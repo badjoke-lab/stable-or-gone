@@ -1,0 +1,50 @@
+---
+const {
+  title = 'Stable or Gone',
+  description = 'A stablecoin registry for pegs, issuers, reserves, depegs, and failures.'
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">SOG</span>
+          <span>
+            <strong>Stable or Gone</strong>
+            <small>stablecoin terminal registry</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/stablecoins/">Stablecoins</a>
+          <a href="/events/">Events</a>
+          <a href="/issuers/">Issuers</a>
+          <a href="/models/">Models</a>
+          <a href="/glossary/">Glossary</a>
+          <a href="/methodology/">Methodology</a>
+          <a href="/support/" class="utility-link">Support</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="footer">
+        <p>SOG is a source-backed registry, not a stablecoin ranking or investment advice service.</p>
+        <div class="footer-links">
+          <a href="/about/">About</a>
+          <a href="/methodology/">Methodology</a>
+          <a href="/support/">Support</a>
+          <a href="https://github.com/badjoke-lab/stable-or-gone">GitHub</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
