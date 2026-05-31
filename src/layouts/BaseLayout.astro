@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Stable or Gone',
+  description = 'A terminal-style registry for stablecoins, depeg events, issuers, reserves, and evidence.'
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Stable or Gone home">
+          <strong>STABLE OR GONE</strong>
+          <span>terminal registry / source-backed stablecoin records</span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/stablecoins/">Stablecoins</a>
+          <a href="/issuers/">Issuers</a>
+          <a href="/events/">Events</a>
+          <a href="/methodology/">Methodology</a>
+          <a href="/support/" data-primary="true">Support</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <span>SOG is a registry, not a stablecoin safety ranking or investment guide.</span>
+        <span>Contact: Google Form TBD / GitHub Issues for public source-backed reports.</span>
+      </footer>
+    </div>
+  </body>
+</html>
