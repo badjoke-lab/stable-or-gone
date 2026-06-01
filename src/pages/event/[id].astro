@@ -1,12 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import events from '../../../data/events.json';
+import eventsData from '../../../data/events.json';
+
+type EventRow = {
+  id: string;
+  title: string;
+  description?: string;
+  event_date?: string;
+  event_type?: string;
+  impact_level?: string;
+  confidence?: string;
+  source_count?: number;
+};
+
+const events = eventsData as EventRow[];
 
 export function getStaticPaths() {
   return events.map((event) => ({ params: { id: event.id }, props: { event } }));
 }
 
-const { event } = Astro.props;
+const { event } = Astro.props as { event: EventRow };
 ---
 <BaseLayout title={`${event.title} — Stable or Gone`}>
   <section class="hero">
@@ -20,7 +33,7 @@ const { event } = Astro.props;
     <div class="bar">event facts</div>
     <table><tbody>
       <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
-      <tr><th>Type</th><td>{event.event_type}</td></tr>
+      <tr><th>Type</th><td>{event.event_type ?? '—'}</td></tr>
       <tr><th>Impact</th><td>{event.impact_level ?? '—'}</td></tr>
       <tr><th>Confidence</th><td>{event.confidence ?? '—'}</td></tr>
       <tr><th>Sources</th><td>{event.source_count ?? 0}</td></tr>
