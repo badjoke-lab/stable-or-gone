@@ -8,10 +8,56 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1>Methodology</h1>
       <p>SOG records stablecoin history with source-backed notes, conservative status labels, visible uncertainty, and separate event records.</p>
     </div>
+    <div class="panel stats">
+      <div class="stat"><span>Mode</span><strong>registry</strong></div>
+      <div class="stat"><span>Scores</span><strong>none</strong></div>
+    </div>
   </section>
+
   <section class="section-grid">
     <div class="panel mini-card"><h2>Status</h2><p>Status labels describe registry state. Event records describe what happened.</p></div>
     <div class="panel mini-card"><h2>Events</h2><p>Material events are kept separate from stablecoin status to avoid overstatement.</p></div>
     <div class="panel mini-card"><h2>Sources</h2><p>Claims should be backed by public sources where possible.</p></div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">what SOG is</div>
+    <table><tbody>
+      <tr><th>Registry</th><td>SOG is a historical registry for stablecoins, issuers, reserve references, event timelines, evidence, and open questions.</td></tr>
+      <tr><th>Not a ranking</th><td>SOG does not rank stablecoins, score stablecoins, recommend stablecoins, or provide investment advice.</td></tr>
+      <tr><th>Source-backed</th><td>Records should point to issuer statements, reserve references, public notices, market references, regulatory documents, archives, or other relevant public sources.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">status labels</div>
+    <table><tbody>
+      <tr><th>active</th><td>Recorded as operating or available based on the sources currently linked in the registry.</td></tr>
+      <tr><th>limited</th><td>Operating with notable limits such as access, geography, redemption, minting, or market availability.</td></tr>
+      <tr><th>impaired</th><td>Material issues are recorded, but the record does not support a discontinued or failed label.</td></tr>
+      <tr><th>discontinued</th><td>Issuance, support, or operation has ended or entered a wind-down state.</td></tr>
+      <tr><th>failed</th><td>The registry records a severe historical event or lifecycle outcome that supports failed status.</td></tr>
+      <tr><th>rebranded / migrated</th><td>The stablecoin or related product moved to a new name, structure, contract, or successor relationship.</td></tr>
+      <tr><th>unknown</th><td>The available sources are not enough to classify the record.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">depeg handling</div>
+    <table><tbody>
+      <tr><th>Minor movement</th><td>SOG does not try to record every small peg movement or short-lived market deviation.</td></tr>
+      <tr><th>Notable event</th><td>A depeg can be recorded when it is material, sustained, historically relevant, or supported by public sources.</td></tr>
+      <tr><th>Major event</th><td>A major depeg record should include context such as trigger, recovery, duration, evidence, and whether status changed.</td></tr>
+      <tr><th>Status separation</th><td>A depeg event does not automatically mean a stablecoin failed. Recovered events and failed lifecycle outcomes are recorded separately.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">uncertainty</div>
+    <table><tbody>
+      <tr><th>Known unknowns</th><td>When a field needs more review, SOG keeps the uncertainty visible instead of guessing.</td></tr>
+      <tr><th>Confidence</th><td>Confidence describes the current record quality, not the safety of the stablecoin.</td></tr>
+      <tr><th>Corrections</th><td>Public, source-backed corrections can be submitted through GitHub Issues. A Google Form route will be added later.</td></tr>
+    </tbody></table>
   </section>
 </BaseLayout>
