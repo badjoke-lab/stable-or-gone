@@ -13,6 +13,7 @@ type StablecoinRow = {
 };
 
 const stablecoins = stablecoinsData as StablecoinRow[];
+const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
 ---
 <BaseLayout title="Stablecoins — Stable or Gone">
   <section class="hero">
@@ -42,7 +43,7 @@ const stablecoins = stablecoinsData as StablecoinRow[];
             <td>{coin.symbol ?? '—'}</td>
             <td>{coin.peg_asset ?? '—'}</td>
             <td>{coin.collateral_model ?? '—'}</td>
-            <td><span class="chip active">{coin.status ?? 'unknown'}</span></td>
+            <td><span class={statusClass(coin.status)}>{coin.status ?? 'unknown'}</span></td>
             <td>{coin.last_verified_at ?? '—'}</td>
           </tr>
         ))}
