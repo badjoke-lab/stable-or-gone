@@ -1,9 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import eventsData from '../../../data/events.json';
+import stablecoinsData from '../../../data/stablecoins.json';
+import issuersData from '../../../data/issuers.json';
+import evidenceData from '../../../data/evidence.json';
 
 type EventRow = {
   id: string;
+  stablecoin_id?: string;
+  issuer_id?: string;
   title: string;
   description?: string;
   event_date?: string;
@@ -13,11 +18,18 @@ type EventRow = {
   source_count?: number;
 };
 
+type StablecoinRow = { id: string; slug: string; name: string; symbol?: string };
+type IssuerRow = { id: string; slug: string; name: string };
+type EvidenceRow = { id: string; event_id?: string | null; title: string; url: string; publisher?: string; source_type?: string };
+
 export function getStaticPaths() {
   return (eventsData as EventRow[]).map((event) => ({ params: { id: event.id }, props: { event } }));
 }
 
 const { event } = Astro.props as { event: EventRow };
+const stablecoin = (stablecoinsData as StablecoinRow[]).find((item) => item.id === event.stablecoin_id);
+const issuer = (issuersData as IssuerRow[]).find((item) => item.id === event.issuer_id);
+const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.event_id === event.id);
 ---
 <BaseLayout title={`${event.title} — Stable or Gone`}>
   <section class="hero">
@@ -26,15 +38,36 @@ const { event } = Astro.props as { event: EventRow };
       <h1>{event.title}</h1>
       <p>{event.description || 'Event description pending.'}</p>
     </div>
+    <div class="panel stats">
+      <div class="stat"><span>Impact</span><strong>{event.impact_level ?? '—'}</strong></div>
+      <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
+    </div>
   </section>
   <section class="panel registry">
     <div class="bar">event facts</div>
     <table><tbody>
       <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
       <tr><th>Type</th><td>{event.event_type ?? '—'}</td></tr>
+      <tr><th>Stablecoin</th><td>{stablecoin ? <a href={`/stablecoin/${stablecoin.slug}/`}>{stablecoin.name} {stablecoin.symbol ? `(${stablecoin.symbol})` : ''}</a> : (event.stablecoin_id ?? '—')}</td></tr>
+      <tr><th>Issuer</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : (event.issuer_id ?? '—')}</td></tr>
       <tr><th>Impact</th><td>{event.impact_level ?? '—'}</td></tr>
       <tr><th>Confidence</th><td>{event.confidence ?? '—'}</td></tr>
-      <tr><th>Sources</th><td>{event.source_count ?? 0}</td></tr>
+      <tr><th>Sources</th><td>{evidence.length}</td></tr>
     </tbody></table>
+  </section>
+  <section class="panel registry">
+    <div class="bar">event evidence</div>
+    <table>
+      <thead><tr><th>Source</th><th>Publisher</th><th>Type</th></tr></thead>
+      <tbody>
+        {evidence.length === 0 ? <tr><td colspan="3">No event-linked evidence records yet.</td></tr> : evidence.map((source) => (
+          <tr>
+            <td><a href={source.url}>{source.title}</a></td>
+            <td>{source.publisher ?? '—'}</td>
+            <td>{source.source_type ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </section>
 </BaseLayout>
