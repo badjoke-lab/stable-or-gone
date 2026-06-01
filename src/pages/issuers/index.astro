@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import issuers from '../../../data/issuers.json';
+import issuersData from '../../../data/issuers.json';
+
+type IssuerRow = {
+  slug: string;
+  name: string;
+  issuer_type?: string;
+  jurisdiction?: string;
+  related_stablecoins?: string[];
+  confidence?: string;
+};
+
+const issuers = issuersData as IssuerRow[];
 ---
 <BaseLayout title="Issuers — Stable or Gone">
   <section class="hero">
@@ -25,7 +36,7 @@ import issuers from '../../../data/issuers.json';
         ) : issuers.map((issuer) => (
           <tr>
             <td><a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a></td>
-            <td>{issuer.issuer_type}</td>
+            <td>{issuer.issuer_type ?? '—'}</td>
             <td>{issuer.jurisdiction ?? '—'}</td>
             <td>{issuer.related_stablecoins?.join(', ') ?? '—'}</td>
             <td>{issuer.confidence ?? '—'}</td>
