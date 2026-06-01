@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import events from '../../../data/events.json';
+import eventsData from '../../../data/events.json';
+
+type EventRow = {
+  id: string;
+  title: string;
+  event_date?: string;
+  event_type?: string;
+  impact_level?: string;
+  recovered?: boolean;
+  source_count?: number;
+};
+
+const events = eventsData as EventRow[];
 ---
 <BaseLayout title="Events — Stable or Gone">
   <section class="hero">
@@ -26,7 +38,7 @@ import events from '../../../data/events.json';
           <tr>
             <td>{event.event_date ?? '—'}</td>
             <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
-            <td>{event.event_type}</td>
+            <td>{event.event_type ?? '—'}</td>
             <td>{event.impact_level ?? '—'}</td>
             <td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td>
             <td>{event.source_count ?? 0}</td>
