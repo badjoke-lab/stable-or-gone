@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import stablecoins from '../../../data/stablecoins.json';
+---
+<BaseLayout title="Stablecoins — Stable or Gone">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; list stablecoins --all</div>
+      <h1>Stablecoin Registry</h1>
+      <p>A source-backed list of stablecoins, their issuers, peg assets, collateral models, status, and major historical events.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Records</span><strong>{stablecoins.length}</strong></div>
+      <div class="stat"><span>Mode</span><strong>v0</strong></div>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">source: data/stablecoins.json</div>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Last verified</th></tr>
+      </thead>
+      <tbody>
+        {stablecoins.length === 0 ? (
+          <tr><td colspan="6">No records yet.</td></tr>
+        ) : stablecoins.map((coin) => (
+          <tr>
+            <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
+            <td>{coin.symbol}</td>
+            <td>{coin.peg_asset}</td>
+            <td>{coin.collateral_model}</td>
+            <td><span class="chip active">{coin.status}</span></td>
+            <td>{coin.last_verified_at ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
