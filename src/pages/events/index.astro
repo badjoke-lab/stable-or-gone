@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import events from '../../../data/events.json';
+---
+<BaseLayout title="Events — Stable or Gone">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; tail /events/depeg.log</div>
+      <h1>Event Log</h1>
+      <p>Depeg, reserve, redemption, wind-down, migration, and related historical events.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
+      <div class="stat"><span>Mode</span><strong>v0</strong></div>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">source: data/events.json</div>
+    <table>
+      <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Sources</th></tr></thead>
+      <tbody>
+        {events.length === 0 ? (
+          <tr><td colspan="6">No event records yet.</td></tr>
+        ) : events.map((event) => (
+          <tr>
+            <td>{event.event_date ?? '—'}</td>
+            <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
+            <td>{event.event_type}</td>
+            <td>{event.impact_level ?? '—'}</td>
+            <td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td>
+            <td>{event.source_count ?? 0}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
