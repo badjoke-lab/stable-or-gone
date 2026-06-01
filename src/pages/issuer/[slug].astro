@@ -12,10 +12,8 @@ type IssuerRow = {
   confidence?: string;
 };
 
-const issuers = issuersData as IssuerRow[];
-
 export function getStaticPaths() {
-  return issuers.map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
+  return (issuersData as IssuerRow[]).map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
 }
 
 const { issuer } = Astro.props as { issuer: IssuerRow };
