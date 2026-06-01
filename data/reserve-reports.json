@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": "sog_reserve_usdt_transparency_seed",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "report_date": "2026-06-01",
+    "period_covered": "current transparency page",
+    "publisher": "Tether",
+    "report_type": "issuer_disclosure",
+    "asset_categories": ["cash_and_equivalents", "t_bills", "other_assets"],
+    "url": "https://tether.to/en/transparency/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed reserve disclosure reference, not a complete reserve history."
+  },
+  {
+    "id": "sog_reserve_usdc_transparency_seed",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "report_date": "2026-06-01",
+    "period_covered": "current transparency page",
+    "publisher": "Circle",
+    "report_type": "issuer_disclosure",
+    "asset_categories": ["cash", "short_duration_us_treasuries"],
+    "url": "https://www.circle.com/transparency",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed reserve disclosure reference, not a complete monthly attestation history."
+  },
+  {
+    "id": "sog_reserve_busd_paxos_seed",
+    "stablecoin_id": "sog_st_busd",
+    "issuer_id": "sog_issuer_paxos",
+    "report_date": "2023-02-13",
+    "period_covered": "wind-down announcement context",
+    "publisher": "Paxos",
+    "report_type": "issuer_disclosure",
+    "asset_categories": ["cash", "us_treasury_bills"],
+    "url": "https://paxos.com/2023/02/13/paxos-to-end-relationship-with-binance-for-busd/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed reference connected to BUSD wind-down; full report history remains incomplete."
+  }
+]
