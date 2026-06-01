@@ -1,0 +1,37 @@
+name: Correction
+about: Report a correction for an existing SOG record
+title: "Correction: "
+labels: [correction]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for public, source-backed corrections. Use the Google Form for private or simple reports.
+  - type: input
+    id: page
+    attributes:
+      label: SOG page URL
+      description: Link to the affected SOG page.
+    validations:
+      required: false
+  - type: input
+    id: record
+    attributes:
+      label: Stablecoin or issuer
+      description: Name of the affected stablecoin, event, or issuer.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should be corrected?
+      description: Describe the correction clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Source URL(s)
+      description: Add public sources supporting the correction.
+    validations:
+      required: true
