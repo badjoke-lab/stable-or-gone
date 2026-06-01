@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import issuers from '../../../data/issuers.json';
+---
+<BaseLayout title="Issuers — Stable or Gone">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; list issuers</div>
+      <h1>Issuer Files</h1>
+      <p>Issuer, protocol, company, jurisdiction, and related stablecoin references.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Issuers</span><strong>{issuers.length}</strong></div>
+      <div class="stat"><span>Mode</span><strong>v0</strong></div>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">source: data/issuers.json</div>
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Confidence</th></tr></thead>
+      <tbody>
+        {issuers.length === 0 ? (
+          <tr><td colspan="5">No issuer records yet.</td></tr>
+        ) : issuers.map((issuer) => (
+          <tr>
+            <td><a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a></td>
+            <td>{issuer.issuer_type}</td>
+            <td>{issuer.jurisdiction ?? '—'}</td>
+            <td>{issuer.related_stablecoins?.join(', ') ?? '—'}</td>
+            <td>{issuer.confidence ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
