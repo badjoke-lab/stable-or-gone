@@ -1,1 +1,53 @@
-[]
+[
+  {
+    "id": "sog_ev_usdc_2023_03_depeg",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_type": "major_depeg",
+    "event_date": "2023-03-11",
+    "title": "USDC depeg during March 2023 banking crisis",
+    "description": "USDC traded below its USD peg during the March 2023 banking crisis after Circle disclosed exposure to Silicon Valley Bank. SOG records this as a recovered major depeg event, not as failed status.",
+    "impact_level": "high",
+    "event_status_effect": "none",
+    "recovered": true,
+    "recovery_date": "2023-03-13",
+    "failure_mechanism": "reserve_asset_exposure",
+    "confidence": "medium",
+    "source_count": 2,
+    "notes": "Initial seed event. Add lowest observed price and duration once source coverage is expanded."
+  },
+  {
+    "id": "sog_ev_ust_2022_05_collapse",
+    "stablecoin_id": "sog_st_ust",
+    "issuer_id": "sog_issuer_terraform_labs",
+    "event_type": "collapse",
+    "event_date": "2022-05-09",
+    "title": "TerraUSD collapse",
+    "description": "UST lost its USD peg in May 2022 and did not recover as a functioning stablecoin. SOG treats this as a collapse event supporting failed status.",
+    "impact_level": "critical",
+    "event_status_effect": "failed",
+    "recovered": false,
+    "recovery_date": null,
+    "failure_mechanism": "algorithmic_death_spiral",
+    "confidence": "medium",
+    "source_count": 2,
+    "notes": "Initial seed event. Expand timeline, LUNA mechanism context, and post-collapse USTC lifecycle later."
+  },
+  {
+    "id": "sog_ev_busd_2023_02_wind_down",
+    "stablecoin_id": "sog_st_busd",
+    "issuer_id": "sog_issuer_paxos",
+    "event_type": "wind_down_announced",
+    "event_date": "2023-02-13",
+    "title": "Paxos announces BUSD minting halt and wind-down",
+    "description": "Paxos announced it would end its relationship with Binance for BUSD and stop issuing new BUSD, while continuing redemption support during the wind-down period.",
+    "impact_level": "high",
+    "event_status_effect": "discontinued",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "issuer_wind_down",
+    "confidence": "medium",
+    "source_count": 2,
+    "notes": "Initial seed event. Add NYDFS/Paxos source details and final support dates in later passes."
+  }
+]
