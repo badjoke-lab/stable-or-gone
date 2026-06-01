@@ -1,9 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import stablecoins from '../../data/stablecoins.json';
-import issuers from '../../data/issuers.json';
-import events from '../../data/events.json';
-import evidence from '../../data/evidence.json';
+import stablecoinsData from '../../data/stablecoins.json';
+import issuersData from '../../data/issuers.json';
+import eventsData from '../../data/events.json';
+import evidenceData from '../../data/evidence.json';
+
+type StablecoinRow = {
+  slug: string;
+  name: string;
+  symbol?: string;
+  peg_asset?: string;
+  collateral_model?: string;
+  status?: string;
+  issuer_id?: string;
+};
+
+const stablecoins = stablecoinsData as StablecoinRow[];
+const issuers = issuersData as unknown[];
+const events = eventsData as unknown[];
+const evidence = evidenceData as unknown[];
 
 const stablecoinCount = stablecoins.length;
 const issuerCount = issuers.length;
@@ -64,11 +79,11 @@ const evidenceCount = evidence.length;
         ) : stablecoins.slice(0, 8).map((coin) => (
           <tr>
             <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
-            <td>{coin.symbol}</td>
-            <td>{coin.peg_asset}</td>
-            <td>{coin.collateral_model}</td>
-            <td><span class="chip active">{coin.status}</span></td>
-            <td>{coin.issuer_id}</td>
+            <td>{coin.symbol ?? '—'}</td>
+            <td>{coin.peg_asset ?? '—'}</td>
+            <td>{coin.collateral_model ?? '—'}</td>
+            <td><span class="chip active">{coin.status ?? 'unknown'}</span></td>
+            <td>{coin.issuer_id ?? '—'}</td>
           </tr>
         ))}
       </tbody>
