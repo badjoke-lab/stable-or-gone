@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import stablecoins from '../../../data/stablecoins.json';
+import stablecoinsData from '../../../data/stablecoins.json';
+
+type StablecoinRow = {
+  slug: string;
+  name: string;
+  symbol?: string;
+  peg_asset?: string;
+  collateral_model?: string;
+  status?: string;
+  last_verified_at?: string;
+};
+
+const stablecoins = stablecoinsData as StablecoinRow[];
 ---
 <BaseLayout title="Stablecoins — Stable or Gone">
   <section class="hero">
@@ -27,10 +39,10 @@ import stablecoins from '../../../data/stablecoins.json';
         ) : stablecoins.map((coin) => (
           <tr>
             <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
-            <td>{coin.symbol}</td>
-            <td>{coin.peg_asset}</td>
-            <td>{coin.collateral_model}</td>
-            <td><span class="chip active">{coin.status}</span></td>
+            <td>{coin.symbol ?? '—'}</td>
+            <td>{coin.peg_asset ?? '—'}</td>
+            <td>{coin.collateral_model ?? '—'}</td>
+            <td><span class="chip active">{coin.status ?? 'unknown'}</span></td>
             <td>{coin.last_verified_at ?? '—'}</td>
           </tr>
         ))}
