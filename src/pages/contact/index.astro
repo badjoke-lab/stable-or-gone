@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact — Stable or Gone">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; submit correction</div>
+      <h1>Contact / Submit Correction</h1>
+      <p>Use this page to report missing records, corrections, source links, broken links, or general contact items.</p>
+    </div>
+  </section>
+  <section class="section-grid">
+    <div class="panel mini-card">
+      <h2>Google Form</h2>
+      <p>Use the Google Form for private, simple, or non-technical reports. URL is still TODO.</p>
+    </div>
+    <a class="panel mini-card" href="https://github.com/badjoke-lab/stable-or-gone/issues">
+      <h2>GitHub Issues</h2>
+      <p>Use GitHub Issues for public, source-backed corrections and missing evidence reports.</p>
+    </a>
+    <a class="panel mini-card" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">
+      <h2>Open report template</h2>
+      <p>Choose correction, missing stablecoin, or missing event/evidence templates.</p>
+    </a>
+  </section>
+  <section class="panel registry">
+    <div class="bar">report types</div>
+    <table>
+      <tbody>
+        <tr><th>Correction</th><td>Wrong status, issuer, event, source, or wording.</td></tr>
+        <tr><th>Missing stablecoin</th><td>Stablecoin candidate not yet in the registry.</td></tr>
+        <tr><th>Missing event/evidence</th><td>Depeg, reserve, redemption, wind-down, or source reference.</td></tr>
+        <tr><th>Broken link</th><td>Dead source URL or archive issue.</td></tr>
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
