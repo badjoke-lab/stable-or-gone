@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import stablecoins from '../../data/stablecoins.json';
+import issuers from '../../data/issuers.json';
+import events from '../../data/events.json';
+import evidence from '../../data/evidence.json';
+
+const stablecoinCount = stablecoins.length;
+const issuerCount = issuers.length;
+const eventCount = events.length;
+const evidenceCount = evidence.length;
+---
+<BaseLayout>
+  <section class="hero">
+    <div class="panel hero-main">
+      <span class="command">&gt; open /registry/stablecoins</span>
+      <h1>Stablecoin records, depeg events, and evidence.</h1>
+      <p>
+        Stable or Gone is a terminal-style registry for stablecoins, issuers, reserve disclosure,
+        redemption access, depeg history, lifecycle changes, and source-backed evidence.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="/stablecoins/">Browse registry</a>
+        <a class="button" href="/methodology/">Read methodology</a>
+        <a class="button support" href="/support/">Support SOG</a>
+      </div>
+    </div>
+    <div class="panel stats" aria-label="Registry summary">
+      <div class="stat"><span>Stablecoins</span><strong>{stablecoinCount}</strong></div>
+      <div class="stat"><span>Issuers</span><strong>{issuerCount}</strong></div>
+      <div class="stat"><span>Events</span><strong>{eventCount}</strong></div>
+      <div class="stat"><span>Evidence</span><strong>{evidenceCount}</strong></div>
+    </div>
+  </section>
+
+  <section class="grid" aria-label="Registry sections">
+    <a class="card" href="/stablecoins/">
+      <h3>Stablecoin Registry</h3>
+      <p>Records for active, limited, impaired, discontinued, failed, migrated, and unknown stablecoins.</p>
+    </a>
+    <a class="card" href="/events/">
+      <h3>Event Log</h3>
+      <p>Depeg, collapse, redemption, reserve, regulatory, wind-down, and migration events.</p>
+    </a>
+    <a class="card" href="/issuers/">
+      <h3>Issuer Files</h3>
+      <p>Issuer, protocol, jurisdiction, reserve disclosure, and related stablecoin references.</p>
+    </a>
+  </section>
+
+  <section class="panel table-panel">
+    <div class="table-head">
+      <div>
+        <strong>Initial registry view</strong>
+        <p class="muted">Seed records will appear here after SOG-003.</p>
+      </div>
+      <code>source: data/stablecoins.json</code>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Symbol</th>
+          <th>Peg</th>
+          <th>Model</th>
+          <th>Status</th>
+          <th>Issuer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {stablecoins.length === 0 ? (
+          <tr>
+            <td colspan="6" class="muted">No stablecoin records yet. SOG-003 will add the first seed batch.</td>
+          </tr>
+        ) : stablecoins.slice(0, 8).map((coin) => (
+          <tr>
+            <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
+            <td>{coin.symbol}</td>
+            <td>{coin.peg_asset}</td>
+            <td>{coin.collateral_model}</td>
+            <td><span class="chip green">{coin.status}</span></td>
+            <td>{coin.issuer_id}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
