@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import events from '../../../data/events.json';
+
+export function getStaticPaths() {
+  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props;
+---
+<BaseLayout title={`${event.title} — Stable or Gone`}>
+  <section class="content-page">
+    <span class="command">&gt; open event/{event.id}</span>
+    <h1>{event.title}</h1>
+    <p>{event.description || 'Event description pending.'}</p>
+    <ul>
+      <li><strong>Date:</strong> {event.event_date ?? '—'}</li>
+      <li><strong>Type:</strong> {event.event_type}</li>
+      <li><strong>Impact:</strong> {event.impact_level ?? '—'}</li>
+      <li><strong>Confidence:</strong> {event.confidence ?? '—'}</li>
+      <li><strong>Sources:</strong> {event.source_count ?? 0}</li>
+    </ul>
+  </section>
+</BaseLayout>
