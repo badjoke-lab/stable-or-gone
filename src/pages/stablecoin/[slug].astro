@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import stablecoinsData from '../../../data/stablecoins.json';
+import issuersData from '../../../data/issuers.json';
+import eventsData from '../../../data/events.json';
+import evidenceData from '../../../data/evidence.json';
+import reserveReportsData from '../../../data/reserve-reports.json';
+import knownUnknownsData from '../../../data/known-unknowns.json';
 
 type StablecoinRow = {
+  id: string;
   slug: string;
   name: string;
   summary?: string;
@@ -11,7 +17,64 @@ type StablecoinRow = {
   peg_asset?: string;
   collateral_model?: string;
   issuer_id?: string;
+  reserve_disclosure_status?: string;
+  redemption_status?: string;
+  launch_date?: string;
+  discontinued_date?: string | null;
+  confidence?: string;
   last_verified_at?: string;
+  notes?: string;
+};
+
+type IssuerRow = {
+  id: string;
+  slug: string;
+  name: string;
+  jurisdiction?: string;
+  issuer_type?: string;
+};
+
+type EventRow = {
+  id: string;
+  stablecoin_id: string;
+  title: string;
+  event_type?: string;
+  event_date?: string;
+  impact_level?: string;
+  recovered?: boolean | null;
+  failure_mechanism?: string;
+};
+
+type EvidenceRow = {
+  id: string;
+  stablecoin_id: string;
+  event_id?: string | null;
+  source_type?: string;
+  title: string;
+  url: string;
+  publisher?: string;
+  claim_scope?: string;
+  reliability?: string;
+};
+
+type ReserveReportRow = {
+  id: string;
+  stablecoin_id: string;
+  report_date?: string;
+  publisher?: string;
+  report_type?: string;
+  asset_categories?: string[];
+  url?: string;
+  confidence?: string;
+};
+
+type KnownUnknownRow = {
+  id: string;
+  stablecoin_id: string;
+  topic: string;
+  description: string;
+  severity?: string;
+  last_checked_at?: string;
 };
 
 export function getStaticPaths() {
@@ -19,6 +82,11 @@ export function getStaticPaths() {
 }
 
 const { coin } = Astro.props as { coin: StablecoinRow };
+const issuer = (issuersData as IssuerRow[]).find((item) => item.id === coin.issuer_id);
+const events = (eventsData as EventRow[]).filter((item) => item.stablecoin_id === coin.id);
+const evidence = (evidenceData as EvidenceRow[]).filter((item) => item.stablecoin_id === coin.id);
+const reserveReports = (reserveReportsData as ReserveReportRow[]).filter((item) => item.stablecoin_id === coin.id);
+const knownUnknowns = (knownUnknownsData as KnownUnknownRow[]).filter((item) => item.stablecoin_id === coin.id);
 ---
 <BaseLayout title={`${coin.name} — Stable or Gone`}>
   <section class="hero">
@@ -27,16 +95,113 @@ const { coin } = Astro.props as { coin: StablecoinRow };
       <h1>{coin.name}</h1>
       <p>{coin.summary || 'Stablecoin record summary pending.'}</p>
     </div>
+    <div class="panel stats">
+      <div class="stat"><span>Status</span><strong>{coin.status ?? 'unknown'}</strong></div>
+      <div class="stat"><span>Evidence</span><strong>{evidence.length}</strong></div>
+    </div>
   </section>
+
   <section class="panel registry">
     <div class="bar">record facts</div>
     <table><tbody>
       <tr><th>Symbol</th><td>{coin.symbol ?? '—'}</td></tr>
       <tr><th>Status</th><td>{coin.status ?? 'unknown'}</td></tr>
       <tr><th>Peg asset</th><td>{coin.peg_asset ?? '—'}</td></tr>
-      <tr><th>Model</th><td>{coin.collateral_model ?? '—'}</td></tr>
-      <tr><th>Issuer</th><td>{coin.issuer_id ?? '—'}</td></tr>
+      <tr><th>Collateral model</th><td>{coin.collateral_model ?? '—'}</td></tr>
+      <tr><th>Issuer</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : (coin.issuer_id ?? '—')}</td></tr>
+      <tr><th>Reserve disclosure</th><td>{coin.reserve_disclosure_status ?? '—'}</td></tr>
+      <tr><th>Redemption status</th><td>{coin.redemption_status ?? '—'}</td></tr>
+      <tr><th>Launch date</th><td>{coin.launch_date ?? '—'}</td></tr>
+      <tr><th>Discontinued date</th><td>{coin.discontinued_date ?? '—'}</td></tr>
+      <tr><th>Confidence</th><td>{coin.confidence ?? '—'}</td></tr>
       <tr><th>Last verified</th><td>{coin.last_verified_at ?? '—'}</td></tr>
     </tbody></table>
+  </section>
+
+  <section class="section-grid">
+    <div class="panel mini-card">
+      <h2>Issuer dossier</h2>
+      <p>{issuer ? `${issuer.name} · ${issuer.issuer_type ?? 'unknown'} · ${issuer.jurisdiction ?? 'jurisdiction unknown'}` : 'Issuer record pending.'}</p>
+    </div>
+    <div class="panel mini-card">
+      <h2>Reserve reports</h2>
+      <p>{reserveReports.length} seed reserve disclosure reference(s) linked to this record.</p>
+    </div>
+    <div class="panel mini-card">
+      <h2>Known unknowns</h2>
+      <p>{knownUnknowns.length} visible uncertainty item(s) kept for later review.</p>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">event timeline</div>
+    <table>
+      <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        {events.length === 0 ? <tr><td colspan="6">No event records yet.</td></tr> : events.map((event) => (
+          <tr>
+            <td>{event.event_date ?? '—'}</td>
+            <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
+            <td>{event.event_type ?? '—'}</td>
+            <td>{event.impact_level ?? '—'}</td>
+            <td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td>
+            <td>{event.failure_mechanism ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">reserve / attestation history</div>
+    <table>
+      <thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Asset categories</th><th>Confidence</th></tr></thead>
+      <tbody>
+        {reserveReports.length === 0 ? <tr><td colspan="5">No reserve report records yet.</td></tr> : reserveReports.map((report) => (
+          <tr>
+            <td>{report.report_date ?? '—'}</td>
+            <td>{report.url ? <a href={report.url}>{report.publisher ?? 'source'}</a> : (report.publisher ?? '—')}</td>
+            <td>{report.report_type ?? '—'}</td>
+            <td>{report.asset_categories?.join(', ') ?? '—'}</td>
+            <td>{report.confidence ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">evidence coverage</div>
+    <table>
+      <thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Claim scope</th><th>Reliability</th></tr></thead>
+      <tbody>
+        {evidence.length === 0 ? <tr><td colspan="5">No evidence records yet.</td></tr> : evidence.map((source) => (
+          <tr>
+            <td><a href={source.url}>{source.title}</a></td>
+            <td>{source.publisher ?? '—'}</td>
+            <td>{source.source_type ?? '—'}</td>
+            <td>{source.claim_scope ?? '—'}</td>
+            <td>{source.reliability ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">known unknowns</div>
+    <table>
+      <thead><tr><th>Topic</th><th>Description</th><th>Severity</th><th>Last checked</th></tr></thead>
+      <tbody>
+        {knownUnknowns.length === 0 ? <tr><td colspan="4">No known unknowns recorded.</td></tr> : knownUnknowns.map((item) => (
+          <tr>
+            <td>{item.topic}</td>
+            <td>{item.description}</td>
+            <td>{item.severity ?? '—'}</td>
+            <td>{item.last_checked_at ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </section>
 </BaseLayout>
