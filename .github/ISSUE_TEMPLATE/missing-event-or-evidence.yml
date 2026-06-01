@@ -1,0 +1,37 @@
+name: Missing event or evidence
+about: Suggest a missing event, depeg record, reserve report, or evidence source
+title: "Missing event/evidence: "
+labels: [evidence, event]
+body:
+  - type: input
+    id: record
+    attributes:
+      label: Stablecoin / issuer / event
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Depeg event
+        - Reserve / attestation source
+        - Redemption / wind-down source
+        - Regulatory source
+        - Issuer source
+        - Broken link
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Source URL(s)
+    validations:
+      required: true
