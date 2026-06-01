@@ -1,12 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import stablecoins from '../../../data/stablecoins.json';
+import stablecoinsData from '../../../data/stablecoins.json';
+
+type StablecoinRow = {
+  slug: string;
+  name: string;
+  summary?: string;
+  symbol?: string;
+  status?: string;
+  peg_asset?: string;
+  collateral_model?: string;
+  issuer_id?: string;
+  last_verified_at?: string;
+};
+
+const stablecoins = stablecoinsData as StablecoinRow[];
 
 export function getStaticPaths() {
   return stablecoins.map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
 }
 
-const { coin } = Astro.props;
+const { coin } = Astro.props as { coin: StablecoinRow };
 ---
 <BaseLayout title={`${coin.name} — Stable or Gone`}>
   <section class="hero">
@@ -19,11 +33,11 @@ const { coin } = Astro.props;
   <section class="panel registry">
     <div class="bar">record facts</div>
     <table><tbody>
-      <tr><th>Symbol</th><td>{coin.symbol}</td></tr>
-      <tr><th>Status</th><td>{coin.status}</td></tr>
-      <tr><th>Peg asset</th><td>{coin.peg_asset}</td></tr>
-      <tr><th>Model</th><td>{coin.collateral_model}</td></tr>
-      <tr><th>Issuer</th><td>{coin.issuer_id}</td></tr>
+      <tr><th>Symbol</th><td>{coin.symbol ?? '—'}</td></tr>
+      <tr><th>Status</th><td>{coin.status ?? 'unknown'}</td></tr>
+      <tr><th>Peg asset</th><td>{coin.peg_asset ?? '—'}</td></tr>
+      <tr><th>Model</th><td>{coin.collateral_model ?? '—'}</td></tr>
+      <tr><th>Issuer</th><td>{coin.issuer_id ?? '—'}</td></tr>
       <tr><th>Last verified</th><td>{coin.last_verified_at ?? '—'}</td></tr>
     </tbody></table>
   </section>
