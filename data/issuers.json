@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "id": "sog_issuer_tether",
+    "slug": "tether",
+    "name": "Tether",
+    "issuer_type": "company",
+    "jurisdiction": "Hong Kong / British Virgin Islands",
+    "related_stablecoins": ["usdt"],
+    "official_url": "https://tether.to/",
+    "summary": "Issuer of USDt and related stablecoin products. SOG tracks Tether at issuer level because reserve disclosure, redemption access, and chain deployment context are central to USDT records.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-01",
+    "notes": "Jurisdiction and legal entity details should be expanded with source-backed issuer documentation."
+  },
+  {
+    "id": "sog_issuer_circle",
+    "slug": "circle",
+    "name": "Circle",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["usdc"],
+    "official_url": "https://www.circle.com/",
+    "summary": "Issuer of USDC and related stablecoin products. SOG tracks Circle at issuer level to connect USDC reserve disclosure, redemption access, and the March 2023 banking-related depeg event.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-01",
+    "notes": "Initial seed record. Add licensing and reserve report history in later passes."
+  },
+  {
+    "id": "sog_issuer_makerdao_sky",
+    "slug": "makerdao-sky",
+    "name": "MakerDAO / Sky",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["dai"],
+    "official_url": "https://sky.money/",
+    "summary": "Protocol ecosystem associated with DAI and the later Sky branding. SOG treats issuer/protocol context separately from DAI's stablecoin entity record.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-01",
+    "notes": "Governance and lifecycle transition details require deeper source-backed expansion."
+  },
+  {
+    "id": "sog_issuer_terraform_labs",
+    "slug": "terraform-labs",
+    "name": "Terraform Labs",
+    "issuer_type": "company",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["ust"],
+    "official_url": "https://www.terra.money/",
+    "summary": "Company and ecosystem associated with TerraUSD. SOG tracks Terraform Labs to connect UST issuance, collapse, and lifecycle records.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-01",
+    "notes": "Legal and bankruptcy/regulatory context should be expanded in later passes."
+  },
+  {
+    "id": "sog_issuer_paxos",
+    "slug": "paxos",
+    "name": "Paxos",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["busd"],
+    "official_url": "https://paxos.com/",
+    "summary": "Issuer of BUSD under the Binance USD brand. SOG tracks Paxos at issuer level because the BUSD wind-down was driven by issuer and regulatory events.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-01",
+    "notes": "Initial seed record. Add regulatory and redemption source coverage in later passes."
+  }
+]
