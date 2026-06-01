@@ -2,13 +2,19 @@
 
 ## Current stage
 
-SOG-001 foundation.
+SOG v0 foundation is live on Cloudflare Pages.
 
-The repository starts with documentation, data placeholders, and reporting templates before implementation work begins.
+Public URL:
 
-## SOG-001: foundation docs and data placeholders
+```txt
+https://stable-or-gone.pages.dev/
+```
 
-Scope:
+## Completed
+
+### SOG-001: foundation docs and data placeholders
+
+Completed:
 
 - README
 - DESIGN.md
@@ -19,81 +25,135 @@ Scope:
 - reporting/contact plan
 - support plan
 - roadmap
-- empty data JSON files
+- data JSON files
 - GitHub Issue templates
 
-## SOG-002: Astro scaffold and base UI
+### SOG-002: Astro scaffold and base UI
 
-Scope:
+Completed:
 
 - Astro + TypeScript setup
 - static routes
 - base layout
 - Terminal Registry UI shell
 - navigation
-- support/contact placeholders
+- support/contact links
 - data loading from JSON
+- Cloudflare-compatible static build
 
-## SOG-003: seed data batch 1
+### SOG-003: seed data batch 1
 
-Scope:
+Completed initial seed:
 
 - USDT
 - USDC
 - DAI
 - UST / TerraUSD
 - BUSD
-- core issuers
-- major events
+- Tether
+- Circle
+- MakerDAO / Sky
+- Terraform Labs
+- Paxos
+- USDC depeg event
+- UST collapse event
+- BUSD wind-down event
 - starter evidence
-- reserve report placeholders where supportable
+- reserve report references
 - known unknowns
 
-## SOG-004: stablecoin detail page
+### SOG-004: stablecoin detail page
 
-Scope:
+Completed first pass:
 
 - stablecoin facts
-- issuer block
-- peg/collateral block
-- redemption block
-- reserve reports
+- issuer link
+- peg/collateral fields
+- redemption fields
+- reserve report table
 - event timeline
-- evidence coverage
-- known unknowns
-- report this entry link
+- evidence coverage table
+- known unknowns table
 
-## SOG-005: registry pages
+### SOG-005: events / issuers / registry pages
 
-Scope:
+Completed first pass:
 
 - `/stablecoins/`
 - `/issuers/`
+- `/issuer/[slug]/`
 - `/events/`
+- `/event/[id]/`
 - `/models/`
-- filters/search
 - compact terminal-style tables
 
-## SOG-006: methodology/about/support/contact polish
+### SOG-006: contact and report route
 
-Scope:
+Completed first pass:
 
-- public methodology page
-- about page
-- support page
-- contact/correction links
-- GitHub Issue route
-- Google Form URL insertion
+- `/contact/`
+- footer contact link
+- header contact link
+- GitHub Issues link
+- GitHub issue template route
+- Google Form placeholder
 
-## SOG-007: Cloudflare Pages deployment
+### SOG-007: Cloudflare Pages deployment
 
-Scope:
+Completed:
 
-- Cloudflare Pages with Git integration
-- production build check
-- basic SEO metadata
-- sitemap/robots if needed
-- public URL check
+- Cloudflare Pages connected
+- main branch build works
+- static output to `dist`
+- public URL available
+
+## Added after deployment
+
+- `scripts/validate-data.mjs`
+- `npm run validate:data`
+- validation included in `npm run build`
+- `robots.txt`
+- dynamic sitemap at `/sitemap-index.xml`
+
+## Next phase: SOG-008
+
+SOG-008 should focus on hardening the public v0 site.
+
+Recommended scope:
+
+- replace Google Form TODO with real URL
+- improve methodology page copy
+- improve support page copy and add support link if available
+- add visible report-this-entry link on stablecoin/event/issuer detail pages
+- add status chip styling by status
+- add basic noindex decision if needed before wider promotion
+- verify live pages after Cloudflare deployment
+
+## SOG-009: seed data expansion
+
+Recommended scope:
+
+- add FRAX
+- add TUSD
+- add FDUSD
+- add PYUSD
+- add USDD
+- add GUSD
+- add LUSD
+- add crvUSD
+- add USDe
+- add sUSD
+
+## SOG-010: methodology and source quality
+
+Recommended scope:
+
+- write public depeg methodology page
+- explain status vs event separation
+- explain known unknowns
+- explain evidence coverage
+- explain reserve report handling
+- explain why SOG is not a ranking
 
 ## Later phases
 
@@ -103,14 +163,15 @@ Scope:
 - Comparisons
 - Reports / Registry Updates
 - more seed data
-- validation scripts
+- richer validation scripts
+- simple search/filtering
 
 ### v1
 
 - ingestion staging pipeline
 - candidate discovery
 - data validation workflow
-- low-frequency depeg candidate watchlist
+- low-frequency candidate watchlist
 
 ### v2
 
