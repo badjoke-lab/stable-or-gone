@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import issuers from '../../../data/issuers.json';
+
+export function getStaticPaths() {
+  return issuers.map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
+}
+
+const { issuer } = Astro.props;
+---
+<BaseLayout title={`${issuer.name} — Stable or Gone`}>
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; open issuer/{issuer.slug}</div>
+      <h1>{issuer.name}</h1>
+      <p>{issuer.summary || 'Issuer summary pending.'}</p>
+    </div>
+  </section>
+  <section class="panel registry">
+    <div class="bar">issuer facts</div>
+    <table><tbody>
+      <tr><th>Type</th><td>{issuer.issuer_type}</td></tr>
+      <tr><th>Jurisdiction</th><td>{issuer.jurisdiction ?? '—'}</td></tr>
+      <tr><th>Related stablecoins</th><td>{issuer.related_stablecoins?.join(', ') ?? '—'}</td></tr>
+      <tr><th>Confidence</th><td>{issuer.confidence ?? '—'}</td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
