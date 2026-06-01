@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const terms = [
+  ['depeg', 'A material deviation from the target peg. SOG does not record every minor deviation.'],
+  ['redemption', 'The process of converting a stablecoin back into the referenced asset or equivalent value under issuer terms.'],
+  ['attestation', 'A reserve-related report or statement, often provided by an issuer or third-party publisher.'],
+  ['wind-down', 'A planned or announced process to discontinue issuance, redemption, or support.'],
+  ['collapse', 'A severe and unrecovered peg or mechanism failure that may support failed status.'],
+  ['known unknown', 'An explicit uncertainty kept visible instead of being guessed or forced.']
+];
+---
+<BaseLayout title="Glossary — Stable or Gone">
+  <section class="content-page">
+    <span class="command">&gt; help glossary</span>
+    <h1>Glossary</h1>
+    <p>Short definitions for terms used across the SOG registry.</p>
+    <ul>
+      {terms.map(([term, definition]) => (
+        <li><strong>{term}</strong> — {definition}</li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
