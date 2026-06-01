@@ -43,6 +43,42 @@ const evidence = (evidenceData as EvidenceRow[]).filter((item) => item.stablecoi
 const reserveReports = (reserveReportsData as ReserveReportRow[]).filter((item) => item.stablecoin_id === coin.id);
 const knownUnknowns = (knownUnknownsData as KnownUnknownRow[]).filter((item) => item.stablecoin_id === coin.id);
 const statusClass = `chip ${coin.status ?? 'unknown'}`;
+
+const evidenceCount = (types: string[]) => evidence.filter((source) => source.source_type && types.includes(source.source_type)).length;
+const coverageRows = [
+  {
+    label: 'Issuer source',
+    count: evidenceCount(['issuer_statement', 'issuer_blog', 'issuer_social'])
+  },
+  {
+    label: 'Reserve reference',
+    count: reserveReports.length + evidenceCount(['reserve_report', 'attestation_report'])
+  },
+  {
+    label: 'Market data',
+    count: evidenceCount(['market_data'])
+  },
+  {
+    label: 'Regulatory source',
+    count: evidenceCount(['regulatory_document'])
+  },
+  {
+    label: 'Exchange notice',
+    count: evidenceCount(['exchange_notice'])
+  },
+  {
+    label: 'News / analysis',
+    count: evidenceCount(['news_article'])
+  },
+  {
+    label: 'Archive capture',
+    count: evidenceCount(['archive_capture'])
+  },
+  {
+    label: 'Other source',
+    count: evidence.filter((source) => !source.source_type || source.source_type === 'other' || source.source_type === 'database_reference' || source.source_type === 'protocol_forum' || source.source_type === 'governance_post').length
+  }
+];
 ---
 <BaseLayout title={`${coin.name} — Stable or Gone`}>
   <section class="hero">
@@ -81,6 +117,22 @@ const statusClass = `chip ${coin.status ?? 'unknown'}`;
   </section>
 
   <section class="panel registry">
+    <div class="bar">evidence coverage summary — source coverage, not a safety score</div>
+    <table>
+      <thead><tr><th>Coverage type</th><th>Count</th><th>Meaning</th></tr></thead>
+      <tbody>
+        {coverageRows.map((row) => (
+          <tr>
+            <td>{row.label}</td>
+            <td>{row.count}</td>
+            <td>{row.count > 0 ? 'Source-backed reference present in this record.' : 'No source of this type is linked yet.'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
     <div class="bar">event timeline</div>
     <table>
       <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Mechanism</th></tr></thead>
@@ -105,7 +157,7 @@ const statusClass = `chip ${coin.status ?? 'unknown'}`;
   </section>
 
   <section class="panel registry">
-    <div class="bar">evidence coverage</div>
+    <div class="bar">evidence records</div>
     <table>
       <thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Claim scope</th><th>Reliability</th></tr></thead>
       <tbody>
