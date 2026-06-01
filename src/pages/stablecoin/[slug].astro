@@ -14,10 +14,8 @@ type StablecoinRow = {
   last_verified_at?: string;
 };
 
-const stablecoins = stablecoinsData as StablecoinRow[];
-
 export function getStaticPaths() {
-  return stablecoins.map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
+  return (stablecoinsData as StablecoinRow[]).map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
 }
 
 const { coin } = Astro.props as { coin: StablecoinRow };
