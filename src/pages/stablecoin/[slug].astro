@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import stablecoins from '../../../data/stablecoins.json';
+
+export function getStaticPaths() {
+  return stablecoins.map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
+}
+
+const { coin } = Astro.props;
+---
+<BaseLayout title={`${coin.name} — Stable or Gone`}>
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; open stablecoin/{coin.slug}</div>
+      <h1>{coin.name}</h1>
+      <p>{coin.summary || 'Stablecoin record summary pending.'}</p>
+    </div>
+  </section>
+  <section class="panel registry">
+    <div class="bar">record facts</div>
+    <table><tbody>
+      <tr><th>Symbol</th><td>{coin.symbol}</td></tr>
+      <tr><th>Status</th><td>{coin.status}</td></tr>
+      <tr><th>Peg asset</th><td>{coin.peg_asset}</td></tr>
+      <tr><th>Model</th><td>{coin.collateral_model}</td></tr>
+      <tr><th>Issuer</th><td>{coin.issuer_id}</td></tr>
+      <tr><th>Last verified</th><td>{coin.last_verified_at ?? '—'}</td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
