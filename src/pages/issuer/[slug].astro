@@ -1,12 +1,24 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import issuers from '../../../data/issuers.json';
+import issuersData from '../../../data/issuers.json';
+
+type IssuerRow = {
+  slug: string;
+  name: string;
+  summary?: string;
+  issuer_type?: string;
+  jurisdiction?: string;
+  related_stablecoins?: string[];
+  confidence?: string;
+};
+
+const issuers = issuersData as IssuerRow[];
 
 export function getStaticPaths() {
   return issuers.map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
 }
 
-const { issuer } = Astro.props;
+const { issuer } = Astro.props as { issuer: IssuerRow };
 ---
 <BaseLayout title={`${issuer.name} — Stable or Gone`}>
   <section class="hero">
@@ -19,7 +31,7 @@ const { issuer } = Astro.props;
   <section class="panel registry">
     <div class="bar">issuer facts</div>
     <table><tbody>
-      <tr><th>Type</th><td>{issuer.issuer_type}</td></tr>
+      <tr><th>Type</th><td>{issuer.issuer_type ?? '—'}</td></tr>
       <tr><th>Jurisdiction</th><td>{issuer.jurisdiction ?? '—'}</td></tr>
       <tr><th>Related stablecoins</th><td>{issuer.related_stablecoins?.join(', ') ?? '—'}</td></tr>
       <tr><th>Confidence</th><td>{issuer.confidence ?? '—'}</td></tr>
