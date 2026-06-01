@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import events from '../../../data/events.json';
+---
+<BaseLayout title="Events — Stable or Gone">
+  <section class="content-page">
+    <span class="command">&gt; tail /events/depeg.log</span>
+    <h1>Event Log</h1>
+    <p>Depeg, collapse, reserve, redemption, wind-down, migration, and regulatory events.</p>
+  </section>
+
+  <section class="panel table-panel">
+    <div class="table-head">
+      <strong>{events.length} events</strong>
+      <code>data/events.json</code>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Sources</th></tr>
+      </thead>
+      <tbody>
+        {events.length === 0 ? (
+          <tr><td colspan="6" class="muted">No event records yet.</td></tr>
+        ) : events.map((event) => (
+          <tr>
+            <td>{event.event_date ?? '—'}</td>
+            <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
+            <td>{event.event_type}</td>
+            <td>{event.impact_level ?? '—'}</td>
+            <td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td>
+            <td>{event.source_count ?? 0}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
