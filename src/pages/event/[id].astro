@@ -13,15 +13,13 @@ type EventRow = {
   source_count?: number;
 };
 
-const events = eventsData as EventRow[];
-
 export function getStaticPaths() {
-  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+  return (eventsData as EventRow[]).map((event) => ({ params: { id: event.id }, props: { event } }));
 }
 
 const { event } = Astro.props as { event: EventRow };
 ---
-<BaseLayout title={`${event.title} — Stable or Gone`}>
+<BaseLayout title={`${event.name ?? event.title} — Stable or Gone`}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; open event/{event.id}</div>
