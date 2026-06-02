@@ -1,12 +1,12 @@
 # Stable or Gone Current Specification
 
-Updated: 2026-06-01
+Updated: 2026-06-02
 
 ## 1. Product definition
 
 Stable or Gone (SOG) is a terminal-style stablecoin history registry.
 
-It records stablecoin entities, issuers, events, reserve references, redemption context, evidence, and visible uncertainty.
+It records stablecoin entities, issuers, events, reserve references, redemption context, regulatory/official context, deployment/contract notes, evidence, and visible uncertainty.
 
 SOG is not:
 
@@ -82,6 +82,8 @@ data/events.json
 data/evidence.json
 data/reserve-reports.json
 data/known-unknowns.json
+data/regulatory-notes.json
+data/deployments.json
 ```
 
 Build validation:
@@ -113,6 +115,12 @@ Core fields:
 - collateral_model
 - reserve_disclosure_status
 - redemption_status
+- who_can_redeem
+- retail_redemption
+- institutional_redemption
+- minimum_redemption
+- redemption_region_notes
+- redemption_notes
 - launch_date
 - discontinued_date
 - summary
@@ -215,6 +223,41 @@ Core fields:
 - last_checked_at
 - notes
 
+### regulatory_note
+
+Represents source-backed regulatory, official, banking, issuer notice, or public authority context.
+
+Core fields:
+
+- id
+- stablecoin_id
+- issuer_id
+- event_id
+- note_date
+- title
+- jurisdiction
+- authority_or_source
+- note_type
+- summary
+- source_url
+- confidence
+- notes
+
+### deployment
+
+Represents chain-specific deployment or contract context.
+
+Core fields:
+
+- id
+- stablecoin_id
+- chain
+- deployment_type
+- contract_address
+- status
+- notes
+- evidence_ids
+
 ## 6. Status labels
 
 Current status enum:
@@ -271,45 +314,50 @@ For each significant event, SOG should eventually record:
 - confidence
 - known unknowns
 
-## 8. Competitive differentiators to add or strengthen
+## 8. Competitive differentiators implemented or being strengthened
 
-The following are required for SOG to become stronger than a generic stablecoin list:
+The following are required for SOG to become stronger than a generic stablecoin list.
 
 ### 8.1 Lifecycle map
 
-Each stablecoin should eventually expose lifecycle relationships:
+Current implementation:
 
-- launched
-- expanded
-- notable depeg
-- recovered
-- restricted
-- wind-down
-- discontinued
-- failed
-- migrated
-- rebranded
+- Stablecoin detail pages show an event-derived lifecycle table.
+- Launch date, registry events, discontinued date, and current status can appear together.
+- This is not yet a dedicated lifecycle data file.
+
+Future strengthening:
+
 - successor token
 - predecessor token
-
-This can start as event data and later become a dedicated lifecycle view.
+- migration relation
+- rebrand relation
+- chain-specific lifecycle
 
 ### 8.2 Redemption access
 
-Each stablecoin detail page should clearly show redemption context:
+Current implementation:
+
+- Stablecoin records include redemption access fields.
+- Stablecoin detail pages show a dedicated redemption access section.
+- SOG separates issuer redemption from secondary-market trading.
+
+Fields:
 
 - redemption status
 - who can redeem
-- retail/institutional distinction if known
-- region limits if known
-- minimum redemption if known
-- wind-down window if relevant
-
-If unclear, the page should show it as a known unknown.
+- retail/institutional distinction
+- minimum redemption
+- region/access notes
+- registry notes
 
 ### 8.3 Reserve disclosure history
 
-Each stablecoin should show reserve disclosure references and not just a single label.
+Current implementation:
+
+- `reserve-reports.json` exists.
+- Stablecoin detail pages show reserve/attestation history.
+- Seed reserve references exist for 10 records, but many are placeholder-level and need source deepening.
 
 Reserve records should distinguish:
 
@@ -322,24 +370,30 @@ Reserve records should distinguish:
 
 ### 8.4 Evidence coverage panel
 
-Each detail page should eventually show source coverage by type:
+Current implementation:
 
-- issuer source
-- market data source
-- reserve report
-- public notice
-- regulatory source
-- archive
-
-This is not a score. It is a source-coverage view.
+- Stablecoin detail pages show evidence coverage by source type.
+- Coverage is not a score.
+- Coverage includes issuer source, reserve reference, market data, regulatory source, deployment/contract, exchange notice, news/analysis, archive capture, and other source.
 
 ### 8.5 Known unknowns
+
+Current implementation:
+
+- `known-unknowns.json` exists.
+- Stablecoin detail pages show known unknowns.
+- New seed records should include a known unknown when important source gaps remain.
 
 Visible uncertainty is part of the product.
 
 Do not hide unclear data. Do not guess.
 
 ### 8.6 Failure mechanism taxonomy
+
+Current implementation:
+
+- `events.json` can hold `failure_mechanism`.
+- Only early seed event coverage exists.
 
 Material events should use failure mechanism labels when supportable:
 
@@ -356,7 +410,11 @@ Material events should use failure mechanism labels when supportable:
 
 ### 8.7 Contract and deployment status
 
-This is not yet complete in v0, but is important for future differentiation.
+Current implementation:
+
+- `deployments.json` exists.
+- Stablecoin detail pages show deployment/contract records.
+- Current entries are mostly placeholder-level and should be source-deepened before treating contract fields as final.
 
 Future records should distinguish:
 
@@ -369,6 +427,12 @@ Future records should distinguish:
 - contract control notes
 
 ### 8.8 Regulatory notes
+
+Current implementation:
+
+- `regulatory-notes.json` exists.
+- Stablecoin detail pages show regulatory/official context.
+- Current notes cover BUSD, UST, and USDC context.
 
 Regulatory notes should remain source-backed and conservative.
 
@@ -383,6 +447,11 @@ Current stablecoin seed:
 - DAI
 - UST / TerraUSD
 - BUSD
+- FRAX
+- TUSD
+- FDUSD
+- PYUSD
+- USDD
 
 Current issuer seed:
 
@@ -391,6 +460,10 @@ Current issuer seed:
 - MakerDAO / Sky
 - Terraform Labs
 - Paxos
+- Frax Finance
+- TrueUSD
+- First Digital / FD121
+- TRON DAO Reserve
 
 Current event seed:
 
@@ -421,13 +494,13 @@ Current v0 is useful as a foundation but incomplete as a competitive product.
 
 Known limitations:
 
-- seed data is shallow
-- source coverage is sparse
+- seed data is still shallow
+- source coverage is sparse for many records
 - reserve report history is not complete
-- redemption access fields need clearer structure
-- lifecycle map is not yet visible as a dedicated component
-- deployment/contract data does not exist yet
-- regulatory notes are not yet separated
+- redemption access fields are useful but need direct source deepening
+- lifecycle map is event-derived, not yet a dedicated lifecycle data model
+- deployment/contract data exists but is mostly placeholder-level
+- regulatory notes exist but are not complete
 - no search/filter UI yet
 - no guide/comparison pages yet
 - Google Form URL is not inserted yet
@@ -439,7 +512,7 @@ Public v0 should be considered meaningfully complete when:
 - at least 15 stablecoins are in the registry
 - top 5 records have stronger evidence coverage
 - all current seed events have source-backed event pages
-- detail pages show status, issuer, reserve, redemption, events, evidence, and known unknowns
+- detail pages show status, issuer, reserve, redemption, regulatory/official context, deployment/contract data, lifecycle, events, evidence, and known unknowns
 - methodology clearly explains status vs event separation
 - report entry links are visible
 - sitemap and robots are live
