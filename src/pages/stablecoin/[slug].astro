@@ -31,6 +31,7 @@ type EventRow = { id: string; stablecoin_id: string; title: string; event_type?:
 type EvidenceRow = { id: string; stablecoin_id: string; event_id?: string | null; source_type?: string; title: string; url: string; publisher?: string; claim_scope?: string; reliability?: string };
 type ReserveReportRow = { id: string; stablecoin_id: string; report_date?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; confidence?: string };
 type KnownUnknownRow = { id: string; stablecoin_id: string; topic: string; description: string; severity?: string; last_checked_at?: string };
+type LifecycleRow = { date: string; stage: string; title: string; detail: string; href?: string };
 
 export function getStaticPaths() {
   return (stablecoinsData as StablecoinRow[]).map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
@@ -46,39 +47,28 @@ const statusClass = `chip ${coin.status ?? 'unknown'}`;
 
 const evidenceCount = (types: string[]) => evidence.filter((source) => source.source_type && types.includes(source.source_type)).length;
 const coverageRows = [
-  {
-    label: 'Issuer source',
-    count: evidenceCount(['issuer_statement', 'issuer_blog', 'issuer_social'])
-  },
-  {
-    label: 'Reserve reference',
-    count: reserveReports.length + evidenceCount(['reserve_report', 'attestation_report'])
-  },
-  {
-    label: 'Market data',
-    count: evidenceCount(['market_data'])
-  },
-  {
-    label: 'Regulatory source',
-    count: evidenceCount(['regulatory_document'])
-  },
-  {
-    label: 'Exchange notice',
-    count: evidenceCount(['exchange_notice'])
-  },
-  {
-    label: 'News / analysis',
-    count: evidenceCount(['news_article'])
-  },
-  {
-    label: 'Archive capture',
-    count: evidenceCount(['archive_capture'])
-  },
-  {
-    label: 'Other source',
-    count: evidence.filter((source) => !source.source_type || source.source_type === 'other' || source.source_type === 'database_reference' || source.source_type === 'protocol_forum' || source.source_type === 'governance_post').length
-  }
+  { label: 'Issuer source', count: evidenceCount(['issuer_statement', 'issuer_blog', 'issuer_social']) },
+  { label: 'Reserve reference', count: reserveReports.length + evidenceCount(['reserve_report', 'attestation_report']) },
+  { label: 'Market data', count: evidenceCount(['market_data']) },
+  { label: 'Regulatory source', count: evidenceCount(['regulatory_document']) },
+  { label: 'Exchange notice', count: evidenceCount(['exchange_notice']) },
+  { label: 'News / analysis', count: evidenceCount(['news_article']) },
+  { label: 'Archive capture', count: evidenceCount(['archive_capture']) },
+  { label: 'Other source', count: evidence.filter((source) => !source.source_type || source.source_type === 'other' || source.source_type === 'database_reference' || source.source_type === 'protocol_forum' || source.source_type === 'governance_post').length }
 ];
+
+const lifecycleRows: LifecycleRow[] = [
+  ...(coin.launch_date ? [{ date: coin.launch_date, stage: 'launched', title: `${coin.name} launch`, detail: 'Launch date recorded on the stablecoin entity.' }] : []),
+  ...events.map((event) => ({
+    date: event.event_date ?? 'unknown',
+    stage: event.event_type ?? 'event',
+    title: event.title,
+    detail: event.recovered === true ? 'Event recorded as recovered.' : event.recovered === false ? 'Event recorded as not recovered.' : 'Event recorded in the registry timeline.',
+    href: `/event/${event.id}/`
+  })),
+  ...(coin.discontinued_date ? [{ date: coin.discontinued_date, stage: coin.status ?? 'discontinued', title: `${coin.name} discontinued status`, detail: 'Discontinued date is recorded on the stablecoin entity.' }] : []),
+  { date: coin.last_verified_at ?? 'unknown', stage: 'current_status', title: `Current registry status: ${coin.status ?? 'unknown'}`, detail: 'This is the current SOG registry label, not a safety score.' }
+].sort((a, b) => a.date.localeCompare(b.date));
 ---
 <BaseLayout title={`${coin.name} — Stable or Gone`}>
   <section class="hero">
@@ -120,12 +110,21 @@ const coverageRows = [
     <div class="bar">evidence coverage summary — source coverage, not a safety score</div>
     <table>
       <thead><tr><th>Coverage type</th><th>Count</th><th>Meaning</th></tr></thead>
+      <tbody>{coverageRows.map((row) => (<tr><td>{row.label}</td><td>{row.count}</td><td>{row.count > 0 ? 'Source-backed reference present in this record.' : 'No source of this type is linked yet.'}</td></tr>))}</tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">lifecycle — event-derived registry timeline</div>
+    <table>
+      <thead><tr><th>Date</th><th>Stage</th><th>Record</th><th>Detail</th></tr></thead>
       <tbody>
-        {coverageRows.map((row) => (
+        {lifecycleRows.map((row) => (
           <tr>
-            <td>{row.label}</td>
-            <td>{row.count}</td>
-            <td>{row.count > 0 ? 'Source-backed reference present in this record.' : 'No source of this type is linked yet.'}</td>
+            <td>{row.date}</td>
+            <td>{row.stage}</td>
+            <td>{row.href ? <a href={row.href}>{row.title}</a> : row.title}</td>
+            <td>{row.detail}</td>
           </tr>
         ))}
       </tbody>
@@ -136,11 +135,7 @@ const coverageRows = [
     <div class="bar">event timeline</div>
     <table>
       <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Mechanism</th></tr></thead>
-      <tbody>
-        {events.length === 0 ? <tr><td colspan="6">No event records yet.</td></tr> : events.map((event) => (
-          <tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{event.event_type ?? '—'}</td><td>{event.impact_level ?? '—'}</td><td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td><td>{event.failure_mechanism ?? '—'}</td></tr>
-        ))}
-      </tbody>
+      <tbody>{events.length === 0 ? <tr><td colspan="6">No event records yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{event.event_type ?? '—'}</td><td>{event.impact_level ?? '—'}</td><td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td><td>{event.failure_mechanism ?? '—'}</td></tr>))}</tbody>
     </table>
   </section>
 
@@ -148,11 +143,7 @@ const coverageRows = [
     <div class="bar">reserve / attestation history</div>
     <table>
       <thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Asset categories</th><th>Confidence</th></tr></thead>
-      <tbody>
-        {reserveReports.length === 0 ? <tr><td colspan="5">No reserve report records yet.</td></tr> : reserveReports.map((report) => (
-          <tr><td>{report.report_date ?? '—'}</td><td>{report.url ? <a href={report.url}>{report.publisher ?? 'source'}</a> : (report.publisher ?? '—')}</td><td>{report.report_type ?? '—'}</td><td>{report.asset_categories?.join(', ') ?? '—'}</td><td>{report.confidence ?? '—'}</td></tr>
-        ))}
-      </tbody>
+      <tbody>{reserveReports.length === 0 ? <tr><td colspan="5">No reserve report records yet.</td></tr> : reserveReports.map((report) => (<tr><td>{report.report_date ?? '—'}</td><td>{report.url ? <a href={report.url}>{report.publisher ?? 'source'}</a> : (report.publisher ?? '—')}</td><td>{report.report_type ?? '—'}</td><td>{report.asset_categories?.join(', ') ?? '—'}</td><td>{report.confidence ?? '—'}</td></tr>))}</tbody>
     </table>
   </section>
 
@@ -160,11 +151,7 @@ const coverageRows = [
     <div class="bar">evidence records</div>
     <table>
       <thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Claim scope</th><th>Reliability</th></tr></thead>
-      <tbody>
-        {evidence.length === 0 ? <tr><td colspan="5">No evidence records yet.</td></tr> : evidence.map((source) => (
-          <tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{source.source_type ?? '—'}</td><td>{source.claim_scope ?? '—'}</td><td>{source.reliability ?? '—'}</td></tr>
-        ))}
-      </tbody>
+      <tbody>{evidence.length === 0 ? <tr><td colspan="5">No evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{source.source_type ?? '—'}</td><td>{source.claim_scope ?? '—'}</td><td>{source.reliability ?? '—'}</td></tr>))}</tbody>
     </table>
   </section>
 
@@ -172,11 +159,7 @@ const coverageRows = [
     <div class="bar">known unknowns</div>
     <table>
       <thead><tr><th>Topic</th><th>Description</th><th>Severity</th><th>Last checked</th></tr></thead>
-      <tbody>
-        {knownUnknowns.length === 0 ? <tr><td colspan="4">No known unknowns recorded.</td></tr> : knownUnknowns.map((item) => (
-          <tr><td>{item.topic}</td><td>{item.description}</td><td>{item.severity ?? '—'}</td><td>{item.last_checked_at ?? '—'}</td></tr>
-        ))}
-      </tbody>
+      <tbody>{knownUnknowns.length === 0 ? <tr><td colspan="4">No known unknowns recorded.</td></tr> : knownUnknowns.map((item) => (<tr><td>{item.topic}</td><td>{item.description}</td><td>{item.severity ?? '—'}</td><td>{item.last_checked_at ?? '—'}</td></tr>))}</tbody>
     </table>
   </section>
 
