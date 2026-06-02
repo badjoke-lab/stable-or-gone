@@ -7,6 +7,7 @@ import evidenceData from '../../../data/evidence.json';
 import reserveReportsData from '../../../data/reserve-reports.json';
 import knownUnknownsData from '../../../data/known-unknowns.json';
 import regulatoryNotesData from '../../../data/regulatory-notes.json';
+import deploymentsData from '../../../data/deployments.json';
 
 type StablecoinRow = {
   id: string;
@@ -39,6 +40,7 @@ type EvidenceRow = { id: string; stablecoin_id: string; event_id?: string | null
 type ReserveReportRow = { id: string; stablecoin_id: string; report_date?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; confidence?: string };
 type KnownUnknownRow = { id: string; stablecoin_id: string; topic: string; description: string; severity?: string; last_checked_at?: string };
 type RegulatoryNoteRow = { id: string; stablecoin_id: string; issuer_id?: string; event_id?: string | null; note_date?: string; title: string; jurisdiction?: string; authority_or_source?: string; note_type?: string; summary: string; source_url: string; confidence?: string; notes?: string };
+type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; contract_address?: string; status: string; notes?: string; evidence_ids?: string[] };
 type LifecycleRow = { date: string; stage: string; title: string; detail: string; href?: string };
 
 export function getStaticPaths() {
@@ -52,6 +54,7 @@ const evidence = (evidenceData as EvidenceRow[]).filter((item) => item.stablecoi
 const reserveReports = (reserveReportsData as ReserveReportRow[]).filter((item) => item.stablecoin_id === coin.id);
 const knownUnknowns = (knownUnknownsData as KnownUnknownRow[]).filter((item) => item.stablecoin_id === coin.id);
 const regulatoryNotes = (regulatoryNotesData as RegulatoryNoteRow[]).filter((item) => item.stablecoin_id === coin.id);
+const deployments = (deploymentsData as DeploymentRow[]).filter((item) => item.stablecoin_id === coin.id);
 const statusClass = `chip ${coin.status ?? 'unknown'}`;
 
 const evidenceCount = (types: string[]) => evidence.filter((source) => source.source_type && types.includes(source.source_type)).length;
@@ -60,6 +63,7 @@ const coverageRows = [
   { label: 'Reserve reference', count: reserveReports.length + evidenceCount(['reserve_report', 'attestation_report']) },
   { label: 'Market data', count: evidenceCount(['market_data']) },
   { label: 'Regulatory source', count: regulatoryNotes.length + evidenceCount(['regulatory_document']) },
+  { label: 'Deployment / contract', count: deployments.length },
   { label: 'Exchange notice', count: evidenceCount(['exchange_notice']) },
   { label: 'News / analysis', count: evidenceCount(['news_article']) },
   { label: 'Archive capture', count: evidenceCount(['archive_capture']) },
@@ -133,6 +137,14 @@ const lifecycleRows: LifecycleRow[] = [
     <table>
       <thead><tr><th>Date</th><th>Title</th><th>Source</th><th>Type</th><th>Summary</th></tr></thead>
       <tbody>{regulatoryNotes.length === 0 ? <tr><td colspan="5">No regulatory notes recorded yet.</td></tr> : regulatoryNotes.map((note) => (<tr><td>{note.note_date ?? '—'}</td><td><a href={note.source_url}>{note.title}</a></td><td>{note.authority_or_source ?? '—'}</td><td>{note.note_type ?? '—'}</td><td>{note.summary}</td></tr>))}</tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">deployment / contract data — static registry notes, not live chain monitoring</div>
+    <table>
+      <thead><tr><th>Chain</th><th>Deployment type</th><th>Status</th><th>Contract</th><th>Notes</th></tr></thead>
+      <tbody>{deployments.length === 0 ? <tr><td colspan="5">No deployment records yet.</td></tr> : deployments.map((deployment) => (<tr><td>{deployment.chain}</td><td>{deployment.deployment_type}</td><td>{deployment.status}</td><td>{deployment.contract_address ?? 'source_review_needed'}</td><td>{deployment.notes ?? '—'}</td></tr>))}</tbody>
     </table>
   </section>
 
