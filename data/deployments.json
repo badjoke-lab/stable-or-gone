@@ -108,5 +108,25 @@
     "status": "active",
     "notes": "Seed deployment placeholder for USDD on TRON.",
     "evidence_ids": ["sog_src_usdd_official_site"]
+  },
+  {
+    "id": "sog_dep_gusd_ethereum_seed",
+    "stablecoin_id": "sog_st_gusd",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for GUSD on Ethereum.",
+    "evidence_ids": ["sog_src_gusd_gemini_official"]
+  },
+  {
+    "id": "sog_dep_lusd_ethereum_seed",
+    "stablecoin_id": "sog_st_lusd",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_token",
+    "contract_address": "source_review_needed",
+    "status": "active_or_legacy_context",
+    "notes": "Seed deployment placeholder for LUSD on Ethereum.",
+    "evidence_ids": ["sog_src_lusd_liquity_docs"]
   }
 ]
