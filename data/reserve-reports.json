@@ -110,5 +110,33 @@
     "archived_url": null,
     "confidence": "medium",
     "notes": "Seed USDD reserve reference. Reserve composition and collateral ratio history require source-deepening."
+  },
+  {
+    "id": "sog_reserve_gusd_gemini_seed",
+    "stablecoin_id": "sog_st_gusd",
+    "issuer_id": "sog_issuer_gemini",
+    "report_date": "2026-06-02",
+    "period_covered": "current Gemini Dollar reference",
+    "publisher": "Gemini",
+    "report_type": "attestation_reference",
+    "asset_categories": ["cash", "cash_equivalents", "source_review_needed"],
+    "url": "https://www.gemini.com/dollar",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed GUSD reserve/attestation reference. Complete monthly attestation archive should be added later."
+  },
+  {
+    "id": "sog_reserve_lusd_protocol_seed",
+    "stablecoin_id": "sog_st_lusd",
+    "issuer_id": "sog_issuer_liquity",
+    "report_date": "2026-06-02",
+    "period_covered": "current protocol documentation reference",
+    "publisher": "Liquity",
+    "report_type": "protocol_disclosure",
+    "asset_categories": ["eth_collateral", "protocol_mechanism", "source_review_needed"],
+    "url": "https://docs.liquity.org/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed LUSD collateral/protocol reference. V1/V2 separation and current protocol status require source-deepening."
   }
 ]
