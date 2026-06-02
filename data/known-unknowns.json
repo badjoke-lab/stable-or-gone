@@ -1,122 +1,16 @@
 [
-  {
-    "id": "sog_unknown_usdt_redemption_access",
-    "stablecoin_id": "sog_st_usdt",
-    "issuer_id": "sog_issuer_tether",
-    "topic": "redemption_access",
-    "description": "Retail redemption access, minimum redemption terms, and regional restrictions need clearer source-backed summary in this record.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-01",
-    "notes": "Keep visible until redemption policy is summarized with direct sources."
-  },
-  {
-    "id": "sog_unknown_usdc_lowest_price",
-    "stablecoin_id": "sog_st_usdc",
-    "issuer_id": "sog_issuer_circle",
-    "topic": "historical_low_price",
-    "description": "Lowest observed USDC price and exact depeg duration vary by data source and need a source-specific value before display.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-01",
-    "notes": "Do not display a single low price until market data source is selected."
-  },
-  {
-    "id": "sog_unknown_dai_sky_lifecycle",
-    "stablecoin_id": "sog_st_dai",
-    "issuer_id": "sog_issuer_makerdao_sky",
-    "topic": "lifecycle_transition",
-    "description": "DAI, Sky, and related successor or parallel token lifecycle details require a dedicated source-backed lifecycle record.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-01",
-    "notes": "Handle in lifecycle/migration pass."
-  },
-  {
-    "id": "sog_unknown_ust_precise_collapse_timeline",
-    "stablecoin_id": "sog_st_ust",
-    "issuer_id": "sog_issuer_terraform_labs",
-    "topic": "collapse_timeline",
-    "description": "UST collapse timeline requires deeper event sequencing and multiple external sources before detailed timeline display.",
-    "severity": "high",
-    "last_checked_at": "2026-06-01",
-    "notes": "Initial status is failed, but detailed timeline remains incomplete."
-  },
-  {
-    "id": "sog_unknown_busd_final_redemption_window",
-    "stablecoin_id": "sog_st_busd",
-    "issuer_id": "sog_issuer_paxos",
-    "topic": "redemption_deadline",
-    "description": "Final redemption window, exchange conversion support, and post-wind-down handling need fuller source coverage.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-01",
-    "notes": "Keep visible until BUSD wind-down details are expanded."
-  },
-  {
-    "id": "sog_unknown_frax_v3_lifecycle",
-    "stablecoin_id": "sog_st_frax",
-    "issuer_id": "sog_issuer_frax_finance",
-    "topic": "lifecycle_transition",
-    "description": "FRAX, frxUSD, FXS, AMO, and V3 collateral design relationships need a dedicated source-backed lifecycle and successor/parallel asset review.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-02",
-    "notes": "Do not collapse FRAX and related Frax stable assets into one lifecycle without source review."
-  },
-  {
-    "id": "sog_unknown_tusd_issuer_reserve_partners",
-    "stablecoin_id": "sog_st_tusd",
-    "issuer_id": "sog_issuer_trueusd",
-    "topic": "issuer_reserve_structure",
-    "description": "TUSD issuer, reserve partner, attestation provider, and chain-specific native/bridged status need deeper source-backed review.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-02",
-    "notes": "Keep visible until exact issuer/reserve and deployment context is reviewed."
-  },
-  {
-    "id": "sog_unknown_fdusd_exact_report_history",
-    "stablecoin_id": "sog_st_fdusd",
-    "issuer_id": "sog_issuer_first_digital",
-    "topic": "reserve_report_history",
-    "description": "FDUSD reserve report history, issuer structure, and supported redemption channels need deeper source-backed review.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-02",
-    "notes": "Keep visible until exact reserve report URLs and client redemption terms are reviewed."
-  },
-  {
-    "id": "sog_unknown_pyusd_chain_and_report_history",
-    "stablecoin_id": "sog_st_pyusd",
-    "issuer_id": "sog_issuer_paxos",
-    "topic": "deployment_and_report_history",
-    "description": "PYUSD chain-specific deployment status, monthly reserve report history, and PayPal/Paxos responsibility split need deeper source-backed review.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-02",
-    "notes": "Keep visible until exact Paxos report history and deployment documentation are reviewed."
-  },
-  {
-    "id": "sog_unknown_usdd_depeg_and_reserve_history",
-    "stablecoin_id": "sog_st_usdd",
-    "issuer_id": "sog_issuer_tron_dao_reserve",
-    "topic": "depeg_reserve_redemption_history",
-    "description": "USDD depeg history, reserve composition, collateral ratio changes, redemption mechanics, and chain-specific deployment details need deeper source-backed review.",
-    "severity": "high",
-    "last_checked_at": "2026-06-02",
-    "notes": "Do not add detailed USDD depeg records until source-specific price and duration references are selected."
-  },
-  {
-    "id": "sog_unknown_gusd_attestation_history",
-    "stablecoin_id": "sog_st_gusd",
-    "issuer_id": "sog_issuer_gemini",
-    "topic": "attestation_and_liquidity_history",
-    "description": "GUSD monthly attestation history, exchange availability, and large collateral-use lifecycle events need deeper source-backed review.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-02",
-    "notes": "Keep visible until exact attestation archive and historical usage events are reviewed."
-  },
-  {
-    "id": "sog_unknown_lusd_v1_v2_lifecycle",
-    "stablecoin_id": "sog_st_lusd",
-    "issuer_id": "sog_issuer_liquity",
-    "topic": "v1_v2_lifecycle",
-    "description": "LUSD V1, Liquity V2, BOLD, current frontend access, and protocol redemption mechanics need deeper source-backed review.",
-    "severity": "medium",
-    "last_checked_at": "2026-06-02",
-    "notes": "Keep visible until LUSD and BOLD are clearly separated in lifecycle records."
-  }
+  {"id":"sog_unknown_usdt_redemption_access","stablecoin_id":"sog_st_usdt","issuer_id":"sog_issuer_tether","topic":"redemption_access","description":"Retail redemption access, minimum redemption terms, and regional restrictions need clearer source-backed summary in this record.","severity":"medium","last_checked_at":"2026-06-01","notes":"Keep visible until redemption policy is summarized with direct sources."},
+  {"id":"sog_unknown_usdc_lowest_price","stablecoin_id":"sog_st_usdc","issuer_id":"sog_issuer_circle","topic":"historical_low_price","description":"Lowest observed USDC price and exact depeg duration vary by data source and need a source-specific value before display.","severity":"medium","last_checked_at":"2026-06-01","notes":"Do not display a single low price until market data source is selected."},
+  {"id":"sog_unknown_dai_sky_lifecycle","stablecoin_id":"sog_st_dai","issuer_id":"sog_issuer_makerdao_sky","topic":"lifecycle_transition","description":"DAI, Sky, and related successor or parallel token lifecycle details require a dedicated source-backed lifecycle record.","severity":"medium","last_checked_at":"2026-06-01","notes":"Handle in lifecycle/migration pass."},
+  {"id":"sog_unknown_ust_precise_collapse_timeline","stablecoin_id":"sog_st_ust","issuer_id":"sog_issuer_terraform_labs","topic":"collapse_timeline","description":"UST collapse timeline requires deeper event sequencing and multiple external sources before detailed timeline display.","severity":"high","last_checked_at":"2026-06-01","notes":"Initial status is failed, but detailed timeline remains incomplete."},
+  {"id":"sog_unknown_busd_final_redemption_window","stablecoin_id":"sog_st_busd","issuer_id":"sog_issuer_paxos","topic":"redemption_deadline","description":"Final redemption window, exchange conversion support, and post-wind-down handling need fuller source coverage.","severity":"medium","last_checked_at":"2026-06-01","notes":"Keep visible until BUSD wind-down details are expanded."},
+  {"id":"sog_unknown_frax_v3_lifecycle","stablecoin_id":"sog_st_frax","issuer_id":"sog_issuer_frax_finance","topic":"lifecycle_transition","description":"FRAX, frxUSD, FXS, AMO, and V3 collateral design relationships need a dedicated source-backed lifecycle and successor/parallel asset review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Do not collapse FRAX and related Frax stable assets into one lifecycle without source review."},
+  {"id":"sog_unknown_tusd_issuer_reserve_partners","stablecoin_id":"sog_st_tusd","issuer_id":"sog_issuer_trueusd","topic":"issuer_reserve_structure","description":"TUSD issuer, reserve partner, attestation provider, and chain-specific native/bridged status need deeper source-backed review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Keep visible until exact issuer/reserve and deployment context is reviewed."},
+  {"id":"sog_unknown_fdusd_exact_report_history","stablecoin_id":"sog_st_fdusd","issuer_id":"sog_issuer_first_digital","topic":"reserve_report_history","description":"FDUSD reserve report history, issuer structure, and supported redemption channels need deeper source-backed review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Keep visible until exact reserve report URLs and client redemption terms are reviewed."},
+  {"id":"sog_unknown_pyusd_chain_and_report_history","stablecoin_id":"sog_st_pyusd","issuer_id":"sog_issuer_paxos","topic":"deployment_and_report_history","description":"PYUSD chain-specific deployment status, monthly reserve report history, and PayPal/Paxos responsibility split need deeper source-backed review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Keep visible until exact Paxos report history and deployment documentation are reviewed."},
+  {"id":"sog_unknown_usdd_depeg_and_reserve_history","stablecoin_id":"sog_st_usdd","issuer_id":"sog_issuer_tron_dao_reserve","topic":"depeg_reserve_redemption_history","description":"USDD depeg history, reserve composition, collateral ratio changes, redemption mechanics, and chain-specific deployment details need deeper source-backed review.","severity":"high","last_checked_at":"2026-06-02","notes":"Do not add detailed USDD depeg records until source-specific price and duration references are selected."},
+  {"id":"sog_unknown_gusd_attestation_history","stablecoin_id":"sog_st_gusd","issuer_id":"sog_issuer_gemini","topic":"attestation_and_liquidity_history","description":"GUSD monthly attestation history, exchange availability, and large collateral-use lifecycle events need deeper source-backed review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Keep visible until exact attestation archive and historical usage events are reviewed."},
+  {"id":"sog_unknown_lusd_v1_v2_lifecycle","stablecoin_id":"sog_st_lusd","issuer_id":"sog_issuer_liquity","topic":"v1_v2_lifecycle","description":"LUSD V1, Liquity V2, BOLD, current frontend access, and protocol redemption mechanics need deeper source-backed review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Keep visible until LUSD and BOLD are clearly separated in lifecycle records."},
+  {"id":"sog_unknown_crvusd_collateral_and_pegkeeper_history","stablecoin_id":"sog_st_crvusd","issuer_id":"sog_issuer_curve_finance","topic":"collateral_pegkeeper_history","description":"crvUSD collateral market history, LLAMMA mechanics, PegKeeper behavior, and chain-specific contract status need deeper source-backed review.","severity":"medium","last_checked_at":"2026-06-02","notes":"Keep visible until exact collateral and PegKeeper sources are selected."},
+  {"id":"sog_unknown_usde_backing_and_redemption_limits","stablecoin_id":"sog_st_usde","issuer_id":"sog_issuer_ethena_labs","topic":"backing_redemption_risk","description":"USDe backing dashboard, custodial setup, delta-hedging venues, reserve fund, mint/redeem eligibility, and jurisdictional restrictions need deeper source-backed review.","severity":"high","last_checked_at":"2026-06-02","notes":"Keep visible until exact Ethena risk, backing, and mint/redeem sources are reviewed."}
 ]
