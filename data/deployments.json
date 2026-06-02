@@ -98,5 +98,15 @@
     "status": "active",
     "notes": "Seed deployment placeholder for PYUSD on Solana.",
     "evidence_ids": ["sog_src_pyusd_paypal_official"]
+  },
+  {
+    "id": "sog_dep_usdd_tron_seed",
+    "stablecoin_id": "sog_st_usdd",
+    "chain": "TRON",
+    "deployment_type": "native_or_protocol_supported",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for USDD on TRON.",
+    "evidence_ids": ["sog_src_usdd_official_site"]
   }
 ]
