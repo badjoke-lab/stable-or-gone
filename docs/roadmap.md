@@ -2,12 +2,12 @@
 
 ## Current stage
 
-SOG v0 foundation is live on Cloudflare Pages.
+SOG v0 foundation is live on Cloudflare Pages with a custom domain.
 
 Public URL:
 
 ```txt
-https://stable-or-gone.pages.dev/
+https://sog.badjoke-lab.com/
 ```
 
 Current specification:
@@ -18,7 +18,7 @@ docs/current-spec.md
 
 ## Current milestone
 
-SOG has reached the PR-016 milestone: 10 stablecoin seed records.
+SOG has reached the PR-017 milestone: 15 stablecoin seed records.
 
 Current stablecoin records:
 
@@ -33,6 +33,11 @@ TUSD
 FDUSD
 PYUSD
 USDD
+GUSD
+LUSD
+crvUSD
+USDe
+sUSD
 ```
 
 ## Completed baseline
@@ -131,6 +136,7 @@ Completed:
 - Cloudflare Pages connected
 - main branch build works
 - static output to `dist`
+- custom domain set to `sog.badjoke-lab.com`
 - public URL available
 
 ### SOG-008: public v0 hardening, first pass
@@ -223,34 +229,22 @@ Completed:
 - 10 total stablecoin records
 - starter issuer/evidence/reserve/known-unknown/deployment records for new entries
 
+## PR-017: Seed expansion batch 3
+
+Completed:
+
+- GUSD
+- LUSD
+- crvUSD
+- USDe
+- sUSD
+- 15 total stablecoin records
+- starter issuer/evidence/reserve/known-unknown/deployment records for new entries
+- public v0 minimum breadth reached
+
 ---
 
 # PR-level schedule from here
-
-## PR-017: Seed expansion batch 3
-
-Goal:
-
-Reach public v0 minimum breadth.
-
-Scope:
-
-Add stablecoin, issuer, starter evidence, reserve references, deployment placeholders, redemption access fields, and known unknowns for:
-
-```txt
-GUSD
-LUSD
-crvUSD
-USDe
-sUSD
-```
-
-Acceptance:
-
-- 15 total stablecoin records
-- All new records pass validation
-- Each new record has at least one evidence entry or known unknown explaining missing evidence
-- Build passes
 
 ## PR-018: Deepen top 5 records
 
