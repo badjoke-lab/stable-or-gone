@@ -254,5 +254,37 @@
     "reliability": "medium",
     "claim_scope": "issuer_reserve",
     "notes": "Seed issuer/reserve reference for USDD. Reserve composition and redemption mechanics need deeper review."
+  },
+  {
+    "id": "sog_src_gusd_gemini_official",
+    "stablecoin_id": "sog_st_gusd",
+    "issuer_id": "sog_issuer_gemini",
+    "event_id": null,
+    "source_type": "issuer_statement",
+    "title": "Gemini Dollar official page",
+    "url": "https://www.gemini.com/dollar",
+    "publisher": "Gemini",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-02",
+    "reliability": "medium",
+    "claim_scope": "entity_redemption_reserve",
+    "notes": "Seed source for GUSD entity, redemption, and reserve/attestation context."
+  },
+  {
+    "id": "sog_src_lusd_liquity_docs",
+    "stablecoin_id": "sog_st_lusd",
+    "issuer_id": "sog_issuer_liquity",
+    "event_id": null,
+    "source_type": "issuer_statement",
+    "title": "Liquity documentation for LUSD",
+    "url": "https://docs.liquity.org/",
+    "publisher": "Liquity",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-02",
+    "reliability": "medium",
+    "claim_scope": "entity_collateral_redemption",
+    "notes": "Seed source for LUSD entity, collateral, and protocol redemption context. Needs exact V1 documentation targeting later."
   }
 ]
