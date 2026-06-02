@@ -68,5 +68,35 @@
     "status": "active",
     "notes": "Seed deployment placeholder for TUSD.",
     "evidence_ids": ["sog_src_tusd_official_site"]
+  },
+  {
+    "id": "sog_dep_fdusd_ethereum_seed",
+    "stablecoin_id": "sog_st_fdusd",
+    "chain": "Ethereum",
+    "deployment_type": "native_or_issuer_supported",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for FDUSD.",
+    "evidence_ids": ["sog_src_fdusd_official_site"]
+  },
+  {
+    "id": "sog_dep_pyusd_ethereum_seed",
+    "stablecoin_id": "sog_st_pyusd",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for PYUSD on Ethereum.",
+    "evidence_ids": ["sog_src_pyusd_paxos_official"]
+  },
+  {
+    "id": "sog_dep_pyusd_solana_seed",
+    "stablecoin_id": "sog_st_pyusd",
+    "chain": "Solana",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for PYUSD on Solana.",
+    "evidence_ids": ["sog_src_pyusd_paypal_official"]
   }
 ]
