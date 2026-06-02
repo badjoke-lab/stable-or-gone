@@ -88,5 +88,15 @@
     "severity": "medium",
     "last_checked_at": "2026-06-02",
     "notes": "Keep visible until exact Paxos report history and deployment documentation are reviewed."
+  },
+  {
+    "id": "sog_unknown_usdd_depeg_and_reserve_history",
+    "stablecoin_id": "sog_st_usdd",
+    "issuer_id": "sog_issuer_tron_dao_reserve",
+    "topic": "depeg_reserve_redemption_history",
+    "description": "USDD depeg history, reserve composition, collateral ratio changes, redemption mechanics, and chain-specific deployment details need deeper source-backed review.",
+    "severity": "high",
+    "last_checked_at": "2026-06-02",
+    "notes": "Do not add detailed USDD depeg records until source-specific price and duration references are selected."
   }
 ]
