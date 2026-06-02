@@ -141,5 +141,31 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-02",
     "notes": "PR-017A seed issuer. Liquity V1 docs and BOLD/V2 relationship need deeper source-backed review."
+  },
+  {
+    "id": "sog_issuer_curve_finance",
+    "slug": "curve-finance",
+    "name": "Curve Finance",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["crvusd"],
+    "official_url": "https://curve.fi/",
+    "summary": "Protocol ecosystem associated with crvUSD. SOG tracks Curve at protocol level for collateral markets, LLAMMA, PegKeeper, DAO governance, and deployment context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-017B seed issuer. Exact documentation pages and governance sources need deeper source-backed review."
+  },
+  {
+    "id": "sog_issuer_ethena_labs",
+    "slug": "ethena-labs",
+    "name": "Ethena Labs",
+    "issuer_type": "protocol_or_company",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["usde"],
+    "official_url": "https://www.ethena.fi/",
+    "summary": "Organization and protocol ecosystem associated with USDe. SOG tracks Ethena at issuer/protocol level for synthetic dollar design, custody, delta-hedging, reserve fund, and mint/redeem context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-017B seed issuer. Eligibility, custody, backing dashboard, and risk-disclosure context need source-backed review."
   }
 ]
