@@ -68,5 +68,33 @@
     "archived_url": null,
     "confidence": "medium",
     "notes": "Seed attestation reference. Replace with exact attestation page and report history in a source-deepening pass."
+  },
+  {
+    "id": "sog_reserve_fdusd_seed",
+    "stablecoin_id": "sog_st_fdusd",
+    "issuer_id": "sog_issuer_first_digital",
+    "report_date": "2026-06-02",
+    "period_covered": "current reserve report reference",
+    "publisher": "First Digital Labs",
+    "report_type": "reserve_report_reference",
+    "asset_categories": ["cash", "cash_equivalents", "source_review_needed"],
+    "url": "https://firstdigitallabs.com/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed FDUSD reserve reference. Replace with exact report URL and history in source-deepening pass."
+  },
+  {
+    "id": "sog_reserve_pyusd_paxos_seed",
+    "stablecoin_id": "sog_st_pyusd",
+    "issuer_id": "sog_issuer_paxos",
+    "report_date": "2026-06-02",
+    "period_covered": "current PayPal USD transparency reference",
+    "publisher": "Paxos",
+    "report_type": "issuer_disclosure",
+    "asset_categories": ["us_dollar_deposits", "us_treasuries", "cash_equivalents"],
+    "url": "https://paxos.com/paypal-usd/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed PYUSD reserve reference. Complete monthly report history should be added later."
   }
 ]
