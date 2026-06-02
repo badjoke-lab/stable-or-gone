@@ -98,5 +98,25 @@
     "severity": "high",
     "last_checked_at": "2026-06-02",
     "notes": "Do not add detailed USDD depeg records until source-specific price and duration references are selected."
+  },
+  {
+    "id": "sog_unknown_gusd_attestation_history",
+    "stablecoin_id": "sog_st_gusd",
+    "issuer_id": "sog_issuer_gemini",
+    "topic": "attestation_and_liquidity_history",
+    "description": "GUSD monthly attestation history, exchange availability, and large collateral-use lifecycle events need deeper source-backed review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-02",
+    "notes": "Keep visible until exact attestation archive and historical usage events are reviewed."
+  },
+  {
+    "id": "sog_unknown_lusd_v1_v2_lifecycle",
+    "stablecoin_id": "sog_st_lusd",
+    "issuer_id": "sog_issuer_liquity",
+    "topic": "v1_v2_lifecycle",
+    "description": "LUSD V1, Liquity V2, BOLD, current frontend access, and protocol redemption mechanics need deeper source-backed review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-02",
+    "notes": "Keep visible until LUSD and BOLD are clearly separated in lifecycle records."
   }
 ]
