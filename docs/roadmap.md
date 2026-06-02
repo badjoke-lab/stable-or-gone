@@ -16,6 +16,25 @@ Current specification:
 docs/current-spec.md
 ```
 
+## Current milestone
+
+SOG has reached the PR-016 milestone: 10 stablecoin seed records.
+
+Current stablecoin records:
+
+```txt
+USDT
+USDC
+DAI
+UST / TerraUSD
+BUSD
+FRAX
+TUSD
+FDUSD
+PYUSD
+USDD
+```
+
 ## Completed baseline
 
 ### SOG-001: foundation docs and data placeholders
@@ -129,174 +148,84 @@ Completed:
 
 ---
 
-# PR-level schedule from here
+# Completed PR-level work
 
 ## PR-009: Add report boxes to issuer and event detail pages
 
-Goal:
+Completed:
 
-Make correction/report routes visible on all core detail pages.
-
-Scope:
-
-- Add `Report this issuer` box to `/issuer/[slug]/`
-- Add `Report this event` box to `/event/[id]/`
-- Keep Google Form URL as TODO
-- Use GitHub Issues route for now
-
-Acceptance:
-
-- All stablecoin, issuer, and event detail pages show a report route
-- Build passes
+- `Report this issuer` on `/issuer/[slug]/`
+- `Report this event` on `/event/[id]/`
+- GitHub Issues route
+- Google Form kept as TODO
 
 ## PR-010: Strengthen support and about pages
 
-Goal:
+Completed:
 
-Make the public framing clearer before more data is added.
-
-Scope:
-
-- Rewrite `/about/` to explain registry purpose
-- Rewrite `/support/` with support/donation placeholder and safe language
-- Clarify that SOG is not a ranking, recommendation, or paid rating product
-- Keep support route secondary
-
-Acceptance:
-
-- About page explains the project in one screen
-- Support page has safe wording and no rating language
-- Build passes
+- `/about/` explains registry purpose
+- `/support/` uses safe support/donation placeholder language
+- ranking, recommendation, investment advice, and paid rating language avoided
 
 ## PR-011: Add evidence coverage summary component
 
-Goal:
+Completed:
 
-Improve the differentiator: source coverage, not scores.
-
-Scope:
-
-- Add simple evidence coverage counts on stablecoin detail pages
-- Count source types for issuer_statement, reserve_report, market_data, regulatory_document, exchange_notice, news_article, archive_capture, other
-- Display as a compact table or mini-card
-- Do not compute safety scores
-
-Acceptance:
-
-- Stablecoin detail page shows evidence coverage by source type
-- Empty categories display as zero or omitted consistently
-- Build passes
+- Stablecoin detail pages show source coverage by type
+- Coverage is explicitly not a safety score
 
 ## PR-012: Add lifecycle section to stablecoin detail pages
 
-Goal:
+Completed:
 
-Start the lifecycle map without adding a new data file yet.
-
-Scope:
-
-- Use existing `events.json` to show lifecycle-relevant events
-- Show launched / depeg / recovered / wind-down / discontinued / migrated / failed where available
-- Add explanatory copy that lifecycle is event-derived
-
-Acceptance:
-
-- Stablecoin detail pages show a lifecycle section
-- UST, USDC, and BUSD show meaningful lifecycle/event context
-- Build passes
+- Stablecoin detail pages show event-derived lifecycle timeline
+- Launch, events, discontinued state, and current status can appear together
 
 ## PR-013: Add redemption access fields to data model and UI
 
-Goal:
+Completed:
 
-Strengthen one of SOG's key competitive angles: who can redeem and under what terms.
-
-Scope:
-
-- Extend `stablecoins.json` records with optional fields:
-  - who_can_redeem
-  - retail_redemption
-  - institutional_redemption
-  - minimum_redemption
-  - redemption_region_notes
-  - redemption_notes
-- Update validation to allow optional fields
-- Show these fields on stablecoin detail pages
-- Use known unknowns where unclear
-
-Acceptance:
-
-- Detail pages show redemption access block
-- Records with unknown terms do not fake certainty
-- Build passes
+- `who_can_redeem`
+- `retail_redemption`
+- `institutional_redemption`
+- `minimum_redemption`
+- `redemption_region_notes`
+- `redemption_notes`
+- Detail UI displays redemption access separately from market trading
 
 ## PR-014: Add regulatory notes data file and first display
 
-Goal:
+Completed:
 
-Keep regulatory context source-backed and separate from status.
-
-Scope:
-
-- Add `data/regulatory-notes.json`
-- Add validation for regulatory notes
-- Add first seed notes for BUSD and UST if supportable
-- Display regulatory notes on stablecoin and issuer detail pages
-
-Acceptance:
-
-- Regulatory notes are separated from normal event/status fields
-- Notes require source/evidence references or clearly mark source pending
-- Build passes
+- `data/regulatory-notes.json`
+- validation for regulatory notes
+- stablecoin detail regulatory/official context table
+- first notes for BUSD, UST, and USDC context
 
 ## PR-015: Add deployment/contract data structure
 
-Goal:
+Completed:
 
-Prepare for chain-specific stablecoin records without bloating the core entity.
-
-Scope:
-
-- Add `data/deployments.json`
-- Define deployment fields:
-  - stablecoin_id
-  - chain
-  - deployment_type
-  - contract_address
-  - status
-  - notes
-  - evidence_ids
-- Add validation
-- Add placeholder display on stablecoin detail pages
-
-Acceptance:
-
-- Detail pages can display deployments when present
-- No live on-chain dependency
-- Build passes
+- `data/deployments.json`
+- validation for deployment records
+- deployment/contract table on stablecoin detail pages
+- no live chain dependency
 
 ## PR-016: Seed expansion batch 2
 
-Goal:
-
-Move from foundation to useful registry breadth.
-
-Scope:
-
-Add stablecoin, issuer, starter evidence, reserve references, and known unknowns for:
+Completed:
 
 - FRAX
 - TUSD
 - FDUSD
 - PYUSD
 - USDD
-
-Acceptance:
-
 - 10 total stablecoin records
-- All new records pass validation
-- Each new record has at least one evidence entry or known unknown explaining missing evidence
-- Build passes
+- starter issuer/evidence/reserve/known-unknown/deployment records for new entries
+
+---
+
+# PR-level schedule from here
 
 ## PR-017: Seed expansion batch 3
 
@@ -306,18 +235,21 @@ Reach public v0 minimum breadth.
 
 Scope:
 
-Add stablecoin, issuer, starter evidence, reserve references, and known unknowns for:
+Add stablecoin, issuer, starter evidence, reserve references, deployment placeholders, redemption access fields, and known unknowns for:
 
-- GUSD
-- LUSD
-- crvUSD
-- USDe
-- sUSD
+```txt
+GUSD
+LUSD
+crvUSD
+USDe
+sUSD
+```
 
 Acceptance:
 
 - 15 total stablecoin records
 - All new records pass validation
+- Each new record has at least one evidence entry or known unknown explaining missing evidence
 - Build passes
 
 ## PR-018: Deepen top 5 records
@@ -335,6 +267,8 @@ For USDT, USDC, DAI, UST, BUSD:
 - Add event details
 - Add known unknowns
 - Improve summaries
+- Improve redemption access notes
+- Improve deployment notes
 
 Acceptance:
 
@@ -351,7 +285,7 @@ Make the site more usable once records reach 15+.
 Scope:
 
 - Add client-side filtering/search to `/stablecoins/`
-- Filter by status, model, peg asset, and issuer
+- Filter by status, collateral model, peg asset, and issuer
 - Keep implementation static and no backend
 
 Acceptance:
