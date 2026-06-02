@@ -96,5 +96,19 @@
     "archived_url": null,
     "confidence": "medium",
     "notes": "Seed PYUSD reserve reference. Complete monthly report history should be added later."
+  },
+  {
+    "id": "sog_reserve_usdd_seed",
+    "stablecoin_id": "sog_st_usdd",
+    "issuer_id": "sog_issuer_tron_dao_reserve",
+    "report_date": "2026-06-02",
+    "period_covered": "current reserve reference",
+    "publisher": "TRON DAO Reserve",
+    "report_type": "reserve_transparency_reference",
+    "asset_categories": ["crypto_collateral", "source_review_needed"],
+    "url": "https://tdr.org/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed USDD reserve reference. Reserve composition and collateral ratio history require source-deepening."
   }
 ]
