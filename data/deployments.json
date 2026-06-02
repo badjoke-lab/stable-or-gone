@@ -6,7 +6,7 @@
     "deployment_type": "native_or_issuer_supported",
     "contract_address": "source_review_needed",
     "status": "active",
-    "notes": "Seed deployment placeholder. Contract address and issuer-supported chain status require source-backed review before final display.",
+    "notes": "Seed deployment placeholder. Contract and chain status require later source review.",
     "evidence_ids": ["sog_src_tether_transparency"]
   },
   {
@@ -16,7 +16,7 @@
     "deployment_type": "native_or_issuer_supported",
     "contract_address": "source_review_needed",
     "status": "active",
-    "notes": "Seed deployment placeholder. Contract address and chain support should be expanded from current Circle documentation.",
+    "notes": "Seed deployment placeholder. Contract and chain status require later source review.",
     "evidence_ids": ["sog_src_circle_transparency"]
   },
   {
@@ -26,7 +26,7 @@
     "deployment_type": "protocol_token",
     "contract_address": "source_review_needed",
     "status": "active",
-    "notes": "Seed deployment placeholder. Contract and protocol deployment details require source-backed expansion.",
+    "notes": "Seed deployment placeholder. Contract and protocol deployment details require later source review.",
     "evidence_ids": ["sog_src_makerdao_docs_dai"]
   },
   {
@@ -36,7 +36,7 @@
     "deployment_type": "native_protocol_asset",
     "contract_address": "not_applicable_or_source_review_needed",
     "status": "legacy_or_failed_context",
-    "notes": "Seed deployment placeholder for historical UST context. Post-collapse USTC lifecycle should be handled separately in a later pass.",
+    "notes": "Seed deployment placeholder for historical UST context.",
     "evidence_ids": ["sog_src_terra_docs"]
   },
   {
@@ -46,7 +46,27 @@
     "deployment_type": "issuer_supported_token",
     "contract_address": "source_review_needed",
     "status": "discontinued_or_wind_down_context",
-    "notes": "Seed deployment placeholder. Historical BUSD contract support and redemption/wind-down state require source-backed expansion.",
+    "notes": "Seed deployment placeholder for BUSD historical context.",
     "evidence_ids": ["sog_src_paxos_busd_announcement"]
+  },
+  {
+    "id": "sog_dep_frax_ethereum_seed",
+    "stablecoin_id": "sog_st_frax",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_token",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for FRAX.",
+    "evidence_ids": ["sog_src_frax_docs_frax"]
+  },
+  {
+    "id": "sog_dep_tusd_ethereum_seed",
+    "stablecoin_id": "sog_st_tusd",
+    "chain": "Ethereum",
+    "deployment_type": "native_or_issuer_supported",
+    "contract_address": "source_review_needed",
+    "status": "active",
+    "notes": "Seed deployment placeholder for TUSD.",
+    "evidence_ids": ["sog_src_tusd_official_site"]
   }
 ]
