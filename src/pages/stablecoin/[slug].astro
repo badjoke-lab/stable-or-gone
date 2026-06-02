@@ -19,6 +19,12 @@ type StablecoinRow = {
   issuer_id?: string;
   reserve_disclosure_status?: string;
   redemption_status?: string;
+  who_can_redeem?: string;
+  retail_redemption?: string;
+  institutional_redemption?: string;
+  minimum_redemption?: string;
+  redemption_region_notes?: string;
+  redemption_notes?: string;
   launch_date?: string;
   discontinued_date?: string | null;
   confidence?: string;
@@ -107,6 +113,19 @@ const lifecycleRows: LifecycleRow[] = [
   </section>
 
   <section class="panel registry">
+    <div class="bar">redemption access — issuer redemption, not secondary-market trading</div>
+    <table><tbody>
+      <tr><th>Status</th><td>{coin.redemption_status ?? '—'}</td></tr>
+      <tr><th>Who can redeem</th><td>{coin.who_can_redeem ?? 'Source review needed.'}</td></tr>
+      <tr><th>Retail redemption</th><td>{coin.retail_redemption ?? 'source_review_needed'}</td></tr>
+      <tr><th>Institutional redemption</th><td>{coin.institutional_redemption ?? 'source_review_needed'}</td></tr>
+      <tr><th>Minimum redemption</th><td>{coin.minimum_redemption ?? 'source_review_needed'}</td></tr>
+      <tr><th>Region / access notes</th><td>{coin.redemption_region_notes ?? 'Source review needed.'}</td></tr>
+      <tr><th>Registry note</th><td>{coin.redemption_notes ?? 'SOG separates issuer redemption from exchange trading and market liquidity.'}</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
     <div class="bar">evidence coverage summary — source coverage, not a safety score</div>
     <table>
       <thead><tr><th>Coverage type</th><th>Count</th><th>Meaning</th></tr></thead>
@@ -120,12 +139,7 @@ const lifecycleRows: LifecycleRow[] = [
       <thead><tr><th>Date</th><th>Stage</th><th>Record</th><th>Detail</th></tr></thead>
       <tbody>
         {lifecycleRows.map((row) => (
-          <tr>
-            <td>{row.date}</td>
-            <td>{row.stage}</td>
-            <td>{row.href ? <a href={row.href}>{row.title}</a> : row.title}</td>
-            <td>{row.detail}</td>
-          </tr>
+          <tr><td>{row.date}</td><td>{row.stage}</td><td>{row.href ? <a href={row.href}>{row.title}</a> : row.title}</td><td>{row.detail}</td></tr>
         ))}
       </tbody>
     </table>
