@@ -48,5 +48,25 @@
     "severity": "medium",
     "last_checked_at": "2026-06-01",
     "notes": "Keep visible until BUSD wind-down details are expanded."
+  },
+  {
+    "id": "sog_unknown_frax_v3_lifecycle",
+    "stablecoin_id": "sog_st_frax",
+    "issuer_id": "sog_issuer_frax_finance",
+    "topic": "lifecycle_transition",
+    "description": "FRAX, frxUSD, FXS, AMO, and V3 collateral design relationships need a dedicated source-backed lifecycle and successor/parallel asset review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-02",
+    "notes": "Do not collapse FRAX and related Frax stable assets into one lifecycle without source review."
+  },
+  {
+    "id": "sog_unknown_tusd_issuer_reserve_partners",
+    "stablecoin_id": "sog_st_tusd",
+    "issuer_id": "sog_issuer_trueusd",
+    "topic": "issuer_reserve_structure",
+    "description": "TUSD issuer, reserve partner, attestation provider, and chain-specific native/bridged status need deeper source-backed review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-02",
+    "notes": "Keep visible until exact issuer/reserve and deployment context is reviewed."
   }
 ]
