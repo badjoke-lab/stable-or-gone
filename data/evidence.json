@@ -222,5 +222,37 @@
     "reliability": "medium",
     "claim_scope": "entity_reserve",
     "notes": "Official Paxos reference for PYUSD issuer and reserve context."
+  },
+  {
+    "id": "sog_src_usdd_official_site",
+    "stablecoin_id": "sog_st_usdd",
+    "issuer_id": "sog_issuer_tron_dao_reserve",
+    "event_id": null,
+    "source_type": "issuer_statement",
+    "title": "USDD official site",
+    "url": "https://usdd.io/",
+    "publisher": "USDD",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-02",
+    "reliability": "medium",
+    "claim_scope": "entity_reserve_deployment",
+    "notes": "Seed source for USDD entity and reserve context. Page is used as an official reference entry point."
+  },
+  {
+    "id": "sog_src_tron_dao_reserve_site",
+    "stablecoin_id": "sog_st_usdd",
+    "issuer_id": "sog_issuer_tron_dao_reserve",
+    "event_id": null,
+    "source_type": "issuer_statement",
+    "title": "TRON DAO Reserve official site",
+    "url": "https://tdr.org/",
+    "publisher": "TRON DAO Reserve",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-02",
+    "reliability": "medium",
+    "claim_scope": "issuer_reserve",
+    "notes": "Seed issuer/reserve reference for USDD. Reserve composition and redemption mechanics need deeper review."
   }
 ]
