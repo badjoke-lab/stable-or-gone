@@ -63,5 +63,31 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-01",
     "notes": "Initial seed record. Add regulatory and redemption source coverage in later passes."
+  },
+  {
+    "id": "sog_issuer_frax_finance",
+    "slug": "frax-finance",
+    "name": "Frax Finance",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["frax"],
+    "official_url": "https://frax.finance/",
+    "summary": "Protocol ecosystem behind FRAX and related Frax stable assets. SOG tracks Frax Finance as protocol/issuer context for collateral model, governance, AMO, and non-redeemability notes.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-016A seed issuer. Jurisdiction, governance, and successor stable asset relationships need deeper source-backed expansion."
+  },
+  {
+    "id": "sog_issuer_trueusd",
+    "slug": "trueusd",
+    "name": "TrueUSD",
+    "issuer_type": "company_or_product_group",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["tusd"],
+    "official_url": "https://tusd.io/",
+    "summary": "Issuer/product organization associated with TUSD. SOG tracks TrueUSD at issuer level for attestation, reserve, redemption, chain deployment, and historical event context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-016A seed issuer. Legal entity, jurisdiction, and reserve partner context need source-backed expansion."
   }
 ]
