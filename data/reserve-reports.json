@@ -40,5 +40,33 @@
     "archived_url": null,
     "confidence": "medium",
     "notes": "Seed reference connected to BUSD wind-down; full report history remains incomplete."
+  },
+  {
+    "id": "sog_reserve_frax_docs_seed",
+    "stablecoin_id": "sog_st_frax",
+    "issuer_id": "sog_issuer_frax_finance",
+    "report_date": "2026-06-02",
+    "period_covered": "current documentation reference",
+    "publisher": "Frax Finance",
+    "report_type": "protocol_disclosure",
+    "asset_categories": ["protocol_collateral", "amo_context", "source_review_needed"],
+    "url": "https://docs.frax.finance/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed protocol reserve/collateral reference. Not a complete reserve report history."
+  },
+  {
+    "id": "sog_reserve_tusd_attestation_seed",
+    "stablecoin_id": "sog_st_tusd",
+    "issuer_id": "sog_issuer_trueusd",
+    "report_date": "2026-06-02",
+    "period_covered": "current attestation reference",
+    "publisher": "TrueUSD",
+    "report_type": "attestation_reference",
+    "asset_categories": ["cash_or_cash_equivalents", "source_review_needed"],
+    "url": "https://tusd.io/",
+    "archived_url": null,
+    "confidence": "medium",
+    "notes": "Seed attestation reference. Replace with exact attestation page and report history in a source-deepening pass."
   }
 ]
