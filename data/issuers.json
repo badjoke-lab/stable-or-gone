@@ -57,12 +57,12 @@
     "name": "Paxos",
     "issuer_type": "company",
     "jurisdiction": "United States",
-    "related_stablecoins": ["busd"],
+    "related_stablecoins": ["busd", "pyusd"],
     "official_url": "https://paxos.com/",
-    "summary": "Issuer of BUSD under the Binance USD brand. SOG tracks Paxos at issuer level because the BUSD wind-down was driven by issuer and regulatory events.",
+    "summary": "Issuer of BUSD and PayPal USD / PYUSD-related stablecoin products. SOG tracks Paxos at issuer level because reserve, redemption, regulatory, and partner-brand context are central to these records.",
     "confidence": "medium",
-    "last_verified_at": "2026-06-01",
-    "notes": "Initial seed record. Add regulatory and redemption source coverage in later passes."
+    "last_verified_at": "2026-06-02",
+    "notes": "Initial seed record. Add regulatory, redemption, BUSD wind-down, and PYUSD reserve report history in later passes."
   },
   {
     "id": "sog_issuer_frax_finance",
@@ -89,5 +89,18 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-02",
     "notes": "PR-016A seed issuer. Legal entity, jurisdiction, and reserve partner context need source-backed expansion."
+  },
+  {
+    "id": "sog_issuer_first_digital",
+    "slug": "first-digital",
+    "name": "First Digital / FD121",
+    "issuer_type": "company",
+    "jurisdiction": "Hong Kong",
+    "related_stablecoins": ["fdusd"],
+    "official_url": "https://firstdigitallabs.com/",
+    "summary": "Issuer/product group associated with FDUSD. SOG tracks First Digital at issuer level for reserve, redemption eligibility, jurisdictional restriction, and deployment context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-016B seed issuer. Legal entity and product documentation should be expanded with source-backed review."
   }
 ]
