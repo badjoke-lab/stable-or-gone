@@ -115,5 +115,31 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-02",
     "notes": "PR-016C seed issuer. Reserve composition, governance, and redemption mechanics require deeper source-backed review."
+  },
+  {
+    "id": "sog_issuer_gemini",
+    "slug": "gemini",
+    "name": "Gemini",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["gusd"],
+    "official_url": "https://www.gemini.com/",
+    "summary": "Issuer and exchange organization associated with Gemini Dollar. SOG tracks Gemini at issuer level for reserve attestations, redemption access, and regulatory context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-017A seed issuer. Attestation history and regulatory/licensing context need source-deepening."
+  },
+  {
+    "id": "sog_issuer_liquity",
+    "slug": "liquity",
+    "name": "Liquity",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["lusd"],
+    "official_url": "https://www.liquity.org/",
+    "summary": "Protocol ecosystem associated with LUSD and Liquity V1. SOG tracks Liquity at protocol level for collateral, redemption mechanics, and V1/V2 lifecycle context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-017A seed issuer. Liquity V1 docs and BOLD/V2 relationship need deeper source-backed review."
   }
 ]
