@@ -68,5 +68,25 @@
     "severity": "medium",
     "last_checked_at": "2026-06-02",
     "notes": "Keep visible until exact issuer/reserve and deployment context is reviewed."
+  },
+  {
+    "id": "sog_unknown_fdusd_exact_report_history",
+    "stablecoin_id": "sog_st_fdusd",
+    "issuer_id": "sog_issuer_first_digital",
+    "topic": "reserve_report_history",
+    "description": "FDUSD reserve report history, issuer structure, and supported redemption channels need deeper source-backed review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-02",
+    "notes": "Keep visible until exact reserve report URLs and client redemption terms are reviewed."
+  },
+  {
+    "id": "sog_unknown_pyusd_chain_and_report_history",
+    "stablecoin_id": "sog_st_pyusd",
+    "issuer_id": "sog_issuer_paxos",
+    "topic": "deployment_and_report_history",
+    "description": "PYUSD chain-specific deployment status, monthly reserve report history, and PayPal/Paxos responsibility split need deeper source-backed review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-02",
+    "notes": "Keep visible until exact Paxos report history and deployment documentation are reviewed."
   }
 ]
