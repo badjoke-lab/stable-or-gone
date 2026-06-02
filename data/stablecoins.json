@@ -223,5 +223,30 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-02",
     "notes": "PR-016B seed record. Needs Paxos report history and chain-specific deployment review."
+  },
+  {
+    "id": "sog_st_usdd",
+    "slug": "usdd",
+    "name": "USDD",
+    "symbol": "USDD",
+    "aliases": ["USDD", "Decentralized USD"],
+    "status": "active",
+    "issuer_id": "sog_issuer_tron_dao_reserve",
+    "peg_asset": "USD",
+    "collateral_model": "crypto_collateralized_or_overcollateralized",
+    "reserve_disclosure_status": "partial",
+    "redemption_status": "unclear_protocol_or_market_based",
+    "who_can_redeem": "USDD redemption and stability mechanics need source-backed review. SOG does not treat secondary-market trading as issuer redemption.",
+    "retail_redemption": "source_review_needed",
+    "institutional_redemption": "source_review_needed",
+    "minimum_redemption": "source_review_needed",
+    "redemption_region_notes": "Access, supported chains, and reserve mechanics need review from USDD/TRON DAO Reserve documentation.",
+    "redemption_notes": "USDD should be handled as a crypto-collateralized or reserve-backed design, not as a simple fiat-backed issuer redemption product.",
+    "launch_date": "2022-05-05",
+    "discontinued_date": null,
+    "summary": "USD-pegged stablecoin associated with TRON DAO Reserve. SOG treats USDD as active and records collateral, reserve transparency, redemption uncertainty, deployment context, and depeg history as separate source-backed layers.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-016C seed record. Depeg events, reserve composition, redemption mechanics, and chain-specific deployments need deeper source-backed expansion."
   }
 ]
