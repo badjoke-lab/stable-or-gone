@@ -1,0 +1,47 @@
+[
+  {
+    "id": "sog_reg_busd_paxos_2023_wind_down",
+    "stablecoin_id": "sog_st_busd",
+    "issuer_id": "sog_issuer_paxos",
+    "event_id": "sog_ev_busd_2023_02_wind_down",
+    "note_date": "2023-02-13",
+    "title": "Paxos BUSD wind-down and issuance halt context",
+    "jurisdiction": "United States",
+    "authority_or_source": "Paxos",
+    "note_type": "issuer_regulatory_notice",
+    "summary": "Paxos announced it would stop issuing new BUSD and end its relationship with Binance for the Binance USD stablecoin. SOG records this as wind-down context, not as failed status.",
+    "source_url": "https://paxos.com/2023/02/13/paxos-to-end-relationship-with-binance-for-busd/",
+    "confidence": "medium",
+    "notes": "Initial regulatory note. Additional NYDFS/regulatory sources should be linked in a later source-deepening pass."
+  },
+  {
+    "id": "sog_reg_ust_sec_2023_context",
+    "stablecoin_id": "sog_st_ust",
+    "issuer_id": "sog_issuer_terraform_labs",
+    "event_id": "sog_ev_ust_2022_05_collapse",
+    "note_date": "2023-02-16",
+    "title": "SEC action involving Terraform Labs and TerraUSD context",
+    "jurisdiction": "United States",
+    "authority_or_source": "U.S. SEC",
+    "note_type": "regulatory_action",
+    "summary": "The U.S. SEC announced charges against Terraform Labs and Do Kwon after the Terra ecosystem collapse. SOG records this as regulatory context connected to the UST history, not as a standalone status label.",
+    "source_url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+    "confidence": "medium",
+    "notes": "Initial regulatory note. Legal outcomes and later court actions should be handled in later source-backed updates."
+  },
+  {
+    "id": "sog_reg_usdc_svb_2023_banking_context",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2023_03_depeg",
+    "note_date": "2023-03-11",
+    "title": "USDC banking exposure context during Silicon Valley Bank failure",
+    "jurisdiction": "United States",
+    "authority_or_source": "Circle",
+    "note_type": "banking_context",
+    "summary": "Circle disclosed USDC reserve exposure to Silicon Valley Bank during the March 2023 banking crisis. SOG records this as banking/regulatory context connected to the recovered USDC depeg event.",
+    "source_url": "https://www.circle.com/blog/an-update-on-usdc-and-silicon-valley-bank",
+    "confidence": "medium",
+    "notes": "This is banking context, not a regulatory action against USDC. Keep separate from status and safety claims."
+  }
+]
