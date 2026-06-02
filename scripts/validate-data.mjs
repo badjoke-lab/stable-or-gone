@@ -47,6 +47,7 @@ const events = readJsonArray('events.json');
 const evidence = readJsonArray('evidence.json');
 const reserveReports = readJsonArray('reserve-reports.json');
 const knownUnknowns = readJsonArray('known-unknowns.json');
+const regulatoryNotes = readJsonArray('regulatory-notes.json');
 
 for (const row of stablecoins) {
   requireField('stablecoins.json', row, 'id');
@@ -108,10 +109,21 @@ for (const row of knownUnknowns) {
 }
 unique('known-unknowns.json', knownUnknowns, 'id');
 
+for (const row of regulatoryNotes) {
+  requireField('regulatory-notes.json', row, 'id');
+  requireField('regulatory-notes.json', row, 'title');
+  requireField('regulatory-notes.json', row, 'summary');
+  requireField('regulatory-notes.json', row, 'source_url');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`regulatory-notes.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`regulatory-notes.json: ${row.id} references missing issuer ${row.issuer_id}`);
+  if (row.event_id && !eventIds.has(row.event_id)) failures.push(`regulatory-notes.json: ${row.id} references missing event ${row.event_id}`);
+}
+unique('regulatory-notes.json', regulatoryNotes, 'id');
+
 if (failures.length > 0) {
   console.error('SOG data validation failed:');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log(`SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records.`);
+console.log(`SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${regulatoryNotes.length} regulatory notes.`);
