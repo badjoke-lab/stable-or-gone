@@ -102,5 +102,18 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-02",
     "notes": "PR-016B seed issuer. Legal entity and product documentation should be expanded with source-backed review."
+  },
+  {
+    "id": "sog_issuer_tron_dao_reserve",
+    "slug": "tron-dao-reserve",
+    "name": "TRON DAO Reserve",
+    "issuer_type": "dao_or_reserve_organization",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["usdd"],
+    "official_url": "https://tdr.org/",
+    "summary": "Reserve organization associated with USDD. SOG tracks TRON DAO Reserve at issuer/reserve level for collateral, reserve transparency, redemption uncertainty, and depeg-event context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-02",
+    "notes": "PR-016C seed issuer. Reserve composition, governance, and redemption mechanics require deeper source-backed review."
   }
 ]
