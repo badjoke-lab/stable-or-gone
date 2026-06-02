@@ -48,6 +48,7 @@ const evidence = readJsonArray('evidence.json');
 const reserveReports = readJsonArray('reserve-reports.json');
 const knownUnknowns = readJsonArray('known-unknowns.json');
 const regulatoryNotes = readJsonArray('regulatory-notes.json');
+const deployments = readJsonArray('deployments.json');
 
 for (const row of stablecoins) {
   requireField('stablecoins.json', row, 'id');
@@ -70,6 +71,7 @@ unique('issuers.json', issuers, 'slug');
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const issuerIds = new Set(issuers.map((row) => row.id));
 const eventIds = new Set(events.map((row) => row.id));
+const evidenceIds = new Set(evidence.map((row) => row.id));
 
 for (const row of stablecoins) {
   if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`stablecoins.json: ${row.id} references missing issuer ${row.issuer_id}`);
@@ -120,10 +122,25 @@ for (const row of regulatoryNotes) {
 }
 unique('regulatory-notes.json', regulatoryNotes, 'id');
 
+for (const row of deployments) {
+  requireField('deployments.json', row, 'id');
+  requireField('deployments.json', row, 'stablecoin_id');
+  requireField('deployments.json', row, 'chain');
+  requireField('deployments.json', row, 'deployment_type');
+  requireField('deployments.json', row, 'status');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`deployments.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
+  if (Array.isArray(row.evidence_ids)) {
+    for (const evidenceId of row.evidence_ids) {
+      if (!evidenceIds.has(evidenceId)) failures.push(`deployments.json: ${row.id} references missing evidence ${evidenceId}`);
+    }
+  }
+}
+unique('deployments.json', deployments, 'id');
+
 if (failures.length > 0) {
   console.error('SOG data validation failed:');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log(`SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${regulatoryNotes.length} regulatory notes.`);
+console.log(`SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${regulatoryNotes.length} regulatory notes, ${deployments.length} deployments.`);
