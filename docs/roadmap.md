@@ -2,7 +2,7 @@
 
 ## Current stage
 
-SOG v0 is ready for low-key public sharing after PR-022 pre-promotion QA.
+SOG v0 is publicly live and confirmed after PR-023.
 
 Public URL:
 
@@ -24,7 +24,7 @@ docs/pre-promotion-qa.md
 
 ## Current milestone
 
-SOG has reached the PR-022 milestone:
+SOG has reached the PR-023 milestone:
 
 ```txt
 15 stablecoin records
@@ -33,6 +33,7 @@ Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
 Pre-promotion QA checklist added
+Public deploy confirmed by site owner
 ```
 
 Current stablecoin records:
@@ -208,41 +209,47 @@ Completed:
 - documented remaining known limitations
 - documented manual checks after Cloudflare deploy
 
+### PR-023: Public deploy confirmation
+
+Completed:
+
+- recorded public deploy confirmation in `docs/pre-promotion-qa.md`
+- moved roadmap to source-deepening phase
+- no blocking public issue was reported before PR-024
+
 ## PR-level schedule from here
 
-## PR-023: Post-QA cleanup after live check
+## PR-024A: USDC source-deepening
 
 Goal:
 
-Fix anything found in the first manual live check on `https://sog.badjoke-lab.com/`.
+Turn USDC from a strengthened seed record into a more useful dossier.
 
 Scope:
 
-- build/deploy issue fixes if Cloudflare fails
-- broken link fixes
-- mobile layout fixes
-- sitemap or robots fixes
-- wording cleanup if needed
+- source-specific reserve report entries
+- clearer March 2023 depeg/recovery source separation
+- redemption/product terms source entries
+- deployment/source notes where safe
+- known unknown cleanup where sources allow
 
-Acceptance:
-
-- public site opens
-- stablecoin registry filters work
-- guides and updates open
-- sitemap uses custom domain
-
-## PR-024: Source-deepening batch 1
+## PR-024B: BUSD source-deepening
 
 Goal:
 
-Start turning top records from stronger seed pages into fuller dossiers.
+Deepen BUSD issuer wind-down, redemption, exchange phase-out, and regulatory follow-up context.
 
-Scope:
+## PR-024C: UST source-deepening
 
-- source-specific reserve reports
-- exact contract/deployment sources
-- exact event timeline sources where available
-- clearer redemption terms summaries
+Goal:
+
+Deepen UST collapse timeline, LFG reserve intervention context, and post-collapse USTC lifecycle separation.
+
+## PR-024D: USDT / DAI source-deepening
+
+Goal:
+
+Deepen USDT reserve/redemption/deployment source entries and DAI collateral/Sky lifecycle/protocol-exit source entries.
 
 ## PR-025: More seed records or comparison pages
 
