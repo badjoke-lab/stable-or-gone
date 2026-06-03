@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import updatesData from '../../../data/registry-updates.json';
+
+type UpdateRow = {
+  id: string;
+  date: string;
+  title: string;
+  category: string;
+  summary: string;
+  related_paths?: string[];
+};
+
+const updates = (updatesData as UpdateRow[]).sort((a, b) => b.date.localeCompare(a.date));
+const categoryClass = (category: string) => `chip ${category === 'data' ? 'active' : category === 'foundation' ? 'limited' : 'unknown'}`;
+---
+<BaseLayout title="Registry Updates — Stable or Gone" description="Short factual updates about changes to the Stable or Gone registry.">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; tail registry-updates.log</div>
+      <h1>Registry Updates</h1>
+      <p>Short notes about changes to SOG data, pages, and methodology.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Entries</span><strong>{updates.length}</strong></div>
+      <div class="stat"><span>Type</span><strong>log</strong></div>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">source: data/registry-updates.json</div>
+    <table>
+      <thead><tr><th>Date</th><th>Category</th><th>Update</th><th>Related</th></tr></thead>
+      <tbody>
+        {updates.map((update) => (
+          <tr>
+            <td>{update.date}</td>
+            <td><span class={categoryClass(update.category)}>{update.category}</span></td>
+            <td><strong>{update.title}</strong><br /><span>{update.summary}</span></td>
+            <td>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">scope</div>
+    <table><tbody>
+      <tr><th>Included</th><td>Registry changes, method changes, data batches, and page changes.</td></tr>
+      <tr><th>Corrections</th><td>Send source-backed corrections through <a href="/contact/">Contact</a> or GitHub Issues.</td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
