@@ -43,5 +43,20 @@
     "source_url": "https://www.circle.com/blog/an-update-on-usdc-and-silicon-valley-bank",
     "confidence": "medium",
     "notes": "This is banking context, not a regulatory action against USDC. Keep separate from status and safety claims."
+  },
+  {
+    "id": "sog_reg_usdc_2023_reopening_context",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2023_03_depeg",
+    "note_date": "2023-03-12",
+    "title": "USDC operations reopening context after March 2023 banking weekend",
+    "jurisdiction": "United States",
+    "authority_or_source": "Circle",
+    "note_type": "issuer_operational_notice",
+    "summary": "Circle stated that USDC operations would open for business after U.S. federal banking actions during the March 2023 banking weekend. SOG records this as recovery context connected to the recovered depeg event.",
+    "source_url": "https://www.circle.com/blog/usdc-operations-will-open-for-business-on-monday-morning",
+    "confidence": "medium",
+    "notes": "Operational recovery context, not a safety score or investment claim."
   }
 ]
