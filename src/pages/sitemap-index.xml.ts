@@ -23,6 +23,7 @@ export const GET: APIRoute = () => {
     '/guides/stablecoin-lifecycle-terms/',
     '/glossary/',
     '/methodology/',
+    '/updates/',
     '/about/',
     '/support/',
     '/contact/'
