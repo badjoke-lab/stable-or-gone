@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="What is a Depeg? — Stable or Gone" description="How Stable or Gone records depeg events without turning every small peg movement into a failure label.">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; guide --depeg</div>
+      <h1>What is a Depeg?</h1>
+      <p>A depeg is a material deviation from a stablecoin's target peg. In SOG, a depeg is an event, not a status label by itself.</p>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">SOG handling</div>
+    <table><tbody>
+      <tr><th>Minor movement</th><td>Small or short-lived market movements are usually not recorded as standalone events.</td></tr>
+      <tr><th>Notable depeg</th><td>A depeg can be recorded when it is material, sustained, historically relevant, or supported by public sources.</td></tr>
+      <tr><th>Major depeg</th><td>A major depeg should include context such as trigger, recovery, source list, duration if supportable, and known unknowns.</td></tr>
+      <tr><th>Collapse</th><td>A collapse is a severe lifecycle outcome. It requires stronger source support than a normal market deviation.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">important distinction</div>
+    <table><tbody>
+      <tr><th>Recovered depeg</th><td>A recovered depeg does not automatically make the stablecoin failed. USDC's March 2023 event is treated this way.</td></tr>
+      <tr><th>Failed status</th><td>Failed status is used only when the lifecycle and evidence support that outcome, such as UST after the May 2022 collapse.</td></tr>
+      <tr><th>No live price feed</th><td>SOG does not try to be a live peg monitor. Historical price values should be source-specific when used.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">related</div>
+    <table><tbody>
+      <tr><th>Read next</th><td><a href="/guides/status-vs-event/">Stablecoin Status vs Event</a> · <a href="/methodology/">Methodology</a> · <a href="/events/">Events</a></td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
