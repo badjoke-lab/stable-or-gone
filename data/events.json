@@ -23,15 +23,15 @@
     "event_type": "collapse",
     "event_date": "2022-05-09",
     "title": "TerraUSD collapse",
-    "description": "UST lost its USD peg in May 2022 and did not recover as a functioning stablecoin. SOG treats this as a collapse event supporting failed status.",
+    "description": "UST lost its USD peg in May 2022 during a reflexive Terra/LUNA crisis and did not recover as a functioning stablecoin. SOG treats this as a collapse event supporting failed status, while post-collapse USTC trading is treated as lifecycle history rather than restored peg status.",
     "impact_level": "critical",
     "event_status_effect": "failed",
     "recovered": false,
     "recovery_date": null,
     "failure_mechanism": "algorithmic_death_spiral",
     "confidence": "medium",
-    "source_count": 2,
-    "notes": "Initial seed event. Expand timeline, LUNA mechanism context, and post-collapse USTC lifecycle later."
+    "source_count": 5,
+    "notes": "Deepened in PR-018B with SEC regulatory context and research sources for failure mechanics and post-collapse lifecycle. Exact intraday timeline, lowest observed price, LFG reserve intervention details, and USTC lifecycle require further source-specific review."
   },
   {
     "id": "sog_ev_busd_2023_02_wind_down",
