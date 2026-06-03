@@ -40,14 +40,14 @@
     "event_type": "wind_down_announced",
     "event_date": "2023-02-13",
     "title": "Paxos announces BUSD minting halt and wind-down",
-    "description": "Paxos announced it would end its relationship with Binance for BUSD and stop issuing new BUSD, while continuing redemption support during the wind-down period.",
+    "description": "Paxos announced it would stop issuing new BUSD and end its relationship with Binance for BUSD while continuing redemption support during the wind-down period. SOG treats BUSD as discontinued through issuer wind-down, not as failed due to a depeg collapse.",
     "impact_level": "high",
     "event_status_effect": "discontinued",
     "recovered": null,
     "recovery_date": null,
     "failure_mechanism": "issuer_wind_down",
     "confidence": "medium",
-    "source_count": 2,
-    "notes": "Initial seed event. Add NYDFS/Paxos source details and final support dates in later passes."
+    "source_count": 5,
+    "notes": "Deepened in PR-018C with Paxos wind-down, NYDFS-related context, reported SEC no-action outcome context, and exchange support phase-out context. Final redemption and exchange conversion status still require source-specific review."
   }
 ]
