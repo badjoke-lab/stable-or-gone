@@ -2,7 +2,7 @@
 
 ## Current stage
 
-SOG v0 foundation is live on Cloudflare Pages with a custom domain.
+SOG v0 is ready for low-key public sharing after PR-022 pre-promotion QA.
 
 Public URL:
 
@@ -16,9 +16,24 @@ Current specification:
 docs/current-spec.md
 ```
 
+QA checklist:
+
+```txt
+docs/pre-promotion-qa.md
+```
+
 ## Current milestone
 
-SOG has reached the PR-018 milestone: top 5 records are no longer shallow seed-only rows.
+SOG has reached the PR-022 milestone:
+
+```txt
+15 stablecoin records
+Top 5 records deepened
+Registry search/filter implemented
+Guides and glossary added
+Registry updates page added
+Pre-promotion QA checklist added
+```
 
 Current stablecoin records:
 
@@ -81,153 +96,37 @@ Completed:
 - data loading from JSON
 - Cloudflare-compatible static build
 
-### SOG-003: seed data batch 1
-
-Completed initial seed:
-
-- USDT
-- USDC
-- DAI
-- UST / TerraUSD
-- BUSD
-- Tether
-- Circle
-- MakerDAO / Sky
-- Terraform Labs
-- Paxos
-- USDC depeg event
-- UST collapse event
-- BUSD wind-down event
-- starter evidence
-- reserve report references
-- known unknowns
-
-### SOG-004: stablecoin detail page
-
-Completed first pass:
-
-- stablecoin facts
-- issuer link
-- peg/collateral fields
-- redemption fields
-- reserve report table
-- event timeline
-- evidence coverage table
-- known unknowns table
-- report entry box on stablecoin detail
-
-### SOG-005: events / issuers / registry pages
-
-Completed first pass:
-
-- `/stablecoins/`
-- `/issuers/`
-- `/issuer/[slug]/`
-- `/events/`
-- `/event/[id]/`
-- `/models/`
-- compact terminal-style tables
-
-### SOG-006: contact and report route
-
-Completed first pass:
-
-- `/contact/`
-- footer contact link
-- header contact link
-- GitHub Issues link
-- GitHub issue template route
-- Google Form placeholder
-
-### SOG-007: Cloudflare Pages deployment
+### SOG-003 to SOG-008
 
 Completed:
 
-- Cloudflare Pages connected
-- main branch build works
-- static output to `dist`
-- custom domain set to `sog.badjoke-lab.com`
-- public URL available
+- first five stablecoin records
+- issuer/event/evidence/reserve/known-unknown seed data
+- stablecoin detail pages
+- issuer and event pages
+- contact/report routes
+- Cloudflare Pages deployment
+- custom domain
+- validation script
+- robots and sitemap
+- public methodology
+- current spec
 
-### SOG-008: public v0 hardening, first pass
+## Completed PR-level work
 
-Completed:
-
-- `scripts/validate-data.mjs`
-- `npm run validate:data`
-- validation included in `npm run build`
-- `robots.txt`
-- dynamic sitemap at `/sitemap-index.xml`
-- status chip styling
-- public methodology first pass
-- `docs/current-spec.md`
-
----
-
-# Completed PR-level work
-
-## PR-009: Add report boxes to issuer and event detail pages
+### PR-009 to PR-015
 
 Completed:
 
-- `Report this issuer` on `/issuer/[slug]/`
-- `Report this event` on `/event/[id]/`
-- GitHub Issues route
-- Google Form kept as TODO
+- report boxes on issuer/event detail pages
+- support and about pages strengthened
+- evidence coverage summary component
+- lifecycle section
+- redemption access fields and UI
+- regulatory notes data and display
+- deployment/contract data and display
 
-## PR-010: Strengthen support and about pages
-
-Completed:
-
-- `/about/` explains registry purpose
-- `/support/` uses safe support/donation placeholder language
-- ranking, recommendation, investment advice, and paid rating language avoided
-
-## PR-011: Add evidence coverage summary component
-
-Completed:
-
-- Stablecoin detail pages show source coverage by type
-- Coverage is explicitly not a safety score
-
-## PR-012: Add lifecycle section to stablecoin detail pages
-
-Completed:
-
-- Stablecoin detail pages show event-derived lifecycle timeline
-- Launch, events, discontinued state, and current status can appear together
-
-## PR-013: Add redemption access fields to data model and UI
-
-Completed:
-
-- `who_can_redeem`
-- `retail_redemption`
-- `institutional_redemption`
-- `minimum_redemption`
-- `redemption_region_notes`
-- `redemption_notes`
-- Detail UI displays redemption access separately from market trading
-
-## PR-014: Add regulatory notes data file and first display
-
-Completed:
-
-- `data/regulatory-notes.json`
-- validation for regulatory notes
-- stablecoin detail regulatory/official context table
-- first notes for BUSD, UST, and USDC context
-
-## PR-015: Add deployment/contract data structure
-
-Completed:
-
-- `data/deployments.json`
-- validation for deployment records
-- deployment/contract table on stablecoin detail pages
-- no live chain dependency
-
-## PR-016: Seed expansion batch 2
+### PR-016: Seed expansion batch 2
 
 Completed:
 
@@ -237,9 +136,8 @@ Completed:
 - PYUSD
 - USDD
 - 10 total stablecoin records
-- starter issuer/evidence/reserve/known-unknown/deployment records for new entries
 
-## PR-017: Seed expansion batch 3
+### PR-017: Seed expansion batch 3
 
 Completed:
 
@@ -249,10 +147,9 @@ Completed:
 - USDe
 - sUSD
 - 15 total stablecoin records
-- starter issuer/evidence/reserve/known-unknown/deployment records for new entries
 - public v0 minimum breadth reached
 
-## PR-018: Deepen top 5 records
+### PR-018: Deepen top 5 records
 
 Completed:
 
@@ -262,107 +159,109 @@ Completed:
 - USDT deepening
 - DAI deepening
 - top 5 records now have stronger evidence/reserve/deployment/known-unknown context
-- USDC, UST, and BUSD event records are deeper than initial seed state
 
 Important limitation:
 
 Top 5 records are stronger, but not final. Source-specific market prices, exact contract addresses, chain-by-chain deployment status, period-level reserve reports, and full legal/regulatory histories still require dedicated source-deepening passes.
 
----
+### PR-019: Improve registry list filtering and sorting
 
-# PR-level schedule from here
+Completed:
 
-## PR-019: Improve registry list filtering and sorting
+- client-side search on `/stablecoins/`
+- filters for status, collateral model, peg asset, and issuer
+- sort options
+- result count
+- no-results state
+- static implementation with no backend
 
-Goal:
+### PR-020: Add Guides / Glossary expansion
 
-Make the site more usable now that it has 15+ records.
+Completed:
 
-Scope:
+- `/guides/`
+- What is a Depeg?
+- Stablecoin Status vs Event
+- Reserve Disclosure Basics
+- Stablecoin Lifecycle Terms
+- expanded `/glossary/`
+- guides in navigation and sitemap
 
-- Add client-side filtering/search to `/stablecoins/`
-- Filter by status, collateral model, peg asset, and issuer
-- Add basic sorting if simple to implement safely
-- Keep implementation static and no backend
+### PR-021: Add public registry updates page
 
-Acceptance:
+Completed:
 
-- Registry can be searched and filtered without external services
-- Mobile remains usable
-- Build passes
+- `data/registry-updates.json`
+- `/updates/`
+- updates in navigation and sitemap
 
-## PR-020: Add Guides / Glossary expansion
+### PR-022: Pre-promotion QA pass
 
-Goal:
+Completed:
 
-Start search-entry pages without turning SOG into a blog.
+- `docs/pre-promotion-qa.md`
+- documented route checklist
+- documented sitemap expectations
+- documented navigation expectations
+- documented registry usability checks
+- documented content boundary checks
+- documented remaining known limitations
+- documented manual checks after Cloudflare deploy
 
-Scope:
+## PR-level schedule from here
 
-- Expand glossary definitions
-- Add guide pages:
-  - What is a Depeg?
-  - Stablecoin Status vs Event
-  - Reserve Disclosure Basics
-  - Stablecoin Lifecycle Terms
-- Link guides from methodology and glossary
-
-Acceptance:
-
-- Guides support registry comprehension
-- No recommendation/ranking language
-- Build passes
-
-## PR-021: Add public registry updates page
-
-Goal:
-
-Create an updates/history layer for changes to SOG itself.
-
-Scope:
-
-- Add `/updates/`
-- Add update entries for v0 launch, seed batches, methodology changes
-- Keep updates factual and short
-
-Acceptance:
-
-- Users can see what changed in the registry
-- Sitemap includes updates
-- Build passes
-
-## PR-022: Pre-promotion QA pass
+## PR-023: Post-QA cleanup after live check
 
 Goal:
 
-Prepare for light public sharing.
+Fix anything found in the first manual live check on `https://sog.badjoke-lab.com/`.
 
 Scope:
 
-- Check all internal links
-- Check sitemap output
-- Review methodology wording
-- Review support/about wording
-- Check mobile layout
-- Check no score/ranking language slipped in
+- build/deploy issue fixes if Cloudflare fails
+- broken link fixes
+- mobile layout fixes
+- sitemap or robots fixes
+- wording cleanup if needed
 
 Acceptance:
 
-- Build passes
-- Main pages render correctly
-- v0 is ready for low-key sharing
+- public site opens
+- stablecoin registry filters work
+- guides and updates open
+- sitemap uses custom domain
 
----
+## PR-024: Source-deepening batch 1
+
+Goal:
+
+Start turning top records from stronger seed pages into fuller dossiers.
+
+Scope:
+
+- source-specific reserve reports
+- exact contract/deployment sources
+- exact event timeline sources where available
+- clearer redemption terms summaries
+
+## PR-025: More seed records or comparison pages
+
+Decision point:
+
+Choose one:
+
+- add more stablecoin records
+- add comparison/reference pages
+- deepen issuer pages
 
 ## Later phases
 
 ### v0.5
 
-- More guides
-- Comparison pages
-- Reports / Registry Updates
+- more guides
+- comparison pages
 - richer validation scripts
-- simple search/filtering if not completed earlier
+- more source-deepened records
 
 ### v1
 
