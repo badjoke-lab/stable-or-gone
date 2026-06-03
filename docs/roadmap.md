@@ -18,7 +18,7 @@ docs/current-spec.md
 
 ## Current milestone
 
-SOG has reached the PR-017 milestone: 15 stablecoin seed records.
+SOG has reached the PR-018 milestone: top 5 records are no longer shallow seed-only rows.
 
 Current stablecoin records:
 
@@ -38,6 +38,16 @@ LUSD
 crvUSD
 USDe
 sUSD
+```
+
+Top 5 deepened records:
+
+```txt
+USDT
+USDC
+DAI
+UST / TerraUSD
+BUSD
 ```
 
 ## Completed baseline
@@ -242,44 +252,37 @@ Completed:
 - starter issuer/evidence/reserve/known-unknown/deployment records for new entries
 - public v0 minimum breadth reached
 
+## PR-018: Deepen top 5 records
+
+Completed:
+
+- USDC deepening
+- UST deepening
+- BUSD deepening
+- USDT deepening
+- DAI deepening
+- top 5 records now have stronger evidence/reserve/deployment/known-unknown context
+- USDC, UST, and BUSD event records are deeper than initial seed state
+
+Important limitation:
+
+Top 5 records are stronger, but not final. Source-specific market prices, exact contract addresses, chain-by-chain deployment status, period-level reserve reports, and full legal/regulatory histories still require dedicated source-deepening passes.
+
 ---
 
 # PR-level schedule from here
-
-## PR-018: Deepen top 5 records
-
-Goal:
-
-Make the first five records meaningfully useful rather than shallow seed rows.
-
-Scope:
-
-For USDT, USDC, DAI, UST, BUSD:
-
-- Add more evidence records
-- Add reserve references where available
-- Add event details
-- Add known unknowns
-- Improve summaries
-- Improve redemption access notes
-- Improve deployment notes
-
-Acceptance:
-
-- Top 5 records have stronger dossier pages
-- USDC, UST, and BUSD event pages have source-backed event context
-- Build passes
 
 ## PR-019: Improve registry list filtering and sorting
 
 Goal:
 
-Make the site more usable once records reach 15+.
+Make the site more usable now that it has 15+ records.
 
 Scope:
 
 - Add client-side filtering/search to `/stablecoins/`
 - Filter by status, collateral model, peg asset, and issuer
+- Add basic sorting if simple to implement safely
 - Keep implementation static and no backend
 
 Acceptance:
