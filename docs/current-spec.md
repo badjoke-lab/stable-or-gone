@@ -6,6 +6,12 @@ Updated: 2026-06-02
 
 Stable or Gone (SOG) is a terminal-style stablecoin history registry.
 
+Public URL:
+
+```txt
+https://sog.badjoke-lab.com/
+```
+
 It records stablecoin entities, issuers, events, reserve references, redemption context, regulatory/official context, deployment/contract notes, evidence, and visible uncertainty.
 
 SOG is not:
@@ -357,7 +363,7 @@ Current implementation:
 
 - `reserve-reports.json` exists.
 - Stablecoin detail pages show reserve/attestation history.
-- Seed reserve references exist for 10 records, but many are placeholder-level and need source deepening.
+- Seed reserve references exist for 15 records, but many are placeholder-level and need source deepening.
 
 Reserve records should distinguish:
 
@@ -367,6 +373,8 @@ Reserve records should distinguish:
 - regulatory filing
 - current transparency page
 - historical report
+- protocol disclosure
+- synthetic/collateral mechanism disclosure
 
 ### 8.4 Evidence coverage panel
 
@@ -382,7 +390,7 @@ Current implementation:
 
 - `known-unknowns.json` exists.
 - Stablecoin detail pages show known unknowns.
-- New seed records should include a known unknown when important source gaps remain.
+- New seed records include known unknowns when important source gaps remain.
 
 Visible uncertainty is part of the product.
 
@@ -452,6 +460,11 @@ Current stablecoin seed:
 - FDUSD
 - PYUSD
 - USDD
+- GUSD
+- LUSD
+- crvUSD
+- USDe
+- sUSD
 
 Current issuer seed:
 
@@ -464,6 +477,11 @@ Current issuer seed:
 - TrueUSD
 - First Digital / FD121
 - TRON DAO Reserve
+- Gemini
+- Liquity
+- Curve Finance
+- Ethena Labs
+- Synthetix
 
 Current event seed:
 
@@ -490,11 +508,11 @@ Rules:
 
 ## 11. Current limitations
 
-Current v0 is useful as a foundation but incomplete as a competitive product.
+Current v0 has public minimum breadth but remains incomplete as a competitive product.
 
 Known limitations:
 
-- seed data is still shallow
+- 15 seed records exist, but many remain shallow
 - source coverage is sparse for many records
 - reserve report history is not complete
 - redemption access fields are useful but need direct source deepening
@@ -507,9 +525,8 @@ Known limitations:
 
 ## 12. Completion target for public v0
 
-Public v0 should be considered meaningfully complete when:
+Public v0 has reached minimum breadth at 15 records, but should be considered meaningfully complete when:
 
-- at least 15 stablecoins are in the registry
 - top 5 records have stronger evidence coverage
 - all current seed events have source-backed event pages
 - detail pages show status, issuer, reserve, redemption, regulatory/official context, deployment/contract data, lifecycle, events, evidence, and known unknowns
