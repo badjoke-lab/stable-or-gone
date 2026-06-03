@@ -12,7 +12,7 @@ Public URL:
 https://sog.badjoke-lab.com/
 ```
 
-SOG records stablecoin entities, issuers, events, reserve references, redemption context, regulatory/official context, deployment/contract notes, evidence, and visible uncertainty.
+SOG records stablecoin entities, issuers, events, reserve references, redemption context, regulatory/official context, deployment/contract notes, evidence, registry updates, and visible uncertainty.
 
 SOG is not:
 
@@ -24,7 +24,30 @@ SOG is not:
 - an investment guide
 - a legal or regulatory advice service
 
-## 2. Competitive position
+## 2. Current public state
+
+SOG is ready for low-key public sharing after PR-022 pre-promotion QA.
+
+Current state:
+
+```txt
+15 stablecoin records
+14 issuer records
+3 event records
+Top 5 records deepened
+Registry search/filter implemented
+Guides and glossary added
+Registry updates page added
+Pre-promotion QA checklist added
+```
+
+QA checklist:
+
+```txt
+docs/pre-promotion-qa.md
+```
+
+## 3. Competitive position
 
 SOG should compete as:
 
@@ -45,9 +68,9 @@ The winning angle is not current market data. The winning angle is making it eas
 - what public sources support the record
 - what remains unclear
 
-## 3. Core pages
+## 4. Core pages
 
-Current v0 public pages:
+Current public pages:
 
 ```txt
 /
@@ -58,8 +81,14 @@ Current v0 public pages:
 /events/
 /event/[id]/
 /models/
+/guides/
+/guides/what-is-a-depeg/
+/guides/status-vs-event/
+/guides/reserve-disclosure-basics/
+/guides/stablecoin-lifecycle-terms/
 /glossary/
 /methodology/
+/updates/
 /about/
 /support/
 /contact/
@@ -67,9 +96,9 @@ Current v0 public pages:
 /robots.txt
 ```
 
-## 4. Core data files
+## 5. Core data files
 
-Current v0 data files:
+Current data files:
 
 ```txt
 data/stablecoins.json
@@ -80,6 +109,7 @@ data/reserve-reports.json
 data/known-unknowns.json
 data/regulatory-notes.json
 data/deployments.json
+data/registry-updates.json
 ```
 
 Build validation:
@@ -90,9 +120,9 @@ npm run validate:data
 npm run build
 ```
 
-The build must fail on broken JSON, missing required IDs, duplicate IDs/slugs, or broken cross-references.
+The build should fail on broken JSON, missing required IDs, duplicate IDs/slugs, or broken cross-references covered by the validator.
 
-## 5. Status labels
+## 6. Status labels
 
 Current status enum:
 
@@ -114,7 +144,7 @@ Rules:
 - A recovered depeg does not make a stablecoin failed.
 - Failed status requires source-backed lifecycle/event context, not price movement alone.
 
-## 6. Depeg handling
+## 7. Depeg handling
 
 SOG does not record every small peg movement.
 
@@ -148,7 +178,7 @@ For each significant event, SOG should eventually record:
 - confidence
 - known unknowns
 
-## 7. Competitive differentiators
+## 8. Competitive differentiators
 
 ### Lifecycle map
 
@@ -157,14 +187,6 @@ Current implementation:
 - Stablecoin detail pages show an event-derived lifecycle table.
 - Launch date, registry events, discontinued date, and current status can appear together.
 - This is not yet a dedicated lifecycle data file.
-
-Future strengthening:
-
-- successor token
-- predecessor token
-- migration relation
-- rebrand relation
-- chain-specific lifecycle
 
 ### Redemption access
 
@@ -183,18 +205,6 @@ Current implementation:
 - Seed reserve references exist for 15 records.
 - USDT, USDC, DAI, UST, and BUSD have stronger source-entry and context rows after PR-018.
 
-Reserve records should distinguish:
-
-- issuer disclosure
-- attestation
-- audit
-- regulatory filing
-- current transparency page
-- historical report
-- protocol disclosure
-- synthetic/collateral mechanism disclosure
-- event-specific reserve exposure or intervention context
-
 ### Evidence coverage panel
 
 Current implementation:
@@ -210,7 +220,6 @@ Current implementation:
 - `known-unknowns.json` exists.
 - Stablecoin detail pages show known unknowns.
 - Important source gaps remain visible instead of being guessed.
-- Top 5 known unknowns now distinguish price/timeline gaps, reserve history gaps, redemption gaps, deployment gaps, lifecycle gaps, and regulatory follow-up gaps.
 
 ### Failure mechanism taxonomy
 
@@ -218,19 +227,6 @@ Current implementation:
 
 - `events.json` can hold `failure_mechanism`.
 - USDC, UST, and BUSD event records have been deepened beyond initial seed state.
-
-Material events should use failure mechanism labels when supportable:
-
-- bank_run_or_redemption_pressure
-- reserve_asset_exposure
-- algorithmic_death_spiral
-- collateral_liquidation_stress
-- oracle_or_liquidity_fragmentation
-- regulatory_shutdown
-- issuer_wind_down
-- bridge_or_wrapped_asset_dependency
-- governance_or_protocol_failure
-- unknown
 
 ### Contract and deployment status
 
@@ -240,16 +236,6 @@ Current implementation:
 - Stablecoin detail pages show deployment/contract records.
 - Current entries are still mostly placeholder-level, but top 5 deployment notes now identify important review questions.
 
-Future records should distinguish:
-
-- native issuance
-- bridged asset
-- wrapped asset
-- deprecated contract
-- old bridged token
-- chain-specific status
-- contract control notes
-
 ### Regulatory notes
 
 Current implementation:
@@ -258,13 +244,17 @@ Current implementation:
 - Stablecoin detail pages show regulatory/official context.
 - USDC, UST, and BUSD regulatory/event context has been strengthened.
 
-Regulatory notes should remain source-backed and conservative.
+### Registry updates
 
-Avoid broad legal conclusions. Record public notices, issuer statements, regulator documents, exchange actions, and clearly marked news follow-up context with dates.
+Current implementation:
 
-## 8. Current records
+- `data/registry-updates.json` exists.
+- `/updates/` shows short factual registry update entries.
+- Updates are for site/data/method changes, not live market monitoring.
 
-Current stablecoin seed:
+## 9. Current records
+
+Current stablecoin records:
 
 - USDT
 - USDC
@@ -282,7 +272,7 @@ Current stablecoin seed:
 - USDe
 - sUSD
 
-Current issuer seed:
+Current issuer records:
 
 - Tether
 - Circle
@@ -299,7 +289,7 @@ Current issuer seed:
 - Ethena Labs
 - Synthetix
 
-Current event seed:
+Current event records:
 
 - USDC March 2023 depeg
 - UST May 2022 collapse
@@ -313,7 +303,7 @@ Top 5 deepened records:
 - UST: collapse event, algorithmic death spiral label, SEC context, post-collapse lifecycle context, LFG reserve unknowns
 - BUSD: Paxos wind-down, exchange support phase-out, reported regulatory follow-up, final redemption unknowns
 
-## 9. Current UI direction
+## 10. Current UI direction
 
 Design direction:
 
@@ -330,46 +320,49 @@ Rules:
 - status colors should be stable and restrained
 - support route exists but is secondary
 
-## 10. Current limitations
-
-Current v0 has public minimum breadth and top 5 source deepening, but remains incomplete as a competitive product.
+## 11. Current limitations
 
 Known limitations:
 
-- 15 records exist, but 10 records remain mostly shallow seed entries
+- 10 records remain mostly shallow seed entries
 - source-specific market prices and depeg durations are not yet selected
 - period-level reserve report histories are not complete
 - exact contract addresses and chain-by-chain deployment status are not complete
 - redemption access fields need direct source extraction
 - lifecycle map is event-derived, not yet a dedicated lifecycle data model
 - regulatory notes exist but are not complete
-- no search/filter UI yet
-- no guide/comparison pages yet
 - Google Form URL is not inserted yet
+- comparison pages are not implemented yet
+- external live deployment/build confirmation must be checked after the latest commit reaches Cloudflare Pages
 
-## 11. Completion target for public v0
+## 12. Manual live check after deploy
 
-Public v0 has reached minimum breadth and top 5 deepening, but should be considered meaningfully complete when:
+After Cloudflare Pages deploys the latest commit, check:
 
-- registry search/filtering exists
-- all current seed events have stronger source-backed event pages
-- key detail pages show status, issuer, reserve, redemption, regulatory/official context, deployment/contract data, lifecycle, events, evidence, and known unknowns
-- methodology clearly explains status vs event separation
-- report entry links are visible
-- sitemap and robots are live
-- build validation catches data errors
-- no live price, ranking, or score language is introduced
+```txt
+https://sog.badjoke-lab.com/
+/stablecoins/
+/stablecoin/usdc/
+/stablecoin/ust/
+/stablecoin/busd/
+/guides/
+/glossary/
+/updates/
+/sitemap-index.xml
+```
 
-## 12. Next implementation focus
+Also check mobile width around 360px and confirm that Contact and GitHub Issue links are visible.
+
+## 13. Next implementation focus
 
 Next PR:
 
 ```txt
-PR-019 Registry filtering / search
+PR-023 Post-QA cleanup after live check
 ```
 
 Purpose:
 
 ```txt
-Make the 15-record registry usable instead of just complete.
+Fix any issue found after the latest Cloudflare deploy is manually checked.
 ```
