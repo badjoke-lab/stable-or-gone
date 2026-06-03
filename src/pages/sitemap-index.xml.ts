@@ -3,7 +3,7 @@ import stablecoins from '../../data/stablecoins.json';
 import issuers from '../../data/issuers.json';
 import events from '../../data/events.json';
 
-const SITE = 'https://stable-or-gone.pages.dev';
+const SITE = 'https://sog.badjoke-lab.com';
 
 function url(path: string) {
   return `${SITE}${path}`;
@@ -16,6 +16,11 @@ export const GET: APIRoute = () => {
     '/issuers/',
     '/events/',
     '/models/',
+    '/guides/',
+    '/guides/what-is-a-depeg/',
+    '/guides/status-vs-event/',
+    '/guides/reserve-disclosure-basics/',
+    '/guides/stablecoin-lifecycle-terms/',
     '/glossary/',
     '/methodology/',
     '/about/',
