@@ -20,6 +20,22 @@ PR-018 top 5 record deepening
 PR-019 registry search/filter
 PR-020 guides/glossary
 PR-021 registry updates
+PR-022 pre-promotion QA
+```
+
+## Public deploy confirmation
+
+Status:
+
+```txt
+confirmed by site owner
+```
+
+Notes:
+
+```txt
+The public site at https://sog.badjoke-lab.com/ was reported as OK after PR-022.
+PR-023 records that live deploy confirmation and moves the project into source-deepening work.
 ```
 
 ## QA checklist
@@ -173,4 +189,4 @@ After Cloudflare Pages deploys the latest commit, manually check:
 
 ## Result
 
-PR-022 prepares SOG for low-key public sharing, with the remaining limitation that external deploy/build confirmation must be checked after the latest commit reaches Cloudflare Pages.
+PR-023 records that the public deploy was confirmed and no blocking issue was reported before moving into PR-024 source-deepening work.
