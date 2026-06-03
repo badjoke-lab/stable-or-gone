@@ -26,7 +26,7 @@ SOG is not:
 
 ## 2. Current public state
 
-SOG is ready for low-key public sharing after PR-022 pre-promotion QA.
+SOG is publicly live and confirmed after PR-023.
 
 Current state:
 
@@ -39,6 +39,7 @@ Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
 Pre-promotion QA checklist added
+Public deploy confirmed by site owner
 ```
 
 QA checklist:
@@ -144,113 +145,39 @@ Rules:
 - A recovered depeg does not make a stablecoin failed.
 - Failed status requires source-backed lifecycle/event context, not price movement alone.
 
-## 7. Depeg handling
+## 7. Current limitations
 
-SOG does not record every small peg movement.
+Known limitations:
 
-SOG records a depeg event when it is material, sustained, historically relevant, or source-backed.
+- 10 records remain mostly shallow seed entries
+- source-specific market prices and depeg durations are not yet selected
+- period-level reserve report histories are not complete
+- exact contract addresses and chain-by-chain deployment status are not complete
+- redemption access fields need direct source extraction
+- lifecycle map is event-derived, not yet a dedicated lifecycle data model
+- regulatory notes exist but are not complete
+- Google Form URL is not inserted yet
+- comparison pages are not implemented yet
 
-Current classes:
+## 8. Source-deepening plan
+
+Current source-deepening sequence:
 
 ```txt
-minor peg deviation
-notable depeg event
-major depeg event
-collapse
+PR-024A USDC source-deepening
+PR-024B BUSD source-deepening
+PR-024C UST source-deepening
+PR-024D USDT / DAI source-deepening
 ```
 
-Public rule:
+Rules for source-deepening:
 
-```txt
-A depeg event does not automatically mean a stablecoin failed.
-```
-
-For each significant event, SOG should eventually record:
-
-- target peg
-- lowest observed price if source-specific
-- approximate duration if source-specific
-- trigger/context
-- recovery true/false
-- recovery date if supportable
-- failure mechanism if supportable
-- source list
-- confidence
-- known unknowns
-
-## 8. Competitive differentiators
-
-### Lifecycle map
-
-Current implementation:
-
-- Stablecoin detail pages show an event-derived lifecycle table.
-- Launch date, registry events, discontinued date, and current status can appear together.
-- This is not yet a dedicated lifecycle data file.
-
-### Redemption access
-
-Current implementation:
-
-- Stablecoin records include redemption access fields.
-- Stablecoin detail pages show a dedicated redemption access section.
-- SOG separates issuer redemption from secondary-market trading.
-
-### Reserve disclosure history
-
-Current implementation:
-
-- `reserve-reports.json` exists.
-- Stablecoin detail pages show reserve/attestation/protocol disclosure history.
-- Seed reserve references exist for 15 records.
-- USDT, USDC, DAI, UST, and BUSD have stronger source-entry and context rows after PR-018.
-
-### Evidence coverage panel
-
-Current implementation:
-
-- Stablecoin detail pages show evidence coverage by source type.
-- Coverage is not a score.
-- Top 5 records now have more evidence context than the initial seed state.
-
-### Known unknowns
-
-Current implementation:
-
-- `known-unknowns.json` exists.
-- Stablecoin detail pages show known unknowns.
-- Important source gaps remain visible instead of being guessed.
-
-### Failure mechanism taxonomy
-
-Current implementation:
-
-- `events.json` can hold `failure_mechanism`.
-- USDC, UST, and BUSD event records have been deepened beyond initial seed state.
-
-### Contract and deployment status
-
-Current implementation:
-
-- `deployments.json` exists.
-- Stablecoin detail pages show deployment/contract records.
-- Current entries are still mostly placeholder-level, but top 5 deployment notes now identify important review questions.
-
-### Regulatory notes
-
-Current implementation:
-
-- `regulatory-notes.json` exists.
-- Stablecoin detail pages show regulatory/official context.
-- USDC, UST, and BUSD regulatory/event context has been strengthened.
-
-### Registry updates
-
-Current implementation:
-
-- `data/registry-updates.json` exists.
-- `/updates/` shows short factual registry update entries.
-- Updates are for site/data/method changes, not live market monitoring.
+- prefer official issuer, regulator, exchange, protocol, or primary documentation sources
+- use news/research as context when primary sources are unavailable or when analysis is needed
+- do not display source-specific market lows or durations until a source is selected
+- do not convert evidence coverage into a score
+- keep issuer redemption, protocol exits, and market exits separate
+- keep known unknowns visible when exact source support is incomplete
 
 ## 9. Current records
 
@@ -320,49 +247,16 @@ Rules:
 - status colors should be stable and restrained
 - support route exists but is secondary
 
-## 11. Current limitations
-
-Known limitations:
-
-- 10 records remain mostly shallow seed entries
-- source-specific market prices and depeg durations are not yet selected
-- period-level reserve report histories are not complete
-- exact contract addresses and chain-by-chain deployment status are not complete
-- redemption access fields need direct source extraction
-- lifecycle map is event-derived, not yet a dedicated lifecycle data model
-- regulatory notes exist but are not complete
-- Google Form URL is not inserted yet
-- comparison pages are not implemented yet
-- external live deployment/build confirmation must be checked after the latest commit reaches Cloudflare Pages
-
-## 12. Manual live check after deploy
-
-After Cloudflare Pages deploys the latest commit, check:
-
-```txt
-https://sog.badjoke-lab.com/
-/stablecoins/
-/stablecoin/usdc/
-/stablecoin/ust/
-/stablecoin/busd/
-/guides/
-/glossary/
-/updates/
-/sitemap-index.xml
-```
-
-Also check mobile width around 360px and confirm that Contact and GitHub Issue links are visible.
-
-## 13. Next implementation focus
+## 11. Next implementation focus
 
 Next PR:
 
 ```txt
-PR-023 Post-QA cleanup after live check
+PR-024A USDC source-deepening
 ```
 
 Purpose:
 
 ```txt
-Fix any issue found after the latest Cloudflare deploy is manually checked.
+Turn USDC from a strengthened seed record into a more useful dossier by adding source-specific reserve, redemption, recovery, and deployment references where safe.
 ```
