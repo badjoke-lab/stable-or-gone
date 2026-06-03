@@ -27,7 +27,22 @@
     "summary": "The U.S. SEC announced charges against Terraform Labs and Do Kwon after the Terra ecosystem collapse. SOG records this as regulatory context connected to the UST history, not as a standalone status label.",
     "source_url": "https://www.sec.gov/newsroom/press-releases/2023-32",
     "confidence": "medium",
-    "notes": "Initial regulatory note. Legal outcomes and later court actions should be handled in later source-backed updates."
+    "notes": "Deepened in PR-018B. Legal outcomes and later court actions should be handled in later source-backed updates."
+  },
+  {
+    "id": "sog_reg_ust_post_collapse_lifecycle_context",
+    "stablecoin_id": "sog_st_ust",
+    "issuer_id": "sog_issuer_terraform_labs",
+    "event_id": "sog_ev_ust_2022_05_collapse",
+    "note_date": "2022-07-04",
+    "title": "USTC and Luna Classic post-collapse lifecycle context",
+    "jurisdiction": "global",
+    "authority_or_source": "research_source",
+    "note_type": "post_collapse_lifecycle_context",
+    "summary": "Post-collapse USTC and Luna Classic activity should be recorded as lifecycle context, not as evidence that UST recovered as a functioning stablecoin.",
+    "source_url": "https://arxiv.org/abs/2207.01700",
+    "confidence": "medium",
+    "notes": "Research source used for lifecycle framing only. Do not treat as official issuer statement."
   },
   {
     "id": "sog_reg_usdc_svb_2023_banking_context",
