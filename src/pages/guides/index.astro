@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const guides = [
+  {
+    title: 'What is a Depeg?',
+    href: '/guides/what-is-a-depeg/',
+    summary: 'How SOG separates small peg movement, notable depeg events, major depegs, and collapse outcomes.'
+  },
+  {
+    title: 'Stablecoin Status vs Event',
+    href: '/guides/status-vs-event/',
+    summary: 'Why “active”, “discontinued”, and “failed” are status labels while depegs and wind-downs are events.'
+  },
+  {
+    title: 'Reserve Disclosure Basics',
+    href: '/guides/reserve-disclosure-basics/',
+    summary: 'How SOG records issuer disclosures, attestations, audits, protocol collateral, and known gaps.'
+  },
+  {
+    title: 'Stablecoin Lifecycle Terms',
+    href: '/guides/stablecoin-lifecycle-terms/',
+    summary: 'A short guide to launch, migration, rebrand, wind-down, failure, and post-collapse lifecycle records.'
+  }
+];
+---
+<BaseLayout title="Guides — Stable or Gone" description="Short registry guides for understanding stablecoin status, depegs, reserve disclosure, and lifecycle terms.">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; open guides</div>
+      <h1>Guides</h1>
+      <p>Short reference pages for reading SOG records. These guides explain registry terms; they do not rank, recommend, or rate stablecoins.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Guide type</span><strong>reference</strong></div>
+      <div class="stat"><span>Advice</span><strong>none</strong></div>
+    </div>
+  </section>
+
+  <section class="section-grid">
+    {guides.map((guide) => (
+      <a class="panel mini-card" href={guide.href}>
+        <h2>{guide.title}</h2>
+        <p>{guide.summary}</p>
+      </a>
+    ))}
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">scope</div>
+    <table><tbody>
+      <tr><th>Purpose</th><td>Help users understand how SOG records evidence, events, lifecycle state, and uncertainty.</td></tr>
+      <tr><th>Not included</th><td>No rankings, no investment advice, no stablecoin safety score, and no live market signals.</td></tr>
+      <tr><th>Related</th><td><a href="/glossary/">Glossary</a> · <a href="/methodology/">Methodology</a> · <a href="/stablecoins/">Stablecoin Registry</a></td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
