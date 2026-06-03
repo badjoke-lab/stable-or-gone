@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Reserve Disclosure Basics — Stable or Gone" description="A SOG guide to reserve disclosures, attestations, audits, protocol collateral, and visible uncertainty.">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; guide --reserve-disclosure</div>
+      <h1>Reserve Disclosure Basics</h1>
+      <p>Stablecoins use different backing and disclosure models. SOG records the source type and uncertainty instead of turning reserve information into a safety score.</p>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">disclosure types</div>
+    <table><tbody>
+      <tr><th>Issuer disclosure</th><td>A statement or transparency page from the issuer or related organization.</td></tr>
+      <tr><th>Attestation</th><td>A third-party or issuer-published assurance-style report for a period or date.</td></tr>
+      <tr><th>Audit</th><td>A stronger formal audit claim when the source explicitly supports that label.</td></tr>
+      <tr><th>Protocol disclosure</th><td>Collateral, vault, debt-pool, or mechanism data for protocol-based stablecoins.</td></tr>
+      <tr><th>Event disclosure</th><td>A reserve-related statement tied to a specific incident, such as bank exposure or reserve intervention.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">SOG rules</div>
+    <table><tbody>
+      <tr><th>No score</th><td>Reserve disclosure coverage is not a safety score.</td></tr>
+      <tr><th>Source-specific</th><td>Historical reserve records should point to a specific source, date, period, or archive when possible.</td></tr>
+      <tr><th>Protocol != issuer</th><td>DAI, LUSD, crvUSD, USDe, and sUSD should not be described like simple fiat-backed issuer redemption products.</td></tr>
+      <tr><th>Known unknowns</th><td>If reserve composition or report history is unclear, SOG keeps the uncertainty visible.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">related</div>
+    <table><tbody>
+      <tr><th>Read next</th><td><a href="/guides/stablecoin-lifecycle-terms/">Stablecoin Lifecycle Terms</a> · <a href="/methodology/">Methodology</a> · <a href="/stablecoins/">Stablecoins</a></td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
