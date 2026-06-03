@@ -1,22 +1,42 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
 const terms = [
+  ['active', 'A status label for a stablecoin recorded as operating or available based on the current sources.'],
+  ['attestation', 'A reserve-related report or assurance-style statement.'],
+  ['collateral model', 'A short label for the backing or mechanism design.'],
+  ['collapse', 'A severe historical event usually tied to a failed lifecycle outcome.'],
   ['depeg', 'A material deviation from the target peg. SOG does not record every small movement.'],
-  ['redemption', 'The process of converting a stablecoin back under issuer terms.'],
-  ['attestation', 'A reserve-related report or statement.'],
-  ['wind-down', 'A planned or announced process to discontinue support.'],
-  ['collapse', 'A severe historical event requiring stronger supporting sources.'],
-  ['open question', 'An explicit uncertainty kept visible instead of being guessed.']
+  ['deployment', 'A chain-specific token or protocol deployment.'],
+  ['discontinued', 'A status label for a stablecoin whose issuance, support, or operation has ended or entered wind-down.'],
+  ['evidence coverage', 'A source coverage view showing what types of sources support a record. It is not a score.'],
+  ['failed', 'A status label for a stablecoin whose lifecycle and evidence support a failed outcome.'],
+  ['known unknown', 'An explicit uncertainty kept visible instead of being guessed.'],
+  ['lifecycle', 'The historical path of a stablecoin, including launch, migration, rebrand, wind-down, failure, or post-collapse context.'],
+  ['market exit', 'Selling or swapping a stablecoin in secondary markets.'],
+  ['migration', 'A move to a new token, contract, chain, issuer structure, or protocol design.'],
+  ['peg asset', 'The target unit a stablecoin tries to track, such as USD.'],
+  ['protocol disclosure', 'Documentation, dashboards, or mechanism descriptions for protocol-based stablecoins.'],
+  ['recovered depeg', 'A depeg event where the stablecoin later returned near its target peg.'],
+  ['redemption', 'The process of converting a stablecoin back under issuer or protocol terms.'],
+  ['reserve disclosure', 'A source describing backing, reserves, collateral, or related mechanism context.'],
+  ['status', 'A registry label describing current or lifecycle state, separate from event records.'],
+  ['wind-down', 'A planned or announced process to discontinue issuance, support, or availability.']
 ];
 ---
-<BaseLayout title="Glossary — Stable or Gone">
+<BaseLayout title="Glossary — Stable or Gone" description="Short definitions for terms used across Stable or Gone records, events, sources, reserves, and lifecycle pages.">
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; help glossary</div>
       <h1>Glossary</h1>
       <p>Short definitions for terms used across the SOG registry.</p>
     </div>
+    <div class="panel stats">
+      <div class="stat"><span>Terms</span><strong>{terms.length}</strong></div>
+      <div class="stat"><span>Scope</span><strong>registry</strong></div>
+    </div>
   </section>
+
   <section class="panel registry">
     <div class="bar">working glossary</div>
     <table>
@@ -27,5 +47,15 @@ const terms = [
         ))}
       </tbody>
     </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">related guides</div>
+    <table><tbody>
+      <tr><th>Depeg</th><td><a href="/guides/what-is-a-depeg/">What is a Depeg?</a></td></tr>
+      <tr><th>Status</th><td><a href="/guides/status-vs-event/">Stablecoin Status vs Event</a></td></tr>
+      <tr><th>Reserves</th><td><a href="/guides/reserve-disclosure-basics/">Reserve Disclosure Basics</a></td></tr>
+      <tr><th>Lifecycle</th><td><a href="/guides/stablecoin-lifecycle-terms/">Stablecoin Lifecycle Terms</a></td></tr>
+    </tbody></table>
   </section>
 </BaseLayout>
