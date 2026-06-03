@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Status vs Event — Stable or Gone" description="A guide to how SOG separates stablecoin status labels from historical event records.">
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">&gt; guide --status-vs-event</div>
+      <h1>Status vs Event</h1>
+      <p>SOG separates current or lifecycle status from historical events. This reduces overstatement and keeps recovered incidents distinct from failed outcomes.</p>
+    </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">status labels</div>
+    <table><tbody>
+      <tr><th>active</th><td>The record is treated as operating or available based on currently linked sources.</td></tr>
+      <tr><th>limited</th><td>The stablecoin appears to operate with important limits such as access, redemption, geography, or market availability.</td></tr>
+      <tr><th>discontinued</th><td>Issuance, support, or operation has ended or entered a wind-down state.</td></tr>
+      <tr><th>failed</th><td>The registry records a severe historical event or lifecycle outcome that supports failed status.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">event records</div>
+    <table><tbody>
+      <tr><th>depeg</th><td>A market or redemption stress event where the stablecoin deviated materially from its target peg.</td></tr>
+      <tr><th>wind-down</th><td>An issuer, exchange, regulator, or protocol-supported process to end or phase out support.</td></tr>
+      <tr><th>collapse</th><td>A severe event where the stablecoin did not return as a functioning stablecoin.</td></tr>
+      <tr><th>regulatory action</th><td>A public notice, enforcement action, regulatory restriction, or official context source.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">rule</div>
+    <table><tbody>
+      <tr><th>Recovered event</th><td>A recovered depeg can remain an event while the stablecoin status remains active.</td></tr>
+      <tr><th>Failed status</th><td>Failed status should not be assigned from a price chart alone. It needs lifecycle and source context.</td></tr>
+      <tr><th>Visible uncertainty</th><td>If the sources are not enough, SOG uses known unknowns instead of guessing.</td></tr>
+    </tbody></table>
+  </section>
+</BaseLayout>
