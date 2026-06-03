@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import stablecoinsData from '../../../data/stablecoins.json';
+import issuersData from '../../../data/issuers.json';
 
 type StablecoinRow = {
   slug: string;
@@ -9,11 +10,24 @@ type StablecoinRow = {
   peg_asset?: string;
   collateral_model?: string;
   status?: string;
+  issuer_id?: string;
   last_verified_at?: string;
 };
 
+type IssuerRow = {
+  id: string;
+  name: string;
+};
+
 const stablecoins = stablecoinsData as StablecoinRow[];
+const issuers = issuersData as IssuerRow[];
+const issuerById = new Map(issuers.map((issuer) => [issuer.id, issuer.name]));
 const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
+const uniqueSorted = (values: Array<string | undefined>) => Array.from(new Set(values.filter(Boolean) as string[])).sort((a, b) => a.localeCompare(b));
+const statusOptions = uniqueSorted(stablecoins.map((coin) => coin.status));
+const modelOptions = uniqueSorted(stablecoins.map((coin) => coin.collateral_model));
+const pegOptions = uniqueSorted(stablecoins.map((coin) => coin.peg_asset));
+const issuerOptions = uniqueSorted(stablecoins.map((coin) => issuerById.get(coin.issuer_id ?? '')));
 ---
 <BaseLayout title="Stablecoins — Stable or Gone">
   <section class="hero">
@@ -28,26 +42,164 @@ const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
     </div>
   </section>
 
-  <section class="panel registry">
+  <section class="panel registry" data-registry>
     <div class="bar">source: data/stablecoins.json</div>
+    <div class="registry-controls" aria-label="Registry filters">
+      <label>
+        <span>Search</span>
+        <input data-filter-search type="search" placeholder="USDC, Terra, synthetic..." autocomplete="off" />
+      </label>
+      <label>
+        <span>Status</span>
+        <select data-filter-status>
+          <option value="">All statuses</option>
+          {statusOptions.map((status) => <option value={status}>{status}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Model</span>
+        <select data-filter-model>
+          <option value="">All models</option>
+          {modelOptions.map((model) => <option value={model}>{model}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Peg</span>
+        <select data-filter-peg>
+          <option value="">All pegs</option>
+          {pegOptions.map((peg) => <option value={peg}>{peg}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Issuer</span>
+        <select data-filter-issuer>
+          <option value="">All issuers</option>
+          {issuerOptions.map((issuer) => <option value={issuer}>{issuer}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Sort</span>
+        <select data-sort>
+          <option value="name">Name A-Z</option>
+          <option value="status">Status A-Z</option>
+          <option value="model">Model A-Z</option>
+          <option value="last_verified_desc">Last verified newest</option>
+        </select>
+      </label>
+    </div>
+    <div class="registry-summary" aria-live="polite">
+      <span data-result-count>{stablecoins.length}</span> / {stablecoins.length} records shown
+    </div>
     <table>
       <thead>
-        <tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Last verified</th></tr>
+        <tr><th>Name</th><th>Symbol</th><th>Issuer</th><th>Peg</th><th>Model</th><th>Status</th><th>Last verified</th></tr>
       </thead>
-      <tbody>
+      <tbody data-registry-body>
         {stablecoins.length === 0 ? (
-          <tr><td colspan="6">No records yet.</td></tr>
-        ) : stablecoins.map((coin) => (
-          <tr>
-            <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
-            <td>{coin.symbol ?? '—'}</td>
-            <td>{coin.peg_asset ?? '—'}</td>
-            <td>{coin.collateral_model ?? '—'}</td>
-            <td><span class={statusClass(coin.status)}>{coin.status ?? 'unknown'}</span></td>
-            <td>{coin.last_verified_at ?? '—'}</td>
-          </tr>
-        ))}
+          <tr><td colspan="7">No records yet.</td></tr>
+        ) : stablecoins.map((coin) => {
+          const issuerName = issuerById.get(coin.issuer_id ?? '') ?? '—';
+          const searchable = [coin.name, coin.symbol, coin.slug, issuerName, coin.peg_asset, coin.collateral_model, coin.status, ...(coin as any).aliases ?? []].filter(Boolean).join(' ');
+          return (
+            <tr
+              data-registry-row
+              data-search={searchable.toLowerCase()}
+              data-name={coin.name.toLowerCase()}
+              data-status={coin.status ?? ''}
+              data-model={coin.collateral_model ?? ''}
+              data-peg={coin.peg_asset ?? ''}
+              data-issuer={issuerName}
+              data-last-verified={coin.last_verified_at ?? ''}
+            >
+              <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
+              <td>{coin.symbol ?? '—'}</td>
+              <td>{issuerName}</td>
+              <td>{coin.peg_asset ?? '—'}</td>
+              <td>{coin.collateral_model ?? '—'}</td>
+              <td><span class={statusClass(coin.status)}>{coin.status ?? 'unknown'}</span></td>
+              <td>{coin.last_verified_at ?? '—'}</td>
+            </tr>
+          );
+        })}
+        <tr data-no-results hidden><td colspan="7">No records match the current filters.</td></tr>
       </tbody>
     </table>
   </section>
+
+  <script>
+    const registry = document.querySelector('[data-registry]');
+    const tbody = registry?.querySelector('[data-registry-body]');
+    const rows = Array.from(registry?.querySelectorAll('[data-registry-row]') ?? []);
+    const noResults = registry?.querySelector('[data-no-results]');
+    const resultCount = registry?.querySelector('[data-result-count]');
+    const controls = {
+      search: registry?.querySelector('[data-filter-search]'),
+      status: registry?.querySelector('[data-filter-status]'),
+      model: registry?.querySelector('[data-filter-model]'),
+      peg: registry?.querySelector('[data-filter-peg]'),
+      issuer: registry?.querySelector('[data-filter-issuer]'),
+      sort: registry?.querySelector('[data-sort]'),
+    };
+
+    const normalize = (value) => String(value ?? '').trim().toLowerCase();
+    const getValue = (control) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
+
+    function sortRows() {
+      if (!tbody) return;
+      const mode = getValue(controls.sort) || 'name';
+      const sorted = [...rows].sort((a, b) => {
+        if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0;
+        if (mode === 'last_verified_desc') {
+          return String(b.dataset.lastVerified ?? '').localeCompare(String(a.dataset.lastVerified ?? ''));
+        }
+        if (mode === 'status') {
+          return String(a.dataset.status ?? '').localeCompare(String(b.dataset.status ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+        }
+        if (mode === 'model') {
+          return String(a.dataset.model ?? '').localeCompare(String(b.dataset.model ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+        }
+        return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+      });
+      sorted.forEach((row) => tbody.appendChild(row));
+      if (noResults) tbody.appendChild(noResults);
+    }
+
+    function applyFilters() {
+      const query = normalize(getValue(controls.search));
+      const status = getValue(controls.status);
+      const model = getValue(controls.model);
+      const peg = getValue(controls.peg);
+      const issuer = getValue(controls.issuer);
+      let visible = 0;
+
+      rows.forEach((row) => {
+        if (!(row instanceof HTMLElement)) return;
+        const matches =
+          (!query || normalize(row.dataset.search).includes(query)) &&
+          (!status || row.dataset.status === status) &&
+          (!model || row.dataset.model === model) &&
+          (!peg || row.dataset.peg === peg) &&
+          (!issuer || row.dataset.issuer === issuer);
+        row.hidden = !matches;
+        if (matches) visible += 1;
+      });
+
+      if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0;
+      if (resultCount) resultCount.textContent = String(visible);
+    }
+
+    Object.values(controls).forEach((control) => {
+      control?.addEventListener('input', () => {
+        sortRows();
+        applyFilters();
+      });
+      control?.addEventListener('change', () => {
+        sortRows();
+        applyFilters();
+      });
+    });
+
+    sortRows();
+    applyFilters();
+  </script>
 </BaseLayout>
