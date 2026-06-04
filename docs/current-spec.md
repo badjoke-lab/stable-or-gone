@@ -36,6 +36,7 @@ Current state:
 3 event records
 Top 5 records deepened
 USDC source-deepening completed
+BUSD source-deepening started
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -166,7 +167,7 @@ Current source-deepening sequence:
 
 ```txt
 PR-024A USDC source-deepening — completed
-PR-024B BUSD source-deepening — next
+PR-024B BUSD source-deepening — in progress
 PR-024C UST source-deepening
 PR-024D USDT / DAI source-deepening
 ```
@@ -229,7 +230,7 @@ Top 5 deepened records:
 - USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, specific January 2026 reserve examination report, redemption access entry point, selected Ethereum/Base/Solana contract references, remaining multichain unknowns
 - DAI: protocol/collateral disclosure entry point, Sky lifecycle unknowns, redemption-mechanics unknowns
 - UST: collapse event, algorithmic death spiral label, SEC context, post-collapse lifecycle context, LFG reserve unknowns
-- BUSD: Paxos wind-down, exchange support phase-out, reported regulatory follow-up, final redemption unknowns
+- BUSD: Paxos wind-down, issuer redemption/conversion context, exchange support phase-out, transparency archive context, reported regulatory follow-up, final customer-specific terms still source-review needed
 
 ## 10. Current UI direction
 
@@ -250,7 +251,7 @@ Rules:
 
 ## 11. Next implementation focus
 
-Next PR:
+Current PR:
 
 ```txt
 PR-024B BUSD source-deepening
@@ -259,15 +260,14 @@ PR-024B BUSD source-deepening
 Purpose:
 
 ```txt
-Turn BUSD from a strengthened wind-down record into a more useful dossier by separating Paxos issuer wind-down, redemption-window context, exchange support phase-out, and regulatory follow-up sources.
+Turn BUSD from a strengthened wind-down record into a more useful dossier by separating Paxos issuer wind-down, redemption/conversion context, exchange support phase-out, reserve/transparency archive context, and reported regulatory follow-up sources.
 ```
 
-PR-024A completion summary:
+Current PR-024B progress:
 
 ```txt
-Added a concrete Circle USDC reserve examination report source.
-Added Circle contract address documentation as a deployment source.
-Added selected Ethereum, Base, and Solana USDC deployment rows.
-Updated USDC redemption-access wording from Circle source context.
-Updated USDC event and registry update notes.
+Updated BUSD stablecoin record wording for Paxos issuer redemption/conversion and Binance exchange support separation.
+Added BUSD transparency/attestation archive reserve context.
+Added a registry update entry for BUSD source-deepening.
+Regulatory notes already separate Paxos wind-down, Binance phase-out, and reported SEC follow-up context.
 ```
