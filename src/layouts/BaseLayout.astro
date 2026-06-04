@@ -4,12 +4,23 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
+const siteUrl = 'https://sog.badjoke-lab.com';
 const {
-  title = 'Stable or Gone',
-  description = 'A terminal-style registry for stablecoins, depeg events, issuers, reserves, and evidence.'
+  title = 'Stable or Gone — Stablecoin History Registry',
+  description = 'A terminal-style stablecoin history registry for stablecoin records, depeg events, issuers, reserve references, redemption context, lifecycle changes, and source-backed evidence.',
+  canonicalPath = Astro.url.pathname,
+  ogImage = '/og/sog-og.svg',
+  jsonLd
 } = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const ogImageUrl = new URL(ogImage, siteUrl).toString();
+const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';
 ---
 <!doctype html>
 <html lang="en">
@@ -18,6 +29,18 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:site_name" content="Stable or Gone" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
   <body>
     <div class="wrap">
