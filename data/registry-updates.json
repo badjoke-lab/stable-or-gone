@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_06_04_pr024c_ust_sources",
+    "date": "2026-06-04",
+    "title": "UST source-deepening started",
+    "category": "data",
+    "summary": "Deepened UST with clearer failed-status wording, collapse-context separation, a placeholder-style reserve-intervention context entry, and explicit separation between UST failure, LFG reserve-flow questions, SEC/regulatory context, research analysis, and post-collapse USTC lifecycle notes.",
+    "related_paths": ["/stablecoin/ust/", "/event/sog_ev_ust_2022_05_collapse/"]
+  },
+  {
     "id": "sog_update_2026_06_04_pr024b_busd_sources",
     "date": "2026-06-04",
     "title": "BUSD source-deepening started",
