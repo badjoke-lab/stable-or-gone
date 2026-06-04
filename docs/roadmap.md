@@ -33,7 +33,7 @@ Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
 Pre-promotion QA checklist added
-Public deploy confirmed by site owner
+Public deploy confirmed
 ```
 
 Current stablecoin records:
@@ -215,7 +215,7 @@ Completed:
 
 - recorded public deploy confirmation in `docs/pre-promotion-qa.md`
 - moved roadmap to source-deepening phase
-- no blocking public issue was reported before PR-024
+- no blocking public issue was found before PR-024
 
 ## PR-level schedule from here
 
