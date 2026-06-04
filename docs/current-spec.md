@@ -38,6 +38,7 @@ Top 5 records deepened
 USDC source-deepening completed
 BUSD source-deepening completed
 UST source-deepening completed
+USDT / DAI source-deepening started
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -170,7 +171,7 @@ Current source-deepening sequence:
 PR-024A USDC source-deepening — completed
 PR-024B BUSD source-deepening — completed
 PR-024C UST source-deepening — completed
-PR-024D USDT / DAI source-deepening — next
+PR-024D USDT / DAI source-deepening — in progress
 ```
 
 Rules for source-deepening:
@@ -227,9 +228,9 @@ Current event records:
 
 Top 5 deepened records:
 
-- USDT: reserve/transparency, assurance entry point, redemption terms entry point, multichain unknowns
+- USDT: reserve/transparency, assurance entry point, legal redemption terms, CFTC historical reserve-representation context, multichain unknowns
 - USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, specific January 2026 reserve examination report, redemption access entry point, selected Ethereum/Base/Solana contract references, remaining multichain unknowns
-- DAI: protocol/collateral disclosure entry point, Sky lifecycle unknowns, redemption-mechanics unknowns
+- DAI: protocol/collateral disclosure entry point, Sky/USDS lifecycle unknowns, protocol exit mechanics, collateral/PSM source-review areas
 - UST: failed status, collapse mechanics, SEC/regulatory context, research analysis, post-collapse USTC lifecycle separation, LFG reserve-intervention source-review area
 - BUSD: Paxos wind-down, issuer redemption/conversion context, exchange support phase-out, transparency archive context, reported regulatory follow-up, final customer-specific terms still source-review needed
 
@@ -252,7 +253,7 @@ Rules:
 
 ## 11. Next implementation focus
 
-Next PR:
+Current PR:
 
 ```txt
 PR-024D USDT / DAI source-deepening
@@ -264,12 +265,11 @@ Purpose:
 Deepen USDT reserve/redemption/deployment source entries and DAI collateral/Sky lifecycle/protocol-exit source entries while keeping fiat-backed issuer redemption and protocol-based exits clearly separated.
 ```
 
-PR-024C completion summary:
+Current PR-024D progress:
 
 ```txt
-Updated UST stablecoin record wording for failed status, no redemption path, post-collapse USTC separation, and reserve-intervention source-review context.
-Added a UST reserve-intervention context entry that is explicitly not treated as a normal reserve report or final LFG audit fact.
-Updated UST known unknowns for collapse timeline, LFG reserve flow, and post-collapse USTC lifecycle separation.
-Added a registry update entry for UST source-deepening.
-Regulatory and research sources already separate SEC context, failure analysis, and post-collapse lifecycle framing.
+Updated USDT stablecoin record wording for issuer redemption terms, reserve/transparency context, CFTC historical reserve-representation context, and multichain deployment caution.
+Updated DAI stablecoin record wording for protocol-based exits, Sky/USDS lifecycle context, collateral exposure, and non-issuer-redemption framing.
+Updated USDT and DAI known unknowns for assurance periods, chain coverage, collateral composition, Sky lifecycle, and protocol exit mechanics.
+Added a registry update entry for USDT / DAI source-deepening.
 ```
