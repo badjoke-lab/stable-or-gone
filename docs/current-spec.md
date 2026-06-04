@@ -38,7 +38,7 @@ Top 5 records deepened
 USDC source-deepening completed
 BUSD source-deepening completed
 UST source-deepening completed
-USDT / DAI source-deepening started
+USDT / DAI source-deepening completed
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -171,7 +171,8 @@ Current source-deepening sequence:
 PR-024A USDC source-deepening — completed
 PR-024B BUSD source-deepening — completed
 PR-024C UST source-deepening — completed
-PR-024D USDT / DAI source-deepening — in progress
+PR-024D USDT / DAI source-deepening — completed
+PR-025 More seed records or comparison pages — next
 ```
 
 Rules for source-deepening:
@@ -228,9 +229,9 @@ Current event records:
 
 Top 5 deepened records:
 
-- USDT: reserve/transparency, assurance entry point, legal redemption terms, CFTC historical reserve-representation context, multichain unknowns
+- USDT: reserve/transparency, assurance entry point, legal redemption terms, CFTC historical reserve-representation context, multichain unknowns, deployment caveats
 - USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, specific January 2026 reserve examination report, redemption access entry point, selected Ethereum/Base/Solana contract references, remaining multichain unknowns
-- DAI: protocol/collateral disclosure entry point, Sky/USDS lifecycle unknowns, protocol exit mechanics, collateral/PSM source-review areas
+- DAI: protocol/collateral disclosure entry point, Sky/USDS lifecycle unknowns, protocol exit mechanics, collateral/PSM source-review areas, Ethereum protocol-token deployment caveats
 - UST: failed status, collapse mechanics, SEC/regulatory context, research analysis, post-collapse USTC lifecycle separation, LFG reserve-intervention source-review area
 - BUSD: Paxos wind-down, issuer redemption/conversion context, exchange support phase-out, transparency archive context, reported regulatory follow-up, final customer-specific terms still source-review needed
 
@@ -253,23 +254,24 @@ Rules:
 
 ## 11. Next implementation focus
 
-Current PR:
+Next PR:
 
 ```txt
-PR-024D USDT / DAI source-deepening
+PR-025 More seed records or comparison pages
 ```
 
-Purpose:
+Decision point:
 
 ```txt
-Deepen USDT reserve/redemption/deployment source entries and DAI collateral/Sky lifecycle/protocol-exit source entries while keeping fiat-backed issuer redemption and protocol-based exits clearly separated.
+Choose whether the next milestone should add more stablecoin seed records, add comparison/reference pages, or deepen issuer pages.
 ```
 
-Current PR-024D progress:
+PR-024D completion summary:
 
 ```txt
 Updated USDT stablecoin record wording for issuer redemption terms, reserve/transparency context, CFTC historical reserve-representation context, and multichain deployment caution.
 Updated DAI stablecoin record wording for protocol-based exits, Sky/USDS lifecycle context, collateral exposure, and non-issuer-redemption framing.
 Updated USDT and DAI known unknowns for assurance periods, chain coverage, collateral composition, Sky lifecycle, and protocol exit mechanics.
 Added a registry update entry for USDT / DAI source-deepening.
+Updated USDT and DAI reserve/deployment notes to keep incomplete assurance periods, collateral dashboards, and chain coverage visible as source-review areas.
 ```
