@@ -14,7 +14,7 @@
     "failure_mechanism": "reserve_asset_exposure",
     "confidence": "medium",
     "source_count": 4,
-    "notes": "Deepened in PR-018A with Circle transparency, SVB exposure, product, and reopening-operation sources. Lowest observed price and exact duration remain source-specific and should not be displayed until a market data source is selected."
+    "notes": "Deepened in PR-018A and PR-024A with Circle transparency, SVB exposure, product, reopening-operation, reserve-report, redemption-access, and deployment documentation sources. Lowest observed price and exact duration remain source-specific and should not be displayed until a market data source is selected."
   },
   {
     "id": "sog_ev_ust_2022_05_collapse",
