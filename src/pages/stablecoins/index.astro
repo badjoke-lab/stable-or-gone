@@ -141,8 +141,8 @@ const issuerOptions = uniqueSorted(stablecoins.map((coin) => issuerById.get(coin
       sort: registry?.querySelector('[data-sort]'),
     };
 
-    const normalize = (value) => String(value ?? '').trim().toLowerCase();
-    const getValue = (control) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
+    const normalize = (value: unknown) => String(value ?? '').trim().toLowerCase();
+    const getValue = (control: Element | null | undefined) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
 
     function sortRows() {
       if (!tbody) return;
