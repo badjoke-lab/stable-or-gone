@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_06_04_pr024b_busd_sources",
+    "date": "2026-06-04",
+    "title": "BUSD source-deepening started",
+    "category": "data",
+    "summary": "Deepened BUSD with updated issuer wind-down and redemption/conversion wording, a BUSD transparency archive reserve reference, and clearer separation between Paxos issuer context, Binance exchange support phase-out, and reported regulatory follow-up context.",
+    "related_paths": ["/stablecoin/busd/", "/issuer/paxos/"]
+  },
+  {
     "id": "sog_update_2026_06_04_pr024a_usdc_sources",
     "date": "2026-06-04",
     "title": "USDC source-deepening completed",
