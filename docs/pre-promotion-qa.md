@@ -10,7 +10,7 @@ https://sog.badjoke-lab.com/
 
 ## Scope
 
-This QA pass prepares SOG for low-key public sharing.
+This QA pass prepares SOG for public review.
 
 It checks the current static registry state after:
 
@@ -28,14 +28,14 @@ PR-022 pre-promotion QA
 Status:
 
 ```txt
-confirmed by site owner
+confirmed
 ```
 
 Notes:
 
 ```txt
-The public site at https://sog.badjoke-lab.com/ was reported as OK after PR-022.
-PR-023 records that live deploy confirmation and moves the project into source-deepening work.
+The public site at https://sog.badjoke-lab.com/ was checked after PR-022.
+PR-023 records the live deploy confirmation and moves the project into source-deepening work.
 ```
 
 ## QA checklist
@@ -189,4 +189,4 @@ After Cloudflare Pages deploys the latest commit, manually check:
 
 ## Result
 
-PR-023 records that the public deploy was confirmed and no blocking issue was reported before moving into PR-024 source-deepening work.
+PR-023 records that the public deploy was confirmed and no blocking issue was found before moving into PR-024 source-deepening work.
