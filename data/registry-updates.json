@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_06_04_pr024d_usdt_dai_sources",
+    "date": "2026-06-04",
+    "title": "USDT and DAI source-deepening started",
+    "category": "data",
+    "summary": "Deepened USDT and DAI records by separating Tether issuer reserve/redemption/regulatory/deployment context from DAI protocol collateral, Sky lifecycle, and protocol-exit context. Known unknowns were updated to keep assurance periods, chain coverage, DAI collateral composition, and protocol exit mechanics as source-review areas.",
+    "related_paths": ["/stablecoin/usdt/", "/stablecoin/dai/"]
+  },
+  {
     "id": "sog_update_2026_06_04_pr024c_ust_sources",
     "date": "2026-06-04",
     "title": "UST source-deepening started",
