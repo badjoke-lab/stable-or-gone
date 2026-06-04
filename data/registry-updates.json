@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_06_04_pr024a_usdc_sources",
+    "date": "2026-06-04",
+    "title": "USDC source-deepening started",
+    "category": "data",
+    "summary": "Added source-specific USDC evidence for a concrete reserve examination report, Circle contract address documentation, and redemption access context. Expanded selected USDC deployment records for Ethereum, Base, and Solana while keeping full chain-by-chain coverage as a remaining source-review area.",
+    "related_paths": ["/stablecoin/usdc/", "/issuer/circle/"]
+  },
+  {
     "id": "sog_update_2026_06_03_pr020_guides",
     "date": "2026-06-03",
     "title": "Guides and glossary layer added",
