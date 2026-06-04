@@ -37,6 +37,7 @@ Current state:
 Top 5 records deepened
 USDC source-deepening completed
 BUSD source-deepening completed
+UST source-deepening started
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -168,7 +169,7 @@ Current source-deepening sequence:
 ```txt
 PR-024A USDC source-deepening — completed
 PR-024B BUSD source-deepening — completed
-PR-024C UST source-deepening — next
+PR-024C UST source-deepening — in progress
 PR-024D USDT / DAI source-deepening
 ```
 
@@ -229,7 +230,7 @@ Top 5 deepened records:
 - USDT: reserve/transparency, assurance entry point, redemption terms entry point, multichain unknowns
 - USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, specific January 2026 reserve examination report, redemption access entry point, selected Ethereum/Base/Solana contract references, remaining multichain unknowns
 - DAI: protocol/collateral disclosure entry point, Sky lifecycle unknowns, redemption-mechanics unknowns
-- UST: collapse event, algorithmic death spiral label, SEC context, post-collapse lifecycle context, LFG reserve unknowns
+- UST: failed status, collapse mechanics, SEC/regulatory context, research analysis, post-collapse USTC lifecycle separation, LFG reserve-intervention source-review area
 - BUSD: Paxos wind-down, issuer redemption/conversion context, exchange support phase-out, transparency archive context, reported regulatory follow-up, final customer-specific terms still source-review needed
 
 ## 10. Current UI direction
@@ -251,7 +252,7 @@ Rules:
 
 ## 11. Next implementation focus
 
-Next PR:
+Current PR:
 
 ```txt
 PR-024C UST source-deepening
@@ -263,11 +264,11 @@ Purpose:
 Deepen UST collapse context by separating collapse timeline, LFG reserve-intervention context, regulatory context, research analysis, and post-collapse USTC lifecycle notes without treating post-collapse trading as recovered stablecoin status.
 ```
 
-PR-024B completion summary:
+Current PR-024C progress:
 
 ```txt
-Updated BUSD stablecoin record wording for Paxos issuer redemption/conversion and Binance exchange support separation.
-Added BUSD transparency/attestation archive reserve context.
-Added a registry update entry for BUSD source-deepening.
-Regulatory notes already separate Paxos wind-down, Binance phase-out, and reported SEC follow-up context.
+Updated UST stablecoin record wording for failed status, no redemption path, post-collapse USTC separation, and reserve-intervention source-review context.
+Added a UST reserve-intervention context entry that is explicitly not treated as a normal reserve report or final LFG audit fact.
+Added a registry update entry for UST source-deepening.
+Regulatory and research sources already separate SEC context, failure analysis, and post-collapse lifecycle framing.
 ```
