@@ -1,6 +1,6 @@
 # Stable or Gone Current Specification
 
-Updated: 2026-06-03
+Updated: 2026-06-04
 
 ## 1. Product definition
 
@@ -35,6 +35,7 @@ Current state:
 14 issuer records
 3 event records
 Top 5 records deepened
+USDC source-deepening started
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -164,7 +165,7 @@ Known limitations:
 Current source-deepening sequence:
 
 ```txt
-PR-024A USDC source-deepening
+PR-024A USDC source-deepening — in progress
 PR-024B BUSD source-deepening
 PR-024C UST source-deepening
 PR-024D USDT / DAI source-deepening
@@ -225,7 +226,7 @@ Current event records:
 Top 5 deepened records:
 
 - USDT: reserve/transparency, assurance entry point, redemption terms entry point, multichain unknowns
-- USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, multichain unknowns
+- USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, specific January 2026 reserve examination report, redemption access entry point, selected Ethereum/Base/Solana contract references, remaining multichain unknowns
 - DAI: protocol/collateral disclosure entry point, Sky lifecycle unknowns, redemption-mechanics unknowns
 - UST: collapse event, algorithmic death spiral label, SEC context, post-collapse lifecycle context, LFG reserve unknowns
 - BUSD: Paxos wind-down, exchange support phase-out, reported regulatory follow-up, final redemption unknowns
@@ -249,7 +250,7 @@ Rules:
 
 ## 11. Next implementation focus
 
-Next PR:
+Current PR:
 
 ```txt
 PR-024A USDC source-deepening
@@ -259,4 +260,13 @@ Purpose:
 
 ```txt
 Turn USDC from a strengthened seed record into a more useful dossier by adding source-specific reserve, redemption, recovery, and deployment references where safe.
+```
+
+Current PR-024A progress:
+
+```txt
+Added a concrete Circle USDC reserve examination report source.
+Added Circle contract address documentation as a deployment source.
+Added selected Ethereum, Base, and Solana USDC deployment rows.
+Added a public registry update entry for the USDC source-deepening pass.
 ```
