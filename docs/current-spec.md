@@ -36,7 +36,7 @@ Current state:
 3 event records
 Top 5 records deepened
 USDC source-deepening completed
-BUSD source-deepening started
+BUSD source-deepening completed
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -167,8 +167,8 @@ Current source-deepening sequence:
 
 ```txt
 PR-024A USDC source-deepening — completed
-PR-024B BUSD source-deepening — in progress
-PR-024C UST source-deepening
+PR-024B BUSD source-deepening — completed
+PR-024C UST source-deepening — next
 PR-024D USDT / DAI source-deepening
 ```
 
@@ -251,19 +251,19 @@ Rules:
 
 ## 11. Next implementation focus
 
-Current PR:
+Next PR:
 
 ```txt
-PR-024B BUSD source-deepening
+PR-024C UST source-deepening
 ```
 
 Purpose:
 
 ```txt
-Turn BUSD from a strengthened wind-down record into a more useful dossier by separating Paxos issuer wind-down, redemption/conversion context, exchange support phase-out, reserve/transparency archive context, and reported regulatory follow-up sources.
+Deepen UST collapse context by separating collapse timeline, LFG reserve-intervention context, regulatory context, research analysis, and post-collapse USTC lifecycle notes without treating post-collapse trading as recovered stablecoin status.
 ```
 
-Current PR-024B progress:
+PR-024B completion summary:
 
 ```txt
 Updated BUSD stablecoin record wording for Paxos issuer redemption/conversion and Binance exchange support separation.
