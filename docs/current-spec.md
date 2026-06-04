@@ -37,7 +37,7 @@ Current state:
 Top 5 records deepened
 USDC source-deepening completed
 BUSD source-deepening completed
-UST source-deepening started
+UST source-deepening completed
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -169,8 +169,8 @@ Current source-deepening sequence:
 ```txt
 PR-024A USDC source-deepening — completed
 PR-024B BUSD source-deepening — completed
-PR-024C UST source-deepening — in progress
-PR-024D USDT / DAI source-deepening
+PR-024C UST source-deepening — completed
+PR-024D USDT / DAI source-deepening — next
 ```
 
 Rules for source-deepening:
@@ -252,23 +252,24 @@ Rules:
 
 ## 11. Next implementation focus
 
-Current PR:
+Next PR:
 
 ```txt
-PR-024C UST source-deepening
+PR-024D USDT / DAI source-deepening
 ```
 
 Purpose:
 
 ```txt
-Deepen UST collapse context by separating collapse timeline, LFG reserve-intervention context, regulatory context, research analysis, and post-collapse USTC lifecycle notes without treating post-collapse trading as recovered stablecoin status.
+Deepen USDT reserve/redemption/deployment source entries and DAI collateral/Sky lifecycle/protocol-exit source entries while keeping fiat-backed issuer redemption and protocol-based exits clearly separated.
 ```
 
-Current PR-024C progress:
+PR-024C completion summary:
 
 ```txt
 Updated UST stablecoin record wording for failed status, no redemption path, post-collapse USTC separation, and reserve-intervention source-review context.
 Added a UST reserve-intervention context entry that is explicitly not treated as a normal reserve report or final LFG audit fact.
+Updated UST known unknowns for collapse timeline, LFG reserve flow, and post-collapse USTC lifecycle separation.
 Added a registry update entry for UST source-deepening.
 Regulatory and research sources already separate SEC context, failure analysis, and post-collapse lifecycle framing.
 ```
