@@ -40,7 +40,7 @@ Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
 Pre-promotion QA checklist added
-Public deploy confirmed by site owner
+Public deploy confirmed
 ```
 
 QA checklist:
