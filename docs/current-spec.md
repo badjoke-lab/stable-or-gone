@@ -35,7 +35,7 @@ Current state:
 14 issuer records
 3 event records
 Top 5 records deepened
-USDC source-deepening started
+USDC source-deepening completed
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
@@ -165,8 +165,8 @@ Known limitations:
 Current source-deepening sequence:
 
 ```txt
-PR-024A USDC source-deepening — in progress
-PR-024B BUSD source-deepening
+PR-024A USDC source-deepening — completed
+PR-024B BUSD source-deepening — next
 PR-024C UST source-deepening
 PR-024D USDT / DAI source-deepening
 ```
@@ -250,23 +250,24 @@ Rules:
 
 ## 11. Next implementation focus
 
-Current PR:
+Next PR:
 
 ```txt
-PR-024A USDC source-deepening
+PR-024B BUSD source-deepening
 ```
 
 Purpose:
 
 ```txt
-Turn USDC from a strengthened seed record into a more useful dossier by adding source-specific reserve, redemption, recovery, and deployment references where safe.
+Turn BUSD from a strengthened wind-down record into a more useful dossier by separating Paxos issuer wind-down, redemption-window context, exchange support phase-out, and regulatory follow-up sources.
 ```
 
-Current PR-024A progress:
+PR-024A completion summary:
 
 ```txt
 Added a concrete Circle USDC reserve examination report source.
 Added Circle contract address documentation as a deployment source.
 Added selected Ethereum, Base, and Solana USDC deployment rows.
-Added a public registry update entry for the USDC source-deepening pass.
+Updated USDC redemption-access wording from Circle source context.
+Updated USDC event and registry update notes.
 ```
