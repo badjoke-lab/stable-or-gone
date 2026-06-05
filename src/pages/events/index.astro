@@ -13,8 +13,19 @@ type EventRow = {
 };
 
 const events = eventsData as EventRow[];
+const title = 'Stablecoin Event Log — Stable or Gone';
+const description = 'Browse stablecoin depeg events, wind-downs, collapses, reserve interventions, regulatory context, recovery status, and source-backed event records.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: 'https://sog.badjoke-lab.com/events/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin depeg events', 'stablecoin collapse', 'stablecoin wind-down', 'stablecoin regulatory context']
+};
 ---
-<BaseLayout title="Events — Stable or Gone">
+<BaseLayout title={title} description={description} canonicalPath="/events/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; tail /events/depeg.log</div>
@@ -25,6 +36,12 @@ const events = eventsData as EventRow[];
       <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
       <div class="stat"><span>Mode</span><strong>v0</strong></div>
     </div>
+  </section>
+
+  <section class="section-grid" aria-label="Event guide links">
+    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>What is a depeg?</h2><p>How SOG separates recovered depegs, major depegs, and collapse outcomes.</p></a>
+    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status vs event</h2><p>Why an event record is not always the same thing as failed status.</p></a>
+    <a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin registry</h2><p>Open the entity records linked to these event records.</p></a>
   </section>
 
   <section class="panel registry">
