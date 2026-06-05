@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const title = 'Stable or Gone Methodology — Stablecoin Registry Rules';
+const description = 'Stable or Gone methodology for stablecoin status labels, depeg handling, reserve references, evidence coverage, visible known unknowns, and source-backed registry updates.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  url: 'https://sog.badjoke-lab.com/methodology/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin methodology', 'stablecoin status labels', 'depeg handling', 'reserve disclosure']
+};
 ---
-<BaseLayout title="Methodology — Stable or Gone">
+<BaseLayout title={title} description={description} canonicalPath="/methodology/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; open methodology</div>
@@ -15,9 +26,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <section class="section-grid">
-    <div class="panel mini-card"><h2>Status</h2><p>Status labels describe registry state. Event records describe what happened.</p></div>
-    <div class="panel mini-card"><h2>Events</h2><p>Material events are kept separate from stablecoin status to avoid overstatement.</p></div>
-    <div class="panel mini-card"><h2>Sources</h2><p>Claims should be backed by public sources where possible.</p></div>
+    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status</h2><p>Status labels describe registry state. Event records describe what happened.</p></a>
+    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Events</h2><p>Material events are kept separate from stablecoin status to avoid overstatement.</p></a>
+    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Sources</h2><p>Claims should be backed by public sources where possible.</p></a>
   </section>
 
   <section class="panel registry">
