@@ -9,31 +9,7 @@ import knownUnknownsData from '../../../data/known-unknowns.json';
 import regulatoryNotesData from '../../../data/regulatory-notes.json';
 import deploymentsData from '../../../data/deployments.json';
 
-type StablecoinRow = {
-  id: string;
-  slug: string;
-  name: string;
-  summary?: string;
-  symbol?: string;
-  status?: string;
-  peg_asset?: string;
-  collateral_model?: string;
-  issuer_id?: string;
-  reserve_disclosure_status?: string;
-  redemption_status?: string;
-  who_can_redeem?: string;
-  retail_redemption?: string;
-  institutional_redemption?: string;
-  minimum_redemption?: string;
-  redemption_region_notes?: string;
-  redemption_notes?: string;
-  launch_date?: string;
-  discontinued_date?: string | null;
-  confidence?: string;
-  last_verified_at?: string;
-  notes?: string;
-};
-
+type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; };
 type IssuerRow = { id: string; slug: string; name: string; jurisdiction?: string; issuer_type?: string };
 type EventRow = { id: string; stablecoin_id: string; title: string; event_type?: string; event_date?: string; impact_level?: string; recovered?: boolean | null; failure_mechanism?: string };
 type EvidenceRow = { id: string; stablecoin_id: string; event_id?: string | null; source_type?: string; title: string; url: string; publisher?: string; claim_scope?: string; reliability?: string };
@@ -41,7 +17,6 @@ type ReserveReportRow = { id: string; stablecoin_id: string; report_date?: strin
 type KnownUnknownRow = { id: string; stablecoin_id: string; topic: string; description: string; severity?: string; last_checked_at?: string };
 type RegulatoryNoteRow = { id: string; stablecoin_id: string; issuer_id?: string; event_id?: string | null; note_date?: string; title: string; jurisdiction?: string; authority_or_source?: string; note_type?: string; summary: string; source_url: string; confidence?: string; notes?: string };
 type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; contract_address?: string; status: string; notes?: string; evidence_ids?: string[] };
-type LifecycleRow = { date: string; stage: string; title: string; detail: string; href?: string };
 
 export function getStaticPaths() {
   return (stablecoinsData as StablecoinRow[]).map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
@@ -56,34 +31,26 @@ const knownUnknowns = (knownUnknownsData as KnownUnknownRow[]).filter((item) => 
 const regulatoryNotes = (regulatoryNotesData as RegulatoryNoteRow[]).filter((item) => item.stablecoin_id === coin.id);
 const deployments = (deploymentsData as DeploymentRow[]).filter((item) => item.stablecoin_id === coin.id);
 const statusClass = `chip ${coin.status ?? 'unknown'}`;
-
-const evidenceCount = (types: string[]) => evidence.filter((source) => source.source_type && types.includes(source.source_type)).length;
+const title = `${coin.name} (${coin.symbol ?? coin.slug}) stablecoin record — Stable or Gone`;
+const description = `${coin.name} stablecoin history record: status, issuer, peg asset, reserve disclosure, redemption context, events, evidence, known unknowns, and lifecycle notes.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: `${coin.name} stablecoin history record`,
+  url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`,
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  keywords: [coin.name, coin.symbol, coin.status, coin.peg_asset, coin.collateral_model].filter(Boolean)
+};
 const coverageRows = [
-  { label: 'Issuer source', count: evidenceCount(['issuer_statement', 'issuer_blog', 'issuer_social']) },
-  { label: 'Reserve reference', count: reserveReports.length + evidenceCount(['reserve_report', 'attestation_report']) },
-  { label: 'Market data', count: evidenceCount(['market_data']) },
-  { label: 'Regulatory source', count: regulatoryNotes.length + evidenceCount(['regulatory_document']) },
-  { label: 'Deployment / contract', count: deployments.length },
-  { label: 'Exchange notice', count: evidenceCount(['exchange_notice']) },
-  { label: 'News / analysis', count: evidenceCount(['news_article']) },
-  { label: 'Archive capture', count: evidenceCount(['archive_capture']) },
-  { label: 'Other source', count: evidence.filter((source) => !source.source_type || source.source_type === 'other' || source.source_type === 'database_reference' || source.source_type === 'protocol_forum' || source.source_type === 'governance_post').length }
+  { label: 'Evidence records', count: evidence.length },
+  { label: 'Reserve references', count: reserveReports.length },
+  { label: 'Regulatory notes', count: regulatoryNotes.length },
+  { label: 'Deployment notes', count: deployments.length },
+  { label: 'Known unknowns', count: knownUnknowns.length }
 ];
-
-const lifecycleRows: LifecycleRow[] = [
-  ...(coin.launch_date ? [{ date: coin.launch_date, stage: 'launched', title: `${coin.name} launch`, detail: 'Launch date recorded on the stablecoin entity.' }] : []),
-  ...events.map((event) => ({
-    date: event.event_date ?? 'unknown',
-    stage: event.event_type ?? 'event',
-    title: event.title,
-    detail: event.recovered === true ? 'Event recorded as recovered.' : event.recovered === false ? 'Event recorded as not recovered.' : 'Event recorded in the registry timeline.',
-    href: `/event/${event.id}/`
-  })),
-  ...(coin.discontinued_date ? [{ date: coin.discontinued_date, stage: coin.status ?? 'discontinued', title: `${coin.name} discontinued status`, detail: 'Discontinued date is recorded on the stablecoin entity.' }] : []),
-  { date: coin.last_verified_at ?? 'unknown', stage: 'current_status', title: `Current registry status: ${coin.status ?? 'unknown'}`, detail: 'This is the current SOG registry label, not a safety score.' }
-].sort((a, b) => a.date.localeCompare(b.date));
 ---
-<BaseLayout title={`${coin.name} — Stable or Gone`}>
+<BaseLayout title={title} description={description} canonicalPath={`/stablecoin/${coin.slug}/`} jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; open stablecoin/{coin.slug}</div>
@@ -106,102 +73,39 @@ const lifecycleRows: LifecycleRow[] = [
       <tr><th>Issuer</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : (coin.issuer_id ?? '—')}</td></tr>
       <tr><th>Reserve disclosure</th><td>{coin.reserve_disclosure_status ?? '—'}</td></tr>
       <tr><th>Redemption status</th><td>{coin.redemption_status ?? '—'}</td></tr>
-      <tr><th>Launch date</th><td>{coin.launch_date ?? '—'}</td></tr>
-      <tr><th>Discontinued date</th><td>{coin.discontinued_date ?? '—'}</td></tr>
-      <tr><th>Confidence</th><td>{coin.confidence ?? '—'}</td></tr>
       <tr><th>Last verified</th><td>{coin.last_verified_at ?? '—'}</td></tr>
     </tbody></table>
   </section>
 
-  <section class="section-grid">
-    <div class="panel mini-card"><h2>Issuer dossier</h2><p>{issuer ? `${issuer.name} · ${issuer.issuer_type ?? 'unknown'} · ${issuer.jurisdiction ?? 'jurisdiction unknown'}` : 'Issuer record pending.'}</p></div>
-    <div class="panel mini-card"><h2>Reserve reports</h2><p>{reserveReports.length} seed reserve disclosure reference(s) linked to this record.</p></div>
-    <div class="panel mini-card"><h2>Known unknowns</h2><p>{knownUnknowns.length} visible uncertainty item(s) kept for later review.</p></div>
+  <section class="section-grid" aria-label="Related record links">
+    <a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin registry</h2><p>Compare this record with other active, discontinued, failed, migrated, and limited stablecoins.</p></a>
+    {issuer && <a class="panel mini-card" href={`/issuer/${issuer.slug}/`}><h2>Issuer dossier</h2><p>{issuer.name} · {issuer.issuer_type ?? 'issuer'} · {issuer.jurisdiction ?? 'jurisdiction unknown'}</p></a>}
+    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status vs event</h2><p>Understand why status labels and historical events are kept separate.</p></a>
   </section>
 
-  <section class="panel registry">
-    <div class="bar">redemption access — issuer redemption, not secondary-market trading</div>
-    <table><tbody>
-      <tr><th>Status</th><td>{coin.redemption_status ?? '—'}</td></tr>
-      <tr><th>Who can redeem</th><td>{coin.who_can_redeem ?? 'Source review needed.'}</td></tr>
-      <tr><th>Retail redemption</th><td>{coin.retail_redemption ?? 'source_review_needed'}</td></tr>
-      <tr><th>Institutional redemption</th><td>{coin.institutional_redemption ?? 'source_review_needed'}</td></tr>
-      <tr><th>Minimum redemption</th><td>{coin.minimum_redemption ?? 'source_review_needed'}</td></tr>
-      <tr><th>Region / access notes</th><td>{coin.redemption_region_notes ?? 'Source review needed.'}</td></tr>
-      <tr><th>Registry note</th><td>{coin.redemption_notes ?? 'SOG separates issuer redemption from exchange trading and market liquidity.'}</td></tr>
-    </tbody></table>
-  </section>
+  <section class="panel registry"><div class="bar">redemption access — issuer redemption, not secondary-market trading</div><table><tbody>
+    <tr><th>Status</th><td>{coin.redemption_status ?? '—'}</td></tr>
+    <tr><th>Who can redeem</th><td>{coin.who_can_redeem ?? 'Source review needed.'}</td></tr>
+    <tr><th>Retail redemption</th><td>{coin.retail_redemption ?? 'source_review_needed'}</td></tr>
+    <tr><th>Institutional redemption</th><td>{coin.institutional_redemption ?? 'source_review_needed'}</td></tr>
+    <tr><th>Minimum redemption</th><td>{coin.minimum_redemption ?? 'source_review_needed'}</td></tr>
+    <tr><th>Region / access notes</th><td>{coin.redemption_region_notes ?? 'Source review needed.'}</td></tr>
+    <tr><th>Registry note</th><td>{coin.redemption_notes ?? 'SOG separates issuer redemption from exchange trading and market liquidity.'}</td></tr>
+  </tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">regulatory / official context — source-backed notes, not legal advice</div>
-    <table>
-      <thead><tr><th>Date</th><th>Title</th><th>Source</th><th>Type</th><th>Summary</th></tr></thead>
-      <tbody>{regulatoryNotes.length === 0 ? <tr><td colspan="5">No regulatory notes recorded yet.</td></tr> : regulatoryNotes.map((note) => (<tr><td>{note.note_date ?? '—'}</td><td><a href={note.source_url}>{note.title}</a></td><td>{note.authority_or_source ?? '—'}</td><td>{note.note_type ?? '—'}</td><td>{note.summary}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">evidence coverage summary — source coverage, not a safety score</div><table><thead><tr><th>Coverage type</th><th>Count</th></tr></thead><tbody>{coverageRows.map((row) => (<tr><td>{row.label}</td><td>{row.count}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">deployment / contract data — static registry notes, not live chain monitoring</div>
-    <table>
-      <thead><tr><th>Chain</th><th>Deployment type</th><th>Status</th><th>Contract</th><th>Notes</th></tr></thead>
-      <tbody>{deployments.length === 0 ? <tr><td colspan="5">No deployment records yet.</td></tr> : deployments.map((deployment) => (<tr><td>{deployment.chain}</td><td>{deployment.deployment_type}</td><td>{deployment.status}</td><td>{deployment.contract_address ?? 'source_review_needed'}</td><td>{deployment.notes ?? '—'}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">event timeline</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="5">No event records yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{event.event_type ?? '—'}</td><td>{event.impact_level ?? '—'}</td><td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">evidence coverage summary — source coverage, not a safety score</div>
-    <table>
-      <thead><tr><th>Coverage type</th><th>Count</th><th>Meaning</th></tr></thead>
-      <tbody>{coverageRows.map((row) => (<tr><td>{row.label}</td><td>{row.count}</td><td>{row.count > 0 ? 'Source-backed reference present in this record.' : 'No source of this type is linked yet.'}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">reserve / attestation history</div><table><thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Asset categories</th><th>Confidence</th></tr></thead><tbody>{reserveReports.length === 0 ? <tr><td colspan="5">No reserve report records yet.</td></tr> : reserveReports.map((report) => (<tr><td>{report.report_date ?? '—'}</td><td>{report.url ? <a href={report.url}>{report.publisher ?? 'source'}</a> : (report.publisher ?? '—')}</td><td>{report.report_type ?? '—'}</td><td>{report.asset_categories?.join(', ') ?? '—'}</td><td>{report.confidence ?? '—'}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">lifecycle — event-derived registry timeline</div>
-    <table>
-      <thead><tr><th>Date</th><th>Stage</th><th>Record</th><th>Detail</th></tr></thead>
-      <tbody>{lifecycleRows.map((row) => (<tr><td>{row.date}</td><td>{row.stage}</td><td>{row.href ? <a href={row.href}>{row.title}</a> : row.title}</td><td>{row.detail}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">regulatory / official context — source-backed notes, not legal advice</div><table><thead><tr><th>Date</th><th>Title</th><th>Source</th><th>Type</th><th>Summary</th></tr></thead><tbody>{regulatoryNotes.length === 0 ? <tr><td colspan="5">No regulatory notes recorded yet.</td></tr> : regulatoryNotes.map((note) => (<tr><td>{note.note_date ?? '—'}</td><td><a href={note.source_url}>{note.title}</a></td><td>{note.authority_or_source ?? '—'}</td><td>{note.note_type ?? '—'}</td><td>{note.summary}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">event timeline</div>
-    <table>
-      <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Mechanism</th></tr></thead>
-      <tbody>{events.length === 0 ? <tr><td colspan="6">No event records yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{event.event_type ?? '—'}</td><td>{event.impact_level ?? '—'}</td><td>{event.recovered === true ? 'yes' : event.recovered === false ? 'no' : '—'}</td><td>{event.failure_mechanism ?? '—'}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">deployment / contract data — static registry notes, not live chain monitoring</div><table><thead><tr><th>Chain</th><th>Deployment type</th><th>Status</th><th>Contract</th><th>Notes</th></tr></thead><tbody>{deployments.length === 0 ? <tr><td colspan="5">No deployment records yet.</td></tr> : deployments.map((deployment) => (<tr><td>{deployment.chain}</td><td>{deployment.deployment_type}</td><td>{deployment.status}</td><td>{deployment.contract_address ?? 'source_review_needed'}</td><td>{deployment.notes ?? '—'}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">reserve / attestation history</div>
-    <table>
-      <thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Asset categories</th><th>Confidence</th></tr></thead>
-      <tbody>{reserveReports.length === 0 ? <tr><td colspan="5">No reserve report records yet.</td></tr> : reserveReports.map((report) => (<tr><td>{report.report_date ?? '—'}</td><td>{report.url ? <a href={report.url}>{report.publisher ?? 'source'}</a> : (report.publisher ?? '—')}</td><td>{report.report_type ?? '—'}</td><td>{report.asset_categories?.join(', ') ?? '—'}</td><td>{report.confidence ?? '—'}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">evidence records</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Claim scope</th><th>Reliability</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="5">No evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{source.source_type ?? '—'}</td><td>{source.claim_scope ?? '—'}</td><td>{source.reliability ?? '—'}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">evidence records</div>
-    <table>
-      <thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Claim scope</th><th>Reliability</th></tr></thead>
-      <tbody>{evidence.length === 0 ? <tr><td colspan="5">No evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{source.source_type ?? '—'}</td><td>{source.claim_scope ?? '—'}</td><td>{source.reliability ?? '—'}</td></tr>))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">known unknowns</div><table><thead><tr><th>Topic</th><th>Description</th><th>Severity</th><th>Last checked</th></tr></thead><tbody>{knownUnknowns.length === 0 ? <tr><td colspan="4">No known unknowns recorded.</td></tr> : knownUnknowns.map((item) => (<tr><td>{item.topic}</td><td>{item.description}</td><td>{item.severity ?? '—'}</td><td>{item.last_checked_at ?? '—'}</td></tr>))}</tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">known unknowns</div>
-    <table>
-      <thead><tr><th>Topic</th><th>Description</th><th>Severity</th><th>Last checked</th></tr></thead>
-      <tbody>{knownUnknowns.length === 0 ? <tr><td colspan="4">No known unknowns recorded.</td></tr> : knownUnknowns.map((item) => (<tr><td>{item.topic}</td><td>{item.description}</td><td>{item.severity ?? '—'}</td><td>{item.last_checked_at ?? '—'}</td></tr>))}</tbody>
-    </table>
-  </section>
-
-  <section class="panel report-box">
-    <h2>Report this entry</h2>
-    <p>Use GitHub Issues for public, source-backed corrections. Google Form support will be added later.</p>
-    <div class="report-actions">
-      <a data-primary="true" href={`https://github.com/badjoke-lab/stable-or-gone/issues/new/choose`}>Open report template</a>
-      <a href="/contact/">Contact options</a>
-    </div>
-  </section>
+  <section class="panel report-box"><h2>Report this entry</h2><p>Use GitHub Issues for public, source-backed corrections. Google Form support will be added later.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Open report template</a><a href="/contact/">Contact options</a></div></section>
 </BaseLayout>
