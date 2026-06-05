@@ -5,44 +5,10 @@ import stablecoinsData from '../../../data/stablecoins.json';
 import eventsData from '../../../data/events.json';
 import evidenceData from '../../../data/evidence.json';
 
-type IssuerRow = {
-  id: string;
-  slug: string;
-  name: string;
-  summary?: string;
-  issuer_type?: string;
-  jurisdiction?: string;
-  related_stablecoins?: string[];
-  official_url?: string;
-  confidence?: string;
-  last_verified_at?: string;
-  notes?: string;
-};
-
-type StablecoinRow = {
-  id: string;
-  slug: string;
-  name: string;
-  symbol?: string;
-  status?: string;
-  issuer_id?: string;
-};
-
-type EventRow = {
-  id: string;
-  issuer_id?: string;
-  title: string;
-  event_type?: string;
-  event_date?: string;
-};
-
-type EvidenceRow = {
-  id: string;
-  issuer_id?: string;
-  title: string;
-  url: string;
-  source_type?: string;
-};
+type IssuerRow = { id: string; slug: string; name: string; summary?: string; issuer_type?: string; jurisdiction?: string; related_stablecoins?: string[]; official_url?: string; confidence?: string; last_verified_at?: string; notes?: string; };
+type StablecoinRow = { id: string; slug: string; name: string; symbol?: string; status?: string; issuer_id?: string; };
+type EventRow = { id: string; issuer_id?: string; title: string; event_type?: string; event_date?: string; };
+type EvidenceRow = { id: string; issuer_id?: string; title: string; url: string; source_type?: string; };
 
 export function getStaticPaths() {
   return (issuersData as IssuerRow[]).map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
@@ -52,8 +18,19 @@ const { issuer } = Astro.props as { issuer: IssuerRow };
 const stablecoins = (stablecoinsData as StablecoinRow[]).filter((coin) => coin.issuer_id === issuer.id);
 const events = (eventsData as EventRow[]).filter((event) => event.issuer_id === issuer.id);
 const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.issuer_id === issuer.id);
+const title = `${issuer.name} stablecoin issuer file — Stable or Gone`;
+const description = issuer.summary || `${issuer.name} issuer and protocol file covering related stablecoins, jurisdiction, source-backed evidence, events, confidence, and lifecycle context.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: issuer.name,
+  url: issuer.official_url || `https://sog.badjoke-lab.com/issuer/${issuer.slug}/`,
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  sameAs: issuer.official_url ? [issuer.official_url] : undefined
+};
 ---
-<BaseLayout title={`${issuer.name} — Stable or Gone`}>
+<BaseLayout title={title} description={description} canonicalPath={`/issuer/${issuer.slug}/`} jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; open issuer/{issuer.slug}</div>
@@ -65,6 +42,13 @@ const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.issue
       <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
     </div>
   </section>
+
+  <section class="section-grid" aria-label="Related issuer links">
+    <a class="panel mini-card" href="/issuers/"><h2>Issuer index</h2><p>Browse company, protocol, and issuer files across the registry.</p></a>
+    <a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin registry</h2><p>Open the stablecoin records linked to issuer and protocol files.</p></a>
+    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reserve disclosure</h2><p>Read how issuer disclosures, reserve references, and protocol collateral are separated.</p></a>
+  </section>
+
   <section class="panel registry">
     <div class="bar">issuer facts</div>
     <table><tbody>
@@ -75,56 +59,8 @@ const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.issue
       <tr><th>Last verified</th><td>{issuer.last_verified_at ?? '—'}</td></tr>
     </tbody></table>
   </section>
-  <section class="panel registry">
-    <div class="bar">related stablecoins</div>
-    <table>
-      <thead><tr><th>Name</th><th>Symbol</th><th>Status</th></tr></thead>
-      <tbody>
-        {stablecoins.length === 0 ? <tr><td colspan="3">No related stablecoin records yet.</td></tr> : stablecoins.map((coin) => (
-          <tr>
-            <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
-            <td>{coin.symbol ?? '—'}</td>
-            <td>{coin.status ?? 'unknown'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </section>
-  <section class="panel registry">
-    <div class="bar">issuer events</div>
-    <table>
-      <thead><tr><th>Date</th><th>Event</th><th>Type</th></tr></thead>
-      <tbody>
-        {events.length === 0 ? <tr><td colspan="3">No issuer-linked events yet.</td></tr> : events.map((event) => (
-          <tr>
-            <td>{event.event_date ?? '—'}</td>
-            <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
-            <td>{event.event_type ?? '—'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </section>
-  <section class="panel registry">
-    <div class="bar">evidence references</div>
-    <table>
-      <thead><tr><th>Source</th><th>Type</th></tr></thead>
-      <tbody>
-        {evidence.length === 0 ? <tr><td colspan="2">No evidence records yet.</td></tr> : evidence.map((source) => (
-          <tr>
-            <td><a href={source.url}>{source.title}</a></td>
-            <td>{source.source_type ?? '—'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </section>
-  <section class="panel report-box">
-    <h2>Report this issuer</h2>
-    <p>Use GitHub Issues for public, source-backed issuer corrections. Google Form support will be added later.</p>
-    <div class="report-actions">
-      <a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Open report template</a>
-      <a href="/contact/">Contact options</a>
-    </div>
-  </section>
+  <section class="panel registry"><div class="bar">related stablecoins</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Status</th></tr></thead><tbody>{stablecoins.length === 0 ? <tr><td colspan="3">No related stablecoin records yet.</td></tr> : stablecoins.map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.status ?? 'unknown'}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">issuer events</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="3">No issuer-linked events yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{event.event_type ?? '—'}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">evidence references</div><table><thead><tr><th>Source</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="2">No evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.source_type ?? '—'}</td></tr>))}</tbody></table></section>
+  <section class="panel report-box"><h2>Report this issuer</h2><p>Use GitHub Issues for public, source-backed issuer corrections. Google Form support will be added later.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Open report template</a><a href="/contact/">Contact options</a></div></section>
 </BaseLayout>
