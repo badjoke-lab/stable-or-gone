@@ -1,13 +1,34 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+const title = 'What is a Stablecoin Depeg? — Stable or Gone Guide';
+const description = 'A plain-language guide to stablecoin depeg events, recovered depegs, major depegs, collapse outcomes, and how SOG separates events from failed status.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What is a Stablecoin Depeg?',
+  description,
+  url: 'https://sog.badjoke-lab.com/guides/what-is-a-depeg/',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin depeg', 'stablecoin collapse', 'stablecoin event history']
+};
 ---
-<BaseLayout title="What is a Depeg? — Stable or Gone" description="How Stable or Gone records depeg events without turning every small peg movement into a failure label.">
+<BaseLayout title={title} description={description} canonicalPath="/guides/what-is-a-depeg/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; guide --depeg</div>
       <h1>What is a Depeg?</h1>
       <p>A depeg is a material deviation from a stablecoin's target peg. In SOG, a depeg is an event, not a status label by itself.</p>
     </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">plain-language definition</div>
+    <p>
+      A stablecoin depeg happens when a token designed to track a reference asset, usually USD, trades or redeems away from that target in a way that is historically relevant. SOG does not treat every tiny price movement as a recordable event. The registry focuses on events with source-backed context: issuer statements, exchange notices, reserve disclosures, regulatory records, research sources, or widely documented market stress.
+    </p>
+    <p>
+      The key distinction is outcome. A stablecoin can experience a depeg and later recover, as recorded for <a href="/stablecoin/usdc/">USDC</a>. Another stablecoin can lose peg and fail as a functioning stablecoin, as recorded for <a href="/stablecoin/ust/">UST / TerraUSD</a>. Those outcomes should not be collapsed into the same label.
+    </p>
   </section>
 
   <section class="panel registry">
@@ -27,6 +48,12 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       <tr><th>Failed status</th><td>Failed status is used only when the lifecycle and evidence support that outcome, such as UST after the May 2022 collapse.</td></tr>
       <tr><th>No live price feed</th><td>SOG does not try to be a live peg monitor. Historical price values should be source-specific when used.</td></tr>
     </tbody></table>
+  </section>
+
+  <section class="section-grid" aria-label="Related records">
+    <a class="panel mini-card" href="/event/sog_ev_usdc_2023_03_depeg/"><h2>USDC March 2023 depeg</h2><p>Recovered depeg event with banking exposure context.</p></a>
+    <a class="panel mini-card" href="/event/sog_ev_ust_2022_05_collapse/"><h2>UST collapse</h2><p>Failed lifecycle outcome, separated from post-collapse USTC trading.</p></a>
+    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status vs Event</h2><p>Why depeg is an event and failed is a lifecycle status.</p></a>
   </section>
 
   <section class="panel registry">
