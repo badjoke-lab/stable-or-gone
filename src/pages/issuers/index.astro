@@ -12,8 +12,19 @@ type IssuerRow = {
 };
 
 const issuers = issuersData as IssuerRow[];
+const title = 'Stablecoin Issuers and Protocols — Stable or Gone';
+const description = 'Browse stablecoin issuer, protocol, company, jurisdiction, related stablecoin, confidence, and evidence context records in Stable or Gone.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: 'https://sog.badjoke-lab.com/issuers/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin issuers', 'stablecoin protocols', 'reserve disclosure', 'issuer lifecycle history']
+};
 ---
-<BaseLayout title="Stablecoin Issuers — Stable or Gone" description="Browse stablecoin issuer and protocol records, including company, jurisdiction, related stablecoins, source confidence, and historical registry context.">
+<BaseLayout title={title} description={description} canonicalPath="/issuers/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; list issuers</div>
@@ -24,6 +35,12 @@ const issuers = issuersData as IssuerRow[];
       <div class="stat"><span>Issuers</span><strong>{issuers.length}</strong></div>
       <div class="stat"><span>Mode</span><strong>v0</strong></div>
     </div>
+  </section>
+
+  <section class="section-grid" aria-label="Issuer guide links">
+    <a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin registry</h2><p>Open stablecoin records connected to issuer and protocol files.</p></a>
+    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reserve disclosure</h2><p>How issuer disclosures, attestations, and protocol collateral sources are handled.</p></a>
+    <a class="panel mini-card" href="/methodology/"><h2>Methodology</h2><p>How SOG separates evidence, events, status labels, and visible uncertainty.</p></a>
   </section>
 
   <section class="panel registry">
