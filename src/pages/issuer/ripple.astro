@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const title = 'Ripple issuer file — Stable or Gone';
+const description = 'Issuer file for Ripple, associated with Ripple USD / RLUSD in the Stable or Gone stablecoin history registry.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ripple', url: 'https://ripple.com/', description };
+---
+<BaseLayout title={title} description={description} canonicalPath="/issuer/ripple/" jsonLd={jsonLd}>
+  <section class="hero"><div class="panel hero-main"><div class="prompt">&gt; open issuer/ripple</div><h1>Ripple</h1><p>Company associated with Ripple USD / RLUSD.</p></div></section>
+  <section class="section-grid"><a class="panel mini-card" href="/stablecoin/rlusd/"><h2>RLUSD</h2><p>Open the Ripple USD stablecoin record.</p></a><a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin registry</h2><p>Return to all stablecoin records.</p></a><a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reserve disclosure</h2><p>How SOG records issuer reserve references.</p></a></section>
+  <section class="panel registry"><div class="bar">issuer facts</div><table><tbody><tr><th>Type</th><td>company</td></tr><tr><th>Jurisdiction</th><td>United States</td></tr><tr><th>Official URL</th><td><a href="https://ripple.com/">https://ripple.com/</a></td></tr><tr><th>Related stablecoin</th><td><a href="/stablecoin/rlusd/">RLUSD</a></td></tr><tr><th>Notes</th><td>PR-026 seed issuer. RLUSD source details need deeper source-backed review.</td></tr></tbody></table></section>
+</BaseLayout>
