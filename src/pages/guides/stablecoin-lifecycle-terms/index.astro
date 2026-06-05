@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+const title = 'Stablecoin Lifecycle Terms — Stable or Gone Guide';
+const description = 'A guide to stablecoin launch, migration, rebrand, wind-down, discontinuation, failure, post-collapse trading, and successor or parallel asset lifecycle terms in Stable or Gone.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  url: 'https://sog.badjoke-lab.com/guides/stablecoin-lifecycle-terms/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin lifecycle', 'stablecoin wind-down', 'stablecoin failure', 'stablecoin migration']
+};
 ---
-<BaseLayout title="Stablecoin Lifecycle Terms — Stable or Gone" description="A guide to launch, migration, rebrand, wind-down, failure, and post-collapse lifecycle terms in SOG.">
+<BaseLayout title={title} description={description} canonicalPath="/guides/stablecoin-lifecycle-terms/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; guide --lifecycle</div>
@@ -11,14 +22,23 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
   </section>
 
   <section class="panel registry">
+    <div class="bar">why lifecycle terms matter</div>
+    <p>
+      Stablecoins do not only move between active and failed. Some keep operating with limits, some stop minting, some enter a planned wind-down, some migrate to a new token or protocol design, and some keep trading after the original stablecoin function has failed. SOG uses lifecycle language to avoid mixing these different outcomes into one vague label.
+    </p>
+  </section>
+
+  <section class="panel registry">
     <div class="bar">terms</div>
     <table><tbody>
       <tr><th>launch</th><td>The initial release or public availability of a stablecoin or protocol asset.</td></tr>
       <tr><th>migration</th><td>A move to a new token, contract, chain, issuer structure, or protocol design.</td></tr>
       <tr><th>rebrand</th><td>A name or brand change that may or may not involve a technical migration.</td></tr>
-      <tr><th>wind-down</th><td>A planned or announced process to end issuance, support, redemption, or exchange availability.</td></tr>
+      <tr><th>wind-down</th><td>A planned or announced process to end issuance, support, redemption, conversion, or exchange availability.</td></tr>
+      <tr><th>discontinued</th><td>A lifecycle state where issuance or support has ended, without necessarily implying a depeg collapse.</td></tr>
       <tr><th>failure</th><td>A severe lifecycle outcome where the stablecoin did not return as a functioning stablecoin.</td></tr>
       <tr><th>post-collapse trading</th><td>Market trading after failure. This is not the same as restored peg or recovered stablecoin status.</td></tr>
+      <tr><th>successor or parallel asset</th><td>A related token or product that may coexist with or replace an earlier stablecoin, such as protocol migration or ecosystem transition context.</td></tr>
     </tbody></table>
   </section>
 
@@ -32,10 +52,16 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
     </tbody></table>
   </section>
 
+  <section class="section-grid" aria-label="Lifecycle examples">
+    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST / TerraUSD</h2><p>Failed lifecycle outcome with post-collapse USTC separated.</p></a>
+    <a class="panel mini-card" href="/stablecoin/busd/"><h2>BUSD</h2><p>Issuer wind-down and discontinued status, not collapse framing.</p></a>
+    <a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI</h2><p>Protocol lifecycle, Sky transition, and successor or parallel asset context.</p></a>
+  </section>
+
   <section class="panel registry">
     <div class="bar">related</div>
     <table><tbody>
-      <tr><th>Read next</th><td><a href="/guides/status-vs-event/">Status vs Event</a> · <a href="/glossary/">Glossary</a> · <a href="/events/">Events</a></td></tr>
+      <tr><th>Read next</th><td><a href="/guides/status-vs-event/">Status vs Event</a> · <a href="/guides/what-is-a-depeg/">What is a Depeg?</a> · <a href="/glossary/">Glossary</a> · <a href="/events/">Events</a></td></tr>
     </tbody></table>
   </section>
 </BaseLayout>
