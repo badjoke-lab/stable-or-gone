@@ -1,6 +1,6 @@
 # Stable or Gone Current Specification
 
-Updated: 2026-06-04
+Updated: 2026-06-05
 
 ## 1. Product definition
 
@@ -44,12 +44,24 @@ Guides and glossary added
 Registry updates page added
 Pre-promotion QA checklist added
 Public deploy confirmed
+SEO-005 page-specific title / description strengthened
+SEO-006 JSON-LD added
+SEO-007 OG image asset added
+SEO-008 internal links / related records strengthened
+SEO-009 guide pages strengthened for search-oriented text
 ```
 
 QA checklist:
 
 ```txt
 docs/pre-promotion-qa.md
+```
+
+Build / validation status:
+
+```txt
+GitHub Actions workflow runs were not found for the checked direct commits.
+npm run validate:data and npm run build still need local or CI confirmation.
 ```
 
 ## 3. Competitive position
@@ -99,6 +111,7 @@ Current public pages:
 /contact/
 /sitemap-index.xml
 /robots.txt
+/og/sog-og.svg
 ```
 
 ## 5. Core data files
@@ -149,7 +162,51 @@ Rules:
 - A recovered depeg does not make a stablecoin failed.
 - Failed status requires source-backed lifecycle/event context, not price movement alone.
 
-## 7. Current limitations
+## 7. Current SEO baseline
+
+Completed SEO work:
+
+```txt
+SEO-005 page-specific title / description strengthened
+SEO-006 JSON-LD added
+SEO-007 OG image asset added
+SEO-008 internal links / related records strengthened
+SEO-009 guide pages strengthened for search-oriented text
+```
+
+Implemented behavior:
+
+- `BaseLayout.astro` supports canonical URL, Open Graph tags, Twitter card tags, OG image URL, and JSON-LD injection.
+- Home, registry/list pages, detail pages, guides, methodology, and updates use page-specific metadata where updated.
+- Stablecoin detail pages expose Dataset JSON-LD.
+- Event detail pages expose Article JSON-LD.
+- Issuer detail pages expose Organization JSON-LD.
+- Guide and methodology pages expose Article JSON-LD.
+- Registry and updates pages expose CollectionPage JSON-LD.
+- Default OG image exists at `/og/sog-og.svg`.
+- Guide pages have stronger explanatory text and internal links to related records.
+
+Representative SEO files:
+
+```txt
+src/layouts/BaseLayout.astro
+public/og/sog-og.svg
+src/pages/index.astro
+src/pages/stablecoins/index.astro
+src/pages/stablecoin/[slug].astro
+src/pages/events/index.astro
+src/pages/event/[id].astro
+src/pages/issuers/index.astro
+src/pages/issuer/[slug].astro
+src/pages/guides/what-is-a-depeg/index.astro
+src/pages/guides/status-vs-event/index.astro
+src/pages/guides/reserve-disclosure-basics/index.astro
+src/pages/guides/stablecoin-lifecycle-terms/index.astro
+src/pages/methodology/index.astro
+src/pages/updates/index.astro
+```
+
+## 8. Current limitations
 
 Known limitations:
 
@@ -162,8 +219,9 @@ Known limitations:
 - regulatory notes exist but are not complete
 - Google Form URL is not inserted yet
 - comparison pages are not implemented yet
+- direct SEO edits still need build confirmation
 
-## 8. Source-deepening plan
+## 9. Source-deepening status
 
 Current source-deepening sequence:
 
@@ -172,7 +230,6 @@ PR-024A USDC source-deepening — completed
 PR-024B BUSD source-deepening — completed
 PR-024C UST source-deepening — completed
 PR-024D USDT / DAI source-deepening — completed
-PR-025 More seed records or comparison pages — next
 ```
 
 Rules for source-deepening:
@@ -184,7 +241,7 @@ Rules for source-deepening:
 - keep issuer redemption, protocol exits, and market exits separate
 - keep known unknowns visible when exact source support is incomplete
 
-## 9. Current records
+## 10. Current records
 
 Current stablecoin records:
 
@@ -235,7 +292,7 @@ Top 5 deepened records:
 - UST: failed status, collapse mechanics, SEC/regulatory context, research analysis, post-collapse USTC lifecycle separation, LFG reserve-intervention source-review area
 - BUSD: Paxos wind-down, issuer redemption/conversion context, exchange support phase-out, transparency archive context, reported regulatory follow-up, final customer-specific terms still source-review needed
 
-## 10. Current UI direction
+## 11. Current UI direction
 
 Design direction:
 
@@ -252,26 +309,39 @@ Rules:
 - status colors should be stable and restrained
 - support route exists but is secondary
 
-## 11. Next implementation focus
+## 12. Next implementation focus
 
 Next PR:
 
 ```txt
-PR-025 More seed records or comparison pages
+PR-025 Build / validation confirmation and SEO QA
+```
+
+Purpose:
+
+```txt
+Confirm that the direct SEO and source-deepening edits build cleanly and that public pages render metadata, OG, JSON-LD, related links, and guide text correctly.
+```
+
+PR-025 checklist:
+
+```txt
+npm run validate:data
+npm run build
+check /og/sog-og.svg
+check canonical / OG / JSON-LD on representative pages
+check guide pages for broken links or thin text
+check stablecoin detail pages for related links and source table rendering
+```
+
+After PR-025:
+
+```txt
+PR-026 More seed records or comparison pages
 ```
 
 Decision point:
 
 ```txt
 Choose whether the next milestone should add more stablecoin seed records, add comparison/reference pages, or deepen issuer pages.
-```
-
-PR-024D completion summary:
-
-```txt
-Updated USDT stablecoin record wording for issuer redemption terms, reserve/transparency context, CFTC historical reserve-representation context, and multichain deployment caution.
-Updated DAI stablecoin record wording for protocol-based exits, Sky/USDS lifecycle context, collateral exposure, and non-issuer-redemption framing.
-Updated USDT and DAI known unknowns for assurance periods, chain coverage, collateral composition, Sky lifecycle, and protocol exit mechanics.
-Added a registry update entry for USDT / DAI source-deepening.
-Updated USDT and DAI reserve/deployment notes to keep incomplete assurance periods, collateral dashboards, and chain coverage visible as source-review areas.
 ```
