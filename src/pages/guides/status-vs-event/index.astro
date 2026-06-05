@@ -1,13 +1,29 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+const title = 'Stablecoin Status vs Event — Stable or Gone Guide';
+const description = 'How Stable or Gone separates stablecoin status labels from historical event records such as depegs, wind-downs, collapses, and lifecycle changes.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  url: 'https://sog.badjoke-lab.com/guides/status-vs-event/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin status', 'stablecoin event records', 'stablecoin lifecycle']
+};
 ---
-<BaseLayout title="Status vs Event — Stable or Gone" description="A guide to how SOG separates stablecoin status labels from historical event records.">
+<BaseLayout title={title} description={description} canonicalPath="/guides/status-vs-event/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; guide --status-vs-event</div>
       <h1>Status vs Event</h1>
       <p>SOG separates current or lifecycle status from historical events. This reduces overstatement and keeps recovered incidents distinct from failed outcomes.</p>
     </div>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">why this matters</div>
+    <p>Stablecoin records are easier to read when lifecycle labels and dated incidents are kept separate. A stablecoin can have a depeg event and later continue operating. Another can enter wind-down, discontinue issuance, migrate, or fail as a lifecycle outcome. SOG keeps those ideas in separate fields.</p>
   </section>
 
   <section class="panel registry">
@@ -37,5 +53,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       <tr><th>Failed status</th><td>Failed status should not be assigned from a price chart alone. It needs lifecycle and source context.</td></tr>
       <tr><th>Visible uncertainty</th><td>If the sources are not enough, SOG uses known unknowns instead of guessing.</td></tr>
     </tbody></table>
+  </section>
+
+  <section class="section-grid" aria-label="Related records">
+    <a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC</h2><p>Recovered depeg event with active status.</p></a>
+    <a class="panel mini-card" href="/stablecoin/busd/"><h2>BUSD</h2><p>Discontinued status through wind-down context.</p></a>
+    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST</h2><p>Failed status tied to collapse context.</p></a>
   </section>
 </BaseLayout>
