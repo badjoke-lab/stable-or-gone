@@ -24,7 +24,7 @@ docs/pre-promotion-qa.md
 
 ## Current milestone
 
-SOG has reached the PR-023 milestone:
+SOG has reached the public v0 hardening and SEO baseline milestone:
 
 ```txt
 15 stablecoin records
@@ -34,6 +34,11 @@ Guides and glossary added
 Registry updates page added
 Pre-promotion QA checklist added
 Public deploy confirmed
+SEO-005 page-specific title / description strengthened
+SEO-006 JSON-LD added
+SEO-007 OG image asset added
+SEO-008 internal links / related records strengthened
+SEO-009 guide pages strengthened for search-oriented text
 ```
 
 Current stablecoin records:
@@ -217,41 +222,58 @@ Completed:
 - moved roadmap to source-deepening phase
 - no blocking public issue was found before PR-024
 
+### PR-024A to PR-024D: Source-deepening pass
+
+Completed:
+
+- PR-024A: USDC source-deepening
+- PR-024B: BUSD source-deepening
+- PR-024C: UST source-deepening
+- PR-024D: USDT / DAI source-deepening
+
+Result:
+
+- USDC reserve, redemption, depeg, and selected deployment sources were strengthened
+- BUSD issuer wind-down, redemption/conversion, exchange support phase-out, and reserve archive context were separated
+- UST failed status, collapse context, LFG reserve-intervention uncertainty, SEC context, and post-collapse USTC lifecycle separation were strengthened
+- USDT issuer reserve/transparency, legal redemption terms, CFTC historical context, and multichain uncertainty were strengthened
+- DAI protocol collateral, Sky lifecycle, and protocol-exit framing were strengthened
+
+### SEO-005 to SEO-009: Public SEO baseline
+
+Completed:
+
+- SEO-005: page-specific title and description strengthened
+- SEO-006: JSON-LD added to layout, home, list pages, detail pages, guides, methodology, and updates
+- SEO-007: default OG image asset added at `public/og/sog-og.svg`
+- SEO-008: internal links and related records strengthened across home, list, detail, issuer, event, and guide pages
+- SEO-009: guide pages strengthened for search-oriented explanatory text
+
+Notes:
+
+- `BaseLayout.astro` now supports canonical URL, Open Graph tags, Twitter card tags, OG image, and JSON-LD injection.
+- Major public pages now provide page-specific metadata instead of relying only on default layout text.
+- Guide pages are now more useful as search landing pages, not just thin reference stubs.
+- GitHub Actions workflow runs were not found for the checked direct commits, so `npm run validate:data` and `npm run build` still need a local or CI confirmation pass.
+
 ## PR-level schedule from here
 
-## PR-024A: USDC source-deepening
+## PR-025: Build / validation confirmation and SEO QA
 
 Goal:
 
-Turn USDC from a strengthened seed record into a more useful dossier.
+Confirm that the direct SEO and source-deepening edits build cleanly and that public pages render metadata, OG, JSON-LD, related links, and guide text correctly.
 
 Scope:
 
-- source-specific reserve report entries
-- clearer March 2023 depeg/recovery source separation
-- redemption/product terms source entries
-- deployment/source notes where safe
-- known unknown cleanup where sources allow
+- run `npm run validate:data`
+- run `npm run build`
+- inspect generated key routes if possible
+- check `/og/sog-og.svg`
+- check canonical / OG / JSON-LD on representative pages
+- check guide pages for overly thin text or broken links
 
-## PR-024B: BUSD source-deepening
-
-Goal:
-
-Deepen BUSD issuer wind-down, redemption, exchange phase-out, and regulatory follow-up context.
-
-## PR-024C: UST source-deepening
-
-Goal:
-
-Deepen UST collapse timeline, LFG reserve intervention context, and post-collapse USTC lifecycle separation.
-
-## PR-024D: USDT / DAI source-deepening
-
-Goal:
-
-Deepen USDT reserve/redemption/deployment source entries and DAI collateral/Sky lifecycle/protocol-exit source entries.
-
-## PR-025: More seed records or comparison pages
+## PR-026: More seed records or comparison pages
 
 Decision point:
 
