@@ -24,8 +24,20 @@ const stablecoinCount = stablecoins.length;
 const issuerCount = issuers.length;
 const eventCount = events.length;
 const evidenceCount = evidence.length;
+
+const title = 'Stable or Gone — Stablecoin History Registry';
+const description = 'Source-backed stablecoin history registry covering depeg events, failed and discontinued stablecoins, issuers, reserve references, redemption context, and known unknowns.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Stable or Gone',
+  url: 'https://sog.badjoke-lab.com/',
+  description,
+  inLanguage: 'en',
+  about: ['stablecoins', 'depeg events', 'reserve disclosure', 'stablecoin lifecycle history']
+};
 ---
-<BaseLayout>
+<BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; open /registry/stablecoins</div>
@@ -55,6 +67,10 @@ const evidenceCount = evidence.length;
     <a class="panel mini-card" href="/issuers/">
       <h2>Issuer Files</h2>
       <p>Issuer, protocol, jurisdiction, reserve disclosure, and related stablecoin references.</p>
+    </a>
+    <a class="panel mini-card" href="/guides/">
+      <h2>Guides</h2>
+      <p>Plain-language guides for depegs, reserve disclosure, status labels, and lifecycle terms.</p>
     </a>
   </section>
 
