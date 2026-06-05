@@ -13,8 +13,19 @@ type UpdateRow = {
 
 const updates = (updatesData as UpdateRow[]).sort((a, b) => b.date.localeCompare(a.date));
 const categoryClass = (category: string) => `chip ${category === 'data' ? 'active' : category === 'foundation' ? 'limited' : 'unknown'}`;
+const title = 'Stable or Gone Registry Updates — Stablecoin Data Changes';
+const description = 'Reviewed updates for Stable or Gone, including stablecoin data batches, source-deepening passes, guide pages, methodology changes, and registry page changes.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: 'https://sog.badjoke-lab.com/updates/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['stablecoin registry updates', 'stablecoin data changes', 'source-deepening updates']
+};
 ---
-<BaseLayout title="Registry Updates — Stable or Gone" description="Short factual updates about changes to the Stable or Gone registry.">
+<BaseLayout title={title} description={description} canonicalPath="/updates/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; tail registry-updates.log</div>
@@ -47,7 +58,8 @@ const categoryClass = (category: string) => `chip ${category === 'data' ? 'activ
   <section class="panel registry">
     <div class="bar">scope</div>
     <table><tbody>
-      <tr><th>Included</th><td>Registry changes, method changes, data batches, and page changes.</td></tr>
+      <tr><th>Included</th><td>Registry changes, method changes, data batches, source-deepening passes, guide updates, and page changes.</td></tr>
+      <tr><th>Boundaries</th><td>No rankings, no recommendations, no safety score, and no live market signals.</td></tr>
       <tr><th>Corrections</th><td>Send source-backed corrections through <a href="/contact/">Contact</a> or GitHub Issues.</td></tr>
     </tbody></table>
   </section>
