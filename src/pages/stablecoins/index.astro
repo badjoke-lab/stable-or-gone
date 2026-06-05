@@ -28,8 +28,18 @@ const statusOptions = uniqueSorted(stablecoins.map((coin) => coin.status));
 const modelOptions = uniqueSorted(stablecoins.map((coin) => coin.collateral_model));
 const pegOptions = uniqueSorted(stablecoins.map((coin) => coin.peg_asset));
 const issuerOptions = uniqueSorted(stablecoins.map((coin) => issuerById.get(coin.issuer_id ?? '')));
+const title = 'Stablecoin Registry — Stable or Gone';
+const description = 'Browse source-backed stablecoin records by status, issuer, peg asset, collateral model, reserve disclosure, and lifecycle context.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Stablecoin Registry',
+  url: 'https://sog.badjoke-lab.com/stablecoins/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
+};
 ---
-<BaseLayout title="Stablecoins — Stable or Gone">
+<BaseLayout title={title} description={description} canonicalPath="/stablecoins/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; list stablecoins --all</div>
@@ -40,6 +50,12 @@ const issuerOptions = uniqueSorted(stablecoins.map((coin) => issuerById.get(coin
       <div class="stat"><span>Records</span><strong>{stablecoins.length}</strong></div>
       <div class="stat"><span>Mode</span><strong>v0</strong></div>
     </div>
+  </section>
+
+  <section class="section-grid" aria-label="Registry guide links">
+    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Depeg guide</h2><p>How SOG separates depeg events from failed lifecycle status.</p></a>
+    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reserve disclosure</h2><p>How issuer disclosures, attestations, protocol collateral, and source gaps are recorded.</p></a>
+    <a class="panel mini-card" href="/updates/"><h2>Registry updates</h2><p>Track reviewed changes to stablecoin records and source-deepening passes.</p></a>
   </section>
 
   <section class="panel registry" data-registry>
