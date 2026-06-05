@@ -30,8 +30,20 @@ const { event } = Astro.props as { event: EventRow };
 const stablecoin = (stablecoinsData as StablecoinRow[]).find((item) => item.id === event.stablecoin_id);
 const issuer = (issuersData as IssuerRow[]).find((item) => item.id === event.issuer_id);
 const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.event_id === event.id);
+const title = `${event.title} — Stablecoin Event Record | Stable or Gone`;
+const description = event.description || `Stablecoin event record for ${event.title}, including linked stablecoin, issuer, event type, impact level, confidence, and source-backed evidence.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: event.title,
+  url: `https://sog.badjoke-lab.com/event/${event.id}/`,
+  description,
+  datePublished: event.event_date,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: [stablecoin?.name, issuer?.name, event.event_type, 'stablecoin event'].filter(Boolean)
+};
 ---
-<BaseLayout title={`${event.title} — Stable or Gone`}>
+<BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; open event/{event.id}</div>
@@ -43,6 +55,13 @@ const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.event
       <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
     </div>
   </section>
+
+  <section class="section-grid" aria-label="Related event links">
+    {stablecoin && <a class="panel mini-card" href={`/stablecoin/${stablecoin.slug}/`}><h2>{stablecoin.name}</h2><p>Open the stablecoin dossier connected to this event.</p></a>}
+    {issuer && <a class="panel mini-card" href={`/issuer/${issuer.slug}/`}><h2>{issuer.name}</h2><p>Open the issuer or protocol file linked to this event.</p></a>}
+    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Depeg guide</h2><p>Understand how SOG separates depeg events, recovered events, and failed outcomes.</p></a>
+  </section>
+
   <section class="panel registry">
     <div class="bar">event facts</div>
     <table><tbody>
