@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExtraRecordTables from '../../components/ExtraRecordTables.astro';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 const coin = (stablecoinsExtraData as any[]).find((item) => item.slug === 'rlusd');
 const title = 'Ripple USD (RLUSD) stablecoin record — Stable or Gone';
@@ -35,4 +36,6 @@ const description = 'Ripple USD / RLUSD stablecoin record in Stable or Gone.';
     <a class="panel mini-card" href="/issuer/ripple/"><h2>Ripple issuer file</h2><p>Open the linked issuer page.</p></a>
     <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reserve disclosure</h2><p>Read how SOG handles source-backed reserve references.</p></a>
   </section>
+
+  <ExtraRecordTables stablecoinId={coin.id} />
 </BaseLayout>
