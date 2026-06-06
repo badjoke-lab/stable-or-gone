@@ -1,0 +1,59 @@
+---
+import evidenceExtraData from '../../data/evidence-extra.json';
+import reserveExtraData from '../../data/reserve-reports-extra.json';
+import deploymentsExtraData from '../../data/deployments-extra.json';
+import unknownsExtraData from '../../data/known-unknowns-extra.json';
+
+const { stablecoinId } = Astro.props as { stablecoinId: string };
+const evidence = (evidenceExtraData as any[]).filter((item) => item.stablecoin_id === stablecoinId);
+const reserves = (reserveExtraData as any[]).filter((item) => item.stablecoin_id === stablecoinId);
+const deployments = (deploymentsExtraData as any[]).filter((item) => item.stablecoin_id === stablecoinId);
+const unknowns = (unknownsExtraData as any[]).filter((item) => item.stablecoin_id === stablecoinId);
+---
+<section class="panel registry">
+  <div class="bar">reserve references</div>
+  <table>
+    <thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Categories</th><th>Notes</th></tr></thead>
+    <tbody>
+      {reserves.length === 0 ? <tr><td colspan="5">No reserve references yet.</td></tr> : reserves.map((row) => (
+        <tr><td>{row.report_date ?? '—'}</td><td>{row.url ? <a href={row.url}>{row.publisher ?? 'source'}</a> : (row.publisher ?? '—')}</td><td>{row.report_type ?? '—'}</td><td>{row.asset_categories?.join(', ') ?? '—'}</td><td>{row.notes ?? '—'}</td></tr>
+      ))}
+    </tbody>
+  </table>
+</section>
+
+<section class="panel registry">
+  <div class="bar">deployment notes</div>
+  <table>
+    <thead><tr><th>Chain</th><th>Type</th><th>Status</th><th>Notes</th></tr></thead>
+    <tbody>
+      {deployments.length === 0 ? <tr><td colspan="4">No deployment notes yet.</td></tr> : deployments.map((row) => (
+        <tr><td>{row.chain ?? '—'}</td><td>{row.deployment_type ?? '—'}</td><td>{row.status ?? '—'}</td><td>{row.notes ?? '—'}</td></tr>
+      ))}
+    </tbody>
+  </table>
+</section>
+
+<section class="panel registry">
+  <div class="bar">evidence records</div>
+  <table>
+    <thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Scope</th></tr></thead>
+    <tbody>
+      {evidence.length === 0 ? <tr><td colspan="4">No evidence records yet.</td></tr> : evidence.map((row) => (
+        <tr><td><a href={row.url}>{row.title}</a></td><td>{row.publisher ?? '—'}</td><td>{row.source_type ?? '—'}</td><td>{row.claim_scope ?? '—'}</td></tr>
+      ))}
+    </tbody>
+  </table>
+</section>
+
+<section class="panel registry">
+  <div class="bar">known unknowns</div>
+  <table>
+    <thead><tr><th>Topic</th><th>Description</th><th>Severity</th></tr></thead>
+    <tbody>
+      {unknowns.length === 0 ? <tr><td colspan="3">No known unknowns recorded.</td></tr> : unknowns.map((row) => (
+        <tr><td>{row.topic}</td><td>{row.description}</td><td>{row.severity ?? '—'}</td></tr>
+      ))}
+    </tbody>
+  </table>
+</section>
