@@ -5,10 +5,9 @@ import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 
 type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; };
 
-const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-
 export function getStaticPaths() {
-  return allStablecoins.map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
+  const records = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
+  return records.map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
 }
 
 const { coin } = Astro.props as { coin: StablecoinRow };
