@@ -1,0 +1,6 @@
+---
+import DetailPage from './[slug].astro';
+import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
+const coin = (stablecoinsExtraData as any[]).find((item) => item.slug === 'rlusd');
+---
+<DetailPage coin={coin} />
