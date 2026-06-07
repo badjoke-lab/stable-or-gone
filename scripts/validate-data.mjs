@@ -11,6 +11,7 @@ function readJsonArray(file) {
     failures.push(`${file}: missing file`);
     return [];
   }
+
   let parsed;
   try {
     parsed = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
@@ -18,55 +19,82 @@ function readJsonArray(file) {
     failures.push(`${file}: invalid JSON (${error.message})`);
     return [];
   }
+
   if (!Array.isArray(parsed)) {
     failures.push(`${file}: expected a JSON array`);
     return [];
   }
-  return parsed;
+
+  return parsed.map((row) => ({ ...row, __source_file: file }));
 }
 
-function requireField(file, row, field) {
+function combine(...files) {
+  return files.flatMap((file) => readJsonArray(file));
+}
+
+function rowLabel(row) {
+  return `${row.__source_file ?? 'unknown file'}: ${row.id ?? row.slug ?? 'unknown row'}`;
+}
+
+function requireField(row, field) {
   if (row[field] === undefined || row[field] === null || row[field] === '') {
-    failures.push(`${file}: ${row.id ?? row.slug ?? 'unknown row'} missing ${field}`);
+    failures.push(`${rowLabel(row)} missing ${field}`);
   }
 }
 
-function unique(file, rows, field) {
-  const seen = new Set();
+function uniqueAcross(label, rows, field) {
+  const seen = new Map();
   for (const row of rows) {
     const value = row[field];
     if (!value) continue;
-    if (seen.has(value)) failures.push(`${file}: duplicate ${field} ${value}`);
-    seen.add(value);
+    if (seen.has(value)) {
+      failures.push(`${label}: duplicate ${field} ${value} in ${seen.get(value)} and ${row.__source_file}`);
+    } else {
+      seen.set(value, row.__source_file);
+    }
   }
 }
 
-const stablecoins = readJsonArray('stablecoins.json');
-const issuers = readJsonArray('issuers.json');
-const events = readJsonArray('events.json');
-const evidence = readJsonArray('evidence.json');
-const reserveReports = readJsonArray('reserve-reports.json');
-const knownUnknowns = readJsonArray('known-unknowns.json');
-const regulatoryNotes = readJsonArray('regulatory-notes.json');
-const deployments = readJsonArray('deployments.json');
+function validateUrl(row, field) {
+  const value = row[field];
+  if (!value) return;
+  try {
+    const parsed = new URL(value);
+    if (!['http:', 'https:'].includes(parsed.protocol)) {
+      failures.push(`${rowLabel(row)} ${field} must use http or https`);
+    }
+  } catch {
+    failures.push(`${rowLabel(row)} has invalid ${field}: ${value}`);
+  }
+}
+
+const stablecoins = combine('stablecoins.json', 'stablecoins-extra.json');
+const issuers = combine('issuers.json', 'issuers-extra.json');
+const events = combine('events.json');
+const evidence = combine('evidence.json', 'evidence-extra.json');
+const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json');
+const knownUnknowns = combine('known-unknowns.json', 'known-unknowns-extra.json');
+const regulatoryNotes = combine('regulatory-notes.json');
+const deployments = combine('deployments.json', 'deployments-extra.json');
 
 for (const row of stablecoins) {
-  requireField('stablecoins.json', row, 'id');
-  requireField('stablecoins.json', row, 'slug');
-  requireField('stablecoins.json', row, 'name');
-  requireField('stablecoins.json', row, 'status');
-  requireField('stablecoins.json', row, 'issuer_id');
+  requireField(row, 'id');
+  requireField(row, 'slug');
+  requireField(row, 'name');
+  requireField(row, 'status');
+  requireField(row, 'issuer_id');
 }
-unique('stablecoins.json', stablecoins, 'id');
-unique('stablecoins.json', stablecoins, 'slug');
+uniqueAcross('stablecoins', stablecoins, 'id');
+uniqueAcross('stablecoins', stablecoins, 'slug');
 
 for (const row of issuers) {
-  requireField('issuers.json', row, 'id');
-  requireField('issuers.json', row, 'slug');
-  requireField('issuers.json', row, 'name');
+  requireField(row, 'id');
+  requireField(row, 'slug');
+  requireField(row, 'name');
+  validateUrl(row, 'official_url');
 }
-unique('issuers.json', issuers, 'id');
-unique('issuers.json', issuers, 'slug');
+uniqueAcross('issuers', issuers, 'id');
+uniqueAcross('issuers', issuers, 'slug');
 
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const issuerIds = new Set(issuers.map((row) => row.id));
@@ -74,68 +102,73 @@ const eventIds = new Set(events.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 
 for (const row of stablecoins) {
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`stablecoins.json: ${row.id} references missing issuer ${row.issuer_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) {
+    failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
+  }
 }
 
 for (const row of events) {
-  requireField('events.json', row, 'id');
-  requireField('events.json', row, 'title');
-  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`events.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`events.json: ${row.id} references missing issuer ${row.issuer_id}`);
+  requireField(row, 'id');
+  requireField(row, 'title');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
 }
-unique('events.json', events, 'id');
+uniqueAcross('events', events, 'id');
 
 for (const row of evidence) {
-  requireField('evidence.json', row, 'id');
-  requireField('evidence.json', row, 'title');
-  requireField('evidence.json', row, 'url');
-  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`evidence.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`evidence.json: ${row.id} references missing issuer ${row.issuer_id}`);
-  if (row.event_id && !eventIds.has(row.event_id)) failures.push(`evidence.json: ${row.id} references missing event ${row.event_id}`);
+  requireField(row, 'id');
+  requireField(row, 'title');
+  requireField(row, 'url');
+  validateUrl(row, 'url');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
+  if (row.event_id && !eventIds.has(row.event_id)) failures.push(`${rowLabel(row)} references missing event ${row.event_id}`);
 }
-unique('evidence.json', evidence, 'id');
+uniqueAcross('evidence', evidence, 'id');
 
 for (const row of reserveReports) {
-  requireField('reserve-reports.json', row, 'id');
-  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`reserve-reports.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`reserve-reports.json: ${row.id} references missing issuer ${row.issuer_id}`);
+  requireField(row, 'id');
+  validateUrl(row, 'url');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
 }
-unique('reserve-reports.json', reserveReports, 'id');
+uniqueAcross('reserve reports', reserveReports, 'id');
 
 for (const row of knownUnknowns) {
-  requireField('known-unknowns.json', row, 'id');
-  requireField('known-unknowns.json', row, 'topic');
-  requireField('known-unknowns.json', row, 'description');
-  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`known-unknowns.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`known-unknowns.json: ${row.id} references missing issuer ${row.issuer_id}`);
+  requireField(row, 'id');
+  requireField(row, 'topic');
+  requireField(row, 'description');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
 }
-unique('known-unknowns.json', knownUnknowns, 'id');
+uniqueAcross('known unknowns', knownUnknowns, 'id');
 
 for (const row of regulatoryNotes) {
-  requireField('regulatory-notes.json', row, 'id');
-  requireField('regulatory-notes.json', row, 'title');
-  requireField('regulatory-notes.json', row, 'summary');
-  requireField('regulatory-notes.json', row, 'source_url');
-  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`regulatory-notes.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`regulatory-notes.json: ${row.id} references missing issuer ${row.issuer_id}`);
-  if (row.event_id && !eventIds.has(row.event_id)) failures.push(`regulatory-notes.json: ${row.id} references missing event ${row.event_id}`);
+  requireField(row, 'id');
+  requireField(row, 'title');
+  requireField(row, 'summary');
+  requireField(row, 'source_url');
+  validateUrl(row, 'source_url');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
+  if (row.event_id && !eventIds.has(row.event_id)) failures.push(`${rowLabel(row)} references missing event ${row.event_id}`);
 }
-unique('regulatory-notes.json', regulatoryNotes, 'id');
+uniqueAcross('regulatory notes', regulatoryNotes, 'id');
 
 for (const row of deployments) {
-  requireField('deployments.json', row, 'id');
-  requireField('deployments.json', row, 'stablecoin_id');
-  requireField('deployments.json', row, 'chain');
-  requireField('deployments.json', row, 'deployment_type');
-  requireField('deployments.json', row, 'status');
-  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`deployments.json: ${row.id} references missing stablecoin ${row.stablecoin_id}`);
+  requireField(row, 'id');
+  requireField(row, 'stablecoin_id');
+  requireField(row, 'chain');
+  requireField(row, 'deployment_type');
+  requireField(row, 'status');
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
   if (Array.isArray(row.evidence_ids)) {
     for (const evidenceId of row.evidence_ids) {
-      if (!evidenceIds.has(evidenceId)) failures.push(`deployments.json: ${row.id} references missing evidence ${evidenceId}`);
+      if (!evidenceIds.has(evidenceId)) failures.push(`${rowLabel(row)} references missing evidence ${evidenceId}`);
     }
   }
 }
-unique('deployments.json', deployments, 'id');
+uniqueAcross('deployments', deployments, 'id');
 
 if (failures.length > 0) {
   console.error('SOG data validation failed:');
@@ -143,4 +176,6 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${regulatoryNotes.length} regulatory notes, ${deployments.length} deployments.`);
+console.log(
+  `SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${reserveReports.length} reserve references, ${knownUnknowns.length} known unknowns, ${regulatoryNotes.length} regulatory notes, ${deployments.length} deployments.`
+);
