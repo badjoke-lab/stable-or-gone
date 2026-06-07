@@ -1,6 +1,6 @@
 # Stable or Gone Current Specification
 
-Updated: 2026-06-05
+Updated: 2026-06-07
 
 ## 1. Product definition
 
@@ -26,43 +26,40 @@ SOG is not:
 
 ## 2. Current public state
 
-SOG is publicly live and confirmed after PR-023.
+SOG is publicly deployed on the official custom domain.
 
 Current state:
 
 ```txt
-15 stablecoin records
-14 issuer records
+20 stablecoin records
+16 issuer records
 3 event records
-Top 5 records deepened
-USDC source-deepening completed
-BUSD source-deepening completed
-UST source-deepening completed
-USDT / DAI source-deepening completed
+59 evidence records
+30 reserve references
+45 known unknowns
+9 regulatory notes
+31 deployments
+Top 5 original records deepened
+PR-026 seed expansion batch 4 added
+PR-028A to PR-028E new 5 records deepened
+PR-031 validator and supplemental data integration completed
 Registry search/filter implemented
 Guides and glossary added
 Registry updates page added
-Pre-promotion QA checklist added
-Public deploy confirmed
-SEO-005 page-specific title / description strengthened
-SEO-006 JSON-LD added
-SEO-007 OG image asset added
-SEO-008 internal links / related records strengthened
-SEO-009 guide pages strengthened for search-oriented text
+SEO-005 to SEO-009 baseline completed
+Public deploy confirmed after PR-031
 ```
 
-QA checklist:
+Build / validation status from the latest confirmed Cloudflare deploy:
 
 ```txt
-docs/pre-promotion-qa.md
+SOG data validation passed: 20 stablecoins, 16 issuers, 3 events, 59 evidence records, 30 reserve references, 45 known unknowns, 9 regulatory notes, 31 deployments.
+astro check: 0 errors, 0 warnings, 1 hint
+astro build: 55 pages built
+Cloudflare Pages deploy: Success
 ```
 
-Build / validation status:
-
-```txt
-GitHub Actions workflow runs were not found for the checked direct commits.
-npm run validate:data and npm run build still need local or CI confirmation.
-```
+The remaining Astro hint is about JSON-LD script inline handling in `BaseLayout.astro`. It is not a build blocker.
 
 ## 3. Competitive position
 
@@ -114,20 +111,39 @@ Current public pages:
 /og/sog-og.svg
 ```
 
+Additional batch 4 records use the same shared detail view as the original records through `/stablecoin/[slug]/`.
+
 ## 5. Core data files
 
 Current data files:
 
 ```txt
 data/stablecoins.json
+data/stablecoins-extra.json
 data/issuers.json
+data/issuers-extra.json
 data/events.json
 data/evidence.json
+data/evidence-extra.json
 data/reserve-reports.json
+data/reserve-reports-extra.json
 data/known-unknowns.json
+data/known-unknowns-extra.json
 data/regulatory-notes.json
 data/deployments.json
+data/deployments-extra.json
 data/registry-updates.json
+```
+
+The `*-extra.json` files are supplemental data layers used during seed expansion and source-deepening. They are now included in:
+
+```txt
+scripts/validate-data.mjs
+/stablecoins/
+/stablecoin/[slug]/
+/issuers/
+/issuer/[slug]/
+/sitemap-index.xml
 ```
 
 Build validation:
@@ -138,7 +154,7 @@ npm run validate:data
 npm run build
 ```
 
-The build should fail on broken JSON, missing required IDs, duplicate IDs/slugs, or broken cross-references covered by the validator.
+The build should fail on broken JSON, missing required IDs, duplicate IDs/slugs, invalid URLs, missing stablecoin references, missing issuer references, missing event references, or missing deployment evidence references covered by the validator.
 
 ## 6. Status labels
 
@@ -194,6 +210,7 @@ public/og/sog-og.svg
 src/pages/index.astro
 src/pages/stablecoins/index.astro
 src/pages/stablecoin/[slug].astro
+src/components/StablecoinDetailView.astro
 src/pages/events/index.astro
 src/pages/event/[id].astro
 src/pages/issuers/index.astro
@@ -210,87 +227,119 @@ src/pages/updates/index.astro
 
 Known limitations:
 
-- 10 records remain mostly shallow seed entries
+- original 10 non-top-5 records remain mostly shallow seed entries
 - source-specific market prices and depeg durations are not yet selected
 - period-level reserve report histories are not complete
-- exact contract addresses and chain-by-chain deployment status are not complete
-- redemption access fields need direct source extraction
+- many contract addresses and chain-by-chain deployment statuses are still source-review areas
+- redemption access fields need more direct source extraction
 - lifecycle map is event-derived, not yet a dedicated lifecycle data model
 - regulatory notes exist but are not complete
 - Google Form URL is not inserted yet
 - comparison pages are not implemented yet
-- direct SEO edits still need build confirmation
+- `*-extra.json` files are functional and validated, but should later be normalized or merged through a safer batch data pipeline
 
 ## 9. Source-deepening status
 
-Current source-deepening sequence:
+Completed source-deepening sequence:
 
 ```txt
 PR-024A USDC source-deepening — completed
 PR-024B BUSD source-deepening — completed
 PR-024C UST source-deepening — completed
 PR-024D USDT / DAI source-deepening — completed
+PR-028A RLUSD source-deepening — completed
+PR-028B EURC source-deepening — completed
+PR-028C USDP source-deepening — completed
+PR-028D USDG source-deepening — completed
+PR-028E USDS source-deepening — completed
 ```
 
 Rules for source-deepening:
 
-- prefer official issuer, regulator, exchange, protocol, or primary documentation sources
+- prefer official issuer, regulator, exchange, protocol, repository, explorer, or primary documentation sources
 - use news/research as context when primary sources are unavailable or when analysis is needed
 - do not display source-specific market lows or durations until a source is selected
 - do not convert evidence coverage into a score
 - keep issuer redemption, protocol exits, and market exits separate
 - keep known unknowns visible when exact source support is incomplete
+- distinguish fiat-backed issuer redemption from protocol/app-based conversion and exit mechanics
+- keep related assets such as sUSDS separate from the base stablecoin record
 
 ## 10. Current records
 
 Current stablecoin records:
 
-- USDT
-- USDC
-- DAI
-- UST / TerraUSD
-- BUSD
-- FRAX
-- TUSD
-- FDUSD
-- PYUSD
-- USDD
-- GUSD
-- LUSD
-- crvUSD
-- USDe
-- sUSD
+```txt
+USDT
+USDC
+DAI
+UST / TerraUSD
+BUSD
+FRAX
+TUSD
+FDUSD
+PYUSD
+USDD
+GUSD
+LUSD
+crvUSD
+USDe
+sUSD
+RLUSD
+EURC
+USDP
+USDG
+USDS
+```
 
 Current issuer records:
 
-- Tether
-- Circle
-- MakerDAO / Sky
-- Terraform Labs
-- Paxos
-- Frax Finance
-- TrueUSD
-- First Digital / FD121
-- TRON DAO Reserve
-- Gemini
-- Liquity
-- Curve Finance
-- Ethena Labs
-- Synthetix
+```txt
+Tether
+Circle
+MakerDAO / Sky
+Terraform Labs
+Paxos
+Frax Finance
+TrueUSD
+First Digital / FD121
+TRON DAO Reserve
+Gemini
+Liquity
+Curve Finance
+Ethena Labs
+Synthetix
+Ripple
+Global Dollar Network
+```
 
 Current event records:
 
-- USDC March 2023 depeg
-- UST May 2022 collapse
-- BUSD wind-down
+```txt
+USDC March 2023 depeg
+UST May 2022 collapse
+BUSD wind-down
+```
 
-Top 5 deepened records:
+Deepened original top 5 records:
 
-- USDT: reserve/transparency, assurance entry point, legal redemption terms, CFTC historical reserve-representation context, multichain unknowns, deployment caveats
-- USDC: March 2023 depeg, SVB exposure, recovery context, reserve reports entry point, specific January 2026 reserve examination report, redemption access entry point, selected Ethereum/Base/Solana contract references, remaining multichain unknowns
-- DAI: protocol/collateral disclosure entry point, Sky/USDS lifecycle unknowns, protocol exit mechanics, collateral/PSM source-review areas, Ethereum protocol-token deployment caveats
-- UST: failed status, collapse mechanics, SEC/regulatory context, research analysis, post-collapse USTC lifecycle separation, LFG reserve-intervention source-review area
-- BUSD: Paxos wind-down, issuer redemption/conversion context, exchange support phase-out, transparency archive context, reported regulatory follow-up, final customer-specific terms still source-review needed
+```txt
+USDT
+USDC
+DAI
+UST / TerraUSD
+BUSD
+```
+
+Deepened PR-026 batch 4 records:
+
+```txt
+RLUSD
+EURC
+USDP
+USDG
+USDS
+```
 
 ## 11. Current UI direction
 
@@ -308,40 +357,48 @@ Rules:
 - source/evidence/log language is preferred
 - status colors should be stable and restrained
 - support route exists but is secondary
+- additional records must not use separate simplified detail pages; they should use the shared detail view
 
 ## 12. Next implementation focus
 
 Next PR:
 
 ```txt
-PR-025 Build / validation confirmation and SEO QA
+PR-033 Original seed record bottom-up pass
 ```
 
 Purpose:
 
 ```txt
-Confirm that the direct SEO and source-deepening edits build cleanly and that public pages render metadata, OG, JSON-LD, related links, and guide text correctly.
+Improve the shallow original non-top-5 records so the site no longer has a strong top layer and visibly thin middle layer.
 ```
 
-PR-025 checklist:
+Recommended PR-033 target set:
 
 ```txt
-npm run validate:data
-npm run build
-check /og/sog-og.svg
-check canonical / OG / JSON-LD on representative pages
-check guide pages for broken links or thin text
-check stablecoin detail pages for related links and source table rendering
+FRAX
+TUSD
+FDUSD
+PYUSD
+USDD
 ```
 
-After PR-025:
+PR-033 checklist:
 
 ```txt
-PR-026 More seed records or comparison pages
+add or strengthen evidence references
+add reserve/transparency references
+add deployment notes
+split known unknowns
+update stablecoin body fields where needed
+keep validator passing at 20 records
+confirm Cloudflare build/deploy
 ```
 
-Decision point:
+After PR-033:
 
 ```txt
-Choose whether the next milestone should add more stablecoin seed records, add comparison/reference pages, or deepen issuer pages.
+PR-034 Second bottom-up pass for GUSD / LUSD / crvUSD / USDe / sUSD
+PR-035 Registry Updates / docs sync
+PR-036 Comparison or reference page decision
 ```
