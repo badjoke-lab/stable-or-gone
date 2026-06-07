@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import issuersData from '../../data/issuers.json';
+import issuersExtraData from '../../data/issuers-extra.json';
 import eventsData from '../../data/events.json';
 import evidenceData from '../../data/evidence.json';
 import evidenceExtraData from '../../data/evidence-extra.json';
@@ -22,11 +23,7 @@ type RegulatoryNoteRow = { id: string; stablecoin_id: string; issuer_id?: string
 type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; contract_address?: string | null; status: string; notes?: string; evidence_ids?: string[] };
 
 const { coin } = Astro.props as { coin: StablecoinRow };
-const extraIssuers: IssuerRow[] = [
-  { id: 'sog_issuer_ripple', slug: 'ripple', name: 'Ripple', jurisdiction: 'United States', issuer_type: 'company' },
-  { id: 'sog_issuer_global_dollar_network', slug: 'global-dollar-network', name: 'Global Dollar Network', jurisdiction: 'multi_jurisdiction', issuer_type: 'network_or_company_group' }
-];
-const allIssuers = [...(issuersData as IssuerRow[]), ...extraIssuers];
+const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
 const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[])];
 const allReserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[])];
 const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[])];
