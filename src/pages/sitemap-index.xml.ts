@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import stablecoins from '../../data/stablecoins.json';
 import stablecoinsExtra from '../../data/stablecoins-extra.json';
 import issuers from '../../data/issuers.json';
+import issuersExtra from '../../data/issuers-extra.json';
 import events from '../../data/events.json';
 
 const SITE = 'https://sog.badjoke-lab.com';
@@ -32,9 +33,7 @@ export const GET: APIRoute = () => {
 
   const dynamicPaths = [
     ...([...(stablecoins as Array<{ slug: string }>), ...(stablecoinsExtra as Array<{ slug: string }>)]).map((row) => `/stablecoin/${row.slug}/`),
-    ...(issuers as Array<{ slug: string }>).map((row) => `/issuer/${row.slug}/`),
-    '/issuer/ripple/',
-    '/issuer/global-dollar-network/',
+    ...([...(issuers as Array<{ slug: string }>), ...(issuersExtra as Array<{ slug: string }>)]).map((row) => `/issuer/${row.slug}/`),
     ...(events as Array<{ id: string }>).map((row) => `/event/${row.id}/`)
   ];
 
