@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import issuersData from '../../../data/issuers.json';
+import issuersExtraData from '../../../data/issuers-extra.json';
 
 type IssuerRow = {
   slug: string;
@@ -11,7 +12,7 @@ type IssuerRow = {
   confidence?: string;
 };
 
-const issuers = issuersData as IssuerRow[];
+const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
 const title = 'Stablecoin Issuers and Protocols — Stable or Gone';
 const description = 'Browse stablecoin issuer, protocol, company, jurisdiction, related stablecoin, confidence, and evidence context records in Stable or Gone.';
 const jsonLd = {
@@ -44,7 +45,7 @@ const jsonLd = {
   </section>
 
   <section class="panel registry">
-    <div class="bar">source: data/issuers.json</div>
+    <div class="bar">source: data/issuers.json + data/issuers-extra.json</div>
     <table>
       <thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Confidence</th></tr></thead>
       <tbody>
