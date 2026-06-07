@@ -1,23 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import issuersData from '../../../data/issuers.json';
+import issuersExtraData from '../../../data/issuers-extra.json';
 import stablecoinsData from '../../../data/stablecoins.json';
+import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import eventsData from '../../../data/events.json';
 import evidenceData from '../../../data/evidence.json';
+import evidenceExtraData from '../../../data/evidence-extra.json';
 
 type IssuerRow = { id: string; slug: string; name: string; summary?: string; issuer_type?: string; jurisdiction?: string; related_stablecoins?: string[]; official_url?: string; confidence?: string; last_verified_at?: string; notes?: string; };
 type StablecoinRow = { id: string; slug: string; name: string; symbol?: string; status?: string; issuer_id?: string; };
 type EventRow = { id: string; issuer_id?: string; title: string; event_type?: string; event_date?: string; };
-type EvidenceRow = { id: string; issuer_id?: string; title: string; url: string; source_type?: string; };
+type EvidenceRow = { id: string; issuer_id?: string; stablecoin_id?: string; title: string; url: string; source_type?: string; };
 
 export function getStaticPaths() {
-  return (issuersData as IssuerRow[]).map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
+  const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
+  return issuers.map((issuer) => ({ params: { slug: issuer.slug }, props: { issuer } }));
 }
 
 const { issuer } = Astro.props as { issuer: IssuerRow };
-const stablecoins = (stablecoinsData as StablecoinRow[]).filter((coin) => coin.issuer_id === issuer.id);
+const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
+const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[])];
+const stablecoins = allStablecoins.filter((coin) => coin.issuer_id === issuer.id);
+const stablecoinIds = new Set(stablecoins.map((coin) => coin.id));
 const events = (eventsData as EventRow[]).filter((event) => event.issuer_id === issuer.id);
-const evidence = (evidenceData as EvidenceRow[]).filter((source) => source.issuer_id === issuer.id);
+const evidence = allEvidence.filter((source) => source.issuer_id === issuer.id || (source.stablecoin_id && stablecoinIds.has(source.stablecoin_id)));
 const title = `${issuer.name} stablecoin issuer file — Stable or Gone`;
 const description = issuer.summary || `${issuer.name} issuer and protocol file covering related stablecoins, jurisdiction, source-backed evidence, events, confidence, and lifecycle context.`;
 const jsonLd = {
