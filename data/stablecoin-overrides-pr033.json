@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_st_frax",
+    "summary": "USD-pegged protocol stablecoin from the Frax Finance ecosystem. SOG records FRAX as active while keeping Frax ecosystem transitions, collateral, AMO, governance, and related assets as separate source-review layers.",
+    "redemption_notes": "PR-033 adds Frax documentation and app references. FRAX should be treated as a protocol stablecoin context rather than a fiat-backed issuer redemption product.",
+    "notes": "PR-033 bottom-up pass. FRAX needs a later dedicated pass for frxUSD, sFRAX, AMO, collateral, and governance lifecycle relationships."
+  },
+  {
+    "id": "sog_st_tusd",
+    "summary": "USD-pegged stablecoin associated with TrueUSD. SOG records TUSD as active with issuer-site, attestation, redemption, token-version, and supported-chain context kept as source-backed or source-review layers.",
+    "redemption_notes": "PR-033 adds TrueUSD official site and attestation entry point references. Exact account eligibility, redemption terms, report history, and token-version treatment remain source-review areas.",
+    "notes": "PR-033 bottom-up pass. TUSD needs exact reserve report URLs, terms extraction, and deployment source review."
+  },
+  {
+    "id": "sog_st_fdusd",
+    "summary": "USD-backed stablecoin associated with First Digital. SOG records FDUSD as active with issuer disclosure, client redemption, access restrictions, reserve references, and chain coverage kept as separate source-backed layers.",
+    "redemption_notes": "PR-033 adds First Digital issuer and reserve entry point references. Client eligibility, regional limits, exact reserve report URLs, and supported-chain records remain source-review areas.",
+    "notes": "PR-033 bottom-up pass. FDUSD needs exact reserve-report archive, terms extraction, and chain-specific deployment review."
+  },
+  {
+    "id": "sog_st_pyusd",
+    "summary": "USD-pegged stablecoin launched by PayPal and issued by Paxos. SOG records PYUSD as active while keeping PayPal app access, Paxos issuer context, reserve reports, redemption paths, and chain deployment references separate.",
+    "redemption_notes": "PR-033 adds PayPal product, Paxos issuer, and Paxos transparency references. PayPal app conversion, Paxos issuer redemption, and exchange liquidity should not be merged into one exit model.",
+    "notes": "PR-033 bottom-up pass. PYUSD needs exact Ethereum/Solana token records, PayPal/Paxos role separation, and period-level reserve rows."
+  },
+  {
+    "id": "sog_st_usdd",
+    "summary": "USD-pegged stablecoin associated with USDD and TRON DAO Reserve. SOG records USDD as active with collateral, reserve, governance, redemption uncertainty, and depeg-history questions kept as visible source-review layers.",
+    "redemption_notes": "PR-033 adds USDD and TRON DAO Reserve entry points. USDD redemption path, reserve mechanics, collateral composition, and depeg history require a dedicated source-backed pass.",
+    "notes": "PR-033 bottom-up pass. USDD needs reserve/collateral source extraction, mechanics review, chain references, and depeg event treatment."
+  }
+]
