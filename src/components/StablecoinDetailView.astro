@@ -5,10 +5,13 @@ import issuersExtraData from '../../data/issuers-extra.json';
 import eventsData from '../../data/events.json';
 import evidenceData from '../../data/evidence.json';
 import evidenceExtraData from '../../data/evidence-extra.json';
+import evidencePr033Data from '../../data/evidence-pr033.json';
 import reserveReportsData from '../../data/reserve-reports.json';
 import reserveReportsExtraData from '../../data/reserve-reports-extra.json';
+import reserveReportsPr033Data from '../../data/reserve-reports-pr033.json';
 import knownUnknownsData from '../../data/known-unknowns.json';
 import knownUnknownsExtraData from '../../data/known-unknowns-extra.json';
+import knownUnknownsPr033Data from '../../data/known-unknowns-pr033.json';
 import regulatoryNotesData from '../../data/regulatory-notes.json';
 import deploymentsData from '../../data/deployments.json';
 import deploymentsExtraData from '../../data/deployments-extra.json';
@@ -24,9 +27,9 @@ type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deploym
 
 const { coin } = Astro.props as { coin: StablecoinRow };
 const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[])];
-const allReserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[])];
-const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[])];
+const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[])];
+const allReserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[])];
+const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[])];
 const allDeployments = [...(deploymentsData as DeploymentRow[]), ...(deploymentsExtraData as DeploymentRow[])];
 
 const issuer = allIssuers.find((item) => item.id === coin.issuer_id);
