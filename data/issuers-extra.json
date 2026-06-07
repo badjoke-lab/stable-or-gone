@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sog_issuer_ripple",
+    "slug": "ripple",
+    "name": "Ripple",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["rlusd"],
+    "official_url": "https://ripple.com/",
+    "summary": "Company associated with Ripple USD / RLUSD and related payment infrastructure.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-05",
+    "notes": "Supplemental issuer record added with the RLUSD dossier expansion."
+  },
+  {
+    "id": "sog_issuer_global_dollar_network",
+    "slug": "global-dollar-network",
+    "name": "Global Dollar Network",
+    "issuer_type": "network_or_company_group",
+    "jurisdiction": "multi_jurisdiction",
+    "related_stablecoins": ["usdg"],
+    "official_url": "https://www.globaldollar.com/",
+    "summary": "Network and organization associated with Global Dollar / USDG and Paxos-related issuer context.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-05",
+    "notes": "Supplemental issuer record. Exact issuer-entity roles remain a known-unknown topic in the USDG dossier."
+  }
+]
