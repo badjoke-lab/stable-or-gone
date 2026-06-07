@@ -71,9 +71,9 @@ function validateUrl(row, field) {
 const stablecoins = combine('stablecoins.json', 'stablecoins-extra.json');
 const issuers = combine('issuers.json', 'issuers-extra.json');
 const events = combine('events.json');
-const evidence = combine('evidence.json', 'evidence-extra.json');
-const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json');
-const knownUnknowns = combine('known-unknowns.json', 'known-unknowns-extra.json');
+const evidence = combine('evidence.json', 'evidence-extra.json', 'evidence-pr033.json');
+const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json', 'reserve-reports-pr033.json');
+const knownUnknowns = combine('known-unknowns.json', 'known-unknowns-extra.json', 'known-unknowns-pr033.json');
 const regulatoryNotes = combine('regulatory-notes.json');
 const deployments = combine('deployments.json', 'deployments-extra.json');
 
@@ -102,9 +102,7 @@ const eventIds = new Set(events.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 
 for (const row of stablecoins) {
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) {
-    failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
-  }
+  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
 }
 
 for (const row of events) {
@@ -163,9 +161,7 @@ for (const row of deployments) {
   requireField(row, 'status');
   if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
   if (Array.isArray(row.evidence_ids)) {
-    for (const evidenceId of row.evidence_ids) {
-      if (!evidenceIds.has(evidenceId)) failures.push(`${rowLabel(row)} references missing evidence ${evidenceId}`);
-    }
+    for (const evidenceId of row.evidence_ids) if (!evidenceIds.has(evidenceId)) failures.push(`${rowLabel(row)} references missing evidence ${evidenceId}`);
   }
 }
 uniqueAcross('deployments', deployments, 'id');
@@ -176,6 +172,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(
-  `SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${reserveReports.length} reserve references, ${knownUnknowns.length} known unknowns, ${regulatoryNotes.length} regulatory notes, ${deployments.length} deployments.`
-);
+console.log(`SOG data validation passed: ${stablecoins.length} stablecoins, ${issuers.length} issuers, ${events.length} events, ${evidence.length} evidence records, ${reserveReports.length} reserve references, ${knownUnknowns.length} known unknowns, ${regulatoryNotes.length} regulatory notes, ${deployments.length} deployments.`);
