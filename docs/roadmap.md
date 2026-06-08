@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-07
+Updated: 2026-06-08
 
 ## Current stage
 
@@ -10,34 +10,31 @@ SOG v0 is publicly live at:
 https://sog.badjoke-lab.com/
 ```
 
-The current detailed state is maintained in:
+Current state references:
 
 ```txt
 docs/current-spec.md
-docs/pr-032-status-sync.md
+docs/pr-035-status-sync.md
 ```
 
 ## Current milestone
+
+The 20-record baseline and original-record bottom-up passes are complete.
+
+Expected post-PR-034 validation counts:
 
 ```txt
 20 stablecoin records
 16 issuer records
 3 event records
-59 evidence records
-30 reserve references
-45 known unknowns
+80 evidence records
+40 reserve references
+55 known unknowns
 9 regulatory notes
-31 deployments
+37 deployments
 ```
 
-Latest confirmed deploy:
-
-```txt
-validate:data passed
-astro check passed with 0 errors and 0 warnings
-astro build generated 55 pages
-Cloudflare Pages deploy succeeded
-```
+Latest deploy confirmation for PR-034 should be checked in Cloudflare before treating this as fully merged/public.
 
 ## Completed major work
 
@@ -49,43 +46,68 @@ issuer/event/report/evidence/redemption/regulatory/deployment UI
 seed expansion to 20 stablecoin records
 source-deepening for USDT / USDC / DAI / UST / BUSD
 source-deepening for RLUSD / EURC / USDP / USDG / USDS
+bottom-up pass for FRAX / TUSD / FDUSD / PYUSD / USDD
+bottom-up pass for GUSD / LUSD / crvUSD / USDe / sUSD
 registry filtering and sorting
 guides and glossary
 registry updates page
 public SEO baseline
 shared stablecoin detail view
 validator and supplemental data integration
-docs and status sync
 ```
+
+## Main remaining weakness
+
+The event layer is too thin.
+
+Current events:
+
+```txt
+USDC March 2023 depeg
+UST May 2022 collapse
+BUSD wind-down
+```
+
+SOG should now shift from entity/evidence thickening to event-density expansion.
 
 ## Next PR
 
 ```txt
-PR-033 Original seed record bottom-up pass 1
+PR-036 Event layer expansion pass 1
 ```
 
 Target set:
 
 ```txt
-FRAX
-TUSD
-FDUSD
-PYUSD
-USDD
+USDT
+USDC
+DAI
+UST
+BUSD
 ```
 
 Goal:
 
 ```txt
-Strengthen the shallow middle layer by adding official evidence, reserve/transparency references, deployment notes, known unknowns, and stablecoin body updates where needed.
+Increase event density for the original top records and make SOG read more like a historical lifecycle registry rather than only a stablecoin card catalog.
 ```
 
 ## Following PRs
 
 ```txt
-PR-034 Original seed record bottom-up pass 2: GUSD / LUSD / crvUSD / USDe / sUSD
-PR-035 Registry updates and docs sync
-PR-036 Comparison or reference page decision
+PR-037 Event layer expansion pass 2: FRAX / TUSD / FDUSD / PYUSD / USDD
+PR-038 Event layer expansion pass 3: GUSD / LUSD / crvUSD / USDe / sUSD
+PR-039 Event UX strengthening
+PR-040 Event expansion docs sync
+PR-041 Next expansion decision
+```
+
+## Event targets
+
+```txt
+short-term: 15 events
+v0.1: 30 events
+later: 60+ events
 ```
 
 ## Operating rule
