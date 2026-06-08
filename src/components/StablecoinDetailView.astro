@@ -4,6 +4,7 @@ import issuersData from '../../data/issuers.json';
 import issuersExtraData from '../../data/issuers-extra.json';
 import eventsData from '../../data/events.json';
 import eventsPr036Data from '../../data/events-pr036.json';
+import eventsPr037Data from '../../data/events-pr037.json';
 import evidenceData from '../../data/evidence.json';
 import evidenceExtraData from '../../data/evidence-extra.json';
 import evidencePr033Data from '../../data/evidence-pr033.json';
@@ -31,7 +32,7 @@ type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deploym
 
 const { coin } = Astro.props as { coin: StablecoinRow };
 const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[])];
+const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[])];
 const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidencePr034Data as EvidenceRow[])];
 const allReserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[])];
 const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[]), ...(knownUnknownsPr034Data as KnownUnknownRow[])];
