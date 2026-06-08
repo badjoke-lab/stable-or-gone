@@ -5,10 +5,10 @@ import issuersExtraData from '../../data/issuers-extra.json';
 import eventsData from '../../data/events.json';
 import eventsPr036Data from '../../data/events-pr036.json';
 import eventsPr037Data from '../../data/events-pr037.json';
+import eventsPr038Data from '../../data/events-pr038.json';
 import evidenceData from '../../data/evidence.json';
 import evidenceExtraData from '../../data/evidence-extra.json';
 import evidencePr033Data from '../../data/evidence-pr033.json';
-import evidencePr034Data from '../../data/evidence-pr034.json';
 import reserveReportsData from '../../data/reserve-reports.json';
 import reserveReportsExtraData from '../../data/reserve-reports-extra.json';
 import reserveReportsPr033Data from '../../data/reserve-reports-pr033.json';
@@ -16,14 +16,13 @@ import reserveReportsPr034Data from '../../data/reserve-reports-pr034.json';
 import knownUnknownsData from '../../data/known-unknowns.json';
 import knownUnknownsExtraData from '../../data/known-unknowns-extra.json';
 import knownUnknownsPr033Data from '../../data/known-unknowns-pr033.json';
-import knownUnknownsPr034Data from '../../data/known-unknowns-pr034.json';
 import regulatoryNotesData from '../../data/regulatory-notes.json';
 import deploymentsData from '../../data/deployments.json';
 import deploymentsExtraData from '../../data/deployments-extra.json';
 
 type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; };
 type IssuerRow = { id: string; slug: string; name: string; jurisdiction?: string; issuer_type?: string };
-type EventRow = { id: string; stablecoin_id: string; title: string; event_type?: string; event_date?: string; impact_level?: string; recovered?: boolean | null; failure_mechanism?: string };
+type EventRow = { id: string; stablecoin_id: string; title: string; event_type?: string; event_date?: string | null; impact_level?: string; recovered?: boolean | null; failure_mechanism?: string };
 type EvidenceRow = { id: string; stablecoin_id: string; event_id?: string | null; source_type?: string; title: string; url: string; publisher?: string; claim_scope?: string; reliability?: string };
 type ReserveReportRow = { id: string; stablecoin_id: string; report_date?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; confidence?: string; notes?: string };
 type KnownUnknownRow = { id: string; stablecoin_id: string; topic: string; description: string; severity?: string; last_checked_at?: string };
@@ -32,10 +31,10 @@ type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deploym
 
 const { coin } = Astro.props as { coin: StablecoinRow };
 const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidencePr034Data as EvidenceRow[])];
+const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
+const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[])];
 const allReserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[])];
-const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[]), ...(knownUnknownsPr034Data as KnownUnknownRow[])];
+const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[])];
 const allDeployments = [...(deploymentsData as DeploymentRow[]), ...(deploymentsExtraData as DeploymentRow[])];
 
 const issuer = allIssuers.find((item) => item.id === coin.issuer_id);
