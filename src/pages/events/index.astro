@@ -8,10 +8,10 @@ import eventsPr038Data from '../../../data/events-pr038.json';
 type EventRow = {
   id: string;
   title: string;
-  event_date?: string;
+  event_date?: string | null;
   event_type?: string;
   impact_level?: string;
-  recovered?: boolean;
+  recovered?: boolean | null;
   source_count?: number;
 };
 
