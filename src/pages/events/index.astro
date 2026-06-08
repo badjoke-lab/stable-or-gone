@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
+import eventsPr038Data from '../../../data/events-pr038.json';
 
 type EventRow = {
   id: string;
@@ -14,7 +15,7 @@ type EventRow = {
   source_count?: number;
 };
 
-const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[])].sort((a, b) => String(b.event_date ?? '').localeCompare(String(a.event_date ?? '')));
+const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])].sort((a, b) => String(b.event_date ?? '').localeCompare(String(a.event_date ?? '')));
 const title = 'Stablecoin Event Log — Stable or Gone';
 const description = 'Browse stablecoin depeg events, wind-downs, collapses, reserve interventions, regulatory context, recovery status, and source-backed event records.';
 const jsonLd = {
@@ -47,7 +48,7 @@ const jsonLd = {
   </section>
 
   <section class="panel registry">
-    <div class="bar">source: data/events.json + data/events-pr036.json + data/events-pr037.json</div>
+    <div class="bar">source: data/events.json + data/events-pr036.json + data/events-pr037.json + data/events-pr038.json</div>
     <table>
       <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Sources</th></tr></thead>
       <tbody>
