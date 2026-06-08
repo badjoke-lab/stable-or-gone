@@ -10,6 +10,7 @@ interface Props {
 }
 
 const siteUrl = 'https://sog.badjoke-lab.com';
+const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
 const {
   title = 'Stable or Gone — Stablecoin History Registry',
   description = 'A terminal-style stablecoin history registry for stablecoin records, depeg events, issuers, reserve references, redemption context, lifecycle changes, and source-backed evidence.',
@@ -21,6 +22,10 @@ const {
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
 const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';
+const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
+const gaInline = gaMeasurementId
+  ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
+  : '';
 ---
 <!doctype html>
 <html lang="en">
@@ -40,6 +45,8 @@ const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') 
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}
+    {gaInline && <script set:html={gaInline} />}
     {structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
   <body>
