@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import eventsData from '../../../data/events.json';
+import eventsPr036Data from '../../../data/events-pr036.json';
 
 type EventRow = {
   id: string;
@@ -12,7 +13,7 @@ type EventRow = {
   source_count?: number;
 };
 
-const events = eventsData as EventRow[];
+const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[])].sort((a, b) => String(b.event_date ?? '').localeCompare(String(a.event_date ?? '')));
 const title = 'Stablecoin Event Log — Stable or Gone';
 const description = 'Browse stablecoin depeg events, wind-downs, collapses, reserve interventions, regulatory context, recovery status, and source-backed event records.';
 const jsonLd = {
@@ -30,7 +31,7 @@ const jsonLd = {
     <div class="panel hero-main">
       <div class="prompt">&gt; tail /events/depeg.log</div>
       <h1>Event Log</h1>
-      <p>Depeg, reserve, redemption, wind-down, migration, and related historical events.</p>
+      <p>Depeg, reserve, redemption, wind-down, migration, regulatory, and related historical events.</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
@@ -45,7 +46,7 @@ const jsonLd = {
   </section>
 
   <section class="panel registry">
-    <div class="bar">source: data/events.json</div>
+    <div class="bar">source: data/events.json + data/events-pr036.json</div>
     <table>
       <thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Sources</th></tr></thead>
       <tbody>
