@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_st_gusd",
+    "summary": "USD-backed stablecoin issued by Gemini. SOG records GUSD as active with issuer redemption, reserve attestation, Ethereum deployment, and platform-access context as separate source-backed layers.",
+    "redemption_notes": "PR-034 adds Gemini issuer and contract repository references. Exact monthly attestation rows, account eligibility, and current redemption terms remain source-review areas.",
+    "notes": "PR-034 bottom-up pass. GUSD needs period-level reserve records and finalized Ethereum deployment references."
+  },
+  {
+    "id": "sog_st_lusd",
+    "summary": "Crypto-collateralized stablecoin from Liquity. SOG records LUSD as active or protocol-legacy context while separating Liquity V1 redemption, Liquity V2/BOLD lifecycle, collateral, and frontend access.",
+    "redemption_notes": "PR-034 adds Liquity site and docs references. LUSD protocol redemption should be described from Liquity documentation, not fiat issuer terms.",
+    "notes": "PR-034 bottom-up pass. LUSD needs Liquity V1/V2 lifecycle separation and exact redemption mechanics references."
+  },
+  {
+    "id": "sog_st_crvusd",
+    "summary": "Crypto-collateralized stablecoin from Curve Finance. SOG records crvUSD as active with LLAMMA, controller, collateral, loan, liquidation, and market-exit context as separate source-backed layers.",
+    "redemption_notes": "PR-034 adds Curve crvUSD documentation references. crvUSD should be treated as a protocol stablecoin, not an issuer-redemption product.",
+    "notes": "PR-034 bottom-up pass. crvUSD needs collateral-specific records, LLAMMA mechanics, and exact contract references."
+  },
+  {
+    "id": "sog_st_usde",
+    "summary": "Synthetic dollar asset from Ethena. SOG records USDe as active while separating backing, hedging, custody, mint/redeem flow, sUSDe relationship, and risk disclosures.",
+    "redemption_notes": "PR-034 adds Ethena site and docs references. USDe mint/redeem and exit context should be handled through Ethena protocol documentation, not fiat issuer redemption framing.",
+    "notes": "PR-034 bottom-up pass. USDe needs exact backing, custody, risk, and sUSDe relationship source extraction."
+  },
+  {
+    "id": "sog_st_susd",
+    "summary": "Synthetic USD asset from the Synthetix ecosystem. SOG records sUSD as active or protocol-legacy context while separating debt-pool mechanics, Synthetix V2/V3 lifecycle, collateral, and market exits.",
+    "redemption_notes": "PR-034 adds Synthetix site and docs references. sUSD exits should be described through protocol mechanics and market access, not fiat-backed issuer redemption.",
+    "notes": "PR-034 bottom-up pass. sUSD needs V2/V3 lifecycle treatment, collateral/debt-pool review, and current role clarification."
+  }
+]
