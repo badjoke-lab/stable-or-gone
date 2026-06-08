@@ -8,11 +8,9 @@ type StablecoinRow = { id: string; slug: string; name: string; summary?: string;
 
 type StablecoinOverride = Partial<StablecoinRow> & { id: string };
 
-const overridesById = new Map((stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row]));
-const applyOverride = (coin: StablecoinRow): StablecoinRow => ({ ...coin, ...(overridesById.get(coin.id) ?? {}) });
-
 export function getStaticPaths() {
-  const records = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])].map(applyOverride);
+  const overridesById = new Map((stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row]));
+  const records = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])].map((coin) => ({ ...coin, ...(overridesById.get(coin.id) ?? {}) }));
   return records.map((coin) => ({ params: { slug: coin.slug }, props: { coin } }));
 }
 
