@@ -63,8 +63,8 @@ function validateUrl(row, field) {
 
 const stablecoins = combine('stablecoins.json', 'stablecoins-extra.json');
 const issuers = combine('issuers.json', 'issuers-extra.json');
-const events = combine('events.json', 'events-pr036.json', 'events-pr037.json');
-const evidence = combine('evidence.json', 'evidence-extra.json', 'evidence-pr033.json', 'evidence-pr034.json', 'evidence-events-pr036.json', 'evidence-events-pr037.json');
+const events = combine('events.json', 'events-pr036.json', 'events-pr037.json', 'events-pr038.json');
+const evidence = combine('evidence.json', 'evidence-extra.json', 'evidence-pr033.json', 'evidence-pr034.json', 'evidence-events-pr036.json', 'evidence-events-pr037.json', 'evidence-events-pr038.json');
 const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json', 'reserve-reports-pr033.json', 'reserve-reports-pr034.json');
 const knownUnknowns = combine('known-unknowns.json', 'known-unknowns-extra.json', 'known-unknowns-pr033.json', 'known-unknowns-pr034.json');
 const regulatoryNotes = combine('regulatory-notes.json');
