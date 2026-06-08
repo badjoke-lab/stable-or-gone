@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
+import eventsPr038Data from '../../../data/events-pr038.json';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import issuersData from '../../../data/issuers.json';
@@ -11,21 +12,22 @@ import evidenceData from '../../../data/evidence.json';
 import evidenceExtraData from '../../../data/evidence-extra.json';
 import evidenceEventsPr036Data from '../../../data/evidence-events-pr036.json';
 import evidenceEventsPr037Data from '../../../data/evidence-events-pr037.json';
+import evidenceEventsPr038Data from '../../../data/evidence-events-pr038.json';
 
-type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; };
+type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string | null; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; };
 type StablecoinRow = { id: string; slug: string; name: string; symbol?: string };
 type IssuerRow = { id: string; slug: string; name: string };
 type EvidenceRow = { id: string; event_id?: string | null; title: string; url: string; publisher?: string; source_type?: string };
 
 export function getStaticPaths() {
-  const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[])];
+  const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
   return events.map((event) => ({ params: { id: event.id }, props: { event } }));
 }
 
 const { event } = Astro.props as { event: EventRow };
 const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
 const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[])];
+const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
 const stablecoin = allStablecoins.find((item) => item.id === event.stablecoin_id);
 const issuer = allIssuers.find((item) => item.id === event.issuer_id);
 const evidence = allEvidence.filter((source) => source.event_id === event.id);
