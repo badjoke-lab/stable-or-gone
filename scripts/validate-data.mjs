@@ -37,9 +37,7 @@ function rowLabel(row) {
 }
 
 function requireField(row, field) {
-  if (row[field] === undefined || row[field] === null || row[field] === '') {
-    failures.push(`${rowLabel(row)} missing ${field}`);
-  }
+  if (row[field] === undefined || row[field] === null || row[field] === '') failures.push(`${rowLabel(row)} missing ${field}`);
 }
 
 function uniqueAcross(label, rows, field) {
@@ -47,11 +45,8 @@ function uniqueAcross(label, rows, field) {
   for (const row of rows) {
     const value = row[field];
     if (!value) continue;
-    if (seen.has(value)) {
-      failures.push(`${label}: duplicate ${field} ${value} in ${seen.get(value)} and ${row.__source_file}`);
-    } else {
-      seen.set(value, row.__source_file);
-    }
+    if (seen.has(value)) failures.push(`${label}: duplicate ${field} ${value} in ${seen.get(value)} and ${row.__source_file}`);
+    else seen.set(value, row.__source_file);
   }
 }
 
@@ -60,9 +55,7 @@ function validateUrl(row, field) {
   if (!value) return;
   try {
     const parsed = new URL(value);
-    if (!['http:', 'https:'].includes(parsed.protocol)) {
-      failures.push(`${rowLabel(row)} ${field} must use http or https`);
-    }
+    if (!['http:', 'https:'].includes(parsed.protocol)) failures.push(`${rowLabel(row)} ${field} must use http or https`);
   } catch {
     failures.push(`${rowLabel(row)} has invalid ${field}: ${value}`);
   }
@@ -71,9 +64,9 @@ function validateUrl(row, field) {
 const stablecoins = combine('stablecoins.json', 'stablecoins-extra.json');
 const issuers = combine('issuers.json', 'issuers-extra.json');
 const events = combine('events.json');
-const evidence = combine('evidence.json', 'evidence-extra.json', 'evidence-pr033.json');
-const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json', 'reserve-reports-pr033.json');
-const knownUnknowns = combine('known-unknowns.json', 'known-unknowns-extra.json', 'known-unknowns-pr033.json');
+const evidence = combine('evidence.json', 'evidence-extra.json', 'evidence-pr033.json', 'evidence-pr034.json');
+const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json', 'reserve-reports-pr033.json', 'reserve-reports-pr034.json');
+const knownUnknowns = combine('known-unknowns.json', 'known-unknowns-extra.json', 'known-unknowns-pr033.json', 'known-unknowns-pr034.json');
 const regulatoryNotes = combine('regulatory-notes.json');
 const deployments = combine('deployments.json', 'deployments-extra.json');
 
@@ -101,9 +94,7 @@ const issuerIds = new Set(issuers.map((row) => row.id));
 const eventIds = new Set(events.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 
-for (const row of stablecoins) {
-  if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
-}
+for (const row of stablecoins) if (row.issuer_id && !issuerIds.has(row.issuer_id)) failures.push(`${rowLabel(row)} references missing issuer ${row.issuer_id}`);
 
 for (const row of events) {
   requireField(row, 'id');
@@ -160,9 +151,7 @@ for (const row of deployments) {
   requireField(row, 'deployment_type');
   requireField(row, 'status');
   if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) failures.push(`${rowLabel(row)} references missing stablecoin ${row.stablecoin_id}`);
-  if (Array.isArray(row.evidence_ids)) {
-    for (const evidenceId of row.evidence_ids) if (!evidenceIds.has(evidenceId)) failures.push(`${rowLabel(row)} references missing evidence ${evidenceId}`);
-  }
+  if (Array.isArray(row.evidence_ids)) for (const evidenceId of row.evidence_ids) if (!evidenceIds.has(evidenceId)) failures.push(`${rowLabel(row)} references missing evidence ${evidenceId}`);
 }
 uniqueAcross('deployments', deployments, 'id');
 
