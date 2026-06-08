@@ -4,6 +4,7 @@ import stablecoinsExtra from '../../data/stablecoins-extra.json';
 import issuers from '../../data/issuers.json';
 import issuersExtra from '../../data/issuers-extra.json';
 import events from '../../data/events.json';
+import eventsPr036 from '../../data/events-pr036.json';
 
 const SITE = 'https://sog.badjoke-lab.com';
 
@@ -34,7 +35,7 @@ export const GET: APIRoute = () => {
   const dynamicPaths = [
     ...([...(stablecoins as Array<{ slug: string }>), ...(stablecoinsExtra as Array<{ slug: string }>)]).map((row) => `/stablecoin/${row.slug}/`),
     ...([...(issuers as Array<{ slug: string }>), ...(issuersExtra as Array<{ slug: string }>)]).map((row) => `/issuer/${row.slug}/`),
-    ...(events as Array<{ id: string }>).map((row) => `/event/${row.id}/`)
+    ...([...(events as Array<{ id: string }>), ...(eventsPr036 as Array<{ id: string }>)]).map((row) => `/event/${row.id}/`)
   ];
 
   const urls = [...staticPaths, ...dynamicPaths]
