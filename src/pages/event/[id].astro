@@ -7,6 +7,7 @@ import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import issuersData from '../../../data/issuers.json';
 import issuersExtraData from '../../../data/issuers-extra.json';
 import evidenceData from '../../../data/evidence.json';
+import evidenceExtraData from '../../../data/evidence-extra.json';
 import evidenceEventsPr036Data from '../../../data/evidence-events-pr036.json';
 
 type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; };
@@ -14,16 +15,15 @@ type StablecoinRow = { id: string; slug: string; name: string; symbol?: string }
 type IssuerRow = { id: string; slug: string; name: string };
 type EvidenceRow = { id: string; event_id?: string | null; title: string; url: string; publisher?: string; source_type?: string };
 
-const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[])];
-const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[])];
-
 export function getStaticPaths() {
-  return allEvents.map((event) => ({ params: { id: event.id }, props: { event } }));
+  const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[])];
+  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
 }
 
 const { event } = Astro.props as { event: EventRow };
+const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
+const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
+const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[])];
 const stablecoin = allStablecoins.find((item) => item.id === event.stablecoin_id);
 const issuer = allIssuers.find((item) => item.id === event.issuer_id);
 const evidence = allEvidence.filter((source) => source.event_id === event.id);
