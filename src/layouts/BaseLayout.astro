@@ -21,7 +21,7 @@ const {
 
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
-const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';
+const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\u003c') : '';
 const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
 const gaInline = gaMeasurementId
   ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
@@ -72,8 +72,8 @@ const gaInline = gaMeasurementId
         <slot />
       </main>
       <footer class="site-footer">
-        <span>SOG is a registry, not a stablecoin safety ranking or investment guide.</span>
-        <span><a href="/contact/">Contact / submit correction</a> · <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a></span>
+        <span>SOG is an independent registry, not a stablecoin safety ranking or investment guide.</span>
+        <span><a class="footer-support" href="/support/">Support SOG</a> · <a href="/contact/">Contact / submit correction</a> · <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a></span>
       </footer>
     </div>
   </body>
