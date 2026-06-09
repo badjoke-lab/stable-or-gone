@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPublicLabel, formatStatusLabel } from '../../utils/displayLabels';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import issuersData from '../../../data/issuers.json';
+import issuersExtraData from '../../../data/issuers-extra.json';
 
 type StablecoinRow = {
   slug: string;
@@ -22,12 +24,8 @@ type IssuerRow = {
 };
 
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-const issuers = issuersData as IssuerRow[];
-const extraIssuerNames = new Map([
-  ['sog_issuer_ripple', 'Ripple'],
-  ['sog_issuer_global_dollar_network', 'Global Dollar Network']
-]);
-const issuerById = new Map([...issuers.map((issuer) => [issuer.id, issuer.name] as const), ...extraIssuerNames]);
+const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
+const issuerById = new Map(issuers.map((issuer) => [issuer.id, issuer.name] as const));
 const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
 const uniqueSorted = (values: Array<string | undefined>) => Array.from(new Set(values.filter(Boolean) as string[])).sort((a, b) => a.localeCompare(b));
 const statusOptions = uniqueSorted(stablecoins.map((coin) => coin.status));
@@ -65,11 +63,11 @@ const jsonLd = {
   </section>
 
   <section class="panel registry" data-registry>
-    <div class="bar">source: data/stablecoins.json + data/stablecoins-extra.json</div>
+    <div class="bar">reviewed stablecoin registry records</div>
     <div class="registry-controls" aria-label="Registry filters">
       <label><span>Search</span><input data-filter-search type="search" placeholder="USDC, Terra, synthetic..." autocomplete="off" /></label>
-      <label><span>Status</span><select data-filter-status><option value="">All statuses</option>{statusOptions.map((status) => <option value={status}>{status}</option>)}</select></label>
-      <label><span>Model</span><select data-filter-model><option value="">All models</option>{modelOptions.map((model) => <option value={model}>{model}</option>)}</select></label>
+      <label><span>Status</span><select data-filter-status><option value="">All statuses</option>{statusOptions.map((status) => <option value={status}>{formatStatusLabel(status)}</option>)}</select></label>
+      <label><span>Model</span><select data-filter-model><option value="">All models</option>{modelOptions.map((model) => <option value={model}>{formatPublicLabel(model)}</option>)}</select></label>
       <label><span>Peg</span><select data-filter-peg><option value="">All pegs</option>{pegOptions.map((peg) => <option value={peg}>{peg}</option>)}</select></label>
       <label><span>Issuer</span><select data-filter-issuer><option value="">All issuers</option>{issuerOptions.map((issuer) => <option value={issuer}>{issuer}</option>)}</select></label>
       <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="status">Status A-Z</option><option value="model">Model A-Z</option><option value="last_verified_desc">Last verified newest</option></select></label>
@@ -79,11 +77,11 @@ const jsonLd = {
       <thead><tr><th>Name</th><th>Symbol</th><th>Issuer</th><th>Peg</th><th>Model</th><th>Status</th><th>Last verified</th></tr></thead>
       <tbody data-registry-body>
         {stablecoins.length === 0 ? <tr><td colspan="7">No records yet.</td></tr> : stablecoins.map((coin) => {
-          const issuerName = issuerById.get(coin.issuer_id ?? '') ?? coin.issuer_id ?? '—';
+          const issuerName = issuerById.get(coin.issuer_id ?? '') ?? 'Unknown issuer';
           const aliases = Array.isArray(coin.aliases) ? coin.aliases : [];
-          const searchable = [coin.name, coin.symbol, coin.slug, issuerName, coin.peg_asset, coin.collateral_model, coin.status, ...aliases].filter(Boolean).join(' ');
+          const searchable = [coin.name, coin.symbol, coin.slug, issuerName, coin.peg_asset, coin.collateral_model, formatPublicLabel(coin.collateral_model), coin.status, formatStatusLabel(coin.status), ...aliases].filter(Boolean).join(' ');
           return (<tr data-registry-row data-search={searchable.toLowerCase()} data-name={coin.name.toLowerCase()} data-status={coin.status ?? ''} data-model={coin.collateral_model ?? ''} data-peg={coin.peg_asset ?? ''} data-issuer={issuerName} data-last-verified={coin.last_verified_at ?? ''}>
-            <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{issuerName}</td><td>{coin.peg_asset ?? '—'}</td><td>{coin.collateral_model ?? '—'}</td><td><span class={statusClass(coin.status)}>{coin.status ?? 'unknown'}</span></td><td>{coin.last_verified_at ?? '—'}</td>
+            <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{issuerName}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td><td>{coin.last_verified_at ?? '—'}</td>
           </tr>);
         })}
         <tr data-no-results hidden><td colspan="7">No records match the current filters.</td></tr>
