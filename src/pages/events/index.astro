@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import { eventPublicCopy } from '../../data/eventPublicCopy';
 import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
@@ -81,13 +82,14 @@ const jsonLd = {
         ) : events.map((event) => {
           const stablecoin = stablecoinById.get(event.stablecoin_id ?? '');
           const stablecoinLabel = stablecoin ? `${stablecoin.name}${stablecoin.symbol ? ` (${stablecoin.symbol})` : ''}` : 'Unknown stablecoin';
+          const eventTitle = eventPublicCopy[event.id]?.title ?? event.title;
           const recovery = event.recovered === true ? 'yes' : event.recovered === false ? 'no' : 'unknown';
-          const searchable = [stablecoinLabel, event.title, event.event_type, formatPublicLabel(event.event_type), event.impact_level, formatPublicLabel(event.impact_level), recovery].filter(Boolean).join(' ').toLowerCase();
+          const searchable = [stablecoinLabel, eventTitle, event.event_type, formatPublicLabel(event.event_type), event.impact_level, formatPublicLabel(event.impact_level), recovery].filter(Boolean).join(' ').toLowerCase();
           return (
-            <tr data-event-row data-search={searchable} data-title={event.title.toLowerCase()} data-date={event.event_date ?? ''} data-type={event.event_type ?? ''} data-impact={event.impact_level ?? ''} data-recovery={recovery}>
+            <tr data-event-row data-search={searchable} data-title={eventTitle.toLowerCase()} data-date={event.event_date ?? ''} data-type={event.event_type ?? ''} data-impact={event.impact_level ?? ''} data-recovery={recovery}>
               <td>{event.event_date ?? '—'}</td>
               <td>{stablecoinLabel}</td>
-              <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
+              <td><a href={`/event/${event.id}/`}>{eventTitle}</a></td>
               <td>{formatPublicLabel(event.event_type)}</td>
               <td>{formatPublicLabel(event.impact_level)}</td>
               <td>{recovery === 'yes' ? 'Yes' : recovery === 'no' ? 'No' : '—'}</td>
