@@ -1,23 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const models = [
-  ['fiat_backed', 'Fiat-backed stablecoins backed by cash, T-bills, or other off-chain reserve assets.'],
-  ['crypto_collateralized', 'Stablecoins backed by on-chain crypto collateral.'],
-  ['algorithmic', 'Stablecoins relying primarily on algorithmic or reflexive peg mechanisms.'],
-  ['hybrid', 'Stablecoins using more than one backing or stabilization mechanism.'],
-  ['synthetic', 'Synthetic dollar or synthetic stable value instruments.'],
-  ['yield_bearing', 'Stablecoins or stable-value tokens designed with yield-bearing mechanics.'],
-  ['commodity_backed', 'Stablecoins backed by commodities or commodity claims.'],
-  ['multi_collateral', 'Stablecoins backed by several collateral categories.'],
-  ['unknown', 'Collateral model requires further source review.']
+  ['Fiat-backed', 'Stablecoins backed by cash or other off-chain reserve assets.'],
+  ['Crypto-collateralized', 'Stablecoins backed by on-chain crypto collateral.'],
+  ['Algorithmic', 'Stablecoins relying primarily on algorithmic or reflexive peg mechanisms.'],
+  ['Hybrid', 'Stablecoins using more than one backing or stabilization mechanism.'],
+  ['Synthetic', 'Synthetic dollar or synthetic stable-value instruments.'],
+  ['Yield-bearing', 'Stablecoins or stable-value tokens designed with yield-bearing mechanics.'],
+  ['Commodity-backed', 'Stablecoins backed by commodities or commodity claims.'],
+  ['Multi-collateral', 'Stablecoins backed by several collateral categories.'],
+  ['Unknown / under review', 'The collateral model requires further source review.']
 ];
 ---
-<BaseLayout title="Models — Stable or Gone">
+<BaseLayout title="Collateral Models — Stable or Gone" description="Human-readable working categories for stablecoin backing, collateral, and stabilization designs used in the Stable or Gone registry." canonicalPath="/models/">
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; cat collateral_models.txt</div>
+      <div class="prompt">&gt; open collateral models</div>
       <h1>Collateral Models</h1>
-      <p>Working categories for stablecoin design and reserve/collateral structure.</p>
+      <p>Working categories for stablecoin design and reserve or collateral structure.</p>
     </div>
   </section>
   <section class="section-grid">
