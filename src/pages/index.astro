@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
 import stablecoinsData from '../../data/stablecoins.json';
 import stablecoinsExtraData from '../../data/stablecoins-extra.json';
 import issuersData from '../../data/issuers.json';
+import issuersExtraData from '../../data/issuers-extra.json';
 import eventsData from '../../data/events.json';
 import eventsPr036Data from '../../data/events-pr036.json';
 import eventsPr037Data from '../../data/events-pr037.json';
@@ -14,41 +16,15 @@ import evidenceEventsPr036Data from '../../data/evidence-events-pr036.json';
 import evidenceEventsPr037Data from '../../data/evidence-events-pr037.json';
 import evidenceEventsPr038Data from '../../data/evidence-events-pr038.json';
 
-type StablecoinRow = {
-  slug: string;
-  name: string;
-  symbol?: string;
-  peg_asset?: string;
-  collateral_model?: string;
-  status?: string;
-  issuer_id?: string;
-};
+type StablecoinRow = { slug: string; name: string; symbol?: string; peg_asset?: string; collateral_model?: string; status?: string; issuer_id?: string };
+type IssuerRow = { id: string; name: string };
 
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-const issuers = issuersData as unknown[];
-const events = [
-  ...(eventsData as unknown[]),
-  ...(eventsPr036Data as unknown[]),
-  ...(eventsPr037Data as unknown[]),
-  ...(eventsPr038Data as unknown[])
-];
-const evidence = [
-  ...(evidenceData as unknown[]),
-  ...(evidenceExtraData as unknown[]),
-  ...(evidencePr033Data as unknown[]),
-  ...(evidenceEventsPr036Data as unknown[]),
-  ...(evidenceEventsPr037Data as unknown[]),
-  ...(evidenceEventsPr038Data as unknown[])
-];
-const stablecoinCount = stablecoins.length;
-const issuerCount = issuers.length + 2;
-const eventCount = events.length;
-const evidenceCount = evidence.length;
+const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
+const issuerById = new Map(issuers.map((issuer) => [issuer.id, issuer.name] as const));
+const events = [...(eventsData as unknown[]), ...(eventsPr036Data as unknown[]), ...(eventsPr037Data as unknown[]), ...(eventsPr038Data as unknown[])];
+const evidence = [...(evidenceData as unknown[]), ...(evidenceExtraData as unknown[]), ...(evidencePr033Data as unknown[]), ...(evidenceEventsPr036Data as unknown[]), ...(evidenceEventsPr037Data as unknown[]), ...(evidenceEventsPr038Data as unknown[])];
 const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
-const issuerNames = new Map([
-  ['sog_issuer_ripple', 'Ripple'],
-  ['sog_issuer_global_dollar_network', 'Global Dollar Network']
-]);
 
 const title = 'Stable or Gone — Stablecoin History Registry';
 const description = 'Source-backed stablecoin history registry covering depeg events, failed and discontinued stablecoins, issuers, reserve references, redemption context, and known unknowns.';
@@ -57,17 +33,9 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'St
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main"><div class="prompt">&gt; open /registry/stablecoins</div><h1>Stablecoin records, depeg events, and evidence.</h1><p>Stable or Gone is a terminal-style registry for stablecoins, issuers, reserve disclosure, redemption access, event history, lifecycle changes, and source-backed evidence.</p></div>
-    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoinCount}</strong></div><div class="stat"><span>Issuers</span><strong>{issuerCount}</strong></div><div class="stat"><span>Events</span><strong>{eventCount}</strong></div><div class="stat"><span>Evidence</span><strong>{evidenceCount}</strong></div></div>
+    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Issuers</span><strong>{issuers.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Evidence</span><strong>{evidence.length}</strong></div></div>
   </section>
   <section class="section-grid" aria-label="Registry sections"><a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin Registry</h2><p>Active, limited, impaired, discontinued, failed, migrated, and unknown stablecoin records.</p></a><a class="panel mini-card" href="/events/"><h2>Event Log</h2><p>Depeg, reserve, redemption, wind-down, migration, and related historical events.</p></a><a class="panel mini-card" href="/issuers/"><h2>Issuer Files</h2><p>Issuer, protocol, jurisdiction, reserve disclosure, and related stablecoin references.</p></a><a class="panel mini-card" href="/guides/"><h2>Guides</h2><p>Plain-language guides for depegs, reserve disclosure, status labels, and lifecycle terms.</p></a></section>
-  <section class="panel registry"><div class="bar">source: data/stablecoins.json + data/stablecoins-extra.json</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{coin.collateral_model ?? '—'}</td><td><span class={statusClass(coin.status)}>{coin.status ?? 'unknown'}</span></td><td>{issuerNames.get(coin.issuer_id ?? '') ?? coin.issuer_id ?? '—'}</td></tr>))}</tbody></table></section>
-
-  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title">
-    <div>
-      <div class="prompt">&gt; maintain registry</div>
-      <h2 id="support-home-title">Help maintain the registry</h2>
-      <p>Source review, evidence maintenance, historical research, and record expansion require ongoing work. Voluntary support helps keep SOG public and updated without affecting classifications or editorial decisions.</p>
-    </div>
-    <a class="support-callout-action" href="/support/">Support SOG</a>
-  </section>
+  <section class="panel registry"><div class="bar">reviewed stablecoin registry records</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td><td>{issuerById.get(coin.issuer_id ?? '') ?? 'Unknown issuer'}</td></tr>))}</tbody></table></section>
+  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title"><div><div class="prompt">&gt; maintain registry</div><h2 id="support-home-title">Help maintain the registry</h2><p>Source review, evidence maintenance, historical research, and record expansion require ongoing work. Voluntary support helps keep SOG public and updated without affecting classifications or editorial decisions.</p></div><a class="support-callout-action" href="/support/">Support SOG</a></section>
 </BaseLayout>
