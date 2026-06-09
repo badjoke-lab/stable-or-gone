@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-08
+Updated: 2026-06-09
 
 ## Current stage
 
@@ -10,31 +10,21 @@ SOG v0 is publicly live at:
 https://sog.badjoke-lab.com/
 ```
 
-Current state references:
+Current public baseline:
 
 ```txt
-docs/current-spec.md
-docs/pr-035-status-sync.md
-```
-
-## Current milestone
-
-The 20-record baseline and original-record bottom-up passes are complete.
-
-Expected post-PR-034 validation counts:
-
-```txt
-20 stablecoin records
-16 issuer records
-3 event records
-80 evidence records
+20 stablecoins
+16 issuers
+23 events
+90 evidence records
 40 reserve references
-55 known unknowns
+50 known unknowns
 9 regulatory notes
 37 deployments
+75 static pages
 ```
 
-Latest deploy confirmation for PR-034 should be checked in Cloudflare before treating this as fully merged/public.
+PR-038 has a confirmed successful Cloudflare deployment. PR-039 event UX strengthening is implemented in the repository; its post-change Cloudflare deployment still needs explicit confirmation.
 
 ## Completed major work
 
@@ -54,62 +44,109 @@ registry updates page
 public SEO baseline
 shared stablecoin detail view
 validator and supplemental data integration
+PR-036 event expansion pass 1
+PR-037 event expansion pass 2
+PR-038 event expansion pass 3
+PR-039 event search / filters / sorting / counts
+PR-040 docs and public update synchronization
 ```
 
-## Main remaining weakness
+## Event-layer progress
 
-The event layer is too thin.
+The event layer was the main weakness after the 20-record baseline.
 
-Current events:
+Progress:
 
 ```txt
-USDC March 2023 depeg
-UST May 2022 collapse
-BUSD wind-down
+before expansion: 3 events
+current: 23 events
+short-term target of 15: completed
+v0.1 target: 30+
+later target: 60+
 ```
 
-SOG should now shift from entity/evidence thickening to event-density expansion.
+The registry now includes depeg, collapse, launch, protocol transition, regulatory, reserve-intervention, chain-halt, recovery, chain-expansion, and exchange-support lifecycle context.
+
+The remaining problem is not only event count. Several records still need exact dated primary-source events instead of broad lifecycle placeholders.
+
+## Current work item
+
+```txt
+PR-040 Event expansion docs / updates sync
+```
+
+Completed:
+
+```txt
+docs/current-spec.md synchronized to 23 events / 90 evidence / 75 pages
+docs/roadmap.md synchronized to the event-expansion state
+data/registry-updates.json updated for PR-036 to PR-039
+docs/pr-040-status-sync.md added
+```
 
 ## Next PR
 
 ```txt
-PR-036 Event layer expansion pass 1
-```
-
-Target set:
-
-```txt
-USDT
-USDC
-DAI
-UST
-BUSD
+PR-041 Event quality pass / 30-event target
 ```
 
 Goal:
 
 ```txt
-Increase event density for the original top records and make SOG read more like a historical lifecycle registry rather than only a stablecoin card catalog.
+23 events → at least 30 reviewed events
+replace or supplement broad lifecycle placeholders with exact-source events
+increase useful timeline density without manufacturing weak events
 ```
+
+Priority targets:
+
+```txt
+FRAX exact-source events
+TUSD exact-source events
+USDD depeg / market-stress exact-source event
+GUSD attestation-history event
+LUSD V1 / V2 / BOLD lifecycle separation
+crvUSD exact launch / collateral events
+USDe exact launch / reserve / risk event
+sUSD V2 / V3 transition event
+```
+
+Source priority:
+
+```txt
+official dated announcement
+regulator release
+official protocol blog or documentation
+official exchange notice
+primary repository release
+verified explorer / contract reference
+```
+
+Do not use a broad documentation homepage to assert an exact event date.
 
 ## Following PRs
 
 ```txt
-PR-037 Event layer expansion pass 2: FRAX / TUSD / FDUSD / PYUSD / USDD
-PR-038 Event layer expansion pass 3: GUSD / LUSD / crvUSD / USDe / sUSD
-PR-039 Event UX strengthening
-PR-040 Event expansion docs sync
-PR-041 Next expansion decision
+PR-042 Comparison / reserve-history / issuer-deepening decision
+PR-043 Selected feature implementation
 ```
 
-## Event targets
+PR-042 should compare the value and implementation cost of:
 
 ```txt
-short-term: 15 events
-v0.1: 30 events
-later: 60+ events
+stablecoin comparison view
+reserve-history view
+issuer deepening
+additional event-density work
 ```
 
-## Operating rule
+The selected feature must strengthen the registry and evidence model rather than turn SOG into a market dashboard or safety score.
 
-Do not add complex automation before the registry model, source handling, and review process are stable.
+## Operating rules
+
+- Continue implementation without waiting for every manual Cloudflare log check.
+- Fix build failures immediately when logs are supplied.
+- Keep `data/known-unknowns-pr034.json` until validator/import cleanup removes the dependency safely.
+- Preserve nullable event fields where exact dates or recovery states are genuinely unresolved.
+- Do not publish internal priorities, personal circumstances, revenue goals, or ChatGPT workflow details in public repository documents.
+- Report each completed work unit with changed files, commits, resulting state, schedule position, and next PR.
