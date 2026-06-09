@@ -1,5 +1,21 @@
 [
   {
+    "id": "sog_update_2026_06_09_pr039_event_ux",
+    "date": "2026-06-09",
+    "title": "Event search and filtering added",
+    "category": "ui",
+    "summary": "Added event search, event-type and impact filters, recovery-state filtering, multiple sort modes, result counts, stablecoin labels in the event table, and event-count visibility on stablecoin detail pages.",
+    "related_paths": ["/events/", "/stablecoins/"]
+  },
+  {
+    "id": "sog_update_2026_06_09_pr036_pr038_event_expansion",
+    "date": "2026-06-09",
+    "title": "Event layer expanded from 3 to 23 records",
+    "category": "data",
+    "summary": "Expanded the stablecoin lifecycle event layer across USDT, USDC, DAI, UST, BUSD, FDUSD, PYUSD, USDD, GUSD, LUSD, crvUSD, USDe, and sUSD. Added launch, protocol transition, regulatory, recovery, reserve-intervention, chain-halt, chain-expansion, and exchange-support context while deferring weak or insufficiently dated candidates.",
+    "related_paths": ["/events/", "/stablecoins/"]
+  },
+  {
     "id": "sog_update_2026_06_04_pr024d_usdt_dai_sources",
     "date": "2026-06-04",
     "title": "USDT and DAI source-deepening started",
