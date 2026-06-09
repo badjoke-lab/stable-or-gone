@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPublicLabel } from '../../utils/displayLabels';
 import updatesData from '../../../data/registry-updates.json';
 
 type UpdateRow = {
@@ -34,19 +35,19 @@ const jsonLd = {
     </div>
     <div class="panel stats">
       <div class="stat"><span>Entries</span><strong>{updates.length}</strong></div>
-      <div class="stat"><span>Type</span><strong>log</strong></div>
+      <div class="stat"><span>Type</span><strong>Log</strong></div>
     </div>
   </section>
 
   <section class="panel registry">
-    <div class="bar">source: data/registry-updates.json</div>
+    <div class="bar">reviewed public registry changes</div>
     <table>
       <thead><tr><th>Date</th><th>Category</th><th>Update</th><th>Related</th></tr></thead>
       <tbody>
         {updates.map((update) => (
           <tr>
             <td>{update.date}</td>
-            <td><span class={categoryClass(update.category)}>{update.category}</span></td>
+            <td><span class={categoryClass(update.category)}>{formatPublicLabel(update.category)}</span></td>
             <td><strong>{update.title}</strong><br /><span>{update.summary}</span></td>
             <td>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</td>
           </tr>
