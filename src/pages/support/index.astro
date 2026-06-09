@@ -2,113 +2,57 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const wallets = [
-  {
-    asset: 'BTC',
-    name: 'Bitcoin',
-    network: 'Bitcoin network',
-    address: 'bc1qk3y8x72me37aj8d236z9v0gu42t8xxr2ytspmd'
-  },
-  {
-    asset: 'ETH',
-    name: 'Ether',
-    network: 'Ethereum Mainnet',
-    address: '0xea2a0fb0def0473d161b7958f6d584533db9202d'
-  },
-  {
-    asset: 'USDT',
-    name: 'Tether USD',
-    network: 'Ethereum · ERC-20',
-    address: '0xea2a0fb0def0473d161b7958f6d584533db9202d'
-  },
-  {
-    asset: 'USDC',
-    name: 'USD Coin',
-    network: 'Ethereum · ERC-20',
-    address: '0xea2a0fb0def0473d161b7958f6d584533db9202d'
-  },
-  {
-    asset: 'SOL',
-    name: 'Solana',
-    network: 'Solana network',
-    address: '9e9kZkwA6tYYAfCzb76aimta26yyPEgR39GZK2oBVH3q'
-  },
-  {
-    asset: 'BNB',
-    name: 'BNB',
-    network: 'BNB Smart Chain · BEP-20',
-    address: '0xea2a0fb0def0473d161b7958f6d584533db9202d'
-  },
-  {
-    asset: 'DOGE',
-    name: 'Dogecoin',
-    network: 'Dogecoin network',
-    address: 'DP1m7675rSCZC5s5wzWSHNaA9bLVpsyjse'
-  },
-  {
-    asset: 'AVAX',
-    name: 'Avalanche',
-    network: 'Avalanche C-Chain',
-    address: '0xea2a0fb0def0473d161b7958f6d584533db9202d'
-  },
-  {
-    asset: 'XRP',
-    name: 'XRP',
-    network: 'XRP Ledger',
-    address: 'rUHSmDUteyPSr7FDq4p3BzQV627gSiJdCr',
-    note: 'Destination tag / memo: optional for this address. Leave it blank unless your sending wallet requires a value.'
-  }
+  { asset: 'BTC', name: 'Bitcoin', network: 'Bitcoin network', address: 'bc1qk3y8x72me37aj8d236z9v0gu42t8xxr2ytspmd' },
+  { asset: 'ETH', name: 'Ether', network: 'Ethereum Mainnet', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'USDT', name: 'Tether USD', network: 'Ethereum · ERC-20', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'USDC', name: 'USD Coin', network: 'Ethereum · ERC-20', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'SOL', name: 'Solana', network: 'Solana network', address: '9e9kZkwA6tYYAfCzb76aimta26yyPEgR39GZK2oBVH3q' },
+  { asset: 'BNB', name: 'BNB', network: 'BNB Smart Chain · BEP-20', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'DOGE', name: 'Dogecoin', network: 'Dogecoin network', address: 'DP1m7675rSCZC5s5wzWSHNaA9bLVpsyjse' },
+  { asset: 'AVAX', name: 'Avalanche', network: 'Avalanche C-Chain', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'XRP', name: 'XRP', network: 'XRP Ledger', address: 'rUHSmDUteyPSr7FDq4p3BzQV627gSiJdCr', note: 'Destination tag / memo is optional for this address. Leave it blank unless your wallet requires a value.' }
 ];
 
-const title = 'Support Stable or Gone — Crypto Addresses';
-const description = 'Voluntarily support Stable or Gone and its source-backed stablecoin history registry. Copy verified support addresses for BTC, ETH, USDT, USDC, SOL, BNB, DOGE, AVAX, and XRP.';
+const title = 'Support Stable or Gone';
+const description = 'Support ongoing research, source checks, link maintenance, and new stablecoin records using the listed crypto addresses.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: title,
   url: 'https://sog.badjoke-lab.com/support/',
   description,
-  isPartOf: {
-    '@type': 'WebSite',
-    name: 'Stable or Gone',
-    url: 'https://sog.badjoke-lab.com/'
-  }
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
 };
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/support/" jsonLd={jsonLd}>
   <section class="hero support-hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; support --voluntary --no-editorial-influence</div>
-      <h1>Support SOG</h1>
-      <p>
-        Stable or Gone is maintained as a public, source-backed history registry. Voluntary support helps with source review, evidence maintenance, historical research, record expansion, and keeping the public site available.
-      </p>
+      <div class="prompt">Support the archive</div>
+      <h1>Help keep Stable or Gone updated</h1>
+      <p>Support helps cover research, source checks, broken-link review, new records, and ongoing site maintenance.</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Supported assets</span><strong>{wallets.length}</strong></div>
-      <div class="stat"><span>Editorial influence</span><strong>None</strong></div>
+      <div class="stat"><span>Use</span><strong>Maintenance</strong></div>
     </div>
   </section>
 
   <section class="panel support-intro" aria-labelledby="before-sending">
-    <div class="bar" id="before-sending">before sending</div>
+    <div class="bar" id="before-sending">Before sending</div>
     <div class="support-intro-body">
-      <p>
-        Select the exact asset and network shown below. Sending an asset through a different network can permanently lose the funds. Check the full address in your wallet before confirming, and consider a small test transaction first.
-      </p>
-      <p>
-        Support is optional and does not purchase a rating, ranking, listing, recommendation, favorable coverage, correction outcome, or access to a paid service. Crypto transfers are generally irreversible. SOG does not issue charitable donation receipts.
-      </p>
+      <p>Select the exact asset and network shown below. Sending through a different network can result in permanent loss. Check the full address before confirming and consider a small test transfer first.</p>
+      <p>Support is optional. It does not affect which records are included, how they are written, or how corrections are reviewed. Crypto transfers are generally irreversible, and charitable donation receipts are not issued.</p>
     </div>
   </section>
 
   <section class="wallet-section" aria-labelledby="wallet-addresses">
     <div class="section-heading">
       <div>
-        <div class="prompt">&gt; list support-addresses</div>
+        <div class="prompt">Available payment options</div>
         <h2 id="wallet-addresses">Wallet addresses</h2>
       </div>
-      <p>Use only the network written on each card.</p>
+      <p>Use only the network shown on each card.</p>
     </div>
 
     <div class="wallet-grid">
@@ -125,14 +69,7 @@ const jsonLd = {
           <div class="address-block">
             <span class="address-label">Address</span>
             <code>{wallet.address}</code>
-            <button
-              class="copy-button"
-              type="button"
-              data-copy-address={wallet.address}
-              aria-label={`Copy ${wallet.asset} support address`}
-            >
-              Copy address
-            </button>
+            <button class="copy-button" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
           </div>
 
           {wallet.note && <p class="network-note">{wallet.note}</p>}
@@ -145,28 +82,24 @@ const jsonLd = {
 
   <section class="section-grid support-principles">
     <div class="panel mini-card">
-      <h2>Independent registry</h2>
-      <p>Supporters do not control SOG classifications, methodology, record inclusion, status labels, or editorial decisions.</p>
+      <h2>What support funds</h2>
+      <p>Research, source review, record updates, link maintenance, and expansion of the archive.</p>
     </div>
     <div class="panel mini-card">
-      <h2>Source work</h2>
-      <p>Support helps sustain the work of finding primary sources, checking claims, preserving evidence links, documenting uncertainty, and expanding lifecycle histories.</p>
+      <h2>What support does not buy</h2>
+      <p>Listings, favorable wording, faster corrections, status changes, or influence over the methodology.</p>
     </div>
     <div class="panel mini-card">
-      <h2>Corrections remain separate</h2>
-      <p>Corrections and source submissions are reviewed on their evidence, whether or not the submitter supports the project.</p>
+      <h2>Corrections remain open</h2>
+      <p>Anyone can submit a correction or stronger source through the contact page or GitHub Issues.</p>
     </div>
   </section>
 
   <section class="panel support-footer-note">
-    <div class="bar">support policy</div>
+    <div class="bar">Questions or corrections</div>
     <div class="support-footer-body">
-      <p>
-        Stable or Gone is a historical and informational registry. It does not provide investment, legal, tax, compliance, or custody advice, and it does not evaluate whether any stablecoin is safe to hold.
-      </p>
-      <p>
-        To report incorrect information or submit stronger sources, use the <a href="/contact/">contact page</a> or <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a>.
-      </p>
+      <p>To report incorrect information, add a source, or suggest a missing record, use the <a href="/contact/">contact page</a> or <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a>.</p>
+      <p>Stable or Gone provides historical information only. Check current issuer terms, exchange notices, and market data before making decisions.</p>
     </div>
   </section>
 
@@ -174,7 +107,6 @@ const jsonLd = {
     (() => {
       const status = document.querySelector('[data-copy-status]');
       const buttons = document.querySelectorAll('[data-copy-address]');
-
       const fallbackCopy = (value) => {
         const textarea = document.createElement('textarea');
         textarea.value = value;
@@ -187,13 +119,11 @@ const jsonLd = {
         textarea.remove();
         return copied;
       };
-
       buttons.forEach((button) => {
         button.addEventListener('click', async () => {
           const address = button.getAttribute('data-copy-address') || '';
           const originalLabel = button.textContent;
           let copied = false;
-
           try {
             if (navigator.clipboard && window.isSecureContext) {
               await navigator.clipboard.writeText(address);
@@ -204,11 +134,9 @@ const jsonLd = {
           } catch {
             copied = fallbackCopy(address);
           }
-
           button.textContent = copied ? 'Copied' : 'Copy failed';
           button.setAttribute('data-copy-state', copied ? 'success' : 'error');
           if (status) status.textContent = copied ? 'Address copied to clipboard.' : 'Could not copy automatically. Select and copy the address manually.';
-
           window.setTimeout(() => {
             button.textContent = originalLabel;
             button.removeAttribute('data-copy-state');
@@ -219,220 +147,45 @@ const jsonLd = {
   </script>
 
   <style>
-    .support-hero p {
-      max-width: 72ch;
-    }
-
-    .support-intro {
-      margin-top: 20px;
-    }
-
-    .support-intro-body,
-    .support-footer-body {
-      display: grid;
-      gap: 12px;
-      padding: 18px;
-    }
-
-    .support-intro-body p,
-    .support-footer-body p {
-      max-width: none;
-    }
-
-    .wallet-section {
-      margin-top: 28px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 16px;
-    }
-
-    .section-heading .prompt {
-      margin-bottom: 8px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(26px, 4vw, 40px);
-    }
-
-    .section-heading > p {
-      text-align: right;
-      font-size: 12px;
-    }
-
-    .wallet-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .wallet-card {
-      min-width: 0;
-      padding: 18px;
-    }
-
-    .wallet-card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .wallet-card-header > div {
-      min-width: 0;
-    }
-
-    .asset-symbol {
-      display: block;
-      color: var(--green);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    .wallet-card h3 {
-      font-size: 20px;
-      letter-spacing: -0.03em;
-    }
-
-    .network-chip {
-      flex: 0 0 auto;
-      max-width: 52%;
-      border: 1px solid var(--line);
-      color: var(--gold);
-      padding: 5px 8px;
-      font-size: 10px;
-      line-height: 1.35;
-      text-align: right;
-    }
-
-    .address-block {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px 12px;
-      align-items: center;
-      padding: 14px;
-      border: 1px solid var(--line-soft);
-      background: rgba(6, 16, 24, 0.58);
-    }
-
-    .address-label {
-      grid-column: 1 / -1;
-      color: var(--muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .address-block code {
-      min-width: 0;
-      color: var(--text);
-      font-size: 12px;
-      line-height: 1.55;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      user-select: all;
-    }
-
-    .copy-button {
-      min-height: 40px;
-      border: 1px solid rgba(113, 214, 255, 0.55);
-      background: rgba(113, 214, 255, 0.08);
-      color: var(--cyan);
-      padding: 8px 11px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .copy-button:hover,
-    .copy-button:focus-visible {
-      border-color: var(--cyan);
-      background: rgba(113, 214, 255, 0.14);
-      outline: none;
-    }
-
-    .copy-button[data-copy-state='success'] {
-      color: var(--green);
-      border-color: rgba(102, 209, 158, 0.7);
-      background: rgba(102, 209, 158, 0.1);
-    }
-
-    .copy-button[data-copy-state='error'] {
-      color: var(--red);
-      border-color: rgba(221, 109, 109, 0.7);
-      background: rgba(221, 109, 109, 0.1);
-    }
-
-    .network-note {
-      margin-top: 12px;
-      padding-left: 11px;
-      border-left: 2px solid var(--amber);
-      color: var(--amber);
-      font-size: 12px;
-      max-width: none;
-    }
-
-    .copy-status {
-      min-height: 1.5em;
-      margin-top: 10px;
-      color: var(--green);
-      font-size: 12px;
-    }
-
-    .support-principles {
-      margin-top: 8px;
-    }
-
-    .support-footer-note {
-      margin-top: 20px;
-    }
-
+    .support-hero p { max-width: 72ch; }
+    .support-intro { margin-top: 20px; }
+    .support-intro-body, .support-footer-body { display: grid; gap: 12px; padding: 18px; }
+    .support-intro-body p, .support-footer-body p { max-width: none; }
+    .wallet-section { margin-top: 28px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+    .section-heading .prompt { margin-bottom: 8px; }
+    .section-heading h2 { font-size: clamp(26px, 4vw, 40px); }
+    .section-heading > p { text-align: right; font-size: 12px; }
+    .wallet-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .wallet-card { min-width: 0; padding: 18px; }
+    .wallet-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+    .wallet-card-header > div { min-width: 0; }
+    .asset-symbol { display: block; color: var(--green); font-size: 12px; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .wallet-card h3 { font-size: 20px; letter-spacing: -0.03em; }
+    .network-chip { flex: 0 0 auto; max-width: 52%; border: 1px solid var(--line); color: var(--gold); padding: 5px 8px; font-size: 10px; line-height: 1.35; text-align: right; }
+    .address-block { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 12px; align-items: center; padding: 14px; border: 1px solid var(--line-soft); background: rgba(6, 16, 24, 0.58); }
+    .address-label { grid-column: 1 / -1; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .address-block code { min-width: 0; color: var(--text); font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; word-break: break-word; user-select: all; }
+    .copy-button { min-height: 40px; border: 1px solid rgba(113, 214, 255, 0.55); background: rgba(113, 214, 255, 0.08); color: var(--cyan); padding: 8px 11px; cursor: pointer; white-space: nowrap; }
+    .copy-button:hover, .copy-button:focus-visible { border-color: var(--cyan); background: rgba(113, 214, 255, 0.14); outline: none; }
+    .copy-button[data-copy-state='success'] { color: var(--green); border-color: rgba(102, 209, 158, 0.7); background: rgba(102, 209, 158, 0.1); }
+    .copy-button[data-copy-state='error'] { color: var(--red); border-color: rgba(221, 109, 109, 0.7); background: rgba(221, 109, 109, 0.1); }
+    .network-note { margin-top: 12px; padding-left: 11px; border-left: 2px solid var(--amber); color: var(--amber); font-size: 12px; max-width: none; }
+    .copy-status { min-height: 1.5em; margin-top: 10px; color: var(--green); font-size: 12px; }
+    .support-principles { margin-top: 8px; }
+    .support-footer-note { margin-top: 20px; }
     @media (max-width: 820px) {
-      .wallet-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-heading {
-        display: grid;
-        align-items: start;
-      }
-
-      .section-heading > p {
-        text-align: left;
-      }
+      .wallet-grid { grid-template-columns: 1fr; }
+      .section-heading { display: grid; align-items: start; }
+      .section-heading > p { text-align: left; }
     }
-
     @media (max-width: 560px) {
-      .wallet-card {
-        padding: 14px;
-      }
-
-      .wallet-card-header {
-        display: grid;
-      }
-
-      .network-chip {
-        max-width: 100%;
-        width: fit-content;
-        text-align: left;
-      }
-
-      .address-block {
-        grid-template-columns: 1fr;
-      }
-
-      .address-label {
-        grid-column: auto;
-      }
-
-      .copy-button {
-        width: 100%;
-      }
+      .wallet-card { padding: 14px; }
+      .wallet-card-header { display: grid; }
+      .network-chip { max-width: 100%; width: fit-content; text-align: left; }
+      .address-block { grid-template-columns: 1fr; }
+      .address-label { grid-column: auto; }
+      .copy-button { width: 100%; }
     }
   </style>
 </BaseLayout>
