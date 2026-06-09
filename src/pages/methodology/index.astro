@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const title = 'Stable or Gone Methodology — Stablecoin Registry Rules';
-const description = 'Stable or Gone methodology for stablecoin status labels, depeg handling, reserve references, evidence coverage, visible known unknowns, and source-backed registry updates.';
+const title = 'Methodology — Stable or Gone';
+const description = 'How Stable or Gone assigns status labels, records depegs and other events, selects sources, and handles incomplete information.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -15,60 +15,60 @@ const jsonLd = {
 <BaseLayout title={title} description={description} canonicalPath="/methodology/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; open methodology</div>
+      <div class="prompt">How records are built</div>
       <h1>Methodology</h1>
-      <p>SOG records stablecoin history with source-backed notes, conservative status labels, visible uncertainty, and separate event records.</p>
+      <p>This page explains how status labels are assigned, which events are recorded, how sources are chosen, and how unresolved questions are shown.</p>
     </div>
     <div class="panel stats">
-      <div class="stat"><span>Mode</span><strong>registry</strong></div>
-      <div class="stat"><span>Scores</span><strong>none</strong></div>
+      <div class="stat"><span>Main unit</span><strong>Record</strong></div>
+      <div class="stat"><span>Review basis</span><strong>Sources</strong></div>
     </div>
   </section>
 
   <section class="section-grid">
-    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status</h2><p>Status labels describe registry state. Event records describe what happened.</p></a>
-    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Events</h2><p>Material events are kept separate from stablecoin status to avoid overstatement.</p></a>
-    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Sources</h2><p>Claims should be backed by public sources where possible.</p></a>
+    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status labels</h2><p>See how a stablecoin’s current state is kept separate from past incidents.</p></a>
+    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Event selection</h2><p>Learn which depegs and other changes are significant enough to record.</p></a>
+    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Source types</h2><p>Compare issuer statements, reports, regulatory documents, and protocol data.</p></a>
   </section>
 
   <section class="panel registry">
-    <div class="bar">what SOG is</div>
+    <div class="bar">Core approach</div>
     <table><tbody>
-      <tr><th>Registry</th><td>SOG is a historical registry for stablecoins, issuers, reserve references, event timelines, evidence, and open questions.</td></tr>
-      <tr><th>Not a ranking</th><td>SOG does not rank stablecoins, score stablecoins, recommend stablecoins, or provide investment advice.</td></tr>
-      <tr><th>Source-backed</th><td>Records should point to issuer statements, reserve references, public notices, market references, regulatory documents, archives, or other relevant public sources.</td></tr>
+      <tr><th>Separate records and events</th><td>A stablecoin record describes the asset. Event records describe dated changes such as launches, depegs, migrations, or wind-downs.</td></tr>
+      <tr><th>Prefer primary sources</th><td>Issuer statements, official notices, reports, regulatory documents, repositories, and verified contract references are preferred where available.</td></tr>
+      <tr><th>Keep context attached</th><td>A source is linked to the claim or event it supports rather than treated as proof of the whole record.</td></tr>
     </tbody></table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">status labels</div>
+    <div class="bar">Status labels</div>
     <table><tbody>
-      <tr><th>active</th><td>Recorded as operating or available based on the sources currently linked in the registry.</td></tr>
-      <tr><th>limited</th><td>Operating with notable limits such as access, geography, redemption, minting, or market availability.</td></tr>
-      <tr><th>impaired</th><td>Material issues are recorded, but the record does not support a discontinued or failed label.</td></tr>
-      <tr><th>discontinued</th><td>Issuance, support, or operation has ended or entered a wind-down state.</td></tr>
-      <tr><th>failed</th><td>The registry records a severe historical event or lifecycle outcome that supports failed status.</td></tr>
-      <tr><th>rebranded / migrated</th><td>The stablecoin or related product moved to a new name, structure, contract, or successor relationship.</td></tr>
-      <tr><th>unknown</th><td>The available sources are not enough to classify the record.</td></tr>
+      <tr><th>Active</th><td>Operating or available according to the most recent sources reviewed.</td></tr>
+      <tr><th>Limited</th><td>Still operating, but with important restrictions on access, minting, redemption, geography, or market availability.</td></tr>
+      <tr><th>Impaired</th><td>Facing material problems without enough evidence to classify it as discontinued or failed.</td></tr>
+      <tr><th>Discontinued</th><td>Issuance, support, or operation has ended or entered a formal wind-down.</td></tr>
+      <tr><th>Failed</th><td>The stablecoin no longer functions as intended after a severe event or collapse.</td></tr>
+      <tr><th>Rebranded / migrated</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr>
+      <tr><th>Unknown</th><td>Available information is not sufficient for a reliable classification.</td></tr>
     </tbody></table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">depeg handling</div>
+    <div class="bar">Depegs and other events</div>
     <table><tbody>
-      <tr><th>Minor movement</th><td>SOG does not try to record every small peg movement or short-lived market deviation.</td></tr>
-      <tr><th>Notable event</th><td>A depeg can be recorded when it is material, sustained, historically relevant, or supported by public sources.</td></tr>
-      <tr><th>Major event</th><td>A major depeg record should include context such as trigger, recovery, duration, evidence, and whether status changed.</td></tr>
-      <tr><th>Status separation</th><td>A depeg event does not automatically mean a stablecoin failed. Recovered events and failed lifecycle outcomes are recorded separately.</td></tr>
+      <tr><th>Small price movement</th><td>Short or minor deviations are normally not recorded as separate events.</td></tr>
+      <tr><th>Notable depeg</th><td>A depeg may be included when it is material, sustained, historically important, or well documented.</td></tr>
+      <tr><th>Major event</th><td>The entry should identify what happened, when it happened, whether the peg recovered, and which sources support the account.</td></tr>
+      <tr><th>Status impact</th><td>A depeg does not automatically mean failure. Recovery and long-term outcome are considered separately.</td></tr>
     </tbody></table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">uncertainty</div>
+    <div class="bar">Incomplete or conflicting information</div>
     <table><tbody>
-      <tr><th>Known unknowns</th><td>When a field needs more review, SOG keeps the uncertainty visible instead of guessing.</td></tr>
-      <tr><th>Confidence</th><td>Confidence describes the current record quality, not the safety of the stablecoin.</td></tr>
-      <tr><th>Corrections</th><td>Public, source-backed corrections can be submitted through GitHub Issues. A Google Form route will be added later.</td></tr>
+      <tr><th>Open questions</th><td>Missing dates, unclear reserve histories, uncertain issuer roles, and conflicting claims are listed explicitly.</td></tr>
+      <tr><th>Confidence</th><td>Confidence describes how complete and well supported the record is. It is not a judgment on the asset itself.</td></tr>
+      <tr><th>Corrections</th><td>Corrections and additional sources can be submitted through the contact page or GitHub Issues.</td></tr>
     </tbody></table>
   </section>
 </BaseLayout>
