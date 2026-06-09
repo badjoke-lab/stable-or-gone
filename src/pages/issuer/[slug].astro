@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel, formatStatusLabel } from '../../utils/displayLabels';
 import { issuerPublicSummaries } from '../../data/issuerPublicCopy';
+import { eventPublicCopy } from '../../data/eventPublicCopy';
 import issuersData from '../../../data/issuers.json';
 import issuersExtraData from '../../../data/issuers-extra.json';
 import stablecoinsData from '../../../data/stablecoins.json';
@@ -78,7 +79,7 @@ const jsonLd = {
   </section>
 
   <section class="panel registry"><div class="bar">Related stablecoins</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Status</th></tr></thead><tbody>{stablecoins.length === 0 ? <tr><td colspan="3">No related stablecoins have been added yet.</td></tr> : stablecoins.map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td><span class={`chip ${coin.status ?? 'unknown'}`}>{formatStatusLabel(coin.status)}</span></td></tr>))}</tbody></table></section>
-  <section class="panel registry"><div class="bar">Events</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="3">No issuer-level events have been added yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{formatPublicLabel(event.event_type)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Events</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="3">No issuer-level events have been added yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{formatPublicLabel(event.event_type)}</td></tr>))}</tbody></table></section>
   <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="2">No sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table></section>
 
   <section class="panel report-box">
