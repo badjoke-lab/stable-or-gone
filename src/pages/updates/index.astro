@@ -14,8 +14,8 @@ type UpdateRow = {
 
 const updates = (updatesData as UpdateRow[]).sort((a, b) => b.date.localeCompare(a.date));
 const categoryClass = (category: string) => `chip ${category === 'data' ? 'active' : category === 'foundation' ? 'limited' : 'unknown'}`;
-const title = 'Stable or Gone Registry Updates — Stablecoin Data Changes';
-const description = 'Reviewed updates for Stable or Gone, including stablecoin data batches, source-deepening passes, guide pages, methodology changes, and registry page changes.';
+const title = 'Updates — Stable or Gone';
+const description = 'Recent additions, corrections, source reviews, and page changes across Stable or Gone.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -23,26 +23,26 @@ const jsonLd = {
   url: 'https://sog.badjoke-lab.com/updates/',
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin registry updates', 'stablecoin data changes', 'source-deepening updates']
+  about: ['stablecoin record updates', 'source reviews', 'archive changes']
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/updates/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; tail registry-updates.log</div>
-      <h1>Registry Updates</h1>
-      <p>Short notes about changes to SOG data, pages, and methodology.</p>
+      <div class="prompt">Archive change history</div>
+      <h1>What changed</h1>
+      <p>Recent additions, corrections, source reviews, new guides, and changes to how records are presented.</p>
     </div>
     <div class="panel stats">
-      <div class="stat"><span>Entries</span><strong>{updates.length}</strong></div>
-      <div class="stat"><span>Type</span><strong>Log</strong></div>
+      <div class="stat"><span>Published updates</span><strong>{updates.length}</strong></div>
+      <div class="stat"><span>Newest first</span><strong>Yes</strong></div>
     </div>
   </section>
 
   <section class="panel registry">
-    <div class="bar">reviewed public registry changes</div>
+    <div class="bar">Update history</div>
     <table>
-      <thead><tr><th>Date</th><th>Category</th><th>Update</th><th>Related</th></tr></thead>
+      <thead><tr><th>Date</th><th>Category</th><th>Change</th><th>Related pages</th></tr></thead>
       <tbody>
         {updates.map((update) => (
           <tr>
@@ -58,19 +58,18 @@ const jsonLd = {
 
   <section class="panel support-callout support-callout-updates" aria-labelledby="support-updates-title">
     <div>
-      <div class="prompt">&gt; continue updates</div>
-      <h2 id="support-updates-title">Support continued updates</h2>
-      <p>If SOG’s record updates, source review, and evidence maintenance are useful to you, voluntary support helps sustain the ongoing work. Support never changes classifications, correction decisions, or editorial treatment.</p>
+      <div class="prompt">Support ongoing maintenance</div>
+      <h2 id="support-updates-title">Help fund the next round of updates</h2>
+      <p>Support helps cover research, source checks, broken-link review, and new records. It does not affect editorial decisions.</p>
     </div>
     <a class="support-callout-action" href="/support/">Support SOG</a>
   </section>
 
   <section class="panel registry">
-    <div class="bar">scope</div>
+    <div class="bar">Submitting a correction</div>
     <table><tbody>
-      <tr><th>Included</th><td>Registry changes, method changes, data batches, source-deepening passes, guide updates, and page changes.</td></tr>
-      <tr><th>Boundaries</th><td>No rankings, no recommendations, no safety score, and no live market signals.</td></tr>
-      <tr><th>Corrections</th><td>Send source-backed corrections through <a href="/contact/">Contact</a> or GitHub Issues.</td></tr>
+      <tr><th>Report an error</th><td>Use the <a href="/contact/">contact page</a> to report incorrect wording, missing sources, broken links, or missing records.</td></tr>
+      <tr><th>Public discussion</th><td>GitHub Issues can be used for source-backed corrections and additions.</td></tr>
     </tbody></table>
   </section>
 </BaseLayout>
