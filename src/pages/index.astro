@@ -4,14 +4,34 @@ import stablecoinsData from '../../data/stablecoins.json';
 import stablecoinsExtraData from '../../data/stablecoins-extra.json';
 import issuersData from '../../data/issuers.json';
 import eventsData from '../../data/events.json';
+import eventsPr036Data from '../../data/events-pr036.json';
+import eventsPr037Data from '../../data/events-pr037.json';
+import eventsPr038Data from '../../data/events-pr038.json';
 import evidenceData from '../../data/evidence.json';
+import evidenceExtraData from '../../data/evidence-extra.json';
+import evidencePr033Data from '../../data/evidence-pr033.json';
+import evidenceEventsPr036Data from '../../data/evidence-events-pr036.json';
+import evidenceEventsPr037Data from '../../data/evidence-events-pr037.json';
+import evidenceEventsPr038Data from '../../data/evidence-events-pr038.json';
 
-type StablecoinRow = { slug: string; name: string; symbol?: string; peg_asset?: string; collateral_model?: string; status?: string; issuer_id?: string };
+ type StablecoinRow = { slug: string; name: string; symbol?: string; peg_asset?: string; collateral_model?: string; status?: string; issuer_id?: string };
 
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
 const issuers = issuersData as unknown[];
-const events = eventsData as unknown[];
-const evidence = evidenceData as unknown[];
+const events = [
+  ...(eventsData as unknown[]),
+  ...(eventsPr036Data as unknown[]),
+  ...(eventsPr037Data as unknown[]),
+  ...(eventsPr038Data as unknown[])
+];
+const evidence = [
+  ...(evidenceData as unknown[]),
+  ...(evidenceExtraData as unknown[]),
+  ...(evidencePr033Data as unknown[]),
+  ...(evidenceEventsPr036Data as unknown[]),
+  ...(evidenceEventsPr037Data as unknown[]),
+  ...(evidenceEventsPr038Data as unknown[])
+];
 const stablecoinCount = stablecoins.length;
 const issuerCount = issuers.length + 2;
 const eventCount = events.length;
@@ -31,5 +51,14 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'St
     <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoinCount}</strong></div><div class="stat"><span>Issuers</span><strong>{issuerCount}</strong></div><div class="stat"><span>Events</span><strong>{eventCount}</strong></div><div class="stat"><span>Evidence</span><strong>{evidenceCount}</strong></div></div>
   </section>
   <section class="section-grid" aria-label="Registry sections"><a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin Registry</h2><p>Active, limited, impaired, discontinued, failed, migrated, and unknown stablecoin records.</p></a><a class="panel mini-card" href="/events/"><h2>Event Log</h2><p>Depeg, reserve, redemption, wind-down, migration, and related historical events.</p></a><a class="panel mini-card" href="/issuers/"><h2>Issuer Files</h2><p>Issuer, protocol, jurisdiction, reserve disclosure, and related stablecoin references.</p></a><a class="panel mini-card" href="/guides/"><h2>Guides</h2><p>Plain-language guides for depegs, reserve disclosure, status labels, and lifecycle terms.</p></a></section>
-  <section class="panel registry"><div class="bar">source: data/stablecoins.json + data/stablecoins-extra.json</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{coin.collateral_model ?? '—'}</td><td><span class="chip active">{coin.status ?? 'unknown'}</span></td><td>{issuerNames.get(coin.issuer_id ?? '') ?? coin.issuer_id ?? '—'}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">source: data/stablecoins.json + data/stablecoins-extra.json</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{coin.collateral_model ?? '—'}</td><td><span class={`chip ${coin.status ?? 'unknown'}`}>{coin.status ?? 'unknown'}</span></td><td>{issuerNames.get(coin.issuer_id ?? '') ?? coin.issuer_id ?? '—'}</td></tr>))}</tbody></table></section>
+
+  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title">
+    <div>
+      <div class="prompt">&gt; maintain registry</div>
+      <h2 id="support-home-title">Help maintain the registry</h2>
+      <p>Source review, evidence maintenance, historical research, and record expansion require ongoing work. Voluntary support helps keep SOG public and updated without affecting classifications or editorial decisions.</p>
+    </div>
+    <a class="support-callout-action" href="/support/">Support SOG</a>
+  </section>
 </BaseLayout>
