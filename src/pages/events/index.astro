@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPublicLabel } from '../../utils/displayLabels';
 import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
@@ -63,11 +64,11 @@ const jsonLd = {
   </section>
 
   <section class="panel registry" data-event-registry>
-    <div class="bar">source: reviewed event records across the SOG data set</div>
+    <div class="bar">reviewed stablecoin lifecycle events</div>
     <div class="registry-controls" aria-label="Event filters">
       <label><span>Search</span><input data-event-search type="search" placeholder="USDC, collapse, launch..." autocomplete="off" /></label>
-      <label><span>Type</span><select data-event-type><option value="">All types</option>{typeOptions.map((type) => <option value={type}>{type}</option>)}</select></label>
-      <label><span>Impact</span><select data-event-impact><option value="">All impact levels</option>{impactOptions.map((impact) => <option value={impact}>{impact}</option>)}</select></label>
+      <label><span>Type</span><select data-event-type><option value="">All types</option>{typeOptions.map((type) => <option value={type}>{formatPublicLabel(type)}</option>)}</select></label>
+      <label><span>Impact</span><select data-event-impact><option value="">All impact levels</option>{impactOptions.map((impact) => <option value={impact}>{formatPublicLabel(impact)}</option>)}</select></label>
       <label><span>Recovery</span><select data-event-recovery><option value="">All recovery states</option><option value="yes">Recovered</option><option value="no">Not recovered</option><option value="unknown">Not applicable / unknown</option></select></label>
       <label><span>Sort</span><select data-event-sort><option value="date_desc">Newest first</option><option value="date_asc">Oldest first</option><option value="impact">Impact</option><option value="title">Event A-Z</option></select></label>
     </div>
@@ -79,17 +80,17 @@ const jsonLd = {
           <tr><td colspan="7">No event records yet.</td></tr>
         ) : events.map((event) => {
           const stablecoin = stablecoinById.get(event.stablecoin_id ?? '');
-          const stablecoinLabel = stablecoin ? `${stablecoin.name}${stablecoin.symbol ? ` (${stablecoin.symbol})` : ''}` : (event.stablecoin_id ?? '—');
+          const stablecoinLabel = stablecoin ? `${stablecoin.name}${stablecoin.symbol ? ` (${stablecoin.symbol})` : ''}` : 'Unknown stablecoin';
           const recovery = event.recovered === true ? 'yes' : event.recovered === false ? 'no' : 'unknown';
-          const searchable = [stablecoinLabel, event.title, event.event_type, event.impact_level, recovery].filter(Boolean).join(' ').toLowerCase();
+          const searchable = [stablecoinLabel, event.title, event.event_type, formatPublicLabel(event.event_type), event.impact_level, formatPublicLabel(event.impact_level), recovery].filter(Boolean).join(' ').toLowerCase();
           return (
             <tr data-event-row data-search={searchable} data-title={event.title.toLowerCase()} data-date={event.event_date ?? ''} data-type={event.event_type ?? ''} data-impact={event.impact_level ?? ''} data-recovery={recovery}>
               <td>{event.event_date ?? '—'}</td>
               <td>{stablecoinLabel}</td>
               <td><a href={`/event/${event.id}/`}>{event.title}</a></td>
-              <td>{event.event_type ?? '—'}</td>
-              <td>{event.impact_level ?? '—'}</td>
-              <td>{recovery === 'yes' ? 'yes' : recovery === 'no' ? 'no' : '—'}</td>
+              <td>{formatPublicLabel(event.event_type)}</td>
+              <td>{formatPublicLabel(event.impact_level)}</td>
+              <td>{recovery === 'yes' ? 'Yes' : recovery === 'no' ? 'No' : '—'}</td>
               <td>{event.source_count ?? 0}</td>
             </tr>
           );
