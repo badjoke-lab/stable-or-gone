@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import { updatePublicCopy } from '../../data/updatePublicCopy';
 import updatesData from '../../../data/registry-updates.json';
 
 type UpdateRow = {
@@ -14,6 +15,7 @@ type UpdateRow = {
 
 const updates = (updatesData as UpdateRow[]).sort((a, b) => b.date.localeCompare(a.date));
 const categoryClass = (category: string) => `chip ${category === 'data' ? 'active' : category === 'foundation' ? 'limited' : 'unknown'}`;
+const latestUpdateDate = updates[0]?.date ?? '—';
 const title = 'Updates — Stable or Gone';
 const description = 'Recent additions, corrections, source reviews, and page changes across Stable or Gone.';
 const jsonLd = {
@@ -35,7 +37,7 @@ const jsonLd = {
     </div>
     <div class="panel stats">
       <div class="stat"><span>Published updates</span><strong>{updates.length}</strong></div>
-      <div class="stat"><span>Newest first</span><strong>Yes</strong></div>
+      <div class="stat"><span>Latest update</span><strong>{latestUpdateDate}</strong></div>
     </div>
   </section>
 
@@ -44,14 +46,17 @@ const jsonLd = {
     <table>
       <thead><tr><th>Date</th><th>Category</th><th>Change</th><th>Related pages</th></tr></thead>
       <tbody>
-        {updates.map((update) => (
-          <tr>
-            <td>{update.date}</td>
-            <td><span class={categoryClass(update.category)}>{formatPublicLabel(update.category)}</span></td>
-            <td><strong>{update.title}</strong><br /><span>{update.summary}</span></td>
-            <td>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</td>
-          </tr>
-        ))}
+        {updates.map((update) => {
+          const publicCopy = updatePublicCopy[update.id];
+          return (
+            <tr>
+              <td>{update.date}</td>
+              <td><span class={categoryClass(update.category)}>{formatPublicLabel(update.category)}</span></td>
+              <td><strong>{publicCopy?.title ?? update.title}</strong><br /><span>{publicCopy?.summary ?? update.summary}</span></td>
+              <td>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </section>
@@ -69,7 +74,7 @@ const jsonLd = {
     <div class="bar">Submitting a correction</div>
     <table><tbody>
       <tr><th>Report an error</th><td>Use the <a href="/contact/">contact page</a> to report incorrect wording, missing sources, broken links, or missing records.</td></tr>
-      <tr><th>Public discussion</th><td>GitHub Issues can be used for source-backed corrections and additions.</td></tr>
+      <tr><th>Public discussion</th><td>GitHub Issues can be used for corrections and additions with supporting sources.</td></tr>
     </tbody></table>
   </section>
 </BaseLayout>
