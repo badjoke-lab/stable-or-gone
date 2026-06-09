@@ -32,14 +32,58 @@ const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData a
 const stablecoin = allStablecoins.find((item) => item.id === event.stablecoin_id);
 const issuer = allIssuers.find((item) => item.id === event.issuer_id);
 const evidence = allEvidence.filter((source) => source.event_id === event.id);
-const title = `${event.title} — Stablecoin Event Record | Stable or Gone`;
-const description = event.description || `Stablecoin event record for ${event.title}, including linked stablecoin, issuer, event type, impact level, confidence, and source-backed evidence.`;
+const cleanDescription = String(event.description ?? '')
+  .replace(/SOG records this as /gi, '')
+  .replace(/SOG treats this as /gi, '')
+  .replace(/while post-collapse USTC trading is treated as lifecycle history rather than restored peg status\.?/gi, 'Post-collapse USTC trading continued, but the original peg and stablecoin function did not return.')
+  .trim();
+const title = `${event.title} — Stablecoin Event | Stable or Gone`;
+const description = cleanDescription || `${event.title}, including the date, stablecoin, issuer, outcome, and supporting sources.`;
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: event.title, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [stablecoin?.name, issuer?.name, event.event_type, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
-  <section class="hero"><div class="panel hero-main"><div class="prompt">&gt; open event record</div><h1>{event.title}</h1><p>{event.description || 'Event description pending.'}</p></div><div class="panel stats"><div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div></section>
-  <section class="section-grid" aria-label="Related event links">{stablecoin && <a class="panel mini-card" href={`/stablecoin/${stablecoin.slug}/`}><h2>{stablecoin.name}</h2><p>Open the stablecoin dossier connected to this event.</p></a>}{issuer && <a class="panel mini-card" href={`/issuer/${issuer.slug}/`}><h2>{issuer.name}</h2><p>Open the issuer or protocol file linked to this event.</p></a>}<a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Depeg guide</h2><p>Understand how SOG separates depeg events, recovered events, and failed outcomes.</p></a></section>
-  <section class="panel registry"><div class="bar">event facts</div><table><tbody><tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr><tr><th>Type</th><td>{formatPublicLabel(event.event_type)}</td></tr><tr><th>Stablecoin</th><td>{stablecoin ? <a href={`/stablecoin/${stablecoin.slug}/`}>{stablecoin.name} {stablecoin.symbol ? `(${stablecoin.symbol})` : ''}</a> : 'Unknown stablecoin'}</td></tr><tr><th>Issuer</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : 'Unknown issuer'}</td></tr><tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr><tr><th>Status effect</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr><tr><th>Recovered</th><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : '—'}</td></tr><tr><th>Recovery date</th><td>{event.recovery_date ?? '—'}</td></tr><tr><th>Failure / mechanism</th><td>{formatPublicLabel(event.failure_mechanism)}</td></tr><tr><th>Confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr><tr><th>Sources</th><td>{evidence.length}</td></tr></tbody></table></section>
-  <section class="panel registry"><div class="bar">event evidence</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="3">No event-linked evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table></section>
-  <section class="panel report-box"><h2>Report this event</h2><p>Use GitHub Issues for public, source-backed event corrections or missing evidence. Google Form support will be added later.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Open report template</a><a href="/contact/">Contact options</a></div></section>
+  <section class="hero">
+    <div class="panel hero-main">
+      <div class="prompt">Stablecoin event</div>
+      <h1>{event.title}</h1>
+      <p>{cleanDescription || 'A description has not yet been added for this event.'}</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div>
+      <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
+    </div>
+  </section>
+
+  <section class="section-grid" aria-label="Related pages">
+    {stablecoin && <a class="panel mini-card" href={`/stablecoin/${stablecoin.slug}/`}><h2>{stablecoin.name}</h2><p>Open the stablecoin record connected to this event.</p></a>}
+    {issuer && <a class="panel mini-card" href={`/issuer/${issuer.slug}/`}><h2>{issuer.name}</h2><p>View the issuer or protocol connected to this event.</p></a>}
+    <a class="panel mini-card" href="/events/"><h2>All events</h2><p>Browse the complete stablecoin event history.</p></a>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Event details</div>
+    <table><tbody>
+      <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
+      <tr><th>Type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
+      <tr><th>Stablecoin</th><td>{stablecoin ? <a href={`/stablecoin/${stablecoin.slug}/`}>{stablecoin.name} {stablecoin.symbol ? `(${stablecoin.symbol})` : ''}</a> : 'Unknown'}</td></tr>
+      <tr><th>Issuer / protocol</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : 'Unknown'}</td></tr>
+      <tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr>
+      <tr><th>Effect on status</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr>
+      <tr><th>Recovered</th><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unclear'}</td></tr>
+      <tr><th>Recovery date</th><td>{event.recovery_date ?? '—'}</td></tr>
+      <tr><th>Cause or mechanism</th><td>{formatPublicLabel(event.failure_mechanism)}</td></tr>
+      <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="3">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table>
+  </section>
+
+  <section class="panel report-box">
+    <h2>Suggest a correction</h2>
+    <p>Report an incorrect date, outcome, description, or source, or suggest a missing event.</p>
+    <div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div>
+  </section>
 </BaseLayout>
