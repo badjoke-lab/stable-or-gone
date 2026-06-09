@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'About Stable or Gone — Purpose, Scope, and Independence';
+const description = 'Learn why Stable or Gone exists, what its stablecoin history registry records, what it avoids, and how its independent source-backed maintenance is supported.';
 ---
-<BaseLayout title="About — Stable or Gone">
+<BaseLayout title={title} description={description} canonicalPath="/about/">
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">&gt; whoami</div>
@@ -28,6 +31,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <tr><th>Neutrality</th><td>Records should avoid promotional language, panic language, and investment conclusions. The goal is to show what is known, what happened, and what remains unclear.</td></tr>
       <tr><th>Evidence</th><td>Claims should be backed by public sources such as issuer statements, reserve references, public notices, event evidence, regulatory documents, archives, or other relevant sources.</td></tr>
     </tbody></table>
+  </section>
+
+  <section class="panel support-callout support-callout-about" aria-labelledby="support-about-title">
+    <div>
+      <div class="prompt">&gt; maintenance model</div>
+      <h2 id="support-about-title">How SOG is maintained</h2>
+      <p>SOG is independently maintained through ongoing source review, evidence-link maintenance, historical research, record expansion, and public-site upkeep. Voluntary support helps sustain that work.</p>
+      <p>Support does not buy inclusion, ratings, rankings, favorable wording, faster corrections, or influence over methodology. Records and corrections are handled according to available evidence.</p>
+    </div>
+    <a class="support-callout-action" href="/support/">Support SOG</a>
   </section>
 
   <section class="panel registry">
