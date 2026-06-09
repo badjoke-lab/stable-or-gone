@@ -1,16 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPublicLabel, formatStatusLabel } from '../../utils/displayLabels';
 import issuersData from '../../../data/issuers.json';
 import issuersExtraData from '../../../data/issuers-extra.json';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import eventsData from '../../../data/events.json';
+import eventsPr036Data from '../../../data/events-pr036.json';
+import eventsPr037Data from '../../../data/events-pr037.json';
+import eventsPr038Data from '../../../data/events-pr038.json';
 import evidenceData from '../../../data/evidence.json';
 import evidenceExtraData from '../../../data/evidence-extra.json';
+import evidenceEventsPr036Data from '../../../data/evidence-events-pr036.json';
+import evidenceEventsPr037Data from '../../../data/evidence-events-pr037.json';
+import evidenceEventsPr038Data from '../../../data/evidence-events-pr038.json';
 
 type IssuerRow = { id: string; slug: string; name: string; summary?: string; issuer_type?: string; jurisdiction?: string; related_stablecoins?: string[]; official_url?: string; confidence?: string; last_verified_at?: string; notes?: string; };
 type StablecoinRow = { id: string; slug: string; name: string; symbol?: string; status?: string; issuer_id?: string; };
-type EventRow = { id: string; issuer_id?: string; title: string; event_type?: string; event_date?: string; };
+type EventRow = { id: string; issuer_id?: string; title: string; event_type?: string; event_date?: string | null; };
 type EvidenceRow = { id: string; issuer_id?: string; stablecoin_id?: string; title: string; url: string; source_type?: string; };
 
 export function getStaticPaths() {
@@ -20,10 +27,11 @@ export function getStaticPaths() {
 
 const { issuer } = Astro.props as { issuer: IssuerRow };
 const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[])];
+const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
+const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
 const stablecoins = allStablecoins.filter((coin) => coin.issuer_id === issuer.id);
 const stablecoinIds = new Set(stablecoins.map((coin) => coin.id));
-const events = (eventsData as EventRow[]).filter((event) => event.issuer_id === issuer.id);
+const events = allEvents.filter((event) => event.issuer_id === issuer.id);
 const evidence = allEvidence.filter((source) => source.issuer_id === issuer.id || (source.stablecoin_id && stablecoinIds.has(source.stablecoin_id)));
 const title = `${issuer.name} stablecoin issuer file — Stable or Gone`;
 const description = issuer.summary || `${issuer.name} issuer and protocol file covering related stablecoins, jurisdiction, source-backed evidence, events, confidence, and lifecycle context.`;
@@ -40,7 +48,7 @@ const jsonLd = {
 <BaseLayout title={title} description={description} canonicalPath={`/issuer/${issuer.slug}/`} jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; open issuer/{issuer.slug}</div>
+      <div class="prompt">&gt; open issuer record</div>
       <h1>{issuer.name}</h1>
       <p>{issuer.summary || 'Issuer summary pending.'}</p>
     </div>
@@ -59,15 +67,15 @@ const jsonLd = {
   <section class="panel registry">
     <div class="bar">issuer facts</div>
     <table><tbody>
-      <tr><th>Type</th><td>{issuer.issuer_type ?? '—'}</td></tr>
-      <tr><th>Jurisdiction</th><td>{issuer.jurisdiction ?? '—'}</td></tr>
+      <tr><th>Type</th><td>{formatPublicLabel(issuer.issuer_type)}</td></tr>
+      <tr><th>Jurisdiction</th><td>{formatPublicLabel(issuer.jurisdiction, 'Unknown')}</td></tr>
       <tr><th>Official URL</th><td>{issuer.official_url ? <a href={issuer.official_url}>{issuer.official_url}</a> : '—'}</td></tr>
-      <tr><th>Confidence</th><td>{issuer.confidence ?? '—'}</td></tr>
+      <tr><th>Confidence</th><td>{formatPublicLabel(issuer.confidence)}</td></tr>
       <tr><th>Last verified</th><td>{issuer.last_verified_at ?? '—'}</td></tr>
     </tbody></table>
   </section>
-  <section class="panel registry"><div class="bar">related stablecoins</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Status</th></tr></thead><tbody>{stablecoins.length === 0 ? <tr><td colspan="3">No related stablecoin records yet.</td></tr> : stablecoins.map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.status ?? 'unknown'}</td></tr>))}</tbody></table></section>
-  <section class="panel registry"><div class="bar">issuer events</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="3">No issuer-linked events yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{event.event_type ?? '—'}</td></tr>))}</tbody></table></section>
-  <section class="panel registry"><div class="bar">evidence references</div><table><thead><tr><th>Source</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="2">No evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.source_type ?? '—'}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">related stablecoins</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Status</th></tr></thead><tbody>{stablecoins.length === 0 ? <tr><td colspan="3">No related stablecoin records yet.</td></tr> : stablecoins.map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td><span class={`chip ${coin.status ?? 'unknown'}`}>{formatStatusLabel(coin.status)}</span></td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">issuer events</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="3">No issuer-linked events yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{event.title}</a></td><td>{formatPublicLabel(event.event_type)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">evidence references</div><table><thead><tr><th>Source</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="2">No evidence records yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table></section>
   <section class="panel report-box"><h2>Report this issuer</h2><p>Use GitHub Issues for public, source-backed issuer corrections. Google Form support will be added later.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Open report template</a><a href="/contact/">Contact options</a></div></section>
 </BaseLayout>
