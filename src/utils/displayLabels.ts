@@ -44,6 +44,7 @@ const acronyms: Record<string, string> = {
   nyag: 'NYAG',
   psm: 'PSM',
   sec: 'SEC',
+  ui: 'UI',
   usd: 'USD',
   v1: 'V1',
   v2: 'V2',
@@ -56,6 +57,14 @@ export function formatPublicLabel(value?: string | null, fallback = '—'): stri
   const normalized = String(value ?? '').trim();
   if (!normalized) return fallback;
   if (exactLabels[normalized]) return exactLabels[normalized];
+
+  const isInternalValue = normalized.includes('_') || /^sog_(issuer|st|ev)_/.test(normalized);
+  if (!isInternalValue) {
+    const lower = normalized.toLowerCase();
+    if (acronyms[lower]) return acronyms[lower];
+    if (/^[a-z0-9-]+$/.test(normalized)) return lower.charAt(0).toUpperCase() + lower.slice(1);
+    return normalized;
+  }
 
   return normalized
     .replace(/^sog_(issuer|st|ev)_/, '')
