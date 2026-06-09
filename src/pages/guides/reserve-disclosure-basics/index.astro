@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-const title = 'Stablecoin Reserve Disclosure Basics — Stable or Gone Guide';
-const description = 'How SOG records stablecoin reserve disclosures, attestations, audits, protocol collateral, event disclosures, and known source gaps.';
+const title = 'How to Read Stablecoin Reserve Disclosures — Stable or Gone';
+const description = 'How to compare issuer statements, attestations, audits, protocol collateral data, and incident-specific reserve disclosures.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Stablecoin Reserve Disclosure Basics',
+  headline: title,
   description,
   url: 'https://sog.badjoke-lab.com/guides/reserve-disclosure-basics/',
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
@@ -15,53 +15,43 @@ const jsonLd = {
 <BaseLayout title={title} description={description} canonicalPath="/guides/reserve-disclosure-basics/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; guide --reserve-disclosure</div>
-      <h1>Reserve Disclosure Basics</h1>
-      <p>Stablecoins use different backing and disclosure models. SOG records the source type and uncertainty instead of turning reserve information into a safety score.</p>
+      <div class="prompt">Guide to reserve information</div>
+      <h1>How to read reserve disclosures</h1>
+      <p>Not every reserve page, attestation, audit, or protocol dashboard tells you the same thing. The source type, date, scope, and publisher all matter.</p>
     </div>
   </section>
 
   <section class="panel registry">
-    <div class="bar">how SOG reads reserve sources</div>
-    <p>
-      Reserve disclosure can mean different things depending on the stablecoin model. A fiat-backed issuer may publish a transparency page, an attestation, or an examination report. A protocol-based stablecoin may rely on collateral dashboards, vault parameters, debt-pool mechanics, or protocol documentation. SOG records which kind of source is present instead of assuming that all reserve references are equivalent.
-    </p>
-    <p>
-      This distinction matters for records such as <a href="/stablecoin/usdt/">USDT</a>, <a href="/stablecoin/usdc/">USDC</a>, <a href="/stablecoin/dai/">DAI</a>, and <a href="/stablecoin/ust/">UST</a>. A current transparency page, a period-specific report, a protocol collateral reference, and a collapse intervention source do not mean the same thing.
-    </p>
+    <div class="bar">Start with the stablecoin model</div>
+    <p>A fiat-backed stablecoin may publish a reserve breakdown, bank or custodian information, and a periodic attestation. A protocol-based stablecoin may instead expose collateral balances, vault parameters, debt positions, or liquidation rules on-chain.</p>
+    <p>Those sources answer different questions. A current transparency page describes the present. A dated report covers a specific period. A protocol dashboard may update continuously. An emergency statement may explain only one incident.</p>
   </section>
 
   <section class="panel registry">
-    <div class="bar">disclosure types</div>
+    <div class="bar">Common disclosure types</div>
     <table><tbody>
-      <tr><th>Issuer disclosure</th><td>A statement or transparency page from the issuer or related organization.</td></tr>
-      <tr><th>Attestation</th><td>A third-party or issuer-published assurance-style report for a period or date.</td></tr>
-      <tr><th>Audit</th><td>A stronger formal audit claim when the source explicitly supports that label.</td></tr>
-      <tr><th>Protocol disclosure</th><td>Collateral, vault, debt-pool, or mechanism data for protocol-based stablecoins.</td></tr>
-      <tr><th>Event disclosure</th><td>A reserve-related statement tied to a specific incident, such as bank exposure or reserve intervention.</td></tr>
+      <tr><th>Issuer statement</th><td>A page or announcement from the organization responsible for the stablecoin.</td></tr>
+      <tr><th>Attestation</th><td>An assurance report covering selected balances or claims at a stated date or period.</td></tr>
+      <tr><th>Audit</th><td>A formal audit only when the source itself clearly uses and supports that term.</td></tr>
+      <tr><th>Protocol data</th><td>On-chain collateral, debt, vault, or mechanism information for protocol-based stablecoins.</td></tr>
+      <tr><th>Incident disclosure</th><td>A statement tied to a specific event, such as bank exposure, reserve intervention, or redemption disruption.</td></tr>
     </tbody></table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">SOG rules</div>
+    <div class="bar">Questions to ask</div>
     <table><tbody>
-      <tr><th>No score</th><td>Reserve disclosure coverage is not a safety score.</td></tr>
-      <tr><th>Source-specific</th><td>Historical reserve records should point to a specific source, date, period, or archive when possible.</td></tr>
-      <tr><th>Protocol != issuer</th><td>DAI, LUSD, crvUSD, USDe, and sUSD should not be described like simple fiat-backed issuer redemption products.</td></tr>
-      <tr><th>Known unknowns</th><td>If reserve composition or report history is unclear, SOG keeps the uncertainty visible.</td></tr>
+      <tr><th>Date</th><td>When was the information measured, published, or last updated?</td></tr>
+      <tr><th>Scope</th><td>Does the source cover all reserves, selected accounts, one chain, or only one product?</td></tr>
+      <tr><th>Publisher</th><td>Was it issued by the stablecoin operator, an accounting firm, a regulator, a custodian, or a protocol dashboard?</td></tr>
+      <tr><th>Frequency</th><td>Is it a one-time report, monthly attestation, annual audit, or continuously updated data source?</td></tr>
+      <tr><th>Redemption link</th><td>Do the disclosed assets match the way holders can redeem or exit?</td></tr>
     </tbody></table>
   </section>
 
-  <section class="section-grid" aria-label="Related reserve examples">
-    <a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC reserve reports</h2><p>Fiat-backed issuer reserve reports and depeg context.</p></a>
-    <a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI protocol collateral</h2><p>Protocol-based collateral and exit mechanics require different framing.</p></a>
-    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST reserve intervention</h2><p>Collapse intervention context is not a normal reserve report.</p></a>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">related</div>
-    <table><tbody>
-      <tr><th>Read next</th><td><a href="/guides/stablecoin-lifecycle-terms/">Stablecoin Lifecycle Terms</a> · <a href="/methodology/">Methodology</a> · <a href="/stablecoins/">Stablecoins</a></td></tr>
-    </tbody></table>
+  <section class="section-grid" aria-label="Examples">
+    <a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC</h2><p>Issuer reserve reports, direct redemption terms, and the March 2023 banking event.</p></a>
+    <a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI</h2><p>Protocol collateral and exit mechanisms rather than a simple issuer redemption model.</p></a>
+    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST</h2><p>Reserve intervention during a collapse, not routine reserve reporting.</p></a>
   </section>
 </BaseLayout>
