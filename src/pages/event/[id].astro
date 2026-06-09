@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import { eventPublicCopy } from '../../data/eventPublicCopy';
 import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
@@ -32,21 +33,19 @@ const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData a
 const stablecoin = allStablecoins.find((item) => item.id === event.stablecoin_id);
 const issuer = allIssuers.find((item) => item.id === event.issuer_id);
 const evidence = allEvidence.filter((source) => source.event_id === event.id);
-const cleanDescription = String(event.description ?? '')
-  .replace(/SOG records this as /gi, '')
-  .replace(/SOG treats this as /gi, '')
-  .replace(/while post-collapse USTC trading is treated as lifecycle history rather than restored peg status\.?/gi, 'Post-collapse USTC trading continued, but the original peg and stablecoin function did not return.')
-  .trim();
-const title = `${event.title} — Stablecoin Event | Stable or Gone`;
-const description = cleanDescription || `${event.title}, including the date, stablecoin, issuer, outcome, and supporting sources.`;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: event.title, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [stablecoin?.name, issuer?.name, event.event_type, 'stablecoin event'].filter(Boolean) };
+const publicCopy = eventPublicCopy[event.id];
+const eventTitle = publicCopy?.title ?? event.title;
+const eventDescription = publicCopy?.description ?? event.description ?? 'A description has not yet been added for this event.';
+const title = `${eventTitle} — Stablecoin Event | Stable or Gone`;
+const description = eventDescription;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [stablecoin?.name, issuer?.name, event.event_type, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">Stablecoin event</div>
-      <h1>{event.title}</h1>
-      <p>{cleanDescription || 'A description has not yet been added for this event.'}</p>
+      <h1>{eventTitle}</h1>
+      <p>{eventDescription}</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div>
