@@ -1,23 +1,27 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const models = [
-  ['Fiat-backed', 'Stablecoins backed by cash or other off-chain reserve assets.'],
-  ['Crypto-collateralized', 'Stablecoins backed by on-chain crypto collateral.'],
-  ['Algorithmic', 'Stablecoins relying primarily on algorithmic or reflexive peg mechanisms.'],
-  ['Hybrid', 'Stablecoins using more than one backing or stabilization mechanism.'],
-  ['Synthetic', 'Synthetic dollar or synthetic stable-value instruments.'],
-  ['Yield-bearing', 'Stablecoins or stable-value tokens designed with yield-bearing mechanics.'],
-  ['Commodity-backed', 'Stablecoins backed by commodities or commodity claims.'],
-  ['Multi-collateral', 'Stablecoins backed by several collateral categories.'],
-  ['Unknown / under review', 'The collateral model requires further source review.']
+  ['Fiat-backed', 'Backed by cash or other off-chain reserve assets.'],
+  ['Crypto-collateralized', 'Backed by crypto assets held in smart contracts or protocol positions.'],
+  ['Algorithmic', 'Uses incentives, supply changes, or linked assets to maintain the target price.'],
+  ['Hybrid', 'Combines more than one reserve or stabilization method.'],
+  ['Synthetic', 'Tracks a dollar-like value through hedging or other synthetic exposure.'],
+  ['Yield-bearing', 'Includes an interest or yield mechanism in the token or related protocol.'],
+  ['Commodity-backed', 'Backed by commodities or claims on commodity holdings.'],
+  ['Multi-collateral', 'Uses several types of collateral rather than a single reserve asset.'],
+  ['Unknown / under review', 'Public information is not yet sufficient to classify the model confidently.']
 ];
 ---
-<BaseLayout title="Collateral Models — Stable or Gone" description="Human-readable working categories for stablecoin backing, collateral, and stabilization designs used in the Stable or Gone registry." canonicalPath="/models/">
+<BaseLayout title="Stablecoin Backing Models — Stable or Gone" description="A plain-language guide to fiat-backed, crypto-collateralized, algorithmic, synthetic, hybrid, and other stablecoin models." canonicalPath="/models/">
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; open collateral models</div>
-      <h1>Collateral Models</h1>
-      <p>Working categories for stablecoin design and reserve or collateral structure.</p>
+      <div class="prompt">Stablecoin backing models</div>
+      <h1>How stablecoins try to hold their value</h1>
+      <p>Stablecoins use different reserve, collateral, and stabilization methods. These categories describe the main design used by each record.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Models</span><strong>{models.length}</strong></div>
+      <div class="stat"><span>Purpose</span><strong>Comparison</strong></div>
     </div>
   </section>
   <section class="section-grid">
