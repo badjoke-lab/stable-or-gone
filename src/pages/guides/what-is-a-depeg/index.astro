@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-const title = 'What is a Stablecoin Depeg? — Stable or Gone Guide';
-const description = 'A plain-language guide to stablecoin depeg events, recovered depegs, major depegs, collapse outcomes, and how SOG separates events from failed status.';
+const title = 'What Is a Stablecoin Depeg? — Stable or Gone';
+const description = 'What a stablecoin depeg is, how recoveries differ from collapses, and what details matter when reviewing an event.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'What is a Stablecoin Depeg?',
+  headline: 'What Is a Stablecoin Depeg?',
   description,
   url: 'https://sog.badjoke-lab.com/guides/what-is-a-depeg/',
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
@@ -15,51 +15,42 @@ const jsonLd = {
 <BaseLayout title={title} description={description} canonicalPath="/guides/what-is-a-depeg/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; guide --depeg</div>
-      <h1>What is a Depeg?</h1>
-      <p>A depeg is a material deviation from a stablecoin's target peg. In SOG, a depeg is an event, not a status label by itself.</p>
+      <div class="prompt">Guide to depegs</div>
+      <h1>What is a depeg?</h1>
+      <p>A depeg happens when a stablecoin moves meaningfully away from the value it is designed to track. The important question is not only how far it moved, but what happened next.</p>
     </div>
   </section>
 
   <section class="panel registry">
-    <div class="bar">plain-language definition</div>
-    <p>
-      A stablecoin depeg happens when a token designed to track a reference asset, usually USD, trades or redeems away from that target in a way that is historically relevant. SOG does not treat every tiny price movement as a recordable event. The registry focuses on events with source-backed context: issuer statements, exchange notices, reserve disclosures, regulatory records, research sources, or widely documented market stress.
-    </p>
-    <p>
-      The key distinction is outcome. A stablecoin can experience a depeg and later recover, as recorded for <a href="/stablecoin/usdc/">USDC</a>. Another stablecoin can lose peg and fail as a functioning stablecoin, as recorded for <a href="/stablecoin/ust/">UST / TerraUSD</a>. Those outcomes should not be collapsed into the same label.
-    </p>
+    <div class="bar">The basic idea</div>
+    <p>A token designed to track one US dollar may trade below or above that target. Small and brief moves happen regularly; not all of them deserve a separate historical entry. A depeg becomes notable when it is large, sustained, widely documented, connected to reserve or redemption problems, or important to the stablecoin’s later history.</p>
+    <p>Outcome matters. <a href="/stablecoin/usdc/">USDC</a> lost its peg during the March 2023 banking crisis and later recovered. <a href="/stablecoin/ust/">UST / TerraUSD</a> lost its peg during a collapse and did not return as a functioning stablecoin. Those events should not be described in the same way.</p>
   </section>
 
   <section class="panel registry">
-    <div class="bar">SOG handling</div>
+    <div class="bar">What to look for</div>
     <table><tbody>
-      <tr><th>Minor movement</th><td>Small or short-lived market movements are usually not recorded as standalone events.</td></tr>
-      <tr><th>Notable depeg</th><td>A depeg can be recorded when it is material, sustained, historically relevant, or supported by public sources.</td></tr>
-      <tr><th>Major depeg</th><td>A major depeg should include context such as trigger, recovery, source list, duration if supportable, and known unknowns.</td></tr>
-      <tr><th>Collapse</th><td>A collapse is a severe lifecycle outcome. It requires stronger source support than a normal market deviation.</td></tr>
+      <tr><th>Size and duration</th><td>How far did the price or redemption value move, and how long did the deviation last?</td></tr>
+      <tr><th>Cause</th><td>Was the event linked to bank exposure, reserve concerns, liquidations, protocol design, market panic, or another trigger?</td></tr>
+      <tr><th>Redemption</th><td>Could holders redeem with the issuer or protocol, and were there delays, limits, or suspensions?</td></tr>
+      <tr><th>Recovery</th><td>Did the stablecoin return close to its target, and did normal operations resume?</td></tr>
+      <tr><th>Long-term outcome</th><td>Did the event lead to a wind-down, migration, discontinued product, or complete failure?</td></tr>
     </tbody></table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">important distinction</div>
+    <div class="bar">How events are recorded</div>
     <table><tbody>
-      <tr><th>Recovered depeg</th><td>A recovered depeg does not automatically make the stablecoin failed. USDC's March 2023 event is treated this way.</td></tr>
-      <tr><th>Failed status</th><td>Failed status is used only when the lifecycle and evidence support that outcome, such as UST after the May 2022 collapse.</td></tr>
-      <tr><th>No live price feed</th><td>SOG does not try to be a live peg monitor. Historical price values should be source-specific when used.</td></tr>
+      <tr><th>Minor movement</th><td>Usually omitted unless it became historically significant.</td></tr>
+      <tr><th>Recovered depeg</th><td>Recorded as an event while the stablecoin may remain active.</td></tr>
+      <tr><th>Unresolved depeg</th><td>Recorded with the recovery state left open when the outcome is unclear.</td></tr>
+      <tr><th>Collapse</th><td>Recorded separately when the stablecoin no longer functions as intended.</td></tr>
     </tbody></table>
   </section>
 
-  <section class="section-grid" aria-label="Related records">
-    <a class="panel mini-card" href="/event/sog_ev_usdc_2023_03_depeg/"><h2>USDC March 2023 depeg</h2><p>Recovered depeg event with banking exposure context.</p></a>
-    <a class="panel mini-card" href="/event/sog_ev_ust_2022_05_collapse/"><h2>UST collapse</h2><p>Failed lifecycle outcome, separated from post-collapse USTC trading.</p></a>
-    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status vs Event</h2><p>Why depeg is an event and failed is a lifecycle status.</p></a>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">related</div>
-    <table><tbody>
-      <tr><th>Read next</th><td><a href="/guides/status-vs-event/">Stablecoin Status vs Event</a> · <a href="/methodology/">Methodology</a> · <a href="/events/">Events</a></td></tr>
-    </tbody></table>
+  <section class="section-grid" aria-label="Examples and next steps">
+    <a class="panel mini-card" href="/event/sog_ev_usdc_2023_03_depeg/"><h2>USDC in March 2023</h2><p>A recovered depeg linked to banking exposure.</p></a>
+    <a class="panel mini-card" href="/event/sog_ev_ust_2022_05_collapse/"><h2>UST in May 2022</h2><p>A collapse that ended the original stablecoin’s function.</p></a>
+    <a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status and event records</h2><p>Why a past incident and a current status are kept separate.</p></a>
   </section>
 </BaseLayout>
