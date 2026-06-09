@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPublicLabel } from '../../utils/displayLabels';
 import issuersData from '../../../data/issuers.json';
 import issuersExtraData from '../../../data/issuers-extra.json';
+import stablecoinsData from '../../../data/stablecoins.json';
+import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 
 type IssuerRow = {
   slug: string;
@@ -12,7 +15,15 @@ type IssuerRow = {
   confidence?: string;
 };
 
+type StablecoinRow = {
+  slug: string;
+  name: string;
+  symbol?: string;
+};
+
 const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
+const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
+const stablecoinBySlug = new Map(stablecoins.map((coin) => [coin.slug, coin] as const));
 const title = 'Stablecoin Issuers and Protocols — Stable or Gone';
 const description = 'Browse stablecoin issuer, protocol, company, jurisdiction, related stablecoin, confidence, and evidence context records in Stable or Gone.';
 const jsonLd = {
@@ -45,21 +56,24 @@ const jsonLd = {
   </section>
 
   <section class="panel registry">
-    <div class="bar">source: data/issuers.json + data/issuers-extra.json</div>
+    <div class="bar">reviewed issuer and protocol records</div>
     <table>
       <thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Confidence</th></tr></thead>
       <tbody>
         {issuers.length === 0 ? (
           <tr><td colspan="5">No issuer records yet.</td></tr>
-        ) : issuers.map((issuer) => (
-          <tr>
-            <td><a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a></td>
-            <td>{issuer.issuer_type ?? '—'}</td>
-            <td>{issuer.jurisdiction ?? '—'}</td>
-            <td>{issuer.related_stablecoins?.join(', ') ?? '—'}</td>
-            <td>{issuer.confidence ?? '—'}</td>
-          </tr>
-        ))}
+        ) : issuers.map((issuer) => {
+          const related = (issuer.related_stablecoins ?? []).map((slug) => stablecoinBySlug.get(slug)).filter(Boolean) as StablecoinRow[];
+          return (
+            <tr>
+              <td><a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a></td>
+              <td>{formatPublicLabel(issuer.issuer_type)}</td>
+              <td>{formatPublicLabel(issuer.jurisdiction, 'Unknown')}</td>
+              <td>{related.length > 0 ? related.map((coin, index) => (<>{coin.name}{coin.symbol ? ` (${coin.symbol})` : ''}{index < related.length - 1 ? <span> · </span> : null}</>)) : '—'}</td>
+              <td>{formatPublicLabel(issuer.confidence)}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </section>
