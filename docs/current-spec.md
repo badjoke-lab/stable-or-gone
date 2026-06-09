@@ -1,6 +1,6 @@
 # Stable or Gone Current Specification
 
-Updated: 2026-06-07
+Updated: 2026-06-09
 
 ## 1. Product definition
 
@@ -12,79 +12,119 @@ Public URL:
 https://sog.badjoke-lab.com/
 ```
 
-SOG records stablecoin entities, issuers, events, reserve references, redemption context, regulatory/official context, deployment/contract notes, evidence, registry updates, and visible uncertainty.
+SOG records:
+
+```txt
+historical dossier
+evidence registry
+lifecycle archive
+event history
+issuer / protocol context
+reserve / redemption context
+regulatory context
+known unknowns
+```
 
 SOG is not:
 
-- a live price dashboard
-- a market cap ranking
-- a trading terminal
-- a stablecoin safety rating site
-- a recommendation engine
-- an investment guide
-- a legal or regulatory advice service
+```txt
+live price dashboard
+market-cap ranking
+trading terminal
+stablecoin safety score
+investment advice
+legal advice
+recommendation engine
+```
+
+Public wording should prefer source-backed historical context and avoid unsupported safety or recommendation language.
 
 ## 2. Current public state
 
-SOG is publicly deployed on the official custom domain.
-
-Current state:
+Latest confirmed public baseline:
 
 ```txt
-20 stablecoin records
-16 issuer records
-3 event records
-59 evidence records
-30 reserve references
-45 known unknowns
+20 stablecoins
+16 issuers
+23 events
+90 evidence records
+40 reserve references
+50 known unknowns
 9 regulatory notes
-31 deployments
-Top 5 original records deepened
-PR-026 seed expansion batch 4 added
-PR-028A to PR-028E new 5 records deepened
-PR-031 validator and supplemental data integration completed
-Registry search/filter implemented
-Guides and glossary added
-Registry updates page added
-SEO-005 to SEO-009 baseline completed
-Public deploy confirmed after PR-031
+37 deployments
+75 static pages
 ```
 
-Build / validation status from the latest confirmed Cloudflare deploy:
+Latest confirmed validation and deployment state:
 
 ```txt
-SOG data validation passed: 20 stablecoins, 16 issuers, 3 events, 59 evidence records, 30 reserve references, 45 known unknowns, 9 regulatory notes, 31 deployments.
-astro check: 0 errors, 0 warnings, 1 hint
-astro build: 55 pages built
-Cloudflare Pages deploy: Success
+SOG data validation passed
+astro check: 0 errors
+astro build: completed
+Cloudflare Pages deploy: succeeded through PR-038
 ```
 
-The remaining Astro hint is about JSON-LD script inline handling in `BaseLayout.astro`. It is not a build blocker.
+PR-039 event UX strengthening is present in the repository. A separate successful Cloudflare deploy after PR-039 has not yet been explicitly confirmed in this document.
 
-## 3. Competitive position
-
-SOG should compete as:
+Astro currently reports three non-blocking inline-script hints in `src/layouts/BaseLayout.astro`:
 
 ```txt
-historical dossier + evidence registry + lifecycle archive
+GA4 loader script
+GA4 inline script
+JSON-LD script
 ```
 
-The winning angle is not current market data. The winning angle is making it easy to inspect:
+These hints request explicit `is:inline` handling and are not build blockers.
 
-- what the stablecoin is
-- who issued it
-- how it was designed
-- how reserve disclosure is represented
-- who could redeem and under what terms
-- what material events happened
-- whether a depeg recovered
-- whether the token was discontinued, failed, migrated, or rebranded
-- what public sources support the record
-- what remains unclear
+## 3. Current records
+
+Stablecoins:
+
+```txt
+USDT
+USDC
+DAI
+UST / TerraUSD
+BUSD
+FRAX
+TUSD
+FDUSD
+PYUSD
+USDD
+GUSD
+LUSD
+crvUSD
+USDe
+sUSD
+RLUSD
+EURC
+USDP
+USDG
+USDS
+```
+
+Issuers / protocol contexts:
+
+```txt
+Tether
+Circle
+MakerDAO / Sky
+Terraform Labs
+Paxos
+Frax Finance
+TrueUSD
+First Digital / FD121
+TRON DAO Reserve
+Gemini
+Liquity
+Curve Finance
+Ethena Labs
+Synthetix
+Ripple
+Global Dollar Network
+```
 
 ## 4. Core pages
-
-Current public pages:
 
 ```txt
 /
@@ -111,11 +151,11 @@ Current public pages:
 /og/sog-og.svg
 ```
 
-Additional batch 4 records use the same shared detail view as the original records through `/stablecoin/[slug]/`.
+All stablecoin records use the shared `/stablecoin/[slug]/` detail route and `StablecoinDetailView.astro`.
 
-## 5. Core data files
+## 5. Core data layers
 
-Current data files:
+Primary and supplemental data files currently include:
 
 ```txt
 data/stablecoins.json
@@ -123,40 +163,42 @@ data/stablecoins-extra.json
 data/issuers.json
 data/issuers-extra.json
 data/events.json
+data/events-pr036.json
+data/events-pr037.json
+data/events-pr038.json
 data/evidence.json
 data/evidence-extra.json
+data/evidence-pr033.json
+data/evidence-events-pr036.json
+data/evidence-events-pr037.json
+data/evidence-events-pr038.json
 data/reserve-reports.json
 data/reserve-reports-extra.json
+data/reserve-reports-pr033.json
+data/reserve-reports-pr034.json
 data/known-unknowns.json
 data/known-unknowns-extra.json
+data/known-unknowns-pr033.json
+data/known-unknowns-pr034.json
 data/regulatory-notes.json
 data/deployments.json
 data/deployments-extra.json
 data/registry-updates.json
 ```
 
-The `*-extra.json` files are supplemental data layers used during seed expansion and source-deepening. They are now included in:
+`data/known-unknowns-pr034.json` is intentionally retained as an empty compatibility array until validator/import cleanup is completed.
+
+Canonical validation command:
 
 ```txt
-scripts/validate-data.mjs
-/stablecoins/
-/stablecoin/[slug]/
-/issuers/
-/issuer/[slug]/
-/sitemap-index.xml
-```
-
-Build validation:
-
-```txt
-scripts/validate-data.mjs
 npm run validate:data
+npm run check
 npm run build
 ```
 
-The build should fail on broken JSON, missing required IDs, duplicate IDs/slugs, invalid URLs, missing stablecoin references, missing issuer references, missing event references, or missing deployment evidence references covered by the validator.
+The validator combines all current supplemental event/evidence/reserve/known-unknown layers and rejects missing files, invalid JSON, duplicate IDs/slugs, broken references, and invalid URLs covered by the current rules.
 
-## 6. Status labels
+## 6. Status model
 
 Current status enum:
 
@@ -173,177 +215,132 @@ unknown
 
 Rules:
 
-- `depegged` is not a status.
-- Depeg is an event type.
+- `depegged` is an event, not a status.
 - A recovered depeg does not make a stablecoin failed.
-- Failed status requires source-backed lifecycle/event context, not price movement alone.
+- Failed status requires source-backed lifecycle context, not price movement alone.
+- Issuer redemption, protocol exits, exchange support, and secondary-market behavior must remain separate.
 
-## 7. Current SEO baseline
+## 7. Event layer
 
-Completed SEO work:
+The event layer expanded from 3 to 23 records through PR-036 to PR-038.
 
-```txt
-SEO-005 page-specific title / description strengthened
-SEO-006 JSON-LD added
-SEO-007 OG image asset added
-SEO-008 internal links / related records strengthened
-SEO-009 guide pages strengthened for search-oriented text
-```
-
-Implemented behavior:
-
-- `BaseLayout.astro` supports canonical URL, Open Graph tags, Twitter card tags, OG image URL, and JSON-LD injection.
-- Home, registry/list pages, detail pages, guides, methodology, and updates use page-specific metadata where updated.
-- Stablecoin detail pages expose Dataset JSON-LD.
-- Event detail pages expose Article JSON-LD.
-- Issuer detail pages expose Organization JSON-LD.
-- Guide and methodology pages expose Article JSON-LD.
-- Registry and updates pages expose CollectionPage JSON-LD.
-- Default OG image exists at `/og/sog-og.svg`.
-- Guide pages have stronger explanatory text and internal links to related records.
-
-Representative SEO files:
+Current event files:
 
 ```txt
-src/layouts/BaseLayout.astro
-public/og/sog-og.svg
-src/pages/index.astro
-src/pages/stablecoins/index.astro
-src/pages/stablecoin/[slug].astro
-src/components/StablecoinDetailView.astro
-src/pages/events/index.astro
-src/pages/event/[id].astro
-src/pages/issuers/index.astro
-src/pages/issuer/[slug].astro
-src/pages/guides/what-is-a-depeg/index.astro
-src/pages/guides/status-vs-event/index.astro
-src/pages/guides/reserve-disclosure-basics/index.astro
-src/pages/guides/stablecoin-lifecycle-terms/index.astro
-src/pages/methodology/index.astro
-src/pages/updates/index.astro
+data/events.json
+data/events-pr036.json
+data/events-pr037.json
+data/events-pr038.json
 ```
 
-## 8. Current limitations
-
-Known limitations:
-
-- original 10 non-top-5 records remain mostly shallow seed entries
-- source-specific market prices and depeg durations are not yet selected
-- period-level reserve report histories are not complete
-- many contract addresses and chain-by-chain deployment statuses are still source-review areas
-- redemption access fields need more direct source extraction
-- lifecycle map is event-derived, not yet a dedicated lifecycle data model
-- regulatory notes exist but are not complete
-- Google Form URL is not inserted yet
-- comparison pages are not implemented yet
-- `*-extra.json` files are functional and validated, but should later be normalized or merged through a safer batch data pipeline
-
-## 9. Source-deepening status
-
-Completed source-deepening sequence:
-
-```txt
-PR-024A USDC source-deepening — completed
-PR-024B BUSD source-deepening — completed
-PR-024C UST source-deepening — completed
-PR-024D USDT / DAI source-deepening — completed
-PR-028A RLUSD source-deepening — completed
-PR-028B EURC source-deepening — completed
-PR-028C USDP source-deepening — completed
-PR-028D USDG source-deepening — completed
-PR-028E USDS source-deepening — completed
-```
-
-Rules for source-deepening:
-
-- prefer official issuer, regulator, exchange, protocol, repository, explorer, or primary documentation sources
-- use news/research as context when primary sources are unavailable or when analysis is needed
-- do not display source-specific market lows or durations until a source is selected
-- do not convert evidence coverage into a score
-- keep issuer redemption, protocol exits, and market exits separate
-- keep known unknowns visible when exact source support is incomplete
-- distinguish fiat-backed issuer redemption from protocol/app-based conversion and exit mechanics
-- keep related assets such as sUSDS separate from the base stablecoin record
-
-## 10. Current records
-
-Current stablecoin records:
+PR-036 added lifecycle, regulatory, reserve, recovery, chain-halt, and exchange phase-out context for:
 
 ```txt
 USDT
 USDC
 DAI
-UST / TerraUSD
+UST
 BUSD
-FRAX
-TUSD
+```
+
+PR-037 added event context for:
+
+```txt
 FDUSD
 PYUSD
 USDD
+```
+
+FRAX and TUSD were deliberately deferred where exact dated primary-source events were not yet strong enough.
+
+PR-038 added event context for:
+
+```txt
 GUSD
 LUSD
 crvUSD
 USDe
 sUSD
-RLUSD
-EURC
-USDP
-USDG
-USDS
 ```
 
-Current issuer records:
+Event targets:
 
 ```txt
-Tether
-Circle
-MakerDAO / Sky
-Terraform Labs
-Paxos
-Frax Finance
-TrueUSD
-First Digital / FD121
-TRON DAO Reserve
-Gemini
-Liquity
-Curve Finance
-Ethena Labs
-Synthetix
-Ripple
-Global Dollar Network
+current: 23
+v0.1 target: 30+
+later target: 60+
 ```
 
-Current event records:
+## 8. Event UX
+
+PR-039 is implemented in the repository.
+
+`/events/` currently provides:
 
 ```txt
-USDC March 2023 depeg
-UST May 2022 collapse
-BUSD wind-down
+search
+event_type filter
+impact_level filter
+recovery-state filter
+newest / oldest sorting
+impact sorting
+title sorting
+visible result count
+stablecoin name column
 ```
 
-Deepened original top 5 records:
+Stablecoin detail pages expose event counts in the hero and event-section link treatment.
+
+Nullable event fields are supported:
+
+```ts
+event_date?: string | null;
+recovered?: boolean | null;
+```
+
+## 9. Evidence and source rules
+
+Prefer:
 
 ```txt
-USDT
-USDC
-DAI
-UST / TerraUSD
-BUSD
+official dated announcement
+regulator release
+official protocol or issuer documentation
+official exchange notice
+primary repository release
+verified explorer / contract reference
 ```
 
-Deepened PR-026 batch 4 records:
+Use news and research for context when primary sources are unavailable or analysis is required.
+
+Do not:
 
 ```txt
-RLUSD
-EURC
-USDP
-USDG
-USDS
+turn evidence coverage into a safety score
+force exact dates from broad documentation entry pages
+collapse issuer redemption and protocol conversion into one field
+hide unresolved questions
 ```
+
+Known unknowns remain visible when exact public support is incomplete.
+
+## 10. SEO baseline
+
+Completed baseline:
+
+```txt
+SEO-005 page-specific title / description
+SEO-006 JSON-LD
+SEO-007 OG image
+SEO-008 internal links / related records
+SEO-009 guide text strengthening
+```
+
+`BaseLayout.astro` supports canonical URLs, Open Graph, Twitter cards, OG image URLs, GA4 hooks, and JSON-LD injection.
+
+Detail and collection pages use page-specific metadata and structured data where implemented.
 
 ## 11. Current UI direction
-
-Design direction:
 
 ```txt
 Terminal Registry UI
@@ -351,54 +348,64 @@ Terminal Registry UI
 
 Rules:
 
-- terminal-inspired, not MS-DOS clone
+- terminal-inspired, not an MS-DOS clone
 - registry-first, not trading-terminal-first
 - dense tables are acceptable
-- source/evidence/log language is preferred
-- status colors should be stable and restrained
-- support route exists but is secondary
-- additional records must not use separate simplified detail pages; they should use the shared detail view
+- evidence/log language is preferred
+- status colors should be restrained and stable
+- support remains secondary
+- shared detail routes must not regress into simplified one-off pages
 
-## 12. Next implementation focus
+## 12. Current limitations
 
-Next PR:
+- event coverage is improved but still uneven across the 20 records
+- FRAX and TUSD need exact-source event passes
+- several protocol events still have low confidence or broad lifecycle dates
+- source-specific reserve histories are incomplete
+- chain-by-chain deployment coverage is incomplete
+- redemption access needs more direct source extraction
+- regulatory notes are not comprehensive
+- Google Form URL is not inserted yet
+- comparison and reserve-history views are not implemented
+- supplemental JSON layers should later be normalized through a safer batch pipeline
+- PR-039 requires explicit post-change public deploy confirmation
 
-```txt
-PR-033 Original seed record bottom-up pass
-```
+## 13. Next implementation focus
 
-Purpose:
-
-```txt
-Improve the shallow original non-top-5 records so the site no longer has a strong top layer and visibly thin middle layer.
-```
-
-Recommended PR-033 target set:
-
-```txt
-FRAX
-TUSD
-FDUSD
-PYUSD
-USDD
-```
-
-PR-033 checklist:
+Next work item:
 
 ```txt
-add or strengthen evidence references
-add reserve/transparency references
-add deployment notes
-split known unknowns
-update stablecoin body fields where needed
-keep validator passing at 20 records
-confirm Cloudflare build/deploy
+PR-041 Event quality pass + 30-event target
 ```
 
-After PR-033:
+Priority candidates:
 
 ```txt
-PR-034 Second bottom-up pass for GUSD / LUSD / crvUSD / USDe / sUSD
-PR-035 Registry Updates / docs sync
-PR-036 Comparison or reference page decision
+FRAX exact-source events
+TUSD exact-source events
+USDD depeg / market-stress event
+GUSD attestation-history event
+LUSD V1 / V2 / BOLD lifecycle separation
+crvUSD exact launch / collateral events
+USDe exact launch / reserve / risk event
+sUSD V2 / V3 transition event
 ```
+
+Rules for PR-041:
+
+- do not add an event only to reach a count
+- prefer exact dated primary sources
+- keep broad lifecycle context separate from discrete incidents
+- preserve nullable dates when exact timing is genuinely unresolved
+- keep validation and static event detail generation passing
+
+## 14. Following decision point
+
+After the 30-event target:
+
+```txt
+PR-042 Comparison / reserve-history / issuer-deepening decision
+PR-043 Selected feature implementation
+```
+
+The next feature should be chosen based on evidence value and registry usefulness, not dashboard novelty.
