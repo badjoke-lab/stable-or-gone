@@ -3,37 +3,37 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const guides = [
   {
-    title: 'What is a Depeg?',
+    title: 'What Is a Depeg?',
     href: '/guides/what-is-a-depeg/',
-    summary: 'How SOG separates small peg movement, notable depeg events, major depegs, and collapse outcomes.'
+    summary: 'Learn what counts as a depeg, how recoveries are recorded, and when a depeg becomes part of a larger collapse.'
   },
   {
-    title: 'Stablecoin Status vs Event',
+    title: 'Status and Event Records',
     href: '/guides/status-vs-event/',
-    summary: 'Why “active”, “discontinued”, and “failed” are status labels while depegs and wind-downs are events.'
+    summary: 'See why a stablecoin can remain active after an incident, and how status labels differ from dated events.'
   },
   {
-    title: 'Reserve Disclosure Basics',
+    title: 'Reading Reserve Disclosures',
     href: '/guides/reserve-disclosure-basics/',
-    summary: 'How SOG records issuer disclosures, attestations, audits, protocol collateral, and known gaps.'
+    summary: 'Understand issuer reports, attestations, audits, protocol collateral data, and gaps in public reporting.'
   },
   {
     title: 'Stablecoin Lifecycle Terms',
     href: '/guides/stablecoin-lifecycle-terms/',
-    summary: 'A short guide to launch, migration, rebrand, wind-down, failure, and post-collapse lifecycle records.'
+    summary: 'A guide to launches, migrations, rebrands, wind-downs, failures, and post-collapse trading.'
   }
 ];
 ---
-<BaseLayout title="Guides — Stable or Gone" description="Short registry guides for understanding stablecoin status, depegs, reserve disclosure, and lifecycle terms.">
+<BaseLayout title="Guides — Stable or Gone" description="Guides to stablecoin depegs, status labels, reserve disclosures, and lifecycle changes.">
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; open guides</div>
-      <h1>Guides</h1>
-      <p>Short reference pages for reading SOG records. These guides explain registry terms; they do not rank, recommend, or rate stablecoins.</p>
+      <div class="prompt">Stablecoin reference guides</div>
+      <h1>Understand the records</h1>
+      <p>These guides explain the terms and distinctions used throughout the archive, with examples from existing stablecoin records.</p>
     </div>
     <div class="panel stats">
-      <div class="stat"><span>Guide type</span><strong>reference</strong></div>
-      <div class="stat"><span>Advice</span><strong>none</strong></div>
+      <div class="stat"><span>Guides</span><strong>{guides.length}</strong></div>
+      <div class="stat"><span>Topics</span><strong>4</strong></div>
     </div>
   </section>
 
@@ -47,11 +47,11 @@ const guides = [
   </section>
 
   <section class="panel registry">
-    <div class="bar">scope</div>
+    <div class="bar">More reference pages</div>
     <table><tbody>
-      <tr><th>Purpose</th><td>Help users understand how SOG records evidence, events, lifecycle state, and uncertainty.</td></tr>
-      <tr><th>Not included</th><td>No rankings, no investment advice, no stablecoin safety score, and no live market signals.</td></tr>
-      <tr><th>Related</th><td><a href="/glossary/">Glossary</a> · <a href="/methodology/">Methodology</a> · <a href="/stablecoins/">Stablecoin Registry</a></td></tr>
+      <tr><th>Glossary</th><td><a href="/glossary/">Definitions of common terms used across the archive</a></td></tr>
+      <tr><th>Methodology</th><td><a href="/methodology/">How records, events, and status labels are reviewed</a></td></tr>
+      <tr><th>Stablecoins</th><td><a href="/stablecoins/">Browse all stablecoin records</a></td></tr>
     </tbody></table>
   </section>
 </BaseLayout>
