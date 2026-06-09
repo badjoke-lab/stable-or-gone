@@ -27,15 +27,54 @@ const evidence = [...(evidenceData as unknown[]), ...(evidenceExtraData as unkno
 const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
 
 const title = 'Stable or Gone — Stablecoin History Registry';
-const description = 'Source-backed stablecoin history registry covering depeg events, failed and discontinued stablecoins, issuers, reserve references, redemption context, and known unknowns.';
-const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/', description, inLanguage: 'en', about: ['stablecoins', 'depeg events', 'reserve disclosure', 'stablecoin lifecycle history'] };
+const description = 'Explore stablecoin histories, depegs, launches, wind-downs, failures, issuers, reserve information, redemption terms, and the sources behind each record.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/', description, inLanguage: 'en', about: ['stablecoins', 'depeg events', 'reserve disclosure', 'stablecoin history'] };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
   <section class="hero">
-    <div class="panel hero-main"><div class="prompt">&gt; open /registry/stablecoins</div><h1>Stablecoin records, depeg events, and evidence.</h1><p>Stable or Gone is a terminal-style registry for stablecoins, issuers, reserve disclosure, redemption access, event history, lifecycle changes, and source-backed evidence.</p></div>
-    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Issuers</span><strong>{issuers.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Evidence</span><strong>{evidence.length}</strong></div></div>
+    <div class="panel hero-main">
+      <div class="prompt">Stablecoin history archive</div>
+      <h1>Stablecoin histories, major events, and sources.</h1>
+      <p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, and redemption terms across the stablecoin market.</p>
+    </div>
+    <div class="panel stats" aria-label="Registry summary">
+      <div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div>
+      <div class="stat"><span>Issuers</span><strong>{issuers.length}</strong></div>
+      <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
+      <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
+    </div>
   </section>
-  <section class="section-grid" aria-label="Registry sections"><a class="panel mini-card" href="/stablecoins/"><h2>Stablecoin Registry</h2><p>Active, limited, impaired, discontinued, failed, migrated, and unknown stablecoin records.</p></a><a class="panel mini-card" href="/events/"><h2>Event Log</h2><p>Depeg, reserve, redemption, wind-down, migration, and related historical events.</p></a><a class="panel mini-card" href="/issuers/"><h2>Issuer Files</h2><p>Issuer, protocol, jurisdiction, reserve disclosure, and related stablecoin references.</p></a><a class="panel mini-card" href="/guides/"><h2>Guides</h2><p>Plain-language guides for depegs, reserve disclosure, status labels, and lifecycle terms.</p></a></section>
-  <section class="panel registry"><div class="bar">reviewed stablecoin registry records</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td><td>{issuerById.get(coin.issuer_id ?? '') ?? 'Unknown issuer'}</td></tr>))}</tbody></table></section>
-  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title"><div><div class="prompt">&gt; maintain registry</div><h2 id="support-home-title">Help maintain the registry</h2><p>Source review, evidence maintenance, historical research, and record expansion require ongoing work. Voluntary support helps keep SOG public and updated without affecting classifications or editorial decisions.</p></div><a class="support-callout-action" href="/support/">Support SOG</a></section>
+
+  <section class="section-grid" aria-label="Main sections">
+    <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Compare status, issuer, peg, backing model, redemption access, and history.</p></a>
+    <a class="panel mini-card" href="/events/"><h2>Explore events</h2><p>Review depegs, launches, regulatory actions, migrations, wind-downs, and collapses.</p></a>
+    <a class="panel mini-card" href="/issuers/"><h2>View issuers</h2><p>See the companies, protocols, and organizations behind each stablecoin.</p></a>
+    <a class="panel mini-card" href="/guides/"><h2>Read the guides</h2><p>Understand depegs, reserve disclosures, status labels, and lifecycle terms.</p></a>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Selected stablecoin records</div>
+    <table>
+      <thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead>
+      <tbody>{stablecoins.slice(0, 10).map((coin) => (
+        <tr>
+          <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
+          <td>{coin.symbol ?? '—'}</td>
+          <td>{coin.peg_asset ?? '—'}</td>
+          <td>{formatPublicLabel(coin.collateral_model)}</td>
+          <td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td>
+          <td>{issuerById.get(coin.issuer_id ?? '') ?? 'Unknown issuer'}</td>
+        </tr>
+      ))}</tbody>
+    </table>
+  </section>
+
+  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title">
+    <div>
+      <div class="prompt">Support the archive</div>
+      <h2 id="support-home-title">Help keep the records current</h2>
+      <p>Support helps cover research, source checks, link maintenance, and new records. It does not affect how any stablecoin is described.</p>
+    </div>
+    <a class="support-callout-action" href="/support/">Support SOG</a>
+  </section>
 </BaseLayout>
