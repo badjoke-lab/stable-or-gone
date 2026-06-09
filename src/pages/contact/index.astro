@@ -1,37 +1,52 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Contact — Stable or Gone">
+<BaseLayout title="Contact and Corrections — Stable or Gone" description="Report an error, submit a missing stablecoin or event, add a source, or flag a broken link in Stable or Gone." canonicalPath="/contact/">
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">&gt; submit correction</div>
-      <h1>Contact / Submit Correction</h1>
-      <p>Use this page to report missing records, corrections, source links, broken links, or general contact items.</p>
+      <div class="prompt">Corrections and submissions</div>
+      <h1>Help improve the archive</h1>
+      <p>Report an error, suggest a missing stablecoin or event, add a stronger source, or flag a broken link.</p>
+    </div>
+    <div class="panel stats">
+      <div class="stat"><span>Public reports</span><strong>GitHub</strong></div>
+      <div class="stat"><span>Best evidence</span><strong>Source URL</strong></div>
     </div>
   </section>
+
   <section class="section-grid">
-    <div class="panel mini-card">
-      <h2>Google Form</h2>
-      <p>Use the Google Form for private, simple, or non-technical reports. URL is still TODO.</p>
-    </div>
-    <a class="panel mini-card" href="https://github.com/badjoke-lab/stable-or-gone/issues">
-      <h2>GitHub Issues</h2>
-      <p>Use GitHub Issues for public, source-backed corrections and missing evidence reports.</p>
-    </a>
     <a class="panel mini-card" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">
-      <h2>Open report template</h2>
-      <p>Choose correction, missing stablecoin, or missing event/evidence templates.</p>
+      <h2>Start a new report</h2>
+      <p>Choose a template for a correction, missing stablecoin, missing event, or missing source.</p>
+    </a>
+    <a class="panel mini-card" href="https://github.com/badjoke-lab/stable-or-gone/issues">
+      <h2>View existing reports</h2>
+      <p>Check open and closed reports before submitting a duplicate.</p>
+    </a>
+    <a class="panel mini-card" href="/methodology/">
+      <h2>Review the methodology</h2>
+      <p>See how status labels, events, sources, and unresolved questions are handled.</p>
     </a>
   </section>
+
   <section class="panel registry">
-    <div class="bar">report types</div>
+    <div class="bar">What to include</div>
     <table>
       <tbody>
-        <tr><th>Correction</th><td>Wrong status, issuer, event, source, or wording.</td></tr>
-        <tr><th>Missing stablecoin</th><td>Stablecoin candidate not yet in the registry.</td></tr>
-        <tr><th>Missing event/evidence</th><td>Depeg, reserve, redemption, wind-down, or source reference.</td></tr>
-        <tr><th>Broken link</th><td>Dead source URL or archive issue.</td></tr>
+        <tr><th>Correction</th><td>Link the affected page, identify the incorrect statement, and provide a source supporting the change.</td></tr>
+        <tr><th>Missing stablecoin</th><td>Provide the name, symbol, issuer or protocol, launch information, and at least one reliable source.</td></tr>
+        <tr><th>Missing event</th><td>Include the stablecoin, date, event description, outcome, and source links.</td></tr>
+        <tr><th>Broken link</th><td>Share the affected page and source title. An archived replacement is helpful when available.</td></tr>
       </tbody>
     </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Review process</div>
+    <table><tbody>
+      <tr><th>Evidence first</th><td>Submissions are reviewed against the sources provided and any additional sources found during review.</td></tr>
+      <tr><th>No automatic changes</th><td>A report may be accepted, revised, left open for more evidence, or declined with an explanation.</td></tr>
+      <tr><th>Public discussion</th><td>GitHub Issues are public. Do not include private information, account details, or confidential documents.</td></tr>
+    </tbody></table>
   </section>
 </BaseLayout>
