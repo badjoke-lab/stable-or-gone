@@ -3,6 +3,7 @@ import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import stablecoinOverridesPr033Data from '../../../data/stablecoin-overrides-pr033.json';
 import stablecoinOverridesPr034Data from '../../../data/stablecoin-overrides-pr034.json';
+import stablecoinClassificationV2Data from '../../../data/stablecoin-classification-v2.json';
 import organizationsData from '../../../data/organizations.json';
 import relationshipsData from '../../../data/relationships.json';
 import eventsData from '../../../data/events.json';
@@ -179,14 +180,20 @@ export type RegistryUpdateRow = {
 };
 
 type StablecoinOverride = Partial<StablecoinRow> & { id: string };
+type StablecoinClassificationV2 = Pick<StablecoinRow, 'id' | 'lifecycle_status' | 'issuance_status' | 'peg_reference' | 'backing_types' | 'stabilization_mechanism' | 'governance_model'>;
 
 const stablecoinOverridesById = new Map([
   ...(stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row] as const),
   ...(stablecoinOverridesPr034Data as StablecoinOverride[]).map((row) => [row.id, row] as const)
 ]);
+const classificationById = new Map((stablecoinClassificationV2Data as StablecoinClassificationV2[]).map((row) => [row.id, row] as const));
 
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])]
-  .map((coin) => ({ ...coin, ...(stablecoinOverridesById.get(coin.id) ?? {}) }));
+  .map((coin) => ({
+    ...coin,
+    ...(stablecoinOverridesById.get(coin.id) ?? {}),
+    ...(classificationById.get(coin.id) ?? {})
+  }));
 const organizations = (organizationsData as OrganizationRow[]).map((organization) => ({
   ...organization,
   issuer_type: organization.legacy_issuer_type ?? organization.organization_type
