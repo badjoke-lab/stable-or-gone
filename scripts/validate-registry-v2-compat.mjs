@@ -56,7 +56,9 @@ const stablecoins = stablecoinBase.map((row) => {
   const override = overridesById.get(row.id);
   return override ? { ...row, ...override, __source_file: `${row.__source_file}+${override.__source_file}` } : row;
 });
-const organizations = combine('issuers.json', 'issuers-extra.json');
+const organizations = combine('organizations.json');
+const relationships = combine('relationships.json');
+const legacyIssuers = combine('issuers.json', 'issuers-extra.json');
 const events = combine('events.json', 'events-pr036.json', 'events-pr037.json', 'events-pr038.json');
 const evidence = combine('evidence.json', 'evidence-extra.json', 'evidence-pr033.json', 'evidence-events-pr036.json', 'evidence-events-pr037.json', 'evidence-events-pr038.json');
 const reserveReports = combine('reserve-reports.json', 'reserve-reports-extra.json', 'reserve-reports-pr033.json', 'reserve-reports-pr034.json');
@@ -67,9 +69,35 @@ const eventIds = new Set(events.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 const reserveReportIds = new Set(reserveReports.map((row) => row.id));
 
+const legacyIssuerById = new Map(legacyIssuers.map((row) => [row.id, row]));
+for (const organization of organizations) {
+  const legacy = legacyIssuerById.get(organization.id);
+  if (!legacy) failures.push(`${label(organization)} has no legacy compatibility record`);
+  else if (legacy.slug !== organization.slug) failures.push(`${label(organization)} slug conflicts with legacy issuer slug ${legacy.slug}`);
+}
+for (const legacy of legacyIssuers) if (!organizationIds.has(legacy.id)) failures.push(`${label(legacy)} is missing from organizations.json`);
+
+const relationshipsByStablecoin = new Map();
+for (const relationship of relationships) {
+  if (!stablecoinIds.has(relationship.stablecoin_id)) failures.push(`${label(relationship)} references missing stablecoin ${relationship.stablecoin_id}`);
+  if (!organizationIds.has(relationship.organization_id)) failures.push(`${label(relationship)} references missing organization ${relationship.organization_id}`);
+  if (!enumSets.organization_role.has(relationship.role)) failures.push(`${label(relationship)} invalid role: ${relationship.role}`);
+  if (relationship.status !== undefined && !enumSets.relationship_status.has(relationship.status)) failures.push(`${label(relationship)} invalid status: ${relationship.status}`);
+  validateDateLike(relationship, 'start_date', relationship.start_date);
+  validateDateLike(relationship, 'end_date', relationship.end_date);
+  validateIdArray(relationship, 'evidence_ids', evidenceIds);
+  const list = relationshipsByStablecoin.get(relationship.stablecoin_id) ?? [];
+  list.push(relationship);
+  relationshipsByStablecoin.set(relationship.stablecoin_id, list);
+}
+
 for (const row of stablecoins) {
-  const hasV2 = ['lifecycle_status','issuance_status','peg_reference','backing_types','stabilization_mechanism','governance_model','reserve_profile','redemption_profile','organization_relationships'].some((field) => row[field] !== undefined);
-  if (!hasV2) warnings.push(`${label(row)} remains legacy-only`);
+  const hasV2 = ['lifecycle_status','issuance_status','peg_reference','backing_types','stabilization_mechanism','governance_model','reserve_profile','redemption_profile'].some((field) => row[field] !== undefined);
+  if (!hasV2) warnings.push(`${label(row)} remains legacy-only for status/classification/profile fields`);
+  const related = relationshipsByStablecoin.get(row.id) ?? [];
+  if (related.length === 0) failures.push(`${label(row)} has no organization relationship`);
+  if (row.issuer_id && !related.some((relationship) => relationship.organization_id === row.issuer_id)) failures.push(`${label(row)} legacy issuer_id is missing from relationships.json`);
+
   validateEnum(row, 'lifecycle_status', enumSets.lifecycle_status);
   validateEnum(row, 'issuance_status', enumSets.issuance_status);
   validateEnum(row, 'stabilization_mechanism', enumSets.stabilization_mechanism);
@@ -96,7 +124,7 @@ for (const row of stablecoins) {
       else for (const value of p.backing_types) if (!enumSets.backing_type.has(value)) failures.push(`${label(row)} invalid reserve_profile.backing_types value: ${value}`);
       validateDateLike(row, 'reserve_profile.as_of_date', p.as_of_date);
       if (p.latest_report_id && !reserveReportIds.has(p.latest_report_id)) failures.push(`${label(row)} reserve_profile.latest_report_id references missing reserve report ${p.latest_report_id}`);
-      if (p.evidence_ids !== undefined) { if (!Array.isArray(p.evidence_ids)) failures.push(`${label(row)} reserve_profile.evidence_ids must be an array`); else for (const id of p.evidence_ids) if (!evidenceIds.has(id)) failures.push(`${label(row)} reserve_profile.evidence_ids references missing evidence ${id}`); }
+      validateIdArray(p, 'evidence_ids', evidenceIds);
     }
   }
   if (row.redemption_profile !== undefined) {
@@ -106,21 +134,8 @@ for (const row of stablecoins) {
       if (!enumSets.redemption_status_v2.has(p.status)) failures.push(`${label(row)} invalid redemption_profile.status: ${p.status}`);
       validateDateLike(row, 'redemption_profile.as_of_date', p.as_of_date);
       if (p.jurisdiction_restrictions !== undefined && (!Array.isArray(p.jurisdiction_restrictions) || p.jurisdiction_restrictions.some((item) => typeof item !== 'string'))) failures.push(`${label(row)} redemption_profile.jurisdiction_restrictions must be an array of strings`);
-      if (p.evidence_ids !== undefined) { if (!Array.isArray(p.evidence_ids)) failures.push(`${label(row)} redemption_profile.evidence_ids must be an array`); else for (const id of p.evidence_ids) if (!evidenceIds.has(id)) failures.push(`${label(row)} redemption_profile.evidence_ids references missing evidence ${id}`); }
+      validateIdArray(p, 'evidence_ids', evidenceIds);
     }
-  }
-  if (row.organization_relationships !== undefined) {
-    if (!Array.isArray(row.organization_relationships)) failures.push(`${label(row)} organization_relationships must be an array`);
-    else for (const rel of row.organization_relationships) {
-      if (!rel || typeof rel !== 'object') { failures.push(`${label(row)} organization_relationships contains a non-object`); continue; }
-      if (!organizationIds.has(rel.organization_id)) failures.push(`${label(row)} relationship references missing organization ${rel.organization_id}`);
-      if (!enumSets.organization_role.has(rel.role)) failures.push(`${label(row)} invalid organization role: ${rel.role}`);
-      if (rel.status !== undefined && !enumSets.relationship_status.has(rel.status)) failures.push(`${label(row)} invalid relationship status: ${rel.status}`);
-      validateDateLike(row, 'organization_relationship.start_date', rel.start_date);
-      validateDateLike(row, 'organization_relationship.end_date', rel.end_date);
-      if (rel.evidence_ids !== undefined) { if (!Array.isArray(rel.evidence_ids)) failures.push(`${label(row)} relationship.evidence_ids must be an array`); else for (const id of rel.evidence_ids) if (!evidenceIds.has(id)) failures.push(`${label(row)} relationship.evidence_ids references missing evidence ${id}`); }
-    }
-    if (row.issuer_id && !row.organization_relationships.some((rel) => rel.organization_id === row.issuer_id)) failures.push(`${label(row)} legacy issuer_id is missing from organization_relationships`);
   }
 }
 
@@ -138,7 +153,7 @@ for (const row of events) {
       if (d.recovery_status !== undefined && !enumSets.recovery_status.has(d.recovery_status)) failures.push(`${label(row)} invalid depeg_detail.recovery_status: ${d.recovery_status}`);
       for (const field of ['extreme_price','maximum_deviation_bps','duration_minutes']) if (d[field] !== undefined && d[field] !== null && typeof d[field] !== 'number') failures.push(`${label(row)} depeg_detail.${field} must be numeric or null`);
       validateDateLike(row, 'depeg_detail.recovery_date', d.recovery_date);
-      if (d.price_source_ids !== undefined) { if (!Array.isArray(d.price_source_ids)) failures.push(`${label(row)} depeg_detail.price_source_ids must be an array`); else for (const id of d.price_source_ids) if (!evidenceIds.has(id)) failures.push(`${label(row)} depeg_detail.price_source_ids references missing evidence ${id}`); }
+      validateIdArray(d, 'price_source_ids', evidenceIds);
     }
   }
   if (row.regulatory_detail !== undefined) {
@@ -164,5 +179,4 @@ if (failures.length > 0) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`Registry v2 compatibility validation passed with ${warnings.length} legacy-only stablecoin record(s).`);
-if (warnings.length > 0) console.log('Legacy-only records are allowed until their scheduled migration PR.');
+console.log(`Registry v2 compatibility validation passed with ${warnings.length} stablecoin record(s) awaiting later status/classification/profile migration.`);
