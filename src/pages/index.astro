@@ -1,29 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
-import stablecoinsData from '../../data/stablecoins.json';
-import stablecoinsExtraData from '../../data/stablecoins-extra.json';
-import issuersData from '../../data/issuers.json';
-import issuersExtraData from '../../data/issuers-extra.json';
-import eventsData from '../../data/events.json';
-import eventsPr036Data from '../../data/events-pr036.json';
-import eventsPr037Data from '../../data/events-pr037.json';
-import eventsPr038Data from '../../data/events-pr038.json';
-import evidenceData from '../../data/evidence.json';
-import evidenceExtraData from '../../data/evidence-extra.json';
-import evidencePr033Data from '../../data/evidence-pr033.json';
-import evidenceEventsPr036Data from '../../data/evidence-events-pr036.json';
-import evidenceEventsPr037Data from '../../data/evidence-events-pr037.json';
-import evidenceEventsPr038Data from '../../data/evidence-events-pr038.json';
+import { getStablecoins, getOrganizations, getEvents, getEvidence } from '../lib/data/registry';
 
-type StablecoinRow = { slug: string; name: string; symbol?: string; peg_asset?: string; collateral_model?: string; status?: string; issuer_id?: string };
-type IssuerRow = { id: string; name: string };
-
-const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const issuerById = new Map(issuers.map((issuer) => [issuer.id, issuer.name] as const));
-const events = [...(eventsData as unknown[]), ...(eventsPr036Data as unknown[]), ...(eventsPr037Data as unknown[]), ...(eventsPr038Data as unknown[])];
-const evidence = [...(evidenceData as unknown[]), ...(evidenceExtraData as unknown[]), ...(evidencePr033Data as unknown[]), ...(evidenceEventsPr036Data as unknown[]), ...(evidenceEventsPr037Data as unknown[]), ...(evidenceEventsPr038Data as unknown[])];
+const stablecoins = getStablecoins();
+const organizations = getOrganizations();
+const organizationById = new Map(organizations.map((organization) => [organization.id, organization.name] as const));
+const events = getEvents();
+const evidence = getEvidence();
 const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
 
 const title = 'Stable or Gone — Stablecoin History Registry';
@@ -39,7 +23,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'St
     </div>
     <div class="panel stats" aria-label="Registry summary">
       <div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div>
-      <div class="stat"><span>Issuers</span><strong>{issuers.length}</strong></div>
+      <div class="stat"><span>Issuers</span><strong>{organizations.length}</strong></div>
       <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
       <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
     </div>
@@ -63,7 +47,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'St
           <td>{coin.peg_asset ?? '—'}</td>
           <td>{formatPublicLabel(coin.collateral_model)}</td>
           <td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td>
-          <td>{issuerById.get(coin.issuer_id ?? '') ?? 'Unknown issuer'}</td>
+          <td>{organizationById.get(coin.issuer_id ?? '') ?? 'Unknown issuer'}</td>
         </tr>
       ))}</tbody>
     </table>
