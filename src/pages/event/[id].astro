@@ -2,87 +2,52 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
-import eventsData from '../../../data/events.json';
-import eventsPr036Data from '../../../data/events-pr036.json';
-import eventsPr037Data from '../../../data/events-pr037.json';
-import eventsPr038Data from '../../../data/events-pr038.json';
-import stablecoinsData from '../../../data/stablecoins.json';
-import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
-import issuersData from '../../../data/issuers.json';
-import issuersExtraData from '../../../data/issuers-extra.json';
-import evidenceData from '../../../data/evidence.json';
-import evidenceExtraData from '../../../data/evidence-extra.json';
-import evidenceEventsPr036Data from '../../../data/evidence-events-pr036.json';
-import evidenceEventsPr037Data from '../../../data/evidence-events-pr037.json';
-import evidenceEventsPr038Data from '../../../data/evidence-events-pr038.json';
-
-type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string | null; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; };
-type StablecoinRow = { id: string; slug: string; name: string; symbol?: string };
-type IssuerRow = { id: string; slug: string; name: string };
-type EvidenceRow = { id: string; event_id?: string | null; title: string; url: string; publisher?: string; source_type?: string };
+import { getEvents, getStablecoins, getOrganizations, getEvidence } from '../../lib/data/registry';
 
 export function getStaticPaths() {
-  const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
-  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+  return getEvents().map((event) => ({ params: { id: event.id }, props: { event } }));
 }
 
-const { event } = Astro.props as { event: EventRow };
-const allStablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
-const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
+const { event } = Astro.props;
+const allStablecoins = getStablecoins();
+const allOrganizations = getOrganizations();
+const allEvidence = getEvidence();
 const stablecoin = allStablecoins.find((item) => item.id === event.stablecoin_id);
-const issuer = allIssuers.find((item) => item.id === event.issuer_id);
+const organization = allOrganizations.find((item) => item.id === event.issuer_id);
 const evidence = allEvidence.filter((source) => source.event_id === event.id);
 const publicCopy = eventPublicCopy[event.id];
 const eventTitle = publicCopy?.title ?? event.title;
 const eventDescription = publicCopy?.description ?? event.description ?? 'A description has not yet been added for this event.';
 const title = `${eventTitle} — Stablecoin Event | Stable or Gone`;
 const description = eventDescription;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [stablecoin?.name, issuer?.name, event.event_type, 'stablecoin event'].filter(Boolean) };
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [stablecoin?.name, organization?.name, event.event_type, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
   <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin event</div>
-      <h1>{eventTitle}</h1>
-      <p>{eventDescription}</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div>
-      <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
-    </div>
+    <div class="panel hero-main"><div class="prompt">Stablecoin event</div><h1>{eventTitle}</h1><p>{eventDescription}</p></div>
+    <div class="panel stats"><div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
   </section>
 
   <section class="section-grid" aria-label="Related pages">
     {stablecoin && <a class="panel mini-card" href={`/stablecoin/${stablecoin.slug}/`}><h2>{stablecoin.name}</h2><p>Open the stablecoin record connected to this event.</p></a>}
-    {issuer && <a class="panel mini-card" href={`/issuer/${issuer.slug}/`}><h2>{issuer.name}</h2><p>View the issuer or protocol connected to this event.</p></a>}
+    {organization && <a class="panel mini-card" href={`/issuer/${organization.slug}/`}><h2>{organization.name}</h2><p>View the issuer or protocol connected to this event.</p></a>}
     <a class="panel mini-card" href="/events/"><h2>All events</h2><p>Browse the complete stablecoin event history.</p></a>
   </section>
 
-  <section class="panel registry">
-    <div class="bar">Event details</div>
-    <table><tbody>
-      <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
-      <tr><th>Type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
-      <tr><th>Stablecoin</th><td>{stablecoin ? <a href={`/stablecoin/${stablecoin.slug}/`}>{stablecoin.name} {stablecoin.symbol ? `(${stablecoin.symbol})` : ''}</a> : 'Unknown'}</td></tr>
-      <tr><th>Issuer / protocol</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : 'Unknown'}</td></tr>
-      <tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr>
-      <tr><th>Effect on status</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr>
-      <tr><th>Recovered</th><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unclear'}</td></tr>
-      <tr><th>Recovery date</th><td>{event.recovery_date ?? '—'}</td></tr>
-      <tr><th>Cause or mechanism</th><td>{formatPublicLabel(event.failure_mechanism)}</td></tr>
-      <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
-    </tbody></table>
-  </section>
+  <section class="panel registry"><div class="bar">Event details</div><table><tbody>
+    <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
+    <tr><th>Type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
+    <tr><th>Stablecoin</th><td>{stablecoin ? <a href={`/stablecoin/${stablecoin.slug}/`}>{stablecoin.name} {stablecoin.symbol ? `(${stablecoin.symbol})` : ''}</a> : 'Unknown'}</td></tr>
+    <tr><th>Issuer / protocol</th><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'Unknown'}</td></tr>
+    <tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr>
+    <tr><th>Effect on status</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr>
+    <tr><th>Recovered</th><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unclear'}</td></tr>
+    <tr><th>Recovery date</th><td>{event.recovery_date ?? '—'}</td></tr>
+    <tr><th>Cause or mechanism</th><td>{formatPublicLabel(event.failure_mechanism)}</td></tr>
+    <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
+  </tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">Sources</div>
-    <table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="3">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table>
-  </section>
+  <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="3">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table></section>
 
-  <section class="panel report-box">
-    <h2>Suggest a correction</h2>
-    <p>Report an incorrect date, outcome, description, or source, or suggest a missing event.</p>
-    <div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div>
-  </section>
+  <section class="panel report-box"><h2>Suggest a correction</h2><p>Report an incorrect date, outcome, description, or source, or suggest a missing event.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div></section>
 </BaseLayout>

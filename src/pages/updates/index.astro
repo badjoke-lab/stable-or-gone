@@ -2,18 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { updatePublicCopy } from '../../data/updatePublicCopy';
-import updatesData from '../../../data/registry-updates.json';
+import { getRegistryUpdates } from '../../lib/data/registry';
 
-type UpdateRow = {
-  id: string;
-  date: string;
-  title: string;
-  category: string;
-  summary: string;
-  related_paths?: string[];
-};
-
-const updates = (updatesData as UpdateRow[]).sort((a, b) => b.date.localeCompare(a.date));
+const updates = getRegistryUpdates().sort((a, b) => b.date.localeCompare(a.date));
 const categoryClass = (category: string) => `chip ${category === 'data' ? 'active' : category === 'foundation' ? 'limited' : 'unknown'}`;
 const latestUpdateDate = updates[0]?.date ?? '—';
 const title = 'Updates — Stable or Gone';

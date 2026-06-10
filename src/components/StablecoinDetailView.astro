@@ -3,37 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
 import { cleanPublicText } from '../utils/publicText';
 import { eventPublicCopy } from '../data/eventPublicCopy';
-import issuersData from '../../data/issuers.json';
-import issuersExtraData from '../../data/issuers-extra.json';
-import eventsData from '../../data/events.json';
-import eventsPr036Data from '../../data/events-pr036.json';
-import eventsPr037Data from '../../data/events-pr037.json';
-import eventsPr038Data from '../../data/events-pr038.json';
-import evidenceData from '../../data/evidence.json';
-import evidenceExtraData from '../../data/evidence-extra.json';
-import evidencePr033Data from '../../data/evidence-pr033.json';
-import evidenceEventsPr036Data from '../../data/evidence-events-pr036.json';
-import evidenceEventsPr037Data from '../../data/evidence-events-pr037.json';
-import evidenceEventsPr038Data from '../../data/evidence-events-pr038.json';
-import reserveReportsData from '../../data/reserve-reports.json';
-import reserveReportsExtraData from '../../data/reserve-reports-extra.json';
-import reserveReportsPr033Data from '../../data/reserve-reports-pr033.json';
-import reserveReportsPr034Data from '../../data/reserve-reports-pr034.json';
-import knownUnknownsData from '../../data/known-unknowns.json';
-import knownUnknownsExtraData from '../../data/known-unknowns-extra.json';
-import knownUnknownsPr033Data from '../../data/known-unknowns-pr033.json';
-import regulatoryNotesData from '../../data/regulatory-notes.json';
-import deploymentsData from '../../data/deployments.json';
-import deploymentsExtraData from '../../data/deployments-extra.json';
-
-type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; };
-type IssuerRow = { id: string; slug: string; name: string; jurisdiction?: string; issuer_type?: string };
-type EventRow = { id: string; stablecoin_id: string; title: string; event_type?: string; event_date?: string | null; impact_level?: string; recovered?: boolean | null; failure_mechanism?: string };
-type EvidenceRow = { id: string; stablecoin_id: string; event_id?: string | null; source_type?: string; title: string; url: string; publisher?: string; claim_scope?: string; reliability?: string };
-type ReserveReportRow = { id: string; stablecoin_id: string; report_date?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; confidence?: string; notes?: string };
-type KnownUnknownRow = { id: string; stablecoin_id: string; topic: string; description: string; severity?: string; last_checked_at?: string };
-type RegulatoryNoteRow = { id: string; stablecoin_id: string; issuer_id?: string; event_id?: string | null; note_date?: string; title: string; jurisdiction?: string; authority_or_source?: string; note_type?: string; summary: string; source_url: string; confidence?: string; notes?: string };
-type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; contract_address?: string | null; status: string; notes?: string; evidence_ids?: string[] };
+import {
+  getOrganizations,
+  getEvents,
+  getEvidence,
+  getReserveReports,
+  getKnownUnknowns,
+  getRegulatoryNotes,
+  getDeployments
+} from '../lib/data/registry';
 
 const publicSummaries: Record<string, string> = {
   usdt: 'A US dollar-pegged stablecoin issued by Tether, with a long operating history across multiple blockchains and continuing scrutiny of reserves, redemptions, and regulatory history.',
@@ -58,20 +36,21 @@ const publicSummaries: Record<string, string> = {
   usds: 'A US dollar stablecoin in the Sky ecosystem, introduced alongside the transition from MakerDAO branding and products.'
 };
 
-const { coin } = Astro.props as { coin: StablecoinRow };
-const allIssuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const allEvents = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
-const allEvidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
-const allReserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[])];
-const allKnownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[])];
-const allDeployments = [...(deploymentsData as DeploymentRow[]), ...(deploymentsExtraData as DeploymentRow[])];
+const { coin } = Astro.props;
+const organizations = getOrganizations();
+const allEvents = getEvents();
+const allEvidence = getEvidence();
+const allReserveReports = getReserveReports();
+const allKnownUnknowns = getKnownUnknowns();
+const allRegulatoryNotes = getRegulatoryNotes();
+const allDeployments = getDeployments();
 
-const issuer = allIssuers.find((item) => item.id === coin.issuer_id);
+const organization = organizations.find((item) => item.id === coin.issuer_id);
 const events = allEvents.filter((item) => item.stablecoin_id === coin.id).sort((a, b) => String(a.event_date ?? '').localeCompare(String(b.event_date ?? '')));
 const evidence = allEvidence.filter((item) => item.stablecoin_id === coin.id);
 const reserveReports = allReserveReports.filter((item) => item.stablecoin_id === coin.id);
 const openQuestions = allKnownUnknowns.filter((item) => item.stablecoin_id === coin.id);
-const regulatoryNotes = (regulatoryNotesData as RegulatoryNoteRow[]).filter((item) => item.stablecoin_id === coin.id);
+const regulatoryNotes = allRegulatoryNotes.filter((item) => item.stablecoin_id === coin.id);
 const deployments = allDeployments.filter((item) => item.stablecoin_id === coin.id);
 const statusClass = `chip ${coin.status ?? 'unknown'}`;
 const title = `${coin.name} (${coin.symbol ?? coin.slug}) — Stablecoin History | Stable or Gone`;
@@ -87,83 +66,21 @@ const coverageRows = [
 ];
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/stablecoin/${coin.slug}/`} jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin record</div>
-      <h1>{coin.name}</h1>
-      <p>{publicSummaries[coin.slug] ?? cleanPublicText(coin.summary, 'A summary has not yet been added for this stablecoin.')}</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Status</span><strong>{formatStatusLabel(coin.status)}</strong></div>
-      <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
-      <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
-    </div>
-  </section>
+  <section class="hero"><div class="panel hero-main"><div class="prompt">Stablecoin record</div><h1>{coin.name}</h1><p>{publicSummaries[coin.slug] ?? cleanPublicText(coin.summary, 'A summary has not yet been added for this stablecoin.')}</p></div><div class="panel stats"><div class="stat"><span>Status</span><strong>{formatStatusLabel(coin.status)}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div></section>
 
-  <section class="panel registry">
-    <div class="bar">Overview</div>
-    <table><tbody>
-      <tr><th>Symbol</th><td>{coin.symbol ?? '—'}</td></tr>
-      <tr><th>Status</th><td><span class={statusClass}>{formatStatusLabel(coin.status)}</span></td></tr>
-      <tr><th>Peg</th><td>{coin.peg_asset ?? '—'}</td></tr>
-      <tr><th>Backing model</th><td>{formatPublicLabel(coin.collateral_model)}</td></tr>
-      <tr><th>Issuer / protocol</th><td>{issuer ? <a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a> : 'Unknown'}</td></tr>
-      <tr><th>Reserve information</th><td>{formatPublicLabel(coin.reserve_disclosure_status)}</td></tr>
-      <tr><th>Redemption</th><td>{formatPublicLabel(coin.redemption_status)}</td></tr>
-      <tr><th>Last reviewed</th><td>{coin.last_verified_at ?? '—'}</td></tr>
-    </tbody></table>
-  </section>
+  <section class="panel registry"><div class="bar">Overview</div><table><tbody>
+    <tr><th>Symbol</th><td>{coin.symbol ?? '—'}</td></tr><tr><th>Status</th><td><span class={statusClass}>{formatStatusLabel(coin.status)}</span></td></tr><tr><th>Peg</th><td>{coin.peg_asset ?? '—'}</td></tr><tr><th>Backing model</th><td>{formatPublicLabel(coin.collateral_model)}</td></tr><tr><th>Issuer / protocol</th><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'Unknown'}</td></tr><tr><th>Reserve information</th><td>{formatPublicLabel(coin.reserve_disclosure_status)}</td></tr><tr><th>Redemption</th><td>{formatPublicLabel(coin.redemption_status)}</td></tr><tr><th>Last reviewed</th><td>{coin.last_verified_at ?? '—'}</td></tr>
+  </tbody></table></section>
 
-  <section class="section-grid" aria-label="Related pages">
-    <a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Compare this record with the rest of the archive.</p></a>
-    {issuer && <a class="panel mini-card" href={`/issuer/${issuer.slug}/`}><h2>{issuer.name}</h2><p>{formatPublicLabel(issuer.issuer_type, 'Issuer')} · {formatPublicLabel(issuer.jurisdiction, 'Jurisdiction unknown')}</p></a>}
-    <a class="panel mini-card" href="/events/"><h2>Event history</h2><p>{events.length} event{events.length === 1 ? '' : 's'} connected to this stablecoin.</p></a>
-  </section>
+  <section class="section-grid" aria-label="Related pages"><a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Compare this record with the rest of the archive.</p></a>{organization && <a class="panel mini-card" href={`/issuer/${organization.slug}/`}><h2>{organization.name}</h2><p>{formatPublicLabel(organization.issuer_type, 'Issuer')} · {formatPublicLabel(organization.jurisdiction, 'Jurisdiction unknown')}</p></a>}<a class="panel mini-card" href="/events/"><h2>Event history</h2><p>{events.length} event{events.length === 1 ? '' : 's'} connected to this stablecoin.</p></a></section>
 
-  <section class="panel registry">
-    <div class="bar">Redemption and access</div>
-    <table><tbody>
-      <tr><th>Current status</th><td>{formatPublicLabel(coin.redemption_status)}</td></tr>
-      <tr><th>Who can redeem</th><td>{cleanPublicText(coin.who_can_redeem, 'Public information is incomplete.')}</td></tr>
-      <tr><th>Retail access</th><td>{formatPublicLabel(coin.retail_redemption, 'Public information is incomplete')}</td></tr>
-      <tr><th>Institutional access</th><td>{formatPublicLabel(coin.institutional_redemption, 'Public information is incomplete')}</td></tr>
-      <tr><th>Minimum amount</th><td>{formatPublicLabel(coin.minimum_redemption, 'Public information is incomplete')}</td></tr>
-      <tr><th>Regional limits</th><td>{cleanPublicText(coin.redemption_region_notes, 'Public information is incomplete.')}</td></tr>
-    </tbody></table>
-  </section>
+  <section class="panel registry"><div class="bar">Redemption and access</div><table><tbody><tr><th>Current status</th><td>{formatPublicLabel(coin.redemption_status)}</td></tr><tr><th>Who can redeem</th><td>{cleanPublicText(coin.who_can_redeem, 'Public information is incomplete.')}</td></tr><tr><th>Retail access</th><td>{formatPublicLabel(coin.retail_redemption, 'Public information is incomplete')}</td></tr><tr><th>Institutional access</th><td>{formatPublicLabel(coin.institutional_redemption, 'Public information is incomplete')}</td></tr><tr><th>Minimum amount</th><td>{formatPublicLabel(coin.minimum_redemption, 'Public information is incomplete')}</td></tr><tr><th>Regional limits</th><td>{cleanPublicText(coin.redemption_region_notes, 'Public information is incomplete.')}</td></tr></tbody></table></section>
 
-  <section class="panel registry">
-    <div class="bar">Record coverage</div>
-    <table><thead><tr><th>Section</th><th>Entries</th></tr></thead><tbody>{coverageRows.map((row) => (<tr><td>{row.label}</td><td>{row.count}</td></tr>))}</tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Event timeline</div>
-    <table><thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="5">No events have been added yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{formatPublicLabel(event.event_type)}</td><td>{formatPublicLabel(event.impact_level)}</td><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : '—'}</td></tr>))}</tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Reserve and attestation history</div>
-    <table><thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Assets covered</th><th>Record confidence</th></tr></thead><tbody>{reserveReports.length === 0 ? <tr><td colspan="5">No reserve reports have been added yet.</td></tr> : reserveReports.map((report) => (<tr><td>{report.report_date ?? '—'}</td><td>{report.url ? <a href={report.url}>{report.publisher ?? 'Source'}</a> : (report.publisher ?? '—')}</td><td>{formatPublicLabel(report.report_type)}</td><td>{report.asset_categories?.map((item) => formatPublicLabel(item)).join(', ') ?? '—'}</td><td>{formatPublicLabel(report.confidence)}</td></tr>))}</tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Regulatory and official notices</div>
-    <table><thead><tr><th>Date</th><th>Title</th><th>Authority / publisher</th><th>Type</th><th>Summary</th></tr></thead><tbody>{regulatoryNotes.length === 0 ? <tr><td colspan="5">No regulatory notes have been added yet.</td></tr> : regulatoryNotes.map((note) => (<tr><td>{note.note_date ?? '—'}</td><td><a href={note.source_url}>{note.title}</a></td><td>{note.authority_or_source ?? '—'}</td><td>{formatPublicLabel(note.note_type)}</td><td>{cleanPublicText(note.summary)}</td></tr>))}</tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Blockchain deployments</div>
-    <table><thead><tr><th>Chain</th><th>Deployment</th><th>Status</th><th>Contract</th><th>Notes</th></tr></thead><tbody>{deployments.length === 0 ? <tr><td colspan="5">No deployment records have been added yet.</td></tr> : deployments.map((deployment) => (<tr><td>{deployment.chain}</td><td>{formatPublicLabel(deployment.deployment_type)}</td><td>{formatPublicLabel(deployment.status)}</td><td>{deployment.contract_address ?? 'Not yet verified'}</td><td>{cleanPublicText(deployment.notes)}</td></tr>))}</tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Sources</div>
-    <table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>What it supports</th><th>Reliability</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="5">No sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{formatPublicLabel(source.claim_scope)}</td><td>{formatPublicLabel(source.reliability)}</td></tr>))}</tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Open questions</div>
-    <table><thead><tr><th>Topic</th><th>What remains unclear</th><th>Priority</th><th>Last checked</th></tr></thead><tbody>{openQuestions.length === 0 ? <tr><td colspan="4">No open questions are currently listed.</td></tr> : openQuestions.map((item) => (<tr><td>{formatPublicLabel(item.topic)}</td><td>{cleanPublicText(item.description)}</td><td>{formatPublicLabel(item.severity)}</td><td>{item.last_checked_at ?? '—'}</td></tr>))}</tbody></table>
-  </section>
+  <section class="panel registry"><div class="bar">Record coverage</div><table><thead><tr><th>Section</th><th>Entries</th></tr></thead><tbody>{coverageRows.map((row) => (<tr><td>{row.label}</td><td>{row.count}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Event timeline</div><table><thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="5">No events have been added yet.</td></tr> : events.map((event) => (<tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{formatPublicLabel(event.event_type)}</td><td>{formatPublicLabel(event.impact_level)}</td><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : '—'}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Reserve and attestation history</div><table><thead><tr><th>Date</th><th>Publisher</th><th>Type</th><th>Assets covered</th><th>Record confidence</th></tr></thead><tbody>{reserveReports.length === 0 ? <tr><td colspan="5">No reserve reports have been added yet.</td></tr> : reserveReports.map((report) => (<tr><td>{report.report_date ?? '—'}</td><td>{report.url ? <a href={report.url}>{report.publisher ?? 'Source'}</a> : (report.publisher ?? '—')}</td><td>{formatPublicLabel(report.report_type)}</td><td>{report.asset_categories?.map((item) => formatPublicLabel(item)).join(', ') ?? '—'}</td><td>{formatPublicLabel(report.confidence)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Regulatory and official notices</div><table><thead><tr><th>Date</th><th>Title</th><th>Authority / publisher</th><th>Type</th><th>Summary</th></tr></thead><tbody>{regulatoryNotes.length === 0 ? <tr><td colspan="5">No regulatory notes have been added yet.</td></tr> : regulatoryNotes.map((note) => (<tr><td>{note.note_date ?? '—'}</td><td><a href={note.source_url}>{note.title}</a></td><td>{note.authority_or_source ?? '—'}</td><td>{formatPublicLabel(note.note_type)}</td><td>{cleanPublicText(note.summary)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Blockchain deployments</div><table><thead><tr><th>Chain</th><th>Deployment</th><th>Status</th><th>Contract</th><th>Notes</th></tr></thead><tbody>{deployments.length === 0 ? <tr><td colspan="5">No deployment records have been added yet.</td></tr> : deployments.map((deployment) => (<tr><td>{deployment.chain}</td><td>{formatPublicLabel(deployment.deployment_type)}</td><td>{formatPublicLabel(deployment.status)}</td><td>{deployment.contract_address ?? 'Not yet verified'}</td><td>{cleanPublicText(deployment.notes)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>What it supports</th><th>Reliability</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="5">No sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{formatPublicLabel(source.claim_scope)}</td><td>{formatPublicLabel(source.reliability)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Open questions</div><table><thead><tr><th>Topic</th><th>What remains unclear</th><th>Priority</th><th>Last checked</th></tr></thead><tbody>{openQuestions.length === 0 ? <tr><td colspan="4">No open questions are currently listed.</td></tr> : openQuestions.map((item) => (<tr><td>{formatPublicLabel(item.topic)}</td><td>{cleanPublicText(item.description)}</td><td>{formatPublicLabel(item.severity)}</td><td>{item.last_checked_at ?? '—'}</td></tr>))}</tbody></table></section>
 </BaseLayout>

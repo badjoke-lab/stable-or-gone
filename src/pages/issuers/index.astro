@@ -1,28 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
-import issuersData from '../../../data/issuers.json';
-import issuersExtraData from '../../../data/issuers-extra.json';
-import stablecoinsData from '../../../data/stablecoins.json';
-import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
+import { getOrganizations, getStablecoins } from '../../lib/data/registry';
 
-type IssuerRow = {
-  slug: string;
-  name: string;
-  issuer_type?: string;
-  jurisdiction?: string;
-  related_stablecoins?: string[];
-  confidence?: string;
-};
-
-type StablecoinRow = {
-  slug: string;
-  name: string;
-  symbol?: string;
-};
-
-const issuers = [...(issuersData as IssuerRow[]), ...(issuersExtraData as IssuerRow[])];
-const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])];
+const organizations = getOrganizations();
+const stablecoins = getStablecoins();
 const stablecoinBySlug = new Map(stablecoins.map((coin) => [coin.slug, coin] as const));
 const title = 'Stablecoin Issuers and Protocols — Stable or Gone';
 const description = 'Browse the companies, protocols, and organizations connected to the stablecoins in Stable or Gone.';
@@ -44,7 +26,7 @@ const jsonLd = {
       <p>Browse the companies, protocols, and organizations linked to the stablecoins in the archive.</p>
     </div>
     <div class="panel stats">
-      <div class="stat"><span>Issuer records</span><strong>{issuers.length}</strong></div>
+      <div class="stat"><span>Issuer records</span><strong>{organizations.length}</strong></div>
       <div class="stat"><span>Stablecoins linked</span><strong>{stablecoins.length}</strong></div>
     </div>
   </section>
@@ -60,17 +42,17 @@ const jsonLd = {
     <table>
       <thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Record confidence</th></tr></thead>
       <tbody>
-        {issuers.length === 0 ? (
+        {organizations.length === 0 ? (
           <tr><td colspan="5">No issuer records available.</td></tr>
-        ) : issuers.map((issuer) => {
-          const related = (issuer.related_stablecoins ?? []).map((slug) => stablecoinBySlug.get(slug)).filter(Boolean) as StablecoinRow[];
+        ) : organizations.map((organization) => {
+          const related = (organization.related_stablecoins ?? []).map((slug) => stablecoinBySlug.get(slug)).filter(Boolean);
           return (
             <tr>
-              <td><a href={`/issuer/${issuer.slug}/`}>{issuer.name}</a></td>
-              <td>{formatPublicLabel(issuer.issuer_type)}</td>
-              <td>{formatPublicLabel(issuer.jurisdiction, 'Unknown')}</td>
-              <td>{related.length > 0 ? related.map((coin, index) => (<>{coin.name}{coin.symbol ? ` (${coin.symbol})` : ''}{index < related.length - 1 ? <span> · </span> : null}</>)) : '—'}</td>
-              <td>{formatPublicLabel(issuer.confidence)}</td>
+              <td><a href={`/issuer/${organization.slug}/`}>{organization.name}</a></td>
+              <td>{formatPublicLabel(organization.issuer_type)}</td>
+              <td>{formatPublicLabel(organization.jurisdiction, 'Unknown')}</td>
+              <td>{related.length > 0 ? related.map((coin, index) => (<>{coin?.name}{coin?.symbol ? ` (${coin.symbol})` : ''}{index < related.length - 1 ? <span> · </span> : null}</>)) : '—'}</td>
+              <td>{formatPublicLabel(organization.confidence)}</td>
             </tr>
           );
         })}

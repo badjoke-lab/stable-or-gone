@@ -24,7 +24,7 @@ Current protected baseline:
 75 static pages
 ```
 
-The project is now in the Registry v2 migration phase. Routine record growth is paused until PR-051 completes, except for corrections, broken links, major incidents, and build/deployment repairs.
+The project is in the Registry v2 migration phase. Routine record growth is paused until PR-051 completes, except for corrections, broken links, major incidents, and build/deployment repairs.
 
 ## Completed major work
 
@@ -43,6 +43,7 @@ public SEO baseline
 validator and supplemental data integration
 event expansion from 3 to 23 records
 public copy cleanup through 2026-06-10
+PR-041 Registry v2 baseline and migration contract
 ```
 
 ## Registry v2 objective
@@ -73,24 +74,23 @@ Protected public URL patterns:
 ## Current work item
 
 ```txt
-PR-041 Baseline and migration contract
+PR-042 Common data loaders
 ```
 
 Goals:
 
 ```txt
-freeze the pre-migration record baseline
-protect IDs, slugs, routes, and minimum counts
-add automated baseline validation
-publish the full PR-041 to PR-051 migration schedule
-make no public data or UI changes
+centralize all repository JSON composition
+remove PR-specific JSON knowledge from public pages
+keep rendered output, record counts, routes, filters, and sort behavior unchanged
+prepare a single compatibility boundary for Schema v2
 ```
 
 ## Full implementation schedule
 
 ```txt
-PR-041 Baseline and migration contract
-PR-042 Common data loaders
+PR-041 Baseline and migration contract — completed
+PR-042 Common data loaders — in progress
 PR-043 Schema v2 and compatibility validator
 PR-044 Organization and relationship migration
 PR-045 Stablecoin status and classification migration
@@ -111,10 +111,12 @@ docs/registry-v2-migration-plan.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-041 of 11
-Status: in progress
+Registry v2 migration: PR-042 of 11
+Completed: 1
+In progress: 1
+Remaining after current PR: 9
 Record-growth phase: paused
-Next after PR-041: PR-042 Common data loaders
+Next after PR-042: PR-043 Schema v2 and compatibility validator
 ```
 
 ## Post-migration priorities
