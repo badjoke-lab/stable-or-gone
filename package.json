@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:data && astro check && astro build",
+    "build": "npm run validate:baseline && npm run validate:data && astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
     "validate:data": "node scripts/validate-data.mjs"
   },
   "dependencies": {

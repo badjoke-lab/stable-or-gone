@@ -1,0 +1,59 @@
+{
+  "baseline_id": "sog_registry_v2_pre_migration_2026_06_10",
+  "captured_at": "2026-06-10",
+  "source_commit": "aeb5ec07c5e5aaadba4586f362c06872941392e5",
+  "minimum_counts": {
+    "stablecoins": 20,
+    "organizations": 16,
+    "events": 23,
+    "evidence": 90,
+    "reserve_reports": 40,
+    "known_unknowns": 50,
+    "regulatory_notes": 9,
+    "deployments": 37
+  },
+  "data_groups": {
+    "stablecoins": ["data/stablecoins.json", "data/stablecoins-extra.json"],
+    "organizations": ["data/issuers.json", "data/issuers-extra.json"],
+    "events": ["data/events.json", "data/events-pr036.json", "data/events-pr037.json", "data/events-pr038.json"],
+    "evidence": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json"],
+    "reserve_reports": ["data/reserve-reports.json", "data/reserve-reports-extra.json", "data/reserve-reports-pr033.json", "data/reserve-reports-pr034.json"],
+    "known_unknowns": ["data/known-unknowns.json", "data/known-unknowns-extra.json", "data/known-unknowns-pr033.json", "data/known-unknowns-pr034.json"],
+    "regulatory_notes": ["data/regulatory-notes.json"],
+    "deployments": ["data/deployments.json", "data/deployments-extra.json"]
+  },
+  "protected_stablecoins": [
+    {"id":"sog_st_usdt","slug":"usdt"}, {"id":"sog_st_usdc","slug":"usdc"},
+    {"id":"sog_st_dai","slug":"dai"}, {"id":"sog_st_ust","slug":"ust"},
+    {"id":"sog_st_busd","slug":"busd"}, {"id":"sog_st_frax","slug":"frax"},
+    {"id":"sog_st_tusd","slug":"tusd"}, {"id":"sog_st_fdusd","slug":"fdusd"},
+    {"id":"sog_st_pyusd","slug":"pyusd"}, {"id":"sog_st_usdd","slug":"usdd"},
+    {"id":"sog_st_gusd","slug":"gusd"}, {"id":"sog_st_lusd","slug":"lusd"},
+    {"id":"sog_st_crvusd","slug":"crvusd"}, {"id":"sog_st_usde","slug":"usde"},
+    {"id":"sog_st_susd","slug":"susd"}, {"id":"sog_st_rlusd","slug":"rlusd"},
+    {"id":"sog_st_eurc","slug":"eurc"}, {"id":"sog_st_usdp","slug":"usdp"},
+    {"id":"sog_st_usdg","slug":"usdg"}, {"id":"sog_st_usds","slug":"usds"}
+  ],
+  "protected_organizations": [
+    {"id":"sog_issuer_tether","slug":"tether"}, {"id":"sog_issuer_circle","slug":"circle"},
+    {"id":"sog_issuer_makerdao_sky","slug":"makerdao-sky"}, {"id":"sog_issuer_terraform_labs","slug":"terraform-labs"},
+    {"id":"sog_issuer_paxos","slug":"paxos"}, {"id":"sog_issuer_frax_finance","slug":"frax-finance"},
+    {"id":"sog_issuer_trueusd","slug":"trueusd"}, {"id":"sog_issuer_first_digital","slug":"first-digital"},
+    {"id":"sog_issuer_tron_dao_reserve","slug":"tron-dao-reserve"}, {"id":"sog_issuer_gemini","slug":"gemini"},
+    {"id":"sog_issuer_liquity","slug":"liquity"}, {"id":"sog_issuer_curve_finance","slug":"curve-finance"},
+    {"id":"sog_issuer_ethena_labs","slug":"ethena-labs"}, {"id":"sog_issuer_synthetix","slug":"synthetix"},
+    {"id":"sog_issuer_ripple","slug":"ripple"}, {"id":"sog_issuer_global_dollar_network","slug":"global-dollar-network"}
+  ],
+  "required_route_sources": [
+    "src/pages/index.astro", "src/pages/stablecoins/index.astro", "src/pages/stablecoin/[slug].astro",
+    "src/pages/issuers/index.astro", "src/pages/issuer/[slug].astro", "src/pages/events/index.astro",
+    "src/pages/event/[id].astro", "src/pages/models/index.astro", "src/pages/guides/index.astro",
+    "src/pages/glossary/index.astro", "src/pages/methodology/index.astro", "src/pages/updates/index.astro",
+    "src/pages/about/index.astro", "src/pages/support/index.astro", "src/pages/contact/index.astro"
+  ],
+  "public_url_rules": {
+    "stablecoin": "/stablecoin/{slug}/",
+    "organization_compatibility": "/issuer/{slug}/",
+    "event": "/event/{id}/"
+  }
+}
