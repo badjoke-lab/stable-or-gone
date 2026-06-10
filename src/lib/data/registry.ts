@@ -1,3 +1,4 @@
+import type { StablecoinV2Fields, EventV2Fields, EvidenceV2Fields } from '../schema/registry-v2';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import stablecoinOverridesPr033Data from '../../../data/stablecoin-overrides-pr033.json';
@@ -51,7 +52,7 @@ export type StablecoinRow = {
   confidence?: string;
   last_verified_at?: string;
   notes?: string;
-};
+} & StablecoinV2Fields;
 
 export type OrganizationRow = {
   id: string;
@@ -83,7 +84,7 @@ export type EventRow = {
   event_status_effect?: string;
   failure_mechanism?: string;
   notes?: string;
-};
+} & EventV2Fields;
 
 export type EvidenceRow = {
   id: string;
@@ -100,7 +101,7 @@ export type EvidenceRow = {
   reliability?: string;
   claim_scope?: string;
   notes?: string;
-};
+} & EvidenceV2Fields;
 
 export type ReserveReportRow = {
   id: string;
