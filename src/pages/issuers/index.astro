@@ -1,13 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
-import { getOrganizations, getStablecoins } from '../../lib/data/registry';
+import { getOrganizations, getStablecoins, getRelationships } from '../../lib/data/registry';
 
 const organizations = getOrganizations();
 const stablecoins = getStablecoins();
-const stablecoinBySlug = new Map(stablecoins.map((coin) => [coin.slug, coin] as const));
-const title = 'Stablecoin Issuers and Protocols — Stable or Gone';
-const description = 'Browse the companies, protocols, and organizations connected to the stablecoins in Stable or Gone.';
+const relationships = getRelationships();
+const stablecoinById = new Map(stablecoins.map((coin) => [coin.id, coin] as const));
+const relationshipsByOrganization = new Map<string, typeof relationships>();
+for (const relationship of relationships) {
+  const list = relationshipsByOrganization.get(relationship.organization_id) ?? [];
+  list.push(relationship);
+  relationshipsByOrganization.set(relationship.organization_id, list);
+}
+const title = 'Stablecoin Organizations — Stable or Gone';
+const description = 'Browse the companies, protocols, networks, and reserve organizations connected to stablecoins in Stable or Gone.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -15,48 +22,27 @@ const jsonLd = {
   url: 'https://sog.badjoke-lab.com/issuers/',
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin issuers', 'stablecoin protocols', 'reserve disclosure', 'issuer history']
+  about: ['stablecoin organizations', 'stablecoin issuers', 'stablecoin protocols', 'reserve disclosure', 'issuer history']
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/issuers/" jsonLd={jsonLd}>
   <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Issuer and protocol directory</div>
-      <h1>Who is behind each stablecoin?</h1>
-      <p>Browse the companies, protocols, and organizations linked to the stablecoins in the archive.</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Issuer records</span><strong>{organizations.length}</strong></div>
-      <div class="stat"><span>Stablecoins linked</span><strong>{stablecoins.length}</strong></div>
-    </div>
+    <div class="panel hero-main"><div class="prompt">Organization directory</div><h1>Who is connected to each stablecoin?</h1><p>Browse the companies, protocols, networks, governance groups, and reserve organizations linked to the stablecoins in the archive.</p></div>
+    <div class="panel stats"><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Relationships</span><strong>{relationships.length}</strong></div></div>
   </section>
 
   <section class="section-grid" aria-label="Helpful links">
-    <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Open the asset records connected to each issuer or protocol.</p></a>
+    <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Open the asset records connected to each organization.</p></a>
     <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Read reserve disclosures</h2><p>Understand the difference between issuer reports and protocol collateral data.</p></a>
-    <a class="panel mini-card" href="/methodology/"><h2>How records are reviewed</h2><p>See how sources, status labels, and open questions are handled.</p></a>
+    <a class="panel mini-card" href="/methodology/"><h2>How records are reviewed</h2><p>See how sources, roles, status labels, and open questions are handled.</p></a>
   </section>
 
-  <section class="panel registry">
-    <div class="bar">All issuers and protocols</div>
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Record confidence</th></tr></thead>
-      <tbody>
-        {organizations.length === 0 ? (
-          <tr><td colspan="5">No issuer records available.</td></tr>
-        ) : organizations.map((organization) => {
-          const related = (organization.related_stablecoins ?? []).map((slug) => stablecoinBySlug.get(slug)).filter(Boolean);
-          return (
-            <tr>
-              <td><a href={`/issuer/${organization.slug}/`}>{organization.name}</a></td>
-              <td>{formatPublicLabel(organization.issuer_type)}</td>
-              <td>{formatPublicLabel(organization.jurisdiction, 'Unknown')}</td>
-              <td>{related.length > 0 ? related.map((coin, index) => (<>{coin?.name}{coin?.symbol ? ` (${coin.symbol})` : ''}{index < related.length - 1 ? <span> · </span> : null}</>)) : '—'}</td>
-              <td>{formatPublicLabel(organization.confidence)}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">All organizations</div><table><thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Roles</th><th>Record confidence</th></tr></thead><tbody>
+    {organizations.length === 0 ? <tr><td colspan="6">No organization records available.</td></tr> : organizations.map((organization) => {
+      const relatedRelationships = relationshipsByOrganization.get(organization.id) ?? [];
+      const relatedCoins = relatedRelationships.map((relationship) => stablecoinById.get(relationship.stablecoin_id)).filter(Boolean);
+      const roles = Array.from(new Set(relatedRelationships.map((relationship) => relationship.role)));
+      return <tr><td><a href={`/issuer/${organization.slug}/`}>{organization.name}</a></td><td>{formatPublicLabel(organization.organization_type)}</td><td>{formatPublicLabel(organization.jurisdiction, 'Unknown')}</td><td>{relatedCoins.length > 0 ? relatedCoins.map((coin, index) => (<>{coin?.name}{coin?.symbol ? ` (${coin.symbol})` : ''}{index < relatedCoins.length - 1 ? <span> · </span> : null}</>)) : '—'}</td><td>{roles.length > 0 ? roles.map((role) => formatPublicLabel(role)).join(', ') : '—'}</td><td>{formatPublicLabel(organization.confidence)}</td></tr>;
+    })}
+  </tbody></table></section>
 </BaseLayout>

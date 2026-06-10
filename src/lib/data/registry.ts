@@ -1,10 +1,10 @@
-import type { StablecoinV2Fields, EventV2Fields, EvidenceV2Fields } from '../schema/registry-v2';
+import type { StablecoinV2Fields, EventV2Fields, EvidenceV2Fields, OrganizationRole, RelationshipStatus } from '../schema/registry-v2';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import stablecoinOverridesPr033Data from '../../../data/stablecoin-overrides-pr033.json';
 import stablecoinOverridesPr034Data from '../../../data/stablecoin-overrides-pr034.json';
-import issuersData from '../../../data/issuers.json';
-import issuersExtraData from '../../../data/issuers-extra.json';
+import organizationsData from '../../../data/organizations.json';
+import relationshipsData from '../../../data/relationships.json';
 import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
@@ -58,13 +58,26 @@ export type OrganizationRow = {
   id: string;
   slug: string;
   name: string;
-  summary?: string;
+  organization_type?: string;
+  legacy_issuer_type?: string;
   issuer_type?: string;
   jurisdiction?: string;
-  related_stablecoins?: string[];
-  official_url?: string;
+  official_url?: string | null;
+  summary?: string;
   confidence?: string;
-  last_verified_at?: string;
+  last_verified_at?: string | null;
+  notes?: string;
+};
+
+export type RelationshipRow = {
+  id: string;
+  stablecoin_id: string;
+  organization_id: string;
+  role: OrganizationRole;
+  start_date?: string | null;
+  end_date?: string | null;
+  status?: RelationshipStatus;
+  evidence_ids?: string[];
   notes?: string;
 };
 
@@ -174,7 +187,11 @@ const stablecoinOverridesById = new Map([
 
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])]
   .map((coin) => ({ ...coin, ...(stablecoinOverridesById.get(coin.id) ?? {}) }));
-const organizations = [...(issuersData as OrganizationRow[]), ...(issuersExtraData as OrganizationRow[])];
+const organizations = (organizationsData as OrganizationRow[]).map((organization) => ({
+  ...organization,
+  issuer_type: organization.legacy_issuer_type ?? organization.organization_type
+}));
+const relationships = relationshipsData as RelationshipRow[];
 const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
 const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
 const reserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[])];
@@ -183,38 +200,19 @@ const regulatoryNotes = regulatoryNotesData as RegulatoryNoteRow[];
 const deployments = [...(deploymentsData as DeploymentRow[]), ...(deploymentsExtraData as DeploymentRow[])];
 const registryUpdates = registryUpdatesData as RegistryUpdateRow[];
 
-export function getStablecoins(): StablecoinRow[] {
-  return stablecoins.map((row) => ({ ...row }));
-}
+export function getStablecoins(): StablecoinRow[] { return stablecoins.map((row) => ({ ...row })); }
+export function getOrganizations(): OrganizationRow[] { return organizations.map((row) => ({ ...row })); }
+export function getRelationships(): RelationshipRow[] { return relationships.map((row) => ({ ...row, evidence_ids: [...(row.evidence_ids ?? [])] })); }
+export function getEvents(): EventRow[] { return events.map((row) => ({ ...row })); }
+export function getEvidence(): EvidenceRow[] { return evidence.map((row) => ({ ...row })); }
+export function getReserveReports(): ReserveReportRow[] { return reserveReports.map((row) => ({ ...row })); }
+export function getKnownUnknowns(): KnownUnknownRow[] { return knownUnknowns.map((row) => ({ ...row })); }
+export function getRegulatoryNotes(): RegulatoryNoteRow[] { return regulatoryNotes.map((row) => ({ ...row })); }
+export function getDeployments(): DeploymentRow[] { return deployments.map((row) => ({ ...row })); }
+export function getRegistryUpdates(): RegistryUpdateRow[] { return registryUpdates.map((row) => ({ ...row })); }
 
-export function getOrganizations(): OrganizationRow[] {
-  return organizations.map((row) => ({ ...row }));
-}
-
-export function getEvents(): EventRow[] {
-  return events.map((row) => ({ ...row }));
-}
-
-export function getEvidence(): EvidenceRow[] {
-  return evidence.map((row) => ({ ...row }));
-}
-
-export function getReserveReports(): ReserveReportRow[] {
-  return reserveReports.map((row) => ({ ...row }));
-}
-
-export function getKnownUnknowns(): KnownUnknownRow[] {
-  return knownUnknowns.map((row) => ({ ...row }));
-}
-
-export function getRegulatoryNotes(): RegulatoryNoteRow[] {
-  return regulatoryNotes.map((row) => ({ ...row }));
-}
-
-export function getDeployments(): DeploymentRow[] {
-  return deployments.map((row) => ({ ...row }));
-}
-
-export function getRegistryUpdates(): RegistryUpdateRow[] {
-  return registryUpdates.map((row) => ({ ...row }));
+export function getPrimaryRelationship(stablecoinId: string): RelationshipRow | undefined {
+  const preferredRoles: OrganizationRole[] = ['legal_issuer', 'protocol_operator', 'brand_owner', 'reserve_manager', 'governance_body', 'redemption_agent', 'custodian', 'technology_provider', 'other'];
+  const matches = relationships.filter((row) => row.stablecoin_id === stablecoinId);
+  return matches.sort((a, b) => preferredRoles.indexOf(a.role) - preferredRoles.indexOf(b.role))[0];
 }

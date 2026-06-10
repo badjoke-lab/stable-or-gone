@@ -5,6 +5,7 @@
   "minimum_counts": {
     "stablecoins": 20,
     "organizations": 16,
+    "relationships": 20,
     "events": 23,
     "evidence": 90,
     "reserve_reports": 40,
@@ -14,7 +15,8 @@
   },
   "data_groups": {
     "stablecoins": ["data/stablecoins.json", "data/stablecoins-extra.json"],
-    "organizations": ["data/issuers.json", "data/issuers-extra.json"],
+    "organizations": ["data/organizations.json"],
+    "relationships": ["data/relationships.json"],
     "events": ["data/events.json", "data/events-pr036.json", "data/events-pr037.json", "data/events-pr038.json"],
     "evidence": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json"],
     "reserve_reports": ["data/reserve-reports.json", "data/reserve-reports-extra.json", "data/reserve-reports-pr033.json", "data/reserve-reports-pr034.json"],

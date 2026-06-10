@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
-import { getStablecoins, getOrganizations, getEvents, getEvidence } from '../lib/data/registry';
+import { getStablecoins, getOrganizations, getPrimaryRelationship, getEvents, getEvidence } from '../lib/data/registry';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
@@ -9,6 +9,10 @@ const organizationById = new Map(organizations.map((organization) => [organizati
 const events = getEvents();
 const evidence = getEvidence();
 const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
+const primaryOrganizationName = (stablecoinId: string) => {
+  const relationship = getPrimaryRelationship(stablecoinId);
+  return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
+};
 
 const title = 'Stable or Gone — Stablecoin History Registry';
 const description = 'Explore stablecoin histories, depegs, launches, wind-downs, failures, issuers, reserve information, redemption terms, and the sources behind each record.';
@@ -16,49 +20,18 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'St
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
   <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin history archive</div>
-      <h1>Stablecoin histories, major events, and sources.</h1>
-      <p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, and redemption terms across the stablecoin market.</p>
-    </div>
-    <div class="panel stats" aria-label="Registry summary">
-      <div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div>
-      <div class="stat"><span>Issuers</span><strong>{organizations.length}</strong></div>
-      <div class="stat"><span>Events</span><strong>{events.length}</strong></div>
-      <div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div>
-    </div>
+    <div class="panel hero-main"><div class="prompt">Stablecoin history archive</div><h1>Stablecoin histories, major events, and sources.</h1><p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, and redemption terms across the stablecoin market.</p></div>
+    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
   </section>
 
   <section class="section-grid" aria-label="Main sections">
-    <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Compare status, issuer, peg, backing model, redemption access, and history.</p></a>
+    <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Compare status, organizations, peg, backing model, redemption access, and history.</p></a>
     <a class="panel mini-card" href="/events/"><h2>Explore events</h2><p>Review depegs, launches, regulatory actions, migrations, wind-downs, and collapses.</p></a>
-    <a class="panel mini-card" href="/issuers/"><h2>View issuers</h2><p>See the companies, protocols, and organizations behind each stablecoin.</p></a>
+    <a class="panel mini-card" href="/issuers/"><h2>View organizations</h2><p>See the companies, protocols, networks, and reserve organizations connected to each stablecoin.</p></a>
     <a class="panel mini-card" href="/guides/"><h2>Read the guides</h2><p>Understand depegs, reserve disclosures, status labels, and lifecycle terms.</p></a>
   </section>
 
-  <section class="panel registry">
-    <div class="bar">Selected stablecoin records</div>
-    <table>
-      <thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Issuer</th></tr></thead>
-      <tbody>{stablecoins.slice(0, 10).map((coin) => (
-        <tr>
-          <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
-          <td>{coin.symbol ?? '—'}</td>
-          <td>{coin.peg_asset ?? '—'}</td>
-          <td>{formatPublicLabel(coin.collateral_model)}</td>
-          <td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td>
-          <td>{organizationById.get(coin.issuer_id ?? '') ?? 'Unknown issuer'}</td>
-        </tr>
-      ))}</tbody>
-    </table>
-  </section>
+  <section class="panel registry"><div class="bar">Selected stablecoin records</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Primary organization</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td><td>{primaryOrganizationName(coin.id)}</td></tr>))}</tbody></table></section>
 
-  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title">
-    <div>
-      <div class="prompt">Support the archive</div>
-      <h2 id="support-home-title">Help keep the records current</h2>
-      <p>Support helps cover research, source checks, link maintenance, and new records. It does not affect how any stablecoin is described.</p>
-    </div>
-    <a class="support-callout-action" href="/support/">Support SOG</a>
-  </section>
+  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title"><div><div class="prompt">Support the archive</div><h2 id="support-home-title">Help keep the records current</h2><p>Support helps cover research, source checks, link maintenance, and new records. It does not affect how any stablecoin is described.</p></div><a class="support-callout-action" href="/support/">Support SOG</a></section>
 </BaseLayout>
