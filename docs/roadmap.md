@@ -10,7 +10,7 @@ SOG v0 is publicly live at:
 https://sog.badjoke-lab.com/
 ```
 
-Current protected baseline:
+Protected baseline:
 
 ```txt
 20 stablecoins
@@ -25,26 +25,6 @@ Current protected baseline:
 ```
 
 The project is in the Registry v2 migration phase. Routine record growth is paused until PR-051 completes, except for corrections, broken links, major incidents, and build/deployment repairs.
-
-## Completed major work
-
-```txt
-foundation docs and data placeholders
-Astro scaffold and Terminal Registry UI
-public v0 foundation
-issuer/event/report/evidence/redemption/regulatory/deployment UI
-seed expansion to 20 stablecoin records
-source-deepening for core and later records
-registry and event filtering / sorting
-shared stablecoin detail view
-guides and glossary
-registry updates page
-public SEO baseline
-validator and supplemental data integration
-event expansion from 3 to 23 records
-public copy cleanup through 2026-06-10
-PR-041 Registry v2 baseline and migration contract
-```
 
 ## Registry v2 objective
 
@@ -71,27 +51,46 @@ Protected public URL patterns:
 /event/[id]/
 ```
 
+## Completed migration work
+
+### PR-041 — Baseline and migration contract
+
+- protected minimum record counts
+- protected current stablecoin and organization IDs/slugs
+- protected route source files and URL patterns
+- added baseline validation
+- fixed the PR-041 to PR-051 schedule
+
+### PR-042 — Common data loaders
+
+- centralized all repository JSON composition in `src/lib/data/registry.ts`
+- centralized stablecoin override application
+- removed PR-specific JSON composition from public routes
+- kept public records, URLs, filters, sorting, and display behavior unchanged
+
 ## Current work item
 
 ```txt
-PR-042 Common data loaders
+PR-043 Schema v2 and compatibility validator
 ```
 
 Goals:
 
 ```txt
-centralize all repository JSON composition
-remove PR-specific JSON knowledge from public pages
-keep rendered output, record counts, routes, filters, and sort behavior unchanged
-prepare a single compatibility boundary for Schema v2
+define Registry v2 types and enums
+allow legacy-only records during staged migration
+validate old/new field consistency when both exist
+reject invalid enums, malformed profiles, and broken references
+add reviewed record templates
+keep current public output unchanged
 ```
 
 ## Full implementation schedule
 
 ```txt
 PR-041 Baseline and migration contract — completed
-PR-042 Common data loaders — in progress
-PR-043 Schema v2 and compatibility validator
+PR-042 Common data loaders — completed
+PR-043 Schema v2 and compatibility validator — in progress
 PR-044 Organization and relationship migration
 PR-045 Stablecoin status and classification migration
 PR-046 Reserve and redemption normalization
@@ -102,21 +101,23 @@ PR-050 Methodology, guides, and SEO
 PR-051 Legacy cleanup and canonical consolidation
 ```
 
-Detailed specification:
+Detailed specifications:
 
 ```txt
 docs/registry-v2-migration-plan.md
+docs/migration/registry-v2-field-mapping.md
+docs/migration/registry-v2-record-templates.md
 ```
 
 ## Current position
 
 ```txt
-Registry v2 migration: PR-042 of 11
-Completed: 1
+Registry v2 migration: PR-043 of 11
+Completed: 2
 In progress: 1
-Remaining after current PR: 9
+Remaining after current PR: 8
 Record-growth phase: paused
-Next after PR-042: PR-043 Schema v2 and compatibility validator
+Next after PR-043: PR-044 Organization and relationship migration
 ```
 
 ## Post-migration priorities
@@ -133,10 +134,10 @@ evidence and reserve-history deepening
 
 ## Operating rules
 
-- Every migration PR must pass baseline validation, canonical data validation, Astro check, and build.
+- Every migration PR must pass baseline validation, canonical data validation, compatibility validation, Astro check, and build.
 - Existing stablecoin, organization, event, and evidence IDs must be preserved.
 - Existing slugs and public URL patterns must be preserved.
-- Do not merge unrelated record-growth work into the migration PRs.
+- Do not merge unrelated record-growth work into migration PRs.
 - Fix build failures immediately.
 - Keep compatibility files until PR-051 removes them safely.
 - After every merge, report the full schedule, current position, merge result, validation state, and next PR.

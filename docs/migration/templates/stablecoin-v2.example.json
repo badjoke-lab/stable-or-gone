@@ -1,0 +1,56 @@
+{
+  "id": "sog_st_example",
+  "slug": "example",
+  "name": "Example Stablecoin",
+  "symbol": "EXAMPLE",
+  "aliases": [],
+  "lifecycle_status": "active",
+  "issuance_status": "open",
+  "peg_reference": {
+    "kind": "fiat",
+    "asset": "USD",
+    "target_value": 1
+  },
+  "backing_types": ["cash", "government_securities"],
+  "stabilization_mechanism": "issuer_redemption",
+  "governance_model": "centralized",
+  "organization_relationships": [
+    {
+      "organization_id": "sog_issuer_example",
+      "role": "legal_issuer",
+      "start_date": null,
+      "end_date": null,
+      "status": "active",
+      "evidence_ids": []
+    }
+  ],
+  "reserve_profile": {
+    "backing_types": ["cash", "government_securities"],
+    "summary": "",
+    "disclosure_status": "unknown",
+    "as_of_date": null,
+    "latest_report_id": null,
+    "confidence": "low",
+    "evidence_ids": []
+  },
+  "redemption_profile": {
+    "status": "unknown",
+    "settlement_asset": "USD",
+    "eligible_parties": "",
+    "retail_access": "",
+    "institutional_access": "",
+    "minimum_amount_text": "",
+    "fee_text": "",
+    "settlement_time_text": "",
+    "jurisdiction_restrictions": [],
+    "as_of_date": null,
+    "confidence": "low",
+    "evidence_ids": []
+  },
+  "launch_date": null,
+  "discontinued_date": null,
+  "summary": "",
+  "confidence": "low",
+  "last_verified_at": null,
+  "notes": ""
+}
