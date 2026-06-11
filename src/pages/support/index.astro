@@ -13,6 +13,9 @@ const wallets = [
   { asset: 'XRP', name: 'XRP', network: 'XRP Ledger', address: 'rUHSmDUteyPSr7FDq4p3BzQV627gSiJdCr', note: 'Destination tag / memo is optional for this address. Leave it blank unless your wallet requires a value.' }
 ];
 
+const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeEUxdPktIm46X0HgwuYvk8vpx0N3R0EezOaC2fz64nfE6JjA/viewform?usp=dialog';
+const githubIssueUrl = 'https://github.com/badjoke-lab/stable-or-gone/issues/new/choose';
+
 const title = 'Support Stable or Gone';
 const description = 'Support ongoing research, source checks, link maintenance, and new stablecoin records using the listed crypto addresses.';
 const jsonLd = {
@@ -91,14 +94,14 @@ const jsonLd = {
     </div>
     <div class="panel mini-card">
       <h2>Corrections remain open</h2>
-      <p>Anyone can submit a correction or stronger source through the contact page or GitHub Issues.</p>
+      <p>Anyone can submit a correction, missing source, broken link, or missing record through the contact form or public GitHub Issues.</p>
     </div>
   </section>
 
   <section class="panel support-footer-note">
     <div class="bar">Questions or corrections</div>
     <div class="support-footer-body">
-      <p>To report incorrect information, add a source, or suggest a missing record, use the <a href="/contact/">contact page</a> or <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a>.</p>
+      <p>To report incorrect information, add a source, suggest a missing record, or contact the maintainers, use the <a href={googleFormUrl} target="_blank" rel="noopener noreferrer">Google contact form</a>. For public, source-backed corrections, use <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer">GitHub Issues</a>.</p>
       <p>Stable or Gone provides historical information only. Check current issuer terms, exchange notices, and market data before making decisions.</p>
     </div>
   </section>
