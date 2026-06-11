@@ -1,4 +1,5 @@
 import type { StablecoinV2Fields, EventV2Fields, EvidenceV2Fields, OrganizationRole, RelationshipStatus } from '../schema/registry-v2';
+import { getStablecoinProfile } from './stablecoinProfiles';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
 import stablecoinOverridesPr033Data from '../../../data/stablecoin-overrides-pr033.json';
@@ -29,175 +30,24 @@ import deploymentsData from '../../../data/deployments.json';
 import deploymentsExtraData from '../../../data/deployments-extra.json';
 import registryUpdatesData from '../../../data/registry-updates.json';
 
-export type StablecoinRow = {
-  id: string;
-  slug: string;
-  name: string;
-  summary?: string;
-  symbol?: string;
-  aliases?: string[];
-  status?: string;
-  peg_asset?: string;
-  collateral_model?: string;
-  issuer_id?: string;
-  reserve_disclosure_status?: string;
-  redemption_status?: string;
-  who_can_redeem?: string;
-  retail_redemption?: string;
-  institutional_redemption?: string;
-  minimum_redemption?: string;
-  redemption_region_notes?: string;
-  redemption_notes?: string;
-  launch_date?: string;
-  discontinued_date?: string | null;
-  confidence?: string;
-  last_verified_at?: string;
-  notes?: string;
-} & StablecoinV2Fields;
-
-export type OrganizationRow = {
-  id: string;
-  slug: string;
-  name: string;
-  organization_type?: string;
-  legacy_issuer_type?: string;
-  issuer_type?: string;
-  jurisdiction?: string;
-  official_url?: string | null;
-  summary?: string;
-  confidence?: string;
-  last_verified_at?: string | null;
-  notes?: string;
-};
-
-export type RelationshipRow = {
-  id: string;
-  stablecoin_id: string;
-  organization_id: string;
-  role: OrganizationRole;
-  start_date?: string | null;
-  end_date?: string | null;
-  status?: RelationshipStatus;
-  evidence_ids?: string[];
-  notes?: string;
-};
-
-export type EventRow = {
-  id: string;
-  stablecoin_id?: string;
-  issuer_id?: string;
-  title: string;
-  description?: string;
-  event_date?: string | null;
-  event_type?: string;
-  impact_level?: string;
-  confidence?: string;
-  source_count?: number;
-  recovered?: boolean | null;
-  recovery_date?: string | null;
-  event_status_effect?: string;
-  failure_mechanism?: string;
-  notes?: string;
-} & EventV2Fields;
-
-export type EvidenceRow = {
-  id: string;
-  stablecoin_id?: string;
-  issuer_id?: string;
-  event_id?: string | null;
-  source_type?: string;
-  title: string;
-  url: string;
-  publisher?: string;
-  published_at?: string | null;
-  archived_url?: string | null;
-  accessed_at?: string | null;
-  reliability?: string;
-  claim_scope?: string;
-  notes?: string;
-} & EvidenceV2Fields;
-
-export type ReserveReportRow = {
-  id: string;
-  stablecoin_id?: string;
-  issuer_id?: string;
-  report_date?: string;
-  period_covered?: string;
-  publisher?: string;
-  report_type?: string;
-  asset_categories?: string[];
-  url?: string;
-  archived_url?: string | null;
-  confidence?: string;
-  notes?: string;
-};
-
-export type KnownUnknownRow = {
-  id: string;
-  stablecoin_id?: string;
-  issuer_id?: string;
-  topic: string;
-  description: string;
-  severity?: string;
-  last_checked_at?: string;
-  notes?: string;
-};
-
-export type RegulatoryNoteRow = {
-  id: string;
-  stablecoin_id?: string;
-  issuer_id?: string;
-  event_id?: string | null;
-  note_date?: string;
-  title: string;
-  jurisdiction?: string;
-  authority_or_source?: string;
-  note_type?: string;
-  summary: string;
-  source_url: string;
-  confidence?: string;
-  notes?: string;
-};
-
-export type DeploymentRow = {
-  id: string;
-  stablecoin_id: string;
-  chain: string;
-  deployment_type: string;
-  contract_address?: string | null;
-  status: string;
-  notes?: string;
-  evidence_ids?: string[];
-};
-
-export type RegistryUpdateRow = {
-  id: string;
-  date: string;
-  title: string;
-  category: string;
-  summary: string;
-  related_paths?: string[];
-};
+export type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; aliases?: string[]; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; } & StablecoinV2Fields;
+export type OrganizationRow = { id: string; slug: string; name: string; organization_type?: string; legacy_issuer_type?: string; issuer_type?: string; jurisdiction?: string; official_url?: string | null; summary?: string; confidence?: string; last_verified_at?: string | null; notes?: string; };
+export type RelationshipRow = { id: string; stablecoin_id: string; organization_id: string; role: OrganizationRole; start_date?: string | null; end_date?: string | null; status?: RelationshipStatus; evidence_ids?: string[]; notes?: string; };
+export type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string | null; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; } & EventV2Fields;
+export type EvidenceRow = { id: string; stablecoin_id?: string; issuer_id?: string; event_id?: string | null; source_type?: string; title: string; url: string; publisher?: string; published_at?: string | null; archived_url?: string | null; accessed_at?: string | null; reliability?: string; claim_scope?: string; notes?: string; } & EvidenceV2Fields;
+export type ReserveReportRow = { id: string; stablecoin_id?: string; issuer_id?: string; report_date?: string; period_covered?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; archived_url?: string | null; confidence?: string; notes?: string; };
+export type KnownUnknownRow = { id: string; stablecoin_id?: string; issuer_id?: string; topic: string; description: string; severity?: string; last_checked_at?: string; notes?: string; };
+export type RegulatoryNoteRow = { id: string; stablecoin_id?: string; issuer_id?: string; event_id?: string | null; note_date?: string; title: string; jurisdiction?: string; authority_or_source?: string; note_type?: string; summary: string; source_url: string; confidence?: string; notes?: string; };
+export type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; contract_address?: string | null; status: string; notes?: string; evidence_ids?: string[]; };
+export type RegistryUpdateRow = { id: string; date: string; title: string; category: string; summary: string; related_paths?: string[]; };
 
 type StablecoinOverride = Partial<StablecoinRow> & { id: string };
 type StablecoinClassificationV2 = Pick<StablecoinRow, 'id' | 'lifecycle_status' | 'issuance_status' | 'peg_reference' | 'backing_types' | 'stabilization_mechanism' | 'governance_model'>;
 
-const stablecoinOverridesById = new Map([
-  ...(stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row] as const),
-  ...(stablecoinOverridesPr034Data as StablecoinOverride[]).map((row) => [row.id, row] as const)
-]);
+const stablecoinOverridesById = new Map([...(stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row] as const), ...(stablecoinOverridesPr034Data as StablecoinOverride[]).map((row) => [row.id, row] as const)]);
 const classificationById = new Map((stablecoinClassificationV2Data as StablecoinClassificationV2[]).map((row) => [row.id, row] as const));
-
-const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])]
-  .map((coin) => ({
-    ...coin,
-    ...(stablecoinOverridesById.get(coin.id) ?? {}),
-    ...(classificationById.get(coin.id) ?? {})
-  }));
-const organizations = (organizationsData as OrganizationRow[]).map((organization) => ({
-  ...organization,
-  issuer_type: organization.legacy_issuer_type ?? organization.organization_type
-}));
+const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])].map((coin) => ({ ...coin, ...(stablecoinOverridesById.get(coin.id) ?? {}), ...(classificationById.get(coin.id) ?? {}), ...(getStablecoinProfile(coin.id) ?? {}) }));
+const organizations = (organizationsData as OrganizationRow[]).map((organization) => ({ ...organization, issuer_type: organization.legacy_issuer_type ?? organization.organization_type }));
 const relationships = relationshipsData as RelationshipRow[];
 const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
 const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
@@ -217,9 +67,4 @@ export function getKnownUnknowns(): KnownUnknownRow[] { return knownUnknowns.map
 export function getRegulatoryNotes(): RegulatoryNoteRow[] { return regulatoryNotes.map((row) => ({ ...row })); }
 export function getDeployments(): DeploymentRow[] { return deployments.map((row) => ({ ...row })); }
 export function getRegistryUpdates(): RegistryUpdateRow[] { return registryUpdates.map((row) => ({ ...row })); }
-
-export function getPrimaryRelationship(stablecoinId: string): RelationshipRow | undefined {
-  const preferredRoles: OrganizationRole[] = ['legal_issuer', 'protocol_operator', 'brand_owner', 'reserve_manager', 'governance_body', 'redemption_agent', 'custodian', 'technology_provider', 'other'];
-  const matches = relationships.filter((row) => row.stablecoin_id === stablecoinId);
-  return matches.sort((a, b) => preferredRoles.indexOf(a.role) - preferredRoles.indexOf(b.role))[0];
-}
+export function getPrimaryRelationship(stablecoinId: string): RelationshipRow | undefined { const preferredRoles: OrganizationRole[] = ['legal_issuer', 'protocol_operator', 'brand_owner', 'reserve_manager', 'governance_body', 'redemption_agent', 'custodian', 'technology_provider', 'other']; const matches = relationships.filter((row) => row.stablecoin_id === stablecoinId); return matches.sort((a, b) => preferredRoles.indexOf(a.role) - preferredRoles.indexOf(b.role))[0]; }
