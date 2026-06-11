@@ -15,6 +15,7 @@ Protected baseline:
 ```txt
 20 stablecoins
 20 Registry v2 classification records
+20 Registry v2 reserve/redemption profiles
 16 organizations
 20 stablecoin-organization relationships
 23 events
@@ -81,22 +82,28 @@ Protected public URL patterns:
 - preserved legacy issuer compatibility files and `/issuer/[slug]/` URLs
 - switched public organization displays to the relationship layer
 
+### PR-045 — Stablecoin status and classification migration
+
+- created 20 Registry v2 classification records
+- added lifecycle, issuance, peg, backing, stabilization mechanism, and governance fields
+- preserved legacy status, peg, and collateral fields for compatibility
+- added classification validation to the build chain
+
 ## Current work item
 
 ```txt
-PR-045 Stablecoin status and classification migration
+PR-046 Reserve and redemption normalization
 ```
 
 Goals:
 
 ```txt
-add Registry v2 classification records for all 20 stablecoins
-add lifecycle_status and issuance_status
-add structured peg_reference
-add backing_types, stabilization_mechanism, and governance_model
-preserve legacy status, peg_asset, and collateral_model fields until PR-051
-validate complete 20-record coverage and old/new compatibility
-leave the full UI v2 field redesign for PR-049
+add Registry v2 reserve_profile and redemption_profile records for all 20 stablecoins
+keep reserve reports as historical records
+preserve legacy redemption display fields until PR-051
+validate complete 20-record profile coverage
+validate profile status, backing types, dates, and reserve report references
+leave full UI v2 field redesign for PR-049
 ```
 
 ## Full implementation schedule
@@ -106,8 +113,8 @@ PR-041 Baseline and migration contract — completed
 PR-042 Common data loaders — completed
 PR-043 Schema v2 and compatibility validator — completed
 PR-044 Organization and relationship migration — completed
-PR-045 Stablecoin status and classification migration — in progress
-PR-046 Reserve and redemption normalization
+PR-045 Stablecoin status and classification migration — completed
+PR-046 Reserve and redemption normalization — in progress
 PR-047 Event v2 migration
 PR-048 Evidence many-to-many migration
 PR-049 UI v2
@@ -126,12 +133,12 @@ docs/migration/registry-v2-record-templates.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-045 of 11
-Completed: 4
+Registry v2 migration: PR-046 of 11
+Completed: 5
 In progress: 1
-Remaining after current PR: 6
+Remaining after current PR: 5
 Record-growth phase: paused
-Next after PR-045: PR-046 Reserve and redemption normalization
+Next after PR-046: PR-047 Event v2 migration
 ```
 
 ## Post-migration priorities
@@ -148,7 +155,7 @@ evidence and reserve-history deepening
 
 ## Operating rules
 
-- Every migration PR must pass baseline validation, canonical data validation, compatibility validation, classification validation, Astro check, and build.
+- Every migration PR must pass baseline validation, canonical data validation, compatibility validation, classification validation, profile validation, Astro check, and build.
 - Existing stablecoin, organization, event, and evidence IDs must be preserved.
 - Existing slugs and public URL patterns must be preserved.
 - Do not merge unrelated record-growth work into migration PRs.
