@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:baseline && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && astro check && astro build",
+    "build": "npm run validate:baseline && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "validate:compat": "node scripts/validate-registry-v2-compat.mjs",
     "validate:classification": "node scripts/validate-stablecoin-classification-v2.mjs",
-    "validate:profiles": "node scripts/validate-stablecoin-profiles-v2.mjs"
+    "validate:profiles": "node scripts/validate-stablecoin-profiles-v2.mjs",
+    "validate:events-v2": "node scripts/validate-event-details-v2.mjs"
   },
   "dependencies": {
     "@astrojs/check": "latest",
