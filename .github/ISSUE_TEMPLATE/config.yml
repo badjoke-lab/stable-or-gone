@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Google contact form
+    url: https://docs.google.com/forms/d/e/1FAIpQLSeEUxdPktIm46X0HgwuYvk8vpx0N3R0EezOaC2fz64nfE6JjA/viewform?usp=dialog
+    about: Use this for normal contact, non-public reports, corrections, missing records, broken links, or source suggestions.
+  - name: Stable or Gone contact page
+    url: https://sog.badjoke-lab.com/contact/
+    about: Choose between the Google Form and public GitHub Issues.
