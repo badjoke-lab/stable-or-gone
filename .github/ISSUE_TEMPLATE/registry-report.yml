@@ -1,0 +1,88 @@
+name: Registry report
+about: Report a correction, missing record, missing source, or broken link
+labels: registry-report
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for public, source-backed reports only.
+
+        For normal contact or reports that should not be discussed publicly, use the Google Form linked from the contact page.
+
+        Do not submit private keys, seed phrases, passwords, wallet credentials, exchange account details, bank information, identification documents, or sensitive personal information.
+
+  - type: dropdown
+    id: report_type
+    attributes:
+      label: What is this about?
+      options:
+        - Record correction
+        - Missing stablecoin
+        - Missing issuer / organization
+        - Missing event
+        - Missing source / evidence
+        - Broken link
+        - Reserve information
+        - Redemption information
+        - Regulatory information
+        - Issuer / organization relationship
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: related_page
+    attributes:
+      label: Related Stable or Gone page URL
+      description: Paste the affected SOG page URL if available.
+      placeholder: https://sog.badjoke-lab.com/stablecoin/example/
+    validations:
+      required: false
+
+  - type: input
+    id: subject_name
+    attributes:
+      label: Related stablecoin, issuer, organization, or event name
+      placeholder: USDT, Circle, Paxos, UST depeg, BUSD wind-down
+    validations:
+      required: false
+
+  - type: textarea
+    id: requested_change
+    attributes:
+      label: What should be changed, added, or reviewed?
+      description: Explain what is wrong or missing and what the record should say.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Source URLs
+      description: Add official statements, regulator notices, issuer pages, reserve reports, archived pages, or reliable references.
+      placeholder: |
+        1. https://...
+        2. https://...
+        3. https://...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Confidence
+      options:
+        - High — official or primary source
+        - Medium — reliable secondary source
+        - Low — needs further verification
+        - Not sure
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: public_acknowledgement
+    attributes:
+      label: Public issue acknowledgement
+      options:
+        - label: I understand that this GitHub Issue is public and should not contain private or sensitive information.
+          required: true
