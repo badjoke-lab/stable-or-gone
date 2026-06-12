@@ -2,34 +2,46 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'About Stable or Gone — Stablecoin History Archive';
-const description = 'Stable or Gone documents stablecoin launches, depegs, recoveries, migrations, wind-downs, and failures, with links to the sources behind each record.';
+const description = 'Stable or Gone documents stablecoin launches, lifecycle status, issuer and protocol relationships, depegs, recoveries, migrations, wind-downs, reserve disclosures, redemption terms, and sources.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/about/">
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">About the archive</div>
       <h1>Why Stable or Gone exists</h1>
-      <p>Stablecoins change over time. Some grow, some migrate, some lose their peg and recover, and some disappear. Stable or Gone keeps those histories in one place.</p>
+      <p>Stablecoins change over time. Some grow, some migrate, some lose their peg and recover, and some disappear. Stable or Gone keeps those histories in one source-backed registry.</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Focus</span><strong>History</strong></div>
+      <div class="stat"><span>Model</span><strong>Registry v2</strong></div>
       <div class="stat"><span>Coverage</span><strong>Sources</strong></div>
     </div>
   </section>
 
   <section class="section-grid">
-    <div class="panel mini-card"><h2>What you can find</h2><p>Stablecoin records, issuer information, event timelines, reserve disclosures, redemption terms, and source links.</p></div>
-    <div class="panel mini-card"><h2>Why history matters</h2><p>A current price or market cap does not explain how a stablecoin reached its present state. The timeline does.</p></div>
+    <div class="panel mini-card"><h2>What you can find</h2><p>Stablecoin records, organization relationships, event timelines, reserve profiles, redemption profiles, evidence scopes, and source links.</p></div>
+    <div class="panel mini-card"><h2>Why history matters</h2><p>A current price or market cap does not explain how a stablecoin reached its present state. The lifecycle and event history do.</p></div>
     <div class="panel mini-card"><h2>How gaps are handled</h2><p>When public information is incomplete or conflicting, the gap is shown rather than filled with a guess.</p></div>
   </section>
 
   <section class="panel registry">
     <div class="bar">What Stable or Gone covers</div>
     <table><tbody>
-      <tr><th>Stablecoins</th><td>Current and historical records for active, limited, migrated, discontinued, and failed stablecoins.</td></tr>
-      <tr><th>Events</th><td>Launches, depegs, recoveries, regulatory actions, protocol changes, wind-downs, and collapses.</td></tr>
-      <tr><th>Issuers and protocols</th><td>The companies, organizations, and protocols connected to each stablecoin.</td></tr>
-      <tr><th>Sources</th><td>Issuer statements, official notices, reports, regulatory documents, archives, and other relevant public material.</td></tr>
+      <tr><th>Stablecoins</th><td>Current and historical records for active, restricted, migrated, rebranded, winding-down, terminated, collapsed, and unknown stablecoins.</td></tr>
+      <tr><th>Organizations</th><td>The companies, DAOs, protocols, reserve managers, custodians, redemption agents, and networks connected to each stablecoin.</td></tr>
+      <tr><th>Relationships</th><td>Explicit roles between stablecoins and organizations, such as legal issuer, protocol operator, governance body, reserve manager, or redemption agent.</td></tr>
+      <tr><th>Events</th><td>Launches, depegs, recoveries, regulatory actions, reserve changes, redemption changes, protocol changes, migrations, wind-downs, and collapses.</td></tr>
+      <tr><th>Reserve and redemption profiles</th><td>Current public summaries of reserve backing, disclosure status, direct redemption access, eligible parties, settlement assets, fees, timing, and limits.</td></tr>
+      <tr><th>Sources</th><td>Issuer statements, official notices, reports, regulatory documents, archives, developer pages, research papers, and other relevant public material.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What Stable or Gone is not</div>
+    <table><tbody>
+      <tr><th>Not live market data</th><td>The registry is not a trading terminal, price tracker, market cap dashboard, or exchange listing page.</td></tr>
+      <tr><th>Not investment advice</th><td>Records are historical and informational. They are not buy, sell, redemption, tax, or legal recommendations.</td></tr>
+      <tr><th>Not issuer support</th><td>The site cannot redeem tokens, recover accounts, resolve wallet problems, or provide customer support for issuers or exchanges.</td></tr>
     </tbody></table>
   </section>
 
