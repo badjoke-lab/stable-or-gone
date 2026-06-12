@@ -11,6 +11,7 @@ import eventsData from '../../../data/events.json';
 import eventsPr036Data from '../../../data/events-pr036.json';
 import eventsPr037Data from '../../../data/events-pr037.json';
 import eventsPr038Data from '../../../data/events-pr038.json';
+import eventDetailsV2Data from '../../../data/event-details-v2.json';
 import evidenceData from '../../../data/evidence.json';
 import evidenceExtraData from '../../../data/evidence-extra.json';
 import evidencePr033Data from '../../../data/evidence-pr033.json';
@@ -65,10 +66,11 @@ const toEvidenceRelation = (row: EvidenceRow): EvidenceRelationRow => ({
 
 const stablecoinOverridesById = new Map([...(stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row] as const), ...(stablecoinOverridesPr034Data as StablecoinOverride[]).map((row) => [row.id, row] as const)]);
 const classificationById = new Map((stablecoinClassificationV2Data as StablecoinClassificationV2[]).map((row) => [row.id, row] as const));
+const eventDetailsById = new Map((eventDetailsV2Data as EventRow[]).map((row) => [row.id, row] as const));
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])].map((coin) => ({ ...coin, ...(stablecoinOverridesById.get(coin.id) ?? {}), ...(classificationById.get(coin.id) ?? {}), ...(getStablecoinProfile(coin.id) ?? {}) }));
 const organizations = (organizationsData as OrganizationRow[]).map((organization) => ({ ...organization, issuer_type: organization.legacy_issuer_type ?? organization.organization_type }));
 const relationships = relationshipsData as RelationshipRow[];
-const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
+const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])].map((event) => ({ ...event, ...(eventDetailsById.get(event.id) ?? {}) }));
 const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])].map(withEvidenceV2Fields);
 const evidenceRelations = evidence.map(toEvidenceRelation);
 const reserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[])];
@@ -80,7 +82,7 @@ const registryUpdates = registryUpdatesData as RegistryUpdateRow[];
 export function getStablecoins(): StablecoinRow[] { return stablecoins.map((row) => ({ ...row })); }
 export function getOrganizations(): OrganizationRow[] { return organizations.map((row) => ({ ...row })); }
 export function getRelationships(): RelationshipRow[] { return relationships.map((row) => ({ ...row, evidence_ids: [...(row.evidence_ids ?? [])] })); }
-export function getEvents(): EventRow[] { return events.map((row) => ({ ...row })); }
+export function getEvents(): EventRow[] { return events.map((row) => ({ ...row, subject_stablecoin_ids: [...(row.subject_stablecoin_ids ?? [])], subject_organization_ids: [...(row.subject_organization_ids ?? [])] })); }
 export function getEvidence(): EvidenceRow[] { return evidence.map((row) => ({ ...row, stablecoin_ids: [...(row.stablecoin_ids ?? [])], organization_ids: [...(row.organization_ids ?? [])], event_ids: [...(row.event_ids ?? [])], claim_scopes: [...(row.claim_scopes ?? [])] })); }
 export function getEvidenceRelations(): EvidenceRelationRow[] { return evidenceRelations.map((row) => ({ ...row, stablecoin_ids: [...row.stablecoin_ids], organization_ids: [...row.organization_ids], event_ids: [...row.event_ids], claim_scopes: [...row.claim_scopes] })); }
 export function getReserveReports(): ReserveReportRow[] { return reserveReports.map((row) => ({ ...row })); }
