@@ -106,21 +106,28 @@ Protected public URL patterns:
 - added event detail kind shells for depeg, regulatory, reserve-change, redemption-change, and migration contexts
 - added Event v2 validation to the build chain
 
+### PR-048 — Evidence many-to-many migration
+
+- projected legacy evidence subjects into V2 stablecoin, organization, event, and claim-scope arrays
+- added the evidence relation view layer
+- preserved legacy evidence fields until PR-051
+- added Evidence relation validation to the build chain
+
 ## Current work item
 
 ```txt
-PR-048 Evidence many-to-many migration
+PR-049 UI v2
 ```
 
 Goals:
 
 ```txt
-project legacy stablecoin_id, issuer_id, event_id, and claim_scope into Evidence v2 arrays
-add getEvidenceRelations() as a relation-view layer
-preserve legacy evidence fields until PR-051
-validate complete 90-evidence relation projection coverage
-validate stablecoin, organization, event, and claim-scope compatibility
-leave full UI v2 field redesign for PR-049
+surface Registry v2 classification fields on stablecoin pages
+surface reserve_profile and redemption_profile on stablecoin pages
+surface Event v2 subject arrays and detail overlays on event pages
+surface Evidence v2 claim-scope arrays on source tables
+preserve legacy public URLs and existing tables
+leave methodology, SEO, and AI-readable publishing for PR-050
 ```
 
 ## Full implementation schedule
@@ -133,8 +140,8 @@ PR-044 Organization and relationship migration — completed
 PR-045 Stablecoin status and classification migration — completed
 PR-046 Reserve and redemption normalization — completed
 PR-047 Event v2 migration — completed
-PR-048 Evidence many-to-many migration — in progress
-PR-049 UI v2
+PR-048 Evidence many-to-many migration — completed
+PR-049 UI v2 — in progress
 PR-050 Methodology, guides, and SEO
 PR-051 Legacy cleanup and canonical consolidation
 ```
@@ -150,12 +157,12 @@ docs/migration/registry-v2-record-templates.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-048 of 11
-Completed: 7
+Registry v2 migration: PR-049 of 11
+Completed: 8
 In progress: 1
-Remaining after current PR: 3
+Remaining after current PR: 2
 Record-growth phase: paused
-Next after PR-048: PR-049 UI v2
+Next after PR-049: PR-050 Methodology, guides, and SEO
 ```
 
 ## Post-migration priorities
