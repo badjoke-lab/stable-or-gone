@@ -13,7 +13,7 @@ const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
 const {
   title = 'Stable or Gone — Stablecoin History Registry',
-  description = 'Explore stablecoin histories, major events, issuers, reserve information, redemption terms, and the sources behind each record.',
+  description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.',
   canonicalPath = Astro.url.pathname,
   ogImage = '/og/sog-og.svg',
   jsonLd
@@ -58,7 +58,7 @@ const gaInline = gaMeasurementId
         </a>
         <nav class="nav" aria-label="Primary navigation">
           <a href="/stablecoins/">Stablecoins</a>
-          <a href="/issuers/">Issuers</a>
+          <a href="/issuers/">Organizations</a>
           <a href="/events/">Events</a>
           <a href="/guides/">Guides</a>
           <a href="/glossary/">Glossary</a>
@@ -72,7 +72,7 @@ const gaInline = gaMeasurementId
         <slot />
       </main>
       <footer class="site-footer">
-        <span>Historical information only. Check current issuer and market information before making decisions.</span>
+        <span>Historical information only. Check current organization, issuer, and market information before making decisions.</span>
         <span><a class="footer-support" href="/support/">Support SOG</a> · <a href="/contact/">Corrections and submissions</a> · <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a></span>
       </footer>
     </div>
