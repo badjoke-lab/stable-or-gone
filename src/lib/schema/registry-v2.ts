@@ -89,6 +89,7 @@ export const organizationRoles = [
   'other'
 ] as const;
 
+export const eventDetailKinds = ['depeg', 'regulatory', 'reserve_change', 'redemption_change', 'migration', 'other'] as const;
 export const relationshipStatuses = ['active', 'ended', 'planned', 'unknown'] as const;
 export const depegDirections = ['below_peg', 'above_peg', 'both', 'unknown'] as const;
 export const recoveryStatuses = ['recovered', 'partially_recovered', 'not_recovered', 'collapsed', 'unknown'] as const;
@@ -101,6 +102,7 @@ export type BackingType = (typeof backingTypes)[number];
 export type StabilizationMechanism = (typeof stabilizationMechanisms)[number];
 export type GovernanceModel = (typeof governanceModels)[number];
 export type OrganizationRole = (typeof organizationRoles)[number];
+export type EventDetailKind = (typeof eventDetailKinds)[number];
 export type RelationshipStatus = (typeof relationshipStatuses)[number];
 export type DepegDirection = (typeof depegDirections)[number];
 export type RecoveryStatus = (typeof recoveryStatuses)[number];
@@ -171,6 +173,18 @@ export type RegulatoryDetailV2 = {
   resolution_date?: string | null;
 };
 
+export type ReserveChangeDetailV2 = {
+  summary?: string;
+};
+
+export type RedemptionChangeDetailV2 = {
+  summary?: string;
+};
+
+export type MigrationDetailV2 = {
+  summary?: string;
+};
+
 export type StablecoinV2Fields = {
   lifecycle_status?: LifecycleStatus;
   issuance_status?: IssuanceStatus;
@@ -187,8 +201,12 @@ export type EventV2Fields = {
   subject_stablecoin_ids?: string[];
   subject_organization_ids?: string[];
   evidence_ids?: string[];
+  event_detail_kind?: EventDetailKind;
   depeg_detail?: DepegDetailV2;
   regulatory_detail?: RegulatoryDetailV2;
+  reserve_change_detail?: ReserveChangeDetailV2;
+  redemption_change_detail?: RedemptionChangeDetailV2;
+  migration_detail?: MigrationDetailV2;
 };
 
 export type EvidenceV2Fields = {
