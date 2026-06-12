@@ -35,6 +35,7 @@ export type OrganizationRow = { id: string; slug: string; name: string; organiza
 export type RelationshipRow = { id: string; stablecoin_id: string; organization_id: string; role: OrganizationRole; start_date?: string | null; end_date?: string | null; status?: RelationshipStatus; evidence_ids?: string[]; notes?: string; };
 export type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string | null; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; } & EventV2Fields;
 export type EvidenceRow = { id: string; stablecoin_id?: string; issuer_id?: string; event_id?: string | null; source_type?: string; title: string; url: string; publisher?: string; published_at?: string | null; archived_url?: string | null; accessed_at?: string | null; reliability?: string; claim_scope?: string; notes?: string; } & EvidenceV2Fields;
+export type EvidenceRelationRow = { id: string; evidence_id: string; stablecoin_ids: string[]; organization_ids: string[]; event_ids: string[]; claim_scopes: string[]; relation_kind: 'legacy_subject_projection' | 'explicit_v2'; notes?: string; };
 export type ReserveReportRow = { id: string; stablecoin_id?: string; issuer_id?: string; report_date?: string; period_covered?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; archived_url?: string | null; confidence?: string; notes?: string; };
 export type KnownUnknownRow = { id: string; stablecoin_id?: string; issuer_id?: string; topic: string; description: string; severity?: string; last_checked_at?: string; notes?: string; };
 export type RegulatoryNoteRow = { id: string; stablecoin_id?: string; issuer_id?: string; event_id?: string | null; note_date?: string; title: string; jurisdiction?: string; authority_or_source?: string; note_type?: string; summary: string; source_url: string; confidence?: string; notes?: string; };
@@ -44,13 +45,32 @@ export type RegistryUpdateRow = { id: string; date: string; title: string; categ
 type StablecoinOverride = Partial<StablecoinRow> & { id: string };
 type StablecoinClassificationV2 = Pick<StablecoinRow, 'id' | 'lifecycle_status' | 'issuance_status' | 'peg_reference' | 'backing_types' | 'stabilization_mechanism' | 'governance_model'>;
 
+const unique = (items: (string | null | undefined)[]) => [...new Set(items.filter((item): item is string => typeof item === 'string' && item.length > 0))];
+const withEvidenceV2Fields = (row: EvidenceRow): EvidenceRow => ({
+  ...row,
+  stablecoin_ids: unique([...(row.stablecoin_ids ?? []), row.stablecoin_id]),
+  organization_ids: unique([...(row.organization_ids ?? []), row.issuer_id]),
+  event_ids: unique([...(row.event_ids ?? []), row.event_id ?? undefined]),
+  claim_scopes: unique([...(row.claim_scopes ?? []), row.claim_scope])
+});
+const toEvidenceRelation = (row: EvidenceRow): EvidenceRelationRow => ({
+  id: `sog_er_${row.id.replace(/^sog_src_/, '')}`,
+  evidence_id: row.id,
+  stablecoin_ids: [...(row.stablecoin_ids ?? [])],
+  organization_ids: [...(row.organization_ids ?? [])],
+  event_ids: [...(row.event_ids ?? [])],
+  claim_scopes: [...(row.claim_scopes ?? [])],
+  relation_kind: row.stablecoin_ids || row.organization_ids || row.event_ids || row.claim_scopes ? 'explicit_v2' : 'legacy_subject_projection'
+});
+
 const stablecoinOverridesById = new Map([...(stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row] as const), ...(stablecoinOverridesPr034Data as StablecoinOverride[]).map((row) => [row.id, row] as const)]);
 const classificationById = new Map((stablecoinClassificationV2Data as StablecoinClassificationV2[]).map((row) => [row.id, row] as const));
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[])].map((coin) => ({ ...coin, ...(stablecoinOverridesById.get(coin.id) ?? {}), ...(classificationById.get(coin.id) ?? {}), ...(getStablecoinProfile(coin.id) ?? {}) }));
 const organizations = (organizationsData as OrganizationRow[]).map((organization) => ({ ...organization, issuer_type: organization.legacy_issuer_type ?? organization.organization_type }));
 const relationships = relationshipsData as RelationshipRow[];
 const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[])];
-const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])];
+const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[])].map(withEvidenceV2Fields);
+const evidenceRelations = evidence.map(toEvidenceRelation);
 const reserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[])];
 const knownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[]), ...(knownUnknownsPr034Data as KnownUnknownRow[])];
 const regulatoryNotes = regulatoryNotesData as RegulatoryNoteRow[];
@@ -61,7 +81,8 @@ export function getStablecoins(): StablecoinRow[] { return stablecoins.map((row)
 export function getOrganizations(): OrganizationRow[] { return organizations.map((row) => ({ ...row })); }
 export function getRelationships(): RelationshipRow[] { return relationships.map((row) => ({ ...row, evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getEvents(): EventRow[] { return events.map((row) => ({ ...row })); }
-export function getEvidence(): EvidenceRow[] { return evidence.map((row) => ({ ...row })); }
+export function getEvidence(): EvidenceRow[] { return evidence.map((row) => ({ ...row, stablecoin_ids: [...(row.stablecoin_ids ?? [])], organization_ids: [...(row.organization_ids ?? [])], event_ids: [...(row.event_ids ?? [])], claim_scopes: [...(row.claim_scopes ?? [])] })); }
+export function getEvidenceRelations(): EvidenceRelationRow[] { return evidenceRelations.map((row) => ({ ...row, stablecoin_ids: [...row.stablecoin_ids], organization_ids: [...row.organization_ids], event_ids: [...row.event_ids], claim_scopes: [...row.claim_scopes] })); }
 export function getReserveReports(): ReserveReportRow[] { return reserveReports.map((row) => ({ ...row })); }
 export function getKnownUnknowns(): KnownUnknownRow[] { return knownUnknowns.map((row) => ({ ...row })); }
 export function getRegulatoryNotes(): RegulatoryNoteRow[] { return regulatoryNotes.map((row) => ({ ...row })); }
