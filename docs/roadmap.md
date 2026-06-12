@@ -121,20 +121,28 @@ Protected public URL patterns:
 - surfaced Evidence v2 claim-scope arrays on source tables
 - preserved legacy public URLs and existing table structure
 
+### PR-050 — Methodology, guides, and SEO
+
+- updated methodology copy for Registry v2 terminology
+- added public explanations of lifecycle, issuance, reserve, redemption, event, and evidence relation fields
+- aligned guides, glossary, and about pages with the normalized model
+- added `public/llms.txt` for AI-readable site guidance
+- preserved canonical public URL patterns
+
 ## Current work item
 
 ```txt
-PR-050 Methodology, guides, and SEO
+PR-051 Legacy cleanup and canonical consolidation
 ```
 
 Goals:
 
 ```txt
-update methodology copy for Registry v2 terminology
-add public explanation of lifecycle, issuance, reserve, redemption, event, and evidence relation fields
-align guides and glossary with the normalized model
-prepare SEO and AI-readable descriptions without changing canonical URLs
-leave legacy cleanup and canonical consolidation for PR-051
+remove or demote legacy-only display fields after V2 equivalents are public
+consolidate canonical naming around organization rather than issuer internally
+keep /issuer/[slug]/ compatibility routes public
+verify all validators and build after cleanup
+unpause record growth after final migration check
 ```
 
 ## Full implementation schedule
@@ -149,8 +157,8 @@ PR-046 Reserve and redemption normalization — completed
 PR-047 Event v2 migration — completed
 PR-048 Evidence many-to-many migration — completed
 PR-049 UI v2 — completed
-PR-050 Methodology, guides, and SEO — next
-PR-051 Legacy cleanup and canonical consolidation
+PR-050 Methodology, guides, and SEO — completed
+PR-051 Legacy cleanup and canonical consolidation — next
 ```
 
 Detailed specifications:
@@ -164,12 +172,12 @@ docs/migration/registry-v2-record-templates.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-050 of 11
-Completed: 9
+Registry v2 migration: PR-051 of 11
+Completed: 10
 In progress: 0
-Remaining: 2
+Remaining: 1
 Record-growth phase: paused
-Next: PR-050 Methodology, guides, and SEO
+Next: PR-051 Legacy cleanup and canonical consolidation
 ```
 
 ## Post-migration priorities
@@ -191,5 +199,5 @@ evidence and reserve-history deepening
 - Existing slugs and public URL patterns must be preserved.
 - Do not merge unrelated record-growth work into migration PRs.
 - Fix build failures immediately.
-- Keep legacy compatibility fields and files until PR-051 removes them safely.
+- Keep public `/issuer/[slug]/` compatibility routes after internal organization consolidation.
 - After every merge, report the full schedule, current position, merge result, validation state, and next PR.
