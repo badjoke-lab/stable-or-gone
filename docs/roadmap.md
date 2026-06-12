@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-10
+Updated: 2026-06-12
 
 ## Current stage
 
@@ -21,6 +21,7 @@ Protected baseline:
 23 events
 23 Event v2 detail records
 90 evidence records
+90 Evidence v2 relation projections
 40 reserve references
 50 known unknowns
 9 regulatory notes
@@ -42,6 +43,7 @@ organization_entity
 stablecoin_organization_relationship
 stablecoin_event
 evidence
+evidence_relation
 reserve_report
 known_unknown
 deployment
@@ -97,21 +99,28 @@ Protected public URL patterns:
 - separated redemption profile from legacy flat redemption fields
 - added profile validation to the build chain
 
+### PR-047 — Event v2 migration
+
+- created 23 Event v2 detail overlay records
+- added event subject stablecoin and organization arrays
+- added event detail kind shells for depeg, regulatory, reserve-change, redemption-change, and migration contexts
+- added Event v2 validation to the build chain
+
 ## Current work item
 
 ```txt
-PR-047 Event v2 migration
+PR-048 Evidence many-to-many migration
 ```
 
 Goals:
 
 ```txt
-add Event v2 detail overlay records for all 23 events
-add subject_stablecoin_ids[] and subject_organization_ids[]
-add event_detail_kind
-add conservative depeg, regulatory, reserve-change, redemption-change, and migration detail shells
-preserve legacy stablecoin_id and issuer_id until PR-051
-validate complete 23-event coverage and legacy/new subject consistency
+project legacy stablecoin_id, issuer_id, event_id, and claim_scope into Evidence v2 arrays
+add getEvidenceRelations() as a relation-view layer
+preserve legacy evidence fields until PR-051
+validate complete 90-evidence relation projection coverage
+validate stablecoin, organization, event, and claim-scope compatibility
+leave full UI v2 field redesign for PR-049
 ```
 
 ## Full implementation schedule
@@ -123,8 +132,8 @@ PR-043 Schema v2 and compatibility validator — completed
 PR-044 Organization and relationship migration — completed
 PR-045 Stablecoin status and classification migration — completed
 PR-046 Reserve and redemption normalization — completed
-PR-047 Event v2 migration — in progress
-PR-048 Evidence many-to-many migration
+PR-047 Event v2 migration — completed
+PR-048 Evidence many-to-many migration — in progress
 PR-049 UI v2
 PR-050 Methodology, guides, and SEO
 PR-051 Legacy cleanup and canonical consolidation
@@ -141,12 +150,12 @@ docs/migration/registry-v2-record-templates.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-047 of 11
-Completed: 6
+Registry v2 migration: PR-048 of 11
+Completed: 7
 In progress: 1
-Remaining after current PR: 4
+Remaining after current PR: 3
 Record-growth phase: paused
-Next after PR-047: PR-048 Evidence many-to-many migration
+Next after PR-048: PR-049 UI v2
 ```
 
 ## Post-migration priorities
@@ -163,7 +172,7 @@ evidence and reserve-history deepening
 
 ## Operating rules
 
-- Every migration PR must pass baseline validation, canonical data validation, compatibility validation, classification validation, profile validation, Event v2 validation, Astro check, and build.
+- Every migration PR must pass baseline validation, canonical data validation, compatibility validation, classification validation, profile validation, Event v2 validation, Evidence relation validation, Astro check, and build.
 - Existing stablecoin, organization, event, and evidence IDs must be preserved.
 - Existing slugs and public URL patterns must be preserved.
 - Do not merge unrelated record-growth work into migration PRs.
