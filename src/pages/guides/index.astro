@@ -24,16 +24,16 @@ const guides = [
   }
 ];
 ---
-<BaseLayout title="Guides — Stable or Gone" description="Guides to stablecoin depegs, status labels, reserve disclosures, and lifecycle changes.">
+<BaseLayout title="Guides — Stable or Gone" description="Guides to stablecoin lifecycle status, event history, depegs, reserve disclosures, redemption access, evidence relations, and Registry v2 fields.">
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">Stablecoin reference guides</div>
       <h1>Understand the records</h1>
-      <p>These guides explain the terms and distinctions used throughout the archive, with examples from existing stablecoin records.</p>
+      <p>These guides explain the terms and distinctions used throughout the archive, including Registry v2 fields for lifecycle status, issuance, reserves, redemption, events, and evidence scopes.</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Guides</span><strong>{guides.length}</strong></div>
-      <div class="stat"><span>Topics</span><strong>4</strong></div>
+      <div class="stat"><span>Model</span><strong>Registry v2</strong></div>
     </div>
   </section>
 
@@ -47,10 +47,20 @@ const guides = [
   </section>
 
   <section class="panel registry">
+    <div class="bar">How to read a Stable or Gone record</div>
+    <table><tbody>
+      <tr><th>Stablecoin page</th><td>Start with lifecycle status, issuance status, peg reference, backing types, organization roles, reserve profile, redemption profile, event timeline, and sources.</td></tr>
+      <tr><th>Event page</th><td>Use event pages for dated changes such as depegs, regulatory actions, reserve changes, redemption changes, migrations, wind-downs, and collapses.</td></tr>
+      <tr><th>Evidence scope</th><td>Sources are scoped to the specific stablecoin, organization, event, and claim they support. A source does not automatically support every field on a page.</td></tr>
+      <tr><th>Open questions</th><td>When public information is incomplete, the archive records the gap instead of guessing.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
     <div class="bar">More reference pages</div>
     <table><tbody>
       <tr><th>Glossary</th><td><a href="/glossary/">Definitions of common terms used across the archive</a></td></tr>
-      <tr><th>Methodology</th><td><a href="/methodology/">How records, events, and status labels are reviewed</a></td></tr>
+      <tr><th>Methodology</th><td><a href="/methodology/">How records, events, relationships, and status labels are reviewed</a></td></tr>
       <tr><th>Stablecoins</th><td><a href="/stablecoins/">Browse all stablecoin records</a></td></tr>
     </tbody></table>
   </section>
