@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import { cleanPublicText } from '../../utils/publicText';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
 import { getEvents, getStablecoins, getOrganizations, getEvidence } from '../../lib/data/registry';
 
@@ -12,42 +13,54 @@ const { event } = Astro.props;
 const allStablecoins = getStablecoins();
 const allOrganizations = getOrganizations();
 const allEvidence = getEvidence();
-const stablecoin = allStablecoins.find((item) => item.id === event.stablecoin_id);
-const organization = allOrganizations.find((item) => item.id === event.issuer_id);
-const evidence = allEvidence.filter((source) => source.event_id === event.id);
+const subjectStablecoins = (event.subject_stablecoin_ids?.length ? event.subject_stablecoin_ids : event.stablecoin_id ? [event.stablecoin_id] : []).map((id) => allStablecoins.find((item) => item.id === id) ?? { id, name: id, slug: '' });
+const subjectOrganizations = (event.subject_organization_ids?.length ? event.subject_organization_ids : event.issuer_id ? [event.issuer_id] : []).map((id) => allOrganizations.find((item) => item.id === id) ?? { id, name: id, slug: '' });
+const stablecoin = subjectStablecoins[0];
+const organization = subjectOrganizations[0];
+const evidence = allEvidence.filter((source) => source.event_ids?.includes(event.id) || source.event_id === event.id);
 const publicCopy = eventPublicCopy[event.id];
 const eventTitle = publicCopy?.title ?? event.title;
 const eventDescription = publicCopy?.description ?? event.description ?? 'A description has not yet been added for this event.';
 const title = `${eventTitle} — Stablecoin Event | Stable or Gone`;
 const description = eventDescription;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [stablecoin?.name, organization?.name, event.event_type, 'stablecoin event'].filter(Boolean) };
+const detailSummary = event.depeg_detail?.cause_summary ?? event.reserve_change_detail?.summary ?? event.redemption_change_detail?.summary ?? event.migration_detail?.summary ?? undefined;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [...subjectStablecoins.map((item) => item.name), ...subjectOrganizations.map((item) => item.name), event.event_detail_kind ?? event.event_type, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main"><div class="prompt">Stablecoin event</div><h1>{eventTitle}</h1><p>{eventDescription}</p></div>
-    <div class="panel stats"><div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
+    <div class="panel stats"><div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div><div class="stat"><span>Detail kind</span><strong>{formatPublicLabel(event.event_detail_kind ?? event.event_type)}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
   </section>
 
   <section class="section-grid" aria-label="Related pages">
-    {stablecoin && <a class="panel mini-card" href={`/stablecoin/${stablecoin.slug}/`}><h2>{stablecoin.name}</h2><p>Open the stablecoin record connected to this event.</p></a>}
-    {organization && <a class="panel mini-card" href={`/issuer/${organization.slug}/`}><h2>{organization.name}</h2><p>View the issuer or protocol connected to this event.</p></a>}
+    {subjectStablecoins.map((item) => item.slug ? <a class="panel mini-card" href={`/stablecoin/${item.slug}/`}><h2>{item.name}</h2><p>Open the stablecoin record connected to this event.</p></a> : <div class="panel mini-card"><h2>{item.name}</h2><p>Stablecoin subject record is not linked yet.</p></div>)}
+    {subjectOrganizations.map((item) => item.slug ? <a class="panel mini-card" href={`/issuer/${item.slug}/`}><h2>{item.name}</h2><p>View the issuer, protocol, or organization connected to this event.</p></a> : <div class="panel mini-card"><h2>{item.name}</h2><p>Organization subject record is not linked yet.</p></div>)}
     <a class="panel mini-card" href="/events/"><h2>All events</h2><p>Browse the complete stablecoin event history.</p></a>
   </section>
 
   <section class="panel registry"><div class="bar">Event details</div><table><tbody>
     <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
-    <tr><th>Type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
-    <tr><th>Stablecoin</th><td>{stablecoin ? <a href={`/stablecoin/${stablecoin.slug}/`}>{stablecoin.name} {stablecoin.symbol ? `(${stablecoin.symbol})` : ''}</a> : 'Unknown'}</td></tr>
-    <tr><th>Issuer / protocol</th><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'Unknown'}</td></tr>
+    <tr><th>Legacy type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
+    <tr><th>Event detail kind</th><td>{formatPublicLabel(event.event_detail_kind, 'Unknown')}</td></tr>
+    <tr><th>Stablecoin subjects</th><td>{subjectStablecoins.map((item) => item.slug ? <a href={`/stablecoin/${item.slug}/`}>{item.name}</a> : item.name).reduce((acc, item, index) => index === 0 ? [item] : [...acc, ', ', item], [])}</td></tr>
+    <tr><th>Organization subjects</th><td>{subjectOrganizations.map((item) => item.slug ? <a href={`/issuer/${item.slug}/`}>{item.name}</a> : item.name).reduce((acc, item, index) => index === 0 ? [item] : [...acc, ', ', item], [])}</td></tr>
     <tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr>
     <tr><th>Effect on status</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr>
-    <tr><th>Recovered</th><td>{event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unclear'}</td></tr>
-    <tr><th>Recovery date</th><td>{event.recovery_date ?? '—'}</td></tr>
-    <tr><th>Cause or mechanism</th><td>{formatPublicLabel(event.failure_mechanism)}</td></tr>
+    <tr><th>Recovered</th><td>{event.depeg_detail?.recovery_status ? formatPublicLabel(event.depeg_detail.recovery_status) : event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unclear'}</td></tr>
+    <tr><th>Recovery date</th><td>{event.depeg_detail?.recovery_date ?? event.recovery_date ?? '—'}</td></tr>
+    <tr><th>Cause or mechanism</th><td>{cleanPublicText(detailSummary ?? event.failure_mechanism, 'Public information is incomplete.')}</td></tr>
     <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
   </tbody></table></section>
 
-  <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="3">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td></tr>))}</tbody></table></section>
+  {(event.depeg_detail || event.regulatory_detail || event.reserve_change_detail || event.redemption_change_detail || event.migration_detail) && <section class="panel registry"><div class="bar">Registry v2 detail overlay</div><table><tbody>
+    {event.depeg_detail && <><tr><th>Depeg recovery status</th><td>{formatPublicLabel(event.depeg_detail.recovery_status, 'Unknown')}</td></tr><tr><th>Depeg recovery date</th><td>{event.depeg_detail.recovery_date ?? '—'}</td></tr><tr><th>Depeg cause summary</th><td>{cleanPublicText(event.depeg_detail.cause_summary, 'Public information is incomplete.')}</td></tr></>}
+    {event.regulatory_detail && <><tr><th>Jurisdiction</th><td>{formatPublicLabel(event.regulatory_detail.jurisdiction, 'Unknown')}</td></tr><tr><th>Authority</th><td>{formatPublicLabel(event.regulatory_detail.authority, 'Unknown')}</td></tr><tr><th>Action type</th><td>{formatPublicLabel(event.regulatory_detail.action_type, 'Unknown')}</td></tr><tr><th>Effective date</th><td>{event.regulatory_detail.effective_date ?? '—'}</td></tr><tr><th>Resolution date</th><td>{event.regulatory_detail.resolution_date ?? '—'}</td></tr></>}
+    {event.reserve_change_detail && <tr><th>Reserve-change summary</th><td>{cleanPublicText(event.reserve_change_detail.summary, 'Public information is incomplete.')}</td></tr>}
+    {event.redemption_change_detail && <tr><th>Redemption-change summary</th><td>{cleanPublicText(event.redemption_change_detail.summary, 'Public information is incomplete.')}</td></tr>}
+    {event.migration_detail && <tr><th>Migration summary</th><td>{cleanPublicText(event.migration_detail.summary, 'Public information is incomplete.')}</td></tr>}
+  </tbody></table></section>}
+
+  <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Evidence scope</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="4">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{source.claim_scopes?.map((item) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(source.claim_scope)}</td></tr>))}</tbody></table></section>
 
   <section class="panel report-box"><h2>Suggest a correction</h2><p>Report an incorrect date, outcome, description, or source, or suggest a missing event.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div></section>
 </BaseLayout>
