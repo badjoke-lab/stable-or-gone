@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'Methodology — Stable or Gone';
-const description = 'How Stable or Gone assigns status labels, records depegs and other events, selects sources, and handles incomplete information.';
+const description = 'How Stable or Gone records stablecoin lifecycle status, issuer relationships, events, reserve and redemption profiles, sources, and unresolved public-information gaps.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -9,7 +9,7 @@ const jsonLd = {
   url: 'https://sog.badjoke-lab.com/methodology/',
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin methodology', 'stablecoin status labels', 'depeg handling', 'reserve disclosure']
+  about: ['stablecoin methodology', 'stablecoin lifecycle status', 'stablecoin events', 'reserve disclosure', 'redemption access', 'evidence relations']
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/methodology/" jsonLd={jsonLd}>
@@ -17,11 +17,12 @@ const jsonLd = {
     <div class="panel hero-main">
       <div class="prompt">How records are built</div>
       <h1>Methodology</h1>
-      <p>This page explains how status labels are assigned, which events are recorded, how sources are chosen, and how unresolved questions are shown.</p>
+      <p>This page explains how Stable or Gone separates stablecoin entities, organizations, relationships, events, reserve and redemption profiles, evidence, and unresolved questions.</p>
     </div>
     <div class="panel stats">
-      <div class="stat"><span>Main unit</span><strong>Record</strong></div>
+      <div class="stat"><span>Main unit</span><strong>Entity</strong></div>
       <div class="stat"><span>Review basis</span><strong>Sources</strong></div>
+      <div class="stat"><span>Model</span><strong>Registry v2</strong></div>
     </div>
   </section>
 
@@ -34,21 +35,37 @@ const jsonLd = {
   <section class="panel registry">
     <div class="bar">Core approach</div>
     <table><tbody>
-      <tr><th>Separate records and events</th><td>A stablecoin record describes the asset. Event records describe dated changes such as launches, depegs, migrations, or wind-downs.</td></tr>
+      <tr><th>Separate entities and events</th><td>A stablecoin record describes the asset. Event records describe dated changes such as launches, depegs, migrations, regulatory actions, reserve interventions, or wind-downs.</td></tr>
+      <tr><th>Separate organizations and roles</th><td>Companies, protocols, DAOs, reserve managers, custodians, and redemption agents are recorded as organizations. Their roles are attached through relationship records.</td></tr>
       <tr><th>Prefer primary sources</th><td>Issuer statements, official notices, reports, regulatory documents, repositories, and verified contract references are preferred where available.</td></tr>
-      <tr><th>Keep context attached</th><td>A source is linked to the claim or event it supports rather than treated as proof of the whole record.</td></tr>
+      <tr><th>Keep evidence scoped</th><td>A source is linked to the stablecoin, organization, event, and claim it supports rather than treated as proof of the whole record.</td></tr>
     </tbody></table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">Status labels</div>
+    <div class="bar">Registry v2 fields</div>
+    <table><tbody>
+      <tr><th>Lifecycle status</th><td>The broad current state of the stablecoin, such as active, restricted, winding down, terminated, collapsed, migrated, rebranded, or unknown.</td></tr>
+      <tr><th>Issuance status</th><td>Whether new issuance appears open, restricted, paused, terminated, protocol-based, or unknown.</td></tr>
+      <tr><th>Peg reference</th><td>The target asset or unit the stablecoin attempts to track, including fiat, crypto asset, commodity, index, floating, other, or unknown references.</td></tr>
+      <tr><th>Backing types</th><td>The public reserve or collateral categories associated with the stablecoin, such as cash, bank deposits, government securities, crypto collateral, tokenized funds, mixed backing, or unknown backing.</td></tr>
+      <tr><th>Reserve profile</th><td>A current high-level summary of reserve backing, disclosure status, confidence, and the latest supporting report if available.</td></tr>
+      <tr><th>Redemption profile</th><td>A current high-level summary of direct redemption access, eligible parties, settlement asset, minimum amount, fees, timing, jurisdiction limits, and confidence where public information exists.</td></tr>
+      <tr><th>Event detail kind</th><td>The normalized event subtype used for display and review, including depeg, regulatory, reserve change, redemption change, migration, or other.</td></tr>
+      <tr><th>Evidence relation</th><td>The projected relation between a source and one or more stablecoins, organizations, events, and claim scopes.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Lifecycle and status labels</div>
     <table><tbody>
       <tr><th>Active</th><td>Operating or available according to the most recent sources reviewed.</td></tr>
-      <tr><th>Limited</th><td>Still operating, but with important restrictions on access, minting, redemption, geography, or market availability.</td></tr>
-      <tr><th>Impaired</th><td>Facing material problems without enough evidence to classify it as discontinued or failed.</td></tr>
-      <tr><th>Discontinued</th><td>Issuance, support, or operation has ended or entered a formal wind-down.</td></tr>
-      <tr><th>Failed</th><td>The stablecoin no longer functions as intended after a severe event or collapse.</td></tr>
-      <tr><th>Rebranded / migrated</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr>
+      <tr><th>Restricted</th><td>Still operating, but with important restrictions on access, minting, redemption, geography, or market availability.</td></tr>
+      <tr><th>Suspended</th><td>Temporarily unavailable or paused in a way that affects issuance, redemption, transfer, or market support.</td></tr>
+      <tr><th>Winding down</th><td>Issuance, support, or operation has entered a formal wind-down but some redemption or support path may remain.</td></tr>
+      <tr><th>Terminated</th><td>The stablecoin or issuer-supported product has ended.</td></tr>
+      <tr><th>Collapsed</th><td>The stablecoin no longer functions as intended after a severe event or collapse.</td></tr>
+      <tr><th>Migrated / rebranded</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr>
       <tr><th>Unknown</th><td>Available information is not sufficient for a reliable classification.</td></tr>
     </tbody></table>
   </section>
@@ -60,6 +77,7 @@ const jsonLd = {
       <tr><th>Notable depeg</th><td>A depeg may be included when it is material, sustained, historically important, or well documented.</td></tr>
       <tr><th>Major event</th><td>The entry should identify what happened, when it happened, whether the peg recovered, and which sources support the account.</td></tr>
       <tr><th>Status impact</th><td>A depeg does not automatically mean failure. Recovery and long-term outcome are considered separately.</td></tr>
+      <tr><th>Event subjects</th><td>Events can reference multiple stablecoins or organizations when the same source-backed event affects more than one record.</td></tr>
     </tbody></table>
   </section>
 
