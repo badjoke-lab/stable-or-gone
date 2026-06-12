@@ -4,31 +4,37 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const terms = [
   ['Active', 'The stablecoin is operating or available according to the latest sources reviewed.'],
   ['Attestation', 'A report that provides assurance about reserves or related financial information for a specific date or period.'],
-  ['Backing model', 'The way a stablecoin is supported, such as fiat reserves, crypto collateral, or an algorithmic mechanism.'],
+  ['Backing type', 'A normalized reserve or collateral category, such as cash, bank deposits, government securities, crypto collateral, tokenized funds, mixed backing, or unknown backing.'],
+  ['Claim scope', 'The specific claim a source supports, such as reserve history, redemption access, deployment contracts, regulatory context, or a depeg event.'],
   ['Collapse', 'A severe event in which a stablecoin loses its intended function and does not recover.'],
   ['Depeg', 'A meaningful move away from the target value a stablecoin is designed to track.'],
   ['Deployment', 'A token or protocol instance launched on a particular blockchain.'],
-  ['Discontinued', 'Issuance, support, or operation has ended or entered a formal wind-down.'],
-  ['Failed', 'The stablecoin no longer functions as intended after a severe event or collapse.'],
+  ['Evidence relation', 'The connection between a source and one or more stablecoins, organizations, events, and claim scopes.'],
+  ['Event detail kind', 'A normalized event subtype such as depeg, regulatory, reserve change, redemption change, migration, or other.'],
+  ['Issuance status', 'Whether new issuance appears open, restricted, paused, terminated, protocol-based, or unknown.'],
   ['Lifecycle', 'The sequence of launches, changes, migrations, wind-downs, failures, and successor products over time.'],
+  ['Lifecycle status', 'The current recorded state of a stablecoin, such as active, restricted, winding down, terminated, collapsed, migrated, rebranded, or unknown.'],
   ['Market exit', 'Selling or swapping a stablecoin through a market rather than redeeming it directly with an issuer or protocol.'],
   ['Migration', 'A move to a new token, contract, chain, issuer structure, or protocol design.'],
   ['Open question', 'An important point that cannot yet be resolved from the available public information.'],
-  ['Peg asset', 'The asset or unit a stablecoin aims to track, such as the US dollar.'],
+  ['Organization relationship', 'The role connecting a stablecoin to an organization, such as legal issuer, protocol operator, governance body, reserve manager, custodian, or redemption agent.'],
+  ['Peg reference', 'The asset or unit a stablecoin aims to track, such as USD, EUR, a crypto asset, a commodity, an index, or another reference.'],
   ['Protocol disclosure', 'Documentation or dashboards showing collateral, debt, reserves, or mechanism details for a protocol-based stablecoin.'],
   ['Recovered depeg', 'A depeg after which the stablecoin returned close to its target value.'],
+  ['Redemption profile', 'A normalized summary of direct redemption status, eligible parties, settlement asset, fees, timing, restrictions, and confidence.'],
   ['Redemption', 'Converting a stablecoin back into cash, collateral, or another asset under issuer or protocol rules.'],
   ['Reserve disclosure', 'Public information about the assets, collateral, or mechanisms supporting a stablecoin.'],
-  ['Status', 'The current recorded state of a stablecoin, kept separate from individual historical events.'],
+  ['Reserve profile', 'A normalized summary of current reserve backing, disclosure status, latest report reference, confidence, and supporting evidence.'],
+  ['Source', 'A public document, page, notice, report, archive, or reference used to support a specific record or claim.'],
   ['Wind-down', 'A planned process to end issuance, redemption, support, or availability.']
 ];
 ---
-<BaseLayout title="Glossary — Stable or Gone" description="Definitions of common stablecoin terms used throughout Stable or Gone.">
+<BaseLayout title="Glossary — Stable or Gone" description="Definitions of common stablecoin and Registry v2 terms used throughout Stable or Gone.">
   <section class="hero">
     <div class="panel hero-main">
       <div class="prompt">Stablecoin glossary</div>
       <h1>Terms used throughout the archive</h1>
-      <p>Plain-language definitions for status labels, event types, reserve information, redemption, and lifecycle changes.</p>
+      <p>Plain-language definitions for lifecycle status, issuance, event types, reserve profiles, redemption profiles, evidence relations, and stablecoin history.</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Terms</span><strong>{terms.length}</strong></div>
@@ -55,6 +61,7 @@ const terms = [
       <tr><th>Status and events</th><td><a href="/guides/status-vs-event/">Status and Event Records</a></td></tr>
       <tr><th>Reserves</th><td><a href="/guides/reserve-disclosure-basics/">Reading Reserve Disclosures</a></td></tr>
       <tr><th>Lifecycle</th><td><a href="/guides/stablecoin-lifecycle-terms/">Stablecoin Lifecycle Terms</a></td></tr>
+      <tr><th>Methodology</th><td><a href="/methodology/">Registry methodology and field definitions</a></td></tr>
     </tbody></table>
   </section>
 </BaseLayout>
