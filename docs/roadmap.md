@@ -113,21 +113,28 @@ Protected public URL patterns:
 - preserved legacy evidence fields until PR-051
 - added Evidence relation validation to the build chain
 
+### PR-049 — UI v2
+
+- surfaced Registry v2 classification fields on stablecoin pages
+- surfaced reserve_profile and redemption_profile on stablecoin pages
+- surfaced Event v2 subject arrays and detail overlays on event pages
+- surfaced Evidence v2 claim-scope arrays on source tables
+- preserved legacy public URLs and existing table structure
+
 ## Current work item
 
 ```txt
-PR-049 UI v2
+PR-050 Methodology, guides, and SEO
 ```
 
 Goals:
 
 ```txt
-surface Registry v2 classification fields on stablecoin pages
-surface reserve_profile and redemption_profile on stablecoin pages
-surface Event v2 subject arrays and detail overlays on event pages
-surface Evidence v2 claim-scope arrays on source tables
-preserve legacy public URLs and existing tables
-leave methodology, SEO, and AI-readable publishing for PR-050
+update methodology copy for Registry v2 terminology
+add public explanation of lifecycle, issuance, reserve, redemption, event, and evidence relation fields
+align guides and glossary with the normalized model
+prepare SEO and AI-readable descriptions without changing canonical URLs
+leave legacy cleanup and canonical consolidation for PR-051
 ```
 
 ## Full implementation schedule
@@ -141,8 +148,8 @@ PR-045 Stablecoin status and classification migration — completed
 PR-046 Reserve and redemption normalization — completed
 PR-047 Event v2 migration — completed
 PR-048 Evidence many-to-many migration — completed
-PR-049 UI v2 — in progress
-PR-050 Methodology, guides, and SEO
+PR-049 UI v2 — completed
+PR-050 Methodology, guides, and SEO — next
 PR-051 Legacy cleanup and canonical consolidation
 ```
 
@@ -157,12 +164,12 @@ docs/migration/registry-v2-record-templates.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-049 of 11
-Completed: 8
-In progress: 1
-Remaining after current PR: 2
+Registry v2 migration: PR-050 of 11
+Completed: 9
+In progress: 0
+Remaining: 2
 Record-growth phase: paused
-Next after PR-049: PR-050 Methodology, guides, and SEO
+Next: PR-050 Methodology, guides, and SEO
 ```
 
 ## Post-migration priorities
