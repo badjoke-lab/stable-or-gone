@@ -29,7 +29,7 @@ Protected baseline:
 75 static pages
 ```
 
-The project is in the Registry v2 migration phase. Routine record growth is paused until PR-051 completes, except for corrections, broken links, major incidents, and build/deployment repairs.
+The Registry v2 migration is complete. Routine record growth may resume after build/deployment verification, while corrections, broken links, major incidents, and build/deployment repairs remain allowed at any time.
 
 ## Registry v2 objective
 
@@ -129,20 +129,31 @@ Protected public URL patterns:
 - added `public/llms.txt` for AI-readable site guidance
 - preserved canonical public URL patterns
 
+### PR-051 — Legacy cleanup and canonical consolidation
+
+- consolidated public navigation wording around organizations while keeping `/issuer/[slug]/` compatibility URLs
+- moved organization detail display toward Registry v2 lifecycle, event detail, and evidence-scope terminology
+- added final Registry v2 validation
+- added final validation to the build chain
+- kept legacy compatibility fields available for staged data cleanup
+
 ## Current work item
 
 ```txt
-PR-051 Legacy cleanup and canonical consolidation
+Registry v2 migration complete
 ```
 
-Goals:
+Next priorities:
 
 ```txt
-remove or demote legacy-only display fields after V2 equivalents are public
-consolidate canonical naming around organization rather than issuer internally
-keep /issuer/[slug]/ compatibility routes public
-verify all validators and build after cleanup
-unpause record growth after final migration check
+run build/deployment verification
+resume controlled record growth
+expand 20 → 40 stablecoins
+expand events from 23 → 60+
+deepen evidence and reserve-history records
+add /events/depegs/
+add /events/regulatory/
+add /stats/
 ```
 
 ## Full implementation schedule
@@ -158,7 +169,7 @@ PR-047 Event v2 migration — completed
 PR-048 Evidence many-to-many migration — completed
 PR-049 UI v2 — completed
 PR-050 Methodology, guides, and SEO — completed
-PR-051 Legacy cleanup and canonical consolidation — next
+PR-051 Legacy cleanup and canonical consolidation — completed
 ```
 
 Detailed specifications:
@@ -172,12 +183,12 @@ docs/migration/registry-v2-record-templates.md
 ## Current position
 
 ```txt
-Registry v2 migration: PR-051 of 11
-Completed: 10
+Registry v2 migration: completed
+Completed: 11
 In progress: 0
-Remaining: 1
-Record-growth phase: paused
-Next: PR-051 Legacy cleanup and canonical consolidation
+Remaining: 0
+Record-growth phase: ready to resume after build/deployment verification
+Next: controlled record growth and post-migration expansion
 ```
 
 ## Post-migration priorities
@@ -194,10 +205,9 @@ evidence and reserve-history deepening
 
 ## Operating rules
 
-- Every migration PR must pass baseline validation, canonical data validation, compatibility validation, classification validation, profile validation, Event v2 validation, Evidence relation validation, Astro check, and build.
-- Existing stablecoin, organization, event, and evidence IDs must be preserved.
+- Every change must preserve existing stablecoin, organization, event, and evidence IDs unless a dedicated migration documents the replacement.
 - Existing slugs and public URL patterns must be preserved.
-- Do not merge unrelated record-growth work into migration PRs.
+- Public `/issuer/[slug]/` compatibility routes must remain available after internal organization consolidation.
 - Fix build failures immediately.
-- Keep public `/issuer/[slug]/` compatibility routes after internal organization consolidation.
-- After every merge, report the full schedule, current position, merge result, validation state, and next PR.
+- Record growth must remain source-backed and must not weaken baseline validation.
+- After every migration or expansion batch, report the schedule position, validation state, and next work item.
