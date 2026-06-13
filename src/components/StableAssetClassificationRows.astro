@@ -1,0 +1,24 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+
+const { coin } = Astro.props;
+const assetClass = coin.asset_class ?? 'stablecoin';
+const referenceTarget = coin.reference_target ?? coin.peg_reference?.kind ?? 'unknown';
+const exitModel = coin.redemption_or_exit_model ?? coin.redemption_profile?.status ?? coin.redemption_status ?? 'unknown';
+const valuationSource = coin.valuation_source;
+const valuationText = valuationSource
+  ? valuationSource.label ?? formatPublicLabel(valuationSource.source_type, 'Unknown valuation source')
+  : 'Public information is incomplete';
+const yieldProfile = coin.yield_or_rebase_profile;
+const yieldText = yieldProfile
+  ? [formatPublicLabel(yieldProfile.mode), yieldProfile.accrual_target ? `Accrual: ${formatPublicLabel(yieldProfile.accrual_target)}` : null]
+      .filter(Boolean)
+      .join(' · ')
+  : 'None recorded';
+---
+<tr><th>Asset class</th><td>{formatPublicLabel(assetClass, 'Unknown')}</td></tr>
+<tr><th>Reference target</th><td>{formatPublicLabel(referenceTarget, 'Unknown')}</td></tr>
+<tr><th>Redemption / exit model</th><td>{formatPublicLabel(exitModel, 'Unknown')}</td></tr>
+<tr><th>Valuation source</th><td>{valuationSource?.url ? <a href={valuationSource.url}>{valuationText}</a> : valuationText}</td></tr>
+<tr><th>Yield / rebase profile</th><td>{yieldText}</td></tr>
+{coin.classification_notes && <tr><th>Classification notes</th><td>{coin.classification_notes}</td></tr>}

@@ -11,6 +11,12 @@ const pegKinds = new Set(['fiat','commodity','crypto_asset','index','floating','
 const backingTypes = new Set(['cash','bank_deposits','government_securities','commercial_paper','crypto_collateral','stablecoin_collateral','tokenized_fund','commodity','unbacked','mixed','other','unknown']);
 const stabilizationMechanisms = new Set(['issuer_redemption','overcollateralized_vault','algorithmic_supply','delta_neutral','protocol_arbitrage','hybrid','other','unknown']);
 const governanceModels = new Set(['centralized','dao_governed','protocol_governed','hybrid','unknown']);
+const assetClasses = new Set(['stablecoin','stable_value_asset','stablecoin_adjacent','tokenized_commodity','yield_bearing_stable_receipt','experimental_stabilization_asset','reserve_asset','unknown']);
+const referenceTargets = new Set(['fiat','commodity','crypto_asset','index','basket','floating','protocol_internal','none','unknown']);
+const redemptionOrExitModels = new Set(['issuer_redemption','protocol_redemption','market_exit','conversion','physical_redemption','vault_withdrawal','rebasing_or_repricing','maturity_or_settlement','none','other','unknown']);
+const valuationSourceTypes = new Set(['issuer','protocol','oracle','market','index_provider','custodian','other','unknown']);
+const yieldOrRebaseModes = new Set(['none','yield_bearing','rebasing','reward_accruing','variable_rate','other','unknown']);
+const accrualTargets = new Set(['asset','wrapper','external_receipt','protocol_position','none','unknown']);
 const legacyCompatibility = {
   active: new Set(['active']),
   limited: new Set(['restricted']),
@@ -39,6 +45,10 @@ function readArray(file) {
     failures.push(`${file}: invalid JSON (${error.message})`);
     return [];
   }
+}
+
+function validateOptionalString(row, field, value) {
+  if (value !== undefined && value !== null && typeof value !== 'string') failures.push(`${row.id}: ${field} must be a string when present`);
 }
 
 const stablecoins = [...readArray('stablecoins.json'), ...readArray('stablecoins-extra.json')];
@@ -80,6 +90,33 @@ for (const stablecoin of stablecoins) {
     failures.push(`${row.id}: backing_types must be a non-empty array`);
   } else {
     for (const value of row.backing_types) if (!backingTypes.has(value)) failures.push(`${row.id}: invalid backing_types value ${value}`);
+  }
+
+  if (row.asset_class !== undefined && !assetClasses.has(row.asset_class)) failures.push(`${row.id}: invalid asset_class ${row.asset_class}`);
+  if (row.reference_target !== undefined && !referenceTargets.has(row.reference_target)) failures.push(`${row.id}: invalid reference_target ${row.reference_target}`);
+  if (row.redemption_or_exit_model !== undefined && !redemptionOrExitModels.has(row.redemption_or_exit_model)) failures.push(`${row.id}: invalid redemption_or_exit_model ${row.redemption_or_exit_model}`);
+  validateOptionalString(row, 'classification_notes', row.classification_notes);
+
+  if (row.valuation_source !== undefined) {
+    const source = row.valuation_source;
+    if (!source || typeof source !== 'object' || Array.isArray(source)) failures.push(`${row.id}: valuation_source must be an object when present`);
+    else {
+      if (!valuationSourceTypes.has(source.source_type)) failures.push(`${row.id}: invalid valuation_source.source_type ${source.source_type}`);
+      validateOptionalString(row, 'valuation_source.label', source.label);
+      validateOptionalString(row, 'valuation_source.url', source.url);
+      validateOptionalString(row, 'valuation_source.notes', source.notes);
+    }
+  }
+
+  if (row.yield_or_rebase_profile !== undefined) {
+    const profile = row.yield_or_rebase_profile;
+    if (!profile || typeof profile !== 'object' || Array.isArray(profile)) failures.push(`${row.id}: yield_or_rebase_profile must be an object when present`);
+    else {
+      if (!yieldOrRebaseModes.has(profile.mode)) failures.push(`${row.id}: invalid yield_or_rebase_profile.mode ${profile.mode}`);
+      if (profile.accrual_target !== undefined && !accrualTargets.has(profile.accrual_target)) failures.push(`${row.id}: invalid yield_or_rebase_profile.accrual_target ${profile.accrual_target}`);
+      validateOptionalString(row, 'yield_or_rebase_profile.rate_source', profile.rate_source);
+      validateOptionalString(row, 'yield_or_rebase_profile.notes', profile.notes);
+    }
   }
 
   const allowedLifecycle = legacyCompatibility[stablecoin.status];
