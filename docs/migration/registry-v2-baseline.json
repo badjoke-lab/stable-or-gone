@@ -1,21 +1,21 @@
 {
-  "baseline_id": "sog_registry_v2_post_batch_b_2026_06_14",
+  "baseline_id": "sog_registry_v2_post_usdt_issuer_control_2026_06_14",
   "captured_at": "2026-06-14",
-  "source_commit": "record-growth-batch-b",
+  "source_commit": "usdt-tron-issuer-control-2026-06",
   "minimum_counts": {
     "stablecoins": 28,
     "organizations": 23,
     "relationships": 28,
     "classifications": 28,
     "profiles": 28,
-    "events": 35,
-    "event_details": 35,
-    "evidence": 133,
-    "evidence_relations": 133,
+    "events": 36,
+    "event_details": 36,
+    "evidence": 140,
+    "evidence_relations": 140,
     "reserve_reports": 42,
-    "known_unknowns": 66,
+    "known_unknowns": 69,
     "regulatory_notes": 9,
-    "deployments": 45
+    "deployments": 46
   },
   "data_groups": {
     "stablecoins": ["data/stablecoins.json", "data/stablecoins-extra.json", "data/stablecoins-batch-b.json"],
@@ -24,14 +24,14 @@
     "classifications": ["data/stablecoin-classification-v2.json", "data/stablecoin-classification-batch-a.json", "data/stablecoin-classification-batch-b.json"],
     "classification_extensions": ["data/stablecoin-classification-extension-batch-a.json"],
     "profiles": ["data/stablecoin-profiles-v2.json", "data/stablecoin-profiles-batch-a.json", "data/stablecoin-profiles-batch-b.json"],
-    "events": ["data/events.json", "data/events-pr036.json", "data/events-pr037.json", "data/events-pr038.json", "data/events-batch-a.json", "data/events-batch-b.json"],
-    "event_details": ["data/event-details-v2.json", "data/event-details-batch-a.json", "data/event-details-batch-b.json"],
-    "evidence": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json"],
-    "evidence_relations": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json"],
+    "events": ["data/events.json", "data/events-pr036.json", "data/events-pr037.json", "data/events-pr038.json", "data/events-batch-a.json", "data/events-batch-b.json", "data/events-issuer-control-2026.json"],
+    "event_details": ["data/event-details-v2.json", "data/event-details-batch-a.json", "data/event-details-batch-b.json", "data/event-details-issuer-control-2026.json"],
+    "evidence": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json", "data/evidence-issuer-control-2026.json"],
+    "evidence_relations": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json", "data/evidence-issuer-control-2026.json"],
     "reserve_reports": ["data/reserve-reports.json", "data/reserve-reports-extra.json", "data/reserve-reports-pr033.json", "data/reserve-reports-pr034.json", "data/reserve-reports-batch-b.json"],
-    "known_unknowns": ["data/known-unknowns.json", "data/known-unknowns-extra.json", "data/known-unknowns-pr033.json", "data/known-unknowns-pr034.json", "data/known-unknowns-batch-a.json", "data/known-unknowns-batch-b.json"],
+    "known_unknowns": ["data/known-unknowns.json", "data/known-unknowns-extra.json", "data/known-unknowns-pr033.json", "data/known-unknowns-pr034.json", "data/known-unknowns-batch-a.json", "data/known-unknowns-batch-b.json", "data/known-unknowns-issuer-control-2026.json"],
     "regulatory_notes": ["data/regulatory-notes.json"],
-    "deployments": ["data/deployments.json", "data/deployments-extra.json", "data/deployments-batch-a.json", "data/deployments-batch-b.json"]
+    "deployments": ["data/deployments.json", "data/deployments-extra.json", "data/deployments-batch-a.json", "data/deployments-batch-b.json", "data/deployments-issuer-control-2026.json"]
   },
   "protected_stablecoins": [
     {"id":"sog_st_usdt","slug":"usdt"}, {"id":"sog_st_usdc","slug":"usdc"},
