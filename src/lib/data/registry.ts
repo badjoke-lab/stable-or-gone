@@ -1,4 +1,5 @@
 import type { StablecoinV2Fields, EventV2Fields, EvidenceV2Fields, OrganizationRole, RelationshipStatus } from '../schema/registry-v2';
+import type { StableAssetExtensionFields } from '../schema/stable-asset-extension';
 import { getStablecoinProfile } from './stablecoinProfiles';
 import stablecoinsData from '../../../data/stablecoins.json';
 import stablecoinsExtraData from '../../../data/stablecoins-extra.json';
@@ -31,7 +32,7 @@ import deploymentsData from '../../../data/deployments.json';
 import deploymentsExtraData from '../../../data/deployments-extra.json';
 import registryUpdatesData from '../../../data/registry-updates.json';
 
-export type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; aliases?: string[]; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; } & StablecoinV2Fields;
+export type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; aliases?: string[]; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; } & StablecoinV2Fields & StableAssetExtensionFields;
 export type OrganizationRow = { id: string; slug: string; name: string; organization_type?: string; legacy_issuer_type?: string; issuer_type?: string; jurisdiction?: string; official_url?: string | null; summary?: string; confidence?: string; last_verified_at?: string | null; notes?: string; };
 export type RelationshipRow = { id: string; stablecoin_id: string; organization_id: string; role: OrganizationRole; start_date?: string | null; end_date?: string | null; status?: RelationshipStatus; evidence_ids?: string[]; notes?: string; };
 export type EventRow = { id: string; stablecoin_id?: string; issuer_id?: string; title: string; description?: string; event_date?: string | null; event_type?: string; impact_level?: string; confidence?: string; source_count?: number; recovered?: boolean | null; recovery_date?: string | null; event_status_effect?: string; failure_mechanism?: string; notes?: string; } & EventV2Fields;
@@ -44,7 +45,7 @@ export type DeploymentRow = { id: string; stablecoin_id: string; chain: string; 
 export type RegistryUpdateRow = { id: string; date: string; title: string; category: string; summary: string; related_paths?: string[]; };
 
 type StablecoinOverride = Partial<StablecoinRow> & { id: string };
-type StablecoinClassificationV2 = Pick<StablecoinRow, 'id' | 'lifecycle_status' | 'issuance_status' | 'peg_reference' | 'backing_types' | 'stabilization_mechanism' | 'governance_model'>;
+type StablecoinClassificationV2 = Pick<StablecoinRow, 'id' | 'lifecycle_status' | 'issuance_status' | 'peg_reference' | 'backing_types' | 'stabilization_mechanism' | 'governance_model' | 'asset_class' | 'reference_target' | 'redemption_or_exit_model' | 'valuation_source' | 'yield_or_rebase_profile' | 'classification_notes'>;
 
 const unique = (items: (string | null | undefined)[]) => [...new Set(items.filter((item): item is string => typeof item === 'string' && item.length > 0))];
 const withEvidenceV2Fields = (row: EvidenceRow): EvidenceRow => ({
