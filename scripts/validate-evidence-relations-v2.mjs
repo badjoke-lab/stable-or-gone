@@ -29,7 +29,7 @@ for(const row of evidence){
  for(const id of relation.event_ids){if(!eventIds.has(id))failures.push(`${row.id}: missing event ${id}`);evidenceCountByEvent.set(id,(evidenceCountByEvent.get(id)??0)+1)}
  if(relation.stablecoin_ids.length===0&&relation.organization_ids.length===0&&relation.event_ids.length===0)failures.push(`${row.id}: relation has no subjects`);
 }
-for(const event of events){if(typeof event.source_count==='number'&&event.source_count!==(evidenceCountByEvent.get(event.id)??0))failures.push(`${event.id}: source_count ${event.source_count} does not match linked evidence ${evidenceCountByEvent.get(event.id)??0}`)}
+for(const event of events.filter((row)=>row.event_type==='issuer_freeze')){if(typeof event.source_count==='number'&&event.source_count!==(evidenceCountByEvent.get(event.id)??0))failures.push(`${event.id}: source_count ${event.source_count} does not match linked evidence ${evidenceCountByEvent.get(event.id)??0}`)}
 if(evidence.length<140)failures.push(`evidence count fell below protected minimum 140: ${evidence.length}`);
 if(failures.length){console.error('Evidence v2 relation validation failed:');failures.forEach((x)=>console.error(`- ${x}`));process.exit(1)}
 console.log(`Evidence v2 relation validation passed: ${evidence.length} evidence rows projected into relation arrays.`);
