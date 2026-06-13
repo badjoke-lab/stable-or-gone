@@ -14,6 +14,10 @@ export const eventPublicCopy: Record<string, { title?: string; description: stri
   sog_ev_usdt_2021_02_nyag_settlement: {
     description: 'The New York Attorney General announced a settlement involving Bitfinex and Tether entities, including requirements connected to reserve and transaction reporting.'
   },
+  sog_ev_usdt_2026_06_12_tron_blacklist: {
+    title: 'Tether blacklists a TRON address holding approximately 72 million USDT',
+    description: 'Tether was reported to have blacklisted a TRON address holding 72,030,295.55 USDT after a wider 120,271,055.092505 USDT flow. The blacklist transaction hash, legal basis, requesting authority, source incident, and final outcome remain unresolved.'
+  },
   sog_ev_usdc_2023_03_operations_reopen: {
     title: 'USDC operations reopen after the March 2023 banking weekend',
     description: 'Circle resumed normal operations after federal measures addressing the banking crisis. This marked the operational recovery phase of the March 2023 USDC depeg.'
