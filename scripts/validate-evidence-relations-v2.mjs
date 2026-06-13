@@ -2,11 +2,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 const dataDir=path.join(process.cwd(),'data');
 const failures=[];
-const evidenceFiles=['evidence.json','evidence-extra.json','evidence-pr033.json','evidence-events-pr036.json','evidence-events-pr037.json','evidence-events-pr038.json','evidence-batch-a.json'];
-const eventFiles=['events.json','events-pr036.json','events-pr037.json','events-pr038.json','events-batch-a.json'];
+const evidenceFiles=['evidence.json','evidence-extra.json','evidence-pr033.json','evidence-events-pr036.json','evidence-events-pr037.json','evidence-events-pr038.json','evidence-batch-a.json','evidence-batch-b.json'];
+const eventFiles=['events.json','events-pr036.json','events-pr037.json','events-pr038.json','events-batch-a.json','events-batch-b.json'];
 function read(file){try{const v=JSON.parse(fs.readFileSync(path.join(dataDir,file),'utf8'));if(!Array.isArray(v))failures.push(`${file}: expected array`);return Array.isArray(v)?v:[]}catch(e){failures.push(`${file}: ${e.message}`);return[]}}
-const stablecoins=[...read('stablecoins.json'),...read('stablecoins-extra.json')];
-const organizations=read('organizations.json');
+const stablecoins=[...read('stablecoins.json'),...read('stablecoins-extra.json'),...read('stablecoins-batch-b.json')];
+const organizations=[...read('organizations.json'),...read('organizations-batch-b.json')];
 const events=eventFiles.flatMap(read);
 const evidence=evidenceFiles.flatMap(read);
 const stablecoinIds=new Set(stablecoins.map((row)=>row.id));
@@ -28,6 +28,6 @@ for(const row of evidence){
  for(const id of relation.event_ids)if(!eventIds.has(id))failures.push(`${row.id}: missing event ${id}`);
  if(relation.stablecoin_ids.length===0&&relation.organization_ids.length===0&&relation.event_ids.length===0)failures.push(`${row.id}: relation has no subjects`);
 }
-if(evidence.length<90)failures.push(`evidence count fell below protected minimum 90: ${evidence.length}`);
+if(evidence.length<133)failures.push(`evidence count fell below protected minimum 133: ${evidence.length}`);
 if(failures.length){console.error('Evidence v2 relation validation failed:');failures.forEach((x)=>console.error(`- ${x}`));process.exit(1)}
 console.log(`Evidence v2 relation validation passed: ${evidence.length} evidence rows projected into relation arrays.`);

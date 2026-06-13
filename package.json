@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "npm run validate:baseline && npm run validate:candidates && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && npm run validate:evidence-relations-v2 && npm run validate:final && astro check && astro build && npm run verify:deployment && npm run verify:public",
+    "build:site": "astro build",
     "preview": "astro preview",
     "check": "astro check",
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",

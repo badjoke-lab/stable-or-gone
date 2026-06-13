@@ -7,10 +7,10 @@ const recovery=new Set(['recovered','partially_recovered','not_recovered','colla
 function read(file){try{const v=JSON.parse(fs.readFileSync(path.join(dataDir,file),'utf8'));if(!Array.isArray(v))failures.push(`${file}: expected array`);return Array.isArray(v)?v:[]}catch(e){failures.push(`${file}: ${e.message}`);return[]}}
 function date(value,label){if(value!==null&&value!==undefined&&value!==''&&(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value)))failures.push(`${label}: expected YYYY-MM-DD or null`)}
 function ids(value,label){if(!Array.isArray(value)||value.length===0||value.some((item)=>typeof item!=='string'))failures.push(`${label}: expected non-empty string array`)}
-const stablecoins=[...read('stablecoins.json'),...read('stablecoins-extra.json')];
-const organizations=read('organizations.json');
-const events=[...read('events.json'),...read('events-pr036.json'),...read('events-pr037.json'),...read('events-pr038.json'),...read('events-batch-a.json')];
-const overlays=[...read('event-details-v2.json'),...read('event-details-batch-a.json')];
+const stablecoins=[...read('stablecoins.json'),...read('stablecoins-extra.json'),...read('stablecoins-batch-b.json')];
+const organizations=[...read('organizations.json'),...read('organizations-batch-b.json')];
+const events=[...read('events.json'),...read('events-pr036.json'),...read('events-pr037.json'),...read('events-pr038.json'),...read('events-batch-a.json'),...read('events-batch-b.json')];
+const overlays=[...read('event-details-v2.json'),...read('event-details-batch-a.json'),...read('event-details-batch-b.json')];
 const stablecoinIds=new Set(stablecoins.map((row)=>row.id));
 const organizationIds=new Set(organizations.map((row)=>row.id));
 const eventById=new Map(events.map((row)=>[row.id,row]));
