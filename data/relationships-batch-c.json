@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sog_rel_gho_aave",
+    "stablecoin_id": "sog_st_gho",
+    "organization_id": "sog_issuer_aave",
+    "role": "protocol_operator",
+    "start_date": "2023-07-15",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_gho_launch_batch_c", "sog_src_gho_facilitators_batch_c"],
+    "notes": "Aave DAO-governed protocol relationship for GHO. Individual facilitator and service-provider roles require separate relationships when expanded."
+  },
+  {
+    "id": "sog_rel_bold_liquity",
+    "stablecoin_id": "sog_st_bold",
+    "organization_id": "sog_issuer_liquity",
+    "role": "protocol_operator",
+    "start_date": "2025-05-19",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_bold_overview_batch_c", "sog_src_bold_live_batch_c"],
+    "notes": "Liquity V2 protocol relationship for BOLD, kept separate from the existing Liquity V1 and LUSD lifecycle."
+  },
+  {
+    "id": "sog_rel_usd0_usual",
+    "stablecoin_id": "sog_st_usd0",
+    "organization_id": "sog_issuer_usual",
+    "role": "protocol_operator",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_usd0_overview_batch_c", "sog_src_usd0_fact_sheet_batch_c"],
+    "notes": "Usual ecosystem relationship for USD0. Legal issuer and collateral-provider relationships remain separate source-review topics."
+  },
+  {
+    "id": "sog_rel_usr_resolv",
+    "stablecoin_id": "sog_st_usr",
+    "organization_id": "sog_issuer_resolv",
+    "role": "protocol_operator",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_usr_overview_batch_c", "sog_src_usr_postmortem_batch_c"],
+    "notes": "Resolv protocol and operating-organization relationship for USR. Current operations are restricted while incident recovery and protocol redesign continue."
+  }
+]
