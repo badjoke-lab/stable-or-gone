@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,15 +19,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Validate data
         run: npm run validate:data
 
       - name: Astro check
-        run: npm run check
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run check 2>&1 | tee astro-check.log
+
+      - name: Upload Astro check log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astro-check-log
+          path: astro-check.log
 
       - name: Build
         run: npm run build
