@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sog_ev_usdt_2026_06_12_tron_blacklist",
+    "subject_stablecoin_ids": ["sog_st_usdt"],
+    "subject_organization_ids": ["sog_issuer_tether"],
+    "evidence_ids": [
+      "sog_src_usdt_tron_initial_flow_2026",
+      "sog_src_usdt_tron_blacklist_alert_2026",
+      "sog_src_usdt_tron_zachxbt_2026",
+      "sog_src_usdt_tron_coindesk_2026",
+      "sog_src_usdt_tron_cryptotimes_2026",
+      "sog_src_tether_tron_supported_protocol_2026",
+      "sog_src_usdt_tron_blacklist_snapshot_2026"
+    ],
+    "event_detail_kind": "issuer_control",
+    "issuer_control_detail": {
+      "event_subtype": "address_blacklisting",
+      "related_category": "issuer_control",
+      "deployment_id": "sog_dep_usdt_tron",
+      "network": "TRON",
+      "token_standard": "TRC-20",
+      "affected_addresses": ["T8zrPEsStbZAUx2SBhD4oHz8UW3FX9Ak9W"],
+      "blacklist_transaction_hash": null,
+      "related_transaction_hashes": ["516109e27db098f540d3f11d12222ceac95dac39de47f783313a25e60746c6c2"],
+      "reported_frozen_amount": {
+        "value": 72030295.55,
+        "symbol": "USDT",
+        "display_text": "72,030,295.55 USDT",
+        "is_approximate": false
+      },
+      "related_flow": {
+        "value": 120271055.092505,
+        "symbol": "USDT",
+        "display_text": "120,271,055.092505 USDT",
+        "is_approximate": false
+      },
+      "trigger": "suspected_illicit_activity",
+      "legal_basis": "unknown",
+      "requesting_authority": "unknown",
+      "source_incident": "unidentified",
+      "status_effect": "none",
+      "market_status_effect": "none_confirmed",
+      "reserve_effect": "none_known",
+      "redemption_effect": "none_known",
+      "depeg_effect": "none_known",
+      "verification_status": "onchain_details_pending",
+      "summary": "A reported exercise of issuer-controlled blacklist authority over a specific TRON address. Blacklisting is not recorded as seizure, burn, reserve impairment, redemption suspension, or depeg."
+    }
+  }
+]
