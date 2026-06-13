@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_aave",
+    "slug": "aave",
+    "name": "Aave DAO / Aave Protocol",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["gho"],
+    "official_url": "https://aave.com/",
+    "summary": "DAO-governed protocol ecosystem behind Aave markets and GHO.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch C legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_usual",
+    "slug": "usual",
+    "name": "Usual DAO / Usual",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["usd0"],
+    "official_url": "https://usual.money/",
+    "summary": "DAO and protocol ecosystem associated with USD0 and related Usual products.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch C legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_resolv",
+    "slug": "resolv",
+    "name": "Resolv",
+    "issuer_type": "protocol_or_company",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["usr"],
+    "official_url": "https://resolv.xyz/",
+    "summary": "Protocol and operating organization associated with USR and the Resolv ecosystem.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch C legacy compatibility record."
+  }
+]
