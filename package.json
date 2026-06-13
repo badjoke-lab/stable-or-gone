@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:baseline && npm run validate:candidates && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && npm run validate:evidence-relations-v2 && npm run validate:final && astro check && astro build && npm run verify:deployment",
+    "build": "npm run validate:baseline && npm run validate:candidates && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && npm run validate:evidence-relations-v2 && npm run validate:final && astro check && astro build && npm run verify:deployment && npm run verify:public",
+    "build:site": "astro build",
     "preview": "astro preview",
     "check": "astro check",
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
@@ -17,7 +18,9 @@
     "validate:events-v2": "node scripts/validate-event-details-v2.mjs",
     "validate:evidence-relations-v2": "node scripts/validate-evidence-relations-v2.mjs",
     "validate:final": "node scripts/validate-registry-v2-final.mjs",
-    "verify:deployment": "node scripts/verify-post-migration-deployment.mjs"
+    "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
+    "verify:public": "node scripts/verify-public-layer.mjs",
+    "check:production": "node scripts/check-production.mjs"
   },
   "dependencies": {
     "@astrojs/check": "latest",
