@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_unk_usdt_tron_blacklist_transaction_hash_2026",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "topic": "blacklist_transaction_hash",
+    "description": "The exact TRON transaction hash that added T8zrPEsStbZAUx2SBhD4oHz8UW3FX9Ak9W to the USDT blacklist has not yet been recovered from primary blacklist-event data.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not substitute the related 120,271,055.092505 USDT transfer hash for the blacklist transaction hash."
+  },
+  {
+    "id": "sog_unk_usdt_tron_blacklist_authority_basis_2026",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "topic": "legal_basis_and_requesting_authority",
+    "description": "No primary source reviewed by SOG identifies the legal basis, requesting authority, or formal process behind the June 2026 TRON blacklist action.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Secondary claims about law-enforcement involvement are not treated as established fact."
+  },
+  {
+    "id": "sog_unk_usdt_tron_blacklist_outcome_2026",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "topic": "freeze_duration_and_final_outcome",
+    "description": "It remains unknown whether the affected address will later be unblacklisted, whether funds will be burned or reissued, whether funds will be returned, or whether the restriction is permanent.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Any unfreeze, burn, reissuance, or return of funds must be recorded as a separate event."
+  }
+]
