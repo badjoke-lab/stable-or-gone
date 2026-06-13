@@ -89,10 +89,12 @@ export const organizationRoles = [
   'other'
 ] as const;
 
-export const eventDetailKinds = ['depeg', 'regulatory', 'reserve_change', 'redemption_change', 'migration', 'other'] as const;
+export const eventDetailKinds = ['depeg', 'regulatory', 'reserve_change', 'redemption_change', 'migration', 'issuer_control', 'other'] as const;
 export const relationshipStatuses = ['active', 'ended', 'planned', 'unknown'] as const;
 export const depegDirections = ['below_peg', 'above_peg', 'both', 'unknown'] as const;
 export const recoveryStatuses = ['recovered', 'partially_recovered', 'not_recovered', 'collapsed', 'unknown'] as const;
+export const issuerControlSubtypes = ['address_blacklisting', 'address_unblacklisting', 'token_freeze', 'token_unfreeze', 'burn', 'reissuance', 'other', 'unknown'] as const;
+export const issuerControlVerificationStatuses = ['verified_onchain', 'onchain_details_pending', 'partially_verified', 'reported_only', 'unknown'] as const;
 
 export type LifecycleStatus = (typeof lifecycleStatuses)[number];
 export type IssuanceStatus = (typeof issuanceStatuses)[number];
@@ -106,6 +108,8 @@ export type EventDetailKind = (typeof eventDetailKinds)[number];
 export type RelationshipStatus = (typeof relationshipStatuses)[number];
 export type DepegDirection = (typeof depegDirections)[number];
 export type RecoveryStatus = (typeof recoveryStatuses)[number];
+export type IssuerControlSubtype = (typeof issuerControlSubtypes)[number];
+export type IssuerControlVerificationStatus = (typeof issuerControlVerificationStatuses)[number];
 
 export type PegReferenceV2 = {
   kind: PegReferenceKind;
@@ -185,6 +189,37 @@ export type MigrationDetailV2 = {
   summary?: string;
 };
 
+export type TokenAmountV2 = {
+  value?: number | null;
+  symbol?: string;
+  display_text?: string;
+  is_approximate?: boolean;
+};
+
+export type IssuerControlDetailV2 = {
+  event_subtype: IssuerControlSubtype;
+  related_category?: 'issuer_control';
+  deployment_id?: string;
+  network?: string;
+  token_standard?: string;
+  affected_addresses?: string[];
+  blacklist_transaction_hash?: string | null;
+  related_transaction_hashes?: string[];
+  reported_frozen_amount?: TokenAmountV2;
+  related_flow?: TokenAmountV2;
+  trigger?: string;
+  legal_basis?: string;
+  requesting_authority?: string;
+  source_incident?: string;
+  status_effect?: string;
+  market_status_effect?: string;
+  reserve_effect?: string;
+  redemption_effect?: string;
+  depeg_effect?: string;
+  verification_status?: IssuerControlVerificationStatus;
+  summary?: string;
+};
+
 export type StablecoinV2Fields = {
   lifecycle_status?: LifecycleStatus;
   issuance_status?: IssuanceStatus;
@@ -207,6 +242,7 @@ export type EventV2Fields = {
   reserve_change_detail?: ReserveChangeDetailV2;
   redemption_change_detail?: RedemptionChangeDetailV2;
   migration_detail?: MigrationDetailV2;
+  issuer_control_detail?: IssuerControlDetailV2;
 };
 
 export type EvidenceV2Fields = {
