@@ -1,0 +1,20 @@
+[
+  {
+    "id": "sog_dep_usdt_tron",
+    "stablecoin_id": "sog_st_usdt",
+    "chain": "TRON",
+    "deployment_type": "issuer_supported_token",
+    "token_standard": "TRC-20",
+    "contract_address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+    "status": "active",
+    "freeze_capability": true,
+    "blacklist_capability": true,
+    "control_event_ids": ["sog_ev_usdt_2026_06_12_tron_blacklist"],
+    "notes": "Official Tether-supported TRC-20 USDT deployment. The June 2026 event records one reported address-blacklisting action. Blacklisting is not equivalent to seizure, burn, or permanent confiscation.",
+    "evidence_ids": [
+      "sog_src_tether_tron_supported_protocol_2026",
+      "sog_src_usdt_tron_initial_flow_2026",
+      "sog_src_usdt_tron_blacklist_alert_2026"
+    ]
+  }
+]
