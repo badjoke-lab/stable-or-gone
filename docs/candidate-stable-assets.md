@@ -85,12 +85,12 @@ The candidate master is not a public recommendation list and does not promote as
 ## Current counts
 
 - total unique entries: 28
-- promoted entries: 23
+- promoted entries: 28
 - P0 entries: 10
-- P0 promoted: USDe, sUSD, MIM, FEI, USDN
-- P0 pending promotion: RAI, PAXG, XAUT, SPOT, Nuon
+- P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon
+- P0 pending promotion: 0
 
-Batch A promoted MIM, FEI, and USDN. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
+Batch A promoted MIM, FEI, and USDN. Batch B promoted RAI, PAXG, XAUT, SPOT, and Nuon. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
 
 ## Required direct scans
 
