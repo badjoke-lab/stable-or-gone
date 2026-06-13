@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_aave",
+    "slug": "aave",
+    "name": "Aave DAO / Aave Protocol",
+    "organization_type": "dao_and_protocol_ecosystem",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://aave.com/",
+    "summary": "DAO-governed protocol ecosystem behind Aave markets and the GHO stablecoin.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch C organization record. Aave DAO governance, service-provider roles, facilitator operators, and frontend operators should be separated when expanded."
+  },
+  {
+    "id": "sog_issuer_usual",
+    "slug": "usual",
+    "name": "Usual DAO / Usual",
+    "organization_type": "dao_and_protocol_ecosystem",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://usual.money/",
+    "summary": "DAO and protocol ecosystem associated with USD0 and related Usual products.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch C organization record. Legal issuer, DAO, collateral-provider, governance, and service-provider roles require source-specific separation."
+  },
+  {
+    "id": "sog_issuer_resolv",
+    "slug": "resolv",
+    "name": "Resolv",
+    "organization_type": "protocol_company",
+    "legacy_issuer_type": "protocol_or_company",
+    "jurisdiction": "unknown",
+    "official_url": "https://resolv.xyz/",
+    "summary": "Protocol and operating organization associated with USR, RLP, and related Resolv products.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch C organization record. Company, protocol, custodian, settlement, and risk-service-provider roles remain separate evidence topics."
+  }
+]
