@@ -20,9 +20,11 @@ import eventsPr037Data from '../../../data/events-pr037.json';
 import eventsPr038Data from '../../../data/events-pr038.json';
 import eventsBatchAData from '../../../data/events-batch-a.json';
 import eventsBatchBData from '../../../data/events-batch-b.json';
+import eventsIssuerControl2026Data from '../../../data/events-issuer-control-2026.json';
 import eventDetailsV2Data from '../../../data/event-details-v2.json';
 import eventDetailsBatchAData from '../../../data/event-details-batch-a.json';
 import eventDetailsBatchBData from '../../../data/event-details-batch-b.json';
+import eventDetailsIssuerControl2026Data from '../../../data/event-details-issuer-control-2026.json';
 import evidenceData from '../../../data/evidence.json';
 import evidenceExtraData from '../../../data/evidence-extra.json';
 import evidencePr033Data from '../../../data/evidence-pr033.json';
@@ -31,6 +33,7 @@ import evidenceEventsPr037Data from '../../../data/evidence-events-pr037.json';
 import evidenceEventsPr038Data from '../../../data/evidence-events-pr038.json';
 import evidenceBatchAData from '../../../data/evidence-batch-a.json';
 import evidenceBatchBData from '../../../data/evidence-batch-b.json';
+import evidenceIssuerControl2026Data from '../../../data/evidence-issuer-control-2026.json';
 import reserveReportsData from '../../../data/reserve-reports.json';
 import reserveReportsExtraData from '../../../data/reserve-reports-extra.json';
 import reserveReportsPr033Data from '../../../data/reserve-reports-pr033.json';
@@ -42,11 +45,13 @@ import knownUnknownsPr033Data from '../../../data/known-unknowns-pr033.json';
 import knownUnknownsPr034Data from '../../../data/known-unknowns-pr034.json';
 import knownUnknownsBatchAData from '../../../data/known-unknowns-batch-a.json';
 import knownUnknownsBatchBData from '../../../data/known-unknowns-batch-b.json';
+import knownUnknownsIssuerControl2026Data from '../../../data/known-unknowns-issuer-control-2026.json';
 import regulatoryNotesData from '../../../data/regulatory-notes.json';
 import deploymentsData from '../../../data/deployments.json';
 import deploymentsExtraData from '../../../data/deployments-extra.json';
 import deploymentsBatchAData from '../../../data/deployments-batch-a.json';
 import deploymentsBatchBData from '../../../data/deployments-batch-b.json';
+import deploymentsIssuerControl2026Data from '../../../data/deployments-issuer-control-2026.json';
 import registryUpdatesData from '../../../data/registry-updates.json';
 
 export type StablecoinRow = { id: string; slug: string; name: string; summary?: string; symbol?: string; aliases?: string[]; status?: string; peg_asset?: string; collateral_model?: string; issuer_id?: string; reserve_disclosure_status?: string; redemption_status?: string; who_can_redeem?: string; retail_redemption?: string; institutional_redemption?: string; minimum_redemption?: string; redemption_region_notes?: string; redemption_notes?: string; launch_date?: string; discontinued_date?: string | null; confidence?: string; last_verified_at?: string; notes?: string; } & StablecoinV2Fields & StableAssetExtensionFields;
@@ -58,7 +63,7 @@ export type EvidenceRelationRow = { id: string; evidence_id: string; stablecoin_
 export type ReserveReportRow = { id: string; stablecoin_id?: string; issuer_id?: string; report_date?: string; period_covered?: string; publisher?: string; report_type?: string; asset_categories?: string[]; url?: string; archived_url?: string | null; confidence?: string; notes?: string; };
 export type KnownUnknownRow = { id: string; stablecoin_id?: string; issuer_id?: string; topic: string; description: string; severity?: string; last_checked_at?: string; notes?: string; };
 export type RegulatoryNoteRow = { id: string; stablecoin_id?: string; issuer_id?: string; event_id?: string | null; note_date?: string; title: string; jurisdiction?: string; authority_or_source?: string; note_type?: string; summary: string; source_url: string; confidence?: string; notes?: string; };
-export type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; contract_address?: string | null; status: string; notes?: string; evidence_ids?: string[]; };
+export type DeploymentRow = { id: string; stablecoin_id: string; chain: string; deployment_type: string; token_standard?: string; contract_address?: string | null; status: string; freeze_capability?: boolean; blacklist_capability?: boolean; control_event_ids?: string[]; notes?: string; evidence_ids?: string[]; };
 export type RegistryUpdateRow = { id: string; date: string; title: string; category: string; summary: string; related_paths?: string[]; };
 
 type StablecoinOverride = Partial<StablecoinRow> & { id: string };
@@ -86,28 +91,28 @@ const toEvidenceRelation = (row: EvidenceRow): EvidenceRelationRow => ({
 const stablecoinOverridesById = new Map([...(stablecoinOverridesPr033Data as StablecoinOverride[]).map((row) => [row.id, row] as const), ...(stablecoinOverridesPr034Data as StablecoinOverride[]).map((row) => [row.id, row] as const)]);
 const classificationById = new Map([...(stablecoinClassificationV2Data as StablecoinClassificationV2[]), ...(stablecoinClassificationBatchAData as StablecoinClassificationV2[]), ...(stablecoinClassificationBatchBData as StablecoinClassificationV2[])].map((row) => [row.id, row] as const));
 const classificationExtensionById = new Map((stablecoinClassificationExtensionBatchAData as StablecoinClassificationExtension[]).map((row) => [row.id, row] as const));
-const eventDetailsById = new Map([...(eventDetailsV2Data as EventRow[]), ...(eventDetailsBatchAData as EventRow[]), ...(eventDetailsBatchBData as EventRow[])].map((row) => [row.id, row] as const));
+const eventDetailsById = new Map([...(eventDetailsV2Data as EventRow[]), ...(eventDetailsBatchAData as EventRow[]), ...(eventDetailsBatchBData as EventRow[]), ...(eventDetailsIssuerControl2026Data as EventRow[])].map((row) => [row.id, row] as const));
 const stablecoins = [...(stablecoinsData as StablecoinRow[]), ...(stablecoinsExtraData as StablecoinRow[]), ...(stablecoinsBatchBData as StablecoinRow[])].map((coin) => ({ ...coin, ...(stablecoinOverridesById.get(coin.id) ?? {}), ...(classificationById.get(coin.id) ?? {}), ...(classificationExtensionById.get(coin.id) ?? {}), ...(getStablecoinProfile(coin.id) ?? {}) }));
 const organizations = [...(organizationsData as OrganizationRow[]), ...(organizationsBatchBData as OrganizationRow[])].map((organization) => ({ ...organization, issuer_type: organization.legacy_issuer_type ?? organization.organization_type }));
 const relationships = [...(relationshipsData as RelationshipRow[]), ...(relationshipsBatchBData as RelationshipRow[])];
-const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[]), ...(eventsBatchAData as EventRow[]), ...(eventsBatchBData as EventRow[])].map((event) => ({ ...event, ...(eventDetailsById.get(event.id) ?? {}) }));
-const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[]), ...(evidenceBatchAData as EvidenceRow[]), ...(evidenceBatchBData as EvidenceRow[])].map(withEvidenceV2Fields);
+const events = [...(eventsData as EventRow[]), ...(eventsPr036Data as EventRow[]), ...(eventsPr037Data as EventRow[]), ...(eventsPr038Data as EventRow[]), ...(eventsBatchAData as EventRow[]), ...(eventsBatchBData as EventRow[]), ...(eventsIssuerControl2026Data as EventRow[])].map((event) => ({ ...event, ...(eventDetailsById.get(event.id) ?? {}) }));
+const evidence = [...(evidenceData as EvidenceRow[]), ...(evidenceExtraData as EvidenceRow[]), ...(evidencePr033Data as EvidenceRow[]), ...(evidenceEventsPr036Data as EvidenceRow[]), ...(evidenceEventsPr037Data as EvidenceRow[]), ...(evidenceEventsPr038Data as EvidenceRow[]), ...(evidenceBatchAData as EvidenceRow[]), ...(evidenceBatchBData as EvidenceRow[]), ...(evidenceIssuerControl2026Data as EvidenceRow[])].map(withEvidenceV2Fields);
 const evidenceRelations = evidence.map(toEvidenceRelation);
 const reserveReports = [...(reserveReportsData as ReserveReportRow[]), ...(reserveReportsExtraData as ReserveReportRow[]), ...(reserveReportsPr033Data as ReserveReportRow[]), ...(reserveReportsPr034Data as ReserveReportRow[]), ...(reserveReportsBatchBData as ReserveReportRow[])];
-const knownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[]), ...(knownUnknownsPr034Data as KnownUnknownRow[]), ...(knownUnknownsBatchAData as KnownUnknownRow[]), ...(knownUnknownsBatchBData as KnownUnknownRow[])];
+const knownUnknowns = [...(knownUnknownsData as KnownUnknownRow[]), ...(knownUnknownsExtraData as KnownUnknownRow[]), ...(knownUnknownsPr033Data as KnownUnknownRow[]), ...(knownUnknownsPr034Data as KnownUnknownRow[]), ...(knownUnknownsBatchAData as KnownUnknownRow[]), ...(knownUnknownsBatchBData as KnownUnknownRow[]), ...(knownUnknownsIssuerControl2026Data as KnownUnknownRow[])];
 const regulatoryNotes = regulatoryNotesData as RegulatoryNoteRow[];
-const deployments = [...(deploymentsData as DeploymentRow[]), ...(deploymentsExtraData as DeploymentRow[]), ...(deploymentsBatchAData as DeploymentRow[]), ...(deploymentsBatchBData as DeploymentRow[])];
+const deployments = [...(deploymentsData as DeploymentRow[]), ...(deploymentsExtraData as DeploymentRow[]), ...(deploymentsBatchAData as DeploymentRow[]), ...(deploymentsBatchBData as DeploymentRow[]), ...(deploymentsIssuerControl2026Data as DeploymentRow[])];
 const registryUpdates = registryUpdatesData as RegistryUpdateRow[];
 
 export function getStablecoins(): StablecoinRow[] { return stablecoins.map((row) => ({ ...row })); }
 export function getOrganizations(): OrganizationRow[] { return organizations.map((row) => ({ ...row })); }
 export function getRelationships(): RelationshipRow[] { return relationships.map((row) => ({ ...row, evidence_ids: [...(row.evidence_ids ?? [])] })); }
-export function getEvents(): EventRow[] { return events.map((row) => ({ ...row, subject_stablecoin_ids: [...(row.subject_stablecoin_ids ?? [])], subject_organization_ids: [...(row.subject_organization_ids ?? [])] })); }
+export function getEvents(): EventRow[] { return events.map((row) => ({ ...row, subject_stablecoin_ids: [...(row.subject_stablecoin_ids ?? [])], subject_organization_ids: [...(row.subject_organization_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getEvidence(): EvidenceRow[] { return evidence.map((row) => ({ ...row, stablecoin_ids: [...(row.stablecoin_ids ?? [])], organization_ids: [...(row.organization_ids ?? [])], event_ids: [...(row.event_ids ?? [])], claim_scopes: [...(row.claim_scopes ?? [])] })); }
 export function getEvidenceRelations(): EvidenceRelationRow[] { return evidenceRelations.map((row) => ({ ...row, stablecoin_ids: [...row.stablecoin_ids], organization_ids: [...row.organization_ids], event_ids: [...row.event_ids], claim_scopes: [...row.claim_scopes] })); }
 export function getReserveReports(): ReserveReportRow[] { return reserveReports.map((row) => ({ ...row })); }
 export function getKnownUnknowns(): KnownUnknownRow[] { return knownUnknowns.map((row) => ({ ...row })); }
 export function getRegulatoryNotes(): RegulatoryNoteRow[] { return regulatoryNotes.map((row) => ({ ...row })); }
-export function getDeployments(): DeploymentRow[] { return deployments.map((row) => ({ ...row })); }
+export function getDeployments(): DeploymentRow[] { return deployments.map((row) => ({ ...row, control_event_ids: [...(row.control_event_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getRegistryUpdates(): RegistryUpdateRow[] { return registryUpdates.map((row) => ({ ...row })); }
 export function getPrimaryRelationship(stablecoinId: string): RelationshipRow | undefined { const preferredRoles: OrganizationRole[] = ['legal_issuer', 'protocol_operator', 'brand_owner', 'reserve_manager', 'governance_body', 'redemption_agent', 'custodian', 'technology_provider', 'other']; const matches = relationships.filter((row) => row.stablecoin_id === stablecoinId); return matches.sort((a, b) => preferredRoles.indexOf(a.role) - preferredRoles.indexOf(b.role))[0]; }

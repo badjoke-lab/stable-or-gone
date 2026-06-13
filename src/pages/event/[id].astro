@@ -15,15 +15,14 @@ const allOrganizations = getOrganizations();
 const allEvidence = getEvidence();
 const subjectStablecoins = (event.subject_stablecoin_ids?.length ? event.subject_stablecoin_ids : event.stablecoin_id ? [event.stablecoin_id] : []).map((id) => allStablecoins.find((item) => item.id === id) ?? { id, name: id, slug: '' });
 const subjectOrganizations = (event.subject_organization_ids?.length ? event.subject_organization_ids : event.issuer_id ? [event.issuer_id] : []).map((id) => allOrganizations.find((item) => item.id === id) ?? { id, name: id, slug: '' });
-const stablecoin = subjectStablecoins[0];
-const organization = subjectOrganizations[0];
 const evidence = allEvidence.filter((source) => source.event_ids?.includes(event.id) || source.event_id === event.id);
 const publicCopy = eventPublicCopy[event.id];
 const eventTitle = publicCopy?.title ?? event.title;
 const eventDescription = publicCopy?.description ?? event.description ?? 'A description has not yet been added for this event.';
 const title = `${eventTitle} — Stablecoin Event | Stable or Gone`;
 const description = eventDescription;
-const detailSummary = event.depeg_detail?.cause_summary ?? event.reserve_change_detail?.summary ?? event.redemption_change_detail?.summary ?? event.migration_detail?.summary ?? undefined;
+const detailSummary = event.depeg_detail?.cause_summary ?? event.reserve_change_detail?.summary ?? event.redemption_change_detail?.summary ?? event.migration_detail?.summary ?? event.issuer_control_detail?.summary ?? undefined;
+const control = event.issuer_control_detail;
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [...subjectStablecoins.map((item) => item.name), ...subjectOrganizations.map((item) => item.name), event.event_detail_kind ?? event.event_type, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
@@ -40,24 +39,41 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
 
   <section class="panel registry"><div class="bar">Event details</div><table><tbody>
     <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
-    <tr><th>Legacy type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
+    <tr><th>Event type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
     <tr><th>Event detail kind</th><td>{formatPublicLabel(event.event_detail_kind, 'Unknown')}</td></tr>
     <tr><th>Stablecoin subjects</th><td>{subjectStablecoins.map((item) => item.slug ? <a href={`/stablecoin/${item.slug}/`}>{item.name}</a> : item.name).reduce((acc, item, index) => index === 0 ? [item] : [...acc, ', ', item], [])}</td></tr>
     <tr><th>Organization subjects</th><td>{subjectOrganizations.map((item) => item.slug ? <a href={`/issuer/${item.slug}/`}>{item.name}</a> : item.name).reduce((acc, item, index) => index === 0 ? [item] : [...acc, ', ', item], [])}</td></tr>
     <tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr>
-    <tr><th>Effect on status</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr>
-    <tr><th>Recovered</th><td>{event.depeg_detail?.recovery_status ? formatPublicLabel(event.depeg_detail.recovery_status) : event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unclear'}</td></tr>
+    <tr><th>Effect on stablecoin status</th><td>{formatPublicLabel(event.event_status_effect)}</td></tr>
+    <tr><th>Recovery / reversal</th><td>{event.depeg_detail?.recovery_status ? formatPublicLabel(event.depeg_detail.recovery_status) : event.recovered === true ? 'Yes' : event.recovered === false ? 'No' : 'Not applicable / unresolved'}</td></tr>
     <tr><th>Recovery date</th><td>{event.depeg_detail?.recovery_date ?? event.recovery_date ?? '—'}</td></tr>
     <tr><th>Cause or mechanism</th><td>{cleanPublicText(detailSummary ?? event.failure_mechanism, 'Public information is incomplete.')}</td></tr>
     <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
   </tbody></table></section>
 
-  {(event.depeg_detail || event.regulatory_detail || event.reserve_change_detail || event.redemption_change_detail || event.migration_detail) && <section class="panel registry"><div class="bar">Registry v2 detail overlay</div><table><tbody>
+  {(event.depeg_detail || event.regulatory_detail || event.reserve_change_detail || event.redemption_change_detail || event.migration_detail || control) && <section class="panel registry"><div class="bar">Registry v2 detail overlay</div><table><tbody>
     {event.depeg_detail && <><tr><th>Depeg recovery status</th><td>{formatPublicLabel(event.depeg_detail.recovery_status, 'Unknown')}</td></tr><tr><th>Depeg recovery date</th><td>{event.depeg_detail.recovery_date ?? '—'}</td></tr><tr><th>Depeg cause summary</th><td>{cleanPublicText(event.depeg_detail.cause_summary, 'Public information is incomplete.')}</td></tr></>}
     {event.regulatory_detail && <><tr><th>Jurisdiction</th><td>{formatPublicLabel(event.regulatory_detail.jurisdiction, 'Unknown')}</td></tr><tr><th>Authority</th><td>{formatPublicLabel(event.regulatory_detail.authority, 'Unknown')}</td></tr><tr><th>Action type</th><td>{formatPublicLabel(event.regulatory_detail.action_type, 'Unknown')}</td></tr><tr><th>Effective date</th><td>{event.regulatory_detail.effective_date ?? '—'}</td></tr><tr><th>Resolution date</th><td>{event.regulatory_detail.resolution_date ?? '—'}</td></tr></>}
     {event.reserve_change_detail && <tr><th>Reserve-change summary</th><td>{cleanPublicText(event.reserve_change_detail.summary, 'Public information is incomplete.')}</td></tr>}
     {event.redemption_change_detail && <tr><th>Redemption-change summary</th><td>{cleanPublicText(event.redemption_change_detail.summary, 'Public information is incomplete.')}</td></tr>}
     {event.migration_detail && <tr><th>Migration summary</th><td>{cleanPublicText(event.migration_detail.summary, 'Public information is incomplete.')}</td></tr>}
+    {control && <>
+      <tr><th>Control action</th><td>{formatPublicLabel(control.event_subtype)}</td></tr>
+      <tr><th>Network / standard</th><td>{[control.network, control.token_standard].filter(Boolean).join(' · ') || '—'}</td></tr>
+      <tr><th>Affected address</th><td>{control.affected_addresses?.join(', ') ?? '—'}</td></tr>
+      <tr><th>Reported restricted amount</th><td>{control.reported_frozen_amount?.display_text ?? (control.reported_frozen_amount?.value !== undefined ? `${control.reported_frozen_amount.value} ${control.reported_frozen_amount.symbol ?? ''}` : '—')}</td></tr>
+      <tr><th>Related flow</th><td>{control.related_flow?.display_text ?? (control.related_flow?.value !== undefined ? `${control.related_flow.value} ${control.related_flow.symbol ?? ''}` : '—')}</td></tr>
+      <tr><th>Blacklist transaction</th><td>{control.blacklist_transaction_hash ?? 'Not yet verified'}</td></tr>
+      <tr><th>Trigger</th><td>{formatPublicLabel(control.trigger, 'Unknown')}</td></tr>
+      <tr><th>Legal basis</th><td>{formatPublicLabel(control.legal_basis, 'Unknown')}</td></tr>
+      <tr><th>Requesting authority</th><td>{formatPublicLabel(control.requesting_authority, 'Unknown')}</td></tr>
+      <tr><th>Source incident</th><td>{formatPublicLabel(control.source_incident, 'Unknown')}</td></tr>
+      <tr><th>Reserve effect</th><td>{formatPublicLabel(control.reserve_effect, 'None known')}</td></tr>
+      <tr><th>Redemption effect</th><td>{formatPublicLabel(control.redemption_effect, 'None known')}</td></tr>
+      <tr><th>Depeg effect</th><td>{formatPublicLabel(control.depeg_effect, 'None known')}</td></tr>
+      <tr><th>Market-status effect</th><td>{formatPublicLabel(control.market_status_effect, 'None confirmed')}</td></tr>
+      <tr><th>Verification status</th><td>{formatPublicLabel(control.verification_status, 'Unknown')}</td></tr>
+    </>}
   </tbody></table></section>}
 
   <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Evidence scope</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="4">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{source.claim_scopes?.map((item) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(source.claim_scope)}</td></tr>))}</tbody></table></section>

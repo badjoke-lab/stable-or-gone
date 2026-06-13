@@ -1,0 +1,25 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+import { eventPublicCopy } from '../data/eventPublicCopy';
+import type { EventRow } from '../lib/data/registry';
+const { events = [], title = 'Issuer controls and intervention history' } = Astro.props as { events?: EventRow[]; title?: string };
+---
+{events.length > 0 && (
+  <section class="panel registry">
+    <div class="bar">{title}</div>
+    <table>
+      <thead><tr><th>Date</th><th>Action</th><th>Network</th><th>Address</th><th>Amount</th><th>Verification</th></tr></thead>
+      <tbody>{events.map((event: EventRow) => {
+        const detail = event.issuer_control_detail;
+        return <tr>
+          <td>{event.event_date ?? '—'}</td>
+          <td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><br /><small>{formatPublicLabel(detail?.event_subtype ?? event.event_type)}</small></td>
+          <td>{[detail?.network, detail?.token_standard].filter(Boolean).join(' · ') || '—'}</td>
+          <td>{detail?.affected_addresses?.join(', ') ?? '—'}</td>
+          <td>{detail?.reported_frozen_amount?.display_text ?? '—'}</td>
+          <td>{formatPublicLabel(detail?.verification_status, 'Unknown')}</td>
+        </tr>;
+      })}</tbody>
+    </table>
+  </section>
+)}

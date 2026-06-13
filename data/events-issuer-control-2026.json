@@ -1,0 +1,19 @@
+[
+  {
+    "id": "sog_ev_usdt_2026_06_12_tron_blacklist",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "event_type": "issuer_freeze",
+    "event_date": "2026-06-12",
+    "title": "Tether blacklists a Tron address holding approximately 72 million USDT",
+    "description": "Tether was reported to have blacklisted Tron address T8zrPEsStbZAUx2SBhD4oHz8UW3FX9Ak9W after it received 72,030,295.55 USDT associated with a wider 120,271,055.092505 USDT flow. The source incident, legal basis, requesting authority, blacklist transaction hash, and permanence of the restriction remain unconfirmed.",
+    "impact_level": "high",
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "issuer_address_blacklisting",
+    "confidence": "medium",
+    "source_count": 7,
+    "notes": "Issuer-control event only. No known reserve, redemption, depeg, insolvency, Tron network, or Monero protocol effect is recorded."
+  }
+]
