@@ -24,5 +24,44 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-05",
     "notes": "Supplemental issuer record. Exact issuer-entity roles remain a known-unknown topic in the USDG dossier."
+  },
+  {
+    "id": "sog_issuer_abracadabra",
+    "slug": "abracadabra-money",
+    "name": "Abracadabra Money",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["mim"],
+    "official_url": "https://abracadabra.money/",
+    "summary": "Protocol ecosystem behind Magic Internet Money and Abracadabra lending markets.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch A legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_fei_protocol",
+    "slug": "fei-protocol",
+    "name": "Fei Protocol / Tribe DAO",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["fei"],
+    "official_url": "https://fei-protocol.github.io/",
+    "summary": "Historical protocol and DAO ecosystem associated with FEI and the Tribe DAO wind-down.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch A legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_neutrino",
+    "slug": "neutrino-protocol",
+    "name": "Neutrino Protocol",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["usdn"],
+    "official_url": "https://neutrino.at/",
+    "summary": "Waves-based protocol ecosystem associated with USDN and the later Neutrino Index / XTN lifecycle.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch A legacy compatibility record."
   }
 ]

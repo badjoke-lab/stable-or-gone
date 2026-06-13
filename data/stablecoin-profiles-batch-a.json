@@ -1,0 +1,83 @@
+[
+  {
+    "id": "sog_st_mim",
+    "reserve_profile": {
+      "backing_types": ["crypto_collateral", "mixed"],
+      "summary": "MIM is issued through isolated Abracadabra lending markets against supported collateral. Exposure varies by cauldron and deprecated markets must be separated from active issuance routes.",
+      "disclosure_status": "protocol_transparent_or_partial",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_mim_docs_batch_a", "sog_src_mim_tokenomics_batch_a", "sog_src_mim_2025_postmortem_batch_a"]
+    },
+    "redemption_profile": {
+      "status": "protocol_based",
+      "settlement_asset": "Collateral release through debt repayment or secondary-market exit",
+      "eligible_parties": "Borrowers with active cauldron positions can repay MIM debt to release collateral; other holders generally rely on market or protocol liquidity.",
+      "retail_access": "protocol_or_market_based",
+      "institutional_access": "protocol_or_market_based",
+      "minimum_amount_text": "Market- or cauldron-specific.",
+      "fee_text": "Cauldron interest, liquidation, gas, and market costs may apply.",
+      "settlement_time_text": "Protocol- and market-dependent.",
+      "jurisdiction_restrictions": ["Interface and market availability may vary by jurisdiction and current protocol configuration."],
+      "redemption_url": "https://app.abracadabra.money/",
+      "as_of_date": "2026-06-14",
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_mim_docs_batch_a", "sog_src_mim_tokenomics_batch_a"]
+    }
+  },
+  {
+    "id": "sog_st_fei",
+    "reserve_profile": {
+      "backing_types": ["stablecoin_collateral", "mixed"],
+      "summary": "FEI historically used protocol-controlled value. The final-redemption design described FEI as backed 1:1 by DAI with zero fees during the Tribe DAO wind-down.",
+      "disclosure_status": "historical_or_final_redemption_context",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_fei_intro_batch_a", "sog_src_fei_v2_batch_a", "sog_src_fei_final_redemption_batch_a"]
+    },
+    "redemption_profile": {
+      "status": "restricted",
+      "settlement_asset": "DAI under the historical final-redemption design",
+      "eligible_parties": "FEI holders subject to the availability and state of the final-redemption contracts or interfaces.",
+      "retail_access": "historical_final_redemption",
+      "institutional_access": "historical_final_redemption",
+      "minimum_amount_text": "Source and contract review needed.",
+      "fee_text": "The final-redemption proposal described zero fees; current execution conditions require verification.",
+      "settlement_time_text": "Contract- and network-dependent.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://fei-protocol.github.io/",
+      "as_of_date": "2026-06-14",
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_fei_final_redemption_batch_a"]
+    }
+  },
+  {
+    "id": "sog_st_usdn",
+    "reserve_profile": {
+      "backing_types": ["crypto_collateral"],
+      "summary": "Historical USDN supply was backed through WAVES held by Neutrino smart-contract mechanics, with later recapitalization systems including NSBT and SURF. This profile is historical because USDN transitioned to XTN.",
+      "disclosure_status": "historical_protocol_transparency",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_usdn_faq_batch_a", "sog_src_usdn_surf_batch_a", "sog_src_usdn_xtn_transition_batch_a"]
+    },
+    "redemption_profile": {
+      "status": "terminated",
+      "settlement_asset": "Historical WAVES contract mechanics or later XTN system",
+      "eligible_parties": "Historical USDN holders were subject to Neutrino smart-contract, recapitalization, liquidity, and later XTN transition mechanics.",
+      "retail_access": "historical_protocol_based",
+      "institutional_access": "historical_protocol_based",
+      "minimum_amount_text": "Protocol-parameter dependent.",
+      "fee_text": "Historical protocol spreads and transaction fees applied.",
+      "settlement_time_text": "Historical protocol- and liquidity-dependent.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://neutrino.at/",
+      "as_of_date": "2026-06-14",
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_usdn_faq_batch_a", "sog_src_usdn_xtn_transition_batch_a"]
+    }
+  }
+]
