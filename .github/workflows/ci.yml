@@ -38,5 +38,9 @@ jobs:
         run: npm run validate:final
       - name: Astro check
         run: npm run check
-      - name: Build
-        run: npm run build
+      - name: Astro build
+        run: npm run build:site
+      - name: Verify deployment
+        run: npm run verify:deployment
+      - name: Verify public layer
+        run: npm run verify:public
