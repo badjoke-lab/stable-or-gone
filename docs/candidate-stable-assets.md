@@ -35,7 +35,7 @@ The candidate master is not a public recommendation list and does not promote as
 
 ## Priority
 
-- `P0`: immediate ten-item working set
+- `P0`: immediate working set
 - `P1`: candidate for the path toward 100 records
 - `P2`: medium-term candidate
 - `P3`: research required
@@ -84,11 +84,19 @@ The candidate master is not a public recommendation list and does not promote as
 
 ## Current counts
 
-- total unique entries: 28
+- total unique entries: 40
 - promoted entries: 28
-- P0 entries: 10
+- P0 entries: 22
 - P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon
-- P0 pending promotion: 0
+- P0 pending promotion: 12
+
+Pending 28 → 40 working set:
+
+- Batch C: GHO, BOLD, USD0, USR
+- Batch D: SAI, HUSD, IRON, mUSD
+- Batch E: EURS, EURT, Mento Dollar / USDm, alUSD
+
+`HUSD` and `Mento Dollar / USDm` remain `needs_review` until current lifecycle and identity-continuity questions are resolved. A target batch does not override evidence requirements or force promotion.
 
 Batch A promoted MIM, FEI, and USDN. Batch B promoted RAI, PAXG, XAUT, SPOT, and Nuon. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
 
