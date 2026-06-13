@@ -85,25 +85,22 @@ The candidate master is not a public recommendation list and does not promote as
 ## Current counts
 
 - total unique entries: 28
-- promoted entries: 20
+- promoted entries: 23
 - P0 entries: 10
-- P0 already promoted: USDe, sUSD
-- P0 pending promotion: MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon
+- P0 promoted: USDe, sUSD, MIM, FEI, USDN
+- P0 pending promotion: RAI, PAXG, XAUT, SPOT, Nuon
 
-USDe and sUSD are already canonical Registry v2 records. They remain P0 classification and evidence-deepening targets and are not duplicated as new candidates.
+Batch A promoted MIM, FEI, and USDN. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
 
 ## Required direct scans
 
 The validator must directly read:
 
 - `data/candidate-stable-assets.json`
-- `data/stablecoins.json`
-- `data/stablecoins-extra.json`
-- `data/stablecoin-classification-v2.json`
-- `data/stablecoin-profiles-v2.json`
-- `data/organizations.json`
-- `data/relationships.json`
-- all event data groups
+- all stablecoin data groups
+- all Registry v2 classification and profile data groups
+- organizations and relationships
+- all event and event-detail data groups
 - all evidence data groups
 
 GitHub code-search results are not accepted as the sole duplicate check.
