@@ -35,6 +35,10 @@ const gaInline = gaMeasurementId
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
+    <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
+    <link rel="alternate" type="text/plain" href="/ai.txt" title="SOG AI entrypoint" />
     <meta property="og:site_name" content="Stable or Gone" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -73,7 +77,7 @@ const gaInline = gaMeasurementId
       </main>
       <footer class="site-footer">
         <span>Historical information only. Check current organization, issuer, and market information before making decisions.</span>
-        <span><a class="footer-support" href="/support/">Support SOG</a> · <a href="/contact/">Corrections and submissions</a> · <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a></span>
+        <span><a class="footer-support" href="/support/">Support SOG</a> · <a href="/contact/">Corrections and submissions</a> · <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a> · <a href="/version.json">Version JSON</a> · <a href="/data/manifest.json">Data manifest</a> · <a href="/llms.txt">LLM guide</a> · <a href="/ai.txt">AI entrypoint</a></span>
       </footer>
     </div>
   </body>
