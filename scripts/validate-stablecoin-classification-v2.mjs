@@ -49,8 +49,8 @@ function validateExtension(row) {
   }
 }
 
-const stablecoins = [...readArray('stablecoins.json'), ...readArray('stablecoins-extra.json')];
-const classifications = [...readArray('stablecoin-classification-v2.json'), ...readArray('stablecoin-classification-batch-a.json')];
+const stablecoins = [...readArray('stablecoins.json'), ...readArray('stablecoins-extra.json'), ...readArray('stablecoins-batch-b.json')];
+const classifications = [...readArray('stablecoin-classification-v2.json'), ...readArray('stablecoin-classification-batch-a.json'), ...readArray('stablecoin-classification-batch-b.json')];
 const extensions = readArray('stablecoin-classification-extension-batch-a.json');
 const stablecoinById = new Map(stablecoins.map((row) => [row.id, row]));
 const classificationById = new Map();

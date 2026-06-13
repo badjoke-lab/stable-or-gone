@@ -6,21 +6,21 @@ const combine=(...files)=>files.flatMap(read);const label=(row)=>`${row.__source
 function req(row,field){if(row[field]===undefined||row[field]===null||row[field]==='')failures.push(`${label(row)} missing ${field}`)}
 function unique(name,rows,field){const seen=new Map();for(const row of rows){const v=row[field];if(!v)continue;if(seen.has(v))failures.push(`${name}: duplicate ${field} ${v} in ${seen.get(v)} and ${row.__source_file}`);else seen.set(v,row.__source_file)}}
 function url(row,field){const value=row[field];if(!value)return;try{const parsed=new URL(value);if(!['http:','https:'].includes(parsed.protocol))failures.push(`${label(row)} ${field} must use http or https`)}catch{failures.push(`${label(row)} invalid ${field}: ${value}`)}}
-const stablecoins=combine('stablecoins.json','stablecoins-extra.json');
-const organizations=combine('organizations.json');
-const relationships=combine('relationships.json');
-const legacyIssuers=combine('issuers.json','issuers-extra.json');
-const events=combine('events.json','events-pr036.json','events-pr037.json','events-pr038.json','events-batch-a.json');
-const evidence=combine('evidence.json','evidence-extra.json','evidence-pr033.json','evidence-events-pr036.json','evidence-events-pr037.json','evidence-events-pr038.json','evidence-batch-a.json');
-const reserveReports=combine('reserve-reports.json','reserve-reports-extra.json','reserve-reports-pr033.json','reserve-reports-pr034.json');
-const knownUnknowns=combine('known-unknowns.json','known-unknowns-extra.json','known-unknowns-pr033.json','known-unknowns-pr034.json','known-unknowns-batch-a.json');
+const stablecoins=combine('stablecoins.json','stablecoins-extra.json','stablecoins-batch-b.json');
+const organizations=combine('organizations.json','organizations-batch-b.json');
+const relationships=combine('relationships.json','relationships-batch-b.json');
+const legacyIssuers=combine('issuers.json','issuers-extra.json','issuers-batch-b.json');
+const events=combine('events.json','events-pr036.json','events-pr037.json','events-pr038.json','events-batch-a.json','events-batch-b.json');
+const evidence=combine('evidence.json','evidence-extra.json','evidence-pr033.json','evidence-events-pr036.json','evidence-events-pr037.json','evidence-events-pr038.json','evidence-batch-a.json','evidence-batch-b.json');
+const reserveReports=combine('reserve-reports.json','reserve-reports-extra.json','reserve-reports-pr033.json','reserve-reports-pr034.json','reserve-reports-batch-b.json');
+const knownUnknowns=combine('known-unknowns.json','known-unknowns-extra.json','known-unknowns-pr033.json','known-unknowns-pr034.json','known-unknowns-batch-a.json','known-unknowns-batch-b.json');
 const regulatoryNotes=combine('regulatory-notes.json');
-const deployments=combine('deployments.json','deployments-extra.json','deployments-batch-a.json');
+const deployments=combine('deployments.json','deployments-extra.json','deployments-batch-a.json','deployments-batch-b.json');
 for(const row of stablecoins){req(row,'id');req(row,'slug');req(row,'name');req(row,'status');req(row,'issuer_id')}unique('stablecoins',stablecoins,'id');unique('stablecoins',stablecoins,'slug');
 for(const row of organizations){req(row,'id');req(row,'slug');req(row,'name');req(row,'organization_type');url(row,'official_url')}unique('organizations',organizations,'id');unique('organizations',organizations,'slug');
 const organizationById=new Map(organizations.map((row)=>[row.id,row]));const legacyById=new Map(legacyIssuers.map((row)=>[row.id,row]));
 for(const row of organizations){const legacy=legacyById.get(row.id);if(!legacy)failures.push(`${label(row)} has no legacy issuer compatibility record`);else if(legacy.slug!==row.slug)failures.push(`${label(row)} slug differs from legacy ${legacy.slug}`)}
-for(const row of legacyIssuers)if(!organizationById.has(row.id))failures.push(`${label(row)} missing from organizations.json`);
+for(const row of legacyIssuers)if(!organizationById.has(row.id))failures.push(`${label(row)} missing from organization groups`);
 const stablecoinIds=new Set(stablecoins.map((row)=>row.id));const organizationIds=new Set(organizations.map((row)=>row.id));const eventIds=new Set(events.map((row)=>row.id));const evidenceIds=new Set(evidence.map((row)=>row.id));
 for(const row of relationships){req(row,'id');req(row,'stablecoin_id');req(row,'organization_id');req(row,'role');if(!stablecoinIds.has(row.stablecoin_id))failures.push(`${label(row)} missing stablecoin ${row.stablecoin_id}`);if(!organizationIds.has(row.organization_id))failures.push(`${label(row)} missing organization ${row.organization_id}`);for(const id of row.evidence_ids??[])if(!evidenceIds.has(id))failures.push(`${label(row)} missing evidence ${id}`)}unique('relationships',relationships,'id');
 const relByStablecoin=new Map();for(const row of relationships){const list=relByStablecoin.get(row.stablecoin_id)??[];list.push(row);relByStablecoin.set(row.stablecoin_id,list)}

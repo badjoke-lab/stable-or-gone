@@ -15,10 +15,10 @@ function readArray(file) {
 }
 function dateOrNull(value, label) { if (value !== null && value !== undefined && value !== '' && (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value))) failures.push(`${label}: expected YYYY-MM-DD or null`); }
 
-const stablecoins = [...readArray('stablecoins.json'), ...readArray('stablecoins-extra.json')];
-const profiles = [...readArray('stablecoin-profiles-v2.json'), ...readArray('stablecoin-profiles-batch-a.json')];
-const reserveReports = [...readArray('reserve-reports.json'), ...readArray('reserve-reports-extra.json'), ...readArray('reserve-reports-pr033.json'), ...readArray('reserve-reports-pr034.json')];
-const evidence = [...readArray('evidence.json'), ...readArray('evidence-extra.json'), ...readArray('evidence-pr033.json'), ...readArray('evidence-events-pr036.json'), ...readArray('evidence-events-pr037.json'), ...readArray('evidence-events-pr038.json'), ...readArray('evidence-batch-a.json')];
+const stablecoins = [...readArray('stablecoins.json'), ...readArray('stablecoins-extra.json'), ...readArray('stablecoins-batch-b.json')];
+const profiles = [...readArray('stablecoin-profiles-v2.json'), ...readArray('stablecoin-profiles-batch-a.json'), ...readArray('stablecoin-profiles-batch-b.json')];
+const reserveReports = [...readArray('reserve-reports.json'), ...readArray('reserve-reports-extra.json'), ...readArray('reserve-reports-pr033.json'), ...readArray('reserve-reports-pr034.json'), ...readArray('reserve-reports-batch-b.json')];
+const evidence = [...readArray('evidence.json'), ...readArray('evidence-extra.json'), ...readArray('evidence-pr033.json'), ...readArray('evidence-events-pr036.json'), ...readArray('evidence-events-pr037.json'), ...readArray('evidence-events-pr038.json'), ...readArray('evidence-batch-a.json'), ...readArray('evidence-batch-b.json')];
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const profileById = new Map();
 const reserveReportIds = new Set(reserveReports.map((row) => row.id));
