@@ -36,6 +36,8 @@ jobs:
         run: npm run validate:evidence-relations-v2
       - name: Validate final state
         run: npm run validate:final
+      - name: Validate batch finalization
+        run: npm run validate:finalization
       - name: Astro check
         run: npm run check
       - name: Build and verify
