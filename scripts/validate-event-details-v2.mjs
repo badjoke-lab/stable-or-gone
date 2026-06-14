@@ -4,10 +4,20 @@ import path from 'node:path';
 const root = process.cwd();
 const failures = [];
 const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
-const kinds = new Set(['depeg','regulatory','reserve_change','redemption_change','migration','issuer_control','other']);
+const kinds = new Set(['depeg','regulatory','reserve_change','redemption_change','migration','issuer_control','security_incident','oracle_failure','collateral_impairment','insolvency','governance_change','bridge_or_chain_incident','termination','launch','other']);
 const recovery = new Set(['recovered','partially_recovered','not_recovered','collapsed','unknown']);
 const issuerControlSubtypes = new Set(['address_blacklisting','address_unblacklisting','token_freeze','token_unfreeze','burn','reissuance','other','unknown']);
 const verificationStatuses = new Set(['verified_onchain','onchain_details_pending','partially_verified','reported_only','unknown']);
+const v3DetailFields = {
+  security_incident: 'security_incident_detail',
+  oracle_failure: 'oracle_failure_detail',
+  collateral_impairment: 'collateral_impairment_detail',
+  insolvency: 'insolvency_detail',
+  governance_change: 'governance_change_detail',
+  bridge_or_chain_incident: 'bridge_or_chain_incident_detail',
+  termination: 'termination_detail',
+  launch: 'launch_detail'
+};
 
 function read(relativePath) {
   try {
@@ -28,6 +38,9 @@ const ids = (value, label) => {
 };
 const optionalString = (value, label) => {
   if (value !== undefined && value !== null && typeof value !== 'string') failures.push(`${label}: expected string or null`);
+};
+const optionalStringArray = (value, label) => {
+  if (value !== undefined && (!Array.isArray(value) || value.some((item) => typeof item !== 'string'))) failures.push(`${label}: expected string array`);
 };
 const amount = (value, label) => {
   if (value === undefined) return;
@@ -93,6 +106,22 @@ for (const overlay of overlays) {
     if (detail.event_subtype === 'address_blacklisting' && detail.blacklist_transaction_hash === null && detail.verification_status !== 'onchain_details_pending') failures.push(`${overlay.id}: missing blacklist hash requires onchain_details_pending`);
   }
   if (overlay.event_detail_kind === 'issuer_control' && !overlay.issuer_control_detail) failures.push(`${overlay.id}: issuer_control kind requires issuer_control_detail`);
+
+  const v3Field = v3DetailFields[overlay.event_detail_kind];
+  if (v3Field) {
+    const detail = overlay[v3Field];
+    if (!detail || typeof detail !== 'object' || Array.isArray(detail)) failures.push(`${overlay.id}: ${overlay.event_detail_kind} kind requires ${v3Field}`);
+    else {
+      optionalString(detail.summary, `${overlay.id}: ${v3Field}.summary`);
+      optionalString(detail.status, `${overlay.id}: ${v3Field}.status`);
+      optionalString(detail.loss_or_exposure_text, `${overlay.id}: ${v3Field}.loss_or_exposure_text`);
+      date(detail.resolution_date, `${overlay.id}: ${v3Field}.resolution_date`);
+      optionalStringArray(detail.affected_deployment_ids, `${overlay.id}: ${v3Field}.affected_deployment_ids`);
+      optionalStringArray(detail.related_organization_ids, `${overlay.id}: ${v3Field}.related_organization_ids`);
+      for (const id of detail.affected_deployment_ids ?? []) if (!deploymentIds.has(id)) failures.push(`${overlay.id}: ${v3Field} references missing deployment ${id}`);
+      for (const id of detail.related_organization_ids ?? []) if (!organizationIds.has(id)) failures.push(`${overlay.id}: ${v3Field} references missing organization ${id}`);
+    }
+  }
 }
 
 for (const event of events) if (!overlayById.has(event.id)) failures.push(`missing event overlay for ${event.id}`);

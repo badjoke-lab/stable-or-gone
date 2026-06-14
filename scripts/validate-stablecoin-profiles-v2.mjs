@@ -5,7 +5,7 @@ const root = process.cwd();
 const failures = [];
 const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
 const redemptionStatuses = new Set(['public_direct','eligible_customers_only','institutional_only','protocol_based','restricted','suspended','terminated','not_applicable','unknown']);
-const backingTypes = new Set(['cash','bank_deposits','government_securities','commercial_paper','crypto_collateral','stablecoin_collateral','tokenized_fund','commodity','unbacked','mixed','other','unknown']);
+const backingTypes = new Set(['cash','bank_deposits','government_securities','commercial_paper','corporate_bonds','private_credit','receivables','secured_loans','insurance_or_guarantee','crypto_collateral','stablecoin_collateral','tokenized_fund','commodity','unbacked','mixed','other','unknown']);
 
 function read(relativePath) {
   try {

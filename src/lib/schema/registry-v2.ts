@@ -38,6 +38,7 @@ export const pegReferenceKinds = [
   'commodity',
   'crypto_asset',
   'index',
+  'basket',
   'floating',
   'other',
   'unknown'
@@ -48,6 +49,11 @@ export const backingTypes = [
   'bank_deposits',
   'government_securities',
   'commercial_paper',
+  'corporate_bonds',
+  'private_credit',
+  'receivables',
+  'secured_loans',
+  'insurance_or_guarantee',
   'crypto_collateral',
   'stablecoin_collateral',
   'tokenized_fund',
@@ -64,6 +70,10 @@ export const stabilizationMechanisms = [
   'algorithmic_supply',
   'delta_neutral',
   'protocol_arbitrage',
+  'bank_deposit_claim',
+  'fund_share_valuation',
+  'commodity_redemption',
+  'rebasing_or_repricing',
   'hybrid',
   'other',
   'unknown'
@@ -89,7 +99,23 @@ export const organizationRoles = [
   'other'
 ] as const;
 
-export const eventDetailKinds = ['depeg', 'regulatory', 'reserve_change', 'redemption_change', 'migration', 'issuer_control', 'other'] as const;
+export const eventDetailKinds = [
+  'depeg',
+  'regulatory',
+  'reserve_change',
+  'redemption_change',
+  'migration',
+  'issuer_control',
+  'security_incident',
+  'oracle_failure',
+  'collateral_impairment',
+  'insolvency',
+  'governance_change',
+  'bridge_or_chain_incident',
+  'termination',
+  'launch',
+  'other'
+] as const;
 export const relationshipStatuses = ['active', 'ended', 'planned', 'unknown'] as const;
 export const depegDirections = ['below_peg', 'above_peg', 'both', 'unknown'] as const;
 export const recoveryStatuses = ['recovered', 'partially_recovered', 'not_recovered', 'collapsed', 'unknown'] as const;

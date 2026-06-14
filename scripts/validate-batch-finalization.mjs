@@ -4,6 +4,7 @@ import path from 'node:path';
 const root = process.cwd();
 const failures = [];
 const baselinePath = 'docs/migration/registry-v2-baseline.json';
+const v3FoundationPath = 'docs/migration/registry-v3-foundation.json';
 
 const fail = (message) => failures.push(message);
 const absolute = (relativePath) => path.join(root, relativePath);
@@ -68,11 +69,19 @@ function walk(relativeDir) {
 }
 
 const baseline = readJson(baselinePath);
-if (!baseline) process.exit(1);
+const v3Foundation = readJson(v3FoundationPath);
+if (!baseline || !v3Foundation) process.exit(1);
+if (v3Foundation.base_registry !== baselinePath) fail(`${v3FoundationPath}: base_registry must reference ${baselinePath}`);
+if (v3Foundation.status !== 'additive') fail(`${v3FoundationPath}: status must be additive`);
 
 const groups = {};
 for (const [name, files] of Object.entries(baseline.data_groups ?? {})) {
   groups[name] = readGroup(files, name);
+}
+
+const v3Groups = {};
+for (const [name, files] of Object.entries(v3Foundation.data_groups ?? {})) {
+  v3Groups[name] = readGroup(files, `Registry v3 ${name}`);
 }
 
 for (const [name, minimum] of Object.entries(baseline.minimum_counts ?? {})) {
@@ -80,8 +89,14 @@ for (const [name, minimum] of Object.entries(baseline.minimum_counts ?? {})) {
   if (typeof actual !== 'number') fail(`baseline count ${name}: no matching data group`);
   else if (actual < minimum) fail(`baseline count ${name}: expected at least ${minimum}, found ${actual}`);
 }
+for (const [name, minimum] of Object.entries(v3Foundation.minimum_counts ?? {})) {
+  const actual = v3Groups[name]?.length;
+  if (typeof actual !== 'number') fail(`Registry v3 count ${name}: no matching data group`);
+  else if (actual < minimum) fail(`Registry v3 count ${name}: expected at least ${minimum}, found ${actual}`);
+}
 
 const idSets = Object.fromEntries(Object.entries(groups).map(([name, rows]) => [name, collectIds(name, rows)]));
+const v3IdSets = Object.fromEntries(Object.entries(v3Groups).map(([name, rows]) => [name, collectIds(`Registry v3 ${name}`, rows)]));
 const stablecoinIds = idSets.stablecoins ?? new Set();
 const organizationIds = idSets.organizations ?? new Set();
 const classificationIds = idSets.classifications ?? new Set();
@@ -123,6 +138,15 @@ for (const row of groups.deployments ?? []) {
   for (const id of row.evidence_ids ?? []) if (!evidenceIds.has(id)) fail(`deployment ${row.id}: missing evidence ${id}`);
 }
 
+for (const id of v3IdSets.legal_profiles ?? []) if (!stablecoinIds.has(id)) fail(`Registry v3 legal profile ${id}: orphan stablecoin reference`);
+for (const row of v3Groups.stable_asset_relationships ?? []) {
+  if (!stablecoinIds.has(row.from_asset_id)) fail(`Registry v3 asset relationship ${row.id}: missing from asset ${row.from_asset_id}`);
+  if (!stablecoinIds.has(row.to_asset_id)) fail(`Registry v3 asset relationship ${row.id}: missing to asset ${row.to_asset_id}`);
+}
+for (const row of v3Groups.reserve_components ?? []) {
+  if (!stablecoinIds.has(row.stablecoin_id)) fail(`Registry v3 reserve component ${row.id}: missing stablecoin ${row.stablecoin_id}`);
+}
+
 const candidates = readJson('data/candidate-stable-assets.json') ?? [];
 const promoted = candidates.filter((row) => row.status === 'promoted');
 const promotedIds = new Set();
@@ -152,6 +176,9 @@ for (const file of baseline.required_route_sources ?? []) if (!exists(file)) fai
 
 const registryLoader = readText('src/lib/data/registry.ts');
 const profileLoader = readText('src/lib/data/stablecoinProfiles.ts');
+const v3LoaderPath = v3Foundation.loader;
+if (!v3LoaderPath || !exists(v3LoaderPath)) fail(`${v3FoundationPath}: missing Registry v3 loader ${v3LoaderPath ?? '(undefined)'}`);
+const v3Loader = v3LoaderPath && exists(v3LoaderPath) ? readText(v3LoaderPath) : '';
 const loaderMap = {
   stablecoins: registryLoader,
   organizations: registryLoader,
@@ -172,6 +199,18 @@ for (const [groupName, loaderText] of Object.entries(loaderMap)) {
     if (!loaderText.includes(path.posix.basename(file))) fail(`${file}: listed in baseline but missing from runtime loader for ${groupName}`);
   }
 }
+for (const [groupName, files] of Object.entries(v3Foundation.data_groups ?? {})) {
+  for (const file of files) {
+    if (!v3Loader.includes(path.posix.basename(file))) fail(`${file}: listed in Registry v3 foundation but missing from runtime loader for ${groupName}`);
+  }
+}
+
+if (!v3Foundation.validator || !exists(v3Foundation.validator)) fail(`${v3FoundationPath}: missing Registry v3 validator ${v3Foundation.validator ?? '(undefined)'}`);
+const packageJsonText = readText('package.json');
+if (!packageJsonText.includes('validate:v3')) fail('package.json: Registry v3 validator is not exposed as validate:v3');
+if (!packageJsonText.includes('npm run validate:v3')) fail('package.json: Registry v3 validator is not included in the build chain');
+const ciText = readText('.github/workflows/ci.yml');
+if (!ciText.includes('npm run validate:v3')) fail('.github/workflows/ci.yml: Registry v3 validator is not included in CI');
 
 const validateDataText = readText('scripts/validate-data.mjs');
 const validateCompatText = readText('scripts/validate-registry-v2-compat.mjs');
@@ -204,4 +243,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Batch finalization validation passed: ${stablecoinIds.size} stablecoins, ${promoted.length} promoted candidates, ${eventIds.size} events, ${evidenceIds.size} evidence records.`);
+console.log(`Batch finalization validation passed: ${stablecoinIds.size} stablecoins, ${promoted.length} promoted candidates, ${eventIds.size} events, ${evidenceIds.size} evidence records, ${v3Groups.legal_profiles?.length ?? 0} legal profiles, ${v3Groups.stable_asset_relationships?.length ?? 0} asset relationships, ${v3Groups.reserve_components?.length ?? 0} reserve components.`);

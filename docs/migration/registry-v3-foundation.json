@@ -1,0 +1,17 @@
+{
+  "schema_version": "3.0-foundation",
+  "status": "additive",
+  "base_registry": "docs/migration/registry-v2-baseline.json",
+  "data_groups": {
+    "legal_profiles": ["data/legal-profiles-v3.json"],
+    "stable_asset_relationships": ["data/stable-asset-relationships-v3.json"],
+    "reserve_components": ["data/reserve-components-v3.json"]
+  },
+  "minimum_counts": {
+    "legal_profiles": 0,
+    "stable_asset_relationships": 0,
+    "reserve_components": 0
+  },
+  "loader": "src/lib/data/registryV3.ts",
+  "validator": "scripts/validate-registry-v3-foundation.mjs"
+}
