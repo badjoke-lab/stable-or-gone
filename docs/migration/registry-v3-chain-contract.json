@@ -1,0 +1,19 @@
+{
+  "schema_version": "3.0-view",
+  "status": "additive",
+  "source": "registry-v2",
+  "source_group_alias": "chain_instances",
+  "default": "unknown",
+  "minimum_count": 67,
+  "allowed_canonicalities": [
+    "native",
+    "issuer_native",
+    "canonical_bridge",
+    "third_party_bridge",
+    "wrapped",
+    "synthetic",
+    "legacy",
+    "unknown"
+  ],
+  "validator": "scripts/validate-registry-v3-chain-view.mjs"
+}
