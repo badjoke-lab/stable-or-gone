@@ -1,0 +1,15 @@
+xt('src/lib/data/registry.ts', registry);
+
+let profileLoader = readText('src/lib/data/stablecoinProfiles.ts');
+profileLoader = replaceOnce(profileLoader, "import profileBatchDData from '../../../data/stablecoin-profiles-batch-d.json';", "import profileBatchDData from '../../../data/stablecoin-profiles-batch-d.json';\nimport profileBatchEData from '../../../data/stablecoin-profiles-batch-e.json';");
+profileLoader = replaceOnce(profileLoader, '...(profileBatchDData as StablecoinProfileV2[])', '...(profileBatchDData as StablecoinProfileV2[]),\n  ...(profileBatchEData as StablecoinProfileV2[])');
+writeText('src/lib/data/stablecoinProfiles.ts', profileLoader);
+
+for (const file of ['scripts/validate-data.mjs', 'scripts/validate-registry-v2-compat.mjs']) {
+  let text = readText(file);
+  text = replaceOnce(text, "'data/issuers-batch-d.json'", "'data/issuers-batch-d.json',\n  'data/issuers-batch-e.json'");
+  writeText(file, text);
+}
+
+let copy = readText('src/data/eventPublicCopy.ts');
+copy = replaceOnce(copy, '\n};\n', `,\n  sog_ev_eurs_2018_launch: {\n    title: 'STASIS introduces the EURS euro stablecoin',\n    description: 'STASIS introduced EURS as a euro-backed stablecoin and expanded it across multiple settlement layers with issuer redemption and recurring reserve-verification processes.'\n  },\n  sog_ev_eurt_2025_11_redemption_end: {\n    title: 'Tether ends direct EURT redemption',\n    description: 'Tether ceased direct redemption of Euro Tether on 27 November 2025. Historical Ethereum and Omni token records may remain visible, but issuer issuance and redemption are terminated.'\n  },\n  sog_ev_usdm_2025_12_rebrand: {\n    title: 'Celo Dollar becomes Mento Dollar and cUSD becomes USDm',\n    description: 'Mento renamed Celo Dollar and cUSD to Mento Dollar and USDm on 17 December 2025. The change did not alter the contract, peg, balances, integrations, or require user action.'\n  },\n  sog_ev_alusd_2021_02_launch: {\n    title: 'Alchemix introduces alUSD and yield-ba
