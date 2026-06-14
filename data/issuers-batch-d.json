@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_stable_universal",
+    "slug": "stable-universal",
+    "name": "Stable Universal",
+    "issuer_type": "company",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["husd"],
+    "official_url": null,
+    "summary": "Historical organization associated with HUSD issuance and operations.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch D legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_iron_finance",
+    "slug": "iron-finance",
+    "name": "Iron Finance",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["iron"],
+    "official_url": "https://iron.finance/",
+    "summary": "Protocol ecosystem behind the original IRON stablecoin.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch D legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_mstable",
+    "slug": "mstable",
+    "name": "mStable",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["musd"],
+    "official_url": "https://www.mstable.com/",
+    "summary": "Protocol ecosystem behind mUSD and later mStable products.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch D legacy compatibility record."
+  }
+]
