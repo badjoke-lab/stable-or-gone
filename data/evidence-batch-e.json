@@ -1,0 +1,362 @@
+[
+  {
+    "id": "sog_src_eurs_product_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "issuer_id": "sog_issuer_stasis",
+    "event_id": "sog_ev_eurs_2018_launch",
+    "source_type": "official_statement",
+    "title": "EURS product and redemption overview",
+    "url": "https://stasis.net/eurs-info",
+    "publisher": "STASIS",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://stasis.net/eurs-info",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "entity_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_eurs"
+    ],
+    "organization_ids": [
+      "sog_issuer_stasis"
+    ],
+    "event_ids": [
+      "sog_ev_eurs_2018_launch"
+    ],
+    "claim_scopes": [
+      "entity_and_redemption",
+      "launch_year",
+      "issuer_identity"
+    ],
+    "notes": "Official current product page used for the active EURS identity and direct redemption entry point."
+  },
+  {
+    "id": "sog_src_eurs_transparency_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "issuer_id": "sog_issuer_stasis",
+    "event_id": "sog_ev_eurs_2018_launch",
+    "source_type": "official_documentation",
+    "title": "STASIS FAQ on EURS reserves, verification, and supported networks",
+    "url": "https://stasis.net/faq",
+    "publisher": "STASIS",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://stasis.net/faq",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "reserve_and_deployments",
+    "stablecoin_ids": [
+      "sog_st_eurs"
+    ],
+    "organization_ids": [
+      "sog_issuer_stasis"
+    ],
+    "event_ids": [
+      "sog_ev_eurs_2018_launch"
+    ],
+    "claim_scopes": [
+      "reserve_and_deployments",
+      "reserve_verification",
+      "network_coverage"
+    ],
+    "notes": "Official description of liquid euro backing, verification layers, and current chain or bridge coverage."
+  },
+  {
+    "id": "sog_src_eurs_terms_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "issuer_id": "sog_issuer_stasis",
+    "event_id": "sog_ev_eurs_2018_launch",
+    "source_type": "terms_of_service",
+    "title": "STASIS EURS terms and redemption conditions",
+    "url": "https://stasis.net/terms",
+    "publisher": "STSS (Malta) Limited / STASIS",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://stasis.net/terms",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "redemption_terms",
+    "stablecoin_ids": [
+      "sog_st_eurs"
+    ],
+    "organization_ids": [
+      "sog_issuer_stasis"
+    ],
+    "event_ids": [
+      "sog_ev_eurs_2018_launch"
+    ],
+    "claim_scopes": [
+      "redemption_terms",
+      "legal_issuer",
+      "address_controls"
+    ],
+    "notes": "Official terms for par-value EUR redemption, customer requirements, burning or freezing redeemed tokens, and legally directed wallet restrictions."
+  },
+  {
+    "id": "sog_src_eurt_legal_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": "sog_ev_eurt_2025_11_redemption_end",
+    "source_type": "terms_of_service",
+    "title": "Tether terms recording the end of EURT redemption",
+    "url": "https://tether.to/en/legal/",
+    "publisher": "Tether",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://tether.to/en/legal/",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "redemption_termination",
+    "stablecoin_ids": [
+      "sog_st_eurt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [
+      "sog_ev_eurt_2025_11_redemption_end"
+    ],
+    "claim_scopes": [
+      "redemption_termination",
+      "event_date",
+      "issuer_terms"
+    ],
+    "notes": "Current official terms state that Tether ceased to redeem EURT effective 27 November 2025."
+  },
+  {
+    "id": "sog_src_eurt_protocols_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": "sog_ev_eurt_2025_11_redemption_end",
+    "source_type": "official_documentation",
+    "title": "Tether supported protocols and EURT contract records",
+    "url": "https://tether.to/en/supported-protocols/",
+    "publisher": "Tether",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://tether.to/en/supported-protocols/",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "contract_and_protocol_identity",
+    "stablecoin_ids": [
+      "sog_st_eurt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [
+      "sog_ev_eurt_2025_11_redemption_end"
+    ],
+    "claim_scopes": [
+      "contract_and_protocol_identity",
+      "ethereum_deployment",
+      "omni_history"
+    ],
+    "notes": "Official source for the EURT Ethereum contract and historical Omni property reference."
+  },
+  {
+    "id": "sog_src_eurt_history_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": "sog_ev_eurt_2025_11_redemption_end",
+    "source_type": "official_statement",
+    "title": "Euro Tether product history and issuer-redemption context",
+    "url": "https://tether.to/en/euro-tether-eurt-and-tether-gold-xaut-to-be-listed-on-digifinex/",
+    "publisher": "Tether",
+    "published_at": "2023-07-13",
+    "archived_url": "https://web.archive.org/web/*/https://tether.to/en/euro-tether-eurt-and-tether-gold-xaut-to-be-listed-on-digifinex/",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "historical_product_identity",
+    "stablecoin_ids": [
+      "sog_st_eurt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [
+      "sog_ev_eurt_2025_11_redemption_end"
+    ],
+    "claim_scopes": [
+      "historical_product_identity",
+      "peg_reference",
+      "issuer_relationship"
+    ],
+    "notes": "Historical official statement establishing the euro-pegged product identity and former Tether issuance and redemption framework."
+  },
+  {
+    "id": "sog_src_usdm_rebrand_batch_e",
+    "stablecoin_id": "sog_st_usdm",
+    "issuer_id": "sog_issuer_mento",
+    "event_id": "sog_ev_usdm_2025_12_rebrand",
+    "source_type": "official_statement",
+    "title": "The Evolution of Mento: cUSD becomes USDm",
+    "url": "https://www.mento.org/blog/a-new-chapter-in-multichain-fx-the-evolution-of-mento-stablecoins",
+    "publisher": "Mento",
+    "published_at": "2025-12-17",
+    "archived_url": "https://web.archive.org/web/*/https://www.mento.org/blog/a-new-chapter-in-multichain-fx-the-evolution-of-mento-stablecoins",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "identity_rebrand",
+    "stablecoin_ids": [
+      "sog_st_usdm"
+    ],
+    "organization_ids": [
+      "sog_issuer_mento"
+    ],
+    "event_ids": [
+      "sog_ev_usdm_2025_12_rebrand"
+    ],
+    "claim_scopes": [
+      "identity_rebrand",
+      "contract_continuity",
+      "event_date"
+    ],
+    "notes": "Official statement that cUSD became USDm with no contract, peg, balance, integration, or user-action change."
+  },
+  {
+    "id": "sog_src_usdm_reserve_batch_e",
+    "stablecoin_id": "sog_st_usdm",
+    "issuer_id": "sog_issuer_mento",
+    "event_id": "sog_ev_usdm_2025_12_rebrand",
+    "source_type": "official_documentation",
+    "title": "Mento Reserve and reserve-liquidity strategy",
+    "url": "https://docs.mento.org/mento/protocol-concepts/reserve",
+    "publisher": "Mento Documentation",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mento.org/mento/protocol-concepts/reserve",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "reserve_mechanism",
+    "stablecoin_ids": [
+      "sog_st_usdm"
+    ],
+    "organization_ids": [
+      "sog_issuer_mento"
+    ],
+    "event_ids": [
+      "sog_ev_usdm_2025_12_rebrand"
+    ],
+    "claim_scopes": [
+      "reserve_mechanism",
+      "mint_burn_mechanics",
+      "protocol_redemption"
+    ],
+    "notes": "Official V3 reserve documentation describing reserve-backed USDm mint and burn operations around protocol pools."
+  },
+  {
+    "id": "sog_src_usdm_contract_batch_e",
+    "stablecoin_id": "sog_st_usdm",
+    "issuer_id": "sog_issuer_mento",
+    "event_id": "sog_ev_usdm_2025_12_rebrand",
+    "source_type": "official_documentation",
+    "title": "Mento SDK example using the continuous Celo USDm contract",
+    "url": "https://docs.mento.org/mento/build-on-mento/mento-sdk/guides/initiating-a-swap",
+    "publisher": "Mento Documentation",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mento.org/mento/build-on-mento/mento-sdk/guides/initiating-a-swap",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "contract_identity",
+    "stablecoin_ids": [
+      "sog_st_usdm"
+    ],
+    "organization_ids": [
+      "sog_issuer_mento"
+    ],
+    "event_ids": [
+      "sog_ev_usdm_2025_12_rebrand"
+    ],
+    "claim_scopes": [
+      "contract_identity",
+      "celo_deployment",
+      "protocol_exchange"
+    ],
+    "notes": "Official integration example for the Celo contract retained through the cUSD-to-USDm rebrand."
+  },
+  {
+    "id": "sog_src_alusd_intro_batch_e",
+    "stablecoin_id": "sog_st_alusd",
+    "issuer_id": "sog_issuer_alchemix",
+    "event_id": "sog_ev_alusd_2021_02_launch",
+    "source_type": "official_statement",
+    "title": "Introducing Alchemix",
+    "url": "https://alchemixfi.medium.com/introducing-alchemix-9e7054de54d6",
+    "publisher": "Alchemix Finance",
+    "published_at": "2021-02-22",
+    "archived_url": "https://web.archive.org/web/*/https://alchemixfi.medium.com/introducing-alchemix-9e7054de54d6",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "launch_and_design",
+    "stablecoin_ids": [
+      "sog_st_alusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_alchemix"
+    ],
+    "event_ids": [
+      "sog_ev_alusd_2021_02_launch"
+    ],
+    "claim_scopes": [
+      "launch_and_design",
+      "yield_backed_debt",
+      "event_date"
+    ],
+    "notes": "Initial official description of alUSD, yield-backed borrowing, and the protocol launch phase."
+  },
+  {
+    "id": "sog_src_alusd_current_docs_batch_e",
+    "stablecoin_id": "sog_st_alusd",
+    "issuer_id": "sog_issuer_alchemix",
+    "event_id": "sog_ev_alusd_2021_02_launch",
+    "source_type": "official_documentation",
+    "title": "Alchemix protocol and alUSD current documentation",
+    "url": "https://docs.alchemix.fi/",
+    "publisher": "Alchemix Documentation",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.alchemix.fi/",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "current_protocol_state",
+    "stablecoin_ids": [
+      "sog_st_alusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_alchemix"
+    ],
+    "event_ids": [
+      "sog_ev_alusd_2021_02_launch"
+    ],
+    "claim_scopes": [
+      "current_protocol_state",
+      "issuance_mechanics",
+      "governance"
+    ],
+    "notes": "Current official documentation for the active protocol, vault, collateral, and debt system."
+  },
+  {
+    "id": "sog_src_alusd_transmuter_batch_e",
+    "stablecoin_id": "sog_st_alusd",
+    "issuer_id": "sog_issuer_alchemix",
+    "event_id": "sog_ev_alusd_2021_02_launch",
+    "source_type": "official_documentation",
+    "title": "Alchemix Transmuter conversion mechanics",
+    "url": "https://docs.alchemix.fi/alchemix-ecosystem/transmuter",
+    "publisher": "Alchemix Documentation",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.alchemix.fi/alchemix-ecosystem/transmuter",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "redemption_and_conversion",
+    "stablecoin_ids": [
+      "sog_st_alusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_alchemix"
+    ],
+    "event_ids": [
+      "sog_ev_alusd_2021_02_launch"
+    ],
+    "claim_scopes": [
+      "redemption_and_conversion",
+      "burn_mechanics",
+      "underlying_settlement"
+    ],
+    "notes": "Official description of alAsset burning and conversion into supported underlying assets."
+  }
+]

@@ -85,20 +85,20 @@ The candidate master is not a public recommendation list and does not promote as
 ## Current counts
 
 - total unique entries: 40
-- promoted entries: 36
+- promoted entries: 40
 - P0 entries: 22
-- P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon, GHO, BOLD, USD0, USR, SAI, HUSD, IRON, mUSD
-- P0 pending promotion: 4
+- P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon, GHO, BOLD, USD0, USR, SAI, HUSD, IRON, mUSD, EURS, EURT, Mento Dollar / USDm, alUSD
+- P0 pending promotion: 0
 
 Current 36 → 40 working set:
 
 - Batch C: GHO, BOLD, USD0, USR — promoted
 - Batch D: SAI, HUSD, IRON, mUSD — promoted
-- Batch E: EURS, EURT, Mento Dollar / USDm, alUSD — pending
+- Batch E: EURS, EURT, Mento Dollar / USDm, alUSD — promoted
 
-HUSD is promoted as a public-quality historical record while its final issuer, reserve, liability, and redemption outcomes remain explicit known unknowns. Mento Dollar / USDm remains `needs_review` until identity continuity between cUSD and USDm is resolved. A target batch does not override evidence requirements or force promotion.
+HUSD is promoted as a public-quality historical record while its final issuer, reserve, liability, and redemption outcomes remain explicit known unknowns. Mento Dollar / USDm is promoted as the same continuous asset as cUSD because Mento explicitly documented a pure naming change with no contract or peg change. A target batch does not override evidence requirements or force promotion.
 
-Batch A promoted MIM, FEI, and USDN. Batch B promoted RAI, PAXG, XAUT, SPOT, and Nuon. Batch C promoted GHO, BOLD, USD0, and USR. Batch D promoted SAI, HUSD, IRON, and mUSD. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
+Batch A promoted MIM, FEI, and USDN. Batch B promoted RAI, PAXG, XAUT, SPOT, and Nuon. Batch C promoted GHO, BOLD, USD0, and USR. Batch D promoted SAI, HUSD, IRON, and mUSD. Batch E promoted EURS, EURT, Mento Dollar / USDm, and alUSD. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
 
 ## Required direct scans
 

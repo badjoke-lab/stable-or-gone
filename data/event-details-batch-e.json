@@ -1,0 +1,68 @@
+[
+  {
+    "id": "sog_ev_eurs_2018_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_eurs"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_stasis"
+    ],
+    "evidence_ids": [
+      "sog_src_eurs_product_batch_e",
+      "sog_src_eurs_transparency_batch_e",
+      "sog_src_eurs_terms_batch_e"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_eurt_2025_11_redemption_end",
+    "subject_stablecoin_ids": [
+      "sog_st_eurt"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "evidence_ids": [
+      "sog_src_eurt_legal_batch_e",
+      "sog_src_eurt_protocols_batch_e",
+      "sog_src_eurt_history_batch_e"
+    ],
+    "event_detail_kind": "redemption_change",
+    "redemption_change_detail": {
+      "summary": "Tether direct redemption of EURT ended effective 27 November 2025; remaining token contracts and market balances are historical or secondary-market artifacts."
+    }
+  },
+  {
+    "id": "sog_ev_usdm_2025_12_rebrand",
+    "subject_stablecoin_ids": [
+      "sog_st_usdm"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_mento"
+    ],
+    "evidence_ids": [
+      "sog_src_usdm_rebrand_batch_e",
+      "sog_src_usdm_reserve_batch_e",
+      "sog_src_usdm_contract_batch_e"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Pure naming and branding change from Celo Dollar/cUSD to Mento Dollar/USDm, with no contract, peg, balance, integration, or user-action change."
+    }
+  },
+  {
+    "id": "sog_ev_alusd_2021_02_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_alusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_alchemix"
+    ],
+    "evidence_ids": [
+      "sog_src_alusd_intro_batch_e",
+      "sog_src_alusd_current_docs_batch_e",
+      "sog_src_alusd_transmuter_batch_e"
+    ],
+    "event_detail_kind": "other"
+  }
+]

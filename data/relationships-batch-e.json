@@ -1,0 +1,58 @@
+[
+  {
+    "id": "sog_rel_eurs_stasis_issuer",
+    "stablecoin_id": "sog_st_eurs",
+    "organization_id": "sog_issuer_stasis",
+    "role": "legal_issuer",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_eurs_product_batch_e",
+      "sog_src_eurs_terms_batch_e"
+    ],
+    "notes": "STASIS and its current Malta service entity operate the issuer redemption framework."
+  },
+  {
+    "id": "sog_rel_eurt_tether_issuer",
+    "stablecoin_id": "sog_st_eurt",
+    "organization_id": "sog_issuer_tether",
+    "role": "legal_issuer",
+    "start_date": null,
+    "end_date": "2025-11-27",
+    "status": "ended",
+    "evidence_ids": [
+      "sog_src_eurt_legal_batch_e",
+      "sog_src_eurt_protocols_batch_e"
+    ],
+    "notes": "Historical issuer relationship ended for direct issuance and redemption service; on-chain tokens may remain."
+  },
+  {
+    "id": "sog_rel_usdm_mento_operator",
+    "stablecoin_id": "sog_st_usdm",
+    "organization_id": "sog_issuer_mento",
+    "role": "protocol_operator",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_usdm_rebrand_batch_e",
+      "sog_src_usdm_reserve_batch_e"
+    ],
+    "notes": "Mento Protocol operates the reserve and exchange mechanisms for the continuous cUSD/USDm asset identity."
+  },
+  {
+    "id": "sog_rel_alusd_alchemix_operator",
+    "stablecoin_id": "sog_st_alusd",
+    "organization_id": "sog_issuer_alchemix",
+    "role": "protocol_operator",
+    "start_date": "2021-02-22",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_alusd_intro_batch_e",
+      "sog_src_alusd_current_docs_batch_e"
+    ],
+    "notes": "Alchemix protocol and DAO govern the synthetic-debt system; this does not imply a conventional legal issuer or bank-account claim."
+  }
+]

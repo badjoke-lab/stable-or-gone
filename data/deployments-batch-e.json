@@ -1,0 +1,138 @@
+[
+  {
+    "id": "sog_dep_eurs_ethereum_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Principal ERC-20 settlement layer. Exact address normalization is deferred to the contract-map follow-up.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e",
+      "sog_src_eurs_terms_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurs_polygon_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "Polygon",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Officially listed EURS settlement layer.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurs_algorand_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "Algorand",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Officially listed EURS settlement layer.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurs_xrpl_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "XRP Ledger",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Officially listed EURS settlement layer.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurs_xdc_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "XDC Network",
+    "deployment_type": "issuer_supported_token",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Officially listed EURS settlement layer.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurs_arbitrum_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "Arbitrum",
+    "deployment_type": "bridge_representation",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Officially listed bridge representation.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurs_gnosis_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "chain": "Gnosis Chain",
+    "deployment_type": "bridge_representation",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Officially listed bridge representation, historically described as xDAI.",
+    "evidence_ids": [
+      "sog_src_eurs_transparency_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurt_ethereum_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "chain": "Ethereum",
+    "deployment_type": "historical_issuer_supported_token",
+    "contract_address": "0xC581b735A1688071A1746c968e0798D642EDE491",
+    "status": "terminated",
+    "notes": "Official EURT ERC-20 contract. Contract visibility may remain after direct issuance and redemption termination.",
+    "evidence_ids": [
+      "sog_src_eurt_protocols_batch_e",
+      "sog_src_eurt_legal_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_eurt_omni_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "chain": "Bitcoin Omni Layer",
+    "deployment_type": "historical_issuer_supported_token",
+    "contract_address": "Property ID 41",
+    "status": "terminated",
+    "notes": "Historical EURT Omni property retained as a protocol-history record.",
+    "evidence_ids": [
+      "sog_src_eurt_protocols_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_usdm_celo_batch_e",
+    "stablecoin_id": "sog_st_usdm",
+    "chain": "Celo",
+    "deployment_type": "protocol_issued_token",
+    "contract_address": "0x765DE816845861e75A25fCA122bb6898B8B1282a",
+    "status": "active",
+    "notes": "Continuous Celo contract retained through the cUSD-to-USDm naming change.",
+    "evidence_ids": [
+      "sog_src_usdm_rebrand_batch_e",
+      "sog_src_usdm_contract_batch_e"
+    ]
+  },
+  {
+    "id": "sog_dep_alusd_ethereum_batch_e",
+    "stablecoin_id": "sog_st_alusd",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_issued_synthetic",
+    "contract_address": null,
+    "status": "active",
+    "notes": "Canonical protocol deployment. Exact current token and component address map is retained as a known unknown pending version-normalized review.",
+    "evidence_ids": [
+      "sog_src_alusd_current_docs_batch_e",
+      "sog_src_alusd_transmuter_batch_e"
+    ]
+  }
+]

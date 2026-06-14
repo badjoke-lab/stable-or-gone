@@ -1,8 +1,0 @@
-
-> stable-or-gone@0.0.1 validate:data
-> node scripts/validate-data.mjs
-
-SOG data validation failed:
-- data/organizations-batch-e.json: sog_issuer_stasis has no legacy issuer compatibility record
-- data/organizations-batch-e.json: sog_issuer_mento has no legacy issuer compatibility record
-- data/organizations-batch-e.json: sog_issuer_alchemix has no legacy issuer compatibility record

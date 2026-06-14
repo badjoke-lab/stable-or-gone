@@ -1,37 +1,37 @@
 {
-  "baseline_id": "sog_registry_v2_post_batch_d_2026_06_14",
+  "baseline_id": "sog_registry_v2_post_batch_e_2026_06_14",
   "captured_at": "2026-06-14",
-  "source_commit": "record-growth-batch-d",
+  "source_commit": "record-growth-batch-e-clean",
   "minimum_counts": {
-    "stablecoins": 36,
-    "organizations": 29,
-    "relationships": 36,
-    "classifications": 36,
-    "profiles": 36,
-    "events": 44,
-    "event_details": 44,
-    "evidence": 170,
-    "evidence_relations": 170,
+    "stablecoins": 40,
+    "organizations": 32,
+    "relationships": 40,
+    "classifications": 40,
+    "profiles": 40,
+    "events": 48,
+    "event_details": 48,
+    "evidence": 182,
+    "evidence_relations": 182,
     "reserve_reports": 42,
-    "known_unknowns": 85,
+    "known_unknowns": 93,
     "regulatory_notes": 9,
-    "deployments": 56
+    "deployments": 67
   },
   "data_groups": {
-    "stablecoins": ["data/stablecoins.json", "data/stablecoins-extra.json", "data/stablecoins-batch-b.json", "data/stablecoins-batch-c.json", "data/stablecoins-batch-d.json"],
-    "organizations": ["data/organizations.json", "data/organizations-batch-b.json", "data/organizations-batch-c.json", "data/organizations-batch-d.json"],
-    "relationships": ["data/relationships.json", "data/relationships-batch-b.json", "data/relationships-batch-c.json", "data/relationships-batch-d.json"],
-    "classifications": ["data/stablecoin-classification-v2.json", "data/stablecoin-classification-batch-a.json", "data/stablecoin-classification-batch-b.json", "data/stablecoin-classification-batch-c.json", "data/stablecoin-classification-batch-d.json"],
+    "stablecoins": ["data/stablecoins.json", "data/stablecoins-extra.json", "data/stablecoins-batch-b.json", "data/stablecoins-batch-c.json", "data/stablecoins-batch-d.json", "data/stablecoins-batch-e.json"],
+    "organizations": ["data/organizations.json", "data/organizations-batch-b.json", "data/organizations-batch-c.json", "data/organizations-batch-d.json", "data/organizations-batch-e.json"],
+    "relationships": ["data/relationships.json", "data/relationships-batch-b.json", "data/relationships-batch-c.json", "data/relationships-batch-d.json", "data/relationships-batch-e.json"],
+    "classifications": ["data/stablecoin-classification-v2.json", "data/stablecoin-classification-batch-a.json", "data/stablecoin-classification-batch-b.json", "data/stablecoin-classification-batch-c.json", "data/stablecoin-classification-batch-d.json", "data/stablecoin-classification-batch-e.json"],
     "classification_extensions": ["data/stablecoin-classification-extension-batch-a.json"],
-    "profiles": ["data/stablecoin-profiles-v2.json", "data/stablecoin-profiles-batch-a.json", "data/stablecoin-profiles-batch-b.json", "data/stablecoin-profiles-batch-c.json", "data/stablecoin-profiles-batch-d.json"],
-    "events": ["data/events.json", "data/events-pr036.json", "data/events-pr037.json", "data/events-pr038.json", "data/events-batch-a.json", "data/events-batch-b.json", "data/events-batch-c.json", "data/events-batch-d.json", "data/events-issuer-control-2026.json"],
-    "event_details": ["data/event-details-v2.json", "data/event-details-batch-a.json", "data/event-details-batch-b.json", "data/event-details-batch-c.json", "data/event-details-batch-d.json", "data/event-details-issuer-control-2026.json"],
-    "evidence": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json", "data/evidence-batch-c.json", "data/evidence-batch-d.json", "data/evidence-issuer-control-2026.json"],
-    "evidence_relations": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json", "data/evidence-batch-c.json", "data/evidence-batch-d.json", "data/evidence-issuer-control-2026.json"],
+    "profiles": ["data/stablecoin-profiles-v2.json", "data/stablecoin-profiles-batch-a.json", "data/stablecoin-profiles-batch-b.json", "data/stablecoin-profiles-batch-c.json", "data/stablecoin-profiles-batch-d.json", "data/stablecoin-profiles-batch-e.json"],
+    "events": ["data/events.json", "data/events-pr036.json", "data/events-pr037.json", "data/events-pr038.json", "data/events-batch-a.json", "data/events-batch-b.json", "data/events-batch-c.json", "data/events-batch-d.json", "data/events-batch-e.json", "data/events-issuer-control-2026.json"],
+    "event_details": ["data/event-details-v2.json", "data/event-details-batch-a.json", "data/event-details-batch-b.json", "data/event-details-batch-c.json", "data/event-details-batch-d.json", "data/event-details-batch-e.json", "data/event-details-issuer-control-2026.json"],
+    "evidence": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json", "data/evidence-batch-c.json", "data/evidence-batch-d.json", "data/evidence-batch-e.json", "data/evidence-issuer-control-2026.json"],
+    "evidence_relations": ["data/evidence.json", "data/evidence-extra.json", "data/evidence-pr033.json", "data/evidence-events-pr036.json", "data/evidence-events-pr037.json", "data/evidence-events-pr038.json", "data/evidence-batch-a.json", "data/evidence-batch-b.json", "data/evidence-batch-c.json", "data/evidence-batch-d.json", "data/evidence-batch-e.json", "data/evidence-issuer-control-2026.json"],
     "reserve_reports": ["data/reserve-reports.json", "data/reserve-reports-extra.json", "data/reserve-reports-pr033.json", "data/reserve-reports-pr034.json", "data/reserve-reports-batch-b.json"],
-    "known_unknowns": ["data/known-unknowns.json", "data/known-unknowns-extra.json", "data/known-unknowns-pr033.json", "data/known-unknowns-pr034.json", "data/known-unknowns-batch-a.json", "data/known-unknowns-batch-b.json", "data/known-unknowns-batch-c.json", "data/known-unknowns-batch-d.json", "data/known-unknowns-issuer-control-2026.json"],
+    "known_unknowns": ["data/known-unknowns.json", "data/known-unknowns-extra.json", "data/known-unknowns-pr033.json", "data/known-unknowns-pr034.json", "data/known-unknowns-batch-a.json", "data/known-unknowns-batch-b.json", "data/known-unknowns-batch-c.json", "data/known-unknowns-batch-d.json", "data/known-unknowns-batch-e.json", "data/known-unknowns-issuer-control-2026.json"],
     "regulatory_notes": ["data/regulatory-notes.json"],
-    "deployments": ["data/deployments.json", "data/deployments-extra.json", "data/deployments-batch-a.json", "data/deployments-batch-b.json", "data/deployments-batch-c.json", "data/deployments-batch-d.json", "data/deployments-issuer-control-2026.json"]
+    "deployments": ["data/deployments.json", "data/deployments-extra.json", "data/deployments-batch-a.json", "data/deployments-batch-b.json", "data/deployments-batch-c.json", "data/deployments-batch-d.json", "data/deployments-batch-e.json", "data/deployments-issuer-control-2026.json"]
   },
   "protected_stablecoins": [
     {"id":"sog_st_usdt","slug":"usdt"}, {"id":"sog_st_usdc","slug":"usdc"},
@@ -51,7 +51,9 @@
     {"id":"sog_st_gho","slug":"gho"}, {"id":"sog_st_bold","slug":"bold"},
     {"id":"sog_st_usd0","slug":"usd0"}, {"id":"sog_st_usr","slug":"usr"},
     {"id":"sog_st_sai","slug":"sai"}, {"id":"sog_st_husd","slug":"husd"},
-    {"id":"sog_st_iron","slug":"iron"}, {"id":"sog_st_musd","slug":"musd"}
+    {"id":"sog_st_iron","slug":"iron"}, {"id":"sog_st_musd","slug":"musd"},
+    {"id":"sog_st_eurs","slug":"eurs"}, {"id":"sog_st_eurt","slug":"eurt"},
+    {"id":"sog_st_usdm","slug":"mento-dollar"}, {"id":"sog_st_alusd","slug":"alusd"}
   ],
   "protected_organizations": [
     {"id":"sog_issuer_tether","slug":"tether"}, {"id":"sog_issuer_circle","slug":"circle"},
@@ -68,7 +70,9 @@
     {"id":"sog_issuer_nuon_finance","slug":"nuon-finance"}, {"id":"sog_issuer_aave","slug":"aave"},
     {"id":"sog_issuer_usual","slug":"usual"}, {"id":"sog_issuer_resolv","slug":"resolv"},
     {"id":"sog_issuer_stable_universal","slug":"stable-universal"}, {"id":"sog_issuer_iron_finance","slug":"iron-finance"},
-    {"id":"sog_issuer_mstable","slug":"mstable"}
+    {"id":"sog_issuer_mstable","slug":"mstable"},
+    {"id":"sog_issuer_stasis","slug":"stasis"}, {"id":"sog_issuer_mento","slug":"mento-protocol"},
+    {"id":"sog_issuer_alchemix","slug":"alchemix"}
   ],
   "required_route_sources": [
     "src/pages/index.astro", "src/pages/stablecoins/index.astro", "src/pages/stablecoin/[slug].astro",

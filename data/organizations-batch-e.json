@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_stasis",
+    "slug": "stasis",
+    "name": "STASIS",
+    "organization_type": "stablecoin_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Malta",
+    "official_url": "https://stasis.net/",
+    "summary": "Financial-technology company and issuer ecosystem behind the euro-backed EURS stablecoin.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Current legal materials identify STSS (Malta) Limited in the EURS service and redemption framework."
+  },
+  {
+    "id": "sog_issuer_mento",
+    "slug": "mento-protocol",
+    "name": "Mento Protocol",
+    "organization_type": "defi_protocol",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://www.mento.org/",
+    "summary": "On-chain foreign-exchange and stablecoin protocol responsible for Mento Dollar and the wider Mento stablecoin suite.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Governance, reserve, and operating roles should remain separated where legal entities or service providers are later documented."
+  },
+  {
+    "id": "sog_issuer_alchemix",
+    "slug": "alchemix",
+    "name": "Alchemix",
+    "organization_type": "defi_protocol",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://alchemix.fi/",
+    "summary": "DAO-governed DeFi protocol that issues alUSD and other synthetic debt assets against yield-bearing collateral.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Protocol governance, multisig administration, frontend operation, and individual contract roles are not collapsed into one legal-issuer claim."
+  }
+]
