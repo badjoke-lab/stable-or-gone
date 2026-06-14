@@ -1,0 +1,21 @@
+[
+  {
+    "id": "sog_st_usdm",
+    "slug": "mento-dollar",
+    "name": "Mento Dollar",
+    "symbol": "USDm",
+    "aliases": ["USDm", "Mento Dollar", "cUSD", "Celo Dollar"],
+    "status": "active",
+    "issuer_id": "sog_issuer_mento",
+    "peg_asset": "USD",
+    "collateral_model": "mento_reserve_backed",
+    "reserve_disclosure_status": "onchain_protocol_transparency",
+    "redemption_status": "protocol_swap_and_liquidity_exit",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "USD-tracking stable asset of Mento Protocol backed through the Mento Reserve and protocol liquidity mechanisms.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch E promotion. Historical cUSD-to-USDm continuity requires a dedicated lifecycle event."
+  }
+]
