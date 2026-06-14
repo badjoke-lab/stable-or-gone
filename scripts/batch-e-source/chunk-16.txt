@@ -1,0 +1,10 @@
+, and adapter contracts is not normalized in this batch.', severity: 'medium', last_checked_at: today, notes: 'The Ethereum protocol deployment is recorded without claiming every component address.' },
+  { id: 'sog_ku_alusd_exit_liquidity_batch_e', stablecoin_id: 'sog_st_alusd', issuer_id: 'sog_issuer_alchemix', topic: 'current_exit_capacity', description: 'Current alUSD market liquidity, Transmuter capacity or term, and collateral-specific exit availability can change and require live contract-level monitoring.', severity: 'medium', last_checked_at: today, notes: 'SOG describes available mechanisms without guaranteeing immediate par exit.' }
+];
+
+const deployments = [
+  { id: 'sog_dep_eurs_ethereum_batch_e', stablecoin_id: 'sog_st_eurs', chain: 'Ethereum', deployment_type: 'issuer_supported_token', contract_address: null, status: 'active', notes: 'Principal ERC-20 settlement layer. Exact address normalization is deferred to the contract-map follow-up.', evidence_ids: ['sog_src_eurs_transparency_batch_e', 'sog_src_eurs_terms_batch_e'] },
+  { id: 'sog_dep_eurs_polygon_batch_e', stablecoin_id: 'sog_st_eurs', chain: 'Polygon', deployment_type: 'issuer_supported_token', contract_address: null, status: 'active', notes: 'Officially listed EURS settlement layer.', evidence_ids: ['sog_src_eurs_transparency_batch_e'] },
+  { id: 'sog_dep_eurs_algorand_batch_e', stablecoin_id: 'sog_st_eurs', chain: 'Algorand', deployment_type: 'issuer_supported_token', contract_address: null, status: 'active', notes: 'Officially listed EURS settlement layer.', evidence_ids: ['sog_src_eurs_transparency_batch_e'] },
+  { id: 'sog_dep_eurs_xrpl_batch_e', stablecoin_id: 'sog_st_eurs', chain: 'XRP Ledger', deployment_type: 'issuer_supported_token', contract_address: null, status: 'active', notes: 'Officially listed EURS settlement layer.', evidence_ids: ['sog_src_eurs_transparency_batch_e'] },
+  { id: 'sog_dep_eurs_xdc_batch_e', stablecoin_id: 'sog_st_eurs', chain: 'XDC Network', deployment_type: 'is
