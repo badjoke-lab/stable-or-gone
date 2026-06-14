@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "output": "data/generated/registry-stats.json",
+  "source_manifests": [
+    "docs/migration/registry-v2-baseline.json",
+    "docs/migration/registry-v3-foundation.json",
+    "docs/migration/registry-v3-view-67.json",
+    "docs/migration/registry-v3-income-profiles.json"
+  ],
+  "required_sections": [
+    "generated_at",
+    "registry",
+    "lifecycle",
+    "composition",
+    "coverage",
+    "quality"
+  ],
+  "generation_policy": {
+    "deterministic": true,
+    "generated_at_source": "SOURCE_DATE_EPOCH_or_baseline_captured_at",
+    "canonical_sources_only": true,
+    "unknown_values_are_explicit": true,
+    "public_ui_deferred": true
+  }
+}
