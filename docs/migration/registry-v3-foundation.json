@@ -30,14 +30,6 @@
     "stable_asset_relationships": ["data/stable-asset-relationships-v3.json"],
     "reserve_components": ["data/reserve-components-v3.json"]
   },
-  "derived_views": {
-    "deployment_canonicality": {
-      "source_group": "deployments",
-      "default": "unknown",
-      "loader_export": "getDeploymentsV3",
-      "minimum_count": 67
-    }
-  },
   "minimum_counts": {
     "legal_profiles": 40,
     "stable_asset_relationships": 1,
