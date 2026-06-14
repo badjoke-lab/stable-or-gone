@@ -117,5 +117,21 @@ export const eventPublicCopy: Record<string, { title?: string; description: stri
   sog_ev_musd_2026_01_legacy_transition: {
     title: 'mUSD remains a limited legacy product during the mStable relaunch',
     description: 'mStable’s current product materials focus on newer yield products while retaining legacy withdrawal tooling. mUSD is recorded as limited because residual Ethereum and Polygon paths remain, but normal current issuance is not fully verified.'
+  },
+  sog_ev_eurs_2018_launch: {
+    title: 'STASIS introduces the EURS euro stablecoin',
+    description: 'STASIS introduced EURS as a euro-backed stablecoin and expanded it across multiple settlement layers with issuer redemption and recurring reserve-verification processes.'
+  },
+  sog_ev_eurt_2025_11_redemption_end: {
+    title: 'Tether ends direct EURT redemption',
+    description: 'Tether ceased direct redemption of Euro Tether on 27 November 2025. Historical Ethereum and Omni token records may remain visible, but issuer issuance and redemption are terminated.'
+  },
+  sog_ev_usdm_2025_12_rebrand: {
+    title: 'Celo Dollar becomes Mento Dollar and cUSD becomes USDm',
+    description: 'Mento renamed Celo Dollar and cUSD to Mento Dollar and USDm on 17 December 2025. The change did not alter the contract, peg, balances, integrations, or require user action.'
+  },
+  sog_ev_alusd_2021_02_launch: {
+    title: 'Alchemix introduces alUSD and yield-backed borrowing',
+    description: 'Alchemix introduced alUSD as synthetic debt minted against yield-bearing stablecoin collateral, with collateral yield reducing debt and protocol or market routes supporting repayment and exit.'
   }
 };

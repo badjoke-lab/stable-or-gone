@@ -1,0 +1,129 @@
+[
+  {
+    "id": "sog_st_eurs",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "EUR",
+      "target_value": 1,
+      "notes": "EURS targets one euro and is issued at par against safeguarded euro funds."
+    },
+    "backing_types": [
+      "cash",
+      "bank_deposits"
+    ],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "valuation_source": {
+      "source_type": "issuer",
+      "label": "STASIS EURS issuance, reserve, and redemption framework",
+      "url": "https://stasis.net/terms"
+    },
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "notes": "EURS balances do not rebase."
+    },
+    "classification_notes": "Active fiat-backed euro stablecoin with onboarding-dependent direct issuance and redemption."
+  },
+  {
+    "id": "sog_st_eurt",
+    "lifecycle_status": "terminated",
+    "issuance_status": "terminated",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "EUR",
+      "target_value": 1,
+      "notes": "EURT historically targeted one euro through Tether issuance and redemption."
+    },
+    "backing_types": [
+      "cash",
+      "bank_deposits",
+      "mixed",
+      "unknown"
+    ],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "valuation_source": {
+      "source_type": "issuer",
+      "label": "Historical Tether EURT terms and supported-protocol records",
+      "url": "https://tether.to/en/legal/"
+    },
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "notes": "EURT balances did not rebase."
+    },
+    "classification_notes": "Direct issuer redemption ended effective 27 November 2025. Remaining on-chain or market presence does not change the terminated issuer lifecycle."
+  },
+  {
+    "id": "sog_st_usdm",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "target_value": 1,
+      "notes": "USDm remains pegged one-to-one to USD after the cUSD naming transition."
+    },
+    "backing_types": [
+      "stablecoin_collateral",
+      "crypto_collateral",
+      "mixed"
+    ],
+    "stabilization_mechanism": "protocol_arbitrage",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {
+      "source_type": "protocol",
+      "label": "Mento Reserve and protocol exchange mechanisms",
+      "url": "https://docs.mento.org/mento/protocol-concepts/reserve"
+    },
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "notes": "USDm itself does not rebase; protocol and liquidity incentives are separate."
+    },
+    "classification_notes": "Continuous cUSD/USDm identity. The December 2025 change was a pure rebrand with unchanged contracts and peg."
+  },
+  {
+    "id": "sog_st_alusd",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "target_value": 1,
+      "notes": "alUSD targets one U.S. dollar through overcollateralized debt, repayment, liquidity, and Transmuter mechanisms."
+    },
+    "backing_types": [
+      "stablecoin_collateral",
+      "mixed"
+    ],
+    "stabilization_mechanism": "overcollateralized_vault",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {
+      "source_type": "protocol",
+      "label": "Alchemix vault, debt, and Transmuter accounting",
+      "url": "https://docs.alchemix.fi/"
+    },
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "notes": "alUSD does not itself accrue yield; yield on collateral reduces borrower debt."
+    },
+    "classification_notes": "Yield-backed synthetic debt asset. Collateral receipts, vault positions, and bridged representations are separate layers."
+  }
+]

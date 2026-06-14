@@ -1,0 +1,82 @@
+[
+  {
+    "id": "sog_ku_eurs_contract_map_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "issuer_id": "sog_issuer_stasis",
+    "topic": "complete_current_contract_map",
+    "description": "The complete current contract and bridge-address inventory for every EURS settlement layer has not been normalized into SOG.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Official chain coverage is recorded; per-chain addresses require a separate direct contract review."
+  },
+  {
+    "id": "sog_ku_eurs_reserve_accounts_batch_e",
+    "stablecoin_id": "sog_st_eurs",
+    "issuer_id": "sog_issuer_stasis",
+    "topic": "current_reserve_account_composition",
+    "description": "SOG has not independently reconstructed the current bank-by-bank allocation, account balances, or every external verification artifact behind EURS reserves.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Issuer transparency claims are recorded without converting them into an independent audit conclusion."
+  },
+  {
+    "id": "sog_ku_eurt_remaining_supply_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "topic": "remaining_supply_and_market_activity",
+    "description": "The amount of EURT remaining in circulation and the current depth of secondary-market activity after redemption termination are not fixed in this batch.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Residual supply does not change the terminated issuer-redemption status."
+  },
+  {
+    "id": "sog_ku_eurt_final_reserve_disposition_batch_e",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "topic": "final_reserve_and_liability_disposition",
+    "description": "Public sources reviewed for this batch do not separately itemize the final EURT reserve allocation, unredeemed liabilities, or token-holder outcomes after 27 November 2025.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "No insolvency claim is made."
+  },
+  {
+    "id": "sog_ku_usdm_v3_transition_batch_e",
+    "stablecoin_id": "sog_st_usdm",
+    "issuer_id": "sog_issuer_mento",
+    "topic": "v3_transition_boundary",
+    "description": "The exact production boundary between legacy Mento reserve mechanics and every Mento V3 pool or strategy is not fully normalized in this record.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "The asset identity and Celo contract continuity are verified independently of this architecture transition."
+  },
+  {
+    "id": "sog_ku_usdm_multichain_map_batch_e",
+    "stablecoin_id": "sog_st_usdm",
+    "issuer_id": "sog_issuer_mento",
+    "topic": "non_celo_deployments",
+    "description": "Current and planned native, bridged, or pool-based USDm representations outside Celo require chain-by-chain identity verification.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Only the verified continuous Celo deployment is canonicalized in Batch E."
+  },
+  {
+    "id": "sog_ku_alusd_contract_versions_batch_e",
+    "stablecoin_id": "sog_st_alusd",
+    "issuer_id": "sog_issuer_alchemix",
+    "topic": "current_contract_version_map",
+    "description": "The complete mapping of alUSD token, V1, V2, V3, Alchemist, Transmuter, and adapter contracts is not normalized in this batch.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "The Ethereum protocol deployment is recorded without claiming every component address."
+  },
+  {
+    "id": "sog_ku_alusd_exit_liquidity_batch_e",
+    "stablecoin_id": "sog_st_alusd",
+    "issuer_id": "sog_issuer_alchemix",
+    "topic": "current_exit_capacity",
+    "description": "Current alUSD market liquidity, Transmuter capacity or term, and collateral-specific exit availability can change and require live contract-level monitoring.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "SOG describes available mechanisms without guaranteeing immediate par exit."
+  }
+]

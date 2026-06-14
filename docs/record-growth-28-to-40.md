@@ -1,6 +1,6 @@
 # SOG record growth plan: 28 to 40
 
-Status: Batch C implemented; Batch D next
+Status: Batch C, Batch D, and Batch E implemented
 
 ## Goal
 
@@ -10,8 +10,8 @@ Grow the canonical registry from 28 to 40 stable assets through three controlled
 
 ```text
 Batch C: 28 → 32 — implemented on record-growth-batch-c
-Batch D: 32 → 36 — next
-Batch E: 36 → 40 — pending
+Batch D: 32 → 36 — implemented
+Batch E: 36 → 40 — implemented
 ```
 
 Batch C added complete canonical records for GHO, BOLD, USD0, and USR. GHO's current Ethereum token address remains intentionally unresolved until it is extracted directly from the maintained Aave address-book source. USR is classified as restricted because of the March 2026 unauthorized-mint incident and ongoing recovery state.
@@ -75,7 +75,7 @@ Status: implemented
 
 Target: `batch_004`
 
-Status: next
+Status: implemented
 
 ### SAI
 
@@ -121,7 +121,7 @@ Status: next
 
 Target: `batch_005`
 
-Status: pending
+Status: implemented
 
 ### EURS
 
@@ -172,8 +172,8 @@ Status: pending
 
 ```text
 Batch C: 28 → 32 — implemented
-Batch D: 32 → 36 — next
-Batch E: 36 → 40 — pending
+Batch D: 32 → 36 — implemented
+Batch E: 36 → 40 — implemented
 ```
 
 ## Required promotion layers
