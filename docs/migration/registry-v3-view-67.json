@@ -1,8 +1,11 @@
 {
-  "schema_version": "3.0-view",
+  "schema_version": "3.0-deployment-view",
   "status": "additive",
-  "source": "registry-v2",
-  "default": "unknown",
+  "source_manifest": "docs/migration/registry-v2-baseline.json",
+  "source_group": "deployments",
+  "canonicality_default": "unknown",
   "minimum_count": 67,
-  "validator": "scripts/validate-registry-v3-chain-view.mjs"
+  "loader": "src/lib/data/registryV3.ts",
+  "loader_export": "getDeploymentsV3",
+  "validator": "scripts/validate-registry-v3-deployments.mjs"
 }
