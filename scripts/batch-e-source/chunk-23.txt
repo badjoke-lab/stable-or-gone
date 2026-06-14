@@ -1,0 +1,17 @@
+cked borrowing',\n    description: 'Alchemix introduced alUSD as synthetic debt minted against yield-bearing stablecoin collateral, with collateral yield reducing debt and protocol or market routes supporting repayment and exit.'\n  }\n};\n`);
+writeText('src/data/eventPublicCopy.ts', copy);
+
+let candidateDoc = readText('docs/candidate-stable-assets.md');
+candidateDoc = replaceOnce(candidateDoc, '- promoted entries: 36', '- promoted entries: 40');
+candidateDoc = replaceOnce(candidateDoc, '- P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon, GHO, BOLD, USD0, USR, SAI, HUSD, IRON, mUSD', '- P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon, GHO, BOLD, USD0, USR, SAI, HUSD, IRON, mUSD, EURS, EURT, Mento Dollar / USDm, alUSD');
+candidateDoc = replaceOnce(candidateDoc, '- P0 pending promotion: 4', '- P0 pending promotion: 0');
+candidateDoc = replaceOnce(candidateDoc, '- Batch E: EURS, EURT, Mento Dollar / USDm, alUSD — pending', '- Batch E: EURS, EURT, Mento Dollar / USDm, alUSD — promoted');
+candidateDoc = replaceOnce(candidateDoc, 'Mento Dollar / USDm remains `needs_review` until identity continuity between cUSD and USDm is resolved.', 'Mento Dollar / USDm is promoted as the same continuous asset as cUSD because Mento explicitly documented a pure naming change with no contract or peg change.');
+candidateDoc = replaceOnce(candidateDoc, 'Batch D promoted SAI, HUSD, IRON, and mUSD.', 'Batch D promoted SAI, HUSD, IRON, and mUSD. Batch E promoted EURS, EURT, Mento Dollar / USDm, and alUSD.');
+writeText('docs/candidate-stable-assets.md', candidateDoc);
+
+let growth = readText('docs/record-growth-28-to-40.md');
+growth = replaceOnce(growth, 'Status: Batch C implemented; Batch D next', 'Status: Batch C, Batch D, and Batch E implemented');
+growth = replaceOnce(growth, 'Batch D: 32 → 36 — next', 'Batch D: 32 → 36 — implemented');
+growth = replaceOnce(growth, 'Batch E: 36 → 40 — pending', 'Batch E: 36 → 40 — implemented');
+growth = replaceOnce(g
