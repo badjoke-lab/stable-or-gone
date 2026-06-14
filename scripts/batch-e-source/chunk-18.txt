@@ -1,0 +1,26 @@
+', deployment_type: 'protocol_issued_synthetic', contract_address: null, status: 'active', notes: 'Canonical protocol deployment. Exact current token and component address map is retained as a known unknown pending version-normalized review.', evidence_ids: ['sog_src_alusd_current_docs_batch_e', 'sog_src_alusd_transmuter_batch_e'] }
+];
+
+writeJson('data/stablecoins-batch-e.json', stablecoins);
+writeJson('data/organizations-batch-e.json', organizations);
+writeJson('data/issuers-batch-e.json', issuers);
+writeJson('data/relationships-batch-e.json', relationships);
+writeJson('data/stablecoin-classification-batch-e.json', classifications);
+writeJson('data/stablecoin-profiles-batch-e.json', profiles);
+writeJson('data/events-batch-e.json', events);
+writeJson('data/event-details-batch-e.json', eventDetails);
+writeJson('data/evidence-batch-e.json', evidence);
+writeJson('data/known-unknowns-batch-e.json', knownUnknowns);
+writeJson('data/deployments-batch-e.json', deployments);
+
+const candidatePath = 'data/candidate-stable-assets.json';
+const candidateMaster = JSON.parse(readText(candidatePath));
+const promotionNotes = {
+  sog_cand_000037: 'Promoted in Batch E as an active euro-backed STASIS stablecoin with reserve-verification, direct-redemption, multi-network, and issuer-control terms.',
+  sog_cand_000038: 'Promoted in Batch E as a terminated historical Tether euro stablecoin with direct redemption ending on 2025-11-27 and preserved Ethereum and Omni deployment history.',
+  sog_cand_000039: 'Promoted in Batch E as the continuous cUSD/USDm asset identity; the December 2025 change was a pure rebrand with no contract or peg change.',
+  sog_cand_000040: 'Promoted in Batch E as an active yield-backed synthetic debt stablecoin with Alchemix vault, repayment, Transmuter, and deployment coverage.'
+};
+for (const row of candidateMaster) if (promotionNotes[row.candidate_id]) { row.status = 'promoted'; row.notes = promotionNotes[row.candidate_id]; }
+writeText(candidatePath, `[
+  ${candi
