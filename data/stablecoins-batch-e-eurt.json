@@ -1,0 +1,21 @@
+[
+  {
+    "id": "sog_st_eurt",
+    "slug": "eurt",
+    "name": "Euro Tether",
+    "symbol": "EURT",
+    "aliases": ["EURT", "EURt", "Euro Tether"],
+    "status": "limited",
+    "issuer_id": "sog_issuer_tether",
+    "peg_asset": "EUR",
+    "collateral_model": "issuer_managed_euro_reserve",
+    "reserve_disclosure_status": "issuer_group_disclosure",
+    "redemption_status": "current_asset_specific_status_uncertain",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "Euro-pegged Tether token with historical Omni and Ethereum representations. Current issuance and direct-redemption availability require asset-specific confirmation.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch E promotion with conservative limited status."
+  }
+]
