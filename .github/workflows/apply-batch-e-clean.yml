@@ -29,7 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
       - name: Reconstruct reviewed Batch E generator
         run: |
@@ -58,7 +57,7 @@ jobs:
           sed -i 's/record-growth-batch-e/record-growth-batch-e-clean/g' docs/batch-e-review.md
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Validate and build
         run: npm run build
