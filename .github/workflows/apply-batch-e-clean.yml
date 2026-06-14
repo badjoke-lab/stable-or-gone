@@ -51,6 +51,9 @@ jobs:
       - name: Generate canonical Batch E files
         run: node scripts/apply-batch-e-clean.mjs
 
+      - name: Fix generated legacy issuer loader
+        run: node scripts/fix-batch-e-loader.mjs
+
       - name: Normalize clean branch provenance
         run: |
           sed -i 's/record-growth-batch-e/record-growth-batch-e-clean/g' docs/migration/registry-v2-baseline.json
@@ -64,19 +67,7 @@ jobs:
       - name: Validate candidates
         run: npm run validate:candidates
       - name: Validate data
-        id: validate_data
-        continue-on-error: true
-        run: npm run validate:data > /tmp/validate-data.log 2>&1
-      - name: Publish data-validation diagnostics
-        if: steps.validate_data.outcome == 'failure'
-        run: |
-          cp /tmp/validate-data.log docs/batch-e-validation-error.txt
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/batch-e-validation-error.txt
-          git commit -m "Record Batch E validation diagnostics"
-          git push origin HEAD:record-growth-batch-e-clean
-          exit 1
+        run: npm run validate:data
       - name: Validate compatibility
         run: npm run validate:compat
       - name: Validate classifications
@@ -101,7 +92,7 @@ jobs:
       - name: Commit clean generated implementation
         run: |
           set -euo pipefail
-          rm scripts/apply-batch-e-clean.mjs
+          rm scripts/apply-batch-e-clean.mjs scripts/fix-batch-e-loader.mjs
           rm .github/workflows/apply-batch-e-clean.yml
           rm -f docs/__branch_probe__.md docs/batch-e-validation-error.txt
           git config user.name "github-actions[bot]"
