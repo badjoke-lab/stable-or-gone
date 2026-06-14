@@ -6,16 +6,19 @@ const failures = [];
 const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
 const lifecycleStatuses = new Set(['announced','active','restricted','suspended','winding_down','inactive','terminated','collapsed','migrated','rebranded','unknown']);
 const issuanceStatuses = new Set(['open','restricted','paused','terminated','protocol_based','unknown']);
-const pegKinds = new Set(['fiat','commodity','crypto_asset','index','floating','other','unknown']);
-const backingTypes = new Set(['cash','bank_deposits','government_securities','commercial_paper','crypto_collateral','stablecoin_collateral','tokenized_fund','commodity','unbacked','mixed','other','unknown']);
-const stabilizationMechanisms = new Set(['issuer_redemption','overcollateralized_vault','algorithmic_supply','delta_neutral','protocol_arbitrage','hybrid','other','unknown']);
+const pegKinds = new Set(['fiat','commodity','crypto_asset','index','basket','floating','other','unknown']);
+const backingTypes = new Set(['cash','bank_deposits','government_securities','commercial_paper','corporate_bonds','private_credit','receivables','secured_loans','insurance_or_guarantee','crypto_collateral','stablecoin_collateral','tokenized_fund','commodity','unbacked','mixed','other','unknown']);
+const stabilizationMechanisms = new Set(['issuer_redemption','overcollateralized_vault','algorithmic_supply','delta_neutral','protocol_arbitrage','bank_deposit_claim','fund_share_valuation','commodity_redemption','rebasing_or_repricing','hybrid','other','unknown']);
 const governanceModels = new Set(['centralized','dao_governed','protocol_governed','hybrid','unknown']);
-const assetClasses = new Set(['stablecoin','stable_value_asset','stablecoin_adjacent','tokenized_commodity','yield_bearing_stable_receipt','experimental_stabilization_asset','reserve_asset','unknown']);
+const assetClasses = new Set(['stablecoin','stable_value_asset','stablecoin_adjacent','tokenized_commodity','yield_bearing_stable_receipt','experimental_stabilization_asset','reserve_asset','tokenized_deposit','tokenized_fund_share','unknown']);
 const referenceTargets = new Set(['fiat','commodity','crypto_asset','index','basket','floating','protocol_internal','none','unknown']);
 const redemptionOrExitModels = new Set(['issuer_redemption','protocol_redemption','market_exit','conversion','physical_redemption','vault_withdrawal','rebasing_or_repricing','maturity_or_settlement','none','other','unknown']);
 const valuationSourceTypes = new Set(['issuer','protocol','oracle','market','index_provider','custodian','other','unknown']);
 const yieldOrRebaseModes = new Set(['none','yield_bearing','rebasing','reward_accruing','variable_rate','other','unknown']);
 const accrualTargets = new Set(['asset','wrapper','external_receipt','protocol_position','none','unknown']);
+const yieldSources = new Set(['reserve_income','lending','staking','derivatives_funding','protocol_incentives','token_emissions','mixed','none','unknown']);
+const accrualMechanisms = new Set(['balance_rebase','exchange_rate_increase','claimable_reward','wrapper_value_increase','external_distribution','protocol_position','none','unknown']);
+const rateTypes = new Set(['fixed','variable','discretionary','protocol_determined','none','unknown']);
 const legacyCompatibility = {active:new Set(['active']),limited:new Set(['restricted']),impaired:new Set(['restricted','suspended']),discontinued:new Set(['winding_down','inactive','terminated']),failed:new Set(['collapsed']),rebranded:new Set(['rebranded']),migrated:new Set(['migrated']),unknown:new Set(['unknown'])};
 
 function read(relativePath) {
@@ -53,6 +56,9 @@ function validateExtension(row) {
     else {
       if (!yieldOrRebaseModes.has(profile.mode)) failures.push(`${row.id}: invalid yield_or_rebase_profile.mode ${profile.mode}`);
       if (profile.accrual_target !== undefined && !accrualTargets.has(profile.accrual_target)) failures.push(`${row.id}: invalid yield_or_rebase_profile.accrual_target ${profile.accrual_target}`);
+      if (profile.yield_source !== undefined && !yieldSources.has(profile.yield_source)) failures.push(`${row.id}: invalid yield_or_rebase_profile.yield_source ${profile.yield_source}`);
+      if (profile.accrual_mechanism !== undefined && !accrualMechanisms.has(profile.accrual_mechanism)) failures.push(`${row.id}: invalid yield_or_rebase_profile.accrual_mechanism ${profile.accrual_mechanism}`);
+      if (profile.rate_type !== undefined && !rateTypes.has(profile.rate_type)) failures.push(`${row.id}: invalid yield_or_rebase_profile.rate_type ${profile.rate_type}`);
       optionalString(row, 'yield_or_rebase_profile.rate_source', profile.rate_source);
       optionalString(row, 'yield_or_rebase_profile.notes', profile.notes);
     }
