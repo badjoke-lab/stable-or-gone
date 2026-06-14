@@ -6,9 +6,6 @@ on:
       - record-growth-batch-e-clean
     paths:
       - .github/workflows/apply-batch-e-clean.yml
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -16,7 +13,6 @@ permissions:
 
 jobs:
   apply:
-    if: ${{ github.event_name != 'pull_request' || github.head_ref == 'record-growth-batch-e-clean' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout clean Batch E branch
@@ -64,7 +60,19 @@ jobs:
       - name: Validate candidates
         run: npm run validate:candidates
       - name: Validate data
-        run: npm run validate:data
+        id: validate_data
+        continue-on-error: true
+        run: npm run validate:data > /tmp/validate-data.log 2>&1
+      - name: Publish data-validation diagnostics
+        if: steps.validate_data.outcome == 'failure'
+        run: |
+          cp /tmp/validate-data.log docs/batch-e-validation-error.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/batch-e-validation-error.txt
+          git commit -m "Record Batch E validation diagnostics"
+          git push origin HEAD:record-growth-batch-e-clean
+          exit 1
       - name: Validate compatibility
         run: npm run validate:compat
       - name: Validate classifications
@@ -91,7 +99,7 @@ jobs:
           set -euo pipefail
           rm scripts/apply-batch-e-clean.mjs
           rm .github/workflows/apply-batch-e-clean.yml
-          rm -f docs/__branch_probe__.md
+          rm -f docs/__branch_probe__.md docs/batch-e-validation-error.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
