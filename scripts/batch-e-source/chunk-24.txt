@@ -1,0 +1,10 @@
+rowth, 'Status: next', 'Status: implemented');
+growth = replaceOnce(growth, 'Status: pending', 'Status: implemented');
+growth = replaceOnce(growth, 'Batch D: 32 → 36 — next', 'Batch D: 32 → 36 — implemented');
+growth = replaceOnce(growth, 'Batch E: 36 → 40 — pending', 'Batch E: 36 → 40 — implemented');
+writeText('docs/record-growth-28-to-40.md', growth);
+
+writeText('docs/batch-e-review.md', `# Batch E review\n\nStatus: implemented on \`record-growth-batch-e\`\n\n## Records\n\n- EURS — active euro-backed STASIS stablecoin with onboarding-dependent direct redemption and multi-network coverage.\n- EURT — terminated Tether euro stablecoin; direct redemption ended on 2025-11-27 while historical contracts may remain visible.\n- Mento Dollar / USDm — active continuous identity from Celo Dollar / cUSD; official rebrand changed no contract or peg.\n- alUSD — active Alchemix synthetic debt asset backed by yield-bearing stablecoin collateral.\n\n## Identity boundaries\n\n- EURS and EURT are separate euro stablecoins with different issuers and lifecycle states.\n- cUSD and USDm are one canonical asset because the official transition was branding-only.\n- alUSD is separate from deposited collateral, vault positions, yield receipts, and bridged representations.\n- Residual EURT contract or market activity is not treated as restored issuer redemption.\n\n## Protected post-Batch-E minimums\n\n- stable assets: 40\n- organizations: 32\n- relationships: 40\n- events and event details: 48\n- evidence and evidence relations: 182\n- known unknowns: 93\n- deployments: 67\n`);
+
+console.log('Batch E files generated and repository integrations updated.');
+
