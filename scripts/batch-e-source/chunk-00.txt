@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const root = process.cwd();
+const today = '2026-06-14';
+const writeJson = (file, value) => {
+  const full = path.join(root, file);
+  fs.mkdirSync(path.dirname(full), { recursive: true });
+  fs.writeFileSync(full, `${JSON.stringify(value, null, 2)}\n`);
+};
+const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const writeText = (file, value) => fs.writeFileSync(path.join(root, file), value);
+const replaceOnce = (text, from, to, label = from) => {
+  if (!text.includes(from)) throw new Error(`Missing replacement target: ${label}`);
+  return text.replace(from, to);
+};
+
+const stablecoins = [
+  {
+    id: 'sog_st_eurs', slug: 'eurs', name: 'STASIS EURO', symbol: 'EURS', aliases: ['EURS', 'STASIS EURO', 'STASIS EURS'], status: 'active', issuer_id: 'sog_issuer_stasis', peg_asset: 'EUR', collateral_model: 'fiat_reserve_backed_euro', reserve_disclosure_status: 'daily_quarterly_annual_verification', redemption_status: 'eligible_customer_direct_redemption', who_can_redeem: 'Onboarded customers can redeem EURS at par through STASIS subject to account, compliance, wallet, and bank-account requirements.', retail_redemption: 'eligible_customer_direct', institutional_redemption: 'eligible_customer_direct_or_api', minimum_redemption: 'terms_and_route_dependent', redemption_region_notes: 'Direct issuance and redemption require STASIS onboarding and applicable compliance checks. Secondary-market access does not itself create an onboarded redemption relationship.', redemption_notes: 'STASIS states that EURS is issued and redeemed at EUR 1, with redeemed tokens frozen or burned. SOG separates issuer redemption from exchange or DeFi liquidity.', launch_date: null, discontinued_date: null, summary: 'Euro-pegged stablecoin issued by STASIS and backed by liquid euro balances. EURS supports direct issuer redemption for onboarded users and is represented across multiple settlement layers.', confidence: 'high', last_verified_at: today, notes: 'Batch E promotion. Official materials describe a 2018 launch history, but a durable day-level launch date is not fixed in this record.'
+  },
+  {
+    id: 'sog_st_eurt', slug: 'eurt', name: 'Euro Tether', symbol: 'EURT', aliases: ['EURT', 'EURt', 'EUR₮', 'Euro Tether'], status: 'discontinued', issuer_id: 'sog_issuer_tether', peg_asset: 'EUR', collateral_model: 'historical_tether_issuer_reserves', reserve_disclosure_status: 'historical_issuer_disclosure_not_separately_current', redemption_status: 'terminated_2025_11_27', who_can_redeem: 'Tether ceased direct redemption of EURT under its terms effective 27 November 2025. Remaining holders depend on market, exchange, wallet, or contract availability rather than issuer redemption.', retail_redemption: 'terminated', institutional_redemption: 'terminated', minimum_redemption: 'not_applicable_after_termination', redemption_region_notes: 'Direct Tether redemption is terminated. Third-party market availability does not restore an issuer redemption right.', redemption_notes: 'The Ethereum and historical Omni representations may remain visible on-chain after direct redemption termination. SOG records those contracts separately from the ended issuer service.', launch_date: null, discontinued_date: '2025-11-27', summary: 'Historical euro-pegged Tether token whose direct issuer redemption ended on 27 November 2025. Contract and market traces may remain, but normal Tether issuance and redemption are terminated.', confidence: 'high', last_verified_at: today, notes: 'Batch E promotion. This is a terminated issuer-redemption product, not evidence that every secondary-market balance or contract ceased to exist.'
+  },
+  {
+    id: 'sog_st_usdm', slug: 'mento-dollar', name: 'Mento Dollar', symbol: 'USDm', aliases: ['USDm', 'Mento Dollar', 'cUSD', 'Celo Dollar'], status: 'active', issuer_id: 'sog_issuer_mento', peg_asset: 'USD', collateral_model: 'overcollateralized_mento_reserve', reserve_disclosure_status: 'protocol_transparent_reserve_dashboard', redemption_status: 'protocol_exchange_and_market_exit', who_can_redeem: 'Users exchange USDm through Mento liquidity and reserve-supported protocol routes at oracle-referenced rates, subject to pool, reserve, chain, and interface state.', retail_redemption: 'protocol_or_market_based', institutional_redemption: 'protocol_or_market_based', minimum_redemption: 'pool_and_transaction_dependent', redemption_region_notes: 'Access depends on Celo or supported Mento deployments, interfaces, liquidity, reserve strategy, and governance parameters.', redemption_notes: 'The December 2025 cUSD-to-USDm transition was a naming and branding change with no contract, peg, or user-action change. SOG therefore keeps one continuous canonical asset identity.', launch_date: null, discontinued_date: null, summary: 'USD-referenced stablecoin of the Mento Protocol, formerly named Celo Dollar and symbolized cUSD. It remains the same contract-level asset after the December 2025 r
