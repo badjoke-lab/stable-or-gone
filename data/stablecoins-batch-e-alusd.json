@@ -1,0 +1,21 @@
+[
+  {
+    "id": "sog_st_alusd",
+    "slug": "alusd",
+    "name": "Alchemix USD",
+    "symbol": "alUSD",
+    "aliases": ["alUSD", "Alchemix USD"],
+    "status": "active",
+    "issuer_id": "sog_issuer_alchemix",
+    "peg_asset": "USD",
+    "collateral_model": "yield_bearing_collateralized_synthetic_debt",
+    "reserve_disclosure_status": "protocol_transparent",
+    "redemption_status": "transmuter_and_market_exit",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "Synthetic USD-denominated debt asset issued by Alchemix against supported yield-bearing collateral.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch E promotion. V1 and V2 migrations and chain representations remain separate research topics."
+  }
+]
