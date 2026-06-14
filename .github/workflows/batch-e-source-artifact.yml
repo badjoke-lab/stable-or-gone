@@ -1,0 +1,26 @@
+name: Batch E Source Artifact
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Batch E branch
+        uses: actions/checkout@v4
+        with:
+          ref: record-growth-batch-e
+          fetch-depth: 0
+
+      - name: Upload Batch E source chunks
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch-e-source-chunks
+          path: scripts/batch-e-source/
+          if-no-files-found: error
