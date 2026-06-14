@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_stable_universal",
+    "slug": "stable-universal",
+    "name": "Stable Universal",
+    "organization_type": "stablecoin_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "unknown",
+    "official_url": null,
+    "summary": "Historical organization associated with HUSD issuance and operations.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-14",
+    "notes": "Historical issuer, custody, exchange-distribution, and legal-entity roles require further source separation."
+  },
+  {
+    "id": "sog_issuer_iron_finance",
+    "slug": "iron-finance",
+    "name": "Iron Finance",
+    "organization_type": "defi_protocol",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://iron.finance/",
+    "summary": "DeFi protocol ecosystem behind the original IRON partially collateralized stablecoin and TITAN share token.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Later products or protocol reuse of the Iron Finance name must not be treated as recovery of the original IRON stablecoin."
+  },
+  {
+    "id": "sog_issuer_mstable",
+    "slug": "mstable",
+    "name": "mStable",
+    "organization_type": "defi_protocol",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://www.mstable.com/",
+    "summary": "DeFi protocol ecosystem that introduced mUSD and later shifted its current product focus toward yield strategies while preserving legacy withdrawal tooling.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "mUSD, imUSD, MTA governance, and newer mStable yield products are separate record layers."
+  }
+]

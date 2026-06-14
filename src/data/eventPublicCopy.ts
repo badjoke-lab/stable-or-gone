@@ -101,5 +101,21 @@ export const eventPublicCopy: Record<string, { title?: string; description: stri
   sog_ev_usr_2026_03_unauthorized_mint: {
     title: 'Unauthorized USR minting incident restricts Resolv operations',
     description: 'Resolv reported unauthorized USR minting on 22 March 2026, paused most operations, and began containment and recovery. The protocol reported that the collateral pool remained intact; the final recovery and restart state remains unresolved.'
+  },
+  sog_ev_sai_2019_11_migration: {
+    title: 'Single-Collateral Dai becomes SAI during the Multi-Collateral Dai launch',
+    description: 'MakerDAO launched Multi-Collateral Dai on 18 November 2019 and renamed the original ETH-only Dai token to SAI. SAI holders were directed to migration or settlement paths rather than continued issuance under the current DAI system.'
+  },
+  sog_ev_husd_2022_10_depeg: {
+    title: 'HUSD suffers a severe depeg after exchange support is removed',
+    description: 'HUSD lost most of its U.S. dollar value after Huobi removed support in October 2022. The final issuer, reserve, liability, and direct-redemption outcomes remain incompletely documented.'
+  },
+  sog_ev_iron_2021_06_collapse: {
+    title: 'IRON V1 collapses during a bank run and TITAN price failure',
+    description: 'Large redemptions and the collapse of the TITAN share token broke IRON V1’s partially collateralized mechanism on 16 June 2021. The original stablecoin did not recover as a functioning one-dollar asset.'
+  },
+  sog_ev_musd_2026_01_legacy_transition: {
+    title: 'mUSD remains a limited legacy product during the mStable relaunch',
+    description: 'mStable’s current product materials focus on newer yield products while retaining legacy withdrawal tooling. mUSD is recorded as limited because residual Ethereum and Polygon paths remain, but normal current issuance is not fully verified.'
   }
 };
