@@ -1,0 +1,43 @@
+name: Batch E Preview
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Batch E branch
+        uses: actions/checkout@v4
+        with:
+          ref: record-growth-batch-e
+          fetch-depth: 0
+
+      - name: Generate Batch E files
+        run: node scripts/apply-batch-e-bootstrap.mjs
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Validate and build
+        run: npm run build
+
+      - name: Package generated repository
+        run: |
+          rm -rf node_modules dist .astro .git
+          rm -f scripts/apply-batch-e-bootstrap.mjs
+          rm -f .github/workflows/apply-batch-e.yml
+          rm -f .github/workflows/batch-e-preview.yml
+          tar -czf /tmp/batch-e-generated.tar.gz .
+
+      - name: Upload generated repository
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch-e-generated
+          path: /tmp/batch-e-generated.tar.gz
+          if-no-files-found: error
