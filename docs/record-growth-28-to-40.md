@@ -1,22 +1,35 @@
 # SOG record growth plan: 28 to 40
 
-Status: candidate set fixed
+Status: Batch C implemented; Batch D next
 
 ## Goal
 
 Grow the canonical registry from 28 to 40 stable assets through three controlled four-record batches. Candidate assignment does not guarantee promotion. Every record must pass duplicate, identity, classification, source, relationship, event, evidence, profile, deployment, and build validation.
 
+## Current progress
+
+```text
+Batch C: 28 → 32 — implemented on record-growth-batch-c
+Batch D: 32 → 36 — next
+Batch E: 36 → 40 — pending
+```
+
+Batch C added complete canonical records for GHO, BOLD, USD0, and USR. GHO's current Ethereum token address remains intentionally unresolved until it is extracted directly from the maintained Aave address-book source. USR is classified as restricted because of the March 2026 unauthorized-mint incident and ongoing recovery state.
+
 ## Batch C — current protocol stable assets
 
 Target: `batch_003`
+
+Status: implemented
 
 ### GHO
 
 - Proposed ID: `sog_st_gho`
 - Organization: Aave / Aave DAO
-- Classification target: overcollateralized protocol stablecoin
-- Required research: launch, facilitators, Ethereum issuance, GSM, bridge deployments, mint and repay mechanics, governance controls
-- Primary source entry points:
+- Classification: facilitator-issued DAO-governed protocol stablecoin
+- Implemented coverage: Ethereum launch, facilitator design, GSM conversion, canonical bridging, reserve/redemption profile, evidence, deployment placeholder, and known unknowns
+- Remaining known unknown: canonical Ethereum token address and complete current facilitator inventory
+- Primary sources:
   - https://aave.com/help/gho-stablecoin/gho
   - https://aave.com/help/gho-stablecoin/facilitators
   - https://aave.com/help/gho-stablecoin/stability-module
@@ -26,9 +39,10 @@ Target: `batch_003`
 
 - Proposed ID: `sog_st_bold`
 - Organization: Liquity
-- Classification target: Ethereum-native crypto-collateralized stablecoin
-- Required research: Liquity V2 launch, ETH and LST collateral branches, borrower-set rates, redemption routing, stability pools, earn products, distinction from LUSD
-- Primary source entry points:
+- Classification: Ethereum-native crypto-collateralized stablecoin
+- Implemented coverage: Liquity V2 live phase, WETH/wstETH/rETH collateral, borrower-set rates, direct redemption, canonical Ethereum deployment, evidence, and known unknowns
+- Identity boundary: BOLD is distinct from LUSD and third-party sBOLD
+- Primary sources:
   - https://docs.liquity.org/
   - https://docs.liquity.org/v2-faq/bold-and-earn
   - https://docs.liquity.org/v2-faq/borrowing-and-liquidations
@@ -38,9 +52,10 @@ Target: `batch_003`
 
 - Proposed ID: `sog_st_usd0`
 - Organization: Usual DAO / Usual ecosystem
-- Classification target: tokenized-real-world-asset-backed stablecoin
-- Required research: issuance entity and DAO roles, direct and indirect minting, redemption, collateral providers, insurance fund, chain deployments, distinction from USD0++, bUSD0, sUSD0, and USD0a
-- Primary source entry points:
+- Classification: tokenized-real-world-asset-backed stablecoin
+- Implemented coverage: direct and indirect mint/redeem architecture, RWA collateral, governance and organization uncertainty, Ethereum/Arbitrum/Base/BNB deployments, evidence, and known unknowns
+- Identity boundary: USD0 is distinct from bUSD0, sUSD0, and USD0a
+- Primary sources:
   - https://docs.usual.money/usual-products/usd0-stablecoin/usd0
   - https://docs.usual.money/resources-and-ecosystem/fact-sheets/usual-products/usd0
 
@@ -48,15 +63,19 @@ Target: `batch_003`
 
 - Proposed ID: `sog_st_usr`
 - Organization: Resolv
-- Classification target: crypto-native stablecoin with delta-neutral backing
-- Required research: collateral and hedge architecture, insurance pool, mint and redemption eligibility, deployment addresses, yield attribution, distinction from RLP and staked or receipt products
-- Primary source entry points:
-  - https://docs.resolv.xyz/litepaper/usd-pegged-tokens/usr
-  - https://docs.resolv.xyz/litepaper/resolv-protocol-overview
+- Classification: crypto-native stablecoin with a separate first-loss layer
+- Implemented coverage: normal mint/redeem design, collateral architecture, Ethereum contract identity, separation from RLP/stUSR/wstUSR, March 2026 unauthorized-mint event, recovery status, evidence, and known unknowns
+- Current lifecycle: restricted
+- Primary sources:
+  - https://docs.resolv.xyz/litepaper/overview/usr
+  - https://docs.resolv.xyz/litepaper/for-developers/token-supply-operations/usr
+  - https://resolv.xyz/blog/resolv-postmortem-march-22-2026-incident
 
 ## Batch D — historical lifecycle cases
 
 Target: `batch_004`
+
+Status: next
 
 ### SAI
 
@@ -101,6 +120,8 @@ Target: `batch_004`
 ## Batch E — non-USD and mechanism diversity
 
 Target: `batch_005`
+
+Status: pending
 
 ### EURS
 
@@ -150,9 +171,9 @@ Target: `batch_005`
 ## Promotion order
 
 ```text
-Batch C: 28 → 32
-Batch D: 32 → 36
-Batch E: 36 → 40
+Batch C: 28 → 32 — implemented
+Batch D: 32 → 36 — next
+Batch E: 36 → 40 — pending
 ```
 
 ## Required promotion layers

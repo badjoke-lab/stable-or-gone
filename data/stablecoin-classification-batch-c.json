@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_gho",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "GHO targets one U.S. dollar through Aave DAO-governed facilitator capacity, borrowing demand, liquidity, and stability modules."},
+    "backing_types": ["crypto_collateral", "stablecoin_collateral", "mixed"],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "market", "label": "GHO market price and DAO-governed stability mechanisms", "url": "https://aave.com/help/gho-stablecoin"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "GHO balances do not rebase; borrowing interest is paid by debt positions."},
+    "classification_notes": "Aave-native facilitator-issued stablecoin. Borrower repayment, GSM conversion, canonical bridging, and secondary-market exit are distinct mechanisms."
+  },
+  {
+    "id": "sog_st_bold",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "BOLD targets one U.S. dollar through immutable Liquity V2 borrowing, redemption, interest-rate, and Stability Pool mechanics."},
+    "backing_types": ["crypto_collateral"],
+    "stabilization_mechanism": "overcollateralized_vault",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "market", "label": "BOLD market price and direct collateral redemption", "url": "https://docs.liquity.org/v2-faq/bold-and-earn"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "BOLD itself does not rebase. Stability Pool or third-party sBOLD positions are separate yield-bearing layers."},
+    "classification_notes": "Ethereum-native Liquity V2 stablecoin backed by WETH, wstETH, and rETH branches. It is distinct from LUSD and third-party sBOLD."
+  },
+  {
+    "id": "sog_st_usd0",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "USD0 is designed for 1:1 minting and redemption against eligible short-duration tokenized sovereign assets or supported indirect collateral routes."},
+    "backing_types": ["government_securities", "tokenized_fund", "stablecoin_collateral", "mixed"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "protocol", "label": "Usual RWA aggregator, collateral providers, and protocol accounting", "url": "https://docs.usual.money/resources-and-ecosystem/fact-sheets/usual-products/usd0"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "USD0 itself is the stable settlement asset. bUSD0, sUSD0, and USD0a are separate yield or strategy products."},
+    "classification_notes": "RWA-backed protocol stablecoin. Direct primary-market redemption and indirect USDC routing have different eligibility and minimum-size conditions."
+  },
+  {
+    "id": "sog_st_usr",
+    "lifecycle_status": "restricted",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "USR is designed to maintain a one-dollar value through liquid collateral, diversified allocation, and an RLP first-loss layer."},
+    "backing_types": ["crypto_collateral", "stablecoin_collateral", "tokenized_fund", "mixed"],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "hybrid",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "protocol", "label": "Resolv collateral accounting, oracle-priced mint and burn requests, and market price", "url": "https://docs.resolv.xyz/litepaper/overview/usr"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "USR is not treated as the yield-bearing receipt. stUSR and wstUSR are separate staking representations."},
+    "classification_notes": "Restricted after the March 2026 unauthorized-mint incident. USR, RLP, stUSR, and wstUSR remain separate asset identities."
+  }
+]

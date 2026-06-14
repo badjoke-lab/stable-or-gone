@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sog_st_gho",
+    "reserve_profile": {
+      "backing_types": ["crypto_collateral", "stablecoin_collateral", "mixed"],
+      "summary": "GHO supply is created by Aave DAO-approved facilitators with governance-set bucket capacities. The original Aave V3 Ethereum facilitator mints GHO against collateral supplied to the market; other approved facilitators and stability modules can use distinct backing or conversion designs.",
+      "disclosure_status": "protocol_and_governance_transparent",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_gho_facilitators_batch_c", "sog_src_gho_launch_batch_c", "sog_src_gho_gsm_batch_c"]
+    },
+    "redemption_profile": {
+      "status": "protocol_based",
+      "settlement_asset": "Borrower collateral release, GSM-supported assets, canonical bridge output, or secondary-market assets",
+      "eligible_parties": "Users of supported Aave markets, approved facilitator interfaces, GHO Stability Modules, canonical bridges, or secondary markets, subject to current protocol parameters.",
+      "retail_access": "protocol_or_market_based",
+      "institutional_access": "protocol_or_market_based",
+      "minimum_amount_text": "Protocol-, module-, liquidity-, and transaction-dependent.",
+      "fee_text": "Borrow interest, GSM fees or spread, bridge costs, liquidity slippage, and gas may apply.",
+      "settlement_time_text": "Protocol-, module-, bridge-, and network-dependent.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://app.aave.com/",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_gho_facilitators_batch_c", "sog_src_gho_gsm_batch_c", "sog_src_gho_bridge_batch_c"]
+    }
+  },
+  {
+    "id": "sog_st_bold",
+    "reserve_profile": {
+      "backing_types": ["crypto_collateral"],
+      "summary": "BOLD is issued in Liquity V2 against WETH, wstETH, and rETH collateral branches. Collateral, debt, liquidation, Stability Pool, and redemption state are visible through Ethereum contracts rather than an issuer reserve account.",
+      "disclosure_status": "protocol_transparent",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_bold_overview_batch_c", "sog_src_bold_technical_batch_c"]
+    },
+    "redemption_profile": {
+      "status": "protocol_based",
+      "settlement_asset": "A routed mixture of WETH, wstETH, and rETH collateral",
+      "eligible_parties": "Any Ethereum address holding sufficient BOLD can initiate a protocol redemption, subject to contract state and fees.",
+      "retail_access": "public_protocol_based",
+      "institutional_access": "public_protocol_based",
+      "minimum_amount_text": "Protocol- and transaction-dependent.",
+      "fee_text": "Dynamic redemption fees, gas, and market costs may apply.",
+      "settlement_time_text": "Ethereum transaction and protocol processing time.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://app.liquity.org/",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_bold_redemptions_batch_c", "sog_src_bold_overview_batch_c"]
+    }
+  },
+  {
+    "id": "sog_st_usd0",
+    "reserve_profile": {
+      "backing_types": ["government_securities", "tokenized_fund", "stablecoin_collateral", "mixed"],
+      "summary": "Usual documentation describes USD0 as fully collateralized by short-duration U.S. Treasury bills and equivalent sovereign instruments provided through tokenized-asset issuers, with an RWA aggregator and a dedicated insurance fund.",
+      "disclosure_status": "protocol_and_collateral_provider_disclosure",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c", "sog_src_usd0_collateral_batch_c"]
+    },
+    "redemption_profile": {
+      "status": "restricted",
+      "settlement_asset": "Eligible tokenized Treasury assets through direct redemption or market/USDC routes through indirect liquidity",
+      "eligible_parties": "Direct primary-market users must meet collateral-provider and compliance requirements. Smaller or non-eligible users generally rely on indirect protocol or secondary-market routes.",
+      "retail_access": "market_or_indirect_protocol_based",
+      "institutional_access": "direct_primary_market_subject_to_eligibility",
+      "minimum_amount_text": "Official documentation identifies a 100,000 USD0 launch-phase direct-route minimum; current route-specific limits require ongoing verification.",
+      "fee_text": "Collateral-provider, swap, liquidity, bridge, and gas costs may apply.",
+      "settlement_time_text": "Route-, collateral-provider-, protocol-, and network-dependent.",
+      "jurisdiction_restrictions": ["Direct collateral-provider access can require KYC/KYB or allowlisting.", "Eligibility varies by collateral provider and jurisdiction."],
+      "redemption_url": "https://app.usual.money/",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_usd0_flow_batch_c", "sog_src_usd0_fact_sheet_batch_c"]
+    }
+  },
+  {
+    "id": "sog_st_usr",
+    "reserve_profile": {
+      "backing_types": ["crypto_collateral", "stablecoin_collateral", "tokenized_fund", "mixed"],
+      "summary": "Resolv documentation describes USR as overcollateralized by liquid assets allocated across delta-neutral crypto, DeFi dollar, and real-world-asset clusters, with RLP functioning as a junior first-loss or insurance layer. The March 2026 incident concerned unauthorized token minting rather than reported loss of the underlying collateral pool.",
+      "disclosure_status": "protocol_disclosure_with_incident_recovery",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_usr_overview_batch_c", "sog_src_usr_collateral_batch_c", "sog_src_usr_postmortem_batch_c"]
+    },
+    "redemption_profile": {
+      "status": "restricted",
+      "settlement_asset": "USDC or USDT through approved mint/burn request infrastructure, plus incident-recovery distributions where applicable",
+      "eligible_parties": "Whitelisted users of supported request-manager contracts and eligible holders under the post-incident recovery process.",
+      "retail_access": "restricted_protocol_access",
+      "institutional_access": "restricted_protocol_access",
+      "minimum_amount_text": "Contract-, whitelist-, recovery-process-, and transaction-dependent.",
+      "fee_text": "Oracle-price, protocol, liquidity, settlement, and gas costs may apply.",
+      "settlement_time_text": "Official documentation describes minting in approximately one to five blocks and normal burns within up to 24 hours; post-incident recovery timing is separate.",
+      "jurisdiction_restrictions": ["Mint and burn request-manager access requires whitelisting.", "Post-incident eligibility and process conditions apply."],
+      "redemption_url": "https://app.resolv.xyz/",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_usr_mint_redeem_batch_c", "sog_src_usr_postmortem_batch_c", "sog_src_usr_recovery_batch_c"]
+    }
+  }
+]

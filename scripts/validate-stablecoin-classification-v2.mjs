@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const dataDir = path.join(process.cwd(), 'data');
+const root = process.cwd();
 const failures = [];
+const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
 const lifecycleStatuses = new Set(['announced','active','restricted','suspended','winding_down','inactive','terminated','collapsed','migrated','rebranded','unknown']);
 const issuanceStatuses = new Set(['open','restricted','paused','terminated','protocol_based','unknown']);
 const pegKinds = new Set(['fiat','commodity','crypto_asset','index','floating','other','unknown']);
@@ -17,14 +18,20 @@ const yieldOrRebaseModes = new Set(['none','yield_bearing','rebasing','reward_ac
 const accrualTargets = new Set(['asset','wrapper','external_receipt','protocol_position','none','unknown']);
 const legacyCompatibility = {active:new Set(['active']),limited:new Set(['restricted']),impaired:new Set(['restricted','suspended']),discontinued:new Set(['winding_down','inactive','terminated']),failed:new Set(['collapsed']),rebranded:new Set(['rebranded']),migrated:new Set(['migrated']),unknown:new Set(['unknown'])};
 
-function readArray(file) {
+function read(relativePath) {
   try {
-    const value = JSON.parse(fs.readFileSync(path.join(dataDir, file), 'utf8'));
-    if (!Array.isArray(value)) failures.push(`${file}: expected a JSON array`);
+    const value = JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
+    if (!Array.isArray(value)) failures.push(`${relativePath}: expected a JSON array`);
     return Array.isArray(value) ? value : [];
-  } catch (error) { failures.push(`${file}: ${error.message}`); return []; }
+  } catch (error) {
+    failures.push(`${relativePath}: ${error.message}`);
+    return [];
+  }
 }
-function optionalString(row, field, value) { if (value !== undefined && value !== null && typeof value !== 'string') failures.push(`${row.id}: ${field} must be a string when present`); }
+const group = (name) => (baseline.data_groups?.[name] ?? []).flatMap(read);
+const optionalString = (row, field, value) => {
+  if (value !== undefined && value !== null && typeof value !== 'string') failures.push(`${row.id}: ${field} must be a string when present`);
+};
 function validateExtension(row) {
   if (row.asset_class !== undefined && !assetClasses.has(row.asset_class)) failures.push(`${row.id}: invalid asset_class ${row.asset_class}`);
   if (row.reference_target !== undefined && !referenceTargets.has(row.reference_target)) failures.push(`${row.id}: invalid reference_target ${row.reference_target}`);
@@ -35,7 +42,9 @@ function validateExtension(row) {
     if (!source || typeof source !== 'object' || Array.isArray(source)) failures.push(`${row.id}: valuation_source must be an object`);
     else {
       if (!valuationSourceTypes.has(source.source_type)) failures.push(`${row.id}: invalid valuation_source.source_type ${source.source_type}`);
-      optionalString(row, 'valuation_source.label', source.label); optionalString(row, 'valuation_source.url', source.url); optionalString(row, 'valuation_source.notes', source.notes);
+      optionalString(row, 'valuation_source.label', source.label);
+      optionalString(row, 'valuation_source.url', source.url);
+      optionalString(row, 'valuation_source.notes', source.notes);
     }
   }
   if (row.yield_or_rebase_profile !== undefined) {
@@ -44,14 +53,15 @@ function validateExtension(row) {
     else {
       if (!yieldOrRebaseModes.has(profile.mode)) failures.push(`${row.id}: invalid yield_or_rebase_profile.mode ${profile.mode}`);
       if (profile.accrual_target !== undefined && !accrualTargets.has(profile.accrual_target)) failures.push(`${row.id}: invalid yield_or_rebase_profile.accrual_target ${profile.accrual_target}`);
-      optionalString(row, 'yield_or_rebase_profile.rate_source', profile.rate_source); optionalString(row, 'yield_or_rebase_profile.notes', profile.notes);
+      optionalString(row, 'yield_or_rebase_profile.rate_source', profile.rate_source);
+      optionalString(row, 'yield_or_rebase_profile.notes', profile.notes);
     }
   }
 }
 
-const stablecoins = [...readArray('stablecoins.json'), ...readArray('stablecoins-extra.json'), ...readArray('stablecoins-batch-b.json')];
-const classifications = [...readArray('stablecoin-classification-v2.json'), ...readArray('stablecoin-classification-batch-a.json'), ...readArray('stablecoin-classification-batch-b.json')];
-const extensions = readArray('stablecoin-classification-extension-batch-a.json');
+const stablecoins = group('stablecoins');
+const classifications = group('classifications');
+const extensions = group('classification_extensions');
 const stablecoinById = new Map(stablecoins.map((row) => [row.id, row]));
 const classificationById = new Map();
 const extensionById = new Map();
@@ -73,7 +83,7 @@ for (const row of extensions) {
 for (const stablecoin of stablecoins) {
   const base = classificationById.get(stablecoin.id);
   if (!base) { failures.push(`missing classification for ${stablecoin.id}`); continue; }
-  const row = {...base, ...(extensionById.get(stablecoin.id) ?? {})};
+  const row = { ...base, ...(extensionById.get(stablecoin.id) ?? {}) };
   if (!lifecycleStatuses.has(row.lifecycle_status)) failures.push(`${row.id}: invalid lifecycle_status ${row.lifecycle_status}`);
   if (!issuanceStatuses.has(row.issuance_status)) failures.push(`${row.id}: invalid issuance_status ${row.issuance_status}`);
   if (!stabilizationMechanisms.has(row.stabilization_mechanism)) failures.push(`${row.id}: invalid stabilization_mechanism ${row.stabilization_mechanism}`);
@@ -90,6 +100,11 @@ for (const stablecoin of stablecoins) {
   const allowedLifecycle = legacyCompatibility[stablecoin.status];
   if (!allowedLifecycle || !allowedLifecycle.has(row.lifecycle_status)) failures.push(`${row.id}: legacy status ${stablecoin.status} conflicts with lifecycle_status ${row.lifecycle_status}`);
 }
+
 if (classificationById.size !== stablecoinById.size) failures.push(`classification count ${classificationById.size} does not match stablecoin count ${stablecoinById.size}`);
-if (failures.length) { console.error('Stablecoin Registry v2 classification validation failed:'); failures.forEach((failure) => console.error(`- ${failure}`)); process.exit(1); }
+if (failures.length) {
+  console.error('Stablecoin Registry v2 classification validation failed:');
+  failures.forEach((failure) => console.error(`- ${failure}`));
+  process.exit(1);
+}
 console.log(`Stablecoin Registry v2 classification validation passed: ${classifications.length} classifications for ${stablecoins.length} stablecoins, ${extensions.length} extension overlays.`);

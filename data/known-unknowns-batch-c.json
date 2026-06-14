@@ -1,0 +1,82 @@
+[
+  {
+    "id": "sog_unk_gho_current_facilitator_inventory_batch_c",
+    "stablecoin_id": "sog_st_gho",
+    "issuer_id": "sog_issuer_aave",
+    "topic": "current_facilitator_inventory_and_bucket_capacity",
+    "description": "The complete current list of GHO facilitators, bucket capacities, supported backing routes, and active remote deployments has not yet been normalized into a dated SOG snapshot.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not infer current facilitator capacity from the 2023 launch proposal alone."
+  },
+  {
+    "id": "sog_unk_gho_ethereum_contract_batch_c",
+    "stablecoin_id": "sog_st_gho",
+    "issuer_id": "sog_issuer_aave",
+    "topic": "canonical_ethereum_contract_address",
+    "description": "The canonical GHO Ethereum token address has not yet been extracted and pinned from the maintained Aave address-book source in this record.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Leave the deployment contract address null until the maintained address-book value is read directly."
+  },
+  {
+    "id": "sog_unk_bold_launch_sequence_batch_c",
+    "stablecoin_id": "sog_st_bold",
+    "issuer_id": "sog_issuer_liquity",
+    "topic": "v2_initial_deployment_and_relaunch_sequence",
+    "description": "Liquity V2 experienced deployment and relaunch work before the documented May 19, 2025 live phase. A complete event sequence with exact contract transitions remains to be normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "The current canonical BOLD identity must not be split without source-backed contract or migration evidence."
+  },
+  {
+    "id": "sog_unk_bold_remote_representations_batch_c",
+    "stablecoin_id": "sog_st_bold",
+    "issuer_id": "sog_issuer_liquity",
+    "topic": "cross_chain_representations",
+    "description": "Official documentation describes BOLD as Ethereum-native and discusses future or external bridge support. Current non-Ethereum representations have not been accepted as canonical deployments in SOG.",
+    "severity": "low",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not treat third-party pools, wrappers, or bridge plans as canonical issuance."
+  },
+  {
+    "id": "sog_unk_usd0_day_level_launch_date_batch_c",
+    "stablecoin_id": "sog_st_usd0",
+    "issuer_id": "sog_issuer_usual",
+    "topic": "day_level_launch_date",
+    "description": "Official materials establish USD0's 2024 launch and growth phase but a single durable day-level canonical launch date has not yet been fixed.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Keep launch_date null rather than inventing a date from secondary listings."
+  },
+  {
+    "id": "sog_unk_usd0_legal_role_map_batch_c",
+    "stablecoin_id": "sog_st_usd0",
+    "issuer_id": "sog_issuer_usual",
+    "topic": "legal_issuer_and_collateral_provider_roles",
+    "description": "The current legal issuer, DAO, collateral-provider, custodian, insurance-fund, and service-provider relationships have not yet been separated into a complete organization-role map.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Usual DAO governance must not be treated as proof that every collateral or legal function is performed by the same entity."
+  },
+  {
+    "id": "sog_unk_usr_final_recovery_state_batch_c",
+    "stablecoin_id": "sog_st_usr",
+    "issuer_id": "sog_issuer_resolv",
+    "topic": "post_incident_final_recovery_state",
+    "description": "The final outcome of the March 2026 incident, including complete invalidation, compensation, protocol restart, and long-term issuance design, remains unresolved.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Any restart, migration, replacement token, compensation completion, or permanent wind-down must be recorded as a later event."
+  },
+  {
+    "id": "sog_unk_usr_original_launch_and_multichain_batch_c",
+    "stablecoin_id": "sog_st_usr",
+    "issuer_id": "sog_issuer_resolv",
+    "topic": "original_launch_date_and_multichain_inventory",
+    "description": "USR's original day-level launch date and a complete verified list of canonical or bridged deployments outside Ethereum have not yet been fixed.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Only the official Ethereum token address is included in Batch C."
+  }
+]
