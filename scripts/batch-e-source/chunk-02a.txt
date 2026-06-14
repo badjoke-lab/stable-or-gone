@@ -1,0 +1,6 @@
+ continuous cUSD/USDm asset identity.' },
+  { id: 'sog_rel_alusd_alchemix_operator', stablecoin_id: 'sog_st_alusd', organization_id: 'sog_issuer_alchemix', role: 'protocol_operator', start_date: '2021-02-22', end_date: null, status: 'active', evidence_ids: ['sog_src_alusd_intro_batch_e', 'sog_src_alusd_current_docs_batch_e'], notes: 'Alchemix protocol and DAO govern the synthetic-debt system; this does not imply a conventional legal issuer or bank-account claim.' }
+];
+
+const classifications = [
+  { id: 'sog_st_eurs', lifecycle_status: 'active', issuance_status: 'restricted', peg_reference: { kind: 'fiat', asset: 'EUR', target_value: 1, notes: 'EURS targets one euro and is issued at par against safeguarded euro funds.' }, backing_types: ['cash', 'bank_deposits'], stabilization_mechanism: 'issuer_redemption', governance_model: 'centralized', asset_class: 'stablecoin', reference_target: 'fiat', redemption_or_exit_model: 'issuer_redemption', valuation_source: { source_type: 'issuer', label
