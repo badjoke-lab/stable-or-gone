@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "stable-or-gone",
+  "snapshots": [
+    {
+      "snapshot_date": "2026-06-14",
+      "source_baseline": "sog_registry_v2_post_batch_e_2026_06_14",
+      "record_counts": {
+        "stablecoins": 40,
+        "organizations": 32,
+        "relationships": 40,
+        "events": 48,
+        "evidence": 182,
+        "reserve_reports": 42,
+        "known_unknowns": 93,
+        "regulatory_notes": 9,
+        "deployments": 67,
+        "legal_profiles": 40,
+        "stable_asset_relationships": 1,
+        "reserve_components": 55,
+        "income_profiles": 40
+      }
+    }
+  ]
+}
