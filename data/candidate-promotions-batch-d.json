@@ -2,25 +2,21 @@
   {
     "candidate_id": "sog_cand_000033",
     "status": "promoted",
-    "name": "Single-Collateral Dai",
-    "symbol": "SAI",
-    "notes": "Promoted in Batch D as the migrated ETH-only predecessor to Multi-Collateral Dai, with contract identity, migration event, scoped evidence, and residual-state known unknowns."
+    "notes": "Batch D reviewed promotion: migrated SAI record with contract identity, migration evidence, and unresolved residual state documented separately."
   },
   {
     "candidate_id": "sog_cand_000034",
     "status": "promoted",
-    "notes": "Promoted in Batch D as an inactive historical issuer stablecoin. Final issuer, reserve, liability, and redemption outcomes remain explicit known unknowns."
+    "notes": "Batch D reviewed promotion: inactive HUSD record with final issuer, reserve, liability, and redemption outcomes retained as known unknowns."
   },
   {
     "candidate_id": "sog_cand_000035",
     "status": "promoted",
-    "name": "IRON V1",
-    "aliases": ["IRON", "Iron Stablecoin", "Iron Finance IRON", "IRON V1"],
-    "notes": "Promoted in Batch D as the collapsed V1 partially collateralized stablecoin, with Polygon identity, June 2021 bank-run event, official post-mortem, and independent mechanism analysis."
+    "notes": "Batch D reviewed promotion: collapsed IRON record with Polygon identity, June 2021 event, official post-mortem, and independent mechanism analysis."
   },
   {
     "candidate_id": "sog_cand_000036",
     "status": "promoted",
-    "notes": "Promoted in Batch D as a limited legacy basket-backed meta-asset with Ethereum contract identity, withdrawal path, adjacent imUSD boundary, and current-operation known unknowns."
+    "notes": "Batch D reviewed promotion: limited legacy mUSD record with Ethereum identity, withdrawal path, imUSD boundary, and current-operation unknowns."
   }
 ]
