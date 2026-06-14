@@ -22,10 +22,14 @@ import legalProfilesUsdm from '../../../data/legal-profiles-v3-usdm.json';
 import legalProfilesAlusd from '../../../data/legal-profiles-v3-alusd.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
+import { getDeployments } from './registry';
+import type { DeploymentRow } from './registry';
 import type {
   LegalProfileV3,
   StableAssetRelationshipV3,
-  ReserveComponentV3
+  ReserveComponentV3,
+  DeploymentV3Fields,
+  DeploymentCanonicality
 } from '../schema/registry-v3';
 
 const legalProfiles = [
@@ -54,6 +58,10 @@ const legalProfiles = [
 ] as LegalProfileV3[];
 const stableAssetRelationships = stableAssetRelationshipsData as StableAssetRelationshipV3[];
 const reserveComponents = reserveComponentsData as ReserveComponentV3[];
+
+export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
+  canonicality: DeploymentCanonicality;
+};
 
 export function getLegalProfiles(): LegalProfileV3[] {
   return legalProfiles.map((row) => ({
@@ -92,4 +100,16 @@ export function getReserveComponents(): ReserveComponentV3[] {
 
 export function getReserveComponentsFor(stablecoinId: string): ReserveComponentV3[] {
   return getReserveComponents().filter((row) => row.stablecoin_id === stablecoinId);
+}
+
+export function getDeploymentsV3(): DeploymentV3View[] {
+  return getDeployments().map((row) => {
+    const deployment = row as DeploymentRow & DeploymentV3Fields;
+    return {
+      ...deployment,
+      canonicality: deployment.canonicality ?? 'unknown',
+      control_event_ids: [...(deployment.control_event_ids ?? [])],
+      evidence_ids: [...(deployment.evidence_ids ?? [])]
+    };
+  });
 }
