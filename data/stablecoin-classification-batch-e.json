@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_eurs",
+    "lifecycle_status": "active",
+    "issuance_status": "open",
+    "peg_reference": {"kind": "fiat", "asset": "EUR", "target_value": 1, "notes": "EURS targets one euro through reserve backing and issuer redemption."},
+    "backing_types": ["cash", "bank_deposits"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "valuation_source": {"source_type": "issuer", "label": "STASIS reserve and redemption reporting", "url": "https://stasis.net/transparency"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "EURS itself does not rebase or accrue protocol yield."},
+    "classification_notes": "Fiat-backed euro stablecoin with issuer-controlled minting and redemption. Third-party bridged representations are not treated as issuer-native deployments without evidence."
+  },
+  {
+    "id": "sog_st_eurt",
+    "lifecycle_status": "restricted",
+    "issuance_status": "unknown",
+    "peg_reference": {"kind": "fiat", "asset": "EUR", "target_value": 1, "notes": "EURT historically targeted one euro through Tether reserve and redemption arrangements."},
+    "backing_types": ["cash", "bank_deposits", "government_securities", "mixed", "unknown"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "valuation_source": {"source_type": "issuer", "label": "Tether supported-protocol and transparency materials", "url": "https://tether.to/en/supported-protocols/"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "EURT itself does not rebase or distribute yield."},
+    "classification_notes": "Conservative restricted classification. Current Ethereum contract identity is verified, while asset-specific issuance and direct-redemption status remain unresolved."
+  },
+  {
+    "id": "sog_st_usdm",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "USDm tracks the U.S. dollar through reserve backing, oracle-guided pools, protocol mint and burn operations, and market arbitrage."},
+    "backing_types": ["stablecoin_collateral", "mixed"],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "oracle", "label": "Mento V3 oracle adapters, pools, and Reserve accounting", "url": "https://docs.mento.org/mento-v3/build/integration/integrate-stables"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "USDm itself does not rebase. Liquidity-provider and incentive returns belong to separate positions."},
+    "classification_notes": "Reserve-backed Mento stable asset. The cUSD and USDm naming transition is recorded separately from the current classification."
+  },
+  {
+    "id": "sog_st_alusd",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "alUSD uses overcollateralized synthetic debt, self-repaying positions, Transmuter conversion, AMO liquidity, and market arbitrage."},
+    "backing_types": ["stablecoin_collateral", "tokenized_fund", "mixed"],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "protocol", "label": "Alchemix Alchemist, Transmuter, oracle, and liquidity systems", "url": "https://docs.alchemix.fi/alchemix-ecosystem/transmuter"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "alUSD does not rebase. Yield accrues in collateral positions and is used to repay debt or fund conversion flows."},
+    "classification_notes": "Synthetic debt stable asset. Yield-bearing collateral tokens and bridged representations remain distinct from canonical alUSD."
+  }
+]
