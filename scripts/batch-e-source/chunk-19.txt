@@ -1,0 +1,18 @@
+dateMaster.map((row) => JSON.stringify(row)).join(',\n  ')}\n]\n`);
+
+let baseline = readText('docs/migration/registry-v2-baseline.json');
+baseline = replaceOnce(baseline, 'sog_registry_v2_post_batch_d_2026_06_14', 'sog_registry_v2_post_batch_e_2026_06_14');
+baseline = replaceOnce(baseline, '"source_commit": "record-growth-batch-d"', '"source_commit": "record-growth-batch-e"');
+for (const [from, to] of [['"stablecoins": 36','"stablecoins": 40'],['"organizations": 29','"organizations": 32'],['"relationships": 36','"relationships": 40'],['"classifications": 36','"classifications": 40'],['"profiles": 36','"profiles": 40'],['"events": 44','"events": 48'],['"event_details": 44','"event_details": 48'],['"evidence": 170','"evidence": 182'],['"evidence_relations": 170','"evidence_relations": 182'],['"known_unknowns": 85','"known_unknowns": 93'],['"deployments": 56','"deployments": 67']]) baseline = replaceOnce(baseline, from, to);
+for (const [d, e] of [['stablecoins','stablecoins'],['organizations','organizations'],['relationships','relationships'],['stablecoin-classification','classifications'],['stablecoin-profiles','profiles']]) {
+  const oldFile = `data/${d}-batch-d.json`;
+  const newFile = `data/${d}-batch-e.json`;
+  baseline = replaceOnce(baseline, `${oldFile}"]`, `${oldFile}", "${newFile}"]`, `${e} data group`);
+}
+for (const d of ['events','event-details','evidence','known-unknowns','deployments']) {
+  const oldFile = `data/${d}-batch-d.json`;
+  const newFile = `data/${d}-batch-e.json`;
+  const nextFile = d === 'events' ? 'data/events-issuer-control-2026.json' : d === 'event-details' ? 'data/event-details-issuer-control-2026.json' : d === 'evidence' ? 'data/evidence-issuer-control-2026.json' : d === 'known-unknowns' ? 'data/known-unknowns-issuer-control-2026.json' : 'data/deployments-issuer-control-2026.json';
+  baseline = replaceOnce(baseline, `${oldFile}", "${nextFile}"]`, `${oldFile}", "${newFile}", "${nextFile}"]`, `${d} data group`);
+}
+baseline = replaceOnce(base
