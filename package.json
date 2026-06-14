@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:baseline && npm run validate:candidates && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && npm run validate:evidence-relations-v2 && npm run validate:v3 && npm run validate:deployments-v3 && npm run validate:final && npm run validate:finalization && astro check && astro build && npm run verify:deployment && npm run verify:public",
+    "build": "npm run validate:baseline && npm run validate:candidates && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && npm run validate:evidence-relations-v2 && npm run validate:v3 && npm run validate:deployments-v3 && npm run validate:income-v3 && npm run validate:final && npm run validate:finalization && astro check && astro build && npm run verify:deployment && npm run verify:public",
     "build:site": "astro build",
     "preview": "astro preview",
     "check": "astro check",
@@ -19,6 +19,7 @@
     "validate:evidence-relations-v2": "node scripts/validate-evidence-relations-v2.mjs",
     "validate:v3": "node scripts/validate-registry-v3-foundation.mjs",
     "validate:deployments-v3": "node scripts/validate-registry-v3-deployments.mjs",
+    "validate:income-v3": "node scripts/validate-registry-v3-income-profiles.mjs",
     "validate:final": "node scripts/validate-registry-v2-final.mjs",
     "validate:finalization": "node scripts/validate-batch-finalization.mjs",
     "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
