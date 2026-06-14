@@ -1,0 +1,8 @@
+{
+  "schema_version": "3.0-view",
+  "status": "additive",
+  "source": "registry-v2",
+  "default": "unknown",
+  "minimum_count": 67,
+  "validator": "scripts/validate-registry-v3-chain-view.mjs"
+}
