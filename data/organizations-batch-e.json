@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_stasis",
+    "slug": "stasis",
+    "name": "STASIS",
+    "organization_type": "regulated_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Malta",
+    "official_url": "https://stasis.net/",
+    "summary": "Organization behind the EURS euro-backed stablecoin and its reserve, redemption, and settlement infrastructure.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Legal entity and service-provider roles may require further relationship separation."
+  },
+  {
+    "id": "sog_issuer_mento",
+    "slug": "mento-protocol",
+    "name": "Mento Protocol",
+    "organization_type": "dao_and_protocol_ecosystem",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://mento.org/",
+    "summary": "Protocol ecosystem operating fiat-referenced stable assets, reserve infrastructure, liquidity pools, oracles, and governance systems.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Mento governance, reserve, bridge, and chain-specific service roles should be separated when evidence supports them."
+  },
+  {
+    "id": "sog_issuer_alchemix",
+    "slug": "alchemix",
+    "name": "Alchemix",
+    "organization_type": "dao_and_protocol_ecosystem",
+    "legacy_issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "official_url": "https://alchemix.fi/",
+    "summary": "Protocol and DAO ecosystem behind alUSD, Alchemist vaults, Transmuter conversion, and related liquidity systems.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "DAO, protocol, frontend, treasury, and service-provider roles remain distinct evidence topics."
+  }
+]
