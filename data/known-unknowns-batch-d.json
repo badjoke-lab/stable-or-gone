@@ -1,0 +1,82 @@
+[
+  {
+    "id": "sog_unk_sai_remaining_migration_state_batch_d",
+    "stablecoin_id": "sog_st_sai",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "remaining_migration_and_settlement_state",
+    "description": "The exact amount of SAI still outstanding and the current usability of every migration or shutdown-settlement contract were not fully verified in this review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not treat historical migration documentation as proof that every current interface remains operational."
+  },
+  {
+    "id": "sog_unk_sai_final_supply_batch_d",
+    "stablecoin_id": "sog_st_sai",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "final_supply_and_residual_holders",
+    "description": "Residual SAI supply, holder distribution, and final settlement outcomes require direct on-chain analysis.",
+    "severity": "low",
+    "last_checked_at": "2026-06-14",
+    "notes": "Historical token existence does not imply active issuance."
+  },
+  {
+    "id": "sog_unk_husd_final_issuer_state_batch_d",
+    "stablecoin_id": "sog_st_husd",
+    "issuer_id": "sog_issuer_stable_universal",
+    "topic": "final_issuer_and_legal_entity_state",
+    "description": "The final legal status of Stable Universal and the complete division of responsibilities among issuer, custodian, and exchange-distribution partners remain incompletely documented.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not infer current legal responsibility from historical marketing pages."
+  },
+  {
+    "id": "sog_unk_husd_reserve_redemption_outcome_batch_d",
+    "stablecoin_id": "sog_st_husd",
+    "issuer_id": "sog_issuer_stable_universal",
+    "topic": "reserve_and_redemption_outcome",
+    "description": "Current reserves, remaining token liabilities, direct-redemption availability, and the final disposition of HUSD backing could not be verified from durable primary sources.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "This is why HUSD is classified inactive or discontinued rather than collapsed or insolvent."
+  },
+  {
+    "id": "sog_unk_iron_bnb_identity_batch_d",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "topic": "bnb_chain_identity_and_outcome",
+    "description": "The BNB Chain IRON and STEEL deployment had separate market behavior from the Polygon IRON and TITAN system. Its complete contract identity and final lifecycle require separate verification.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not copy Polygon collapse metrics onto the BNB Chain deployment."
+  },
+  {
+    "id": "sog_unk_iron_residual_contracts_batch_d",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "topic": "residual_contract_and_liquidity_state",
+    "description": "Residual balances, pools, redemption functions, and later reuse of Iron Finance contracts were not exhaustively reviewed.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Residual contract activity does not constitute recovery of the original stablecoin."
+  },
+  {
+    "id": "sog_unk_musd_current_mint_state_batch_d",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "topic": "current_mint_and_redeem_state",
+    "description": "The current availability of normal mUSD minting, basket redemption, and every legacy frontend route has not been fully verified against live contracts.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "A withdrawal interface supports limited exit availability but does not prove open issuance."
+  },
+  {
+    "id": "sog_unk_musd_basket_and_crosschain_state_batch_d",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "topic": "residual_basket_and_crosschain_state",
+    "description": "Current Ethereum and Polygon basket composition, feeder-pool state, liquidity depth, and cross-chain support require direct contract-level review.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Historical documentation is not treated as a current reserve report."
+  }
+]
