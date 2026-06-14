@@ -59,8 +59,32 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Validate and build
-        run: npm run build
+      - name: Validate baseline
+        run: npm run validate:baseline
+      - name: Validate candidates
+        run: npm run validate:candidates
+      - name: Validate data
+        run: npm run validate:data
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate classifications
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate events
+        run: npm run validate:events-v2
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate final state
+        run: npm run validate:final
+      - name: Astro check
+        run: npm run check
+      - name: Build site
+        run: npm run build:site
+      - name: Verify deployment
+        run: npm run verify:deployment
+      - name: Verify public layer
+        run: npm run verify:public
 
       - name: Commit clean generated implementation
         run: |
