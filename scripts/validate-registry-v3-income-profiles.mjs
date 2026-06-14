@@ -115,8 +115,8 @@ const packageText = readText('package.json');
 if (!packageText.includes('"validate:income-v3"')) fail('package.json: missing validate:income-v3 script');
 if (!packageText.includes('npm run validate:income-v3')) fail('package.json: build chain does not include validate:income-v3');
 
-const workflowText = readText('.github/workflows/registry-v3-income-profiles.yml');
-if (!workflowText.includes(manifest.validator)) fail('.github/workflows/registry-v3-income-profiles.yml: validator entry point is missing');
+const workflowText = readText('.github/workflows/registry-v3-income.yml');
+if (!workflowText.includes(manifest.validator)) fail('.github/workflows/registry-v3-income.yml: validator entry point is missing');
 
 if (failures.length) {
   console.error('Registry v3 income profile validation failed:');
