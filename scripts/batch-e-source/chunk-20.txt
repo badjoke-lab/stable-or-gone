@@ -1,0 +1,14 @@
+line, '"data/evidence-batch-d.json", "data/evidence-issuer-control-2026.json"]', '"data/evidence-batch-d.json", "data/evidence-batch-e.json", "data/evidence-issuer-control-2026.json"]', 'evidence relations group');
+baseline = replaceOnce(baseline, '{"id":"sog_st_musd","slug":"musd"}\n  ],', '{"id":"sog_st_musd","slug":"musd"},\n    {"id":"sog_st_eurs","slug":"eurs"}, {"id":"sog_st_eurt","slug":"eurt"},\n    {"id":"sog_st_usdm","slug":"mento-dollar"}, {"id":"sog_st_alusd","slug":"alusd"}\n  ],');
+baseline = replaceOnce(baseline, '{"id":"sog_issuer_mstable","slug":"mstable"}\n  ]', '{"id":"sog_issuer_mstable","slug":"mstable"},\n    {"id":"sog_issuer_stasis","slug":"stasis"}, {"id":"sog_issuer_mento","slug":"mento-protocol"},\n    {"id":"sog_issuer_alchemix","slug":"alchemix"}\n  ]');
+writeText('docs/migration/registry-v2-baseline.json', baseline);
+
+let registry = readText('src/lib/data/registry.ts');
+for (const [anchor, line] of [
+  ["import stablecoinsBatchDData from '../../../data/stablecoins-batch-d.json';", "import stablecoinsBatchEData from '../../../data/stablecoins-batch-e.json';"],
+  ["import stablecoinClassificationBatchDData from '../../../data/stablecoin-classification-batch-d.json';", "import stablecoinClassificationBatchEData from '../../../data/stablecoin-classification-batch-e.json';"],
+  ["import organizationsBatchDData from '../../../data/organizations-batch-d.json';", "import organizationsBatchEData from '../../../data/organizations-batch-e.json';"],
+  ["import relationshipsBatchDData from '../../../data/relationships-batch-d.json';", "import relationshipsBatchEData from '../../../data/relationships-batch-e.json';"],
+  ["import eventsBatchDData from '../../../data/events-batch-d.json';", "import eventsBatchEData from '../../../data/events-batch-e.json';"],
+  ["import eventDetailsBatchDData from '../../../data/event-details-batch-d.json';", "import eventDetailsBatchEData from '../../../data/event-details-batch-e.json';"],
+  ["import evidenceBatchDDat
