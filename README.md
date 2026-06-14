@@ -1,32 +1,80 @@
 # Stable or Gone
 
-Stable or Gone (SOG) is a public stablecoin history registry focused on stablecoin lifecycles, issuers and organizations, reserve disclosures, redemption access, depeg events, wind-downs, migrations, failures, and source-backed evidence.
+Stable or Gone (SOG) is a public historical registry for stablecoins and closely related stable-value assets. It records how assets are issued, backed, stabilized, redeemed, governed, migrated, restricted, wound down, or collapsed, together with the organizations, deployments, events, and evidence behind each claim.
 
 Public site: https://sog.badjoke-lab.com/
 
-SOG is not a live price dashboard, not a trading terminal, not a safety ranking, and not investment advice.
+SOG is not a live price dashboard, trading terminal, safety ranking, market-cap ranking, or source of investment advice.
+
+## Current registry checkpoint
+
+The protected canonical checkpoint contains:
+
+```text
+40 stable assets
+32 organizations
+40 stablecoin-organization relationships
+40 classification records
+40 reserve/redemption profiles
+48 events
+48 Event v2 detail records
+182 evidence records
+182 evidence relation projections
+42 reserve-report references
+93 known unknowns
+9 regulatory notes
+67 deployments
+```
+
+The 28 → 40 growth phase is complete. The batch finalization guard protects this checkpoint before the next taxonomy, schema, statistics, and record-growth phase.
 
 ## What the registry tracks
 
-Stablecoins should not be understood only by current price or market cap. SOG records:
+SOG records:
 
-- stablecoin identity, symbol, peg, lifecycle status, and issuance status
-- issuer, organization, protocol, network, and reserve-organization relationships
-- launches, depegs, regulatory actions, migrations, wind-downs, failures, and other material events
-- reserve disclosure state and historical reserve-report references
-- redemption access, eligibility, settlement asset, and restrictions when available
-- source-backed evidence for claims
-- known unknowns and unresolved record questions
+- canonical stable-asset identity, aliases, symbol, reference target, lifecycle, and issuance state
+- asset class, backing model, stabilization mechanism, governance model, and exit or redemption model
+- issuers, protocols, governance bodies, custodians, reserve managers, redemption agents, and other organizations
+- reserve disclosure, reserve-report history, redemption access, eligibility, settlement terms, and restrictions
+- launches, depegs, regulatory actions, reserve changes, redemption changes, migrations, wind-downs, failures, issuer-control actions, and other material events
+- chain deployments, contract identities, control capabilities, and deployment status
+- source-backed evidence, claim scopes, known unknowns, and unresolved questions
 
-## What SOG does not do
+## Scope
+
+The canonical registry may include:
+
+- fiat-backed stablecoins
+- crypto-collateralized and overcollateralized stablecoins
+- algorithmic, partially collateralized, and hybrid designs
+- synthetic and delta-neutral stable assets
+- RWA- and government-security-backed stablecoins
+- commodity-referenced stable-value assets
+- basket-, index-, CPI-, and floating-target assets
+- independent yield-bearing or rebasing stable assets
+- historical failed, terminated, migrated, rebranded, and inactive assets
+
+Tokenized deposits, fund shares, yield receipts, reserve assets, and other adjacent instruments are included only when their relevance to stable-value systems is clear and their legal and economic nature can be classified separately.
+
+Simple bridged versions, wrappers, LP tokens, vault shares, and ordinary yield wrappers are not separate canonical assets by default. They are represented through deployment or stable-asset relationship records when appropriate.
+
+See:
+
+```text
+docs/stable-asset-scope.md
+docs/classification-spec.md
+docs/data-model-v3-spec.md
+```
+
+## What SOG does not provide
 
 SOG does not provide:
 
 - stablecoin safety scores
 - buy, sell, hold, avoid, or redemption recommendations
-- yield comparison
+- yield rankings
 - live depeg alerts
-- market cap ranking
+- live price or market-cap rankings
 - issuer, exchange, wallet, or account support
 - investment, legal, financial, tax, or regulatory advice
 
@@ -34,36 +82,46 @@ SOG does not provide:
 
 The registry is built from repository-managed JSON data and static Astro pages.
 
-Core data groups include:
+Current canonical data groups include:
 
-- stablecoin records
+- stable-asset records
 - organization records
 - stablecoin-organization relationships
-- event records
-- evidence records
-- reserve report references
+- classification records
+- reserve and redemption profiles
+- event records and Event v2 details
+- evidence records and evidence relations
+- reserve-report references
 - known unknowns
 - regulatory notes
 - deployment records
-- Registry v2 classification records
-- Registry v2 reserve and redemption profiles
 
-Current Registry v2 migration status is tracked in `docs/roadmap.md` and `docs/migration/`.
+Registry v3 is a planned additive extension. It will add legal profiles, stable-asset relationships, reserve components, deployment canonicality, expanded yield mechanics, and additional event detail types without breaking current public URLs.
 
-## Local development
+See:
+
+```text
+docs/roadmap.md
+docs/migration/registry-v3-plan.md
+docs/stats-spec.md
+docs/record-growth-40-to-70.md
+```
+
+## Validation and build
 
 ```bash
 npm install
 npm run dev
-```
-
-Validate and build:
-
-```bash
 npm run build
 ```
 
-The build chain runs baseline validation, data validation, Registry v2 compatibility validation, classification validation, profile validation, Astro check, and Astro build.
+The build chain runs baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, final-state, and batch-finalization validation before Astro check, site build, deployment verification, and public-layer verification.
+
+The dedicated finalization guard can also be run directly:
+
+```bash
+npm run validate:finalization
+```
 
 ## Reporting and corrections
 
@@ -95,4 +153,4 @@ Registry data and written record content are released under Creative Commons Att
 
 ## Disclaimer
 
-Stable or Gone is a historical and reference-oriented registry. Information may be incomplete, outdated, disputed, or dependent on source interpretation. Always check current issuer terms, exchange notices, regulator publications, and market data before making decisions.
+Stable or Gone is a historical and reference-oriented registry. Information may be incomplete, outdated, disputed, or dependent on source interpretation. Always check current issuer terms, protocol documentation, regulator publications, and market data before making decisions.
