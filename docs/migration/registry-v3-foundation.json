@@ -3,12 +3,35 @@
   "status": "additive",
   "base_registry": "docs/migration/registry-v2-baseline.json",
   "data_groups": {
-    "legal_profiles": ["data/legal-profiles-v3.json"],
+    "legal_profiles": [
+      "data/legal-profiles-v3.json",
+      "data/legal-profiles-v3-batch-b.json",
+      "data/legal-profiles-v3-batch-c1.json",
+      "data/legal-profiles-v3-batch-c2.json",
+      "data/legal-profiles-v3-batch-d1.json",
+      "data/legal-profiles-v3-batch-d2a.json",
+      "data/legal-profiles-v3-batch-e1.json",
+      "data/legal-profiles-v3-batch-e2.json",
+      "data/legal-profiles-v3-batch-e3.json",
+      "data/legal-profiles-v3-batch-f1.json",
+      "data/legal-profiles-v3-gho.json",
+      "data/legal-profiles-v3-bold.json",
+      "data/legal-profiles-v3-usd0.json",
+      "data/legal-profiles-v3-usr.json",
+      "data/legal-profiles-v3-sai.json",
+      "data/legal-profiles-v3-husd.json",
+      "data/legal-profiles-v3-iron.json",
+      "data/legal-profiles-v3-musd.json",
+      "data/legal-profiles-v3-eurs.json",
+      "data/legal-profiles-v3-eurt.json",
+      "data/legal-profiles-v3-usdm.json",
+      "data/legal-profiles-v3-alusd.json"
+    ],
     "stable_asset_relationships": ["data/stable-asset-relationships-v3.json"],
     "reserve_components": ["data/reserve-components-v3.json"]
   },
   "minimum_counts": {
-    "legal_profiles": 0,
+    "legal_profiles": 40,
     "stable_asset_relationships": 0,
     "reserve_components": 0
   },

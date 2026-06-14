@@ -1,1 +1,7 @@
-[]
+[
+  {"id":"sog_st_usdt","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_usdc","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_dai","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_ust","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_busd","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]}
+]
