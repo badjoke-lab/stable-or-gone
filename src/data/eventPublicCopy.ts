@@ -85,5 +85,21 @@ export const eventPublicCopy: Record<string, { title?: string; description: stri
   sog_ev_susd_synthetix_lifecycle_context: {
     title: 'sUSD across Synthetix V2 and V3',
     description: 'sUSD has served as a synthetic dollar within Synthetix, with its role and backing mechanics changing as the protocol moved from V2 toward V3.'
+  },
+  sog_ev_gho_2023_07_launch: {
+    title: 'Aave DAO launches GHO on Ethereum',
+    description: 'Aave governance launched GHO on Ethereum with the Aave V3 Ethereum Pool and FlashMinter as the initial facilitators. Later facilitators, stability modules, and canonical bridges extend the system without changing the canonical GHO identity.'
+  },
+  sog_ev_bold_2025_05_live: {
+    title: 'Liquity V2 brings BOLD live',
+    description: 'Liquity V2 introduced BOLD as an Ethereum-native stablecoin backed by WETH, wstETH, and rETH branches, with borrower-set interest rates and direct protocol redemption.'
+  },
+  sog_ev_usd0_2024_launch_phase: {
+    title: 'Usual introduces the RWA-backed USD0 stablecoin',
+    description: 'Usual introduced USD0 as a stablecoin collateralized by short-duration tokenized sovereign assets, with direct primary-market and indirect protocol or market issuance and redemption paths.'
+  },
+  sog_ev_usr_2026_03_unauthorized_mint: {
+    title: 'Unauthorized USR minting incident restricts Resolv operations',
+    description: 'Resolv reported unauthorized USR minting on 22 March 2026, paused most operations, and began containment and recovery. The protocol reported that the collateral pool remained intact; the final recovery and restart state remains unresolved.'
   }
 };
