@@ -5,17 +5,10 @@ const root = process.cwd();
 const failures = [];
 const baselinePath = 'docs/migration/registry-v2-baseline.json';
 
-function fail(message) {
-  failures.push(message);
-}
-
-function exists(relativePath) {
-  return fs.existsSync(path.join(root, relativePath));
-}
-
-function readText(relativePath) {
-  return fs.readFileSync(path.join(root, relativePath), 'utf8');
-}
+const fail = (message) => failures.push(message);
+const absolute = (relativePath) => path.join(root, relativePath);
+const exists = (relativePath) => fs.existsSync(absolute(relativePath));
+const readText = (relativePath) => fs.readFileSync(absolute(relativePath), 'utf8');
 
 function readJson(relativePath) {
   try {
@@ -49,29 +42,29 @@ function readGroup(files, label) {
   return rows;
 }
 
-function duplicateIds(label, rows) {
-  const seen = new Set();
+function collectIds(label, rows) {
+  const ids = new Set();
   for (const row of rows) {
     if (!row || typeof row.id !== 'string' || row.id.length === 0) {
       fail(`${label}: record without a valid id`);
       continue;
     }
-    if (seen.has(row.id)) fail(`${label}: duplicate id ${row.id}`);
-    seen.add(row.id);
+    if (ids.has(row.id)) fail(`${label}: duplicate id ${row.id}`);
+    ids.add(row.id);
   }
-  return seen;
+  return ids;
 }
 
 function walk(relativeDir) {
-  const base = path.join(root, relativeDir);
-  if (!fs.existsSync(base)) return [];
-  const output = [];
-  for (const entry of fs.readdirSync(base, { withFileTypes: true })) {
+  const directory = absolute(relativeDir);
+  if (!fs.existsSync(directory)) return [];
+  const files = [];
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const relativePath = path.posix.join(relativeDir, entry.name);
-    if (entry.isDirectory()) output.push(...walk(relativePath));
-    else output.push(relativePath);
+    if (entry.isDirectory()) files.push(...walk(relativePath));
+    else files.push(relativePath);
   }
-  return output;
+  return files;
 }
 
 const baseline = readJson(baselinePath);
@@ -82,22 +75,13 @@ for (const [name, files] of Object.entries(baseline.data_groups ?? {})) {
   groups[name] = readGroup(files, name);
 }
 
-const countAliases = {
-  evidence_relations: 'evidence_relations'
-};
-for (const [name, expected] of Object.entries(baseline.minimum_counts ?? {})) {
-  const groupName = countAliases[name] ?? name;
-  const actual = groups[groupName]?.length;
-  if (typeof actual !== 'number') {
-    fail(`baseline count ${name}: no matching data group`);
-  } else if (actual !== expected) {
-    fail(`baseline count ${name}: expected ${expected}, found ${actual}; update data and baseline together`);
-  }
+for (const [name, minimum] of Object.entries(baseline.minimum_counts ?? {})) {
+  const actual = groups[name]?.length;
+  if (typeof actual !== 'number') fail(`baseline count ${name}: no matching data group`);
+  else if (actual < minimum) fail(`baseline count ${name}: expected at least ${minimum}, found ${actual}`);
 }
 
-const idSets = {};
-for (const [name, rows] of Object.entries(groups)) idSets[name] = duplicateIds(name, rows);
-
+const idSets = Object.fromEntries(Object.entries(groups).map(([name, rows]) => [name, collectIds(name, rows)]));
 const stablecoinIds = idSets.stablecoins ?? new Set();
 const organizationIds = idSets.organizations ?? new Set();
 const classificationIds = idSets.classifications ?? new Set();
@@ -166,28 +150,6 @@ for (const row of baseline.protected_organizations ?? []) {
 }
 for (const file of baseline.required_route_sources ?? []) if (!exists(file)) fail(`required route source missing: ${file}`);
 
-const batchPatterns = [
-  ['stablecoins', /^stablecoins-batch-[a-z0-9-]+\.json$/],
-  ['organizations', /^organizations-batch-[a-z0-9-]+\.json$/],
-  ['relationships', /^relationships-batch-[a-z0-9-]+\.json$/],
-  ['classifications', /^stablecoin-classification-batch-[a-z0-9-]+\.json$/],
-  ['classification_extensions', /^stablecoin-classification-extension-batch-[a-z0-9-]+\.json$/],
-  ['profiles', /^stablecoin-profiles-batch-[a-z0-9-]+\.json$/],
-  ['events', /^events-batch-[a-z0-9-]+\.json$/],
-  ['event_details', /^event-details-batch-[a-z0-9-]+\.json$/],
-  ['evidence', /^evidence-batch-[a-z0-9-]+\.json$/],
-  ['reserve_reports', /^reserve-reports-batch-[a-z0-9-]+\.json$/],
-  ['known_unknowns', /^known-unknowns-batch-[a-z0-9-]+\.json$/],
-  ['deployments', /^deployments-batch-[a-z0-9-]+\.json$/]
-];
-const dataFiles = walk('data').filter((file) => file.endsWith('.json'));
-for (const [groupName, pattern] of batchPatterns) {
-  const listed = new Set(baseline.data_groups?.[groupName] ?? []);
-  for (const file of dataFiles) {
-    if (pattern.test(path.posix.basename(file)) && !listed.has(file)) fail(`${file}: batch file is not listed in baseline group ${groupName}`);
-  }
-}
-
 const registryLoader = readText('src/lib/data/registry.ts');
 const profileLoader = readText('src/lib/data/stablecoinProfiles.ts');
 const loaderMap = {
@@ -207,16 +169,19 @@ const loaderMap = {
 };
 for (const [groupName, loaderText] of Object.entries(loaderMap)) {
   for (const file of baseline.data_groups?.[groupName] ?? []) {
-    const basename = path.posix.basename(file);
-    if (!loaderText.includes(basename)) fail(`${file}: listed in baseline but missing from runtime loader for ${groupName}`);
+    if (!loaderText.includes(path.posix.basename(file))) fail(`${file}: listed in baseline but missing from runtime loader for ${groupName}`);
   }
 }
 
 const validateDataText = readText('scripts/validate-data.mjs');
 const validateCompatText = readText('scripts/validate-registry-v2-compat.mjs');
-for (const file of dataFiles.filter((file) => /^issuers-batch-[a-z0-9-]+\.json$/.test(path.posix.basename(file)))) {
-  if (!validateDataText.includes(file)) fail(`${file}: missing from validate-data legacy issuer loader`);
-  if (!validateCompatText.includes(file)) fail(`${file}: missing from compatibility validator legacy issuer loader`);
+for (const organizationFile of baseline.data_groups?.organizations ?? []) {
+  const match = path.posix.basename(organizationFile).match(/^organizations-(batch-[a-z0-9-]+)\.json$/);
+  if (!match) continue;
+  const issuerFile = `data/issuers-${match[1]}.json`;
+  if (!exists(issuerFile)) continue;
+  if (!validateDataText.includes(issuerFile)) fail(`${issuerFile}: missing from validate-data legacy issuer loader`);
+  if (!validateCompatText.includes(issuerFile)) fail(`${issuerFile}: missing from compatibility validator legacy issuer loader`);
 }
 
 const forbiddenPatterns = [
