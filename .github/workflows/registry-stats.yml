@@ -1,0 +1,25 @@
+name: Registry stats
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check generated stats
+        run: node scripts/generate-registry-stats.mjs --check
+      - name: Validate stats contract
+        run: node scripts/validate-registry-stats.mjs
