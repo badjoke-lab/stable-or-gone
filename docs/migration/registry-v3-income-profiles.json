@@ -1,6 +1,7 @@
 {
   "schema_version": "3.0-income-profiles",
   "status": "additive",
+  "base_registry": "docs/migration/registry-v2-baseline.json",
   "data_files": [
     "data/income-profiles-v3-a.json",
     "data/income-profiles-v3-b.json",
@@ -9,5 +10,6 @@
   ],
   "minimum_count": 40,
   "loader": "src/lib/data/incomeProfilesV3.ts",
+  "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"
 }

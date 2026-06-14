@@ -2,8 +2,20 @@ import batchA from '../../../data/income-profiles-v3-a.json';
 import batchB from '../../../data/income-profiles-v3-b.json';
 import batchC from '../../../data/income-profiles-v3-c.json';
 import batchD from '../../../data/income-profiles-v3-d.json';
+import type { YieldSource, AccrualMechanism, RateType } from '../schema/registry-v3';
 
-type IncomeProfileV3 = (typeof batchA)[number];
+export type IncomeAvailability = 'native' | 'via_wrapper' | 'none' | 'unknown';
+
+export type IncomeProfileV3 = {
+  id: string;
+  availability: IncomeAvailability;
+  source: YieldSource;
+  accrual: AccrualMechanism;
+  rate: RateType;
+  related_asset_ids: string[];
+  evidence_ids: string[];
+};
+
 const profiles = [...batchA, ...batchB, ...batchC, ...batchD] as IncomeProfileV3[];
 
 export function getIncomeProfilesV3(): IncomeProfileV3[] {
