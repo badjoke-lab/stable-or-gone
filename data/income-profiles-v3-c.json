@@ -1,0 +1,12 @@
+[
+  {"id":"sog_st_mim","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_fei","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_usdn","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_rai","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_paxg","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_xaut","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_spot","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_nuon","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_gho","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_bold","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]}
+]
