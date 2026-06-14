@@ -1,0 +1,7 @@
+[
+  {"id":"sog_st_frax","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_tusd","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_fdusd","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_pyusd","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]},
+  {"id":"sog_st_usdd","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]}
+]
