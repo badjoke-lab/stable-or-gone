@@ -1,0 +1,16 @@
+a from '../../../data/evidence-batch-d.json';", "import evidenceBatchEData from '../../../data/evidence-batch-e.json';"],
+  ["import knownUnknownsBatchDData from '../../../data/known-unknowns-batch-d.json';", "import knownUnknownsBatchEData from '../../../data/known-unknowns-batch-e.json';"],
+  ["import deploymentsBatchDData from '../../../data/deployments-batch-d.json';", "import deploymentsBatchEData from '../../../data/deployments-batch-e.json';"]
+]) registry = replaceOnce(registry, anchor, `${anchor}\n${line}`);
+for (const [from, to] of [
+  ['...(stablecoinClassificationBatchDData as StablecoinClassificationV2[])', '...(stablecoinClassificationBatchDData as StablecoinClassificationV2[]), ...(stablecoinClassificationBatchEData as StablecoinClassificationV2[])'],
+  ['...(stablecoinsBatchDData as StablecoinRow[])', '...(stablecoinsBatchDData as StablecoinRow[]), ...(stablecoinsBatchEData as StablecoinRow[])'],
+  ['...(organizationsBatchDData as OrganizationRow[])', '...(organizationsBatchDData as OrganizationRow[]), ...(organizationsBatchEData as OrganizationRow[])'],
+  ['...(relationshipsBatchDData as RelationshipRow[])', '...(relationshipsBatchDData as RelationshipRow[]), ...(relationshipsBatchEData as RelationshipRow[])'],
+  ['...(eventDetailsBatchDData as EventRow[])', '...(eventDetailsBatchDData as EventRow[]), ...(eventDetailsBatchEData as EventRow[])'],
+  ['...(eventsBatchDData as EventRow[])', '...(eventsBatchDData as EventRow[]), ...(eventsBatchEData as EventRow[])'],
+  ['...(evidenceBatchDData as EvidenceRow[])', '...(evidenceBatchDData as EvidenceRow[]), ...(evidenceBatchEData as EvidenceRow[])'],
+  ['...(knownUnknownsBatchDData as KnownUnknownRow[])', '...(knownUnknownsBatchDData as KnownUnknownRow[]), ...(knownUnknownsBatchEData as KnownUnknownRow[])'],
+  ['...(deploymentsBatchDData as DeploymentRow[])', '...(deploymentsBatchDData as DeploymentRow[]), ...(deploymentsBatchEData as DeploymentRow[])']
+]) registry = replaceOnce(registry, from, to);
+writeTe
