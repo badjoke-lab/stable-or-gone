@@ -20,8 +20,9 @@
     "validate:v3": "node scripts/validate-registry-v3-foundation.mjs",
     "validate:deployments-v3": "node scripts/validate-registry-v3-deployments.mjs",
     "validate:income-v3": "node scripts/validate-registry-v3-income-profiles.mjs",
+    "validate:migration-v3": "node scripts/validate-registry-v3-migration-audit.mjs",
     "validate:final": "node scripts/validate-registry-v2-final.mjs",
-    "validate:finalization": "node scripts/validate-batch-finalization.mjs",
+    "validate:finalization": "npm run validate:migration-v3 && node scripts/validate-batch-finalization.mjs",
     "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
     "verify:public": "node scripts/verify-public-layer.mjs",
     "check:production": "node scripts/check-production.mjs"
