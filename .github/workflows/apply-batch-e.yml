@@ -1,6 +1,9 @@
 name: Apply Batch E
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - record-growth-batch-e
@@ -14,7 +17,7 @@ permissions:
 
 jobs:
   apply:
-    if: ${{ !contains(github.event.head_commit.message, '[batch-e-generated]') }}
+    if: ${{ github.event_name == 'pull_request' || !contains(github.event.head_commit.message, '[batch-e-generated]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Batch E branch
