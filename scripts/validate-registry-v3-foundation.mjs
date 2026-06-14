@@ -4,6 +4,7 @@ import path from 'node:path';
 const root = process.cwd();
 const failures = [];
 const baseline = readJson('docs/migration/registry-v2-baseline.json') ?? {};
+const foundation = readJson('docs/migration/registry-v3-foundation.json') ?? {};
 
 const legalClassifications = new Set(['fiat_backed_stablecoin','e_money_token','asset_referenced_token','tokenized_deposit','bank_liability_token','fund_share','security_token','commodity_claim','protocol_asset','unclassified','unknown']);
 const holderClaimTypes = new Set(['direct_claim_on_issuer','direct_claim_on_bank','beneficial_interest_in_reserve','fund_share_claim','commodity_ownership_or_claim','protocol_redemption_right','contractual_conversion_right','no_direct_claim','unclear','unknown']);
@@ -30,9 +31,22 @@ function readJson(relativePath) {
   }
 }
 
+function filesForGroup(name) {
+  return [
+    ...(baseline.data_groups?.[name] ?? []),
+    ...(foundation.data_groups?.[name] ?? [])
+  ];
+}
+
 function group(name) {
   const rows = [];
-  for (const file of baseline.data_groups?.[name] ?? []) {
+  const seenFiles = new Set();
+  for (const file of filesForGroup(name)) {
+    if (seenFiles.has(file)) {
+      failures.push(`${name}: duplicate data-group path ${file}`);
+      continue;
+    }
+    seenFiles.add(file);
     const value = readJson(file);
     if (!Array.isArray(value)) {
       failures.push(`${file}: expected a JSON array`);
@@ -105,6 +119,12 @@ const deploymentIds = uniqueIds(deployments, 'deployments');
 uniqueIds(legalProfiles, 'legal_profiles');
 uniqueIds(assetRelationships, 'stable_asset_relationships');
 uniqueIds(reserveComponents, 'reserve_components');
+
+for (const [name, minimum] of Object.entries(foundation.minimum_counts ?? {})) {
+  const actual = { legal_profiles: legalProfiles.length, stable_asset_relationships: assetRelationships.length, reserve_components: reserveComponents.length }[name];
+  if (typeof actual !== 'number') failures.push(`Registry v3 foundation count ${name}: no matching data group`);
+  else if (actual < minimum) failures.push(`Registry v3 foundation count ${name}: expected at least ${minimum}, found ${actual}`);
+}
 
 for (const row of legalProfiles) {
   if (!stablecoinIds.has(row.id)) failures.push(`${label(row)} references missing stablecoin`);
