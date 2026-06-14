@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_sai",
+    "lifecycle_status": "migrated",
+    "issuance_status": "terminated",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "SAI targeted one U.S. dollar through ETH-backed Single-Collateral Dai vaults before migration to Multi-Collateral Dai."},
+    "backing_types": ["crypto_collateral"],
+    "stabilization_mechanism": "overcollateralized_vault",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "conversion",
+    "valuation_source": {"source_type": "protocol", "label": "Historical MakerDAO Single-Collateral Dai contracts and migration system", "url": "https://docs.makerdao.com/miscellaneous/scd-mcd-migration"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "SAI balances did not rebase."},
+    "classification_notes": "Historical predecessor asset migrated to Multi-Collateral Dai. SAI and current DAI are separate canonical identities."
+  },
+  {
+    "id": "sog_st_husd",
+    "lifecycle_status": "inactive",
+    "issuance_status": "terminated",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "HUSD was marketed as a U.S. dollar-backed stablecoin before losing its peg and exchange support in 2022."},
+    "backing_types": ["cash", "bank_deposits", "unknown"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "valuation_source": {"source_type": "market", "label": "Historical issuer claims, exchange notices, and market pricing", "url": "https://www.coindesk.com/markets/2022/10/28/stablecoin-husd-plunges-72-after-huobi-delisting/"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "HUSD was not a rebasing asset."},
+    "classification_notes": "Inactive rather than collapsed because the surviving evidence does not fully establish the final reserve and redemption disposition."
+  },
+  {
+    "id": "sog_st_iron",
+    "lifecycle_status": "collapsed",
+    "issuance_status": "terminated",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "IRON targeted one U.S. dollar through a partially collateralized design using USDC and the TITAN share token."},
+    "backing_types": ["stablecoin_collateral", "crypto_collateral", "mixed"],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "market", "label": "IRON redemption design, collateral state, and market price during the June 2021 run", "url": "https://ironfinance.medium.com/iron-finance-post-mortem-17-june-2021-6a4e9ccf23f5"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "IRON did not rebase; stability depended on collateral and TITAN mint/burn economics."},
+    "classification_notes": "Terminal partially collateralized stablecoin collapse. Later Iron Finance activity is not treated as recovery of the original IRON."
+  },
+  {
+    "id": "sog_st_musd",
+    "lifecycle_status": "restricted",
+    "issuance_status": "unknown",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "mUSD targeted one U.S. dollar through a basket of approved USD stablecoins and protocol mint/redemption mechanics."},
+    "backing_types": ["stablecoin_collateral", "mixed"],
+    "stabilization_mechanism": "protocol_arbitrage",
+    "governance_model": "dao_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "valuation_source": {"source_type": "protocol", "label": "mUSD basket accounting and legacy contract state", "url": "https://docs.mstable.org/assets/musd"},
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "notes": "mUSD itself did not accrue yield. imUSD and later yield products are separate assets."},
+    "classification_notes": "Legacy basket-backed asset with residual withdrawal or contract-exit paths. Current issuance availability remains unresolved."
+  }
+]
