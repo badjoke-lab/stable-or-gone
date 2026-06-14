@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sog_st_eurs",
+    "reserve_profile": {
+      "backing_types": ["cash", "bank_deposits"],
+      "summary": "STASIS reports EURS as fully backed by euro liquid balances held through central-bank and segregated-account arrangements, with daily statements, quarterly verification, and annual audit reporting.",
+      "disclosure_status": "daily_statements_quarterly_verification_annual_audit",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_eurs_product_batch_e", "sog_src_eurs_transparency_batch_e"]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "EUR through supported bank-transfer routes",
+      "eligible_parties": "Registered and verified STASIS customers subject to current terms and compliance review.",
+      "retail_access": "account_required",
+      "institutional_access": "account_and_integration_available",
+      "minimum_amount_text": "Current route and terms dependent.",
+      "fee_text": "Current STASIS fees and banking charges apply.",
+      "settlement_time_text": "SEPA or SWIFT process dependent.",
+      "jurisdiction_restrictions": ["Account and jurisdiction eligibility apply."],
+      "redemption_url": "https://stasis.net/eurs-info",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_eurs_product_batch_e"]
+    }
+  },
+  {
+    "id": "sog_st_eurt",
+    "reserve_profile": {
+      "backing_types": ["cash", "bank_deposits", "government_securities", "mixed", "unknown"],
+      "summary": "EURT was issued under Tether's reserve framework. Current public materials verify token identity but do not provide a current asset-specific reserve breakdown sufficient to describe EURT independently from other Tether tokens.",
+      "disclosure_status": "issuer_group_disclosure_asset_specific_gap",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_eurt_supported_protocols_batch_e", "sog_src_eurt_ethereum_contract_batch_e"]
+    },
+    "redemption_profile": {
+      "status": "unknown",
+      "settlement_asset": "Historically EUR through Tether customer processes",
+      "eligible_parties": "Historically verified Tether customers; current EURT-specific availability is unresolved.",
+      "retail_access": "not_generally_direct",
+      "institutional_access": "unknown",
+      "minimum_amount_text": "Current asset-specific terms unconfirmed.",
+      "fee_text": "Current asset-specific terms unconfirmed.",
+      "settlement_time_text": "Current asset-specific terms unconfirmed.",
+      "jurisdiction_restrictions": ["Tether account and jurisdiction rules apply.", "Current EURT-specific eligibility is unconfirmed."],
+      "redemption_url": "https://tether.to/en/supported-protocols/",
+      "as_of_date": "2026-06-14",
+      "confidence": "low",
+      "evidence_ids": ["sog_src_eurt_supported_protocols_batch_e"]
+    }
+  },
+  {
+    "id": "sog_st_usdm",
+    "reserve_profile": {
+      "backing_types": ["stablecoin_collateral", "mixed"],
+      "summary": "Mento V3 describes reserve-backed USDm as backed by collateral held in the Mento Reserve, including external fiat-backed stable assets used by protocol liquidity strategies.",
+      "disclosure_status": "onchain_protocol_transparency",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_usdm_integration_batch_e", "sog_src_usdm_reserve_batch_e"]
+    },
+    "redemption_profile": {
+      "status": "protocol_based",
+      "settlement_asset": "Protocol-supported stable assets through pools, reserve mechanisms, bridges, or market routes",
+      "eligible_parties": "Users with chain and protocol access; no conventional issuer-account redemption right is represented.",
+      "retail_access": "public_protocol_based",
+      "institutional_access": "public_protocol_based",
+      "minimum_amount_text": "Liquidity, route, and transaction dependent.",
+      "fee_text": "Pool, protocol, bridge, and network fees may apply.",
+      "settlement_time_text": "Chain and route dependent.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://app.mento.org/",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_usdm_integration_batch_e", "sog_src_usdm_reserve_batch_e"]
+    }
+  },
+  {
+    "id": "sog_st_alusd",
+    "reserve_profile": {
+      "backing_types": ["stablecoin_collateral", "tokenized_fund", "mixed"],
+      "summary": "alUSD is issued as synthetic debt against supported yield-bearing collateral deposited in Alchemist positions. Collateral yield, repayments, and self-liquidations reduce debt and fund system conversion flows.",
+      "disclosure_status": "protocol_transparent",
+      "as_of_date": "2026-06-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": ["sog_src_alusd_alassets_batch_e", "sog_src_alusd_transmuter_batch_e"]
+    },
+    "redemption_profile": {
+      "status": "protocol_based",
+      "settlement_asset": "Underlying stable assets through the Transmuter or supported market routes",
+      "eligible_parties": "Users able to interact with supported Alchemix contracts and interfaces.",
+      "retail_access": "public_protocol_based",
+      "institutional_access": "public_protocol_based",
+      "minimum_amount_text": "Contract, flow, and transaction dependent.",
+      "fee_text": "Network, liquidity, and route costs may apply.",
+      "settlement_time_text": "Transmuter conversion can be gradual and flow dependent.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://app.alchemix.fi/",
+      "as_of_date": "2026-06-14",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_alusd_transmuter_batch_e"]
+    }
+  }
+]
