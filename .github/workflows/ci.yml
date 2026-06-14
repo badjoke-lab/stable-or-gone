@@ -36,6 +36,8 @@ jobs:
         run: npm run validate:evidence-relations-v2
       - name: Validate Registry v3 foundation
         run: npm run validate:v3
+      - name: Validate Registry v3 chain instances
+        run: node scripts/validate-registry-v3-chain-instances.mjs
       - name: Validate final state
         run: npm run validate:final
       - name: Validate batch finalization
