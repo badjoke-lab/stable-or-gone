@@ -19,7 +19,21 @@ jobs:
           fetch-depth: 0
 
       - name: Generate Batch E files
-        run: node scripts/apply-batch-e-bootstrap.mjs
+        id: generate
+        continue-on-error: true
+        run: node scripts/apply-batch-e-bootstrap.mjs > /tmp/batch-e-generate.log 2>&1
+
+      - name: Upload generation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch-e-generation-log
+          path: /tmp/batch-e-generate.log
+          if-no-files-found: error
+
+      - name: Stop after generation failure
+        if: steps.generate.outcome == 'failure'
+        run: exit 1
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
