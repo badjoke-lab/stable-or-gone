@@ -6,6 +6,9 @@ on:
       - record-growth-batch-e-clean
     paths:
       - .github/workflows/apply-batch-e-clean.yml
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -13,6 +16,7 @@ permissions:
 
 jobs:
   apply:
+    if: ${{ github.event_name != 'pull_request' || github.head_ref == 'record-growth-batch-e-clean' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout clean Batch E branch
@@ -64,6 +68,7 @@ jobs:
           set -euo pipefail
           rm scripts/apply-batch-e-clean.mjs
           rm .github/workflows/apply-batch-e-clean.yml
+          rm -f docs/__branch_probe__.md
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
