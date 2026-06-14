@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_issuer_stasis",
+    "slug": "stasis",
+    "name": "STASIS",
+    "issuer_type": "company",
+    "jurisdiction": "Malta",
+    "related_stablecoins": ["eurs"],
+    "official_url": "https://stasis.net/",
+    "summary": "Organization behind EURS.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch E legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_mento",
+    "slug": "mento-protocol",
+    "name": "Mento Protocol",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["mento-dollar"],
+    "official_url": "https://mento.org/",
+    "summary": "Protocol ecosystem behind Mento Dollar and other fiat-referenced stable assets.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch E legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_alchemix",
+    "slug": "alchemix",
+    "name": "Alchemix",
+    "issuer_type": "protocol_or_dao",
+    "jurisdiction": "unknown",
+    "related_stablecoins": ["alusd"],
+    "official_url": "https://alchemix.fi/",
+    "summary": "Protocol and DAO ecosystem behind alUSD.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-14",
+    "notes": "Batch E legacy compatibility record."
+  }
+]
