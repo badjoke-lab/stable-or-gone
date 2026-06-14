@@ -1,213 +1,248 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-12
+Updated: 2026-06-14
 
 ## Current stage
 
-SOG v0 is publicly live at:
+SOG is publicly live at:
 
-```txt
+```text
 https://sog.badjoke-lab.com/
 ```
 
-Protected baseline:
+The Registry v2 normalization and the controlled 20 → 40 growth phase are complete.
 
-```txt
-20 stablecoins
-20 Registry v2 classification records
-20 Registry v2 reserve/redemption profiles
-16 organizations
-20 stablecoin-organization relationships
-23 events
-23 Event v2 detail records
-90 evidence records
-90 Evidence v2 relation projections
-40 reserve references
-50 known unknowns
+Protected canonical checkpoint:
+
+```text
+40 stable assets
+32 organizations
+40 stablecoin-organization relationships
+40 classification records
+40 reserve/redemption profiles
+48 events
+48 Event v2 detail records
+182 evidence records
+182 evidence relation projections
+42 reserve-report references
+93 known unknowns
 9 regulatory notes
-37 deployments
-75 static pages
+67 deployments
 ```
 
-The Registry v2 migration is complete. Routine record growth may resume after build/deployment verification, while corrections, broken links, major incidents, and build/deployment repairs remain allowed at any time.
+The batch finalization guard is active and part of both `npm run build` and CI.
 
-## Registry v2 objective
+## Current objective
 
-Normalize the existing registry without changing public URLs or losing records.
+Before resuming large-scale record growth, SOG will:
 
-Final model:
+```text
+1. freeze the 40-record checkpoint
+2. finalize the stable-asset scope and taxonomy
+3. specify Registry v3 additive fields
+4. specify and implement generated statistics
+5. create the reviewed 40 → 70 Candidate Master
+6. resume controlled five-record growth batches
+```
 
-```txt
-stablecoin_entity
-organization_entity
+Record corrections, broken-link fixes, major incident updates, and build or deployment repairs remain allowed at any time.
+
+## Canonical model
+
+Current Registry v2 model:
+
+```text
+stable_asset
+organization
 stablecoin_organization_relationship
-stablecoin_event
+event
+event_detail
 evidence
 evidence_relation
 reserve_report
 known_unknown
+regulatory_note
 deployment
 ```
 
-Protected public URL patterns:
+Planned Registry v3 additions:
 
-```txt
+```text
+legal_profile
+stable_asset_relationship
+reserve_component
+deployment_v2_fields
+expanded_yield_mechanics
+expanded_event_details
+```
+
+Registry v3 is additive. It must preserve current IDs, slugs, routes, and the existing Registry v2 compatibility layer until a dedicated cleanup phase proves removal safe.
+
+## Protected public URL patterns
+
+```text
 /stablecoin/[slug]/
 /issuer/[slug]/
 /event/[id]/
 ```
 
-## Completed migration work
+Planned addition:
 
-### PR-041 — Baseline and migration contract
-
-- protected minimum record counts, IDs, slugs, routes, and URL patterns
-- added baseline validation
-- fixed the PR-041 to PR-051 schedule
-
-### PR-042 — Common data loaders
-
-- centralized repository JSON composition and override application
-- removed PR-specific JSON composition from public routes
-- preserved public output and behavior
-
-### PR-043 — Schema v2 and compatibility validator
-
-- added Registry v2 enums, types, field mapping, and templates
-- allowed staged legacy compatibility
-- rejected conflicting values, malformed profiles, invalid enums, and broken references
-
-### PR-044 — Organization and relationship migration
-
-- created 16 canonical organization records
-- created 20 explicit stablecoin-organization relationships
-- added roles, periods, and relationship status
-- preserved legacy issuer compatibility files and `/issuer/[slug]/` URLs
-- switched public organization displays to the relationship layer
-
-### PR-045 — Stablecoin status and classification migration
-
-- created 20 Registry v2 classification records
-- added lifecycle, issuance, peg, backing, stabilization mechanism, and governance fields
-- preserved legacy status, peg, and collateral fields for compatibility
-- added classification validation to the build chain
-
-### PR-046 — Reserve and redemption normalization
-
-- created 20 Registry v2 reserve/redemption profile records
-- separated current reserve profile from reserve-report history
-- separated redemption profile from legacy flat redemption fields
-- added profile validation to the build chain
-
-### PR-047 — Event v2 migration
-
-- created 23 Event v2 detail overlay records
-- added event subject stablecoin and organization arrays
-- added event detail kind shells for depeg, regulatory, reserve-change, redemption-change, and migration contexts
-- added Event v2 validation to the build chain
-
-### PR-048 — Evidence many-to-many migration
-
-- projected legacy evidence subjects into V2 stablecoin, organization, event, and claim-scope arrays
-- added the evidence relation view layer
-- preserved legacy evidence fields until PR-051
-- added Evidence relation validation to the build chain
-
-### PR-049 — UI v2
-
-- surfaced Registry v2 classification fields on stablecoin pages
-- surfaced reserve_profile and redemption_profile on stablecoin pages
-- surfaced Event v2 subject arrays and detail overlays on event pages
-- surfaced Evidence v2 claim-scope arrays on source tables
-- preserved legacy public URLs and existing table structure
-
-### PR-050 — Methodology, guides, and SEO
-
-- updated methodology copy for Registry v2 terminology
-- added public explanations of lifecycle, issuance, reserve, redemption, event, and evidence relation fields
-- aligned guides, glossary, and about pages with the normalized model
-- added `public/llms.txt` for AI-readable site guidance
-- preserved canonical public URL patterns
-
-### PR-051 — Legacy cleanup and canonical consolidation
-
-- consolidated public navigation wording around organizations while keeping `/issuer/[slug]/` compatibility URLs
-- moved organization detail display toward Registry v2 lifecycle, event detail, and evidence-scope terminology
-- added final Registry v2 validation
-- added final validation to the build chain
-- kept legacy compatibility fields available for staged data cleanup
-
-## Current work item
-
-```txt
-Registry v2 migration complete
+```text
+/stats/
 ```
 
-Next priorities:
+The `/issuer/[slug]/` route remains a compatibility route even where the internal entity is described as an organization.
 
-```txt
-run build/deployment verification
-resume controlled record growth
-expand 20 → 40 stablecoins
-expand events from 23 → 60+
-deepen evidence and reserve-history records
-add /events/depegs/
-add /events/regulatory/
-add /stats/
-```
+## Completed phases
 
-## Full implementation schedule
+### Registry v2 normalization
 
-```txt
-PR-041 Baseline and migration contract — completed
-PR-042 Common data loaders — completed
-PR-043 Schema v2 and compatibility validator — completed
-PR-044 Organization and relationship migration — completed
-PR-045 Stablecoin status and classification migration — completed
-PR-046 Reserve and redemption normalization — completed
-PR-047 Event v2 migration — completed
-PR-048 Evidence many-to-many migration — completed
-PR-049 UI v2 — completed
-PR-050 Methodology, guides, and SEO — completed
-PR-051 Legacy cleanup and canonical consolidation — completed
-```
+Completed work includes:
 
-Detailed specifications:
+- baseline and migration contract
+- common data loaders
+- Registry v2 schema and compatibility validation
+- organization and relationship migration
+- stablecoin classification normalization
+- reserve and redemption profiles
+- Event v2 details
+- evidence many-to-many projection
+- Registry v2 UI and methodology alignment
+- final validation and legacy compatibility retention
 
-```txt
+Historical specifications remain in:
+
+```text
 docs/registry-v2-migration-plan.md
 docs/migration/registry-v2-field-mapping.md
 docs/migration/registry-v2-record-templates.md
 ```
 
-## Current position
+### Controlled record growth: 20 → 40
 
-```txt
-Registry v2 migration: completed
-Completed: 11
-In progress: 0
-Remaining: 0
-Record-growth phase: ready to resume after build/deployment verification
-Next: controlled record growth and post-migration expansion
+Completed batches expanded coverage across:
+
+- major protocol stablecoins
+- RWA-backed stablecoins
+- synthetic and delta-neutral designs
+- floating, index, commodity, and experimental stable-value assets
+- historical failures, migrations, terminations, and restricted assets
+- euro-denominated and non-USD examples
+
+The completed 28 → 40 phase is recorded in:
+
+```text
+docs/record-growth-28-to-40.md
 ```
 
-## Post-migration priorities
+### Forty-record checkpoint protection
 
-```txt
-20 → 40 stablecoins
-organization and relationship expansion
-23 → 60+ events
-evidence and reserve-history deepening
-/events/depegs/
-/events/regulatory/
-/stats/
+Completed:
+
+- batch finalization validator
+- Candidate Master and canonical count checks
+- classification/profile/event-detail coverage checks
+- runtime loader and compatibility loader checks
+- temporary batch artifact rejection
+- CI and build integration
+
+Specification:
+
+```text
+docs/batch-finalization-guard.md
+```
+
+## Next implementation sequence
+
+```text
+PR A  Update canonical scope, taxonomy, data-model, stats, and growth specifications
+PR B  Implement Registry v3 additive schema and validators
+PR C  Migrate the existing 40 records to required Registry v3 coverage
+PR D  Add generated stats data and stats validation
+PR E  Add the public /stats/ page
+PR F  Freeze the reviewed 40 → 70 Candidate Master
+PR G  Batch F: 40 → 45
+PR H  Batch G: 45 → 50
+PR I  Batch H: 50 → 55
+PR J  Batch I: 55 → 60
+PR K  Batch J: 60 → 65
+PR L  Batch K: 65 → 70
+PR M  Seventy-record quality and coverage audit
+```
+
+The exact GitHub PR numbers are assigned at implementation time. The logical order is fixed.
+
+## Registry v3 priorities
+
+Registry v3 must add:
+
+- legal classification and holder-claim structure
+- stable-asset-to-stable-asset relationships
+- structured reserve components
+- deployment canonicality and origin relationships
+- structured yield source, accrual mechanism, and rate type
+- basket as a first-class reference target
+- security, oracle, collateral, insolvency, governance, bridge, launch, and termination event details
+
+Full specification:
+
+```text
+docs/stable-asset-scope.md
+docs/classification-spec.md
+docs/data-model-v3-spec.md
+docs/migration/registry-v3-plan.md
+```
+
+## Statistics priorities
+
+SOG statistics must explain the registry, not rank assets.
+
+The statistics system will cover:
+
+- lifecycle groups
+- asset classes and reference targets
+- backing and stabilization mechanisms
+- issuance and redemption access
+- legal and yield classifications
+- failures, depegs, recoveries, wind-downs, and migrations
+- evidence and data-quality coverage
+
+It will not include live price, market-cap, yield, or safety rankings.
+
+Specification:
+
+```text
+docs/stats-spec.md
+```
+
+## Record-growth priorities
+
+The next checkpoint is 70 canonical assets.
+
+Default batch size:
+
+```text
+5 stable assets per PR
+```
+
+Complex batches may be reduced to three or four assets when they include major collapses, multiple migrations, complex legal structures, or extensive deployment histories.
+
+Growth specification:
+
+```text
+docs/record-growth-40-to-70.md
 ```
 
 ## Operating rules
 
-- Every change must preserve existing stablecoin, organization, event, and evidence IDs unless a dedicated migration documents the replacement.
-- Existing slugs and public URL patterns must be preserved.
-- Public `/issuer/[slug]/` compatibility routes must remain available after internal organization consolidation.
+- Preserve existing stable-asset, organization, event, and evidence IDs unless a dedicated migration documents the replacement.
+- Preserve existing slugs and public URL patterns.
+- Keep `/issuer/[slug]/` compatibility routes available.
+- Treat chain-specific native, bridged, wrapped, and legacy deployments as deployment records unless identity analysis requires a separate canonical asset.
+- Do not promote simple wrappers, vault shares, or LP tokens as independent canonical assets by default.
+- Keep candidates, canonical data, loaders, baseline counts, validators, public output, and review documentation synchronized.
 - Fix build failures immediately.
-- Record growth must remain source-backed and must not weaken baseline validation.
-- After every migration or expansion batch, report the schedule position, validation state, and next work item.
+- Keep record growth source-backed and review-gated.
+- Do not auto-publish research candidates or monitoring output.
+- After each migration or growth batch, report the current checkpoint, validation result, and next work item.
