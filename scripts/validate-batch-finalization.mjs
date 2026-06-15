@@ -72,7 +72,7 @@ function walk(relativeDir) {
 function loadCandidateMaster() {
   const contract = readJson(candidateContractPath) ?? {};
   const master = readGroup(contract.candidate_files ?? ['data/candidate-stable-assets.json'], 'Candidate Master');
-  const promotionFiles = ['data/candidate-promotions-batch-d.json', 'data/candidate-promotions-batch-f.json', 'data/candidate-promotions-batch-g.json', 'data/candidate-promotions-batch-h.json'];
+  const promotionFiles = ['data/candidate-promotions-batch-d.json', 'data/candidate-promotions-batch-f.json', 'data/candidate-promotions-batch-g.json', 'data/candidate-promotions-batch-h.json', 'data/candidate-promotions-batch-i.json'];
   const patches = new Map();
   for (const file of promotionFiles) {
     if (!exists(file)) continue;

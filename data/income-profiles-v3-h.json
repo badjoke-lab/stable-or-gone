@@ -1,0 +1,7 @@
+[
+  {"id":"sog_st_xsgd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_xsgd_overview_batch_i","sog_src_xsgd_attestation_batch_i"]},
+  {"id":"sog_st_jpyc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_jpyc_launch_batch_i","sog_src_jpyc_registration_batch_i"]},
+  {"id":"sog_st_gyen","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_gyen_winddown_batch_i","sog_src_gyen_attestations_batch_i"]},
+  {"id":"sog_st_brz","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_brz_product_batch_i","sog_src_brz_transparency_batch_i"]},
+  {"id":"sog_st_tryb","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_tryb_product_batch_i","sog_src_tryb_terms_batch_i"]}
+]
