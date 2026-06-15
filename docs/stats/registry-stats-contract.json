@@ -15,6 +15,9 @@
     "coverage",
     "quality"
   ],
+  "protected_minimums": {
+    "stablecoins": 40
+  },
   "generation_policy": {
     "deterministic": true,
     "generated_at_source": "SOURCE_DATE_EPOCH_or_baseline_captured_at",
