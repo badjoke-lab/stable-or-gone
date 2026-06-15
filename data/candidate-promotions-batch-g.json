@@ -1,0 +1,7 @@
+[
+  {"candidate_id":"sog_cand_000046","status":"promoted","notes":"Promoted in Batch G as active DOLA with FiRM debt backing, PSM reserves, protocol evidence, and Ethereum deployment coverage."},
+  {"candidate_id":"sog_cand_000047","status":"promoted","notes":"Promoted in Batch G as active Djed on Cardano with COTI operator role, ADA reserve backing, SHEN reserve-coin mechanics, and launch evidence."},
+  {"candidate_id":"sog_cand_000048","status":"promoted","notes":"Promoted in Batch G as active VAI with Venus collateralized debt, stability-fee, PSM, and BNB Chain deployment coverage."},
+  {"candidate_id":"sog_cand_000049","status":"promoted","notes":"Promoted in Batch G as active lisUSD with HAY retained as a historical alias and a continuous Lista/Helio Maker-fork identity."},
+  {"candidate_id":"sog_cand_000050","status":"promoted","notes":"Promoted in Batch G with conservative limited status because official USK mechanics remain documented but current unrestricted minting and successor operation are unresolved."}
+]
