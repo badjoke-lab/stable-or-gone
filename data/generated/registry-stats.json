@@ -1,86 +1,86 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-14T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_post_batch_e_2026_06_14",
+  "generated_at": "2026-06-15T00:00:00.000Z",
+  "baseline_id": "sog_registry_v2_post_batch_f_2026_06_15",
   "registry": {
-    "stablecoins": 40,
-    "organizations": 32,
-    "relationships": 40,
-    "classifications": 40,
-    "profiles": 40,
-    "events": 48,
-    "event_details": 48,
-    "evidence": 183,
-    "reserve_reports": 42,
-    "known_unknowns": 93,
+    "stablecoins": 45,
+    "organizations": 37,
+    "relationships": 46,
+    "classifications": 45,
+    "profiles": 45,
+    "events": 53,
+    "event_details": 53,
+    "evidence": 198,
+    "reserve_reports": 47,
+    "known_unknowns": 103,
     "regulatory_notes": 9,
-    "deployments": 67,
-    "legal_profiles": 40,
+    "deployments": 75,
+    "legal_profiles": 45,
     "stable_asset_relationships": 1,
-    "reserve_components": 55,
-    "income_profiles": 40
+    "reserve_components": 67,
+    "income_profiles": 45
   },
   "lifecycle": {
     "by_status": {
-      "active": 30,
+      "active": 34,
       "collapsed": 2,
       "inactive": 1,
       "migrated": 1,
       "rebranded": 1,
       "restricted": 2,
       "terminated": 2,
-      "winding_down": 1
+      "winding_down": 2
     },
     "active_side": {
-      "count": 32,
+      "count": 36,
       "share": 0.8,
       "statuses": ["active", "restricted"]
     },
     "historical_side": {
-      "count": 8,
+      "count": 9,
       "share": 0.2,
       "statuses": ["collapsed", "inactive", "migrated", "rebranded", "terminated", "winding_down"]
     },
     "strict_failed": {
       "count": 2,
-      "share": 0.05,
+      "share": 0.0444,
       "statuses": ["collapsed", "failed"]
     }
   },
   "composition": {
-    "entity_statuses": {"active": 30, "discontinued": 4, "failed": 2, "limited": 2, "migrated": 1, "rebranded": 1},
-    "issuance_statuses": {"protocol_based": 15, "restricted": 16, "terminated": 8, "unknown": 1},
-    "reference_kinds": {"commodity": 2, "fiat": 36, "floating": 1, "index": 1},
-    "reference_assets": {"AMPL_CPI_ADJUSTED_TARGET": 1, "EUR": 3, "GOLD": 2, "RAI_REDEMPTION_PRICE": 1, "USD": 32, "USD_WITH_TRUFLATION_LINKED_REBASE": 1},
-    "asset_classes": {"experimental_stabilization_asset": 1, "stable_value_asset": 2, "stablecoin": 35, "tokenized_commodity": 2},
-    "backing_types_non_exclusive": {"bank_deposits": 3, "cash": 7, "commodity": 2, "crypto_collateral": 13, "government_securities": 5, "mixed": 23, "stablecoin_collateral": 9, "tokenized_fund": 3, "unbacked": 1, "unknown": 2},
-    "stabilization_mechanisms": {"algorithmic_supply": 1, "delta_neutral": 1, "hybrid": 8, "issuer_redemption": 17, "overcollateralized_vault": 8, "protocol_arbitrage": 5},
-    "governance_models": {"centralized": 16, "dao_governed": 13, "hybrid": 3, "protocol_governed": 8},
-    "legal_classifications_non_exclusive": {"unclassified": 40},
-    "reserve_component_categories": {"bank_deposits": 3, "cash": 7, "commodity": 2, "crypto_collateral": 13, "government_securities": 5, "other": 1, "stablecoin_collateral": 9, "tokenized_fund": 3, "unknown": 12},
-    "deployment_chains": {"Algorand": 1, "Arbitrum": 2, "Avalanche": 1, "Base": 4, "Bitcoin Omni Layer": 1, "BNB Chain": 1, "Celo": 1, "Ethereum": 34, "Gnosis Chain": 1, "multi_chain": 2, "multi_chain_or_bridge_context": 1, "multi_chain_or_protocol_context": 1, "Polygon": 2, "Solana": 5, "source_review_needed": 1, "Stellar": 1, "Terra": 1, "TRON": 3, "Waves": 1, "XDC Network": 1, "XRP Ledger": 2},
-    "income_availability": {"unknown": 40},
-    "income_sources": {"unknown": 40},
-    "income_accrual": {"unknown": 40},
-    "income_rates": {"unknown": 40}
+    "entity_statuses": {"active": 34, "discontinued": 5, "failed": 2, "limited": 2, "migrated": 1, "rebranded": 1},
+    "issuance_statuses": {"protocol_based": 15, "restricted": 20, "terminated": 9, "unknown": 1},
+    "reference_kinds": {"commodity": 2, "fiat": 41, "floating": 1, "index": 1},
+    "reference_assets": {"AMPL_CPI_ADJUSTED_TARGET": 1, "EUR": 3, "GOLD": 2, "RAI_REDEMPTION_PRICE": 1, "USD": 37, "USD_WITH_TRUFLATION_LINKED_REBASE": 1},
+    "asset_classes": {"experimental_stabilization_asset": 1, "stable_value_asset": 2, "stablecoin": 40, "tokenized_commodity": 2},
+    "backing_types_non_exclusive": {"bank_deposits": 4, "cash": 10, "commodity": 2, "crypto_collateral": 13, "government_securities": 8, "mixed": 24, "other": 2, "stablecoin_collateral": 11, "tokenized_fund": 4, "unbacked": 1, "unknown": 2},
+    "stabilization_mechanisms": {"algorithmic_supply": 1, "delta_neutral": 1, "hybrid": 8, "issuer_redemption": 22, "overcollateralized_vault": 8, "protocol_arbitrage": 5},
+    "governance_models": {"centralized": 21, "dao_governed": 13, "hybrid": 3, "protocol_governed": 8},
+    "legal_classifications_non_exclusive": {"e_money_token": 1, "protocol_asset": 1, "unclassified": 43},
+    "reserve_component_categories": {"bank_deposits": 4, "cash": 10, "commodity": 2, "crypto_collateral": 13, "government_securities": 8, "other": 3, "stablecoin_collateral": 11, "tokenized_fund": 4, "unknown": 12},
+    "deployment_chains": {"Algorand": 1, "Arbitrum": 2, "Avalanche": 1, "Base": 4, "Bitcoin Omni Layer": 1, "BNB Chain": 2, "Celo": 1, "Ethereum": 39, "Gnosis Chain": 1, "multi_chain": 2, "multi_chain_or_bridge_context": 1, "multi_chain_or_protocol_context": 1, "Polygon": 2, "Solana": 6, "source_review_needed": 1, "Stellar": 1, "Terra": 1, "TRON": 3, "Waves": 1, "XDC Network": 1, "XRP Ledger": 3},
+    "income_availability": {"native": 1, "none": 4, "unknown": 40},
+    "income_sources": {"none": 4, "reserve_income": 1, "unknown": 40},
+    "income_accrual": {"balance_rebase": 1, "none": 4, "unknown": 40},
+    "income_rates": {"none": 4, "unknown": 40, "variable": 1}
   },
   "coverage": {
-    "classifications": {"covered": 40, "total": 40, "share": 1},
-    "profiles": {"covered": 40, "total": 40, "share": 1},
-    "legal_profiles": {"covered": 40, "total": 40, "share": 1},
-    "reserve_components": {"covered": 40, "total": 40, "share": 1},
-    "income_profiles": {"covered": 40, "total": 40, "share": 1},
-    "deployments": {"covered": 39, "total": 40, "share": 0.975},
-    "events": {"covered": 33, "total": 40, "share": 0.825},
-    "evidence": {"covered": 40, "total": 40, "share": 1},
-    "reserve_reports": {"covered": 22, "total": 40, "share": 0.55},
-    "known_unknowns": {"covered": 40, "total": 40, "share": 1}
+    "classifications": {"covered": 45, "total": 45, "share": 1},
+    "profiles": {"covered": 45, "total": 45, "share": 1},
+    "legal_profiles": {"covered": 45, "total": 45, "share": 1},
+    "reserve_components": {"covered": 45, "total": 45, "share": 1},
+    "income_profiles": {"covered": 45, "total": 45, "share": 1},
+    "deployments": {"covered": 44, "total": 45, "share": 0.9778},
+    "events": {"covered": 38, "total": 45, "share": 0.8444},
+    "evidence": {"covered": 45, "total": 45, "share": 1},
+    "reserve_reports": {"covered": 27, "total": 45, "share": 0.6},
+    "known_unknowns": {"covered": 45, "total": 45, "share": 1}
   },
   "quality": {
     "lifecycle_unknown": {"count": 0, "share": 0},
-    "legal_profiles_unclassified": {"count": 40, "share": 1},
-    "income_profiles_all_unknown": {"count": 40, "share": 1},
-    "reserve_components_unknown_category": {"count": 12, "share": 0.2182},
-    "deployments_unknown_canonicality": {"count": 67, "share": 1}
+    "legal_profiles_unclassified": {"count": 43, "share": 0.9556},
+    "income_profiles_all_unknown": {"count": 40, "share": 0.8889},
+    "reserve_components_unknown_category": {"count": 12, "share": 0.1791},
+    "deployments_unknown_canonicality": {"count": 67, "share": 0.8933}
   }
 }
