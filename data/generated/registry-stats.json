@@ -48,7 +48,7 @@
     }
   },
   "composition": {
-    "entity_statuses": {"active": 46, "discontinued": 5, "failed": 2, "limited": 5, "migrated": 1, "rebranded": 1},
+    "entity_statuses": {"active": 46, "discontinued": 6, "failed": 2, "limited": 4, "migrated": 1, "rebranded": 1},
     "issuance_statuses": {"protocol_based": 21, "restricted": 27, "terminated": 10, "unknown": 2},
     "reference_kinds": {"commodity": 2, "fiat": 56, "floating": 1, "index": 1},
     "reference_assets": {"AMPL_CPI_ADJUSTED_TARGET": 1, "BRL": 1, "EUR": 3, "GOLD": 2, "JPY": 2, "RAI_REDEMPTION_PRICE": 1, "SGD": 1, "TRY": 1, "USD": 47, "USD_WITH_TRUFLATION_LINKED_REBASE": 1},
