@@ -1,0 +1,7 @@
+[
+  {"id":"sog_st_dola","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_dola_docs_batch_g","sog_src_dola_llms_batch_g"]},
+  {"id":"sog_st_djed","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_djed_home_batch_g","sog_src_djed_launch_batch_g"]},
+  {"id":"sog_st_vai","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_vai_docs_batch_g"]},
+  {"id":"sog_st_lisusd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_lisusd_mechanics_batch_g"]},
+  {"id":"sog_st_usk","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usk_technical_batch_g"]}
+]

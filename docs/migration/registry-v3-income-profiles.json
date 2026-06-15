@@ -7,9 +7,10 @@
     "data/income-profiles-v3-b.json",
     "data/income-profiles-v3-c.json",
     "data/income-profiles-v3-d.json",
-    "data/income-profiles-v3-e.json"
+    "data/income-profiles-v3-e.json",
+    "data/income-profiles-v3-f.json"
   ],
-  "minimum_count": 45,
+  "minimum_count": 50,
   "loader": "src/lib/data/incomeProfilesV3.ts",
   "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"

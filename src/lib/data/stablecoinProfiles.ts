@@ -5,6 +5,7 @@ import profileBatchCData from '../../../data/stablecoin-profiles-batch-c.json';
 import profileBatchDData from '../../../data/stablecoin-profiles-batch-d.json';
 import profileBatchEData from '../../../data/stablecoin-profiles-batch-e.json';
 import profileBatchFData from '../../../data/stablecoin-profiles-batch-f.json';
+import profileBatchGData from '../../../data/stablecoin-profiles-batch-g.json';
 import type { ReserveProfileV2, RedemptionProfileV2 } from '../schema/registry-v2';
 
 export type StablecoinProfileV2 = {
@@ -20,7 +21,8 @@ const profiles = [
   ...(profileBatchCData as StablecoinProfileV2[]),
   ...(profileBatchDData as StablecoinProfileV2[]),
   ...(profileBatchEData as StablecoinProfileV2[]),
-  ...(profileBatchFData as StablecoinProfileV2[])
+  ...(profileBatchFData as StablecoinProfileV2[]),
+  ...(profileBatchGData as StablecoinProfileV2[])
 ];
 const profileById = new Map(profiles.map((profile) => [profile.id, profile] as const));
 

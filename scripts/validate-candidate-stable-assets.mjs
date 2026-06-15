@@ -16,7 +16,7 @@ const master = candidateFiles.flatMap((file) => {
   }
   return rows;
 });
-const promotionFiles = ['data/candidate-promotions-batch-d.json', 'data/candidate-promotions-batch-f.json'];
+const promotionFiles = ['data/candidate-promotions-batch-d.json', 'data/candidate-promotions-batch-f.json', 'data/candidate-promotions-batch-g.json'];
 const patches = new Map();
 
 for (const file of promotionFiles) {
