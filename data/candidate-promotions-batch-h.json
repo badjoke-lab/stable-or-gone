@@ -1,0 +1,7 @@
+[
+  {"candidate_id":"sog_cand_000051","status":"promoted","notes":"Promoted in Batch H as active sUSDe, a reward-accruing yield wrapper over USDe with distinct lifecycle and conversion mechanics."},
+  {"candidate_id":"sog_cand_000052","status":"promoted","notes":"Promoted in Batch H as limited sDAI, retaining the legacy DAI savings vault without asserting termination or mandatory migration."},
+  {"candidate_id":"sog_cand_000053","status":"promoted","notes":"Promoted in Batch H as active sUSDS, the current Sky Savings Rate ERC-4626 wrapper over USDS."},
+  {"candidate_id":"sog_cand_000054","status":"promoted","notes":"Promoted in Batch H as active USDY, explicitly classified as a tokenized secured note rather than a traditional stablecoin."},
+  {"candidate_id":"sog_cand_000055","status":"promoted","notes":"Promoted in Batch H as active USYC, explicitly classified as a permissioned tokenized mutual-fund share rather than a traditional stablecoin."}
+]
