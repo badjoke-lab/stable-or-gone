@@ -10,9 +10,10 @@
     "data/income-profiles-v3-e.json",
     "data/income-profiles-v3-f.json",
     "data/income-profiles-v3-g.json",
-    "data/income-profiles-v3-h.json"
+    "data/income-profiles-v3-h.json",
+    "data/asset-yield-state-batch-j.json"
   ],
-  "minimum_count": 60,
+  "minimum_count": 65,
   "loader": "src/lib/data/incomeProfilesV3.ts",
   "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"
