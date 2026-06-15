@@ -1,7 +1,0 @@
-[
-{"candidate_id":"sog_cand_000061","status":"promoted","notes":"Promoted in Batch J as active EURA, retaining agEUR as the historical alias and treating the rebrand as one asset identity."},
-{"candidate_id":"sog_cand_000062","status":"promoted","notes":"Promoted in Batch J as active EURCV, a MiCA-compliant euro electronic-money token issued by Societe Generale-FORGE."},
-{"candidate_id":"sog_cand_000063","status":"promoted","notes":"Promoted in Batch J as active EURI, a Banking Circle euro electronic-money token with one-to-one cash backing."},
-{"candidate_id":"sog_cand_000064","status":"promoted","notes":"Promoted in Batch J as active EURQ, reusing the existing Quantoz Payments organization."},
-{"candidate_id":"sog_cand_000065","status":"promoted","notes":"Promoted in Batch J as active VCHF while leaving exact reserve composition as a known unknown."}
-]
