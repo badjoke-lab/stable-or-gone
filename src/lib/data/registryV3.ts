@@ -24,6 +24,7 @@ import legalProfilesGrowthF from '../../../data/legal-profiles-v3-batch-growth-f
 import legalProfilesGrowthG from '../../../data/legal-profiles-v3-batch-growth-g.json';
 import legalProfilesGrowthH from '../../../data/legal-profiles-v3-batch-growth-h.json';
 import legalProfilesGrowthI from '../../../data/legal-profiles-v3-batch-growth-i.json';
+import legalProfilesGrowthJ from '../../../data/legal-profiles-v3-batch-growth-j.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
@@ -31,6 +32,7 @@ import reserveComponentsBatchF from '../../../data/reserve-components-v3-batch-f
 import reserveComponentsBatchG from '../../../data/reserve-components-v3-batch-g.json';
 import reserveComponentsBatchH from '../../../data/reserve-components-v3-batch-h.json';
 import reserveComponentsBatchI from '../../../data/reserve-components-v3-batch-i.json';
+import reserveComponentsBatchJ from '../../../data/reserve-components-v3-batch-j.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -67,10 +69,11 @@ const legalProfiles = [
   ...legalProfilesGrowthF,
   ...legalProfilesGrowthG,
   ...legalProfilesGrowthH,
-  ...legalProfilesGrowthI
+  ...legalProfilesGrowthI,
+  ...legalProfilesGrowthJ
 ] as LegalProfileV3[];
 const stableAssetRelationships = [...stableAssetRelationshipsData, ...stableAssetRelationshipsBatchH] as StableAssetRelationshipV3[];
-const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI] as ReserveComponentV3[];
+const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
   canonicality: DeploymentCanonicality;
