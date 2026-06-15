@@ -6,7 +6,16 @@ const failures = [];
 const warnings = [];
 const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const baseline = read('docs/migration/registry-v2-baseline.json');
-const master = read('data/candidate-stable-assets.json');
+const growthContract = read('docs/growth/candidate-master-70.json');
+const candidateFiles = growthContract.candidate_files ?? ['data/candidate-stable-assets.json'];
+const master = candidateFiles.flatMap((file) => {
+  const rows = read(file);
+  if (!Array.isArray(rows)) {
+    failures.push(`${file}: expected array`);
+    return [];
+  }
+  return rows;
+});
 const promotionFiles = ['data/candidate-promotions-batch-d.json'];
 const patches = new Map();
 
@@ -68,9 +77,13 @@ for (const candidate of candidates) {
   if (!allowedClass.has(candidate.asset_class)) failures.push(`${id}: invalid asset_class ${candidate.asset_class}`);
   if (!allowedReference.has(candidate.reference_kind)) failures.push(`${id}: invalid reference_kind ${candidate.reference_kind}`);
 
-  if (seenCandidateIds.has(candidate.candidate_id)) failures.push(`duplicate candidate_id: ${candidate.candidate_id}`); seenCandidateIds.add(candidate.candidate_id);
-  if (seenRecordIds.has(candidate.proposed_record_id)) failures.push(`duplicate proposed_record_id: ${candidate.proposed_record_id}`); seenRecordIds.add(candidate.proposed_record_id);
-  const slug = normalize(candidate.slug); if (seenSlugs.has(slug)) failures.push(`duplicate slug: ${slug}`); seenSlugs.add(slug);
+  if (seenCandidateIds.has(candidate.candidate_id)) failures.push(`duplicate candidate_id: ${candidate.candidate_id}`);
+  seenCandidateIds.add(candidate.candidate_id);
+  if (seenRecordIds.has(candidate.proposed_record_id)) failures.push(`duplicate proposed_record_id: ${candidate.proposed_record_id}`);
+  seenRecordIds.add(candidate.proposed_record_id);
+  const slug = normalize(candidate.slug);
+  if (seenSlugs.has(slug)) failures.push(`duplicate slug: ${slug}`);
+  seenSlugs.add(slug);
   candidateByRecordId.set(candidate.proposed_record_id, candidate);
 
   const canonical = stablecoinById.get(candidate.proposed_record_id);
@@ -97,6 +110,19 @@ for (const stablecoin of stablecoins) {
 }
 for (const id of referencedIds) if (!stablecoinById.has(id)) failures.push(`relationship, event, or evidence references missing stablecoin: ${id}`);
 
+const promoted = candidates.filter((row) => row.status === 'promoted').length;
+const pending = candidates.length - promoted;
+const minimums = growthContract.protected_minimums ?? {};
+if (candidates.length < (minimums.total_candidates ?? 0)) failures.push(`candidate master must contain at least ${minimums.total_candidates} rows, found ${candidates.length}`);
+if (promoted < (minimums.promoted_candidates ?? 0)) failures.push(`candidate master must retain at least ${minimums.promoted_candidates} promoted rows, found ${promoted}`);
+if (pending < (minimums.pending_candidates ?? 0)) failures.push(`candidate master must retain at least ${minimums.pending_candidates} pending rows, found ${pending}`);
+
+for (const [batch, rule] of Object.entries(growthContract.planned_batches ?? {})) {
+  const actual = candidates.filter((row) => row.target_batch === batch).length;
+  const minimum = rule.minimum_candidates ?? 0;
+  if (actual < minimum) failures.push(`${batch} must contain at least ${minimum} candidates, found ${actual}`);
+}
+
 if (warnings.length) warnings.forEach((warning) => console.warn(`warning: ${warning}`));
 if (failures.length) {
   console.error('Candidate Stable Asset validation failed:');
@@ -104,6 +130,5 @@ if (failures.length) {
   process.exit(1);
 }
 
-const promoted = candidates.filter((row) => row.status === 'promoted').length;
 const pendingP0 = candidates.filter((row) => row.priority === 'P0' && row.status !== 'promoted').length;
-console.log(`Candidate Stable Asset validation passed: ${candidates.length} candidates, ${promoted} promoted, ${pendingP0} P0 pending, ${stablecoins.length} canonical stablecoins.`);
+console.log(`Candidate Stable Asset validation passed: ${candidates.length} candidates, ${promoted} promoted, ${pending} pending, ${pendingP0} P0 pending, ${stablecoins.length} canonical stablecoins.`);
