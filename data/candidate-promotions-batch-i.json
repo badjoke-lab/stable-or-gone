@@ -1,0 +1,7 @@
+[
+  {"candidate_id":"sog_cand_000056","status":"promoted","notes":"Promoted in Batch I as active XSGD, a one-to-one SGD-backed regional fiat stablecoin with current reserve attestations."},
+  {"candidate_id":"sog_cand_000057","status":"promoted","notes":"Promoted in Batch I as the current regulated JPYC launched through JPYC EX; legacy prepaid versions remain a separate unresolved lineage question."},
+  {"candidate_id":"sog_cand_000058","status":"promoted","notes":"Promoted in Batch I as GYEN with winding-down lifecycle status, purchases disabled, and redemption still available during the announced period."},
+  {"candidate_id":"sog_cand_000059","status":"promoted","notes":"Promoted in Batch I as active BRZ, a one-to-one BRL-backed regional fiat stablecoin operated by Transfero."},
+  {"candidate_id":"sog_cand_000060","status":"promoted","notes":"Promoted in Batch I as active TRYB, a one-to-one TRY-backed stablecoin issued and redeemed through BiLira."}
+]
