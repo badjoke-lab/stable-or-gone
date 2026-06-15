@@ -1,0 +1,7 @@
+[
+  {"id":"sog_st_agoraausd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_agoraausd_product_batch_f"]},
+  {"id":"sog_st_usd1","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usd1_faq_batch_f"]},
+  {"id":"sog_st_usdtb","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdtb_docs_batch_f"]},
+  {"id":"sog_st_mountainusdm","availability":"native","source":"reserve_income","accrual":"balance_rebase","rate":"variable","related_asset_ids":[],"evidence_ids":["sog_src_mountainusdm_winddown_batch_f","sog_src_mountainusdm_por_batch_f"]},
+  {"id":"sog_st_usdq","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdq_transparency_batch_f"]}
+]

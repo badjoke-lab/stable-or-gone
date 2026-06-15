@@ -5,6 +5,7 @@ const root = process.cwd();
 const failures = [];
 const baselinePath = 'docs/migration/registry-v2-baseline.json';
 const v3FoundationPath = 'docs/migration/registry-v3-foundation.json';
+const candidateContractPath = 'docs/growth/candidate-master-70.json';
 
 const fail = (message) => failures.push(message);
 const absolute = (relativePath) => path.join(root, relativePath);
@@ -68,6 +69,33 @@ function walk(relativeDir) {
   return files;
 }
 
+function loadCandidateMaster() {
+  const contract = readJson(candidateContractPath) ?? {};
+  const master = readGroup(contract.candidate_files ?? ['data/candidate-stable-assets.json'], 'Candidate Master');
+  const promotionFiles = ['data/candidate-promotions-batch-d.json', 'data/candidate-promotions-batch-f.json'];
+  const patches = new Map();
+  for (const file of promotionFiles) {
+    if (!exists(file)) continue;
+    const rows = readJson(file);
+    if (!Array.isArray(rows)) {
+      fail(`${file}: expected a JSON array`);
+      continue;
+    }
+    for (const row of rows) {
+      if (!row.candidate_id) {
+        fail(`${file}: promotion without candidate_id`);
+        continue;
+      }
+      if (patches.has(row.candidate_id)) fail(`Candidate Master: duplicate promotion patch ${row.candidate_id}`);
+      patches.set(row.candidate_id, row);
+    }
+  }
+  for (const candidateId of patches.keys()) {
+    if (!master.some((row) => row.candidate_id === candidateId)) fail(`Candidate Master: promotion references missing candidate ${candidateId}`);
+  }
+  return master.map((row) => ({ ...row, ...(patches.get(row.candidate_id) ?? {}) }));
+}
+
 const baseline = readJson(baselinePath);
 const v3Foundation = readJson(v3FoundationPath);
 if (!baseline || !v3Foundation) process.exit(1);
@@ -75,14 +103,9 @@ if (v3Foundation.base_registry !== baselinePath) fail(`${v3FoundationPath}: base
 if (v3Foundation.status !== 'additive') fail(`${v3FoundationPath}: status must be additive`);
 
 const groups = {};
-for (const [name, files] of Object.entries(baseline.data_groups ?? {})) {
-  groups[name] = readGroup(files, name);
-}
-
+for (const [name, files] of Object.entries(baseline.data_groups ?? {})) groups[name] = readGroup(files, name);
 const v3Groups = {};
-for (const [name, files] of Object.entries(v3Foundation.data_groups ?? {})) {
-  v3Groups[name] = readGroup(files, `Registry v3 ${name}`);
-}
+for (const [name, files] of Object.entries(v3Foundation.data_groups ?? {})) v3Groups[name] = readGroup(files, `Registry v3 ${name}`);
 
 for (const [name, minimum] of Object.entries(baseline.minimum_counts ?? {})) {
   const actual = groups[name]?.length;
@@ -143,11 +166,9 @@ for (const row of v3Groups.stable_asset_relationships ?? []) {
   if (!stablecoinIds.has(row.from_asset_id)) fail(`Registry v3 asset relationship ${row.id}: missing from asset ${row.from_asset_id}`);
   if (!stablecoinIds.has(row.to_asset_id)) fail(`Registry v3 asset relationship ${row.id}: missing to asset ${row.to_asset_id}`);
 }
-for (const row of v3Groups.reserve_components ?? []) {
-  if (!stablecoinIds.has(row.stablecoin_id)) fail(`Registry v3 reserve component ${row.id}: missing stablecoin ${row.stablecoin_id}`);
-}
+for (const row of v3Groups.reserve_components ?? []) if (!stablecoinIds.has(row.stablecoin_id)) fail(`Registry v3 reserve component ${row.id}: missing stablecoin ${row.stablecoin_id}`);
 
-const candidates = readJson('data/candidate-stable-assets.json') ?? [];
+const candidates = loadCandidateMaster();
 const promoted = candidates.filter((row) => row.status === 'promoted');
 const promotedIds = new Set();
 for (const row of promoted) {
@@ -195,14 +216,10 @@ const loaderMap = {
   deployments: registryLoader
 };
 for (const [groupName, loaderText] of Object.entries(loaderMap)) {
-  for (const file of baseline.data_groups?.[groupName] ?? []) {
-    if (!loaderText.includes(path.posix.basename(file))) fail(`${file}: listed in baseline but missing from runtime loader for ${groupName}`);
-  }
+  for (const file of baseline.data_groups?.[groupName] ?? []) if (!loaderText.includes(path.posix.basename(file))) fail(`${file}: listed in baseline but missing from runtime loader for ${groupName}`);
 }
 for (const [groupName, files] of Object.entries(v3Foundation.data_groups ?? {})) {
-  for (const file of files) {
-    if (!v3Loader.includes(path.posix.basename(file))) fail(`${file}: listed in Registry v3 foundation but missing from runtime loader for ${groupName}`);
-  }
+  for (const file of files) if (!v3Loader.includes(path.posix.basename(file))) fail(`${file}: listed in Registry v3 foundation but missing from runtime loader for ${groupName}`);
 }
 
 if (!v3Foundation.validator || !exists(v3Foundation.validator)) fail(`${v3FoundationPath}: missing Registry v3 validator ${v3Foundation.validator ?? '(undefined)'}`);
