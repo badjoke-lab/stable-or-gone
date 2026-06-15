@@ -28,8 +28,15 @@ if (current.schema_version !== contract.schema_version) {
   failures.push(`schema_version must be ${contract.schema_version}`);
 }
 
-if (current.registry?.stablecoins !== 40) {
-  failures.push(`protected stablecoin count must be 40, found ${current.registry?.stablecoins}`);
+for (const [name, minimum] of Object.entries(contract.protected_minimums ?? {})) {
+  const actual = current.registry?.[name];
+  if (!Number.isInteger(minimum) || minimum < 0) {
+    failures.push(`protected minimum ${name} must be a non-negative integer`);
+    continue;
+  }
+  if (!Number.isInteger(actual) || actual < minimum) {
+    failures.push(`protected ${name} count must be at least ${minimum}, found ${actual}`);
+  }
 }
 
 if (sumObjectValues(current.lifecycle?.by_status ?? {}) !== current.registry?.stablecoins) {
