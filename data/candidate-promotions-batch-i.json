@@ -3,5 +3,10 @@
   {"candidate_id":"sog_cand_000057","status":"promoted","notes":"Promoted in Batch I as the current regulated JPYC launched through JPYC EX; legacy prepaid versions remain a separate unresolved lineage question."},
   {"candidate_id":"sog_cand_000058","status":"promoted","notes":"Promoted in Batch I as GYEN with winding-down lifecycle status, purchases disabled, and redemption still available during the announced period."},
   {"candidate_id":"sog_cand_000059","status":"promoted","notes":"Promoted in Batch I as active BRZ, a one-to-one BRL-backed regional fiat stablecoin operated by Transfero."},
-  {"candidate_id":"sog_cand_000060","status":"promoted","notes":"Promoted in Batch I as active TRYB, a one-to-one TRY-backed stablecoin issued and redeemed through BiLira."}
+  {"candidate_id":"sog_cand_000060","status":"promoted","notes":"Promoted in Batch I as active TRYB, a one-to-one TRY-backed stablecoin issued and redeemed through BiLira."},
+  {"candidate_id":"sog_cand_000061","status":"promoted","notes":"Promoted in Batch J as active EURA, retaining agEUR as the historical alias and one asset identity."},
+  {"candidate_id":"sog_cand_000062","status":"promoted","notes":"Promoted in Batch J as active EURCV, a euro electronic-money token issued by Societe Generale-FORGE."},
+  {"candidate_id":"sog_cand_000063","status":"promoted","notes":"Promoted in Batch J as active EURI, issued by Banking Circle with one-to-one euro cash backing."},
+  {"candidate_id":"sog_cand_000064","status":"promoted","notes":"Promoted in Batch J as active EURQ, reusing the existing Quantoz Payments organization."},
+  {"candidate_id":"sog_cand_000065","status":"promoted","notes":"Promoted in Batch J as active VCHF while retaining reserve composition as a known unknown."}
 ]
