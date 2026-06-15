@@ -4,6 +4,7 @@ import batchC from '../../../data/income-profiles-v3-c.json';
 import batchD from '../../../data/income-profiles-v3-d.json';
 import batchE from '../../../data/income-profiles-v3-e.json';
 import batchF from '../../../data/income-profiles-v3-f.json';
+import batchG from '../../../data/income-profiles-v3-g.json';
 import type { YieldSource, AccrualMechanism, RateType } from '../schema/registry-v3';
 
 export type IncomeAvailability = 'native' | 'via_wrapper' | 'none' | 'unknown';
@@ -18,7 +19,7 @@ export type IncomeProfileV3 = {
   evidence_ids: string[];
 };
 
-const profiles = [...batchA, ...batchB, ...batchC, ...batchD, ...batchE, ...batchF] as IncomeProfileV3[];
+const profiles = [...batchA, ...batchB, ...batchC, ...batchD, ...batchE, ...batchF, ...batchG] as IncomeProfileV3[];
 
 export function getIncomeProfilesV3(): IncomeProfileV3[] {
   return profiles.map((row) => ({
