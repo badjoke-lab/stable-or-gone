@@ -1,0 +1,7 @@
+[
+  {"id":"sog_st_susde","availability":"native","source":"mixed","accrual":"exchange_rate_increase","rate":"variable","related_asset_ids":["sog_st_usde"],"evidence_ids":["sog_src_susde_overview_batch_h","sog_src_susde_rewards_batch_h","sog_src_susde_staking_batch_h"]},
+  {"id":"sog_st_sdai","availability":"native","source":"protocol_incentives","accrual":"exchange_rate_increase","rate":"protocol_determined","related_asset_ids":["sog_st_dai"],"evidence_ids":["sog_src_sdai_routes_batch_h","sog_src_sdai_repo_batch_h","sog_src_sdai_dsr_batch_h"]},
+  {"id":"sog_st_susds","availability":"native","source":"reserve_income","accrual":"exchange_rate_increase","rate":"protocol_determined","related_asset_ids":["sog_st_usds"],"evidence_ids":["sog_src_susds_token_batch_h","sog_src_susds_product_batch_h","sog_src_susds_routes_batch_h"]},
+  {"id":"sog_st_usdy","availability":"native","source":"reserve_income","accrual":"exchange_rate_increase","rate":"variable","related_asset_ids":[],"evidence_ids":["sog_src_usdy_basics_batch_h","sog_src_usdy_comparison_batch_h","sog_src_usdy_terms_batch_h"]},
+  {"id":"sog_st_usyc","availability":"native","source":"reserve_income","accrual":"exchange_rate_increase","rate":"variable","related_asset_ids":[],"evidence_ids":["sog_src_usyc_circle_overview_batch_h","sog_src_usyc_product_batch_h","sog_src_usyc_acquisition_batch_h"]}
+]
