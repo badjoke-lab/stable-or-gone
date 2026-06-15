@@ -1,0 +1,7 @@
+[
+{"id":"sog_st_eura","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eura_docs_batch_j"]},
+{"id":"sog_st_eurcv","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurcv_product_batch_j"]},
+{"id":"sog_st_euri","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_euri_product_batch_j"]},
+{"id":"sog_st_eurq","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurq_product_batch_j"]},
+{"id":"sog_st_vchf","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_vchf_product_batch_j"]}
+]
