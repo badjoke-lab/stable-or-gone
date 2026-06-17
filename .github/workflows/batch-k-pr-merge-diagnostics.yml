@@ -7,21 +7,29 @@ on:
       - .github/workflows/batch-k-pr-merge-diagnostics.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   capture:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: refs/pull/42/merge
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - run: |
-          node scripts/validate-batch-finalization.mjs > finalization.log 2>&1 || true
-      - uses: actions/upload-artifact@v4
-        with:
-          name: batch-k-pr-merge-finalization
-          path: finalization.log
+          node scripts/validate-batch-finalization.mjs > /tmp/pr-merge-finalization.log 2>&1 || true
+      - run: |
+          git fetch origin batch-k-historical-failures
+          git checkout -B batch-k-historical-failures origin/batch-k-historical-failures
+          mkdir -p diagnostics
+          cp /tmp/pr-merge-finalization.log diagnostics/pr-merge-finalization.log
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add diagnostics/pr-merge-finalization.log
+          git commit -m "Capture PR merge finalization diagnostics"
+          git push origin HEAD:batch-k-historical-failures
