@@ -63,7 +63,8 @@ const legacyIssuers = [
   ...read('data/issuers-batch-f.json'),
   ...read('data/issuers-batch-g.json'),
   ...read('data/issuers-batch-h.json'),
-  ...read('data/issuers-batch-i.json')
+  ...read('data/issuers-batch-i.json'),
+  ...read('data/issuers-batch-j.json')
 ];
 
 for (const row of stablecoins) {
