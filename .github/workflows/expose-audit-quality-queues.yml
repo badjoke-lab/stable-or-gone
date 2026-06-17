@@ -1,0 +1,80 @@
+name: Expose audit quality queue IDs
+
+on:
+  push:
+    branches:
+      - expose-audit-quality-queues
+    paths:
+      - .github/workflows/expose-audit-quality-queues.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: expose-audit-quality-queues
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-package-lock
+      - name: Add machine-readable quality queues
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/audit-registry-integrity.mjs')
+          source = path.read_text()
+
+          old_observations = """observations.push(`${stale.length} records have missing or older-than-one-year last_verified_at values.`);
+          observations.push(`${missingLaunch.length} records have no launch_date.`);
+          observations.push(`${missingEnd.length} historical-side records have no discontinued_date.`);
+          observations.push(`${unknownIncome.length} income profiles remain entirely unknown.`);"""
+          new_observations = """const sortedIds = (rows) => rows.map((row) => row.id).sort();
+          const staleIds = sortedIds(stale);
+          const missingLaunchIds = sortedIds(missingLaunch);
+          const missingEndIds = sortedIds(missingEnd);
+          const unknownIncomeIds = sortedIds(unknownIncome);
+          observations.push(`${stale.length} records have missing or older-than-one-year last_verified_at values: ${staleIds.join(', ') || 'none'}.`);
+          observations.push(`${missingLaunch.length} records have no launch_date: ${missingLaunchIds.join(', ') || 'none'}.`);
+          observations.push(`${missingEnd.length} historical-side records have no discontinued_date: ${missingEndIds.join(', ') || 'none'}.`);
+          observations.push(`${unknownIncome.length} income profiles remain entirely unknown: ${unknownIncomeIds.join(', ') || 'none'}.`);"""
+          if old_observations not in source:
+              raise SystemExit('quality observation anchor missing')
+          source = source.replace(old_observations, new_observations, 1)
+
+          old_quality = """    stale_or_missing_last_verified: stale.length,
+              missing_launch_date: missingLaunch.length,
+              historical_missing_discontinued_date: missingEnd.length,
+              all_unknown_income_profiles: unknownIncome.length,
+              reserve_report_context_coverage: {"""
+          new_quality = """    stale_or_missing_last_verified: stale.length,
+              stale_or_missing_last_verified_ids: staleIds,
+              missing_launch_date: missingLaunch.length,
+              missing_launch_date_ids: missingLaunchIds,
+              historical_missing_discontinued_date: missingEnd.length,
+              historical_missing_discontinued_date_ids: missingEndIds,
+              all_unknown_income_profiles: unknownIncome.length,
+              all_unknown_income_profile_ids: unknownIncomeIds,
+              reserve_report_context_coverage: {"""
+          if old_quality not in source:
+              raise SystemExit('quality summary anchor missing')
+          source = source.replace(old_quality, new_quality, 1)
+
+          path.write_text(source)
+          PY
+      - name: Regenerate integrity audit
+        run: npm run audit:integrity
+      - name: Remove one-off workflow
+        run: rm .github/workflows/expose-audit-quality-queues.yml
+      - name: Commit generated queues
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Expose integrity audit quality queues"
+          git push origin HEAD:expose-audit-quality-queues
