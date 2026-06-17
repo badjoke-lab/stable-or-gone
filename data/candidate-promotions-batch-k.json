@@ -1,0 +1,7 @@
+[
+{"candidate_id":"sog_cand_000066","status":"promoted","notes":"Promoted in Batch K as failed Empty Set Dollar; exact terminal date remains a known unknown."},
+{"candidate_id":"sog_cand_000067","status":"promoted","notes":"Promoted in Batch K as failed Basis Cash, with BAB and BAS modeled as related mechanism tokens rather than stablecoin records."},
+{"candidate_id":"sog_cand_000068","status":"promoted","notes":"Promoted in Batch K as failed Dynamic Set Dollar; v1/v2 lineage remains partially unresolved."},
+{"candidate_id":"sog_cand_000069","status":"promoted","notes":"Promoted in Batch K as failed Cashio Dollar following the 2022 infinite-mint exploit and peg collapse."},
+{"candidate_id":"sog_cand_000070","status":"promoted","notes":"Promoted in Batch K as one continuous aUSD-to-aSEED migrated identity under Acala governance."}
+]
