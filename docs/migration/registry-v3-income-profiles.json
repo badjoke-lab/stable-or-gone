@@ -2,18 +2,8 @@
   "schema_version": "3.0-income-profiles",
   "status": "additive",
   "base_registry": "docs/migration/registry-v2-baseline.json",
-  "data_files": [
-    "data/income-profiles-v3-a.json",
-    "data/income-profiles-v3-b.json",
-    "data/income-profiles-v3-c.json",
-    "data/income-profiles-v3-d.json",
-    "data/income-profiles-v3-e.json",
-    "data/income-profiles-v3-f.json",
-    "data/income-profiles-v3-g.json",
-    "data/income-profiles-v3-h.json",
-    "data/asset-yield-state-batch-j.json"
-  ],
-  "minimum_count": 65,
+  "data_files": ["data/income-profiles-v3-a.json","data/income-profiles-v3-b.json","data/income-profiles-v3-c.json","data/income-profiles-v3-d.json","data/income-profiles-v3-e.json","data/income-profiles-v3-f.json","data/income-profiles-v3-g.json","data/income-profiles-v3-h.json","data/asset-yield-state-batch-j.json","data/asset-yield-state-batch-k.json"],
+  "minimum_count": 70,
   "loader": "src/lib/data/incomeProfilesV3.ts",
   "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"
