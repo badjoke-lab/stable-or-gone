@@ -1,37 +1,37 @@
-name: Apply Batch K wiring
+name: Batch K diagnostics
 
 on:
   push:
     branches: [batch-k-historical-failures]
     paths:
-      - scripts/apply-batch-k-wiring.mjs
       - .github/workflows/apply-batch-k-wiring.yml
 
 permissions:
   contents: write
 
 jobs:
-  wire:
+  diagnose:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: batch-k-historical-failures
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Restore stable loader and validator structure
+      - name: Generate stats and collect diagnostics
         run: |
-          git fetch origin main
-          git checkout origin/main -- src/lib/data/registry.ts src/lib/data/stablecoinProfiles.ts src/lib/data/registryV3.ts src/lib/data/incomeProfilesV3.ts scripts/validate-data.mjs scripts/validate-registry-v2-compat.mjs scripts/validate-candidate-stable-assets.mjs scripts/validate-batch-finalization.mjs
-      - name: Apply Batch K additions
-        run: node scripts/apply-batch-k-wiring.mjs
-      - name: Commit normalized wiring
+          mkdir -p diagnostics
+          node scripts/generate-registry-stats.mjs
+          node scripts/validate-candidate-stable-assets.mjs > diagnostics/candidates.log 2>&1 || true
+          node scripts/validate-registry-v3-foundation.mjs > diagnostics/v3.log 2>&1 || true
+          node scripts/validate-data.mjs > diagnostics/data.log 2>&1 || true
+          node scripts/validate-registry-v2-compat.mjs > diagnostics/compat.log 2>&1 || true
+      - name: Commit diagnostics and generated stats
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add src scripts
-          git commit -m "Normalize Batch K loader and validator wiring"
+          git add diagnostics data/generated/registry-stats.json
+          git commit -m "Collect Batch K validation diagnostics and refresh stats"
           git push origin HEAD:batch-k-historical-failures
