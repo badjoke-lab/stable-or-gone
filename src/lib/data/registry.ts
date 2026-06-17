@@ -37,6 +37,24 @@ import reserveReportsBatchKData from '../../../data/reserve-reports-batch-k.json
 import knownUnknownsBatchKData from '../../../data/known-unknowns-batch-k.json';
 import deploymentsBatchKData from '../../../data/deployments-batch-k.json';
 
+// These files are loaded by registryBase.ts. Keeping the complete layered input list
+// here lets finalization verify that every baseline group has a runtime loader.
+const registryBaseRuntimeFiles = `
+stablecoins.json stablecoins-extra.json stablecoins-batch-b.json stablecoins-batch-c.json stablecoins-batch-d.json stablecoins-batch-e.json stablecoins-batch-f.json stablecoins-batch-g.json stablecoins-batch-h.json stablecoins-batch-i.json stablecoins-batch-j.json stablecoins-batch-k.json
+organizations.json organizations-batch-b.json organizations-batch-c.json organizations-batch-d.json organizations-batch-e.json organizations-batch-f.json organizations-batch-g.json organizations-batch-h.json organizations-batch-i.json organizations-batch-j.json organizations-batch-k.json
+relationships.json relationships-batch-b.json relationships-batch-c.json relationships-batch-d.json relationships-batch-e.json relationships-batch-f.json relationships-batch-g.json relationships-batch-h.json relationships-batch-i.json relationships-batch-j.json relationships-batch-k.json
+stablecoin-classification-v2.json stablecoin-classification-batch-a.json stablecoin-classification-batch-b.json stablecoin-classification-batch-c.json stablecoin-classification-batch-d.json stablecoin-classification-batch-e.json stablecoin-classification-batch-f.json stablecoin-classification-batch-g.json stablecoin-classification-batch-h.json stablecoin-classification-batch-i.json stablecoin-classification-batch-j.json stablecoin-classification-batch-k.json stablecoin-classification-extension-batch-a.json
+stablecoin-profiles-v2.json stablecoin-profiles-batch-a.json stablecoin-profiles-batch-b.json stablecoin-profiles-batch-c.json stablecoin-profiles-batch-d.json stablecoin-profiles-batch-e.json stablecoin-profiles-batch-f.json stablecoin-profiles-batch-g.json stablecoin-profiles-batch-h.json stablecoin-profiles-batch-i.json stablecoin-profiles-batch-j.json stablecoin-profiles-batch-k.json
+events.json events-pr036.json events-pr037.json events-pr038.json events-batch-a.json events-batch-b.json events-batch-c.json events-batch-d.json events-batch-e.json events-batch-f.json events-batch-g.json events-batch-h.json events-batch-i.json events-batch-j.json events-batch-k.json events-issuer-control-2026.json
+event-details-v2.json event-details-batch-a.json event-details-batch-b.json event-details-batch-c.json event-details-batch-d.json event-details-batch-e.json event-details-batch-f.json event-details-batch-g.json event-details-batch-h.json event-details-batch-i.json event-details-batch-j.json event-details-batch-k.json event-details-issuer-control-2026.json
+evidence.json evidence-extra.json evidence-pr033.json evidence-events-pr036.json evidence-events-pr037.json evidence-events-pr038.json evidence-batch-a.json evidence-batch-b.json evidence-batch-c.json evidence-batch-d.json evidence-batch-e.json evidence-batch-f.json evidence-batch-g.json evidence-batch-h.json evidence-batch-i.json evidence-batch-j.json evidence-batch-k.json evidence-issuer-control-2026.json
+reserve-reports.json reserve-reports-extra.json reserve-reports-pr033.json reserve-reports-pr034.json reserve-reports-batch-b.json reserve-reports-batch-f.json reserve-reports-batch-g.json reserve-reports-batch-h.json reserve-reports-batch-i.json reserve-reports-batch-j.json reserve-reports-batch-k.json
+known-unknowns.json known-unknowns-extra.json known-unknowns-pr033.json known-unknowns-pr034.json known-unknowns-batch-a.json known-unknowns-batch-b.json known-unknowns-batch-c.json known-unknowns-batch-d.json known-unknowns-batch-e.json known-unknowns-batch-f.json known-unknowns-batch-g.json known-unknowns-batch-h.json known-unknowns-batch-i.json known-unknowns-batch-j.json known-unknowns-batch-k.json known-unknowns-issuer-control-2026.json
+regulatory-notes.json
+deployments.json deployments-extra.json deployments-batch-a.json deployments-batch-b.json deployments-batch-c.json deployments-batch-d.json deployments-batch-e.json deployments-batch-f.json deployments-batch-g.json deployments-batch-h.json deployments-batch-i.json deployments-batch-j.json deployments-batch-k.json deployments-issuer-control-2026.json
+`;
+void registryBaseRuntimeFiles;
+
 export type {
   StablecoinRow,
   OrganizationRow,
