@@ -1,0 +1,35 @@
+name: Generate event coverage artifacts
+
+on:
+  push:
+    branches:
+      - complete-event-coverage
+    paths:
+      - .github/workflows/generate-event-coverage-artifacts.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: complete-event-coverage
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - name: Generate registry statistics
+        run: node scripts/generate-registry-stats.mjs
+      - name: Generate integrity audit
+        run: npm run audit:integrity
+      - name: Commit generated outputs
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/generated/registry-stats.json data/generated/registry-integrity-audit.json docs/audits/registry-70-final-audit.md
+          git commit -m "Regenerate event coverage audit artifacts"
+          git push origin HEAD:complete-event-coverage
