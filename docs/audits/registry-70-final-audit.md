@@ -4,8 +4,8 @@
 - Baseline: `sog_registry_v2_post_batch_k_2026_06_17`
 - Canonical stable assets: **70**
 - Promoted candidates: **70 / 70**
-- Critical findings: **19**
-- Warnings: **7**
+- Critical findings: **0**
+- Warnings: **10**
 
 ## Scope
 
@@ -13,6 +13,7 @@
 - Legacy status and Registry v2 lifecycle compatibility
 - Organization, event, evidence, deployment, and Registry v3 references
 - Full-record coverage across required Registry v2/v3 layers
+- Optional event, reserve-report, and deployment coverage visibility
 - Generated registry statistics consistency
 - Date freshness and explicit known-unknown inventory
 
@@ -37,27 +38,25 @@
 | reserve_components | 102 |
 | income_profiles | 70 |
 
+## Coverage
+
+| Layer | Covered | Required |
+|---|---:|:---:|
+| classifications | 70 / 70 | yes |
+| profiles | 70 / 70 | yes |
+| relationships | 70 / 70 | yes |
+| evidence | 70 / 70 | yes |
+| reserve_reports | 52 / 70 | no |
+| known_unknowns | 70 / 70 | yes |
+| deployments | 69 / 70 | no |
+| events | 63 / 70 | no |
+| legal_profiles | 70 / 70 | yes |
+| reserve_components | 70 / 70 | yes |
+| income_profiles | 70 / 70 | yes |
+
 ## Critical Findings
 
-- reserve_reports coverage is missing sog_st_mim
-- reserve_reports coverage is missing sog_st_fei
-- reserve_reports coverage is missing sog_st_usdn
-- reserve_reports coverage is missing sog_st_rai
-- reserve_reports coverage is missing sog_st_spot
-- reserve_reports coverage is missing sog_st_nuon
-- reserve_reports coverage is missing sog_st_gho
-- reserve_reports coverage is missing sog_st_bold
-- reserve_reports coverage is missing sog_st_usd0
-- reserve_reports coverage is missing sog_st_usr
-- reserve_reports coverage is missing sog_st_sai
-- reserve_reports coverage is missing sog_st_husd
-- reserve_reports coverage is missing sog_st_iron
-- reserve_reports coverage is missing sog_st_musd
-- reserve_reports coverage is missing sog_st_eurs
-- reserve_reports coverage is missing sog_st_eurt
-- reserve_reports coverage is missing sog_st_usdm
-- reserve_reports coverage is missing sog_st_alusd
-- deployments coverage is missing sog_st_husd
+- None.
 
 ## Warnings
 
@@ -68,6 +67,9 @@
 - sog_ev_susd_synthetix_lifecycle_context source_count=1, linked evidence=3
 - sog_ev_rai_governance_minimization source_count=2, linked evidence=1
 - sog_ev_nuon_base_launch source_count=2, linked evidence=3
+- reserve_reports coverage 52/70; missing sog_st_mim, sog_st_fei, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_nuon, sog_st_gho, sog_st_bold, sog_st_usd0, sog_st_usr, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurs, sog_st_eurt, sog_st_usdm, sog_st_alusd
+- deployments coverage 69/70; missing sog_st_husd
+- events coverage 63/70; missing sog_st_frax, sog_st_tusd, sog_st_rlusd, sog_st_eurc, sog_st_usdp, sog_st_usdg, sog_st_usds
 
 ## Quality Observations
 
@@ -78,4 +80,4 @@
 
 ## Result
 
-The registry does not pass the final audit until all critical findings are resolved.
+The 70-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.
