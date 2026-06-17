@@ -1,0 +1,34 @@
+name: Registry integrity audit
+
+on:
+  push:
+    branches: [audit-70-record-registry]
+    paths:
+      - scripts/audit-registry-integrity.mjs
+      - .github/workflows/registry-integrity-audit.yml
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit-70-record-registry
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run audit and persist findings
+        env:
+          AUDIT_ALLOW_CRITICAL: '1'
+        run: node scripts/audit-registry-integrity.mjs
+      - name: Commit generated audit reports
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/audits/registry-70-final-audit.md data/generated/registry-integrity-audit.json
+          git commit -m "Generate 70-record registry integrity audit"
+          git push origin HEAD:audit-70-record-registry
