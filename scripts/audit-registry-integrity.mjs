@@ -289,10 +289,15 @@ const stale = stablecoins.filter((row) => !Number.isFinite(dateValue(row.last_ve
 const missingLaunch = stablecoins.filter((row) => !row.launch_date);
 const missingEnd = stablecoins.filter((row) => ['failed', 'discontinued', 'migrated', 'rebranded'].includes(row.status) && !row.discontinued_date);
 const unknownIncome = incomeProfiles.filter((row) => [row.availability, row.source, row.accrual, row.rate].every((value) => value === 'unknown'));
-observations.push(`${stale.length} records have missing or older-than-one-year last_verified_at values.`);
-observations.push(`${missingLaunch.length} records have no launch_date.`);
-observations.push(`${missingEnd.length} historical-side records have no discontinued_date.`);
-observations.push(`${unknownIncome.length} income profiles remain entirely unknown.`);
+const sortedIds = (rows) => rows.map((row) => row.id).sort();
+const staleIds = sortedIds(stale);
+const missingLaunchIds = sortedIds(missingLaunch);
+const missingEndIds = sortedIds(missingEnd);
+const unknownIncomeIds = sortedIds(unknownIncome);
+observations.push(`${stale.length} records have missing or older-than-one-year last_verified_at values: ${staleIds.join(', ') || 'none'}.`);
+observations.push(`${missingLaunch.length} records have no launch_date: ${missingLaunchIds.join(', ') || 'none'}.`);
+observations.push(`${missingEnd.length} historical-side records have no discontinued_date: ${missingEndIds.join(', ') || 'none'}.`);
+observations.push(`${unknownIncome.length} income profiles remain entirely unknown: ${unknownIncomeIds.join(', ') || 'none'}.`);
 
 const summary = {
   audited_at: auditDate,
@@ -311,9 +316,13 @@ const summary = {
   },
   quality: {
     stale_or_missing_last_verified: stale.length,
+    stale_or_missing_last_verified_ids: staleIds,
     missing_launch_date: missingLaunch.length,
+    missing_launch_date_ids: missingLaunchIds,
     historical_missing_discontinued_date: missingEnd.length,
+    historical_missing_discontinued_date_ids: missingEndIds,
     all_unknown_income_profiles: unknownIncome.length,
+    all_unknown_income_profile_ids: unknownIncomeIds,
     reserve_report_context_coverage: {
       covered: allCoverage.reserve_reports.size,
       total: stablecoinIds.size
