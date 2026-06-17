@@ -287,7 +287,11 @@ if (generatedStats.baseline_id !== baseline.baseline_id) {
 const now = dateValue(auditDate);
 const stale = stablecoins.filter((row) => !Number.isFinite(dateValue(row.last_verified_at)) || now - dateValue(row.last_verified_at) > 365 * 86400000);
 const missingLaunch = stablecoins.filter((row) => !row.launch_date);
-const missingEnd = stablecoins.filter((row) => ['failed', 'discontinued', 'migrated', 'rebranded'].includes(row.status) && !row.discontinued_date);
+const terminalLifecycleStatuses = new Set(['collapsed', 'inactive', 'terminated', 'migrated', 'rebranded']);
+const missingEnd = stablecoins.filter((row) => {
+  const lifecycle = classificationById.get(row.id)?.lifecycle_status;
+  return terminalLifecycleStatuses.has(lifecycle) && !row.discontinued_date;
+});
 const unknownIncome = incomeProfiles.filter((row) => [row.availability, row.source, row.accrual, row.rate].every((value) => value === 'unknown'));
 const sortedIds = (rows) => rows.map((row) => row.id).sort();
 const staleIds = sortedIds(stale);
