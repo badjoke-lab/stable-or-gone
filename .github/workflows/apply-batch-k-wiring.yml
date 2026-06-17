@@ -1,0 +1,31 @@
+name: Apply Batch K wiring
+
+on:
+  push:
+    branches: [batch-k-historical-failures]
+    paths:
+      - scripts/apply-batch-k-wiring.mjs
+      - .github/workflows/apply-batch-k-wiring.yml
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: batch-k-historical-failures
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/apply-batch-k-wiring.mjs
+      - name: Commit wiring changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs src scripts
+          git commit -m "Wire Batch K into registry loaders and validators"
+          git push origin HEAD:batch-k-historical-failures
