@@ -13,7 +13,7 @@
     "recovery_date": "2023-03-13",
     "failure_mechanism": "reserve_asset_exposure",
     "confidence": "medium",
-    "source_count": 4,
+    "source_count": 2,
     "notes": "Deepened in PR-018A and PR-024A with Circle transparency, SVB exposure, product, reopening-operation, reserve-report, redemption-access, and deployment documentation sources. Lowest observed price and exact duration remain source-specific and should not be displayed until a market data source is selected."
   },
   {
@@ -30,7 +30,7 @@
     "recovery_date": null,
     "failure_mechanism": "algorithmic_death_spiral",
     "confidence": "medium",
-    "source_count": 5,
+    "source_count": 3,
     "notes": "Deepened in PR-018B with SEC regulatory context and research sources for failure mechanics and post-collapse lifecycle. Exact intraday timeline, lowest observed price, LFG reserve intervention details, and USTC lifecycle require further source-specific review."
   },
   {
@@ -47,7 +47,7 @@
     "recovery_date": null,
     "failure_mechanism": "issuer_wind_down",
     "confidence": "medium",
-    "source_count": 5,
+    "source_count": 4,
     "notes": "Deepened in PR-018C with Paxos wind-down, NYDFS-related context, reported SEC no-action outcome context, and exchange support phase-out context. Final redemption and exchange conversion status still require source-specific review."
   }
 ]

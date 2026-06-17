@@ -1,0 +1,1 @@
+Seven event source_count fields now match currently linked evidence records. Integrity warnings were reduced from ten to three without adding or removing evidence.
