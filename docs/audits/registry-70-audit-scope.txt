@@ -1,0 +1,1 @@
+Scope: identity uniqueness, candidate mapping, lifecycle compatibility, cross-record references, required and optional coverage, generated statistics consistency, freshness, and known-unknown inventory.
