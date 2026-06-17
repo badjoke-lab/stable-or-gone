@@ -1,1 +1,0 @@
-This change adds contract deployment evidence only and does not alter HUSD lifecycle classification.
