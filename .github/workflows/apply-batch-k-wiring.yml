@@ -29,3 +29,5 @@ jobs:
           git add docs src scripts
           git commit -m "Wire Batch K into registry loaders and validators"
           git push origin HEAD:batch-k-historical-failures
+
+# Triggered after workflow installation.
