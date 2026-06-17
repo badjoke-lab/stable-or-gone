@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const auditDate = '2026-06-17';
 const reportPath = 'docs/audits/registry-70-final-audit.md';
 const jsonPath = 'data/generated/registry-integrity-audit.json';
 const critical = [];
@@ -11,12 +10,14 @@ const observations = [];
 
 const absolute = (relativePath) => path.join(root, relativePath);
 const readJson = (relativePath) => JSON.parse(fs.readFileSync(absolute(relativePath), 'utf8'));
-const writeText = (relativePath, text) => {
-  fs.mkdirSync(path.dirname(absolute(relativePath)), { recursive: true });
-  fs.writeFileSync(absolute(relativePath), text.endsWith('\n') ? text : `${text}\n`);
-};
+const serialize = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const normalize = (value) => String(value ?? '').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, '');
 const dateValue = (value) => value ? Date.parse(`${value}T00:00:00Z`) : Number.NaN;
+const loadFiles = (files = []) => files.flatMap((file) => {
+  const rows = readJson(file);
+  if (!Array.isArray(rows)) throw new Error(`${file} must contain an array`);
+  return rows.map((row) => ({ ...row, __source_file: file }));
+});
 const groupBy = (rows, keyFn) => {
   const map = new Map();
   for (const row of rows) {
@@ -28,26 +29,38 @@ const groupBy = (rows, keyFn) => {
   }
   return map;
 };
-const duplicateValues = (rows, field, normalizeValue = (value) => value) => {
-  const grouped = groupBy(rows, (row) => row[field] ? normalizeValue(row[field]) : null);
-  return [...grouped.entries()].filter(([, items]) => items.length > 1);
+const duplicateValues = (rows, field, transform = (value) => value) =>
+  [...groupBy(rows, (row) => row[field] ? transform(row[field]) : null).entries()].filter(([, items]) => items.length > 1);
+const coveredIds = (rows, stablecoinIds) => {
+  const result = new Set();
+  for (const row of rows) {
+    const candidates = [];
+    if (typeof row.id === 'string' && stablecoinIds.has(row.id)) candidates.push(row.id);
+    if (typeof row.stablecoin_id === 'string') candidates.push(row.stablecoin_id);
+    if (Array.isArray(row.stablecoin_ids)) candidates.push(...row.stablecoin_ids);
+    if (Array.isArray(row.subject_stablecoin_ids)) candidates.push(...row.subject_stablecoin_ids);
+    for (const id of candidates) if (stablecoinIds.has(id)) result.add(id);
+  }
+  return result;
 };
-const loadFiles = (files = []) => files.flatMap((file) => {
-  const rows = readJson(file);
-  if (!Array.isArray(rows)) throw new Error(`${file} must contain an array`);
-  return rows.map((row) => ({ ...row, __source_file: file }));
-});
+const validateIds = (owner, ids, known, label) => {
+  for (const id of ids ?? []) if (!known.has(id)) critical.push(`${owner} references missing ${label} ${id}`);
+};
 
 const baseline = readJson('docs/migration/registry-v2-baseline.json');
 const foundation = readJson('docs/migration/registry-v3-foundation.json');
 const incomeManifest = readJson('docs/migration/registry-v3-income-profiles.json');
 const candidateContract = readJson('docs/growth/candidate-master-70.json');
 const generatedStats = readJson('data/generated/registry-stats.json');
+const auditDate = baseline.captured_at;
 const groups = Object.fromEntries(Object.entries(baseline.data_groups).map(([name, files]) => [name, loadFiles(files)]));
 const v3 = Object.fromEntries(Object.entries(foundation.data_groups).map(([name, files]) => [name, loadFiles(files)]));
 const incomeProfiles = loadFiles(incomeManifest.data_files);
 const candidatesBase = loadFiles(candidateContract.candidate_files);
-const promotionFiles = fs.readdirSync(absolute('data')).filter((name) => /^candidate-promotions-batch-[a-z0-9-]+\.json$/.test(name)).sort().map((name) => `data/${name}`);
+const promotionFiles = fs.readdirSync(absolute('data'))
+  .filter((name) => /^candidate-promotions-batch-[a-z0-9-]+\.json$/.test(name))
+  .sort()
+  .map((name) => `data/${name}`);
 const promotionRows = loadFiles(promotionFiles);
 const promotionByCandidate = new Map();
 for (const row of promotionRows) {
@@ -86,16 +99,17 @@ const uniqueChecks = [
   ['income profile id', incomeProfiles, 'id']
 ];
 for (const [label, rows, field] of uniqueChecks) {
-  for (const [value, items] of duplicateValues(rows, field)) critical.push(`Duplicate ${label} ${value}: ${items.map((row) => row.__source_file).join(', ')}`);
+  for (const [value, items] of duplicateValues(rows, field)) {
+    critical.push(`Duplicate ${label} ${value}: ${items.map((row) => row.__source_file).join(', ')}`);
+  }
 }
-for (const [nameKey, items] of duplicateValues(stablecoins, 'name', normalize)) {
-  critical.push(`Canonical-name collision ${nameKey}: ${items.map((row) => `${row.id} (${row.name})`).join(', ')}`);
+for (const [key, items] of duplicateValues(stablecoins, 'name', normalize)) {
+  critical.push(`Canonical-name collision ${key}: ${items.map((row) => `${row.id} (${row.name})`).join(', ')}`);
 }
 
 const identityOwners = new Map();
 for (const coin of stablecoins) {
-  const values = [coin.name, ...(coin.aliases ?? [])];
-  for (const value of values) {
+  for (const value of [coin.name, ...(coin.aliases ?? [])]) {
     const key = normalize(value);
     if (!key || key.length < 4 || key === normalize(coin.symbol)) continue;
     const owners = identityOwners.get(key) ?? new Set();
@@ -125,72 +139,105 @@ const relationByStablecoin = groupBy(relationships, (row) => row.stablecoin_id);
 for (const row of relationships) {
   if (!stablecoinIds.has(row.stablecoin_id)) critical.push(`${row.id} references missing stablecoin ${row.stablecoin_id}`);
   if (!organizationIds.has(row.organization_id)) critical.push(`${row.id} references missing organization ${row.organization_id}`);
-  for (const id of row.evidence_ids ?? []) if (!evidenceIds.has(id)) critical.push(`${row.id} references missing evidence ${id}`);
+  validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 }
 for (const coin of stablecoins) {
   const rows = relationByStablecoin.get(coin.id) ?? [];
   if (!rows.length) critical.push(`${coin.id} has no organization relationship`);
-  if (coin.issuer_id && !rows.some((row) => row.organization_id === coin.issuer_id)) critical.push(`${coin.id} issuer_id ${coin.issuer_id} is absent from relationships`);
+  if (coin.issuer_id && !rows.some((row) => row.organization_id === coin.issuer_id)) {
+    critical.push(`${coin.id} issuer_id ${coin.issuer_id} is absent from relationships`);
+  }
 }
 
-const eventDetailIds = new Set(eventDetails.map((row) => row.id));
+const eventDetailById = new Map(eventDetails.map((row) => [row.id, row]));
 for (const event of events) {
-  if (!eventDetailIds.has(event.id)) critical.push(`${event.id} has no Event v2 detail`);
-  for (const id of event.subject_stablecoin_ids ?? []) if (!stablecoinIds.has(id)) critical.push(`${event.id} references missing stablecoin ${id}`);
-  for (const id of event.subject_organization_ids ?? []) if (!organizationIds.has(id)) critical.push(`${event.id} references missing organization ${id}`);
-  for (const id of event.evidence_ids ?? []) if (!evidenceIds.has(id)) critical.push(`${event.id} references missing evidence ${id}`);
+  const detail = eventDetailById.get(event.id);
+  if (!detail) critical.push(`${event.id} has no Event v2 detail`);
+  validateIds(event.id, event.subject_stablecoin_ids, stablecoinIds, 'stablecoin');
+  validateIds(event.id, event.subject_organization_ids, organizationIds, 'organization');
+  validateIds(event.id, event.evidence_ids, evidenceIds, 'evidence');
 }
-for (const detail of eventDetails) if (!eventIds.has(detail.id)) critical.push(`${detail.id} is an orphan event detail`);
+for (const detail of eventDetails) {
+  if (!eventIds.has(detail.id)) critical.push(`${detail.id} is an orphan event detail`);
+  validateIds(detail.id, detail.subject_stablecoin_ids, stablecoinIds, 'stablecoin');
+  validateIds(detail.id, detail.subject_organization_ids, organizationIds, 'organization');
+  validateIds(detail.id, detail.evidence_ids, evidenceIds, 'evidence');
+}
 
-for (const row of evidence) {
-  for (const id of row.stablecoin_ids ?? []) if (!stablecoinIds.has(id)) critical.push(`${row.id} references missing stablecoin ${id}`);
-  for (const id of row.organization_ids ?? []) if (!organizationIds.has(id)) critical.push(`${row.id} references missing organization ${id}`);
-  for (const id of row.event_ids ?? []) if (!eventIds.has(id)) critical.push(`${row.id} references missing event ${id}`);
-  try { new URL(row.url); } catch { critical.push(`${row.id} has invalid URL ${row.url}`); }
-}
 const evidenceByStablecoin = new Map();
 for (const row of evidence) {
-  for (const id of new Set([row.stablecoin_id, ...(row.stablecoin_ids ?? [])].filter(Boolean))) {
-    evidenceByStablecoin.set(id, (evidenceByStablecoin.get(id) ?? 0) + 1);
-  }
+  const stablecoinRefs = [...new Set([row.stablecoin_id, ...(row.stablecoin_ids ?? [])].filter(Boolean))];
+  const organizationRefs = [...new Set([row.issuer_id, ...(row.organization_ids ?? [])].filter(Boolean))];
+  const eventRefs = [...new Set([row.event_id, ...(row.event_ids ?? [])].filter(Boolean))];
+  validateIds(row.id, stablecoinRefs, stablecoinIds, 'stablecoin');
+  validateIds(row.id, organizationRefs, organizationIds, 'organization');
+  validateIds(row.id, eventRefs, eventIds, 'event');
+  try { new URL(row.url); } catch { critical.push(`${row.id} has invalid URL ${row.url}`); }
+  for (const id of stablecoinRefs) evidenceByStablecoin.set(id, (evidenceByStablecoin.get(id) ?? 0) + 1);
 }
 for (const coin of stablecoins) if (!(evidenceByStablecoin.get(coin.id) > 0)) critical.push(`${coin.id} has no direct evidence coverage`);
 
-const detailById = new Map(eventDetails.map((row) => [row.id, row]));
 for (const event of events) {
   const direct = evidence.filter((row) => row.event_id === event.id || row.event_ids?.includes(event.id)).map((row) => row.id);
-  const detailed = detailById.get(event.id)?.evidence_ids ?? [];
+  const detailed = eventDetailById.get(event.id)?.evidence_ids ?? [];
   const actual = new Set([...direct, ...detailed]).size;
-  if (Number.isInteger(event.source_count) && actual !== event.source_count) warnings.push(`${event.id} source_count=${event.source_count}, linked evidence=${actual}`);
+  if (Number.isInteger(event.source_count) && actual !== event.source_count) {
+    warnings.push(`${event.id} source_count=${event.source_count}, linked evidence=${actual}`);
+  }
 }
 
-const coverageSets = {
-  classifications: new Set(classifications.map((row) => row.id)),
-  profiles: new Set(profiles.map((row) => row.id)),
-  relationships: new Set(relationships.map((row) => row.stablecoin_id)),
+const allCoverage = {
+  classifications: coveredIds(classifications, stablecoinIds),
+  profiles: coveredIds(profiles, stablecoinIds),
+  relationships: coveredIds(relationships, stablecoinIds),
   evidence: new Set(evidenceByStablecoin.keys()),
-  reserve_reports: new Set(reserveReports.map((row) => row.stablecoin_id).filter(Boolean)),
-  known_unknowns: new Set(knownUnknowns.map((row) => row.stablecoin_id).filter(Boolean)),
-  deployments: new Set(deployments.map((row) => row.stablecoin_id)),
-  legal_profiles: new Set(legalProfiles.map((row) => row.id)),
-  reserve_components: new Set(reserveComponents.map((row) => row.stablecoin_id)),
-  income_profiles: new Set(incomeProfiles.map((row) => row.id))
+  reserve_reports: coveredIds(reserveReports, stablecoinIds),
+  known_unknowns: coveredIds(knownUnknowns, stablecoinIds),
+  deployments: coveredIds(deployments, stablecoinIds),
+  events: coveredIds(events, stablecoinIds),
+  legal_profiles: coveredIds(legalProfiles, stablecoinIds),
+  reserve_components: coveredIds(reserveComponents, stablecoinIds),
+  income_profiles: coveredIds(incomeProfiles, stablecoinIds)
 };
-for (const [label, covered] of Object.entries(coverageSets)) {
-  for (const id of stablecoinIds) if (!covered.has(id)) critical.push(`${label} coverage is missing ${id}`);
+const requiredCoverage = new Set([
+  'classifications', 'profiles', 'relationships', 'evidence', 'known_unknowns',
+  'legal_profiles', 'reserve_components', 'income_profiles'
+]);
+for (const [label, covered] of Object.entries(allCoverage)) {
   for (const id of covered) if (!stablecoinIds.has(id)) critical.push(`${label} contains orphan ${id}`);
+  const missing = [...stablecoinIds].filter((id) => !covered.has(id));
+  if (requiredCoverage.has(label)) {
+    for (const id of missing) critical.push(`${label} coverage is missing ${id}`);
+  } else if (missing.length) {
+    warnings.push(`${label} coverage ${covered.size}/${stablecoinIds.size}; missing ${missing.join(', ')}`);
+  }
+  const statsCoverage = generatedStats.coverage?.[label];
+  if (statsCoverage && (statsCoverage.covered !== covered.size || statsCoverage.total !== stablecoinIds.size)) {
+    critical.push(`Generated stats coverage.${label}=${statsCoverage.covered}/${statsCoverage.total}, actual=${covered.size}/${stablecoinIds.size}`);
+  }
 }
+
 for (const row of deployments) {
   if (!stablecoinIds.has(row.stablecoin_id)) critical.push(`${row.id} deployment references missing stablecoin ${row.stablecoin_id}`);
-  for (const id of row.evidence_ids ?? []) if (!evidenceIds.has(id)) critical.push(`${row.id} references missing evidence ${id}`);
+  validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 }
+for (const row of reserveReports) {
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) critical.push(`${row.id} reserve report references missing stablecoin ${row.stablecoin_id}`);
+  try { if (row.url) new URL(row.url); } catch { critical.push(`${row.id} has invalid URL ${row.url}`); }
+}
+for (const row of knownUnknowns) {
+  if (row.stablecoin_id && !stablecoinIds.has(row.stablecoin_id)) critical.push(`${row.id} known unknown references missing stablecoin ${row.stablecoin_id}`);
+}
+for (const row of legalProfiles) validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 for (const row of reserveComponents) {
   if (!stablecoinIds.has(row.stablecoin_id)) critical.push(`${row.id} reserve component references missing stablecoin ${row.stablecoin_id}`);
-  for (const id of row.evidence_ids ?? []) if (!evidenceIds.has(id)) critical.push(`${row.id} references missing evidence ${id}`);
+  validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 }
+for (const row of incomeProfiles) validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 for (const row of assetRelationships) {
   if (!stablecoinIds.has(row.from_asset_id)) critical.push(`${row.id} references missing from asset ${row.from_asset_id}`);
   if (!stablecoinIds.has(row.to_asset_id)) critical.push(`${row.id} references missing to asset ${row.to_asset_id}`);
+  validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 }
 
 const canonicalById = new Map(stablecoins.map((row) => [row.id, row]));
@@ -221,15 +268,19 @@ const expectedCounts = {
 };
 for (const [key, actual] of Object.entries(expectedCounts)) {
   if (generatedStats.registry?.[key] !== actual) critical.push(`Generated stats ${key}=${generatedStats.registry?.[key]}, actual=${actual}`);
-  if (baseline.minimum_counts?.[key] !== undefined && baseline.minimum_counts[key] !== actual) warnings.push(`Baseline minimum ${key}=${baseline.minimum_counts[key]}, actual=${actual}`);
+  if (baseline.minimum_counts?.[key] !== undefined && baseline.minimum_counts[key] !== actual) {
+    warnings.push(`Baseline minimum ${key}=${baseline.minimum_counts[key]}, actual=${actual}`);
+  }
 }
-if (generatedStats.baseline_id !== baseline.baseline_id) critical.push(`Generated stats baseline_id ${generatedStats.baseline_id} differs from ${baseline.baseline_id}`);
+if (generatedStats.baseline_id !== baseline.baseline_id) {
+  critical.push(`Generated stats baseline_id ${generatedStats.baseline_id} differs from ${baseline.baseline_id}`);
+}
 
 const now = dateValue(auditDate);
 const stale = stablecoins.filter((row) => !Number.isFinite(dateValue(row.last_verified_at)) || now - dateValue(row.last_verified_at) > 365 * 86400000);
 const missingLaunch = stablecoins.filter((row) => !row.launch_date);
 const missingEnd = stablecoins.filter((row) => ['failed', 'discontinued', 'migrated', 'rebranded'].includes(row.status) && !row.discontinued_date);
-const unknownIncome = incomeProfiles.filter((row) => row.availability === 'unknown' && row.source === 'unknown' && row.accrual === 'unknown' && row.rate === 'unknown');
+const unknownIncome = incomeProfiles.filter((row) => [row.availability, row.source, row.accrual, row.rate].every((value) => value === 'unknown'));
 observations.push(`${stale.length} records have missing or older-than-one-year last_verified_at values.`);
 observations.push(`${missingLaunch.length} records have no launch_date.`);
 observations.push(`${missingEnd.length} historical-side records have no discontinued_date.`);
@@ -239,12 +290,24 @@ const summary = {
   audited_at: auditDate,
   baseline_id: baseline.baseline_id,
   counts: expectedCounts,
+  coverage: Object.fromEntries(Object.entries(allCoverage).map(([label, covered]) => [label, {
+    covered: covered.size,
+    total: stablecoinIds.size,
+    required: requiredCoverage.has(label)
+  }])),
   candidate_promotions: { total: candidates.length, promoted: promoted.length, pending: candidates.length - promoted.length },
-  identity: { canonical_name_collisions: critical.filter((value) => value.startsWith('Canonical-name collision')).length, alias_collision_warnings: warnings.filter((value) => value.startsWith('Name/alias token')).length },
-  quality: { stale_or_missing_last_verified: stale.length, missing_launch_date: missingLaunch.length, historical_missing_discontinued_date: missingEnd.length, all_unknown_income_profiles: unknownIncome.length },
+  identity: {
+    canonical_name_collisions: critical.filter((value) => value.startsWith('Canonical-name collision')).length,
+    alias_collision_warnings: warnings.filter((value) => value.startsWith('Name/alias token')).length
+  },
+  quality: {
+    stale_or_missing_last_verified: stale.length,
+    missing_launch_date: missingLaunch.length,
+    historical_missing_discontinued_date: missingEnd.length,
+    all_unknown_income_profiles: unknownIncome.length
+  },
   findings: { critical, warnings, observations }
 };
-writeText(jsonPath, JSON.stringify(summary, null, 2));
 
 const section = (title, rows, empty) => [`## ${title}`, '', ...(rows.length ? rows.map((row) => `- ${row}`) : [`- ${empty}`]), ''].join('\n');
 const markdown = [
@@ -260,11 +323,15 @@ const markdown = [
   '- Legacy status and Registry v2 lifecycle compatibility',
   '- Organization, event, evidence, deployment, and Registry v3 references',
   '- Full-record coverage across required Registry v2/v3 layers',
+  '- Optional event, reserve-report, and deployment coverage visibility',
   '- Generated registry statistics consistency',
   '- Date freshness and explicit known-unknown inventory', '',
   '## Registry Counts', '',
   '| Layer | Count |', '|---|---:|',
   ...Object.entries(expectedCounts).map(([key, value]) => `| ${key} | ${value} |`), '',
+  '## Coverage', '',
+  '| Layer | Covered | Required |', '|---|---:|:---:|',
+  ...Object.entries(allCoverage).map(([label, covered]) => `| ${label} | ${covered.size} / ${stablecoinIds.size} | ${requiredCoverage.has(label) ? 'yes' : 'no'} |`), '',
   section('Critical Findings', critical, 'None.'),
   section('Warnings', warnings, 'None.'),
   section('Quality Observations', observations, 'None.'),
@@ -273,7 +340,23 @@ const markdown = [
     ? 'The 70-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.'
     : 'The registry does not pass the final audit until all critical findings are resolved.', ''
 ].join('\n');
-writeText(reportPath, markdown);
+
+const expectedJson = serialize(summary);
+const expectedMarkdown = markdown.endsWith('\n') ? markdown : `${markdown}\n`;
+const checkOnly = process.argv.includes('--check');
+if (checkOnly) {
+  const currentJson = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';
+  const currentMarkdown = fs.existsSync(absolute(reportPath)) ? fs.readFileSync(absolute(reportPath), 'utf8') : '';
+  if (currentJson !== expectedJson || currentMarkdown !== expectedMarkdown) {
+    console.error('Registry integrity audit outputs are stale or missing.');
+    process.exit(1);
+  }
+} else {
+  fs.mkdirSync(path.dirname(absolute(jsonPath)), { recursive: true });
+  fs.mkdirSync(path.dirname(absolute(reportPath)), { recursive: true });
+  fs.writeFileSync(absolute(jsonPath), expectedJson);
+  fs.writeFileSync(absolute(reportPath), expectedMarkdown);
+}
 
 console.log(`Registry integrity audit: ${critical.length} critical, ${warnings.length} warnings, ${observations.length} observations.`);
-if (critical.length && process.env.AUDIT_ALLOW_CRITICAL !== '1') process.exit(1);
+if (critical.length) process.exit(1);
