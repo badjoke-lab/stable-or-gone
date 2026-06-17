@@ -1,1 +1,27 @@
-{"schema_version":"1.0","status":"growth_target_reached","candidate_files":["data/candidate-stable-assets.json","data/candidate-stable-assets-growth-70.json"],"protected_minimums":{"total_candidates":70,"promoted_candidates":70,"pending_candidates":0},"planned_batches":{"batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},"batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},"batch_008":{"minimum_candidates":5,"theme":"yield-bearing wrappers"},"batch_009":{"minimum_candidates":5,"theme":"regional fiat stablecoins"},"batch_010":{"minimum_candidates":5,"theme":"regulated EUR and CHF stablecoins"},"batch_011":{"minimum_candidates":5,"theme":"historical failures"}},"promotion_policy":{"candidate_is_not_canonical":true,"manual_evidence_review_required":true,"identity_deduplication_required":true,"promotion_occurs_in_separate_batch_prs":true}}
+{
+  "schema_version": "1.0",
+  "status": "growth_target_reached",
+  "candidate_files": [
+    "data/candidate-stable-assets.json",
+    "data/candidate-stable-assets-growth-70.json"
+  ],
+  "protected_minimums": {
+    "total_candidates": 70,
+    "promoted_candidates": 70,
+    "pending_candidates": 0
+  },
+  "planned_batches": {
+    "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
+    "batch_007": {"minimum_candidates": 5, "theme": "protocol stablecoins"},
+    "batch_008": {"minimum_candidates": 5, "theme": "yield-bearing wrappers"},
+    "batch_009": {"minimum_candidates": 5, "theme": "regional fiat stablecoins"},
+    "batch_010": {"minimum_candidates": 5, "theme": "regulated EUR and CHF stablecoins"},
+    "batch_011": {"minimum_candidates": 5, "theme": "historical failures"}
+  },
+  "promotion_policy": {
+    "candidate_is_not_canonical": true,
+    "manual_evidence_review_required": true,
+    "identity_deduplication_required": true,
+    "promotion_occurs_in_separate_batch_prs": true
+  }
+}
