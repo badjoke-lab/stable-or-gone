@@ -20,20 +20,71 @@
     "income_profiles": 70
   },
   "coverage": {
-    "classifications": {"covered": 70, "total": 70, "required": true},
-    "profiles": {"covered": 70, "total": 70, "required": true},
-    "relationships": {"covered": 70, "total": 70, "required": true},
-    "evidence": {"covered": 70, "total": 70, "required": true},
-    "reserve_reports": {"covered": 52, "total": 70, "required": false},
-    "known_unknowns": {"covered": 70, "total": 70, "required": true},
-    "deployments": {"covered": 69, "total": 70, "required": false},
-    "events": {"covered": 63, "total": 70, "required": false},
-    "legal_profiles": {"covered": 70, "total": 70, "required": true},
-    "reserve_components": {"covered": 70, "total": 70, "required": true},
-    "income_profiles": {"covered": 70, "total": 70, "required": true}
+    "classifications": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "profiles": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "relationships": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "evidence": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "reserve_reports": {
+      "covered": 52,
+      "total": 70,
+      "required": false
+    },
+    "known_unknowns": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "deployments": {
+      "covered": 69,
+      "total": 70,
+      "required": false
+    },
+    "events": {
+      "covered": 63,
+      "total": 70,
+      "required": false
+    },
+    "legal_profiles": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "reserve_components": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    },
+    "income_profiles": {
+      "covered": 70,
+      "total": 70,
+      "required": true
+    }
   },
-  "candidate_promotions": {"total": 70, "promoted": 70, "pending": 0},
-  "identity": {"canonical_name_collisions": 0, "alias_collision_warnings": 0},
+  "candidate_promotions": {
+    "total": 70,
+    "promoted": 70,
+    "pending": 0
+  },
+  "identity": {
+    "canonical_name_collisions": 0,
+    "alias_collision_warnings": 0
+  },
   "quality": {
     "stale_or_missing_last_verified": 0,
     "missing_launch_date": 44,
