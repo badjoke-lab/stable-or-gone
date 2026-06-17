@@ -1,0 +1,43 @@
+{
+  "generated_from": "canonical stablecoin and event data",
+  "missing_launch_date_total": 44,
+  "dated_launch_event_candidate_total": 3,
+  "high_confidence_total": 1,
+  "medium_confidence_total": 0,
+  "low_confidence_total": 2,
+  "candidates": [
+    {
+      "stablecoin_id": "sog_st_acalaausd",
+      "stablecoin_name": "Acala Dollar / aUSD Seed",
+      "event_id": "sog_ev_acalaausd_launch_batch_k",
+      "event_type": "launch",
+      "event_date": "2022-02-10",
+      "confidence": "high",
+      "source_count": 1,
+      "title": "Acala launches aUSD",
+      "notes": "Official launch announcement date."
+    },
+    {
+      "stablecoin_id": "sog_st_crvusd",
+      "stablecoin_name": "Curve USD",
+      "event_id": "sog_ev_crvusd_launch_context",
+      "event_type": "protocol_launch_or_lifecycle_context",
+      "event_date": "2023-05-01",
+      "confidence": "low",
+      "source_count": 1,
+      "title": "crvUSD launch and LLAMMA context",
+      "notes": "PR-038 event expansion. Exact launch and collateral timeline should be refined later."
+    },
+    {
+      "stablecoin_id": "sog_st_usde",
+      "stablecoin_name": "Ethena USDe",
+      "event_id": "sog_ev_usde_launch_context",
+      "event_type": "protocol_launch_or_lifecycle_context",
+      "event_date": "2024-02-01",
+      "confidence": "low",
+      "source_count": 2,
+      "title": "Ethena USDe launch and synthetic-dollar context",
+      "notes": "PR-038 event expansion. Exact public launch and docs-source timeline should be refined later."
+    }
+  ]
+}
