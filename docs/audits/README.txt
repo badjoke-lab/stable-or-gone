@@ -1,0 +1,1 @@
+Registry audits in this directory are deterministic repository artifacts. Regenerate with npm run audit:integrity. CI verifies committed output with npm run validate:integrity. Critical findings block CI; warnings remain explicit non-blocking quality queues.
