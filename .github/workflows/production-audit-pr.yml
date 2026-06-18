@@ -18,6 +18,6 @@ jobs:
       - name: Verify current production against PR base
         env:
           SOG_EXPECTED_COMMIT: ${{ github.event.pull_request.base.sha }}
-          SOG_SMOKE_ATTEMPTS: '20'
-          SOG_SMOKE_DELAY_MS: '15000'
+          SOG_SMOKE_ATTEMPTS: '3'
+          SOG_SMOKE_DELAY_MS: '5000'
         run: npm run check:production
