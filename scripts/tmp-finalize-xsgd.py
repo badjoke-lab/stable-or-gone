@@ -1,3 +1,4 @@
+# Temporary payload for the XSGD launch-date batch.
 import json
 from pathlib import Path
 
