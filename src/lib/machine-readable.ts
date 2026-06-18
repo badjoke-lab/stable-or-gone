@@ -13,7 +13,7 @@ import {
 } from './data/registry';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
-export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
+export const DATA_SCHEMA_VERSION = 'sog_registry_v2_v3';
 
 export const PROJECT = {
   projectId: 'stable-or-gone',
@@ -24,7 +24,15 @@ export const PROJECT = {
   canonicalOrigin: 'https://sog.badjoke-lab.com',
   releaseChannel: 'production',
   verificationMarker: 'sog_machine_readable_layer_v1',
-  designGeneration: 'registry_v2',
+  designGeneration: 'registry_v2_v3',
+} as const;
+
+export const CANONICAL_DATA_SOURCE = {
+  runtime_loader: 'src/lib/data/registry.ts',
+  baseline_manifest: 'docs/migration/registry-v2-baseline.json',
+  generated_stats: 'data/generated/registry-stats.json',
+  canonical_only: true,
+  publication_model: 'repository-managed JSON assembled by the canonical runtime loader',
 } as const;
 
 export const MAIN_ROUTES = [
@@ -111,11 +119,13 @@ export function getRecordCountBreakdown() {
   const regulatoryNotes = getRegulatoryNotes();
   const deployments = getDeployments();
   const registryUpdates = getRegistryUpdates();
+  const reserveRedemptionProfiles = stablecoins.filter((coin) => coin.reserve_profile && coin.redemption_profile);
 
   return {
     stablecoins: stablecoins.length,
     organizations: organizations.length,
     relationships: relationships.length,
+    reserve_redemption_profiles: reserveRedemptionProfiles.length,
     evidence_relations: evidenceRelations.length,
     reserve_reports: reserveReports.length,
     known_unknowns: knownUnknowns.length,
