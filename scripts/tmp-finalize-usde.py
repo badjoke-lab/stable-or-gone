@@ -1,3 +1,4 @@
+# Temporary canonical/event/detail patch for launch-date Batch N.
 import json
 from pathlib import Path
 
