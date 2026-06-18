@@ -20,20 +20,12 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-package-lock
-      - name: Run branch migration body
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          source = Path('.github/workflows/finalize-launch-date-batch-m.yml').read_text()
-          body = source.split("          python - <<'PY'\n", 1)[1].split("\n          PY", 1)[0]
-          body = '\n'.join(line[10:] if line.startswith('          ') else line for line in body.splitlines())
-          Path('/tmp/finalize-xsgd.py').write_text(body + '\n')
-          PY
-          python /tmp/finalize-xsgd.py
+      - run: python scripts/tmp-finalize-xsgd.py
       - run: node scripts/generate-registry-stats.mjs
       - run: npm run audit:integrity
       - name: Commit final batch
         run: |
+          rm scripts/tmp-finalize-xsgd.py
           rm .github/workflows/finalize-launch-date-batch-m.yml
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
