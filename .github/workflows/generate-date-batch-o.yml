@@ -1,0 +1,28 @@
+name: Generate Batch O outputs
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-package-lock
+      - run: python scripts/tmp-batch-o-canonical.py
+      - run: python scripts/tmp-batch-o-index.py
+      - run: node scripts/generate-registry-stats.mjs
+      - run: npm run audit:integrity
+      - uses: actions/upload-artifact@v4
+        with:
+          name: date-batch-o-output
+          path: |
+            data/stablecoins.json
+            data/stablecoins-batch-h.json
+            data/stablecoins-batch-j.json
+            docs/migration/registry-v2-baseline.json
+            data/generated/registry-stats.json
+            data/generated/registry-integrity-audit.json
+            docs/audits/registry-70-final-audit.md
