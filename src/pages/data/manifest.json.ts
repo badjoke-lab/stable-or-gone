@@ -1,5 +1,7 @@
 import {
+  CANONICAL_DATA_SOURCE,
   DATA_SAFETY,
+  DATA_SCHEMA_VERSION,
   MACHINE_READABLE_SCHEMA_VERSION,
   MAIN_ROUTES,
   PROJECT,
@@ -8,8 +10,10 @@ import {
 } from '../../lib/machine-readable';
 
 export function GET() {
+  const generatedAt = new Date().toISOString();
   const manifest = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
+    data_schema_version: DATA_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
     title: PROJECT.siteName,
     description: PROJECT.description,
@@ -17,11 +21,13 @@ export function GET() {
     registry_family: PROJECT.registryFamily,
     registry_type: PROJECT.registryType,
     design_generation: PROJECT.designGeneration,
+    canonical_data_source: CANONICAL_DATA_SOURCE,
     data_model: {
       primary_record: 'stablecoin',
       supporting_records: [
         'organization',
         'stablecoin_organization_relationship',
+        'reserve_redemption_profile',
         'stablecoin_event',
         'evidence',
         'evidence_relation',
@@ -36,6 +42,8 @@ export function GET() {
       manifest: '/data/manifest.json',
       llms: '/llms.txt',
       ai: '/ai.txt',
+      sitemap: '/sitemap-index.xml',
+      robots: '/robots.txt',
     },
     main_routes: MAIN_ROUTES,
     record_counts: getRecordCounts(),
@@ -51,13 +59,13 @@ export function GET() {
     },
     language: 'en',
     locales: ['en'],
-    generated_at: new Date().toISOString(),
+    generated_at: generatedAt,
   };
 
   return new Response(JSON.stringify(manifest, null, 2), {
     headers: {
       'content-type': 'application/json; charset=utf-8',
-      'cache-control': 'public, max-age=3600, must-revalidate',
+      'cache-control': 'public, max-age=300, must-revalidate',
     },
   });
 }
