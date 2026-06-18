@@ -1,0 +1,96 @@
+name: Audit launch dates v2
+
+on:
+  push:
+    branches:
+      - audit-launch-dates-v2
+    paths:
+      - .github/workflows/audit-launch-dates-v2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit-launch-dates-v2
+      - name: Generate dated-event candidate report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('.')
+          baseline = json.loads((root / 'docs/migration/registry-v2-baseline.json').read_text())
+
+          def load_group(name):
+              rows = []
+              for file_name in baseline['data_groups'][name]:
+                  rows.extend(json.loads((root / file_name).read_text()))
+              return rows
+
+          stablecoins = load_group('stablecoins')
+          events = load_group('events')
+          missing = {row['id']: row for row in stablecoins if not row.get('launch_date')}
+          keywords = ('launch', 'launched', 'introduc', 'debut', 'goes live', 'went live', 'issuance', 'mainnet')
+          candidates = []
+
+          for event in events:
+              if not event.get('event_date'):
+                  continue
+              ids = []
+              if event.get('stablecoin_id'):
+                  ids.append(event['stablecoin_id'])
+              ids.extend(event.get('subject_stablecoin_ids') or [])
+              ids = sorted(set(ids))
+              signal_text = f"{event.get('event_type','')} {event.get('title','')} {event.get('description','')}".lower()
+              matched_keywords = [word for word in keywords if word in signal_text]
+              for stablecoin_id in ids:
+                  if stablecoin_id not in missing:
+                      continue
+                  candidates.append({
+                      'stablecoin_id': stablecoin_id,
+                      'stablecoin_name': missing[stablecoin_id].get('name'),
+                      'event_id': event.get('id'),
+                      'event_date': event.get('event_date'),
+                      'event_type': event.get('event_type'),
+                      'title': event.get('title'),
+                      'confidence': event.get('confidence'),
+                      'source_count': event.get('source_count'),
+                      'launch_signal': bool(matched_keywords),
+                      'matched_keywords': matched_keywords,
+                      'notes': event.get('notes')
+                  })
+
+          confidence_rank = {'high': 0, 'medium': 1, 'low': 2, None: 3}
+          candidates.sort(key=lambda row: (
+              not row['launch_signal'],
+              confidence_rank.get(row.get('confidence'), 3),
+              row['stablecoin_id'],
+              row['event_date'],
+              row['event_id'] or ''
+          ))
+          report = {
+              'missing_launch_date_total': len(missing),
+              'dated_event_candidate_total': len(candidates),
+              'launch_signal_total': sum(1 for row in candidates if row['launch_signal']),
+              'high_confidence_launch_signal_total': sum(1 for row in candidates if row['launch_signal'] and row.get('confidence') == 'high'),
+              'candidates': candidates
+          }
+          output = root / 'docs/audits/launch-date-event-candidates-v2.json'
+          output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n')
+          PY
+      - name: Remove one-off workflow
+        run: rm .github/workflows/audit-launch-dates-v2.yml
+      - name: Commit report
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git add -f docs/audits/launch-date-event-candidates-v2.json
+          git commit -m "Generate broader launch-date candidate audit"
+          git push origin HEAD:audit-launch-dates-v2
