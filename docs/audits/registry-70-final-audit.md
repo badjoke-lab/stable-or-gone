@@ -4,7 +4,7 @@
 - Baseline: `sog_registry_v2_post_batch_k_2026_06_17`
 - Canonical stable assets: **70**
 - Promoted candidates: **70 / 70**
-- Critical findings: **1**
+- Critical findings: **0**
 - Warnings: **0**
 
 ## Scope
@@ -56,7 +56,7 @@
 
 ## Critical Findings
 
-- Generated stats evidence=274, actual=276
+- None.
 
 ## Warnings
 
@@ -72,4 +72,4 @@
 
 ## Result
 
-The registry does not pass the final audit until all critical findings are resolved.
+The 70-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.
