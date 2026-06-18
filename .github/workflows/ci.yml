@@ -42,5 +42,9 @@ jobs:
         run: npm run validate:finalization
       - name: Astro check
         run: npm run check
-      - name: Build and verify
-        run: npm run build:site && npm run verify:deployment && npm run verify:public
+      - name: Build site
+        run: npm run build:site
+      - name: Verify generated routes
+        run: npm run verify:deployment
+      - name: Verify public surface parity
+        run: npm run verify:public
