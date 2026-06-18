@@ -1,3 +1,4 @@
+# One-off PR workflow; removed after completing Batch M.
 name: Finalize launch date batch M
 
 on:
