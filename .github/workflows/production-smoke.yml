@@ -26,5 +26,5 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Check production endpoints
-        run: npm run check:production
+      - name: Check production HTML and canonical data parity
+        run: node scripts/check-production-parity.mjs
