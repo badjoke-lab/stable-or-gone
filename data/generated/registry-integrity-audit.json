@@ -9,7 +9,7 @@
     "profiles": 70,
     "events": 91,
     "event_details": 91,
-    "evidence": 274,
+    "evidence": 276,
     "reserve_reports": 72,
     "known_unknowns": 153,
     "regulatory_notes": 9,
@@ -99,7 +99,7 @@
   "quality": {
     "stale_or_missing_last_verified": 0,
     "stale_or_missing_last_verified_ids": [],
-    "missing_launch_date": 42,
+    "missing_launch_date": 40,
     "missing_launch_date_ids": [
       "sog_st_agoraausd",
       "sog_st_bac",
@@ -110,7 +110,6 @@
       "sog_st_dsd",
       "sog_st_esd",
       "sog_st_eura",
-      "sog_st_eurc",
       "sog_st_eurcv",
       "sog_st_euri",
       "sog_st_eurq",
@@ -124,7 +123,6 @@
       "sog_st_mountainusdm",
       "sog_st_musd",
       "sog_st_nuon",
-      "sog_st_rlusd",
       "sog_st_sdai",
       "sog_st_spot",
       "sog_st_susd",
@@ -206,7 +204,7 @@
     "observations": [
       "reserve_reports context coverage is 52/70; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_fei, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_nuon, sog_st_gho, sog_st_bold, sog_st_usd0, sog_st_usr, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurs, sog_st_eurt, sog_st_usdm, sog_st_alusd.",
       "0 records have missing or older-than-one-year last_verified_at values: none.",
-      "42 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_crvusd, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurc, sog_st_eurcv, sog_st_euri, sog_st_eurq, sog_st_eurs, sog_st_eurt, sog_st_gyen, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mim, sog_st_mountainusdm, sog_st_musd, sog_st_nuon, sog_st_rlusd, sog_st_sdai, sog_st_spot, sog_st_susd, sog_st_susde, sog_st_susds, sog_st_tryb, sog_st_usd0, sog_st_usd1, sog_st_usde, sog_st_usdm, sog_st_usdtb, sog_st_usdy, sog_st_usk, sog_st_usr, sog_st_usyc, sog_st_vai, sog_st_vchf, sog_st_xsgd.",
+      "40 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_crvusd, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurcv, sog_st_euri, sog_st_eurq, sog_st_eurs, sog_st_eurt, sog_st_gyen, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mim, sog_st_mountainusdm, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_susd, sog_st_susde, sog_st_susds, sog_st_tryb, sog_st_usd0, sog_st_usd1, sog_st_usde, sog_st_usdm, sog_st_usdtb, sog_st_usdy, sog_st_usk, sog_st_usr, sog_st_usyc, sog_st_vai, sog_st_vchf, sog_st_xsgd.",
       "4 historical-side records have no discontinued_date: sog_st_bac, sog_st_dsd, sog_st_esd, sog_st_usdn.",
       "41 income profiles remain entirely unknown: sog_st_acalaausd, sog_st_alusd, sog_st_bold, sog_st_busd, sog_st_crvusd, sog_st_dai, sog_st_eurc, sog_st_eurs, sog_st_eurt, sog_st_fdusd, sog_st_fei, sog_st_frax, sog_st_gho, sog_st_gusd, sog_st_husd, sog_st_iron, sog_st_lusd, sog_st_mim, sog_st_musd, sog_st_nuon, sog_st_paxg, sog_st_pyusd, sog_st_rai, sog_st_rlusd, sog_st_sai, sog_st_spot, sog_st_susd, sog_st_tusd, sog_st_usd0, sog_st_usdc, sog_st_usdd, sog_st_usde, sog_st_usdg, sog_st_usdm, sog_st_usdn, sog_st_usdp, sog_st_usds, sog_st_usdt, sog_st_usr, sog_st_ust, sog_st_xaut."
     ]
