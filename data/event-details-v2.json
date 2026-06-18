@@ -1,32 +1,453 @@
 [
-  {"id":"sog_ev_usdc_2023_03_depeg","subject_stablecoin_ids":["sog_st_usdc"],"subject_organization_ids":["sog_issuer_circle"],"event_detail_kind":"depeg","depeg_detail":{"recovery_status":"recovered","recovery_date":"2023-03-13","cause_summary":"Reserve asset exposure during the March 2023 banking crisis.","price_source_ids":[]}},
-  {"id":"sog_ev_ust_2022_05_collapse","subject_stablecoin_ids":["sog_st_ust"],"subject_organization_ids":["sog_issuer_terraform_labs"],"event_detail_kind":"depeg","depeg_detail":{"recovery_status":"collapsed","recovery_date":null,"cause_summary":"Algorithmic stablecoin collapse and reflexive Terra/LUNA crisis.","price_source_ids":[]}},
-  {"id":"sog_ev_busd_2023_02_wind_down","subject_stablecoin_ids":["sog_st_busd"],"subject_organization_ids":["sog_issuer_paxos"],"event_detail_kind":"migration","migration_detail":{"summary":"Issuer wind-down and minting halt context."}},
-  {"id":"sog_ev_usdt_2021_10_cftc_order","subject_stablecoin_ids":["sog_st_usdt"],"subject_organization_ids":["sog_issuer_tether"],"event_detail_kind":"regulatory","regulatory_detail":{"jurisdiction":"United States","authority":"CFTC","action_type":"order","effective_date":"2021-10-15","resolution_date":null}},
-  {"id":"sog_ev_usdt_2021_02_nyag_settlement","subject_stablecoin_ids":["sog_st_usdt"],"subject_organization_ids":["sog_issuer_tether"],"event_detail_kind":"regulatory","regulatory_detail":{"jurisdiction":"United States / New York","authority":"NYAG","action_type":"settlement","effective_date":"2021-02-23","resolution_date":null}},
-  {"id":"sog_ev_usdc_2023_03_operations_reopen","subject_stablecoin_ids":["sog_st_usdc"],"subject_organization_ids":["sog_issuer_circle"],"event_detail_kind":"redemption_change","redemption_change_detail":{"summary":"Operational reopening and recovery context after the banking-crisis weekend."}},
-  {"id":"sog_ev_dai_2019_11_multi_collateral_launch","subject_stablecoin_ids":["sog_st_dai"],"subject_organization_ids":["sog_issuer_makerdao_sky"],"event_detail_kind":"migration","migration_detail":{"summary":"Protocol transition to Multi-Collateral Dai."}},
-  {"id":"sog_ev_dai_2020_03_black_thursday","subject_stablecoin_ids":["sog_st_dai"],"subject_organization_ids":["sog_issuer_makerdao_sky"],"event_detail_kind":"reserve_change","reserve_change_detail":{"summary":"Protocol collateral and liquidation stress context."}},
-  {"id":"sog_ev_dai_2024_08_sky_transition","subject_stablecoin_ids":["sog_st_dai"],"subject_organization_ids":["sog_issuer_makerdao_sky"],"event_detail_kind":"migration","migration_detail":{"summary":"MakerDAO / Sky lifecycle transition context."}},
-  {"id":"sog_ev_ust_2022_05_lfg_intervention","subject_stablecoin_ids":["sog_st_ust"],"subject_organization_ids":["sog_issuer_terraform_labs"],"event_detail_kind":"reserve_change","reserve_change_detail":{"summary":"Luna Foundation Guard reserve intervention context during the UST collapse."}},
-  {"id":"sog_ev_ust_2022_05_chain_halt","subject_stablecoin_ids":["sog_st_ust"],"subject_organization_ids":["sog_issuer_terraform_labs"],"event_detail_kind":"migration","migration_detail":{"summary":"Terra chain halt and infrastructure crisis context during the UST collapse."}},
-  {"id":"sog_ev_ust_2023_02_sec_charges","subject_stablecoin_ids":["sog_st_ust"],"subject_organization_ids":["sog_issuer_terraform_labs"],"event_detail_kind":"regulatory","regulatory_detail":{"jurisdiction":"United States","authority":"SEC","action_type":"charges","effective_date":"2023-02-16","resolution_date":null}},
-  {"id":"sog_ev_busd_2023_08_binance_phaseout","subject_stablecoin_ids":["sog_st_busd"],"subject_organization_ids":["sog_issuer_paxos"],"event_detail_kind":"migration","migration_detail":{"summary":"Exchange support phase-out context, separate from issuer redemption."}},
-  {"id":"sog_ev_fdusd_2023_launch_context","subject_stablecoin_ids":["sog_st_fdusd"],"subject_organization_ids":["sog_issuer_first_digital"],"event_detail_kind":"migration","migration_detail":{"summary":"Launch and issuer context."}},
-  {"id":"sog_ev_fdusd_2023_binance_adoption_context","subject_stablecoin_ids":["sog_st_fdusd"],"subject_organization_ids":["sog_issuer_first_digital"],"event_detail_kind":"migration","migration_detail":{"summary":"Exchange adoption context during BUSD phase-out."}},
-  {"id":"sog_ev_pyusd_2023_08_launch","subject_stablecoin_ids":["sog_st_pyusd"],"subject_organization_ids":["sog_issuer_paxos"],"event_detail_kind":"migration","migration_detail":{"summary":"PYUSD product launch context."}},
-  {"id":"sog_ev_pyusd_2024_05_solana","subject_stablecoin_ids":["sog_st_pyusd"],"subject_organization_ids":["sog_issuer_paxos"],"event_detail_kind":"migration","migration_detail":{"summary":"PYUSD chain-expansion context."}},
-  {"id":"sog_ev_usdd_2022_05_launch","subject_stablecoin_ids":["sog_st_usdd"],"subject_organization_ids":["sog_issuer_tron_dao_reserve"],"event_detail_kind":"migration","migration_detail":{"summary":"USDD launch and reserve-organization context."}},
-  {"id":"sog_ev_gusd_2018_launch","subject_stablecoin_ids":["sog_st_gusd"],"subject_organization_ids":["sog_issuer_gemini"],"event_detail_kind":"migration","migration_detail":{"summary":"Gemini Dollar launch context."}},
-  {"id":"sog_ev_lusd_liquity_v1_context","subject_stablecoin_ids":["sog_st_lusd"],"subject_organization_ids":["sog_issuer_liquity"],"event_detail_kind":"migration","migration_detail":{"summary":"Liquity V1 and LUSD protocol lifecycle context."}},
-  {"id":"sog_ev_crvusd_launch_context","subject_stablecoin_ids":["sog_st_crvusd"],"subject_organization_ids":["sog_issuer_curve_finance"],"event_detail_kind":"migration","migration_detail":{"summary":"crvUSD launch and LLAMMA context."}},
-  {"id":"sog_ev_usde_launch_context","subject_stablecoin_ids":["sog_st_usde"],"subject_organization_ids":["sog_issuer_ethena_labs"],"event_detail_kind":"migration","migration_detail":{"summary":"Ethena USDe launch and synthetic-dollar context."}},
-  {"id":"sog_ev_susd_synthetix_lifecycle_context","subject_stablecoin_ids":["sog_st_susd"],"subject_organization_ids":["sog_issuer_synthetix"],"event_detail_kind":"migration","migration_detail":{"summary":"sUSD and Synthetix protocol lifecycle context."}},
-  {"id":"sog_ev_frax_2020_12_launch","subject_stablecoin_ids":["sog_st_frax"],"subject_organization_ids":["sog_issuer_frax_finance"],"evidence_ids":["sog_src_frax_docs","sog_src_frax_app"],"event_detail_kind":"launch","launch_detail":{"summary":"FRAX launch and protocol lifecycle starting point.","status":"active"}},
-  {"id":"sog_ev_tusd_2018_03_launch","subject_stablecoin_ids":["sog_st_tusd"],"subject_organization_ids":["sog_issuer_trueusd"],"evidence_ids":["sog_src_tusd_site","sog_src_tusd_attestation_entry"],"event_detail_kind":"launch","launch_detail":{"summary":"TrueUSD launch and issuer lifecycle starting point.","status":"active"}},
-  {"id":"sog_ev_rlusd_lifecycle_context","subject_stablecoin_ids":["sog_st_rlusd"],"subject_organization_ids":["sog_issuer_ripple"],"evidence_ids":["sog_src_rlusd_launch_2024","sog_src_rlusd_ripple_page","sog_src_rlusd_transparency_reports","sog_src_rlusd_user_terms"],"event_detail_kind":"launch","launch_detail":{"summary":"RLUSD global product launch and exchange availability beginning December 17, 2024.","status":"active"}},
-  {"id":"sog_ev_eurc_lifecycle_context","subject_stablecoin_ids":["sog_st_eurc"],"subject_organization_ids":["sog_issuer_circle"],"evidence_ids":["sog_src_eurc_launch_2022","sog_src_eurc_circle_page","sog_src_eurc_transparency"],"event_detail_kind":"launch","launch_detail":{"summary":"Euro Coin / EUROC launch on Ethereum on June 30, 2022, continuing under the EURC name.","status":"active"}},
-  {"id":"sog_ev_usdp_2018_09_launch","subject_stablecoin_ids":["sog_st_usdp"],"subject_organization_ids":["sog_issuer_paxos"],"evidence_ids":["sog_src_usdp_paxos_page","sog_src_usdp_transparency"],"event_detail_kind":"launch","launch_detail":{"summary":"Pax Dollar launch and issuer lifecycle starting point.","status":"active"}},
-  {"id":"sog_ev_usdg_2024_11_launch","subject_stablecoin_ids":["sog_st_usdg"],"subject_organization_ids":["sog_issuer_global_dollar_network"],"evidence_ids":["sog_src_usdg_global_dollar_page","sog_src_usdg_paxos_page"],"event_detail_kind":"launch","launch_detail":{"summary":"Global Dollar launch and network lifecycle starting point.","status":"active"}},
-  {"id":"sog_ev_usds_2024_08_launch","subject_stablecoin_ids":["sog_st_usds"],"subject_organization_ids":["sog_issuer_makerdao_sky"],"evidence_ids":["sog_src_usds_sky_page","sog_src_usds_developer_docs"],"event_detail_kind":"launch","launch_detail":{"summary":"USDS launch during the MakerDAO-to-Sky transition.","status":"active"}}
+  {
+    "id": "sog_ev_usdc_2023_03_depeg",
+    "subject_stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_detail_kind": "depeg",
+    "depeg_detail": {
+      "recovery_status": "recovered",
+      "recovery_date": "2023-03-13",
+      "cause_summary": "Reserve asset exposure during the March 2023 banking crisis.",
+      "price_source_ids": []
+    }
+  },
+  {
+    "id": "sog_ev_ust_2022_05_collapse",
+    "subject_stablecoin_ids": [
+      "sog_st_ust"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_terraform_labs"
+    ],
+    "event_detail_kind": "depeg",
+    "depeg_detail": {
+      "recovery_status": "collapsed",
+      "recovery_date": null,
+      "cause_summary": "Algorithmic stablecoin collapse and reflexive Terra/LUNA crisis.",
+      "price_source_ids": []
+    }
+  },
+  {
+    "id": "sog_ev_busd_2023_02_wind_down",
+    "subject_stablecoin_ids": [
+      "sog_st_busd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_paxos"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Issuer wind-down and minting halt context."
+    }
+  },
+  {
+    "id": "sog_ev_usdt_2021_10_cftc_order",
+    "subject_stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_detail_kind": "regulatory",
+    "regulatory_detail": {
+      "jurisdiction": "United States",
+      "authority": "CFTC",
+      "action_type": "order",
+      "effective_date": "2021-10-15",
+      "resolution_date": null
+    }
+  },
+  {
+    "id": "sog_ev_usdt_2021_02_nyag_settlement",
+    "subject_stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_detail_kind": "regulatory",
+    "regulatory_detail": {
+      "jurisdiction": "United States / New York",
+      "authority": "NYAG",
+      "action_type": "settlement",
+      "effective_date": "2021-02-23",
+      "resolution_date": null
+    }
+  },
+  {
+    "id": "sog_ev_usdc_2023_03_operations_reopen",
+    "subject_stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_detail_kind": "redemption_change",
+    "redemption_change_detail": {
+      "summary": "Operational reopening and recovery context after the banking-crisis weekend."
+    }
+  },
+  {
+    "id": "sog_ev_dai_2019_11_multi_collateral_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_dai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Protocol transition to Multi-Collateral Dai."
+    }
+  },
+  {
+    "id": "sog_ev_dai_2020_03_black_thursday",
+    "subject_stablecoin_ids": [
+      "sog_st_dai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_detail_kind": "reserve_change",
+    "reserve_change_detail": {
+      "summary": "Protocol collateral and liquidation stress context."
+    }
+  },
+  {
+    "id": "sog_ev_dai_2024_08_sky_transition",
+    "subject_stablecoin_ids": [
+      "sog_st_dai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "MakerDAO / Sky lifecycle transition context."
+    }
+  },
+  {
+    "id": "sog_ev_ust_2022_05_lfg_intervention",
+    "subject_stablecoin_ids": [
+      "sog_st_ust"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_terraform_labs"
+    ],
+    "event_detail_kind": "reserve_change",
+    "reserve_change_detail": {
+      "summary": "Luna Foundation Guard reserve intervention context during the UST collapse."
+    }
+  },
+  {
+    "id": "sog_ev_ust_2022_05_chain_halt",
+    "subject_stablecoin_ids": [
+      "sog_st_ust"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_terraform_labs"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Terra chain halt and infrastructure crisis context during the UST collapse."
+    }
+  },
+  {
+    "id": "sog_ev_ust_2023_02_sec_charges",
+    "subject_stablecoin_ids": [
+      "sog_st_ust"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_terraform_labs"
+    ],
+    "event_detail_kind": "regulatory",
+    "regulatory_detail": {
+      "jurisdiction": "United States",
+      "authority": "SEC",
+      "action_type": "charges",
+      "effective_date": "2023-02-16",
+      "resolution_date": null
+    }
+  },
+  {
+    "id": "sog_ev_busd_2023_08_binance_phaseout",
+    "subject_stablecoin_ids": [
+      "sog_st_busd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_paxos"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Exchange support phase-out context, separate from issuer redemption."
+    }
+  },
+  {
+    "id": "sog_ev_fdusd_2023_launch_context",
+    "subject_stablecoin_ids": [
+      "sog_st_fdusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_first_digital"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Launch and issuer context."
+    }
+  },
+  {
+    "id": "sog_ev_fdusd_2023_binance_adoption_context",
+    "subject_stablecoin_ids": [
+      "sog_st_fdusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_first_digital"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Exchange adoption context during BUSD phase-out."
+    }
+  },
+  {
+    "id": "sog_ev_pyusd_2023_08_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_pyusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_paxos"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "PYUSD product launch context."
+    }
+  },
+  {
+    "id": "sog_ev_pyusd_2024_05_solana",
+    "subject_stablecoin_ids": [
+      "sog_st_pyusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_paxos"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "PYUSD chain-expansion context."
+    }
+  },
+  {
+    "id": "sog_ev_usdd_2022_05_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_usdd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tron_dao_reserve"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "USDD launch and reserve-organization context."
+    }
+  },
+  {
+    "id": "sog_ev_gusd_2018_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_gusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_gemini"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Gemini Dollar launch context."
+    }
+  },
+  {
+    "id": "sog_ev_lusd_liquity_v1_context",
+    "subject_stablecoin_ids": [
+      "sog_st_lusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_liquity"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Liquity V1 and LUSD protocol lifecycle context."
+    }
+  },
+  {
+    "id": "sog_ev_crvusd_launch_context",
+    "subject_stablecoin_ids": [
+      "sog_st_crvusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_curve_finance"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "crvUSD launch and LLAMMA context."
+    }
+  },
+  {
+    "id": "sog_ev_usde_launch_context",
+    "subject_stablecoin_ids": [
+      "sog_st_usde"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_ethena_labs"
+    ],
+    "event_detail_kind": "launch",
+    "evidence_ids": [
+      "sog_src_usde_public_launch_2024",
+      "sog_src_usde_ethena_lifecycle_event"
+    ],
+    "launch_detail": {
+      "summary": "USDe official public launch on 2024-02-19.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_susd_synthetix_lifecycle_context",
+    "subject_stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "sUSD and Synthetix protocol lifecycle context."
+    }
+  },
+  {
+    "id": "sog_ev_frax_2020_12_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_frax"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_frax_finance"
+    ],
+    "evidence_ids": [
+      "sog_src_frax_docs",
+      "sog_src_frax_app"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "FRAX launch and protocol lifecycle starting point.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_tusd_2018_03_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_tusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_trueusd"
+    ],
+    "evidence_ids": [
+      "sog_src_tusd_site",
+      "sog_src_tusd_attestation_entry"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "TrueUSD launch and issuer lifecycle starting point.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_rlusd_lifecycle_context",
+    "subject_stablecoin_ids": [
+      "sog_st_rlusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_ripple"
+    ],
+    "evidence_ids": [
+      "sog_src_rlusd_launch_2024",
+      "sog_src_rlusd_ripple_page",
+      "sog_src_rlusd_transparency_reports",
+      "sog_src_rlusd_user_terms"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "RLUSD global product launch and exchange availability beginning December 17, 2024.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_eurc_lifecycle_context",
+    "subject_stablecoin_ids": [
+      "sog_st_eurc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "evidence_ids": [
+      "sog_src_eurc_launch_2022",
+      "sog_src_eurc_circle_page",
+      "sog_src_eurc_transparency"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Euro Coin / EUROC launch on Ethereum on June 30, 2022, continuing under the EURC name.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_usdp_2018_09_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_usdp"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_paxos"
+    ],
+    "evidence_ids": [
+      "sog_src_usdp_paxos_page",
+      "sog_src_usdp_transparency"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Pax Dollar launch and issuer lifecycle starting point.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_usdg_2024_11_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_usdg"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_global_dollar_network"
+    ],
+    "evidence_ids": [
+      "sog_src_usdg_global_dollar_page",
+      "sog_src_usdg_paxos_page"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Global Dollar launch and network lifecycle starting point.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_usds_2024_08_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_usds"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "evidence_ids": [
+      "sog_src_usds_sky_page",
+      "sog_src_usds_developer_docs"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "USDS launch during the MakerDAO-to-Sky transition.",
+      "status": "active"
+    }
+  }
 ]
