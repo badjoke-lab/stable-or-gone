@@ -1,9 +1,9 @@
 name: Finalize launch date batch M
 
 on:
-  push:
+  pull_request:
     branches:
-      - launch-date-batch-m
+      - main
     paths:
       - .github/workflows/finalize-launch-date-batch-m.yml
 
