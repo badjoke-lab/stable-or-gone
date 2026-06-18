@@ -1,4 +1,5 @@
 # Payload consumed by the temporary default-branch runner.
+# Triggered after the runner was registered without a path filter.
 name: XSGD batch payload
 
 on:
