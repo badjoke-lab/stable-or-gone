@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { DATA_SCHEMA_VERSION, DATA_SAFETY, getBuildMetadata } from '../lib/machine-readable';
 
 interface Props {
   title?: string;
@@ -22,19 +23,26 @@ const {
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
 const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\u003c') : '';
+const build = getBuildMetadata(new Date().toISOString());
 const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
 const gaInline = gaMeasurementId
   ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
   : '';
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" data-sog-build-commit={build.commit} data-sog-data-schema={DATA_SCHEMA_VERSION}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="sog-build-commit" content={build.commit} />
+    <meta name="sog-build-branch" content={build.branch} />
+    <meta name="sog-data-schema" content={DATA_SCHEMA_VERSION} />
+    <meta name="sog-canonical-only" content={String(DATA_SAFETY.canonical_only)} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
