@@ -1,3 +1,4 @@
+# Temporary audit-alignment patch for Batch N.
 import json
 from pathlib import Path
 
