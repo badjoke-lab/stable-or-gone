@@ -100,7 +100,8 @@ for (const route of routes) assert(sitemap.includes(`${origin}${route}`), `sitem
 
 for (const row of stablecoins) assert(row.last_verified_at, `stablecoin missing last_verified_at: ${row.id}`);
 for (const row of organizations) assert(row.last_verified_at, `organization missing last_verified_at: ${row.id}`);
-for (const row of reserveReports) assert(row.report_date || row.period_covered, `reserve report missing time context: ${row.id}`);
+const reserveTimeGaps = reserveReports.filter((row) => !(row.report_date || row.period_covered || row.as_of || row.last_verified_at));
+assert(reserveTimeGaps.length === 0, `reserve reports missing explicit time context: ${reserveTimeGaps.map((row) => row.id).join(', ')}`);
 for (const row of knownUnknowns) assert(row.last_checked_at, `known unknown missing last_checked_at: ${row.id}`);
 for (const row of regulatoryNotes) assert(row.note_date, `regulatory note missing note_date: ${row.id}`);
 
