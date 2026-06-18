@@ -1,21 +1,516 @@
 [
-  {"id":"sog_src_xsgd_overview_batch_i","stablecoin_id":"sog_st_xsgd","issuer_id":"sog_issuer_straitsx","event_id":"sog_ev_xsgd_active_review_batch_i","source_type":"official_documentation","title":"What is XSGD?","url":"https://support.straitsx.com/support/solutions/articles/157000363433-what-is-xsgd-","publisher":"StraitsX","published_at":null,"archived_url":"https://web.archive.org/web/*/https://support.straitsx.com/support/solutions/articles/157000363433-what-is-xsgd-","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_backing_and_redemption","stablecoin_ids":["sog_st_xsgd"],"organization_ids":["sog_issuer_straitsx"],"event_ids":["sog_ev_xsgd_active_review_batch_i"],"claim_scopes":["entity_identity","one_to_one_sgd_backing","issuer_redemption"],"notes":"Official support documentation for XSGD identity and 1:1 SGD redemption."},
-  {"id":"sog_src_xsgd_attestation_batch_i","stablecoin_id":"sog_st_xsgd","issuer_id":"sog_issuer_straitsx","event_id":"sog_ev_xsgd_active_review_batch_i","source_type":"official_attestation","title":"XSGD January 2026 attestation report notice","url":"https://www.straitsx.com/blog-post/xsgd-january-2026-attestation-reports-now-available","publisher":"StraitsX","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.straitsx.com/blog-post/xsgd-january-2026-attestation-reports-now-available","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_attestation","stablecoin_ids":["sog_st_xsgd"],"organization_ids":["sog_issuer_straitsx"],"event_ids":["sog_ev_xsgd_active_review_batch_i"],"claim_scopes":["monthly_attestation","sgd_reserves","active_status"],"notes":"Current official reserve-attestation publication."},
-  {"id":"sog_src_xsgd_base_batch_i","stablecoin_id":"sog_st_xsgd","issuer_id":"sog_issuer_straitsx","event_id":"sog_ev_xsgd_active_review_batch_i","source_type":"official_statement","title":"Access XSGD on Base directly from StraitsX","url":"https://www.straitsx.com/blog-post/access-xsgd-on-base-straitsx","publisher":"StraitsX","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.straitsx.com/blog-post/access-xsgd-on-base-straitsx","accessed_at":"2026-06-15","reliability":"high","claim_scope":"current_product_and_network_access","stablecoin_ids":["sog_st_xsgd"],"organization_ids":["sog_issuer_straitsx"],"event_ids":["sog_ev_xsgd_active_review_batch_i"],"claim_scopes":["active_product","mint_transfer_redeem","base_support"],"notes":"Current first-party product availability signal."},
-
-  {"id":"sog_src_jpyc_launch_batch_i","stablecoin_id":"sog_st_jpyc","issuer_id":"sog_issuer_jpyc_inc","event_id":"sog_ev_jpyc_regulated_launch_batch_i","source_type":"official_statement","title":"JPYC and JPYC EX official launch","url":"https://corporate.jpyc.co.jp/news/posts/jpyc-ex-launch","publisher":"JPYC Inc.","published_at":"2025-10-24","archived_url":"https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/jpyc-ex-launch","accessed_at":"2026-06-15","reliability":"high","claim_scope":"launch_backing_and_redemption","stablecoin_ids":["sog_st_jpyc"],"organization_ids":["sog_issuer_jpyc_inc"],"event_ids":["sog_ev_jpyc_regulated_launch_batch_i"],"claim_scopes":["launch","one_to_one_jpy_exchange","deposits_and_government_bonds","supported_chains"],"notes":"Official launch announcement for the current funds-transfer-service JPYC."},
-  {"id":"sog_src_jpyc_registration_batch_i","stablecoin_id":"sog_st_jpyc","issuer_id":"sog_issuer_jpyc_inc","event_id":"sog_ev_jpyc_regulated_launch_batch_i","source_type":"official_statement","title":"JPYC obtains funds transfer service registration","url":"https://corporate.jpyc.co.jp/news/posts/first-yen-stablecoin-jpyc","publisher":"JPYC Inc.","published_at":"2025-08-18","archived_url":"https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/first-yen-stablecoin-jpyc","accessed_at":"2026-06-15","reliability":"high","claim_scope":"regulatory_registration","stablecoin_ids":["sog_st_jpyc"],"organization_ids":["sog_issuer_jpyc_inc"],"event_ids":["sog_ev_jpyc_regulated_launch_batch_i"],"claim_scopes":["funds_transfer_registration","registration_number","issuer_identity"],"notes":"Official registration announcement for JPYC Inc."},
-  {"id":"sog_src_jpyc_current_growth_batch_i","stablecoin_id":"sog_st_jpyc","issuer_id":"sog_issuer_jpyc_inc","event_id":"sog_ev_jpyc_regulated_launch_batch_i","source_type":"official_statement","title":"JPYC Series B second close","url":"https://corporate.jpyc.co.jp/news/posts/series-b-second-close","publisher":"JPYC Inc.","published_at":null,"archived_url":"https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/series-b-second-close","accessed_at":"2026-06-15","reliability":"high","claim_scope":"current_operating_status","stablecoin_ids":["sog_st_jpyc"],"organization_ids":["sog_issuer_jpyc_inc"],"event_ids":["sog_ev_jpyc_regulated_launch_batch_i"],"claim_scopes":["active_status","circulation_growth","post_launch_operation"],"notes":"Current official evidence that the regulated JPYC product remains active."},
-
-  {"id":"sog_src_gyen_winddown_batch_i","stablecoin_id":"sog_st_gyen","issuer_id":"sog_issuer_gmo_trust","event_id":"sog_ev_gyen_winddown_batch_i","source_type":"official_statement","title":"Wind-down of GYEN and ZUSD stablecoin issuance","url":"https://stablecoin.z.com/press/","publisher":"GMO-Z.com Trust Company","published_at":"2026-05-15","archived_url":"https://web.archive.org/web/*/https://stablecoin.z.com/press/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"wind_down_and_purchase_stop","stablecoin_ids":["sog_st_gyen"],"organization_ids":["sog_issuer_gmo_trust"],"event_ids":["sog_ev_gyen_winddown_batch_i"],"claim_scopes":["wind_down","issuance_stop","purchase_disabled"],"notes":"Official notice index for the orderly wind-down effective 2026-05-15."},
-  {"id":"sog_src_gyen_fee_schedule_batch_i","stablecoin_id":"sog_st_gyen","issuer_id":"sog_issuer_gmo_trust","event_id":"sog_ev_gyen_winddown_batch_i","source_type":"official_documentation","title":"GYEN fee schedule and redemption period","url":"https://stablecoin.z.com/fee-schedule/","publisher":"GMO-Z.com Trust Company","published_at":null,"archived_url":"https://web.archive.org/web/*/https://stablecoin.z.com/fee-schedule/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"redemption_terms","stablecoin_ids":["sog_st_gyen"],"organization_ids":["sog_issuer_gmo_trust"],"event_ids":["sog_ev_gyen_winddown_batch_i"],"claim_scopes":["initial_redemption_period","purchase_disabled","redemption_available"],"notes":"Official current wind-down fee and redemption schedule."},
-  {"id":"sog_src_gyen_attestations_batch_i","stablecoin_id":"sog_st_gyen","issuer_id":"sog_issuer_gmo_trust","event_id":"sog_ev_gyen_winddown_batch_i","source_type":"official_attestation","title":"GYEN monthly attestation reports","url":"https://stablecoin.z.com/attestation/","publisher":"GMO-Z.com Trust Company","published_at":null,"archived_url":"https://web.archive.org/web/*/https://stablecoin.z.com/attestation/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_attestation_and_legal_context","stablecoin_ids":["sog_st_gyen"],"organization_ids":["sog_issuer_gmo_trust"],"event_ids":["sog_ev_gyen_winddown_batch_i"],"claim_scopes":["monthly_attestation","redemption_assets","mica_e_money_token_statement"],"notes":"Official attestation index and current legal-context notice."},
-
-  {"id":"sog_src_brz_product_batch_i","stablecoin_id":"sog_st_brz","issuer_id":"sog_issuer_transfero","event_id":"sog_ev_brz_active_review_batch_i","source_type":"official_website","title":"BRZ Brazilian real stablecoin","url":"https://transfero.com/brz","publisher":"Transfero","published_at":null,"archived_url":"https://web.archive.org/web/*/https://transfero.com/brz","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_backing_and_redemption","stablecoin_ids":["sog_st_brz"],"organization_ids":["sog_issuer_transfero"],"event_ids":["sog_ev_brz_active_review_batch_i"],"claim_scopes":["active_product","one_to_one_brl_backing","regulated_partner_redemption"],"notes":"Current official BRZ product page."},
-  {"id":"sog_src_brz_stablecoins_batch_i","stablecoin_id":"sog_st_brz","issuer_id":"sog_issuer_transfero","event_id":"sog_ev_brz_active_review_batch_i","source_type":"official_website","title":"BRZ token stablecoin page","url":"https://transfero.com/stablecoins/brz","publisher":"Transfero","published_at":null,"archived_url":"https://web.archive.org/web/*/https://transfero.com/stablecoins/brz","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_custody_and_current_status","stablecoin_ids":["sog_st_brz"],"organization_ids":["sog_issuer_transfero"],"event_ids":["sog_ev_brz_active_review_batch_i"],"claim_scopes":["brl_reserves","authorized_financial_institution","active_status"],"notes":"Current official reserve-custody statement."},
-  {"id":"sog_src_brz_transparency_batch_i","stablecoin_id":"sog_st_brz","issuer_id":"sog_issuer_transfero","event_id":"sog_ev_brz_active_review_batch_i","source_type":"official_report","title":"BRZ transparency report","url":"https://transfero.com/wp-content/uploads/2024/12/daily-report.pdf","publisher":"Transfero","published_at":null,"archived_url":"https://web.archive.org/web/*/https://transfero.com/wp-content/uploads/2024/12/daily-report.pdf","accessed_at":"2026-06-15","reliability":"medium","claim_scope":"reserve_and_redemption_transparency","stablecoin_ids":["sog_st_brz"],"organization_ids":["sog_issuer_transfero"],"event_ids":["sog_ev_brz_active_review_batch_i"],"claim_scopes":["reserve_report","redemption_route","issuer_transparency"],"notes":"Officially hosted BRZ transparency report; exact report date remains to be normalized."},
-
-  {"id":"sog_src_tryb_product_batch_i","stablecoin_id":"sog_st_tryb","issuer_id":"sog_issuer_bilira","event_id":"sog_ev_tryb_active_review_batch_i","source_type":"official_website","title":"TRYB stablecoin product page","url":"https://www.bilira.co/en/product/tryb-stablecoin","publisher":"BiLira","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.bilira.co/en/product/tryb-stablecoin","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_backing_redemption_and_networks","stablecoin_ids":["sog_st_tryb"],"organization_ids":["sog_issuer_bilira"],"event_ids":["sog_ev_tryb_active_review_batch_i"],"claim_scopes":["active_product","one_to_one_try_backing","redemption","multichain"],"notes":"Current official TRYB product page."},
-  {"id":"sog_src_tryb_terms_batch_i","stablecoin_id":"sog_st_tryb","issuer_id":"sog_issuer_bilira","event_id":"sog_ev_tryb_active_review_batch_i","source_type":"official_terms","title":"TRYB Terms of Use","url":"https://www.bilira.co/en/legal-information/tryb-terms-of-use","publisher":"BiLira","published_at":"2026-03-06","archived_url":"https://web.archive.org/web/*/https://www.bilira.co/en/legal-information/tryb-terms-of-use","accessed_at":"2026-06-15","reliability":"high","claim_scope":"issuer_reserve_and_redemption_terms","stablecoin_ids":["sog_st_tryb"],"organization_ids":["sog_issuer_bilira"],"event_ids":["sog_ev_tryb_active_review_batch_i"],"claim_scopes":["issuer_identity","one_to_one_reserve","issuance","redemption"],"notes":"Current contractual terms for TRYB issuance and redemption."},
-  {"id":"sog_src_tryb_audits_batch_i","stablecoin_id":"sog_st_tryb","issuer_id":"sog_issuer_bilira","event_id":"sog_ev_tryb_active_review_batch_i","source_type":"official_attestation","title":"TRYB audit reports","url":"https://www.bilira.co/en/audit-reports","publisher":"BiLira","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.bilira.co/en/audit-reports","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_attestations","stablecoin_ids":["sog_st_tryb"],"organization_ids":["sog_issuer_bilira"],"event_ids":["sog_ev_tryb_active_review_batch_i"],"claim_scopes":["bank_reserves","audit_reports","active_status"],"notes":"Current official TRYB audit-report index."}
+  {
+    "id": "sog_src_xsgd_overview_batch_i",
+    "stablecoin_id": "sog_st_xsgd",
+    "issuer_id": "sog_issuer_straitsx",
+    "event_id": "sog_ev_xsgd_active_review_batch_i",
+    "source_type": "official_documentation",
+    "title": "What is XSGD?",
+    "url": "https://support.straitsx.com/support/solutions/articles/157000363433-what-is-xsgd-",
+    "publisher": "StraitsX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://support.straitsx.com/support/solutions/articles/157000363433-what-is-xsgd-",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_backing_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_xsgd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx"
+    ],
+    "event_ids": [
+      "sog_ev_xsgd_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "entity_identity",
+      "one_to_one_sgd_backing",
+      "issuer_redemption"
+    ],
+    "notes": "Official support documentation for XSGD identity and 1:1 SGD redemption."
+  },
+  {
+    "id": "sog_src_xsgd_attestation_batch_i",
+    "stablecoin_id": "sog_st_xsgd",
+    "issuer_id": "sog_issuer_straitsx",
+    "event_id": "sog_ev_xsgd_active_review_batch_i",
+    "source_type": "official_attestation",
+    "title": "XSGD January 2026 attestation report notice",
+    "url": "https://www.straitsx.com/blog-post/xsgd-january-2026-attestation-reports-now-available",
+    "publisher": "StraitsX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/blog-post/xsgd-january-2026-attestation-reports-now-available",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_attestation",
+    "stablecoin_ids": [
+      "sog_st_xsgd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx"
+    ],
+    "event_ids": [
+      "sog_ev_xsgd_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "monthly_attestation",
+      "sgd_reserves",
+      "active_status"
+    ],
+    "notes": "Current official reserve-attestation publication."
+  },
+  {
+    "id": "sog_src_xsgd_base_batch_i",
+    "stablecoin_id": "sog_st_xsgd",
+    "issuer_id": "sog_issuer_straitsx",
+    "event_id": "sog_ev_xsgd_active_review_batch_i",
+    "source_type": "official_statement",
+    "title": "Access XSGD on Base directly from StraitsX",
+    "url": "https://www.straitsx.com/blog-post/access-xsgd-on-base-straitsx",
+    "publisher": "StraitsX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/blog-post/access-xsgd-on-base-straitsx",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "current_product_and_network_access",
+    "stablecoin_ids": [
+      "sog_st_xsgd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx"
+    ],
+    "event_ids": [
+      "sog_ev_xsgd_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "active_product",
+      "mint_transfer_redeem",
+      "base_support"
+    ],
+    "notes": "Current first-party product availability signal."
+  },
+  {
+    "id": "sog_src_jpyc_launch_batch_i",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": "sog_ev_jpyc_regulated_launch_batch_i",
+    "source_type": "official_statement",
+    "title": "JPYC and JPYC EX official launch",
+    "url": "https://corporate.jpyc.co.jp/news/posts/jpyc-ex-launch",
+    "publisher": "JPYC Inc.",
+    "published_at": "2025-10-24",
+    "archived_url": "https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/jpyc-ex-launch",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "launch_backing_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [
+      "sog_ev_jpyc_regulated_launch_batch_i"
+    ],
+    "claim_scopes": [
+      "launch",
+      "one_to_one_jpy_exchange",
+      "deposits_and_government_bonds",
+      "supported_chains"
+    ],
+    "notes": "Official launch announcement for the current funds-transfer-service JPYC."
+  },
+  {
+    "id": "sog_src_jpyc_registration_batch_i",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": "sog_ev_jpyc_regulated_launch_batch_i",
+    "source_type": "official_statement",
+    "title": "JPYC obtains funds transfer service registration",
+    "url": "https://corporate.jpyc.co.jp/news/posts/first-yen-stablecoin-jpyc",
+    "publisher": "JPYC Inc.",
+    "published_at": "2025-08-18",
+    "archived_url": "https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/first-yen-stablecoin-jpyc",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "regulatory_registration",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [
+      "sog_ev_jpyc_regulated_launch_batch_i"
+    ],
+    "claim_scopes": [
+      "funds_transfer_registration",
+      "registration_number",
+      "issuer_identity"
+    ],
+    "notes": "Official registration announcement for JPYC Inc."
+  },
+  {
+    "id": "sog_src_jpyc_current_growth_batch_i",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": "sog_ev_jpyc_regulated_launch_batch_i",
+    "source_type": "official_statement",
+    "title": "JPYC Series B second close",
+    "url": "https://corporate.jpyc.co.jp/news/posts/series-b-second-close",
+    "publisher": "JPYC Inc.",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/series-b-second-close",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "current_operating_status",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [
+      "sog_ev_jpyc_regulated_launch_batch_i"
+    ],
+    "claim_scopes": [
+      "active_status",
+      "circulation_growth",
+      "post_launch_operation"
+    ],
+    "notes": "Current official evidence that the regulated JPYC product remains active."
+  },
+  {
+    "id": "sog_src_gyen_winddown_batch_i",
+    "stablecoin_id": "sog_st_gyen",
+    "issuer_id": "sog_issuer_gmo_trust",
+    "event_id": "sog_ev_gyen_winddown_batch_i",
+    "source_type": "official_statement",
+    "title": "Wind-down of GYEN and ZUSD stablecoin issuance",
+    "url": "https://stablecoin.z.com/press/",
+    "publisher": "GMO-Z.com Trust Company",
+    "published_at": "2026-05-15",
+    "archived_url": "https://web.archive.org/web/*/https://stablecoin.z.com/press/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "wind_down_and_purchase_stop",
+    "stablecoin_ids": [
+      "sog_st_gyen"
+    ],
+    "organization_ids": [
+      "sog_issuer_gmo_trust"
+    ],
+    "event_ids": [
+      "sog_ev_gyen_winddown_batch_i"
+    ],
+    "claim_scopes": [
+      "wind_down",
+      "issuance_stop",
+      "purchase_disabled"
+    ],
+    "notes": "Official notice index for the orderly wind-down effective 2026-05-15."
+  },
+  {
+    "id": "sog_src_gyen_fee_schedule_batch_i",
+    "stablecoin_id": "sog_st_gyen",
+    "issuer_id": "sog_issuer_gmo_trust",
+    "event_id": "sog_ev_gyen_winddown_batch_i",
+    "source_type": "official_documentation",
+    "title": "GYEN fee schedule and redemption period",
+    "url": "https://stablecoin.z.com/fee-schedule/",
+    "publisher": "GMO-Z.com Trust Company",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://stablecoin.z.com/fee-schedule/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "redemption_terms",
+    "stablecoin_ids": [
+      "sog_st_gyen"
+    ],
+    "organization_ids": [
+      "sog_issuer_gmo_trust"
+    ],
+    "event_ids": [
+      "sog_ev_gyen_winddown_batch_i"
+    ],
+    "claim_scopes": [
+      "initial_redemption_period",
+      "purchase_disabled",
+      "redemption_available"
+    ],
+    "notes": "Official current wind-down fee and redemption schedule."
+  },
+  {
+    "id": "sog_src_gyen_attestations_batch_i",
+    "stablecoin_id": "sog_st_gyen",
+    "issuer_id": "sog_issuer_gmo_trust",
+    "event_id": "sog_ev_gyen_winddown_batch_i",
+    "source_type": "official_attestation",
+    "title": "GYEN monthly attestation reports",
+    "url": "https://stablecoin.z.com/attestation/",
+    "publisher": "GMO-Z.com Trust Company",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://stablecoin.z.com/attestation/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_attestation_and_legal_context",
+    "stablecoin_ids": [
+      "sog_st_gyen"
+    ],
+    "organization_ids": [
+      "sog_issuer_gmo_trust"
+    ],
+    "event_ids": [
+      "sog_ev_gyen_winddown_batch_i"
+    ],
+    "claim_scopes": [
+      "monthly_attestation",
+      "redemption_assets",
+      "mica_e_money_token_statement"
+    ],
+    "notes": "Official attestation index and current legal-context notice."
+  },
+  {
+    "id": "sog_src_brz_product_batch_i",
+    "stablecoin_id": "sog_st_brz",
+    "issuer_id": "sog_issuer_transfero",
+    "event_id": "sog_ev_brz_active_review_batch_i",
+    "source_type": "official_website",
+    "title": "BRZ Brazilian real stablecoin",
+    "url": "https://transfero.com/brz",
+    "publisher": "Transfero",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://transfero.com/brz",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_backing_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_brz"
+    ],
+    "organization_ids": [
+      "sog_issuer_transfero"
+    ],
+    "event_ids": [
+      "sog_ev_brz_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "active_product",
+      "one_to_one_brl_backing",
+      "regulated_partner_redemption"
+    ],
+    "notes": "Current official BRZ product page."
+  },
+  {
+    "id": "sog_src_brz_stablecoins_batch_i",
+    "stablecoin_id": "sog_st_brz",
+    "issuer_id": "sog_issuer_transfero",
+    "event_id": "sog_ev_brz_active_review_batch_i",
+    "source_type": "official_website",
+    "title": "BRZ token stablecoin page",
+    "url": "https://transfero.com/stablecoins/brz",
+    "publisher": "Transfero",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://transfero.com/stablecoins/brz",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_custody_and_current_status",
+    "stablecoin_ids": [
+      "sog_st_brz"
+    ],
+    "organization_ids": [
+      "sog_issuer_transfero"
+    ],
+    "event_ids": [
+      "sog_ev_brz_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "brl_reserves",
+      "authorized_financial_institution",
+      "active_status"
+    ],
+    "notes": "Current official reserve-custody statement."
+  },
+  {
+    "id": "sog_src_brz_transparency_batch_i",
+    "stablecoin_id": "sog_st_brz",
+    "issuer_id": "sog_issuer_transfero",
+    "event_id": "sog_ev_brz_active_review_batch_i",
+    "source_type": "official_report",
+    "title": "BRZ transparency report",
+    "url": "https://transfero.com/wp-content/uploads/2024/12/daily-report.pdf",
+    "publisher": "Transfero",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://transfero.com/wp-content/uploads/2024/12/daily-report.pdf",
+    "accessed_at": "2026-06-15",
+    "reliability": "medium",
+    "claim_scope": "reserve_and_redemption_transparency",
+    "stablecoin_ids": [
+      "sog_st_brz"
+    ],
+    "organization_ids": [
+      "sog_issuer_transfero"
+    ],
+    "event_ids": [
+      "sog_ev_brz_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "reserve_report",
+      "redemption_route",
+      "issuer_transparency"
+    ],
+    "notes": "Officially hosted BRZ transparency report; exact report date remains to be normalized."
+  },
+  {
+    "id": "sog_src_tryb_product_batch_i",
+    "stablecoin_id": "sog_st_tryb",
+    "issuer_id": "sog_issuer_bilira",
+    "event_id": "sog_ev_tryb_active_review_batch_i",
+    "source_type": "official_website",
+    "title": "TRYB stablecoin product page",
+    "url": "https://www.bilira.co/en/product/tryb-stablecoin",
+    "publisher": "BiLira",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.bilira.co/en/product/tryb-stablecoin",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_backing_redemption_and_networks",
+    "stablecoin_ids": [
+      "sog_st_tryb"
+    ],
+    "organization_ids": [
+      "sog_issuer_bilira"
+    ],
+    "event_ids": [
+      "sog_ev_tryb_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "active_product",
+      "one_to_one_try_backing",
+      "redemption",
+      "multichain"
+    ],
+    "notes": "Current official TRYB product page."
+  },
+  {
+    "id": "sog_src_tryb_terms_batch_i",
+    "stablecoin_id": "sog_st_tryb",
+    "issuer_id": "sog_issuer_bilira",
+    "event_id": "sog_ev_tryb_active_review_batch_i",
+    "source_type": "official_terms",
+    "title": "TRYB Terms of Use",
+    "url": "https://www.bilira.co/en/legal-information/tryb-terms-of-use",
+    "publisher": "BiLira",
+    "published_at": "2026-03-06",
+    "archived_url": "https://web.archive.org/web/*/https://www.bilira.co/en/legal-information/tryb-terms-of-use",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "issuer_reserve_and_redemption_terms",
+    "stablecoin_ids": [
+      "sog_st_tryb"
+    ],
+    "organization_ids": [
+      "sog_issuer_bilira"
+    ],
+    "event_ids": [
+      "sog_ev_tryb_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "issuer_identity",
+      "one_to_one_reserve",
+      "issuance",
+      "redemption"
+    ],
+    "notes": "Current contractual terms for TRYB issuance and redemption."
+  },
+  {
+    "id": "sog_src_tryb_audits_batch_i",
+    "stablecoin_id": "sog_st_tryb",
+    "issuer_id": "sog_issuer_bilira",
+    "event_id": "sog_ev_tryb_active_review_batch_i",
+    "source_type": "official_attestation",
+    "title": "TRYB audit reports",
+    "url": "https://www.bilira.co/en/audit-reports",
+    "publisher": "BiLira",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.bilira.co/en/audit-reports",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_attestations",
+    "stablecoin_ids": [
+      "sog_st_tryb"
+    ],
+    "organization_ids": [
+      "sog_issuer_bilira"
+    ],
+    "event_ids": [
+      "sog_ev_tryb_active_review_batch_i"
+    ],
+    "claim_scopes": [
+      "bank_reserves",
+      "audit_reports",
+      "active_status"
+    ],
+    "notes": "Current official TRYB audit-report index."
+  },
+  {
+    "id": "sog_src_xsgd_launch_batch_m",
+    "stablecoin_id": "sog_st_xsgd",
+    "issuer_id": "sog_issuer_straitsx",
+    "event_id": "sog_ev_xsgd_launch_batch_m",
+    "source_type": "official_statement",
+    "title": "Introducing XSGD — the Singapore Dollar-backed and Travel Rule compliant stablecoin",
+    "url": "https://www.straitsx.com/blog-post/introducing-xsgd-the-singapore-dollar-backed-and-travel-rule1-compliant-stablecoin",
+    "publisher": "StraitsX",
+    "published_at": "2020-10-05",
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/blog-post/introducing-xsgd-the-singapore-dollar-backed-and-travel-rule1-compliant-stablecoin",
+    "accessed_at": "2026-06-18",
+    "reliability": "high",
+    "claim_scope": "launch_backing_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_xsgd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx"
+    ],
+    "event_ids": [
+      "sog_ev_xsgd_launch_batch_m"
+    ],
+    "claim_scopes": [
+      "launch",
+      "first_public_release",
+      "one_to_one_sgd_backing",
+      "issuer_conversion"
+    ],
+    "notes": "Official public-release announcement dated 2020-10-05."
+  },
+  {
+    "id": "sog_src_xsgd_anniversary_batch_m",
+    "stablecoin_id": "sog_st_xsgd",
+    "issuer_id": "sog_issuer_straitsx",
+    "event_id": "sog_ev_xsgd_launch_batch_m",
+    "source_type": "official_statement",
+    "title": "Celebrating 5 Years of XSGD, The First SGD Stablecoin for Real-World Payments",
+    "url": "https://www.straitsx.com/blog-post/celebrating-5-years-of-xsgd-the-first-sgd-stablecoin-for-real-world-payments",
+    "publisher": "StraitsX",
+    "published_at": "2025-10-22",
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/blog-post/celebrating-5-years-of-xsgd-the-first-sgd-stablecoin-for-real-world-payments",
+    "accessed_at": "2026-06-18",
+    "reliability": "high",
+    "claim_scope": "launch_date_confirmation",
+    "stablecoin_ids": [
+      "sog_st_xsgd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx"
+    ],
+    "event_ids": [
+      "sog_ev_xsgd_launch_batch_m"
+    ],
+    "claim_scopes": [
+      "first_issuance",
+      "launch_date",
+      "continuous_asset_identity"
+    ],
+    "notes": "Official fifth-anniversary history explicitly states first issuance on 2020-10-05."
+  }
 ]
