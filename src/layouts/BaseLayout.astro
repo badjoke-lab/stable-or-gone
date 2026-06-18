@@ -35,6 +35,8 @@ const gaInline = gaMeasurementId
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
