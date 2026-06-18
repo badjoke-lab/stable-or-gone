@@ -8,25 +8,27 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 
 ## Current registry checkpoint
 
-The protected canonical checkpoint contains:
+The canonical checkpoint contains:
 
 ```text
-40 stable assets
-32 organizations
-40 stablecoin-organization relationships
-40 classification records
-40 reserve/redemption profiles
-48 events
-48 Event v2 detail records
-182 evidence records
-182 evidence relation projections
-42 reserve-report references
-93 known unknowns
+70 stable assets
+59 organizations
+72 stablecoin-organization relationships
+70 classification records
+70 reserve/redemption profiles
+92 events
+92 Event v2 detail records
+279 evidence records
+279 evidence relation projections
+72 reserve-report references
+153 known unknowns
 9 regulatory notes
-67 deployments
+101 deployments
 ```
 
-The 28 → 40 growth phase is complete. The batch finalization guard protects this checkpoint before the next taxonomy, schema, statistics, and record-growth phase.
+These counts are generated from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and the sitemap. They must not be maintained independently by hand.
+
+The current roadmap first completes quality work on the 70-record checkpoint, then resumes controlled growth toward 100 canonical assets.
 
 ## What the registry tracks
 
@@ -96,7 +98,7 @@ Current canonical data groups include:
 - regulatory notes
 - deployment records
 
-Registry v3 is a planned additive extension. It will add legal profiles, stable-asset relationships, reserve components, deployment canonicality, expanded yield mechanics, and additional event detail types without breaking current public URLs.
+Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, and the sitemap are generated or validated against the same canonical groups. Unreviewed candidates, internal monitoring output, staging data, and private notes are excluded from the public machine-readable layer.
 
 See:
 
@@ -115,12 +117,26 @@ npm run dev
 npm run build
 ```
 
-The build chain runs baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, final-state, and batch-finalization validation before Astro check, site build, deployment verification, and public-layer verification.
+The build chain runs baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, deployment, income-profile, final-state, batch-finalization, and integrity validation before Astro check and site generation.
 
-The dedicated finalization guard can also be run directly:
+After generation it also verifies:
+
+- HTML list counts against canonical JSON counts
+- stablecoin, organization, and event detail-route counts
+- reserve-report, deployment, known-unknown, and regulatory-note references
+- `version.json` and `data/manifest.json` count parity
+- sitemap detail-route coverage
+- canonical, hreflang, meta description, Open Graph, and JSON-LD metadata
+- absence of known legacy count strings such as the old 16/20 issuer view and 23-event view
+
+A separate production workflow waits for the Cloudflare Pages deployment after each `main` push and repeats the HTML, JSON, sitemap, and metadata checks against the public origin.
+
+Useful commands:
 
 ```bash
 npm run validate:finalization
+npm run verify:consistency
+npm run check:production
 ```
 
 ## Reporting and corrections
