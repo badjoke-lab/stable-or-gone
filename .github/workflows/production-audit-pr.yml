@@ -18,6 +18,15 @@ jobs:
       - name: Verify redeployed production
         env:
           SOG_EXPECTED_COMMIT: ${{ github.event.pull_request.base.sha }}
-          SOG_SMOKE_ATTEMPTS: '12'
-          SOG_SMOKE_DELAY_MS: '15000'
-        run: npm run check:production
+          SOG_SMOKE_ATTEMPTS: '3'
+          SOG_SMOKE_DELAY_MS: '5000'
+        run: |
+          set -o pipefail
+          npm run check:production 2>&1 | tee production-audit.log
+      - name: Upload production audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-audit
+          path: production-audit.log
+          retention-days: 1
