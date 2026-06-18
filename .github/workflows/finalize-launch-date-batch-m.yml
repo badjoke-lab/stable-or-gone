@@ -1,29 +1,13 @@
-name: Finalize launch date batch M
+name: XSGD batch payload
 
 on:
-  push:
-    branches:
-      - launch-date-batch-m
-    paths:
-      - .github/workflows/finalize-launch-date-batch-m.yml
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
-  finalize:
-    if: github.actor != 'github-actions[bot]'
+  payload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: launch-date-batch-m
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm install --no-package-lock
-      - name: Add official XSGD launch evidence
-        run: |
+      - run: |
           python - <<'PY'
           import json
           from pathlib import Path
@@ -88,13 +72,3 @@ Primary evidence:
 The existing 2026 status-review event remains separate from the historical launch event.
 ''')
           PY
-      - run: node scripts/generate-registry-stats.mjs
-      - run: npm run audit:integrity
-      - name: Commit final batch
-        run: |
-          rm .github/workflows/finalize-launch-date-batch-m.yml
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -A
-          git commit -m "Add official XSGD launch date evidence"
-          git push origin HEAD:launch-date-batch-m
