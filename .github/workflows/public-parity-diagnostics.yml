@@ -1,0 +1,31 @@
+name: Public parity diagnostics
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build site
+        run: npm run build:site
+      - name: Run parity verifier
+        continue-on-error: true
+        run: npm run verify:public > parity.log 2>&1
+      - name: Upload diagnostic log
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-parity-diagnostics
+          path: parity.log
+          retention-days: 1
