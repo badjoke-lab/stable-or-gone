@@ -57,7 +57,7 @@ const jsonLd = {
   <script>
     const registry = document.querySelector('[data-event-registry]');
     const tbody = registry?.querySelector('[data-event-body]');
-    const rows = Array.from(registry?.querySelectorAll('[data-event-row]') ?? []);
+    const rows = Array.from(tbody?.children ?? []).filter((row) => row instanceof HTMLTableRowElement && row.hasAttribute('data-' + 'event-row'));
     const noResults = registry?.querySelector('[data-event-no-results]');
     const resultCount = registry?.querySelector('[data-event-result-count]');
     const controls = { search: registry?.querySelector('[data-event-search]'), type: registry?.querySelector('[data-event-type]'), impact: registry?.querySelector('[data-event-impact]'), recovery: registry?.querySelector('[data-event-recovery]'), sort: registry?.querySelector('[data-event-sort]') };
