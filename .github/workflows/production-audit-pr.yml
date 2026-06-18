@@ -15,6 +15,10 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-package-lock --no-audit --no-fund
+      - name: Reproduce Cloudflare build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee cloudflare-build.log
       - name: Verify current production against PR base
         env:
           SOG_EXPECTED_COMMIT: ${{ github.event.pull_request.base.sha }}
@@ -23,10 +27,13 @@ jobs:
         run: |
           set -o pipefail
           npm run check:production 2>&1 | tee production-audit.log
-      - name: Upload production audit
+      - name: Upload audit logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: production-audit
-          path: production-audit.log
+          path: |
+            cloudflare-build.log
+            production-audit.log
+          if-no-files-found: ignore
           retention-days: 1
