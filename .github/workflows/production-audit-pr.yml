@@ -1,0 +1,23 @@
+name: Production audit after redeploy
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-package-lock --no-audit --no-fund
+      - name: Verify redeployed production
+        env:
+          SOG_EXPECTED_COMMIT: ${{ github.event.pull_request.base.sha }}
+          SOG_SMOKE_ATTEMPTS: '12'
+          SOG_SMOKE_DELAY_MS: '15000'
+        run: npm run check:production
