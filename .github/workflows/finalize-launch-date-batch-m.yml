@@ -4,14 +4,13 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - .github/workflows/finalize-launch-date-batch-m.yml
 
 permissions:
   contents: write
 
 jobs:
   finalize:
+    if: github.head_ref == 'launch-date-batch-m'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
