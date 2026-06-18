@@ -1,0 +1,3 @@
+[
+{"id":"sog_src_eurq_launch_batch_o","stablecoin_id":"sog_st_eurq","issuer_id":"sog_issuer_quantoz_payments","event_id":"sog_ev_eurq_launch_batch_o","source_type":"official_statement","title":"Quantoz Payments Issues Euro and US Dollar Stablecoins","url":"https://www.quantoz.com/blog/quantoz-payments-issues-euro-and-us-dollar-stablecoins","publisher":"Quantoz Payments","published_at":"2024-11-18","accessed_at":"2026-06-18","reliability":"high","claim_scope":"date_confirmation","stablecoin_ids":["sog_st_eurq"],"organization_ids":["sog_issuer_quantoz_payments"],"event_ids":["sog_ev_eurq_launch_batch_o"],"claim_scopes":["launch_date"],"notes":"First-party source confirms 18 November 2024."}
+]
