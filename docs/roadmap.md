@@ -76,6 +76,12 @@ Historical records missing terminal date:   4
 All-unknown income profiles:                41
 ```
 
+Latest completed roadmap PR:
+
+```text
+PR #56 — Anchor the 70-to-100 execution roadmap
+```
+
 Latest completed record-quality PR:
 
 ```text
@@ -85,14 +91,14 @@ PR #55 — Add official USDe launch date
 Current development stage:
 
 ```text
-70-record quality completion before 70 → 100 record growth
+Phase 1 — Launch-date quality work
 ```
 
 Current next action:
 
 ```text
-PR #56 — Store and anchor this roadmap
-PR #57 — Audit and classify the remaining 38 launch-date gaps
+PR #57 — Audit and classify the remaining 38 launch-date gaps: complete in this change
+PR #58 — Launch-date Batch O: next
 ```
 
 ## Completed major phases
@@ -108,6 +114,7 @@ PR #57 — Audit and classify the remaining 38 launch-date gaps
 - integrity audit converted into a deterministic CI check
 - machine-readable quality queues added
 - launch-date strengthening through PRs #51–#55
+- 70-to-100 execution and recovery roadmap anchored in PR #56
 
 ## Fixed execution order
 
@@ -130,7 +137,7 @@ Target: 2026-06-18
 
 ## PR #56 — Store the 70-to-100 roadmap
 
-Status: **in progress**
+Status: **complete**
 
 Scope:
 
@@ -140,12 +147,13 @@ Scope:
 - define the recovery procedure
 - require this file to be updated as part of future roadmap work
 
-Completion conditions:
+Completion result:
 
 - `docs/roadmap.md` contains the current checkpoint
 - planned PR order is explicit
 - current and next work items are explicit
-- normal CI succeeds
+- normal CI succeeded
+- merged as PR #56
 
 # Phase 1 — Launch-date quality work
 
@@ -157,16 +165,18 @@ The objective is not to force all records to have a day-level date. The objectiv
 
 ## PR #57 — Audit the remaining launch-date queue
 
-Classify every remaining record as:
+Status: **complete in PR #57**
+
+All 38 records were classified as:
 
 ```text
-A. Day-level date confirmed by primary evidence
-B. Only month or year can be confirmed
-C. Multiple plausible launch definitions or dates exist
-D. No adequate primary source has been found
+A. Day-level date supported:                         7
+B. Only month or year currently supported:           5
+C. Multiple launch definitions or versions exist:   23
+D. No adequate primary launch source found:           3
 ```
 
-For every record, review:
+For every record, the review considered:
 
 - issuer announcement date
 - public availability date
@@ -176,17 +186,42 @@ For every record, review:
 - migration or rebrand date
 - difference between announcement and operational launch
 
-Outputs:
+Output:
 
 ```text
 docs/audits/remaining-launch-date-review.md
 ```
 
-The review must record accepted sources, rejected date candidates, uncertainty reasons, and the recommended treatment.
+The review records accepted sources, rejected shortcuts, uncertainty reasons, and recommended treatment.
+
+Category-A records allocated to the next batches:
+
+```text
+PR #58 / Batch O
+- crvUSD: 2023-05-14
+- EURCV:  2023-04-20
+- EURI:   2024-08-26
+- EURQ:   2024-11-18
+- USDY:   2023-09-07
+
+PR #59 / Batch P
+- sUSDS:  2024-09-18
+- USDtb:  2024-12-16
+```
 
 ## PR #58 — Launch-date Batch O
 
-Apply four to six category-A dates.
+Status: **next**
+
+Apply the five cleanest category-A dates:
+
+```text
+crvUSD
+EURCV
+EURI
+EURQ
+USDY
+```
 
 Each promoted date must update all applicable layers:
 
@@ -202,24 +237,31 @@ record-specific review note
 
 ## PR #59 — Launch-date Batch P
 
-Apply the next four to six category-A dates using the same evidence and validation standard.
+Apply the remaining two category-A dates:
+
+```text
+sUSDS
+USDtb
+```
+
+These require more careful lineage and activation-boundary handling than Batch O.
 
 ## PR #60 — Launch-date Batch Q and unresolved queue freeze
 
-Apply the remaining safe day-level dates and freeze the unresolved set.
+Apply any additional day-level date that becomes safe during re-review and freeze the unresolved set.
 
-For categories B, C, and D, retain `launch_date: null` unless the schema is deliberately extended later. Record the reason and the strongest known date range instead of inserting an artificial first day of a month or year.
+For categories B, C, and D, retain `launch_date: null` unless later evidence changes the classification. Record the reason and the strongest known date range instead of inserting an artificial first day of a month or year.
 
 Phase completion target:
 
 ```text
-Missing launch dates: 38 → 25 or fewer where evidence supports it
+Missing launch dates: 38 → 31 after the seven confirmed dates
 All remaining null dates: explicitly classified and documented
 Critical findings: 0
 Warnings: 0
 ```
 
-The numeric target must not override source quality.
+The earlier aspirational target of 25 or fewer is subordinate to source quality. The current evidence-backed target is 31.
 
 # Phase 2 — Historical terminal-date work
 
@@ -505,7 +547,7 @@ After merge, report:
 # Immediate next work
 
 ```text
-Current: PR #56 — roadmap anchoring
-Next:    PR #57 — audit and classify the remaining 38 launch-date gaps
-Then:    PR #58 — Launch-date Batch O
+Current: PR #57 — audit and classify the remaining 38 launch-date gaps
+Next:    PR #58 — Launch-date Batch O
+Then:    PR #59 — Launch-date Batch P
 ```
