@@ -198,9 +198,7 @@
   },
   "findings": {
     "critical": [],
-    "warnings": [
-      "sog_ev_usde_launch_context source_count=2, linked evidence=3"
-    ],
+    "warnings": [],
     "observations": [
       "reserve_reports context coverage is 52/70; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_fei, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_nuon, sog_st_gho, sog_st_bold, sog_st_usd0, sog_st_usr, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurs, sog_st_eurt, sog_st_usdm, sog_st_alusd.",
       "0 records have missing or older-than-one-year last_verified_at values: none.",

@@ -5,7 +5,7 @@
 - Canonical stable assets: **70**
 - Promoted candidates: **70 / 70**
 - Critical findings: **0**
-- Warnings: **1**
+- Warnings: **0**
 
 ## Scope
 
@@ -60,7 +60,7 @@
 
 ## Warnings
 
-- sog_ev_usde_launch_context source_count=2, linked evidence=3
+- None.
 
 ## Quality Observations
 
@@ -72,4 +72,4 @@
 
 ## Result
 
-The 70-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.
+The 70-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.
