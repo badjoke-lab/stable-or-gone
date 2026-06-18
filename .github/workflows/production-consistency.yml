@@ -1,0 +1,25 @@
+name: Production consistency
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-package-lock
+      - name: Wait for Cloudflare Pages and verify production
+        env:
+          SOG_EXPECTED_COMMIT: ${{ github.sha }}
+          SOG_SMOKE_ATTEMPTS: '20'
+          SOG_SMOKE_DELAY_MS: '15000'
+        run: npm run check:production
