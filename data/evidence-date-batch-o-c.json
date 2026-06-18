@@ -1,0 +1,3 @@
+[
+{"id":"sog_src_usdy_launch_batch_o","stablecoin_id":"sog_st_usdy","issuer_id":"sog_issuer_ondo_global_markets","event_id":"sog_ev_usdy_launch_batch_o","source_type":"official_statement","title":"Introducing Ondo USD Yield (USDY)","url":"https://ondo.finance/blog/introducing-ondo-usd-yield-usdy","publisher":"Ondo Finance","published_at":"2023-09-07","accessed_at":"2026-06-18","reliability":"high","claim_scope":"date_confirmation","stablecoin_ids":["sog_st_usdy"],"organization_ids":["sog_issuer_ondo_global_markets"],"event_ids":["sog_ev_usdy_launch_batch_o"],"claim_scopes":["launch_date"],"notes":"Official product announcement dated 7 September 2023; later network deployments remain separate."}
+]
