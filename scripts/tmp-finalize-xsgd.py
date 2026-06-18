@@ -1,0 +1,59 @@
+import json
+from pathlib import Path
+
+path = Path('data/evidence-batch-i.json')
+rows = json.loads(path.read_text())
+existing = {row['id'] for row in rows}
+additions = [
+    {
+        "id": "sog_src_xsgd_launch_batch_m",
+        "stablecoin_id": "sog_st_xsgd",
+        "issuer_id": "sog_issuer_straitsx",
+        "event_id": "sog_ev_xsgd_launch_batch_m",
+        "source_type": "official_statement",
+        "title": "Introducing XSGD — the Singapore Dollar-backed and Travel Rule compliant stablecoin",
+        "url": "https://www.straitsx.com/blog-post/introducing-xsgd-the-singapore-dollar-backed-and-travel-rule1-compliant-stablecoin",
+        "publisher": "StraitsX",
+        "published_at": "2020-10-05",
+        "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/blog-post/introducing-xsgd-the-singapore-dollar-backed-and-travel-rule1-compliant-stablecoin",
+        "accessed_at": "2026-06-18",
+        "reliability": "high",
+        "claim_scope": "launch_backing_and_redemption",
+        "stablecoin_ids": ["sog_st_xsgd"],
+        "organization_ids": ["sog_issuer_straitsx"],
+        "event_ids": ["sog_ev_xsgd_launch_batch_m"],
+        "claim_scopes": ["launch", "first_public_release", "one_to_one_sgd_backing", "issuer_conversion"],
+        "notes": "Official public-release announcement dated 2020-10-05."
+    },
+    {
+        "id": "sog_src_xsgd_anniversary_batch_m",
+        "stablecoin_id": "sog_st_xsgd",
+        "issuer_id": "sog_issuer_straitsx",
+        "event_id": "sog_ev_xsgd_launch_batch_m",
+        "source_type": "official_statement",
+        "title": "Celebrating 5 Years of XSGD, The First SGD Stablecoin for Real-World Payments",
+        "url": "https://www.straitsx.com/blog-post/celebrating-5-years-of-xsgd-the-first-sgd-stablecoin-for-real-world-payments",
+        "publisher": "StraitsX",
+        "published_at": "2025-10-22",
+        "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/blog-post/celebrating-5-years-of-xsgd-the-first-sgd-stablecoin-for-real-world-payments",
+        "accessed_at": "2026-06-18",
+        "reliability": "high",
+        "claim_scope": "launch_date_confirmation",
+        "stablecoin_ids": ["sog_st_xsgd"],
+        "organization_ids": ["sog_issuer_straitsx"],
+        "event_ids": ["sog_ev_xsgd_launch_batch_m"],
+        "claim_scopes": ["first_issuance", "launch_date", "continuous_asset_identity"],
+        "notes": "Official fifth-anniversary history explicitly states first issuance on 2020-10-05."
+    }
+]
+rows.extend(row for row in additions if row['id'] not in existing)
+path.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + '\n')
+
+Path('docs/audits/xsgd-launch-date-review.md').write_text(
+    "# XSGD launch-date review\n\n"
+    "The canonical XSGD launch date is `2020-10-05`.\n\n"
+    "Primary evidence:\n\n"
+    "- `sog_src_xsgd_launch_batch_m`: StraitsX public-release announcement dated 2020-10-05.\n"
+    "- `sog_src_xsgd_anniversary_batch_m`: StraitsX fifth-anniversary history confirming first issuance on 2020-10-05.\n\n"
+    "The existing 2026 status-review event remains separate from the historical launch event.\n"
+)
