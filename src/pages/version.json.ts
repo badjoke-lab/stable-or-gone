@@ -1,4 +1,6 @@
 import {
+  CANONICAL_DATA_SOURCE,
+  DATA_SAFETY,
   DATA_SCHEMA_VERSION,
   MACHINE_READABLE_SCHEMA_VERSION,
   PROJECT,
@@ -20,6 +22,8 @@ export function GET() {
     canonical_origin: PROJECT.canonicalOrigin,
     release_channel: PROJECT.releaseChannel,
     design_generation: PROJECT.designGeneration,
+    canonical_data_source: CANONICAL_DATA_SOURCE,
+    data_safety: DATA_SAFETY,
     build: getBuildMetadata(generatedAt),
     data: {
       data_schema_version: DATA_SCHEMA_VERSION,
