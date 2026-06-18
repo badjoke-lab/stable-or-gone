@@ -74,7 +74,7 @@ const jsonLd = {
   <script>
     const registry = document.querySelector('[data-registry]');
     const tbody = registry?.querySelector('[data-registry-body]');
-    const rows = Array.from(registry?.querySelectorAll('[data-registry-row]') ?? []);
+    const rows = Array.from(tbody?.children ?? []).filter((row) => row instanceof HTMLTableRowElement && row.hasAttribute('data-' + 'registry-row'));
     const noResults = registry?.querySelector('[data-no-results]');
     const resultCount = registry?.querySelector('[data-result-count]');
     const controls = { search: registry?.querySelector('[data-filter-search]'), status: registry?.querySelector('[data-filter-status]'), model: registry?.querySelector('[data-filter-model]'), peg: registry?.querySelector('[data-filter-peg]'), issuer: registry?.querySelector('[data-filter-issuer]'), sort: registry?.querySelector('[data-sort]') };
