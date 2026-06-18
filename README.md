@@ -8,25 +8,29 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 
 ## Current registry checkpoint
 
-The protected canonical checkpoint contains:
+The canonical public checkpoint contains:
 
 ```text
-40 stable assets
-32 organizations
-40 stablecoin-organization relationships
-40 classification records
-40 reserve/redemption profiles
-48 events
-48 Event v2 detail records
-182 evidence records
-182 evidence relation projections
-42 reserve-report references
-93 known unknowns
+70 stable assets
+59 organizations
+72 stablecoin-organization relationships
+70 classification records
+70 reserve/redemption profiles
+92 events
+92 Event v2 detail records
+279 evidence records
+279 evidence relation projections
+72 reserve-report or reserve-context records
+153 known unknowns
 9 regulatory notes
-67 deployments
+101 deployments
+70 legal profiles
+4 stable-asset relationships
+102 reserve components
+70 income profiles
 ```
 
-The 28 → 40 growth phase is complete. The batch finalization guard protects this checkpoint before the next taxonomy, schema, statistics, and record-growth phase.
+The controlled 20 → 70 growth phase is complete. SOG is now in the 70-record quality-completion phase before controlled growth from 70 to 100 records. The batch finalization guard and integrity audit protect the canonical checkpoint.
 
 ## What the registry tracks
 
@@ -80,7 +84,7 @@ SOG does not provide:
 
 ## Data structure
 
-The registry is built from repository-managed JSON data and static Astro pages.
+The registry is built from repository-managed canonical JSON data and static Astro pages. Human-readable HTML, machine-readable metadata, generated statistics, route generation, and deployment verification all resolve through the canonical registry loader in `src/lib/data/registry.ts`.
 
 Current canonical data groups include:
 
@@ -91,12 +95,13 @@ Current canonical data groups include:
 - reserve and redemption profiles
 - event records and Event v2 details
 - evidence records and evidence relations
-- reserve-report references
+- reserve-report and reserve-context records
 - known unknowns
 - regulatory notes
 - deployment records
+- legal profiles, stable-asset relationships, reserve components, and income profiles
 
-Registry v3 is a planned additive extension. It will add legal profiles, stable-asset relationships, reserve components, deployment canonicality, expanded yield mechanics, and additional event detail types without breaking current public URLs.
+Registry v3 is implemented as an additive extension. It preserves current IDs, slugs, routes, and Registry v2 compatibility while adding legal profiles, stable-asset relationships, reserve components, deployment canonicality, expanded income mechanics, and additional event detail types.
 
 See:
 
@@ -115,7 +120,7 @@ npm run dev
 npm run build
 ```
 
-The build chain runs baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, final-state, and batch-finalization validation before Astro check, site build, deployment verification, and public-layer verification.
+The build chain runs baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, final-state, batch-finalization, integrity, Astro, deployment, and public-surface validation. The public-surface checks compare canonical counts with generated HTML, detail routes, the sitemap, version metadata, the manifest, `llms.txt`, and `ai.txt`.
 
 The dedicated finalization guard can also be run directly:
 
