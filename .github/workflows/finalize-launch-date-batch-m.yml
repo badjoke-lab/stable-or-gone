@@ -1,0 +1,43 @@
+name: Finalize launch date batch M
+
+on:
+  push:
+    branches:
+      - launch-date-batch-m
+    paths:
+      - .github/workflows/finalize-launch-date-batch-m.yml
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: launch-date-batch-m
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-package-lock
+      - name: Run branch migration body
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('.github/workflows/finalize-launch-date-batch-m.yml').read_text()
+          body = source.split("          python - <<'PY'\n", 1)[1].split("\n          PY", 1)[0]
+          body = '\n'.join(line[10:] if line.startswith('          ') else line for line in body.splitlines())
+          Path('/tmp/finalize-xsgd.py').write_text(body + '\n')
+          PY
+          python /tmp/finalize-xsgd.py
+      - run: node scripts/generate-registry-stats.mjs
+      - run: npm run audit:integrity
+      - name: Commit final batch
+        run: |
+          rm .github/workflows/finalize-launch-date-batch-m.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Add official XSGD launch date evidence"
+          git push origin HEAD:launch-date-batch-m
