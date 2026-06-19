@@ -22,6 +22,8 @@ jobs:
         run: npm run validate:deployment-policy
       - name: Validate baseline
         run: npm run validate:baseline
+      - name: Validate unresolved launch-date queue
+        run: npm run validate:launch-queue
       - name: Validate candidates
         run: npm run validate:candidates
       - name: Validate data

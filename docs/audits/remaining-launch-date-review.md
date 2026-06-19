@@ -33,6 +33,8 @@ Category B:                           5
 Category C:                          23
 Category D:                           3
 Remaining launch_date null:         31
+Queue status:                       frozen and validator-enforced
+Machine-readable queue:             data/quality/launch-date-unresolved.json
 ```
 
 ## Category A — day-level date supported
@@ -216,12 +218,13 @@ USDtb      2024-12-16
 
 These require more careful evidence and lineage handling than Batch O.
 
-### Launch-date unresolved queue freeze
+### Launch-date unresolved queue freeze — complete
 
-- re-check whether any Category B record can be promoted using an archived first-party day-level source
-- resolve any Category C record whose version or lineage can be documented safely
-- retain all other launch dates as `null`
-- record the final B/C/D classification as the maintained unresolved queue
+- all 31 category B, C, and D records are stored in `data/quality/launch-date-unresolved.json`
+- category counts are fixed at B 5, C 23, and D 3
+- the canonical null-date set and machine-readable queue must match exactly
+- future promotion requires new day-level primary evidence and simultaneous removal from the queue
+- month/year coercion, exchange-listing substitution, and rebrand substitution remain prohibited
 
 ## Completion state
 
@@ -232,5 +235,6 @@ Canonical launch dates promoted in Batch O: 5
 Canonical launch dates promoted in Batch P: 2
 Remaining launch_date null: 31
 Remaining category-A records: none
-Next work item: Launch-date unresolved queue freeze
+Unresolved queue: frozen and validator-enforced
+Next work item: Historical terminal-date review
 ```
