@@ -82,7 +82,7 @@ Deployment coverage:                   70 / 70
 Reserve-report context coverage:       52 / 70 informational
 Missing canonical launch dates:            31
 Historical records missing terminal date:   6
-All-unknown income profiles:                21
+All-unknown income profiles:                 0
 ```
 
 Latest completed record-quality work:
@@ -97,6 +97,8 @@ PR #74 — Freeze unresolved launch-date queue
 PR #75 — Audit historical terminal-date boundaries
 PR #77 — Freeze historical terminal-date queue
 PR #78 — Resolve fiat-backed income profiles
+PR #79 — Resolve protocol stable-asset mechanics
+PR #80 — Complete income-profile classification
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -112,14 +114,15 @@ Current development stage:
 ```text
 Phase 1 — Launch-date quality work: complete in PR #74
 Phase 2 — Historical terminal-date work: complete in PR #77
-Phase 3 — Income-profile completion: in progress
+Phase 3 — Income-profile completion: complete in PR #80
+Phase 4 — Reserve-report applicability and evidence: next
 ```
 
 Current next action:
 
 ```text
-1. Complete protocol mechanics batch in this change
-2. Begin remaining profile completion
+1. Begin reserve-report applicability classification
+2. Separate expected, not-applicable, and unresolved coverage
 ```
 
 ## Cloudflare and public-parity position
@@ -385,7 +388,7 @@ Invented shutdown dates:         0
 
 Target window: 2026-06-29 to 2026-07-08
 
-Current queue: **21 all-unknown income profiles after this change**
+Current queue: **0 all-unknown income profiles after PR #80**
 
 The objective is to classify mechanics, not to publish live yield figures or rank assets.
 
@@ -426,6 +429,8 @@ Determine:
 
 ## Protocol stablecoin income profiles
 
+Status: **complete in PR #79 and PR #80**
+
 Prioritize DAI, LUSD, crvUSD, GHO, FRAX, RAI, BOLD, alUSD, MIM, and similar protocol assets.
 
 Separate:
@@ -439,11 +444,21 @@ Separate:
 
 ## Synthetic and yield-related profiles
 
+Status: **complete in PR #80**
+
+Decision record:
+
+```text
+docs/audits/income-profile-phase3-final-batch.md
+```
+
 Prioritize USDe, sUSDe, sDAI, sUSDS, USD0, USR, sUSD, SPOT, and NUON.
 
 Do not merge temporary campaign rewards, secondary DeFi yield, and native asset income into one field.
 
 ## Historical, commodity, and edge profiles
+
+Status: **complete in PR #80**
 
 Cover failed, migrated, commodity-backed, and otherwise non-standard assets.
 
@@ -646,9 +661,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Protocol mechanics batch — complete in this change
-Next:    Synthetic and historical profile completion
-Then:    Synthetic and yield-related income profiles
-Then:    Historical, commodity, and edge income profiles
-Then:    Phase 3 completion audit
+Current: Income-profile completion — complete in PR #80
+Next:    Reserve-report applicability classification
+Then:    Reserve evidence deepening where applicable
+Then:    Final 70-record quality audit
+Then:    Freeze the 70-record quality baseline
 ```
