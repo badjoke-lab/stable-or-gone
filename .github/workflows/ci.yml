@@ -24,6 +24,8 @@ jobs:
         run: npm run validate:baseline
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
+      - name: Validate unresolved terminal-date queue
+        run: npm run validate:terminal-queue
       - name: Validate candidates
         run: npm run validate:candidates
       - name: Validate data
