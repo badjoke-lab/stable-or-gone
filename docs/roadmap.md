@@ -94,6 +94,7 @@ PR #57 — Audit and classify the remaining launch-date queue
 PR #69 — Complete Launch-date Batch O
 PR #70 — Complete Launch-date Batch P
 PR #74 — Freeze unresolved launch-date queue
+PR #75 — Audit historical terminal-date boundaries
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -108,14 +109,15 @@ Current development stage:
 
 ```text
 Phase 1 — Launch-date quality work: complete in PR #74
-Phase 2 — Historical terminal-date work: in progress
+Phase 2 — Historical terminal-date work: complete in this change
+Phase 3 — Income-profile completion: next
 ```
 
 Current next action:
 
 ```text
-1. Complete historical terminal-date review in this change
-2. Resolve or freeze terminal-date unknowns
+1. Complete historical terminal-date freeze in this change
+2. Begin fiat-backed income-profile completion
 ```
 
 ## Cloudflare and public-parity position
@@ -307,7 +309,7 @@ USDN
 
 ## Historical terminal-date review
 
-Status: **complete in this change**
+Status: **complete in PR #75**
 
 Review source:
 
@@ -340,6 +342,22 @@ A market collapse date must not automatically become `discontinued_date`.
 
 ## Resolve or freeze terminal-date unknowns
 
+Status: **complete in this change**
+
+Machine-readable queue:
+
+```text
+data/quality/terminal-date-unresolved.json
+```
+
+Validation command:
+
+```text
+npm run validate:terminal-queue
+```
+
+All four reviewed records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly.
+
 Apply exact terminal dates only where supported. Otherwise retain `null` and record:
 
 - last confirmed operational date
@@ -350,8 +368,11 @@ Apply exact terminal dates only where supported. Otherwise retain `null` and rec
 Phase completion conditions:
 
 ```text
-Unexplained terminal-date gaps: 0
-Invented shutdown dates:        0
+Historical null terminal dates: 4
+Machine-readable explanations:  4 / 4
+Canonical null set vs queue:     exact match
+Unexplained terminal-date gaps:  0
+Invented shutdown dates:         0
 ```
 
 # Phase 3 — Income-profile completion
@@ -596,9 +617,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Historical terminal-date review — complete in this change
-Next:    Historical terminal-date resolution or freeze
-Then:    Fiat-backed income profiles
+Current: Historical terminal-date freeze — complete in this change
+Next:    Fiat-backed income profiles
 Then:    Protocol stablecoin income profiles
 Then:    Synthetic and yield-related income profiles
+Then:    Historical, commodity, and edge income profiles
 ```
