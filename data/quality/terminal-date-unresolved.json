@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "frozen_at": "2026-06-19",
+  "source_review": "docs/audits/historical-terminal-date-review.md",
+  "policy": {
+    "canonical_day_required": true,
+    "keep_null_without_matching_terminal_boundary_evidence": true,
+    "forbid_depeg_as_default_terminal_date": true,
+    "forbid_last_commit_as_shutdown_date": true,
+    "forbid_migration_start_as_default_final_end": true,
+    "forbid_retrospective_source_date_as_effective_date": true
+  },
+  "expected_total": 4,
+  "records": [
+    {
+      "stablecoin_id": "sog_st_bac",
+      "canonical_status": "failed",
+      "strongest_known_boundary": null,
+      "boundary_type": "no_terminal_boundary_recovered",
+      "last_confirmed_activity": null,
+      "first_confirmed_successor_or_inactive": null,
+      "formal_shutdown_announcement": "not_recovered",
+      "reason_code": "shutdown_source_absent",
+      "review_note": "First-party repository, documentation, and historical-site sources support identity and mechanism history but do not establish a shutdown, minting stop, redemption stop, or governance termination date.",
+      "rejected_shortcuts": ["first_depeg_date", "price_low_date", "last_repository_commit", "last_website_capture", "negligible_liquidity_date"],
+      "future_review_target": "archived_first_party_shutdown_notice_or_contract_level_end_state"
+    },
+    {
+      "stablecoin_id": "sog_st_dsd",
+      "canonical_status": "failed",
+      "strongest_known_boundary": "2021-04",
+      "boundary_type": "last_confirmed_protocol_design_activity",
+      "last_confirmed_activity": "2021-04",
+      "first_confirmed_successor_or_inactive": null,
+      "formal_shutdown_announcement": "not_recovered",
+      "reason_code": "development_activity_without_terminal_effect",
+      "review_note": "Official V2 specification and voting material confirms continuing protocol work in April 2021 but does not establish a final migration, minting stop, governance revocation, or shutdown date.",
+      "rejected_shortcuts": ["v2_spec_publication_date", "first_depeg_date", "worst_depeg_date", "version_vote_date", "last_medium_post"],
+      "future_review_target": "official_migration_execution_shutdown_or_governance_termination_record"
+    },
+    {
+      "stablecoin_id": "sog_st_esd",
+      "canonical_status": "failed",
+      "strongest_known_boundary": "2021-08-02",
+      "boundary_type": "successor_migration_availability",
+      "last_confirmed_activity": "2021-08-02",
+      "first_confirmed_successor_or_inactive": "2021-08-02 successor protocol live and migration available",
+      "formal_shutdown_announcement": "not_recovered",
+      "reason_code": "migration_opening_not_final_cessation",
+      "review_note": "The official Empty Set V2 migration announcement confirms that users could exchange ESD and Bonded ESD for ESS on 2021-08-02, but it does not prove that all original contracts, claims, or exit paths ended that day.",
+      "rejected_shortcuts": ["v2_audit_date", "migration_opening_as_final_end", "first_sustained_depeg", "successor_token_launch_as_immediate_end"],
+      "future_review_target": "official_v1_end_block_contract_disable_or_final_migration_deadline"
+    },
+    {
+      "stablecoin_id": "sog_st_usdn",
+      "canonical_status": "rebranded",
+      "strongest_known_boundary": "not_later_than_2023-07-20",
+      "boundary_type": "successor_identity_confirmed",
+      "last_confirmed_activity": "2022 recapitalization activity under USDN identity",
+      "first_confirmed_successor_or_inactive": "2023-07-20 XTN explicitly described as formerly USDN",
+      "formal_shutdown_announcement": "not_applicable_or_not_recovered",
+      "reason_code": "rebrand_effective_date_unresolved",
+      "review_note": "Neutrino's 2023-07-20 explanation confirms that XTN was formerly known as USDN, but it is retrospective and does not state the effective day when the original hard-USD classification ended.",
+      "rejected_shortcuts": ["april_2022_depeg", "august_2022_persistent_depeg", "december_2022_price_decline", "transition_proposal_date", "retrospective_article_publication_date"],
+      "future_review_target": "official_governance_execution_asset_metadata_change_or_effective_rebrand_notice"
+    }
+  ]
+}
