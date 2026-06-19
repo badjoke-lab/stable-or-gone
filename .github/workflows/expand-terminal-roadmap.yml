@@ -1,0 +1,33 @@
+name: Expand terminal roadmap
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  expand:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: freeze-historical-terminal-dates
+      - name: Add validator-discovered records
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('docs/roadmap.md')
+          s=p.read_text()
+          s=s.replace('BAC\nDSD\nESD\nUSDN','BAC\nDSD\nESD\nGYEN\nMountain USDM\nUSDN',1)
+          s=s.replace('ESD   retain null — 2021-08-02 migration start is not final cessation\nUSDN  retain null — XTN transition confirmed without effective date','ESD   retain null — 2021-08-02 migration start is not final cessation\nGYEN  retain null — wind-down started while redemption remained open\nUSDM  retain null — Phase 3 on-chain exit continues after issuer-platform closure\nUSDN  retain null — XTN transition confirmed without effective date',1)
+          s=s.replace('All six canonical terminal-status records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly.','All six canonical terminal-status records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly. GYEN and Mountain USDM were added after validation exposed the stale four-record planning count.',1)
+          p.write_text(s)
+          PY
+      - name: Commit roadmap expansion
+        run: |
+          rm .github/workflows/expand-terminal-roadmap.yml
+          git config user.name github-actions-bot
+          git config user.email bot@users.noreply.github.com
+          git add -A
+          git commit -m 'Expand terminal queue roadmap to six records'
+          git push origin HEAD:freeze-historical-terminal-dates
