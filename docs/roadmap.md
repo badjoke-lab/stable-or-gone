@@ -81,7 +81,7 @@ Event coverage:                        70 / 70
 Deployment coverage:                   70 / 70
 Reserve-report context coverage:       52 / 70 informational
 Missing canonical launch dates:            31
-Historical records missing terminal date:   4
+Historical records missing terminal date:   6
 All-unknown income profiles:                41
 ```
 
@@ -356,7 +356,7 @@ Validation command:
 npm run validate:terminal-queue
 ```
 
-All four reviewed records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly.
+All six canonical terminal-status records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly.
 
 Apply exact terminal dates only where supported. Otherwise retain `null` and record:
 
@@ -368,8 +368,8 @@ Apply exact terminal dates only where supported. Otherwise retain `null` and rec
 Phase completion conditions:
 
 ```text
-Historical null terminal dates: 4
-Machine-readable explanations:  4 / 4
+Historical null terminal dates: 6
+Machine-readable explanations:  6 / 6
 Canonical null set vs queue:     exact match
 Unexplained terminal-date gaps:  0
 Invented shutdown dates:         0
