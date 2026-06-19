@@ -34,6 +34,7 @@ jobs:
         run: |
           rm scripts/update-phase3-completion-roadmap.mjs
           rm .github/workflows/finalize-phase3-income.yml
+          rm -f docs/audits/pr80-preflight.txt
       - name: Commit finalized Phase 3 state
         run: |
           git config user.name "github-actions[bot]"
