@@ -304,6 +304,8 @@ Current queue:
 BAC
 DSD
 ESD
+GYEN
+Mountain USDM
 USDN
 ```
 
@@ -323,6 +325,8 @@ Current review decision:
 BAC   retain null — no first-party shutdown or cessation date recovered
 DSD   retain null — April 2021 V2 activity is not a shutdown date
 ESD   retain null — 2021-08-02 migration start is not final cessation
+GYEN  retain null — wind-down started while redemption remained open
+USDM  retain null — Phase 3 on-chain exit continues after issuer-platform closure
 USDN  retain null — XTN transition confirmed without effective date
 ```
 
@@ -356,7 +360,7 @@ Validation command:
 npm run validate:terminal-queue
 ```
 
-All six canonical terminal-status records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly.
+All six canonical terminal-status records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly. GYEN and Mountain USDM were added after validation exposed the stale four-record planning count.
 
 Apply exact terminal dates only where supported. Otherwise retain `null` and record:
 
