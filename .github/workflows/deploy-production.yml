@@ -67,6 +67,7 @@ jobs:
       - name: Run full repository build
         run: npm run build
 
+      # Equivalent CLI operation: wrangler pages deploy dist
       - name: Upload prebuilt site to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
