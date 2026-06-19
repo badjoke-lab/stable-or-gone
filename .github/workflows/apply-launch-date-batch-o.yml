@@ -1,0 +1,48 @@
+name: Apply Launch-date Batch O
+
+on:
+  push:
+    branches:
+      - launch-date-batch-o
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-launch-date-batch-o
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: launch-date-batch-o
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-package-lock --no-audit --no-fund
+      - name: Apply canonical source changes
+        run: node scripts/apply-launch-date-batch-o.mjs
+      - name: Regenerate statistics
+        run: node scripts/generate-registry-stats.mjs
+      - name: Regenerate integrity audit
+        run: npm run audit:integrity
+      - name: Validate generated statistics
+        run: node scripts/validate-registry-stats.mjs
+      - name: Validate and build
+        run: npm run build
+      - name: Remove one-time migration machinery
+        run: |
+          rm scripts/apply-launch-date-batch-o.mjs
+          rm .github/workflows/apply-launch-date-batch-o.yml
+      - name: Commit generated Batch O result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add Launch-date Batch O records"
+          git push origin HEAD:launch-date-batch-o
