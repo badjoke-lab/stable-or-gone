@@ -82,7 +82,7 @@ Deployment coverage:                   70 / 70
 Reserve-report context coverage:       52 / 70 informational
 Missing canonical launch dates:            31
 Historical records missing terminal date:   6
-All-unknown income profiles:                41
+All-unknown income profiles:                31
 ```
 
 Latest completed record-quality work:
@@ -95,6 +95,7 @@ PR #69 — Complete Launch-date Batch O
 PR #70 — Complete Launch-date Batch P
 PR #74 — Freeze unresolved launch-date queue
 PR #75 — Audit historical terminal-date boundaries
+PR #77 — Freeze historical terminal-date queue
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -109,15 +110,15 @@ Current development stage:
 
 ```text
 Phase 1 — Launch-date quality work: complete in PR #74
-Phase 2 — Historical terminal-date work: complete in this change
-Phase 3 — Income-profile completion: next
+Phase 2 — Historical terminal-date work: complete in PR #77
+Phase 3 — Income-profile completion: in progress
 ```
 
 Current next action:
 
 ```text
-1. Complete historical terminal-date freeze in this change
-2. Begin fiat-backed income-profile completion
+1. Complete fiat-backed income-profile batch in this change
+2. Begin protocol stablecoin income-profile completion
 ```
 
 ## Cloudflare and public-parity position
@@ -383,11 +384,34 @@ Invented shutdown dates:         0
 
 Target window: 2026-06-29 to 2026-07-08
 
-Current queue: **41 all-unknown income profiles**
+Current queue: **31 all-unknown income profiles after this change**
 
 The objective is to classify mechanics, not to publish live yield figures or rank assets.
 
 ## Fiat-backed income profiles
+
+Status: **complete in this change**
+
+Decision record:
+
+```text
+docs/audits/fiat-backed-income-profile-batch.md
+```
+
+Resolved assets:
+
+```text
+USDT  USDC  TUSD  FDUSD  PYUSD
+GUSD  RLUSD EURC  USDP   USDG
+```
+
+All ten canonical tokens are classified as having no native token-holder income. Issuer reserve earnings, exchange campaigns, partner incentives, and external lending rates are not treated as intrinsic token yield.
+
+Queue impact:
+
+```text
+All-unknown income profiles: 41 → 31
+```
 
 Prioritize issuer-backed assets such as USDT, USDC, PYUSD, FDUSD, RLUSD, EURC, USDP, USDG, TUSD, and GUSD.
 
@@ -621,9 +645,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Historical terminal-date freeze — complete in this change
-Next:    Fiat-backed income profiles
-Then:    Protocol stablecoin income profiles
+Current: Fiat-backed income profiles — complete in this change
+Next:    Protocol stablecoin income profiles
 Then:    Synthetic and yield-related income profiles
 Then:    Historical, commodity, and edge income profiles
+Then:    Phase 3 completion audit
 ```
