@@ -17,7 +17,7 @@ This batch promotes the final two category-A launch dates from the 38-record rev
 - USDtb updates the existing launch event rather than creating a duplicate. Ethena’s official page establishes the launch, while the dated Curve publication fixes the exact day.
 - Neither date changes the canonical stable-asset count or creates a new issuer record.
 
-## Expected deterministic changes
+## Deterministic result
 
 ```text
 Stable assets:             70 unchanged
@@ -28,6 +28,8 @@ Missing launch dates:      33 → 31
 Critical findings:          0
 Warnings:                   0
 ```
+
+The branch migration regenerated registry statistics and the integrity audit, validated generated statistics, and completed the full repository build successfully before removing its one-time migration machinery.
 
 ## Next work
 
