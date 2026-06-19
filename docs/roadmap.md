@@ -40,10 +40,11 @@ Repository:
 badjoke-lab/stable-or-gone
 ```
 
-Latest completed roadmap checkpoint:
+Latest completed data checkpoint:
 
 ```text
-a486618a5b499aa431c53a6b63b6ffa4015150b7
+PR #69 — Launch-date Batch O
+Merge: 1b12963bbe7e5d1bb0653842e6b57a86357e63bc
 ```
 
 Current canonical registry checkpoint:
@@ -54,9 +55,9 @@ Current canonical registry checkpoint:
 72 stablecoin-organization relationships
 70 classifications
 70 reserve/redemption profiles
-96 events
-96 Event v2 detail records
-284 evidence records
+97 events
+97 Event v2 detail records
+286 evidence records
 72 reserve-report or reserve-context records
 153 known unknowns
 9 regulatory notes
@@ -79,7 +80,7 @@ Required-layer coverage:              70 / 70
 Event coverage:                        70 / 70
 Deployment coverage:                   70 / 70
 Reserve-report context coverage:       52 / 70 informational
-Missing canonical launch dates:            33
+Missing canonical launch dates:            31
 Historical records missing terminal date:   4
 All-unknown income profiles:                41
 ```
@@ -90,6 +91,7 @@ Latest completed record-quality work:
 PR #55 — Add official USDe launch date
 PR #56 — Anchor the 70-to-100 execution roadmap
 PR #57 — Audit and classify the remaining launch-date queue
+PR #69 — Complete Launch-date Batch O
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -109,8 +111,8 @@ Phase 1 — Launch-date quality work
 Current next action:
 
 ```text
-1. Complete Launch-date Batch O in this change
-2. Launch-date Batch P
+1. Complete Launch-date Batch P in this change
+2. Launch-date unresolved queue freeze
 ```
 
 ## Cloudflare and public-parity position
@@ -185,7 +187,7 @@ Completion conditions:
 
 Target window: 2026-06-19 to 2026-06-24
 
-Current remaining queue: **33 records**
+Current remaining queue: **31 records**
 
 The objective is not to force all records to have a day-level date. The objective is to distinguish confirmed dates from unresolved dates without inventing precision.
 
@@ -200,7 +202,7 @@ D. No adequate primary launch source found:           3
 
 ## Launch-date Batch O
 
-Status: **complete in this change**
+Status: **complete in PR #69**
 
 Apply the five cleanest category-A dates:
 
@@ -234,6 +236,8 @@ Canonical stable-asset count:    70 unchanged
 ```
 
 ## Launch-date Batch P
+
+Status: **complete in this change**
 
 Apply the remaining two currently approved category-A dates:
 
@@ -556,9 +560,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Launch-date Batch O — complete in this change
-Next:    Launch-date Batch P
-Then:    Launch-date unresolved queue freeze
+Current: Launch-date Batch P — complete in this change
+Next:    Launch-date unresolved queue freeze
 Then:    Historical terminal-date review
 Then:    Historical terminal-date resolution or freeze
+Then:    Fiat-backed income profiles
 ```

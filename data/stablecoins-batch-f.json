@@ -4,7 +4,11 @@
     "slug": "agora-ausd",
     "name": "Agora Dollar",
     "symbol": "AUSD",
-    "aliases": ["AUSD", "Agora AUSD", "Agora Dollar"],
+    "aliases": [
+      "AUSD",
+      "Agora AUSD",
+      "Agora Dollar"
+    ],
     "status": "active",
     "issuer_id": "sog_issuer_agora_bermuda",
     "peg_asset": "USD",
@@ -29,7 +33,11 @@
     "slug": "usd1",
     "name": "World Liberty Financial USD",
     "symbol": "USD1",
-    "aliases": ["USD1", "World Liberty Financial USD", "WLFI USD1"],
+    "aliases": [
+      "USD1",
+      "World Liberty Financial USD",
+      "WLFI USD1"
+    ],
     "status": "active",
     "issuer_id": "sog_issuer_bitgo",
     "peg_asset": "USD",
@@ -54,7 +62,10 @@
     "slug": "usdtb",
     "name": "Ethena USDtb",
     "symbol": "USDtb",
-    "aliases": ["USDtb", "Ethena USDtb"],
+    "aliases": [
+      "USDtb",
+      "Ethena USDtb"
+    ],
     "status": "active",
     "issuer_id": "sog_issuer_ethena_labs",
     "peg_asset": "USD",
@@ -67,19 +78,23 @@
     "minimum_redemption": "counterparty_and_route_dependent",
     "redemption_region_notes": "Direct access is subject to onboarding, counterparty, service-provider, and jurisdiction restrictions.",
     "redemption_notes": "USDtb is separate from USDe. Its reserve model centers on tokenized U.S. Treasury fund products plus a stablecoin liquidity reserve.",
-    "launch_date": null,
+    "launch_date": "2024-12-16",
     "discontinued_date": null,
     "summary": "Ethena digital dollar backed by institutional tokenized U.S. Treasury fund products and a stablecoin reserve intended to support rapid redemptions.",
     "confidence": "high",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch F promotion. Exact legal claim structure and direct-access counterparties remain separately documented as known unknowns."
+    "last_verified_at": "2026-06-19",
+    "notes": "Batch F promotion. Exact legal claim structure and direct-access counterparties remain separately documented as known unknowns. Launch-date Batch P uses Ethena’s official launch page together with Curve’s dated launch publication to establish 2024-12-16."
   },
   {
     "id": "sog_st_mountainusdm",
     "slug": "mountain-usdm",
     "name": "Mountain Protocol USD",
     "symbol": "USDM",
-    "aliases": ["USDM", "Mountain USDM", "Mountain Protocol USD"],
+    "aliases": [
+      "USDM",
+      "Mountain USDM",
+      "Mountain Protocol USD"
+    ],
     "status": "discontinued",
     "issuer_id": "sog_issuer_mountain_protocol",
     "peg_asset": "USD",
@@ -104,7 +119,10 @@
     "slug": "usdq",
     "name": "Quantoz USDQ",
     "symbol": "USDQ",
-    "aliases": ["USDQ", "Quantoz USDQ"],
+    "aliases": [
+      "USDQ",
+      "Quantoz USDQ"
+    ],
     "status": "active",
     "issuer_id": "sog_issuer_quantoz_payments",
     "peg_asset": "USD",

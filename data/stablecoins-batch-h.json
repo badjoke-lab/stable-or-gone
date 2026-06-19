@@ -78,12 +78,12 @@
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Front-end screening and jurisdictional restrictions may apply even when contracts remain permissionless.",
     "redemption_notes": "sUSDS represents shares in the Sky Savings Rate vault. Its USDS conversion value changes as savings accrue.",
-    "launch_date": null,
+    "launch_date": "2024-09-18",
     "discontinued_date": null,
     "summary": "Sky Protocol's active ERC-4626 savings wrapper for USDS, providing a transferable share whose USDS conversion value reflects the Sky Savings Rate.",
     "confidence": "high",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch H boundary promotion as a yield-bearing stable receipt."
+    "last_verified_at": "2026-06-19",
+    "notes": "Batch H boundary promotion as a yield-bearing stable receipt. Launch-date Batch P records 2024-09-18 as the Sky Token and Product Launch activation date for sUSDS while preserving its relationship to legacy sDAI."
   },
   {
     "id": "sog_st_usdy",
