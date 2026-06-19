@@ -26,6 +26,10 @@ jobs:
         run: npm install --no-package-lock --no-audit --no-fund
       - name: Validate income profiles
         run: npm run validate:income-v3
+      - name: Regenerate registry stats
+        run: node scripts/generate-registry-stats.mjs
+      - name: Validate regenerated registry stats
+        run: node scripts/validate-registry-stats.mjs
       - name: Run full repository build
         run: npm run build
       - name: Remove one-time machinery
