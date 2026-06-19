@@ -1,0 +1,49 @@
+name: Apply Launch-date Batch P
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-launch-date-batch-p
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: launch-date-batch-p
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-package-lock --no-audit --no-fund
+      - name: Apply canonical source changes
+        run: node scripts/apply-launch-date-batch-p.mjs
+      - name: Regenerate statistics
+        run: node scripts/generate-registry-stats.mjs
+      - name: Regenerate integrity audit
+        run: npm run audit:integrity
+      - name: Validate generated statistics
+        run: node scripts/validate-registry-stats.mjs
+      - name: Validate and build
+        run: npm run build
+      - name: Remove one-time migration machinery
+        run: |
+          rm scripts/apply-launch-date-batch-p.mjs
+          rm .github/workflows/apply-launch-date-batch-p.yml
+      - name: Commit generated Batch P result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add Launch-date Batch P records"
+          git push origin HEAD:launch-date-batch-p
