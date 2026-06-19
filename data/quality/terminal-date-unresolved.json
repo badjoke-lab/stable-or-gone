@@ -10,7 +10,7 @@
     "forbid_migration_start_as_default_final_end": true,
     "forbid_retrospective_source_date_as_effective_date": true
   },
-  "expected_total": 4,
+  "expected_total": 6,
   "records": [
     {
       "stablecoin_id": "sog_st_bac",
@@ -50,6 +50,32 @@
       "review_note": "The official Empty Set V2 migration announcement confirms that users could exchange ESD and Bonded ESD for ESS on 2021-08-02, but it does not prove that all original contracts, claims, or exit paths ended that day.",
       "rejected_shortcuts": ["v2_audit_date", "migration_opening_as_final_end", "first_sustained_depeg", "successor_token_launch_as_immediate_end"],
       "future_review_target": "official_v1_end_block_contract_disable_or_final_migration_deadline"
+    },
+    {
+      "stablecoin_id": "sog_st_gyen",
+      "canonical_status": "discontinued",
+      "strongest_known_boundary": "2026-05-15",
+      "boundary_type": "orderly_wind_down_start",
+      "last_confirmed_activity": "2026-05-15 purchases disabled and wind-down commenced",
+      "first_confirmed_successor_or_inactive": "2026-05-15 new purchases disabled while redemption remained available",
+      "formal_shutdown_announcement": "wind_down_notice_recovered_final_termination_not_reached",
+      "reason_code": "redemption_period_still_open",
+      "review_note": "GMO Trust's official notice establishes an orderly wind-down effective 2026-05-15 and disables new purchases, but the issuer continues to provide redemption during the announced period, so this is not a final token termination date.",
+      "rejected_shortcuts": ["wind_down_start_as_final_end", "purchase_disable_date_as_redemption_end", "notice_publication_as_token_termination"],
+      "future_review_target": "official_final_redemption_deadline_or_termination_notice"
+    },
+    {
+      "stablecoin_id": "sog_st_mountainusdm",
+      "canonical_status": "discontinued",
+      "strongest_known_boundary": "phase_3_wind_down",
+      "boundary_type": "issuer_platform_ended_onchain_exit_continues",
+      "last_confirmed_activity": "Phase 3 on-chain reserve and exit process remains documented",
+      "first_confirmed_successor_or_inactive": "issuer redemption platform no longer operates in Phase 3",
+      "formal_shutdown_announcement": "wind_down_documented_final_termination_not_recovered",
+      "reason_code": "phase_3_exit_still_continues",
+      "review_note": "Mountain Protocol's official Phase 3 documentation states that the issuer redemption platform no longer operates while an on-chain reserve and exit process remains available, so a final discontinued date cannot yet be assigned.",
+      "rejected_shortcuts": ["issuer_platform_close_as_token_end", "phase_3_start_as_final_end", "reserve_migration_as_token_termination"],
+      "future_review_target": "official_phase_3_completion_final_exit_deadline_or_contract_termination"
     },
     {
       "stablecoin_id": "sog_st_usdn",
