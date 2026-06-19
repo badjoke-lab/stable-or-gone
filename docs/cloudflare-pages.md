@@ -2,7 +2,7 @@
 
 Updated: 2026-06-19
 
-## Policy source
+## Canonical policy
 
 Deployment timing and classification are governed by:
 
@@ -10,86 +10,94 @@ Deployment timing and classification are governed by:
 docs/deployment-policy.md
 ```
 
-This file describes Cloudflare-specific configuration only. It must not redefine when production deployment is required.
-
-## Project configuration
+## SOG production target
 
 ```text
 Production branch: main
 Framework: Astro
-Repository build command: npm run build
-Build output directory: dist
-Root directory: /
-Custom domain: sog.badjoke-lab.com
+Build command: npm run build
+Build output: dist
+Pages project: stable-or-gone
+Public origin: https://sog.badjoke-lab.com/
 ```
 
-The intended publication path builds the repository in GitHub Actions and uploads the prebuilt `dist` directory with Wrangler.
+## Repository workflows
 
-## Required Cloudflare dashboard controls
+Manual production deployment:
 
-Configure the existing Pages project as follows:
+```text
+.github/workflows/deploy-production.yml
+```
+
+Manual standalone verification:
+
+```text
+.github/workflows/production-consistency.yml
+.github/workflows/production-smoke.yml
+```
+
+All three workflows are manual-only. Normal pull requests and normal `main` merges do not deploy or poll production.
+
+The production workflow requires:
+
+- dispatch from `main`
+- deployment classification
+- exact `DEPLOY` confirmation
+- successful full repository build
+- the GitHub `production` environment
+- configured Cloudflare credentials
+
+It uploads the prebuilt `dist` directory to the fixed Pages project and then runs production consistency against the deployed commit.
+
+## Cloudflare dashboard controls
+
+The operator must confirm:
 
 ```text
 Automatic production branch deployments: OFF
 Automatic preview branch deployments:    OFF
 ```
 
-For a Git-integrated Pages project, open the project and use the branch deployment controls under Builds and deployments. Save the settings after changing them.
+In the Pages project, open branch deployment controls, disable automatic production deployments, set preview branches to None, and save.
 
-Repository code cannot confirm or change the operator's dashboard settings. Record completion in the deployment report when these controls are changed.
+## GitHub operator setup
 
-## Required GitHub Secrets
+Before the first production run:
+
+1. Create or review the `production` environment.
+2. Configure the Cloudflare credentials described in `docs/deployment-policy.md`.
+3. Restrict production deployment to `main` where available.
+4. Confirm the Pages project name is `stable-or-gone`.
+5. Run `Deploy production` once from `main`.
+6. Verify the workflow's production-consistency result.
+
+## Equivalent operation
+
+The workflow uses Cloudflare's Wrangler Action to perform the equivalent of:
 
 ```text
-CLOUDFLARE_API_TOKEN
-CLOUDFLARE_ACCOUNT_ID
+wrangler pages deploy dist
+project: stable-or-gone
+branch: main
+commit: checked-out main SHA
 ```
-
-The API token must use least privilege and be limited to the Pages deployment operation required for this project.
-
-Do not store secret values in repository files, issues, pull requests, comments, artifacts, or logs.
-
-## Manual deployment command
-
-The manual production workflow will upload the prebuilt site with a command equivalent to:
-
-```bash
-npx wrangler pages deploy dist \
-  --project-name stable-or-gone \
-  --branch main \
-  --commit-hash "$GITHUB_SHA"
-```
-
-The exact Pages project name must be confirmed in the Cloudflare dashboard before the workflow is enabled.
-
-## Production consistency
-
-`.github/workflows/production-consistency.yml` is manual-only.
-
-Run it after a deliberate deployment or operator-requested verification. Provide the expected deployed commit when it differs from the selected workflow ref.
-
-The check verifies:
-
-- deployed commit
-- HTML and canonical count parity
-- JSON and manifest parity
-- detail-route counts
-- sitemap coverage
-- canonical and hreflang metadata
-- Open Graph and JSON-LD output
-- absence of obsolete count markers
 
 ## Retry rule
 
-Do not retry an old failed deployment after code has changed. That republishes or rebuilds the old commit.
+Do not retry an old deployment after code has changed. Run one new manual deployment from the intended `main` commit.
 
-Create one new deployment from the intended latest commit, then verify production.
+## Migration state
 
-## Current migration status
+```text
+Repository policy:              implemented
+Policy validator:               implemented
+Manual deployment workflow:     implemented
+Production checks:              manual-only
+Cloudflare dashboard controls:  operator confirmation required
+First manual deployment:        not yet executed
+```
 
-Repository-side policy and manual-only production verification are established first. The manual Wrangler production workflow is implemented in a separate follow-up PR.
-
-Until that workflow and the dashboard controls are configured, continue normal GitHub development without restoring automatic deployment triggers.
+Pending external configuration does not block normal GitHub development.
 
 ## Official references
 
