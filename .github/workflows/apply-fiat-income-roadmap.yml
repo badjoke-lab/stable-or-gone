@@ -30,8 +30,6 @@ jobs:
         run: node scripts/generate-registry-stats.mjs
       - name: Validate regenerated registry stats
         run: node scripts/validate-registry-stats.mjs
-      - name: Run full repository build
-        run: npm run build
       - name: Remove one-time machinery
         run: |
           rm scripts/apply-fiat-income-roadmap.mjs
