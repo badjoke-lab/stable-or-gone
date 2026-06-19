@@ -1,12 +1,19 @@
 name: Production consistency
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Expected deployed commit SHA. Leave empty to use the selected workflow ref.
+        required: false
+        type: string
 
 permissions:
   contents: read
+
+concurrency:
+  group: production-consistency
+  cancel-in-progress: false
 
 jobs:
   verify-production:
@@ -16,10 +23,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-package-lock
-      - name: Wait for Cloudflare Pages and verify production
+      - run: npm install --no-package-lock --no-audit --no-fund
+      - name: Verify deliberately deployed production
         env:
-          SOG_EXPECTED_COMMIT: ${{ github.sha }}
+          SOG_EXPECTED_COMMIT: ${{ inputs.expected_commit || github.sha }}
           SOG_SMOKE_ATTEMPTS: '20'
           SOG_SMOKE_DELAY_MS: '15000'
         run: npm run check:production

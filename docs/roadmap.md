@@ -117,6 +117,8 @@ Current next action:
 
 ## Cloudflare and public-parity position
 
+All deployment classifications and timing follow `docs/deployment-policy.md`. Normal pull requests and normal `main` merges do not wait for Cloudflare Pages.
+
 Issue #66 remains open as a deferred verification item. It no longer blocks 70-record quality work.
 
 The repository build, public consistency validator, production checker, and CI are implemented. The production deployment concern must be rechecked when the public record count changes, because that is the highest-risk point for HTML, JSON, manifest, sitemap, and deployment commit drift.
@@ -537,6 +539,8 @@ Indicative growth targets:
 These are planning targets, not permission to weaken inclusion or evidence standards.
 
 # Validation and merge rules
+
+Deployment decisions must follow `docs/deployment-policy.md`. Production publication is manual and separate from normal development completion.
 
 Every work item in this roadmap must:
 
