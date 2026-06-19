@@ -16,10 +16,10 @@ The canonical checkpoint contains:
 72 stablecoin-organization relationships
 70 classification records
 70 reserve/redemption profiles
-92 events
-92 Event v2 detail records
-279 evidence records
-279 evidence relation projections
+97 events
+97 Event v2 detail records
+286 evidence records
+286 evidence relation projections
 72 reserve-report references
 153 known unknowns
 9 regulatory notes
@@ -117,7 +117,7 @@ npm run dev
 npm run build
 ```
 
-The build chain runs baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, deployment, income-profile, final-state, batch-finalization, and integrity validation before Astro check and site generation.
+The build chain runs deployment-policy, baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, deployment, income-profile, final-state, batch-finalization, and integrity validation before Astro check and site generation.
 
 After generation it also verifies:
 
@@ -129,11 +129,20 @@ After generation it also verifies:
 - canonical, hreflang, meta description, Open Graph, and JSON-LD metadata
 - absence of known legacy count strings such as the old 16/20 issuer view and 23-event view
 
-A separate production workflow waits for the Cloudflare Pages deployment after each `main` push and repeats the HTML, JSON, sitemap, and metadata checks against the public origin.
+## Development and production deployment
+
+Development validation and production publication are separate. Normal pull requests and normal `main` merges complete through GitHub CI and do not wait for Cloudflare Pages.
+
+Production deployment is reserved for defined publication checkpoints or verified emergencies. The target workflow builds in GitHub Actions, uploads the prebuilt `dist` directory with Wrangler, and then verifies the public origin.
+
+Canonical policy: `docs/deployment-policy.md`
+
+Cloudflare operator setup: `docs/cloudflare-pages.md`
 
 Useful commands:
 
 ```bash
+npm run validate:deployment-policy
 npm run validate:finalization
 npm run verify:consistency
 npm run check:production
