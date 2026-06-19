@@ -3,5 +3,5 @@
   {"id":"sog_st_bac","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_bac_repo_batch_k"]},
   {"id":"sog_st_dsd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_dsd_faq_batch_k"]},
   {"id":"sog_st_cashio","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_cashio_repo_batch_k"]},
-  {"id":"sog_st_acalaausd","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_acala_aseed_batch_k"]}
+  {"id":"sog_st_acalaausd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_acala_launch_batch_k","sog_src_acala_aseed_batch_k"]}
 ]
