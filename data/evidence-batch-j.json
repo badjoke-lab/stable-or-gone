@@ -1,17 +1,456 @@
 [
-{"id":"sog_src_eura_docs_batch_j","stablecoin_id":"sog_st_eura","issuer_id":"sog_issuer_angle","source_type":"official_documentation","title":"Angle Documentation","url":"https://docs.angle.money/","publisher":"Angle Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.angle.money/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_model","stablecoin_ids":["sog_st_eura"],"organization_ids":["sog_issuer_angle"],"claim_scopes":["identity","agEUR_alias","governance"]},
-{"id":"sog_src_eura_stablecoins_batch_j","stablecoin_id":"sog_st_eura","issuer_id":"sog_issuer_angle","source_type":"official_documentation","title":"Angle stablecoins","url":"https://docs.angle.money/overview/stablecoins","publisher":"Angle Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.angle.money/overview/stablecoins","accessed_at":"2026-06-15","reliability":"high","claim_scope":"backing_and_status","stablecoin_ids":["sog_st_eura"],"organization_ids":["sog_issuer_angle"],"claim_scopes":["active_product","transmuter","borrowing_modules"]},
-{"id":"sog_src_eura_redeem_batch_j","stablecoin_id":"sog_st_eura","issuer_id":"sog_issuer_angle","source_type":"official_documentation","title":"Redeem Angle stablecoins","url":"https://docs.angle.money/transmuter/user-guides/redeem","publisher":"Angle Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.angle.money/transmuter/user-guides/redeem","accessed_at":"2026-06-15","reliability":"high","claim_scope":"redemption","stablecoin_ids":["sog_st_eura"],"organization_ids":["sog_issuer_angle"],"claim_scopes":["permissionless_redemption"]},
-{"id":"sog_src_eurcv_product_batch_j","stablecoin_id":"sog_st_eurcv","issuer_id":"sog_issuer_sg_forge","source_type":"official_website","title":"CoinVertible","url":"https://www.sgforge.com/product/coinvertible/","publisher":"Societe Generale-FORGE","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.sgforge.com/product/coinvertible/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_status","stablecoin_ids":["sog_st_eurcv"],"organization_ids":["sog_issuer_sg_forge"],"claim_scopes":["mica_emt","active_product"]},
-{"id":"sog_src_eurcv_reserves_batch_j","stablecoin_id":"sog_st_eurcv","issuer_id":"sog_issuer_sg_forge","source_type":"official_attestation","title":"CoinVertible reserves","url":"https://www.sgforge.com/product/coinvertible/","publisher":"Societe Generale-FORGE","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.sgforge.com/product/coinvertible/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_framework","stablecoin_ids":["sog_st_eurcv"],"organization_ids":["sog_issuer_sg_forge"],"claim_scopes":["cash_backing","segregation","daily_disclosure"]},
-{"id":"sog_src_eurcv_redemption_batch_j","stablecoin_id":"sog_st_eurcv","issuer_id":"sog_issuer_sg_forge","source_type":"official_documentation","title":"CoinVertible redemption","url":"https://www.sgforge.com/product/coinvertible/","publisher":"Societe Generale-FORGE","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.sgforge.com/product/coinvertible/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"redemption","stablecoin_ids":["sog_st_eurcv"],"organization_ids":["sog_issuer_sg_forge"],"claim_scopes":["one_to_one_redemption","permitted_holders"]},
-{"id":"sog_src_euri_product_batch_j","stablecoin_id":"sog_st_euri","issuer_id":"sog_issuer_banking_circle","source_type":"official_website","title":"Eurite EURI","url":"https://www.eurite.com/","publisher":"Banking Circle","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.eurite.com/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_status","stablecoin_ids":["sog_st_euri"],"organization_ids":["sog_issuer_banking_circle"],"claim_scopes":["mica_emt","ethereum","bnb_chain"]},
-{"id":"sog_src_euri_reserves_batch_j","stablecoin_id":"sog_st_euri","issuer_id":"sog_issuer_banking_circle","source_type":"official_documentation","title":"EURI safeguarded funds","url":"https://www.eurite.com/","publisher":"Banking Circle","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.eurite.com/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_framework","stablecoin_ids":["sog_st_euri"],"organization_ids":["sog_issuer_banking_circle"],"claim_scopes":["cash_backing","segregation","bankruptcy_remoteness"]},
-{"id":"sog_src_euri_redemption_batch_j","stablecoin_id":"sog_st_euri","issuer_id":"sog_issuer_banking_circle","source_type":"official_documentation","title":"EURI redemption","url":"https://www.eurite.com/","publisher":"Banking Circle","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.eurite.com/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"redemption","stablecoin_ids":["sog_st_euri"],"organization_ids":["sog_issuer_banking_circle"],"claim_scopes":["redemption_at_par","no_issuer_fee","customer_due_diligence"]},
-{"id":"sog_src_eurq_product_batch_j","stablecoin_id":"sog_st_eurq","issuer_id":"sog_issuer_quantoz_payments","source_type":"official_website","title":"EURQ and USDQ","url":"https://www.quantoz.com/products/eurq-usdq","publisher":"Quantoz","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.quantoz.com/products/eurq-usdq","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_status","stablecoin_ids":["sog_st_eurq"],"organization_ids":["sog_issuer_quantoz_payments"],"claim_scopes":["mica_emt","active_product"]},
-{"id":"sog_src_eurq_reserves_batch_j","stablecoin_id":"sog_st_eurq","issuer_id":"sog_issuer_quantoz_payments","source_type":"official_documentation","title":"EURQ reserves","url":"https://www.quantoz.com/products/eurq-usdq","publisher":"Quantoz","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.quantoz.com/products/eurq-usdq","accessed_at":"2026-06-15","reliability":"high","claim_scope":"reserve_framework","stablecoin_ids":["sog_st_eurq"],"organization_ids":["sog_issuer_quantoz_payments"],"claim_scopes":["tier_one_banks","government_bonds","segregation"]},
-{"id":"sog_src_eurq_redemption_batch_j","stablecoin_id":"sog_st_eurq","issuer_id":"sog_issuer_quantoz_payments","source_type":"official_documentation","title":"EURQ redemption","url":"https://www.quantoz.com/products/eurq-usdq","publisher":"Quantoz","published_at":null,"archived_url":"https://web.archive.org/web/*/https://www.quantoz.com/products/eurq-usdq","accessed_at":"2026-06-15","reliability":"high","claim_scope":"redemption","stablecoin_ids":["sog_st_eurq"],"organization_ids":["sog_issuer_quantoz_payments"],"claim_scopes":["redemption_at_par","partner_access"]},
-{"id":"sog_src_vchf_product_batch_j","stablecoin_id":"sog_st_vchf","issuer_id":"sog_issuer_vnx_commodities","source_type":"official_website","title":"VNX Swiss Franc","url":"https://vnx.li/vchf/","publisher":"VNX Commodities","published_at":null,"archived_url":"https://web.archive.org/web/*/https://vnx.li/vchf/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_status","stablecoin_ids":["sog_st_vchf"],"organization_ids":["sog_issuer_vnx_commodities"],"claim_scopes":["active_product","chf_reference"]},
-{"id":"sog_src_vchf_license_batch_j","stablecoin_id":"sog_st_vchf","issuer_id":"sog_issuer_vnx_commodities","source_type":"official_documentation","title":"VNX licensing","url":"https://vnx.li/vchf/","publisher":"VNX Commodities","published_at":null,"archived_url":"https://web.archive.org/web/*/https://vnx.li/vchf/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"issuer_licensing","stablecoin_ids":["sog_st_vchf"],"organization_ids":["sog_issuer_vnx_commodities"],"claim_scopes":["token_generator","fma_liechtenstein"]},
-{"id":"sog_src_vchf_exchange_batch_j","stablecoin_id":"sog_st_vchf","issuer_id":"sog_issuer_vnx_commodities","source_type":"official_documentation","title":"VCHF exchange and networks","url":"https://vnx.li/vchf/","publisher":"VNX Commodities","published_at":null,"archived_url":"https://web.archive.org/web/*/https://vnx.li/vchf/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"redemption_and_deployments","stablecoin_ids":["sog_st_vchf"],"organization_ids":["sog_issuer_vnx_commodities"],"claim_scopes":["exchange_to_chf","multichain"]}
+  {
+    "id": "sog_src_eura_docs_batch_j",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "source_type": "official_documentation",
+    "title": "Angle Documentation",
+    "url": "https://docs.angle.money/",
+    "publisher": "Angle Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.angle.money/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_model",
+    "stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "claim_scopes": [
+      "identity",
+      "agEUR_alias",
+      "governance"
+    ]
+  },
+  {
+    "id": "sog_src_eura_stablecoins_batch_j",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "source_type": "official_documentation",
+    "title": "Angle stablecoins",
+    "url": "https://docs.angle.money/overview/stablecoins",
+    "publisher": "Angle Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.angle.money/overview/stablecoins",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "backing_and_status",
+    "stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "claim_scopes": [
+      "active_product",
+      "transmuter",
+      "borrowing_modules"
+    ]
+  },
+  {
+    "id": "sog_src_eura_redeem_batch_j",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "source_type": "official_documentation",
+    "title": "Redeem Angle stablecoins",
+    "url": "https://docs.angle.money/transmuter/user-guides/redeem",
+    "publisher": "Angle Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.angle.money/transmuter/user-guides/redeem",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "redemption",
+    "stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "claim_scopes": [
+      "permissionless_redemption"
+    ]
+  },
+  {
+    "id": "sog_src_eurcv_product_batch_j",
+    "stablecoin_id": "sog_st_eurcv",
+    "issuer_id": "sog_issuer_sg_forge",
+    "source_type": "official_website",
+    "title": "CoinVertible",
+    "url": "https://www.sgforge.com/product/coinvertible/",
+    "publisher": "Societe Generale-FORGE",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.sgforge.com/product/coinvertible/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_status",
+    "stablecoin_ids": [
+      "sog_st_eurcv"
+    ],
+    "organization_ids": [
+      "sog_issuer_sg_forge"
+    ],
+    "claim_scopes": [
+      "mica_emt",
+      "active_product"
+    ]
+  },
+  {
+    "id": "sog_src_eurcv_reserves_batch_j",
+    "stablecoin_id": "sog_st_eurcv",
+    "issuer_id": "sog_issuer_sg_forge",
+    "source_type": "official_attestation",
+    "title": "CoinVertible reserves",
+    "url": "https://www.sgforge.com/product/coinvertible/",
+    "publisher": "Societe Generale-FORGE",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.sgforge.com/product/coinvertible/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_framework",
+    "stablecoin_ids": [
+      "sog_st_eurcv"
+    ],
+    "organization_ids": [
+      "sog_issuer_sg_forge"
+    ],
+    "claim_scopes": [
+      "cash_backing",
+      "segregation",
+      "daily_disclosure"
+    ]
+  },
+  {
+    "id": "sog_src_eurcv_redemption_batch_j",
+    "stablecoin_id": "sog_st_eurcv",
+    "issuer_id": "sog_issuer_sg_forge",
+    "source_type": "official_documentation",
+    "title": "CoinVertible redemption",
+    "url": "https://www.sgforge.com/product/coinvertible/",
+    "publisher": "Societe Generale-FORGE",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.sgforge.com/product/coinvertible/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "redemption",
+    "stablecoin_ids": [
+      "sog_st_eurcv"
+    ],
+    "organization_ids": [
+      "sog_issuer_sg_forge"
+    ],
+    "claim_scopes": [
+      "one_to_one_redemption",
+      "permitted_holders"
+    ]
+  },
+  {
+    "id": "sog_src_euri_product_batch_j",
+    "stablecoin_id": "sog_st_euri",
+    "issuer_id": "sog_issuer_banking_circle",
+    "source_type": "official_website",
+    "title": "Eurite EURI",
+    "url": "https://www.eurite.com/",
+    "publisher": "Banking Circle",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.eurite.com/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_status",
+    "stablecoin_ids": [
+      "sog_st_euri"
+    ],
+    "organization_ids": [
+      "sog_issuer_banking_circle"
+    ],
+    "claim_scopes": [
+      "mica_emt",
+      "ethereum",
+      "bnb_chain"
+    ]
+  },
+  {
+    "id": "sog_src_euri_reserves_batch_j",
+    "stablecoin_id": "sog_st_euri",
+    "issuer_id": "sog_issuer_banking_circle",
+    "source_type": "official_documentation",
+    "title": "EURI safeguarded funds",
+    "url": "https://www.eurite.com/",
+    "publisher": "Banking Circle",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.eurite.com/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_framework",
+    "stablecoin_ids": [
+      "sog_st_euri"
+    ],
+    "organization_ids": [
+      "sog_issuer_banking_circle"
+    ],
+    "claim_scopes": [
+      "cash_backing",
+      "segregation",
+      "bankruptcy_remoteness"
+    ]
+  },
+  {
+    "id": "sog_src_euri_redemption_batch_j",
+    "stablecoin_id": "sog_st_euri",
+    "issuer_id": "sog_issuer_banking_circle",
+    "source_type": "official_documentation",
+    "title": "EURI redemption",
+    "url": "https://www.eurite.com/",
+    "publisher": "Banking Circle",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.eurite.com/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "redemption",
+    "stablecoin_ids": [
+      "sog_st_euri"
+    ],
+    "organization_ids": [
+      "sog_issuer_banking_circle"
+    ],
+    "claim_scopes": [
+      "redemption_at_par",
+      "no_issuer_fee",
+      "customer_due_diligence"
+    ]
+  },
+  {
+    "id": "sog_src_eurq_product_batch_j",
+    "stablecoin_id": "sog_st_eurq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "source_type": "official_website",
+    "title": "EURQ and USDQ",
+    "url": "https://www.quantoz.com/products/eurq-usdq",
+    "publisher": "Quantoz",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.quantoz.com/products/eurq-usdq",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_status",
+    "stablecoin_ids": [
+      "sog_st_eurq"
+    ],
+    "organization_ids": [
+      "sog_issuer_quantoz_payments"
+    ],
+    "claim_scopes": [
+      "mica_emt",
+      "active_product"
+    ]
+  },
+  {
+    "id": "sog_src_eurq_reserves_batch_j",
+    "stablecoin_id": "sog_st_eurq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "source_type": "official_documentation",
+    "title": "EURQ reserves",
+    "url": "https://www.quantoz.com/products/eurq-usdq",
+    "publisher": "Quantoz",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.quantoz.com/products/eurq-usdq",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "reserve_framework",
+    "stablecoin_ids": [
+      "sog_st_eurq"
+    ],
+    "organization_ids": [
+      "sog_issuer_quantoz_payments"
+    ],
+    "claim_scopes": [
+      "tier_one_banks",
+      "government_bonds",
+      "segregation"
+    ]
+  },
+  {
+    "id": "sog_src_eurq_redemption_batch_j",
+    "stablecoin_id": "sog_st_eurq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "source_type": "official_documentation",
+    "title": "EURQ redemption",
+    "url": "https://www.quantoz.com/products/eurq-usdq",
+    "publisher": "Quantoz",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.quantoz.com/products/eurq-usdq",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "redemption",
+    "stablecoin_ids": [
+      "sog_st_eurq"
+    ],
+    "organization_ids": [
+      "sog_issuer_quantoz_payments"
+    ],
+    "claim_scopes": [
+      "redemption_at_par",
+      "partner_access"
+    ]
+  },
+  {
+    "id": "sog_src_vchf_product_batch_j",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "source_type": "official_website",
+    "title": "VNX Swiss Franc",
+    "url": "https://vnx.li/vchf/",
+    "publisher": "VNX Commodities",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://vnx.li/vchf/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_status",
+    "stablecoin_ids": [
+      "sog_st_vchf"
+    ],
+    "organization_ids": [
+      "sog_issuer_vnx_commodities"
+    ],
+    "claim_scopes": [
+      "active_product",
+      "chf_reference"
+    ]
+  },
+  {
+    "id": "sog_src_vchf_license_batch_j",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "source_type": "official_documentation",
+    "title": "VNX licensing",
+    "url": "https://vnx.li/vchf/",
+    "publisher": "VNX Commodities",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://vnx.li/vchf/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "issuer_licensing",
+    "stablecoin_ids": [
+      "sog_st_vchf"
+    ],
+    "organization_ids": [
+      "sog_issuer_vnx_commodities"
+    ],
+    "claim_scopes": [
+      "token_generator",
+      "fma_liechtenstein"
+    ]
+  },
+  {
+    "id": "sog_src_vchf_exchange_batch_j",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "source_type": "official_documentation",
+    "title": "VCHF exchange and networks",
+    "url": "https://vnx.li/vchf/",
+    "publisher": "VNX Commodities",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://vnx.li/vchf/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "redemption_and_deployments",
+    "stablecoin_ids": [
+      "sog_st_vchf"
+    ],
+    "organization_ids": [
+      "sog_issuer_vnx_commodities"
+    ],
+    "claim_scopes": [
+      "exchange_to_chf",
+      "multichain"
+    ]
+  },
+  {
+    "id": "sog_src_eurcv_launch_2023",
+    "stablecoin_id": "sog_st_eurcv",
+    "issuer_id": "sog_issuer_sg_forge",
+    "event_id": "sog_ev_eurcv_2023_04_launch",
+    "source_type": "official_launch_announcement",
+    "title": "Societe Generale-FORGE launches CoinVertible",
+    "url": "https://www.sgforge.com/societe-generale-forge-launches-coinvertible-the-first-institutional-stablecoin-deployed-on-a-public-blockchain/",
+    "publisher": "Societe Generale-FORGE",
+    "published_at": "2023-04-20",
+    "archived_url": "https://web.archive.org/web/*/https://www.sgforge.com/societe-generale-forge-launches-coinvertible-the-first-institutional-stablecoin-deployed-on-a-public-blockchain/",
+    "accessed_at": "2026-06-19",
+    "reliability": "high",
+    "claim_scope": "official_launch_date",
+    "stablecoin_ids": [
+      "sog_st_eurcv"
+    ],
+    "organization_ids": [
+      "sog_issuer_sg_forge"
+    ],
+    "event_ids": [
+      "sog_ev_eurcv_2023_04_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "product_launch"
+    ],
+    "notes": "Dated first-party launch release for EUR CoinVertible."
+  },
+  {
+    "id": "sog_src_euri_launch_2024",
+    "stablecoin_id": "sog_st_euri",
+    "issuer_id": "sog_issuer_banking_circle",
+    "event_id": "sog_ev_euri_2024_08_launch",
+    "source_type": "official_launch_announcement",
+    "title": "Banking Circle launches EURI",
+    "url": "https://www.bankingcircle.com/banking-circle-launches-the-first-bank-backed-mica-compliant-stablecoin-euri/",
+    "publisher": "Banking Circle",
+    "published_at": "2024-08-26",
+    "archived_url": "https://web.archive.org/web/*/https://www.bankingcircle.com/banking-circle-launches-the-first-bank-backed-mica-compliant-stablecoin-euri/",
+    "accessed_at": "2026-06-19",
+    "reliability": "high",
+    "claim_scope": "official_launch_date",
+    "stablecoin_ids": [
+      "sog_st_euri"
+    ],
+    "organization_ids": [
+      "sog_issuer_banking_circle"
+    ],
+    "event_ids": [
+      "sog_ev_euri_2024_08_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "product_launch",
+      "mica_context"
+    ],
+    "notes": "Dated first-party launch announcement for EURI."
+  },
+  {
+    "id": "sog_src_eurq_issuance_start_2024",
+    "stablecoin_id": "sog_st_eurq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "event_id": "sog_ev_eurq_2024_11_launch",
+    "source_type": "official_launch_announcement",
+    "title": "Quantoz Payments issues euro and US dollar stablecoins",
+    "url": "https://www.quantoz.com/blog/quantoz-payments-issues-euro-and-us-dollar-stablecoins",
+    "publisher": "Quantoz Payments",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.quantoz.com/blog/quantoz-payments-issues-euro-and-us-dollar-stablecoins",
+    "accessed_at": "2026-06-19",
+    "reliability": "high",
+    "claim_scope": "official_issuance_start_date",
+    "stablecoin_ids": [
+      "sog_st_eurq"
+    ],
+    "organization_ids": [
+      "sog_issuer_quantoz_payments"
+    ],
+    "event_ids": [
+      "sog_ev_eurq_2024_11_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "issuance_start"
+    ],
+    "notes": "Quantoz states that EURQ and USDQ issuance began on Monday, November 18, 2024; later exchange availability is not used as the launch date."
+  }
 ]

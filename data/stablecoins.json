@@ -353,12 +353,12 @@
     "minimum_redemption": "source_review_needed",
     "redemption_region_notes": "Protocol access, collateral markets, and frontend availability require source-backed review.",
     "redemption_notes": "SOG separates crvUSD borrowing/repayment mechanics from secondary-market liquidity and peg-keeper activity.",
-    "launch_date": null,
+    "launch_date": "2023-05-14",
     "discontinued_date": null,
     "summary": "Crypto-collateralized stablecoin from Curve Finance. SOG records minting, collateral, LLAMMA, PegKeeper, and Curve DAO governance context separately from market price data.",
     "confidence": "medium",
-    "last_verified_at": "2026-06-02",
-    "notes": "Seed record."
+    "last_verified_at": "2026-06-19",
+    "notes": "Seed record. Launch-date Batch O uses Curve Finance’s official second-anniversary statement to establish 2023-05-14 as the canonical launch date."
   },
   {
     "id": "sog_st_usde",
