@@ -3,7 +3,7 @@
   {"id":"sog_st_lusd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_lusd_liquity_docs"]},
   {"id":"sog_st_crvusd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_crvusd_curve_docs"]},
   {"id":"sog_st_usde","availability":"via_wrapper","source":"mixed","accrual":"wrapper_value_increase","rate":"variable","related_asset_ids":["sog_st_susde"],"evidence_ids":["sog_src_usde_terms_batch_a","sog_src_susde_overview_batch_h","sog_src_susde_rewards_batch_h"]},
-  {"id":"sog_st_susd","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_susd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_susd_synthetix_docs","sog_src_susd_v3_faq_batch_a"]},
   {"id":"sog_st_rlusd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_rlusd_ripple_page","sog_src_rlusd_user_terms"]},
   {"id":"sog_st_eurc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurc_circle_page","sog_src_eurc_transparency"]},
   {"id":"sog_st_usdp","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdp_paxos_page","sog_src_usdp_transparency"]},

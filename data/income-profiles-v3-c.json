@@ -1,12 +1,12 @@
 [
   {"id":"sog_st_mim","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_mim_docs_batch_a","sog_src_mim_tokenomics_batch_a"]},
-  {"id":"sog_st_fei","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
-  {"id":"sog_st_usdn","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
-  {"id":"sog_st_rai","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
-  {"id":"sog_st_paxg","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
-  {"id":"sog_st_xaut","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
-  {"id":"sog_st_spot","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
-  {"id":"sog_st_nuon","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":[]},
+  {"id":"sog_st_fei","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_fei_intro_batch_a","sog_src_fei_final_redemption_batch_a"]},
+  {"id":"sog_st_usdn","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdn_faq_batch_a","sog_src_usdn_xtn_transition_batch_a"]},
+  {"id":"sog_st_rai","availability":"native","source":"protocol_incentives","accrual":"protocol_position","rate":"protocol_determined","related_asset_ids":[],"evidence_ids":["sog_src_rai_faq_batch_b","sog_src_rai_oracle_relayer_batch_b"]},
+  {"id":"sog_st_paxg","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_paxg_whitepaper_batch_b","sog_src_paxg_transparency_batch_b"]},
+  {"id":"sog_st_xaut","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_xaut_faq_batch_b","sog_src_xaut_whitepaper_batch_b"]},
+  {"id":"sog_st_spot","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_spot_about_batch_b","sog_src_spot_mint_batch_b"]},
+  {"id":"sog_st_nuon","availability":"native","source":"mixed","accrual":"balance_rebase","rate":"variable","related_asset_ids":[],"evidence_ids":["sog_src_nuon_overview_batch_b","sog_src_nuon_whitepaper_batch_b"]},
   {"id":"sog_st_gho","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_gho_facilitators_batch_c","sog_src_gho_gsm_batch_c"]},
   {"id":"sog_st_bold","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_bold_overview_batch_c"]}
 ]
