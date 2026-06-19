@@ -39,6 +39,10 @@ Each entry records:
 
 The validator runs in both the normal CI workflow and the full `npm run build` chain as `npm run validate:launch-queue`.
 
+## Validation result
+
+The queue validator and full repository build completed successfully in GitHub Actions.
+
 ## Update rule
 
 A future launch-date promotion must update the canonical record and remove the same ID from this queue in one PR. CI must fail when only one side changes.
