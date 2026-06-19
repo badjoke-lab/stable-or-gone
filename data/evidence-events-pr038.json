@@ -88,5 +88,34 @@
     "reliability": "high",
     "claim_scope": "official_public_launch_date",
     "notes": "Signed Ethena Labs publication states that 2024-02-19 marked USDe’s official launch to the public."
+  },
+  {
+    "id": "sog_src_crvusd_anniversary_launch_2025",
+    "stablecoin_id": "sog_st_crvusd",
+    "issuer_id": "sog_issuer_curve_finance",
+    "event_id": "sog_ev_crvusd_launch_context",
+    "source_type": "official_statement",
+    "title": "crvUSD: 2 Years On",
+    "url": "https://news.curve.finance/crvusd-2-years-on/",
+    "publisher": "Curve Finance",
+    "published_at": "2025-05-14",
+    "archived_url": "https://web.archive.org/web/*/https://news.curve.finance/crvusd-2-years-on/",
+    "accessed_at": "2026-06-19",
+    "reliability": "high",
+    "claim_scope": "official_launch_date_from_second_anniversary",
+    "stablecoin_ids": [
+      "sog_st_crvusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_curve_finance"
+    ],
+    "event_ids": [
+      "sog_ev_crvusd_launch_context"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "second_anniversary"
+    ],
+    "notes": "Curve’s dated article identifies May 14, 2025 as crvUSD’s second anniversary, establishing May 14, 2023 as the launch date."
   }
 ]

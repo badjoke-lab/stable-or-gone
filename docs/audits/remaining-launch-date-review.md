@@ -1,6 +1,6 @@
 # Remaining Launch-Date Review
 
-Updated: 2026-06-18
+Updated: 2026-06-19
 
 ## Purpose
 
@@ -24,24 +24,27 @@ Categories B, C, and D must remain `null` unless later research changes the clas
 ## Queue summary
 
 ```text
-Total reviewed: 38
-Category A:       7
-Category B:       5
-Category C:      23
-Category D:       3
+Original null-date queue reviewed: 38
+Category A identified:              7
+Promoted in Launch-date Batch O:     5
+Category A remaining:                2
+Category B:                           5
+Category C:                          23
+Category D:                           3
+Remaining launch_date null:         33
 ```
 
 ## Category A — day-level date supported
 
 | Stable asset | ID | Candidate date | Basis | Planned treatment |
 |---|---|---:|---|---|
-| crvUSD | `sog_st_crvusd` | 2023-05-14 | Curve's official second-anniversary article dated 2025-05-14 states that the date was the second anniversary of crvUSD. | Batch O |
-| EUR CoinVertible | `sog_st_eurcv` | 2023-04-20 | SG-FORGE's launch release is dated 2023-04-20 and explicitly states that it launches EUR CoinVertible. | Batch O |
-| EURI | `sog_st_euri` | 2024-08-26 | Banking Circle's dated issuer announcement explicitly states the launch of EURI. | Batch O |
-| EURQ | `sog_st_eurq` | 2024-11-18 | Quantoz states that it started issuing EURQ and USDQ on Monday 2024-11-18. Exchange listing on 2024-11-21 is a later distribution event, not the canonical launch. | Batch O |
+| crvUSD | `sog_st_crvusd` | 2023-05-14 | Curve's official second-anniversary article dated 2025-05-14 states that the date was the second anniversary of crvUSD. | Promoted in Launch-date Batch O |
+| EUR CoinVertible | `sog_st_eurcv` | 2023-04-20 | SG-FORGE's launch release is dated 2023-04-20 and explicitly states that it launches EUR CoinVertible. | Promoted in Launch-date Batch O |
+| EURI | `sog_st_euri` | 2024-08-26 | Banking Circle's dated issuer announcement explicitly states the launch of EURI. | Promoted in Launch-date Batch O |
+| EURQ | `sog_st_eurq` | 2024-11-18 | Quantoz states that it started issuing EURQ and USDQ on Monday 2024-11-18. Exchange listing on 2024-11-21 is a later distribution event, not the canonical launch. | Promoted in Launch-date Batch O |
 | sUSDS | `sog_st_susds` | 2024-09-18 | Sky Launch Season governance and activation materials identify 2024-09-18 as the product activation date. The record must preserve the relationship to sDAI rather than imply an unrelated lineage. | Batch P |
 | USDtb | `sog_st_usdtb` | 2024-12-16 | Ethena's official launch page and contemporaneous ecosystem launch material identify 2024-12-16 as the launch date. The exact publication metadata must be captured in evidence before promotion. | Batch P |
-| USDY | `sog_st_usdy` | 2023-09-07 | Ondo's official blog index dates “Introducing Ondo USD Yield (USDY)” to 2023-09-07. Network-specific launches are later deployment events. | Batch O |
+| USDY | `sog_st_usdy` | 2023-09-07 | Ondo's official blog index dates “Introducing Ondo USD Yield (USDY)” to 2023-09-07. Network-specific launches are later deployment events. | Promoted in Launch-date Batch O |
 
 ### Primary sources for Category A
 
@@ -191,7 +194,7 @@ The following shortcuts are explicitly disallowed:
 
 ## Batch plan produced by this audit
 
-### PR #58 — Launch-date Batch O
+### Launch-date Batch O — complete
 
 ```text
 crvUSD     2023-05-14
@@ -203,7 +206,7 @@ USDY       2023-09-07
 
 These five have the cleanest identity and primary-source boundaries.
 
-### PR #59 — Launch-date Batch P
+### Launch-date Batch P — next
 
 ```text
 sUSDS      2024-09-18
@@ -212,7 +215,7 @@ USDtb      2024-12-16
 
 These require more careful evidence and lineage handling than Batch O.
 
-### PR #60 — Launch-date Batch Q and unresolved freeze
+### Launch-date unresolved queue freeze
 
 - re-check whether any Category B record can be promoted using an archived first-party day-level source
 - resolve any Category C record whose version or lineage can be documented safely
@@ -222,9 +225,10 @@ These require more careful evidence and lineage handling than Batch O.
 ## Completion state
 
 ```text
-PR #57 review scope: complete
+Original review scope: complete
 Records classified: 38 / 38
-Canonical data changed: no
-Launch dates promoted: no
-Next PR: #58 Launch-date Batch O
+Canonical launch dates promoted in Batch O: 5
+Remaining launch_date null: 33
+Remaining category-A records: sUSDS, USDtb
+Next work item: Launch-date Batch P
 ```

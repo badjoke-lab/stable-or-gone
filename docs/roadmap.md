@@ -40,10 +40,10 @@ Repository:
 badjoke-lab/stable-or-gone
 ```
 
-Current `main` checkpoint before this roadmap realignment:
+Latest completed roadmap checkpoint:
 
 ```text
-d2217291101a94826c968401e16520e35830abae
+a486618a5b499aa431c53a6b63b6ffa4015150b7
 ```
 
 Current canonical registry checkpoint:
@@ -54,9 +54,9 @@ Current canonical registry checkpoint:
 72 stablecoin-organization relationships
 70 classifications
 70 reserve/redemption profiles
-92 events
-92 Event v2 detail records
-279 evidence records
+96 events
+96 Event v2 detail records
+284 evidence records
 72 reserve-report or reserve-context records
 153 known unknowns
 9 regulatory notes
@@ -79,7 +79,7 @@ Required-layer coverage:              70 / 70
 Event coverage:                        70 / 70
 Deployment coverage:                   70 / 70
 Reserve-report context coverage:       52 / 70 informational
-Missing canonical launch dates:            38
+Missing canonical launch dates:            33
 Historical records missing terminal date:   4
 All-unknown income profiles:                41
 ```
@@ -103,15 +103,14 @@ PR #64 — Refresh Cloudflare Pages deployment
 Current development stage:
 
 ```text
-Roadmap realignment after emergency repair
-then Phase 1 — Launch-date quality work
+Phase 1 — Launch-date quality work
 ```
 
 Current next action:
 
 ```text
-1. Realign this roadmap and defer Cloudflare production recheck to the count-growth gates
-2. Launch-date Batch O
+1. Complete Launch-date Batch O in this change
+2. Launch-date Batch P
 ```
 
 ## Cloudflare and public-parity position
@@ -164,7 +163,7 @@ Target: 2026-06-19
 
 ## Roadmap realignment
 
-Status: **in progress**
+Status: **complete in PR #67**
 
 Scope:
 
@@ -186,7 +185,7 @@ Completion conditions:
 
 Target window: 2026-06-19 to 2026-06-24
 
-Current queue: **38 records**
+Current remaining queue: **33 records**
 
 The objective is not to force all records to have a day-level date. The objective is to distinguish confirmed dates from unresolved dates without inventing precision.
 
@@ -201,7 +200,7 @@ D. No adequate primary launch source found:           3
 
 ## Launch-date Batch O
 
-Status: **next after Phase 0**
+Status: **complete in this change**
 
 Apply the five cleanest category-A dates:
 
@@ -557,9 +556,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Roadmap realignment after emergency repair
-Next:    Launch-date Batch O
-Then:    Launch-date Batch P
+Current: Launch-date Batch O — complete in this change
+Next:    Launch-date Batch P
 Then:    Launch-date unresolved queue freeze
 Then:    Historical terminal-date review
+Then:    Historical terminal-date resolution or freeze
 ```

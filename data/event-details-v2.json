@@ -285,9 +285,14 @@
     "subject_organization_ids": [
       "sog_issuer_curve_finance"
     ],
-    "event_detail_kind": "migration",
-    "migration_detail": {
-      "summary": "crvUSD launch and LLAMMA context."
+    "event_detail_kind": "launch",
+    "evidence_ids": [
+      "sog_src_crvusd_curve_lifecycle_event",
+      "sog_src_crvusd_anniversary_launch_2025"
+    ],
+    "launch_detail": {
+      "summary": "crvUSD official launch on 2023-05-14, established from Curve Finance’s second-anniversary statement.",
+      "status": "active"
     }
   },
   {
