@@ -177,27 +177,29 @@
     },
     "income_availability": {
       "native": 6,
-      "none": 33,
-      "unknown": 31
+      "none": 39,
+      "unknown": 21,
+      "via_wrapper": 4
     },
     "income_sources": {
-      "mixed": 1,
-      "none": 33,
-      "protocol_incentives": 1,
-      "reserve_income": 4,
-      "unknown": 31
+      "mixed": 3,
+      "none": 39,
+      "protocol_incentives": 2,
+      "reserve_income": 5,
+      "unknown": 21
     },
     "income_accrual": {
       "balance_rebase": 1,
       "exchange_rate_increase": 5,
-      "none": 33,
-      "unknown": 31
+      "none": 39,
+      "unknown": 21,
+      "wrapper_value_increase": 4
     },
     "income_rates": {
-      "none": 33,
-      "protocol_determined": 2,
-      "unknown": 31,
-      "variable": 4
+      "none": 39,
+      "protocol_determined": 4,
+      "unknown": 21,
+      "variable": 6
     }
   },
   "coverage": {
@@ -262,8 +264,8 @@
       "share": 0.6143
     },
     "income_profiles_all_unknown": {
-      "count": 31,
-      "share": 0.4429
+      "count": 21,
+      "share": 0.3
     },
     "reserve_components_unknown_category": {
       "count": 13,

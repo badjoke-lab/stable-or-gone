@@ -82,7 +82,7 @@ Deployment coverage:                   70 / 70
 Reserve-report context coverage:       52 / 70 informational
 Missing canonical launch dates:            31
 Historical records missing terminal date:   6
-All-unknown income profiles:                31
+All-unknown income profiles:                21
 ```
 
 Latest completed record-quality work:
@@ -96,6 +96,7 @@ PR #70 — Complete Launch-date Batch P
 PR #74 — Freeze unresolved launch-date queue
 PR #75 — Audit historical terminal-date boundaries
 PR #77 — Freeze historical terminal-date queue
+PR #78 — Resolve fiat-backed income profiles
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -117,8 +118,8 @@ Phase 3 — Income-profile completion: in progress
 Current next action:
 
 ```text
-1. Complete fiat-backed income-profile batch in this change
-2. Begin protocol stablecoin income-profile completion
+1. Complete protocol mechanics batch in this change
+2. Begin remaining profile completion
 ```
 
 ## Cloudflare and public-parity position
@@ -384,13 +385,13 @@ Invented shutdown dates:         0
 
 Target window: 2026-06-29 to 2026-07-08
 
-Current queue: **31 all-unknown income profiles after this change**
+Current queue: **21 all-unknown income profiles after this change**
 
 The objective is to classify mechanics, not to publish live yield figures or rank assets.
 
 ## Fiat-backed income profiles
 
-Status: **complete in this change**
+Status: **complete in PR #78**
 
 Decision record:
 
@@ -645,8 +646,8 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Fiat-backed income profiles — complete in this change
-Next:    Protocol stablecoin income profiles
+Current: Protocol mechanics batch — complete in this change
+Next:    Synthetic and historical profile completion
 Then:    Synthetic and yield-related income profiles
 Then:    Historical, commodity, and edge income profiles
 Then:    Phase 3 completion audit
