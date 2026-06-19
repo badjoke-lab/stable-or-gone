@@ -43,8 +43,8 @@ badjoke-lab/stable-or-gone
 Latest completed data checkpoint:
 
 ```text
-PR #69 — Launch-date Batch O
-Merge: 1b12963bbe7e5d1bb0653842e6b57a86357e63bc
+PR #70 — Launch-date Batch P
+Merge: ca70f6ba470fdcde638c7546d9dad64d278a7dfb
 ```
 
 Current canonical registry checkpoint:
@@ -92,6 +92,7 @@ PR #55 — Add official USDe launch date
 PR #56 — Anchor the 70-to-100 execution roadmap
 PR #57 — Audit and classify the remaining launch-date queue
 PR #69 — Complete Launch-date Batch O
+PR #70 — Complete Launch-date Batch P
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -105,14 +106,15 @@ PR #64 — Refresh Cloudflare Pages deployment
 Current development stage:
 
 ```text
-Phase 1 — Launch-date quality work
+Phase 1 — Launch-date quality work: complete in this change
+Phase 2 — Historical terminal-date work: next
 ```
 
 Current next action:
 
 ```text
-1. Complete Launch-date Batch P in this change
-2. Launch-date unresolved queue freeze
+1. Complete the launch-date unresolved queue freeze in this change
+2. Historical terminal-date review for BAC, DSD, ESD, and USDN
 ```
 
 ## Cloudflare and public-parity position
@@ -187,7 +189,7 @@ Completion conditions:
 
 Target window: 2026-06-19 to 2026-06-24
 
-Current remaining queue: **31 records**
+Current frozen unresolved queue: **31 records**
 
 The objective is not to force all records to have a day-level date. The objective is to distinguish confirmed dates from unresolved dates without inventing precision.
 
@@ -237,7 +239,7 @@ Canonical stable-asset count:    70 unchanged
 
 ## Launch-date Batch P
 
-Status: **complete in this change**
+Status: **complete in PR #70**
 
 Apply the remaining two currently approved category-A dates:
 
@@ -256,7 +258,17 @@ Missing canonical launch dates: 33 → 31
 
 ## Launch-date unresolved queue freeze
 
-Recheck the remaining category B, C, and D records. Apply an additional day-level date only if newly found primary evidence resolves the exact launch boundary.
+Status: **complete in this change**
+
+The remaining category B, C, and D records are frozen in the machine-readable queue:
+
+```text
+data/quality/launch-date-unresolved.json
+```
+
+The build now runs `npm run validate:launch-queue` and requires the canonical `launch_date: null` set to match the queue exactly.
+
+Recheck the remaining category B, C, and D records only when new primary evidence resolves the exact launch boundary.
 
 Otherwise retain `launch_date: null` and preserve:
 
@@ -268,8 +280,10 @@ Otherwise retain `launch_date: null` and preserve:
 Phase completion conditions:
 
 ```text
-Missing launch dates:            31 unless stronger evidence is found
-All remaining null dates:        explicitly classified and documented
+Missing launch dates:             31 frozen
+Category B / C / D:                5 / 23 / 3
+All remaining null dates:         machine-readable and documented
+Canonical null set vs queue:      exact match
 Artificial month/year-first date: 0
 Critical findings:                0
 Warnings:                         0
@@ -560,9 +574,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Launch-date Batch P — complete in this change
-Next:    Launch-date unresolved queue freeze
-Then:    Historical terminal-date review
+Current: Launch-date unresolved queue freeze — complete in this change
+Next:    Historical terminal-date review
 Then:    Historical terminal-date resolution or freeze
 Then:    Fiat-backed income profiles
+Then:    Protocol stablecoin income profiles
 ```
