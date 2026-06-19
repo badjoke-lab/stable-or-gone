@@ -30,7 +30,16 @@ jobs:
       - name: Install dependencies
         run: npm install --no-package-lock --no-audit --no-fund
       - name: Apply canonical source changes
-        run: node scripts/apply-launch-date-batch-o.mjs
+        run: |
+          set -o pipefail
+          node scripts/apply-launch-date-batch-o.mjs 2>&1 | tee batch-o-migration.log
+      - name: Upload migration diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch-o-migration-diagnostics
+          path: batch-o-migration.log
+          retention-days: 1
       - name: Regenerate statistics
         run: node scripts/generate-registry-stats.mjs
       - name: Regenerate integrity audit
@@ -43,7 +52,7 @@ jobs:
         run: |
           rm scripts/apply-launch-date-batch-o.mjs
           rm .github/workflows/apply-launch-date-batch-o.yml
-          rm -f docs/audits/.batch-o-trigger docs/audits/.batch-o-pr-trigger
+          rm -f docs/audits/.batch-o-trigger docs/audits/.batch-o-pr-trigger batch-o-migration.log
       - name: Commit generated Batch O result
         run: |
           git config user.name "github-actions[bot]"
