@@ -31,6 +31,8 @@ Warnings:                   0
 
 The branch migration regenerated registry statistics and the integrity audit, validated generated statistics, and completed the full repository build successfully before removing its one-time migration machinery.
 
+The final normal PR validation also completed successfully across CI, Public consistency, Registry integrity, Registry stats, Registry v3 view, and Registry v3 income profiles.
+
 ## Next work
 
 Launch-date unresolved queue freeze for the remaining category B, C, and D records.
