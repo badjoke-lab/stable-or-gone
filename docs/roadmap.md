@@ -93,6 +93,7 @@ PR #56 — Anchor the 70-to-100 execution roadmap
 PR #57 — Audit and classify the remaining launch-date queue
 PR #69 — Complete Launch-date Batch O
 PR #70 — Complete Launch-date Batch P
+PR #74 — Freeze unresolved launch-date queue
 ```
 
 Emergency public-consistency repair completed afterward:
@@ -106,15 +107,15 @@ PR #64 — Refresh Cloudflare Pages deployment
 Current development stage:
 
 ```text
-Phase 1 — Launch-date quality work: complete in this change
-Phase 2 — Historical terminal-date work: next
+Phase 1 — Launch-date quality work: complete in PR #74
+Phase 2 — Historical terminal-date work: in progress
 ```
 
 Current next action:
 
 ```text
-1. Complete the launch-date unresolved queue freeze in this change
-2. Historical terminal-date review for BAC, DSD, ESD, and USDN
+1. Complete historical terminal-date review in this change
+2. Resolve or freeze terminal-date unknowns
 ```
 
 ## Cloudflare and public-parity position
@@ -262,7 +263,7 @@ Missing canonical launch dates: 33 → 31
 
 ## Launch-date unresolved queue freeze
 
-Status: **complete in this change**
+Status: **complete in PR #74**
 
 The remaining category B, C, and D records are frozen in the machine-readable queue:
 
@@ -305,6 +306,23 @@ USDN
 ```
 
 ## Historical terminal-date review
+
+Status: **complete in this change**
+
+Review source:
+
+```text
+docs/audits/historical-terminal-date-review.md
+```
+
+Current review decision:
+
+```text
+BAC   retain null — no first-party shutdown or cessation date recovered
+DSD   retain null — April 2021 V2 activity is not a shutdown date
+ESD   retain null — 2021-08-02 migration start is not final cessation
+USDN  retain null — XTN transition confirmed without effective date
+```
 
 For each asset, distinguish:
 
@@ -578,9 +596,9 @@ merge growth batch
 # Immediate next work
 
 ```text
-Current: Launch-date unresolved queue freeze — complete in this change
-Next:    Historical terminal-date review
-Then:    Historical terminal-date resolution or freeze
+Current: Historical terminal-date review — complete in this change
+Next:    Historical terminal-date resolution or freeze
 Then:    Fiat-backed income profiles
 Then:    Protocol stablecoin income profiles
+Then:    Synthetic and yield-related income profiles
 ```
