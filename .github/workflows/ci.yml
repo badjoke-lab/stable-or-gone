@@ -18,6 +18,8 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install
+      - name: Validate deployment policy
+        run: npm run validate:deployment-policy
       - name: Validate baseline
         run: npm run validate:baseline
       - name: Validate candidates
