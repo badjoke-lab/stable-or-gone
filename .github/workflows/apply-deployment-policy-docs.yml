@@ -1,0 +1,48 @@
+name: Apply deployment policy documentation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-deployment-policy-docs
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: establish-deployment-policy
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply documentation changes
+        run: node scripts/apply-deployment-policy-docs.mjs
+      - name: Install dependencies
+        run: npm install --no-package-lock --no-audit --no-fund
+      - name: Validate deployment policy
+        run: npm run validate:deployment-policy
+      - name: Run full repository build
+        run: npm run build
+      - name: Remove one-time machinery and branch markers
+        run: |
+          rm scripts/apply-deployment-policy-docs.mjs
+          rm .github/workflows/apply-deployment-policy-docs.yml
+          rm -f docs/.deployment-policy-placeholder
+          rm -f docs/.deployment-policy-placeholder-2
+          rm -f docs/.deployment-policy-placeholder-3
+      - name: Commit finalized deployment policy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Establish repository deployment policy"
+          git push origin HEAD:establish-deployment-policy
