@@ -32,6 +32,10 @@ Canonical stable assets:     70 unchanged
 
 No live APY, ranking, campaign, or market-performance data is added.
 
+## Integrity output
+
+The final registry integrity Markdown and JSON outputs are regenerated after the profile and statistics changes so they record the zero-item all-unknown queue.
+
 ## Deployment classification
 
 No production deployment required. Cloudflare access is not used.
