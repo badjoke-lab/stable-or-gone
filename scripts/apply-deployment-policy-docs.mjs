@@ -42,23 +42,4 @@ const replaceRequired = (text, before, after, label) => {
   write(file, text);
 }
 
-{
-  const file = '.github/workflows/production-smoke.yml';
-  let text = read(file);
-  text = replaceRequired(text,
-`on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-  schedule:
-    - cron: '23 3 * * *'`,
-`on:
-  workflow_dispatch:`,
-    'production smoke triggers');
-  text = text.replace('run: npm install --no-audit --no-fund', 'run: npm install --no-package-lock --no-audit --no-fund');
-  text = text.replace('name: Check production endpoints', 'name: Check deliberately deployed production endpoints');
-  write(file, text);
-}
-
-console.log('Applied deployment-policy documentation and workflow updates.');
+console.log('Applied deployment-policy documentation updates.');
