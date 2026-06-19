@@ -27,11 +27,12 @@ Categories B, C, and D must remain `null` unless later research changes the clas
 Original null-date queue reviewed: 38
 Category A identified:              7
 Promoted in Launch-date Batch O:     5
-Category A remaining:                2
+Promoted in Launch-date Batch P:     2
+Category A remaining:                0
 Category B:                           5
 Category C:                          23
 Category D:                           3
-Remaining launch_date null:         33
+Remaining launch_date null:         31
 ```
 
 ## Category A — day-level date supported
@@ -42,8 +43,8 @@ Remaining launch_date null:         33
 | EUR CoinVertible | `sog_st_eurcv` | 2023-04-20 | SG-FORGE's launch release is dated 2023-04-20 and explicitly states that it launches EUR CoinVertible. | Promoted in Launch-date Batch O |
 | EURI | `sog_st_euri` | 2024-08-26 | Banking Circle's dated issuer announcement explicitly states the launch of EURI. | Promoted in Launch-date Batch O |
 | EURQ | `sog_st_eurq` | 2024-11-18 | Quantoz states that it started issuing EURQ and USDQ on Monday 2024-11-18. Exchange listing on 2024-11-21 is a later distribution event, not the canonical launch. | Promoted in Launch-date Batch O |
-| sUSDS | `sog_st_susds` | 2024-09-18 | Sky Launch Season governance and activation materials identify 2024-09-18 as the product activation date. The record must preserve the relationship to sDAI rather than imply an unrelated lineage. | Batch P |
-| USDtb | `sog_st_usdtb` | 2024-12-16 | Ethena's official launch page and contemporaneous ecosystem launch material identify 2024-12-16 as the launch date. The exact publication metadata must be captured in evidence before promotion. | Batch P |
+| sUSDS | `sog_st_susds` | 2024-09-18 | Sky Launch Season governance and activation materials identify 2024-09-18 as the product activation date. The record preserves the relationship to sDAI rather than implying an unrelated lineage. | Promoted in Launch-date Batch P |
+| USDtb | `sog_st_usdtb` | 2024-12-16 | Ethena's official launch page and Curve's contemporaneous dated launch publication identify 2024-12-16 as the launch date. | Promoted in Launch-date Batch P |
 | USDY | `sog_st_usdy` | 2023-09-07 | Ondo's official blog index dates “Introducing Ondo USD Yield (USDY)” to 2023-09-07. Network-specific launches are later deployment events. | Promoted in Launch-date Batch O |
 
 ### Primary sources for Category A
@@ -206,7 +207,7 @@ USDY       2023-09-07
 
 These five have the cleanest identity and primary-source boundaries.
 
-### Launch-date Batch P — next
+### Launch-date Batch P — complete
 
 ```text
 sUSDS      2024-09-18
@@ -228,7 +229,8 @@ These require more careful evidence and lineage handling than Batch O.
 Original review scope: complete
 Records classified: 38 / 38
 Canonical launch dates promoted in Batch O: 5
-Remaining launch_date null: 33
-Remaining category-A records: sUSDS, USDtb
-Next work item: Launch-date Batch P
+Canonical launch dates promoted in Batch P: 2
+Remaining launch_date null: 31
+Remaining category-A records: none
+Next work item: Launch-date unresolved queue freeze
 ```

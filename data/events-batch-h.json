@@ -85,5 +85,22 @@
     "recovery_date": null,
     "failure_mechanism": "product_launch",
     "notes": "Official Ondo introduction; added in Launch-date Batch O."
+  },
+  {
+    "id": "sog_ev_susds_2024_09_launch",
+    "stablecoin_id": "sog_st_susds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "event_type": "launch",
+    "event_date": "2024-09-18",
+    "title": "sUSDS activates in the Sky Token and Product Launch",
+    "description": "Sky governance launch materials identify September 18, 2024 as the Token and Product Launch date that introduced and initialized sUSDS as the tokenized Sky Savings Rate product. The record remains linked to the continuing Maker/Sky and sDAI lineage.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "Added in Launch-date Batch P; the existing current-model event remains separate."
   }
 ]

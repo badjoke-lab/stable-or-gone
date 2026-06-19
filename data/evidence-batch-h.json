@@ -484,5 +484,38 @@
       "product_introduction"
     ],
     "notes": "Ondo’s official blog index dates the USDY introduction to September 7, 2023. Network-specific launches remain deployment events."
+  },
+  {
+    "id": "sog_src_susds_launch_activation_2024",
+    "stablecoin_id": "sog_st_susds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "event_id": "sog_ev_susds_2024_09_launch",
+    "source_type": "official_governance_proposal",
+    "title": "Sky Protocol Launch Season: Token and Product Launch Parameter Proposal",
+    "url": "https://forum.sky.money/t/sky-protocol-launch-season-token-and-product-launch-parameter-proposal/25031",
+    "publisher": "Sky Governance",
+    "published_at": "2024-09-06",
+    "archived_url": "https://web.archive.org/web/*/https://forum.sky.money/t/sky-protocol-launch-season-token-and-product-launch-parameter-proposal/25031",
+    "accessed_at": "2026-06-19",
+    "reliability": "high",
+    "claim_scope": "susds_product_launch_and_activation_date",
+    "stablecoin_ids": [
+      "sog_st_susds",
+      "sog_st_usds",
+      "sog_st_sdai"
+    ],
+    "organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_ids": [
+      "sog_ev_susds_2024_09_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "product_activation",
+      "sky_savings_rate",
+      "lineage"
+    ],
+    "notes": "Official Sky governance materials describe sUSDS as part of the Token and Product Launch and identify the September 18, 2024 launch date. The evidence preserves the continuing sDAI/USDS/Sky lineage."
   }
 ]

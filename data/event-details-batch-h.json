@@ -108,5 +108,30 @@
       "summary": "USDY official introduction on 2023-09-07.",
       "status": "active"
     }
+  },
+  {
+    "id": "sog_ev_susds_2024_09_launch",
+    "title": "sUSDS activates in the Sky Token and Product Launch",
+    "subject_stablecoin_ids": [
+      "sog_st_susds"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "evidence_ids": [
+      "sog_src_susds_launch_activation_2024"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "sUSDS activation during the Sky Token and Product Launch on 2024-09-18.",
+      "status": "active",
+      "related_stablecoin_ids": [
+        "sog_st_sdai",
+        "sog_st_usds"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_makerdao_sky"
+      ]
+    }
   }
 ]
