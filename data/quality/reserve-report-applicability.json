@@ -7,11 +7,11 @@
     "reserve_components_remain_required": true,
     "no_placeholder_rows": true,
     "no_universal_coverage_target": true,
-    "canonical_reserve_reports_unchanged": true
+    "canonical_updates_require_reviewed_primary_context": true
   },
-  "expected_total": 18,
+  "expected_total": 13,
   "category_counts": {
-    "report_expected_but_missing": 5,
+    "report_expected_but_missing": 0,
     "not_applicable_by_design": 10,
     "source_status_unresolved": 3
   },
@@ -57,14 +57,6 @@
       "next_action": "retain_not_applicable"
     },
     {
-      "stablecoin_id": "sog_st_nuon",
-      "applicability": "report_expected_but_missing",
-      "reason_code": "active_treasury_and_collateral_disclosure_expected",
-      "evidence_ids": ["sog_src_nuon_overview_batch_b", "sog_src_nuon_whitepaper_batch_b", "sog_src_nuon_maxcap_batch_b"],
-      "review_note": "NUON documentation describes collateral, treasury strategies, and a separate risk-bearing MaxCap layer. A current protocol collateral or treasury disclosure belongs in the informational reserve-context layer but no canonical row exists.",
-      "next_action": "add_primary_context"
-    },
-    {
       "stablecoin_id": "sog_st_gho",
       "applicability": "not_applicable_by_design",
       "reason_code": "facilitator_and_onchain_collateral_without_periodic_report",
@@ -79,22 +71,6 @@
       "evidence_ids": ["sog_src_bold_overview_batch_c", "sog_src_bold_technical_batch_c"],
       "review_note": "BOLD is directly overcollateralized by protocol positions and redeemed through Liquity contracts. Its design is covered by protocol and technical disclosures rather than periodic reserve reports.",
       "next_action": "retain_not_applicable"
-    },
-    {
-      "stablecoin_id": "sog_st_usd0",
-      "applicability": "report_expected_but_missing",
-      "reason_code": "active_rwa_collateral_disclosure_expected",
-      "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c", "sog_src_usd0_collateral_batch_c"],
-      "review_note": "USD0 is backed through tokenized RWA and government-securities collateral. A current collateral or transparency disclosure is applicable and should be represented without inventing a placeholder report.",
-      "next_action": "add_primary_context"
-    },
-    {
-      "stablecoin_id": "sog_st_usr",
-      "applicability": "report_expected_but_missing",
-      "reason_code": "active_collateral_pool_transparency_expected",
-      "evidence_ids": ["sog_src_usr_overview_batch_c", "sog_src_usr_collateral_batch_c"],
-      "review_note": "USR relies on a managed collateral pool and separate risk-bearing layers. A current collateral transparency or protocol disclosure is applicable, especially after the recorded unauthorized-mint incident.",
-      "next_action": "add_primary_context"
     },
     {
       "stablecoin_id": "sog_st_sai",
@@ -129,28 +105,12 @@
       "next_action": "retain_not_applicable"
     },
     {
-      "stablecoin_id": "sog_st_eurs",
-      "applicability": "report_expected_but_missing",
-      "reason_code": "active_fiat_reserve_verification_expected",
-      "evidence_ids": ["sog_src_eurs_transparency_batch_e", "sog_src_eurs_terms_batch_e"],
-      "review_note": "EURS is an active fiat-backed issuer product whose official materials describe reserve verification. A current transparency, attestation, or verification context should be represented in the reserve-report layer.",
-      "next_action": "add_primary_context"
-    },
-    {
       "stablecoin_id": "sog_st_eurt",
       "applicability": "source_status_unresolved",
       "reason_code": "historical_reserve_archive_after_redemption_end_unresolved",
       "evidence_ids": ["sog_src_eurt_legal_batch_e", "sog_src_eurt_history_batch_e"],
       "review_note": "EURT was a fiat-backed Tether product and redemption ended in November 2025. Historical reserve or assurance material is relevant, but the exact durable EURT-specific archive has not been normalized.",
       "next_action": "investigate_source_status"
-    },
-    {
-      "stablecoin_id": "sog_st_usdm",
-      "applicability": "report_expected_but_missing",
-      "reason_code": "active_protocol_reserve_disclosure_expected",
-      "evidence_ids": ["sog_src_usdm_reserve_batch_e", "sog_src_usdm_contract_batch_e"],
-      "review_note": "USDm is actively supported by the Mento Reserve and reserve-liquidity strategy. The existing primary reserve documentation is applicable and should be promoted into a canonical reserve-context row.",
-      "next_action": "add_primary_context"
     },
     {
       "stablecoin_id": "sog_st_alusd",
