@@ -4,7 +4,7 @@ Updated: 2026-06-20
 
 ## Scope
 
-The canonical registry now has reserve-report or reserve-context coverage for 57 of 70 stable assets. This layer remains informational and is not expected for every asset.
+The canonical registry has reserve-report or reserve-context coverage for 57 of 70 stable assets. This layer remains informational and is not expected for every asset.
 
 Required backing structure remains represented by `reserve_components`, which covers 70 of 70 canonical assets. The reserve-report layer may contain issuer reports, attestations, transparency dashboards, protocol collateral disclosures, or relevant historical reserve-intervention records.
 
@@ -17,15 +17,16 @@ source_status_unresolved:     3
 Total remaining queue:       13
 ```
 
-The machine-readable source of truth is:
+Sources of truth:
 
 ```text
 data/quality/reserve-report-applicability.json
+docs/audits/reserve-source-status-review.md
 ```
 
 ## Added primary context
 
-The following five records were promoted from `report_expected_but_missing` into canonical reserve-context coverage:
+The following five records were promoted from `report_expected_but_missing` into canonical reserve-context coverage in Phase 4B:
 
 | Asset | Context added | Boundary |
 |---|---|---|
@@ -56,13 +57,15 @@ Canonical reserve-report/context records increased from 72 to 77. Coverage incre
 
 ## Source status unresolved
 
-| Asset | Missing boundary | Future review target |
-|---|---|---|
-| FEI | Final protocol-controlled reserve distribution and present redemption execution are not normalized into one durable source package. | Recover final distribution or execution records without treating governance approval as completed execution. |
-| HUSD | Historical fiat reserve or attestation archive has not been recovered beyond archived product claims. | Search issuer archives, assurance reports, and preserved transparency pages. |
-| EURT | EURT-specific historical reserve or assurance archive is not normalized after redemption ended in November 2025. | Recover a durable product-specific archive without copying USDT coverage onto EURT. |
+Phase 4C completed a targeted source review and froze all three records as reviewed unresolved items.
 
-Unresolved records remain explicit research targets. They are not converted to `not_applicable` merely because a source has not yet been recovered.
+| Asset | Confirmed in review | Missing boundary |
+|---|---|---|
+| FEI | Governance design plus an Aave-specific FEI-to-DAI execution path. | Full final-redemption completion, final PCV distribution, universal execution, and present availability are not proven. |
+| HUSD | Monthly attestations were announced and a January 2022 accountant report is identified by a legal study. | The original signed report and durable public archive are not recovered. |
+| EURT | Tether consolidated reserve reporting and EURT redemption termination are confirmed. | No reviewed report separately proves EURT reserve assets, liabilities, issuer scope, or final reconciliation. |
+
+These records are not unreviewed gaps. They remain explicit research targets that may be reopened only when materially better primary evidence appears.
 
 ## Integrity rules
 
@@ -76,6 +79,18 @@ The validator requires all of the following:
 - records already covered by canonical reserve-report context cannot remain in the queue
 - canonical additions require reviewed primary context
 - no placeholder reserve-report rows are added to improve the numerical coverage ratio
+
+## Phase 4 result
+
+```text
+Applicable missing context:        0
+Not-applicable decisions:         10 documented
+Reviewed unresolved source status: 3 frozen
+Reserve-context coverage:         57 / 70 informational
+Placeholder reserve rows:          0
+```
+
+Phase 4 is complete. The next work item is the final 70-record quality audit and baseline freeze.
 
 ## Deployment classification
 

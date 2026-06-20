@@ -2,6 +2,7 @@
   "schema_version": "1.0",
   "classified_at": "2026-06-20",
   "source_review": "docs/audits/reserve-report-applicability-review.md",
+  "source_status_review": "docs/audits/reserve-source-status-review.md",
   "policy": {
     "publication_specific_layer": true,
     "reserve_components_remain_required": true,
@@ -27,9 +28,9 @@
     {
       "stablecoin_id": "sog_st_fei",
       "applicability": "source_status_unresolved",
-      "reason_code": "historical_final_reserve_distribution_not_recovered",
+      "reason_code": "participant_execution_found_full_final_redemption_unresolved",
       "evidence_ids": ["sog_src_fei_v2_batch_a", "sog_src_fei_final_redemption_batch_a"],
-      "review_note": "FEI v2 documented protocol-controlled reserves and the later final-redemption process, but the exact final reserve-distribution record and present execution state have not been recovered as one durable source package.",
+      "review_note": "Fei v2 and TIP-121c document reserve and final-redemption design, and an Aave-specific on-chain swapper proves one FEI-to-DAI execution path. That does not establish completion of the full FEI redemption program, final PCV distribution, universal holder execution, or present route availability.",
       "next_action": "investigate_source_status"
     },
     {
@@ -83,9 +84,9 @@
     {
       "stablecoin_id": "sog_st_husd",
       "applicability": "source_status_unresolved",
-      "reason_code": "historical_attestation_archive_not_recovered",
+      "reason_code": "historical_attestation_confirmed_source_unrecovered",
       "evidence_ids": ["sog_src_husd_background_batch_d", "sog_src_husd_depeg_batch_d"],
-      "review_note": "HUSD was presented as a fiat-backed issuer product, so historical reserve or attestation material would be relevant. Only archived product claims and later depeg reporting are currently normalized.",
+      "review_note": "Stable Universal announced monthly HUSD attestations, and a legal study identifies a January 2022 Accountant's Attestation: Reserve Accounts Report while stating that it is no longer publicly available. The original signed report, exact measurement boundary, reserve comparison, and durable archive have not been recovered.",
       "next_action": "investigate_source_status"
     },
     {
@@ -107,9 +108,9 @@
     {
       "stablecoin_id": "sog_st_eurt",
       "applicability": "source_status_unresolved",
-      "reason_code": "historical_reserve_archive_after_redemption_end_unresolved",
+      "reason_code": "consolidated_reporting_found_product_scope_unresolved",
       "evidence_ids": ["sog_src_eurt_legal_batch_e", "sog_src_eurt_history_batch_e"],
-      "review_note": "EURT was a fiat-backed Tether product and redemption ended in November 2025. Historical reserve or assurance material is relevant, but the exact durable EURT-specific archive has not been normalized.",
+      "review_note": "Tether publishes consolidated reserve and auditor reports, but the reviewed material does not separately identify EURT reserve assets, liabilities, issuer scope, or a final product-specific reconciliation. EURT redemption ended on 27 November 2025, and general Tether reporting must not be copied into the EURT record without explicit product scope.",
       "next_action": "investigate_source_status"
     },
     {
