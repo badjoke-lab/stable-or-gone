@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "classified_at": "2026-06-20",
+  "source_review": "docs/audits/reserve-report-applicability-review.md",
+  "policy": {
+    "publication_specific_layer": true,
+    "reserve_components_remain_required": true,
+    "no_placeholder_rows": true,
+    "no_universal_coverage_target": true,
+    "canonical_reserve_reports_unchanged": true
+  },
+  "expected_total": 18,
+  "category_counts": {
+    "report_expected_but_missing": 5,
+    "not_applicable_by_design": 10,
+    "source_status_unresolved": 3
+  },
+  "records": [
+    {
+      "stablecoin_id": "sog_st_mim",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "onchain_collateral_protocol_without_periodic_report",
+      "evidence_ids": ["sog_src_mim_docs_batch_a", "sog_src_mim_tokenomics_batch_a"],
+      "review_note": "MIM is minted through protocol cauldrons against supported collateral. Backing is represented by protocol mechanics and collateral inventories rather than an issuer-style periodic reserve report.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_fei",
+      "applicability": "source_status_unresolved",
+      "reason_code": "historical_final_reserve_distribution_not_recovered",
+      "evidence_ids": ["sog_src_fei_v2_batch_a", "sog_src_fei_final_redemption_batch_a"],
+      "review_note": "FEI v2 documented protocol-controlled reserves and the later final-redemption process, but the exact final reserve-distribution record and present execution state have not been recovered as one durable source package.",
+      "next_action": "investigate_source_status"
+    },
+    {
+      "stablecoin_id": "sog_st_usdn",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "algorithmic_protocol_backing_without_periodic_report",
+      "evidence_ids": ["sog_src_usdn_faq_batch_a", "sog_src_usdn_surf_batch_a"],
+      "review_note": "USDN used protocol backing-ratio and recapitalization mechanics rather than a conventional issuer reserve-report cycle. Historical mechanics remain documented separately from the later XTN transition.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_rai",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "onchain_safe_collateral_without_periodic_report",
+      "evidence_ids": ["sog_src_rai_faq_batch_b", "sog_src_rai_oracle_relayer_batch_b"],
+      "review_note": "RAI is generated from on-chain SAFE collateral with protocol redemption-price mechanics. A periodic issuer reserve report is not part of the system design.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_spot",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "onchain_tranche_collateral_without_periodic_report",
+      "evidence_ids": ["sog_src_spot_about_batch_b", "sog_src_spot_mint_batch_b"],
+      "review_note": "SPOT is an on-chain perpetual note backed through AMPL-derived tranche mechanics. Protocol collateral mechanics are relevant, but an issuer-style periodic reserve report is not expected.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_nuon",
+      "applicability": "report_expected_but_missing",
+      "reason_code": "active_treasury_and_collateral_disclosure_expected",
+      "evidence_ids": ["sog_src_nuon_overview_batch_b", "sog_src_nuon_whitepaper_batch_b", "sog_src_nuon_maxcap_batch_b"],
+      "review_note": "NUON documentation describes collateral, treasury strategies, and a separate risk-bearing MaxCap layer. A current protocol collateral or treasury disclosure belongs in the informational reserve-context layer but no canonical row exists.",
+      "next_action": "add_primary_context"
+    },
+    {
+      "stablecoin_id": "sog_st_gho",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "facilitator_and_onchain_collateral_without_periodic_report",
+      "evidence_ids": ["sog_src_gho_facilitators_batch_c", "sog_src_gho_gsm_batch_c"],
+      "review_note": "GHO supply is controlled through facilitators, Aave collateral, and stability modules. These on-chain protocol mechanisms do not imply a periodic issuer reserve report.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_bold",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "onchain_overcollateralization_without_periodic_report",
+      "evidence_ids": ["sog_src_bold_overview_batch_c", "sog_src_bold_technical_batch_c"],
+      "review_note": "BOLD is directly overcollateralized by protocol positions and redeemed through Liquity contracts. Its design is covered by protocol and technical disclosures rather than periodic reserve reports.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_usd0",
+      "applicability": "report_expected_but_missing",
+      "reason_code": "active_rwa_collateral_disclosure_expected",
+      "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c", "sog_src_usd0_collateral_batch_c"],
+      "review_note": "USD0 is backed through tokenized RWA and government-securities collateral. A current collateral or transparency disclosure is applicable and should be represented without inventing a placeholder report.",
+      "next_action": "add_primary_context"
+    },
+    {
+      "stablecoin_id": "sog_st_usr",
+      "applicability": "report_expected_but_missing",
+      "reason_code": "active_collateral_pool_transparency_expected",
+      "evidence_ids": ["sog_src_usr_overview_batch_c", "sog_src_usr_collateral_batch_c"],
+      "review_note": "USR relies on a managed collateral pool and separate risk-bearing layers. A current collateral transparency or protocol disclosure is applicable, especially after the recorded unauthorized-mint incident.",
+      "next_action": "add_primary_context"
+    },
+    {
+      "stablecoin_id": "sog_st_sai",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "historical_single_collateral_protocol_without_periodic_report",
+      "evidence_ids": ["sog_src_sai_migration_docs_batch_d", "sog_src_sai_contract_batch_d"],
+      "review_note": "SAI was a historical single-collateral on-chain debt asset that migrated to Multi-Collateral DAI. A current periodic reserve report is not applicable to the retired predecessor record.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_husd",
+      "applicability": "source_status_unresolved",
+      "reason_code": "historical_attestation_archive_not_recovered",
+      "evidence_ids": ["sog_src_husd_background_batch_d", "sog_src_husd_depeg_batch_d"],
+      "review_note": "HUSD was presented as a fiat-backed issuer product, so historical reserve or attestation material would be relevant. Only archived product claims and later depeg reporting are currently normalized.",
+      "next_action": "investigate_source_status"
+    },
+    {
+      "stablecoin_id": "sog_st_iron",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "collapsed_algorithmic_protocol_without_periodic_report",
+      "evidence_ids": ["sog_src_iron_postmortem_batch_d", "sog_src_iron_fed_batch_d"],
+      "review_note": "IRON was a partially collateralized algorithmic protocol that collapsed in 2021. The post-mortem and mechanism analysis are the appropriate historical context; a periodic reserve-report cycle was not part of the design.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_musd",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "protocol_basket_and_legacy_exit_without_periodic_report",
+      "evidence_ids": ["sog_src_musd_docs_batch_d", "sog_src_musd_save_batch_d"],
+      "review_note": "mUSD was a protocol basket asset and is now handled through legacy withdrawal paths. Protocol mechanics and exit documentation are applicable, but a current periodic reserve report is not.",
+      "next_action": "retain_not_applicable"
+    },
+    {
+      "stablecoin_id": "sog_st_eurs",
+      "applicability": "report_expected_but_missing",
+      "reason_code": "active_fiat_reserve_verification_expected",
+      "evidence_ids": ["sog_src_eurs_transparency_batch_e", "sog_src_eurs_terms_batch_e"],
+      "review_note": "EURS is an active fiat-backed issuer product whose official materials describe reserve verification. A current transparency, attestation, or verification context should be represented in the reserve-report layer.",
+      "next_action": "add_primary_context"
+    },
+    {
+      "stablecoin_id": "sog_st_eurt",
+      "applicability": "source_status_unresolved",
+      "reason_code": "historical_reserve_archive_after_redemption_end_unresolved",
+      "evidence_ids": ["sog_src_eurt_legal_batch_e", "sog_src_eurt_history_batch_e"],
+      "review_note": "EURT was a fiat-backed Tether product and redemption ended in November 2025. Historical reserve or assurance material is relevant, but the exact durable EURT-specific archive has not been normalized.",
+      "next_action": "investigate_source_status"
+    },
+    {
+      "stablecoin_id": "sog_st_usdm",
+      "applicability": "report_expected_but_missing",
+      "reason_code": "active_protocol_reserve_disclosure_expected",
+      "evidence_ids": ["sog_src_usdm_reserve_batch_e", "sog_src_usdm_contract_batch_e"],
+      "review_note": "USDm is actively supported by the Mento Reserve and reserve-liquidity strategy. The existing primary reserve documentation is applicable and should be promoted into a canonical reserve-context row.",
+      "next_action": "add_primary_context"
+    },
+    {
+      "stablecoin_id": "sog_st_alusd",
+      "applicability": "not_applicable_by_design",
+      "reason_code": "yield_backed_debt_protocol_without_periodic_report",
+      "evidence_ids": ["sog_src_alusd_current_docs_batch_e", "sog_src_alusd_transmuter_batch_e"],
+      "review_note": "alUSD is protocol debt issued against yield-bearing collateral and settled through the Transmuter. Its backing is represented by protocol mechanics rather than a periodic issuer reserve report.",
+      "next_action": "retain_not_applicable"
+    }
+  ]
+}
