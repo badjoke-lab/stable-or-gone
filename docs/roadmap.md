@@ -4,17 +4,17 @@ Updated: 2026-06-20
 
 ## Purpose
 
-This file is the canonical execution and recovery schedule for the current SOG development phase.
+This file is the canonical execution and recovery schedule for SOG.
 
-When work is interrupted or transferred:
+Resume interrupted work in this order:
 
 1. Confirm the latest merged PR and current `main`.
 2. Read **Current position** and **Immediate next work**.
-3. Confirm counts and queues in `data/generated/registry-integrity-audit.json`.
-4. Check for an existing branch or PR for the named next work item.
+3. Validate `docs/migration/registry-v3-baseline.json`.
+4. Check for an existing branch or PR for the next named work item.
 5. Resume from the first incomplete item.
 
-Every roadmap-changing PR must update this file before merge. Every merge report must state the merge SHA, data changes, CI result, remaining queues, and next work item.
+Every roadmap-changing PR must update this file. Every merge report must state the merge SHA, data changes, CI result, remaining queues, and next work item.
 
 ## Current position
 
@@ -30,14 +30,14 @@ Public site:
 https://sog.badjoke-lab.com/
 ```
 
-Latest merged checkpoint:
+Latest quality checkpoint:
 
 ```text
-PR #82 — Add Phase 4 reserve context records
-Merge: 370e7cff58f0dc0a38f1918dd491915f121889eb
+PR #84 — Establish the 70-record quality baseline
+Status: active; becomes complete on merge
 ```
 
-Current canonical registry:
+Canonical registry baseline:
 
 ```text
 70 stable assets
@@ -58,7 +58,7 @@ Current canonical registry:
 70 income profiles
 ```
 
-Current integrity state:
+Quality baseline:
 
 ```text
 Candidate promotions:                    70 / 70
@@ -72,7 +72,15 @@ Deployment coverage:                   70 / 70
 Reserve-report context coverage:       57 / 70 informational
 Missing canonical launch dates:            31
 Historical records missing terminal date:   6
+Reserve applicability queue:                13
 All-unknown income profiles:                 0
+```
+
+Machine-readable baseline:
+
+```text
+docs/migration/registry-v3-baseline.json
+scripts/validate-registry-v3-baseline.mjs
 ```
 
 Completed quality checkpoints:
@@ -86,6 +94,8 @@ PR #79 — Resolve protocol stable-asset mechanics
 PR #80 — Complete income-profile classification
 PR #81 — Classify reserve-report applicability
 PR #82 — Add Phase 4 reserve context records
+PR #83 — Freeze reviewed reserve source status
+PR #84 — Establish the 70-record quality baseline
 ```
 
 Current development stage:
@@ -94,22 +104,23 @@ Current development stage:
 Phase 1 — Launch-date quality work: complete
 Phase 2 — Historical terminal-date work: complete
 Phase 3 — Income-profile completion: complete
-Phase 4A — Reserve-report applicability classification: complete
-Phase 4B — Five reviewed primary reserve-context records: complete in PR #82
-Phase 4C — FEI / HUSD / EURT source-status review: complete as reviewed unresolved
-Phase 5 — Final 70-record quality audit and baseline freeze: next
-Phase 6 — Controlled growth to 100: blocked until Phase 5 completes
+Phase 4 — Reserve-report applicability and evidence: complete
+Phase 5 — Final 70-record quality audit and baseline: complete on PR #84 merge
+Phase 6A — Controlled growth from 70 to 75: next
+Phase 6B — Growth beyond 75: blocked until production parity succeeds
 ```
 
 ## Immediate next work
 
+After PR #84 merges:
+
 ```text
-1. Open the final 70-record quality audit.
-2. Re-run collision, relationship, lifecycle, date, event/evidence, deployment, reserve, income, stats, and freshness checks.
-3. Freeze the Registry v3 quality baseline.
-4. Keep the 31 launch-date and 6 terminal-date queues explicit.
-5. Keep FEI, HUSD, and EURT as reviewed unresolved unless materially better primary evidence appears.
-6. Do not begin 70 → 75 growth until the baseline freeze is complete.
+1. Prepare one controlled five-asset candidate batch for 70 → 75.
+2. Apply duplicate, lineage, issuer, event, evidence, deployment, legal, reserve, and income checks.
+3. Promote only reviewed canonical assets.
+4. Update the Registry v3 baseline in the same growth PR.
+5. Stop at 75 records if Cloudflare access is still unavailable.
+6. Run full production parity before any 75 → 80 work.
 ```
 
 ## Cloudflare and public-parity position
@@ -122,19 +133,19 @@ Cloudflare operator access is currently unavailable. Do not attempt:
 - production parity execution
 - deployment polling requiring Cloudflare access
 
-GitHub-only data, validation, documentation, and CI work continues normally. Normal pull requests and `main` merges do not wait for Cloudflare Pages.
+GitHub-only data, validation, documentation, CI, and the 70-to-75 growth batch may continue.
 
-Issue #66 remains a deferred production-verification item and does not block the final 70-record repository audit.
+Issue #66 remains a deferred production-verification item. It does not block the 70-record baseline or preparation of the first growth batch, but no 75-to-80 work may begin until production parity is completed.
 
-Production parity becomes mandatory at growth checkpoints:
+Production parity gates:
 
 ```text
-70 → 75: full production parity audit before any 75 → 80 work
-75 → 80: production parity audit after merge
-80 → 85: production parity audit after merge
-85 → 90: production parity audit after merge
-90 → 95: production parity audit after merge
-95 → 100: final full production parity audit
+75 records: full production parity; block 75 → 80 on failure or unavailable access
+80 records: production parity after merge
+85 records: production parity after merge
+90 records: production parity after merge
+95 records: production parity after merge
+100 records: final full production parity and Issue #66 resolution
 ```
 
 ## Fixed execution order
@@ -145,57 +156,32 @@ Phase 1  Launch-date quality work
 Phase 2  Historical terminal-date work
 Phase 3  Income-profile completion
 Phase 4  Reserve-report applicability and evidence
-Phase 5  Final 70-record quality audit and baseline freeze
+Phase 5  Final 70-record quality audit and baseline
 Phase 6  Controlled growth from 70 to 100 with public-parity gates
 Phase 7  Continuous maintenance and growth
 ```
-
-Large-scale record growth must not start before Phase 5 is complete.
-
-# Phase 0 — Roadmap realignment
-
-Status: **complete in PR #67**
-
-Outcomes:
-
-- named work items are the canonical schedule
-- GitHub development is separated from production deployment
-- production parity checks occur at count-growth gates
-- Issue #66 remains a deferred verification item
 
 # Phase 1 — Launch-date quality work
 
 Status: **complete in PR #74**
 
-Frozen queue:
-
 ```text
-31 records
+31 unresolved records
 Category B — partial date only: 5
 Category C — boundary, version, or lineage conflict: 23
 Category D — adequate primary source absent: 3
 ```
 
-Source of truth:
+Source: `data/quality/launch-date-unresolved.json`
 
-```text
-data/quality/launch-date-unresolved.json
-```
-
-Rules:
-
-- do not invent day-level precision
-- retain `launch_date: null` where the boundary is unresolved
-- preserve supported range, rejected shortcut dates, and future review target
-- canonical null set must exactly match the queue
+Do not invent day-level precision or coerce month/year evidence into a canonical date.
 
 # Phase 2 — Historical terminal-date work
 
 Status: **complete in PR #77**
 
-Frozen queue:
-
 ```text
+6 unresolved records
 BAC
 DSD
 ESD
@@ -204,17 +190,9 @@ Mountain USDM
 USDN
 ```
 
-Source of truth:
+Source: `data/quality/terminal-date-unresolved.json`
 
-```text
-data/quality/terminal-date-unresolved.json
-```
-
-Rules:
-
-- depeg or collapse is not automatically discontinuation
-- distinguish mint stop, redemption stop, migration, abandonment, formal shutdown, and last operation
-- retain `null` where the terminal boundary is unproven
+Depeg, migration start, last commit, and retrospective source date are not default terminal dates.
 
 # Phase 3 — Income-profile completion
 
@@ -225,62 +203,24 @@ All-unknown income profiles: 41 → 0
 Canonical income profiles:   70 unchanged
 ```
 
-Rules:
-
-- classify mechanics, not live yield or rankings
-- issuer reserve earnings are not token-holder income
-- external lending, pools, campaigns, wrappers, and savings tokens remain separate
+Classify mechanics rather than live yield. External lending, pools, wrappers, and issuer reserve earnings remain separate from base-token holder income.
 
 # Phase 4 — Reserve-report applicability and evidence
 
-Status: **complete**
-
-## Phase 4A — Applicability classification
-
-Completed in PR #81.
-
-Initial classification:
+Status: **complete in PR #83**
 
 ```text
-report_expected_but_missing: 5
-not_applicable_by_design:    10
-source_status_unresolved:     3
+Canonical reserve-context rows:        77
+Reserve-context coverage:            57/70 informational
+Expected but missing:                    0
+Not applicable by design:               10
+Reviewed source-status unresolved:       3
+Placeholder reserve rows:                0
 ```
 
-## Phase 4B — Reviewed primary context
+The three reviewed unresolved items are FEI, HUSD, and EURT.
 
-Completed in PR #82.
-
-Assets:
-
-```text
-NUON
-USD0
-USR
-EURS
-USDm
-```
-
-Result:
-
-```text
-Reserve-report/context records: 72 → 77
-Context coverage:               52/70 → 57/70
-Expected-but-missing:            5 → 0
-Remaining queue:                18 → 13
-```
-
-## Phase 4C — Historical source status
-
-Status: **complete as reviewed unresolved**
-
-```text
-FEI  — participant-specific FEI-to-DAI execution exists; full final-redemption completion is unproven
-HUSD — January 2022 accountant attestation is identified; original signed report is unrecovered
-EURT — consolidated Tether reporting exists; EURT-specific reserve and liability scope is unproven
-```
-
-Source of truth:
+Sources:
 
 ```text
 data/quality/reserve-report-applicability.json
@@ -288,44 +228,19 @@ docs/audits/reserve-report-applicability-review.md
 docs/audits/reserve-source-status-review.md
 ```
 
-Phase 4 final state:
+# Phase 5 — Final 70-record quality audit and baseline
+
+Status: **complete on PR #84 merge**
+
+Sources:
 
 ```text
-Applicable missing context:         0
-Not-applicable decisions:          10 documented
-Reviewed unresolved source status:  3 frozen
-Reserve-context coverage:          57 / 70 informational
-Placeholder reserve rows:           0
-```
-
-# Phase 5 — Final 70-record quality audit and baseline freeze
-
-Status: **next**
-
-Audit all 70 records for:
-
-- ID, name, symbol, alias, and slug collisions
-- issuer and organization relationships
-- status and lifecycle consistency
-- launch and terminal-date consistency
-- event and evidence relations
-- event `source_count`
-- deployment identity and canonicality
-- reserve-report applicability
-- income-profile classification
-- generated statistics and deterministic output
-- stale verification dates
-
-Freeze or update:
-
-```text
-docs/audits/registry-70-quality-baseline.md
 docs/migration/registry-v3-baseline.json
-data/generated/registry-stats.json
-data/generated/registry-integrity-audit.json
+docs/audits/registry-70-quality-baseline.md
+scripts/validate-registry-v3-baseline.mjs
 ```
 
-Completion conditions:
+Completion requirements:
 
 ```text
 Critical findings:              0
@@ -338,20 +253,22 @@ Unresolved queues:              explicit and exact
 Normal CI workflows:            all successful
 ```
 
+Any intentional record growth or queue resolution must update the canonical data, generated outputs, and baseline in one reviewed PR.
+
 # Phase 6 — Controlled growth from 70 to 100
 
-Status: **blocked until Phase 5 completes**
+Status: **Phase 6A may begin after PR #84; later growth is gated**
 
 Default batch size: five canonical assets.
 
-| Growth checkpoint | Required gate |
+| Checkpoint | Required gate |
 |---:|---|
-| 75 | full production parity audit; block 80 work on failure |
-| 80 | production parity audit |
-| 85 | production parity audit |
-| 90 | production parity audit |
-| 95 | production parity audit |
-| 100 | final full production parity audit and Issue #66 resolution |
+| 75 | full production parity; block further growth if unavailable or failing |
+| 80 | production parity after merge |
+| 85 | production parity after merge |
+| 90 | production parity after merge |
+| 95 | production parity after merge |
+| 100 | final full parity and Issue #66 resolution |
 
 Every new canonical asset must include the applicable entity, organization, relationship, classification, profile, event, evidence, unknowns, deployment, legal, reserve-component, and income layers.
 
