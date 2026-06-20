@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_012",
+  "reviewed_at": "2026-06-20",
+  "status": "reviewed_not_promoted",
+  "canonical_assets": 70,
+  "policy": {
+    "canonical_write_allowed": false,
+    "manual_evidence_review_required": true,
+    "full_layer_draft_required": true,
+    "unsupported_day_precision_forbidden": true,
+    "yield_wrapper_is_not_alias": true,
+    "production_parity_required_at_75": true
+  },
+  "records": [
+    {
+      "candidate_id": "sog_cand_000071",
+      "proposed_record_id": "sog_st_m0m",
+      "name": "M",
+      "symbol": "M",
+      "slug": "m0-m",
+      "proposed_status": "active",
+      "launch_date": "2024-07-28",
+      "launch_precision": "day",
+      "identity_decision": "M is the M0 base token; M0 Extensions are related products, not aliases.",
+      "backing_decision": "Approved offchain collateral under the Minter and validator framework.",
+      "redemption_decision": "Minter burn mechanics are documented; universal holder redemption into collateral is not established.",
+      "income_decision": "Selective native rebasing applies to approved earning balances; non-earning balances remain static.",
+      "deployment_decision": "Canonical token address and cross-chain rules remain required.",
+      "primary_sources": [
+        "https://docs.m0.org/protocol/m-token",
+        "https://docs.m0.org/protocol/minter-gateway",
+        "https://www.m0.org/blog/the-first-m-mint"
+      ],
+      "blocking_unknowns": ["organization and SPV map", "canonical deployment", "holder redemption boundary", "reserve-report source"],
+      "promotion_readiness": "needs_layer_draft"
+    },
+    {
+      "candidate_id": "sog_cand_000072",
+      "proposed_record_id": "sog_st_usdf",
+      "name": "Falcon USD",
+      "symbol": "USDf",
+      "slug": "falcon-usdf",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "year",
+      "identity_decision": "USDf is the base synthetic dollar; sUSDf is a separate yield representation.",
+      "backing_decision": "Overcollateralized stablecoin and non-stablecoin collateral with hedging and custody arrangements.",
+      "redemption_decision": "Direct redemption is for verified and whitelisted participants; official material shows a USD 10,000 minimum.",
+      "income_decision": "No intrinsic holder income is established for base USDf.",
+      "deployment_decision": "Ethereum contract is known; complete canonical deployment inventory remains required.",
+      "primary_sources": [
+        "https://docs.falcon.finance/mechanism/usdf-synthetic-dollar",
+        "https://docs.falcon.finance/mechanism/usdf-synthetic-dollar/usdf-peg-stability",
+        "https://docs.falcon.finance/resources/transparency-and-attestations",
+        "https://falcon.finance/newsroom/falcon-finance-launches-transparency-dashboard"
+      ],
+      "blocking_unknowns": ["exact launch boundary", "legal and custody map", "deployment inventory", "assurance normalization"],
+      "promotion_readiness": "needs_layer_draft"
+    },
+    {
+      "candidate_id": "sog_cand_000073",
+      "proposed_record_id": "sog_st_usx",
+      "name": "dForce USX",
+      "symbol": "USX",
+      "slug": "dforce-usx",
+      "proposed_status": "active",
+      "launch_date": "2021-06-02",
+      "launch_precision": "day",
+      "identity_decision": "Keep one USX token identity across the dForce-to-USX Finance brand transition unless contract evidence proves replacement; sUSX is separate.",
+      "backing_decision": "Overcollateralized crypto assets plus supported stablecoin mint and redemption paths.",
+      "redemption_decision": "Protocol documentation describes one-to-one mint and redemption with supported stablecoins.",
+      "income_decision": "Current documentation calls USX yield-bearing while also distinguishing sUSX; base-token accrual remains unresolved.",
+      "deployment_decision": "Ethereum origin and omnichain deployments require a canonical contract map; Unitus sunset is not a global shutdown.",
+      "primary_sources": [
+        "https://dforce.network/blog/dforce-lending-synthetic-asset-protocol-officially-launched-on-ethereum-mainnet",
+        "https://docs.dforce.network/ecosystem/usx-stablecoin",
+        "https://docs.dforce.network/dapps/usx",
+        "https://app.dforce.network/"
+      ],
+      "blocking_unknowns": ["brand and organization lineage", "base-token income", "omnichain deployment set", "Unitus sunset scope"],
+      "promotion_readiness": "needs_identity_and_income_resolution"
+    },
+    {
+      "candidate_id": "sog_cand_000074",
+      "proposed_record_id": "sog_st_usdz",
+      "name": "Anzen USDz",
+      "symbol": "USDz",
+      "slug": "anzen-usdz",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "month",
+      "identity_decision": "USDz is the base RWA-backed token; sUSDz is separate.",
+      "backing_decision": "Tokenized private-credit and asset-backed collateral represented through SPCT structures.",
+      "redemption_decision": "Direct mint and redemption are limited to approved institutional parties; retail holders generally use market liquidity.",
+      "income_decision": "Base USDz does not automatically pass through RWA yield; sUSDz is the staking representation.",
+      "deployment_decision": "Ethereum and Arbitrum contracts are documented; Base and Blast references require reconciliation.",
+      "primary_sources": [
+        "https://docs.anzen.finance/usdz-101/overview",
+        "https://docs.anzen.finance/usdz-101/transparency",
+        "https://docs.anzen.finance/usdz-101/backing-assets-collateral/eligibility-overview",
+        "https://docs.anzen.finance/developers/smart-contracts"
+      ],
+      "blocking_unknowns": ["exact launch day", "legal issuer and SPV map", "complete deployment inventory", "collateral-report normalization"],
+      "promotion_readiness": "needs_layer_draft"
+    },
+    {
+      "candidate_id": "sog_cand_000075",
+      "proposed_record_id": "sog_st_usda",
+      "name": "Avalon USDa",
+      "symbol": "USDa",
+      "slug": "avalon-usda",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "month",
+      "identity_decision": "Avalon USDa is the base Bitcoin-backed CDP token; staked and lending receipts are separate.",
+      "backing_decision": "Bitcoin and supported crypto collateral in CDP and CeDeFi structures.",
+      "redemption_decision": "Borrowers repay USDa to close debt positions; universal holder redemption into BTC collateral is not established.",
+      "income_decision": "Official documentation calls USDa yield-bearing, but the base-token accrual mechanism must be normalized.",
+      "deployment_decision": "Official documentation describes multiple networks; canonical contracts and bridge rules remain required.",
+      "primary_sources": [
+        "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda",
+        "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda/risk-management",
+        "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda/usda-audits",
+        "https://docs.avalonfinance.xyz/about-us"
+      ],
+      "blocking_unknowns": ["exact launch day", "legal and custody map", "base-token income", "holder redemption boundary", "deployment inventory"],
+      "promotion_readiness": "needs_income_and_legal_resolution"
+    }
+  ]
+}
