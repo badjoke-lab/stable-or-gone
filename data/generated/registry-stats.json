@@ -11,7 +11,7 @@
     "events": 97,
     "event_details": 97,
     "evidence": 286,
-    "reserve_reports": 72,
+    "reserve_reports": 77,
     "known_unknowns": 153,
     "regulatory_notes": 9,
     "deployments": 101,
@@ -241,9 +241,9 @@
       "share": 1
     },
     "reserve_reports": {
-      "covered": 52,
+      "covered": 57,
       "total": 70,
-      "share": 0.7429
+      "share": 0.8143
     },
     "known_unknowns": {
       "covered": 70,
