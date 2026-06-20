@@ -3,7 +3,7 @@
 - Audited at: 2026-06-17
 - Baseline: `sog_registry_v2_post_batch_k_2026_06_17`
 - Canonical stable assets: **70**
-- Promoted candidates: **70 / 70**
+- Promoted candidates: **70 / 75**
 - Critical findings: **0**
 - Warnings: **0**
 

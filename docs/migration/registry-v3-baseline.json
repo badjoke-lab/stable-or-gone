@@ -46,7 +46,7 @@
   "quality": {
     "canonical_assets": 70,
     "candidate_promotions": 70,
-    "pending_candidates": 0,
+    "pending_candidates": 5,
     "critical_findings": 0,
     "warnings": 0,
     "canonical_name_collisions": 0,

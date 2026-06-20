@@ -1,14 +1,15 @@
 {
-  "schema_version": "1.0",
-  "status": "growth_target_reached",
+  "schema_version": "1.1",
+  "status": "growth_batch_12_prepared",
   "candidate_files": [
     "data/candidate-stable-assets.json",
-    "data/candidate-stable-assets-growth-70.json"
+    "data/candidate-stable-assets-growth-70.json",
+    "data/candidate-stable-assets-growth-75.json"
   ],
   "protected_minimums": {
-    "total_candidates": 70,
+    "total_candidates": 75,
     "promoted_candidates": 70,
-    "pending_candidates": 0
+    "pending_candidates": 5
   },
   "planned_batches": {
     "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
@@ -16,12 +17,16 @@
     "batch_008": {"minimum_candidates": 5, "theme": "yield-bearing wrappers"},
     "batch_009": {"minimum_candidates": 5, "theme": "regional fiat stablecoins"},
     "batch_010": {"minimum_candidates": 5, "theme": "regulated EUR and CHF stablecoins"},
-    "batch_011": {"minimum_candidates": 5, "theme": "historical failures"}
+    "batch_011": {"minimum_candidates": 5, "theme": "historical failures"},
+    "batch_012": {"minimum_candidates": 5, "theme": "current modular, synthetic, protocol, RWA, and BTC-backed USD assets"}
   },
   "promotion_policy": {
     "candidate_is_not_canonical": true,
     "manual_evidence_review_required": true,
     "identity_deduplication_required": true,
-    "promotion_occurs_in_separate_batch_prs": true
+    "full_required_layer_draft_required": true,
+    "promotion_occurs_in_separate_batch_prs": true,
+    "production_parity_required_at_75": true,
+    "no_75_to_80_work_without_production_parity": true
   }
 }
