@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-19
+Updated: 2026-06-20
 
 ## Purpose
 
@@ -14,25 +14,9 @@ When work is interrupted or transferred, resume in this order:
 4. Check whether the named next work item already has an open branch or PR.
 5. Continue from the first incomplete named work item.
 
-Work item names such as `Launch-date Batch O` are canonical. GitHub PR numbers are assigned only when a PR is opened and must not be used as future scheduling identifiers.
-
-Every roadmap-changing PR must update this file before merge. After every merge, the implementation report must state:
-
-- the full schedule
-- the current position
-- the merged PR and merge SHA
-- exact data and coverage changes
-- validation and CI results
-- remaining queues
-- the next named work item
+Every roadmap-changing PR must update this file before merge. After every merge, the implementation report must state the current position, merge SHA, exact data changes, CI result, remaining queues, and next named work item.
 
 ## Current position
-
-Public site:
-
-```text
-https://sog.badjoke-lab.com/
-```
 
 Repository:
 
@@ -40,14 +24,20 @@ Repository:
 badjoke-lab/stable-or-gone
 ```
 
-Latest completed data checkpoint:
+Public site:
 
 ```text
-PR #70 — Launch-date Batch P
-Merge: ca70f6ba470fdcde638c7546d9dad64d278a7dfb
+https://sog.badjoke-lab.com/
 ```
 
-Current canonical registry checkpoint:
+Latest completed quality checkpoint:
+
+```text
+PR #81 — Classify reserve-report applicability
+Merge: bd50ba76b1e9c6cf8a6bb8f21499e2f7443f5a5c
+```
+
+Current canonical registry checkpoint after the active Phase 4B branch:
 
 ```text
 70 stable assets
@@ -58,7 +48,7 @@ Current canonical registry checkpoint:
 97 events
 97 Event v2 detail records
 286 evidence records
-72 reserve-report or reserve-context records
+77 reserve-report or reserve-context records
 153 known unknowns
 9 regulatory notes
 101 deployments
@@ -79,34 +69,22 @@ Stale verification records:               0
 Required-layer coverage:              70 / 70
 Event coverage:                        70 / 70
 Deployment coverage:                   70 / 70
-Reserve-report context coverage:       52 / 70 informational
+Reserve-report context coverage:       57 / 70 informational
 Missing canonical launch dates:            31
 Historical records missing terminal date:   6
 All-unknown income profiles:                 0
 ```
 
-Latest completed record-quality work:
+Completed record-quality work:
 
 ```text
-PR #55 — Add official USDe launch date
-PR #56 — Anchor the 70-to-100 execution roadmap
-PR #57 — Audit and classify the remaining launch-date queue
-PR #69 — Complete Launch-date Batch O
-PR #70 — Complete Launch-date Batch P
 PR #74 — Freeze unresolved launch-date queue
 PR #75 — Audit historical terminal-date boundaries
 PR #77 — Freeze historical terminal-date queue
 PR #78 — Resolve fiat-backed income profiles
 PR #79 — Resolve protocol stable-asset mechanics
 PR #80 — Complete income-profile classification
-```
-
-Emergency public-consistency repair completed afterward:
-
-```text
-PR #59 — Fix public HTML and canonical count consistency
-PR #62 — Fix reserve context validator
-PR #64 — Refresh Cloudflare Pages deployment
+PR #81 — Classify reserve-report applicability
 ```
 
 Current development stage:
@@ -115,27 +93,42 @@ Current development stage:
 Phase 1 — Launch-date quality work: complete in PR #74
 Phase 2 — Historical terminal-date work: complete in PR #77
 Phase 3 — Income-profile completion: complete in PR #80
-Phase 4 — Reserve-report applicability and evidence: next
+Phase 4A — Reserve-report applicability classification: complete in PR #81
+Phase 4B — Add five reviewed primary reserve-context records: active
+Phase 4C — Investigate FEI / HUSD / EURT source status: next
+Phase 5 — Final 70-record quality audit and baseline freeze: pending
 ```
 
-Current next action:
+## Immediate next work
 
 ```text
-1. Begin reserve-report applicability classification
-2. Separate expected, not-applicable, and unresolved coverage
+1. Complete and merge Phase 4B for NUON, USD0, USR, EURS, and USDm.
+2. Confirm reserve-report/context records 72 → 77.
+3. Confirm informational coverage 52/70 → 57/70.
+4. Confirm the applicability queue 18 → 13.
+5. Investigate FEI, HUSD, and EURT historical source status.
+6. Begin the final 70-record quality audit only after Phase 4 is complete.
 ```
 
 ## Cloudflare and public-parity position
 
-All deployment classifications and timing follow `docs/deployment-policy.md`. Normal pull requests and normal `main` merges do not wait for Cloudflare Pages.
+All deployment classifications and timing follow `docs/deployment-policy.md`.
 
-Issue #66 remains open as a deferred verification item. It no longer blocks 70-record quality work.
+Cloudflare operator access is currently unavailable. Do not attempt:
 
-Cloudflare operator access is temporarily unavailable. Do not attempt production deployment, dashboard changes, credential setup, or production parity execution until the operator reports that access has been restored. GitHub-only quality work continues normally.
+- production deployment
+- dashboard changes
+- credential or secret setup
+- production parity execution
+- deployment polling that requires Cloudflare access
 
-The repository build, public consistency validator, production checker, and CI are implemented. The production deployment concern must be rechecked when the public record count changes, because that is the highest-risk point for HTML, JSON, manifest, sitemap, and deployment commit drift.
+GitHub-only data, validation, documentation, and CI work continues normally.
 
-Required parity gates:
+Normal pull requests and normal `main` merges do not wait for Cloudflare Pages. Production verification remains deferred until operator access returns.
+
+Issue #66 remains open as a deferred verification item and does not block 70-record quality work.
+
+Production parity becomes mandatory at record-growth checkpoints:
 
 ```text
 70 → 75: full production parity audit before any 75 → 80 work
@@ -146,17 +139,7 @@ Required parity gates:
 95 → 100: final full production parity audit
 ```
 
-At every gate verify:
-
-- deployed commit matches the latest merged `main`
-- home counts match version and manifest counts
-- stablecoin, organization, and event list counts match canonical data
-- detail-link counts match the registry counts
-- sitemap detail-route counts match canonical data
-- canonical, hreflang, OGP, and JSON-LD checks pass
-- obsolete count markers are absent
-
-If any parity gate fails, the next growth batch is blocked until production matches the canonical repository state.
+At every gate verify deployed commit, home counts, manifest counts, detail routes, sitemap counts, canonical metadata, hreflang, OGP, JSON-LD, and obsolete count markers.
 
 ## Fixed execution order
 
@@ -171,139 +154,50 @@ Phase 6  Controlled growth from 70 to 100 with public-parity gates
 Phase 7  Continuous maintenance and growth
 ```
 
-Large-scale record growth must not start before Phase 5 is complete. Urgent corrections, broken-link repairs, current status changes, security fixes, and build repairs may interrupt the order, but the roadmap must be updated before normal work resumes.
+Large-scale record growth must not start before Phase 5 is complete. Urgent corrections, security fixes, broken-link repairs, status changes, and build repairs may interrupt the order, but the roadmap must be updated before normal work resumes.
 
-# Phase 0 — Roadmap realignment after emergency repair
-
-Target: 2026-06-19
-
-## Roadmap realignment
+# Phase 0 — Roadmap realignment
 
 Status: **complete in PR #67**
 
-Scope:
+Completed outcomes:
 
-- remove future scheduling dependence on obsolete GitHub PR numbers
-- retain named work items as the canonical schedule
-- record the emergency public-consistency repair as completed
-- move Cloudflare production verification to count-growth gates
-- keep Issue #66 open as deferred verification rather than a current blocker
-- restore `Launch-date Batch O` as the next data implementation item
-
-Completion conditions:
-
-- this roadmap reflects the current repository and queue state
-- Phase 1 through Phase 7 remain explicit
-- the public-parity gate is mandatory after every growth checkpoint
-- normal CI succeeds
+- restored named work items as the canonical schedule
+- separated GitHub development from production deployment
+- moved production parity checks to count-growth gates
+- kept Issue #66 as a deferred verification item
 
 # Phase 1 — Launch-date quality work
 
-Target window: 2026-06-19 to 2026-06-24
-
-Current frozen unresolved queue: **31 records**
-
-The objective is not to force all records to have a day-level date. The objective is to distinguish confirmed dates from unresolved dates without inventing precision.
-
-The completed launch-date review classified the queue as:
-
-```text
-A. Day-level date supported:                         7
-B. Only month or year currently supported:           5
-C. Multiple launch definitions or versions exist:   23
-D. No adequate primary launch source found:           3
-```
-
-## Launch-date Batch O
-
-Status: **complete in PR #69**
-
-Apply the five cleanest category-A dates:
-
-```text
-crvUSD   2023-05-14
-EURCV    2023-04-20
-EURI     2024-08-26
-EURQ     2024-11-18
-USDY     2023-09-07
-```
-
-Each promoted date must update all applicable layers:
-
-```text
-canonical stable-asset record
-launch event
-event detail
-evidence and evidence relations
-event source_count
-registry statistics
-integrity audit
-remaining-launch-date review
-roadmap current position
-```
-
-Expected queue result:
-
-```text
-Missing canonical launch dates: 38 → 33
-Canonical stable-asset count:    70 unchanged
-```
-
-## Launch-date Batch P
-
-Status: **complete in PR #70**
-
-Apply the remaining two currently approved category-A dates:
-
-```text
-sUSDS   2024-09-18
-USDtb   2024-12-16
-```
-
-These require careful lineage, activation-boundary, and publication-metadata handling.
-
-Expected queue result:
-
-```text
-Missing canonical launch dates: 33 → 31
-```
-
-## Launch-date unresolved queue freeze
-
 Status: **complete in PR #74**
 
-The remaining category B, C, and D records are frozen in the machine-readable queue:
+Frozen unresolved queue:
+
+```text
+31 records
+Category B — partial date only: 5
+Category C — boundary, version, or lineage conflict: 23
+Category D — adequate primary source absent: 3
+```
+
+Source of truth:
 
 ```text
 data/quality/launch-date-unresolved.json
 ```
 
-The normal CI workflow and full build run `npm run validate:launch-queue` and require the canonical `launch_date: null` set to match the queue exactly.
+Rules:
 
-Recheck the remaining records only when new primary evidence resolves the exact launch boundary. Otherwise retain `launch_date: null` and preserve:
-
-- the strongest supported date range
-- the unresolved launch definition
-- the rejected shortcut dates
-- the future review target
-
-Phase completion conditions:
-
-```text
-Missing launch dates:             31 frozen
-Category B / C / D:                5 / 23 / 3
-All remaining null dates:         machine-readable and documented
-Canonical null set vs queue:      exact match
-Artificial month/year-first date: 0
-Critical findings:                0
-Warnings:                         0
-```
+- do not invent day-level precision
+- retain `launch_date: null` where the exact boundary remains unresolved
+- preserve strongest supported range, rejected shortcut dates, and future review target
+- canonical null set must exactly match the queue
 
 # Phase 2 — Historical terminal-date work
 
-Target window: 2026-06-25 to 2026-06-28
+Status: **complete in PR #77**
 
-Current queue:
+Frozen unresolved queue:
 
 ```text
 BAC
@@ -314,210 +208,119 @@ Mountain USDM
 USDN
 ```
 
-## Historical terminal-date review
-
-Status: **complete in PR #75**
-
-Review source:
-
-```text
-docs/audits/historical-terminal-date-review.md
-```
-
-Current review decision:
-
-```text
-BAC   retain null — no first-party shutdown or cessation date recovered
-DSD   retain null — April 2021 V2 activity is not a shutdown date
-ESD   retain null — 2021-08-02 migration start is not final cessation
-GYEN  retain null — wind-down started while redemption remained open
-USDM  retain null — Phase 3 on-chain exit continues after issuer-platform closure
-USDN  retain null — XTN transition confirmed without effective date
-```
-
-For each asset, distinguish:
-
-- depeg start
-- protocol or frontend abandonment
-- minting stop
-- redemption stop
-- governance abandonment
-- migration or rebrand date
-- last confirmed operational date
-- first confirmed non-operational date
-- formal shutdown announcement
-
-A market collapse date must not automatically become `discontinued_date`.
-
-## Resolve or freeze terminal-date unknowns
-
-Status: **complete in this change**
-
-Machine-readable queue:
+Source of truth:
 
 ```text
 data/quality/terminal-date-unresolved.json
 ```
 
-Validation command:
+Rules:
 
-```text
-npm run validate:terminal-queue
-```
-
-All six canonical terminal-status records remain `null`, with their strongest known boundary, unresolved definition, rejected shortcut dates, and future review target recorded explicitly. GYEN and Mountain USDM were added after validation exposed the stale four-record planning count.
-
-Apply exact terminal dates only where supported. Otherwise retain `null` and record:
-
-- last confirmed operational date
-- first confirmed inactive date
-- missing source or unresolved definition
-- future source-review target
-
-Phase completion conditions:
-
-```text
-Historical null terminal dates: 6
-Machine-readable explanations:  6 / 6
-Canonical null set vs queue:     exact match
-Unexplained terminal-date gaps:  0
-Invented shutdown dates:         0
-```
+- a depeg or collapse date is not automatically a discontinuation date
+- distinguish mint stop, redemption stop, migration, abandonment, shutdown announcement, and last operational date
+- retain `null` where a terminal boundary is not proven
 
 # Phase 3 — Income-profile completion
 
-Target window: 2026-06-29 to 2026-07-08
-
-Current queue: **0 all-unknown income profiles after PR #80**
-
-The objective is to classify mechanics, not to publish live yield figures or rank assets.
-
-## Fiat-backed income profiles
-
-Status: **complete in PR #78**
-
-Decision record:
-
-```text
-docs/audits/fiat-backed-income-profile-batch.md
-```
-
-Resolved assets:
-
-```text
-USDT  USDC  TUSD  FDUSD  PYUSD
-GUSD  RLUSD EURC  USDP   USDG
-```
-
-All ten canonical tokens are classified as having no native token-holder income. Issuer reserve earnings, exchange campaigns, partner incentives, and external lending rates are not treated as intrinsic token yield.
-
-Queue impact:
-
-```text
-All-unknown income profiles: 41 → 31
-```
-
-Prioritize issuer-backed assets such as USDT, USDC, PYUSD, FDUSD, RLUSD, EURC, USDP, USDG, TUSD, and GUSD.
-
-Determine:
-
-- whether the base token has native holder yield
-- whether reserve income is retained by the issuer
-- whether a separate yield-bearing product exists
-- whether yield requires an external platform
-- whether the correct classification is `none`, `separate_asset`, or `unknown`
-
-## Protocol stablecoin income profiles
-
-Status: **complete in PR #79 and PR #80**
-
-Prioritize DAI, LUSD, crvUSD, GHO, FRAX, RAI, BOLD, alUSD, MIM, and similar protocol assets.
-
-Separate:
-
-- base-asset mechanics
-- savings or staking modules
-- protocol revenue distribution
-- collateral yield
-- borrowing and redemption fees
-- separate wrappers or receipt tokens
-
-## Synthetic and yield-related profiles
-
 Status: **complete in PR #80**
-
-Decision record:
-
-```text
-docs/audits/income-profile-phase3-final-batch.md
-```
-
-Prioritize USDe, sUSDe, sDAI, sUSDS, USD0, USR, sUSD, SPOT, and NUON.
-
-Do not merge temporary campaign rewards, secondary DeFi yield, and native asset income into one field.
-
-## Historical, commodity, and edge profiles
-
-Status: **complete in PR #80**
-
-Cover failed, migrated, commodity-backed, and otherwise non-standard assets.
-
-Phase completion target:
 
 ```text
 All-unknown income profiles: 41 → 0
+Canonical income profiles:   70 unchanged
 ```
 
-A profile may still contain unknown fields, but it must identify at least one of:
+Rules:
 
-```text
-no native yield
-separate yield-bearing derivative
-protocol-dependent income
-historical-only income
-not applicable
-source unresolved
-```
+- classify mechanics, not live yield or rankings
+- issuer reserve earnings are not token-holder income
+- external lending, pool rewards, campaigns, wrappers, and savings tokens remain separate from base-token mechanics
+- a profile may contain unknown fields but cannot remain entirely unknown
 
 # Phase 4 — Reserve-report applicability and evidence
 
-Target window: 2026-07-09 to 2026-07-12
+## Phase 4A — Applicability classification
 
-Current context coverage: **52 / 70**
+Status: **complete in PR #81**
 
-This layer is informational and is not expected for every asset.
-
-## Classify reserve-report applicability
-
-Classify uncovered records as:
+Initial classification:
 
 ```text
-report expected but missing
-not applicable by design
-source status unresolved
+report_expected_but_missing: 5
+not_applicable_by_design:    10
+source_status_unresolved:     3
+Total:                       18
 ```
 
-Required backing structure remains represented by `reserve_components`, which already covers 70 / 70 assets.
+Source of truth:
 
-## Add missing applicable reserve evidence
+```text
+data/quality/reserve-report-applicability.json
+docs/audits/reserve-report-applicability-review.md
+```
 
-Add only real issuer reports, attestations, audit archives, transparency dashboards, protocol collateral disclosures, or relevant historical reserve-intervention records.
+## Phase 4B — Add reviewed primary context
 
-Do not create placeholder reserve-report rows merely to reach 70 / 70.
+Status: **active**
 
-Phase completion conditions:
+Assets:
 
-- applicability is explicit
-- applicable missing evidence is reduced as far as primary sources allow
-- informational coverage remains visible
-- critical findings remain 0
-- warnings remain 0
+```text
+NUON
+USD0
+USR
+EURS
+USDm
+```
+
+Expected result:
+
+```text
+Reserve-report/context records: 72 → 77
+Context coverage:               52/70 → 57/70
+Expected-but-missing queue:      5 → 0
+Total remaining queue:          18 → 13
+```
+
+Boundaries:
+
+- use only existing reviewed primary disclosures
+- do not invent report dates, assurance firms, reserve values, or attestation results
+- identify protocol or issuer disclosure separately from independent assurance
+- do not create placeholder rows to force 70/70 coverage
+
+## Phase 4C — Resolve historical source status
+
+Status: **next**
+
+Targets:
+
+```text
+FEI  — final reserve distribution and redemption execution
+HUSD — historical reserve or attestation archive
+EURT — product-specific historical reserve or assurance archive
+```
+
+Completion rule:
+
+- add a canonical context row only when a durable, product-specific source is recovered
+- do not copy another product's assurance coverage
+- do not treat governance approval as completed execution
+- retain unresolved status when the source boundary remains unproven
+
+Phase 4 completion conditions:
+
+```text
+Applicable missing context:        0
+Not-applicable decisions:         10 documented
+Unresolved source-status records:  3 or fewer, explicitly documented
+Critical findings:                 0
+Warnings:                          0
+Placeholder reserve rows:          0
+```
 
 # Phase 5 — Final 70-record quality audit and baseline freeze
 
-Target window: 2026-07-13 to 2026-07-16
-
-## Final 70-record quality audit
+Status: **pending**
 
 Audit all 70 records for:
 
@@ -534,9 +337,7 @@ Audit all 70 records for:
 - deterministic integrity output
 - stale verification dates
 
-## Freeze the 70-record quality baseline
-
-Update or create:
+Freeze or update:
 
 ```text
 docs/audits/registry-70-quality-baseline.md
@@ -545,7 +346,7 @@ data/generated/registry-stats.json
 data/generated/registry-integrity-audit.json
 ```
 
-Phase completion conditions:
+Completion conditions:
 
 ```text
 Critical findings:              0
@@ -555,27 +356,24 @@ Canonical collisions:           0
 Alias warnings:                 0
 All-unknown income profiles:    0
 Unresolved date records:        explicitly documented
+Reserve applicability queue:    exact canonical match
 Normal CI workflows:            all successful
 ```
 
 # Phase 6 — Controlled growth from 70 to 100
 
-Target window: 2026-07-17 to 2026-08-10
+Status: **blocked until Phase 5 completes**
 
 Default batch size: five canonical assets.
 
-Growth work item names will be assigned when each candidate set is frozen. Names must not conflict with the launch-date batches.
-
-| Growth checkpoint | Target window | Required post-merge gate |
-|---:|---|---|
-| 75 assets | 2026-07-17 to 2026-07-20 | full production parity audit; block 80 work on failure |
-| 80 assets | 2026-07-21 to 2026-07-24 | production parity audit |
-| 85 assets | 2026-07-25 to 2026-07-28 | production parity audit |
-| 90 assets | 2026-07-29 to 2026-08-01 | production parity audit |
-| 95 assets | 2026-08-02 to 2026-08-05 | production parity audit |
-| 100 assets | 2026-08-06 to 2026-08-10 | final full production parity audit and Issue #66 resolution |
-
-Complex batches may contain fewer records when they involve collapses, migrations, complex legal structures, disputed identity, or extensive deployment history.
+| Growth checkpoint | Required post-merge gate |
+|---:|---|
+| 75 assets | full production parity audit; block 80 work on failure |
+| 80 assets | production parity audit |
+| 85 assets | production parity audit |
+| 90 assets | production parity audit |
+| 95 assets | production parity audit |
+| 100 assets | final full production parity audit and Issue #66 resolution |
 
 Every new canonical asset must include, where applicable:
 
@@ -587,7 +385,7 @@ classification
 reserve/redemption profile
 at least one lifecycle event
 event detail
-at least two useful evidence records
+useful evidence records
 known unknowns
 deployments
 legal profile
@@ -595,21 +393,13 @@ reserve components
 income profile
 ```
 
-Growth priority order:
-
-1. clearly issued and regulated fiat-backed assets
-2. historically important failures and shutdowns
-3. underrepresented non-USD reference currencies
-4. established protocol and synthetic stable assets
-5. migrated, rebranded, wound-down, and discontinued assets
-
 Do not promote simple wrappers, bridged copies, LP tokens, vault shares, test tokens, duplicate chain deployments, or announcement-only projects as separate canonical assets by default.
 
 # Phase 7 — Continuous maintenance and growth
 
-Target start: 2026-08-11
+Status: **future**
 
-Default operating cycle:
+Default cycle:
 
 ```text
 Weekly:
@@ -618,52 +408,10 @@ Weekly:
 
 Monthly:
 - stale verification audit
-- issuer terms and redemption review
-- reserve and attestation review
-- lifecycle and status review
-- generated statistics and integrity refresh
+- source-link and archive check
+- generated statistics and integrity review
+
+At every growth checkpoint:
 - production parity audit
-```
-
-Indicative growth targets:
-
-```text
-2026-08-10: 100 canonical assets
-2026-09-30: 120–130 canonical assets
-2026-12-31: 160–200 canonical assets
-```
-
-These are planning targets, not permission to weaken inclusion or evidence standards.
-
-# Validation and merge rules
-
-Deployment decisions must follow `docs/deployment-policy.md`. Production publication is manual and separate from normal development completion.
-
-Every work item in this roadmap must:
-
-- start from the latest confirmed `main`
-- keep candidates, canonical data, loaders, validators, baselines, generated output, and documentation synchronized
-- run the normal CI suite
-- preserve existing IDs, slugs, and public routes unless a dedicated migration approves a change
-- avoid fabricated day-level dates, yield values, reserve claims, or current status claims
-- remove one-off generation workflows and temporary files before merge
-- update this roadmap when the current position, queues, or planned sequence changes
-
-Record-growth work has the additional rule:
-
-```text
-merge growth batch
-→ wait for or trigger the corresponding production deployment
-→ run production consistency
-→ proceed only after parity succeeds
-```
-
-# Immediate next work
-
-```text
-Current: Income-profile completion — complete in PR #80
-Next:    Reserve-report applicability classification
-Then:    Reserve evidence deepening where applicable
-Then:    Final 70-record quality audit
-Then:    Freeze the 70-record quality baseline
+- public metadata and route-count verification
 ```
