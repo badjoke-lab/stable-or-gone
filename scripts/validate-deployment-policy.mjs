@@ -8,13 +8,27 @@ const absolute = (relativePath) => path.join(root, relativePath);
 const exists = (relativePath) => fs.existsSync(absolute(relativePath));
 const read = (relativePath) => fs.readFileSync(absolute(relativePath), 'utf8');
 const fail = (message) => errors.push(message);
+const requireText = (file, phrases) => {
+  if (!exists(file)) {
+    fail(`missing required deployment-policy file: ${file}`);
+    return;
+  }
+  const text = read(file);
+  for (const phrase of phrases) {
+    if (!text.includes(phrase)) fail(`${file} is missing required text: ${phrase}`);
+  }
+};
 
 const requiredFiles = [
   'AGENTS.md',
   'README.md',
   'docs/deployment-policy.md',
   'docs/cloudflare-pages.md',
+  'docs/roadmap.md',
+  'docs/audits/manual-production-deployment.md',
+  'docs/audits/manual-production-activation-2026-06-22.md',
   '.github/pull_request_template.md',
+  '.github/workflows/deploy-production.yml',
   '.github/workflows/production-consistency.yml'
 ];
 
@@ -22,11 +36,10 @@ for (const file of requiredFiles) {
   if (!exists(file)) fail(`missing required deployment-policy file: ${file}`);
 }
 
-if (exists('AGENTS.md')) {
-  const text = read('AGENTS.md');
-  if (!text.includes('docs/deployment-policy.md')) fail('AGENTS.md must reference docs/deployment-policy.md');
-  if (!text.includes('A normal pull request must not wait for Cloudflare Pages')) fail('AGENTS.md must prohibit waiting for Cloudflare in normal PRs');
-}
+requireText('AGENTS.md', [
+  'docs/deployment-policy.md',
+  'A normal pull request must not wait for Cloudflare Pages'
+]);
 
 if (exists('README.md')) {
   const text = read('README.md');
@@ -34,10 +47,55 @@ if (exists('README.md')) {
   if (/after each `?main`? push/i.test(text)) fail('README.md still describes production verification after each main push');
 }
 
-if (exists('docs/cloudflare-pages.md')) {
-  const text = read('docs/cloudflare-pages.md');
-  if (!text.includes('docs/deployment-policy.md')) fail('docs/cloudflare-pages.md must defer deployment timing to docs/deployment-policy.md');
+requireText('docs/deployment-policy.md', [
+  'Automatic production branch deployments: OFF',
+  'Automatic preview branch deployments: OFF',
+  'Manual publication architecture: operational',
+  'Workflow run: 27908380603',
+  'CLOUDFLARE_API_TOKEN',
+  'CLOUDFLARE_ACCOUNT_ID'
+]);
+
+requireText('docs/cloudflare-pages.md', [
+  'docs/deployment-policy.md',
+  'Automatic production branch deployments: OFF',
+  'Automatic preview branch deployments:    OFF',
+  'Manual deployment workflow:     operational',
+  'Workflow run: 27908380603'
+]);
+
+if (exists('docs/roadmap.md')) {
+  const text = read('docs/roadmap.md');
+  const required = [
+    'Automatic production deployment: disabled',
+    'Preview branch deployments: disabled',
+    'Publication path: manual GitHub Actions workflow only',
+    'Manual production publication activation — PASS',
+    'Deployment workflow run: 27908380603'
+  ];
+  for (const phrase of required) {
+    if (!text.includes(phrase)) fail(`docs/roadmap.md is missing required manual-publication state: ${phrase}`);
+  }
+  if (/Automatic production deployment:\s*enabled/i.test(text)) {
+    fail('docs/roadmap.md must not describe automatic production deployment as enabled');
+  }
+  if (/successful merge to `main` triggers one production deployment/i.test(text)) {
+    fail('docs/roadmap.md still describes automatic publication after main merge');
+  }
 }
+
+requireText('docs/audits/manual-production-deployment.md', [
+  'Status: OPERATIONAL',
+  'Workflow run: 27908380603',
+  'Automatic Cloudflare publication is disabled'
+]);
+
+requireText('docs/audits/manual-production-activation-2026-06-22.md', [
+  'Run: 27908380603',
+  'Job: 82581060887',
+  'Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c',
+  'PASS'
+]);
 
 if (exists('.github/pull_request_template.md')) {
   const text = read('.github/pull_request_template.md');
@@ -91,6 +149,10 @@ if (exists('.github/workflows/deploy-production.yml')) {
   if (!/wrangler\s+pages\s+deploy/i.test(text)) fail('deploy-production.yml must upload prebuilt assets with Wrangler');
   if (!/npm\s+run\s+build/.test(text)) fail('deploy-production.yml must run the full repository build');
   if (!/check:production/.test(text)) fail('deploy-production.yml must verify production after deployment');
+  if (!/environment:\s*production/.test(text)) fail('deploy-production.yml must use the production environment');
+  if (!/CLOUDFLARE_API_TOKEN/.test(text)) fail('deploy-production.yml must use CLOUDFLARE_API_TOKEN');
+  if (!/CLOUDFLARE_ACCOUNT_ID/.test(text)) fail('deploy-production.yml must use CLOUDFLARE_ACCOUNT_ID');
+  if (!/confirm=DEPLOY|CONFIRM.*DEPLOY|"DEPLOY"/.test(text)) fail('deploy-production.yml must enforce explicit DEPLOY confirmation');
 }
 
 if (exists('package.json')) {
@@ -110,4 +172,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Deployment policy validation passed across ${workflowFiles.length} workflow files.`);
+console.log(`Deployment policy validation passed across ${workflowFiles.length} workflow files with manual publication operational.`);
