@@ -22,6 +22,11 @@ jobs:
       - run: npm install --no-audit --no-fund
       - name: Finalize Batch M
         run: node scripts/finalize-batch-m-bootstrap.mjs
+      - name: Apply corrected reserve components
+        run: |
+          base64 -d data/reserve-components-v3-batch-m.fixed.b64 > data/reserve-components-v3-batch-m.json
+          rm -f data/reserve-components-v3-batch-m.fixed.b64
+          rm -f data/reserve-components-v3-batch-m.fixed.json
       - name: Restore manual publication state
         run: |
           cat >> docs/roadmap.md <<'EOF'
@@ -44,9 +49,11 @@ jobs:
       - name: Capture build error
         if: ${{ steps.build.outcome == 'failure' }}
         run: tail -n 120 batch-m-build.log > docs/batch-m-build-error.log
-      - name: Clear temporary logs
+      - name: Clear temporary files
         run: |
           rm -f batch-m-build.log
+          rm -f package-lock.json
+          rm -f docs/batch-m-finalize-trigger.txt
           if [ "${{ steps.build.outcome }}" = "success" ]; then
             rm -f docs/batch-m-build-error.log
           fi
