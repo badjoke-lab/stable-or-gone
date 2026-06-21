@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "batch_id": "batch_013",
   "reviewed_at": "2026-06-22",
-  "status": "candidate_intake",
+  "status": "reviewed_not_promoted",
   "canonical_assets": 75,
   "policy": {
     "canonical_write_allowed": false,
@@ -21,17 +21,21 @@
       "symbol": "GYD",
       "slug": "gyroscope-gyd",
       "proposed_status": "active",
-      "launch_date": null,
-      "launch_precision": "unresolved",
-      "identity_boundary": "GYD is the base Gyroscope stablecoin; sGYD is a separate yield-bearing representation and must not be treated as an alias.",
-      "research_scope": ["reserve composition", "mint and redemption mechanics", "autonomous pricing", "deployment inventory", "governance controls", "launch chronology"],
-      "primary_source_leads": [
+      "launch_date": "2023-12-07",
+      "launch_precision": "day",
+      "identity_decision": "GYD is the base Gyroscope reserve-backed stablecoin launched on Ethereum; sGYD is a separate yield-bearing representation and not an alias.",
+      "backing_decision": "GYD is designed to be fully backed by a diversified basket of protocol-controlled reserve assets with risk-diversification rules and automated risk controls.",
+      "redemption_decision": "Official material documents minting and redemption through the frontend and smart contracts using protocol bonding-curve mechanisms; jurisdictional frontend access and exact reserve-asset outputs require normalization.",
+      "income_decision": "No intrinsic holder yield is established for base GYD. Yield-bearing treatment belongs to the separate sGYD representation and liquidity strategies.",
+      "deployment_decision": "Ethereum is the canonical full-protocol launch network. Polygon Gyro Proto is historical and must not be merged into the Ethereum deployment without an explicit lineage relationship.",
+      "primary_sources": [
+        "https://www.gyro.finance/blog/gyd-is-live-on-ethereum-mainnet/",
         "https://docs.gyro.finance/gyd/",
         "https://docs.gyro.finance/deployed-contracts/",
         "https://docs.gyro.finance/audit-reports.html"
       ],
-      "blocking_unknowns": ["exact launch boundary", "current reserve basket", "complete deployment and bridge map", "holder redemption limits", "organization and governance map"],
-      "promotion_readiness": "intake"
+      "blocking_unknowns": ["current reserve component inventory", "canonical token and reserve contract map", "organization and governance role map", "historical Polygon Gyro Proto lineage", "reserve-report normalization"],
+      "promotion_readiness": "needs_layer_draft"
     },
     {
       "candidate_id": "sog_cand_000077",
@@ -42,15 +46,20 @@
       "proposed_status": "active",
       "launch_date": null,
       "launch_precision": "unresolved",
-      "identity_boundary": "fxUSD is the base stablecoin; fxSAVE, stability-pool positions, and leveraged xPOSITION or sPOSITION products are related products, not aliases.",
-      "research_scope": ["V1 and V2 continuity", "collateral and issuance", "redemption", "peg protection", "base-token income", "contracts and audits"],
-      "primary_source_leads": [
-        "https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol",
+      "identity_decision": "fxUSD is the base f(x) Protocol stablecoin. fxSAVE is a separate tokenized stability-pool vault, while xPOSITION, sPOSITION, stability-pool shares, and CreditNotes are separate position or receipt products.",
+      "backing_decision": "Current protocol documentation describes fxUSD as fully collateralized and on-chain, with stETH and WBTC position collateral and a USDC/fxUSD stability pool supporting peg operations.",
+      "redemption_decision": "Official documentation states that fxUSD can be minted and redeemed at oracle prices and redeemed for backing collateral; implementation routes and V1/V2 pool-specific constraints require contract-level normalization.",
+      "income_decision": "Official documentation associates sustainable on-chain yield with the fxUSD system, but direct base-token accrual versus yield delivered through fxSAVE or stability-pool participation remains unresolved and must not be inferred.",
+      "deployment_decision": "An Ethereum fxUSD address is documented for protocol 2.0. V1/V2 continuity, replacement boundaries, and the complete canonical contract set require a reviewed deployment map.",
+      "primary_sources": [
+        "https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol-2.0",
         "https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/key-functions-of-f-x",
-        "https://fxprotocol.gitbook.io/fx-docs/risk-management/audit-reports"
+        "https://fxprotocol.gitbook.io/fx-docs/faq/how-do-f-x-protocol-stablecoins-maintain-stability",
+        "https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/stability-pool",
+        "https://fxprotocol.gitbook.io/fx-docs/more/resources/contracts"
       ],
-      "blocking_unknowns": ["V1 to V2 token continuity", "exact launch boundary", "canonical contract set", "base fxUSD yield behavior", "organization and governance map"],
-      "promotion_readiness": "intake"
+      "blocking_unknowns": ["exact launch boundary", "V1-to-V2 token and contract continuity", "base fxUSD income accrual", "complete collateral and position contract map", "organization and governance map"],
+      "promotion_readiness": "needs_identity_and_income_resolution"
     },
     {
       "candidate_id": "sog_cand_000078",
@@ -60,16 +69,20 @@
       "slug": "berachain-honey",
       "proposed_status": "active",
       "launch_date": null,
-      "launch_precision": "unresolved",
-      "identity_boundary": "HONEY is Berachain's native base stablecoin; liquidity receipts and any bridged representations require separate relationship treatment.",
-      "research_scope": ["collateral vaults", "custody", "Basket Mode", "mint and redemption fees", "HoneyFactory", "cross-chain representations"],
-      "primary_source_leads": [
+      "launch_precision": "year",
+      "identity_decision": "HONEY is Berachain's native base stablecoin. HONEY borrowed through Bend remains the same asset, while vault receipts, liquidity positions, and bridged representations require separate relationship treatment.",
+      "backing_decision": "HONEY is fully collateralized by governance-whitelisted stablecoin collateral held in asset-specific vaults. Governance may designate custodians, so custody and reserve location must be represented separately from token identity.",
+      "redemption_decision": "Users can mint and redeem HONEY against supported collateral through HoneySwap. Basket Mode changes redemption into a proportional basket when collateral instability is detected, and fees vary by collateral asset.",
+      "income_decision": "Base HONEY has no documented intrinsic holder yield. Mint and redeem fees accrue to BGT holders, while Bend supply positions and reward vaults are separate income-bearing products.",
+      "deployment_decision": "Berachain mainnet is the native deployment. HoneyFactory and related mainnet contracts are documented; Bepolia is testnet and must not be represented as a canonical production deployment.",
+      "primary_sources": [
         "https://docs.berachain.com/general/tokens/honey",
         "https://docs.berachain.com/developers/contracts/honey-token",
+        "https://docs.berachain.com/build/getting-started/deployed-contracts",
         "https://docs.berachain.com/llms.txt"
       ],
-      "blocking_unknowns": ["exact launch boundary", "collateral and custodian history", "governance change chronology", "canonical cross-chain map", "legal and operator structure"],
-      "promotion_readiness": "intake"
+      "blocking_unknowns": ["exact mainnet launch day", "historical collateral and fee chronology", "custodian and legal-operator map", "cross-chain representation inventory", "governance-change event history"],
+      "promotion_readiness": "needs_layer_draft"
     },
     {
       "candidate_id": "sog_cand_000079",
@@ -80,16 +93,21 @@
       "proposed_status": "active",
       "launch_date": null,
       "launch_precision": "unresolved",
-      "identity_boundary": "MAI is the QiDAO stablecoin previously called miMATIC; continuity must be proven before one canonical record is accepted across names and chains.",
-      "research_scope": ["miMATIC rebrand continuity", "vault collateral", "peg-stability module", "liquidations", "chain deployments", "current issuance and redemption"],
-      "primary_source_leads": [
+      "identity_decision": "Official QiDAO documentation identifies MAI as the stablecoin previously called miMATIC, supporting one continuous asset identity across the rebrand. Chain-specific token representations still require deployment-level mapping.",
+      "backing_decision": "MAI is backed by overcollateralized crypto-asset vaults and may also be minted against approved stablecoins through Peg Stability Modules.",
+      "redemption_decision": "Vault borrowers repay MAI to reduce debt and release collateral. Peg Stability Modules provide permissionless one-to-one minting and queued redemption against approved stablecoins, with documented fees and a withdrawal delay.",
+      "income_decision": "Base MAI has no documented intrinsic holder yield. Yield generated by Peg Stability Module collateral strategies is protocol-side income rather than automatic holder accrual.",
+      "deployment_decision": "MAI is deployed across multiple chains with chain-specific addresses and bridge risks. A canonical chain and contract inventory is required before promotion; identical symbol use alone does not prove canonicality.",
+      "primary_sources": [
+        "https://docs.mai.finance/resources/qi-glossary",
         "https://docs.mai.finance/detailed-introduction",
         "https://docs.mai.finance/stablecoin-economics",
         "https://docs.mai.finance/peg-stability-module",
-        "https://docs.mai.finance/functions/smart-contract-addresses"
+        "https://docs.mai.finance/functions/smart-contract-addresses",
+        "https://docs.mai.finance/risks/chain-risk"
       ],
-      "blocking_unknowns": ["miMATIC to MAI contract continuity", "exact launch and rebrand boundaries", "current supported chains", "present peg and issuance status", "incident and bad-debt history"],
-      "promotion_readiness": "intake"
+      "blocking_unknowns": ["exact original launch and rebrand dates", "complete current deployment inventory", "current peg and issuance condition", "incident and bad-debt chronology", "legal and governance operator map"],
+      "promotion_readiness": "needs_lifecycle_and_deployment_resolution"
     },
     {
       "candidate_id": "sog_cand_000080",
@@ -100,16 +118,21 @@
       "proposed_status": "active",
       "launch_date": null,
       "launch_precision": "unresolved",
-      "identity_boundary": "Stables Labs USDX requires a disambiguated identity because USDX is reused by unrelated projects; sUSDX is a separate staked representation.",
-      "research_scope": ["delta-neutral backing", "counterparties and custody", "institutional minting", "redemption delay", "contracts", "reserve and security disclosures"],
-      "primary_source_leads": [
+      "identity_decision": "This record is limited to the Stables Labs and usdx.money USDX token. The reused USDX symbol does not merge unrelated assets, and sUSDX is a separate ERC-4626 staking representation.",
+      "backing_decision": "USDX uses a delta-neutral portfolio of crypto spot assets and offsetting derivatives positions, with backing assets handled through off-exchange settlement and multiple custody or exchange counterparties.",
+      "redemption_decision": "Direct minting and redemption are restricted to approved KYC/KYB entities. Official documentation describes direct redemption into USDT after a seven-day period, while general holders rely on external liquidity pools.",
+      "income_decision": "Base USDX does not automatically distribute protocol yield. Yield is allocated through the separate sUSDX staking vault, whose value accrues through protocol revenue transfers.",
+      "deployment_decision": "The official documentation identifies an Ethereum USDX token contract and separate sales, redeem, and sUSDX contracts. Additional deployments and any bridge representations require review.",
+      "primary_sources": [
         "https://docs.usdx.money/",
+        "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
         "https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability",
         "https://docs.usdx.money/guides/how-to-redeem",
+        "https://docs.usdx.money/a-yield-bearing-token/staking-usdx",
         "https://docs.usdx.money/informaiton/contracts"
       ],
-      "blocking_unknowns": ["exact launch boundary", "legal and operator map", "collateral and derivatives counterparties", "complete deployment inventory", "reserve and assurance normalization"],
-      "promotion_readiness": "intake"
+      "blocking_unknowns": ["exact launch boundary", "legal issuer and operating entity map", "current custody and derivatives counterparties", "complete deployment inventory", "reserve and assurance normalization"],
+      "promotion_readiness": "needs_legal_and_counterparty_resolution"
     }
   ]
 }

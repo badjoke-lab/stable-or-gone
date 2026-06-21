@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "status": "growth_batch_13_intake",
+  "status": "growth_batch_13_reviewed",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -28,6 +28,7 @@
     "identity_deduplication_required": true,
     "full_required_layer_draft_required": true,
     "promotion_occurs_in_separate_batch_prs": true,
+    "batch_013_boundary_review_complete": true,
     "production_parity_at_75_passed": true,
     "production_parity_required_at_80": true,
     "no_80_to_85_work_without_production_parity": true

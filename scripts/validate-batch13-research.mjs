@@ -8,9 +8,9 @@ const check = (condition, message) => { if (!condition) errors.push(message); };
 
 check(research.schema_version === '1.0', 'schema_version must be 1.0');
 check(research.batch_id === 'batch_013', 'batch_id must be batch_013');
-check(research.status === 'candidate_intake', 'research status must be candidate_intake');
+check(research.status === 'reviewed_not_promoted', 'research status must be reviewed_not_promoted');
 check(research.canonical_assets === 75, 'canonical asset baseline must be 75');
-check(research.policy?.canonical_write_allowed === false, 'candidate intake cannot directly write canonical data');
+check(research.policy?.canonical_write_allowed === false, 'boundary review cannot directly write canonical data');
 check(research.policy?.manual_evidence_review_required === true, 'manual evidence review must remain required');
 check(research.policy?.full_layer_draft_required === true, 'full layer drafts must remain required');
 check(research.policy?.unsupported_day_precision_forbidden === true, 'unsupported day precision must remain forbidden');
@@ -31,6 +31,19 @@ const expectedRecordIds = new Map(candidates.map((item) => [item.candidate_id, i
 const seenCandidateIds = new Set();
 const seenRecordIds = new Set();
 const seenSlugs = new Set();
+const allowedReadiness = new Set([
+  'needs_layer_draft',
+  'needs_identity_and_income_resolution',
+  'needs_lifecycle_and_deployment_resolution',
+  'needs_legal_and_counterparty_resolution'
+]);
+const requiredDecisionFields = [
+  'identity_decision',
+  'backing_decision',
+  'redemption_decision',
+  'income_decision',
+  'deployment_decision'
+];
 
 check(expectedIds.every((id) => expectedCandidateIds.has(id)), 'candidate IDs must be contiguous from 76 through 80');
 
@@ -49,22 +62,33 @@ for (const record of research.records ?? []) {
   seenCandidateIds.add(record.candidate_id);
   seenRecordIds.add(record.proposed_record_id);
   seenSlugs.add(record.slug);
+
   check(record.proposed_status === 'active', `candidate must remain an active proposal: ${record.candidate_id}`);
-  check(record.launch_date === null, `candidate intake must not assert launch_date: ${record.candidate_id}`);
-  check(record.launch_precision === 'unresolved', `candidate launch precision must remain unresolved: ${record.candidate_id}`);
-  check(typeof record.identity_boundary === 'string' && record.identity_boundary.length > 40, `identity boundary required: ${record.candidate_id}`);
-  check(Array.isArray(record.research_scope) && record.research_scope.length >= 5, `research scope is incomplete: ${record.candidate_id}`);
-  check(Array.isArray(record.primary_source_leads) && record.primary_source_leads.length >= 3, `insufficient primary-source leads: ${record.candidate_id}`);
-  for (const url of record.primary_source_leads ?? []) check(/^https:\/\//.test(url), `source must use https: ${record.candidate_id}`);
+  if (record.launch_date !== null) {
+    check(/^\d{4}-\d{2}-\d{2}$/.test(record.launch_date), `launch_date must be ISO day precision: ${record.candidate_id}`);
+    check(record.launch_precision === 'day', `non-null launch_date requires day precision: ${record.candidate_id}`);
+  } else {
+    check(['unresolved', 'year', 'month'].includes(record.launch_precision), `null launch_date must retain bounded precision: ${record.candidate_id}`);
+  }
+
+  for (const field of requiredDecisionFields) {
+    check(typeof record[field] === 'string' && record[field].length >= 60, `${field} is incomplete: ${record.candidate_id}`);
+  }
+  check(Array.isArray(record.primary_sources) && record.primary_sources.length >= 3, `insufficient reviewed primary sources: ${record.candidate_id}`);
+  for (const url of record.primary_sources ?? []) check(/^https:\/\//.test(url), `source must use https: ${record.candidate_id}`);
   check(Array.isArray(record.blocking_unknowns) && record.blocking_unknowns.length >= 4, `blocking unknowns required: ${record.candidate_id}`);
-  check(record.promotion_readiness === 'intake', `promotion readiness must remain intake: ${record.candidate_id}`);
+  check(allowedReadiness.has(record.promotion_readiness), `invalid promotion readiness: ${record.candidate_id}`);
 }
 
 for (const candidateId of expectedCandidateIds) check(seenCandidateIds.has(candidateId), `candidate missing from research: ${candidateId}`);
+check(research.records.filter((record) => record.launch_date !== null).length === 1, 'only the reviewed GYD day-level launch date may be asserted');
+check(research.records.find((record) => record.candidate_id === 'sog_cand_000076')?.launch_date === '2023-12-07', 'GYD launch date must match the official mainnet announcement');
+check(research.records.find((record) => record.candidate_id === 'sog_cand_000079')?.identity_decision.includes('previously called miMATIC'), 'MAI review must preserve official miMATIC continuity');
+check(research.records.find((record) => record.candidate_id === 'sog_cand_000080')?.identity_decision.includes('sUSDX is a separate'), 'USDX review must keep sUSDX separate');
 
 if (errors.length) {
   for (const error of errors) console.error(`Batch 13 research: ${error}`);
   process.exitCode = 1;
 } else {
-  console.log('Batch 13 research contract valid: 5 intake candidates, 0 canonical promotions');
+  console.log('Batch 13 boundary review valid: 5 reviewed candidates, 0 canonical promotions');
 }
