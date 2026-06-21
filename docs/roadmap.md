@@ -33,18 +33,18 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #92 — Review Batch 13 promotion boundaries
-Merge: d7c0b5df99c2511464a1aab500835e5252e5fa3d
+PR #93 — Promote Batch M stable assets
+Merge: cd745f315d2b0f935fc2288c2e118f6905e087b6
 ```
 
-Active work:
+Current blocker:
 
 ```text
-PR #93 — Promote Batch M stable assets
-Branch: promote-batch-m-stable-assets
-Canonical target: 75 → 80
-Current step: final reviewed canonical promotion
-Canonical writes: active and fully validated in this PR
+80-record GitHub canonical baseline: complete
+80-record production publication: pending
+80-record production parity: pending
+Cloudflare access: unavailable
+80 → 85 controlled growth: blocked until parity passes
 ```
 
 Latest production checkpoints:
@@ -60,7 +60,7 @@ Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
 Audit: docs/audits/manual-production-activation-2026-06-22.md
 ```
 
-## Canonical registry after PR #93
+## Current canonical registry
 
 ```text
 80 stable assets
@@ -81,7 +81,7 @@ Audit: docs/audits/manual-production-activation-2026-06-22.md
 80 income profiles
 ```
 
-## Candidate controls during PR #93
+## Candidate controls
 
 ```text
 Total controlled candidates: 80
@@ -175,18 +175,19 @@ docs/migration/registry-v3-baseline.json
 scripts/validate-registry-v3-baseline.mjs
 ```
 
-The reviewed baseline becomes 80 only when PR #93 is merged. Production remains at the previous published checkpoint until a separate manual publication action is completed.
+The reviewed GitHub baseline is 80 after PR #93. Production remains at the previous published checkpoint until a separate manual publication action is completed.
 
 ## Immediate next work
 
 ```text
-1. Complete PR #93 with every GitHub CI check passing.
-2. Merge PR #93 only with zero critical findings and zero warnings.
-3. Do not deploy from the PR and do not change Cloudflare configuration.
-4. When Cloudflare access is available again, run one manual 80-record publication checkpoint from the merged main branch.
-5. Verify deployed commit, public counts, machine-readable files, canonical routes, sitemap, metadata, structured data, and production consistency.
-6. Record the 80-record parity result in a separate audit PR.
-7. Do not begin 80 → 85 controlled growth until the 80-record production-parity gate passes.
+1. Do not deploy or change Cloudflare while access is unavailable.
+2. Continue GitHub-only quality work against the 80-record baseline.
+3. Prioritize the 38-record launch-date queue, 6-record terminal-date queue, and 13-record reserve applicability queue.
+4. Keep generated outputs, integrity audit, Registry v3 baseline, and roadmap synchronized in every quality PR.
+5. When Cloudflare access is available again, run one manual 80-record publication checkpoint from the merged main branch.
+6. Verify deployed commit, public counts, machine-readable files, canonical routes, sitemap, metadata, structured data, and production consistency.
+7. Record the 80-record parity result in a separate audit PR.
+8. Do not begin 80 → 85 controlled growth until the 80-record production-parity gate passes.
 ```
 
 ## Batch M promotion requirements
@@ -206,7 +207,7 @@ Every promoted candidate includes the applicable:
 - income profile
 - candidate promotion record
 
-Candidate-specific constraints:
+Candidate-specific constraints remain active:
 
 ```text
 GYD:
@@ -284,7 +285,7 @@ Normal pull requests and normal `main` merges do not publish to Cloudflare.
 | Canonical count | Required gate |
 |---:|---|
 | 75 | complete — parity and manual publication activation passed |
-| 80 | pending — manual publication and production parity after PR #93 merge and Cloudflare access recovery |
+| 80 | pending — manual publication and production parity after Cloudflare access recovery |
 | 85 | manual publication and production parity after merge |
 | 90 | manual publication and production parity after merge |
 | 95 | manual publication and production parity after merge |
@@ -312,6 +313,7 @@ PR #89 — Record 75-record production parity
 PR #90 — Finalize manual Cloudflare publication controls
 PR #91 — Prepare Batch 13 candidate intake
 PR #92 — Review Batch 13 promotion boundaries
+PR #93 — Promote Batch M stable assets
 75-record production parity — PASS
 Manual production publication activation — PASS
 ```
@@ -329,8 +331,8 @@ Phase 6B — 75-record production parity: complete
 Phase 6C — Manual Cloudflare publication activation: complete
 Phase 6D-1 — Batch 13 candidate intake: complete
 Phase 6D-2 — Batch 13 boundary review: complete
-Phase 6D-3 — Batch M canonical promotion to 80: active in PR #93
-Phase 6D-4 — 80-record manual publication and parity: blocked pending PR #93 merge and Cloudflare access
+Phase 6D-3 — Batch M canonical promotion to 80: complete
+Phase 6D-4 — 80-record manual publication and parity: blocked pending Cloudflare access
 ```
 
 ## Explicit unresolved queues
@@ -338,7 +340,7 @@ Phase 6D-4 — 80-record manual publication and parity: blocked pending PR #93 m
 ### Launch dates
 
 ```text
-38 unresolved canonical records after PR #93
+38 unresolved canonical records
 ```
 
 Source: `data/quality/launch-date-unresolved.json`
