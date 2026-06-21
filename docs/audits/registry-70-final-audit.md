@@ -4,7 +4,6 @@
 - Baseline: `sog_registry_v2_post_batch_l_2026_06_21`
 - Canonical stable assets: **75**
 - Promoted candidates: **75 / 80**
-- Pending candidates: **5**
 - Critical findings: **0**
 - Warnings: **0**
 
@@ -65,7 +64,6 @@
 
 ## Quality Observations
 
-- Candidate controls contain 80 records: 75 promoted and 5 pending Batch 13 research candidates. Pending candidates are not canonical records.
 - reserve_reports context coverage is 62/75; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_fei, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
 - 0 records have missing or older-than-one-year last_verified_at values: none.
 - 34 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurs, sog_st_eurt, sog_st_gyen, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mim, sog_st_mountainusdm, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_susd, sog_st_susde, sog_st_tryb, sog_st_usd0, sog_st_usd1, sog_st_usda, sog_st_usdf, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usr, sog_st_usyc, sog_st_vai, sog_st_vchf.
@@ -74,4 +72,4 @@
 
 ## Result
 
-The 75-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Five Batch 13 candidates remain non-canonical research intake records. Informational coverage metrics remain visible without implying universal applicability.
+The 70-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.
