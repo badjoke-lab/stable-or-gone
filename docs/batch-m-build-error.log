@@ -6,9 +6,98 @@
 > stable-or-gone@0.0.1 validate:deployment-policy
 > node scripts/validate-deployment-policy.mjs
 
-Deployment policy validation failed:
-- docs/roadmap.md is missing required manual-publication state: Automatic production deployment: disabled
-- docs/roadmap.md is missing required manual-publication state: Preview branch deployments: disabled
-- docs/roadmap.md is missing required manual-publication state: Publication path: manual GitHub Actions workflow only
-- docs/roadmap.md is missing required manual-publication state: Manual production publication activation — PASS
-- docs/roadmap.md is missing required manual-publication state: Deployment workflow run: 27908380603
+Deployment policy validation passed across 10 workflow files with manual publication operational.
+
+> stable-or-gone@0.0.1 validate:baseline
+> node scripts/validate-registry-v2-baseline.mjs
+
+Registry v2 baseline validation passed:
+- stablecoins: 80
+- organizations: 69
+- relationships: 82
+- classifications: 80
+- classification_extensions: 2
+- profiles: 80
+- events: 107
+- event_details: 107
+- evidence: 327
+- evidence_relations: 327
+- reserve_reports: 87
+- known_unknowns: 188
+- regulatory_notes: 9
+- deployments: 111
+- protected stablecoins: 80
+- protected organizations: 69
+- required route sources: 15
+
+> stable-or-gone@0.0.1 validate:v3-baseline
+> node scripts/validate-registry-v3-baseline.mjs
+
+Registry v3 quality baseline valid: sog_registry_v3_quality_80_2026_06_22
+
+> stable-or-gone@0.0.1 validate:launch-queue
+> node scripts/validate-launch-date-unresolved.mjs
+
+launch-date unresolved queue valid: 38 records (B 9, C 26, D 3)
+
+> stable-or-gone@0.0.1 validate:terminal-queue
+> node scripts/validate-terminal-date-unresolved.mjs
+
+terminal-date unresolved queue valid: 6 records (sog_st_bac, sog_st_dsd, sog_st_esd, sog_st_gyen, sog_st_mountainusdm, sog_st_usdn)
+
+> stable-or-gone@0.0.1 validate:reserve-applicability
+> node scripts/validate-reserve-report-applicability.mjs
+
+reserve-report applicability queue valid: 13 records
+
+> stable-or-gone@0.0.1 validate:candidates
+> node scripts/validate-candidate-stable-assets.mjs
+
+Candidate Stable Asset validation passed: 80 candidates, 80 promoted, 0 pending, 0 P0 pending, 80 canonical stablecoins.
+
+> stable-or-gone@0.0.1 validate:batch12-research
+> node scripts/validate-batch12-research.mjs
+
+Batch 12 research contract valid: 5 reviewed candidates, 5 promotions
+
+> stable-or-gone@0.0.1 validate:batch13-research
+> node scripts/validate-batch13-research.mjs
+
+Batch 13 promotion contract valid: 5 promoted candidates, 80 canonical assets
+
+> stable-or-gone@0.0.1 validate:data
+> node scripts/validate-data.mjs
+
+Data validation passed: 80 stablecoins, 69 organizations, 82 relationships, 107 events, 327 evidence records, 87 reserve reports, 188 known unknowns, 9 regulatory notes, 111 deployments, 69 issuer compatibility records.
+
+> stable-or-gone@0.0.1 validate:compat
+> node scripts/validate-registry-v2-compat.mjs
+
+Registry v2 compatibility validation passed: 80 stablecoins, 69 organizations, 82 relationships, 107 events, 327 evidence records, 0 warnings.
+
+> stable-or-gone@0.0.1 validate:classification
+> node scripts/validate-stablecoin-classification-v2.mjs
+
+Stablecoin Registry v2 classification validation passed: 80 classifications for 80 stablecoins, 2 extension overlays.
+
+> stable-or-gone@0.0.1 validate:profiles
+> node scripts/validate-stablecoin-profiles-v2.mjs
+
+Stablecoin Registry v2 profile validation passed: 80 profiles for 80 stablecoins.
+
+> stable-or-gone@0.0.1 validate:events-v2
+> node scripts/validate-event-details-v2.mjs
+
+Stablecoin event v2 validation passed: 107 overlays for 107 events.
+
+> stable-or-gone@0.0.1 validate:evidence-relations-v2
+> node scripts/validate-evidence-relations-v2.mjs
+
+Evidence v2 relation validation passed: 327 evidence rows projected into relation arrays.
+
+> stable-or-gone@0.0.1 validate:v3
+> node scripts/validate-registry-v3-foundation.mjs
+
+Registry v3 foundation validation failed:
+- data/reserve-components-v3-batch-m.json: sog_rc_gyd_reserve_batch_m invalid asset_category mixed
+- data/reserve-components-v3-batch-m.json: sog_rc_usdx_portfolio_batch_m invalid asset_category mixed

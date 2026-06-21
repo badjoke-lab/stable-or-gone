@@ -82,3 +82,13 @@ Target: **75 → 80 canonical stable assets**
 ## Production constraint
 
 Normal PRs and ordinary main merges do not publish. Cloudflare deployment is a separate manual checkpoint after the 80-record promotion is merged.
+
+## Manual production publication state
+
+```text
+Automatic production deployment: disabled
+Preview branch deployments: disabled
+Publication path: manual GitHub Actions workflow only
+Manual production publication activation — PASS
+Deployment workflow run: 27908380603
+```
