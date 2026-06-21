@@ -23,18 +23,28 @@ jobs:
       - name: Finalize Batch M
         run: node scripts/finalize-batch-m-bootstrap.mjs
       - name: Validate complete build
+        id: build
+        continue-on-error: true
         shell: bash
-        run: |
-          set -o pipefail
-          npm run build 2>&1 | tail -n 80
+        run: npm run build > batch-m-build.log 2>&1
+      - name: Capture build error
+        if: ${{ steps.build.outcome == 'failure' }}
+        run: tail -n 120 batch-m-build.log > docs/batch-m-build-error.log
+      - name: Clear old build error
+        if: ${{ steps.build.outcome == 'success' }}
+        run: rm -f docs/batch-m-build-error.log
       - name: Commit finalized Batch M
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          if git diff --cached --quiet; then
-            exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m "Finalize Batch M registry"
+            git push origin HEAD:${{ github.head_ref }}
           fi
-          git commit -m "Finalize Batch M registry"
-          git push origin HEAD:${{ github.head_ref }}
+      - name: Fail on build error
+        if: ${{ steps.build.outcome == 'failure' }}
+        run: |
+          cat docs/batch-m-build-error.log
+          exit 1
