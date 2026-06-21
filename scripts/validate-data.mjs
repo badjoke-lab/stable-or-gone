@@ -19,5 +19,5 @@ const basePath = new URL('./validate-data-base.mjs', import.meta.url);
 const original = fs.readFileSync(basePath, 'utf8');
 const anchor = "...read('data/issuers-batch-j.json')";
 if (!original.includes(anchor)) throw new Error('Batch L data-validator patch anchor is missing');
-const patched = original.replace(anchor, `${anchor},\n  ...read('data/issuers-batch-k.json'),\n  ...read('data/issuers-batch-l.json')`);
+const patched = original.replace(anchor, `${anchor},\n  ...read('data/issuers-batch-k.json'),\n  ...read('data/issuers-batch-l.json'),\n  ...read('data/issuers-batch-m.json')`);
 await import(`data:text/javascript;base64,${Buffer.from(patched).toString('base64')}`);

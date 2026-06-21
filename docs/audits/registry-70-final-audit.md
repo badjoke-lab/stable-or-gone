@@ -1,9 +1,9 @@
-# SOG 70-Record Final Registry Audit
+# SOG 80-Record Final Registry Audit
 
-- Audited at: 2026-06-21
-- Baseline: `sog_registry_v2_post_batch_l_2026_06_21`
-- Canonical stable assets: **75**
-- Promoted candidates: **75 / 80**
+- Audited at: 2026-06-22
+- Baseline: `sog_registry_v2_post_batch_m_2026_06_22`
+- Canonical stable assets: **80**
+- Promoted candidates: **80 / 80**
 - Critical findings: **0**
 - Warnings: **0**
 
@@ -21,38 +21,38 @@
 
 | Layer | Count |
 |---|---:|
-| stablecoins | 75 |
-| organizations | 64 |
-| relationships | 77 |
-| classifications | 75 |
-| profiles | 75 |
-| events | 102 |
-| event_details | 102 |
-| evidence | 306 |
-| reserve_reports | 82 |
-| known_unknowns | 173 |
+| stablecoins | 80 |
+| organizations | 69 |
+| relationships | 82 |
+| classifications | 80 |
+| profiles | 80 |
+| events | 107 |
+| event_details | 107 |
+| evidence | 327 |
+| reserve_reports | 87 |
+| known_unknowns | 188 |
 | regulatory_notes | 9 |
-| deployments | 106 |
-| legal_profiles | 75 |
+| deployments | 111 |
+| legal_profiles | 80 |
 | stable_asset_relationships | 4 |
-| reserve_components | 107 |
-| income_profiles | 75 |
+| reserve_components | 112 |
+| income_profiles | 80 |
 
 ## Coverage
 
 | Layer | Covered | Expectation |
 |---|---:|---|
-| classifications | 75 / 75 | required |
-| profiles | 75 / 75 | required |
-| relationships | 75 / 75 | required |
-| evidence | 75 / 75 | required |
-| reserve_reports | 62 / 75 | informational |
-| known_unknowns | 75 / 75 | required |
-| deployments | 75 / 75 | optional_review |
-| events | 75 / 75 | optional_review |
-| legal_profiles | 75 / 75 | required |
-| reserve_components | 75 / 75 | required |
-| income_profiles | 75 / 75 | required |
+| classifications | 80 / 80 | required |
+| profiles | 80 / 80 | required |
+| relationships | 80 / 80 | required |
+| evidence | 80 / 80 | required |
+| reserve_reports | 67 / 80 | informational |
+| known_unknowns | 80 / 80 | required |
+| deployments | 80 / 80 | optional_review |
+| events | 80 / 80 | optional_review |
+| legal_profiles | 80 / 80 | required |
+| reserve_components | 80 / 80 | required |
+| income_profiles | 80 / 80 | required |
 
 ## Critical Findings
 
@@ -64,12 +64,12 @@
 
 ## Quality Observations
 
-- reserve_reports context coverage is 62/75; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_fei, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
+- reserve_reports context coverage is 67/80; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_fei, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
 - 0 records have missing or older-than-one-year last_verified_at values: none.
-- 34 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurs, sog_st_eurt, sog_st_gyen, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mim, sog_st_mountainusdm, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_susd, sog_st_susde, sog_st_tryb, sog_st_usd0, sog_st_usd1, sog_st_usda, sog_st_usdf, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usr, sog_st_usyc, sog_st_vai, sog_st_vchf.
+- 38 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurs, sog_st_eurt, sog_st_fxusd, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mai, sog_st_mim, sog_st_mountainusdm, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_stablesusdx, sog_st_susd, sog_st_susde, sog_st_tryb, sog_st_usd0, sog_st_usd1, sog_st_usda, sog_st_usdf, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usr, sog_st_usyc, sog_st_vai, sog_st_vchf.
 - 4 historical-side records have no discontinued_date: sog_st_bac, sog_st_dsd, sog_st_esd, sog_st_usdn.
 - 0 income profiles remain entirely unknown: none.
 
 ## Result
 
-The 70-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.
+The 80-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.

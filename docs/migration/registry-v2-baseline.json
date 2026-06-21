@@ -1,21 +1,21 @@
 {
-  "baseline_id": "sog_registry_v2_post_batch_l_2026_06_21",
-  "captured_at": "2026-06-21",
-  "source_commit": "batch-l-current-stable-assets",
+  "baseline_id": "sog_registry_v2_post_batch_m_2026_06_22",
+  "captured_at": "2026-06-22",
+  "source_commit": "batch-m-stable-assets",
   "minimum_counts": {
-    "stablecoins": 75,
-    "organizations": 64,
-    "relationships": 77,
-    "classifications": 75,
-    "profiles": 75,
-    "events": 102,
-    "event_details": 102,
-    "evidence": 306,
-    "evidence_relations": 306,
-    "reserve_reports": 82,
-    "known_unknowns": 173,
+    "stablecoins": 80,
+    "organizations": 69,
+    "relationships": 82,
+    "classifications": 80,
+    "profiles": 80,
+    "events": 107,
+    "event_details": 107,
+    "evidence": 327,
+    "evidence_relations": 327,
+    "reserve_reports": 87,
+    "known_unknowns": 188,
     "regulatory_notes": 9,
-    "deployments": 106
+    "deployments": 111
   },
   "data_groups": {
     "stablecoins": [
@@ -31,7 +31,8 @@
       "data/stablecoins-batch-i.json",
       "data/stablecoins-batch-j.json",
       "data/stablecoins-batch-k.json",
-      "data/stablecoins-batch-l.json"
+      "data/stablecoins-batch-l.json",
+      "data/stablecoins-batch-m.json"
     ],
     "organizations": [
       "data/organizations.json",
@@ -45,7 +46,8 @@
       "data/organizations-batch-i.json",
       "data/organizations-batch-j.json",
       "data/organizations-batch-k.json",
-      "data/organizations-batch-l.json"
+      "data/organizations-batch-l.json",
+      "data/organizations-batch-m.json"
     ],
     "relationships": [
       "data/relationships.json",
@@ -59,7 +61,8 @@
       "data/relationships-batch-i.json",
       "data/relationships-batch-j.json",
       "data/relationships-batch-k.json",
-      "data/relationships-batch-l.json"
+      "data/relationships-batch-l.json",
+      "data/relationships-batch-m.json"
     ],
     "classifications": [
       "data/stablecoin-classification-v2.json",
@@ -74,7 +77,8 @@
       "data/stablecoin-classification-batch-i.json",
       "data/stablecoin-classification-batch-j.json",
       "data/stablecoin-classification-batch-k.json",
-      "data/stablecoin-classification-batch-l.json"
+      "data/stablecoin-classification-batch-l.json",
+      "data/stablecoin-classification-batch-m.json"
     ],
     "classification_extensions": [
       "data/stablecoin-classification-extension-batch-a.json"
@@ -92,7 +96,8 @@
       "data/stablecoin-profiles-batch-i.json",
       "data/stablecoin-profiles-batch-j.json",
       "data/stablecoin-profiles-batch-k.json",
-      "data/stablecoin-profiles-batch-l.json"
+      "data/stablecoin-profiles-batch-l.json",
+      "data/stablecoin-profiles-batch-m.json"
     ],
     "events": [
       "data/events.json",
@@ -111,7 +116,8 @@
       "data/events-batch-j.json",
       "data/events-batch-k.json",
       "data/events-issuer-control-2026.json",
-      "data/events-batch-l.json"
+      "data/events-batch-l.json",
+      "data/events-batch-m.json"
     ],
     "event_details": [
       "data/event-details-v2.json",
@@ -127,7 +133,8 @@
       "data/event-details-batch-j.json",
       "data/event-details-batch-k.json",
       "data/event-details-issuer-control-2026.json",
-      "data/event-details-batch-l.json"
+      "data/event-details-batch-l.json",
+      "data/event-details-batch-m.json"
     ],
     "evidence": [
       "data/evidence.json",
@@ -152,7 +159,8 @@
       "data/evidence-batch-l-b.json",
       "data/evidence-batch-l-c.json",
       "data/evidence-batch-l-d1.json",
-      "data/evidence-batch-l-d2.json"
+      "data/evidence-batch-l-d2.json",
+      "data/evidence-batch-m.json"
     ],
     "evidence_relations": [
       "data/evidence.json",
@@ -177,7 +185,8 @@
       "data/evidence-batch-l-b.json",
       "data/evidence-batch-l-c.json",
       "data/evidence-batch-l-d1.json",
-      "data/evidence-batch-l-d2.json"
+      "data/evidence-batch-l-d2.json",
+      "data/evidence-batch-m.json"
     ],
     "reserve_reports": [
       "data/reserve-reports.json",
@@ -191,7 +200,9 @@
       "data/reserve-reports-batch-i.json",
       "data/reserve-reports-batch-j.json",
       "data/reserve-reports-batch-k.json",
-      "data/reserve-reports-batch-l.json"
+      "data/reserve-reports-batch-l.json",
+      "data/reserve-reports-batch-m-a.json",
+      "data/reserve-reports-batch-m-b.json"
     ],
     "known_unknowns": [
       "data/known-unknowns.json",
@@ -211,7 +222,8 @@
       "data/known-unknowns-batch-k.json",
       "data/known-unknowns-issuer-control-2026.json",
       "data/known-unknowns-batch-l-a.json",
-      "data/known-unknowns-batch-l-b.json"
+      "data/known-unknowns-batch-l-b.json",
+      "data/known-unknowns-batch-m.json"
     ],
     "regulatory_notes": [
       "data/regulatory-notes.json"
@@ -231,7 +243,8 @@
       "data/deployments-batch-j.json",
       "data/deployments-batch-k.json",
       "data/deployments-issuer-control-2026.json",
-      "data/deployments-batch-l.json"
+      "data/deployments-batch-l.json",
+      "data/deployments-batch-m.json"
     ]
   },
   "protected_stablecoins": [
@@ -534,6 +547,26 @@
     {
       "id": "sog_st_usda",
       "slug": "avalon-usda"
+    },
+    {
+      "id": "sog_st_gyd",
+      "slug": "gyroscope-gyd"
+    },
+    {
+      "id": "sog_st_fxusd",
+      "slug": "fx-protocol-fxusd"
+    },
+    {
+      "id": "sog_st_honey",
+      "slug": "berachain-honey"
+    },
+    {
+      "id": "sog_st_mai",
+      "slug": "qidao-mai"
+    },
+    {
+      "id": "sog_st_stablesusdx",
+      "slug": "stables-labs-usdx"
     }
   ],
   "protected_organizations": [
@@ -792,6 +825,26 @@
     {
       "id": "sog_issuer_avalon_labs",
       "slug": "avalon-labs"
+    },
+    {
+      "id": "sog_issuer_gyroscope",
+      "slug": "gyroscope-protocol"
+    },
+    {
+      "id": "sog_issuer_fx_protocol",
+      "slug": "fx-protocol"
+    },
+    {
+      "id": "sog_issuer_berachain",
+      "slug": "berachain"
+    },
+    {
+      "id": "sog_issuer_qidao",
+      "slug": "qidao"
+    },
+    {
+      "id": "sog_issuer_stables_labs",
+      "slug": "stables-labs"
     }
   ],
   "required_route_sources": [

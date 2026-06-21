@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-21",
+  "frozen_at": "2026-06-22",
   "source_review": "docs/audits/remaining-launch-date-review.md",
   "policy": {
     "canonical_day_required": true,
@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 34,
+  "expected_total": 38,
   "category_counts": {
-    "B": 8,
-    "C": 23,
+    "B": 9,
+    "C": 26,
     "D": 3
   },
   "records": [
@@ -253,6 +253,34 @@
       "best_known_range": "2024-11",
       "reason_code": "partial_date_only",
       "review_note": "Official material establishes November 2024 without a reviewed day-level launch date."
+    },
+    {
+      "stablecoin_id": "sog_st_honey",
+      "category": "B",
+      "best_known_range": "2025",
+      "reason_code": "partial_date_only",
+      "review_note": "Official mainnet documentation establishes HONEY in 2025 without one reviewed day-level launch statement."
+    },
+    {
+      "stablecoin_id": "sog_st_fxusd",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Product introduction, V1 issuance, V2 contracts, and broad availability are distinct candidate launch boundaries."
+    },
+    {
+      "stablecoin_id": "sog_st_mai",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Original miMATIC launch, MAI rebrand, and chain-specific deployments do not resolve to one reviewed canonical day."
+    },
+    {
+      "stablecoin_id": "sog_st_stablesusdx",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Announcement, initial minting, contract deployment, and approved-participant availability are distinct boundaries."
     }
   ]
 }

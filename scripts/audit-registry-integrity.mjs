@@ -337,7 +337,7 @@ const summary = {
 
 const section = (title, rows, empty) => [`## ${title}`, '', ...(rows.length ? rows.map((row) => `- ${row}`) : [`- ${empty}`]), ''].join('\n');
 const markdown = [
-  '# SOG 70-Record Final Registry Audit', '',
+  '# SOG 80-Record Final Registry Audit', '',
   `- Audited at: ${auditDate}`,
   `- Baseline: \`${baseline.baseline_id}\``,
   `- Canonical stable assets: **${stablecoins.length}**`,
@@ -363,9 +363,9 @@ const markdown = [
   section('Quality Observations', observations, 'None.'),
   '## Result', '',
   critical.length === 0 && warnings.length === 0
-    ? 'The 70-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.'
+    ? 'The 80-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.'
     : critical.length === 0
-      ? 'The 70-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.'
+      ? 'The 80-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.'
       : 'The registry does not pass the final audit until all critical findings are resolved.', ''
 ].join('\n');
 

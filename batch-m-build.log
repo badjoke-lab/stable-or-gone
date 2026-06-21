@@ -1,0 +1,14 @@
+
+> stable-or-gone@0.0.1 build
+> npm run validate:deployment-policy && npm run validate:baseline && npm run validate:v3-baseline && npm run validate:launch-queue && npm run validate:terminal-queue && npm run validate:reserve-applicability && npm run validate:candidates && npm run validate:batch12-research && npm run validate:batch13-research && npm run validate:data && npm run validate:compat && npm run validate:classification && npm run validate:profiles && npm run validate:events-v2 && npm run validate:evidence-relations-v2 && npm run validate:v3 && npm run validate:deployments-v3 && npm run validate:income-v3 && npm run validate:final && npm run validate:finalization && npm run validate:integrity && astro check && astro build && npm run verify:consistency && npm run verify:deployment && npm run verify:public
+
+
+> stable-or-gone@0.0.1 validate:deployment-policy
+> node scripts/validate-deployment-policy.mjs
+
+Deployment policy validation failed:
+- docs/roadmap.md is missing required manual-publication state: Automatic production deployment: disabled
+- docs/roadmap.md is missing required manual-publication state: Preview branch deployments: disabled
+- docs/roadmap.md is missing required manual-publication state: Publication path: manual GitHub Actions workflow only
+- docs/roadmap.md is missing required manual-publication state: Manual production publication activation — PASS
+- docs/roadmap.md is missing required manual-publication state: Deployment workflow run: 27908380603
