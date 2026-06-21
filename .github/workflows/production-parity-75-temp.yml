@@ -1,0 +1,42 @@
+name: Temporary 75-Record Production Parity
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-package-lock --no-audit --no-fund
+      - name: Check deployed production parity
+        env:
+          SOG_EXPECTED_COMMIT: 40fb5841e9d4327b54359e5cb595818b9ebec73b
+          SOG_SMOKE_ATTEMPTS: '20'
+          SOG_SMOKE_DELAY_MS: '15000'
+        run: npm run check:production
+      - name: Check all Batch L detail routes
+        run: |
+          node --input-type=module <<'NODE'
+          const base = 'https://sog.badjoke-lab.com';
+          const slugs = ['m0-m', 'falcon-usdf', 'dforce-usx', 'anzen-usdz', 'avalon-usda'];
+          for (const slug of slugs) {
+            const url = `${base}/stablecoin/${slug}/`;
+            const response = await fetch(url, { headers: { 'cache-control': 'no-cache' } });
+            if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+            const html = await response.text();
+            if (!html.includes(`rel="canonical" href="${url}"`) && !html.includes(`href="${url}" rel="canonical"`)) {
+              throw new Error(`${url} canonical metadata missing`);
+            }
+            if (!html.includes('application/ld+json')) throw new Error(`${url} JSON-LD missing`);
+            console.log(`OK ${url}`);
+          }
+          NODE
