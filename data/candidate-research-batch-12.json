@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "batch_id": "batch_012",
   "reviewed_at": "2026-06-20",
-  "status": "reviewed_not_promoted",
-  "canonical_assets": 70,
+  "status": "promoted",
+  "canonical_assets": 75,
   "policy": {
     "canonical_write_allowed": false,
     "manual_evidence_review_required": true,
@@ -32,8 +32,13 @@
         "https://docs.m0.org/protocol/minter-gateway",
         "https://www.m0.org/blog/the-first-m-mint"
       ],
-      "blocking_unknowns": ["organization and SPV map", "canonical deployment", "holder redemption boundary", "reserve-report source"],
-      "promotion_readiness": "needs_layer_draft"
+      "blocking_unknowns": [
+        "organization and SPV map",
+        "canonical deployment",
+        "holder redemption boundary",
+        "reserve-report source"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000072",
@@ -55,8 +60,13 @@
         "https://docs.falcon.finance/resources/transparency-and-attestations",
         "https://falcon.finance/newsroom/falcon-finance-launches-transparency-dashboard"
       ],
-      "blocking_unknowns": ["exact launch boundary", "legal and custody map", "deployment inventory", "assurance normalization"],
-      "promotion_readiness": "needs_layer_draft"
+      "blocking_unknowns": [
+        "exact launch boundary",
+        "legal and custody map",
+        "deployment inventory",
+        "assurance normalization"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000073",
@@ -78,8 +88,13 @@
         "https://docs.dforce.network/dapps/usx",
         "https://app.dforce.network/"
       ],
-      "blocking_unknowns": ["brand and organization lineage", "base-token income", "omnichain deployment set", "Unitus sunset scope"],
-      "promotion_readiness": "needs_identity_and_income_resolution"
+      "blocking_unknowns": [
+        "brand and organization lineage",
+        "base-token income",
+        "omnichain deployment set",
+        "Unitus sunset scope"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000074",
@@ -101,8 +116,13 @@
         "https://docs.anzen.finance/usdz-101/backing-assets-collateral/eligibility-overview",
         "https://docs.anzen.finance/developers/smart-contracts"
       ],
-      "blocking_unknowns": ["exact launch day", "legal issuer and SPV map", "complete deployment inventory", "collateral-report normalization"],
-      "promotion_readiness": "needs_layer_draft"
+      "blocking_unknowns": [
+        "exact launch day",
+        "legal issuer and SPV map",
+        "complete deployment inventory",
+        "collateral-report normalization"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000075",
@@ -124,8 +144,14 @@
         "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda/usda-audits",
         "https://docs.avalonfinance.xyz/start/faq"
       ],
-      "blocking_unknowns": ["exact launch day", "legal and custody map", "holder redemption boundary", "deployment inventory"],
-      "promotion_readiness": "needs_legal_and_deployment_resolution"
+      "blocking_unknowns": [
+        "exact launch day",
+        "legal and custody map",
+        "holder redemption boundary",
+        "deployment inventory"
+      ],
+      "promotion_readiness": "promoted"
     }
-  ]
+  ],
+  "promoted_at": "2026-06-21"
 }
