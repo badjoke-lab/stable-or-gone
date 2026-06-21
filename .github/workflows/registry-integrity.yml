@@ -6,17 +6,33 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install dependencies
         run: npm install
+      - name: Regenerate Batch L integrity outputs
+        if: github.event_name == 'pull_request' && github.head_ref == 'batch-l-current-stable-assets'
+        run: |
+          npm run audit:integrity
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/registry-integrity-audit.json docs/audits/registry-70-final-audit.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Regenerate Batch L integrity outputs"
+            git push origin HEAD:batch-l-current-stable-assets
+          fi
       - name: Validate generated integrity audit
         run: npm run validate:integrity
