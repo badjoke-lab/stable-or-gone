@@ -113,19 +113,19 @@
       "proposed_status": "active",
       "launch_date": null,
       "launch_precision": "month",
-      "identity_decision": "Avalon USDa is the base Bitcoin-backed CDP token; staked and lending receipts are separate.",
+      "identity_decision": "Avalon USDa is the base Bitcoin-backed CDP token; sUSDa and lending receipts are separate.",
       "backing_decision": "Bitcoin and supported crypto collateral in CDP and CeDeFi structures.",
       "redemption_decision": "Borrowers repay USDa to close debt positions; universal holder redemption into BTC collateral is not established.",
-      "income_decision": "Official documentation calls USDa yield-bearing, but the base-token accrual mechanism must be normalized.",
+      "income_decision": "Base USDa does not intrinsically accrue yield; holders enter the separate sUSDa savings representation to earn protocol yield.",
       "deployment_decision": "Official documentation describes multiple networks; canonical contracts and bridge rules remain required.",
       "primary_sources": [
         "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda",
         "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda/risk-management",
         "https://docs.avalonfinance.xyz/avalon-btcfi-products/cedefi-cdp-usda/usda-audits",
-        "https://docs.avalonfinance.xyz/about-us"
+        "https://docs.avalonfinance.xyz/start/faq"
       ],
-      "blocking_unknowns": ["exact launch day", "legal and custody map", "base-token income", "holder redemption boundary", "deployment inventory"],
-      "promotion_readiness": "needs_income_and_legal_resolution"
+      "blocking_unknowns": ["exact launch day", "legal and custody map", "holder redemption boundary", "deployment inventory"],
+      "promotion_readiness": "needs_legal_and_deployment_resolution"
     }
   ]
 }
