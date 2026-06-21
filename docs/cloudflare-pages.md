@@ -1,6 +1,6 @@
 # Cloudflare Pages Deployment
 
-Updated: 2026-06-19
+Updated: 2026-06-22
 
 ## Canonical policy
 
@@ -41,39 +41,48 @@ All three workflows are manual-only. Normal pull requests and normal `main` merg
 The production workflow requires:
 
 - dispatch from `main`
-- deployment classification
+- a deployment classification
 - exact `DEPLOY` confirmation
-- successful full repository build
+- a successful full repository build
 - the GitHub `production` environment
-- configured Cloudflare credentials
+- configured Cloudflare repository secrets
 
 It uploads the prebuilt `dist` directory to the fixed Pages project and then runs production consistency against the deployed commit.
 
 ## Cloudflare dashboard controls
 
-The operator must confirm:
+Configured state:
 
 ```text
 Automatic production branch deployments: OFF
 Automatic preview branch deployments:    OFF
+Build cache:                              ON
+Build watch paths:                        *
 ```
 
-In the Pages project, open branch deployment controls, disable automatic production deployments, set preview branches to None, and save.
+The Git repository connection remains attached, but Git pushes do not trigger Pages builds. Publication occurs through Wrangler direct upload only.
 
 ## GitHub operator setup
 
-Before the first production run:
+Configured state:
 
-1. Create or review the `production` environment.
-2. Configure the Cloudflare credentials described in `docs/deployment-policy.md`.
-3. Restrict production deployment to `main` where available.
-4. Confirm the Pages project name is `stable-or-gone`.
-5. Run `Deploy production` once from `main`.
-6. Verify the workflow's production-consistency result.
+```text
+Repository secrets:
+- CLOUDFLARE_API_TOKEN
+- CLOUDFLARE_ACCOUNT_ID
+
+Environment:
+- production
+- deployment branch: main
+- required reviewers: none
+- wait timer: none
+```
+
+The Cloudflare token is account-scoped and limited to the Pages edit permission required by the deployment workflow.
 
 ## Equivalent operation
 
-The workflow uses Cloudflare's Wrangler Action to perform the equivalent of:
+The workflow performs the equivalent of:
 
 ```text
 wrangler pages deploy dist
@@ -82,22 +91,43 @@ branch: main
 commit: checked-out main SHA
 ```
 
+## First controlled deployment
+
+```text
+Result: PASS
+Workflow run: 27908380603
+Job: 82581060887
+Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
+Deployment classification: publication-checkpoint
+Public origin: https://sog.badjoke-lab.com/
+```
+
+The run completed the full repository build, uploaded the prebuilt site to Cloudflare Pages, verified production, and wrote the deployment summary.
+
+Audit:
+
+```text
+docs/audits/manual-production-activation-2026-06-22.md
+```
+
 ## Retry rule
 
 Do not retry an old deployment after code has changed. Run one new manual deployment from the intended `main` commit.
 
-## Migration state
+## Operational state
 
 ```text
 Repository policy:              implemented
 Policy validator:               implemented
-Manual deployment workflow:     implemented
-Production checks:              manual-only
-Cloudflare dashboard controls:  operator confirmation required
-First manual deployment:        not yet executed
+Manual deployment workflow:     operational
+Production checks:              manual-only and operational
+Cloudflare dashboard controls:  configured
+GitHub credentials:             configured
+GitHub production environment:  configured
+First manual deployment:        passed
 ```
 
-Pending external configuration does not block normal GitHub development.
+Normal GitHub development does not depend on Cloudflare availability. Production publication is performed only at planned checkpoints or verified emergencies.
 
 ## Official references
 
