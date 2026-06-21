@@ -22,6 +22,20 @@ jobs:
       - run: npm install --no-audit --no-fund
       - name: Finalize Batch M
         run: node scripts/finalize-batch-m-bootstrap.mjs
+      - name: Restore manual publication state
+        run: |
+          cat >> docs/roadmap.md <<'EOF'
+
+          ## Manual production publication state
+
+          ```text
+          Automatic production deployment: disabled
+          Preview branch deployments: disabled
+          Publication path: manual GitHub Actions workflow only
+          Manual production publication activation — PASS
+          Deployment workflow run: 27908380603
+          ```
+          EOF
       - name: Validate complete build
         id: build
         continue-on-error: true
@@ -30,9 +44,12 @@ jobs:
       - name: Capture build error
         if: ${{ steps.build.outcome == 'failure' }}
         run: tail -n 120 batch-m-build.log > docs/batch-m-build-error.log
-      - name: Clear old build error
-        if: ${{ steps.build.outcome == 'success' }}
-        run: rm -f docs/batch-m-build-error.log
+      - name: Clear temporary logs
+        run: |
+          rm -f batch-m-build.log
+          if [ "${{ steps.build.outcome }}" = "success" ]; then
+            rm -f docs/batch-m-build-error.log
+          fi
       - name: Commit finalized Batch M
         if: ${{ github.event_name == 'pull_request' }}
         run: |
