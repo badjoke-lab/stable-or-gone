@@ -6,37 +6,18 @@ on:
       - main
   pull_request:
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install dependencies
         run: npm install
-      - name: Synchronize Batch L manifests
-        if: github.event_name == 'pull_request' && github.head_ref == 'batch-l-current-stable-assets'
-        run: |
-          node scripts/prepare-batch-l-pre.mjs
-          node scripts/generate-registry-stats.mjs
-          npm run audit:integrity
-          node scripts/prepare-batch-l-post.mjs
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs data scripts
-          if ! git diff --cached --quiet; then
-            git commit -m "Synchronize Batch L manifests and generated outputs"
-            git push origin HEAD:batch-l-current-stable-assets
-          fi
       - name: Validate deployment policy
         run: npm run validate:deployment-policy
       - name: Validate baseline
