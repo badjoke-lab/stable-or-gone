@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "status": "growth_batch_12_prepared",
+  "status": "growth_batch_12_promoted",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -8,8 +8,8 @@
   ],
   "protected_minimums": {
     "total_candidates": 75,
-    "promoted_candidates": 70,
-    "pending_candidates": 5
+    "promoted_candidates": 75,
+    "pending_candidates": 0
   },
   "planned_batches": {
     "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
