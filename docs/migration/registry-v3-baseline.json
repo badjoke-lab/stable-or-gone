@@ -48,7 +48,7 @@
     "candidate_promotions": 75,
     "pending_candidates": 0,
     "critical_findings": 0,
-    "warnings": 2,
+    "warnings": 0,
     "canonical_name_collisions": 0,
     "alias_collision_warnings": 0,
     "stale_or_missing_last_verified": 0,
