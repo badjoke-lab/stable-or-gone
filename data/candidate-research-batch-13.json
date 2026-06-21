@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_013",
+  "reviewed_at": "2026-06-22",
+  "status": "candidate_intake",
+  "canonical_assets": 75,
+  "policy": {
+    "canonical_write_allowed": false,
+    "manual_evidence_review_required": true,
+    "full_layer_draft_required": true,
+    "unsupported_day_precision_forbidden": true,
+    "yield_wrapper_is_not_alias": true,
+    "identity_deduplication_required": true,
+    "production_parity_required_at_80": true
+  },
+  "records": [
+    {
+      "candidate_id": "sog_cand_000076",
+      "proposed_record_id": "sog_st_gyd",
+      "name": "Gyroscope GYD",
+      "symbol": "GYD",
+      "slug": "gyroscope-gyd",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_boundary": "GYD is the base Gyroscope stablecoin; sGYD is a separate yield-bearing representation and must not be treated as an alias.",
+      "research_scope": ["reserve composition", "mint and redemption mechanics", "autonomous pricing", "deployment inventory", "governance controls", "launch chronology"],
+      "primary_source_leads": [
+        "https://docs.gyro.finance/gyd/",
+        "https://docs.gyro.finance/deployed-contracts/",
+        "https://docs.gyro.finance/audit-reports.html"
+      ],
+      "blocking_unknowns": ["exact launch boundary", "current reserve basket", "complete deployment and bridge map", "holder redemption limits", "organization and governance map"],
+      "promotion_readiness": "intake"
+    },
+    {
+      "candidate_id": "sog_cand_000077",
+      "proposed_record_id": "sog_st_fxusd",
+      "name": "f(x) Protocol fxUSD",
+      "symbol": "fxUSD",
+      "slug": "fx-protocol-fxusd",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_boundary": "fxUSD is the base stablecoin; fxSAVE, stability-pool positions, and leveraged xPOSITION or sPOSITION products are related products, not aliases.",
+      "research_scope": ["V1 and V2 continuity", "collateral and issuance", "redemption", "peg protection", "base-token income", "contracts and audits"],
+      "primary_source_leads": [
+        "https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol",
+        "https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/key-functions-of-f-x",
+        "https://fxprotocol.gitbook.io/fx-docs/risk-management/audit-reports"
+      ],
+      "blocking_unknowns": ["V1 to V2 token continuity", "exact launch boundary", "canonical contract set", "base fxUSD yield behavior", "organization and governance map"],
+      "promotion_readiness": "intake"
+    },
+    {
+      "candidate_id": "sog_cand_000078",
+      "proposed_record_id": "sog_st_honey",
+      "name": "Berachain HONEY",
+      "symbol": "HONEY",
+      "slug": "berachain-honey",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_boundary": "HONEY is Berachain's native base stablecoin; liquidity receipts and any bridged representations require separate relationship treatment.",
+      "research_scope": ["collateral vaults", "custody", "Basket Mode", "mint and redemption fees", "HoneyFactory", "cross-chain representations"],
+      "primary_source_leads": [
+        "https://docs.berachain.com/general/tokens/honey",
+        "https://docs.berachain.com/developers/contracts/honey-token",
+        "https://docs.berachain.com/llms.txt"
+      ],
+      "blocking_unknowns": ["exact launch boundary", "collateral and custodian history", "governance change chronology", "canonical cross-chain map", "legal and operator structure"],
+      "promotion_readiness": "intake"
+    },
+    {
+      "candidate_id": "sog_cand_000079",
+      "proposed_record_id": "sog_st_mai",
+      "name": "QiDAO MAI",
+      "symbol": "MAI",
+      "slug": "qidao-mai",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_boundary": "MAI is the QiDAO stablecoin previously called miMATIC; continuity must be proven before one canonical record is accepted across names and chains.",
+      "research_scope": ["miMATIC rebrand continuity", "vault collateral", "peg-stability module", "liquidations", "chain deployments", "current issuance and redemption"],
+      "primary_source_leads": [
+        "https://docs.mai.finance/detailed-introduction",
+        "https://docs.mai.finance/stablecoin-economics",
+        "https://docs.mai.finance/peg-stability-module",
+        "https://docs.mai.finance/functions/smart-contract-addresses"
+      ],
+      "blocking_unknowns": ["miMATIC to MAI contract continuity", "exact launch and rebrand boundaries", "current supported chains", "present peg and issuance status", "incident and bad-debt history"],
+      "promotion_readiness": "intake"
+    },
+    {
+      "candidate_id": "sog_cand_000080",
+      "proposed_record_id": "sog_st_stablesusdx",
+      "name": "Stables Labs USDX",
+      "symbol": "USDX",
+      "slug": "stables-labs-usdx",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_boundary": "Stables Labs USDX requires a disambiguated identity because USDX is reused by unrelated projects; sUSDX is a separate staked representation.",
+      "research_scope": ["delta-neutral backing", "counterparties and custody", "institutional minting", "redemption delay", "contracts", "reserve and security disclosures"],
+      "primary_source_leads": [
+        "https://docs.usdx.money/",
+        "https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability",
+        "https://docs.usdx.money/guides/how-to-redeem",
+        "https://docs.usdx.money/informaiton/contracts"
+      ],
+      "blocking_unknowns": ["exact launch boundary", "legal and operator map", "collateral and derivatives counterparties", "complete deployment inventory", "reserve and assurance normalization"],
+      "promotion_readiness": "intake"
+    }
+  ]
+}
