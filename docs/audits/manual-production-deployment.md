@@ -1,10 +1,22 @@
 # Manual Production Deployment Audit
 
-Updated: 2026-06-19
+Updated: 2026-06-22
+
+## Result
+
+```text
+Status: OPERATIONAL
+First controlled deployment: PASS
+Workflow run: 27908380603
+Job: 82581060887
+Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
+Pages project: stable-or-gone
+Public origin: https://sog.badjoke-lab.com/
+```
 
 ## Repository implementation
 
-The repository now contains a manual-only production publication workflow:
+The repository contains a manual-only production publication workflow:
 
 ```text
 .github/workflows/deploy-production.yml
@@ -36,25 +48,51 @@ The repository policy validator confirms that:
 - Pages deployment does not occur from another workflow
 - production consistency is not attached to an automatic trigger
 
+## External configuration
+
+The required operator configuration is complete:
+
+- automatic production deployments disabled in Cloudflare Pages
+- automatic preview deployments disabled in Cloudflare Pages
+- build cache enabled
+- Pages project confirmed as `stable-or-gone`
+- least-privilege Cloudflare API token created
+- `CLOUDFLARE_API_TOKEN` stored as a Repository secret
+- `CLOUDFLARE_ACCOUNT_ID` stored as a Repository secret
+- GitHub `production` environment created
+- environment deployment branch restricted to `main`
+
+## First controlled deployment
+
+Workflow run `27908380603` completed successfully.
+
+All deployment job steps passed:
+
+- main and confirmation enforcement
+- latest main checkout
+- source commit recording
+- Node setup and dependency install
+- full repository build
+- prebuilt Pages upload
+- production verification
+- deployment summary
+
+The run proves that the intended free-plan architecture is operational: normal GitHub development remains independent from Cloudflare, while planned releases are published through one deliberate manual workflow.
+
 ## Data impact
 
-No canonical registry data or public record count changes are included.
-
-## External configuration still required
-
-Repository code cannot complete these operator actions:
-
-- disable automatic production deployments in the Cloudflare Pages dashboard
-- disable automatic preview deployments in the Cloudflare Pages dashboard
-- confirm the Pages project name
-- configure the GitHub `production` environment
-- configure the required Cloudflare credentials
-- execute the first manual production deployment
+No canonical registry data or public record count changed during activation. The deployed source contained the existing 75-record canonical baseline.
 
 ## Publication status
 
-This PR implements deployment infrastructure only. It is classified as no production deployment required and must not invoke the new workflow during its own review.
+This infrastructure-finalization change is classified as:
+
+```text
+No production deployment required
+```
+
+Automatic Cloudflare publication is disabled, and the documentation/validator PR does not need a second deployment.
 
 ## Next work
 
-After the external configuration is completed, run one controlled manual deployment from `main`. Normal SOG data development may resume without waiting for that first run.
+Resume controlled growth from 75 to 80. After the 80-record promotion PR is merged, execute one `publication-checkpoint` deployment from `main` and complete the 80-record parity gate.
