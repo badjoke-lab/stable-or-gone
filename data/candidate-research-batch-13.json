@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "batch_id": "batch_013",
   "reviewed_at": "2026-06-22",
-  "status": "reviewed_not_promoted",
-  "canonical_assets": 75,
+  "status": "promoted",
+  "canonical_assets": 80,
   "policy": {
     "canonical_write_allowed": false,
     "manual_evidence_review_required": true,
@@ -34,8 +34,14 @@
         "https://docs.gyro.finance/deployed-contracts/",
         "https://docs.gyro.finance/audit-reports.html"
       ],
-      "blocking_unknowns": ["current reserve component inventory", "canonical token and reserve contract map", "organization and governance role map", "historical Polygon Gyro Proto lineage", "reserve-report normalization"],
-      "promotion_readiness": "needs_layer_draft"
+      "blocking_unknowns": [
+        "current reserve component inventory",
+        "canonical token and reserve contract map",
+        "organization and governance role map",
+        "historical Polygon Gyro Proto lineage",
+        "reserve-report normalization"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000077",
@@ -58,8 +64,14 @@
         "https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/stability-pool",
         "https://fxprotocol.gitbook.io/fx-docs/more/resources/contracts"
       ],
-      "blocking_unknowns": ["exact launch boundary", "V1-to-V2 token and contract continuity", "base fxUSD income accrual", "complete collateral and position contract map", "organization and governance map"],
-      "promotion_readiness": "needs_identity_and_income_resolution"
+      "blocking_unknowns": [
+        "exact launch boundary",
+        "V1-to-V2 token and contract continuity",
+        "base fxUSD income accrual",
+        "complete collateral and position contract map",
+        "organization and governance map"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000078",
@@ -81,8 +93,14 @@
         "https://docs.berachain.com/build/getting-started/deployed-contracts",
         "https://docs.berachain.com/llms.txt"
       ],
-      "blocking_unknowns": ["exact mainnet launch day", "historical collateral and fee chronology", "custodian and legal-operator map", "cross-chain representation inventory", "governance-change event history"],
-      "promotion_readiness": "needs_layer_draft"
+      "blocking_unknowns": [
+        "exact mainnet launch day",
+        "historical collateral and fee chronology",
+        "custodian and legal-operator map",
+        "cross-chain representation inventory",
+        "governance-change event history"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000079",
@@ -106,8 +124,14 @@
         "https://docs.mai.finance/functions/smart-contract-addresses",
         "https://docs.mai.finance/risks/chain-risk"
       ],
-      "blocking_unknowns": ["exact original launch and rebrand dates", "complete current deployment inventory", "current peg and issuance condition", "incident and bad-debt chronology", "legal and governance operator map"],
-      "promotion_readiness": "needs_lifecycle_and_deployment_resolution"
+      "blocking_unknowns": [
+        "exact original launch and rebrand dates",
+        "complete current deployment inventory",
+        "current peg and issuance condition",
+        "incident and bad-debt chronology",
+        "legal and governance operator map"
+      ],
+      "promotion_readiness": "promoted"
     },
     {
       "candidate_id": "sog_cand_000080",
@@ -131,8 +155,14 @@
         "https://docs.usdx.money/a-yield-bearing-token/staking-usdx",
         "https://docs.usdx.money/informaiton/contracts"
       ],
-      "blocking_unknowns": ["exact launch boundary", "legal issuer and operating entity map", "current custody and derivatives counterparties", "complete deployment inventory", "reserve and assurance normalization"],
-      "promotion_readiness": "needs_legal_and_counterparty_resolution"
+      "blocking_unknowns": [
+        "exact launch boundary",
+        "legal issuer and operating entity map",
+        "current custody and derivatives counterparties",
+        "complete deployment inventory",
+        "reserve and assurance normalization"
+      ],
+      "promotion_readiness": "promoted"
     }
   ]
 }
