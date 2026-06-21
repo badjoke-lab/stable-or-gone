@@ -33,17 +33,17 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #90 — Finalize manual Cloudflare publication controls
-Merge: adfdca3054c4b44e6707660c33783373cb9e9946
+PR #91 — Prepare Batch 13 candidate intake
+Merge: f423b82f27f5e1751da24b7c3f018e22c0310a32
 ```
 
 Active work:
 
 ```text
-PR #91 — Prepare Batch 13 candidate intake
-Branch: prepare-batch-13-candidate-intake
+PR #92 — Review Batch 13 promotion boundaries
+Branch: review-batch-13-promotion-boundaries
 Canonical target: 75 → 80
-Current step: candidate intake only
+Current step: boundary review
 Canonical writes: forbidden in this PR
 ```
 
@@ -81,16 +81,17 @@ Audit: docs/audits/manual-production-activation-2026-06-22.md
 75 income profiles
 ```
 
-## Candidate controls during PR #91
+## Candidate controls during PR #92
 
 ```text
 Total controlled candidates: 80
 Promoted candidates:         75
 Pending candidates:           5
 Canonical assets:             75 unchanged
+Boundary-reviewed candidates: 5
 ```
 
-Batch 13 intake:
+Batch 13 candidates:
 
 ```text
 sog_cand_000076 — Gyroscope GYD
@@ -106,8 +107,46 @@ Sources:
 data/candidate-stable-assets-growth-80.json
 data/candidate-research-batch-13.json
 docs/audits/batch-13-candidate-intake.md
+docs/audits/batch-13-promotion-boundary-review.md
 scripts/validate-batch13-research.mjs
 ```
+
+## Boundary-review result
+
+```text
+GYD:
+- base GYD only
+- sGYD remains separate
+- reviewed Ethereum launch date: 2023-12-07
+- Polygon Gyro Proto remains historical lineage
+- readiness: needs_layer_draft
+
+fxUSD:
+- base fxUSD only
+- fxSAVE and position products remain separate
+- V1/V2 continuity and base-token income remain explicit unknowns
+- readiness: needs_identity_and_income_resolution
+
+HONEY:
+- native Berachain HONEY only
+- receipts and bridged forms require explicit relationships
+- Basket Mode, collateral-vault, custody, and fee boundaries recorded
+- readiness: needs_layer_draft
+
+MAI:
+- official miMATIC-to-MAI identity continuity accepted
+- chain deployments and current lifecycle require normalization
+- readiness: needs_lifecycle_and_deployment_resolution
+
+Stables Labs USDX:
+- identity restricted to Stables Labs and usdx.money
+- unrelated USDX assets remain separate
+- sUSDX remains separate
+- approved-party direct redemption boundary recorded
+- readiness: needs_legal_and_counterparty_resolution
+```
+
+Only GYD has a reviewed day-level launch date. No other launch date, legal issuer, contract, reserve percentage, redemption right, or lifecycle conclusion may be inferred beyond the reviewed sources.
 
 ## Current quality baseline
 
@@ -139,41 +178,60 @@ The canonical baseline remains 75 until a later reviewed promotion PR changes ev
 ## Immediate next work
 
 ```text
-1. Complete and merge PR #91 after all GitHub CI checks pass.
-2. Open a separate Batch 13 boundary-review PR.
-3. Resolve each candidate's identity, issuer/operator, launch boundary, lifecycle, backing, redemption, income, deployment, legal, event, evidence, and known-unknown scope.
-4. Reject or defer any candidate that cannot support a complete reviewed layer draft.
-5. Only after boundary review, open the Batch M promotion PR for eligible candidates.
-6. Update canonical data, generated outputs, integrity audit, Registry v3 baseline, and roadmap in the same promotion PR.
+1. Complete and merge PR #92 after all GitHub CI checks pass.
+2. Open the Batch M canonical-promotion PR from the merged main branch.
+3. Build complete reviewed layer drafts for GYD, fxUSD, HONEY, MAI, and Stables Labs USDX.
+4. Keep unresolved legal, income, lifecycle, deployment, counterparty, and date fields explicit rather than guessed.
+5. Defer any candidate whose required layers cannot be represented safely.
+6. In the same promotion PR, update canonical data, candidate promotion manifests, generated outputs, integrity audit, Registry v3 baseline, and roadmap.
 7. After the 80-record promotion merge, execute one manual publication-checkpoint deployment and full production parity.
+8. Do not begin 80 → 85 work until the 80-record parity gate passes.
 ```
 
-## Batch 13 boundary rules
+## Batch M promotion requirements
+
+Every promoted candidate must include the applicable:
+
+- canonical stable-asset record
+- organization and relationship
+- classification and lifecycle
+- reserve and redemption profile
+- event and Event v2 detail
+- reviewed evidence
+- explicit known unknowns
+- deployment identity
+- legal profile
+- reserve components
+- income profile
+- candidate promotion record
+
+Candidate-specific constraints:
 
 ```text
 GYD:
-- base GYD only
-- sGYD remains separate
+- preserve sGYD separation
+- represent Gyro Proto only through explicit lineage
+- use 2023-12-07 as the reviewed launch date
 
 fxUSD:
-- base fxUSD only
-- fxSAVE, xPOSITION, sPOSITION, and stability-pool positions remain separate
+- do not merge fxSAVE or position products
+- represent V1/V2 and base-income uncertainty explicitly
 
 HONEY:
-- native HONEY only
-- receipts and bridged forms require explicit relationships
+- exclude testnet as a production deployment
+- keep receipts and bridges separate
+- separate custody from token identity
 
 MAI:
-- miMATIC-to-MAI continuity must be proven
-- multi-chain copies require canonical deployment review
+- preserve miMATIC continuity as a rebrand, not a second asset
+- normalize chain-specific contracts and current lifecycle
 
 Stables Labs USDX:
-- use a disambiguated identity
-- sUSDX remains separate
-- unrelated USDX projects must not merge into this record
+- use disambiguated identity `sog_st_stablesusdx`
+- do not merge unrelated USDX assets
+- keep sUSDX separate
+- preserve approved-party redemption limits
 ```
-
-No intake source lead may by itself establish a launch date, legal issuer, canonical contract, reserve percentage, redemption right, or current lifecycle status.
 
 ## Manual publication result
 
@@ -251,6 +309,7 @@ PR #86 — Review Batch 12 promotion boundaries
 PR #87 — Promote Batch L current stable assets
 PR #89 — Record 75-record production parity
 PR #90 — Finalize manual Cloudflare publication controls
+PR #91 — Prepare Batch 13 candidate intake
 75-record production parity — PASS
 Manual production publication activation — PASS
 ```
@@ -266,9 +325,9 @@ Phase 5 — 70-record quality audit and baseline: complete
 Phase 6A — Controlled growth from 70 to 75: complete
 Phase 6B — 75-record production parity: complete
 Phase 6C — Manual Cloudflare publication activation: complete
-Phase 6D-1 — Batch 13 candidate intake: active in PR #91
-Phase 6D-2 — Batch 13 boundary review: next
-Phase 6D-3 — Batch M canonical promotion to 80: blocked pending review
+Phase 6D-1 — Batch 13 candidate intake: complete
+Phase 6D-2 — Batch 13 boundary review: active in PR #92
+Phase 6D-3 — Batch M canonical promotion to 80: next after PR #92
 Phase 6D-4 — 80-record manual publication and parity: blocked pending promotion
 ```
 
@@ -277,7 +336,7 @@ Phase 6D-4 — 80-record manual publication and parity: blocked pending promotio
 ### Launch dates
 
 ```text
-34 unresolved records
+34 unresolved canonical records
 ```
 
 Source: `data/quality/launch-date-unresolved.json`
@@ -287,7 +346,7 @@ Unsupported day-level precision remains forbidden.
 ### Terminal dates
 
 ```text
-6 unresolved records
+6 unresolved canonical records
 BAC
 DSD
 ESD
@@ -316,21 +375,6 @@ The reviewed unresolved records remain FEI, HUSD, and EURT.
 ## Controlled-growth rules
 
 Default batch size is five canonical assets.
-
-Every promoted asset must include the applicable:
-
-- canonical stable-asset record
-- organization and relationship
-- classification
-- reserve and redemption profile
-- event and Event v2 detail
-- primary evidence
-- explicit known unknowns
-- deployment identity
-- legal profile
-- reserve component
-- income profile
-- candidate promotion record
 
 Do not promote simple wrappers, bridged copies, LP tokens, vault shares, test tokens, duplicate deployments, or announcement-only projects as separate canonical assets by default.
 
