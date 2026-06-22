@@ -21,7 +21,7 @@ jobs:
       - name: Wire Batch N and baselines
         run: node scripts/finalize-msusd-emergency.mjs
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Regenerate integrity outputs
         run: npm run audit:integrity
       - name: Validate repository
