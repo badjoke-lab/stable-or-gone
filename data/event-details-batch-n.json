@@ -1,0 +1,31 @@
+[
+  {
+    "id": "sog_ev_msusd_verification_termination_2026",
+    "title": "Accountable terminates verification services for MainStreet",
+    "subject_stablecoin_ids": ["sog_st_msusd"],
+    "subject_organization_ids": ["sog_issuer_mainstreet_finance"],
+    "evidence_ids": ["sog_src_msusd_incident_batch_n"],
+    "event_detail_kind": "reserve_change",
+    "reserve_change_detail": {
+      "summary": "Third-party public reserve-verification coverage ended on 2026-06-20; this does not by itself establish a reserve deficit."
+    }
+  },
+  {
+    "id": "sog_ev_msusd_severe_depeg_2026",
+    "title": "msUSD suffers severe market depeg",
+    "subject_stablecoin_ids": ["sog_st_msusd"],
+    "subject_organization_ids": ["sog_issuer_mainstreet_finance"],
+    "evidence_ids": ["sog_src_msusd_incident_batch_n"],
+    "event_detail_kind": "depeg",
+    "depeg_detail": {
+      "direction": "below_peg",
+      "peg_reference": "1 USD",
+      "extreme_price": 0.09,
+      "maximum_deviation_bps": 9100,
+      "recovery_status": "not_recovered",
+      "recovery_date": null,
+      "cause_summary": "The severe market dislocation followed loss of the prior public verification path; reserve sufficiency and direct-redemption performance remain unresolved.",
+      "price_source_ids": ["sog_src_msusd_incident_batch_n"]
+    }
+  }
+]
