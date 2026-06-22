@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_ev_msusd_verification_termination_2026",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "event_type": "reserve_verification_termination",
+    "event_date": "2026-06-20",
+    "title": "Accountable terminates verification services for MainStreet",
+    "description": "Accountable ended its service relationship with MainStreet after stating that MainStreet did not meet its verification standards, removing the previously available public reserve-verification path.",
+    "impact_level": "high",
+    "confidence": "medium",
+    "source_count": 1,
+    "event_status_effect": "impaired",
+    "notes": "This establishes loss of public verification visibility, not a confirmed reserve deficit or insolvency."
+  },
+  {
+    "id": "sog_ev_msusd_severe_depeg_2026",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "event_type": "depeg",
+    "event_date": "2026-06-20",
+    "title": "msUSD suffers severe market depeg",
+    "description": "msUSD traded materially below its intended one-dollar peg after the verification-provider termination, with reporting placing the intraday low near nine cents.",
+    "impact_level": "high",
+    "confidence": "medium",
+    "source_count": 1,
+    "event_status_effect": "impaired",
+    "notes": "A rebound from the low is not treated as sustainable peg recovery. Market price is distinct from verified direct-redemption value."
+  }
+]
