@@ -72,16 +72,16 @@
     "stablecoin_id": "sog_st_usdn",
     "issuer_id": "sog_issuer_neutrino",
     "event_type": "rebrand_and_classification_change",
-    "event_date": null,
-    "title": "USDN transitions to Neutrino Index / XTN",
-    "description": "Neutrino transitioned the former USDN identity to Neutrino Index / XTN. SOG records this as the end of USDN's original hard-USD stablecoin classification rather than a recovered peg.",
+    "event_date": "2023-01-31",
+    "title": "Neutrino begins the Waves asset rename from USDN to XTN",
+    "description": "Neutrino announced that it was starting the approved USDN-to-XTN transition on 31 January 2023 by renaming the token on Waves through an Update Asset Info transaction. SOG uses this on-chain identity change as the end of the original hard-USD stablecoin classification, while recognizing that external interfaces could retain USDN during the staged rollout.",
     "impact_level": "critical",
     "event_status_effect": "rebranded",
     "recovered": false,
     "recovery_date": null,
     "failure_mechanism": "persistent_depeg_and_protocol_transition",
-    "confidence": "medium",
-    "source_count": 2,
-    "notes": "The exact effective transition date remains unresolved; no date is invented to satisfy the schema."
+    "confidence": "high",
+    "source_count": 3,
+    "notes": "The date marks the first executed on-chain rename step and stablecoin-classification end, not universal completion across every exchange, wallet, or data provider."
   }
 ]

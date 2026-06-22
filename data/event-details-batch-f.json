@@ -87,8 +87,8 @@
     ],
     "event_detail_kind": "termination",
     "termination_detail": {
-      "summary": "Normal Mountain Protocol issuance and issuer-platform redemption ended; Phase 3 retains an on-chain reserve and exit process while the token winds down.",
-      "status": "winding_down",
+      "summary": "Mountain Protocol issuance, direct redemption, and platform operation ended when Phase 3 took effect on 2025-08-22; residual on-chain wind-down and exit routes continue as post-discontinuation context.",
+      "status": "discontinued",
       "related_organization_ids": [
         "sog_issuer_mountain_protocol"
       ]
