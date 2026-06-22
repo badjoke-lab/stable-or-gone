@@ -22,6 +22,8 @@ jobs:
         run: node scripts/finalize-msusd-emergency.mjs
       - name: Synchronize candidate controls and generated stats
         run: node scripts/finalize-msusd-controls.mjs
+      - name: Correct evidence relation baseline
+        run: node scripts/fix-msusd-evidence-relation-count.mjs
       - name: Install dependencies
         run: npm install
       - name: Regenerate integrity outputs
@@ -45,6 +47,7 @@ jobs:
         run: |
           rm -f scripts/finalize-msusd-emergency.mjs
           rm -f scripts/finalize-msusd-controls.mjs
+          rm -f scripts/fix-msusd-evidence-relation-count.mjs
           rm -f .github/workflows/apply-msusd-emergency.yml
           rm -f .github/workflows/validate-msusd-emergency-on-pr.yml
           rm -f .github/workflows/export-msusd-transform.yml
