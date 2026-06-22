@@ -12,7 +12,7 @@
     ],
     "holder_claim_type": "contractual_conversion_right",
     "claim_against_organization_ids": ["sog_issuer_mainstreet_finance"],
-    "reserve_ownership": "issuer_controlled",
+    "reserve_ownership": "issuer_owned",
     "reserve_segregation": "unclear",
     "bankruptcy_remoteness": "unclear",
     "licensed_or_regulated_as": [],
