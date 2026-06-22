@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          show-progress: false
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -29,7 +31,7 @@ jobs:
               raise SystemExit('embedded transform not found')
           pathlib.Path('/tmp/apply-msusd-emergency-record.mjs').write_bytes(gzip.decompress(base64.b64decode(match.group(1))))
           PY
-          node /tmp/apply-msusd-emergency-record.mjs
+          node /tmp/apply-msusd-emergency-record.mjs 2>&1 | tail -n 20
       - name: Install dependencies
         run: npm install
       - name: Regenerate integrity outputs
