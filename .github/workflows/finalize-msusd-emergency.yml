@@ -20,6 +20,8 @@ jobs:
           show-progress: false
       - name: Wire Batch N and baselines
         run: node scripts/finalize-msusd-emergency.mjs
+      - name: Synchronize candidate controls and generated stats
+        run: node scripts/finalize-msusd-controls.mjs
       - name: Install dependencies
         run: npm install
       - name: Regenerate integrity outputs
@@ -46,9 +48,11 @@ jobs:
       - name: Remove temporary finalization files
         run: |
           rm -f scripts/finalize-msusd-emergency.mjs
+          rm -f scripts/finalize-msusd-controls.mjs
           rm -f .github/workflows/apply-msusd-emergency.yml
           rm -f .github/workflows/validate-msusd-emergency-on-pr.yml
           rm -f .github/workflows/export-msusd-transform.yml
+          rm -f .github/workflows/diagnose-msusd-integrity.yml
           rm -f .github/workflows/finalize-msusd-emergency.yml
       - name: Commit validated result
         run: |
