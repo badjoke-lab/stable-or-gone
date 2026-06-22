@@ -22,7 +22,7 @@ Recorded: 2026-06-22
 | profiles | 80 |
 | events | 107 |
 | event_details | 107 |
-| evidence | 327 |
+| evidence | 328 |
 | reserve_reports | 87 |
 | known_unknowns | 188 |
 | regulatory_notes | 9 |
@@ -50,10 +50,14 @@ Recorded: 2026-06-22
 
 ## Quality queues
 
-- Launch-date unresolved: 38
+- Launch-date unresolved: 37
 - Terminal-date unresolved: 6
 - Reserve-report applicability queue: 13
 - All-unknown income profiles: 0
+
+## Launch-date follow-up
+
+Falcon USDf now has the reviewed public-launch date `2025-04-30`, backed by Falcon Finance’s dated first-party announcement. The earlier closed beta remains separate from unrestricted public access.
 
 ## Promotion boundary
 

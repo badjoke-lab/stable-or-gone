@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "frozen_at": "2026-06-22",
-  "source_review": "docs/audits/remaining-launch-date-review.md",
+  "source_review": "docs/audits/launch-date-category-b-follow-up.md",
   "policy": {
     "canonical_day_required": true,
     "keep_null_without_day_level_primary_evidence": true,
@@ -9,9 +9,9 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 38,
+  "expected_total": 37,
   "category_counts": {
-    "B": 9,
+    "B": 8,
     "C": 26,
     "D": 3
   },
@@ -232,13 +232,6 @@
       "best_known_range": null,
       "reason_code": "primary_source_not_found",
       "review_note": "Current fund-token documentation does not establish the original product launch day."
-    },
-    {
-      "stablecoin_id": "sog_st_usdf",
-      "category": "B",
-      "best_known_range": "2025",
-      "reason_code": "partial_date_only",
-      "review_note": "Official material establishes 2025 without a reviewed day-level launch boundary."
     },
     {
       "stablecoin_id": "sog_st_usdz",

@@ -70,7 +70,7 @@ Audit: docs/audits/manual-production-activation-2026-06-22.md
 80 reserve/redemption profiles
 107 events
 107 Event v2 detail records
-327 evidence records
+328 evidence records
 87 reserve-report or reserve-context records
 188 known unknowns
 9 regulatory notes
@@ -162,7 +162,7 @@ Required-layer coverage:              80 / 80
 Event coverage:                        80 / 80
 Deployment coverage:                   80 / 80
 Reserve-report context coverage:       67 / 80 informational
-Missing canonical launch dates:            38
+Missing canonical launch dates:            37
 Historical records missing terminal date:   6
 Reserve applicability queue:                13
 All-unknown income profiles:                 0
@@ -182,7 +182,7 @@ The reviewed GitHub baseline is 80 after PR #93. Production remains at the previ
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
 2. Continue GitHub-only quality work against the 80-record baseline.
-3. Prioritize the 38-record launch-date queue, 6-record terminal-date queue, and 13-record reserve applicability queue.
+3. Prioritize the 37-record launch-date queue, 6-record terminal-date queue, and 13-record reserve applicability queue.
 4. Keep generated outputs, integrity audit, Registry v3 baseline, and roadmap synchronized in every quality PR.
 5. When Cloudflare access is available again, run one manual 80-record publication checkpoint from the merged main branch.
 6. Verify deployed commit, public counts, machine-readable files, canonical routes, sitemap, metadata, structured data, and production consistency.
@@ -340,10 +340,16 @@ Phase 6D-4 — 80-record manual publication and parity: blocked pending Cloudfla
 ### Launch dates
 
 ```text
-38 unresolved canonical records
+37 unresolved canonical records
 ```
 
 Source: `data/quality/launch-date-unresolved.json`
+
+Resolved in the 80-record quality follow-up:
+
+```text
+Falcon USDf — 2025-04-30 public launch
+```
 
 Unsupported day-level precision remains forbidden.
 
