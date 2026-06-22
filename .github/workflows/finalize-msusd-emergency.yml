@@ -33,8 +33,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: msusd-integrity-diagnostics
-          path: /tmp/msusd-integrity.log
-          if-no-files-found: error
+          path: |
+            /tmp/msusd-integrity.log
+            data/generated/registry-integrity-audit.json
+            docs/audits/registry-70-final-audit.md
+          if-no-files-found: warn
       - name: Stop on integrity failure
         if: steps.integrity.outcome != 'success'
         run: exit 1
