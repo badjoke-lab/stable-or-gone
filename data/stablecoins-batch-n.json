@@ -1,0 +1,31 @@
+[
+  {
+    "id": "sog_st_msusd",
+    "slug": "mainstreet-msusd",
+    "name": "MainStreetUSD",
+    "symbol": "msUSD",
+    "aliases": [
+      "msUSD",
+      "Main Street USD",
+      "MainStreet USD"
+    ],
+    "status": "impaired",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "peg_asset": "USD",
+    "collateral_model": "issuer_claimed_usdc_backing_with_separate_yield_strategy",
+    "reserve_disclosure_status": "verification_provider_terminated_under_review",
+    "redemption_status": "restricted",
+    "who_can_redeem": "KYC-verified users may request direct redemption under MainStreet program rules; current execution, capacity, and settlement performance remain under review.",
+    "retail_redemption": "market_based_unless_kyc_approved",
+    "institutional_redemption": "approved_participant_direct_subject_to_capacity",
+    "minimum_redemption": "program_terms_dependent",
+    "redemption_region_notes": "Identity, jurisdiction, compliance, liquidity, cooldown, and concurrent-redemption limits apply.",
+    "redemption_notes": "Official documentation describes a seven-day cooldown and limited concurrent redemption capacity. Base msUSD is separate from msY and legacy contract representations.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "USDC-referenced stablecoin issued by MainStreet Finance whose reserve-verification relationship ended and whose market price suffered a severe depeg in June 2026.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-22",
+    "notes": "Emergency Batch N. Classified as impaired, not failed or discontinued; reserve deficit, insolvency, permanent redemption failure, and shutdown are not confirmed."
+  }
+]
