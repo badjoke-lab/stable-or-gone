@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_dep_msusd_ethereum_v2_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "network": "Ethereum",
+    "chain_id": 1,
+    "contract_address": "0x4ba01f22827018b4772CD326C7627FB4956A7C00",
+    "deployment_type": "native",
+    "status": "active",
+    "is_canonical": true,
+    "start_date": null,
+    "end_date": null,
+    "evidence_ids": ["sog_src_msusd_addresses_batch_n"],
+    "notes": "Current msUSDV2 Ethereum address from official documentation. Legacy msUSD contracts and cross-chain OFT representations remain separate."
+  }
+]
