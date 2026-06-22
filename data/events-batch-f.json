@@ -46,14 +46,14 @@
     "stablecoin_id": "sog_st_mountainusdm",
     "issuer_id": "sog_issuer_mountain_protocol",
     "event_type": "wind_down",
-    "event_date": null,
-    "title": "Mountain Protocol advances USDM to Phase 3 wind-down",
-    "description": "Mountain Protocol ended normal issuer-platform redemption and moved the remaining USDM reserve and exit process into its Phase 3 on-chain wind-down structure.",
-    "impact_level": "high",
+    "event_date": "2025-08-22",
+    "title": "Mountain Protocol enters Phase 3 and ends issuer services for USDM",
+    "description": "Mountain Protocol Phase 3 terms took effect on 22 August 2025. From that date Mountain Protocol no longer issued or directly redeemed USDM and no longer operated the issuer platform, while remaining reserves and exit liquidity moved to an on-chain wind-down structure.",
+    "impact_level": "critical",
     "confidence": "high",
     "source_count": 3,
-    "event_status_effect": "winding_down",
-    "notes": "Final token termination date remains unresolved."
+    "event_status_effect": "discontinued",
+    "notes": "The date is the issuer-service discontinuation boundary. Residual token transferability, rebasing, pools, and on-chain exits do not restore normal issuance or issuer redemption."
   },
   {
     "id": "sog_ev_usdq_2024_launch",

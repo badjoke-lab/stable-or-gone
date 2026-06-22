@@ -1,7 +1,7 @@
 {
-  "baseline_id": "sog_registry_v2_post_category_b_launch_dates_2026_06_22",
-  "captured_at": "2026-06-22",
-  "source_commit": "resolve-category-b-launch-dates",
+  "baseline_id": "sog_registry_v2_post_terminal_date_resolution_2026_06_23",
+  "captured_at": "2026-06-23",
+  "source_commit": "resolve-terminal-dates-usdm-usdn",
   "minimum_counts": {
     "stablecoins": 81,
     "organizations": 70,
@@ -10,8 +10,8 @@
     "profiles": 81,
     "events": 111,
     "event_details": 111,
-    "evidence": 337,
-    "evidence_relations": 332,
+    "evidence": 338,
+    "evidence_relations": 333,
     "reserve_reports": 88,
     "known_unknowns": 195,
     "regulatory_notes": 9,

@@ -1,8 +1,8 @@
 {
   "schema_version": "3.0-baseline",
-  "baseline_id": "sog_registry_v3_quality_81_category_b_launch_dates_2026_06_22",
-  "recorded_at": "2026-06-22",
-  "data_checkpoint_commit": "resolve-category-b-launch-dates",
+  "baseline_id": "sog_registry_v3_quality_81_terminal_dates_2026_06_23",
+  "recorded_at": "2026-06-23",
+  "data_checkpoint_commit": "resolve-terminal-dates-usdm-usdn",
   "base_registry": "docs/migration/registry-v2-baseline.json",
   "foundation": "docs/migration/registry-v3-foundation.json",
   "generated_stats": "data/generated/registry-stats.json",
@@ -20,7 +20,7 @@
     "profiles": 81,
     "events": 111,
     "event_details": 111,
-    "evidence": 337,
+    "evidence": 338,
     "reserve_reports": 88,
     "known_unknowns": 195,
     "regulatory_notes": 9,
@@ -54,7 +54,7 @@
     "stale_or_missing_last_verified": 0,
     "all_unknown_income_profiles": 0,
     "launch_date_unresolved": 34,
-    "terminal_date_unresolved": 6,
+    "terminal_date_unresolved": 4,
     "reserve_report_applicability_queue": 13,
     "reserve_report_not_applicable_by_design": 10,
     "reserve_report_source_status_unresolved": 3,
@@ -72,5 +72,5 @@
     "production_parity_required_at_80": true
   },
   "validator": "scripts/validate-registry-v3-baseline.mjs",
-  "audit_report": "docs/audits/launch-date-category-b-resolution.md"
+  "audit_report": "docs/audits/terminal-date-resolution-usdm-usdn.md"
 }

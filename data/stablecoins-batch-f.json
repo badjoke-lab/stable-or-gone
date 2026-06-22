@@ -108,11 +108,11 @@
     "redemption_region_notes": "The former issuer platform is closed; access depends on Ethereum contracts, pool state, wallet access, and applicable restrictions.",
     "redemption_notes": "USDM remains transferable and may continue to rebase or be wrapped, but that does not mean normal issuance and direct issuer redemption remain active.",
     "launch_date": "2023-09-11",
-    "discontinued_date": null,
+    "discontinued_date": "2025-08-22",
     "summary": "Historical rebasing USD stablecoin of Mountain Protocol now in Phase 3 wind-down, with reserves moved to on-chain stablecoin liquidity and no continuing issuer redemption platform.",
     "confidence": "high",
-    "last_verified_at": "2026-06-22",
-    "notes": "Batch F promotion. The launch date follows Mountain Protocol’s dated statement that it publicly launched Mountain Protocol and USDM on 2023-09-11; later wind-down remains a separate lifecycle event."
+    "last_verified_at": "2026-06-23",
+    "notes": "Batch F promotion. Launch date is 2023-09-11. Terminal-date review records 2025-08-22 as the issuer-service discontinuation boundary, when Phase 3 terms ended Mountain Protocol issuance, direct redemption, and platform operation; residual on-chain exit routes remain separate post-discontinuation context."
   },
   {
     "id": "sog_st_usdq",
