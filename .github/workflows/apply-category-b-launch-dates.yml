@@ -32,7 +32,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: category-b-integrity-diagnostics
-          path: /tmp/category-b-integrity.log
+          path: |
+            /tmp/category-b-integrity.log
+            data/generated/registry-integrity-audit.json
           if-no-files-found: error
       - name: Stop on integrity failure
         if: steps.integrity.outcome != 'success'
