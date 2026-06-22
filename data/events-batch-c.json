@@ -38,17 +38,17 @@
     "stablecoin_id": "sog_st_usd0",
     "issuer_id": "sog_issuer_usual",
     "event_type": "launch",
-    "event_date": null,
-    "title": "Usual introduces USD0 and its RWA-backed issuance architecture",
-    "description": "Usual introduced USD0 as a USD-pegged protocol stablecoin collateralized by short-duration tokenized sovereign assets, with direct and indirect minting and redemption routes.",
+    "event_date": "2024-07-09",
+    "title": "Usual launches its public mainnet with USD0 live",
+    "description": "Usual announced on 9 July 2024 that its public mainnet had launched, with USD0 and USD0++ available for participation in the public Pills campaign.",
     "impact_level": "high",
     "event_status_effect": "active",
     "recovered": null,
     "recovery_date": null,
     "failure_mechanism": "not_applicable",
-    "confidence": "medium",
-    "source_count": 2,
-    "notes": "Official materials place the product launch and expansion in 2024 but a durable single day-level launch date has not yet been fixed."
+    "confidence": "high",
+    "source_count": 3,
+    "notes": "The canonical boundary is unrestricted public-mainnet availability; earlier May 2024 introduction and permissioned activity remain pre-public context."
   },
   {
     "id": "sog_ev_usr_2026_03_unauthorized_mint",
@@ -66,5 +66,22 @@
     "confidence": "high",
     "source_count": 2,
     "notes": "SOG records the unauthorized mint, operational restriction, and recovery state without treating the incident as proof that underlying collateral was lost."
+  },
+  {
+    "id": "sog_ev_usr_2024_09_public_launch",
+    "stablecoin_id": "sog_st_usr",
+    "issuer_id": "sog_issuer_resolv",
+    "event_type": "launch",
+    "event_date": "2024-09-04",
+    "title": "Resolv opens USR to public participation",
+    "description": "Resolv opened its points program to the crypto community on 4 September 2024 with live USR holding, staking, liquidity, and trading activities; a later first-party anniversary statement identifies that date as the public launch.",
+    "impact_level": "high",
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "not_applicable",
+    "confidence": "high",
+    "source_count": 1,
+    "notes": "The public-launch date is distinct from the March 2026 unauthorized-mint incident and recovery state."
   }
 ]

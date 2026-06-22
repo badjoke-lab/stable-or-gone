@@ -1,33 +1,86 @@
 [
   {
     "id": "sog_ev_gho_2023_07_launch",
-    "subject_stablecoin_ids": ["sog_st_gho"],
-    "subject_organization_ids": ["sog_issuer_aave"],
-    "evidence_ids": ["sog_src_gho_launch_batch_c", "sog_src_gho_facilitators_batch_c"],
+    "subject_stablecoin_ids": [
+      "sog_st_gho"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_aave"
+    ],
+    "evidence_ids": [
+      "sog_src_gho_launch_batch_c",
+      "sog_src_gho_facilitators_batch_c"
+    ],
     "event_detail_kind": "migration",
-    "migration_detail": {"summary": "GHO Ethereum mainnet launch with the Aave V3 Ethereum and FlashMinter facilitators."}
+    "migration_detail": {
+      "summary": "GHO Ethereum mainnet launch with the Aave V3 Ethereum and FlashMinter facilitators."
+    }
   },
   {
     "id": "sog_ev_bold_2025_05_live",
-    "subject_stablecoin_ids": ["sog_st_bold"],
-    "subject_organization_ids": ["sog_issuer_liquity"],
-    "evidence_ids": ["sog_src_bold_live_batch_c", "sog_src_bold_overview_batch_c"],
+    "subject_stablecoin_ids": [
+      "sog_st_bold"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_liquity"
+    ],
+    "evidence_ids": [
+      "sog_src_bold_live_batch_c",
+      "sog_src_bold_overview_batch_c"
+    ],
     "event_detail_kind": "migration",
-    "migration_detail": {"summary": "Liquity V2 relaunch and BOLD live deployment."}
+    "migration_detail": {
+      "summary": "Liquity V2 relaunch and BOLD live deployment."
+    }
   },
   {
     "id": "sog_ev_usd0_2024_launch_phase",
-    "subject_stablecoin_ids": ["sog_st_usd0"],
-    "subject_organization_ids": ["sog_issuer_usual"],
-    "evidence_ids": ["sog_src_usd0_overview_batch_c", "sog_src_usd0_fact_sheet_batch_c"],
-    "event_detail_kind": "reserve_change",
-    "reserve_change_detail": {"summary": "USD0 launch phase and introduction of tokenized-sovereign-asset collateral architecture."}
+    "subject_stablecoin_ids": [
+      "sog_st_usd0"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_usual"
+    ],
+    "evidence_ids": [
+      "sog_src_usd0_overview_batch_c",
+      "sog_src_usd0_fact_sheet_batch_c",
+      "sog_src_usd0_public_mainnet_2024"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Usual announced that its public mainnet and public USD0 participation were live on 2024-07-09.",
+      "status": "active"
+    }
   },
   {
     "id": "sog_ev_usr_2026_03_unauthorized_mint",
-    "subject_stablecoin_ids": ["sog_st_usr"],
-    "subject_organization_ids": ["sog_issuer_resolv"],
-    "evidence_ids": ["sog_src_usr_postmortem_batch_c", "sog_src_usr_recovery_batch_c"],
+    "subject_stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_resolv"
+    ],
+    "evidence_ids": [
+      "sog_src_usr_postmortem_batch_c",
+      "sog_src_usr_recovery_batch_c"
+    ],
     "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_usr_2024_09_public_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_resolv"
+    ],
+    "evidence_ids": [
+      "sog_src_usr_public_launch_2024"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Resolv opened USR participation to the public on 2024-09-04.",
+      "status": "active"
+    }
   }
 ]

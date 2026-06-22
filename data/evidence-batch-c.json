@@ -13,10 +13,18 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "gho_mainnet_launch_and_initial_facilitators",
-    "stablecoin_ids": ["sog_st_gho"],
-    "organization_ids": ["sog_issuer_aave"],
-    "event_ids": ["sog_ev_gho_2023_07_launch"],
-    "claim_scopes": ["gho_mainnet_launch_and_initial_facilitators"],
+    "stablecoin_ids": [
+      "sog_st_gho"
+    ],
+    "organization_ids": [
+      "sog_issuer_aave"
+    ],
+    "event_ids": [
+      "sog_ev_gho_2023_07_launch"
+    ],
+    "claim_scopes": [
+      "gho_mainnet_launch_and_initial_facilitators"
+    ],
     "notes": "Executed Aave governance proposal establishing the July 15, 2023 Ethereum launch and the Aave V3 Ethereum and FlashMinter initial facilitators."
   },
   {
@@ -33,10 +41,19 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "gho_facilitator_supply_and_bucket_mechanics",
-    "stablecoin_ids": ["sog_st_gho"],
-    "organization_ids": ["sog_issuer_aave"],
-    "event_ids": ["sog_ev_gho_2023_07_launch"],
-    "claim_scopes": ["gho_facilitator_supply_and_bucket_mechanics", "gho_aave_v3_ethereum_facilitator"],
+    "stablecoin_ids": [
+      "sog_st_gho"
+    ],
+    "organization_ids": [
+      "sog_issuer_aave"
+    ],
+    "event_ids": [
+      "sog_ev_gho_2023_07_launch"
+    ],
+    "claim_scopes": [
+      "gho_facilitator_supply_and_bucket_mechanics",
+      "gho_aave_v3_ethereum_facilitator"
+    ],
     "notes": "Primary Aave documentation for facilitator-controlled GHO mint and burn capacity."
   },
   {
@@ -53,10 +70,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "gho_stability_module_conversion_mechanics",
-    "stablecoin_ids": ["sog_st_gho"],
-    "organization_ids": ["sog_issuer_aave"],
+    "stablecoin_ids": [
+      "sog_st_gho"
+    ],
+    "organization_ids": [
+      "sog_issuer_aave"
+    ],
     "event_ids": [],
-    "claim_scopes": ["gho_stability_module_conversion_mechanics"],
+    "claim_scopes": [
+      "gho_stability_module_conversion_mechanics"
+    ],
     "notes": "Primary documentation for governance-approved GHO stability modules and supported conversion paths."
   },
   {
@@ -73,10 +96,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "gho_canonical_bridge_and_remote_deployment_design",
-    "stablecoin_ids": ["sog_st_gho"],
-    "organization_ids": ["sog_issuer_aave"],
+    "stablecoin_ids": [
+      "sog_st_gho"
+    ],
+    "organization_ids": [
+      "sog_issuer_aave"
+    ],
     "event_ids": [],
-    "claim_scopes": ["gho_canonical_bridge_and_remote_deployment_design"],
+    "claim_scopes": [
+      "gho_canonical_bridge_and_remote_deployment_design"
+    ],
     "notes": "Primary Aave documentation separating Ethereum issuance from canonical bridge representations on supported networks."
   },
   {
@@ -93,10 +122,19 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "bold_collateral_direct_redemption_and_asset_identity",
-    "stablecoin_ids": ["sog_st_bold"],
-    "organization_ids": ["sog_issuer_liquity"],
-    "event_ids": ["sog_ev_bold_2025_05_live"],
-    "claim_scopes": ["bold_collateral_direct_redemption_and_asset_identity", "bold_distinct_from_sbold"],
+    "stablecoin_ids": [
+      "sog_st_bold"
+    ],
+    "organization_ids": [
+      "sog_issuer_liquity"
+    ],
+    "event_ids": [
+      "sog_ev_bold_2025_05_live"
+    ],
+    "claim_scopes": [
+      "bold_collateral_direct_redemption_and_asset_identity",
+      "bold_distinct_from_sbold"
+    ],
     "notes": "Primary Liquity documentation describing BOLD as overcollateralized by WETH, wstETH, and rETH and separating BOLD from third-party sBOLD."
   },
   {
@@ -113,10 +151,18 @@
     "accessed_at": "2026-06-14",
     "reliability": "medium",
     "claim_scope": "liquity_v2_relaunch_date",
-    "stablecoin_ids": ["sog_st_bold"],
-    "organization_ids": ["sog_issuer_liquity"],
-    "event_ids": ["sog_ev_bold_2025_05_live"],
-    "claim_scopes": ["liquity_v2_relaunch_date"],
+    "stablecoin_ids": [
+      "sog_st_bold"
+    ],
+    "organization_ids": [
+      "sog_issuer_liquity"
+    ],
+    "event_ids": [
+      "sog_ev_bold_2025_05_live"
+    ],
+    "claim_scopes": [
+      "liquity_v2_relaunch_date"
+    ],
     "notes": "Official documentation references the Liquity V2 relaunch announcement dated May 19, 2025."
   },
   {
@@ -133,10 +179,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "bold_public_redemption_and_collateral_routing",
-    "stablecoin_ids": ["sog_st_bold"],
-    "organization_ids": ["sog_issuer_liquity"],
+    "stablecoin_ids": [
+      "sog_st_bold"
+    ],
+    "organization_ids": [
+      "sog_issuer_liquity"
+    ],
     "event_ids": [],
-    "claim_scopes": ["bold_public_redemption_and_collateral_routing"],
+    "claim_scopes": [
+      "bold_public_redemption_and_collateral_routing"
+    ],
     "notes": "Primary documentation stating that any Ethereum address with sufficient BOLD can initiate redemption through Liquity V2 contracts."
   },
   {
@@ -153,10 +205,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "bold_contract_identity_audits_and_technical_architecture",
-    "stablecoin_ids": ["sog_st_bold"],
-    "organization_ids": ["sog_issuer_liquity"],
+    "stablecoin_ids": [
+      "sog_st_bold"
+    ],
+    "organization_ids": [
+      "sog_issuer_liquity"
+    ],
     "event_ids": [],
-    "claim_scopes": ["bold_contract_identity_audits_and_technical_architecture"],
+    "claim_scopes": [
+      "bold_contract_identity_audits_and_technical_architecture"
+    ],
     "notes": "Primary Liquity technical resource index for the live BOLD contracts, codebase, and audits."
   },
   {
@@ -173,10 +231,18 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usd0_product_identity_and_rwa_stablecoin_design",
-    "stablecoin_ids": ["sog_st_usd0"],
-    "organization_ids": ["sog_issuer_usual"],
-    "event_ids": ["sog_ev_usd0_2024_launch_phase"],
-    "claim_scopes": ["usd0_product_identity_and_rwa_stablecoin_design"],
+    "stablecoin_ids": [
+      "sog_st_usd0"
+    ],
+    "organization_ids": [
+      "sog_issuer_usual"
+    ],
+    "event_ids": [
+      "sog_ev_usd0_2024_launch_phase"
+    ],
+    "claim_scopes": [
+      "usd0_product_identity_and_rwa_stablecoin_design"
+    ],
     "notes": "Primary Usual product documentation for USD0."
   },
   {
@@ -193,10 +259,19 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usd0_collateral_chains_contracts_and_governance",
-    "stablecoin_ids": ["sog_st_usd0"],
-    "organization_ids": ["sog_issuer_usual"],
-    "event_ids": ["sog_ev_usd0_2024_launch_phase"],
-    "claim_scopes": ["usd0_collateral_chains_contracts_and_governance", "usd0_contract_addresses"],
+    "stablecoin_ids": [
+      "sog_st_usd0"
+    ],
+    "organization_ids": [
+      "sog_issuer_usual"
+    ],
+    "event_ids": [
+      "sog_ev_usd0_2024_launch_phase"
+    ],
+    "claim_scopes": [
+      "usd0_collateral_chains_contracts_and_governance",
+      "usd0_contract_addresses"
+    ],
     "notes": "Primary fact sheet listing Ethereum, Arbitrum, Base, and BNB Chain token addresses and current collateral architecture."
   },
   {
@@ -213,10 +288,17 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usd0_direct_and_indirect_mint_redemption_routes",
-    "stablecoin_ids": ["sog_st_usd0"],
-    "organization_ids": ["sog_issuer_usual"],
+    "stablecoin_ids": [
+      "sog_st_usd0"
+    ],
+    "organization_ids": [
+      "sog_issuer_usual"
+    ],
     "event_ids": [],
-    "claim_scopes": ["usd0_direct_and_indirect_mint_redemption_routes", "usd0_primary_market_minimum"],
+    "claim_scopes": [
+      "usd0_direct_and_indirect_mint_redemption_routes",
+      "usd0_primary_market_minimum"
+    ],
     "notes": "Primary documentation for direct tokenized-Treasury and indirect USDC routes, including launch-phase direct-route minimums."
   },
   {
@@ -233,10 +315,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usd0_tokenized_rwa_collateral_and_aggregator",
-    "stablecoin_ids": ["sog_st_usd0"],
-    "organization_ids": ["sog_issuer_usual"],
+    "stablecoin_ids": [
+      "sog_st_usd0"
+    ],
+    "organization_ids": [
+      "sog_issuer_usual"
+    ],
     "event_ids": [],
-    "claim_scopes": ["usd0_tokenized_rwa_collateral_and_aggregator"],
+    "claim_scopes": [
+      "usd0_tokenized_rwa_collateral_and_aggregator"
+    ],
     "notes": "Primary collateral documentation describing the RWA aggregator and 1:1 mint and redeem design."
   },
   {
@@ -253,10 +341,17 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usr_overcollateralization_redemption_and_rlp_layer",
-    "stablecoin_ids": ["sog_st_usr"],
-    "organization_ids": ["sog_issuer_resolv"],
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
     "event_ids": [],
-    "claim_scopes": ["usr_overcollateralization_redemption_and_rlp_layer", "usr_distinct_from_stusr_and_wstusr"],
+    "claim_scopes": [
+      "usr_overcollateralization_redemption_and_rlp_layer",
+      "usr_distinct_from_stusr_and_wstusr"
+    ],
     "notes": "Primary Resolv documentation for USR, normal 1:1 mint and redeem design, and the separate RLP insurance layer."
   },
   {
@@ -273,10 +368,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usr_collateral_asset_clusters_and_user_operations",
-    "stablecoin_ids": ["sog_st_usr"],
-    "organization_ids": ["sog_issuer_resolv"],
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
     "event_ids": [],
-    "claim_scopes": ["usr_collateral_asset_clusters_and_user_operations"],
+    "claim_scopes": [
+      "usr_collateral_asset_clusters_and_user_operations"
+    ],
     "notes": "Primary documentation describing USR collateral exposure and user mint, stake, and redeem actions."
   },
   {
@@ -293,10 +394,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usr_whitelisted_mint_burn_requests_and_settlement_timing",
-    "stablecoin_ids": ["sog_st_usr"],
-    "organization_ids": ["sog_issuer_resolv"],
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
     "event_ids": [],
-    "claim_scopes": ["usr_whitelisted_mint_burn_requests_and_settlement_timing"],
+    "claim_scopes": [
+      "usr_whitelisted_mint_burn_requests_and_settlement_timing"
+    ],
     "notes": "Primary developer documentation for request-based USR minting and burning using supported USDC and USDT collateral."
   },
   {
@@ -313,10 +420,16 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usr_ethereum_contract_identity_and_related_token_separation",
-    "stablecoin_ids": ["sog_st_usr"],
-    "organization_ids": ["sog_issuer_resolv"],
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
     "event_ids": [],
-    "claim_scopes": ["usr_ethereum_contract_identity_and_related_token_separation"],
+    "claim_scopes": [
+      "usr_ethereum_contract_identity_and_related_token_separation"
+    ],
     "notes": "Official public contract repository listing separate USR, RLP, stUSR, wstUSR, whitelist, and request-manager addresses."
   },
   {
@@ -333,10 +446,19 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usr_unauthorized_mint_containment_and_recovery",
-    "stablecoin_ids": ["sog_st_usr"],
-    "organization_ids": ["sog_issuer_resolv"],
-    "event_ids": ["sog_ev_usr_2026_03_unauthorized_mint"],
-    "claim_scopes": ["usr_unauthorized_mint_containment_and_recovery", "usr_collateral_pool_not_reported_lost"],
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
+    "event_ids": [
+      "sog_ev_usr_2026_03_unauthorized_mint"
+    ],
+    "claim_scopes": [
+      "usr_unauthorized_mint_containment_and_recovery",
+      "usr_collateral_pool_not_reported_lost"
+    ],
     "notes": "Primary incident report. SOG keeps token-mint compromise, collateral custody, operational pause, invalidation, compensation, and final recovery outcome as distinct claims."
   },
   {
@@ -353,10 +475,78 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "usr_current_incident_notice_and_recovery_state",
-    "stablecoin_ids": ["sog_st_usr"],
-    "organization_ids": ["sog_issuer_resolv"],
-    "event_ids": ["sog_ev_usr_2026_03_unauthorized_mint"],
-    "claim_scopes": ["usr_current_incident_notice_and_recovery_state"],
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
+    "event_ids": [
+      "sog_ev_usr_2026_03_unauthorized_mint"
+    ],
+    "claim_scopes": [
+      "usr_current_incident_notice_and_recovery_state"
+    ],
     "notes": "Current official site notice states that Resolv is investigating unauthorized USR minting and that the collateral pool remains intact."
+  },
+  {
+    "id": "sog_src_usd0_public_mainnet_2024",
+    "stablecoin_id": "sog_st_usd0",
+    "issuer_id": "sog_issuer_usual",
+    "event_id": "sog_ev_usd0_2024_launch_phase",
+    "source_type": "official_blog",
+    "title": "Launch of the Pills Campaign!",
+    "url": "https://usual.money/blog/pills-campaign-launch",
+    "publisher": "Usual",
+    "published_at": "2024-07-09",
+    "archived_url": "https://web.archive.org/web/*/https://usual.money/blog/pills-campaign-launch",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "usd0_public_mainnet_launch",
+    "stablecoin_ids": [
+      "sog_st_usd0"
+    ],
+    "organization_ids": [
+      "sog_issuer_usual"
+    ],
+    "event_ids": [
+      "sog_ev_usd0_2024_launch_phase"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "public_mainnet",
+      "USD0_public_availability"
+    ],
+    "notes": "Usual’s dated announcement states that its public mainnet had launched and describes public participation using USD0 and USD0++."
+  },
+  {
+    "id": "sog_src_usr_public_launch_2024",
+    "stablecoin_id": "sog_st_usr",
+    "issuer_id": "sog_issuer_resolv",
+    "event_id": "sog_ev_usr_2024_09_public_launch",
+    "source_type": "official_blog",
+    "title": "Introducing Resolv Points Program",
+    "url": "https://resolv.xyz/blog/introducing-resolv-points-program",
+    "publisher": "Resolv",
+    "published_at": "2024-09-04",
+    "archived_url": "https://web.archive.org/web/*/https://resolv.xyz/blog/introducing-resolv-points-program",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "usr_public_launch_and_participation",
+    "stablecoin_ids": [
+      "sog_st_usr"
+    ],
+    "organization_ids": [
+      "sog_issuer_resolv"
+    ],
+    "event_ids": [
+      "sog_ev_usr_2024_09_public_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "public_launch",
+      "USR_live_participation"
+    ],
+    "notes": "The dated page opens participation to the crypto community with live USR activities; Resolv’s 2025 anniversary article states that public launch occurred exactly one year earlier."
   }
 ]

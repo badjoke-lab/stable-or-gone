@@ -4,17 +4,17 @@
     "stablecoin_id": "sog_st_eurs",
     "issuer_id": "sog_issuer_stasis",
     "event_type": "launched",
-    "event_date": null,
-    "title": "STASIS introduces the EURS euro stablecoin in 2018",
-    "description": "STASIS introduced EURS as a euro-referenced token backed by euro balances and later expanded it across multiple settlement layers with issuer redemption and reserve-verification processes.",
+    "event_date": "2018-06-22",
+    "title": "STASIS records the first EURS emission",
+    "description": "STASIS identifies 22 June 2018 as the first EURS emission, establishing the operational launch boundary for the euro-backed stablecoin.",
     "impact_level": "high",
     "event_status_effect": "active",
     "recovered": null,
     "recovery_date": null,
     "failure_mechanism": "not_applicable",
-    "confidence": "medium",
-    "source_count": 3,
-    "notes": "The year is supported by current official materials; a durable day-level launch date remains unresolved."
+    "confidence": "high",
+    "source_count": 4,
+    "notes": "The day-level date is supported by repeated first-party anniversary statements tied to the first EURS emission."
   },
   {
     "id": "sog_ev_eurt_2025_11_redemption_end",

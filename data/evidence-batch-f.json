@@ -480,5 +480,35 @@
       "curve_distribution"
     ],
     "notes": "Contemporaneous Curve publication dated 2024-12-16 states that Ethena launched USDtb and created launch liquidity pools. Used with Ethena’s official launch page."
+  },
+  {
+    "id": "sog_src_mountainusdm_public_launch_2023",
+    "stablecoin_id": "sog_st_mountainusdm",
+    "issuer_id": "sog_issuer_mountain_protocol",
+    "event_id": "sog_ev_mountainusdm_2023_09_public_launch",
+    "source_type": "official_blog",
+    "title": "Unveiling Mountain Protocol",
+    "url": "https://medium.com/@MountainUSDM/unveiling-mountain-protocol-db2ae9f50dc1",
+    "publisher": "Mountain Protocol",
+    "published_at": "2023-09-11",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/@MountainUSDM/unveiling-mountain-protocol-db2ae9f50dc1",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "mountain_protocol_and_usdm_public_launch",
+    "stablecoin_ids": [
+      "sog_st_mountainusdm"
+    ],
+    "organization_ids": [
+      "sog_issuer_mountain_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_mountainusdm_2023_09_public_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "public_launch",
+      "product_identity"
+    ],
+    "notes": "Mountain Protocol states that it publicly launched the protocol and USDM on the publication date."
   }
 ]
