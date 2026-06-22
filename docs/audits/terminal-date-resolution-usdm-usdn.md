@@ -28,6 +28,7 @@ A canonical discontinued date may mark the end of the issuer service or the old 
 ## Validation
 
 - Cross-layer integrity audit passed with zero critical findings and zero warnings.
+- The canonical registry stats file was regenerated with the repository generator and passed the dedicated stats validator.
 - The complete `npm run build` validation chain passed.
 - Temporary transformation and workflow files were removed from the final pull-request diff.
 
