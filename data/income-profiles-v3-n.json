@@ -1,16 +1,11 @@
 [
   {
-    "id": "sog_income_msusd_batch_n",
-    "stablecoin_id": "sog_st_msusd",
-    "income_availability": "none",
-    "income_source": "none",
-    "accrual_method": "none",
-    "rate_structure": "none",
-    "distribution_asset": null,
-    "holder_requirements": "Base msUSD does not itself represent the separate msY yield strategy.",
-    "as_of_date": "2026-06-22",
-    "confidence": "high",
-    "evidence_ids": ["sog_src_msusd_welcome_batch_n"],
-    "notes": "Any yield-bearing msY position, lending market, or vault strategy remains outside the base msUSD income profile."
+    "id": "sog_st_msusd",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_msusd_welcome_batch_n"]
   }
 ]
