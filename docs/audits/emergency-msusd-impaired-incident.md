@@ -35,7 +35,8 @@ This is an emergency one-record exception. It does not open general 80-to-85 gro
 
 ## Validation
 
-- The complete repository validation chain, including `npm run build`, passed on 2026-06-22 before the final branch commit.
+- The complete repository validation chain, including `npm run build`, passed on 2026-06-22.
+- All six standard pull-request workflows passed on the final reviewed head.
 - The integrity audit passed with 81 canonical assets and complete required-layer coverage.
 - Temporary transformation, diagnostic, and finalization workflows and scripts were removed before review.
 - No Cloudflare deployment or production publication was performed.
