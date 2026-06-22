@@ -31,6 +31,13 @@ No month or year was coerced into a day, and exchange listings were not used as 
 - Registry v2 and v3 count baselines
 - generated stats and integrity audit
 
+## Validation
+
+- The cross-layer integrity audit passed with zero critical findings and zero warnings.
+- The complete `npm run build` validation chain passed before the clean branch commit.
+- Temporary transformation and workflow files were removed from the pull-request diff.
+- Canonical asset count remains 81; only evidence and event history grew.
+
 ## Production status
 
 No Cloudflare action, production deployment, or public parity assertion is performed.
