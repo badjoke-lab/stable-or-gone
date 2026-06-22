@@ -1,0 +1,29 @@
+[
+  {
+    "id": "sog_st_msusd",
+    "reserve_profile": {
+      "backing_types": ["stablecoin_collateral"],
+      "summary": "Official documentation describes an issuer-managed USDC backing model; current assurance status is under review.",
+      "disclosure_status": "under_review",
+      "as_of_date": "2026-06-22",
+      "latest_report_id": "sog_rr_msusd_protocol_batch_n",
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_incident_batch_n"]
+    },
+    "redemption_profile": {
+      "status": "restricted",
+      "settlement_asset": "USDC",
+      "eligible_parties": "Approved users under program rules.",
+      "retail_access": "market_based_unless_approved",
+      "institutional_access": "approved_participant_direct",
+      "minimum_amount_text": "Program terms dependent.",
+      "fee_text": "Program, network, liquidity, and settlement terms apply.",
+      "settlement_time_text": "Program timing and capacity limits apply.",
+      "jurisdiction_restrictions": ["Program restrictions apply."],
+      "redemption_url": "https://docs.mainstreet.finance/mainstreet-products/msusd/redemption-process",
+      "as_of_date": "2026-06-22",
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_msusd_redemption_batch_n"]
+    }
+  }
+]
