@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_dep_msusd_ethereum_v2_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_supported_token",
+    "token_standard": "ERC-20",
+    "contract_address": "0x4ba01f22827018b4772CD326C7627FB4956A7C00",
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "issuer_operator_mint",
+    "notes": "Current msUSDV2 Ethereum address from official documentation. Legacy msUSD contracts and cross-chain OFT representations remain separate.",
+    "evidence_ids": ["sog_src_msusd_addresses_batch_n"]
+  }
+]

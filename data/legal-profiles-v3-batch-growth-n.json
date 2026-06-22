@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sog_st_msusd",
+    "classifications": [
+      {
+        "classification": "unclassified",
+        "jurisdiction": "British Virgin Islands",
+        "effective_from": null,
+        "effective_to": null,
+        "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_redemption_batch_n"]
+      }
+    ],
+    "holder_claim_type": "contractual_conversion_right",
+    "claim_against_organization_ids": ["sog_issuer_mainstreet_finance"],
+    "reserve_ownership": "issuer_owned",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "unclear",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_redemption_batch_n", "sog_src_msusd_site_batch_n"],
+    "notes": "Approved-party conversion is documented. Holder priority, custody, segregation, and insolvency treatment remain unresolved."
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sog_issuer_mainstreet_finance",
+    "slug": "mainstreet-finance",
+    "name": "MainStreet Finance",
+    "issuer_type": "company",
+    "jurisdiction": "British Virgin Islands",
+    "related_stablecoins": [
+      "mainstreet-msusd"
+    ],
+    "official_url": "https://mainstreet.finance/",
+    "summary": "Operator of MainStreetUSD / msUSD and the separate msY product.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-22",
+    "notes": "Emergency Batch N compatibility row."
+  }
+]

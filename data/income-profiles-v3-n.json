@@ -1,0 +1,11 @@
+[
+  {
+    "id": "sog_st_msusd",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_msusd_welcome_batch_n"]
+  }
+]

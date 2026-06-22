@@ -1,0 +1,20 @@
+[
+  {
+    "id": "sog_st_msusd",
+    "lifecycle_status": "restricted",
+    "issuance_status": "restricted",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "notes": "msUSD targets one U.S. dollar under an issuer-managed USDC backing and redemption model."
+    },
+    "backing_types": [
+      "stablecoin_collateral"
+    ],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Emergency impaired classification. msY remains a separate product."
+  }
+]

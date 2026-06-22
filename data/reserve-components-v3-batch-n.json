@@ -1,0 +1,19 @@
+[
+  {
+    "id": "sog_rc_msusd_usdc_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "reserve_report_id": "sog_rr_msusd_protocol_batch_n",
+    "asset_category": "stablecoin_collateral",
+    "asset_label": "Issuer-stated USDC backing",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USDC",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-06-22",
+    "confidence": "medium",
+    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_incident_batch_n"],
+    "notes": "Records the claimed backing model only. Current reserve sufficiency and location are not independently confirmed."
+  }
+]

@@ -1,15 +1,16 @@
 {
   "schema_version": "1.1",
-  "status": "growth_batch_13_promoted",
+  "status": "emergency_batch_14_included",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
     "data/candidate-stable-assets-growth-75.json",
-    "data/candidate-stable-assets-growth-80.json"
+    "data/candidate-stable-assets-growth-80.json",
+    "data/candidate-stable-assets-emergency-msusd.json"
   ],
   "protected_minimums": {
-    "total_candidates": 80,
-    "promoted_candidates": 80,
+    "total_candidates": 81,
+    "promoted_candidates": 81,
     "pending_candidates": 0
   },
   "planned_batches": {
@@ -44,6 +45,10 @@
     "batch_013": {
       "minimum_candidates": 5,
       "theme": "current reserve-backed, collateralized, ecosystem-native, and delta-neutral protocol stablecoins"
+    },
+    "batch_014": {
+      "minimum_candidates": 1,
+      "theme": "emergency incident record"
     }
   },
   "promotion_policy": {
@@ -56,6 +61,8 @@
     "production_parity_at_75_passed": true,
     "production_parity_required_at_80": true,
     "no_80_to_85_work_without_production_parity": true,
-    "batch_013_promotion_complete": true
+    "batch_013_promotion_complete": true,
+    "batch_014_is_emergency_incident_exception": true,
+    "ordinary_growth_remains_blocked": true
   }
 }

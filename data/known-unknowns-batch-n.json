@@ -1,0 +1,72 @@
+[
+  {
+    "id": "sog_ku_msusd_launch_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "exact_launch_date",
+    "description": "The reviewed sources do not establish one day-level MainStreetUSD launch boundary.",
+    "severity": "low",
+    "last_checked_at": "2026-06-22",
+    "notes": "Keep launch_date null."
+  },
+  {
+    "id": "sog_ku_msusd_accountable_primary_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "accountable_primary_post_url_and_timestamp",
+    "description": "The exact Accountable primary-post URL and timestamp for the service termination have not yet been preserved in the evidence layer.",
+    "severity": "high",
+    "last_checked_at": "2026-06-22",
+    "notes": "Do not invent a primary-source URL."
+  },
+  {
+    "id": "sog_ku_msusd_reserves_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "current_reserve_sufficiency",
+    "description": "Current USDC reserve sufficiency and any reserve deficit remain unconfirmed after public verification visibility was lost.",
+    "severity": "high",
+    "last_checked_at": "2026-06-22",
+    "notes": "Do not infer insolvency from market price alone."
+  },
+  {
+    "id": "sog_ku_msusd_redemption_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "current_redemption_execution",
+    "description": "Current successful redemption volume, waiting time, capacity usage, rejection rate, and settlement performance are not established.",
+    "severity": "high",
+    "last_checked_at": "2026-06-22",
+    "notes": "Documented redemption rules do not prove current execution."
+  },
+  {
+    "id": "sog_ku_msusd_issuer_response_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "issuer_incident_response",
+    "description": "A complete issuer response addressing the verification termination, reserve status, and recovery mechanism has not been normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-06-22",
+    "notes": "Monitor official channels."
+  },
+  {
+    "id": "sog_ku_msusd_recovery_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "sustainable_peg_recovery",
+    "description": "A temporary price rebound does not establish sustainable recovery to the one-dollar peg.",
+    "severity": "high",
+    "last_checked_at": "2026-06-22",
+    "notes": "Require sustained market and redemption evidence."
+  },
+  {
+    "id": "sog_ku_msusd_msy_contagion_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "topic": "msy_and_lending_market_contagion",
+    "description": "Realized losses, bad debt, liquidations, oracle failures, or withdrawal restrictions in msY-linked lending and vault systems are not yet established for SOG.",
+    "severity": "high",
+    "last_checked_at": "2026-06-22",
+    "notes": "Downstream platform effects remain separate from the msUSD asset record."
+  }
+]

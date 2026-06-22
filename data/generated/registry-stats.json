@@ -1,24 +1,24 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-22T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_post_batch_m_2026_06_22",
+  "baseline_id": "sog_registry_v2_post_msusd_emergency_2026_06_22",
   "registry": {
-    "stablecoins": 80,
-    "organizations": 69,
-    "relationships": 82,
-    "classifications": 80,
-    "profiles": 80,
-    "events": 107,
-    "event_details": 107,
-    "evidence": 328,
-    "reserve_reports": 87,
-    "known_unknowns": 188,
+    "stablecoins": 81,
+    "organizations": 70,
+    "relationships": 83,
+    "classifications": 81,
+    "profiles": 81,
+    "events": 109,
+    "event_details": 109,
+    "evidence": 333,
+    "reserve_reports": 88,
+    "known_unknowns": 195,
     "regulatory_notes": 9,
-    "deployments": 111,
-    "legal_profiles": 80,
+    "deployments": 112,
+    "legal_profiles": 81,
     "stable_asset_relationships": 4,
-    "reserve_components": 112,
-    "income_profiles": 80
+    "reserve_components": 113,
+    "income_profiles": 81
   },
   "lifecycle": {
     "by_status": {
@@ -27,13 +27,13 @@
       "inactive": 1,
       "migrated": 2,
       "rebranded": 1,
-      "restricted": 4,
+      "restricted": 5,
       "terminated": 2,
       "winding_down": 3
     },
     "active_side": {
-      "count": 65,
-      "share": 0.8125,
+      "count": 66,
+      "share": 0.8148,
       "statuses": [
         "active",
         "restricted"
@@ -41,7 +41,7 @@
     },
     "historical_side": {
       "count": 15,
-      "share": 0.1875,
+      "share": 0.1852,
       "statuses": [
         "collapsed",
         "inactive",
@@ -53,7 +53,7 @@
     },
     "strict_failed": {
       "count": 6,
-      "share": 0.075,
+      "share": 0.0741,
       "statuses": [
         "collapsed",
         "failed"
@@ -65,6 +65,7 @@
       "active": 61,
       "discontinued": 6,
       "failed": 6,
+      "impaired": 1,
       "limited": 4,
       "migrated": 2,
       "rebranded": 1
@@ -72,13 +73,13 @@
     "issuance_statuses": {
       "open": 1,
       "protocol_based": 27,
-      "restricted": 35,
+      "restricted": 36,
       "terminated": 15,
       "unknown": 2
     },
     "reference_kinds": {
       "commodity": 2,
-      "fiat": 76,
+      "fiat": 77,
       "floating": 1,
       "index": 1
     },
@@ -92,13 +93,13 @@
       "RAI_REDEMPTION_PRICE": 1,
       "SGD": 1,
       "TRY": 1,
-      "USD": 62,
+      "USD": 63,
       "USD_WITH_TRUFLATION_LINKED_REBASE": 1
     },
     "asset_classes": {
       "experimental_stabilization_asset": 1,
       "stable_value_asset": 4,
-      "stablecoin": 70,
+      "stablecoin": 71,
       "tokenized_commodity": 2,
       "yield_bearing_stable_receipt": 3
     },
@@ -113,7 +114,7 @@
       "private_credit": 1,
       "receivables": 1,
       "secured_loans": 1,
-      "stablecoin_collateral": 23,
+      "stablecoin_collateral": 24,
       "tokenized_fund": 6,
       "unbacked": 4,
       "unknown": 3
@@ -123,12 +124,12 @@
       "delta_neutral": 2,
       "fund_share_valuation": 2,
       "hybrid": 16,
-      "issuer_redemption": 33,
+      "issuer_redemption": 34,
       "overcollateralized_vault": 15,
       "protocol_arbitrage": 8
     },
     "governance_models": {
-      "centralized": 33,
+      "centralized": 34,
       "dao_governed": 23,
       "hybrid": 6,
       "protocol_governed": 18
@@ -139,7 +140,7 @@
       "fund_share": 1,
       "protocol_asset": 22,
       "security_token": 1,
-      "unclassified": 46
+      "unclassified": 47
     },
     "reserve_component_categories": {
       "bank_deposits": 11,
@@ -150,7 +151,7 @@
       "government_securities": 12,
       "other": 12,
       "private_credit": 1,
-      "stablecoin_collateral": 19,
+      "stablecoin_collateral": 20,
       "tokenized_fund": 5,
       "unknown": 13
     },
@@ -165,7 +166,7 @@
       "BNB Chain": 4,
       "Cardano": 1,
       "Celo": 1,
-      "Ethereum": 67,
+      "Ethereum": 68,
       "Gnosis Chain": 1,
       "Kujira": 1,
       "multi_chain": 2,
@@ -183,79 +184,79 @@
     },
     "income_availability": {
       "native": 9,
-      "none": 60,
+      "none": 61,
       "via_wrapper": 11
     },
     "income_sources": {
       "derivatives_funding": 1,
       "lending": 2,
       "mixed": 5,
-      "none": 60,
+      "none": 61,
       "protocol_incentives": 3,
       "reserve_income": 9
     },
     "income_accrual": {
       "balance_rebase": 3,
       "exchange_rate_increase": 5,
-      "none": 60,
+      "none": 61,
       "protocol_position": 1,
       "wrapper_value_increase": 11
     },
     "income_rates": {
-      "none": 60,
+      "none": 61,
       "protocol_determined": 5,
       "variable": 15
     }
   },
   "coverage": {
     "classifications": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "profiles": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "legal_profiles": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "reserve_components": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "income_profiles": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "deployments": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "events": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "evidence": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     },
     "reserve_reports": {
-      "covered": 67,
-      "total": 80,
-      "share": 0.8375
+      "covered": 68,
+      "total": 81,
+      "share": 0.8395
     },
     "known_unknowns": {
-      "covered": 80,
-      "total": 80,
+      "covered": 81,
+      "total": 81,
       "share": 1
     }
   },
@@ -265,8 +266,8 @@
       "share": 0
     },
     "legal_profiles_unclassified": {
-      "count": 46,
-      "share": 0.575
+      "count": 47,
+      "share": 0.5802
     },
     "income_profiles_all_unknown": {
       "count": 0,
@@ -274,11 +275,11 @@
     },
     "reserve_components_unknown_category": {
       "count": 13,
-      "share": 0.1161
+      "share": 0.115
     },
     "deployments_unknown_canonicality": {
       "count": 69,
-      "share": 0.6216
+      "share": 0.6161
     }
   }
 }

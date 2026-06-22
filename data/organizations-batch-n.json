@@ -1,0 +1,15 @@
+[
+  {
+    "id": "sog_issuer_mainstreet_finance",
+    "slug": "mainstreet-finance",
+    "name": "MainStreet Finance",
+    "organization_type": "financial_technology_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "British Virgin Islands",
+    "official_url": "https://mainstreet.finance/",
+    "summary": "Operator of MainStreetUSD / msUSD and the separate msY yield strategy product.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-22",
+    "notes": "Legal, operating, reserve, custody, verification-provider, and redemption-agent roles require continued review."
+  }
+]

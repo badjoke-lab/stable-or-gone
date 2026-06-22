@@ -9,48 +9,13 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 37,
+  "expected_total": 38,
   "category_counts": {
+    "C": 27,
     "B": 8,
-    "C": 26,
     "D": 3
   },
   "records": [
-    {
-      "stablecoin_id": "sog_st_brz",
-      "category": "B",
-      "best_known_range": "2019",
-      "reason_code": "partial_date_only",
-      "review_note": "First-party materials confirm a 2019 launch but not a canonical day."
-    },
-    {
-      "stablecoin_id": "sog_st_eurs",
-      "category": "B",
-      "best_known_range": "2018",
-      "reason_code": "partial_date_only",
-      "review_note": "First-party materials establish the early 2018 launch period without a preserved day-level statement."
-    },
-    {
-      "stablecoin_id": "sog_st_mountainusdm",
-      "category": "B",
-      "best_known_range": "2023",
-      "reason_code": "partial_date_only",
-      "review_note": "The issuer confirms launch in 2023, but announcement, first mint, and public portal availability are not resolved to one day."
-    },
-    {
-      "stablecoin_id": "sog_st_usd0",
-      "category": "B",
-      "best_known_range": "2024-05",
-      "reason_code": "partial_date_only",
-      "review_note": "First-party history states that USD0 went live in May 2024 without a day-level date."
-    },
-    {
-      "stablecoin_id": "sog_st_usr",
-      "category": "B",
-      "best_known_range": "2024-09",
-      "reason_code": "partial_date_only",
-      "review_note": "First-party history identifies September 2024 as public launch without a day-level date."
-    },
     {
       "stablecoin_id": "sog_st_agoraausd",
       "category": "C",
@@ -64,6 +29,13 @@
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Contract deployment, first distribution, first epoch, and public protocol launch are different candidate boundaries."
+    },
+    {
+      "stablecoin_id": "sog_st_brz",
+      "category": "B",
+      "best_known_range": "2019",
+      "reason_code": "partial_date_only",
+      "review_note": "First-party materials confirm a 2019 launch but not a canonical day."
     },
     {
       "stablecoin_id": "sog_st_cashio",
@@ -101,6 +73,13 @@
       "review_note": "The record spans agEUR and EURA; original launch and later rename must not be collapsed."
     },
     {
+      "stablecoin_id": "sog_st_eurs",
+      "category": "B",
+      "best_known_range": "2018",
+      "reason_code": "partial_date_only",
+      "review_note": "First-party materials establish the early 2018 launch period without a preserved day-level statement."
+    },
+    {
       "stablecoin_id": "sog_st_eurt",
       "category": "C",
       "best_known_range": null,
@@ -108,11 +87,32 @@
       "review_note": "Issuer announcement, issuance start, exchange availability, and chain deployments require separation."
     },
     {
+      "stablecoin_id": "sog_st_fxusd",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Product introduction, V1 issuance, V2 contracts, and broad availability are distinct candidate launch boundaries."
+    },
+    {
       "stablecoin_id": "sog_st_gyen",
       "category": "C",
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Initial issuance, public availability, exchange listings, and later wind-down are separate milestones."
+    },
+    {
+      "stablecoin_id": "sog_st_honey",
+      "category": "B",
+      "best_known_range": "2025",
+      "reason_code": "partial_date_only",
+      "review_note": "Official mainnet documentation establishes HONEY in 2025 without one reviewed day-level launch statement."
+    },
+    {
+      "stablecoin_id": "sog_st_husd",
+      "category": "D",
+      "best_known_range": null,
+      "reason_code": "primary_source_not_found",
+      "review_note": "No sufficiently reliable issuer-level day-specific launch statement has been recovered."
     },
     {
       "stablecoin_id": "sog_st_iron",
@@ -129,11 +129,32 @@
       "review_note": "Helio/HAY to Lista/lisUSD lineage requires original launch and rebrand or migration dates to remain separate."
     },
     {
+      "stablecoin_id": "sog_st_mai",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Original miMATIC launch, MAI rebrand, and chain-specific deployments do not resolve to one reviewed canonical day."
+    },
+    {
       "stablecoin_id": "sog_st_mim",
       "category": "C",
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "First cauldron, first MIM mint, announcement, and public interface availability are not reconciled."
+    },
+    {
+      "stablecoin_id": "sog_st_mountainusdm",
+      "category": "B",
+      "best_known_range": "2023",
+      "reason_code": "partial_date_only",
+      "review_note": "The issuer confirms launch in 2023, but announcement, first mint, and public portal availability are not resolved to one day."
+    },
+    {
+      "stablecoin_id": "sog_st_msusd",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Announcement, first mint, first deployment, and broad public availability are not resolved to one canonical day."
     },
     {
       "stablecoin_id": "sog_st_musd",
@@ -164,6 +185,13 @@
       "review_note": "SPOT v1, v2, and later versions create a versioned identity question."
     },
     {
+      "stablecoin_id": "sog_st_stablesusdx",
+      "category": "C",
+      "best_known_range": null,
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "Announcement, initial minting, contract deployment, and approved-participant availability are distinct boundaries."
+    },
+    {
       "stablecoin_id": "sog_st_susd",
       "category": "C",
       "best_known_range": "2018",
@@ -178,11 +206,32 @@
       "review_note": "USDe launch, staking activation, reward accrual, and unrestricted acquisition are distinct."
     },
     {
+      "stablecoin_id": "sog_st_tryb",
+      "category": "D",
+      "best_known_range": null,
+      "reason_code": "primary_source_not_found",
+      "review_note": "Current first-party materials establish mechanics but do not preserve a day-level launch statement."
+    },
+    {
+      "stablecoin_id": "sog_st_usd0",
+      "category": "B",
+      "best_known_range": "2024-05",
+      "reason_code": "partial_date_only",
+      "review_note": "First-party history states that USD0 went live in May 2024 without a day-level date."
+    },
+    {
       "stablecoin_id": "sog_st_usd1",
       "category": "C",
       "best_known_range": "2025-03",
       "reason_code": "launch_boundary_conflict",
       "review_note": "Introduction, first mint, testing, exchange availability, and broad public use are separate milestones."
+    },
+    {
+      "stablecoin_id": "sog_st_usda",
+      "category": "B",
+      "best_known_range": "2024-11",
+      "reason_code": "partial_date_only",
+      "review_note": "Official material establishes November 2024 without a reviewed day-level launch date."
     },
     {
       "stablecoin_id": "sog_st_usdm",
@@ -192,11 +241,32 @@
       "review_note": "Current Mento Dollar identity must be distinguished from earlier Celo-dollar naming and deployment history."
     },
     {
+      "stablecoin_id": "sog_st_usdz",
+      "category": "B",
+      "best_known_range": "2024-06",
+      "reason_code": "partial_date_only",
+      "review_note": "Official material establishes June 2024 without a reviewed day-level launch date."
+    },
+    {
       "stablecoin_id": "sog_st_usk",
       "category": "C",
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Protocol deployment, first mint, and public app availability require chain-level reconstruction."
+    },
+    {
+      "stablecoin_id": "sog_st_usr",
+      "category": "B",
+      "best_known_range": "2024-09",
+      "reason_code": "partial_date_only",
+      "review_note": "First-party history identifies September 2024 as public launch without a day-level date."
+    },
+    {
+      "stablecoin_id": "sog_st_usyc",
+      "category": "D",
+      "best_known_range": null,
+      "reason_code": "primary_source_not_found",
+      "review_note": "Current fund-token documentation does not establish the original product launch day."
     },
     {
       "stablecoin_id": "sog_st_vai",
@@ -211,69 +281,6 @@
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Issuer announcement, first issuance, and exchange or network availability remain unreconciled."
-    },
-    {
-      "stablecoin_id": "sog_st_husd",
-      "category": "D",
-      "best_known_range": null,
-      "reason_code": "primary_source_not_found",
-      "review_note": "No sufficiently reliable issuer-level day-specific launch statement has been recovered."
-    },
-    {
-      "stablecoin_id": "sog_st_tryb",
-      "category": "D",
-      "best_known_range": null,
-      "reason_code": "primary_source_not_found",
-      "review_note": "Current first-party materials establish mechanics but do not preserve a day-level launch statement."
-    },
-    {
-      "stablecoin_id": "sog_st_usyc",
-      "category": "D",
-      "best_known_range": null,
-      "reason_code": "primary_source_not_found",
-      "review_note": "Current fund-token documentation does not establish the original product launch day."
-    },
-    {
-      "stablecoin_id": "sog_st_usdz",
-      "category": "B",
-      "best_known_range": "2024-06",
-      "reason_code": "partial_date_only",
-      "review_note": "Official material establishes June 2024 without a reviewed day-level launch date."
-    },
-    {
-      "stablecoin_id": "sog_st_usda",
-      "category": "B",
-      "best_known_range": "2024-11",
-      "reason_code": "partial_date_only",
-      "review_note": "Official material establishes November 2024 without a reviewed day-level launch date."
-    },
-    {
-      "stablecoin_id": "sog_st_honey",
-      "category": "B",
-      "best_known_range": "2025",
-      "reason_code": "partial_date_only",
-      "review_note": "Official mainnet documentation establishes HONEY in 2025 without one reviewed day-level launch statement."
-    },
-    {
-      "stablecoin_id": "sog_st_fxusd",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Product introduction, V1 issuance, V2 contracts, and broad availability are distinct candidate launch boundaries."
-    },
-    {
-      "stablecoin_id": "sog_st_mai",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Original miMATIC launch, MAI rebrand, and chain-specific deployments do not resolve to one reviewed canonical day."
-    },
-    {
-      "stablecoin_id": "sog_st_stablesusdx",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Announcement, initial minting, contract deployment, and approved-participant availability are distinct boundaries."
     }
   ]
 }

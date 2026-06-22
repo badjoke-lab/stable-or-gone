@@ -1,0 +1,14 @@
+[
+  {
+    "id": "sog_rr_msusd_protocol_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "publisher": "MainStreet Finance",
+    "report_type": "issuer_claimed_usdc_backing_context_with_verification_termination",
+    "asset_categories": ["stablecoin_collateral"],
+    "url": "https://docs.mainstreet.finance/welcome-to-mainstreet",
+    "archived_url": "https://web.archive.org/web/*/https://docs.mainstreet.finance/welcome-to-mainstreet",
+    "confidence": "medium",
+    "notes": "Official documentation describes 1:1 USDC backing. Current reserve sufficiency is not asserted after the verification-provider termination."
+  }
+]
