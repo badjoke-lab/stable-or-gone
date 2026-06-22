@@ -32,3 +32,10 @@ The exact Accountable primary-post URL and timestamp have not yet been preserved
 ## Scope
 
 This is an emergency one-record exception. It does not open general 80-to-85 growth and does not change Cloudflare or production publication.
+
+## Validation
+
+- The complete repository validation chain, including `npm run build`, passed on 2026-06-22 before the final branch commit.
+- The integrity audit passed with 81 canonical assets and complete required-layer coverage.
+- Temporary transformation, diagnostic, and finalization workflows and scripts were removed before review.
+- No Cloudflare deployment or production publication was performed.
