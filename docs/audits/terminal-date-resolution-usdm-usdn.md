@@ -25,6 +25,12 @@ Recorded: 2026-06-23
 
 A canonical discontinued date may mark the end of the issuer service or the old stablecoin identity even when residual contracts, balances, pools, or migration routes remain. Those residual states must remain separately documented and must not be described as restored issuance or redemption.
 
+## Validation
+
+- Cross-layer integrity audit passed with zero critical findings and zero warnings.
+- The complete `npm run build` validation chain passed.
+- Temporary transformation and workflow files were removed from the final pull-request diff.
+
 ## Production status
 
 No Cloudflare action, production deployment, or public parity assertion is performed.
