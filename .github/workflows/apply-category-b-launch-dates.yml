@@ -20,6 +20,8 @@ jobs:
           show-progress: false
       - name: Apply launch-date resolutions
         run: node scripts/apply-category-b-launch-dates.mjs
+      - name: Synchronize generated stats
+        run: node scripts/sync-category-b-registry-stats.mjs
       - name: Install dependencies
         run: npm install
       - name: Regenerate integrity outputs
@@ -32,9 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: category-b-integrity-diagnostics
-          path: |
-            /tmp/category-b-integrity.log
-            data/generated/registry-integrity-audit.json
+          path: /tmp/category-b-integrity.log
           if-no-files-found: error
       - name: Stop on integrity failure
         if: steps.integrity.outcome != 'success'
@@ -44,6 +44,7 @@ jobs:
       - name: Remove temporary automation
         run: |
           rm -f scripts/apply-category-b-launch-dates.mjs
+          rm -f scripts/sync-category-b-registry-stats.mjs
           rm -f .github/workflows/apply-category-b-launch-dates.yml
       - name: Commit validated result
         run: |
