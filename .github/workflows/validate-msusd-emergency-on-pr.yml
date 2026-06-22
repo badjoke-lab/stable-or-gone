@@ -1,0 +1,52 @@
+name: Validate msUSD emergency transform
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.head_ref == 'add-mainstreet-msusd-impaired-incident'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Extract and run transformation
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, gzip, pathlib, re
+          source = pathlib.Path('.github/workflows/apply-msusd-emergency.yml').read_text()
+          match = re.search(r"printf '%s' '([^']+)'", source)
+          if not match:
+              raise SystemExit('embedded transform not found')
+          pathlib.Path('/tmp/apply-msusd-emergency-record.mjs').write_bytes(gzip.decompress(base64.b64decode(match.group(1))))
+          PY
+          node /tmp/apply-msusd-emergency-record.mjs
+      - name: Install dependencies
+        run: npm install
+      - name: Regenerate integrity outputs
+        run: npm run audit:integrity
+      - name: Validate full repository
+        run: npm run build
+      - name: Package changed files
+        shell: bash
+        run: |
+          git add -N .
+          git diff --name-only HEAD -- . ':(exclude).github/workflows/*' > /tmp/changed-files.txt
+          tar -czf /tmp/msusd-changes.tar.gz -T /tmp/changed-files.txt
+          cp /tmp/changed-files.txt /tmp/msusd-changed-files.txt
+      - name: Upload validated change set
+        uses: actions/upload-artifact@v4
+        with:
+          name: msusd-validated-changes
+          path: |
+            /tmp/msusd-changes.tar.gz
+            /tmp/msusd-changed-files.txt
