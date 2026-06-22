@@ -1,0 +1,18 @@
+[
+  {
+    "id": "sog_legal_msusd_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "issuer_id": "sog_issuer_mainstreet_finance",
+    "legal_entity_name": "Main St Finance Ltd.",
+    "jurisdiction": "British Virgin Islands",
+    "regulatory_status": "not_normalized",
+    "claim_structure": "contractual_token_and_redemption_program_subject_to_terms",
+    "bankruptcy_remoteness": "unknown",
+    "holder_priority": "unknown",
+    "redemption_counterparty": "MainStreet program operator or designated service provider",
+    "as_of_date": "2026-06-22",
+    "confidence": "medium",
+    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_redemption_batch_n", "sog_src_msusd_site_batch_n"],
+    "notes": "Legal entity and jurisdiction are recorded conservatively; holder priority, custody, segregation, and insolvency treatment remain unresolved."
+  }
+]
