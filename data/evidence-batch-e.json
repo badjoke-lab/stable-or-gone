@@ -358,5 +358,34 @@
       "underlying_settlement"
     ],
     "notes": "Official description of alAsset burning and conversion into supported underlying assets."
+  },
+  {
+    "id": "sog_src_eurs_first_emission_2018",
+    "stablecoin_id": "sog_st_eurs",
+    "issuer_id": "sog_issuer_stasis",
+    "event_id": "sog_ev_eurs_2018_launch",
+    "source_type": "official_blog",
+    "title": "STASIS Celebrates 4th Year Milestone of EURS Launch",
+    "url": "https://medium.com/stasis-blog/stasis-celebrates-4th-year-milestone-of-eurs-launch-2ac119ae031c",
+    "publisher": "STASIS",
+    "published_at": "2022-06-27",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/stasis-blog/stasis-celebrates-4th-year-milestone-of-eurs-launch-2ac119ae031c",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "eurs_first_emission_date",
+    "stablecoin_ids": [
+      "sog_st_eurs"
+    ],
+    "organization_ids": [
+      "sog_issuer_stasis"
+    ],
+    "event_ids": [
+      "sog_ev_eurs_2018_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "first_emission"
+    ],
+    "notes": "First-party anniversary statement says 22 June marked the fourth anniversary of the first EURS emission, establishing 2018-06-22."
   }
 ]

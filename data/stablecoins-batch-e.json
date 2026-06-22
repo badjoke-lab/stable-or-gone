@@ -21,12 +21,12 @@
     "minimum_redemption": "terms_and_route_dependent",
     "redemption_region_notes": "Direct issuance and redemption require STASIS onboarding and applicable compliance checks. Secondary-market access does not itself create an onboarded redemption relationship.",
     "redemption_notes": "STASIS states that EURS is issued and redeemed at EUR 1, with redeemed tokens frozen or burned. SOG separates issuer redemption from exchange or DeFi liquidity.",
-    "launch_date": null,
+    "launch_date": "2018-06-22",
     "discontinued_date": null,
     "summary": "Euro-pegged stablecoin issued by STASIS and backed by liquid euro balances. EURS supports direct issuer redemption for onboarded users and is represented across multiple settlement layers.",
     "confidence": "high",
-    "last_verified_at": "2026-06-14",
-    "notes": "Batch E promotion. Official materials describe a 2018 launch history, but a durable day-level launch date is not fixed in this record."
+    "last_verified_at": "2026-06-22",
+    "notes": "Batch E promotion. Launch-date follow-up uses STASIS anniversary statements identifying 2018-06-22 as the first EURS emission."
   },
   {
     "id": "sog_st_eurt",

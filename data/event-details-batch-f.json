@@ -116,5 +116,22 @@
         "sog_issuer_quantoz_payments"
       ]
     }
+  },
+  {
+    "id": "sog_ev_mountainusdm_2023_09_public_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_mountainusdm"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_mountain_protocol"
+    ],
+    "evidence_ids": [
+      "sog_src_mountainusdm_public_launch_2023"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Mountain Protocol publicly launched USDM on 2023-09-11.",
+      "status": "active"
+    }
   }
 ]

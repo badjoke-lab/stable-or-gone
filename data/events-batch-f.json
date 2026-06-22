@@ -68,5 +68,22 @@
     "source_count": 3,
     "event_status_effect": "active",
     "notes": "Launch announcement date is recorded from the official Quantoz statement."
+  },
+  {
+    "id": "sog_ev_mountainusdm_2023_09_public_launch",
+    "stablecoin_id": "sog_st_mountainusdm",
+    "issuer_id": "sog_issuer_mountain_protocol",
+    "event_type": "launch",
+    "event_date": "2023-09-11",
+    "title": "Mountain Protocol publicly launches USDM",
+    "description": "Mountain Protocol announced the public launch of the protocol and its first product, USDM, on 11 September 2023.",
+    "impact_level": "high",
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "not_applicable",
+    "confidence": "high",
+    "source_count": 1,
+    "notes": "The public-launch event is preserved separately from the later USDM wind-down."
   }
 ]

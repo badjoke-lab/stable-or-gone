@@ -10,9 +10,14 @@
     "evidence_ids": [
       "sog_src_eurs_product_batch_e",
       "sog_src_eurs_transparency_batch_e",
-      "sog_src_eurs_terms_batch_e"
+      "sog_src_eurs_terms_batch_e",
+      "sog_src_eurs_first_emission_2018"
     ],
-    "event_detail_kind": "other"
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "STASIS identifies 2018-06-22 as the first EURS emission.",
+      "status": "active"
+    }
   },
   {
     "id": "sog_ev_eurt_2025_11_redemption_end",
