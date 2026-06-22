@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_rc_msusd_usdc_batch_n",
+    "stablecoin_id": "sog_st_msusd",
+    "component_type": "stablecoin_collateral",
+    "asset_name": "USD Coin",
+    "asset_symbol": "USDC",
+    "share_percent": null,
+    "valuation_basis": "issuer_stated_one_to_one_backing_model",
+    "custodian_or_location": null,
+    "as_of_date": "2026-06-22",
+    "confidence": "medium",
+    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_incident_batch_n"],
+    "notes": "Records the claimed backing model only. Current reserve sufficiency and location are not independently confirmed."
+  }
+]
