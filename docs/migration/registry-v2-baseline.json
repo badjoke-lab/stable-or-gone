@@ -1,21 +1,21 @@
 {
-  "baseline_id": "sog_registry_v2_susd_lineage_2026_06_23",
+  "baseline_id": "sog_registry_v2_nuon_lineage_2026_06_23",
   "captured_at": "2026-06-23",
-  "source_commit": "category-c-susd-lineage",
+  "source_commit": "nuon-lineage",
   "minimum_counts": {
     "stablecoins": 81,
     "organizations": 70,
     "relationships": 83,
     "classifications": 81,
     "profiles": 81,
-    "events": 118,
-    "event_details": 118,
-    "evidence": 358,
-    "evidence_relations": 353,
+    "events": 119,
+    "event_details": 119,
+    "evidence": 363,
+    "evidence_relations": 358,
     "reserve_reports": 89,
     "known_unknowns": 198,
     "regulatory_notes": 9,
-    "deployments": 113,
+    "deployments": 114,
     "classification_extensions": 2
   },
   "data_groups": {

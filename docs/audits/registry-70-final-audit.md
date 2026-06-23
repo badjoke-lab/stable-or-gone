@@ -1,7 +1,7 @@
 # SOG 80-Record Final Registry Audit
 
 - Audited at: 2026-06-23
-- Baseline: `sog_registry_v2_susd_lineage_2026_06_23`
+- Baseline: `sog_registry_v2_nuon_lineage_2026_06_23`
 - Canonical stable assets: **81**
 - Promoted candidates: **81 / 81**
 - Critical findings: **0**
@@ -26,13 +26,13 @@
 | relationships | 83 |
 | classifications | 81 |
 | profiles | 81 |
-| events | 118 |
-| event_details | 118 |
-| evidence | 358 |
+| events | 119 |
+| event_details | 119 |
+| evidence | 363 |
 | reserve_reports | 89 |
 | known_unknowns | 198 |
 | regulatory_notes | 9 |
-| deployments | 113 |
+| deployments | 114 |
 | legal_profiles | 81 |
 | stable_asset_relationships | 4 |
 | reserve_components | 113 |
@@ -67,7 +67,7 @@
 
 - reserve_reports context coverage is 69/81; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
 - 0 records have missing or older-than-one-year last_verified_at values: none.
-- 30 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eurt, sog_st_fxusd, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_mai, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_stablesusdx, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usyc, sog_st_vai, sog_st_vchf.
+- 29 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eurt, sog_st_fxusd, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_mai, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_sdai, sog_st_spot, sog_st_stablesusdx, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usyc, sog_st_vai, sog_st_vchf.
 - 3 historical-side records have no discontinued_date: sog_st_bac, sog_st_dsd, sog_st_esd.
 - 0 income profiles remain entirely unknown: none.
 

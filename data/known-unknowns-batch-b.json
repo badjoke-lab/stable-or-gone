@@ -1,1 +1,102 @@
-[{"id":"sog_unk_rai_parameter_control","stablecoin_id":"sog_st_rai","issuer_id":"sog_issuer_reflexer","topic":"governance_and_parameter_control","description":"Current automated, ungoverned, and maintained RAI components require contract-level normalization.","severity":"high","last_checked_at":"2026-06-14","notes":"Do not describe RAI as fully immutable without review."},{"id":"sog_unk_rai_current_access","stablecoin_id":"sog_st_rai","issuer_id":"sog_issuer_reflexer","topic":"current_protocol_access","description":"Current interfaces, collateral types, keeper infrastructure, and cross-chain representations require fresh verification.","severity":"medium","last_checked_at":"2026-06-14","notes":"Historical integrations do not prove current availability."},{"id":"sog_unk_paxg_redemption_limits","stablecoin_id":"sog_st_paxg","issuer_id":"sog_issuer_paxos","topic":"physical_redemption_terms","description":"Current customer-specific bar, unallocated-gold, delivery, fee, and quantity requirements must be checked at redemption time.","severity":"medium","last_checked_at":"2026-06-14","notes":"General guidance does not establish individual eligibility."},{"id":"sog_unk_paxg_solana","stablecoin_id":"sog_st_paxg","issuer_id":"sog_issuer_paxos","topic":"additional_deployments","description":"Paxos identifies Solana support, but the canonical token identifier and lifecycle status are not yet normalized.","severity":"medium","last_checked_at":"2026-06-14","notes":"Do not infer identifiers from third-party lists."},{"id":"sog_unk_xaut_bnb_contract","stablecoin_id":"sog_st_xaut","issuer_id":"sog_issuer_tg_commodities","topic":"additional_deployments","description":"Official material confirms BNB Chain availability, but the canonical address and architecture require direct verification.","severity":"medium","last_checked_at":"2026-06-14","notes":"Ethereum and BNB representations remain separate."},{"id":"sog_unk_xaut_delivery_timing","stablecoin_id":"sog_st_xaut","issuer_id":"sog_issuer_tg_commodities","topic":"physical_redemption_operations","description":"Bar reallocation, delivery scheduling, sale execution, and customer-specific costs are not fully captured by the general FAQ.","severity":"medium","last_checked_at":"2026-06-14","notes":"General terms are not an execution guarantee."},{"id":"sog_unk_spot_contracts","stablecoin_id":"sog_st_spot","issuer_id":"sog_issuer_ampleforth","topic":"contract_and_version_state","description":"The current SPOT v2 token, bond, and migration contract set requires durable primary-source normalization.","severity":"high","last_checked_at":"2026-06-14","notes":"No address is published until verified."},{"id":"sog_unk_spot_history","stablecoin_id":"sog_st_spot","issuer_id":"sog_issuer_ampleforth","topic":"lifecycle_and_collateral_rotation","description":"Initial launch, v1-to-v2 transition, and collateral-rotation history are not yet a complete event series.","severity":"medium","last_checked_at":"2026-06-14","notes":"Current coverage establishes identity and mechanism only."},{"id":"sog_unk_nuon_launch_phase","stablecoin_id":"sog_st_nuon","issuer_id":"sog_issuer_nuon_finance","topic":"current_launch_phase","description":"The exact current public-launch phase and remaining capacity restrictions require confirmation.","severity":"high","last_checked_at":"2026-06-14","notes":"Planned dates are not proof of completed milestones."},{"id":"sog_unk_nuon_treasury_exit","stablecoin_id":"sog_st_nuon","issuer_id":"sog_issuer_nuon_finance","topic":"treasury_strategy_and_redemption","description":"Current strategy allocations, liquidity buffers, capacity, and direct exit path are not yet independently normalized.","severity":"high","last_checked_at":"2026-06-14","notes":"Minting guidance does not prove guaranteed USDC redemption."}]
+[
+  {
+    "id": "sog_unk_rai_parameter_control",
+    "stablecoin_id": "sog_st_rai",
+    "issuer_id": "sog_issuer_reflexer",
+    "topic": "governance_and_parameter_control",
+    "description": "Current automated, ungoverned, and maintained RAI components require contract-level normalization.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not describe RAI as fully immutable without review."
+  },
+  {
+    "id": "sog_unk_rai_current_access",
+    "stablecoin_id": "sog_st_rai",
+    "issuer_id": "sog_issuer_reflexer",
+    "topic": "current_protocol_access",
+    "description": "Current interfaces, collateral types, keeper infrastructure, and cross-chain representations require fresh verification.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Historical integrations do not prove current availability."
+  },
+  {
+    "id": "sog_unk_paxg_redemption_limits",
+    "stablecoin_id": "sog_st_paxg",
+    "issuer_id": "sog_issuer_paxos",
+    "topic": "physical_redemption_terms",
+    "description": "Current customer-specific bar, unallocated-gold, delivery, fee, and quantity requirements must be checked at redemption time.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "General guidance does not establish individual eligibility."
+  },
+  {
+    "id": "sog_unk_paxg_solana",
+    "stablecoin_id": "sog_st_paxg",
+    "issuer_id": "sog_issuer_paxos",
+    "topic": "additional_deployments",
+    "description": "Paxos identifies Solana support, but the canonical token identifier and lifecycle status are not yet normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Do not infer identifiers from third-party lists."
+  },
+  {
+    "id": "sog_unk_xaut_bnb_contract",
+    "stablecoin_id": "sog_st_xaut",
+    "issuer_id": "sog_issuer_tg_commodities",
+    "topic": "additional_deployments",
+    "description": "Official material confirms BNB Chain availability, but the canonical address and architecture require direct verification.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Ethereum and BNB representations remain separate."
+  },
+  {
+    "id": "sog_unk_xaut_delivery_timing",
+    "stablecoin_id": "sog_st_xaut",
+    "issuer_id": "sog_issuer_tg_commodities",
+    "topic": "physical_redemption_operations",
+    "description": "Bar reallocation, delivery scheduling, sale execution, and customer-specific costs are not fully captured by the general FAQ.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "General terms are not an execution guarantee."
+  },
+  {
+    "id": "sog_unk_spot_contracts",
+    "stablecoin_id": "sog_st_spot",
+    "issuer_id": "sog_issuer_ampleforth",
+    "topic": "contract_and_version_state",
+    "description": "The current SPOT v2 token, bond, and migration contract set requires durable primary-source normalization.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "No address is published until verified."
+  },
+  {
+    "id": "sog_unk_spot_history",
+    "stablecoin_id": "sog_st_spot",
+    "issuer_id": "sog_issuer_ampleforth",
+    "topic": "lifecycle_and_collateral_rotation",
+    "description": "Initial launch, v1-to-v2 transition, and collateral-rotation history are not yet a complete event series.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-14",
+    "notes": "Current coverage establishes identity and mechanism only."
+  },
+  {
+    "id": "sog_unk_nuon_launch_phase",
+    "stablecoin_id": "sog_st_nuon",
+    "issuer_id": "sog_issuer_nuon_finance",
+    "topic": "version_transition_and_v1_holder_treatment",
+    "description": "Nuon v1 launched on Arbitrum in 2023 and Nuon v2 opened on Base in 2025 with a different contract and architecture. No first-party source recovered in this review establishes a token swap, holder migration, v1 redemption path, or definitive v1 shutdown date.",
+    "severity": "high",
+    "last_checked_at": "2026-06-23",
+    "notes": "Maintain one branded asset lineage while keeping v1 and v2 deployments distinct. Do not imply contract continuity or automatic holder conversion."
+  },
+  {
+    "id": "sog_unk_nuon_treasury_exit",
+    "stablecoin_id": "sog_st_nuon",
+    "issuer_id": "sog_issuer_nuon_finance",
+    "topic": "treasury_strategy_and_redemption",
+    "description": "Current strategy allocations, liquidity buffers, capacity, and direct exit path are not yet independently normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-06-14",
+    "notes": "Minting guidance does not prove guaranteed USDC redemption."
+  }
+]

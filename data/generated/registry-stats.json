@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-23T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_susd_lineage_2026_06_23",
+  "baseline_id": "sog_registry_v2_nuon_lineage_2026_06_23",
   "registry": {
     "stablecoins": 81,
     "organizations": 70,
     "relationships": 83,
     "classifications": 81,
     "profiles": 81,
-    "events": 118,
-    "event_details": 118,
-    "evidence": 358,
+    "events": 119,
+    "event_details": 119,
+    "evidence": 363,
     "reserve_reports": 89,
     "known_unknowns": 198,
     "regulatory_notes": 9,
-    "deployments": 113,
+    "deployments": 114,
     "legal_profiles": 81,
     "stable_asset_relationships": 4,
     "reserve_components": 113,
@@ -159,6 +159,7 @@
       "Acala": 1,
       "Algorand": 1,
       "Arbitrum": 2,
+      "Arbitrum One": 1,
       "Avalanche": 1,
       "Base": 4,
       "Berachain": 1,
@@ -279,8 +280,8 @@
       "share": 0.115
     },
     "deployments_unknown_canonicality": {
-      "count": 70,
-      "share": 0.6195
+      "count": 69,
+      "share": 0.6053
     }
   }
 }
