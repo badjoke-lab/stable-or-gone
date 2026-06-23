@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-23T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_post_fei_reserve_context_2026_06_23",
+  "baseline_id": "sog_registry_v2_post_category_b_final_review_2026_06_23",
   "registry": {
     "stablecoins": 81,
     "organizations": 70,
@@ -10,7 +10,7 @@
     "profiles": 81,
     "events": 111,
     "event_details": 111,
-    "evidence": 339,
+    "evidence": 340,
     "reserve_reports": 89,
     "known_unknowns": 195,
     "regulatory_notes": 9,
