@@ -1,0 +1,29 @@
+name: Sync sUSD minimum
+
+on:
+  push:
+    branches: [record-susd-depeg-sip423]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: record-susd-depeg-sip423
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: node scripts/sync-susd-migration-minimum.mjs
+      - run: npm run validate:finalization
+      - run: rm scripts/sync-susd-migration-minimum.mjs docs/migration/.susd-migration-minimum-note .github/workflows/sync-susd-minimum.yml
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: Sync sUSD deployment migration minimum
+          add: -A
+          push: true
