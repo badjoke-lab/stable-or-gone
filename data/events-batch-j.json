@@ -119,5 +119,39 @@
     "recovery_date": null,
     "failure_mechanism": "product_launch",
     "notes": "Official Quantoz issuance-start statement; added in Launch-date Batch O."
+  },
+  {
+    "id": "sog_ev_eura_2021_11_launch",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "event_type": "launch",
+    "event_date": "2021-11-03",
+    "title": "Angle launches agEUR on Ethereum mainnet",
+    "description": "Angle Protocol announced its Ethereum mainnet launch on November 3, 2021 with agEUR as the protocol euro stablecoin. SOG uses this day as the canonical launch of the continuous asset now branded EURA.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "The later EURA name does not create a new asset identity."
+  },
+  {
+    "id": "sog_ev_eura_2024_03_rebrand",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "event_type": "rebrand",
+    "event_date": "2024-03-14",
+    "title": "agEUR is rebranded as EURA",
+    "description": "Angle Protocol renamed agEUR to EURA on March 14, 2024 after a governance vote. The official announcement states that the existing token address remained unchanged and no separate token was introduced.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "same_token_rebrand",
+    "notes": "Identity continuity is explicit: agEUR remains a historical alias of EURA."
   }
 ]

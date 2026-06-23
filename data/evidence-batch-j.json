@@ -452,5 +452,93 @@
       "issuance_start"
     ],
     "notes": "Quantoz states that EURQ and USDQ issuance began on Monday, November 18, 2024; later exchange availability is not used as the launch date."
+  },
+  {
+    "id": "sog_src_eura_launch_2021",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "event_id": "sog_ev_eura_2021_11_launch",
+    "source_type": "official_protocol_announcement",
+    "title": "Angle is live on the Ethereum mainnet",
+    "url": "https://medium.com/angle-protocol/angle-is-live-on-the-ethereum-mainnet-a8253162daf0",
+    "publisher": "Angle Protocol",
+    "published_at": "2021-11-03",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/angle-protocol/angle-is-live-on-the-ethereum-mainnet-a8253162daf0",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "launch_date_and_mainnet_availability",
+    "stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "event_ids": [
+      "sog_ev_eura_2021_11_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "ethereum_mainnet",
+      "ageur_identity"
+    ]
+  },
+  {
+    "id": "sog_src_eura_rebrand_2024",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "event_id": "sog_ev_eura_2024_03_rebrand",
+    "source_type": "official_protocol_announcement",
+    "title": "agEUR rebrands to EURA",
+    "url": "https://blog.angle.money/ageur-rebrands-to-eura",
+    "publisher": "Angle Protocol",
+    "published_at": "2024-03-14",
+    "archived_url": "https://web.archive.org/web/*/https://blog.angle.money/ageur-rebrands-to-eura",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "same_token_rebrand",
+    "stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "event_ids": [
+      "sog_ev_eura_2024_03_rebrand"
+    ],
+    "claim_scopes": [
+      "rebrand",
+      "same_contract",
+      "no_new_token",
+      "agEUR_alias"
+    ]
+  },
+  {
+    "id": "sog_src_eura_aip85_2024",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "event_id": "sog_ev_eura_2024_03_rebrand",
+    "source_type": "official_governance_proposal",
+    "title": "AIP-85: Rebrand agEUR into EURA",
+    "url": "https://gov.angle.money/t/aip-85-rebrand-ageur-into-eura/809",
+    "publisher": "Angle Governance Forum",
+    "published_at": "2024-02-26",
+    "archived_url": "https://web.archive.org/web/*/https://gov.angle.money/t/aip-85-rebrand-ageur-into-eura/809",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "rebrand_governance_context",
+    "stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "event_ids": [
+      "sog_ev_eura_2024_03_rebrand"
+    ],
+    "claim_scopes": [
+      "governance_proposal",
+      "symbol_change",
+      "name_change"
+    ]
   }
 ]
