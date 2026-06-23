@@ -23,7 +23,11 @@ SIP-423 proposes Ethereum and Optimism legacy sUSD retirement, a governance-defi
 
 ## Evidence hierarchy
 
-Primary sources: SIP-423, SIP status definitions, SIP-420, Rebuilding sUSD, and the 2026 roadmap. The MetaMask price page is retained only as a third-party market observation. User screenshots remain investigation leads because route, pool, block, timestamp, and chain were not canonicalized.
+Primary sources: SIP-423, SIP status definitions, SIP-420, Rebuilding sUSD, and the 2026 roadmap. The MetaMask price page is retained only as a third-party market observation. Unverified executable quotes remain investigation leads because route, pool, block, timestamp, and chain were not canonicalized.
+
+## Validation
+
+The update pipeline completed the v2 baseline, v3 baseline, data, compatibility, classification, profile, Event v2, evidence-relation, deployment, final-registry, and integrity validators successfully before committing the canonical result.
 
 ## Remaining unknowns
 
