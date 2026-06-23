@@ -1,12 +1,92 @@
 [
-  {"id":"sog_ku_dola_launch_date_batch_g","stablecoin_id":"sog_st_dola","issuer_id":"sog_issuer_inverse_finance","topic":"exact_launch_date","description":"The current official documentation establishes the active DOLA model but does not provide one durable day-level initial launch date for the canonical record.","severity":"low","last_checked_at":"2026-06-15","notes":"Keep launch_date null until a dated primary source is normalized."},
-  {"id":"sog_ku_dola_crosschain_map_batch_g","stablecoin_id":"sog_st_dola","issuer_id":"sog_issuer_inverse_finance","topic":"crosschain_deployment_map","description":"DOLA is documented on Ethereum mainnet and L2s, but every canonical, bridged, and legacy deployment is not yet normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Initial deployment coverage is limited to the verified Ethereum mainnet contract."},
-  {"id":"sog_ku_djed_reserve_ratio_state_batch_g","stablecoin_id":"sog_st_djed","issuer_id":"sog_issuer_coti","topic":"current_reserve_ratio_and_mint_limits","description":"The reserve-ratio design is established, but the current live reserve ratio, mint limits, and fee schedule are not snapshotted in this batch.","severity":"medium","last_checked_at":"2026-06-15","notes":"Future onchain snapshot work should supply time-stamped reserve state."},
-  {"id":"sog_ku_djed_legal_claim_batch_g","stablecoin_id":"sog_st_djed","issuer_id":"sog_issuer_coti","topic":"legal_claim_and_operator_structure","description":"Public materials explain COTI's operator role and protocol mechanics, but the complete legal claim of DJED holders and all operating entities are not normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Legal profile remains conservative."},
-  {"id":"sog_ku_vai_launch_date_batch_g","stablecoin_id":"sog_st_vai","issuer_id":"sog_issuer_venus_protocol","topic":"exact_launch_date","description":"The current protocol documentation does not provide one authoritative day-level VAI launch date for this record.","severity":"low","last_checked_at":"2026-06-15","notes":"Keep launch_date null pending a dated official announcement."},
-  {"id":"sog_ku_vai_current_mint_parameters_batch_g","stablecoin_id":"sog_st_vai","issuer_id":"sog_issuer_venus_protocol","topic":"current_mint_and_psm_parameters","description":"Current mint ceilings, stability-fee parameters, PSM reserves, and operational limits are governance-controlled and not snapshotted here.","severity":"medium","last_checked_at":"2026-06-15","notes":"Requires periodic governance and onchain monitoring."},
-  {"id":"sog_ku_lisusd_rebrand_date_batch_g","stablecoin_id":"sog_st_lisusd","issuer_id":"sog_issuer_lista_dao","topic":"exact_hay_to_lisusd_rebrand_date","description":"The continuing HAY-to-lisUSD identity is supported, but a single authoritative day-level effective rebrand date is not fixed in the current evidence set.","severity":"low","last_checked_at":"2026-06-15","notes":"Event date remains null."},
-  {"id":"sog_ku_lisusd_contract_continuity_batch_g","stablecoin_id":"sog_st_lisusd","issuer_id":"sog_issuer_lista_dao","topic":"contract_and_migration_continuity","description":"Official documentation retains HAY-derived contract names while presenting lisUSD as the current asset; all historical contract replacements and migrations are not yet normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Current record assumes one continuous identity with HAY as alias."},
-  {"id":"sog_ku_usk_current_mint_state_batch_g","stablecoin_id":"sog_st_usk","issuer_id":"sog_issuer_kujira","topic":"current_mint_and_burn_availability","description":"Official documentation describes BLUE-based minting and burn-to-release collateral, but the present unrestricted availability of those interfaces and contracts could not be fully verified.","severity":"high","last_checked_at":"2026-06-15","notes":"This is the basis for limited rather than active status."},
-  {"id":"sog_ku_usk_successor_state_batch_g","stablecoin_id":"sog_st_usk","issuer_id":"sog_issuer_kujira","topic":"successor_network_and_liability_state","description":"The relationship between legacy Kujira USK positions, current chain operation, and any successor ecosystem or migration path is not fully resolved.","severity":"high","last_checked_at":"2026-06-15","notes":"Do not mark terminated or migrated without authoritative evidence."}
+  {
+    "id": "sog_ku_dola_launch_date_batch_g",
+    "stablecoin_id": "sog_st_dola",
+    "issuer_id": "sog_issuer_inverse_finance",
+    "topic": "exact_launch_date",
+    "description": "The current official documentation establishes the active DOLA model but does not provide one durable day-level initial launch date for the canonical record.",
+    "severity": "low",
+    "last_checked_at": "2026-06-15",
+    "notes": "Keep launch_date null until a dated primary source is normalized."
+  },
+  {
+    "id": "sog_ku_dola_crosschain_map_batch_g",
+    "stablecoin_id": "sog_st_dola",
+    "issuer_id": "sog_issuer_inverse_finance",
+    "topic": "crosschain_deployment_map",
+    "description": "DOLA is documented on Ethereum mainnet and L2s, but every canonical, bridged, and legacy deployment is not yet normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Initial deployment coverage is limited to the verified Ethereum mainnet contract."
+  },
+  {
+    "id": "sog_ku_djed_reserve_ratio_state_batch_g",
+    "stablecoin_id": "sog_st_djed",
+    "issuer_id": "sog_issuer_coti",
+    "topic": "current_reserve_ratio_and_mint_limits",
+    "description": "The reserve-ratio design is established, but the current live reserve ratio, mint limits, and fee schedule are not snapshotted in this batch.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Future onchain snapshot work should supply time-stamped reserve state."
+  },
+  {
+    "id": "sog_ku_djed_legal_claim_batch_g",
+    "stablecoin_id": "sog_st_djed",
+    "issuer_id": "sog_issuer_coti",
+    "topic": "legal_claim_and_operator_structure",
+    "description": "Public materials explain COTI's operator role and protocol mechanics, but the complete legal claim of DJED holders and all operating entities are not normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Legal profile remains conservative."
+  },
+  {
+    "id": "sog_ku_vai_launch_date_batch_g",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "topic": "exact_launch_date",
+    "description": "The current protocol documentation does not provide one authoritative day-level VAI launch date for this record.",
+    "severity": "low",
+    "last_checked_at": "2026-06-15",
+    "notes": "Keep launch_date null pending a dated official announcement."
+  },
+  {
+    "id": "sog_ku_vai_current_mint_parameters_batch_g",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "topic": "current_mint_and_psm_parameters",
+    "description": "Current mint ceilings, stability-fee parameters, PSM reserves, and operational limits are governance-controlled and not snapshotted here.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Requires periodic governance and onchain monitoring."
+  },
+  {
+    "id": "sog_ku_lisusd_contract_continuity_batch_g",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "topic": "contract_and_migration_continuity",
+    "description": "The current BNB Chain lisUSD proxy address and HAY-to-lisUSD naming continuity are normalized. Historical proxy implementation upgrades, ancillary contract replacements, and future cross-chain canonical or bridged deployments remain incomplete.",
+    "severity": "low",
+    "last_checked_at": "2026-06-23",
+    "notes": "Do not split HAY and lisUSD unless future contract evidence establishes a token migration rather than a rename."
+  },
+  {
+    "id": "sog_ku_usk_current_mint_state_batch_g",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "topic": "current_mint_and_burn_availability",
+    "description": "Official documentation describes BLUE-based minting and burn-to-release collateral, but the present unrestricted availability of those interfaces and contracts could not be fully verified.",
+    "severity": "high",
+    "last_checked_at": "2026-06-15",
+    "notes": "This is the basis for limited rather than active status."
+  },
+  {
+    "id": "sog_ku_usk_successor_state_batch_g",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "topic": "successor_network_and_liability_state",
+    "description": "The relationship between legacy Kujira USK positions, current chain operation, and any successor ecosystem or migration path is not fully resolved.",
+    "severity": "high",
+    "last_checked_at": "2026-06-15",
+    "notes": "Do not mark terminated or migrated without authoritative evidence."
+  }
 ]

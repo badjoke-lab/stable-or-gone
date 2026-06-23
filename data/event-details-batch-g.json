@@ -1,7 +1,112 @@
 [
-  {"id":"sog_ev_dola_protocol_model_batch_g","title":"DOLA supply centers on FiRM and the Peg Stability Module","subject_stablecoin_ids":["sog_st_dola"],"subject_organization_ids":["sog_issuer_inverse_finance"],"evidence_ids":["sog_src_dola_docs_batch_g","sog_src_dola_psm_batch_g","sog_src_dola_llms_batch_g"],"event_detail_kind":"other"},
-  {"id":"sog_ev_djed_launch_batch_g","title":"COTI launches Djed on Cardano","subject_stablecoin_ids":["sog_st_djed"],"subject_organization_ids":["sog_issuer_coti"],"evidence_ids":["sog_src_djed_home_batch_g","sog_src_djed_coti_cardano_batch_g","sog_src_djed_launch_batch_g"],"event_detail_kind":"launch","launch_detail":{"summary":"Djed launched on Cardano under COTI operation with ADA reserves and the SHEN reserve coin.","status":"active","related_organization_ids":["sog_issuer_coti"]}},
-  {"id":"sog_ev_vai_protocol_model_batch_g","title":"Venus operates VAI with stability fees and peg-support modules","subject_stablecoin_ids":["sog_st_vai"],"subject_organization_ids":["sog_issuer_venus_protocol"],"evidence_ids":["sog_src_vai_docs_batch_g","sog_src_vai_psm_batch_g","sog_src_vai_contracts_batch_g"],"event_detail_kind":"other"},
-  {"id":"sog_ev_lisusd_rebrand_batch_g","title":"HAY continues under the lisUSD brand","subject_stablecoin_ids":["sog_st_lisusd"],"subject_organization_ids":["sog_issuer_lista_dao"],"evidence_ids":["sog_src_lisusd_mechanics_batch_g","sog_src_lisusd_price_stability_batch_g","sog_src_lisusd_site_batch_g"],"event_detail_kind":"migration","migration_detail":{"summary":"The HAY stablecoin identity continues as lisUSD inside the Lista protocol and Maker-derived contract system."}},
-  {"id":"sog_ev_usk_limited_status_batch_g","title":"USK recorded with limited current status","subject_stablecoin_ids":["sog_st_usk"],"subject_organization_ids":["sog_issuer_kujira"],"evidence_ids":["sog_src_usk_overview_batch_g","sog_src_usk_technical_batch_g","sog_src_usk_transparency_batch_g"],"event_detail_kind":"other"}
+  {
+    "id": "sog_ev_dola_protocol_model_batch_g",
+    "title": "DOLA supply centers on FiRM and the Peg Stability Module",
+    "subject_stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "evidence_ids": [
+      "sog_src_dola_docs_batch_g",
+      "sog_src_dola_psm_batch_g",
+      "sog_src_dola_llms_batch_g"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_djed_launch_batch_g",
+    "title": "COTI launches Djed on Cardano",
+    "subject_stablecoin_ids": [
+      "sog_st_djed"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_coti"
+    ],
+    "evidence_ids": [
+      "sog_src_djed_home_batch_g",
+      "sog_src_djed_coti_cardano_batch_g",
+      "sog_src_djed_launch_batch_g"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Djed launched on Cardano under COTI operation with ADA reserves and the SHEN reserve coin.",
+      "status": "active",
+      "related_organization_ids": [
+        "sog_issuer_coti"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_vai_protocol_model_batch_g",
+    "title": "Venus operates VAI with stability fees and peg-support modules",
+    "subject_stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "evidence_ids": [
+      "sog_src_vai_docs_batch_g",
+      "sog_src_vai_psm_batch_g",
+      "sog_src_vai_contracts_batch_g"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_lisusd_rebrand_batch_g",
+    "title": "HAY is rebranded as lisUSD",
+    "subject_stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "evidence_ids": [
+      "sog_src_lisusd_mechanics_batch_g",
+      "sog_src_lisusd_site_batch_g",
+      "sog_src_lisusd_rebrand_plan_2023",
+      "sog_src_lisusd_rebrand_effective_2024",
+      "sog_src_lisusd_contract_docs_2026"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_usk_limited_status_batch_g",
+    "title": "USK recorded with limited current status",
+    "subject_stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "evidence_ids": [
+      "sog_src_usk_overview_batch_g",
+      "sog_src_usk_technical_batch_g",
+      "sog_src_usk_transparency_batch_g"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_lisusd_2022_08_launch",
+    "title": "Helio Protocol launches HAY on BNB Chain",
+    "subject_stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "evidence_ids": [
+      "sog_src_lisusd_launch_2022"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "HAY launched with Helio Protocol mainnet on BNB Chain on 2022-08-19.",
+      "status": "active_same_asset_now_branded_lisusd",
+      "related_organization_ids": [
+        "sog_issuer_lista_dao"
+      ]
+    }
+  }
 ]
