@@ -51,6 +51,14 @@ HUSD and EURT remain source-status unresolved. Neither is classified as expected
 
 The applicability ledger must continue to equal the exact set of canonical assets without reserve/report context. No placeholder row may be added merely to increase coverage. Required backing structure remains represented separately by complete reserve-component coverage.
 
+## Validation
+
+- The reserve-applicability validator accepted the 12-record ledger as the exact set of canonical assets without reserve/report context.
+- Registry stats were regenerated from the updated baseline.
+- The cross-layer integrity audit completed with zero critical findings and zero warnings.
+- The complete `npm run build` validation chain passed.
+- Temporary transformation and workflow files were removed from the final pull-request diff.
+
 ## Production status
 
 No Cloudflare action, production deployment, or public parity assertion is performed.
