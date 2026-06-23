@@ -33,14 +33,15 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #101 — Record 81-record quality checkpoint
-Merge: ef30857b9960b2f1da609d7f411328c7c4439603
+PR #103 — Record Category C lineage audit plan
+Merge: 8d2aa3b8bc27e67332e37ead057854bb5f56d304
 ```
 
-Current quality PR:
+Current quality work:
 
 ```text
-PR #102 — Resolve Avalon USDa launch date
+sUSD severe depeg and SIP-423 Vote Pending proposal
+Branch: record-susd-depeg-sip423
 ```
 
 Recent merged quality work:
@@ -79,13 +80,13 @@ Audit: docs/audits/registry-75-production-parity.md
 83 stablecoin-organization relationships
 81 classifications
 81 reserve/redemption profiles
-111 events
-111 Event v2 detail records
-340 evidence records
+113 events
+113 Event v2 detail records
+346 evidence records
 89 reserve-report or reserve-context records
-195 known unknowns
+199 known unknowns
 9 regulatory notes
-112 deployments
+113 deployments
 81 legal profiles
 4 stable-asset relationships
 113 reserve components

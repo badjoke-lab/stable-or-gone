@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-23T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_post_fei_reserve_context_2026_06_23",
+  "baseline_id": "sog_registry_v2_susd_impaired_sip423_2026_06_23",
   "registry": {
     "stablecoins": 81,
     "organizations": 70,
     "relationships": 83,
     "classifications": 81,
     "profiles": 81,
-    "events": 111,
-    "event_details": 111,
-    "evidence": 340,
+    "events": 113,
+    "event_details": 113,
+    "evidence": 346,
     "reserve_reports": 89,
-    "known_unknowns": 195,
+    "known_unknowns": 199,
     "regulatory_notes": 9,
-    "deployments": 112,
+    "deployments": 113,
     "legal_profiles": 81,
     "stable_asset_relationships": 4,
     "reserve_components": 113,
@@ -22,12 +22,12 @@
   },
   "lifecycle": {
     "by_status": {
-      "active": 61,
+      "active": 60,
       "collapsed": 6,
       "inactive": 1,
       "migrated": 2,
       "rebranded": 1,
-      "restricted": 5,
+      "restricted": 6,
       "terminated": 2,
       "winding_down": 3
     },
@@ -62,18 +62,18 @@
   },
   "composition": {
     "entity_statuses": {
-      "active": 61,
+      "active": 60,
       "discontinued": 6,
       "failed": 6,
-      "impaired": 1,
+      "impaired": 2,
       "limited": 4,
       "migrated": 2,
       "rebranded": 1
     },
     "issuance_statuses": {
       "open": 1,
-      "protocol_based": 27,
-      "restricted": 36,
+      "protocol_based": 26,
+      "restricted": 37,
       "terminated": 15,
       "unknown": 2
     },
@@ -172,6 +172,7 @@
       "multi_chain": 2,
       "multi_chain_or_bridge_context": 1,
       "multi_chain_or_protocol_context": 1,
+      "Optimism": 1,
       "Polygon": 3,
       "Solana": 7,
       "source_review_needed": 1,
@@ -278,8 +279,8 @@
       "share": 0.115
     },
     "deployments_unknown_canonicality": {
-      "count": 69,
-      "share": 0.6161
+      "count": 70,
+      "share": 0.6195
     }
   }
 }
