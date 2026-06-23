@@ -1,0 +1,37 @@
+name: Apply lisUSD lineage update
+
+on:
+  push:
+    branches: [lisusd-hay-lineage]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: lisusd-hay-lineage
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/lisusd-step1.mjs
+      - run: node scripts/lisusd-step2a.mjs
+      - run: node scripts/lisusd-step2b.mjs
+      - run: node scripts/lisusd-step3.mjs
+      - run: node scripts/lisusd-step4.mjs
+      - run: node scripts/generate-registry-stats.mjs
+      - run: node scripts/audit-registry-integrity.mjs
+      - run: npm run validate:launch-queue
+      - run: npm run build
+      - run: rm scripts/lisusd-step*.mjs .github/workflows/apply-lisusd-lineage.yml
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: Resolve lisUSD and HAY lineage
+          add: -A
+          push: true
