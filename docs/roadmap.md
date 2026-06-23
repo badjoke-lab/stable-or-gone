@@ -210,6 +210,20 @@ At each publication checkpoint verify:
 - stale count markers
 - production consistency
 
+## Manual publication configuration
+
+```text
+Pages project: stable-or-gone
+Production branch: main
+Automatic production deployment: disabled
+Preview branch deployments: disabled
+Publication path: manual GitHub Actions workflow only
+Deployment workflow run: 27908380603
+Manual production publication activation — PASS
+```
+
+Normal pull requests and normal merges must not invoke the production deployment workflow. Manual publication remains operational but is not executed while Cloudflare access is unavailable.
+
 ## Growth policy
 
 Controlled record growth remains paused while the public site is behind the canonical GitHub baseline.
