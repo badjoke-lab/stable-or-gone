@@ -31,6 +31,8 @@ The update pipeline completed the v2 baseline, v3 baseline, data, compatibility,
 
 The Registry v3 migration-audit deployment minimum was synchronized to 113 after the Optimism legacy deployment was added.
 
+All six normal pull-request workflows passed on the final branch head.
+
 ## Remaining unknowns
 
 Vote result, implementation date, snapshot block, eligible holdings, LP and vault handling, claim contract, SNX issuance cap, lock and vesting clocks, claim expiration, 420 Pool position treatment, Optimism contract identity, canonical market low, and final terminal date remain unresolved.
