@@ -23,3 +23,7 @@ No first-party source recovered in this review establishes an automatic v1-to-v2
 ## Registry treatment
 
 The asset launch date is 2023-02-02. The 2025 Base opening is a v2 public relaunch, not a replacement launch date. Arbitrum v1 is stored as a legacy deployment with unresolved current status; Base v2 is the current primary deployment.
+
+## Validation
+
+The one-time update pipeline passed baseline, launch queue, terminal queue, candidate, data, compatibility, classification, profile, Event v2, evidence relation, deployment, Registry v3, final-state, finalization, Astro, site-build, deployment verification, and public verification checks before committing the canonical result. Temporary scripts and workflow files were removed from the final branch.
