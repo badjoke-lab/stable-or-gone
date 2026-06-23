@@ -16,10 +16,10 @@ The canonical GitHub checkpoint contains:
 83 stablecoin-organization relationships
 81 classification records
 81 reserve/redemption profiles
-116 events
-116 Event v2 detail records
-353 evidence records
-353 evidence relation projections
+118 events
+118 Event v2 detail records
+358 evidence records
+358 evidence relation projections
 89 reserve-report or reserve-context records
 198 known unknowns
 9 regulatory notes
@@ -37,7 +37,7 @@ The public production site remains at the last verified publication checkpoint u
 Current quality queues:
 
 ```text
-31 unresolved launch dates
+30 unresolved launch dates
 4 unresolved historical terminal dates
 12 assets without reserve/report context
   10 not applicable by design
