@@ -9,9 +9,9 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 31,
+  "expected_total": 30,
   "category_counts": {
-    "C": 25,
+    "C": 24,
     "B": 3,
     "D": 3
   },
@@ -162,13 +162,6 @@
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Announcement, issuance, deployment, and approved access differ."
-    },
-    {
-      "stablecoin_id": "sog_st_susd",
-      "category": "C",
-      "best_known_range": "2018",
-      "reason_code": "lineage_conflict",
-      "review_note": "eUSD, nUSD, and sUSD lineage needs a separate policy."
     },
     {
       "stablecoin_id": "sog_st_susde",

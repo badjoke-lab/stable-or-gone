@@ -396,7 +396,9 @@
     "symbol": "sUSD",
     "aliases": [
       "sUSD",
-      "Synthetix USD"
+      "Synthetix USD",
+      "nUSD",
+      "Nomin USD"
     ],
     "status": "impaired",
     "issuer_id": "sog_issuer_synthetix",
@@ -410,11 +412,11 @@
     "minimum_redemption": "not_established",
     "redemption_region_notes": "Market exits, protocol access, Ethereum and Optimism legacy deployments, future snapshot eligibility, claim routing, DeFi custody, and frontend restrictions must be treated separately.",
     "redemption_notes": "SOG separates the observed market depeg from nominal one-dollar accounting, and separates the Vote Pending SIP-423 proposal from approved or implemented compensation. The proposed four-SNX entitlement is not immediately realizable one-dollar redemption.",
-    "launch_date": null,
+    "launch_date": "2018-06-11",
     "discontinued_date": null,
     "summary": "Legacy synthetic USD asset from Synthetix. SOG records sUSD as impaired after a prolonged and severe market depeg, while separately tracking the Vote Pending SIP-423 proposal to retire Ethereum and Optimism legacy sUSD and offer conditional SNX-denominated compensation.",
     "confidence": "high",
     "last_verified_at": "2026-06-23",
-    "notes": "Major lifecycle update on 2026-06-23. SIP-423 remains Vote Pending; sUSD is not classified as failed, discontinued, migrated, or terminated. Exact launch lineage, market low, snapshot, claim contract, eligibility, vote result, and implementation remain unresolved."
+    "notes": "The current sUSD asset lineage is anchored to the HAV-backed nUSD mainnet launch on 2018-06-11. eUSD was a separate ETH-backed trial predecessor launched on 2018-04-11 and closed on 2018-06-29. nUSD was renamed sUSD during the 2018 Synthetix rebrand without a contract-address change. The 2026 impaired-state and SIP-423 proposal remain separate lifecycle records."
   }
 ]

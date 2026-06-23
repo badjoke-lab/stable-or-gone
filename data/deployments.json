@@ -215,11 +215,14 @@
     "deployment_type": "protocol_token",
     "contract_address": "source_review_needed",
     "status": "impaired_retirement_proposed",
-    "notes": "Ethereum legacy sUSD remains a live impaired deployment. SIP-423 proposes transfer, mint, and burn suspension after a successful vote and a seven-day implementation window; those changes are not yet approved or implemented. Exact canonical contract metadata remains under source review.",
+    "notes": "Ethereum legacy sUSD deployment. Official 2018 rebrand material states that the nUSD-to-sUSD rename did not change contract addresses. Later proxy and implementation upgrades, the current impaired state, and the Vote Pending SIP-423 retirement proposal remain separate lifecycle layers.",
     "evidence_ids": [
       "sog_src_susd_synthetix_docs",
       "sog_src_susd_sip423_2026",
-      "sog_src_susd_metamask_market_2026_06_18"
+      "sog_src_susd_metamask_market_2026_06_18",
+      "sog_src_susd_nusd_launch_2018",
+      "sog_src_susd_rebrand_2018",
+      "sog_src_susd_synths_mainnet_2018"
     ]
   },
   {

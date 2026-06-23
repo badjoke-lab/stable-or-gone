@@ -233,11 +233,11 @@
     "id": "sog_unknown_susd_v2_v3_lifecycle",
     "stablecoin_id": "sog_st_susd",
     "issuer_id": "sog_issuer_synthetix",
-    "topic": "synthetix_lifecycle",
-    "description": "sUSD launch lineage from eUSD to nUSD to sUSD, Synthetix V2/V3 boundaries, SNX-backed minting deprecation, 420 Pool history, debt-pool mechanics, and any successor or parallel stable assets require a dedicated source-backed lifecycle backfill.",
-    "severity": "high",
+    "topic": "synthetix_v2_v3_and_post_launch_lifecycle",
+    "description": "The eUSD predecessor, nUSD launch, and nUSD-to-sUSD rename are now resolved. Synthetix V2/V3 boundaries, SNX-backed minting deprecation, 420 Pool history, debt-pool mechanics, deployment upgrades, and any successor or parallel stable assets still require dedicated source-backed lifecycle records.",
+    "severity": "medium",
     "last_checked_at": "2026-06-23",
-    "notes": "The 2026 impaired-state and SIP-423 proposal are now recorded separately. The older lineage and version-boundary audit remains unresolved."
+    "notes": "Do not reopen the 2018 launch boundary without conflicting first-party evidence. Keep later protocol-version and debt-system transitions separate from the launch lineage."
   },
   {
     "id": "sog_unknown_susd_sip423_governance_implementation",

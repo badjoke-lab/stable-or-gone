@@ -321,10 +321,13 @@
     "subject_organization_ids": [
       "sog_issuer_synthetix"
     ],
-    "event_detail_kind": "migration",
-    "migration_detail": {
-      "summary": "sUSD and Synthetix protocol lifecycle context."
-    }
+    "event_detail_kind": "other",
+    "title": "eUSD trial predecessor launches and is later phased out",
+    "evidence_ids": [
+      "sog_src_susd_eusd_release_2018",
+      "sog_src_susd_eusd_phaseout_2018",
+      "sog_src_susd_rebuilding_2026"
+    ]
   },
   {
     "id": "sog_ev_frax_2020_12_launch",
@@ -507,6 +510,53 @@
       "affected_deployment_ids": [
         "sog_dep_susd_ethereum_seed",
         "sog_dep_susd_optimism_legacy"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_synthetix"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_susd_nusd_launch_2018",
+    "title": "Havven launches nUSD on Ethereum mainnet",
+    "subject_stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "evidence_ids": [
+      "sog_src_susd_nusd_launch_2018",
+      "sog_src_susd_synths_mainnet_2018",
+      "sog_src_susd_rebuilding_2026"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "nUSD launched on Ethereum mainnet on 2018-06-11 and is the canonical launch boundary for the asset now branded sUSD.",
+      "status": "impaired_current_asset"
+    }
+  },
+  {
+    "id": "sog_ev_susd_rebrand_2018",
+    "title": "nUSD is renamed sUSD during the Synthetix rebrand",
+    "subject_stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "evidence_ids": [
+      "sog_src_susd_rebrand_2018",
+      "sog_src_susd_synths_mainnet_2018",
+      "sog_src_susd_rebuilding_2026"
+    ],
+    "event_detail_kind": "governance_change",
+    "governance_change_detail": {
+      "summary": "Project and token naming changed from Havven and nUSD to Synthetix and sUSD without contract-address changes.",
+      "status": "implemented_same_token_rebrand",
+      "resolution_date": "2018-11-30",
+      "affected_deployment_ids": [
+        "sog_dep_susd_ethereum_seed"
       ],
       "related_organization_ids": [
         "sog_issuer_synthetix"
