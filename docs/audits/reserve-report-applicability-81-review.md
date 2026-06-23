@@ -57,6 +57,7 @@ The applicability ledger must continue to equal the exact set of canonical asset
 - Registry stats were regenerated from the updated baseline.
 - The cross-layer integrity audit completed with zero critical findings and zero warnings.
 - The complete `npm run build` validation chain passed.
+- All six standard pull-request workflows passed on the reviewed tree.
 - Temporary transformation and workflow files were removed from the final pull-request diff.
 
 ## Production status
