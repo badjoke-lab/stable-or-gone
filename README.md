@@ -8,27 +8,43 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 
 ## Current registry checkpoint
 
-The canonical checkpoint contains:
+The canonical GitHub checkpoint contains:
 
 ```text
-70 stable assets
-59 organizations
-72 stablecoin-organization relationships
-70 classification records
-70 reserve/redemption profiles
-97 events
-97 Event v2 detail records
-286 evidence records
-286 evidence relation projections
-72 reserve-report references
-153 known unknowns
+81 stable assets
+70 organizations
+83 stablecoin-organization relationships
+81 classification records
+81 reserve/redemption profiles
+111 events
+111 Event v2 detail records
+339 evidence records
+339 evidence relation projections
+89 reserve-report or reserve-context records
+195 known unknowns
 9 regulatory notes
-101 deployments
+112 deployments
+81 legal profiles
+4 stable-asset relationships
+113 reserve components
+81 income profiles
 ```
 
 These counts are generated from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and the sitemap. They must not be maintained independently by hand.
 
-The current roadmap first completes quality work on the 70-record checkpoint, then resumes controlled growth toward 100 canonical assets.
+The public production site remains at the last verified publication checkpoint until Cloudflare access returns and a manual deployment plus parity audit is completed. GitHub-only quality work continues against the 81-record baseline.
+
+Current quality queues:
+
+```text
+34 unresolved launch dates
+4 unresolved historical terminal dates
+12 assets without reserve/report context
+  10 not applicable by design
+   2 source status unresolved
+```
+
+See `docs/roadmap.md` for the canonical current position and next work item.
 
 ## What the registry tracks
 
@@ -97,6 +113,10 @@ Current canonical data groups include:
 - known unknowns
 - regulatory notes
 - deployment records
+- legal profiles
+- stable-asset relationships
+- reserve components
+- income profiles
 
 Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, and the sitemap are generated or validated against the same canonical groups. Unreviewed candidates, internal monitoring output, staging data, and private notes are excluded from the public machine-readable layer.
 
@@ -117,7 +137,7 @@ npm run dev
 npm run build
 ```
 
-The build chain runs deployment-policy, baseline, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, deployment, income-profile, final-state, batch-finalization, and integrity validation before Astro check and site generation.
+The build chain runs deployment-policy, baseline, launch-queue, terminal-queue, reserve-applicability, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, deployment, income-profile, final-state, batch-finalization, and integrity validation before Astro check and site generation.
 
 After generation it also verifies:
 
@@ -127,7 +147,7 @@ After generation it also verifies:
 - `version.json` and `data/manifest.json` count parity
 - sitemap detail-route coverage
 - canonical, hreflang, meta description, Open Graph, and JSON-LD metadata
-- absence of known legacy count strings such as the old 16/20 issuer view and 23-event view
+- absence of stale legacy count strings
 
 ## Development and production deployment
 
