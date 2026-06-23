@@ -29,6 +29,8 @@ Primary sources: SIP-423, SIP status definitions, SIP-420, Rebuilding sUSD, and 
 
 The update pipeline completed the v2 baseline, v3 baseline, data, compatibility, classification, profile, Event v2, evidence-relation, deployment, final-registry, and integrity validators successfully before committing the canonical result.
 
+The Registry v3 migration-audit deployment minimum was synchronized to 113 after the Optimism legacy deployment was added.
+
 ## Remaining unknowns
 
 Vote result, implementation date, snapshot block, eligible holdings, LP and vault handling, claim contract, SNX issuance cap, lock and vesting clocks, claim expiration, 420 Pool position treatment, Optimism contract identity, canonical market low, and final terminal date remain unresolved.
