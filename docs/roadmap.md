@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-22
+Updated: 2026-06-23
 
 ## Purpose
 
@@ -33,211 +33,162 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #93 — Promote Batch M stable assets
-Merge: cd745f315d2b0f935fc2288c2e118f6905e087b6
+PR #100 — Resolve FEI reserve context
+Merge: 39131d5c6dfdeecbf9a6e3359b21df6237fa7bd0
+```
+
+Recent merged quality work:
+
+```text
+PR #97 — Add MainStreet msUSD impaired incident
+PR #98 — Resolve four Category B launch dates
+PR #99 — Resolve Mountain USDM and USDN terminal dates
+PR #100 — Resolve FEI reserve context
 ```
 
 Current blocker:
 
 ```text
-80-record GitHub canonical baseline: complete
-80-record production publication: pending
-80-record production parity: pending
+81-record GitHub canonical baseline: complete
+81-record production publication: pending
+81-record production parity: pending
 Cloudflare access: unavailable
-80 → 85 controlled growth: blocked until parity passes
+Controlled record growth: paused until production parity can be restored
+GitHub-only quality work: active
 ```
 
-Latest production checkpoints:
+Latest verified production checkpoint:
 
 ```text
 75-record production parity: PASS
 Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
-
-Manual publication activation: PASS
-Deployment workflow run: 27908380603
-Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
-Audit: docs/audits/manual-production-activation-2026-06-22.md
 ```
 
 ## Current canonical registry
 
 ```text
-80 stable assets
-69 organizations
-82 stablecoin-organization relationships
-80 classifications
-80 reserve/redemption profiles
-107 events
-107 Event v2 detail records
-328 evidence records
-87 reserve-report or reserve-context records
-188 known unknowns
+81 stable assets
+70 organizations
+83 stablecoin-organization relationships
+81 classifications
+81 reserve/redemption profiles
+111 events
+111 Event v2 detail records
+339 evidence records
+89 reserve-report or reserve-context records
+195 known unknowns
 9 regulatory notes
-111 deployments
-80 legal profiles
+112 deployments
+81 legal profiles
 4 stable-asset relationships
-112 reserve components
-80 income profiles
+113 reserve components
+81 income profiles
 ```
 
-## Candidate controls
+Machine-readable source of truth:
 
 ```text
-Total controlled candidates: 80
-Promoted candidates:         80
-Pending candidates:           0
-Canonical assets:             80
-Batch M promotions:            5
+docs/migration/registry-v3-baseline.json
 ```
-
-Batch M promotions:
-
-```text
-sog_cand_000076 — Gyroscope GYD
-sog_cand_000077 — f(x) Protocol fxUSD
-sog_cand_000078 — Berachain HONEY
-sog_cand_000079 — QiDAO MAI
-sog_cand_000080 — Stables Labs USDX
-```
-
-Sources and audits:
-
-```text
-data/candidate-stable-assets-growth-80.json
-data/candidate-research-batch-13.json
-data/candidate-promotions-batch-m.json
-docs/audits/batch-13-candidate-intake.md
-docs/audits/batch-13-promotion-boundary-review.md
-docs/audits/batch-m-promotion.md
-docs/audits/registry-80-quality-baseline.md
-scripts/validate-batch13-research.mjs
-```
-
-## Batch M result
-
-```text
-GYD:
-- base GYD promoted
-- sGYD remains separate
-- reviewed Ethereum launch date: 2023-12-07
-- Polygon Gyro Proto remains historical lineage
-- unresolved reserve, contract, and governance details remain explicit
-
-fxUSD:
-- base fxUSD promoted
-- fxSAVE, position products, pool shares, and CreditNotes remain separate
-- V1/V2 continuity remains explicit
-- base-token income uncertainty is preserved through the wrapper boundary
-
-HONEY:
-- native Berachain HONEY promoted
-- receipts, liquidity positions, bridged forms, and testnet assets remain separate
-- Basket Mode, collateral-vault, custody, and fee boundaries are recorded
-- exact launch day remains unresolved
-
-MAI:
-- official miMATIC-to-MAI identity continuity retained as one asset
-- chain-specific deployment canonicality remains explicit
-- launch, rebrand, current peg, and incident chronology remain known unknowns
-
-Stables Labs USDX:
-- disambiguated Stables Labs identity promoted as sog_st_stablesusdx
-- unrelated USDX assets remain separate
-- sUSDX remains separate
-- approved-party direct redemption limits and seven-day route are preserved
-```
-
-Only GYD has a reviewed day-level launch date. No other launch date, legal issuer, contract, reserve percentage, redemption right, or lifecycle conclusion is inferred beyond reviewed sources.
 
 ## Current quality baseline
 
 ```text
-Candidate promotions:                    80 / 80 controlled
+Candidate promotions:                    81 / 81 controlled
 Pending candidates:                       0
 Critical findings:                        0
 Warnings:                                 0
 Stale verification records:               0
-Required-layer coverage:              80 / 80
-Event coverage:                        80 / 80
-Deployment coverage:                   80 / 80
-Reserve-report context coverage:       67 / 80 informational
-Missing canonical launch dates:            37
-Historical records missing terminal date:   6
-Reserve applicability queue:                13
+Required-layer coverage:              81 / 81
+Event coverage:                        81 / 81
+Deployment coverage:                   81 / 81
+Reserve-report context coverage:       69 / 81 informational
+Missing canonical launch dates:            34
+Historical records missing terminal date:   4
+Reserve applicability queue:                12
+  not applicable by design:                 10
+  source status unresolved:                  2
+  expected but missing:                      0
 All-unknown income profiles:                 0
 ```
 
-Machine-readable baseline:
+## Queue state
+
+### Launch-date queue
 
 ```text
-docs/migration/registry-v3-baseline.json
-scripts/validate-registry-v3-baseline.mjs
+Total unresolved: 34
+Category B:         4
+Category C:        27
+Category D:         3
 ```
 
-The reviewed GitHub baseline is 80 after PR #93. Production remains at the previous published checkpoint until a separate manual publication action is completed.
+Remaining Category B records:
+
+```text
+BRZ
+Berachain HONEY
+Anzen USDA
+Anzen USDz
+```
+
+Policy:
+
+- require day-level primary evidence
+- do not coerce month or year into a canonical date
+- do not use exchange listings as the default launch boundary
+- keep `launch_date: null` when the exact public boundary remains unresolved
+
+### Terminal-date queue
+
+```text
+Total unresolved: 4
+Basis Cash
+Dynamic Set Dollar
+Empty Set Dollar
+GYEN
+```
+
+GYEN remains in an active wind-down and is not assigned a final terminal date while the initial redemption period remains open through 2026-11-11.
+
+### Reserve-report applicability queue
+
+```text
+Total uncovered:              12
+Not applicable by design:     10
+Source status unresolved:      2
+Expected but missing:          0
+```
+
+The ten `not_applicable_by_design` records are reviewed and retained with evidence-backed protocol-specific reasons.
+
+Remaining source-status unresolved records:
+
+```text
+HUSD — original signed historical attestation not recovered
+EURT — product-specific reserve scope not recovered from consolidated Tether reporting
+```
+
+FEI left the unresolved queue in PR #100 after recovery of the executed TIP-121c historical redemption and DAI-backing package. Current redemption availability, universal holder completion, and completion of every residual PCV distribution remain separate known unknowns.
 
 ## Immediate next work
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Continue GitHub-only quality work against the 80-record baseline.
-3. Prioritize the 37-record launch-date queue, 6-record terminal-date queue, and 13-record reserve applicability queue.
-4. Keep generated outputs, integrity audit, Registry v3 baseline, and roadmap synchronized in every quality PR.
-5. When Cloudflare access is available again, run one manual 80-record publication checkpoint from the merged main branch.
-6. Verify deployed commit, public counts, machine-readable files, canonical routes, sitemap, metadata, structured data, and production consistency.
-7. Record the 80-record parity result in a separate audit PR.
-8. Do not begin 80 → 85 controlled growth until the 80-record production-parity gate passes.
+2. Continue GitHub-only quality work against the 81-record baseline.
+3. Re-audit the four remaining Category B launch-date records: BRZ, HONEY, USDA, and USDz.
+4. Resolve only records supported by day-level primary evidence; retain the rest without forced dates.
+5. Keep launch-date queue, generated outputs, integrity audit, Registry v2/v3 baselines, README checkpoint, and roadmap synchronized in every quality PR.
+6. After Category B, decide whether to audit high-value Category C boundary conflicts or freeze the queue for a later source-led pass.
+7. When Cloudflare access returns, publish the latest merged main checkpoint manually and verify production parity before controlled record growth resumes.
 ```
 
-## Batch M promotion requirements
+## Production policy
 
-Every promoted candidate includes the applicable:
+Normal pull requests and normal `main` merges complete through GitHub CI and do not publish to Cloudflare.
 
-- canonical stable-asset record
-- organization and relationship
-- classification and lifecycle
-- reserve and redemption profile
-- event and Event v2 detail
-- reviewed evidence
-- explicit known unknowns
-- deployment identity
-- legal profile
-- reserve components
-- income profile
-- candidate promotion record
-
-Candidate-specific constraints remain active:
-
-```text
-GYD:
-- preserve sGYD separation
-- represent Gyro Proto only through explicit lineage
-- use 2023-12-07 as the reviewed launch date
-
-fxUSD:
-- do not merge fxSAVE or position products
-- represent V1/V2 and base-income uncertainty explicitly
-
-HONEY:
-- exclude testnet as a production deployment
-- keep receipts and bridges separate
-- separate custody from token identity
-
-MAI:
-- preserve miMATIC continuity as a rebrand, not a second asset
-- keep chain-specific canonicality and lifecycle uncertainty explicit
-
-Stables Labs USDX:
-- use disambiguated identity sog_st_stablesusdx
-- do not merge unrelated USDX assets
-- keep sUSDX separate
-- preserve approved-party redemption limits
-```
-
-## Manual publication result
-
-The repository uses the intended free-plan publication architecture:
+The production path remains:
 
 ```text
 latest main
@@ -248,50 +199,24 @@ latest main
 → production consistency verification
 ```
 
-The first controlled manual deployment completed successfully in workflow run `27908380603`.
+At each publication checkpoint verify:
 
-## Cloudflare production configuration
+- deployed commit
+- public counts
+- machine-readable files
+- canonical routes
+- sitemap
+- metadata and structured data
+- stale count markers
+- production consistency
 
-```text
-Production branch: main
-Automatic production deployment: disabled
-Preview branch deployments: disabled
-Build cache: enabled
-Build command: npm run build
-Output directory: dist
-Build watch paths: *
-Publication path: manual GitHub Actions workflow only
-Pages project: stable-or-gone
-```
+## Growth policy
 
-GitHub production controls:
+Controlled record growth remains paused while the public site is behind the canonical GitHub baseline.
 
-```text
-Repository secrets:
-- CLOUDFLARE_API_TOKEN
-- CLOUDFLARE_ACCOUNT_ID
+The emergency addition of MainStreet msUSD created the 81-record checkpoint after the earlier 80-record publication gate was already pending. No further routine growth batch begins until a manual publication and parity audit can be completed from the latest merged `main`.
 
-Environment:
-- production
-- allowed deployment branch: main
-- required reviewers: none
-- wait timer: none
-```
-
-Normal pull requests and normal `main` merges do not publish to Cloudflare.
-
-## Production-parity gates
-
-| Canonical count | Required gate |
-|---:|---|
-| 75 | complete — parity and manual publication activation passed |
-| 80 | pending — manual publication and production parity after Cloudflare access recovery |
-| 85 | manual publication and production parity after merge |
-| 90 | manual publication and production parity after merge |
-| 95 | manual publication and production parity after merge |
-| 100 | final manual publication, full parity, and Issue #66 resolution |
-
-At every gate verify the deployed commit, public counts, machine-readable files, canonical routes, sitemap, metadata, structured data, stale count markers, and production errors.
+Quality corrections, evidence improvements, date resolution, queue maintenance, schema validation, and generated-output synchronization may continue without Cloudflare access.
 
 ## Completed checkpoints
 
@@ -314,103 +239,12 @@ PR #90 — Finalize manual Cloudflare publication controls
 PR #91 — Prepare Batch 13 candidate intake
 PR #92 — Review Batch 13 promotion boundaries
 PR #93 — Promote Batch M stable assets
+PR #95 — Recover Falcon USDf launch date
+PR #96 — Record PR #95 merge checkpoint
+PR #97 — Add MainStreet msUSD impaired incident
+PR #98 — Resolve four Category B launch dates
+PR #99 — Resolve Mountain USDM and USDN terminal dates
+PR #100 — Resolve FEI reserve context
 75-record production parity — PASS
 Manual production publication activation — PASS
 ```
-
-## Phase status
-
-```text
-Phase 1 — Launch-date quality work: complete
-Phase 2 — Historical terminal-date work: complete
-Phase 3 — Income-profile completion: complete
-Phase 4 — Reserve-report applicability and evidence: complete
-Phase 5 — 70-record quality audit and baseline: complete
-Phase 6A — Controlled growth from 70 to 75: complete
-Phase 6B — 75-record production parity: complete
-Phase 6C — Manual Cloudflare publication activation: complete
-Phase 6D-1 — Batch 13 candidate intake: complete
-Phase 6D-2 — Batch 13 boundary review: complete
-Phase 6D-3 — Batch M canonical promotion to 80: complete
-Phase 6D-4 — 80-record manual publication and parity: blocked pending Cloudflare access
-```
-
-## Explicit unresolved queues
-
-### Launch dates
-
-```text
-37 unresolved canonical records
-```
-
-Source: `data/quality/launch-date-unresolved.json`
-
-Resolved in the 80-record quality follow-up:
-
-```text
-Falcon USDf — 2025-04-30 public launch
-```
-
-Unsupported day-level precision remains forbidden.
-
-Batch M additions to the queue:
-
-```text
-fxUSD — unresolved day-level launch boundary
-HONEY — 2025 known, exact day unresolved
-MAI — original launch and rebrand dates unresolved
-Stables Labs USDX — unresolved day-level launch boundary
-```
-
-### Terminal dates
-
-```text
-6 unresolved canonical records
-BAC
-DSD
-ESD
-GYEN
-Mountain USDM
-USDN
-```
-
-Source: `data/quality/terminal-date-unresolved.json`
-
-A depeg, migration start, last commit, or retrospective source date is not automatically a terminal date.
-
-### Reserve-report applicability
-
-```text
-Reserve-context rows:                87
-Context coverage:                 67/80 informational
-Expected but missing:                0
-Not applicable by design:           10
-Reviewed source-status unresolved:   3
-Placeholder reserve rows:            0
-```
-
-The reviewed unresolved records remain FEI, HUSD, and EURT.
-
-## Controlled-growth rules
-
-Default batch size is five canonical assets.
-
-Every promoted asset must include the applicable required layers and reviewed evidence. Unknown values remain explicit and must not be replaced with inferred dates, legal entities, contracts, percentages, or redemption rights.
-
-Do not promote simple wrappers, bridged copies, LP tokens, vault shares, test tokens, duplicate deployments, or announcement-only projects as separate canonical assets by default.
-
-Any intentional count or queue change must update canonical data, generated outputs, integrity audit, Registry v3 baseline, and roadmap in one reviewed PR.
-
-## Publication cadence
-
-```text
-Normal PR or normal main merge: no deployment
-Several quality PRs: bundle into one later deployment
-Count-growth checkpoint: one manual deployment when access is available
-Verified emergency: one immediate manual deployment
-```
-
-Manual production publication activation — PASS
-Deployment workflow run: 27908380603
-
-Do not create no-op commits or repeated short-interval deployments merely to trigger Cloudflare.
