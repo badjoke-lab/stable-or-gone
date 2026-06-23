@@ -454,5 +454,63 @@
       "summary": "USDS launch during the MakerDAO-to-Sky transition.",
       "status": "active"
     }
+  },
+  {
+    "id": "sog_ev_susd_severe_depeg_2026",
+    "title": "sUSD remains in a severe market depeg",
+    "subject_stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "evidence_ids": [
+      "sog_src_susd_rebuilding_2026",
+      "sog_src_susd_metamask_market_2026_06_18",
+      "sog_src_susd_sip423_2026"
+    ],
+    "event_detail_kind": "depeg",
+    "depeg_detail": {
+      "direction": "below_peg",
+      "peg_reference": "1 USD",
+      "extreme_price": 0.3104,
+      "maximum_deviation_bps": 6896,
+      "recovery_status": "not_recovered",
+      "recovery_date": null,
+      "cause_summary": "Persistent market depeg and weak immediately realizable exit value during a broader Synthetix debt-pool and staking-system transition.",
+      "price_source_ids": [
+        "sog_src_susd_metamask_market_2026_06_18"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_susd_sip423_proposed_2026",
+    "title": "SIP-423 proposes legacy sUSD retirement and SNX compensation",
+    "subject_stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "evidence_ids": [
+      "sog_src_susd_sip423_2026",
+      "sog_src_susd_sip_status_2026",
+      "sog_src_susd_sip420_2024",
+      "sog_src_susd_rebuilding_2026",
+      "sog_src_susd_roadmap_2026"
+    ],
+    "event_detail_kind": "governance_change",
+    "governance_change_detail": {
+      "summary": "Vote Pending proposal for Ethereum and Optimism legacy sUSD retirement, a governance-defined holder snapshot, conditional four-SNX entitlement, 420 Pool closure, and staking reform.",
+      "status": "vote_pending_not_approved_or_implemented",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_susd_ethereum_seed",
+        "sog_dep_susd_optimism_legacy"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_synthetix"
+      ]
+    }
   }
 ]

@@ -202,5 +202,39 @@
     "confidence": "medium",
     "source_count": 2,
     "notes": "Uses the canonical launch date and existing Sky primary sources."
+  },
+  {
+    "id": "sog_ev_susd_severe_depeg_2026",
+    "stablecoin_id": "sog_st_susd",
+    "issuer_id": "sog_issuer_synthetix",
+    "event_type": "major_depeg",
+    "event_date": "2026-06-18",
+    "title": "sUSD remains in a severe market depeg",
+    "description": "An indexed Ethereum market observation showed sUSD near $0.3104 on June 18, 2026, after Synthetix had already acknowledged that sUSD had traded below $0.70 for months. SOG records a severe unresolved depeg without treating one venue observation or an unverified quote as a universal redemption value or canonical all-time low.",
+    "impact_level": "high",
+    "event_status_effect": "impaired",
+    "recovered": false,
+    "recovery_date": null,
+    "failure_mechanism": "persistent_market_depeg_and_impaired_exit_liquidity",
+    "confidence": "medium",
+    "source_count": 3,
+    "notes": "The $0.3104 observation is source-specific. User-provided screenshots suggested executable quotes near $0.74 and later $0.25 for 10,000 sUSD, but route, pool, block, chain, and timestamp were not canonicalized and those quotes are not stored as the official low."
+  },
+  {
+    "id": "sog_ev_susd_sip423_proposed_2026",
+    "stablecoin_id": "sog_st_susd",
+    "issuer_id": "sog_issuer_synthetix",
+    "event_type": "governance_change_proposed",
+    "event_date": "2026-06-12",
+    "title": "SIP-423 proposes legacy sUSD retirement and SNX compensation",
+    "description": "SIP-423 entered Vote Pending status with a proposal to retire legacy sUSD on Ethereum and Optimism, suspend transfer, mint, and burn functions after a successful vote, snapshot eligible holdings, close the 420 Pool structure, reform staking exits, and offer a proposed entitlement of four newly minted SNX per eligible sUSD. The proposal is not approved or implemented.",
+    "impact_level": "critical",
+    "event_status_effect": "impaired_context",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "governance_proposed_legacy_retirement_and_compensation",
+    "confidence": "high",
+    "source_count": 5,
+    "notes": "Vote Pending is distinct from Approved and Implemented. Snapshot block, final eligibility, claim contract, claim opening, vesting clock, expiration treatment, and execution transactions remain unresolved."
   }
 ]

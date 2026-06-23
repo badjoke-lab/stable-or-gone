@@ -1,7 +1,7 @@
 # SOG 80-Record Final Registry Audit
 
 - Audited at: 2026-06-23
-- Baseline: `sog_registry_v2_post_fei_reserve_context_2026_06_23`
+- Baseline: `sog_registry_v2_susd_impaired_sip423_2026_06_23`
 - Canonical stable assets: **81**
 - Promoted candidates: **81 / 81**
 - Critical findings: **0**
@@ -26,13 +26,13 @@
 | relationships | 83 |
 | classifications | 81 |
 | profiles | 81 |
-| events | 111 |
-| event_details | 111 |
-| evidence | 340 |
+| events | 113 |
+| event_details | 113 |
+| evidence | 346 |
 | reserve_reports | 89 |
-| known_unknowns | 195 |
+| known_unknowns | 199 |
 | regulatory_notes | 9 |
-| deployments | 112 |
+| deployments | 113 |
 | legal_profiles | 81 |
 | stable_asset_relationships | 4 |
 | reserve_components | 113 |
