@@ -73,7 +73,7 @@ FEI current route availability, universal redemption completion, and completion 
 
 - BRZ
 - Berachain HONEY
-- Anzen USDA
+- Avalon USDa
 - Anzen USDz
 
 ### Terminal dates
