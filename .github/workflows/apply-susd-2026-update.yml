@@ -1,0 +1,52 @@
+name: Apply sUSD 2026 update
+
+on:
+  push:
+    branches:
+      - record-susd-depeg-sip423
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: record-susd-depeg-sip423
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Apply canonical update
+        run: node scripts/apply-susd-2026-update.mjs
+      - name: Regenerate derived files
+        run: |
+          node scripts/generate-registry-stats.mjs
+          node scripts/audit-registry-integrity.mjs
+      - name: Validate registry layers
+        run: |
+          npm run validate:baseline
+          npm run validate:v3-baseline
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:classification
+          npm run validate:profiles
+          npm run validate:events-v2
+          npm run validate:evidence-relations-v2
+          npm run validate:deployments-v3
+          npm run validate:final
+          npm run validate:integrity
+      - name: Commit canonical result
+        run: |
+          rm scripts/apply-susd-2026-update.mjs
+          rm .github/workflows/apply-susd-2026-update.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Record sUSD severe depeg and SIP-423 proposal"
+          git push origin HEAD:record-susd-depeg-sip423
