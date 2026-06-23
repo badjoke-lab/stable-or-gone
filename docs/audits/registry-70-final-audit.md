@@ -28,7 +28,7 @@
 | profiles | 81 |
 | events | 111 |
 | event_details | 111 |
-| evidence | 339 |
+| evidence | 340 |
 | reserve_reports | 89 |
 | known_unknowns | 195 |
 | regulatory_notes | 9 |
@@ -66,7 +66,7 @@
 
 - reserve_reports context coverage is 69/81; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
 - 0 records have missing or older-than-one-year last_verified_at values: none.
-- 34 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurt, sog_st_fxusd, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mai, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_stablesusdx, sog_st_susd, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usda, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usyc, sog_st_vai, sog_st_vchf.
+- 33 records have no launch_date: sog_st_agoraausd, sog_st_bac, sog_st_brz, sog_st_cashio, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eura, sog_st_eurt, sog_st_fxusd, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_lisusd, sog_st_mai, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_nuon, sog_st_sdai, sog_st_spot, sog_st_stablesusdx, sog_st_susd, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usyc, sog_st_vai, sog_st_vchf.
 - 3 historical-side records have no discontinued_date: sog_st_bac, sog_st_dsd, sog_st_esd.
 - 0 income profiles remain entirely unknown: none.
 
