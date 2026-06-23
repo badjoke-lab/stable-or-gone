@@ -1,0 +1,1 @@
+The canonical roadmap still names PR #102 as current work. The post-Category-B checkpoint and next lineage-batch plan are recorded in adjacent audit files pending a safe roadmap-only synchronization change.
