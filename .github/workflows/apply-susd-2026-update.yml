@@ -32,19 +32,28 @@ jobs:
         run: |
           node scripts/generate-registry-stats.mjs
           node scripts/audit-registry-integrity.mjs
-      - name: Validate registry layers
-        run: |
-          npm run validate:baseline
-          npm run validate:v3-baseline
-          npm run validate:data
-          npm run validate:compat
-          npm run validate:classification
-          npm run validate:profiles
-          npm run validate:events-v2
-          npm run validate:evidence-relations-v2
-          npm run validate:deployments-v3
-          npm run validate:final
-          npm run validate:integrity
+      - name: Validate v2 baseline
+        run: npm run validate:baseline
+      - name: Validate v3 baseline
+        run: npm run validate:v3-baseline
+      - name: Validate data
+        run: npm run validate:data
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate classification
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate event details
+        run: npm run validate:events-v2
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate deployments
+        run: npm run validate:deployments-v3
+      - name: Validate final registry
+        run: npm run validate:final
+      - name: Validate integrity
+        run: npm run validate:integrity
       - name: Commit canonical result
         run: |
           rm scripts/apply-susd-2026-update.mjs
