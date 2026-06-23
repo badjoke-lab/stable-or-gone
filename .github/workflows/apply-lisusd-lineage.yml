@@ -3,6 +3,9 @@ name: Apply lisUSD lineage update
 on:
   push:
     branches: [lisusd-hay-lineage]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
