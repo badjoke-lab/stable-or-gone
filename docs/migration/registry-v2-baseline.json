@@ -1,7 +1,7 @@
 {
-  "baseline_id": "sog_registry_v2_post_terminal_date_resolution_2026_06_23",
+  "baseline_id": "sog_registry_v2_post_fei_reserve_context_2026_06_23",
   "captured_at": "2026-06-23",
-  "source_commit": "resolve-terminal-dates-usdm-usdn",
+  "source_commit": "resolve-fei-reserve-context",
   "minimum_counts": {
     "stablecoins": 81,
     "organizations": 70,
@@ -10,9 +10,9 @@
     "profiles": 81,
     "events": 111,
     "event_details": 111,
-    "evidence": 338,
-    "evidence_relations": 333,
-    "reserve_reports": 88,
+    "evidence": 339,
+    "evidence_relations": 334,
+    "reserve_reports": 89,
     "known_unknowns": 195,
     "regulatory_notes": 9,
     "deployments": 112

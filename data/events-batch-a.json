@@ -47,8 +47,8 @@
     "recovery_date": null,
     "failure_mechanism": "dao_wind_down",
     "confidence": "medium",
-    "source_count": 1,
-    "notes": "The date is the end of the TIP-121c Snapshot vote. Exact final on-chain execution and present redemption availability remain source-review topics."
+    "source_count": 2,
+    "notes": "The event date remains the on-chain proposal date. Tally now confirms the TIP-121c package was executed; the exact execution timestamp, current route availability, and completion of every residual PCV distribution remain separate review topics."
   },
   {
     "id": "sog_ev_usdn_2019_11_issuance",
