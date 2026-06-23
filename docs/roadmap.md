@@ -129,7 +129,7 @@ Remaining Category B records:
 ```text
 BRZ
 Berachain HONEY
-Anzen USDA
+Avalon USDa
 Anzen USDz
 ```
 
@@ -177,7 +177,7 @@ FEI left the unresolved queue in PR #100 after recovery of the executed TIP-121c
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
 2. Continue GitHub-only quality work against the 81-record baseline.
-3. Re-audit the four remaining Category B launch-date records: BRZ, HONEY, USDA, and USDz.
+3. Re-audit the four remaining Category B launch-date records: BRZ, HONEY, USDa, and USDz.
 4. Resolve only records supported by day-level primary evidence; retain the rest without forced dates.
 5. Keep launch-date queue, generated outputs, integrity audit, Registry v2/v3 baselines, README checkpoint, and roadmap synchronized in every quality PR.
 6. After Category B, decide whether to audit high-value Category C boundary conflicts or freeze the queue for a later source-led pass.
