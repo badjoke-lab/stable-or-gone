@@ -33,17 +33,23 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #100 — Resolve FEI reserve context
-Merge: 39131d5c6dfdeecbf9a6e3359b21df6237fa7bd0
+PR #101 — Record 81-record quality checkpoint
+Merge: ef30857b9960b2f1da609d7f411328c7c4439603
+```
+
+Current quality PR:
+
+```text
+PR #102 — Resolve Avalon USDa launch date
 ```
 
 Recent merged quality work:
 
 ```text
-PR #97 — Add MainStreet msUSD impaired incident
 PR #98 — Resolve four Category B launch dates
 PR #99 — Resolve Mountain USDM and USDN terminal dates
 PR #100 — Resolve FEI reserve context
+PR #101 — Record 81-record quality checkpoint
 ```
 
 Current blocker:
@@ -75,7 +81,7 @@ Audit: docs/audits/registry-75-production-parity.md
 81 reserve/redemption profiles
 111 events
 111 Event v2 detail records
-339 evidence records
+340 evidence records
 89 reserve-report or reserve-context records
 195 known unknowns
 9 regulatory notes
@@ -104,7 +110,7 @@ Required-layer coverage:              81 / 81
 Event coverage:                        81 / 81
 Deployment coverage:                   81 / 81
 Reserve-report context coverage:       69 / 81 informational
-Missing canonical launch dates:            34
+Missing canonical launch dates:            33
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -118,8 +124,8 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved: 34
-Category B:         4
+Total unresolved: 33
+Category B:         3
 Category C:        27
 Category D:         3
 ```
@@ -129,9 +135,10 @@ Remaining Category B records:
 ```text
 BRZ
 Berachain HONEY
-Avalon USDa
 Anzen USDz
 ```
+
+Avalon USDa leaves the queue with a canonical launch date of 2024-11-07, supported by Avalon's dated first-party introduction and documented public access routes.
 
 Policy:
 
@@ -176,12 +183,11 @@ FEI left the unresolved queue in PR #100 after recovery of the executed TIP-121c
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Continue GitHub-only quality work against the 81-record baseline.
-3. Re-audit the four remaining Category B launch-date records: BRZ, HONEY, USDa, and USDz.
-4. Resolve only records supported by day-level primary evidence; retain the rest without forced dates.
-5. Keep launch-date queue, generated outputs, integrity audit, Registry v2/v3 baselines, README checkpoint, and roadmap synchronized in every quality PR.
-6. After Category B, decide whether to audit high-value Category C boundary conflicts or freeze the queue for a later source-led pass.
-7. When Cloudflare access returns, publish the latest merged main checkpoint manually and verify production parity before controlled record growth resumes.
+2. Complete and merge PR #102 after all standard workflows pass.
+3. Freeze BRZ, HONEY, and USDz as reviewed Category B unresolved records; do not repeat the same source search without new primary evidence.
+4. Select a small high-value Category C boundary-conflict audit rather than attempting all 27 records at once.
+5. Keep the launch-date queue, generated outputs, integrity audit, Registry v3 baseline, README checkpoint, and roadmap synchronized in every quality PR.
+6. When Cloudflare access returns, publish the latest merged main checkpoint manually and verify production parity before controlled record growth resumes.
 ```
 
 ## Production policy
@@ -259,6 +265,7 @@ PR #97 — Add MainStreet msUSD impaired incident
 PR #98 — Resolve four Category B launch dates
 PR #99 — Resolve Mountain USDM and USDN terminal dates
 PR #100 — Resolve FEI reserve context
+PR #101 — Record 81-record quality checkpoint
 75-record production parity — PASS
 Manual production publication activation — PASS
 ```

@@ -18,8 +18,8 @@ The canonical GitHub checkpoint contains:
 81 reserve/redemption profiles
 111 events
 111 Event v2 detail records
-339 evidence records
-339 evidence relation projections
+340 evidence records
+340 evidence relation projections
 89 reserve-report or reserve-context records
 195 known unknowns
 9 regulatory notes
@@ -37,7 +37,7 @@ The public production site remains at the last verified publication checkpoint u
 Current quality queues:
 
 ```text
-34 unresolved launch dates
+33 unresolved launch dates
 4 unresolved historical terminal dates
 12 assets without reserve/report context
   10 not applicable by design
