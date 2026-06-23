@@ -28,9 +28,9 @@ jobs:
       - run: npm ci
       - name: Apply canonical update
         run: node scripts/apply-susd-2026-update.mjs
-      - name: Normalize v3 count surface
+      - name: Normalize v3 protected surfaces
         run: |
-          node --input-type=module -e "import fs from 'node:fs'; const file='docs/migration/registry-v3-baseline.json'; const value=JSON.parse(fs.readFileSync(file,'utf8')); delete value.expected_counts.classification_extensions; delete value.expected_counts.evidence_relations; fs.writeFileSync(file, JSON.stringify(value,null,2)+'\n');"
+          node --input-type=module -e "import fs from 'node:fs'; const v3File='docs/migration/registry-v3-baseline.json'; const v3=JSON.parse(fs.readFileSync(v3File,'utf8')); delete v3.expected_counts.classification_extensions; delete v3.expected_counts.evidence_relations; fs.writeFileSync(v3File, JSON.stringify(v3,null,2)+'\n'); const base=JSON.parse(fs.readFileSync('docs/migration/registry-v2-baseline.json','utf8')); const viewFile='docs/migration/registry-v3-view-67.json'; const view=JSON.parse(fs.readFileSync(viewFile,'utf8')); view.minimum_count=base.minimum_counts.deployments; fs.writeFileSync(viewFile, JSON.stringify(view,null,2)+'\n');"
       - name: Regenerate derived files
         run: |
           node scripts/generate-registry-stats.mjs
