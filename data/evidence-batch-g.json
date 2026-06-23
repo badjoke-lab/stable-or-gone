@@ -1,21 +1,578 @@
 [
-  {"id":"sog_src_dola_docs_batch_g","stablecoin_id":"sog_st_dola","issuer_id":"sog_issuer_inverse_finance","event_id":"sog_ev_dola_protocol_model_batch_g","source_type":"official_documentation","title":"Inverse Finance DOLA documentation","url":"https://docs.inverse.finance/inverse-finance/inverse-finance/products/tokens/dola","publisher":"Inverse Finance","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.inverse.finance/inverse-finance/inverse-finance/products/tokens/dola","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_issuance_and_backing","stablecoin_ids":["sog_st_dola"],"organization_ids":["sog_issuer_inverse_finance"],"event_ids":["sog_ev_dola_protocol_model_batch_g"],"claim_scopes":["entity_identity","overcollateralized_issuance","psm_reserves","ethereum_contract"],"notes":"Current official documentation describes FiRM debt backing, PSM issuance, active Feds, and the Ethereum contract."},
-  {"id":"sog_src_dola_psm_batch_g","stablecoin_id":"sog_st_dola","issuer_id":"sog_issuer_inverse_finance","event_id":"sog_ev_dola_protocol_model_batch_g","source_type":"official_documentation","title":"DOLA Peg Stability Module","url":"https://docs.inverse.finance/inverse-finance/inverse-finance/products/peg-stability-module","publisher":"Inverse Finance","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.inverse.finance/inverse-finance/inverse-finance/products/peg-stability-module","accessed_at":"2026-06-15","reliability":"high","claim_scope":"peg_and_redemption_mechanics","stablecoin_ids":["sog_st_dola"],"organization_ids":["sog_issuer_inverse_finance"],"event_ids":["sog_ev_dola_protocol_model_batch_g"],"claim_scopes":["usds_reserve","swap_terms","fees","governance_controls"],"notes":"Official PSM terms describe 1:1 USDS-to-DOLA swaps and 20 bps DOLA-to-USDS exit fee."},
-  {"id":"sog_src_dola_llms_batch_g","stablecoin_id":"sog_st_dola","issuer_id":"sog_issuer_inverse_finance","event_id":"sog_ev_dola_protocol_model_batch_g","source_type":"official_repository","title":"Inverse Finance public product index","url":"https://github.com/InverseFinance/inverse-web/blob/885f881a83334412fffdd698a92bcbd9abce8383/public/llms.txt","publisher":"Inverse Finance","published_at":"2026-05-01","archived_url":"https://web.archive.org/web/*/https://github.com/InverseFinance/inverse-web/blob/885f881a83334412fffdd698a92bcbd9abce8383/public/llms.txt","accessed_at":"2026-06-15","reliability":"high","claim_scope":"current_product_status","stablecoin_ids":["sog_st_dola"],"organization_ids":["sog_issuer_inverse_finance"],"event_ids":["sog_ev_dola_protocol_model_batch_g"],"claim_scopes":["active_product","firm_borrowing","sdola_relationship"],"notes":"Current official repository index identifies DOLA as a flagship active product."},
-
-  {"id":"sog_src_djed_home_batch_g","stablecoin_id":"sog_st_djed","issuer_id":"sog_issuer_coti","event_id":"sog_ev_djed_launch_batch_g","source_type":"official_website","title":"Djed official website","url":"https://djed.xyz/","publisher":"Djed / COTI","published_at":null,"archived_url":"https://web.archive.org/web/*/https://djed.xyz/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"current_product_identity","stablecoin_ids":["sog_st_djed"],"organization_ids":["sog_issuer_coti"],"event_ids":["sog_ev_djed_launch_batch_g"],"claim_scopes":["entity_identity","current_interface"],"notes":"Official current product website."},
-  {"id":"sog_src_djed_coti_cardano_batch_g","stablecoin_id":"sog_st_djed","issuer_id":"sog_issuer_coti","event_id":"sog_ev_djed_launch_batch_g","source_type":"official_statement","title":"COTI to issue Djed stablecoin on Cardano","url":"https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/article/coti-to-issue-djed-stablecoin-on-cardano.md","publisher":"Input Output / Essential Cardano","published_at":"2021-09-26","archived_url":"https://web.archive.org/web/*/https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/article/coti-to-issue-djed-stablecoin-on-cardano.md","accessed_at":"2026-06-15","reliability":"high","claim_scope":"issuer_and_design","stablecoin_ids":["sog_st_djed"],"organization_ids":["sog_issuer_coti"],"event_ids":["sog_ev_djed_launch_batch_g"],"claim_scopes":["issuer_role","cardano_deployment","algorithmic_design"],"notes":"Official Cardano ecosystem statement assigning Djed issuance to COTI."},
-  {"id":"sog_src_djed_launch_batch_g","stablecoin_id":"sog_st_djed","issuer_id":"sog_issuer_coti","event_id":"sog_ev_djed_launch_batch_g","source_type":"official_statement","title":"COTI launches Djed on Cardano","url":"https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/video/coti-launches-djed-bringing-new-stablecoins-to-cardano.md","publisher":"Essential Cardano","published_at":"2023-01-31","archived_url":"https://web.archive.org/web/*/https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/video/coti-launches-djed-bringing-new-stablecoins-to-cardano.md","accessed_at":"2026-06-15","reliability":"high","claim_scope":"launch","stablecoin_ids":["sog_st_djed"],"organization_ids":["sog_issuer_coti"],"event_ids":["sog_ev_djed_launch_batch_g"],"claim_scopes":["launch_date","reserve_coin","cardano"],"notes":"Official Cardano ecosystem launch record."},
-
-  {"id":"sog_src_vai_docs_batch_g","stablecoin_id":"sog_st_vai","issuer_id":"sog_issuer_venus_protocol","event_id":"sog_ev_vai_protocol_model_batch_g","source_type":"official_repository","title":"Venus Protocol VAI documentation","url":"https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/tokens/vai.md","publisher":"Venus Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/tokens/vai.md","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_stability_fee","stablecoin_ids":["sog_st_vai"],"organization_ids":["sog_issuer_venus_protocol"],"event_ids":["sog_ev_vai_protocol_model_batch_g"],"claim_scopes":["entity_identity","usd_peg","stability_fee","minting"],"notes":"Official protocol documentation describes VAI and its stability-fee mechanism."},
-  {"id":"sog_src_vai_psm_batch_g","stablecoin_id":"sog_st_vai","issuer_id":"sog_issuer_venus_protocol","event_id":"sog_ev_vai_protocol_model_batch_g","source_type":"official_repository","title":"Venus VAI Peg Stability Module documentation","url":"https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/whats-new/psm.md","publisher":"Venus Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/whats-new/psm.md","accessed_at":"2026-06-15","reliability":"high","claim_scope":"peg_stability_module","stablecoin_ids":["sog_st_vai"],"organization_ids":["sog_issuer_venus_protocol"],"event_ids":["sog_ev_vai_protocol_model_batch_g"],"claim_scopes":["psm","stablecoin_reserve","protocol_controls"],"notes":"Official documentation for the VAI PSM."},
-  {"id":"sog_src_vai_contracts_batch_g","stablecoin_id":"sog_st_vai","issuer_id":"sog_issuer_venus_protocol","event_id":"sog_ev_vai_protocol_model_batch_g","source_type":"official_repository","title":"Venus Protocol smart-contract repository","url":"https://github.com/VenusProtocol/venus-protocol","publisher":"Venus Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://github.com/VenusProtocol/venus-protocol","accessed_at":"2026-06-15","reliability":"high","claim_scope":"deployment_and_protocol_controls","stablecoin_ids":["sog_st_vai"],"organization_ids":["sog_issuer_venus_protocol"],"event_ids":["sog_ev_vai_protocol_model_batch_g"],"claim_scopes":["bnb_chain_deployment","mint_controller","peg_stability_contracts"],"notes":"Official Venus contracts and deployment repository."},
-
-  {"id":"sog_src_lisusd_mechanics_batch_g","stablecoin_id":"sog_st_lisusd","issuer_id":"sog_issuer_lista_dao","event_id":"sog_ev_lisusd_rebrand_batch_g","source_type":"official_repository","title":"Lista mechanics and lisUSD borrowing","url":"https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/for-developers/lista-mechanics.md","publisher":"Lista DAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/for-developers/lista-mechanics.md","accessed_at":"2026-06-15","reliability":"high","claim_scope":"mechanics_and_identity","stablecoin_ids":["sog_st_lisusd"],"organization_ids":["sog_issuer_lista_dao"],"event_ids":["sog_ev_lisusd_rebrand_batch_g"],"claim_scopes":["maker_fork","collateralized_debt","lisusd_identity","hay_contract_lineage"],"notes":"Official Lista documentation retains legacy HAY contract terminology while describing lisUSD operations."},
-  {"id":"sog_src_lisusd_price_stability_batch_g","stablecoin_id":"sog_st_lisusd","issuer_id":"sog_issuer_lista_dao","event_id":"sog_ev_lisusd_rebrand_batch_g","source_type":"official_repository","title":"Lista lisUSD price stability documentation","url":"https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/tokens/price-stability.md","publisher":"Lista DAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/tokens/price-stability.md","accessed_at":"2026-06-15","reliability":"high","claim_scope":"peg_and_protocol_stability","stablecoin_ids":["sog_st_lisusd"],"organization_ids":["sog_issuer_lista_dao"],"event_ids":["sog_ev_lisusd_rebrand_batch_g"],"claim_scopes":["peg_mechanics","liquidation","protocol_governance"],"notes":"Official documentation for lisUSD price-stability mechanisms."},
-  {"id":"sog_src_lisusd_site_batch_g","stablecoin_id":"sog_st_lisusd","issuer_id":"sog_issuer_lista_dao","event_id":"sog_ev_lisusd_rebrand_batch_g","source_type":"official_website","title":"Lista DAO official website","url":"https://lista.org/","publisher":"Lista DAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://lista.org/","accessed_at":"2026-06-15","reliability":"high","claim_scope":"current_product_status","stablecoin_ids":["sog_st_lisusd"],"organization_ids":["sog_issuer_lista_dao"],"event_ids":["sog_ev_lisusd_rebrand_batch_g"],"claim_scopes":["active_protocol","current_brand"],"notes":"Current official protocol website."},
-
-  {"id":"sog_src_usk_overview_batch_g","stablecoin_id":"sog_st_usk","issuer_id":"sog_issuer_kujira","event_id":"sog_ev_usk_limited_status_batch_g","source_type":"official_documentation","title":"Kujira USK overview","url":"https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin","publisher":"Kujira","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin","accessed_at":"2026-06-15","reliability":"high","claim_scope":"entity_and_collateral_model","stablecoin_ids":["sog_st_usk"],"organization_ids":["sog_issuer_kujira"],"event_ids":["sog_ev_usk_limited_status_batch_g"],"claim_scopes":["entity_identity","overcollateralization","collateral_types","kujira_native"],"notes":"Official USK product overview remains published."},
-  {"id":"sog_src_usk_technical_batch_g","stablecoin_id":"sog_st_usk","issuer_id":"sog_issuer_kujira","event_id":"sog_ev_usk_limited_status_batch_g","source_type":"official_documentation","title":"USK technical specifics","url":"https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/technical-specifics","publisher":"Kujira","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/technical-specifics","accessed_at":"2026-06-15","reliability":"high","claim_scope":"minting_liquidation_and_backing","stablecoin_ids":["sog_st_usk"],"organization_ids":["sog_issuer_kujira"],"event_ids":["sog_ev_usk_limited_status_batch_g"],"claim_scopes":["cdp_minting","minimum_collateralization","burning","liquidation","stability_fee"],"notes":"Official documentation describes 166% minimum collateralization, CDP minting, burn-to-release collateral, and ORCA liquidations."},
-  {"id":"sog_src_usk_transparency_batch_g","stablecoin_id":"sog_st_usk","issuer_id":"sog_issuer_kujira","event_id":"sog_ev_usk_limited_status_batch_g","source_type":"official_documentation","title":"USK transparency documentation","url":"https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/transparency","publisher":"Kujira","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/transparency","accessed_at":"2026-06-15","reliability":"high","claim_scope":"collateral_and_mint_transparency","stablecoin_ids":["sog_st_usk"],"organization_ids":["sog_issuer_kujira"],"event_ids":["sog_ev_usk_limited_status_batch_g"],"claim_scopes":["collateral_dashboard","mint_and_burn_tracking","liquidation_backstop"],"notes":"Official transparency guide, while current interface availability remains a separate known unknown."}
+  {
+    "id": "sog_src_dola_docs_batch_g",
+    "stablecoin_id": "sog_st_dola",
+    "issuer_id": "sog_issuer_inverse_finance",
+    "event_id": "sog_ev_dola_protocol_model_batch_g",
+    "source_type": "official_documentation",
+    "title": "Inverse Finance DOLA documentation",
+    "url": "https://docs.inverse.finance/inverse-finance/inverse-finance/products/tokens/dola",
+    "publisher": "Inverse Finance",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.inverse.finance/inverse-finance/inverse-finance/products/tokens/dola",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_issuance_and_backing",
+    "stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "event_ids": [
+      "sog_ev_dola_protocol_model_batch_g"
+    ],
+    "claim_scopes": [
+      "entity_identity",
+      "overcollateralized_issuance",
+      "psm_reserves",
+      "ethereum_contract"
+    ],
+    "notes": "Current official documentation describes FiRM debt backing, PSM issuance, active Feds, and the Ethereum contract."
+  },
+  {
+    "id": "sog_src_dola_psm_batch_g",
+    "stablecoin_id": "sog_st_dola",
+    "issuer_id": "sog_issuer_inverse_finance",
+    "event_id": "sog_ev_dola_protocol_model_batch_g",
+    "source_type": "official_documentation",
+    "title": "DOLA Peg Stability Module",
+    "url": "https://docs.inverse.finance/inverse-finance/inverse-finance/products/peg-stability-module",
+    "publisher": "Inverse Finance",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.inverse.finance/inverse-finance/inverse-finance/products/peg-stability-module",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "peg_and_redemption_mechanics",
+    "stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "event_ids": [
+      "sog_ev_dola_protocol_model_batch_g"
+    ],
+    "claim_scopes": [
+      "usds_reserve",
+      "swap_terms",
+      "fees",
+      "governance_controls"
+    ],
+    "notes": "Official PSM terms describe 1:1 USDS-to-DOLA swaps and 20 bps DOLA-to-USDS exit fee."
+  },
+  {
+    "id": "sog_src_dola_llms_batch_g",
+    "stablecoin_id": "sog_st_dola",
+    "issuer_id": "sog_issuer_inverse_finance",
+    "event_id": "sog_ev_dola_protocol_model_batch_g",
+    "source_type": "official_repository",
+    "title": "Inverse Finance public product index",
+    "url": "https://github.com/InverseFinance/inverse-web/blob/885f881a83334412fffdd698a92bcbd9abce8383/public/llms.txt",
+    "publisher": "Inverse Finance",
+    "published_at": "2026-05-01",
+    "archived_url": "https://web.archive.org/web/*/https://github.com/InverseFinance/inverse-web/blob/885f881a83334412fffdd698a92bcbd9abce8383/public/llms.txt",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "current_product_status",
+    "stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "event_ids": [
+      "sog_ev_dola_protocol_model_batch_g"
+    ],
+    "claim_scopes": [
+      "active_product",
+      "firm_borrowing",
+      "sdola_relationship"
+    ],
+    "notes": "Current official repository index identifies DOLA as a flagship active product."
+  },
+  {
+    "id": "sog_src_djed_home_batch_g",
+    "stablecoin_id": "sog_st_djed",
+    "issuer_id": "sog_issuer_coti",
+    "event_id": "sog_ev_djed_launch_batch_g",
+    "source_type": "official_website",
+    "title": "Djed official website",
+    "url": "https://djed.xyz/",
+    "publisher": "Djed / COTI",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://djed.xyz/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "current_product_identity",
+    "stablecoin_ids": [
+      "sog_st_djed"
+    ],
+    "organization_ids": [
+      "sog_issuer_coti"
+    ],
+    "event_ids": [
+      "sog_ev_djed_launch_batch_g"
+    ],
+    "claim_scopes": [
+      "entity_identity",
+      "current_interface"
+    ],
+    "notes": "Official current product website."
+  },
+  {
+    "id": "sog_src_djed_coti_cardano_batch_g",
+    "stablecoin_id": "sog_st_djed",
+    "issuer_id": "sog_issuer_coti",
+    "event_id": "sog_ev_djed_launch_batch_g",
+    "source_type": "official_statement",
+    "title": "COTI to issue Djed stablecoin on Cardano",
+    "url": "https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/article/coti-to-issue-djed-stablecoin-on-cardano.md",
+    "publisher": "Input Output / Essential Cardano",
+    "published_at": "2021-09-26",
+    "archived_url": "https://web.archive.org/web/*/https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/article/coti-to-issue-djed-stablecoin-on-cardano.md",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "issuer_and_design",
+    "stablecoin_ids": [
+      "sog_st_djed"
+    ],
+    "organization_ids": [
+      "sog_issuer_coti"
+    ],
+    "event_ids": [
+      "sog_ev_djed_launch_batch_g"
+    ],
+    "claim_scopes": [
+      "issuer_role",
+      "cardano_deployment",
+      "algorithmic_design"
+    ],
+    "notes": "Official Cardano ecosystem statement assigning Djed issuance to COTI."
+  },
+  {
+    "id": "sog_src_djed_launch_batch_g",
+    "stablecoin_id": "sog_st_djed",
+    "issuer_id": "sog_issuer_coti",
+    "event_id": "sog_ev_djed_launch_batch_g",
+    "source_type": "official_statement",
+    "title": "COTI launches Djed on Cardano",
+    "url": "https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/video/coti-launches-djed-bringing-new-stablecoins-to-cardano.md",
+    "publisher": "Essential Cardano",
+    "published_at": "2023-01-31",
+    "archived_url": "https://web.archive.org/web/*/https://github.com/input-output-hk/essential-cardano-content/blob/07d20b0383864b7265d13a2423295796777ab598/content/video/coti-launches-djed-bringing-new-stablecoins-to-cardano.md",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "launch",
+    "stablecoin_ids": [
+      "sog_st_djed"
+    ],
+    "organization_ids": [
+      "sog_issuer_coti"
+    ],
+    "event_ids": [
+      "sog_ev_djed_launch_batch_g"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "reserve_coin",
+      "cardano"
+    ],
+    "notes": "Official Cardano ecosystem launch record."
+  },
+  {
+    "id": "sog_src_vai_docs_batch_g",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "event_id": "sog_ev_vai_protocol_model_batch_g",
+    "source_type": "official_repository",
+    "title": "Venus Protocol VAI documentation",
+    "url": "https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/tokens/vai.md",
+    "publisher": "Venus Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/tokens/vai.md",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_stability_fee",
+    "stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_vai_protocol_model_batch_g"
+    ],
+    "claim_scopes": [
+      "entity_identity",
+      "usd_peg",
+      "stability_fee",
+      "minting"
+    ],
+    "notes": "Official protocol documentation describes VAI and its stability-fee mechanism."
+  },
+  {
+    "id": "sog_src_vai_psm_batch_g",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "event_id": "sog_ev_vai_protocol_model_batch_g",
+    "source_type": "official_repository",
+    "title": "Venus VAI Peg Stability Module documentation",
+    "url": "https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/whats-new/psm.md",
+    "publisher": "Venus Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://github.com/VenusProtocol/venus-protocol-documentation/blob/585c1775be8f4e4ff754ce70eb0f67412621d59f/whats-new/psm.md",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "peg_stability_module",
+    "stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_vai_protocol_model_batch_g"
+    ],
+    "claim_scopes": [
+      "psm",
+      "stablecoin_reserve",
+      "protocol_controls"
+    ],
+    "notes": "Official documentation for the VAI PSM."
+  },
+  {
+    "id": "sog_src_vai_contracts_batch_g",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "event_id": "sog_ev_vai_protocol_model_batch_g",
+    "source_type": "official_repository",
+    "title": "Venus Protocol smart-contract repository",
+    "url": "https://github.com/VenusProtocol/venus-protocol",
+    "publisher": "Venus Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://github.com/VenusProtocol/venus-protocol",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "deployment_and_protocol_controls",
+    "stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_vai_protocol_model_batch_g"
+    ],
+    "claim_scopes": [
+      "bnb_chain_deployment",
+      "mint_controller",
+      "peg_stability_contracts"
+    ],
+    "notes": "Official Venus contracts and deployment repository."
+  },
+  {
+    "id": "sog_src_lisusd_mechanics_batch_g",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_rebrand_batch_g",
+    "source_type": "official_repository",
+    "title": "Lista mechanics and lisUSD borrowing",
+    "url": "https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/for-developers/lista-mechanics.md",
+    "publisher": "Lista DAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/for-developers/lista-mechanics.md",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "mechanics_and_identity",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_rebrand_batch_g"
+    ],
+    "claim_scopes": [
+      "maker_fork",
+      "collateralized_debt",
+      "lisusd_identity",
+      "hay_contract_lineage"
+    ],
+    "notes": "Official Lista documentation retains legacy HAY contract terminology while describing lisUSD operations."
+  },
+  {
+    "id": "sog_src_lisusd_price_stability_batch_g",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_rebrand_batch_g",
+    "source_type": "official_repository",
+    "title": "Lista lisUSD price stability documentation",
+    "url": "https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/tokens/price-stability.md",
+    "publisher": "Lista DAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://github.com/lista-dao/gitbook/blob/db7b6dd94d1448892273580dd5cd3652d0a7692b/tokens/price-stability.md",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "peg_and_protocol_stability",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_rebrand_batch_g"
+    ],
+    "claim_scopes": [
+      "peg_mechanics",
+      "liquidation",
+      "protocol_governance"
+    ],
+    "notes": "Official documentation for lisUSD price-stability mechanisms."
+  },
+  {
+    "id": "sog_src_lisusd_site_batch_g",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_rebrand_batch_g",
+    "source_type": "official_website",
+    "title": "Lista DAO official website",
+    "url": "https://lista.org/",
+    "publisher": "Lista DAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://lista.org/",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "current_product_status",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_rebrand_batch_g"
+    ],
+    "claim_scopes": [
+      "active_protocol",
+      "current_brand"
+    ],
+    "notes": "Current official protocol website."
+  },
+  {
+    "id": "sog_src_usk_overview_batch_g",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": "sog_ev_usk_limited_status_batch_g",
+    "source_type": "official_documentation",
+    "title": "Kujira USK overview",
+    "url": "https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin",
+    "publisher": "Kujira",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "entity_and_collateral_model",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [
+      "sog_ev_usk_limited_status_batch_g"
+    ],
+    "claim_scopes": [
+      "entity_identity",
+      "overcollateralization",
+      "collateral_types",
+      "kujira_native"
+    ],
+    "notes": "Official USK product overview remains published."
+  },
+  {
+    "id": "sog_src_usk_technical_batch_g",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": "sog_ev_usk_limited_status_batch_g",
+    "source_type": "official_documentation",
+    "title": "USK technical specifics",
+    "url": "https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/technical-specifics",
+    "publisher": "Kujira",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/technical-specifics",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "minting_liquidation_and_backing",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [
+      "sog_ev_usk_limited_status_batch_g"
+    ],
+    "claim_scopes": [
+      "cdp_minting",
+      "minimum_collateralization",
+      "burning",
+      "liquidation",
+      "stability_fee"
+    ],
+    "notes": "Official documentation describes 166% minimum collateralization, CDP minting, burn-to-release collateral, and ORCA liquidations."
+  },
+  {
+    "id": "sog_src_usk_transparency_batch_g",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": "sog_ev_usk_limited_status_batch_g",
+    "source_type": "official_documentation",
+    "title": "USK transparency documentation",
+    "url": "https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/transparency",
+    "publisher": "Kujira",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.kujira.app/dapps-and-infrastructure/usk-stablecoin/transparency",
+    "accessed_at": "2026-06-15",
+    "reliability": "high",
+    "claim_scope": "collateral_and_mint_transparency",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [
+      "sog_ev_usk_limited_status_batch_g"
+    ],
+    "claim_scopes": [
+      "collateral_dashboard",
+      "mint_and_burn_tracking",
+      "liquidation_backstop"
+    ],
+    "notes": "Official transparency guide, while current interface availability remains a separate known unknown."
+  },
+  {
+    "id": "sog_src_lisusd_launch_2022",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_2022_08_launch",
+    "source_type": "official_protocol_guide",
+    "title": "Using Helio Protocol",
+    "url": "https://medium.com/@ListaDAO/guide-using-helio-protocol-929a3cd63961",
+    "publisher": "Helio Protocol / Lista DAO",
+    "published_at": "2022-08-23",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/@ListaDAO/guide-using-helio-protocol-929a3cd63961",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "mainnet_launch_and_hay_borrowing",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_2022_08_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "bnb_chain_mainnet",
+      "hay_identity",
+      "collateralized_borrowing"
+    ],
+    "notes": "The official guide states that mainnet launched on August 19 and documents HAY borrowing at launch."
+  },
+  {
+    "id": "sog_src_lisusd_rebrand_plan_2023",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_rebrand_batch_g",
+    "source_type": "official_protocol_announcement",
+    "title": "A new chapter — Introducing LISTA DAO",
+    "url": "https://medium.com/listadao/a-new-chapter-introducing-lista-dao-771d69be7930",
+    "publisher": "Lista DAO",
+    "published_at": "2023-11-30",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/listadao/a-new-chapter-introducing-lista-dao-771d69be7930",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "planned_hay_to_lisusd_rebrand",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_rebrand_batch_g"
+    ],
+    "claim_scopes": [
+      "rebrand_plan",
+      "hay_alias",
+      "lisusd_name",
+      "protocol_continuity"
+    ]
+  },
+  {
+    "id": "sog_src_lisusd_rebrand_effective_2024",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_rebrand_batch_g",
+    "source_type": "official_protocol_announcement",
+    "title": "Lista is Coming: Product Update",
+    "url": "https://medium.com/listadao/lista-is-coming-product-update-ae37b3869db0",
+    "publisher": "Lista DAO",
+    "published_at": "2024-02-01",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/listadao/lista-is-coming-product-update-ae37b3869db0",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "effective_rebrand_date",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_rebrand_batch_g"
+    ],
+    "claim_scopes": [
+      "rebrand_date",
+      "hay_to_lisusd",
+      "helio_to_lista"
+    ],
+    "notes": "Official update fixes the transition and HAY-to-lisUSD rebrand on February 5, 2024."
+  },
+  {
+    "id": "sog_src_lisusd_contract_docs_2026",
+    "stablecoin_id": "sog_st_lisusd",
+    "issuer_id": "sog_issuer_lista_dao",
+    "event_id": "sog_ev_lisusd_rebrand_batch_g",
+    "source_type": "official_documentation",
+    "title": "Lista collateral debt position smart contracts",
+    "url": "https://docs.bsc.lista.org/for-developer/collateral-debt-position/smart-contract",
+    "publisher": "Lista DAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.bsc.lista.org/for-developer/collateral-debt-position/smart-contract",
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "current_bnb_chain_contract",
+    "stablecoin_ids": [
+      "sog_st_lisusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_lista_dao"
+    ],
+    "event_ids": [
+      "sog_ev_lisusd_rebrand_batch_g"
+    ],
+    "claim_scopes": [
+      "bnb_chain_contract",
+      "lisusd_token",
+      "hay_contract_lineage"
+    ],
+    "notes": "Official contract list links lisUSD to proxy 0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5 while retaining HayJoin terminology."
+  }
 ]

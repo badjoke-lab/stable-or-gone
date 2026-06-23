@@ -1,7 +1,94 @@
 [
-  {"id":"sog_dep_dola_ethereum_batch_g","stablecoin_id":"sog_st_dola","chain":"Ethereum","deployment_type":"protocol_native_token","token_standard":"ERC-20","contract_address":"0x865377367054516e17014ccded1e7d814edc9ce4","status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"governance_authorized_feds","notes":"Official DOLA Ethereum mainnet contract.","evidence_ids":["sog_src_dola_docs_batch_g","sog_src_dola_llms_batch_g"]},
-  {"id":"sog_dep_djed_cardano_batch_g","stablecoin_id":"sog_st_djed","chain":"Cardano","deployment_type":"protocol_native_asset","token_standard":"Cardano native asset","contract_address":null,"status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"reserve_ratio_protocol","notes":"Native Cardano Djed asset; policy ID normalization remains pending.","evidence_ids":["sog_src_djed_home_batch_g","sog_src_djed_launch_batch_g"]},
-  {"id":"sog_dep_vai_bnb_batch_g","stablecoin_id":"sog_st_vai","chain":"BNB Chain","deployment_type":"protocol_native_token","token_standard":"BEP-20","contract_address":"0x4BD17003473389A42DAF6a0a729f6Fdb328BbBd7","status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"venus_controller_governed","notes":"Official Venus VAI BNB Chain deployment.","evidence_ids":["sog_src_vai_docs_batch_g","sog_src_vai_contracts_batch_g"]},
-  {"id":"sog_dep_lisusd_bnb_batch_g","stablecoin_id":"sog_st_lisusd","chain":"BNB Chain","deployment_type":"protocol_native_token","token_standard":"BEP-20","contract_address":null,"status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"maker_fork_join_adapter","notes":"Native lisUSD/HAY protocol deployment; exact current token address normalization remains pending.","evidence_ids":["sog_src_lisusd_mechanics_batch_g","sog_src_lisusd_site_batch_g"]},
-  {"id":"sog_dep_usk_kujira_batch_g","stablecoin_id":"sog_st_usk","chain":"Kujira","deployment_type":"protocol_native_token","token_standard":"Cosmos SDK token","contract_address":null,"status":"restricted","canonicality":"native","is_primary":true,"mint_authority_type":"collateral_debt_position_contracts","control_event_ids":["sog_ev_usk_limited_status_batch_g"],"notes":"Legacy/native USK deployment recorded as restricted pending current chain and interface verification.","evidence_ids":["sog_src_usk_overview_batch_g","sog_src_usk_technical_batch_g","sog_src_usk_transparency_batch_g"]}
+  {
+    "id": "sog_dep_dola_ethereum_batch_g",
+    "stablecoin_id": "sog_st_dola",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_native_token",
+    "token_standard": "ERC-20",
+    "contract_address": "0x865377367054516e17014ccded1e7d814edc9ce4",
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "governance_authorized_feds",
+    "notes": "Official DOLA Ethereum mainnet contract.",
+    "evidence_ids": [
+      "sog_src_dola_docs_batch_g",
+      "sog_src_dola_llms_batch_g"
+    ]
+  },
+  {
+    "id": "sog_dep_djed_cardano_batch_g",
+    "stablecoin_id": "sog_st_djed",
+    "chain": "Cardano",
+    "deployment_type": "protocol_native_asset",
+    "token_standard": "Cardano native asset",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "reserve_ratio_protocol",
+    "notes": "Native Cardano Djed asset; policy ID normalization remains pending.",
+    "evidence_ids": [
+      "sog_src_djed_home_batch_g",
+      "sog_src_djed_launch_batch_g"
+    ]
+  },
+  {
+    "id": "sog_dep_vai_bnb_batch_g",
+    "stablecoin_id": "sog_st_vai",
+    "chain": "BNB Chain",
+    "deployment_type": "protocol_native_token",
+    "token_standard": "BEP-20",
+    "contract_address": "0x4BD17003473389A42DAF6a0a729f6Fdb328BbBd7",
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "venus_controller_governed",
+    "notes": "Official Venus VAI BNB Chain deployment.",
+    "evidence_ids": [
+      "sog_src_vai_docs_batch_g",
+      "sog_src_vai_contracts_batch_g"
+    ]
+  },
+  {
+    "id": "sog_dep_lisusd_bnb_batch_g",
+    "stablecoin_id": "sog_st_lisusd",
+    "chain": "BNB Chain",
+    "deployment_type": "protocol_native_token",
+    "token_standard": "BEP-20",
+    "contract_address": "0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5",
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "maker_fork_join_adapter",
+    "notes": "Current BNB Chain lisUSD proxy, continuing the former HAY token identity. Historical implementation upgrades and ancillary contract changes remain tracked separately.",
+    "evidence_ids": [
+      "sog_src_lisusd_mechanics_batch_g",
+      "sog_src_lisusd_site_batch_g",
+      "sog_src_lisusd_launch_2022",
+      "sog_src_lisusd_rebrand_effective_2024",
+      "sog_src_lisusd_contract_docs_2026"
+    ]
+  },
+  {
+    "id": "sog_dep_usk_kujira_batch_g",
+    "stablecoin_id": "sog_st_usk",
+    "chain": "Kujira",
+    "deployment_type": "protocol_native_token",
+    "token_standard": "Cosmos SDK token",
+    "contract_address": null,
+    "status": "restricted",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "collateral_debt_position_contracts",
+    "control_event_ids": [
+      "sog_ev_usk_limited_status_batch_g"
+    ],
+    "notes": "Legacy/native USK deployment recorded as restricted pending current chain and interface verification.",
+    "evidence_ids": [
+      "sog_src_usk_overview_batch_g",
+      "sog_src_usk_technical_batch_g",
+      "sog_src_usk_transparency_batch_g"
+    ]
+  }
 ]
