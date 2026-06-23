@@ -132,5 +132,49 @@
       "summary": "EURQ issuance began on 2024-11-18.",
       "status": "active"
     }
+  },
+  {
+    "id": "sog_ev_eura_2021_11_launch",
+    "title": "Angle launches agEUR on Ethereum mainnet",
+    "subject_stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "evidence_ids": [
+      "sog_src_eura_launch_2021"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "agEUR launched with Angle Protocol on Ethereum mainnet on 2021-11-03.",
+      "status": "active_same_asset_now_branded_eura"
+    }
+  },
+  {
+    "id": "sog_ev_eura_2024_03_rebrand",
+    "title": "agEUR is rebranded as EURA",
+    "subject_stablecoin_ids": [
+      "sog_st_eura"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_angle"
+    ],
+    "evidence_ids": [
+      "sog_src_eura_rebrand_2024",
+      "sog_src_eura_aip85_2024"
+    ],
+    "event_detail_kind": "governance_change",
+    "governance_change_detail": {
+      "summary": "Governance-approved rename from agEUR to EURA without a new token or address change.",
+      "status": "implemented_same_token_rebrand",
+      "resolution_date": "2024-03-14",
+      "affected_deployment_ids": [
+        "sog_dep_eura_ethereum_batch_j"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_angle"
+      ]
+    }
   }
 ]

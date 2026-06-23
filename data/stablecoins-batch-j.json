@@ -21,12 +21,12 @@
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Frontend and jurisdiction restrictions may apply.",
     "redemption_notes": "EURA was previously branded agEUR and was rebranded in March 2024 without creating a separate asset identity.",
-    "launch_date": null,
+    "launch_date": "2021-11-03",
     "discontinued_date": null,
     "summary": "Euro-pegged overcollateralized stablecoin of Angle Protocol, formerly agEUR, supported by Transmuter and borrowing modules.",
     "confidence": "high",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch J promotion; agEUR retained as alias and historical brand."
+    "last_verified_at": "2026-06-23",
+    "notes": "Batch J promotion. The canonical asset launch is the agEUR mainnet launch on 2021-11-03. The 2024-03-14 EURA rename is a rebrand of the same token and is recorded separately."
   },
   {
     "id": "sog_st_eurcv",
