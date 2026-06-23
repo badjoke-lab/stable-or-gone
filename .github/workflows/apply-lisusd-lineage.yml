@@ -30,8 +30,38 @@ jobs:
       - run: node scripts/lisusd-step4.mjs
       - run: node scripts/generate-registry-stats.mjs
       - run: node scripts/audit-registry-integrity.mjs
-      - run: npm run validate:launch-queue
-      - run: npm run build
+      - name: Validate deployment policy
+        run: npm run validate:deployment-policy
+      - name: Validate baseline
+        run: npm run validate:baseline
+      - name: Validate launch queue
+        run: npm run validate:launch-queue
+      - name: Validate terminal queue
+        run: npm run validate:terminal-queue
+      - name: Validate candidates
+        run: npm run validate:candidates
+      - name: Validate data
+        run: npm run validate:data
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate classifications
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate events
+        run: npm run validate:events-v2
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate Registry v3
+        run: npm run validate:v3
+      - name: Validate final state
+        run: npm run validate:final
+      - name: Validate finalization
+        run: npm run validate:finalization
+      - name: Astro check
+        run: npm run check
+      - name: Build and verify
+        run: npm run build:site && npm run verify:deployment && npm run verify:public
       - run: rm scripts/lisusd-step*.mjs .github/workflows/apply-lisusd-lineage.yml
       - uses: EndBug/add-and-commit@v9
         with:
