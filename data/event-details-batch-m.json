@@ -1,1 +1,134 @@
-[{"id":"sog_ev_gyd_launch_batch_m","title":"Gyroscope launches GYD on Ethereum mainnet","subject_stablecoin_ids":["sog_st_gyd"],"subject_organization_ids":["sog_issuer_gyroscope"],"evidence_ids":["sog_src_gyd_launch_batch_m","sog_src_gyd_docs_batch_m","sog_src_gyd_contracts_batch_m","sog_src_gyd_audits_batch_m"],"event_detail_kind":"launch","launch_detail":{"summary":"Official dated announcement establishes the Ethereum mainnet launch boundary.","status":"active"}},{"id":"sog_ev_fxusd_launch_batch_m","title":"f(x) Protocol introduces fxUSD","subject_stablecoin_ids":["sog_st_fxusd"],"subject_organization_ids":["sog_issuer_fx_protocol"],"evidence_ids":["sog_src_fxusd_products_batch_m","sog_src_fxusd_functions_batch_m","sog_src_fxusd_stability_batch_m","sog_src_fxusd_contracts_batch_m"],"event_detail_kind":"launch","launch_detail":{"summary":"Official protocol documentation establishes the product but not one reviewed day-level launch boundary.","status":"active"}},{"id":"sog_ev_honey_launch_batch_m","title":"Berachain launches HONEY on mainnet","subject_stablecoin_ids":["sog_st_honey"],"subject_organization_ids":["sog_issuer_berachain"],"evidence_ids":["sog_src_honey_token_batch_m","sog_src_honey_contract_batch_m","sog_src_honey_deployments_batch_m","sog_src_honey_llms_batch_m"],"event_detail_kind":"launch","launch_detail":{"summary":"Official mainnet documentation establishes HONEY in 2025 without a reviewed day-level boundary.","status":"active"}},{"id":"sog_ev_mai_launch_batch_m","title":"QiDAO establishes the miMATIC and MAI stablecoin lineage","subject_stablecoin_ids":["sog_st_mai"],"subject_organization_ids":["sog_issuer_qidao"],"evidence_ids":["sog_src_mai_glossary_batch_m","sog_src_mai_intro_batch_m","sog_src_mai_psm_batch_m","sog_src_mai_contracts_batch_m"],"event_detail_kind":"launch","launch_detail":{"summary":"Official documentation establishes identity continuity but not exact launch and rebrand dates.","status":"active"}},{"id":"sog_ev_usdx_launch_batch_m","title":"Stables Labs introduces USDX","subject_stablecoin_ids":["sog_st_stablesusdx"],"subject_organization_ids":["sog_issuer_stables_labs"],"evidence_ids":["sog_src_usdx_basics_batch_m","sog_src_usdx_delta_batch_m","sog_src_usdx_redeem_batch_m","sog_src_usdx_staking_batch_m","sog_src_usdx_contracts_batch_m"],"event_detail_kind":"launch","launch_detail":{"summary":"Official documentation establishes the current USDX system but not one reviewed day-level launch boundary.","status":"active"}}]
+[
+  {
+    "id": "sog_ev_gyd_launch_batch_m",
+    "title": "Gyroscope launches GYD on Ethereum mainnet",
+    "subject_stablecoin_ids": [
+      "sog_st_gyd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_gyroscope"
+    ],
+    "evidence_ids": [
+      "sog_src_gyd_launch_batch_m",
+      "sog_src_gyd_docs_batch_m",
+      "sog_src_gyd_contracts_batch_m",
+      "sog_src_gyd_audits_batch_m"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official dated announcement establishes the Ethereum mainnet launch boundary.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_fxusd_launch_batch_m",
+    "title": "fxUSD becomes publicly available on Ethereum",
+    "subject_stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "evidence_ids": [
+      "sog_src_fxusd_products_batch_m",
+      "sog_src_fxusd_functions_batch_m",
+      "sog_src_fxusd_contracts_batch_m",
+      "sog_src_fxusd_announcement_2024",
+      "sog_src_fxusd_seeding_2024",
+      "sog_src_fxusd_curve_pool_2024",
+      "sog_src_fxusd_v1_v2_docs_2025"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "fxUSD reached a reviewed public-availability boundary on Ethereum on 2024-02-27 after its seeding phase began.",
+      "status": "active_same_proxy_now_v2",
+      "related_organization_ids": [
+        "sog_issuer_fx_protocol"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_honey_launch_batch_m",
+    "title": "Berachain launches HONEY on mainnet",
+    "subject_stablecoin_ids": [
+      "sog_st_honey"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_berachain"
+    ],
+    "evidence_ids": [
+      "sog_src_honey_token_batch_m",
+      "sog_src_honey_contract_batch_m",
+      "sog_src_honey_deployments_batch_m",
+      "sog_src_honey_llms_batch_m"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official mainnet documentation establishes HONEY in 2025 without a reviewed day-level boundary.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_mai_launch_batch_m",
+    "title": "QiDAO establishes the miMATIC and MAI stablecoin lineage",
+    "subject_stablecoin_ids": [
+      "sog_st_mai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_qidao"
+    ],
+    "evidence_ids": [
+      "sog_src_mai_glossary_batch_m",
+      "sog_src_mai_intro_batch_m",
+      "sog_src_mai_psm_batch_m",
+      "sog_src_mai_contracts_batch_m"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official documentation establishes identity continuity but not exact launch and rebrand dates.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_usdx_launch_batch_m",
+    "title": "Stables Labs introduces USDX",
+    "subject_stablecoin_ids": [
+      "sog_st_stablesusdx"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_stables_labs"
+    ],
+    "evidence_ids": [
+      "sog_src_usdx_basics_batch_m",
+      "sog_src_usdx_delta_batch_m",
+      "sog_src_usdx_redeem_batch_m",
+      "sog_src_usdx_staking_batch_m",
+      "sog_src_usdx_contracts_batch_m"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official documentation establishes the current USDX system but not one reviewed day-level launch boundary.",
+      "status": "active"
+    }
+  },
+  {
+    "id": "sog_ev_fxusd_v2_upgrade_2025",
+    "title": "fxUSD proxy is upgraded for f(x) Protocol V2",
+    "subject_stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "evidence_ids": [
+      "sog_src_fxusd_contracts_batch_m",
+      "sog_src_fxusd_v1_v2_docs_2025",
+      "sog_src_fxusd_proxy_upgrade_2025"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Same-proxy transition from the V1 product architecture to f(x) Protocol V2.",
+      "status": "implemented_same_token_proxy_upgrade"
+    }
+  }
+]

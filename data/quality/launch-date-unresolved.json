@@ -9,9 +9,9 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 28,
+  "expected_total": 27,
   "category_counts": {
-    "C": 22,
+    "C": 21,
     "B": 3,
     "D": 3
   },
@@ -71,13 +71,6 @@
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Announcement, issuance, listings, and deployments differ."
-    },
-    {
-      "stablecoin_id": "sog_st_fxusd",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Introduction, V1, V2, and public availability differ."
     },
     {
       "stablecoin_id": "sog_st_gyen",

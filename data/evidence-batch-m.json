@@ -1,1 +1,762 @@
-[{"id":"sog_src_gyd_launch_batch_m","stablecoin_id":"sog_st_gyd","issuer_id":"sog_issuer_gyroscope","source_type":"official_blog","title":"GYD is live on Ethereum mainnet","url":"https://www.gyro.finance/blog/gyd-is-live-on-ethereum-mainnet/","publisher":"Gyroscope","published_at":"2023-12-07","archived_url":"https://web.archive.org/web/*/https://www.gyro.finance/blog/gyd-is-live-on-ethereum-mainnet/","accessed_at":"2026-06-22","reliability":"high","claim_scope":"launch_and_identity","stablecoin_ids":["sog_st_gyd"],"organization_ids":["sog_issuer_gyroscope"],"claim_scopes":["launch_date","identity","ethereum_mainnet","full_backing"],"event_ids":["sog_ev_gyd_launch_batch_m"]},{"id":"sog_src_gyd_docs_batch_m","stablecoin_id":"sog_st_gyd","issuer_id":"sog_issuer_gyroscope","source_type":"official_documentation","title":"GYD documentation","url":"https://docs.gyro.finance/gyd/","publisher":"Gyroscope","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.gyro.finance/gyd/","accessed_at":"2026-06-22","reliability":"high","claim_scope":"backing_redemption_and_mechanism","stablecoin_ids":["sog_st_gyd"],"organization_ids":["sog_issuer_gyroscope"],"claim_scopes":["reserve_basket","mint","redemption","bonding_curve","sGYD_boundary"],"event_ids":["sog_ev_gyd_launch_batch_m"]},{"id":"sog_src_gyd_contracts_batch_m","stablecoin_id":"sog_st_gyd","issuer_id":"sog_issuer_gyroscope","source_type":"official_documentation","title":"Gyroscope deployed contracts","url":"https://docs.gyro.finance/deployed-contracts/","publisher":"Gyroscope","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.gyro.finance/deployed-contracts/","accessed_at":"2026-06-22","reliability":"high","claim_scope":"deployment","stablecoin_ids":["sog_st_gyd"],"organization_ids":["sog_issuer_gyroscope"],"claim_scopes":["ethereum_deployment","contracts","canonicality"],"event_ids":["sog_ev_gyd_launch_batch_m"]},{"id":"sog_src_gyd_audits_batch_m","stablecoin_id":"sog_st_gyd","issuer_id":"sog_issuer_gyroscope","source_type":"official_documentation","title":"Gyroscope audit reports","url":"https://docs.gyro.finance/audit-reports.html","publisher":"Gyroscope","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.gyro.finance/audit-reports.html","accessed_at":"2026-06-22","reliability":"high","claim_scope":"security_review","stablecoin_ids":["sog_st_gyd"],"organization_ids":["sog_issuer_gyroscope"],"claim_scopes":["audits","security"],"event_ids":["sog_ev_gyd_launch_batch_m"]},{"id":"sog_src_fxusd_products_batch_m","stablecoin_id":"sog_st_fxusd","issuer_id":"sog_issuer_fx_protocol","source_type":"official_documentation","title":"Core products of f(x) Protocol 2.0","url":"https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol-2.0","publisher":"f(x) Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol-2.0","accessed_at":"2026-06-22","reliability":"high","claim_scope":"identity_and_product_boundaries","stablecoin_ids":["sog_st_fxusd"],"organization_ids":["sog_issuer_fx_protocol"],"claim_scopes":["identity","fxSAVE_boundary","position_products","collateral"],"event_ids":["sog_ev_fxusd_launch_batch_m"]},{"id":"sog_src_fxusd_functions_batch_m","stablecoin_id":"sog_st_fxusd","issuer_id":"sog_issuer_fx_protocol","source_type":"official_documentation","title":"Key functions of f(x) Protocol","url":"https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/key-functions-of-f-x","publisher":"f(x) Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/key-functions-of-f-x","accessed_at":"2026-06-22","reliability":"high","claim_scope":"issuance_and_redemption","stablecoin_ids":["sog_st_fxusd"],"organization_ids":["sog_issuer_fx_protocol"],"claim_scopes":["mint","redemption","oracle_pricing","collateral_positions"],"event_ids":["sog_ev_fxusd_launch_batch_m"]},{"id":"sog_src_fxusd_stability_batch_m","stablecoin_id":"sog_st_fxusd","issuer_id":"sog_issuer_fx_protocol","source_type":"official_documentation","title":"f(x) stability pool","url":"https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/stability-pool","publisher":"f(x) Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/stability-pool","accessed_at":"2026-06-22","reliability":"high","claim_scope":"stability_and_income_boundary","stablecoin_ids":["sog_st_fxusd"],"organization_ids":["sog_issuer_fx_protocol"],"claim_scopes":["stability_pool","fxSAVE","income_boundary","peg_support"],"event_ids":["sog_ev_fxusd_launch_batch_m"]},{"id":"sog_src_fxusd_contracts_batch_m","stablecoin_id":"sog_st_fxusd","issuer_id":"sog_issuer_fx_protocol","source_type":"official_documentation","title":"f(x) Protocol contracts","url":"https://fxprotocol.gitbook.io/fx-docs/more/resources/contracts","publisher":"f(x) Protocol","published_at":null,"archived_url":"https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/more/resources/contracts","accessed_at":"2026-06-22","reliability":"high","claim_scope":"deployment","stablecoin_ids":["sog_st_fxusd"],"organization_ids":["sog_issuer_fx_protocol"],"claim_scopes":["ethereum_deployment","contracts","version_2"],"event_ids":["sog_ev_fxusd_launch_batch_m"]},{"id":"sog_src_honey_token_batch_m","stablecoin_id":"sog_st_honey","issuer_id":"sog_issuer_berachain","source_type":"official_documentation","title":"HONEY token","url":"https://docs.berachain.com/general/tokens/honey","publisher":"Berachain","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.berachain.com/general/tokens/honey","accessed_at":"2026-06-22","reliability":"high","claim_scope":"identity_backing_and_redemption","stablecoin_ids":["sog_st_honey"],"organization_ids":["sog_issuer_berachain"],"claim_scopes":["identity","collateral_vaults","mint","redemption","basket_mode","fees"],"event_ids":["sog_ev_honey_launch_batch_m"]},{"id":"sog_src_honey_contract_batch_m","stablecoin_id":"sog_st_honey","issuer_id":"sog_issuer_berachain","source_type":"official_documentation","title":"HONEY token contracts","url":"https://docs.berachain.com/developers/contracts/honey-token","publisher":"Berachain","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.berachain.com/developers/contracts/honey-token","accessed_at":"2026-06-22","reliability":"high","claim_scope":"contract_and_control","stablecoin_ids":["sog_st_honey"],"organization_ids":["sog_issuer_berachain"],"claim_scopes":["token_contract","HoneyFactory","mint_authority"],"event_ids":["sog_ev_honey_launch_batch_m"]},{"id":"sog_src_honey_deployments_batch_m","stablecoin_id":"sog_st_honey","issuer_id":"sog_issuer_berachain","source_type":"official_documentation","title":"Berachain deployed contracts","url":"https://docs.berachain.com/build/getting-started/deployed-contracts","publisher":"Berachain","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.berachain.com/build/getting-started/deployed-contracts","accessed_at":"2026-06-22","reliability":"high","claim_scope":"deployment","stablecoin_ids":["sog_st_honey"],"organization_ids":["sog_issuer_berachain"],"claim_scopes":["mainnet_deployment","contracts","testnet_boundary"],"event_ids":["sog_ev_honey_launch_batch_m"]},{"id":"sog_src_honey_llms_batch_m","stablecoin_id":"sog_st_honey","issuer_id":"sog_issuer_berachain","source_type":"official_documentation","title":"Berachain documentation index","url":"https://docs.berachain.com/llms.txt","publisher":"Berachain","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.berachain.com/llms.txt","accessed_at":"2026-06-22","reliability":"high","claim_scope":"documentation_index","stablecoin_ids":["sog_st_honey"],"organization_ids":["sog_issuer_berachain"],"claim_scopes":["documentation_scope","mainnet"],"event_ids":["sog_ev_honey_launch_batch_m"]},{"id":"sog_src_mai_glossary_batch_m","stablecoin_id":"sog_st_mai","issuer_id":"sog_issuer_qidao","source_type":"official_documentation","title":"QiDAO glossary","url":"https://docs.mai.finance/resources/qi-glossary","publisher":"QiDAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.mai.finance/resources/qi-glossary","accessed_at":"2026-06-22","reliability":"high","claim_scope":"identity_and_rebrand","stablecoin_ids":["sog_st_mai"],"organization_ids":["sog_issuer_qidao"],"claim_scopes":["identity","miMATIC","MAI","rebrand_continuity"],"event_ids":["sog_ev_mai_launch_batch_m"]},{"id":"sog_src_mai_intro_batch_m","stablecoin_id":"sog_st_mai","issuer_id":"sog_issuer_qidao","source_type":"official_documentation","title":"MAI detailed introduction","url":"https://docs.mai.finance/detailed-introduction","publisher":"QiDAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.mai.finance/detailed-introduction","accessed_at":"2026-06-22","reliability":"high","claim_scope":"vault_model","stablecoin_ids":["sog_st_mai"],"organization_ids":["sog_issuer_qidao"],"claim_scopes":["vaults","collateral","debt","repayment"],"event_ids":["sog_ev_mai_launch_batch_m"]},{"id":"sog_src_mai_psm_batch_m","stablecoin_id":"sog_st_mai","issuer_id":"sog_issuer_qidao","source_type":"official_documentation","title":"MAI Peg Stability Module","url":"https://docs.mai.finance/peg-stability-module","publisher":"QiDAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.mai.finance/peg-stability-module","accessed_at":"2026-06-22","reliability":"high","claim_scope":"stablecoin_mint_and_redemption","stablecoin_ids":["sog_st_mai"],"organization_ids":["sog_issuer_qidao"],"claim_scopes":["psm","mint","queued_redemption","fees","withdrawal_delay"],"event_ids":["sog_ev_mai_launch_batch_m"]},{"id":"sog_src_mai_contracts_batch_m","stablecoin_id":"sog_st_mai","issuer_id":"sog_issuer_qidao","source_type":"official_documentation","title":"MAI smart contract addresses","url":"https://docs.mai.finance/functions/smart-contract-addresses","publisher":"QiDAO","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.mai.finance/functions/smart-contract-addresses","accessed_at":"2026-06-22","reliability":"high","claim_scope":"deployment","stablecoin_ids":["sog_st_mai"],"organization_ids":["sog_issuer_qidao"],"claim_scopes":["contracts","chains","deployments"],"event_ids":["sog_ev_mai_launch_batch_m"]},{"id":"sog_src_usdx_basics_batch_m","stablecoin_id":"sog_st_stablesusdx","issuer_id":"sog_issuer_stables_labs","source_type":"official_documentation","title":"USDX basics","url":"https://docs.usdx.money/a-synthetic-usd/usdx-basics","publisher":"Stables Labs","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.usdx.money/a-synthetic-usd/usdx-basics","accessed_at":"2026-06-22","reliability":"high","claim_scope":"identity_and_access","stablecoin_ids":["sog_st_stablesusdx"],"organization_ids":["sog_issuer_stables_labs"],"claim_scopes":["identity","collateral","approved_participants","sUSDX_boundary"],"event_ids":["sog_ev_usdx_launch_batch_m"]},{"id":"sog_src_usdx_delta_batch_m","stablecoin_id":"sog_st_stablesusdx","issuer_id":"sog_issuer_stables_labs","source_type":"official_documentation","title":"USDX delta-neutral stability","url":"https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability","publisher":"Stables Labs","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability","accessed_at":"2026-06-22","reliability":"high","claim_scope":"backing_and_stabilization","stablecoin_ids":["sog_st_stablesusdx"],"organization_ids":["sog_issuer_stables_labs"],"claim_scopes":["delta_neutral","spot_assets","derivatives","counterparties"],"event_ids":["sog_ev_usdx_launch_batch_m"]},{"id":"sog_src_usdx_redeem_batch_m","stablecoin_id":"sog_st_stablesusdx","issuer_id":"sog_issuer_stables_labs","source_type":"official_documentation","title":"How to redeem USDX","url":"https://docs.usdx.money/guides/how-to-redeem","publisher":"Stables Labs","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.usdx.money/guides/how-to-redeem","accessed_at":"2026-06-22","reliability":"high","claim_scope":"redemption","stablecoin_ids":["sog_st_stablesusdx"],"organization_ids":["sog_issuer_stables_labs"],"claim_scopes":["redemption","USDT_settlement","seven_day_period","approved_participants"],"event_ids":["sog_ev_usdx_launch_batch_m"]},{"id":"sog_src_usdx_staking_batch_m","stablecoin_id":"sog_st_stablesusdx","issuer_id":"sog_issuer_stables_labs","source_type":"official_documentation","title":"Staking USDX","url":"https://docs.usdx.money/a-yield-bearing-token/staking-usdx","publisher":"Stables Labs","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.usdx.money/a-yield-bearing-token/staking-usdx","accessed_at":"2026-06-22","reliability":"high","claim_scope":"income_and_wrapper_boundary","stablecoin_ids":["sog_st_stablesusdx"],"organization_ids":["sog_issuer_stables_labs"],"claim_scopes":["sUSDX","wrapper_value","income_boundary"],"event_ids":["sog_ev_usdx_launch_batch_m"]},{"id":"sog_src_usdx_contracts_batch_m","stablecoin_id":"sog_st_stablesusdx","issuer_id":"sog_issuer_stables_labs","source_type":"official_documentation","title":"USDX contracts","url":"https://docs.usdx.money/informaiton/contracts","publisher":"Stables Labs","published_at":null,"archived_url":"https://web.archive.org/web/*/https://docs.usdx.money/informaiton/contracts","accessed_at":"2026-06-22","reliability":"high","claim_scope":"deployment","stablecoin_ids":["sog_st_stablesusdx"],"organization_ids":["sog_issuer_stables_labs"],"claim_scopes":["ethereum_deployment","contracts","sUSDX_contract","redemption_contract"],"event_ids":["sog_ev_usdx_launch_batch_m"]}]
+[
+  {
+    "id": "sog_src_gyd_launch_batch_m",
+    "stablecoin_id": "sog_st_gyd",
+    "issuer_id": "sog_issuer_gyroscope",
+    "source_type": "official_blog",
+    "title": "GYD is live on Ethereum mainnet",
+    "url": "https://www.gyro.finance/blog/gyd-is-live-on-ethereum-mainnet/",
+    "publisher": "Gyroscope",
+    "published_at": "2023-12-07",
+    "archived_url": "https://web.archive.org/web/*/https://www.gyro.finance/blog/gyd-is-live-on-ethereum-mainnet/",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "launch_and_identity",
+    "stablecoin_ids": [
+      "sog_st_gyd"
+    ],
+    "organization_ids": [
+      "sog_issuer_gyroscope"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "identity",
+      "ethereum_mainnet",
+      "full_backing"
+    ],
+    "event_ids": [
+      "sog_ev_gyd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_gyd_docs_batch_m",
+    "stablecoin_id": "sog_st_gyd",
+    "issuer_id": "sog_issuer_gyroscope",
+    "source_type": "official_documentation",
+    "title": "GYD documentation",
+    "url": "https://docs.gyro.finance/gyd/",
+    "publisher": "Gyroscope",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.gyro.finance/gyd/",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "backing_redemption_and_mechanism",
+    "stablecoin_ids": [
+      "sog_st_gyd"
+    ],
+    "organization_ids": [
+      "sog_issuer_gyroscope"
+    ],
+    "claim_scopes": [
+      "reserve_basket",
+      "mint",
+      "redemption",
+      "bonding_curve",
+      "sGYD_boundary"
+    ],
+    "event_ids": [
+      "sog_ev_gyd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_gyd_contracts_batch_m",
+    "stablecoin_id": "sog_st_gyd",
+    "issuer_id": "sog_issuer_gyroscope",
+    "source_type": "official_documentation",
+    "title": "Gyroscope deployed contracts",
+    "url": "https://docs.gyro.finance/deployed-contracts/",
+    "publisher": "Gyroscope",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.gyro.finance/deployed-contracts/",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "deployment",
+    "stablecoin_ids": [
+      "sog_st_gyd"
+    ],
+    "organization_ids": [
+      "sog_issuer_gyroscope"
+    ],
+    "claim_scopes": [
+      "ethereum_deployment",
+      "contracts",
+      "canonicality"
+    ],
+    "event_ids": [
+      "sog_ev_gyd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_gyd_audits_batch_m",
+    "stablecoin_id": "sog_st_gyd",
+    "issuer_id": "sog_issuer_gyroscope",
+    "source_type": "official_documentation",
+    "title": "Gyroscope audit reports",
+    "url": "https://docs.gyro.finance/audit-reports.html",
+    "publisher": "Gyroscope",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.gyro.finance/audit-reports.html",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "security_review",
+    "stablecoin_ids": [
+      "sog_st_gyd"
+    ],
+    "organization_ids": [
+      "sog_issuer_gyroscope"
+    ],
+    "claim_scopes": [
+      "audits",
+      "security"
+    ],
+    "event_ids": [
+      "sog_ev_gyd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_products_batch_m",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "source_type": "official_documentation",
+    "title": "Core products of f(x) Protocol 2.0",
+    "url": "https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol-2.0",
+    "publisher": "f(x) Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/overview/core-products-of-f-x-protocol-2.0",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "identity_and_product_boundaries",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "claim_scopes": [
+      "identity",
+      "fxSAVE_boundary",
+      "position_products",
+      "collateral"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_functions_batch_m",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "source_type": "official_documentation",
+    "title": "Key functions of f(x) Protocol",
+    "url": "https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/key-functions-of-f-x",
+    "publisher": "f(x) Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/key-functions-of-f-x",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "issuance_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "claim_scopes": [
+      "mint",
+      "redemption",
+      "oracle_pricing",
+      "collateral_positions"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_stability_batch_m",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "source_type": "official_documentation",
+    "title": "f(x) stability pool",
+    "url": "https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/stability-pool",
+    "publisher": "f(x) Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/f-x-protocol-mechanisms/stability-pool",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "stability_and_income_boundary",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "claim_scopes": [
+      "stability_pool",
+      "fxSAVE",
+      "income_boundary",
+      "peg_support"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_contracts_batch_m",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "source_type": "official_documentation",
+    "title": "f(x) Protocol contracts",
+    "url": "https://fxprotocol.gitbook.io/fx-docs/more/resources/contracts",
+    "publisher": "f(x) Protocol",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/more/resources/contracts",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "current_proxy_and_versioned_contracts",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "claim_scopes": [
+      "ethereum_deployment",
+      "fxusd_proxy",
+      "version_1_contracts",
+      "version_2_contracts"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ],
+    "notes": "Official contracts documentation identifies the continuous fxUSD proxy at 0x085780639CC2cACd35E474e71f4d000e2405d8f6 and separates current V2 contracts from historical V1 contracts."
+  },
+  {
+    "id": "sog_src_honey_token_batch_m",
+    "stablecoin_id": "sog_st_honey",
+    "issuer_id": "sog_issuer_berachain",
+    "source_type": "official_documentation",
+    "title": "HONEY token",
+    "url": "https://docs.berachain.com/general/tokens/honey",
+    "publisher": "Berachain",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.berachain.com/general/tokens/honey",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "identity_backing_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_honey"
+    ],
+    "organization_ids": [
+      "sog_issuer_berachain"
+    ],
+    "claim_scopes": [
+      "identity",
+      "collateral_vaults",
+      "mint",
+      "redemption",
+      "basket_mode",
+      "fees"
+    ],
+    "event_ids": [
+      "sog_ev_honey_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_honey_contract_batch_m",
+    "stablecoin_id": "sog_st_honey",
+    "issuer_id": "sog_issuer_berachain",
+    "source_type": "official_documentation",
+    "title": "HONEY token contracts",
+    "url": "https://docs.berachain.com/developers/contracts/honey-token",
+    "publisher": "Berachain",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.berachain.com/developers/contracts/honey-token",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "contract_and_control",
+    "stablecoin_ids": [
+      "sog_st_honey"
+    ],
+    "organization_ids": [
+      "sog_issuer_berachain"
+    ],
+    "claim_scopes": [
+      "token_contract",
+      "HoneyFactory",
+      "mint_authority"
+    ],
+    "event_ids": [
+      "sog_ev_honey_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_honey_deployments_batch_m",
+    "stablecoin_id": "sog_st_honey",
+    "issuer_id": "sog_issuer_berachain",
+    "source_type": "official_documentation",
+    "title": "Berachain deployed contracts",
+    "url": "https://docs.berachain.com/build/getting-started/deployed-contracts",
+    "publisher": "Berachain",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.berachain.com/build/getting-started/deployed-contracts",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "deployment",
+    "stablecoin_ids": [
+      "sog_st_honey"
+    ],
+    "organization_ids": [
+      "sog_issuer_berachain"
+    ],
+    "claim_scopes": [
+      "mainnet_deployment",
+      "contracts",
+      "testnet_boundary"
+    ],
+    "event_ids": [
+      "sog_ev_honey_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_honey_llms_batch_m",
+    "stablecoin_id": "sog_st_honey",
+    "issuer_id": "sog_issuer_berachain",
+    "source_type": "official_documentation",
+    "title": "Berachain documentation index",
+    "url": "https://docs.berachain.com/llms.txt",
+    "publisher": "Berachain",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.berachain.com/llms.txt",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "documentation_index",
+    "stablecoin_ids": [
+      "sog_st_honey"
+    ],
+    "organization_ids": [
+      "sog_issuer_berachain"
+    ],
+    "claim_scopes": [
+      "documentation_scope",
+      "mainnet"
+    ],
+    "event_ids": [
+      "sog_ev_honey_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_mai_glossary_batch_m",
+    "stablecoin_id": "sog_st_mai",
+    "issuer_id": "sog_issuer_qidao",
+    "source_type": "official_documentation",
+    "title": "QiDAO glossary",
+    "url": "https://docs.mai.finance/resources/qi-glossary",
+    "publisher": "QiDAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mai.finance/resources/qi-glossary",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "identity_and_rebrand",
+    "stablecoin_ids": [
+      "sog_st_mai"
+    ],
+    "organization_ids": [
+      "sog_issuer_qidao"
+    ],
+    "claim_scopes": [
+      "identity",
+      "miMATIC",
+      "MAI",
+      "rebrand_continuity"
+    ],
+    "event_ids": [
+      "sog_ev_mai_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_mai_intro_batch_m",
+    "stablecoin_id": "sog_st_mai",
+    "issuer_id": "sog_issuer_qidao",
+    "source_type": "official_documentation",
+    "title": "MAI detailed introduction",
+    "url": "https://docs.mai.finance/detailed-introduction",
+    "publisher": "QiDAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mai.finance/detailed-introduction",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "vault_model",
+    "stablecoin_ids": [
+      "sog_st_mai"
+    ],
+    "organization_ids": [
+      "sog_issuer_qidao"
+    ],
+    "claim_scopes": [
+      "vaults",
+      "collateral",
+      "debt",
+      "repayment"
+    ],
+    "event_ids": [
+      "sog_ev_mai_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_mai_psm_batch_m",
+    "stablecoin_id": "sog_st_mai",
+    "issuer_id": "sog_issuer_qidao",
+    "source_type": "official_documentation",
+    "title": "MAI Peg Stability Module",
+    "url": "https://docs.mai.finance/peg-stability-module",
+    "publisher": "QiDAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mai.finance/peg-stability-module",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "stablecoin_mint_and_redemption",
+    "stablecoin_ids": [
+      "sog_st_mai"
+    ],
+    "organization_ids": [
+      "sog_issuer_qidao"
+    ],
+    "claim_scopes": [
+      "psm",
+      "mint",
+      "queued_redemption",
+      "fees",
+      "withdrawal_delay"
+    ],
+    "event_ids": [
+      "sog_ev_mai_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_mai_contracts_batch_m",
+    "stablecoin_id": "sog_st_mai",
+    "issuer_id": "sog_issuer_qidao",
+    "source_type": "official_documentation",
+    "title": "MAI smart contract addresses",
+    "url": "https://docs.mai.finance/functions/smart-contract-addresses",
+    "publisher": "QiDAO",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mai.finance/functions/smart-contract-addresses",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "deployment",
+    "stablecoin_ids": [
+      "sog_st_mai"
+    ],
+    "organization_ids": [
+      "sog_issuer_qidao"
+    ],
+    "claim_scopes": [
+      "contracts",
+      "chains",
+      "deployments"
+    ],
+    "event_ids": [
+      "sog_ev_mai_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_usdx_basics_batch_m",
+    "stablecoin_id": "sog_st_stablesusdx",
+    "issuer_id": "sog_issuer_stables_labs",
+    "source_type": "official_documentation",
+    "title": "USDX basics",
+    "url": "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
+    "publisher": "Stables Labs",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.usdx.money/a-synthetic-usd/usdx-basics",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "identity_and_access",
+    "stablecoin_ids": [
+      "sog_st_stablesusdx"
+    ],
+    "organization_ids": [
+      "sog_issuer_stables_labs"
+    ],
+    "claim_scopes": [
+      "identity",
+      "collateral",
+      "approved_participants",
+      "sUSDX_boundary"
+    ],
+    "event_ids": [
+      "sog_ev_usdx_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_usdx_delta_batch_m",
+    "stablecoin_id": "sog_st_stablesusdx",
+    "issuer_id": "sog_issuer_stables_labs",
+    "source_type": "official_documentation",
+    "title": "USDX delta-neutral stability",
+    "url": "https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability",
+    "publisher": "Stables Labs",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "backing_and_stabilization",
+    "stablecoin_ids": [
+      "sog_st_stablesusdx"
+    ],
+    "organization_ids": [
+      "sog_issuer_stables_labs"
+    ],
+    "claim_scopes": [
+      "delta_neutral",
+      "spot_assets",
+      "derivatives",
+      "counterparties"
+    ],
+    "event_ids": [
+      "sog_ev_usdx_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_usdx_redeem_batch_m",
+    "stablecoin_id": "sog_st_stablesusdx",
+    "issuer_id": "sog_issuer_stables_labs",
+    "source_type": "official_documentation",
+    "title": "How to redeem USDX",
+    "url": "https://docs.usdx.money/guides/how-to-redeem",
+    "publisher": "Stables Labs",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.usdx.money/guides/how-to-redeem",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "redemption",
+    "stablecoin_ids": [
+      "sog_st_stablesusdx"
+    ],
+    "organization_ids": [
+      "sog_issuer_stables_labs"
+    ],
+    "claim_scopes": [
+      "redemption",
+      "USDT_settlement",
+      "seven_day_period",
+      "approved_participants"
+    ],
+    "event_ids": [
+      "sog_ev_usdx_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_usdx_staking_batch_m",
+    "stablecoin_id": "sog_st_stablesusdx",
+    "issuer_id": "sog_issuer_stables_labs",
+    "source_type": "official_documentation",
+    "title": "Staking USDX",
+    "url": "https://docs.usdx.money/a-yield-bearing-token/staking-usdx",
+    "publisher": "Stables Labs",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.usdx.money/a-yield-bearing-token/staking-usdx",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "income_and_wrapper_boundary",
+    "stablecoin_ids": [
+      "sog_st_stablesusdx"
+    ],
+    "organization_ids": [
+      "sog_issuer_stables_labs"
+    ],
+    "claim_scopes": [
+      "sUSDX",
+      "wrapper_value",
+      "income_boundary"
+    ],
+    "event_ids": [
+      "sog_ev_usdx_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_usdx_contracts_batch_m",
+    "stablecoin_id": "sog_st_stablesusdx",
+    "issuer_id": "sog_issuer_stables_labs",
+    "source_type": "official_documentation",
+    "title": "USDX contracts",
+    "url": "https://docs.usdx.money/informaiton/contracts",
+    "publisher": "Stables Labs",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.usdx.money/informaiton/contracts",
+    "accessed_at": "2026-06-22",
+    "reliability": "high",
+    "claim_scope": "deployment",
+    "stablecoin_ids": [
+      "sog_st_stablesusdx"
+    ],
+    "organization_ids": [
+      "sog_issuer_stables_labs"
+    ],
+    "claim_scopes": [
+      "ethereum_deployment",
+      "contracts",
+      "sUSDX_contract",
+      "redemption_contract"
+    ],
+    "event_ids": [
+      "sog_ev_usdx_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_announcement_2024",
+    "event_id": "sog_ev_fxusd_launch_batch_m",
+    "source_type": "official_blog",
+    "title": "fxUSD: This ain’t your bank’s stablecoin",
+    "url": "https://medium.com/@protocol_fx_667/fxusd-this-aint-your-bank-s-stablecoin-7d6a717af488",
+    "publisher": "f(x) Protocol",
+    "published_at": "2024-01-11",
+    "claim_scope": "product_announcement_before_launch",
+    "claim_scopes": [
+      "announcement",
+      "identity",
+      "design",
+      "prelaunch_boundary"
+    ],
+    "reliability": "high",
+    "notes": "Official introduction of fxUSD. The announcement date is not used as the canonical launch date.",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/@protocol_fx_667/fxusd-this-aint-your-bank-s-stablecoin-7d6a717af488",
+    "accessed_at": "2026-06-24",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_seeding_2024",
+    "event_id": "sog_ev_fxusd_launch_batch_m",
+    "source_type": "official_blog",
+    "title": "fxUSD Seeding Event: The Race to 500 ETH!",
+    "url": "https://medium.com/@protocol_fx_667/fxusd-seeding-event-the-race-to-500-eth-e8181f48cbc7",
+    "publisher": "f(x) Protocol",
+    "published_at": "2024-02-23",
+    "claim_scope": "seeding_phase_and_full_live_condition",
+    "claim_scopes": [
+      "seeding_start",
+      "500_eth_threshold",
+      "mint_redeem_condition",
+      "launch_boundary"
+    ],
+    "reliability": "high",
+    "notes": "Official seeding announcement states that fxUSD would go fully live after the first seed vault reached 500 ETH. The seeding-start date is not treated as launch.",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/@protocol_fx_667/fxusd-seeding-event-the-race-to-500-eth-e8181f48cbc7",
+    "accessed_at": "2026-06-24",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_curve_pool_2024",
+    "event_id": "sog_ev_fxusd_launch_batch_m",
+    "source_type": "onchain_explorer",
+    "title": "GHO/fxUSD Curve pool creation on Ethereum",
+    "url": "https://etherscan.io/address/0x8fFC7b89412eFD0D17EDEa2018F6634eA4C2FCb2",
+    "publisher": "Etherscan",
+    "published_at": "2024-02-27",
+    "claim_scope": "onchain_public_availability_boundary",
+    "claim_scopes": [
+      "curve_pool_creation",
+      "ethereum",
+      "fxusd_public_liquidity",
+      "launch_date"
+    ],
+    "reliability": "high",
+    "notes": "Verified Curve StableSwap pool containing fxUSD was created at 2024-02-27 16:26:35 UTC. SOG uses the calendar day as a conservative public-availability launch boundary, not as a claim about the first token mint.",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/address/0x8fFC7b89412eFD0D17EDEa2018F6634eA4C2FCb2",
+    "accessed_at": "2026-06-24",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_launch_batch_m"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_v1_v2_docs_2025",
+    "event_id": "sog_ev_fxusd_v2_upgrade_2025",
+    "source_type": "official_documentation",
+    "title": "What is the difference between f(x) Protocol V1 and V2?",
+    "url": "https://fxprotocol.gitbook.io/fx-docs/faq/what-is-the-difference-between-f-x-protocol-v1-and-v2",
+    "publisher": "f(x) Protocol",
+    "published_at": null,
+    "claim_scope": "v1_v2_architecture_boundary",
+    "claim_scopes": [
+      "version_1",
+      "version_2",
+      "architecture_change",
+      "stablecoin_continuity"
+    ],
+    "reliability": "high",
+    "notes": "Official documentation distinguishes V1 and V2 product mechanics while continuing to describe fxUSD as the protocol stablecoin.",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "archived_url": "https://web.archive.org/web/*/https://fxprotocol.gitbook.io/fx-docs/faq/what-is-the-difference-between-f-x-protocol-v1-and-v2",
+    "accessed_at": "2026-06-24",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_v2_upgrade_2025"
+    ]
+  },
+  {
+    "id": "sog_src_fxusd_proxy_upgrade_2025",
+    "event_id": "sog_ev_fxusd_v2_upgrade_2025",
+    "source_type": "onchain_explorer",
+    "title": "fxUSD proxy upgrade event on Ethereum",
+    "url": "https://etherscan.io/address/0x085780639CC2cACd35E474e71f4d000e2405d8f6#events",
+    "publisher": "Etherscan",
+    "published_at": "2025-01-02",
+    "claim_scope": "same_proxy_v2_upgrade",
+    "claim_scopes": [
+      "proxy_upgrade",
+      "same_token_address",
+      "v2_activation",
+      "ethereum"
+    ],
+    "reliability": "high",
+    "notes": "The continuous fxUSD proxy emitted an Upgraded event on 2025-01-02. Component rollout beyond this proxy event remains separately reviewable.",
+    "stablecoin_id": "sog_st_fxusd",
+    "issuer_id": "sog_issuer_fx_protocol",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/address/0x085780639CC2cACd35E474e71f4d000e2405d8f6#events",
+    "accessed_at": "2026-06-24",
+    "stablecoin_ids": [
+      "sog_st_fxusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_fx_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fxusd_v2_upgrade_2025"
+    ]
+  }
+]
