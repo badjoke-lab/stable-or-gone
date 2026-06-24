@@ -29,7 +29,7 @@ Basis Cash published its official distribution guide on 2020-11-17. The guide de
 - use of the Basis Cash application to deposit liquidity-provider tokens and claim BAC
 
 ```text
-https://basiscash.medium.com/basis-cash-the-roadmap-ahead-3a2b2a3c4b1a
+https://medium.com/basis-cash/overall-guide-for-basis-cash-79b606c5ba8c
 ```
 
 The guide establishes the intended public distribution design and near-term launch process. It is a pre-launch instruction boundary, not by itself the effective launch date.
@@ -175,13 +175,13 @@ These unknowns do not block the reviewed original launch date.
 
 - Official Basis Cash repository: `https://github.com/Basis-Cash/basis-cash-protocol`
 - Official Basis Cash documentation archive: `https://docs.basis.cash/`
-- Official distribution guide, 2020-11-17: `https://basiscash.medium.com/basis-cash-the-roadmap-ahead-3a2b2a3c4b1a`
-- Official V2 migration plan, 2021-02-02
-- Official Basis Cash roadmap, 2021-02-28
-- Official Basis Cash V2 live announcement, 2021-04-26
+- Official distribution guide, 2020-11-17: `https://medium.com/basis-cash/overall-guide-for-basis-cash-79b606c5ba8c`
+- Official V2 migration plan, 2021-02-02: `https://medium.com/basis-cash/basis-cash-v2-migration-plan-6bdd88198da2`
+- Official Basis Cash ecosystem roadmap, 2021-02-28: `https://medium.com/basis-cash/basis-cash-ecosystem-roadmap-1814d1a4c23b`
+- Official Basis Cash V2 live announcement, 2021-04-25: `https://medium.com/basis-cash/basis-v2-launch-day-is-here-950900ac0a9f`
 - Canonical BAC contract: `https://etherscan.io/address/0x3449fc1cd036255ba1eb19d65ff4ba2b8903a69a`
 - Contract creation transaction: `https://etherscan.io/tx/0x19fa45dacde46f73af21893c7649c48eebc05feec8811ac9848931106fc6c947`
-- Contemporaneous public-opening report, 2020-11-30
+- Contemporaneous public-opening report, 2020-11-30: `https://www.coindesk.com/tech/2020/11/30/basis-cash-launch-brings-defunct-stablecoin-into-the-defi-era`
 
 ## Production status
 
