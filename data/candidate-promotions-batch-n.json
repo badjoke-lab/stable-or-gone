@@ -3,5 +3,10 @@
     "candidate_id": "sog_cand_000081",
     "status": "promoted",
     "notes": "Emergency incident control for base MainStreetUSD / msUSD; msY, legacy contracts, vault receipts, lending positions, and cross-chain representations remain separate."
+  },
+  {
+    "candidate_id": "sog_cand_000082",
+    "status": "promoted",
+    "notes": "Emergency launch control for JPYSC as a separate trust-issued Japanese-yen stablecoin; JPYC, JPYC Prepaid, GYEN, tokenized deposits, and future representations remain separate."
   }
 ]

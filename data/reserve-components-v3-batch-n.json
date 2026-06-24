@@ -13,7 +13,48 @@
     "custodian_organization_id": null,
     "as_of_date": "2026-06-22",
     "confidence": "medium",
-    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_incident_batch_n"],
+    "evidence_ids": [
+      "sog_src_msusd_welcome_batch_n",
+      "sog_src_msusd_incident_batch_n"
+    ],
     "notes": "Records the claimed backing model only. Current reserve sufficiency and location are not independently confirmed."
+  },
+  {
+    "id": "sog_rc_jpysc_cash_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "reserve_report_id": "sog_rr_jpysc_launch_context_batch_n",
+    "asset_category": "bank_deposits",
+    "asset_label": "Japanese-yen cash and deposits held in trust",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "JPY",
+    "liquidity_class": "high",
+    "maturity_bucket": "on_demand",
+    "custodian_organization_id": "sog_issuer_sbi_shinsei_trust",
+    "as_of_date": "2026-06-24",
+    "confidence": "high",
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026"
+    ],
+    "notes": "Initial launch-level reserve category; no percentage allocation asserted."
+  },
+  {
+    "id": "sog_rc_jpysc_jgb_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "reserve_report_id": "sog_rr_jpysc_launch_context_batch_n",
+    "asset_category": "government_securities",
+    "asset_label": "Japanese government bonds held in trust",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "JPY",
+    "liquidity_class": "high",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": "sog_issuer_sbi_shinsei_trust",
+    "as_of_date": "2026-06-24",
+    "confidence": "high",
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026"
+    ],
+    "notes": "Initial launch-level reserve category; maturity and allocation remain unresolved."
   }
 ]

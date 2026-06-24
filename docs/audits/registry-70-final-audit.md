@@ -1,9 +1,9 @@
 # SOG 80-Record Final Registry Audit
 
 - Audited at: 2026-06-24
-- Baseline: `sog_registry_v2_cashio_launch_2026_06_24`
-- Canonical stable assets: **81**
-- Promoted candidates: **81 / 81**
+- Baseline: `sog_registry_v2_jpysc_launch_2026_06_24`
+- Canonical stable assets: **82**
+- Promoted candidates: **82 / 82**
 - Critical findings: **0**
 - Warnings: **3**
 
@@ -21,38 +21,38 @@
 
 | Layer | Count |
 |---|---:|
-| stablecoins | 81 |
-| organizations | 70 |
-| relationships | 83 |
-| classifications | 81 |
-| profiles | 81 |
-| events | 126 |
-| event_details | 126 |
-| evidence | 382 |
-| reserve_reports | 89 |
-| known_unknowns | 197 |
+| stablecoins | 82 |
+| organizations | 73 |
+| relationships | 86 |
+| classifications | 82 |
+| profiles | 82 |
+| events | 128 |
+| event_details | 128 |
+| evidence | 386 |
+| reserve_reports | 90 |
+| known_unknowns | 200 |
 | regulatory_notes | 9 |
-| deployments | 115 |
-| legal_profiles | 81 |
+| deployments | 116 |
+| legal_profiles | 82 |
 | stable_asset_relationships | 4 |
-| reserve_components | 113 |
-| income_profiles | 81 |
+| reserve_components | 115 |
+| income_profiles | 82 |
 
 ## Coverage
 
 | Layer | Covered | Expectation |
 |---|---:|---|
-| classifications | 81 / 81 | required |
-| profiles | 81 / 81 | required |
-| relationships | 81 / 81 | required |
-| evidence | 81 / 81 | required |
-| reserve_reports | 69 / 81 | informational |
-| known_unknowns | 81 / 81 | required |
-| deployments | 81 / 81 | optional_review |
-| events | 81 / 81 | optional_review |
-| legal_profiles | 81 / 81 | required |
-| reserve_components | 81 / 81 | required |
-| income_profiles | 81 / 81 | required |
+| classifications | 82 / 82 | required |
+| profiles | 82 / 82 | required |
+| relationships | 82 / 82 | required |
+| evidence | 82 / 82 | required |
+| reserve_reports | 70 / 82 | informational |
+| known_unknowns | 82 / 82 | required |
+| deployments | 82 / 82 | optional_review |
+| events | 82 / 82 | optional_review |
+| legal_profiles | 82 / 82 | required |
+| reserve_components | 82 / 82 | required |
+| income_profiles | 82 / 82 | required |
 
 ## Critical Findings
 
@@ -66,7 +66,7 @@
 
 ## Quality Observations
 
-- reserve_reports context coverage is 69/81; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
+- reserve_reports context coverage is 70/82; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
 - 0 records have missing or older-than-one-year last_verified_at values: none.
 - 23 records have no launch_date: sog_st_agoraausd, sog_st_brz, sog_st_dola, sog_st_dsd, sog_st_esd, sog_st_eurt, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_stablesusdx, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usdm, sog_st_usdz, sog_st_usk, sog_st_usyc, sog_st_vai, sog_st_vchf.
 - 3 historical-side records have no discontinued_date: sog_st_bac, sog_st_dsd, sog_st_esd.

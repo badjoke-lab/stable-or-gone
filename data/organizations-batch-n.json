@@ -11,5 +11,44 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-22",
     "notes": "Legal, operating, reserve, custody, verification-provider, and redemption-agent roles require continued review."
+  },
+  {
+    "id": "sog_issuer_sbi_shinsei_trust",
+    "slug": "sbi-shinsei-trust",
+    "name": "SBI Shinsei Trust & Banking",
+    "organization_type": "trust_bank",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Japan",
+    "official_url": "https://www.sbishinseitrust.co.jp/",
+    "summary": "Japanese trust bank and legal issuer of JPYSC.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Recorded as JPYSC legal issuer under the trust-based Type 3 electronic payment instrument structure."
+  },
+  {
+    "id": "sog_org_sbi_vc_trade",
+    "slug": "sbi-vc-trade",
+    "name": "SBI VC Trade",
+    "organization_type": "regulated_crypto_asset_and_electronic_payment_instrument_service_provider",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Japan",
+    "official_url": "https://www.sbivc.co.jp/",
+    "summary": "Japanese regulated platform serving as the initial distribution and account-access partner for JPYSC and the Japan handling provider for RLUSD.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Distribution and service-provider roles are separate from legal issuance."
+  },
+  {
+    "id": "sog_org_startale_group",
+    "slug": "startale-group",
+    "name": "Startale Group",
+    "organization_type": "technology_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Singapore",
+    "official_url": "https://startale.com/",
+    "summary": "Technology and blockchain-integration partner for JPYSC.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Technology-provider role does not imply legal issuance or reserve custody."
   }
 ]

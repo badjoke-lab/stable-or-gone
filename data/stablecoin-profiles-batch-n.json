@@ -2,13 +2,18 @@
   {
     "id": "sog_st_msusd",
     "reserve_profile": {
-      "backing_types": ["stablecoin_collateral"],
+      "backing_types": [
+        "stablecoin_collateral"
+      ],
       "summary": "Official documentation describes an issuer-managed USDC backing model; current assurance status is under review.",
       "disclosure_status": "under_review",
       "as_of_date": "2026-06-22",
       "latest_report_id": "sog_rr_msusd_protocol_batch_n",
       "confidence": "medium",
-      "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_incident_batch_n"]
+      "evidence_ids": [
+        "sog_src_msusd_welcome_batch_n",
+        "sog_src_msusd_incident_batch_n"
+      ]
     },
     "redemption_profile": {
       "status": "restricted",
@@ -19,11 +24,52 @@
       "minimum_amount_text": "Program terms dependent.",
       "fee_text": "Program, network, liquidity, and settlement terms apply.",
       "settlement_time_text": "Program timing and capacity limits apply.",
-      "jurisdiction_restrictions": ["Program restrictions apply."],
+      "jurisdiction_restrictions": [
+        "Program restrictions apply."
+      ],
       "redemption_url": "https://docs.mainstreet.finance/mainstreet-products/msusd/redemption-process",
       "as_of_date": "2026-06-22",
       "confidence": "medium",
-      "evidence_ids": ["sog_src_msusd_redemption_batch_n"]
+      "evidence_ids": [
+        "sog_src_msusd_redemption_batch_n"
+      ]
+    }
+  },
+  {
+    "id": "sog_st_jpysc",
+    "reserve_profile": {
+      "backing_types": [
+        "bank_deposits",
+        "government_securities"
+      ],
+      "summary": "JPYSC is issued under a trust structure with Japanese-yen cash and Japanese government bond reserve assets described by the launch materials.",
+      "disclosure_status": "official_launch_disclosure",
+      "as_of_date": "2026-06-24",
+      "latest_report_id": "sog_rr_jpysc_launch_context_batch_n",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_jpysc_launch_sbi_vc_2026",
+        "sog_src_jpysc_announcement_sbi_2026"
+      ]
+    },
+    "redemption_profile": {
+      "status": "restricted",
+      "settlement_asset": "JPY",
+      "eligible_parties": "Eligible SBI VC Trade account holders under current platform and compliance terms.",
+      "retail_access": "eligible_platform_customers_only",
+      "institutional_access": "eligible_platform_customers_only",
+      "minimum_amount_text": "Platform and transaction limits apply.",
+      "fee_text": "Initial platform materials state fixed one-to-one purchase and sale without spread; other service terms may apply.",
+      "settlement_time_text": "Account-internal settlement; external-wallet settlement unavailable at launch.",
+      "jurisdiction_restrictions": [
+        "Japan account and identity-verification requirements apply."
+      ],
+      "redemption_url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+      "as_of_date": "2026-06-24",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_jpysc_launch_sbi_vc_2026"
+      ]
     }
   }
 ]

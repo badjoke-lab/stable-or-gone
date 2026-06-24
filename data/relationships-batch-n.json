@@ -13,5 +13,47 @@
       "sog_src_msusd_addresses_batch_n"
     ],
     "notes": "Recorded as operator; legal issuer, custody, reserve-management, redemption-agent, and verification-provider roles remain separately reviewable."
+  },
+  {
+    "id": "sog_rel_jpysc_issuer_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "organization_id": "sog_issuer_sbi_shinsei_trust",
+    "role": "legal_issuer",
+    "start_date": "2026-06-24",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026"
+    ],
+    "notes": "SBI Shinsei Trust & Banking is recorded as the legal trust-bank issuer."
+  },
+  {
+    "id": "sog_rel_jpysc_distribution_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "organization_id": "sog_org_sbi_vc_trade",
+    "role": "other",
+    "start_date": "2026-06-24",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026"
+    ],
+    "notes": "Initial distribution and account-access partner; not the legal issuer."
+  },
+  {
+    "id": "sog_rel_jpysc_technology_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "organization_id": "sog_org_startale_group",
+    "role": "technology_provider",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026"
+    ],
+    "notes": "Technology and blockchain-integration role."
   }
 ]
