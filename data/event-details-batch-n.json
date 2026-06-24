@@ -27,5 +27,33 @@
       "cause_summary": "The severe market dislocation followed loss of the prior public verification path; reserve sufficiency and direct-redemption performance remain unresolved.",
       "price_source_ids": ["sog_src_msusd_incident_batch_n"]
     }
+  },
+  {
+    "id": "sog_ev_jpysc_launch_2026",
+    "title": "JPYSC begins restricted account-internal distribution",
+    "subject_stablecoin_ids": ["sog_st_jpysc"],
+    "subject_organization_ids": ["sog_issuer_sbi_shinsei_trust", "sog_org_sbi_vc_trade", "sog_org_startale_group"],
+    "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026", "sog_src_jpysc_announcement_sbi_2026"],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "JPYSC launched on 2026-06-24 in a restricted SBI VC Trade account-internal phase.",
+      "status": "restricted",
+      "related_organization_ids": ["sog_issuer_sbi_shinsei_trust", "sog_org_sbi_vc_trade", "sog_org_startale_group"]
+    }
+  },
+  {
+    "id": "sog_ev_rlusd_japan_handling_2026",
+    "title": "SBI VC Trade begins RLUSD handling in Japan",
+    "subject_stablecoin_ids": ["sog_st_rlusd"],
+    "subject_organization_ids": ["sog_issuer_ripple", "sog_org_sbi_vc_trade"],
+    "evidence_ids": ["sog_src_rlusd_japan_launch_sbi_vc_2026", "sog_src_rlusd_japan_mou_sbi_2025"],
+    "event_detail_kind": "regulatory",
+    "regulatory_detail": {
+      "jurisdiction": "Japan",
+      "authority": "Japanese electronic payment instrument framework",
+      "action_type": "Type 4 electronic payment instrument handling begins",
+      "effective_date": "2026-06-24",
+      "resolution_date": null
+    }
   }
 ]

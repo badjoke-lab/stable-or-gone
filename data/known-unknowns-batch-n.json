@@ -68,5 +68,35 @@
     "severity": "high",
     "last_checked_at": "2026-06-22",
     "notes": "Downstream platform effects remain separate from the msUSD asset record."
+  },
+  {
+    "id": "sog_ku_jpysc_external_transfer_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "issuer_id": "sog_issuer_sbi_shinsei_trust",
+    "topic": "external_wallet_transfer_start",
+    "description": "The reviewed launch materials do not establish the date when JPYSC external-wallet transfer will become available.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-24",
+    "notes": "Do not treat technical readiness or a future plan as public availability."
+  },
+  {
+    "id": "sog_ku_jpysc_public_chain_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "issuer_id": "sog_issuer_sbi_shinsei_trust",
+    "topic": "public_chain_contract_and_circulation",
+    "description": "The public contract address, first transferable deployment, and first unrestricted public-chain circulation boundary are not yet established.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-24",
+    "notes": "The initial account-internal phase is not equivalent to public-chain circulation."
+  },
+  {
+    "id": "sog_ku_jpysc_periodic_reserve_reporting_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "issuer_id": "sog_issuer_sbi_shinsei_trust",
+    "topic": "periodic_reserve_reporting",
+    "description": "A normalized periodic reserve-report or attestation cadence was not established from the initial launch materials.",
+    "severity": "low",
+    "last_checked_at": "2026-06-24",
+    "notes": "Launch reserve descriptions are not treated as recurring assurance reports."
   }
 ]

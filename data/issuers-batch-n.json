@@ -13,5 +13,51 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-22",
     "notes": "Emergency Batch N compatibility row."
+  },
+  {
+    "id": "sog_issuer_sbi_shinsei_trust",
+    "slug": "sbi-shinsei-trust",
+    "name": "SBI Shinsei Trust & Banking",
+    "issuer_type": "company",
+    "jurisdiction": "Japan",
+    "related_stablecoins": [
+      "jpysc"
+    ],
+    "official_url": "https://www.sbishinseitrust.co.jp/",
+    "summary": "Trust-bank issuer of JPYSC.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Emergency Batch N compatibility row."
+  },
+  {
+    "id": "sog_org_sbi_vc_trade",
+    "slug": "sbi-vc-trade",
+    "name": "SBI VC Trade",
+    "issuer_type": "company",
+    "jurisdiction": "Japan",
+    "related_stablecoins": [
+      "jpysc",
+      "rlusd"
+    ],
+    "official_url": "https://www.sbivc.co.jp/",
+    "summary": "Distribution and handling partner for JPYSC and RLUSD in Japan.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Compatibility row; this organization is not represented as the legal issuer of either asset."
+  },
+  {
+    "id": "sog_org_startale_group",
+    "slug": "startale-group",
+    "name": "Startale Group",
+    "issuer_type": "company",
+    "jurisdiction": "Singapore",
+    "related_stablecoins": [
+      "jpysc"
+    ],
+    "official_url": "https://startale.com/",
+    "summary": "Technology partner for JPYSC.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Compatibility row; technology-provider role only."
   }
 ]

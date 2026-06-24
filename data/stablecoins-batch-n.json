@@ -4,11 +4,7 @@
     "slug": "mainstreet-msusd",
     "name": "MainStreetUSD",
     "symbol": "msUSD",
-    "aliases": [
-      "msUSD",
-      "Main Street USD",
-      "MainStreet USD"
-    ],
+    "aliases": ["msUSD", "Main Street USD", "MainStreet USD"],
     "status": "impaired",
     "issuer_id": "sog_issuer_mainstreet_finance",
     "peg_asset": "USD",
@@ -27,5 +23,30 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-22",
     "notes": "Emergency Batch N. Classified as impaired, not failed or discontinued; reserve deficit, insolvency, permanent redemption failure, and shutdown are not confirmed."
+  },
+  {
+    "id": "sog_st_jpysc",
+    "slug": "jpysc",
+    "name": "JPYSC",
+    "symbol": "JPYSC",
+    "aliases": ["JPYSC", "SBI JPYSC", "Japanese Yen Stablecoin JPYSC"],
+    "status": "limited",
+    "issuer_id": "sog_issuer_sbi_shinsei_trust",
+    "peg_asset": "JPY",
+    "collateral_model": "trust_backed_jpy_cash_and_japanese_government_bonds",
+    "reserve_disclosure_status": "official_trust_and_product_disclosures",
+    "redemption_status": "platform_internal_purchase_and_sale",
+    "who_can_redeem": "Eligible SBI VC Trade account holders may purchase and sell JPYSC at a fixed one-to-one Japanese-yen rate inside the platform, subject to account, compliance, and product terms.",
+    "retail_redemption": "eligible_platform_customers_only",
+    "institutional_redemption": "eligible_platform_customers_only",
+    "minimum_redemption": "platform_terms_and_transaction_limits_apply",
+    "redemption_region_notes": "Initial access is limited to eligible SBI VC Trade accounts in Japan. External-wallet transfer and public-chain circulation were not available at launch.",
+    "redemption_notes": "JPYSC launched in a restricted account-internal phase. The trust-bank issuance structure, platform purchase and sale, future external transfer, and future public-chain circulation are recorded separately.",
+    "launch_date": "2026-06-24",
+    "discontinued_date": null,
+    "summary": "Japanese-yen stablecoin issued by SBI Shinsei Trust & Banking under a trust structure and initially distributed inside SBI VC Trade with external-wallet transfer unavailable.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Emergency Batch N expansion for the 2026-06-24 launch. Status is limited because the initial product is account-internal and public-chain circulation remains pending."
   }
 ]

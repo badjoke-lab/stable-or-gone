@@ -10,5 +10,17 @@
     "archived_url": "https://web.archive.org/web/*/https://docs.mainstreet.finance/welcome-to-mainstreet",
     "confidence": "medium",
     "notes": "Official documentation describes 1:1 USDC backing. Current reserve sufficiency is not asserted after the verification-provider termination."
+  },
+  {
+    "id": "sog_rr_jpysc_launch_context_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "issuer_id": "sog_issuer_sbi_shinsei_trust",
+    "publisher": "SBI VC Trade and SBI Holdings",
+    "report_type": "official_launch_reserve_context",
+    "asset_categories": ["bank_deposits", "government_securities"],
+    "url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+    "archived_url": "https://web.archive.org/web/*/https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+    "confidence": "high",
+    "notes": "Initial official reserve-context disclosure. This is not a periodic attestation and does not establish a continuing report cadence."
   }
 ]

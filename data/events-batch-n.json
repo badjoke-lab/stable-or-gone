@@ -26,5 +26,33 @@
     "source_count": 1,
     "event_status_effect": "impaired",
     "notes": "A rebound from the low is not treated as sustainable peg recovery. Market price is distinct from verified direct-redemption value."
+  },
+  {
+    "id": "sog_ev_jpysc_launch_2026",
+    "stablecoin_id": "sog_st_jpysc",
+    "issuer_id": "sog_issuer_sbi_shinsei_trust",
+    "event_type": "launch",
+    "event_date": "2026-06-24",
+    "title": "JPYSC begins restricted account-internal distribution",
+    "description": "JPYSC launched through SBI VC Trade as a trust-issued Japanese-yen stablecoin. Initial use was limited to eligible platform accounts, with external-wallet transfer and public-chain circulation unavailable.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "restricted",
+    "notes": "Launch is recorded separately from future external-transfer, public-chain, lending, and additional-network milestones."
+  },
+  {
+    "id": "sog_ev_rlusd_japan_handling_2026",
+    "stablecoin_id": "sog_st_rlusd",
+    "issuer_id": "sog_issuer_ripple",
+    "event_type": "exchange_adoption_context",
+    "event_date": "2026-06-24",
+    "title": "SBI VC Trade begins RLUSD handling in Japan",
+    "description": "SBI VC Trade began handling RLUSD in Japan as a Type 4 electronic payment instrument, adding a regulated Japanese distribution and access route without changing RLUSD's global launch date or active status.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "none",
+    "notes": "This is a regional distribution event, not a new global launch and not a change to the USD peg reference."
   }
 ]

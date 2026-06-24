@@ -7,5 +7,14 @@
     "rate": "none",
     "related_asset_ids": [],
     "evidence_ids": ["sog_src_msusd_welcome_batch_n"]
+  },
+  {
+    "id": "sog_st_jpysc",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026"]
   }
 ]

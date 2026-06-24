@@ -12,5 +12,19 @@
     "mint_authority_type": "issuer_operator_mint",
     "notes": "Current msUSDV2 Ethereum address from official documentation. Legacy msUSD contracts and cross-chain OFT representations remain separate.",
     "evidence_ids": ["sog_src_msusd_addresses_batch_n"]
+  },
+  {
+    "id": "sog_dep_jpysc_ethereum_initial_batch_n",
+    "stablecoin_id": "sog_st_jpysc",
+    "chain": "Ethereum",
+    "deployment_type": "trust_issued_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "restricted",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "trust_bank_controlled_mint",
+    "notes": "Initial launch materials describe Ethereum-oriented issuance, but external-wallet transfer and public-chain circulation were unavailable. Contract address and transferable activation remain unresolved.",
+    "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026", "sog_src_jpysc_announcement_sbi_2026"]
   }
 ]

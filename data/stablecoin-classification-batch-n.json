@@ -16,5 +16,24 @@
     "asset_class": "stablecoin",
     "reference_target": "fiat",
     "classification_notes": "Emergency impaired classification. msY remains a separate product."
+  },
+  {
+    "id": "sog_st_jpysc",
+    "lifecycle_status": "restricted",
+    "issuance_status": "restricted",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "JPY",
+      "notes": "JPYSC targets one Japanese yen under a trust-bank issuance structure."
+    },
+    "backing_types": [
+      "bank_deposits",
+      "government_securities"
+    ],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Initial account-internal launch; external-wallet transfer and public-chain circulation remain unavailable."
   }
 ]
