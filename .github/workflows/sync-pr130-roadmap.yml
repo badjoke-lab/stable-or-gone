@@ -1,0 +1,30 @@
+name: Synchronize PR130 roadmap
+
+on:
+  push:
+    branches:
+      - add-mica-stablecoin-guide
+
+permissions:
+  contents: write
+
+jobs:
+  synchronize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: add-mica-stablecoin-guide
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Update roadmap
+        run: node scripts/sync-pr130-roadmap.mjs
+      - name: Commit synchronized roadmap
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Synchronize roadmap for MiCA guide"
+          git push origin HEAD:add-mica-stablecoin-guide
