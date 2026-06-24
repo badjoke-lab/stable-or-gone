@@ -1,0 +1,31 @@
+name: JPYSC finalization diagnostic
+
+on:
+  push:
+    branches:
+      - add-jpysc-and-japan-stablecoin-events
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run finalization validator
+        shell: bash
+        run: |
+          set +e
+          node scripts/validate-batch-finalization.mjs > jpysc-finalization-diagnostic.txt 2>&1
+          status=$?
+          cat jpysc-finalization-diagnostic.txt
+          echo "exit_status=$status" >> jpysc-finalization-diagnostic.txt
+          exit 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jpysc-finalization-diagnostic
+          path: jpysc-finalization-diagnostic.txt
