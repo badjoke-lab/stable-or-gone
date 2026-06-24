@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-23
+Updated: 2026-06-24
 
 ## Purpose
 
@@ -30,23 +30,26 @@ Public site:
 https://sog.badjoke-lab.com/
 ```
 
-Latest merged data checkpoint:
+Latest merged checkpoint before this change:
 
 ```text
-PR #109 — Resolve Nuon v1 and v2 lineage
-Merge: 732dd3719b64538ea96a041860be5aaaa1b86ce7
+PR #110 — Record Category C lineage checkpoint
+Merge: a51e705a17dbd77f3075a52f2e65ebd496b1e463
 ```
 
-Current quality checkpoint:
+Current quality change:
 
 ```text
-Bounded Category C lineage pass: complete
-Completed records: EURA, lisUSD, sUSD, Nuon
-Audit: docs/audits/category-c-lineage-pass-2026-06-23.md
-Next bounded record: SPOT
+PR #112 — Resolve SPOT launch and protocol versions
+Canonical launch: 2022-12-08
+v2 proposal: 2024-04-09
+v2 signal passed: 2024-04-19
+v2 production activation: unresolved
+v5 on-chain execution: 2025-07-21
+Next bounded record after merge: fxUSD
 ```
 
-Recent merged quality work:
+Recent lineage and incident work:
 
 ```text
 PR #104 — Record sUSD severe depeg and SIP-423 proposal
@@ -54,6 +57,8 @@ PR #105 — Document EURA launch and rebrand
 PR #107 — Resolve lisUSD and HAY lineage
 PR #108 — Resolve sUSD launch lineage
 PR #109 — Resolve Nuon v1 and v2 lineage
+PR #110 — Record Category C lineage checkpoint
+PR #112 — Resolve SPOT launch and protocol versions
 ```
 
 Current blocker:
@@ -75,7 +80,7 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry
+## Current canonical registry after SPOT change
 
 ```text
 81 stable assets
@@ -83,13 +88,13 @@ Audit: docs/audits/registry-75-production-parity.md
 83 stablecoin-organization relationships
 81 classifications
 81 reserve/redemption profiles
-119 events
-119 Event v2 detail records
-363 evidence records
+121 events
+121 Event v2 detail records
+367 evidence records
 89 reserve-report or reserve-context records
 198 known unknowns
 9 regulatory notes
-114 deployments
+115 deployments
 81 legal profiles
 4 stable-asset relationships
 113 reserve components
@@ -114,7 +119,7 @@ Required-layer coverage:              81 / 81
 Event coverage:                        81 / 81
 Deployment coverage:                   81 / 81
 Reserve-report context coverage:       69 / 81 informational
-Missing canonical launch dates:            29
+Missing canonical launch dates:            28
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -128,9 +133,9 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved: 29
+Total unresolved: 28
 Category B:         3
-Category C:        23
+Category C:        22
 Category D:         3
 ```
 
@@ -142,13 +147,14 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Completed bounded Category C records:
+Completed bounded lineage records:
 
 ```text
 EURA   — agEUR launch separated from EURA rebrand
 lisUSD — HAY launch separated from lisUSD rebrand
 sUSD   — eUSD predecessor separated from nUSD launch and sUSD rebrand
 Nuon   — Arbitrum v1 launch separated from Base v2 relaunch
+SPOT   — original launch separated from v2 proposal and v5 execution
 ```
 
 Policy:
@@ -192,10 +198,10 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Merge the Category C lineage checkpoint after standard workflows pass.
-3. Audit SPOT as the next bounded Category C version-boundary record.
-4. For SPOT, separate original launch, v1-to-v2 rollout, token and bond contracts, and collateral-rotation history.
-5. Assign no SPOT launch date without a day-level first-party production boundary.
+2. Merge PR #112 only after all six normal pull-request workflows pass on the final user-authored head.
+3. Audit fxUSD as the next bounded Category C version-boundary record.
+4. Separate fxUSD introduction, V1, V2, public availability, token contracts, and any holder or collateral migration.
+5. Assign no fxUSD launch date without a day-level first-party production boundary.
 6. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
 7. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```

@@ -9,9 +9,9 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 29,
+  "expected_total": 28,
   "category_counts": {
-    "C": 23,
+    "C": 22,
     "B": 3,
     "D": 3
   },
@@ -141,13 +141,6 @@
       "best_known_range": null,
       "reason_code": "product_activation_conflict",
       "review_note": "Vault, interface, distribution, and sUSDS boundaries differ."
-    },
-    {
-      "stablecoin_id": "sog_st_spot",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "version_boundary_conflict",
-      "review_note": "SPOT version boundaries remain unresolved."
     },
     {
       "stablecoin_id": "sog_st_stablesusdx",

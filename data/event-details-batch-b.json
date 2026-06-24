@@ -59,9 +59,22 @@
     "subject_organization_ids": [
       "sog_issuer_ampleforth"
     ],
-    "event_detail_kind": "migration",
-    "migration_detail": {
-      "summary": "SPOT v2 rollout."
+    "event_detail_kind": "governance_change",
+    "title": "SPOT v2 in-place rollout is proposed",
+    "evidence_ids": [
+      "sog_src_spot_v2_rollout_batch_b",
+      "sog_src_spot_about_batch_b"
+    ],
+    "governance_change_detail": {
+      "summary": "Governance-backed in-place v2 rollout with no holder migration and no change to the underlying ButtonTranche contracts.",
+      "status": "signal_passed_activation_date_unresolved",
+      "resolution_date": "2024-04-19",
+      "affected_deployment_ids": [
+        "sog_dep_spot_ethereum"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_ampleforth"
+      ]
     }
   },
   {
@@ -119,6 +132,53 @@
     "launch_detail": {
       "summary": "Nuon v1 first public guarded mainnet release on Arbitrum on 2023-02-02.",
       "status": "legacy_version_status_unresolved"
+    }
+  },
+  {
+    "id": "sog_ev_spot_launch_2022",
+    "title": "SPOT launches on Ethereum mainnet",
+    "subject_stablecoin_ids": [
+      "sog_st_spot"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_ampleforth"
+    ],
+    "evidence_ids": [
+      "sog_src_spot_launch_2022",
+      "sog_src_spot_launch_news_2022"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "SPOT was announced live on Ethereum mainnet on 2022-12-08.",
+      "status": "active_same_token_through_later_upgrades",
+      "related_organization_ids": [
+        "sog_issuer_ampleforth"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_spot_v5_upgrade_2025",
+    "title": "SPOT v5.0 upgrade is executed on-chain",
+    "subject_stablecoin_ids": [
+      "sog_st_spot"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_ampleforth"
+    ],
+    "evidence_ids": [
+      "sog_src_spot_v5_upgrade_2025"
+    ],
+    "event_detail_kind": "governance_change",
+    "governance_change_detail": {
+      "summary": "SPOT v5.0 executed on-chain with updated fee, rotation, and paired mint-redemption mechanics.",
+      "status": "implemented",
+      "resolution_date": "2025-07-21",
+      "affected_deployment_ids": [
+        "sog_dep_spot_ethereum"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_ampleforth"
+      ]
     }
   }
 ]
