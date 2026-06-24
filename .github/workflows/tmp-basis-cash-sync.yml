@@ -1,0 +1,38 @@
+name: Temporary Basis Cash synchronization
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: ${{ github.head_ref == 'resolve-basis-cash-launch-lineage' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: resolve-basis-cash-launch-lineage
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: node scripts/tmp-sync-basis-cash-lineage.mjs
+      - name: Validate full repository
+        run: npm run build
+      - name: Commit synchronized files
+        run: |
+          if git diff --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md data docs
+          git commit -m "Resolve Basis Cash launch lineage"
+          git push origin HEAD:resolve-basis-cash-launch-lineage
