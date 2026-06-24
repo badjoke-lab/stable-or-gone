@@ -51,6 +51,16 @@ export const guides: GuideEntry[] = [
     revisions: []
   },
   {
+    slug: 'jpyc-vs-jpysc',
+    title: 'JPYC vs JPYSC',
+    summary: 'A side-by-side guide to two Japanese-yen stablecoins with different issuers, legal structures, reserves, redemption routes, launch stages, and wallet availability.',
+    category: 'asset-comparisons',
+    publishedAt: null,
+    informationCurrentThrough: '2026-06-25',
+    updatedAt: null,
+    revisions: []
+  },
+  {
     slug: 'what-is-a-depeg',
     title: 'What Is a Depeg?',
     summary: 'Learn what counts as a depeg, how recoveries are recorded, and when a depeg becomes part of a larger collapse.',
