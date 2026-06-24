@@ -33,16 +33,16 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #114 — Resolve MAI and miMATIC launch lineage
-Merge: 196d35b5c6a2b69b03ab3c17a41be717ee73aa54
+PR #116 — Audit Stables Labs USDX launch boundary
+Merge: 2d954409ee3780c6cb7f54699c29ccf6ffa0206c
 ```
 
 Current quality position:
 
 ```text
 No open canonical quality PR
-Latest resolved record: MAI
-Next bounded record: Stables Labs USDX
+Latest reviewed record: Stables Labs USDX
+Next bounded record: sUSDe
 ```
 
 Recent lineage and incident work:
@@ -57,6 +57,7 @@ PR #110 — Record Category C lineage checkpoint
 PR #112 — Resolve SPOT launch and protocol versions
 PR #113 — Resolve fxUSD launch and V2 lineage
 PR #114 — Resolve MAI and miMATIC launch lineage
+PR #116 — Audit Stables Labs USDX launch boundary
 ```
 
 Current blocker:
@@ -155,6 +156,7 @@ Nuon   — Arbitrum v1 launch separated from Base v2 relaunch
 SPOT   — original launch separated from v2 proposal and v5 execution
 fxUSD  — public availability separated from announcement, seeding, and same-proxy V2 upgrade
 MAI    — Polygon public launch fixed while rename and V2 activation remain unresolved
+USDX   — Ethereum production contracts fixed to 2024-03-18 while public launch and approved-access boundaries remain unresolved
 ```
 
 Policy:
@@ -198,9 +200,9 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Audit Stables Labs USDX as the next bounded Category C launch-boundary record.
-3. Separate USDX announcement, public mint availability, approved-participant access, and sUSDX wrapper launch.
-4. Assign no USDX launch date without day-level first-party production evidence.
+2. Audit sUSDe as the next bounded Category C product-activation record.
+3. Separate the original USDe launch, sUSDe contract deployment, public staking activation, and later reward or cooldown changes.
+4. Assign no sUSDe launch date without day-level first-party or on-chain production evidence for the staking product itself.
 5. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
 6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
