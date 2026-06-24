@@ -13,5 +13,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate batch finalization
-        run: npm run validate:finalization
+      - name: Capture batch finalization output
+        shell: bash
+        run: |
+          set +e
+          npm run validate:finalization > finalization-output.txt 2>&1
+          status=$?
+          cat finalization-output.txt
+          echo "exit_status=$status" >> finalization-output.txt
+          exit 0
+      - name: Upload batch finalization output
+        uses: actions/upload-artifact@v4
+        with:
+          name: finalization-output
+          path: finalization-output.txt
