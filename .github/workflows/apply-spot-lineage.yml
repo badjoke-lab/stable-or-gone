@@ -25,6 +25,7 @@ jobs:
       - run: node scripts/spot-step1.mjs
       - run: node scripts/spot-step2.mjs
       - run: node scripts/spot-step3.mjs
+      - run: node scripts/spot-step3b.mjs
       - run: node scripts/spot-step4.mjs
       - run: node scripts/generate-registry-stats.mjs
       - run: node scripts/audit-registry-integrity.mjs
