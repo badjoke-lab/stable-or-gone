@@ -70,7 +70,7 @@
   },
   {
     "id": "sog_ev_mai_launch_batch_m",
-    "title": "QiDAO establishes the miMATIC and MAI stablecoin lineage",
+    "title": "QiDao publicly launches MAI borrowing on Polygon",
     "subject_stablecoin_ids": [
       "sog_st_mai"
     ],
@@ -81,12 +81,17 @@
       "sog_src_mai_glossary_batch_m",
       "sog_src_mai_intro_batch_m",
       "sog_src_mai_psm_batch_m",
-      "sog_src_mai_contracts_batch_m"
+      "sog_src_mai_contracts_batch_m",
+      "sog_src_mai_launch_2021",
+      "sog_src_mai_v2_2022"
     ],
     "event_detail_kind": "launch",
     "launch_detail": {
-      "summary": "Official documentation establishes identity continuity but not exact launch and rebrand dates.",
-      "status": "active"
+      "summary": "Official public instructions establish operating MAI borrowing on Polygon on 2021-05-02.",
+      "status": "active_same_asset_previously_mimatic",
+      "related_organization_ids": [
+        "sog_issuer_qidao"
+      ]
     }
   },
   {
@@ -129,6 +134,31 @@
     "migration_detail": {
       "summary": "Same-proxy transition from the V1 product architecture to f(x) Protocol V2.",
       "status": "implemented_same_token_proxy_upgrade"
+    }
+  },
+  {
+    "id": "sog_ev_mai_v2_announcement_2022",
+    "title": "QiDao introduces its V2 architecture",
+    "subject_stablecoin_ids": [
+      "sog_st_mai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_qidao"
+    ],
+    "evidence_ids": [
+      "sog_src_mai_v2_2022"
+    ],
+    "event_detail_kind": "governance_change",
+    "governance_change_detail": {
+      "summary": "V2 architecture was introduced with revised liquidation, risk, chain, and vault-deprecation mechanics.",
+      "status": "announced_activation_date_unresolved",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_mai_polygon_batch_m"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_qidao"
+      ]
     }
   }
 ]

@@ -109,12 +109,12 @@
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Chain, bridge, vault, liquidity, module, and interface conditions apply.",
     "redemption_notes": "MAI is the renamed continuation of miMATIC; chain-specific deployments require explicit canonicality review.",
-    "launch_date": null,
+    "launch_date": "2021-05-02",
     "discontinued_date": null,
     "summary": "QiDAO multi-chain overcollateralized stablecoin issued through crypto vaults and supported Peg Stability Modules.",
-    "confidence": "medium",
-    "last_verified_at": "2026-06-22",
-    "notes": "Batch M. Exact original launch, rebrand dates, and current deployment inventory remain unresolved."
+    "confidence": "high",
+    "last_verified_at": "2026-06-24",
+    "notes": "Batch M. Canonical public-availability launch is the official Polygon borrowing guide published on 2021-05-02, which documents an operating protocol, MAI borrowing, and a live debt ceiling. MAI is the continuing stablecoin previously called miMATIC. The exact rename day and exact V2 production activation remain unresolved."
   },
   {
     "id": "sog_st_stablesusdx",

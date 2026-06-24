@@ -88,9 +88,9 @@ Audit: docs/audits/registry-75-production-parity.md
 83 stablecoin-organization relationships
 81 classifications
 81 reserve/redemption profiles
-122 events
-122 Event v2 detail records
-372 evidence records
+123 events
+123 Event v2 detail records
+374 evidence records
 89 reserve-report or reserve-context records
 197 known unknowns
 9 regulatory notes
@@ -119,7 +119,7 @@ Required-layer coverage:              81 / 81
 Event coverage:                        81 / 81
 Deployment coverage:                   81 / 81
 Reserve-report context coverage:       69 / 81 informational
-Missing canonical launch dates:            27
+Missing canonical launch dates:            26
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -133,9 +133,9 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved: 27
+Total unresolved: 26
 Category B:         3
-Category C:        21
+Category C:        20
 Category D:         3
 ```
 
@@ -156,6 +156,7 @@ sUSD   — eUSD predecessor separated from nUSD launch and sUSD rebrand
 Nuon   — Arbitrum v1 launch separated from Base v2 relaunch
 SPOT   — original launch separated from v2 proposal and v5 execution
 fxUSD  — public availability separated from announcement, seeding, and same-proxy V2 upgrade
+MAI    — Polygon public launch fixed while rename and V2 activation remain unresolved
 ```
 
 Policy:
@@ -200,9 +201,9 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
 2. Merge PR #112 only after all six normal pull-request workflows pass on the final user-authored head.
-3. Audit MAI as the next bounded Category C rebrand and deployment-boundary record.
-4. Separate miMATIC launch, MAI rename, current multi-chain deployments, and any canonical or bridged contract boundaries.
-5. Assign no MAI launch or rebrand date without day-level first-party evidence.
+3. Audit Stables Labs USDX as the next bounded Category C launch-boundary record.
+4. Separate USDX announcement, public mint availability, approved-participant access, and sUSDX wrapper launch.
+5. Assign no USDX launch date without day-level first-party production evidence.
 6. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
 7. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```

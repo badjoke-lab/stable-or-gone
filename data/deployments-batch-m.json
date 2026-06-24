@@ -61,17 +61,24 @@
     "id": "sog_dep_mai_polygon_batch_m",
     "stablecoin_id": "sog_st_mai",
     "chain": "Polygon",
-    "deployment_type": "protocol_supported_token",
+    "deployment_type": "protocol_native_token",
     "token_standard": "ERC-20",
-    "contract_address": null,
+    "contract_address": "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
     "status": "active",
-    "canonicality": "unknown",
+    "canonicality": "native",
     "is_primary": true,
     "mint_authority_type": "protocol_vault_and_psm_mint",
-    "notes": "Polygon is recorded as the initial primary view because of the miMATIC origin; complete native and bridged canonicality remains unresolved.",
+    "notes": "Original Polygon MAI token, historically labeled miMATIC. The current official address registry continues to identify this Polygon address while listing additional chain representations. Cross-chain activity, bridge canonicality, and current fungibility remain separate review questions.",
     "evidence_ids": [
+      "sog_src_mai_launch_2021",
       "sog_src_mai_glossary_batch_m",
-      "sog_src_mai_contracts_batch_m"
+      "sog_src_mai_contracts_batch_m",
+      "sog_src_mai_v2_2022"
+    ],
+    "contract_version": "continuous_mimatic_mai_identity",
+    "control_event_ids": [
+      "sog_ev_mai_launch_batch_m",
+      "sog_ev_mai_v2_announcement_2022"
     ]
   },
   {

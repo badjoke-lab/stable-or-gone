@@ -46,14 +46,14 @@
     "stablecoin_id": "sog_st_mai",
     "issuer_id": "sog_issuer_qidao",
     "event_type": "launch",
-    "event_date": null,
-    "title": "QiDAO establishes the miMATIC and MAI stablecoin lineage",
-    "description": "QiDAO launched the stablecoin initially known as miMATIC and later continued it under the MAI name.",
-    "impact_level": "medium",
-    "confidence": "medium",
-    "source_count": 4,
+    "event_date": "2021-05-02",
+    "title": "QiDao publicly launches MAI borrowing on Polygon",
+    "description": "QiDao published an operational Polygon borrowing guide on May 2, 2021 showing users how to create vaults and borrow MAI, previously called miMATIC. SOG uses this first-party public-availability boundary as the canonical launch date.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 6,
     "event_status_effect": "active",
-    "notes": "The identity continuity is supported, while exact launch and rebrand dates remain unresolved."
+    "notes": "The exact earlier smart-contract deployment time and the exact miMATIC-to-MAI rename day are not inferred from this boundary."
   },
   {
     "id": "sog_ev_usdx_launch_batch_m",
@@ -85,5 +85,22 @@
     "recovery_date": null,
     "failure_mechanism": "not_applicable",
     "notes": "The same proxy address is retained. Component contracts and product mechanics changed, so V2 is not treated as a second asset launch."
+  },
+  {
+    "id": "sog_ev_mai_v2_announcement_2022",
+    "stablecoin_id": "sog_st_mai",
+    "issuer_id": "sog_issuer_qidao",
+    "event_type": "protocol_upgrade_announced",
+    "event_date": "2022-06-28",
+    "title": "QiDao introduces its V2 architecture",
+    "description": "QiDao introduced V2 with a new liquidation engine, risk-management process, chain-specific tailoring, and vault-deprecation tools. The announcement confirms that V1 began on Polygon in May 2021 but does not establish one exact V2 production activation transaction.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "version_transition_context",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "not_applicable",
+    "notes": "Recorded as a version announcement, not as a second stablecoin launch or an exact activation date."
   }
 ]

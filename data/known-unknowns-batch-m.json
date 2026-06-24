@@ -83,21 +83,21 @@
     "id": "sog_ku_mai_dates_batch_m",
     "stablecoin_id": "sog_st_mai",
     "issuer_id": "sog_issuer_qidao",
-    "topic": "launch_and_rebrand_dates",
-    "description": "Identity continuity from miMATIC to MAI is documented, but exact launch and rebrand dates are unresolved.",
+    "topic": "rename_and_v2_activation_dates",
+    "description": "The MAI public-availability launch is resolved to 2021-05-02. Official sources establish that MAI was previously called miMATIC and that V2 was introduced on 2022-06-28, but they do not establish one exact rename day or one exact V2 production activation transaction.",
     "severity": "medium",
-    "last_checked_at": "2026-06-22",
-    "notes": "Keep launch_date null."
+    "last_checked_at": "2026-06-24",
+    "notes": "Keep the launch date fixed. Do not invent a separate rebrand or V2 activation day without day-level first-party or on-chain evidence."
   },
   {
     "id": "sog_ku_mai_deployments_batch_m",
     "stablecoin_id": "sog_st_mai",
     "issuer_id": "sog_issuer_qidao",
-    "topic": "current_deployment_inventory",
-    "description": "The complete current native, bridged, and chain-specific MAI contract inventory is not normalized.",
+    "topic": "current_multichain_deployment_inventory_and_canonicality",
+    "description": "The original Polygon MAI token address is normalized. Official documentation lists many additional chain addresses, but current activity, native versus bridged status, bridge operators, paused fungibility, and retired deployments are not yet a complete reviewed inventory.",
     "severity": "high",
-    "last_checked_at": "2026-06-22",
-    "notes": "Do not infer canonicality from symbol reuse."
+    "last_checked_at": "2026-06-24",
+    "notes": "Do not infer canonicality or current support from symbol reuse or an address list alone."
   },
   {
     "id": "sog_ku_mai_lifecycle_batch_m",
