@@ -1,6 +1,9 @@
 name: CI
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
 
 jobs:
@@ -13,17 +16,37 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Capture batch finalization output
-        shell: bash
-        run: |
-          set +e
-          npm run validate:finalization > finalization-output.txt 2>&1
-          status=$?
-          cat finalization-output.txt
-          echo "exit_status=$status" >> finalization-output.txt
-          exit 0
-      - name: Upload batch finalization output
-        uses: actions/upload-artifact@v4
-        with:
-          name: finalization-output
-          path: finalization-output.txt
+      - name: Install dependencies
+        run: npm install
+      - name: Validate deployment policy
+        run: npm run validate:deployment-policy
+      - name: Validate baseline
+        run: npm run validate:baseline
+      - name: Validate unresolved launch-date queue
+        run: npm run validate:launch-queue
+      - name: Validate unresolved terminal-date queue
+        run: npm run validate:terminal-queue
+      - name: Validate candidates
+        run: npm run validate:candidates
+      - name: Validate data
+        run: npm run validate:data
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate classifications
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate events
+        run: npm run validate:events-v2
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+      - name: Validate final state
+        run: npm run validate:final
+      - name: Validate batch finalization
+        run: npm run validate:finalization
+      - name: Astro check
+        run: npm run check
+      - name: Build and verify
+        run: npm run build:site && npm run verify:deployment && npm run verify:public
