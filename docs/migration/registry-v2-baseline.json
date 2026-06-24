@@ -1,7 +1,7 @@
 {
-  "baseline_id": "sog_registry_v2_basis_cash_lineage_2026_06_24",
+  "baseline_id": "sog_registry_v2_cashio_launch_2026_06_24",
   "captured_at": "2026-06-24",
-  "source_commit": "basis-cash-lineage",
+  "source_commit": "cashio-launch",
   "minimum_counts": {
     "stablecoins": 81,
     "organizations": 70,
@@ -10,8 +10,8 @@
     "profiles": 81,
     "events": 126,
     "event_details": 126,
-    "evidence": 381,
-    "evidence_relations": 376,
+    "evidence": 382,
+    "evidence_relations": 377,
     "reserve_reports": 89,
     "known_unknowns": 197,
     "regulatory_notes": 9,

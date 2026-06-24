@@ -69,12 +69,16 @@
       "sog_issuer_cashio"
     ],
     "evidence_ids": [
-      "sog_src_cashio_repo_batch_k"
+      "sog_src_cashio_repo_batch_k",
+      "sog_src_cashio_public_launch_2021"
     ],
     "event_detail_kind": "launch",
     "launch_detail": {
-      "summary": "Solana protocol launch; exact date unresolved.",
-      "status": "launched"
+      "summary": "CASH became publicly mintable, redeemable, swappable, and usable in a live Solana CASH/USDC pool on 2021-11-09.",
+      "status": "public_product_launch",
+      "related_organization_ids": [
+        "sog_issuer_cashio"
+      ]
     }
   },
   {

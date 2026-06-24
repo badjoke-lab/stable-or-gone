@@ -514,5 +514,37 @@
       "bondroom"
     ],
     "notes": "Official announcement states that Basis Cash V2 would go live at 00:00 UTC on 2021-04-26. This is a later protocol-version event."
+  },
+  {
+    "id": "sog_src_cashio_public_launch_2021",
+    "stablecoin_id": "sog_st_cashio",
+    "issuer_id": "sog_issuer_cashio",
+    "event_id": "sog_ev_cashio_launch_batch_k",
+    "source_type": "official_ecosystem_announcement",
+    "title": "Saber Launches CASH / USDC Pool in Partnership with Cashio",
+    "url": "https://medium.com/@saberteam/saber-launches-cash-usdc-pool-in-partnership-with-cashio-9ef6671be4e6",
+    "publisher": "Saber Team",
+    "published_at": "2021-11-09",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/@saberteam/saber-launches-cash-usdc-pool-in-partnership-with-cashio-9ef6671be4e6",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "claim_scope": "public_launch_and_availability",
+    "stablecoin_ids": [
+      "sog_st_cashio"
+    ],
+    "organization_ids": [
+      "sog_issuer_cashio"
+    ],
+    "event_ids": [
+      "sog_ev_cashio_launch_batch_k"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "public_mint",
+      "redemption",
+      "liquidity_pool",
+      "swap_availability"
+    ],
+    "notes": "Saber’s dated partnership announcement states that the CASH/USDC pool was live and that users could mint and redeem through Cashio or swap CASH on Saber."
   }
 ]
