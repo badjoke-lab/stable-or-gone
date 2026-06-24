@@ -1,16 +1,16 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-24T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_fxusd_lineage_2026_06_24",
+  "baseline_id": "sog_registry_v2_mai_lineage_2026_06_24",
   "registry": {
     "stablecoins": 81,
     "organizations": 70,
     "relationships": 83,
     "classifications": 81,
     "profiles": 81,
-    "events": 122,
-    "event_details": 122,
-    "evidence": 372,
+    "events": 123,
+    "event_details": 123,
+    "evidence": 374,
     "reserve_reports": 89,
     "known_unknowns": 197,
     "regulatory_notes": 9,
@@ -280,8 +280,8 @@
       "share": 0.115
     },
     "deployments_unknown_canonicality": {
-      "count": 68,
-      "share": 0.5913
+      "count": 67,
+      "share": 0.5826
     }
   }
 }
