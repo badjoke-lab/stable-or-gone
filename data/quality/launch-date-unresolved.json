@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 25,
+  "expected_total": 24,
   "category_counts": {
     "B": 3,
-    "C": 19,
+    "C": 18,
     "D": 3
   },
   "records": [
@@ -22,13 +22,6 @@
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Ethereum contract deployment is fixed to 2024-07-07; first mint, approved access, and broad public availability remain unresolved."
-    },
-    {
-      "stablecoin_id": "sog_st_bac",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Deployment, distribution, epoch, and public launch conflict."
     },
     {
       "stablecoin_id": "sog_st_brz",

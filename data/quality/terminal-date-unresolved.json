@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-23",
+  "frozen_at": "2026-06-24",
   "source_review": "docs/audits/terminal-date-resolution-usdm-usdn.md",
   "policy": {
     "canonical_day_required": true,
@@ -17,11 +17,11 @@
       "canonical_status": "failed",
       "strongest_known_boundary": null,
       "boundary_type": "no_terminal_boundary_recovered",
-      "last_confirmed_activity": null,
+      "last_confirmed_activity": "2026-06-24 canonical BAC ERC-20 contract remains deployed and transferable",
       "first_confirmed_successor_or_inactive": null,
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "shutdown_source_absent",
-      "review_note": "First-party repository, documentation, and historical-site sources support identity and mechanism history but do not establish a shutdown, minting stop, redemption stop, or governance termination date.",
+      "review_note": "The original BAC launch is fixed to 2020-11-30 and V2 activation to 2021-04-26. No first-party shutdown, final mint stop, governance termination, redemption termination, or contract end state is recovered; continued transferability does not restore active protocol status.",
       "rejected_shortcuts": [
         "first_depeg_date",
         "price_low_date",
@@ -29,7 +29,7 @@
         "last_website_capture",
         "negligible_liquidity_date"
       ],
-      "future_review_target": "archived_first_party_shutdown_notice_or_contract_level_end_state"
+      "future_review_target": "official_shutdown_notice_final_mint_or_governance_disable_record_or_contract_level_end_state"
     },
     {
       "stablecoin_id": "sog_st_dsd",

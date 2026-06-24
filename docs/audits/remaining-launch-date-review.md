@@ -9,9 +9,9 @@ This document is the human-readable companion to `data/quality/launch-date-unres
 ## Current queue
 
 ```text
-Total unresolved: 25
+Total unresolved: 24
 Category B: 3
-Category C: 19
+Category C: 18
 Category D: 3
 ```
 
@@ -25,6 +25,7 @@ Category D: 3
 - fxUSD — public availability separated from announcement, seeding, and V2 upgrade.
 - MAI — Polygon public launch separated from rename and V2 activation.
 - Savings DAI — contract deployment on 2023-01-17 separated from public Spark availability on 2023-05-09.
+- Basis Cash — original public launch fixed to 2020-11-30 while V2 activation and unresolved terminal boundaries remain separate.
 
 USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C. Agora AUSD’s current Ethereum contract deployment is fixed to 2024-07-07 without treating deployment as public launch.
 
@@ -40,8 +41,7 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 
 | Stable asset | ID | Best known range | Reason |
 |---|---|---|---|
-| Agora Dollar | `sog_st_agoraausd` | — | Announcement, mint, deployment, and public availability conflict. |
-| Basis Cash | `sog_st_bac` | — | Deployment, distribution, epoch, and public launch conflict. |
+| Agora Dollar | `sog_st_agoraausd` | — | Ethereum contract deployment is fixed to 2024-07-07; first mint, approved access, and broad public availability remain unresolved. |
 | Cashio Dollar | `sog_st_cashio` | — | Deployment and public mint availability differ. |
 | DOLA | `sog_st_dola` | — | First mint, release, and FiRM issuance differ. |
 | Dynamic Set Dollar | `sog_st_dsd` | — | Version, epoch, and distribution boundaries conflict. |
@@ -80,10 +80,10 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 
 ```text
 Original review scope: complete
-Current unresolved queue: 25
+Current unresolved queue: 24
 Category B: 3
-Category C: 19
+Category C: 18
 Category D: 3
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: Basis Cash
+Next bounded review: Cashio Dollar
 ```

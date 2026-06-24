@@ -1,7 +1,101 @@
 [
-{"id":"sog_dep_esd_ethereum_batch_k","stablecoin_id":"sog_st_esd","chain":"Ethereum","deployment_type":"historical_protocol_native_token","token_standard":"ERC-20","contract_address":null,"status":"inactive","canonicality":"legacy","is_primary":true,"mint_authority_type":"algorithmic_protocol_supply_control","notes":"Historical primary deployment; complete contract lineage remains unresolved.","evidence_ids":["sog_src_esd_audit_batch_k","sog_src_esd_repo_batch_k"]},
-{"id":"sog_dep_bac_ethereum_batch_k","stablecoin_id":"sog_st_bac","chain":"Ethereum","deployment_type":"historical_protocol_native_token","token_standard":"ERC-20","contract_address":null,"status":"inactive","canonicality":"legacy","is_primary":true,"mint_authority_type":"algorithmic_protocol_supply_control","notes":"Historical BAC deployment; BAB and BAS are related mechanism tokens.","evidence_ids":["sog_src_bac_repo_batch_k","sog_src_bac_docs_batch_k"]},
-{"id":"sog_dep_dsd_ethereum_batch_k","stablecoin_id":"sog_st_dsd","chain":"Ethereum","deployment_type":"historical_protocol_native_token","token_standard":"ERC-20","contract_address":null,"status":"inactive","canonicality":"legacy","is_primary":true,"mint_authority_type":"algorithmic_protocol_supply_control","notes":"Historical primary deployment; full v1/v2 map unresolved.","evidence_ids":["sog_src_dsd_faq_batch_k","sog_src_dsd_v2_batch_k"]},
-{"id":"sog_dep_cashio_solana_batch_k","stablecoin_id":"sog_st_cashio","chain":"Solana","deployment_type":"historical_protocol_native_token","token_standard":"SPL Token","contract_address":null,"status":"inactive","canonicality":"legacy","is_primary":true,"mint_authority_type":"protocol_collateralized_mint","notes":"Historical CASH mint; exact mint address remains for a contract normalization pass.","evidence_ids":["sog_src_cashio_repo_batch_k","sog_src_cashio_certik_batch_k"],"control_event_ids":["sog_ev_cashio_exploit_batch_k"]},
-{"id":"sog_dep_acalaausd_acala_batch_k","stablecoin_id":"sog_st_acalaausd","chain":"Acala","deployment_type":"protocol_native_asset","token_standard":"Substrate Asset / EVM mirror","contract_address":"0x0000000000000000000100000000000000000001","status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"governance_controlled_migrated_asset","notes":"Same asset registry entry transitioned from aUSD to aSEED; Karura counterpart is not normalized in this batch.","evidence_ids":["sog_src_acala_launch_batch_k","sog_src_acala_aseed_batch_k"],"control_event_ids":["sog_ev_acalaausd_aseed_migration_batch_k"]}
+  {
+    "id": "sog_dep_esd_ethereum_batch_k",
+    "stablecoin_id": "sog_st_esd",
+    "chain": "Ethereum",
+    "deployment_type": "historical_protocol_native_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "inactive",
+    "canonicality": "legacy",
+    "is_primary": true,
+    "mint_authority_type": "algorithmic_protocol_supply_control",
+    "notes": "Historical primary deployment; complete contract lineage remains unresolved.",
+    "evidence_ids": [
+      "sog_src_esd_audit_batch_k",
+      "sog_src_esd_repo_batch_k"
+    ]
+  },
+  {
+    "id": "sog_dep_bac_ethereum_batch_k",
+    "stablecoin_id": "sog_st_bac",
+    "chain": "Ethereum",
+    "deployment_type": "historical_protocol_native_token",
+    "token_standard": "ERC-20",
+    "contract_address": "0x3449fc1cd036255ba1eb19d65ff4ba2b8903a69a",
+    "status": "inactive",
+    "canonicality": "legacy",
+    "is_primary": true,
+    "mint_authority_type": "algorithmic_protocol_supply_control",
+    "notes": "Canonical historical BAC Ethereum token contract. The original public protocol launch is 2020-11-30 and the 2021-04-26 V2 activation is a separate protocol-version boundary. The deployment remains transferable, but the stablecoin system is classified failed and no exact contract termination is asserted.",
+    "evidence_ids": [
+      "sog_src_bac_repo_batch_k",
+      "sog_src_bac_docs_batch_k",
+      "sog_src_bac_distribution_guide_2020",
+      "sog_src_bac_contract_creation_2020",
+      "sog_src_bac_public_opening_2020",
+      "sog_src_bac_v2_launch_2021"
+    ],
+    "control_event_ids": [
+      "sog_ev_bac_2020_11_public_launch",
+      "sog_ev_bac_2021_04_v2_activation"
+    ]
+  },
+  {
+    "id": "sog_dep_dsd_ethereum_batch_k",
+    "stablecoin_id": "sog_st_dsd",
+    "chain": "Ethereum",
+    "deployment_type": "historical_protocol_native_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "inactive",
+    "canonicality": "legacy",
+    "is_primary": true,
+    "mint_authority_type": "algorithmic_protocol_supply_control",
+    "notes": "Historical primary deployment; full v1/v2 map unresolved.",
+    "evidence_ids": [
+      "sog_src_dsd_faq_batch_k",
+      "sog_src_dsd_v2_batch_k"
+    ]
+  },
+  {
+    "id": "sog_dep_cashio_solana_batch_k",
+    "stablecoin_id": "sog_st_cashio",
+    "chain": "Solana",
+    "deployment_type": "historical_protocol_native_token",
+    "token_standard": "SPL Token",
+    "contract_address": null,
+    "status": "inactive",
+    "canonicality": "legacy",
+    "is_primary": true,
+    "mint_authority_type": "protocol_collateralized_mint",
+    "notes": "Historical CASH mint; exact mint address remains for a contract normalization pass.",
+    "evidence_ids": [
+      "sog_src_cashio_repo_batch_k",
+      "sog_src_cashio_certik_batch_k"
+    ],
+    "control_event_ids": [
+      "sog_ev_cashio_exploit_batch_k"
+    ]
+  },
+  {
+    "id": "sog_dep_acalaausd_acala_batch_k",
+    "stablecoin_id": "sog_st_acalaausd",
+    "chain": "Acala",
+    "deployment_type": "protocol_native_asset",
+    "token_standard": "Substrate Asset / EVM mirror",
+    "contract_address": "0x0000000000000000000100000000000000000001",
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "governance_controlled_migrated_asset",
+    "notes": "Same asset registry entry transitioned from aUSD to aSEED; Karura counterpart is not normalized in this batch.",
+    "evidence_ids": [
+      "sog_src_acala_launch_batch_k",
+      "sog_src_acala_aseed_batch_k"
+    ],
+    "control_event_ids": [
+      "sog_ev_acalaausd_aseed_migration_batch_k"
+    ]
+  }
 ]
