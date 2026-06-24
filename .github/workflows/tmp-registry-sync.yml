@@ -24,8 +24,18 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: node scripts/tmp-sync-savings-dai-launch.mjs
       - name: Validate full repository
-        run: |
-          npm run build > /tmp/build.log 2>&1 || (tail -n 140 /tmp/build.log && false)
+        id: validation
+        continue-on-error: true
+        run: npm run build > build.log 2>&1
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: registry-sync-build-log
+          path: build.log
+      - name: Require successful validation
+        if: steps.validation.outcome != 'success'
+        run: false
       - name: Commit synchronized files
         run: |
           if git diff --quiet; then
