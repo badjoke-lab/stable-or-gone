@@ -30,27 +30,30 @@ Public site:
 https://sog.badjoke-lab.com/
 ```
 
-Latest merged checkpoint:
+Latest merged data checkpoint:
 
 ```text
-PR #103 — Record Category C lineage audit plan
-Merge: 8d2aa3b8bc27e67332e37ead057854bb5f56d304
+PR #109 — Resolve Nuon v1 and v2 lineage
+Merge: 732dd3719b64538ea96a041860be5aaaa1b86ce7
 ```
 
-Current quality work:
+Current quality checkpoint:
 
 ```text
-sUSD severe depeg and SIP-423 Vote Pending proposal
-Branch: record-susd-depeg-sip423
+Bounded Category C lineage pass: complete
+Completed records: EURA, lisUSD, sUSD, Nuon
+Audit: docs/audits/category-c-lineage-pass-2026-06-23.md
+Next bounded record: SPOT
 ```
 
 Recent merged quality work:
 
 ```text
-PR #98 — Resolve four Category B launch dates
-PR #99 — Resolve Mountain USDM and USDN terminal dates
-PR #100 — Resolve FEI reserve context
-PR #101 — Record 81-record quality checkpoint
+PR #104 — Record sUSD severe depeg and SIP-423 proposal
+PR #105 — Document EURA launch and rebrand
+PR #107 — Resolve lisUSD and HAY lineage
+PR #108 — Resolve sUSD launch lineage
+PR #109 — Resolve Nuon v1 and v2 lineage
 ```
 
 Current blocker:
@@ -80,13 +83,13 @@ Audit: docs/audits/registry-75-production-parity.md
 83 stablecoin-organization relationships
 81 classifications
 81 reserve/redemption profiles
-113 events
-113 Event v2 detail records
-346 evidence records
+119 events
+119 Event v2 detail records
+363 evidence records
 89 reserve-report or reserve-context records
-199 known unknowns
+198 known unknowns
 9 regulatory notes
-113 deployments
+114 deployments
 81 legal profiles
 4 stable-asset relationships
 113 reserve components
@@ -111,7 +114,7 @@ Required-layer coverage:              81 / 81
 Event coverage:                        81 / 81
 Deployment coverage:                   81 / 81
 Reserve-report context coverage:       69 / 81 informational
-Missing canonical launch dates:            33
+Missing canonical launch dates:            29
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -125,9 +128,9 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved: 33
+Total unresolved: 29
 Category B:         3
-Category C:        27
+Category C:        23
 Category D:         3
 ```
 
@@ -139,13 +142,22 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Avalon USDa leaves the queue with a canonical launch date of 2024-11-07, supported by Avalon's dated first-party introduction and documented public access routes.
+Completed bounded Category C records:
+
+```text
+EURA   — agEUR launch separated from EURA rebrand
+lisUSD — HAY launch separated from lisUSD rebrand
+sUSD   — eUSD predecessor separated from nUSD launch and sUSD rebrand
+Nuon   — Arbitrum v1 launch separated from Base v2 relaunch
+```
 
 Policy:
 
 - require day-level primary evidence
 - do not coerce month or year into a canonical date
 - do not use exchange listings as the default launch boundary
+- do not substitute a rebrand or later protocol version for the original launch
+- preserve predecessor, legacy deployment, and unresolved migration boundaries explicitly
 - keep `launch_date: null` when the exact public boundary remains unresolved
 
 ### Terminal-date queue
@@ -169,8 +181,6 @@ Source status unresolved:      2
 Expected but missing:          0
 ```
 
-The ten `not_applicable_by_design` records are reviewed and retained with evidence-backed protocol-specific reasons.
-
 Remaining source-status unresolved records:
 
 ```text
@@ -178,17 +188,16 @@ HUSD — original signed historical attestation not recovered
 EURT — product-specific reserve scope not recovered from consolidated Tether reporting
 ```
 
-FEI left the unresolved queue in PR #100 after recovery of the executed TIP-121c historical redemption and DAI-backing package. Current redemption availability, universal holder completion, and completion of every residual PCV distribution remain separate known unknowns.
-
 ## Immediate next work
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Complete and merge PR #102 after all standard workflows pass.
-3. Freeze BRZ, HONEY, and USDz as reviewed Category B unresolved records; do not repeat the same source search without new primary evidence.
-4. Select a small high-value Category C boundary-conflict audit rather than attempting all 27 records at once.
-5. Keep the launch-date queue, generated outputs, integrity audit, Registry v3 baseline, README checkpoint, and roadmap synchronized in every quality PR.
-6. When Cloudflare access returns, publish the latest merged main checkpoint manually and verify production parity before controlled record growth resumes.
+2. Merge the Category C lineage checkpoint after standard workflows pass.
+3. Audit SPOT as the next bounded Category C version-boundary record.
+4. For SPOT, separate original launch, v1-to-v2 rollout, token and bond contracts, and collateral-rotation history.
+5. Assign no SPOT launch date without a day-level first-party production boundary.
+6. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
+7. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 
 ## Production policy
@@ -235,38 +244,6 @@ Normal pull requests and normal merges must not invoke the production deployment
 
 Controlled record growth remains paused while the public site is behind the canonical GitHub baseline.
 
-The emergency addition of MainStreet msUSD created the 81-record checkpoint after the earlier 80-record publication gate was already pending. No further routine growth batch begins until a manual publication and parity audit can be completed from the latest merged `main`.
+No further routine growth batch begins until a manual publication and parity audit can be completed from the latest merged `main`.
 
 Quality corrections, evidence improvements, date resolution, queue maintenance, schema validation, and generated-output synchronization may continue without Cloudflare access.
-
-## Completed checkpoints
-
-```text
-PR #74 — Freeze unresolved launch-date queue
-PR #75 — Audit historical terminal-date boundaries
-PR #77 — Freeze historical terminal-date queue
-PR #78 — Resolve fiat-backed income profiles
-PR #79 — Resolve protocol stable-asset mechanics
-PR #80 — Complete income-profile classification
-PR #81 — Classify reserve-report applicability
-PR #82 — Add Phase 4 reserve context records
-PR #83 — Freeze reviewed reserve source status
-PR #84 — Establish the 70-record quality baseline
-PR #85 — Prepare Batch 12 candidate intake
-PR #86 — Review Batch 12 promotion boundaries
-PR #87 — Promote Batch L current stable assets
-PR #89 — Record 75-record production parity
-PR #90 — Finalize manual Cloudflare publication controls
-PR #91 — Prepare Batch 13 candidate intake
-PR #92 — Review Batch 13 promotion boundaries
-PR #93 — Promote Batch M stable assets
-PR #95 — Recover Falcon USDf launch date
-PR #96 — Record PR #95 merge checkpoint
-PR #97 — Add MainStreet msUSD impaired incident
-PR #98 — Resolve four Category B launch dates
-PR #99 — Resolve Mountain USDM and USDN terminal dates
-PR #100 — Resolve FEI reserve context
-PR #101 — Record 81-record quality checkpoint
-75-record production parity — PASS
-Manual production publication activation — PASS
-```
