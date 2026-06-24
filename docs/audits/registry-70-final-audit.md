@@ -1,7 +1,7 @@
 # SOG 80-Record Final Registry Audit
 
 - Audited at: 2026-06-24
-- Baseline: `sog_registry_v2_sdai_launch_2026_06_24`
+- Baseline: `sog_registry_v2_agora_ausd_deployment_2026_06_24`
 - Canonical stable assets: **81**
 - Promoted candidates: **81 / 81**
 - Critical findings: **0**
@@ -28,7 +28,7 @@
 | profiles | 81 |
 | events | 124 |
 | event_details | 124 |
-| evidence | 376 |
+| evidence | 377 |
 | reserve_reports | 89 |
 | known_unknowns | 197 |
 | regulatory_notes | 9 |

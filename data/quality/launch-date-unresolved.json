@@ -21,7 +21,7 @@
       "category": "C",
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
-      "review_note": "Announcement, mint, deployment, and public availability conflict."
+      "review_note": "Ethereum contract deployment is fixed to 2024-07-07; first mint, approved access, and broad public availability remain unresolved."
     },
     {
       "stablecoin_id": "sog_st_bac",

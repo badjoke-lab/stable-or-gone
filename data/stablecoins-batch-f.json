@@ -25,8 +25,8 @@
     "discontinued_date": null,
     "summary": "USD-referenced stablecoin issued by Agora Bermuda Limited and backed by cash, overnight repo or reverse-repo positions, and short-term U.S. Treasury securities.",
     "confidence": "high",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch F promotion. Exact day-level initial launch date remains unresolved; network-specific issuance is tracked separately."
+    "last_verified_at": "2026-06-24",
+    "notes": "Batch F promotion. The current Ethereum production contract was deployed on 2024-07-07, but exact first production mint, approved-customer access, and broad public availability remain unresolved. Network-specific issuance is tracked separately and launch_date remains null."
   },
   {
     "id": "sog_st_usd1",

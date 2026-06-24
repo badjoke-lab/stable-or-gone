@@ -1,7 +1,7 @@
 {
-  "baseline_id": "sog_registry_v2_sdai_launch_2026_06_24",
+  "baseline_id": "sog_registry_v2_agora_ausd_deployment_2026_06_24",
   "captured_at": "2026-06-24",
-  "source_commit": "sdai-launch",
+  "source_commit": "agora-ausd-deployment",
   "minimum_counts": {
     "stablecoins": 81,
     "organizations": 70,
@@ -10,8 +10,8 @@
     "profiles": 81,
     "events": 124,
     "event_details": 124,
-    "evidence": 376,
-    "evidence_relations": 371,
+    "evidence": 377,
+    "evidence_relations": 372,
     "reserve_reports": 89,
     "known_unknowns": 197,
     "regulatory_notes": 9,

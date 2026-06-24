@@ -1,12 +1,102 @@
 [
-  {"id":"sog_ku_agoraausd_launch_date_batch_f","stablecoin_id":"sog_st_agoraausd","issuer_id":"sog_issuer_agora_bermuda","topic":"exact_launch_date","description":"The current official evidence establishes the product and reserve framework but does not provide a durable day-level initial AUSD launch date.","severity":"low","last_checked_at":"2026-06-15","notes":"Preserve launch_date as null until an authoritative dated source is added."},
-  {"id":"sog_ku_agoraausd_network_map_batch_f","stablecoin_id":"sog_st_agoraausd","issuer_id":"sog_issuer_agora_bermuda","topic":"network_and_contract_map","description":"AUSD operates across multiple networks, but a versioned list of every native, OFT, bridge, and winding-down deployment is not yet normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Injective wind-down and LayerZero migration require deployment-level follow-up."},
-  {"id":"sog_ku_usd1_launch_date_batch_f","stablecoin_id":"sog_st_usd1","issuer_id":"sog_issuer_bitgo","topic":"exact_launch_date","description":"USD1 is documented as a 2025 launch, but the current official evidence set does not fix one day-level launch date across announcement, minting, and trading milestones.","severity":"low","last_checked_at":"2026-06-15","notes":"Keep the event date null pending an authoritative chronology decision."},
-  {"id":"sog_ku_usd1_reserve_breakdown_batch_f","stablecoin_id":"sog_st_usd1","issuer_id":"sog_issuer_bitgo","topic":"reserve_component_percentages","description":"The permitted reserve categories are public, but a normalized current percentage allocation by category is not fixed in this record.","severity":"medium","last_checked_at":"2026-06-15","notes":"Use monthly attestations for future component-level percentages."},
-  {"id":"sog_ku_usdtb_legal_claim_batch_f","stablecoin_id":"sog_st_usdtb","issuer_id":"sog_issuer_ethena_labs","topic":"legal_claim_and_issuer_structure","description":"Current public documentation explains backing and product operation but does not fully resolve the token holder's legal claim, reserve ownership, and all issuing or service entities.","severity":"high","last_checked_at":"2026-06-15","notes":"Legal profile remains conservative until terms specific to USDtb are normalized."},
-  {"id":"sog_ku_usdtb_direct_access_batch_f","stablecoin_id":"sog_st_usdtb","issuer_id":"sog_issuer_ethena_labs","topic":"direct_mint_and_redemption_access","description":"The exact current list of approved creation and redemption counterparties, minimums, fees, and settlement routes is not fully public in one durable source.","severity":"medium","last_checked_at":"2026-06-15","notes":"General holders should not be represented as having unrestricted issuer redemption."},
-  {"id":"sog_ku_mountainusdm_final_termination_batch_f","stablecoin_id":"sog_st_mountainusdm","issuer_id":"sog_issuer_mountain_protocol","topic":"final_termination_date","description":"USDM is in Phase 3 wind-down, but a final date on which all token, reserve, wrapping, or exit functionality ends is not fixed.","severity":"high","last_checked_at":"2026-06-15","notes":"Keep lifecycle_status winding_down rather than terminated."},
-  {"id":"sog_ku_mountainusdm_rebase_state_batch_f","stablecoin_id":"sog_st_mountainusdm","issuer_id":"sog_issuer_mountain_protocol","topic":"phase3_rebase_and_wrapper_state","description":"The exact continuing behavior of USDM rebases and wUSDM conversion across all Phase 3 contracts requires on-chain verification.","severity":"medium","last_checked_at":"2026-06-15","notes":"Income mechanics are recorded from the product design with a wind-down caveat."},
-  {"id":"sog_ku_usdq_crosschain_map_batch_f","stablecoin_id":"sog_st_usdq","issuer_id":"sog_issuer_quantoz_payments","topic":"crosschain_contract_map","description":"Official sources identify Ethereum and XRPL issuance and broader cross-chain expansion, but all canonical, bridged, and LayerZero representations are not yet normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Initial deployment records cover verified issuer-native representations only."},
-  {"id":"sog_ku_usdq_reserve_percentages_batch_f","stablecoin_id":"sog_st_usdq","issuer_id":"sog_issuer_quantoz_payments","topic":"reserve_component_percentages","description":"Quantoz discloses the reserve categories and aggregate transparency, but this record does not yet contain current percentages split between cash and government securities.","severity":"low","last_checked_at":"2026-06-15","notes":"Future dashboard snapshots may support percentage-level components."}
+  {
+    "id": "sog_ku_agoraausd_launch_date_batch_f",
+    "stablecoin_id": "sog_st_agoraausd",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "topic": "exact_launch_date",
+    "description": "The current Ethereum production contract was created on 2024-07-07, but the first production mint, approved-customer access, and broad public-availability day remain unresolved.",
+    "severity": "low",
+    "last_checked_at": "2026-06-24",
+    "notes": "Preserve launch_date as null. Do not substitute contract creation or a later network launch for the original public boundary."
+  },
+  {
+    "id": "sog_ku_agoraausd_network_map_batch_f",
+    "stablecoin_id": "sog_st_agoraausd",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "topic": "network_and_contract_map",
+    "description": "AUSD operates across multiple networks, but a versioned list of every native, OFT, bridge, and winding-down deployment is not yet normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-24",
+    "notes": "Ethereum is normalized to the official current address. Solana, Avalanche, Sui, Injective, LayerZero, native, bridged, and winding-down representations still require deployment-level normalization."
+  },
+  {
+    "id": "sog_ku_usd1_launch_date_batch_f",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "topic": "exact_launch_date",
+    "description": "USD1 is documented as a 2025 launch, but the current official evidence set does not fix one day-level launch date across announcement, minting, and trading milestones.",
+    "severity": "low",
+    "last_checked_at": "2026-06-15",
+    "notes": "Keep the event date null pending an authoritative chronology decision."
+  },
+  {
+    "id": "sog_ku_usd1_reserve_breakdown_batch_f",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "topic": "reserve_component_percentages",
+    "description": "The permitted reserve categories are public, but a normalized current percentage allocation by category is not fixed in this record.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Use monthly attestations for future component-level percentages."
+  },
+  {
+    "id": "sog_ku_usdtb_legal_claim_batch_f",
+    "stablecoin_id": "sog_st_usdtb",
+    "issuer_id": "sog_issuer_ethena_labs",
+    "topic": "legal_claim_and_issuer_structure",
+    "description": "Current public documentation explains backing and product operation but does not fully resolve the token holder's legal claim, reserve ownership, and all issuing or service entities.",
+    "severity": "high",
+    "last_checked_at": "2026-06-15",
+    "notes": "Legal profile remains conservative until terms specific to USDtb are normalized."
+  },
+  {
+    "id": "sog_ku_usdtb_direct_access_batch_f",
+    "stablecoin_id": "sog_st_usdtb",
+    "issuer_id": "sog_issuer_ethena_labs",
+    "topic": "direct_mint_and_redemption_access",
+    "description": "The exact current list of approved creation and redemption counterparties, minimums, fees, and settlement routes is not fully public in one durable source.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "General holders should not be represented as having unrestricted issuer redemption."
+  },
+  {
+    "id": "sog_ku_mountainusdm_final_termination_batch_f",
+    "stablecoin_id": "sog_st_mountainusdm",
+    "issuer_id": "sog_issuer_mountain_protocol",
+    "topic": "final_termination_date",
+    "description": "USDM is in Phase 3 wind-down, but a final date on which all token, reserve, wrapping, or exit functionality ends is not fixed.",
+    "severity": "high",
+    "last_checked_at": "2026-06-15",
+    "notes": "Keep lifecycle_status winding_down rather than terminated."
+  },
+  {
+    "id": "sog_ku_mountainusdm_rebase_state_batch_f",
+    "stablecoin_id": "sog_st_mountainusdm",
+    "issuer_id": "sog_issuer_mountain_protocol",
+    "topic": "phase3_rebase_and_wrapper_state",
+    "description": "The exact continuing behavior of USDM rebases and wUSDM conversion across all Phase 3 contracts requires on-chain verification.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Income mechanics are recorded from the product design with a wind-down caveat."
+  },
+  {
+    "id": "sog_ku_usdq_crosschain_map_batch_f",
+    "stablecoin_id": "sog_st_usdq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "crosschain_contract_map",
+    "description": "Official sources identify Ethereum and XRPL issuance and broader cross-chain expansion, but all canonical, bridged, and LayerZero representations are not yet normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Initial deployment records cover verified issuer-native representations only."
+  },
+  {
+    "id": "sog_ku_usdq_reserve_percentages_batch_f",
+    "stablecoin_id": "sog_st_usdq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "reserve_component_percentages",
+    "description": "Quantoz discloses the reserve categories and aggregate transparency, but this record does not yet contain current percentages split between cash and government securities.",
+    "severity": "low",
+    "last_checked_at": "2026-06-15",
+    "notes": "Future dashboard snapshots may support percentage-level components."
+  }
 ]
