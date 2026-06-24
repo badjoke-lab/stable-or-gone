@@ -32,3 +32,7 @@ The original Polygon MAI token address is normalized as the primary native deplo
 ## Remaining unknowns
 
 The exact rename day, exact V2 activation transaction, and complete current native-versus-bridged deployment map remain unresolved.
+
+## Validation
+
+The one-time update pipeline passed baseline, launch queue, terminal queue, candidate, data, compatibility, classification, profile, Event v2, evidence relation, deployment, Registry v3, final-state, finalization, Astro, site-build, deployment verification, and public verification checks before committing the canonical result. Temporary scripts and workflow files were removed from the final branch.
