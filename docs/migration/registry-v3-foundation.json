@@ -54,9 +54,9 @@
     ]
   },
   "minimum_counts": {
-    "legal_profiles": 81,
+    "legal_profiles": 82,
     "stable_asset_relationships": 4,
-    "reserve_components": 113
+    "reserve_components": 115
   },
   "loader": "src/lib/data/registryV3.ts",
   "validator": "scripts/validate-registry-v3-foundation.mjs"
