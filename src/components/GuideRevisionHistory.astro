@@ -1,0 +1,27 @@
+---
+import type { GuideRevision } from '../data/guideCatalog';
+
+interface Props {
+  revisions: GuideRevision[];
+}
+
+const { revisions } = Astro.props;
+---
+{revisions.length > 0 && (
+  <section class="panel registry" aria-labelledby="revision-history-title">
+    <div class="bar" id="revision-history-title">Revision history</div>
+    <table>
+      <thead>
+        <tr><th>Date</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        {revisions.map((revision) => (
+          <tr>
+            <td>{revision.date}</td>
+            <td><strong>{revision.kind === 'correction' ? 'Correction: ' : ''}</strong>{revision.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+)}
