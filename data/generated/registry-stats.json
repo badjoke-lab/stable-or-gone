@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-24T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_sdai_launch_2026_06_24",
+  "baseline_id": "sog_registry_v2_agora_ausd_deployment_2026_06_24",
   "registry": {
     "stablecoins": 81,
     "organizations": 70,
@@ -10,7 +10,7 @@
     "profiles": 81,
     "events": 124,
     "event_details": 124,
-    "evidence": 376,
+    "evidence": 377,
     "reserve_reports": 89,
     "known_unknowns": 197,
     "regulatory_notes": 9,

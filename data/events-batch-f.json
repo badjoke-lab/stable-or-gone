@@ -9,9 +9,9 @@
     "description": "Agora introduced AUSD as a USD-referenced stablecoin backed by its segregated reserve framework.",
     "impact_level": "medium",
     "confidence": "high",
-    "source_count": 3,
+    "source_count": 4,
     "event_status_effect": "active",
-    "notes": "Exact day-level launch date remains unresolved."
+    "notes": "Exact day-level public launch remains unresolved. The current Ethereum production contract was created on 2024-07-07, which is recorded as a deployment boundary rather than a canonical public-launch date."
   },
   {
     "id": "sog_ev_usd1_2025_launch",

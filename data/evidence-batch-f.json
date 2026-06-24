@@ -510,5 +510,36 @@
       "product_identity"
     ],
     "notes": "Mountain Protocol states that it publicly launched the protocol and USDM on the publication date."
+  },
+  {
+    "id": "sog_src_agoraausd_ethereum_deployment_2024",
+    "stablecoin_id": "sog_st_agoraausd",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "event_id": "sog_ev_agoraausd_launch",
+    "source_type": "onchain_explorer",
+    "title": "Agora AUSD Ethereum contract creation",
+    "url": "https://etherscan.io/tx/0xa892144a2bdb59bf3598e9e879c3863658bba90688de211bc538c38e6c3a6ed5",
+    "publisher": "Etherscan",
+    "published_at": "2024-07-07",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/tx/0xa892144a2bdb59bf3598e9e879c3863658bba90688de211bc538c38e6c3a6ed5",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "claim_scope": "contract_deployment_before_public_launch",
+    "stablecoin_ids": [
+      "sog_st_agoraausd"
+    ],
+    "organization_ids": [
+      "sog_issuer_agora_bermuda"
+    ],
+    "event_ids": [
+      "sog_ev_agoraausd_launch"
+    ],
+    "claim_scopes": [
+      "ethereum_deployment",
+      "contract_address",
+      "deployment_date",
+      "prelaunch_boundary"
+    ],
+    "notes": "The transaction created the current canonical Ethereum AUSD token contract at 2024-07-07 22:28:59 UTC. Contract creation is not treated as proof of the original public-launch day."
   }
 ]

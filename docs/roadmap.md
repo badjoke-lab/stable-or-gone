@@ -33,16 +33,16 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #120 — Audit Savings DAI launch boundary
-Merge: 9a0e33136002ecdf32284a8b85fa6d24c5514131
+PR #122 — Audit Agora AUSD launch boundary
+Merge: fa4742eed871f9fb82a5573501ca7a88a8c73943
 ```
 
 Current quality position:
 
 ```text
 No open canonical quality PR
-Latest resolved record: Savings DAI
-Next bounded record: Agora AUSD
+Latest reviewed record: Agora AUSD
+Next bounded record: Basis Cash
 ```
 
 Recent lineage and incident work:
@@ -60,6 +60,7 @@ PR #114 — Resolve MAI and miMATIC launch lineage
 PR #116 — Audit Stables Labs USDX launch boundary
 PR #118 — Audit Ethena product activation boundary
 PR #120 — Audit Savings DAI launch boundary
+PR #122 — Audit Agora AUSD launch boundary
 ```
 
 Current blocker:
@@ -81,7 +82,7 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry after Savings DAI launch resolution
+## Current canonical registry after Agora AUSD deployment normalization
 
 ```text
 81 stable assets
@@ -91,7 +92,7 @@ Audit: docs/audits/registry-75-production-parity.md
 81 reserve/redemption profiles
 124 events
 124 Event v2 detail records
-376 evidence records
+377 evidence records
 89 reserve-report or reserve-context records
 197 known unknowns
 9 regulatory notes
@@ -162,6 +163,7 @@ MAI    — Polygon public launch fixed while rename and V2 activation remain unr
 USDX   — Ethereum production contracts fixed to 2024-03-18 while public launch and approved-access boundaries remain unresolved
 sUSDe  — current contract deployment fixed to 2023-11-14 while stealth activity, public mainnet, staking access, and reward payout remain separate unresolved boundaries
 sDAI   — Ethereum contract deployment fixed to 2023-01-17 and public Spark availability fixed to 2023-05-09
+AUSD   — Ethereum production contract fixed to 2024-07-07 while first mint, approved access, and public launch remain unresolved
 ```
 
 Policy:
@@ -205,10 +207,10 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Audit Agora AUSD as the next bounded Category C launch-boundary record.
-3. Separate announcement, first mint, first network deployment, institutional access, and broad public availability.
-4. Assign no AUSD launch date without day-level first-party or on-chain evidence for the selected public boundary.
-5. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
+2. Audit Basis Cash as the next bounded Category C launch and terminal-lineage record.
+3. Separate deployment, first distribution, epoch activation, public availability, peg failure, and practical cessation boundaries.
+4. Assign no BAC launch or terminal date without day-level primary or on-chain evidence for the selected boundary.
+5. Keep launch and terminal queues, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
 6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 

@@ -26,7 +26,7 @@ Category D: 3
 - MAI — Polygon public launch separated from rename and V2 activation.
 - Savings DAI — contract deployment on 2023-01-17 separated from public Spark availability on 2023-05-09.
 
-USDX and sUSDe have also completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C.
+USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C. Agora AUSD’s current Ethereum contract deployment is fixed to 2024-07-07 without treating deployment as public launch.
 
 ## Category B — partial date only
 
@@ -85,5 +85,5 @@ Category B: 3
 Category C: 19
 Category D: 3
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: Agora AUSD
+Next bounded review: Basis Cash
 ```

@@ -11,11 +11,12 @@
     "evidence_ids": [
       "sog_src_agoraausd_product_batch_f",
       "sog_src_agoraausd_terms_batch_f",
-      "sog_src_agoraausd_transparency_batch_f"
+      "sog_src_agoraausd_transparency_batch_f",
+      "sog_src_agoraausd_ethereum_deployment_2024"
     ],
     "event_detail_kind": "launch",
     "launch_detail": {
-      "summary": "AUSD entered the market under Agora Bermuda's reserve-backed issuer framework.",
+      "summary": "AUSD entered production under Agora Bermuda’s reserve-backed issuer framework; the 2024-07-07 Ethereum contract deployment is known while the exact original public-launch boundary remains unresolved.",
       "status": "active",
       "related_organization_ids": [
         "sog_issuer_agora_bermuda"
