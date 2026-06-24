@@ -33,19 +33,20 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #126 — Audit Cashio Dollar launch boundary
-Merge: 019f14e14928cffc0651670f2bb7cd8e9ab6c7fb
+PR #127 — Resolve Cashio Dollar launch boundary
+Merge: 82ebe1857c26d09538dd17138694e45314b38531
 ```
 
-Current quality position:
+Current implementation checkpoint:
 
 ```text
-PR #128 open — JPYSC launch and RLUSD Japan handling
-Latest resolved record: Cashio Dollar
+PR #128 — JPYSC launch and RLUSD Japan handling
+Status: in review
+Canonical branch count: 82 stable assets
 Next planned work after PR #128: dated Guides foundation and GENIUS Act article
 ```
 
-Recent lineage and incident work:
+Recent lineage, incident, and launch work:
 
 ```text
 PR #104 — Record sUSD severe depeg and SIP-423 proposal
@@ -65,17 +66,19 @@ PR #123 — Normalize Agora AUSD Ethereum deployment
 PR #124 — Audit Basis Cash launch and terminal boundaries
 PR #125 — Resolve Basis Cash launch lineage
 PR #126 — Audit Cashio Dollar launch boundary
+PR #127 — Resolve Cashio Dollar launch boundary
+PR #128 — Add JPYSC and Japan stablecoin events
 ```
 
 Current blocker:
 
 ```text
-82-record GitHub canonical baseline: complete
-81-record production publication: pending
-81-record production parity: pending
+82-record GitHub canonical baseline: complete on PR #128 branch
+82-record production publication: pending
+82-record production parity: pending
 Cloudflare access: unavailable
 Controlled record growth: paused until production parity can be restored
-GitHub-only quality work: active
+GitHub-only quality and guide work: active
 ```
 
 Latest verified production checkpoint:
@@ -92,7 +95,7 @@ Audit: docs/audits/registry-75-production-parity.md
 82 stable assets
 73 organizations
 86 stablecoin-organization relationships
-81 classifications
+82 classifications
 82 reserve/redemption profiles
 128 events
 128 Event v2 detail records
@@ -116,16 +119,16 @@ docs/migration/registry-v3-baseline.json
 ## Current quality baseline
 
 ```text
-Candidate promotions:                    81 / 81 controlled
+Candidate promotions:                    82 / 82 controlled
 Pending candidates:                       0
 Critical findings:                        0
 Blocking warnings:                        0
 Integrity audit warnings:                  3 non-blocking source-count mismatches
 Stale verification records:               0
-Required-layer coverage:              81 / 81
-Event coverage:                        81 / 81
-Deployment coverage:                   81 / 81
-Reserve-report context coverage:       69 / 81 informational
+Required-layer coverage:              82 / 82
+Event coverage:                        82 / 82
+Deployment coverage:                   82 / 82
+Reserve-report context coverage:       70 / 82 informational
 Missing canonical launch dates:            23
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
@@ -170,6 +173,7 @@ sDAI   — Ethereum contract deployment fixed to 2023-01-17 and public Spark ava
 AUSD   — Ethereum production contract fixed to 2024-07-07 while first mint, approved access, and public launch remain unresolved
 BAC    — original public launch fixed to 2020-11-30; V2 activation fixed to 2021-04-26; terminal date remains unresolved
 CASH   — public mint, redemption, liquidity, and swap availability fixed to 2021-11-09; exact Solana mint remains unresolved
+JPYSC  — restricted account-internal launch fixed to 2026-06-24; external transfer and public-chain circulation remain unresolved
 ```
 
 Policy:
@@ -213,11 +217,12 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Complete PR #128 with synchronized JPYSC and RLUSD Japan event data, generated outputs, baselines, README, and roadmap.
+2. Complete and merge PR #128 with synchronized JPYSC and RLUSD Japan event data, generated outputs, baselines, README, and roadmap.
 3. After PR #128 merges, implement the dated Guides foundation and publish the GENIUS Act article as the next PR.
 4. Follow with the MiCA article, then the JPYC versus JPYSC comparison article.
-5. Keep article publication dates unset until the pages are actually live in production; use information-current-through dates during GitHub-only work.
-6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
+5. Finish with a site-wide guide integration PR covering homepage links, related guides, Updates, metadata, sitemap, and validation.
+6. Keep article publication dates unset until the pages are actually live in production; use information-current-through dates during GitHub-only work.
+7. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 
 ## Production policy
@@ -266,4 +271,4 @@ Controlled record growth remains paused while the public site is behind the cano
 
 No further routine growth batch begins until a manual publication and parity audit can be completed from the latest merged `main`.
 
-Quality corrections, evidence improvements, date resolution, queue maintenance, schema validation, and generated-output synchronization may continue without Cloudflare access.
+Quality corrections, evidence improvements, date resolution, queue maintenance, schema validation, guide work, and generated-output synchronization may continue without Cloudflare access.
