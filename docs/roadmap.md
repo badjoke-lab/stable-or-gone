@@ -33,16 +33,16 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #118 — Audit Ethena product activation boundary
-Merge: e5f6906b05da7a98173ddebd257248e1461bd714
+PR #120 — Audit Savings DAI launch boundary
+Merge: 9a0e33136002ecdf32284a8b85fa6d24c5514131
 ```
 
 Current quality position:
 
 ```text
 No open canonical quality PR
-Latest reviewed record: Staked USDe
-Next bounded record: Savings DAI
+Latest resolved record: Savings DAI
+Next bounded record: Agora AUSD
 ```
 
 Recent lineage and incident work:
@@ -59,6 +59,7 @@ PR #113 — Resolve fxUSD launch and V2 lineage
 PR #114 — Resolve MAI and miMATIC launch lineage
 PR #116 — Audit Stables Labs USDX launch boundary
 PR #118 — Audit Ethena product activation boundary
+PR #120 — Audit Savings DAI launch boundary
 ```
 
 Current blocker:
@@ -80,7 +81,7 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry after MAI change
+## Current canonical registry after Savings DAI launch resolution
 
 ```text
 81 stable assets
@@ -88,9 +89,9 @@ Audit: docs/audits/registry-75-production-parity.md
 83 stablecoin-organization relationships
 81 classifications
 81 reserve/redemption profiles
-123 events
-123 Event v2 detail records
-374 evidence records
+124 events
+124 Event v2 detail records
+376 evidence records
 89 reserve-report or reserve-context records
 197 known unknowns
 9 regulatory notes
@@ -113,13 +114,14 @@ docs/migration/registry-v3-baseline.json
 Candidate promotions:                    81 / 81 controlled
 Pending candidates:                       0
 Critical findings:                        0
-Warnings:                                 0
+Blocking warnings:                        0
+Integrity audit warnings:                  3 non-blocking source-count mismatches
 Stale verification records:               0
 Required-layer coverage:              81 / 81
 Event coverage:                        81 / 81
 Deployment coverage:                   81 / 81
 Reserve-report context coverage:       69 / 81 informational
-Missing canonical launch dates:            26
+Missing canonical launch dates:            25
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -133,9 +135,9 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved: 26
+Total unresolved: 25
 Category B:         3
-Category C:        20
+Category C:        19
 Category D:         3
 ```
 
@@ -159,6 +161,7 @@ fxUSD  — public availability separated from announcement, seeding, and same-pr
 MAI    — Polygon public launch fixed while rename and V2 activation remain unresolved
 USDX   — Ethereum production contracts fixed to 2024-03-18 while public launch and approved-access boundaries remain unresolved
 sUSDe  — current contract deployment fixed to 2023-11-14 while stealth activity, public mainnet, staking access, and reward payout remain separate unresolved boundaries
+sDAI   — Ethereum contract deployment fixed to 2023-01-17 and public Spark availability fixed to 2023-05-09
 ```
 
 Policy:
@@ -202,9 +205,9 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Audit Savings DAI as the next bounded Category C product-activation record.
-3. Separate the underlying DAI savings-rate history, Savings DAI contract deployment, public vault activation, interface availability, and later Sky / sUSDS transition.
-4. Assign no Savings DAI launch date without day-level first-party or on-chain production evidence for the vault product itself.
+2. Audit Agora AUSD as the next bounded Category C launch-boundary record.
+3. Separate announcement, first mint, first network deployment, institutional access, and broad public availability.
+4. Assign no AUSD launch date without day-level first-party or on-chain evidence for the selected public boundary.
 5. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
 6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```

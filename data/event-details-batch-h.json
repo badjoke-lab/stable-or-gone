@@ -133,5 +133,31 @@
         "sog_issuer_makerdao_sky"
       ]
     }
+  },
+  {
+    "id": "sog_ev_sdai_2023_05_launch",
+    "title": "Savings DAI becomes publicly available through Spark Protocol",
+    "subject_stablecoin_ids": [
+      "sog_st_sdai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "evidence_ids": [
+      "sog_src_sdai_launch_2023",
+      "sog_src_sdai_contract_deployment_2023"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Maker announced general DeFi-user availability for Spark Protocol and sDAI effective 2023-05-09.",
+      "status": "public_product_launch",
+      "related_stablecoin_ids": [
+        "sog_st_dai",
+        "sog_st_susds"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_makerdao_sky"
+      ]
+    }
   }
 ]

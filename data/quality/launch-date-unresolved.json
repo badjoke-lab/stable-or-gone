@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-23",
-  "source_review": "docs/audits/launch-date-category-b-final-review.md",
+  "frozen_at": "2026-06-24",
+  "source_review": "docs/audits/remaining-launch-date-review.md",
   "policy": {
     "canonical_day_required": true,
     "keep_null_without_day_level_primary_evidence": true,
@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 26,
+  "expected_total": 25,
   "category_counts": {
-    "C": 20,
     "B": 3,
+    "C": 19,
     "D": 3
   },
   "records": [
@@ -120,13 +120,6 @@
       "best_known_range": null,
       "reason_code": "launch_boundary_conflict",
       "review_note": "Deployment, public launch, basket, and Save differ."
-    },
-    {
-      "stablecoin_id": "sog_st_sdai",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "product_activation_conflict",
-      "review_note": "Vault, interface, distribution, and sUSDS boundaries differ."
     },
     {
       "stablecoin_id": "sog_st_stablesusdx",

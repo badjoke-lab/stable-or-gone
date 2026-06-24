@@ -517,5 +517,67 @@
       "lineage"
     ],
     "notes": "Official Sky governance materials describe sUSDS as part of the Token and Product Launch and identify the September 18, 2024 launch date. The evidence preserves the continuing sDAI/USDS/Sky lineage."
+  },
+  {
+    "id": "sog_src_sdai_launch_2023",
+    "event_id": "sog_ev_sdai_2023_05_launch",
+    "stablecoin_id": "sog_st_sdai",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "source_type": "official_social",
+    "title": "Maker announces Spark Protocol availability for all DeFi users",
+    "url": "https://twitter.com/MakerDAO/status/1655575088547127311",
+    "publisher": "MakerDAO",
+    "published_at": "2023-05-08",
+    "archived_url": "https://web.archive.org/web/*/https://twitter.com/MakerDAO/status/1655575088547127311",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "claim_scope": "public_launch_and_availability",
+    "stablecoin_ids": [
+      "sog_st_sdai"
+    ],
+    "organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_ids": [
+      "sog_ev_sdai_2023_05_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "spark_protocol",
+      "public_availability",
+      "sDAI_support"
+    ],
+    "notes": "The official announcement was published on 2023-05-08 and states that Spark Protocol would be available to all DeFi users starting 2023-05-09. SOG uses the stated effective date."
+  },
+  {
+    "id": "sog_src_sdai_contract_deployment_2023",
+    "event_id": "sog_ev_sdai_2023_05_launch",
+    "stablecoin_id": "sog_st_sdai",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "source_type": "onchain_explorer",
+    "title": "SavingsDai contract creation on Ethereum",
+    "url": "https://etherscan.io/tx/0xa2f51048265f2fe9ffaf69b94cb5a2a4113be49bdecd2040d530dd6f68facc42",
+    "publisher": "Etherscan",
+    "published_at": "2023-01-17",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/tx/0xa2f51048265f2fe9ffaf69b94cb5a2a4113be49bdecd2040d530dd6f68facc42",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "claim_scope": "contract_deployment_before_public_launch",
+    "stablecoin_ids": [
+      "sog_st_sdai"
+    ],
+    "organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_ids": [
+      "sog_ev_sdai_2023_05_launch"
+    ],
+    "claim_scopes": [
+      "ethereum_deployment",
+      "contract_address",
+      "deployment_date",
+      "prelaunch_boundary"
+    ],
+    "notes": "The canonical SavingsDai contract was created at 2023-01-17 17:52:11 UTC in block 16428133. Deployment is recorded separately from the 2023-05-09 public product launch."
   }
 ]
