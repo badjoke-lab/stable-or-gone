@@ -41,6 +41,16 @@ export const guides: GuideEntry[] = [
     revisions: []
   },
   {
+    slug: 'mica-stablecoins',
+    title: 'MiCA and Stablecoins',
+    summary: 'A beginner-friendly guide to EU stablecoin rules, the 2026 CASP transition deadline, and the different questions facing representative dollar, euro, and protocol-issued assets.',
+    category: 'regulation',
+    publishedAt: null,
+    informationCurrentThrough: '2026-06-25',
+    updatedAt: null,
+    revisions: []
+  },
+  {
     slug: 'what-is-a-depeg',
     title: 'What Is a Depeg?',
     summary: 'Learn what counts as a depeg, how recoveries are recorded, and when a depeg becomes part of a larger collapse.',
