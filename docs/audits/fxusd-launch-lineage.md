@@ -26,3 +26,7 @@ The fxUSD launch date is 2024-02-27. The January announcement and February 23 se
 ## Remaining unknowns
 
 The complete V1-to-V2 component replacement graph, staged rollout chronology, pool migration, and treatment of every V1 position product remain unresolved. The separate base-token income-accrual question also remains open.
+
+## Validation
+
+The one-time update pipeline passed baseline, launch queue, terminal queue, candidate, data, compatibility, classification, profile, Event v2, evidence relation, deployment, Registry v3, final-state, finalization, Astro, site-build, deployment verification, and public verification checks before committing the canonical result. Temporary scripts and workflow files were removed from the final branch.
