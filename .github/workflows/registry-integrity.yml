@@ -19,16 +19,4 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Validate generated integrity audit
-        continue-on-error: true
         run: npm run validate:integrity
-      - name: Rebuild integrity outputs
-        if: always()
-        run: npm run audit:integrity
-      - name: Upload integrity outputs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: registry-integrity
-          path: |
-            data/generated/registry-integrity-audit.json
-            docs/audits/registry-70-final-audit.md

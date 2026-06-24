@@ -17,22 +17,12 @@ jobs:
         with:
           node-version: 22
       - name: Validate current output
-        continue-on-error: true
         run: node scripts/validate-registry-stats.mjs
       - name: Rebuild output
-        if: always()
         run: node scripts/generate-registry-stats.mjs
       - name: Validate rebuilt output
-        if: always()
         run: node scripts/validate-registry-stats.mjs
       - uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: registry-stats
-          path: |
-            data/generated/registry-stats.json
-            docs/migration/registry-v2-baseline.json
-            docs/migration/registry-v3-baseline.json
-            docs/migration/registry-v3-income-profiles.json
-            README.md
-            docs/roadmap.md
+          path: data/generated/registry-stats.json

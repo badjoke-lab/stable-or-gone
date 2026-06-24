@@ -11,23 +11,23 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 The canonical GitHub checkpoint contains:
 
 ```text
-81 stable assets
-70 organizations
-83 stablecoin-organization relationships
-81 classification records
-81 reserve/redemption profiles
-126 events
-126 Event v2 detail records
-382 evidence records
-382 evidence relation projections
-89 reserve-report or reserve-context records
-197 known unknowns
+82 stable assets
+73 organizations
+86 stablecoin-organization relationships
+82 classification records
+82 reserve/redemption profiles
+128 events
+128 Event v2 detail records
+386 evidence records
+386 evidence relation projections
+90 reserve-report or reserve-context records
+200 known unknowns
 9 regulatory notes
-115 deployments
-81 legal profiles
+116 deployments
+82 legal profiles
 4 stable-asset relationships
-113 reserve components
-81 income profiles
+115 reserve components
+82 income profiles
 ```
 
 These counts are generated from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and the sitemap. They must not be maintained independently by hand.

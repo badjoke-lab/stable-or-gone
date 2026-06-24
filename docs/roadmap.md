@@ -40,9 +40,9 @@ Merge: 019f14e14928cffc0651670f2bb7cd8e9ab6c7fb
 Current quality position:
 
 ```text
-No open canonical quality PR
+PR #128 open — JPYSC launch and RLUSD Japan handling
 Latest resolved record: Cashio Dollar
-Next bounded record: DOLA
+Next planned work after PR #128: dated Guides foundation and GENIUS Act article
 ```
 
 Recent lineage and incident work:
@@ -70,7 +70,7 @@ PR #126 — Audit Cashio Dollar launch boundary
 Current blocker:
 
 ```text
-81-record GitHub canonical baseline: complete
+82-record GitHub canonical baseline: complete
 81-record production publication: pending
 81-record production parity: pending
 Cloudflare access: unavailable
@@ -86,25 +86,25 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry after Cashio Dollar launch resolution
+## Current canonical registry after JPYSC launch branch changes
 
 ```text
-81 stable assets
-70 organizations
-83 stablecoin-organization relationships
+82 stable assets
+73 organizations
+86 stablecoin-organization relationships
 81 classifications
-81 reserve/redemption profiles
-126 events
-126 Event v2 detail records
-382 evidence records
-89 reserve-report or reserve-context records
-197 known unknowns
+82 reserve/redemption profiles
+128 events
+128 Event v2 detail records
+386 evidence records
+90 reserve-report or reserve-context records
+200 known unknowns
 9 regulatory notes
-115 deployments
-81 legal profiles
+116 deployments
+82 legal profiles
 4 stable-asset relationships
-113 reserve components
-81 income profiles
+115 reserve components
+82 income profiles
 ```
 
 Machine-readable source of truth:
@@ -213,10 +213,10 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Audit DOLA as the next bounded Category C launch-boundary record.
-3. Separate initial token deployment, first mint, public release, FiRM issuance, and later product integrations.
-4. Assign no DOLA launch date without day-level first-party or on-chain public-availability evidence.
-5. Keep launch and terminal queues, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
+2. Complete PR #128 with synchronized JPYSC and RLUSD Japan event data, generated outputs, baselines, README, and roadmap.
+3. After PR #128 merges, implement the dated Guides foundation and publish the GENIUS Act article as the next PR.
+4. Follow with the MiCA article, then the JPYC versus JPYSC comparison article.
+5. Keep article publication dates unset until the pages are actually live in production; use information-current-through dates during GitHub-only work.
 6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 

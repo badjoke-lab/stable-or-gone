@@ -13,7 +13,10 @@
     "custodian_organization_id": null,
     "as_of_date": "2026-06-22",
     "confidence": "medium",
-    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_incident_batch_n"],
+    "evidence_ids": [
+      "sog_src_msusd_welcome_batch_n",
+      "sog_src_msusd_incident_batch_n"
+    ],
     "notes": "Records the claimed backing model only. Current reserve sufficiency and location are not independently confirmed."
   },
   {
@@ -26,11 +29,13 @@
     "amount_text": null,
     "currency": "JPY",
     "liquidity_class": "high",
-    "maturity_bucket": "on_demand_or_unknown",
+    "maturity_bucket": "on_demand",
     "custodian_organization_id": "sog_issuer_sbi_shinsei_trust",
     "as_of_date": "2026-06-24",
     "confidence": "high",
-    "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026"],
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026"
+    ],
     "notes": "Initial launch-level reserve category; no percentage allocation asserted."
   },
   {
@@ -47,7 +52,9 @@
     "custodian_organization_id": "sog_issuer_sbi_shinsei_trust",
     "as_of_date": "2026-06-24",
     "confidence": "high",
-    "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026"],
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026"
+    ],
     "notes": "Initial launch-level reserve category; maturity and allocation remain unresolved."
   }
 ]

@@ -7,36 +7,55 @@
         "jurisdiction": "British Virgin Islands",
         "effective_from": null,
         "effective_to": null,
-        "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_redemption_batch_n"]
+        "evidence_ids": [
+          "sog_src_msusd_welcome_batch_n",
+          "sog_src_msusd_redemption_batch_n"
+        ]
       }
     ],
     "holder_claim_type": "contractual_conversion_right",
-    "claim_against_organization_ids": ["sog_issuer_mainstreet_finance"],
+    "claim_against_organization_ids": [
+      "sog_issuer_mainstreet_finance"
+    ],
     "reserve_ownership": "issuer_owned",
     "reserve_segregation": "unclear",
     "bankruptcy_remoteness": "unclear",
     "licensed_or_regulated_as": [],
-    "evidence_ids": ["sog_src_msusd_welcome_batch_n", "sog_src_msusd_redemption_batch_n", "sog_src_msusd_site_batch_n"],
+    "evidence_ids": [
+      "sog_src_msusd_welcome_batch_n",
+      "sog_src_msusd_redemption_batch_n",
+      "sog_src_msusd_site_batch_n"
+    ],
     "notes": "Approved-party conversion is documented. Holder priority, custody, segregation, and insolvency treatment remain unresolved."
   },
   {
     "id": "sog_st_jpysc",
     "classifications": [
       {
-        "classification": "electronic_payment_instrument_type_3",
+        "classification": "fiat_backed_stablecoin",
         "jurisdiction": "Japan",
         "effective_from": "2026-06-24",
         "effective_to": null,
-        "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026", "sog_src_jpysc_announcement_sbi_2026"]
+        "evidence_ids": [
+          "sog_src_jpysc_launch_sbi_vc_2026",
+          "sog_src_jpysc_announcement_sbi_2026"
+        ]
       }
     ],
-    "holder_claim_type": "trust_beneficial_interest_based_redemption_claim",
-    "claim_against_organization_ids": ["sog_issuer_sbi_shinsei_trust"],
-    "reserve_ownership": "trust_property",
-    "reserve_segregation": "trust_segregated",
-    "bankruptcy_remoteness": "trust_structure_intended",
-    "licensed_or_regulated_as": ["Type 3 electronic payment instrument"],
-    "evidence_ids": ["sog_src_jpysc_launch_sbi_vc_2026", "sog_src_jpysc_announcement_sbi_2026"],
+    "holder_claim_type": "beneficial_interest_in_reserve",
+    "claim_against_organization_ids": [
+      "sog_issuer_sbi_shinsei_trust"
+    ],
+    "reserve_ownership": "trust_or_custodial",
+    "reserve_segregation": "legally_segregated",
+    "bankruptcy_remoteness": "stated",
+    "licensed_or_regulated_as": [
+      "Type 3 electronic payment instrument"
+    ],
+    "evidence_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026"
+    ],
     "notes": "Initial legal profile based on official launch materials. Detailed beneficiary priority, trust terms, and insolvency treatment require continued source review."
   }
 ]
