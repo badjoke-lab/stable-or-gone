@@ -30,23 +30,19 @@ Public site:
 https://sog.badjoke-lab.com/
 ```
 
-Latest merged checkpoint before this change:
+Latest merged checkpoint:
 
 ```text
-PR #110 — Record Category C lineage checkpoint
-Merge: a51e705a17dbd77f3075a52f2e65ebd496b1e463
+PR #114 — Resolve MAI and miMATIC launch lineage
+Merge: 196d35b5c6a2b69b03ab3c17a41be717ee73aa54
 ```
 
-Current quality change:
+Current quality position:
 
 ```text
-PR #112 — Resolve SPOT launch and protocol versions
-Canonical launch: 2022-12-08
-v2 proposal: 2024-04-09
-v2 signal passed: 2024-04-19
-v2 production activation: unresolved
-v5 on-chain execution: 2025-07-21
-Next bounded record after merge: fxUSD
+No open canonical quality PR
+Latest resolved record: MAI
+Next bounded record: Stables Labs USDX
 ```
 
 Recent lineage and incident work:
@@ -59,6 +55,8 @@ PR #108 — Resolve sUSD launch lineage
 PR #109 — Resolve Nuon v1 and v2 lineage
 PR #110 — Record Category C lineage checkpoint
 PR #112 — Resolve SPOT launch and protocol versions
+PR #113 — Resolve fxUSD launch and V2 lineage
+PR #114 — Resolve MAI and miMATIC launch lineage
 ```
 
 Current blocker:
@@ -80,7 +78,7 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry after SPOT change
+## Current canonical registry after MAI change
 
 ```text
 81 stable assets
@@ -200,12 +198,11 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Merge PR #112 only after all six normal pull-request workflows pass on the final user-authored head.
-3. Audit Stables Labs USDX as the next bounded Category C launch-boundary record.
-4. Separate USDX announcement, public mint availability, approved-participant access, and sUSDX wrapper launch.
-5. Assign no USDX launch date without day-level first-party production evidence.
-6. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
-7. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
+2. Audit Stables Labs USDX as the next bounded Category C launch-boundary record.
+3. Separate USDX announcement, public mint availability, approved-participant access, and sUSDX wrapper launch.
+4. Assign no USDX launch date without day-level first-party production evidence.
+5. Keep launch queue, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
+6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 
 ## Production policy
