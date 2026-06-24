@@ -33,16 +33,16 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #122 — Audit Agora AUSD launch boundary
-Merge: fa4742eed871f9fb82a5573501ca7a88a8c73943
+PR #124 — Audit Basis Cash launch and terminal boundaries
+Merge: 334d5ef8a4a31a10a754d5b30fdbdb26ef17d05f
 ```
 
 Current quality position:
 
 ```text
 No open canonical quality PR
-Latest reviewed record: Agora AUSD
-Next bounded record: Basis Cash
+Latest resolved record: Basis Cash launch
+Next bounded record: Cashio Dollar
 ```
 
 Recent lineage and incident work:
@@ -61,6 +61,8 @@ PR #116 — Audit Stables Labs USDX launch boundary
 PR #118 — Audit Ethena product activation boundary
 PR #120 — Audit Savings DAI launch boundary
 PR #122 — Audit Agora AUSD launch boundary
+PR #123 — Normalize Agora AUSD Ethereum deployment
+PR #124 — Audit Basis Cash launch and terminal boundaries
 ```
 
 Current blocker:
@@ -82,7 +84,7 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry after Agora AUSD deployment normalization
+## Current canonical registry after Basis Cash launch resolution
 
 ```text
 81 stable assets
@@ -90,9 +92,9 @@ Audit: docs/audits/registry-75-production-parity.md
 83 stablecoin-organization relationships
 81 classifications
 81 reserve/redemption profiles
-124 events
-124 Event v2 detail records
-377 evidence records
+126 events
+126 Event v2 detail records
+381 evidence records
 89 reserve-report or reserve-context records
 197 known unknowns
 9 regulatory notes
@@ -122,7 +124,7 @@ Required-layer coverage:              81 / 81
 Event coverage:                        81 / 81
 Deployment coverage:                   81 / 81
 Reserve-report context coverage:       69 / 81 informational
-Missing canonical launch dates:            25
+Missing canonical launch dates:            24
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -136,9 +138,9 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved: 25
+Total unresolved: 24
 Category B:         3
-Category C:        19
+Category C:        18
 Category D:         3
 ```
 
@@ -164,6 +166,7 @@ USDX   — Ethereum production contracts fixed to 2024-03-18 while public launch
 sUSDe  — current contract deployment fixed to 2023-11-14 while stealth activity, public mainnet, staking access, and reward payout remain separate unresolved boundaries
 sDAI   — Ethereum contract deployment fixed to 2023-01-17 and public Spark availability fixed to 2023-05-09
 AUSD   — Ethereum production contract fixed to 2024-07-07 while first mint, approved access, and public launch remain unresolved
+BAC    — original public launch fixed to 2020-11-30; V2 activation fixed to 2021-04-26; terminal date remains unresolved
 ```
 
 Policy:
@@ -207,9 +210,9 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Audit Basis Cash as the next bounded Category C launch and terminal-lineage record.
-3. Separate deployment, first distribution, epoch activation, public availability, peg failure, and practical cessation boundaries.
-4. Assign no BAC launch or terminal date without day-level primary or on-chain evidence for the selected boundary.
+2. Audit Cashio Dollar as the next bounded Category C launch-boundary record.
+3. Separate Solana mint deployment, first public mint availability, initial liquidity, exploit, peg collapse, and practical shutdown.
+4. Assign no Cashio launch date without day-level primary or on-chain public-availability evidence.
 5. Keep launch and terminal queues, generated outputs, integrity audit, Registry v3 baseline, README, and roadmap synchronized in every quality PR.
 6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
