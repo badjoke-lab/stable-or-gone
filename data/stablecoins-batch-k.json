@@ -105,12 +105,12 @@
     "minimum_redemption": "not_applicable",
     "redemption_region_notes": "Historical Solana protocol asset.",
     "redemption_notes": "The March 2022 infinite-mint exploit destroyed the collateral constraint and collapsed the peg.",
-    "launch_date": null,
+    "launch_date": "2021-11-09",
     "discontinued_date": "2022-03-23",
     "summary": "Solana stablecoin backed through Saber-related LP collateral before a March 2022 infinite-mint exploit collapsed the asset and protocol.",
     "confidence": "high",
-    "last_verified_at": "2026-06-17",
-    "notes": "Batch K promotion; reported loss estimates differ by source."
+    "last_verified_at": "2026-06-24",
+    "notes": "Batch K promotion. Canonical public launch is 2021-11-09, when Saber announced a live CASH/USDC pool and documented active Cashio mint and redemption routes. The exact Solana CASH mint address remains unresolved. Exploit, peg collapse, and practical shutdown remain fixed to 2022-03-23."
   },
   {
     "id": "sog_st_acalaausd",

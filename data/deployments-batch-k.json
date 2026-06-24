@@ -69,12 +69,14 @@
     "canonicality": "legacy",
     "is_primary": true,
     "mint_authority_type": "protocol_collateralized_mint",
-    "notes": "Historical CASH mint; exact mint address remains for a contract normalization pass.",
+    "notes": "Historical Solana CASH deployment. Public product availability is fixed to 2021-11-09. The exact CASH mint and complete program-account map remain unresolved; the 2022-03-23 exploit ended practical operation.",
     "evidence_ids": [
       "sog_src_cashio_repo_batch_k",
-      "sog_src_cashio_certik_batch_k"
+      "sog_src_cashio_certik_batch_k",
+      "sog_src_cashio_public_launch_2021"
     ],
     "control_event_ids": [
+      "sog_ev_cashio_launch_batch_k",
       "sog_ev_cashio_exploit_batch_k"
     ]
   },

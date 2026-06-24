@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 24,
+  "expected_total": 23,
   "category_counts": {
     "B": 3,
-    "C": 18,
+    "C": 17,
     "D": 3
   },
   "records": [
@@ -29,13 +29,6 @@
       "best_known_range": "2019",
       "reason_code": "partial_date_only",
       "review_note": "First-party sources establish 2019 only."
-    },
-    {
-      "stablecoin_id": "sog_st_cashio",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Deployment and public mint availability differ."
     },
     {
       "stablecoin_id": "sog_st_dola",

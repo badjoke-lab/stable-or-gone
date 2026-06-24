@@ -46,14 +46,14 @@
     "stablecoin_id": "sog_st_cashio",
     "issuer_id": "sog_issuer_cashio",
     "event_type": "launch",
-    "event_date": null,
+    "event_date": "2021-11-09",
     "title": "Cashio Dollar launches on Solana",
-    "description": "Cashio introduced CASH as a Solana dollar asset collateralized through Saber-related LP positions.",
+    "description": "Cashio became publicly usable on Solana with a live CASH/USDC pool and documented mint, redemption, liquidity-provision, and swap routes.",
     "impact_level": "medium",
-    "confidence": "medium",
-    "source_count": 1,
+    "confidence": "high",
+    "source_count": 2,
     "event_status_effect": "active",
-    "notes": "Exact launch date remains unresolved."
+    "notes": "The public product boundary is supported by the official Cashio repository and Saber’s dated first-pool announcement. Later pool additions are liquidity expansion, not the original launch."
   },
   {
     "id": "sog_ev_cashio_exploit_batch_k",
