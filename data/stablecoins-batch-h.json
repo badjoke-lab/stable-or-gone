@@ -49,12 +49,12 @@
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Sky now prioritizes USDS and sUSDS. Access to legacy sDAI routes may depend on direct contract use or third-party interfaces.",
     "redemption_notes": "sDAI remains a distinct yield-bearing DAI vault share. It is not exchangeable one-for-one with sUSDS because their accumulated exchange rates differ.",
-    "launch_date": null,
+    "launch_date": "2023-05-09",
     "discontinued_date": null,
     "summary": "Legacy yield-bearing DAI savings vault share from the Maker/Sky protocol, retained with limited status after sUSDS became the current savings product.",
     "confidence": "medium",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch H promotion with conservative limited status; no termination is asserted."
+    "last_verified_at": "2026-06-24",
+    "notes": "Batch H boundary record. Canonical public launch is 2023-05-09, when Maker announced Spark Protocol availability for all DeFi users and explicitly included sDAI. The canonical Ethereum SavingsDai contract was deployed earlier on 2023-01-17; deployment, DSR history, public Spark availability, and the later sUSDS transition remain separate lifecycle boundaries."
   },
   {
     "id": "sog_st_susds",

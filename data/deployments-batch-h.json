@@ -1,7 +1,93 @@
 [
-  {"id":"sog_dep_susde_ethereum_batch_h","stablecoin_id":"sog_st_susde","chain":"Ethereum","deployment_type":"protocol_native_vault_share","token_standard":"ERC-20 token vault share","contract_address":null,"status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"deposit_and_withdraw_vault_contract","notes":"Primary Ethereum sUSDe vault-share deployment; exact address normalization is deferred to a contract-map pass.","evidence_ids":["sog_src_susde_rewards_batch_h","sog_src_susde_staking_batch_h"]},
-  {"id":"sog_dep_sdai_ethereum_batch_h","stablecoin_id":"sog_st_sdai","chain":"Ethereum","deployment_type":"protocol_native_vault_share","token_standard":"ERC-4626","contract_address":null,"status":"restricted","canonicality":"native","is_primary":true,"mint_authority_type":"deposit_and_withdraw_vault_contract","control_event_ids":["sog_ev_sdai_limited_status_batch_h"],"notes":"Legacy Ethereum sDAI vault-share deployment recorded as restricted/limited; exact address remains for a contract-map pass.","evidence_ids":["sog_src_sdai_routes_batch_h","sog_src_sdai_repo_batch_h"]},
-  {"id":"sog_dep_susds_ethereum_batch_h","stablecoin_id":"sog_st_susds","chain":"Ethereum","deployment_type":"protocol_native_vault_share","token_standard":"ERC-4626","contract_address":null,"status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"deposit_and_withdraw_vault_contract","notes":"Primary Ethereum sUSDS token and vault deployment; exact address normalization is deferred to a contract-map pass.","evidence_ids":["sog_src_susds_token_batch_h","sog_src_susds_routes_batch_h"]},
-  {"id":"sog_dep_usdy_ethereum_batch_h","stablecoin_id":"sog_st_usdy","chain":"Ethereum","deployment_type":"issuer_native_tokenized_note","token_standard":"ERC-20","contract_address":null,"status":"active","canonicality":"issuer_native","is_primary":true,"mint_authority_type":"allowlisted_issuer_subscription_and_redemption","notes":"Initial primary USDY deployment coverage; additional network and bridge deployments remain a known unknown.","evidence_ids":["sog_src_usdy_basics_batch_h","sog_src_usdy_terms_batch_h"]},
-  {"id":"sog_dep_usyc_ethereum_batch_h","stablecoin_id":"sog_st_usyc","chain":"Ethereum","deployment_type":"issuer_native_tokenized_fund_share","token_standard":"permissioned ERC-20","contract_address":null,"status":"active","canonicality":"issuer_native","is_primary":true,"mint_authority_type":"allowlisted_fund_subscription_and_redemption","notes":"Initial primary USYC deployment coverage; additional network and teller deployments remain a known unknown.","evidence_ids":["sog_src_usyc_circle_overview_batch_h","sog_src_usyc_product_batch_h"]}
+  {
+    "id": "sog_dep_susde_ethereum_batch_h",
+    "stablecoin_id": "sog_st_susde",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_native_vault_share",
+    "token_standard": "ERC-20 token vault share",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "deposit_and_withdraw_vault_contract",
+    "notes": "Primary Ethereum sUSDe vault-share deployment; exact address normalization is deferred to a contract-map pass.",
+    "evidence_ids": [
+      "sog_src_susde_rewards_batch_h",
+      "sog_src_susde_staking_batch_h"
+    ]
+  },
+  {
+    "id": "sog_dep_sdai_ethereum_batch_h",
+    "stablecoin_id": "sog_st_sdai",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_native_vault_share",
+    "token_standard": "ERC-4626",
+    "contract_address": "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+    "status": "restricted",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "deposit_and_withdraw_vault_contract",
+    "control_event_ids": [
+      "sog_ev_sdai_2023_05_launch",
+      "sog_ev_sdai_limited_status_batch_h"
+    ],
+    "notes": "Canonical Ethereum SavingsDai ERC-4626 vault-share contract deployed on 2023-01-17. Public product availability is fixed separately to 2023-05-09 through Maker's Spark Protocol launch announcement. The deployment remains restricted/limited in the current Sky-era view; no termination or mandatory migration is asserted.",
+    "evidence_ids": [
+      "sog_src_sdai_routes_batch_h",
+      "sog_src_sdai_repo_batch_h",
+      "sog_src_sdai_launch_2023",
+      "sog_src_sdai_contract_deployment_2023"
+    ]
+  },
+  {
+    "id": "sog_dep_susds_ethereum_batch_h",
+    "stablecoin_id": "sog_st_susds",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_native_vault_share",
+    "token_standard": "ERC-4626",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "deposit_and_withdraw_vault_contract",
+    "notes": "Primary Ethereum sUSDS token and vault deployment; exact address normalization is deferred to a contract-map pass.",
+    "evidence_ids": [
+      "sog_src_susds_token_batch_h",
+      "sog_src_susds_routes_batch_h"
+    ]
+  },
+  {
+    "id": "sog_dep_usdy_ethereum_batch_h",
+    "stablecoin_id": "sog_st_usdy",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_tokenized_note",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "allowlisted_issuer_subscription_and_redemption",
+    "notes": "Initial primary USDY deployment coverage; additional network and bridge deployments remain a known unknown.",
+    "evidence_ids": [
+      "sog_src_usdy_basics_batch_h",
+      "sog_src_usdy_terms_batch_h"
+    ]
+  },
+  {
+    "id": "sog_dep_usyc_ethereum_batch_h",
+    "stablecoin_id": "sog_st_usyc",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_tokenized_fund_share",
+    "token_standard": "permissioned ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "allowlisted_fund_subscription_and_redemption",
+    "notes": "Initial primary USYC deployment coverage; additional network and teller deployments remain a known unknown.",
+    "evidence_ids": [
+      "sog_src_usyc_circle_overview_batch_h",
+      "sog_src_usyc_product_batch_h"
+    ]
+  }
 ]

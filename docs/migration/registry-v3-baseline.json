@@ -1,8 +1,8 @@
 {
   "schema_version": "3.0-baseline",
-  "baseline_id": "sog_registry_v3_mai_lineage_2026_06_24",
+  "baseline_id": "sog_registry_v3_sdai_launch_2026_06_24",
   "recorded_at": "2026-06-24",
-  "data_checkpoint_commit": "mai-lineage",
+  "data_checkpoint_commit": "sdai-launch",
   "base_registry": "docs/migration/registry-v2-baseline.json",
   "foundation": "docs/migration/registry-v3-foundation.json",
   "generated_stats": "data/generated/registry-stats.json",
@@ -18,9 +18,9 @@
     "relationships": 83,
     "classifications": 81,
     "profiles": 81,
-    "events": 123,
-    "event_details": 123,
-    "evidence": 374,
+    "events": 124,
+    "event_details": 124,
+    "evidence": 376,
     "reserve_reports": 89,
     "known_unknowns": 197,
     "regulatory_notes": 9,
@@ -48,12 +48,12 @@
     "candidate_promotions": 81,
     "pending_candidates": 0,
     "critical_findings": 0,
-    "warnings": 0,
+    "warnings": 3,
     "canonical_name_collisions": 0,
     "alias_collision_warnings": 0,
     "stale_or_missing_last_verified": 0,
     "all_unknown_income_profiles": 0,
-    "launch_date_unresolved": 26,
+    "launch_date_unresolved": 25,
     "terminal_date_unresolved": 4,
     "reserve_report_applicability_queue": 12,
     "reserve_report_not_applicable_by_design": 10,
@@ -72,5 +72,5 @@
     "production_parity_required_at_80": true
   },
   "validator": "scripts/validate-registry-v3-baseline.mjs",
-  "audit_report": "docs/audits/reserve-report-applicability-81-review.md"
+  "audit_report": "docs/audits/registry-70-final-audit.md"
 }

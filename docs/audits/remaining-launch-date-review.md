@@ -1,240 +1,89 @@
 # Remaining Launch-Date Review
 
-Updated: 2026-06-19
+Updated: 2026-06-24
 
 ## Purpose
 
-This review classifies every canonical stable asset that still has `launch_date: null` after PR #55.
+This document is the human-readable companion to `data/quality/launch-date-unresolved.json`. The machine-readable queue and the canonical `launch_date: null` set must match exactly. Day-level dates are added only when a reviewed first-party or on-chain public boundary supports them.
 
-The objective is not to force a day-level date into every record. It is to separate dates that are supported by primary evidence from dates that are only partially known, definition-dependent, or not recoverable from adequate sources.
-
-## Classification
+## Current queue
 
 ```text
-A. Day-level date confirmed or strongly recoverable from primary evidence
-B. Only month or year is currently confirmed
-C. Multiple plausible launch definitions, versions, migrations, or dates exist
-D. No adequate primary launch source has been found
+Total unresolved: 25
+Category B: 3
+Category C: 19
+Category D: 3
 ```
 
-Category A is eligible for a launch-date batch only after the exact source is added to the evidence layer and the canonical record, event, event detail, source count, generated statistics, and integrity output are updated together.
+## Recently resolved bounded records
 
-Categories B, C, and D must remain `null` unless later research changes the classification.
+- EURA — agEUR launch separated from the later EURA rebrand.
+- lisUSD — HAY launch separated from the lisUSD rebrand.
+- sUSD — eUSD, nUSD launch, and sUSD rename separated.
+- Nuon — v1 and v2 product boundaries separated.
+- SPOT — original launch separated from later protocol versions.
+- fxUSD — public availability separated from announcement, seeding, and V2 upgrade.
+- MAI — Polygon public launch separated from rename and V2 activation.
+- Savings DAI — contract deployment on 2023-01-17 separated from public Spark availability on 2023-05-09.
 
-## Queue summary
+USDX and sUSDe have also completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C.
 
-```text
-Original null-date queue reviewed: 38
-Category A identified:              7
-Promoted in Launch-date Batch O:     5
-Promoted in Launch-date Batch P:     2
-Category A remaining:                0
-Category B:                           5
-Category C:                          20
-Category D:                           3
-Remaining launch_date null:         26
-Queue status:                       frozen and validator-enforced
-Machine-readable queue:             data/quality/launch-date-unresolved.json
-```
+## Category B — partial date only
 
-## Category A — day-level date supported
-
-| Stable asset | ID | Candidate date | Basis | Planned treatment |
-|---|---|---:|---|---|
-| crvUSD | `sog_st_crvusd` | 2023-05-14 | Curve's official second-anniversary article dated 2025-05-14 states that the date was the second anniversary of crvUSD. | Promoted in Launch-date Batch O |
-| EUR CoinVertible | `sog_st_eurcv` | 2023-04-20 | SG-FORGE's launch release is dated 2023-04-20 and explicitly states that it launches EUR CoinVertible. | Promoted in Launch-date Batch O |
-| EURI | `sog_st_euri` | 2024-08-26 | Banking Circle's dated issuer announcement explicitly states the launch of EURI. | Promoted in Launch-date Batch O |
-| EURQ | `sog_st_eurq` | 2024-11-18 | Quantoz states that it started issuing EURQ and USDQ on Monday 2024-11-18. Exchange listing on 2024-11-21 is a later distribution event, not the canonical launch. | Promoted in Launch-date Batch O |
-| sUSDS | `sog_st_susds` | 2024-09-18 | Sky Launch Season governance and activation materials identify 2024-09-18 as the product activation date. The record preserves the relationship to sDAI rather than implying an unrelated lineage. | Promoted in Launch-date Batch P |
-| USDtb | `sog_st_usdtb` | 2024-12-16 | Ethena's official launch page and Curve's contemporaneous dated launch publication identify 2024-12-16 as the launch date. | Promoted in Launch-date Batch P |
-| USDY | `sog_st_usdy` | 2023-09-07 | Ondo's official blog index dates “Introducing Ondo USD Yield (USDY)” to 2023-09-07. Network-specific launches are later deployment events. | Promoted in Launch-date Batch O |
-
-### Primary sources for Category A
-
-```text
-crvUSD
-https://news.curve.finance/crvusd-2-years-on/
-
-EURCV
-https://www.sgforge.com/societe-generale-forge-launches-coinvertible-the-first-institutional-stablecoin-deployed-on-a-public-blockchain/
-
-EURI
-https://www.bankingcircle.com/banking-circle-launches-the-first-bank-backed-mica-compliant-stablecoin-euri/
-
-EURQ
-https://www.quantoz.com/blog/quantoz-payments-issues-euro-and-us-dollar-stablecoins
-
-sUSDS
-https://forum.sky.money/tag/susds
-https://docs.sky.money/legal/skybase-international/terms-of-use
-
-USDtb
-https://ethena.fi/blog/usdtb-launch
-https://news.curve.finance/ethena-usdtb-curve-launch/
-
-USDY
-https://ondo.finance/blog/introducing-ondo-usd-yield-usdy
-https://blog.ondo.finance/page/5/
-```
-
-## Category B — month or year only
-
-| Stable asset | ID | Best confirmed range | Reason day-level precision is not accepted |
+| Stable asset | ID | Best known range | Reason |
 |---|---|---|---|
-| BRZ | `sog_st_brz` | 2019 | Transfero's current first-party product page confirms launch in 2019 but does not provide a day-level date. |
-| EURS | `sog_st_eurs` | 2018 | STASIS materials establish the early EURS launch period, but the currently accessible first-party pages do not provide an adequately preserved day-level launch statement. |
-| Mountain Protocol USDM | `sog_st_mountainusdm` | 2023 | Mountain Protocol states that it launched in 2023. The date of company/product announcement, first mint, and public portal availability has not yet been resolved to one canonical day. |
-| USD0 | `sog_st_usd0` | 2024-05 | Usual's first-party history states that USD0 went live in May 2024, without a day-level date on the reviewed source. |
-| USR | `sog_st_usr` | 2024-09 | Resolv's first-party journey page identifies September 2024 as public launch, without a day-level date. |
+| Brazilian Digital Token | `sog_st_brz` | 2019 | First-party sources establish 2019 only. |
+| Berachain HONEY | `sog_st_honey` | 2025 | No HONEY-specific day-level public launch statement recovered. |
+| Anzen USDz | `sog_st_usdz` | 2024-06 | Official sources establish June 2024 only. |
 
-### Primary sources for Category B
+## Category C — boundary, version, or lineage conflict
 
-```text
-BRZ
-https://transfero.com/brz
+| Stable asset | ID | Best known range | Reason |
+|---|---|---|---|
+| Agora Dollar | `sog_st_agoraausd` | — | Announcement, mint, deployment, and public availability conflict. |
+| Basis Cash | `sog_st_bac` | — | Deployment, distribution, epoch, and public launch conflict. |
+| Cashio Dollar | `sog_st_cashio` | — | Deployment and public mint availability differ. |
+| DOLA | `sog_st_dola` | — | First mint, release, and FiRM issuance differ. |
+| Dynamic Set Dollar | `sog_st_dsd` | — | Version, epoch, and distribution boundaries conflict. |
+| Empty Set Dollar | `sog_st_esd` | — | Deployment, epoch, and architecture boundaries conflict. |
+| Euro Tether | `sog_st_eurt` | — | Announcement, issuance, listings, and deployments differ. |
+| GYEN | `sog_st_gyen` | — | Issuance, availability, listings, and wind-down differ. |
+| IRON | `sog_st_iron` | — | BSC, Polygon, and staged rollout boundaries differ. |
+| Magic Internet Money | `sog_st_mim` | — | Cauldron, first issuance, announcement, and UI differ. |
+| MainStreetUSD | `sog_st_msusd` | — | Announcement, issuance, deployment, and availability differ. |
+| mStable USD | `sog_st_musd` | — | Deployment, public launch, basket, and Save differ. |
+| Stables Labs USDX | `sog_st_stablesusdx` | — | Announcement, issuance, deployment, and approved access differ. |
+| Staked USDe | `sog_st_susde` | — | USDe launch and staking activation differ. |
+| World Liberty Financial USD | `sog_st_usd1` | 2025-03 | Introduction, issuance, testing, and availability differ. |
+| Mento Dollar | `sog_st_usdm` | — | Mento Dollar and earlier Celo-dollar history differ. |
+| Kujira USK | `sog_st_usk` | — | Deployment, first issuance, and app availability differ. |
+| Vai | `sog_st_vai` | — | Venus, first VAI issuance, and feature activation differ. |
+| VNX Swiss Franc | `sog_st_vchf` | — | Announcement, issuance, and availability remain unresolved. |
 
-EURS
-https://stasis.net/eurs-info
-https://stasis.net/about-us
+## Category D — adequate primary source not recovered
 
-Mountain USDM
-https://mountainprotocol.com/company/
+| Stable asset | ID | Best known range | Reason |
+|---|---|---|---|
+| HUSD | `sog_st_husd` | — | No reliable issuer day-level launch source recovered. |
+| BiLira | `sog_st_tryb` | — | Current sources do not preserve the original launch day. |
+| Hashnote US Yield Coin | `sog_st_usyc` | — | Current documents do not establish the original launch day. |
 
-USD0
-https://docs.usual.money/resources-and-ecosystem/roadmap/usual-the-first-two-years
+## Fixed policy
 
-USR
-https://resolv.xyz/journey
-```
+- Require day-level primary or on-chain evidence for a canonical launch date.
+- Do not coerce month or year into a date.
+- Do not use exchange listings as the default launch boundary.
+- Do not substitute a rebrand, migration, contract deployment, testnet, guarded beta, or later product version for the original public boundary.
+- Keep unresolved values as `null`.
 
-## Category C — definition, version, or lineage conflict
-
-| Stable asset | ID | Conflict that must be resolved before using a date |
-|---|---|---|
-| Agora AUSD | `sog_st_agoraausd` | Announcement, first mint, first network deployment, and broad public availability are distinct. Current first-party pages confirm operation but do not expose one canonical launch day. |
-| Basis Cash | `sog_st_bac` | Contract deployment, first distribution, first epoch, and public protocol launch are different possible dates. Historical primary material must be reconstructed before selecting one. |
-| Cashio Dollar | `sog_st_cashio` | Contract deployment and actual public minting availability must be distinguished. Current records strongly cover the exploit and shutdown but not the launch boundary. |
-| DOLA | `sog_st_dola` | Current Inverse documentation describes DOLA but does not establish whether the canonical date should be first mint, first product release, or later FiRM-era issuance. |
-| Dynamic Set Dollar | `sog_st_dsd` | DSD v1, later versions, first epoch, and public distribution create a version-boundary problem. |
-| Empty Set Dollar | `sog_st_esd` | First contract deployment, first epoch, and later Empty Set architecture changes are distinct lifecycle points. |
-| EURA / agEUR | `sog_st_eura` | The record spans agEUR and EURA branding. The original protocol launch and later rename must not be collapsed without a documented lineage decision. |
-| Euro Tether | `sog_st_eurt` | Issuer announcement, issuance start, exchange availability, and chain-specific deployments require separation. |
-| GYEN | `sog_st_gyen` | Initial issuance, first public availability, and exchange listings are different. The current winding-down state also requires careful separation from launch history. |
-| IRON | `sog_st_iron` | BSC and Polygon versions and the protocol's staged rollout create multiple possible launch boundaries. |
-| lisUSD | `sog_st_lisusd` | The record includes the Helio/HAY to Lista/lisUSD lineage. Original stablecoin launch and rebrand/migration dates must be modeled separately. |
-| Magic Internet Money | `sog_st_mim` | First cauldron, first MIM mint, protocol announcement, and public interface availability are not yet reconciled. |
-| mUSD | `sog_st_musd` | Contract deployment, mStable public launch, basket activation, and Save product availability are separate events. |
-| NUON | `sog_st_nuon` | Nuon v1 guarded mainnet launched on 2023-02-02, while Nuon v2 opened publicly on 2025-03-03. The canonical record's continuity across versions must be resolved before choosing one date. |
-| sDAI | `sog_st_sdai` | DSR vault deployment, user-interface release, and later Spark distribution are separate. The record also has a successor relationship to sUSDS. |
-| SPOT | `sog_st_spot` | SPOT v1, v2, and later protocol versions create a versioned identity question. |
-| sUSD | `sog_st_susd` | Synthetix states that the asset launched in 2018 as eUSD, migrated to nUSD, and was later rebranded to sUSD. A day-level date requires a lineage-specific policy. |
-| sUSDe | `sog_st_susde` | USDe public launch, staking contract activation, reward accrual start, and unrestricted acquisition are distinct. |
-| USD1 | `sog_st_usd1` | March 2025 introduction, first onchain mint, airdrop testing, exchange availability, and broad public use are separate milestones. |
-| Mento Dollar | `sog_st_usdm` | The current Mento asset identity must be distinguished from earlier Celo-dollar naming and deployment history. |
-| USK | `sog_st_usk` | Kujira protocol deployment, first mint, and public app availability require chain-level reconstruction. |
-| VAI | `sog_st_vai` | Venus protocol launch, first VAI minting, and later VAI-specific feature activation are distinct. |
-| VCHF | `sog_st_vchf` | Issuer announcement, first issuance, and exchange/network availability have not been reconciled to one canonical launch definition. |
-
-### Primary sources and starting points for Category C
-
-```text
-Agora AUSD
-https://www.agora.finance/product/ausd
-https://www.agora.finance/blog
-
-DOLA
-https://docs.inverse.finance/inverse-finance/inverse-finance/products/tokens/dola
-
-EURA
-https://angle.money/eura
-https://docs.angle.money/
-
-EURCV lineage example
-https://www.sgforge.com/stablecoin-elevation/
-
-lisUSD
-https://docs.bsc.lista.org/
-
-Mountain and version-boundary comparison
-https://docs.mountainprotocol.com/
-
-NUON v1
-https://blog.nuon.fi/launch-release-note-and-faqs/
-
-NUON v2
-https://blog.nuon.fi/nuon-v2-is-open/
-
-sUSD lineage
-https://blog.synthetix.io/rebuilding-susd/
-
-sUSDe mechanics
-https://docs.ethena.fi/solution-design/staking-usde
-
-USD1
-https://worldlibertyfinancial.com/usd1
-https://docs.worldlibertyfinancial.com/resources/faq
-```
-
-## Category D — adequate primary launch source not found
-
-| Stable asset | ID | Current position |
-|---|---|---|
-| HUSD | `sog_st_husd` | Current and archived product materials reviewed so far do not provide a sufficiently reliable issuer-level launch statement. Exchange listing dates must not be substituted automatically. |
-| TRYB | `sog_st_tryb` | Current BiLira materials establish product mechanics but the reviewed primary sources do not preserve a day-level launch statement. |
-| USYC | `sog_st_usyc` | Current Hashnote/Circle documentation explains the fund-token structure and current operation, but the original product launch date is not established by the reviewed primary sources. |
-
-## Rejected shortcuts
-
-The following shortcuts are explicitly disallowed:
-
-- using the first block explorer transfer without proving that it was public issuance
-- using an exchange listing date as the asset launch by default
-- converting a year-only statement to January 1
-- converting a month-only statement to the first day of the month
-- using an article publication date when the article describes a different operational date
-- treating a rebrand or migration as a new asset launch without a separate identity decision
-- treating a testnet, guarded beta, or limited-access phase as unrestricted public launch without documentation
-
-## Batch plan produced by this audit
-
-### Launch-date Batch O — complete
-
-```text
-crvUSD     2023-05-14
-EURCV      2023-04-20
-EURI       2024-08-26
-EURQ       2024-11-18
-USDY       2023-09-07
-```
-
-These five have the cleanest identity and primary-source boundaries.
-
-### Launch-date Batch P — complete
-
-```text
-sUSDS      2024-09-18
-USDtb      2024-12-16
-```
-
-These require more careful evidence and lineage handling than Batch O.
-
-### Launch-date unresolved queue freeze — complete
-
-- all 31 category B, C, and D records are stored in `data/quality/launch-date-unresolved.json`
-- category counts are fixed at B 5, C 23, and D 3
-- the canonical null-date set and machine-readable queue must match exactly
-- future promotion requires new day-level primary evidence and simultaneous removal from the queue
-- month/year coercion, exchange-listing substitution, and rebrand substitution remain prohibited
-
-## Completion state
+## Current completion state
 
 ```text
 Original review scope: complete
-Records classified: 38 / 38
-Canonical launch dates promoted in Batch O: 5
-Canonical launch dates promoted in Batch P: 2
-Remaining launch_date null:         26
-Remaining category-A records: none
-Unresolved queue: frozen and validator-enforced
-Next work item: Historical terminal-date review
+Current unresolved queue: 25
+Category B: 3
+Category C: 19
+Category D: 3
+Machine-readable queue: data/quality/launch-date-unresolved.json
+Next bounded review: Agora AUSD
 ```

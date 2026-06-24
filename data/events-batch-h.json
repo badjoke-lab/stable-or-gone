@@ -102,5 +102,22 @@
     "recovery_date": null,
     "failure_mechanism": "product_launch",
     "notes": "Added in Launch-date Batch P; the existing current-model event remains separate."
+  },
+  {
+    "id": "sog_ev_sdai_2023_05_launch",
+    "stablecoin_id": "sog_st_sdai",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "event_type": "launch",
+    "event_date": "2023-05-09",
+    "title": "Savings DAI becomes publicly available through Spark Protocol",
+    "description": "Maker announced that Spark Protocol would become available to all DeFi users on May 9, 2023 and explicitly included sDAI among the supported assets. SOG uses this first-party public-availability boundary rather than the earlier contract-deployment date.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "The canonical SavingsDai contract was deployed on 2023-01-17. Contract deployment, public Spark availability, and the later sUSDS transition are recorded as separate boundaries."
   }
 ]
