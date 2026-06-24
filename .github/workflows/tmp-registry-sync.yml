@@ -23,6 +23,7 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund
       - run: node scripts/tmp-sync-savings-dai-launch.mjs
+      - run: node scripts/tmp-fix-v3-baseline.mjs
       - name: Validate full repository
         id: validation
         continue-on-error: true
