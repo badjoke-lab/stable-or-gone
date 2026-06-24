@@ -23,7 +23,9 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund
       - run: node scripts/tmp-sync-savings-dai-launch.mjs
-      - run: npm run build
+      - name: Validate full repository
+        run: |
+          npm run build > /tmp/build.log 2>&1 || (tail -n 140 /tmp/build.log && false)
       - name: Commit synchronized files
         run: |
           if git diff --quiet; then
