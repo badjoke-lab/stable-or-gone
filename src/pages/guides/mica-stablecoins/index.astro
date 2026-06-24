@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('mica-stablecoins');
+const title = 'MiCA and Stablecoins: What Changes in the EU — Stable or Gone';
+const description = 'A beginner-friendly guide to EU MiCA stablecoin rules, EMTs and ARTs, the July 1, 2026 CASP deadline, and representative dollar, euro, and protocol-issued assets.';
+const canonicalPath = '/guides/mica-stablecoins/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'MiCA and Stablecoins',
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['MiCA', 'e-money tokens', 'asset-referenced tokens', 'stablecoin regulation', 'crypto-asset service providers'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Dollar stablecoin issued in the EEA through Circle Internet Financial Europe.' },
+  { href: '/stablecoin/eurc/', title: 'EURC', summary: 'Euro stablecoin issued in the EEA through the same Circle electronic-money institution.' },
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Global dollar stablecoin whose EU regulated-platform availability must be separated from self-custody.' },
+  { href: '/stablecoin/euri/', title: 'EURI', summary: 'Euro-referenced token issued by Banking Circle under a bank-backed model.' },
+  { href: '/stablecoin/eurcv/', title: 'EURCV', summary: 'Euro CoinVertible issued by Société Générale-FORGE.' },
+  { href: '/stablecoin/eurq/', title: 'EURQ', summary: 'Euro electronic-money token issued by Quantoz Payments.' },
+  { href: '/stablecoin/usdq/', title: 'USDQ', summary: 'Dollar electronic-money token issued by Quantoz Payments.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Dollar stablecoin whose service-provider and token-level EU status must be checked separately.' },
+  { href: '/stablecoin/dai/', title: 'DAI', summary: 'Protocol-issued stablecoin whose structure does not map neatly to a conventional electronic-money issuer.' },
+  { href: '/stablecoin/usds/', title: 'USDS', summary: 'Sky ecosystem stablecoin with protocol-governed issuance and related yield products.' },
+  { href: '/stablecoin/frax/', title: 'FRAX', summary: 'Hybrid protocol stablecoin that illustrates the limits of simple issuer categories.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="MiCA and Stablecoins"
+    description="What the EU rules already changed, what the July 1, 2026 deadline actually means, and how to compare representative stablecoins without turning a regulatory transition into a winner-versus-loser story."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>MiCA is the European Union's common regulatory framework for crypto-assets.</strong> Its stablecoin provisions already apply. Tokens that reference one official currency are generally treated as electronic-money tokens, while other reference structures may fall into the asset-referenced-token category.</p>
+    <p><strong>July 1, 2026 is mainly a service-provider deadline.</strong> It is the latest date on which a crypto-asset service provider operating under a qualifying pre-MiCA national regime may continue without MiCA authorization. It is not the date on which USDT, RLUSD, or any other token automatically disappears from a blockchain.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What MiCA is trying to regulate</div>
+    <p>Stablecoins combine several different activities that are easy to confuse. A company may issue the token, another company may hold reserves, a bank may safeguard cash, a crypto platform may list the token, and a wallet may merely let users hold it.</p>
+    <table>
+      <thead><tr><th>Layer</th><th>Question MiCA asks</th></tr></thead>
+      <tbody>
+        <tr><td>Issuer</td><td>Is the organization legally permitted to issue this type of token, maintain reserves, redeem holders, and publish required information?</td></tr>
+        <tr><td>Token</td><td>What does it reference, what rights do holders have, and has the required white paper or notification been completed?</td></tr>
+        <tr><td>Crypto-asset service provider</td><td>Is the exchange, broker, custodian, transfer service, or trading platform authorized to serve EU clients?</td></tr>
+        <tr><td>Service availability</td><td>Can a particular EU customer buy, sell, trade, custody, or transfer the token through a particular regulated provider?</td></tr>
+        <tr><td>Self-custody</td><td>Does the token still exist on its blockchain, and can a user hold or transfer it outside a regulated trading platform?</td></tr>
+      </tbody>
+    </table>
+    <p>These layers must not be collapsed into one label. A company obtaining a crypto-service authorization does not automatically prove that every token associated with that company is an authorized e-money token. An exchange removing a token does not erase the token from its network.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">EMT and ART in plain language</div>
+    <table>
+      <thead><tr><th>MiCA category</th><th>Beginner explanation</th><th>Typical example</th></tr></thead>
+      <tbody>
+        <tr><td>Electronic-money token (EMT)</td><td>A token that aims to maintain a stable value by referring to one official currency.</td><td>A token designed to equal one euro or one U.S. dollar.</td></tr>
+        <tr><td>Asset-referenced token (ART)</td><td>A token that aims to maintain a stable value by referring to another value, right, or combination, rather than fitting the single-currency EMT definition.</td><td>A basket-linked or multi-asset reference structure.</td></tr>
+        <tr><td>Other crypto-asset</td><td>A crypto-asset that is neither an EMT nor an ART and is covered by a different MiCA title.</td><td>Many ordinary utility or governance tokens.</td></tr>
+      </tbody>
+    </table>
+    <p>The commercial label “stablecoin” is broader than the legal categories. SOG therefore records the asset's peg, backing, issuer, legal profile, redemption terms, and service availability separately.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Timeline: what already happened and what happens next</div>
+    <table>
+      <thead><tr><th>Date</th><th>What changed</th></tr></thead>
+      <tbody>
+        <tr><td>2023-06-29</td><td>MiCA entered into force after publication in the Official Journal, with staged application dates.</td></tr>
+        <tr><td>2024-06-30</td><td>The titles covering ART and EMT issuers became applicable.</td></tr>
+        <tr><td>2024-12-30</td><td>The broader MiCA framework, including the CASP authorization regime, became applicable.</td></tr>
+        <tr><td>By the end of Q1 2025</td><td>ESMA expected national authorities to ensure that CASPs aligned services involving non-MiCA-compliant ARTs and EMTs.</td></tr>
+        <tr><td>2024-12-30 to 2026-07-01</td><td>Some existing service providers could continue under national transitional arrangements, but member states could shorten or decline that transition.</td></tr>
+        <tr><td>2026-07-01</td><td>The maximum CASP transitional period ends across the EU. A provider must have authorization, have received a decision, or stop the unauthorized EU service.</td></tr>
+        <tr><td>2026 review process</td><td>The European Commission is gathering feedback on how MiCA is functioning and may propose later adjustments. A review is not the same as an immediate repeal or replacement.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What changes on July 1, 2026?</div>
+    <p>Article 143 allows a service provider that was operating lawfully before December 30, 2024 to continue only until July 1, 2026, or until its MiCA authorization is granted or refused, whichever comes first. Individual member states could use a shorter transition.</p>
+    <table>
+      <thead><tr><th>Possible consequence</th><th>What users may see</th></tr></thead>
+      <tbody>
+        <tr><td>Authorization completed</td><td>The provider continues under MiCA and may use passporting to serve other EU or EEA markets within the authorized scope.</td></tr>
+        <tr><td>Application refused or not completed</td><td>The provider must stop the unauthorized service, wind down, or move clients to an appropriately authorized entity.</td></tr>
+        <tr><td>Client migration</td><td>Customers may receive new terms, a different legal entity, account-transfer instructions, or asset-transfer deadlines.</td></tr>
+        <tr><td>Product cleanup</td><td>A provider may narrow supported assets or services to reduce legal uncertainty and operational burden.</td></tr>
+        <tr><td>Market concentration</td><td>More EU activity may move toward providers that completed authorization, though authorization alone does not decide which stablecoin is safest or most widely used.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What does not automatically change on July 1?</div>
+    <table>
+      <tbody>
+        <tr><th>No automatic token deletion</th><td>A token contract and balances do not vanish because the CASP transition ends.</td></tr>
+        <tr><th>No universal USDT ban date</th><td>Many regulated-platform restrictions on non-compliant stablecoin services began earlier. Availability still varies by provider, country, product, and client type.</td></tr>
+        <tr><th>No automatic RLUSD approval</th><td>A Ripple-related company authorization or preliminary approval is not by itself proof that RLUSD has the required token-level status for every EU use.</td></tr>
+        <tr><th>No single exchange rule for every user</th><td>One platform may support a token, another may restrict purchases, and another may permit only withdrawal or sale.</td></tr>
+        <tr><th>No removal of self-custody</th><td>Holding or transferring a token in a self-custody wallet is a different activity from a regulated platform offering it to the public or admitting it to trading.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Representative stablecoins under the same questions</div>
+    <p>The table compares starting structures and verification questions. “Issuer-reported compliant” is not treated as a substitute for checking the relevant regulator and EU registers.</p>
+    <table>
+      <thead><tr><th>Asset</th><th>Peg</th><th>Issuer or model</th><th>MiCA question to verify</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/stablecoin/usdc/">USDC</a></td><td>USD</td><td>Circle; EEA issuance through Circle Internet Financial Europe</td><td>Circle states that its French electronic-money institution is authorized to issue USDC as a regulated EMT in the EEA. Verify current issuer, white-paper, and service-provider records.</td></tr>
+        <tr><td><a href="/stablecoin/eurc/">EURC</a></td><td>EUR</td><td>Circle; EEA issuance through Circle Internet Financial Europe</td><td>Circle states that EURC is an EEA-regulated EMT redeemable one-to-one for euros. Verify current chain, issuer, and service availability.</td></tr>
+        <tr><td><a href="/stablecoin/usdt/">USDT</a></td><td>USD</td><td>Tether's global offshore-centered issuer structure</td><td>Separate token existence and self-custody from whether an EU-regulated CASP may offer trading, exchange, custody, or other services involving it.</td></tr>
+        <tr><td><a href="/stablecoin/euri/">EURI</a></td><td>EUR</td><td>Banking Circle bank-issued model</td><td>Banking Circle describes EURI as a MiCA-regulated bank-backed euro token. Verify its current white paper, issuer status, and platform availability.</td></tr>
+        <tr><td><a href="/stablecoin/eurcv/">EURCV</a></td><td>EUR</td><td>Société Générale-FORGE electronic-money institution model</td><td>SG-FORGE describes EURCV as MiCA-compliant. Verify current issuer authorization, token documentation, chain deployments, and access terms.</td></tr>
+        <tr><td><a href="/stablecoin/eurq/">EURQ</a></td><td>EUR</td><td>Quantoz Payments electronic-money institution model</td><td>Quantoz describes EURQ as an EMT designed for MiCA compliance. Verify the Dutch authorization, current white paper, reserves, and redemption access.</td></tr>
+        <tr><td><a href="/stablecoin/usdq/">USDQ</a></td><td>USD</td><td>Quantoz Payments electronic-money institution model</td><td>Apply the same checks as EURQ while remembering that the reference currency is the U.S. dollar rather than the euro.</td></tr>
+        <tr><td><a href="/stablecoin/rlusd/">RLUSD</a></td><td>USD</td><td>Standard Custody & Trust Company; Ripple-branded global distribution</td><td>Separate the legal issuer, any EEA issuer or offering arrangement, Ripple's service-provider permissions, token documentation, and actual CASP availability.</td></tr>
+        <tr><td><a href="/stablecoin/dai/">DAI</a></td><td>USD target</td><td>Protocol-governed crypto and real-world-asset collateral system</td><td>Determine how an issuer-centered EMT framework applies to a protocol model and how regulated CASPs treat the asset in practice.</td></tr>
+        <tr><td><a href="/stablecoin/usds/">USDS</a></td><td>USD target</td><td>Sky protocol issuance and governance</td><td>Separate the base token from governance, savings, yield-bearing, and service-provider layers; avoid assuming one treatment covers all related products.</td></tr>
+        <tr><td><a href="/stablecoin/frax/">FRAX</a></td><td>USD target</td><td>Hybrid protocol and collateral model</td><td>Verify the current legal and issuance structure rather than relying on the asset's historical “algorithmic” or “hybrid” label.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Euro stablecoins are not a footnote</div>
+    <p>MiCA creates a direct regulatory path for euro-denominated EMTs, so euro tokens deserve their own comparison rather than appearing only as smaller alternatives to dollar stablecoins.</p>
+    <table>
+      <thead><tr><th>Example</th><th>Distinctive starting point</th></tr></thead>
+      <tbody>
+        <tr><td>EURC</td><td>A global stablecoin company using a licensed European electronic-money institution.</td></tr>
+        <tr><td>EURI</td><td>A bank-issued euro token.</td></tr>
+        <tr><td>EURCV</td><td>A major banking-group digital-asset subsidiary using an electronic-money institution model.</td></tr>
+        <tr><td>EURQ</td><td>A specialist payments company supervised in the Netherlands.</td></tr>
+      </tbody>
+    </table>
+    <p>All four may describe themselves as MiCA-aligned, but they still differ in issuer, holder claim, reserve custody, redemption channel, chain deployment, eligible customer base, and service availability.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Protocol-issued and decentralized models</div>
+    <p>MiCA's stablecoin titles are built around an accountable issuer that can seek authorization, publish a white paper, maintain reserves, redeem holders, and comply with supervisory orders. Protocol-issued assets may distribute those functions across smart contracts, governance bodies, foundations, service providers, collateral managers, and front ends.</p>
+    <p>This does not justify declaring every protocol asset prohibited or outside MiCA. It means the legal analysis and the regulated-platform decision are less straightforward. SOG records the actual structure and observed service restrictions rather than guessing a universal classification.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">How to check a MiCA claim</div>
+    <table>
+      <thead><tr><th>Claim</th><th>Better evidence</th></tr></thead>
+      <tbody>
+        <tr><td>“The company is MiCA approved”</td><td>Identify the exact legal entity, authorization type, competent authority, date, and permitted services.</td></tr>
+        <tr><td>“The stablecoin is MiCA compliant”</td><td>Check the legal issuer, EMT or ART category, authorization or notification, white paper, redemption terms, and current official register.</td></tr>
+        <tr><td>“The token is banned in Europe”</td><td>Check whether the statement concerns issuance, public offering, admission to trading, purchase, custody, sale-only access, or one provider's policy.</td></tr>
+        <tr><td>“Self-custody is prohibited”</td><td>Distinguish wallet possession and on-chain transfer from a regulated intermediary providing a crypto-asset service.</td></tr>
+        <tr><td>“One coin won MiCA”</td><td>Compare authorization, redemption, reserves, distribution, liquidity, user eligibility, and actual availability instead of reducing a regulatory system to a brand contest.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What users should check before July and after it</div>
+    <ul>
+      <li>Which legal entity provides the exchange, custody, transfer, or brokerage service?</li>
+      <li>Has that entity received MiCA authorization, and in which member state?</li>
+      <li>Will the account move to another entity or require new terms?</li>
+      <li>Can each stablecoin still be bought, sold, deposited, withdrawn, or only held?</li>
+      <li>Is the token's issuer authorized or notified under the relevant EMT or ART rules?</li>
+      <li>Does the issuer offer direct redemption, and to whom?</li>
+      <li>Are self-custody and regulated-platform availability being described separately?</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Primary regulatory and issuer sources</div>
+    <ul>
+      <li><a href="https://www.esma.europa.eu/publications-and-data/interactive-single-rulebook/mica/article-143-transitional-measures">ESMA interactive rulebook — MiCA Article 143 transitional measures</a></li>
+      <li><a href="https://www.esma.europa.eu/document/statement-end-transitional-periods-under-mica">ESMA statement on the end of MiCA transitional periods</a></li>
+      <li><a href="https://www.esma.europa.eu/press-news/esma-news/esma-and-european-commission-publish-guidance-non-mica-compliant-arts-and-emts">ESMA and European Commission guidance on non-compliant ARTs and EMTs</a></li>
+      <li><a href="https://www.eba.europa.eu/regulation-and-policy/asset-referenced-and-e-money-tokens-mica">EBA hub for ART and EMT rules, standards, and supervision</a></li>
+      <li><a href="https://finance.ec.europa.eu/news/digital-finance-2024-12-19_en">European Commission — MiCA application timeline</a></li>
+      <li><a href="https://finance.ec.europa.eu/news/commission-seeks-feedback-functioning-eu-crypto-assets-rules-2026-05-20_en">European Commission — 2026 feedback on MiCA's functioning</a></li>
+      <li><a href="https://www.circle.com/eurc">Circle — EEA issuer and EURC information</a></li>
+      <li><a href="https://www.bankingcircle.com/banking-circle-launches-the-first-bank-backed-mica-compliant-stablecoin-euri/">Banking Circle — EURI issuer statement</a></li>
+      <li><a href="https://www.sgforge.com/stablecoin-elevation/">Société Générale-FORGE — EURCV MiCA restructuring statement</a></li>
+      <li><a href="https://www.quantoz.com/products/eurq-usdq">Quantoz — EURQ and USDQ product and regulatory information</a></li>
+    </ul>
+    <p>Issuer pages record issuer claims and product terms. Authorization and register status should also be checked against the relevant national authority, EBA, and ESMA sources.</p>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide explains the framework and compares representative structures. It does not provide a complete legal opinion for every token, country, service, or customer type. It is not investment, legal, financial, or tax advice. Rules, authorizations, and platform availability can change.</p>
+  </section>
+</BaseLayout>
