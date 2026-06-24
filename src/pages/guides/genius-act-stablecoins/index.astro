@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('genius-act-stablecoins');
+const title = 'GENIUS Act and Stablecoins: What the U.S. Law Changes — Stable or Gone';
+const description = 'A beginner-friendly guide to the U.S. GENIUS Act, its implementation timeline, issuer rules, reserves, redemption, and representative dollar stablecoin models.';
+const canonicalPath = '/guides/genius-act-stablecoins/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'GENIUS Act and Stablecoins',
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['GENIUS Act', 'payment stablecoins', 'stablecoin regulation', 'stablecoin reserves', 'stablecoin redemption'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review the asset, issuer relationships, reserve profile, events, and evidence recorded by SOG.' },
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the global dollar stablecoin and the evidence behind its reserve and redemption record.' },
+  { href: '/stablecoin/pyusd/', title: 'PYUSD', summary: 'Review the PayPal-branded, Paxos-issued stablecoin and its current legal and reserve structure.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Review the Ripple-branded stablecoin issued through Standard Custody & Trust Company.' },
+  { href: '/stablecoin/dai/', title: 'DAI', summary: 'Review a protocol-issued, crypto-collateralized model that does not fit a simple bank-deposit analogy.' },
+  { href: '/stablecoin/usds/', title: 'USDS', summary: 'Review the Sky ecosystem stablecoin and its protocol-governed issuance model.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="GENIUS Act and Stablecoins"
+    description="What the new U.S. payment-stablecoin law changes, when it takes effect, and how to compare representative issuer models without declaring winners before approvals exist."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>The GENIUS Act creates a regulated issuer system for U.S. payment stablecoins.</strong> A permitted issuer must hold eligible reserves at least one-to-one, maintain redemption procedures, publish reserve information, and operate under federal or qualifying state supervision.</p>
+    <p>The law was enacted on July 18, 2025, but the implementing rules were still being developed as of June 25, 2026. Existing stablecoins are not automatically approved, and they do not disappear immediately. The important question is how each issuer enters the new system.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The basic idea</div>
+    <p>A payment stablecoin is a digital token designed to be used for payment or settlement while maintaining a fixed value, usually one U.S. dollar. The token is not safe merely because its market price is close to one dollar. Its reliability also depends on the issuer, the reserve assets, the redemption process, and the legal claim held by users.</p>
+    <table>
+      <tbody>
+        <tr><th>Before a common federal framework</th><td>Dollar stablecoins relied on different state licences, trust-company structures, overseas issuers, banking relationships, and protocol designs.</td></tr>
+        <tr><th>Under the GENIUS Act</th><td>A payment stablecoin offered through the regulated U.S. framework must be issued by a permitted issuer that meets reserve, redemption, disclosure, risk-management, and compliance requirements.</td></tr>
+        <tr><th>What does not follow automatically</th><td>Passing the law does not make every existing stablecoin approved, government-guaranteed, deposit-insured, or risk-free.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Is it a bill or a law?</div>
+    <p>It is a law. The GENIUS Act became <a href="https://www.congress.gov/119/plaws/publ27/PLAW-119publ27.htm">Public Law 119-27</a> on July 18, 2025.</p>
+    <p>The law does not become fully operational merely because it was signed. Federal regulators must create application, supervision, reserve, reporting, anti-money-laundering, sanctions, and customer-identification rules.</p>
+    <table>
+      <thead><tr><th>Date or stage</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>2025-07-18</td><td>The GENIUS Act became law.</td></tr>
+        <tr><td>2025–2026</td><td>Regulators began proposing application procedures and operating standards.</td></tr>
+        <tr><td>2026-02-25</td><td>The OCC announced a broad proposed rule for issuers and related stablecoin activities under its jurisdiction.</td></tr>
+        <tr><td>2026-04-07</td><td>The FDIC approved a proposed rule covering prudential requirements and related custody questions for FDIC-supervised institutions.</td></tr>
+        <tr><td>2026-06-18</td><td>Federal agencies proposed customer-identification requirements for payment stablecoin issuers.</td></tr>
+        <tr><td>Effective date</td><td>The earlier of January 18, 2027, or 120 days after the primary federal regulators issue final implementing regulations.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Current reading:</strong> as of the information date above, the framework was in rulemaking and implementation. Proposed rules are not final approvals for individual stablecoins.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Who may issue a regulated payment stablecoin?</div>
+    <p>The law creates several possible routes rather than one single federal issuer licence for every company.</p>
+    <table>
+      <thead><tr><th>Route</th><th>Beginner explanation</th></tr></thead>
+      <tbody>
+        <tr><td>Subsidiary of an insured bank or credit union</td><td>A regulated deposit-taking institution may use an approved subsidiary to issue payment stablecoins under its primary federal regulator.</td></tr>
+        <tr><td>Federal qualified nonbank issuer</td><td>A nonbank may apply to the OCC for federal approval and supervision.</td></tr>
+        <tr><td>Qualifying state issuer</td><td>A state-approved issuer may operate under a state framework that meets the statutory requirements, subject to the law's size and oversight provisions.</td></tr>
+        <tr><td>Foreign issuer</td><td>An overseas issuer needs an eligible foreign-regulatory route, U.S. registration and compliance, and sufficient U.S.-accessible liquidity for U.S. holders.</td></tr>
+      </tbody>
+    </table>
+    <p>A brand name is not the legal issuer. For example, a stablecoin may carry the name of a payments company while being legally issued by a regulated trust company. SOG therefore separates the asset, brand or operator, legal issuer, reserve manager, custodian, and redemption agent.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Reserves, redemption, and disclosure</div>
+    <table>
+      <thead><tr><th>Requirement</th><th>What it is intended to do</th></tr></thead>
+      <tbody>
+        <tr><td>At least one-to-one eligible reserves</td><td>Limit the issuer's ability to back a one-dollar token with risky, illiquid, or insufficient assets.</td></tr>
+        <tr><td>Cash and liquid permitted assets</td><td>Center reserves on U.S. currency, demand deposits, short-term Treasury obligations, qualifying repurchase transactions, government money-market funds, and other permitted liquid forms.</td></tr>
+        <tr><td>Redemption policy</td><td>Tell holders how, when, and at what cost the token can be returned for dollars.</td></tr>
+        <tr><td>Monthly reserve disclosure</td><td>Show what backs the outstanding tokens and whether the reported reserve amount covers them.</td></tr>
+        <tr><td>Independent examination and executive certification</td><td>Create accountability beyond an issuer's unsupported statement.</td></tr>
+        <tr><td>Risk, capital, liquidity, AML and sanctions controls</td><td>Bring issuers into a supervised financial-compliance framework.</td></tr>
+      </tbody>
+    </table>
+    <p>These rules are designed to reduce risk; they are not a government promise that a stablecoin can never depeg or fail.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Does the law guarantee holders or pay interest?</div>
+    <p><strong>No automatic government guarantee.</strong> A compliant payment stablecoin is not the same as an insured bank deposit. Issuers may not market the token as government-backed or deposit-insured when it is not.</p>
+    <p><strong>No issuer-paid interest merely for holding the token.</strong> The law prevents a payment stablecoin issuer from paying interest or yield solely because a person holds the stablecoin.</p>
+    <p>This does not make every third-party lending, exchange reward, liquidity-pool return, or protocol position identical. A base payment token and a separate yield-bearing wrapper or lending claim must be analysed separately.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Representative stablecoins: what should be tracked?</div>
+    <p>This table does not label any asset a winner or declare it approved under the GENIUS Act. It shows the different starting structures and the questions that SOG should continue to verify.</p>
+    <table>
+      <thead><tr><th>Asset</th><th>Current model</th><th>Key GENIUS Act question</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/stablecoin/usdc/">USDC</a></td><td>U.S.-connected corporate issuer with cash, bank-deposit, Treasury, and money-market-fund reserve infrastructure.</td><td>Which federal or qualifying state issuer route becomes the operative approval, and when is it final?</td></tr>
+        <tr><td><a href="/stablecoin/usdt/">USDT</a></td><td>Large global dollar stablecoin issued through an overseas corporate structure.</td><td>Does U.S. access rely on a foreign-issuer route, a separate U.S.-issued product, restrictions, or a combination?</td></tr>
+        <tr><td><a href="/stablecoin/pyusd/">PYUSD</a></td><td>PayPal-branded token legally issued through Paxos under an existing regulated trust-company model.</td><td>How does the legal issuer transition into a permitted issuer category under final rules?</td></tr>
+        <tr><td><a href="/stablecoin/rlusd/">RLUSD</a></td><td>Ripple-branded token issued by Standard Custody & Trust Company under New York supervision.</td><td>Does the issuer use a state-qualified route, a federal route, or another confirmed structure?</td></tr>
+        <tr><td><a href="/stablecoin/usdg/">USDG</a></td><td>Dollar stablecoin issued through a non-U.S. regulatory structure.</td><td>What foreign-issuer and U.S.-distribution path applies if it is offered to U.S. users?</td></tr>
+        <tr><td><a href="/stablecoin/dai/">DAI</a> / <a href="/stablecoin/usds/">USDS</a></td><td>Protocol-governed assets backed through on-chain collateral and broader protocol mechanisms.</td><td>Whether and how a protocol-issued model fits a law structured around a permitted legal issuer.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What changes for users and businesses?</div>
+    <table>
+      <tbody>
+        <tr><th>For ordinary holders</th><td>Issuer identity, redemption terms, reserve reporting, and regulatory status should become easier to compare, but self-custody and market risks still matter.</td></tr>
+        <tr><th>For exchanges and wallets</th><td>They will need to decide which stablecoins can be offered to U.S. users under the phased restrictions and final rules.</td></tr>
+        <tr><th>For banks and payment companies</th><td>A clearer approval path may support settlement and payments, while adding supervision, reporting, capital, liquidity, and compliance costs.</td></tr>
+        <tr><th>For foreign issuers</th><td>U.S. access becomes a separate legal and operational question rather than an automatic consequence of global circulation.</td></tr>
+        <tr><th>For decentralized stablecoins</th><td>The fit may be less direct because the law assumes an accountable permitted issuer that can hold reserves, redeem tokens, and comply with orders.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Confirmed, proposed, and not yet confirmed</div>
+    <table>
+      <thead><tr><th>Status</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Confirmed law</td><td>The Act was enacted; it establishes permitted issuer categories, reserve and redemption requirements, disclosure duties, and a phased implementation structure.</td></tr>
+        <tr><td>Proposed implementation</td><td>OCC, FDIC, and other agency rulemakings published during 2025–2026.</td></tr>
+        <tr><td>Not automatically confirmed</td><td>That any named existing stablecoin is finally approved, that every proposed rule will remain unchanged, or that compliance removes all loss and depeg risk.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Primary regulatory sources</div>
+    <ul>
+      <li><a href="https://www.congress.gov/119/plaws/publ27/PLAW-119publ27.htm">Public Law 119-27 — GENIUS Act</a></li>
+      <li><a href="https://www.congress.gov/bill/119th-congress/senate-bill/1582/actions">Congressional actions for S.1582</a></li>
+      <li><a href="https://www.occ.treas.gov/news-issuances/bulletins/2026/bulletin-2026-3.html">OCC Bulletin 2026-3 — proposed GENIUS Act regulations</a></li>
+      <li><a href="https://www.fdic.gov/news/press-releases/2026/fdic-approves-proposal-implement-genius-act-requirements-and-standards">FDIC proposal for GENIUS Act requirements and standards</a></li>
+      <li><a href="https://www.federalreserve.gov/newsevents/pressreleases/barr-statement-20260618.htm">Federal Reserve statement on proposed customer-identification requirements</a></li>
+    </ul>
+    <p>Issuer-specific statements are useful but do not replace regulator approval records or the final rules. Related SOG asset pages link to the evidence used for each recorded issuer, reserve, redemption, and event claim.</p>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide explains the structure of the law and the questions it creates for representative stablecoins. It is not legal, financial, tax, or investment advice. Regulatory status can change, and readers should verify current agency rules, issuer terms, and service availability.</p>
+  </section>
+</BaseLayout>

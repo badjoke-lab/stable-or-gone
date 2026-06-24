@@ -1,0 +1,21 @@
+---
+interface RelatedRecord {
+  href: string;
+  title: string;
+  summary: string;
+}
+
+interface Props {
+  records: RelatedRecord[];
+}
+
+const { records } = Astro.props;
+---
+<section class="section-grid" aria-label="Related Stable or Gone records">
+  {records.map((record) => (
+    <a class="panel mini-card" href={record.href}>
+      <h2>{record.title}</h2>
+      <p>{record.summary}</p>
+    </a>
+  ))}
+</section>

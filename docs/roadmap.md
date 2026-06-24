@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-24
+Updated: 2026-06-25
 
 ## Purpose
 
@@ -33,20 +33,20 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #127 — Resolve Cashio Dollar launch boundary
-Merge: 82ebe1857c26d09538dd17138694e45314b38531
+PR #128 — Add JPYSC and Japan stablecoin events
+Merge: 6ce8b9770eae75b5d0b23490a55c653fc551625c
 ```
 
 Current implementation checkpoint:
 
 ```text
-PR #128 — JPYSC launch and RLUSD Japan handling
+PR #129 — Dated Guides framework and GENIUS Act guide
 Status: in review
-Canonical branch count: 82 stable assets
-Next planned work after PR #128: dated Guides foundation and GENIUS Act article
+Information current through: 2026-06-25
+Next planned work after PR #129: MiCA guide
 ```
 
-Recent lineage, incident, and launch work:
+Recent lineage, incident, launch, and guide work:
 
 ```text
 PR #104 — Record sUSD severe depeg and SIP-423 proposal
@@ -68,12 +68,13 @@ PR #125 — Resolve Basis Cash launch lineage
 PR #126 — Audit Cashio Dollar launch boundary
 PR #127 — Resolve Cashio Dollar launch boundary
 PR #128 — Add JPYSC and Japan stablecoin events
+PR #129 — Add dated Guides framework and GENIUS Act guide
 ```
 
 Current blocker:
 
 ```text
-82-record GitHub canonical baseline: complete on PR #128 branch
+82-record GitHub canonical baseline: complete
 82-record production publication: pending
 82-record production parity: pending
 Cloudflare access: unavailable
@@ -89,7 +90,7 @@ Verification workflow run: 27905696588
 Audit: docs/audits/registry-75-production-parity.md
 ```
 
-## Current canonical registry after JPYSC launch branch changes
+## Current canonical registry
 
 ```text
 82 stable assets
@@ -213,15 +214,34 @@ HUSD — original signed historical attestation not recovered
 EURT — product-specific reserve scope not recovered from consolidated Tether reporting
 ```
 
+## Guide expansion sequence
+
+```text
+PR #129 — Guides framework + GENIUS Act
+PR #130 — MiCA
+PR #131 — JPYC versus JPYSC
+PR #132 — Site-wide guide integration
+```
+
+Rules:
+
+- use `/guides/` rather than adding another top-level navigation item
+- keep new guide URLs flat under `/guides/<slug>/`
+- keep `Published` unset until actual production publication
+- display `Information current through` from the final primary-source review date
+- display `Last updated` only after a meaningful later revision
+- record factual corrections explicitly as `Correction`
+- compare representative assets under the same fields without declaring unconfirmed winners
+
 ## Immediate next work
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Complete and merge PR #128 with synchronized JPYSC and RLUSD Japan event data, generated outputs, baselines, README, and roadmap.
-3. After PR #128 merges, implement the dated Guides foundation and publish the GENIUS Act article as the next PR.
-4. Follow with the MiCA article, then the JPYC versus JPYSC comparison article.
-5. Finish with a site-wide guide integration PR covering homepage links, related guides, Updates, metadata, sitemap, and validation.
-6. Keep article publication dates unset until the pages are actually live in production; use information-current-through dates during GitHub-only work.
+2. Complete and merge PR #129 with the dated guide catalog, shared article components, restructured Guides index, and GENIUS Act guide.
+3. Add the MiCA guide next, separating issuer authorization, token status, and CASP availability.
+4. Add the JPYC versus JPYSC guide after MiCA; keep RLUSD outside that comparison.
+5. Finish with the site-wide integration PR covering homepage discovery, related guides, Updates, metadata, sitemap, and validation.
+6. Keep article publication dates unset until the pages are actually live in production.
 7. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 

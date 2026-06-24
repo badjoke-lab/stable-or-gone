@@ -1,50 +1,63 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  guides,
+  guideCategoryDescriptions,
+  guideCategoryLabels,
+  type GuideCategory
+} from '../../data/guideCatalog';
 
-const guides = [
-  {
-    title: 'What Is a Depeg?',
-    href: '/guides/what-is-a-depeg/',
-    summary: 'Learn what counts as a depeg, how recoveries are recorded, and when a depeg becomes part of a larger collapse.'
-  },
-  {
-    title: 'Status and Event Records',
-    href: '/guides/status-vs-event/',
-    summary: 'See why a stablecoin can remain active after an incident, and how status labels differ from dated events.'
-  },
-  {
-    title: 'Reading Reserve Disclosures',
-    href: '/guides/reserve-disclosure-basics/',
-    summary: 'Understand issuer reports, attestations, audits, protocol collateral data, and gaps in public reporting.'
-  },
-  {
-    title: 'Stablecoin Lifecycle Terms',
-    href: '/guides/stablecoin-lifecycle-terms/',
-    summary: 'A guide to launches, migrations, rebrands, wind-downs, failures, and post-collapse trading.'
-  }
-];
+const categoryOrder: GuideCategory[] = ['regulation', 'asset-comparisons', 'core-concepts'];
+const visibleCategories = categoryOrder
+  .map((category) => ({ category, entries: guides.filter((guide) => guide.category === category) }))
+  .filter((group) => group.entries.length > 0);
+
+const title = 'Guides — Stable or Gone';
+const description = 'Beginner-friendly guides to stablecoin regulation, asset structures, depegs, reserves, redemption, lifecycle events, and the records behind each claim.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: 'https://sog.badjoke-lab.com/guides/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  hasPart: guides.map((guide) => ({
+    '@type': 'Article',
+    name: guide.title,
+    url: `https://sog.badjoke-lab.com/guides/${guide.slug}/`
+  }))
+};
 ---
-<BaseLayout title="Guides — Stable or Gone" description="Guides to stablecoin lifecycle status, event history, depegs, reserve disclosures, redemption access, evidence relations, and Registry v2 fields.">
+<BaseLayout title={title} description={description} canonicalPath="/guides/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main">
-      <div class="prompt">Stablecoin reference guides</div>
-      <h1>Understand the records</h1>
-      <p>These guides explain the terms and distinctions used throughout the archive, including Registry v2 fields for lifecycle status, issuance, reserves, redemption, events, and evidence scopes.</p>
+      <div class="prompt">Stablecoin guides and explainers</div>
+      <h1>Understand stablecoins and the rules around them</h1>
+      <p>These guides explain regulation, legal and reserve structures, redemption, lifecycle events, and the distinctions used throughout the archive.</p>
     </div>
     <div class="panel stats">
       <div class="stat"><span>Guides</span><strong>{guides.length}</strong></div>
-      <div class="stat"><span>Model</span><strong>Registry v2</strong></div>
+      <div class="stat"><span>Sections</span><strong>{visibleCategories.length}</strong></div>
     </div>
   </section>
 
-  <section class="section-grid">
-    {guides.map((guide) => (
-      <a class="panel mini-card" href={guide.href}>
-        <h2>{guide.title}</h2>
-        <p>{guide.summary}</p>
-      </a>
-    ))}
-  </section>
+  {visibleCategories.map(({ category, entries }) => (
+    <section aria-labelledby={`guide-category-${category}`}>
+      <div class="panel registry">
+        <div class="bar" id={`guide-category-${category}`}>{guideCategoryLabels[category]}</div>
+        <p>{guideCategoryDescriptions[category]}</p>
+      </div>
+      <div class="section-grid">
+        {entries.map((guide) => (
+          <a class="panel mini-card" href={`/guides/${guide.slug}/`}>
+            <h2>{guide.title}</h2>
+            <p>{guide.summary}</p>
+            <p><small>Information current through {guide.informationCurrentThrough}</small></p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 
   <section class="panel registry">
     <div class="bar">How to read a Stable or Gone record</div>
