@@ -492,11 +492,11 @@
     "title": "Proposal to initiate rollout of SPOT v2",
     "url": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
     "publisher": "Ampleforth Governance",
-    "published_at": null,
+    "published_at": "2024-04-09",
     "archived_url": null,
     "accessed_at": "2026-06-14",
-    "reliability": "medium",
-    "claim_scope": "spot_v2_rollout_and_protocol_version_history",
+    "reliability": "high",
+    "claim_scope": "spot_v2_proposal_signal_and_in_place_upgrade_design",
     "stablecoin_ids": [
       "sog_st_spot"
     ],
@@ -507,9 +507,13 @@
       "sog_ev_spot_v2_rollout"
     ],
     "claim_scopes": [
-      "spot_v2_rollout_and_protocol_version_history"
+      "v2_proposal",
+      "signal_vote_passed",
+      "in_place_upgrade",
+      "no_holder_migration",
+      "button_tranche_continuity"
     ],
-    "notes": "Official governance forum record; production activation details require further verification."
+    "notes": "Official governance thread fixes the proposal date, April 19 signal-vote result, and in-place upgrade boundary. Exact production activation remains unresolved."
   },
   {
     "id": "sog_src_spot_site_batch_b",
@@ -874,6 +878,126 @@
     ],
     "event_ids": [
       "sog_ev_nuon_guarded_launch"
+    ]
+  },
+  {
+    "id": "sog_src_spot_launch_2022",
+    "event_id": "sog_ev_spot_launch_2022",
+    "source_type": "protocol_page",
+    "title": "SPOT — A Responsibly-Designed, Inflation Resistant, Store of Value",
+    "url": "https://blog.ampleforth.org/spot-the-inflation-resistant-store-of-value-87e8112468b2",
+    "publisher": "Ampleforth",
+    "published_at": "2022-12-08",
+    "claim_scope": "spot_ethereum_mainnet_launch",
+    "claim_scopes": [
+      "launch_date",
+      "ethereum_mainnet",
+      "spot_contract",
+      "initial_configuration"
+    ],
+    "stablecoin_id": "sog_st_spot",
+    "issuer_id": "sog_issuer_ampleforth",
+    "archived_url": "https://web.archive.org/web/*/https://blog.ampleforth.org/spot-the-inflation-resistant-store-of-value-87e8112468b2",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "stablecoin_ids": [
+      "sog_st_spot"
+    ],
+    "organization_ids": [
+      "sog_issuer_ampleforth"
+    ],
+    "event_ids": [
+      "sog_ev_spot_launch_2022"
+    ]
+  },
+  {
+    "id": "sog_src_spot_launch_news_2022",
+    "event_id": "sog_ev_spot_launch_2022",
+    "source_type": "news_article",
+    "title": "Ampleforth developer debuts Ethereum-based inflation-resistant token",
+    "url": "https://www.theblock.co/post/193230/ampleforth-developer-debuts-ethereum-based-inflation-resistant-token",
+    "publisher": "The Block",
+    "published_at": "2022-12-08",
+    "claim_scope": "independent_launch_corroboration",
+    "claim_scopes": [
+      "launch_date",
+      "public_minting",
+      "ethereum_release"
+    ],
+    "stablecoin_id": "sog_st_spot",
+    "issuer_id": "sog_issuer_ampleforth",
+    "archived_url": "https://web.archive.org/web/*/https://www.theblock.co/post/193230/ampleforth-developer-debuts-ethereum-based-inflation-resistant-token",
+    "accessed_at": "2026-06-24",
+    "reliability": "medium",
+    "stablecoin_ids": [
+      "sog_st_spot"
+    ],
+    "organization_ids": [
+      "sog_issuer_ampleforth"
+    ],
+    "event_ids": [
+      "sog_ev_spot_launch_2022"
+    ]
+  },
+  {
+    "id": "sog_src_spot_technical_resources_2026",
+    "event_id": null,
+    "source_type": "protocol_docs",
+    "title": "SPOT Technical Resources",
+    "url": "https://docs.spot.cash/spot-documentation/technical-resources",
+    "publisher": "Ampleforth SPOT",
+    "published_at": null,
+    "claim_scope": "current_spot_contracts_and_networks",
+    "claim_scopes": [
+      "ethereum_spot_contract",
+      "stampl_contract",
+      "bond_issuer",
+      "fee_policy",
+      "router",
+      "base_bridged_contract"
+    ],
+    "stablecoin_id": "sog_st_spot",
+    "issuer_id": "sog_issuer_ampleforth",
+    "archived_url": "https://web.archive.org/web/*/https://docs.spot.cash/spot-documentation/technical-resources",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "stablecoin_ids": [
+      "sog_st_spot"
+    ],
+    "organization_ids": [
+      "sog_issuer_ampleforth"
+    ],
+    "event_ids": []
+  },
+  {
+    "id": "sog_src_spot_v5_upgrade_2025",
+    "event_id": "sog_ev_spot_v5_upgrade_2025",
+    "source_type": "governance_proposal",
+    "title": "SPOT v5.0 Upgrade",
+    "url": "https://forum.ampleforth.org/t/spot-v5-0-upgrade/855",
+    "publisher": "Ampleforth Governance",
+    "published_at": "2025-06-11",
+    "claim_scope": "spot_v5_proposal_and_execution",
+    "claim_scopes": [
+      "v5_upgrade",
+      "onchain_execution",
+      "rotation_changes",
+      "dr_fees",
+      "paired_mint_redemption"
+    ],
+    "stablecoin_id": "sog_st_spot",
+    "issuer_id": "sog_issuer_ampleforth",
+    "archived_url": "https://web.archive.org/web/*/https://forum.ampleforth.org/t/spot-v5-0-upgrade/855",
+    "accessed_at": "2026-06-24",
+    "reliability": "high",
+    "stablecoin_ids": [
+      "sog_st_spot"
+    ],
+    "organization_ids": [
+      "sog_issuer_ampleforth"
+    ],
+    "event_ids": [
+      "sog_ev_spot_v5_upgrade_2025"
     ]
   }
 ]

@@ -30,9 +30,9 @@ Promoted in Launch-date Batch O:     5
 Promoted in Launch-date Batch P:     2
 Category A remaining:                0
 Category B:                           5
-Category C:                          23
+Category C:                          22
 Category D:                           3
-Remaining launch_date null:         29
+Remaining launch_date null:         28
 Queue status:                       frozen and validator-enforced
 Machine-readable queue:             data/quality/launch-date-unresolved.json
 ```
@@ -233,7 +233,7 @@ Original review scope: complete
 Records classified: 38 / 38
 Canonical launch dates promoted in Batch O: 5
 Canonical launch dates promoted in Batch P: 2
-Remaining launch_date null:         29
+Remaining launch_date null:         28
 Remaining category-A records: none
 Unresolved queue: frozen and validator-enforced
 Next work item: Historical terminal-date review

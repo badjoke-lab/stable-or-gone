@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-23T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_nuon_lineage_2026_06_23",
+  "generated_at": "2026-06-24T00:00:00.000Z",
+  "baseline_id": "sog_registry_v2_spot_lineage_2026_06_24",
   "registry": {
     "stablecoins": 81,
     "organizations": 70,
     "relationships": 83,
     "classifications": 81,
     "profiles": 81,
-    "events": 119,
-    "event_details": 119,
-    "evidence": 363,
+    "events": 121,
+    "event_details": 121,
+    "evidence": 367,
     "reserve_reports": 89,
     "known_unknowns": 198,
     "regulatory_notes": 9,
-    "deployments": 114,
+    "deployments": 115,
     "legal_profiles": 81,
     "stable_asset_relationships": 4,
     "reserve_components": 113,
@@ -161,7 +161,7 @@
       "Arbitrum": 2,
       "Arbitrum One": 1,
       "Avalanche": 1,
-      "Base": 4,
+      "Base": 5,
       "Berachain": 1,
       "Bitcoin Omni Layer": 1,
       "BNB Chain": 4,
@@ -280,8 +280,8 @@
       "share": 0.115
     },
     "deployments_unknown_canonicality": {
-      "count": 69,
-      "share": 0.6053
+      "count": 68,
+      "share": 0.5913
     }
   }
 }

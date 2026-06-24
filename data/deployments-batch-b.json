@@ -41,12 +41,23 @@
     "stablecoin_id": "sog_st_spot",
     "chain": "Ethereum",
     "deployment_type": "native",
-    "contract_address": null,
-    "status": "source_review_needed",
-    "notes": "Official documentation confirms SPOT as an ERC-20 protocol asset, but the current v2 canonical address is withheld pending durable primary-source verification.",
+    "contract_address": "0xC1f33e0cf7e40a67375007104B929E49a581bafE",
+    "status": "active",
+    "notes": "Continuous Ethereum SPOT token proxy launched in 2022 and retained through in-place protocol upgrades. Current official components include stAMPL 0x82A91a0D599A45d8E9Af781D67f695d7C72869Bd, BondIssuer 0x5613Fc36A431c9c2746763B80C1DD89e03593871, FeePolicy 0x8689Fa9991834Bcf0387b31b7986ac311bAb6ab5, and Router 0xCe2878d1f2901EFaF48cd456E586B470C145d1BC.",
     "evidence_ids": [
+      "sog_src_spot_launch_2022",
       "sog_src_spot_about_batch_b",
-      "sog_src_spot_mint_batch_b"
+      "sog_src_spot_technical_resources_2026",
+      "sog_src_spot_v5_upgrade_2025"
+    ],
+    "token_standard": "ERC-20",
+    "canonicality": "native",
+    "is_primary": true,
+    "contract_version": "continuous_proxy_current_v5",
+    "control_event_ids": [
+      "sog_ev_spot_launch_2022",
+      "sog_ev_spot_v2_rollout",
+      "sog_ev_spot_v5_upgrade_2025"
     ]
   },
   {
@@ -89,5 +100,23 @@
       "sog_src_nuon_v1_launch_2023",
       "sog_src_nuon_v1_arbiscan"
     ]
+  },
+  {
+    "id": "sog_dep_spot_base",
+    "stablecoin_id": "sog_st_spot",
+    "chain": "Base",
+    "deployment_type": "bridged",
+    "token_standard": "ERC-20",
+    "contract_address": "0x8f2E6758C4D6570344bd5007DEc6301cd57590A0",
+    "status": "active",
+    "canonicality": "canonical_bridge",
+    "is_primary": false,
+    "contract_version": "superbridge_representation",
+    "control_event_ids": [],
+    "notes": "Official SPOT documentation identifies this Base representation as bridged via Superbridge. The Ethereum deployment remains the primary native token.",
+    "evidence_ids": [
+      "sog_src_spot_technical_resources_2026"
+    ],
+    "origin_deployment_id": "sog_dep_spot_ethereum"
   }
 ]

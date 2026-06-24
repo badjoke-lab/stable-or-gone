@@ -63,21 +63,21 @@
     "id": "sog_unk_spot_contracts",
     "stablecoin_id": "sog_st_spot",
     "issuer_id": "sog_issuer_ampleforth",
-    "topic": "contract_and_version_state",
-    "description": "The current SPOT v2 token, bond, and migration contract set requires durable primary-source normalization.",
-    "severity": "high",
-    "last_checked_at": "2026-06-14",
-    "notes": "No address is published until verified."
+    "topic": "historical_contract_and_version_state",
+    "description": "Current Ethereum SPOT, stAMPL, BondIssuer, FeePolicy, Router, and Base bridged addresses are normalized from official technical documentation. Historical implementation addresses across v1, v2, v4.1, and v5, plus any retired auxiliary contracts, are not yet a complete versioned contract graph.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-24",
+    "notes": "The SPOT token proxy is continuous. Do not infer that every component contract remained unchanged across upgrades."
   },
   {
     "id": "sog_unk_spot_history",
     "stablecoin_id": "sog_st_spot",
     "issuer_id": "sog_issuer_ampleforth",
-    "topic": "lifecycle_and_collateral_rotation",
-    "description": "Initial launch, v1-to-v2 transition, and collateral-rotation history are not yet a complete event series.",
+    "topic": "v2_activation_and_collateral_rotation_history",
+    "description": "The 2022 launch, April 2024 v2 proposal and signal result, and July 2025 v5 execution are recorded. The exact v2 production activation transaction date, August 2023 Rotation Vault launch day, intermediate v3/v4 upgrade sequence, and complete bond and collateral-rotation parameter history remain unresolved.",
     "severity": "medium",
-    "last_checked_at": "2026-06-14",
-    "notes": "Current coverage establishes identity and mechanism only."
+    "last_checked_at": "2026-06-24",
+    "notes": "Do not substitute the v2 proposal or signal-vote date for the unresolved production activation day."
   },
   {
     "id": "sog_unk_nuon_launch_phase",
