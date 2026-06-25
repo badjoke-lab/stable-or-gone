@@ -88,9 +88,9 @@
     }
   },
   "candidate_promotions": {
-    "total": 82,
+    "total": 87,
     "promoted": 82,
-    "pending": 0
+    "pending": 5
   },
   "identity": {
     "canonical_name_collisions": 0,
