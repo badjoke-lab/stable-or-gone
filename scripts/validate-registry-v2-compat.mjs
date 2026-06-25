@@ -19,7 +19,7 @@ const relationships = group(baseline.data_groups?.relationships);
 const events = group(baseline.data_groups?.events);
 const evidence = group(baseline.data_groups?.evidence);
 const legacyIssuers = group([
-  'data/issuers.json','data/issuers-extra.json','data/issuers-batch-b.json','data/issuers-batch-c.json','data/issuers-batch-d.json','data/issuers-batch-e.json','data/issuers-batch-f.json','data/issuers-batch-g.json','data/issuers-batch-h.json','data/issuers-batch-i.json','data/issuers-batch-j.json','data/issuers-batch-k.json','data/issuers-batch-l.json','data/issuers-batch-m.json','data/issuers-batch-n.json','data/issuers-batch-o.json'
+  'data/issuers.json','data/issuers-extra.json','data/issuers-batch-b.json','data/issuers-batch-c.json','data/issuers-batch-d.json','data/issuers-batch-e.json','data/issuers-batch-f.json','data/issuers-batch-g.json','data/issuers-batch-h.json','data/issuers-batch-i.json','data/issuers-batch-j.json','data/issuers-batch-k.json','data/issuers-batch-l.json','data/issuers-batch-m.json','data/issuers-batch-n.json','data/issuers-batch-o.json','data/issuers-batch-p.json'
 ]);
 
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
