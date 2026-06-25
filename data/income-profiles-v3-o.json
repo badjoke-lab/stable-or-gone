@@ -1,0 +1,47 @@
+[
+  {
+    "id": "sog_st_unitedu",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_unitedu_site_batch_o", "sog_src_unitedu_terms_batch_o"]
+  },
+  {
+    "id": "sog_st_usdgo",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_usdgo_product_batch_o", "sog_src_usdgo_anchorage_batch_o"]
+  },
+  {
+    "id": "sog_st_sofiusd",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_sofiusd_launch_batch_o", "sog_src_sofiusd_support_batch_o"]
+  },
+  {
+    "id": "sog_st_solsticeusx",
+    "availability": "via_wrapper",
+    "source": "reserve_income",
+    "accrual": "wrapper_value_increase",
+    "rate": "variable",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_solsticeusx_docs_batch_o"]
+  },
+  {
+    "id": "sog_st_ousd",
+    "availability": "native",
+    "source": "reserve_income",
+    "accrual": "balance_rebase",
+    "rate": "variable",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_ousd_launch_batch_o", "sog_src_ousd_docs_batch_o"]
+  }
+]
