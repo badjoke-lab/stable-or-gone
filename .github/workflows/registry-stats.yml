@@ -6,16 +6,21 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Finalize MIM boundary synchronization
+        if: github.event_name == 'pull_request' && github.actor != 'github-actions[bot]'
+        run: node scripts/finalize-mim-boundaries.mjs
       - name: Validate current output
         run: node scripts/validate-registry-stats.mjs
       - name: Rebuild output
