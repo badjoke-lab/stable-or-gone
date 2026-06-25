@@ -16,13 +16,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate current output
-        run: node scripts/validate-registry-stats.mjs
+      - name: Update registry snapshot
+        run: node scripts/update-registry-snapshot.mjs
       - name: Rebuild output
         run: node scripts/generate-registry-stats.mjs
+      - name: Rebuild integrity audit
+        run: node scripts/audit-registry-integrity.mjs
       - name: Validate rebuilt output
         run: node scripts/validate-registry-stats.mjs
       - uses: actions/upload-artifact@v4
         with:
-          name: registry-stats
-          path: data/generated/registry-stats.json
+          name: registry-synchronized-files
+          path: |
+            docs/migration/registry-v2-baseline.json
+            docs/migration/registry-v3-baseline.json
+            data/generated/registry-stats.json
+            data/generated/registry-integrity-audit.json
