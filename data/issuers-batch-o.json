@@ -1,0 +1,67 @@
+[
+  {
+    "id": "sog_issuer_united_stables",
+    "slug": "united-stables-limited",
+    "name": "United Stables Limited",
+    "issuer_type": "company",
+    "jurisdiction": "British Virgin Islands",
+    "related_stablecoins": ["united-stables-u"],
+    "official_url": "https://www.u.tech/",
+    "summary": "Issuer and operator of United Stables U.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch O compatibility row."
+  },
+  {
+    "id": "sog_issuer_anchorage_digital_bank",
+    "slug": "anchorage-digital-bank",
+    "name": "Anchorage Digital Bank",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["usdgo"],
+    "official_url": "https://www.anchorage.com/",
+    "summary": "Federally chartered digital-asset bank identified as the legal issuer of USDGO.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch O compatibility row; OSL roles remain separate."
+  },
+  {
+    "id": "sog_issuer_sofi_bank",
+    "slug": "sofi-bank",
+    "name": "SoFi Bank, N.A.",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["sofiusd"],
+    "official_url": "https://www.sofi.com/",
+    "summary": "National bank and legal issuer of SoFiUSD / SOFID.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch O compatibility row."
+  },
+  {
+    "id": "sog_issuer_solstice_finance",
+    "slug": "solstice-finance",
+    "name": "Solstice Finance",
+    "issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "related_stablecoins": ["solstice-usx"],
+    "official_url": "https://solstice.finance/",
+    "summary": "Protocol and operating ecosystem behind Solstice USX and separate yield products.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch O compatibility row."
+  },
+  {
+    "id": "sog_issuer_origin_protocol",
+    "slug": "origin-protocol",
+    "name": "Origin Protocol",
+    "issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "related_stablecoins": ["origin-dollar"],
+    "official_url": "https://www.originprotocol.com/",
+    "summary": "Protocol and governance ecosystem behind Origin Dollar and related Origin yield products.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch O compatibility row."
+  }
+]
