@@ -37,7 +37,7 @@
   },
   {
     "id": "sog_st_usdh",
-    "lifecycle_status": "winding_down",
+    "lifecycle_status": "restricted",
     "issuance_status": "restricted",
     "peg_reference": {"kind":"fiat","asset":"USD","notes":"Targets one U.S. dollar during a migration and liquidity-transition period."},
     "backing_types": ["cash","government_securities","tokenized_fund","mixed"],
@@ -45,7 +45,7 @@
     "governance_model": "centralized",
     "asset_class": "stablecoin",
     "reference_target": "fiat",
-    "classification_notes": "Issuer-backed Hyperliquid stablecoin currently treated as limited / winding down pending final migration boundaries."
+    "classification_notes": "Issuer-backed Hyperliquid stablecoin treated as limited during an unresolved migration and liquidity-transition period."
   },
   {
     "id": "sog_st_aecoin",
