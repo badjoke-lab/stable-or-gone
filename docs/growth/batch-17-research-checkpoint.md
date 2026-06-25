@@ -7,6 +7,7 @@ candidate total: 92
 promoted candidates: 87
 pending candidates: 5
 canonical stable assets: 87
+canonical writes in this checkpoint: 0
 ```
 
 Accepted candidates:
@@ -25,4 +26,4 @@ Identity and lifecycle boundaries:
 - AE Coin separates the B2B issuer from appointed custody, conversion, transfer, and end-customer agents.
 - EURAU separates AllUnity's issuer role from shareholders, reserve banks, custodians, liquidity providers, and distributors.
 
-Unresolved launch dates remain null for USDH and AE Coin. Canonical promotion remains a separate full-layer PR.
+Unresolved launch dates remain null for USDH and AE Coin. Every candidate retains five explicit blocking unknowns and at least three primary-source leads. Canonical promotion remains a separate full-layer PR.
