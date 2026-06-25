@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-import { buildRegistryStats } from './generate-registry-stats.mjs';
+import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
 
 const root = process.cwd();
 const contractPath = 'docs/stats/registry-stats-contract.json';
