@@ -1,0 +1,47 @@
+[
+  {
+    "id":"sog_ev_usat_launch_batch_p",
+    "title":"USA₮ officially launches",
+    "subject_stablecoin_ids":["sog_st_usat"],
+    "subject_organization_ids":["sog_issuer_anchorage_digital_bank","sog_org_tether_usat"],
+    "evidence_ids":["sog_src_usat_launch_batch_p","sog_src_usat_site_batch_p","sog_src_usat_unveil_batch_p","sog_src_usat_anchorage_batch_p"],
+    "event_detail_kind":"launch",
+    "launch_detail":{"summary":"The dated announcement establishes the official USA₮ launch and Anchorage issuer boundary.","status":"active"}
+  },
+  {
+    "id":"sog_ev_eurau_launch_batch_p",
+    "title":"AllUnity launches EURAU",
+    "subject_stablecoin_ids":["sog_st_eurau"],
+    "subject_organization_ids":["sog_issuer_allunity","sog_org_tradevest"],
+    "evidence_ids":["sog_src_eurau_launch_batch_p","sog_src_eurau_site_batch_p","sog_src_eurau_license_batch_p","sog_src_eurau_tradevest_batch_p"],
+    "event_detail_kind":"launch",
+    "launch_detail":{"summary":"Official material establishes the 31 July 2025 launch and separates AllUnity's issuer role from partner roles.","status":"active"}
+  },
+  {
+    "id":"sog_ev_nobleusdn_launch_batch_p",
+    "title":"Noble Dollar launches",
+    "subject_stablecoin_ids":["sog_st_nobleusdn"],
+    "subject_organization_ids":["sog_issuer_noble","sog_issuer_m0_protocol"],
+    "evidence_ids":["sog_src_nobleusdn_launch_batch_p","sog_src_nobleusdn_overview_batch_p","sog_src_nobleusdn_architecture_batch_p","sog_src_nobleusdn_site_batch_p"],
+    "event_detail_kind":"launch",
+    "launch_detail":{"summary":"Official Noble material establishes the 5 March 2025 launch and native yield design.","status":"active"}
+  },
+  {
+    "id":"sog_ev_usdh_migration_batch_p",
+    "title":"USDH enters migration period",
+    "subject_stablecoin_ids":["sog_st_usdh"],
+    "subject_organization_ids":["sog_issuer_bridge","sog_org_native_markets"],
+    "evidence_ids":["sog_src_usdh_about_batch_p","sog_src_usdh_reserves_batch_p","sog_src_usdh_overview_batch_p","sog_src_usdh_minting_batch_p","sog_src_usdh_migration_batch_p"],
+    "event_detail_kind":"migration",
+    "migration_detail":{"summary":"USDH remains fully backed during a migration and liquidity-transition period; exact start and end boundaries remain unresolved.","status":"in_progress"}
+  },
+  {
+    "id":"sog_ev_aecoin_regulatory_context_batch_p",
+    "title":"AE Coin operates under CBUAE payment-token authorization",
+    "subject_stablecoin_ids":["sog_st_aecoin"],
+    "subject_organization_ids":["sog_issuer_aed_stablecoin"],
+    "evidence_ids":["sog_src_aecoin_site_batch_p","sog_src_aecoin_privacy_batch_p","sog_src_aecoin_whitepaper_batch_p","sog_src_aecoin_cbuae_batch_p"],
+    "event_detail_kind":"regulatory",
+    "regulatory_detail":{"summary":"AED Stablecoin LLC states that it is authorized by CBUAE to issue AE Coin through a B2B and appointed-agent model.","effective_date":null,"resolution_date":null,"status":"active"}
+  }
+]
