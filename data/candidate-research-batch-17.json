@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_017",
+  "reviewed_at": "2026-06-26",
+  "status": "accepted",
+  "canonical_assets": 87,
+  "policy": {
+    "canonical_write_allowed": false,
+    "manual_evidence_review_required": true,
+    "full_layer_draft_required": true,
+    "unsupported_day_precision_forbidden": true,
+    "identity_deduplication_required": true,
+    "symbol_collision_requires_disambiguation": true,
+    "production_record_parity_required": true
+  },
+  "records": [
+    {
+      "candidate_id": "sog_cand_000088",
+      "proposed_record_id": "sog_st_usat",
+      "name": "USA₮",
+      "symbol": "USAT",
+      "slug": "usat",
+      "proposed_status": "active",
+      "launch_date": "2026-01-27",
+      "launch_precision": "day",
+      "identity_decision": "USA₮ is a separate U.S.-regulated stablecoin and must not be merged with Tether USD₮. Anchorage Digital Bank, N.A. is the legal issuer; Tether product, brand, technology, and distribution support must remain separate from issuance.",
+      "backing_decision": "Official launch material describes a federally regulated dollar-backed stablecoin. Exact reserve composition, eligible instruments, custody, segregation, and recurring attestation scope require terms-level normalization.",
+      "redemption_decision": "Institutional issuance and redemption are expected through regulated onboarding routes. Direct holder eligibility, minimums, fees, settlement timing, and secondary-market-holder rights require primary program terms.",
+      "income_decision": "No intrinsic holder yield is established for base USA₮. Reserve income, platform rewards, and distribution incentives must remain separate from token-holder accrual.",
+      "deployment_decision": "Official material confirms the product launch and later Ethereum support. Exact first mint, canonical contract, authority controls, and any additional networks require direct verification.",
+      "primary_sources": [
+        "https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/",
+        "https://usat.io/",
+        "https://tether.io/news/tether-unveils-usat-its-planned-u-s-regulated-dollar-backed-stablecoin-and-will-appoint-bo-hines-as-ceo-of-tether-usat/",
+        "https://tether.io/news/tether-announces-100-million-strategic-equity-investment-in-anchorage-digital/"
+      ],
+      "blocking_unknowns": [
+        "complete Anchorage issuance and redemption terms",
+        "reserve composition, custody, and segregation map",
+        "canonical contract, mint authority, and freeze authority",
+        "complete recurring attestation archive",
+        "current institutional and retail distribution eligibility"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000089",
+      "proposed_record_id": "sog_st_eurau",
+      "name": "EURAU",
+      "symbol": "EURAU",
+      "slug": "eurau",
+      "proposed_status": "active",
+      "launch_date": "2025-07-31",
+      "launch_precision": "day",
+      "identity_decision": "EURAU is the euro-denominated stablecoin issued by AllUnity. DWS, Flow Traders, Galaxy, reserve banks, custodians, market makers, and distribution partners must not be represented as co-issuers unless primary legal material establishes that role.",
+      "backing_decision": "AllUnity describes EURAU as fully reserved and MiCAR-compliant. The exact reserve allocation, safeguarding accounts, bank diversification, eligible instruments, and attestation chronology require primary report normalization.",
+      "redemption_decision": "Initial issuance and redemption were directed toward onboarded institutional customers and partners. Current end-user access, redemption eligibility, minimums, fees, timing, and agent routes require current terms review.",
+      "income_decision": "No intrinsic holder yield is established for base EURAU. Reserve earnings, liquidity-provider incentives, and partner rewards must remain separate.",
+      "deployment_decision": "Ethereum is the original launch deployment. Later Base and other network expansions must be modeled as subsequent deployments with separate contract and bridge verification.",
+      "primary_sources": [
+        "https://allunity.com/news/allunity-launches-eurau-germanys-first-fully-reserved-micar-compliant-euro-stablecoin",
+        "https://allunity.com/eurau/",
+        "https://allunity.com/news/allunity-secures-bafin-emi-license-to-launch-its-micar-compliant-euro-stablecoin/",
+        "https://allunity.com/news/allunity-announces-partnership-with-tradevest-as-custodian-first-buyer-and-exchange-partner-for-eurau/"
+      ],
+      "blocking_unknowns": [
+        "complete reserve-allocation and safeguarding chronology",
+        "current direct issuance and redemption eligibility",
+        "canonical contracts and authority controls across networks",
+        "complete attestation and audit archive",
+        "current reserve-bank, custodian, and liquidity-provider role map"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000090",
+      "proposed_record_id": "sog_st_nobleusdn",
+      "name": "Noble Dollar",
+      "symbol": "USDN",
+      "slug": "noble-usdn",
+      "proposed_status": "active",
+      "launch_date": "2025-03-05",
+      "launch_precision": "day",
+      "identity_decision": "Noble Dollar is a separate USDN identity and must not be merged with the existing Neutrino USD record. It is a Noble-issued extension built with M0 infrastructure, with Noble, M0, collateral validators, bridge providers, and integrators modeled as distinct roles.",
+      "backing_decision": "Official material describes full backing through short-term U.S. Treasury-bill exposure inherited from the M0 base asset. The exact collateral portfolio, validator reports, custody, and reserve-liability chain require normalization.",
+      "redemption_decision": "USDN conversion and liquidity routes operate through Noble, M0, and supported integrations. Primary mint and redemption eligibility, direct settlement assets, fees, delays, and emergency controls require contract and terms review.",
+      "income_decision": "Base USDN is designed to pass through variable yield without staking or lockups. Boosted-yield vaults, points programs, and integrator incentives are separate layers and must not be merged into the base income profile.",
+      "deployment_decision": "USDN launched on Noble and uses M0 Portal and Wormhole NTT-based infrastructure for cross-ecosystem movement. Native, bridged, and integrated representations require separate canonicality review.",
+      "primary_sources": [
+        "https://noble.xyz/blog/introducing-usdn",
+        "https://docs.noble.xyz/learn/usdn/overview/",
+        "https://docs.noble.xyz/usdn/architecture/",
+        "https://noble.xyz/usdn"
+      ],
+      "blocking_unknowns": [
+        "legal issuer, extension operator, and redemption-agent role map",
+        "complete M0 collateral and validator-report linkage",
+        "primary mint and redemption terms",
+        "canonical deployment and bridge representation inventory",
+        "base yield versus vault, points, and integrator reward boundaries"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000091",
+      "proposed_record_id": "sog_st_usdh",
+      "name": "USDH",
+      "symbol": "USDH",
+      "slug": "usdh",
+      "proposed_status": "limited",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_decision": "USDH is the Hyperliquid-native stablecoin designed by Native Markets and issued through Bridge infrastructure. The base token, HyperCore representation, linked HyperEVM ERC-20, reserve managers, issuer, and ecosystem contributors require distinct role and deployment treatment.",
+      "backing_decision": "Official material describes 1:1 backing with cash, U.S. Treasury exposure, and cash equivalents. Off-chain and on-chain reserve management, custody, monthly attestations, and the allocation of reserve income require time-bounded normalization.",
+      "redemption_decision": "Official documentation describes 1:1 bank-dollar and USDC mint and redemption routes for approved institutional users. Current availability during the migration period, eligibility, minimums, fees, timing, and final redemption deadlines require review.",
+      "income_decision": "Base USDH does not document intrinsic holder yield. Reserve income is allocated to ecosystem contributions and growth programs rather than automatically accruing to every holder.",
+      "deployment_decision": "USDH spans a HyperCore native token and a linked HyperEVM ERC-20 representation. Exact launch dates, contracts, linking controls, treasury-deployer transition, and post-migration canonical status require direct verification.",
+      "primary_sources": [
+        "https://usdh.com/about",
+        "https://usdh.com/reserves",
+        "https://docs.usdh.com/usdh/overview",
+        "https://docs.usdh.com/usdh/minting",
+        "https://usdh.com/migration"
+      ],
+      "blocking_unknowns": [
+        "canonical public launch date and first mint",
+        "Bridge issuer terms and direct redemption agreement",
+        "HyperCore and HyperEVM contract and authority map",
+        "migration timeline, final support date, and successor-liquidity boundary",
+        "complete reserve attestation and income-allocation chronology"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000092",
+      "proposed_record_id": "sog_st_aecoin",
+      "name": "AE Coin",
+      "symbol": "AEC",
+      "slug": "ae-coin",
+      "proposed_status": "active",
+      "launch_date": null,
+      "launch_precision": "unresolved",
+      "identity_decision": "AE Coin is the AED-referenced payment token issued by AED Stablecoin LLC. The issuer conducts B2B minting, while appointed agents handle custody, transfer, conversion, and end-customer relationships; those roles must remain separate.",
+      "backing_decision": "Official material states that one AEC targets one AED and that the product operates under CBUAE regulation. Exact reserve composition, safeguarding, bank accounts, segregation, attestations, and holder-claim structure require primary legal and financial documentation.",
+      "redemption_decision": "AED Stablecoin LLC does not maintain direct end-customer relationships. Redemption and conversion are performed through authorized agents, so agent eligibility, fees, limits, timing, and issuer-level settlement rights require normalization.",
+      "income_decision": "No intrinsic holder yield is established for base AEC. Agent rewards, account benefits, and reserve earnings must remain separate.",
+      "deployment_decision": "Official material confirms blockchain issuance but does not yet provide a sufficiently normalized canonical chain, contract, mint authority, freeze authority, or version history for promotion.",
+      "primary_sources": [
+        "https://aecoin.com/",
+        "https://aecoin.com/privacy-policy.php",
+        "https://aecoin.com/downloads/whitepaper-en.pdf",
+        "https://www.centralbank.ae/en/licensing/"
+      ],
+      "blocking_unknowns": [
+        "canonical launch date and first public circulation boundary",
+        "complete reserve, safeguarding, and attestation structure",
+        "authorized agent inventory and role chronology",
+        "direct and indirect redemption terms for institutions and end users",
+        "canonical chain, contract, and administrative-control map"
+      ],
+      "promotion_readiness": "accepted"
+    }
+  ]
+}
