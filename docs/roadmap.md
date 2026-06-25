@@ -11,29 +11,29 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #149 — Audit VAI launch boundary
-Latest merged commit: 2ce768064623dee173594c11dd3f57a469420a76
-Current work: VAI canonical implementation
-Launch result: launch_date set to 2020-11-24
-Current-state result: status active; discontinued_date null
-Next bounded review after merge: VCHF
+Latest merged PR: #150 — Implement VAI launch boundary
+Latest merged commit: 83a52866378bbba6e219893b3e038b2b6b734ca7
+Current work: VCHF bounded launch-boundary audit
+Launch conclusion: set launch_date to 2022-12-15
+Current-state conclusion: retain status active and discontinued_date null
+Next operation after audit: VCHF canonical implementation
+Next bounded review after VCHF: IRON
 ```
 
-## VAI audit checkpoint
+## VCHF audit checkpoint
 
 ```text
-2020-10-17 — Venus alpha testnet launched; VAI minting still described as future beta functionality
-2020-11-24 — Venus mainnet launched and public VAI minting became available
-exact VAI contract deployment — unresolved in the reviewed source set
-exact first VAI mint — unresolved
-2023 — VAI Peg Stability Module introduced through later governance and deployment work
-current — collateralized VAI borrowing is restricted to eligible Prime users; PSM and market routes remain separate
+2022-12-15 — VNX launches VEUR and VCHF with trading, deposit, and withdrawal access on Emirex
+2022-12-27 — VNX year-end review confirms December launch and Ethereum issuance
+2023 onward — Polygon, Avalanche, Stellar, Solana, Tezos, and other network expansions
+exact first VCHF issuance transaction — unresolved
+complete multichain contract map — unresolved
 ```
 
 Decision:
 
 ```text
-launch_date: 2020-11-24
+launch_date: 2022-12-15
 status: active
 discontinued_date: null
 ```
@@ -41,18 +41,18 @@ discontinued_date: null
 Audit:
 
 ```text
-docs/audits/vai-launch-boundary-review.md
+docs/audits/vchf-launch-boundary-review.md
 ```
 
-Canonical implementation result:
+Follow-up implementation:
 
-- 2020-11-24 public launch event added
-- first-party testnet and mainnet evidence added
-- exact deployment and first mint preserved as known unknowns
-- later stability-fee and PSM changes remain separate from launch
-- BNB Chain deployment note and evidence updated
-- VAI removed from the unresolved launch queue
-- queue reduced from 21 to 20 and Category C from 15 to 14
+- add the 2022-12-15 launch event and Event v2 launch detail
+- add first-party launch and year-end review evidence
+- update the Ethereum deployment note and evidence
+- preserve later chain launches as deployment boundaries
+- replace the launch unknown with exact first issuance and distribution unknowns
+- remove VCHF from the unresolved launch queue
+- reduce the queue from 20 to 19 and Category C from 14 to 13
 
 ## Completed quality checkpoints
 
@@ -62,6 +62,7 @@ USD1 — launch null; deployment/introduction/testing normalized; PR #142
 MIM — launch null; introduction/deployment/liquidity/live-operation normalized; PR #144
 mUSD — launch null; contract verification/mainnet candidate/security boundary normalized; PR #146
 USK — public launch 2022-09-12; repayment-only wind-down normalized; PR #148
+VAI — public launch 2020-11-24; implementation PR #150
 ```
 
 ## Production checkpoint
@@ -130,9 +131,18 @@ Reserve applicability queue:                12
 ### Launch-date queue
 
 ```text
-Total unresolved: 20
+Total unresolved before VCHF implementation: 20
+Category B:                                   3
+Category C:                                  14
+Category D:                                   3
+```
+
+Expected after VCHF implementation:
+
+```text
+Total unresolved: 19
 Category B:         3
-Category C:        14
+Category C:        13
 Category D:         3
 ```
 
@@ -144,13 +154,7 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review:
-
-```text
-VCHF
-```
-
-Following quality wave:
+Next bounded review after VCHF implementation:
 
 ```text
 IRON
@@ -165,8 +169,6 @@ Dynamic Set Dollar
 Empty Set Dollar
 GYEN
 ```
-
-USK does not enter the terminal-date queue until a final end boundary is established. Its current state is an active wind-down with repayment available.
 
 ### Reserve-report applicability queue
 
@@ -187,28 +189,28 @@ EURT
 ## Full execution sequence
 
 ```text
-Phase 1 — VAI audit
-1. Complete CI and merge the VAI audit PR.
-2. Preserve testnet, mainnet launch, first mint, stability-fee, PSM, and current-access boundaries separately.
+Phase 1 — VCHF audit
+1. Complete CI and merge the VCHF audit PR.
+2. Preserve original launch and later chain-expansion boundaries separately.
 
-Phase 2 — VAI canonical implementation
-3. Set launch_date to 2020-11-24.
+Phase 2 — VCHF canonical implementation
+3. Set launch_date to 2022-12-15.
 4. Retain status active and discontinued_date null.
 5. Add the launch event and Event v2 launch detail.
-6. Add first-party testnet and mainnet evidence.
-7. Update the launch known unknown and BNB Chain deployment note.
-8. Remove VAI from the unresolved launch queue.
+6. Add first-party launch and retrospective evidence.
+7. Update the launch unknown and Ethereum deployment note.
+8. Remove VCHF from the unresolved launch queue.
 9. Synchronize baselines, generated outputs, README, audits, and roadmap.
 10. Run all six workflows and merge only after every check passes.
 
-Phase 3 — Continue launch-date quality wave
-11. Audit VCHF.
-12. Audit IRON.
+Phase 3 — Complete the first launch-date quality wave
+11. Audit IRON.
+12. Implement the IRON result if supported.
 
 Phase 4 — Cross-queue maintenance
 13. Recheck HUSD and EURT only when durable product-specific evidence appears.
 14. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching evidence exists.
-15. Revisit USK terminal status only when the repayment and network end boundary is documented.
+15. Perform separate current-state reviews for assets with newly effective operational restrictions.
 
 Phase 5 — Controlled growth
 16. Promote no more than five complete records per batch.
@@ -219,11 +221,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the VAI implementation PR.
-2. Report the queue reduction to 20 total and Category C 14.
-3. Start the bounded VCHF launch-boundary audit.
-4. Separate issuer announcement, token issuance, chain deployment, and public availability.
-5. Do not substitute a later listing or chain expansion for original launch.
+1. Complete CI and merge the VCHF audit PR.
+2. Open the VCHF canonical implementation PR.
+3. Set launch_date only to the audited 2022-12-15 boundary.
+4. Preserve later chain launches and exact first issuance as separate boundaries.
+5. Start IRON after the VCHF implementation passes all six workflows.
 ```
 
 ## Production policy
