@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_unitedu",
+    "classifications": [{"classification": "fiat_backed_stablecoin", "jurisdiction": "British Virgin Islands", "effective_from": "2025-12-18", "effective_to": null, "authority_or_basis": "issuer terms and product disclosures", "confidence": "medium", "evidence_ids": ["sog_src_unitedu_terms_batch_o", "sog_src_unitedu_launch_batch_o"]}],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": ["sog_issuer_united_stables"],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "stated_segregated",
+    "bankruptcy_remoteness": "limited",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": ["sog_src_unitedu_site_batch_o", "sog_src_unitedu_terms_batch_o"],
+    "notes": "Approved-user contractual issuance and redemption are documented; jurisdiction-specific holder rights and bankruptcy treatment remain incomplete."
+  },
+  {
+    "id": "sog_st_usdgo",
+    "classifications": [{"classification": "fiat_backed_stablecoin", "jurisdiction": "United States", "effective_from": "2026-02-10", "effective_to": null, "authority_or_basis": "federally chartered bank issuance and product disclosures", "confidence": "high", "evidence_ids": ["sog_src_usdgo_launch_batch_o", "sog_src_usdgo_anchorage_batch_o"]}],
+    "holder_claim_type": "direct_claim_on_bank",
+    "claim_against_organization_ids": ["sog_issuer_anchorage_digital_bank"],
+    "reserve_ownership": "trust_or_custodial",
+    "reserve_segregation": "stated_segregated",
+    "bankruptcy_remoteness": "limited",
+    "licensed_or_regulated_as": ["federally chartered digital asset bank issued stablecoin"],
+    "evidence_ids": ["sog_src_usdgo_launch_batch_o", "sog_src_usdgo_product_batch_o", "sog_src_usdgo_anchorage_batch_o"],
+    "notes": "Anchorage Digital Bank is the legal issuer. OSL branding and distribution do not create a separate issuer claim."
+  },
+  {
+    "id": "sog_st_sofiusd",
+    "classifications": [{"classification": "fiat_backed_stablecoin", "jurisdiction": "United States", "effective_from": "2025-12-18", "effective_to": null, "authority_or_basis": "national bank issuance and official product disclosures", "confidence": "high", "evidence_ids": ["sog_src_sofiusd_launch_batch_o", "sog_src_sofiusd_product_batch_o"]}],
+    "holder_claim_type": "direct_claim_on_bank",
+    "claim_against_organization_ids": ["sog_issuer_sofi_bank"],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "stated_segregated",
+    "bankruptcy_remoteness": "limited",
+    "licensed_or_regulated_as": ["national bank issued payment stablecoin"],
+    "evidence_ids": ["sog_src_sofiusd_launch_batch_o", "sog_src_sofiusd_product_batch_o", "sog_src_sofiusd_support_batch_o"],
+    "notes": "SoFi Bank is recorded as legal issuer. Interest-bearing tokenized deposits remain separate products."
+  },
+  {
+    "id": "sog_st_solsticeusx",
+    "classifications": [{"classification": "protocol_asset", "jurisdiction": null, "effective_from": "2025-09-30", "effective_to": null, "authority_or_basis": "protocol documentation and launch materials", "confidence": "medium", "evidence_ids": ["sog_src_solsticeusx_docs_batch_o", "sog_src_solsticeusx_launch_batch_o"]}],
+    "holder_claim_type": "protocol_redemption_right",
+    "claim_against_organization_ids": [],
+    "reserve_ownership": "protocol_controlled",
+    "reserve_segregation": "operationally_separate",
+    "bankruptcy_remoteness": "not_applicable",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": ["sog_src_solsticeusx_site_batch_o", "sog_src_solsticeusx_docs_batch_o"],
+    "notes": "Protocol conversion and redemption routes are documented; legal operator, custody, and counterparty roles remain unresolved."
+  },
+  {
+    "id": "sog_st_ousd",
+    "classifications": [{"classification": "protocol_asset", "jurisdiction": null, "effective_from": "2020-09-22", "effective_to": null, "authority_or_basis": "protocol documentation and launch materials", "confidence": "high", "evidence_ids": ["sog_src_ousd_launch_batch_o", "sog_src_ousd_docs_batch_o"]}],
+    "holder_claim_type": "protocol_redemption_right",
+    "claim_against_organization_ids": [],
+    "reserve_ownership": "protocol_controlled",
+    "reserve_segregation": "operationally_separate",
+    "bankruptcy_remoteness": "not_applicable",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": ["sog_src_ousd_launch_batch_o", "sog_src_ousd_docs_batch_o", "sog_src_ousd_audits_batch_o"],
+    "notes": "Protocol mint, redemption, and rebasing mechanics are documented; governance and administrative-control roles remain reviewable."
+  }
+]
