@@ -21,12 +21,12 @@ Every roadmap-changing PR must update this file. Every merge report must state t
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #140 — Resolve DOLA launch boundary
-Latest merged commit: d7ea9cb79a03bc0911423652926ea9a034ded1f1
-Current work: USD1 bounded launch-boundary audit
-Canonical launch conclusion: keep launch_date null
-Resolved implementation target: normalize deployments and dated introduction/testing events
-Next bounded review after USD1 implementation: MIM
+Latest merged PR: #141 — Audit USD1 launch boundaries
+Latest merged commit: c2ecd9a537fb8a339e81c50bf79d0eb6f0b8a032
+Current work: USD1 canonical quality implementation
+Canonical launch conclusion: launch_date remains null
+Implementation result: deployments, introduction, and testing boundaries normalized
+Next bounded review after merge: MIM
 ```
 
 ## USD1 audit checkpoint
@@ -60,14 +60,14 @@ Audit file:
 docs/audits/usd1-launch-boundary-review.md
 ```
 
-Follow-up canonical implementation must:
+Canonical implementation result:
 
-- normalize the official Ethereum and BNB Smart Chain contract addresses
-- record both January 28 deployment boundaries
-- add the March 25 introduction event
-- add the April 7 testing event
-- preserve the April 2025 best-known range without coercing a day
-- keep USD1 in the unresolved launch queue
+- official Ethereum and BNB Smart Chain contract addresses normalized
+- both January 28 deployment boundaries recorded
+- March 25 introduction event added
+- April 7 testing event added
+- April 2025 best-known range preserved without coercing a day
+- USD1 remains in the unresolved launch queue
 
 ## Production checkpoint
 
@@ -92,10 +92,10 @@ DOLA and USD1 quality work does not increase the stable-asset count or trigger a
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-129 events
-129 Event v2 detail records
-389 evidence records
-389 evidence relation projections
+130 events
+130 Event v2 detail records
+394 evidence records
+394 evidence relation projections
 90 reserve-report or reserve-context records
 200 known unknowns
 9 regulatory notes
@@ -165,7 +165,7 @@ Launch-date policy:
 - keep `launch_date: null` when the exact public boundary remains unresolved
 - separate contract deployment, introduction, testing, first issuance, and public availability
 
-Next bounded launch-date review after USD1 implementation:
+Next bounded launch-date review:
 
 ```text
 MIM
@@ -239,51 +239,43 @@ JPYC vs JPYSC:              2026-06-25
 ## Full execution sequence
 
 ```text
-Phase 1 — USD1 bounded review
-1. Complete CI and merge the USD1 audit PR.
-2. Preserve launch_date as null.
-3. Preserve the distinction between deployment, testing, introduction, issuance, and public availability.
+Phase 1 — Complete USD1 implementation
+1. Synchronize baselines, generated outputs, README, audits, and roadmap.
+2. Remove temporary synchronization code.
+3. Run all six CI workflows.
+4. Merge the USD1 implementation PR only after every check passes.
 
-Phase 2 — USD1 canonical quality implementation
-4. Normalize Ethereum and BNB Smart Chain addresses.
-5. Record both 2025-01-28 deployment boundaries.
-6. Add a dated 2025-03-25 introduction event and supporting evidence.
-7. Add a dated 2025-04-07 testing event and supporting evidence.
-8. Update the USD1 known unknown and queue note without reducing queue counts.
-9. Synchronize baselines, generated outputs, README, audits, and roadmap.
-10. Run all six CI workflows and merge only after every check passes.
+Phase 2 — Continue launch-date quality wave
+5. Audit MIM Cauldron deployment, first issuance, announcement, and UI availability boundaries.
+6. Audit mUSD.
+7. Audit USK.
+8. Audit VAI.
+9. Audit VCHF.
+10. Audit IRON.
 
-Phase 3 — First launch-date quality wave
-11. Audit MIM.
-12. Audit mUSD.
-13. Audit USK.
-14. Audit VAI.
-15. Audit VCHF.
-16. Audit IRON.
+Phase 3 — Cross-queue maintenance
+11. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
+12. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
 
-Phase 4 — Cross-queue maintenance
-17. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
-18. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
+Phase 4 — Controlled growth
+13. Prepare a reviewed candidate master.
+14. Promote no more than five complete stable-asset records per batch.
+15. Publish and verify production after each growth batch.
+16. Do not allow production to trail main by more than one growth batch.
 
-Phase 5 — Controlled growth
-19. Prepare a reviewed candidate master.
-20. Promote no more than five complete stable-asset records per batch.
-21. Publish and verify production after each growth batch.
-22. Do not allow production to trail main by more than one growth batch.
-
-Phase 6 — Normal operating cycle
-23. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
-24. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
+Phase 5 — Normal operating cycle
+17. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
+18. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the USD1 audit PR.
-2. Report that canonical launch remains null and queue counts remain 22 / C16.
-3. Open the USD1 canonical quality implementation PR.
-4. Normalize deployment addresses and dates.
-5. Add introduction and testing events without mislabeling them as public launch.
+1. Complete final CI and merge the USD1 implementation PR.
+2. Report that launch_date remains null and queue counts remain 22 / C16.
+3. Start the bounded MIM launch-boundary audit.
+4. Separate Cauldron deployment, first issuance, announcement, and public UI availability.
+5. Do not substitute a later chain deployment or rebrand for the original MIM boundary.
 ```
 
 ## Production policy

@@ -92,7 +92,7 @@
     "id": "sog_src_usd1_faq_batch_f",
     "stablecoin_id": "sog_st_usd1",
     "issuer_id": "sog_issuer_bitgo",
-    "event_id": "sog_ev_usd1_2025_launch",
+    "event_id": null,
     "source_type": "official_documentation",
     "title": "World Liberty Financial FAQ for USD1",
     "url": "https://docs.worldlibertyfinancial.com/resources/faq",
@@ -109,9 +109,7 @@
       "sog_issuer_bitgo",
       "sog_org_world_liberty_financial"
     ],
-    "event_ids": [
-      "sog_ev_usd1_2025_launch"
-    ],
+    "event_ids": [],
     "claim_scopes": [
       "legal_issuer",
       "brand_owner",
@@ -124,7 +122,7 @@
     "id": "sog_src_usd1_reserves_batch_f",
     "stablecoin_id": "sog_st_usd1",
     "issuer_id": "sog_issuer_bitgo",
-    "event_id": "sog_ev_usd1_2025_launch",
+    "event_id": null,
     "source_type": "reserve_report_index",
     "title": "USD1 proof of reserves and attestation index",
     "url": "https://docs.worldlibertyfinancial.com/usd1-token/proof-of-reserves",
@@ -141,9 +139,7 @@
       "sog_issuer_bitgo",
       "sog_org_world_liberty_financial"
     ],
-    "event_ids": [
-      "sog_ev_usd1_2025_launch"
-    ],
+    "event_ids": [],
     "claim_scopes": [
       "reserve_attestation",
       "multichain_supply"
@@ -154,7 +150,7 @@
     "id": "sog_src_usd1_risk_batch_f",
     "stablecoin_id": "sog_st_usd1",
     "issuer_id": "sog_issuer_bitgo",
-    "event_id": "sog_ev_usd1_2025_launch",
+    "event_id": null,
     "source_type": "risk_disclosure",
     "title": "USD1 risk and redemption disclosures",
     "url": "https://worldlibertyfinancial.com/risk-disclosures",
@@ -171,9 +167,7 @@
       "sog_issuer_bitgo",
       "sog_org_world_liberty_financial"
     ],
-    "event_ids": [
-      "sog_ev_usd1_2025_launch"
-    ],
+    "event_ids": [],
     "claim_scopes": [
       "redemption_conditions",
       "address_controls",

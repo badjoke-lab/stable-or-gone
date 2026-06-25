@@ -2,7 +2,7 @@
 
 Recorded: 2026-06-25
 
-Result: PUBLIC LAUNCH DATE REMAINS UNRESOLVED
+Result: IMPLEMENTED — PUBLIC LAUNCH DATE REMAINS UNRESOLVED
 
 Stablecoin: `sog_st_usd1`
 
@@ -167,19 +167,19 @@ Reason:
 - current broad availability pages are undated
 - exchange listings are later distribution events and are not used as the default asset-launch boundary
 
-## Resolved quality improvements
+## Implementation result
 
-Although the public launch date remains unresolved, the follow-up implementation should:
+The public launch date remains unresolved, and the canonical quality implementation:
 
-1. normalize the official Ethereum contract address
-2. normalize the official BNB Smart Chain contract address
-3. record both 2025-01-28 contract-creation boundaries
-4. add the official March 25 introduction as a dated event separate from launch
-5. add the April 7 test-airdrop proposal as a testing boundary
-6. preserve an April 2025 best-known launch range without coercing it into a day
-7. update the USD1 known unknown to distinguish deployment, testing, introduction, issuance, and broad access
-8. keep USD1 in the unresolved launch queue
-9. keep the total queue at 22 and Category C at 16
+1. normalizes the official Ethereum contract address
+2. normalizes the official BNB Smart Chain contract address
+3. records both 2025-01-28 contract-creation boundaries
+4. adds the official March 25 introduction as a dated event separate from launch
+5. adds the April 7 test-airdrop proposal as a testing boundary
+6. preserves an April 2025 best-known launch range without coercing it into a day
+7. updates the USD1 known unknown to distinguish deployment, testing, introduction, issuance, and broad access
+8. keeps USD1 in the unresolved launch queue
+9. keeps the total queue at 22 and Category C at 16
 
 ## Scope boundary
 

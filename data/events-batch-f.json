@@ -14,18 +14,18 @@
     "notes": "Exact day-level public launch remains unresolved. The current Ethereum production contract was created on 2024-07-07, which is recorded as a deployment boundary rather than a canonical public-launch date."
   },
   {
-    "id": "sog_ev_usd1_2025_launch",
+    "id": "sog_ev_usd1_introduction_2025",
     "stablecoin_id": "sog_st_usd1",
     "issuer_id": "sog_issuer_bitgo",
-    "event_type": "launched",
-    "event_date": null,
-    "title": "BitGo and World Liberty Financial introduce USD1",
-    "description": "USD1 entered circulation in 2025 under a structure in which BitGo issues and redeems the token while World Liberty Financial owns the brand.",
+    "event_type": "announcement",
+    "event_date": "2025-03-25",
+    "title": "World Liberty Financial announces plans for USD1",
+    "description": "World Liberty Financial and BitGo publicly introduced USD1 and described plans for issuance on Ethereum and BNB Smart Chain. The announcement used future-oriented launch language and is recorded as an introduction rather than the canonical public launch.",
     "impact_level": "medium",
     "confidence": "high",
-    "source_count": 3,
-    "event_status_effect": "active",
-    "notes": "The launch year is established; this record does not assert an unsupported day-level date."
+    "source_count": 1,
+    "event_status_effect": "none",
+    "notes": "Contract deployment occurred on 2025-01-28. The exact day of broader public availability remains unresolved."
   },
   {
     "id": "sog_ev_usdtb_launch",
@@ -85,5 +85,19 @@
     "confidence": "high",
     "source_count": 1,
     "notes": "The public-launch event is preserved separately from the later USDM wind-down."
+  },
+  {
+    "id": "sog_ev_usd1_airdrop_test_2025",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "event_type": "testing",
+    "event_date": "2025-04-07",
+    "title": "World Liberty Financial proposes USD1 airdrop test",
+    "description": "World Liberty Financial proposed distributing a small amount of USD1 to test on-chain airdrop functionality and described the exercise as preparation before broader market access.",
+    "impact_level": "low",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "none",
+    "notes": "This is a testing boundary and is not treated as the original public launch."
   }
 ]
