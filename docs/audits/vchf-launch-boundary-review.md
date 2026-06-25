@@ -2,11 +2,11 @@
 
 Recorded: 2026-06-25
 
-Result: LAUNCH RESOLVED
+Result: IMPLEMENTED — FINAL CI PENDING
 
 Stablecoin: `sog_st_vchf`
 
-Recommended canonical launch date: `2022-12-15`
+Current canonical launch date: `2022-12-15`
 
 ## Evidence
 
@@ -26,27 +26,33 @@ Later launches on Polygon, Avalanche, Stellar, Solana, Tezos, and other networks
 
 ## Decision
 
-Set VCHF `launch_date` to:
-
 ```text
-2022-12-15
-```
-
-Retain:
-
-```text
+launch_date: 2022-12-15
 status: active
 discontinued_date: null
 ```
 
-## Implementation requirements
+## Implementation result
 
-1. Set VCHF `launch_date` to `2022-12-15`.
-2. Add a dated launch event and Event v2 launch detail.
-3. Add the first-party launch and year-end review evidence.
-4. Update the Ethereum deployment note and evidence.
-5. Preserve later network launches as separate deployment events.
-6. Replace the launch unknown with unresolved exact contract-deployment, first-issuance, and initial-distribution boundaries.
-7. Remove VCHF from the unresolved launch queue.
-8. Reduce the queue from 20 to 19 and Category C from 14 to 13.
-9. Synchronize baselines, generated outputs, README, audits, and roadmap.
+- launch event and Event v2 launch detail added
+- first-party launch and year-end review evidence added
+- Ethereum deployment note and evidence updated
+- later network launches preserved as separate boundaries
+- exact first issuance and the complete deployment map remain unresolved
+- VCHF removed from the unresolved launch queue
+- queue reduced from 20 to 19 and Category C from 14 to 13
+- baselines, generated outputs, README, audits, and roadmap synchronized
+
+Post-implementation counts:
+
+```text
+Stable assets:              82
+Events:                     138
+Event v2 details:           138
+Evidence:                   409
+Evidence relations:         409
+Known unknowns:             202
+Launch dates unresolved:     19
+```
+
+The next bounded launch review is IRON after all six workflows pass and PR #152 merges.
