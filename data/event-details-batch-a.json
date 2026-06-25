@@ -1,7 +1,101 @@
 [
-  {"id":"sog_ev_mim_2025_03_gm_cauldron_attack","subject_stablecoin_ids":["sog_st_mim"],"subject_organization_ids":["sog_issuer_abracadabra"],"event_detail_kind":"other"},
-  {"id":"sog_ev_fei_2021_04_launch","subject_stablecoin_ids":["sog_st_fei"],"subject_organization_ids":["sog_issuer_fei_protocol"],"event_detail_kind":"migration","migration_detail":{"summary":"FEI launch using protocol-controlled value and direct-incentive mechanisms."}},
-  {"id":"sog_ev_fei_2022_09_final_redemption","subject_stablecoin_ids":["sog_st_fei"],"subject_organization_ids":["sog_issuer_fei_protocol"],"event_detail_kind":"redemption_change","redemption_change_detail":{"summary":"Executed TIP-121c established an immutable zero-fee FEI-to-DAI wrapper and assigned DAI to maintain complete 1:1 backing against circulating FEI as part of the Tribe DAO wind-down."},"evidence_ids":["sog_src_fei_final_redemption_batch_a","sog_src_fei_tip121c_execution_2022"]},
-  {"id":"sog_ev_usdn_2019_11_issuance","subject_stablecoin_ids":["sog_st_usdn"],"subject_organization_ids":["sog_issuer_neutrino"],"event_detail_kind":"migration","migration_detail":{"summary":"Historical USDN token issuance on Waves."}},
-  {"id":"sog_ev_usdn_xtn_transition","subject_stablecoin_ids":["sog_st_usdn"],"subject_organization_ids":["sog_issuer_neutrino"],"event_detail_kind":"migration","migration_detail":{"summary":"On 2023-01-31 Neutrino began the Waves on-chain rename from USDN to XTN, ending the original hard-USD stablecoin identity while the broader rebrand continued across external interfaces."},"evidence_ids":["sog_src_usdn_xtn_transition_batch_a","sog_src_usdn_current_batch_a","sog_src_usdn_xtn_step_one_2023"]}
+  {
+    "id": "sog_ev_mim_introduction_2021",
+    "title": "Abracadabra introduces Magic Internet Money",
+    "subject_stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "evidence_ids": [
+      "sog_src_mim_introduction_2021"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_mim_liquidity_incentives_2021",
+    "title": "MIM/3CRV LP staking rewards begin",
+    "subject_stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "evidence_ids": [
+      "sog_src_mim_curve_live_2021"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_mim_2025_03_gm_cauldron_attack",
+    "subject_stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_fei_2021_04_launch",
+    "subject_stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "FEI launch using protocol-controlled value and direct-incentive mechanisms."
+    }
+  },
+  {
+    "id": "sog_ev_fei_2022_09_final_redemption",
+    "subject_stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_detail_kind": "redemption_change",
+    "redemption_change_detail": {
+      "summary": "Executed TIP-121c established an immutable zero-fee FEI-to-DAI wrapper and assigned DAI to maintain complete 1:1 backing against circulating FEI as part of the Tribe DAO wind-down."
+    },
+    "evidence_ids": [
+      "sog_src_fei_final_redemption_batch_a",
+      "sog_src_fei_tip121c_execution_2022"
+    ]
+  },
+  {
+    "id": "sog_ev_usdn_2019_11_issuance",
+    "subject_stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "Historical USDN token issuance on Waves."
+    }
+  },
+  {
+    "id": "sog_ev_usdn_xtn_transition",
+    "subject_stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_detail_kind": "migration",
+    "migration_detail": {
+      "summary": "On 2023-01-31 Neutrino began the Waves on-chain rename from USDN to XTN, ending the original hard-USD stablecoin identity while the broader rebrand continued across external interfaces."
+    },
+    "evidence_ids": [
+      "sog_src_usdn_xtn_transition_batch_a",
+      "sog_src_usdn_current_batch_a",
+      "sog_src_usdn_xtn_step_one_2023"
+    ]
+  }
 ]
