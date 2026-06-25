@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const failures = [];
 const warnings = [];
 const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-const baseline = read('docs/migration/registry-v2-baseline.json');
+const baseline = loadRegistryV2Baseline(root);
 const growthContract = read('docs/growth/candidate-master-70.json');
 const candidateFiles = growthContract.candidate_files ?? ['data/candidate-stable-assets.json'];
 const master = candidateFiles.flatMap((file) => { const rows = read(file); if (!Array.isArray(rows)) { failures.push(`${file}: expected array`); return []; } return rows; });
