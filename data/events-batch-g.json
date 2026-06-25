@@ -94,6 +94,14 @@
     "event_type": "launch",
     "event_date": "2022-08-19",
     "title": "Helio Protocol launches HAY on BNB Chain",
-    "description": "Helio Protocol launched mainnet on August 19, 2022, allowing users to deposit BNB collateral and borrow HAY. This is the canonical launch of the asset now branded lisUSD."
+    "description": "Helio Protocol launched mainnet on August 19, 2022, allowing users to deposit BNB collateral and borrow HAY. This is the canonical launch of the asset now branded lisUSD.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "The 2024 lisUSD name is a later rebrand of this continuous asset."
   }
 ]
