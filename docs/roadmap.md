@@ -33,17 +33,17 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #129 — Add dated Guides framework and GENIUS Act guide
-Merge: 7cc7a2fe2465b56f5d9dfd1e422ad1f6292af076
+PR #130 — Add MiCA and Stablecoins guide
+Merge: 3482b53fb24ec9160480531bd010d0ce9ee127c0
 ```
 
 Current implementation checkpoint:
 
 ```text
-PR #130 — MiCA and Stablecoins guide
+PR #131 — JPYC versus JPYSC comparison
 Status: in review
 Information current through: 2026-06-25
-Next planned work after PR #130: JPYC versus JPYSC comparison
+Next planned work after PR #131: site-wide guide integration
 ```
 
 Recent lineage, incident, launch, and guide work:
@@ -70,6 +70,7 @@ PR #127 — Resolve Cashio Dollar launch boundary
 PR #128 — Add JPYSC and Japan stablecoin events
 PR #129 — Add dated Guides framework and GENIUS Act guide
 PR #130 — Add MiCA and Stablecoins guide
+PR #131 — Add JPYC versus JPYSC comparison guide
 ```
 
 Current blocker:
@@ -219,8 +220,8 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 
 ```text
 PR #129 — Guides framework + GENIUS Act — merged
-PR #130 — MiCA — in review
-PR #131 — JPYC versus JPYSC
+PR #130 — MiCA — merged
+PR #131 — JPYC versus JPYSC — in review
 PR #132 — Site-wide guide integration
 ```
 
@@ -238,11 +239,10 @@ Rules:
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Complete and merge PR #130 with the MiCA guide, primary-source links, representative asset comparisons, and roadmap update.
-3. Add the JPYC versus JPYSC comparison next; keep JPYC Prepaid and JPYSC legally and operationally separate.
-4. Finish with the site-wide integration PR covering homepage discovery, related guides, Updates, metadata, sitemap, and validation.
-5. Keep article publication dates unset until the pages are actually live in production.
-6. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
+2. Complete and merge PR #131 with the JPYC versus JPYSC comparison, primary-source links, and explicit JPYC Prepaid separation.
+3. Finish with PR #132 covering homepage discovery, related guides, Updates, metadata, sitemap, and guide validation.
+4. Keep article publication dates unset until the pages are actually live in production.
+5. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
 ```
 
 ## Production policy

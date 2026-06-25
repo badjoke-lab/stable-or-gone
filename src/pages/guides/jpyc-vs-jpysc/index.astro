@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('jpyc-vs-jpysc');
+const title = 'JPYC vs JPYSC: Two Japanese-Yen Stablecoins Compared — Stable or Gone';
+const description = 'A side-by-side comparison of JPYC and JPYSC covering issuer, legal structure, reserves, redemption, transaction limits, distribution, wallet transfer, and launch stage.';
+const canonicalPath = '/guides/jpyc-vs-jpysc/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'JPYC vs JPYSC',
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['JPYC', 'JPYSC', 'Japanese yen stablecoins', 'electronic payment instruments', 'stablecoin comparison'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/jpyc/', title: 'JPYC', summary: 'The regulated funds-transfer-service JPYC launched through JPYC EX in October 2025.' },
+  { href: '/stablecoin/jpysc/', title: 'JPYSC', summary: 'The trust-issued JPYSC launched in a restricted SBI VC Trade account-internal phase in June 2026.' },
+  { href: '/stablecoin/gyen/', title: 'GYEN', summary: 'A separate Japanese-yen stablecoin recorded in an orderly wind-down.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="JPYC vs JPYSC"
+    description="Both target one Japanese yen, but they are separate assets with different legal issuers, reserve structures, redemption routes, statutory limits, distribution models, and launch stages."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>JPYC and JPYSC are not two names for the same token.</strong> JPYC is issued by JPYC Inc. under a funds-transfer-service model and is issued and redeemed through JPYC EX. JPYSC is issued by SBI Shinsei Trust &amp; Banking under a trust structure and initially became available inside SBI VC Trade.</p>
+    <p>JPYC was already transferable on supported public networks after its October 2025 launch. JPYSC's June 2026 launch was deliberately narrower: eligible platform users could purchase and sell it inside SBI VC Trade, while external-wallet transfer and public-chain circulation were not yet available.</p>
+    <p>The legal routes also affect scale. The current JPYC funds-transfer route is subject to the second-type funds-transfer ceiling of one million yen per transfer. The trust-issued JPYSC model does not carry that same statutory ceiling, although actual platform, order, compliance, liquidity, and operational limits still apply.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Side-by-side comparison</div>
+    <table>
+      <thead><tr><th>Question</th><th>JPYC</th><th>JPYSC</th></tr></thead>
+      <tbody>
+        <tr><th>Reference asset</th><td>Japanese yen</td><td>Japanese yen</td></tr>
+        <tr><th>Legal issuer</th><td>JPYC Inc.</td><td>SBI Shinsei Trust &amp; Banking</td></tr>
+        <tr><th>Basic structure</th><td>Funds-transfer-service stablecoin</td><td>Trust-issued stablecoin</td></tr>
+        <tr><th>Initial regulated launch</th><td>October 27, 2025</td><td>June 24, 2026</td></tr>
+        <tr><th>Primary access route</th><td>JPYC EX issuance and redemption platform</td><td>SBI VC Trade account</td></tr>
+        <tr><th>Backing described at launch</th><td>Japanese-yen deposits and Japanese government bonds covering at least 100% of issued value</td><td>Japanese-yen cash and Japanese government bonds held as trust property</td></tr>
+        <tr><th>Direct issue and redemption</th><td>Available to eligible verified JPYC EX users under issuer terms</td><td>Initial purchase and sale available to eligible SBI VC Trade users; external withdrawal and the broader redemption route were not yet available</td></tr>
+        <tr><th>One-million-yen statutory ceiling</th><td>The current second-type funds-transfer route is subject to the one-million-yen ceiling per transfer</td><td>The trust-issued model is not subject to the same funds-transfer ceiling, but product and platform limits may still apply</td></tr>
+        <tr><th>External-wallet transfer at the compared launch stage</th><td>Supported on documented public-network deployments</td><td>Unavailable at the June 2026 account-internal launch</td></tr>
+        <tr><th>SOG lifecycle status</th><td>Active</td><td>Limited</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The legal structure is the main difference</div>
+    <p>Japan's stablecoin framework can support more than one issuance model. The important distinction is not the ticker design or the fact that both aim for one yen. It is the legal route through which the token is issued and redeemed.</p>
+    <table>
+      <thead><tr><th>Model</th><th>What it means for this comparison</th></tr></thead>
+      <tbody>
+        <tr><td>Funds-transfer-service model</td><td>JPYC Inc. is the regulated issuer and operates the JPYC EX channel for eligible users to issue and redeem the current JPYC. Its current second-type route is designed for transfers of no more than one million yen per transaction.</td></tr>
+        <tr><td>Trust model</td><td>SBI Shinsei Trust &amp; Banking is the legal issuer of JPYSC, while SBI VC Trade provides the initial distribution and account-access route. The trust model does not inherit the same one-million-yen funds-transfer ceiling.</td></tr>
+      </tbody>
+    </table>
+    <p>Brand, technology, distribution, and legal issuance are separate roles. Startale Group's technology role in JPYSC does not make it the legal issuer, and SBI VC Trade's distribution role does not replace the trust bank's issuer role.</p>
+    <p><strong>No statutory ceiling does not mean unlimited immediate use.</strong> At the compared launch stage, JPYSC remained confined to SBI VC Trade accounts and could not be withdrawn to an external wallet. Legal capacity, platform availability, order size, onboarding, compliance review, liquidity, and settlement operations must be checked separately.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Reserves and holder claims</div>
+    <p>Both assets are designed to track one yen, but their reserve descriptions and legal claim structures differ.</p>
+    <table>
+      <thead><tr><th>Topic</th><th>JPYC</th><th>JPYSC</th></tr></thead>
+      <tbody>
+        <tr><td>Reserve framework</td><td>Japanese-yen deposits and Japanese government bonds described as covering at least 100% of issued JPYC under the funds-transfer-service structure.</td><td>Trust property described as Japanese-yen cash and Japanese government bonds.</td></tr>
+        <tr><td>Who owes the redemption obligation?</td><td>The regulated JPYC issuer under JPYC EX terms.</td><td>The trust-bank issuer under the JPYSC trust and product terms.</td></tr>
+        <tr><td>What still needs ongoing verification?</td><td>Current safeguarding disclosures, network-specific supply, eligibility, fees, transaction limits, and processing conditions.</td><td>Periodic reserve reporting, detailed trust terms, allocation, public-chain deployment, external withdrawal, and redemption mechanics.</td></tr>
+      </tbody>
+    </table>
+    <p>“Backed one-to-one” is not a complete comparison by itself. Users also need to know who holds the assets, who owes the claim, who may redeem, what legal or product limits apply, and how quickly the route works.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Distribution and wallet availability</div>
+    <p>At the information date for this guide, the two products were at different distribution stages.</p>
+    <table>
+      <tbody>
+        <tr><th>JPYC</th><td>The current regulated JPYC had been launched through JPYC EX and documented on Avalanche, Ethereum, and Polygon. Eligible users could use issuer issuance and redemption channels, while secondary holders still needed to satisfy issuer onboarding rules for direct redemption.</td></tr>
+        <tr><th>JPYSC</th><td>The initial JPYSC phase was account-internal at SBI VC Trade. Purchase and sale inside the platform did not yet establish external-wallet transfer, an independently usable public contract, or unrestricted public-chain circulation.</td></tr>
+      </tbody>
+    </table>
+    <p>This difference can change. A later JPYSC external-transfer or public-chain event should be recorded as a new dated milestone rather than silently rewritten into the original launch.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">JPYC is not JPYC Prepaid</div>
+    <p>The current funds-transfer-service JPYC must not be silently merged with the earlier prepaid instrument. JPYC Prepaid had a different legal and redemption model, stopped new issuance in May 2025, and remains a separate lineage question.</p>
+    <p>In SOG, the October 27, 2025 launch date refers to the regulated JPYC and JPYC EX product. Historical prepaid references do not prove the launch date, legal structure, or redemption terms of the current stablecoin.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Which one is better?</div>
+    <p>SOG does not rank stablecoins. The useful answer depends on the task and on features that may change over time.</p>
+    <table>
+      <thead><tr><th>User question</th><th>What to verify</th></tr></thead>
+      <tbody>
+        <tr><td>Can I move it to my own wallet now?</td><td>Current network support, contract address, deposit and withdrawal status, and issuer warnings.</td></tr>
+        <tr><td>Can I redeem directly for yen?</td><td>Identity requirements, eligible jurisdiction, account type, statutory and product limits, fees, settlement time, and the legal redemption counterparty.</td></tr>
+        <tr><td>Can a company use it for large settlement?</td><td>Whether the legal route supports the amount, product eligibility, operational limits, liquidity, counterparty onboarding, and integration support.</td></tr>
+        <tr><td>Are reserves protected if an intermediary fails?</td><td>The issuer's legal structure, safeguarding or trust terms, custody chain, holder priority, and insolvency treatment.</td></tr>
+        <tr><td>Will it work in DeFi?</td><td>Public-chain availability, token contract controls, liquidity, oracle support, bridge or wrapper risk, and protocol acceptance.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What remains unresolved</div>
+    <ul>
+      <li>The date and conditions for JPYSC external-wallet transfer.</li>
+      <li>The first unrestricted JPYSC public-chain deployment and verified usable contract address.</li>
+      <li>A normalized recurring JPYSC reserve-reporting cadence.</li>
+      <li>The exact external-redemption process and product limits that will apply when JPYSC moves beyond account-internal trading.</li>
+      <li>Continuing JPYC network support, current contract list, fees, limits, and direct-redemption eligibility.</li>
+      <li>How each asset's actual circulation, liquidity, and merchant or institutional use develop after launch.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Regulatory, issuer, and distributor sources</div>
+    <ul>
+      <li><a href="https://corporate.jpyc.co.jp/news/posts/jpyc-ex-launch">JPYC Inc. — JPYC and JPYC EX official launch</a></li>
+      <li><a href="https://corporate.jpyc.co.jp/news/posts/first-yen-stablecoin-jpyc">JPYC Inc. — funds transfer service provider registration</a></li>
+      <li><a href="https://corporate.jpyc.co.jp/news/posts/jpyc-prepaid-name-notice-eng">JPYC Inc. — JPYC Prepaid name and lineage notice</a></li>
+      <li><a href="https://www.fsa.go.jp/access/r2/213.html">Financial Services Agency — first-, second-, and third-type funds transfer framework</a></li>
+      <li><a href="https://www.sbigroup.co.jp/news/2026/0227_16153.html">SBI Holdings and Startale Group — JPYSC announcement</a></li>
+      <li><a href="https://www.sbigroup.co.jp/news/2026/0624_16425.html">SBI Group and Startale Group — JPYSC launch announcement</a></li>
+      <li><a href="https://www.sbivc.co.jp/jpysc">SBI VC Trade — JPYSC product, account access, and transfer availability</a></li>
+      <li><a href="https://www.sbivc.co.jp/columns/content/baqz_7m452z">SBI VC Trade — first-party explanation of JPYSC and JPYC structural differences</a></li>
+    </ul>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide compares recorded structures and access conditions; it is not a recommendation or legal advice. Product terms, networks, legal interpretations, fees, limits, and service availability can change. Verify current regulator, issuer, and distributor documentation before relying on either asset.</p>
+  </section>
+</BaseLayout>
