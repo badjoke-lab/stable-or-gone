@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
-const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
+const baseline = loadRegistryV2Baseline(root);
 const readRows = (relative) => {
   const value = JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
   return Array.isArray(value) ? value : value.records;
