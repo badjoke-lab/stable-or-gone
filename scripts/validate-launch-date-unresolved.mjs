@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const readJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
@@ -9,7 +10,7 @@ const fail = (message) => {
 };
 
 const queue = readJson('data/quality/launch-date-unresolved.json');
-const baseline = readJson('docs/migration/registry-v2-baseline.json');
+const baseline = loadRegistryV2Baseline(root);
 const stablecoinFiles = baseline?.data_groups?.stablecoins;
 
 if (!Array.isArray(stablecoinFiles) || stablecoinFiles.length === 0) {
