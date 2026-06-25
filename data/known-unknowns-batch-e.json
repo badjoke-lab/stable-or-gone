@@ -26,18 +26,18 @@
     "topic": "remaining_supply_and_market_activity",
     "description": "The amount of EURT remaining in circulation and the current depth of secondary-market activity after redemption termination are not fixed in this batch.",
     "severity": "medium",
-    "last_checked_at": "2026-06-14",
+    "last_checked_at": "2026-06-25",
     "notes": "Residual supply does not change the terminated issuer-redemption status."
   },
   {
     "id": "sog_ku_eurt_final_reserve_disposition_batch_e",
     "stablecoin_id": "sog_st_eurt",
     "issuer_id": "sog_issuer_tether",
-    "topic": "final_reserve_and_liability_disposition",
-    "description": "Public sources reviewed for this batch do not separately itemize the final EURT reserve allocation, unredeemed liabilities, or token-holder outcomes after 27 November 2025.",
+    "topic": "product_specific_reserve_liability_and_final_disposition",
+    "description": "Tether publishes consolidated reserve and assurance reports, but reviewed official material does not separately reconcile EURT reserve assets, EURT liabilities, the applicable EURT issuer boundary, unredeemed supply, or final holder outcomes after redemption ended.",
     "severity": "high",
-    "last_checked_at": "2026-06-14",
-    "notes": "No insolvency claim is made."
+    "last_checked_at": "2026-06-25",
+    "notes": "Consolidated Tether reporting must not be copied into a product-specific EURT reserve-report row without explicit scope."
   },
   {
     "id": "sog_ku_usdm_v3_transition_batch_e",

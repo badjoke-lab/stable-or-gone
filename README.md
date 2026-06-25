@@ -18,8 +18,8 @@ The canonical GitHub checkpoint contains:
 82 reserve/redemption profiles
 140 events
 140 Event v2 detail records
-412 evidence records
-412 evidence relation projections
+415 evidence records
+415 evidence relation projections
 90 reserve-report or reserve-context records
 203 known unknowns
 9 regulatory notes

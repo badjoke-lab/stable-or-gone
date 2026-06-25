@@ -26,18 +26,18 @@
     "topic": "final_issuer_and_legal_entity_state",
     "description": "The final legal status of Stable Universal and the complete division of responsibilities among issuer, custodian, and exchange-distribution partners remain incompletely documented.",
     "severity": "high",
-    "last_checked_at": "2026-06-14",
+    "last_checked_at": "2026-06-25",
     "notes": "Do not infer current legal responsibility from historical marketing pages."
   },
   {
     "id": "sog_unk_husd_reserve_redemption_outcome_batch_d",
     "stablecoin_id": "sog_st_husd",
     "issuer_id": "sog_issuer_stable_universal",
-    "topic": "reserve_and_redemption_outcome",
-    "description": "Current reserves, remaining token liabilities, direct-redemption availability, and the final disposition of HUSD backing could not be verified from durable primary sources.",
+    "topic": "signed_attestation_reserve_and_redemption_outcome",
+    "description": "Monthly HUSD attestations and a January 2022 Reserve Accounts Report are historically identified, but the original signed report, measurement boundary, token-supply comparison, reserve-account balance, remaining liabilities, redemption availability, and final backing disposition remain unrecovered.",
     "severity": "high",
-    "last_checked_at": "2026-06-14",
-    "notes": "This is why HUSD is classified inactive or discontinued rather than collapsed or insolvent."
+    "last_checked_at": "2026-06-25",
+    "notes": "The legal-study description is retained as source-recovery context and does not support a canonical reserve-report row."
   },
   {
     "id": "sog_unk_iron_bnb_identity_batch_d",

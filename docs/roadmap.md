@@ -11,13 +11,13 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #154 — Implement IRON launch date
-Latest merged commit: d9676e3fc98f8f15da768525c7cc971622a8975e
+Latest merged PR: #155 — Recheck HUSD and EURT reserve sources
+Latest merged commit: 217d3992431409520f166165b560fd20c46cb7d9
 Completed phase: first bounded launch-date quality wave
-Current work: HUSD and EURT reserve-source recheck
-Audit conclusion: retain both as source_status_unresolved
-Next operation after audit: add source-recovery context without reserve-report rows
-Next phase: terminal queue checkpoint, then controlled growth
+Current work: HUSD and EURT source-recovery context implementation
+Implementation result: three evidence records added; both remain source_status_unresolved
+Reserve-report result: no reserve-report rows added; count remains 90
+Next phase after merge: terminal queue checkpoint, then controlled growth
 ```
 
 ## Reserve-source audit checkpoint
@@ -43,14 +43,14 @@ Audit:
 docs/audits/husd-eurt-reserve-source-recheck.md
 ```
 
-Follow-up quality implementation:
+Canonical quality implementation result:
 
-- add HUSD legal-study evidence as secondary source-recovery context
-- add official Tether transparency and relevant-information evidence as consolidated-scope context
-- update HUSD and EURT known unknowns and queue notes to 2026-06-25
-- retain both records as `source_status_unresolved`
-- add no reserve-report rows
-- keep reserve-report count at 90
+- HUSD legal-study evidence added as secondary source-recovery context
+- official Tether transparency and relevant-information evidence added as consolidated-scope context
+- HUSD and EURT known unknowns and queue notes updated to 2026-06-25
+- both records retained as `source_status_unresolved`
+- no reserve-report rows added
+- reserve-report count remains 90
 
 ## Completed launch-date quality wave
 
@@ -87,8 +87,8 @@ Quality-only work after the checkpoint does not trigger automatic production pub
 82 reserve/redemption profiles
 140 events
 140 Event v2 detail records
-412 evidence records
-412 evidence relation projections
+415 evidence records
+415 evidence relation projections
 90 reserve-report or reserve-context records
 203 known unknowns
 9 regulatory notes
@@ -163,12 +163,11 @@ Terminal dates remain null unless matching end-boundary evidence is recovered. G
 ## Full execution sequence
 
 ```text
-Phase 1 — Reserve-source cross-queue maintenance
-1. Complete CI and merge the HUSD/EURT audit PR.
-2. Add reviewed source-recovery context without creating reserve-report rows.
-3. Keep both records in source_status_unresolved.
-4. Synchronize evidence, known unknowns, queue notes, baselines, generated outputs, README, audits, and roadmap.
-5. Run all six workflows and merge only after every check passes.
+Phase 1 — Complete reserve-source cross-queue maintenance
+1. Complete final CI and merge the source-recovery context PR.
+2. Keep HUSD and EURT in source_status_unresolved.
+3. Keep reserve-report count at 90.
+4. Confirm temporary synchronization code is removed.
 
 Phase 2 — Terminal queue checkpoint
 6. Recheck BAC, DSD, and ESD only for new primary or authoritative end-boundary evidence.
@@ -189,11 +188,11 @@ Phase 4 — Normal operating cycle
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the HUSD/EURT reserve-source audit PR.
-2. Open the source-recovery context implementation PR.
-3. Add no reserve-report rows unless product-specific primary evidence is recovered.
-4. Complete the terminal queue checkpoint.
-5. Resume controlled growth in batches of no more than five records.
+1. Complete final CI and merge the HUSD/EURT source-context implementation PR.
+2. Complete the terminal queue checkpoint for BAC, DSD, ESD, and GYEN.
+3. Keep terminal dates null without matching end-boundary evidence.
+4. Resume controlled growth in batches of no more than five records.
+5. Publish and verify after the first growth batch.
 ```
 
 ## Production policy

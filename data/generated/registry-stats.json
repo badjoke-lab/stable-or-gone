@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-25T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_iron_launch_2026_06_25",
+  "baseline_id": "sog_registry_v2_reserve_source_context_2026_06_25",
   "registry": {
     "stablecoins": 82,
     "organizations": 73,
@@ -10,7 +10,7 @@
     "profiles": 82,
     "events": 140,
     "event_details": 140,
-    "evidence": 412,
+    "evidence": 415,
     "reserve_reports": 90,
     "known_unknowns": 203,
     "regulatory_notes": 9,

@@ -1,7 +1,7 @@
 {
-  "baseline_id": "sog_registry_v2_iron_launch_2026_06_25",
+  "baseline_id": "sog_registry_v2_reserve_source_context_2026_06_25",
   "captured_at": "2026-06-25",
-  "source_commit": "iron-launch",
+  "source_commit": "reserve-source-context",
   "minimum_counts": {
     "stablecoins": 82,
     "organizations": 73,
@@ -10,8 +10,8 @@
     "profiles": 82,
     "events": 140,
     "event_details": 140,
-    "evidence": 412,
-    "evidence_relations": 412,
+    "evidence": 415,
+    "evidence_relations": 415,
     "reserve_reports": 90,
     "known_unknowns": 203,
     "regulatory_notes": 9,

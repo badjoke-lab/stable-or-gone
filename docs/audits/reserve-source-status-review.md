@@ -1,10 +1,10 @@
 # Reserve Source-status Review
 
-Updated: 2026-06-23
+Updated: 2026-06-25
 
 ## Result
 
-The 81-record registry has 69 assets with canonical reserve/report context and 12 classified uncovered assets. FEI moved from source-status unresolved into canonical historical reserve/redemption context after recovery of the executed on-chain TIP-121c package.
+The 82-record registry has 70 assets with canonical reserve/report context and 12 classified uncovered assets. HUSD and EURT were rechecked on 2026-06-25 and remain source-status unresolved. Three source-scope evidence records were added without creating reserve-report rows.
 
 ```text
 FEI resolved into canonical context: 1
@@ -26,11 +26,11 @@ The following remain separate known unknowns and do not block the historical con
 
 ## HUSD — retained unresolved
 
-Monthly attestations and a January 2022 Accountant's Attestation are historically identified, but the original signed report, accountant package, measurement boundary, reserve comparison, and durable archive remain unrecovered. Secondary descriptions do not justify a canonical report row.
+Monthly attestations and a January 2022 Accountant's Attestation are historically identified. A legal study confirms the report existed and is no longer publicly available, but the original signed report, accountant package, measurement boundary, reserve comparison, and durable primary archive remain unrecovered. The secondary source does not justify a canonical report row.
 
 ## EURT — retained unresolved
 
-Tether consolidated reports cover group assets and aggregate digital-token liabilities, but the reviewed reports do not separately identify EURT reserve assets, EURT liabilities, the EURT issuer boundary, or a final product-specific reconciliation. Consolidated Tether reporting is not copied into the EURT record without explicit product scope.
+Official Tether transparency and relevant-information materials confirm quarterly consolidated reserve reporting. They also show that the reporting scope may include assets and liabilities of entities that do not issue or redeem Tether Tokens. The reviewed material does not separately identify EURT reserve assets, EURT liabilities, the EURT issuer boundary, or a final product-specific reconciliation.
 
 ## Reopen rule
 
