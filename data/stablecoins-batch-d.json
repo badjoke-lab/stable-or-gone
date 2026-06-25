@@ -4,7 +4,12 @@
     "slug": "sai",
     "name": "Single-Collateral Dai",
     "symbol": "SAI",
-    "aliases": ["SAI", "Sai", "Single-Collateral Dai", "SCD"],
+    "aliases": [
+      "SAI",
+      "Sai",
+      "Single-Collateral Dai",
+      "SCD"
+    ],
     "status": "migrated",
     "issuer_id": "sog_issuer_makerdao_sky",
     "peg_asset": "USD",
@@ -29,7 +34,11 @@
     "slug": "husd",
     "name": "HUSD",
     "symbol": "HUSD",
-    "aliases": ["HUSD", "Huobi USD", "Stable Universal HUSD"],
+    "aliases": [
+      "HUSD",
+      "Huobi USD",
+      "Stable Universal HUSD"
+    ],
     "status": "discontinued",
     "issuer_id": "sog_issuer_stable_universal",
     "peg_asset": "USD",
@@ -54,7 +63,11 @@
     "slug": "iron",
     "name": "IRON",
     "symbol": "IRON",
-    "aliases": ["IRON", "Iron Stablecoin", "Iron Finance IRON"],
+    "aliases": [
+      "IRON",
+      "Iron Stablecoin",
+      "Iron Finance IRON"
+    ],
     "status": "failed",
     "issuer_id": "sog_issuer_iron_finance",
     "peg_asset": "USD",
@@ -79,7 +92,11 @@
     "slug": "musd",
     "name": "mStable USD",
     "symbol": "mUSD",
-    "aliases": ["mUSD", "mStable USD", "mStable mUSD"],
+    "aliases": [
+      "mUSD",
+      "mStable USD",
+      "mStable mUSD"
+    ],
     "status": "limited",
     "issuer_id": "sog_issuer_mstable",
     "peg_asset": "USD",
@@ -96,7 +113,7 @@
     "discontinued_date": null,
     "summary": "Basket-backed meta-stablecoin from mStable, historically minted and redeemed against selected USD stablecoins on Ethereum and Polygon. It is now treated as a legacy product with withdrawal and contract-exit paths rather than a current flagship issuance product.",
     "confidence": "medium",
-    "last_verified_at": "2026-06-14",
-    "notes": "Batch D promotion. Current mint availability and complete residual basket state remain open questions."
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch D promotion. The Ethereum contract was verified on 2020-05-28. A contemporaneous record and independent historical account identify 2020-05-29 as the strongest public-mainnet candidate, while official production-security coverage is fixed to 2020-06-05. The original first-party launch announcement, exact creation transaction, and first permissionless mint remain unresolved."
   }
 ]

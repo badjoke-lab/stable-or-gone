@@ -96,9 +96,9 @@
     {
       "stablecoin_id": "sog_st_musd",
       "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Deployment, public launch, basket, and Save differ."
+      "best_known_range": "2020-05-29",
+      "reason_code": "primary_launch_source_not_recovered",
+      "review_note": "May 28 contract verification, the May 29 mainnet-live candidate, and June 5 official production-security coverage are fixed; the original first-party launch statement, exact creation transaction, and first permissionless mint remain unresolved."
     },
     {
       "stablecoin_id": "sog_st_stablesusdx",

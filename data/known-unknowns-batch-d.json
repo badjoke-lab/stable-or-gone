@@ -78,5 +78,15 @@
     "severity": "medium",
     "last_checked_at": "2026-06-14",
     "notes": "Historical documentation is not treated as a current reserve report."
+  },
+  {
+    "id": "sog_unk_musd_launch_boundary_batch_d",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "topic": "exact_public_launch_boundary",
+    "description": "The Ethereum contract verification is fixed to 2020-05-28, May 29 is the strongest recovered mainnet-live candidate, and official production-security coverage is fixed to 2020-06-05. The original first-party launch announcement, exact creation transaction, and first permissionless mint remain unresolved.",
+    "severity": "low",
+    "last_checked_at": "2026-06-25",
+    "notes": "Keep launch_date null. Do not substitute contract verification, secondary historical reporting, or later Save activation for a primary-source public-launch boundary."
   }
 ]
