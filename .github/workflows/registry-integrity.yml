@@ -21,8 +21,10 @@ jobs:
       - name: Rebuild integrity audit
         run: npm run audit:integrity
       - name: Validate generated integrity audit
+        if: success()
         run: npm run validate:integrity
       - name: Upload integrity audit
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: registry-integrity

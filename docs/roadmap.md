@@ -11,28 +11,20 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #162 — Add Batch 17 candidate research
-Latest merged commit: eaf2daecdbe799a5ac5deaa7ea915bc295425d7d
-Canonical stable assets: 87
+Latest merged prerequisite PR: #163 — Add Batch 17 full-layer drafts
+Latest merged prerequisite commit: a5ad0174263b29d26d6df0237ea41f80620dc654
+Current promotion PR: #164 — Promote Batch 17 stable assets
+Canonical stable assets after merge: 92
 Candidate total: 92
-Promoted candidates: 87
-Pending accepted candidates: 5
-Current work: Batch 17 full-layer draft
-Next operation after merge: open the bounded Batch 17 canonical promotion PR
-Publication requirement: manual publication and production-parity verification after canonical promotion
+Promoted candidates after merge: 92
+Pending accepted candidates after merge: 0
+Current work: Batch 17 canonical promotion validation and merge
+Next operation after merge: manual production publication and production-parity verification
 ```
 
-## Batch 17 full-layer checkpoint
+## Batch 17 canonical promotion checkpoint
 
-```text
-Accepted candidates: 5
-Full-layer drafts: 5
-Canonical promotions in draft PR: 0
-Canonical stable assets: 87
-Target after canonical promotion: 92
-```
-
-Drafted candidates:
+Promoted assets:
 
 ```text
 USA₮ / USAT
@@ -42,68 +34,39 @@ USDH
 AE Coin / AEC
 ```
 
-The non-canonical draft covers identity, organizations, classifications, reserve and redemption context, events, evidence, deployments, legal profiles, reserve components, income profiles, and five explicit known unknowns for every candidate.
+Canonical boundaries:
 
-Important boundaries:
-
-- USA₮ is separate from USD₮ / USDT; Anchorage Digital Bank, N.A. remains the legal issuer.
+- USA₮ is separate from USD₮ / USDT; Anchorage Digital Bank, N.A. is the legal issuer.
 - EURAU is issued by AllUnity; shareholders, reserve banks, custodians, market makers, and distributors remain separate roles.
 - Noble Dollar is separate from Neutrino USD and uses `sog_st_nobleusdn` / `noble-usdn`.
-- USDH remains proposed as limited / winding down while migration and final support boundaries remain under review.
-- AE Coin separates AED Stablecoin LLC's B2B issuer role from appointed agent roles.
+- USDH remains `limited` with Registry v2 lifecycle `restricted` while migration and final support boundaries remain unresolved.
+- AE Coin separates AED Stablecoin LLC's B2B issuer role from appointed custody, transfer, conversion, and end-customer agents.
 - Unsupported launch dates for USDH and AE Coin remain null.
+- Base Noble Dollar income is separated from vault boosts, points programs, and integrator incentives.
+- USDH reserve income allocated to ecosystem programs is not treated as intrinsic holder yield.
 
-Draft files:
+Promotion files include complete Registry v2/v3 coverage for identities, organizations, relationships, classifications, reserve/redemption profiles, events, evidence, reserve context, known unknowns, deployments, legal profiles, reserve components, and income profiles.
 
-```text
-data/batch-17-full-layer-draft.json
-docs/growth/batch-17-full-layer-draft.md
-scripts/validate-batch17-full-layer-draft.mjs
-```
-
-## Batch 16 completion checkpoint
-
-PR #160 promoted:
+## Current canonical registry after Batch 17
 
 ```text
-United Stables U
-USDGO
-SoFiUSD / SOFID
-Solstice USX
-Origin Dollar / OUSD
-```
-
-Final Batch 16 state:
-
-```text
-Canonical stable assets: 87
-Candidate total: 87
-Promoted candidates: 87
-Pending candidates: 0
-All six GitHub workflows: PASS
-Cloudflare publication: not performed by the canonical promotion PR
-```
-
-## Current canonical registry
-
-```text
-87 stable assets
-79 organizations
-92 stablecoin-organization relationships
-87 classifications
-87 reserve/redemption profiles
-145 events
-145 Event v2 detail records
-434 evidence records
-434 evidence relation projections
-95 reserve-report or reserve-context records
-228 known unknowns
+92 stable assets
+86 organizations
+101 stablecoin-organization relationships
+92 classifications
+92 reserve/redemption profiles
+150 events
+150 Event v2 detail records
+455 evidence records
+455 evidence relation projections
+100 reserve-report or reserve-context records
+253 known unknowns
 9 regulatory notes
-124 deployments
-87 legal profiles
+130 deployments
+92 legal profiles
 4 stable-asset relationships
-120 reserve components
-87 income profiles
+125 reserve components
+92 income profiles
 ```
 
 Machine-readable source of truth:
@@ -118,10 +81,10 @@ docs/migration/registry-v3-baseline.json
 Critical findings:                         0
 Blocking warnings:                         0
 Integrity audit warnings:                  4 non-blocking source-count mismatches
-Required-layer coverage:               87 / 87
-Event coverage:                         87 / 87
-Deployment coverage:                    87 / 87
-Missing canonical launch dates:             18
+Required-layer coverage:               92 / 92
+Event coverage:                         92 / 92
+Deployment coverage:                    92 / 92
+Missing canonical launch dates:             20
 Historical records missing terminal date:    4
 Reserve applicability queue:                 12
   not applicable by design:                  10
@@ -134,10 +97,10 @@ Reserve applicability queue:                 12
 ### Launch dates
 
 ```text
-Total unresolved: 18
+Total unresolved: 20
 Category B:         3
-Category C:        12
-Category D:         3
+Category C:        13
+Category D:         4
 ```
 
 Category B:
@@ -146,6 +109,13 @@ Category B:
 BRZ
 Berachain HONEY
 Anzen USDz
+```
+
+New Batch 17 unresolved launch boundaries:
+
+```text
+USDH — Category C, launch-boundary conflict
+AE Coin — Category D, primary launch source not recovered
 ```
 
 ### Reserve sources
@@ -163,6 +133,8 @@ Dynamic Set Dollar
 Empty Set Dollar
 GYEN
 ```
+
+USDH migration remains an explicit lifecycle unknown but is not added to the terminal-date queue because its canonical legacy status is `limited`, not terminal.
 
 These queues remain explicit research backlogs and do not block bounded growth.
 
@@ -200,13 +172,13 @@ Phase 5 — Normal operating cycle
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the Batch 17 full-layer draft PR.
-2. Split the draft into canonical production-layer files.
-3. Add candidate promotion controls and Batch 17 promotion validation.
-4. Update Registry v2/v3 baselines, loaders, generated stats, and integrity outputs.
-5. Merge only after all six workflows pass.
-6. Manually publish and verify production parity.
-7. Resume existing-record quality audits before selecting Batch 18.
+1. Complete final CI for PR #164 and merge the Batch 17 canonical promotion.
+2. Manually publish latest main through the approved GitHub Actions workflow.
+3. Verify the production commit and 92-record public registry.
+4. Verify all five new canonical routes and their evidence/profile sections.
+5. Verify version.json, manifest.json, llms.txt, ai.txt, sitemap, and public consistency.
+6. Record production parity in the roadmap or deployment checkpoint.
+7. Resume two or three existing-record quality audits before selecting Batch 18.
 ```
 
 ## Production policy
@@ -228,7 +200,7 @@ Production branch: main
 - unresolved quality queues remain explicit but do not block bounded growth
 - promote no more than five complete records per growth batch
 - research, full-layer drafting, and canonical promotion remain separate review boundaries
-- run full CI for every batch
+- run all six workflows for every canonical promotion
 - publish and verify after every canonical growth batch
 - alternate growth with existing-record quality work
 - keep unreviewed candidates and internal monitoring out of public files

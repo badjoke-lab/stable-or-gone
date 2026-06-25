@@ -22,13 +22,7 @@
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "shutdown_source_absent",
       "review_note": "No new first-party shutdown, final mint stop, governance termination, redemption termination, or contract-level end state was recovered in the 2026-06-25 recheck. Continued transferability does not restore active protocol status or establish a terminal day.",
-      "rejected_shortcuts": [
-        "first_depeg_date",
-        "price_low_date",
-        "last_repository_commit",
-        "last_website_capture",
-        "negligible_liquidity_date"
-      ],
+      "rejected_shortcuts": ["first_depeg_date","price_low_date","last_repository_commit","last_website_capture","negligible_liquidity_date"],
       "future_review_target": "official_shutdown_notice_final_mint_or_governance_disable_record_or_contract_level_end_state"
     },
     {
@@ -41,13 +35,7 @@
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "development_activity_without_terminal_effect",
       "review_note": "The 2026-06-25 recheck recovered no executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal day. April 2021 V2 design activity remains non-terminal evidence.",
-      "rejected_shortcuts": [
-        "v2_spec_publication_date",
-        "first_depeg_date",
-        "worst_depeg_date",
-        "version_vote_date",
-        "last_medium_post"
-      ],
+      "rejected_shortcuts": ["v2_spec_publication_date","first_depeg_date","worst_depeg_date","version_vote_date","last_medium_post"],
       "future_review_target": "official_migration_execution_shutdown_or_governance_termination_record"
     },
     {
@@ -60,12 +48,7 @@
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "migration_opening_not_final_cessation",
       "review_note": "The 2026-06-25 recheck recovered no V1 end block, final migration deadline, contract disablement, or final claim termination. The 2021-08-02 successor migration opening remains a non-terminal availability boundary.",
-      "rejected_shortcuts": [
-        "v2_audit_date",
-        "migration_opening_as_final_end",
-        "first_sustained_depeg",
-        "successor_token_launch_as_immediate_end"
-      ],
+      "rejected_shortcuts": ["v2_audit_date","migration_opening_as_final_end","first_sustained_depeg","successor_token_launch_as_immediate_end"],
       "future_review_target": "official_v1_end_block_contract_disable_or_final_migration_deadline"
     },
     {
@@ -78,11 +61,7 @@
       "formal_shutdown_announcement": "wind_down_notice_recovered_final_termination_not_reached",
       "reason_code": "redemption_period_still_open",
       "review_note": "GMO Trust's official notice confirms that the initial redemption period remains open until 2026-11-11. The wind-down start, purchase disablement, and notice date are not final token termination boundaries.",
-      "rejected_shortcuts": [
-        "wind_down_start_as_final_end",
-        "purchase_disable_date_as_redemption_end",
-        "notice_publication_as_token_termination"
-      ],
+      "rejected_shortcuts": ["wind_down_start_as_final_end","purchase_disable_date_as_redemption_end","notice_publication_as_token_termination"],
       "future_review_target": "official_final_redemption_deadline_or_termination_notice"
     }
   ]

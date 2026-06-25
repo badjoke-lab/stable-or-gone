@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_usat",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind":"fiat","asset":"USD","notes":"Targets one U.S. dollar."},
+    "backing_types": ["cash","government_securities","mixed"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Federally regulated bank-issued payment stablecoin; separate from USD₮ / USDT."
+  },
+  {
+    "id": "sog_st_eurau",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind":"fiat","asset":"EUR","notes":"Targets one euro."},
+    "backing_types": ["cash","bank_deposits","mixed"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "MiCAR-compliant electronic-money token issued by AllUnity."
+  },
+  {
+    "id": "sog_st_nobleusdn",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind":"fiat","asset":"USD","notes":"Targets one U.S. dollar through M0-backed collateral and conversion routes."},
+    "backing_types": ["government_securities","tokenized_fund"],
+    "stabilization_mechanism": "rebasing_or_repricing",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Yield-bearing Noble extension of M0 infrastructure; separate from Neutrino USD."
+  },
+  {
+    "id": "sog_st_usdh",
+    "lifecycle_status": "restricted",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind":"fiat","asset":"USD","notes":"Targets one U.S. dollar during a migration and liquidity-transition period."},
+    "backing_types": ["cash","government_securities","tokenized_fund","mixed"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Issuer-backed Hyperliquid stablecoin treated as limited during an unresolved migration and liquidity-transition period."
+  },
+  {
+    "id": "sog_st_aecoin",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind":"fiat","asset":"AED","notes":"Targets one UAE dirham."},
+    "backing_types": ["unknown"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "CBUAE-regulated payment token with reserve details and customer-facing agent structure still under review."
+  }
+]

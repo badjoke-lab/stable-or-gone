@@ -1,0 +1,93 @@
+[
+  {
+    "id": "sog_org_tether_usat",
+    "slug": "tether-usat",
+    "name": "Tether USA₮",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["usat"],
+    "official_url": "https://usat.io/",
+    "summary": "Product, brand, technology, and distribution organization supporting USA₮.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Compatibility row only; Anchorage Digital Bank remains the legal issuer."
+  },
+  {
+    "id": "sog_issuer_allunity",
+    "slug": "allunity",
+    "name": "AllUnity",
+    "issuer_type": "company",
+    "jurisdiction": "Germany",
+    "related_stablecoins": ["eurau"],
+    "official_url": "https://allunity.com/",
+    "summary": "Regulated electronic-money institution and legal issuer of EURAU.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Batch P compatibility row."
+  },
+  {
+    "id": "sog_org_tradevest",
+    "slug": "tradevest",
+    "name": "Tradevest",
+    "issuer_type": "company",
+    "jurisdiction": "Germany",
+    "related_stablecoins": ["eurau"],
+    "official_url": "https://www.tradevest.ai/",
+    "summary": "EURAU custody, first-buyer, and exchange infrastructure partner.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Compatibility row only; not the legal issuer."
+  },
+  {
+    "id": "sog_issuer_noble",
+    "slug": "noble",
+    "name": "Noble",
+    "issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "related_stablecoins": ["noble-usdn"],
+    "official_url": "https://noble.xyz/",
+    "summary": "Blockchain and asset-issuance ecosystem operating Noble Dollar.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Batch P compatibility row."
+  },
+  {
+    "id": "sog_issuer_bridge",
+    "slug": "bridge-stablecoin-infrastructure",
+    "name": "Bridge",
+    "issuer_type": "company",
+    "jurisdiction": "United States",
+    "related_stablecoins": ["usdh"],
+    "official_url": "https://www.bridge.xyz/",
+    "summary": "Stablecoin infrastructure and issuer-side provider for USDH.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-26",
+    "notes": "Batch P compatibility row."
+  },
+  {
+    "id": "sog_org_native_markets",
+    "slug": "native-markets",
+    "name": "Native Markets",
+    "issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "related_stablecoins": ["usdh"],
+    "official_url": "https://usdh.com/",
+    "summary": "Designer and protocol operator associated with USDH.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Compatibility row only; not the legal issuer."
+  },
+  {
+    "id": "sog_issuer_aed_stablecoin",
+    "slug": "aed-stablecoin-llc",
+    "name": "AED Stablecoin LLC",
+    "issuer_type": "company",
+    "jurisdiction": "United Arab Emirates",
+    "related_stablecoins": ["ae-coin"],
+    "official_url": "https://aecoin.com/",
+    "summary": "CBUAE-regulated B2B issuer of AE Coin.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Batch P compatibility row."
+  }
+]

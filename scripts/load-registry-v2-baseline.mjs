@@ -3,37 +3,52 @@ import path from 'node:path';
 
 const unique = (items) => [...new Set(items)];
 const uniqueRows = (rows) => [...new Map(rows.map((row) => [row.id, row])).values()];
+const readJson = (root, relativePath) => JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
 
 export function loadRegistryV2Baseline(root = process.cwd()) {
-  const basePath = path.join(root, 'docs/migration/registry-v2-baseline.json');
-  const overlayPath = path.join(root, 'docs/migration/registry-v2-baseline-batch-o.json');
-  const base = JSON.parse(fs.readFileSync(basePath, 'utf8'));
-  if (!fs.existsSync(overlayPath)) return base;
+  const baseRelativePath = 'docs/migration/registry-v2-baseline.json';
+  const base = readJson(root, baseRelativePath);
+  const migrationDir = path.join(root, 'docs/migration');
+  const overlayFiles = fs.readdirSync(migrationDir)
+    .filter((name) => /^registry-v2-baseline-batch-[a-z]+\.json$/i.test(name))
+    .sort()
+    .map((name) => `docs/migration/${name}`);
 
-  const overlay = JSON.parse(fs.readFileSync(overlayPath, 'utf8'));
+  if (overlayFiles.length === 0) return base;
+
   const dataGroups = { ...(base.data_groups ?? {}) };
-  for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
-    dataGroups[name] = unique([...(dataGroups[name] ?? []), ...additions]);
-  }
+  const minimumCounts = { ...(base.minimum_counts ?? {}) };
+  let capturedAt = base.captured_at;
+  const protectedStablecoins = [...(base.protected_stablecoins ?? [])];
+  const protectedOrganizations = [...(base.protected_organizations ?? [])];
+  const suffixes = [];
 
-  const batchOStablecoins = JSON.parse(fs.readFileSync(path.join(root, 'data/stablecoins-batch-o.json'), 'utf8'));
-  const batchOOrganizations = JSON.parse(fs.readFileSync(path.join(root, 'data/organizations-batch-o.json'), 'utf8'));
-  const protectedStablecoins = uniqueRows([
-    ...(base.protected_stablecoins ?? []),
-    ...batchOStablecoins.map((row) => ({ id: row.id, slug: row.slug }))
-  ]);
-  const protectedOrganizations = uniqueRows([
-    ...(base.protected_organizations ?? []),
-    ...batchOOrganizations.map((row) => ({ id: row.id, slug: row.slug }))
-  ]);
+  for (const relativePath of overlayFiles) {
+    const overlay = readJson(root, relativePath);
+    const suffix = path.basename(relativePath).match(/batch-([a-z]+)\.json$/i)?.[1];
+    if (suffix) suffixes.push(`batch_${suffix.toLowerCase()}`);
+    Object.assign(minimumCounts, overlay.minimum_counts ?? {});
+    capturedAt = overlay.captured_at ?? capturedAt;
+
+    for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
+      dataGroups[name] = unique([...(dataGroups[name] ?? []), ...additions]);
+    }
+
+    for (const stablecoinFile of overlay.data_group_additions?.stablecoins ?? []) {
+      for (const row of readJson(root, stablecoinFile)) protectedStablecoins.push({ id: row.id, slug: row.slug });
+    }
+    for (const organizationFile of overlay.data_group_additions?.organizations ?? []) {
+      for (const row of readJson(root, organizationFile)) protectedOrganizations.push({ id: row.id, slug: row.slug });
+    }
+  }
 
   return {
     ...base,
-    baseline_id: `${base.baseline_id}_batch_o`,
-    captured_at: overlay.captured_at ?? base.captured_at,
-    minimum_counts: { ...(base.minimum_counts ?? {}), ...(overlay.minimum_counts ?? {}) },
+    baseline_id: `${base.baseline_id}_${suffixes.join('_')}`,
+    captured_at: capturedAt,
+    minimum_counts: minimumCounts,
     data_groups: dataGroups,
-    protected_stablecoins: protectedStablecoins,
-    protected_organizations: protectedOrganizations
+    protected_stablecoins: uniqueRows(protectedStablecoins),
+    protected_organizations: uniqueRows(protectedOrganizations)
   };
 }

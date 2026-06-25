@@ -1,0 +1,93 @@
+[
+  {
+    "id": "sog_org_tether_usat",
+    "slug": "tether-usat",
+    "name": "Tether USA₮",
+    "organization_type": "financial_technology_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "United States",
+    "official_url": "https://usat.io/",
+    "summary": "Product, brand, technology, and distribution organization supporting USA₮ while Anchorage Digital Bank remains the legal issuer.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "The precise legal entity and division structure behind the USA₮ brand remains separately reviewable."
+  },
+  {
+    "id": "sog_issuer_allunity",
+    "slug": "allunity",
+    "name": "AllUnity",
+    "organization_type": "regulated_emoney_institution",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Germany",
+    "official_url": "https://allunity.com/",
+    "summary": "BaFin-authorized electronic-money institution and legal issuer of EURAU.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Shareholder, reserve-bank, custodian, market-maker, and distributor roles remain separate."
+  },
+  {
+    "id": "sog_org_tradevest",
+    "slug": "tradevest",
+    "name": "Tradevest",
+    "organization_type": "digital_asset_infrastructure_provider",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Germany",
+    "official_url": "https://www.tradevest.ai/",
+    "summary": "EURAU custody, first-buyer, and exchange infrastructure partner identified by AllUnity.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Not recorded as the legal issuer of EURAU."
+  },
+  {
+    "id": "sog_issuer_noble",
+    "slug": "noble",
+    "name": "Noble",
+    "organization_type": "blockchain_asset_issuance_protocol",
+    "legacy_issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "official_url": "https://noble.xyz/",
+    "summary": "Blockchain and asset-issuance ecosystem operating Noble Dollar and its cross-chain integrations.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "The complete legal issuer, redemption-agent, and operator entity map remains under review."
+  },
+  {
+    "id": "sog_issuer_bridge",
+    "slug": "bridge-stablecoin-infrastructure",
+    "name": "Bridge",
+    "organization_type": "regulated_stablecoin_infrastructure_provider",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "United States",
+    "official_url": "https://www.bridge.xyz/",
+    "summary": "Stablecoin infrastructure and issuance organization identified as the issuer-side provider for USDH.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-26",
+    "notes": "The precise issuing legal entity and contractual holder-claim structure require primary terms review."
+  },
+  {
+    "id": "sog_org_native_markets",
+    "slug": "native-markets",
+    "name": "Native Markets",
+    "organization_type": "crypto_asset_protocol",
+    "legacy_issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "official_url": "https://usdh.com/",
+    "summary": "Designer and protocol operator associated with USDH and its Hyperliquid ecosystem deployment.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "Not recorded as the legal issuer; migration and post-transition operating roles remain under review."
+  },
+  {
+    "id": "sog_issuer_aed_stablecoin",
+    "slug": "aed-stablecoin-llc",
+    "name": "AED Stablecoin LLC",
+    "organization_type": "regulated_payment_token_issuer",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "United Arab Emirates",
+    "official_url": "https://aecoin.com/",
+    "summary": "CBUAE-regulated B2B issuer of AE Coin, with customer-facing custody, transfer, and conversion handled through appointed agents.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-26",
+    "notes": "The complete authorized-agent, reserve-bank, safeguarding, and service-provider map remains under review."
+  }
+]

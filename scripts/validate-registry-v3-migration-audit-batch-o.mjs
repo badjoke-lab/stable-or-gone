@@ -1,1 +1,28 @@
-import fs from'node:fs';const p=new URL('./validate-registry-v3-migration-audit.mjs',import.meta.url);let s=fs.readFileSync(p,'utf8');const a="const baseline = readJson(audit.base_registry ?? '') ?? {};";if(!s.includes(a))throw new Error('baseline anchor missing');const r=`const b=readJson(audit.base_registry??'')??{};const o=readJson('docs/migration/registry-v2-baseline-batch-o.json')??{};const g={...(b.data_groups??{})};for(const[n,x]of Object.entries(o.data_group_additions??{}))g[n]=[...new Set([...(g[n]??[]),...x])];const q=readJson('data/stablecoins-batch-o.json')??[];const baseline={...b,minimum_counts:{...(b.minimum_counts??{}),...(o.minimum_counts??{})},data_groups:g,protected_stablecoins:[...(b.protected_stablecoins??[]),...q.map(x=>({id:x.id,slug:x.slug}))]};`;s=s.replace(a,r).replace("'validate:v3': 'scripts/validate-registry-v3-foundation.mjs'","'validate:v3': 'scripts/validate-registry-v3-foundation-batch-o.mjs'").replace("'validate:migration-v3': 'scripts/validate-registry-v3-migration-audit.mjs'","'validate:migration-v3': 'scripts/validate-registry-v3-migration-audit-batch-o.mjs'");await import(`data:text/javascript;base64,${Buffer.from(s).toString('base64')}`);
+import fs from 'node:fs';
+
+const path = new URL('./validate-registry-v3-migration-audit.mjs', import.meta.url);
+let source = fs.readFileSync(path, 'utf8');
+const anchor = "const baseline = readJson(audit.base_registry ?? '') ?? {};";
+if (!source.includes(anchor)) throw new Error('migration audit baseline anchor missing');
+const replacement = `
+const baselineBase = readJson(audit.base_registry ?? '') ?? {};
+const baselineGroups = { ...(baselineBase.data_groups ?? {}) };
+const minimumCounts = { ...(baselineBase.minimum_counts ?? {}) };
+const protectedStablecoins = [...(baselineBase.protected_stablecoins ?? [])];
+for (const suffix of ['o', 'p']) {
+  const overlay = readJson(\`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`) ?? {};
+  Object.assign(minimumCounts, overlay.minimum_counts ?? {});
+  for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
+    baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
+  }
+  for (const file of overlay.data_group_additions?.stablecoins ?? []) {
+    for (const row of readJson(file) ?? []) protectedStablecoins.push({ id: row.id, slug: row.slug });
+  }
+}
+const baseline = { ...baselineBase, minimum_counts: minimumCounts, data_groups: baselineGroups, protected_stablecoins: [...new Map(protectedStablecoins.map((row) => [row.id, row])).values()] };
+`;
+source = source
+  .replace(anchor, replacement)
+  .replace("'validate:v3': 'scripts/validate-registry-v3-foundation.mjs'", "'validate:v3': 'scripts/validate-registry-v3-foundation-batch-o.mjs'")
+  .replace("'validate:migration-v3': 'scripts/validate-registry-v3-migration-audit.mjs'", "'validate:migration-v3': 'scripts/validate-registry-v3-migration-audit-batch-o.mjs'");
+await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);

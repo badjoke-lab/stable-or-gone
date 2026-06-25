@@ -6,10 +6,12 @@ const anchor = "const baseline = readJson('docs/migration/registry-v2-baseline.j
 if (!original.includes(anchor)) throw new Error('Registry v3 foundation baseline patch anchor is missing');
 const replacement = `
 const baselineBase = readJson('docs/migration/registry-v2-baseline.json') ?? {};
-const baselineOverlay = readJson('docs/migration/registry-v2-baseline-batch-o.json') ?? {};
 const baselineGroups = { ...baselineBase.data_groups };
-for (const [name, additions] of Object.entries(baselineOverlay.data_group_additions ?? {})) {
-  baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
+for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', 'docs/migration/registry-v2-baseline-batch-p.json']) {
+  const overlay = readJson(overlayPath) ?? {};
+  for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
+    baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
+  }
 }
 const baseline = { ...baselineBase, data_groups: baselineGroups };
 `;
