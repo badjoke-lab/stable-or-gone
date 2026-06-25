@@ -8,24 +8,36 @@ if (!original.includes(promotionAnchor)) throw new Error('Batch finalization pro
 if (!original.includes(baselineAnchor)) throw new Error('Batch finalization baseline patch anchor is missing');
 const promotionPatched = original.replace(
   promotionAnchor,
-  `${promotionAnchor}, 'data/candidate-promotions-batch-k.json', 'data/candidate-promotions-batch-l.json', 'data/candidate-promotions-batch-m.json', 'data/candidate-promotions-batch-n.json', 'data/candidate-promotions-batch-16.json'`
+  `${promotionAnchor}, 'data/candidate-promotions-batch-k.json', 'data/candidate-promotions-batch-l.json', 'data/candidate-promotions-batch-m.json', 'data/candidate-promotions-batch-n.json', 'data/candidate-promotions-batch-16.json', 'data/candidate-promotions-batch-17.json'`
 );
 const baselineReplacement = `
 const baselineBase = readJson(baselinePath);
-const baselineOverlay = readJson('docs/migration/registry-v2-baseline-batch-o.json');
 const baselineGroups = { ...(baselineBase?.data_groups ?? {}) };
-for (const [name, additions] of Object.entries(baselineOverlay?.data_group_additions ?? {})) {
-  baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
+const minimumCounts = { ...(baselineBase?.minimum_counts ?? {}) };
+const protectedStablecoins = [...(baselineBase?.protected_stablecoins ?? [])];
+const protectedOrganizations = [...(baselineBase?.protected_organizations ?? [])];
+const suffixes = [];
+for (const suffix of ['o', 'p']) {
+  const overlay = readJson(\`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`) ?? {};
+  suffixes.push(\`batch_\${suffix}\`);
+  Object.assign(minimumCounts, overlay.minimum_counts ?? {});
+  for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
+    baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
+  }
+  for (const file of overlay.data_group_additions?.stablecoins ?? []) {
+    for (const row of readJson(file) ?? []) protectedStablecoins.push({ id: row.id, slug: row.slug });
+  }
+  for (const file of overlay.data_group_additions?.organizations ?? []) {
+    for (const row of readJson(file) ?? []) protectedOrganizations.push({ id: row.id, slug: row.slug });
+  }
 }
-const batchOStablecoins = readJson('data/stablecoins-batch-o.json') ?? [];
-const batchOOrganizations = readJson('data/organizations-batch-o.json') ?? [];
 const baseline = baselineBase ? {
   ...baselineBase,
-  baseline_id: \`${'${baselineBase.baseline_id}'}_batch_o\`,
-  minimum_counts: { ...(baselineBase.minimum_counts ?? {}), ...(baselineOverlay?.minimum_counts ?? {}) },
+  baseline_id: \`${'${baselineBase.baseline_id}'}_\${suffixes.join('_')}\`,
+  minimum_counts: minimumCounts,
   data_groups: baselineGroups,
-  protected_stablecoins: [...(baselineBase.protected_stablecoins ?? []), ...batchOStablecoins.map((row) => ({ id: row.id, slug: row.slug }))],
-  protected_organizations: [...(baselineBase.protected_organizations ?? []), ...batchOOrganizations.map((row) => ({ id: row.id, slug: row.slug }))]
+  protected_stablecoins: [...new Map(protectedStablecoins.map((row) => [row.id, row])).values()],
+  protected_organizations: [...new Map(protectedOrganizations.map((row) => [row.id, row])).values()]
 } : null;`;
 const patched = promotionPatched.replace(baselineAnchor, baselineReplacement);
 await import(`data:text/javascript;base64,${Buffer.from(patched).toString('base64')}`);
