@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const failures = [];
-const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
+const baseline = loadRegistryV2Baseline(root);
 
 function read(relativePath) {
   try {
@@ -64,7 +65,12 @@ const legacyIssuers = [
   ...read('data/issuers-batch-g.json'),
   ...read('data/issuers-batch-h.json'),
   ...read('data/issuers-batch-i.json'),
-  ...read('data/issuers-batch-j.json')
+  ...read('data/issuers-batch-j.json'),
+  ...read('data/issuers-batch-k.json'),
+  ...read('data/issuers-batch-l.json'),
+  ...read('data/issuers-batch-m.json'),
+  ...read('data/issuers-batch-n.json'),
+  ...read('data/issuers-batch-o.json')
 ];
 
 for (const row of stablecoins) {
