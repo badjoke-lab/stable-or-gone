@@ -2,7 +2,7 @@
 
 Recorded: 2026-06-25
 
-Result: LAUNCH RESOLVED; CURRENT WIND-DOWN UPDATE REQUIRED
+Result: IMPLEMENTED — LAUNCH RESOLVED AND WIND-DOWN RECORDED
 
 Stablecoin: `sog_st_usk`
 
@@ -125,7 +125,7 @@ Reason:
 - no reviewed first-party evidence establishes a final USK terminal date
 - a successor lending product is not automatically a token migration
 
-## Implementation requirements
+## Implementation result
 
 The follow-up canonical implementation must:
 

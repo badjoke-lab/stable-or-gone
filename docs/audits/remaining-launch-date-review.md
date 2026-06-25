@@ -9,9 +9,9 @@ This document is the human-readable companion to `data/quality/launch-date-unres
 ## Current queue
 
 ```text
-Total unresolved: 22
+Total unresolved: 21
 Category B: 3
-Category C: 16
+Category C: 15
 Category D: 3
 ```
 
@@ -31,6 +31,7 @@ Category D: 3
 - USD1 — Ethereum and BNB Smart Chain deployments on 2025-01-28, the 2025-03-25 introduction, and the 2025-04-07 airdrop test were separated; public launch remains unresolved at April 2025 month level.
 - MIM — 2021-05-05 introduction, 2021-05-25 deployment, 2021-06-05 LP incentives, and live operation by 2021-06-11 were separated; the exact first Cauldron remains unresolved.
 - mUSD — 2020-05-28 contract verification, the 2020-05-29 mainnet-live candidate, and 2020-06-05 production-security coverage were separated; the original first-party launch statement remains unresolved.
+- USK — canonical public launch fixed to 2022-09-12; the 2025-06-30 wind-down and repayment-only state are recorded separately while the final terminal date remains unresolved.
 
 USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C. Agora AUSD’s current Ethereum contract deployment is fixed to 2024-07-07 without treating deployment as public launch.
 
@@ -59,7 +60,6 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 | Staked USDe | `sog_st_susde` | — | USDe launch and staking activation differ. |
 | World Liberty Financial USD | `sog_st_usd1` | 2025-04 | January deployments, March introduction, April testing, first issuance, and broader availability differ. |
 | Mento Dollar | `sog_st_usdm` | — | Mento Dollar and earlier Celo-dollar history differ. |
-| Kujira USK | `sog_st_usk` | — | Deployment, first issuance, and app availability differ. |
 | Vai | `sog_st_vai` | — | Venus, first VAI issuance, and feature activation differ. |
 | VNX Swiss Franc | `sog_st_vchf` | — | Announcement, issuance, and availability remain unresolved. |
 
@@ -83,10 +83,10 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 
 ```text
 Original review scope: complete
-Current unresolved queue: 22
+Current unresolved queue: 21
 Category B: 3
-Category C: 16
+Category C: 15
 Category D: 3
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: USK
+Next bounded review: VAI
 ```

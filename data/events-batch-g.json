@@ -78,14 +78,14 @@
     "stablecoin_id": "sog_st_usk",
     "issuer_id": "sog_issuer_kujira",
     "event_type": "status_review",
-    "event_date": "2026-06-15",
-    "title": "USK recorded with limited current status",
-    "description": "Official USK documentation remains available and describes minting, burning, collateral, and liquidation, but current unrestricted mint-interface and successor-ecosystem operation could not be fully verified.",
+    "event_date": "2026-06-25",
+    "title": "USK remains limited during repayment-only wind-down",
+    "description": "USK launched in 2022 but is now in an orderly wind-down. First-party Rujira documentation states that new USK debt is disabled while existing positions remain repayable during the Kujira-to-Rujira transition.",
     "impact_level": "high",
-    "confidence": "medium",
-    "source_count": 3,
+    "confidence": "high",
+    "source_count": 4,
     "event_status_effect": "restricted",
-    "notes": "This is a registry review event, not a claim that USK has formally terminated."
+    "notes": "This is a registry current-state review. USK is not marked discontinued because the final repayment, network, and successor-liability boundaries remain unresolved."
   },
   {
     "id": "sog_ev_lisusd_2022_08_launch",
@@ -103,5 +103,39 @@
     "recovery_date": null,
     "failure_mechanism": "product_launch",
     "notes": "The 2024 lisUSD name is a later rebrand of this continuous asset."
+  },
+  {
+    "id": "sog_ev_usk_2022_09_launch",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_type": "launch",
+    "event_date": "2022-09-12",
+    "title": "Kujira launches USK and ORCA",
+    "description": "Team Kujira announced that USK and the ORCA liquidation system launched publicly on September 12, 2022, enabling users to mint the overcollateralized stablecoin and participate in liquidation markets.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "A September 10 first-party article still described the launch as upcoming, supporting September 12 as the public boundary."
+  },
+  {
+    "id": "sog_ev_usk_winddown_2025",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_type": "wind_down_announced",
+    "event_date": "2025-06-30",
+    "title": "Rujira announces USK wind-down and repayment-only state",
+    "description": "Rujira announced that USK would wind down, interest would increase gradually to encourage debt repayment, and Kujira debt products including USK minting had been set to repayment-only so users could not take on new debt.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "restricted",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "orderly_wind_down",
+    "notes": "The announcement does not establish a final USK terminal date or a completed token or liability migration."
   }
 ]

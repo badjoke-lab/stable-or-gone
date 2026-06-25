@@ -73,20 +73,20 @@
     "id": "sog_ku_usk_current_mint_state_batch_g",
     "stablecoin_id": "sog_st_usk",
     "issuer_id": "sog_issuer_kujira",
-    "topic": "current_mint_and_burn_availability",
-    "description": "Official documentation describes BLUE-based minting and burn-to-release collateral, but the present unrestricted availability of those interfaces and contracts could not be fully verified.",
+    "topic": "repayment_completion_and_final_terminal_boundary",
+    "description": "First-party Rujira documentation establishes that new USK debt is disabled and existing debt is repayment-only. The completion of repayment, final USK terminal date, and any residual liability treatment remain unresolved.",
     "severity": "high",
-    "last_checked_at": "2026-06-15",
-    "notes": "This is the basis for limited rather than active status."
+    "last_checked_at": "2026-06-25",
+    "notes": "Do not mark USK discontinued while repayment and network access continue."
   },
   {
     "id": "sog_ku_usk_successor_state_batch_g",
     "stablecoin_id": "sog_st_usk",
     "issuer_id": "sog_issuer_kujira",
-    "topic": "successor_network_and_liability_state",
-    "description": "The relationship between legacy Kujira USK positions, current chain operation, and any successor ecosystem or migration path is not fully resolved.",
+    "topic": "successor_product_and_liability_migration",
+    "description": "Rujira lending is presented as the successor borrowing venue, but a completed migration of USK token identity, debt liabilities, or holder claims has not been established.",
     "severity": "high",
-    "last_checked_at": "2026-06-15",
-    "notes": "Do not mark terminated or migrated without authoritative evidence."
+    "last_checked_at": "2026-06-25",
+    "notes": "A successor lending product is not automatically a USK token migration."
   }
 ]
