@@ -20,17 +20,72 @@
     "income_profiles": 82
   },
   "coverage": {
-    "classifications": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "profiles": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "relationships": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "evidence": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "reserve_reports": {"covered": 70, "total": 82, "required": false, "expectation": "informational"},
-    "known_unknowns": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "deployments": {"covered": 82, "total": 82, "required": false, "expectation": "optional_review"},
-    "events": {"covered": 82, "total": 82, "required": false, "expectation": "optional_review"},
-    "legal_profiles": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "reserve_components": {"covered": 82, "total": 82, "required": true, "expectation": "required"},
-    "income_profiles": {"covered": 82, "total": 82, "required": true, "expectation": "required"}
+    "classifications": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "profiles": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "relationships": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "evidence": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "reserve_reports": {
+      "covered": 70,
+      "total": 82,
+      "required": false,
+      "expectation": "informational"
+    },
+    "known_unknowns": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "deployments": {
+      "covered": 82,
+      "total": 82,
+      "required": false,
+      "expectation": "optional_review"
+    },
+    "events": {
+      "covered": 82,
+      "total": 82,
+      "required": false,
+      "expectation": "optional_review"
+    },
+    "legal_profiles": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "reserve_components": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    },
+    "income_profiles": {
+      "covered": 82,
+      "total": 82,
+      "required": true,
+      "expectation": "required"
+    }
   },
   "candidate_promotions": {
     "total": 87,
@@ -66,10 +121,17 @@
       "sog_st_usyc"
     ],
     "historical_missing_discontinued_date": 3,
-    "historical_missing_discontinued_date_ids": ["sog_st_bac", "sog_st_dsd", "sog_st_esd"],
+    "historical_missing_discontinued_date_ids": [
+      "sog_st_bac",
+      "sog_st_dsd",
+      "sog_st_esd"
+    ],
     "all_unknown_income_profiles": 0,
     "all_unknown_income_profile_ids": [],
-    "reserve_report_context_coverage": {"covered": 70, "total": 82}
+    "reserve_report_context_coverage": {
+      "covered": 70,
+      "total": 82
+    }
   },
   "findings": {
     "critical": [],
