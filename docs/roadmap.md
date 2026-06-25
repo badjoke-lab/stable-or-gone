@@ -33,17 +33,17 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #131 — Add JPYC versus JPYSC comparison guide
-Merge: a9939f3fd509e17396f465f985bda93805952d97
+PR #132 — Integrate dated guides across the site
+Merge: ea94d61d8fdf4e539c132d99f3024949218f8918
 ```
 
 Current implementation checkpoint:
 
 ```text
-PR #132 — Site-wide guide integration
-Status: in review
-Scope: homepage discovery, stablecoin related guides, Updates, structured metadata, dynamic sitemap routes, and guide validation
-Completion effect: the five-PR Japan/regulation guide sequence is complete when this branch merges
+GitHub Japan/regulation guide sequence: complete through PR #132
+Canonical guide routes: GENIUS Act, MiCA, and JPYC versus JPYSC
+Site integration: homepage, stablecoin related guides, Updates, structured metadata, dynamic sitemap, and CI validation complete
+Next state-changing operation: production publication checkpoint when Cloudflare access returns
 ```
 
 Recent lineage, incident, launch, and guide work:
@@ -82,7 +82,7 @@ Current blocker:
 82-record production parity: pending
 Cloudflare access: unavailable
 Controlled record growth: paused until production parity can be restored
-Final GitHub-only guide integration: active in PR #132
+Japan/regulation guide implementation and GitHub integration: complete
 ```
 
 Latest verified production checkpoint:
@@ -224,10 +224,10 @@ PR #128 — JPYC, JPYSC, and RLUSD Japan canonical update — merged
 PR #129 — Guides framework + GENIUS Act — merged
 PR #130 — MiCA — merged
 PR #131 — JPYC versus JPYSC — merged
-PR #132 — Site-wide guide integration — in review
+PR #132 — Site-wide guide integration — merged
 ```
 
-PR #132 integration coverage:
+Completed integration coverage:
 
 ```text
 homepage: featured dated-guide discovery
@@ -251,9 +251,9 @@ Rules:
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Complete CI and merge PR #132.
-3. Keep article publication dates unset while the pages are not live in production.
-4. When Cloudflare access returns, set the actual publication date, publish latest merged main manually, and verify production parity.
+2. Keep article publication dates unset while the pages are not live in production.
+3. When Cloudflare access returns, set the actual publication date, publish latest merged main manually, and verify production parity.
+4. Confirm the three dated guide routes, stablecoin related-guide links, Updates entry, sitemap, metadata, and machine-readable counts in production.
 5. Resume controlled record growth only after the 82-record production baseline and guide routes pass the parity audit.
 ```
 
