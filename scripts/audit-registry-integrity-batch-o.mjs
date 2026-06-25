@@ -17,5 +17,8 @@ const baseline = {
   minimum_counts: { ...baselineBase.minimum_counts, ...baselineOverlay.minimum_counts },
   data_groups: baselineGroups
 };`;
-const patched = original.replace(anchor, replacement);
+const patched = original
+  .replace(anchor, replacement)
+  .replaceAll('SOG 80-Record Final Registry Audit', 'SOG 87-Record Registry Audit')
+  .replaceAll('The 80-record canonical registry', 'The 87-record canonical registry');
 await import(`data:text/javascript;base64,${Buffer.from(patched).toString('base64')}`);
