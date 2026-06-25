@@ -1,4 +1,8 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
+  sog_update_2026_06_25_pr129_pr132_dated_guides: {
+    title: 'Dated regulation and comparison guides added',
+    summary: 'Added beginner-friendly guides to the GENIUS Act, MiCA, and the differences between JPYC and JPYSC, together with direct discovery from relevant record pages.'
+  },
   sog_update_2026_06_09_pr039_event_ux: {
     title: 'Event search and filters added',
     summary: 'The event page now supports text search, filters for type, impact, and recovery, several sorting options, and visible result counts.'

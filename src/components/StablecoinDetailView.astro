@@ -2,9 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StableAssetClassificationRows from './StableAssetClassificationRows.astro';
 import IssuerControlEvents from './IssuerControlEvents.astro';
+import RelatedGuides from './RelatedGuides.astro';
 import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
 import { cleanPublicText } from '../utils/publicText';
 import { eventPublicCopy } from '../data/eventPublicCopy';
+import { getRelatedGuidesForStablecoin } from '../data/stablecoinGuideLinks';
 import {
   getOrganizations,
   getRelationships,
@@ -59,10 +61,26 @@ const reserveReports = allReserveReports.filter((item) => item.stablecoin_id ===
 const openQuestions = allKnownUnknowns.filter((item) => item.stablecoin_id === coin.id);
 const regulatoryNotes = allRegulatoryNotes.filter((item) => item.stablecoin_id === coin.id);
 const deployments = allDeployments.filter((item) => item.stablecoin_id === coin.id);
+const relatedGuides = getRelatedGuidesForStablecoin(coin.slug);
 const statusClass = `chip ${coin.lifecycle_status ?? coin.status ?? 'unknown'}`;
 const title = `${coin.name} (${coin.symbol ?? coin.slug}) — Stablecoin History | Stable or Gone`;
 const description = `${coin.name} history, status, organization relationships, backing model, redemption terms, major events, reserve information, and sources.`;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Dataset', name: `${coin.name} stablecoin history`, url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`, description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, keywords: [coin.name, coin.symbol, coin.lifecycle_status ?? coin.status, coin.peg_reference?.asset ?? coin.peg_asset, ...(coin.backing_types ?? [coin.collateral_model])].filter(Boolean) };
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: `${coin.name} stablecoin history`,
+  url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`,
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  keywords: [coin.name, coin.symbol, coin.lifecycle_status ?? coin.status, coin.peg_reference?.asset ?? coin.peg_asset, ...(coin.backing_types ?? [coin.collateral_model])].filter(Boolean),
+  ...(relatedGuides.length > 0 ? {
+    subjectOf: relatedGuides.map((guide) => ({
+      '@type': 'Article',
+      name: guide.title,
+      url: `https://sog.badjoke-lab.com${guide.href}`
+    }))
+  } : {})
+};
 const coverageRows = [
   { label: 'Organizations', count: relationships.length },
   { label: 'Sources', count: evidence.length },
@@ -89,6 +107,7 @@ const redemptionProfile = coin.redemption_profile;
   <section class="panel registry"><div class="bar">Organizations and roles</div><table><thead><tr><th>Organization</th><th>Role</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="5">No organization relationships have been added yet.</td></tr> : relationships.map((relationship) => { const organization = organizationById.get(relationship.organization_id); return <tr><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : relationship.organization_id}</td><td>{formatPublicLabel(relationship.role)}</td><td>{relationship.start_date ?? '—'}</td><td>{relationship.end_date ?? '—'}</td><td>{formatPublicLabel(relationship.status)}</td></tr>; })}</tbody></table></section>
 
   <section class="section-grid" aria-label="Related pages"><a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Compare this record with the rest of the archive.</p></a>{primaryOrganization && <a class="panel mini-card" href={`/issuer/${primaryOrganization.slug}/`}><h2>{primaryOrganization.name}</h2><p>{formatPublicLabel(primaryOrganization.organization_type, 'Organization')} · {formatPublicLabel(primaryOrganization.jurisdiction, 'Jurisdiction unknown')}</p></a>}<a class="panel mini-card" href="/events/"><h2>Event history</h2><p>{events.length} event{events.length === 1 ? '' : 's'} connected to this stablecoin.</p></a></section>
+  <RelatedGuides guides={relatedGuides} />
 
   <section class="panel registry"><div class="bar">Reserve profile</div><table><tbody><tr><th>Disclosure status</th><td>{formatPublicLabel(reserveProfile?.disclosure_status ?? coin.reserve_disclosure_status, 'Public information is incomplete')}</td></tr><tr><th>Backing types</th><td>{reserveProfile?.backing_types?.map((item: string) => formatPublicLabel(item)).join(', ') ?? backingTypes}</td></tr><tr><th>Summary</th><td>{cleanPublicText(reserveProfile?.summary, 'Public information is incomplete.')}</td></tr><tr><th>As of</th><td>{reserveProfile?.as_of_date ?? '—'}</td></tr><tr><th>Profile confidence</th><td>{formatPublicLabel(reserveProfile?.confidence, 'Unknown')}</td></tr></tbody></table></section>
 

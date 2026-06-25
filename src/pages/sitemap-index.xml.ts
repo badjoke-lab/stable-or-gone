@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { guides } from '../data/guideCatalog';
 import { getStablecoins, getOrganizations, getEvents } from '../lib/data/registry';
 
 const SITE = 'https://sog.badjoke-lab.com';
@@ -15,10 +16,7 @@ export const GET: APIRoute = () => {
     '/events/',
     '/models/',
     '/guides/',
-    '/guides/what-is-a-depeg/',
-    '/guides/status-vs-event/',
-    '/guides/reserve-disclosure-basics/',
-    '/guides/stablecoin-lifecycle-terms/',
+    ...guides.map((guide) => `/guides/${guide.slug}/`),
     '/glossary/',
     '/methodology/',
     '/updates/',
@@ -33,7 +31,7 @@ export const GET: APIRoute = () => {
     ...getEvents().map((row) => `/event/${row.id}/`)
   ];
 
-  const urls = [...staticPaths, ...dynamicPaths]
+  const urls = [...new Set([...staticPaths, ...dynamicPaths])]
     .map((path) => `<url><loc>${url(path)}</loc></url>`)
     .join('');
 

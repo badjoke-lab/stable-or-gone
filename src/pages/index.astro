@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
+import { getGuide } from '../data/guideCatalog';
 import { getStablecoins, getOrganizations, getPrimaryRelationship, getEvents, getEvidence } from '../lib/data/registry';
 
 const stablecoins = getStablecoins();
@@ -13,14 +14,32 @@ const primaryOrganizationName = (stablecoinId: string) => {
   const relationship = getPrimaryRelationship(stablecoinId);
   return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
 };
+const featuredGuides = [
+  getGuide('genius-act-stablecoins'),
+  getGuide('mica-stablecoins'),
+  getGuide('jpyc-vs-jpysc')
+];
 
-const title = 'Stable or Gone — Stablecoin History Registry';
-const description = 'Explore stablecoin histories, depegs, launches, wind-downs, failures, issuers, reserve information, redemption terms, and the sources behind each record.';
-const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/', description, inLanguage: 'en', about: ['stablecoins', 'depeg events', 'reserve disclosure', 'stablecoin history'] };
+const title = 'Stable or Gone — Stablecoin History Registry and Guides';
+const description = 'Explore stablecoin histories, depegs, launches, wind-downs, failures, issuers, reserve information, redemption terms, regulation guides, asset comparisons, and the sources behind each record.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Stable or Gone',
+  url: 'https://sog.badjoke-lab.com/',
+  description,
+  inLanguage: 'en',
+  about: ['stablecoins', 'depeg events', 'reserve disclosure', 'stablecoin history', 'stablecoin regulation'],
+  hasPart: featuredGuides.map((guide) => ({
+    '@type': 'Article',
+    name: guide.title,
+    url: `https://sog.badjoke-lab.com/guides/${guide.slug}/`
+  }))
+};
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
   <section class="hero">
-    <div class="panel hero-main"><div class="prompt">Stablecoin history archive</div><h1>Stablecoin histories, major events, and sources.</h1><p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, and redemption terms across the stablecoin market.</p></div>
+    <div class="panel hero-main"><div class="prompt">Stablecoin history archive</div><h1>Stablecoin histories, major events, sources, and explainers.</h1><p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, redemption terms, and the regulatory structures around stablecoins.</p></div>
     <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
   </section>
 
@@ -28,7 +47,23 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'St
     <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Compare status, organizations, peg, backing model, redemption access, and history.</p></a>
     <a class="panel mini-card" href="/events/"><h2>Explore events</h2><p>Review depegs, launches, regulatory actions, migrations, wind-downs, and collapses.</p></a>
     <a class="panel mini-card" href="/issuers/"><h2>View organizations</h2><p>See the companies, protocols, networks, and reserve organizations connected to each stablecoin.</p></a>
-    <a class="panel mini-card" href="/guides/"><h2>Read the guides</h2><p>Understand stablecoin regulation, asset structures, depegs, reserves, redemption, and lifecycle terms.</p></a>
+    <a class="panel mini-card" href="/guides/"><h2>Browse all guides</h2><p>Understand regulation, legal and reserve structures, depegs, redemption, and lifecycle terms.</p></a>
+  </section>
+
+  <section aria-labelledby="featured-guides-title">
+    <div class="panel registry">
+      <div class="bar" id="featured-guides-title">Current regulatory and comparison guides</div>
+      <p>Dated explainers separate enacted rules, implementation stages, issuer claims, asset structures, and unresolved questions.</p>
+    </div>
+    <div class="section-grid">
+      {featuredGuides.map((guide) => (
+        <a class="panel mini-card" href={`/guides/${guide.slug}/`}>
+          <h2>{guide.title}</h2>
+          <p>{guide.summary}</p>
+          <p><small>Information current through {guide.informationCurrentThrough}</small></p>
+        </a>
+      ))}
+    </div>
   </section>
 
   <section class="panel registry"><div class="bar">Selected stablecoin records</div><table><thead><tr><th>Name</th><th>Symbol</th><th>Peg</th><th>Model</th><th>Status</th><th>Primary organization</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td><td>{primaryOrganizationName(coin.id)}</td></tr>))}</tbody></table></section>

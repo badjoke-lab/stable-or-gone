@@ -33,17 +33,17 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #130 — Add MiCA and Stablecoins guide
-Merge: 3482b53fb24ec9160480531bd010d0ce9ee127c0
+PR #131 — Add JPYC versus JPYSC comparison guide
+Merge: a9939f3fd509e17396f465f985bda93805952d97
 ```
 
 Current implementation checkpoint:
 
 ```text
-PR #131 — JPYC versus JPYSC comparison
+PR #132 — Site-wide guide integration
 Status: in review
-Information current through: 2026-06-25
-Next planned work after PR #131: site-wide guide integration
+Scope: homepage discovery, stablecoin related guides, Updates, structured metadata, dynamic sitemap routes, and guide validation
+Completion effect: the five-PR Japan/regulation guide sequence is complete when this branch merges
 ```
 
 Recent lineage, incident, launch, and guide work:
@@ -71,6 +71,7 @@ PR #128 — Add JPYSC and Japan stablecoin events
 PR #129 — Add dated Guides framework and GENIUS Act guide
 PR #130 — Add MiCA and Stablecoins guide
 PR #131 — Add JPYC versus JPYSC comparison guide
+PR #132 — Integrate dated guides site-wide
 ```
 
 Current blocker:
@@ -81,7 +82,7 @@ Current blocker:
 82-record production parity: pending
 Cloudflare access: unavailable
 Controlled record growth: paused until production parity can be restored
-GitHub-only quality and guide work: active
+Final GitHub-only guide integration: active in PR #132
 ```
 
 Latest verified production checkpoint:
@@ -219,10 +220,21 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 ## Guide expansion sequence
 
 ```text
+PR #128 — JPYC, JPYSC, and RLUSD Japan canonical update — merged
 PR #129 — Guides framework + GENIUS Act — merged
 PR #130 — MiCA — merged
-PR #131 — JPYC versus JPYSC — in review
-PR #132 — Site-wide guide integration
+PR #131 — JPYC versus JPYSC — merged
+PR #132 — Site-wide guide integration — in review
+```
+
+PR #132 integration coverage:
+
+```text
+homepage: featured dated-guide discovery
+stablecoin records: mapped related-guide cards and subjectOf metadata
+Updates: dated guide expansion entry
+sitemap: guide routes generated from the shared catalog
+validation: catalog/page/canonical/home/relationship/update checks in the main build
 ```
 
 Rules:
@@ -239,10 +251,10 @@ Rules:
 
 ```text
 1. Do not deploy or change Cloudflare while access is unavailable.
-2. Complete and merge PR #131 with the JPYC versus JPYSC comparison, primary-source links, and explicit JPYC Prepaid separation.
-3. Finish with PR #132 covering homepage discovery, related guides, Updates, metadata, sitemap, and guide validation.
-4. Keep article publication dates unset until the pages are actually live in production.
-5. When Cloudflare access returns, publish latest merged main manually and verify production parity before controlled record growth resumes.
+2. Complete CI and merge PR #132.
+3. Keep article publication dates unset while the pages are not live in production.
+4. When Cloudflare access returns, set the actual publication date, publish latest merged main manually, and verify production parity.
+5. Resume controlled record growth only after the 82-record production baseline and guide routes pass the parity audit.
 ```
 
 ## Production policy
@@ -253,6 +265,7 @@ The production path remains:
 
 ```text
 latest main
+→ set actual guide publication date at the publication checkpoint
 → manual GitHub Actions dispatch
 → npm run build
 → prebuilt dist upload with Wrangler
@@ -266,6 +279,8 @@ At each publication checkpoint verify:
 - public counts
 - machine-readable files
 - canonical routes
+- guide routes and article metadata
+- stablecoin related-guide links
 - sitemap
 - metadata and structured data
 - stale count markers

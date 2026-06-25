@@ -1,0 +1,29 @@
+---
+interface GuideLink {
+  href: string;
+  title: string;
+  summary: string;
+}
+
+interface Props {
+  guides: GuideLink[];
+}
+
+const { guides } = Astro.props;
+---
+{guides.length > 0 && (
+  <section aria-labelledby="related-guides-title">
+    <div class="panel registry">
+      <div class="bar" id="related-guides-title">Related guides</div>
+      <p>Use these explainers to compare the legal, regulatory, reserve, redemption, or distribution questions connected to this record.</p>
+    </div>
+    <div class="section-grid">
+      {guides.map((guide) => (
+        <a class="panel mini-card" href={guide.href}>
+          <h2>{guide.title}</h2>
+          <p>{guide.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
