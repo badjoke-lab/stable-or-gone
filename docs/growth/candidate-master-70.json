@@ -47,6 +47,7 @@
     "batch_016_research_complete": true,
     "batch_016_promotion_complete": true,
     "batch_017_research_complete": true,
+    "batch_017_full_layer_draft_complete": false,
     "batch_017_promotion_complete": false,
     "ordinary_growth_remains_blocked": false
   }
