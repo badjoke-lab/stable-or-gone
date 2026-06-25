@@ -1,0 +1,80 @@
+[
+  {
+    "id": "sog_issuer_united_stables",
+    "slug": "united-stables-limited",
+    "name": "United Stables Limited",
+    "organization_type": "financial_technology_company",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "British Virgin Islands",
+    "official_url": "https://www.u.tech/",
+    "summary": "Issuer and operator of United Stables U.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-25",
+    "notes": "Custody, reserve-manager, and jurisdiction-specific legal-claim roles remain under review."
+  },
+  {
+    "id": "sog_issuer_anchorage_digital_bank",
+    "slug": "anchorage-digital-bank",
+    "name": "Anchorage Digital Bank",
+    "organization_type": "regulated_bank",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "United States",
+    "official_url": "https://www.anchorage.com/",
+    "summary": "Federally chartered digital-asset bank identified as the legal issuer of USDGO.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "OSL branding, distribution, and operating roles are modeled separately."
+  },
+  {
+    "id": "sog_org_osl_group",
+    "slug": "osl-group",
+    "name": "OSL Group",
+    "organization_type": "regulated_crypto_asset_service_provider",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Hong Kong",
+    "official_url": "https://www.osl.com/",
+    "summary": "Brand operator and distributor for USDGO.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Not recorded as the legal issuer of USDGO."
+  },
+  {
+    "id": "sog_issuer_sofi_bank",
+    "slug": "sofi-bank",
+    "name": "SoFi Bank, N.A.",
+    "organization_type": "regulated_bank",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "United States",
+    "official_url": "https://www.sofi.com/",
+    "summary": "National bank and legal issuer of SoFiUSD / SOFID.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Interest-bearing tokenized-deposit products remain outside the SoFiUSD stablecoin identity."
+  },
+  {
+    "id": "sog_issuer_solstice_finance",
+    "slug": "solstice-finance",
+    "name": "Solstice Finance",
+    "organization_type": "decentralized_protocol",
+    "legacy_issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "official_url": "https://solstice.finance/",
+    "summary": "Protocol and operating ecosystem behind Solstice USX and separate yield products.",
+    "confidence": "medium",
+    "last_verified_at": "2026-06-25",
+    "notes": "The complete operator, legal-entity, reserve, and custody map remains unresolved."
+  },
+  {
+    "id": "sog_issuer_origin_protocol",
+    "slug": "origin-protocol",
+    "name": "Origin Protocol",
+    "organization_type": "decentralized_protocol",
+    "legacy_issuer_type": "protocol",
+    "jurisdiction": "Decentralized / multi-entity",
+    "official_url": "https://www.originprotocol.com/",
+    "summary": "Protocol and governance ecosystem behind Origin Dollar and related Origin yield products.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Current governance, strategy, and administrative-control roles remain reviewable."
+  }
+]
