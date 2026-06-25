@@ -16,8 +16,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate current output
-        run: node scripts/validate-registry-stats.mjs
       - name: Rebuild output
         run: node scripts/generate-registry-stats-batch-o.mjs
       - name: Validate rebuilt output
