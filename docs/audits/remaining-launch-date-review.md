@@ -9,9 +9,9 @@ This document is the human-readable companion to `data/quality/launch-date-unres
 ## Current queue
 
 ```text
-Total unresolved: 21
+Total unresolved: 20
 Category B: 3
-Category C: 15
+Category C: 14
 Category D: 3
 ```
 
@@ -32,6 +32,7 @@ Category D: 3
 - MIM — 2021-05-05 introduction, 2021-05-25 deployment, 2021-06-05 LP incentives, and live operation by 2021-06-11 were separated; the exact first Cauldron remains unresolved.
 - mUSD — 2020-05-28 contract verification, the 2020-05-29 mainnet-live candidate, and 2020-06-05 production-security coverage were separated; the original first-party launch statement remains unresolved.
 - USK — canonical public launch fixed to 2022-09-12; the 2025-06-30 wind-down and repayment-only state are recorded separately while the final terminal date remains unresolved.
+- VAI — canonical public launch fixed to 2020-11-24, when Venus mainnet opened and public VAI minting became available; exact deployment and first mint remain unresolved.
 
 USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C. Agora AUSD’s current Ethereum contract deployment is fixed to 2024-07-07 without treating deployment as public launch.
 
@@ -60,7 +61,6 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 | Staked USDe | `sog_st_susde` | — | USDe launch and staking activation differ. |
 | World Liberty Financial USD | `sog_st_usd1` | 2025-04 | January deployments, March introduction, April testing, first issuance, and broader availability differ. |
 | Mento Dollar | `sog_st_usdm` | — | Mento Dollar and earlier Celo-dollar history differ. |
-| Vai | `sog_st_vai` | — | Venus, first VAI issuance, and feature activation differ. |
 | VNX Swiss Franc | `sog_st_vchf` | — | Announcement, issuance, and availability remain unresolved. |
 
 ## Category D — adequate primary source not recovered
@@ -83,10 +83,10 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 
 ```text
 Original review scope: complete
-Current unresolved queue: 21
+Current unresolved queue: 20
 Category B: 3
-Category C: 15
+Category C: 14
 Category D: 3
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: VAI
+Next bounded review: VCHF
 ```

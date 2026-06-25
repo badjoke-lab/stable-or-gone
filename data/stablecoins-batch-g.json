@@ -76,12 +76,12 @@
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Access depends on Venus market availability, supported BNB Chain interfaces, and applicable restrictions.",
     "redemption_notes": "VAI uses a stability fee and protocol-controlled peg mechanisms rather than a legal issuer redemption claim.",
-    "launch_date": null,
+    "launch_date": "2020-11-24",
     "discontinued_date": null,
-    "summary": "Venus Protocol's USD-pegged stablecoin on BNB Chain, generated against protocol collateral and supported by stability-fee and peg-stability mechanisms.",
-    "confidence": "medium",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch G promotion. Current mint ceilings and PSM operating parameters require ongoing monitoring."
+    "summary": "Venus Protocol's USD-pegged stablecoin on BNB Chain, publicly mintable against supported collateral from the Venus mainnet launch on November 24, 2020, and later supported by stability-fee and peg-stability mechanisms.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Canonical public launch is 2020-11-24, when Venus announced mainnet operation and public VAI minting. The 2020-10-17 alpha testnet explicitly described VAI minting as future beta functionality. Exact contract deployment, first mint, initial distribution, later stability-fee changes, PSM deployment, and current Prime access conditions remain separate boundaries."
   },
   {
     "id": "sog_st_lisusd",

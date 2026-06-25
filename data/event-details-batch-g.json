@@ -167,5 +167,27 @@
       "sog_src_usk_winddown_2025"
     ],
     "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_vai_2020_11_launch",
+    "title": "Venus launches mainnet and public VAI minting",
+    "subject_stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "evidence_ids": [
+      "sog_src_vai_testnet_prelaunch_2020",
+      "sog_src_vai_mainnet_launch_2020"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Venus mainnet launched on 2020-11-24 and enabled users to mint VAI against supported collateral.",
+      "status": "active",
+      "related_organization_ids": [
+        "sog_issuer_venus_protocol"
+      ]
+    }
   }
 ]
