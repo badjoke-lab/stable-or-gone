@@ -23,7 +23,7 @@
     "description": "Inverse Finance opened the Anchor money market, now called Frontier, on February 25, 2021. The protocol facilitated DOLA issuance, establishing the original public launch boundary for the continuing DOLA asset.",
     "impact_level": "high",
     "confidence": "high",
-    "source_count": 2,
+    "source_count": 3,
     "event_status_effect": "active",
     "recovered": null,
     "recovery_date": null,
@@ -68,7 +68,7 @@
     "description": "Lista DAO completed the Helio-to-Lista transition on February 5, 2024 and renamed HAY to lisUSD. The BNB Chain stablecoin remained the continuing HAY-derived token.",
     "impact_level": "medium",
     "confidence": "high",
-    "source_count": 5,
+    "source_count": 6,
     "event_status_effect": "none",
     "notes": "The rebrand date is not the asset launch date. HAY remains a historical alias.",
     "failure_mechanism": "same_token_rebrand"
