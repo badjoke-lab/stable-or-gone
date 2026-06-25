@@ -19,11 +19,16 @@ This review protects the comparison boundaries used by `/guides/jpyc-vs-jpysc/`.
 - regulatory and legal structure
 - reserve description
 - direct issue and redemption route
+- statutory transaction ceiling versus product or operational limits
 - initial distribution channel
 - external-wallet availability
 - public-chain availability
 - launch date and lifecycle status
 - explicit unresolved questions
+
+## Limit boundary
+
+The guide distinguishes the current JPYC second-type funds-transfer ceiling from the JPYSC trust model. It does not translate the absence of that same statutory ceiling into a claim of unlimited present-day usability. Account eligibility, order size, compliance review, liquidity, settlement operations, and the unavailable JPYSC external-withdrawal route remain separate questions.
 
 ## Publication policy
 
