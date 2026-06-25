@@ -1,0 +1,7 @@
+[
+  {"candidate_id":"sog_cand_000083","status":"promoted","notes":"Promoted in Batch O as base United Stables U; rewards, wrappers, and exchange positions remain separate."},
+  {"candidate_id":"sog_cand_000084","status":"promoted","notes":"Promoted in Batch O as Anchorage-issued USDGO with OSL distribution; reserve vehicles and exchange rewards remain separate."},
+  {"candidate_id":"sog_cand_000085","status":"promoted","notes":"Promoted in Batch O as SoFiUSD with token symbol SOFID; future tokenized deposits remain separate legal products."},
+  {"candidate_id":"sog_cand_000086","status":"promoted","notes":"Promoted in Batch O as Solstice USX; dForce USX, eUSX, YieldVault positions, and partner receipts remain separate."},
+  {"candidate_id":"sog_cand_000087","status":"promoted","notes":"Promoted in Batch O as base Origin Dollar OUSD; wrapped OUSD and other Origin yield products remain separate."}
+]
