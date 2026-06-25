@@ -34,7 +34,8 @@
       "data/legal-profiles-v3-batch-growth-k.json",
       "data/legal-profiles-v3-batch-growth-l.json",
       "data/legal-profiles-v3-batch-growth-m.json",
-      "data/legal-profiles-v3-batch-growth-n.json"
+      "data/legal-profiles-v3-batch-growth-n.json",
+      "data/legal-profiles-v3-batch-growth-o.json"
     ],
     "stable_asset_relationships": [
       "data/stable-asset-relationships-v3.json",
@@ -50,13 +51,14 @@
       "data/reserve-components-v3-batch-k.json",
       "data/reserve-components-v3-batch-l.json",
       "data/reserve-components-v3-batch-m.json",
-      "data/reserve-components-v3-batch-n.json"
+      "data/reserve-components-v3-batch-n.json",
+      "data/reserve-components-v3-batch-o.json"
     ]
   },
   "minimum_counts": {
-    "legal_profiles": 82,
+    "legal_profiles": 87,
     "stable_asset_relationships": 4,
-    "reserve_components": 115
+    "reserve_components": 120
   },
   "loader": "src/lib/data/registryV3.ts",
   "validator": "scripts/validate-registry-v3-foundation.mjs"
