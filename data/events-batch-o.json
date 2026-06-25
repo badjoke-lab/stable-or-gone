@@ -1,0 +1,72 @@
+[
+  {
+    "id": "sog_ev_unitedu_launch_batch_o",
+    "stablecoin_id": "sog_st_unitedu",
+    "issuer_id": "sog_issuer_united_stables",
+    "event_type": "launch",
+    "event_date": "2025-12-18",
+    "title": "United Stables launches U",
+    "description": "United Stables announced U on Ethereum and BNB Chain as a reserve-backed U.S.-dollar stablecoin.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "active",
+    "notes": "Launch date follows the dated public announcement."
+  },
+  {
+    "id": "sog_ev_usdgo_launch_batch_o",
+    "stablecoin_id": "sog_st_usdgo",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "event_type": "launch",
+    "event_date": "2026-02-10",
+    "title": "OSL and Anchorage launch USDGO",
+    "description": "USDGO launched on Solana as an enterprise stablecoin issued by Anchorage Digital Bank and distributed under the OSL brand.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 5,
+    "event_status_effect": "active",
+    "notes": "Issuer and distributor roles remain separate."
+  },
+  {
+    "id": "sog_ev_sofiusd_launch_batch_o",
+    "stablecoin_id": "sog_st_sofiusd",
+    "issuer_id": "sog_issuer_sofi_bank",
+    "event_type": "launch",
+    "event_date": "2025-12-18",
+    "title": "SoFi launches SoFiUSD infrastructure",
+    "description": "SoFi announced its fully reserved payment stablecoin for banks, fintechs, and enterprise partners.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 4,
+    "event_status_effect": "active",
+    "notes": "Later network and consumer-platform availability are separate distribution or deployment boundaries."
+  },
+  {
+    "id": "sog_ev_solsticeusx_launch_batch_o",
+    "stablecoin_id": "sog_st_solsticeusx",
+    "issuer_id": "sog_issuer_solstice_finance",
+    "event_type": "launch",
+    "event_date": "2025-09-30",
+    "title": "Solstice Finance launches USX",
+    "description": "Solstice Finance launched the Solana-native USX stablecoin and associated protocol system.",
+    "impact_level": "medium",
+    "confidence": "medium",
+    "source_count": 3,
+    "event_status_effect": "active",
+    "notes": "Base USX remains separate from eUSX and YieldVault positions."
+  },
+  {
+    "id": "sog_ev_ousd_launch_batch_o",
+    "stablecoin_id": "sog_st_ousd",
+    "issuer_id": "sog_issuer_origin_protocol",
+    "event_type": "launch",
+    "event_date": "2020-09-22",
+    "title": "Origin Protocol introduces Origin Dollar",
+    "description": "Origin Protocol introduced OUSD as a rebasing stablecoin designed to earn strategy yield in user wallets.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 4,
+    "event_status_effect": "active",
+    "notes": "Later security, restart, and compensation chronology remains a separate review queue."
+  }
+]
