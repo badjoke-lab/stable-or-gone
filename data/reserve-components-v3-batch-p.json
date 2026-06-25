@@ -43,7 +43,7 @@
     "amount_text":null,
     "currency":"USD",
     "liquidity_class":"high",
-    "maturity_bucket":"short_term",
+    "maturity_bucket":"under_1_year",
     "custodian_organization_id":null,
     "as_of_date":"2026-06-26",
     "confidence":"high",
