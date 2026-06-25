@@ -5,7 +5,7 @@
 - Canonical stable assets: **92**
 - Promoted candidates: **92 / 92**
 - Critical findings: **0**
-- Warnings: **4**
+- Warnings: **0**
 
 ## Scope
 
@@ -60,10 +60,7 @@
 
 ## Warnings
 
-- sog_ev_susd_synthetix_lifecycle_context source_count=3, linked evidence=6
-- sog_ev_dola_2021_02_launch source_count=2, linked evidence=3
-- sog_ev_lisusd_rebrand_batch_g source_count=5, linked evidence=6
-- sog_ev_fxusd_launch_batch_m source_count=7, linked evidence=8
+- None.
 
 ## Quality Observations
 
@@ -75,4 +72,4 @@
 
 ## Result
 
-The 92-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.
+The 92-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.
