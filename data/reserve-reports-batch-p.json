@@ -1,0 +1,62 @@
+[
+  {
+    "id":"sog_rr_usat_context_batch_p",
+    "stablecoin_id":"sog_st_usat",
+    "issuer_id":"sog_issuer_anchorage_digital_bank",
+    "publisher":"Tether / USA₮",
+    "report_type":"official_launch_and_reserve_context",
+    "asset_categories":["cash","government_securities","mixed"],
+    "url":"https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/",
+    "archived_url":"https://web.archive.org/web/*/https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/",
+    "confidence":"medium",
+    "notes":"Official launch context; exact allocation, custody, recurring reports, and attestation archive remain unresolved."
+  },
+  {
+    "id":"sog_rr_eurau_context_batch_p",
+    "stablecoin_id":"sog_st_eurau",
+    "issuer_id":"sog_issuer_allunity",
+    "publisher":"AllUnity",
+    "report_type":"official_micar_and_reserve_context",
+    "asset_categories":["cash","bank_deposits","mixed"],
+    "url":"https://allunity.com/eurau/",
+    "archived_url":"https://web.archive.org/web/*/https://allunity.com/eurau/",
+    "confidence":"high",
+    "notes":"Official fully reserved and MiCAR context; exact reserve allocation and complete attestation archive remain unresolved."
+  },
+  {
+    "id":"sog_rr_nobleusdn_context_batch_p",
+    "stablecoin_id":"sog_st_nobleusdn",
+    "issuer_id":"sog_issuer_noble",
+    "publisher":"Noble",
+    "report_type":"official_protocol_collateral_context",
+    "asset_categories":["government_securities","tokenized_fund"],
+    "url":"https://docs.noble.xyz/learn/usdn/overview/",
+    "archived_url":"https://web.archive.org/web/*/https://docs.noble.xyz/learn/usdn/overview/",
+    "confidence":"high",
+    "notes":"Official M0-backed Treasury exposure context; complete validator, custody, and liability-chain chronology remains unresolved."
+  },
+  {
+    "id":"sog_rr_usdh_context_batch_p",
+    "stablecoin_id":"sog_st_usdh",
+    "issuer_id":"sog_issuer_bridge",
+    "publisher":"USDH",
+    "report_type":"official_monthly_attestation_and_live_reserve_context",
+    "asset_categories":["cash","government_securities","tokenized_fund","mixed"],
+    "url":"https://usdh.com/reserves",
+    "archived_url":"https://web.archive.org/web/*/https://usdh.com/reserves",
+    "confidence":"high",
+    "notes":"Official live reserve and monthly-attestation context; complete historical allocation and migration-period chronology remain unresolved."
+  },
+  {
+    "id":"sog_rr_aecoin_context_batch_p",
+    "stablecoin_id":"sog_st_aecoin",
+    "issuer_id":"sog_issuer_aed_stablecoin",
+    "publisher":"AED Stablecoin LLC",
+    "report_type":"official_regulatory_and_product_context",
+    "asset_categories":["unknown"],
+    "url":"https://aecoin.com/downloads/whitepaper-en.pdf",
+    "archived_url":"https://web.archive.org/web/*/https://aecoin.com/downloads/whitepaper-en.pdf",
+    "confidence":"medium",
+    "notes":"Official product and regulatory context; reserve composition, safeguarding, banking, segregation, and attestation details remain unresolved."
+  }
+]
