@@ -35,7 +35,7 @@ export const guides: GuideEntry[] = [
     title: 'GENIUS Act and Stablecoins',
     summary: 'A beginner-friendly guide to the U.S. payment-stablecoin law, its implementation timeline, and the questions it creates for representative dollar stablecoins.',
     category: 'regulation',
-    publishedAt: null,
+    publishedAt: '2026-06-25',
     informationCurrentThrough: '2026-06-25',
     updatedAt: null,
     revisions: []
@@ -45,7 +45,7 @@ export const guides: GuideEntry[] = [
     title: 'MiCA and Stablecoins',
     summary: 'A beginner-friendly guide to EU stablecoin rules, the 2026 CASP transition deadline, and the different questions facing representative dollar, euro, and protocol-issued assets.',
     category: 'regulation',
-    publishedAt: null,
+    publishedAt: '2026-06-25',
     informationCurrentThrough: '2026-06-25',
     updatedAt: null,
     revisions: []
@@ -55,7 +55,7 @@ export const guides: GuideEntry[] = [
     title: 'JPYC vs JPYSC',
     summary: 'A side-by-side guide to two Japanese-yen stablecoins with different issuers, legal structures, reserves, redemption routes, launch stages, and wallet availability.',
     category: 'asset-comparisons',
-    publishedAt: null,
+    publishedAt: '2026-06-25',
     informationCurrentThrough: '2026-06-25',
     updatedAt: null,
     revisions: []

@@ -14,7 +14,7 @@ Resume interrupted work in this order:
 4. Check for an existing branch or PR for the named next work item.
 5. Resume from the first incomplete item.
 
-Every roadmap-changing PR must update this file. Every merge report must state the merge SHA, data changes, CI result, remaining queues, production status, and next work item.
+Every roadmap-changing PR must update this file. Every merge report must state the merge SHA, data changes, CI result, remaining queues, production status, current position, full execution sequence, and next work item.
 
 ## Current position
 
@@ -33,17 +33,18 @@ https://sog.badjoke-lab.com/
 Latest merged checkpoint:
 
 ```text
-PR #132 — Integrate dated guides across the site
-Merge: ea94d61d8fdf4e539c132d99f3024949218f8918
+PR #133 — Finalize guide sequence roadmap checkpoint
+Merge: 15e29c4b5477abf3782b2eaf6180a2afa6af4397
 ```
 
 Current implementation checkpoint:
 
 ```text
-GitHub Japan/regulation guide sequence: complete through PR #132
-Canonical guide routes: GENIUS Act, MiCA, and JPYC versus JPYSC
-Site integration: homepage, stablecoin related guides, Updates, structured metadata, dynamic sitemap, and CI validation complete
-Next state-changing operation: production publication checkpoint when Cloudflare access returns
+PR #134 — Set dated guide publication dates
+Status: in review
+Publication date candidate: 2026-06-25
+Scope: GENIUS Act, MiCA, and JPYC versus JPYSC
+Required next operation after merge: manual production publication from latest main
 ```
 
 Recent lineage, incident, launch, and guide work:
@@ -72,6 +73,8 @@ PR #129 — Add dated Guides framework and GENIUS Act guide
 PR #130 — Add MiCA and Stablecoins guide
 PR #131 — Add JPYC versus JPYSC comparison guide
 PR #132 — Integrate dated guides site-wide
+PR #133 — Finalize guide sequence roadmap checkpoint
+PR #134 — Set dated guide publication dates
 ```
 
 Current blocker:
@@ -80,9 +83,9 @@ Current blocker:
 82-record GitHub canonical baseline: complete
 82-record production publication: pending
 82-record production parity: pending
-Cloudflare access: unavailable
 Controlled record growth: paused until production parity can be restored
 Japan/regulation guide implementation and GitHub integration: complete
+Guide publication metadata: active in PR #134
 ```
 
 Latest verified production checkpoint:
@@ -168,8 +171,8 @@ EURA   — agEUR launch separated from EURA rebrand
 lisUSD — HAY launch separated from lisUSD rebrand
 sUSD   — eUSD predecessor separated from nUSD launch and sUSD rebrand
 Nuon   — Arbitrum v1 launch separated from Base v2 relaunch
-SPOT   — original launch separated from v2 proposal and v5 execution
-fxUSD  — public availability separated from announcement, seeding, and same-proxy V2 upgrade
+SPOT   — original launch separated from later protocol versions
+fxUSD  — public availability separated from announcement, seeding, and V2 upgrade
 MAI    — Polygon public launch fixed while rename and V2 activation remain unresolved
 USDX   — Ethereum production contracts fixed to 2024-03-18 while public launch and approved-access boundaries remain unresolved
 sUSDe  — current contract deployment fixed to 2023-11-14 while stealth activity, public mainnet, staking access, and reward payout remain separate unresolved boundaries
@@ -188,6 +191,12 @@ Policy:
 - do not substitute a rebrand or later protocol version for the original launch
 - preserve predecessor, legacy deployment, and unresolved migration boundaries explicitly
 - keep `launch_date: null` when the exact public boundary remains unresolved
+
+Next bounded launch-date review:
+
+```text
+DOLA
+```
 
 ### Terminal-date queue
 
@@ -225,6 +234,8 @@ PR #129 — Guides framework + GENIUS Act — merged
 PR #130 — MiCA — merged
 PR #131 — JPYC versus JPYSC — merged
 PR #132 — Site-wide guide integration — merged
+PR #133 — Completion checkpoint — merged
+PR #134 — Publication dates — in review
 ```
 
 Completed integration coverage:
@@ -237,24 +248,56 @@ sitemap: guide routes generated from the shared catalog
 validation: catalog/page/canonical/home/relationship/update checks in the main build
 ```
 
-Rules:
+Guide rules:
 
 - use `/guides/` rather than adding another top-level navigation item
 - keep new guide URLs flat under `/guides/<slug>/`
-- keep `Published` unset until actual production publication
+- set `Published` only at the production publication checkpoint
 - display `Information current through` from the final primary-source review date
 - display `Last updated` only after a meaningful later revision
 - record factual corrections explicitly as `Correction`
 - compare representative assets under the same fields without declaring unconfirmed winners
 
+## Full execution sequence after PR #134
+
+```text
+Phase 1 — Production publication
+1. Merge PR #134 after all checks pass.
+2. Manually run the production publication workflow from latest main.
+3. Verify deployed commit, 82-record counts, three dated guide routes, related-guide links, Updates, sitemap, metadata, and machine-readable files.
+4. Record PASS or failure details in the production parity audit.
+
+Phase 2 — Production checkpoint
+5. Add and merge the 82-record production parity audit PR.
+6. Remove the controlled-growth pause only after parity is PASS.
+
+Phase 3 — Resume interrupted quality work
+7. Audit DOLA launch boundaries without forcing a date.
+8. Implement a canonical DOLA launch date only if day-level primary or on-chain public evidence supports it; otherwise preserve null and close the bounded audit.
+9. Continue the first launch-date quality wave: USD1, MIM, mUSD, USK, VAI, VCHF, and IRON.
+
+Phase 4 — Cross-queue maintenance
+10. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
+11. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
+
+Phase 5 — Controlled growth
+12. Prepare a reviewed candidate master.
+13. Promote no more than five complete stable-asset records per batch.
+14. Publish and verify production after each growth batch so production never trails main by more than one batch.
+
+Phase 6 — Normal operating cycle
+15. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
+16. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when needed.
+```
+
 ## Immediate next work
 
 ```text
-1. Do not deploy or change Cloudflare while access is unavailable.
-2. Keep article publication dates unset while the pages are not live in production.
-3. When Cloudflare access returns, set the actual publication date, publish latest merged main manually, and verify production parity.
-4. Confirm the three dated guide routes, stablecoin related-guide links, Updates entry, sitemap, metadata, and machine-readable counts in production.
-5. Resume controlled record growth only after the 82-record production baseline and guide routes pass the parity audit.
+1. Complete CI and merge PR #134.
+2. Do not start DOLA or controlled record growth before production publication and parity verification.
+3. Manually publish latest main after PR #134 merges.
+4. Verify the production checkpoint and record it in a dedicated audit PR.
+5. Resume at DOLA only after production parity is PASS.
 ```
 
 ## Production policy
@@ -265,7 +308,6 @@ The production path remains:
 
 ```text
 latest main
-→ set actual guide publication date at the publication checkpoint
 → manual GitHub Actions dispatch
 → npm run build
 → prebuilt dist upload with Wrangler
@@ -298,7 +340,7 @@ Deployment workflow run: 27908380603
 Manual production publication activation — PASS
 ```
 
-Normal pull requests and normal merges must not invoke the production deployment workflow. Manual publication remains operational but is not executed while Cloudflare access is unavailable.
+Normal pull requests and normal merges must not invoke the production deployment workflow.
 
 ## Growth policy
 
@@ -306,4 +348,4 @@ Controlled record growth remains paused while the public site is behind the cano
 
 No further routine growth batch begins until a manual publication and parity audit can be completed from the latest merged `main`.
 
-Quality corrections, evidence improvements, date resolution, queue maintenance, schema validation, guide work, and generated-output synchronization may continue without Cloudflare access.
+After parity is restored, quality corrections and controlled growth resume in the alternating cycle defined above.
