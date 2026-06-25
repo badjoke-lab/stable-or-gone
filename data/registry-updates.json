@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_06_25_pr129_pr132_dated_guides",
+    "date": "2026-06-25",
+    "title": "Dated regulation and asset-comparison guides added",
+    "category": "content",
+    "summary": "Expanded the Guides layer with dated explainers for the U.S. GENIUS Act, EU MiCA rules, and the structural differences between JPYC and JPYSC. Added homepage discovery, asset-page relationships, article metadata, dynamic sitemap coverage, and guide validation.",
+    "related_paths": ["/guides/", "/guides/genius-act-stablecoins/", "/guides/mica-stablecoins/", "/guides/jpyc-vs-jpysc/", "/stablecoin/jpyc/", "/stablecoin/jpysc/"]
+  },
+  {
     "id": "sog_update_2026_06_09_pr039_event_ux",
     "date": "2026-06-09",
     "title": "Event search and filtering added",
