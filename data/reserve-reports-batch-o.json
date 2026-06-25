@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_rr_unitedu_context_batch_o",
+    "stablecoin_id": "sog_st_unitedu",
+    "issuer_id": "sog_issuer_united_stables",
+    "publisher": "United Stables",
+    "report_type": "official_product_and_terms_context",
+    "asset_categories": ["cash", "government_securities", "stablecoin_collateral"],
+    "url": "https://u.tech/terms/",
+    "archived_url": "https://web.archive.org/web/*/https://u.tech/terms/",
+    "confidence": "medium",
+    "notes": "Official reserve and redemption context; complete recurring attestation archive remains unresolved."
+  },
+  {
+    "id": "sog_rr_usdgo_context_batch_o",
+    "stablecoin_id": "sog_st_usdgo",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "publisher": "Anchorage Digital / OSL Group",
+    "report_type": "official_product_and_audit_context",
+    "asset_categories": ["cash", "government_securities", "tokenized_fund", "mixed"],
+    "url": "https://www.osl.com/en/bits/article/what-is-usdgo-enterprise-grade-compliant-stablecoin",
+    "archived_url": "https://web.archive.org/web/*/https://www.osl.com/en/bits/article/what-is-usdgo-enterprise-grade-compliant-stablecoin",
+    "confidence": "medium",
+    "notes": "Official reserve-vehicle and product context; exact allocation chronology and complete attestation archive remain unresolved."
+  },
+  {
+    "id": "sog_rr_sofiusd_context_batch_o",
+    "stablecoin_id": "sog_st_sofiusd",
+    "issuer_id": "sog_issuer_sofi_bank",
+    "publisher": "SoFi",
+    "report_type": "official_monthly_attestation_program_context",
+    "asset_categories": ["cash", "bank_deposits"],
+    "url": "https://www.sofi.com/crypto/sofiusd/",
+    "archived_url": "https://web.archive.org/web/*/https://www.sofi.com/crypto/sofiusd/",
+    "confidence": "high",
+    "notes": "Official full-reserve and monthly-attestation program context; normalized report history remains incomplete."
+  },
+  {
+    "id": "sog_rr_solsticeusx_context_batch_o",
+    "stablecoin_id": "sog_st_solsticeusx",
+    "issuer_id": "sog_issuer_solstice_finance",
+    "publisher": "Solstice Finance",
+    "report_type": "official_protocol_collateral_and_strategy_context",
+    "asset_categories": ["stablecoin_collateral", "tokenized_fund", "mixed"],
+    "url": "https://docs.solstice.finance/",
+    "archived_url": "https://web.archive.org/web/*/https://docs.solstice.finance/",
+    "confidence": "medium",
+    "notes": "Official protocol context; exact current composition, custody, and strategy allocation remain unresolved."
+  },
+  {
+    "id": "sog_rr_ousd_context_batch_o",
+    "stablecoin_id": "sog_st_ousd",
+    "issuer_id": "sog_issuer_origin_protocol",
+    "publisher": "Origin Protocol",
+    "report_type": "official_protocol_reserve_and_strategy_context",
+    "asset_categories": ["stablecoin_collateral"],
+    "url": "https://docs.originprotocol.com/yield-bearing-tokens/origin-dollar-ousd",
+    "archived_url": "https://web.archive.org/web/*/https://docs.originprotocol.com/yield-bearing-tokens/origin-dollar-ousd",
+    "confidence": "high",
+    "notes": "Current official reserve and strategy context; historical composition and complete strategy chronology remain reviewable."
+  }
+]
