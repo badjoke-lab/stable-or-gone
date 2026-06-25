@@ -1,18 +1,19 @@
 {
-  "schema_version": "1.1",
-  "status": "emergency_batch_15_included",
+  "schema_version": "1.2",
+  "status": "batch_016_research_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
     "data/candidate-stable-assets-growth-75.json",
     "data/candidate-stable-assets-growth-80.json",
     "data/candidate-stable-assets-emergency-msusd.json",
-    "data/candidate-stable-assets-emergency-jpysc.json"
+    "data/candidate-stable-assets-emergency-jpysc.json",
+    "data/candidate-stable-assets-growth-85.json"
   ],
   "protected_minimums": {
-    "total_candidates": 82,
+    "total_candidates": 87,
     "promoted_candidates": 82,
-    "pending_candidates": 0
+    "pending_candidates": 5
   },
   "planned_batches": {
     "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
@@ -24,7 +25,8 @@
     "batch_012": {"minimum_candidates": 5, "theme": "current modular, synthetic, protocol, RWA, and BTC-backed USD assets"},
     "batch_013": {"minimum_candidates": 5, "theme": "current reserve-backed, collateralized, ecosystem-native, and delta-neutral protocol stablecoins"},
     "batch_014": {"minimum_candidates": 1, "theme": "emergency incident record"},
-    "batch_015": {"minimum_candidates": 1, "theme": "time-sensitive regulated stablecoin launch"}
+    "batch_015": {"minimum_candidates": 1, "theme": "time-sensitive regulated stablecoin launch"},
+    "batch_016": {"minimum_candidates": 5, "theme": "current bank, enterprise, ecosystem-native, and yield-bearing USD assets"}
   },
   "promotion_policy": {
     "candidate_is_not_canonical": true,
@@ -36,9 +38,12 @@
     "production_parity_at_75_passed": true,
     "production_parity_required_at_80": true,
     "no_80_to_85_work_without_production_parity": true,
+    "production_record_parity_at_82_passed": true,
     "batch_013_promotion_complete": true,
     "batch_014_is_emergency_incident_exception": true,
     "batch_015_is_time_sensitive_launch_exception": true,
-    "ordinary_growth_remains_blocked": true
+    "batch_016_research_complete": true,
+    "batch_016_promotion_complete": false,
+    "ordinary_growth_remains_blocked": false
   }
 }
