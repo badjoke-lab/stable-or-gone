@@ -2,11 +2,11 @@
 
 Recorded: 2026-06-25
 
-Result: LAUNCH RESOLVED
+Result: IMPLEMENTED — LAUNCH RESOLVED
 
 Stablecoin: `sog_st_vai`
 
-Current canonical launch date: `null`
+Current canonical launch date: `2020-11-24`
 
 Recommended canonical launch date: `2020-11-24`
 
@@ -114,9 +114,9 @@ Reason:
 - the exact first mint transaction is not required to override a documented public product launch
 - stability-fee changes, PSM deployment, and current Prime access restrictions are later lifecycle boundaries
 
-## Implementation requirements
+## Implementation result
 
-The follow-up canonical implementation must:
+The canonical implementation:
 
 1. set VAI `launch_date` to `2020-11-24`
 2. retain `status: active`

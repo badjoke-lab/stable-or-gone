@@ -49,10 +49,16 @@
     "canonicality": "native",
     "is_primary": true,
     "mint_authority_type": "venus_controller_governed",
-    "notes": "Official Venus VAI BNB Chain deployment.",
+    "notes": "Official Venus VAI BNB Chain deployment. Public mainnet minting is fixed to 2020-11-24; the exact contract-creation timestamp and first VAI mint transaction remain unresolved.",
     "evidence_ids": [
       "sog_src_vai_docs_batch_g",
-      "sog_src_vai_contracts_batch_g"
+      "sog_src_vai_contracts_batch_g",
+      "sog_src_vai_testnet_prelaunch_2020",
+      "sog_src_vai_mainnet_launch_2020"
+    ],
+    "control_event_ids": [
+      "sog_ev_vai_2020_11_launch",
+      "sog_ev_vai_protocol_model_batch_g"
     ]
   },
   {

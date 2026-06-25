@@ -715,5 +715,66 @@
       "network_transition"
     ],
     "notes": "First-party Rujira statement. It does not establish the final USK terminal date."
+  },
+  {
+    "id": "sog_src_vai_testnet_prelaunch_2020",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "event_id": "sog_ev_vai_2020_11_launch",
+    "source_type": "official_blog",
+    "title": "Venus Protocol Testnet Launch",
+    "url": "https://medium.com/venusprotocol/venus-protocol-testnet-launch-6b3641c0d5d7",
+    "publisher": "Venus Protocol",
+    "published_at": "2020-10-17",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/venusprotocol/venus-protocol-testnet-launch-6b3641c0d5d7",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "explicit_prelaunch_testnet_boundary",
+    "stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_vai_2020_11_launch"
+    ],
+    "claim_scopes": [
+      "alpha_testnet",
+      "vai_minting_future_beta",
+      "pre_mainnet_boundary"
+    ],
+    "notes": "First-party alpha-testnet article explicitly states that VAI minting would be released in a later beta stage and that mainnet remained a future milestone."
+  },
+  {
+    "id": "sog_src_vai_mainnet_launch_2020",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "event_id": "sog_ev_vai_2020_11_launch",
+    "source_type": "official_blog",
+    "title": "Venus Protocol Main Network Launched",
+    "url": "https://medium.com/venusprotocol/venus-protocol-main-network-launched-52ea9929091f",
+    "publisher": "Venus Protocol",
+    "published_at": "2020-11-24",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/venusprotocol/venus-protocol-main-network-launched-52ea9929091f",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "same_day_mainnet_and_vai_public_launch",
+    "stablecoin_ids": [
+      "sog_st_vai"
+    ],
+    "organization_ids": [
+      "sog_issuer_venus_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_vai_2020_11_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "mainnet_launch",
+      "public_vai_minting",
+      "supported_collateral"
+    ],
+    "notes": "First-party same-day launch statement that Venus mainnet was live and users could mint VAI through the public application."
   }
 ]

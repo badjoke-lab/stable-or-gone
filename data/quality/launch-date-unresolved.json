@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 21,
+  "expected_total": 20,
   "category_counts": {
     "B": 3,
-    "C": 15,
+    "C": 14,
     "D": 3
   },
   "records": [
@@ -148,13 +148,6 @@
       "best_known_range": null,
       "reason_code": "primary_source_not_found",
       "review_note": "Current documents do not establish the original launch day."
-    },
-    {
-      "stablecoin_id": "sog_st_vai",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Venus, first VAI issuance, and feature activation differ."
     },
     {
       "stablecoin_id": "sog_st_vchf",

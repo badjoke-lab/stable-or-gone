@@ -1,7 +1,7 @@
 # SOG 80-Record Final Registry Audit
 
 - Audited at: 2026-06-25
-- Baseline: `sog_registry_v2_usk_launch_winddown_2026_06_25`
+- Baseline: `sog_registry_v2_vai_launch_2026_06_25`
 - Canonical stable assets: **82**
 - Promoted candidates: **82 / 82**
 - Critical findings: **0**
@@ -26,9 +26,9 @@
 | relationships | 86 |
 | classifications | 82 |
 | profiles | 82 |
-| events | 136 |
-| event_details | 136 |
-| evidence | 405 |
+| events | 137 |
+| event_details | 137 |
+| evidence | 407 |
 | reserve_reports | 90 |
 | known_unknowns | 202 |
 | regulatory_notes | 9 |
@@ -69,7 +69,7 @@
 
 - reserve_reports context coverage is 70/82; this publication-specific layer is informational and is not expected for every asset. Missing: sog_st_mim, sog_st_usdn, sog_st_rai, sog_st_spot, sog_st_gho, sog_st_bold, sog_st_sai, sog_st_husd, sog_st_iron, sog_st_musd, sog_st_eurt, sog_st_alusd.
 - 0 records have missing or older-than-one-year last_verified_at values: none.
-- 21 records have no launch_date: sog_st_agoraausd, sog_st_brz, sog_st_dsd, sog_st_esd, sog_st_eurt, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_stablesusdx, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usdm, sog_st_usdz, sog_st_usyc, sog_st_vai, sog_st_vchf.
+- 20 records have no launch_date: sog_st_agoraausd, sog_st_brz, sog_st_dsd, sog_st_esd, sog_st_eurt, sog_st_gyen, sog_st_honey, sog_st_husd, sog_st_iron, sog_st_mim, sog_st_msusd, sog_st_musd, sog_st_stablesusdx, sog_st_susde, sog_st_tryb, sog_st_usd1, sog_st_usdm, sog_st_usdz, sog_st_usyc, sog_st_vchf.
 - 3 historical-side records have no discontinued_date: sog_st_bac, sog_st_dsd, sog_st_esd.
 - 0 income profiles remain entirely unknown: none.
 

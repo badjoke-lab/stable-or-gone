@@ -43,11 +43,11 @@
     "id": "sog_ku_vai_launch_date_batch_g",
     "stablecoin_id": "sog_st_vai",
     "issuer_id": "sog_issuer_venus_protocol",
-    "topic": "exact_launch_date",
-    "description": "The current protocol documentation does not provide one authoritative day-level VAI launch date for this record.",
+    "topic": "exact_contract_deployment_first_mint_and_initial_distribution",
+    "description": "The public Venus mainnet and VAI minting launch is fixed to 2020-11-24. The exact VAI contract-creation timestamp, first mint transaction, and initial distribution sequence are not normalized.",
     "severity": "low",
-    "last_checked_at": "2026-06-15",
-    "notes": "Keep launch_date null pending a dated official announcement."
+    "last_checked_at": "2026-06-25",
+    "notes": "The unresolved deployment and first-mint details do not override the documented public mainnet launch boundary."
   },
   {
     "id": "sog_ku_vai_current_mint_parameters_batch_g",

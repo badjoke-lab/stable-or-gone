@@ -11,13 +11,12 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #148 — Implement USK launch and wind-down chronology
-Latest merged commit: fe34fbaa1c6b4c28682c214941f937caadb6d983
-Current work: VAI bounded launch-boundary audit
-Launch conclusion: set launch_date to 2020-11-24
-Current-state conclusion: retain status active
-Next operation after audit: VAI canonical implementation
-Next bounded review after VAI: VCHF
+Latest merged PR: #149 — Audit VAI launch boundary
+Latest merged commit: 2ce768064623dee173594c11dd3f57a469420a76
+Current work: VAI canonical implementation
+Launch result: launch_date set to 2020-11-24
+Current-state result: status active; discontinued_date null
+Next bounded review after merge: VCHF
 ```
 
 ## VAI audit checkpoint
@@ -45,15 +44,15 @@ Audit:
 docs/audits/vai-launch-boundary-review.md
 ```
 
-Follow-up implementation:
+Canonical implementation result:
 
-- add the 2020-11-24 public launch event
-- add first-party testnet and mainnet evidence
-- preserve exact deployment and first mint as known unknowns
-- keep later stability-fee and PSM changes separate from launch
-- update the BNB Chain deployment note and evidence
-- remove VAI from the unresolved launch queue
-- reduce the queue from 21 to 20 and Category C from 15 to 14
+- 2020-11-24 public launch event added
+- first-party testnet and mainnet evidence added
+- exact deployment and first mint preserved as known unknowns
+- later stability-fee and PSM changes remain separate from launch
+- BNB Chain deployment note and evidence updated
+- VAI removed from the unresolved launch queue
+- queue reduced from 21 to 20 and Category C from 15 to 14
 
 ## Completed quality checkpoints
 
@@ -85,10 +84,10 @@ Quality-only work after the checkpoint does not trigger automatic production pub
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-136 events
-136 Event v2 detail records
-405 evidence records
-405 evidence relation projections
+137 events
+137 Event v2 detail records
+407 evidence records
+407 evidence relation projections
 90 reserve-report or reserve-context records
 202 known unknowns
 9 regulatory notes
@@ -118,7 +117,7 @@ Required-layer coverage:              82 / 82
 Event coverage:                        82 / 82
 Deployment coverage:                   82 / 82
 Reserve-report context coverage:       70 / 82 informational
-Missing canonical launch dates:            21
+Missing canonical launch dates:            20
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -129,15 +128,6 @@ Reserve applicability queue:                12
 ## Queue state
 
 ### Launch-date queue
-
-```text
-Total unresolved before VAI implementation: 21
-Category B:                                  3
-Category C:                                 15
-Category D:                                  3
-```
-
-Expected after VAI implementation:
 
 ```text
 Total unresolved: 20
@@ -154,7 +144,7 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review after VAI implementation:
+Next bounded review:
 
 ```text
 VCHF
@@ -229,11 +219,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the VAI audit PR.
-2. Open the VAI canonical implementation PR.
-3. Set launch_date only to the audited 2020-11-24 mainnet boundary.
-4. Preserve exact deployment and first mint as unresolved.
-5. Start VCHF after the VAI implementation passes all six workflows.
+1. Complete final CI and merge the VAI implementation PR.
+2. Report the queue reduction to 20 total and Category C 14.
+3. Start the bounded VCHF launch-boundary audit.
+4. Separate issuer announcement, token issuance, chain deployment, and public availability.
+5. Do not substitute a later listing or chain expansion for original launch.
 ```
 
 ## Production policy

@@ -56,7 +56,7 @@
     "confidence": "high",
     "source_count": 3,
     "event_status_effect": "active",
-    "notes": "Exact initial launch date is not asserted in this batch."
+    "notes": "This event records the later and current protocol model. VAI public launch is separately fixed to 2020-11-24; stability-fee changes and PSM deployment are later lifecycle boundaries."
   },
   {
     "id": "sog_ev_lisusd_rebrand_batch_g",
@@ -137,5 +137,22 @@
     "recovery_date": null,
     "failure_mechanism": "orderly_wind_down",
     "notes": "The announcement does not establish a final USK terminal date or a completed token or liability migration."
+  },
+  {
+    "id": "sog_ev_vai_2020_11_launch",
+    "stablecoin_id": "sog_st_vai",
+    "issuer_id": "sog_issuer_venus_protocol",
+    "event_type": "launch",
+    "event_date": "2020-11-24",
+    "title": "Venus launches mainnet and public VAI minting",
+    "description": "Venus Protocol announced that its main network had officially launched on Binance Smart Chain and that users could mint VAI against supported collateral through the live Venus application.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "The October 17 alpha-testnet announcement still described VAI minting as future beta functionality. Exact contract deployment and first mint remain unresolved."
   }
 ]
