@@ -16,10 +16,10 @@ The canonical GitHub checkpoint contains:
 86 stablecoin-organization relationships
 82 classification records
 82 reserve/redemption profiles
-128 events
-128 Event v2 detail records
-386 evidence records
-386 evidence relation projections
+129 events
+129 Event v2 detail records
+389 evidence records
+389 evidence relation projections
 90 reserve-report or reserve-context records
 200 known unknowns
 9 regulatory notes
@@ -32,12 +32,12 @@ The canonical GitHub checkpoint contains:
 
 These counts are generated from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and the sitemap. They must not be maintained independently by hand.
 
-The public production site remains at the last verified publication checkpoint until Cloudflare access returns and a manual deployment plus parity audit is completed. GitHub-only quality work continues against the 81-record baseline.
+The latest verified production publication contains 82 stable assets and the three dated guides. GitHub may contain later reviewed quality-only corrections before the next defined manual publication checkpoint.
 
 Current quality queues:
 
 ```text
-23 unresolved launch dates
+22 unresolved launch dates
 4 unresolved historical terminal dates
 12 assets without reserve/report context
   10 not applicable by design

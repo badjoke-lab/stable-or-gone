@@ -6,45 +6,23 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Update registry snapshot
-        run: node scripts/update-registry-snapshot.mjs
+      - name: Validate current output
+        run: node scripts/validate-registry-stats.mjs
       - name: Rebuild output
         run: node scripts/generate-registry-stats.mjs
-      - name: Rebuild integrity audit
-        run: node scripts/audit-registry-integrity.mjs
       - name: Validate rebuilt output
         run: node scripts/validate-registry-stats.mjs
-      - name: Commit synchronized files to pull-request branch
-        if: github.event_name == 'pull_request' && github.actor != 'github-actions[bot]'
-        env:
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-        run: |
-          if git diff --quiet -- docs/migration/registry-v2-baseline.json docs/migration/registry-v3-baseline.json data/generated/registry-stats.json data/generated/registry-integrity-audit.json; then
-            echo "No synchronization changes to commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/migration/registry-v2-baseline.json docs/migration/registry-v3-baseline.json data/generated/registry-stats.json data/generated/registry-integrity-audit.json
-          git commit -m "Synchronize DOLA registry snapshots"
-          git push origin "HEAD:${HEAD_REF}"
       - uses: actions/upload-artifact@v4
         with:
-          name: registry-synchronized-files
-          path: |
-            docs/migration/registry-v2-baseline.json
-            docs/migration/registry-v3-baseline.json
-            data/generated/registry-stats.json
-            data/generated/registry-integrity-audit.json
+          name: registry-stats
+          path: data/generated/registry-stats.json
