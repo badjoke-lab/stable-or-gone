@@ -60,6 +60,9 @@ jobs:
         run: npm install --no-package-lock --no-audit --no-fund
 
       - name: Run full repository build
+        env:
+          SOG_BUILD_COMMIT: ${{ steps.source.outputs.sha }}
+          SOG_BUILD_BRANCH: main
         run: npm run build
 
       # Equivalent CLI operation: wrangler pages deploy dist

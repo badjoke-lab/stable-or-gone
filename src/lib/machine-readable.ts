@@ -1,3 +1,5 @@
+import { execFileSync } from 'node:child_process';
+
 import {
   getDeployments,
   getEvidence,
@@ -81,11 +83,29 @@ function runtimeEnvironment() {
   return runtime.process?.env || {};
 }
 
+function getCheckedOutGitCommit(env: Record<string, string | undefined>) {
+  if (env.GITHUB_ACTIONS !== 'true') return null;
+
+  try {
+    const commit = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: env.GITHUB_WORKSPACE || undefined,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+
+    return /^[0-9a-f]{40}$/i.test(commit) ? commit : null;
+  } catch {
+    return null;
+  }
+}
+
 export function getBuildMetadata(generatedAt: string) {
   const env = runtimeEnvironment();
+  const checkedOutCommit = getCheckedOutGitCommit(env);
+
   return {
-    commit: env.CF_PAGES_COMMIT_SHA || env.VERCEL_GIT_COMMIT_SHA || env.GITHUB_SHA || 'unknown',
-    branch: env.CF_PAGES_BRANCH || env.VERCEL_GIT_COMMIT_REF || env.GITHUB_REF_NAME || 'main',
+    commit: env.SOG_BUILD_COMMIT || checkedOutCommit || env.CF_PAGES_COMMIT_SHA || env.VERCEL_GIT_COMMIT_SHA || env.GITHUB_SHA || 'unknown',
+    branch: env.SOG_BUILD_BRANCH || env.CF_PAGES_BRANCH || env.VERCEL_GIT_COMMIT_REF || env.GITHUB_REF_NAME || 'main',
     generated_at: generatedAt,
     verification_marker: PROJECT.verificationMarker,
   };
