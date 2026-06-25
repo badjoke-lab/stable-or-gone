@@ -928,5 +928,91 @@
       "post_collapse_successor_boundary"
     ],
     "notes": "The August 2021 product used a redesigned overcollateralized model with ICE and IronLend. It is not treated as recovery of the failed v1 deployment without a separate lineage determination."
+  },
+  {
+    "id": "sog_src_husd_legal_attestation_status_2026",
+    "stablecoin_id": "sog_st_husd",
+    "issuer_id": "sog_issuer_stable_universal",
+    "event_id": null,
+    "source_type": "research_report",
+    "title": "The Private Law of Stablecoins — HUSD reserve-account analysis",
+    "url": "https://arizonastatelawjournal.org/wp-content/uploads/2023/08/54.4_Bruce_Publication.pdf",
+    "publisher": "Arizona State Law Journal",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://arizonastatelawjournal.org/wp-content/uploads/2023/08/54.4_Bruce_Publication.pdf",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "historical_attestation_existence_and_source_status",
+    "stablecoin_ids": [
+      "sog_st_husd"
+    ],
+    "organization_ids": [
+      "sog_issuer_stable_universal"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "january_2022_attestation",
+      "reserve_account_language",
+      "source_no_longer_public"
+    ],
+    "notes": "The legal study identifies Stable Universal Ltd.’s January 2022 Accountant’s Attestation: Reserve Accounts Report and states that the report is no longer publicly available. It is secondary source-recovery context, not a substitute for the missing signed attestation."
+  },
+  {
+    "id": "sog_src_eurt_tether_transparency_scope_2026",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "Tether reports and reserves transparency page",
+    "url": "https://tether.to/transparency/?tab=reports",
+    "publisher": "Tether",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://tether.to/transparency/?tab=reports",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "consolidated_reserve_reporting_scope",
+    "stablecoin_ids": [
+      "sog_st_eurt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "quarterly_reserve_reports",
+      "issuer_total_assets",
+      "issuer_total_liabilities",
+      "non_product_specific_scope"
+    ],
+    "notes": "Official reporting context confirms quarterly reserve and assurance reporting but does not separately reconcile EURT assets and liabilities."
+  },
+  {
+    "id": "sog_src_eurt_relevant_information_scope_2026",
+    "stablecoin_id": "sog_st_eurt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "Tether International relevant information document",
+    "url": "https://tether.to/public/Relevant_Information_Document_-_Tether_International%2C_S.A._de_C.V..pdf",
+    "publisher": "Tether International",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://tether.to/public/Relevant_Information_Document_-_Tether_International%2C_S.A._de_C.V..pdf",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "reporting_entity_and_scope_limitations",
+    "stablecoin_ids": [
+      "sog_st_eurt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "reserve_report_scope",
+      "reporting_entities",
+      "assets_and_liabilities",
+      "non_issuing_entities"
+    ],
+    "notes": "Official document states that reserve-report information may include assets and liabilities of entities that do not issue or redeem Tether Tokens. This prevents treating the package as an automatic EURT-specific final reconciliation."
   }
 ]

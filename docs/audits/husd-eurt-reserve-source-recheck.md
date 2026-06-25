@@ -2,7 +2,7 @@
 
 Recorded: 2026-06-25
 
-Result: BOTH RECORDS REMAIN SOURCE-STATUS UNRESOLVED
+Result: IMPLEMENTED — BOTH RECORDS REMAIN SOURCE-STATUS UNRESOLVED
 
 ## Scope
 
@@ -106,9 +106,9 @@ Report expected but missing:              0
 
 No reserve-report row is added in this audit.
 
-## Follow-up implementation
+## Implementation result
 
-A separate quality implementation may:
+The quality implementation:
 
 1. add the HUSD legal-study evidence as secondary source-recovery context
 2. add Tether transparency and relevant-information evidence as consolidated-scope context
