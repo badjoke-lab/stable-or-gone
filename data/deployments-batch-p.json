@@ -63,7 +63,7 @@
     "token_standard":"ERC-20",
     "contract_address":null,
     "status":"limited",
-    "canonicality":"linked_native_representation",
+    "canonicality":"canonical_bridge",
     "is_primary":false,
     "mint_authority_type":"linked_representation_control",
     "notes":"Linked HyperEVM representation during migration; contract and linking-control details remain unresolved.",
