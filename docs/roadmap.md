@@ -18,79 +18,14 @@ Every roadmap-changing PR must update this file. Every merge report must state t
 
 ## Current position
 
-Repository:
-
 ```text
-badjoke-lab/stable-or-gone
-```
-
-Public site:
-
-```text
-https://sog.badjoke-lab.com/
-```
-
-Latest merged checkpoint:
-
-```text
-PR #138 — Verify rerun builds against checked-out commit
-Merge: 835a00d5cd2db48c0a0ede3394cf265dec919813
-```
-
-Current implementation checkpoint:
-
-```text
-PR #135 — Audit registry 82 production parity
-Status: PASS recorded; pending final CI and merge
-Production commit: 835a00d5cd2db48c0a0ede3394cf265dec919813
-Verification workflow run: 27908380603
-Successful verification job: 83360065881
-Next bounded work after merge: DOLA launch-boundary audit
-```
-
-Current gate state:
-
-```text
-82-record GitHub canonical baseline: complete
-82-record production publication: PASS
-82-record production parity: PASS
-Three dated guides production publication: PASS
-Controlled record growth: eligible to resume only after PR #135 merges
-Next work: existing-record quality audit for DOLA
-```
-
-## Recent execution history
-
-```text
-PR #104 — Record sUSD severe depeg and SIP-423 proposal
-PR #105 — Document EURA launch and rebrand
-PR #107 — Resolve lisUSD and HAY lineage
-PR #108 — Resolve sUSD launch lineage
-PR #109 — Resolve Nuon v1 and v2 lineage
-PR #110 — Record Category C lineage checkpoint
-PR #112 — Resolve SPOT launch and protocol versions
-PR #113 — Resolve fxUSD launch and V2 lineage
-PR #114 — Resolve MAI and miMATIC launch lineage
-PR #116 — Audit Stables Labs USDX launch boundary
-PR #118 — Audit Ethena product activation boundary
-PR #120 — Audit Savings DAI launch boundary
-PR #122 — Audit Agora AUSD launch boundary
-PR #123 — Normalize Agora AUSD Ethereum deployment
-PR #124 — Audit Basis Cash launch and terminal boundaries
-PR #125 — Resolve Basis Cash launch lineage
-PR #126 — Audit Cashio Dollar launch boundary
-PR #127 — Resolve Cashio Dollar launch boundary
-PR #128 — Add JPYSC and Japan stablecoin events
-PR #129 — Add dated Guides framework and GENIUS Act guide
-PR #130 — Add MiCA and Stablecoins guide
-PR #131 — Add JPYC versus JPYSC comparison guide
-PR #132 — Integrate dated guides site-wide
-PR #133 — Finalize guide sequence roadmap checkpoint
-PR #134 — Set dated guide publication dates
-PR #136 — Fix production build commit metadata
-PR #137 — Align build marker validation with deployment source
-PR #138 — Verify rerun builds against checked-out commit
-PR #135 — Record registry 82 production parity — pending merge
+Repository: badjoke-lab/stable-or-gone
+Public site: https://sog.badjoke-lab.com/
+Latest merged PR: #138
+Latest merged commit: 835a00d5cd2db48c0a0ede3394cf265dec919813
+Current PR: #135 — Record registry 82 production parity
+Current PR status: PASS recorded; pending final CI and merge
+Next bounded work: DOLA launch-boundary audit
 ```
 
 ## Production checkpoint
@@ -99,12 +34,12 @@ PR #135 — Record registry 82 production parity — pending merge
 Result: PASS
 Canonical records: 82
 Production commit: 835a00d5cd2db48c0a0ede3394cf265dec919813
-Workflow run: 27908380603
-Successful job: 83360065881
+Verification workflow run: 27908380603
+Successful verification job: 83360065881
 Audit: docs/audits/registry-82-production-parity.md
 ```
 
-The successful job completed:
+The successful production job completed:
 
 - latest `main` checkout
 - source commit recording
@@ -113,15 +48,7 @@ The successful job completed:
 - deployed-production verification
 - deployment summary
 
-The production publication includes:
-
-- the 82-record canonical registry
-- the GENIUS Act guide
-- the MiCA guide
-- the JPYC versus JPYSC guide
-- site-wide related-guide discovery
-- Updates and sitemap integration
-- machine-readable public files
+The production publication includes the 82-record registry, the GENIUS Act guide, the MiCA guide, the JPYC versus JPYSC guide, related-guide discovery, Updates, sitemap integration, and machine-readable public files.
 
 ## Current canonical registry
 
@@ -191,25 +118,6 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Completed bounded lineage records:
-
-```text
-EURA   — agEUR launch separated from EURA rebrand
-lisUSD — HAY launch separated from lisUSD rebrand
-sUSD   — eUSD predecessor separated from nUSD launch and sUSD rebrand
-Nuon   — Arbitrum v1 launch separated from Base v2 relaunch
-SPOT   — original launch separated from later protocol versions
-fxUSD  — public availability separated from announcement, seeding, and V2 upgrade
-MAI    — Polygon public launch fixed while rename and V2 activation remain unresolved
-USDX   — Ethereum production contracts fixed to 2024-03-18 while later access boundaries remain unresolved
-sUSDe  — current contract deployment fixed to 2023-11-14 while activation boundaries remain separate
-sDAI   — Ethereum contract deployment fixed to 2023-01-17 and public Spark availability fixed to 2023-05-09
-AUSD   — Ethereum production contract fixed to 2024-07-07 while public launch remains unresolved
-BAC    — original public launch fixed to 2020-11-30; V2 activation fixed to 2021-04-26
-CASH   — public mint, redemption, liquidity, and swap availability fixed to 2021-11-09
-JPYSC  — restricted account-internal launch fixed to 2026-06-24; external circulation remains unresolved
-```
-
 Launch-date policy:
 
 - require day-level primary evidence
@@ -247,7 +155,7 @@ Empty Set Dollar
 GYEN
 ```
 
-GYEN remains in an active wind-down and is not assigned a final terminal date while the initial redemption period remains open through 2026-11-11.
+GYEN remains unresolved while the initial redemption period remains open through 2026-11-11.
 
 ### Reserve-report applicability queue
 
@@ -268,8 +176,8 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 ## Guide expansion checkpoint
 
 ```text
-PR #128 — JPYC, JPYSC, and RLUSD Japan canonical update — merged
-PR #129 — Guides framework + GENIUS Act — merged
+PR #128 — Japan canonical update — merged
+PR #129 — Guides framework and GENIUS Act — merged
 PR #130 — MiCA — merged
 PR #131 — JPYC versus JPYSC — merged
 PR #132 — Site-wide guide integration — merged
@@ -295,18 +203,28 @@ Guide rules:
 - record factual corrections explicitly as `Correction`
 - compare representative assets under the same fields without declaring unconfirmed winners
 
+## Publication repair history
+
+```text
+PR #136 — Fix production build commit metadata — merged
+PR #137 — Align build marker validation with deployment source — merged
+PR #138 — Verify rerun builds against checked-out commit — merged
+```
+
+These repairs aligned generated build metadata and final validation with the source commit actually checked out for deployment. The final rerun completed successfully.
+
 ## Full execution sequence
 
 ```text
 Phase 1 — Close production checkpoint
 1. Complete CI and merge PR #135.
-2. Confirm roadmap and audit point to production commit 835a00d5cd2db48c0a0ede3394cf265dec919813.
+2. Confirm the audit and roadmap remain anchored to production commit 835a00d5cd2db48c0a0ede3394cf265dec919813.
 
 Phase 2 — Resume interrupted quality work
 3. Audit DOLA announcement, contract deployment, first mint, redemption, liquidity, and public-access boundaries.
 4. Add a canonical DOLA launch date only if day-level primary or on-chain public evidence supports it.
-5. Preserve `launch_date: null` and close the bounded audit if the public boundary remains unresolved.
-6. Continue the first quality wave: USD1, MIM, mUSD, USK, VAI, VCHF, and IRON.
+5. Preserve launch_date: null and close the bounded audit if the public boundary remains unresolved.
+6. Continue USD1, MIM, mUSD, USK, VAI, VCHF, and IRON.
 
 Phase 3 — Cross-queue maintenance
 7. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
@@ -316,12 +234,11 @@ Phase 4 — Controlled growth
 9. Prepare a reviewed candidate master.
 10. Promote no more than five complete stable-asset records per batch.
 11. Publish and verify production after each growth batch.
-12. Do not allow production to trail `main` by more than one growth batch.
+12. Do not allow production to trail main by more than one growth batch.
 
 Phase 5 — Normal operating cycle
 13. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
 14. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
-15. Update regulatory guides only when a material legal, licensing, transition, or implementation change is supported by primary sources.
 ```
 
 ## Immediate next work
@@ -329,14 +246,25 @@ Phase 5 — Normal operating cycle
 ```text
 1. Complete CI and merge PR #135.
 2. Report the 82-record production checkpoint as complete.
-3. Start a bounded DOLA launch-boundary audit.
+3. Start the bounded DOLA launch-boundary audit.
 4. Do not force a DOLA date without day-level evidence.
-5. After DOLA, continue USD1, MIM, mUSD, USK, VAI, VCHF, and IRON.
+5. Continue the first quality wave after DOLA.
 ```
 
 ## Production policy
 
 Normal pull requests and normal `main` merges complete through GitHub CI and do not publish to Cloudflare.
+
+```text
+Automatic production deployment: disabled
+Preview branch deployments: disabled
+Publication path: manual GitHub Actions workflow only
+Manual production publication activation — PASS
+Deployment workflow run: 27908380603
+Pages project: stable-or-gone
+Production branch: main
+Latest successful job: 83360065881
+```
 
 The production path remains:
 
@@ -350,30 +278,7 @@ latest main
 → production consistency verification
 ```
 
-At each publication checkpoint verify:
-
-- deployed commit
-- public counts
-- machine-readable files
-- canonical routes
-- guide routes and article metadata
-- stablecoin related-guide links
-- sitemap
-- metadata and structured data
-- stale count markers
-- production consistency
-
-Manual publication configuration:
-
-```text
-Pages project: stable-or-gone
-Production branch: main
-Automatic production deployment: disabled
-Preview branch deployments: disabled
-Publication path: approved manual GitHub Actions workflow
-Latest successful workflow run: 27908380603
-Latest successful job: 83360065881
-```
+At each publication checkpoint verify deployed commit, public counts, machine-readable files, canonical routes, guide routes, article metadata, related-guide links, sitemap, structured data, stale count markers, and production consistency.
 
 ## Growth policy
 
