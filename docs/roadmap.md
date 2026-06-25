@@ -221,6 +221,8 @@ Normal pull requests and normal `main` merges complete through GitHub CI and do 
 Automatic production deployment: disabled
 Preview branch deployments: disabled
 Publication path: manual GitHub Actions workflow only
+Manual production publication activation — PASS
+Deployment workflow run: 27908380603
 Pages project: stable-or-gone
 Production branch: main
 ```
