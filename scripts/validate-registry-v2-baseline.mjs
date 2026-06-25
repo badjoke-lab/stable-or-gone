@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
-const manifestPath = path.join(root, 'docs', 'migration', 'registry-v2-baseline.json');
 const failures = [];
 
 function readJson(filePath) {
@@ -30,13 +30,7 @@ function readGroup(files) {
   });
 }
 
-const manifest = readJson(manifestPath);
-if (!manifest) {
-  console.error('Registry v2 baseline validation failed:');
-  failures.forEach((failure) => console.error(`- ${failure}`));
-  process.exit(1);
-}
-
+const manifest = loadRegistryV2Baseline(root);
 const groups = {};
 for (const [name, files] of Object.entries(manifest.data_groups ?? {})) {
   groups[name] = readGroup(files);
