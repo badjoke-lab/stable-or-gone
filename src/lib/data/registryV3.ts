@@ -29,6 +29,7 @@ import legalProfilesGrowthK from '../../../data/legal-profiles-v3-batch-growth-k
 import legalProfilesGrowthL from '../../../data/legal-profiles-v3-batch-growth-l.json';
 import legalProfilesGrowthM from '../../../data/legal-profiles-v3-batch-growth-m.json';
 import legalProfilesGrowthN from '../../../data/legal-profiles-v3-batch-growth-n.json';
+import legalProfilesGrowthO from '../../../data/legal-profiles-v3-batch-growth-o.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
@@ -41,6 +42,7 @@ import reserveComponentsBatchK from '../../../data/reserve-components-v3-batch-k
 import reserveComponentsBatchL from '../../../data/reserve-components-v3-batch-l.json';
 import reserveComponentsBatchM from '../../../data/reserve-components-v3-batch-m.json';
 import reserveComponentsBatchN from '../../../data/reserve-components-v3-batch-n.json';
+import reserveComponentsBatchO from '../../../data/reserve-components-v3-batch-o.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -82,10 +84,11 @@ const legalProfiles = [
   ...legalProfilesGrowthK,
   ...legalProfilesGrowthL,
   ...legalProfilesGrowthM,
-  ...legalProfilesGrowthN
+  ...legalProfilesGrowthN,
+  ...legalProfilesGrowthO
 ] as LegalProfileV3[];
 const stableAssetRelationships = [...stableAssetRelationshipsData, ...stableAssetRelationshipsBatchH] as StableAssetRelationshipV3[];
-const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL, ...reserveComponentsBatchM, ...reserveComponentsBatchN] as ReserveComponentV3[];
+const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL, ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
   canonicality: DeploymentCanonicality;

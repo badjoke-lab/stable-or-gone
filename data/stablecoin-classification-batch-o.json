@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_unitedu",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar."},
+    "backing_types": ["cash", "government_securities", "stablecoin_collateral"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Reserve-backed base token with approved-user primary issuance and redemption."
+  },
+  {
+    "id": "sog_st_usdgo",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar."},
+    "backing_types": ["cash", "government_securities", "tokenized_fund", "mixed"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Bank-issued enterprise stablecoin; OSL distribution is separate from issuance."
+  },
+  {
+    "id": "sog_st_sofiusd",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar."},
+    "backing_types": ["cash", "bank_deposits"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "National-bank-issued payment stablecoin; future interest-bearing tokenized deposits remain separate."
+  },
+  {
+    "id": "sog_st_solsticeusx",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar through protocol collateral and liquidity routes."},
+    "backing_types": ["stablecoin_collateral", "tokenized_fund", "mixed"],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Solana-native base USX; dForce USX, eUSX, and YieldVault positions remain separate."
+  },
+  {
+    "id": "sog_st_ousd",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar through collateral redemption and strategy management."},
+    "backing_types": ["stablecoin_collateral"],
+    "stabilization_mechanism": "rebasing_or_repricing",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "classification_notes": "Base rebasing OUSD distributes strategy income natively; wrapped OUSD remains separate."
+  }
+]

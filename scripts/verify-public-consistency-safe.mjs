@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
-const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
+const baseline = loadRegistryV2Baseline(root);
 const readRows = (relative) => {
   const value = JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
   return Array.isArray(value) ? value : value.records;
@@ -29,7 +30,13 @@ try {
     originals.set(file, original);
     fs.writeFileSync(file, `${JSON.stringify(Array.isArray(value) ? normalized : { ...value, records: normalized }, null, 2)}\n`);
   }
-  await import('./verify-public-consistency.mjs');
+
+  const verifyPath = new URL('./verify-public-consistency.mjs', import.meta.url);
+  const source = fs.readFileSync(verifyPath, 'utf8');
+  const anchor = "const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));";
+  if (!source.includes(anchor)) throw new Error('Public consistency baseline patch anchor is missing');
+  const injected = `const baseline = ${JSON.stringify(baseline)};`;
+  await import(`data:text/javascript;base64,${Buffer.from(source.replace(anchor, injected)).toString('base64')}`);
 } finally {
   for (const [file, original] of originals) fs.writeFileSync(file, original);
 }

@@ -1,0 +1,27 @@
+[
+  {
+    "candidate_id": "sog_cand_000083",
+    "status": "promoted",
+    "notes": "Promoted as sog_st_unitedu. Base U remains separate from exchange balances, incentive positions, staking products, and wrapped representations."
+  },
+  {
+    "candidate_id": "sog_cand_000084",
+    "status": "promoted",
+    "notes": "Promoted as sog_st_usdgo. Anchorage Digital Bank issuance remains separate from OSL branding and distribution roles."
+  },
+  {
+    "candidate_id": "sog_cand_000085",
+    "status": "promoted",
+    "notes": "Promoted as sog_st_sofiusd. SoFiUSD and SOFID are one stablecoin identity; future tokenized-deposit products remain separate."
+  },
+  {
+    "candidate_id": "sog_cand_000086",
+    "status": "promoted",
+    "notes": "Promoted as sog_st_solsticeusx. Solstice USX remains separate from dForce USX, eUSX, YieldVault positions, and partner receipts."
+  },
+  {
+    "candidate_id": "sog_cand_000087",
+    "status": "promoted",
+    "notes": "Promoted as sog_st_ousd. Base rebasing OUSD remains separate from wrapped OUSD and other Origin yield products."
+  }
+]

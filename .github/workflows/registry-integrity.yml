@@ -18,5 +18,14 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install
+      - name: Rebuild integrity audit
+        run: npm run audit:integrity
       - name: Validate generated integrity audit
         run: npm run validate:integrity
+      - name: Upload integrity audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: registry-integrity
+          path: |
+            data/generated/registry-integrity-audit.json
+            docs/audits/registry-70-final-audit.md

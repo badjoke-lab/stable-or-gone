@@ -1,0 +1,47 @@
+[
+  {
+    "id": "sog_ev_unitedu_launch_batch_o",
+    "title": "United Stables launches U",
+    "subject_stablecoin_ids": ["sog_st_unitedu"],
+    "subject_organization_ids": ["sog_issuer_united_stables"],
+    "evidence_ids": ["sog_src_unitedu_site_batch_o", "sog_src_unitedu_terms_batch_o", "sog_src_unitedu_launch_batch_o"],
+    "event_detail_kind": "launch",
+    "launch_detail": {"summary": "The dated announcement establishes the initial Ethereum and BNB Chain launch boundary.", "status": "active"}
+  },
+  {
+    "id": "sog_ev_usdgo_launch_batch_o",
+    "title": "OSL and Anchorage launch USDGO",
+    "subject_stablecoin_ids": ["sog_st_usdgo"],
+    "subject_organization_ids": ["sog_issuer_anchorage_digital_bank", "sog_org_osl_group"],
+    "evidence_ids": ["sog_src_usdgo_launch_batch_o", "sog_src_usdgo_product_batch_o", "sog_src_usdgo_supply_batch_o", "sog_src_usdgo_site_batch_o", "sog_src_usdgo_anchorage_batch_o"],
+    "event_detail_kind": "launch",
+    "launch_detail": {"summary": "Official materials establish the Solana launch and separate Anchorage issuer and OSL brand/distribution roles.", "status": "active"}
+  },
+  {
+    "id": "sog_ev_sofiusd_launch_batch_o",
+    "title": "SoFi launches SoFiUSD infrastructure",
+    "subject_stablecoin_ids": ["sog_st_sofiusd"],
+    "subject_organization_ids": ["sog_issuer_sofi_bank"],
+    "evidence_ids": ["sog_src_sofiusd_launch_batch_o", "sog_src_sofiusd_product_batch_o", "sog_src_sofiusd_platform_batch_o", "sog_src_sofiusd_support_batch_o"],
+    "event_detail_kind": "launch",
+    "launch_detail": {"summary": "The dated issuer announcement establishes the SoFiUSD launch boundary and full-reserve program.", "status": "active"}
+  },
+  {
+    "id": "sog_ev_solsticeusx_launch_batch_o",
+    "title": "Solstice Finance launches USX",
+    "subject_stablecoin_ids": ["sog_st_solsticeusx"],
+    "subject_organization_ids": ["sog_issuer_solstice_finance"],
+    "evidence_ids": ["sog_src_solsticeusx_site_batch_o", "sog_src_solsticeusx_docs_batch_o", "sog_src_solsticeusx_launch_batch_o"],
+    "event_detail_kind": "launch",
+    "launch_detail": {"summary": "The dated launch material establishes the Solana-native base USX boundary while eUSX and vault positions remain separate.", "status": "active"}
+  },
+  {
+    "id": "sog_ev_ousd_launch_batch_o",
+    "title": "Origin Protocol introduces Origin Dollar",
+    "subject_stablecoin_ids": ["sog_st_ousd"],
+    "subject_organization_ids": ["sog_issuer_origin_protocol"],
+    "evidence_ids": ["sog_src_ousd_launch_batch_o", "sog_src_ousd_docs_batch_o", "sog_src_ousd_compensation_batch_o", "sog_src_ousd_audits_batch_o"],
+    "event_detail_kind": "launch",
+    "launch_detail": {"summary": "The dated Origin announcement establishes the initial OUSD launch and native rebasing-yield design.", "status": "active"}
+  }
+]

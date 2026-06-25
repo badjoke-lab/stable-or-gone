@@ -2,10 +2,11 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
-const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
+const baseline = loadRegistryV2Baseline(root);
 const read = (file) => {
   const value = JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
   if (Array.isArray(value)) return value;
