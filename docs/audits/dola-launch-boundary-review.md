@@ -2,17 +2,15 @@
 
 Recorded: 2026-06-25
 
-Result: RESOLVED FOR CANONICAL IMPLEMENTATION
+Result: IMPLEMENTED
 
 Stablecoin: `sog_st_dola`
 
-Current canonical launch date: `null`
-
-Recommended canonical launch date: `2021-02-25`
+Canonical launch date: `2021-02-25`
 
 ## Question
 
-DOLA currently remains in the unresolved launch-date queue because its token deployment, first mint, Anchor/Frontier release, DOLA Stabilizer availability, and later FiRM issuance model are different boundaries.
+DOLA previously remained in the unresolved launch-date queue because its token deployment, first mint, Anchor/Frontier release, DOLA Stabilizer availability, and later FiRM issuance model are different boundaries.
 
 This review determines which boundary represents the original public launch of the continuing DOLA asset.
 
@@ -23,7 +21,7 @@ This review determines which boundary represents the original public launch of t
 | Ethereum DOLA token contract creation | 2021-02-23 | Day-level on-chain evidence | Deployment boundary only |
 | Anchor public launch under the protocol now called Frontier | 2021-02-25 | Day-level first-party documentation | Original public launch boundary |
 | DOLA issuance through Anchor/Frontier | 2021-02-25 | First-party documentation ties the launched protocol to DOLA issuance | Supports canonical launch |
-| Exact first DOLA mint transaction | Unresolved | Not established in the reviewed source set | Preserve as a known unknown if needed |
+| Exact first DOLA mint transaction | Unresolved | Not established in the reviewed source set | Preserved as a known unknown |
 | DOLA Stabilizer introduction | February 2021 | First-party month-level retrospective | Supporting product history, not needed to replace the day-level launch boundary |
 | FiRM launch and migration of the main backing model | Late 2022 | First-party documentation | Later protocol/model boundary, not original DOLA launch |
 
@@ -81,7 +79,7 @@ https://docs.inverse.finance/inverse-finance/inverse-finance/products/tokens/dol
 
 ## Decision
 
-Set DOLA's canonical `launch_date` to:
+DOLA's canonical `launch_date` is:
 
 ```text
 2021-02-25
@@ -96,20 +94,20 @@ Reason:
 - the earlier contract creation is preserved separately
 - FiRM is correctly treated as a later model transition
 
-## Implementation requirements
+## Implementation result
 
-The follow-up canonical implementation must:
+The canonical implementation:
 
-1. set `data/stablecoins-batch-g.json` DOLA `launch_date` to `2021-02-25`
-2. preserve the 2021-02-23 Ethereum contract creation as a deployment boundary
-3. add a dated DOLA launch event for 2021-02-25
-4. add first-party launch evidence and on-chain deployment evidence
-5. update Event v2 and evidence relations
-6. remove DOLA from `data/quality/launch-date-unresolved.json`
-7. reduce the unresolved launch queue from 23 to 22 and Category C from 17 to 16
-8. preserve the exact first mint as unresolved unless transaction-level evidence is separately established
-9. synchronize baselines, generated outputs, README counts, and roadmap
+1. sets `data/stablecoins-batch-g.json` DOLA `launch_date` to `2021-02-25`
+2. preserves the 2021-02-23 Ethereum contract creation as a deployment boundary
+3. adds a dated DOLA launch event for 2021-02-25
+4. adds first-party launch evidence and on-chain deployment evidence
+5. updates Event v2 and evidence relations
+6. removes DOLA from `data/quality/launch-date-unresolved.json`
+7. reduces the unresolved launch queue from 23 to 22 and Category C from 17 to 16
+8. preserves the exact first mint as unresolved
+9. synchronizes baselines, generated outputs, README counts, human-readable audits, and roadmap
 
 ## Scope boundary
 
-This review does not claim that the first mint occurred on 2021-02-25. It resolves the canonical public launch boundary using the original protocol's documented public launch date.
+This implementation does not claim that the first mint occurred on 2021-02-25. It resolves the canonical public launch boundary using the original protocol's documented public launch date.
