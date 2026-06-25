@@ -24,7 +24,7 @@
     "validate:profiles": "node scripts/validate-stablecoin-profiles-v2.mjs",
     "validate:events-v2": "node scripts/validate-event-details-v2.mjs",
     "validate:evidence-relations-v2": "node scripts/validate-evidence-relations-v2.mjs",
-    "validate:v3": "node scripts/validate-registry-v3-foundation.mjs",
+    "validate:v3": "node scripts/validate-registry-v3-foundation-batch-o.mjs",
     "validate:deployments-v3": "node scripts/validate-registry-v3-deployments.mjs",
     "validate:income-v3": "node scripts/validate-registry-v3-income-profiles.mjs",
     "validate:migration-v3": "node scripts/validate-registry-v3-migration-audit.mjs",
