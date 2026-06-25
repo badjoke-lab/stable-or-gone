@@ -2,11 +2,11 @@
 
 Recorded: 2026-06-25
 
-Result: LAUNCH RESOLVED; DEPLOYMENT AND V2 BOUNDARIES REMAIN SEPARATE
+Result: IMPLEMENTED — LAUNCH RESOLVED AND LINEAGE BOUNDARIES SEPARATED
 
 Stablecoin: `sog_st_iron`
 
-Recommended canonical state:
+Current canonical state:
 
 ```text
 launch_date: 2021-03-06
@@ -62,7 +62,7 @@ Reason:
 - BSC and Polygon used separate chain deployments but remain part of the same original IRON product lineage in the current entity model
 - the June failure and August v2 relaunch must not be substituted for the original launch
 
-## Implementation requirements
+## Implementation result
 
 1. Set IRON `launch_date` to `2021-03-06`.
 2. Retain `status: failed` and `discontinued_date: 2021-06-16`.

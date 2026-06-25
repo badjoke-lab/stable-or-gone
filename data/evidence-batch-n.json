@@ -837,5 +837,96 @@
       "emirex_listing"
     ],
     "notes": "First-party year-end review corroborating December launch and original Ethereum issuance."
+  },
+  {
+    "id": "sog_src_iron_bsc_launch_2021",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "event_id": "sog_ev_iron_2021_03_bsc_launch",
+    "source_type": "official_blog",
+    "title": "IRON: The first partial-collateralized stablecoin on Binance Smart Chain",
+    "url": "https://ironfinance.medium.com/iron-the-first-partial-collateralized-stablecoin-on-binance-smart-chain-8c22c426cace",
+    "publisher": "Iron Finance",
+    "published_at": "2021-03-04",
+    "archived_url": "https://web.archive.org/web/*/https://ironfinance.medium.com/iron-the-first-partial-collateralized-stablecoin-on-binance-smart-chain-8c22c426cace",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "original_bsc_public_launch",
+    "stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "event_ids": [
+      "sog_ev_iron_2021_03_bsc_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "bsc_launch",
+      "minting",
+      "redemption",
+      "liquidity_rollout"
+    ],
+    "notes": "First-party article fixing the original IRON protocol launch to 2021-03-06 at 11:00 UTC."
+  },
+  {
+    "id": "sog_src_iron_polygon_launch_2021",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "event_id": "sog_ev_iron_2021_05_polygon_launch",
+    "source_type": "official_blog",
+    "title": "Iron Finance Expansion to Polygon",
+    "url": "https://ironfinance.medium.com/iron-finance-expansion-to-polygon-8a714ba5635e",
+    "publisher": "Iron Finance",
+    "published_at": "2021-05-16",
+    "archived_url": "https://web.archive.org/web/*/https://ironfinance.medium.com/iron-finance-expansion-to-polygon-8a714ba5635e",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "polygon_network_launch_and_separate_token_set",
+    "stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "event_ids": [
+      "sog_ev_iron_2021_05_polygon_launch"
+    ],
+    "claim_scopes": [
+      "polygon_launch_date",
+      "separate_deployment",
+      "usdc_titan_collateral",
+      "bsc_predecessor"
+    ],
+    "notes": "First-party expansion article fixing Polygon launch to 2021-05-18 and stating that Iron Finance first launched on BSC."
+  },
+  {
+    "id": "sog_src_iron_v2_launch_2021",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "IRON Stablecoin Launch — 25 August 2021",
+    "url": "https://ironfinance.medium.com/iron-stablecoin-launch-606941fff49f",
+    "publisher": "Iron Finance",
+    "published_at": "2021-08-24",
+    "archived_url": "https://web.archive.org/web/*/https://ironfinance.medium.com/iron-stablecoin-launch-606941fff49f",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "post_collapse_redesigned_v2_launch",
+    "stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "v2_launch",
+      "redesigned_collateral_model",
+      "post_collapse_successor_boundary"
+    ],
+    "notes": "The August 2021 product used a redesigned overcollateralized model with ICE and IronLend. It is not treated as recovery of the failed v1 deployment without a separate lineage determination."
   }
 ]

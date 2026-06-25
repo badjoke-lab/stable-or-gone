@@ -80,12 +80,12 @@
     "minimum_redemption": "contract_and_liquidity_dependent",
     "redemption_region_notes": "Chain-specific contracts and residual pools must be reviewed separately. Later Iron Finance products do not prove recovery of the original IRON stablecoin.",
     "redemption_notes": "The June 2021 run caused IRON to break its peg while TITAN collapsed, leaving the stablecoin unable to function as designed.",
-    "launch_date": null,
+    "launch_date": "2021-03-06",
     "discontinued_date": "2021-06-16",
-    "summary": "Partially collateralized algorithmic stablecoin from Iron Finance that combined USDC with the TITAN share token. A June 2021 bank run and TITAN collapse caused a terminal loss of the peg and protocol failure.",
+    "summary": "Partially collateralized IRON stablecoin launched on Binance Smart Chain on March 6, 2021 and expanded through a separate Polygon deployment on May 18, 2021. The original Polygon IRON and TITAN design failed during the June 2021 bank run.",
     "confidence": "high",
-    "last_verified_at": "2026-06-14",
-    "notes": "Batch D promotion. Polygon and BNB Chain representations are kept under one historical entity for now, while deployment identity remains explicit."
+    "last_verified_at": "2026-06-25",
+    "notes": "Canonical entity-level launch is the original BSC public protocol launch on 2021-03-06. Polygon used a separate IRON/TITAN token set launched on 2021-05-18. The Polygon system collapsed on 2021-06-16. A redesigned IRON v2 launched later in August 2021 and is preserved as a separate post-collapse product boundary rather than evidence that the original failed design recovered."
   },
   {
     "id": "sog_st_musd",

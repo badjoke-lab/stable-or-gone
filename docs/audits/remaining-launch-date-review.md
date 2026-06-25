@@ -9,9 +9,9 @@ This document is the human-readable companion to `data/quality/launch-date-unres
 ## Current queue
 
 ```text
-Total unresolved: 19
+Total unresolved: 18
 Category B: 3
-Category C: 13
+Category C: 12
 Category D: 3
 ```
 
@@ -34,6 +34,7 @@ Category D: 3
 - USK — canonical public launch fixed to 2022-09-12; the 2025-06-30 wind-down and repayment-only state are recorded separately while the final terminal date remains unresolved.
 - VAI — canonical public launch fixed to 2020-11-24, when Venus mainnet opened and public VAI minting became available; exact deployment and first mint remain unresolved.
 - VCHF — canonical public launch fixed to 2022-12-15; original Ethereum issuance is separated from later multichain deployments and listings.
+- IRON — canonical entity-level public launch fixed to the original BSC protocol launch on 2021-03-06; Polygon deployment, June collapse, and August v2 redesign remain separate.
 
 USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C. Agora AUSD’s current Ethereum contract deployment is fixed to 2024-07-07 without treating deployment as public launch.
 
@@ -54,7 +55,6 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 | Empty Set Dollar | `sog_st_esd` | — | Deployment, epoch, and architecture boundaries conflict. |
 | Euro Tether | `sog_st_eurt` | — | Announcement, issuance, listings, and deployments differ. |
 | GYEN | `sog_st_gyen` | — | Issuance, availability, listings, and wind-down differ. |
-| IRON | `sog_st_iron` | — | BSC, Polygon, and staged rollout boundaries differ. |
 | Magic Internet Money | `sog_st_mim` | 2021-05 to 2021-06 | Introduction, deployment, first Cauldron, first issuance, liquidity, incentives, and UI differ. |
 | MainStreetUSD | `sog_st_msusd` | — | Announcement, issuance, deployment, and availability differ. |
 | mStable USD | `sog_st_musd` | 2020-05-29 | Contract verification, candidate mainnet availability, first mint, and Save activation differ; the original first-party launch source is not recovered. |
@@ -83,10 +83,10 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 
 ```text
 Original review scope: complete
-Current unresolved queue: 19
+Current unresolved queue: 18
 Category B: 3
-Category C: 13
+Category C: 12
 Category D: 3
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: IRON
+Next bounded review: none — first launch-date quality wave complete
 ```

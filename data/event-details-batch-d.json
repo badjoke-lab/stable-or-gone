@@ -121,5 +121,40 @@
       "sog_src_musd_security_program_2020"
     ],
     "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_iron_2021_03_bsc_launch",
+    "title": "Iron Finance launches the original IRON protocol on BSC",
+    "subject_stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "evidence_ids": [
+      "sog_src_iron_bsc_launch_2021"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "The original IRON protocol opened publicly on Binance Smart Chain on 2021-03-06.",
+      "status": "failed",
+      "related_organization_ids": [
+        "sog_issuer_iron_finance"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_iron_2021_05_polygon_launch",
+    "title": "Iron Finance launches a separate IRON deployment on Polygon",
+    "subject_stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "evidence_ids": [
+      "sog_src_iron_polygon_launch_2021"
+    ],
+    "event_detail_kind": "other"
   }
 ]
