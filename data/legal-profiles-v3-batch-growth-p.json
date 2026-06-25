@@ -1,0 +1,62 @@
+[
+  {
+    "id":"sog_st_usat",
+    "classifications":[{"classification":"fiat_backed_stablecoin","jurisdiction":"United States","effective_from":"2026-01-27","effective_to":null,"authority_or_basis":"federally regulated bank issuance and official launch disclosures","confidence":"high","evidence_ids":["sog_src_usat_launch_batch_p","sog_src_usat_unveil_batch_p"]}],
+    "holder_claim_type":"direct_claim_on_bank",
+    "claim_against_organization_ids":["sog_issuer_anchorage_digital_bank"],
+    "reserve_ownership":"trust_or_custodial",
+    "reserve_segregation":"under_review",
+    "bankruptcy_remoteness":"limited",
+    "licensed_or_regulated_as":["federally regulated bank-issued payment stablecoin"],
+    "evidence_ids":["sog_src_usat_launch_batch_p","sog_src_usat_site_batch_p","sog_src_usat_unveil_batch_p"],
+    "notes":"Anchorage Digital Bank is the legal issuer. Tether product, brand, technology, and distribution support do not create a separate issuer claim."
+  },
+  {
+    "id":"sog_st_eurau",
+    "classifications":[{"classification":"e_money_token","jurisdiction":"European Union / Germany","effective_from":"2025-07-31","effective_to":null,"authority_or_basis":"MiCAR and BaFin-authorized electronic-money issuance","confidence":"high","evidence_ids":["sog_src_eurau_launch_batch_p","sog_src_eurau_license_batch_p"]}],
+    "holder_claim_type":"direct_claim_on_issuer",
+    "claim_against_organization_ids":["sog_issuer_allunity"],
+    "reserve_ownership":"issuer_owned_for_holders",
+    "reserve_segregation":"stated_segregated",
+    "bankruptcy_remoteness":"limited",
+    "licensed_or_regulated_as":["MiCAR electronic-money token","BaFin-authorized electronic-money institution issuance"],
+    "evidence_ids":["sog_src_eurau_launch_batch_p","sog_src_eurau_site_batch_p","sog_src_eurau_license_batch_p","sog_src_eurau_tradevest_batch_p"],
+    "notes":"AllUnity is the legal issuer. Tradevest and other partners do not create separate issuer claims."
+  },
+  {
+    "id":"sog_st_nobleusdn",
+    "classifications":[{"classification":"protocol_asset","jurisdiction":null,"effective_from":"2025-03-05","effective_to":null,"authority_or_basis":"Noble and M0 protocol documentation","confidence":"high","evidence_ids":["sog_src_nobleusdn_launch_batch_p","sog_src_nobleusdn_overview_batch_p","sog_src_nobleusdn_architecture_batch_p"]}],
+    "holder_claim_type":"protocol_redemption_right",
+    "claim_against_organization_ids":[],
+    "reserve_ownership":"protocol_controlled",
+    "reserve_segregation":"operationally_separate",
+    "bankruptcy_remoteness":"not_applicable",
+    "licensed_or_regulated_as":[],
+    "evidence_ids":["sog_src_nobleusdn_launch_batch_p","sog_src_nobleusdn_overview_batch_p","sog_src_nobleusdn_architecture_batch_p"],
+    "notes":"Protocol conversion and native rebase mechanics are documented; the complete legal issuer, validator, custody, and redemption-agent map remains unresolved."
+  },
+  {
+    "id":"sog_st_usdh",
+    "classifications":[{"classification":"fiat_backed_stablecoin","jurisdiction":"United States / Hyperliquid ecosystem","effective_from":null,"effective_to":null,"authority_or_basis":"issuer, protocol, reserve, minting, and migration documentation","confidence":"medium","evidence_ids":["sog_src_usdh_about_batch_p","sog_src_usdh_reserves_batch_p","sog_src_usdh_migration_batch_p"]}],
+    "holder_claim_type":"direct_claim_on_issuer",
+    "claim_against_organization_ids":["sog_issuer_bridge"],
+    "reserve_ownership":"trust_or_custodial",
+    "reserve_segregation":"stated_segregated",
+    "bankruptcy_remoteness":"limited",
+    "licensed_or_regulated_as":["issuer-backed payment stablecoin under migration"],
+    "evidence_ids":["sog_src_usdh_about_batch_p","sog_src_usdh_reserves_batch_p","sog_src_usdh_minting_batch_p","sog_src_usdh_migration_batch_p"],
+    "notes":"USDH remains limited / winding down pending final migration and support boundaries. Reserve income is not assigned as intrinsic holder yield."
+  },
+  {
+    "id":"sog_st_aecoin",
+    "classifications":[{"classification":"fiat_backed_stablecoin","jurisdiction":"United Arab Emirates","effective_from":null,"effective_to":null,"authority_or_basis":"CBUAE payment-token authorization and issuer product documentation","confidence":"medium","evidence_ids":["sog_src_aecoin_site_batch_p","sog_src_aecoin_whitepaper_batch_p","sog_src_aecoin_cbuae_batch_p"]}],
+    "holder_claim_type":"direct_claim_on_issuer",
+    "claim_against_organization_ids":["sog_issuer_aed_stablecoin"],
+    "reserve_ownership":"issuer_owned_for_holders",
+    "reserve_segregation":"under_review",
+    "bankruptcy_remoteness":"under_review",
+    "licensed_or_regulated_as":["CBUAE-regulated payment token"],
+    "evidence_ids":["sog_src_aecoin_site_batch_p","sog_src_aecoin_privacy_batch_p","sog_src_aecoin_whitepaper_batch_p","sog_src_aecoin_cbuae_batch_p"],
+    "notes":"AED Stablecoin LLC is the B2B issuer. Appointed agents mediate customer-facing custody, transfer, conversion, and redemption routes."
+  }
+]
