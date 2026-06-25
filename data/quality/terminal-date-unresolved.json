@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-24",
-  "source_review": "docs/audits/terminal-date-resolution-usdm-usdn.md",
+  "frozen_at": "2026-06-25",
+  "source_review": "docs/audits/terminal-date-checkpoint-2026-06-25.md",
   "policy": {
     "canonical_day_required": true,
     "keep_null_without_matching_terminal_boundary_evidence": true,
@@ -17,11 +17,11 @@
       "canonical_status": "failed",
       "strongest_known_boundary": null,
       "boundary_type": "no_terminal_boundary_recovered",
-      "last_confirmed_activity": "2026-06-24 canonical BAC ERC-20 contract remains deployed and transferable",
+      "last_confirmed_activity": "2026-06-25 canonical BAC ERC-20 contract remains deployed and transferable",
       "first_confirmed_successor_or_inactive": null,
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "shutdown_source_absent",
-      "review_note": "The original BAC launch is fixed to 2020-11-30 and V2 activation to 2021-04-26. No first-party shutdown, final mint stop, governance termination, redemption termination, or contract end state is recovered; continued transferability does not restore active protocol status.",
+      "review_note": "No new first-party shutdown, final mint stop, governance termination, redemption termination, or contract-level end state was recovered in the 2026-06-25 recheck. Continued transferability does not restore active protocol status or establish a terminal day.",
       "rejected_shortcuts": [
         "first_depeg_date",
         "price_low_date",
@@ -40,7 +40,7 @@
       "first_confirmed_successor_or_inactive": null,
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "development_activity_without_terminal_effect",
-      "review_note": "Official V2 specification and voting material confirms continuing protocol work in April 2021 but does not establish a final migration, minting stop, governance revocation, or shutdown date.",
+      "review_note": "The 2026-06-25 recheck recovered no executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal day. April 2021 V2 design activity remains non-terminal evidence.",
       "rejected_shortcuts": [
         "v2_spec_publication_date",
         "first_depeg_date",
@@ -59,7 +59,7 @@
       "first_confirmed_successor_or_inactive": "2021-08-02 successor protocol live and migration available",
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "migration_opening_not_final_cessation",
-      "review_note": "The official Empty Set V2 migration announcement confirms that users could exchange ESD and Bonded ESD for ESS on 2021-08-02, but it does not prove that all original contracts, claims, or exit paths ended that day.",
+      "review_note": "The 2026-06-25 recheck recovered no V1 end block, final migration deadline, contract disablement, or final claim termination. The 2021-08-02 successor migration opening remains a non-terminal availability boundary.",
       "rejected_shortcuts": [
         "v2_audit_date",
         "migration_opening_as_final_end",
@@ -73,11 +73,11 @@
       "canonical_status": "discontinued",
       "strongest_known_boundary": "2026-05-15",
       "boundary_type": "orderly_wind_down_start",
-      "last_confirmed_activity": "2026-05-15 purchases disabled and wind-down commenced",
+      "last_confirmed_activity": "2026-06-25 initial redemption period remains open through 2026-11-11",
       "first_confirmed_successor_or_inactive": "2026-05-15 new purchases disabled while redemption remained available",
       "formal_shutdown_announcement": "wind_down_notice_recovered_final_termination_not_reached",
       "reason_code": "redemption_period_still_open",
-      "review_note": "GMO Trust's official notice establishes an orderly wind-down effective 2026-05-15 and disables new purchases, but the issuer continues to provide redemption during the announced period, so this is not a final token termination date.",
+      "review_note": "GMO Trust's official notice confirms that the initial redemption period remains open until 2026-11-11. The wind-down start, purchase disablement, and notice date are not final token termination boundaries.",
       "rejected_shortcuts": [
         "wind_down_start_as_final_end",
         "purchase_disable_date_as_redemption_end",

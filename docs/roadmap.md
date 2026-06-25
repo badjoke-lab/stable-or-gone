@@ -11,48 +11,52 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #155 — Recheck HUSD and EURT reserve sources
-Latest merged commit: 217d3992431409520f166165b560fd20c46cb7d9
-Completed phase: first bounded launch-date quality wave
-Current work: HUSD and EURT source-recovery context implementation
-Implementation result: three evidence records added; both remain source_status_unresolved
-Reserve-report result: no reserve-report rows added; count remains 90
-Next phase after merge: terminal queue checkpoint, then controlled growth
+Latest merged PR: #156 — Add reserve source context
+Latest merged commit: 02b1b9baf9b8c1a37d0787506ffa4e135a91f8a6
+Completed phases: first launch-date quality wave and reserve-source cross-queue maintenance
+Current work: terminal-date checkpoint
+Terminal result: BAC, DSD, ESD, and GYEN remain unresolved
+Next phase after merge: controlled growth in batches of no more than five records
+Publication requirement: manual publish and parity verification after each growth batch
 ```
 
-## Reserve-source audit checkpoint
+## Terminal-date checkpoint
 
 ```text
-HUSD
-- monthly attestations historically confirmed
-- January 2022 Accountant's Attestation identified by a legal study
-- original signed report and accountant package not recovered
-- exact measurement, supply, reserve-account, and custodian boundaries unresolved
-- result: retain source_status_unresolved
+Basis Cash
+- no formal shutdown, final mint stop, governance termination, or contract end state recovered
+- terminal date remains null
 
-EURT
-- quarterly Tether reserve and assurance reports exist
-- reports cover the Tether Issuer or broader reporting entities
-- EURT-specific assets, liabilities, issuer scope, and final reconciliation not separated
-- result: retain source_status_unresolved
+Dynamic Set Dollar
+- April 2021 design activity is not final shutdown or executed migration
+- terminal date remains null
+
+Empty Set Dollar
+- 2021-08-02 migration opening is not final cessation of every V1 claim or contract
+- terminal date remains null
+
+GYEN
+- orderly wind-down began 2026-05-15
+- initial redemption period remains open through 2026-11-11
+- terminal date remains null
 ```
 
 Audit:
 
 ```text
-docs/audits/husd-eurt-reserve-source-recheck.md
+docs/audits/terminal-date-checkpoint-2026-06-25.md
 ```
 
-Canonical quality implementation result:
+Queue result:
 
-- HUSD legal-study evidence added as secondary source-recovery context
-- official Tether transparency and relevant-information evidence added as consolidated-scope context
-- HUSD and EURT known unknowns and queue notes updated to 2026-06-25
-- both records retained as `source_status_unresolved`
-- no reserve-report rows added
-- reserve-report count remains 90
+```text
+Terminal-date unresolved: 4
+No canonical terminal-date changes
+```
 
-## Completed launch-date quality wave
+## Completed quality checkpoints
+
+### Launch-date wave
 
 ```text
 DOLA — launch 2021-02-25; PR #140
@@ -62,7 +66,16 @@ mUSD — launch unresolved; boundaries normalized; PR #146
 USK — launch 2022-09-12; wind-down normalized; PR #148
 VAI — launch 2020-11-24; PR #150
 VCHF — launch 2022-12-15; PR #152
-IRON — launch 2021-03-06; lineage boundaries normalized; PR #154
+IRON — launch 2021-03-06; lineage normalized; PR #154
+```
+
+### Reserve-source checkpoint
+
+```text
+HUSD — signed historical attestation unrecovered
+EURT — product-specific reserve and liability scope unrecovered
+Evidence context implementation: PR #156
+Reserve-report count remains 90
 ```
 
 ## Production checkpoint
@@ -122,9 +135,9 @@ Reserve applicability queue:                12
   report expected but missing:               0
 ```
 
-## Queue state
+## Remaining quality queues
 
-### Launch-date queue
+### Launch dates
 
 ```text
 Total unresolved: 18
@@ -133,7 +146,7 @@ Category C:        12
 Category D:         3
 ```
 
-Remaining Category B records:
+Category B:
 
 ```text
 BRZ
@@ -141,58 +154,58 @@ Berachain HONEY
 Anzen USDz
 ```
 
-### Reserve-source queue
+### Reserve sources
 
 ```text
-HUSD — signed historical attestation unrecovered
-EURT — product-specific reserve and liability scope unrecovered
+HUSD
+EURT
 ```
 
-### Terminal-date queue
+### Terminal dates
 
 ```text
-Total unresolved: 4
 Basis Cash
 Dynamic Set Dollar
 Empty Set Dollar
 GYEN
 ```
 
-Terminal dates remain null unless matching end-boundary evidence is recovered. GYEN remains open while the documented redemption period continues.
+These queues remain explicit research backlogs. They no longer block controlled record growth.
 
-## Full execution sequence
+## Controlled growth sequence
 
 ```text
-Phase 1 — Complete reserve-source cross-queue maintenance
-1. Complete final CI and merge the source-recovery context PR.
-2. Keep HUSD and EURT in source_status_unresolved.
-3. Keep reserve-report count at 90.
-4. Confirm temporary synchronization code is removed.
+Phase 1 — Candidate master
+1. Read the existing reviewed candidate and pending-candidate files.
+2. Exclude duplicates, out-of-scope projects, and thin records.
+3. Select no more than five candidates that can support complete canonical layers.
+4. Record why every scanned candidate was selected, deferred, or rejected.
 
-Phase 2 — Terminal queue checkpoint
-6. Recheck BAC, DSD, and ESD only for new primary or authoritative end-boundary evidence.
-7. Keep GYEN unresolved while the redemption boundary remains open.
-8. Do not force terminal dates from inactive markets, delistings, or later summaries.
+Phase 2 — Growth batch
+5. Add complete stable-asset, organization, relationship, classification, reserve/redemption, event, evidence, deployment, legal, reserve-component, and income-profile layers as applicable.
+6. Add no placeholder reserve-report rows.
+7. Keep unreviewed candidates and private monitoring out of public files.
+8. Run all six workflows and merge only after every check passes.
 
-Phase 3 — Controlled growth
-9. Prepare a reviewed candidate master.
-10. Promote no more than five complete stable-asset records per batch.
-11. Publish and verify after each growth batch.
-12. Do not allow production to trail main by more than one growth batch.
+Phase 3 — Publication checkpoint
+9. Manually publish latest main through the approved GitHub Actions workflow.
+10. Verify deployed commit, public counts, canonical routes, machine-readable files, sitemap, and consistency.
+11. Record production parity before starting the next growth batch.
 
 Phase 4 — Normal operating cycle
-13. Alternate two or three existing-record quality audits with one growth batch.
-14. Insert urgent depeg, incident, regulatory, wind-down, or redemption updates ahead of the routine queue.
+12. Alternate one growth batch with two or three existing-record quality audits.
+13. Insert urgent incident, depeg, regulatory, wind-down, or redemption changes ahead of the routine queue.
+14. Never allow production to trail main by more than one growth batch.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the HUSD/EURT source-context implementation PR.
-2. Complete the terminal queue checkpoint for BAC, DSD, ESD, and GYEN.
-3. Keep terminal dates null without matching end-boundary evidence.
-4. Resume controlled growth in batches of no more than five records.
-5. Publish and verify after the first growth batch.
+1. Complete CI and merge the terminal-date checkpoint PR.
+2. Build the first reviewed candidate master after the quality pause.
+3. Select no more than five complete candidates.
+4. Implement the first controlled growth batch.
+5. Manually publish and verify production parity after merge.
 ```
 
 ## Production policy
@@ -211,7 +224,7 @@ Production branch: main
 
 ## Growth policy
 
-- complete the reserve-source and terminal cross-queue checkpoints
+- unresolved quality queues remain explicit but do not block bounded growth
 - promote no more than five complete records per growth batch
 - run full CI for every batch
 - publish and verify after every growth batch
