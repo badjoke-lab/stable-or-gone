@@ -11,51 +11,48 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #153 — Audit IRON launch boundary
-Latest merged commit: 98276eef87b1b334ba3f929000d2903f7723ae79
-Current work: IRON canonical implementation
-Launch result: launch_date set to 2021-03-06
-Terminal state: failed with discontinued_date 2021-06-16
-Quality-wave result: first bounded launch-date wave complete
-Next phase after merge: cross-queue maintenance, then controlled growth
+Latest merged PR: #154 — Implement IRON launch date
+Latest merged commit: d9676e3fc98f8f15da768525c7cc971622a8975e
+Completed phase: first bounded launch-date quality wave
+Current work: HUSD and EURT reserve-source recheck
+Audit conclusion: retain both as source_status_unresolved
+Next operation after audit: add source-recovery context without reserve-report rows
+Next phase: terminal queue checkpoint, then controlled growth
 ```
 
-## IRON audit checkpoint
+## Reserve-source audit checkpoint
 
 ```text
-2021-03-06 — original IRON protocol launch on Binance Smart Chain
-2021-05-18 — Polygon deployment with a separate IRON/TITAN token set
-2021-06-16 — Polygon IRON bank run and terminal failure of the original design
-June 2021 — rebuilding announcement says the stablecoin would be redesigned from scratch
-2021-08-25 — redesigned IRON v2 launch
-```
+HUSD
+- monthly attestations historically confirmed
+- January 2022 Accountant's Attestation identified by a legal study
+- original signed report and accountant package not recovered
+- exact measurement, supply, reserve-account, and custodian boundaries unresolved
+- result: retain source_status_unresolved
 
-Decision:
-
-```text
-launch_date: 2021-03-06
-status: failed
-discontinued_date: 2021-06-16
+EURT
+- quarterly Tether reserve and assurance reports exist
+- reports cover the Tether Issuer or broader reporting entities
+- EURT-specific assets, liabilities, issuer scope, and final reconciliation not separated
+- result: retain source_status_unresolved
 ```
 
 Audit:
 
 ```text
-docs/audits/iron-launch-boundary-review.md
+docs/audits/husd-eurt-reserve-source-recheck.md
 ```
 
-Canonical implementation result:
+Follow-up quality implementation:
 
-- 2021-03-06 BSC launch event added
-- 2021-05-18 Polygon deployment event added
-- June 16 collapse event preserved
-- first-party BSC launch, Polygon expansion, and v2 evidence added
-- IRON v2 preserved as a later redesigned-product boundary
-- BSC deployment and v1/v2 lineage unknowns updated
-- IRON removed from the unresolved launch queue
-- queue reduced from 19 to 18 and Category C from 13 to 12
+- add HUSD legal-study evidence as secondary source-recovery context
+- add official Tether transparency and relevant-information evidence as consolidated-scope context
+- update HUSD and EURT known unknowns and queue notes to 2026-06-25
+- retain both records as `source_status_unresolved`
+- add no reserve-report rows
+- keep reserve-report count at 90
 
-## Completed quality checkpoints
+## Completed launch-date quality wave
 
 ```text
 DOLA — launch 2021-02-25; PR #140
@@ -65,6 +62,7 @@ mUSD — launch unresolved; boundaries normalized; PR #146
 USK — launch 2022-09-12; wind-down normalized; PR #148
 VAI — launch 2020-11-24; PR #150
 VCHF — launch 2022-12-15; PR #152
+IRON — launch 2021-03-06; lineage boundaries normalized; PR #154
 ```
 
 ## Production checkpoint
@@ -119,6 +117,9 @@ Deployment coverage:                   82 / 82
 Missing canonical launch dates:            18
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
+  not applicable by design:                 10
+  source status unresolved:                  2
+  report expected but missing:               0
 ```
 
 ## Queue state
@@ -140,6 +141,13 @@ Berachain HONEY
 Anzen USDz
 ```
 
+### Reserve-source queue
+
+```text
+HUSD — signed historical attestation unrecovered
+EURT — product-specific reserve and liability scope unrecovered
+```
+
 ### Terminal-date queue
 
 ```text
@@ -150,41 +158,42 @@ Empty Set Dollar
 GYEN
 ```
 
-### Reserve-source queue
-
-```text
-HUSD
-EURT
-```
+Terminal dates remain null unless matching end-boundary evidence is recovered. GYEN remains open while the documented redemption period continues.
 
 ## Full execution sequence
 
 ```text
-Phase 1 — Complete the first launch-date quality wave
-1. Complete final CI and merge the IRON implementation PR.
-2. Preserve BSC launch, Polygon deployment, collapse, and v2 redesign as separate boundaries.
-3. Confirm temporary synchronization code is removed.
+Phase 1 — Reserve-source cross-queue maintenance
+1. Complete CI and merge the HUSD/EURT audit PR.
+2. Add reviewed source-recovery context without creating reserve-report rows.
+3. Keep both records in source_status_unresolved.
+4. Synchronize evidence, known unknowns, queue notes, baselines, generated outputs, README, audits, and roadmap.
+5. Run all six workflows and merge only after every check passes.
 
-Phase 3 — Cross-queue maintenance
-11. Recheck HUSD and EURT only when durable product-specific reserve evidence appears.
-12. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching evidence exists.
-13. Review newly effective operational restrictions separately from launch dates.
+Phase 2 — Terminal queue checkpoint
+6. Recheck BAC, DSD, and ESD only for new primary or authoritative end-boundary evidence.
+7. Keep GYEN unresolved while the redemption boundary remains open.
+8. Do not force terminal dates from inactive markets, delistings, or later summaries.
 
-Phase 4 — Controlled growth
-14. Prepare a reviewed candidate master.
-15. Promote no more than five complete records per batch.
-16. Publish and verify after each growth batch.
-17. Do not allow production to trail main by more than one growth batch.
+Phase 3 — Controlled growth
+9. Prepare a reviewed candidate master.
+10. Promote no more than five complete stable-asset records per batch.
+11. Publish and verify after each growth batch.
+12. Do not allow production to trail main by more than one growth batch.
+
+Phase 4 — Normal operating cycle
+13. Alternate two or three existing-record quality audits with one growth batch.
+14. Insert urgent depeg, incident, regulatory, wind-down, or redemption updates ahead of the routine queue.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the IRON implementation PR.
-2. Report the queue reduction to 18 total and Category C 12.
-3. Audit HUSD and EURT reserve-source recovery status as the first cross-queue maintenance batch.
-4. Recheck BAC, DSD, and ESD terminal dates only if new primary evidence exists.
-5. Resume controlled growth after the cross-queue checkpoint.
+1. Complete CI and merge the HUSD/EURT reserve-source audit PR.
+2. Open the source-recovery context implementation PR.
+3. Add no reserve-report rows unless product-specific primary evidence is recovered.
+4. Complete the terminal queue checkpoint.
+5. Resume controlled growth in batches of no more than five records.
 ```
 
 ## Production policy
@@ -203,7 +212,7 @@ Production branch: main
 
 ## Growth policy
 
-- finish the first bounded quality wave
+- complete the reserve-source and terminal cross-queue checkpoints
 - promote no more than five complete records per growth batch
 - run full CI for every batch
 - publish and verify after every growth batch
