@@ -26,4 +26,4 @@ Identity and lifecycle boundaries:
 - AE Coin separates the B2B issuer from appointed custody, conversion, transfer, and end-customer agents.
 - EURAU separates AllUnity's issuer role from shareholders, reserve banks, custodians, liquidity providers, and distributors.
 
-Unresolved launch dates remain null for USDH and AE Coin. Every candidate retains five explicit blocking unknowns and at least three primary-source leads. Canonical promotion remains a separate full-layer PR.
+Unresolved launch dates remain null for USDH and AE Coin. Every candidate retains five explicit blocking unknowns and at least three primary-source leads. No candidate is canonical until the separate full-layer promotion PR is reviewed and merged.
