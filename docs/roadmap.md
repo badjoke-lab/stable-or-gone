@@ -182,8 +182,8 @@ Rules:
 Automatic production deployment: disabled
 Preview branch deployments: disabled
 Publication path: manual GitHub Actions workflow only
-Manual publication workflow activation: PASS
-Reference deployment workflow run: 27908380603
+Manual production publication activation — PASS
+Deployment workflow run: 27908380603
 Pages project: stable-or-gone
 Production branch: main
 ```
