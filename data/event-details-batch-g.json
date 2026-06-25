@@ -16,6 +16,28 @@
     "event_detail_kind": "other"
   },
   {
+    "id": "sog_ev_dola_2021_02_launch",
+    "title": "Inverse Finance launches Anchor and DOLA",
+    "subject_stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "evidence_ids": [
+      "sog_src_dola_anchor_launch_2021",
+      "sog_src_dola_origin_firm_2022"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Anchor opened publicly on 2021-02-25 and facilitated DOLA issuance, establishing the canonical public launch of the continuing DOLA asset.",
+      "status": "active",
+      "related_organization_ids": [
+        "sog_issuer_inverse_finance"
+      ]
+    }
+  },
+  {
     "id": "sog_ev_djed_launch_batch_g",
     "title": "COTI launches Djed on Cardano",
     "subject_stablecoin_ids": [
