@@ -1,0 +1,398 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_017",
+  "status": "full_layer_draft",
+  "reviewed_at": "2026-06-26",
+  "canonical_write_allowed": false,
+  "source_research": "data/candidate-research-batch-17.json",
+  "target": {
+    "canonical_assets_before": 87,
+    "canonical_assets_after": 92,
+    "candidate_total": 92,
+    "pending_before": 5,
+    "pending_after": 0
+  },
+  "records": [
+    {
+      "candidate_id": "sog_cand_000088",
+      "id": "sog_st_usat",
+      "slug": "usat",
+      "name": "USA₮",
+      "symbol": "USAT",
+      "aliases": ["USA₮", "USAT", "Tether USAT"],
+      "status": "active",
+      "launch_date": "2026-01-27",
+      "issuer_id": "sog_issuer_anchorage_digital_bank",
+      "summary": "Federally regulated U.S.-dollar stablecoin issued by Anchorage Digital Bank with Tether supporting the product, technology, and brand.",
+      "identity_notes": "USA₮ is separate from USD₮ / USDT. Anchorage Digital Bank is the legal issuer; Tether support and product roles do not replace the issuer role.",
+      "organizations": [
+        {
+          "id": "sog_issuer_anchorage_digital_bank",
+          "name": "Anchorage Digital Bank",
+          "role": "legal_issuer",
+          "type": "regulated_bank",
+          "jurisdiction": "United States",
+          "official_url": "https://www.anchorage.com/"
+        },
+        {
+          "id": "sog_org_tether_usat",
+          "name": "Tether USA₮",
+          "role": "brand_owner",
+          "type": "financial_technology_company",
+          "jurisdiction": "United States",
+          "official_url": "https://usat.io/"
+        }
+      ],
+      "classification": {
+        "lifecycle_status": "active",
+        "issuance_status": "restricted",
+        "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar."},
+        "backing_types": ["cash", "government_securities", "mixed"],
+        "stabilization_mechanism": "issuer_redemption",
+        "governance_model": "centralized"
+      },
+      "reserve_profile": {
+        "summary": "Official launch material describes a federally regulated dollar-backed stablecoin; exact reserve allocation and custody require terms-level normalization.",
+        "disclosure_status": "official_launch_context_terms_pending",
+        "context_url": "https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/",
+        "asset_categories": ["cash", "government_securities", "mixed"],
+        "reserve_component": "Dollar-denominated reserve assets subject to regulated issuer terms"
+      },
+      "redemption_profile": {
+        "status": "institutional_only",
+        "eligible_parties": "Approved institutional customers and distribution participants under Anchorage program terms.",
+        "retail_access": "market_based_or_partner_access",
+        "institutional_access": "approved_participant_direct",
+        "settlement_asset": "USD",
+        "redemption_url": "https://usat.io/"
+      },
+      "event": {
+        "id": "sog_ev_usat_launch_batch17",
+        "event_type": "launch",
+        "event_date": "2026-01-27",
+        "title": "USA₮ officially launches",
+        "description": "Tether announced the launch of USA₮ as a federally regulated dollar-backed stablecoin issued by Anchorage Digital Bank.",
+        "confidence": "high"
+      },
+      "evidence": [
+        {"id": "sog_src_usat_launch_batch17", "type": "official_blog", "title": "Tether announces the launch of USA₮", "url": "https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/", "publisher": "Tether"},
+        {"id": "sog_src_usat_site_batch17", "type": "official_documentation", "title": "USA₮ official site", "url": "https://usat.io/", "publisher": "USA₮"},
+        {"id": "sog_src_usat_unveil_batch17", "type": "official_blog", "title": "Tether unveils planned U.S.-regulated stablecoin USA₮", "url": "https://tether.io/news/tether-unveils-usat-its-planned-u-s-regulated-dollar-backed-stablecoin-and-will-appoint-bo-hines-as-ceo-of-tether-usat/", "publisher": "Tether"},
+        {"id": "sog_src_usat_anchorage_batch17", "type": "official_blog", "title": "Tether supports Anchorage Digital, issuer of USA₮", "url": "https://tether.io/news/tether-announces-100-million-strategic-equity-investment-in-anchorage-digital/", "publisher": "Tether"}
+      ],
+      "deployments": [
+        {"id": "sog_dep_usat_ethereum_batch17", "chain": "Ethereum", "token_standard": "ERC-20", "canonicality": "issuer_native", "contract_address": null}
+      ],
+      "legal_profile": {
+        "classification": "federally_regulated_bank_issued_payment_stablecoin",
+        "holder_claim_type": "contractual_redemption_right_subject_to_issuer_terms",
+        "reserve_ownership": "bank_or_custodian_controlled",
+        "reserve_segregation": "under_review",
+        "bankruptcy_remoteness": "under_review"
+      },
+      "income_profile": {"availability": "none", "source": "none", "accrual": "none", "rate": "none"},
+      "known_unknowns": [
+        "complete Anchorage issuance and redemption terms",
+        "reserve composition, custody, and segregation map",
+        "canonical contract, mint authority, and freeze authority",
+        "complete recurring attestation archive",
+        "current institutional and retail distribution eligibility"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_000089",
+      "id": "sog_st_eurau",
+      "slug": "eurau",
+      "name": "EURAU",
+      "symbol": "EURAU",
+      "aliases": ["EURAU", "AllUnity EURAU", "AllUnity E-Euro"],
+      "status": "active",
+      "launch_date": "2025-07-31",
+      "issuer_id": "sog_issuer_allunity",
+      "summary": "Fully reserved MiCAR-compliant euro stablecoin issued by the regulated electronic-money institution AllUnity.",
+      "identity_notes": "AllUnity is the legal issuer. Shareholders, reserve banks, custodians, liquidity providers, exchanges, and distribution partners remain separate roles.",
+      "organizations": [
+        {"id": "sog_issuer_allunity", "name": "AllUnity", "role": "legal_issuer", "type": "regulated_emoney_institution", "jurisdiction": "Germany", "official_url": "https://allunity.com/"},
+        {"id": "sog_org_tradevest", "name": "Tradevest", "role": "custodian", "type": "digital_asset_infrastructure_provider", "jurisdiction": "Germany", "official_url": "https://www.tradevest.ai/"}
+      ],
+      "classification": {
+        "lifecycle_status": "active",
+        "issuance_status": "restricted",
+        "peg_reference": {"kind": "fiat", "asset": "EUR", "notes": "Targets one euro."},
+        "backing_types": ["cash", "bank_deposits", "mixed"],
+        "stabilization_mechanism": "issuer_redemption",
+        "governance_model": "centralized"
+      },
+      "reserve_profile": {
+        "summary": "AllUnity describes EURAU as fully reserved under MiCAR, with reserve-bank and safeguarding arrangements requiring report-level normalization.",
+        "disclosure_status": "official_micar_and_reserve_context",
+        "context_url": "https://allunity.com/eurau/",
+        "asset_categories": ["cash", "bank_deposits", "mixed"],
+        "reserve_component": "Euro-denominated cash and safeguarded reserve assets"
+      },
+      "redemption_profile": {
+        "status": "eligible_customers_only",
+        "eligible_parties": "Onboarded institutional customers and approved partners under AllUnity terms.",
+        "retail_access": "partner_or_market_based",
+        "institutional_access": "approved_customer_direct",
+        "settlement_asset": "EUR",
+        "redemption_url": "https://allunity.com/eurau/"
+      },
+      "event": {
+        "id": "sog_ev_eurau_launch_batch17",
+        "event_type": "launch",
+        "event_date": "2025-07-31",
+        "title": "AllUnity launches EURAU",
+        "description": "AllUnity launched EURAU as Germany's fully reserved MiCAR-compliant euro stablecoin.",
+        "confidence": "high"
+      },
+      "evidence": [
+        {"id": "sog_src_eurau_launch_batch17", "type": "official_blog", "title": "AllUnity launches EURAU", "url": "https://allunity.com/news/allunity-launches-eurau-germanys-first-fully-reserved-micar-compliant-euro-stablecoin", "publisher": "AllUnity"},
+        {"id": "sog_src_eurau_site_batch17", "type": "official_documentation", "title": "EURAU product page", "url": "https://allunity.com/eurau/", "publisher": "AllUnity"},
+        {"id": "sog_src_eurau_license_batch17", "type": "official_blog", "title": "AllUnity secures BaFin EMI license", "url": "https://allunity.com/news/allunity-secures-bafin-emi-license-to-launch-its-micar-compliant-euro-stablecoin/", "publisher": "AllUnity"},
+        {"id": "sog_src_eurau_tradevest_batch17", "type": "official_blog", "title": "AllUnity partners with Tradevest for EURAU", "url": "https://allunity.com/news/allunity-announces-partnership-with-tradevest-as-custodian-first-buyer-and-exchange-partner-for-eurau/", "publisher": "AllUnity"}
+      ],
+      "deployments": [
+        {"id": "sog_dep_eurau_ethereum_batch17", "chain": "Ethereum", "token_standard": "ERC-20", "canonicality": "issuer_native", "contract_address": null}
+      ],
+      "legal_profile": {
+        "classification": "mica_e_money_token",
+        "holder_claim_type": "contractual_redemption_right_subject_to_emoney_terms",
+        "reserve_ownership": "issuer_or_safeguarding_bank_controlled",
+        "reserve_segregation": "regulated_safeguarding_under_review",
+        "bankruptcy_remoteness": "under_review"
+      },
+      "income_profile": {"availability": "none", "source": "none", "accrual": "none", "rate": "none"},
+      "known_unknowns": [
+        "complete reserve-allocation and safeguarding chronology",
+        "current direct issuance and redemption eligibility",
+        "canonical contracts and authority controls across networks",
+        "complete attestation and audit archive",
+        "current reserve-bank, custodian, and liquidity-provider role map"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_000090",
+      "id": "sog_st_nobleusdn",
+      "slug": "noble-usdn",
+      "name": "Noble Dollar",
+      "symbol": "USDN",
+      "aliases": ["USDN", "Noble Dollar", "Noble USDN"],
+      "status": "active",
+      "launch_date": "2025-03-05",
+      "issuer_id": "sog_issuer_noble",
+      "summary": "Yield-bearing dollar stablecoin launched by Noble using M0 infrastructure and short-term U.S. Treasury-backed collateral.",
+      "identity_notes": "Noble Dollar is separate from Neutrino USD. Native USDN, M0's M base asset, vault positions, points programs, and cross-chain representations remain distinct layers.",
+      "organizations": [
+        {"id": "sog_issuer_noble", "name": "Noble", "role": "protocol_operator", "type": "blockchain_asset_issuance_protocol", "jurisdiction": "Decentralized / multi-entity", "official_url": "https://noble.xyz/"},
+        {"id": "sog_org_m0", "name": "M0", "role": "technology_provider", "type": "stablecoin_infrastructure_protocol", "jurisdiction": "Decentralized / multi-entity", "official_url": "https://www.m0.org/"}
+      ],
+      "classification": {
+        "lifecycle_status": "active",
+        "issuance_status": "protocol_based",
+        "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar."},
+        "backing_types": ["government_securities", "tokenized_fund"],
+        "stabilization_mechanism": "rebasing_or_repricing",
+        "governance_model": "protocol_governed"
+      },
+      "reserve_profile": {
+        "summary": "Official Noble documentation describes full backing through short-term U.S. Treasury-bill exposure inherited from M0's M asset.",
+        "disclosure_status": "official_protocol_and_collateral_context",
+        "context_url": "https://docs.noble.xyz/learn/usdn/overview/",
+        "asset_categories": ["government_securities", "tokenized_fund"],
+        "reserve_component": "M0-backed short-term U.S. Treasury exposure"
+      },
+      "redemption_profile": {
+        "status": "protocol_based",
+        "eligible_parties": "Users and integrators of supported Noble and M0 conversion routes.",
+        "retail_access": "protocol_based_subject_to_access",
+        "institutional_access": "protocol_or_partner_based",
+        "settlement_asset": "M_or_supported_stablecoin_liquidity",
+        "redemption_url": "https://dollar.noble.xyz/"
+      },
+      "event": {
+        "id": "sog_ev_nobleusdn_launch_batch17",
+        "event_type": "launch",
+        "event_date": "2025-03-05",
+        "title": "Noble Dollar launches",
+        "description": "Noble launched USDN as a composable yield-bearing stablecoin built with the M0 stack.",
+        "confidence": "high"
+      },
+      "evidence": [
+        {"id": "sog_src_nobleusdn_launch_batch17", "type": "official_blog", "title": "Noble Dollar, USDN, is live", "url": "https://noble.xyz/blog/introducing-usdn", "publisher": "Noble"},
+        {"id": "sog_src_nobleusdn_overview_batch17", "type": "official_documentation", "title": "USDN overview", "url": "https://docs.noble.xyz/learn/usdn/overview/", "publisher": "Noble"},
+        {"id": "sog_src_nobleusdn_architecture_batch17", "type": "official_documentation", "title": "USDN architecture", "url": "https://docs.noble.xyz/usdn/architecture/", "publisher": "Noble"},
+        {"id": "sog_src_nobleusdn_site_batch17", "type": "official_documentation", "title": "Noble Dollar product page", "url": "https://noble.xyz/usdn", "publisher": "Noble"}
+      ],
+      "deployments": [
+        {"id": "sog_dep_nobleusdn_noble_batch17", "chain": "Noble", "token_standard": "Cosmos SDK token", "canonicality": "native", "contract_address": null}
+      ],
+      "legal_profile": {
+        "classification": "protocol_extension_stablecoin",
+        "holder_claim_type": "protocol_conversion_and_rebase_right",
+        "reserve_ownership": "underlying_protocol_and_validator_controlled",
+        "reserve_segregation": "protocol_structure_under_review",
+        "bankruptcy_remoteness": "under_review"
+      },
+      "income_profile": {"availability": "native", "source": "reserve_income", "accrual": "balance_rebase", "rate": "variable"},
+      "known_unknowns": [
+        "legal issuer, extension operator, and redemption-agent role map",
+        "complete M0 collateral and validator-report linkage",
+        "primary mint and redemption terms",
+        "canonical deployment and bridge representation inventory",
+        "base yield versus vault, points, and integrator reward boundaries"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_000091",
+      "id": "sog_st_usdh",
+      "slug": "usdh",
+      "name": "USDH",
+      "symbol": "USDH",
+      "aliases": ["USDH", "Hyperliquid USDH", "Native Markets USDH"],
+      "status": "limited",
+      "launch_date": null,
+      "issuer_id": "sog_issuer_bridge",
+      "summary": "Hyperliquid-native reserve-backed stablecoin designed by Native Markets and issued through Bridge infrastructure, currently subject to a migration-period lifecycle review.",
+      "identity_notes": "The HyperCore native token, linked HyperEVM ERC-20, issuer, Native Markets operator role, reserve managers, custodians, and ecosystem contribution routes remain distinct.",
+      "organizations": [
+        {"id": "sog_issuer_bridge", "name": "Bridge", "role": "legal_issuer", "type": "regulated_stablecoin_infrastructure_provider", "jurisdiction": "United States", "official_url": "https://www.bridge.xyz/"},
+        {"id": "sog_org_native_markets", "name": "Native Markets", "role": "protocol_operator", "type": "crypto_asset_protocol", "jurisdiction": "Decentralized / multi-entity", "official_url": "https://usdh.com/"}
+      ],
+      "classification": {
+        "lifecycle_status": "winding_down",
+        "issuance_status": "restricted",
+        "peg_reference": {"kind": "fiat", "asset": "USD", "notes": "Targets one U.S. dollar during the migration period."},
+        "backing_types": ["cash", "government_securities", "tokenized_fund", "mixed"],
+        "stabilization_mechanism": "issuer_redemption",
+        "governance_model": "centralized"
+      },
+      "reserve_profile": {
+        "summary": "Official material describes 1:1 reserves managed across off-chain and on-chain structures with monthly attestations.",
+        "disclosure_status": "monthly_attestation_and_live_reserve_context",
+        "context_url": "https://usdh.com/reserves",
+        "asset_categories": ["cash", "government_securities", "tokenized_fund", "mixed"],
+        "reserve_component": "Cash, U.S. Treasury exposure, cash equivalents, and tokenized reserve assets"
+      },
+      "redemption_profile": {
+        "status": "restricted",
+        "eligible_parties": "Approved institutional users and supported migration or liquidity routes.",
+        "retail_access": "market_based_during_migration",
+        "institutional_access": "approved_participant_direct",
+        "settlement_asset": "USD_or_USDC",
+        "redemption_url": "https://docs.usdh.com/usdh/minting"
+      },
+      "event": {
+        "id": "sog_ev_usdh_migration_batch17",
+        "event_type": "migration",
+        "event_date": null,
+        "title": "USDH migration period begins",
+        "description": "USDH entered a migration and liquidity-transition period while remaining fully backed and supported through designated routes.",
+        "confidence": "high"
+      },
+      "evidence": [
+        {"id": "sog_src_usdh_about_batch17", "type": "official_documentation", "title": "About USDH", "url": "https://usdh.com/about", "publisher": "USDH"},
+        {"id": "sog_src_usdh_reserves_batch17", "type": "official_documentation", "title": "USDH reserves", "url": "https://usdh.com/reserves", "publisher": "USDH"},
+        {"id": "sog_src_usdh_overview_batch17", "type": "official_documentation", "title": "USDH overview", "url": "https://docs.usdh.com/usdh/overview", "publisher": "USDH"},
+        {"id": "sog_src_usdh_minting_batch17", "type": "official_documentation", "title": "USDH minting and redeeming", "url": "https://docs.usdh.com/usdh/minting", "publisher": "USDH"},
+        {"id": "sog_src_usdh_migration_batch17", "type": "official_documentation", "title": "USDH migration", "url": "https://usdh.com/migration", "publisher": "USDH"}
+      ],
+      "deployments": [
+        {"id": "sog_dep_usdh_hypercore_batch17", "chain": "Hyperliquid HyperCore", "token_standard": "HIP-1 native token", "canonicality": "native", "contract_address": null},
+        {"id": "sog_dep_usdh_hyperevm_batch17", "chain": "HyperEVM", "token_standard": "ERC-20", "canonicality": "linked_native_representation", "contract_address": null}
+      ],
+      "legal_profile": {
+        "classification": "issuer_backed_payment_stablecoin_in_migration",
+        "holder_claim_type": "contractual_redemption_right_subject_to_issuer_and_migration_terms",
+        "reserve_ownership": "issuer_and_reserve_manager_controlled",
+        "reserve_segregation": "attested_structure_under_review",
+        "bankruptcy_remoteness": "under_review"
+      },
+      "income_profile": {"availability": "none", "source": "none", "accrual": "none", "rate": "none"},
+      "known_unknowns": [
+        "canonical public launch date and first mint",
+        "Bridge issuer terms and direct redemption agreement",
+        "HyperCore and HyperEVM contract and authority map",
+        "migration timeline, final support date, and successor-liquidity boundary",
+        "complete reserve attestation and income-allocation chronology"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_000092",
+      "id": "sog_st_aecoin",
+      "slug": "ae-coin",
+      "name": "AE Coin",
+      "symbol": "AEC",
+      "aliases": ["AEC", "AE Coin", "AED Stablecoin AE Coin"],
+      "status": "active",
+      "launch_date": null,
+      "issuer_id": "sog_issuer_aed_stablecoin",
+      "summary": "UAE-dirham payment token issued by AED Stablecoin LLC under CBUAE regulation, with custody, transfer, conversion, and end-customer services handled through appointed agents.",
+      "identity_notes": "AED Stablecoin LLC performs B2B issuance. Appointed agents handle custody, transfer, conversion, and end-customer relationships and must not be merged into the issuer role.",
+      "organizations": [
+        {"id": "sog_issuer_aed_stablecoin", "name": "AED Stablecoin LLC", "role": "legal_issuer", "type": "regulated_payment_token_issuer", "jurisdiction": "United Arab Emirates", "official_url": "https://aecoin.com/"}
+      ],
+      "classification": {
+        "lifecycle_status": "active",
+        "issuance_status": "restricted",
+        "peg_reference": {"kind": "fiat", "asset": "AED", "notes": "Targets one UAE dirham."},
+        "backing_types": ["unknown"],
+        "stabilization_mechanism": "issuer_redemption",
+        "governance_model": "centralized"
+      },
+      "reserve_profile": {
+        "summary": "Official material states one AEC targets one AED, while the complete reserve, safeguarding, bank-account, and attestation structure remains unresolved.",
+        "disclosure_status": "official_regulatory_and_product_context_reserve_details_pending",
+        "context_url": "https://aecoin.com/downloads/whitepaper-en.pdf",
+        "asset_categories": ["unknown"],
+        "reserve_component": "AED-denominated reserve structure under primary-document review"
+      },
+      "redemption_profile": {
+        "status": "eligible_customers_only",
+        "eligible_parties": "Institutional customers and end users served through authorized agents under applicable terms.",
+        "retail_access": "authorized_agent_based",
+        "institutional_access": "issuer_and_agent_based",
+        "settlement_asset": "AED",
+        "redemption_url": "https://aecoin.com/"
+      },
+      "event": {
+        "id": "sog_ev_aecoin_regulatory_context_batch17",
+        "event_type": "regulatory",
+        "event_date": null,
+        "title": "AE Coin operates under CBUAE payment-token authorization",
+        "description": "AED Stablecoin LLC states that it is authorized by the Central Bank of the UAE to issue AE Coin and operates through a B2B and appointed-agent model.",
+        "confidence": "high"
+      },
+      "evidence": [
+        {"id": "sog_src_aecoin_site_batch17", "type": "official_documentation", "title": "AE Coin official site", "url": "https://aecoin.com/", "publisher": "AED Stablecoin LLC"},
+        {"id": "sog_src_aecoin_privacy_batch17", "type": "official_documentation", "title": "AE Coin privacy and operating-role policy", "url": "https://aecoin.com/privacy-policy.php", "publisher": "AED Stablecoin LLC"},
+        {"id": "sog_src_aecoin_whitepaper_batch17", "type": "official_documentation", "title": "AE Coin whitepaper", "url": "https://aecoin.com/downloads/whitepaper-en.pdf", "publisher": "AED Stablecoin LLC"},
+        {"id": "sog_src_aecoin_cbuae_batch17", "type": "regulatory_notice", "title": "CBUAE licensing register", "url": "https://www.centralbank.ae/en/licensing/", "publisher": "Central Bank of the UAE"}
+      ],
+      "deployments": [
+        {"id": "sog_dep_aecoin_unresolved_batch17", "chain": "source_review_needed", "token_standard": "unknown", "canonicality": "unknown", "contract_address": null}
+      ],
+      "legal_profile": {
+        "classification": "cbuae_regulated_payment_token",
+        "holder_claim_type": "agent_mediated_contractual_redemption_right",
+        "reserve_ownership": "issuer_or_safeguarding_entity_controlled",
+        "reserve_segregation": "under_review",
+        "bankruptcy_remoteness": "under_review"
+      },
+      "income_profile": {"availability": "none", "source": "none", "accrual": "none", "rate": "none"},
+      "known_unknowns": [
+        "canonical launch date and first public circulation boundary",
+        "complete reserve, safeguarding, and attestation structure",
+        "authorized agent inventory and role chronology",
+        "direct and indirect redemption terms for institutions and end users",
+        "canonical chain, contract, and administrative-control map"
+      ]
+    }
+  ],
+  "review_gate": {
+    "canonical_promotion_requires_separate_pr": true,
+    "manual_source_review_required": true,
+    "all_blocking_unknowns_must_remain_explicit": true,
+    "unsupported_dates_must_remain_null": true
+  }
+}
