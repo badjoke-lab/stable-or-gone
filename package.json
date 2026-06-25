@@ -43,5 +43,7 @@
     "astro": "latest",
     "typescript": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "latest"
+  }
 }
