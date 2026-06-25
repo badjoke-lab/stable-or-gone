@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
@@ -21,6 +22,19 @@ const countValues = (values) => values.reduce((counts, raw) => {
 const applyById = (rows, layers) => {
   const maps = layers.map((layer) => new Map(layer.map((row) => [row.id, row])));
   return rows.map((row) => maps.reduce((merged, map) => ({ ...merged, ...(map.get(row.id) || {}) }), row));
+};
+const checkedOutCommit = () => {
+  if (process.env.GITHUB_ACTIONS !== 'true') return null;
+  try {
+    const value = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: process.env.GITHUB_WORKSPACE || root,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    return /^[0-9a-f]{40}$/i.test(value) ? value : null;
+  } catch {
+    return null;
+  }
 };
 
 const stablecoins = applyById(group('stablecoins'), [
@@ -88,7 +102,7 @@ const aiText = fs.readFileSync(path.join(distDir, 'ai.txt'), 'utf8');
 assert(version.schema_version === '1.0.0', 'version schema mismatch');
 assert(version.project_id === 'stable-or-gone', 'version project id mismatch');
 assert(version.registry_family === 'badjoke-lab-ledger-series', 'version registry family mismatch');
-assert(version.registry_type === 'stablecoin_issuer_registry', 'version registry type mismatch');
+assert(version.registry_type === 'stablecoin_issuer_registry', 'version type mismatch');
 assert(version.canonical_origin === 'https://sog.badjoke-lab.com', 'version canonical origin mismatch');
 assert(version.build?.verification_marker === 'sog_machine_readable_layer_v1', 'verification marker mismatch');
 assert(version.data?.data_schema_version === 'sog_registry_v2', 'data schema mismatch');
@@ -96,7 +110,7 @@ assert(isDeepStrictEqual(version.data?.record_counts, expectedCounts), 'version 
 assert(isDeepStrictEqual(version.data?.record_count_breakdown, expectedBreakdown), 'version breakdown does not match canonical data');
 assert(version.data?.records_last_reviewed_at === expectedLastReviewedAt, 'records_last_reviewed_at mismatch');
 
-const expectedBuildCommit = process.env.SOG_BUILD_COMMIT || process.env.GITHUB_SHA;
+const expectedBuildCommit = process.env.SOG_BUILD_COMMIT || checkedOutCommit() || process.env.GITHUB_SHA;
 const expectedBuildBranch = process.env.SOG_BUILD_BRANCH || process.env.GITHUB_REF_NAME;
 if (expectedBuildCommit) assert(version.build.commit === expectedBuildCommit, `build commit ${version.build.commit} does not match expected ${expectedBuildCommit}`);
 if (expectedBuildBranch) assert(version.build.branch === expectedBuildBranch, `build branch ${version.build.branch} does not match expected ${expectedBuildBranch}`);
