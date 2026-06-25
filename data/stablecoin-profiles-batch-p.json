@@ -1,0 +1,137 @@
+[
+  {
+    "id":"sog_st_usat",
+    "reserve_profile":{
+      "backing_types":["cash","government_securities","mixed"],
+      "summary":"Official launch material describes a federally regulated dollar-backed stablecoin; exact reserve allocation and custody remain under review.",
+      "disclosure_status":"official_launch_context_terms_pending",
+      "as_of_date":"2026-06-26",
+      "latest_report_id":"sog_rr_usat_context_batch_p",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_usat_launch_batch_p","sog_src_usat_site_batch_p","sog_src_usat_unveil_batch_p"]
+    },
+    "redemption_profile":{
+      "status":"institutional_only",
+      "settlement_asset":"USD",
+      "eligible_parties":"Approved institutional customers and distribution participants under Anchorage program terms.",
+      "retail_access":"market_based_or_partner_access",
+      "institutional_access":"approved_participant_direct",
+      "minimum_amount_text":"Program terms dependent.",
+      "fee_text":"Program and network terms apply.",
+      "settlement_time_text":"Program and banking rails dependent.",
+      "jurisdiction_restrictions":["Federal stablecoin, onboarding, jurisdiction, and distribution restrictions apply."],
+      "redemption_url":"https://usat.io/",
+      "as_of_date":"2026-06-26",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_usat_launch_batch_p","sog_src_usat_site_batch_p","sog_src_usat_unveil_batch_p"]
+    }
+  },
+  {
+    "id":"sog_st_eurau",
+    "reserve_profile":{
+      "backing_types":["cash","bank_deposits","mixed"],
+      "summary":"AllUnity describes EURAU as fully reserved under MiCAR, with reserve-bank and safeguarding arrangements requiring report-level normalization.",
+      "disclosure_status":"official_micar_and_reserve_context",
+      "as_of_date":"2026-06-26",
+      "latest_report_id":"sog_rr_eurau_context_batch_p",
+      "confidence":"high",
+      "evidence_ids":["sog_src_eurau_launch_batch_p","sog_src_eurau_site_batch_p","sog_src_eurau_license_batch_p"]
+    },
+    "redemption_profile":{
+      "status":"eligible_customers_only",
+      "settlement_asset":"EUR",
+      "eligible_parties":"Onboarded institutional customers and approved partners under AllUnity terms.",
+      "retail_access":"partner_or_market_based",
+      "institutional_access":"approved_customer_direct",
+      "minimum_amount_text":"Program terms dependent.",
+      "fee_text":"Issuer and distribution terms apply.",
+      "settlement_time_text":"Banking rails and program terms dependent.",
+      "jurisdiction_restrictions":["MiCAR, onboarding, jurisdiction, safeguarding, and distribution restrictions apply."],
+      "redemption_url":"https://allunity.com/eurau/",
+      "as_of_date":"2026-06-26",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_eurau_site_batch_p","sog_src_eurau_license_batch_p","sog_src_eurau_tradevest_batch_p"]
+    }
+  },
+  {
+    "id":"sog_st_nobleusdn",
+    "reserve_profile":{
+      "backing_types":["government_securities","tokenized_fund"],
+      "summary":"Official Noble documentation describes full backing through short-term U.S. Treasury-bill exposure inherited from M0's M asset.",
+      "disclosure_status":"official_protocol_and_collateral_context",
+      "as_of_date":"2026-06-26",
+      "latest_report_id":"sog_rr_nobleusdn_context_batch_p",
+      "confidence":"high",
+      "evidence_ids":["sog_src_nobleusdn_launch_batch_p","sog_src_nobleusdn_overview_batch_p","sog_src_nobleusdn_architecture_batch_p"]
+    },
+    "redemption_profile":{
+      "status":"protocol_based",
+      "settlement_asset":"M_or_supported_stablecoin_liquidity",
+      "eligible_parties":"Users and integrators of supported Noble and M0 conversion routes.",
+      "retail_access":"protocol_based_subject_to_access",
+      "institutional_access":"protocol_or_partner_based",
+      "minimum_amount_text":"Protocol transaction dependent.",
+      "fee_text":"Protocol, bridge, integrator, and network terms apply.",
+      "settlement_time_text":"Protocol, bridge, and liquidity dependent.",
+      "jurisdiction_restrictions":["Network, protocol, bridge, integrator, jurisdiction, and liquidity restrictions may apply."],
+      "redemption_url":"https://noble.xyz/usdn",
+      "as_of_date":"2026-06-26",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_nobleusdn_overview_batch_p","sog_src_nobleusdn_architecture_batch_p","sog_src_nobleusdn_site_batch_p"]
+    }
+  },
+  {
+    "id":"sog_st_usdh",
+    "reserve_profile":{
+      "backing_types":["cash","government_securities","tokenized_fund","mixed"],
+      "summary":"Official material describes 1:1 reserves managed across off-chain and on-chain structures with monthly attestations.",
+      "disclosure_status":"monthly_attestation_and_live_reserve_context",
+      "as_of_date":"2026-06-26",
+      "latest_report_id":"sog_rr_usdh_context_batch_p",
+      "confidence":"high",
+      "evidence_ids":["sog_src_usdh_reserves_batch_p","sog_src_usdh_overview_batch_p","sog_src_usdh_migration_batch_p"]
+    },
+    "redemption_profile":{
+      "status":"restricted",
+      "settlement_asset":"USD_or_USDC",
+      "eligible_parties":"Approved institutional users and supported migration or liquidity routes.",
+      "retail_access":"market_based_during_migration",
+      "institutional_access":"approved_participant_direct",
+      "minimum_amount_text":"Program and migration terms dependent.",
+      "fee_text":"Issuer, migration, network, and liquidity terms apply.",
+      "settlement_time_text":"Banking rails, migration, and liquidity dependent.",
+      "jurisdiction_restrictions":["Migration, onboarding, issuer, network, and liquidity restrictions apply."],
+      "redemption_url":"https://docs.usdh.com/usdh/minting",
+      "as_of_date":"2026-06-26",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_usdh_minting_batch_p","sog_src_usdh_migration_batch_p","sog_src_usdh_about_batch_p"]
+    }
+  },
+  {
+    "id":"sog_st_aecoin",
+    "reserve_profile":{
+      "backing_types":["unknown"],
+      "summary":"Official material states one AEC targets one AED, while complete reserve, safeguarding, banking, and attestation details remain unresolved.",
+      "disclosure_status":"official_regulatory_and_product_context_reserve_details_pending",
+      "as_of_date":"2026-06-26",
+      "latest_report_id":"sog_rr_aecoin_context_batch_p",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_aecoin_site_batch_p","sog_src_aecoin_whitepaper_batch_p","sog_src_aecoin_cbuae_batch_p"]
+    },
+    "redemption_profile":{
+      "status":"eligible_customers_only",
+      "settlement_asset":"AED",
+      "eligible_parties":"Institutional customers and end users served through authorized agents under applicable terms.",
+      "retail_access":"authorized_agent_based",
+      "institutional_access":"issuer_and_agent_based",
+      "minimum_amount_text":"Agent terms dependent.",
+      "fee_text":"Issuer and appointed-agent terms apply.",
+      "settlement_time_text":"Agent, banking, and settlement rails dependent.",
+      "jurisdiction_restrictions":["CBUAE, agent, onboarding, jurisdiction, and payment-token restrictions apply."],
+      "redemption_url":"https://aecoin.com/",
+      "as_of_date":"2026-06-26",
+      "confidence":"medium",
+      "evidence_ids":["sog_src_aecoin_site_batch_p","sog_src_aecoin_privacy_batch_p","sog_src_aecoin_whitepaper_batch_p"]
+    }
+  }
+]
