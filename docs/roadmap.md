@@ -11,47 +11,50 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #145 — Audit mStable USD launch history
-Latest merged commit: e750081fc183aa2c44932f5e077c36f52d9257bd
-Current work: mUSD canonical quality implementation
-Canonical conclusion: launch_date remains null
-Implementation result: deployment-readiness, candidate mainnet availability, and production-security boundaries normalized
-Next bounded review after merge: USK
+Latest merged PR: #146 — Implement mStable USD boundary chronology
+Latest merged commit: f56d7a2e1e86391ee75f2d01f0d406c693e31641
+Current work: USK launch and wind-down audit
+Launch conclusion: set launch_date to 2022-09-12
+Current-state conclusion: retain status limited and discontinued_date null
+Next operation after audit: USK canonical implementation
+Next bounded review after USK: VAI
 ```
 
-## mUSD audit checkpoint
+## USK audit checkpoint
 
 ```text
-2020-05-28 — Ethereum mUSD contract source verified
-2020-05-29 — contemporaneous mainnet-live record; original outbound statement not recovered
-2020-06-01 — secondary confirmation that the first protocol version was on mainnet
-2020-06-05 — official production-security program covers MINT, SWAP, REDEEM, and SAVE
-July 2020   — Save / imUSD is a later product boundary
+2022-08-08 — USK design and planned launch announced
+2022-08-19 — minting and liquidation workflow documented before launch
+2022-09-10 — first-party article explicitly describes the launch as upcoming
+2022-09-12 — Team Kujira states USK and ORCA launched that day
+2025-06-30 — Rujira transition announces USK wind-down
+2025-06-30 state — new debt disabled; existing positions repayment-only
+final terminal date — unresolved
 ```
 
 Decision:
 
 ```text
-mUSD launch_date remains null.
-2020-05-29 is the strongest recovered candidate.
-The primary-source threshold for a canonical day-level date is not met.
+launch_date: 2022-09-12
+status: limited
+discontinued_date: null
 ```
 
 Audit:
 
 ```text
-docs/audits/musd-launch-boundary-review.md
+docs/audits/usk-launch-and-winddown-review.md
 ```
 
-Canonical implementation result:
+Follow-up implementation:
 
-- official Ethereum mUSD address preserved
-- 2020-05-28 deployment-readiness boundary recorded
-- 2020-05-29 candidate mainnet-availability event added at medium confidence
-- 2020-06-05 production-security boundary added
-- Save and imUSD remain separate from the base mUSD launch
-- launch-specific known unknown added
-- mUSD remains in the unresolved queue
+- add the 2022-09-12 launch event
+- add the 2025-06-30 wind-down and repayment-only event
+- add first-party pre-launch, launch, and wind-down evidence
+- update the existing limited-status event and record notes
+- preserve final terminal date and successor-liability boundaries as known unknowns
+- remove USK from the unresolved launch queue
+- reduce the queue from 22 to 21 and Category C from 16 to 15
 
 ## Completed quality checkpoints
 
@@ -59,6 +62,7 @@ Canonical implementation result:
 DOLA — public launch 2021-02-25; implementation PR #140
 USD1 — launch null; deployment/introduction/testing normalized; PR #142
 MIM — launch null; introduction/deployment/liquidity/live-operation normalized; PR #144
+mUSD — launch null; contract verification/mainnet candidate/security boundary normalized; PR #146
 ```
 
 ## Production checkpoint
@@ -127,13 +131,20 @@ Reserve applicability queue:                12
 ### Launch-date queue
 
 ```text
-Total unresolved: 22
-Category B:         3
-Category C:        16
-Category D:         3
+Total unresolved before USK implementation: 22
+Category B:                                 3
+Category C:                                16
+Category D:                                 3
 ```
 
-mUSD remains in Category C. Contract verification and later confirmed operation do not establish a primary-source public-launch day.
+Expected after USK implementation:
+
+```text
+Total unresolved: 21
+Category B:         3
+Category C:        15
+Category D:         3
+```
 
 Remaining Category B records:
 
@@ -143,16 +154,15 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review:
+Next bounded review after USK implementation:
 
 ```text
-USK
+VAI
 ```
 
 Following quality wave:
 
 ```text
-VAI
 VCHF
 IRON
 ```
@@ -166,6 +176,8 @@ Dynamic Set Dollar
 Empty Set Dollar
 GYEN
 ```
+
+USK does not enter the terminal-date queue until a final end boundary is established. Its current state is an active wind-down with repayment available.
 
 ### Reserve-report applicability queue
 
@@ -186,13 +198,20 @@ EURT
 ## Full execution sequence
 
 ```text
-Phase 1 — mUSD bounded review
-1. Complete final CI and merge the mUSD implementation PR.
-2. Preserve launch_date as null and retain the 2020-05-29 candidate as non-canonical.
-3. Confirm that all temporary synchronization code is removed.
+Phase 1 — USK audit
+1. Complete CI and merge the USK audit PR.
+2. Preserve launch, wind-down, repayment-only, successor, and terminal boundaries separately.
+
+Phase 2 — USK canonical implementation
+3. Set launch_date to 2022-09-12.
+4. Retain status limited and discontinued_date null.
+5. Add launch and wind-down events plus Event v2 details.
+6. Add first-party evidence and update known unknowns.
+7. Remove USK from the unresolved launch queue.
+8. Synchronize baselines, generated outputs, README, audits, and roadmap.
+9. Run all six workflows and merge only after every check passes.
 
 Phase 3 — Continue launch-date quality wave
-9. Audit USK.
 10. Audit VAI.
 11. Audit VCHF.
 12. Audit IRON.
@@ -200,21 +219,22 @@ Phase 3 — Continue launch-date quality wave
 Phase 4 — Cross-queue maintenance
 13. Recheck HUSD and EURT only when durable product-specific evidence appears.
 14. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching evidence exists.
+15. Revisit USK terminal status only when the repayment and network end boundary is documented.
 
 Phase 5 — Controlled growth
-15. Promote no more than five complete records per batch.
-16. Publish and verify after each growth batch.
-17. Do not allow production to trail main by more than one growth batch.
+16. Promote no more than five complete records per batch.
+17. Publish and verify after each growth batch.
+18. Do not allow production to trail main by more than one growth batch.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the mUSD implementation PR.
-2. Report that launch_date remains null and queue counts remain 22 / C16.
-3. Start the bounded USK launch-boundary audit.
-4. Separate deployment, first issuance, interface availability, chain state, and successor-network boundaries.
-5. Do not mark USK migrated or terminated without authoritative evidence.
+1. Complete CI and merge the USK audit PR.
+2. Open the USK canonical implementation PR.
+3. Set launch_date only to the audited 2022-09-12 boundary.
+4. Record the 2025-06-30 wind-down without assigning a terminal date.
+5. Start VAI after the USK implementation passes all six workflows.
 ```
 
 ## Production policy
