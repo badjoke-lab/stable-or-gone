@@ -96,7 +96,7 @@
   },
   {
     "id": "sog_ev_usk_limited_status_batch_g",
-    "title": "USK recorded with limited current status",
+    "title": "USK remains limited during repayment-only wind-down",
     "subject_stablecoin_ids": [
       "sog_st_usk"
     ],
@@ -106,7 +106,8 @@
     "evidence_ids": [
       "sog_src_usk_overview_batch_g",
       "sog_src_usk_technical_batch_g",
-      "sog_src_usk_transparency_batch_g"
+      "sog_src_usk_transparency_batch_g",
+      "sog_src_usk_winddown_2025"
     ],
     "event_detail_kind": "other"
   },
@@ -130,5 +131,41 @@
         "sog_issuer_lista_dao"
       ]
     }
+  },
+  {
+    "id": "sog_ev_usk_2022_09_launch",
+    "title": "Kujira launches USK and ORCA",
+    "subject_stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "evidence_ids": [
+      "sog_src_usk_prelaunch_2022",
+      "sog_src_usk_launch_2022"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Team Kujira stated that USK and ORCA launched on 2022-09-12.",
+      "status": "limited_currently_winding_down",
+      "related_organization_ids": [
+        "sog_issuer_kujira"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_usk_winddown_2025",
+    "title": "Rujira announces USK wind-down and repayment-only state",
+    "subject_stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "evidence_ids": [
+      "sog_src_usk_winddown_2025"
+    ],
+    "event_detail_kind": "other"
   }
 ]

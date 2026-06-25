@@ -11,13 +11,12 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #146 — Implement mStable USD boundary chronology
-Latest merged commit: f56d7a2e1e86391ee75f2d01f0d406c693e31641
-Current work: USK launch and wind-down audit
-Launch conclusion: set launch_date to 2022-09-12
-Current-state conclusion: retain status limited and discontinued_date null
-Next operation after audit: USK canonical implementation
-Next bounded review after USK: VAI
+Latest merged PR: #147 — Audit USK launch and wind-down boundaries
+Latest merged commit: 2ce73c1233b459a2c32762d4b5eaff320b5ffcbf
+Current work: USK canonical implementation
+Launch result: launch_date set to 2022-09-12
+Current-state result: status limited; discontinued_date null; repayment-only wind-down recorded
+Next bounded review after merge: VAI
 ```
 
 ## USK audit checkpoint
@@ -46,15 +45,15 @@ Audit:
 docs/audits/usk-launch-and-winddown-review.md
 ```
 
-Follow-up implementation:
+Canonical implementation result:
 
-- add the 2022-09-12 launch event
-- add the 2025-06-30 wind-down and repayment-only event
-- add first-party pre-launch, launch, and wind-down evidence
-- update the existing limited-status event and record notes
-- preserve final terminal date and successor-liability boundaries as known unknowns
-- remove USK from the unresolved launch queue
-- reduce the queue from 22 to 21 and Category C from 16 to 15
+- 2022-09-12 launch event added
+- 2025-06-30 wind-down and repayment-only event added
+- first-party pre-launch, launch, and wind-down evidence added
+- existing limited-status event and record notes updated
+- final terminal date and successor-liability boundaries preserved as known unknowns
+- USK removed from the unresolved launch queue
+- queue reduced from 22 to 21 and Category C from 16 to 15
 
 ## Completed quality checkpoints
 
@@ -85,10 +84,10 @@ Quality-only work after the checkpoint does not trigger automatic production pub
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-134 events
-134 Event v2 detail records
-401 evidence records
-401 evidence relation projections
+136 events
+136 Event v2 detail records
+405 evidence records
+405 evidence relation projections
 90 reserve-report or reserve-context records
 202 known unknowns
 9 regulatory notes
@@ -118,7 +117,7 @@ Required-layer coverage:              82 / 82
 Event coverage:                        82 / 82
 Deployment coverage:                   82 / 82
 Reserve-report context coverage:       70 / 82 informational
-Missing canonical launch dates:            22
+Missing canonical launch dates:            21
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -129,15 +128,6 @@ Reserve applicability queue:                12
 ## Queue state
 
 ### Launch-date queue
-
-```text
-Total unresolved before USK implementation: 22
-Category B:                                 3
-Category C:                                16
-Category D:                                 3
-```
-
-Expected after USK implementation:
 
 ```text
 Total unresolved: 21
@@ -154,7 +144,7 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review after USK implementation:
+Next bounded review:
 
 ```text
 VAI
@@ -230,11 +220,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the USK audit PR.
-2. Open the USK canonical implementation PR.
-3. Set launch_date only to the audited 2022-09-12 boundary.
-4. Record the 2025-06-30 wind-down without assigning a terminal date.
-5. Start VAI after the USK implementation passes all six workflows.
+1. Complete final CI and merge the USK implementation PR.
+2. Report the queue reduction to 21 total and Category C 15.
+3. Start the bounded VAI launch-boundary audit.
+4. Separate Venus protocol launch, first VAI issuance, stability-fee activation, and PSM boundaries.
+5. Do not substitute later feature activation for original public launch.
 ```
 
 ## Production policy

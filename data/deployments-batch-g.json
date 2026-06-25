@@ -87,13 +87,16 @@
     "is_primary": true,
     "mint_authority_type": "collateral_debt_position_contracts",
     "control_event_ids": [
+      "sog_ev_usk_winddown_2025",
       "sog_ev_usk_limited_status_batch_g"
     ],
-    "notes": "Legacy/native USK deployment recorded as restricted pending current chain and interface verification.",
+    "notes": "Native Kujira USK deployment launched on 2022-09-12. New debt and USK minting are disabled during the Rujira transition, while existing positions remain repayable. The final network and terminal boundary is unresolved.",
     "evidence_ids": [
       "sog_src_usk_overview_batch_g",
       "sog_src_usk_technical_batch_g",
-      "sog_src_usk_transparency_batch_g"
+      "sog_src_usk_transparency_batch_g",
+      "sog_src_usk_launch_2022",
+      "sog_src_usk_winddown_2025"
     ]
   }
 ]

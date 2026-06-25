@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 22,
+  "expected_total": 21,
   "category_counts": {
     "B": 3,
-    "C": 16,
+    "C": 15,
     "D": 3
   },
   "records": [
@@ -141,13 +141,6 @@
       "best_known_range": "2024-06",
       "reason_code": "partial_date_only",
       "review_note": "Official sources establish June 2024 only."
-    },
-    {
-      "stablecoin_id": "sog_st_usk",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Deployment, first issuance, and app availability differ."
     },
     {
       "stablecoin_id": "sog_st_usyc",

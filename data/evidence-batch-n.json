@@ -592,5 +592,128 @@
       "mim_supply_and_liquidity"
     ],
     "notes": "First-party proposal states that the first lending market and LP incentives launched less than two weeks earlier and fixes LP reward start to 2021-06-05."
+  },
+  {
+    "id": "sog_src_usk_design_2022",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "Kujira USK stablecoin launch: Kickstarting grown-up DeFi",
+    "url": "https://medium.com/team-kujira/kujira-usk-stablecoin-launch-kickstarting-grown-up-defi-26b4372d7aef",
+    "publisher": "Team Kujira",
+    "published_at": "2022-08-08",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/team-kujira/kujira-usk-stablecoin-launch-kickstarting-grown-up-defi-26b4372d7aef",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "product_design_and_planned_launch",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "announcement",
+      "minting_design",
+      "collateral",
+      "liquidation_design"
+    ],
+    "notes": "First-party design and planned-launch article. It predates the canonical public launch."
+  },
+  {
+    "id": "sog_src_usk_prelaunch_2022",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": "sog_ev_usk_2022_09_launch",
+    "source_type": "official_blog",
+    "title": "What to Expect When USK Launches",
+    "url": "https://medium.com/team-kujira/what-to-expect-when-usk-launches-42ae87929d2",
+    "publisher": "Team Kujira",
+    "published_at": "2022-09-10",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/team-kujira/what-to-expect-when-usk-launches-42ae87929d2",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "explicit_prelaunch_boundary",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [
+      "sog_ev_usk_2022_09_launch"
+    ],
+    "claim_scopes": [
+      "prelaunch",
+      "planned_availability",
+      "initial_collateral"
+    ],
+    "notes": "First-party article published two days before launch and explicitly describing launch as upcoming."
+  },
+  {
+    "id": "sog_src_usk_launch_2022",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": "sog_ev_usk_2022_09_launch",
+    "source_type": "official_blog",
+    "title": "Weekly Roundup by Team Kujira — Episode 3",
+    "url": "https://medium.com/team-kujira/weekly-roundup-by-team-kujira-ep-3-d9f63dafdf9",
+    "publisher": "Team Kujira",
+    "published_at": "2022-09-12",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/team-kujira/weekly-roundup-by-team-kujira-ep-3-d9f63dafdf9",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "same_day_public_launch",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [
+      "sog_ev_usk_2022_09_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "usk_launch",
+      "orca_launch",
+      "public_minting"
+    ],
+    "notes": "First-party same-day statement that USK and ORCA launched on 2022-09-12."
+  },
+  {
+    "id": "sog_src_usk_winddown_2025",
+    "stablecoin_id": "sog_st_usk",
+    "issuer_id": "sog_issuer_kujira",
+    "event_id": "sog_ev_usk_winddown_2025",
+    "source_type": "official_statement",
+    "title": "Introduction to the Merge",
+    "url": "https://medium.com/rujiranetwork/introduction-to-the-merge-f52a277a3c3c",
+    "publisher": "Rujira",
+    "published_at": "2025-06-30",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/rujiranetwork/introduction-to-the-merge-f52a277a3c3c",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "usk_wind_down_and_repayment_only_state",
+    "stablecoin_ids": [
+      "sog_st_usk"
+    ],
+    "organization_ids": [
+      "sog_issuer_kujira"
+    ],
+    "event_ids": [
+      "sog_ev_usk_winddown_2025",
+      "sog_ev_usk_limited_status_batch_g"
+    ],
+    "claim_scopes": [
+      "wind_down",
+      "interest_increase",
+      "repayment_only",
+      "new_debt_disabled",
+      "network_transition"
+    ],
+    "notes": "First-party Rujira statement. It does not establish the final USK terminal date."
   }
 ]

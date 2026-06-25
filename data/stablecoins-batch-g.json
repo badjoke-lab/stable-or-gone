@@ -126,18 +126,18 @@
     "peg_asset": "USD",
     "collateral_model": "overcollateralized_cosmos_vaults",
     "reserve_disclosure_status": "onchain_protocol_transparency",
-    "redemption_status": "protocol_position_repayment_and_market_exit",
-    "who_can_redeem": "Vault borrowers may repay USK to release collateral where the relevant Kujira contracts and interfaces remain operational; other holders depend on available market liquidity.",
-    "retail_redemption": "protocol_or_market_availability_dependent",
-    "institutional_redemption": "protocol_or_market_availability_dependent",
+    "redemption_status": "repayment_only_wind_down",
+    "who_can_redeem": "Existing USK debt positions may be repaid to release collateral while Kujira debt products remain in repayment-only mode. Other holders depend on available market liquidity and supported transition routes.",
+    "retail_redemption": "repayment_or_market_availability_dependent",
+    "institutional_redemption": "repayment_or_market_availability_dependent",
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Current access depends on Kujira-chain and front-end availability, collateral-vault state, and successor ecosystem infrastructure.",
-    "redemption_notes": "Official documentation describes overcollateralized minting, but the current unrestricted minting and successor-network status is not sufficiently resolved to classify USK as fully active.",
-    "launch_date": null,
+    "redemption_notes": "Rujira announced an orderly USK wind-down. New USK debt is disabled, existing debt remains repayable, and the final terminal or successor-liability boundary is unresolved.",
+    "launch_date": "2022-09-12",
     "discontinued_date": null,
-    "summary": "Kujira's overcollateralized Cosmos stablecoin, soft-pegged to the U.S. dollar and backed by multiple collateral vaults, currently classified as limited pending current-state verification.",
-    "confidence": "medium",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch G promotion with conservative limited status."
+    "summary": "Kujira overcollateralized USD stablecoin launched on September 12, 2022, now in an orderly repayment-only wind-down during the Rujira transition.",
+    "confidence": "high",
+    "last_verified_at": "2026-06-25",
+    "notes": "Canonical launch follows Team Kujira’s same-day September 12, 2022 launch statement. Rujira announced the USK wind-down on 2025-06-30 and stated that USK minting and other debt products were repayment-only. Status remains limited and discontinued_date remains null until a final end boundary is established."
   }
 ]
