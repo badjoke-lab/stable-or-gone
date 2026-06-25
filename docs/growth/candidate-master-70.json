@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "status": "batch_016_promotion_complete",
+  "status": "batch_017_research_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -8,12 +8,13 @@
     "data/candidate-stable-assets-growth-80.json",
     "data/candidate-stable-assets-emergency-msusd.json",
     "data/candidate-stable-assets-emergency-jpysc.json",
-    "data/candidate-stable-assets-growth-85.json"
+    "data/candidate-stable-assets-growth-85.json",
+    "data/candidate-stable-assets-growth-90.json"
   ],
   "protected_minimums": {
-    "total_candidates": 87,
+    "total_candidates": 92,
     "promoted_candidates": 87,
-    "pending_candidates": 0
+    "pending_candidates": 5
   },
   "planned_batches": {
     "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
@@ -26,7 +27,8 @@
     "batch_013": {"minimum_candidates": 5, "theme": "current reserve-backed, collateralized, ecosystem-native, and delta-neutral protocol stablecoins"},
     "batch_014": {"minimum_candidates": 1, "theme": "emergency incident record"},
     "batch_015": {"minimum_candidates": 1, "theme": "time-sensitive regulated stablecoin launch"},
-    "batch_016": {"minimum_candidates": 5, "theme": "current bank, enterprise, ecosystem-native, and yield-bearing USD assets"}
+    "batch_016": {"minimum_candidates": 5, "theme": "current bank, enterprise, ecosystem-native, and yield-bearing USD assets"},
+    "batch_017": {"minimum_candidates": 5, "theme": "current regulated, regional, ecosystem-native, and yield-bearing stablecoins"}
   },
   "promotion_policy": {
     "candidate_is_not_canonical": true,
@@ -44,6 +46,9 @@
     "batch_015_is_time_sensitive_launch_exception": true,
     "batch_016_research_complete": true,
     "batch_016_promotion_complete": true,
+    "batch_017_research_complete": true,
+    "batch_017_full_layer_draft_complete": false,
+    "batch_017_promotion_complete": false,
     "ordinary_growth_remains_blocked": false
   }
 }
