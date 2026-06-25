@@ -21,45 +21,59 @@ Every roadmap-changing PR must update this file. Every merge report must state t
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #139 — Audit DOLA launch boundary
-Latest merged commit: 4cb2f9f27ba8aef40794f25d8eb331bc5f2eaa97
-Current PR: #140 — Resolve DOLA launch boundary
-Current phase: canonical quality implementation
-Canonical result: DOLA launch fixed to 2021-02-25
-Next bounded work after merge: USD1 launch-boundary audit
+Latest merged PR: #140 — Resolve DOLA launch boundary
+Latest merged commit: d7ea9cb79a03bc0911423652926ea9a034ded1f1
+Current work: USD1 bounded launch-boundary audit
+Canonical launch conclusion: keep launch_date null
+Resolved implementation target: normalize deployments and dated introduction/testing events
+Next bounded review after USD1 implementation: MIM
 ```
 
-## DOLA audit checkpoint
+## USD1 audit checkpoint
 
-The bounded review separates the following boundaries:
+Reviewed boundaries:
 
 ```text
-2021-02-23 — canonical Ethereum token contract creation
-2021-02-25 — Anchor public launch under the protocol now called Frontier
-2021-02-25 — original public DOLA issuance boundary supported by first-party documentation
-exact first mint — unresolved
-late 2022 — FiRM launch and backing-model transition
+2025-01-28 04:01:35 UTC — Ethereum contract creation
+2025-01-28 04:03:41 UTC — BNB Smart Chain contract creation
+March 2025              — early issuance and market-maker testing
+2025-03-25              — first-party plans-to-launch announcement
+2025-03-28              — BitGo launch-infrastructure article
+2025-04-07              — official airdrop test proposed before broader market access
+April 2025              — first-party retrospective launch period
+current                 — broad availability confirmed by undated current documentation
 ```
 
 Audit conclusion:
 
 ```text
-Canonical DOLA launch_date: 2021-02-25
-Contract deployment remains a separate 2021-02-23 boundary
-FiRM is a later protocol/model boundary, not the original DOLA launch
+USD1 launch_date remains null.
+January 28 is deployment, not public launch.
+March 25 is introduction and planned launch, not completed public access.
+April 7 is a testing boundary before broader market access.
+First-party evidence supports April 2025 only at month level.
 ```
 
 Audit file:
 
 ```text
-docs/audits/dola-launch-boundary-review.md
+docs/audits/usd1-launch-boundary-review.md
 ```
+
+Follow-up canonical implementation must:
+
+- normalize the official Ethereum and BNB Smart Chain contract addresses
+- record both January 28 deployment boundaries
+- add the March 25 introduction event
+- add the April 7 testing event
+- preserve the April 2025 best-known range without coercing a day
+- keep USD1 in the unresolved launch queue
 
 ## Production checkpoint
 
 ```text
 Result: PASS
-Canonical records: 82
+Canonical records in production: 82
 Production commit: 835a00d5cd2db48c0a0ede3394cf265dec919813
 Verification workflow run: 27908380603
 Successful verification job: 83360065881
@@ -68,7 +82,7 @@ Audit: docs/audits/registry-82-production-parity.md
 
 The successful production publication includes the 82-record registry, the GENIUS Act guide, the MiCA guide, the JPYC versus JPYSC guide, related-guide discovery, Updates, sitemap integration, and machine-readable public files.
 
-PR #140 is a quality-only change and does not increase the stable-asset count or trigger automatic production publication.
+DOLA and USD1 quality work does not increase the stable-asset count or trigger automatic production publication.
 
 ## Current canonical registry
 
@@ -131,7 +145,7 @@ Category C:        16
 Category D:         3
 ```
 
-DOLA is no longer in the queue. Its public launch is fixed to 2021-02-25 while exact first mint remains a known unknown.
+USD1 remains in Category C after the bounded audit. The audit resolves deployment and testing chronology but not one day-level public launch.
 
 Remaining Category B records:
 
@@ -147,21 +161,19 @@ Launch-date policy:
 - do not coerce month or year into a canonical date
 - do not use exchange listings as the default launch boundary
 - do not substitute a rebrand or later protocol version for the original launch
-- preserve predecessor, legacy deployment, and unresolved migration boundaries explicitly
+- preserve predecessor, legacy deployment, testing, and unresolved migration boundaries explicitly
 - keep `launch_date: null` when the exact public boundary remains unresolved
-- separate contract deployment from public availability
-- preserve exact first mint as unresolved when the canonical public launch can be established independently
+- separate contract deployment, introduction, testing, first issuance, and public availability
 
-Next bounded launch-date review:
+Next bounded launch-date review after USD1 implementation:
 
 ```text
-USD1
+MIM
 ```
 
 Following quality wave:
 
 ```text
-MIM
 mUSD
 USK
 VAI
@@ -208,6 +220,11 @@ PR #132 — Site-wide guide integration — merged
 PR #133 — Completion checkpoint — merged
 PR #134 — Publication dates — merged
 PR #135 — Registry 82 production parity — merged
+PR #136 — Production build metadata repair — merged
+PR #137 — Build marker validation repair — merged
+PR #138 — Rerun checkout validation repair — merged
+PR #139 — DOLA audit — merged
+PR #140 — DOLA canonical implementation — merged
 Production publication — PASS
 ```
 
@@ -219,51 +236,54 @@ MiCA and Stablecoins:       2026-06-25
 JPYC vs JPYSC:              2026-06-25
 ```
 
-Publication-path repair history:
-
-```text
-PR #136 — Fix production build commit metadata — merged
-PR #137 — Align build marker validation with deployment source — merged
-PR #138 — Verify rerun builds against checked-out commit — merged
-```
-
 ## Full execution sequence
 
 ```text
-Phase 1 — Complete DOLA implementation
-1. Synchronize baselines, generated outputs, README, audits, and roadmap.
-2. Remove temporary synchronization workflow changes and helper script.
-3. Run all six CI workflows.
-4. Merge PR #140 only after every check passes.
+Phase 1 — USD1 bounded review
+1. Complete CI and merge the USD1 audit PR.
+2. Preserve launch_date as null.
+3. Preserve the distinction between deployment, testing, introduction, issuance, and public availability.
 
-Phase 2 — First launch-date quality wave
-5. Audit USD1 introduction, contract deployment, first issuance, testing, and public availability boundaries.
-6. Implement a date only if day-level primary or on-chain evidence supports the selected public boundary.
-7. Review MIM, mUSD, USK, VAI, VCHF, and IRON.
+Phase 2 — USD1 canonical quality implementation
+4. Normalize Ethereum and BNB Smart Chain addresses.
+5. Record both 2025-01-28 deployment boundaries.
+6. Add a dated 2025-03-25 introduction event and supporting evidence.
+7. Add a dated 2025-04-07 testing event and supporting evidence.
+8. Update the USD1 known unknown and queue note without reducing queue counts.
+9. Synchronize baselines, generated outputs, README, audits, and roadmap.
+10. Run all six CI workflows and merge only after every check passes.
 
-Phase 3 — Cross-queue maintenance
-8. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
-9. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
+Phase 3 — First launch-date quality wave
+11. Audit MIM.
+12. Audit mUSD.
+13. Audit USK.
+14. Audit VAI.
+15. Audit VCHF.
+16. Audit IRON.
 
-Phase 4 — Controlled growth
-10. Prepare a reviewed candidate master.
-11. Promote no more than five complete stable-asset records per batch.
-12. Publish and verify production after each growth batch.
-13. Do not allow production to trail main by more than one growth batch.
+Phase 4 — Cross-queue maintenance
+17. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
+18. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
 
-Phase 5 — Normal operating cycle
-14. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
-15. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
+Phase 5 — Controlled growth
+19. Prepare a reviewed candidate master.
+20. Promote no more than five complete stable-asset records per batch.
+21. Publish and verify production after each growth batch.
+22. Do not allow production to trail main by more than one growth batch.
+
+Phase 6 — Normal operating cycle
+23. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
+24. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge PR #140.
-2. Report DOLA implementation counts and queue reduction.
-3. Start the bounded USD1 launch-boundary audit.
-4. Do not force a USD1 date from the March 2025 month-level range alone.
-5. Separate introduction, deployment, first issuance, testing, and public availability.
+1. Complete CI and merge the USD1 audit PR.
+2. Report that canonical launch remains null and queue counts remain 22 / C16.
+3. Open the USD1 canonical quality implementation PR.
+4. Normalize deployment addresses and dates.
+5. Add introduction and testing events without mislabeling them as public launch.
 ```
 
 ## Production policy
@@ -301,7 +321,7 @@ The production backlog is cleared at the 82-record checkpoint.
 
 Controlled growth may resume only under these limits:
 
-- finish the DOLA implementation and first bounded quality wave
+- finish the first bounded quality wave
 - promote no more than five complete records per growth batch
 - run full CI for every batch
 - publish and verify after every growth batch
