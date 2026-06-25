@@ -13,6 +13,7 @@ data/issuers-batch-l.json
 data/issuers-batch-m.json
 data/issuers-batch-n.json
 data/issuers-batch-o.json
+data/issuers-batch-p.json
 `;
 void legacyIssuerRuntimeFiles;
 
