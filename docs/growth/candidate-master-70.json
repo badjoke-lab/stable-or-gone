@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "status": "batch_017_full_layer_draft_complete",
+  "status": "batch_017_promotion_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -13,8 +13,8 @@
   ],
   "protected_minimums": {
     "total_candidates": 92,
-    "promoted_candidates": 87,
-    "pending_candidates": 5
+    "promoted_candidates": 92,
+    "pending_candidates": 0
   },
   "planned_batches": {
     "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
@@ -48,7 +48,7 @@
     "batch_016_promotion_complete": true,
     "batch_017_research_complete": true,
     "batch_017_full_layer_draft_complete": true,
-    "batch_017_promotion_complete": false,
+    "batch_017_promotion_complete": true,
     "ordinary_growth_remains_blocked": false
   }
 }
