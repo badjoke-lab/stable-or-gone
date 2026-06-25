@@ -43,11 +43,11 @@
     "id": "sog_unk_iron_bnb_identity_batch_d",
     "stablecoin_id": "sog_st_iron",
     "issuer_id": "sog_issuer_iron_finance",
-    "topic": "bnb_chain_identity_and_outcome",
-    "description": "The BNB Chain IRON and STEEL deployment had separate market behavior from the Polygon IRON and TITAN system. Its complete contract identity and final lifecycle require separate verification.",
+    "topic": "bnb_contract_first_mint_and_final_lifecycle",
+    "description": "The original BSC public launch is fixed to 2021-03-06, but the complete BSC contract identity, exact first mint, supply history, and final deployment lifecycle are not normalized.",
     "severity": "medium",
-    "last_checked_at": "2026-06-14",
-    "notes": "Do not copy Polygon collapse metrics onto the BNB Chain deployment."
+    "last_checked_at": "2026-06-25",
+    "notes": "Do not copy Polygon contract identity or collapse metrics onto the BSC deployment."
   },
   {
     "id": "sog_unk_iron_residual_contracts_batch_d",
@@ -88,5 +88,15 @@
     "severity": "low",
     "last_checked_at": "2026-06-25",
     "notes": "Keep launch_date null. Do not substitute contract verification, secondary historical reporting, or later Save activation for a primary-source public-launch boundary."
+  },
+  {
+    "id": "sog_unk_iron_v1_v2_lineage_batch_d",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "topic": "v1_v2_token_and_liability_continuity",
+    "description": "Iron Finance launched a redesigned IRON v2 in August 2021 after stating that the stablecoin would be rebuilt from scratch. Token-contract continuity, holder migration, liability continuity, and the final v2 lifecycle are not normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-06-25",
+    "notes": "Do not treat the v2 launch as recovery of the original failed BSC or Polygon deployment without separate evidence."
   }
 ]

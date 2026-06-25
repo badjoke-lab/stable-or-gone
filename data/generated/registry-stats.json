@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-06-25T00:00:00.000Z",
-  "baseline_id": "sog_registry_v2_vchf_launch_2026_06_25",
+  "baseline_id": "sog_registry_v2_iron_launch_2026_06_25",
   "registry": {
     "stablecoins": 82,
     "organizations": 73,
     "relationships": 86,
     "classifications": 82,
     "profiles": 82,
-    "events": 138,
-    "event_details": 138,
-    "evidence": 409,
+    "events": 140,
+    "event_details": 140,
+    "evidence": 412,
     "reserve_reports": 90,
-    "known_unknowns": 202,
+    "known_unknowns": 203,
     "regulatory_notes": 9,
-    "deployments": 116,
+    "deployments": 117,
     "legal_profiles": 82,
     "stable_asset_relationships": 4,
     "reserve_components": 115,
@@ -165,6 +165,7 @@
       "Berachain": 1,
       "Bitcoin Omni Layer": 1,
       "BNB Chain": 4,
+      "BNB Smart Chain": 1,
       "Cardano": 1,
       "Celo": 1,
       "Ethereum": 69,
@@ -280,8 +281,8 @@
       "share": 0.113
     },
     "deployments_unknown_canonicality": {
-      "count": 67,
-      "share": 0.5776
+      "count": 68,
+      "share": 0.5812
     }
   }
 }

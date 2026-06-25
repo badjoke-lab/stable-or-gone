@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 19,
+  "expected_total": 18,
   "category_counts": {
     "B": 3,
-    "C": 13,
+    "C": 12,
     "D": 3
   },
   "records": [
@@ -71,13 +71,6 @@
       "best_known_range": null,
       "reason_code": "primary_source_not_found",
       "review_note": "No reliable issuer day-level launch source recovered."
-    },
-    {
-      "stablecoin_id": "sog_st_iron",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "network_rollout_conflict",
-      "review_note": "BSC, Polygon, and staged rollout boundaries differ."
     },
     {
       "stablecoin_id": "sog_st_mim",

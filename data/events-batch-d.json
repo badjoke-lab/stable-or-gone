@@ -48,7 +48,7 @@
     "failure_mechanism": "partially_collateralized_bank_run",
     "confidence": "high",
     "source_count": 3,
-    "notes": "The original Polygon and BNB Chain representations are treated as deployments of one failed historical entity."
+    "notes": "The terminal June 2021 event applies to the original Polygon IRON and TITAN design. The earlier BSC deployment and the later redesigned IRON v2 remain separate lifecycle boundaries."
   },
   {
     "id": "sog_ev_musd_2026_01_legacy_transition",
@@ -100,5 +100,39 @@
     "confidence": "high",
     "source_count": 1,
     "notes": "This confirms production functionality by June 5 and remains separate from the unresolved original public-launch day."
+  },
+  {
+    "id": "sog_ev_iron_2021_03_bsc_launch",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "event_type": "launch",
+    "event_date": "2021-03-06",
+    "title": "Iron Finance launches the original IRON protocol on BSC",
+    "description": "Iron Finance launched the original partially collateralized IRON protocol on Binance Smart Chain, with public minting, redemption, liquidity, and an initial fully collateralized rollout phase.",
+    "impact_level": "high",
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "confidence": "high",
+    "source_count": 1,
+    "notes": "This is the earliest public launch of the IRON entity. Exact BSC contract identity and first mint remain unresolved."
+  },
+  {
+    "id": "sog_ev_iron_2021_05_polygon_launch",
+    "stablecoin_id": "sog_st_iron",
+    "issuer_id": "sog_issuer_iron_finance",
+    "event_type": "launch",
+    "event_date": "2021-05-18",
+    "title": "Iron Finance launches a separate IRON deployment on Polygon",
+    "description": "Iron Finance expanded to Polygon with a separate IRON token collateralized by USDC and TITAN rather than bridging the original BSC token set.",
+    "impact_level": "high",
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "network_expansion",
+    "confidence": "high",
+    "source_count": 1,
+    "notes": "This is a later chain deployment, not the original entity-level launch. The Polygon deployment became the principal June 2021 collapse case."
   }
 ]

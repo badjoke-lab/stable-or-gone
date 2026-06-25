@@ -11,13 +11,13 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #152 — Implement VCHF launch date
-Latest merged commit: 1582f2844b5390d161e6454fb00d14d540f3f37d
-Current work: IRON bounded launch and lineage audit
-Launch conclusion: set launch_date to 2021-03-06
-Terminal state: retain failed and discontinued_date 2021-06-16
-Next operation after audit: IRON canonical implementation
-Next phase after IRON: cross-queue maintenance, then controlled growth
+Latest merged PR: #153 — Audit IRON launch boundary
+Latest merged commit: 98276eef87b1b334ba3f929000d2903f7723ae79
+Current work: IRON canonical implementation
+Launch result: launch_date set to 2021-03-06
+Terminal state: failed with discontinued_date 2021-06-16
+Quality-wave result: first bounded launch-date wave complete
+Next phase after merge: cross-queue maintenance, then controlled growth
 ```
 
 ## IRON audit checkpoint
@@ -44,16 +44,16 @@ Audit:
 docs/audits/iron-launch-boundary-review.md
 ```
 
-Implementation requirements:
+Canonical implementation result:
 
-- add the 2021-03-06 BSC launch event
-- add the 2021-05-18 Polygon deployment event
-- preserve the June 16 collapse event
-- add first-party BSC launch and Polygon expansion evidence
-- preserve IRON v2 as a later redesigned-product boundary
-- update known unknowns for BSC identity, first mint, Polygon deployment, and v1/v2 continuity
-- remove IRON from the unresolved launch queue
-- reduce the queue from 19 to 18 and Category C from 13 to 12
+- 2021-03-06 BSC launch event added
+- 2021-05-18 Polygon deployment event added
+- June 16 collapse event preserved
+- first-party BSC launch, Polygon expansion, and v2 evidence added
+- IRON v2 preserved as a later redesigned-product boundary
+- BSC deployment and v1/v2 lineage unknowns updated
+- IRON removed from the unresolved launch queue
+- queue reduced from 19 to 18 and Category C from 13 to 12
 
 ## Completed quality checkpoints
 
@@ -87,14 +87,14 @@ Quality-only work after the checkpoint does not trigger automatic production pub
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-138 events
-138 Event v2 detail records
-409 evidence records
-409 evidence relation projections
+140 events
+140 Event v2 detail records
+412 evidence records
+412 evidence relation projections
 90 reserve-report or reserve-context records
-202 known unknowns
+203 known unknowns
 9 regulatory notes
-116 deployments
+117 deployments
 82 legal profiles
 4 stable-asset relationships
 115 reserve components
@@ -116,7 +116,7 @@ Integrity audit warnings:                  3 non-blocking source-count mismatche
 Required-layer coverage:              82 / 82
 Event coverage:                        82 / 82
 Deployment coverage:                   82 / 82
-Missing canonical launch dates:            19
+Missing canonical launch dates:            18
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
 ```
@@ -124,15 +124,6 @@ Reserve applicability queue:                12
 ## Queue state
 
 ### Launch-date queue
-
-```text
-Total unresolved before IRON implementation: 19
-Category B:                                  3
-Category C:                                 13
-Category D:                                  3
-```
-
-Expected after IRON implementation:
 
 ```text
 Total unresolved: 18
@@ -169,19 +160,10 @@ EURT
 ## Full execution sequence
 
 ```text
-Phase 1 — IRON audit
-1. Complete CI and merge the IRON audit PR.
+Phase 1 — Complete the first launch-date quality wave
+1. Complete final CI and merge the IRON implementation PR.
 2. Preserve BSC launch, Polygon deployment, collapse, and v2 redesign as separate boundaries.
-
-Phase 2 — IRON canonical implementation
-3. Set launch_date to 2021-03-06.
-4. Retain failed status and discontinued_date 2021-06-16.
-5. Add BSC launch and Polygon deployment events plus Event v2 details.
-6. Add first-party launch and expansion evidence.
-7. Update deployments and known unknowns.
-8. Remove IRON from the unresolved launch queue.
-9. Synchronize baselines, generated outputs, README, audits, and roadmap.
-10. Run all six workflows and merge only after every check passes.
+3. Confirm temporary synchronization code is removed.
 
 Phase 3 — Cross-queue maintenance
 11. Recheck HUSD and EURT only when durable product-specific reserve evidence appears.
@@ -198,11 +180,11 @@ Phase 4 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the IRON audit PR.
-2. Open the IRON canonical implementation PR.
-3. Set launch_date only to the original 2021-03-06 BSC boundary.
-4. Keep Polygon deployment, June collapse, and August v2 redesign separate.
-5. Complete the first launch-date quality wave, then move to cross-queue maintenance.
+1. Complete final CI and merge the IRON implementation PR.
+2. Report the queue reduction to 18 total and Category C 12.
+3. Audit HUSD and EURT reserve-source recovery status as the first cross-queue maintenance batch.
+4. Recheck BAC, DSD, and ESD terminal dates only if new primary evidence exists.
+5. Resume controlled growth after the cross-queue checkpoint.
 ```
 
 ## Production policy
