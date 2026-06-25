@@ -11,13 +11,54 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #156 — Add reserve source context
-Latest merged commit: 02b1b9baf9b8c1a37d0787506ffa4e135a91f8a6
-Completed phases: first launch-date quality wave and reserve-source cross-queue maintenance
-Current work: terminal-date checkpoint
-Terminal result: BAC, DSD, ESD, and GYEN remain unresolved
-Next phase after merge: controlled growth in batches of no more than five records
-Publication requirement: manual publish and parity verification after each growth batch
+Latest merged PR: #157 — Record terminal-date checkpoint
+Latest merged commit: 59d6abc1960578f9f281522e23b7d85a0bfe7c29
+Completed phases: launch-date wave, reserve-source checkpoint, and terminal-date checkpoint
+Current work: Batch 16 candidate research
+Candidate result: 5 accepted candidates; canonical assets remain 82
+Next operation after merge: complete full-layer drafts and open the canonical promotion PR
+Publication requirement: manual publish and parity verification after canonical promotion
+```
+
+## Batch 16 candidate checkpoint
+
+```text
+Accepted candidates: 5
+Canonical promotions: 0
+Canonical stable assets: 82
+Target batch: batch_016
+```
+
+Selected candidates:
+
+```text
+United Stables U
+USDGO
+SoFiUSD / SOFID
+Solstice USX
+Origin Dollar / OUSD
+```
+
+Identity boundaries:
+
+- Solstice USX is separate from the existing dForce USX record.
+- SoFiUSD is the brand and SOFID is the token symbol for one asset.
+- Future SoFi tokenized deposits are separate legal products.
+- OUSD is separate from wrapped OUSD and other Origin yield products.
+- Base U and USDGO are separate from exchange rewards, staking positions, or reserve income.
+
+Deferred from this batch:
+
+- YLDS — official material defines it as a registered fixed-income security rather than a stablecoin; retain for a separate stablecoin-adjacent scope review.
+- Blast USDB — bridged and rebasing identity requires a dedicated bridge-liability and underlying-asset review.
+- UXD — current backing model and lifecycle require a deeper protocol-state review before promotion.
+
+Research files:
+
+```text
+data/candidate-stable-assets-growth-85.json
+data/candidate-research-batch-16.json
+scripts/validate-batch16-research.mjs
 ```
 
 ## Terminal-date checkpoint
@@ -175,37 +216,40 @@ These queues remain explicit research backlogs. They no longer block controlled 
 ## Controlled growth sequence
 
 ```text
-Phase 1 — Candidate master
-1. Read the existing reviewed candidate and pending-candidate files.
-2. Exclude duplicates, out-of-scope projects, and thin records.
-3. Select no more than five candidates that can support complete canonical layers.
-4. Record why every scanned candidate was selected, deferred, or rejected.
+Phase 1 — Candidate master complete
+1. Five accepted candidates are fixed in Batch 16 research.
+2. Symbol and identity collisions are explicitly disambiguated.
+3. Deferred records retain separate scope decisions.
 
-Phase 2 — Growth batch
-5. Add complete stable-asset, organization, relationship, classification, reserve/redemption, event, evidence, deployment, legal, reserve-component, and income-profile layers as applicable.
+Phase 2 — Full-layer draft
+4. Draft stable-asset, organization, relationship, classification, reserve/redemption, event, evidence, deployment, legal, reserve-component, and income-profile layers for all five candidates.
+5. Resolve contract, issuer, reserve, redemption, and income boundaries before promotion.
 6. Add no placeholder reserve-report rows.
 7. Keep unreviewed candidates and private monitoring out of public files.
-8. Run all six workflows and merge only after every check passes.
 
-Phase 3 — Publication checkpoint
-9. Manually publish latest main through the approved GitHub Actions workflow.
-10. Verify deployed commit, public counts, canonical routes, machine-readable files, sitemap, and consistency.
-11. Record production parity before starting the next growth batch.
+Phase 3 — Canonical promotion
+8. Promote all five only after the complete draft passes review.
+9. Run all six workflows and merge only after every check passes.
 
-Phase 4 — Normal operating cycle
-12. Alternate one growth batch with two or three existing-record quality audits.
-13. Insert urgent incident, depeg, regulatory, wind-down, or redemption changes ahead of the routine queue.
-14. Never allow production to trail main by more than one growth batch.
+Phase 4 — Publication checkpoint
+10. Manually publish latest main through the approved GitHub Actions workflow.
+11. Verify deployed commit, public counts, canonical routes, machine-readable files, sitemap, and consistency.
+12. Record production parity before starting the next growth batch.
+
+Phase 5 — Normal operating cycle
+13. Alternate one growth batch with two or three existing-record quality audits.
+14. Insert urgent incident, depeg, regulatory, wind-down, or redemption changes ahead of the routine queue.
+15. Never allow production to trail main by more than one growth batch.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the terminal-date checkpoint PR.
-2. Build the first reviewed candidate master after the quality pause.
-3. Select no more than five complete candidates.
-4. Implement the first controlled growth batch.
-5. Manually publish and verify production parity after merge.
+1. Complete CI and merge the Batch 16 candidate-research PR.
+2. Build complete canonical drafts for the five accepted candidates.
+3. Resolve all blocking contract, issuer, reserve, redemption, and income boundaries.
+4. Implement Batch 16 in one bounded five-record promotion PR.
+5. Manually publish and verify production parity after canonical merge.
 ```
 
 ## Production policy
