@@ -21,53 +21,68 @@ Every roadmap-changing PR must update this file. Every merge report must state t
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #141 — Audit USD1 launch boundaries
-Latest merged commit: c2ecd9a537fb8a339e81c50bf79d0eb6f0b8a032
-Current work: USD1 canonical quality implementation
-Canonical launch conclusion: launch_date remains null
-Implementation result: deployments, introduction, and testing boundaries normalized
-Next bounded review after merge: MIM
+Latest merged PR: #142 — Implement USD1 deployment and testing boundaries
+Latest merged commit: 39304080bd5bb7019949f4b4ea24c99fe2b50058
+Current work: MIM bounded launch-boundary audit
+Canonical launch conclusion: keep launch_date null
+Resolved implementation target: introduction, deployment, liquidity incentive, and live-protocol chronology
+Next bounded review after MIM implementation: mUSD
 ```
 
-## USD1 audit checkpoint
-
-Reviewed boundaries:
+## MIM audit checkpoint
 
 ```text
-2025-01-28 04:01:35 UTC — Ethereum contract creation
-2025-01-28 04:03:41 UTC — BNB Smart Chain contract creation
-March 2025              — early issuance and market-maker testing
-2025-03-25              — first-party plans-to-launch announcement
-2025-03-28              — BitGo launch-infrastructure article
-2025-04-07              — official airdrop test proposed before broader market access
-April 2025              — first-party retrospective launch period
-current                 — broad availability confirmed by undated current documentation
+2021-05-05 — official Abracadabra, SPELL, and MIM introduction
+2021-05-25 — Ethereum MIM contract creation
+late May / early June 2021 — first lending market activation; exact day unresolved
+2021-06-02 — MIM/3CRV factory-pool creation
+2021-06-05 — LP staking rewards begin
+2021-06-11 — first-party proposal documents live public operation
 ```
 
 Audit conclusion:
 
 ```text
-USD1 launch_date remains null.
-January 28 is deployment, not public launch.
-March 25 is introduction and planned launch, not completed public access.
-April 7 is a testing boundary before broader market access.
-First-party evidence supports April 2025 only at month level.
+MIM launch_date remains null.
+May 5 is introduction, not proven public borrowing availability.
+May 25 is deployment, not proven public borrowing availability.
+June 2 and June 5 are liquidity and incentive boundaries.
+The exact first Cauldron, first issuance, and public UI day remain unresolved.
 ```
 
 Audit file:
 
 ```text
-docs/audits/usd1-launch-boundary-review.md
+docs/audits/mim-launch-boundary-review.md
 ```
 
-Canonical implementation result:
+Follow-up implementation:
 
-- official Ethereum and BNB Smart Chain contract addresses normalized
-- both January 28 deployment boundaries recorded
-- March 25 introduction event added
-- April 7 testing event added
-- April 2025 best-known range preserved without coercing a day
-- USD1 remains in the unresolved launch queue
+- preserve the official Ethereum MIM address
+- record the 2021-05-25 deployment boundary
+- add the 2021-05-05 introduction event
+- add the 2021-06-05 liquidity-incentive event
+- add first-party evidence that the protocol was already live by 2021-06-11
+- preserve a late-May-to-early-June best-known range without coercing a day
+- keep MIM in the unresolved launch queue
+
+## Completed quality checkpoints
+
+```text
+DOLA
+  public launch: 2021-02-25
+  Ethereum deployment: 2021-02-23
+  exact first mint: unresolved
+  implementation PR: #140
+
+USD1
+  public launch: null
+  Ethereum and BNB deployments: 2025-01-28
+  introduction: 2025-03-25
+  airdrop testing: 2025-04-07
+  best-known range: 2025-04
+  implementation PR: #142
+```
 
 ## Production checkpoint
 
@@ -80,9 +95,7 @@ Successful verification job: 83360065881
 Audit: docs/audits/registry-82-production-parity.md
 ```
 
-The successful production publication includes the 82-record registry, the GENIUS Act guide, the MiCA guide, the JPYC versus JPYSC guide, related-guide discovery, Updates, sitemap integration, and machine-readable public files.
-
-DOLA and USD1 quality work does not increase the stable-asset count or trigger automatic production publication.
+The successful production publication includes the 82-record registry and the three dated guides. DOLA, USD1, and MIM quality work does not increase the stable-asset count or trigger automatic production publication.
 
 ## Current canonical registry
 
@@ -145,7 +158,7 @@ Category C:        16
 Category D:         3
 ```
 
-USD1 remains in Category C after the bounded audit. The audit resolves deployment and testing chronology but not one day-level public launch.
+MIM remains in Category C. The audit resolves introduction, deployment, liquidity, and live-operation chronology but not one day-level public launch.
 
 Remaining Category B records:
 
@@ -157,24 +170,21 @@ Anzen USDz
 
 Launch-date policy:
 
-- require day-level primary evidence
-- do not coerce month or year into a canonical date
+- require day-level primary or on-chain evidence
+- do not coerce month or year into a date
 - do not use exchange listings as the default launch boundary
-- do not substitute a rebrand or later protocol version for the original launch
-- preserve predecessor, legacy deployment, testing, and unresolved migration boundaries explicitly
+- do not substitute contract deployment, testing, liquidity incentives, a rebrand, or a later version for the original launch
 - keep `launch_date: null` when the exact public boundary remains unresolved
-- separate contract deployment, introduction, testing, first issuance, and public availability
 
-Next bounded launch-date review:
+Next bounded review after MIM implementation:
 
 ```text
-MIM
+mUSD
 ```
 
 Following quality wave:
 
 ```text
-mUSD
 USK
 VAI
 VCHF
@@ -212,19 +222,10 @@ EURT — product-specific reserve scope not recovered from consolidated Tether r
 ## Guide and publication checkpoint
 
 ```text
-PR #128 — Japan canonical update — merged
-PR #129 — Guides framework and GENIUS Act — merged
-PR #130 — MiCA — merged
-PR #131 — JPYC versus JPYSC — merged
-PR #132 — Site-wide guide integration — merged
-PR #133 — Completion checkpoint — merged
-PR #134 — Publication dates — merged
-PR #135 — Registry 82 production parity — merged
-PR #136 — Production build metadata repair — merged
-PR #137 — Build marker validation repair — merged
-PR #138 — Rerun checkout validation repair — merged
-PR #139 — DOLA audit — merged
-PR #140 — DOLA canonical implementation — merged
+PR #128–#135 — guides and 82-record production checkpoint — merged
+PR #136–#138 — production publication-path repairs — merged
+PR #139–#140 — DOLA audit and implementation — merged
+PR #141–#142 — USD1 audit and implementation — merged
 Production publication — PASS
 ```
 
@@ -239,43 +240,46 @@ JPYC vs JPYSC:              2026-06-25
 ## Full execution sequence
 
 ```text
-Phase 1 — Complete USD1 implementation
-1. Synchronize baselines, generated outputs, README, audits, and roadmap.
-2. Remove temporary synchronization code.
-3. Run all six CI workflows.
-4. Merge the USD1 implementation PR only after every check passes.
+Phase 1 — MIM bounded review
+1. Complete CI and merge the MIM audit PR.
+2. Preserve launch_date as null.
+3. Preserve introduction, deployment, first Cauldron, first issuance, liquidity, incentives, and UI boundaries separately.
 
-Phase 2 — Continue launch-date quality wave
-5. Audit MIM Cauldron deployment, first issuance, announcement, and UI availability boundaries.
-6. Audit mUSD.
-7. Audit USK.
-8. Audit VAI.
-9. Audit VCHF.
-10. Audit IRON.
+Phase 2 — MIM canonical quality implementation
+4. Record the 2021-05-25 Ethereum deployment boundary.
+5. Add the 2021-05-05 introduction event.
+6. Add the 2021-06-05 LP-incentive event.
+7. Add the 2021-06-11 live-protocol evidence.
+8. Add a launch-specific known unknown and update the queue note without reducing counts.
+9. Synchronize baselines, generated outputs, README, audits, and roadmap.
+10. Run all six CI workflows and merge only after every check passes.
 
-Phase 3 — Cross-queue maintenance
-11. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
-12. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
+Phase 3 — Continue launch-date quality wave
+11. Audit mUSD.
+12. Audit USK.
+13. Audit VAI.
+14. Audit VCHF.
+15. Audit IRON.
 
-Phase 4 — Controlled growth
-13. Prepare a reviewed candidate master.
-14. Promote no more than five complete stable-asset records per batch.
-15. Publish and verify production after each growth batch.
-16. Do not allow production to trail main by more than one growth batch.
+Phase 4 — Cross-queue maintenance
+16. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
+17. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
 
-Phase 5 — Normal operating cycle
-17. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
-18. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
+Phase 5 — Controlled growth
+18. Prepare a reviewed candidate master.
+19. Promote no more than five complete stable-asset records per batch.
+20. Publish and verify production after each growth batch.
+21. Do not allow production to trail main by more than one growth batch.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the USD1 implementation PR.
+1. Complete CI and merge the MIM audit PR.
 2. Report that launch_date remains null and queue counts remain 22 / C16.
-3. Start the bounded MIM launch-boundary audit.
-4. Separate Cauldron deployment, first issuance, announcement, and public UI availability.
-5. Do not substitute a later chain deployment or rebrand for the original MIM boundary.
+3. Open the MIM canonical quality implementation PR.
+4. Record introduction, deployment, and liquidity-incentive boundaries without labeling them as public launch.
+5. Start mUSD only after the MIM implementation passes all six workflows.
 ```
 
 ## Production policy
