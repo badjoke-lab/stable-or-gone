@@ -60,14 +60,14 @@
     "stablecoin_id": "sog_st_vchf",
     "issuer_id": "sog_issuer_vnx_commodities",
     "event_type": "status_review",
-    "event_date": "2026-06-15",
-    "title": "VCHF remains active as a Swiss-franc-referencing token",
-    "description": "VNX continues to present VCHF as an active multichain Swiss-franc-referencing token available through issuer exchange routes.",
+    "event_date": "2026-06-25",
+    "title": "VCHF remains active after its 2022 launch and multichain expansion",
+    "description": "VCHF launched on December 15, 2022 and remains represented across multiple networks with issuer and market access documented separately from the original launch.",
     "impact_level": "medium",
     "confidence": "high",
-    "source_count": 3,
+    "source_count": 5,
     "event_status_effect": "active",
-    "notes": "Reserve composition remains a known unknown."
+    "notes": "The original launch is now separately fixed. Reserve composition and the complete multichain deployment map remain known unknowns."
   },
   {
     "id": "sog_ev_eurcv_2023_04_launch",
@@ -153,5 +153,22 @@
     "recovery_date": null,
     "failure_mechanism": "same_token_rebrand",
     "notes": "Identity continuity is explicit: agEUR remains a historical alias of EURA."
+  },
+  {
+    "id": "sog_ev_vchf_2022_12_launch",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "event_type": "launch",
+    "event_date": "2022-12-15",
+    "title": "VNX launches VNX Swiss Franc",
+    "description": "VNX announced the launch of VNX Euro and VNX Swiss Franc, with users able to trade, deposit, and withdraw the tokens through Emirex. The initial VCHF issuance was on Ethereum.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "product_launch",
+    "notes": "Later launches on Polygon, Avalanche, Stellar, Solana, Tezos, and other networks are separate deployment or distribution boundaries."
   }
 ]

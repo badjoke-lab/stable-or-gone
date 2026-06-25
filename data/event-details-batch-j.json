@@ -65,7 +65,7 @@
   },
   {
     "id": "sog_ev_vchf_active_batch_j",
-    "title": "VCHF remains active as a Swiss-franc-referencing token",
+    "title": "VCHF remains active after its 2022 launch and multichain expansion",
     "subject_stablecoin_ids": [
       "sog_st_vchf"
     ],
@@ -75,7 +75,9 @@
     "evidence_ids": [
       "sog_src_vchf_product_batch_j",
       "sog_src_vchf_license_batch_j",
-      "sog_src_vchf_exchange_batch_j"
+      "sog_src_vchf_exchange_batch_j",
+      "sog_src_vchf_launch_2022",
+      "sog_src_vchf_recap_2022"
     ],
     "event_detail_kind": "other"
   },
@@ -174,6 +176,28 @@
       ],
       "related_organization_ids": [
         "sog_issuer_angle"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_vchf_2022_12_launch",
+    "title": "VNX launches VNX Swiss Franc",
+    "subject_stablecoin_ids": [
+      "sog_st_vchf"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_vnx_commodities"
+    ],
+    "evidence_ids": [
+      "sog_src_vchf_launch_2022",
+      "sog_src_vchf_recap_2022"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "VNX launched VCHF on 2022-12-15 with original Ethereum issuance and user access through Emirex.",
+      "status": "active",
+      "related_organization_ids": [
+        "sog_issuer_vnx_commodities"
       ]
     }
   }

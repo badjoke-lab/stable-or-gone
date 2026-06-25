@@ -11,13 +11,12 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #150 — Implement VAI launch boundary
-Latest merged commit: 83a52866378bbba6e219893b3e038b2b6b734ca7
-Current work: VCHF bounded launch-boundary audit
-Launch conclusion: set launch_date to 2022-12-15
-Current-state conclusion: retain status active and discontinued_date null
-Next operation after audit: VCHF canonical implementation
-Next bounded review after VCHF: IRON
+Latest merged PR: #151 — Audit VCHF launch date
+Latest merged commit: 4cfbf3ced51c82b96c66adcedce0ae06e1ecbde0
+Current work: VCHF canonical implementation
+Launch result: launch_date set to 2022-12-15
+Current-state result: status active; discontinued_date null
+Next bounded review after merge: IRON
 ```
 
 ## VCHF audit checkpoint
@@ -44,15 +43,15 @@ Audit:
 docs/audits/vchf-launch-boundary-review.md
 ```
 
-Follow-up implementation:
+Canonical implementation result:
 
-- add the 2022-12-15 launch event and Event v2 launch detail
-- add first-party launch and year-end review evidence
-- update the Ethereum deployment note and evidence
-- preserve later chain launches as deployment boundaries
-- replace the launch unknown with exact first issuance and distribution unknowns
-- remove VCHF from the unresolved launch queue
-- reduce the queue from 20 to 19 and Category C from 14 to 13
+- 2022-12-15 launch event and Event v2 launch detail added
+- first-party launch and year-end review evidence added
+- Ethereum deployment note and evidence updated
+- later chain launches preserved as deployment boundaries
+- exact first issuance and distribution retained as known unknowns
+- VCHF removed from the unresolved launch queue
+- queue reduced from 20 to 19 and Category C from 14 to 13
 
 ## Completed quality checkpoints
 
@@ -85,10 +84,10 @@ Quality-only work after the checkpoint does not trigger automatic production pub
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-137 events
-137 Event v2 detail records
-407 evidence records
-407 evidence relation projections
+138 events
+138 Event v2 detail records
+409 evidence records
+409 evidence relation projections
 90 reserve-report or reserve-context records
 202 known unknowns
 9 regulatory notes
@@ -118,7 +117,7 @@ Required-layer coverage:              82 / 82
 Event coverage:                        82 / 82
 Deployment coverage:                   82 / 82
 Reserve-report context coverage:       70 / 82 informational
-Missing canonical launch dates:            20
+Missing canonical launch dates:            19
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -129,15 +128,6 @@ Reserve applicability queue:                12
 ## Queue state
 
 ### Launch-date queue
-
-```text
-Total unresolved before VCHF implementation: 20
-Category B:                                   3
-Category C:                                  14
-Category D:                                   3
-```
-
-Expected after VCHF implementation:
 
 ```text
 Total unresolved: 19
@@ -154,7 +144,7 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review after VCHF implementation:
+Next bounded review:
 
 ```text
 IRON
@@ -190,18 +180,9 @@ EURT
 
 ```text
 Phase 1 — VCHF audit
-1. Complete CI and merge the VCHF audit PR.
+1. Complete final CI and merge the VCHF implementation PR.
 2. Preserve original launch and later chain-expansion boundaries separately.
-
-Phase 2 — VCHF canonical implementation
-3. Set launch_date to 2022-12-15.
-4. Retain status active and discontinued_date null.
-5. Add the launch event and Event v2 launch detail.
-6. Add first-party launch and retrospective evidence.
-7. Update the launch unknown and Ethereum deployment note.
-8. Remove VCHF from the unresolved launch queue.
-9. Synchronize baselines, generated outputs, README, audits, and roadmap.
-10. Run all six workflows and merge only after every check passes.
+3. Confirm temporary synchronization code is removed.
 
 Phase 3 — Complete the first launch-date quality wave
 11. Audit IRON.
@@ -221,11 +202,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the VCHF audit PR.
-2. Open the VCHF canonical implementation PR.
-3. Set launch_date only to the audited 2022-12-15 boundary.
-4. Preserve later chain launches and exact first issuance as separate boundaries.
-5. Start IRON after the VCHF implementation passes all six workflows.
+1. Complete final CI and merge the VCHF implementation PR.
+2. Report the queue reduction to 19 total and Category C 13.
+3. Start the bounded IRON launch-boundary audit.
+4. Separate BSC launch, Polygon deployment, staged minting, and public availability.
+5. Complete the first launch-date quality wave before controlled growth resumes.
 ```
 
 ## Production policy

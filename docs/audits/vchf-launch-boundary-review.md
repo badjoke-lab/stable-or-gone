@@ -2,11 +2,11 @@
 
 Recorded: 2026-06-25
 
-Result: LAUNCH RESOLVED
+Result: IMPLEMENTED — LAUNCH RESOLVED
 
 Stablecoin: `sog_st_vchf`
 
-Recommended canonical launch date: `2022-12-15`
+Current canonical launch date: `2022-12-15`
 
 ## Evidence
 
@@ -39,7 +39,7 @@ status: active
 discontinued_date: null
 ```
 
-## Implementation requirements
+## Implementation result
 
 1. Set VCHF `launch_date` to `2022-12-15`.
 2. Add a dated launch event and Event v2 launch detail.

@@ -1,7 +1,93 @@
 [
-{"id":"sog_dep_eura_ethereum_batch_j","stablecoin_id":"sog_st_eura","chain":"Ethereum","deployment_type":"protocol_native_token","token_standard":"ERC-20","contract_address":null,"status":"active","canonicality":"native","is_primary":true,"mint_authority_type":"protocol_governed_mint_and_redeem","notes":"Primary EURA deployment; additional networks remain a known unknown.","evidence_ids":["sog_src_eura_docs_batch_j","sog_src_eura_stablecoins_batch_j"]},
-{"id":"sog_dep_eurcv_ethereum_batch_j","stablecoin_id":"sog_st_eurcv","chain":"Ethereum","deployment_type":"issuer_native_fiat_token","token_standard":"ERC-20","contract_address":null,"status":"active","canonicality":"issuer_native","is_primary":true,"mint_authority_type":"verified_issuer_mint_and_redeem","notes":"Primary EURCV deployment.","evidence_ids":["sog_src_eurcv_product_batch_j","sog_src_eurcv_reserves_batch_j"]},
-{"id":"sog_dep_euri_ethereum_batch_j","stablecoin_id":"sog_st_euri","chain":"Ethereum","deployment_type":"issuer_native_fiat_token","token_standard":"ERC-20","contract_address":null,"status":"active","canonicality":"issuer_native","is_primary":true,"mint_authority_type":"verified_issuer_mint_and_redeem","notes":"Primary EURI deployment; BNB Chain remains outside this initial row.","evidence_ids":["sog_src_euri_product_batch_j","sog_src_euri_reserves_batch_j"]},
-{"id":"sog_dep_eurq_ethereum_batch_j","stablecoin_id":"sog_st_eurq","chain":"Ethereum","deployment_type":"issuer_native_fiat_token","token_standard":"ERC-20","contract_address":null,"status":"active","canonicality":"issuer_native","is_primary":true,"mint_authority_type":"verified_issuer_mint_and_redeem","notes":"Primary EURQ deployment.","evidence_ids":["sog_src_eurq_product_batch_j","sog_src_eurq_reserves_batch_j"]},
-{"id":"sog_dep_vchf_ethereum_batch_j","stablecoin_id":"sog_st_vchf","chain":"Ethereum","deployment_type":"issuer_native_fiat_token","token_standard":"ERC-20","contract_address":null,"status":"active","canonicality":"issuer_native","is_primary":true,"mint_authority_type":"verified_issuer_mint_and_exchange","notes":"Initial VCHF deployment coverage; complete multichain map remains pending.","evidence_ids":["sog_src_vchf_product_batch_j","sog_src_vchf_exchange_batch_j"]}
+  {
+    "id": "sog_dep_eura_ethereum_batch_j",
+    "stablecoin_id": "sog_st_eura",
+    "chain": "Ethereum",
+    "deployment_type": "protocol_native_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "protocol_governed_mint_and_redeem",
+    "notes": "Primary EURA deployment; additional networks remain a known unknown.",
+    "evidence_ids": [
+      "sog_src_eura_docs_batch_j",
+      "sog_src_eura_stablecoins_batch_j"
+    ]
+  },
+  {
+    "id": "sog_dep_eurcv_ethereum_batch_j",
+    "stablecoin_id": "sog_st_eurcv",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_fiat_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "verified_issuer_mint_and_redeem",
+    "notes": "Primary EURCV deployment.",
+    "evidence_ids": [
+      "sog_src_eurcv_product_batch_j",
+      "sog_src_eurcv_reserves_batch_j"
+    ]
+  },
+  {
+    "id": "sog_dep_euri_ethereum_batch_j",
+    "stablecoin_id": "sog_st_euri",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_fiat_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "verified_issuer_mint_and_redeem",
+    "notes": "Primary EURI deployment; BNB Chain remains outside this initial row.",
+    "evidence_ids": [
+      "sog_src_euri_product_batch_j",
+      "sog_src_euri_reserves_batch_j"
+    ]
+  },
+  {
+    "id": "sog_dep_eurq_ethereum_batch_j",
+    "stablecoin_id": "sog_st_eurq",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_fiat_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "verified_issuer_mint_and_redeem",
+    "notes": "Primary EURQ deployment.",
+    "evidence_ids": [
+      "sog_src_eurq_product_batch_j",
+      "sog_src_eurq_reserves_batch_j"
+    ]
+  },
+  {
+    "id": "sog_dep_vchf_ethereum_batch_j",
+    "stablecoin_id": "sog_st_vchf",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_fiat_token",
+    "token_standard": "ERC-20",
+    "contract_address": null,
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "verified_issuer_mint_and_exchange",
+    "notes": "Original VCHF Ethereum issuance was publicly launched on 2022-12-15. Exact first issuance transaction and the complete later multichain deployment map remain unresolved.",
+    "evidence_ids": [
+      "sog_src_vchf_product_batch_j",
+      "sog_src_vchf_exchange_batch_j",
+      "sog_src_vchf_launch_2022",
+      "sog_src_vchf_recap_2022"
+    ],
+    "control_event_ids": [
+      "sog_ev_vchf_2022_12_launch",
+      "sog_ev_vchf_active_batch_j"
+    ]
+  }
 ]

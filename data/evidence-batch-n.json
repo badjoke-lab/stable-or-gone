@@ -776,5 +776,66 @@
       "supported_collateral"
     ],
     "notes": "First-party same-day launch statement that Venus mainnet was live and users could mint VAI through the public application."
+  },
+  {
+    "id": "sog_src_vchf_launch_2022",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "event_id": "sog_ev_vchf_2022_12_launch",
+    "source_type": "official_blog",
+    "title": "VNX launches Europe’s first tokens referencing fiat currencies",
+    "url": "https://medium.com/@vnx/vnx-launches-europes-first-tokens-referencing-fiat-currencies-with-an-underlying-gold-base-value-26867d197042",
+    "publisher": "VNX",
+    "published_at": "2022-12-15",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/@vnx/vnx-launches-europes-first-tokens-referencing-fiat-currencies-with-an-underlying-gold-base-value-26867d197042",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "same_day_product_launch_and_public_access",
+    "stablecoin_ids": [
+      "sog_st_vchf"
+    ],
+    "organization_ids": [
+      "sog_issuer_vnx_commodities"
+    ],
+    "event_ids": [
+      "sog_ev_vchf_2022_12_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "vchf_identity",
+      "emirex_access",
+      "trade_deposit_withdraw"
+    ],
+    "notes": "First-party same-day launch release for VEUR and VCHF."
+  },
+  {
+    "id": "sog_src_vchf_recap_2022",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "event_id": "sog_ev_vchf_2022_12_launch",
+    "source_type": "official_blog",
+    "title": "VNX’s Recap of 2022",
+    "url": "https://vnx.li/vnxs-recap-of-2022/",
+    "publisher": "VNX",
+    "published_at": "2022-12-27",
+    "archived_url": "https://web.archive.org/web/*/https://vnx.li/vnxs-recap-of-2022/",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "launch_retrospective_and_initial_deployment",
+    "stablecoin_ids": [
+      "sog_st_vchf"
+    ],
+    "organization_ids": [
+      "sog_issuer_vnx_commodities"
+    ],
+    "event_ids": [
+      "sog_ev_vchf_2022_12_launch"
+    ],
+    "claim_scopes": [
+      "december_2022_launch",
+      "ethereum_issuance",
+      "emirex_listing"
+    ],
+    "notes": "First-party year-end review corroborating December launch and original Ethereum issuance."
   }
 ]

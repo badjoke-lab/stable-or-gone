@@ -1,12 +1,102 @@
 [
-{"id":"sog_ku_eura_contract_lineage_batch_j","stablecoin_id":"sog_st_eura","issuer_id":"sog_issuer_angle","topic":"ageur_to_eura_contract_lineage","description":"The agEUR to EURA rebrand is treated as one identity, but every historical contract and migration step is not normalized here.","severity":"medium","last_checked_at":"2026-06-15","notes":"Avoid creating a duplicate asset record."},
-{"id":"sog_ku_eura_complete_deployments_batch_j","stablecoin_id":"sog_st_eura","issuer_id":"sog_issuer_angle","topic":"complete_network_and_contract_map","description":"EURA is multichain, but only the primary Ethereum deployment is recorded in this batch.","severity":"medium","last_checked_at":"2026-06-15","notes":"Additional deployments remain pending."},
-{"id":"sog_ku_eurcv_holder_scope_batch_j","stablecoin_id":"sog_st_eurcv","issuer_id":"sog_issuer_sg_forge","topic":"permitted_holder_and_distribution_scope","description":"Current holder eligibility and partner distribution routes may change and are not exhaustively normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Keep current legal restrictions under review."},
-{"id":"sog_ku_eurcv_complete_deployments_batch_j","stablecoin_id":"sog_st_eurcv","issuer_id":"sog_issuer_sg_forge","topic":"complete_network_and_contract_map","description":"Every current EURCV deployment and contract version is not normalized in this batch.","severity":"medium","last_checked_at":"2026-06-15","notes":"Initial deployment coverage records Ethereum only."},
-{"id":"sog_ku_euri_distribution_scope_batch_j","stablecoin_id":"sog_st_euri","issuer_id":"sog_issuer_banking_circle","topic":"current_distribution_and_cdd_scope","description":"Public materials establish redemption rights, but detailed customer eligibility and distribution arrangements may change.","severity":"medium","last_checked_at":"2026-06-15","notes":"Do not generalize issuer access to all secondary-market holders."},
-{"id":"sog_ku_euri_complete_deployments_batch_j","stablecoin_id":"sog_st_euri","issuer_id":"sog_issuer_banking_circle","topic":"complete_network_and_contract_map","description":"Ethereum and BNB Chain are documented, but this batch records only the primary Ethereum deployment.","severity":"medium","last_checked_at":"2026-06-15","notes":"Additional deployment normalization remains pending."},
-{"id":"sog_ku_eurq_partner_routes_batch_j","stablecoin_id":"sog_st_eurq","issuer_id":"sog_issuer_quantoz_payments","topic":"partner_distribution_and_redemption_routes","description":"Current partner-based acquisition and redemption routes are not exhaustively normalized.","severity":"medium","last_checked_at":"2026-06-15","notes":"Issuer terms remain the primary reference."},
-{"id":"sog_ku_eurq_complete_deployments_batch_j","stablecoin_id":"sog_st_eurq","issuer_id":"sog_issuer_quantoz_payments","topic":"complete_network_and_contract_map","description":"Every current EURQ deployment and contract version is not normalized in this batch.","severity":"medium","last_checked_at":"2026-06-15","notes":"Initial deployment coverage records Ethereum only."},
-{"id":"sog_ku_vchf_reserve_composition_batch_j","stablecoin_id":"sog_st_vchf","issuer_id":"sog_issuer_vnx_commodities","topic":"exact_reserve_composition_and_holder_claim","description":"Official product materials establish CHF reference and exchange access, but exact reserve composition and holder claim structure are not normalized.","severity":"high","last_checked_at":"2026-06-15","notes":"Reserve category remains unknown."},
-{"id":"sog_ku_vchf_complete_deployments_batch_j","stablecoin_id":"sog_st_vchf","issuer_id":"sog_issuer_vnx_commodities","topic":"complete_network_and_contract_map","description":"VCHF is described as multichain, but this batch records only an initial Ethereum deployment.","severity":"medium","last_checked_at":"2026-06-15","notes":"Full contract map remains pending."}
+  {
+    "id": "sog_ku_eura_contract_lineage_batch_j",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "topic": "ageur_to_eura_contract_lineage",
+    "description": "The agEUR to EURA rebrand is treated as one identity, but every historical contract and migration step is not normalized here.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Avoid creating a duplicate asset record."
+  },
+  {
+    "id": "sog_ku_eura_complete_deployments_batch_j",
+    "stablecoin_id": "sog_st_eura",
+    "issuer_id": "sog_issuer_angle",
+    "topic": "complete_network_and_contract_map",
+    "description": "EURA is multichain, but only the primary Ethereum deployment is recorded in this batch.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Additional deployments remain pending."
+  },
+  {
+    "id": "sog_ku_eurcv_holder_scope_batch_j",
+    "stablecoin_id": "sog_st_eurcv",
+    "issuer_id": "sog_issuer_sg_forge",
+    "topic": "permitted_holder_and_distribution_scope",
+    "description": "Current holder eligibility and partner distribution routes may change and are not exhaustively normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Keep current legal restrictions under review."
+  },
+  {
+    "id": "sog_ku_eurcv_complete_deployments_batch_j",
+    "stablecoin_id": "sog_st_eurcv",
+    "issuer_id": "sog_issuer_sg_forge",
+    "topic": "complete_network_and_contract_map",
+    "description": "Every current EURCV deployment and contract version is not normalized in this batch.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Initial deployment coverage records Ethereum only."
+  },
+  {
+    "id": "sog_ku_euri_distribution_scope_batch_j",
+    "stablecoin_id": "sog_st_euri",
+    "issuer_id": "sog_issuer_banking_circle",
+    "topic": "current_distribution_and_cdd_scope",
+    "description": "Public materials establish redemption rights, but detailed customer eligibility and distribution arrangements may change.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Do not generalize issuer access to all secondary-market holders."
+  },
+  {
+    "id": "sog_ku_euri_complete_deployments_batch_j",
+    "stablecoin_id": "sog_st_euri",
+    "issuer_id": "sog_issuer_banking_circle",
+    "topic": "complete_network_and_contract_map",
+    "description": "Ethereum and BNB Chain are documented, but this batch records only the primary Ethereum deployment.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Additional deployment normalization remains pending."
+  },
+  {
+    "id": "sog_ku_eurq_partner_routes_batch_j",
+    "stablecoin_id": "sog_st_eurq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "partner_distribution_and_redemption_routes",
+    "description": "Current partner-based acquisition and redemption routes are not exhaustively normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Issuer terms remain the primary reference."
+  },
+  {
+    "id": "sog_ku_eurq_complete_deployments_batch_j",
+    "stablecoin_id": "sog_st_eurq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "complete_network_and_contract_map",
+    "description": "Every current EURQ deployment and contract version is not normalized in this batch.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-15",
+    "notes": "Initial deployment coverage records Ethereum only."
+  },
+  {
+    "id": "sog_ku_vchf_reserve_composition_batch_j",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "topic": "exact_reserve_composition_and_holder_claim",
+    "description": "Official product materials establish CHF reference and exchange access, but exact reserve composition and holder claim structure are not normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-06-15",
+    "notes": "Reserve category remains unknown."
+  },
+  {
+    "id": "sog_ku_vchf_complete_deployments_batch_j",
+    "stablecoin_id": "sog_st_vchf",
+    "issuer_id": "sog_issuer_vnx_commodities",
+    "topic": "exact_first_issuance_and_complete_network_map",
+    "description": "The public VCHF launch is fixed to 2022-12-15 and original Ethereum issuance is established, but the exact first issuance transaction, initial distribution sequence, and complete canonical or bridged multichain contract map are not normalized.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-25",
+    "notes": "The unresolved first issuance and later deployment map do not override the documented public launch boundary."
+  }
 ]
