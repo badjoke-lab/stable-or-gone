@@ -95,8 +95,11 @@ assert(version.data?.data_schema_version === 'sog_registry_v2', 'data schema mis
 assert(isDeepStrictEqual(version.data?.record_counts, expectedCounts), 'version record counts do not match canonical data');
 assert(isDeepStrictEqual(version.data?.record_count_breakdown, expectedBreakdown), 'version breakdown does not match canonical data');
 assert(version.data?.records_last_reviewed_at === expectedLastReviewedAt, 'records_last_reviewed_at mismatch');
-if (process.env.GITHUB_SHA) assert(version.build.commit === process.env.GITHUB_SHA, 'build commit does not match GITHUB_SHA');
-if (process.env.GITHUB_REF_NAME) assert(version.build.branch === process.env.GITHUB_REF_NAME, 'build branch does not match GITHUB_REF_NAME');
+
+const expectedBuildCommit = process.env.SOG_BUILD_COMMIT || process.env.GITHUB_SHA;
+const expectedBuildBranch = process.env.SOG_BUILD_BRANCH || process.env.GITHUB_REF_NAME;
+if (expectedBuildCommit) assert(version.build.commit === expectedBuildCommit, `build commit ${version.build.commit} does not match expected ${expectedBuildCommit}`);
+if (expectedBuildBranch) assert(version.build.branch === expectedBuildBranch, `build branch ${version.build.branch} does not match expected ${expectedBuildBranch}`);
 
 assert(manifest.schema_version === version.schema_version, 'manifest schema mismatch');
 assert(manifest.project_id === version.project_id, 'manifest project mismatch');
