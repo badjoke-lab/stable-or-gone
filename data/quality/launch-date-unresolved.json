@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-25",
+  "frozen_at": "2026-06-26",
   "source_review": "docs/audits/remaining-launch-date-review.md",
   "policy": {
     "canonical_day_required": true,
@@ -9,138 +9,28 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 18,
-  "category_counts": {
-    "B": 3,
-    "C": 12,
-    "D": 3
-  },
+  "expected_total": 20,
+  "category_counts": {"B":3,"C":13,"D":4},
   "records": [
-    {
-      "stablecoin_id": "sog_st_agoraausd",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Ethereum contract deployment is fixed to 2024-07-07; first mint, approved access, and broad public availability remain unresolved."
-    },
-    {
-      "stablecoin_id": "sog_st_brz",
-      "category": "B",
-      "best_known_range": "2019",
-      "reason_code": "partial_date_only",
-      "review_note": "First-party sources establish 2019 only."
-    },
-    {
-      "stablecoin_id": "sog_st_dsd",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "version_boundary_conflict",
-      "review_note": "Version, epoch, and distribution boundaries conflict."
-    },
-    {
-      "stablecoin_id": "sog_st_esd",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "version_boundary_conflict",
-      "review_note": "Deployment, epoch, and architecture boundaries conflict."
-    },
-    {
-      "stablecoin_id": "sog_st_eurt",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Announcement, issuance, listings, and deployments differ."
-    },
-    {
-      "stablecoin_id": "sog_st_gyen",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Issuance, availability, listings, and wind-down differ."
-    },
-    {
-      "stablecoin_id": "sog_st_honey",
-      "category": "B",
-      "best_known_range": "2025",
-      "reason_code": "partial_date_only",
-      "review_note": "No HONEY-specific day-level public launch statement recovered."
-    },
-    {
-      "stablecoin_id": "sog_st_husd",
-      "category": "D",
-      "best_known_range": null,
-      "reason_code": "primary_source_not_found",
-      "review_note": "No reliable issuer day-level launch source recovered."
-    },
-    {
-      "stablecoin_id": "sog_st_mim",
-      "category": "C",
-      "best_known_range": "2021-05 to 2021-06",
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "May 5 introduction, May 25 deployment, June 5 LP rewards, and live operation by June 11 are fixed; the exact first Cauldron, first issuance, and public UI day remain unresolved."
-    },
-    {
-      "stablecoin_id": "sog_st_msusd",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Announcement, issuance, deployment, and availability differ."
-    },
-    {
-      "stablecoin_id": "sog_st_musd",
-      "category": "C",
-      "best_known_range": "2020-05-29",
-      "reason_code": "primary_launch_source_not_recovered",
-      "review_note": "May 28 contract verification, the May 29 mainnet-live candidate, and June 5 official production-security coverage are fixed; the original first-party launch statement, exact creation transaction, and first permissionless mint remain unresolved."
-    },
-    {
-      "stablecoin_id": "sog_st_stablesusdx",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "Announcement, issuance, deployment, and approved access differ."
-    },
-    {
-      "stablecoin_id": "sog_st_susde",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "product_activation_conflict",
-      "review_note": "USDe launch and staking activation differ."
-    },
-    {
-      "stablecoin_id": "sog_st_tryb",
-      "category": "D",
-      "best_known_range": null,
-      "reason_code": "primary_source_not_found",
-      "review_note": "Current sources do not preserve the original launch day."
-    },
-    {
-      "stablecoin_id": "sog_st_usd1",
-      "category": "C",
-      "best_known_range": "2025-04",
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "January 28 deployments, March 25 introduction, and April 7 testing are fixed; a first-party retrospective establishes April 2025 only at month level, while first issuance and broader public availability remain unresolved."
-    },
-    {
-      "stablecoin_id": "sog_st_usdm",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "lineage_conflict",
-      "review_note": "Mento Dollar and earlier Celo-dollar history differ."
-    },
-    {
-      "stablecoin_id": "sog_st_usdz",
-      "category": "B",
-      "best_known_range": "2024-06",
-      "reason_code": "partial_date_only",
-      "review_note": "Official sources establish June 2024 only."
-    },
-    {
-      "stablecoin_id": "sog_st_usyc",
-      "category": "D",
-      "best_known_range": null,
-      "reason_code": "primary_source_not_found",
-      "review_note": "Current documents do not establish the original launch day."
-    }
+    {"stablecoin_id":"sog_st_agoraausd","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Ethereum contract deployment is fixed to 2024-07-07; first mint, approved access, and broad public availability remain unresolved."},
+    {"stablecoin_id":"sog_st_brz","category":"B","best_known_range":"2019","reason_code":"partial_date_only","review_note":"First-party sources establish 2019 only."},
+    {"stablecoin_id":"sog_st_dsd","category":"C","best_known_range":null,"reason_code":"version_boundary_conflict","review_note":"Version, epoch, and distribution boundaries conflict."},
+    {"stablecoin_id":"sog_st_esd","category":"C","best_known_range":null,"reason_code":"version_boundary_conflict","review_note":"Deployment, epoch, and architecture boundaries conflict."},
+    {"stablecoin_id":"sog_st_eurt","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Announcement, issuance, listings, and deployments differ."},
+    {"stablecoin_id":"sog_st_gyen","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Issuance, availability, listings, and wind-down differ."},
+    {"stablecoin_id":"sog_st_honey","category":"B","best_known_range":"2025","reason_code":"partial_date_only","review_note":"No HONEY-specific day-level public launch statement recovered."},
+    {"stablecoin_id":"sog_st_husd","category":"D","best_known_range":null,"reason_code":"primary_source_not_found","review_note":"No reliable issuer day-level launch source recovered."},
+    {"stablecoin_id":"sog_st_mim","category":"C","best_known_range":"2021-05 to 2021-06","reason_code":"launch_boundary_conflict","review_note":"May 5 introduction, May 25 deployment, June 5 LP rewards, and live operation by June 11 are fixed; the exact first Cauldron, first issuance, and public UI day remain unresolved."},
+    {"stablecoin_id":"sog_st_msusd","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Announcement, issuance, deployment, and availability differ."},
+    {"stablecoin_id":"sog_st_musd","category":"C","best_known_range":"2020-05-29","reason_code":"primary_launch_source_not_recovered","review_note":"May 28 contract verification, the May 29 mainnet-live candidate, and June 5 official production-security coverage are fixed; the original first-party launch statement, exact creation transaction, and first permissionless mint remain unresolved."},
+    {"stablecoin_id":"sog_st_stablesusdx","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Announcement, issuance, deployment, and approved access differ."},
+    {"stablecoin_id":"sog_st_susde","category":"C","best_known_range":null,"reason_code":"product_activation_conflict","review_note":"USDe launch and staking activation differ."},
+    {"stablecoin_id":"sog_st_tryb","category":"D","best_known_range":null,"reason_code":"primary_source_not_found","review_note":"Current sources do not preserve the original launch day."},
+    {"stablecoin_id":"sog_st_usd1","category":"C","best_known_range":"2025-04","reason_code":"launch_boundary_conflict","review_note":"January 28 deployments, March 25 introduction, and April 7 testing are fixed; a first-party retrospective establishes April 2025 only at month level, while first issuance and broader public availability remain unresolved."},
+    {"stablecoin_id":"sog_st_usdm","category":"C","best_known_range":null,"reason_code":"lineage_conflict","review_note":"Mento Dollar and earlier Celo-dollar history differ."},
+    {"stablecoin_id":"sog_st_usdz","category":"B","best_known_range":"2024-06","reason_code":"partial_date_only","review_note":"Official sources establish June 2024 only."},
+    {"stablecoin_id":"sog_st_usyc","category":"D","best_known_range":null,"reason_code":"primary_source_not_found","review_note":"Current documents do not establish the original launch day."},
+    {"stablecoin_id":"sog_st_usdh","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Product announcement, first mint, HyperCore activation, HyperEVM linking, and migration boundaries remain unresolved."},
+    {"stablecoin_id":"sog_st_aecoin","category":"D","best_known_range":null,"reason_code":"primary_source_not_found","review_note":"Current official and regulatory materials do not establish the exact first issuance or public circulation day."}
   ]
 }
