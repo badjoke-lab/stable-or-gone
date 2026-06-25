@@ -1,0 +1,7 @@
+[
+  {"candidate_id":"sog_cand_000088","status":"promoted","notes":"Promoted as sog_st_usat. Keep USA₮ separate from USD₮ / USDT and preserve Anchorage Digital Bank as the legal issuer."},
+  {"candidate_id":"sog_cand_000089","status":"promoted","notes":"Promoted as sog_st_eurau. AllUnity remains the legal issuer; shareholder, reserve-bank, custodian, liquidity, and distribution roles remain separate."},
+  {"candidate_id":"sog_cand_000090","status":"promoted","notes":"Promoted as sog_st_nobleusdn. Keep Noble Dollar separate from Neutrino USD, M0 M, vaults, points programs, and bridged representations."},
+  {"candidate_id":"sog_cand_000091","status":"promoted","notes":"Promoted as sog_st_usdh with limited / winding-down treatment while migration and final support boundaries remain unresolved."},
+  {"candidate_id":"sog_cand_000092","status":"promoted","notes":"Promoted as sog_st_aecoin. Keep AED Stablecoin LLC's issuer role separate from appointed custody, transfer, conversion, and end-customer agents."}
+]
