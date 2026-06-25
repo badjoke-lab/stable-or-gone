@@ -10,10 +10,15 @@
     "canonicality": "native",
     "is_primary": true,
     "mint_authority_type": "governance_authorized_feds",
-    "notes": "Official DOLA Ethereum mainnet contract.",
+    "control_event_ids": [
+      "sog_ev_dola_2021_02_launch"
+    ],
+    "notes": "Canonical DOLA Ethereum contract created on 2021-02-23. Contract deployment precedes the 2021-02-25 public Anchor and DOLA launch and does not establish the exact first mint.",
     "evidence_ids": [
       "sog_src_dola_docs_batch_g",
-      "sog_src_dola_llms_batch_g"
+      "sog_src_dola_llms_batch_g",
+      "sog_src_dola_ethereum_deployment_2021",
+      "sog_src_dola_anchor_launch_2021"
     ]
   },
   {
