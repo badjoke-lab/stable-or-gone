@@ -11,49 +11,49 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #147 — Audit USK launch and wind-down boundaries
-Latest merged commit: 2ce73c1233b459a2c32762d4b5eaff320b5ffcbf
-Current work: USK canonical implementation
-Launch result: launch_date set to 2022-09-12
-Current-state result: status limited; discontinued_date null; repayment-only wind-down recorded
-Next bounded review after merge: VAI
+Latest merged PR: #148 — Implement USK launch and wind-down chronology
+Latest merged commit: fe34fbaa1c6b4c28682c214941f937caadb6d983
+Current work: VAI bounded launch-boundary audit
+Launch conclusion: set launch_date to 2020-11-24
+Current-state conclusion: retain status active
+Next operation after audit: VAI canonical implementation
+Next bounded review after VAI: VCHF
 ```
 
-## USK audit checkpoint
+## VAI audit checkpoint
 
 ```text
-2022-08-08 — USK design and planned launch announced
-2022-08-19 — minting and liquidation workflow documented before launch
-2022-09-10 — first-party article explicitly describes the launch as upcoming
-2022-09-12 — Team Kujira states USK and ORCA launched that day
-2025-06-30 — Rujira transition announces USK wind-down
-2025-06-30 state — new debt disabled; existing positions repayment-only
-final terminal date — unresolved
+2020-10-17 — Venus alpha testnet launched; VAI minting still described as future beta functionality
+2020-11-24 — Venus mainnet launched and public VAI minting became available
+exact VAI contract deployment — unresolved in the reviewed source set
+exact first VAI mint — unresolved
+2023 — VAI Peg Stability Module introduced through later governance and deployment work
+current — collateralized VAI borrowing is restricted to eligible Prime users; PSM and market routes remain separate
 ```
 
 Decision:
 
 ```text
-launch_date: 2022-09-12
-status: limited
+launch_date: 2020-11-24
+status: active
 discontinued_date: null
 ```
 
 Audit:
 
 ```text
-docs/audits/usk-launch-and-winddown-review.md
+docs/audits/vai-launch-boundary-review.md
 ```
 
-Canonical implementation result:
+Follow-up implementation:
 
-- 2022-09-12 launch event added
-- 2025-06-30 wind-down and repayment-only event added
-- first-party pre-launch, launch, and wind-down evidence added
-- existing limited-status event and record notes updated
-- final terminal date and successor-liability boundaries preserved as known unknowns
-- USK removed from the unresolved launch queue
-- queue reduced from 22 to 21 and Category C from 16 to 15
+- add the 2020-11-24 public launch event
+- add first-party testnet and mainnet evidence
+- preserve exact deployment and first mint as known unknowns
+- keep later stability-fee and PSM changes separate from launch
+- update the BNB Chain deployment note and evidence
+- remove VAI from the unresolved launch queue
+- reduce the queue from 21 to 20 and Category C from 15 to 14
 
 ## Completed quality checkpoints
 
@@ -62,6 +62,7 @@ DOLA — public launch 2021-02-25; implementation PR #140
 USD1 — launch null; deployment/introduction/testing normalized; PR #142
 MIM — launch null; introduction/deployment/liquidity/live-operation normalized; PR #144
 mUSD — launch null; contract verification/mainnet candidate/security boundary normalized; PR #146
+USK — public launch 2022-09-12; repayment-only wind-down normalized; PR #148
 ```
 
 ## Production checkpoint
@@ -130,9 +131,18 @@ Reserve applicability queue:                12
 ### Launch-date queue
 
 ```text
-Total unresolved: 21
+Total unresolved before VAI implementation: 21
+Category B:                                  3
+Category C:                                 15
+Category D:                                  3
+```
+
+Expected after VAI implementation:
+
+```text
+Total unresolved: 20
 Category B:         3
-Category C:        15
+Category C:        14
 Category D:         3
 ```
 
@@ -144,16 +154,15 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review:
+Next bounded review after VAI implementation:
 
 ```text
-VAI
+VCHF
 ```
 
 Following quality wave:
 
 ```text
-VCHF
 IRON
 ```
 
@@ -188,21 +197,21 @@ EURT
 ## Full execution sequence
 
 ```text
-Phase 1 — USK audit
-1. Complete CI and merge the USK audit PR.
-2. Preserve launch, wind-down, repayment-only, successor, and terminal boundaries separately.
+Phase 1 — VAI audit
+1. Complete CI and merge the VAI audit PR.
+2. Preserve testnet, mainnet launch, first mint, stability-fee, PSM, and current-access boundaries separately.
 
-Phase 2 — USK canonical implementation
-3. Set launch_date to 2022-09-12.
-4. Retain status limited and discontinued_date null.
-5. Add launch and wind-down events plus Event v2 details.
-6. Add first-party evidence and update known unknowns.
-7. Remove USK from the unresolved launch queue.
-8. Synchronize baselines, generated outputs, README, audits, and roadmap.
-9. Run all six workflows and merge only after every check passes.
+Phase 2 — VAI canonical implementation
+3. Set launch_date to 2020-11-24.
+4. Retain status active and discontinued_date null.
+5. Add the launch event and Event v2 launch detail.
+6. Add first-party testnet and mainnet evidence.
+7. Update the launch known unknown and BNB Chain deployment note.
+8. Remove VAI from the unresolved launch queue.
+9. Synchronize baselines, generated outputs, README, audits, and roadmap.
+10. Run all six workflows and merge only after every check passes.
 
 Phase 3 — Continue launch-date quality wave
-10. Audit VAI.
 11. Audit VCHF.
 12. Audit IRON.
 
@@ -220,11 +229,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the USK implementation PR.
-2. Report the queue reduction to 21 total and Category C 15.
-3. Start the bounded VAI launch-boundary audit.
-4. Separate Venus protocol launch, first VAI issuance, stability-fee activation, and PSM boundaries.
-5. Do not substitute later feature activation for original public launch.
+1. Complete CI and merge the VAI audit PR.
+2. Open the VAI canonical implementation PR.
+3. Set launch_date only to the audited 2020-11-24 mainnet boundary.
+4. Preserve exact deployment and first mint as unresolved.
+5. Start VCHF after the VAI implementation passes all six workflows.
 ```
 
 ## Production policy
