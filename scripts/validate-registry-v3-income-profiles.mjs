@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -56,7 +57,7 @@ function stringArray(row, field) {
 }
 
 const manifest = readJson(manifestPath) ?? {};
-const baseline = readJson(baselinePath) ?? {};
+const baseline = loadRegistryV2Baseline(root);
 
 if (manifest.schema_version !== '3.0-income-profiles') fail(`${manifestPath}: invalid schema_version`);
 if (manifest.status !== 'additive') fail(`${manifestPath}: status must be additive`);
