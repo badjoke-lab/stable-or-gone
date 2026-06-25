@@ -27,7 +27,7 @@
     "validate:v3": "node scripts/validate-registry-v3-foundation-batch-o.mjs",
     "validate:deployments-v3": "node scripts/validate-registry-v3-deployments.mjs",
     "validate:income-v3": "node scripts/validate-registry-v3-income-profiles.mjs",
-    "validate:migration-v3": "node scripts/validate-registry-v3-migration-audit.mjs",
+    "validate:migration-v3": "node scripts/validate-registry-v3-migration-audit-batch-o.mjs",
     "validate:final": "node scripts/validate-registry-v2-final.mjs",
     "validate:finalization": "npm run validate:migration-v3 && node scripts/validate-batch-finalization.mjs",
     "validate:integrity": "node scripts/audit-registry-integrity-batch-o.mjs --check",
