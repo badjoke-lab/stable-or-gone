@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_016",
+  "reviewed_at": "2026-06-25",
+  "status": "accepted",
+  "canonical_assets": 82,
+  "policy": {
+    "canonical_write_allowed": false,
+    "manual_evidence_review_required": true,
+    "full_layer_draft_required": true,
+    "unsupported_day_precision_forbidden": true,
+    "identity_deduplication_required": true,
+    "symbol_collision_requires_disambiguation": true,
+    "production_record_parity_required": true
+  },
+  "records": [
+    {
+      "candidate_id": "sog_cand_000083",
+      "proposed_record_id": "sog_st_unitedu",
+      "name": "United Stables U",
+      "symbol": "U",
+      "slug": "united-stables-u",
+      "proposed_status": "active",
+      "launch_date": "2025-12-18",
+      "launch_precision": "day",
+      "identity_decision": "U is the base token issued by United Stables Limited. It must remain separate from exchange balances, incentive positions, and any future staking or wrapped representations.",
+      "backing_decision": "Official material describes reserves using cash, Treasury bills, and selected fiat-referenced stablecoins. Marketing statements about segregated custody must be reconciled with terms that disclaim holder ownership or preferential claims over reserves.",
+      "redemption_decision": "Direct minting and redemption are limited to approved Mint Users after KYB and wallet approval. Secondary-market holders do not automatically have direct issuer redemption rights.",
+      "income_decision": "No intrinsic holder yield is established for base U. Any rewards, staking, or platform incentives must be modeled separately.",
+      "deployment_decision": "The launch announcement identifies Ethereum and BNB Chain. Exact canonical contracts and audit coverage require direct verification.",
+      "primary_sources": [
+        "https://www.u.tech/",
+        "https://u.tech/terms/",
+        "https://www.globenewswire.com/news-release/2025/12/18/3207735/0/en/U-Stablecoin-Launches-on-BNB-%D0%A1hain-and-Ethereum-by-United-Stables.html"
+      ],
+      "blocking_unknowns": [
+        "exact reserve composition and custodian map",
+        "complete attestation archive",
+        "Ethereum and BNB contract identities",
+        "regulatory and legal-claim treatment by jurisdiction",
+        "current direct-redemption onboarding scope"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000084",
+      "proposed_record_id": "sog_st_usdgo",
+      "name": "USDGO",
+      "symbol": "USDGO",
+      "slug": "usdgo",
+      "proposed_status": "active",
+      "launch_date": "2026-02-10",
+      "launch_precision": "day",
+      "identity_decision": "USDGO is issued by Anchorage Digital Bank, while OSL acts as branding operator and distributor. Issuer, operator, distributor, and reserve-manager roles must remain separate.",
+      "backing_decision": "Official OSL material describes 1:1 backing with cash and high-quality liquid assets, including BUIDL and STBXX reserve vehicles, with third-party audits.",
+      "redemption_decision": "The institutional mint-and-burn route is documented at a high level, but direct eligibility, fees, settlement timing, and the legal redemption agreement require primary terms review.",
+      "income_decision": "No intrinsic holder yield is established for base USDGO. Exchange reward campaigns and reserve income are separate from token-holder accrual.",
+      "deployment_decision": "The original public launch was on Solana with an initial 50 million USDGO issuance. Later chain expansion must be recorded separately.",
+      "primary_sources": [
+        "https://www.osl.com/hk-en/press-release/osl-group-officially-launches-regulated-enterprise-stablecoin-usdgo",
+        "https://www.osl.com/en/bits/article/what-is-usdgo-enterprise-grade-compliant-stablecoin",
+        "https://www.osl.com/hk-en/press-release/usdgo-stablecoin-surpasses-100m-circulating-supply",
+        "https://www.usdgo.com/"
+      ],
+      "blocking_unknowns": [
+        "Anchorage issuance and redemption terms",
+        "Solana mint authority and contract identity",
+        "complete audit and attestation archive",
+        "reserve-vehicle allocation chronology",
+        "distribution eligibility by jurisdiction"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000085",
+      "proposed_record_id": "sog_st_sofiusd",
+      "name": "SoFiUSD",
+      "symbol": "SOFID",
+      "slug": "sofiusd",
+      "proposed_status": "active",
+      "launch_date": "2025-12-18",
+      "launch_precision": "day",
+      "identity_decision": "SoFiUSD is a payment stablecoin issued by SoFi Bank, N.A. The on-chain symbol SOFID and the SoFiUSD brand belong to one asset. Future tokenized bank deposits are a different legal product and must not be merged into this record.",
+      "backing_decision": "Official material describes full 1:1 reserves in cash or cash equivalents, primarily cash balances at the Federal Reserve, with monthly independent attestations.",
+      "redemption_decision": "SoFi states 1:1 redemption capability. Member, enterprise, and external-wallet redemption routes and contractual limits require terms-level normalization.",
+      "income_decision": "Base SOFID does not carry documented intrinsic yield. Future interest-bearing tokenized deposits are explicitly separate.",
+      "deployment_decision": "The infrastructure launch occurred on a public permissionless blockchain in December 2025. Ethereum and Solana availability and consumer-app access are later deployment or distribution boundaries requiring exact contract verification.",
+      "primary_sources": [
+        "https://investors.sofi.com/news/news-details/2025/SoFi-Launches-Fully-Reserved-Stablecoin-to-Power-Financial-Infrastructure-for-Banks-Fintechs-and-Enterprise-Partners/default.aspx",
+        "https://www.sofi.com/crypto/sofiusd/",
+        "https://investors.sofi.com/news/news-details/2026/SoFiUSD-Becomes-the-First-Stablecoin-Issued-by-a-US-National-Bank-to-Launch-on-a-Banking-Platform/default.aspx",
+        "https://support.sofi.com/hc/en-us/articles/44587095338253-What-is-SoFi-USD"
+      ],
+      "blocking_unknowns": [
+        "Ethereum and Solana contract identities",
+        "exact first mint and first external transfer",
+        "complete monthly attestation normalization",
+        "direct redemption eligibility and fees",
+        "SOFID versus SoFiUSD naming treatment across interfaces"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000086",
+      "proposed_record_id": "sog_st_solsticeusx",
+      "name": "Solstice USX",
+      "symbol": "USX",
+      "slug": "solstice-usx",
+      "proposed_status": "active",
+      "launch_date": "2025-09-30",
+      "launch_precision": "day",
+      "identity_decision": "Solstice USX is a Solana-native asset and is not dForce USX. eUSX, YieldVault positions, reward balances, and partner-protocol receipts are separate representations or positions.",
+      "backing_decision": "Launch and protocol material describe a collateralized stablecoin connected to reserve assets and institutional yield strategies. Exact reserve composition and strategy allocation require first-party normalization.",
+      "redemption_decision": "The public protocol is permissionless at the user layer, but exact primary minting, reserve redemption, withdrawal timing, and liquidity-provider dependencies require contract and terms review.",
+      "income_decision": "Base USX and the YieldVault or eUSX yield route must be separated. Yield must not be assigned automatically to base USX without explicit mechanics.",
+      "deployment_decision": "The original launch is Solana-native. Any Ethereum or partner representations require separate identity and bridge review.",
+      "primary_sources": [
+        "https://solstice.finance/",
+        "https://docs.solstice.finance/",
+        "https://cryptoslate.com/press-releases/solstice-finance-officially-launches-usx-a-solana-native-stablecoin-with-160m-deposited-tvl/"
+      ],
+      "blocking_unknowns": [
+        "canonical Solana mint and authority map",
+        "reserve composition and custody",
+        "USX versus eUSX and YieldVault conversion mechanics",
+        "December 2025 peg event and intervention chronology",
+        "operator and legal-entity map"
+      ],
+      "promotion_readiness": "accepted"
+    },
+    {
+      "candidate_id": "sog_cand_000087",
+      "proposed_record_id": "sog_st_ousd",
+      "name": "Origin Dollar",
+      "symbol": "OUSD",
+      "slug": "origin-dollar",
+      "proposed_status": "active",
+      "launch_date": "2020-09-22",
+      "launch_precision": "day",
+      "identity_decision": "OUSD is the base rebasing stablecoin. Wrapped OUSD, Origin Ether, Super OETH, Origin Sonic, and other Origin products are separate assets or wrappers.",
+      "backing_decision": "Current documentation describes 100 percent USDC backing deployed through on-chain strategies. Historical backing used multiple stablecoins, so reserve chronology must be time-bounded.",
+      "redemption_decision": "Current documentation states 1:1 redemption into USDC through the Origin application, with secondary AMM exit routes. Historical redemption and post-exploit restart boundaries require event normalization.",
+      "income_decision": "OUSD intrinsically distributes strategy yield through rebasing. Wrapped OUSD converts that behavior into a non-rebasing vault representation and must remain separate.",
+      "deployment_decision": "The canonical launch was on Ethereum. Later strategy expansion and any cross-chain representations must not replace the original deployment identity.",
+      "primary_sources": [
+        "https://www.originprotocol.com/blog/meet-ousd-the-first-stablecoin-that-earns-a-yield-in-your-wallet?lang=en",
+        "https://docs.originprotocol.com/yield-bearing-tokens/origin-dollar-ousd",
+        "https://www.originprotocol.com/blog/origin-dollar-ousd-detailed-compensation-plan?lang=en",
+        "https://docs.originprotocol.com/security-and-risk/audits"
+      ],
+      "blocking_unknowns": [
+        "complete strategy and reserve chronology",
+        "November 2020 exploit restart and compensation completion dates",
+        "current governance and admin-control map",
+        "wrapped OUSD deployment and relationship boundaries",
+        "complete current contract inventory"
+      ],
+      "promotion_readiness": "accepted"
+    }
+  ]
+}
