@@ -1,0 +1,68 @@
+[
+  {
+    "id": "sog_rel_unitedu_issuer_batch_o",
+    "stablecoin_id": "sog_st_unitedu",
+    "organization_id": "sog_issuer_united_stables",
+    "role": "legal_issuer",
+    "start_date": "2025-12-18",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_unitedu_launch_batch_o", "sog_src_unitedu_terms_batch_o"],
+    "notes": "Legal issuer and approved-user mint and redemption operator."
+  },
+  {
+    "id": "sog_rel_usdgo_issuer_batch_o",
+    "stablecoin_id": "sog_st_usdgo",
+    "organization_id": "sog_issuer_anchorage_digital_bank",
+    "role": "legal_issuer",
+    "start_date": "2026-02-10",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_usdgo_launch_batch_o", "sog_src_usdgo_anchorage_batch_o"],
+    "notes": "Issuer role remains separate from OSL branding and distribution."
+  },
+  {
+    "id": "sog_rel_usdgo_brand_batch_o",
+    "stablecoin_id": "sog_st_usdgo",
+    "organization_id": "sog_org_osl_group",
+    "role": "brand_owner",
+    "start_date": "2026-02-10",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_usdgo_launch_batch_o", "sog_src_usdgo_product_batch_o"],
+    "notes": "Brand and distribution role; not legal issuance."
+  },
+  {
+    "id": "sog_rel_sofiusd_issuer_batch_o",
+    "stablecoin_id": "sog_st_sofiusd",
+    "organization_id": "sog_issuer_sofi_bank",
+    "role": "legal_issuer",
+    "start_date": "2025-12-18",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_sofiusd_launch_batch_o", "sog_src_sofiusd_product_batch_o"],
+    "notes": "National-bank issuer of the SoFiUSD / SOFID stablecoin."
+  },
+  {
+    "id": "sog_rel_solsticeusx_operator_batch_o",
+    "stablecoin_id": "sog_st_solsticeusx",
+    "organization_id": "sog_issuer_solstice_finance",
+    "role": "protocol_operator",
+    "start_date": "2025-09-30",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_solsticeusx_site_batch_o", "sog_src_solsticeusx_docs_batch_o"],
+    "notes": "Protocol operator; separate legal, reserve, and custody roles remain unresolved."
+  },
+  {
+    "id": "sog_rel_ousd_operator_batch_o",
+    "stablecoin_id": "sog_st_ousd",
+    "organization_id": "sog_issuer_origin_protocol",
+    "role": "protocol_operator",
+    "start_date": "2020-09-22",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_ousd_launch_batch_o", "sog_src_ousd_docs_batch_o"],
+    "notes": "Protocol operator across the base OUSD identity; wrappers remain separate."
+  }
+]
