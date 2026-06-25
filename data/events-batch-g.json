@@ -11,7 +11,24 @@
     "confidence": "high",
     "source_count": 3,
     "event_status_effect": "active",
-    "notes": "This event records the current protocol model rather than asserting an unsupported initial launch date."
+    "notes": "This event records the current protocol model rather than the original launch. FiRM is a later backing-model transition from DOLA's 2021 Anchor origin."
+  },
+  {
+    "id": "sog_ev_dola_2021_02_launch",
+    "stablecoin_id": "sog_st_dola",
+    "issuer_id": "sog_issuer_inverse_finance",
+    "event_type": "launch",
+    "event_date": "2021-02-25",
+    "title": "Inverse Finance launches Anchor and DOLA",
+    "description": "Inverse Finance opened the Anchor money market, now called Frontier, on February 25, 2021. The protocol facilitated DOLA issuance, establishing the original public launch boundary for the continuing DOLA asset.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "not_applicable",
+    "notes": "The canonical Ethereum token contract was created on 2021-02-23. Contract deployment and the exact first mint are separate from the documented public protocol launch."
   },
   {
     "id": "sog_ev_djed_launch_batch_g",
@@ -77,14 +94,6 @@
     "event_type": "launch",
     "event_date": "2022-08-19",
     "title": "Helio Protocol launches HAY on BNB Chain",
-    "description": "Helio Protocol launched mainnet on August 19, 2022, allowing users to deposit BNB collateral and borrow HAY. This is the canonical launch of the asset now branded lisUSD.",
-    "impact_level": "high",
-    "confidence": "high",
-    "source_count": 1,
-    "event_status_effect": "active",
-    "recovered": null,
-    "recovery_date": null,
-    "failure_mechanism": "product_launch",
-    "notes": "The 2024 lisUSD name is a later rebrand of this continuous asset."
+    "description": "Helio Protocol launched mainnet on August 19, 2022, allowing users to deposit BNB collateral and borrow HAY. This is the canonical launch of the asset now branded lisUSD."
   }
 ]
