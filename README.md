@@ -16,10 +16,10 @@ The canonical GitHub checkpoint contains:
 86 stablecoin-organization relationships
 82 classification records
 82 reserve/redemption profiles
-129 events
-129 Event v2 detail records
-389 evidence records
-389 evidence relation projections
+130 events
+130 Event v2 detail records
+394 evidence records
+394 evidence relation projections
 90 reserve-report or reserve-context records
 200 known unknowns
 9 regulatory notes

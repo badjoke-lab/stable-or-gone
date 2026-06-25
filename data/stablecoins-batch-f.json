@@ -54,8 +54,8 @@
     "discontinued_date": null,
     "summary": "USD stablecoin issued by BitGo and branded by World Liberty Financial, backed by short-term U.S. government securities, government money-market funds, dollar deposits, and cash equivalents.",
     "confidence": "high",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch F promotion. Launch is recorded as a 2025 event without asserting an unsupported day-level date."
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch F promotion. The official Ethereum and BNB Smart Chain contracts were created on 2025-01-28. World Liberty Financial announced plans to launch USD1 on 2025-03-25, and an official 2025-04-07 proposal still described an airdrop test before broader market access. First-party retrospective evidence establishes April 2025 only at month level, so launch_date remains null."
   },
   {
     "id": "sog_st_usdtb",

@@ -124,9 +124,9 @@
     {
       "stablecoin_id": "sog_st_usd1",
       "category": "C",
-      "best_known_range": "2025-03",
+      "best_known_range": "2025-04",
       "reason_code": "launch_boundary_conflict",
-      "review_note": "Introduction, issuance, testing, and availability differ."
+      "review_note": "January 28 deployments, March 25 introduction, and April 7 testing are fixed; a first-party retrospective establishes April 2025 only at month level, while first issuance and broader public availability remain unresolved."
     },
     {
       "stablecoin_id": "sog_st_usdm",

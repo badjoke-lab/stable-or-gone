@@ -12,9 +12,18 @@
     "accessed_at": "2026-06-22",
     "reliability": "high",
     "claim_scope": "identity_backing_and_product_boundary",
-    "stablecoin_ids": ["sog_st_msusd"],
-    "organization_ids": ["sog_issuer_mainstreet_finance"],
-    "claim_scopes": ["identity", "claimed_usdc_backing", "claimed_one_to_one_redemption", "msY_boundary"],
+    "stablecoin_ids": [
+      "sog_st_msusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mainstreet_finance"
+    ],
+    "claim_scopes": [
+      "identity",
+      "claimed_usdc_backing",
+      "claimed_one_to_one_redemption",
+      "msY_boundary"
+    ],
     "event_ids": []
   },
   {
@@ -30,9 +39,19 @@
     "accessed_at": "2026-06-22",
     "reliability": "high",
     "claim_scope": "redemption",
-    "stablecoin_ids": ["sog_st_msusd"],
-    "organization_ids": ["sog_issuer_mainstreet_finance"],
-    "claim_scopes": ["kyc", "redemption", "USDC_settlement", "seven_day_cooldown", "concurrent_capacity"],
+    "stablecoin_ids": [
+      "sog_st_msusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mainstreet_finance"
+    ],
+    "claim_scopes": [
+      "kyc",
+      "redemption",
+      "USDC_settlement",
+      "seven_day_cooldown",
+      "concurrent_capacity"
+    ],
     "event_ids": []
   },
   {
@@ -48,9 +67,18 @@
     "accessed_at": "2026-06-22",
     "reliability": "high",
     "claim_scope": "deployment_and_lineage",
-    "stablecoin_ids": ["sog_st_msusd"],
-    "organization_ids": ["sog_issuer_mainstreet_finance"],
-    "claim_scopes": ["ethereum_contract", "msUSDV2", "legacy_contract_boundary", "LayerZero_OFT"],
+    "stablecoin_ids": [
+      "sog_st_msusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mainstreet_finance"
+    ],
+    "claim_scopes": [
+      "ethereum_contract",
+      "msUSDV2",
+      "legacy_contract_boundary",
+      "LayerZero_OFT"
+    ],
     "event_ids": []
   },
   {
@@ -66,10 +94,23 @@
     "accessed_at": "2026-06-22",
     "reliability": "medium",
     "claim_scope": "verification_termination_and_severe_depeg",
-    "stablecoin_ids": ["sog_st_msusd"],
-    "organization_ids": ["sog_issuer_mainstreet_finance"],
-    "claim_scopes": ["Accountable_termination", "verification_standards", "depeg", "reported_intraday_low", "unconfirmed_insolvency"],
-    "event_ids": ["sog_ev_msusd_verification_termination_2026", "sog_ev_msusd_severe_depeg_2026"]
+    "stablecoin_ids": [
+      "sog_st_msusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mainstreet_finance"
+    ],
+    "claim_scopes": [
+      "Accountable_termination",
+      "verification_standards",
+      "depeg",
+      "reported_intraday_low",
+      "unconfirmed_insolvency"
+    ],
+    "event_ids": [
+      "sog_ev_msusd_verification_termination_2026",
+      "sog_ev_msusd_severe_depeg_2026"
+    ]
   },
   {
     "id": "sog_src_msusd_site_batch_n",
@@ -84,9 +125,16 @@
     "accessed_at": "2026-06-22",
     "reliability": "high",
     "claim_scope": "operator_identity",
-    "stablecoin_ids": ["sog_st_msusd"],
-    "organization_ids": ["sog_issuer_mainstreet_finance"],
-    "claim_scopes": ["operator_identity", "product_identity"],
+    "stablecoin_ids": [
+      "sog_st_msusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mainstreet_finance"
+    ],
+    "claim_scopes": [
+      "operator_identity",
+      "product_identity"
+    ],
     "event_ids": []
   },
   {
@@ -102,10 +150,25 @@
     "accessed_at": "2026-06-24",
     "reliability": "high",
     "claim_scope": "launch_issuer_reserves_and_initial_restrictions",
-    "stablecoin_ids": ["sog_st_jpysc"],
-    "organization_ids": ["sog_issuer_sbi_shinsei_trust", "sog_org_sbi_vc_trade", "sog_org_startale_group"],
-    "claim_scopes": ["launch", "trust_bank_issuer", "one_to_one_jpy", "cash_and_jgb_reserves", "account_internal_availability", "external_transfer_unavailable"],
-    "event_ids": ["sog_ev_jpysc_launch_2026"]
+    "stablecoin_ids": [
+      "sog_st_jpysc"
+    ],
+    "organization_ids": [
+      "sog_issuer_sbi_shinsei_trust",
+      "sog_org_sbi_vc_trade",
+      "sog_org_startale_group"
+    ],
+    "claim_scopes": [
+      "launch",
+      "trust_bank_issuer",
+      "one_to_one_jpy",
+      "cash_and_jgb_reserves",
+      "account_internal_availability",
+      "external_transfer_unavailable"
+    ],
+    "event_ids": [
+      "sog_ev_jpysc_launch_2026"
+    ]
   },
   {
     "id": "sog_src_jpysc_announcement_sbi_2026",
@@ -120,10 +183,24 @@
     "accessed_at": "2026-06-24",
     "reliability": "high",
     "claim_scope": "issuer_distribution_technology_and_product_design",
-    "stablecoin_ids": ["sog_st_jpysc"],
-    "organization_ids": ["sog_issuer_sbi_shinsei_trust", "sog_org_sbi_vc_trade", "sog_org_startale_group"],
-    "claim_scopes": ["issuer_identity", "type_3_electronic_payment_instrument", "distribution_partner", "technology_partner", "planned_multichain_use"],
-    "event_ids": ["sog_ev_jpysc_launch_2026"]
+    "stablecoin_ids": [
+      "sog_st_jpysc"
+    ],
+    "organization_ids": [
+      "sog_issuer_sbi_shinsei_trust",
+      "sog_org_sbi_vc_trade",
+      "sog_org_startale_group"
+    ],
+    "claim_scopes": [
+      "issuer_identity",
+      "type_3_electronic_payment_instrument",
+      "distribution_partner",
+      "technology_partner",
+      "planned_multichain_use"
+    ],
+    "event_ids": [
+      "sog_ev_jpysc_launch_2026"
+    ]
   },
   {
     "id": "sog_src_rlusd_japan_launch_sbi_vc_2026",
@@ -138,10 +215,22 @@
     "accessed_at": "2026-06-24",
     "reliability": "high",
     "claim_scope": "japan_distribution_and_regulatory_classification",
-    "stablecoin_ids": ["sog_st_rlusd"],
-    "organization_ids": ["sog_issuer_ripple", "sog_org_sbi_vc_trade"],
-    "claim_scopes": ["Japan_handling_start", "Type_4_electronic_payment_instrument", "SBI_VC_Trade_distribution", "deposit_and_withdrawal"],
-    "event_ids": ["sog_ev_rlusd_japan_handling_2026"]
+    "stablecoin_ids": [
+      "sog_st_rlusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_ripple",
+      "sog_org_sbi_vc_trade"
+    ],
+    "claim_scopes": [
+      "Japan_handling_start",
+      "Type_4_electronic_payment_instrument",
+      "SBI_VC_Trade_distribution",
+      "deposit_and_withdrawal"
+    ],
+    "event_ids": [
+      "sog_ev_rlusd_japan_handling_2026"
+    ]
   },
   {
     "id": "sog_src_rlusd_japan_mou_sbi_2025",
@@ -156,10 +245,21 @@
     "accessed_at": "2026-06-24",
     "reliability": "high",
     "claim_scope": "japan_distribution_plan",
-    "stablecoin_ids": ["sog_st_rlusd"],
-    "organization_ids": ["sog_issuer_ripple", "sog_org_sbi_vc_trade"],
-    "claim_scopes": ["distribution_agreement", "Japan_market_plan", "SBI_VC_Trade_role"],
-    "event_ids": ["sog_ev_rlusd_japan_handling_2026"]
+    "stablecoin_ids": [
+      "sog_st_rlusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_ripple",
+      "sog_org_sbi_vc_trade"
+    ],
+    "claim_scopes": [
+      "distribution_agreement",
+      "Japan_market_plan",
+      "SBI_VC_Trade_role"
+    ],
+    "event_ids": [
+      "sog_ev_rlusd_japan_handling_2026"
+    ]
   },
   {
     "id": "sog_src_dola_anchor_launch_2021",
@@ -175,10 +275,21 @@
     "accessed_at": "2026-06-25",
     "reliability": "high",
     "claim_scope": "original_public_launch",
-    "stablecoin_ids": ["sog_st_dola"],
-    "organization_ids": ["sog_issuer_inverse_finance"],
-    "event_ids": ["sog_ev_dola_2021_02_launch"],
-    "claim_scopes": ["launch_date", "anchor_frontier_lineage", "dola_issuance", "public_protocol_availability"],
+    "stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "event_ids": [
+      "sog_ev_dola_2021_02_launch"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "anchor_frontier_lineage",
+      "dola_issuance",
+      "public_protocol_availability"
+    ],
     "notes": "First-party documentation states that Frontier facilitates issuance of synthetic tokens including DOLA and launched on 2021-02-25 under the name Anchor."
   },
   {
@@ -195,10 +306,21 @@
     "accessed_at": "2026-06-25",
     "reliability": "high",
     "claim_scope": "asset_origin_and_protocol_lineage",
-    "stablecoin_ids": ["sog_st_dola"],
-    "organization_ids": ["sog_issuer_inverse_finance"],
-    "event_ids": ["sog_ev_dola_2021_02_launch"],
-    "claim_scopes": ["february_2021_origin", "anchor_launch", "dola_launch", "firm_is_later_protocol"],
+    "stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "event_ids": [
+      "sog_ev_dola_2021_02_launch"
+    ],
+    "claim_scopes": [
+      "february_2021_origin",
+      "anchor_launch",
+      "dola_launch",
+      "firm_is_later_protocol"
+    ],
     "notes": "First-party retrospective states that Inverse Finance launched Anchor and DOLA in February 2021 and describes FiRM as the later fixed-rate protocol."
   },
   {
@@ -215,10 +337,171 @@
     "accessed_at": "2026-06-25",
     "reliability": "high",
     "claim_scope": "contract_deployment_before_public_launch",
-    "stablecoin_ids": ["sog_st_dola"],
-    "organization_ids": ["sog_issuer_inverse_finance"],
-    "event_ids": ["sog_ev_dola_2021_02_launch"],
-    "claim_scopes": ["ethereum_contract", "contract_creation_date", "deployment_boundary", "pre_launch_deployment"],
+    "stablecoin_ids": [
+      "sog_st_dola"
+    ],
+    "organization_ids": [
+      "sog_issuer_inverse_finance"
+    ],
+    "event_ids": [
+      "sog_ev_dola_2021_02_launch"
+    ],
+    "claim_scopes": [
+      "ethereum_contract",
+      "contract_creation_date",
+      "deployment_boundary",
+      "pre_launch_deployment"
+    ],
     "notes": "The canonical DOLA Ethereum contract was created on 2021-02-23, two days before the documented public Anchor launch."
+  },
+  {
+    "id": "sog_src_usd1_contract_addresses_2025",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "USD1 official contract addresses",
+    "url": "https://docs.worldlibertyfinancial.com/usd1-token/contract-addresses",
+    "publisher": "World Liberty Financial",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.worldlibertyfinancial.com/usd1-token/contract-addresses",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "deployment_identity",
+    "stablecoin_ids": [
+      "sog_st_usd1"
+    ],
+    "organization_ids": [
+      "sog_issuer_bitgo",
+      "sog_org_world_liberty_financial"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "ethereum_contract",
+      "bnb_contract",
+      "issuer_supported_deployments"
+    ],
+    "notes": "Official documentation identifies the same USD1 address on Ethereum and BNB Smart Chain."
+  },
+  {
+    "id": "sog_src_usd1_ethereum_deployment_2025",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "event_id": null,
+    "source_type": "onchain_explorer",
+    "title": "USD1 Ethereum contract creation",
+    "url": "https://etherscan.io/tx/0x1cf37f0670ce56d9489d7ec4c4ccddbd6ab59df95b316aafc353edc3a6862896",
+    "publisher": "Etherscan",
+    "published_at": "2025-01-28",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/tx/0x1cf37f0670ce56d9489d7ec4c4ccddbd6ab59df95b316aafc353edc3a6862896",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "ethereum_contract_deployment",
+    "stablecoin_ids": [
+      "sog_st_usd1"
+    ],
+    "organization_ids": [
+      "sog_issuer_bitgo",
+      "sog_org_world_liberty_financial"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "contract_creation_date",
+      "deployment_boundary",
+      "pre_introduction_deployment"
+    ],
+    "notes": "The official USD1 Ethereum contract was created on 2025-01-28 at 04:01:35 UTC. Deployment is not treated as public launch."
+  },
+  {
+    "id": "sog_src_usd1_bnb_deployment_2025",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "event_id": null,
+    "source_type": "onchain_explorer",
+    "title": "USD1 BNB Smart Chain contract creation",
+    "url": "https://bscscan.com/tx/0x0dcbe0103fadabf494e2c5717d5fd01b1e0016607b00283b97aeee23875abba3",
+    "publisher": "BscScan",
+    "published_at": "2025-01-28",
+    "archived_url": "https://web.archive.org/web/*/https://bscscan.com/tx/0x0dcbe0103fadabf494e2c5717d5fd01b1e0016607b00283b97aeee23875abba3",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "bnb_contract_deployment",
+    "stablecoin_ids": [
+      "sog_st_usd1"
+    ],
+    "organization_ids": [
+      "sog_issuer_bitgo",
+      "sog_org_world_liberty_financial"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "contract_creation_date",
+      "deployment_boundary",
+      "pre_introduction_deployment"
+    ],
+    "notes": "The official USD1 BNB Smart Chain contract was created on 2025-01-28 at 04:03:41 UTC. Deployment is not treated as public launch."
+  },
+  {
+    "id": "sog_src_usd1_introduction_2025",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "event_id": "sog_ev_usd1_introduction_2025",
+    "source_type": "official_statement",
+    "title": "World Liberty Financial plans to launch USD1",
+    "url": "https://www.businesswire.com/news/home/20250325773694/en/World-Liberty-Financial-Plans-to-Launch-USD1-the-Institutional-Ready-Stablecoin",
+    "publisher": "World Liberty Financial / Business Wire",
+    "published_at": "2025-03-25",
+    "archived_url": "https://web.archive.org/web/*/https://www.businesswire.com/news/home/20250325773694/en/World-Liberty-Financial-Plans-to-Launch-USD1-the-Institutional-Ready-Stablecoin",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "product_introduction_and_planned_launch",
+    "stablecoin_ids": [
+      "sog_st_usd1"
+    ],
+    "organization_ids": [
+      "sog_issuer_bitgo",
+      "sog_org_world_liberty_financial"
+    ],
+    "event_ids": [
+      "sog_ev_usd1_introduction_2025"
+    ],
+    "claim_scopes": [
+      "announcement_date",
+      "planned_launch",
+      "initial_networks",
+      "issuer_and_brand_roles"
+    ],
+    "notes": "The release uses plans-to-launch language and does not establish completed broad public availability on 2025-03-25."
+  },
+  {
+    "id": "sog_src_usd1_airdrop_test_2025",
+    "stablecoin_id": "sog_st_usd1",
+    "issuer_id": "sog_issuer_bitgo",
+    "event_id": "sog_ev_usd1_airdrop_test_2025",
+    "source_type": "governance_proposal",
+    "title": "Proposal to test USD1 airdrop functionality",
+    "url": "https://governance.worldlibertyfinancial.com/t/proposal-test-airdrop-functionality-by-distributing-usd1-to-all-wlfi-token-holders/4794",
+    "publisher": "World Liberty Financial Governance",
+    "published_at": "2025-04-07",
+    "archived_url": "https://web.archive.org/web/*/https://governance.worldlibertyfinancial.com/t/proposal-test-airdrop-functionality-by-distributing-usd1-to-all-wlfi-token-holders/4794",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "testing_before_broader_market_access",
+    "stablecoin_ids": [
+      "sog_st_usd1"
+    ],
+    "organization_ids": [
+      "sog_issuer_bitgo",
+      "sog_org_world_liberty_financial"
+    ],
+    "event_ids": [
+      "sog_ev_usd1_airdrop_test_2025"
+    ],
+    "claim_scopes": [
+      "airdrop_test",
+      "onchain_functionality_test",
+      "pre_broader_market_access"
+    ],
+    "notes": "The proposal describes a small test distribution before broader market access and is not a public-launch statement."
   }
 ]

@@ -23,11 +23,11 @@
     "id": "sog_ku_usd1_launch_date_batch_f",
     "stablecoin_id": "sog_st_usd1",
     "issuer_id": "sog_issuer_bitgo",
-    "topic": "exact_launch_date",
-    "description": "USD1 is documented as a 2025 launch, but the current official evidence set does not fix one day-level launch date across announcement, minting, and trading milestones.",
+    "topic": "exact_public_launch_date",
+    "description": "The official Ethereum and BNB Smart Chain deployments are fixed to 2025-01-28, the first-party introduction to 2025-03-25, and the airdrop testing proposal to 2025-04-07. First-party retrospective evidence supports April 2025 only at month level, while the exact first issuance and broader public-access day remain unresolved.",
     "severity": "low",
-    "last_checked_at": "2026-06-15",
-    "notes": "Keep the event date null pending an authoritative chronology decision."
+    "last_checked_at": "2026-06-25",
+    "notes": "Keep launch_date null. Do not substitute contract creation, planned-launch announcement, testing, or a later exchange listing for the original public boundary."
   },
   {
     "id": "sog_ku_usd1_reserve_breakdown_batch_f",

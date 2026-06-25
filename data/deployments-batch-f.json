@@ -39,15 +39,17 @@
     "chain": "Ethereum",
     "deployment_type": "issuer_supported_token",
     "token_standard": "ERC-20",
-    "contract_address": null,
+    "contract_address": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
     "status": "active",
     "canonicality": "issuer_native",
     "is_primary": true,
     "mint_authority_type": "issuer_controlled",
-    "notes": "Issuer-supported USD1 deployment; exact address normalization remains pending.",
+    "notes": "Official issuer-supported Ethereum USD1 contract created on 2025-01-28 at 04:01:35 UTC. Contract creation predates the March 25 introduction and does not establish public launch.",
     "evidence_ids": [
       "sog_src_usd1_faq_batch_f",
-      "sog_src_usd1_reserves_batch_f"
+      "sog_src_usd1_reserves_batch_f",
+      "sog_src_usd1_contract_addresses_2025",
+      "sog_src_usd1_ethereum_deployment_2025"
     ]
   },
   {
@@ -56,15 +58,17 @@
     "chain": "BNB Chain",
     "deployment_type": "issuer_supported_token",
     "token_standard": "BEP-20",
-    "contract_address": null,
+    "contract_address": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
     "status": "active",
     "canonicality": "issuer_native",
     "is_primary": false,
     "mint_authority_type": "issuer_controlled",
-    "notes": "Issuer-supported USD1 deployment; exact address normalization remains pending.",
+    "notes": "Official issuer-supported BNB Smart Chain USD1 contract created on 2025-01-28 at 04:03:41 UTC. Contract creation predates the March 25 introduction and does not establish public launch.",
     "evidence_ids": [
       "sog_src_usd1_faq_batch_f",
-      "sog_src_usd1_reserves_batch_f"
+      "sog_src_usd1_reserves_batch_f",
+      "sog_src_usd1_contract_addresses_2025",
+      "sog_src_usd1_bnb_deployment_2025"
     ]
   },
   {

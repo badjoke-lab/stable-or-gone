@@ -24,8 +24,8 @@
     }
   },
   {
-    "id": "sog_ev_usd1_2025_launch",
-    "title": "BitGo and World Liberty Financial introduce USD1",
+    "id": "sog_ev_usd1_introduction_2025",
+    "title": "World Liberty Financial announces plans for USD1",
     "subject_stablecoin_ids": [
       "sog_st_usd1"
     ],
@@ -34,19 +34,9 @@
       "sog_org_world_liberty_financial"
     ],
     "evidence_ids": [
-      "sog_src_usd1_faq_batch_f",
-      "sog_src_usd1_reserves_batch_f",
-      "sog_src_usd1_risk_batch_f"
+      "sog_src_usd1_introduction_2025"
     ],
-    "event_detail_kind": "launch",
-    "launch_detail": {
-      "summary": "USD1 launched with BitGo as issuer and redemption processor and World Liberty Financial as brand owner and service provider.",
-      "status": "active",
-      "related_organization_ids": [
-        "sog_issuer_bitgo",
-        "sog_org_world_liberty_financial"
-      ]
-    }
+    "event_detail_kind": "other"
   },
   {
     "id": "sog_ev_usdtb_launch",
@@ -134,5 +124,20 @@
       "summary": "Mountain Protocol publicly launched USDM on 2023-09-11.",
       "status": "active"
     }
+  },
+  {
+    "id": "sog_ev_usd1_airdrop_test_2025",
+    "title": "World Liberty Financial proposes USD1 airdrop test",
+    "subject_stablecoin_ids": [
+      "sog_st_usd1"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_bitgo",
+      "sog_org_world_liberty_financial"
+    ],
+    "evidence_ids": [
+      "sog_src_usd1_airdrop_test_2025"
+    ],
+    "event_detail_kind": "other"
   }
 ]
