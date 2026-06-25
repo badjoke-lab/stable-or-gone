@@ -3,11 +3,11 @@
     "id": "sog_ku_dola_launch_date_batch_g",
     "stablecoin_id": "sog_st_dola",
     "issuer_id": "sog_issuer_inverse_finance",
-    "topic": "exact_launch_date",
-    "description": "The current official documentation establishes the active DOLA model but does not provide one durable day-level initial launch date for the canonical record.",
+    "topic": "exact_first_mint_and_initial_distribution",
+    "description": "The public Anchor and DOLA launch is fixed to 2021-02-25 and the Ethereum contract deployment to 2021-02-23, but the exact first DOLA mint transaction and initial distribution sequence are not normalized.",
     "severity": "low",
-    "last_checked_at": "2026-06-15",
-    "notes": "Keep launch_date null until a dated primary source is normalized."
+    "last_checked_at": "2026-06-25",
+    "notes": "The unresolved first mint does not override the documented public launch boundary."
   },
   {
     "id": "sog_ku_dola_crosschain_map_batch_g",

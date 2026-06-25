@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-24",
+  "frozen_at": "2026-06-25",
   "source_review": "docs/audits/remaining-launch-date-review.md",
   "policy": {
     "canonical_day_required": true,
@@ -9,10 +9,10 @@
     "forbid_exchange_listing_as_default_launch": true,
     "forbid_rebrand_or_migration_as_default_launch": true
   },
-  "expected_total": 23,
+  "expected_total": 22,
   "category_counts": {
     "B": 3,
-    "C": 17,
+    "C": 16,
     "D": 3
   },
   "records": [
@@ -29,13 +29,6 @@
       "best_known_range": "2019",
       "reason_code": "partial_date_only",
       "review_note": "First-party sources establish 2019 only."
-    },
-    {
-      "stablecoin_id": "sog_st_dola",
-      "category": "C",
-      "best_known_range": null,
-      "reason_code": "launch_boundary_conflict",
-      "review_note": "First mint, release, and FiRM issuance differ."
     },
     {
       "stablecoin_id": "sog_st_dsd",

@@ -20,12 +20,12 @@
     "minimum_redemption": "protocol_transaction_dependent",
     "redemption_region_notes": "Access depends on supported networks, collateral markets, front ends, and applicable restrictions.",
     "redemption_notes": "DOLA is primarily debt-backed through FiRM, with a USDS-backed Peg Stability Module acting as a secondary issuance and redemption route.",
-    "launch_date": null,
+    "launch_date": "2021-02-25",
     "discontinued_date": null,
     "summary": "Inverse Finance's decentralized USD stablecoin, created through overcollateralized FiRM borrowing and direct reserve swaps through the Peg Stability Module.",
     "confidence": "high",
-    "last_verified_at": "2026-06-15",
-    "notes": "Batch G promotion. Exact initial launch date remains unresolved."
+    "last_verified_at": "2026-06-25",
+    "notes": "Batch G promotion. Canonical public launch is 2021-02-25, when Anchor opened publicly and facilitated DOLA issuance. The Ethereum token contract was created on 2021-02-23 as a separate deployment boundary. The exact first mint remains unresolved, and FiRM is a later protocol and backing-model transition."
   },
   {
     "id": "sog_st_djed",

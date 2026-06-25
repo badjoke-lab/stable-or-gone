@@ -21,12 +21,12 @@ Every roadmap-changing PR must update this file. Every merge report must state t
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #135 — Record registry 82 production parity
-Latest merged commit: 9e4cde7456ccf83d62d646191809c97031c8529e
-Current PR: #139 — Audit DOLA launch boundary
-Current phase: bounded existing-record quality audit
-Canonical change in this PR: none
-Next operation after merge: implement the resolved DOLA launch boundary
+Latest merged PR: #139 — Audit DOLA launch boundary
+Latest merged commit: 4cb2f9f27ba8aef40794f25d8eb331bc5f2eaa97
+Current PR: #140 — Resolve DOLA launch boundary
+Current phase: canonical quality implementation
+Canonical result: DOLA launch fixed to 2021-02-25
+Next bounded work after merge: USD1 launch-boundary audit
 ```
 
 ## DOLA audit checkpoint
@@ -44,7 +44,7 @@ late 2022 — FiRM launch and backing-model transition
 Audit conclusion:
 
 ```text
-Recommended canonical DOLA launch_date: 2021-02-25
+Canonical DOLA launch_date: 2021-02-25
 Contract deployment remains a separate 2021-02-23 boundary
 FiRM is a later protocol/model boundary, not the original DOLA launch
 ```
@@ -68,6 +68,8 @@ Audit: docs/audits/registry-82-production-parity.md
 
 The successful production publication includes the 82-record registry, the GENIUS Act guide, the MiCA guide, the JPYC versus JPYSC guide, related-guide discovery, Updates, sitemap integration, and machine-readable public files.
 
+PR #140 is a quality-only change and does not increase the stable-asset count or trigger automatic production publication.
+
 ## Current canonical registry
 
 ```text
@@ -76,9 +78,10 @@ The successful production publication includes the 82-record registry, the GENIU
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-128 events
-128 Event v2 detail records
-386 evidence records
+129 events
+129 Event v2 detail records
+389 evidence records
+389 evidence relation projections
 90 reserve-report or reserve-context records
 200 known unknowns
 9 regulatory notes
@@ -108,7 +111,7 @@ Required-layer coverage:              82 / 82
 Event coverage:                        82 / 82
 Deployment coverage:                   82 / 82
 Reserve-report context coverage:       70 / 82 informational
-Missing canonical launch dates:            23
+Missing canonical launch dates:            22
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
   not applicable by design:                 10
@@ -122,20 +125,13 @@ All-unknown income profiles:                 0
 ### Launch-date queue
 
 ```text
-Total unresolved before DOLA implementation: 23
-Category B:                                 3
-Category C:                                17
-Category D:                                 3
+Total unresolved: 22
+Category B:         3
+Category C:        16
+Category D:         3
 ```
 
-The audit PR does not alter canonical data. The implementation PR is expected to remove DOLA and produce:
-
-```text
-Total unresolved after implementation: 22
-Category B:                              3
-Category C:                             16
-Category D:                              3
-```
+DOLA is no longer in the queue. Its public launch is fixed to 2021-02-25 while exact first mint remains a known unknown.
 
 Remaining Category B records:
 
@@ -156,16 +152,15 @@ Launch-date policy:
 - separate contract deployment from public availability
 - preserve exact first mint as unresolved when the canonical public launch can be established independently
 
-Current bounded launch-date review:
-
-```text
-DOLA — audit resolved; canonical implementation pending
-```
-
-First quality wave after DOLA:
+Next bounded launch-date review:
 
 ```text
 USD1
+```
+
+Following quality wave:
+
+```text
 MIM
 mUSD
 USK
@@ -235,52 +230,40 @@ PR #138 — Verify rerun builds against checked-out commit — merged
 ## Full execution sequence
 
 ```text
-Phase 1 — DOLA bounded review
-1. Complete CI and merge PR #139.
-2. Preserve the audit conclusion that public launch is 2021-02-25 and deployment is 2021-02-23.
+Phase 1 — Complete DOLA implementation
+1. Synchronize baselines, generated outputs, README, audits, and roadmap.
+2. Remove temporary synchronization workflow changes and helper script.
+3. Run all six CI workflows.
+4. Merge PR #140 only after every check passes.
 
-Phase 2 — DOLA canonical implementation
-3. Set DOLA launch_date to 2021-02-25.
-4. Add a dated launch event and Event v2 detail.
-5. Add first-party launch evidence and on-chain deployment evidence.
-6. Update the existing Ethereum deployment record with the 2021-02-23 boundary.
-7. Remove DOLA from the unresolved launch queue.
-8. Preserve the exact first mint as unresolved unless separately established.
-9. Synchronize baselines, generated outputs, counts, README, audits, and roadmap.
-10. Run all CI and merge only after every check passes.
+Phase 2 — First launch-date quality wave
+5. Audit USD1 introduction, contract deployment, first issuance, testing, and public availability boundaries.
+6. Implement a date only if day-level primary or on-chain evidence supports the selected public boundary.
+7. Review MIM, mUSD, USK, VAI, VCHF, and IRON.
 
-Phase 3 — First launch-date quality wave
-11. Review USD1.
-12. Review MIM.
-13. Review mUSD.
-14. Review USK.
-15. Review VAI.
-16. Review VCHF.
-17. Review IRON.
+Phase 3 — Cross-queue maintenance
+8. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
+9. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
 
-Phase 4 — Cross-queue maintenance
-18. Recheck HUSD and EURT reserve-source status only when durable product-specific evidence is found.
-19. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching end-boundary evidence exists.
+Phase 4 — Controlled growth
+10. Prepare a reviewed candidate master.
+11. Promote no more than five complete stable-asset records per batch.
+12. Publish and verify production after each growth batch.
+13. Do not allow production to trail main by more than one growth batch.
 
-Phase 5 — Controlled growth
-20. Prepare a reviewed candidate master.
-21. Promote no more than five complete stable-asset records per batch.
-22. Publish and verify production after each growth batch.
-23. Do not allow production to trail `main` by more than one growth batch.
-
-Phase 6 — Normal operating cycle
-24. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
-25. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
+Phase 5 — Normal operating cycle
+14. Alternate two or three existing-record quality audits with one growth batch of no more than five records.
+15. Insert urgent incident, regulatory, depeg, wind-down, or redemption updates ahead of the routine queue when necessary.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete CI and merge PR #139.
-2. Report the DOLA audit conclusion and unchanged canonical counts.
-3. Open the DOLA canonical implementation PR.
-4. Set launch_date only to the audited 2021-02-25 public boundary.
-5. Preserve 2021-02-23 as deployment and exact first mint as unresolved.
+1. Complete final CI and merge PR #140.
+2. Report DOLA implementation counts and queue reduction.
+3. Start the bounded USD1 launch-boundary audit.
+4. Do not force a USD1 date from the March 2025 month-level range alone.
+5. Separate introduction, deployment, first issuance, testing, and public availability.
 ```
 
 ## Production policy
@@ -318,7 +301,7 @@ The production backlog is cleared at the 82-record checkpoint.
 
 Controlled growth may resume only under these limits:
 
-- finish the DOLA bounded audit and canonical implementation first
+- finish the DOLA implementation and first bounded quality wave
 - promote no more than five complete records per growth batch
 - run full CI for every batch
 - publish and verify after every growth batch
