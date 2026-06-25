@@ -11,57 +11,60 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #151 — Audit VCHF launch date
-Latest merged commit: 4cfbf3ced51c82b96c66adcedce0ae06e1ecbde0
-Current work: VCHF canonical implementation
-Launch result: launch_date set to 2022-12-15
-Current-state result: status active; discontinued_date null
-Next bounded review after merge: IRON
+Latest merged PR: #152 — Implement VCHF launch date
+Latest merged commit: 1582f2844b5390d161e6454fb00d14d540f3f37d
+Current work: IRON bounded launch and lineage audit
+Launch conclusion: set launch_date to 2021-03-06
+Terminal state: retain failed and discontinued_date 2021-06-16
+Next operation after audit: IRON canonical implementation
+Next phase after IRON: cross-queue maintenance, then controlled growth
 ```
 
-## VCHF audit checkpoint
+## IRON audit checkpoint
 
 ```text
-2022-12-15 — VNX launches VEUR and VCHF with trading, deposit, and withdrawal access on Emirex
-2022-12-27 — VNX year-end review confirms December launch and Ethereum issuance
-2023 onward — Polygon, Avalanche, Stellar, Solana, Tezos, and other network expansions
-exact first VCHF issuance transaction — unresolved
-complete multichain contract map — unresolved
+2021-03-06 — original IRON protocol launch on Binance Smart Chain
+2021-05-18 — Polygon deployment with a separate IRON/TITAN token set
+2021-06-16 — Polygon IRON bank run and terminal failure of the original design
+June 2021 — rebuilding announcement says the stablecoin would be redesigned from scratch
+2021-08-25 — redesigned IRON v2 launch
 ```
 
 Decision:
 
 ```text
-launch_date: 2022-12-15
-status: active
-discontinued_date: null
+launch_date: 2021-03-06
+status: failed
+discontinued_date: 2021-06-16
 ```
 
 Audit:
 
 ```text
-docs/audits/vchf-launch-boundary-review.md
+docs/audits/iron-launch-boundary-review.md
 ```
 
-Canonical implementation result:
+Implementation requirements:
 
-- 2022-12-15 launch event and Event v2 launch detail added
-- first-party launch and year-end review evidence added
-- Ethereum deployment note and evidence updated
-- later chain launches preserved as deployment boundaries
-- exact first issuance and distribution retained as known unknowns
-- VCHF removed from the unresolved launch queue
-- queue reduced from 20 to 19 and Category C from 14 to 13
+- add the 2021-03-06 BSC launch event
+- add the 2021-05-18 Polygon deployment event
+- preserve the June 16 collapse event
+- add first-party BSC launch and Polygon expansion evidence
+- preserve IRON v2 as a later redesigned-product boundary
+- update known unknowns for BSC identity, first mint, Polygon deployment, and v1/v2 continuity
+- remove IRON from the unresolved launch queue
+- reduce the queue from 19 to 18 and Category C from 13 to 12
 
 ## Completed quality checkpoints
 
 ```text
-DOLA — public launch 2021-02-25; implementation PR #140
-USD1 — launch null; deployment/introduction/testing normalized; PR #142
-MIM — launch null; introduction/deployment/liquidity/live-operation normalized; PR #144
-mUSD — launch null; contract verification/mainnet candidate/security boundary normalized; PR #146
-USK — public launch 2022-09-12; repayment-only wind-down normalized; PR #148
-VAI — public launch 2020-11-24; implementation PR #150
+DOLA — launch 2021-02-25; PR #140
+USD1 — launch unresolved; boundaries normalized; PR #142
+MIM — launch unresolved; boundaries normalized; PR #144
+mUSD — launch unresolved; boundaries normalized; PR #146
+USK — launch 2022-09-12; wind-down normalized; PR #148
+VAI — launch 2020-11-24; PR #150
+VCHF — launch 2022-12-15; PR #152
 ```
 
 ## Production checkpoint
@@ -107,22 +110,15 @@ docs/migration/registry-v3-baseline.json
 ## Current quality baseline
 
 ```text
-Candidate promotions:                    82 / 82 controlled
-Pending candidates:                       0
 Critical findings:                        0
 Blocking warnings:                        0
 Integrity audit warnings:                  3 non-blocking source-count mismatches
-Stale verification records:               0
 Required-layer coverage:              82 / 82
 Event coverage:                        82 / 82
 Deployment coverage:                   82 / 82
-Reserve-report context coverage:       70 / 82 informational
 Missing canonical launch dates:            19
 Historical records missing terminal date:   4
 Reserve applicability queue:                12
-  not applicable by design:                 10
-  source status unresolved:                  2
-  expected but missing:                      0
 ```
 
 ## Queue state
@@ -130,9 +126,18 @@ Reserve applicability queue:                12
 ### Launch-date queue
 
 ```text
-Total unresolved: 19
+Total unresolved before IRON implementation: 19
+Category B:                                  3
+Category C:                                 13
+Category D:                                  3
+```
+
+Expected after IRON implementation:
+
+```text
+Total unresolved: 18
 Category B:         3
-Category C:        13
+Category C:        12
 Category D:         3
 ```
 
@@ -142,12 +147,6 @@ Remaining Category B records:
 BRZ
 Berachain HONEY
 Anzen USDz
-```
-
-Next bounded review:
-
-```text
-IRON
 ```
 
 ### Terminal-date queue
@@ -160,16 +159,7 @@ Empty Set Dollar
 GYEN
 ```
 
-### Reserve-report applicability queue
-
-```text
-Total uncovered:              12
-Not applicable by design:     10
-Source status unresolved:      2
-Expected but missing:          0
-```
-
-Source-status unresolved:
+### Reserve-source queue
 
 ```text
 HUSD
@@ -179,34 +169,40 @@ EURT
 ## Full execution sequence
 
 ```text
-Phase 1 — VCHF audit
-1. Complete final CI and merge the VCHF implementation PR.
-2. Preserve original launch and later chain-expansion boundaries separately.
-3. Confirm temporary synchronization code is removed.
+Phase 1 — IRON audit
+1. Complete CI and merge the IRON audit PR.
+2. Preserve BSC launch, Polygon deployment, collapse, and v2 redesign as separate boundaries.
 
-Phase 3 — Complete the first launch-date quality wave
-11. Audit IRON.
-12. Implement the IRON result if supported.
+Phase 2 — IRON canonical implementation
+3. Set launch_date to 2021-03-06.
+4. Retain failed status and discontinued_date 2021-06-16.
+5. Add BSC launch and Polygon deployment events plus Event v2 details.
+6. Add first-party launch and expansion evidence.
+7. Update deployments and known unknowns.
+8. Remove IRON from the unresolved launch queue.
+9. Synchronize baselines, generated outputs, README, audits, and roadmap.
+10. Run all six workflows and merge only after every check passes.
 
-Phase 4 — Cross-queue maintenance
-13. Recheck HUSD and EURT only when durable product-specific evidence appears.
-14. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching evidence exists.
-15. Perform separate current-state reviews for assets with newly effective operational restrictions.
+Phase 3 — Cross-queue maintenance
+11. Recheck HUSD and EURT only when durable product-specific reserve evidence appears.
+12. Keep BAC, DSD, ESD, and GYEN terminal dates unresolved until matching evidence exists.
+13. Review newly effective operational restrictions separately from launch dates.
 
-Phase 5 — Controlled growth
-16. Promote no more than five complete records per batch.
-17. Publish and verify after each growth batch.
-18. Do not allow production to trail main by more than one growth batch.
+Phase 4 — Controlled growth
+14. Prepare a reviewed candidate master.
+15. Promote no more than five complete records per batch.
+16. Publish and verify after each growth batch.
+17. Do not allow production to trail main by more than one growth batch.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete final CI and merge the VCHF implementation PR.
-2. Report the queue reduction to 19 total and Category C 13.
-3. Start the bounded IRON launch-boundary audit.
-4. Separate BSC launch, Polygon deployment, staged minting, and public availability.
-5. Complete the first launch-date quality wave before controlled growth resumes.
+1. Complete CI and merge the IRON audit PR.
+2. Open the IRON canonical implementation PR.
+3. Set launch_date only to the original 2021-03-06 BSC boundary.
+4. Keep Polygon deployment, June collapse, and August v2 redesign separate.
+5. Complete the first launch-date quality wave, then move to cross-queue maintenance.
 ```
 
 ## Production policy
@@ -217,23 +213,8 @@ Normal pull requests and normal `main` merges complete through GitHub CI and do 
 Automatic production deployment: disabled
 Preview branch deployments: disabled
 Publication path: manual GitHub Actions workflow only
-Manual production publication activation — PASS
-Deployment workflow run: 27908380603
 Pages project: stable-or-gone
 Production branch: main
-Latest successful job: 83360065881
-```
-
-The production path remains:
-
-```text
-latest main
-→ approved manual GitHub Actions job
-→ latest main checkout
-→ npm run build
-→ prebuilt dist upload with Wrangler
-→ deployed commit verification
-→ production consistency verification
 ```
 
 ## Growth policy
@@ -243,4 +224,4 @@ latest main
 - run full CI for every batch
 - publish and verify after every growth batch
 - alternate growth with existing-record quality work
-- keep unreviewed candidates, internal monitoring, and private notes out of public files
+- keep unreviewed candidates and internal monitoring out of public files
