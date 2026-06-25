@@ -2,7 +2,7 @@
 
 Recorded: 2026-06-25
 
-Result: PUBLIC LAUNCH DATE REMAINS UNRESOLVED
+Result: IMPLEMENTED — PUBLIC LAUNCH DATE REMAINS UNRESOLVED
 
 Stablecoin: `sog_st_musd`
 
@@ -42,7 +42,7 @@ Keep mUSD's canonical `launch_date` as `null`.
 
 The 2020-05-29 mainnet-live record is the strongest recovered candidate, but its original first-party outbound announcement was not recovered. The repository requires day-level primary or on-chain public evidence before assigning a canonical date.
 
-## Follow-up implementation
+## Implementation result
 
 1. Preserve the official Ethereum mUSD address.
 2. Record 2020-05-28 as a verified deployment-readiness boundary.

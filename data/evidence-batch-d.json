@@ -13,10 +13,21 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "migration_event",
-    "stablecoin_ids": ["sog_st_sai", "sog_st_dai"],
-    "organization_ids": ["sog_issuer_makerdao_sky"],
-    "event_ids": ["sog_ev_sai_2019_11_migration"],
-    "claim_scopes": ["migration_event", "launch_date", "identity_transition"],
+    "stablecoin_ids": [
+      "sog_st_sai",
+      "sog_st_dai"
+    ],
+    "organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_ids": [
+      "sog_ev_sai_2019_11_migration"
+    ],
+    "claim_scopes": [
+      "migration_event",
+      "launch_date",
+      "identity_transition"
+    ],
     "notes": "Official launch announcement establishing the Multi-Collateral Dai transition and the historical SAI identity."
   },
   {
@@ -33,10 +44,21 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "migration_mechanics",
-    "stablecoin_ids": ["sog_st_sai", "sog_st_dai"],
-    "organization_ids": ["sog_issuer_makerdao_sky"],
-    "event_ids": ["sog_ev_sai_2019_11_migration"],
-    "claim_scopes": ["migration_mechanics", "redemption_exit", "identity_transition"],
+    "stablecoin_ids": [
+      "sog_st_sai",
+      "sog_st_dai"
+    ],
+    "organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_ids": [
+      "sog_ev_sai_2019_11_migration"
+    ],
+    "claim_scopes": [
+      "migration_mechanics",
+      "redemption_exit",
+      "identity_transition"
+    ],
     "notes": "Used to distinguish migration and settlement paths from ordinary current issuance."
   },
   {
@@ -53,10 +75,19 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "contract_identity",
-    "stablecoin_ids": ["sog_st_sai"],
-    "organization_ids": ["sog_issuer_makerdao_sky"],
-    "event_ids": ["sog_ev_sai_2019_11_migration"],
-    "claim_scopes": ["contract_identity", "ethereum_deployment"],
+    "stablecoin_ids": [
+      "sog_st_sai"
+    ],
+    "organization_ids": [
+      "sog_issuer_makerdao_sky"
+    ],
+    "event_ids": [
+      "sog_ev_sai_2019_11_migration"
+    ],
+    "claim_scopes": [
+      "contract_identity",
+      "ethereum_deployment"
+    ],
     "notes": "Primary chain identity for the historical SAI token."
   },
   {
@@ -73,10 +104,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "medium",
     "claim_scope": "historical_entity_and_issuer",
-    "stablecoin_ids": ["sog_st_husd"],
-    "organization_ids": ["sog_issuer_stable_universal"],
-    "event_ids": ["sog_ev_husd_2022_10_depeg"],
-    "claim_scopes": ["historical_entity_and_issuer", "reserve_claim", "redemption_claim"],
+    "stablecoin_ids": [
+      "sog_st_husd"
+    ],
+    "organization_ids": [
+      "sog_issuer_stable_universal"
+    ],
+    "event_ids": [
+      "sog_ev_husd_2022_10_depeg"
+    ],
+    "claim_scopes": [
+      "historical_entity_and_issuer",
+      "reserve_claim",
+      "redemption_claim"
+    ],
     "notes": "Archived material only. Current reserve and redemption status must not be inferred from historical product claims."
   },
   {
@@ -93,10 +134,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "depeg_event",
-    "stablecoin_ids": ["sog_st_husd"],
-    "organization_ids": ["sog_issuer_stable_universal"],
-    "event_ids": ["sog_ev_husd_2022_10_depeg"],
-    "claim_scopes": ["depeg_event", "market_price", "event_date"],
+    "stablecoin_ids": [
+      "sog_st_husd"
+    ],
+    "organization_ids": [
+      "sog_issuer_stable_universal"
+    ],
+    "event_ids": [
+      "sog_ev_husd_2022_10_depeg"
+    ],
+    "claim_scopes": [
+      "depeg_event",
+      "market_price",
+      "event_date"
+    ],
     "notes": "Reliable secondary evidence for the severe October 2022 depeg."
   },
   {
@@ -113,10 +164,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "medium",
     "claim_scope": "historical_market_state",
-    "stablecoin_ids": ["sog_st_husd"],
-    "organization_ids": ["sog_issuer_stable_universal"],
-    "event_ids": ["sog_ev_husd_2022_10_depeg"],
-    "claim_scopes": ["historical_market_state", "contract_identity", "inactive_market_context"],
+    "stablecoin_ids": [
+      "sog_st_husd"
+    ],
+    "organization_ids": [
+      "sog_issuer_stable_universal"
+    ],
+    "event_ids": [
+      "sog_ev_husd_2022_10_depeg"
+    ],
+    "claim_scopes": [
+      "historical_market_state",
+      "contract_identity",
+      "inactive_market_context"
+    ],
     "notes": "Used as supporting market-history context, not as proof of current reserves or direct redemption."
   },
   {
@@ -133,10 +194,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "collapse_postmortem",
-    "stablecoin_ids": ["sog_st_iron"],
-    "organization_ids": ["sog_issuer_iron_finance"],
-    "event_ids": ["sog_ev_iron_2021_06_collapse"],
-    "claim_scopes": ["collapse_postmortem", "mechanism_failure", "event_date"],
+    "stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "event_ids": [
+      "sog_ev_iron_2021_06_collapse"
+    ],
+    "claim_scopes": [
+      "collapse_postmortem",
+      "mechanism_failure",
+      "event_date"
+    ],
     "notes": "Official post-mortem for the June 2021 run and protocol response."
   },
   {
@@ -153,10 +224,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "mechanism_and_run_analysis",
-    "stablecoin_ids": ["sog_st_iron"],
-    "organization_ids": ["sog_issuer_iron_finance"],
-    "event_ids": ["sog_ev_iron_2021_06_collapse"],
-    "claim_scopes": ["mechanism_and_run_analysis", "collateral_model", "depeg_event"],
+    "stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "event_ids": [
+      "sog_ev_iron_2021_06_collapse"
+    ],
+    "claim_scopes": [
+      "mechanism_and_run_analysis",
+      "collateral_model",
+      "depeg_event"
+    ],
     "notes": "Independent research using Polygon transaction data to analyze IRON's design and June 2021 run."
   },
   {
@@ -173,10 +254,19 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "contract_identity",
-    "stablecoin_ids": ["sog_st_iron"],
-    "organization_ids": ["sog_issuer_iron_finance"],
-    "event_ids": ["sog_ev_iron_2021_06_collapse"],
-    "claim_scopes": ["contract_identity", "polygon_deployment"],
+    "stablecoin_ids": [
+      "sog_st_iron"
+    ],
+    "organization_ids": [
+      "sog_issuer_iron_finance"
+    ],
+    "event_ids": [
+      "sog_ev_iron_2021_06_collapse"
+    ],
+    "claim_scopes": [
+      "contract_identity",
+      "polygon_deployment"
+    ],
     "notes": "Polygon contract identity used for the principal June 2021 IRON case."
   },
   {
@@ -193,10 +283,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "asset_mechanics",
-    "stablecoin_ids": ["sog_st_musd"],
-    "organization_ids": ["sog_issuer_mstable"],
-    "event_ids": ["sog_ev_musd_2026_01_legacy_transition"],
-    "claim_scopes": ["asset_mechanics", "basket_backing", "mint_redemption"],
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [
+      "sog_ev_musd_2026_01_legacy_transition"
+    ],
+    "claim_scopes": [
+      "asset_mechanics",
+      "basket_backing",
+      "mint_redemption"
+    ],
     "notes": "Official documentation for the historical mUSD basket and protocol mechanics."
   },
   {
@@ -213,10 +313,18 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "adjacent_asset_boundary",
-    "stablecoin_ids": ["sog_st_musd"],
-    "organization_ids": ["sog_issuer_mstable"],
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
     "event_ids": [],
-    "claim_scopes": ["adjacent_asset_boundary", "imusd_distinction", "yield_layer"],
+    "claim_scopes": [
+      "adjacent_asset_boundary",
+      "imusd_distinction",
+      "yield_layer"
+    ],
     "notes": "Used to distinguish mUSD from the separate interest-bearing imUSD representation."
   },
   {
@@ -233,10 +341,20 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "current_product_focus",
-    "stablecoin_ids": ["sog_st_musd"],
-    "organization_ids": ["sog_issuer_mstable"],
-    "event_ids": ["sog_ev_musd_2026_01_legacy_transition"],
-    "claim_scopes": ["current_product_focus", "legacy_transition", "organization_status"],
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [
+      "sog_ev_musd_2026_01_legacy_transition"
+    ],
+    "claim_scopes": [
+      "current_product_focus",
+      "legacy_transition",
+      "organization_status"
+    ],
     "notes": "Current site focuses on a newer yield product and links legacy users to withdrawal tooling."
   },
   {
@@ -253,10 +371,139 @@
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "legacy_withdrawal_path",
-    "stablecoin_ids": ["sog_st_musd"],
-    "organization_ids": ["sog_issuer_mstable"],
-    "event_ids": ["sog_ev_musd_2026_01_legacy_transition"],
-    "claim_scopes": ["legacy_withdrawal_path", "redemption_exit", "current_interface"],
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [
+      "sog_ev_musd_2026_01_legacy_transition"
+    ],
+    "claim_scopes": [
+      "legacy_withdrawal_path",
+      "redemption_exit",
+      "current_interface"
+    ],
     "notes": "Presence of a withdrawal interface supports limited legacy-exit treatment but does not prove normal current minting."
+  },
+  {
+    "id": "sog_src_musd_contract_verification_2020",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "event_id": null,
+    "source_type": "onchain_contract",
+    "title": "mUSD Ethereum contract and source verification",
+    "url": "https://etherscan.io/address/0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
+    "publisher": "Etherscan",
+    "published_at": "2020-05-28",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/address/0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "ethereum_contract_identity_and_verification",
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "contract_identity",
+      "source_verification_date",
+      "deployment_readiness"
+    ],
+    "notes": "Etherscan identifies the official mUSD contract and records source-code submission for verification on 2020-05-28. The exact creation transaction and public launch remain unresolved."
+  },
+  {
+    "id": "sog_src_musd_mainnet_record_2020",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "event_id": "sog_ev_musd_mainnet_availability_2020",
+    "source_type": "contemporaneous_record",
+    "title": "mStable Now Live on Mainnet",
+    "url": "https://www.reddit.com/r/ethfinance/comments/gsu4ae",
+    "publisher": "EthFinance community link record",
+    "published_at": "2020-05-29",
+    "archived_url": "https://web.archive.org/web/*/https://www.reddit.com/r/ethfinance/comments/gsu4ae",
+    "accessed_at": "2026-06-25",
+    "reliability": "medium",
+    "claim_scope": "contemporaneous_mainnet_availability_record",
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [
+      "sog_ev_musd_mainnet_availability_2020"
+    ],
+    "claim_scopes": [
+      "candidate_launch_date",
+      "mainnet_availability"
+    ],
+    "notes": "The dated title is preserved, but the original shared first-party outbound URL was not recovered."
+  },
+  {
+    "id": "sog_src_musd_defiant_history_2020",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "event_id": "sog_ev_musd_mainnet_availability_2020",
+    "source_type": "news_article",
+    "title": "DeFi Produces COMP Short Selling",
+    "url": "https://thedefiant.io/newsletter/archive/defi-produces-comp-short-selling",
+    "publisher": "The Defiant",
+    "publhed_at": "2020-06-26",
+    "archived_url": "https://web.archive.org/web/*/https://thedefiant.io/newsletter/archive/defi-produces-comp-short-selling",
+    "accessed_at": "2026-06-25",
+    "reliability": "medium",
+    "claim_scope": "historical_launch_date_support",
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [
+      "sog_ev_musd_mainnet_availability_2020"
+    ],
+    "claim_scopes": [
+      "candidate_launch_date",
+      "early_protocol_history"
+    ],
+    "notes": "Independent historical support for May 29, 2020. It does not replace a missing first-party launch source."
+  },
+  {
+    "id": "sog_src_musd_security_program_2020",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "event_id": "sog_ev_musd_security_program_2020",
+    "source_type": "official_documentation",
+    "title": "mStable bug bounty and production security scope",
+    "url": "https://developers.mstable.org/security/bug-bounty",
+    "publisher": "mStable Developer Documentation",
+    "publhed_at": "2020-06-05",
+    "archived_url": "https://web.archive.org/web/*/https://developers.mstable.org/security/bug-bounty",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "production_security_and_functionality",
+    "stablecoin_ids": [
+      "sog_st_musd"
+    ],
+    "organization_ids": [
+      "sog_issuer_mstable"
+    ],
+    "event_ids": [
+      "sog_ev_musd_security_program_2020"
+    ],
+    "claim_scopes": [
+      "security_program_start",
+      "masset_contracts",
+      "mint",
+      "swap",
+      "redeem",
+      "save"
+    ],
+    "notes": "First-party documentation confirms that production contract functionality was covered by the security program from 2020-06-05."
   }
 ]

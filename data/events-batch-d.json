@@ -66,5 +66,39 @@
     "confidence": "medium",
     "source_count": 3,
     "notes": "This event does not prove that every mUSD contract is disabled; current mint availability remains an open question."
+  },
+  {
+    "id": "sog_ev_musd_mainnet_availability_2020",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "event_type": "mainnet_availability_report",
+    "event_date": "2020-05-29",
+    "title": "mStable mainnet availability is reported",
+    "description": "A contemporaneous community link record announced that mStable was live on mainnet on May 29, 2020, and a later independent historical account identified the same date. The original first-party outbound announcement was not recovered, so this event is medium-confidence and does not set the canonical launch date.",
+    "impact_level": "medium",
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "not_applicable",
+    "confidence": "medium",
+    "source_count": 2,
+    "notes": "Best-known public-launch candidate only. The canonical launch_date remains null."
+  },
+  {
+    "id": "sog_ev_musd_security_program_2020",
+    "stablecoin_id": "sog_st_musd",
+    "issuer_id": "sog_issuer_mstable",
+    "event_type": "production_security_program_start",
+    "event_date": "2020-06-05",
+    "title": "mStable production security program covers core mUSD functions",
+    "description": "mStable documentation states that its production bug-bounty program had been running since June 5, 2020 and covered the mAsset contracts together with MINT, SWAP, REDEEM, and SAVE functionality.",
+    "impact_level": "medium",
+    "event_status_effect": "active",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "not_applicable",
+    "confidence": "high",
+    "source_count": 1,
+    "notes": "This confirms production functionality by June 5 and remains separate from the unresolved original public-launch day."
   }
 ]

@@ -11,13 +11,12 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #144 — Implement MIM boundary chronology
-Latest merged commit: 1e7347c7acb1b55cb8e76774e7e8a9bc2b54c83a
-Current work: mUSD bounded launch-boundary audit
-Canonical conclusion: keep launch_date null
-Best-known public-launch candidate: 2020-05-29
-Next operation after audit: mUSD canonical quality implementation
-Next bounded review: USK
+Latest merged PR: #145 — Audit mStable USD launch history
+Latest merged commit: e750081fc183aa2c44932f5e077c36f52d9257bd
+Current work: mUSD canonical quality implementation
+Canonical conclusion: launch_date remains null
+Implementation result: deployment-readiness, candidate mainnet availability, and production-security boundaries normalized
+Next bounded review after merge: USK
 ```
 
 ## mUSD audit checkpoint
@@ -44,16 +43,15 @@ Audit:
 docs/audits/musd-launch-boundary-review.md
 ```
 
-Follow-up implementation:
+Canonical implementation result:
 
-- preserve the official Ethereum mUSD address
-- record 2020-05-28 as a verified deployment-readiness boundary
-- preserve 2020-05-29 as the best-known candidate without coercion
-- add a medium-confidence mainnet-availability event
-- add the official 2020-06-05 production-security boundary
-- keep Save and imUSD separate from the base mUSD launch
-- add a launch-specific known unknown
-- keep mUSD in the unresolved queue
+- official Ethereum mUSD address preserved
+- 2020-05-28 deployment-readiness boundary recorded
+- 2020-05-29 candidate mainnet-availability event added at medium confidence
+- 2020-06-05 production-security boundary added
+- Save and imUSD remain separate from the base mUSD launch
+- launch-specific known unknown added
+- mUSD remains in the unresolved queue
 
 ## Completed quality checkpoints
 
@@ -83,12 +81,12 @@ Quality-only work after the checkpoint does not trigger automatic production pub
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-132 events
-132 Event v2 detail records
-397 evidence records
-397 evidence relation projections
+134 events
+134 Event v2 detail records
+401 evidence records
+401 evidence relation projections
 90 reserve-report or reserve-context records
-201 known unknowns
+202 known unknowns
 9 regulatory notes
 116 deployments
 82 legal profiles
@@ -145,7 +143,7 @@ Berachain HONEY
 Anzen USDz
 ```
 
-Next bounded review after mUSD implementation:
+Next bounded review:
 
 ```text
 USK
@@ -189,16 +187,9 @@ EURT
 
 ```text
 Phase 1 — mUSD bounded review
-1. Complete CI and merge the mUSD audit PR.
-2. Preserve launch_date as null.
-
-Phase 2 — mUSD canonical quality implementation
-3. Record the 2020-05-28 deployment-readiness boundary.
-4. Add the 2020-05-29 candidate mainnet-availability event at medium confidence.
-5. Add the official 2020-06-05 production-security boundary.
-6. Add a launch-specific known unknown and update the queue note without reducing counts.
-7. Synchronize baselines, generated outputs, README, audits, and roadmap.
-8. Run all six CI workflows and merge only after every check passes.
+1. Complete final CI and merge the mUSD implementation PR.
+2. Preserve launch_date as null and retain the 2020-05-29 candidate as non-canonical.
+3. Confirm that all temporary synchronization code is removed.
 
 Phase 3 — Continue launch-date quality wave
 9. Audit USK.
@@ -219,11 +210,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the mUSD audit PR.
+1. Complete final CI and merge the mUSD implementation PR.
 2. Report that launch_date remains null and queue counts remain 22 / C16.
-3. Open the mUSD canonical quality implementation PR.
-4. Add boundary records without representing 2020-05-29 as confirmed canonical launch.
-5. Start USK after the mUSD implementation passes all six workflows.
+3. Start the bounded USK launch-boundary audit.
+4. Separate deployment, first issuance, interface availability, chain state, and successor-network boundaries.
+5. Do not mark USK migrated or terminated without authoritative evidence.
 ```
 
 ## Production policy

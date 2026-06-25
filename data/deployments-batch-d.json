@@ -7,7 +7,10 @@
     "contract_address": "0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359",
     "status": "migrated",
     "notes": "Historical SAI token contract. Current DAI uses a different canonical token and system.",
-    "evidence_ids": ["sog_src_sai_contract_batch_d", "sog_src_sai_migration_docs_batch_d"]
+    "evidence_ids": [
+      "sog_src_sai_contract_batch_d",
+      "sog_src_sai_migration_docs_batch_d"
+    ]
   },
   {
     "id": "sog_dep_iron_polygon_batch_d",
@@ -17,7 +20,11 @@
     "contract_address": "0xD86b5923F3AD7b585eD81B448170ae026c65ae9a",
     "status": "collapsed",
     "notes": "Principal IRON deployment studied in the June 2021 Polygon bank-run case.",
-    "evidence_ids": ["sog_src_iron_contract_batch_d", "sog_src_iron_fed_batch_d", "sog_src_iron_postmortem_batch_d"]
+    "evidence_ids": [
+      "sog_src_iron_contract_batch_d",
+      "sog_src_iron_fed_batch_d",
+      "sog_src_iron_postmortem_batch_d"
+    ]
   },
   {
     "id": "sog_dep_musd_ethereum_batch_d",
@@ -26,7 +33,11 @@
     "deployment_type": "legacy_canonical_issuance",
     "contract_address": "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
     "status": "restricted",
-    "notes": "Historical Ethereum mUSD token. Current issuance, basket composition, and frontend support require ongoing contract-level verification.",
-    "evidence_ids": ["sog_src_musd_docs_batch_d", "sog_src_mstable_withdrawal_batch_d"]
+    "notes": "Official Ethereum mUSD token. Source code was submitted for verification on 2020-05-28. The exact creation transaction, first permissionless mint, and canonical public-launch day remain unresolved.",
+    "evidence_ids": [
+      "sog_src_musd_docs_batch_d",
+      "sog_src_mstable_withdrawal_batch_d",
+      "sog_src_musd_contract_verification_2020"
+    ]
   }
 ]
