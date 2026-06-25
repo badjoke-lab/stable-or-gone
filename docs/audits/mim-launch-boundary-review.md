@@ -2,7 +2,7 @@
 
 Recorded: 2026-06-25
 
-Result: PUBLIC LAUNCH DATE REMAINS UNRESOLVED
+Result: IMPLEMENTED — PUBLIC LAUNCH DATE REMAINS UNRESOLVED
 
 Stablecoin: `sog_st_mim`
 
@@ -120,9 +120,9 @@ Reason:
 - 2021-06-02 and 2021-06-05 are liquidity and incentive boundaries
 - no reviewed primary or on-chain source fixes one defensible day for original public MIM borrowing and issuance
 
-## Resolved quality improvements
+## Implementation result
 
-Although the public launch date remains unresolved, the follow-up canonical implementation should:
+The public launch date remains unresolved, and the canonical quality implementation:
 
 1. preserve the official Ethereum MIM address
 2. record 2021-05-25 as the contract-deployment boundary

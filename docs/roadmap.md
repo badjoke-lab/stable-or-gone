@@ -21,12 +21,12 @@ Every roadmap-changing PR must update this file. Every merge report must state t
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #142 — Implement USD1 deployment and testing boundaries
-Latest merged commit: 39304080bd5bb7019949f4b4ea24c99fe2b50058
-Current work: MIM bounded launch-boundary audit
-Canonical launch conclusion: keep launch_date null
-Resolved implementation target: introduction, deployment, liquidity incentive, and live-protocol chronology
-Next bounded review after MIM implementation: mUSD
+Latest merged PR: #143 — Audit MIM launch boundaries
+Latest merged commit: 56309708750cb4f90815fa61e32f5c4c82106559
+Current work: MIM canonical quality implementation
+Canonical launch conclusion: launch_date remains null
+Implementation result: introduction, deployment, liquidity incentive, and live-protocol chronology normalized
+Next bounded review after merge: mUSD
 ```
 
 ## MIM audit checkpoint
@@ -56,7 +56,7 @@ Audit file:
 docs/audits/mim-launch-boundary-review.md
 ```
 
-Follow-up implementation:
+Canonical implementation result:
 
 - preserve the official Ethereum MIM address
 - record the 2021-05-25 deployment boundary
@@ -105,12 +105,12 @@ The successful production publication includes the 82-record registry and the th
 86 stablecoin-organization relationships
 82 classifications
 82 reserve/redemption profiles
-130 events
-130 Event v2 detail records
-394 evidence records
-394 evidence relation projections
+132 events
+132 Event v2 detail records
+397 evidence records
+397 evidence relation projections
 90 reserve-report or reserve-context records
-200 known unknowns
+201 known unknowns
 9 regulatory notes
 116 deployments
 82 legal profiles
@@ -176,7 +176,7 @@ Launch-date policy:
 - do not substitute contract deployment, testing, liquidity incentives, a rebrand, or a later version for the original launch
 - keep `launch_date: null` when the exact public boundary remains unresolved
 
-Next bounded review after MIM implementation:
+Next bounded review:
 
 ```text
 mUSD
@@ -275,11 +275,11 @@ Phase 5 — Controlled growth
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the MIM audit PR.
+1. Complete final CI and merge the MIM implementation PR.
 2. Report that launch_date remains null and queue counts remain 22 / C16.
-3. Open the MIM canonical quality implementation PR.
-4. Record introduction, deployment, and liquidity-incentive boundaries without labeling them as public launch.
-5. Start mUSD only after the MIM implementation passes all six workflows.
+3. Start the bounded mUSD launch-boundary audit.
+4. Separate deployment, public launch, basket activation, and Save-product boundaries.
+5. Do not force a date without day-level primary or on-chain public evidence.
 ```
 
 ## Production policy

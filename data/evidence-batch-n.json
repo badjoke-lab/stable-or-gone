@@ -503,5 +503,94 @@
       "pre_broader_market_access"
     ],
     "notes": "The proposal describes a small test distribution before broader market access and is not a public-launch statement."
+  },
+  {
+    "id": "sog_src_mim_introduction_2021",
+    "stablecoin_id": "sog_st_mim",
+    "issuer_id": "sog_issuer_abracadabra",
+    "event_id": "sog_ev_mim_introduction_2021",
+    "source_type": "official_blog",
+    "title": "Abracadabra, SPELL and Magic Internet Money",
+    "url": "https://medium.com/abracadabra-money/abracadabra-spell-and-magic-internet-money-a563637ce92e",
+    "publisher": "Abracadabra Money",
+    "published_at": "2021-05-05",
+    "archived_url": "https://web.archive.org/web/*/https://medium.com/abracadabra-money/abracadabra-spell-and-magic-internet-money-a563637ce92e",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "product_and_protocol_introduction",
+    "stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_ids": [
+      "sog_ev_mim_introduction_2021"
+    ],
+    "claim_scopes": [
+      "introduction_date",
+      "mim_identity",
+      "abracadabra_protocol_design"
+    ],
+    "notes": "Dated first-party introduction. It does not establish the first public Cauldron or minting day."
+  },
+  {
+    "id": "sog_src_mim_ethereum_deployment_2021",
+    "stablecoin_id": "sog_st_mim",
+    "issuer_id": "sog_issuer_abracadabra",
+    "event_id": null,
+    "source_type": "onchain_explorer",
+    "title": "MIM Ethereum contract creation",
+    "url": "https://etherscan.io/tx/0x42dc8aae5acb46454f0355787c9add15f58ec1a7cc9f79ca2ba5499bcf855ef7",
+    "publisher": "Etherscan",
+    "published_at": "2021-05-25",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/tx/0x42dc8aae5acb46454f0355787c9add15f58ec1a7cc9f79ca2ba5499bcf855ef7",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "ethereum_contract_deployment",
+    "stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "contract_creation_date",
+      "deployment_boundary",
+      "pre_public_launch_deployment"
+    ],
+    "notes": "The official MIM Ethereum contract was created on 2021-05-25. Deployment is not treated as public launch."
+  },
+  {
+    "id": "sog_src_mim_curve_live_2021",
+    "stablecoin_id": "sog_st_mim",
+    "issuer_id": "sog_issuer_abracadabra",
+    "event_id": "sog_ev_mim_liquidity_incentives_2021",
+    "source_type": "governance_proposal",
+    "title": "sCIP#40 Adding a MIM/3Pool metapool",
+    "url": "https://gov.curve.finance/t/scip-40-adding-a-mim-3pool-metapool/1850",
+    "publisher": "Abracadabra Money via Curve Governance",
+    "published_at": "2021-06-11",
+    "archived_url": "https://web.archive.org/web/*/https://gov.curve.finance/t/scip-40-adding-a-mim-3pool-metapool/1850",
+    "accessed_at": "2026-06-25",
+    "reliability": "high",
+    "claim_scope": "early_lending_market_and_liquidity_operation",
+    "stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_ids": [
+      "sog_ev_mim_liquidity_incentives_2021"
+    ],
+    "claim_scopes": [
+      "first_lending_market_range",
+      "lp_rewards_start",
+      "live_protocol_use",
+      "mim_supply_and_liquidity"
+    ],
+    "notes": "First-party proposal states that the first lending market and LP incentives launched less than two weeks earlier and fixes LP reward start to 2021-06-05."
   }
 ]

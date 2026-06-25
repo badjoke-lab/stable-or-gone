@@ -82,9 +82,9 @@
     {
       "stablecoin_id": "sog_st_mim",
       "category": "C",
-      "best_known_range": null,
+      "best_known_range": "2021-05 to 2021-06",
       "reason_code": "launch_boundary_conflict",
-      "review_note": "Cauldron, first issuance, announcement, and UI differ."
+      "review_note": "May 5 introduction, May 25 deployment, June 5 LP rewards, and live operation by June 11 are fixed; the exact first Cauldron, first issuance, and public UI day remain unresolved."
     },
     {
       "stablecoin_id": "sog_st_msusd",

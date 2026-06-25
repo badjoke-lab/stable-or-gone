@@ -29,6 +29,7 @@ Category D: 3
 - Cashio Dollar — public mint, redemption, liquidity, and swap availability fixed to 2021-11-09 while the exact Solana mint remains unresolved.
 - DOLA — Ethereum contract creation on 2021-02-23 separated from the public Anchor and DOLA launch on 2021-02-25; the exact first mint remains unresolved.
 - USD1 — Ethereum and BNB Smart Chain deployments on 2025-01-28, the 2025-03-25 introduction, and the 2025-04-07 airdrop test were separated; public launch remains unresolved at April 2025 month level.
+- MIM — 2021-05-05 introduction, 2021-05-25 deployment, 2021-06-05 LP incentives, and live operation by 2021-06-11 were separated; the exact first Cauldron remains unresolved.
 
 USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical launch dates remain unresolved and therefore stay in Category C. Agora AUSD’s current Ethereum contract deployment is fixed to 2024-07-07 without treating deployment as public launch.
 
@@ -50,7 +51,7 @@ USDX, sUSDe, and Agora AUSD have completed bounded audits, but their canonical l
 | Euro Tether | `sog_st_eurt` | — | Announcement, issuance, listings, and deployments differ. |
 | GYEN | `sog_st_gyen` | — | Issuance, availability, listings, and wind-down differ. |
 | IRON | `sog_st_iron` | — | BSC, Polygon, and staged rollout boundaries differ. |
-| Magic Internet Money | `sog_st_mim` | — | Cauldron, first issuance, announcement, and UI differ. |
+| Magic Internet Money | `sog_st_mim` | 2021-05 to 2021-06 | Introduction, deployment, first Cauldron, first issuance, liquidity, incentives, and UI differ. |
 | MainStreetUSD | `sog_st_msusd` | — | Announcement, issuance, deployment, and availability differ. |
 | mStable USD | `sog_st_musd` | — | Deployment, public launch, basket, and Save differ. |
 | Stables Labs USDX | `sog_st_stablesusdx` | — | Announcement, issuance, deployment, and approved access differ. |
@@ -86,5 +87,5 @@ Category B: 3
 Category C: 16
 Category D: 3
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: MIM
+Next bounded review: mUSD
 ```
