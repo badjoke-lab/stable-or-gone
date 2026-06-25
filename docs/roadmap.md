@@ -11,27 +11,28 @@ This is the canonical execution and recovery schedule for SOG. Every roadmap-cha
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged PR: #160 — Promote Batch 16 stable assets
-Latest merged commit: b176bc1b57ca17578cbc7e4ef4ec757e065a1d68
+Latest merged PR: #162 — Add Batch 17 candidate research
+Latest merged commit: eaf2daecdbe799a5ac5deaa7ea915bc295425d7d
 Canonical stable assets: 87
 Candidate total: 92
 Promoted candidates: 87
 Pending accepted candidates: 5
-Current work: Batch 17 candidate research
-Next operation after merge: build a reviewed full-layer Batch 17 draft
+Current work: Batch 17 full-layer draft
+Next operation after merge: open the bounded Batch 17 canonical promotion PR
 Publication requirement: manual publication and production-parity verification after canonical promotion
 ```
 
-## Batch 17 candidate checkpoint
+## Batch 17 full-layer checkpoint
 
 ```text
 Accepted candidates: 5
-Canonical promotions in research PR: 0
+Full-layer drafts: 5
+Canonical promotions in draft PR: 0
 Canonical stable assets: 87
-Target batch: batch_017
+Target after canonical promotion: 92
 ```
 
-Selected candidates:
+Drafted candidates:
 
 ```text
 USA₮ / USAT
@@ -41,27 +42,28 @@ USDH
 AE Coin / AEC
 ```
 
-Identity and lifecycle boundaries:
+The non-canonical draft covers identity, organizations, classifications, reserve and redemption context, events, evidence, deployments, legal profiles, reserve components, income profiles, and five explicit known unknowns for every candidate.
 
-- USA₮ is separate from USD₮ / USDT; Anchorage Digital Bank, N.A. is the legal issuer.
+Important boundaries:
+
+- USA₮ is separate from USD₮ / USDT; Anchorage Digital Bank, N.A. remains the legal issuer.
 - EURAU is issued by AllUnity; shareholders, reserve banks, custodians, market makers, and distributors remain separate roles.
-- Noble Dollar is separate from Neutrino USD and therefore uses `sog_st_nobleusdn` and `noble-usdn`.
-- USDH is proposed as `limited` while migration, treasury-deployer transition, and final support boundaries remain under review.
-- AE Coin separates AED Stablecoin LLC's B2B issuer role from appointed custody, transfer, conversion, and end-customer agents.
+- Noble Dollar is separate from Neutrino USD and uses `sog_st_nobleusdn` / `noble-usdn`.
+- USDH remains proposed as limited / winding down while migration and final support boundaries remain under review.
+- AE Coin separates AED Stablecoin LLC's B2B issuer role from appointed agent roles.
 - Unsupported launch dates for USDH and AE Coin remain null.
 
-Research files:
+Draft files:
 
 ```text
-data/candidate-stable-assets-growth-90.json
-data/candidate-research-batch-17.json
-docs/growth/batch-17-research-checkpoint.md
-scripts/validate-batch17-research.mjs
+data/batch-17-full-layer-draft.json
+docs/growth/batch-17-full-layer-draft.md
+scripts/validate-batch17-full-layer-draft.mjs
 ```
 
 ## Batch 16 completion checkpoint
 
-PR #160 promoted the following five assets with complete Registry v2/v3 layers:
+PR #160 promoted:
 
 ```text
 United Stables U
@@ -81,14 +83,6 @@ Pending candidates: 0
 All six GitHub workflows: PASS
 Cloudflare publication: not performed by the canonical promotion PR
 ```
-
-Key Batch 16 identity boundaries remain fixed:
-
-- Anchorage Digital Bank is the USDGO legal issuer; OSL branding and distribution are separate.
-- SoFiUSD and SOFID are one stablecoin identity; tokenized deposits remain separate products.
-- Solstice USX is separate from dForce USX, eUSX, and YieldVault positions.
-- Base OUSD is separate from wrapped OUSD and other Origin products.
-- Base United Stables U is separate from rewards, staking, and wrapped representations.
 
 ## Current canonical registry
 
@@ -170,7 +164,7 @@ Empty Set Dollar
 GYEN
 ```
 
-These queues remain explicit research backlogs. They do not block bounded record growth.
+These queues remain explicit research backlogs and do not block bounded growth.
 
 ## Controlled growth sequence
 
@@ -179,38 +173,40 @@ Phase 1 — Candidate research
 1. Select no more than five candidates.
 2. Verify identity, issuer, backing, redemption, income, deployment, and lifecycle boundaries.
 3. Preserve unsupported dates as null.
-4. Record blocking unknowns and primary source leads.
-5. Change no canonical registry data.
+4. Change no canonical registry data.
 
 Phase 2 — Full-layer draft
-6. Draft stable-asset, organization, relationship, classification, reserve/redemption, event, evidence, deployment, legal, reserve-component, and income layers.
-7. Add no placeholder reserve-report rows.
-8. Keep private monitoring and unreviewed candidates out of public files.
+5. Draft all required Registry v2/v3 layers.
+6. Add no placeholder reserve-report rows.
+7. Keep private monitoring and unreviewed candidates out of public files.
+8. Preserve every blocking unknown explicitly.
 
 Phase 3 — Canonical promotion
-9. Promote all five only after the complete draft passes review.
-10. Run all six workflows and merge only after every check passes.
+9. Split reviewed drafts into production files.
+10. Promote all five only after the complete draft passes review.
+11. Run all six workflows and merge only after every check passes.
 
 Phase 4 — Publication checkpoint
-11. Manually publish latest main through the approved GitHub Actions workflow.
-12. Verify deployed commit, public counts, canonical routes, machine-readable files, sitemap, and consistency.
-13. Record production parity before beginning the following canonical growth promotion.
+12. Manually publish latest main through the approved GitHub Actions workflow.
+13. Verify deployed commit, public counts, canonical routes, machine-readable files, sitemap, and consistency.
+14. Record production parity before beginning the following canonical growth promotion.
 
 Phase 5 — Normal operating cycle
-14. Alternate one growth batch with two or three existing-record quality audits.
-15. Insert urgent incident, depeg, regulatory, wind-down, or redemption changes ahead of the routine queue.
-16. Never allow production to trail main by more than one growth batch.
+15. Alternate one growth batch with two or three existing-record quality audits.
+16. Insert urgent incident, depeg, regulatory, wind-down, or redemption changes ahead of the routine queue.
+17. Never allow production to trail main by more than one growth batch.
 ```
 
 ## Immediate next work
 
 ```text
-1. Complete CI and merge the Batch 17 candidate-research PR.
-2. Build the complete non-canonical full-layer draft for all five accepted candidates.
-3. Resolve issuer, reserve, redemption, deployment, income, and lifecycle boundaries.
-4. Promote Batch 17 in one bounded five-record canonical PR.
-5. Manually publish and verify production parity after canonical merge.
-6. Resume existing-record quality audits before selecting Batch 18.
+1. Complete CI and merge the Batch 17 full-layer draft PR.
+2. Split the draft into canonical production-layer files.
+3. Add candidate promotion controls and Batch 17 promotion validation.
+4. Update Registry v2/v3 baselines, loaders, generated stats, and integrity outputs.
+5. Merge only after all six workflows pass.
+6. Manually publish and verify production parity.
+7. Resume existing-record quality audits before selecting Batch 18.
 ```
 
 ## Production policy

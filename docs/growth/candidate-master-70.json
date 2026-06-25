@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "status": "batch_017_research_complete",
+  "status": "batch_017_full_layer_draft_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -47,7 +47,7 @@
     "batch_016_research_complete": true,
     "batch_016_promotion_complete": true,
     "batch_017_research_complete": true,
-    "batch_017_full_layer_draft_complete": false,
+    "batch_017_full_layer_draft_complete": true,
     "batch_017_promotion_complete": false,
     "ordinary_growth_remains_blocked": false
   }
