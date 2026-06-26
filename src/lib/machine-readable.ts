@@ -15,6 +15,7 @@ import {
 } from './data/registry';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
+import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
 export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
@@ -126,6 +127,7 @@ export function getRecordCountBreakdown() {
   const registryUpdates = getRegistryUpdates();
   const referenceTargets = stablecoins.map((coin) => resolveReferenceTarget(coin));
   const backingModels = stablecoins.map((coin) => resolveBackingModel(coin));
+  const eventTaxonomies = events.map((event) => resolveEventTaxonomy(event));
 
   return {
     stablecoins: stablecoins.length,
@@ -147,7 +149,11 @@ export function getRecordCountBreakdown() {
     asset_class: countValues(stablecoins.map((coin) => coin.asset_class)),
     organization_type: countValues(organizations.map((organization) => organization.organization_type || organization.issuer_type)),
     relationship_role: countValues(relationships.map((relationship) => relationship.role)),
-    event_type: countValues(events.map((event) => event.event_type)),
+    public_event_category: countValues(eventTaxonomies.map((event) => event.public_category)),
+    canonical_event_subtype: countValues(eventTaxonomies.map((event) => event.canonical_subtype)),
+    event_detail_kind: countValues(eventTaxonomies.map((event) => event.detail_kind)),
+    event_status_effect_category: countValues(eventTaxonomies.map((event) => event.status_effect_category)),
+    event_recovery_category: countValues(eventTaxonomies.map((event) => event.recovery_category)),
     evidence_reliability: countValues(evidence.map((item) => item.reliability)),
     evidence_source_type: countValues(evidence.map((item) => item.source_type)),
     reserve_report_type: countValues(reserveReports.map((report) => report.report_type)),
