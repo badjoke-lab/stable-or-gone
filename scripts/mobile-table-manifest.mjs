@@ -6,6 +6,7 @@ export const mobileTableSourceFiles = [
   'src/components/IssuerControlEvents.astro',
   'src/components/StablecoinEventTimeline.astro',
   'src/components/StructuredEventDetail.astro',
+  'src/components/DeploymentTable.astro',
   'src/components/EvidenceSourceTable.astro',
   'src/pages/issuer/[slug].astro',
   'src/pages/event/[id].astro'

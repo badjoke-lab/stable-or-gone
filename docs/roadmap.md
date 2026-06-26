@@ -43,8 +43,8 @@ docs/migration/registry-v3-baseline.json
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed work after PR #178 merges: PR 11
-Next approved work: PR 12 — deployment status and verification-state separation
+Latest completed work after PR #179 merges: PR 12
+Next approved work: PR 13 — value-state semantics
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -91,6 +91,7 @@ PR #175  PR 8  backing and stabilization normalization
 PR #176  PR 9  event category and subtype normalization
 PR #177  PR 10 organization classification normalization
 PR #178  PR 11 evidence reliability, provenance, and type separation
+PR #179  PR 12 deployment status and verification-state separation
 ```
 
 ## PR 10 organization baseline
@@ -182,44 +183,99 @@ scripts/validate-evidence-taxonomy-normalization.mjs
 docs/audits/evidence-taxonomy-normalization-2026-06-26.md
 ```
 
-Evidence presentation separates:
+Duplicate evidence is not merged in PR 11. Deduplication remains reserved for PR 15, where all subject and claim relations must be preserved.
+
+## PR 12 deployment baseline
+
+Status after PR #179 merges: **PASS**
 
 ```text
-original URL
-publisher
-public source category
-canonical source type
-provenance
-primary or secondary state
-supported claims
-archive state and archive URL
-normalized reliability
-recorded raw reliability when different
+Deployments:                       130
+Unique deployment IDs:            130
+Stable assets covered:             92
+Network or network contexts:       31
+Records with evidence:            130
+Records with control events:       18
+Canonicality explicitly recorded:  63
+Canonicality not recorded:         67
+Explicit verification status:       0
 ```
 
-Duplicate evidence is not merged in PR 11. Deduplication remains reserved for PR 15, where all subject and claim relations must be preserved.
+Operational state:
+
+```text
+Active:                 85
+Unknown or unresolved:  23
+Inactive or historical:  6
+Restricted:              6
+Collapsed or failed:     2
+Winding down:            2
+Terminated:              2
+Limited:                 2
+Impaired:                1
+Migrated:                1
+```
+
+Verification state:
+
+```text
+Source-linked record; identifier not recorded: 69
+Identifier recorded; verification not recorded: 45
+Source review needed:                           15
+Unknown or unresolved:                           1
+Explicitly verified:                             0
+```
+
+Contract identity state:
+
+```text
+Identifier not recorded:                  69
+Identifier recorded:                      45
+Source review needed:                     15
+Not applicable or review unresolved:       1
+```
+
+Network record state:
+
+```text
+Specific network recorded:        124
+Aggregate or multi-chain context:    4
+Network source review needed:        2
+```
+
+Authoritative files:
+
+```text
+config/deployment-taxonomy.mjs
+src/utils/deploymentTaxonomy.ts
+src/components/DeploymentTable.astro
+scripts/collect-deployment-taxonomy-migration.mjs
+scripts/validate-deployment-taxonomy-normalization.mjs
+docs/audits/deployment-taxonomy-normalization-2026-06-26.md
+```
+
+PR 12 does not infer canonicality from popularity, verification from identifier syntax, active state from explorer availability, or implementation from a proposal.
 
 ## Remaining Gate C sequence
 
 ```text
-PR 12  deployment status and verification-state separation
 PR 13  value-state semantics
 PR 14  explicit primary display relationships
 PR 15  evidence-source deduplication with claim preservation
 PR 16  move record-specific public copy and complete the 92-record migration
 ```
 
-## Immediate next work — PR 12
+## Immediate next work — PR 13
 
-1. Inventory all 130 deployment records.
-2. Separate deployment lifecycle status from canonicality and verification state.
-3. Separate chain/network identity, token standard, deployment type, contract verification, issuer-control capability, and operational state.
-4. Detect status values standing in for canonicality or verification.
-5. Distinguish missing contract data from unknown, not applicable, and not yet verified.
-6. Preserve multi-chain and historical deployment records.
-7. Update deployment tables, machine-readable output, statistics, mobile checks, and validators.
-8. Do not infer canonicality from chain popularity or current market use.
-9. Do not perform value-state semantics work inside PR 12.
+1. Define shared public states for known, unknown, not recorded, not applicable, review needed, and unavailable.
+2. Audit field-level placeholders and blank-value semantics across the 92 current asset records.
+3. Prevent literal workflow placeholders from appearing as user-facing facts.
+4. Preserve canonical raw values while exposing normalized public state separately.
+5. Apply the shared value-state model to asset, organization, event, evidence, reserve, redemption, and deployment surfaces where applicable.
+6. Update machine-readable output, statistics, mobile checks, and validators.
+7. Do not infer missing facts.
+8. Do not perform primary-display-relationship work inside PR 13.
+9. Do not deduplicate evidence.
 10. Do not change canonical record counts.
 11. Do not deploy production.
 12. Do not select Batch 18.
@@ -232,6 +288,9 @@ Historical terminal dates unresolved:     4
 Reserve applicability queue:              12
 Evidence duplicate URLs for PR 15:        32
 Evidence polluted reliability values:     36
+Deployment canonicality not recorded:     67
+Deployment verification not recorded:    130
+Deployment source review needed:          15
 ```
 
 ## Later phase gates

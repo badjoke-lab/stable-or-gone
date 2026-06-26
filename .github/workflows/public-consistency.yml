@@ -21,6 +21,7 @@ jobs:
       - run: node scripts/collect-event-taxonomy-migration.mjs
       - run: node scripts/collect-organization-taxonomy-migration.mjs
       - run: node scripts/collect-evidence-taxonomy-migration.mjs
+      - run: node scripts/collect-deployment-taxonomy-migration.mjs
       - name: Build public site
         shell: bash
         run: |
@@ -35,6 +36,8 @@ jobs:
           if-no-files-found: warn
           path: |
             build-site.log
+            data/generated/deployment-taxonomy-migration.json
+            data/generated/deployment-taxonomy-validation.json
             data/generated/evidence-taxonomy-migration.json
             data/generated/organization-taxonomy-migration.json
             data/generated/organization-taxonomy-validation.json

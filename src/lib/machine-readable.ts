@@ -1,7 +1,6 @@
 import buildProvenanceData from '../../data/generated/build-provenance.json';
 
 import {
-  getDeployments,
   getEvidence,
   getEvidenceRelations,
   getEvents,
@@ -13,11 +12,13 @@ import {
   getReserveReports,
   getStablecoins,
 } from './data/registry';
+import { getDeploymentsV3 } from './data/registryV3';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
 import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
 import { resolveOrganizationTaxonomy } from '../utils/organizationTaxonomy';
 import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
+import { resolveDeploymentTaxonomy } from '../utils/deploymentTaxonomy';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
 export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
@@ -125,13 +126,14 @@ export function getRecordCountBreakdown() {
   const reserveReports = getReserveReports();
   const knownUnknowns = getKnownUnknowns();
   const regulatoryNotes = getRegulatoryNotes();
-  const deployments = getDeployments();
+  const deployments = getDeploymentsV3();
   const registryUpdates = getRegistryUpdates();
   const referenceTargets = stablecoins.map((coin) => resolveReferenceTarget(coin));
   const backingModels = stablecoins.map((coin) => resolveBackingModel(coin));
   const eventTaxonomies = events.map((event) => resolveEventTaxonomy(event));
   const organizationTaxonomies = organizations.map((organization) => resolveOrganizationTaxonomy(organization));
   const evidenceTaxonomies = evidence.map((item) => resolveEvidenceTaxonomy(item));
+  const deploymentTaxonomies = deployments.map((item) => resolveDeploymentTaxonomy(item));
 
   return {
     stablecoins: stablecoins.length,
@@ -174,7 +176,16 @@ export function getRecordCountBreakdown() {
     evidence_claim_scope_non_exclusive: countMultiValues(evidenceRelations.map((item) => item.claim_scopes)),
     reserve_report_type: countValues(reserveReports.map((report) => report.report_type)),
     known_unknown_severity: countValues(knownUnknowns.map((item) => item.severity)),
-    deployment_status: countValues(deployments.map((deployment) => deployment.status)),
+    public_deployment_category: countValues(deploymentTaxonomies.map((item) => item.public_category)),
+    canonical_deployment_type: countValues(deploymentTaxonomies.map((item) => item.canonical_deployment_type)),
+    deployment_operational_state: countValues(deploymentTaxonomies.map((item) => item.operational_state)),
+    deployment_status: countValues(deploymentTaxonomies.map((item) => item.canonical_status_raw)),
+    deployment_change_state: countValues(deploymentTaxonomies.map((item) => item.change_state)),
+    deployment_canonicality: countValues(deploymentTaxonomies.map((item) => item.canonicality)),
+    deployment_canonicality_record_state: countValues(deploymentTaxonomies.map((item) => item.canonicality_record_state)),
+    deployment_verification_state: countValues(deploymentTaxonomies.map((item) => item.verification_state)),
+    deployment_contract_identity_state: countValues(deploymentTaxonomies.map((item) => item.contract_identity_state)),
+    deployment_network_identity_state: countValues(deploymentTaxonomies.map((item) => item.network_identity_state)),
     deployment_chain: countValues(deployments.map((deployment) => deployment.chain)),
   };
 }
