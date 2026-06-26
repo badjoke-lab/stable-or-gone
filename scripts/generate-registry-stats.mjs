@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getReferenceComparisonCategory } from '../config/reference-targets.mjs';
 import { getPublicBackingModelCategory } from '../config/backing-models.mjs';
+import { getEventStatusEffectCategory, getPublicEventCategory, getRecoveryCategory } from '../config/event-taxonomy.mjs';
 
 const root = process.cwd();
 const outputPath = 'data/generated/registry-stats.json';
@@ -78,6 +79,8 @@ export function buildRegistryStats() {
   const stablecoins = groups.stablecoins;
   const classificationExtensionById = new Map((groups.classification_extensions ?? []).map((row) => [row.id, row]));
   const classifications = groups.classifications.map((row) => ({ ...row, ...(classificationExtensionById.get(row.id) ?? {}) }));
+  const eventDetailById = new Map(groups.event_details.map((row) => [row.id, row]));
+  const events = groups.events.map((row) => ({ ...row, ...(eventDetailById.get(row.id) ?? {}) }));
   const stablecoinIds = new Set(stablecoins.map((row) => row.id));
   const lifecycleCounts = countBy(classifications, (row) => row.lifecycle_status);
   const activeStatuses = new Set(['active', 'restricted']);
@@ -111,7 +114,7 @@ export function buildRegistryStats() {
       relationships: groups.relationships.length,
       classifications: classifications.length,
       profiles: groups.profiles.length,
-      events: groups.events.length,
+      events: events.length,
       event_details: groups.event_details.length,
       evidence: groups.evidence.length,
       reserve_reports: groups.reserve_reports.length,
@@ -152,6 +155,12 @@ export function buildRegistryStats() {
       backing_types_non_exclusive: countBy(classifications, (row) => row.backing_types ?? ['unknown']),
       stabilization_mechanisms: countBy(classifications, (row) => row.stabilization_mechanism),
       governance_models: countBy(classifications, (row) => row.governance_model),
+      public_event_categories: countBy(events, (row) => getPublicEventCategory(row.event_type)),
+      canonical_event_subtypes: countBy(events, (row) => row.event_type),
+      event_detail_kinds: countBy(events, (row) => row.event_detail_kind),
+      event_status_effect_categories: countBy(events, (row) => getEventStatusEffectCategory(row.event_status_effect)),
+      event_recovery_categories: countBy(events, (row) => getRecoveryCategory(row)),
+      event_impact_levels: countBy(events, (row) => row.impact_level),
       legal_classifications_non_exclusive: countBy(legalProfiles, (row) =>
         Array.isArray(row.classifications) && row.classifications.length
           ? row.classifications.map((item) => item.classification)
@@ -171,7 +180,7 @@ export function buildRegistryStats() {
       reserve_components: coverage(reserveComponents, stablecoinIds),
       income_profiles: coverage(incomeProfiles, stablecoinIds),
       deployments: coverage(deployments, stablecoinIds),
-      events: coverage(groups.events, stablecoinIds),
+      events: coverage(events, stablecoinIds),
       evidence: coverage(groups.evidence, stablecoinIds),
       reserve_reports: coverage(groups.reserve_reports, stablecoinIds),
       known_unknowns: coverage(groups.known_unknowns, stablecoinIds)
