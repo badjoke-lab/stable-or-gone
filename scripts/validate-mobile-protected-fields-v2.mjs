@@ -5,6 +5,7 @@ const protectedByFile = {
   'src/pages/issuers/index.astro': ['Organization category', 'Regulatory character', 'Jurisdiction', 'Functional roles', 'Relationship state', 'Record confidence'],
   'src/pages/events/index.astro': ['Category', 'Subtype', 'Impact', 'Recovery', 'Sources'],
   'src/components/StablecoinDetailView.astro': ['Reference target', 'Reference kind', 'Comparison category', 'Reference methodology', 'Public backing model', 'Canonical backing types', 'Reserve component categories', 'Primary stabilization mechanism', 'Recorded model description'],
+  'src/components/DeploymentTable.astro': ['Network record state', 'Public deployment category', 'Canonical deployment type', 'Operational state', 'Recorded status', 'Change or proposal state', 'Canonicality', 'Canonicality record state', 'Verification state', 'Contract identity state', 'Contract or identifier', 'Freeze', 'Blacklist', 'Control events'],
   'src/pages/issuer/[slug].astro': ['Organization category', 'Canonical organization type', 'Legal form', 'Legal-form state', 'Regulatory character', 'Jurisdiction scope', 'Functional roles', 'Relationship states', 'Record confidence'],
   'src/pages/event/[id].astro': ['Public event category', 'Canonical event subtype', 'Structured detail kind', 'Effect on stablecoin lifecycle', 'Recovery or reversal', 'Structured detail coverage', 'Record confidence']
 };
