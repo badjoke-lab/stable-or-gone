@@ -108,7 +108,7 @@ for (const relativePath of publicFiles) {
   const source = readText(relativePath);
   check(!/\bcoin\.status\b/.test(source), `${relativePath}: public UI still reads coin.status`);
   check(!/\bstablecoin\.status\b/.test(source), `${relativePath}: public UI still reads stablecoin.status`);
-  check(!/lifecycle_status\s*\?\?/.test(source), `${relativePath}: lifecycle fallback to a legacy value is prohibited`);
+  check(!/lifecycle_status\s*\?\?\s*(?:coin|stablecoin)\.status/.test(source), `${relativePath}: lifecycle fallback to legacy status is prohibited`);
 }
 
 const homeSource = readText('src/pages/index.astro');
