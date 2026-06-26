@@ -1,6 +1,6 @@
 # Deployment Policy
 
-Updated: 2026-06-22
+Updated: 2026-06-26
 
 ## Status
 
@@ -13,9 +13,12 @@ Workflow run: 27908380603
 Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
 Pages project: stable-or-gone
 Public origin: https://sog.badjoke-lab.com/
+Current publication state: routine publication paused during the repair program
 ```
 
-All deployment decisions, pull-request classifications, Cloudflare settings, production workflows, and verification rules must follow this file. `AGENTS.md`, `README.md`, `docs/cloudflare-pages.md`, pull-request templates, workflows, audits, and roadmaps may summarize this policy but must not contradict it.
+All deployment decisions, pull-request classifications, Cloudflare settings, production workflows, audits, and roadmaps must follow this file. `AGENTS.md`, `README.md`, `docs/cloudflare-pages.md`, pull-request templates, workflows, audits, and roadmaps may summarize this policy but must not contradict it.
+
+Document authority and change control are defined in `docs/spec-governance.md`.
 
 ## Core principle
 
@@ -54,7 +57,7 @@ Every pull request must select exactly one classification.
 
 ### No production deployment required
 
-Default for normal development, data enrichment, validation, documentation, roadmaps, workflows, and non-emergency corrections that can wait for the next checkpoint.
+Default for normal documentation, data enrichment, taxonomy migration, UI implementation, validation, workflows, roadmaps, and non-emergency corrections that can wait for the next checkpoint.
 
 Completion condition:
 
@@ -66,7 +69,7 @@ Cloudflare is not checked and production is not polled.
 
 ### Publication checkpoint deployment required after merge
 
-Use for planned public releases, canonical count-growth checkpoints, phase-completion releases, or bundled corrections that should become visible together.
+Use only for a defined planned public release, an approved phase-completion release, or a bundled correction set that the roadmap explicitly marks for publication.
 
 Completion condition:
 
@@ -79,13 +82,41 @@ PR merged
 
 ### Emergency production deployment required
 
-Use only for a broken public site, missing or corrupt public files, materially incorrect public data already visible to users, a security issue, rollback, or urgent repair.
+Use only for a broken public site, missing or corrupt public files, materially incorrect public data already visible to users, a security issue, rollback, or an urgent repair approved under the roadmap.
 
-The reason and deployed commit must be recorded.
+The reason, source commit, workflow run, and production verification must be recorded.
+
+## Current repair-program publication gate
+
+As of 2026-06-26, routine publication and routine record-growth gates are paused while SOG completes the 100-record UI and public-information repair program.
+
+Binding documents:
+
+```text
+docs/roadmap.md
+docs/ui-redesign/master-spec.md
+docs/ui-redesign/implementation-plan.md
+```
+
+The next planned non-emergency publication checkpoint is:
+
+```text
+100 canonical stable assets
++ repaired production snapshot integrity
++ repaired public taxonomy
++ repaired information architecture and UI
++ complete 92-record audit
++ final eight-record promotion
++ release-candidate verification
+```
+
+Documentation, migration, mock, implementation, audit, and normal `main` merges before that checkpoint do not deploy to production.
+
+A verified emergency may interrupt the sequence, but it must be limited to the emergency and must not be used to publish unfinished redesign work.
 
 ## Cloudflare dashboard policy
 
-The required Cloudflare Pages settings are:
+Required settings:
 
 ```text
 Production branch: main
@@ -132,10 +163,10 @@ Normal CI may install dependencies, validate canonical data, run integrity check
 
 Normal CI must not:
 
-- call `wrangler pages deploy`
-- wait for Cloudflare Pages
-- poll production for a new deployment
-- require Cloudflare credentials
+- call `wrangler pages deploy`;
+- wait for Cloudflare Pages;
+- poll production for a new deployment;
+- require Cloudflare credentials.
 
 ### Production consistency workflows
 
@@ -147,18 +178,18 @@ It must not run automatically on every `main` push.
 
 `.github/workflows/deploy-production.yml` must:
 
-- use `workflow_dispatch`
-- require an explicit deployment classification
-- require exact `DEPLOY` confirmation
-- run only from `main`
-- check out the latest intended `main`
-- install dependencies and run the full repository build
-- upload `dist` with Wrangler
-- pass the source commit SHA to the deployment
-- run production consistency after deployment
-- write a deployment summary
-- use the `production` environment
-- use concurrency control to prevent overlapping deployments
+- use `workflow_dispatch`;
+- require an explicit deployment classification;
+- require exact `DEPLOY` confirmation;
+- run only from `main`;
+- check out the latest intended `main`;
+- install dependencies and run the full repository build;
+- upload `dist` with Wrangler;
+- pass the source commit SHA to the deployment;
+- run production consistency after deployment;
+- write a deployment summary;
+- use the `production` environment;
+- use concurrency control to prevent overlapping deployments.
 
 It must not have `push`, `pull_request`, or `schedule` triggers.
 
@@ -167,16 +198,17 @@ It must not have `push`, `pull_request`, or `schedule` triggers.
 ```text
 normal PR                         no deployment
 normal main merge                 no deployment
-several quality PRs               bundle into one later deployment
-planned checkpoint                one manual deployment
+repair phase completion           no deployment unless roadmap says otherwise
+several quality PRs               no deployment during the current pause
 verified emergency                one immediate manual deployment
+100-record repaired release       one planned manual deployment
 ```
 
 Short-interval repeated deployments and no-op trigger commits are prohibited.
 
-## Canonical count-growth gates
+## Superseded count-growth gates
 
-The following checkpoints require one manual publication and full production parity before the next growth batch begins:
+The previous routine sequence was:
 
 ```text
 75 → 80
@@ -186,20 +218,28 @@ The following checkpoints require one manual publication and full production par
 95 → 100
 ```
 
-The 70 → 75 gate and initial manual-publication activation are complete.
+The registry is now at 92 canonical assets. The 90 → 95 and 95 → 100 routine gates are superseded by the repair-program gate.
 
-At every remaining gate verify:
+Do not publish at 95 merely because the count is reached. Do not begin the final eight-record promotion until `docs/ui-redesign/implementation-plan.md` permits it.
 
-- deployed commit equals the intended `main` commit
-- homepage counts match generated JSON and manifests
-- stablecoin, organization, and event counts match canonical data
-- detail-link counts match canonical counts
-- sitemap route counts match canonical counts
-- canonical, hreflang, metadata, Open Graph, and JSON-LD checks pass
-- obsolete count markers are absent
-- production has no material errors
+## 100-record repaired-release verification
 
-A failed gate blocks the next count-growth batch. It does not invalidate unrelated completed quality work.
+Before the planned publication, verify:
+
+- deployed commit equals the intended `main` commit;
+- build provenance identifies one canonical data snapshot;
+- homepage, stablecoin, organization, and event counts match canonical data;
+- every expected detail route exists;
+- no stale route family from an older build remains;
+- sitemap route counts match canonical counts;
+- canonical, hreflang, metadata, Open Graph, and JSON-LD checks pass;
+- `version.json`, `data/manifest.json`, `llms.txt`, and `ai.txt` match the same snapshot;
+- search and shareable filter URLs work;
+- compatibility routes work without exposing implementation notes;
+- mobile smoke tests preserve material information;
+- production has no material errors.
+
+A failed gate blocks publication. It does not invalidate unrelated completed repository work.
 
 ## Retry and rollback rules
 
@@ -207,10 +247,10 @@ Do not retry an old failed deployment after code has changed. An old run republi
 
 Instead:
 
-1. confirm the intended `main` commit
-2. fix the repository if needed
-3. run one new manual deployment from the intended commit
-4. verify production
+1. confirm the intended `main` commit;
+2. fix the repository if needed;
+3. run one new manual deployment from the intended commit;
+4. verify production.
 
 Use rollback only when a previously successful deployment is the correct emergency recovery target.
 
@@ -218,13 +258,15 @@ Use rollback only when a previously successful deployment is the correct emergen
 
 A production deployment report must include:
 
-- deployment classification
-- source commit SHA
-- workflow run result
-- Cloudflare Pages project
-- public origin checked
-- production consistency result
-- any remaining discrepancy
+- deployment classification;
+- source commit SHA;
+- canonical data hash or provenance identifier when implemented;
+- workflow run result;
+- Cloudflare Pages project;
+- public origin checked;
+- production consistency result;
+- record and route counts;
+- any remaining discrepancy.
 
 A normal no-deploy PR report should state only that production deployment was not required under this policy.
 
