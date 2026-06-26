@@ -14,6 +14,7 @@ import {
   getStablecoins,
 } from './data/registry';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
+import { resolveBackingModel } from '../utils/backingModel';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
 export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
@@ -77,6 +78,10 @@ function countValues(values: unknown[]) {
   }, {});
 }
 
+function countMultiValues(values: unknown[][]) {
+  return countValues(values.flat());
+}
+
 export type BuildProvenance = typeof buildProvenanceData;
 
 export function getBuildProvenance(): BuildProvenance {
@@ -120,6 +125,7 @@ export function getRecordCountBreakdown() {
   const deployments = getDeployments();
   const registryUpdates = getRegistryUpdates();
   const referenceTargets = stablecoins.map((coin) => resolveReferenceTarget(coin));
+  const backingModels = stablecoins.map((coin) => resolveBackingModel(coin));
 
   return {
     stablecoins: stablecoins.length,
@@ -135,6 +141,9 @@ export function getRecordCountBreakdown() {
     issuance_status: countValues(stablecoins.map((coin) => coin.issuance_status)),
     reference_kind: countValues(referenceTargets.map((target) => target.reference_kind)),
     reference_comparison_category: countValues(referenceTargets.map((target) => target.comparison_category)),
+    public_model_category: countValues(backingModels.map((model) => model.public_category)),
+    backing_type_non_exclusive: countMultiValues(backingModels.map((model) => model.canonical_backing_types)),
+    stabilization_mechanism: countValues(backingModels.map((model) => model.stabilization_mechanism)),
     asset_class: countValues(stablecoins.map((coin) => coin.asset_class)),
     organization_type: countValues(organizations.map((organization) => organization.organization_type || organization.issuer_type)),
     relationship_role: countValues(relationships.map((relationship) => relationship.role)),

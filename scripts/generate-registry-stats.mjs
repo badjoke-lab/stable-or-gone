@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getReferenceComparisonCategory } from '../config/reference-targets.mjs';
+import { getPublicBackingModelCategory } from '../config/backing-models.mjs';
 
 const root = process.cwd();
 const outputPath = 'data/generated/registry-stats.json';
@@ -146,6 +147,7 @@ export function buildRegistryStats() {
       reference_kinds: countBy(classifications, (row) => row.peg_reference?.kind),
       reference_target_categories: countBy(classifications, (row) => getReferenceComparisonCategory(row.peg_reference?.asset) ?? 'unknown'),
       canonical_reference_assets_compatibility: countBy(classifications, (row) => row.peg_reference?.asset),
+      public_model_categories: countBy(stablecoins, (row) => getPublicBackingModelCategory(row.slug) ?? 'unknown'),
       asset_classes: countBy(classifications, (row) => row.asset_class ?? 'stablecoin'),
       backing_types_non_exclusive: countBy(classifications, (row) => row.backing_types ?? ['unknown']),
       stabilization_mechanisms: countBy(classifications, (row) => row.stabilization_mechanism),

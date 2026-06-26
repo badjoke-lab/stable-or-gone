@@ -76,10 +76,20 @@ check(tableKinds.size === requiredKinds.length, `Expected ${requiredKinds.length
 check(tableCount === requiredKinds.length, `Expected ${requiredKinds.length} core tables, found ${tableCount}`);
 
 const protectedFields = {
-  'stablecoin-index': ['Reference target', 'Model', 'Lifecycle', 'Issuance', 'Reviewed'],
+  'stablecoin-index': ['Reference target', 'Backing model', 'Lifecycle', 'Issuance', 'Reviewed'],
   'organization-index': ['Jurisdiction', 'Roles', 'Record confidence'],
   'event-index': ['Impact', 'Recovered', 'Sources'],
-  'stablecoin-overview': ['Reference target', 'Reference kind', 'Comparison category', 'Reference methodology'],
+  'stablecoin-overview': [
+    'Reference target',
+    'Reference kind',
+    'Comparison category',
+    'Reference methodology',
+    'Public backing model',
+    'Canonical backing types',
+    'Reserve component categories',
+    'Primary stabilization mechanism',
+    'Recorded model description'
+  ],
   'stablecoin-organizations': ['Relationship status'],
   'stablecoin-reserve-profile': ['Summary', 'Profile confidence'],
   'stablecoin-event-timeline': ['Recovered'],

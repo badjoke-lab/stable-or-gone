@@ -6,6 +6,7 @@ import RelatedGuides from './RelatedGuides.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
+import { resolveBackingModel } from '../utils/backingModel';
 import { cleanPublicText } from '../utils/publicText';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { getRelatedGuidesForStablecoin } from '../data/stablecoinGuideLinks';
@@ -19,6 +20,7 @@ import {
   getRegulatoryNotes,
   getDeployments
 } from '../lib/data/registry';
+import { getReserveComponentsFor } from '../lib/data/registryV3';
 
 const publicSummaries: Record<string, string> = {
   usdt: 'A US dollar-pegged stablecoin issued by Tether across multiple blockchains. Its record includes reserves, redemption, regulation, deployments, and documented exercises of issuer-controlled blacklist or freeze authority.',
@@ -43,6 +45,12 @@ const publicSummaries: Record<string, string> = {
   usds: 'A US dollar stablecoin in the Sky ecosystem, introduced alongside the transition from MakerDAO branding and products.'
 };
 
+const modelChangeTerms = new Set<string | undefined>([
+  'governance_change', 'migration', 'protocol_model_update', 'protocol_transition',
+  'protocol_upgrade', 'rebrand_and_classification_change', 'rebrand_or_lifecycle_transition',
+  'reserve_change', 'token_migration'
+]);
+
 const { coin } = Astro.props;
 const organizations = getOrganizations();
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
@@ -58,16 +66,19 @@ const primaryRelationship = relationships[0];
 const primaryOrganization = primaryRelationship ? organizationById.get(primaryRelationship.organization_id) : undefined;
 const events = allEvents.filter((item) => item.subject_stablecoin_ids?.includes(coin.id) || item.stablecoin_id === coin.id).sort((a, b) => String(a.event_date ?? '').localeCompare(String(b.event_date ?? '')));
 const issuerControlEvents = events.filter((item) => item.event_detail_kind === 'issuer_control' || item.event_type === 'issuer_freeze');
+const modelHistoryEvents = events.filter((event) => modelChangeTerms.has(event.event_type) || modelChangeTerms.has(event.event_detail_kind) || /model|collateral|reserve|migration|transition|upgrade|rebrand/i.test(`${event.title ?? ''} ${event.description ?? ''}`));
 const evidence = allEvidence.filter((item) => item.stablecoin_ids?.includes(coin.id) || item.stablecoin_id === coin.id);
 const reserveReports = allReserveReports.filter((item) => item.stablecoin_id === coin.id);
+const reserveComponents = getReserveComponentsFor(coin.id);
 const openQuestions = allKnownUnknowns.filter((item) => item.stablecoin_id === coin.id);
 const regulatoryNotes = allRegulatoryNotes.filter((item) => item.stablecoin_id === coin.id);
 const deployments = allDeployments.filter((item) => item.stablecoin_id === coin.id);
 const relatedGuides = getRelatedGuidesForStablecoin(coin.slug);
 const statusClass = lifecycleChipClass(coin.lifecycle_status);
 const reference = resolveReferenceTarget(coin);
+const model = resolveBackingModel(coin);
 const title = `${coin.name} (${coin.symbol ?? coin.slug}) — Stablecoin History | Stable or Gone`;
-const description = `${coin.name} lifecycle, issuance, reference target, organization relationships, backing model, redemption terms, major events, reserve information, and sources.`;
+const description = `${coin.name} lifecycle, issuance, reference target, backing category, canonical backing types, stabilization mechanism, redemption terms, major events, reserve information, and sources.`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -75,7 +86,7 @@ const jsonLd = {
   url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`,
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  keywords: [coin.name, coin.symbol, coin.lifecycle_status, coin.issuance_status, reference.public_label, reference.comparison_category_label, ...(coin.backing_types ?? [coin.collateral_model])].filter(Boolean),
+  keywords: [coin.name, coin.symbol, coin.lifecycle_status, coin.issuance_status, reference.public_label, reference.comparison_category_label, model.public_label, model.stabilization_label, ...model.canonical_backing_type_labels].filter(Boolean),
   ...(relatedGuides.length > 0 ? {
     subjectOf: relatedGuides.map((guide) => ({
       '@type': 'Article',
@@ -88,13 +99,14 @@ const coverageRows = [
   { label: 'Organizations', count: relationships.length },
   { label: 'Sources', count: evidence.length },
   { label: 'Reserve reports', count: reserveReports.length },
+  { label: 'Reserve components', count: reserveComponents.length },
+  { label: 'Model-history events', count: modelHistoryEvents.length },
   { label: 'Regulatory notes', count: regulatoryNotes.length },
   { label: 'Deployments', count: deployments.length },
   { label: 'Issuer-control actions', count: issuerControlEvents.length },
   { label: 'Open questions', count: openQuestions.length },
   { label: 'Events', count: events.length }
 ];
-const backingTypes = coin.backing_types?.map((item: string) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(coin.collateral_model);
 const reserveProfile = coin.reserve_profile;
 const redemptionProfile = coin.redemption_profile;
 ---
@@ -111,20 +123,27 @@ const redemptionProfile = coin.redemption_profile;
     <tr><th>Comparison category</th><td>{reference.comparison_category_label}</td></tr>
     <tr><th>Target value</th><td>{reference.target_value ?? 'Defined by the recorded methodology'}</td></tr>
     <tr><th>Reference methodology</th><td>{reference.methodology_description ?? 'No methodology description has been recorded.'}</td></tr>
-    <tr><th>Backing types</th><td>{backingTypes}</td></tr>
-    <tr><th>Stabilization</th><td>{formatPublicLabel(coin.stabilization_mechanism, 'Unknown')}</td></tr>
+    <tr><th>Public backing model</th><td>{model.public_label}</td></tr>
+    <tr><th>Canonical backing types</th><td>{model.canonical_backing_type_labels.join(', ') || 'Unknown'}</td></tr>
+    <tr><th>Reserve component categories</th><td>{reserveComponents.map((component) => formatPublicLabel(component.asset_category)).join(', ') || 'No component categories recorded'}</td></tr>
+    <tr><th>Primary stabilization mechanism</th><td>{model.stabilization_label}</td></tr>
+    <tr><th>Recorded model description</th><td>{model.recorded_model_description}</td></tr>
     <tr><th>Governance</th><td>{formatPublicLabel(coin.governance_model, 'Unknown')}</td></tr>
     <tr><th>Primary organization</th><td>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Unknown'}</td></tr>
     <tr><th>Primary role</th><td>{formatPublicLabel(primaryRelationship?.role, 'Unknown')}</td></tr>
     <tr><th>Last reviewed</th><td>{coin.last_verified_at ?? '—'}</td></tr>
   </tbody></table></section>
 
+  <section class="panel registry"><div class="bar">Reserve components</div>{reserveComponents.length === 0 ? <p>No reserve components have been recorded.</p> : <ul>{reserveComponents.map((component) => <li><strong>{component.asset_label ?? formatPublicLabel(component.asset_category)}</strong> — {formatPublicLabel(component.asset_category)}{component.share_percent !== null && component.share_percent !== undefined ? ` · ${component.share_percent}%` : ''}{component.liquidity_class ? ` · liquidity ${formatPublicLabel(component.liquidity_class)}` : ''}{component.maturity_bucket ? ` · maturity ${formatPublicLabel(component.maturity_bucket)}` : ''}{component.as_of_date ? ` · as of ${component.as_of_date}` : ''}{component.notes ? ` · ${cleanPublicText(component.notes)}` : ''}</li>)}</ul>}</section>
+
+  <section class="panel registry"><div class="bar">Historical model changes</div>{modelHistoryEvents.length === 0 ? <p>No separate model-change event is currently recorded.</p> : <ul>{modelHistoryEvents.map((event) => <li>{event.event_date ?? 'Date unknown'} — <a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a> · {formatPublicLabel(event.event_detail_kind ?? event.event_type)}</li>)}</ul>}</section>
+
   <section class="panel registry"><div class="bar">Organizations and roles</div><table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve"><thead><tr><th>Organization</th><th>Role</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="5">No organization relationships have been added yet.</td></tr> : relationships.map((relationship) => { const organization = organizationById.get(relationship.organization_id); return <tr><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : relationship.organization_id}</td><td>{formatPublicLabel(relationship.role)}</td><td>{relationship.start_date ?? '—'}</td><td>{relationship.end_date ?? '—'}</td><td>{formatPublicLabel(relationship.status)}</td></tr>; })}</tbody></table></section>
 
   <section class="section-grid" aria-label="Related pages"><a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Compare this record with the rest of the archive.</p></a>{primaryOrganization && <a class="panel mini-card" href={`/issuer/${primaryOrganization.slug}/`}><h2>{primaryOrganization.name}</h2><p>{formatPublicLabel(primaryOrganization.organization_type, 'Organization')} · {formatPublicLabel(primaryOrganization.jurisdiction, 'Jurisdiction unknown')}</p></a>}<a class="panel mini-card" href="/events/"><h2>Event history</h2><p>{events.length} event{events.length === 1 ? '' : 's'} connected to this stablecoin.</p></a></section>
   <RelatedGuides guides={relatedGuides} />
 
-  <section class="panel registry"><div class="bar">Reserve profile</div><table data-table-kind="stablecoin-reserve-profile" data-mobile-table="scroll-preserve"><tbody><tr><th>Disclosure status</th><td>{formatPublicLabel(reserveProfile?.disclosure_status ?? coin.reserve_disclosure_status, 'Public information is incomplete')}</td></tr><tr><th>Backing types</th><td>{reserveProfile?.backing_types?.map((item: string) => formatPublicLabel(item)).join(', ') ?? backingTypes}</td></tr><tr><th>Summary</th><td>{cleanPublicText(reserveProfile?.summary, 'Public information is incomplete.')}</td></tr><tr><th>As of</th><td>{reserveProfile?.as_of_date ?? '—'}</td></tr><tr><th>Profile confidence</th><td>{formatPublicLabel(reserveProfile?.confidence, 'Unknown')}</td></tr></tbody></table></section>
+  <section class="panel registry"><div class="bar">Reserve profile</div><table data-table-kind="stablecoin-reserve-profile" data-mobile-table="scroll-preserve"><tbody><tr><th>Disclosure status</th><td>{formatPublicLabel(reserveProfile?.disclosure_status ?? coin.reserve_disclosure_status, 'Public information is incomplete')}</td></tr><tr><th>Backing types</th><td>{reserveProfile?.backing_types?.map((item: string) => formatPublicLabel(item)).join(', ') ?? model.canonical_backing_type_labels.join(', ')}</td></tr><tr><th>Summary</th><td>{cleanPublicText(reserveProfile?.summary, 'Public information is incomplete.')}</td></tr><tr><th>As of</th><td>{reserveProfile?.as_of_date ?? '—'}</td></tr><tr><th>Profile confidence</th><td>{formatPublicLabel(reserveProfile?.confidence, 'Unknown')}</td></tr></tbody></table></section>
 
   <section class="panel registry"><div class="bar">Redemption profile</div><table data-table-kind="stablecoin-redemption-profile" data-mobile-table="scroll-preserve"><tbody><tr><th>Current status</th><td>{formatPublicLabel(redemptionProfile?.status ?? coin.redemption_status, 'Public information is incomplete')}</td></tr><tr><th>Settlement asset</th><td>{formatPublicLabel(redemptionProfile?.settlement_asset, 'Public information is incomplete')}</td></tr><tr><th>Eligible parties</th><td>{cleanPublicText(redemptionProfile?.eligible_parties ?? coin.who_can_redeem, 'Public information is incomplete.')}</td></tr><tr><th>Retail access</th><td>{formatPublicLabel(redemptionProfile?.retail_access ?? coin.retail_redemption, 'Public information is incomplete')}</td></tr><tr><th>Institutional access</th><td>{formatPublicLabel(redemptionProfile?.institutional_access ?? coin.institutional_redemption, 'Public information is incomplete')}</td></tr><tr><th>Minimum amount</th><td>{formatPublicLabel(redemptionProfile?.minimum_amount_text ?? coin.minimum_redemption, 'Public information is incomplete')}</td></tr><tr><th>Fee</th><td>{formatPublicLabel(redemptionProfile?.fee_text, 'Public information is incomplete')}</td></tr><tr><th>Settlement time</th><td>{formatPublicLabel(redemptionProfile?.settlement_time_text, 'Public information is incomplete')}</td></tr><tr><th>Regional limits</th><td>{redemptionProfile?.jurisdiction_restrictions?.map((item: string) => formatPublicLabel(item)).join(', ') ?? cleanPublicText(coin.redemption_region_notes, 'Public information is incomplete.')}</td></tr></tbody></table></section>
 

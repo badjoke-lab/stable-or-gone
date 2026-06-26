@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../../utils/publicTaxonomy';
 import { getReferenceFilterOptions, resolveReferenceTarget } from '../../utils/referenceTarget';
+import { getPublicBackingModelFilterOptions, resolveBackingModel } from '../../utils/backingModel';
 import { getStablecoins, getOrganizations, getPrimaryRelationship } from '../../lib/data/registry';
 
 const stablecoins = getStablecoins();
@@ -11,7 +12,7 @@ const organizationById = new Map(organizations.map((organization) => [organizati
 const uniqueSorted = (values: Array<string | undefined>) => Array.from(new Set(values.filter(Boolean) as string[])).sort((a, b) => a.localeCompare(b));
 const lifecycleOptions = uniqueSorted(stablecoins.map((coin) => coin.lifecycle_status));
 const issuanceOptions = uniqueSorted(stablecoins.map((coin) => coin.issuance_status));
-const modelOptions = uniqueSorted(stablecoins.map((coin) => coin.collateral_model));
+const modelOptions = getPublicBackingModelFilterOptions();
 const referenceOptions = getReferenceFilterOptions();
 const primaryRelationshipByStablecoin = new Map(stablecoins.map((coin) => [coin.id, getPrimaryRelationship(coin.id)] as const));
 const organizationOptions = uniqueSorted(stablecoins.map((coin) => {
@@ -19,7 +20,7 @@ const organizationOptions = uniqueSorted(stablecoins.map((coin) => {
   return relationship ? organizationById.get(relationship.organization_id)?.name : undefined;
 }));
 const title = 'Stablecoin Registry — Stable or Gone';
-const description = 'Browse stablecoins by organization, reference target, backing model, lifecycle, issuance, and last review date.';
+const description = 'Browse stablecoins by organization, reference target, public backing model, lifecycle, issuance, and last review date.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -34,7 +35,7 @@ const jsonLd = {
     <div class="panel hero-main">
       <div class="prompt">Stablecoin directory</div>
       <h1>Browse stablecoin records</h1>
-      <p>Search by name, organization, reference target, backing model, lifecycle, or issuance. Open any record for its history, reserve information, redemption terms, events, and sources.</p>
+      <p>Search by name, organization, reference target, public backing model, lifecycle, or issuance. Open any record for detailed backing types, reserve components, stabilization mechanism, history, and sources.</p>
     </div>
     <div class="panel stats"><div class="stat"><span>Records</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div></div>
   </section>
@@ -51,14 +52,14 @@ const jsonLd = {
       <label><span>Search</span><input data-filter-search type="search" placeholder="USDC, Terra, synthetic..." autocomplete="off" /></label>
       <label><span>Lifecycle</span><select data-filter-lifecycle><option value="">All lifecycle states</option>{lifecycleOptions.map((lifecycle) => <option value={lifecycle}>{formatLifecycleLabel(lifecycle)}</option>)}</select></label>
       <label><span>Issuance</span><select data-filter-issuance><option value="">All issuance states</option>{issuanceOptions.map((issuance) => <option value={issuance}>{formatIssuanceLabel(issuance)}</option>)}</select></label>
-      <label><span>Model</span><select data-filter-model><option value="">All models</option>{modelOptions.map((model) => <option value={model}>{formatPublicLabel(model)}</option>)}</select></label>
+      <label><span>Backing model</span><select data-filter-model-category><option value="">All backing models</option>{modelOptions.map((model) => <option value={model.value}>{model.public_label}</option>)}</select></label>
       <label><span>Reference target</span><select data-filter-reference-category><option value="">All reference targets</option>{referenceOptions.map((option) => <option value={option.value}>{option.public_label}</option>)}</select></label>
       <label><span>Organization</span><select data-filter-issuer><option value="">All organizations</option>{organizationOptions.map((organization) => <option value={organization}>{organization}</option>)}</select></label>
-      <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="lifecycle">Lifecycle A-Z</option><option value="issuance">Issuance A-Z</option><option value="reference">Reference target A-Z</option><option value="model">Model A-Z</option><option value="last_verified_desc">Recently reviewed</option></select></label>
+      <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="lifecycle">Lifecycle A-Z</option><option value="issuance">Issuance A-Z</option><option value="reference">Reference target A-Z</option><option value="model">Backing model A-Z</option><option value="last_verified_desc">Recently reviewed</option></select></label>
     </div>
     <div class="registry-summary" aria-live="polite"><span data-result-count>{stablecoins.length}</span> of {stablecoins.length} records</div>
     <table data-table-kind="stablecoin-index" data-mobile-table="scroll-preserve">
-      <thead><tr><th>Name</th><th>Symbol</th><th>Organization</th><th>Role</th><th>Reference target</th><th>Model</th><th>Lifecycle</th><th>Issuance</th><th>Reviewed</th></tr></thead>
+      <thead><tr><th>Name</th><th>Symbol</th><th>Organization</th><th>Role</th><th>Reference target</th><th>Backing model</th><th>Lifecycle</th><th>Issuance</th><th>Reviewed</th></tr></thead>
       <tbody data-registry-body>
         {stablecoins.length === 0 ? <tr><td colspan="9">No records available.</td></tr> : stablecoins.map((coin) => {
           const relationship = primaryRelationshipByStablecoin.get(coin.id);
@@ -67,8 +68,9 @@ const jsonLd = {
           const role = relationship?.role ?? 'unknown';
           const aliases = Array.isArray(coin.aliases) ? coin.aliases : [];
           const reference = resolveReferenceTarget(coin);
-          const searchable = [coin.name, coin.symbol, coin.slug, organizationName, role, formatPublicLabel(role), reference.canonical_value, reference.public_label, reference.comparison_category_label, reference.reference_kind_label, coin.collateral_model, formatPublicLabel(coin.collateral_model), coin.lifecycle_status, formatLifecycleLabel(coin.lifecycle_status), coin.issuance_status, formatIssuanceLabel(coin.issuance_status), ...aliases].filter(Boolean).join(' ');
-          return (<tr data-registry-row data-search={searchable.toLowerCase()} data-name={coin.name.toLowerCase()} data-lifecycle={coin.lifecycle_status ?? ''} data-issuance={coin.issuance_status ?? ''} data-reference-category={reference.comparison_category} data-reference-label={reference.public_label.toLowerCase()} data-model={coin.collateral_model ?? ''} data-issuer={organizationName} data-last-verified={coin.last_verified_at ?? ''}><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : organizationName}</td><td>{formatPublicLabel(role)}</td><td>{reference.public_label}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{coin.last_verified_at ?? '—'}</td></tr>);
+          const model = resolveBackingModel(coin);
+          const searchable = [coin.name, coin.symbol, coin.slug, organizationName, role, formatPublicLabel(role), reference.canonical_value, reference.public_label, reference.comparison_category_label, reference.reference_kind_label, model.public_category, model.public_label, ...model.canonical_backing_types, ...model.canonical_backing_type_labels, model.stabilization_mechanism, model.stabilization_label, model.recorded_model_description, coin.lifecycle_status, formatLifecycleLabel(coin.lifecycle_status), coin.issuance_status, formatIssuanceLabel(coin.issuance_status), ...aliases].filter(Boolean).join(' ');
+          return (<tr data-registry-row data-search={searchable.toLowerCase()} data-name={coin.name.toLowerCase()} data-lifecycle={coin.lifecycle_status ?? ''} data-issuance={coin.issuance_status ?? ''} data-reference-category={reference.comparison_category} data-reference-label={reference.public_label.toLowerCase()} data-model-category={model.public_category} data-model-label={model.public_label.toLowerCase()} data-issuer={organizationName} data-last-verified={coin.last_verified_at ?? ''}><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : organizationName}</td><td>{formatPublicLabel(role)}</td><td>{reference.public_label}</td><td>{model.public_label}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{coin.last_verified_at ?? '—'}</td></tr>);
         })}
         <tr data-no-results hidden><td colspan="9">No stablecoins match these filters.</td></tr>
       </tbody>
@@ -81,11 +83,11 @@ const jsonLd = {
     const rows = Array.from(registry?.querySelectorAll('[data-registry-row]') ?? []);
     const noResults = registry?.querySelector('[data-no-results]');
     const resultCount = registry?.querySelector('[data-result-count]');
-    const controls = { search: registry?.querySelector('[data-filter-search]'), lifecycle: registry?.querySelector('[data-filter-lifecycle]'), issuance: registry?.querySelector('[data-filter-issuance]'), model: registry?.querySelector('[data-filter-model]'), reference: registry?.querySelector('[data-filter-reference-category]'), issuer: registry?.querySelector('[data-filter-issuer]'), sort: registry?.querySelector('[data-sort]') };
+    const controls = { search: registry?.querySelector('[data-filter-search]'), lifecycle: registry?.querySelector('[data-filter-lifecycle]'), issuance: registry?.querySelector('[data-filter-issuance]'), model: registry?.querySelector('[data-filter-model-category]'), reference: registry?.querySelector('[data-filter-reference-category]'), issuer: registry?.querySelector('[data-filter-issuer]'), sort: registry?.querySelector('[data-sort]') };
     const normalize = (value: unknown) => String(value ?? '').trim().toLowerCase();
     const getValue = (control: Element | null | undefined) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
-    function sortRows() { if (!tbody) return; const mode = getValue(controls.sort) || 'name'; const sorted = [...rows].sort((a, b) => { if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0; if (mode === 'last_verified_desc') return String(b.dataset.lastVerified ?? '').localeCompare(String(a.dataset.lastVerified ?? '')); if (mode === 'lifecycle') return String(a.dataset.lifecycle ?? '').localeCompare(String(b.dataset.lifecycle ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'issuance') return String(a.dataset.issuance ?? '').localeCompare(String(b.dataset.issuance ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'reference') return String(a.dataset.referenceLabel ?? '').localeCompare(String(b.dataset.referenceLabel ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'model') return String(a.dataset.model ?? '').localeCompare(String(b.dataset.model ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); }); sorted.forEach((row) => tbody.appendChild(row)); if (noResults) tbody.appendChild(noResults); }
-    function applyFilters() { const query = normalize(getValue(controls.search)); const lifecycle = getValue(controls.lifecycle); const issuance = getValue(controls.issuance); const model = getValue(controls.model); const reference = getValue(controls.reference); const issuer = getValue(controls.issuer); let visible = 0; rows.forEach((row) => { if (!(row instanceof HTMLElement)) return; const matches = (!query || normalize(row.dataset.search).includes(query)) && (!lifecycle || row.dataset.lifecycle === lifecycle) && (!issuance || row.dataset.issuance === issuance) && (!model || row.dataset.model === model) && (!reference || row.dataset.referenceCategory === reference) && (!issuer || row.dataset.issuer === issuer); row.hidden = !matches; if (matches) visible += 1; }); if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0; if (resultCount) resultCount.textContent = String(visible); }
+    function sortRows() { if (!tbody) return; const mode = getValue(controls.sort) || 'name'; const sorted = [...rows].sort((a, b) => { if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0; if (mode === 'last_verified_desc') return String(b.dataset.lastVerified ?? '').localeCompare(String(a.dataset.lastVerified ?? '')); if (mode === 'lifecycle') return String(a.dataset.lifecycle ?? '').localeCompare(String(b.dataset.lifecycle ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'issuance') return String(a.dataset.issuance ?? '').localeCompare(String(b.dataset.issuance ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'reference') return String(a.dataset.referenceLabel ?? '').localeCompare(String(b.dataset.referenceLabel ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'model') return String(a.dataset.modelLabel ?? '').localeCompare(String(b.dataset.modelLabel ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); }); sorted.forEach((row) => tbody.appendChild(row)); if (noResults) tbody.appendChild(noResults); }
+    function applyFilters() { const query = normalize(getValue(controls.search)); const lifecycle = getValue(controls.lifecycle); const issuance = getValue(controls.issuance); const model = getValue(controls.model); const reference = getValue(controls.reference); const issuer = getValue(controls.issuer); let visible = 0; rows.forEach((row) => { if (!(row instanceof HTMLElement)) return; const matches = (!query || normalize(row.dataset.search).includes(query)) && (!lifecycle || row.dataset.lifecycle === lifecycle) && (!issuance || row.dataset.issuance === issuance) && (!model || row.dataset.modelCategory === model) && (!reference || row.dataset.referenceCategory === reference) && (!issuer || row.dataset.issuer === issuer); row.hidden = !matches; if (matches) visible += 1; }); if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0; if (resultCount) resultCount.textContent = String(visible); }
     Object.values(controls).forEach((control) => { control?.addEventListener('input', () => { sortRows(); applyFilters(); }); control?.addEventListener('change', () => { sortRows(); applyFilters(); }); });
     sortRows(); applyFilters();
   </script>

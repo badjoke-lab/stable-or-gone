@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { getReferenceComparisonCategory, getReferenceTargetDefinition } from '../config/reference-targets.mjs';
+import { getPublicBackingModelCategory } from '../config/backing-models.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -21,6 +22,7 @@ const countValues = (values) => values.reduce((counts, raw) => {
   counts[value] = (counts[value] || 0) + 1;
   return counts;
 }, {});
+const countMultiValues = (values) => countValues(values.flat());
 const applyById = (rows, layers) => {
   const maps = layers.map((layer) => new Map(layer.map((row) => [row.id, row])));
   return rows.map((row) => maps.reduce((merged, map) => ({ ...merged, ...(map.get(row.id) || {}) }), row));
@@ -61,6 +63,9 @@ const registryUpdates = read('data/registry-updates.json');
 
 const referenceKinds = stablecoins.map((row) => row.peg_reference?.kind ?? getReferenceTargetDefinition(row.peg_reference?.asset ?? row.peg_asset)?.reference_kind ?? 'unknown');
 const referenceCategories = stablecoins.map((row) => getReferenceComparisonCategory(row.peg_reference?.asset ?? row.peg_asset) ?? 'unknown');
+const publicModelCategories = stablecoins.map((row) => getPublicBackingModelCategory(row.slug) ?? 'unknown');
+const backingTypes = stablecoins.map((row) => Array.isArray(row.backing_types) ? row.backing_types : []);
+const stabilizationMechanisms = stablecoins.map((row) => row.stabilization_mechanism ?? 'unknown');
 
 const expectedCounts = {
   primary_records: stablecoins.length,
@@ -81,6 +86,9 @@ const expectedBreakdown = {
   issuance_status: countValues(stablecoins.map((row) => row.issuance_status)),
   reference_kind: countValues(referenceKinds),
   reference_comparison_category: countValues(referenceCategories),
+  public_model_category: countValues(publicModelCategories),
+  backing_type_non_exclusive: countMultiValues(backingTypes),
+  stabilization_mechanism: countValues(stabilizationMechanisms),
   asset_class: countValues(stablecoins.map((row) => row.asset_class)),
   organization_type: countValues(organizations.map((row) => row.organization_type || row.issuer_type)),
   relationship_role: countValues(relationships.map((row) => row.role)),
