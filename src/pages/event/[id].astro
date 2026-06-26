@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StructuredEventDetail from '../../components/StructuredEventDetail.astro';
 import EvidenceSourceTable from '../../components/EvidenceSourceTable.astro';
+import EventValueStateRows from '../../components/EventValueStateRows.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
-import { cleanPublicText } from '../../utils/publicText';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
 import { resolveEventTaxonomy } from '../../utils/eventTaxonomy';
 import { getEvents, getStablecoins, getOrganizations, getEvidence } from '../../lib/data/registry';
@@ -51,23 +51,9 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
   </section>
 
   <section class="panel registry"><div class="bar">Event details</div><table data-table-kind="event-details" data-mobile-table="scroll-preserve"><tbody>
-    <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
-    <tr><th>Public event category</th><td>{taxonomy.public_category_label}</td></tr>
-    <tr><th>Canonical event subtype</th><td>{taxonomy.canonical_subtype_label}</td></tr>
-    <tr><th>Structured detail kind</th><td>{taxonomy.detail_kind_label}</td></tr>
-    <tr><th>Stablecoin subjects</th><td>{subjectStablecoins.map((item) => item.slug ? <a href={`/stablecoin/${item.slug}/`}>{item.name}</a> : item.name).reduce((acc, item, index) => index === 0 ? [item] : [...acc, ', ', item], [])}</td></tr>
-    <tr><th>Organization subjects</th><td>{subjectOrganizations.map((item) => item.slug ? <a href={`/issuer/${item.slug}/`}>{item.name}</a> : item.name).reduce((acc, item, index) => index === 0 ? [item] : [...acc, ', ', item], [])}</td></tr>
-    <tr><th>Impact</th><td>{formatPublicLabel(event.impact_level)}</td></tr>
-    <tr><th>Effect on stablecoin lifecycle</th><td>{taxonomy.status_effect_label}</td></tr>
-    <tr><th>Canonical status-effect value</th><td>{formatPublicLabel(taxonomy.canonical_status_effect)}</td></tr>
-    <tr><th>Recovery or reversal</th><td>{taxonomy.recovery_label}</td></tr>
-    <tr><th>Recovery date</th><td>{event.depeg_detail?.recovery_date ?? event.recovery_date ?? '—'}</td></tr>
-    <tr><th>Cause or mechanism</th><td>{cleanPublicText(detailSummary ?? event.failure_mechanism, 'Public information is incomplete.')}</td></tr>
-    <tr><th>Structured detail coverage</th><td>{hasStructuredDetail ? 'Structured fields available below' : 'Description and source record only'}</td></tr>
-    <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
+    <EventValueStateRows event={event} taxonomy={taxonomy} subjectStablecoins={subjectStablecoins} subjectOrganizations={subjectOrganizations} detailSummary={detailSummary} hasStructuredDetail={hasStructuredDetail} />
   </tbody></table></section>
 
-  <!-- Structured event detail is rendered by the shared component for every supported detail family. -->
   <StructuredEventDetail event={structuredEvent} />
 
   <section class="panel registry"><div class="bar">Sources</div><EvidenceSourceTable evidence={evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added yet." /></section>
