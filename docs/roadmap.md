@@ -4,7 +4,7 @@ Updated: 2026-06-26
 
 ## Purpose
 
-This file is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/`; this roadmap records current position, completed gates, remaining PR order, and publication constraints.
+This is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/`; this file records current position, completed gates, remaining PR order, and publication constraints.
 
 Required authority:
 
@@ -17,26 +17,18 @@ docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
 ```
 
-## Current registry checkpoint
+## Registry checkpoint
 
 ```text
 Stable assets:                92
 Organizations:                86
 Organization relationships:  101
-Classifications:              92
-Reserve/redemption profiles:  92
 Events:                      150
-Event details:               150
 Evidence:                    455
 Evidence relations:          455
-Reserve reports/context:     100
 Known unknowns:              253
-Regulatory notes:              9
 Deployments:                 130
-Legal profiles:               92
-Stable-asset relationships:    4
 Reserve components:          125
-Income profiles:              92
 ```
 
 Canonical count source:
@@ -58,31 +50,38 @@ Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
 ```
 
-## Completed program work
+## Completed gates and PRs
 
-### Documentation and production-integrity gates
+### Gate A — documentation reset
+
+Status: **PASS**
 
 ```text
 PR #167  documentation reset
+```
+
+### Gate B — production-integrity repair
+
+Status: **PASS**
+
+```text
 PR #168  repair baseline and defect inventory
 PR #169  generated build provenance
 PR #170  route, sitemap, canonical, JSON-LD, and output parity
 PR #171  mobile information preservation
 ```
 
-Gate A — documentation reset: **PASS**  
-Gate B — production-integrity repair: **PASS**
-
 Gate B guarantees:
 
 - one source commit and canonical data hash per generated site;
-- exact parity among canonical identities, routes, sitemap, canonical URLs, and JSON-LD;
+- parity among canonical identities, routes, sitemap, canonical URLs, and JSON-LD;
 - rejection of stale extra routes;
 - preservation of material mobile information;
-- prohibition of generic numbered-column hiding;
-- explicit table identities with `scroll-preserve` access during repair.
+- prohibition of generic numbered-column hiding.
 
-### Taxonomy and semantics work
+### Gate C — taxonomy and data semantics
+
+Status: **in progress**
 
 ```text
 PR #172  PR 5  public-value registry
@@ -94,68 +93,7 @@ PR #177  PR 10 organization classification normalization
 PR #178  PR 11 evidence reliability, provenance, and type separation
 ```
 
-Gate C — taxonomy and data semantics: **in progress**
-
-## Completed taxonomy baselines
-
-### Lifecycle and issuance
-
-```text
-Lifecycle:
-  active        69
-  restricted     8
-  winding_down   3
-  inactive       1
-  terminated     2
-  collapsed      6
-  migrated       2
-  rebranded      1
-
-Issuance:
-  open             1
-  protocol_based  29
-  restricted      45
-  terminated      15
-  unknown           2
-```
-
-### Reference target
-
-```text
-US dollar                         71
-Euro                               8
-Japanese yen                       3
-Other fiat currency                5
-Gold                               2
-Floating protocol target           1
-Indexed or inflation-linked target 2
-```
-
-### Public backing model
-
-```text
-Fiat and cash-equivalent backed 31
-Crypto-collateralized           27
-Hybrid or mixed                 10
-Tokenized asset-backed           7
-Synthetic or hedged              6
-Algorithmic or unbacked          4
-Wrapper or receipt               3
-Commodity-backed                 2
-Unknown                          2
-```
-
-### Event taxonomy
-
-```text
-Canonical events:                    150
-Canonical event subtypes:             51
-Unmapped current subtypes:              0
-Structured typed-detail records:     120
-Description-and-source-only records:  30
-```
-
-### Organization taxonomy
+## PR 10 organization baseline
 
 ```text
 Organizations:                       86
@@ -175,7 +113,7 @@ Authoritative audit:
 docs/audits/organization-taxonomy-normalization-2026-06-26.md
 ```
 
-### Evidence taxonomy
+## PR 11 evidence baseline
 
 Status after PR #178 merges: **PASS**
 
@@ -224,7 +162,7 @@ Low:       0
 Unknown:  36
 ```
 
-The 36 `Unknown` records contain raw values such as `primary`, `explorer`, and repository/interface labels. These remain visible as compatibility values and are not promoted to reliability grades.
+The 36 `Unknown` records contain provenance/type-like raw values such as `primary`, `explorer`, repository labels, and interface labels. They are not promoted to reliability grades.
 
 Archive state:
 
@@ -244,10 +182,10 @@ scripts/validate-evidence-taxonomy-normalization.mjs
 docs/audits/evidence-taxonomy-normalization-2026-06-26.md
 ```
 
-Evidence presentation now separates:
+Evidence presentation separates:
 
 ```text
-original source URL
+original URL
 publisher
 public source category
 canonical source type
@@ -273,18 +211,14 @@ PR 16  move record-specific public copy and complete the 92-record migration
 
 ## Immediate next work — PR 12
 
-PR 12 must start from the latest main after PR #178 merges.
-
-Required work:
-
 1. Inventory all 130 deployment records.
 2. Separate deployment lifecycle status from canonicality and verification state.
 3. Separate chain/network identity, token standard, deployment type, contract verification, issuer-control capability, and operational state.
-4. Detect `status` values that are standing in for canonicality or verification.
+4. Detect status values standing in for canonicality or verification.
 5. Distinguish missing contract data from unknown, not applicable, and not yet verified.
 6. Preserve multi-chain and historical deployment records.
-7. Update stablecoin deployment tables, machine-readable output, registry statistics, mobile checks, and validators.
-8. Do not infer canonical deployment status from chain popularity or current market use.
+7. Update deployment tables, machine-readable output, statistics, mobile checks, and validators.
+8. Do not infer canonicality from chain popularity or current market use.
 9. Do not perform value-state semantics work inside PR 12.
 10. Do not change canonical record counts.
 11. Do not deploy production.
@@ -296,14 +230,9 @@ Required work:
 Missing canonical launch dates:          20
 Historical terminal dates unresolved:     4
 Reserve applicability queue:              12
-  not applicable by design:               10
-  source status unresolved:                2
-  report expected but missing:             0
 Evidence duplicate URLs for PR 15:        32
 Evidence polluted reliability values:     36
 ```
-
-These queues remain visible but are not the PR 12 work item unless explicitly required by deployment semantics.
 
 ## Later phase gates
 
@@ -321,15 +250,7 @@ Gate I  deliberate production publication and parity verification complete
 
 Routine growth remains paused at 92 assets. The final eight records may be promoted only after taxonomy migration, information architecture, UI implementation, hardening, and the complete 92-record audit.
 
-The 100 target never permits:
-
-- thin records;
-- unsupported dates;
-- placeholder sources;
-- collapsed organization roles;
-- hidden known unknowns;
-- erased evidence relations;
-- reduced evidence requirements.
+The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, hidden known unknowns, erased evidence relations, or reduced evidence requirements.
 
 ## Publication policy during repair
 
@@ -342,6 +263,8 @@ Verified emergency repair: manual emergency publication allowed
 Publication path: manual GitHub Actions workflow only
 Pages project: stable-or-gone
 Production branch: main
+Manual production publication activation — PASS
+Deployment workflow run: 27908380603
 ```
 
 Canonical publication rules remain in `docs/deployment-policy.md`.
