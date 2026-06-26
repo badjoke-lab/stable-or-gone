@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { publicTaxonomy } from '../config/public-taxonomy.mjs';
 import { publicValueStates, publicValueStateValues } from '../config/value-states.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
@@ -43,6 +44,14 @@ assert(new Set(publicValueStateValues).size === publicValueStateValues.length, '
 assert(publicValueStates.every((entry) => typeof entry.public_label === 'string' && entry.public_label.length > 0), 'every public value state requires a public label');
 assert(publicValueStates.every((entry) => typeof entry.short_definition === 'string' && entry.short_definition.length > 0), 'every public value state requires a short definition');
 assert(new Set(publicValueStates.map((entry) => entry.sort_order)).size === publicValueStates.length, 'public value-state sort orders must be unique');
+
+const taxonomyValueStateEntries = publicTaxonomy.axes?.value_state?.entries ?? [];
+assert(JSON.stringify(taxonomyValueStateEntries.map((entry) => entry.canonical_value)) === JSON.stringify(expectedStates), 'public taxonomy value-state axis differs from the canonical value-state registry');
+for (const definition of publicValueStates) {
+  const taxonomyEntry = taxonomyValueStateEntries.find((entry) => entry.canonical_value === definition.value);
+  assert(taxonomyEntry?.public_label === definition.public_label, `public taxonomy label differs for value state ${definition.value}`);
+  assert(taxonomyEntry?.is_filterable === false, `value state ${definition.value} must not become a public filter by default`);
+}
 
 let report = null;
 if (fs.existsSync(reportPath)) {
