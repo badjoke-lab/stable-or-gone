@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatPublicLabel, formatStatusLabel } from '../../utils/displayLabels';
+import { formatPublicLabel } from '../../utils/displayLabels';
+import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../../utils/publicTaxonomy';
 import { getStablecoins, getOrganizations, getPrimaryRelationship } from '../../lib/data/registry';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
-const statusClass = (status?: string) => `chip ${status ?? 'unknown'}`;
 const uniqueSorted = (values: Array<string | undefined>) => Array.from(new Set(values.filter(Boolean) as string[])).sort((a, b) => a.localeCompare(b));
-const statusOptions = uniqueSorted(stablecoins.map((coin) => coin.status));
+const lifecycleOptions = uniqueSorted(stablecoins.map((coin) => coin.lifecycle_status));
+const issuanceOptions = uniqueSorted(stablecoins.map((coin) => coin.issuance_status));
 const modelOptions = uniqueSorted(stablecoins.map((coin) => coin.collateral_model));
 const pegOptions = uniqueSorted(stablecoins.map((coin) => coin.peg_asset));
 const primaryRelationshipByStablecoin = new Map(stablecoins.map((coin) => [coin.id, getPrimaryRelationship(coin.id)] as const));
@@ -17,7 +18,7 @@ const organizationOptions = uniqueSorted(stablecoins.map((coin) => {
   return relationship ? organizationById.get(relationship.organization_id)?.name : undefined;
 }));
 const title = 'Stablecoin Registry — Stable or Gone';
-const description = 'Browse stablecoins by organization, peg, backing model, status, and last review date.';
+const description = 'Browse stablecoins by organization, peg, backing model, lifecycle, issuance, and last review date.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -32,7 +33,7 @@ const jsonLd = {
     <div class="panel hero-main">
       <div class="prompt">Stablecoin directory</div>
       <h1>Browse stablecoin records</h1>
-      <p>Search by name, organization, peg, backing model, or status. Open any record for its history, reserve information, redemption terms, events, and sources.</p>
+      <p>Search by name, organization, peg, backing model, lifecycle, or issuance. Open any record for its history, reserve information, redemption terms, events, and sources.</p>
     </div>
     <div class="panel stats"><div class="stat"><span>Records</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div></div>
   </section>
@@ -47,26 +48,27 @@ const jsonLd = {
     <div class="bar">All stablecoins</div>
     <div class="registry-controls" aria-label="Registry filters">
       <label><span>Search</span><input data-filter-search type="search" placeholder="USDC, Terra, synthetic..." autocomplete="off" /></label>
-      <label><span>Status</span><select data-filter-status><option value="">All statuses</option>{statusOptions.map((status) => <option value={status}>{formatStatusLabel(status)}</option>)}</select></label>
+      <label><span>Lifecycle</span><select data-filter-lifecycle><option value="">All lifecycle states</option>{lifecycleOptions.map((lifecycle) => <option value={lifecycle}>{formatLifecycleLabel(lifecycle)}</option>)}</select></label>
+      <label><span>Issuance</span><select data-filter-issuance><option value="">All issuance states</option>{issuanceOptions.map((issuance) => <option value={issuance}>{formatIssuanceLabel(issuance)}</option>)}</select></label>
       <label><span>Model</span><select data-filter-model><option value="">All models</option>{modelOptions.map((model) => <option value={model}>{formatPublicLabel(model)}</option>)}</select></label>
       <label><span>Peg</span><select data-filter-peg><option value="">All pegs</option>{pegOptions.map((peg) => <option value={peg}>{peg}</option>)}</select></label>
       <label><span>Organization</span><select data-filter-issuer><option value="">All organizations</option>{organizationOptions.map((organization) => <option value={organization}>{organization}</option>)}</select></label>
-      <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="status">Status A-Z</option><option value="model">Model A-Z</option><option value="last_verified_desc">Recently reviewed</option></select></label>
+      <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="lifecycle">Lifecycle A-Z</option><option value="issuance">Issuance A-Z</option><option value="model">Model A-Z</option><option value="last_verified_desc">Recently reviewed</option></select></label>
     </div>
     <div class="registry-summary" aria-live="polite"><span data-result-count>{stablecoins.length}</span> of {stablecoins.length} records</div>
     <table data-table-kind="stablecoin-index" data-mobile-table="scroll-preserve">
-      <thead><tr><th>Name</th><th>Symbol</th><th>Organization</th><th>Role</th><th>Peg</th><th>Model</th><th>Status</th><th>Reviewed</th></tr></thead>
+      <thead><tr><th>Name</th><th>Symbol</th><th>Organization</th><th>Role</th><th>Peg</th><th>Model</th><th>Lifecycle</th><th>Issuance</th><th>Reviewed</th></tr></thead>
       <tbody data-registry-body>
-        {stablecoins.length === 0 ? <tr><td colspan="8">No records available.</td></tr> : stablecoins.map((coin) => {
+        {stablecoins.length === 0 ? <tr><td colspan="9">No records available.</td></tr> : stablecoins.map((coin) => {
           const relationship = primaryRelationshipByStablecoin.get(coin.id);
           const organization = relationship ? organizationById.get(relationship.organization_id) : undefined;
           const organizationName = organization?.name ?? 'Unknown organization';
           const role = relationship?.role ?? 'unknown';
           const aliases = Array.isArray(coin.aliases) ? coin.aliases : [];
-          const searchable = [coin.name, coin.symbol, coin.slug, organizationName, role, formatPublicLabel(role), coin.peg_asset, coin.collateral_model, formatPublicLabel(coin.collateral_model), coin.status, formatStatusLabel(coin.status), ...aliases].filter(Boolean).join(' ');
-          return (<tr data-registry-row data-search={searchable.toLowerCase()} data-name={coin.name.toLowerCase()} data-status={coin.status ?? ''} data-model={coin.collateral_model ?? ''} data-peg={coin.peg_asset ?? ''} data-issuer={organizationName} data-last-verified={coin.last_verified_at ?? ''}><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : organizationName}</td><td>{formatPublicLabel(role)}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={statusClass(coin.status)}>{formatStatusLabel(coin.status)}</span></td><td>{coin.last_verified_at ?? '—'}</td></tr>);
+          const searchable = [coin.name, coin.symbol, coin.slug, organizationName, role, formatPublicLabel(role), coin.peg_asset, coin.collateral_model, formatPublicLabel(coin.collateral_model), coin.lifecycle_status, formatLifecycleLabel(coin.lifecycle_status), coin.issuance_status, formatIssuanceLabel(coin.issuance_status), ...aliases].filter(Boolean).join(' ');
+          return (<tr data-registry-row data-search={searchable.toLowerCase()} data-name={coin.name.toLowerCase()} data-lifecycle={coin.lifecycle_status ?? ''} data-issuance={coin.issuance_status ?? ''} data-model={coin.collateral_model ?? ''} data-peg={coin.peg_asset ?? ''} data-issuer={organizationName} data-last-verified={coin.last_verified_at ?? ''}><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : organizationName}</td><td>{formatPublicLabel(role)}</td><td>{coin.peg_asset ?? '—'}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{coin.last_verified_at ?? '—'}</td></tr>);
         })}
-        <tr data-no-results hidden><td colspan="8">No stablecoins match these filters.</td></tr>
+        <tr data-no-results hidden><td colspan="9">No stablecoins match these filters.</td></tr>
       </tbody>
     </table>
   </section>
@@ -77,11 +79,11 @@ const jsonLd = {
     const rows = Array.from(registry?.querySelectorAll('[data-registry-row]') ?? []);
     const noResults = registry?.querySelector('[data-no-results]');
     const resultCount = registry?.querySelector('[data-result-count]');
-    const controls = { search: registry?.querySelector('[data-filter-search]'), status: registry?.querySelector('[data-filter-status]'), model: registry?.querySelector('[data-filter-model]'), peg: registry?.querySelector('[data-filter-peg]'), issuer: registry?.querySelector('[data-filter-issuer]'), sort: registry?.querySelector('[data-sort]') };
+    const controls = { search: registry?.querySelector('[data-filter-search]'), lifecycle: registry?.querySelector('[data-filter-lifecycle]'), issuance: registry?.querySelector('[data-filter-issuance]'), model: registry?.querySelector('[data-filter-model]'), peg: registry?.querySelector('[data-filter-peg]'), issuer: registry?.querySelector('[data-filter-issuer]'), sort: registry?.querySelector('[data-sort]') };
     const normalize = (value: unknown) => String(value ?? '').trim().toLowerCase();
     const getValue = (control: Element | null | undefined) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
-    function sortRows() { if (!tbody) return; const mode = getValue(controls.sort) || 'name'; const sorted = [...rows].sort((a, b) => { if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0; if (mode === 'last_verified_desc') return String(b.dataset.lastVerified ?? '').localeCompare(String(a.dataset.lastVerified ?? '')); if (mode === 'status') return String(a.dataset.status ?? '').localeCompare(String(b.dataset.status ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'model') return String(a.dataset.model ?? '').localeCompare(String(b.dataset.model ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); }); sorted.forEach((row) => tbody.appendChild(row)); if (noResults) tbody.appendChild(noResults); }
-    function applyFilters() { const query = normalize(getValue(controls.search)); const status = getValue(controls.status); const model = getValue(controls.model); const peg = getValue(controls.peg); const issuer = getValue(controls.issuer); let visible = 0; rows.forEach((row) => { if (!(row instanceof HTMLElement)) return; const matches = (!query || normalize(row.dataset.search).includes(query)) && (!status || row.dataset.status === status) && (!model || row.dataset.model === model) && (!peg || row.dataset.peg === peg) && (!issuer || row.dataset.issuer === issuer); row.hidden = !matches; if (matches) visible += 1; }); if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0; if (resultCount) resultCount.textContent = String(visible); }
+    function sortRows() { if (!tbody) return; const mode = getValue(controls.sort) || 'name'; const sorted = [...rows].sort((a, b) => { if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0; if (mode === 'last_verified_desc') return String(b.dataset.lastVerified ?? '').localeCompare(String(a.dataset.lastVerified ?? '')); if (mode === 'lifecycle') return String(a.dataset.lifecycle ?? '').localeCompare(String(b.dataset.lifecycle ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'issuance') return String(a.dataset.issuance ?? '').localeCompare(String(b.dataset.issuance ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'model') return String(a.dataset.model ?? '').localeCompare(String(b.dataset.model ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); }); sorted.forEach((row) => tbody.appendChild(row)); if (noResults) tbody.appendChild(noResults); }
+    function applyFilters() { const query = normalize(getValue(controls.search)); const lifecycle = getValue(controls.lifecycle); const issuance = getValue(controls.issuance); const model = getValue(controls.model); const peg = getValue(controls.peg); const issuer = getValue(controls.issuer); let visible = 0; rows.forEach((row) => { if (!(row instanceof HTMLElement)) return; const matches = (!query || normalize(row.dataset.search).includes(query)) && (!lifecycle || row.dataset.lifecycle === lifecycle) && (!issuance || row.dataset.issuance === issuance) && (!model || row.dataset.model === model) && (!peg || row.dataset.peg === peg) && (!issuer || row.dataset.issuer === issuer); row.hidden = !matches; if (matches) visible += 1; }); if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0; if (resultCount) resultCount.textContent = String(visible); }
     Object.values(controls).forEach((control) => { control?.addEventListener('input', () => { sortRows(); applyFilters(); }); control?.addEventListener('change', () => { sortRows(); applyFilters(); }); });
     sortRows(); applyFilters();
   </script>
