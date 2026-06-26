@@ -57,6 +57,7 @@ const registryV2 = loadRegistryV2Baseline(root);
 const registryV3 = readJson('docs/migration/registry-v3-foundation.json');
 const incomeProfiles = readJson('docs/migration/registry-v3-income-profiles.json');
 const qualityBaseline = readJson('docs/migration/registry-v3-baseline.json');
+const generatedStats = readJson(qualityBaseline.generated_stats);
 
 const compatibilityFiles = [
   'data/stablecoin-overrides-pr033.json',
@@ -80,7 +81,13 @@ for (const relativePath of canonicalFiles) {
   hash.update('\0');
 }
 
-const counts = qualityBaseline.expected_counts;
+const counts = generatedStats.registry;
+for (const [key, expected] of Object.entries(qualityBaseline.expected_counts)) {
+  if (counts[key] !== expected) {
+    throw new Error(`Generated registry count differs from Registry v3 baseline for ${key}: ${counts[key]} !== ${expected}`);
+  }
+}
+
 const routeCounts = {
   stablecoin_detail: counts.stablecoins,
   organization_detail: counts.organizations,
@@ -116,6 +123,7 @@ const summary = [
   `- Organizations: ${counts.organizations}`,
   `- Events: ${counts.events}`,
   `- Evidence: ${counts.evidence}`,
+  `- Evidence relations: ${counts.evidence_relations}`,
   `- Expected detail routes: ${routeCounts.total_detail}`,
   ''
 ].join('\n');
