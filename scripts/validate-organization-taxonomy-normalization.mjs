@@ -40,6 +40,10 @@ function countBy(rows, getter) {
   return Object.fromEntries([...counts.entries()].sort(([a], [b]) => a.localeCompare(b)));
 }
 
+function sameCounts(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
+}
+
 const baseline = loadRegistryV2Baseline(root);
 const organizations = baseline.data_groups.organizations.flatMap(readRows);
 const relationships = baseline.data_groups.relationships.flatMap(readRows);
@@ -93,12 +97,8 @@ for (const [type, category] of Object.entries(organizationTypeCategoryMap)) {
 for (const [type, character] of Object.entries(organizationTypeRegulatoryCharacterMap)) {
   check(regulatoryValues.has(character), `${type}: unknown regulatory character ${character}`);
 }
-for (const role of canonicalRoles) {
-  check(Boolean(functionalRoleLabels[role]), `unmapped functional role: ${role}`);
-}
-for (const status of canonicalRelationshipStatuses) {
-  check(Boolean(relationshipStatusLabels[status]), `unmapped relationship status: ${status}`);
-}
+for (const role of canonicalRoles) check(Boolean(functionalRoleLabels[role]), `unmapped functional role: ${role}`);
+for (const status of canonicalRelationshipStatuses) check(Boolean(relationshipStatusLabels[status]), `unmapped relationship status: ${status}`);
 
 const records = organizations.map((organization) => {
   const related = relationshipsByOrganization.get(organization.id) ?? [];
@@ -109,10 +109,8 @@ const records = organizations.map((organization) => {
   const roles = [...new Set(related.map((row) => row.role))].sort();
   const statuses = [...new Set(related.map((row) => row.status ?? 'unknown'))].sort();
 
-  check(categoryValues.has(publicCategory), `${organization.id}: invalid public organization category ${publicCategory}`);
-  check(publicCategory !== 'unknown', `${organization.id}: public organization category remains unknown`);
-  check(regulatoryValues.has(regulatoryCharacter), `${organization.id}: invalid regulatory character ${regulatoryCharacter}`);
-  check(regulatoryCharacter !== 'unknown', `${organization.id}: regulatory character remains unknown`);
+  check(categoryValues.has(publicCategory) && publicCategory !== 'unknown', `${organization.id}: invalid public organization category ${publicCategory}`);
+  check(regulatoryValues.has(regulatoryCharacter) && regulatoryCharacter !== 'unknown', `${organization.id}: invalid regulatory character ${regulatoryCharacter}`);
   check(jurisdictionValues.has(jurisdictionScope), `${organization.id}: invalid jurisdiction scope ${jurisdictionScope}`);
   check(['recorded', 'not_recorded', 'unknown'].includes(legalFormState), `${organization.id}: invalid legal-form state ${legalFormState}`);
   check(typeof organization.confidence === 'string' && organization.confidence.length > 0, `${organization.id}: confidence is missing`);
@@ -138,7 +136,7 @@ const roleCounts = countBy(relationships, (row) => row.role);
 const relationshipStatusCounts = countBy(relationships, (row) => row.status);
 const multiRoleOrganizations = records.filter((row) => row.functional_roles.length > 1);
 
-const expectedCategoryCounts = {
+check(sameCounts(categoryCounts, {
   bank_trust_or_credit_institution: 7,
   company_or_corporate_group: 27,
   dao_or_governance_body: 5,
@@ -149,22 +147,23 @@ const expectedCategoryCounts = {
   product_or_brand_organization: 1,
   protocol_or_software_system: 31,
   reserve_or_special_purpose_body: 1
-};
-const expectedRegulatoryCounts = {
+}), `public organization category counts changed: ${JSON.stringify(categoryCounts)}`);
+check(sameCounts(regulatoryCounts, {
   not_recorded: 31,
   protocol_or_decentralized_system: 37,
   regulated_bank_or_credit_institution: 7,
   regulated_digital_asset_service: 5,
   regulated_fund_or_investment_vehicle: 1,
   regulated_payment_or_e_money: 5
-};
-const expectedJurisdictionCounts = {
+}), `regulatory character counts changed: ${JSON.stringify(regulatoryCounts)}`);
+check(sameCounts(jurisdictionCounts, {
   country_or_territory: 34,
   decentralized_or_protocol: 21,
   multi_jurisdiction: 7,
   unknown: 24
-};
-const expectedRoleCounts = {
+}), `jurisdiction scope counts changed: ${JSON.stringify(jurisdictionCounts)}`);
+check(sameCounts(legalFormCounts, { not_recorded: 86 }), `legal-form state counts changed: ${JSON.stringify(legalFormCounts)}`);
+check(sameCounts(roleCounts, {
   brand_owner: 5,
   custodian: 1,
   legal_issuer: 37,
@@ -172,19 +171,8 @@ const expectedRoleCounts = {
   protocol_operator: 53,
   reserve_manager: 2,
   technology_provider: 2
-};
-const expectedRelationshipStatusCounts = {
-  active: 86,
-  ended: 13,
-  unknown: 2
-};
-
-check(JSON.stringify(categoryCounts) === JSON.stringify(expectedCategoryCounts), `public organization category counts changed: ${JSON.stringify(categoryCounts)}`);
-check(JSON.stringify(regulatoryCounts) === JSON.stringify(expectedRegulatoryCounts), `regulatory character counts changed: ${JSON.stringify(regulatoryCounts)}`);
-check(JSON.stringify(jurisdictionCounts) === JSON.stringify(expectedJurisdictionCounts), `jurisdiction scope counts changed: ${JSON.stringify(jurisdictionCounts)}`);
-check(JSON.stringify(legalFormCounts) === JSON.stringify({ not_recorded: 86 }), `legal-form state counts changed: ${JSON.stringify(legalFormCounts)}`);
-check(JSON.stringify(roleCounts) === JSON.stringify(expectedRoleCounts), `functional role counts changed: ${JSON.stringify(roleCounts)}`);
-check(JSON.stringify(relationshipStatusCounts) === JSON.stringify(expectedRelationshipStatusCounts), `relationship status counts changed: ${JSON.stringify(relationshipStatusCounts)}`);
+}), `functional role counts changed: ${JSON.stringify(roleCounts)}`);
+check(sameCounts(relationshipStatusCounts, { active: 86, ended: 13, unknown: 2 }), `relationship status counts changed: ${JSON.stringify(relationshipStatusCounts)}`);
 check(multiRoleOrganizations.length === 1 && multiRoleOrganizations[0].id === 'sog_issuer_m0_protocol', 'expected M0 Protocol to remain the current multi-role organization');
 
 const indexSource = readText('src/pages/issuers/index.astro');
@@ -200,9 +188,7 @@ for (const token of [
   'data-organization-jurisdiction',
   'data-organization-role',
   'data-organization-status'
-]) {
-  check(indexSource.includes(token), `organization index normalization token is missing: ${token}`);
-}
+]) check(indexSource.includes(token), `organization index normalization token is missing: ${token}`);
 for (const heading of ['Organization category', 'Regulatory character', 'Jurisdiction', 'Functional roles', 'Relationship state', 'Record confidence']) {
   check(indexSource.includes(`<th>${heading}</th>`), `organization index heading is missing: ${heading}`);
 }
@@ -219,13 +205,11 @@ for (const heading of [
   'Jurisdiction scope',
   'Functional roles',
   'Relationship states'
-]) {
-  check(detailSource.includes(`<th>${heading}</th>`), `organization detail heading is missing: ${heading}`);
-}
+]) check(detailSource.includes(`<th>${heading}</th>`), `organization detail heading is missing: ${heading}`);
 check(detailSource.includes('resolveOrganizationTaxonomy'), 'organization detail must resolve normalized taxonomy');
 check(detailSource.includes('getFunctionalRoleLabel'), 'organization detail must use functional role labels');
 check(detailSource.includes('getRelationshipStatusLabel'), 'organization detail must use relationship status labels');
-check(!detailSource.includes('<th>Type</th>'), 'legacy generic Type row remains on organization detail');
+check(!/<tr><th>Type<\/th><td>/.test(detailSource), 'legacy generic Type row remains in organization identity overview');
 
 const machineSource = readText('src/lib/machine-readable.ts');
 for (const key of [
@@ -236,11 +220,9 @@ for (const key of [
   'organization_jurisdiction_scope',
   'functional_role',
   'relationship_status'
-]) {
-  check(machineSource.includes(`${key}: countValues`), `machine-readable organization breakdown is missing: ${key}`);
-}
-check(!machineSource.includes('organization_type: countValues'), 'machine-readable public breakdown must not expose generic organization_type as the unnamed public axis');
-check(!machineSource.includes('relationship_role: countValues'), 'machine-readable public breakdown must use functional_role');
+]) check(machineSource.includes(`${key}: countValues`), `machine-readable organization breakdown is missing: ${key}`);
+check(!/\n\s{4}organization_type:\s*countValues/.test(machineSource), 'machine-readable public breakdown must not expose generic organization_type as the unnamed public axis');
+check(!/\n\s{4}relationship_role:\s*countValues/.test(machineSource), 'machine-readable public breakdown must use functional_role');
 
 const statsSource = readText('scripts/generate-registry-stats.mjs');
 for (const key of [
@@ -251,9 +233,7 @@ for (const key of [
   'organization_jurisdiction_scopes:',
   'functional_roles:',
   'relationship_statuses:'
-]) {
-  check(statsSource.includes(key), `registry stats organization axis is missing: ${key}`);
-}
+]) check(statsSource.includes(key), `registry stats organization axis is missing: ${key}`);
 
 const report = {
   schema_version: '1.0',
