@@ -39,7 +39,7 @@
     "verify:consistency": "node scripts/verify-public-consistency-safe.mjs",
     "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
     "verify:public": "node scripts/verify-public-layer.mjs",
-    "check:production": "node scripts/check-production.mjs"
+    "check:production": "node scripts/check-production.mjs && node scripts/check-production-provenance.mjs"
   },
   "dependencies": {
     "@astrojs/check": "latest",
