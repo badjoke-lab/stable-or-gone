@@ -13,6 +13,7 @@ import {
   getStablecoins,
 } from './data/registry';
 import { getDeploymentsV3 } from './data/registryV3';
+import { getPublicValueStateBreakdown } from './value-state-breakdown';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
 import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
@@ -187,6 +188,7 @@ export function getRecordCountBreakdown() {
     deployment_contract_identity_state: countValues(deploymentTaxonomies.map((item) => item.contract_identity_state)),
     deployment_network_identity_state: countValues(deploymentTaxonomies.map((item) => item.network_identity_state)),
     deployment_chain: countValues(deployments.map((deployment) => deployment.chain)),
+    ...getPublicValueStateBreakdown(),
   };
 }
 
