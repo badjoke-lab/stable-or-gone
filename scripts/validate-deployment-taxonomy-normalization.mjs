@@ -67,11 +67,13 @@ for (const [name, values] of Object.entries({
   network_identity_state: counts.network_identity_state
 })) check(sum(values) === deploymentTaxonomyBaseline.deployments, `${name} counts do not total ${deploymentTaxonomyBaseline.deployments}`);
 
-const detailSource = fs.readFileSync('src/components/StablecoinDetailView.astro', 'utf8');
+const detailSource = fs.readFileSync('src/components/DeploymentTable.astro', 'utf8');
 for (const heading of ['Public deployment category', 'Canonical deployment type', 'Operational state', 'Recorded status', 'Change or proposal state', 'Canonicality', 'Canonicality record state', 'Verification state', 'Network record state', 'Contract identity state']) {
   check(detailSource.includes(`<th>${heading}</th>`), `deployment table heading is missing: ${heading}`);
 }
-check(detailSource.includes('resolveDeploymentTaxonomy'), 'stablecoin deployment table must resolve normalized deployment taxonomy');
+check(detailSource.includes('resolveDeploymentTaxonomy'), 'deployment table must resolve normalized deployment taxonomy');
+const stablecoinSource = fs.readFileSync('src/components/StablecoinDetailView.astro', 'utf8');
+check(stablecoinSource.includes('<DeploymentTable deployments={deployments} />'), 'stablecoin detail must use the normalized deployment table component');
 
 const machineSource = fs.readFileSync('src/lib/machine-readable.ts', 'utf8');
 for (const key of ['public_deployment_category', 'canonical_deployment_type', 'deployment_operational_state', 'deployment_change_state', 'deployment_canonicality', 'deployment_canonicality_record_state', 'deployment_verification_state', 'deployment_contract_identity_state', 'deployment_network_identity_state']) {
