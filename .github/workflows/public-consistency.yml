@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
-      - run: node scripts/collect-backing-stabilization-migration.mjs
       - run: npm run build:site
       - run: npm run verify:consistency
       - name: Upload public output diagnostics
@@ -29,6 +28,7 @@ jobs:
           if-no-files-found: warn
           path: |
             data/generated/backing-stabilization-migration.json
+            data/generated/backing-stabilization-validation.json
             data/generated/reference-target-migration.json
             data/generated/reference-target-validation.json
             data/generated/lifecycle-issuance-migration.json
