@@ -82,4 +82,18 @@ jobs:
       - name: Verify deployment output
         run: npm run verify:deployment
       - name: Verify public layer
-        run: npm run verify:public
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run verify:public 2>&1 | tee public-layer-verification.log
+      - name: Upload public layer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-layer-diagnostics-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            public-layer-verification.log
+            data/generated/deployment-taxonomy-migration.json
+            dist/version.json
+            dist/data/manifest.json
