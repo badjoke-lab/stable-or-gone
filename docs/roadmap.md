@@ -6,6 +6,15 @@ Updated: 2026-06-26
 
 This is the canonical execution and recovery schedule for SOG. Roadmap-changing pull requests must update this file.
 
+The document-authority rules are defined in `docs/spec-governance.md`.
+
+The active workstream is governed by:
+
+```text
+docs/ui-redesign/master-spec.md
+docs/ui-redesign/implementation-plan.md
+```
+
 ## Current position
 
 ```text
@@ -20,27 +29,32 @@ Candidate total: 92
 Promoted candidates: 92
 Pending candidates: 0
 Integrity audit: 0 critical findings / 0 warnings
-Current phase: post-Batch 17 publication and quality work
+Current phase: documentation reset for the 100-record UI and public-information repair program
+Routine growth: paused
+Production publication: paused except verified emergency repair
+Next approved work item: merge the documentation-reset PR, then begin repair PR 1
 ```
 
-## Batch 17 records
+## Why the roadmap changed
 
-```text
-USA₮ / USAT
-EURAU
-Noble Dollar / USDN
-USDH
-AE Coin / AEC
-```
+The 92-record checkpoint exposed defects that cannot be solved by a cosmetic redesign alone.
 
-Fixed identity and lifecycle boundaries:
+Confirmed repair areas include:
 
-- USA₮ is separate from USD₮ / USDT; Anchorage Digital Bank is the legal issuer.
-- EURAU is issued by AllUnity; shareholder, reserve-bank, custodian, liquidity, and distribution roles remain separate.
-- Noble Dollar is separate from Neutrino USD, M0 M, vault positions, points programs, and bridged representations.
-- USDH remains `limited` with Registry v2 lifecycle `restricted` while migration and final-support boundaries remain unresolved.
-- AE Coin separates AED Stablecoin LLC's B2B issuer role from appointed customer-facing agents.
-- Unsupported launch dates for USDH and AE Coin remain null.
+- public pages generated from inconsistent production snapshots;
+- legacy and canonical lifecycle labels used inconsistently;
+- arbitrary free-text values used as filter taxonomies;
+- internal peg, deployment, and review values exposed publicly;
+- event-category proliferation;
+- evidence reliability mixed with source provenance;
+- primary organization inferred from relationship array order;
+- duplicate evidence presentation;
+- internal implementation terminology in public records;
+- generic mobile CSS hiding unrelated material fields by column number;
+- long detail pages without an adequate information hierarchy;
+- record-specific copy hard-coded in components.
+
+The previous immediate sequence of publication, quality audits, and Batch 18 selection is superseded by the repair program below.
 
 ## Canonical registry
 
@@ -87,14 +101,7 @@ Reserve applicability queue:                 12
   report expected but missing:                0
 ```
 
-PR #165 resolved the previous four source-count mismatches:
-
-```text
-sUSD predecessor lifecycle: 3 → 6
-DOLA launch:                2 → 3
-lisUSD rebrand:             5 → 6
-fxUSD launch:               7 → 8
-```
+These canonical-data checks remain valid but do not replace the new public-layer, taxonomy, responsive, and production-parity repair gates.
 
 ## Remaining research queues
 
@@ -138,52 +145,110 @@ Empty Set Dollar
 GYEN
 ```
 
-USDH migration remains an explicit lifecycle unknown but is not in the terminal-date queue because its canonical status is `limited`, not terminal.
+These queues remain preserved but are not the next work item.
 
-## Required operating sequence
+## Binding repair sequence
+
+The detailed PR-by-PR plan is `docs/ui-redesign/implementation-plan.md`.
+
+Summary:
 
 ```text
-1. Candidate research
-2. Non-canonical full-layer draft
-3. Bounded canonical promotion
-4. Six-workflow validation
-5. Manual production publication
-6. Production-parity verification
-7. Two or three existing-record quality audits
-8. Next growth batch selection
+Phase 0  Documentation reset
+Phase 1  Emergency production-integrity repair
+Phase 2  Public taxonomy and canonical-semantics repair
+Phase 3  Information architecture, responsive specification, and mocks
+Phase 4  Shared UI and registry indexes
+Phase 5  Stablecoin dossier implementation
+Phase 6  Search, home, editorial alignment, and hardening
+Phase 7  Full 92-record audit and final eight-record promotion
+Phase 8  100-record production publication
+Phase 9  Post-release work
 ```
 
-Rules:
+## Current gate
 
-- no more than five complete records per routine growth batch
-- unsupported dates remain null
-- private monitoring and unreviewed candidates stay out of public files
-- normal pull requests and main merges do not deploy automatically
-- production publication uses the approved manual GitHub Actions workflow
-- production must not trail main by more than one growth batch
-- urgent incident, depeg, regulatory, wind-down, or redemption updates may interrupt the routine queue
+```text
+Gate A — documentation reset
+```
+
+Gate A requires:
+
+- `docs/spec-governance.md` added;
+- `docs/ui-redesign/master-spec.md` added;
+- `docs/ui-redesign/implementation-plan.md` added;
+- `AGENTS.md` updated with the mandatory reading order and traceability rules;
+- this roadmap updated;
+- README checkpoint and source-of-truth links updated;
+- old Registry v3 implementation schedule marked historical;
+- deployment policy updated for the repair release gate.
+
+No UI implementation, taxonomy migration, Batch 18 selection, stats work, or production publication begins before Gate A passes.
+
+## Phase gates
+
+```text
+Gate A  documentation reset merged
+Gate B  production integrity repaired
+Gate C  taxonomy and data-semantics migration complete
+Gate D  information architecture and mocks approved
+Gate E  core registry UI complete
+Gate F  responsive, accessibility, performance, SEO, and machine-readable hardening complete
+Gate G  all 92 current records audited
+Gate H  100-record release candidate verified
+Gate I  deliberate production publication and parity verification complete
+```
 
 ## Immediate next work
 
 ```text
-1. Manually publish latest main.
-2. Verify production commit db625e2f2b2268e3b5c2d8afadbe0f67452f7c63.
-3. Verify the public count is 92 stable assets.
-4. Verify all five Batch 17 routes and their evidence/profile sections.
-5. Verify version.json, manifest.json, llms.txt, ai.txt, sitemap, and public consistency.
-6. Record production parity.
-7. Complete one or two more existing-record quality audits.
-8. Select Batch 18 only after the publication checkpoint and quality work.
+1. Complete and review the documentation-reset PR.
+2. Confirm that all source-of-truth links and required reading order agree.
+3. Merge the documentation-reset PR with no production deployment.
+4. Start implementation-plan PR 1: freeze the repair baseline and defect inventory.
+5. Do not select Batch 18.
+6. Do not produce final UI mocks before PRs 17–21 define the information and responsive behavior.
+7. Do not begin production UI implementation before Gate D.
 ```
 
-## Production policy
+## Growth policy during repair
+
+Routine growth is paused at 92 canonical assets.
+
+The final eight records are promoted only after:
+
+- production integrity repair;
+- public-taxonomy migration;
+- information-architecture approval;
+- UI implementation and hardening;
+- a full 92-record audit.
+
+The final eight records must follow the normal candidate, evidence, full-layer, validation, and bounded-batch rules. The count target does not justify thin or incomplete records.
+
+## Publication policy during repair
 
 ```text
 Automatic production deployment: disabled
 Preview branch deployments: disabled
+Routine repair PR deployment: none
+Verified emergency repair: manual emergency publication allowed
+100-record repaired UI: one planned manual publication checkpoint
 Publication path: manual GitHub Actions workflow only
-Manual production publication activation — PASS
-Deployment workflow run: 27908380603
 Pages project: stable-or-gone
 Production branch: main
 ```
+
+The canonical deployment rules remain in `docs/deployment-policy.md`.
+
+## Completion definition
+
+The repair program is complete only when:
+
+- 100 canonical stable assets are present;
+- the repaired public taxonomy is used consistently;
+- all current asset, organization, and event routes pass the new audit;
+- no material mobile information is silently suppressed;
+- evidence and known unknowns remain visible and connected;
+- production is generated from one verified source commit and data snapshot;
+- HTML, sitemap, metadata, machine-readable files, and canonical counts agree;
+- the production publication report is recorded.
