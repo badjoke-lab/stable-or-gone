@@ -40,11 +40,12 @@ Taxonomy PR 5 public-value registry: PR #172 merged
 Taxonomy PR 6 lifecycle and issuance: PR #173 merged
 Taxonomy PR 7 reference target and peg: PR #174 merged
 Taxonomy PR 8 backing and stabilization: PR #175 merged
+Taxonomy PR 9 event category and subtype: PR #176 merged
+Taxonomy PR 10 organization classification: completed by PR #177
 
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Current work item: PR 9 — event category and subtype normalization
-Latest completed item after this PR merges: PR 9
-Next approved work item: PR 10 — organization classification normalization
+Latest completed item after PR #177 merges: PR 10
+Current approved work item after PR #177 merges: PR 11 — evidence reliability, provenance, and type separation
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -136,16 +137,6 @@ Observed unmapped managed values: 0
 Status: **PASS**  
 Merged as PR #173.
 
-Authoritative files:
-
-```text
-config/lifecycle-issuance-compatibility.mjs
-src/utils/publicTaxonomy.ts
-scripts/collect-lifecycle-issuance-migration.mjs
-scripts/validate-lifecycle-issuance-normalization.mjs
-docs/audits/lifecycle-issuance-normalization-2026-06-26.md
-```
-
 Canonical lifecycle counts:
 
 ```text
@@ -169,22 +160,12 @@ terminated:      15
 unknown:           2
 ```
 
-Public presentation separates lifecycle from issuance. Legacy status remains only as compatibility diagnostics under `composition.legacy_status_compatibility`.
+Public presentation separates lifecycle from issuance. Legacy status remains compatibility-only diagnostics.
 
 ### PR 7 — reference-target and peg normalization
 
 Status: **PASS**  
 Merged as PR #174.
-
-Authoritative files:
-
-```text
-config/reference-targets.mjs
-src/utils/referenceTarget.ts
-scripts/collect-reference-target-migration.mjs
-scripts/validate-reference-target-normalization.mjs
-docs/audits/reference-target-normalization-2026-06-26.md
-```
 
 Validation baseline:
 
@@ -208,22 +189,12 @@ Floating protocol target:           1
 Indexed or inflation-linked target: 2
 ```
 
-Public presentation separates reference target, reference kind, comparison category, target value, and methodology. Canonical reference codes remain compatibility diagnostics only.
+Public presentation separates reference target, reference kind, comparison category, target value, and methodology.
 
 ### PR 8 — backing and stabilization normalization
 
 Status: **PASS**  
 Merged as PR #175.
-
-Authoritative files:
-
-```text
-config/backing-models.mjs
-src/utils/backingModel.ts
-scripts/collect-backing-stabilization-migration.mjs
-scripts/validate-backing-stabilization-normalization.mjs
-docs/audits/backing-stabilization-normalization-2026-06-26.md
-```
 
 Validation baseline:
 
@@ -255,19 +226,8 @@ The public comparison model, non-exclusive canonical backing types, reserve comp
 
 ### PR 9 — event category and subtype normalization
 
-Status after this PR merges: **PASS**
-
-Authoritative files:
-
-```text
-config/event-taxonomy.mjs
-src/utils/eventTaxonomy.ts
-src/components/StablecoinEventTimeline.astro
-src/components/StructuredEventDetail.astro
-scripts/collect-event-taxonomy-migration.mjs
-scripts/validate-event-taxonomy-normalization.mjs
-docs/audits/event-taxonomy-normalization-2026-06-26.md
-```
+Status: **PASS**  
+Merged as PR #176.
 
 Validation baseline:
 
@@ -305,46 +265,113 @@ Testing and pre-launch activity:      1
 Other material event:                 0
 ```
 
+Public presentation separates public category, canonical subtype, structured detail kind, lifecycle effect, recovery or reversal state, impact level, and structured-detail coverage.
+
+### PR 10 — organization classification normalization
+
+Status after PR #177 merges: **PASS**
+
+Authoritative files:
+
+```text
+config/organization-taxonomy.mjs
+src/utils/organizationTaxonomy.ts
+scripts/collect-organization-taxonomy-migration.mjs
+scripts/validate-organization-taxonomy-normalization.mjs
+docs/audits/organization-taxonomy-normalization-2026-06-26.md
+```
+
+Validation baseline:
+
+```text
+Canonical organizations:                86
+Canonical organization relationships:  101
+Canonical organization types:           39
+Unmapped organization categories:        0
+Unmapped regulatory characters:          0
+Unmapped functional roles:               0
+Unmapped relationship states:            0
+Organizations without relationships:     0
+```
+
+Approved public organization categories:
+
+```text
+Protocol or software system:                    31
+Company or corporate group:                     27
+Bank, trust, or credit institution:              7
+Digital-asset service or infrastructure:         6
+DAO or governance body:                          5
+Payment or e-money institution:                  5
+Network or ecosystem:                            2
+Fund or investment vehicle:                      1
+Product or brand organization:                   1
+Reserve or special-purpose body:                 1
+Unknown:                                          0
+```
+
+Regulatory-character baseline:
+
+```text
+Protocol or decentralized system:               37
+Not recorded in canonical data:                 31
+Regulated bank, trust, or credit institution:    7
+Regulated digital-asset service provider:        5
+Regulated payment or e-money institution:        5
+Regulated fund or investment vehicle:            1
+Unknown:                                          0
+```
+
+Jurisdiction-scope baseline:
+
+```text
+Country or territory:             34
+Unknown or not publicly resolved: 24
+Decentralized or protocol-based:  21
+Multiple jurisdictions:            7
+```
+
+Functional-role baseline:
+
+```text
+Protocol operator:    53
+Legal issuer:         37
+Brand owner:           5
+Reserve manager:       2
+Technology provider:   2
+Custodian:              1
+Other recorded role:    1
+```
+
+Relationship-state baseline:
+
+```text
+Active relationship:        86
+Ended relationship:         13
+Unknown relationship state:  2
+```
+
 Public presentation now separates:
 
 ```text
-public event category
-canonical event subtype
-structured detail kind
-lifecycle status effect
-canonical status-effect value
-recovery or reversal state
-impact level
-structured detail coverage
+public organization category
+canonical organization type
+legal form and legal-form state
+regulatory character
+recorded jurisdiction
+jurisdiction scope
+functional role
+relationship state
+record confidence
 ```
 
-The normalized taxonomy is used by the event index, event detail pages, stablecoin timelines, organization event tables, machine-readable output, registry statistics, and mobile preservation checks.
+The normalized taxonomy is used by the organization index, organization detail pages, stablecoin relationship labels, JSON-LD keywords, machine-readable output, registry statistics, validators, and mobile information-preservation checks.
 
-Machine-readable output exposes:
-
-```text
-public_event_category
-canonical_event_subtype
-event_detail_kind
-event_status_effect_category
-event_recovery_category
-```
-
-Registry statistics expose:
-
-```text
-composition.public_event_categories
-composition.canonical_event_subtypes
-composition.event_detail_kinds
-composition.event_status_effect_categories
-composition.event_recovery_categories
-composition.event_impact_levels
-```
+No legal form is inferred. All 86 current organizations explicitly report `Not recorded in canonical data` until reviewed canonical legal-form fields exist.
 
 ## Remaining Gate C sequence
 
 ```text
-PR 10  organization classification normalization
 PR 11  evidence reliability, provenance, and type separation
 PR 12  deployment status and verification-state separation
 PR 13  value-state semantics
@@ -356,15 +383,18 @@ PR 16  move record-specific public copy and complete the 92-record migration
 ## Immediate next work
 
 ```text
-1. Merge PR 9 only after every workflow passes.
-2. Start PR 10 from the resulting latest main.
-3. Inventory organization_type, legacy issuer_type, relationship roles, jurisdiction values, organization confidence, and active/historical relationship state across all 86 organizations and 101 relationships.
-4. Separate organization class from relationship role and lifecycle state.
-5. Replace implementation-facing organization labels and raw filters with approved public categories.
-6. Preserve multi-role and historical organization relationships instead of selecting one issuer label as the entire identity.
-7. Validate every organization and relationship, including compatibility route behavior under /issuers/ and /issuer/[slug]/.
-8. Do not deploy production.
-9. Do not select Batch 18.
+1. Merge PR #177 only after every workflow passes on the final head.
+2. Start PR 11 from the resulting latest main.
+3. Inventory all 455 evidence records and 455 evidence relationships.
+4. Separate source type, publisher identity, primary/secondary provenance, reliability, claim scope, evidence relation, archival state, and record confidence.
+5. Detect reliability values that are standing in for provenance or source type.
+6. Preserve one evidence source supporting multiple assets, organizations, events, and individual claims.
+7. Keep original and archived URLs separate and do not silently replace source identity.
+8. Update evidence tables, event/source views, machine-readable output, statistics, mobile preservation, and validators.
+9. Record explicit unknown or not-recorded states instead of guessing provenance.
+10. Do not begin deployment normalization inside PR 11.
+11. Do not deploy production.
+12. Do not select Batch 18.
 ```
 
 ## Quality queues preserved during repair
@@ -398,7 +428,7 @@ Gate I  deliberate production publication and parity verification complete
 
 Routine growth is paused at 92 assets. The final eight records may be promoted only after production integrity, taxonomy migration, information architecture, UI implementation, hardening, and the complete 92-record audit.
 
-The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, or reduced evidence requirements.
+The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, hidden known unknowns, or reduced evidence requirements.
 
 ## Publication policy during repair
 
