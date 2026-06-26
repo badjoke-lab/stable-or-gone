@@ -19,6 +19,7 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund
       - run: node scripts/collect-event-taxonomy-migration.mjs
+      - run: node scripts/collect-organization-taxonomy-migration.mjs
       - name: Build public site
         shell: bash
         run: |
@@ -33,6 +34,7 @@ jobs:
           if-no-files-found: warn
           path: |
             build-site.log
+            data/generated/organization-taxonomy-migration.json
             data/generated/event-taxonomy-migration.json
             data/generated/event-taxonomy-validation.json
             data/generated/backing-stabilization-migration.json
