@@ -18,6 +18,7 @@ For the active 100-record UI and public-information repair program, also read:
 ```text
 docs/ui-redesign/master-spec.md
 docs/ui-redesign/implementation-plan.md
+docs/public-taxonomy-spec.md
 ```
 
 For data work, inspect the current generated statistics, protected baseline, and integrity audit before editing canonical records.
