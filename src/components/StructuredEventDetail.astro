@@ -1,6 +1,7 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
 import { cleanPublicText } from '../utils/publicText';
+import { valueStatePresentation, type PublicValueState } from '../utils/valueState';
 
 const { event } = Astro.props as { event: Record<string, any> };
 
@@ -70,32 +71,58 @@ function labelFor(key: string) {
   return fieldLabels[key] ?? formatPublicLabel(key);
 }
 
-function valueFor(key: string, value: unknown): string {
-  if (value === null || value === undefined || value === '') return '—';
-  if (typeof value === 'boolean') return value ? 'Yes' : 'No';
-  if (Array.isArray(value)) return value.length > 0 ? value.map((item) => String(item)).join(', ') : '—';
-  if (typeof value === 'object') {
+type PresentedValue = {
+  text: string;
+  state: PublicValueState;
+  label: string;
+};
+
+function knownValue(text: string): PresentedValue {
+  return { text, state: 'known', label: 'Known' };
+}
+
+function valueFor(key: string, value: unknown): PresentedValue {
+  const policy = key === 'verification_status' ? 'verification' : 'default';
+
+  if (key.endsWith('_summary') || key === 'summary') {
+    const text = value === null || value === undefined || value === '' ? '' : cleanPublicText(String(value));
+    return valueStatePresentation(value, { policy, detect_markers: false, display_value: text });
+  }
+
+  if (typeof value === 'boolean') return knownValue(value ? 'Yes' : 'No');
+
+  if (Array.isArray(value)) {
+    const display = value.map((item) => String(item)).join(', ');
+    return valueStatePresentation(value, { policy, display_value: display });
+  }
+
+  if (value && typeof value === 'object') {
     const record = value as Record<string, unknown>;
-    if (typeof record.display_text === 'string' && record.display_text.length > 0) return record.display_text;
+    if (typeof record.display_text === 'string' && record.display_text.length > 0) {
+      return valueStatePresentation(record.display_text, { policy, display_value: record.display_text });
+    }
     const valueText = record.value !== null && record.value !== undefined ? String(record.value) : '';
     const symbol = typeof record.symbol === 'string' ? record.symbol : '';
-    if (valueText) return `${valueText}${symbol ? ` ${symbol}` : ''}`;
-    return Object.entries(record)
+    if (valueText) return knownValue(`${valueText}${symbol ? ` ${symbol}` : ''}`);
+    const nested = Object.entries(record)
       .filter(([, item]) => item !== null && item !== undefined && item !== '')
       .map(([nestedKey, item]) => `${labelFor(nestedKey)}: ${Array.isArray(item) ? item.join(', ') : String(item)}`)
-      .join(' · ') || '—';
+      .join(' · ');
+    return valueStatePresentation(nested, { policy, display_value: nested });
   }
-  if (key.endsWith('_summary') || key === 'summary') return cleanPublicText(String(value));
-  if (key.endsWith('_bps')) return `${value} bps`;
-  if (key.endsWith('_minutes')) return `${value} minutes`;
-  return formatPublicLabel(String(value), String(value));
+
+  let displayValue = value === null || value === undefined ? '' : String(value);
+  if (key.endsWith('_bps') && displayValue) displayValue = `${displayValue} bps`;
+  else if (key.endsWith('_minutes') && displayValue) displayValue = `${displayValue} minutes`;
+  else if (displayValue) displayValue = formatPublicLabel(displayValue, displayValue);
+  return valueStatePresentation(value, { policy, display_value: displayValue });
 }
 
 const rows = sections.flatMap((section) => {
   const fields = Object.entries(section.value as Record<string, unknown>);
   return fields.map(([key, value]) => ({
     label: `${section.label} — ${labelFor(key)}`,
-    value: valueFor(key, value)
+    presentation: valueFor(key, value)
   }));
 });
 ---
@@ -107,7 +134,7 @@ const rows = sections.flatMap((section) => {
         {rows.map((row) => (
           <tr>
             <th>{row.label}</th>
-            <td>{row.value}</td>
+            <td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td>
           </tr>
         ))}
       </tbody>
