@@ -41,7 +41,7 @@ const jsonLd = {
       <label><span>Sort</span><select data-event-sort><option value="date_desc">Newest first</option><option value="date_asc">Oldest first</option><option value="impact">Impact</option><option value="title">Event A-Z</option></select></label>
     </div>
     <div class="registry-summary" aria-live="polite"><span data-event-result-count>{events.length}</span> of {events.length} events</div>
-    <table><thead><tr><th>Date</th><th>Stablecoin</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Sources</th></tr></thead><tbody data-event-body>
+    <table data-table-kind="event-index" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Stablecoin</th><th>Event</th><th>Type</th><th>Impact</th><th>Recovered</th><th>Sources</th></tr></thead><tbody data-event-body>
       {events.length === 0 ? <tr><td colspan="7">No event records available.</td></tr> : events.map((event) => {
         const stablecoin = stablecoinById.get(event.stablecoin_id ?? '');
         const stablecoinLabel = stablecoin ? `${stablecoin.name}${stablecoin.symbol ? ` (${stablecoin.symbol})` : ''}` : 'Unknown stablecoin';
