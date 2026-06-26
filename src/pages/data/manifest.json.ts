@@ -3,11 +3,13 @@ import {
   MACHINE_READABLE_SCHEMA_VERSION,
   MAIN_ROUTES,
   PROJECT,
+  getBuildMetadata,
   getRecordCountBreakdown,
   getRecordCounts,
 } from '../../lib/machine-readable';
 
 export function GET() {
+  const build = getBuildMetadata();
   const manifest = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
@@ -17,6 +19,7 @@ export function GET() {
     registry_family: PROJECT.registryFamily,
     registry_type: PROJECT.registryType,
     design_generation: PROJECT.designGeneration,
+    build,
     data_model: {
       primary_record: 'stablecoin',
       supporting_records: [
@@ -51,7 +54,7 @@ export function GET() {
     },
     language: 'en',
     locales: ['en'],
-    generated_at: new Date().toISOString(),
+    generated_at: build.generated_at,
   };
 
   return new Response(JSON.stringify(manifest, null, 2), {
