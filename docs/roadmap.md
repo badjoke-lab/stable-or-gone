@@ -25,15 +25,18 @@ Latest merged growth PR: #164 — Promote Batch 17 stable assets
 Growth merge commit: be058152fe6f9c8b18357a36015a6b49c249624b
 Latest merged quality PR: #165 — Align event source counts
 Quality merge commit: db625e2f2b2268e3b5c2d8afadbe0f67452f7c63
+Documentation reset PR: #167 — merged
+Documentation reset merge commit: 94db111dc48e7dfb30576cda52d60e5494565ec0
 Canonical stable assets: 92
 Candidate total: 92
 Promoted candidates: 92
 Pending candidates: 0
 Integrity audit: 0 critical findings / 0 warnings
-Current phase: documentation reset for the 100-record UI and public-information repair program
+Current phase: Phase 1 — emergency production-integrity repair
+Latest completed repair item after this PR merges: PR 1 — repair baseline and defect inventory
+Next approved work item: PR 2 — add build provenance
 Routine growth: paused
 Production publication: paused except verified emergency repair
-Next approved work item: merge the documentation-reset PR, then begin repair PR 1
 ```
 
 ## Why the roadmap changed
@@ -56,6 +59,18 @@ Confirmed repair areas include:
 - record-specific copy hard-coded in components.
 
 The previous immediate sequence of publication, quality audits, and Batch 18 selection is superseded by the repair program below.
+
+## Repair baseline
+
+The fixed starting point for the repair program is:
+
+```text
+docs/ui-redesign/repair-baseline.json
+docs/audits/ui-repair-baseline-2026-06-26.md
+scripts/validate-ui-repair-baseline.mjs
+```
+
+The baseline records canonical counts, generated route and sitemap expectations, the public split-generation snapshot observed on 2026-06-26, sixteen confirmed defect IDs, and twenty representative records.
 
 ## Canonical registry
 
@@ -102,7 +117,7 @@ Reserve applicability queue:                 12
   report expected but missing:                0
 ```
 
-These canonical-data checks remain valid but do not replace the new public-layer, taxonomy, responsive, and production-parity repair gates.
+These canonical-data checks remain valid but do not replace the public-layer, taxonomy, responsive, and production-parity repair gates.
 
 ## Remaining research queues
 
@@ -170,22 +185,20 @@ Phase 9  Post-release work
 ## Current gate
 
 ```text
-Gate A — documentation reset
+Gate A — PASS
+Gate B — in progress
 ```
 
-Gate A requires:
+Gate A completed through PR #167.
 
-- `docs/spec-governance.md` added;
-- `docs/ui-redesign/master-spec.md` added;
-- `docs/ui-redesign/implementation-plan.md` added;
-- `docs/public-taxonomy-spec.md` added;
-- `AGENTS.md` updated with the mandatory reading order and traceability rules;
-- this roadmap updated;
-- README checkpoint and source-of-truth links updated;
-- old Registry v3 implementation schedule marked historical;
-- deployment policy updated for the repair release gate.
+Gate B requires:
 
-No UI implementation, taxonomy migration, Batch 18 selection, stats work, or production publication begins before Gate A passes.
+- PR 1 — repair baseline and defect inventory;
+- PR 2 — build provenance;
+- PR 3 — full-route and output parity enforcement;
+- PR 4 — removal of destructive mobile column suppression.
+
+No taxonomy migration, final UI mock, production UI implementation, Batch 18 selection, or routine publication begins before Gate B passes.
 
 ## Phase gates
 
@@ -204,12 +217,12 @@ Gate I  deliberate production publication and parity verification complete
 ## Immediate next work
 
 ```text
-1. Complete and review the documentation-reset PR.
-2. Confirm that all source-of-truth links and required reading order agree.
-3. Merge the documentation-reset PR with no production deployment.
-4. Start implementation-plan PR 1: freeze the repair baseline and defect inventory.
+1. Merge PR 1 after all CI workflows pass.
+2. Start PR 2 from the resulting latest main.
+3. Generate source commit, build timestamp, canonical data hash, canonical counts, and generated route counts at build time.
+4. Expose the same provenance through version.json and build verification.
 5. Do not select Batch 18.
-6. Do not produce final UI mocks before PRs 17–21 define the information and responsive behavior.
+6. Do not produce final UI mocks before PRs 17–21 define information and responsive behavior.
 7. Do not begin production UI implementation before Gate D.
 ```
 
