@@ -19,7 +19,7 @@ export const publicValueStates = [
   },
   {
     value: 'not_applicable',
-    public_label: 'Not applicable',
+    public_label: 'Not Applicable',
     short_definition: 'The field does not apply to this record or context.',
     sort_order: 40
   },
