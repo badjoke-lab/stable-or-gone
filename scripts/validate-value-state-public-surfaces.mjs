@@ -22,7 +22,7 @@ const requiredUsage = {
   'src/pages/event/[id].astro': ['EventValueStateRows'],
   'src/pages/issuer/[slug].astro': ['ValueStateText', 'start_date', 'end_date', 'last_verified_at'],
   'src/components/StablecoinDetailView.astro': ['ValueStateText', 'StablecoinValueStateSections', 'start_date', 'end_date'],
-  'src/components/StablecoinValueStateSections.astro': ['ValueStateText', 'unknown', 'published_at', 'report_date', 'last_checked_at']
+  'src/components/StablecoinValueStateSections.astro': ['ValueStateText', 'unknown', 'report_date', 'last_checked_at']
 };
 
 const forbiddenPublicLiterals = [
