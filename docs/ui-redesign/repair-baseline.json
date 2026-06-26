@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "baseline_id": "sog_ui_repair_baseline_2026_06_26",
+  "recorded_at": "2026-06-26",
+  "source_main_commit": "94db111dc48e7dfb30576cda52d60e5494565ec0",
+  "governing_documents": [
+    "docs/spec-governance.md",
+    "docs/roadmap.md",
+    "docs/deployment-policy.md",
+    "docs/ui-redesign/master-spec.md",
+    "docs/ui-redesign/implementation-plan.md",
+    "docs/public-taxonomy-spec.md"
+  ],
+  "canonical": {
+    "source": "docs/migration/registry-v3-baseline.json",
+    "stats": "data/generated/registry-stats.json",
+    "integrity_audit": "data/generated/registry-integrity-audit.json",
+    "counts": {
+      "stablecoins": 92,
+      "organizations": 86,
+      "relationships": 101,
+      "classifications": 92,
+      "profiles": 92,
+      "events": 150,
+      "event_details": 150,
+      "evidence": 455,
+      "evidence_relations": 455,
+      "reserve_reports": 100,
+      "known_unknowns": 253,
+      "regulatory_notes": 9,
+      "deployments": 130,
+      "legal_profiles": 92,
+      "stable_asset_relationships": 4,
+      "reserve_components": 125,
+      "income_profiles": 92
+    },
+    "coverage": {
+      "classifications": 92,
+      "profiles": 92,
+      "relationships": 92,
+      "events": 92,
+      "evidence": 92,
+      "known_unknowns": 92,
+      "deployments": 92,
+      "legal_profiles": 92,
+      "reserve_components": 92,
+      "income_profiles": 92,
+      "reserve_reports": 80
+    },
+    "quality_queues": {
+      "launch_dates_unresolved": 20,
+      "terminal_dates_unresolved": 4,
+      "reserve_applicability": 12,
+      "reserve_not_applicable_by_design": 10,
+      "reserve_source_status_unresolved": 2,
+      "reserve_expected_but_missing": 0
+    }
+  },
+  "generated_expectations": {
+    "index_counts": {
+      "stablecoins": 92,
+      "organizations": 86,
+      "relationships": 101,
+      "events": 150,
+      "evidence": 455
+    },
+    "detail_routes": {
+      "stablecoins": 92,
+      "organizations": 86,
+      "events": 150,
+      "total": 328
+    },
+    "sitemap_detail_urls": {
+      "stablecoins": 92,
+      "organizations": 86,
+      "events": 150,
+      "total": 328
+    },
+    "machine_readable_primary_counts": {
+      "primary_records": 92,
+      "events": 150,
+      "evidence": 455
+    }
+  },
+  "production_snapshot": {
+    "origin": "https://sog.badjoke-lab.com/",
+    "observed_at": "2026-06-26",
+    "status": "split_generation",
+    "html": {
+      "home": {
+        "stablecoins": 82,
+        "organizations": 73,
+        "events": 128,
+        "evidence": 386
+      },
+      "stablecoin_index": {
+        "stablecoins": 82,
+        "organizations": 73
+      },
+      "organization_index": {
+        "organizations": 73,
+        "relationships": 86
+      },
+      "event_index": {
+        "events": 128,
+        "stablecoins_covered": 82
+      }
+    },
+    "machine_readable": {
+      "build_commit": "24eb8bef07fff093bf8f366dd1aab5804a2367c3",
+      "generated_at": "2026-06-18T04:59:28.519Z",
+      "design_generation": "registry_v2",
+      "stablecoins": 70,
+      "organizations": 59,
+      "relationships": 72,
+      "events": 92,
+      "evidence": 279,
+      "evidence_relations": 279,
+      "reserve_reports": 72,
+      "known_unknowns": 153,
+      "regulatory_notes": 9,
+      "deployments": 101
+    },
+    "sitemap": {
+      "expected_from_current_canonical": {
+        "stablecoins": 92,
+        "organizations": 86,
+        "events": 150,
+        "total_detail_urls": 328
+      },
+      "observed_public_counts": null,
+      "verification_state": "not_captured_in_initial_external_snapshot",
+      "required_follow_up": "PR 3 must verify public sitemap counts against the intended deployed commit"
+    },
+    "generation_layers": [
+      {
+        "layer": "canonical_repository",
+        "stablecoins": 92,
+        "organizations": 86,
+        "events": 150,
+        "evidence": 455
+      },
+      {
+        "layer": "public_html",
+        "stablecoins": 82,
+        "organizations": 73,
+        "events": 128,
+        "evidence": 386
+      },
+      {
+        "layer": "public_machine_readable",
+        "stablecoins": 70,
+        "organizations": 59,
+        "events": 92,
+        "evidence": 279
+      }
+    ]
+  },
+  "known_defects": [
+    {
+      "id": "SOG-UI-001",
+      "severity": "blocker",
+      "status": "confirmed",
+      "title": "Public output contains multiple data generations",
+      "evidence": "Canonical repository, public HTML, and public machine-readable files report 92, 82, and 70 stable assets respectively.",
+      "target_prs": [2, 3]
+    },
+    {
+      "id": "SOG-UI-002",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Legacy status and canonical lifecycle labels diverge",
+      "evidence": "Lists expose legacy labels such as Failed and Discontinued while detail and statistics use Collapsed, Terminated, Restricted, and Winding down.",
+      "target_prs": [5, 6]
+    },
+    {
+      "id": "SOG-UI-003",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Model filters are generated from arbitrary descriptive values",
+      "evidence": "The stablecoin index enumerates every unique collateral_model string, including long protocol-specific descriptions.",
+      "target_prs": [5, 8, 24]
+    },
+    {
+      "id": "SOG-UI-004",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Internal reference identifiers appear as public peg labels",
+      "evidence": "Values including AMPL_CPI_ADJUSTED_TARGET, RAI_REDEMPTION_PRICE, and USD_WITH_TRUFLATION_LINKED_REBASE are exposed in the public filter.",
+      "target_prs": [5, 7, 24]
+    },
+    {
+      "id": "SOG-UI-005",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Event categories contain near-duplicate lifecycle and launch values",
+      "evidence": "Launch, Launched, Product launch, protocol launch, migration, token migration, rebrand, and wind-down variants appear as peer filter values.",
+      "target_prs": [5, 9, 26]
+    },
+    {
+      "id": "SOG-UI-006",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Evidence reliability mixes quality with provenance and medium",
+      "evidence": "Public machine-readable reliability values include high, medium, primary, repository, explorer, dashboard, and interface concepts.",
+      "target_prs": [5, 11, 31]
+    },
+    {
+      "id": "SOG-UI-007",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Deployment work states leak into public canonical values",
+      "evidence": "Deployment status and chain statistics include source_review_needed and related work-queue strings.",
+      "target_prs": [5, 12, 30]
+    },
+    {
+      "id": "SOG-UI-008",
+      "severity": "blocker",
+      "status": "confirmed",
+      "title": "Primary organization is selected by relationship array order",
+      "evidence": "The current detail component uses relationships[0] as the primary relationship.",
+      "target_prs": [14, 28]
+    },
+    {
+      "id": "SOG-UI-009",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Evidence sources can appear as duplicate public rows",
+      "evidence": "One source supporting multiple claims is rendered repeatedly instead of once with multiple claim relations.",
+      "target_prs": [15, 31]
+    },
+    {
+      "id": "SOG-UI-010",
+      "severity": "medium",
+      "status": "confirmed",
+      "title": "Internal implementation terminology appears in public records",
+      "evidence": "Compatibility URL notes, registry overlay names, and review placeholders are exposed as record content.",
+      "target_prs": [9, 12, 17, 25, 26]
+    },
+    {
+      "id": "SOG-UI-011",
+      "severity": "blocker",
+      "status": "confirmed",
+      "title": "Generic mobile CSS removes unrelated material fields",
+      "evidence": "At widths below 820px the fifth column is hidden across all tables, removing peg, relationship status, impact, confidence, summaries, or control capability depending on the table.",
+      "target_prs": [4, 21, 35]
+    },
+    {
+      "id": "SOG-UI-012",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Stablecoin detail hierarchy is flat and unbounded",
+      "evidence": "Current state, mechanisms, history, evidence, unknowns, and record coverage use nearly identical panel-table structures in one long sequence.",
+      "target_prs": [18, 21, 27, 28, 29, 30, 31]
+    },
+    {
+      "id": "SOG-UI-013",
+      "severity": "medium",
+      "status": "confirmed",
+      "title": "Record-specific summaries are hard-coded in a rendering component",
+      "evidence": "StablecoinDetailView contains a record-specific publicSummaries map.",
+      "target_prs": [16]
+    },
+    {
+      "id": "SOG-UI-014",
+      "severity": "medium",
+      "status": "confirmed",
+      "title": "Filter state is not shareable or restorable from the URL",
+      "evidence": "Current list scripts modify DOM state without reading or writing query parameters.",
+      "target_prs": [19, 24, 26]
+    },
+    {
+      "id": "SOG-UI-015",
+      "severity": "medium",
+      "status": "confirmed",
+      "title": "Home selected records are determined by array order",
+      "evidence": "The home page uses stablecoins.slice(0, 10) while presenting the result as selected records.",
+      "target_prs": [33]
+    },
+    {
+      "id": "SOG-UI-016",
+      "severity": "medium",
+      "status": "confirmed",
+      "title": "Registry, learning, and project navigation are visually flat",
+      "evidence": "Nine top-level links are displayed as one peer navigation set and wrap directly on mobile.",
+      "target_prs": [17, 23]
+    }
+  ],
+  "representative_records": [
+    {
+      "id": "sog_st_usdt",
+      "slug": "usdt",
+      "coverage_tags": ["active", "multi_deployment", "regulation_heavy", "issuer_control", "evidence_heavy"]
+    },
+    {
+      "id": "sog_st_usdc",
+      "slug": "usdc",
+      "coverage_tags": ["active", "reserve_and_redemption", "depeg_and_recovery", "multi_deployment"]
+    },
+    {
+      "id": "sog_st_ust",
+      "slug": "ust",
+      "coverage_tags": ["collapsed", "failure_history", "regulatory_context", "evidence_heavy"]
+    },
+    {
+      "id": "sog_st_busd",
+      "slug": "busd",
+      "coverage_tags": ["winding_down_or_terminated", "regulatory_action", "redemption_transition"]
+    },
+    {
+      "id": "sog_st_susd",
+      "slug": "susd",
+      "coverage_tags": ["impaired_or_restricted", "current_vs_history", "protocol_transition"]
+    },
+    {
+      "id": "sog_st_sai",
+      "slug": "sai",
+      "coverage_tags": ["migrated", "predecessor_successor", "historical_non_failure"]
+    },
+    {
+      "id": "sog_st_usdn",
+      "slug": "usdn",
+      "coverage_tags": ["rebranded", "peg_failure", "protocol_supersession"]
+    },
+    {
+      "id": "sog_st_rai",
+      "slug": "rai",
+      "coverage_tags": ["floating_reference", "nonstandard_peg", "internal_label_exposure"]
+    },
+    {
+      "id": "sog_st_spot",
+      "slug": "spot",
+      "coverage_tags": ["index_reference", "cpi_target", "nonstandard_peg"]
+    },
+    {
+      "id": "sog_st_susde",
+      "slug": "susde",
+      "coverage_tags": ["yield_receipt", "wrapper_boundary", "income_mechanics"]
+    },
+    {
+      "id": "sog_st_usyc",
+      "slug": "usyc",
+      "coverage_tags": ["fund_share", "legal_structure", "multi_organization"]
+    },
+    {
+      "id": "sog_st_usd1",
+      "slug": "usd1",
+      "coverage_tags": ["multi_organization", "issuer_vs_brand_owner", "reserve_structure"]
+    },
+    {
+      "id": "sog_st_msusd",
+      "slug": "mainstreet-msusd",
+      "coverage_tags": ["impaired", "recent_incident", "reserve_verification_gap", "unknown_heavy"]
+    },
+    {
+      "id": "sog_st_jpysc",
+      "slug": "jpysc",
+      "coverage_tags": ["non_usd", "multi_organization", "restricted_launch", "external_transfer_pending"]
+    },
+    {
+      "id": "sog_st_usat",
+      "slug": "usat",
+      "coverage_tags": ["multi_organization", "legal_issuer_vs_brand_support", "institutional_redemption"]
+    },
+    {
+      "id": "sog_st_eurau",
+      "slug": "eurau",
+      "coverage_tags": ["non_usd", "mica", "multi_role_ecosystem", "regulated_issuer"]
+    },
+    {
+      "id": "sog_st_usdh",
+      "slug": "usdh",
+      "coverage_tags": ["restricted", "migration_period", "unknown_launch_date", "multi_layer_roles"]
+    },
+    {
+      "id": "sog_st_aecoin",
+      "slug": "ae-coin",
+      "coverage_tags": ["non_usd", "authorized_agents", "unknown_launch_date", "reserve_details_pending"]
+    },
+    {
+      "id": "sog_st_ousd",
+      "slug": "origin-dollar",
+      "coverage_tags": ["rebasing", "yield_mechanics", "wrapper_boundary", "security_history"]
+    },
+    {
+      "id": "sog_st_nobleusdn",
+      "slug": "noble-usdn",
+      "coverage_tags": ["identity_collision_risk", "yield_bearing", "infrastructure_roles", "cross_chain_boundary"]
+    }
+  ],
+  "required_representative_tags": [
+    "active",
+    "collapsed",
+    "winding_down_or_terminated",
+    "impaired_or_restricted",
+    "migrated",
+    "rebranded",
+    "non_usd",
+    "multi_organization",
+    "multi_deployment",
+    "evidence_heavy",
+    "unknown_heavy",
+    "wrapper_boundary",
+    "regulation_heavy",
+    "nonstandard_peg"
+  ]
+}
