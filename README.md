@@ -11,66 +11,81 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 The canonical GitHub checkpoint contains:
 
 ```text
-82 stable assets
-73 organizations
-86 stablecoin-organization relationships
-82 classification records
-82 reserve/redemption profiles
-140 events
-140 Event v2 detail records
-415 evidence records
-415 evidence relation projections
-90 reserve-report or reserve-context records
-203 known unknowns
+92 stable assets
+86 organizations
+101 stablecoin-organization relationships
+92 classification records
+92 reserve/redemption profiles
+150 events
+150 Event v2 detail records
+455 evidence records
+455 evidence relation projections
+100 reserve-report or reserve-context records
+253 known unknowns
 9 regulatory notes
-117 deployments
-82 legal profiles
+130 deployments
+92 legal profiles
 4 stable-asset relationships
-115 reserve components
-82 income profiles
+125 reserve components
+92 income profiles
 ```
 
 These counts are generated from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and the sitemap. They must not be maintained independently by hand.
 
-The latest verified production publication contains 82 stable assets and the three dated guides. GitHub may contain later reviewed quality-only corrections before the next defined manual publication checkpoint.
+## Current workstream
 
-Current quality queues:
+Routine record growth is paused at 92 assets while SOG completes the 100-record UI and public-information repair program.
+
+The repair covers:
+
+- production-snapshot and route parity;
+- public lifecycle, peg, backing, event, organization, evidence, deployment, and value-state taxonomy;
+- explicit primary organization relationships;
+- evidence deduplication with claim-relation preservation;
+- removal of internal work values from public pages;
+- stablecoin, organization, and event information architecture;
+- desktop and mobile registry behavior;
+- accessibility, performance, SEO, and machine-readable parity;
+- a full audit of all 92 current records before the final eight records are promoted.
+
+The repository source of truth is:
 
 ```text
-18 unresolved launch dates
-4 unresolved historical terminal dates
-12 assets without reserve/report context
-  10 not applicable by design
-   2 source status unresolved
+AGENTS.md
+docs/spec-governance.md
+docs/roadmap.md
+docs/deployment-policy.md
+docs/ui-redesign/master-spec.md
+docs/ui-redesign/implementation-plan.md
 ```
 
-See `docs/roadmap.md` for the canonical current position and next work item.
+Do not infer the active schedule from old handoffs or previous migration plans. See `docs/roadmap.md` for the current gate and next approved work item.
 
 ## What the registry tracks
 
 SOG records:
 
-- canonical stable-asset identity, aliases, symbol, reference target, lifecycle, and issuance state
-- asset class, backing model, stabilization mechanism, governance model, and exit or redemption model
-- issuers, protocols, governance bodies, custodians, reserve managers, redemption agents, and other organizations
-- reserve disclosure, reserve-report history, redemption access, eligibility, settlement terms, and restrictions
-- launches, depegs, regulatory actions, reserve changes, redemption changes, migrations, wind-downs, failures, issuer-control actions, and other material events
-- chain deployments, contract identities, control capabilities, and deployment status
-- source-backed evidence, claim scopes, known unknowns, and unresolved questions
+- canonical stable-asset identity, aliases, symbol, reference target, lifecycle, and issuance state;
+- asset class, backing model, stabilization mechanism, governance model, and exit or redemption model;
+- issuers, protocols, governance bodies, custodians, reserve managers, redemption agents, and other organizations;
+- reserve disclosure, reserve-report history, redemption access, eligibility, settlement terms, and restrictions;
+- launches, depegs, regulatory actions, reserve changes, redemption changes, migrations, wind-downs, failures, issuer-control actions, and other material events;
+- chain deployments, contract identities, control capabilities, and deployment status;
+- source-backed evidence, claim scopes, known unknowns, and unresolved questions.
 
 ## Scope
 
 The canonical registry may include:
 
-- fiat-backed stablecoins
-- crypto-collateralized and overcollateralized stablecoins
-- algorithmic, partially collateralized, and hybrid designs
-- synthetic and delta-neutral stable assets
-- RWA- and government-security-backed stablecoins
-- commodity-referenced stable-value assets
-- basket-, index-, CPI-, and floating-target assets
-- independent yield-bearing or rebasing stable assets
-- historical failed, terminated, migrated, rebranded, and inactive assets
+- fiat-backed stablecoins;
+- crypto-collateralized and overcollateralized stablecoins;
+- algorithmic, partially collateralized, and hybrid designs;
+- synthetic and delta-neutral stable assets;
+- RWA- and government-security-backed stablecoins;
+- commodity-referenced stable-value assets;
+- basket-, index-, CPI-, and floating-target assets;
+- independent yield-bearing or rebasing stable assets;
+- historical failed, terminated, migrated, rebranded, and inactive assets.
 
 Tokenized deposits, fund shares, yield receipts, reserve assets, and other adjacent instruments are included only when their relevance to stable-value systems is clear and their legal and economic nature can be classified separately.
 
@@ -88,13 +103,13 @@ docs/data-model-v3-spec.md
 
 SOG does not provide:
 
-- stablecoin safety scores
-- buy, sell, hold, avoid, or redemption recommendations
-- yield rankings
-- live depeg alerts
-- live price or market-cap rankings
-- issuer, exchange, wallet, or account support
-- investment, legal, financial, tax, or regulatory advice
+- stablecoin safety scores;
+- buy, sell, hold, avoid, or redemption recommendations;
+- yield rankings;
+- live depeg alerts;
+- live price or market-cap rankings;
+- issuer, exchange, wallet, or account support;
+- investment, legal, financial, tax, or regulatory advice.
 
 ## Data structure
 
@@ -102,32 +117,40 @@ The registry is built from repository-managed JSON data and static Astro pages.
 
 Current canonical data groups include:
 
-- stable-asset records
-- organization records
-- stablecoin-organization relationships
-- classification records
-- reserve and redemption profiles
-- event records and Event v2 details
-- evidence records and evidence relations
-- reserve-report references
-- known unknowns
-- regulatory notes
-- deployment records
-- legal profiles
-- stable-asset relationships
-- reserve components
-- income profiles
+- stable-asset records;
+- organization records;
+- stablecoin-organization relationships;
+- classification records;
+- reserve and redemption profiles;
+- event records and Event v2 details;
+- evidence records and evidence relations;
+- reserve-report references;
+- known unknowns;
+- regulatory notes;
+- deployment records;
+- legal profiles;
+- stable-asset relationships;
+- reserve components;
+- income profiles.
 
 Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, and the sitemap are generated or validated against the same canonical groups. Unreviewed candidates, internal monitoring output, staging data, and private notes are excluded from the public machine-readable layer.
 
-See:
+## Specification and change control
+
+Repository specifications are authoritative. Chat history, old handoffs, unmerged drafts, and mock images do not change the approved implementation by themselves.
+
+Every non-trivial pull request must cite:
 
 ```text
-docs/roadmap.md
-docs/migration/registry-v3-plan.md
-docs/stats-spec.md
-docs/record-growth-40-to-70.md
+Specification references
+Roadmap item
+Scope and non-scope
+Data-preservation checks
+Validation performed
+Deployment classification
 ```
+
+See `docs/spec-governance.md`.
 
 ## Validation and build
 
@@ -141,13 +164,15 @@ The build chain runs deployment-policy, baseline, launch-queue, terminal-queue, 
 
 After generation it also verifies:
 
-- HTML list counts against canonical JSON counts
-- stablecoin, organization, and event detail-route counts
-- reserve-report, deployment, known-unknown, and regulatory-note references
-- `version.json` and `data/manifest.json` count parity
-- sitemap detail-route coverage
-- canonical, hreflang, meta description, Open Graph, and JSON-LD metadata
-- absence of stale legacy count strings
+- HTML list counts against canonical JSON counts;
+- stablecoin, organization, and event detail-route counts;
+- reserve-report, deployment, known-unknown, and regulatory-note references;
+- `version.json` and `data/manifest.json` count parity;
+- sitemap detail-route coverage;
+- canonical, hreflang, meta description, Open Graph, and JSON-LD metadata;
+- absence of stale legacy count strings.
+
+The repair program adds build provenance, stale-output detection, full-route parity, public-taxonomy validation, mobile information-preservation checks, and repaired-UI audit gates according to `docs/ui-redesign/implementation-plan.md`.
 
 ## Development and production deployment
 
