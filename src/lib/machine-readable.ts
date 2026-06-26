@@ -16,6 +16,7 @@ import {
 import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
 import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
+import { resolveOrganizationTaxonomy } from '../utils/organizationTaxonomy';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
 export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
@@ -128,6 +129,7 @@ export function getRecordCountBreakdown() {
   const referenceTargets = stablecoins.map((coin) => resolveReferenceTarget(coin));
   const backingModels = stablecoins.map((coin) => resolveBackingModel(coin));
   const eventTaxonomies = events.map((event) => resolveEventTaxonomy(event));
+  const organizationTaxonomies = organizations.map((organization) => resolveOrganizationTaxonomy(organization));
 
   return {
     stablecoins: stablecoins.length,
@@ -147,8 +149,13 @@ export function getRecordCountBreakdown() {
     backing_type_non_exclusive: countMultiValues(backingModels.map((model) => model.canonical_backing_types)),
     stabilization_mechanism: countValues(backingModels.map((model) => model.stabilization_mechanism)),
     asset_class: countValues(stablecoins.map((coin) => coin.asset_class)),
-    organization_type: countValues(organizations.map((organization) => organization.organization_type || organization.issuer_type)),
-    relationship_role: countValues(relationships.map((relationship) => relationship.role)),
+    public_organization_category: countValues(organizationTaxonomies.map((organization) => organization.public_category)),
+    canonical_organization_type: countValues(organizationTaxonomies.map((organization) => organization.canonical_organization_type)),
+    organization_legal_form_state: countValues(organizationTaxonomies.map((organization) => organization.legal_form_state)),
+    organization_regulatory_character: countValues(organizationTaxonomies.map((organization) => organization.regulatory_character)),
+    organization_jurisdiction_scope: countValues(organizationTaxonomies.map((organization) => organization.jurisdiction_scope)),
+    functional_role: countValues(relationships.map((relationship) => relationship.role)),
+    relationship_status: countValues(relationships.map((relationship) => relationship.status)),
     public_event_category: countValues(eventTaxonomies.map((event) => event.public_category)),
     canonical_event_subtype: countValues(eventTaxonomies.map((event) => event.canonical_subtype)),
     event_detail_kind: countValues(eventTaxonomies.map((event) => event.detail_kind)),
