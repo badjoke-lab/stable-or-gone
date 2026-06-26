@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatPublicLabel } from '../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
+import { formatPublicBackingModelLabel } from '../utils/backingModel';
 import { getGuide } from '../data/guideCatalog';
 import { getStablecoins, getOrganizations, getPrimaryRelationship, getEvents, getEvidence } from '../lib/data/registry';
 
@@ -67,7 +67,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="panel registry"><div class="bar">Selected stablecoin records</div><table data-table-kind="home-selected-stablecoins" data-mobile-table="scroll-preserve"><thead><tr><th>Name</th><th>Symbol</th><th>Reference target</th><th>Model</th><th>Lifecycle</th><th>Issuance</th><th>Primary organization</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{formatReferenceTargetLabel(coin)}</td><td>{formatPublicLabel(coin.collateral_model)}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{primaryOrganizationName(coin.id)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Selected stablecoin records</div><table data-table-kind="home-selected-stablecoins" data-mobile-table="scroll-preserve"><thead><tr><th>Name</th><th>Symbol</th><th>Reference target</th><th>Model</th><th>Lifecycle</th><th>Issuance</th><th>Primary organization</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{formatReferenceTargetLabel(coin)}</td><td>{formatPublicBackingModelLabel(coin)}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{primaryOrganizationName(coin.id)}</td></tr>))}</tbody></table></section>
 
   <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title"><div><div class="prompt">Support the archive</div><h2 id="support-home-title">Help keep the records current</h2><p>Support helps cover research, source checks, link maintenance, and new records. It does not affect how any stablecoin is described.</p></div><a class="support-callout-action" href="/support/">Support SOG</a></section>
 </BaseLayout>
