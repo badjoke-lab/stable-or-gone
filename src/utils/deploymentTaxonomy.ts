@@ -15,8 +15,10 @@ import {
   getPublicDeploymentCategory,
   getPublicDeploymentCategoryLabel
 } from '../../config/deployment-taxonomy.mjs';
+import { getDeployments } from '../lib/data/registry';
 
 export type DeploymentTaxonomyRecord = {
+  id?: string | null;
   deployment_type?: string | null;
   status?: string | null;
   canonicality?: string | null;
@@ -26,12 +28,24 @@ export type DeploymentTaxonomyRecord = {
   evidence_ids?: string[] | null;
 };
 
+const canonicalityRecordedByDeploymentId = new Map(
+  getDeployments().map((deployment) => [
+    deployment.id,
+    deployment.canonicality !== null && deployment.canonicality !== undefined && deployment.canonicality !== ''
+  ])
+);
+
 export function resolveDeploymentTaxonomy(deployment: DeploymentTaxonomyRecord) {
   const publicCategory = getPublicDeploymentCategory(deployment.deployment_type);
   const operationalState = getDeploymentOperationalState(deployment.status);
   const changeState = getDeploymentChangeState(deployment.status);
   const canonicality = deployment.canonicality ?? 'unknown';
-  const canonicalityRecordState = getDeploymentCanonicalityRecordState(deployment.canonicality);
+  const canonicalityWasRecorded = deployment.id ? canonicalityRecordedByDeploymentId.get(deployment.id) : undefined;
+  const canonicalityRecordState = canonicalityWasRecorded === false
+    ? 'not_recorded'
+    : canonicalityWasRecorded === true
+      ? 'recorded'
+      : getDeploymentCanonicalityRecordState(deployment.canonicality);
   const contractIdentityState = getContractIdentityState(deployment.contract_address);
   const verificationState = getDeploymentVerificationState(deployment);
   const networkIdentityState = getNetworkIdentityState(deployment.chain);
