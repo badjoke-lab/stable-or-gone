@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { getRecoveryCategory } from '../config/event-taxonomy.mjs';
 import {
   getContractIdentityState,
@@ -90,3 +91,16 @@ export function buildValueStateStats(root = process.cwd()) {
     deployment_contract_identity: countStates(deployments.map(deploymentContractValueState))
   };
 }
+
+function runCli() {
+  const root = process.cwd();
+  const outputPath = path.join(root, 'data/generated/registry-stats.json');
+  if (!fs.existsSync(outputPath)) throw new Error('Generate registry-stats.json before adding value-state statistics.');
+  const stats = JSON.parse(fs.readFileSync(outputPath, 'utf8'));
+  stats.value_states = buildValueStateStats(root);
+  fs.writeFileSync(outputPath, `${JSON.stringify(stats, null, 2)}\n`);
+  console.log(`Added ${Object.keys(stats.value_states).length - 1} value-state axes to registry-stats.json.`);
+}
+
+const direct = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (direct) runCli();
