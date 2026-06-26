@@ -170,7 +170,7 @@ export function getRecordCountBreakdown() {
     evidence_reliability: countValues(evidenceTaxonomies.map((item) => item.reliability)),
     canonical_evidence_reliability_raw: countValues(evidenceTaxonomies.map((item) => item.canonical_reliability_raw)),
     evidence_archive_state: countValues(evidenceTaxonomies.map((item) => item.archive_state)),
-    evidence_relation_kind: countValues(evidenceTaxonomies.map((item) => item.relation_origin)),
+    evidence_relation_kind: countValues(evidenceTaxonomies.map((item) => item.relation_kind)),
     evidence_claim_scope_non_exclusive: countMultiValues(evidenceRelations.map((item) => item.claim_scopes)),
     reserve_report_type: countValues(reserveReports.map((report) => report.report_type)),
     known_unknown_severity: countValues(knownUnknowns.map((item) => item.severity)),
