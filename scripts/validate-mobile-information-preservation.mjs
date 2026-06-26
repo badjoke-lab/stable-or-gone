@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { evidenceMobileFields } from './evidence-mobile-fields.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -24,6 +25,7 @@ const sourceFiles = [
   'src/components/IssuerControlEvents.astro',
   'src/components/StablecoinEventTimeline.astro',
   'src/components/StructuredEventDetail.astro',
+  'src/components/EvidenceSourceTable.astro',
   'src/pages/issuer/[slug].astro',
   'src/pages/event/[id].astro'
 ];
@@ -98,6 +100,7 @@ const protectedFields = {
   'stablecoin-reserve-history': ['Record confidence'],
   'stablecoin-regulatory-notices': ['Summary'],
   'stablecoin-deployments': ['Freeze', 'Blacklist', 'Contract'],
+  'stablecoin-sources': evidenceMobileFields,
   'organization-overview': [
     'Organization category',
     'Canonical organization type',
@@ -112,6 +115,7 @@ const protectedFields = {
   ],
   'organization-relationships': ['Functional role', 'Relationship state', 'Stablecoin lifecycle'],
   'organization-events': ['Category', 'Subtype', 'Status effect'],
+  'organization-sources': evidenceMobileFields,
   'event-details': [
     'Public event category',
     'Canonical event subtype',
@@ -121,7 +125,8 @@ const protectedFields = {
     'Recovery or reversal',
     'Structured detail coverage',
     'Record confidence'
-  ]
+  ],
+  'event-sources': evidenceMobileFields
 };
 
 const sourceByTableKind = new Map([...tableKinds.entries()].map(([kind, relativePath]) => [kind, read(relativePath)]));
