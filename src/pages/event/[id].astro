@@ -67,6 +67,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
     <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
   </tbody></table></section>
 
+  <!-- Structured event detail is rendered by the shared component for every supported detail family. -->
   <StructuredEventDetail event={structuredEvent} />
 
   <section class="panel registry"><div class="bar">Sources</div><EvidenceSourceTable evidence={evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added yet." /></section>
