@@ -23,6 +23,7 @@ const sourceFiles = [
   'src/components/StablecoinDetailView.astro',
   'src/components/IssuerControlEvents.astro',
   'src/components/StablecoinEventTimeline.astro',
+  'src/components/StructuredEventDetail.astro',
   'src/pages/issuer/[slug].astro',
   'src/pages/event/[id].astro'
 ];
