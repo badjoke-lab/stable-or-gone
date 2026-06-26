@@ -90,18 +90,26 @@ function valueFor(key: string, value: unknown): string {
   if (key.endsWith('_minutes')) return `${value} minutes`;
   return formatPublicLabel(String(value), String(value));
 }
+
+const rows = sections.flatMap((section) => {
+  const fields = Object.entries(section.value as Record<string, unknown>);
+  return fields.map(([key, value]) => ({
+    label: `${section.label} — ${labelFor(key)}`,
+    value: valueFor(key, value)
+  }));
+});
 ---
-{sections.length > 0 && (
+{rows.length > 0 && (
   <section class="panel registry">
     <div class="bar">Structured event detail</div>
     <table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve">
       <tbody>
-        {sections.flatMap((section) => Object.entries(section.value as Record<string, unknown>).map(([key, value]) => (
+        {rows.map((row) => (
           <tr>
-            <th>{section.label} — {labelFor(key)}</th>
-            <td>{valueFor(key, value)}</td>
+            <th>{row.label}</th>
+            <td>{row.value}</td>
           </tr>
-        )))}
+        ))}
       </tbody>
     </table>
   </section>
