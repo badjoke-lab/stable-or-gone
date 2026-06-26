@@ -13,6 +13,7 @@ The active workstream is governed by:
 ```text
 docs/ui-redesign/master-spec.md
 docs/ui-redesign/implementation-plan.md
+docs/public-taxonomy-spec.md
 ```
 
 ## Current position
@@ -177,6 +178,7 @@ Gate A requires:
 - `docs/spec-governance.md` added;
 - `docs/ui-redesign/master-spec.md` added;
 - `docs/ui-redesign/implementation-plan.md` added;
+- `docs/public-taxonomy-spec.md` added;
 - `AGENTS.md` updated with the mandatory reading order and traceability rules;
 - this roadmap updated;
 - README checkpoint and source-of-truth links updated;
@@ -236,6 +238,8 @@ Verified emergency repair: manual emergency publication allowed
 Publication path: manual GitHub Actions workflow only
 Pages project: stable-or-gone
 Production branch: main
+Manual production publication activation — PASS
+Deployment workflow run: 27908380603
 ```
 
 The canonical deployment rules remain in `docs/deployment-policy.md`.
