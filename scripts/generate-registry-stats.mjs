@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getReferenceComparisonCategory } from '../config/reference-targets.mjs';
 
 const root = process.cwd();
 const outputPath = 'data/generated/registry-stats.json';
@@ -74,7 +75,8 @@ export function buildRegistryStats() {
   const incomeProfiles = readGroup(incomeManifest.data_files);
 
   const stablecoins = groups.stablecoins;
-  const classifications = groups.classifications;
+  const classificationExtensionById = new Map((groups.classification_extensions ?? []).map((row) => [row.id, row]));
+  const classifications = groups.classifications.map((row) => ({ ...row, ...(classificationExtensionById.get(row.id) ?? {}) }));
   const stablecoinIds = new Set(stablecoins.map((row) => row.id));
   const lifecycleCounts = countBy(classifications, (row) => row.lifecycle_status);
   const activeStatuses = new Set(['active', 'restricted']);
@@ -142,7 +144,8 @@ export function buildRegistryStats() {
       legacy_status_compatibility: countBy(stablecoins, (row) => row.status),
       issuance_statuses: countBy(classifications, (row) => row.issuance_status),
       reference_kinds: countBy(classifications, (row) => row.peg_reference?.kind),
-      reference_assets: countBy(classifications, (row) => row.peg_reference?.asset),
+      reference_target_categories: countBy(classifications, (row) => getReferenceComparisonCategory(row.peg_reference?.asset) ?? 'unknown'),
+      canonical_reference_assets_compatibility: countBy(classifications, (row) => row.peg_reference?.asset),
       asset_classes: countBy(classifications, (row) => row.asset_class ?? 'stablecoin'),
       backing_types_non_exclusive: countBy(classifications, (row) => row.backing_types ?? ['unknown']),
       stabilization_mechanisms: countBy(classifications, (row) => row.stabilization_mechanism),
