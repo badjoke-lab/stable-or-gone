@@ -19,6 +19,15 @@ import {
   getPublicEvidenceCategory
 } from '../config/evidence-taxonomy.mjs';
 import { getEvidenceRelationKind } from '../config/evidence-relation-kinds.mjs';
+import {
+  getContractIdentityState,
+  getDeploymentCanonicalityRecordState,
+  getDeploymentChangeState,
+  getDeploymentOperationalState,
+  getDeploymentVerificationState,
+  getNetworkIdentityState,
+  getPublicDeploymentCategory
+} from '../config/deployment-taxonomy.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -94,6 +103,13 @@ const evidenceProvenances = evidence.map((row) => getEvidenceProvenance(row.sour
 const evidencePrimaryStates = evidence.map((row) => getEvidencePrimaryState(row.source_type, row.is_primary, row.primary_state));
 const evidenceReliabilities = evidence.map((row) => getEvidenceReliability(row.reliability));
 const evidenceArchiveStates = evidence.map((row) => getEvidenceArchiveState(row.archived_url));
+const publicDeploymentCategories = deployments.map((row) => getPublicDeploymentCategory(row.deployment_type));
+const deploymentOperationalStates = deployments.map((row) => getDeploymentOperationalState(row.status));
+const deploymentChangeStates = deployments.map((row) => getDeploymentChangeState(row.status));
+const deploymentCanonicalityRecordStates = deployments.map((row) => getDeploymentCanonicalityRecordState(row.canonicality));
+const deploymentVerificationStates = deployments.map((row) => getDeploymentVerificationState(row));
+const deploymentContractIdentityStates = deployments.map((row) => getContractIdentityState(row.contract_address));
+const deploymentNetworkIdentityStates = deployments.map((row) => getNetworkIdentityState(row.chain));
 
 const expectedCounts = { primary_records: stablecoins.length, events: events.length, evidence: evidence.length };
 const expectedBreakdown = {
@@ -137,7 +153,16 @@ const expectedBreakdown = {
   evidence_claim_scope_non_exclusive: countMultiValues(evidence.map(evidenceClaims)),
   reserve_report_type: countValues(reserveReports.map((row) => row.report_type)),
   known_unknown_severity: countValues(knownUnknowns.map((row) => row.severity)),
+  public_deployment_category: countValues(publicDeploymentCategories),
+  canonical_deployment_type: countValues(deployments.map((row) => row.deployment_type)),
+  deployment_operational_state: countValues(deploymentOperationalStates),
   deployment_status: countValues(deployments.map((row) => row.status)),
+  deployment_change_state: countValues(deploymentChangeStates),
+  deployment_canonicality: countValues(deployments.map((row) => row.canonicality ?? 'unknown')),
+  deployment_canonicality_record_state: countValues(deploymentCanonicalityRecordStates),
+  deployment_verification_state: countValues(deploymentVerificationStates),
+  deployment_contract_identity_state: countValues(deploymentContractIdentityStates),
+  deployment_network_identity_state: countValues(deploymentNetworkIdentityStates),
   deployment_chain: countValues(deployments.map((row) => row.chain)),
 };
 const expectedLastReviewedAt = [...stablecoins.map((row) => row.last_verified_at), ...organizations.map((row) => row.last_verified_at)].filter(Boolean).sort().at(-1) || null;
