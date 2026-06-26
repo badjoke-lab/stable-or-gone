@@ -18,7 +18,12 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
-      - run: npm run build:site
+      - run: node scripts/collect-event-taxonomy-migration.mjs
+      - name: Build public site
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build:site 2>&1 | tee build-site.log
       - run: npm run verify:consistency
       - name: Upload public output diagnostics
         if: always()
@@ -27,6 +32,9 @@ jobs:
           name: sog-public-output-${{ github.run_id }}
           if-no-files-found: warn
           path: |
+            build-site.log
+            data/generated/event-taxonomy-migration.json
+            data/generated/event-taxonomy-validation.json
             data/generated/backing-stabilization-migration.json
             data/generated/backing-stabilization-validation.json
             data/generated/reference-target-migration.json

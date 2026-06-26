@@ -22,6 +22,8 @@ const sourceFiles = [
   'src/pages/events/index.astro',
   'src/components/StablecoinDetailView.astro',
   'src/components/IssuerControlEvents.astro',
+  'src/components/StablecoinEventTimeline.astro',
+  'src/components/StructuredEventDetail.astro',
   'src/pages/issuer/[slug].astro',
   'src/pages/event/[id].astro'
 ];
@@ -78,7 +80,7 @@ check(tableCount === requiredKinds.length, `Expected ${requiredKinds.length} cor
 const protectedFields = {
   'stablecoin-index': ['Reference target', 'Backing model', 'Lifecycle', 'Issuance', 'Reviewed'],
   'organization-index': ['Jurisdiction', 'Roles', 'Record confidence'],
-  'event-index': ['Impact', 'Recovered', 'Sources'],
+  'event-index': ['Category', 'Subtype', 'Impact', 'Recovery', 'Sources'],
   'stablecoin-overview': [
     'Reference target',
     'Reference kind',
@@ -92,12 +94,22 @@ const protectedFields = {
   ],
   'stablecoin-organizations': ['Relationship status'],
   'stablecoin-reserve-profile': ['Summary', 'Profile confidence'],
-  'stablecoin-event-timeline': ['Recovered'],
+  'stablecoin-event-timeline': ['Category', 'Subtype', 'Status effect', 'Recovery'],
   'stablecoin-reserve-history': ['Record confidence'],
   'stablecoin-regulatory-notices': ['Summary'],
   'stablecoin-deployments': ['Freeze', 'Blacklist', 'Contract'],
   'organization-relationships': ['Relationship status', 'Lifecycle status'],
-  'event-details': ['Impact', 'Recovery / reversal', 'Record confidence']
+  'organization-events': ['Category', 'Subtype', 'Status effect'],
+  'event-details': [
+    'Public event category',
+    'Canonical event subtype',
+    'Structured detail kind',
+    'Impact',
+    'Effect on stablecoin lifecycle',
+    'Recovery or reversal',
+    'Structured detail coverage',
+    'Record confidence'
+  ]
 };
 
 const sourceByTableKind = new Map([...tableKinds.entries()].map(([kind, relativePath]) => [kind, read(relativePath)]));

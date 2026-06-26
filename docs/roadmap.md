@@ -4,7 +4,7 @@ Updated: 2026-06-26
 
 ## Purpose
 
-This is the canonical execution schedule for SOG. Roadmap-changing pull requests must update this file.
+This is the canonical execution schedule for SOG. Roadmap-changing pull requests must update this file. Every implementation PR must cite the relevant specification and this roadmap.
 
 Required authority and workstream documents:
 
@@ -26,9 +26,11 @@ Canonical stable assets: 92
 Organizations: 86
 Relationships: 101
 Events: 150
+Event details: 150
 Evidence: 455
 Known unknowns: 253
 Deployments: 130
+
 Documentation reset: PR #167 merged
 Repair PR 1 baseline: PR #168 merged
 Repair PR 2 provenance: PR #169 merged
@@ -37,9 +39,12 @@ Repair PR 4 mobile preservation: PR #171 merged
 Taxonomy PR 5 public-value registry: PR #172 merged
 Taxonomy PR 6 lifecycle and issuance: PR #173 merged
 Taxonomy PR 7 reference target and peg: PR #174 merged
+Taxonomy PR 8 backing and stabilization: PR #175 merged
+
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed repair item after this PR merges: PR 8 — backing and stabilization normalization
-Next approved work item: PR 9 — event category and subtype normalization
+Current work item: PR 9 — event category and subtype normalization
+Latest completed item after this PR merges: PR 9
+Next approved work item: PR 10 — organization classification normalization
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -91,9 +96,9 @@ Completed work:
 Gate B guarantees:
 
 - one source commit, build timestamp, and canonical SHA-256 data hash per generated site;
-- exact equality between canonical identity sets, index links, generated routes, sitemap URLs, canonical URLs, and JSON-LD URLs;
+- exact equality between canonical identities, generated routes, sitemap URLs, canonical URLs, and JSON-LD URLs;
 - rejection of missing or stale extra routes;
-- preservation of material table fields on narrow screens;
+- preservation of material fields on narrow screens;
 - prohibition of generic numbered-column hiding;
 - explicit identities and temporary `scroll-preserve` behavior for core registry tables.
 
@@ -106,7 +111,7 @@ Status: **in progress**
 Status: **PASS**  
 Merged as PR #172.
 
-Authoritative mapping layer:
+Authoritative files:
 
 ```text
 config/public-taxonomy.mjs
@@ -114,9 +119,6 @@ docs/audits/public-taxonomy-registry-2026-06-26.md
 scripts/collect-public-taxonomy-values.mjs
 scripts/generate-public-taxonomy-registry.mjs
 scripts/validate-public-taxonomy-registry.mjs
-data/generated/public-taxonomy-values.json
-data/generated/public-taxonomy-registry.json
-data/generated/public-taxonomy-validation.json
 ```
 
 Validation baseline:
@@ -134,7 +136,7 @@ Observed unmapped managed values: 0
 Status: **PASS**  
 Merged as PR #173.
 
-Authoritative compatibility and validation files:
+Authoritative files:
 
 ```text
 config/lifecycle-issuance-compatibility.mjs
@@ -142,8 +144,6 @@ src/utils/publicTaxonomy.ts
 scripts/collect-lifecycle-issuance-migration.mjs
 scripts/validate-lifecycle-issuance-normalization.mjs
 docs/audits/lifecycle-issuance-normalization-2026-06-26.md
-data/generated/lifecycle-issuance-migration.json
-data/generated/lifecycle-issuance-validation.json
 ```
 
 Canonical lifecycle counts:
@@ -169,20 +169,14 @@ terminated:      15
 unknown:           2
 ```
 
-Public presentation separates lifecycle from issuance on the home page, stablecoin index, stablecoin detail pages, organization relationship tables, machine-readable breakdowns, and statistics.
-
-Legacy status remains only as compatibility diagnostics under:
-
-```text
-composition.legacy_status_compatibility
-```
+Public presentation separates lifecycle from issuance. Legacy status remains only as compatibility diagnostics under `composition.legacy_status_compatibility`.
 
 ### PR 7 — reference-target and peg normalization
 
 Status: **PASS**  
 Merged as PR #174.
 
-Authoritative mapping and validation files:
+Authoritative files:
 
 ```text
 config/reference-targets.mjs
@@ -190,11 +184,9 @@ src/utils/referenceTarget.ts
 scripts/collect-reference-target-migration.mjs
 scripts/validate-reference-target-normalization.mjs
 docs/audits/reference-target-normalization-2026-06-26.md
-data/generated/reference-target-migration.json
-data/generated/reference-target-validation.json
 ```
 
-Canonical coverage:
+Validation baseline:
 
 ```text
 Stable assets:                 92
@@ -202,15 +194,6 @@ Missing reference kind:        0
 Missing reference asset:       0
 Unmapped reference asset:      0
 Kind/mapping contradictions:   0
-```
-
-Reference kinds:
-
-```text
-fiat:       88
-commodity:   2
-floating:    1
-index:       1
 ```
 
 Approved public comparison categories:
@@ -225,40 +208,14 @@ Floating protocol target:           1
 Indexed or inflation-linked target: 2
 ```
 
-The three implementation-style reference codes now have reviewed public labels:
-
-```text
-Nuon -> US dollar with Truflation-linked rebase
-RAI  -> Floating protocol redemption price
-SPOT -> CPI-adjusted AMPL target
-```
-
-Public presentation separates reference target, reference kind, comparison category, target value, and methodology. The stablecoin index filters on approved comparison categories instead of raw reference codes.
-
-Machine-readable output exposes:
-
-```text
-reference_kind
-reference_comparison_category
-```
-
-Registry statistics expose:
-
-```text
-composition.reference_target_categories
-```
-
-Canonical codes remain only as compatibility diagnostics under:
-
-```text
-composition.canonical_reference_assets_compatibility
-```
+Public presentation separates reference target, reference kind, comparison category, target value, and methodology. Canonical reference codes remain compatibility diagnostics only.
 
 ### PR 8 — backing and stabilization normalization
 
-Status after this PR merges: **PASS**
+Status: **PASS**  
+Merged as PR #175.
 
-Authoritative mapping and validation files:
+Authoritative files:
 
 ```text
 config/backing-models.mjs
@@ -266,11 +223,9 @@ src/utils/backingModel.ts
 scripts/collect-backing-stabilization-migration.mjs
 scripts/validate-backing-stabilization-normalization.mjs
 docs/audits/backing-stabilization-normalization-2026-06-26.md
-data/generated/backing-stabilization-migration.json
-data/generated/backing-stabilization-validation.json
 ```
 
-Canonical coverage:
+Validation baseline:
 
 ```text
 Stable assets:                    92
@@ -296,31 +251,99 @@ Unknown:                          2
 Other:                            0
 ```
 
-Public presentation now separates the one-category comparison model from canonical non-exclusive backing types, reserve component records, the primary stabilization mechanism, the recorded model description, and historical model-change events.
+The public comparison model, non-exclusive canonical backing types, reserve components, stabilization mechanism, model description, and historical model changes remain separate.
 
-The stablecoin index filters by approved public model category instead of deriving options from free-text `collateral_model` values.
+### PR 9 — event category and subtype normalization
+
+Status after this PR merges: **PASS**
+
+Authoritative files:
+
+```text
+config/event-taxonomy.mjs
+src/utils/eventTaxonomy.ts
+src/components/StablecoinEventTimeline.astro
+src/components/StructuredEventDetail.astro
+scripts/collect-event-taxonomy-migration.mjs
+scripts/validate-event-taxonomy-normalization.mjs
+docs/audits/event-taxonomy-normalization-2026-06-26.md
+```
+
+Validation baseline:
+
+```text
+Canonical events:                    150
+Event detail records:                150
+Missing canonical event subtype:       0
+Unmapped canonical event subtype:      0
+Unmapped lifecycle status effect:      0
+Structured typed-detail records:     120
+Description-and-source-only records:  30
+Current events in Other category:      0
+```
+
+Public event category counts:
+
+```text
+Launch and introduction:             75
+Lifecycle review:                    12
+Migration and rebrand:               12
+Governance and protocol change:      11
+Depeg and peg stress:                10
+Security and chain incident:          6
+Wind-down and termination:            6
+Regulatory action:                    4
+Adoption and expansion:               3
+Recovery:                             2
+Redemption change:                    2
+Reserve change:                       2
+Failure and collapse:                 1
+Issuer control action:                1
+Market and liquidity support:         1
+Ownership change:                     1
+Testing and pre-launch activity:      1
+Other material event:                 0
+```
+
+Public presentation now separates:
+
+```text
+public event category
+canonical event subtype
+structured detail kind
+lifecycle status effect
+canonical status-effect value
+recovery or reversal state
+impact level
+structured detail coverage
+```
+
+The normalized taxonomy is used by the event index, event detail pages, stablecoin timelines, organization event tables, machine-readable output, registry statistics, and mobile preservation checks.
 
 Machine-readable output exposes:
 
 ```text
-public_model_category
-backing_type_non_exclusive
-stabilization_mechanism
+public_event_category
+canonical_event_subtype
+event_detail_kind
+event_status_effect_category
+event_recovery_category
 ```
 
 Registry statistics expose:
 
 ```text
-composition.public_model_categories
-composition.backing_types_non_exclusive
-composition.stabilization_mechanisms
-composition.reserve_component_categories
+composition.public_event_categories
+composition.canonical_event_subtypes
+composition.event_detail_kinds
+composition.event_status_effect_categories
+composition.event_recovery_categories
+composition.event_impact_levels
 ```
 
-### Remaining Gate C sequence
+## Remaining Gate C sequence
 
 ```text
-PR 9   event category and subtype normalization
 PR 10  organization classification normalization
 PR 11  evidence reliability, provenance, and type separation
 PR 12  deployment status and verification-state separation
@@ -333,13 +356,13 @@ PR 16  move record-specific public copy and complete the 92-record migration
 ## Immediate next work
 
 ```text
-1. Merge PR 8 only after every workflow passes.
-2. Start PR 9 from the resulting latest main.
-3. Inventory event_type, event_detail_kind, status effect, recovery state, and event-specific detail fields across all 150 events.
-4. Separate public event category, canonical subtype, status effect, and recovery state.
-5. Preserve depeg, issuer-control, governance, regulatory, launch, migration, wind-down, and failure detail instead of flattening them into one label.
-6. Replace raw event filters and headings with approved public categories while retaining canonical subtype detail.
-7. Validate all 150 events and reject unmapped category/subtype combinations.
+1. Merge PR 9 only after every workflow passes.
+2. Start PR 10 from the resulting latest main.
+3. Inventory organization_type, legacy issuer_type, relationship roles, jurisdiction values, organization confidence, and active/historical relationship state across all 86 organizations and 101 relationships.
+4. Separate organization class from relationship role and lifecycle state.
+5. Replace implementation-facing organization labels and raw filters with approved public categories.
+6. Preserve multi-role and historical organization relationships instead of selecting one issuer label as the entire identity.
+7. Validate every organization and relationship, including compatibility route behavior under /issuers/ and /issuer/[slug]/.
 8. Do not deploy production.
 9. Do not select Batch 18.
 ```

@@ -1,0 +1,19 @@
+---
+import type { EventRow } from '../lib/data/registry';
+import { eventPublicCopy } from '../data/eventPublicCopy';
+import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
+
+const { events } = Astro.props as { events: EventRow[] };
+---
+<section class="panel registry">
+  <div class="bar">Event timeline</div>
+  <table data-table-kind="stablecoin-event-timeline" data-mobile-table="scroll-preserve">
+    <thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Status effect</th><th>Recovery</th></tr></thead>
+    <tbody>
+      {events.length === 0 ? <tr><td colspan="6">No events have been added yet.</td></tr> : events.map((event) => {
+        const taxonomy = resolveEventTaxonomy(event);
+        return <tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{taxonomy.public_category_label}</td><td>{taxonomy.canonical_subtype_label}</td><td>{taxonomy.status_effect_label}</td><td>{taxonomy.recovery_label}</td></tr>;
+      })}
+    </tbody>
+  </table>
+</section>
