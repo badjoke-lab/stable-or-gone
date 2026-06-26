@@ -1,40 +1,9 @@
-import {
-  DATA_SCHEMA_VERSION,
-  MACHINE_READABLE_SCHEMA_VERSION,
-  PROJECT,
-  ROUTES,
-  getBuildMetadata,
-  getRecordCountBreakdown,
-  getRecordCounts,
-  getRecordsLastReviewedAt,
-} from '../lib/machine-readable';
+import { GET as getBaseVersion } from '../lib/versionBase';
+import { normalizePublicRecordBreakdown } from '../lib/publicRecordBreakdown';
 
-export function GET() {
-  const build = getBuildMetadata();
-  const version = {
-    schema_version: MACHINE_READABLE_SCHEMA_VERSION,
-    project_id: PROJECT.projectId,
-    site_name: PROJECT.siteName,
-    registry_family: PROJECT.registryFamily,
-    registry_type: PROJECT.registryType,
-    canonical_origin: PROJECT.canonicalOrigin,
-    release_channel: PROJECT.releaseChannel,
-    design_generation: PROJECT.designGeneration,
-    build,
-    data: {
-      data_schema_version: DATA_SCHEMA_VERSION,
-      generated_at: build.generated_at,
-      records_last_reviewed_at: getRecordsLastReviewedAt(),
-      record_counts: getRecordCounts(),
-      record_count_breakdown: getRecordCountBreakdown(),
-    },
-    routes: ROUTES,
-  };
-
-  return new Response(JSON.stringify(version, null, 2), {
-    headers: {
-      'content-type': 'application/json; charset=utf-8',
-      'cache-control': 'public, max-age=300, must-revalidate',
-    },
-  });
+export async function GET() {
+  const baseResponse = getBaseVersion();
+  const version: any = await baseResponse.json();
+  version.data.record_count_breakdown = normalizePublicRecordBreakdown(version.data.record_count_breakdown);
+  return new Response(JSON.stringify(version, null, 2), { headers: baseResponse.headers });
 }
