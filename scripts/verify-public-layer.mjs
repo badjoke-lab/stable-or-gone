@@ -18,6 +18,7 @@ import {
   getEvidenceReliability,
   getPublicEvidenceCategory
 } from '../config/evidence-taxonomy.mjs';
+import { getEvidenceRelationOrigin } from '../config/evidence-relation-origin.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -45,9 +46,6 @@ const evidenceClaims = (row) => [...new Set([
   ...(Array.isArray(row.claim_scopes) ? row.claim_scopes : []),
   ...(typeof row.claim_scope === 'string' && row.claim_scope.length ? [row.claim_scope] : [])
 ])];
-const evidenceRelationKind = (row) => Array.isArray(row.stablecoin_ids) || Array.isArray(row.organization_ids) || Array.isArray(row.event_ids) || Array.isArray(row.claim_scopes)
-  ? 'explicit_v2'
-  : 'legacy_subject_projection';
 const checkedOutCommit = () => {
   if (process.env.GITHUB_ACTIONS !== 'true') return null;
   try {
@@ -135,7 +133,7 @@ const expectedBreakdown = {
   evidence_reliability: countValues(evidenceReliabilities),
   canonical_evidence_reliability_raw: countValues(evidence.map((row) => row.reliability)),
   evidence_archive_state: countValues(evidenceArchiveStates),
-  evidence_relation_kind: countValues(evidence.map(evidenceRelationKind)),
+  evidence_relation_kind: countValues(evidence.map((row) => getEvidenceRelationOrigin(row.id))),
   evidence_claim_scope_non_exclusive: countMultiValues(evidence.map(evidenceClaims)),
   reserve_report_type: countValues(reserveReports.map((row) => row.report_type)),
   known_unknown_severity: countValues(knownUnknowns.map((row) => row.severity)),
