@@ -33,9 +33,10 @@ Documentation reset: PR #167 merged
 Repair PR 1 baseline: PR #168 merged
 Repair PR 2 provenance: PR #169 merged
 Repair PR 3 output parity: PR #170 merged
-Current phase after this PR merges: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed repair item after this PR merges: PR 4 — mobile information preservation
-Next approved work item: PR 5 — add public-value registry and legacy mapping
+Repair PR 4 mobile preservation: PR #171 merged
+Current phase: Phase 2 — public taxonomy and canonical-semantics repair
+Latest completed repair item after this PR merges: PR 5 — public-value registry and legacy mapping
+Next approved work item: PR 6 — lifecycle and issuance normalization
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -76,16 +77,16 @@ Completed by PR #167.
 
 ## Gate B — production-integrity repair
 
-Status after this PR merges: **PASS**
+Status: **PASS**
 
 Completed work:
 
 - [x] PR 1 — repair baseline and defect inventory, PR #168;
 - [x] PR 2 — generated build provenance, PR #169;
 - [x] PR 3 — exact route, sitemap, canonical, JSON-LD, and output parity, PR #170;
-- [x] PR 4 — remove destructive mobile column suppression and enforce information-preserving table identities.
+- [x] PR 4 — mobile information preservation, PR #171.
 
-### Controls established
+Controls established:
 
 ```text
 docs/ui-redesign/repair-baseline.json
@@ -100,29 +101,49 @@ scripts/check-production-output-parity.mjs
 scripts/validate-mobile-information-preservation.mjs
 ```
 
-Gate B now guarantees:
+Gate B guarantees:
 
 - one source commit, build timestamp, and canonical SHA-256 data hash per generated site;
 - exact equality between canonical identity sets, index links, generated routes, sitemap URLs, canonical URLs, and JSON-LD URLs;
 - rejection of missing or stale extra routes;
 - preservation of material table fields on narrow screens;
-- prohibition of generic `th/td:nth-child` hiding;
+- prohibition of generic numbered-column hiding;
 - explicit identities and temporary `scroll-preserve` behavior for 22 core registry tables.
 
-## Current gate
+## Gate C — taxonomy and data semantics
+
+Status: **in progress**
+
+### PR 5 public-value registry
+
+After PR 5 merges, the approved mapping layer is:
 
 ```text
-Gate A — PASS
-Gate B — PASS after this PR merges
-Gate C — next
+config/public-taxonomy.mjs
+docs/audits/public-taxonomy-registry-2026-06-26.md
+scripts/collect-public-taxonomy-values.mjs
+scripts/generate-public-taxonomy-registry.mjs
+scripts/validate-public-taxonomy-registry.mjs
+data/generated/public-taxonomy-values.json
+data/generated/public-taxonomy-registry.json
+data/generated/public-taxonomy-validation.json
 ```
 
-Gate C is governed by Phase 2 of `docs/ui-redesign/implementation-plan.md`.
-
-Required sequence:
+Current validation baseline:
 
 ```text
-PR 5   public-value registry and legacy mapping
+Managed axes:       26
+Mapped entries:    411
+Legacy rules:       10
+Descriptive axes:    3
+Observed unmapped managed values: 0
+```
+
+The registry separates canonical values, public categories, public labels, legacy handling, sort order, and filter eligibility. Record-specific claim scopes, known-unknown topics, and reserve-disclosure summaries are explicitly non-filterable.
+
+### Remaining Gate C sequence
+
+```text
 PR 6   lifecycle and issuance normalization
 PR 7   reference-target and peg normalization
 PR 8   backing and stabilization normalization
@@ -139,14 +160,15 @@ PR 16  move record-specific public copy and complete the 92-record migration
 ## Immediate next work
 
 ```text
-1. Merge PR 4 only after every workflow passes.
-2. Start PR 5 from the resulting latest main.
-3. Implement one approved mapping layer for canonical value, public category, public label, legacy aliases, definition, and sort order.
-4. Cover lifecycle, issuance, reference target, public model category, event category, organization category, relationship role, evidence, deployment, and value-state axes.
-5. Add unmapped-value and duplicate-mapping validators.
-6. Do not modify canonical record meaning in PR 5.
-7. Do not deploy production.
-8. Do not select Batch 18.
+1. Merge PR 5 only after every workflow passes.
+2. Start PR 6 from the resulting latest main.
+3. Produce a per-record lifecycle and issuance migration table for all 92 assets.
+4. Resolve legacy discontinued values per record rather than by a global string replacement.
+5. Keep lifecycle, issuance, event effect, and market history as separate axes.
+6. Update filters and chips only from approved taxonomy mappings.
+7. Record before-and-after counts and compatibility aliases.
+8. Do not deploy production.
+9. Do not select Batch 18.
 ```
 
 ## Quality queues preserved during repair
