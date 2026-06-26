@@ -13,6 +13,7 @@ import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '.
 import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
 import { cleanPublicText } from '../utils/publicText';
+import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { getRelatedGuidesForStablecoin } from '../data/stablecoinGuideLinks';
 import {
@@ -58,7 +59,11 @@ const modelChangeTerms = new Set<string | undefined>([
 const { coin } = Astro.props;
 const organizations = getOrganizations();
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
-const relationships = getRelationships().filter((relationship) => relationship.stablecoin_id === coin.id);
+const allRelationships = getRelationships();
+const primaryResolution = resolvePrimaryRelationshipForStablecoin(coin.id, allRelationships);
+const relationships = primaryResolution.candidates;
+const primaryRelationship = primaryResolution.relationship;
+const primaryOrganization = primaryRelationship ? organizationById.get(primaryRelationship.organization_id) : undefined;
 const allEvents = getEvents();
 const allEvidence = getEvidence();
 const allReserveReports = getReserveReports();
@@ -66,8 +71,6 @@ const allKnownUnknowns = getKnownUnknowns();
 const allRegulatoryNotes = getRegulatoryNotes();
 const allDeployments = getDeploymentsV3();
 
-const primaryRelationship = relationships[0];
-const primaryOrganization = primaryRelationship ? organizationById.get(primaryRelationship.organization_id) : undefined;
 const events = allEvents.filter((item) => item.subject_stablecoin_ids?.includes(coin.id) || item.stablecoin_id === coin.id).sort((a, b) => String(a.event_date ?? '').localeCompare(String(b.event_date ?? '')));
 const issuerControlEvents = events.filter((item) => item.event_detail_kind === 'issuer_control' || item.event_type === 'issuer_freeze');
 const modelHistoryEvents = events.filter((event) => modelChangeTerms.has(event.event_type) || modelChangeTerms.has(event.event_detail_kind) || /model|collateral|reserve|migration|transition|upgrade|rebrand/i.test(`${event.title ?? ''} ${event.description ?? ''}`));
@@ -133,8 +136,9 @@ const redemptionProfile = coin.redemption_profile;
     <tr><th>Primary stabilization mechanism</th><td>{model.stabilization_label}</td></tr>
     <tr><th>Recorded model description</th><td><ValueStateText value={model.recorded_model_description} displayValue={model.recorded_model_description} detectMarkers={false} /></td></tr>
     <tr><th>Governance</th><td><ValueStateText value={coin.governance_model} displayValue={formatPublicLabel(coin.governance_model)} /></td></tr>
-    <tr><th>Primary organization</th><td>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : <ValueStateText value={null} />}</td></tr>
-    <tr><th>Primary role</th><td><ValueStateText value={primaryRelationship?.role} displayValue={formatPublicLabel(primaryRelationship?.role)} /></td></tr>
+    <tr><th>Primary display organization</th><td>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : <ValueStateText value={null} />}</td></tr>
+    <tr><th>Primary display role</th><td><ValueStateText value={primaryRelationship?.role} displayValue={formatPublicLabel(primaryRelationship?.role)} /></td></tr>
+    <tr><th>Display selection mode</th><td>{formatPublicLabel(primaryResolution.selection_mode)}</td></tr>
     <tr><th>Last reviewed</th><td><ValueStateText value={coin.last_verified_at} /></td></tr>
   </tbody></table></section>
 
@@ -142,9 +146,9 @@ const redemptionProfile = coin.redemption_profile;
 
   <section class="panel registry"><div class="bar">Historical model changes</div>{modelHistoryEvents.length === 0 ? <p>No separate model-change event is currently recorded.</p> : <ul>{modelHistoryEvents.map((event) => <li><ValueStateText value={event.event_date} /> — <a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a> · {formatPublicLabel(event.event_detail_kind ?? event.event_type)}</li>)}</ul>}</section>
 
-  <section class="panel registry"><div class="bar">Organizations and roles</div><table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve"><thead><tr><th>Organization</th><th>Role</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="5">No organization relationships have been added yet.</td></tr> : relationships.map((relationship) => { const organization = organizationById.get(relationship.organization_id); return <tr><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : relationship.organization_id}</td><td>{formatPublicLabel(relationship.role)}</td><td><ValueStateText value={relationship.start_date} /></td><td><ValueStateText value={relationship.end_date} /></td><td>{formatPublicLabel(relationship.status)}</td></tr>; })}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Organizations and roles</div><p><small>Primary display is a navigation and summary choice only. It does not replace other organizations or imply sole legal responsibility, operational control, reserve custody, or historical continuity.</small></p><table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve"><thead><tr><th>Organization</th><th>Role</th><th>Display priority</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="6">No organization relationships have been added yet.</td></tr> : relationships.map((relationship) => { const organization = organizationById.get(relationship.organization_id); const isPrimary = relationship.id === primaryRelationship?.id; return <tr><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : relationship.organization_id}</td><td>{formatPublicLabel(relationship.role)}</td><td>{isPrimary ? 'Primary display' : 'Additional relationship'}</td><td><ValueStateText value={relationship.start_date} /></td><td><ValueStateText value={relationship.end_date} /></td><td>{formatPublicLabel(relationship.status)}</td></tr>; })}</tbody></table></section>
 
-  <section class="section-grid" aria-label="Related pages"><a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Compare this record with the rest of the archive.</p></a>{primaryOrganization && <a class="panel mini-card" href={`/issuer/${primaryOrganization.slug}/`}><h2>{primaryOrganization.name}</h2><p>{formatPublicLabel(primaryOrganization.organization_type, 'Organization')} · {formatPublicLabel(primaryOrganization.jurisdiction, 'Jurisdiction unknown')}</p></a>}<a class="panel mini-card" href="/events/"><h2>Event history</h2><p>{events.length} event{events.length === 1 ? '' : 's'} connected to this stablecoin.</p></a></section>
+  <section class="section-grid" aria-label="Related pages"><a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Compare this record with the rest of the archive.</p></a>{primaryOrganization && <a class="panel mini-card" href={`/issuer/${primaryOrganization.slug}/`}><h2>{primaryOrganization.name}</h2><p>Primary display relationship · {formatPublicLabel(primaryRelationship?.role)}. Open the organization page for all connected assets and roles.</p></a>}<a class="panel mini-card" href="/events/"><h2>Event history</h2><p>{events.length} event{events.length === 1 ? '' : 's'} connected to this stablecoin.</p></a></section>
   <RelatedGuides guides={relatedGuides} />
 
   <StablecoinValueStateSections coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
