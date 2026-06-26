@@ -1,8 +1,9 @@
 ---
+import type { EventRow } from '../lib/data/registry';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
 
-const { events } = Astro.props;
+const { events } = Astro.props as { events: EventRow[] };
 ---
 <section class="panel registry">
   <div class="bar">Event timeline</div>
