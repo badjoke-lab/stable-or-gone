@@ -37,7 +37,7 @@ const jsonLd = {
     <a class="panel mini-card" href="/methodology/"><h2>How records are reviewed</h2><p>See how sources, roles, status labels, and open questions are handled.</p></a>
   </section>
 
-  <section class="panel registry"><div class="bar">All organizations</div><table><thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Roles</th><th>Record confidence</th></tr></thead><tbody>
+  <section class="panel registry"><div class="bar">All organizations</div><table data-table-kind="organization-index" data-mobile-table="scroll-preserve"><thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Roles</th><th>Record confidence</th></tr></thead><tbody>
     {organizations.length === 0 ? <tr><td colspan="6">No organization records available.</td></tr> : organizations.map((organization) => {
       const relatedRelationships = relationshipsByOrganization.get(organization.id) ?? [];
       const relatedCoins = relatedRelationships.map((relationship) => stablecoinById.get(relationship.stablecoin_id)).filter(Boolean);

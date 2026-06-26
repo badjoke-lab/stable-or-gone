@@ -54,7 +54,7 @@ const jsonLd = {
       <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="status">Status A-Z</option><option value="model">Model A-Z</option><option value="last_verified_desc">Recently reviewed</option></select></label>
     </div>
     <div class="registry-summary" aria-live="polite"><span data-result-count>{stablecoins.length}</span> of {stablecoins.length} records</div>
-    <table>
+    <table data-table-kind="stablecoin-index" data-mobile-table="scroll-preserve">
       <thead><tr><th>Name</th><th>Symbol</th><th>Organization</th><th>Role</th><th>Peg</th><th>Model</th><th>Status</th><th>Reviewed</th></tr></thead>
       <tbody data-registry-body>
         {stablecoins.length === 0 ? <tr><td colspan="8">No records available.</td></tr> : stablecoins.map((coin) => {

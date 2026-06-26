@@ -32,9 +32,10 @@ Deployments: 130
 Documentation reset: PR #167 merged
 Repair PR 1 baseline: PR #168 merged
 Repair PR 2 provenance: PR #169 merged
-Current phase: Phase 1 — emergency production-integrity repair
-Latest completed repair item after this PR merges: PR 3 — full-route and output parity enforcement
-Next approved work item: PR 4 — remove destructive mobile column suppression
+Repair PR 3 output parity: PR #170 merged
+Current phase after this PR merges: Phase 2 — public taxonomy and canonical-semantics repair
+Latest completed repair item after this PR merges: PR 4 — mobile information preservation
+Next approved work item: PR 5 — add public-value registry and legacy mapping
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -67,53 +68,86 @@ Canonical count source:
 docs/migration/registry-v3-baseline.json
 ```
 
-## Repair controls now present
+## Gate A — documentation reset
 
-### Repair baseline
+Status: **PASS**
+
+Completed by PR #167.
+
+## Gate B — production-integrity repair
+
+Status after this PR merges: **PASS**
+
+Completed work:
+
+- [x] PR 1 — repair baseline and defect inventory, PR #168;
+- [x] PR 2 — generated build provenance, PR #169;
+- [x] PR 3 — exact route, sitemap, canonical, JSON-LD, and output parity, PR #170;
+- [x] PR 4 — remove destructive mobile column suppression and enforce information-preserving table identities.
+
+### Controls established
 
 ```text
 docs/ui-redesign/repair-baseline.json
 docs/audits/ui-repair-baseline-2026-06-26.md
-scripts/validate-ui-repair-baseline.mjs
-```
-
-The baseline fixes canonical counts, 328 expected detail routes, the 2026-06-26 split-generation production snapshot, sixteen defect IDs, and twenty representative records.
-
-### Build provenance
-
-```text
 data/generated/build-provenance.json
+scripts/validate-ui-repair-baseline.mjs
 scripts/generate-build-provenance.mjs
 scripts/verify-build-provenance.mjs
-scripts/check-production-provenance.mjs
-```
-
-Every full build identifies one source commit, source branch, timestamp, canonical SHA-256 data hash, canonical file count, record-group counts, and route counts. The same object appears in `version.json` and `data/manifest.json`.
-
-### Full output parity
-
-After PR 3 merges, CI rejects any difference between canonical record identity sets and:
-
-```text
-stablecoin index links
-organization index links
-event index links
-generated detail directories
-sitemap detail URLs
-per-page canonical URLs
-per-page JSON-LD URLs
-version and manifest provenance
-```
-
-Relevant files:
-
-```text
 scripts/verify-full-output-parity.mjs
+scripts/check-production-provenance.mjs
 scripts/check-production-output-parity.mjs
-dist/data/output-parity.json
+scripts/validate-mobile-information-preservation.mjs
 ```
 
-The local verifier checks all 328 detail pages. The production verifier checks the exact canonical sets and every detail page at the deployed origin.
+Gate B now guarantees:
+
+- one source commit, build timestamp, and canonical SHA-256 data hash per generated site;
+- exact equality between canonical identity sets, index links, generated routes, sitemap URLs, canonical URLs, and JSON-LD URLs;
+- rejection of missing or stale extra routes;
+- preservation of material table fields on narrow screens;
+- prohibition of generic `th/td:nth-child` hiding;
+- explicit identities and temporary `scroll-preserve` behavior for 22 core registry tables.
+
+## Current gate
+
+```text
+Gate A — PASS
+Gate B — PASS after this PR merges
+Gate C — next
+```
+
+Gate C is governed by Phase 2 of `docs/ui-redesign/implementation-plan.md`.
+
+Required sequence:
+
+```text
+PR 5   public-value registry and legacy mapping
+PR 6   lifecycle and issuance normalization
+PR 7   reference-target and peg normalization
+PR 8   backing and stabilization normalization
+PR 9   event category and subtype normalization
+PR 10  organization classification normalization
+PR 11  evidence reliability, provenance, and type separation
+PR 12  deployment status and verification-state separation
+PR 13  value-state semantics
+PR 14  explicit primary display relationships
+PR 15  evidence-source deduplication with claim preservation
+PR 16  move record-specific public copy and complete the 92-record migration
+```
+
+## Immediate next work
+
+```text
+1. Merge PR 4 only after every workflow passes.
+2. Start PR 5 from the resulting latest main.
+3. Implement one approved mapping layer for canonical value, public category, public label, legacy aliases, definition, and sort order.
+4. Cover lifecycle, issuance, reference target, public model category, event category, organization category, relationship role, evidence, deployment, and value-state axes.
+5. Add unmapped-value and duplicate-mapping validators.
+6. Do not modify canonical record meaning in PR 5.
+7. Do not deploy production.
+8. Do not select Batch 18.
+```
 
 ## Quality queues preserved during repair
 
@@ -127,51 +161,6 @@ Reserve applicability queue:              12
 ```
 
 These queues remain canonical but are not the current work item.
-
-## Binding repair sequence
-
-Detailed sequence: `docs/ui-redesign/implementation-plan.md`
-
-```text
-Phase 0  Documentation reset
-Phase 1  Emergency production-integrity repair
-Phase 2  Public taxonomy and canonical-semantics repair
-Phase 3  Information architecture, responsive specification, and mocks
-Phase 4  Shared UI and registry indexes
-Phase 5  Stablecoin dossier implementation
-Phase 6  Search, home, editorial alignment, and hardening
-Phase 7  Full 92-record audit and final eight-record promotion
-Phase 8  100-record production publication
-Phase 9  Post-release work
-```
-
-## Current gate
-
-```text
-Gate A — PASS
-Gate B — in progress
-```
-
-Gate B requires:
-
-- [x] PR 1 — repair baseline and defect inventory;
-- [x] PR 2 — build provenance;
-- [x] PR 3 — full-route and output parity enforcement, after this PR merges;
-- [ ] PR 4 — removal of destructive mobile column suppression.
-
-No taxonomy migration, final UI mock, production UI implementation, Batch 18 selection, statistics expansion, or routine publication begins before Gate B passes.
-
-## Immediate next work
-
-```text
-1. Merge PR 3 only after every workflow passes.
-2. Start PR 4 from the resulting latest main.
-3. Remove the global fifth-column suppression rule.
-4. Add explicit table identities and temporary information-preserving mobile behavior.
-5. Verify that peg, impact, relationship status, confidence, summary, and control capability never disappear by generic column position.
-6. Do not deploy production for PR 3 or PR 4.
-7. Do not select Batch 18.
-```
 
 ## Phase gates
 
