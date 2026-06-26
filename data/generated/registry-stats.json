@@ -105,6 +105,17 @@
       "USD": 71,
       "USD_WITH_TRUFLATION_LINKED_REBASE": 1
     },
+    "public_model_categories": {
+      "algorithmic_or_unbacked": 4,
+      "commodity_backed": 2,
+      "crypto_collateralized": 27,
+      "fiat_and_cash_equivalent": 31,
+      "hybrid_or_mixed": 10,
+      "synthetic_or_hedged": 6,
+      "tokenized_asset_backed": 7,
+      "unknown": 2,
+      "wrapper_or_receipt": 3
+    },
     "asset_classes": {
       "experimental_stabilization_asset": 1,
       "stable_value_asset": 6,
