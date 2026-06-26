@@ -66,6 +66,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
     <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
   </tbody></table></section>
 
+  <!-- Structured event detail is rendered by the shared component for every supported detail family. -->
   <StructuredEventDetail event={structuredEvent} />
 
   <section class="panel registry"><div class="bar">Sources</div><table data-table-kind="event-sources" data-mobile-table="scroll-preserve"><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Evidence scope</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="4">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{source.claim_scopes?.map((item) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(source.claim_scope)}</td></tr>))}</tbody></table></section>
