@@ -42,3 +42,4 @@ try {
 }
 
 await import('./verify-build-provenance.mjs');
+await import('./verify-full-output-parity.mjs');
