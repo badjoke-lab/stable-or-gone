@@ -29,10 +29,13 @@ export type DeploymentTaxonomyRecord = {
 };
 
 const canonicalityRecordedByDeploymentId = new Map(
-  getDeployments().map((deployment) => [
-    deployment.id,
-    deployment.canonicality !== null && deployment.canonicality !== undefined && deployment.canonicality !== ''
-  ])
+  getDeployments().map((deployment) => {
+    const record = deployment as DeploymentTaxonomyRecord;
+    return [
+      record.id,
+      record.canonicality !== null && record.canonicality !== undefined && record.canonicality !== ''
+    ];
+  })
 );
 
 export function resolveDeploymentTaxonomy(deployment: DeploymentTaxonomyRecord) {
