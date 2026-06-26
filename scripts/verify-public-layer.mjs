@@ -18,7 +18,7 @@ import {
   getEvidenceReliability,
   getPublicEvidenceCategory
 } from '../config/evidence-taxonomy.mjs';
-import { getEvidenceRelationOrigin } from '../config/evidence-relation-origin.mjs';
+import { getEvidenceRelationKind } from '../config/evidence-relation-kinds.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -133,7 +133,7 @@ const expectedBreakdown = {
   evidence_reliability: countValues(evidenceReliabilities),
   canonical_evidence_reliability_raw: countValues(evidence.map((row) => row.reliability)),
   evidence_archive_state: countValues(evidenceArchiveStates),
-  evidence_relation_kind: countValues(evidence.map((row) => getEvidenceRelationOrigin(row.id))),
+  evidence_relation_kind: countValues(evidence.map((row) => getEvidenceRelationKind(row.id))),
   evidence_claim_scope_non_exclusive: countMultiValues(evidence.map(evidenceClaims)),
   reserve_report_type: countValues(reserveReports.map((row) => row.report_type)),
   known_unknown_severity: countValues(knownUnknowns.map((row) => row.severity)),
