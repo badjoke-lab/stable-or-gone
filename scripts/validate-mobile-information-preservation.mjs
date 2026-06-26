@@ -76,9 +76,10 @@ check(tableKinds.size === requiredKinds.length, `Expected ${requiredKinds.length
 check(tableCount === requiredKinds.length, `Expected ${requiredKinds.length} core tables, found ${tableCount}`);
 
 const protectedFields = {
-  'stablecoin-index': ['Peg', 'Model', 'Status', 'Reviewed'],
+  'stablecoin-index': ['Reference target', 'Model', 'Lifecycle', 'Issuance', 'Reviewed'],
   'organization-index': ['Jurisdiction', 'Roles', 'Record confidence'],
   'event-index': ['Impact', 'Recovered', 'Sources'],
+  'stablecoin-overview': ['Reference target', 'Reference kind', 'Comparison category', 'Reference methodology'],
   'stablecoin-organizations': ['Relationship status'],
   'stablecoin-reserve-profile': ['Summary', 'Profile confidence'],
   'stablecoin-event-timeline': ['Recovered'],
@@ -89,11 +90,12 @@ const protectedFields = {
   'event-details': ['Impact', 'Recovery / reversal', 'Record confidence']
 };
 
-const allCoreSource = sourceFiles.map(read).join('\n');
+const sourceByTableKind = new Map([...tableKinds.entries()].map(([kind, relativePath]) => [kind, read(relativePath)]));
 for (const [kind, labels] of Object.entries(protectedFields)) {
   check(tableKinds.has(kind), `Protected table is not identified: ${kind}`);
+  const source = sourceByTableKind.get(kind) ?? '';
   for (const label of labels) {
-    check(allCoreSource.includes(`>${label}<`), `Protected material field label is missing: ${kind} / ${label}`);
+    check(source.includes(`>${label}<`), `Protected material field label is missing: ${kind} / ${label}`);
   }
 }
 

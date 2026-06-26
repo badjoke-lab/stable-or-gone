@@ -27,6 +27,8 @@ jobs:
           name: sog-public-output-${{ github.run_id }}
           if-no-files-found: warn
           path: |
+            data/generated/reference-target-migration.json
+            data/generated/reference-target-validation.json
             data/generated/lifecycle-issuance-migration.json
             data/generated/lifecycle-issuance-validation.json
             data/generated/public-taxonomy-values.json

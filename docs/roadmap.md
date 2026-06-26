@@ -35,9 +35,10 @@ Repair PR 2 provenance: PR #169 merged
 Repair PR 3 output parity: PR #170 merged
 Repair PR 4 mobile preservation: PR #171 merged
 Taxonomy PR 5 public-value registry: PR #172 merged
+Taxonomy PR 6 lifecycle and issuance: PR #173 merged
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed repair item after this PR merges: PR 6 — lifecycle and issuance normalization
-Next approved work item: PR 7 — reference-target and peg normalization
+Latest completed repair item after this PR merges: PR 7 — reference-target and peg normalization
+Next approved work item: PR 8 — backing and stabilization normalization
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -129,7 +130,8 @@ Observed unmapped managed values: 0
 
 ### PR 6 — lifecycle and issuance normalization
 
-Status after this PR merges: **PASS**
+Status: **PASS**  
+Merged as PR #173.
 
 Authoritative compatibility and validation files:
 
@@ -166,18 +168,7 @@ terminated:      15
 unknown:           2
 ```
 
-Public presentation now separates lifecycle from issuance on the home page, stablecoin index, stablecoin detail pages, organization relationship tables, machine-readable breakdowns, and statistics.
-
-The six legacy `discontinued` records are resolved individually:
-
-```text
-BUSD          -> winding_down / terminated
-EURT          -> terminated / terminated
-FEI           -> terminated / terminated
-GYEN          -> winding_down / terminated
-HUSD          -> inactive / terminated
-Mountain USDM -> winding_down / terminated
-```
+Public presentation separates lifecycle from issuance on the home page, stablecoin index, stablecoin detail pages, organization relationship tables, machine-readable breakdowns, and statistics.
 
 Legacy status remains only as compatibility diagnostics under:
 
@@ -185,10 +176,85 @@ Legacy status remains only as compatibility diagnostics under:
 composition.legacy_status_compatibility
 ```
 
+### PR 7 — reference-target and peg normalization
+
+Status after this PR merges: **PASS**
+
+Authoritative mapping and validation files:
+
+```text
+config/reference-targets.mjs
+src/utils/referenceTarget.ts
+scripts/collect-reference-target-migration.mjs
+scripts/validate-reference-target-normalization.mjs
+docs/audits/reference-target-normalization-2026-06-26.md
+data/generated/reference-target-migration.json
+data/generated/reference-target-validation.json
+```
+
+Canonical coverage:
+
+```text
+Stable assets:                 92
+Missing reference kind:        0
+Missing reference asset:       0
+Unmapped reference asset:      0
+Kind/mapping contradictions:   0
+```
+
+Reference kinds:
+
+```text
+fiat:       88
+commodity:   2
+floating:    1
+index:       1
+```
+
+Approved public comparison categories:
+
+```text
+US dollar:                         71
+Euro:                               8
+Japanese yen:                       3
+Other fiat currency:                5
+Gold:                               2
+Floating protocol target:           1
+Indexed or inflation-linked target: 2
+```
+
+The three implementation-style reference codes now have reviewed public labels:
+
+```text
+Nuon -> US dollar with Truflation-linked rebase
+RAI  -> Floating protocol redemption price
+SPOT -> CPI-adjusted AMPL target
+```
+
+Public presentation now separates reference target, reference kind, comparison category, target value, and methodology. The stablecoin index filters on approved comparison categories instead of raw reference codes.
+
+Machine-readable output exposes:
+
+```text
+reference_kind
+reference_comparison_category
+```
+
+Registry statistics expose:
+
+```text
+composition.reference_target_categories
+```
+
+Canonical codes remain only as compatibility diagnostics under:
+
+```text
+composition.canonical_reference_assets_compatibility
+```
+
 ### Remaining Gate C sequence
 
 ```text
-PR 7   reference-target and peg normalization
 PR 8   backing and stabilization normalization
 PR 9   event category and subtype normalization
 PR 10  organization classification normalization
@@ -203,13 +269,13 @@ PR 16  move record-specific public copy and complete the 92-record migration
 ## Immediate next work
 
 ```text
-1. Merge PR 6 only after every workflow passes.
-2. Start PR 7 from the resulting latest main.
-3. Separate public reference categories from internal peg identifiers.
-4. Preserve exact reference methodology in record detail while using approved public labels and categories in filters.
-5. Remove AMPL_CPI_ADJUSTED_TARGET, RAI_REDEMPTION_PRICE, and USD_WITH_TRUFLATION_LINKED_REBASE from raw public filter values.
-6. Keep market price, reference target, redemption value, and recovery history as separate concepts.
-7. Record all 92 reference mappings and reject unmapped values.
+1. Merge PR 7 only after every workflow passes.
+2. Start PR 8 from the resulting latest main.
+3. Separate public comparison model from canonical backing types.
+4. Keep reserve components and historical model changes outside the finite filter taxonomy.
+5. Preserve the primary stabilization mechanism and protocol-specific explanation separately.
+6. Replace the current collateral_model filter with an approved public model category.
+7. Validate all 92 records and reject unmapped model categories.
 8. Do not deploy production.
 9. Do not select Batch 18.
 ```
