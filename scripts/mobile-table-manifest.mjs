@@ -3,6 +3,7 @@ export const mobileTableSourceFiles = [
   'src/pages/issuers/index.astro',
   'src/pages/events/index.astro',
   'src/components/StablecoinDetailView.astro',
+  'src/components/StablecoinValueStateSections.astro',
   'src/components/IssuerControlEvents.astro',
   'src/components/StablecoinEventTimeline.astro',
   'src/components/StructuredEventDetail.astro',
