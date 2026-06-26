@@ -83,9 +83,15 @@ function knownValue(text: string): PresentedValue {
 
 function valueFor(key: string, value: unknown): PresentedValue {
   const policy = key === 'verification_status' ? 'verification' : 'default';
+  const structurallyMissing = value === null
+    || value === undefined
+    || (typeof value === 'string' && value.trim().length === 0)
+    || (Array.isArray(value) && value.length === 0);
+
+  if (structurallyMissing) return valueStatePresentation(value, { policy });
 
   if (key.endsWith('_summary') || key === 'summary') {
-    const text = value === null || value === undefined || value === '' ? '' : cleanPublicText(String(value));
+    const text = cleanPublicText(String(value));
     return valueStatePresentation(value, { policy, detect_markers: false, display_value: text });
   }
 
@@ -111,10 +117,10 @@ function valueFor(key: string, value: unknown): PresentedValue {
     return valueStatePresentation(nested, { policy, display_value: nested });
   }
 
-  let displayValue = value === null || value === undefined ? '' : String(value);
-  if (key.endsWith('_bps') && displayValue) displayValue = `${displayValue} bps`;
-  else if (key.endsWith('_minutes') && displayValue) displayValue = `${displayValue} minutes`;
-  else if (displayValue) displayValue = formatPublicLabel(displayValue, displayValue);
+  let displayValue = String(value);
+  if (key.endsWith('_bps')) displayValue = `${displayValue} bps`;
+  else if (key.endsWith('_minutes')) displayValue = `${displayValue} minutes`;
+  else displayValue = formatPublicLabel(displayValue, displayValue);
   return valueStatePresentation(value, { policy, display_value: displayValue });
 }
 
