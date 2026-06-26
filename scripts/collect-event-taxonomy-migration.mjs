@@ -31,8 +31,10 @@ function taxonomyEntry(axis, value) {
 }
 
 const baseline = loadRegistryV2Baseline(root);
-const events = baseline.data_groups.events.flatMap(readRows);
-const eventDetails = baseline.data_groups.event_details.flatMap(readRows);
+const eventFiles = baseline.data_groups.events;
+const detailFiles = baseline.data_groups.event_details;
+const events = eventFiles.flatMap((file) => readRows(file).map((row) => ({ ...row, __source_file: file })));
+const eventDetails = detailFiles.flatMap((file) => readRows(file).map((row) => ({ ...row, __source_file: file })));
 const detailById = new Map(eventDetails.map((row) => [row.id, row]));
 const detailFieldNames = [
   'depeg_detail',
@@ -50,6 +52,7 @@ const detailFieldNames = [
   'termination_detail',
   'launch_detail'
 ];
+const structuralKeys = new Set(['id', '__source_file', 'event_detail_kind', 'subject_stablecoin_ids', 'subject_organization_ids', 'evidence_ids']);
 
 const records = events.map((event) => {
   const detail = detailById.get(event.id) ?? {};
@@ -61,9 +64,14 @@ const records = events.map((event) => {
     ?? (merged.recovered === true ? 'recovered' : merged.recovered === false ? 'not_recovered' : null);
   const recoveryEntry = taxonomyEntry('recovery_status', recoveryStatus);
   const presentDetailFields = detailFieldNames.filter((field) => merged[field] !== null && merged[field] !== undefined);
+  const rawDetailKeys = Object.keys(detail).filter((key) => !structuralKeys.has(key)).sort();
 
   return {
     id: merged.id,
+    event_source_file: event.__source_file,
+    detail_source_file: detail.__source_file ?? null,
+    title: merged.title ?? null,
+    description: merged.description ?? null,
     event_type: merged.event_type ?? null,
     public_event_category: typeEntry?.public_category ?? null,
     public_event_label: typeEntry?.public_label ?? null,
@@ -77,6 +85,8 @@ const records = events.map((event) => {
     impact_level: merged.impact_level ?? null,
     present_detail_fields: presentDetailFields,
     detail_field_count: presentDetailFields.length,
+    raw_detail_keys: rawDetailKeys,
+    raw_detail: Object.fromEntries(rawDetailKeys.map((key) => [key, detail[key]])),
     combination_key: `${merged.event_type ?? 'missing'}|${merged.event_detail_kind ?? 'missing'}|${merged.event_status_effect ?? 'missing'}|${recoveryStatus ?? 'missing'}`
   };
 }).sort((a, b) => a.id.localeCompare(b.id));
@@ -103,6 +113,7 @@ const output = {
   recovery_status_counts: countBy(records, (row) => row.recovery_status),
   impact_level_counts: countBy(records, (row) => row.impact_level),
   detail_field_counts_non_exclusive: countBy(records, (row) => row.present_detail_fields),
+  raw_detail_key_counts_non_exclusive: countBy(records, (row) => row.raw_detail_keys),
   combination_counts: countBy(records, (row) => row.combination_key),
   records
 };
@@ -125,6 +136,7 @@ console.log(JSON.stringify({
   event_status_effect_counts: output.event_status_effect_counts,
   recovery_status_counts: output.recovery_status_counts,
   detail_field_counts_non_exclusive: output.detail_field_counts_non_exclusive,
+  raw_detail_key_counts_non_exclusive: output.raw_detail_key_counts_non_exclusive,
   missing_event_type_ids: output.missing_event_type_ids,
   unmapped_event_type_ids: output.unmapped_event_type_ids,
   missing_event_detail_kind_ids: output.missing_event_detail_kind_ids,
