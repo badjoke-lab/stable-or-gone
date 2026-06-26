@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+import buildProvenanceData from '../../data/generated/build-provenance.json';
 
 import {
   getDeployments,
@@ -76,37 +76,24 @@ function countValues(values: unknown[]) {
   }, {});
 }
 
-function runtimeEnvironment() {
-  const runtime = globalThis as typeof globalThis & {
-    process?: { env?: Record<string, string | undefined> };
-  };
-  return runtime.process?.env || {};
+export type BuildProvenance = typeof buildProvenanceData;
+
+export function getBuildProvenance(): BuildProvenance {
+  return buildProvenanceData;
 }
 
-function getCheckedOutGitCommit(env: Record<string, string | undefined>) {
-  if (env.GITHUB_ACTIONS !== 'true') return null;
-
-  try {
-    const commit = execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: env.GITHUB_WORKSPACE || undefined,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim();
-
-    return /^[0-9a-f]{40}$/i.test(commit) ? commit : null;
-  } catch {
-    return null;
-  }
-}
-
-export function getBuildMetadata(generatedAt: string) {
-  const env = runtimeEnvironment();
-  const checkedOutCommit = getCheckedOutGitCommit(env);
-
+export function getBuildMetadata() {
+  const provenance = getBuildProvenance();
   return {
-    commit: env.SOG_BUILD_COMMIT || checkedOutCommit || env.CF_PAGES_COMMIT_SHA || env.VERCEL_GIT_COMMIT_SHA || env.GITHUB_SHA || 'unknown',
-    branch: env.SOG_BUILD_BRANCH || env.CF_PAGES_BRANCH || env.VERCEL_GIT_COMMIT_REF || env.GITHUB_REF_NAME || 'main',
-    generated_at: generatedAt,
+    commit: provenance.source_commit,
+    branch: provenance.source_branch,
+    generated_at: provenance.generated_at,
+    canonical_data_hash: provenance.canonical_data_hash,
+    canonical_file_count: provenance.canonical_file_count,
+    canonical_record_counts: provenance.canonical_record_counts,
+    route_counts: provenance.route_counts,
+    provenance_schema_version: provenance.schema_version,
+    provenance_verification_marker: provenance.verification_marker,
     verification_marker: PROJECT.verificationMarker,
   };
 }
