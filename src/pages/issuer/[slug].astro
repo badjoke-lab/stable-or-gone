@@ -25,11 +25,12 @@ const evidence = allEvidence.filter((source) => source.issuer_id === organizatio
 const summary = issuerPublicSummaries[organization.slug] ?? organization.summary ?? 'A summary has not yet been added.';
 const title = `${organization.name} — Stablecoin Organization History | Stable or Gone`;
 const description = `${organization.name} profile, stablecoin relationships, roles, major events, jurisdiction, official links, and sources.`;
+const canonicalUrl = `https://sog.badjoke-lab.com/issuer/${organization.slug}/`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: organization.name,
-  url: organization.official_url || `https://sog.badjoke-lab.com/issuer/${organization.slug}/`,
+  url: canonicalUrl,
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
   sameAs: organization.official_url ? [organization.official_url] : undefined

@@ -4,7 +4,7 @@ Updated: 2026-06-26
 
 ## Purpose
 
-This is the canonical execution and recovery schedule for SOG. Roadmap-changing pull requests must update this file.
+This is the canonical execution schedule for SOG. Roadmap-changing pull requests must update this file.
 
 Required authority and workstream documents:
 
@@ -31,9 +31,10 @@ Known unknowns: 253
 Deployments: 130
 Documentation reset: PR #167 merged
 Repair PR 1 baseline: PR #168 merged
+Repair PR 2 provenance: PR #169 merged
 Current phase: Phase 1 — emergency production-integrity repair
-Latest completed repair item after this PR merges: PR 2 — build provenance
-Next approved work item: PR 3 — full-route and output parity enforcement
+Latest completed repair item after this PR merges: PR 3 — full-route and output parity enforcement
+Next approved work item: PR 4 — remove destructive mobile column suppression
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -66,9 +67,9 @@ Canonical count source:
 docs/migration/registry-v3-baseline.json
 ```
 
-## Repair baseline
+## Repair controls now present
 
-The fixed starting point is:
+### Repair baseline
 
 ```text
 docs/ui-redesign/repair-baseline.json
@@ -76,40 +77,9 @@ docs/audits/ui-repair-baseline-2026-06-26.md
 scripts/validate-ui-repair-baseline.mjs
 ```
 
-It records:
+The baseline fixes canonical counts, 328 expected detail routes, the 2026-06-26 split-generation production snapshot, sixteen defect IDs, and twenty representative records.
 
-- canonical counts and coverage;
-- 328 expected detail routes;
-- 328 expected detail sitemap URLs;
-- the public split-generation state observed on 2026-06-26;
-- sixteen confirmed defects;
-- twenty representative records.
-
-## Build provenance
-
-After PR 2 merges, every full build generates one provenance record containing:
-
-```text
-source commit
-source branch
-build timestamp
-canonical data SHA-256 hash
-canonical file count
-canonical record-group counts
-generated detail-route counts
-```
-
-The same record is embedded in:
-
-```text
-/version.json
-/data/manifest.json
-GitHub build summary
-local post-build verification
-production verification
-```
-
-Relevant files:
+### Build provenance
 
 ```text
 data/generated/build-provenance.json
@@ -117,6 +87,33 @@ scripts/generate-build-provenance.mjs
 scripts/verify-build-provenance.mjs
 scripts/check-production-provenance.mjs
 ```
+
+Every full build identifies one source commit, source branch, timestamp, canonical SHA-256 data hash, canonical file count, record-group counts, and route counts. The same object appears in `version.json` and `data/manifest.json`.
+
+### Full output parity
+
+After PR 3 merges, CI rejects any difference between canonical record identity sets and:
+
+```text
+stablecoin index links
+organization index links
+event index links
+generated detail directories
+sitemap detail URLs
+per-page canonical URLs
+per-page JSON-LD URLs
+version and manifest provenance
+```
+
+Relevant files:
+
+```text
+scripts/verify-full-output-parity.mjs
+scripts/check-production-output-parity.mjs
+dist/data/output-parity.json
+```
+
+The local verifier checks all 328 detail pages. The production verifier checks the exact canonical sets and every detail page at the deployed origin.
 
 ## Quality queues preserved during repair
 
@@ -155,13 +152,11 @@ Gate A — PASS
 Gate B — in progress
 ```
 
-Gate A completed through PR #167.
-
 Gate B requires:
 
 - [x] PR 1 — repair baseline and defect inventory;
-- [x] PR 2 — build provenance, after this PR merges;
-- [ ] PR 3 — full-route and output parity enforcement;
+- [x] PR 2 — build provenance;
+- [x] PR 3 — full-route and output parity enforcement, after this PR merges;
 - [ ] PR 4 — removal of destructive mobile column suppression.
 
 No taxonomy migration, final UI mock, production UI implementation, Batch 18 selection, statistics expansion, or routine publication begins before Gate B passes.
@@ -169,12 +164,13 @@ No taxonomy migration, final UI mock, production UI implementation, Batch 18 sel
 ## Immediate next work
 
 ```text
-1. Merge PR 2 only after every workflow passes.
-2. Start PR 3 from the resulting latest main.
-3. Enforce list counts, detail-route counts, sitemap coverage, JSON-LD, canonical coverage, version/manifest parity, and stale-output rejection.
-4. Make a mixed or partial generated site fail CI.
-5. Do not deploy production for PR 2 or PR 3.
-6. Do not select Batch 18.
+1. Merge PR 3 only after every workflow passes.
+2. Start PR 4 from the resulting latest main.
+3. Remove the global fifth-column suppression rule.
+4. Add explicit table identities and temporary information-preserving mobile behavior.
+5. Verify that peg, impact, relationship status, confidence, summary, and control capability never disappear by generic column position.
+6. Do not deploy production for PR 3 or PR 4.
+7. Do not select Batch 18.
 ```
 
 ## Phase gates
