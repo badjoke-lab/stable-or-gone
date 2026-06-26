@@ -35,6 +35,7 @@ jobs:
           path: |
             build-site.log
             data/generated/organization-taxonomy-migration.json
+            data/generated/organization-taxonomy-validation.json
             data/generated/event-taxonomy-migration.json
             data/generated/event-taxonomy-validation.json
             data/generated/backing-stabilization-migration.json
