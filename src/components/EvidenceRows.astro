@@ -1,14 +1,18 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
 import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
+import type { EvidenceRow } from '../lib/data/registryBase';
 
-const { evidence, emptyMessage = 'No sources have been added yet.' } = Astro.props;
+const { evidence, emptyMessage = 'No sources have been added yet.' } = Astro.props as {
+  evidence: EvidenceRow[];
+  emptyMessage?: string;
+};
 ---
 <tbody>
   {evidence.length === 0 ? <tr><td colspan="8">{emptyMessage}</td></tr> : evidence.map((source) => {
     const taxonomy = resolveEvidenceTaxonomy(source);
     const claims = source.claim_scopes?.length
-      ? source.claim_scopes.map((item) => formatPublicLabel(item)).join(', ')
+      ? source.claim_scopes.map((item: string) => formatPublicLabel(item)).join(', ')
       : formatPublicLabel(source.claim_scope, 'No claim scope recorded');
     return <tr>
       <td><a href={source.url}>{source.title}</a>{source.published_at ? <><br /><small>Published {source.published_at}</small></> : null}</td>
