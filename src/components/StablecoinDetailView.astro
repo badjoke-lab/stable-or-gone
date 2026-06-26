@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import StableAssetClassificationRows from './StableAssetClassificationRows.astro';
 import IssuerControlEvents from './IssuerControlEvents.astro';
 import RelatedGuides from './RelatedGuides.astro';
-import { formatPublicLabel, formatStatusLabel } from '../utils/displayLabels';
+import { formatPublicLabel } from '../utils/displayLabels';
+import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { cleanPublicText } from '../utils/publicText';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { getRelatedGuidesForStablecoin } from '../data/stablecoinGuideLinks';
@@ -62,9 +63,9 @@ const openQuestions = allKnownUnknowns.filter((item) => item.stablecoin_id === c
 const regulatoryNotes = allRegulatoryNotes.filter((item) => item.stablecoin_id === coin.id);
 const deployments = allDeployments.filter((item) => item.stablecoin_id === coin.id);
 const relatedGuides = getRelatedGuidesForStablecoin(coin.slug);
-const statusClass = `chip ${coin.lifecycle_status ?? coin.status ?? 'unknown'}`;
+const statusClass = lifecycleChipClass(coin.lifecycle_status);
 const title = `${coin.name} (${coin.symbol ?? coin.slug}) — Stablecoin History | Stable or Gone`;
-const description = `${coin.name} history, status, organization relationships, backing model, redemption terms, major events, reserve information, and sources.`;
+const description = `${coin.name} lifecycle, issuance, organization relationships, backing model, redemption terms, major events, reserve information, and sources.`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -72,7 +73,7 @@ const jsonLd = {
   url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`,
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  keywords: [coin.name, coin.symbol, coin.lifecycle_status ?? coin.status, coin.peg_reference?.asset ?? coin.peg_asset, ...(coin.backing_types ?? [coin.collateral_model])].filter(Boolean),
+  keywords: [coin.name, coin.symbol, coin.lifecycle_status, coin.issuance_status, coin.peg_reference?.asset ?? coin.peg_asset, ...(coin.backing_types ?? [coin.collateral_model])].filter(Boolean),
   ...(relatedGuides.length > 0 ? {
     subjectOf: relatedGuides.map((guide) => ({
       '@type': 'Article',
@@ -96,12 +97,12 @@ const reserveProfile = coin.reserve_profile;
 const redemptionProfile = coin.redemption_profile;
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/stablecoin/${coin.slug}/`} jsonLd={jsonLd}>
-  <section class="hero"><div class="panel hero-main"><div class="prompt">Stablecoin record</div><h1>{coin.name}</h1><p>{publicSummaries[coin.slug] ?? cleanPublicText(coin.summary, 'A summary has not yet been added for this stablecoin.')}</p></div><div class="panel stats"><div class="stat"><span>Lifecycle</span><strong>{formatStatusLabel(coin.lifecycle_status ?? coin.status)}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div></section>
+  <section class="hero"><div class="panel hero-main"><div class="prompt">Stablecoin record</div><h1>{coin.name}</h1><p>{publicSummaries[coin.slug] ?? cleanPublicText(coin.summary, 'A summary has not yet been added for this stablecoin.')}</p></div><div class="panel stats"><div class="stat"><span>Lifecycle</span><strong>{formatLifecycleLabel(coin.lifecycle_status)}</strong></div><div class="stat"><span>Issuance</span><strong>{formatIssuanceLabel(coin.issuance_status)}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div></section>
 
   <section class="panel registry"><div class="bar">Overview</div><table data-table-kind="stablecoin-overview" data-mobile-table="scroll-preserve"><tbody>
     <tr><th>Symbol</th><td>{coin.symbol ?? '—'}</td></tr>
     <StableAssetClassificationRows coin={coin} />
-    <tr><th>Lifecycle status</th><td><span class={statusClass}>{formatStatusLabel(coin.lifecycle_status ?? coin.status)}</span></td></tr><tr><th>Issuance status</th><td>{formatPublicLabel(coin.issuance_status, 'Unknown')}</td></tr><tr><th>Peg reference</th><td>{coin.peg_reference ? `${formatPublicLabel(coin.peg_reference.kind)} · ${coin.peg_reference.asset ?? 'asset unknown'}` : (coin.peg_asset ?? '—')}</td></tr><tr><th>Backing types</th><td>{backingTypes}</td></tr><tr><th>Stabilization</th><td>{formatPublicLabel(coin.stabilization_mechanism, 'Unknown')}</td></tr><tr><th>Governance</th><td>{formatPublicLabel(coin.governance_model, 'Unknown')}</td></tr><tr><th>Primary organization</th><td>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Unknown'}</td></tr><tr><th>Primary role</th><td>{formatPublicLabel(primaryRelationship?.role, 'Unknown')}</td></tr><tr><th>Last reviewed</th><td>{coin.last_verified_at ?? '—'}</td></tr>
+    <tr><th>Lifecycle status</th><td><span class={statusClass}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td></tr><tr><th>Issuance status</th><td>{formatIssuanceLabel(coin.issuance_status)}</td></tr><tr><th>Peg reference</th><td>{coin.peg_reference ? `${formatPublicLabel(coin.peg_reference.kind)} · ${coin.peg_reference.asset ?? 'asset unknown'}` : (coin.peg_asset ?? '—')}</td></tr><tr><th>Backing types</th><td>{backingTypes}</td></tr><tr><th>Stabilization</th><td>{formatPublicLabel(coin.stabilization_mechanism, 'Unknown')}</td></tr><tr><th>Governance</th><td>{formatPublicLabel(coin.governance_model, 'Unknown')}</td></tr><tr><th>Primary organization</th><td>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Unknown'}</td></tr><tr><th>Primary role</th><td>{formatPublicLabel(primaryRelationship?.role, 'Unknown')}</td></tr><tr><th>Last reviewed</th><td>{coin.last_verified_at ?? '—'}</td></tr>
   </tbody></table></section>
 
   <section class="panel registry"><div class="bar">Organizations and roles</div><table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve"><thead><tr><th>Organization</th><th>Role</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="5">No organization relationships have been added yet.</td></tr> : relationships.map((relationship) => { const organization = organizationById.get(relationship.organization_id); return <tr><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : relationship.organization_id}</td><td>{formatPublicLabel(relationship.role)}</td><td>{relationship.start_date ?? '—'}</td><td>{relationship.end_date ?? '—'}</td><td>{formatPublicLabel(relationship.status)}</td></tr>; })}</tbody></table></section>
