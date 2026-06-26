@@ -15,7 +15,7 @@ import {
   getPublicEvidenceCategoryLabel,
   publicEvidenceCategories
 } from '../../config/evidence-taxonomy.mjs';
-import { getEvidenceRelationOrigin } from '../../config/evidence-relation-origin.mjs';
+import { getEvidenceRelationKind } from '../../config/evidence-relation-kinds.mjs';
 
 export type EvidenceTaxonomyRecord = {
   id: string;
@@ -33,7 +33,7 @@ export function resolveEvidenceTaxonomy(evidence: EvidenceTaxonomyRecord) {
   const primaryState = getEvidencePrimaryState(evidence.source_type, evidence.is_primary, evidence.primary_state);
   const reliability = getEvidenceReliability(evidence.reliability);
   const archiveState = getEvidenceArchiveState(evidence.archived_url);
-  const relationOrigin = getEvidenceRelationOrigin(evidence.id);
+  const relationKind = getEvidenceRelationKind(evidence.id);
 
   return {
     public_category: publicCategory,
@@ -48,7 +48,7 @@ export function resolveEvidenceTaxonomy(evidence: EvidenceTaxonomyRecord) {
     canonical_reliability_raw: evidence.reliability ?? 'not_recorded',
     archive_state: archiveState,
     archive_state_label: getEvidenceArchiveStateLabel(archiveState),
-    relation_origin: relationOrigin
+    relation_kind: relationKind
   };
 }
 
