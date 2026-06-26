@@ -37,7 +37,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
     <a class="panel mini-card" href="/events/"><h2>All events</h2><p>Browse the complete stablecoin event history.</p></a>
   </section>
 
-  <section class="panel registry"><div class="bar">Event details</div><table><tbody>
+  <section class="panel registry"><div class="bar">Event details</div><table data-table-kind="event-details" data-mobile-table="scroll-preserve"><tbody>
     <tr><th>Date</th><td>{event.event_date ?? '—'}</td></tr>
     <tr><th>Event type</th><td>{formatPublicLabel(event.event_type)}</td></tr>
     <tr><th>Event detail kind</th><td>{formatPublicLabel(event.event_detail_kind, 'Unknown')}</td></tr>
@@ -51,7 +51,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
     <tr><th>Record confidence</th><td>{formatPublicLabel(event.confidence)}</td></tr>
   </tbody></table></section>
 
-  {(event.depeg_detail || event.regulatory_detail || event.reserve_change_detail || event.redemption_change_detail || event.migration_detail || control) && <section class="panel registry"><div class="bar">Registry v2 detail overlay</div><table><tbody>
+  {(event.depeg_detail || event.regulatory_detail || event.reserve_change_detail || event.redemption_change_detail || event.migration_detail || control) && <section class="panel registry"><div class="bar">Registry v2 detail overlay</div><table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve"><tbody>
     {event.depeg_detail && <><tr><th>Depeg recovery status</th><td>{formatPublicLabel(event.depeg_detail.recovery_status, 'Unknown')}</td></tr><tr><th>Depeg recovery date</th><td>{event.depeg_detail.recovery_date ?? '—'}</td></tr><tr><th>Depeg cause summary</th><td>{cleanPublicText(event.depeg_detail.cause_summary, 'Public information is incomplete.')}</td></tr></>}
     {event.regulatory_detail && <><tr><th>Jurisdiction</th><td>{formatPublicLabel(event.regulatory_detail.jurisdiction, 'Unknown')}</td></tr><tr><th>Authority</th><td>{formatPublicLabel(event.regulatory_detail.authority, 'Unknown')}</td></tr><tr><th>Action type</th><td>{formatPublicLabel(event.regulatory_detail.action_type, 'Unknown')}</td></tr><tr><th>Effective date</th><td>{event.regulatory_detail.effective_date ?? '—'}</td></tr><tr><th>Resolution date</th><td>{event.regulatory_detail.resolution_date ?? '—'}</td></tr></>}
     {event.reserve_change_detail && <tr><th>Reserve-change summary</th><td>{cleanPublicText(event.reserve_change_detail.summary, 'Public information is incomplete.')}</td></tr>}
@@ -76,7 +76,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
     </>}
   </tbody></table></section>}
 
-  <section class="panel registry"><div class="bar">Sources</div><table><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Evidence scope</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="4">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{source.claim_scopes?.map((item) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(source.claim_scope)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Sources</div><table data-table-kind="event-sources" data-mobile-table="scroll-preserve"><thead><tr><th>Source</th><th>Publisher</th><th>Type</th><th>Evidence scope</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="4">No event-specific sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{source.publisher ?? '—'}</td><td>{formatPublicLabel(source.source_type)}</td><td>{source.claim_scopes?.map((item) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(source.claim_scope)}</td></tr>))}</tbody></table></section>
 
   <section class="panel report-box"><h2>Suggest a correction</h2><p>Report an incorrect date, outcome, description, or source, or suggest a missing event.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div></section>
 </BaseLayout>
