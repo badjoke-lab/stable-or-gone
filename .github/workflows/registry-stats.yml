@@ -17,7 +17,9 @@ jobs:
         with:
           node-version: 22
       - name: Rebuild output
-        run: node scripts/generate-registry-stats-batch-o.mjs
+        run: |
+          node scripts/generate-registry-stats-batch-o.mjs
+          node scripts/build-value-state-stats.mjs
       - name: Validate rebuilt output
         run: node scripts/validate-registry-stats.mjs
       - uses: actions/upload-artifact@v4
