@@ -1,0 +1,21 @@
+---
+import EvidenceRows from './EvidenceRows.astro';
+
+const { evidence, tableKind, emptyMessage } = Astro.props;
+---
+{tableKind === 'stablecoin-sources' ? (
+  <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve">
+    <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
+    <EvidenceRows evidence={evidence} emptyMessage={emptyMessage} />
+  </table>
+) : tableKind === 'organization-sources' ? (
+  <table data-table-kind="organization-sources" data-mobile-table="scroll-preserve">
+    <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
+    <EvidenceRows evidence={evidence} emptyMessage={emptyMessage} />
+  </table>
+) : (
+  <table data-table-kind="event-sources" data-mobile-table="scroll-preserve">
+    <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
+    <EvidenceRows evidence={evidence} emptyMessage={emptyMessage} />
+  </table>
+)}

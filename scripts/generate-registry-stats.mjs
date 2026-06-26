@@ -10,6 +10,14 @@ import {
   getPublicOrganizationCategory,
   getRegulatoryCharacter
 } from '../config/organization-taxonomy.mjs';
+import {
+  getEvidenceArchiveState,
+  getEvidencePrimaryState,
+  getEvidenceProvenance,
+  getEvidenceReliability,
+  getPublicEvidenceCategory,
+  pollutedReliabilityValues
+} from '../config/evidence-taxonomy.mjs';
 
 const root = process.cwd();
 const outputPath = 'data/generated/registry-stats.json';
@@ -60,6 +68,19 @@ function coverage(rows, stablecoinIds) {
   };
 }
 
+function evidenceClaimScopes(row) {
+  return [...new Set([
+    ...(Array.isArray(row.claim_scopes) ? row.claim_scopes : []),
+    ...(typeof row.claim_scope === 'string' && row.claim_scope.length ? [row.claim_scope] : [])
+  ])];
+}
+
+function evidenceRelationKind(row) {
+  return Array.isArray(row.stablecoin_ids) || Array.isArray(row.organization_ids) || Array.isArray(row.event_ids) || Array.isArray(row.claim_scopes)
+    ? 'explicit_v2'
+    : 'legacy_subject_projection';
+}
+
 function deterministicGeneratedAt(baseline) {
   if (process.env.SOURCE_DATE_EPOCH) {
     const milliseconds = Number(process.env.SOURCE_DATE_EPOCH) * 1000;
@@ -85,6 +106,7 @@ export function buildRegistryStats() {
   const stablecoins = groups.stablecoins;
   const organizations = groups.organizations;
   const relationships = groups.relationships;
+  const evidence = groups.evidence;
   const classificationExtensionById = new Map((groups.classification_extensions ?? []).map((row) => [row.id, row]));
   const classifications = groups.classifications.map((row) => ({ ...row, ...(classificationExtensionById.get(row.id) ?? {}) }));
   const eventDetailById = new Map(groups.event_details.map((row) => [row.id, row]));
@@ -116,6 +138,13 @@ export function buildRegistryStats() {
   const organizationLegalFormNotRecorded = organizations.filter((row) => getLegalFormState(row) === 'not_recorded').length;
   const organizationsWithoutRelationships = organizations.filter((row) => !organizationIdsWithRelationships.has(row.id)).length;
   const relationshipsUnknownStatus = relationships.filter((row) => !row.status || row.status === 'unknown').length;
+  const evidenceReliabilityUnknown = evidence.filter((row) => getEvidenceReliability(row.reliability) === 'unknown').length;
+  const evidenceProvenanceUnknown = evidence.filter((row) => getEvidenceProvenance(row.source_type, row.source_provenance) === 'unknown').length;
+  const evidencePrimaryUnknown = evidence.filter((row) => getEvidencePrimaryState(row.source_type, row.is_primary, row.primary_state) === 'unknown').length;
+  const evidenceArchiveMissing = evidence.filter((row) => getEvidenceArchiveState(row.archived_url) === 'not_recorded').length;
+  const evidencePollutedReliability = evidence.filter((row) => pollutedReliabilityValues.has(row.reliability)).length;
+  const evidenceUrlCounts = countBy(evidence, (row) => row.url);
+  const duplicateEvidenceUrls = Object.values(evidenceUrlCounts).filter((value) => value > 1).length;
 
   const stats = {
     schema_version: '1.0',
@@ -129,7 +158,7 @@ export function buildRegistryStats() {
       profiles: groups.profiles.length,
       events: events.length,
       event_details: groups.event_details.length,
-      evidence: groups.evidence.length,
+      evidence: evidence.length,
       reserve_reports: groups.reserve_reports.length,
       known_unknowns: groups.known_unknowns.length,
       regulatory_notes: groups.regulatory_notes.length,
@@ -141,21 +170,9 @@ export function buildRegistryStats() {
     },
     lifecycle: {
       by_status: lifecycleCounts,
-      active_side: {
-        count: activeSide,
-        share: share(activeSide, classifications.length),
-        statuses: ['active', 'restricted']
-      },
-      historical_side: {
-        count: historicalSide,
-        share: share(historicalSide, classifications.length),
-        statuses: Object.keys(lifecycleCounts).filter((status) => !activeStatuses.has(status))
-      },
-      strict_failed: {
-        count: strictFailed,
-        share: share(strictFailed, classifications.length),
-        statuses: ['collapsed']
-      }
+      active_side: { count: activeSide, share: share(activeSide, classifications.length), statuses: ['active', 'restricted'] },
+      historical_side: { count: historicalSide, share: share(historicalSide, classifications.length), statuses: Object.keys(lifecycleCounts).filter((status) => !activeStatuses.has(status)) },
+      strict_failed: { count: strictFailed, share: share(strictFailed, classifications.length), statuses: ['collapsed'] }
     },
     composition: {
       legacy_status_compatibility: countBy(stablecoins, (row) => row.status),
@@ -181,11 +198,16 @@ export function buildRegistryStats() {
       event_status_effect_categories: countBy(events, (row) => getEventStatusEffectCategory(row.event_status_effect)),
       event_recovery_categories: countBy(events, (row) => getRecoveryCategory(row)),
       event_impact_levels: countBy(events, (row) => row.impact_level),
-      legal_classifications_non_exclusive: countBy(legalProfiles, (row) =>
-        Array.isArray(row.classifications) && row.classifications.length
-          ? row.classifications.map((item) => item.classification)
-          : ['unknown']
-      ),
+      public_evidence_categories: countBy(evidence, (row) => getPublicEvidenceCategory(row.source_type)),
+      canonical_evidence_source_types: countBy(evidence, (row) => row.source_type),
+      evidence_source_provenances: countBy(evidence, (row) => getEvidenceProvenance(row.source_type, row.source_provenance)),
+      evidence_primary_states: countBy(evidence, (row) => getEvidencePrimaryState(row.source_type, row.is_primary, row.primary_state)),
+      evidence_reliabilities: countBy(evidence, (row) => getEvidenceReliability(row.reliability)),
+      canonical_evidence_reliabilities_raw: countBy(evidence, (row) => row.reliability),
+      evidence_archive_states: countBy(evidence, (row) => getEvidenceArchiveState(row.archived_url)),
+      evidence_relation_kinds: countBy(evidence, evidenceRelationKind),
+      evidence_claim_scopes_non_exclusive: countBy(evidence, evidenceClaimScopes),
+      legal_classifications_non_exclusive: countBy(legalProfiles, (row) => Array.isArray(row.classifications) && row.classifications.length ? row.classifications.map((item) => item.classification) : ['unknown']),
       reserve_component_categories: countBy(reserveComponents, (row) => row.asset_category),
       deployment_chains: countBy(deployments, (row) => row.chain ?? row.network),
       income_availability: countBy(incomeProfiles, (row) => row.availability),
@@ -201,50 +223,29 @@ export function buildRegistryStats() {
       income_profiles: coverage(incomeProfiles, stablecoinIds),
       deployments: coverage(deployments, stablecoinIds),
       events: coverage(events, stablecoinIds),
-      evidence: coverage(groups.evidence, stablecoinIds),
+      evidence: coverage(evidence, stablecoinIds),
       reserve_reports: coverage(groups.reserve_reports, stablecoinIds),
       known_unknowns: coverage(groups.known_unknowns, stablecoinIds)
     },
     quality: {
-      lifecycle_unknown: {
-        count: lifecycleCounts.unknown ?? 0,
-        share: share(lifecycleCounts.unknown ?? 0, classifications.length)
-      },
-      legal_profiles_unclassified: {
-        count: legalUnclassified,
-        share: share(legalUnclassified, legalProfiles.length)
-      },
-      organization_jurisdiction_unknown: {
-        count: organizationJurisdictionUnknown,
-        share: share(organizationJurisdictionUnknown, organizations.length)
-      },
-      organization_legal_form_not_recorded: {
-        count: organizationLegalFormNotRecorded,
-        share: share(organizationLegalFormNotRecorded, organizations.length)
-      },
-      organizations_without_relationships: {
-        count: organizationsWithoutRelationships,
-        share: share(organizationsWithoutRelationships, organizations.length)
-      },
-      relationships_unknown_status: {
-        count: relationshipsUnknownStatus,
-        share: share(relationshipsUnknownStatus, relationships.length)
-      },
-      income_profiles_all_unknown: {
-        count: incomeAllUnknown,
-        share: share(incomeAllUnknown, incomeProfiles.length)
-      },
+      lifecycle_unknown: { count: lifecycleCounts.unknown ?? 0, share: share(lifecycleCounts.unknown ?? 0, classifications.length) },
+      legal_profiles_unclassified: { count: legalUnclassified, share: share(legalUnclassified, legalProfiles.length) },
+      organization_jurisdiction_unknown: { count: organizationJurisdictionUnknown, share: share(organizationJurisdictionUnknown, organizations.length) },
+      organization_legal_form_not_recorded: { count: organizationLegalFormNotRecorded, share: share(organizationLegalFormNotRecorded, organizations.length) },
+      organizations_without_relationships: { count: organizationsWithoutRelationships, share: share(organizationsWithoutRelationships, organizations.length) },
+      relationships_unknown_status: { count: relationshipsUnknownStatus, share: share(relationshipsUnknownStatus, relationships.length) },
+      evidence_reliability_unknown: { count: evidenceReliabilityUnknown, share: share(evidenceReliabilityUnknown, evidence.length) },
+      evidence_provenance_unknown: { count: evidenceProvenanceUnknown, share: share(evidenceProvenanceUnknown, evidence.length) },
+      evidence_primary_state_unknown: { count: evidencePrimaryUnknown, share: share(evidencePrimaryUnknown, evidence.length) },
+      evidence_archive_not_recorded: { count: evidenceArchiveMissing, share: share(evidenceArchiveMissing, evidence.length) },
+      evidence_polluted_reliability_compatibility: { count: evidencePollutedReliability, share: share(evidencePollutedReliability, evidence.length) },
+      evidence_duplicate_urls_preserved: { count: duplicateEvidenceUrls, share: share(duplicateEvidenceUrls, evidence.length) },
+      income_profiles_all_unknown: { count: incomeAllUnknown, share: share(incomeAllUnknown, incomeProfiles.length) },
       reserve_components_unknown_category: {
         count: reserveComponents.filter((row) => !row.asset_category || row.asset_category === 'unknown').length,
-        share: share(
-          reserveComponents.filter((row) => !row.asset_category || row.asset_category === 'unknown').length,
-          reserveComponents.length
-        )
+        share: share(reserveComponents.filter((row) => !row.asset_category || row.asset_category === 'unknown').length, reserveComponents.length)
       },
-      deployments_unknown_canonicality: {
-        count: deploymentUnknown,
-        share: share(deploymentUnknown, deployments.length)
-      }
+      deployments_unknown_canonicality: { count: deploymentUnknown, share: share(deploymentUnknown, deployments.length) }
     }
   };
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import IssuerControlEvents from '../../components/IssuerControlEvents.astro';
+import EvidenceSourceTable from '../../components/EvidenceSourceTable.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { formatLifecycleLabel, lifecycleChipClass } from '../../utils/publicTaxonomy';
 import { resolveEventTaxonomy } from '../../utils/eventTaxonomy';
@@ -79,7 +80,7 @@ const jsonLd = {
 
   <IssuerControlEvents events={issuerControlEvents} title="Enforcement and control actions" />
   <section class="panel registry"><div class="bar">Events</div><table data-table-kind="organization-events" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Status effect</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="5">No organization-level events have been added yet.</td></tr> : events.map((event) => { const eventTaxonomy = resolveEventTaxonomy(event); return <tr><td>{event.event_date ?? '—'}</td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{eventTaxonomy.public_category_label}</td><td>{eventTaxonomy.canonical_subtype_label}</td><td>{eventTaxonomy.status_effect_label}</td></tr>; })}</tbody></table></section>
-  <section class="panel registry"><div class="bar">Sources</div><table data-table-kind="organization-sources" data-mobile-table="scroll-preserve"><thead><tr><th>Source</th><th>Type</th><th>Evidence scope</th></tr></thead><tbody>{evidence.length === 0 ? <tr><td colspan="3">No sources have been added yet.</td></tr> : evidence.map((source) => (<tr><td><a href={source.url}>{source.title}</a></td><td>{formatPublicLabel(source.source_type)}</td><td>{source.claim_scopes?.map((item) => formatPublicLabel(item)).join(', ') ?? formatPublicLabel(source.claim_scope)}</td></tr>))}</tbody></table></section>
+  <section class="panel registry"><div class="bar">Sources</div><EvidenceSourceTable evidence={evidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added yet." /></section>
 
   <section class="panel report-box"><h2>Suggest a correction</h2><p>Report an incorrect organization category, legal form, regulatory character, jurisdiction, role, date, relationship, or source.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div></section>
 </BaseLayout>

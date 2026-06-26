@@ -11,6 +11,14 @@ import {
   getPublicOrganizationCategory,
   getRegulatoryCharacter
 } from '../config/organization-taxonomy.mjs';
+import {
+  getEvidenceArchiveState,
+  getEvidencePrimaryState,
+  getEvidenceProvenance,
+  getEvidenceReliability,
+  getPublicEvidenceCategory
+} from '../config/evidence-taxonomy.mjs';
+import { getEvidenceRelationKind } from '../config/evidence-relation-kinds.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -34,6 +42,10 @@ const applyById = (rows, layers) => {
   const maps = layers.map((layer) => new Map(layer.map((row) => [row.id, row])));
   return rows.map((row) => maps.reduce((merged, map) => ({ ...merged, ...(map.get(row.id) || {}) }), row));
 };
+const evidenceClaims = (row) => [...new Set([
+  ...(Array.isArray(row.claim_scopes) ? row.claim_scopes : []),
+  ...(typeof row.claim_scope === 'string' && row.claim_scope.length ? [row.claim_scope] : [])
+])];
 const checkedOutCommit = () => {
   if (process.env.GITHUB_ACTIONS !== 'true') return null;
   try {
@@ -55,10 +67,7 @@ const stablecoins = applyById(group('stablecoins'), [
   group('classification_extensions'),
   group('profiles'),
 ]);
-const organizations = group('organizations').map((row) => ({
-  ...row,
-  issuer_type: row.legacy_issuer_type || row.organization_type,
-}));
+const organizations = group('organizations').map((row) => ({ ...row, issuer_type: row.legacy_issuer_type || row.organization_type }));
 const relationships = group('relationships');
 const events = applyById(group('events'), [group('event_details')]);
 const evidence = group('evidence');
@@ -80,12 +89,13 @@ const organizationJurisdictionScopes = organizations.map((row) => getJurisdictio
 const publicEventCategories = events.map((row) => getPublicEventCategory(row.event_type));
 const eventStatusEffectCategories = events.map((row) => getEventStatusEffectCategory(row.event_status_effect));
 const eventRecoveryCategories = events.map((row) => getRecoveryCategory(row));
+const publicEvidenceCategories = evidence.map((row) => getPublicEvidenceCategory(row.source_type));
+const evidenceProvenances = evidence.map((row) => getEvidenceProvenance(row.source_type, row.source_provenance));
+const evidencePrimaryStates = evidence.map((row) => getEvidencePrimaryState(row.source_type, row.is_primary, row.primary_state));
+const evidenceReliabilities = evidence.map((row) => getEvidenceReliability(row.reliability));
+const evidenceArchiveStates = evidence.map((row) => getEvidenceArchiveState(row.archived_url));
 
-const expectedCounts = {
-  primary_records: stablecoins.length,
-  events: events.length,
-  evidence: evidence.length,
-};
+const expectedCounts = { primary_records: stablecoins.length, events: events.length, evidence: evidence.length };
 const expectedBreakdown = {
   stablecoins: stablecoins.length,
   organizations: organizations.length,
@@ -116,21 +126,23 @@ const expectedBreakdown = {
   event_detail_kind: countValues(events.map((row) => row.event_detail_kind)),
   event_status_effect_category: countValues(eventStatusEffectCategories),
   event_recovery_category: countValues(eventRecoveryCategories),
-  evidence_reliability: countValues(evidence.map((row) => row.reliability)),
-  evidence_source_type: countValues(evidence.map((row) => row.source_type)),
+  public_evidence_category: countValues(publicEvidenceCategories),
+  canonical_evidence_source_type: countValues(evidence.map((row) => row.source_type)),
+  evidence_source_provenance: countValues(evidenceProvenances),
+  evidence_primary_state: countValues(evidencePrimaryStates),
+  evidence_reliability: countValues(evidenceReliabilities),
+  canonical_evidence_reliability_raw: countValues(evidence.map((row) => row.reliability)),
+  evidence_archive_state: countValues(evidenceArchiveStates),
+  evidence_relation_kind: countValues(evidence.map((row) => getEvidenceRelationKind(row.id))),
+  evidence_claim_scope_non_exclusive: countMultiValues(evidence.map(evidenceClaims)),
   reserve_report_type: countValues(reserveReports.map((row) => row.report_type)),
   known_unknown_severity: countValues(knownUnknowns.map((row) => row.severity)),
   deployment_status: countValues(deployments.map((row) => row.status)),
   deployment_chain: countValues(deployments.map((row) => row.chain)),
 };
-const expectedLastReviewedAt = [
-  ...stablecoins.map((row) => row.last_verified_at),
-  ...organizations.map((row) => row.last_verified_at),
-].filter(Boolean).sort().at(-1) || null;
+const expectedLastReviewedAt = [...stablecoins.map((row) => row.last_verified_at), ...organizations.map((row) => row.last_verified_at)].filter(Boolean).sort().at(-1) || null;
 
-for (const file of ['version.json', 'data/manifest.json', 'llms.txt', 'ai.txt']) {
-  assert(fs.existsSync(path.join(distDir, file)), `Missing dist/${file}`);
-}
+for (const file of ['version.json', 'data/manifest.json', 'llms.txt', 'ai.txt']) assert(fs.existsSync(path.join(distDir, file)), `Missing dist/${file}`);
 const version = JSON.parse(fs.readFileSync(path.join(distDir, 'version.json'), 'utf8'));
 const manifest = JSON.parse(fs.readFileSync(path.join(distDir, 'data/manifest.json'), 'utf8'));
 const llmsText = fs.readFileSync(path.join(distDir, 'llms.txt'), 'utf8');
@@ -149,11 +161,7 @@ assert(isDeepStrictEqual(version.data?.record_count_breakdown, expectedBreakdown
 assert(version.data?.records_last_reviewed_at === expectedLastReviewedAt, 'records_last_reviewed_at mismatch');
 
 const expectedBuildCommit = process.env.SOG_BUILD_COMMIT || checkedOutCommit() || process.env.GITHUB_SHA;
-const expectedBuildBranch = process.env.SOG_BUILD_BRANCH
-  || process.env.CF_PAGES_BRANCH
-  || process.env.VERCEL_GIT_COMMIT_REF
-  || process.env.GITHUB_HEAD_REF
-  || process.env.GITHUB_REF_NAME;
+const expectedBuildBranch = process.env.SOG_BUILD_BRANCH || process.env.CF_PAGES_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME;
 if (expectedBuildCommit) assert(version.build.commit === expectedBuildCommit, `build commit ${version.build.commit} does not match expected ${expectedBuildCommit}`);
 if (expectedBuildBranch) assert(version.build.branch === expectedBuildBranch, `build branch ${version.build.branch} does not match expected ${expectedBuildBranch}`);
 

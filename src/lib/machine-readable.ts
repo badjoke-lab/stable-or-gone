@@ -17,6 +17,7 @@ import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
 import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
 import { resolveOrganizationTaxonomy } from '../utils/organizationTaxonomy';
+import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
 export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
@@ -130,6 +131,7 @@ export function getRecordCountBreakdown() {
   const backingModels = stablecoins.map((coin) => resolveBackingModel(coin));
   const eventTaxonomies = events.map((event) => resolveEventTaxonomy(event));
   const organizationTaxonomies = organizations.map((organization) => resolveOrganizationTaxonomy(organization));
+  const evidenceTaxonomies = evidence.map((item) => resolveEvidenceTaxonomy(item));
 
   return {
     stablecoins: stablecoins.length,
@@ -161,8 +163,15 @@ export function getRecordCountBreakdown() {
     event_detail_kind: countValues(eventTaxonomies.map((event) => event.detail_kind)),
     event_status_effect_category: countValues(eventTaxonomies.map((event) => event.status_effect_category)),
     event_recovery_category: countValues(eventTaxonomies.map((event) => event.recovery_category)),
-    evidence_reliability: countValues(evidence.map((item) => item.reliability)),
-    evidence_source_type: countValues(evidence.map((item) => item.source_type)),
+    public_evidence_category: countValues(evidenceTaxonomies.map((item) => item.public_category)),
+    canonical_evidence_source_type: countValues(evidenceTaxonomies.map((item) => item.canonical_source_type)),
+    evidence_source_provenance: countValues(evidenceTaxonomies.map((item) => item.provenance)),
+    evidence_primary_state: countValues(evidenceTaxonomies.map((item) => item.primary_state)),
+    evidence_reliability: countValues(evidenceTaxonomies.map((item) => item.reliability)),
+    canonical_evidence_reliability_raw: countValues(evidenceTaxonomies.map((item) => item.canonical_reliability_raw)),
+    evidence_archive_state: countValues(evidenceTaxonomies.map((item) => item.archive_state)),
+    evidence_relation_kind: countValues(evidenceTaxonomies.map((item) => item.relation_kind)),
+    evidence_claim_scope_non_exclusive: countMultiValues(evidenceRelations.map((item) => item.claim_scopes)),
     reserve_report_type: countValues(reserveReports.map((report) => report.report_type)),
     known_unknown_severity: countValues(knownUnknowns.map((item) => item.severity)),
     deployment_status: countValues(deployments.map((deployment) => deployment.status)),
