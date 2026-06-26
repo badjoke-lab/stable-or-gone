@@ -145,9 +145,13 @@ th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spa
   .nav { justify-content: flex-start; }
   .stats { grid-template-columns: 1fr 1fr; }
   .section-grid { grid-template-columns: 1fr; }
-  .registry { overflow-x: auto; }
-  table { font-size: 12px; min-width: 760px; }
-  th:nth-child(5), td:nth-child(5) { display: none; }
+  .registry {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-gutter: stable;
+    -webkit-overflow-scrolling: touch;
+  }
+  table[data-mobile-table="scroll-preserve"] { font-size: 12px; min-width: 760px; }
   .support-callout { align-items: flex-start; }
 }
 
