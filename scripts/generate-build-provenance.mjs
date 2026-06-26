@@ -11,6 +11,17 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
 }
 
+function readRows(relativePath) {
+  const value = readJson(relativePath);
+  if (Array.isArray(value)) return value;
+  if (Array.isArray(value.records)) return value.records;
+  throw new Error(`${relativePath}: expected an array or { records: [] }`);
+}
+
+function countRows(files = []) {
+  return files.reduce((total, relativePath) => total + readRows(relativePath).length, 0);
+}
+
 function resolveCommit() {
   const explicit = process.env.SOG_BUILD_COMMIT?.trim();
   if (explicit) return explicit;
@@ -81,11 +92,17 @@ for (const relativePath of canonicalFiles) {
   hash.update('\0');
 }
 
-const counts = generatedStats.registry;
+const counts = {
+  ...generatedStats.registry,
+  evidence_relations: countRows(registryV2.data_groups.evidence_relations)
+};
 for (const [key, expected] of Object.entries(qualityBaseline.expected_counts)) {
   if (counts[key] !== expected) {
     throw new Error(`Generated registry count differs from Registry v3 baseline for ${key}: ${counts[key]} !== ${expected}`);
   }
+}
+if (counts.evidence_relations !== counts.evidence) {
+  throw new Error(`Evidence relation projection count differs from evidence count: ${counts.evidence_relations} !== ${counts.evidence}`);
 }
 
 const routeCounts = {
