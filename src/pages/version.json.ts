@@ -10,7 +10,7 @@ import {
 } from '../lib/machine-readable';
 
 export function GET() {
-  const generatedAt = new Date().toISOString();
+  const build = getBuildMetadata();
   const version = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
@@ -20,10 +20,10 @@ export function GET() {
     canonical_origin: PROJECT.canonicalOrigin,
     release_channel: PROJECT.releaseChannel,
     design_generation: PROJECT.designGeneration,
-    build: getBuildMetadata(generatedAt),
+    build,
     data: {
       data_schema_version: DATA_SCHEMA_VERSION,
-      generated_at: generatedAt,
+      generated_at: build.generated_at,
       records_last_reviewed_at: getRecordsLastReviewedAt(),
       record_counts: getRecordCounts(),
       record_count_breakdown: getRecordCountBreakdown(),
