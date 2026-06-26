@@ -73,7 +73,6 @@ const expectedBreakdown = {
   regulatory_notes: regulatoryNotes.length,
   deployments: deployments.length,
   registry_updates: registryUpdates.length,
-  status: countValues(stablecoins.map((row) => row.status)),
   lifecycle_status: countValues(stablecoins.map((row) => row.lifecycle_status)),
   issuance_status: countValues(stablecoins.map((row) => row.issuance_status)),
   asset_class: countValues(stablecoins.map((row) => row.asset_class)),

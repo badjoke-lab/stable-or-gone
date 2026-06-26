@@ -34,9 +34,10 @@ Repair PR 1 baseline: PR #168 merged
 Repair PR 2 provenance: PR #169 merged
 Repair PR 3 output parity: PR #170 merged
 Repair PR 4 mobile preservation: PR #171 merged
+Taxonomy PR 5 public-value registry: PR #172 merged
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed repair item after this PR merges: PR 5 — public-value registry and legacy mapping
-Next approved work item: PR 6 — lifecycle and issuance normalization
+Latest completed repair item after this PR merges: PR 6 — lifecycle and issuance normalization
+Next approved work item: PR 7 — reference-target and peg normalization
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -71,8 +72,7 @@ docs/migration/registry-v3-baseline.json
 
 ## Gate A — documentation reset
 
-Status: **PASS**
-
+Status: **PASS**  
 Completed by PR #167.
 
 ## Gate B — production-integrity repair
@@ -86,21 +86,6 @@ Completed work:
 - [x] PR 3 — exact route, sitemap, canonical, JSON-LD, and output parity, PR #170;
 - [x] PR 4 — mobile information preservation, PR #171.
 
-Controls established:
-
-```text
-docs/ui-redesign/repair-baseline.json
-docs/audits/ui-repair-baseline-2026-06-26.md
-data/generated/build-provenance.json
-scripts/validate-ui-repair-baseline.mjs
-scripts/generate-build-provenance.mjs
-scripts/verify-build-provenance.mjs
-scripts/verify-full-output-parity.mjs
-scripts/check-production-provenance.mjs
-scripts/check-production-output-parity.mjs
-scripts/validate-mobile-information-preservation.mjs
-```
-
 Gate B guarantees:
 
 - one source commit, build timestamp, and canonical SHA-256 data hash per generated site;
@@ -108,15 +93,18 @@ Gate B guarantees:
 - rejection of missing or stale extra routes;
 - preservation of material table fields on narrow screens;
 - prohibition of generic numbered-column hiding;
-- explicit identities and temporary `scroll-preserve` behavior for 22 core registry tables.
+- explicit identities and temporary `scroll-preserve` behavior for core registry tables.
 
 ## Gate C — taxonomy and data semantics
 
 Status: **in progress**
 
-### PR 5 public-value registry
+### PR 5 — public-value registry
 
-After PR 5 merges, the approved mapping layer is:
+Status: **PASS**  
+Merged as PR #172.
+
+Authoritative mapping layer:
 
 ```text
 config/public-taxonomy.mjs
@@ -129,7 +117,7 @@ data/generated/public-taxonomy-registry.json
 data/generated/public-taxonomy-validation.json
 ```
 
-Current validation baseline:
+Validation baseline:
 
 ```text
 Managed axes:       26
@@ -139,12 +127,67 @@ Descriptive axes:    3
 Observed unmapped managed values: 0
 ```
 
-The registry separates canonical values, public categories, public labels, legacy handling, sort order, and filter eligibility. Record-specific claim scopes, known-unknown topics, and reserve-disclosure summaries are explicitly non-filterable.
+### PR 6 — lifecycle and issuance normalization
+
+Status after this PR merges: **PASS**
+
+Authoritative compatibility and validation files:
+
+```text
+config/lifecycle-issuance-compatibility.mjs
+src/utils/publicTaxonomy.ts
+scripts/collect-lifecycle-issuance-migration.mjs
+scripts/validate-lifecycle-issuance-normalization.mjs
+docs/audits/lifecycle-issuance-normalization-2026-06-26.md
+data/generated/lifecycle-issuance-migration.json
+data/generated/lifecycle-issuance-validation.json
+```
+
+Canonical lifecycle counts:
+
+```text
+active:        69
+restricted:     8
+winding_down:   3
+inactive:       1
+terminated:     2
+collapsed:      6
+migrated:       2
+rebranded:      1
+```
+
+Canonical issuance counts:
+
+```text
+open:             1
+protocol_based:  29
+restricted:      45
+terminated:      15
+unknown:           2
+```
+
+Public presentation now separates lifecycle from issuance on the home page, stablecoin index, stablecoin detail pages, organization relationship tables, machine-readable breakdowns, and statistics.
+
+The six legacy `discontinued` records are resolved individually:
+
+```text
+BUSD          -> winding_down / terminated
+EURT          -> terminated / terminated
+FEI           -> terminated / terminated
+GYEN          -> winding_down / terminated
+HUSD          -> inactive / terminated
+Mountain USDM -> winding_down / terminated
+```
+
+Legacy status remains only as compatibility diagnostics under:
+
+```text
+composition.legacy_status_compatibility
+```
 
 ### Remaining Gate C sequence
 
 ```text
-PR 6   lifecycle and issuance normalization
 PR 7   reference-target and peg normalization
 PR 8   backing and stabilization normalization
 PR 9   event category and subtype normalization
@@ -160,13 +203,13 @@ PR 16  move record-specific public copy and complete the 92-record migration
 ## Immediate next work
 
 ```text
-1. Merge PR 5 only after every workflow passes.
-2. Start PR 6 from the resulting latest main.
-3. Produce a per-record lifecycle and issuance migration table for all 92 assets.
-4. Resolve legacy discontinued values per record rather than by a global string replacement.
-5. Keep lifecycle, issuance, event effect, and market history as separate axes.
-6. Update filters and chips only from approved taxonomy mappings.
-7. Record before-and-after counts and compatibility aliases.
+1. Merge PR 6 only after every workflow passes.
+2. Start PR 7 from the resulting latest main.
+3. Separate public reference categories from internal peg identifiers.
+4. Preserve exact reference methodology in record detail while using approved public labels and categories in filters.
+5. Remove AMPL_CPI_ADJUSTED_TARGET, RAI_REDEMPTION_PRICE, and USD_WITH_TRUFLATION_LINKED_REBASE from raw public filter values.
+6. Keep market price, reference target, redemption value, and recovery history as separate concepts.
+7. Record all 92 reference mappings and reject unmapped values.
 8. Do not deploy production.
 9. Do not select Batch 18.
 ```

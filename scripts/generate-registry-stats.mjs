@@ -78,7 +78,7 @@ export function buildRegistryStats() {
   const stablecoinIds = new Set(stablecoins.map((row) => row.id));
   const lifecycleCounts = countBy(classifications, (row) => row.lifecycle_status);
   const activeStatuses = new Set(['active', 'restricted']);
-  const failedStatuses = new Set(['collapsed', 'failed']);
+  const failedStatuses = new Set(['collapsed']);
   const activeSide = classifications.filter((row) => activeStatuses.has(row.lifecycle_status)).length;
   const strictFailed = classifications.filter((row) => failedStatuses.has(row.lifecycle_status)).length;
   const historicalSide = classifications.length - activeSide;
@@ -135,11 +135,11 @@ export function buildRegistryStats() {
       strict_failed: {
         count: strictFailed,
         share: share(strictFailed, classifications.length),
-        statuses: ['collapsed', 'failed']
+        statuses: ['collapsed']
       }
     },
     composition: {
-      entity_statuses: countBy(stablecoins, (row) => row.status),
+      legacy_status_compatibility: countBy(stablecoins, (row) => row.status),
       issuance_statuses: countBy(classifications, (row) => row.issuance_status),
       reference_kinds: countBy(classifications, (row) => row.peg_reference?.kind),
       reference_assets: countBy(classifications, (row) => row.peg_reference?.asset),

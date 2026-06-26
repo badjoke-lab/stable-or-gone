@@ -129,7 +129,6 @@ export function getRecordCountBreakdown() {
     regulatory_notes: regulatoryNotes.length,
     deployments: deployments.length,
     registry_updates: registryUpdates.length,
-    status: countValues(stablecoins.map((coin) => coin.status)),
     lifecycle_status: countValues(stablecoins.map((coin) => coin.lifecycle_status)),
     issuance_status: countValues(stablecoins.map((coin) => coin.issuance_status)),
     asset_class: countValues(stablecoins.map((coin) => coin.asset_class)),
