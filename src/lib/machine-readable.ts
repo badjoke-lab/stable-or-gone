@@ -14,6 +14,7 @@ import {
 } from './data/registry';
 import { getDeploymentsV3 } from './data/registryV3';
 import { getPublicValueStateBreakdown } from './value-state-breakdown';
+import { getPrimaryDisplayRelationshipBreakdown } from './primary-display-breakdown';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
 import { resolveBackingModel } from '../utils/backingModel';
 import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
@@ -161,6 +162,7 @@ export function getRecordCountBreakdown() {
     organization_jurisdiction_scope: countValues(organizationTaxonomies.map((organization) => organization.jurisdiction_scope)),
     functional_role: countValues(relationships.map((relationship) => relationship.role)),
     relationship_status: countValues(relationships.map((relationship) => relationship.status)),
+    ...getPrimaryDisplayRelationshipBreakdown(),
     public_event_category: countValues(eventTaxonomies.map((event) => event.public_category)),
     canonical_event_subtype: countValues(eventTaxonomies.map((event) => event.canonical_subtype)),
     event_detail_kind: countValues(eventTaxonomies.map((event) => event.detail_kind)),

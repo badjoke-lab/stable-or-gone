@@ -43,8 +43,8 @@ docs/migration/registry-v3-baseline.json
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed work after PR #180 merges: PR 13
-Next approved work: PR 14 — explicit primary display relationships
+Latest completed work after PR #181 merges: PR 14
+Next approved work: PR 15 — evidence-source deduplication with claim preservation
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -71,13 +71,7 @@ PR #170  route, sitemap, canonical, JSON-LD, and output parity
 PR #171  mobile information preservation
 ```
 
-Gate B guarantees:
-
-- one source commit and canonical data hash per generated site;
-- parity among canonical identities, routes, sitemap, canonical URLs, and JSON-LD;
-- rejection of stale extra routes;
-- preservation of material mobile information;
-- prohibition of generic numbered-column hiding.
+Gate B guarantees one source commit and data hash per generated site, route and sitemap parity, stale-output rejection, and preservation of material mobile information.
 
 ### Gate C — taxonomy and data semantics
 
@@ -93,6 +87,7 @@ PR #177  PR 10 organization classification normalization
 PR #178  PR 11 evidence reliability, provenance, and type separation
 PR #179  PR 12 deployment status and verification-state separation
 PR #180  PR 13 value-state semantics
+PR #181  PR 14 explicit primary display relationships
 ```
 
 ## PR 10 organization baseline
@@ -133,28 +128,6 @@ Duplicate URLs retained:             32
 Duplicate URL-title pairs retained:   7
 ```
 
-Reviewed provenance:
-
-```text
-Subject-controlled source:                  363
-Technical primary source:                    31
-Independent third-party source:              20
-Governance primary source:                   14
-Assurance or financial-report source:        13
-Archive capture:                              5
-Government, regulator, or legal source:       5
-Data or market aggregator:                    4
-Unknown:                                      0
-```
-
-Reviewed primary state:
-
-```text
-Primary:   431
-Secondary:  24
-Unknown:     0
-```
-
 Reviewed public reliability:
 
 ```text
@@ -164,27 +137,13 @@ Low:       0
 Unknown:  36
 ```
 
-The 36 `Unknown` records contain provenance/type-like raw values such as `primary`, `explorer`, repository labels, and interface labels. They are not promoted to reliability grades.
+The 36 unknown reliability values are retained rather than promoted from provenance or type-like raw values. Duplicate evidence remains reserved for PR 15.
 
-Archive state:
-
-```text
-Archive index or wildcard: 282
-No archive recorded:       173
-```
-
-Authoritative files:
+Authoritative audit:
 
 ```text
-config/evidence-taxonomy.mjs
-config/evidence-relation-kinds.mjs
-src/utils/evidenceTaxonomy.ts
-scripts/collect-evidence-taxonomy-migration.mjs
-scripts/validate-evidence-taxonomy-normalization.mjs
 docs/audits/evidence-taxonomy-normalization-2026-06-26.md
 ```
-
-Duplicate evidence is not merged in PR 11. Deduplication remains reserved for PR 15, where all subject and claim relations must be preserved.
 
 ## PR 12 deployment baseline
 
@@ -227,35 +186,11 @@ Unknown or unresolved:                           1
 Explicitly verified:                             0
 ```
 
-Contract identity state:
+Authoritative audit:
 
 ```text
-Identifier not recorded:                  69
-Identifier recorded:                      45
-Source review needed:                     15
-Not applicable or review unresolved:       1
-```
-
-Network record state:
-
-```text
-Specific network recorded:        124
-Aggregate or multi-chain context:    4
-Network source review needed:        2
-```
-
-Authoritative files:
-
-```text
-config/deployment-taxonomy.mjs
-src/utils/deploymentTaxonomy.ts
-src/components/DeploymentTable.astro
-scripts/collect-deployment-taxonomy-migration.mjs
-scripts/validate-deployment-taxonomy-normalization.mjs
 docs/audits/deployment-taxonomy-normalization-2026-06-26.md
 ```
-
-PR 12 does not infer canonicality from popularity, verification from identifier syntax, active state from explorer availability, or implementation from a proposal.
 
 ## PR 13 value-state baseline
 
@@ -285,63 +220,90 @@ Narrative-text findings:       39
 Excluded reference scalars:   435
 ```
 
-Direct-value signals:
+PR 13 preserves canonical raw values, exposes explicit public states, and keeps known-unknown records distinct from accidental blanks.
+
+Authoritative audit:
 
 ```text
-Null value:                 999
-Work-queue placeholder:     111
-Explicit unknown:            64
-Not-applicable marker:       46
-Approximate marker:           4
-Not-recorded marker:          2
-Mixed placeholder:            1
+docs/audits/value-state-normalization-2026-06-27.md
 ```
 
-PR 13 preserves canonical raw values. It adds an explicit public presentation layer, protects major asset/organization/event/evidence/deployment surfaces, exposes canonical-only machine-readable value-state breakdowns, and keeps known-unknown records distinct from accidental blanks.
+## PR 14 primary display relationship baseline
+
+Status after PR #181 merges: **PASS**
+
+```text
+Stable assets:                         92
+Organization relationships:          101
+Primary display selections:            92
+Deterministic selections:              92
+Explicit overrides required:            0
+Ambiguous selections:                   0
+Invalid selections:                     0
+Assets with multiple relationships:     8
+Assets with multiple organizations:     8
+Historical end dates not recorded:      7
+```
+
+Selected roles:
+
+```text
+Protocol operator: 52
+Legal issuer:      37
+Brand owner:        2
+Reserve manager:    1
+```
+
+Selected relationship states:
+
+```text
+Active:  77
+Ended:   13
+Unknown:  2
+```
+
+PR 14 removes relationship-array-order selection. Every asset is tested against canonical, reversed, and rotated relationship order. Search and organization filters continue to cover every relationship, while compact summaries use one reviewed primary display relationship.
 
 Authoritative files:
 
 ```text
-config/value-states.mjs
-src/utils/valueState.ts
-src/components/ValueStateText.astro
-src/components/ValueStateMethodology.astro
-scripts/collect-value-state-migration.mjs
-scripts/validate-value-state-normalization.mjs
-scripts/validate-value-state-public-surfaces.mjs
-docs/audits/value-state-normalization-2026-06-27.md
+config/primary-display-relationships.mjs
+src/utils/primaryDisplayRelationship.ts
+scripts/collect-primary-display-relationships.mjs
+scripts/validate-primary-display-relationships.mjs
+scripts/validate-primary-display-public-surfaces.mjs
+docs/audits/primary-display-relationships-2026-06-27.md
 ```
 
 ## Remaining Gate C sequence
 
 ```text
-PR 14  explicit primary display relationships
 PR 15  evidence-source deduplication with claim preservation
 PR 16  move record-specific public copy and complete the 92-record migration
 ```
 
-## Immediate next work — PR 14
+## Immediate next work — PR 15
 
-1. Audit all 101 organization relationships and every public surface that currently selects a primary organization.
-2. Stop using relationship array order as a public priority rule.
-3. Define an explicit primary-display relationship field or an approved deterministic priority model.
-4. Preserve all additional current and historical roles.
-5. Separate display priority from legal responsibility, operational control, and historical relationship status.
-6. Reject zero or multiple unintended primary relationships where one primary is required.
-7. Update stablecoin indexes, details, organization pages, machine-readable output, statistics, mobile checks, and validators.
-8. Do not deduplicate evidence.
-9. Do not perform PR 16 record-specific copy migration.
-10. Do not change canonical record counts except an explicitly audited relationship-metadata migration.
-11. Do not deploy production.
-12. Do not select Batch 18.
+1. Audit all 455 evidence identities and all projected evidence relations.
+2. Start from the 32 duplicate URLs and 7 duplicate URL-title pairs already identified.
+3. Distinguish true duplicate source identities from different archive captures, editions, pages, or claim contexts.
+4. Preserve every stablecoin, organization, event, and claim-scope relation before merging source identities.
+5. Prevent duplicate public source rows while allowing one source to support multiple claims and subjects.
+6. Preserve canonical counts unless an audited evidence-identity migration explicitly changes them.
+7. Update evidence pages, machine-readable output, Registry statistics, mobile checks, and validators.
+8. Do not perform PR 16 record-specific copy migration.
+9. Do not select Batch 18.
+10. Do not deploy production.
 
 ## Preserved quality queues
 
 ```text
 Missing canonical launch dates:          20
 Historical terminal dates unresolved:     4
+Historical relationship end dates:        7
 Reserve applicability queue:              12
 Evidence duplicate URLs for PR 15:        32
+Evidence duplicate URL-title pairs:        7
 Evidence polluted reliability values:     36
 Direct workflow placeholders retained:   112
 Deployment canonicality not recorded:     67

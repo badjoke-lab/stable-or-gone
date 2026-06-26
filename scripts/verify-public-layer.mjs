@@ -29,6 +29,7 @@ import {
   getPublicDeploymentCategory
 } from '../config/deployment-taxonomy.mjs';
 import { publicValueStateValues, resolvePublicValueState } from '../config/value-states.mjs';
+import { buildPrimaryDisplayRelationshipStats } from './build-primary-display-relationship-stats.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -142,6 +143,7 @@ const deploymentCanonicalityRecordStates = deployments.map((row) => getDeploymen
 const deploymentVerificationStates = deployments.map((row) => getDeploymentVerificationState(row));
 const deploymentContractIdentityStates = deployments.map((row) => getContractIdentityState(row.contract_address));
 const deploymentNetworkIdentityStates = deployments.map((row) => getNetworkIdentityState(row.chain));
+const primaryDisplayStats = buildPrimaryDisplayRelationshipStats(root);
 
 const expectedCounts = { primary_records: stablecoins.length, events: events.length, evidence: evidence.length };
 const expectedBreakdown = {
@@ -169,6 +171,16 @@ const expectedBreakdown = {
   organization_jurisdiction_scope: countValues(organizationJurisdictionScopes),
   functional_role: countValues(relationships.map((row) => row.role)),
   relationship_status: countValues(relationships.map((row) => row.status)),
+  primary_display_relationships: primaryDisplayStats.selected_relationships,
+  primary_display_explicit_overrides: primaryDisplayStats.explicit_overrides,
+  primary_display_ambiguities: primaryDisplayStats.ambiguous_selections,
+  stablecoins_with_multiple_relationships: primaryDisplayStats.stablecoins_with_multiple_relationships,
+  stablecoins_with_multiple_organizations: primaryDisplayStats.stablecoins_with_multiple_organizations,
+  stablecoins_with_historical_relationships: primaryDisplayStats.stablecoins_with_historical_relationships,
+  primary_display_selection_mode: primaryDisplayStats.selection_mode,
+  primary_display_role: primaryDisplayStats.selected_role,
+  primary_display_relationship_status: primaryDisplayStats.selected_status,
+  primary_display_organization_category: primaryDisplayStats.selected_organization_category,
   public_event_category: countValues(publicEventCategories),
   canonical_event_subtype: countValues(events.map((row) => row.event_type)),
   event_detail_kind: countValues(events.map((row) => row.event_detail_kind)),

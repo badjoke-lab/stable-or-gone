@@ -3,6 +3,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
 import { buildValueStateStats } from './build-value-state-stats.mjs';
+import { buildPrimaryDisplayRelationshipStats } from './build-primary-display-relationship-stats.mjs';
 
 const root = process.cwd();
 const contractPath = 'docs/stats/registry-stats-contract.json';
@@ -20,6 +21,7 @@ const contract = readJson(contractPath);
 const current = readJson(outputPath);
 const expected = buildRegistryStats();
 expected.value_states = buildValueStateStats(root);
+expected.primary_display_relationships = buildPrimaryDisplayRelationshipStats(root);
 const failures = [];
 
 for (const section of contract.required_sections ?? []) {
@@ -73,6 +75,26 @@ for (const [name, counts] of Object.entries(current.value_states ?? {})) {
   if (!Number.isInteger(total) || total <= 0) failures.push(`value_states.${name} must contain positive integer counts`);
 }
 
+const primaryDisplay = current.primary_display_relationships;
+if (primaryDisplay?.selected_relationships !== current.registry?.stablecoins) {
+  failures.push('primary_display_relationships.selected_relationships must equal registry.stablecoins');
+}
+if (primaryDisplay?.ambiguous_selections !== 0) {
+  failures.push('primary_display_relationships.ambiguous_selections must be zero');
+}
+if (sumObjectValues(primaryDisplay?.selection_mode ?? {}) !== current.registry?.stablecoins) {
+  failures.push('primary display selection_mode counts must sum to registry.stablecoins');
+}
+if (sumObjectValues(primaryDisplay?.selected_role ?? {}) !== current.registry?.stablecoins) {
+  failures.push('primary display selected_role counts must sum to registry.stablecoins');
+}
+if (sumObjectValues(primaryDisplay?.selected_status ?? {}) !== current.registry?.stablecoins) {
+  failures.push('primary display selected_status counts must sum to registry.stablecoins');
+}
+if (sumObjectValues(primaryDisplay?.selected_organization_category ?? {}) !== current.registry?.stablecoins) {
+  failures.push('primary display selected_organization_category counts must sum to registry.stablecoins');
+}
+
 try {
   assert.deepStrictEqual(current, expected);
 } catch {
@@ -87,4 +109,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Registry stats validation passed: ${current.registry.stablecoins} assets, ${current.registry.events} events, ${current.registry.evidence} evidence records, ${Object.keys(current.value_states).length - 1} value-state axes.`);
+console.log(`Registry stats validation passed: ${current.registry.stablecoins} assets, ${current.registry.events} events, ${current.registry.evidence} evidence records, ${Object.keys(current.value_states).length - 1} value-state axes, and ${primaryDisplay.selected_relationships} primary display relationships.`);
