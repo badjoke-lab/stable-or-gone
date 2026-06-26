@@ -22,6 +22,7 @@ const sourceFiles = [
   'src/pages/events/index.astro',
   'src/components/StablecoinDetailView.astro',
   'src/components/IssuerControlEvents.astro',
+  'src/components/StablecoinEventTimeline.astro',
   'src/pages/issuer/[slug].astro',
   'src/pages/event/[id].astro'
 ];
@@ -92,11 +93,12 @@ const protectedFields = {
   ],
   'stablecoin-organizations': ['Relationship status'],
   'stablecoin-reserve-profile': ['Summary', 'Profile confidence'],
-  'stablecoin-event-timeline': ['Recovered'],
+  'stablecoin-event-timeline': ['Category', 'Subtype', 'Status effect', 'Recovery'],
   'stablecoin-reserve-history': ['Record confidence'],
   'stablecoin-regulatory-notices': ['Summary'],
   'stablecoin-deployments': ['Freeze', 'Blacklist', 'Contract'],
   'organization-relationships': ['Relationship status', 'Lifecycle status'],
+  'organization-events': ['Category', 'Subtype', 'Status effect'],
   'event-details': [
     'Public event category',
     'Canonical event subtype',
