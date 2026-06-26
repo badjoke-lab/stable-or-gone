@@ -52,6 +52,33 @@ export const publicValueStates = [
 export const publicValueStateValues = publicValueStates.map((entry) => entry.value);
 export const publicValueStateSet = new Set(publicValueStateValues);
 
+export const valueStatePolicies = {
+  default: {
+    null_state: 'not_recorded',
+    blank_state: 'not_recorded',
+    explicit_unknown_state: 'unknown_after_review',
+    work_queue_state: 'not_recorded'
+  },
+  reviewed_unknown: {
+    null_state: 'unknown_after_review',
+    blank_state: 'unknown_after_review',
+    explicit_unknown_state: 'unknown_after_review',
+    work_queue_state: 'unknown_after_review'
+  },
+  verification: {
+    null_state: 'unverified',
+    blank_state: 'unverified',
+    explicit_unknown_state: 'unverified',
+    work_queue_state: 'unverified'
+  },
+  public_disclosure: {
+    null_state: 'not_recorded',
+    blank_state: 'not_recorded',
+    explicit_unknown_state: 'unknown_after_review',
+    work_queue_state: 'not_recorded'
+  }
+};
+
 const exactSignals = new Map([
   ['unknown', 'explicit_unknown'],
   ['unknown_after_review', 'explicit_unknown'],
@@ -97,6 +124,7 @@ export function normalizeSignalText(value) {
 export function detectRawValueSignal(value) {
   if (value === null) return 'null_value';
   if (value === undefined) return 'undefined_value';
+  if (Array.isArray(value) && value.length === 0) return 'null_value';
   if (typeof value !== 'string') return null;
 
   const trimmed = value.trim();
@@ -118,4 +146,51 @@ export function getPublicValueStateDefinition(value) {
 
 export function getPublicValueStateLabel(value) {
   return getPublicValueStateDefinition(value)?.public_label ?? 'Value state not classified';
+}
+
+export function resolvePublicValueState(value, options = {}) {
+  const explicitState = options.explicit_state;
+  if (explicitState && publicValueStateSet.has(explicitState)) return explicitState;
+
+  const policy = valueStatePolicies[options.policy] ?? valueStatePolicies.default;
+  const signal = options.detect_markers === false ? null : detectRawValueSignal(value);
+
+  if (signal === 'null_value' || signal === 'undefined_value') return options.null_state ?? policy.null_state;
+  if (signal === 'blank_string') return options.blank_state ?? policy.blank_state;
+  if (signal === 'explicit_unknown') return options.explicit_unknown_state ?? policy.explicit_unknown_state;
+  if (signal === 'not_recorded_marker') return 'not_recorded';
+  if (signal === 'not_applicable_marker') return 'not_applicable';
+  if (signal === 'not_public_marker') return 'not_public';
+  if (signal === 'unverified_marker') return 'unverified';
+  if (signal === 'disputed_marker') return 'disputed';
+  if (signal === 'approximate_marker') return 'approximate';
+  if (signal === 'work_queue_placeholder' || signal === 'mixed_placeholder') return options.work_queue_state ?? policy.work_queue_state;
+  return 'known';
+}
+
+export function resolveValueStatePresentation(value, options = {}) {
+  const state = resolvePublicValueState(value, options);
+  const label = getPublicValueStateLabel(state);
+  const providedDisplay = options.display_value;
+  const displayValue = providedDisplay !== null && providedDisplay !== undefined
+    ? String(providedDisplay)
+    : Array.isArray(value)
+      ? value.map((item) => String(item)).join(', ')
+      : value === null || value === undefined
+        ? ''
+        : String(value);
+  const hasValue = state === 'known' || (state === 'approximate' && displayValue.length > 0);
+  const text = state === 'known'
+    ? displayValue
+    : state === 'approximate' && displayValue.length > 0
+      ? `${displayValue} (${label.toLowerCase()})`
+      : label;
+
+  return {
+    state,
+    label,
+    text,
+    has_value: hasValue,
+    raw_signal: options.detect_markers === false ? null : detectRawValueSignal(value)
+  };
 }
