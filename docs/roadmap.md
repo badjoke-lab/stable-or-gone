@@ -6,11 +6,12 @@ Updated: 2026-06-26
 
 This is the canonical execution and recovery schedule for SOG. Roadmap-changing pull requests must update this file.
 
-The document-authority rules are defined in `docs/spec-governance.md`.
-
-The active workstream is governed by:
+Required authority and workstream documents:
 
 ```text
+AGENTS.md
+docs/spec-governance.md
+docs/deployment-policy.md
 docs/ui-redesign/master-spec.md
 docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
@@ -21,58 +22,23 @@ docs/public-taxonomy-spec.md
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged growth PR: #164 — Promote Batch 17 stable assets
-Growth merge commit: be058152fe6f9c8b18357a36015a6b49c249624b
-Latest merged quality PR: #165 — Align event source counts
-Quality merge commit: db625e2f2b2268e3b5c2d8afadbe0f67452f7c63
-Documentation reset PR: #167 — merged
-Documentation reset merge commit: 94db111dc48e7dfb30576cda52d60e5494565ec0
 Canonical stable assets: 92
-Candidate total: 92
-Promoted candidates: 92
-Pending candidates: 0
-Integrity audit: 0 critical findings / 0 warnings
+Organizations: 86
+Relationships: 101
+Events: 150
+Evidence: 455
+Known unknowns: 253
+Deployments: 130
+Documentation reset: PR #167 merged
+Repair PR 1 baseline: PR #168 merged
 Current phase: Phase 1 — emergency production-integrity repair
-Latest completed repair item after this PR merges: PR 1 — repair baseline and defect inventory
-Next approved work item: PR 2 — add build provenance
+Latest completed repair item after this PR merges: PR 2 — build provenance
+Next approved work item: PR 3 — full-route and output parity enforcement
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
 
-## Why the roadmap changed
-
-The 92-record checkpoint exposed defects that cannot be solved by a cosmetic redesign alone.
-
-Confirmed repair areas include:
-
-- public pages generated from inconsistent production snapshots;
-- legacy and canonical lifecycle labels used inconsistently;
-- arbitrary free-text values used as filter taxonomies;
-- internal peg, deployment, and review values exposed publicly;
-- event-category proliferation;
-- evidence reliability mixed with source provenance;
-- primary organization inferred from relationship array order;
-- duplicate evidence presentation;
-- internal implementation terminology in public records;
-- generic mobile CSS hiding unrelated material fields by column number;
-- long detail pages without an adequate information hierarchy;
-- record-specific copy hard-coded in components.
-
-The previous immediate sequence of publication, quality audits, and Batch 18 selection is superseded by the repair program below.
-
-## Repair baseline
-
-The fixed starting point for the repair program is:
-
-```text
-docs/ui-redesign/repair-baseline.json
-docs/audits/ui-repair-baseline-2026-06-26.md
-scripts/validate-ui-repair-baseline.mjs
-```
-
-The baseline records canonical counts, generated route and sitemap expectations, the public split-generation snapshot observed on 2026-06-26, sixteen confirmed defect IDs, and twenty representative records.
-
-## Canonical registry
+## Canonical registry checkpoint
 
 ```text
 Stable assets:               92
@@ -81,7 +47,7 @@ Relationships:              101
 Classifications:             92
 Reserve/redemption profiles: 92
 Events:                     150
-Event v2 details:           150
+Event details:              150
 Evidence:                   455
 Evidence relations:         455
 Reserve reports/context:    100
@@ -94,80 +60,80 @@ Reserve components:         125
 Income profiles:             92
 ```
 
-Source of truth:
+Canonical count source:
 
 ```text
 docs/migration/registry-v3-baseline.json
 ```
 
-## Quality baseline
+## Repair baseline
+
+The fixed starting point is:
 
 ```text
-Critical findings:                         0
-Blocking warnings:                         0
-Integrity audit warnings:                  0
-Required-layer coverage:               92 / 92
-Event coverage:                         92 / 92
-Deployment coverage:                    92 / 92
-Missing canonical launch dates:             20
-Historical records missing terminal date:    4
-Reserve applicability queue:                 12
-  not applicable by design:                  10
-  source status unresolved:                   2
-  report expected but missing:                0
+docs/ui-redesign/repair-baseline.json
+docs/audits/ui-repair-baseline-2026-06-26.md
+scripts/validate-ui-repair-baseline.mjs
 ```
 
-These canonical-data checks remain valid but do not replace the public-layer, taxonomy, responsive, and production-parity repair gates.
+It records:
 
-## Remaining research queues
+- canonical counts and coverage;
+- 328 expected detail routes;
+- 328 expected detail sitemap URLs;
+- the public split-generation state observed on 2026-06-26;
+- sixteen confirmed defects;
+- twenty representative records.
 
-### Launch dates
+## Build provenance
+
+After PR 2 merges, every full build generates one provenance record containing:
 
 ```text
-Total unresolved: 20
-Category B:         3
-Category C:        13
-Category D:         4
+source commit
+source branch
+build timestamp
+canonical data SHA-256 hash
+canonical file count
+canonical record-group counts
+generated detail-route counts
 ```
 
-Category B:
+The same record is embedded in:
 
 ```text
-BRZ
-Berachain HONEY
-Anzen USDz
+/version.json
+/data/manifest.json
+GitHub build summary
+local post-build verification
+production verification
 ```
 
-Batch 17 additions:
+Relevant files:
 
 ```text
-USDH — Category C, launch-boundary conflict
-AE Coin — Category D, primary launch source not recovered
+data/generated/build-provenance.json
+scripts/generate-build-provenance.mjs
+scripts/verify-build-provenance.mjs
+scripts/check-production-provenance.mjs
 ```
 
-### Reserve sources
+## Quality queues preserved during repair
 
 ```text
-HUSD
-EURT
+Missing canonical launch dates:          20
+Historical terminal dates unresolved:     4
+Reserve applicability queue:              12
+  not applicable by design:               10
+  source status unresolved:                2
+  report expected but missing:             0
 ```
 
-### Terminal dates
-
-```text
-Basis Cash
-Dynamic Set Dollar
-Empty Set Dollar
-GYEN
-```
-
-These queues remain preserved but are not the next work item.
+These queues remain canonical but are not the current work item.
 
 ## Binding repair sequence
 
-The detailed PR-by-PR plan is `docs/ui-redesign/implementation-plan.md`.
-
-Summary:
+Detailed sequence: `docs/ui-redesign/implementation-plan.md`
 
 ```text
 Phase 0  Documentation reset
@@ -193,12 +159,23 @@ Gate A completed through PR #167.
 
 Gate B requires:
 
-- PR 1 — repair baseline and defect inventory;
-- PR 2 — build provenance;
-- PR 3 — full-route and output parity enforcement;
-- PR 4 — removal of destructive mobile column suppression.
+- [x] PR 1 — repair baseline and defect inventory;
+- [x] PR 2 — build provenance, after this PR merges;
+- [ ] PR 3 — full-route and output parity enforcement;
+- [ ] PR 4 — removal of destructive mobile column suppression.
 
-No taxonomy migration, final UI mock, production UI implementation, Batch 18 selection, or routine publication begins before Gate B passes.
+No taxonomy migration, final UI mock, production UI implementation, Batch 18 selection, statistics expansion, or routine publication begins before Gate B passes.
+
+## Immediate next work
+
+```text
+1. Merge PR 2 only after every workflow passes.
+2. Start PR 3 from the resulting latest main.
+3. Enforce list counts, detail-route counts, sitemap coverage, JSON-LD, canonical coverage, version/manifest parity, and stale-output rejection.
+4. Make a mixed or partial generated site fail CI.
+5. Do not deploy production for PR 2 or PR 3.
+6. Do not select Batch 18.
+```
 
 ## Phase gates
 
@@ -214,31 +191,11 @@ Gate H  100-record release candidate verified
 Gate I  deliberate production publication and parity verification complete
 ```
 
-## Immediate next work
+## Growth policy
 
-```text
-1. Merge PR 1 after all CI workflows pass.
-2. Start PR 2 from the resulting latest main.
-3. Generate source commit, build timestamp, canonical data hash, canonical counts, and generated route counts at build time.
-4. Expose the same provenance through version.json and build verification.
-5. Do not select Batch 18.
-6. Do not produce final UI mocks before PRs 17–21 define information and responsive behavior.
-7. Do not begin production UI implementation before Gate D.
-```
+Routine growth is paused at 92 assets. The final eight records may be promoted only after production integrity, taxonomy migration, information architecture, UI implementation, hardening, and the complete 92-record audit.
 
-## Growth policy during repair
-
-Routine growth is paused at 92 canonical assets.
-
-The final eight records are promoted only after:
-
-- production integrity repair;
-- public-taxonomy migration;
-- information-architecture approval;
-- UI implementation and hardening;
-- a full 92-record audit.
-
-The final eight records must follow the normal candidate, evidence, full-layer, validation, and bounded-batch rules. The count target does not justify thin or incomplete records.
+The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, or reduced evidence requirements.
 
 ## Publication policy during repair
 
@@ -262,10 +219,10 @@ The canonical deployment rules remain in `docs/deployment-policy.md`.
 The repair program is complete only when:
 
 - 100 canonical stable assets are present;
-- the repaired public taxonomy is used consistently;
-- all current asset, organization, and event routes pass the new audit;
+- public taxonomy is consistent;
+- every asset, organization, and event route passes the repaired audit;
 - no material mobile information is silently suppressed;
 - evidence and known unknowns remain visible and connected;
-- production is generated from one verified source commit and data snapshot;
+- production identifies one source commit and one canonical data hash;
 - HTML, sitemap, metadata, machine-readable files, and canonical counts agree;
 - the production publication report is recorded.

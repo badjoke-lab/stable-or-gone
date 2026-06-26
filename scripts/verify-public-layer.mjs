@@ -106,13 +106,18 @@ assert(version.registry_family === 'badjoke-lab-ledger-series', 'version registr
 assert(version.registry_type === 'stablecoin_issuer_registry', 'version type mismatch');
 assert(version.canonical_origin === 'https://sog.badjoke-lab.com', 'version canonical origin mismatch');
 assert(version.build?.verification_marker === 'sog_machine_readable_layer_v1', 'verification marker mismatch');
+assert(version.build?.provenance_verification_marker === 'sog_build_provenance_v1', 'build provenance marker mismatch');
 assert(version.data?.data_schema_version === 'sog_registry_v2', 'data schema mismatch');
 assert(isDeepStrictEqual(version.data?.record_counts, expectedCounts), 'version record counts do not match canonical data');
 assert(isDeepStrictEqual(version.data?.record_count_breakdown, expectedBreakdown), 'version breakdown does not match canonical data');
 assert(version.data?.records_last_reviewed_at === expectedLastReviewedAt, 'records_last_reviewed_at mismatch');
 
 const expectedBuildCommit = process.env.SOG_BUILD_COMMIT || checkedOutCommit() || process.env.GITHUB_SHA;
-const expectedBuildBranch = process.env.SOG_BUILD_BRANCH || process.env.GITHUB_REF_NAME;
+const expectedBuildBranch = process.env.SOG_BUILD_BRANCH
+  || process.env.CF_PAGES_BRANCH
+  || process.env.VERCEL_GIT_COMMIT_REF
+  || process.env.GITHUB_HEAD_REF
+  || process.env.GITHUB_REF_NAME;
 if (expectedBuildCommit) assert(version.build.commit === expectedBuildCommit, `build commit ${version.build.commit} does not match expected ${expectedBuildCommit}`);
 if (expectedBuildBranch) assert(version.build.branch === expectedBuildBranch, `build branch ${version.build.branch} does not match expected ${expectedBuildBranch}`);
 
@@ -121,6 +126,7 @@ assert(manifest.project_id === version.project_id, 'manifest project mismatch');
 assert(manifest.registry_family === version.registry_family, 'manifest registry family mismatch');
 assert(manifest.registry_type === version.registry_type, 'manifest type mismatch');
 assert(manifest.canonical_origin === version.canonical_origin, 'manifest origin mismatch');
+assert(isDeepStrictEqual(manifest.build, version.build), 'manifest build provenance differs from version');
 assert(isDeepStrictEqual(manifest.record_counts, expectedCounts), 'manifest counts do not match canonical data');
 assert(isDeepStrictEqual(manifest.record_count_breakdown, expectedBreakdown), 'manifest breakdown does not match canonical data');
 assert(manifest.data_safety?.canonical_only === true, 'canonical-only flag missing');
@@ -130,4 +136,4 @@ assert(manifest.data_safety?.includes_private_notes === false, 'private-note saf
 assert(llmsText.includes('/data/manifest.json') && llmsText.includes('/ai.txt'), 'llms.txt endpoint references missing');
 assert(aiText.includes('Version endpoint: /version.json') && aiText.includes('LLM guide: /llms.txt'), 'ai.txt endpoint references missing');
 
-console.log(JSON.stringify({ ok: true, record_counts: expectedCounts, record_count_breakdown: expectedBreakdown }, null, 2));
+console.log(JSON.stringify({ ok: true, build: version.build, record_counts: expectedCounts, record_count_breakdown: expectedBreakdown }, null, 2));
