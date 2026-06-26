@@ -45,7 +45,7 @@ const publicSummaries: Record<string, string> = {
   usds: 'A US dollar stablecoin in the Sky ecosystem, introduced alongside the transition from MakerDAO branding and products.'
 };
 
-const modelChangeTerms = new Set([
+const modelChangeTerms = new Set<string | undefined>([
   'governance_change', 'migration', 'protocol_model_update', 'protocol_transition',
   'protocol_upgrade', 'rebrand_and_classification_change', 'rebrand_or_lifecycle_transition',
   'reserve_change', 'token_migration'
