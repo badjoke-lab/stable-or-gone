@@ -1,0 +1,108 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+import { cleanPublicText } from '../utils/publicText';
+
+const { event } = Astro.props as { event: Record<string, any> };
+
+const sections = [
+  { key: 'depeg_detail', label: 'Depeg detail' },
+  { key: 'regulatory_detail', label: 'Regulatory detail' },
+  { key: 'reserve_change_detail', label: 'Reserve-change detail' },
+  { key: 'redemption_change_detail', label: 'Redemption-change detail' },
+  { key: 'migration_detail', label: 'Migration detail' },
+  { key: 'issuer_control_detail', label: 'Issuer-control detail' },
+  { key: 'security_incident_detail', label: 'Security-incident detail' },
+  { key: 'oracle_failure_detail', label: 'Oracle-failure detail' },
+  { key: 'collateral_impairment_detail', label: 'Collateral-impairment detail' },
+  { key: 'insolvency_detail', label: 'Insolvency detail' },
+  { key: 'governance_change_detail', label: 'Governance-change detail' },
+  { key: 'bridge_or_chain_incident_detail', label: 'Bridge or chain incident detail' },
+  { key: 'termination_detail', label: 'Termination detail' },
+  { key: 'launch_detail', label: 'Launch detail' }
+]
+  .map((section) => ({ ...section, value: event[section.key] }))
+  .filter((section) => section.value && typeof section.value === 'object');
+
+const fieldLabels: Record<string, string> = {
+  peg_reference: 'Peg reference',
+  direction: 'Direction',
+  extreme_price: 'Extreme price',
+  maximum_deviation_bps: 'Maximum deviation',
+  duration_minutes: 'Duration',
+  recovery_status: 'Recovery status',
+  recovery_date: 'Recovery date',
+  cause_summary: 'Cause summary',
+  price_source_ids: 'Price-source records',
+  jurisdiction: 'Jurisdiction',
+  authority: 'Authority',
+  action_type: 'Action type',
+  case_reference: 'Case reference',
+  effective_date: 'Effective date',
+  resolution_date: 'Resolution date',
+  summary: 'Summary',
+  status: 'Status',
+  event_subtype: 'Control action',
+  related_category: 'Related category',
+  deployment_id: 'Deployment record',
+  network: 'Network',
+  token_standard: 'Token standard',
+  affected_addresses: 'Affected addresses',
+  blacklist_transaction_hash: 'Blacklist transaction',
+  related_transaction_hashes: 'Related transactions',
+  reported_frozen_amount: 'Reported restricted amount',
+  related_flow: 'Related flow',
+  trigger: 'Trigger',
+  legal_basis: 'Legal basis',
+  requesting_authority: 'Requesting authority',
+  source_incident: 'Source incident',
+  status_effect: 'Status effect',
+  market_status_effect: 'Market-status effect',
+  reserve_effect: 'Reserve effect',
+  redemption_effect: 'Redemption effect',
+  depeg_effect: 'Depeg effect',
+  verification_status: 'Verification status',
+  loss_or_exposure_text: 'Loss or exposure',
+  affected_deployment_ids: 'Affected deployments',
+  related_organization_ids: 'Related organizations'
+};
+
+function labelFor(key: string) {
+  return fieldLabels[key] ?? formatPublicLabel(key);
+}
+
+function valueFor(key: string, value: unknown): string {
+  if (value === null || value === undefined || value === '') return '—';
+  if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+  if (Array.isArray(value)) return value.length > 0 ? value.map((item) => String(item)).join(', ') : '—';
+  if (typeof value === 'object') {
+    const record = value as Record<string, unknown>;
+    if (typeof record.display_text === 'string' && record.display_text.length > 0) return record.display_text;
+    const valueText = record.value !== null && record.value !== undefined ? String(record.value) : '';
+    const symbol = typeof record.symbol === 'string' ? record.symbol : '';
+    if (valueText) return `${valueText}${symbol ? ` ${symbol}` : ''}`;
+    return Object.entries(record)
+      .filter(([, item]) => item !== null && item !== undefined && item !== '')
+      .map(([nestedKey, item]) => `${labelFor(nestedKey)}: ${Array.isArray(item) ? item.join(', ') : String(item)}`)
+      .join(' · ') || '—';
+  }
+  if (key.endsWith('_summary') || key === 'summary') return cleanPublicText(String(value));
+  if (key.endsWith('_bps')) return `${value} bps`;
+  if (key.endsWith('_minutes')) return `${value} minutes`;
+  return formatPublicLabel(String(value), String(value));
+}
+---
+{sections.length > 0 && (
+  <section class="panel registry">
+    <div class="bar">Structured event detail</div>
+    <table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve">
+      <tbody>
+        {sections.flatMap((section) => Object.entries(section.value as Record<string, unknown>).map(([key, value]) => (
+          <tr>
+            <th>{section.label} — {labelFor(key)}</th>
+            <td>{valueFor(key, value)}</td>
+          </tr>
+        )))}
+      </tbody>
+    </table>
+  </section>
+)}
