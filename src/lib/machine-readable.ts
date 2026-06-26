@@ -13,6 +13,7 @@ import {
   getReserveReports,
   getStablecoins,
 } from './data/registry';
+import { resolveReferenceTarget } from '../utils/referenceTarget';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
 export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
@@ -118,6 +119,7 @@ export function getRecordCountBreakdown() {
   const regulatoryNotes = getRegulatoryNotes();
   const deployments = getDeployments();
   const registryUpdates = getRegistryUpdates();
+  const referenceTargets = stablecoins.map((coin) => resolveReferenceTarget(coin));
 
   return {
     stablecoins: stablecoins.length,
@@ -131,6 +133,8 @@ export function getRecordCountBreakdown() {
     registry_updates: registryUpdates.length,
     lifecycle_status: countValues(stablecoins.map((coin) => coin.lifecycle_status)),
     issuance_status: countValues(stablecoins.map((coin) => coin.issuance_status)),
+    reference_kind: countValues(referenceTargets.map((target) => target.reference_kind)),
+    reference_comparison_category: countValues(referenceTargets.map((target) => target.comparison_category)),
     asset_class: countValues(stablecoins.map((coin) => coin.asset_class)),
     organization_type: countValues(organizations.map((organization) => organization.organization_type || organization.issuer_type)),
     relationship_role: countValues(relationships.map((relationship) => relationship.role)),
