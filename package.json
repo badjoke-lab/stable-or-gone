@@ -65,7 +65,7 @@
     "verify:output-parity": "node scripts/verify-full-output-parity.mjs",
     "verify:consistency": "node scripts/verify-public-consistency-safe.mjs",
     "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
-    "verify:public": "node scripts/verify-public-layer-deployments.mjs",
+    "verify:public": "node scripts/verify-public-layer.mjs && node scripts/verify-public-layer-deployment-axes.mjs",
     "check:production": "node scripts/check-production.mjs && node scripts/check-production-provenance.mjs && node scripts/check-production-output-parity.mjs"
   },
   "dependencies": {
