@@ -3,6 +3,65 @@ import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { cleanPublicText } from '../utils/publicText';
 
+type CoinRecord = {
+  reserve_disclosure_status?: string | null;
+  redemption_status?: string | null;
+  who_can_redeem?: string | null;
+  retail_redemption?: string | null;
+  institutional_redemption?: string | null;
+  minimum_redemption?: string | null;
+  redemption_region_notes?: string | null;
+};
+
+type ReserveProfile = {
+  disclosure_status?: string | null;
+  backing_types?: string[] | null;
+  summary?: string | null;
+  as_of_date?: string | null;
+  confidence?: string | null;
+} | null | undefined;
+
+type RedemptionProfile = {
+  status?: string | null;
+  settlement_asset?: string | null;
+  eligible_parties?: string | null;
+  retail_access?: string | null;
+  institutional_access?: string | null;
+  minimum_amount_text?: string | null;
+  fee_text?: string | null;
+  settlement_time_text?: string | null;
+  jurisdiction_restrictions?: string[] | null;
+} | null | undefined;
+
+type BackingModel = {
+  canonical_backing_types: string[];
+};
+
+type ReserveReport = {
+  report_date?: string | null;
+  url?: string | null;
+  publisher?: string | null;
+  report_type?: string | null;
+  asset_categories?: string[] | null;
+  confidence?: string | null;
+};
+
+type RegulatoryNote = {
+  note_date?: string | null;
+  source_url: string;
+  title: string;
+  authority_or_source?: string | null;
+  note_type?: string | null;
+  summary?: string | null;
+};
+
+type OpenQuestion = {
+  topic?: string | null;
+  description?: string | null;
+  severity?: string | null;
+  last_checked_at?: string | null;
+};
+
 const {
   coin,
   reserveProfile,
@@ -11,10 +70,18 @@ const {
   reserveReports,
   regulatoryNotes,
   openQuestions
-} = Astro.props;
+} = Astro.props as {
+  coin: CoinRecord;
+  reserveProfile: ReserveProfile;
+  redemptionProfile: RedemptionProfile;
+  model: BackingModel;
+  reserveReports: ReserveReport[];
+  regulatoryNotes: RegulatoryNote[];
+  openQuestions: OpenQuestion[];
+};
 
 const disclosureStatus = reserveProfile?.disclosure_status ?? coin.reserve_disclosure_status;
-const backingTypes = reserveProfile?.backing_types?.length ? reserveProfile.backing_types : model.canonical_backing_types;
+const backingTypes: string[] = reserveProfile?.backing_types?.length ? reserveProfile.backing_types : model.canonical_backing_types;
 const reserveSummary = reserveProfile?.summary;
 const redemptionStatus = redemptionProfile?.status ?? coin.redemption_status;
 const settlementAsset = redemptionProfile?.settlement_asset;
@@ -22,7 +89,7 @@ const eligibleParties = redemptionProfile?.eligible_parties ?? coin.who_can_rede
 const retailAccess = redemptionProfile?.retail_access ?? coin.retail_redemption;
 const institutionalAccess = redemptionProfile?.institutional_access ?? coin.institutional_redemption;
 const minimumAmount = redemptionProfile?.minimum_amount_text ?? coin.minimum_redemption;
-const regionalRestrictions = redemptionProfile?.jurisdiction_restrictions?.length
+const regionalRestrictions: string[] | null = redemptionProfile?.jurisdiction_restrictions?.length
   ? redemptionProfile.jurisdiction_restrictions
   : null;
 ---
@@ -31,7 +98,7 @@ const regionalRestrictions = redemptionProfile?.jurisdiction_restrictions?.lengt
   <table data-table-kind="stablecoin-reserve-profile" data-mobile-table="scroll-preserve">
     <tbody>
       <tr><th>Disclosure status</th><td><ValueStateText value={disclosureStatus} displayValue={formatPublicLabel(disclosureStatus)} policy="public_disclosure" /></td></tr>
-      <tr><th>Backing types</th><td>{backingTypes?.length ? backingTypes.map((item, index) => <>{index > 0 ? ', ' : ''}<ValueStateText value={item} displayValue={formatPublicLabel(item)} /></>) : <ValueStateText value={null} />}</td></tr>
+      <tr><th>Backing types</th><td>{backingTypes.length ? backingTypes.map((item, index) => <>{index > 0 ? ', ' : ''}<ValueStateText value={item} displayValue={formatPublicLabel(item)} /></>) : <ValueStateText value={null} />}</td></tr>
       <tr><th>Summary</th><td><ValueStateText value={reserveSummary} displayValue={reserveSummary ? cleanPublicText(reserveSummary) : null} detectMarkers={false} /></td></tr>
       <tr><th>As of</th><td><ValueStateText value={reserveProfile?.as_of_date} /></td></tr>
       <tr><th>Profile confidence</th><td><ValueStateText value={reserveProfile?.confidence} displayValue={formatPublicLabel(reserveProfile?.confidence)} /></td></tr>
