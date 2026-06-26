@@ -135,6 +135,21 @@ check(!detailSource.includes('Registry v2 detail overlay'), 'implementation-faci
 check(detailSource.includes('Structured event detail'), 'structured event detail section is missing');
 check(detailSource.includes('Description and source record only'), 'descriptive-only detail coverage must be explicit');
 
+const stablecoinTimelineSource = readText('src/components/StablecoinEventTimeline.astro');
+check(stablecoinTimelineSource.includes('resolveEventTaxonomy'), 'stablecoin timeline must resolve normalized taxonomy');
+for (const heading of ['Category', 'Subtype', 'Status effect', 'Recovery']) {
+  check(stablecoinTimelineSource.includes(`<th>${heading}</th>`), `stablecoin timeline heading is missing: ${heading}`);
+}
+const stablecoinDetailSource = readText('src/components/StablecoinDetailView.astro');
+check(stablecoinDetailSource.includes('<StablecoinEventTimeline events={events} />'), 'stablecoin detail must use the normalized event timeline component');
+check(!stablecoinDetailSource.includes('<th>Type</th><th>Detail kind</th><th>Recovered</th>'), 'legacy stablecoin event timeline remains inline');
+
+const organizationSource = readText('src/pages/issuer/[slug].astro');
+check(organizationSource.includes('resolveEventTaxonomy'), 'organization event table must resolve normalized taxonomy');
+for (const heading of ['Category', 'Subtype', 'Status effect']) {
+  check(organizationSource.includes(`<th>${heading}</th>`), `organization event heading is missing: ${heading}`);
+}
+
 const machineSource = readText('src/lib/machine-readable.ts');
 for (const key of ['public_event_category', 'canonical_event_subtype', 'event_detail_kind', 'event_status_effect_category', 'event_recovery_category']) {
   check(machineSource.includes(`${key}: countValues`), `machine-readable event breakdown is missing: ${key}`);
