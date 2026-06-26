@@ -15,6 +15,7 @@ import {
   pollutedReliabilityValues,
   publicEvidenceCategories
 } from '../config/evidence-taxonomy.mjs';
+import { getEvidenceRelationOrigin, legacyProjectedEvidenceIds } from '../config/evidence-relation-origin.mjs';
 import { evidenceTaxonomyBaseline } from './evidence-taxonomy-baseline.mjs';
 
 const inputPath = 'data/generated/evidence-taxonomy-migration.json';
@@ -40,6 +41,7 @@ const provenances = records.map((record) => getEvidenceProvenance(record.source_
 const primaryStates = records.map((record) => getEvidencePrimaryState(record.source_type, record.is_primary, record.primary_state));
 const reliabilities = records.map((record) => getEvidenceReliability(record.reliability));
 const archiveStates = records.map((record) => getEvidenceArchiveState(record.archived_url));
+const relationOrigins = records.map((record) => getEvidenceRelationOrigin(record.id));
 const polluted = records.filter((record) => pollutedReliabilityValues.has(record.reliability));
 
 check(records.length === evidenceTaxonomyBaseline.evidence_records, `expected ${evidenceTaxonomyBaseline.evidence_records} evidence records, found ${records.length}`);
@@ -47,6 +49,8 @@ check(sourceTypes.length === evidenceTaxonomyBaseline.canonical_source_types, `e
 check(new Set(ids).size === ids.length, 'evidence ids must remain unique');
 check(records.every((record) => record.subject_count > 0), 'every evidence record must preserve at least one subject relation');
 check(records.every((record) => record.claim_scope_count > 0), 'every evidence record must preserve at least one claim scope');
+check(legacyProjectedEvidenceIds.size === evidenceTaxonomyBaseline.relation_kind.legacy_subject_projection, `expected ${evidenceTaxonomyBaseline.relation_kind.legacy_subject_projection} legacy projected evidence ids, found ${legacyProjectedEvidenceIds.size}`);
+check(records.every((record) => getEvidenceRelationOrigin(record.id) === record.relation_kind), 'evidence relation-origin mapping differs from raw canonical field provenance');
 
 const categoryValues = new Set(publicEvidenceCategories.map((entry) => entry.value));
 const provenanceValues = new Set(evidenceProvenances.map((entry) => entry.value));
@@ -70,7 +74,7 @@ const actual = {
   primary_state: count(primaryStates),
   reliability: count(reliabilities),
   archive_state: count(archiveStates),
-  relation_kind: count(records.map((record) => record.relation_kind))
+  relation_kind: count(relationOrigins)
 };
 check(isDeepStrictEqual(actual.public_categories, evidenceTaxonomyBaseline.public_categories), `public evidence category counts changed: ${JSON.stringify(actual.public_categories)}`);
 check(isDeepStrictEqual(actual.provenance, evidenceTaxonomyBaseline.provenance), `evidence provenance counts changed: ${JSON.stringify(actual.provenance)}`);
@@ -104,6 +108,7 @@ const validation = {
   duplicate_urls_preserved_for_pr15: report.totals.duplicate_urls,
   duplicate_url_title_pairs_preserved_for_pr15: report.totals.duplicate_url_title_pairs,
   polluted_reliability_normalized_to_unknown: polluted.length,
+  legacy_relation_origins_preserved: legacyProjectedEvidenceIds.size,
   failures
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(validation, null, 2)}\n`);
