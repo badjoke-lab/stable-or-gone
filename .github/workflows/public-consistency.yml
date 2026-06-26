@@ -18,10 +18,9 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
-      - run: node scripts/collect-public-taxonomy-values.mjs
       - run: npm run build:site
       - run: npm run verify:consistency
-      - name: Upload public-output diagnostics
+      - name: Upload public output diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -29,6 +28,8 @@ jobs:
           if-no-files-found: warn
           path: |
             data/generated/public-taxonomy-values.json
+            data/generated/public-taxonomy-registry.json
+            data/generated/public-taxonomy-validation.json
             data/generated/build-provenance.json
             dist/version.json
             dist/data/manifest.json
