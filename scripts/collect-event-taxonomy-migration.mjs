@@ -1,6 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { publicTaxonomy } from '../config/public-taxonomy.mjs';
+import {
+  eventTypeCategoryMap,
+  getEventStatusEffectCategory,
+  getPublicEventCategory,
+  getPublicEventCategoryLabel,
+  getRecoveryCategory,
+  getRecoveryCategoryLabel
+} from '../config/event-taxonomy.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -57,12 +65,10 @@ const structuralKeys = new Set(['id', '__source_file', 'event_detail_kind', 'sub
 const records = events.map((event) => {
   const detail = detailById.get(event.id) ?? {};
   const merged = { ...event, ...detail };
-  const typeEntry = taxonomyEntry('event_type', merged.event_type);
   const detailEntry = taxonomyEntry('event_detail_kind', merged.event_detail_kind);
-  const statusEntry = taxonomyEntry('event_status_effect', merged.event_status_effect);
-  const recoveryStatus = merged.depeg_detail?.recovery_status
-    ?? (merged.recovered === true ? 'recovered' : merged.recovered === false ? 'not_recovered' : null);
-  const recoveryEntry = taxonomyEntry('recovery_status', recoveryStatus);
+  const publicCategory = getPublicEventCategory(merged.event_type);
+  const statusCategory = getEventStatusEffectCategory(merged.event_status_effect);
+  const recoveryCategory = getRecoveryCategory(merged);
   const presentDetailFields = detailFieldNames.filter((field) => merged[field] !== null && merged[field] !== undefined);
   const rawDetailKeys = Object.keys(detail).filter((key) => !structuralKeys.has(key)).sort();
 
@@ -73,21 +79,21 @@ const records = events.map((event) => {
     title: merged.title ?? null,
     description: merged.description ?? null,
     event_type: merged.event_type ?? null,
-    public_event_category: typeEntry?.public_category ?? null,
-    public_event_label: typeEntry?.public_label ?? null,
+    public_event_category: publicCategory,
+    public_event_label: getPublicEventCategoryLabel(publicCategory),
     event_detail_kind: merged.event_detail_kind ?? null,
     public_detail_category: detailEntry?.public_category ?? null,
     event_status_effect: merged.event_status_effect ?? null,
-    public_status_effect_category: statusEntry?.public_category ?? null,
-    recovery_status: recoveryStatus,
-    public_recovery_category: recoveryEntry?.public_category ?? null,
+    public_status_effect_category: statusCategory,
+    recovery_status: recoveryCategory,
+    public_recovery_label: getRecoveryCategoryLabel(recoveryCategory),
     recovered_legacy: merged.recovered ?? null,
     impact_level: merged.impact_level ?? null,
     present_detail_fields: presentDetailFields,
     detail_field_count: presentDetailFields.length,
     raw_detail_keys: rawDetailKeys,
     raw_detail: Object.fromEntries(rawDetailKeys.map((key) => [key, detail[key]])),
-    combination_key: `${merged.event_type ?? 'missing'}|${merged.event_detail_kind ?? 'missing'}|${merged.event_status_effect ?? 'missing'}|${recoveryStatus ?? 'missing'}`
+    combination_key: `${merged.event_type ?? 'missing'}|${merged.event_detail_kind ?? 'missing'}|${merged.event_status_effect ?? 'missing'}|${recoveryCategory}`
   };
 }).sort((a, b) => a.id.localeCompare(b.id));
 
@@ -98,11 +104,11 @@ const output = {
   event_count: records.length,
   event_detail_count: eventDetails.length,
   missing_event_type_ids: records.filter((row) => !row.event_type).map((row) => row.id),
-  unmapped_event_type_ids: records.filter((row) => row.event_type && !row.public_event_category).map((row) => row.id),
+  unmapped_event_type_ids: records.filter((row) => row.event_type && !eventTypeCategoryMap[row.event_type]).map((row) => row.id),
   missing_event_detail_kind_ids: records.filter((row) => !row.event_detail_kind).map((row) => row.id),
   unmapped_event_detail_kind_ids: records.filter((row) => row.event_detail_kind && !row.public_detail_category).map((row) => row.id),
-  unmapped_status_effect_ids: records.filter((row) => row.event_status_effect && !row.public_status_effect_category).map((row) => row.id),
-  unmapped_recovery_status_ids: records.filter((row) => row.recovery_status && !row.public_recovery_category).map((row) => row.id),
+  missing_event_status_effect_ids: records.filter((row) => !row.event_status_effect).map((row) => row.id),
+  unknown_status_effect_ids: records.filter((row) => row.event_status_effect && row.public_status_effect_category === 'unknown').map((row) => row.id),
   missing_typed_detail_ids: records.filter((row) => row.detail_field_count === 0).map((row) => row.id),
   event_type_counts: countBy(records, (row) => row.event_type),
   public_event_category_counts: countBy(records, (row) => row.public_event_category),
@@ -127,13 +133,14 @@ console.log(JSON.stringify({
     && output.unmapped_event_type_ids.length === 0
     && output.missing_event_detail_kind_ids.length === 0
     && output.unmapped_event_detail_kind_ids.length === 0
-    && output.unmapped_status_effect_ids.length === 0
-    && output.unmapped_recovery_status_ids.length === 0,
+    && output.missing_event_status_effect_ids.length === 0
+    && output.unknown_status_effect_ids.length === 0,
   event_count: output.event_count,
   event_detail_count: output.event_detail_count,
   public_event_category_counts: output.public_event_category_counts,
   event_detail_kind_counts: output.event_detail_kind_counts,
   event_status_effect_counts: output.event_status_effect_counts,
+  public_status_effect_category_counts: output.public_status_effect_category_counts,
   recovery_status_counts: output.recovery_status_counts,
   detail_field_counts_non_exclusive: output.detail_field_counts_non_exclusive,
   raw_detail_key_counts_non_exclusive: output.raw_detail_key_counts_non_exclusive,
@@ -141,7 +148,7 @@ console.log(JSON.stringify({
   unmapped_event_type_ids: output.unmapped_event_type_ids,
   missing_event_detail_kind_ids: output.missing_event_detail_kind_ids,
   unmapped_event_detail_kind_ids: output.unmapped_event_detail_kind_ids,
-  unmapped_status_effect_ids: output.unmapped_status_effect_ids,
-  unmapped_recovery_status_ids: output.unmapped_recovery_status_ids,
+  missing_event_status_effect_ids: output.missing_event_status_effect_ids,
+  unknown_status_effect_ids: output.unknown_status_effect_ids,
   missing_typed_detail_ids: output.missing_typed_detail_ids
 }, null, 2));
