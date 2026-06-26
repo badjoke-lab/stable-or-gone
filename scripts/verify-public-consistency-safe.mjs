@@ -40,3 +40,5 @@ try {
 } finally {
   for (const [file, original] of originals) fs.writeFileSync(file, original);
 }
+
+await import('./verify-build-provenance.mjs');
