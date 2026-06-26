@@ -1,5 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  getPublicBackingModelCategory,
+  getPublicBackingModelLabel
+} from '../config/backing-models.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -77,10 +81,13 @@ const records = stablecoins.map((coin) => {
   );
   const backingTypes = Array.isArray(classification.backing_types) ? classification.backing_types : [];
   const componentCategories = [...new Set(components.map((row) => row.asset_category).filter(Boolean))].sort();
+  const publicCategory = getPublicBackingModelCategory(coin.slug);
   return {
     id: coin.id,
     slug: coin.slug,
     name: coin.name,
+    public_model_category: publicCategory,
+    public_model_label: getPublicBackingModelLabel(publicCategory),
     legacy_collateral_model: coin.collateral_model ?? null,
     backing_types: backingTypes,
     backing_type_count: backingTypes.length,
@@ -101,8 +108,10 @@ const output = {
   record_count: records.length,
   reserve_component_count: reserveComponents.length,
   missing_classification_ids: records.filter((row) => !classificationById.has(row.id)).map((row) => row.id),
+  missing_public_model_ids: records.filter((row) => !row.public_model_category).map((row) => row.id),
   missing_backing_type_ids: records.filter((row) => row.backing_types.length === 0).map((row) => row.id),
   missing_stabilization_ids: records.filter((row) => !row.stabilization_mechanism).map((row) => row.id),
+  public_model_category_counts: countBy(records, (row) => row.public_model_category),
   legacy_collateral_model_counts: countBy(records, (row) => row.legacy_collateral_model),
   backing_type_counts_non_exclusive: countBy(records, (row) => row.backing_types),
   backing_type_count_distribution: countBy(records, (row) => String(row.backing_type_count)),
@@ -118,15 +127,16 @@ const outputPath = path.join(root, 'data/generated/backing-stabilization-migrati
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(JSON.stringify({
-  ok: output.missing_classification_ids.length === 0 && output.missing_backing_type_ids.length === 0 && output.missing_stabilization_ids.length === 0,
+  ok: output.missing_classification_ids.length === 0 && output.missing_public_model_ids.length === 0 && output.missing_backing_type_ids.length === 0 && output.missing_stabilization_ids.length === 0,
   record_count: output.record_count,
   reserve_component_count: output.reserve_component_count,
+  public_model_category_counts: output.public_model_category_counts,
   legacy_collateral_model_counts: output.legacy_collateral_model_counts,
   backing_type_counts_non_exclusive: output.backing_type_counts_non_exclusive,
   stabilization_mechanism_counts: output.stabilization_mechanism_counts,
-  combination_counts: output.combination_counts,
   records_with_historical_model_events: output.records_with_historical_model_events,
   missing_classification_ids: output.missing_classification_ids,
+  missing_public_model_ids: output.missing_public_model_ids,
   missing_backing_type_ids: output.missing_backing_type_ids,
   missing_stabilization_ids: output.missing_stabilization_ids
 }, null, 2));
