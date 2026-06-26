@@ -340,7 +340,7 @@ Verified emergency repair: manual emergency publication allowed
 Publication path: manual GitHub Actions workflow only
 Pages project: stable-or-gone
 Production branch: main
-Manual production publication activation: PASS
+Manual production publication activation — PASS
 Deployment workflow run: 27908380603
 ```
 
