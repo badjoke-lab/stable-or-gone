@@ -5,6 +5,7 @@ export const mobileTableSourceFiles = [
   'src/components/StablecoinDetailView.astro',
   'src/components/StablecoinValueStateSections.astro',
   'src/components/ValueStateMethodology.astro',
+  'src/components/PrimaryDisplayRelationshipMethodology.astro',
   'src/components/IssuerControlEvents.astro',
   'src/components/StablecoinEventTimeline.astro',
   'src/components/StructuredEventDetail.astro',
@@ -21,5 +22,6 @@ export const requiredMobileTableKinds = [
   'stablecoin-reserve-history', 'stablecoin-regulatory-notices', 'stablecoin-deployments',
   'stablecoin-sources', 'stablecoin-open-questions', 'organization-overview',
   'organization-relationships', 'organization-events', 'organization-sources',
-  'event-details', 'event-detail-overlay', 'event-sources', 'methodology-value-states'
+  'event-details', 'event-detail-overlay', 'event-sources', 'methodology-value-states',
+  'methodology-primary-display-relationships'
 ];
