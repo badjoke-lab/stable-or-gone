@@ -14,6 +14,7 @@ const requiredStates = [
 
 const requiredUsage = {
   'src/components/ValueStateText.astro': ['data-value-state', 'value-state--'],
+  'src/components/ValueStateMethodology.astro': ['publicValueStates', 'data-value-state', 'short_definition'],
   'src/components/EvidenceRows.astro': ['ValueStateText', 'published_at', 'publisher', 'claim_scopes'],
   'src/components/DeploymentTable.astro': ['ValueStateText', 'canonical_status_raw', 'freeze_capability', 'blacklist_capability'],
   'src/components/StructuredEventDetail.astro': ['valueStatePresentation', 'data-value-state'],
