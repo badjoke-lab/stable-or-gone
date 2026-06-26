@@ -31,6 +31,7 @@ const organizationIds = new Set(organizations.map((row) => row.id));
 const relationshipIds = new Set();
 const errors = [];
 const warnings = [];
+const historicalEndDateNotRecorded = [];
 const assert = (condition, message) => { if (!condition) errors.push(message); };
 
 assert(fs.existsSync(auditPath), 'primary display relationship audit is missing');
@@ -47,8 +48,8 @@ for (const relationship of relationships) {
   if (relationship.status === 'active') {
     assert(!relationship.end_date, `${relationship.id}: active relationship must not have an end date`);
   }
-  if (relationship.status === 'ended') {
-    assert(Boolean(relationship.end_date), `${relationship.id}: ended relationship must have an end date`);
+  if (relationship.status === 'ended' && !relationship.end_date) {
+    historicalEndDateNotRecorded.push(relationship.id);
   }
 }
 
@@ -114,6 +115,9 @@ if (fs.existsSync(auditPath)) {
 if (Object.keys(primaryDisplayRelationshipOverrides).length === 0) {
   warnings.push('No explicit primary-display overrides are currently required by the deterministic policy.');
 }
+if (historicalEndDateNotRecorded.length > 0) {
+  warnings.push(`${historicalEndDateNotRecorded.length} ended relationships have no supported end date and remain explicitly not recorded.`);
+}
 
 const validation = {
   schema_version: '1.0',
@@ -125,8 +129,10 @@ const validation = {
     organizations: organizations.length,
     relationships: relationships.length,
     selections: selections.length,
-    explicit_overrides: Object.keys(primaryDisplayRelationshipOverrides).length
+    explicit_overrides: Object.keys(primaryDisplayRelationshipOverrides).length,
+    historical_end_dates_not_recorded: historicalEndDateNotRecorded.length
   },
+  historical_end_date_not_recorded_relationship_ids: historicalEndDateNotRecorded,
   errors,
   warnings,
   selections
