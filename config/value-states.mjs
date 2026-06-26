@@ -55,6 +55,7 @@ export const publicValueStateSet = new Set(publicValueStateValues);
 const exactSignals = new Map([
   ['unknown', 'explicit_unknown'],
   ['unknown_after_review', 'explicit_unknown'],
+  ['unknown_or_unavailable', 'explicit_unknown'],
   ['not_recorded', 'not_recorded_marker'],
   ['not_yet_recorded', 'not_recorded_marker'],
   ['not_applicable', 'not_applicable_marker'],
@@ -69,22 +70,24 @@ const exactSignals = new Map([
   ['disputed', 'disputed_marker'],
   ['contested', 'disputed_marker'],
   ['approximate', 'approximate_marker'],
+  ['approximately', 'approximate_marker'],
   ['estimated', 'approximate_marker'],
   ['source_review_needed', 'work_queue_placeholder'],
   ['review_needed', 'work_queue_placeholder'],
   ['needs_review', 'work_queue_placeholder']
 ]);
 
+const token = (expression) => new RegExp(`(?:^|_)(?:${expression})(?:_|$)`, 'i');
 const signalPatterns = [
   { signal: 'mixed_placeholder', pattern: /(?:not_applicable|unknown|unverified).*(?:review_needed|source_review_needed)|(?:review_needed|source_review_needed).*(?:not_applicable|unknown|unverified)/i },
-  { signal: 'work_queue_placeholder', pattern: /(?:source_)?review_needed|needs_(?:source_)?review|pending_review|to_be_reviewed|requires_review/i },
-  { signal: 'not_public_marker', pattern: /not_(?:public|publicly_(?:available|disclosed))|non_public|undisclosed|not_disclosed/i },
-  { signal: 'not_applicable_marker', pattern: /not_applicable|^n\/?a$/i },
-  { signal: 'unverified_marker', pattern: /unverified|not_verified|verification_(?:missing|not_recorded)|verification_unknown/i },
-  { signal: 'disputed_marker', pattern: /disputed|contested|conflicting_sources/i },
-  { signal: 'approximate_marker', pattern: /approx(?:imate|imately)?|estimated|circa|about_/i },
-  { signal: 'explicit_unknown', pattern: /(?:^|_)unknown(?:$|_)|unresolved|unclear|not_known/i },
-  { signal: 'not_recorded_marker', pattern: /not_recorded|not_yet_recorded|missing_record/i }
+  { signal: 'work_queue_placeholder', pattern: /(?:^|_)(?:(?:source_)?review_needed|needs_(?:source_)?review|pending_review|to_be_reviewed|requires_review)(?:_|$)/i },
+  { signal: 'not_public_marker', pattern: token('not_public|not_publicly_available|not_publicly_disclosed|non_public|undisclosed|not_disclosed') },
+  { signal: 'not_applicable_marker', pattern: token('not_applicable|n/?a') },
+  { signal: 'unverified_marker', pattern: token('unverified|not_verified|verification_missing|verification_not_recorded|verification_unknown') },
+  { signal: 'disputed_marker', pattern: token('disputed|contested|conflicting_sources') },
+  { signal: 'approximate_marker', pattern: token('approximate|approximately|estimated|circa') },
+  { signal: 'explicit_unknown', pattern: token('unknown|unresolved|unclear|not_known') },
+  { signal: 'not_recorded_marker', pattern: token('not_recorded|not_yet_recorded|missing_record') }
 ];
 
 export function normalizeSignalText(value) {
