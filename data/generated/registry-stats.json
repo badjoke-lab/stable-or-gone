@@ -82,7 +82,16 @@
       "floating": 1,
       "index": 1
     },
-    "reference_assets": {
+    "reference_target_categories": {
+      "eur": 8,
+      "floating_protocol": 1,
+      "gold": 2,
+      "indexed_or_inflation_linked": 2,
+      "jpy": 3,
+      "other_fiat": 5,
+      "usd": 71
+    },
+    "canonical_reference_assets_compatibility": {
       "AED": 1,
       "AMPL_CPI_ADJUSTED_TARGET": 1,
       "BRL": 1,
@@ -98,8 +107,8 @@
     },
     "asset_classes": {
       "experimental_stabilization_asset": 1,
-      "stable_value_asset": 4,
-      "stablecoin": 82,
+      "stable_value_asset": 6,
+      "stablecoin": 80,
       "tokenized_commodity": 2,
       "yield_bearing_stable_receipt": 3
     },
