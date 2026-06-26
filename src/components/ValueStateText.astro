@@ -1,0 +1,36 @@
+---
+import { valueStatePresentation, type PublicValueState, type ValueStateOptions } from '../utils/valueState';
+
+const {
+  value,
+  displayValue,
+  policy = 'default',
+  nullState,
+  blankState,
+  explicitUnknownState,
+  workQueueState,
+  detectMarkers = true
+} = Astro.props as {
+  value: unknown;
+  displayValue?: unknown;
+  policy?: ValueStateOptions['policy'];
+  nullState?: PublicValueState;
+  blankState?: PublicValueState;
+  explicitUnknownState?: PublicValueState;
+  workQueueState?: PublicValueState;
+  detectMarkers?: boolean;
+};
+
+const presentation = valueStatePresentation(value, {
+  policy,
+  null_state: nullState,
+  blank_state: blankState,
+  explicit_unknown_state: explicitUnknownState,
+  work_queue_state: workQueueState,
+  detect_markers: detectMarkers,
+  display_value: displayValue
+});
+---
+<span class={`value-state value-state--${presentation.state}`} data-value-state={presentation.state} title={presentation.label}>
+  {presentation.text}
+</span>
