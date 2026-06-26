@@ -36,9 +36,10 @@ Repair PR 3 output parity: PR #170 merged
 Repair PR 4 mobile preservation: PR #171 merged
 Taxonomy PR 5 public-value registry: PR #172 merged
 Taxonomy PR 6 lifecycle and issuance: PR #173 merged
+Taxonomy PR 7 reference target and peg: PR #174 merged
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed repair item after this PR merges: PR 7 — reference-target and peg normalization
-Next approved work item: PR 8 — backing and stabilization normalization
+Latest completed repair item after this PR merges: PR 8 — backing and stabilization normalization
+Next approved work item: PR 9 — event category and subtype normalization
 Routine growth: paused
 Production publication: paused except verified emergency repair
 ```
@@ -178,7 +179,8 @@ composition.legacy_status_compatibility
 
 ### PR 7 — reference-target and peg normalization
 
-Status after this PR merges: **PASS**
+Status: **PASS**  
+Merged as PR #174.
 
 Authoritative mapping and validation files:
 
@@ -231,7 +233,7 @@ RAI  -> Floating protocol redemption price
 SPOT -> CPI-adjusted AMPL target
 ```
 
-Public presentation now separates reference target, reference kind, comparison category, target value, and methodology. The stablecoin index filters on approved comparison categories instead of raw reference codes.
+Public presentation separates reference target, reference kind, comparison category, target value, and methodology. The stablecoin index filters on approved comparison categories instead of raw reference codes.
 
 Machine-readable output exposes:
 
@@ -252,10 +254,72 @@ Canonical codes remain only as compatibility diagnostics under:
 composition.canonical_reference_assets_compatibility
 ```
 
+### PR 8 — backing and stabilization normalization
+
+Status after this PR merges: **PASS**
+
+Authoritative mapping and validation files:
+
+```text
+config/backing-models.mjs
+src/utils/backingModel.ts
+scripts/collect-backing-stabilization-migration.mjs
+scripts/validate-backing-stabilization-normalization.mjs
+docs/audits/backing-stabilization-normalization-2026-06-26.md
+data/generated/backing-stabilization-migration.json
+data/generated/backing-stabilization-validation.json
+```
+
+Canonical coverage:
+
+```text
+Stable assets:                    92
+Reviewed public assignments:     92
+Missing public model category:    0
+Missing canonical backing type:   0
+Missing stabilization mechanism:  0
+Reserve component records:      125
+```
+
+Approved public model categories:
+
+```text
+Fiat and cash-equivalent backed: 31
+Crypto-collateralized:           27
+Hybrid or mixed:                 10
+Tokenized asset-backed:           7
+Synthetic or hedged:              6
+Algorithmic or unbacked:          4
+Wrapper or receipt:               3
+Commodity-backed:                 2
+Unknown:                          2
+Other:                            0
+```
+
+Public presentation now separates the one-category comparison model from canonical non-exclusive backing types, reserve component records, the primary stabilization mechanism, the recorded model description, and historical model-change events.
+
+The stablecoin index filters by approved public model category instead of deriving options from free-text `collateral_model` values.
+
+Machine-readable output exposes:
+
+```text
+public_model_category
+backing_type_non_exclusive
+stabilization_mechanism
+```
+
+Registry statistics expose:
+
+```text
+composition.public_model_categories
+composition.backing_types_non_exclusive
+composition.stabilization_mechanisms
+composition.reserve_component_categories
+```
+
 ### Remaining Gate C sequence
 
 ```text
-PR 8   backing and stabilization normalization
 PR 9   event category and subtype normalization
 PR 10  organization classification normalization
 PR 11  evidence reliability, provenance, and type separation
@@ -269,13 +333,13 @@ PR 16  move record-specific public copy and complete the 92-record migration
 ## Immediate next work
 
 ```text
-1. Merge PR 7 only after every workflow passes.
-2. Start PR 8 from the resulting latest main.
-3. Separate public comparison model from canonical backing types.
-4. Keep reserve components and historical model changes outside the finite filter taxonomy.
-5. Preserve the primary stabilization mechanism and protocol-specific explanation separately.
-6. Replace the current collateral_model filter with an approved public model category.
-7. Validate all 92 records and reject unmapped model categories.
+1. Merge PR 8 only after every workflow passes.
+2. Start PR 9 from the resulting latest main.
+3. Inventory event_type, event_detail_kind, status effect, recovery state, and event-specific detail fields across all 150 events.
+4. Separate public event category, canonical subtype, status effect, and recovery state.
+5. Preserve depeg, issuer-control, governance, regulatory, launch, migration, wind-down, and failure detail instead of flattening them into one label.
+6. Replace raw event filters and headings with approved public categories while retaining canonical subtype detail.
+7. Validate all 150 events and reject unmapped category/subtype combinations.
 8. Do not deploy production.
 9. Do not select Batch 18.
 ```
