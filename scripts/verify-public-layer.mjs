@@ -4,6 +4,7 @@ import path from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { getReferenceComparisonCategory, getReferenceTargetDefinition } from '../config/reference-targets.mjs';
 import { getPublicBackingModelCategory } from '../config/backing-models.mjs';
+import { getEventStatusEffectCategory, getPublicEventCategory, getRecoveryCategory } from '../config/event-taxonomy.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -66,6 +67,9 @@ const referenceCategories = stablecoins.map((row) => getReferenceComparisonCateg
 const publicModelCategories = stablecoins.map((row) => getPublicBackingModelCategory(row.slug) ?? 'unknown');
 const backingTypes = stablecoins.map((row) => Array.isArray(row.backing_types) ? row.backing_types : []);
 const stabilizationMechanisms = stablecoins.map((row) => row.stabilization_mechanism ?? 'unknown');
+const publicEventCategories = events.map((row) => getPublicEventCategory(row.event_type));
+const eventStatusEffectCategories = events.map((row) => getEventStatusEffectCategory(row.event_status_effect));
+const eventRecoveryCategories = events.map((row) => getRecoveryCategory(row));
 
 const expectedCounts = {
   primary_records: stablecoins.length,
@@ -92,7 +96,11 @@ const expectedBreakdown = {
   asset_class: countValues(stablecoins.map((row) => row.asset_class)),
   organization_type: countValues(organizations.map((row) => row.organization_type || row.issuer_type)),
   relationship_role: countValues(relationships.map((row) => row.role)),
-  event_type: countValues(events.map((row) => row.event_type)),
+  public_event_category: countValues(publicEventCategories),
+  canonical_event_subtype: countValues(events.map((row) => row.event_type)),
+  event_detail_kind: countValues(events.map((row) => row.event_detail_kind)),
+  event_status_effect_category: countValues(eventStatusEffectCategories),
+  event_recovery_category: countValues(eventRecoveryCategories),
   evidence_reliability: countValues(evidence.map((row) => row.reliability)),
   evidence_source_type: countValues(evidence.map((row) => row.source_type)),
   reserve_report_type: countValues(reserveReports.map((row) => row.report_type)),
