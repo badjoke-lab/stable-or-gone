@@ -18,6 +18,15 @@ import {
   getPublicEvidenceCategory,
   pollutedReliabilityValues
 } from '../config/evidence-taxonomy.mjs';
+import {
+  getContractIdentityState,
+  getDeploymentCanonicalityRecordState,
+  getDeploymentChangeState,
+  getDeploymentOperationalState,
+  getDeploymentVerificationState,
+  getNetworkIdentityState,
+  getPublicDeploymentCategory
+} from '../config/deployment-taxonomy.mjs';
 
 const root = process.cwd();
 const outputPath = 'data/generated/registry-stats.json';
@@ -133,6 +142,9 @@ export function buildRegistryStats() {
     [row.availability, row.source, row.accrual, row.rate].every((value) => value === 'unknown')
   ).length;
   const deploymentUnknown = deployments.filter((row) => !row.canonicality || row.canonicality === 'unknown').length;
+  const deploymentVerificationUnknown = deployments.filter((row) => getDeploymentVerificationState(row) === 'unknown').length;
+  const deploymentReviewNeeded = deployments.filter((row) => getDeploymentVerificationState(row) === 'review_needed').length;
+  const deploymentContractNotRecorded = deployments.filter((row) => getContractIdentityState(row.contract_address) === 'not_recorded').length;
   const organizationIdsWithRelationships = new Set(relationships.map((row) => row.organization_id));
   const organizationJurisdictionUnknown = organizations.filter((row) => getJurisdictionScope(row.jurisdiction) === 'unknown').length;
   const organizationLegalFormNotRecorded = organizations.filter((row) => getLegalFormState(row) === 'not_recorded').length;
@@ -209,6 +221,16 @@ export function buildRegistryStats() {
       evidence_claim_scopes_non_exclusive: countBy(evidence, evidenceClaimScopes),
       legal_classifications_non_exclusive: countBy(legalProfiles, (row) => Array.isArray(row.classifications) && row.classifications.length ? row.classifications.map((item) => item.classification) : ['unknown']),
       reserve_component_categories: countBy(reserveComponents, (row) => row.asset_category),
+      public_deployment_categories: countBy(deployments, (row) => getPublicDeploymentCategory(row.deployment_type)),
+      canonical_deployment_types: countBy(deployments, (row) => row.deployment_type),
+      deployment_operational_states: countBy(deployments, (row) => getDeploymentOperationalState(row.status)),
+      deployment_raw_statuses: countBy(deployments, (row) => row.status),
+      deployment_change_states: countBy(deployments, (row) => getDeploymentChangeState(row.status)),
+      deployment_canonicalities: countBy(deployments, (row) => row.canonicality ?? 'unknown'),
+      deployment_canonicality_record_states: countBy(deployments, (row) => getDeploymentCanonicalityRecordState(row.canonicality)),
+      deployment_verification_states: countBy(deployments, (row) => getDeploymentVerificationState(row)),
+      deployment_contract_identity_states: countBy(deployments, (row) => getContractIdentityState(row.contract_address)),
+      deployment_network_identity_states: countBy(deployments, (row) => getNetworkIdentityState(row.chain)),
       deployment_chains: countBy(deployments, (row) => row.chain ?? row.network),
       income_availability: countBy(incomeProfiles, (row) => row.availability),
       income_sources: countBy(incomeProfiles, (row) => row.source),
@@ -245,7 +267,10 @@ export function buildRegistryStats() {
         count: reserveComponents.filter((row) => !row.asset_category || row.asset_category === 'unknown').length,
         share: share(reserveComponents.filter((row) => !row.asset_category || row.asset_category === 'unknown').length, reserveComponents.length)
       },
-      deployments_unknown_canonicality: { count: deploymentUnknown, share: share(deploymentUnknown, deployments.length) }
+      deployments_unknown_canonicality: { count: deploymentUnknown, share: share(deploymentUnknown, deployments.length) },
+      deployments_verification_unknown: { count: deploymentVerificationUnknown, share: share(deploymentVerificationUnknown, deployments.length) },
+      deployments_review_needed: { count: deploymentReviewNeeded, share: share(deploymentReviewNeeded, deployments.length) },
+      deployments_contract_identifier_not_recorded: { count: deploymentContractNotRecorded, share: share(deploymentContractNotRecorded, deployments.length) }
     }
   };
 
