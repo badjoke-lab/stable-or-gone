@@ -33,7 +33,7 @@
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
     "validate:v3-baseline": "node scripts/validate-registry-v3-baseline.mjs",
     "validate:ui-repair-baseline": "node scripts/validate-ui-repair-baseline.mjs",
-    "validate:mobile-information": "node scripts/validate-mobile-information-preservation.mjs",
+    "validate:mobile-information": "node scripts/validate-mobile-css-preservation-v2.mjs && node scripts/validate-mobile-table-identities-v2.mjs && node scripts/validate-mobile-protected-fields-v2.mjs && node scripts/validate-evidence-mobile.mjs",
     "validate:launch-queue": "node scripts/validate-launch-date-unresolved.mjs",
     "validate:terminal-queue": "node scripts/validate-terminal-date-unresolved.mjs",
     "validate:reserve-applicability": "node scripts/validate-reserve-report-applicability.mjs",
