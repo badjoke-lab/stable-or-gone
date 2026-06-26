@@ -79,7 +79,7 @@ check(tableCount === requiredKinds.length, `Expected ${requiredKinds.length} cor
 
 const protectedFields = {
   'stablecoin-index': ['Reference target', 'Backing model', 'Lifecycle', 'Issuance', 'Reviewed'],
-  'organization-index': ['Jurisdiction', 'Roles', 'Record confidence'],
+  'organization-index': ['Organization category', 'Regulatory character', 'Jurisdiction', 'Functional roles', 'Relationship state', 'Record confidence'],
   'event-index': ['Category', 'Subtype', 'Impact', 'Recovery', 'Sources'],
   'stablecoin-overview': [
     'Reference target',
@@ -98,7 +98,19 @@ const protectedFields = {
   'stablecoin-reserve-history': ['Record confidence'],
   'stablecoin-regulatory-notices': ['Summary'],
   'stablecoin-deployments': ['Freeze', 'Blacklist', 'Contract'],
-  'organization-relationships': ['Relationship status', 'Lifecycle status'],
+  'organization-overview': [
+    'Organization category',
+    'Canonical organization type',
+    'Legal form',
+    'Legal-form state',
+    'Regulatory character',
+    'Jurisdiction',
+    'Jurisdiction scope',
+    'Functional roles',
+    'Relationship states',
+    'Record confidence'
+  ],
+  'organization-relationships': ['Functional role', 'Relationship state', 'Stablecoin lifecycle'],
   'organization-events': ['Category', 'Subtype', 'Status effect'],
   'event-details': [
     'Public event category',

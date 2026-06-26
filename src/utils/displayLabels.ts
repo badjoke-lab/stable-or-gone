@@ -32,6 +32,14 @@ const exactLabels: Record<string, string> = {
   chain_halt_context: 'Blockchain halt',
   chain_expansion: 'Blockchain expansion',
   exchange_phaseout: 'Exchange phase-out',
+  legal_issuer: 'Legal issuer',
+  brand_owner: 'Brand owner',
+  protocol_operator: 'Protocol operator',
+  governance_body: 'Governance body',
+  reserve_manager: 'Reserve manager',
+  custodian: 'Custodian',
+  redemption_agent: 'Redemption agent',
+  technology_provider: 'Technology provider',
   none: 'No recorded change'
 };
 

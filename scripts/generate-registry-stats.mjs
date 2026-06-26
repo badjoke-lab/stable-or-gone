@@ -4,6 +4,12 @@ import { fileURLToPath } from 'node:url';
 import { getReferenceComparisonCategory } from '../config/reference-targets.mjs';
 import { getPublicBackingModelCategory } from '../config/backing-models.mjs';
 import { getEventStatusEffectCategory, getPublicEventCategory, getRecoveryCategory } from '../config/event-taxonomy.mjs';
+import {
+  getJurisdictionScope,
+  getLegalFormState,
+  getPublicOrganizationCategory,
+  getRegulatoryCharacter
+} from '../config/organization-taxonomy.mjs';
 
 const root = process.cwd();
 const outputPath = 'data/generated/registry-stats.json';
@@ -77,6 +83,8 @@ export function buildRegistryStats() {
   const incomeProfiles = readGroup(incomeManifest.data_files);
 
   const stablecoins = groups.stablecoins;
+  const organizations = groups.organizations;
+  const relationships = groups.relationships;
   const classificationExtensionById = new Map((groups.classification_extensions ?? []).map((row) => [row.id, row]));
   const classifications = groups.classifications.map((row) => ({ ...row, ...(classificationExtensionById.get(row.id) ?? {}) }));
   const eventDetailById = new Map(groups.event_details.map((row) => [row.id, row]));
@@ -103,6 +111,11 @@ export function buildRegistryStats() {
     [row.availability, row.source, row.accrual, row.rate].every((value) => value === 'unknown')
   ).length;
   const deploymentUnknown = deployments.filter((row) => !row.canonicality || row.canonicality === 'unknown').length;
+  const organizationIdsWithRelationships = new Set(relationships.map((row) => row.organization_id));
+  const organizationJurisdictionUnknown = organizations.filter((row) => getJurisdictionScope(row.jurisdiction) === 'unknown').length;
+  const organizationLegalFormNotRecorded = organizations.filter((row) => getLegalFormState(row) === 'not_recorded').length;
+  const organizationsWithoutRelationships = organizations.filter((row) => !organizationIdsWithRelationships.has(row.id)).length;
+  const relationshipsUnknownStatus = relationships.filter((row) => !row.status || row.status === 'unknown').length;
 
   const stats = {
     schema_version: '1.0',
@@ -110,8 +123,8 @@ export function buildRegistryStats() {
     baseline_id: baseline.baseline_id,
     registry: {
       stablecoins: stablecoins.length,
-      organizations: groups.organizations.length,
-      relationships: groups.relationships.length,
+      organizations: organizations.length,
+      relationships: relationships.length,
       classifications: classifications.length,
       profiles: groups.profiles.length,
       events: events.length,
@@ -155,6 +168,13 @@ export function buildRegistryStats() {
       backing_types_non_exclusive: countBy(classifications, (row) => row.backing_types ?? ['unknown']),
       stabilization_mechanisms: countBy(classifications, (row) => row.stabilization_mechanism),
       governance_models: countBy(classifications, (row) => row.governance_model),
+      public_organization_categories: countBy(organizations, (row) => getPublicOrganizationCategory(row.organization_type)),
+      canonical_organization_types: countBy(organizations, (row) => row.organization_type),
+      organization_legal_form_states: countBy(organizations, (row) => getLegalFormState(row)),
+      organization_regulatory_characters: countBy(organizations, (row) => getRegulatoryCharacter(row.organization_type)),
+      organization_jurisdiction_scopes: countBy(organizations, (row) => getJurisdictionScope(row.jurisdiction)),
+      functional_roles: countBy(relationships, (row) => row.role),
+      relationship_statuses: countBy(relationships, (row) => row.status),
       public_event_categories: countBy(events, (row) => getPublicEventCategory(row.event_type)),
       canonical_event_subtypes: countBy(events, (row) => row.event_type),
       event_detail_kinds: countBy(events, (row) => row.event_detail_kind),
@@ -193,6 +213,22 @@ export function buildRegistryStats() {
       legal_profiles_unclassified: {
         count: legalUnclassified,
         share: share(legalUnclassified, legalProfiles.length)
+      },
+      organization_jurisdiction_unknown: {
+        count: organizationJurisdictionUnknown,
+        share: share(organizationJurisdictionUnknown, organizations.length)
+      },
+      organization_legal_form_not_recorded: {
+        count: organizationLegalFormNotRecorded,
+        share: share(organizationLegalFormNotRecorded, organizations.length)
+      },
+      organizations_without_relationships: {
+        count: organizationsWithoutRelationships,
+        share: share(organizationsWithoutRelationships, organizations.length)
+      },
+      relationships_unknown_status: {
+        count: relationshipsUnknownStatus,
+        share: share(relationshipsUnknownStatus, relationships.length)
       },
       income_profiles_all_unknown: {
         count: incomeAllUnknown,

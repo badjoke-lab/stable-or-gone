@@ -5,6 +5,12 @@ import { isDeepStrictEqual } from 'node:util';
 import { getReferenceComparisonCategory, getReferenceTargetDefinition } from '../config/reference-targets.mjs';
 import { getPublicBackingModelCategory } from '../config/backing-models.mjs';
 import { getEventStatusEffectCategory, getPublicEventCategory, getRecoveryCategory } from '../config/event-taxonomy.mjs';
+import {
+  getJurisdictionScope,
+  getLegalFormState,
+  getPublicOrganizationCategory,
+  getRegulatoryCharacter
+} from '../config/organization-taxonomy.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -67,6 +73,10 @@ const referenceCategories = stablecoins.map((row) => getReferenceComparisonCateg
 const publicModelCategories = stablecoins.map((row) => getPublicBackingModelCategory(row.slug) ?? 'unknown');
 const backingTypes = stablecoins.map((row) => Array.isArray(row.backing_types) ? row.backing_types : []);
 const stabilizationMechanisms = stablecoins.map((row) => row.stabilization_mechanism ?? 'unknown');
+const publicOrganizationCategories = organizations.map((row) => getPublicOrganizationCategory(row.organization_type));
+const organizationLegalFormStates = organizations.map((row) => getLegalFormState(row));
+const organizationRegulatoryCharacters = organizations.map((row) => getRegulatoryCharacter(row.organization_type));
+const organizationJurisdictionScopes = organizations.map((row) => getJurisdictionScope(row.jurisdiction));
 const publicEventCategories = events.map((row) => getPublicEventCategory(row.event_type));
 const eventStatusEffectCategories = events.map((row) => getEventStatusEffectCategory(row.event_status_effect));
 const eventRecoveryCategories = events.map((row) => getRecoveryCategory(row));
@@ -94,8 +104,13 @@ const expectedBreakdown = {
   backing_type_non_exclusive: countMultiValues(backingTypes),
   stabilization_mechanism: countValues(stabilizationMechanisms),
   asset_class: countValues(stablecoins.map((row) => row.asset_class)),
-  organization_type: countValues(organizations.map((row) => row.organization_type || row.issuer_type)),
-  relationship_role: countValues(relationships.map((row) => row.role)),
+  public_organization_category: countValues(publicOrganizationCategories),
+  canonical_organization_type: countValues(organizations.map((row) => row.organization_type)),
+  organization_legal_form_state: countValues(organizationLegalFormStates),
+  organization_regulatory_character: countValues(organizationRegulatoryCharacters),
+  organization_jurisdiction_scope: countValues(organizationJurisdictionScopes),
+  functional_role: countValues(relationships.map((row) => row.role)),
+  relationship_status: countValues(relationships.map((row) => row.status)),
   public_event_category: countValues(publicEventCategories),
   canonical_event_subtype: countValues(events.map((row) => row.event_type)),
   event_detail_kind: countValues(events.map((row) => row.event_detail_kind)),
