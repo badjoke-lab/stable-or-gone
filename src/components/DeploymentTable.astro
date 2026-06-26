@@ -1,4 +1,5 @@
 ---
+import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { cleanPublicText } from '../utils/publicText';
 import { resolveDeploymentTaxonomy } from '../utils/deploymentTaxonomy';
@@ -33,22 +34,25 @@ const { deployments } = Astro.props as { deployments: DeploymentV3View[] };
     <tbody>
       {deployments.length === 0 ? <tr><td colspan="17">No deployment records have been added yet.</td></tr> : deployments.map((deployment) => {
         const taxonomy = resolveDeploymentTaxonomy(deployment);
+        const rawStatusLabel = formatPublicLabel(taxonomy.canonical_status_raw);
+        const freezeValue = deployment.freeze_capability === true ? 'Yes' : deployment.freeze_capability === false ? 'No' : null;
+        const blacklistValue = deployment.blacklist_capability === true ? 'Yes' : deployment.blacklist_capability === false ? 'No' : null;
         return <tr>
-          <td>{deployment.chain ?? 'Not recorded'}</td>
+          <td><ValueStateText value={deployment.chain} /></td>
           <td>{taxonomy.network_identity_state_label}</td>
-          <td>{deployment.token_standard ?? 'Not recorded'}</td>
+          <td><ValueStateText value={deployment.token_standard} /></td>
           <td>{taxonomy.public_category_label}</td>
           <td>{formatPublicLabel(taxonomy.canonical_deployment_type)}</td>
           <td>{taxonomy.operational_state_label}</td>
-          <td>{formatPublicLabel(taxonomy.canonical_status_raw)}</td>
+          <td><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></td>
           <td>{taxonomy.change_state_label}</td>
           <td>{taxonomy.canonicality_label}</td>
           <td>{taxonomy.canonicality_record_state_label}</td>
           <td>{taxonomy.verification_state_label}</td>
           <td>{taxonomy.contract_identity_state_label}</td>
           <td>{taxonomy.contract_identity_state === 'recorded_identifier' ? deployment.contract_address : taxonomy.contract_identity_state_label}</td>
-          <td>{deployment.freeze_capability === true ? 'Yes' : deployment.freeze_capability === false ? 'No' : 'Unknown'}</td>
-          <td>{deployment.blacklist_capability === true ? 'Yes' : deployment.blacklist_capability === false ? 'No' : 'Unknown'}</td>
+          <td><ValueStateText value={freezeValue} /></td>
+          <td><ValueStateText value={blacklistValue} /></td>
           <td>{deployment.control_event_ids?.length ?? 0}</td>
           <td>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</td>
         </tr>;

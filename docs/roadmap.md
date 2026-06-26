@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-26
+Updated: 2026-06-27
 
 ## Purpose
 
@@ -43,8 +43,8 @@ docs/migration/registry-v3-baseline.json
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
 Current phase: Phase 2 — public taxonomy and canonical-semantics repair
-Latest completed work after PR #179 merges: PR 12
-Next approved work: PR 13 — value-state semantics
+Latest completed work after PR #180 merges: PR 13
+Next approved work: PR 14 — explicit primary display relationships
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -92,6 +92,7 @@ PR #176  PR 9  event category and subtype normalization
 PR #177  PR 10 organization classification normalization
 PR #178  PR 11 evidence reliability, provenance, and type separation
 PR #179  PR 12 deployment status and verification-state separation
+PR #180  PR 13 value-state semantics
 ```
 
 ## PR 10 organization baseline
@@ -256,27 +257,81 @@ docs/audits/deployment-taxonomy-normalization-2026-06-26.md
 
 PR 12 does not infer canonicality from popularity, verification from identifier syntax, active state from explorer availability, or implementation from a proposal.
 
+## PR 13 value-state baseline
+
+Status after PR #180 merges: **PASS**
+
+Approved public states:
+
+```text
+known
+unknown_after_review
+not_recorded
+not_applicable
+not_public
+unverified
+disputed
+approximate
+```
+
+Canonical inventory:
+
+```text
+Source files scanned:         236
+Records scanned:            2,167
+Scalar values scanned:     31,908
+Direct-value findings:      1,227
+Narrative-text findings:       39
+Excluded reference scalars:   435
+```
+
+Direct-value signals:
+
+```text
+Null value:                 999
+Work-queue placeholder:     111
+Explicit unknown:            64
+Not-applicable marker:       46
+Approximate marker:           4
+Not-recorded marker:          2
+Mixed placeholder:            1
+```
+
+PR 13 preserves canonical raw values. It adds an explicit public presentation layer, protects major asset/organization/event/evidence/deployment surfaces, exposes canonical-only machine-readable value-state breakdowns, and keeps known-unknown records distinct from accidental blanks.
+
+Authoritative files:
+
+```text
+config/value-states.mjs
+src/utils/valueState.ts
+src/components/ValueStateText.astro
+src/components/ValueStateMethodology.astro
+scripts/collect-value-state-migration.mjs
+scripts/validate-value-state-normalization.mjs
+scripts/validate-value-state-public-surfaces.mjs
+docs/audits/value-state-normalization-2026-06-27.md
+```
+
 ## Remaining Gate C sequence
 
 ```text
-PR 13  value-state semantics
 PR 14  explicit primary display relationships
 PR 15  evidence-source deduplication with claim preservation
 PR 16  move record-specific public copy and complete the 92-record migration
 ```
 
-## Immediate next work — PR 13
+## Immediate next work — PR 14
 
-1. Define shared public states for known, unknown, not recorded, not applicable, review needed, and unavailable.
-2. Audit field-level placeholders and blank-value semantics across the 92 current asset records.
-3. Prevent literal workflow placeholders from appearing as user-facing facts.
-4. Preserve canonical raw values while exposing normalized public state separately.
-5. Apply the shared value-state model to asset, organization, event, evidence, reserve, redemption, and deployment surfaces where applicable.
-6. Update machine-readable output, statistics, mobile checks, and validators.
-7. Do not infer missing facts.
-8. Do not perform primary-display-relationship work inside PR 13.
-9. Do not deduplicate evidence.
-10. Do not change canonical record counts.
+1. Audit all 101 organization relationships and every public surface that currently selects a primary organization.
+2. Stop using relationship array order as a public priority rule.
+3. Define an explicit primary-display relationship field or an approved deterministic priority model.
+4. Preserve all additional current and historical roles.
+5. Separate display priority from legal responsibility, operational control, and historical relationship status.
+6. Reject zero or multiple unintended primary relationships where one primary is required.
+7. Update stablecoin indexes, details, organization pages, machine-readable output, statistics, mobile checks, and validators.
+8. Do not deduplicate evidence.
+9. Do not perform PR 16 record-specific copy migration.
+10. Do not change canonical record counts except an explicitly audited relationship-metadata migration.
 11. Do not deploy production.
 12. Do not select Batch 18.
 
@@ -288,6 +343,7 @@ Historical terminal dates unresolved:     4
 Reserve applicability queue:              12
 Evidence duplicate URLs for PR 15:        32
 Evidence polluted reliability values:     36
+Direct workflow placeholders retained:   112
 Deployment canonicality not recorded:     67
 Deployment verification not recorded:    130
 Deployment source review needed:          15

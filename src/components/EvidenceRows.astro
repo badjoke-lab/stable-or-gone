@@ -1,6 +1,7 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
 import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
+import ValueStateText from './ValueStateText.astro';
 import type { EvidenceRow } from '../lib/data/registryBase';
 
 const { evidence, emptyMessage = 'No sources have been added yet.' } = Astro.props as {
@@ -13,14 +14,14 @@ const { evidence, emptyMessage = 'No sources have been added yet.' } = Astro.pro
     const taxonomy = resolveEvidenceTaxonomy(source);
     const claims = source.claim_scopes?.length
       ? source.claim_scopes.map((item: string) => formatPublicLabel(item)).join(', ')
-      : formatPublicLabel(source.claim_scope, 'No claim scope recorded');
+      : null;
     return <tr>
-      <td><a href={source.url}>{source.title}</a>{source.published_at ? <><br /><small>Published {source.published_at}</small></> : null}</td>
-      <td>{source.publisher ?? 'Not recorded'}</td>
+      <td><a href={source.url}>{source.title}</a><br /><small>Published <ValueStateText value={source.published_at} /></small></td>
+      <td><ValueStateText value={source.publisher} /></td>
       <td>{taxonomy.public_category_label}<br /><small>Canonical: {formatPublicLabel(taxonomy.canonical_source_type)}</small></td>
       <td>{taxonomy.provenance_label}</td>
       <td>{taxonomy.primary_state_label}</td>
-      <td>{claims}</td>
+      <td><ValueStateText value={claims} displayValue={claims} /></td>
       <td>{source.archived_url ? <a href={source.archived_url}>{taxonomy.archive_state_label}</a> : taxonomy.archive_state_label}</td>
       <td>{taxonomy.reliability_label}{taxonomy.canonical_reliability_raw !== taxonomy.reliability ? <><br /><small>Recorded value: {formatPublicLabel(taxonomy.canonical_reliability_raw)}</small></> : null}</td>
     </tr>;

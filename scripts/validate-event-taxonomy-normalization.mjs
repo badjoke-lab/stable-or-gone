@@ -126,14 +126,19 @@ check(indexSource.includes('data-event-category'), 'event index category filter 
 check(!indexSource.includes('data-event-type'), 'legacy raw event-type filter remains on event index');
 check(indexSource.includes('<th>Category</th>') && indexSource.includes('<th>Subtype</th>'), 'event index must separate category and subtype columns');
 
-const detailSource = readText('src/pages/event/[id].astro');
+const detailPageSource = readText('src/pages/event/[id].astro');
+const detailRowsSource = readText('src/components/EventValueStateRows.astro');
+const structuredDetailSource = readText('src/components/StructuredEventDetail.astro');
+const detailSource = [detailPageSource, detailRowsSource, structuredDetailSource].join('\n');
 for (const heading of ['Public event category', 'Canonical event subtype', 'Structured detail kind', 'Effect on stablecoin lifecycle', 'Recovery or reversal']) {
   check(detailSource.includes(`<th>${heading}</th>`), `event detail heading is missing: ${heading}`);
 }
-check(detailSource.includes('resolveEventTaxonomy'), 'event detail must resolve normalized taxonomy');
+check(detailPageSource.includes('resolveEventTaxonomy'), 'event detail must resolve normalized taxonomy');
+check(detailPageSource.includes('EventValueStateRows'), 'event detail must use the value-state summary rows component');
+check(detailPageSource.includes('StructuredEventDetail'), 'event detail must use the structured detail component');
 check(!detailSource.includes('Registry v2 detail overlay'), 'implementation-facing overlay name remains in public copy');
-check(detailSource.includes('Structured event detail'), 'structured event detail section is missing');
-check(detailSource.includes('Description and source record only'), 'descriptive-only detail coverage must be explicit');
+check(structuredDetailSource.includes('Structured event detail'), 'structured event detail section is missing');
+check(detailRowsSource.includes('Description and source record only'), 'descriptive-only detail coverage must be explicit');
 
 const stablecoinTimelineSource = readText('src/components/StablecoinEventTimeline.astro');
 check(stablecoinTimelineSource.includes('resolveEventTaxonomy'), 'stablecoin timeline must resolve normalized taxonomy');

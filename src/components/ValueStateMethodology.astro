@@ -1,0 +1,18 @@
+---
+import { publicValueStates } from '../../config/value-states.mjs';
+---
+<section class="panel registry">
+  <div class="bar">Value-state semantics</div>
+  <table data-table-kind="methodology-value-states" data-mobile-table="scroll-preserve">
+    <thead><tr><th>Public state</th><th>Meaning</th></tr></thead>
+    <tbody>
+      {publicValueStates.map((state) => (
+        <tr>
+          <th><code>{state.value}</code><br /><span class={`value-state value-state--${state.value}`} data-value-state={state.value}>{state.public_label}</span></th>
+          <td>{state.short_definition}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p>A blank field, an investigated unknown, a non-applicable field, and undisclosed information are not treated as the same state. Known-unknown records remain explicit research gaps rather than being reduced to missing data.</p>
+</section>

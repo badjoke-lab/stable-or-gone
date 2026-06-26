@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
+import { buildValueStateStats } from './build-value-state-stats.mjs';
 
 const root = process.cwd();
 const contractPath = 'docs/stats/registry-stats-contract.json';
@@ -18,6 +19,7 @@ function sumObjectValues(value) {
 const contract = readJson(contractPath);
 const current = readJson(outputPath);
 const expected = buildRegistryStats();
+expected.value_states = buildValueStateStats(root);
 const failures = [];
 
 for (const section of contract.required_sections ?? []) {
@@ -62,6 +64,15 @@ for (const [name, row] of Object.entries(current.coverage ?? {})) {
   if (row.share !== expectedShare) failures.push(`coverage.${name}.share is inconsistent`);
 }
 
+if (current.value_states?.definitions !== 8) {
+  failures.push('value_states.definitions must equal the approved eight-state model');
+}
+for (const [name, counts] of Object.entries(current.value_states ?? {})) {
+  if (name === 'definitions') continue;
+  const total = sumObjectValues(counts);
+  if (!Number.isInteger(total) || total <= 0) failures.push(`value_states.${name} must contain positive integer counts`);
+}
+
 try {
   assert.deepStrictEqual(current, expected);
 } catch {
@@ -76,4 +87,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Registry stats validation passed: ${current.registry.stablecoins} assets, ${current.registry.events} events, ${current.registry.evidence} evidence records.`);
+console.log(`Registry stats validation passed: ${current.registry.stablecoins} assets, ${current.registry.events} events, ${current.registry.evidence} evidence records, ${Object.keys(current.value_states).length - 1} value-state axes.`);

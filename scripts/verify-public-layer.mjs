@@ -28,6 +28,7 @@ import {
   getNetworkIdentityState,
   getPublicDeploymentCategory
 } from '../config/deployment-taxonomy.mjs';
+import { publicValueStateValues, resolvePublicValueState } from '../config/value-states.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -47,6 +48,10 @@ const countValues = (values) => values.reduce((counts, raw) => {
   return counts;
 }, {});
 const countMultiValues = (values) => countValues(values.flat());
+const countStates = (states) => states.reduce((counts, state) => {
+  counts[state] = (counts[state] || 0) + 1;
+  return counts;
+}, {});
 const applyById = (rows, layers) => {
   const maps = layers.map((layer) => new Map(layer.map((row) => [row.id, row])));
   return rows.map((row) => maps.reduce((merged, map) => ({ ...merged, ...(map.get(row.id) || {}) }), row));
@@ -67,6 +72,33 @@ const checkedOutCommit = () => {
   } catch {
     return null;
   }
+};
+const eventRecoveryDateState = (row) => {
+  const recoveryDate = row.depeg_detail?.recovery_date ?? row.recovery_date;
+  if (recoveryDate !== null && recoveryDate !== undefined && recoveryDate !== '') return resolvePublicValueState(recoveryDate);
+  const category = getRecoveryCategory(row);
+  if (category === 'not_applicable') return 'not_applicable';
+  if (category === 'unknown') return 'unknown_after_review';
+  return 'not_recorded';
+};
+const deploymentCanonicalityValueState = (row) => {
+  const recordState = getDeploymentCanonicalityRecordState(row.canonicality);
+  if (recordState === 'not_recorded') return 'not_recorded';
+  if (row.canonicality === 'unknown') return 'unknown_after_review';
+  return 'known';
+};
+const deploymentVerificationValueState = (row) => {
+  const verification = getDeploymentVerificationState(row);
+  if (verification === 'verified') return 'known';
+  if (verification === 'unknown') return 'unknown_after_review';
+  return 'unverified';
+};
+const deploymentContractIdentityValueState = (row) => {
+  const contractState = getContractIdentityState(row.contract_address);
+  if (contractState === 'recorded_identifier') return 'known';
+  if (contractState === 'review_needed') return 'unverified';
+  if (contractState === 'not_applicable_or_review_unresolved') return 'unknown_after_review';
+  return 'not_recorded';
 };
 
 const stablecoins = applyById(group('stablecoins'), [
@@ -164,6 +196,21 @@ const expectedBreakdown = {
   deployment_contract_identity_state: countValues(deploymentContractIdentityStates),
   deployment_network_identity_state: countValues(deploymentNetworkIdentityStates),
   deployment_chain: countValues(deployments.map((row) => row.chain)),
+  public_value_state_definitions: publicValueStateValues.length,
+  stablecoin_symbol_value_state: countStates(stablecoins.map((row) => resolvePublicValueState(row.symbol))),
+  stablecoin_launch_date_value_state: countStates(stablecoins.map((row) => resolvePublicValueState(row.launch_date))),
+  stablecoin_discontinued_date_value_state: countStates(stablecoins.map((row) => resolvePublicValueState(row.discontinued_date))),
+  organization_jurisdiction_value_state: countStates(organizations.map((row) => resolvePublicValueState(row.jurisdiction))),
+  relationship_start_date_value_state: countStates(relationships.map((row) => resolvePublicValueState(row.start_date))),
+  relationship_end_date_value_state: countStates(relationships.map((row) => resolvePublicValueState(row.end_date))),
+  event_date_value_state: countStates(events.map((row) => resolvePublicValueState(row.event_date))),
+  event_recovery_date_value_state: countStates(events.map(eventRecoveryDateState)),
+  evidence_published_at_value_state: countStates(evidence.map((row) => resolvePublicValueState(row.published_at))),
+  reserve_report_date_value_state: countStates(reserveReports.map((row) => resolvePublicValueState(row.report_date))),
+  known_unknown_record_value_state: countStates(knownUnknowns.map(() => 'unknown_after_review')),
+  deployment_canonicality_value_state: countStates(deployments.map(deploymentCanonicalityValueState)),
+  deployment_verification_value_state: countStates(deployments.map(deploymentVerificationValueState)),
+  deployment_contract_identity_value_state: countStates(deployments.map(deploymentContractIdentityValueState)),
 };
 const expectedLastReviewedAt = [...stablecoins.map((row) => row.last_verified_at), ...organizations.map((row) => row.last_verified_at)].filter(Boolean).sort().at(-1) || null;
 
