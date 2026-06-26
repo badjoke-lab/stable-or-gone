@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import {
+  getFunctionalRoleLabel,
+  getJurisdictionScopeFilterOptions,
+  getPublicOrganizationCategoryFilterOptions,
+  getRegulatoryCharacterFilterOptions,
+  getRelationshipStatusLabel,
+  resolveOrganizationTaxonomy
+} from '../../utils/organizationTaxonomy';
 import { getOrganizations, getStablecoins, getRelationships } from '../../lib/data/registry';
 
 const organizations = getOrganizations();
@@ -13,8 +21,13 @@ for (const relationship of relationships) {
   list.push(relationship);
   relationshipsByOrganization.set(relationship.organization_id, list);
 }
+const categoryOptions = getPublicOrganizationCategoryFilterOptions();
+const regulatoryOptions = getRegulatoryCharacterFilterOptions();
+const jurisdictionScopeOptions = getJurisdictionScopeFilterOptions();
+const roleOptions = Array.from(new Set(relationships.map((relationship) => relationship.role))).sort((a, b) => getFunctionalRoleLabel(a).localeCompare(getFunctionalRoleLabel(b)));
+const relationshipStatusOptions = Array.from(new Set(relationships.map((relationship) => relationship.status ?? 'unknown'))).sort((a, b) => getRelationshipStatusLabel(a).localeCompare(getRelationshipStatusLabel(b)));
 const title = 'Stablecoin Organizations — Stable or Gone';
-const description = 'Browse the companies, protocols, networks, and reserve organizations connected to stablecoins in Stable or Gone.';
+const description = 'Browse companies, protocols, DAOs, financial institutions, networks, funds, and reserve organizations connected to stablecoins, with functional roles kept separate from organization classification.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -22,27 +35,104 @@ const jsonLd = {
   url: 'https://sog.badjoke-lab.com/issuers/',
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin organizations', 'stablecoin issuers', 'stablecoin protocols', 'reserve disclosure', 'issuer history']
+  about: ['stablecoin organizations', 'stablecoin issuers', 'stablecoin protocols', 'stablecoin governance', 'reserve disclosure', 'issuer history']
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/issuers/" jsonLd={jsonLd}>
   <section class="hero">
-    <div class="panel hero-main"><div class="prompt">Organization directory</div><h1>Who is connected to each stablecoin?</h1><p>Browse the companies, protocols, networks, governance groups, and reserve organizations linked to the stablecoins in the archive.</p></div>
+    <div class="panel hero-main"><div class="prompt">Organization directory</div><h1>Who is connected to each stablecoin?</h1><p>Browse organizations by broad public category while keeping legal form, regulatory character, jurisdiction, and relationship-specific functional roles separate.</p></div>
     <div class="panel stats"><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Relationships</span><strong>{relationships.length}</strong></div></div>
   </section>
 
   <section class="section-grid" aria-label="Helpful links">
     <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Open the asset records connected to each organization.</p></a>
     <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Read reserve disclosures</h2><p>Understand the difference between issuer reports and protocol collateral data.</p></a>
-    <a class="panel mini-card" href="/methodology/"><h2>How records are reviewed</h2><p>See how sources, roles, status labels, and open questions are handled.</p></a>
+    <a class="panel mini-card" href="/methodology/"><h2>How roles are recorded</h2><p>See how organization identity, functional role, relationship status, and unresolved public information are kept separate.</p></a>
   </section>
 
-  <section class="panel registry"><div class="bar">All organizations</div><table data-table-kind="organization-index" data-mobile-table="scroll-preserve"><thead><tr><th>Name</th><th>Type</th><th>Jurisdiction</th><th>Stablecoins</th><th>Roles</th><th>Record confidence</th></tr></thead><tbody>
-    {organizations.length === 0 ? <tr><td colspan="6">No organization records available.</td></tr> : organizations.map((organization) => {
-      const relatedRelationships = relationshipsByOrganization.get(organization.id) ?? [];
-      const relatedCoins = relatedRelationships.map((relationship) => stablecoinById.get(relationship.stablecoin_id)).filter(Boolean);
-      const roles = Array.from(new Set(relatedRelationships.map((relationship) => relationship.role)));
-      return <tr><td><a href={`/issuer/${organization.slug}/`}>{organization.name}</a></td><td>{formatPublicLabel(organization.organization_type)}</td><td>{formatPublicLabel(organization.jurisdiction, 'Unknown')}</td><td>{relatedCoins.length > 0 ? relatedCoins.map((coin, index) => (<>{coin?.name}{coin?.symbol ? ` (${coin.symbol})` : ''}{index < relatedCoins.length - 1 ? <span> · </span> : null}</>)) : '—'}</td><td>{roles.length > 0 ? roles.map((role) => formatPublicLabel(role)).join(', ') : '—'}</td><td>{formatPublicLabel(organization.confidence)}</td></tr>;
-    })}
-  </tbody></table></section>
+  <section class="panel registry" data-organization-registry>
+    <div class="bar">All organizations</div>
+    <div class="registry-controls" aria-label="Organization filters">
+      <label><span>Search</span><input data-organization-search type="search" placeholder="Circle, protocol, Japan..." autocomplete="off" /></label>
+      <label><span>Category</span><select data-organization-category><option value="">All categories</option>{categoryOptions.map((category) => <option value={category.value}>{category.public_label}</option>)}</select></label>
+      <label><span>Regulatory character</span><select data-organization-regulatory><option value="">All regulatory states</option>{regulatoryOptions.map((entry) => <option value={entry.value}>{entry.public_label}</option>)}</select></label>
+      <label><span>Jurisdiction scope</span><select data-organization-jurisdiction><option value="">All jurisdiction scopes</option>{jurisdictionScopeOptions.map((entry) => <option value={entry.value}>{entry.public_label}</option>)}</select></label>
+      <label><span>Functional role</span><select data-organization-role><option value="">All roles</option>{roleOptions.map((role) => <option value={role}>{getFunctionalRoleLabel(role)}</option>)}</select></label>
+      <label><span>Relationship state</span><select data-organization-status><option value="">All relationship states</option>{relationshipStatusOptions.map((status) => <option value={status}>{getRelationshipStatusLabel(status)}</option>)}</select></label>
+      <label><span>Sort</span><select data-organization-sort><option value="name">Name A-Z</option><option value="category">Category A-Z</option><option value="stablecoins_desc">Most stablecoins</option><option value="roles_desc">Most roles</option></select></label>
+    </div>
+    <div class="registry-summary" aria-live="polite"><span data-organization-result-count>{organizations.length}</span> of {organizations.length} organizations</div>
+    <table data-table-kind="organization-index" data-mobile-table="scroll-preserve"><thead><tr><th>Name</th><th>Organization category</th><th>Regulatory character</th><th>Jurisdiction</th><th>Stablecoins</th><th>Functional roles</th><th>Relationship state</th><th>Record confidence</th></tr></thead><tbody data-organization-body>
+      {organizations.length === 0 ? <tr><td colspan="8">No organization records available.</td></tr> : organizations.map((organization) => {
+        const relatedRelationships = relationshipsByOrganization.get(organization.id) ?? [];
+        const relatedCoins = relatedRelationships.map((relationship) => stablecoinById.get(relationship.stablecoin_id)).filter(Boolean);
+        const roles = Array.from(new Set(relatedRelationships.map((relationship) => relationship.role))).sort((a, b) => getFunctionalRoleLabel(a).localeCompare(getFunctionalRoleLabel(b)));
+        const statuses = Array.from(new Set(relatedRelationships.map((relationship) => relationship.status ?? 'unknown'))).sort((a, b) => getRelationshipStatusLabel(a).localeCompare(getRelationshipStatusLabel(b)));
+        const taxonomy = resolveOrganizationTaxonomy(organization);
+        const searchable = [organization.name, organization.organization_type, organization.legacy_issuer_type, taxonomy.public_category_label, taxonomy.regulatory_character_label, taxonomy.jurisdiction_label, taxonomy.jurisdiction_scope_label, ...roles.map(getFunctionalRoleLabel), ...statuses.map(getRelationshipStatusLabel), ...relatedCoins.flatMap((coin) => [coin?.name, coin?.symbol])].filter(Boolean).join(' ').toLowerCase();
+        return <tr data-organization-row data-search={searchable} data-name={organization.name.toLowerCase()} data-category={taxonomy.public_category} data-category-label={taxonomy.public_category_label.toLowerCase()} data-regulatory={taxonomy.regulatory_character} data-jurisdiction={taxonomy.jurisdiction_scope} data-roles={roles.join(' ')} data-statuses={statuses.join(' ')} data-stablecoin-count={String(relatedCoins.length)} data-role-count={String(roles.length)}><td><a href={`/issuer/${organization.slug}/`}>{organization.name}</a></td><td>{taxonomy.public_category_label}</td><td>{taxonomy.regulatory_character_label}</td><td>{taxonomy.jurisdiction_label}<br /><small>{taxonomy.jurisdiction_scope_label}</small></td><td>{relatedCoins.length > 0 ? relatedCoins.map((coin, index) => (<>{coin?.name}{coin?.symbol ? ` (${coin.symbol})` : ''}{index < relatedCoins.length - 1 ? <span> · </span> : null}</>)) : '—'}</td><td>{roles.length > 0 ? roles.map(getFunctionalRoleLabel).join(', ') : '—'}</td><td>{statuses.length > 0 ? statuses.map(getRelationshipStatusLabel).join(', ') : '—'}</td><td>{formatPublicLabel(organization.confidence)}</td></tr>;
+      })}
+      <tr data-organization-no-results hidden><td colspan="8">No organizations match these filters.</td></tr>
+    </tbody></table>
+  </section>
+
+  <script>
+    const registry = document.querySelector('[data-organization-registry]');
+    const tbody = registry?.querySelector('[data-organization-body]');
+    const rows = Array.from(registry?.querySelectorAll('[data-organization-row]') ?? []);
+    const noResults = registry?.querySelector('[data-organization-no-results]');
+    const resultCount = registry?.querySelector('[data-organization-result-count]');
+    const controls = {
+      search: registry?.querySelector('[data-organization-search]'),
+      category: registry?.querySelector('[data-organization-category]'),
+      regulatory: registry?.querySelector('[data-organization-regulatory]'),
+      jurisdiction: registry?.querySelector('[data-organization-jurisdiction]'),
+      role: registry?.querySelector('[data-organization-role]'),
+      status: registry?.querySelector('[data-organization-status]'),
+      sort: registry?.querySelector('[data-organization-sort]')
+    };
+    const normalize = (value: unknown) => String(value ?? '').trim().toLowerCase();
+    const getValue = (control: Element | null | undefined) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
+    function sortRows() {
+      if (!tbody) return;
+      const mode = getValue(controls.sort) || 'name';
+      const sorted = [...rows].sort((a, b) => {
+        if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0;
+        if (mode === 'category') return String(a.dataset.categoryLabel ?? '').localeCompare(String(b.dataset.categoryLabel ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+        if (mode === 'stablecoins_desc') return Number(b.dataset.stablecoinCount ?? 0) - Number(a.dataset.stablecoinCount ?? 0) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+        if (mode === 'roles_desc') return Number(b.dataset.roleCount ?? 0) - Number(a.dataset.roleCount ?? 0) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+        return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? ''));
+      });
+      sorted.forEach((row) => tbody.appendChild(row));
+      if (noResults) tbody.appendChild(noResults);
+    }
+    function applyFilters() {
+      const query = normalize(getValue(controls.search));
+      const category = getValue(controls.category);
+      const regulatory = getValue(controls.regulatory);
+      const jurisdiction = getValue(controls.jurisdiction);
+      const role = getValue(controls.role);
+      const status = getValue(controls.status);
+      let visible = 0;
+      rows.forEach((row) => {
+        if (!(row instanceof HTMLElement)) return;
+        const matches = (!query || normalize(row.dataset.search).includes(query))
+          && (!category || row.dataset.category === category)
+          && (!regulatory || row.dataset.regulatory === regulatory)
+          && (!jurisdiction || row.dataset.jurisdiction === jurisdiction)
+          && (!role || normalize(row.dataset.roles).split(' ').includes(role))
+          && (!status || normalize(row.dataset.statuses).split(' ').includes(status));
+        row.hidden = !matches;
+        if (matches) visible += 1;
+      });
+      if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0;
+      if (resultCount) resultCount.textContent = String(visible);
+    }
+    Object.values(controls).forEach((control) => {
+      control?.addEventListener('input', () => { sortRows(); applyFilters(); });
+      control?.addEventListener('change', () => { sortRows(); applyFilters(); });
+    });
+    sortRows();
+    applyFilters();
+  </script>
 </BaseLayout>
