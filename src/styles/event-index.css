@@ -1,0 +1,97 @@
+@import './stablecoin-index.css';
+
+.event-index-cards {
+  display: none;
+}
+
+.event-card {
+  padding: 1rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  background: var(--sog-surface);
+}
+
+.event-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.event-card h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.event-card dl {
+  margin: 1rem 0 0;
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 0.55rem 0.8rem;
+}
+
+.event-card dt {
+  color: var(--sog-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.event-card dd {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.event-date {
+  color: var(--sog-positive);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.event-subject-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.event-subject-list a,
+.event-subject-list span {
+  min-height: 26px;
+  padding: 0 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--sog-line);
+  border-radius: 999px;
+  color: var(--sog-link);
+  font-size: 0.68rem;
+  text-decoration: none;
+}
+
+@media (max-width: 719px) {
+  .event-index-cards {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .event-index-table-wrap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .event-card dl {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .event-card dd + dt {
+    margin-top: 0.55rem;
+  }
+}
