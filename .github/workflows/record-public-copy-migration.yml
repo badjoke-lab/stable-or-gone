@@ -28,4 +28,5 @@ jobs:
           if-no-files-found: error
           path: |
             data/generated/record-public-copy-audit.json
+            data/generated/record-public-copy-preservation.json
             data/generated/record-public-copy-validation.json
