@@ -50,7 +50,7 @@ function roleHint(route) {
   if (route === '/') return 'registry_entry';
   if (/^\/(stablecoins|stablecoin|issuers|issuer|events|event)(\/|$)/.test(route)) return 'registry';
   if (/^\/(guides|glossary|models)(\/|$)/.test(route)) return 'learn';
-  if (/^\/(methodology|updates|contact|support)(\/|$)/.test(route)) return 'project';
+  if (/^\/(methodology|updates|contact|support|about)(\/|$)/.test(route)) return 'project';
   if (/^\/(version\.json|data\/|llms\.txt|ai\.txt)/.test(route)) return 'data_access';
   if (/sitemap|robots/.test(route)) return 'discovery';
   return 'unassigned';
