@@ -3,22 +3,26 @@ import path from 'node:path';
 
 const root = process.cwd();
 const auditPath = path.join(root, 'data/generated/record-public-copy-audit.json');
+const preservationPath = path.join(root, 'data/generated/record-public-copy-preservation.json');
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 assert(fs.existsSync(auditPath), 'record public-copy audit is missing');
-if (!fs.existsSync(auditPath)) {
+assert(fs.existsSync(preservationPath), 'record public-copy preservation report is missing');
+if (!fs.existsSync(auditPath) || !fs.existsSync(preservationPath)) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
 
 const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
+const preservation = JSON.parse(fs.readFileSync(preservationPath, 'utf8'));
 const totals = audit.totals ?? {};
 const matrix = audit.record_matrix ?? [];
 const occurrences = audit.occurrences ?? [];
 const findingsByDisposition = audit.findings_by_disposition ?? {};
 
 assert(audit.schema_version === '1.0', 'audit schema version must be 1.0');
+assert(preservation.schema_version === '1.0', 'preservation schema version must be 1.0');
 assert(typeof audit.baseline_id === 'string' && audit.baseline_id.length > 0, 'baseline id is missing');
 assert(totals.stablecoins === 92, `expected 92 stablecoins, found ${totals.stablecoins}`);
 assert(matrix.length === 92, `expected 92 migration rows, found ${matrix.length}`);
@@ -31,6 +35,14 @@ assert(totals.approved_public_copy_overrides === 20, `expected 20 reviewed stabl
 assert(totals.records_using_canonical_summary_fallback === 72, `expected 72 canonical-summary fallbacks, found ${totals.records_using_canonical_summary_fallback}`);
 assert(totals.migration_target_occurrences === 0, `unresolved record-specific public-copy occurrences remain: ${totals.migration_target_occurrences}`);
 assert(totals.migration_target_files === 0, `unresolved record-specific public-copy files remain: ${totals.migration_target_files}`);
+assert(totals.public_copy_preservation_ok === true, 'public-copy preservation result must pass');
+assert(preservation.ok === true, 'before/after public-copy preservation report must pass');
+assert(Object.values(preservation.preserved ?? {}).every(Boolean), 'all public-copy preservation axes must pass');
+assert(preservation.before?.summary_override_count === 20, 'before report must contain 20 embedded summary overrides');
+assert(preservation.after?.summary_override_count === 20, 'after report must contain 20 data-layer summary overrides');
+assert(preservation.before?.canonical_summary_fallback_count === 72, 'before report must contain 72 canonical-summary fallbacks');
+assert(preservation.after?.canonical_summary_fallback_count === 72, 'after report must contain 72 canonical-summary fallbacks');
+assert(preservation.before?.summary_map_sha256 === preservation.after?.summary_map_sha256, 'summary text digest changed during migration');
 assert((audit.migration_target_files ?? []).length === 0, 'migration target file list must be empty');
 assert((audit.orphan_source_relation_ids ?? []).length === 0, 'orphan source relation list must be empty');
 assert((audit.invalid_stablecoin_relation_ids ?? []).length === 0, 'invalid stablecoin relation list must be empty');
@@ -77,7 +89,7 @@ for (const occurrence of occurrences) {
 }
 
 const componentSource = fs.readFileSync(path.join(root, 'src/components/StablecoinDetailView.astro'), 'utf8');
-assert(componentSource.includes("getStablecoinPublicSummary"), 'StablecoinDetailView must use the stablecoin public-copy resolver');
+assert(componentSource.includes('getStablecoinPublicSummary'), 'StablecoinDetailView must use the stablecoin public-copy resolver');
 assert(componentSource.includes('<p>{publicSummary}</p>'), 'StablecoinDetailView must render the resolved public summary');
 assert(!componentSource.includes('const publicSummaries'), 'record-specific summary map remains embedded in StablecoinDetailView');
 
@@ -95,7 +107,8 @@ const validation = {
     approved_public_copy_overrides: totals.approved_public_copy_overrides,
     records_using_canonical_summary_fallback: totals.records_using_canonical_summary_fallback,
     migration_ready_records: matrix.filter((row) => row.migration_ready).length,
-    incomplete_records: matrix.filter((row) => !row.migration_ready).length
+    incomplete_records: matrix.filter((row) => !row.migration_ready).length,
+    public_copy_preservation_ok: preservation.ok
   },
   findings_by_disposition: findingsByDisposition,
   failures
