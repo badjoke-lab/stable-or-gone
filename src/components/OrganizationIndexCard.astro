@@ -1,6 +1,6 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
-const { record } = Astro.props;
+const { record } = Astro.props as { record: { search: string; name: string; category: string; regulatory: string; jurisdictionScope: string; roles: string[]; relationshipStatuses: string[]; assetCount: number; relationshipCount: number; sourceIdentityCount: number; slug: string; categoryLabel: string; regulatoryLabel: string; jurisdictionLabel: string; confidenceLabel: string; assetNames: string[] } };
 const data = {
   'data-search': record.search,
   'data-name': record.name.toLocaleLowerCase(),
@@ -22,8 +22,8 @@ const data = {
   <dl class="organization-index-card-grid">
     <div><dt>Jurisdiction</dt><dd>{record.jurisdictionLabel}</dd></div>
     <div><dt>Regulatory character</dt><dd>{record.regulatoryLabel}</dd></div>
-    <div><dt>Functional roles</dt><dd>{record.roles.length ? record.roles.map((role) => formatPublicLabel(role)).join(', ') : 'Not recorded'}</dd></div>
-    <div><dt>Relationship states</dt><dd>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</dd></div>
+    <div><dt>Functional roles</dt><dd>{record.roles.length ? record.roles.map((role: string) => formatPublicLabel(role)).join(', ') : 'Not recorded'}</dd></div>
+    <div><dt>Relationship states</dt><dd>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status: string) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</dd></div>
     <div><dt>Connected assets</dt><dd>{record.assetCount}</dd></div>
     <div><dt>Relationships</dt><dd>{record.relationshipCount}</dd></div>
     <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
