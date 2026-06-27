@@ -151,7 +151,7 @@ export const sharedInteractionPolicy = Object.freeze({
   server_rendered_unfiltered_fallback_required: true,
   javascript_enhancement_only: true,
   implementation_deferred: true,
-  implementation_starts_at_pr: 25,
+  implementation_starts_at_pr: 24,
   route_changes_allowed: false
 });
 
