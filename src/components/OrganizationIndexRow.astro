@@ -1,6 +1,6 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
-const { record } = Astro.props as { record: { search: string; name: string; category: string; regulatory: string; jurisdictionScope: string; roles: string[]; relationshipStatuses: string[]; assetCount: number; relationshipCount: number; sourceIdentityCount: number; slug: string; categoryLabel: string; regulatoryLabel: string; jurisdictionLabel: string } };
+const { record } = Astro.props as { record: { search: string; name: string; category: string; regulatory: string; jurisdictionScope: string; roles: string[]; relationshipStatuses: string[]; assetCount: number; relationshipCount: number; sourceIdentityCount: number; slug: string; categoryLabel: string; regulatoryLabel: string; jurisdictionLabel: string; confidenceLabel: string } };
 const data = {
   'data-search': record.search,
   'data-name': record.name.toLocaleLowerCase(),
@@ -22,5 +22,5 @@ const data = {
   <td>{record.roles.length ? record.roles.map((role: string) => formatPublicLabel(role)).join(', ') : 'Not recorded'}</td>
   <td>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status: string) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</td>
   <td>{record.assetCount} asset{record.assetCount === 1 ? '' : 's'} · {record.relationshipCount} relationship{record.relationshipCount === 1 ? '' : 's'}</td>
-  <td>{record.sourceIdentityCount} sources</td>
+  <td>{record.confidenceLabel}</td>
 </tr>

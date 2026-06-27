@@ -43,7 +43,8 @@ if (missing.length > 0) {
   for (const marker of ['URLSearchParams', 'replaceState', 'pushState', 'popstate', 'data-organization-clear-key']) check(source.client.includes(marker), `organization client behavior missing: ${marker}`);
   for (const section of ['id="overview"', 'id="relationships"', 'id="events"', 'id="evidence"', 'id="unknowns"', 'id="corrections"']) check(source.detail.includes(section), `organization detail section missing: ${section}`);
   for (const kind of ['organization-overview', 'organization-relationships', 'organization-events', 'organization-sources']) {
-    check(source.detail.includes(`data-table-kind="${kind}"`), `organization detail table missing: ${kind}`);
+    const tableMarker = source.detail.includes(`data-table-kind="${kind}"`) || source.detail.includes(`tableKind="${kind}"`);
+    check(tableMarker, `organization detail table missing: ${kind}`);
     check(source.detail.includes(`data-mobile-representation-for="${kind}"`), `organization mobile representation missing: ${kind}`);
   }
   check(source.detail.includes('Primary display is a navigation and summary choice only'), 'primary-display relationship semantics are missing');

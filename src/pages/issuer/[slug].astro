@@ -3,52 +3,65 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import IssuerControlEvents from '../../components/IssuerControlEvents.astro';
 import EvidenceSourceTable from '../../components/EvidenceSourceTable.astro';
 import ValueStateText from '../../components/ValueStateText.astro';
+import '../../styles/organization-detail.css';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { formatLifecycleLabel, lifecycleChipClass } from '../../utils/publicTaxonomy';
 import { resolveEventTaxonomy } from '../../utils/eventTaxonomy';
 import { resolvePrimaryRelationshipForStablecoin } from '../../utils/primaryDisplayRelationship';
-import {
-  getFunctionalRoleLabel,
-  getRelationshipStatusLabel,
-  resolveOrganizationTaxonomy
-} from '../../utils/organizationTaxonomy';
+import { getFunctionalRoleLabel, getRelationshipStatusLabel, resolveOrganizationTaxonomy } from '../../utils/organizationTaxonomy';
 import { issuerPublicSummaries } from '../../data/issuerPublicCopy';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
-import { getOrganizations, getStablecoins, getRelationships, getEvents, getEvidence } from '../../lib/data/registry';
+import { getOrganizations, getStablecoins, getRelationships, getEvents, getEvidence, getKnownUnknowns, type OrganizationRow } from '../../lib/data/registry';
+import { getCanonicalEvidenceRelations, getEvidenceSourceIdentities } from '../../lib/data/evidenceSources';
+import { resolveEvidenceIdentityId } from '../../../config/evidence-source-identities.mjs';
 
 export function getStaticPaths() {
   return getOrganizations().map((organization) => ({ params: { slug: organization.slug }, props: { organization } }));
 }
 
-const { organization } = Astro.props;
+const { organization } = Astro.props as { organization: OrganizationRow };
 const allStablecoins = getStablecoins();
 const allRelationships = getRelationships();
 const allEvents = getEvents();
 const allEvidence = getEvidence();
-const relationships = allRelationships.filter((relationship) => relationship.organization_id === organization.id);
 const stablecoinById = new Map(allStablecoins.map((coin) => [coin.id, coin] as const));
-const stablecoins = Array.from(new Set(relationships.map((relationship) => relationship.stablecoin_id))).map((id) => stablecoinById.get(id)).filter(Boolean);
-const stablecoinIds = new Set(relationships.map((relationship) => relationship.stablecoin_id));
-const primaryRelationshipIdByStablecoin = new Map(allStablecoins.map((coin) => [
-  coin.id,
-  resolvePrimaryRelationshipForStablecoin(coin.id, allRelationships).relationship?.id
-] as const));
-const primaryDisplayRelationshipCount = relationships.filter((relationship) => primaryRelationshipIdByStablecoin.get(relationship.stablecoin_id) === relationship.id).length;
-const events = allEvents.filter((event) => event.issuer_id === organization.id || event.subject_organization_ids?.includes(organization.id));
+const relationships = allRelationships
+  .filter((relationship) => relationship.organization_id === organization.id)
+  .map((relationship) => ({
+    relationship,
+    coin: stablecoinById.get(relationship.stablecoin_id),
+    isPrimary: resolvePrimaryRelationshipForStablecoin(relationship.stablecoin_id, allRelationships).relationship?.id === relationship.id
+  }))
+  .sort((left, right) => {
+    const leftHistorical = left.relationship.status === 'ended' || Boolean(left.relationship.end_date);
+    const rightHistorical = right.relationship.status === 'ended' || Boolean(right.relationship.end_date);
+    return Number(leftHistorical) - Number(rightHistorical) || String(left.coin?.name ?? '').localeCompare(String(right.coin?.name ?? ''));
+  });
+const stablecoinIds = new Set(relationships.map((item) => item.relationship.stablecoin_id));
+const stablecoins = Array.from(stablecoinIds).map((id) => stablecoinById.get(id)).filter(Boolean);
+const currentRelationships = relationships.filter((item) => item.relationship.status !== 'ended' && !item.relationship.end_date);
+const historicalRelationships = relationships.filter((item) => item.relationship.status === 'ended' || Boolean(item.relationship.end_date));
+const primaryDisplayRelationshipCount = relationships.filter((item) => item.isPrimary).length;
+const events = allEvents
+  .filter((event) => event.issuer_id === organization.id || event.subject_organization_ids?.includes(organization.id))
+  .sort((left, right) => String(right.event_date ?? '').localeCompare(String(left.event_date ?? '')));
 const issuerControlEvents = events.filter((event) => event.event_detail_kind === 'issuer_control' || event.event_type === 'issuer_freeze');
-const evidence = allEvidence.filter((source) => source.issuer_id === organization.id || source.organization_ids?.includes(organization.id) || (source.stablecoin_id && stablecoinIds.has(source.stablecoin_id)) || source.stablecoin_ids?.some((id) => stablecoinIds.has(id)));
+const evidenceRelations = getCanonicalEvidenceRelations().filter((relation) => relation.organization_ids.includes(organization.id));
+const sourceIdentityIds = new Set(evidenceRelations.map((relation) => relation.evidence_id));
+const evidence = allEvidence.filter((source) => sourceIdentityIds.has(resolveEvidenceIdentityId(source.id)));
+const sourceIdentities = getEvidenceSourceIdentities().filter((source) => sourceIdentityIds.has(source.id));
+const knownUnknowns = getKnownUnknowns().filter((item) => item.issuer_id === organization.id);
 const summary = issuerPublicSummaries[organization.slug] ?? organization.summary ?? 'A summary has not yet been added.';
 const taxonomy = resolveOrganizationTaxonomy(organization);
-const functionalRoles = Array.from(new Set(relationships.map((relationship) => relationship.role))).sort((a, b) => getFunctionalRoleLabel(a).localeCompare(getFunctionalRoleLabel(b)));
-const relationshipStates = Array.from(new Set(relationships.map((relationship) => relationship.status ?? 'unknown'))).sort((a, b) => getRelationshipStatusLabel(a).localeCompare(getRelationshipStatusLabel(b)));
+const functionalRoles = Array.from(new Set(relationships.map((item) => item.relationship.role))).sort((a, b) => getFunctionalRoleLabel(a).localeCompare(getFunctionalRoleLabel(b)));
+const relationshipStates = Array.from(new Set(relationships.map((item) => item.relationship.status ?? 'unknown'))).sort((a, b) => getRelationshipStatusLabel(a).localeCompare(getRelationshipStatusLabel(b)));
 const title = `${organization.name} — Stablecoin Organization History | Stable or Gone`;
 const description = `${organization.name} organization category, legal-form state, regulatory character, jurisdiction, functional roles, stablecoin relationships, major events, and sources.`;
-const canonicalUrl = `https://sog.badjoke-lab.com/issuer/${organization.slug}/`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: organization.name,
-  url: canonicalUrl,
+  url: `https://sog.badjoke-lab.com/issuer/${organization.slug}/`,
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
   sameAs: organization.official_url ? [organization.official_url] : undefined,
@@ -56,38 +69,59 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/issuer/${organization.slug}/`} jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main"><div class="prompt">Organization record</div><h1>{organization.name}</h1><p>{summary}</p></div>
-    <div class="panel stats"><div class="stat"><span>Category</span><strong>{taxonomy.public_category_label}</strong></div><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Relationships</span><strong>{relationships.length}</strong></div><div class="stat"><span>Primary displays</span><strong>{primaryDisplayRelationshipCount}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
-  </section>
+  <article class="organization-detail-page">
+    <header class="panel organization-detail-hero">
+      <div><div class="prompt">Organization record</div><h1>{organization.name}</h1><p>{summary}</p></div>
+      <dl class="organization-detail-summary">
+        <div><dt>Category</dt><dd>{taxonomy.public_category_label}</dd></div>
+        <div><dt>Jurisdiction</dt><dd>{taxonomy.jurisdiction_label}</dd></div>
+        <div><dt>Connected assets</dt><dd>{stablecoins.length}</dd></div>
+        <div><dt>Relationships</dt><dd>{relationships.length}</dd></div>
+        <div><dt>Primary displays</dt><dd>{primaryDisplayRelationshipCount}</dd></div>
+        <div><dt>Source identities</dt><dd>{sourceIdentities.length}</dd></div>
+      </dl>
+    </header>
 
-  <section class="section-grid" aria-label="Related pages">
-    <a class="panel mini-card" href="/issuers/"><h2>All organizations</h2><p>Browse companies, protocols, DAOs, financial institutions, networks, funds, and reserve bodies.</p></a>
-    <a class="panel mini-card" href="/stablecoins/"><h2>All stablecoins</h2><p>Open the asset records connected to these organization profiles.</p></a>
-    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reading reserve disclosures</h2><p>Understand issuer reports, attestations, audits, and protocol collateral data.</p></a>
-  </section>
+    <nav class="organization-detail-nav" aria-label="Organization record sections">
+      <a href="#overview">Overview</a><a href="#relationships">Relationships</a><a href="#events">Events</a><a href="#evidence">Evidence</a><a href="#unknowns">Known unknowns</a><a href="#corrections">Corrections</a>
+    </nav>
 
-  <section class="panel registry"><div class="bar">Organization identity</div><table data-table-kind="organization-overview" data-mobile-table="scroll-preserve"><tbody>
-    <tr><th>Organization category</th><td>{taxonomy.public_category_label}</td></tr>
-    <tr><th>Canonical organization type</th><td>{formatPublicLabel(taxonomy.canonical_organization_type)}</td></tr>
-    <tr><th>Legal form</th><td>{taxonomy.legal_form_label}</td></tr>
-    <tr><th>Legal-form state</th><td>{formatPublicLabel(taxonomy.legal_form_state)}</td></tr>
-    <tr><th>Regulatory character</th><td>{taxonomy.regulatory_character_label}</td></tr>
-    <tr><th>Jurisdiction</th><td>{taxonomy.jurisdiction_label}</td></tr>
-    <tr><th>Jurisdiction scope</th><td>{taxonomy.jurisdiction_scope_label}</td></tr>
-    <tr><th>Functional roles</th><td>{functionalRoles.length > 0 ? functionalRoles.map(getFunctionalRoleLabel).join(', ') : <ValueStateText value={null} />}</td></tr>
-    <tr><th>Relationship states</th><td>{relationshipStates.length > 0 ? relationshipStates.map(getRelationshipStatusLabel).join(', ') : <ValueStateText value={null} />}</td></tr>
-    <tr><th>Primary display relationships</th><td>{primaryDisplayRelationshipCount}</td></tr>
-    <tr><th>Official website</th><td>{organization.official_url ? <a href={organization.official_url}>{organization.official_url}</a> : <ValueStateText value={null} />}</td></tr>
-    <tr><th>Record confidence</th><td><ValueStateText value={organization.confidence} displayValue={formatPublicLabel(organization.confidence)} /></td></tr>
-    <tr><th>Last reviewed</th><td><ValueStateText value={organization.last_verified_at} /></td></tr>
-  </tbody></table></section>
+    <section class="panel organization-detail-section" id="overview">
+      <div class="bar">Organization overview</div>
+      <div class="organization-detail-table"><table data-table-kind="organization-overview" data-mobile-table="scroll-preserve"><caption>Organization identity and reviewed taxonomy</caption><tbody>
+        <tr><th>Organization category</th><td>{taxonomy.public_category_label}</td></tr><tr><th>Canonical organization type</th><td>{formatPublicLabel(taxonomy.canonical_organization_type)}</td></tr><tr><th>Legal form</th><td>{taxonomy.legal_form_label}</td></tr><tr><th>Legal-form state</th><td>{formatPublicLabel(taxonomy.legal_form_state)}</td></tr><tr><th>Regulatory character</th><td>{taxonomy.regulatory_character_label}</td></tr><tr><th>Jurisdiction</th><td>{taxonomy.jurisdiction_label}</td></tr><tr><th>Jurisdiction scope</th><td>{taxonomy.jurisdiction_scope_label}</td></tr><tr><th>Functional roles</th><td>{functionalRoles.length > 0 ? functionalRoles.map(getFunctionalRoleLabel).join(', ') : <ValueStateText value={null} />}</td></tr><tr><th>Relationship states</th><td>{relationshipStates.length > 0 ? relationshipStates.map(getRelationshipStatusLabel).join(', ') : <ValueStateText value={null} />}</td></tr><tr><th>Primary display relationships</th><td>{primaryDisplayRelationshipCount}</td></tr><tr><th>Official website</th><td>{organization.official_url ? <a href={organization.official_url}>{organization.official_url}</a> : <ValueStateText value={null} />}</td></tr><tr><th>Record confidence</th><td><ValueStateText value={organization.confidence} displayValue={formatPublicLabel(organization.confidence)} /></td></tr><tr><th>Last reviewed</th><td><ValueStateText value={organization.last_verified_at} /></td></tr>
+      </tbody></table></div>
+      <dl class="organization-overview-cards" data-mobile-representation-for="organization-overview">
+        <div><dt>Organization category</dt><dd>{taxonomy.public_category_label}</dd></div><div><dt>Canonical organization type</dt><dd>{formatPublicLabel(taxonomy.canonical_organization_type)}</dd></div><div><dt>Legal form</dt><dd>{taxonomy.legal_form_label}</dd></div><div><dt>Legal-form state</dt><dd>{formatPublicLabel(taxonomy.legal_form_state)}</dd></div><div><dt>Regulatory character</dt><dd>{taxonomy.regulatory_character_label}</dd></div><div><dt>Jurisdiction scope</dt><dd>{taxonomy.jurisdiction_scope_label}</dd></div><div><dt>Functional roles</dt><dd>{functionalRoles.length ? functionalRoles.map(getFunctionalRoleLabel).join(', ') : 'Not recorded'}</dd></div><div><dt>Relationship states</dt><dd>{currentRelationships.length} current · {historicalRelationships.length} historical</dd></div><div><dt>Primary display relationships</dt><dd>{primaryDisplayRelationshipCount}</dd></div><div><dt>Record confidence</dt><dd>{formatPublicLabel(organization.confidence)}</dd></div>
+      </dl>
+    </section>
 
-  <section class="panel registry"><div class="bar">Stablecoin relationships</div><p><small>Display priority is used for registry summaries and navigation. It does not erase additional roles or determine legal responsibility.</small></p><table data-table-kind="organization-relationships" data-mobile-table="scroll-preserve"><thead><tr><th>Stablecoin</th><th>Symbol</th><th>Functional role</th><th>Display priority</th><th>From</th><th>Until</th><th>Relationship state</th><th>Stablecoin lifecycle</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="8">No stablecoin relationships have been added yet.</td></tr> : relationships.map((relationship) => { const coin = stablecoinById.get(relationship.stablecoin_id); const isPrimary = primaryRelationshipIdByStablecoin.get(relationship.stablecoin_id) === relationship.id; return <tr><td>{coin ? <a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a> : relationship.stablecoin_id}</td><td><ValueStateText value={coin?.symbol} /></td><td>{getFunctionalRoleLabel(relationship.role)}</td><td>{isPrimary ? 'Primary display' : 'Additional relationship'}</td><td><ValueStateText value={relationship.start_date} /></td><td><ValueStateText value={relationship.end_date} /></td><td>{getRelationshipStatusLabel(relationship.status ?? 'unknown')}</td><td>{coin ? <span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span> : <ValueStateText value={null} />}</td></tr>; })}</tbody></table></section>
+    <section class="panel organization-detail-section" id="relationships">
+      <div class="bar">Stablecoin relationships</div>
+      <p class="organization-detail-note">Primary display is a navigation and summary choice only. All current and historical relationships remain visible.</p>
+      <div class="organization-detail-table"><table data-table-kind="organization-relationships" data-mobile-table="scroll-preserve"><caption>Current and historical stablecoin relationships</caption><thead><tr><th>Stablecoin</th><th>Symbol</th><th>Functional role</th><th>Display priority</th><th>From</th><th>Until</th><th>Relationship state</th><th>Stablecoin lifecycle</th></tr></thead><tbody>{relationships.length === 0 ? <tr><td colspan="8">No stablecoin relationships have been added yet.</td></tr> : relationships.map(({ relationship, coin, isPrimary }) => <tr><td>{coin ? <a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a> : relationship.stablecoin_id}</td><td><ValueStateText value={coin?.symbol} /></td><td>{getFunctionalRoleLabel(relationship.role)}</td><td>{isPrimary ? 'Primary display' : 'Additional relationship'}</td><td><ValueStateText value={relationship.start_date} /></td><td><ValueStateText value={relationship.end_date} /></td><td>{getRelationshipStatusLabel(relationship.status ?? 'unknown')}</td><td>{coin ? <span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span> : <ValueStateText value={null} />}</td></tr>)}</tbody></table></div>
+      <div class="organization-relationship-cards" data-mobile-representation-for="organization-relationships">{relationships.map(({ relationship, coin, isPrimary }) => <article><header><h3>{coin ? <a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a> : relationship.stablecoin_id}</h3><span>{isPrimary ? 'Primary display' : 'Additional relationship'}</span></header><dl><div><dt>Functional role</dt><dd>{getFunctionalRoleLabel(relationship.role)}</dd></div><div><dt>Relationship state</dt><dd>{getRelationshipStatusLabel(relationship.status ?? 'unknown')}</dd></div><div><dt>From</dt><dd>{relationship.start_date ?? 'Not recorded'}</dd></div><div><dt>Until</dt><dd>{relationship.end_date ?? 'Not recorded'}</dd></div></dl></article>)}</div>
+    </section>
 
-  <IssuerControlEvents events={issuerControlEvents} title="Enforcement and control actions" />
-  <section class="panel registry"><div class="bar">Events</div><table data-table-kind="organization-events" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Status effect</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="5">No organization-level events have been added yet.</td></tr> : events.map((event) => { const eventTaxonomy = resolveEventTaxonomy(event); return <tr><td><ValueStateText value={event.event_date} /></td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{eventTaxonomy.public_category_label}</td><td>{eventTaxonomy.canonical_subtype_label}</td><td>{eventTaxonomy.status_effect_label}</td></tr>; })}</tbody></table></section>
-  <section class="panel registry"><div class="bar">Sources</div><EvidenceSourceTable evidence={evidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added yet." /></section>
+    <section class="panel organization-detail-section" id="events">
+      <div class="bar">Events</div>
+      <IssuerControlEvents events={issuerControlEvents} title="Enforcement and control actions" />
+      <div class="organization-detail-table"><table data-table-kind="organization-events" data-mobile-table="scroll-preserve"><caption>Events connected to this organization</caption><thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Status effect</th></tr></thead><tbody>{events.length === 0 ? <tr><td colspan="5">No organization-level events have been added yet.</td></tr> : events.map((event) => { const eventTaxonomy = resolveEventTaxonomy(event); return <tr><td><ValueStateText value={event.event_date} /></td><td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></td><td>{eventTaxonomy.public_category_label}</td><td>{eventTaxonomy.canonical_subtype_label}</td><td>{eventTaxonomy.status_effect_label}</td></tr>; })}</tbody></table></div>
+      <div class="organization-event-cards" data-mobile-representation-for="organization-events">{events.map((event) => { const eventTaxonomy = resolveEventTaxonomy(event); return <article><time>{event.event_date ?? 'Date not recorded'}</time><h3><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></h3><p>{eventTaxonomy.public_category_label} · {eventTaxonomy.canonical_subtype_label}</p><small>{eventTaxonomy.status_effect_label}</small></article>; })}</div>
+    </section>
 
-  <section class="panel report-box"><h2>Suggest a correction</h2><p>Report an incorrect organization category, legal form, regulatory character, jurisdiction, role, date, relationship, or source.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div></section>
+    <section class="panel organization-detail-section" id="evidence">
+      <div class="bar">Evidence</div>
+      <div class="organization-detail-table"><EvidenceSourceTable evidence={evidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added yet." /></div>
+      <div class="organization-source-cards" data-mobile-representation-for="organization-sources">{sourceIdentities.map((source) => <article><span class="record-kicker">Source identity</span><h3><a href={source.url}>{source.title}</a></h3><dl><div><dt>Publisher</dt><dd>{source.publisher ?? 'Not recorded'}</dd></div><div><dt>Published</dt><dd>{source.published_at ?? 'Not recorded'}</dd></div><div><dt>Reliability</dt><dd>{formatPublicLabel(source.reliability)}</dd></div><div><dt>Evidence relations</dt><dd>{evidenceRelations.filter((relation) => relation.evidence_id === source.id).length}</dd></div></dl>{source.archived_url && <a href={source.archived_url}>Open archive</a>}</article>)}</div>
+    </section>
+
+    <section class="panel organization-detail-section" id="unknowns">
+      <div class="bar">Known unknowns</div>
+      <div class="organization-unknown-cards">{knownUnknowns.map((item) => <article><span class="record-kicker">Known unknown</span><h3>{item.topic}</h3><p>{item.description}</p><dl><div><dt>Severity</dt><dd>{formatPublicLabel(item.severity)}</dd></div><div><dt>Last checked</dt><dd>{item.last_checked_at ?? 'Not recorded'}</dd></div></dl></article>)}</div>
+      {knownUnknowns.length === 0 && <p class="organization-detail-empty">No organization-level known unknown is recorded. Stablecoin dossiers may still contain relationship-specific unresolved questions.</p>}
+    </section>
+
+    <section class="panel organization-detail-section" id="corrections"><div class="bar">Corrections and further reading</div><div class="organization-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Read the methodology</a><a href="/issuers/">Back to Organizations</a></div></section>
+  </article>
 </BaseLayout>

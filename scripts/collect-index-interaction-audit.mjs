@@ -4,7 +4,10 @@ import { indexInteractionContracts } from '../config/index-interaction-contract.
 
 const root = process.cwd();
 const outputPath = path.join(root, 'data/generated/index-interaction-audit.json');
-const clients = { stablecoins: 'src/scripts/stablecoin-index.ts' };
+const clients = {
+  stablecoins: 'src/scripts/stablecoin-index.ts',
+  organizations: 'src/scripts/organization-index.ts'
+};
 const clean = (value) => value.replace(/<[^>]+>/g, ' ').replace(/\{[^}]+\}/g, ' ').replace(/\s+/g, ' ').trim();
 
 function inspect(contract) {
@@ -29,13 +32,13 @@ function inspect(contract) {
       result_count_present: /data-(?:organization-|event-)?result-count/.test(source),
       zero_result_row_present: /data-(?:organization-|event-)?no-results/.test(source),
       aria_live_present: /aria-live=/.test(source),
-      url_search_params_present: /URLSearchParams|searchParams/.test(behavior),
-      history_replace_present: /replaceState/.test(behavior),
-      history_push_present: /pushState/.test(behavior),
-      popstate_present: /popstate/.test(behavior),
-      clear_all_present: /data-clear-all|clear-all|clear filters|reset filters/i.test(behavior),
+      url_search_params_present: behavior.includes('URLSearchParams'),
+      history_replace_present: behavior.includes('replaceState'),
+      history_push_present: behavior.includes('pushState'),
+      popstate_present: behavior.includes('popstate'),
+      clear_all_present: /clear-all|clear filters|reset filters/i.test(behavior),
       comparison_present: /data-compare|comparison-panel|compare=/i.test(behavior),
-      server_rendered_rows_present: /records\.map|stablecoins\.map|\.map\(\(/.test(source)
+      server_rendered_rows_present: /records\.map|stablecoins\.map|organizations\.map|\.map\(\(/.test(source)
     }
   };
 }
