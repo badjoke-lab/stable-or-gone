@@ -30,6 +30,7 @@ import {
 } from '../config/deployment-taxonomy.mjs';
 import { publicValueStateValues, resolvePublicValueState } from '../config/value-states.mjs';
 import { buildPrimaryDisplayRelationshipStats } from './build-primary-display-relationship-stats.mjs';
+import { buildEvidenceSourceIdentityStats } from './build-evidence-source-identity-stats.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -144,6 +145,19 @@ const deploymentVerificationStates = deployments.map((row) => getDeploymentVerif
 const deploymentContractIdentityStates = deployments.map((row) => getContractIdentityState(row.contract_address));
 const deploymentNetworkIdentityStates = deployments.map((row) => getNetworkIdentityState(row.chain));
 const primaryDisplayStats = buildPrimaryDisplayRelationshipStats(root);
+const evidenceIdentityStats = buildEvidenceSourceIdentityStats(root);
+
+const expectedEvidenceSourceIdentitySummary = {
+  raw_evidence_records: evidenceIdentityStats.canonical_evidence_records,
+  source_identities: evidenceIdentityStats.public_source_identities,
+  source_identity_groups: evidenceIdentityStats.source_identity_groups,
+  source_aliases: evidenceIdentityStats.source_aliases,
+  removed_public_duplicate_rows: evidenceIdentityStats.removed_public_duplicate_rows,
+  evidence_relations: evidenceIdentityStats.evidence_relations,
+  relation_source_identities: evidenceIdentityStats.relation_source_identities,
+  orphan_relation_source_ids: evidenceIdentityStats.orphan_relation_source_ids,
+  unmapped_alias_ids: []
+};
 
 const expectedCounts = { primary_records: stablecoins.length, events: events.length, evidence: evidence.length };
 const expectedBreakdown = {
@@ -151,6 +165,13 @@ const expectedBreakdown = {
   organizations: organizations.length,
   relationships: relationships.length,
   evidence_relations: evidence.length,
+  evidence_source_identities: evidenceIdentityStats.public_source_identities,
+  evidence_source_identity_groups: evidenceIdentityStats.source_identity_groups,
+  evidence_source_aliases: evidenceIdentityStats.source_aliases,
+  evidence_duplicate_public_rows_removed: evidenceIdentityStats.removed_public_duplicate_rows,
+  evidence_canonical_relations: evidenceIdentityStats.evidence_relations,
+  evidence_relation_source_identities: evidenceIdentityStats.relation_source_identities,
+  evidence_orphan_relation_source_ids: evidenceIdentityStats.orphan_relation_source_ids.length,
   reserve_reports: reserveReports.length,
   known_unknowns: knownUnknowns.length,
   regulatory_notes: regulatoryNotes.length,
@@ -194,7 +215,12 @@ const expectedBreakdown = {
   canonical_evidence_reliability_raw: countValues(evidence.map((row) => row.reliability)),
   evidence_archive_state: countValues(evidenceArchiveStates),
   evidence_relation_kind: countValues(evidence.map((row) => getEvidenceRelationKind(row.id))),
-  evidence_claim_scope_non_exclusive: countMultiValues(evidence.map(evidenceClaims)),
+  public_evidence_source_identity_category: evidenceIdentityStats.public_source_category,
+  evidence_source_identity_provenance: evidenceIdentityStats.source_provenance,
+  evidence_source_identity_primary_state: evidenceIdentityStats.primary_state,
+  evidence_source_identity_reliability: evidenceIdentityStats.reliability,
+  evidence_source_identity_archive_state: evidenceIdentityStats.archive_state,
+  evidence_claim_scope_non_exclusive: evidenceIdentityStats.relation_claim_scopes_non_exclusive,
   reserve_report_type: countValues(reserveReports.map((row) => row.report_type)),
   known_unknown_severity: countValues(knownUnknowns.map((row) => row.severity)),
   public_deployment_category: countValues(publicDeploymentCategories),
@@ -242,6 +268,7 @@ assert(version.build?.provenance_verification_marker === 'sog_build_provenance_v
 assert(version.data?.data_schema_version === 'sog_registry_v2', 'data schema mismatch');
 assert(isDeepStrictEqual(version.data?.record_counts, expectedCounts), 'version record counts do not match canonical data');
 assert(isDeepStrictEqual(version.data?.record_count_breakdown, expectedBreakdown), 'version breakdown does not match canonical data');
+assert(isDeepStrictEqual(version.data?.evidence_source_identity, expectedEvidenceSourceIdentitySummary), 'version evidence source identity summary mismatch');
 assert(version.data?.records_last_reviewed_at === expectedLastReviewedAt, 'records_last_reviewed_at mismatch');
 
 const expectedBuildCommit = process.env.SOG_BUILD_COMMIT || checkedOutCommit() || process.env.GITHUB_SHA;
@@ -257,6 +284,7 @@ assert(manifest.canonical_origin === version.canonical_origin, 'manifest origin 
 assert(isDeepStrictEqual(manifest.build, version.build), 'manifest build provenance differs from version');
 assert(isDeepStrictEqual(manifest.record_counts, expectedCounts), 'manifest counts do not match canonical data');
 assert(isDeepStrictEqual(manifest.record_count_breakdown, expectedBreakdown), 'manifest breakdown does not match canonical data');
+assert(isDeepStrictEqual(manifest.evidence_source_identity, expectedEvidenceSourceIdentitySummary), 'manifest evidence source identity summary mismatch');
 assert(manifest.data_safety?.canonical_only === true, 'canonical-only flag missing');
 assert(manifest.data_safety?.includes_unreviewed_candidates === false, 'candidate safety flag invalid');
 assert(manifest.data_safety?.includes_internal_monitoring === false, 'monitoring safety flag invalid');
@@ -264,4 +292,4 @@ assert(manifest.data_safety?.includes_private_notes === false, 'private-note saf
 assert(llmsText.includes('/data/manifest.json') && llmsText.includes('/ai.txt'), 'llms.txt endpoint references missing');
 assert(aiText.includes('Version endpoint: /version.json') && aiText.includes('LLM guide: /llms.txt'), 'ai.txt endpoint references missing');
 
-console.log(JSON.stringify({ ok: true, build: version.build, record_counts: expectedCounts, record_count_breakdown: expectedBreakdown }, null, 2));
+console.log(JSON.stringify({ ok: true, build: version.build, record_counts: expectedCounts, record_count_breakdown: expectedBreakdown, evidence_source_identity: expectedEvidenceSourceIdentitySummary }, null, 2));

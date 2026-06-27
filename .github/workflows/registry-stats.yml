@@ -21,6 +21,7 @@ jobs:
           node scripts/generate-registry-stats-batch-o.mjs
           node scripts/build-value-state-stats.mjs
           node scripts/build-primary-display-relationship-stats.mjs
+          node scripts/build-evidence-source-identity-stats.mjs
       - name: Validate rebuilt output
         run: node scripts/validate-registry-stats.mjs
       - uses: actions/upload-artifact@v4

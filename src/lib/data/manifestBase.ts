@@ -7,9 +7,11 @@ import {
   getRecordCountBreakdown,
   getRecordCounts,
 } from '../../lib/machine-readable';
+import { getEvidenceSourceIdentitySummary } from './evidenceSources';
 
 export function GET() {
   const build = getBuildMetadata();
+  const evidenceSourceIdentity = getEvidenceSourceIdentitySummary();
   const manifest = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
@@ -27,6 +29,7 @@ export function GET() {
         'stablecoin_organization_relationship',
         'stablecoin_event',
         'evidence',
+        'evidence_source_identity',
         'evidence_relation',
         'reserve_report',
         'known_unknown',
@@ -43,6 +46,7 @@ export function GET() {
     main_routes: MAIN_ROUTES,
     record_counts: getRecordCounts(),
     record_count_breakdown: getRecordCountBreakdown(),
+    evidence_source_identity: evidenceSourceIdentity,
     data_safety: DATA_SAFETY,
     correction_links: {
       page: '/contact/',
