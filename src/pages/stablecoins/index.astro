@@ -154,6 +154,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
     </section>
     <div hidden>{records.map((record) => <StablecoinComparisonSource record={record} />)}</div>
   </div>
-  <script><script is:inline>void 0</script></script>
-  <script src="../../scripts/stablecoin-index.ts"></script>
+  <script>
+    import '../../scripts/stablecoin-index';
+  </script>
 </BaseLayout>
