@@ -18,7 +18,11 @@ const data = {
 <tr data-registry-row {...data}>
   <td><label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span aria-hidden="true">Compare</span></label><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a></td>
   <td>{record.symbol || '—'}</td>
-  <td>{record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}{record.relationshipCount > 1 && <small class="relationship-summary">{record.relationshipCount} relationships · {record.organizationCount} organizations</small>}</td>
+  <td>
+    {record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}
+    {record.relationshipCount > 1 && <small class="relationship-summary">+{record.relationshipCount - 1} additional relationship{record.relationshipCount - 1 === 1 ? '' : 's'} · {record.organizationCount} organizations</small>}
+    {record.relationshipCount > 1 && <details class="organization-summary"><summary>All connected organizations</summary><p>{record.organizationSummary}</p></details>}
+  </td>
   <td>{record.primaryRoleLabel}</td>
   <td>{record.referenceLabel}</td>
   <td>{record.backingLabel}</td>
