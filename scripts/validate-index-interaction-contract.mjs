@@ -100,7 +100,7 @@ for (const [key, value] of Object.entries(sharedInteractionPolicy)) {
 }
 assert(sharedInteractionPolicy.multi_value_separator === ',', 'multi-value separator must be a comma');
 assert(sharedInteractionPolicy.implementation_deferred === true, 'PR 19 must remain specification-only');
-assert(sharedInteractionPolicy.implementation_starts_at_pr === 25, 'index interaction implementation must remain deferred to PR 25');
+assert(sharedInteractionPolicy.implementation_starts_at_pr === 24, 'index interaction implementation must begin with stablecoin index PR 24');
 assert(sharedInteractionPolicy.route_changes_allowed === false, 'PR 19 must not change routes');
 
 for (const [key, value] of Object.entries(comparisonPolicy)) assert(value === true, `comparison policy ${key} must remain true`);
