@@ -1,0 +1,47 @@
+.event-index-page { display: grid; gap: 24px; }
+.event-index-intro { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr); gap: 20px; }
+.event-index-intro-main, .event-index-intro-stats { padding: 28px; }
+.event-index-intro-main h1 { max-width: 18ch; }
+.event-index-intro-main p { max-width: 78ch; }
+.event-index-intro-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--shell-line-subtle); }
+.event-index-stat { display: grid; align-content: center; gap: 8px; padding: 18px; background: var(--shell-surface); }
+.event-index-stat span, .event-index-toolbar label > span, .event-index-filter summary, .event-index-card-grid dt { color: var(--shell-text-muted); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.event-index-stat strong { font-size: 2rem; }
+.event-index-registry { overflow: visible; }
+.event-index-toolbar { display: grid; grid-template-columns: minmax(260px, 1.4fr) minmax(190px, .6fr) auto; gap: 12px; align-items: end; padding: 18px; border-bottom: 1px solid var(--shell-line-subtle); background: var(--shell-surface-raised); }
+.event-index-toolbar label { display: grid; gap: 7px; }
+.event-index-toolbar input, .event-index-toolbar select, .event-index-action { min-height: 44px; font: inherit; }
+.event-index-toolbar input, .event-index-toolbar select { width: 100%; border: 1px solid var(--shell-line); border-radius: 6px; background: var(--shell-background-subtle); color: var(--shell-text); padding: 10px 12px; }
+.event-index-action { border: 1px solid var(--shell-line); border-radius: 6px; background: transparent; color: var(--shell-link); padding: 10px 14px; cursor: pointer; }
+.event-index-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--shell-line-subtle); }
+.event-index-filter { border: 1px solid var(--shell-line-subtle); border-radius: 8px; background: var(--shell-background-subtle); }
+.event-index-filter summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; cursor: pointer; }
+.event-index-filter summary::after { content: attr(data-summary-label); color: var(--shell-link); font-size: .75rem; text-transform: none; letter-spacing: 0; }
+.event-index-filter-options { display: grid; gap: 2px; max-height: 240px; overflow: auto; padding: 4px 10px 12px; }
+.event-index-filter-options label { min-height: 38px; display: flex; align-items: center; gap: 10px; color: var(--shell-text); cursor: pointer; }
+.event-index-filter-options input { width: 18px; height: 18px; accent-color: var(--shell-focus); }
+.event-index-summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 14px 18px; border-bottom: 1px solid var(--shell-line-subtle); }
+.event-index-result-count { flex: 0 0 auto; color: var(--shell-positive); font-weight: 700; }
+.event-index-active-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.event-index-table { overflow-x: auto; overscroll-behavior-inline: contain; }
+.event-index-table table { min-width: 1100px; }
+.event-index-table td:nth-child(2) { min-width: 250px; }
+.event-index-cards { display: none; }
+.event-index-card { display: grid; gap: 16px; border: 1px solid var(--shell-line-subtle); border-radius: 10px; background: var(--shell-surface); padding: 18px; }
+.event-index-card header { display: grid; gap: 5px; }
+.event-index-card h2 { margin: 0; }
+.event-index-card time { color: var(--shell-link); font-family: var(--shell-font-mono); font-size: .78rem; font-weight: 700; }
+.event-index-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.event-index-card-grid dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.event-index-no-results { display: grid; gap: 12px; justify-items: start; padding: 28px 18px; border-top: 1px solid var(--shell-line-subtle); }
+@media (max-width: 980px) {
+  .event-index-intro, .event-index-toolbar { grid-template-columns: 1fr; }
+  .event-index-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 719px) {
+  .event-index-intro-stats, .event-index-filter-grid, .event-index-card-grid { grid-template-columns: 1fr; }
+  .event-index-intro-main, .event-index-intro-stats { padding: 20px; }
+  .event-index-summary { display: grid; }
+  .event-index-table { display: none; }
+  .event-index-cards { display: grid; gap: 12px; padding: 14px; }
+}
