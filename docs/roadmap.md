@@ -6,7 +6,7 @@ Updated: 2026-06-27
 
 This is the canonical execution schedule for SOG.
 
-Detailed audits belong in `docs/audits/`. Canonical visual and page decisions belong in `docs/architecture/`. The UI implementation sequence belongs in `docs/ui-redesign/implementation-plan.md`.
+Detailed audits belong in `docs/audits/`. Canonical visual and page decisions belong in `docs/architecture/`. The binding UI sequence belongs in `docs/ui-redesign/implementation-plan.md`.
 
 ## Required authority
 
@@ -27,8 +27,6 @@ docs/architecture/responsive-accessibility-v1.md
 
 `docs/architecture/visual-system-and-mocks-v1.md` is historical for new visual implementation. The v2 Modern Data Product contract is authoritative.
 
-Implementation work must cite these documents before changing public semantics, routes, record counts, navigation, dossier ownership, index behavior, change history, responsive behavior, accessibility behavior, or visual presentation.
-
 ## Registry checkpoint
 
 ```text
@@ -44,21 +42,20 @@ Deployments:                   130
 Reserve components:            125
 ```
 
-Canonical count source:
-
-```text
-docs/migration/registry-v3-baseline.json
-```
+Canonical count source: `docs/migration/registry-v3-baseline.json`.
 
 ## Current position
 
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged repair work: PR #206
+Latest merged UI-program work: PR #207
+Latest merged main: 3df568eab0a179d7690a88efb599156b0d659ab7
 Current public UI: partial repair implementation, not accepted as completed UI v2
-Current phase: Phase V2-0 — approved UI v2 documentation reset
-Active work: PR #207 — freeze approved UI v2 contract and replacement schedule
+Gate V2-A: passed
+Current phase: Phase V2-1 — shared visual foundation
+Active work: PR #208 — approved brand assets, v2 tokens, shared shell, primitives, and validation
+Next work after Gate V2-B: PR #209 — approved Home page
 Approved visual direction: Modern Data Product
 Approved desktop reference pages: 8
 Routine record growth: paused at 92 assets
@@ -69,15 +66,15 @@ Production publication: prohibited until Gate V2-G owner approval
 
 ## Why the schedule was reset
 
-The earlier program correctly repaired data semantics, route integrity, evidence handling, responsive foundations, and several page implementations. It did not establish the final visual direction with owner-approved page mocks before implementation advanced.
+The earlier program repaired data semantics, route integrity, evidence handling, responsive foundations, and several page functions, but implementation advanced before the owner approved a final visual direction.
 
-As a result:
+Therefore:
 
-- PRs #191–#201 contain reusable functional work;
-- the live site is not considered the completed new UI;
-- the earlier v1 mock package no longer controls visual implementation;
-- the owner-approved eight-page Modern Data Product set now controls the redesign;
-- all remaining UI work must follow the v2 contract and the replacement PR sequence.
+- PRs #191–#201 remain reusable functional work;
+- the live site is not the completed new UI;
+- the v1 mock package no longer controls visual implementation;
+- the owner-approved eight-page Modern Data Product set controls the redesign;
+- every remaining UI PR must cite the v2 contract, exact reference page, and this schedule.
 
 ## Preserved completed foundations
 
@@ -116,7 +113,7 @@ PR #186  stablecoin dossier hierarchy and field matrix
 PR #187  index interaction contract
 PR #188  meaningful public change-history contract
 PR #189  responsive and accessibility contract
-PR #190  v1 visual system and generated mocks — now historical for new visual work
+PR #190  v1 visual system and generated mocks — historical for new visual work
 PR #191  grouped navigation shell
 PR #195  layout wiring
 PR #196  stablecoin index implementation
@@ -136,7 +133,12 @@ PR #205  Batch 13 stage-gate correction
 PR #206  production integrity-audit alignment
 ```
 
-These repairs remain valid. They do not make the current visual UI the approved v2 release.
+### Approved v2 reset
+
+```text
+PR #207  approved UI v2 contract, eight page references, logo references, schedule, and AGENTS authority
+Gate V2-A passed
+```
 
 ## Approved UI v2 reference set
 
@@ -160,7 +162,7 @@ Approved branding:
 - monogram for compact surfaces;
 - no stacked-cube substitute.
 
-Approved asset policy:
+Approved identity-asset policy:
 
 - ticker badges are the default stablecoin identity;
 - organization-initial badges are the default organization identity;
@@ -172,14 +174,14 @@ Approved asset policy:
 ### Phase V2-0 — Documentation and reference freeze
 
 ```text
-PR #207  approved UI v2 contract, mock assets, logo references, schedule, AGENTS update
-Gate V2-A
+PR #207  approved UI v2 contract, reference assets, schedule, and AGENTS update
+Gate V2-A passed
 ```
 
 ### Phase V2-1 — Shared visual foundation
 
 ```text
-PR #208  production logo assets, design tokens, shared shell and primitives
+PR #208  production logo assets, design tokens, shared shell, primitives, and v2 validator
 Gate V2-B
 ```
 
@@ -197,14 +199,14 @@ Gate V2-C
 ### Phase V2-3 — Editorial and project family
 
 ```text
-PR #214  Methodology, Guides, Glossary, Models, Updates, About, Corrections, Contact, Support, data access
+PR #214  Methodology, Guides, Glossary, Models, Updates, About, Corrections, Contact, Support, and data access
 Gate V2-D
 ```
 
 ### Phase V2-4 — Mobile, accessibility, and interaction hardening
 
 ```text
-PR #215  mobile transformations, accessibility, interaction, screenshot alignment
+PR #215  mobile transformations, accessibility, interaction, and screenshot alignment
 Gate V2-E
 ```
 
@@ -219,47 +221,50 @@ Gate V2-G  immutable candidate explicitly approved by owner
 ### Phase V2-6 — Deliberate publication
 
 ```text
-PR #217 or publication report  publish exact approved candidate
+PR #217 or publication report  publish the exact approved candidate
 Gate V2-H  production parity verified
 ```
 
-## Immediate work — PR #207
+## Immediate work — PR #208
 
-1. Add the canonical v2 visual/page contract.
-2. Save all eight approved desktop mock images in the repository.
-3. Save approved S/G logo references.
-4. Make the v2 contract supersede v1 visual implementation authority.
-5. Replace the old PR schedule with the v2 sequence.
-6. Update this roadmap current position.
-7. Update `AGENTS.md` so all agents must read the v2 contract and current schedule.
-8. Record mock-only feature exclusions.
-9. Make no production-code or canonical-data change.
-10. Do not deploy production.
-
-PR #207 completion criteria:
+Specification references:
 
 ```text
-V2 contract exists and is canonical
-Eight approved page mocks are stored
-Approved logo references are stored
-Implementation plan and roadmap agree
-AGENTS.md enforces v2 references
-Old v1 visual authority is explicitly historical
-No application code or canonical data changes
+docs/architecture/approved-modern-data-product-ui-v2.md
+docs/ui-redesign/approved-mocks-v2/README.md
+docs/ui-redesign/implementation-plan.md
+```
+
+Implementation scope:
+
+1. Create local SVG lockup and monogram assets from the approved S/G references.
+2. Apply the approved S/G lockup to the shared header and footer.
+3. Use the S/G monogram as the SVG favicon.
+4. Define v2 dark-navy, bright-blue, teal, coral, text, border, and semantic tokens.
+5. Add shared panel, button, field, chip, ticker-badge, organization-badge, hero, metric-card, and support-banner primitives.
+6. Map legacy shared surfaces onto the new token family without redesigning page-specific layouts.
+7. Add reusable `BrandLockup`, `TickerBadge`, `OrganizationBadge`, `PageHero`, `MetricCard`, and `SupportBanner` components.
+8. Add a v2 foundation validator and run it in full and site builds.
+9. Preserve all routes, canonical counts, evidence, known unknowns, and existing interaction contracts.
+10. Do not redesign Home or registry pages in this PR.
+11. Do not add official coin-logo dependencies.
+12. Do not deploy production.
+
+PR #208 completion criteria:
+
+```text
+Approved S/G assets exist locally
+Header, footer, and favicon use approved branding
+Rejected substitute branding is absent from production sources
+V2 token contract and shared components exist
+Shared shell remains keyboard and forced-colors compatible
+V2 validator passes in npm run build and build:site
+All canonical counts and routes are unchanged
+No page-specific full redesign
 No production deployment
 ```
 
-## Gate V2-B planned scope — PR #208
-
-After PR #207 merges:
-
-- create final local SVG lockup and monogram from approved references;
-- implement dark-navy and bright-blue tokens;
-- implement shared typography, surfaces, borders, focus, forms, buttons, chips, tables, and badges;
-- implement shared header, grouped navigation, footer, hero, and support banner;
-- remove substitute stacked-cube branding;
-- preserve all routes and canonical counts;
-- stop before page-specific full redesign.
+After PR #208 merges, the active item becomes PR #209 — implement the approved Home page using `01-home.webp` and canonical data only.
 
 ## Mock-only exclusions
 
