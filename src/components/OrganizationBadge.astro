@@ -1,0 +1,12 @@
+---
+interface Props {
+  name: string;
+  label?: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { name, label = name, size = 'medium' } = Astro.props;
+const words = String(name || '?').trim().split(/\s+/).filter(Boolean);
+const initials = (words.length === 1 ? words[0].slice(0, 2) : words.slice(0, 2).map((word) => word[0]).join('')).toUpperCase() || '?';
+---
+<span class:list={['organization-badge', `organization-badge--${size}`]} role="img" aria-label={label} title={label}>{initials}</span>

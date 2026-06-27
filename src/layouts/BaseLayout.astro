@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/shell.css';
+import BrandLockup from '../components/BrandLockup.astro';
 import { globalNavigationGroups, utilityNavigation } from '../../config/site-architecture.mjs';
 interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
 const siteUrl = 'https://sog.badjoke-lab.com';
@@ -24,6 +25,7 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" href="/brand/sog-mark-on-dark.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
@@ -38,7 +40,7 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header"><div class="site-header-inner">
-      <a class="site-brand" href="/" aria-label="Stable or Gone home"><strong>STABLE OR GONE</strong><span>Stablecoin history, events, and sources</span></a>
+      <BrandLockup class="site-brand" />
       <nav class="grouped-navigation" aria-label="Primary navigation">
         {globalNavigationGroups.map((group) => <div class="navigation-group"><span class="navigation-group-label">{group.label}</span><div class="navigation-group-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></div>)}
       </nav>
@@ -50,6 +52,7 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
     </div></header>
     <main id="main-content" class="site-main" tabindex="-1"><slot /></main>
     <footer class="site-footer"><div class="site-footer-inner">
+      <div class="site-footer-brand"><BrandLockup /></div>
       <p class="site-footer-summary">Historical information only. SOG is a registry, not a ranking or recommendation service.</p>
       <nav class="site-footer-links" aria-label="Footer navigation"><a href="/methodology/">Methodology</a><a href="/updates/">Updates</a><a href="/about/">About</a><a href="/contact/">Corrections</a><a href="/support/">Support</a><a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a><a href="/version.json">Version JSON</a><a href="/data/manifest.json">Data manifest</a><a href="/llms.txt">LLM guide</a><a href="/ai.txt">AI entrypoint</a></nav>
       <span class="site-footer-meta">Registry, evidence, and known-unknown information are preserved across desktop and compact layouts.</span>
