@@ -74,14 +74,17 @@ for (const field of currentFields) {
 }
 
 assert(dossierPolicies.implementation_deferred === true, 'PR 18 must remain a specification-only migration');
-assert(dossierPolicies.implementation_starts_at_pr === 23, 'dossier implementation must remain deferred to PR 23');
+assert(dossierPolicies.implementation_starts_at_pr === 27, 'dossier implementation must remain deferred to PR 27');
 assert(dossierPolicies.route_changes_allowed === false, 'PR 18 must not change routes');
 assert(dossierPolicies.evidence_section_required === true, 'Evidence section must remain mandatory');
 assert(dossierPolicies.known_unknowns_section_required === true, 'Known unknowns section must remain mandatory');
 assert(dossierPolicies.corrections_section_required === true, 'Corrections and further reading section must remain mandatory');
 assert(dossierPolicies.all_relationships_required === true, 'All organization relationships must remain reachable');
+assert(dossierPolicies.current_and_historical_data_must_remain_distinct === true, 'Current and historical data must remain distinct');
+assert(dossierPolicies.hero_metrics_are_summaries_not_replacement_fields === true, 'Hero metrics must remain summaries rather than replacement fields');
 assert(dossierPolicies.deployment_axes_must_remain_separate.length === 8, 'all eight deployment axes must remain separate');
-assert(dossierPolicies.evidence_axes_must_remain_separate.length === 7, 'all seven evidence axes must remain separate');
+assert(dossierPolicies.evidence_axes_must_remain_separate.length === 8, 'all eight evidence axes must remain separate');
+assert(dossierPolicies.evidence_axes_must_remain_separate.includes('published_at'), 'evidence publication date must remain a separate axis');
 
 const evidenceFields = allFields.filter((field) => field.destination_section === 'evidence');
 const unknownFields = allFields.filter((field) => field.destination_section === 'known_unknowns');
@@ -103,6 +106,7 @@ const sourceFields = allFields.filter((field) => field.destination_section === '
 for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'Supported claims', 'Archive', 'Reliability']) {
   assert(sourceFields.some((field) => field.current_label === label), `Evidence section must preserve ${label}`);
 }
+assert(sourceFields.some((field) => field.field_id === 'evidence.published_at'), 'Evidence section must preserve publication date');
 
 const deprecatedFields = allFields.filter((field) => field.decision === 'deprecate');
 assert(deprecatedFields.length === 0, 'PR 18 must not deprecate a current field without a dedicated replacement decision');
