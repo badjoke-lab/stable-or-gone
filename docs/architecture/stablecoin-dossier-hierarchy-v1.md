@@ -44,9 +44,9 @@ Collector or validator failures:     0
 Decision counts:
 
 ```text
-Move:                  97
+Move:                  98
 Consolidate:            7
-Keep:                   5
+Keep:                   4
 Replace:                2
 Add contextual link:    3
 Deprecate:               0
