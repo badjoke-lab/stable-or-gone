@@ -83,7 +83,7 @@ check(!indexSource.includes('data-filter-model>'), 'legacy free-text model filte
 check(!indexSource.includes('uniqueSorted(stablecoins.map((coin) => coin.collateral_model))'), 'filters must not derive from collateral_model free text');
 check(indexSource.includes('<th>Backing model</th>'), 'backing model heading is missing');
 const detailSource = readText('src/components/StablecoinDetailView.astro');
-for (const heading of ['Public backing model', 'Canonical backing types', 'Reserve component categories', 'Primary stabilization mechanism', 'Recorded model description']) check(detailSource.includes(`<th>${heading}</th>`), `detail heading is missing: ${heading}`);
+for (const heading of ['Public backing model', 'Canonical backing types', 'Reserve component categories', 'Primary stabilization mechanism', 'Recorded model description']) check(detailSource.includes(`<th>${heading}</th>`) || detailSource.includes(`<dt>${heading}</dt>`), `detail heading is missing: ${heading}`);
 check(detailSource.includes('getReserveComponentsFor') && detailSource.includes('Historical model changes'), 'detail backing history is incomplete');
 const machineSource = readText('src/lib/machine-readable.ts');
 check(machineSource.includes('public_model_category: countValues'), 'machine-readable public model breakdown is missing');
