@@ -20,6 +20,7 @@ export const dossierSurfaceFiles = Object.freeze([
 ]);
 
 export const blockSectionAssignments = Object.freeze({
+  'src/components/StablecoinDetailView.astro|Identity and current state': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Reserve components': 'how_asset_works',
   'src/components/StablecoinDetailView.astro|Historical model changes': 'history',
   'src/components/StablecoinDetailView.astro|Organizations and roles': 'organizations_control',
