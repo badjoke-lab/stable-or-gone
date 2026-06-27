@@ -1,21 +1,31 @@
 ---
 import EvidenceRows from './EvidenceRows.astro';
+import { getEvidenceSourceIdentities } from '../lib/data/evidenceSources';
+import { resolveEvidenceIdentityId } from '../../config/evidence-source-identities.mjs';
+import type { EvidenceRow } from '../lib/data/registryBase';
 
-const { evidence, tableKind, emptyMessage } = Astro.props;
+const { evidence, tableKind, emptyMessage } = Astro.props as {
+  evidence: EvidenceRow[];
+  tableKind: 'stablecoin-sources' | 'organization-sources' | 'event-sources';
+  emptyMessage?: string;
+};
+
+const requestedIdentityIds = new Set(evidence.map((source) => resolveEvidenceIdentityId(source.id)));
+const sourceIdentities = getEvidenceSourceIdentities().filter((source) => requestedIdentityIds.has(source.id));
 ---
 {tableKind === 'stablecoin-sources' ? (
-  <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve">
+  <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
     <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
-    <EvidenceRows evidence={evidence} emptyMessage={emptyMessage} />
+    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
   </table>
 ) : tableKind === 'organization-sources' ? (
-  <table data-table-kind="organization-sources" data-mobile-table="scroll-preserve">
+  <table data-table-kind="organization-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
     <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
-    <EvidenceRows evidence={evidence} emptyMessage={emptyMessage} />
+    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
   </table>
 ) : (
-  <table data-table-kind="event-sources" data-mobile-table="scroll-preserve">
+  <table data-table-kind="event-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
     <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
-    <EvidenceRows evidence={evidence} emptyMessage={emptyMessage} />
+    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
   </table>
 )}
