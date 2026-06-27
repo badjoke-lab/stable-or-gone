@@ -1,31 +1,21 @@
 ---
 import '../styles/global.css';
-
-interface Props {
-  title?: string;
-  description?: string;
-  canonicalPath?: string;
-  ogImage?: string;
-  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-}
-
+import '../styles/shell.css';
+import { globalNavigationGroups, utilityNavigation } from '../../config/site-architecture.mjs';
+interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const {
-  title = 'Stable or Gone — Stablecoin History Registry',
-  description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.',
-  canonicalPath = Astro.url.pathname,
-  ogImage = '/og/sog-og.svg',
-  jsonLd
-} = Astro.props;
-
+const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd } = Astro.props;
+const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
 const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\u003c') : '';
 const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
-const gaInline = gaMeasurementId
-  ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
-  : '';
+const gaInline = gaMeasurementId ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');` : '';
+const routeFamilies: Record<string, string[]> = {
+  '/stablecoins/': ['/stablecoins/', '/stablecoin/'], '/issuers/': ['/issuers/', '/issuer/'], '/events/': ['/events/', '/event/'], '/guides/': ['/guides/'], '/glossary/': ['/glossary/'], '/models/': ['/models/'], '/methodology/': ['/methodology/'], '/updates/': ['/updates/'], '/about/': ['/about/'], '/contact/': ['/contact/'], '/support/': ['/support/']
+};
+const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
 ---
 <!doctype html>
 <html lang="en">
@@ -41,46 +31,36 @@ const gaInline = gaMeasurementId
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
     <link rel="alternate" type="text/plain" href="/ai.txt" title="SOG AI entrypoint" />
-    <meta property="og:site_name" content="Stable or Gone" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImageUrl} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
-    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}
-    {gaInline && <script set:html={gaInline} />}
-    {structuredData && <script type="application/ld+json" set:html={structuredData} />}
+    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={ogImageUrl} />
+    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}{gaInline && <script set:html={gaInline} />}{structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
   <body>
-    <div class="wrap">
-      <header class="site-header">
-        <a class="brand" href="/" aria-label="Stable or Gone home">
-          <strong>STABLE OR GONE</strong>
-          <span>Stablecoin history, events, and sources</span>
-        </a>
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="/stablecoins/">Stablecoins</a>
-          <a href="/issuers/">Organizations</a>
-          <a href="/events/">Events</a>
-          <a href="/guides/">Guides</a>
-          <a href="/glossary/">Glossary</a>
-          <a href="/methodology/">Methodology</a>
-          <a href="/updates/">Updates</a>
-          <a href="/contact/">Contact</a>
-          <a href="/support/" data-primary="true">Support</a>
-        </nav>
-      </header>
-      <main>
-        <slot />
-      </main>
-      <footer class="site-footer">
-        <span>Historical information only. Check current organization, issuer, and market information before making decisions.</span>
-        <span><a class="footer-support" href="/support/">Support SOG</a> · <a href="/contact/">Corrections and submissions</a> · <a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a> · <a href="/version.json">Version JSON</a> · <a href="/data/manifest.json">Data manifest</a> · <a href="/llms.txt">LLM guide</a> · <a href="/ai.txt">AI entrypoint</a></span>
-      </footer>
-    </div>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header"><div class="site-header-inner">
+      <a class="site-brand" href="/" aria-label="Stable or Gone home"><strong>STABLE OR GONE</strong><span>Stablecoin history, events, and sources</span></a>
+      <nav class="grouped-navigation" aria-label="Primary navigation">
+        {globalNavigationGroups.map((group) => <div class="navigation-group"><span class="navigation-group-label">{group.label}</span><div class="navigation-group-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></div>)}
+      </nav>
+      <nav class="utility-navigation" aria-label="Utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
+      <details class="mobile-navigation" data-mobile-navigation><summary aria-label="Open navigation menu">Menu</summary><div class="mobile-navigation-panel">
+        {globalNavigationGroups.map((group) => <section class="mobile-navigation-group" aria-labelledby={`mobile-navigation-${group.id}`}><span class="navigation-group-label" id={`mobile-navigation-${group.id}`}>{group.label}</span><div class="mobile-navigation-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></section>)}
+        <nav class="mobile-navigation-utilities" aria-label="Mobile utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
+      </div></details>
+    </div></header>
+    <main id="main-content" class="site-main" tabindex="-1"><slot /></main>
+    <footer class="site-footer"><div class="site-footer-inner">
+      <p class="site-footer-summary">Historical information only. SOG is a registry, not a ranking or recommendation service.</p>
+      <nav class="site-footer-links" aria-label="Footer navigation"><a href="/methodology/">Methodology</a><a href="/updates/">Updates</a><a href="/about/">About</a><a href="/contact/">Corrections</a><a href="/support/">Support</a><a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a><a href="/version.json">Version JSON</a><a href="/data/manifest.json">Data manifest</a><a href="/llms.txt">LLM guide</a><a href="/ai.txt">AI entrypoint</a></nav>
+      <span class="site-footer-meta">Registry, evidence, and known-unknown information are preserved across desktop and compact layouts.</span>
+    </div></footer>
+    <script>
+      const navigation = document.querySelector('[data-mobile-navigation]');
+      if (navigation instanceof HTMLDetailsElement) {
+        const trigger = navigation.querySelector('summary');
+        navigation.addEventListener('keydown', (event) => { if (event.key !== 'Escape' || !navigation.open) return; event.preventDefault(); navigation.open = false; if (trigger instanceof HTMLElement) trigger.focus(); });
+        navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.open = false; }));
+      }
+    </script>
   </body>
 </html>
