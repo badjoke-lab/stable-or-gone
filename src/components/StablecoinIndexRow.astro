@@ -1,0 +1,28 @@
+---
+import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
+const { record } = Astro.props;
+const data = {
+  'data-record-slug': record.slug,
+  'data-search': record.search,
+  'data-name': record.name.toLocaleLowerCase(),
+  'data-lifecycle': record.lifecycle,
+  'data-issuance': record.issuance,
+  'data-asset-class': record.assetClass,
+  'data-reference': record.referenceCategory,
+  'data-backing': record.backingCategory,
+  'data-stabilization': record.stabilization,
+  'data-launch-date': record.launchDate,
+  'data-evidence-count': String(record.sourceIdentityCount)
+};
+---
+<tr data-registry-row {...data}>
+  <td><label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span aria-hidden="true">Compare</span></label><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a></td>
+  <td>{record.symbol || '—'}</td>
+  <td>{record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}{record.relationshipCount > 1 && <small class="relationship-summary">{record.relationshipCount} relationships · {record.organizationCount} organizations</small>}</td>
+  <td>{record.primaryRoleLabel}</td>
+  <td>{record.referenceLabel}</td>
+  <td>{record.backingLabel}</td>
+  <td><span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span></td>
+  <td>{formatIssuanceLabel(record.issuance)}</td>
+  <td>{record.sourceIdentityCount} sources</td>
+</tr>
