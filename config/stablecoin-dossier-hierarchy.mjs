@@ -1,11 +1,11 @@
 export const dossierSections = Object.freeze([
-  Object.freeze({ id: 'identity_current_state', label: 'Identity and current state', local_nav_label: 'Overview', order: 1, required: true, purpose: 'Identify the asset and show its current lifecycle, issuance, classification, and review state.' }),
-  Object.freeze({ id: 'organizations_control', label: 'Organizations and control', local_nav_label: 'Organizations', order: 2, required: true, purpose: 'Show every organization relationship, governance context, primary display selection, and issuer-control history.' }),
+  Object.freeze({ id: 'identity_current_state', label: 'Identity and current state', local_nav_label: 'Overview', order: 1, required: true, purpose: 'Identify the asset and show its current lifecycle, issuance, classification, and record review state.' }),
+  Object.freeze({ id: 'organizations_control', label: 'Organizations and control', local_nav_label: 'Organizations', order: 2, required: true, purpose: 'Show every organization relationship, governance context, primary display selection, control capabilities, and the scope of organizational responsibility.' }),
   Object.freeze({ id: 'how_asset_works', label: 'How the asset works', local_nav_label: 'How it works', order: 3, required: true, purpose: 'Explain the reference target, backing, stabilization, reserves, redemption, valuation, and yield or rebase behavior.' }),
-  Object.freeze({ id: 'deployments_legal_context', label: 'Deployments and legal context', local_nav_label: 'Deployments', order: 4, required: true, purpose: 'Separate blockchain deployment state from contract verification and show regulatory or official notices.' }),
-  Object.freeze({ id: 'history', label: 'History', local_nav_label: 'History', order: 5, required: true, purpose: 'Present model changes, issuer interventions, and the complete event timeline.' }),
-  Object.freeze({ id: 'evidence', label: 'Evidence', local_nav_label: 'Evidence', order: 6, required: true, purpose: 'Present public source identities, supported claims, archive state, reliability, reserve reports, and source provenance.' }),
-  Object.freeze({ id: 'known_unknowns', label: 'Known unknowns and coverage', local_nav_label: 'Unknowns', order: 7, required: true, purpose: 'Expose investigated unknowns, unresolved questions, record coverage, and last-check context.' }),
+  Object.freeze({ id: 'deployments_legal_context', label: 'Deployments and legal context', local_nav_label: 'Deployments', order: 4, required: true, purpose: 'Separate blockchain deployment state from contract verification and show legal, regulatory, and official context.' }),
+  Object.freeze({ id: 'history', label: 'History', local_nav_label: 'History', order: 5, required: true, purpose: 'Present model changes, observed issuer interventions, and the complete typed event timeline.' }),
+  Object.freeze({ id: 'evidence', label: 'Evidence', local_nav_label: 'Evidence', order: 6, required: true, purpose: 'Present public source identities, publication dates, supported claims, archive state, reliability, reserve reports, and source provenance.' }),
+  Object.freeze({ id: 'known_unknowns', label: 'Known unknowns and coverage', local_nav_label: 'Unknowns', order: 7, required: true, purpose: 'Expose investigated unknowns, unresolved questions, record coverage, priority, and question-specific last-check context.' }),
   Object.freeze({ id: 'corrections_further_reading', label: 'Corrections and further reading', local_nav_label: 'More', order: 8, required: true, purpose: 'Provide correction access, related registry destinations, guides, methodology, and machine-readable references.' })
 ]);
 
@@ -58,7 +58,7 @@ export const fieldSectionOverrides = Object.freeze({
   'src/components/StablecoinDetailView.astro|Overview|Primary display organization': 'organizations_control',
   'src/components/StablecoinDetailView.astro|Overview|Primary display role': 'organizations_control',
   'src/components/StablecoinDetailView.astro|Overview|Display selection mode': 'organizations_control',
-  'src/components/StablecoinDetailView.astro|Overview|Last reviewed': 'known_unknowns'
+  'src/components/StablecoinDetailView.astro|Overview|Last reviewed': 'identity_current_state'
 });
 
 export const fieldDecisionOverrides = Object.freeze({
@@ -80,6 +80,7 @@ export const syntheticDossierFields = Object.freeze([
   Object.freeze({ field_id: 'mechanics.reserve_component_detail', current_surface: 'Reserve components list', source: 'reserve_components.*', destination_section: 'how_asset_works', decision: 'move', required: true, public_label: 'Reserve components', value_state: true }),
   Object.freeze({ field_id: 'history.model_change_detail', current_surface: 'Historical model changes list', source: 'events filtered by model-change semantics', destination_section: 'history', decision: 'consolidate', required: true, public_label: 'Model changes', value_state: true }),
   Object.freeze({ field_id: 'organizations.relationship_disclaimer', current_surface: 'Organizations and roles note', source: 'approved interface copy', destination_section: 'organizations_control', decision: 'keep', required: true, public_label: 'Relationship scope note', value_state: false }),
+  Object.freeze({ field_id: 'evidence.published_at', current_surface: 'EvidenceRows source metadata', source: 'evidence.published_at', destination_section: 'evidence', decision: 'keep', required: true, public_label: 'Published', value_state: true }),
   Object.freeze({ field_id: 'further_reading.related_registry', current_surface: 'Related pages cards', source: 'stablecoins, primary organization, events', destination_section: 'corrections_further_reading', decision: 'move', required: true, public_label: 'Related registry pages', value_state: false }),
   Object.freeze({ field_id: 'further_reading.guides', current_surface: 'RelatedGuides component', source: 'stablecoinGuideLinks', destination_section: 'corrections_further_reading', decision: 'move', required: true, public_label: 'Related guides', value_state: false }),
   Object.freeze({ field_id: 'further_reading.corrections', current_surface: 'global Corrections utility', source: '/contact/', destination_section: 'corrections_further_reading', decision: 'add_contextual_link', required: true, public_label: 'Submit a correction', value_state: false }),
@@ -89,12 +90,14 @@ export const syntheticDossierFields = Object.freeze([
 
 export const dossierPolicies = Object.freeze({
   implementation_deferred: true,
-  implementation_starts_at_pr: 23,
+  implementation_starts_at_pr: 27,
   route_changes_allowed: false,
   evidence_section_required: true,
   known_unknowns_section_required: true,
   corrections_section_required: true,
   all_relationships_required: true,
+  current_and_historical_data_must_remain_distinct: true,
+  hero_metrics_are_summaries_not_replacement_fields: true,
   deployment_axes_must_remain_separate: Object.freeze([
     'operational_state',
     'canonical_status_raw',
@@ -112,6 +115,7 @@ export const dossierPolicies = Object.freeze({
     'primary_state',
     'claim_scopes',
     'archive_state',
-    'reliability'
+    'reliability',
+    'published_at'
   ])
 });
