@@ -22,3 +22,5 @@ The identity section owns canonical name, symbol, asset class, lifecycle status,
 Hero metrics remain summaries and do not replace detailed fields. Lifecycle and issuance belong to identity/current state; event count belongs to history; source count belongs to evidence.
 
 Reference, backing, stabilization, redemption, valuation, yield, classification, governance, and primary-display fields remain visible in explicit preview blocks until PRs 28 and 29 complete their final hierarchy.
+
+Reference-target and backing-model validators continue to enforce the complete 92-record mappings. Their public-surface checks now recognize both table headers and definition-list terms, allowing the same protected fields to move from the old overview table into the reviewed preview blocks without weakening data validation.
