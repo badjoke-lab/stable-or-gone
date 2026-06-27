@@ -1,0 +1,33 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+const { record } = Astro.props;
+const data = {
+  'data-search': record.search,
+  'data-name': record.name.toLocaleLowerCase(),
+  'data-category': record.category,
+  'data-regulatory': record.regulatory,
+  'data-jurisdiction': record.jurisdictionScope,
+  'data-role': record.roles.join(','),
+  'data-relationship-status': record.relationshipStatuses.join(','),
+  'data-assets-count': String(record.assetCount),
+  'data-relationships-count': String(record.relationshipCount),
+  'data-evidence-count': String(record.sourceIdentityCount)
+};
+---
+<article class="organization-index-card" data-organization-card data-mobile-representation-for="organization-index" {...data}>
+  <header>
+    <span class="record-kicker">{record.categoryLabel}</span>
+    <h2><a href={`/issuer/${record.slug}/`}>{record.name}</a></h2>
+  </header>
+  <dl class="organization-index-card-grid">
+    <div><dt>Jurisdiction</dt><dd>{record.jurisdictionLabel}</dd></div>
+    <div><dt>Regulatory character</dt><dd>{record.regulatoryLabel}</dd></div>
+    <div><dt>Functional roles</dt><dd>{record.roles.length ? record.roles.map((role) => formatPublicLabel(role)).join(', ') : 'Not recorded'}</dd></div>
+    <div><dt>Relationship states</dt><dd>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</dd></div>
+    <div><dt>Connected assets</dt><dd>{record.assetCount}</dd></div>
+    <div><dt>Relationships</dt><dd>{record.relationshipCount}</dd></div>
+    <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
+    <div><dt>Record confidence</dt><dd>{record.confidenceLabel}</dd></div>
+  </dl>
+  {record.assetNames.length > 0 && <details class="organization-assets-summary"><summary>Connected stablecoins</summary><p>{record.assetNames.join(', ')}</p></details>}
+</article>
