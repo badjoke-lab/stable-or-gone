@@ -12,11 +12,6 @@ import {
   getReserveReports,
   getStablecoins,
 } from './data/registry';
-import {
-  getCanonicalEvidenceRelations,
-  getEvidenceSourceIdentities,
-  getEvidenceSourceIdentitySummary
-} from './data/evidenceSources';
 import { getDeploymentsV3 } from './data/registryV3';
 import { getPublicValueStateBreakdown } from './value-state-breakdown';
 import { getPrimaryDisplayRelationshipBreakdown } from './primary-display-breakdown';
@@ -130,9 +125,6 @@ export function getRecordCountBreakdown() {
   const events = getEvents();
   const evidence = getEvidence();
   const evidenceRelations = getEvidenceRelations();
-  const evidenceSourceIdentities = getEvidenceSourceIdentities();
-  const canonicalEvidenceRelations = getCanonicalEvidenceRelations();
-  const evidenceSourceIdentitySummary = getEvidenceSourceIdentitySummary();
   const reserveReports = getReserveReports();
   const knownUnknowns = getKnownUnknowns();
   const regulatoryNotes = getRegulatoryNotes();
@@ -143,7 +135,6 @@ export function getRecordCountBreakdown() {
   const eventTaxonomies = events.map((event) => resolveEventTaxonomy(event));
   const organizationTaxonomies = organizations.map((organization) => resolveOrganizationTaxonomy(organization));
   const evidenceTaxonomies = evidence.map((item) => resolveEvidenceTaxonomy(item));
-  const evidenceSourceIdentityTaxonomies = evidenceSourceIdentities.map((item) => resolveEvidenceTaxonomy(item));
   const deploymentTaxonomies = deployments.map((item) => resolveDeploymentTaxonomy(item));
 
   return {
@@ -151,13 +142,6 @@ export function getRecordCountBreakdown() {
     organizations: organizations.length,
     relationships: relationships.length,
     evidence_relations: evidenceRelations.length,
-    evidence_source_identities: evidenceSourceIdentitySummary.source_identities,
-    evidence_source_identity_groups: evidenceSourceIdentitySummary.source_identity_groups,
-    evidence_source_aliases: evidenceSourceIdentitySummary.source_aliases,
-    evidence_duplicate_public_rows_removed: evidenceSourceIdentitySummary.removed_public_duplicate_rows,
-    evidence_canonical_relations: canonicalEvidenceRelations.length,
-    evidence_relation_source_identities: evidenceSourceIdentitySummary.relation_source_identities,
-    evidence_orphan_relation_source_ids: evidenceSourceIdentitySummary.orphan_relation_source_ids.length,
     reserve_reports: reserveReports.length,
     known_unknowns: knownUnknowns.length,
     regulatory_notes: regulatoryNotes.length,
@@ -192,12 +176,7 @@ export function getRecordCountBreakdown() {
     canonical_evidence_reliability_raw: countValues(evidenceTaxonomies.map((item) => item.canonical_reliability_raw)),
     evidence_archive_state: countValues(evidenceTaxonomies.map((item) => item.archive_state)),
     evidence_relation_kind: countValues(evidenceTaxonomies.map((item) => item.relation_kind)),
-    public_evidence_source_identity_category: countValues(evidenceSourceIdentityTaxonomies.map((item) => item.public_category)),
-    evidence_source_identity_provenance: countValues(evidenceSourceIdentityTaxonomies.map((item) => item.provenance)),
-    evidence_source_identity_primary_state: countValues(evidenceSourceIdentityTaxonomies.map((item) => item.primary_state)),
-    evidence_source_identity_reliability: countValues(evidenceSourceIdentityTaxonomies.map((item) => item.reliability)),
-    evidence_source_identity_archive_state: countValues(evidenceSourceIdentityTaxonomies.map((item) => item.archive_state)),
-    evidence_claim_scope_non_exclusive: countMultiValues(canonicalEvidenceRelations.map((item) => item.claim_scopes)),
+    evidence_claim_scope_non_exclusive: countMultiValues(evidenceRelations.map((item) => item.claim_scopes)),
     reserve_report_type: countValues(reserveReports.map((report) => report.report_type)),
     known_unknown_severity: countValues(knownUnknowns.map((item) => item.severity)),
     public_deployment_category: countValues(deploymentTaxonomies.map((item) => item.public_category)),
