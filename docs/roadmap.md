@@ -4,7 +4,7 @@ Updated: 2026-06-27
 
 ## Purpose
 
-This is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/`; this file records the current position, completed gates, remaining PR order, protected queues, and publication constraints.
+This is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/` and approved design decisions belong in `docs/architecture/`. This file records the current position, completed gates, remaining PR order, protected queues, and publication constraints.
 
 Required authority:
 
@@ -15,9 +15,10 @@ docs/deployment-policy.md
 docs/ui-redesign/master-spec.md
 docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
+docs/architecture/site-architecture-v1.md
 ```
 
-Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, or deployment behavior.
+Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, or deployment behavior.
 
 ## Registry checkpoint
 
@@ -45,9 +46,9 @@ docs/migration/registry-v3-baseline.json
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Current phase after PR #183 merges: Phase 3 — information architecture, responsive specification, and mocks
-Latest completed work after PR #183 merges: PR 16
-Next approved work: PR 17 — finalize site architecture and route roles
+Current phase after PR #185 merges: Phase 3 — information architecture, responsive specification, and mocks
+Latest completed work after PR #185 merges: PR 17
+Next approved work: PR 18 — finalize stablecoin dossier hierarchy
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -95,9 +96,11 @@ PR #182  PR 15 evidence-source deduplication with claim preservation
 PR #183  PR 16 record-specific public-copy migration and 92-record completion matrix
 ```
 
-## PR 10 organization baseline
+Gate C guarantees normalized public taxonomy, explicit investigated-unknown states, deterministic primary display relationships, independent deployment verification axes, one reviewed public source identity per exact source URL, all 455 evidence relations preserved, record-specific summaries outside reusable rendering components, and a passing migration matrix for all 92 assets.
 
-Status: **PASS**
+## Phase 2 baselines
+
+### Organization taxonomy
 
 ```text
 Organizations:                       86
@@ -117,34 +120,41 @@ Authoritative audit:
 docs/audits/organization-taxonomy-normalization-2026-06-26.md
 ```
 
-## PR 11 evidence taxonomy baseline
-
-Status: **PASS**
+### Evidence taxonomy and source identity
 
 ```text
 Canonical evidence records:          455
-Projected evidence relations:         455
+Evidence relations:                   455
 Canonical source types:                75
 Public source categories:              12 used / 13 defined
 Explicit v2 relation origins:         361
 Legacy subject projections:            94
 Multi-subject records:                421
 Multi-claim records:                  307
-Duplicate evidence IDs:                 0
 Unknown reliability values retained:   36
+Public source identities:             410
+Exact duplicate URL groups reviewed:   32
+Alias evidence IDs:                    45
+Public duplicate URL groups:            0
+Orphan relation source IDs:              0
 ```
 
-Reliability, provenance, primary state, source type, and claim scope remain separate axes.
+Identity equation:
 
-Authoritative audit:
+```text
+410 public source identities
++45 alias evidence records
+=455 canonical evidence records
+```
+
+Authoritative audits:
 
 ```text
 docs/audits/evidence-taxonomy-normalization-2026-06-26.md
+docs/audits/evidence-source-deduplication-2026-06-27.md
 ```
 
-## PR 12 deployment baseline
-
-Status: **PASS**
+### Deployment taxonomy
 
 ```text
 Deployments:                         130
@@ -166,9 +176,7 @@ Authoritative audit:
 docs/audits/deployment-taxonomy-normalization-2026-06-26.md
 ```
 
-## PR 13 value-state baseline
-
-Status: **PASS**
+### Value states
 
 Approved public states:
 
@@ -194,17 +202,13 @@ Narrative-text findings:       39
 Excluded reference scalars:   435
 ```
 
-Canonical raw values remain preserved, and known-unknown records remain distinct from accidental blanks.
-
 Authoritative audit:
 
 ```text
 docs/audits/value-state-normalization-2026-06-27.md
 ```
 
-## PR 14 primary display relationship baseline
-
-Status: **PASS**
+### Primary display relationships
 
 ```text
 Stable assets:                         92
@@ -219,57 +223,13 @@ Assets with multiple organizations:     8
 Historical end dates not recorded:      7
 ```
 
-Selection is independent of relationship JSON order. All current and historical relationships remain visible and searchable.
-
 Authoritative audit:
 
 ```text
 docs/audits/primary-display-relationships-2026-06-27.md
 ```
 
-## PR 15 evidence source identity baseline
-
-Status after PR #182 merges: **PASS**
-
-```text
-Canonical evidence records:          455
-Public source identities:            410
-Evidence relations preserved:        455
-Exact duplicate URL groups reviewed:  32
-Records inside duplicate groups:      77
-Approved canonical source groups:     32
-Alias evidence IDs:                   45
-Public duplicate URL groups:           0
-Orphan relation source IDs:            0
-```
-
-Identity equation:
-
-```text
-410 public source identities
-+45 alias evidence records
-=455 canonical evidence records
-```
-
-PR 15 preserves all canonical evidence records for audit history. Public tables render one source identity per exact URL and union the connected stablecoins, organizations, events, and claim scopes. Every original evidence record still projects one relation, with alias evidence IDs resolved to the approved canonical source identity.
-
-Authoritative files:
-
-```text
-config/evidence-source-identities.mjs
-config/evidence-source-deduplication.mjs
-src/lib/data/evidenceSources.ts
-src/components/EvidenceSourceTable.astro
-scripts/collect-evidence-deduplication.mjs
-scripts/validate-evidence-deduplication.mjs
-scripts/validate-evidence-deduplication-public-surfaces.mjs
-scripts/build-evidence-source-identity-stats.mjs
-docs/audits/evidence-source-deduplication-2026-06-27.md
-```
-
-## PR 16 record public-copy and migration baseline
-
-Status after PR #183 merges: **PASS**
+### Record public-copy migration
 
 ```text
 Stable assets audited:                    92
@@ -294,73 +254,138 @@ Summary override ID set preserved:      true
 Summary text digest preserved:          true
 ```
 
-The 20 reviewed summaries moved from the `StablecoinDetailView.astro` component to `src/data/stablecoinPublicCopy.ts`, keyed by canonical stablecoin ID. All 92 records now use one deterministic summary resolver. The rendering component contains no asset-specific summary table.
-
-The source-code audit scanned 77 files and classified 595 stablecoin-specific references:
+Authoritative audit:
 
 ```text
-Unresolved migration targets:       0
-Approved data-overlay occurrences: 270
-Editorial references:              319
-Search examples:                     4
-Schema examples:                     2
-Shared-infrastructure references:    0
+docs/audits/record-public-copy-migration-2026-06-27.md
 ```
 
-Editorial articles, methodology examples, search examples, and schema examples remain intentional content rather than migration defects.
+## PR 17 site architecture baseline
+
+Status after PR #185 merges: **PASS**
+
+Route inventory:
+
+```text
+Page source files:                    27
+Route patterns:                       27
+Static routes:                        24
+Dynamic route families:                3
+HTML route patterns:                  22
+Machine-readable route patterns:       5
+Duplicate routes:                       0
+Navigation destinations without route: 0
+Declared routes without source:         0
+Unassigned routes after review:         0
+```
+
+Approved global information architecture:
+
+```text
+Registry
+  Stablecoins     /stablecoins/
+  Organizations   /issuers/
+  Events          /events/
+
+Learn
+  Guides          /guides/
+  Glossary        /glossary/
+  Models          /models/
+
+Project
+  Methodology     /methodology/
+  Updates         /updates/
+  About           /about/
+
+Utilities
+  Corrections     /contact/   primary utility
+  Support         /support/   secondary utility
+```
+
+Data access remains outside the primary human-navigation groups:
+
+```text
+/version.json
+/data/manifest.json
+/llms.txt
+/ai.txt
+/sitemap-index.xml
+```
+
+Route decisions:
+
+```text
+Current routes kept:     27
+Routes renamed:           0
+Routes removed:           0
+Redirects introduced:     0
+Compatibility breaks:     0
+```
+
+`/about/` was the only route without a preliminary role and is now assigned to Project. `/about/` and `/models/` are added to the approved grouped-navigation map, but the current global shell is not changed in PR 17. Actual grouped desktop/mobile navigation remains deferred to PR 23.
 
 Authoritative files:
 
 ```text
-src/data/stablecoinPublicCopy.ts
-docs/migration/record-public-copy-baseline.json
-scripts/record-public-copy-audit-lib.mjs
-scripts/record-public-copy-occurrences.mjs
-scripts/record-migration-matrix.mjs
-scripts/collect-record-public-copy-audit.mjs
-scripts/validate-record-public-copy-audit.mjs
-docs/audits/record-public-copy-migration-2026-06-27.md
+config/site-architecture.mjs
+scripts/collect-site-architecture-audit.mjs
+scripts/validate-site-architecture.mjs
+docs/architecture/site-architecture-v1.md
 ```
 
-## Gate C conclusion
-
-Gate C is complete after PR #183 merges.
-
-PRs 5–16 now guarantee:
-
-- normalized public taxonomy and independent semantic axes;
-- explicit investigated-unknown states;
-- deterministic primary display relationships;
-- deployment state separated from verification work state;
-- one reviewed public source identity per exact source with all 455 evidence relations preserved;
-- record-specific summaries outside reusable rendering components;
-- a passing migration matrix for all 92 current assets;
-- no unexplained canonical count loss;
-- no unsupported value inference;
-- no production publication during repair.
-
-## Immediate next work — PR 17
-
-1. Finalize the site architecture and route-role map.
-2. Define Registry, Learn, and Project navigation groups.
-3. Preserve all canonical and compatibility routes unless a dedicated route migration is approved.
-4. Separate record access, educational material, project methodology, updates, corrections, and support by explicit information role.
-5. Inventory every current page and assign a keep, merge, redirect, replace, or remove decision without implementing route changes prematurely.
-6. Ensure evidence, known unknowns, machine-readable access, and corrections remain first-class destinations.
-7. Produce the approved global navigation map and route responsibility matrix required for Phase 3.
-8. Do not add stable assets or select Batch 18.
-9. Do not begin production publication.
-10. Do not treat the current public UI as the final information architecture.
-
-## PR 17 completion criteria
+## Phase 3 sequence
 
 ```text
-Registry, Learn, and Project navigation groups approved
-Every current route assigned an explicit role
-Compatibility routes preserved or separately migrated
-No record field or evidence route orphaned by architecture
-No implementation-level route change hidden in documentation
-Phase 3 PR 18 can begin from one approved architecture map
+PR 17  finalize site architecture and route roles — PASS after PR #185
+PR 18  finalize stablecoin dossier hierarchy
+PR 19  finalize list, search, filter, and comparison behavior
+PR 20  define meaningful change history
+PR 21  finalize responsive and accessibility specification
+PR 22  approve visual system and image mocks
+```
+
+### Gate D
+
+No production UI implementation begins until PRs 17–22 are merged.
+
+The approved architecture is a specification, not permission to implement the final shell early. Global shell and grouped navigation implementation remains PR 23.
+
+## Immediate next work — PR 18
+
+1. Inventory every field currently exposed on the stablecoin detail route.
+2. Create one field-to-section matrix covering:
+
+```text
+identity and current state
+organizations and control
+how the asset works
+deployments and legal context
+history
+evidence
+known unknowns
+corrections and further reading
+```
+
+3. Assign every current public field one destination, replacement, or explicit deprecation decision.
+4. Keep canonical field names, public labels, value-state handling, and display formatting separate.
+5. Preserve all organization relationships, not only the primary display relationship.
+6. Preserve deployment operational state, canonicality, verification, contract identity, and network identity as distinct facts.
+7. Preserve source identity and evidence relation counts and every supported claim scope.
+8. Make evidence and known unknowns mandatory dossier sections that cannot be removed by visual simplification.
+9. Define local dossier navigation and section order without implementing the final UI shell.
+10. Do not add stable assets, select Batch 18, change routes, or publish production.
+
+## PR 18 completion criteria
+
+```text
+Every current stablecoin-detail field appears in the matrix
+Every field has destination, replacement, or explicit deprecation
+Evidence section is mandatory
+Known-unknown section is mandatory
+All organization relationships remain reachable
+All deployment axes remain distinguishable
+No route or production implementation is hidden in the specification
+PR 19 can begin from one approved dossier hierarchy
 ```
 
 ## Preserved quality queues
@@ -392,11 +417,11 @@ Gate H  100-record release candidate verified
 Gate I  deliberate production publication and parity verification complete
 ```
 
-Gate D begins with PR 17 after PR 16 merges and Gate C passes. The final eight records remain blocked until information architecture, UI implementation, hardening, and the later full repaired-UI regression audit are complete.
+The final eight records remain blocked until information architecture, UI implementation, hardening, and the later full repaired-UI regression audit are complete.
 
 ## Growth policy
 
-Routine growth remains paused at 92 assets. The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, hidden known unknowns, erased evidence relations, or reduced evidence requirements.
+Routine growth remains paused at 92 assets. The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, hidden known unknowns, erased evidence relations, duplicated public source rows, or reduced evidence requirements.
 
 ## Publication policy during repair
 
