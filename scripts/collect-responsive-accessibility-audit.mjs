@@ -12,7 +12,7 @@ import {
   responsiveBands,
   visualAccessibilityContract
 } from '../config/responsive-accessibility-contract.mjs';
-import { mobileTableSourceFiles, requiredMobileTableKinds } from './mobile-table-manifest.mjs';
+import { implementedMobileTableRepresentations, mobileTableSourceFiles, requiredMobileTableKinds } from './mobile-table-manifest.mjs';
 
 const root = process.cwd();
 const outputPath = path.join(root, 'data/generated/responsive-accessibility-audit.json');
@@ -33,6 +33,14 @@ for (const file of mobileTableSourceFiles) {
     });
   }
 }
+
+const implementedRepresentations = Object.entries(implementedMobileTableRepresentations).map(([kind, file]) => ({
+  kind,
+  source_file: file,
+  source_exists: fs.existsSync(path.join(root, file)),
+  marker_present: fs.existsSync(path.join(root, file)) && read(file).includes(`data-mobile-representation-for="${kind}"`)
+}));
+const implementedKinds = implementedRepresentations.filter((entry) => entry.source_exists && entry.marker_present).map((entry) => entry.kind);
 
 const globalCss = read('src/styles/global.css');
 const shellCss = read('src/styles/shell.css');
@@ -70,7 +78,9 @@ const currentBaseline = {
   table_count: tableInventory.length,
   table_kinds: currentTableKinds.sort(),
   tables_using_scroll_preserve: tableInventory.filter((entry) => entry.mobile_strategy === 'scroll-preserve').length,
-  tables_with_non_scroll_strategy: tableInventory.filter((entry) => entry.mobile_strategy !== 'scroll-preserve').length,
+  implemented_mobile_representations: implementedKinds.length,
+  implemented_mobile_table_kinds: implementedKinds.sort(),
+  mobile_representation_checks: implementedRepresentations,
   missing_current_tables: missingCurrentTables,
   duplicate_current_tables: duplicateCurrentTables,
   css: {
@@ -98,7 +108,7 @@ const currentBaseline = {
 };
 
 const implementationGaps = {
-  table_transformations_pending: mobileTableContracts.filter((contract) => tableInventory.find((entry) => entry.kind === contract.kind)?.mobile_strategy === 'scroll-preserve').map((contract) => contract.kind),
+  table_transformations_pending: mobileTableContracts.filter((contract) => !implementedKinds.includes(contract.kind)).map((contract) => contract.kind),
   skip_link_missing: !currentBaseline.layout.skip_link_present,
   main_target_missing: !currentBaseline.layout.main_landmark_has_id,
   current_page_state_missing: !currentBaseline.layout.current_page_state_present,
@@ -123,7 +133,8 @@ const audit = {
     current_tables: tableInventory.length,
     required_table_kinds: requiredMobileTableKinds.length,
     target_table_contracts: mobileTableContracts.length,
-    tables_currently_scroll_only: currentBaseline.tables_using_scroll_preserve,
+    tables_with_scroll_fallback: currentBaseline.tables_using_scroll_preserve,
+    implemented_mobile_representations: implementedKinds.length,
     keyboard_contracts: keyboardContracts.length,
     announcement_contracts: announcementContracts.length,
     source_files_scanned: sourceSignals.length,

@@ -1,0 +1,35 @@
+---
+import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
+const { record } = Astro.props;
+const data = {
+  'data-record-slug': record.slug,
+  'data-search': record.search,
+  'data-name': record.name.toLocaleLowerCase(),
+  'data-lifecycle': record.lifecycle,
+  'data-issuance': record.issuance,
+  'data-asset-class': record.assetClass,
+  'data-reference': record.referenceCategory,
+  'data-backing': record.backingCategory,
+  'data-stabilization': record.stabilization,
+  'data-launch-date': record.launchDate,
+  'data-evidence-count': String(record.sourceIdentityCount)
+};
+---
+<article class="stablecoin-index-card" data-registry-card data-mobile-representation-for="stablecoin-index" {...data}>
+  <div class="stablecoin-index-card-heading">
+    <div><span class="record-symbol">{record.symbol || 'No symbol'}</span><h2><a href={`/stablecoin/${record.slug}/`}>{record.name}</a></h2></div>
+    <span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span>
+  </div>
+  <dl class="stablecoin-index-card-grid">
+    <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
+    <div><dt>Reference</dt><dd>{record.referenceLabel}</dd></div>
+    <div><dt>Backing</dt><dd>{record.backingLabel}</dd></div>
+    <div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div>
+    <div><dt>Organization</dt><dd>{record.primaryOrganizationName}</dd></div>
+    <div><dt>Relationships</dt><dd>{record.relationshipCount} across {record.organizationCount}</dd></div>
+    <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
+    <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
+  </dl>
+  {record.relationshipCount > 1 && <details class="organization-summary"><summary>All connected organizations</summary><p>{record.organizationSummary}</p><small>Includes {record.relationshipCount - 1} additional relationship{record.relationshipCount - 1 === 1 ? '' : 's'} beyond the primary display.</small></details>}
+  <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
+</article>

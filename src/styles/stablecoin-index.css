@@ -1,0 +1,406 @@
+.stablecoin-index-page {
+  display: grid;
+  gap: 24px;
+}
+
+.stablecoin-index-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.stablecoin-index-intro-main,
+.stablecoin-index-intro-stats {
+  padding: 28px;
+}
+
+.stablecoin-index-intro-main h1 {
+  max-width: 18ch;
+}
+
+.stablecoin-index-intro-main p {
+  max-width: 78ch;
+}
+
+.stablecoin-index-intro-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--shell-line-subtle);
+}
+
+.stablecoin-index-stat {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 18px;
+  background: var(--shell-surface);
+}
+
+.stablecoin-index-stat span,
+.stablecoin-index-toolbar label > span,
+.stablecoin-index-filter summary,
+.stablecoin-index-card-grid dt,
+.comparison-record dt {
+  color: var(--shell-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stablecoin-index-stat strong {
+  font-size: 2rem;
+}
+
+.stablecoin-index-registry {
+  overflow: visible;
+}
+
+.stablecoin-index-toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.4fr) minmax(190px, 0.6fr) auto;
+  gap: 12px;
+  align-items: end;
+  padding: 18px;
+  border-bottom: 1px solid var(--shell-line-subtle);
+  background: var(--shell-surface-raised);
+}
+
+.stablecoin-index-toolbar label {
+  display: grid;
+  gap: 7px;
+}
+
+.stablecoin-index-toolbar input,
+.stablecoin-index-toolbar select,
+.stablecoin-index-action,
+.active-filter-chip,
+.comparison-choice {
+  min-height: 44px;
+  font: inherit;
+}
+
+.stablecoin-index-toolbar input,
+.stablecoin-index-toolbar select {
+  width: 100%;
+  border: 1px solid var(--shell-line);
+  border-radius: 6px;
+  background: var(--shell-background-subtle);
+  color: var(--shell-text);
+  padding: 10px 12px;
+}
+
+.stablecoin-index-action {
+  border: 1px solid var(--shell-line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--shell-link);
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.stablecoin-index-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--shell-line-subtle);
+}
+
+.stablecoin-index-filter {
+  border: 1px solid var(--shell-line-subtle);
+  border-radius: 8px;
+  background: var(--shell-background-subtle);
+}
+
+.stablecoin-index-filter summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.stablecoin-index-filter summary::after {
+  content: attr(data-summary-label);
+  color: var(--shell-link);
+  font-size: 0.75rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.stablecoin-index-filter-options {
+  display: grid;
+  gap: 2px;
+  max-height: 240px;
+  overflow: auto;
+  padding: 4px 10px 12px;
+}
+
+.stablecoin-index-filter-options label {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--shell-text);
+  cursor: pointer;
+}
+
+.stablecoin-index-filter-options input,
+.comparison-choice input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--shell-focus);
+}
+
+.stablecoin-index-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--shell-line-subtle);
+}
+
+.stablecoin-index-result-count {
+  flex: 0 0 auto;
+  color: var(--shell-positive);
+  font-weight: 700;
+}
+
+.stablecoin-index-active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.active-filter-chip {
+  min-height: 34px;
+  border: 1px solid var(--shell-line);
+  border-radius: 999px;
+  background: var(--shell-surface-raised);
+  color: var(--shell-text);
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.active-filter-empty {
+  color: var(--shell-text-muted);
+}
+
+.stablecoin-index-table {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.stablecoin-index-table table {
+  min-width: 1080px;
+}
+
+.stablecoin-index-table td:first-child {
+  min-width: 190px;
+}
+
+.comparison-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-right: 10px;
+  color: var(--shell-text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.record-name {
+  font-weight: 700;
+}
+
+.relationship-summary {
+  display: block;
+  margin-top: 5px;
+  color: var(--shell-text-muted);
+}
+
+.stablecoin-index-cards {
+  display: none;
+}
+
+.stablecoin-index-card {
+  border: 1px solid var(--shell-line-subtle);
+  border-radius: 10px;
+  background: var(--shell-surface);
+  padding: 18px;
+}
+
+.stablecoin-index-card-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.stablecoin-index-card h2,
+.comparison-record h3,
+.comparison-record h4 {
+  margin: 0;
+}
+
+.record-symbol {
+  color: var(--shell-link);
+  font-family: var(--shell-font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.stablecoin-index-card-grid,
+.comparison-record dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.stablecoin-index-card-grid div,
+.comparison-record dl div {
+  min-width: 0;
+}
+
+.stablecoin-index-card-grid dd,
+.comparison-record dd {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.comparison-choice-card {
+  width: 100%;
+  justify-content: center;
+  border: 1px solid var(--shell-line);
+  border-radius: 6px;
+  background: var(--shell-background-subtle);
+}
+
+.stablecoin-index-no-results {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: 28px 18px;
+  border-top: 1px solid var(--shell-line-subtle);
+}
+
+.stablecoin-index-comparison {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+}
+
+.stablecoin-index-comparison[hidden] {
+  display: none;
+}
+
+.comparison-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.comparison-heading p {
+  margin-top: 6px;
+}
+
+.comparison-alert {
+  min-height: 1.5em;
+  color: var(--shell-warning);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(230px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.comparison-record {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  min-width: 230px;
+  border: 1px solid var(--shell-line-subtle);
+  border-radius: 10px;
+  background: var(--shell-background-subtle);
+  padding: 16px;
+}
+
+.comparison-record header {
+  display: grid;
+  gap: 5px;
+}
+
+.comparison-record section {
+  display: grid;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--shell-line-subtle);
+}
+
+.comparison-record dl {
+  grid-template-columns: 1fr;
+  margin: 0;
+}
+
+.comparison-record p {
+  color: var(--shell-text);
+  font-size: 0.88rem;
+}
+
+.comparison-source {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .stablecoin-index-intro,
+  .stablecoin-index-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 719px) {
+  .stablecoin-index-intro-stats,
+  .stablecoin-index-filter-grid,
+  .stablecoin-index-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-intro-main,
+  .stablecoin-index-intro-stats {
+    padding: 20px;
+  }
+
+  .stablecoin-index-summary,
+  .comparison-heading {
+    display: grid;
+  }
+
+  .stablecoin-index-table {
+    display: none;
+  }
+
+  .stablecoin-index-cards {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .comparison-grid {
+    grid-template-columns: repeat(4, minmax(280px, 88vw));
+  }
+}
