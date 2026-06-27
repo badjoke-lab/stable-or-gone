@@ -1,0 +1,50 @@
+.organization-index-page { display: grid; gap: 24px; }
+.organization-index-intro { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr); gap: 20px; }
+.organization-index-intro-main, .organization-index-intro-stats { padding: 28px; }
+.organization-index-intro-main h1 { max-width: 18ch; }
+.organization-index-intro-main p { max-width: 78ch; }
+.organization-index-intro-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--shell-line-subtle); }
+.organization-index-stat { display: grid; align-content: center; gap: 8px; padding: 18px; background: var(--shell-surface); }
+.organization-index-stat span, .organization-index-toolbar label > span, .organization-index-filter summary, .organization-index-card-grid dt { color: var(--shell-text-muted); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.organization-index-stat strong { font-size: 2rem; }
+.organization-index-registry { overflow: visible; }
+.organization-index-toolbar { display: grid; grid-template-columns: minmax(260px, 1.4fr) minmax(190px, .6fr) auto; gap: 12px; align-items: end; padding: 18px; border-bottom: 1px solid var(--shell-line-subtle); background: var(--shell-surface-raised); }
+.organization-index-toolbar label { display: grid; gap: 7px; }
+.organization-index-toolbar input, .organization-index-toolbar select, .organization-index-action { min-height: 44px; font: inherit; }
+.organization-index-toolbar input, .organization-index-toolbar select { width: 100%; border: 1px solid var(--shell-line); border-radius: 6px; background: var(--shell-background-subtle); color: var(--shell-text); padding: 10px 12px; }
+.organization-index-action { border: 1px solid var(--shell-line); border-radius: 6px; background: transparent; color: var(--shell-link); padding: 10px 14px; cursor: pointer; }
+.organization-index-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--shell-line-subtle); }
+.organization-index-filter { border: 1px solid var(--shell-line-subtle); border-radius: 8px; background: var(--shell-background-subtle); }
+.organization-index-filter summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; cursor: pointer; }
+.organization-index-filter summary::after { content: attr(data-summary-label); color: var(--shell-link); font-size: .75rem; text-transform: none; letter-spacing: 0; }
+.organization-index-filter-options { display: grid; gap: 2px; max-height: 240px; overflow: auto; padding: 4px 10px 12px; }
+.organization-index-filter-options label { min-height: 38px; display: flex; align-items: center; gap: 10px; color: var(--shell-text); cursor: pointer; }
+.organization-index-filter-options input { width: 18px; height: 18px; accent-color: var(--shell-focus); }
+.organization-index-summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 14px 18px; border-bottom: 1px solid var(--shell-line-subtle); }
+.organization-index-result-count { flex: 0 0 auto; color: var(--shell-positive); font-weight: 700; }
+.organization-index-active-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.organization-index-table { overflow-x: auto; overscroll-behavior-inline: contain; }
+.organization-index-table table { min-width: 1120px; }
+.organization-index-table td:first-child { min-width: 200px; }
+.organization-index-cards { display: none; }
+.organization-index-card { display: grid; gap: 16px; border: 1px solid var(--shell-line-subtle); border-radius: 10px; background: var(--shell-surface); padding: 18px; }
+.organization-index-card header { display: grid; gap: 4px; }
+.organization-index-card h2 { margin: 0; }
+.record-kicker { color: var(--shell-link); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.organization-index-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.organization-index-card-grid dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.organization-assets-summary { border-top: 1px solid var(--shell-line-subtle); padding-top: 12px; }
+.organization-assets-summary summary { min-height: 44px; display: flex; align-items: center; color: var(--shell-link); cursor: pointer; }
+.organization-assets-summary p { color: var(--shell-text); }
+.organization-index-no-results { display: grid; gap: 12px; justify-items: start; padding: 28px 18px; border-top: 1px solid var(--shell-line-subtle); }
+@media (max-width: 980px) {
+  .organization-index-intro, .organization-index-toolbar { grid-template-columns: 1fr; }
+  .organization-index-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 719px) {
+  .organization-index-intro-stats, .organization-index-filter-grid, .organization-index-card-grid { grid-template-columns: 1fr; }
+  .organization-index-intro-main, .organization-index-intro-stats { padding: 20px; }
+  .organization-index-summary { display: grid; }
+  .organization-index-table { display: none; }
+  .organization-index-cards { display: grid; gap: 12px; padding: 14px; }
+}
