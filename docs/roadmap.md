@@ -4,7 +4,7 @@ Updated: 2026-06-27
 
 ## Purpose
 
-This is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/` and approved design decisions belong in `docs/architecture/`. This file records the current position, completed gates, remaining PR order, protected queues, and publication constraints.
+This is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/`; approved information-architecture decisions belong in `docs/architecture/`. This file records the current position, completed gates, remaining PR order, protected queues, and publication constraints.
 
 Required authority:
 
@@ -16,9 +16,10 @@ docs/ui-redesign/master-spec.md
 docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
 docs/architecture/site-architecture-v1.md
+docs/architecture/stablecoin-dossier-hierarchy-v1.md
 ```
 
-Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, or deployment behavior.
+Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, dossier field ownership, or deployment behavior.
 
 ## Registry checkpoint
 
@@ -46,9 +47,9 @@ docs/migration/registry-v3-baseline.json
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Current phase after PR #185 merges: Phase 3 — information architecture, responsive specification, and mocks
-Latest completed work after PR #185 merges: PR 17
-Next approved work: PR 18 — finalize stablecoin dossier hierarchy
+Current phase after PR #186 merges: Phase 3 — information architecture, responsive specification, and mocks
+Latest completed work after PR #186 merges: PR 18
+Next approved work: PR 19 — finalize list, search, filter, and comparison behavior
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -98,7 +99,7 @@ PR #183  PR 16 record-specific public-copy migration and 92-record completion ma
 
 Gate C guarantees normalized public taxonomy, explicit investigated-unknown states, deterministic primary display relationships, independent deployment verification axes, one reviewed public source identity per exact source URL, all 455 evidence relations preserved, record-specific summaries outside reusable rendering components, and a passing migration matrix for all 92 assets.
 
-## Phase 2 baselines
+## Phase 2 protected baselines
 
 ### Organization taxonomy
 
@@ -260,6 +261,23 @@ Authoritative audit:
 docs/audits/record-public-copy-migration-2026-06-27.md
 ```
 
+## Phase 3 sequence
+
+```text
+PR 17  finalize site architecture and route roles — PASS after PR #185
+PR 18  finalize stablecoin dossier hierarchy — PASS after PR #186
+PR 19  finalize list, search, filter, and comparison behavior
+PR 20  define meaningful change history
+PR 21  finalize responsive and accessibility specification
+PR 22  approve visual system and image mocks
+```
+
+### Gate D
+
+No production UI implementation begins until PRs 17–22 are merged and their validation contracts pass.
+
+The approved architecture and dossier hierarchy are specifications, not permission to implement the final shell early. Dossier implementation remains deferred to PR 27 under the current implementation plan.
+
 ## PR 17 site architecture baseline
 
 Status after PR #185 merges: **PASS**
@@ -322,8 +340,6 @@ Redirects introduced:     0
 Compatibility breaks:     0
 ```
 
-`/about/` was the only route without a preliminary role and is now assigned to Project. `/about/` and `/models/` are added to the approved grouped-navigation map, but the current global shell is not changed in PR 17. Actual grouped desktop/mobile navigation remains deferred to PR 23.
-
 Authoritative files:
 
 ```text
@@ -333,59 +349,103 @@ scripts/validate-site-architecture.mjs
 docs/architecture/site-architecture-v1.md
 ```
 
-## Phase 3 sequence
+## PR 18 stablecoin dossier baseline
+
+Status after PR #186 merges: **PASS**
+
+Generated inventory:
 
 ```text
-PR 17  finalize site architecture and route roles — PASS after PR #185
-PR 18  finalize stablecoin dossier hierarchy
-PR 19  finalize list, search, filter, and comparison behavior
-PR 20  define meaningful change history
-PR 21  finalize responsive and accessibility specification
-PR 22  approve visual system and image mocks
+Required dossier sections:          8
+Current dossier surface files:      7
+Current section labels found:      13
+Raw field-render occurrences:     118
+Unique current field surfaces:    102
+Synthetic required fields:         12
+Total field-to-section rows:       114
+Unassigned current fields:          0
+Duplicate field IDs:                0
+Deprecated current fields:          0
+Collector or validator failures:    0
 ```
 
-### Gate D
-
-No production UI implementation begins until PRs 17–22 are merged.
-
-The approved architecture is a specification, not permission to implement the final shell early. Global shell and grouped navigation implementation remains PR 23.
-
-## Immediate next work — PR 18
-
-1. Inventory every field currently exposed on the stablecoin detail route.
-2. Create one field-to-section matrix covering:
+Approved section order and field counts:
 
 ```text
-identity and current state
-organizations and control
-how the asset works
-deployments and legal context
-history
-evidence
-known unknowns
-corrections and further reading
+Identity and current state           15
+Organizations and control            11
+How the asset works                  25
+Deployments and legal context        22
+History                              14
+Evidence                             15
+Known unknowns and coverage           7
+Corrections and further reading       5
 ```
 
-3. Assign every current public field one destination, replacement, or explicit deprecation decision.
-4. Keep canonical field names, public labels, value-state handling, and display formatting separate.
-5. Preserve all organization relationships, not only the primary display relationship.
-6. Preserve deployment operational state, canonicality, verification, contract identity, and network identity as distinct facts.
-7. Preserve source identity and evidence relation counts and every supported claim scope.
-8. Make evidence and known unknowns mandatory dossier sections that cannot be removed by visual simplification.
-9. Define local dossier navigation and section order without implementing the final UI shell.
-10. Do not add stable assets, select Batch 18, change routes, or publish production.
-
-## PR 18 completion criteria
+Field decisions:
 
 ```text
-Every current stablecoin-detail field appears in the matrix
-Every field has destination, replacement, or explicit deprecation
-Evidence section is mandatory
-Known-unknown section is mandatory
-All organization relationships remain reachable
-All deployment axes remain distinguishable
-No route or production implementation is hidden in the specification
-PR 19 can begin from one approved dossier hierarchy
+Move:                  98
+Consolidate:            7
+Keep:                   4
+Replace:                2
+Add contextual link:    3
+Deprecate:               0
+```
+
+Mandatory dossier protections:
+
+```text
+Evidence section required:                  true
+Known unknowns section required:            true
+Corrections and further reading required:   true
+All organization relationships reachable:  true
+Current and historical data kept distinct: true
+Hero metrics remain summaries only:        true
+Deployment semantic axes preserved:          8
+Evidence semantic axes preserved:            8
+Route changes in PR 18:                       0
+Dossier implementation starts:              PR 27
+```
+
+The two replacement decisions apply only to the generic Record coverage table headers. Coverage information remains mandatory and must become section-aware completeness and unresolved-state reporting rather than disappearing.
+
+Evidence must preserve source category, canonical source type, provenance, primary state, claim scopes, publication date, archive state, and reliability as separate axes. Deployments must preserve operational state, recorded status, change state, canonicality, canonicality record state, verification state, contract identity state, and network identity state as separate axes.
+
+Authoritative files:
+
+```text
+config/stablecoin-dossier-hierarchy.mjs
+scripts/collect-stablecoin-dossier-hierarchy.mjs
+scripts/validate-stablecoin-dossier-hierarchy.mjs
+docs/architecture/stablecoin-dossier-hierarchy-v1.md
+```
+
+## Immediate next work — PR 19
+
+1. Inventory the current stablecoin, organization, and event index behavior.
+2. Define search scope separately for each index.
+3. Define approved filters and sort orders using enumerable canonical values rather than free-text reconstruction.
+4. Synchronize approved filter and sort state to shareable URLs.
+5. Define active-filter summaries and clear/reset behavior.
+6. Preserve multi-role and multi-organization summaries instead of showing only the primary relationship.
+7. Define compact mobile record rows without material-information suppression.
+8. Define comparison behavior and explicitly state what is and is not comparable.
+9. Generate a machine-readable interaction contract and dedicated validator.
+10. Do not implement the final UI, add stable assets, select Batch 18, change routes, or deploy production.
+
+PR 19 completion criteria:
+
+```text
+Stablecoin, organization, and event index behavior specified
+Search scope explicit for each index
+Approved filters use canonical enumerations
+Filter and sort state shareable in URL
+Active-filter summary and clear behavior defined
+Multi-role summaries preserved
+Mobile row information contract defined
+Comparison scope and exclusions defined
+No final UI implementation or production publication hidden in the specification
 ```
 
 ## Preserved quality queues
