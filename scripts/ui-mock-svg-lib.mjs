@@ -36,7 +36,7 @@ export function chip(x, y, value, tone = 'neutral', width = Math.max(64, value.l
 }
 
 export function heading(x, y, eyebrow, title, subtitle = '') {
-  return `${text(x, y, eyebrow.toUpperCase(), 11, colors.positive, 700)}${text(x, y + 42, title, 34, colors.text, 700)}${subtitle ? text(x, y + 70, subtitle, 14, colors.text_muted) : ''}`;
+  return `${text(x, y, eyebrow, 11, colors.positive, 700)}${text(x, y + 42, title, 34, colors.text, 700)}${subtitle ? text(x, y + 70, subtitle, 14, colors.text_muted) : ''}`;
 }
 
 export function panelTitle(x, y, title, meta = '') {
