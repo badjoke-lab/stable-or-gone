@@ -1,0 +1,57 @@
+name: One-time organization filter API repair
+
+on:
+  push:
+    branches: [ui/organization-index-repair]
+    paths:
+      - .github/workflows/repair-organization-filter-options.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/organization-index-repair
+      - name: Use public taxonomy filter APIs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('src/pages/issuers/index.astro')
+          text = path.read_text()
+          text = text.replace(
+              "  getFunctionalRoleLabel,\n  getRelationshipStatusLabel,\n  resolveOrganizationTaxonomy",
+              "  getFunctionalRoleLabel,\n  getJurisdictionScopeFilterOptions,\n  getPublicOrganizationCategoryFilterOptions,\n  getRegulatoryCharacterFilterOptions,\n  getRelationshipStatusLabel,\n  resolveOrganizationTaxonomy"
+          )
+          text = text.replace(
+              "{ id: 'category', label: 'Category', options: unique(records.map((record) => record.category)).sort().map((value) => option(value, records.find((record) => record.category === value)!.categoryLabel)) },",
+              "{ id: 'category', label: 'Category', options: getPublicOrganizationCategoryFilterOptions().map((item) => option(item.value, item.public_label)) },"
+          )
+          text = text.replace(
+              "{ id: 'regulatory', label: 'Regulatory character', options: unique(records.map((record) => record.regulatory)).sort().map((value) => option(value, records.find((record) => record.regulatory === value)!.regulatoryLabel)) },",
+              "{ id: 'regulatory', label: 'Regulatory character', options: getRegulatoryCharacterFilterOptions().map((item) => option(item.value, item.public_label)) },"
+          )
+          text = text.replace(
+              "{ id: 'jurisdiction', label: 'Jurisdiction scope', options: unique(records.map((record) => record.jurisdictionScope)).sort().map((value) => option(value, formatPublicLabel(value))) },",
+              "{ id: 'jurisdiction', label: 'Jurisdiction scope', options: getJurisdictionScopeFilterOptions().map((item) => option(item.value, item.public_label)) },"
+          )
+          required = [
+              'getPublicOrganizationCategoryFilterOptions',
+              'getRegulatoryCharacterFilterOptions',
+              'getJurisdictionScopeFilterOptions'
+          ]
+          if not all(token in text for token in required):
+              raise SystemExit('Public taxonomy filter APIs were not installed')
+          path.write_text(text)
+          PY
+      - name: Remove one-time workflow and commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm .github/workflows/repair-organization-filter-options.yml
+          git add src/pages/issuers/index.astro
+          git commit -m 'Use organization taxonomy filter APIs'
+          git push origin HEAD:ui/organization-index-repair
