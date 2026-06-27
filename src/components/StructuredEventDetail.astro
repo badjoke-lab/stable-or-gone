@@ -4,7 +4,6 @@ import { cleanPublicText } from '../utils/publicText';
 import { valueStatePresentation, type PublicValueState } from '../utils/valueState';
 
 const { event } = Astro.props as { event: Record<string, any> };
-
 const sections = [
   { key: 'depeg_detail', label: 'Depeg detail' },
   { key: 'regulatory_detail', label: 'Regulatory detail' },
@@ -20,130 +19,42 @@ const sections = [
   { key: 'bridge_or_chain_incident_detail', label: 'Bridge or chain incident detail' },
   { key: 'termination_detail', label: 'Termination detail' },
   { key: 'launch_detail', label: 'Launch detail' }
-]
-  .map((section) => ({ ...section, value: event[section.key] }))
-  .filter((section) => section.value && typeof section.value === 'object');
+].map((section) => ({ ...section, value: event[section.key] })).filter((section) => section.value && typeof section.value === 'object');
 
 const fieldLabels: Record<string, string> = {
-  peg_reference: 'Peg reference',
-  direction: 'Direction',
-  extreme_price: 'Extreme price',
-  maximum_deviation_bps: 'Maximum deviation',
-  duration_minutes: 'Duration',
-  recovery_status: 'Recovery status',
-  recovery_date: 'Recovery date',
-  cause_summary: 'Cause summary',
-  price_source_ids: 'Price-source records',
-  jurisdiction: 'Jurisdiction',
-  authority: 'Authority',
-  action_type: 'Action type',
-  case_reference: 'Case reference',
-  effective_date: 'Effective date',
-  resolution_date: 'Resolution date',
-  summary: 'Summary',
-  status: 'Status',
-  event_subtype: 'Control action',
-  related_category: 'Related category',
-  deployment_id: 'Deployment record',
-  network: 'Network',
-  token_standard: 'Token standard',
-  affected_addresses: 'Affected addresses',
-  blacklist_transaction_hash: 'Blacklist transaction',
-  related_transaction_hashes: 'Related transactions',
-  reported_frozen_amount: 'Reported restricted amount',
-  related_flow: 'Related flow',
-  trigger: 'Trigger',
-  legal_basis: 'Legal basis',
-  requesting_authority: 'Requesting authority',
-  source_incident: 'Source incident',
-  status_effect: 'Status effect',
-  market_status_effect: 'Market-status effect',
-  reserve_effect: 'Reserve effect',
-  redemption_effect: 'Redemption effect',
-  depeg_effect: 'Depeg effect',
-  verification_status: 'Verification status',
-  loss_or_exposure_text: 'Loss or exposure',
-  affected_deployment_ids: 'Affected deployments',
-  related_organization_ids: 'Related organizations'
+  peg_reference: 'Peg reference', direction: 'Direction', extreme_price: 'Extreme price', maximum_deviation_bps: 'Maximum deviation', duration_minutes: 'Duration', recovery_status: 'Recovery status', recovery_date: 'Recovery date', cause_summary: 'Cause summary', price_source_ids: 'Price-source records', jurisdiction: 'Jurisdiction', authority: 'Authority', action_type: 'Action type', case_reference: 'Case reference', effective_date: 'Effective date', resolution_date: 'Resolution date', summary: 'Summary', status: 'Status', event_subtype: 'Control action', related_category: 'Related category', deployment_id: 'Deployment record', network: 'Network', token_standard: 'Token standard', affected_addresses: 'Affected addresses', blacklist_transaction_hash: 'Blacklist transaction', related_transaction_hashes: 'Related transactions', reported_frozen_amount: 'Reported restricted amount', related_flow: 'Related flow', trigger: 'Trigger', legal_basis: 'Legal basis', requesting_authority: 'Requesting authority', source_incident: 'Source incident', status_effect: 'Status effect', market_status_effect: 'Market-status effect', reserve_effect: 'Reserve effect', redemption_effect: 'Redemption effect', depeg_effect: 'Depeg effect', verification_status: 'Verification status', loss_or_exposure_text: 'Loss or exposure', affected_deployment_ids: 'Affected deployments', related_organization_ids: 'Related organizations'
 };
-
-function labelFor(key: string) {
-  return fieldLabels[key] ?? formatPublicLabel(key);
-}
-
-type PresentedValue = {
-  text: string;
-  state: PublicValueState;
-  label: string;
-};
-
-function knownValue(text: string): PresentedValue {
-  return { text, state: 'known', label: 'Known' };
-}
-
+function labelFor(key: string) { return fieldLabels[key] ?? formatPublicLabel(key); }
+type PresentedValue = { text: string; state: PublicValueState; label: string };
+function knownValue(text: string): PresentedValue { return { text, state: 'known', label: 'Known' }; }
 function valueFor(key: string, value: unknown): PresentedValue {
   const policy = key === 'verification_status' ? 'verification' : 'default';
-  const structurallyMissing = value === null
-    || value === undefined
-    || (typeof value === 'string' && value.trim().length === 0)
-    || (Array.isArray(value) && value.length === 0);
-
+  const structurallyMissing = value === null || value === undefined || (typeof value === 'string' && value.trim().length === 0) || (Array.isArray(value) && value.length === 0);
   if (structurallyMissing) return valueStatePresentation(value, { policy });
-
-  if (key.endsWith('_summary') || key === 'summary') {
-    const text = cleanPublicText(String(value));
-    return valueStatePresentation(value, { policy, detect_markers: false, display_value: text });
-  }
-
+  if (key.endsWith('_summary') || key === 'summary') return valueStatePresentation(value, { policy, detect_markers: false, display_value: cleanPublicText(String(value)) });
   if (typeof value === 'boolean') return knownValue(value ? 'Yes' : 'No');
-
-  if (Array.isArray(value)) {
-    const display = value.map((item) => String(item)).join(', ');
-    return valueStatePresentation(value, { policy, display_value: display });
-  }
-
+  if (Array.isArray(value)) return valueStatePresentation(value, { policy, display_value: value.map((item) => String(item)).join(', ') });
   if (value && typeof value === 'object') {
     const record = value as Record<string, unknown>;
-    if (typeof record.display_text === 'string' && record.display_text.length > 0) {
-      return valueStatePresentation(record.display_text, { policy, display_value: record.display_text });
-    }
+    if (typeof record.display_text === 'string' && record.display_text.length > 0) return valueStatePresentation(record.display_text, { policy, display_value: record.display_text });
     const valueText = record.value !== null && record.value !== undefined ? String(record.value) : '';
     const symbol = typeof record.symbol === 'string' ? record.symbol : '';
     if (valueText) return knownValue(`${valueText}${symbol ? ` ${symbol}` : ''}`);
-    const nested = Object.entries(record)
-      .filter(([, item]) => item !== null && item !== undefined && item !== '')
-      .map(([nestedKey, item]) => `${labelFor(nestedKey)}: ${Array.isArray(item) ? item.join(', ') : String(item)}`)
-      .join(' · ');
+    const nested = Object.entries(record).filter(([, item]) => item !== null && item !== undefined && item !== '').map(([nestedKey, item]) => `${labelFor(nestedKey)}: ${Array.isArray(item) ? item.join(', ') : String(item)}`).join(' · ');
     return valueStatePresentation(nested, { policy, display_value: nested });
   }
-
   let displayValue = String(value);
   if (key.endsWith('_bps')) displayValue = `${displayValue} bps`;
   else if (key.endsWith('_minutes')) displayValue = `${displayValue} minutes`;
   else displayValue = formatPublicLabel(displayValue, displayValue);
   return valueStatePresentation(value, { policy, display_value: displayValue });
 }
-
-const rows = sections.flatMap((section) => {
-  const fields = Object.entries(section.value as Record<string, unknown>);
-  return fields.map(([key, value]) => ({
-    label: `${section.label} — ${labelFor(key)}`,
-    presentation: valueFor(key, value)
-  }));
-});
+const rows = sections.flatMap((section) => Object.entries(section.value as Record<string, unknown>).map(([key, value]) => ({ label: `${section.label} — ${labelFor(key)}`, presentation: valueFor(key, value) })));
 ---
 {rows.length > 0 && (
-  <section class="panel registry">
+  <section class="panel registry event-structured-detail" id="structured-detail">
     <div class="bar">Structured event detail</div>
-    <table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve">
-      <tbody>
-        {rows.map((row) => (
-          <tr>
-            <th>{row.label}</th>
-            <td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div class="event-detail-table"><table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve"><tbody>{rows.map((row) => <tr><th>{row.label}</th><td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td></tr>)}</tbody></table></div>
+    <dl class="event-structured-cards" data-mobile-representation-for="event-detail-overlay">{rows.map((row) => <div><dt>{row.label}</dt><dd><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></dd></div>)}</dl>
   </section>
 )}
