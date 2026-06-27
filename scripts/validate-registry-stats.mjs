@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
 import { buildValueStateStats } from './build-value-state-stats.mjs';
 import { buildPrimaryDisplayRelationshipStats } from './build-primary-display-relationship-stats.mjs';
+import { applyEvidenceSourceIdentityStats } from './build-evidence-source-identity-stats.mjs';
 
 const root = process.cwd();
 const contractPath = 'docs/stats/registry-stats-contract.json';
@@ -22,6 +23,7 @@ const current = readJson(outputPath);
 const expected = buildRegistryStats();
 expected.value_states = buildValueStateStats(root);
 expected.primary_display_relationships = buildPrimaryDisplayRelationshipStats(root);
+applyEvidenceSourceIdentityStats(expected, root);
 const failures = [];
 
 for (const section of contract.required_sections ?? []) {
@@ -95,6 +97,29 @@ if (sumObjectValues(primaryDisplay?.selected_organization_category ?? {}) !== cu
   failures.push('primary display selected_organization_category counts must sum to registry.stablecoins');
 }
 
+const sourceIdentities = current.evidence_source_identities;
+if (sourceIdentities?.canonical_evidence_records !== current.registry?.evidence) {
+  failures.push('evidence source identity canonical count must equal registry.evidence');
+}
+if (sourceIdentities?.public_source_identities !== current.registry?.evidence_source_identities) {
+  failures.push('public source identity count must equal registry.evidence_source_identities');
+}
+if (sourceIdentities?.evidence_relations !== current.registry?.evidence_relations) {
+  failures.push('evidence relation count must equal registry.evidence_relations');
+}
+if ((sourceIdentities?.public_source_identities ?? 0) + (sourceIdentities?.source_aliases ?? 0) !== (sourceIdentities?.canonical_evidence_records ?? -1)) {
+  failures.push('public source identities plus aliases must equal canonical evidence records');
+}
+if (sourceIdentities?.public_duplicate_url_groups !== 0) {
+  failures.push('public source identity projection must contain zero duplicate URL groups');
+}
+if ((sourceIdentities?.orphan_relation_source_ids ?? []).length !== 0) {
+  failures.push('evidence relations must not point to missing public source identities');
+}
+if (sourceIdentities?.source_identity_groups !== 32) {
+  failures.push('evidence source identity group count must remain 32');
+}
+
 try {
   assert.deepStrictEqual(current, expected);
 } catch {
@@ -109,4 +134,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Registry stats validation passed: ${current.registry.stablecoins} assets, ${current.registry.events} events, ${current.registry.evidence} evidence records, ${Object.keys(current.value_states).length - 1} value-state axes, and ${primaryDisplay.selected_relationships} primary display relationships.`);
+console.log(`Registry stats validation passed: ${current.registry.stablecoins} assets, ${current.registry.events} events, ${current.registry.evidence} canonical evidence records, ${current.registry.evidence_source_identities} public source identities, ${current.registry.evidence_relations} evidence relations, ${Object.keys(current.value_states).length - 1} value-state axes, and ${primaryDisplay.selected_relationships} primary display relationships.`);
