@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
       - name: Validate completed shell
         run: node scripts/validate-global-shell-completion.mjs
       - name: Rebuild responsive audit
