@@ -18,7 +18,11 @@ const expected = [
   'organization-overview',
   'organization-relationships',
   'organization-events',
-  'organization-sources'
+  'organization-sources',
+  'event-index',
+  'event-details',
+  'event-detail-overlay',
+  'event-sources'
 ].sort();
 
 check(audit.schema_version === '1.0', 'audit schema changed');
@@ -46,7 +50,7 @@ const layout = audit.current_baseline?.layout ?? {};
 for (const key of ['language_declared', 'viewport_declared', 'main_landmark_present', 'main_landmark_has_id', 'skip_link_present', 'primary_navigation_label_present', 'current_page_state_present']) check(layout[key] === true, `layout foundation is missing: ${key}`);
 
 const gaps = audit.implementation_gaps ?? {};
-check(gaps.table_transformations_pending?.length === 19, 'page transformation queue must contain 19 pending tables');
+check(gaps.table_transformations_pending?.length === 15, 'page transformation queue must contain 15 pending tables');
 for (const kind of expected) check(!gaps.table_transformations_pending?.includes(kind), `implemented table remains pending: ${kind}`);
 for (const key of ['skip_link_missing', 'main_target_missing', 'current_page_state_missing', 'reduced_motion_missing', 'forced_colors_missing', 'long_value_wrapping_missing', 'minimum_target_rule_missing']) check(gaps[key] === false, `global shell foundation remains incomplete: ${key}`);
 
