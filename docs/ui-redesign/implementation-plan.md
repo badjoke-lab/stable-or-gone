@@ -1,786 +1,529 @@
-# Stable or Gone UI and public-information repair implementation plan
+# Stable or Gone UI implementation plan v2
 
-Status: canonical implementation plan  
-Updated: 2026-06-26  
-Target release: 100 canonical stable assets
+Status: canonical implementation schedule  
+Updated: 2026-06-27  
+Current registry checkpoint: 92 canonical stable assets  
+Approved visual direction: Modern Data Product
 
 ## 1. Purpose
 
-This file is the binding pull-request sequence for the SOG documentation reset, public-taxonomy repair, information-architecture rebuild, UI implementation, full-record audit, and 100-record release.
+This file is the binding execution order for completing the approved SOG UI redesign.
 
-No implementation work may be reordered, combined, or skipped without updating this file and `docs/roadmap.md` in the same pull request.
+The earlier repair program successfully established data integrity, taxonomy, route, responsive, and evidence-preservation foundations. It did not produce a visually approved final interface. The partial production UI merged through PR #201 is therefore treated as reusable implementation work, not as the accepted redesign release.
 
-## 2. Current position
+No UI work may be reordered, combined, skipped, or published without updating this file and `docs/roadmap.md` in the same pull request.
+
+## 2. Required authority
+
+Every UI implementation PR must read and cite:
 
 ```text
+AGENTS.md
+docs/spec-governance.md
+docs/deployment-policy.md
+docs/ui-redesign/master-spec.md
+docs/architecture/approved-modern-data-product-ui-v2.md
+docs/ui-redesign/implementation-plan.md
+docs/roadmap.md
+docs/public-taxonomy-spec.md
+```
+
+Additional architecture documents remain binding where they do not conflict with the approved v2 visual contract.
+
+The v2 visual contract supersedes `docs/architecture/visual-system-and-mocks-v1.md` for visual composition and page implementation. The v1 document remains historical.
+
+## 3. Current position
+
+```text
+Repository: badjoke-lab/stable-or-gone
+Latest merged repair hotfix: PR #206
 Canonical stable assets: 92
 Canonical organizations: 86
 Canonical relationships: 101
 Canonical events: 150
 Canonical evidence: 455
-Current approved phase: documentation reset
-Growth status: paused
-Production publication: paused except verified emergency repair
+Public source identities: 410
+Current phase: approved UI v2 documentation reset
+Active work: PR #207 — freeze approved UI v2 contract and replacement schedule
+Routine record growth: paused
+Batch 18 selection: prohibited
+Automatic production deployment: disabled
+Production publication: prohibited until the final approved checkpoint
 ```
 
-The present branch is the documentation-reset pull request. It must merge before PR 1 below begins.
+## 4. What is already complete
 
-## 3. Binding working rules
+The following foundations remain valid and must not be weakened:
+
+```text
+PR #167–171  documentation and production-integrity repair
+PR #172–183  public taxonomy and canonical-semantics repair
+PR #185–190  information architecture, responsive contracts, and v1 mock package
+PR #191–201  partial shell, index, event, organization, and dossier implementation
+PR #202–206  emergency build and validation repairs
+```
+
+Reusable completed work includes:
+
+- canonical/public taxonomy mapping;
+- explicit primary display relationships;
+- source identity and evidence relation preservation;
+- value-state semantics;
+- grouped navigation architecture;
+- stablecoin, organization, and event search/filter foundations;
+- stablecoin dossier field ownership;
+- route and machine-readable parity validation;
+- mobile information-preservation checks;
+- production provenance and integrity validation.
+
+These foundations do not authorize the current visual presentation as the completed new UI.
+
+## 5. Binding rules
 
 Every PR must:
 
 1. start from the latest confirmed `main`;
-2. cite exact sections of `docs/ui-redesign/master-spec.md`;
-3. cite its numbered item in this plan;
-4. update `docs/roadmap.md` when current position or sequence changes;
-5. preserve canonical counts unless an explicit audited migration says otherwise;
-6. run repository validation and the checks introduced by earlier dependency PRs;
-7. state one deployment classification from `docs/deployment-policy.md`;
-8. avoid production deployment unless this plan marks a publication checkpoint;
-9. remain independently buildable;
-10. avoid combining unrelated repair layers.
+2. cite the exact v2 page or component contract being implemented;
+3. cite its numbered work item in this plan;
+4. preserve canonical counts unless a separately audited data migration approves a change;
+5. use only canonical or approved editorial data;
+6. exclude mock-only values and unsupported functionality;
+7. keep the approved S/G logo and prohibit substitute branding;
+8. preserve evidence, evidence relations, known unknowns, deployments, and multiple organization roles;
+9. run all existing validation and any new checks introduced by the PR;
+10. state a deployment classification;
+11. avoid production deployment unless this plan marks the publication checkpoint;
+12. update `docs/roadmap.md` when current position changes.
 
-## 4. Phase gates
+## 6. Phase gates
 
 ```text
-Gate A — documentation reset merged
-Gate B — production integrity repaired
-Gate C — taxonomy and data-semantics migration complete
-Gate D — information architecture and mocks approved
-Gate E — core registry UI complete
-Gate F — full responsive/accessibility/performance hardening complete
-Gate G — all 92 current records audited
-Gate H — 100-record release candidate verified
-Gate I — deliberate production publication and parity verification
+Gate V2-A — approved v2 design contract and schedule merged
+Gate V2-B — shared visual foundation and brand assets complete
+Gate V2-C — all eight approved desktop page families implemented
+Gate V2-D — remaining editorial pages aligned
+Gate V2-E — mobile, accessibility, and interaction hardening complete
+Gate V2-F — 92-record and all-route UI audit complete
+Gate V2-G — immutable release candidate approved by the owner
+Gate V2-H — deliberate production publication and parity verification
 ```
 
-A failed gate blocks the next dependent phase. It does not erase already completed unrelated work.
+A failed gate blocks dependent work. It does not permit weakening a validator or hiding canonical information.
 
-# Phase 0 — Documentation reset
+# Phase V2-0 — Documentation and approved references
 
-## Documentation reset PR — Rewrite the source of truth
+## PR #207 — Freeze approved UI v2 contract and replacement schedule
 
-This is the current pull request.
+### Work
 
-### Scope
-
-- add `docs/spec-governance.md`;
-- add `docs/ui-redesign/master-spec.md`;
-- add `docs/ui-redesign/implementation-plan.md`;
-- update `AGENTS.md` required reading and traceability rules;
-- update `docs/roadmap.md` current phase and full sequence;
-- update `README.md` current counts and source-of-truth links;
-- mark the old Registry v3 implementation plan as historical and replace its active schedule role;
-- update deployment gates to pause routine growth and define the redesign release checkpoint.
+- add `docs/architecture/approved-modern-data-product-ui-v2.md`;
+- store the eight approved desktop reference images in the repository;
+- store approved S/G logo reference images;
+- mark the v1 visual package as historical for new implementation;
+- replace this implementation schedule;
+- update `docs/roadmap.md` current position and full PR sequence;
+- update `AGENTS.md` required reading and authority rules;
+- define mock-only exclusions and asset-identity rules;
+- prohibit further UI work that does not cite the v2 contract.
 
 ### Completion criteria
 
-- repository documents no longer direct work toward Batch 18 before the repair program;
-- all future work has one authoritative reading order;
-- the current 92-record checkpoint is recorded consistently;
-- no production code or canonical data changes are included.
+```text
+Eight approved page references are present
+Approved S/G logo references are present
+V2 contract is canonical
+Implementation plan and roadmap agree
+AGENTS.md requires the v2 contract
+No production code or canonical data changes
+No production deployment
+```
 
 ### Deployment classification
 
 No production deployment required.
 
-# Phase 1 — Emergency integrity repair
+### Gate V2-A
 
-## PR 1 — Freeze repair baseline and defect inventory
+Passes when PR #207 merges.
+
+# Phase V2-1 — Shared visual foundation
+
+## PR #208 — Implement v2 visual foundation and approved brand assets
 
 ### Work
 
-Create a machine-readable and human-readable baseline containing:
+- create production SVG versions of the approved S/G lockup and monogram;
+- add stable asset paths and accessibility labels;
+- replace all rejected stacked-cube branding;
+- define final dark-navy, surface, line, text, blue accent, and semantic-state tokens;
+- implement shared typography, spacing, radius, focus, form, button, chip, panel, and table primitives;
+- implement ticker and organization-initial badges;
+- implement shared header, grouped navigation, footer, support banner, and page hero;
+- keep decorative hero illustrations optional and non-semantic.
 
-- canonical record-group counts;
-- generated route counts;
-- public-origin counts;
-- sitemap counts;
-- machine-readable counts;
-- known public-taxonomy defects;
-- known mobile defects;
-- known stale-output defects;
-- representative complex records.
+### Non-scope
 
-Representative cases must include active, restricted, winding-down, collapsed, migrated, non-USD, multi-organization, multi-deployment, evidence-heavy, unknown-heavy, wrapper/relationship, and regulation-heavy records.
+- no page-specific full redesign;
+- no official coin-logo collection;
+- no new canonical data;
+- no production publication.
 
 ### Completion criteria
-
-- each confirmed defect has a reproducible check or audit entry;
-- before/after comparisons can use this baseline;
-- no canonical data changes.
-
-## PR 2 — Add build provenance
-
-### Work
-
-Generate and expose:
 
 ```text
-source commit
-build timestamp
-canonical data hash
-record-group counts
-generated route counts
+Approved S/G branding appears in shell
+No substitute logo remains
+Shared tokens and primitives are reusable
+Contrast and keyboard focus pass
+Canonical routes and counts remain unchanged
+Full build passes
 ```
 
-Use the same generated provenance in `version.json`, build summaries, and production verification.
+### Gate V2-B
 
-### Completion criteria
+Passes when PR #208 merges.
 
-- a deployed page set can be tied to one commit and one data snapshot;
-- provenance values are generated, not manually maintained.
+# Phase V2-2 — Approved registry pages
 
-## PR 3 — Enforce full-route and output parity
+## PR #209 — Implement approved home page
 
-### Work
-
-Validate:
-
-- stablecoin, organization, and event list counts;
-- detail-route counts;
-- sitemap coverage;
-- JSON-LD and canonical coverage;
-- `version.json` and manifest parity;
-- absence of stale generated pages from an earlier snapshot.
-
-### Completion criteria
-
-- partial or mixed-generation output fails CI;
-- one route family cannot silently remain on an older dataset.
-
-## PR 4 — Remove destructive mobile column suppression
+Reference: `01-home.webp`
 
 ### Work
 
-- remove global numbered-column hiding;
-- add explicit table identities;
-- preserve all material fields until the full responsive redesign;
-- document temporary overflow behavior.
+- implement the approved hero and product statement;
+- add truthful registry-wide or widest-supported search;
+- show canonical counts for stablecoins, organizations, events, and source identities;
+- implement primary registry entry cards;
+- implement guide cards from real guide records;
+- implement a selected-record section with an explicit deterministic selection rule;
+- implement the approved support banner and footer composition.
 
-### Completion criteria
+### Required exclusions
 
-Peg, impact, recovery, confidence, summary, and control-capability fields no longer disappear based only on column position.
+- no invented growth deltas;
+- no unsupported metrics;
+- no live market data;
+- no featured selection based on raw array order.
 
-### Gate B
+## PR #210 — Implement approved Stablecoins index
 
-Phase 1 is complete only when PRs 1–4 are merged and all new integrity checks pass.
-
-# Phase 2 — Public taxonomy and canonical-semantics repair
-
-## PR 5 — Add public-value registry and legacy mapping
+Reference: `02-stablecoin-index.webp`
 
 ### Work
 
-Create one approved mapping layer for:
+- apply approved search and filter composition;
+- preserve URL-synchronized filter state;
+- use approved public taxonomy only;
+- show canonical count cards;
+- implement dense desktop rows and compact mobile-ready record data;
+- show ticker badges, lifecycle, issuance, reference target, model, organization, and reviewed/change context;
+- preserve real export access where available.
+
+### Required exclusions
+
+- saved views;
+- user watchlists;
+- recently viewed history;
+- account-dependent behavior;
+- mock-only comparison tray in the initial v2 release;
+- market-cap or price filters.
+
+## PR #211 — Implement approved Stablecoin detail
+
+Reference: `03-stablecoin-detail.webp`
+
+### Work
+
+- implement approved record hero with ticker badge;
+- implement current-state summary axes;
+- implement profile summary;
+- implement organizations and control relationships;
+- implement reserve, redemption, and backing context without synthetic scoring;
+- implement deployments;
+- implement event presentation;
+- implement evidence and known unknowns as first-class sections;
+- keep guides secondary;
+- preserve all eight value states.
+
+### Completion criteria
+
+- every current dossier field has a visible destination or deliberate progressive-disclosure destination;
+- multiple organizations and roles remain visible;
+- no overall safety or transparency score is generated;
+- no unsupported reserve amount is invented.
+
+## PR #212 — Implement approved Organizations index and detail
+
+References:
 
 ```text
-canonical value
-public category
-public label
-legacy aliases
-short definition
-sort order
+04-organization-index.webp
+05-organization-detail.webp
 ```
 
-Cover lifecycle, issuance, reference target, backing/model category, event category, organization category, relationship role, evidence fields, deployment state, and value-state semantics.
-
-### Completion criteria
-
-- UI code no longer needs ad hoc label rules;
-- free-text values cannot become filter categories automatically.
-
-## PR 6 — Normalize lifecycle and issuance presentation
-
 ### Work
 
-- make canonical lifecycle the public source of truth;
-- retain legacy status only for compatibility validation;
-- map legacy values record by record;
-- keep issuance separate;
-- update chips, filters, list rows, detail summaries, and statistics inputs.
+- implement search and approved organization filters;
+- implement organization list rows/cards;
+- implement organization identity, category, legal form, jurisdiction, functional role, and connected records;
+- implement current and historical relationships;
+- implement connected stablecoins and events;
+- implement evidence, regulatory/legal context, known unknowns, and related guides;
+- use organization-initial badges unless a reviewed official local asset exists.
 
-### Completion criteria
+### Required exclusions
 
-- list and detail pages cannot describe the same asset with conflicting lifecycle labels;
-- compatibility validation rejects contradictory legacy and canonical values.
+- no generic `Verified` badge without a canonical verification meaning;
+- no assumption that every organization is an issuer;
+- no unsupported licensing conclusion.
 
-## PR 7 — Normalize reference targets and peg labels
+## PR #213 — Implement approved Events index and detail
 
-### Work
-
-- separate reference kind, asset/code, public label, and methodology description;
-- migrate internal identifiers away from default display;
-- define comparison categories for filters.
-
-### Completion criteria
-
-- internal enum strings do not appear as public peg labels;
-- complex floating or indexed targets retain accurate descriptions.
-
-## PR 8 — Normalize backing and stabilization presentation
-
-### Work
-
-Separate:
+References:
 
 ```text
-public comparison category
-canonical backing types
-reserve components
-primary stabilization mechanism
-protocol-specific explanation
-historical model changes
+06-event-index.webp
+07-event-detail.webp
 ```
 
-### Completion criteria
-
-- model filters use a finite approved category list;
-- detailed mechanism information remains available in asset records.
-
-## PR 9 — Normalize event categories and subtypes
-
 ### Work
 
-- define stable public event categories;
-- map legacy event types to categories and precise subtypes;
-- preserve typed detail records;
-- remove implementation-facing overlay names from public copy.
+- implement event search and approved filters;
+- implement public category, subtype, date, lifecycle impact, affected records, and related organization presentation;
+- implement typed detail sections;
+- implement multi-moment timeline only when supported by canonical detail data;
+- implement source evidence, known unknowns, and related guides.
 
-### Completion criteria
+### Required exclusions
 
-- launch, migration, rebrand, and wind-down variants are consistently grouped;
-- no material event detail is lost.
+- no invented market-loss figure;
+- no unsupported legal-liability statement;
+- no mock prose copied into canonical records;
+- no internal overlay names as public labels.
 
-## PR 10 — Normalize organization classification
+### Gate V2-C
 
-### Work
+Passes when PRs #209–#213 merge and all five registry page families match the approved composition and canonical field contracts.
 
-Separate:
+# Phase V2-3 — Editorial and project pages
+
+## PR #214 — Align Methodology and the editorial/project family
+
+Reference: `08-methodology.webp`
+
+### Routes and families
 
 ```text
-organization category
-legal form
-functional role
-jurisdiction
-regulatory character
+Methodology
+Guides and guide detail
+Glossary
+Models
+Updates
+About
+Corrections
+Contact
+Support
+Data access entrypoints
 ```
 
-### Completion criteria
-
-- legal form and operational function are not treated as one enum;
-- public Organization pages can explain multiple roles accurately.
-
-## PR 11 — Separate evidence reliability, provenance, and type
-
 ### Work
 
-Migrate evidence metadata so that:
-
-- reliability is a quality assessment;
-- primary/secondary status is independent;
-- source type and source provenance are independent;
-- claim scopes remain relation-level data where appropriate.
+- implement shared editorial shell and on-page navigation;
+- implement modular explanatory cards where appropriate;
+- align Methodology with the actual canonical model, taxonomy, value states, evidence policy, review process, and public files;
+- preserve long-form readability for Guides and policy pages;
+- keep Corrections and data access visible;
+- keep Support secondary.
 
 ### Completion criteria
 
-- values such as `high` and `primary_repository` cannot occupy the same semantic axis.
+- editorial pages visibly belong to the approved v2 system;
+- guide prose does not replace canonical evidence;
+- updates use meaningful change types;
+- methodology matches actual validators and data structures.
 
-## PR 12 — Separate deployment status from verification work state
+### Gate V2-D
+
+Passes when PR #214 merges.
+
+# Phase V2-4 — Mobile, accessibility, and interaction hardening
+
+## PR #215 — Complete mobile and accessibility implementation
 
 ### Work
 
-Add or normalize:
+- produce implementation-derived mobile reference screenshots;
+- implement controlled compact navigation;
+- transform each protected table using its page-specific contract;
+- preserve active filters and clear actions;
+- implement long-record section navigation;
+- verify evidence, known unknowns, contracts, URLs, and long titles;
+- verify 320, 360, 390, 768, 820, 1024, and 1280+ widths;
+- verify 200% zoom and text spacing;
+- verify keyboard operation, focus return, labels, announcements, reduced motion, forced colors, and non-color states;
+- fix layout drift against the approved desktop references.
+
+### Completion criteria
 
 ```text
-deployment status
-canonicality
-contract address
-verification status
-verification note
-linked known unknown
+No material field is hidden
+No page depends only on uncontrolled horizontal scrolling
+44px targets pass
+Keyboard and screen-reader contracts pass
+Mobile screenshots are reviewed
+Desktop screenshots remain aligned
 ```
 
-### Completion criteria
+### Gate V2-E
 
-- review placeholders no longer appear as chain, contract, or deployment status values;
-- unresolved contract identity remains visible through an explicit unknown state.
+Passes when PR #215 merges.
 
-## PR 13 — Define and migrate value-state semantics
+# Phase V2-5 — Full audit and release candidate
 
-### Work
+## PR #216 — Audit all records, routes, and outputs under UI v2
 
-Implement the approved distinctions:
+### Audit scope
 
-```text
-known
-unknown_after_review
-not_recorded
-not_applicable
-not_public
-unverified
-disputed
-approximate
-```
-
-### Completion criteria
-
-- the public UI can distinguish investigated unknowns from missing data;
-- validators prevent work-queue strings from substituting for value state.
-
-## PR 14 — Make primary display relationships explicit
-
-### Work
-
-- stop using relationship array order;
-- add an explicit primary display relationship or approved deterministic priority;
-- validate current/historical relationship boundaries;
-- support multiple visible organizations and roles.
-
-### Completion criteria
-
-- changing JSON order cannot change the public primary organization;
-- zero or multiple unintended primaries fail validation.
-
-## PR 15 — Deduplicate evidence sources while preserving claim relations
-
-### Work
-
-- identify duplicate source records and duplicate public rows;
-- preserve one source identity with multiple evidence relations;
-- show all supported claim scopes.
-
-### Completion criteria
-
-- no accidental duplicate source rows;
-- evidence relation counts and claim coverage are preserved.
-
-## PR 16 — Move record-specific public copy out of components and complete the 92-record migration
-
-### Work
-
-- move hard-coded asset summaries into the approved data/copy layer;
-- apply PR 5–15 migrations to all 92 assets and related records;
-- generate before/after preservation reports.
-
-### Completion criteria
-
-- rendering components contain no asset-specific summary table;
-- all canonical record-group counts are preserved or explicitly audited;
-- all 92 assets pass taxonomy validators.
-
-### Gate C
-
-Phase 2 is complete only when PRs 5–16 are merged and the 92-record migration audit passes.
-
-# Phase 3 — Information architecture, responsive specification, and mocks
-
-## PR 17 — Finalize site architecture and route roles
-
-### Work
-
-Define Registry, Learn, and Project navigation groups; preserve canonical route compatibility; remove compatibility implementation details from record content.
-
-### Completion criteria
-
-- route map and global navigation map are approved;
-- no route change is implied without a dedicated migration.
-
-## PR 18 — Finalize stablecoin dossier hierarchy
-
-### Work
-
-Create the field-to-section matrix for:
-
-```text
-identity and current state
-organizations and control
-how the asset works
-deployments and legal context
-history
-evidence
-known unknowns
-corrections and further reading
-```
-
-### Completion criteria
-
-- every current public field has a destination, replacement, or explicit deprecation decision;
-- evidence and unknowns cannot be omitted by design.
-
-## PR 19 — Finalize list, search, filter, and comparison behavior
-
-### Work
-
-Specify stablecoin, organization, and event indexes, including URL-synchronized filters, active-filter summaries, search scope, multi-role summaries, and mobile record rows.
-
-### Completion criteria
-
-- filter behavior is shareable and testable;
-- no approved filter depends on unique free-text enumeration.
-
-## PR 20 — Define meaningful change history
-
-### Work
-
-Define public change types:
-
-```text
-status change
-event added
-evidence added
-relationship change
-reserve/redemption change
-unknown added
-unknown resolved
-copy-only correction
-```
-
-### Completion criteria
-
-- Updates and detail summaries can explain what changed, not merely when a record was reviewed.
-
-## PR 21 — Finalize responsive and accessibility specification
-
-### Work
-
-Define page-specific mobile transformations, filter behavior, local detail navigation, table semantics, source expansion, contract handling, focus order, and result announcements.
-
-### Completion criteria
-
-- every current table has an explicit mobile representation;
-- no material-information suppression remains unspecified.
-
-## PR 22 — Approve visual system and image mocks
-
-### Work
-
-Produce and review the visual system and required desktop/mobile mocks using representative complex records.
-
-Required mocks:
-
-```text
-stablecoin index desktop
-stablecoin detail desktop
-stablecoin index mobile
-stablecoin detail mobile
-organization detail
-event detail
-home
-open filter state
-evidence expanded state
-known-unknown warning state
-```
-
-### Completion criteria
-
-- every visible element maps to canonical fields and value-state rules;
-- mocks satisfy desktop, mobile, evidence, unknown, and multi-relationship requirements.
-
-### Gate D
-
-No production UI implementation begins until PRs 17–22 are merged.
-
-# Phase 4 — Shared UI and registry indexes
-
-## PR 23 — Implement global shell and navigation
-
-### Work
-
-- Registry/Learn/Project navigation;
-- desktop and mobile navigation;
-- current-page state;
-- footer hierarchy;
-- corrections and data-access visibility;
-- support as secondary utility.
-
-### Completion criteria
-
-- mobile header does not become an uncontrolled multi-row link list;
-- compatibility path details are absent from record content.
-
-## PR 24 — Rebuild stablecoin index
-
-### Work
-
-Implement approved taxonomy, URL filters, result-state controls, desktop comparison table, mobile compact rows, multi-organization indication, and meaningful review/change information.
-
-### Completion criteria
-
-- no internal enum or free-text mechanism appears as a filter category;
-- shared filter URLs restore the same state.
-
-## PR 25 — Rebuild organization index and detail
-
-### Work
-
-Implement organization category, legal form, jurisdiction, current/historical roles, connected assets, confidence scope, and relationship navigation.
-
-### Completion criteria
-
-- organization is not treated as synonymous with issuer;
-- all material roles remain visible.
-
-## PR 26 — Rebuild event index and detail
-
-### Work
-
-Implement public category, precise subtype, impact, recovery applicability/outcome, asset and organization links, evidence summary, and typed details.
-
-### Completion criteria
-
-- internal overlay names are not public;
-- event category and subtype remain distinct.
-
-# Phase 5 — Stablecoin dossier implementation
-
-## PR 27 — Implement detail shell and local navigation
-
-### Work
-
-- dossier header;
-- current-state summary;
-- section outline;
-- sticky desktop navigation;
-- mobile section navigation;
-- direct anchors;
-- top-level event/evidence/unknown summaries.
-
-### Completion criteria
-
-- users can understand and navigate long records without reading from top to bottom.
-
-## PR 28 — Implement identity, lifecycle, issuance, and organization relationships
-
-### Work
-
-Implement canonical identity, aliases, lifecycle, issuance, reference target, explicit primary relationship, additional roles, dates, control context, and organization links.
-
-### Completion criteria
-
-- a single visible organization cannot imply sole responsibility when multiple roles exist.
-
-## PR 29 — Implement backing, reserve, stabilization, redemption, and income mechanics
-
-### Work
-
-Present each axis separately, connect section-local evidence and unknowns, and preserve dated reserve/redemption context.
-
-### Completion criteria
-
-- no safety score or recommendation is generated;
-- current and historical mechanism data are distinguishable.
-
-## PR 30 — Implement deployments, legal context, and control capabilities
-
-### Work
-
-Present chain, contract, canonicality, verification, legacy/current state, freeze/blacklist capability, observed control events, legal classification, and regulatory notes.
-
-### Completion criteria
-
-- unresolved verification is explicit without exposing internal work-queue strings.
-
-## PR 31 — Implement unified history, evidence, and known unknowns
-
-### Work
-
-- unified but typed timeline;
-- source-deduplicated evidence presentation;
-- claim scopes;
-- primary/official/archive indicators;
-- top and section-local known-unknown links;
-- priority and last-checked information.
-
-### Completion criteria
-
-- evidence is not a buried appendix;
-- known unknowns are not presented as accidental missing data.
-
-### Gate E
-
-Core registry UI is complete only when PRs 23–31 are merged.
-
-# Phase 6 — Search, home, editorial alignment, and hardening
-
-## PR 32 — Add build-time registry-wide search
-
-### Work
-
-Index approved public fields across assets, organizations, and events without introducing a live external search dependency.
-
-### Completion criteria
-
-- results are grouped by record type;
-- contract, alias, organization, role, event, and reference searches work as specified.
-
-## PR 33 — Rebuild home page
-
-### Work
-
-Prioritize registry entry, global search, main record families, meaningful recent changes, methodology, data access, and secondary support.
-
-### Completion criteria
-
-- no selected/featured record section depends on array order;
-- registry access is the primary purpose.
-
-## PR 34 — Align guides, glossary, methodology, updates, contact, support, and data access
-
-### Work
-
-Separate editorial content from canonical records, update methodology to match public taxonomy, implement meaningful update types, strengthen corrections, and formalize machine-readable data access.
-
-### Completion criteria
-
-- guides do not interrupt core record sections;
-- methodology matches canonical/public mappings.
-
-## PR 35 — Complete responsive transformation
-
-### Work
-
-Test and repair all pages at required widths; implement page-specific table and record transformations; verify filters, long text, contracts, evidence, and local navigation.
-
-### Completion criteria
-
-- no material field is silently removed;
-- mobile operation does not depend only on horizontal scrolling.
-
-## PR 36 — Complete accessibility and interaction audit
-
-### Work
-
-Audit semantic structure, keyboard operation, focus, labels, result announcements, non-color states, expanded state, reduced motion, and contrast.
-
-### Completion criteria
-
-- no known critical keyboard, screen-reader, or contrast defect remains.
-
-## PR 37 — Complete performance, SEO, build, and machine-readable parity audit
-
-### Work
-
-Audit static generation, client bundle, search index, route counts, canonical metadata, JSON-LD, sitemap, version, manifest, AI/LLM entrypoints, and canonical-only data boundaries.
-
-### Completion criteria
-
-- all parity and performance gates pass on one candidate build.
-
-### Gate F
-
-PRs 32–37 must merge before the full-record audit or count growth resumes.
-
-# Phase 7 — Full-record audit and 100-record release
-
-## PR 38 — Audit all 92 current assets under the repaired public layer
-
-### Work
-
-For every current asset verify:
+For all 92 stable assets, all organizations, all events, and all public route families verify:
 
 ```text
 identity
 lifecycle
 issuance
-reference label
-public backing/model category
-primary and additional relationships
+reference target
+model/backing category
+organization relationships
 reserve and redemption
-income/yield
-legal profile
+income/yield where applicable
+legal and regulatory context
 deployments
 events
-evidence deduplication
+evidence and evidence relations
 known unknowns
+value states
 mobile layout
+desktop layout
 metadata
 machine-readable parity
 ```
 
-Also audit all current organization and event routes.
+Also verify:
 
-### Completion criteria
-
-- 92/92 assets pass the repair checklist;
-- no unexplained canonical-count loss;
-- no route-generation discrepancy;
-- unresolved defects are either fixed or explicitly block release.
-
-## PR 39 — Promote the final eight assets for the 100-record release
-
-### Work
-
-Select and promote eight records using the normal candidate, full-layer, evidence, validation, and bounded-batch policy. This PR may be split into two bounded growth PRs if required by the five-record routine batch limit. If split, update this plan and roadmap before work begins.
-
-### Completion criteria
-
-- 100 canonical assets;
-- every added record passes the repaired taxonomy and UI audit;
-- no shortcut or thin placeholder record is used to reach the number.
-
-## PR 40 — Build and verify the 100-record release candidate
-
-### Work
-
-Create one candidate build from the intended main commit and verify:
-
-- all canonical counts;
-- all list and detail routes;
+- canonical counts;
+- route counts;
 - sitemap;
-- canonical and JSON-LD;
+- canonical URLs and JSON-LD;
 - version and manifest;
-- search;
-- filter URLs;
-- compatibility routes;
-- responsive smoke tests;
-- machine-readable outputs;
-- production provenance fields.
+- search and filter URLs;
+- output provenance;
+- no stale page family;
+- no mock-only values;
+- no rejected logo or v1 visual remnants on protected routes.
+
+### Required artifacts
+
+```text
+desktop screenshots for all eight approved page references
+mobile screenshots for core page families
+before/after visual comparison report
+92-record audit matrix
+organization and event route audit
+build and public-output diagnostics
+```
 
 ### Completion criteria
 
-- one immutable intended commit passes the complete release checklist.
+- all validators pass on one immutable candidate commit;
+- the owner reviews the candidate screenshots;
+- unresolved material visual defects block release;
+- no production publication occurs without explicit approval.
 
-### Gate H
+### Gates V2-F and V2-G
 
-No production publication occurs until PR 40 is merged and the release candidate audit passes.
+Gate V2-F passes when the audit is complete.  
+Gate V2-G passes only after explicit owner approval of the immutable release candidate.
 
-# Phase 8 — Production publication
+# Phase V2-6 — Deliberate production publication
 
-## Publication checkpoint — 100-record repaired UI
+## PR #217 or publication report — Publish the approved UI v2 candidate
+
+This step begins only after Gate V2-G.
 
 ### Work
 
-- manually dispatch the approved production workflow from the intended `main` commit;
-- verify the deployed source commit;
-- verify public counts and all route families;
-- verify no stale route family remains;
-- run production consistency;
-- record the publication report in the repository.
+- publish the exact approved candidate commit through the manual production workflow;
+- verify deployed commit and build provenance;
+- verify public counts and route families;
+- verify desktop and mobile smoke tests;
+- verify machine-readable parity;
+- record the publication report.
 
 ### Completion criteria
 
 ```text
-deployed commit equals intended main
-100 stable assets visible
-all public counts match canonical data
-all route counts match
+deployed commit equals approved candidate
+all canonical and route counts match
+no stale page family remains
+approved S/G logo is present
+v2 page families are live
 machine-readable parity passes
-no material responsive or navigation regression
+production report is committed
 ```
 
 ### Deployment classification
 
-Publication checkpoint deployment required after merge.
+Publication checkpoint deployment required after explicit approval.
 
-# Phase 9 — Post-release work
+### Gate V2-H
 
-Only after Gate I passes may the roadmap select:
+Passes only after production parity verification.
 
-- post-release defects;
-- statistics implementation or revision;
-- further record growth;
-- additional languages;
-- optional explorer enhancements.
+## 7. Mock and asset policy
 
-These items are not part of the 100-record repaired-UI release unless this plan is deliberately amended.
+The approved reference images are visual specifications, not data sources.
+
+Implementation must use:
+
+- canonical records;
+- approved taxonomy mappings;
+- approved editorial copy;
+- local reviewed assets;
+- deterministic ticker/initial badges as the default.
+
+Implementation must not use:
+
+- generated imitation coin logos;
+- unreviewed third-party logo hotlinks;
+- mock-only counts or metrics;
+- invented current data;
+- account-like features not separately approved.
+
+## 8. Growth policy
+
+Routine growth remains paused at 92 assets until Gate V2-F passes.
+
+The final eight-record path to 100 is not part of the visual implementation PR sequence above. After the repaired 92-record UI audit, the roadmap must deliberately decide whether to resume the existing 100-record release path. No record may be added merely to complete a visual release.
+
+## 9. Publication policy
+
+```text
+Automatic production deployment: disabled
+Preview branch deployment: disabled unless separately approved
+Normal implementation PR deployment: none
+Emergency publication: only under deployment policy
+UI v2 publication: one deliberate checkpoint after Gate V2-G
+Production branch: main
+```
+
+## 10. Schedule change control
+
+A schedule or design-direction change requires the same PR to update:
+
+```text
+docs/architecture/approved-modern-data-product-ui-v2.md
+docs/ui-redesign/implementation-plan.md
+docs/roadmap.md
+```
+
+A PR that cannot cite its approved v2 page contract and schedule item must be paused.
