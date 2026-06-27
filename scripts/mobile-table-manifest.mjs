@@ -3,6 +3,7 @@ export const mobileTableSourceFiles = [
   'src/pages/issuers/index.astro',
   'src/pages/events/index.astro',
   'src/components/StablecoinDetailView.astro',
+  'src/components/StablecoinOrganizationsControl.astro',
   'src/components/StablecoinValueStateSections.astro',
   'src/components/ValueStateMethodology.astro',
   'src/components/PrimaryDisplayRelationshipMethodology.astro',
@@ -30,6 +31,7 @@ export const requiredMobileTableKinds = [
 export const implementedMobileTableRepresentations = Object.freeze({
   'stablecoin-index': 'src/components/StablecoinIndexCard.astro',
   'stablecoin-overview': 'src/components/StablecoinDetailView.astro',
+  'stablecoin-organizations': 'src/components/StablecoinOrganizationsControl.astro',
   'organization-index': 'src/components/OrganizationIndexCard.astro',
   'organization-overview': 'src/pages/issuer/[slug].astro',
   'organization-relationships': 'src/pages/issuer/[slug].astro',

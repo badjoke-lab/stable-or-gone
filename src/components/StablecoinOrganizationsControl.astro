@@ -1,0 +1,98 @@
+---
+import ValueStateText from './ValueStateText.astro';
+import { formatPublicLabel } from '../utils/displayLabels';
+import {
+  getFunctionalRoleLabel,
+  getRelationshipStatusLabel,
+  resolveOrganizationTaxonomy
+} from '../utils/organizationTaxonomy';
+
+const {
+  coin,
+  relationships,
+  primaryResolution,
+  primaryRelationship,
+  primaryOrganization,
+  organizations,
+  deployments,
+  issuerControlEvents
+} = Astro.props;
+const organizationById = new Map(organizations.map((organization: any) => [organization.id, organization] as const));
+const relationshipRows = relationships.map((relationship: any) => {
+  const organization = organizationById.get(relationship.organization_id) as any;
+  return {
+    relationship,
+    organization,
+    taxonomy: organization ? resolveOrganizationTaxonomy(organization) : null,
+    isPrimary: relationship.id === primaryRelationship?.id,
+    isEnded: relationship.status === 'ended' || Boolean(relationship.end_date)
+  };
+});
+const currentCount = relationshipRows.filter((item: any) => !item.isEnded && item.relationship.status !== 'unknown').length;
+const endedCount = relationshipRows.filter((item: any) => item.isEnded).length;
+const unknownCount = relationshipRows.filter((item: any) => !item.isEnded && item.relationship.status === 'unknown').length;
+const freezeYes = deployments.filter((deployment: any) => deployment.freeze_capability === true).length;
+const freezeNo = deployments.filter((deployment: any) => deployment.freeze_capability === false).length;
+const freezeUnknown = deployments.length - freezeYes - freezeNo;
+const blacklistYes = deployments.filter((deployment: any) => deployment.blacklist_capability === true).length;
+const blacklistNo = deployments.filter((deployment: any) => deployment.blacklist_capability === false).length;
+const blacklistUnknown = deployments.length - blacklistYes - blacklistNo;
+const controlEventIds = new Set(deployments.flatMap((deployment: any) => deployment.control_event_ids ?? []));
+const capabilitySummary = (yes: number, no: number, unknown: number) => {
+  if (deployments.length === 0) return 'No deployment records';
+  return `${yes} recorded yes · ${no} recorded no · ${unknown} not recorded`;
+};
+---
+<section class="panel stablecoin-organizations-control" id="organizations-control">
+  <div class="bar">Organizations and control</div>
+  <p class="stablecoin-control-note">Primary display is a navigation and summary choice only. It does not replace other organizations or imply sole legal responsibility, operational control, reserve custody, or historical continuity.</p>
+
+  <dl class="stablecoin-control-summary">
+    <div><dt>Governance</dt><dd><ValueStateText value={coin.governance_model} displayValue={formatPublicLabel(coin.governance_model)} /></dd></div>
+    <div><dt>Primary display organization</dt><dd>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Not recorded'}</dd></div>
+    <div><dt>Primary display role</dt><dd>{primaryRelationship ? getFunctionalRoleLabel(primaryRelationship.role) : 'Not recorded'}</dd></div>
+    <div><dt>Display selection mode</dt><dd>{formatPublicLabel(primaryResolution.selection_mode)}</dd></div>
+    <div><dt>Current relationships</dt><dd>{currentCount}</dd></div>
+    <div><dt>Ended relationships</dt><dd>{endedCount}</dd></div>
+    <div><dt>Unknown relationship state</dt><dd>{unknownCount}</dd></div>
+    <div><dt>Freeze capability</dt><dd>{capabilitySummary(freezeYes, freezeNo, freezeUnknown)}</dd></div>
+    <div><dt>Blacklist capability</dt><dd>{capabilitySummary(blacklistYes, blacklistNo, blacklistUnknown)}</dd></div>
+    <div><dt>Deployment control-event references</dt><dd>{controlEventIds.size}</dd></div>
+    <div><dt>Observed issuer-control events</dt><dd>{issuerControlEvents.length}</dd></div>
+    <div><dt>Relationship coverage</dt><dd>{relationships.length} recorded relationship{relationships.length === 1 ? '' : 's'}</dd></div>
+  </dl>
+
+  <div class="stablecoin-organizations-table">
+    <table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve">
+      <caption>All current, ended, and unknown-state organization relationships</caption>
+      <thead><tr><th>Organization</th><th>Organization category</th><th>Regulatory character</th><th>Jurisdiction</th><th>Role</th><th>Display priority</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead>
+      <tbody>
+        {relationshipRows.length === 0 ? <tr><td colspan="9">No organization relationships have been added yet.</td></tr> : relationshipRows.map((item: any) => <tr>
+          <td>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</td>
+          <td>{item.taxonomy?.public_category_label ?? 'Not recorded'}</td>
+          <td>{item.taxonomy?.regulatory_character_label ?? 'Not recorded'}</td>
+          <td>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</td>
+          <td>{getFunctionalRoleLabel(item.relationship.role)}</td>
+          <td>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</td>
+          <td><ValueStateText value={item.relationship.start_date} /></td>
+          <td><ValueStateText value={item.relationship.end_date} /></td>
+          <td>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</td>
+        </tr>)}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="stablecoin-organization-cards" data-mobile-representation-for="stablecoin-organizations">
+    {relationshipRows.map((item: any) => <article>
+      <header><div><span class="record-kicker">{item.taxonomy?.public_category_label ?? 'Organization'}</span><h3>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</h3></div><span>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</span></header>
+      <dl>
+        <div><dt>Functional role</dt><dd>{getFunctionalRoleLabel(item.relationship.role)}</dd></div>
+        <div><dt>Relationship status</dt><dd>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</dd></div>
+        <div><dt>Regulatory character</dt><dd>{item.taxonomy?.regulatory_character_label ?? 'Not recorded'}</dd></div>
+        <div><dt>Jurisdiction</dt><dd>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</dd></div>
+        <div><dt>From</dt><dd>{item.relationship.start_date ?? 'Not recorded'}</dd></div>
+        <div><dt>Until</dt><dd>{item.relationship.end_date ?? 'Not recorded'}</dd></div>
+      </dl>
+    </article>)}
+  </div>
+</section>
