@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "captured_at": "2026-06-27",
+  "source_file": "src/components/StablecoinDetailView.astro",
+  "source_form": "embedded publicSummaries map keyed by slug",
+  "stablecoin_count": 92,
+  "embedded_summary_override_count": 20,
+  "canonical_summary_fallback_count": 72,
+  "summary_override_ids": [
+    "sog_st_busd",
+    "sog_st_crvusd",
+    "sog_st_dai",
+    "sog_st_eurc",
+    "sog_st_fdusd",
+    "sog_st_frax",
+    "sog_st_gusd",
+    "sog_st_lusd",
+    "sog_st_pyusd",
+    "sog_st_rlusd",
+    "sog_st_susd",
+    "sog_st_tusd",
+    "sog_st_usdc",
+    "sog_st_usdd",
+    "sog_st_usde",
+    "sog_st_usdg",
+    "sog_st_usdp",
+    "sog_st_usds",
+    "sog_st_usdt",
+    "sog_st_ust"
+  ],
+  "summary_map_sha256": "90fbe0de0a5d9d34ae8b387141ab31241f98337b8d740927e26376d57af46c7c"
+}
