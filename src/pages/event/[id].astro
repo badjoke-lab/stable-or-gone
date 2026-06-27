@@ -3,10 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import StructuredEventDetail from '../../components/StructuredEventDetail.astro';
 import EvidenceSourceTable from '../../components/EvidenceSourceTable.astro';
 import EventValueStateRows from '../../components/EventValueStateRows.astro';
+import ValueStateText from '../../components/ValueStateText.astro';
+import '../../styles/event-detail.css';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import { cleanPublicText } from '../../utils/publicText';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
 import { resolveEventTaxonomy } from '../../utils/eventTaxonomy';
 import { getEvents, getStablecoins, getOrganizations, getEvidence } from '../../lib/data/registry';
+import { canonicalizeLinkedEvidenceIds, getCanonicalEvidenceRelations, getEvidenceSourceIdentities } from '../../lib/data/evidenceSources';
+import { resolveEvidenceIdentityId } from '../../../config/evidence-source-identities.mjs';
 
 export function getStaticPaths() {
   return getEvents().map((event) => ({ params: { id: event.id }, props: { event } }));
@@ -19,7 +24,15 @@ const allOrganizations = getOrganizations();
 const allEvidence = getEvidence();
 const subjectStablecoins = (event.subject_stablecoin_ids?.length ? event.subject_stablecoin_ids : event.stablecoin_id ? [event.stablecoin_id] : []).map((id) => allStablecoins.find((item) => item.id === id) ?? { id, name: id, slug: '' });
 const subjectOrganizations = (event.subject_organization_ids?.length ? event.subject_organization_ids : event.issuer_id ? [event.issuer_id] : []).map((id) => allOrganizations.find((item) => item.id === id) ?? { id, name: id, slug: '' });
-const evidence = allEvidence.filter((source) => source.event_ids?.includes(event.id) || source.event_id === event.id);
+const relationSourceIds = getCanonicalEvidenceRelations().filter((relation) => relation.event_ids.includes(event.id)).map((relation) => relation.evidence_id);
+const directSourceIds = canonicalizeLinkedEvidenceIds([
+  ...(event.evidence_ids ?? []),
+  ...allEvidence.filter((source) => source.event_ids?.includes(event.id) || source.event_id === event.id).map((source) => source.id)
+]);
+const sourceIds = new Set([...relationSourceIds, ...directSourceIds]);
+const evidence = allEvidence.filter((source) => sourceIds.has(resolveEvidenceIdentityId(source.id)));
+const sourceIdentities = getEvidenceSourceIdentities().filter((source) => sourceIds.has(source.id));
+const eventRelations = getCanonicalEvidenceRelations().filter((relation) => relation.event_ids.includes(event.id));
 const publicCopy = eventPublicCopy[event.id];
 const eventTitle = publicCopy?.title ?? event.title;
 const eventDescription = publicCopy?.description ?? event.description ?? 'A description has not yet been added for this event.';
@@ -33,30 +46,66 @@ const detailFamilies = [
   'bridge_or_chain_incident_detail', 'termination_detail', 'launch_detail'
 ];
 const hasStructuredDetail = detailFamilies.some((field) => structuredEvent[field] && typeof structuredEvent[field] === 'object');
-const detailSummary = detailFamilies
-  .map((field) => structuredEvent[field]?.cause_summary ?? structuredEvent[field]?.summary)
-  .find((value) => typeof value === 'string' && value.length > 0);
+const detailSummary = detailFamilies.map((field) => structuredEvent[field]?.cause_summary ?? structuredEvent[field]?.summary).find((value) => typeof value === 'string' && value.length > 0);
+const recoveryDate = structuredEvent.depeg_detail?.recovery_date ?? structuredEvent.recovery_date;
+const causeOrMechanism = detailSummary ?? structuredEvent.failure_mechanism;
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [...subjectStablecoins.map((item) => item.name), ...subjectOrganizations.map((item) => item.name), taxonomy.public_category_label, taxonomy.canonical_subtype_label, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main"><div class="prompt">Stablecoin event</div><h1>{eventTitle}</h1><p>{eventDescription}</p></div>
-    <div class="panel stats"><div class="stat"><span>Category</span><strong>{taxonomy.public_category_label}</strong></div><div class="stat"><span>Impact</span><strong>{formatPublicLabel(event.impact_level)}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
-  </section>
+  <article class="event-detail-page">
+    <header class="panel event-detail-hero">
+      <div><div class="prompt">Stablecoin event record</div><h1>{eventTitle}</h1><p>{eventDescription}</p></div>
+      <dl class="event-detail-summary">
+        <div><dt>Date</dt><dd>{event.event_date ?? 'Not recorded'}</dd></div>
+        <div><dt>Category</dt><dd>{taxonomy.public_category_label}</dd></div>
+        <div><dt>Subtype</dt><dd>{taxonomy.canonical_subtype_label}</dd></div>
+        <div><dt>Status effect</dt><dd>{taxonomy.status_effect_label}</dd></div>
+        <div><dt>Recovery</dt><dd>{taxonomy.recovery_label}</dd></div>
+        <div><dt>Source identities</dt><dd>{sourceIdentities.length}</dd></div>
+      </dl>
+    </header>
 
-  <section class="section-grid" aria-label="Related pages">
-    {subjectStablecoins.map((item) => item.slug ? <a class="panel mini-card" href={`/stablecoin/${item.slug}/`}><h2>{item.name}</h2><p>Open the stablecoin record connected to this event.</p></a> : <div class="panel mini-card"><h2>{item.name}</h2><p>Stablecoin subject record is not linked yet.</p></div>)}
-    {subjectOrganizations.map((item) => item.slug ? <a class="panel mini-card" href={`/issuer/${item.slug}/`}><h2>{item.name}</h2><p>View the issuer, protocol, or organization connected to this event.</p></a> : <div class="panel mini-card"><h2>{item.name}</h2><p>Organization subject record is not linked yet.</p></div>)}
-    <a class="panel mini-card" href="/events/"><h2>All events</h2><p>Browse the complete stablecoin event history.</p></a>
-  </section>
+    <nav class="event-detail-nav" aria-label="Event record sections"><a href="#overview">Overview</a><a href="#subjects">Subjects</a>{hasStructuredDetail && <a href="#structured-detail">Structured detail</a>}<a href="#sources">Sources</a><a href="#corrections">Corrections</a></nav>
 
-  <section class="panel registry"><div class="bar">Event details</div><table data-table-kind="event-details" data-mobile-table="scroll-preserve"><tbody>
-    <EventValueStateRows event={event} taxonomy={taxonomy} subjectStablecoins={subjectStablecoins} subjectOrganizations={subjectOrganizations} detailSummary={detailSummary} hasStructuredDetail={hasStructuredDetail} />
-  </tbody></table></section>
+    <section class="panel event-detail-section" id="overview">
+      <div class="bar">Event overview</div>
+      <div class="event-detail-table"><table data-table-kind="event-details" data-mobile-table="scroll-preserve"><caption>Event overview and reviewed value states</caption><tbody><EventValueStateRows event={event} taxonomy={taxonomy} subjectStablecoins={subjectStablecoins} subjectOrganizations={subjectOrganizations} detailSummary={detailSummary} hasStructuredDetail={hasStructuredDetail} /></tbody></table></div>
+      <dl class="event-overview-cards" data-mobile-representation-for="event-details">
+        <div><dt>Date</dt><dd><ValueStateText value={event.event_date} /></dd></div>
+        <div><dt>Public event category</dt><dd>{taxonomy.public_category_label}</dd></div>
+        <div><dt>Canonical event subtype</dt><dd>{taxonomy.canonical_subtype_label}</dd></div>
+        <div><dt>Structured detail kind</dt><dd>{taxonomy.detail_kind_label}</dd></div>
+        <div><dt>Impact</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
+        <div><dt>Effect on stablecoin lifecycle</dt><dd>{taxonomy.status_effect_label}</dd></div>
+        <div><dt>Recovery or reversal</dt><dd>{taxonomy.recovery_label}</dd></div>
+        <div><dt>Recovery date</dt><dd><ValueStateText value={recoveryDate} /></dd></div>
+        <div><dt>Cause or mechanism</dt><dd>{causeOrMechanism ? cleanPublicText(String(causeOrMechanism)) : 'Not recorded'}</dd></div>
+        <div><dt>Structured detail coverage</dt><dd>{hasStructuredDetail ? 'Structured fields available below' : 'Description and source record only'}</dd></div>
+        <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
+        <div><dt>Evidence relations</dt><dd>{eventRelations.length}</dd></div>
+      </dl>
+    </section>
 
-  <StructuredEventDetail event={structuredEvent} />
+    <section class="panel event-detail-section" id="subjects">
+      <div class="bar">Subjects</div>
+      <div class="event-subject-grid">
+        {subjectStablecoins.map((item) => <article class="event-subject-card"><span class="record-kicker">Stablecoin subject</span><h3>{item.slug ? <a href={`/stablecoin/${item.slug}/`}>{item.name}</a> : item.name}</h3><p>Open the stablecoin dossier for current state, organizations, deployments, events, evidence, and known unknowns.</p></article>)}
+        {subjectOrganizations.map((item) => <article class="event-subject-card"><span class="record-kicker">Organization subject</span><h3>{item.slug ? <a href={`/issuer/${item.slug}/`}>{item.name}</a> : item.name}</h3><p>Open the organization record for roles, current and historical relationships, events, and evidence.</p></article>)}
+      </div>
+      {subjectStablecoins.length === 0 && subjectOrganizations.length === 0 && <p class="event-detail-empty">No subject relationship is recorded.</p>}
+    </section>
 
-  <section class="panel registry"><div class="bar">Sources</div><EvidenceSourceTable evidence={evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added yet." /></section>
+    <StructuredEventDetail event={structuredEvent} />
 
-  <section class="panel report-box"><h2>Suggest a correction</h2><p>Report an incorrect date, outcome, description, or source, or suggest a missing event.</p><div class="report-actions"><a data-primary="true" href="https://github.com/badjoke-lab/stable-or-gone/issues/new/choose">Start a report</a><a href="/contact/">Submission guide</a></div></section>
+    <section class="panel event-detail-section" id="sources">
+      <div class="bar">Sources</div>
+      <div class="event-detail-table"><EvidenceSourceTable evidence={evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added yet." /></div>
+      <div class="event-source-cards" data-mobile-representation-for="event-sources">
+        {sourceIdentities.map((source) => <article><span class="record-kicker">Source identity</span><h3><a href={source.url}>{source.title}</a></h3><dl><div><dt>Publisher</dt><dd>{source.publisher ?? 'Not recorded'}</dd></div><div><dt>Published</dt><dd>{source.published_at ?? 'Not recorded'}</dd></div><div><dt>Reliability</dt><dd>{formatPublicLabel(source.reliability)}</dd></div><div><dt>Evidence relations</dt><dd>{eventRelations.filter((relation) => relation.evidence_id === source.id).length}</dd></div></dl>{source.archived_url && <a href={source.archived_url}>Open archive</a>}</article>)}
+      </div>
+      {sourceIdentities.length === 0 && <p class="event-detail-empty">No event-specific source identity has been added.</p>}
+    </section>
+
+    <section class="panel event-detail-section" id="corrections"><div class="bar">Corrections and further reading</div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Read the methodology</a><a href="/events/">Back to Events</a></div></section>
+  </article>
 </BaseLayout>
