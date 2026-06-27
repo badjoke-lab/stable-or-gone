@@ -3,16 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { formatPublicBackingModelLabel } from '../utils/backingModel';
+import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
 import { getGuide } from '../data/guideCatalog';
-import { getStablecoins, getOrganizations, getPrimaryRelationship, getEvents, getEvidence } from '../lib/data/registry';
+import { getStablecoins, getOrganizations, getRelationships, getEvents } from '../lib/data/registry';
+import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
+const relationships = getRelationships();
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization.name] as const));
 const events = getEvents();
-const evidence = getEvidence();
+const evidenceSummary = getEvidenceSourceIdentitySummary();
 const primaryOrganizationName = (stablecoinId: string) => {
-  const relationship = getPrimaryRelationship(stablecoinId);
+  const relationship = resolvePrimaryRelationshipForStablecoin(stablecoinId, relationships).relationship;
   return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
 };
 const featuredGuides = [
@@ -41,7 +44,7 @@ const jsonLd = {
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
   <section class="hero">
     <div class="panel hero-main"><div class="prompt">Stablecoin history archive</div><h1>Stablecoin histories, major events, sources, and explainers.</h1><p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, redemption terms, and the regulatory structures around stablecoins.</p></div>
-    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Sources</span><strong>{evidence.length}</strong></div></div>
+    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Source identities</span><strong>{evidenceSummary.source_identities}</strong></div></div>
   </section>
 
   <section class="section-grid" aria-label="Main sections">
