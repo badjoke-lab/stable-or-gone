@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  actionLabel: string;
+  actionHref: string;
+}
+
+const { title, description, actionLabel, actionHref } = Astro.props;
+---
+<aside class="support-banner ui-panel">
+  <span class="support-banner__icon" aria-hidden="true">SOG</span>
+  <div class="support-banner__copy">
+    <h2>{title}</h2>
+    <p>{description}</p>
+  </div>
+  <a class="ui-button ui-button--primary support-banner__action" href={actionHref}>{actionLabel}</a>
+</aside>
