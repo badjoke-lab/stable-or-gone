@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-06-27",
+  "review_basis": [
+    "docs/architecture/site-architecture-v1.md",
+    "docs/architecture/stablecoin-dossier-hierarchy-v1.md",
+    "docs/architecture/index-interaction-contract-v1.md",
+    "docs/architecture/meaningful-change-history-v1.md",
+    "docs/architecture/responsive-accessibility-v1.md"
+  ],
+  "mocks": [
+    { "id": "stablecoin-index-desktop", "decision": "approved", "notes": "Registry-first layout, explicit filters, multi-organization context, and non-ranking comparison selection are visible." },
+    { "id": "stablecoin-detail-desktop", "decision": "approved", "notes": "The eight-section dossier hierarchy is represented with visible evidence and known unknowns." },
+    { "id": "stablecoin-index-mobile", "decision": "approved", "notes": "Record cards preserve material fields without depending only on horizontal table scrolling." },
+    { "id": "stablecoin-detail-mobile", "decision": "approved", "notes": "State, organization context, section navigation, evidence, and known unknowns remain visible." },
+    { "id": "organization-detail", "decision": "approved", "notes": "Organization category, jurisdiction, multiple roles, relationships, connected assets, events, and evidence are distinct." },
+    { "id": "event-detail", "decision": "approved", "notes": "Date, category, subtype, subjects, status effect, typed details, affected records, and evidence are distinct." },
+    { "id": "home", "decision": "approved", "notes": "Registry entry and search are primary; methodology and data access precede secondary support." },
+    { "id": "open-filter-state", "decision": "approved", "notes": "Multi-value selection, clear action, result preview, and apply action are visible." },
+    { "id": "evidence-expanded-state", "decision": "approved", "notes": "One source identity and multiple claim relations are displayed without duplicate source rows." },
+    { "id": "known-unknown-warning-state", "decision": "approved", "notes": "Value state, unresolved scope, priority, last checked, related section, evidence, and correction access are visible." }
+  ],
+  "gate_d_decision": "pass_after_pr22_merge"
+}
