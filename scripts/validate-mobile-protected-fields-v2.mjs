@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 const protectedByFile = {
-  'src/pages/stablecoins/index.astro': ['Primary display organization', 'Primary display role', 'Reference target', 'Backing model', 'Lifecycle', 'Issuance', 'Reviewed'],
+  'src/pages/stablecoins/index.astro': ['Primary display organization', 'Primary display role', 'Reference target', 'Backing model', 'Lifecycle', 'Issuance', 'Evidence'],
   'src/pages/issuers/index.astro': ['Organization category', 'Regulatory character', 'Jurisdiction', 'Functional roles', 'Relationship state', 'Record confidence'],
   'src/pages/events/index.astro': ['Category', 'Subtype', 'Impact', 'Recovery', 'Sources'],
   'src/components/StablecoinDetailView.astro': ['Reference target', 'Reference kind', 'Comparison category', 'Reference methodology', 'Public backing model', 'Canonical backing types', 'Reserve component categories', 'Primary stabilization mechanism', 'Recorded model description', 'Primary display organization', 'Primary display role', 'Display selection mode', 'Display priority', 'Relationship status'],
