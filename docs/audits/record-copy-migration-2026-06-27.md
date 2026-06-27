@@ -99,6 +99,37 @@ Empty curated summaries: none
 Duplicate curated summaries: none
 ```
 
+## 92-route regression
+
+After the site build, every stablecoin detail route is checked against the same copy resolver and canonical data.
+
+```text
+Expected routes:           92
+Checked routes:            92
+Passing routes:            92
+Failing routes:             0
+Curated-copy routes:       20
+Canonical-summary routes:  72
+```
+
+Each route must contain:
+
+- the canonical URL;
+- the stablecoin title;
+- the expected reviewed summary;
+- lifecycle and issuance information;
+- organization relationships;
+- separate Evidence-record and Source-identity counts;
+- deployments;
+- sources;
+- open questions.
+
+The route-level report is:
+
+```text
+data/generated/record-copy-route-regression.json
+```
+
 ## Evidence count boundary
 
 PR 15 distinctions remain preserved:
@@ -133,9 +164,10 @@ Approved record-specific copy belongs in reviewed data or copy registries, not p
 ```text
 data/generated/record-copy-migration-audit.json
 data/generated/record-copy-migration-validation.json
+data/generated/record-copy-route-regression.json
 ```
 
-The audit contains one row for each of the 92 assets and records its copy source, normalized axes, related-record counts, missing-axis list, and pass/fail result.
+The audit contains one row for each of the 92 assets and records its copy source, normalized axes, related-record counts, missing-axis list, and pass/fail result. The route report verifies the generated HTML rather than only the source data.
 
 ## Validation
 
@@ -150,7 +182,10 @@ CI rejects:
 - missing organization relationships;
 - missing canonical evidence or source identities;
 - missing deployments;
-- failure of any of the 92 migration rows.
+- failure of any of the 92 migration rows;
+- a missing stablecoin route or canonical URL;
+- a generated route whose summary differs from the approved copy source;
+- loss of the required detail sections on any stablecoin route.
 
 ## Non-inference rules
 
