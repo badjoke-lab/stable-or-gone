@@ -17,6 +17,8 @@ import { buildRecordMigrationMatrix } from './record-migration-matrix.mjs';
 const root = process.cwd();
 const baseline = loadRegistryV2Baseline(root);
 const outputPath = path.join(root, 'data/generated/record-public-copy-audit.json');
+const preservationPath = path.join(root, 'data/generated/record-public-copy-preservation.json');
+const publicCopyBaseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/record-public-copy-baseline.json'), 'utf8'));
 const group = (name) => groupRows(root, baseline, name);
 
 const stablecoins = applyById(group('stablecoins'), [
@@ -66,11 +68,48 @@ const relatedStablecoinIds = uniqueStrings([
   ...reserveReports.map((row) => row.stablecoin_id)
 ]);
 const invalidStablecoinRelationIds = relatedStablecoinIds.filter((id) => !stablecoinIds.has(id));
+
 const publicCopySource = fs.readFileSync(path.join(root, 'src/data/stablecoinPublicCopy.ts'), 'utf8');
-const publicCopyOverrideIds = uniqueStrings([...publicCopySource.matchAll(/\b(sog_st_[a-z0-9_]+)\s*:/g)].map((match) => match[1])).sort();
+const publicCopyEntries = [...publicCopySource.matchAll(/\b(sog_st_[a-z0-9_]+)\s*:\s*\{\s*summary:\s*'([^']*)'/gs)]
+  .map((match) => [match[1], match[2]]);
+const publicCopySummaryMap = Object.fromEntries(publicCopyEntries.sort(([left], [right]) => left.localeCompare(right)));
+const publicCopyOverrideIds = Object.keys(publicCopySummaryMap).sort();
 const invalidPublicCopyOverrideIds = publicCopyOverrideIds.filter((id) => !stablecoinIds.has(id));
+const publicCopySummaryDigest = createHash('sha256').update(JSON.stringify(publicCopySummaryMap)).digest('hex');
+const baselineOverrideIds = [...(publicCopyBaseline.summary_override_ids ?? [])].sort();
+const preservation = {
+  schema_version: '1.0',
+  generated_at: new Date().toISOString(),
+  before: {
+    source_file: publicCopyBaseline.source_file,
+    source_form: publicCopyBaseline.source_form,
+    stablecoin_count: publicCopyBaseline.stablecoin_count,
+    summary_override_count: publicCopyBaseline.embedded_summary_override_count,
+    canonical_summary_fallback_count: publicCopyBaseline.canonical_summary_fallback_count,
+    summary_override_ids: baselineOverrideIds,
+    summary_map_sha256: publicCopyBaseline.summary_map_sha256
+  },
+  after: {
+    source_file: 'src/data/stablecoinPublicCopy.ts',
+    source_form: 'approved public-copy data overlay keyed by canonical stablecoin id',
+    stablecoin_count: stablecoins.length,
+    summary_override_count: publicCopyOverrideIds.length,
+    canonical_summary_fallback_count: stablecoins.length - publicCopyOverrideIds.length,
+    summary_override_ids: publicCopyOverrideIds,
+    summary_map_sha256: publicCopySummaryDigest
+  },
+  preserved: {
+    stablecoin_count: publicCopyBaseline.stablecoin_count === stablecoins.length,
+    summary_override_count: publicCopyBaseline.embedded_summary_override_count === publicCopyOverrideIds.length,
+    canonical_summary_fallback_count: publicCopyBaseline.canonical_summary_fallback_count === stablecoins.length - publicCopyOverrideIds.length,
+    summary_override_ids: JSON.stringify(baselineOverrideIds) === JSON.stringify(publicCopyOverrideIds),
+    summary_text: publicCopyBaseline.summary_map_sha256 === publicCopySummaryDigest
+  }
+};
+preservation.ok = Object.values(preservation.preserved).every(Boolean);
+
 const inventoryDigest = createHash('sha256')
-  .update(JSON.stringify({ files: scan.scanned_files, occurrences: scan.occurrences, matrix, publicCopyOverrideIds }))
+  .update(JSON.stringify({ files: scan.scanned_files, occurrences: scan.occurrences, matrix, publicCopyOverrideIds, preservation }))
   .digest('hex');
 const dispositionNames = [
   'migration_target',
@@ -109,7 +148,8 @@ const audit = {
     canonical_evidence_relations: canonicalRelations.length,
     public_source_identities: sourceIdentities.length,
     orphan_source_relation_ids: orphanSourceRelationIds.length,
-    invalid_stablecoin_relation_ids: invalidStablecoinRelationIds.length
+    invalid_stablecoin_relation_ids: invalidStablecoinRelationIds.length,
+    public_copy_preservation_ok: preservation.ok
   },
   findings_by_surface: Object.fromEntries([
     'public_component_or_page',
@@ -123,6 +163,7 @@ const audit = {
   migration_target_files: migrationTargetFiles,
   public_copy_override_ids: publicCopyOverrideIds,
   invalid_public_copy_override_ids: invalidPublicCopyOverrideIds,
+  public_copy_preservation: preservation,
   files: scan.files,
   occurrences: scan.occurrences,
   record_matrix: matrix,
@@ -134,4 +175,5 @@ const audit = {
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(audit, null, 2)}\n`);
+fs.writeFileSync(preservationPath, `${JSON.stringify(preservation, null, 2)}\n`);
 console.log(JSON.stringify(audit.totals, null, 2));
