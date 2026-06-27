@@ -51,6 +51,7 @@
     "generate:record-copy-migration": "node scripts/collect-record-copy-migration.mjs",
     "validate:record-copy-migration": "node scripts/validate-record-copy-migration.mjs",
     "prepare:record-copy-migration": "npm run generate:record-copy-migration && npm run validate:record-copy-migration",
+    "verify:record-copy-routes": "node scripts/verify-record-copy-routes.mjs",
     "validate:deployment-policy": "node scripts/validate-deployment-policy.mjs",
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
     "validate:v3-baseline": "node scripts/validate-registry-v3-baseline.mjs",
@@ -79,7 +80,7 @@
     "audit:integrity": "node scripts/audit-registry-integrity-batch-o.mjs",
     "verify:provenance": "node scripts/verify-build-provenance.mjs",
     "verify:output-parity": "node scripts/verify-full-output-parity.mjs",
-    "verify:consistency": "node scripts/verify-public-consistency-safe.mjs",
+    "verify:consistency": "node scripts/verify-public-consistency-safe.mjs && npm run verify:record-copy-routes",
     "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
     "verify:public": "node scripts/verify-public-layer.mjs && node scripts/verify-public-layer-deployment-axes.mjs",
     "check:production": "node scripts/check-production.mjs && node scripts/check-production-provenance.mjs && node scripts/check-production-output-parity.mjs"
