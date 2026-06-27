@@ -1,107 +1,159 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import StablecoinIndexRow from '../../components/StablecoinIndexRow.astro';
+import StablecoinIndexCard from '../../components/StablecoinIndexCard.astro';
+import StablecoinComparisonSource from '../../components/StablecoinComparisonSource.astro';
+import '../../styles/stablecoin-index.css';
 import { formatPublicLabel } from '../../utils/displayLabels';
-import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../../utils/publicTaxonomy';
+import { formatIssuanceLabel, formatLifecycleLabel } from '../../utils/publicTaxonomy';
 import { getReferenceFilterOptions, resolveReferenceTarget } from '../../utils/referenceTarget';
 import { getPublicBackingModelFilterOptions, resolveBackingModel } from '../../utils/backingModel';
 import { resolvePrimaryRelationshipForStablecoin } from '../../utils/primaryDisplayRelationship';
-import { getStablecoins, getOrganizations, getRelationships } from '../../lib/data/registry';
+import { getDeployments, getEvents, getKnownUnknowns, getOrganizations, getRelationships, getStablecoins } from '../../lib/data/registry';
+import { getCanonicalEvidenceRelations } from '../../lib/data/evidenceSources';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
 const relationships = getRelationships();
+const events = getEvents();
+const knownUnknowns = getKnownUnknowns();
+const deployments = getDeployments();
+const evidenceRelations = getCanonicalEvidenceRelations();
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
-const relationshipsByStablecoin = new Map(stablecoins.map((coin) => [coin.id, relationships.filter((relationship) => relationship.stablecoin_id === coin.id)] as const));
-const uniqueSorted = (values: Array<string | undefined>) => Array.from(new Set(values.filter(Boolean) as string[])).sort((a, b) => a.localeCompare(b));
-const lifecycleOptions = uniqueSorted(stablecoins.map((coin) => coin.lifecycle_status));
-const issuanceOptions = uniqueSorted(stablecoins.map((coin) => coin.issuance_status));
-const modelOptions = getPublicBackingModelFilterOptions();
-const referenceOptions = getReferenceFilterOptions();
-const primaryRelationshipByStablecoin = new Map(stablecoins.map((coin) => [
-  coin.id,
-  resolvePrimaryRelationshipForStablecoin(coin.id, relationships).relationship
-] as const));
-const organizationOptions = organizations
-  .filter((organization) => relationships.some((relationship) => relationship.organization_id === organization.id))
-  .slice()
-  .sort((a, b) => a.name.localeCompare(b.name));
-const title = 'Stablecoin Registry — Stable or Gone';
-const description = 'Browse stablecoins by organization, reference target, public backing model, lifecycle, issuance, and last review date.';
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'Stablecoin Registry',
-  url: 'https://sog.badjoke-lab.com/stablecoins/',
-  description,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
+const unique = <T,>(values: T[]) => [...new Set(values)];
+const label = (value?: string | null, fallback = 'Not recorded') => value ? formatPublicLabel(value) : fallback;
+const recordDomain = (coin: unknown) => {
+  const candidate = coin as { official_domain?: string; official_url?: string };
+  if (candidate.official_domain) return candidate.official_domain;
+  if (!candidate.official_url) return '';
+  try { return new URL(candidate.official_url).hostname; } catch { return ''; }
 };
+
+const records = stablecoins.map((coin) => {
+  const coinRelationships = relationships.filter((relationship) => relationship.stablecoin_id === coin.id);
+  const primaryRelationship = resolvePrimaryRelationshipForStablecoin(coin.id, relationships).relationship;
+  const primaryOrganization = primaryRelationship ? organizationById.get(primaryRelationship.organization_id) : undefined;
+  const connectedOrganizations = unique(coinRelationships.map((relationship) => organizationById.get(relationship.organization_id)).filter(Boolean));
+  const organizationNames = connectedOrganizations.map((organization) => organization!.name);
+  const organizationRoles = unique(coinRelationships.map((relationship) => relationship.role));
+  const reference = resolveReferenceTarget(coin);
+  const backing = resolveBackingModel(coin);
+  const assetClass = coin.asset_class ?? 'unknown';
+  const stabilization = backing.stabilization_mechanism || 'not_recorded';
+  const linkedRelations = evidenceRelations.filter((relation) => relation.stablecoin_ids.includes(coin.id));
+  const sourceIdentityCount = new Set(linkedRelations.map((relation) => relation.evidence_id)).size;
+  const linkedEvents = events.filter((event) => event.stablecoin_id === coin.id || (event.subject_stablecoin_ids ?? []).includes(coin.id));
+  const linkedUnknowns = knownUnknowns.filter((item) => item.stablecoin_id === coin.id);
+  const linkedDeployments = deployments.filter((deployment) => deployment.stablecoin_id === coin.id);
+  const officialDomain = recordDomain(coin);
+  const search = [coin.name, coin.symbol, coin.slug, ...(coin.aliases ?? []), officialDomain, ...organizationNames]
+    .filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
+  const organizationSummary = organizationNames.length
+    ? `${organizationNames.join(', ')} · ${coinRelationships.length} relationship${coinRelationships.length === 1 ? '' : 's'} across ${organizationRoles.map((role) => formatPublicLabel(role)).join(', ')}`
+    : 'No organization relationship recorded';
+  return {
+    id: coin.id,
+    slug: coin.slug,
+    name: coin.name,
+    symbol: coin.symbol ?? '',
+    search,
+    lifecycle: coin.lifecycle_status ?? 'unknown',
+    issuance: coin.issuance_status ?? 'unknown',
+    assetClass,
+    assetClassLabel: label(assetClass),
+    referenceCategory: reference.comparison_category,
+    referenceLabel: reference.public_label,
+    backingCategory: backing.public_category,
+    backingLabel: backing.public_label,
+    stabilization,
+    stabilizationLabel: label(stabilization),
+    launchDate: coin.launch_date ?? '',
+    primaryOrganizationName: primaryOrganization?.name ?? 'No primary organization recorded',
+    primaryOrganizationSlug: primaryOrganization?.slug ?? '',
+    primaryRoleLabel: label(primaryRelationship?.role),
+    relationshipCount: coinRelationships.length,
+    organizationCount: connectedOrganizations.length,
+    organizationSummary,
+    reserveSummary: label(coin.reserve_disclosure_status),
+    redemptionSummary: label(coin.redemption_status),
+    deploymentCount: linkedDeployments.length,
+    eventCount: linkedEvents.length,
+    sourceIdentityCount,
+    evidenceRelationCount: linkedRelations.length,
+    knownUnknownCount: linkedUnknowns.length
+  };
+}).sort((left, right) => left.name.localeCompare(right.name));
+
+const option = (value: string, publicLabel = label(value)) => ({ value, publicLabel });
+const lifecycleOptions = unique(records.map((record) => record.lifecycle)).sort().map((value) => option(value, formatLifecycleLabel(value)));
+const issuanceOptions = unique(records.map((record) => record.issuance)).sort().map((value) => option(value, formatIssuanceLabel(value)));
+const assetClassOptions = unique(records.map((record) => record.assetClass)).sort().map((value) => option(value));
+const referenceOptions = getReferenceFilterOptions().map((item) => option(item.value, item.public_label));
+const backingOptions = getPublicBackingModelFilterOptions().map((item) => option(item.value, item.public_label));
+const stabilizationOptions = unique(records.map((record) => record.stabilization)).sort().map((value) => option(value));
+const filters = [
+  { id: 'lifecycle', label: 'Lifecycle', options: lifecycleOptions },
+  { id: 'issuance', label: 'Issuance', options: issuanceOptions },
+  { id: 'asset_class', label: 'Asset class', options: assetClassOptions },
+  { id: 'reference', label: 'Reference', options: referenceOptions },
+  { id: 'backing', label: 'Backing', options: backingOptions },
+  { id: 'stabilization', label: 'Stabilization', options: stabilizationOptions }
+];
+const title = 'Stablecoin Registry — Stable or Gone';
+const description = 'Browse stablecoin records with shareable search, taxonomy filters, mobile record cards, and evidence-aware comparison.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Registry', url: 'https://sog.badjoke-lab.com/stablecoins/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/stablecoins/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin directory</div>
-      <h1>Browse stablecoin records</h1>
-      <p>Search by name, any connected organization, role, reference target, public backing model, lifecycle, or issuance. The table shows one primary display relationship while each detail page preserves every current and historical relationship.</p>
-    </div>
-    <div class="panel stats"><div class="stat"><span>Records</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div></div>
-  </section>
+  <div class="stablecoin-index-page" data-stablecoin-index>
+    <section class="stablecoin-index-intro">
+      <div class="panel stablecoin-index-intro-main"><div class="prompt">Stablecoin registry</div><h1>Browse stablecoin records</h1><p>Search canonical names, symbols, aliases, domains, and connected organizations. Filter by reviewed public taxonomy, preserve the same state in a shared URL, and compare two to four stablecoin records without price, market, yield, or safety rankings.</p></div>
+      <div class="panel stablecoin-index-intro-stats" aria-label="Registry totals"><div class="stablecoin-index-stat"><span>Stable assets</span><strong>{records.length}</strong></div><div class="stablecoin-index-stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stablecoin-index-stat"><span>Events</span><strong>{events.length}</strong></div><div class="stablecoin-index-stat"><span>Source identities</span><strong>{new Set(evidenceRelations.map((relation) => relation.evidence_id)).size}</strong></div></div>
+    </section>
 
-  <section class="section-grid" aria-label="Helpful links">
-    <a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Understanding depegs</h2><p>Learn how a temporary depeg differs from a collapse or failed stablecoin.</p></a>
-    <a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Reading reserve disclosures</h2><p>Compare issuer reports, attestations, audits, and on-chain collateral data.</p></a>
-    <a class="panel mini-card" href="/updates/"><h2>Recent changes</h2><p>See which records, sources, and pages were updated most recently.</p></a>
-  </section>
+    <section class="panel stablecoin-index-registry" aria-labelledby="stablecoin-index-heading">
+      <div class="bar" id="stablecoin-index-heading">All stablecoin records</div>
+      <div class="stablecoin-index-toolbar">
+        <label><span>Search</span><input data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
+        <label><span>Sort</span><select data-index-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="lifecycle_then_name">Lifecycle, then name</option><option value="launch_oldest">Launch: oldest first</option><option value="launch_newest">Launch: newest first</option><option value="evidence_most">Most source identities</option></select></label>
+        <button class="stablecoin-index-action" type="button" data-clear-all>Clear all</button>
+      </div>
 
-  <section class="panel registry" data-registry>
-    <div class="bar">All stablecoins</div>
-    <div class="registry-controls" aria-label="Registry filters">
-      <label><span>Search</span><input data-filter-search type="search" placeholder="USDC, Terra, synthetic..." autocomplete="off" /></label>
-      <label><span>Lifecycle</span><select data-filter-lifecycle><option value="">All lifecycle states</option>{lifecycleOptions.map((lifecycle) => <option value={lifecycle}>{formatLifecycleLabel(lifecycle)}</option>)}</select></label>
-      <label><span>Issuance</span><select data-filter-issuance><option value="">All issuance states</option>{issuanceOptions.map((issuance) => <option value={issuance}>{formatIssuanceLabel(issuance)}</option>)}</select></label>
-      <label><span>Backing model</span><select data-filter-model-category><option value="">All backing models</option>{modelOptions.map((model) => <option value={model.value}>{model.public_label}</option>)}</select></label>
-      <label><span>Reference target</span><select data-filter-reference-category><option value="">All reference targets</option>{referenceOptions.map((option) => <option value={option.value}>{option.public_label}</option>)}</select></label>
-      <label><span>Organization</span><select data-filter-issuer><option value="">All connected organizations</option>{organizationOptions.map((organization) => <option value={organization.id}>{organization.name}</option>)}</select></label>
-      <label><span>Sort</span><select data-sort><option value="name">Name A-Z</option><option value="lifecycle">Lifecycle A-Z</option><option value="issuance">Issuance A-Z</option><option value="reference">Reference target A-Z</option><option value="model">Backing model A-Z</option><option value="last_verified_desc">Recently reviewed</option></select></label>
-    </div>
-    <div class="registry-summary" aria-live="polite"><span data-result-count>{stablecoins.length}</span> of {stablecoins.length} records</div>
-    <table data-table-kind="stablecoin-index" data-mobile-table="scroll-preserve">
-      <thead><tr><th>Name</th><th>Symbol</th><th>Primary display organization</th><th>Primary display role</th><th>Reference target</th><th>Backing model</th><th>Lifecycle</th><th>Issuance</th><th>Reviewed</th></tr></thead>
-      <tbody data-registry-body>
-        {stablecoins.length === 0 ? <tr><td colspan="9">No records available.</td></tr> : stablecoins.map((coin) => {
-          const coinRelationships = relationshipsByStablecoin.get(coin.id) ?? [];
-          const relationship = primaryRelationshipByStablecoin.get(coin.id);
-          const organization = relationship ? organizationById.get(relationship.organization_id) : undefined;
-          const organizationName = organization?.name ?? 'Unknown organization';
-          const role = relationship?.role ?? 'unknown';
-          const connectedOrganizations = coinRelationships.map((item) => organizationById.get(item.organization_id)).filter(Boolean);
-          const connectedOrganizationIds = Array.from(new Set(connectedOrganizations.map((item) => item!.id)));
-          const connectedOrganizationNames = Array.from(new Set(connectedOrganizations.map((item) => item!.name)));
-          const connectedRoles = Array.from(new Set(coinRelationships.map((item) => item.role)));
-          const additionalRelationshipCount = Math.max(0, coinRelationships.length - (relationship ? 1 : 0));
-          const aliases = Array.isArray(coin.aliases) ? coin.aliases : [];
-          const reference = resolveReferenceTarget(coin);
-          const model = resolveBackingModel(coin);
-          const searchable = [coin.name, coin.symbol, coin.slug, ...connectedOrganizationNames, ...connectedRoles, ...connectedRoles.map((item) => formatPublicLabel(item)), reference.canonical_value, reference.public_label, reference.comparison_category_label, reference.reference_kind_label, model.public_category, model.public_label, ...model.canonical_backing_types, ...model.canonical_backing_type_labels, model.stabilization_mechanism, model.stabilization_label, model.recorded_model_description, coin.lifecycle_status, formatLifecycleLabel(coin.lifecycle_status), coin.issuance_status, formatIssuanceLabel(coin.issuance_status), ...aliases].filter(Boolean).join(' ');
-          return (<tr data-registry-row data-search={searchable.toLowerCase()} data-name={coin.name.toLowerCase()} data-lifecycle={coin.lifecycle_status ?? ''} data-issuance={coin.issuance_status ?? ''} data-reference-category={reference.comparison_category} data-reference-label={reference.public_label.toLowerCase()} data-model-category={model.public_category} data-model-label={model.public_label.toLowerCase()} data-organization-ids={connectedOrganizationIds.join(' ')} data-last-verified={coin.last_verified_at ?? ''}><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : organizationName}{additionalRelationshipCount > 0 ? <><br /><small>+{additionalRelationshipCount} additional relationship{additionalRelationshipCount === 1 ? '' : 's'}</small></> : null}</td><td>{formatPublicLabel(role)}</td><td>{reference.public_label}</td><td>{model.public_label}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{coin.last_verified_at ?? '—'}</td></tr>);
-        })}
-        <tr data-no-results hidden><td colspan="9">No stablecoins match these filters.</td></tr>
-      </tbody>
-    </table>
-  </section>
+      <div class="stablecoin-index-filter-grid" aria-label="Stablecoin filters">
+        {filters.map((filter) => (
+          <details class="stablecoin-index-filter">
+            <summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-filter-count={filter.id}>0</span></summary>
+            <div class="stablecoin-index-filter-options">
+              {filter.options.map((item) => <label><input type="checkbox" data-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}
+            </div>
+          </details>
+        ))}
+      </div>
 
-  <script>
-    const registry = document.querySelector('[data-registry]');
-    const tbody = registry?.querySelector('[data-registry-body]');
-    const rows = Array.from(registry?.querySelectorAll('[data-registry-row]') ?? []);
-    const noResults = registry?.querySelector('[data-no-results]');
-    const resultCount = registry?.querySelector('[data-result-count]');
-    const controls = { search: registry?.querySelector('[data-filter-search]'), lifecycle: registry?.querySelector('[data-filter-lifecycle]'), issuance: registry?.querySelector('[data-filter-issuance]'), model: registry?.querySelector('[data-filter-model-category]'), reference: registry?.querySelector('[data-filter-reference-category]'), issuer: registry?.querySelector('[data-filter-issuer]'), sort: registry?.querySelector('[data-sort]') };
-    const normalize = (value: unknown) => String(value ?? '').trim().toLowerCase();
-    const getValue = (control: Element | null | undefined) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
-    const hasOrganization = (row: HTMLElement, organizationId: string) => !organizationId || String(row.dataset.organizationIds ?? '').split(/\s+/).includes(organizationId);
-    function sortRows() { if (!tbody) return; const mode = getValue(controls.sort) || 'name'; const sorted = [...rows].sort((a, b) => { if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0; if (mode === 'last_verified_desc') return String(b.dataset.lastVerified ?? '').localeCompare(String(a.dataset.lastVerified ?? '')); if (mode === 'lifecycle') return String(a.dataset.lifecycle ?? '').localeCompare(String(b.dataset.lifecycle ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'issuance') return String(a.dataset.issuance ?? '').localeCompare(String(b.dataset.issuance ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'reference') return String(a.dataset.referenceLabel ?? '').localeCompare(String(b.dataset.referenceLabel ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); if (mode === 'model') return String(a.dataset.modelLabel ?? '').localeCompare(String(b.dataset.modelLabel ?? '')) || String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); return String(a.dataset.name ?? '').localeCompare(String(b.dataset.name ?? '')); }); sorted.forEach((row) => tbody.appendChild(row)); if (noResults) tbody.appendChild(noResults); }
-    function applyFilters() { const query = normalize(getValue(controls.search)); const lifecycle = getValue(controls.lifecycle); const issuance = getValue(controls.issuance); const model = getValue(controls.model); const reference = getValue(controls.reference); const issuer = getValue(controls.issuer); let visible = 0; rows.forEach((row) => { if (!(row instanceof HTMLElement)) return; const matches = (!query || normalize(row.dataset.search).includes(query)) && (!lifecycle || row.dataset.lifecycle === lifecycle) && (!issuance || row.dataset.issuance === issuance) && (!model || row.dataset.modelCategory === model) && (!reference || row.dataset.referenceCategory === reference) && hasOrganization(row, issuer); row.hidden = !matches; if (matches) visible += 1; }); if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0; if (resultCount) resultCount.textContent = String(visible); }
-    Object.values(controls).forEach((control) => { control?.addEventListener('input', () => { sortRows(); applyFilters(); }); control?.addEventListener('change', () => { sortRows(); applyFilters(); }); });
-    sortRows(); applyFilters();
-  </script>
+      <div class="stablecoin-index-summary">
+        <div class="stablecoin-index-active-filters" data-active-filters aria-label="Active filters"></div>
+        <div class="stablecoin-index-result-count" aria-live="polite"><span data-result-count>{records.length}</span> of {records.length} records</div>
+      </div>
+
+      <div class="stablecoin-index-table">
+        <table data-table-kind="stablecoin-index" data-mobile-table="scroll-preserve">
+          <caption>Stablecoin registry results. A compact card representation follows in the same document for small screens.</caption>
+          <thead><tr><th>Name</th><th>Symbol</th><th>Primary display organization</th><th>Primary display role</th><th>Reference target</th><th>Backing model</th><th>Lifecycle</th><th>Issuance</th><th>Evidence</th></tr></thead>
+          <tbody data-registry-body>{records.map((record) => <StablecoinIndexRow record={record} />)}</tbody>
+        </table>
+      </div>
+
+      <div class="stablecoin-index-cards" data-card-body aria-label="Stablecoin compact records">{records.map((record) => <StablecoinIndexCard record={record} />)}</div>
+      <div class="stablecoin-index-no-results" data-no-results hidden><strong>No stablecoins match this state.</strong><span>Clear the search and filters to restore all records.</span><button class="stablecoin-index-action" type="button" data-clear-all>Clear all</button></div>
+    </section>
+
+    <section class="panel stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
+      <div class="comparison-heading"><div><h2 id="comparison-heading">Stablecoin comparison</h2><p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p></div><button class="stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button></div>
+      <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
+      <div class="comparison-grid" data-comparison-grid></div>
+      <p>Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
+    </section>
+    <div hidden>{records.map((record) => <StablecoinComparisonSource record={record} />)}</div>
+  </div>
+  <script><script is:inline>void 0</script></script>
+  <script src="../../scripts/stablecoin-index.ts"></script>
 </BaseLayout>
