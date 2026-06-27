@@ -1,0 +1,38 @@
+name: One-time organization header repair
+
+on:
+  push:
+    branches: [ui/organization-index-repair]
+    paths:
+      - .github/workflows/repair-organization-confidence-header.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/organization-index-repair
+      - name: Restore protected confidence header
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('src/pages/issuers/index.astro')
+          text = path.read_text()
+          old = '<th>Connected assets</th><th>Evidence</th>'
+          new = '<th>Connected assets</th><th>Record confidence</th>'
+          if old not in text:
+              raise SystemExit('Expected organization header sequence was not found')
+          path.write_text(text.replace(old, new, 1))
+          PY
+      - name: Remove one-time workflow and commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm .github/workflows/repair-organization-confidence-header.yml
+          git add src/pages/issuers/index.astro
+          git commit -m 'Restore organization confidence header'
+          git push origin HEAD:ui/organization-index-repair
