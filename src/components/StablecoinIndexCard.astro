@@ -30,5 +30,6 @@ const data = {
     <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
     <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
   </dl>
+  {record.relationshipCount > 1 && <details class="organization-summary"><summary>All connected organizations</summary><p>{record.organizationSummary}</p><small>Includes {record.relationshipCount - 1} additional relationship{record.relationshipCount - 1 === 1 ? '' : 's'} beyond the primary display.</small></details>}
   <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
 </article>
