@@ -3,7 +3,9 @@ import fs from 'node:fs';
 const basePath = new URL('./audit-registry-integrity.mjs', import.meta.url);
 const original = fs.readFileSync(basePath, 'utf8');
 const anchor = "const baseline = readJson('docs/migration/registry-v2-baseline.json');";
+const currentJsonAnchor = "const currentJson = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';";
 if (!original.includes(anchor)) throw new Error('Registry integrity baseline patch anchor is missing');
+if (!original.includes(currentJsonAnchor)) throw new Error('Registry integrity JSON comparison patch anchor is missing');
 const replacement = `
 const baselineBase = readJson('docs/migration/registry-v2-baseline.json');
 const baselineGroups = { ...baselineBase.data_groups };
@@ -23,8 +25,18 @@ const baseline = {
   minimum_counts: minimumCounts,
   data_groups: baselineGroups
 };`;
+const semanticJsonReplacement = `const currentJsonRaw = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';
+  let currentJson = currentJsonRaw;
+  if (currentJsonRaw) {
+    try {
+      currentJson = serialize(JSON.parse(currentJsonRaw));
+    } catch {
+      currentJson = currentJsonRaw;
+    }
+  }`;
 const patched = original
   .replace(anchor, replacement)
+  .replace(currentJsonAnchor, semanticJsonReplacement)
   .replaceAll('SOG 80-Record Final Registry Audit', 'SOG 92-Record Registry Audit')
   .replaceAll('SOG 87-Record Registry Audit', 'SOG 92-Record Registry Audit')
   .replaceAll('The 80-record canonical registry', 'The 92-record canonical registry')
