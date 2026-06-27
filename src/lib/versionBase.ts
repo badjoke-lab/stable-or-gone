@@ -8,9 +8,11 @@ import {
   getRecordCounts,
   getRecordsLastReviewedAt,
 } from '../lib/machine-readable';
+import { getEvidenceSourceIdentitySummary } from './data/evidenceSources';
 
 export function GET() {
   const build = getBuildMetadata();
+  const evidenceSourceIdentity = getEvidenceSourceIdentitySummary();
   const version = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
@@ -25,8 +27,15 @@ export function GET() {
       data_schema_version: DATA_SCHEMA_VERSION,
       generated_at: build.generated_at,
       records_last_reviewed_at: getRecordsLastReviewedAt(),
-      record_counts: getRecordCounts(),
-      record_count_breakdown: getRecordCountBreakdown(),
+      record_counts: {
+        ...getRecordCounts(),
+        evidence_source_identities: evidenceSourceIdentity.source_identities,
+        evidence_relations: evidenceSourceIdentity.evidence_relations,
+      },
+      record_count_breakdown: {
+        ...getRecordCountBreakdown(),
+        evidence_source_identity: evidenceSourceIdentity,
+      },
     },
     routes: ROUTES,
   };
