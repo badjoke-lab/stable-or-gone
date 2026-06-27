@@ -44,15 +44,9 @@ export function GET() {
       ai: '/ai.txt',
     },
     main_routes: MAIN_ROUTES,
-    record_counts: {
-      ...getRecordCounts(),
-      evidence_source_identities: evidenceSourceIdentity.source_identities,
-      evidence_relations: evidenceSourceIdentity.evidence_relations,
-    },
-    record_count_breakdown: {
-      ...getRecordCountBreakdown(),
-      evidence_source_identity: evidenceSourceIdentity,
-    },
+    record_counts: getRecordCounts(),
+    record_count_breakdown: getRecordCountBreakdown(),
+    evidence_source_identity: evidenceSourceIdentity,
     data_safety: DATA_SAFETY,
     correction_links: {
       page: '/contact/',
