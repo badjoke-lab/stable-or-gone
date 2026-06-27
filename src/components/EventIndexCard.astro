@@ -1,0 +1,27 @@
+---
+const { record } = Astro.props;
+const data = {
+  'data-search': record.search,
+  'data-title': record.title.toLocaleLowerCase(),
+  'data-category': record.category,
+  'data-subtype': record.subtype,
+  'data-status-effect': record.statusEffect,
+  'data-recovery': record.recovery,
+  'data-year': record.year,
+  'data-event-date': record.eventDate,
+  'data-evidence-count': String(record.sourceIdentityCount)
+};
+---
+<article class="event-index-card" data-event-card data-mobile-representation-for="event-index" {...data}>
+  <header><time>{record.eventDate || 'Date not recorded'}</time><h2><a href={`/event/${record.id}/`}>{record.title}</a></h2></header>
+  <dl class="event-index-card-grid">
+    <div><dt>Category</dt><dd>{record.categoryLabel}</dd></div>
+    <div><dt>Subtype</dt><dd>{record.subtypeLabel}</dd></div>
+    <div><dt>Subjects</dt><dd>{record.subjectNames.join(', ') || 'Not recorded'}</dd></div>
+    <div><dt>Status effect</dt><dd>{record.statusEffectLabel}</dd></div>
+    <div><dt>Recovery</dt><dd>{record.recoveryLabel}</dd></div>
+    <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
+    <div><dt>Record confidence</dt><dd>{record.confidenceLabel}</dd></div>
+    <div><dt>Event ID</dt><dd><code>{record.id}</code></dd></div>
+  </dl>
+</article>
