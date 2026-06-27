@@ -19,9 +19,10 @@ docs/architecture/site-architecture-v1.md
 docs/architecture/stablecoin-dossier-hierarchy-v1.md
 docs/architecture/index-interaction-contract-v1.md
 docs/architecture/meaningful-change-history-v1.md
+docs/architecture/responsive-accessibility-v1.md
 ```
 
-Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, dossier field ownership, index interaction behavior, change-history behavior, or deployment behavior.
+Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, dossier field ownership, index interaction behavior, change-history behavior, responsive representation, accessibility behavior, or deployment behavior.
 
 ## Registry checkpoint
 
@@ -49,9 +50,9 @@ docs/migration/registry-v3-baseline.json
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Current phase after PR #188 merges: Phase 3 — information architecture, responsive specification, and mocks
-Latest completed work after PR #188 merges: PR 20
-Next approved work: PR 21 — finalize responsive and accessibility specification
+Current phase after PR #189 merges: Phase 3 — information architecture, responsive specification, and mocks
+Latest completed work after PR #189 merges: PR 21
+Next approved work: PR 22 — approve visual system and image mocks
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -223,7 +224,7 @@ PR 17  finalize site architecture and route roles — PASS after PR #185
 PR 18  finalize stablecoin dossier hierarchy — PASS after PR #186
 PR 19  finalize list, search, filter, and comparison behavior — PASS after PR #187
 PR 20  define meaningful public change history — PASS after PR #188
-PR 21  finalize responsive and accessibility specification
+PR 21  finalize responsive and accessibility specification — PASS after PR #189
 PR 22  approve visual system and image mocks
 ```
 
@@ -231,7 +232,7 @@ PR 22  approve visual system and image mocks
 
 No production UI implementation begins until PRs 17–22 are merged and their validation contracts pass.
 
-The approved architecture, dossier hierarchy, index interaction contract, and change-history contract are specifications, not permission to implement the final UI early.
+Only PR 22 remains before Gate D can pass.
 
 ```text
 Global shell implementation:       PR 23
@@ -240,6 +241,8 @@ Organization index implementation: PR 25
 Event index implementation:        PR 26
 Dossier implementation begins:     PR 27
 Meaningful Updates implementation: PR 34
+Responsive completion:             PR 35
+Accessibility completion:          PR 36
 ```
 
 ## PR 17 site architecture baseline
@@ -263,23 +266,23 @@ Approved global information architecture:
 
 ```text
 Registry
-  Stablecoins     /stablecoins/
-  Organizations   /issuers/
-  Events          /events/
+  Stablecoins
+  Organizations
+  Events
 
 Learn
-  Guides          /guides/
-  Glossary        /glossary/
-  Models          /models/
+  Guides
+  Glossary
+  Models
 
 Project
-  Methodology     /methodology/
-  Updates         /updates/
-  About           /about/
+  Methodology
+  Updates
+  About
 
 Utilities
-  Corrections     /contact/
-  Support         /support/
+  Corrections
+  Support
 ```
 
 Route decisions:
@@ -353,15 +356,6 @@ Comparison-disabled indexes:      2
 Route changes:                     0
 ```
 
-Current implementation baseline:
-
-```text
-Index            Search inputs   Select controls   Table columns
-Stablecoins      1               6                 9
-Organizations    1               6                 8
-Events           1               4                 8
-```
-
 Implementation gaps preserved for PRs 24–26:
 
 ```text
@@ -383,8 +377,6 @@ Comparison groups: 7
 Excluded market/ranking axes: 8
 ```
 
-Comparison is not a ranking or recommendation. Unknown values remain explicit and are not converted to zero or treated as worst.
-
 ## PR 20 meaningful change-history baseline
 
 Status after PR #188 merges: **PASS**
@@ -402,7 +394,7 @@ known_unknown_resolved
 copy_only_correction
 ```
 
-Current legacy update layer:
+Legacy update baseline:
 
 ```text
 Legacy entries:                    13
@@ -412,17 +404,6 @@ Public-copy overlays:              13
 Missing public-copy overlays:       0
 Target-ready legacy entries:        0
 ```
-
-Legacy category inventory:
-
-```text
-data:        8
-content:     2
-ui:          2
-foundation:  1
-```
-
-The legacy entries remain intact. Broad legacy categories are not automatically converted to meaningful change types. Migration requires reviewed manual mapping in PR 34.
 
 Canonical date-signal audit:
 
@@ -434,23 +415,10 @@ Historical/effective signals:       323
 Invalid date shapes:                  0
 ```
 
-Review-only and generated dates do not create change entries:
-
-```text
-stablecoin.last_verified_at
-organization.last_verified_at
-evidence.accessed_at
-known_unknown.last_checked_at
-build.generated_at
-manifest.generated_at
-version.generated_at
-```
-
 Structured change-entry contract:
 
 ```text
 Required fields:                   12
-Optional relationship fields:       5
 Public placement surfaces:          4
 Before/after value states:           8
 Effective-date states:               5
@@ -458,66 +426,165 @@ Route changes:                        0
 Public implementation starts:       PR 34
 ```
 
-Mandatory history protections:
+## PR 21 responsive and accessibility baseline
+
+Status after PR #189 merges: **PASS**
+
+Contract totals:
 
 ```text
-append-only public history
-historical entries not overwritten
-corrections reference prior entries
-superseded entries remain visible
-copy-only corrections do not imply fact changes
-known-unknown resolution requires prior unknown and evidence
-source identity and evidence relation remain distinct
-recorded date and effective date remain distinct
+Responsive bands:                    3
+Page-family contracts:               8
+Protected table source files:       15
+Current protected tables:           25
+Target table transformations:       25
+Keyboard contracts:                 10
+Announcement contracts:              5
+Source files scanned:               23
+Route changes:                        0
 ```
+
+Current implementation baseline:
+
+```text
+Current CSS max-width breakpoints: 980 / 820 / 620 / 560
+Tables using scroll-preserve:       25
+Tables with another mobile form:     0
+Generic column hiding:               0
+Focus-visible rules:                 1
+Language declared:                 true
+Viewport declared:                 true
+Main landmark present:             true
+Primary navigation labelled:       true
+```
+
+Current implementation gaps:
+
+```text
+25 table transformations pending
+skip link missing
+main target missing
+current-page navigation state missing
+reduced-motion rules missing
+forced-colors rules missing
+long-value overflow wrapping missing
+44px target-size rule missing
+```
+
+Approved responsive bands:
+
+```text
+Wide:     1024 CSS px and above
+Medium:   720–1023 CSS px
+Compact:  0–719 CSS px
+```
+
+Every protected table has an explicit target representation:
+
+```text
+record cards
+timeline cards
+definition lists
+relationship cards
+deployment cards
+source cards
+unknown cards
+coverage summaries
+methodology matrix cards
+```
+
+Horizontal scrolling remains available as a fallback but may not be the only compact-screen representation.
+
+Accessibility requirements:
+
+```text
+normal text contrast: 4.5:1
+large text contrast: 3:1
+non-text UI contrast: 3:1
+minimum pointer target: 44 CSS px
+200% zoom support
+320 CSS px reflow support
+text-spacing override support
+forced-colors support
+reduced-motion support
+text labels for every state
+color-only state prohibited
+```
+
+Required interaction contracts:
+
+```text
+skip link
+global navigation
+index search
+index filters
+active-filter removal
+comparison selection
+comparison panel
+local dossier navigation
+disclosure
+copy identifier
+```
+
+Required announcements:
+
+```text
+result count
+active filters
+zero results
+comparison maximum
+copy result
+```
+
+Implementation begins in PR 23, continues through the page-specific UI PRs, and is completed by PRs 35–36.
 
 Authoritative files:
 
 ```text
-config/change-history-contract.mjs
-scripts/collect-change-history-audit.mjs
-scripts/validate-change-history-contract.mjs
-docs/architecture/meaningful-change-history-v1.md
+config/responsive-accessibility-contract.mjs
+scripts/collect-responsive-accessibility-audit.mjs
+scripts/validate-responsive-accessibility-contract.mjs
+docs/architecture/responsive-accessibility-v1.md
 ```
 
-## Immediate next work — PR 21
+## Immediate next work — PR 22
 
-1. Inventory every current table, long-form record section, filter control, navigation surface, evidence list, contract field, and expanded-state interaction.
-2. Define page-specific responsive transformations for:
+1. Define the visual tokens for background, panels, lines, text, muted text, accent, warnings, errors, links, focus indicators, and state chips.
+2. Define typography scale, spacing scale, border and radius rules, shadow use, content width, and density levels.
+3. Produce representative desktop and mobile image mocks for:
 
 ```text
-home
-stablecoin index
-organization index
-event index
-stablecoin dossier
+stablecoin index desktop
+stablecoin detail desktop
+stablecoin index mobile
+stablecoin detail mobile
 organization detail
 event detail
-guides and project pages
+home
+open filter state
+evidence expanded state
+known-unknown warning state
 ```
 
-3. Define the mobile representation of every protected table.
-4. Ensure mobile operation does not depend only on horizontal scrolling.
-5. Define desktop and mobile focus order.
-6. Define keyboard behavior for navigation, filters, comparison selection, disclosure controls, source expansion, and local dossier navigation.
-7. Define result announcements, active-filter announcements, and zero-result recovery.
-8. Define long contract-address handling and copy behavior.
-9. Define non-color state indicators, reduced-motion behavior, and minimum contrast requirements.
-10. Generate a machine-readable responsive/accessibility contract and dedicated validator.
-11. Do not implement the final UI, add stable assets, select Batch 18, change routes, or deploy production.
+4. Use complex records with multiple organizations, unknowns, deployments, events, and evidence.
+5. Map every visible mock element to the PR 17–21 contracts.
+6. Show focus state, active-filter state, empty state, expanded evidence, unknown warning, long contract address, and mobile navigation behavior.
+7. Verify that Evidence and Known unknowns remain first-class, visible sections.
+8. Verify that mobile mocks preserve material fields without relying only on horizontal scrolling.
+9. Record explicit approval or rejection for every mock.
+10. Do not implement production UI, add stable assets, select Batch 18, change routes, or deploy production.
 
-PR 21 completion criteria:
+PR 22 completion criteria:
 
 ```text
-every current table has an explicit mobile representation
-no material-information suppression remains unspecified
-focus order defined for all major page families
-keyboard behavior defined for all interactive controls
-result and filter announcements defined
-contract and long-text behavior defined
-non-color and reduced-motion requirements defined
-machine-readable contract and validator pass
-no final UI implementation or production publication hidden in the specification
+visual token contract approved
+all ten required mocks produced and reviewed
+every visible element maps to canonical fields or approved public copy
+desktop and mobile states follow PR 21
+Evidence and Known unknowns remain visible
+multi-organization records do not imply sole responsibility
+no internal enum or work-queue language appears
+Gate D approval is explicit
 ```
 
 ## Preserved quality queues
