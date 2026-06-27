@@ -24,12 +24,18 @@ jobs:
       - run: node scripts/collect-deployment-taxonomy-migration.mjs
       - run: node scripts/collect-value-state-migration.mjs
       - run: node scripts/collect-primary-display-relationships.mjs
+      - run: node scripts/collect-evidence-deduplication.mjs
+      - run: node scripts/collect-record-copy-migration.mjs
       - name: Build public site
         shell: bash
         run: |
           set -o pipefail
           npm run build:site 2>&1 | tee build-site.log
-      - run: npm run verify:consistency
+      - name: Verify public consistency and 92 routes
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run verify:consistency 2>&1 | tee public-consistency.log
       - name: Upload public output diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -38,6 +44,12 @@ jobs:
           if-no-files-found: warn
           path: |
             build-site.log
+            public-consistency.log
+            data/generated/record-copy-migration-audit.json
+            data/generated/record-copy-migration-validation.json
+            data/generated/record-copy-route-regression.json
+            data/generated/evidence-deduplication-audit.json
+            data/generated/evidence-deduplication-validation.json
             data/generated/primary-display-relationship-audit.json
             data/generated/primary-display-relationship-validation.json
             data/generated/value-state-migration.json
