@@ -34,14 +34,12 @@ for (const file of mobileTableSourceFiles) {
   }
 }
 
-const css = read('src/styles/global.css');
+const globalCss = read('src/styles/global.css');
+const shellCss = read('src/styles/shell.css');
+const css = `${globalCss}\n${shellCss}`;
 const layout = read('src/layouts/BaseLayout.astro');
 const mediaBreakpoints = unique([...css.matchAll(/@media\s*\(max-width:\s*(\d+)px\)/g)].map((match) => Number(match[1]))).sort((a, b) => b - a);
-const sourceSet = unique([
-  'src/layouts/BaseLayout.astro',
-  ...mobileTableSourceFiles,
-  ...pageFamilyContracts.flatMap((family) => family.sources)
-]);
+const sourceSet = unique(['src/layouts/BaseLayout.astro', ...mobileTableSourceFiles, ...pageFamilyContracts.flatMap((family) => family.sources)]);
 const sourceSignals = sourceSet.map((file) => {
   const source = read(file);
   return {
@@ -76,6 +74,7 @@ const currentBaseline = {
   missing_current_tables: missingCurrentTables,
   duplicate_current_tables: duplicateCurrentTables,
   css: {
+    source_files: ['src/styles/global.css', 'src/styles/shell.css'],
     media_breakpoints_max_width_px: mediaBreakpoints,
     horizontal_overflow_present: css.includes('overflow-x: auto'),
     table_min_width_present: /table\[data-mobile-table="scroll-preserve"\][^{]*\{[^}]*min-width:/s.test(css),
@@ -90,8 +89,8 @@ const currentBaseline = {
     language_declared: /<html\s+lang="en"/.test(layout),
     viewport_declared: /name="viewport"/.test(layout),
     main_landmark_present: /<main\b/.test(layout),
-    main_landmark_has_id: /<main\b[^>]*\bid=/.test(layout),
-    skip_link_present: /skip-link|skip to (?:main|content)/i.test(layout),
+    main_landmark_has_id: /<main\b[^>]*\bid="main-content"/.test(layout),
+    skip_link_present: /class="skip-link"[^>]*href="#main-content"/.test(layout),
     primary_navigation_label_present: /<nav\b[^>]*aria-label="Primary navigation"/.test(layout),
     current_page_state_present: /aria-current=/.test(layout)
   },
@@ -99,10 +98,7 @@ const currentBaseline = {
 };
 
 const implementationGaps = {
-  table_transformations_pending: mobileTableContracts.filter((contract) => {
-    const current = tableInventory.find((entry) => entry.kind === contract.kind);
-    return current?.mobile_strategy === 'scroll-preserve';
-  }).map((contract) => contract.kind),
+  table_transformations_pending: mobileTableContracts.filter((contract) => tableInventory.find((entry) => entry.kind === contract.kind)?.mobile_strategy === 'scroll-preserve').map((contract) => contract.kind),
   skip_link_missing: !currentBaseline.layout.skip_link_present,
   main_target_missing: !currentBaseline.layout.main_landmark_has_id,
   current_page_state_missing: !currentBaseline.layout.current_page_state_present,
