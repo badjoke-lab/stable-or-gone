@@ -17,13 +17,13 @@ check(audit.totals?.search_fields === 18, 'search field total changed');
 check(audit.totals?.filters === 16, 'filter total changed');
 check(audit.totals?.sorts === 15, 'sort total changed');
 check(audit.totals?.mobile_row_fields === 26, 'mobile field total changed');
-check(audit.totals?.implemented_indexes === 2, 'stablecoin and organization indexes must be implemented at PR 25');
+check(audit.totals?.implemented_indexes === 3, 'all three registry indexes must be implemented at PR 26');
 check(audit.totals?.route_changes === 0, 'routes must not change');
 
 const expected = {
   stablecoins: { route: '/stablecoins/', inputs: 2, selects: 1, headers: 9, client: 'src/scripts/stablecoin-index.ts' },
   organizations: { route: '/issuers/', inputs: 2, selects: 1, headers: 8, client: 'src/scripts/organization-index.ts' },
-  events: { route: '/events/', inputs: 1, selects: 4, headers: 8, client: null }
+  events: { route: '/events/', inputs: 2, selects: 1, headers: 8, client: 'src/scripts/event-index.ts' }
 };
 
 for (const contract of indexInteractionContracts) {
@@ -39,22 +39,21 @@ for (const contract of indexInteractionContracts) {
   check(current?.current_controls?.select_count === target.selects, `${contract.id}: select inventory changed`);
   check(current?.current_table_headers?.length === target.headers, `${contract.id}: header inventory changed`);
   for (const key of ['result_count_present', 'zero_result_row_present', 'aria_live_present', 'server_rendered_rows_present']) check(current?.current_behavior?.[key] === true, `${contract.id}: required behavior missing: ${key}`);
+  for (const key of ['url_search_params_present', 'history_replace_present', 'history_push_present', 'popstate_present', 'clear_all_present']) check(current?.current_behavior?.[key] === true, `${contract.id}: behavior missing: ${key}`);
+  const gap = audit.implementation_gaps.find((item) => item.id === contract.id);
+  for (const key of ['url_state_missing', 'browser_history_restore_missing', 'clear_all_missing']) check(gap?.[key] === false, `${contract.id}: implementation gap remains: ${key}`);
 }
 
-for (const id of ['stablecoins', 'organizations']) {
-  const current = audit.current_implementation.find((item) => item.id === id);
-  for (const key of ['url_search_params_present', 'history_replace_present', 'history_push_present', 'popstate_present', 'clear_all_present']) check(current?.current_behavior?.[key] === true, `${id}: behavior missing: ${key}`);
-  const gap = audit.implementation_gaps.find((item) => item.id === id);
-  for (const key of ['url_state_missing', 'browser_history_restore_missing', 'clear_all_missing']) check(gap?.[key] === false, `${id}: implementation gap remains: ${key}`);
-}
 const stable = audit.current_implementation.find((item) => item.id === 'stablecoins');
 check(stable?.current_behavior?.comparison_present === true, 'stablecoin comparison is missing');
 const stableGap = audit.implementation_gaps.find((item) => item.id === 'stablecoins');
 check(stableGap?.comparison_missing === false, 'stablecoin comparison gap remains');
-const organizationGap = audit.implementation_gaps.find((item) => item.id === 'organizations');
-check(organizationGap?.comparison_missing === false, 'organization comparison state changed');
-const eventGap = audit.implementation_gaps.find((item) => item.id === 'events');
-check(eventGap?.url_state_missing === true && eventGap?.browser_history_restore_missing === true && eventGap?.clear_all_missing === true, 'event index must remain deferred to PR 26');
+for (const id of ['organizations', 'events']) {
+  const current = audit.current_implementation.find((item) => item.id === id);
+  check(current?.current_behavior?.comparison_present === false, `${id}: generic comparison must remain disabled`);
+  const gap = audit.implementation_gaps.find((item) => item.id === id);
+  check(gap?.comparison_missing === false, `${id}: comparison gap state changed`);
+}
 
 const stableContract = indexInteractionContracts.find((item) => item.id === 'stablecoins');
 check(stableContract?.comparison.enabled === true && stableContract?.comparison.minimum_records === 2 && stableContract?.comparison.maximum_records === 4, 'stablecoin comparison contract changed');
@@ -64,7 +63,7 @@ const validation = {
   schema_version: '1.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
-  totals: { index_contracts: 3, implemented_indexes: 2, deferred_indexes: 1, failures: failures.length },
+  totals: { index_contracts: 3, implemented_indexes: 3, deferred_indexes: 0, failures: failures.length },
   failures
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(validation, null, 2)}\n`);
