@@ -1,0 +1,25 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+const { record } = Astro.props;
+const data = {
+  'data-search': record.search,
+  'data-title': record.title.toLocaleLowerCase(),
+  'data-category': record.category,
+  'data-subtype': record.subtype,
+  'data-status-effect': record.statusEffect,
+  'data-recovery': record.recovery,
+  'data-year': record.year,
+  'data-event-date': record.eventDate,
+  'data-evidence-count': String(record.sourceIdentityCount)
+};
+---
+<tr data-event-row {...data}>
+  <td>{record.eventDate || 'Not recorded'}</td>
+  <td><a class="record-name" href={`/event/${record.id}/`}>{record.title}</a></td>
+  <td>{record.categoryLabel}</td>
+  <td>{record.subtypeLabel}</td>
+  <td>{record.subjectNames.join(', ') || 'Not recorded'}</td>
+  <td>{record.statusEffectLabel}</td>
+  <td>{record.recoveryLabel}</td>
+  <td>{record.sourceIdentityCount} sources</td>
+</tr>
