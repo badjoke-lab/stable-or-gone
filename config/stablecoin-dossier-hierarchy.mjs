@@ -40,6 +40,10 @@ export const blockSectionAssignments = Object.freeze({
 });
 
 export const fieldSectionOverrides = Object.freeze({
+  'src/components/StablecoinDetailView.astro|embedded|Lifecycle': 'identity_current_state',
+  'src/components/StablecoinDetailView.astro|embedded|Issuance': 'identity_current_state',
+  'src/components/StablecoinDetailView.astro|embedded|Events': 'history',
+  'src/components/StablecoinDetailView.astro|embedded|Sources': 'evidence',
   'src/components/StablecoinDetailView.astro|Hero metrics|Lifecycle': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Hero metrics|Issuance': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Hero metrics|Events': 'history',
