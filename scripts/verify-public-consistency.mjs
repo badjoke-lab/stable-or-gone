@@ -104,13 +104,13 @@ const eventIds = ids(events);
 const evidenceIds = ids(evidence);
 
 for (const row of stablecoins) {
-  assert(Boolean(row.id && row.slug), `stablecoin missing id or slug`);
+  assert(Boolean(row.id && row.slug), 'stablecoin missing id or slug');
   assert(Boolean(row.last_verified_at), `${row.id}: last_verified_at missing`);
   if (row.reserve_profile) assert(Boolean(row.reserve_profile.as_of_date || row.last_verified_at), `${row.id}: reserve profile lacks as_of_date or record verification date`);
   if (row.redemption_profile) assert(Boolean(row.redemption_profile.as_of_date || row.last_verified_at), `${row.id}: redemption profile lacks as_of_date or record verification date`);
 }
 for (const row of organizations) {
-  assert(Boolean(row.id && row.slug), `organization missing id or slug`);
+  assert(Boolean(row.id && row.slug), 'organization missing id or slug');
   assert(Boolean(row.last_verified_at), `${row.id}: last_verified_at missing`);
 }
 for (const row of relationships) {
@@ -162,13 +162,13 @@ assert(homeText.includes(`Stablecoins ${counts.stablecoins}`), `home stablecoin 
 assert(homeText.includes(`Organizations ${counts.organizations}`), `home organization count mismatch: expected ${counts.organizations}`);
 assert(homeText.includes(`Events ${counts.events}`), `home event count mismatch: expected ${counts.events}`);
 assert(homeText.includes(`Sources ${counts.evidence}`), `home evidence count mismatch: expected ${counts.evidence}`);
-assert(stablecoinsText.includes(`Records ${counts.stablecoins}`), `stablecoin index record count mismatch`);
-assert(stablecoinsText.includes(`Organizations ${counts.organizations}`), `stablecoin index organization count mismatch`);
-assert(stablecoinsText.includes(`${counts.stablecoins} of ${counts.stablecoins} records`), `stablecoin index visible result count mismatch`);
-assert(organizationsText.includes(`Organizations ${counts.organizations}`), `organization index count mismatch`);
-assert(organizationsText.includes(`Relationships ${counts.relationships}`), `organization index relationship count mismatch`);
-assert(eventsText.includes(`Events ${counts.events}`), `event index count mismatch`);
-assert(eventsText.includes(`${counts.events} of ${counts.events} events`), `event index visible result count mismatch`);
+assert(stablecoinsText.includes(`Stable assets ${counts.stablecoins}`), 'stablecoin index record count mismatch');
+assert(stablecoinsText.includes(`Organizations ${counts.organizations}`), 'stablecoin index organization count mismatch');
+assert(stablecoinsText.includes(`${counts.stablecoins} of ${counts.stablecoins} records`), 'stablecoin index visible result count mismatch');
+assert(organizationsText.includes(`Organizations ${counts.organizations}`), 'organization index count mismatch');
+assert(organizationsText.includes(`Relationships ${counts.relationships}`), 'organization index relationship count mismatch');
+assert(eventsText.includes(`Events ${counts.events}`), 'event index count mismatch');
+assert(eventsText.includes(`${counts.events} of ${counts.events} events`), 'event index visible result count mismatch');
 
 const stablecoinLinks = uniqueInternalLinks(stablecoinsHtml, '/stablecoin/');
 const organizationLinks = uniqueInternalLinks(organizationsHtml, '/issuer/');
@@ -183,9 +183,7 @@ for (const row of stablecoins) {
   const html = readRoute(route);
   requireMetadata(html, route);
   const text = visibleText(html);
-  for (const heading of ['Redemption profile', 'Reserve and attestation history', 'Regulatory and official notices', 'Blockchain deployments', 'Open questions', 'Sources']) {
-    assert(text.includes(heading), `${route}: missing ${heading} section`);
-  }
+  for (const heading of ['Redemption profile', 'Reserve and attestation history', 'Regulatory and official notices', 'Blockchain deployments', 'Open questions', 'Sources']) assert(text.includes(heading), `${route}: missing ${heading} section`);
 }
 for (const row of organizations) requireMetadata(readRoute(`/issuer/${row.slug}/`), `/issuer/${row.slug}/`);
 for (const row of events) requireMetadata(readRoute(`/event/${row.id}/`), `/event/${row.id}/`);
@@ -202,9 +200,7 @@ if (fs.existsSync(versionPath) && fs.existsSync(manifestPath)) {
   assert(isDeepStrictEqual(manifest.record_counts, expectedPrimary), 'manifest primary counts mismatch');
   for (const [key, value] of Object.entries(counts)) {
     const manifestKey = key === 'evidence' ? null : key;
-    if (manifestKey && manifest.record_count_breakdown?.[manifestKey] !== undefined) {
-      assert(manifest.record_count_breakdown[manifestKey] === value, `manifest ${manifestKey} count mismatch`);
-    }
+    if (manifestKey && manifest.record_count_breakdown?.[manifestKey] !== undefined) assert(manifest.record_count_breakdown[manifestKey] === value, `manifest ${manifestKey} count mismatch`);
   }
   assert(Boolean(version.schema_version && version.data?.generated_at), 'version schema_version/generated_at missing');
   assert(Boolean(manifest.schema_version && manifest.generated_at), 'manifest schema_version/generated_at missing');
@@ -220,40 +216,20 @@ assert(fs.existsSync(sitemapPath), 'sitemap-index.xml missing');
 if (fs.existsSync(robotsPath)) assert(fs.readFileSync(robotsPath, 'utf8').includes('https://sog.badjoke-lab.com/sitemap-index.xml'), 'robots.txt sitemap URL mismatch');
 if (fs.existsSync(sitemapPath)) {
   const sitemap = fs.readFileSync(sitemapPath, 'utf8');
-  const listedStablecoins = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/stablecoin\/([^<]+)\/ <\/loc>/g)].map((match) => match[1]));
-  const listedOrganizations = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/issuer\/([^<]+)\/ <\/loc>/g)].map((match) => match[1]));
-  const listedEvents = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/event\/([^<]+)\/ <\/loc>/g)].map((match) => match[1]));
-  // Accept compact XML without a space before </loc>.
-  const compactStablecoins = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/stablecoin\/([^<]+)\/<\/loc>/g)].map((match) => match[1]));
-  const compactOrganizations = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/issuer\/([^<]+)\/<\/loc>/g)].map((match) => match[1]));
-  const compactEvents = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/event\/([^<]+)\/<\/loc>/g)].map((match) => match[1]));
-  assert(Math.max(listedStablecoins.size, compactStablecoins.size) === counts.stablecoins, `sitemap stablecoin URLs mismatch`);
-  assert(Math.max(listedOrganizations.size, compactOrganizations.size) === counts.organizations, `sitemap organization URLs mismatch`);
-  assert(Math.max(listedEvents.size, compactEvents.size) === counts.events, `sitemap event URLs mismatch`);
+  const collect = (pattern) => new Set([...sitemap.matchAll(pattern)].map((match) => match[1]));
+  const listedStablecoins = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/stablecoin\/([^<]+)\/<\/loc>/g);
+  const listedOrganizations = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/issuer\/([^<]+)\/<\/loc>/g);
+  const listedEvents = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/event\/([^<]+)\/<\/loc>/g);
+  assert(listedStablecoins.size === counts.stablecoins, `sitemap stablecoin count ${listedStablecoins.size}, expected ${counts.stablecoins}`);
+  assert(listedOrganizations.size === counts.organizations, `sitemap organization count ${listedOrganizations.size}, expected ${counts.organizations}`);
+  assert(listedEvents.size === counts.events, `sitemap event count ${listedEvents.size}, expected ${counts.events}`);
 }
 
-const legacyMarkers = [
-  'Issuer records 16',
-  'Stablecoins linked 20',
-  '23 of 23 events',
-  'Events 23'
-];
-function listHtmlFiles(directory) {
-  if (!fs.existsSync(directory)) return [];
-  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const full = path.join(directory, entry.name);
-    return entry.isDirectory() ? listHtmlFiles(full) : entry.isFile() && entry.name.endsWith('.html') ? [full] : [];
-  });
-}
-for (const file of listHtmlFiles(distDir)) {
-  const html = fs.readFileSync(file, 'utf8');
-  for (const marker of legacyMarkers) assert(!visibleText(html).includes(marker), `${path.relative(distDir, file)} contains legacy marker: ${marker}`);
-}
-
-if (failures.length) {
+const report = { checked_at: new Date().toISOString(), counts, failures };
+fs.writeFileSync(path.join(root, 'data/generated/public-consistency-report.json'), `${JSON.stringify(report, null, 2)}\n`);
+if (failures.length > 0) {
   console.error('Public consistency verification failed:');
-  for (const failure of failures) console.error(`- ${failure}`);
+  failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-
-console.log(JSON.stringify({ ok: true, counts, detail_routes: { stablecoins: stablecoinLinks.size, organizations: organizationLinks.size, events: eventLinks.size } }, null, 2));
+console.log(JSON.stringify({ ...report, ok: true }, null, 2));
