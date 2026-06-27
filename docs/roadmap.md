@@ -17,9 +17,10 @@ docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
 docs/architecture/site-architecture-v1.md
 docs/architecture/stablecoin-dossier-hierarchy-v1.md
+docs/architecture/index-interaction-contract-v1.md
 ```
 
-Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, dossier field ownership, or deployment behavior.
+Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, dossier field ownership, index interaction behavior, or deployment behavior.
 
 ## Registry checkpoint
 
@@ -47,9 +48,9 @@ docs/migration/registry-v3-baseline.json
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Current phase after PR #186 merges: Phase 3 — information architecture, responsive specification, and mocks
-Latest completed work after PR #186 merges: PR 18
-Next approved work: PR 19 — finalize list, search, filter, and comparison behavior
+Current phase after PR #187 merges: Phase 3 — information architecture, responsive specification, and mocks
+Latest completed work after PR #187 merges: PR 19
+Next approved work: PR 20 — define meaningful public change history
 Routine record growth: paused at 92 assets
 Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
@@ -266,7 +267,7 @@ docs/audits/record-public-copy-migration-2026-06-27.md
 ```text
 PR 17  finalize site architecture and route roles — PASS after PR #185
 PR 18  finalize stablecoin dossier hierarchy — PASS after PR #186
-PR 19  finalize list, search, filter, and comparison behavior
+PR 19  finalize list, search, filter, and comparison behavior — PASS after PR #187
 PR 20  define meaningful change history
 PR 21  finalize responsive and accessibility specification
 PR 22  approve visual system and image mocks
@@ -276,13 +277,19 @@ PR 22  approve visual system and image mocks
 
 No production UI implementation begins until PRs 17–22 are merged and their validation contracts pass.
 
-The approved architecture and dossier hierarchy are specifications, not permission to implement the final shell early. Dossier implementation remains deferred to PR 27 under the current implementation plan.
+The approved architecture, dossier hierarchy, and index interaction contract are specifications, not permission to implement the final shell early.
+
+```text
+Global shell implementation:       PR 23
+Stablecoin index implementation:   PR 24
+Organization index implementation: PR 25
+Event index implementation:        PR 26
+Dossier implementation begins:     PR 27
+```
 
 ## PR 17 site architecture baseline
 
 Status after PR #185 merges: **PASS**
-
-Route inventory:
 
 ```text
 Page source files:                    27
@@ -320,16 +327,6 @@ Utilities
   Support         /support/   secondary utility
 ```
 
-Data access remains outside the primary human-navigation groups:
-
-```text
-/version.json
-/data/manifest.json
-/llms.txt
-/ai.txt
-/sitemap-index.xml
-```
-
 Route decisions:
 
 ```text
@@ -352,8 +349,6 @@ docs/architecture/site-architecture-v1.md
 ## PR 18 stablecoin dossier baseline
 
 Status after PR #186 merges: **PASS**
-
-Generated inventory:
 
 ```text
 Required dossier sections:          8
@@ -408,10 +403,6 @@ Route changes in PR 18:                       0
 Dossier implementation starts:              PR 27
 ```
 
-The two replacement decisions apply only to the generic Record coverage table headers. Coverage information remains mandatory and must become section-aware completeness and unresolved-state reporting rather than disappearing.
-
-Evidence must preserve source category, canonical source type, provenance, primary state, claim scopes, publication date, archive state, and reliability as separate axes. Deployments must preserve operational state, recorded status, change state, canonicality, canonicality record state, verification state, contract identity state, and network identity state as separate axes.
-
 Authoritative files:
 
 ```text
@@ -421,30 +412,146 @@ scripts/validate-stablecoin-dossier-hierarchy.mjs
 docs/architecture/stablecoin-dossier-hierarchy-v1.md
 ```
 
-## Immediate next work — PR 19
+## PR 19 index interaction baseline
 
-1. Inventory the current stablecoin, organization, and event index behavior.
-2. Define search scope separately for each index.
-3. Define approved filters and sort orders using enumerable canonical values rather than free-text reconstruction.
-4. Synchronize approved filter and sort state to shareable URLs.
-5. Define active-filter summaries and clear/reset behavior.
-6. Preserve multi-role and multi-organization summaries instead of showing only the primary relationship.
-7. Define compact mobile record rows without material-information suppression.
-8. Define comparison behavior and explicitly state what is and is not comparable.
-9. Generate a machine-readable interaction contract and dedicated validator.
-10. Do not implement the final UI, add stable assets, select Batch 18, change routes, or deploy production.
+Status after PR #187 merges: **PASS**
 
-PR 19 completion criteria:
+Target contract totals:
 
 ```text
-Stablecoin, organization, and event index behavior specified
-Search scope explicit for each index
-Approved filters use canonical enumerations
-Filter and sort state shareable in URL
-Active-filter summary and clear behavior defined
-Multi-role summaries preserved
-Mobile row information contract defined
-Comparison scope and exclusions defined
+Index contracts:                  3
+Explicit search fields:          18
+Multi-value filters:             16
+Sort modes:                      15
+Material mobile-row fields:      26
+Comparison-enabled indexes:       1
+Comparison-disabled indexes:      2
+Route changes:                     0
+```
+
+Current implementation inventory:
+
+```text
+Index            Search inputs   Select controls   Table columns
+Stablecoins      1               6                 9
+Organizations    1               6                 8
+Events           1               4                 8
+```
+
+Current pages retain server-rendered rows, announced result counts, and zero-result rows. The following remain explicit implementation gaps for PRs 24–26:
+
+```text
+shareable URL state
+browser Back and Forward restoration
+per-filter removal
+Clear all
+stablecoin comparison
+```
+
+Approved index behavior:
+
+```text
+Stablecoins
+  Search fields: 6
+  Filters:       6
+  Sorts:         6
+  Mobile fields: 10
+  Comparison:    2–4 records, enabled
+
+Organizations
+  Search fields: 6
+  Filters:       5
+  Sorts:         5
+  Mobile fields: 8
+  Comparison:    disabled with explicit false-equivalence reason
+
+Events
+  Search fields: 6
+  Filters:       5
+  Sorts:         4
+  Mobile fields: 8
+  Comparison:    disabled with explicit chronological-record reason
+```
+
+Shared URL and interaction rules:
+
+```text
+Search query parameter: q
+Multiple filter values: comma-separated
+Empty values: omitted
+Unknown values: ignored
+Typing: history.replaceState
+Committed filter changes: history.pushState
+Back and Forward: restore state
+Active-filter summary: required
+Per-filter clear: required
+Clear all: required
+Result count: required
+Zero-result recovery: required
+Keyboard operation: required
+Pointer-only controls: prohibited
+Server-rendered fallback: required
+Material mobile suppression: prohibited
+```
+
+Stablecoin comparison:
+
+```text
+Minimum records: 2
+Maximum records: 4
+URL parameter: compare
+Identity key: slug
+Comparison groups: 7
+Excluded market/ranking axes: 8
+```
+
+Comparison is not a ranking or recommendation. Unknown values remain explicit and are not converted to zero or treated as worst. Source identity and evidence relation counts remain distinct. Current and historical values remain distinct.
+
+Authoritative files:
+
+```text
+config/index-interaction-contract.mjs
+scripts/collect-index-interaction-audit.mjs
+scripts/validate-index-interaction-contract.mjs
+docs/architecture/index-interaction-contract-v1.md
+```
+
+## Immediate next work — PR 20
+
+1. Inventory the current Updates page and all record-level change or review timestamps.
+2. Define the approved public change types:
+
+```text
+status change
+event added
+evidence added
+relationship change
+reserve or redemption change
+known unknown added
+known unknown resolved
+copy-only correction
+```
+
+3. Keep meaningful data changes separate from routine review timestamps and build timestamps.
+4. Define one canonical change-entry identity and affected-record relationship model.
+5. Define before, after, changed fields, source evidence, effective date, recorded date, and correction semantics.
+6. Specify which change types appear on Updates, stablecoin records, organization records, and event records.
+7. Preserve historical entries when a current value changes again.
+8. Define copy-only corrections so they do not imply a factual or lifecycle change.
+9. Generate a machine-readable change-history contract and dedicated validator.
+10. Do not implement the final Updates UI, add stable assets, select Batch 18, change routes, or deploy production.
+
+PR 20 completion criteria:
+
+```text
+Approved change types fixed
+Routine review timestamps excluded from meaningful change history
+Canonical change identity and affected-record model defined
+Before and after semantics explicit
+Source evidence requirements explicit
+Copy-only correction separated from factual change
+Updates and record-detail placement rules defined
+Machine-readable contract and validator pass
 No final UI implementation or production publication hidden in the specification
 ```
 
