@@ -1,0 +1,82 @@
+@import './stablecoin-index.css';
+
+.organization-index-cards {
+  display: none;
+}
+
+.organization-card {
+  padding: 1rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  background: var(--sog-surface);
+}
+
+.organization-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.organization-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.organization-card dl {
+  margin: 1rem 0 0;
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 0.55rem 0.8rem;
+}
+
+.organization-card dt {
+  color: var(--sog-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.organization-card dd {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.organization-role-list,
+.organization-status-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.organization-role-list .state-label,
+.organization-status-list .state-label {
+  min-height: 26px;
+  font-size: 0.68rem;
+}
+
+@media (max-width: 719px) {
+  .organization-index-cards {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .organization-index-table-wrap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .organization-card dl {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .organization-card dd + dt {
+    margin-top: 0.55rem;
+  }
+}
