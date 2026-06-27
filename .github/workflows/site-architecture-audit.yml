@@ -20,6 +20,8 @@ jobs:
         run: node scripts/collect-site-architecture-audit.mjs
       - name: Validate approved architecture map
         run: node scripts/validate-site-architecture.mjs
+      - name: Validate ownership and compatibility boundaries
+        run: node scripts/validate-site-architecture-ownership.mjs
       - name: Upload architecture diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -29,3 +31,4 @@ jobs:
           path: |
             data/generated/site-architecture-audit.json
             data/generated/site-architecture-validation.json
+            data/generated/site-architecture-ownership-validation.json
