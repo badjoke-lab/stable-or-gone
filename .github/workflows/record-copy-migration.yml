@@ -1,0 +1,31 @@
+name: Record copy migration
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collect 92-record migration audit
+        run: node scripts/collect-record-copy-migration.mjs
+      - name: Validate 92-record migration audit
+        run: node scripts/validate-record-copy-migration.mjs
+      - name: Upload record migration diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: record-copy-migration-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            data/generated/record-copy-migration-audit.json
+            data/generated/record-copy-migration-validation.json
