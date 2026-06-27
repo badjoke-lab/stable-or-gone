@@ -1,0 +1,26 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+const { record } = Astro.props;
+const data = {
+  'data-search': record.search,
+  'data-name': record.name.toLocaleLowerCase(),
+  'data-category': record.category,
+  'data-regulatory': record.regulatory,
+  'data-jurisdiction': record.jurisdictionScope,
+  'data-role': record.roles.join(','),
+  'data-relationship-status': record.relationshipStatuses.join(','),
+  'data-assets-count': String(record.assetCount),
+  'data-relationships-count': String(record.relationshipCount),
+  'data-evidence-count': String(record.sourceIdentityCount)
+};
+---
+<tr data-organization-row {...data}>
+  <td><a class="record-name" href={`/issuer/${record.slug}/`}>{record.name}</a></td>
+  <td>{record.categoryLabel}</td>
+  <td>{record.regulatoryLabel}</td>
+  <td>{record.jurisdictionLabel}</td>
+  <td>{record.roles.length ? record.roles.map((role) => formatPublicLabel(role)).join(', ') : 'Not recorded'}</td>
+  <td>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</td>
+  <td>{record.assetCount} asset{record.assetCount === 1 ? '' : 's'} · {record.relationshipCount} relationship{record.relationshipCount === 1 ? '' : 's'}</td>
+  <td>{record.sourceIdentityCount} sources</td>
+</tr>
