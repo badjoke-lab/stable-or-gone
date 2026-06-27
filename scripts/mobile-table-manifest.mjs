@@ -26,3 +26,7 @@ export const requiredMobileTableKinds = [
   'event-details', 'event-detail-overlay', 'event-sources', 'methodology-value-states',
   'methodology-primary-display-relationships', 'methodology-evidence-source-identities'
 ];
+
+export const implementedMobileTableRepresentations = Object.freeze({
+  'stablecoin-index': 'src/components/StablecoinIndexCard.astro'
+});
