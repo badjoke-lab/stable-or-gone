@@ -33,14 +33,14 @@ const relationships = allRelationships
     isPrimary: resolvePrimaryRelationshipForStablecoin(relationship.stablecoin_id, allRelationships).relationship?.id === relationship.id
   }))
   .sort((left, right) => {
-    const leftHistorical = left.relationship.status === 'historical' || Boolean(left.relationship.end_date);
-    const rightHistorical = right.relationship.status === 'historical' || Boolean(right.relationship.end_date);
+    const leftHistorical = left.relationship.status === 'ended' || Boolean(left.relationship.end_date);
+    const rightHistorical = right.relationship.status === 'ended' || Boolean(right.relationship.end_date);
     return Number(leftHistorical) - Number(rightHistorical) || String(left.coin?.name ?? '').localeCompare(String(right.coin?.name ?? ''));
   });
 const stablecoinIds = new Set(relationships.map((item) => item.relationship.stablecoin_id));
 const stablecoins = Array.from(stablecoinIds).map((id) => stablecoinById.get(id)).filter(Boolean);
-const currentRelationships = relationships.filter((item) => item.relationship.status !== 'historical' && !item.relationship.end_date);
-const historicalRelationships = relationships.filter((item) => item.relationship.status === 'historical' || Boolean(item.relationship.end_date));
+const currentRelationships = relationships.filter((item) => item.relationship.status !== 'ended' && !item.relationship.end_date);
+const historicalRelationships = relationships.filter((item) => item.relationship.status === 'ended' || Boolean(item.relationship.end_date));
 const primaryDisplayRelationshipCount = relationships.filter((item) => item.isPrimary).length;
 const events = allEvents
   .filter((event) => event.issuer_id === organization.id || event.subject_organization_ids?.includes(organization.id))
