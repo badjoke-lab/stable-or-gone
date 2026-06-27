@@ -11,6 +11,7 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'registry',
     label: 'Registry',
+    purpose: 'Browse canonical stablecoin, organization, and event records.',
     items: Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
@@ -20,6 +21,7 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'learn',
     label: 'Learn',
+    purpose: 'Understand terms, models, regulation, and historical context.',
     items: Object.freeze([
       Object.freeze({ label: 'Guides', href: '/guides/' }),
       Object.freeze({ label: 'Glossary', href: '/glossary/' }),
@@ -29,6 +31,7 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'project',
     label: 'Project',
+    purpose: 'Review methodology, changes, scope, and project identity.',
     items: Object.freeze([
       Object.freeze({ label: 'Methodology', href: '/methodology/' }),
       Object.freeze({ label: 'Updates', href: '/updates/' }),
@@ -72,10 +75,31 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/version.json', source_file: 'src/pages/version.json.ts', output_kind: 'json', group: 'data_access', role: 'build_and_data_version', decision: 'keep', navigation: 'footer_data' })
 ]);
 
+export const recordContentOwnership = Object.freeze([
+  Object.freeze({ owner_role: 'stablecoin_record', route: '/stablecoin/{slug}/', responsibilities: Object.freeze(['identity_and_current_state', 'organization_relationships', 'reserve_and_redemption', 'deployments', 'legal_and_regulatory_context', 'history', 'evidence', 'known_unknowns', 'corrections_and_further_reading']) }),
+  Object.freeze({ owner_role: 'organization_record', route: '/issuer/{slug}/', responsibilities: Object.freeze(['organization_identity', 'current_and_historical_roles', 'connected_assets', 'events', 'evidence', 'corrections']) }),
+  Object.freeze({ owner_role: 'event_record', route: '/event/{id}/', responsibilities: Object.freeze(['event_identity', 'subjects', 'status_effect', 'recovery', 'structured_detail', 'evidence', 'corrections']) }),
+  Object.freeze({ owner_role: 'methodology', route: '/methodology/', responsibilities: Object.freeze(['taxonomy_definitions', 'value_state_semantics', 'evidence_model', 'relationship_model', 'selection_rules']) }),
+  Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['public_change_history']) }),
+  Object.freeze({ owner_role: 'corrections_and_submissions', route: '/contact/', responsibilities: Object.freeze(['correction_submission', 'source_submission']) }),
+  Object.freeze({ owner_role: 'public_data_manifest', route: '/data/manifest.json', responsibilities: Object.freeze(['machine_readable_inventory', 'canonical_data_safety']) })
+]);
+
+export const compatibilityRoutePolicy = Object.freeze({
+  organization_public_term: 'Organizations',
+  preserved_index_path: '/issuers/',
+  preserved_detail_path: '/issuer/{slug}/',
+  path_names_are_not_record_fields: true,
+  compatibility_labels_in_record_content: false,
+  future_path_change_requires_dedicated_migration: true
+});
+
 export const routeMigrationPolicy = Object.freeze({
   current_pr_changes_routes: false,
+  current_pr_changes_navigation_markup: false,
   all_current_routes_preserved: true,
   redirects_introduced: Object.freeze([]),
   removals_introduced: Object.freeze([]),
-  compatibility_changes_require_dedicated_migration: true
+  compatibility_changes_require_dedicated_migration: true,
+  grouped_navigation_implementation_deferred_to_pr: 23
 });
