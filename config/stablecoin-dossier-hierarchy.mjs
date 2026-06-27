@@ -20,6 +20,9 @@ export const dossierSurfaceFiles = Object.freeze([
 ]);
 
 export const blockSectionAssignments = Object.freeze({
+  'src/components/StablecoinDetailView.astro|Identity and current state': 'identity_current_state',
+  'src/components/StablecoinDetailView.astro|Current mechanics fields': 'how_asset_works',
+  'src/components/StablecoinDetailView.astro|Current organization and governance fields': 'organizations_control',
   'src/components/StablecoinDetailView.astro|Reserve components': 'how_asset_works',
   'src/components/StablecoinDetailView.astro|Historical model changes': 'history',
   'src/components/StablecoinDetailView.astro|Organizations and roles': 'organizations_control',
@@ -37,6 +40,10 @@ export const blockSectionAssignments = Object.freeze({
 });
 
 export const fieldSectionOverrides = Object.freeze({
+  'src/components/StablecoinDetailView.astro|embedded|Lifecycle': 'identity_current_state',
+  'src/components/StablecoinDetailView.astro|embedded|Issuance': 'identity_current_state',
+  'src/components/StablecoinDetailView.astro|embedded|Events': 'history',
+  'src/components/StablecoinDetailView.astro|embedded|Sources': 'evidence',
   'src/components/StablecoinDetailView.astro|Hero metrics|Lifecycle': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Hero metrics|Issuance': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Hero metrics|Events': 'history',

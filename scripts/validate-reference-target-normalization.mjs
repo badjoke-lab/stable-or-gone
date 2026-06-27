@@ -83,7 +83,7 @@ check(indexSource.includes("id: 'reference'") && indexSource.includes('getRefere
 check(!indexSource.includes('data-filter-peg'), 'legacy peg filter remains');
 check(indexSource.includes('resolveReferenceTarget') && indexSource.includes('<th>Reference target</th>'), 'stablecoin reference rendering is missing');
 const detailSource = readText('src/components/StablecoinDetailView.astro');
-for (const heading of ['Reference target', 'Reference kind', 'Comparison category', 'Reference methodology']) check(detailSource.includes(`<th>${heading}</th>`), `detail heading is missing: ${heading}`);
+for (const heading of ['Reference target', 'Reference kind', 'Comparison category', 'Reference methodology']) check(detailSource.includes(`<th>${heading}</th>`) || detailSource.includes(`<dt>${heading}</dt>`), `detail heading is missing: ${heading}`);
 check(detailSource.includes('resolveReferenceTarget(coin)'), 'detail must resolve reference mapping');
 const machineSource = readText('src/lib/machine-readable.ts');
 check(machineSource.includes('reference_kind: countValues') && machineSource.includes('reference_comparison_category: countValues'), 'machine-readable reference breakdown is missing');

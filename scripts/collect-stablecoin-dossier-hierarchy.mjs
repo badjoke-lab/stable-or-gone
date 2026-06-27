@@ -41,7 +41,7 @@ function collectFileSurfaces(file) {
   }
 
   const source = fs.readFileSync(absolute, 'utf8');
-  const pattern = /<div class="bar">([^<{][^<]*)<\/div>|<th>([^<{][^<]*)<\/th>|<div class="stat"><span>([^<{][^<]*)<\/span>/g;
+  const pattern = /<div class="bar">([^<{][^<]*)<\/div>|<th>([^<{][^<]*)<\/th>|<div class="stat"><span>([^<{][^<]*)<\/span>|<dt>([^<{][^<]*)<\/dt>/g;
   const sections = [];
   const fields = [];
   let currentSection = defaultSectionForFile(file);
@@ -52,9 +52,9 @@ function collectFileSurfaces(file) {
       sections.push({ file, label: currentSection, source_index: match.index });
       continue;
     }
-    const label = normalizeLabel(match[2] ?? match[3]);
+    const label = normalizeLabel(match[2] ?? match[3] ?? match[4]);
     const section = match[3] ? 'Hero metrics' : currentSection;
-    const kind = match[3] ? 'hero_metric' : 'table_header';
+    const kind = match[3] ? 'hero_metric' : match[4] ? 'definition_term' : 'table_header';
     fields.push({
       surface_key: `${file}|${section}|${label}`,
       file,
@@ -107,7 +107,7 @@ const fieldMatrix = [...groupedFields.values()].map((field) => {
     destination_section: destinationSection,
     decision: fieldDecisionOverrides[field.surface_key] ?? 'move',
     required: true,
-    value_state: field.kind === 'table_header'
+    value_state: field.kind !== 'hero_metric'
   };
 }).sort((left, right) => left.source_file.localeCompare(right.source_file) || left.current_section.localeCompare(right.current_section) || left.current_label.localeCompare(right.current_label));
 
