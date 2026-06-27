@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { evidenceAliasIds } from '../config/evidence-source-identities.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
@@ -9,6 +10,8 @@ const readRows = (relative) => {
   return Array.isArray(value) ? value : value.records;
 };
 const stablecoins = baseline.data_groups.stablecoins.flatMap(readRows);
+const evidence = baseline.data_groups.evidence.flatMap(readRows);
+const publicSourceIdentityCount = evidence.length - evidenceAliasIds.size;
 const verifiedByStablecoin = new Map(stablecoins.map((row) => [row.id, row.last_verified_at]));
 const originals = new Map();
 
@@ -33,10 +36,16 @@ try {
 
   const verifyPath = new URL('./verify-public-consistency.mjs', import.meta.url);
   const source = fs.readFileSync(verifyPath, 'utf8');
-  const anchor = "const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));";
-  if (!source.includes(anchor)) throw new Error('Public consistency baseline patch anchor is missing');
-  const injected = `const baseline = ${JSON.stringify(baseline)};`;
-  await import(`data:text/javascript;base64,${Buffer.from(source.replace(anchor, injected)).toString('base64')}`);
+  const baselineAnchor = "const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));";
+  if (!source.includes(baselineAnchor)) throw new Error('Public consistency baseline patch anchor is missing');
+  const homeSourceAnchor = 'assert(homeText.includes(`Sources ${counts.evidence}`), `home evidence count mismatch: expected ${counts.evidence}`);';
+  if (!source.includes(homeSourceAnchor)) throw new Error('Public consistency home source-count patch anchor is missing');
+  const injectedBaseline = `const baseline = ${JSON.stringify(baseline)};`;
+  const injectedHomeSourceAssertion = `assert(homeText.includes(\`Source identities ${publicSourceIdentityCount}\`), \`home source identity count mismatch: expected ${publicSourceIdentityCount}\`);`;
+  const patchedSource = source
+    .replace(baselineAnchor, injectedBaseline)
+    .replace(homeSourceAnchor, injectedHomeSourceAssertion);
+  await import(`data:text/javascript;base64,${Buffer.from(patchedSource).toString('base64')}`);
 } finally {
   for (const [file, original] of originals) fs.writeFileSync(file, original);
 }
