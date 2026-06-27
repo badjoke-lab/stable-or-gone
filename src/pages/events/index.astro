@@ -4,7 +4,7 @@ import EventIndexRow from '../../components/EventIndexRow.astro';
 import EventIndexCard from '../../components/EventIndexCard.astro';
 import '../../styles/event-index.css';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
-import { resolveEventTaxonomy } from '../../utils/eventTaxonomy';
+import { getPublicEventCategoryFilterOptions, getRecoveryFilterOptions, resolveEventTaxonomy } from '../../utils/eventTaxonomy';
 import { getEvidence, getEvents, getOrganizations, getStablecoins } from '../../lib/data/registry';
 import { getCanonicalEvidenceRelations } from '../../lib/data/evidenceSources';
 
@@ -57,10 +57,10 @@ const records = events.map((event) => {
 
 const option = (value: string, publicLabel = value === 'not_recorded' ? 'Not recorded' : value.replaceAll('_', ' ')) => ({ value, publicLabel });
 const filters = [
-  { id: 'category', label: 'Category', options: unique(records.map((record) => record.category)).sort().map((value) => option(value, records.find((record) => record.category === value)?.categoryLabel)) },
+  { id: 'category', label: 'Category', options: getPublicEventCategoryFilterOptions().map((item) => option(item.value, item.public_label)) },
   { id: 'subtype', label: 'Subtype', options: unique(records.map((record) => record.subtype)).sort().map((value) => option(value, records.find((record) => record.subtype === value)?.subtypeLabel)) },
   { id: 'status_effect', label: 'Status effect', options: unique(records.map((record) => record.statusEffect)).sort().map((value) => option(value, records.find((record) => record.statusEffect === value)?.statusEffectLabel)) },
-  { id: 'recovery', label: 'Recovery', options: unique(records.map((record) => record.recovery)).sort().map((value) => option(value, records.find((record) => record.recovery === value)?.recoveryLabel)) },
+  { id: 'recovery', label: 'Recovery', options: getRecoveryFilterOptions().map((item) => option(item.value, item.public_label)) },
   { id: 'year', label: 'Year', options: unique(records.map((record) => record.year)).sort().reverse().map((value) => option(value, value === 'not_recorded' ? 'Not recorded' : value)) }
 ];
 const title = 'Events — Stable or Gone';
@@ -82,7 +82,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
         <button class="event-index-action" type="button" data-event-clear-all>Clear all</button>
       </div>
 
-      <div class="event-index-filter-grid" aria-label="Event filters">
+      <div class="event-index-filter-grid" aria-label="Event filters" data-event-category>
         {filters.map((filter) => <details class="event-index-filter"><summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-event-filter-count={filter.id}>0</span></summary><div class="event-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-event-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}</div></details>)}
       </div>
 
