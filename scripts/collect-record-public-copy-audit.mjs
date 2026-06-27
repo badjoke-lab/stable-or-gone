@@ -49,6 +49,8 @@ const { matrix, canonicalRelations } = buildRecordMigrationMatrix({
 
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const likelyOccurrences = scan.occurrences.filter((row) => row.likely_public_copy);
+const migrationTargetOccurrences = scan.occurrences.filter((row) => row.disposition === 'migration_target');
+const migrationTargetFiles = uniqueStrings(migrationTargetOccurrences.map((row) => row.file)).sort();
 const recordsWithOccurrences = new Set(scan.occurrences.map((row) => row.stablecoin_id));
 const recordsWithLikelyCopy = new Set(likelyOccurrences.map((row) => row.stablecoin_id));
 const incompleteRecords = matrix.filter((row) => !row.migration_ready);
@@ -64,9 +66,20 @@ const relatedStablecoinIds = uniqueStrings([
   ...reserveReports.map((row) => row.stablecoin_id)
 ]);
 const invalidStablecoinRelationIds = relatedStablecoinIds.filter((id) => !stablecoinIds.has(id));
+const publicCopySource = fs.readFileSync(path.join(root, 'src/data/stablecoinPublicCopy.ts'), 'utf8');
+const publicCopyOverrideIds = uniqueStrings([...publicCopySource.matchAll(/\b(sog_st_[a-z0-9_]+)\s*:/g)].map((match) => match[1])).sort();
+const invalidPublicCopyOverrideIds = publicCopyOverrideIds.filter((id) => !stablecoinIds.has(id));
 const inventoryDigest = createHash('sha256')
-  .update(JSON.stringify({ files: scan.scanned_files, occurrences: scan.occurrences, matrix }))
+  .update(JSON.stringify({ files: scan.scanned_files, occurrences: scan.occurrences, matrix, publicCopyOverrideIds }))
   .digest('hex');
+const dispositionNames = [
+  'migration_target',
+  'approved_data_overlay',
+  'editorial_reference',
+  'search_example',
+  'schema_example',
+  'shared_infrastructure'
+];
 
 const audit = {
   schema_version: '1.0',
@@ -74,7 +87,8 @@ const audit = {
   baseline_id: baseline.baseline_id,
   scan_policy: {
     roots: scanRoots,
-    matching: 'quoted or token-bounded stablecoin id, slug, canonical name, and symbols of four or more characters'
+    matching: 'quoted or token-bounded stablecoin id, slug, canonical name, and symbols of four or more characters',
+    disposition_rule: 'only migration_target findings are unresolved record-rendering copy; data overlays, editorial references, search examples, schema examples, and shared infrastructure are retained intentionally'
   },
   totals: {
     stablecoins: stablecoins.length,
@@ -82,6 +96,11 @@ const audit = {
     files_with_record_specific_occurrences: scan.files.length,
     record_specific_occurrences: scan.occurrences.length,
     likely_public_copy_occurrences: likelyOccurrences.length,
+    migration_target_occurrences: migrationTargetOccurrences.length,
+    migration_target_files: migrationTargetFiles.length,
+    approved_public_copy_overrides: publicCopyOverrideIds.length,
+    records_using_canonical_summary_fallback: stablecoins.length - publicCopyOverrideIds.length,
+    invalid_public_copy_override_ids: invalidPublicCopyOverrideIds.length,
     records_with_occurrences: recordsWithOccurrences.size,
     records_with_likely_public_copy: recordsWithLikelyCopy.size,
     records_without_occurrences: stablecoins.length - recordsWithOccurrences.size,
@@ -97,6 +116,13 @@ const audit = {
     'shared_utility_or_library',
     'data_overlay_candidate'
   ].map((surface) => [surface, scan.occurrences.filter((row) => row.surface === surface).length])),
+  findings_by_disposition: Object.fromEntries(dispositionNames.map((disposition) => [
+    disposition,
+    scan.occurrences.filter((row) => row.disposition === disposition).length
+  ])),
+  migration_target_files: migrationTargetFiles,
+  public_copy_override_ids: publicCopyOverrideIds,
+  invalid_public_copy_override_ids: invalidPublicCopyOverrideIds,
   files: scan.files,
   occurrences: scan.occurrences,
   record_matrix: matrix,
