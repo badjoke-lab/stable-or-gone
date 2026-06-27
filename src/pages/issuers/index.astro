@@ -5,6 +5,9 @@ import OrganizationIndexCard from '../../components/OrganizationIndexCard.astro'
 import '../../styles/organization-index.css';
 import {
   getFunctionalRoleLabel,
+  getJurisdictionScopeFilterOptions,
+  getPublicOrganizationCategoryFilterOptions,
+  getRegulatoryCharacterFilterOptions,
   getRelationshipStatusLabel,
   resolveOrganizationTaxonomy
 } from '../../utils/organizationTaxonomy';
@@ -62,9 +65,9 @@ const records = organizations.map((organization) => {
 
 const option = (value: string, label: string) => ({ value, label });
 const filters = [
-  { id: 'category', label: 'Category', options: unique(records.map((record) => record.category)).sort().map((value) => option(value, records.find((record) => record.category === value)!.categoryLabel)) },
-  { id: 'regulatory', label: 'Regulatory character', options: unique(records.map((record) => record.regulatory)).sort().map((value) => option(value, records.find((record) => record.regulatory === value)!.regulatoryLabel)) },
-  { id: 'jurisdiction', label: 'Jurisdiction scope', options: unique(records.map((record) => record.jurisdictionScope)).sort().map((value) => option(value, formatPublicLabel(value))) },
+  { id: 'category', label: 'Category', options: getPublicOrganizationCategoryFilterOptions().map((item) => option(item.value, item.public_label)) },
+  { id: 'regulatory', label: 'Regulatory character', options: getRegulatoryCharacterFilterOptions().map((item) => option(item.value, item.public_label)) },
+  { id: 'jurisdiction', label: 'Jurisdiction scope', options: getJurisdictionScopeFilterOptions().map((item) => option(item.value, item.public_label)) },
   { id: 'role', label: 'Functional role', options: unique(records.flatMap((record) => record.roles)).sort().map((value) => option(value, getFunctionalRoleLabel(value))) },
   { id: 'relationship_status', label: 'Relationship state', options: unique(records.flatMap((record) => record.relationshipStatuses)).sort().map((value) => option(value, getRelationshipStatusLabel(value))) }
 ];
