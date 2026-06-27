@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   architectureGroups,
+  compatibilityRoutePolicy,
   globalNavigationGroups,
+  recordContentOwnership,
   routeMigrationPolicy,
   siteArchitectureRoutes,
   utilityNavigation
@@ -57,6 +59,7 @@ for (const configured of configuredRoutes) {
 assert(globalNavigationGroups.length === 3, 'target global navigation must contain Registry, Learn, and Project groups');
 assert(JSON.stringify(globalNavigationGroups.map((group) => group.id)) === JSON.stringify(['registry', 'learn', 'project']), 'global navigation group order must be Registry, Learn, Project');
 for (const group of globalNavigationGroups) {
+  assert(typeof group.purpose === 'string' && group.purpose.length > 0, `${group.id}: navigation purpose is missing`);
   assert(group.items.length === 3, `${group.id}: target navigation group must contain three items`);
   for (const item of group.items) {
     const route = configuredByPattern.get(item.href);
@@ -74,11 +77,39 @@ for (const item of utilityNavigation) {
   assert(route?.navigation === 'utility', `${item.href}: utility route is not marked as utility navigation`);
 }
 
+assert(recordContentOwnership.length === 7, 'record content ownership must define seven canonical owners');
+const ownerRoles = new Set();
+for (const owner of recordContentOwnership) {
+  assert(!ownerRoles.has(owner.owner_role), `duplicate content owner role: ${owner.owner_role}`);
+  ownerRoles.add(owner.owner_role);
+  const route = configuredByPattern.get(owner.route);
+  assert(Boolean(route), `${owner.owner_role}: content owner route is missing: ${owner.route}`);
+  assert(route?.role === owner.owner_role, `${owner.owner_role}: route role mismatch for ${owner.route}`);
+  assert(Array.isArray(owner.responsibilities) && owner.responsibilities.length > 0, `${owner.owner_role}: responsibilities are missing`);
+  assert(new Set(owner.responsibilities).size === owner.responsibilities.length, `${owner.owner_role}: responsibilities must be unique`);
+}
+const stablecoinOwner = recordContentOwnership.find((owner) => owner.owner_role === 'stablecoin_record');
+assert(stablecoinOwner?.responsibilities.includes('evidence'), 'stablecoin record ownership must include evidence');
+assert(stablecoinOwner?.responsibilities.includes('known_unknowns'), 'stablecoin record ownership must include known unknowns');
+assert(stablecoinOwner?.responsibilities.includes('organization_relationships'), 'stablecoin record ownership must include organization relationships');
+assert(stablecoinOwner?.responsibilities.includes('deployments'), 'stablecoin record ownership must include deployments');
+
+assert(compatibilityRoutePolicy.organization_public_term === 'Organizations', 'public organization term must remain Organizations');
+assert(compatibilityRoutePolicy.preserved_index_path === '/issuers/', 'organization index compatibility path must remain /issuers/');
+assert(compatibilityRoutePolicy.preserved_detail_path === '/issuer/{slug}/', 'organization detail compatibility path must remain /issuer/{slug}/');
+assert(compatibilityRoutePolicy.path_names_are_not_record_fields === true, 'compatibility paths must not be exposed as record fields');
+assert(compatibilityRoutePolicy.compatibility_labels_in_record_content === false, 'compatibility labels must not appear in record content');
+assert(compatibilityRoutePolicy.future_path_change_requires_dedicated_migration === true, 'future organization path changes must require a dedicated migration');
+const organizationPage = fs.readFileSync(path.join(root, 'src/pages/issuer/[slug].astro'), 'utf8');
+assert(!organizationPage.includes('Compatibility URL'), 'organization record still exposes a compatibility implementation label');
+
 assert(routeMigrationPolicy.current_pr_changes_routes === false, 'PR 17 must not change routes');
+assert(routeMigrationPolicy.current_pr_changes_navigation_markup === false, 'PR 17 must not implement grouped navigation markup');
 assert(routeMigrationPolicy.all_current_routes_preserved === true, 'PR 17 must preserve every current route');
 assert(routeMigrationPolicy.redirects_introduced.length === 0, 'PR 17 must not introduce redirects');
 assert(routeMigrationPolicy.removals_introduced.length === 0, 'PR 17 must not remove routes');
 assert(routeMigrationPolicy.compatibility_changes_require_dedicated_migration === true, 'compatibility changes must require a dedicated migration');
+assert(routeMigrationPolicy.grouped_navigation_implementation_deferred_to_pr === 23, 'grouped navigation implementation must remain deferred to PR 23');
 
 const targetGroupItems = globalNavigationGroups.flatMap((group) => group.items.map((item) => ({ ...item, group: group.id })));
 const targetUtilityItems = utilityNavigation.map((item) => ({ ...item, group: 'utility' }));
@@ -93,7 +124,7 @@ const navigationTransition = {
   retained_in_target_navigation: [...targetHrefs].filter((href) => currentHrefs.has(href)).sort(),
   removed_from_navigation: [...currentHrefs].filter((href) => !targetHrefs.has(href)).sort(),
   moved_from_flat_nav_to_utility: utilityNavigation.map((item) => item.href).filter((href) => currentHrefs.has(href)),
-  implementation_deferred_to_pr: 23
+  implementation_deferred_to_pr: routeMigrationPolicy.grouped_navigation_implementation_deferred_to_pr
 };
 
 assert(navigationTransition.removed_from_navigation.length === 0, 'approved target navigation must not orphan a current navigation destination');
@@ -111,11 +142,15 @@ const validation = {
     navigation_groups: globalNavigationGroups.length,
     grouped_navigation_items: targetGroupItems.length,
     utility_navigation_items: targetUtilityItems.length,
+    content_owners: recordContentOwnership.length,
     route_changes: routeMigrationPolicy.current_pr_changes_routes ? 1 : 0,
+    navigation_markup_changes: routeMigrationPolicy.current_pr_changes_navigation_markup ? 1 : 0,
     failures: failures.length
   },
   role_counts: roleCounts,
   decision_counts: decisionCounts,
+  content_ownership: recordContentOwnership,
+  compatibility_route_policy: compatibilityRoutePolicy,
   navigation_transition: navigationTransition,
   failures
 };
