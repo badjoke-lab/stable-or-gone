@@ -14,12 +14,24 @@ const requiredUsage = {
     'getEvidenceSourceIdentitySummary',
     'orphan_relation_source_ids'
   ],
+  'src/pages/index.astro': [
+    'getEvidenceSourceIdentitySummary',
+    'Source identities',
+    'evidenceSummary.source_identities',
+    'resolvePrimaryRelationshipForStablecoin'
+  ],
   'src/lib/data/manifestBase.ts': [
     "'evidence_source_identity'",
     'evidence_source_identity: evidenceSourceIdentity'
   ],
   'src/lib/versionBase.ts': [
     'evidence_source_identity: evidenceSourceIdentity'
+  ],
+  'src/lib/machine-readable.ts': [
+    'getEvidenceSourceIdentitySummary',
+    'evidence_source_identities',
+    'evidence_canonical_relations',
+    'evidence_orphan_relation_source_ids'
   ],
   'scripts/build-evidence-source-identity-stats.mjs': [
     'public_source_identities',
@@ -31,6 +43,12 @@ const requiredUsage = {
     'applyEvidenceSourceIdentityStats',
     'public source identity projection must contain zero duplicate URL groups'
   ],
+  'scripts/verify-public-layer.mjs': [
+    'buildEvidenceSourceIdentityStats',
+    'expectedEvidenceSourceIdentitySummary',
+    'version evidence source identity summary mismatch',
+    'manifest evidence source identity summary mismatch'
+  ],
   'scripts/validate-evidence-mobile.mjs': [
     'source_identity_protections'
   ]
@@ -39,6 +57,10 @@ const requiredUsage = {
 const forbiddenUsage = {
   'src/components/EvidenceSourceTable.astro': [
     'EvidenceRows evidence={evidence}'
+  ],
+  'src/pages/index.astro': [
+    'getPrimaryRelationship',
+    '<span>Sources</span><strong>{evidence.length}</strong>'
   ]
 };
 
@@ -52,7 +74,7 @@ for (const [file, terms] of Object.entries(requiredUsage)) {
 for (const [file, terms] of Object.entries(forbiddenUsage)) {
   const source = fs.readFileSync(file, 'utf8');
   for (const term of terms) {
-    if (source.includes(term)) failures.push(`${file}: raw duplicate evidence rows remain on a public table: ${term}`);
+    if (source.includes(term)) failures.push(`${file}: raw or legacy public projection remains: ${term}`);
   }
 }
 
@@ -60,5 +82,5 @@ if (failures.length > 0) throw new Error(failures.join('\n'));
 console.log(JSON.stringify({
   ok: true,
   protected_surfaces: Object.keys(requiredUsage).length,
-  forbidden_raw_row_patterns: Object.values(forbiddenUsage).flat().length
+  forbidden_raw_or_legacy_patterns: Object.values(forbiddenUsage).flat().length
 }, null, 2));
