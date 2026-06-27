@@ -20,6 +20,9 @@ const requiredUsage = {
   ],
   'src/components/StablecoinDetailView.astro': [
     'resolvePrimaryRelationshipForStablecoin',
+    'StablecoinOrganizationsControl'
+  ],
+  'src/components/StablecoinOrganizationsControl.astro': [
     'Primary display organization',
     'Primary display role',
     'Display selection mode',

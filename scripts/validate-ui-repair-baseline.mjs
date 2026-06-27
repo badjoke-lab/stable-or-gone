@@ -19,6 +19,7 @@ const stats = read(repair.canonical.stats);
 const audit = read(repair.canonical.integrity_audit);
 const registryV2 = loadRegistryV2Baseline(root);
 const group = (name) => (registryV2.data_groups?.[name] ?? []).flatMap(recordsFromJson);
+const canonicalCount = (counts, key) => counts?.[key] ?? (key === 'evidence_relations' ? counts?.evidence : undefined);
 
 check(repair.schema_version === '1.0', 'repair baseline schema_version must be 1.0');
 check(repair.baseline_id === 'sog_ui_repair_baseline_2026_06_26', 'unexpected repair baseline id');
@@ -26,9 +27,9 @@ check(/^\d{4}-\d{2}-\d{2}$/.test(repair.recorded_at ?? ''), 'repair baseline rec
 check(Array.isArray(repair.governing_documents) && repair.governing_documents.length >= 6, 'governing document list is incomplete');
 
 for (const [key, expected] of Object.entries(repair.canonical.counts)) {
-  check(stats.registry?.[key] === expected, `generated stats count mismatch: ${key}`);
-  check(audit.counts?.[key] === expected, `integrity audit count mismatch: ${key}`);
-  check(registryV3.expected_counts?.[key] === expected, `Registry v3 baseline count mismatch: ${key}`);
+  check(canonicalCount(stats.registry, key) === expected, `generated stats count mismatch: ${key}`);
+  check(canonicalCount(audit.counts, key) === expected, `integrity audit count mismatch: ${key}`);
+  check(canonicalCount(registryV3.expected_counts, key) === expected, `Registry v3 baseline count mismatch: ${key}`);
 }
 
 for (const [key, expected] of Object.entries(repair.canonical.coverage)) {
