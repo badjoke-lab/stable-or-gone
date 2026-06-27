@@ -33,5 +33,9 @@ export const implementedMobileTableRepresentations = Object.freeze({
   'organization-overview': 'src/pages/issuer/[slug].astro',
   'organization-relationships': 'src/pages/issuer/[slug].astro',
   'organization-events': 'src/pages/issuer/[slug].astro',
-  'organization-sources': 'src/pages/issuer/[slug].astro'
+  'organization-sources': 'src/pages/issuer/[slug].astro',
+  'event-index': 'src/components/EventIndexCard.astro',
+  'event-details': 'src/pages/event/[id].astro',
+  'event-detail-overlay': 'src/components/StructuredEventDetail.astro',
+  'event-sources': 'src/pages/event/[id].astro'
 });

@@ -6,7 +6,8 @@ const root = process.cwd();
 const outputPath = path.join(root, 'data/generated/index-interaction-audit.json');
 const clients = {
   stablecoins: 'src/scripts/stablecoin-index.ts',
-  organizations: 'src/scripts/organization-index.ts'
+  organizations: 'src/scripts/organization-index.ts',
+  events: 'src/scripts/event-index.ts'
 };
 const clean = (value) => value.replace(/<[^>]+>/g, ' ').replace(/\{[^}]+\}/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -38,7 +39,7 @@ function inspect(contract) {
       popstate_present: behavior.includes('popstate'),
       clear_all_present: /clear-all|clear filters|reset filters/i.test(behavior),
       comparison_present: /data-compare|comparison-panel|compare=/i.test(behavior),
-      server_rendered_rows_present: /records\.map|stablecoins\.map|organizations\.map|\.map\(\(/.test(source)
+      server_rendered_rows_present: /records\.map|stablecoins\.map|organizations\.map|events\.map|\.map\(\(/.test(source)
     }
   };
 }

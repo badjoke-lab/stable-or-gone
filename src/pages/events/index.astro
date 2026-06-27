@@ -1,75 +1,96 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatPublicLabel } from '../../utils/displayLabels';
+import EventIndexRow from '../../components/EventIndexRow.astro';
+import EventIndexCard from '../../components/EventIndexCard.astro';
+import '../../styles/event-index.css';
 import { eventPublicCopy } from '../../data/eventPublicCopy';
 import { getPublicEventCategoryFilterOptions, getRecoveryFilterOptions, resolveEventTaxonomy } from '../../utils/eventTaxonomy';
-import { getEvents, getStablecoins } from '../../lib/data/registry';
+import { getEvidence, getEvents, getOrganizations, getStablecoins } from '../../lib/data/registry';
+import { getCanonicalEvidenceRelations } from '../../lib/data/evidenceSources';
 
 const events = getEvents();
 const stablecoins = getStablecoins();
+const organizations = getOrganizations();
+const evidence = getEvidence();
+const evidenceRelations = getCanonicalEvidenceRelations();
 const stablecoinById = new Map(stablecoins.map((coin) => [coin.id, coin] as const));
-const uniqueSorted = (values: Array<string | undefined>) => Array.from(new Set(values.filter(Boolean) as string[])).sort((a, b) => a.localeCompare(b));
-const categoryOptions = getPublicEventCategoryFilterOptions();
-const impactOptions = uniqueSorted(events.map((event) => event.impact_level));
-const recoveryOptions = getRecoveryFilterOptions();
-const coveredStablecoins = new Set(events.flatMap((event) => event.subject_stablecoin_ids?.length ? event.subject_stablecoin_ids : event.stablecoin_id ? [event.stablecoin_id] : [])).size;
-const title = 'Stablecoin Events — Stable or Gone';
-const description = 'Browse stablecoin launches, depegs, recoveries, regulatory actions, security incidents, migrations, wind-downs, and collapses by reviewed public category and canonical subtype.';
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: title,
-  url: 'https://sog.badjoke-lab.com/events/',
-  description,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin depeg events', 'stablecoin collapse', 'stablecoin launches', 'stablecoin regulatory actions']
-};
+const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
+const evidenceById = new Map(evidence.map((source) => [source.id, source] as const));
+const unique = <T,>(values: T[]) => [...new Set(values)];
+
+const records = events.map((event) => {
+  const taxonomy = resolveEventTaxonomy(event);
+  const stablecoinIds = unique([...(event.subject_stablecoin_ids ?? []), ...(event.stablecoin_id ? [event.stablecoin_id] : [])]);
+  const organizationIds = unique([...(event.subject_organization_ids ?? []), ...(event.issuer_id ? [event.issuer_id] : [])]);
+  const stablecoinNames = stablecoinIds.map((id) => stablecoinById.get(id)?.name ?? id);
+  const organizationNames = organizationIds.map((id) => organizationById.get(id)?.name ?? id);
+  const relationSourceIds = evidenceRelations.filter((relation) => relation.event_ids.includes(event.id)).map((relation) => relation.evidence_id);
+  const directSourceIds = evidence.filter((source) => source.event_id === event.id || source.event_ids?.includes(event.id)).map((source) => source.id);
+  const sourceIds = unique([...(event.evidence_ids ?? []), ...relationSourceIds, ...directSourceIds]);
+  const publishers = unique(sourceIds.map((id) => evidenceById.get(id)?.publisher).filter(Boolean) as string[]);
+  const title = eventPublicCopy[event.id]?.title ?? event.title;
+  const description = eventPublicCopy[event.id]?.description ?? event.description ?? '';
+  const eventDate = event.event_date ?? '';
+  const subjectNames = [...stablecoinNames, ...organizationNames];
+  return {
+    id: event.id,
+    title,
+    eventDate,
+    year: eventDate ? eventDate.slice(0, 4) : 'not_recorded',
+    category: taxonomy.public_category,
+    categoryLabel: taxonomy.public_category_label,
+    subtype: taxonomy.canonical_subtype,
+    subtypeLabel: taxonomy.canonical_subtype_label,
+    impactLabel: event.impact_level ? event.impact_level.replaceAll('_', ' ') : 'Not recorded',
+    statusEffect: taxonomy.status_effect_category,
+    statusEffectLabel: taxonomy.status_effect_label,
+    recovery: taxonomy.recovery_category,
+    recoveryLabel: taxonomy.recovery_label,
+    subjectNames,
+    stablecoinIds,
+    organizationIds,
+    sourceIdentityCount: sourceIds.length,
+    confidenceLabel: event.confidence ? event.confidence.replaceAll('_', ' ') : 'Not recorded',
+    search: [title, description, event.id, ...stablecoinNames, ...organizationNames, ...publishers].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ')
+  };
+}).sort((left, right) => right.eventDate.localeCompare(left.eventDate) || left.title.localeCompare(right.title));
+
+const option = (value: string, publicLabel = value === 'not_recorded' ? 'Not recorded' : value.replaceAll('_', ' ')) => ({ value, publicLabel });
+const filters = [
+  { id: 'category', label: 'Category', options: getPublicEventCategoryFilterOptions().map((item) => option(item.value, item.public_label)) },
+  { id: 'subtype', label: 'Subtype', options: unique(records.map((record) => record.subtype)).sort().map((value) => option(value, records.find((record) => record.subtype === value)?.subtypeLabel)) },
+  { id: 'status_effect', label: 'Status effect', options: unique(records.map((record) => record.statusEffect)).sort().map((value) => option(value, records.find((record) => record.statusEffect === value)?.statusEffectLabel)) },
+  { id: 'recovery', label: 'Recovery', options: getRecoveryFilterOptions().map((item) => option(item.value, item.public_label)) },
+  { id: 'year', label: 'Year', options: unique(records.map((record) => record.year)).sort().reverse().map((value) => option(value, value === 'not_recorded' ? 'Not recorded' : value)) }
+];
+const title = 'Events — Stable or Gone';
+const description = 'Browse stablecoin lifecycle events by public category, precise subtype, status effect, recovery state, year, subjects, and evidence.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Events', url: 'https://sog.badjoke-lab.com/events/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/events/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main"><div class="prompt">Stablecoin event history</div><h1>Browse major stablecoin events</h1><p>Search reviewed event categories while preserving the precise canonical subtype, status effect, recovery state, and source count for each record.</p></div>
-    <div class="panel stats"><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Stablecoins covered</span><strong>{coveredStablecoins}</strong></div></div>
-  </section>
+  <div class="event-index-page" data-event-index>
+    <section class="event-index-intro">
+      <div class="panel event-index-intro-main"><div class="prompt">Event registry</div><h1>Browse stablecoin events</h1><p>Events are chronological records, not status labels. Search titles, descriptions, record IDs, subjects, and source publishers while keeping public category, precise subtype, lifecycle effect, and recovery separate.</p></div>
+      <div class="panel event-index-intro-stats" aria-label="Event registry totals"><div class="event-index-stat"><span>Events</span><strong>{records.length}</strong></div><div class="event-index-stat"><span>Stablecoin subjects</span><strong>{new Set(records.flatMap((record) => record.stablecoinIds)).size}</strong></div><div class="event-index-stat"><span>Organization subjects</span><strong>{new Set(records.flatMap((record) => record.organizationIds)).size}</strong></div><div class="event-index-stat"><span>Source identities</span><strong>{new Set(evidenceRelations.filter((relation) => relation.event_ids.length > 0).map((relation) => relation.evidence_id)).size}</strong></div></div>
+    </section>
 
-  <section class="section-grid" aria-label="Helpful links"><a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Understanding depegs</h2><p>See how temporary depegs, recoveries, and collapses are distinguished.</p></a><a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status and events</h2><p>Learn why a past incident does not always change a stablecoin’s current status.</p></a><a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Open the full records connected to these events.</p></a></section>
+    <section class="panel event-index-registry" aria-labelledby="event-index-heading">
+      <div class="bar" id="event-index-heading">All event records</div>
+      <div class="event-index-toolbar">
+        <label><span>Search</span><input data-event-search type="search" name="q" placeholder="Title, description, ID, subject, publisher" autocomplete="off" /></label>
+        <label><span>Sort</span><select data-event-sort name="sort"><option value="date_desc">Date: newest first</option><option value="date_asc">Date: oldest first</option><option value="title_asc">Title A–Z</option><option value="evidence_most">Most source identities</option></select></label>
+        <button class="event-index-action" type="button" data-event-clear-all>Clear all</button>
+      </div>
 
-  <section class="panel registry" data-event-registry>
-    <div class="bar">All events</div>
-    <div class="registry-controls" aria-label="Event filters">
-      <label><span>Search</span><input data-event-search type="search" placeholder="USDC, collapse, launch..." autocomplete="off" /></label>
-      <label><span>Category</span><select data-event-category><option value="">All event categories</option>{categoryOptions.map((category) => <option value={category.value}>{category.public_label}</option>)}</select></label>
-      <label><span>Impact</span><select data-event-impact><option value="">All impact levels</option>{impactOptions.map((impact) => <option value={impact}>{formatPublicLabel(impact)}</option>)}</select></label>
-      <label><span>Recovery</span><select data-event-recovery><option value="">All recovery states</option>{recoveryOptions.map((recovery) => <option value={recovery.value}>{recovery.public_label}</option>)}</select></label>
-      <label><span>Sort</span><select data-event-sort><option value="date_desc">Newest first</option><option value="date_asc">Oldest first</option><option value="impact">Impact</option><option value="category">Category A-Z</option><option value="title">Event A-Z</option></select></label>
-    </div>
-    <div class="registry-summary" aria-live="polite"><span data-event-result-count>{events.length}</span> of {events.length} events</div>
-    <table data-table-kind="event-index" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Stablecoin</th><th>Event</th><th>Category</th><th>Subtype</th><th>Impact</th><th>Recovery</th><th>Sources</th></tr></thead><tbody data-event-body>
-      {events.length === 0 ? <tr><td colspan="8">No event records available.</td></tr> : events.map((event) => {
-        const stablecoinIds = event.subject_stablecoin_ids?.length ? event.subject_stablecoin_ids : event.stablecoin_id ? [event.stablecoin_id] : [];
-        const stablecoinLabels = stablecoinIds.map((id) => stablecoinById.get(id)).filter(Boolean).map((coin) => `${coin?.name}${coin?.symbol ? ` (${coin.symbol})` : ''}`);
-        const stablecoinLabel = stablecoinLabels.join(', ') || 'Unknown stablecoin';
-        const eventTitle = eventPublicCopy[event.id]?.title ?? event.title;
-        const taxonomy = resolveEventTaxonomy(event);
-        const searchable = [stablecoinLabel, eventTitle, taxonomy.public_category_label, taxonomy.canonical_subtype, taxonomy.canonical_subtype_label, taxonomy.detail_kind_label, taxonomy.status_effect_label, taxonomy.recovery_label, event.impact_level, formatPublicLabel(event.impact_level)].filter(Boolean).join(' ').toLowerCase();
-        return (<tr data-event-row data-search={searchable} data-title={eventTitle.toLowerCase()} data-date={event.event_date ?? ''} data-category={taxonomy.public_category} data-category-label={taxonomy.public_category_label.toLowerCase()} data-impact={event.impact_level ?? ''} data-recovery={taxonomy.recovery_category}><td>{event.event_date ?? '—'}</td><td>{stablecoinLabel}</td><td><a href={`/event/${event.id}/`}>{eventTitle}</a></td><td>{taxonomy.public_category_label}</td><td>{taxonomy.canonical_subtype_label}</td><td>{formatPublicLabel(event.impact_level)}</td><td>{taxonomy.recovery_label}</td><td>{event.source_count ?? 0}</td></tr>);
-      })}
-      <tr data-event-no-results hidden><td colspan="8">No events match these filters.</td></tr>
-    </tbody></table>
-  </section>
+      <div class="event-index-filter-grid" aria-label="Event filters" data-event-category>
+        {filters.map((filter) => <details class="event-index-filter"><summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-event-filter-count={filter.id}>0</span></summary><div class="event-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-event-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}</div></details>)}
+      </div>
 
-  <script>
-    const registry = document.querySelector('[data-event-registry]');
-    const tbody = registry?.querySelector('[data-event-body]');
-    const rows = Array.from(registry?.querySelectorAll('[data-event-row]') ?? []);
-    const noResults = registry?.querySelector('[data-event-no-results]');
-    const resultCount = registry?.querySelector('[data-event-result-count]');
-    const controls = { search: registry?.querySelector('[data-event-search]'), category: registry?.querySelector('[data-event-category]'), impact: registry?.querySelector('[data-event-impact]'), recovery: registry?.querySelector('[data-event-recovery]'), sort: registry?.querySelector('[data-event-sort]') };
-    const normalize = (value: unknown) => String(value ?? '').trim().toLowerCase();
-    const getValue = (control: Element | null | undefined) => control instanceof HTMLInputElement || control instanceof HTMLSelectElement ? control.value : '';
-    const impactRank: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 };
-    function sortRows() { if (!tbody) return; const mode = getValue(controls.sort) || 'date_desc'; const sorted = [...rows].sort((a, b) => { if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0; if (mode === 'date_asc') return String(a.dataset.date ?? '').localeCompare(String(b.dataset.date ?? '')); if (mode === 'impact') return (impactRank[a.dataset.impact ?? ''] ?? 99) - (impactRank[b.dataset.impact ?? ''] ?? 99) || String(b.dataset.date ?? '').localeCompare(String(a.dataset.date ?? '')); if (mode === 'category') return String(a.dataset.categoryLabel ?? '').localeCompare(String(b.dataset.categoryLabel ?? '')) || String(b.dataset.date ?? '').localeCompare(String(a.dataset.date ?? '')); if (mode === 'title') return String(a.dataset.title ?? '').localeCompare(String(b.dataset.title ?? '')); return String(b.dataset.date ?? '').localeCompare(String(a.dataset.date ?? '')); }); sorted.forEach((row) => tbody.appendChild(row)); if (noResults) tbody.appendChild(noResults); }
-    function applyFilters() { const query = normalize(getValue(controls.search)); const category = getValue(controls.category); const impact = getValue(controls.impact); const recovery = getValue(controls.recovery); let visible = 0; rows.forEach((row) => { if (!(row instanceof HTMLElement)) return; const matches = (!query || normalize(row.dataset.search).includes(query)) && (!category || row.dataset.category === category) && (!impact || row.dataset.impact === impact) && (!recovery || row.dataset.recovery === recovery); row.hidden = !matches; if (matches) visible += 1; }); if (noResults instanceof HTMLElement) noResults.hidden = visible !== 0; if (resultCount) resultCount.textContent = String(visible); }
-    Object.values(controls).forEach((control) => { control?.addEventListener('input', () => { sortRows(); applyFilters(); }); control?.addEventListener('change', () => { sortRows(); applyFilters(); }); });
-    sortRows(); applyFilters();
-  </script>
+      <div class="event-index-summary"><div class="event-index-active-filters" data-event-active-filters aria-label="Active event filters"></div><div class="event-index-result-count" aria-live="polite"><span data-event-result-count>{records.length}</span> of {records.length} events</div></div>
+      <div class="event-index-table"><table data-table-kind="event-index" data-mobile-table="scroll-preserve"><caption>Event registry results. Compact timeline cards follow in the same document for small screens.</caption><thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Impact</th><th>Status effect</th><th>Recovery</th><th>Sources</th></tr></thead><tbody data-event-body>{records.map((record) => <EventIndexRow record={record} />)}</tbody></table></div>
+      <div class="event-index-cards" data-event-card-body aria-label="Event compact records">{records.map((record) => <EventIndexCard record={record} />)}</div>
+      <div class="event-index-no-results" data-event-no-results hidden><strong>No events match this state.</strong><span>Clear the search and filters to restore all event records.</span><button class="event-index-action" type="button" data-event-clear-all>Clear all</button></div>
+    </section>
+  </div>
+  <script>import '../../scripts/event-index';</script>
 </BaseLayout>
