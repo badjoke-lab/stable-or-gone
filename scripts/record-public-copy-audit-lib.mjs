@@ -17,6 +17,23 @@ const excludedPaths = new Set([
   'src/lib/data/registryV3.ts'
 ]);
 
+const editorialPrefixes = [
+  'src/pages/guides/',
+  'src/pages/glossary/',
+  'src/pages/methodology/',
+  'src/pages/models/',
+  'src/pages/support/'
+];
+
+const editorialFiles = new Set([
+  'src/pages/index.astro'
+]);
+
+const searchExampleFiles = new Set([
+  'src/pages/events/index.astro',
+  'src/pages/stablecoins/index.astro'
+]);
+
 export function readRows(root, relativePath) {
   const value = JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
   const rows = Array.isArray(value) ? value : value.records;
@@ -83,6 +100,15 @@ export function surfaceKind(file) {
   if (file.startsWith('src/components/') || file.startsWith('src/pages/') || file.startsWith('src/layouts/')) return 'public_component_or_page';
   if (file.startsWith('src/data/')) return 'data_overlay_candidate';
   return 'shared_utility_or_library';
+}
+
+export function occurrenceDisposition(file) {
+  if (file.startsWith('src/data/')) return 'approved_data_overlay';
+  if (file.startsWith('src/lib/schema/')) return 'schema_example';
+  if (searchExampleFiles.has(file)) return 'search_example';
+  if (editorialFiles.has(file) || editorialPrefixes.some((prefix) => file.startsWith(prefix))) return 'editorial_reference';
+  if (file.startsWith('src/components/') || file.startsWith('src/pages/') || file.startsWith('src/layouts/')) return 'migration_target';
+  return 'shared_infrastructure';
 }
 
 export function likelyPublicCopy(file, line) {
