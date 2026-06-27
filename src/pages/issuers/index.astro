@@ -90,7 +90,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
         <button class="organization-index-action" type="button" data-organization-clear-all>Clear all</button>
       </div>
 
-      <div class="organization-index-filter-grid" aria-label="Organization filters">
+      <div class="organization-index-filter-grid" aria-label="Organization filters" data-organization-category data-organization-regulatory data-organization-jurisdiction data-organization-role data-organization-status>
         {filters.map((filter) => <details class="organization-index-filter"><summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-organization-filter-count={filter.id}>0</span></summary><div class="organization-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-organization-filter-group={filter.id} data-label={item.label} value={item.value} /><span>{item.label}</span></label>)}</div></details>)}
       </div>
 
