@@ -4,7 +4,7 @@ Updated: 2026-06-27
 
 ## Purpose
 
-This is the canonical execution schedule for SOG. Detailed findings belong in `docs/audits/`; approved information-architecture decisions belong in `docs/architecture/`. This file records the current position, completed gates, remaining PR order, protected queues, and publication constraints.
+This is the canonical execution schedule for SOG. Detailed audits belong in `docs/audits/`; approved information architecture and visual decisions belong in `docs/architecture/`.
 
 Required authority:
 
@@ -20,9 +20,10 @@ docs/architecture/stablecoin-dossier-hierarchy-v1.md
 docs/architecture/index-interaction-contract-v1.md
 docs/architecture/meaningful-change-history-v1.md
 docs/architecture/responsive-accessibility-v1.md
+docs/architecture/visual-system-and-mocks-v1.md
 ```
 
-Implementation work must cite these documents and this roadmap before changing public semantics, record counts, routes, navigation, dossier field ownership, index interaction behavior, change-history behavior, responsive representation, accessibility behavior, or deployment behavior.
+Implementation work must cite these documents before changing public semantics, routes, record counts, navigation, dossier ownership, index behavior, change history, responsive behavior, accessibility behavior, or visual presentation.
 
 ## Registry checkpoint
 
@@ -50,12 +51,15 @@ docs/migration/registry-v3-baseline.json
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Current phase after PR #189 merges: Phase 3 — information architecture, responsive specification, and mocks
-Latest completed work after PR #189 merges: PR 21
-Next approved work: PR 22 — approve visual system and image mocks
+Current phase after PR #190 merges: Phase 4 — approved UI implementation
+Latest completed work after PR #190 merges: PR 22
+Next approved work: PR 23 — implement global shell and grouped navigation
+Gate C: PASS
+Gate D: PASS after PR #190
 Routine record growth: paused at 92 assets
-Production publication: paused except verified emergency repair
 Batch 18 selection: prohibited during repair
+Automatic production deployment: disabled
+Production publication: paused except verified emergency repair
 ```
 
 ## Completed gates and PRs
@@ -79,241 +83,93 @@ PR #170  route, sitemap, canonical, JSON-LD, and output parity
 PR #171  mobile information preservation
 ```
 
-Gate B guarantees one source commit and canonical data hash per generated site, route and sitemap parity, stale-output rejection, and preservation of material mobile information.
+Gate B guarantees source-commit and canonical-data provenance, route and sitemap parity, stale-output rejection, and material mobile-information preservation.
 
 ### Gate C — taxonomy and data semantics
 
-Status after PR #183 merges: **PASS**
+Status: **PASS after PR #183**
 
 ```text
-PR #172  PR 5  public-value registry
-PR #173  PR 6  lifecycle and issuance normalization
-PR #174  PR 7  reference-target and peg normalization
-PR #175  PR 8  backing and stabilization normalization
-PR #176  PR 9  event category and subtype normalization
-PR #177  PR 10 organization classification normalization
-PR #178  PR 11 evidence reliability, provenance, and type separation
-PR #179  PR 12 deployment status and verification-state separation
-PR #180  PR 13 value-state semantics
-PR #181  PR 14 explicit primary display relationships
-PR #182  PR 15 evidence-source deduplication with claim preservation
-PR #183  PR 16 record-specific public-copy migration and 92-record completion matrix
+PR #172  public-value registry
+PR #173  lifecycle and issuance normalization
+PR #174  reference-target and peg normalization
+PR #175  backing and stabilization normalization
+PR #176  event category and subtype normalization
+PR #177  organization classification normalization
+PR #178  evidence reliability, provenance, and type separation
+PR #179  deployment status and verification-state separation
+PR #180  value-state semantics
+PR #181  explicit primary display relationships
+PR #182  evidence-source identity deduplication with claim preservation
+PR #183  record-specific public-copy migration and 92-record completion matrix
 ```
 
-Gate C guarantees normalized public taxonomy, explicit investigated-unknown states, deterministic primary display relationships, independent deployment verification axes, one reviewed public source identity per exact source URL, all 455 evidence relations preserved, record-specific summaries outside reusable rendering components, and a passing migration matrix for all 92 assets.
-
-## Phase 2 protected baselines
-
-### Organization taxonomy
+Gate C protections:
 
 ```text
-Organizations:                       86
-Relationships:                      101
-Canonical organization types:       39
-Public organization categories:     10
-Unmapped categories:                 0
-Unmapped regulatory characters:      0
-Unmapped functional roles:           0
-Unmapped relationship states:        0
-Organizations without relationships: 0
-```
-
-### Evidence taxonomy and source identity
-
-```text
-Canonical evidence records:          455
-Evidence relations:                   455
-Canonical source types:                75
-Public source categories:              12 used / 13 defined
-Explicit v2 relation origins:         361
-Legacy subject projections:            94
-Multi-subject records:                421
-Multi-claim records:                  307
-Unknown reliability values retained:   36
-Public source identities:             410
-Exact duplicate URL groups reviewed:   32
-Alias evidence IDs:                    45
-Public duplicate URL groups:            0
-Orphan relation source IDs:              0
-```
-
-Identity equation:
-
-```text
+Eight explicit value states
+92 deterministic primary display relationships
+455 canonical evidence records preserved
 410 public source identities
-+45 alias evidence records
-=455 canonical evidence records
+455 evidence relations preserved
+Zero public duplicate source URLs
+Zero orphan evidence relations
+92/92 records migration-ready
+Zero unresolved component copy targets
 ```
 
-### Deployment taxonomy
+### Gate D — information architecture and mocks
+
+Status after PR #190 merges: **PASS**
 
 ```text
-Deployments:                         130
-Unique deployment IDs:              130
-Stable assets covered:               92
-Network or network contexts:         31
-Records with evidence:              130
-Records with control events:         18
-Canonicality explicitly recorded:    63
-Canonicality not recorded:           67
-Explicit verification status:         0
+PR #185  site architecture and route roles
+PR #186  stablecoin dossier hierarchy and field matrix
+PR #187  index search, filter, sort, and comparison contract
+PR #188  meaningful public change-history contract
+PR #189  responsive and accessibility contract
+PR #190  visual system and ten approved image mocks
 ```
 
-Deployment operational state, canonicality, verification state, contract identity, and network identity remain separate axes.
+Gate D means the design and interaction contracts are approved. It does not mean the production UI has been implemented or published.
 
-### Value states
+## Gate D protected baselines
 
-Approved public states:
-
-```text
-known
-unknown_after_review
-not_recorded
-not_applicable
-not_public
-unverified
-disputed
-approximate
-```
-
-Canonical inventory:
+### Site architecture — PR 17
 
 ```text
-Source files scanned:         236
-Records scanned:            2,167
-Scalar values scanned:     31,908
-Direct-value findings:      1,227
-Narrative-text findings:       39
-Excluded reference scalars:   435
-```
-
-### Primary display relationships
-
-```text
-Stable assets:                         92
-Organization relationships:          101
-Primary display selections:            92
-Deterministic selections:              92
-Explicit overrides required:            0
-Ambiguous selections:                   0
-Invalid selections:                     0
-Assets with multiple relationships:     8
-Assets with multiple organizations:     8
-Historical end dates not recorded:      7
-```
-
-### Record public-copy migration
-
-```text
-Stable assets audited:                    92
-Migration-ready records:                  92
-Incomplete records:                        0
-Reviewed summary overrides preserved:     20
-Canonical-summary fallbacks preserved:    72
-Unresolved component/page copy targets:    0
-Canonical evidence relations preserved:  455
-Public source identities preserved:      410
-Orphan source relation IDs:                0
-Invalid stablecoin relation IDs:           0
-```
-
-## Phase 3 sequence
-
-```text
-PR 17  finalize site architecture and route roles — PASS after PR #185
-PR 18  finalize stablecoin dossier hierarchy — PASS after PR #186
-PR 19  finalize list, search, filter, and comparison behavior — PASS after PR #187
-PR 20  define meaningful public change history — PASS after PR #188
-PR 21  finalize responsive and accessibility specification — PASS after PR #189
-PR 22  approve visual system and image mocks
-```
-
-### Gate D
-
-No production UI implementation begins until PRs 17–22 are merged and their validation contracts pass.
-
-Only PR 22 remains before Gate D can pass.
-
-```text
-Global shell implementation:       PR 23
-Stablecoin index implementation:   PR 24
-Organization index implementation: PR 25
-Event index implementation:        PR 26
-Dossier implementation begins:     PR 27
-Meaningful Updates implementation: PR 34
-Responsive completion:             PR 35
-Accessibility completion:          PR 36
-```
-
-## PR 17 site architecture baseline
-
-Status after PR #185 merges: **PASS**
-
-```text
-Page source files:                    27
 Route patterns:                       27
 Static routes:                        24
 Dynamic route families:                3
 HTML route patterns:                  22
 Machine-readable route patterns:       5
 Duplicate routes:                       0
-Navigation destinations without route: 0
-Declared routes without source:         0
-Unassigned routes after review:         0
+Unassigned routes:                      0
+Routes renamed or removed:              0
+Redirects introduced:                  0
 ```
 
-Approved global information architecture:
+Approved groups:
 
 ```text
-Registry
-  Stablecoins
-  Organizations
-  Events
-
-Learn
-  Guides
-  Glossary
-  Models
-
-Project
-  Methodology
-  Updates
-  About
-
-Utilities
-  Corrections
-  Support
+Registry: Stablecoins, Organizations, Events
+Learn: Guides, Glossary, Models
+Project: Methodology, Updates, About
+Utilities: Corrections, Support
 ```
 
-Route decisions:
+### Stablecoin dossier — PR 18
 
 ```text
-Current routes kept:     27
-Routes renamed:           0
-Routes removed:           0
-Redirects introduced:     0
-Compatibility breaks:     0
+Required dossier sections:           8
+Current field surfaces:            102
+Synthetic required fields:          12
+Total field-to-section rows:        114
+Unassigned fields:                    0
+Deprecated fields:                    0
 ```
 
-## PR 18 stablecoin dossier baseline
-
-Status after PR #186 merges: **PASS**
-
-```text
-Required dossier sections:          8
-Current dossier surface files:      7
-Current section labels found:      13
-Raw field-render occurrences:     118
-Unique current field surfaces:    102
-Synthetic required fields:         12
-Total field-to-section rows:       114
-Unassigned current fields:          0
-Duplicate field IDs:                0
-Deprecated current fields:          0
-Collector or validator failures:    0
-```
-
-Approved section order:
+Required order:
 
 ```text
 Identity and current state
@@ -326,62 +182,34 @@ Known unknowns and coverage
 Corrections and further reading
 ```
 
-Mandatory dossier protections:
+Evidence, known unknowns, all organization relationships, and independent deployment/evidence axes are mandatory.
+
+### Index interactions — PR 19
 
 ```text
-Evidence section required:                  true
-Known unknowns section required:            true
-Corrections and further reading required:   true
-All organization relationships reachable:  true
-Current and historical data kept distinct: true
-Hero metrics remain summaries only:        true
-Deployment semantic axes preserved:          8
-Evidence semantic axes preserved:            8
-Route changes in PR 18:                       0
-Dossier implementation starts:              PR 27
+Index contracts:                    3
+Explicit search fields:            18
+Multi-value filters:               16
+Sort modes:                        15
+Material mobile-row fields:        26
+Comparison-enabled indexes:         1
+Comparison-disabled indexes:        2
 ```
 
-## PR 19 index interaction baseline
+Stablecoin comparison supports two to four records. Organization and event scorecards remain disabled because they would imply false equivalence. Price, market-cap, volume, TVL, APY, safety scores, and investment rankings are outside the comparison contract.
 
-Status after PR #187 merges: **PASS**
+### Meaningful change history — PR 20
 
 ```text
-Index contracts:                  3
-Explicit search fields:          18
-Multi-value filters:             16
-Sort modes:                      15
-Material mobile-row fields:      26
-Comparison-enabled indexes:       1
-Comparison-disabled indexes:      2
-Route changes:                     0
+Approved change types:               8
+Required structured fields:         12
+Legacy update entries preserved:    13
+Legacy entries auto-migrated:         0
+Date signals audited:             1,324
+Invalid date shapes:                  0
 ```
 
-Implementation gaps preserved for PRs 24–26:
-
-```text
-shareable URL state
-browser Back and Forward restoration
-per-filter removal
-Clear all
-stablecoin comparison
-```
-
-Stablecoin comparison:
-
-```text
-Minimum records: 2
-Maximum records: 4
-URL parameter: compare
-Identity key: slug
-Comparison groups: 7
-Excluded market/ranking axes: 8
-```
-
-## PR 20 meaningful change-history baseline
-
-Status after PR #188 merges: **PASS**
-
-Approved public change types:
+Approved types:
 
 ```text
 status_change
@@ -394,164 +222,35 @@ known_unknown_resolved
 copy_only_correction
 ```
 
-Legacy update baseline:
+Review timestamps, source-publication dates, and generated build dates do not create meaningful change entries automatically.
 
-```text
-Legacy entries:                    13
-Legacy categories:                  4
-Duplicate legacy IDs:               0
-Public-copy overlays:              13
-Missing public-copy overlays:       0
-Target-ready legacy entries:        0
-```
-
-Canonical date-signal audit:
-
-```text
-Date signals scanned:             1,324
-Review-only signals:                850
-Source metadata signals:            151
-Historical/effective signals:       323
-Invalid date shapes:                  0
-```
-
-Structured change-entry contract:
-
-```text
-Required fields:                   12
-Public placement surfaces:          4
-Before/after value states:           8
-Effective-date states:               5
-Route changes:                        0
-Public implementation starts:       PR 34
-```
-
-## PR 21 responsive and accessibility baseline
-
-Status after PR #189 merges: **PASS**
-
-Contract totals:
+### Responsive and accessibility — PR 21
 
 ```text
 Responsive bands:                    3
 Page-family contracts:               8
-Protected table source files:       15
-Current protected tables:           25
-Target table transformations:       25
+Protected table kinds:              25
+Target mobile transformations:      25
 Keyboard contracts:                 10
 Announcement contracts:              5
-Source files scanned:               23
+```
+
+Required foundations include 44px targets, 320px reflow, 200% zoom, text-spacing support, forced-colors support, reduced motion, non-color state labels, skip link, current-page state, and full long-identifier access.
+
+### Visual system and mocks — PR 22
+
+```text
+Visual color tokens:                16
+Generated SVG mocks:                10
+Large/desktop-state mocks:           7
+Mobile mocks:                         3
+Required-element omissions:          0
+Prohibited visual-language findings: 0
 Route changes:                        0
+Production UI implementation:        0
 ```
 
-Current implementation baseline:
-
-```text
-Current CSS max-width breakpoints: 980 / 820 / 620 / 560
-Tables using scroll-preserve:       25
-Tables with another mobile form:     0
-Generic column hiding:               0
-Focus-visible rules:                 1
-Language declared:                 true
-Viewport declared:                 true
-Main landmark present:             true
-Primary navigation labelled:       true
-```
-
-Current implementation gaps:
-
-```text
-25 table transformations pending
-skip link missing
-main target missing
-current-page navigation state missing
-reduced-motion rules missing
-forced-colors rules missing
-long-value overflow wrapping missing
-44px target-size rule missing
-```
-
-Approved responsive bands:
-
-```text
-Wide:     1024 CSS px and above
-Medium:   720–1023 CSS px
-Compact:  0–719 CSS px
-```
-
-Every protected table has an explicit target representation:
-
-```text
-record cards
-timeline cards
-definition lists
-relationship cards
-deployment cards
-source cards
-unknown cards
-coverage summaries
-methodology matrix cards
-```
-
-Horizontal scrolling remains available as a fallback but may not be the only compact-screen representation.
-
-Accessibility requirements:
-
-```text
-normal text contrast: 4.5:1
-large text contrast: 3:1
-non-text UI contrast: 3:1
-minimum pointer target: 44 CSS px
-200% zoom support
-320 CSS px reflow support
-text-spacing override support
-forced-colors support
-reduced-motion support
-text labels for every state
-color-only state prohibited
-```
-
-Required interaction contracts:
-
-```text
-skip link
-global navigation
-index search
-index filters
-active-filter removal
-comparison selection
-comparison panel
-local dossier navigation
-disclosure
-copy identifier
-```
-
-Required announcements:
-
-```text
-result count
-active filters
-zero results
-comparison maximum
-copy result
-```
-
-Implementation begins in PR 23, continues through the page-specific UI PRs, and is completed by PRs 35–36.
-
-Authoritative files:
-
-```text
-config/responsive-accessibility-contract.mjs
-scripts/collect-responsive-accessibility-audit.mjs
-scripts/validate-responsive-accessibility-contract.mjs
-docs/architecture/responsive-accessibility-v1.md
-```
-
-## Immediate next work — PR 22
-
-1. Define the visual tokens for background, panels, lines, text, muted text, accent, warnings, errors, links, focus indicators, and state chips.
-2. Define typography scale, spacing scale, border and radius rules, shadow use, content width, and density levels.
-3. Produce representative desktop and mobile image mocks for:
+Approved mock set:
 
 ```text
 stablecoin index desktop
@@ -562,29 +261,59 @@ organization detail
 event detail
 home
 open filter state
-evidence expanded state
+expanded evidence state
 known-unknown warning state
 ```
 
-4. Use complex records with multiple organizations, unknowns, deployments, events, and evidence.
-5. Map every visible mock element to the PR 17–21 contracts.
-6. Show focus state, active-filter state, empty state, expanded evidence, unknown warning, long contract address, and mobile navigation behavior.
-7. Verify that Evidence and Known unknowns remain first-class, visible sections.
-8. Verify that mobile mocks preserve material fields without relying only on horizontal scrolling.
-9. Record explicit approval or rejection for every mock.
-10. Do not implement production UI, add stable assets, select Batch 18, change routes, or deploy production.
+The mock package is generated deterministically from `config/visual-system-contract.mjs`. Evidence and known unknowns remain first-class. Multi-organization context remains visible. The design does not resemble a market, ranking, portfolio, or recommendation interface.
 
-PR 22 completion criteria:
+## Phase 4 implementation sequence
 
 ```text
-visual token contract approved
-all ten required mocks produced and reviewed
-every visible element maps to canonical fields or approved public copy
-desktop and mobile states follow PR 21
-Evidence and Known unknowns remain visible
-multi-organization records do not imply sole responsibility
-no internal enum or work-queue language appears
-Gate D approval is explicit
+PR 23  global shell, grouped navigation, skip link, current-page state
+PR 24  stablecoin index and comparison
+PR 25  organization index
+PR 26  event index
+PR 27  stablecoin dossier — identity and current state
+PR 28  stablecoin dossier — organizations and control
+PR 29  stablecoin dossier — mechanics, reserves, and redemption
+PR 30  stablecoin dossier — deployments and legal context
+PR 31  stablecoin dossier — history and events
+PR 32  stablecoin dossier — evidence
+PR 33  stablecoin dossier — known unknowns, corrections, further reading
+PR 34  meaningful Updates implementation and reviewed legacy migration
+PR 35  complete responsive transformations
+PR 36  complete accessibility and interaction audit
+```
+
+No implementation PR may weaken the Gate C or Gate D contracts to make the page easier to build.
+
+## Immediate next work — PR 23
+
+1. Implement the global shell using the approved visual tokens.
+2. Replace the flat navigation with Registry, Learn, and Project groups.
+3. Keep Corrections as the primary utility and Support as secondary.
+4. Add a skip link and labelled main-content target.
+5. Add current-page navigation state.
+6. Implement the compact disclosure navigation with Escape and focus return.
+7. Add footer access to version, manifest, LLM, AI, methodology, corrections, and support.
+8. Add forced-colors, reduced-motion, focus, long-value wrapping, and 44px target foundations.
+9. Preserve all 27 routes and machine-readable endpoints.
+10. Do not add stable assets, select Batch 18, or publish production.
+
+PR 23 completion criteria:
+
+```text
+Grouped navigation matches the approved site architecture
+Desktop and compact navigation are keyboard-operable
+Skip link and main target work
+Current-page state is programmatically exposed
+Corrections remains visible
+Support remains secondary
+Data access remains available
+Visual tokens are used without weakening contrast
+All routes and canonical counts remain unchanged
+No production deployment occurs
 ```
 
 ## Preserved quality queues
@@ -602,27 +331,15 @@ Deployment verification not recorded:     130
 Deployment source review needed:           15
 ```
 
-These queues may be reduced only by source-backed review. Architecture and UI work must not clear them by defaulting, guessing, or relabeling them as known.
-
-## Later phase gates
-
-```text
-Gate C  taxonomy and data-semantics migration complete — PASS after PR #183
-Gate D  information architecture and mocks approved
-Gate E  core registry UI complete
-Gate F  responsive, accessibility, performance, SEO, and machine-readable hardening complete
-Gate G  all 92 current records audited under the repaired UI
-Gate H  100-record release candidate verified
-Gate I  deliberate production publication and parity verification complete
-```
-
-The final eight records remain blocked until information architecture, UI implementation, hardening, and the later full repaired-UI regression audit are complete.
+Queues may be reduced only through source-backed review. UI work must not clear them by defaulting, guessing, hiding, or relabeling them as known.
 
 ## Growth policy
 
-Routine growth remains paused at 92 assets. The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, hidden known unknowns, erased evidence relations, duplicated public source rows, or reduced evidence requirements.
+Routine growth remains paused at 92 assets. The final eight records remain blocked until implementation, responsive/accessibility hardening, and the complete 92-record repaired-UI audit are finished.
 
-## Publication policy during repair
+The 100 target never permits thin records, unsupported dates, placeholder sources, collapsed organization roles, hidden unknowns, erased evidence relations, duplicated public sources, or reduced evidence requirements.
+
+## Publication policy
 
 ```text
 Automatic production deployment: disabled
@@ -633,8 +350,6 @@ Verified emergency repair: manual emergency publication allowed
 Publication path: manual GitHub Actions workflow only
 Pages project: stable-or-gone
 Production branch: main
-Manual production publication activation — PASS
-Deployment workflow run: 27908380603
 ```
 
 Canonical publication rules remain in `docs/deployment-policy.md`.
@@ -645,9 +360,9 @@ The repair program is complete only when:
 
 - 100 canonical stable assets are present;
 - all public taxonomy axes are consistent;
-- every asset, organization, event, evidence, and deployment route passes audit;
-- no material mobile information is silently suppressed;
-- evidence source identities, evidence relations, and known unknowns remain visible and connected;
+- every record and route passes the repaired-UI audit;
+- no material mobile information is suppressed;
+- evidence identities, evidence relations, and known unknowns remain visible and connected;
 - production identifies one source commit and one canonical data hash;
 - HTML, sitemap, metadata, machine-readable files, and canonical counts agree;
 - the production publication report is recorded.

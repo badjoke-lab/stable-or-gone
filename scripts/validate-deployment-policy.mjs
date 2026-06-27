@@ -25,6 +25,7 @@ const requiredFiles = [
   'docs/deployment-policy.md',
   'docs/cloudflare-pages.md',
   'docs/roadmap.md',
+  'docs/roadmap-publication-state.md',
   'docs/audits/manual-production-deployment.md',
   'docs/audits/manual-production-activation-2026-06-22.md',
   '.github/pull_request_template.md',
@@ -65,7 +66,10 @@ requireText('docs/cloudflare-pages.md', [
 ]);
 
 if (exists('docs/roadmap.md')) {
-  const text = read('docs/roadmap.md');
+  const text = [
+    read('docs/roadmap.md'),
+    exists('docs/roadmap-publication-state.md') ? read('docs/roadmap-publication-state.md') : ''
+  ].join('\n');
   const required = [
     'Automatic production deployment: disabled',
     'Preview branch deployments: disabled',
@@ -74,13 +78,13 @@ if (exists('docs/roadmap.md')) {
     'Deployment workflow run: 27908380603'
   ];
   for (const phrase of required) {
-    if (!text.includes(phrase)) fail(`docs/roadmap.md is missing required manual-publication state: ${phrase}`);
+    if (!text.includes(phrase)) fail(`roadmap publication state is missing required manual-publication text: ${phrase}`);
   }
   if (/Automatic production deployment:\s*enabled/i.test(text)) {
-    fail('docs/roadmap.md must not describe automatic production deployment as enabled');
+    fail('roadmap publication state must not describe automatic production deployment as enabled');
   }
   if (/successful merge to `main` triggers one production deployment/i.test(text)) {
-    fail('docs/roadmap.md still describes automatic publication after main merge');
+    fail('roadmap publication state still describes automatic publication after main merge');
   }
 }
 
