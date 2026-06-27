@@ -4,6 +4,7 @@ import {
   escapeRegExp,
   likelyPublicCopy,
   listSourceFiles,
+  occurrenceDisposition,
   surfaceKind,
   uniqueStrings
 } from './record-public-copy-audit-lib.mjs';
@@ -44,6 +45,7 @@ export function collectRecordPublicCopyOccurrences(root, stablecoins) {
             file,
             line: index + 1,
             surface: surfaceKind(file),
+            disposition: occurrenceDisposition(file),
             stablecoin_id: record.id,
             slug: record.slug,
             term_type: term.type,
@@ -66,6 +68,7 @@ export function collectRecordPublicCopyOccurrences(root, stablecoins) {
     files: filesWithFindings.map((file) => ({
       file,
       surface: surfaceKind(file),
+      disposition: occurrenceDisposition(file),
       occurrences: deduplicated.filter((row) => row.file === file).length,
       likely_public_copy_occurrences: deduplicated.filter((row) => row.file === file && row.likely_public_copy).length,
       stablecoin_ids: uniqueStrings(deduplicated.filter((row) => row.file === file).map((row) => row.stablecoin_id)).sort()
