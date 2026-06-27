@@ -104,7 +104,7 @@
         "sog_src_husd_legal_attestation_status_2026"
       ],
       "review_note": "Monthly attestations and a January 2022 Reserve Accounts Report are historically identified, but the signed report, accountant package, measurement boundary, supply comparison, reserve balance, and durable primary archive remain unrecovered. Secondary legal analysis confirms source loss but cannot substitute for the report.",
-      "next_action": "retain_unresolved_until_primary_report_recovered"
+      "next_action": "investigate_source_status"
     },
     {
       "stablecoin_id": "sog_st_iron",
@@ -139,7 +139,7 @@
         "sog_src_eurt_relevant_information_scope_2026"
       ],
       "review_note": "Tether publishes quarterly consolidated reserve and assurance reports, but reviewed official material does not separately identify EURT assets, EURT liabilities, the EURT issuer boundary, or a final product-specific reconciliation after redemption ended.",
-      "next_action": "retain_unresolved_until_product_specific_scope_recovered"
+      "next_action": "investigate_source_status"
     },
     {
       "stablecoin_id": "sog_st_alusd",
