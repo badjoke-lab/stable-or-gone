@@ -11,6 +11,7 @@ export const dossierSections = Object.freeze([
 
 export const dossierSurfaceFiles = Object.freeze([
   'src/components/StablecoinDetailView.astro',
+  'src/components/StablecoinOrganizationsControl.astro',
   'src/components/StableAssetClassificationRows.astro',
   'src/components/StablecoinValueStateSections.astro',
   'src/components/DeploymentTable.astro',
@@ -22,10 +23,9 @@ export const dossierSurfaceFiles = Object.freeze([
 export const blockSectionAssignments = Object.freeze({
   'src/components/StablecoinDetailView.astro|Identity and current state': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Current mechanics fields': 'how_asset_works',
-  'src/components/StablecoinDetailView.astro|Current organization and governance fields': 'organizations_control',
+  'src/components/StablecoinOrganizationsControl.astro|Organizations and control': 'organizations_control',
   'src/components/StablecoinDetailView.astro|Reserve components': 'how_asset_works',
   'src/components/StablecoinDetailView.astro|Historical model changes': 'history',
-  'src/components/StablecoinDetailView.astro|Organizations and roles': 'organizations_control',
   'src/components/StablecoinDetailView.astro|Record coverage': 'known_unknowns',
   'src/components/StableAssetClassificationRows.astro|embedded': 'identity_current_state',
   'src/components/StablecoinValueStateSections.astro|Reserve profile': 'how_asset_works',
@@ -86,7 +86,7 @@ export const syntheticDossierFields = Object.freeze([
   Object.freeze({ field_id: 'record.route_identity', current_surface: 'stablecoin route and canonical metadata', source: 'stablecoin.slug and stablecoin.id', destination_section: 'identity_current_state', decision: 'keep', required: true, public_label: 'Record identity', value_state: false }),
   Object.freeze({ field_id: 'mechanics.reserve_component_detail', current_surface: 'Reserve components list', source: 'reserve_components.*', destination_section: 'how_asset_works', decision: 'move', required: true, public_label: 'Reserve components', value_state: true }),
   Object.freeze({ field_id: 'history.model_change_detail', current_surface: 'Historical model changes list', source: 'events filtered by model-change semantics', destination_section: 'history', decision: 'consolidate', required: true, public_label: 'Model changes', value_state: true }),
-  Object.freeze({ field_id: 'organizations.relationship_disclaimer', current_surface: 'Organizations and roles note', source: 'approved interface copy', destination_section: 'organizations_control', decision: 'keep', required: true, public_label: 'Relationship scope note', value_state: false }),
+  Object.freeze({ field_id: 'organizations.relationship_disclaimer', current_surface: 'StablecoinOrganizationsControl relationship scope note', source: 'approved interface copy', destination_section: 'organizations_control', decision: 'keep', required: true, public_label: 'Relationship scope note', value_state: false }),
   Object.freeze({ field_id: 'evidence.published_at', current_surface: 'EvidenceRows source metadata', source: 'evidence.published_at', destination_section: 'evidence', decision: 'keep', required: true, public_label: 'Published', value_state: true }),
   Object.freeze({ field_id: 'further_reading.related_registry', current_surface: 'Related pages cards', source: 'stablecoins, primary organization, events', destination_section: 'corrections_further_reading', decision: 'move', required: true, public_label: 'Related registry pages', value_state: false }),
   Object.freeze({ field_id: 'further_reading.guides', current_surface: 'RelatedGuides component', source: 'stablecoinGuideLinks', destination_section: 'corrections_further_reading', decision: 'move', required: true, public_label: 'Related guides', value_state: false }),
