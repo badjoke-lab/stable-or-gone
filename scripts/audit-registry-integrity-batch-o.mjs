@@ -1,5 +1,10 @@
 import fs from 'node:fs';
 
+// Integrity compares canonical groups against generated registry statistics.
+// Rebuild the statistics first so quality-only evidence/date changes cannot leave
+// the checked-in snapshot stale during CI or local validation.
+await import('./generate-registry-stats-batch-o.mjs');
+
 const basePath = new URL('./audit-registry-integrity.mjs', import.meta.url);
 const original = fs.readFileSync(basePath, 'utf8');
 const anchor = "const baseline = readJson('docs/migration/registry-v2-baseline.json');";
