@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import './validate-launch-date-pr220-review.mjs';
+import './validate-terminal-relationship-review.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -26,12 +27,12 @@ requireText('docs/spec-governance.md', [
   'The UI program is paused after PR #216'
 ]);
 requireText('docs/roadmap.md', [
-  'Latest completed work: PR #219',
-  'Active work: PR #220',
-  'Next work: PR #221',
-  'Gate V2-F: deferred and not passed',
-  'Routine record growth: paused at 92 assets',
-  'Missing canonical launch dates:           19 before PR #220'
+  'Latest completed: PR #220',
+  'Active: PR #221',
+  'Next: PR #222',
+  'Gate V2-F: not passed',
+  'Record growth: paused',
+  'Relationship end dates: 4'
 ]);
 requireText('docs/ui-redesign/implementation-plan.md', [
   'canonical implementation schedule — paused',
@@ -42,14 +43,13 @@ requireText('docs/deployment-policy.md', [
   'No release candidate is currently selected'
 ]);
 requireText('docs/quality/non-ui-quality-program.md', [
-  'PR #219–#220 — launch-date boundary-conflict groups',
+  'PR #221 — terminal-date and relationship-end review',
   'Gate V2-F remains pending'
 ]);
 
 const roadmap = read('docs/roadmap.md');
 if (roadmap.includes('Gate V2-F: passed')) failures.push('roadmap must not mark Gate V2-F as passed');
-if (roadmap.includes('Active work: PR #219')) failures.push('roadmap still points to completed PR #219');
-if (!roadmap.includes('GYEN to `2021-03-01`')) failures.push('roadmap is missing the GYEN resolution');
+if (roadmap.includes('Active: PR #220')) failures.push('roadmap still points to completed PR #220');
 
 if (failures.length) {
   console.error('Active workstream validation failed:');
@@ -57,4 +57,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Active workstream validation passed: PR #220 is active and UI Gate V2-F remains deferred.');
+console.log('Active workstream validation passed: PR #221 is active; terminal and relationship queues are aligned.');
