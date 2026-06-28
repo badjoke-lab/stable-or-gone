@@ -28,10 +28,10 @@ Canonical count source: `docs/migration/registry-v3-baseline.json`.
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest completed work: PR #218 — launch-date Category B/D source review
+Latest completed work: PR #219 — historical launch-boundary review
 Current phase: non-UI quality program
-Active work: PR #219 — historical launch-boundary review
-Next work: PR #220 — remaining current launch-boundary review
+Active work: PR #220 — remaining current launch-boundary review
+Next work: PR #221 — terminal-date and relationship-end review
 Detailed UI review: deferred
 Gate V2-A: passed
 Gate V2-B: passed
@@ -80,32 +80,16 @@ The current UI is an intermediate repository state. The 92-record and all-route 
 - replaced the source-missing category with source-backed boundary classifications;
 - changed the launch queue from `B 3 / C 13 / D 4` to `B 3 / C 17 / D 0`.
 
-## Immediate work — PR #219
+### PR #219 — historical launch-boundary review
 
-Review the historical boundary group:
+- reviewed Agora AUSD, DSD, ESD, EURT, GYEN, MIM, and mUSD;
+- resolved GYEN to `2021-03-01` using two official GMO sources;
+- preserved the other six launch dates as `null` with stronger source-backed ranges;
+- reduced the launch-date queue from 20 to 19;
+- increased canonical evidence and evidence relations from 455 to 457;
+- made registry stats, integrity, provenance, runtime loading, and evidence taxonomy derive from the current canonical snapshot.
 
-```text
-Agora AUSD
-Dynamic Set Dollar
-Empty Set Dollar
-Euro Tether
-GYEN
-Magic Internet Money
-mStable USD
-```
-
-PR #219 resolves GYEN to `2021-03-01` using two official GMO sources that state issuance, redemption, and service began on that day. Agora AUSD, DSD, ESD, EURT, MIM, and mUSD remain unresolved because deployment, protocol start, first mint, public announcement, and public availability do not yet collapse into one evidenced day.
-
-Expected PR #219 queue state:
-
-```text
-Missing canonical launch dates: 19
-Category B: 3
-Category C: 16
-Category D: 0
-```
-
-## Next work — PR #220
+## Immediate work — PR #220
 
 Review the remaining current-product and lineage group:
 
@@ -122,12 +106,24 @@ Hyperliquid USDH
 AE Coin
 ```
 
-PR #220 may resolve values or preserve `null`. Network launch, regulatory approval, fund inception, migration, rebrand, or contract deployment must not be substituted for the asset launch without matching evidence.
+Allowed outcomes are a supported canonical launch day, a stronger bounded range, a corrected reason code, or an explicitly preserved `null` with a better evidence trail.
+
+The following substitutions remain prohibited without matching evidence:
+
+- network launch for token launch;
+- regulatory approval for first issuance;
+- fund inception for token launch;
+- contract deployment for public availability;
+- migration or rebrand for original product launch;
+- exchange listing for issuer or protocol launch.
+
+## Next work — PR #221
+
+Recheck the four terminal-date records and seven historical organization-relationship end dates. A future deadline is not a completed terminal event, and a depeg, migration opening, last website capture, or final software commit is not used as a default terminal boundary.
 
 ## Remaining non-UI quality sequence
 
 ```text
-PR #220      remaining launch-date boundary review
 PR #221      terminal-date and relationship-end review
 PR #222      reserve applicability review
 PR #223–225  evidence quality review
@@ -140,7 +136,7 @@ A quality PR may resolve a value or preserve an unknown. Completion means that t
 ## Preserved quality queues
 
 ```text
-Missing canonical launch dates:           19 after PR #219
+Missing canonical launch dates:           19 before PR #220
 Historical terminal dates unresolved:      4
 Historical relationship end dates:         7
 Reserve applicability queue:               12
