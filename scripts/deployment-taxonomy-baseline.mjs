@@ -39,7 +39,6 @@ export const deploymentTaxonomyBaseline = {
     unknown: 6
   },
   canonicality_record_state: {
-    not_recorded: 0,
     recorded: 130
   },
   verification_states: {
