@@ -14,7 +14,7 @@ import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 const root = process.cwd();
 const baseline = loadRegistryV2Baseline(root);
 const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-const verificationReview = read('data/deployment-verification-pr228.json');
+const verificationReview = read('data/deployment-verification-pr229.json');
 const verificationById = new Map(
   Object.entries(verificationReview.status_ids ?? {}).flatMap(([status, ids]) =>
     (ids ?? []).map((id) => [id, status])
@@ -42,7 +42,7 @@ function countBy(sourceRows, getter) {
 }
 
 const records = rows.map((row) => {
-  const contractIdentityState = getContractIdentityState(row.contract_address);
+  const contractIdentityState = getContractIdentityState(row.contract_address, row.deployment_identifier);
   return {
     id: row.id,
     file: row.__file,
@@ -59,6 +59,8 @@ const records = rows.map((row) => {
     canonicality_record_state: getDeploymentCanonicalityRecordState(row.canonicality),
     verification_status: row.verification_status ?? null,
     verification_state: getDeploymentVerificationState(row),
+    identifier_type: row.identifier_type ?? null,
+    deployment_identifier: row.deployment_identifier ?? row.contract_address ?? null,
     contract_address: row.contract_address ?? null,
     contract_identity_state: contractIdentityState,
     freeze_capability: row.freeze_capability ?? null,
@@ -72,7 +74,7 @@ const records = rows.map((row) => {
       !row.deployment_type ? 'missing_deployment_type' : null,
       !row.status ? 'missing_status' : null,
       row.canonicality === undefined ? 'canonicality_not_recorded' : null,
-      row.verification_status === undefined ? 'verification_status_not_recorded' : null,
+      row.verification_status === undefined && !verificationById.has(row.id) ? 'verification_status_not_recorded' : null,
       contractIdentityState === 'review_needed' || contractIdentityState === 'not_applicable_or_review_unresolved' ? 'contract_review_needed' : null,
       !Array.isArray(row.evidence_ids) || row.evidence_ids.length === 0 ? 'missing_evidence_ids' : null
     ].filter(Boolean)
