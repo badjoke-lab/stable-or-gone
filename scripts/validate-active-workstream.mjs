@@ -28,12 +28,12 @@ requireText('docs/spec-governance.md', [
 ]);
 
 requireText('docs/roadmap.md', [
-  'Latest completed: PR 218',
-  'Active: PR 219',
-  'Next: PR 220',
-  'Gate V2-F: not passed',
-  'Stable assets: 92',
-  'Record growth: paused'
+  'Latest completed work: PR #218',
+  'Active work: PR #219',
+  'Next work: PR #220',
+  'Gate V2-F: deferred and not passed',
+  'Routine record growth: paused at 92 assets',
+  'Missing canonical launch dates:           19 after PR #219'
 ]);
 
 requireText('docs/ui-redesign/implementation-plan.md', [
@@ -57,7 +57,8 @@ requireText('docs/quality/non-ui-quality-program.md', [
 
 const roadmap = read('docs/roadmap.md');
 if (/Gate V2-F:\s*passed/i.test(roadmap)) failures.push('roadmap must not mark Gate V2-F as passed');
-if (/Active:\s*PR 21[78]/i.test(roadmap)) failures.push('roadmap still points to a completed work item');
+if (/Active work:\s*PR #21[78]/i.test(roadmap)) failures.push('roadmap still points to a completed work item');
+if (!roadmap.includes('GYEN to `2021-03-01`')) failures.push('roadmap is missing the PR #219 GYEN resolution');
 
 if (failures.length) {
   console.error('Active workstream validation failed:');
@@ -65,4 +66,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Active workstream validation passed: PR 219 is active and UI Gate V2-F remains deferred.');
+console.log('Active workstream validation passed: PR #219 is active, GYEN is resolved, and UI Gate V2-F remains deferred.');
