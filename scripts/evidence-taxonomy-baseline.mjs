@@ -26,12 +26,12 @@ export const evidenceTaxonomyBaseline = {
     technical_primary: 31
   },
   primary_state: { primary: 433, secondary: 24 },
-  reliability: { high: 358, medium: 63, unknown: 36 },
+  reliability: { high: 376, medium: 81 },
   archive_state: { archive_index: 284, not_recorded: 173 },
   relation_kind: { explicit_v2: 363, legacy_subject_projection: 94 },
   multi_subject_records: 423,
   multi_claim_records: 309,
   duplicate_urls: 32,
   duplicate_url_title_pairs: 7,
-  polluted_reliability_records: 36
+  polluted_reliability_records: 0
 };
