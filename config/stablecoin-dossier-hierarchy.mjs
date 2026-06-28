@@ -23,6 +23,7 @@ export const dossierSurfaceFiles = Object.freeze([
 export const blockSectionAssignments = Object.freeze({
   'src/components/StablecoinDetailView.astro|Identity and current state': 'identity_current_state',
   'src/components/StablecoinDetailView.astro|Current mechanics fields': 'how_asset_works',
+  'src/components/StablecoinDetailView.astro|How the asset works': 'how_asset_works',
   'src/components/StablecoinOrganizationsControl.astro|Organizations and control': 'organizations_control',
   'src/components/StablecoinDetailView.astro|Reserve components': 'how_asset_works',
   'src/components/StablecoinDetailView.astro|Historical model changes': 'history',
@@ -75,6 +76,7 @@ export const fieldDecisionOverrides = Object.freeze({
   'src/components/StablecoinDetailView.astro|Hero metrics|Sources': 'consolidate',
   'src/components/StableAssetClassificationRows.astro|embedded|Reference target': 'consolidate',
   'src/components/StablecoinDetailView.astro|Overview|Reference target': 'consolidate',
+  'src/components/StablecoinDetailView.astro|How the asset works|Reference target': 'consolidate',
   'src/components/StablecoinDetailView.astro|Overview|Display selection mode': 'move',
   'src/components/StablecoinDetailView.astro|Record coverage|Section': 'replace',
   'src/components/StablecoinDetailView.astro|Record coverage|Entries': 'replace'
