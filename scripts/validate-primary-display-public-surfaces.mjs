@@ -31,7 +31,7 @@ const requiredUsage = {
   ],
   'src/pages/issuer/[slug].astro': [
     'resolvePrimaryRelationshipForStablecoin',
-    'Primary displays',
+    'primaryDisplayRelationshipCount',
     'Primary display relationships',
     'Display priority',
     'Additional relationship'
