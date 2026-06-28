@@ -1,31 +1,70 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import MetricCard from '../components/MetricCard.astro';
+import SupportBanner from '../components/SupportBanner.astro';
+import TickerBadge from '../components/TickerBadge.astro';
+import '../styles/home-v2.css';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { formatPublicBackingModelLabel } from '../utils/backingModel';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
 import { getGuide } from '../data/guideCatalog';
+import { eventPublicCopy } from '../data/eventPublicCopy';
 import { getStablecoins, getOrganizations, getRelationships, getEvents } from '../lib/data/registry';
 import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
 const relationships = getRelationships();
-const organizationById = new Map(organizations.map((organization) => [organization.id, organization.name] as const));
 const events = getEvents();
 const evidenceSummary = getEvidenceSourceIdentitySummary();
+const organizationById = new Map(organizations.map((organization) => [organization.id, organization.name] as const));
 const primaryOrganizationName = (stablecoinId: string) => {
   const relationship = resolvePrimaryRelationshipForStablecoin(stablecoinId, relationships).relationship;
   return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
 };
+
 const featuredGuides = [
-  getGuide('genius-act-stablecoins'),
-  getGuide('mica-stablecoins'),
-  getGuide('jpyc-vs-jpysc')
+  { guide: getGuide('genius-act-stablecoins'), theme: 'us', label: 'United States' },
+  { guide: getGuide('mica-stablecoins'), theme: 'eu', label: 'European Union' },
+  { guide: getGuide('jpyc-vs-jpysc'), theme: 'jp', label: 'Japan' }
 ];
 
+const selectedSlugs = ['usdt', 'usdc', 'dai', 'ust', 'busd', 'frax', 'tusd', 'fdusd', 'pyusd', 'usdd'];
+const stablecoinBySlug = new Map(stablecoins.map((coin) => [coin.slug, coin] as const));
+const selectedStablecoins = selectedSlugs.flatMap((slug) => {
+  const coin = stablecoinBySlug.get(slug);
+  return coin ? [coin] : [];
+});
+
+const searchRecords = [
+  ...stablecoins.map((coin) => ({
+    type: 'Stablecoin',
+    title: coin.symbol ? `${coin.name} (${coin.symbol})` : coin.name,
+    meta: `${formatLifecycleLabel(coin.lifecycle_status)} · ${formatReferenceTargetLabel(coin)}`,
+    href: `/stablecoin/${coin.slug}/`,
+    search: [coin.name, coin.symbol, ...(coin.aliases ?? []), coin.summary, formatLifecycleLabel(coin.lifecycle_status), formatReferenceTargetLabel(coin), formatPublicBackingModelLabel(coin)].filter(Boolean).join(' ')
+  })),
+  ...organizations.map((organization) => ({
+    type: 'Organization',
+    title: organization.name,
+    meta: String(organization.organization_type ?? organization.legacy_issuer_type ?? 'Organization').replaceAll('_', ' '),
+    href: `/issuer/${organization.slug}/`,
+    search: [organization.name, organization.slug, organization.organization_type, organization.legacy_issuer_type].filter(Boolean).join(' ')
+  })),
+  ...events.map((event) => ({
+    type: 'Event',
+    title: eventPublicCopy[event.id]?.title ?? event.title,
+    meta: event.event_date ? `Event · ${event.event_date}` : 'Event · Date not recorded',
+    href: `/event/${event.id}/`,
+    search: [eventPublicCopy[event.id]?.title, eventPublicCopy[event.id]?.description, event.title, event.description, event.id, event.event_date].filter(Boolean).join(' ')
+  }))
+].map((record) => ({ ...record, search: record.search.normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, ' ').trim() }));
+const searchDataJson = JSON.stringify(searchRecords).replace(/</g, '\\u003c');
+
 const title = 'Stable or Gone — Stablecoin History Registry and Guides';
-const description = 'Explore stablecoin histories, depegs, launches, wind-downs, failures, issuers, reserve information, redemption terms, regulation guides, asset comparisons, and the sources behind each record.';
+const description = 'Explore stablecoin histories, depegs, launches, wind-downs, failures, organizations, reserve information, redemption terms, regulation guides, and the sources behind each record.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -33,44 +72,115 @@ const jsonLd = {
   url: 'https://sog.badjoke-lab.com/',
   description,
   inLanguage: 'en',
-  about: ['stablecoins', 'depeg events', 'reserve disclosure', 'stablecoin history', 'stablecoin regulation'],
-  hasPart: featuredGuides.map((guide) => ({
-    '@type': 'Article',
-    name: guide.title,
-    url: `https://sog.badjoke-lab.com/guides/${guide.slug}/`
-  }))
+  about: ['stablecoins', 'stablecoin events', 'stablecoin organizations', 'reserve disclosure', 'stablecoin history', 'stablecoin regulation'],
+  hasPart: featuredGuides.map(({ guide }) => ({ '@type': 'Article', name: guide.title, url: `https://sog.badjoke-lab.com/guides/${guide.slug}/` }))
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main"><div class="prompt">Stablecoin history archive</div><h1>Stablecoin histories, major events, sources, and explainers.</h1><p>Follow launches, depegs, wind-downs, migrations, failures, reserve disclosures, redemption terms, and the regulatory structures around stablecoins.</p></div>
-    <div class="panel stats" aria-label="Registry summary"><div class="stat"><span>Stablecoins</span><strong>{stablecoins.length}</strong></div><div class="stat"><span>Organizations</span><strong>{organizations.length}</strong></div><div class="stat"><span>Events</span><strong>{events.length}</strong></div><div class="stat"><span>Source identities</span><strong>{evidenceSummary.source_identities}</strong></div></div>
-  </section>
+  <div class="home-v2">
+    <PageHero
+      className="home-hero"
+      eyebrow="Stablecoin history registry"
+      title="Trace stablecoins"
+      titleAccent="with the evidence."
+      description="Explore stablecoin records, the organizations connected to them, and the events that changed their lifecycle. Every public claim is tied to canonical data or source-backed editorial context."
+    >
+      <div slot="visual" class="home-hero__visual">
+        <div class="home-hero__grid"></div>
+        <div class="home-coin-stack"><span></span><span></span><span></span><span></span></div>
+      </div>
+    </PageHero>
 
-  <section class="section-grid" aria-label="Main sections">
-    <a class="panel mini-card" href="/stablecoins/"><h2>Browse stablecoins</h2><p>Compare lifecycle, issuance, organizations, reference target, backing model, redemption access, and history.</p></a>
-    <a class="panel mini-card" href="/events/"><h2>Explore events</h2><p>Review depegs, launches, regulatory actions, migrations, wind-downs, and collapses.</p></a>
-    <a class="panel mini-card" href="/issuers/"><h2>View organizations</h2><p>See the companies, protocols, networks, and reserve organizations connected to each stablecoin.</p></a>
-    <a class="panel mini-card" href="/guides/"><h2>Browse all guides</h2><p>Understand regulation, legal and reserve structures, depegs, redemption, and lifecycle terms.</p></a>
-  </section>
+    <section class="home-search ui-panel" aria-labelledby="home-search-title" data-home-search>
+      <h2 id="home-search-title" class="visually-hidden">Search the registry</h2>
+      <form class="home-search__form" action="/stablecoins/" method="get" data-home-search-form>
+        <input class="ui-field home-search__field" type="search" name="q" placeholder="Search stablecoins, organizations, and events" autocomplete="off" aria-controls="home-search-results" aria-expanded="false" data-home-search-input />
+        <button class="ui-button ui-button--primary" type="submit">Search registry</button>
+      </form>
+      <div class="home-search__popular"><span>Popular:</span>{['USDT', 'USDC', 'DAI', 'UST'].map((term) => <button type="button" data-home-search-term={term}>{term}</button>)}</div>
+      <div class="home-search__results" id="home-search-results" role="region" aria-live="polite" hidden data-home-search-results></div>
+    </section>
 
-  <section aria-labelledby="featured-guides-title">
-    <div class="panel registry">
-      <div class="bar" id="featured-guides-title">Current regulatory and comparison guides</div>
-      <p>Dated explainers separate enacted rules, implementation stages, issuer claims, asset structures, and unresolved questions.</p>
-    </div>
-    <div class="section-grid">
-      {featuredGuides.map((guide) => (
-        <a class="panel mini-card" href={`/guides/${guide.slug}/`}>
-          <h2>{guide.title}</h2>
-          <p>{guide.summary}</p>
-          <p><small>Information current through {guide.informationCurrentThrough}</small></p>
-        </a>
-      ))}
-    </div>
-  </section>
+    <section class="home-metrics" aria-label="Canonical registry totals">
+      <MetricCard label="Stablecoins" value={stablecoins.length} detail="Canonical asset records" href="/stablecoins/" icon="S" />
+      <MetricCard label="Organizations" value={organizations.length} detail="Connected legal and protocol entities" href="/issuers/" icon="O" />
+      <MetricCard label="Events" value={events.length} detail="Lifecycle and historical records" href="/events/" icon="E" />
+      <MetricCard label="Source identities" value={evidenceSummary.source_identities} detail="Deduplicated public source records" href="/methodology/" icon="✓" />
+    </section>
 
-  <section class="panel registry"><div class="bar">Selected stablecoin records</div><table data-table-kind="home-selected-stablecoins" data-mobile-table="scroll-preserve"><thead><tr><th>Name</th><th>Symbol</th><th>Reference target</th><th>Model</th><th>Lifecycle</th><th>Issuance</th><th>Primary organization</th></tr></thead><tbody>{stablecoins.slice(0, 10).map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td><td>{coin.symbol ?? '—'}</td><td>{formatReferenceTargetLabel(coin)}</td><td>{formatPublicBackingModelLabel(coin)}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{primaryOrganizationName(coin.id)}</td></tr>))}</tbody></table></section>
+    <section class="home-entry-section ui-panel" aria-labelledby="home-entry-title">
+      <div class="home-section-heading"><div><h2 id="home-entry-title">Explore the registry</h2><p>Start with records, organizations, events, or explanatory guides.</p></div></div>
+      <div class="home-entry-grid">
+        <a class="home-entry-card ui-panel" href="/stablecoins/"><span class="home-entry-card__icon" aria-hidden="true">S</span><h3>Stablecoins</h3><p>Compare lifecycle, issuance, reference target, model, organizations, redemption access, and history.</p><span>Browse stablecoins →</span></a>
+        <a class="home-entry-card ui-panel" href="/issuers/"><span class="home-entry-card__icon" aria-hidden="true">O</span><h3>Organizations</h3><p>Review companies, protocols, networks, custodians, reserve organizations, and their recorded roles.</p><span>Browse organizations →</span></a>
+        <a class="home-entry-card ui-panel" href="/events/"><span class="home-entry-card__icon" aria-hidden="true">E</span><h3>Events</h3><p>Follow launches, depegs, regulatory actions, migrations, wind-downs, and collapses.</p><span>Browse events →</span></a>
+        <a class="home-entry-card ui-panel" href="/guides/"><span class="home-entry-card__icon" aria-hidden="true">G</span><h3>Guides</h3><p>Understand regulation, reserve structures, redemption, lifecycle terms, and asset differences.</p><span>Browse guides →</span></a>
+      </div>
+    </section>
 
-  <section class="panel support-callout support-callout-home" aria-labelledby="support-home-title"><div><div class="prompt">Support the archive</div><h2 id="support-home-title">Help keep the records current</h2><p>Support helps cover research, source checks, link maintenance, and new records. It does not affect how any stablecoin is described.</p></div><a class="support-callout-action" href="/support/">Support SOG</a></section>
+    <section class="home-guides ui-panel" aria-labelledby="home-guides-title">
+      <div class="home-section-heading"><div><h2 id="home-guides-title">Current guides</h2><p>Dated explainers separate enacted rules, implementation stages, asset structures, and unresolved questions.</p></div><a href="/guides/">All guides →</a></div>
+      <div class="home-guide-grid">
+        {featuredGuides.map(({ guide, theme, label }) => (
+          <a class="home-guide-card" data-theme={theme} href={`/guides/${guide.slug}/`}>
+            <span class="home-guide-card__eyebrow">{label}</span>
+            <h3>{guide.title}</h3>
+            <p>{guide.summary}</p>
+            <small>Information current through {guide.informationCurrentThrough}</small>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="home-selected ui-panel" aria-labelledby="home-selected-title">
+      <div class="home-section-heading"><div><h2 id="home-selected-title">Selected stablecoin records</h2><p>A fixed cross-section of major active, restricted, discontinued, and failed records. Selection is defined by slug, not array order.</p></div><a href="/stablecoins/">View all {stablecoins.length} →</a></div>
+      <div class="home-selected__table-wrap">
+        <table data-table-kind="home-selected-stablecoins" data-mobile-table="paired-cards">
+          <caption class="visually-hidden">Selected stablecoin records with lifecycle, issuance, reference target, model, and primary organization.</caption>
+          <thead><tr><th>Stablecoin</th><th>Reference target</th><th>Model</th><th>Lifecycle</th><th>Issuance</th><th>Primary organization</th></tr></thead>
+          <tbody>{selectedStablecoins.map((coin) => (<tr><td><a href={`/stablecoin/${coin.slug}/`}><TickerBadge symbol={coin.symbol ?? coin.name} label={`${coin.name} ticker badge`} size="small" />{coin.name}</a></td><td>{formatReferenceTargetLabel(coin)}</td><td>{formatPublicBackingModelLabel(coin)}</td><td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td><td>{formatIssuanceLabel(coin.issuance_status)}</td><td>{primaryOrganizationName(coin.id)}</td></tr>))}</tbody>
+        </table>
+      </div>
+      <div class="home-selected__cards" aria-label="Selected stablecoin compact cards">
+        {selectedStablecoins.map((coin) => (
+          <article class="home-selected-card ui-panel">
+            <div class="home-selected-card__header"><TickerBadge symbol={coin.symbol ?? coin.name} label={`${coin.name} ticker badge`} /><div><strong><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></strong><span>{coin.symbol ?? 'Symbol not recorded'}</span></div></div>
+            <dl><div><dt>Reference target</dt><dd>{formatReferenceTargetLabel(coin)}</dd></div><div><dt>Model</dt><dd>{formatPublicBackingModelLabel(coin)}</dd></div><div><dt>Lifecycle</dt><dd>{formatLifecycleLabel(coin.lifecycle_status)}</dd></div><div><dt>Issuance</dt><dd>{formatIssuanceLabel(coin.issuance_status)}</dd></div><div><dt>Primary organization</dt><dd>{primaryOrganizationName(coin.id)}</dd></div></dl>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <SupportBanner title="Help keep the records current" description="Support helps cover research, source checks, link maintenance, and new records without changing how any stablecoin is described." actionLabel="Support SOG" actionHref="/support/" />
+  </div>
+
+  <script id="home-search-data" type="application/json" set:html={searchDataJson}></script>
+  <script>
+    type HomeSearchRecord = { type: string; title: string; meta: string; href: string; search: string };
+    const root = document.querySelector('[data-home-search]');
+    const input = root?.querySelector('[data-home-search-input]');
+    const form = root?.querySelector('[data-home-search-form]');
+    const results = root?.querySelector('[data-home-search-results]');
+    const dataElement = document.getElementById('home-search-data');
+    let records: HomeSearchRecord[] = [];
+    try { records = JSON.parse(dataElement?.textContent || '[]') as HomeSearchRecord[]; } catch { records = []; }
+    const entities: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    const escapeHtml = (value: unknown): string => String(value).replace(/[&<>"']/g, (character) => entities[character] ?? character);
+    const search = (): HomeSearchRecord[] => {
+      if (!(input instanceof HTMLInputElement) || !(results instanceof HTMLElement)) return [];
+      const query = input.value.normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
+      if (!query) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); results.innerHTML = ''; return []; }
+      const matches = records.filter((record) => record.search.includes(query) || record.title.toLocaleLowerCase().includes(query)).sort((left, right) => left.type.localeCompare(right.type) || left.title.localeCompare(right.title)).slice(0, 12);
+      const items = matches.map((record) => `<a class="home-search__record" href="${escapeHtml(record.href)}"><span class="home-search__type">${escapeHtml(record.type)}</span><span class="home-search__copy"><strong>${escapeHtml(record.title)}</strong><span>${escapeHtml(record.meta)}</span></span><span aria-hidden="true">→</span></a>`).join('');
+      results.innerHTML = `<div class="home-search__summary">${matches.length ? `${matches.length} matching records` : 'No matching records'}</div>${items}`;
+      results.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      return matches;
+    };
+    input?.addEventListener('input', search);
+    form?.addEventListener('submit', (event) => { const matches = search(); const first = matches[0]; if (matches.length === 1 && first) { event.preventDefault(); window.location.href = first.href; } });
+    root?.querySelectorAll('[data-home-search-term]').forEach((button) => button.addEventListener('click', () => { if (!(button instanceof HTMLButtonElement) || !(input instanceof HTMLInputElement)) return; input.value = button.dataset.homeSearchTerm || ''; input.focus(); search(); }));
+    root?.addEventListener('keydown', (event) => { if (event instanceof KeyboardEvent && event.key === 'Escape' && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); input.focus(); } });
+    document.addEventListener('click', (event) => { if (root instanceof HTMLElement && event.target instanceof Node && !root.contains(event.target) && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); } });
+  </script>
 </BaseLayout>
