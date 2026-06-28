@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import './validate-launch-date-pr220-review.mjs';
 import './validate-terminal-relationship-review.mjs';
-import './collect-pr223.mjs';
+import './validate-evidence-reliability-pr223.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -28,13 +28,13 @@ requireText('docs/spec-governance.md', [
   'The UI program is paused after PR #216'
 ]);
 requireText('docs/roadmap.md', [
-  'Latest completed: PR #221',
-  'Active: PR #222',
-  'Next: PR #223',
+  'Latest completed: PR #222',
+  'Active: PR #223',
+  'Next: PR #224',
   'Gate V2-F: not passed',
   'Record growth: paused',
-  'Not applicable by design: 10',
-  'Source status unresolved: 2'
+  'Reviewed evidence records: 36',
+  'Unresolved: 0'
 ]);
 requireText('docs/ui-redesign/implementation-plan.md', [
   'canonical implementation schedule — paused',
@@ -45,19 +45,19 @@ requireText('docs/deployment-policy.md', [
   'No release candidate is currently selected'
 ]);
 requireText('docs/quality/non-ui-quality-program.md', [
-  'PR #222 — reserve applicability review',
+  'PR #223–#225 — evidence quality review',
   'Gate V2-F remains pending'
 ]);
-requireText('docs/quality/reserve-applicability-review-2026-06-28.md', [
-  'Reserve applicability total: 12',
-  'Not applicable by design: 10',
-  'Source status unresolved: 2',
-  'Report expected but missing: 0'
+requireText('docs/quality/evidence-reliability-review-2026-06-28.md', [
+  'Reviewed records: 36',
+  'High:             18',
+  'Medium:           18',
+  'Unknown:           0'
 ]);
 
 const roadmap = read('docs/roadmap.md');
 if (roadmap.includes('Gate V2-F: passed')) failures.push('roadmap must not mark Gate V2-F as passed');
-if (roadmap.includes('Active: PR #221')) failures.push('roadmap still points to completed PR #221');
+if (roadmap.includes('Active: PR #222')) failures.push('roadmap still points to completed PR #222');
 
 if (failures.length) {
   console.error('Active workstream validation failed:');
@@ -65,4 +65,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Active workstream validation passed: PR #222 is active; PR #223 evidence inventory generated.');
+console.log('Active workstream validation passed: PR #223 is active; evidence reliability unknown count is zero.');
