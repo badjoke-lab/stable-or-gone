@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-06-28",
+  "source_review": "docs/quality/deployment-canonicality-batches-review-2026-06-28.md",
+  "reviewed_source_files": [
+    "data/deployments-batch-a.json",
+    "data/deployments-batch-b.json",
+    "data/deployments-batch-c.json",
+    "data/deployments-batch-d.json",
+    "data/deployments-batch-e.json"
+  ],
+  "reviewed_total": 28,
+  "decision_counts": {
+    "canonical_bridge": 3,
+    "issuer_native": 5,
+    "legacy": 8,
+    "native": 9,
+    "synthetic": 1,
+    "unknown": 2
+  },
+  "expected_registry_counts": {
+    "canonical_bridge": 5,
+    "issuer_native": 60,
+    "legacy": 18,
+    "native": 40,
+    "synthetic": 1,
+    "unknown": 6
+  },
+  "expected_record_state_counts": {
+    "recorded": 130,
+    "not_recorded": 0
+  },
+  "canonical_bridge_ids": [
+    "sog_dep_usd0_arbitrum_batch_c",
+    "sog_dep_usd0_base_batch_c",
+    "sog_dep_usd0_bnb_batch_c"
+  ],
+  "issuer_native_ids": [
+    "sog_dep_eurs_ethereum_batch_e",
+    "sog_dep_eurs_polygon_batch_e",
+    "sog_dep_eurs_algorand_batch_e",
+    "sog_dep_eurs_xrpl_batch_e",
+    "sog_dep_eurs_xdc_batch_e"
+  ],
+  "legacy_ids": [
+    "sog_dep_fei_ethereum",
+    "sog_dep_usdn_waves",
+    "sog_dep_sai_ethereum_batch_d",
+    "sog_dep_iron_bnb_batch_d",
+    "sog_dep_iron_polygon_batch_d",
+    "sog_dep_musd_ethereum_batch_d",
+    "sog_dep_eurt_ethereum_batch_e",
+    "sog_dep_eurt_omni_batch_e"
+  ],
+  "native_ids": [
+    "sog_dep_mim_ethereum",
+    "sog_dep_rai_ethereum",
+    "sog_dep_paxg_ethereum",
+    "sog_dep_xaut_ethereum",
+    "sog_dep_gho_ethereum_batch_c",
+    "sog_dep_bold_ethereum_batch_c",
+    "sog_dep_usd0_ethereum_batch_c",
+    "sog_dep_usr_ethereum_batch_c",
+    "sog_dep_usdm_celo_batch_e"
+  ],
+  "synthetic_ids": [
+    "sog_dep_alusd_ethereum_batch_e"
+  ],
+  "unknown_ids": [
+    "sog_dep_eurs_arbitrum_batch_e",
+    "sog_dep_eurs_gnosis_batch_e"
+  ],
+  "policy": {
+    "all_deployments_must_record_canonicality": true,
+    "officially_listed_bridge_is_not_automatically_canonical": true,
+    "synthetic_is_distinct_from_protocol_native": true,
+    "historical_issuance_is_recorded_as_legacy": true,
+    "canonical_bridge_requires_reviewed_official_representation": true,
+    "explicit_unknown_is_preferred_to_unrecorded_or_guessed": true,
+    "verification_and_contract_identity_remain_deferred": true
+  }
+}
