@@ -196,10 +196,7 @@ export function getNetworkIdentityStateLabel(value) {
 
 export function getDeploymentVerificationState(deployment) {
   const explicit = deployment?.verification_status;
-  if (explicit === 'verified') return 'verified';
-  if (explicit === 'review_needed') return 'review_needed';
-  if (explicit === 'not_recorded') return 'not_recorded';
-  if (explicit === 'unknown') return 'unknown';
+  if (deploymentVerificationStates.some((entry) => entry.value === explicit)) return explicit;
 
   const contractState = getContractIdentityState(deployment?.contract_address);
   if (contractState === 'recorded_identifier') return 'identifier_recorded_unverified';
