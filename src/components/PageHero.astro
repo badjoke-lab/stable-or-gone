@@ -10,7 +10,8 @@ interface Props {
 
 const { title, titleAccent, description, eyebrow, compact = false, className = '' } = Astro.props;
 const classes = className.split(/\s+/);
-const usesApprovedVisual = classes.includes('stablecoin-dossier-hero') || classes.includes('home-hero');
+const usesStablecoinIdentity = classes.includes('stablecoin-dossier-hero');
+const usesApprovedVisual = (usesStablecoinIdentity && true) || classes.includes('home-hero');
 const heroStyle = usesApprovedVisual ? undefined : 'grid-template-columns:minmax(0,1fr)';
 ---
 <header class:list={['page-hero', compact && 'page-hero--compact', className]} style={heroStyle}>
