@@ -15,8 +15,6 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
-      - name: Collect PR 224 placeholder inventory
-        run: node scripts/collect-pr224.mjs > pr224-evidence.txt
       - name: Run build
         shell: bash
         run: |
@@ -35,6 +33,4 @@ jobs:
           path: |
             stablecoin-build.log
             stablecoin-consistency.log
-            pr224-evidence.txt
-            data/generated/value-state-migration.json
           if-no-files-found: error
