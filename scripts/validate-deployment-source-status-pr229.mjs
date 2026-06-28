@@ -41,6 +41,7 @@ for (const item of reviewed) {
   const identifier = row.deployment_identifier ?? row.contract_address;
   if (identifier !== item.identifier) fail(`${item.id}: canonical identifier ${identifier} differs from reviewed identifier ${item.identifier}`);
   if (row.identifier_type !== item.identifier_type) fail(`${item.id}: identifier_type differs from reviewed value`);
+  if (row.verification_status !== 'verified') fail(`${item.id}: canonical verification_status must be verified`);
   if (typeof item.source_url !== 'string' || !item.source_url.startsWith('https://')) fail(`${item.id}: reviewed source must use HTTPS`);
   if (!Array.isArray(row.evidence_ids) || row.evidence_ids.length === 0) fail(`${item.id}: canonical evidence relation missing`);
 }
