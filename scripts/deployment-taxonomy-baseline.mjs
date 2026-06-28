@@ -32,14 +32,14 @@ export const deploymentTaxonomyBaseline = {
   },
   canonicality: {
     canonical_bridge: 2,
-    issuer_native: 30,
-    legacy: 7,
-    native: 22,
-    unknown: 69
+    issuer_native: 55,
+    legacy: 10,
+    native: 31,
+    unknown: 32
   },
   canonicality_record_state: {
-    not_recorded: 67,
-    recorded: 63
+    not_recorded: 28,
+    recorded: 102
   },
   verification_states: {
     identifier_recorded_unverified: 45,
