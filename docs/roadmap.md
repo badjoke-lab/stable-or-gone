@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #223
-Active: PR #224
-Next: PR #225
+Latest completed: PR #224
+Active: PR #225
+Next: PR #226
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: paused
@@ -43,27 +43,33 @@ PR #220 remaining launch-boundary review
 PR #221 terminal and relationship-end review
 PR #222 reserve applicability review
 PR #223 evidence reliability review
+PR #224 direct workflow placeholder review
 ```
 
-## PR #224
+## PR #225
+
+Evidence traceability checkpoint:
 
 ```text
-Total findings: 112
-Replaceable after source review: 67
-Intentionally unknown after review: 0
-Invalid placeholder encoding: 45
+Canonical evidence records: 457
+Public source identities: 412
+Evidence relations: 457
+Approved identity groups: 32
+Approved alias IDs: 45
+Public duplicate URL groups: 0
+Orphan relation sources: 0
+Invalid subject references: 0
 ```
 
-Classification does not resolve or replace the underlying canonical facts. Deployment resolution remains scheduled for PR #226–#229. Invalid refers to field encoding, not automatically to the whole record.
+Canonical evidence history remains append-only. Public deduplication occurs only through reviewed source-identity groups, and all relation unions must survive the projection.
 
-Specification: `docs/quality/direct-workflow-placeholder-review-2026-06-28.md`
-Manifest: `data/quality/direct-workflow-placeholder-review.json`
-Validator: `scripts/validate-direct-workflow-placeholders-pr224.mjs`
+Specification: `docs/quality/evidence-traceability-review-2026-06-28.md`
+Manifest: `data/quality/evidence-traceability-pr225.json`
+Validator: `scripts/validate-evidence-traceability-pr225.mjs`
 
 ## Remaining sequence
 
 ```text
-PR #225 evidence traceability and duplicate invariants
 PR #226-229 deployment quality
 PR #230-232 review-only monitoring
 ```
