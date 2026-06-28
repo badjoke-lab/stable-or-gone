@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import MetricCard from '../../components/MetricCard.astro';
 import OrganizationIndexRow from '../../components/OrganizationIndexRow.astro';
 import OrganizationIndexCard from '../../components/OrganizationIndexCard.astro';
 import '../../styles/organization-index.css';
@@ -71,19 +73,28 @@ const filters = [
   { id: 'role', label: 'Functional role', options: unique(records.flatMap((record) => record.roles)).sort().map((value) => option(value, getFunctionalRoleLabel(value))) },
   { id: 'relationship_status', label: 'Relationship state', options: unique(records.flatMap((record) => record.relationshipStatuses)).sort().map((value) => option(value, getRelationshipStatusLabel(value))) }
 ];
+const connectedAssetCount = new Set(relationships.map((relationship) => relationship.stablecoin_id)).size;
+const sourceIdentityCount = new Set(evidenceRelations.filter((relation) => relation.organization_ids.length > 0).map((relation) => relation.evidence_id)).size;
 const title = 'Organizations — Stable or Gone';
 const description = 'Browse organizations connected to stablecoin records, including category, jurisdiction, functional roles, relationship states, connected assets, and evidence.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Organizations', url: 'https://sog.badjoke-lab.com/issuers/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/issuers/" jsonLd={jsonLd}>
-  <div class="organization-index-page" data-organization-index>
-    <section class="organization-index-intro">
-      <div class="panel organization-index-intro-main"><div class="prompt">Organization registry</div><h1>Browse connected organizations</h1><p>Organizations are not treated as synonymous with issuers. Search legal issuers, reserve managers, protocol operators, governance bodies, custodians, technology providers, and other recorded roles while preserving current and historical relationships.</p></div>
-      <div class="panel organization-index-intro-stats" aria-label="Organization registry totals"><div class="organization-index-stat"><span>Organizations</span><strong>{records.length}</strong></div><div class="organization-index-stat"><span>Relationships</span><strong>{relationships.length}</strong></div><div class="organization-index-stat"><span>Connected assets</span><strong>{new Set(relationships.map((relationship) => relationship.stablecoin_id)).size}</strong></div><div class="organization-index-stat"><span>Source identities</span><strong>{new Set(evidenceRelations.filter((relation) => relation.organization_ids.length > 0).map((relation) => relation.evidence_id)).size}</strong></div></div>
+  <div class="organization-index-page" data-organization-index data-ui-v2-organizations>
+    <PageHero eyebrow="Organization registry" title="Organizations behind stable assets" description="Search legal issuers, reserve managers, protocol operators, governance bodies, custodians, technology providers, and other reviewed roles without collapsing current and historical relationships.">
+      <div slot="actions" class="organization-index-hero-actions"><a class="ui-button" href="/stablecoins/">Browse stablecoins</a><a class="ui-button ui-button--secondary" href="/events/">Browse events</a></div>
+      <div slot="visual" class="organization-index-hero-mark"><strong>ORG</strong><span>{records.length} reviewed records</span></div>
+    </PageHero>
+
+    <section class="organization-index-metrics" aria-label="Organization registry totals">
+      <MetricCard label="Organizations" value={String(records.length)} detail="Canonical organization records" icon="O" />
+      <MetricCard label="Relationships" value={String(relationships.length)} detail="Current, ended, and unknown states" icon="R" />
+      <MetricCard label="Connected assets" value={String(connectedAssetCount)} detail="Stablecoin records with organization links" icon="A" />
+      <MetricCard label="Source identities" value={String(sourceIdentityCount)} detail="Deduplicated public evidence sources" icon="S" />
     </section>
 
     <section class="panel organization-index-registry" aria-labelledby="organization-index-heading">
-      <div class="bar" id="organization-index-heading">All organization records</div>
+      <div class="organization-index-section-heading"><p>Reviewed records</p><h2 id="organization-index-heading">All organizations</h2><span>Filter by taxonomy, jurisdiction, role, and relationship state.</span></div>
       <div class="organization-index-toolbar">
         <label><span>Search</span><input data-organization-search type="search" name="q" placeholder="Name, jurisdiction, asset, role" autocomplete="off" /></label>
         <label><span>Sort</span><select data-organization-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="assets_most">Most connected assets</option><option value="relationships_most">Most relationships</option><option value="evidence_most">Most source identities</option></select></label>
