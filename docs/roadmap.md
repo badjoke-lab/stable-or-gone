@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-27
+Updated: 2026-06-28
 
 ## Purpose
 
@@ -23,7 +23,7 @@ docs/architecture/meaningful-change-history-v1.md
 docs/architecture/responsive-accessibility-v1.md
 ```
 
-The v2 Modern Data Product contract is authoritative. `docs/architecture/visual-system-and-mocks-v1.md` is historical for new visual work.
+The v2 Modern Data Product contract is authoritative. The v1 visual package is historical.
 
 ## Registry checkpoint
 
@@ -47,14 +47,14 @@ Canonical count source: `docs/migration/registry-v3-baseline.json`.
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged UI-program work: PR #208
-Latest merged main: 26c2686549befe9653ce30888ec2394fcfb52e59
+Latest merged UI-program work: PR #209
+Latest merged main: 4e07907cf1e796882382e964c2e7852cfed21c07
 Current public UI: partial repair implementation, not yet the completed UI v2 release
 Gate V2-A: passed
 Gate V2-B: passed
 Current phase: Phase V2-2 — approved registry pages
-Active work: PR #209 — approved Home page
-Next work: PR #210 — approved Stablecoins index
+Active work: PR #210 — approved Stablecoins index
+Next work: PR #211 — approved Stablecoin detail
 Approved visual direction: Modern Data Product
 Approved desktop reference pages: 8
 Routine record growth: paused at 92 assets
@@ -63,7 +63,7 @@ Automatic production deployment: disabled
 Production publication: prohibited until Gate V2-G owner approval
 ```
 
-## Completed foundations
+## Completed foundations and pages
 
 ```text
 PR #167–171  documentation, provenance, route parity, and mobile preservation
@@ -73,9 +73,10 @@ PR #191–201  reusable shell, index, organization, event, and dossier implement
 PR #202–206  emergency build and integrity repairs
 PR #207      approved UI v2 contract, eight page references, logo references, schedule, and AGENTS authority
 PR #208      approved S/G assets, v2 tokens, shared shell, reusable components, and foundation validator
+PR #209      approved Home, cross-registry search, canonical metrics, deterministic selected records, and Home validator
 ```
 
-PR #207 passed Gate V2-A. PR #208 passed Gate V2-B. Both merged without changing canonical record counts or publishing production.
+PR #207 passed Gate V2-A. PR #208 passed Gate V2-B. PR #209 merged after all 18 pull-request checks passed. No completed v2 PR changed canonical record counts or published production.
 
 ## Approved UI v2 reference set
 
@@ -118,8 +119,8 @@ Gate V2-B passed
 ### Phase V2-2 — Approved registry pages
 
 ```text
-PR #209  Home — active
-PR #210  Stablecoins index
+PR #209  Home — complete
+PR #210  Stablecoins index — active
 PR #211  Stablecoin detail
 PR #212  Organizations index and detail
 PR #213  Events index and detail
@@ -155,41 +156,46 @@ PR #217 or publication report  publish the exact approved candidate
 Gate V2-H  production parity verified
 ```
 
-## Immediate work — PR #209
+## Immediate work — PR #210
 
-Reference: `docs/ui-redesign/approved-mocks-v2/01-home.webp`.
+Reference: `docs/ui-redesign/approved-mocks-v2/02-stablecoin-index.webp`.
 
 Implementation scope:
 
-1. Replace the legacy Home composition with the approved v2 hero and hierarchy.
-2. Add static client-side search across stablecoins, organizations, and events.
-3. Preserve a no-JavaScript fallback to the Stablecoins search route.
-4. Show dynamic canonical counts for stablecoins, organizations, events, and source identities.
-5. Add the four primary registry entry cards.
-6. Show the three real dated guides already selected by the approved editorial rule.
-7. Replace `stablecoins.slice(0, 10)` with an explicit slug-ordered selection rule.
-8. Provide the selected records as a desktop table and equivalent compact cards.
-9. Use shared v2 components and the approved support banner.
-10. Add a Home-specific validator to full and site builds.
-11. Preserve all routes and canonical record counts.
-12. Do not deploy production.
+1. Replace the legacy Stablecoins intro with the approved v2 hero and metric hierarchy.
+2. Preserve dynamic counts for all records, active lifecycle records, connected organizations, and source identities.
+3. Preserve search across name, symbol, alias, domain, and connected organization.
+4. Preserve URL-synchronized state, deterministic parameter order, browser back/forward handling, and clear actions.
+5. Preserve six approved taxonomy filters: lifecycle, issuance, asset class, reference, backing, and stabilization.
+6. Preserve six sort modes.
+7. Preserve nine protected desktop table headers.
+8. Add ticker badges to desktop rows and compact cards.
+9. Add last-reviewed, event, evidence, and known-unknown context from canonical records.
+10. Preserve compact cards for small screens.
+11. Preserve the bounded two-to-four-record comparison as secondary historical context, not a ranking or account feature.
+12. Add a PR #210-specific validator to full and site builds.
+13. Correct `AGENTS.md` so current-work authority comes from this roadmap and the implementation plan.
+14. Preserve canonical counts and routes.
+15. Do not deploy production.
 
-PR #209 completion criteria:
+PR #210 completion criteria:
 
 ```text
-Approved Home hierarchy is implemented
-Search covers stablecoins, organizations, and events
-Canonical counts are dynamic
-Primary registry and guide destinations are real
-Selected records use explicit slug order
-Desktop and compact selected-record views preserve the same fields
-Mock-only values and account features are absent
-Home validator and all repository checks pass
-Canonical counts and routes remain unchanged
+Approved Stablecoins hierarchy is implemented
+Canonical metric cards remain dynamic
+Six filters and six sorts remain functional
+URL and browser history behavior remains functional
+Nine protected headers remain present
+Ticker badges and review context are visible
+Compact cards preserve protected information
+Comparison remains bounded and non-ranking
+Mock-only features are absent
+PR #210 validator and all repository checks pass
+Canonical routes and counts remain unchanged
 No production deployment
 ```
 
-After PR #209 merges, the active item becomes PR #210 and must use `02-stablecoin-index.webp`.
+After PR #210 merges, the active item becomes PR #211 and must use `03-stablecoin-detail.webp`.
 
 ## Mock-only exclusions
 

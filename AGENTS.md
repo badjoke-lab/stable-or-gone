@@ -13,7 +13,7 @@ Before changing code, data, workflows, or documentation, read:
 5. the canonical specification and implementation plan for the current work item
 6. any audit or baseline named by that work item
 
-For the active UI v2 implementation program, also read in this order:
+For the active UI v2 program, also read in this order:
 
 ```text
 docs/ui-redesign/master-spec.md
@@ -22,13 +22,13 @@ docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
 ```
 
-For page-specific work, open the approved reference image named by the v2 contract before changing layout or visual presentation.
+For page-specific work, open the approved repository reference image named by the v2 contract before changing layout or visual presentation.
 
-For data work, inspect the current generated statistics, protected baseline, and integrity audit before editing canonical records.
+For data work, inspect current generated statistics, the protected baseline, and the integrity audit before editing canonical records.
 
 ## Repository source of truth
 
-Repository specifications outrank chat memory, handoff prose, mock images outside the repository, issue discussion, and unmerged drafts.
+Repository specifications outrank chat memory, handoff prose, external mock copies, issue discussion, and unmerged drafts.
 
 A decision becomes binding only when the relevant canonical repository document is updated and merged. If implementation conflicts with a canonical specification, treat the implementation as defective until the specification is deliberately changed through review.
 
@@ -42,24 +42,26 @@ The active visual and page-layout authority is:
 docs/architecture/approved-modern-data-product-ui-v2.md
 ```
 
-`docs/architecture/visual-system-and-mocks-v1.md` remains historical and must not be used to override the approved v2 direction.
+`docs/architecture/visual-system-and-mocks-v1.md` is historical and must not override v2.
 
 No agent may:
 
 - invent a new visual direction;
 - substitute another logo;
 - redesign a page from memory;
-- implement mock-only data as if it were canonical;
+- implement mock-only data as canonical data;
 - skip the approved page reference;
 - alter the PR sequence without updating both the implementation plan and roadmap.
 
 ## Current workstream
 
-As of 2026-06-27, the approved workstream is the Modern Data Product UI v2 implementation program.
+The approved workstream is the Modern Data Product UI v2 implementation program.
 
-The current step is PR #207: freeze the approved v2 contract, reference assets, and replacement schedule.
+The current step is not maintained independently in this file. Before starting or continuing work, read the `Current position` and `Immediate work` sections of `docs/roadmap.md`, then confirm the same PR item in `docs/ui-redesign/implementation-plan.md`.
 
-Routine growth beyond 92 canonical stable assets is paused until the gates in `docs/ui-redesign/implementation-plan.md` permit it. Do not start Batch 18 or resume the final-eight path to 100 without a deliberate roadmap amendment after the 92-record v2 audit.
+As of 2026-06-28, the active scheduled item is PR #210: implement the approved Stablecoins index from `docs/ui-redesign/approved-mocks-v2/02-stablecoin-index.webp`.
+
+Routine growth beyond 92 canonical stable assets is paused until the plan permits it. Do not start Batch 18 or resume the final-eight path to 100 without a deliberate roadmap amendment after the 92-record v2 audit.
 
 Verified emergency repairs may interrupt the sequence only under `docs/deployment-policy.md` and must be recorded in `docs/roadmap.md`.
 
@@ -77,7 +79,7 @@ Organizations index
 Organization detail
 Events index
 Event detail
-Methodology / editorial family
+Methodology and editorial family
 ```
 
 The approved brand is the S/G monogram crossed by a horizontal line with a short coral broken segment on the right. The rejected stacked-cube logo must not be used.
@@ -114,9 +116,9 @@ Development and production publication are separate processes.
 
 - GitHub CI success is the completion condition for normal development work.
 - A normal pull request must not wait for Cloudflare Pages.
-- A normal `main` merge must not trigger or wait for a production deployment.
-- Production deployment is allowed only through the manual production deployment workflow at a defined publication checkpoint or for an approved emergency.
-- Production verification runs only after a deliberate production deployment.
+- A normal `main` merge must not trigger or wait for production deployment.
+- Production deployment is allowed only through the manual production workflow at a defined publication checkpoint or for an approved emergency.
+- Production verification runs only after a deliberate deployment.
 - Production success may not be claimed before the deployed commit and public parity are verified.
 
 The canonical policy is `docs/deployment-policy.md`.
@@ -132,7 +134,7 @@ Do not:
 - reduce data, evidence, or validation requirements;
 - implement undocumented UI, taxonomy, route, or responsive behavior;
 - implement a page without citing its approved v2 reference;
-- substitute or regenerate the approved logo;
+- substitute or regenerate the approved logo outside the approved asset process;
 - use externally hosted or unverified coin logos;
 - create public filter categories from arbitrary free-text values;
 - hide material mobile information through generic numbered-column rules;
@@ -143,9 +145,9 @@ Do not:
 
 Every pull request must use one classification:
 
-1. **No production deployment required** — the default for documentation, data, code, validation, and workflow changes.
-2. **Publication checkpoint deployment required after explicit approval** — for the defined UI v2 release checkpoint.
-3. **Emergency production deployment required** — only for a verified public breakage, security issue, or materially incorrect public state.
+1. **No production deployment required** — default for documentation, data, code, validation, and workflow changes.
+2. **Publication checkpoint deployment required after explicit approval** — the defined UI v2 release checkpoint.
+3. **Emergency production deployment required** — only for verified public breakage, security issues, or materially incorrect public state.
 
 ## Current UI v2 gate sequence
 
@@ -158,7 +160,7 @@ Every pull request must use one classification:
 → Stablecoin detail
 → Organizations index and detail
 → Events index and detail
-→ editorial/project family
+→ editorial and project family
 → mobile and accessibility hardening
 → 92-record and all-route UI audit
 → immutable candidate owner approval
@@ -172,8 +174,8 @@ Every pull request must use one classification:
 - Keep each PR within one approved responsibility.
 - Cite the exact approved v2 page or component contract.
 - Run normal repository validation before merge.
-- Remove temporary migration artifacts unless the active plan explicitly retains them.
-- Update `docs/roadmap.md` when the current position or sequence changes.
+- Remove temporary artifacts unless the active plan explicitly retains them.
+- Update `docs/roadmap.md` when current position or sequence changes.
 - Update the relevant canonical specification when semantics, routes, information hierarchy, responsive behavior, or machine-readable output change.
 - Preserve canonical record-group counts unless an explicit audited migration approves a change.
 - State the deployment classification in the PR body.
@@ -182,7 +184,7 @@ Every non-trivial PR body must include:
 
 ```text
 Specification references
-Approved v2 page/component reference
+Approved v2 page or component reference
 Roadmap item
 Scope and non-scope
 Mock-only exclusions checked

@@ -1,4 +1,5 @@
 ---
+import TickerBadge from './TickerBadge.astro';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 const { record } = Astro.props;
 const data = {
@@ -16,8 +17,14 @@ const data = {
 };
 ---
 <tr data-registry-row {...data}>
-  <td><label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span aria-hidden="true">Compare</span></label><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a></td>
-  <td>{record.symbol || '—'}</td>
+  <td>
+    <div class="stablecoin-record-identity">
+      <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} size="small" />
+      <div><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a><small>{record.reviewedAt ? `Last reviewed ${record.reviewedAt}` : 'Review date not recorded'}</small></div>
+    </div>
+    <label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
+  </td>
+  <td><span class="record-symbol">{record.symbol || 'No symbol'}</span></td>
   <td>
     {record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}
     {record.relationshipCount > 1 && <small class="relationship-summary">+{record.relationshipCount - 1} additional relationship{record.relationshipCount - 1 === 1 ? '' : 's'} · {record.organizationCount} organizations</small>}
@@ -28,5 +35,5 @@ const data = {
   <td>{record.backingLabel}</td>
   <td><span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span></td>
   <td>{formatIssuanceLabel(record.issuance)}</td>
-  <td>{record.sourceIdentityCount} sources</td>
+  <td><strong>{record.sourceIdentityCount}</strong> sources<small class="evidence-context">{record.eventCount} events · {record.knownUnknownCount} known unknowns</small></td>
 </tr>
