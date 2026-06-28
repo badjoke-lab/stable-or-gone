@@ -172,7 +172,7 @@ check(sameCounts(roleCounts, {
   reserve_manager: 2,
   technology_provider: 2
 }), `functional role counts changed: ${JSON.stringify(roleCounts)}`);
-check(sameCounts(relationshipStatusCounts, { active: 86, ended: 13, unknown: 2 }), `relationship status counts changed: ${JSON.stringify(relationshipStatusCounts)}`);
+check(sameCounts(relationshipStatusCounts, { active: 87, ended: 12, unknown: 2 }), `relationship status counts changed: ${JSON.stringify(relationshipStatusCounts)}`);
 check(multiRoleOrganizations.length === 1 && multiRoleOrganizations[0].id === 'sog_issuer_m0_protocol', 'expected M0 Protocol to remain the current multi-role organization');
 
 const indexSource = readText('src/pages/issuers/index.astro');
