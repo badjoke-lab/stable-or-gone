@@ -21,14 +21,33 @@ Production publication: deferred
 ## Completed UI sequence
 
 ```text
-PR #207-#216 UI v2 implementation and visual-mark correction
+PR #207 approved v2 contract and governance
+PR #208 shared visual foundation
+PR #209 Home
+PR #210 Stablecoins index
+PR #211 Stablecoin detail
+PR #212 Organizations index and detail
+PR #213 Events index and detail
+PR #214 Editorial and project pages
+PR #215 Mobile and accessibility hardening
+PR #216 Visual-mark correction
 ```
 
 ## Completed quality sequence
 
 ```text
-PR #217-#225 date, reserve, and evidence quality
-PR #226-#228 deployment canonicality and verification review
+PR #217 workstream transition
+PR #218 launch-date source review
+PR #219 historical launch-boundary review
+PR #220 remaining launch-boundary review
+PR #221 terminal and relationship-end review
+PR #222 reserve applicability review
+PR #223 evidence reliability review
+PR #224 direct workflow placeholder review
+PR #225 evidence traceability and duplicate invariants
+PR #226 seed and extra deployment canonicality
+PR #227 remaining deployment canonicality
+PR #228 deployment verification-state review
 ```
 
 ## PR #229
