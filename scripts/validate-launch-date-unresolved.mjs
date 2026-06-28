@@ -3,7 +3,8 @@ import path from 'node:path';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
-const readJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
+const absolute = (relativePath) => path.join(root, relativePath);
+const readJson = (relativePath) => JSON.parse(fs.readFileSync(absolute(relativePath), 'utf8'));
 const fail = (message) => {
   console.error(`launch-date unresolved queue: ${message}`);
   process.exitCode = 1;
@@ -26,6 +27,7 @@ const stablecoins = stablecoinFiles.flatMap((file) => {
 if (queue.schema_version !== '1.0') fail(`unexpected schema_version ${queue.schema_version}`);
 if (!/^\d{4}-\d{2}-\d{2}$/.test(queue.frozen_at ?? '')) fail('frozen_at must be YYYY-MM-DD');
 if (!Array.isArray(queue.records)) fail('records must be an array');
+if (typeof queue.source_review !== 'string' || queue.source_review.length === 0) fail('source_review is required');
 
 const records = Array.isArray(queue.records) ? queue.records : [];
 const ids = records.map((row) => row.stablecoin_id);
@@ -80,6 +82,25 @@ if (!queue.policy?.keep_null_without_day_level_primary_evidence) fail('keep-null
 if (!queue.policy?.forbid_month_or_year_coercion) fail('month/year coercion guard must remain true');
 if (!queue.policy?.forbid_exchange_listing_as_default_launch) fail('exchange-listing guard must remain true');
 if (!queue.policy?.forbid_rebrand_or_migration_as_default_launch) fail('lineage guard must remain true');
+
+if (typeof queue.source_review === 'string') {
+  if (!fs.existsSync(absolute(queue.source_review))) {
+    fail(`source_review file is missing: ${queue.source_review}`);
+  } else {
+    const review = fs.readFileSync(absolute(queue.source_review), 'utf8');
+    for (const phrase of [
+      `Total unresolved: ${records.length}`,
+      `Category B: ${categoryCounts.B}`,
+      `Category C: ${categoryCounts.C}`,
+      `Category D: ${categoryCounts.D}`
+    ]) {
+      if (!review.includes(phrase)) fail(`source_review is missing aligned summary: ${phrase}`);
+    }
+    for (const id of queueIds) {
+      if (!review.includes(`\`${id}\``)) fail(`source_review is missing queue record ${id}`);
+    }
+  }
+}
 
 if (!process.exitCode) {
   console.log(`launch-date unresolved queue valid: ${records.length} records (B ${categoryCounts.B}, C ${categoryCounts.C}, D ${categoryCounts.D})`);
