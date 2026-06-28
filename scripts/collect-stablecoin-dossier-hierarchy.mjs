@@ -41,20 +41,20 @@ function collectFileSurfaces(file) {
   }
 
   const source = fs.readFileSync(absolute, 'utf8');
-  const pattern = /<div class="bar">([^<{][^<]*)<\/div>|<th>([^<{][^<]*)<\/th>|<div class="stat"><span>([^<{][^<]*)<\/span>|<dt>([^<{][^<]*)<\/dt>/g;
+  const pattern = /<div class="bar">([^<{][^<]*)<\/div>|<div class="stablecoin-section-heading">[\s\S]*?<h2>([^<{][^<]*)<\/h2>[\s\S]*?<\/div>|<th>([^<{][^<]*)<\/th>|<div class="stat"><span>([^<{][^<]*)<\/span>|<dt>([^<{][^<]*)<\/dt>/g;
   const sections = [];
   const fields = [];
   let currentSection = defaultSectionForFile(file);
   let match;
   while ((match = pattern.exec(source)) !== null) {
-    if (match[1]) {
-      currentSection = normalizeLabel(match[1]);
+    if (match[1] || match[2]) {
+      currentSection = normalizeLabel(match[1] ?? match[2]);
       sections.push({ file, label: currentSection, source_index: match.index });
       continue;
     }
-    const label = normalizeLabel(match[2] ?? match[3] ?? match[4]);
-    const section = match[3] ? 'Hero metrics' : currentSection;
-    const kind = match[3] ? 'hero_metric' : match[4] ? 'definition_term' : 'table_header';
+    const label = normalizeLabel(match[3] ?? match[4] ?? match[5]);
+    const section = match[4] ? 'Hero metrics' : currentSection;
+    const kind = match[4] ? 'hero_metric' : match[5] ? 'definition_term' : 'table_header';
     fields.push({
       surface_key: `${file}|${section}|${label}`,
       file,
