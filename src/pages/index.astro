@@ -156,15 +156,17 @@ const jsonLd = {
 
   <script id="home-search-data" type="application/json" set:html={searchDataJson}></script>
   <script>
+    type HomeSearchRecord = { type: string; title: string; meta: string; href: string; search: string };
     const root = document.querySelector('[data-home-search]');
     const input = root?.querySelector('[data-home-search-input]');
     const form = root?.querySelector('[data-home-search-form]');
     const results = root?.querySelector('[data-home-search-results]');
     const dataElement = document.getElementById('home-search-data');
-    let records = [];
-    try { records = JSON.parse(dataElement?.textContent || '[]'); } catch { records = []; }
-    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
-    const search = () => {
+    let records: HomeSearchRecord[] = [];
+    try { records = JSON.parse(dataElement?.textContent || '[]') as HomeSearchRecord[]; } catch { records = []; }
+    const entities: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    const escapeHtml = (value: unknown): string => String(value).replace(/[&<>"']/g, (character) => entities[character] ?? character);
+    const search = (): HomeSearchRecord[] => {
       if (!(input instanceof HTMLInputElement) || !(results instanceof HTMLElement)) return [];
       const query = input.value.normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
       if (!query) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); results.innerHTML = ''; return []; }
@@ -176,9 +178,9 @@ const jsonLd = {
       return matches;
     };
     input?.addEventListener('input', search);
-    form?.addEventListener('submit', (event) => { const matches = search(); if (matches.length === 1) { event.preventDefault(); window.location.href = matches[0].href; } });
+    form?.addEventListener('submit', (event) => { const matches = search(); const first = matches[0]; if (matches.length === 1 && first) { event.preventDefault(); window.location.href = first.href; } });
     root?.querySelectorAll('[data-home-search-term]').forEach((button) => button.addEventListener('click', () => { if (!(button instanceof HTMLButtonElement) || !(input instanceof HTMLInputElement)) return; input.value = button.dataset.homeSearchTerm || ''; input.focus(); search(); }));
-    root?.addEventListener('keydown', (event) => { if (event.key === 'Escape' && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); input.focus(); } });
-    document.addEventListener('click', (event) => { if (root instanceof HTMLElement && !root.contains(event.target) && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); } });
+    root?.addEventListener('keydown', (event) => { if (event instanceof KeyboardEvent && event.key === 'Escape' && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); input.focus(); } });
+    document.addEventListener('click', (event) => { if (root instanceof HTMLElement && event.target instanceof Node && !root.contains(event.target) && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); } });
   </script>
 </BaseLayout>
