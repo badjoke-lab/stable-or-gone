@@ -33,7 +33,10 @@ B 3 / C 13 / D 4
 to:
 
 ```text
-B 3 / C 17 / D 0
+Total unresolved: 20
+Category B: 3
+Category C: 17
+Category D: 0
 ```
 
 Category D is cleared because all four former D records now have meaningful source trails. Their remaining problem is boundary ambiguity, not total absence of sources.
@@ -49,6 +52,31 @@ Category D is cleared because all four former D records now have meaningful sour
 | TRYB | D | B | BiLira establishes initial Ethereum release in 2019 only. |
 | USYC | D | C | Circle publishes a 2023-05-01 fund inception date, which is not proof of token launch or first mint. |
 | AE Coin | D | C | Regulatory approval preceded live customer access; first issuance and first customer-availability day remain unresolved. |
+
+## Full unresolved queue snapshot
+
+```text
+sog_st_agoraausd
+sog_st_brz
+sog_st_dsd
+sog_st_esd
+sog_st_eurt
+sog_st_gyen
+sog_st_honey
+sog_st_husd
+sog_st_mim
+sog_st_msusd
+sog_st_musd
+sog_st_stablesusdx
+sog_st_susde
+sog_st_tryb
+sog_st_usd1
+sog_st_usdm
+sog_st_usdz
+sog_st_usyc
+sog_st_usdh
+sog_st_aecoin
+```
 
 ## Boundary rules applied
 
