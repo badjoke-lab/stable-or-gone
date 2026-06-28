@@ -9,12 +9,13 @@ import './validate-deployment-canonicality-pr227.mjs';
 import './validate-deployment-source-status-pr229.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
-const spec = fs.readFileSync('docs/quality/monitoring-pipeline-spec.md', 'utf8');
-const required = ['Latest completed: PR #229', 'Active: PR #230', 'Next: PR #231', 'Gate V2-F: not passed'];
-for (const phrase of required) {
+const overview = fs.readFileSync('docs/quality/monitoring-official-source-spec.md', 'utf8');
+const schema = fs.readFileSync('docs/quality/monitoring-official-source-schema.md', 'utf8');
+for (const phrase of ['Latest completed: PR #230', 'Active: PR #231', 'Next: PR #232', 'Gate V2-F: not passed']) {
   if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
 }
-for (const phrase of ['PR #230 — skeleton and canonical guard', 'workflow_dispatch', 'candidate_count: 0']) {
-  if (!spec.includes(phrase)) throw new Error(`monitoring spec missing: ${phrase}`);
+for (const phrase of ['status: needs_human_review', 'canonical_action: none', 'workflow_dispatch']) {
+  if (!overview.includes(phrase)) throw new Error(`official-source spec missing: ${phrase}`);
 }
-console.log('Active workstream validation passed: PR #230 is active.');
+if (!schema.includes('signal_types')) throw new Error('official-source runtime schema is not fixed');
+console.log('Active workstream validation passed: PR #231 is active.');
