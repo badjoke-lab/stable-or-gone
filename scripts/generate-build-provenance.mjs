@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
+import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
 
 const root = process.cwd();
 const outputPath = path.join(root, 'data/generated/build-provenance.json');
@@ -68,6 +69,13 @@ const registryV2 = loadRegistryV2Baseline(root);
 const registryV3 = readJson('docs/migration/registry-v3-foundation.json');
 const incomeProfiles = readJson('docs/migration/registry-v3-income-profiles.json');
 const qualityBaseline = readJson('docs/migration/registry-v3-baseline.json');
+
+// Build provenance must describe the current canonical snapshot, not a stale
+// checked-in generated file. Rebuild and persist stats before count validation.
+const rebuiltStats = buildRegistryStats();
+const generatedStatsPath = path.join(root, qualityBaseline.generated_stats);
+fs.mkdirSync(path.dirname(generatedStatsPath), { recursive: true });
+fs.writeFileSync(generatedStatsPath, `${JSON.stringify(rebuiltStats, null, 2)}\n`);
 const generatedStats = readJson(qualityBaseline.generated_stats);
 
 const compatibilityFiles = [
