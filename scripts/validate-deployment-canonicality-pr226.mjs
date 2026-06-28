@@ -32,36 +32,18 @@ const decisions = {
 const reviewedIds = Object.values(decisions).flat();
 if (reviewedIds.length !== review.reviewed_total) fail(`reviewed total ${reviewedIds.length} does not match ${review.reviewed_total}`);
 if (new Set(reviewedIds).size !== reviewedIds.length) fail('reviewed decision sets overlap');
-
 for (const [canonicality, ids] of Object.entries(decisions)) {
   if (ids.length !== review.decision_counts?.[canonicality]) fail(`${canonicality} decision count mismatch`);
   for (const id of ids) {
     const row = byId.get(id);
     if (!row) fail(`${id}: deployment is missing`);
     else if (row.canonicality !== canonicality) fail(`${id}: expected ${canonicality}, found ${row.canonicality}`);
+    if (!Array.isArray(row?.evidence_ids) || row.evidence_ids.length === 0) fail(`${id}: evidence relation is missing`);
   }
 }
 
 const reviewedFiles = unique(reviewedIds.map((id) => byId.get(id)?.__file).filter(Boolean));
 if (!same(reviewedFiles, review.reviewed_source_files ?? [])) fail(`reviewed source files changed: ${reviewedFiles.join(', ')}`);
-
-const notRecordedIds = deployments
-  .filter((row) => row.canonicality === undefined || row.canonicality === null || row.canonicality === '')
-  .map((row) => row.id)
-  .sort();
-if (!same(notRecordedIds, review.remaining_not_recorded_ids ?? [])) fail(`remaining not-recorded set changed: ${notRecordedIds.join(', ')}`);
-
-const canonicalityCounts = {};
-const recordStateCounts = { recorded: 0, not_recorded: 0 };
-for (const row of deployments) {
-  const value = row.canonicality === undefined || row.canonicality === null || row.canonicality === '' ? 'unknown' : row.canonicality;
-  canonicalityCounts[value] = (canonicalityCounts[value] ?? 0) + 1;
-  recordStateCounts[row.canonicality === undefined || row.canonicality === null || row.canonicality === '' ? 'not_recorded' : 'recorded'] += 1;
-  if (!Array.isArray(row.evidence_ids) || row.evidence_ids.length === 0) fail(`${row.id}: evidence relation is missing`);
-}
-for (const [key, expected] of Object.entries(review.expected_registry_counts ?? {})) if (canonicalityCounts[key] !== expected) fail(`${key} count ${canonicalityCounts[key]} does not match ${expected}`);
-for (const [key, expected] of Object.entries(review.expected_record_state_counts ?? {})) if (recordStateCounts[key] !== expected) fail(`${key} record-state count ${recordStateCounts[key]} does not match ${expected}`);
-
 for (const id of review.unknown_ids ?? []) {
   const row = byId.get(id);
   if (!row?.notes?.toLowerCase().includes('separate') && !row?.notes?.toLowerCase().includes('require')) fail(`${id}: explicit unknown requires a review-boundary note`);
@@ -79,4 +61,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('PR #226 deployment canonicality valid: 39 reviewed, 102 recorded, 28 deferred to PR #227.');
+console.log('PR #226 historical checkpoint valid: 39 reviewed decisions remain fixed; PR #227 owns the current registry totals.');
