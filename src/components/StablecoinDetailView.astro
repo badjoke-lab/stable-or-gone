@@ -174,9 +174,12 @@ const redemptionProfile = coin.redemption_profile;
 
     <section class="ui-panel registry stablecoin-reserve-components" id="reserves-redemption"><div class="stablecoin-section-heading"><p>Backing detail</p><h2>Reserve components</h2><span>Recorded components only; missing shares and dates remain explicit.</span></div>{reserveComponents.length === 0 ? <p class="stablecoin-empty-state">No reserve components have been recorded.</p> : <ul>{reserveComponents.map((component) => <li><strong>{component.asset_label ?? formatPublicLabel(component.asset_category)}</strong> — <ValueStateText value={component.asset_category} displayValue={formatPublicLabel(component.asset_category)} />{component.share_percent !== null && component.share_percent !== undefined ? ` · ${component.share_percent}%` : ''}{component.liquidity_class ? ` · liquidity ${formatPublicLabel(component.liquidity_class)}` : ''}{component.maturity_bucket ? ` · maturity ${formatPublicLabel(component.maturity_bucket)}` : ''}{component.as_of_date ? ` · as of ${component.as_of_date}` : ''}{component.notes ? ` · ${cleanPublicText(component.notes)}` : ''}</li>)}</ul>}</section>
 
-    <div class="stablecoin-value-state-group"><StablecoinValueStateSections coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
+    <div class="stablecoin-value-state-group stablecoin-reserve-redemption-group">
+      <StablecoinValueStateSections mode="reserves" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
+    </div>
 
     <div id="deployments-legal-context" class="stablecoin-deployment-group"><DeploymentTable deployments={deployments} /></div>
+    <div class="stablecoin-legal-group"><StablecoinValueStateSections mode="legal" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
 
     <section class="ui-panel registry stablecoin-model-history" id="history"><div class="stablecoin-section-heading"><p>Historical changes</p><h2>Model and lifecycle changes</h2><span>Current classification remains separate from dated historical events.</span></div>{modelHistoryEvents.length === 0 ? <p class="stablecoin-empty-state">No separate model-change event is currently recorded.</p> : <ul>{modelHistoryEvents.map((event) => <li><ValueStateText value={event.event_date} /> — <a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a> · {formatPublicLabel(event.event_detail_kind ?? event.event_type)}</li>)}</ul>}</section>
 
@@ -184,6 +187,8 @@ const redemptionProfile = coin.redemption_profile;
     <StablecoinEventTimeline events={events} />
 
     <section class="ui-panel registry stablecoin-evidence-section" id="evidence"><div class="stablecoin-section-heading"><p>Source record</p><h2>Evidence</h2><span>Publisher, provenance, supported claims, archive state, reliability, and publication date remain separate.</span></div><EvidenceSourceTable evidence={evidence} tableKind="stablecoin-sources" /></section>
+
+    <div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
 
     <section class="ui-panel registry stablecoin-coverage-section"><div class="stablecoin-section-heading"><p>Coverage</p><h2>Record coverage</h2><span>Entry counts describe coverage, not quality.</span></div><table data-table-kind="stablecoin-record-coverage" data-mobile-table="scroll-preserve"><thead><tr><th>Section</th><th>Entries</th></tr></thead><tbody>{coverageRows.map((row) => (<tr><td>{row.label}</td><td>{row.count}</td></tr>))}</tbody></table></section>
 
