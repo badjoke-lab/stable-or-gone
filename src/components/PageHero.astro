@@ -14,7 +14,9 @@ const { title, titleAccent, description, eyebrow, compact = false, className = '
   <div class="page-hero__content">
     {eyebrow && <p class="page-hero__eyebrow">{eyebrow}</p>}
     <h1>{title}{titleAccent && <span>{titleAccent}</span>}</h1>
-    {description && <p class="page-hero__description">{description}</p>}
+    <slot name="description">
+      {description && <p class="page-hero__description">{description}</p>}
+    </slot>
     <slot name="actions" />
   </div>
   <div class="page-hero__visual" aria-hidden="true"><slot name="visual" /></div>
