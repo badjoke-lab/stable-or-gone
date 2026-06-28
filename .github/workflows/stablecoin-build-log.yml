@@ -36,4 +36,5 @@ jobs:
             stablecoin-build.log
             stablecoin-consistency.log
             pr224-evidence.txt
+            data/generated/value-state-migration.json
           if-no-files-found: error
