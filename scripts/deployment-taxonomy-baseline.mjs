@@ -31,15 +31,16 @@ export const deploymentTaxonomyBaseline = {
     wind_down_recorded: 2
   },
   canonicality: {
-    canonical_bridge: 2,
-    issuer_native: 55,
-    legacy: 10,
-    native: 31,
-    unknown: 32
+    canonical_bridge: 5,
+    issuer_native: 60,
+    legacy: 18,
+    native: 40,
+    synthetic: 1,
+    unknown: 6
   },
   canonicality_record_state: {
-    not_recorded: 28,
-    recorded: 102
+    not_recorded: 0,
+    recorded: 130
   },
   verification_states: {
     identifier_recorded_unverified: 45,
