@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-06-28",
+  "source_review": "docs/quality/launch-date-current-boundary-review-2026-06-28.md",
+  "expected_total": 10,
+  "records": [
+    {
+      "stablecoin_id": "sog_st_honey",
+      "decision": "preserve_null",
+      "best_known_range": "2025-02-06 network launch; HONEY first-use boundary unresolved",
+      "reason_code": "network_launch_not_asset_first_use",
+      "review_note": "Berachain mainnet launched on 2025-02-06 and official documentation identifies HONEY and its mainnet contracts. No HONEY-specific first mint, first redemption, or first permissionless minting transaction was recovered.",
+      "reviewed_sources": [
+        "https://x.com/berachain/status/1886777450480259265",
+        "https://docs.berachain.com/developers/contracts/honey-token",
+        "https://docs.berachain.com/learn/pol/tokens/honey"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_husd",
+      "decision": "preserve_null",
+      "best_known_range": "2019-07-17 announcement to 2019-10-18 confirmed conversion service",
+      "reason_code": "announcement_to_operational_boundary",
+      "review_note": "Stable Universal announced on 2019-07-17 that it would launch HUSD. By 2019-10-18, HUSD-PAX conversion was operating on Huobi. Deployment, first issuance, issuer redemption, and broad public availability remain unresolved.",
+      "reviewed_sources": [
+        "https://www.prnewswire.com/news-releases/stable-universal-partners-with-paxos-and-huobi-to-launch-new-stablecoin-husd-300886646.html",
+        "https://www.prnewswire.com/news-releases/stable-universal-and-paxos-global-jointly-launch-industry-first-11-conversion-between-stablecoins-husd-and-pax-on-huobi-300941057.html",
+        "https://etherscan.io/address/0xdf574c24545e5ffecb9a659c229253d4111d87e1"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_msusd",
+      "decision": "preserve_null",
+      "best_known_range": "live product and onchain supply before June 2026 incident; original launch day unresolved",
+      "reason_code": "product_operation_without_original_launch_boundary",
+      "review_note": "MainStreet materials establish msUSD as an operating synthetic rebasing product. The original announcement, first contract deployment, first mint, and first permissionless public-access day were not recovered from durable first-party material.",
+      "reviewed_sources": [
+        "https://www.mainstreet.finance/",
+        "https://por.mainstreet.finance/",
+        "https://www.mainstreet.finance/tos.pdf"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_stablesusdx",
+      "decision": "preserve_null",
+      "best_known_range": "contracts and live mint/redeem product documented by 2025; original launch day unresolved",
+      "reason_code": "deployed_product_without_original_launch_statement",
+      "review_note": "usdx.money documents the USDX, sales, redemption, and staking contracts and current product behavior. The original launch announcement, contract-creation boundary, first mint, and first public dApp availability day were not recovered.",
+      "reviewed_sources": [
+        "https://docs.usdx.money/",
+        "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
+        "https://docs.usdx.money/informaiton/contracts"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_susde",
+      "decision": "preserve_null",
+      "best_known_range": "2024-02-19 Ethena public mainnet boundary; separate sUSDe activation day unresolved",
+      "reason_code": "underlying_launch_not_derivative_activation",
+      "review_note": "Ethena documentation establishes sUSDe as the staking receipt and reward-accruing derivative of USDe. A distinct first sUSDe deposit, first mint, or separately announced staking-activation day was not recovered, so the underlying USDe launch is not copied into the derivative record.",
+      "reviewed_sources": [
+        "https://docs.ethena.fi/solution-design/staking-usde",
+        "https://docs.ethena.fi/solution-overview/usde-overview",
+        "https://etherscan.io/token/0x9d39a5de30e57443bff2a8307a4256c8797a3497"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usd1",
+      "decision": "preserve_null",
+      "best_known_range": "2025-04 at month level; production test preceded broader market access",
+      "reason_code": "testing_to_market_access_boundary",
+      "review_note": "USD1 contracts, introduction, production airdrop testing, first issuance, and broad market access are separate boundaries. Official material supports April 2025 only at month level for the launch history.",
+      "reviewed_sources": [
+        "https://governance.worldlibertyfinancial.com/t/proposal-test-airdrop-functionality-by-distributing-usd1-to-all-wlfi-token-holders/4794",
+        "https://static.worldlibertyfinancial.com/docs/mica-whitepaper.pdf",
+        "https://www.worldlibertyfinancial.com/usd1"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usdm",
+      "decision": "preserve_null",
+      "best_known_range": "cUSD activation in June 2020; 2025-12-17 USDm rebrand is not a new launch",
+      "reason_code": "original_cusd_activation_and_rebrand_lineage",
+      "review_note": "Mento states that cUSD and USDm are one continuing asset and that the 2025 rebrand required no contract, peg, or user action. Celo sources bound cUSD activation to June 2020, but the final executed first-public-transfer day was not jointly recovered.",
+      "reviewed_sources": [
+        "https://www.mento.org/blog/a-new-chapter-in-multichain-fx-the-evolution-of-mento-stablecoins",
+        "https://forum.celo.org/t/governance-proposal-to-activate-celo-stability-protocol-and-enable-cusd-transfers/547",
+        "https://forum.celo.org/t/approach-to-stablecoins-on-celo/897"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usyc",
+      "decision": "preserve_null",
+      "best_known_range": "2023-05-01 fund inception; token issuance and public availability unresolved",
+      "reason_code": "fund_inception_not_token_launch",
+      "review_note": "Circle publishes 2023-05-01 as the fund inception date. Hashnote separately documents the onchain token, contracts, subscription, and redemption structure. Fund inception is not proof of first token issuance or public availability.",
+      "reviewed_sources": [
+        "https://www.circle.com/usyc",
+        "https://usyc.docs.hashnote.com/",
+        "https://usyc.docs.hashnote.com/overview/smart-contracts"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usdh",
+      "decision": "preserve_null",
+      "best_known_range": "Native Markets terms effective 2025-09-21; first mint and Hyperliquid activation unresolved",
+      "reason_code": "terms_effective_date_not_first_issuance",
+      "review_note": "Native Markets terms identify USDH as a Bridge-issued token native to Hyperliquid, and Bridge later describes USDH as issued through its infrastructure. Product announcement, first mint, HyperCore activation, HyperEVM linking, and migration remain separate boundaries.",
+      "reviewed_sources": [
+        "https://nativemarkets.com/policies/terms",
+        "https://www.bridge.xyz/news/introducing-open-issuance",
+        "https://www.bridge.xyz/product/issuance"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_aecoin",
+      "decision": "preserve_null",
+      "best_known_range": "after 2025-01-17 planning-stage whitepaper; live customer and payment use by 2025-05",
+      "reason_code": "license_to_public_availability_boundary",
+      "review_note": "AE Coin had regulatory approval by December 2024, but its 2025-01-17 whitepaper still used future and introductory-phase issuance terms. Current issuer and Mbank pages show a live product, while first issuance and first customer availability remain unresolved.",
+      "reviewed_sources": [
+        "https://aecoin.com/downloads/whitepaper-en.pdf",
+        "https://aecoin.com/",
+        "https://www.mbank.ae/aec-wallet/"
+      ]
+    }
+  ]
+}
