@@ -59,8 +59,6 @@ The approved workstream is the Modern Data Product UI v2 implementation program.
 
 The current step is not maintained independently in this file. Before starting or continuing work, read the `Current position` and `Immediate work` sections of `docs/roadmap.md`, then confirm the same PR item in `docs/ui-redesign/implementation-plan.md`.
 
-As of 2026-06-28, the active scheduled item is PR #210: implement the approved Stablecoins index from `docs/ui-redesign/approved-mocks-v2/02-stablecoin-index.webp`.
-
 Routine growth beyond 92 canonical stable assets is paused until the plan permits it. Do not start Batch 18 or resume the final-eight path to 100 without a deliberate roadmap amendment after the 92-record v2 audit.
 
 Verified emergency repairs may interrupt the sequence only under `docs/deployment-policy.md` and must be recorded in `docs/roadmap.md`.
