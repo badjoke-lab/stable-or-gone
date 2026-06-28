@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/shell.css';
 import '../styles/accessibility-utilities.css';
+import '../styles/editorial-v2.css';
 import BrandLockup from '../components/BrandLockup.astro';
 import { globalNavigationGroups, utilityNavigation } from '../../config/site-architecture.mjs';
 interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
@@ -17,6 +18,8 @@ const gaInline = gaMeasurementId ? `window.dataLayer=window.dataLayer||[];functi
 const routeFamilies: Record<string, string[]> = {
   '/stablecoins/': ['/stablecoins/', '/stablecoin/'], '/issuers/': ['/issuers/', '/issuer/'], '/events/': ['/events/', '/event/'], '/guides/': ['/guides/'], '/glossary/': ['/glossary/'], '/models/': ['/models/'], '/methodology/': ['/methodology/'], '/updates/': ['/updates/'], '/about/': ['/about/'], '/contact/': ['/contact/'], '/support/': ['/support/']
 };
+const editorialPrefixes = ['/guides/', '/glossary/', '/models/', '/methodology/', '/updates/', '/about/', '/contact/', '/support/'];
+const pageFamily = editorialPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix)) ? 'editorial' : 'registry';
 const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
 ---
 <!doctype html>
@@ -42,16 +45,11 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header"><div class="site-header-inner">
       <BrandLockup class="site-brand" />
-      <nav class="grouped-navigation" aria-label="Primary navigation">
-        {globalNavigationGroups.map((group) => <div class="navigation-group"><span class="navigation-group-label">{group.label}</span><div class="navigation-group-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></div>)}
-      </nav>
+      <nav class="grouped-navigation" aria-label="Primary navigation">{globalNavigationGroups.map((group) => <div class="navigation-group"><span class="navigation-group-label">{group.label}</span><div class="navigation-group-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></div>)}</nav>
       <nav class="utility-navigation" aria-label="Utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
-      <details class="mobile-navigation" data-mobile-navigation><summary aria-label="Open navigation menu">Menu</summary><div class="mobile-navigation-panel">
-        {globalNavigationGroups.map((group) => <section class="mobile-navigation-group" aria-labelledby={`mobile-navigation-${group.id}`}><span class="navigation-group-label" id={`mobile-navigation-${group.id}`}>{group.label}</span><div class="mobile-navigation-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></section>)}
-        <nav class="mobile-navigation-utilities" aria-label="Mobile utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
-      </div></details>
+      <details class="mobile-navigation" data-mobile-navigation><summary aria-label="Open navigation menu">Menu</summary><div class="mobile-navigation-panel">{globalNavigationGroups.map((group) => <section class="mobile-navigation-group" aria-labelledby={`mobile-navigation-${group.id}`}><span class="navigation-group-label" id={`mobile-navigation-${group.id}`}>{group.label}</span><div class="mobile-navigation-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></section>)}<nav class="mobile-navigation-utilities" aria-label="Mobile utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav></div></details>
     </div></header>
-    <main id="main-content" class="site-main" tabindex="-1"><slot /></main>
+    <main id="main-content" class="site-main" tabindex="-1" data-page-family={pageFamily}><slot /></main>
     <footer class="site-footer"><div class="site-footer-inner">
       <div class="site-footer-brand"><BrandLockup /></div>
       <p class="site-footer-summary">Historical information only. SOG is a registry, not a ranking or recommendation service.</p>
