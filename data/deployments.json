@@ -4,238 +4,208 @@
     "stablecoin_id": "sog_st_usdt",
     "chain": "Ethereum",
     "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "PR-024D USDT Ethereum deployment placeholder. USDT is multichain, and issuer-supported/native, bridged, frozen, deprecated, unsupported, or legacy status requires chain-by-chain source review. Do not treat every USDT-like asset as current issuer-supported USDT.",
-    "evidence_ids": [
-      "sog_src_tether_transparency",
-      "sog_src_tether_legal_terms"
-    ]
+    "evidence_ids": ["sog_src_tether_transparency", "sog_src_tether_legal_terms"]
   },
   {
     "id": "sog_dep_usdc_ethereum_seed",
     "stablecoin_id": "sog_st_usdc",
     "chain": "Ethereum",
     "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
     "contract_address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     "status": "active",
     "notes": "PR-024A source-specific Ethereum USDC contract row. Full chain-by-chain native/bridged status remains a known unknown outside selected official Circle contract references.",
-    "evidence_ids": [
-      "sog_src_circle_usdc_product",
-      "sog_src_circle_usdc_contract_addresses"
-    ]
+    "evidence_ids": ["sog_src_circle_usdc_product", "sog_src_circle_usdc_contract_addresses"]
   },
   {
     "id": "sog_dep_usdc_base_seed",
     "stablecoin_id": "sog_st_usdc",
     "chain": "Base",
     "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
     "contract_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
     "status": "active",
     "notes": "PR-024A selected Base USDC contract row from Circle developer documentation. Not a complete deployment inventory.",
-    "evidence_ids": [
-      "sog_src_circle_usdc_contract_addresses"
-    ]
+    "evidence_ids": ["sog_src_circle_usdc_contract_addresses"]
   },
   {
     "id": "sog_dep_usdc_solana_seed",
     "stablecoin_id": "sog_st_usdc",
     "chain": "Solana",
     "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
     "contract_address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
     "status": "active",
     "notes": "PR-024A selected Solana USDC contract row from Circle developer documentation. Not a complete deployment inventory.",
-    "evidence_ids": [
-      "sog_src_circle_usdc_contract_addresses"
-    ]
+    "evidence_ids": ["sog_src_circle_usdc_contract_addresses"]
   },
   {
     "id": "sog_dep_dai_ethereum_seed",
     "stablecoin_id": "sog_st_dai",
     "chain": "Ethereum",
     "deployment_type": "protocol_token",
+    "canonicality": "native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "PR-024D DAI Ethereum protocol-token placeholder. Exact contract metadata, Sky/USDS lifecycle context, protocol exit routes, and successor or parallel asset relationships need source-backed review before deployment coverage is treated as complete.",
-    "evidence_ids": [
-      "sog_src_makerdao_docs_dai",
-      "sog_src_sky_dai_product_docs"
-    ]
+    "evidence_ids": ["sog_src_makerdao_docs_dai", "sog_src_sky_dai_product_docs"]
   },
   {
     "id": "sog_dep_ust_terra_seed",
     "stablecoin_id": "sog_st_ust",
     "chain": "Terra",
     "deployment_type": "native_protocol_asset",
+    "canonicality": "legacy",
     "contract_address": "not_applicable_or_source_review_needed",
     "status": "failed_legacy_context",
     "notes": "UST historical Terra deployment context. Post-collapse USTC and Terra Classic lifecycle should be handled separately from restored stablecoin status.",
-    "evidence_ids": [
-      "sog_src_terra_docs",
-      "sog_src_ust_failure_research_arxiv"
-    ]
+    "evidence_ids": ["sog_src_terra_docs", "sog_src_ust_failure_research_arxiv"]
   },
   {
     "id": "sog_dep_busd_ethereum_seed",
     "stablecoin_id": "sog_st_busd",
     "chain": "Ethereum",
     "deployment_type": "issuer_supported_token",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "discontinued_or_wind_down_context",
     "notes": "BUSD Ethereum deployment placeholder. Contract metadata and post-wind-down status require source-backed review. Exchange support phase-out should be separated from issuer redemption status.",
-    "evidence_ids": [
-      "sog_src_paxos_busd_announcement",
-      "sog_src_busd_paxos_issuer_update"
-    ]
+    "evidence_ids": ["sog_src_paxos_busd_announcement", "sog_src_busd_paxos_issuer_update"]
   },
   {
     "id": "sog_dep_frax_ethereum_seed",
     "stablecoin_id": "sog_st_frax",
     "chain": "Ethereum",
     "deployment_type": "protocol_token",
+    "canonicality": "native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_frax_docs_frax"
-    ]
+    "evidence_ids": ["sog_src_frax_docs_frax"]
   },
   {
     "id": "sog_dep_tusd_ethereum_seed",
     "stablecoin_id": "sog_st_tusd",
     "chain": "Ethereum",
     "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_tusd_official_site"
-    ]
+    "evidence_ids": ["sog_src_tusd_official_site"]
   },
   {
     "id": "sog_dep_fdusd_ethereum_seed",
     "stablecoin_id": "sog_st_fdusd",
     "chain": "Ethereum",
     "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_fdusd_official_site"
-    ]
+    "evidence_ids": ["sog_src_fdusd_official_site"]
   },
   {
     "id": "sog_dep_pyusd_ethereum_seed",
     "stablecoin_id": "sog_st_pyusd",
     "chain": "Ethereum",
     "deployment_type": "issuer_supported_token",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_pyusd_paxos_official"
-    ]
+    "evidence_ids": ["sog_src_pyusd_paxos_official"]
   },
   {
     "id": "sog_dep_pyusd_solana_seed",
     "stablecoin_id": "sog_st_pyusd",
     "chain": "Solana",
     "deployment_type": "issuer_supported_token",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_pyusd_paypal_official"
-    ]
+    "evidence_ids": ["sog_src_pyusd_paypal_official"]
   },
   {
     "id": "sog_dep_usdd_tron_seed",
     "stablecoin_id": "sog_st_usdd",
     "chain": "TRON",
     "deployment_type": "native_or_protocol_supported",
+    "canonicality": "native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_usdd_official_site"
-    ]
+    "evidence_ids": ["sog_src_usdd_official_site"]
   },
   {
     "id": "sog_dep_gusd_ethereum_seed",
     "stablecoin_id": "sog_st_gusd",
     "chain": "Ethereum",
     "deployment_type": "issuer_supported_token",
+    "canonicality": "issuer_native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_gusd_gemini_official"
-    ]
+    "evidence_ids": ["sog_src_gusd_gemini_official"]
   },
   {
     "id": "sog_dep_lusd_ethereum_seed",
     "stablecoin_id": "sog_st_lusd",
     "chain": "Ethereum",
     "deployment_type": "protocol_token",
+    "canonicality": "native",
     "contract_address": "source_review_needed",
     "status": "active_or_legacy_context",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_lusd_liquity_docs"
-    ]
+    "evidence_ids": ["sog_src_lusd_liquity_docs"]
   },
   {
     "id": "sog_dep_crvusd_ethereum_seed",
     "stablecoin_id": "sog_st_crvusd",
     "chain": "Ethereum",
     "deployment_type": "protocol_token",
+    "canonicality": "native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_crvusd_curve_docs"
-    ]
+    "evidence_ids": ["sog_src_crvusd_curve_docs"]
   },
   {
     "id": "sog_dep_usde_ethereum_seed",
     "stablecoin_id": "sog_st_usde",
     "chain": "Ethereum",
     "deployment_type": "protocol_token",
+    "canonicality": "native",
     "contract_address": "source_review_needed",
     "status": "active",
     "notes": "Seed deployment placeholder.",
-    "evidence_ids": [
-      "sog_src_usde_ethena_docs"
-    ]
+    "evidence_ids": ["sog_src_usde_ethena_docs"]
   },
   {
     "id": "sog_dep_susd_ethereum_seed",
     "stablecoin_id": "sog_st_susd",
     "chain": "Ethereum",
     "deployment_type": "protocol_token",
+    "canonicality": "legacy",
     "contract_address": "source_review_needed",
     "status": "impaired_retirement_proposed",
     "notes": "Ethereum legacy sUSD deployment. Official 2018 rebrand material states that the nUSD-to-sUSD rename did not change contract addresses. Later proxy and implementation upgrades, the current impaired state, and the Vote Pending SIP-423 retirement proposal remain separate lifecycle layers.",
-    "evidence_ids": [
-      "sog_src_susd_synthetix_docs",
-      "sog_src_susd_sip423_2026",
-      "sog_src_susd_metamask_market_2026_06_18",
-      "sog_src_susd_nusd_launch_2018",
-      "sog_src_susd_rebrand_2018",
-      "sog_src_susd_synths_mainnet_2018"
-    ]
+    "evidence_ids": ["sog_src_susd_synthetix_docs", "sog_src_susd_sip423_2026", "sog_src_susd_metamask_market_2026_06_18", "sog_src_susd_nusd_launch_2018", "sog_src_susd_rebrand_2018", "sog_src_susd_synths_mainnet_2018"]
   },
   {
     "id": "sog_dep_susd_optimism_legacy",
     "stablecoin_id": "sog_st_susd",
     "chain": "Optimism",
     "deployment_type": "legacy_protocol_token",
+    "canonicality": "legacy",
     "contract_address": "source_review_needed",
     "status": "retirement_proposed",
     "notes": "SIP-423 explicitly includes Optimism legacy sUSD in the proposed retirement. Exact contract identity, bridge and custody treatment, snapshot routing, and current transfer or mint state require direct chain-specific verification. No suspension is recorded before implementation.",
-    "evidence_ids": [
-      "sog_src_susd_synthetix_docs",
-      "sog_src_susd_sip423_2026"
-    ]
+    "evidence_ids": ["sog_src_susd_synthetix_docs", "sog_src_susd_sip423_2026"]
   }
 ]

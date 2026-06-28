@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #224
-Active: PR #225
-Next: PR #226
+Latest completed: PR #225
+Active: PR #226
+Next: PR #227
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: paused
@@ -44,33 +44,35 @@ PR #221 terminal and relationship-end review
 PR #222 reserve applicability review
 PR #223 evidence reliability review
 PR #224 direct workflow placeholder review
+PR #225 evidence traceability and duplicate invariants
 ```
 
-## PR #225
+## PR #226
 
-Evidence traceability checkpoint:
+Deployment canonicality review for seed, extra, and issuer-control records:
 
 ```text
-Canonical evidence records: 457
-Public source identities: 412
-Evidence relations: 457
-Approved identity groups: 32
-Approved alias IDs: 45
-Public duplicate URL groups: 0
-Orphan relation sources: 0
-Invalid subject references: 0
+Reviewed deployments: 39
+Issuer native: 25
+Native: 9
+Legacy: 3
+Explicit unknown: 2
+Canonicality recorded registry-wide: 102
+Canonicality not recorded: 28
 ```
 
-Canonical evidence history remains append-only. Public deduplication occurs only through reviewed source-identity groups, and all relation unions must survive the projection.
+The two explicit unknown records are the sUSDS related-asset context and the aggregate USDS bridge context. Contract identity, verification, and operational status remain separate review axes.
 
-Specification: `docs/quality/evidence-traceability-review-2026-06-28.md`
-Manifest: `data/quality/evidence-traceability-pr225.json`
-Validator: `scripts/validate-evidence-traceability-pr225.mjs`
+Specification: `docs/quality/deployment-canonicality-review-2026-06-28.md`
+Manifest: `data/quality/deployment-canonicality-pr226.json`
+Validator: `scripts/validate-deployment-canonicality-pr226.mjs`
 
 ## Remaining sequence
 
 ```text
-PR #226-229 deployment quality
+PR #227 remaining batch A-E canonicality
+PR #228 contract identity and verification status
+PR #229 deployment source-status finalization
 PR #230-232 review-only monitoring
 ```
 
