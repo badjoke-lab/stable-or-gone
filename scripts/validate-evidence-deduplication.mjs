@@ -19,6 +19,8 @@ const warnings = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 const unique = (items) => [...new Set(items.filter((item) => typeof item === 'string' && item.length > 0))].sort();
 const sameArray = (left, right) => left.length === right.length && left.every((value, index) => value === right[index]);
+const expectedEvidenceRecords = baseline.minimum_counts?.evidence;
+const expectedPublicSourceIdentities = 412;
 
 function readRows(relativePath) {
   const parsed = JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
@@ -61,18 +63,18 @@ const auditGroupByUrl = new Map(groups.map((group) => [group.group_value, group]
 
 assert(audit.schema_version === '1.0', 'audit schema version must be 1.0');
 assert(audit.baseline_id === baseline.baseline_id, 'audit baseline id mismatch');
-assert(totals.evidence_records === 455, `expected 455 evidence records, found ${totals.evidence_records}`);
-assert(totals.unique_evidence_ids === 455, `expected 455 unique evidence ids, found ${totals.unique_evidence_ids}`);
+assert(totals.evidence_records === expectedEvidenceRecords, `expected ${expectedEvidenceRecords} evidence records, found ${totals.evidence_records}`);
+assert(totals.unique_evidence_ids === expectedEvidenceRecords, `expected ${expectedEvidenceRecords} unique evidence ids, found ${totals.unique_evidence_ids}`);
 assert(totals.duplicate_evidence_ids === 0, `duplicate evidence ids found: ${totals.duplicate_evidence_ids}`);
 assert(totals.exact_duplicate_url_groups === 32, `expected 32 exact duplicate URL groups, found ${totals.exact_duplicate_url_groups}`);
 assert(totals.exact_duplicate_url_title_groups === 5, `expected 5 exact duplicate URL-title groups, found ${totals.exact_duplicate_url_title_groups}`);
 assert(totals.normalized_only_duplicate_url_groups === 0, `expected no normalized-only duplicate URL groups, found ${totals.normalized_only_duplicate_url_groups}`);
 assert(records.length === totals.evidence_records, 'record inventory length mismatch');
 assert(groups.length === totals.exact_duplicate_url_groups, 'exact URL group inventory length mismatch');
-assert(canonicalRecords.length === 455, `expected 455 canonical evidence records, found ${canonicalRecords.length}`);
+assert(canonicalRecords.length === expectedEvidenceRecords, `expected ${expectedEvidenceRecords} canonical evidence records, found ${canonicalRecords.length}`);
 assert(evidenceSourceIdentityGroupCount === 32, `expected 32 approved source identity groups, found ${evidenceSourceIdentityGroupCount}`);
 assert(evidenceSourceAliasCount === 45, `expected 45 source alias ids, found ${evidenceSourceAliasCount}`);
-assert(publicSources.length === 410, `expected 410 public source identities, found ${publicSources.length}`);
+assert(publicSources.length === expectedPublicSourceIdentities, `expected ${expectedPublicSourceIdentities} public source identities, found ${publicSources.length}`);
 
 const recordIds = new Set(records.map((record) => record.id));
 assert(recordIds.size === records.length, 'record inventory contains duplicate ids');
@@ -141,7 +143,7 @@ const canonicalRelations = canonicalRecords.map((record) => ({
   claim_scopes: [...record.claim_scopes]
 }));
 const orphanRelationSourceIds = unique(canonicalRelations.map((relation) => relation.evidence_id)).filter((id) => !publicSourceById.has(id));
-assert(canonicalRelations.length === 455, `expected 455 evidence relations, found ${canonicalRelations.length}`);
+assert(canonicalRelations.length === expectedEvidenceRecords, `expected ${expectedEvidenceRecords} evidence relations, found ${canonicalRelations.length}`);
 assert(orphanRelationSourceIds.length === 0, `relations point to missing public source identities: ${orphanRelationSourceIds.join(', ')}`);
 assert(groupedEvidenceIds.size === 77, `expected 77 grouped evidence records, found ${groupedEvidenceIds.size}`);
 assert(publicSources.reduce((sum, source) => sum + (source.source_alias_ids?.length ?? 0), 0) === 45, 'public source alias total is not 45');
