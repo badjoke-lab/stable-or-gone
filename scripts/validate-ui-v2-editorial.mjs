@@ -1,3 +1,4 @@
+import './validate-ui-v2-mobile-accessibility.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
