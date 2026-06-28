@@ -58,7 +58,8 @@ export function resolveDeploymentTaxonomy(deployment: DeploymentTaxonomyRecord) 
     : canonicalityWasRecorded === true
       ? 'recorded'
       : getDeploymentCanonicalityRecordState(deployment.canonicality);
-  const contractIdentityState = getContractIdentityState(deployment.contract_address, deployment.deployment_identifier);
+  const identityValue = deployment.deployment_identifier ?? deployment.contract_address;
+  const contractIdentityState = getContractIdentityState(identityValue);
   const explicitVerificationStatus = deployment.id ? verificationStatusByDeploymentId.get(deployment.id) : undefined;
   const verificationState = getDeploymentVerificationState({
     ...deployment,
