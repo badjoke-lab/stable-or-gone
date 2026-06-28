@@ -42,7 +42,7 @@ function countBy(sourceRows, getter) {
 }
 
 const records = rows.map((row) => {
-  const contractIdentityState = getContractIdentityState(row.contract_address, row.deployment_identifier);
+  const contractIdentityState = getContractIdentityState(row.contract_address);
   return {
     id: row.id,
     file: row.__file,
