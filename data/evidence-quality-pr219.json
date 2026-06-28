@@ -1,0 +1,38 @@
+[
+  {
+    "id": "sog_src_gyen_launch_2021_pr219",
+    "stablecoin_id": "sog_st_gyen",
+    "issuer_id": "sog_issuer_gmo_trust",
+    "source_type": "official_statement",
+    "title": "GMO Trust begins GYEN and ZUSD issuance, redemption, and service",
+    "url": "https://group.gmo/news/article/7134/",
+    "publisher": "GMO Internet Group",
+    "published_at": "2021-03-02",
+    "archived_url": "https://web.archive.org/web/*/https://group.gmo/news/article/7134/",
+    "accessed_at": "2026-06-28",
+    "reliability": "high",
+    "claim_scope": "launch_date",
+    "stablecoin_ids": ["sog_st_gyen"],
+    "organization_ids": ["sog_issuer_gmo_trust"],
+    "claim_scopes": ["launch_date", "issuance_start", "redemption_start", "service_start"],
+    "notes": "The official release states that GMO Trust began GYEN issuance, redemption, and service on 2021-03-01 New York time. The release itself is dated 2021-03-02."
+  },
+  {
+    "id": "sog_src_gyen_launch_recap_2021_pr219",
+    "stablecoin_id": "sog_st_gyen",
+    "issuer_id": "sog_issuer_gmo_trust",
+    "source_type": "official_statement",
+    "title": "GMO official GYEN and ZUSD service-start retrospective",
+    "url": "https://group.gmo/news/article/7534/",
+    "publisher": "GMO Internet Group",
+    "published_at": "2021-12-22",
+    "archived_url": "https://web.archive.org/web/*/https://group.gmo/news/article/7534/",
+    "accessed_at": "2026-06-28",
+    "reliability": "high",
+    "claim_scope": "launch_date",
+    "stablecoin_ids": ["sog_st_gyen"],
+    "organization_ids": ["sog_issuer_gmo_trust"],
+    "claim_scopes": ["launch_date", "service_start", "issuer_history"],
+    "notes": "The later official retrospective independently states that GYEN and ZUSD service began on 2021-03-01 New York time."
+  }
+]

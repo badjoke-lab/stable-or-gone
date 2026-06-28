@@ -4,30 +4,36 @@ import path from 'node:path';
 const root = process.cwd();
 const auditPath = path.join(root, 'data/generated/record-public-copy-audit.json');
 const preservationPath = path.join(root, 'data/generated/record-public-copy-preservation.json');
+const v3BaselinePath = path.join(root, 'docs/migration/registry-v3-baseline.json');
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 assert(fs.existsSync(auditPath), 'record public-copy audit is missing');
 assert(fs.existsSync(preservationPath), 'record public-copy preservation report is missing');
-if (!fs.existsSync(auditPath) || !fs.existsSync(preservationPath)) {
+assert(fs.existsSync(v3BaselinePath), 'registry-v3 baseline is missing');
+if (!fs.existsSync(auditPath) || !fs.existsSync(preservationPath) || !fs.existsSync(v3BaselinePath)) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
 
 const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
 const preservation = JSON.parse(fs.readFileSync(preservationPath, 'utf8'));
+const v3Baseline = JSON.parse(fs.readFileSync(v3BaselinePath, 'utf8'));
 const totals = audit.totals ?? {};
 const matrix = audit.record_matrix ?? [];
 const occurrences = audit.occurrences ?? [];
 const findingsByDisposition = audit.findings_by_disposition ?? {};
+const expectedStablecoins = v3Baseline.expected_counts?.stablecoins;
+const expectedEvidenceRelations = v3Baseline.expected_counts?.evidence;
+const expectedPublicSourceIdentities = 412;
 
 assert(audit.schema_version === '1.0', 'audit schema version must be 1.0');
 assert(preservation.schema_version === '1.0', 'preservation schema version must be 1.0');
 assert(typeof audit.baseline_id === 'string' && audit.baseline_id.length > 0, 'baseline id is missing');
-assert(totals.stablecoins === 92, `expected 92 stablecoins, found ${totals.stablecoins}`);
-assert(matrix.length === 92, `expected 92 migration rows, found ${matrix.length}`);
-assert(totals.canonical_evidence_relations === 455, `expected 455 canonical evidence relations, found ${totals.canonical_evidence_relations}`);
-assert(totals.public_source_identities === 410, `expected 410 public source identities, found ${totals.public_source_identities}`);
+assert(totals.stablecoins === expectedStablecoins, `expected ${expectedStablecoins} stablecoins, found ${totals.stablecoins}`);
+assert(matrix.length === expectedStablecoins, `expected ${expectedStablecoins} migration rows, found ${matrix.length}`);
+assert(totals.canonical_evidence_relations === expectedEvidenceRelations, `expected ${expectedEvidenceRelations} canonical evidence relations, found ${totals.canonical_evidence_relations}`);
+assert(totals.public_source_identities === expectedPublicSourceIdentities, `expected ${expectedPublicSourceIdentities} public source identities, found ${totals.public_source_identities}`);
 assert(totals.orphan_source_relation_ids === 0, 'orphan evidence source relation ids must be zero');
 assert(totals.invalid_stablecoin_relation_ids === 0, 'invalid stablecoin relation ids must be zero');
 assert(totals.invalid_public_copy_override_ids === 0, 'public-copy overrides must reference canonical stablecoin ids');

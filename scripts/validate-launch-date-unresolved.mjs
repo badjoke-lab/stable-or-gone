@@ -13,6 +13,7 @@ const fail = (message) => {
 const queue = readJson('data/quality/launch-date-unresolved.json');
 const baseline = loadRegistryV2Baseline(root);
 const stablecoinFiles = baseline?.data_groups?.stablecoins;
+const evidenceFiles = baseline?.data_groups?.evidence;
 const reviewedInPr218 = new Set([
   'sog_st_brz',
   'sog_st_honey',
@@ -22,16 +23,33 @@ const reviewedInPr218 = new Set([
   'sog_st_usyc',
   'sog_st_aecoin'
 ]);
+const unresolvedReviewedInPr219 = new Set([
+  'sog_st_agoraausd',
+  'sog_st_dsd',
+  'sog_st_esd',
+  'sog_st_eurt',
+  'sog_st_mim',
+  'sog_st_musd'
+]);
+const gyenLaunchEvidenceIds = new Set([
+  'sog_src_gyen_launch_2021_pr219',
+  'sog_src_gyen_launch_recap_2021_pr219'
+]);
 
 if (!Array.isArray(stablecoinFiles) || stablecoinFiles.length === 0) {
   throw new Error('registry-v2 baseline has no stablecoin data group');
 }
+if (!Array.isArray(evidenceFiles) || evidenceFiles.length === 0) {
+  throw new Error('registry-v2 baseline has no evidence data group');
+}
 
-const stablecoins = stablecoinFiles.flatMap((file) => {
+const loadRows = (files, groupName) => files.flatMap((file) => {
   const rows = readJson(file);
-  if (!Array.isArray(rows)) throw new Error(`${file} must contain an array`);
+  if (!Array.isArray(rows)) throw new Error(`${file} in ${groupName} must contain an array`);
   return rows;
 });
+const stablecoins = loadRows(stablecoinFiles, 'stablecoins');
+const evidence = loadRows(evidenceFiles, 'evidence');
 
 if (queue.schema_version !== '1.0') fail(`unexpected schema_version ${queue.schema_version}`);
 if (!/^\d{4}-\d{2}-\d{2}$/.test(queue.frozen_at ?? '')) fail('frozen_at must be YYYY-MM-DD');
@@ -77,10 +95,19 @@ for (const row of records) {
     if (!Array.isArray(row.reviewed_sources) || row.reviewed_sources.length < 2) fail(`${row.stablecoin_id}: PR #218 requires at least two reviewed sources`);
     if (row.category === 'D') fail(`${row.stablecoin_id}: PR #218 source trail must not remain Category D`);
   }
+  if (unresolvedReviewedInPr219.has(row.stablecoin_id)) {
+    if (row.last_reviewed !== '2026-06-28') fail(`${row.stablecoin_id}: PR #219 review date is missing`);
+    if (!Array.isArray(row.reviewed_sources) || row.reviewed_sources.length < 2) fail(`${row.stablecoin_id}: PR #219 requires at least two reviewed sources`);
+    if (typeof row.best_known_range !== 'string' || row.best_known_range.length === 0) fail(`${row.stablecoin_id}: PR #219 requires a bounded range`);
+    if (row.category !== 'C') fail(`${row.stablecoin_id}: unresolved PR #219 boundary must remain Category C`);
+  }
 }
 
 for (const reviewedId of reviewedInPr218) {
   if (!uniqueIds.has(reviewedId)) fail(`${reviewedId}: PR #218 reviewed record is missing from queue`);
+}
+for (const reviewedId of unresolvedReviewedInPr219) {
+  if (!uniqueIds.has(reviewedId)) fail(`${reviewedId}: PR #219 unresolved record is missing from queue`);
 }
 
 for (const category of ['B', 'C', 'D']) {
@@ -96,12 +123,30 @@ for (const id of uniqueIds) {
   else if (coin.launch_date !== null) fail(`${id}: queue record has non-null launch_date ${coin.launch_date}`);
 }
 
+const gyen = stablecoinById.get('sog_st_gyen');
+if (!gyen) fail('sog_st_gyen: canonical stablecoin is missing');
+else if (gyen.launch_date !== '2021-03-01') fail(`sog_st_gyen: expected launch_date 2021-03-01, found ${gyen.launch_date}`);
+if (uniqueIds.has('sog_st_gyen')) fail('sog_st_gyen: resolved launch date must not remain in the unresolved queue');
+
+const evidenceById = new Map(evidence.map((row) => [row.id, row]));
+for (const evidenceId of gyenLaunchEvidenceIds) {
+  const row = evidenceById.get(evidenceId);
+  if (!row) {
+    fail(`${evidenceId}: required GYEN launch evidence is missing`);
+    continue;
+  }
+  const subjects = new Set([...(row.stablecoin_ids ?? []), row.stablecoin_id].filter(Boolean));
+  if (!subjects.has('sog_st_gyen')) fail(`${evidenceId}: evidence is not linked to GYEN`);
+  const scopes = new Set([...(row.claim_scopes ?? []), row.claim_scope].filter(Boolean));
+  if (!scopes.has('launch_date')) fail(`${evidenceId}: launch_date claim scope is missing`);
+  if (row.reliability !== 'high') fail(`${evidenceId}: launch evidence must remain high reliability`);
+}
+
 const nullLaunchIds = stablecoins
   .filter((row) => row.launch_date === null)
   .map((row) => row.id)
   .sort();
 const queueIds = [...uniqueIds].sort();
-
 const missingFromQueue = nullLaunchIds.filter((id) => !uniqueIds.has(id));
 const extraInQueue = queueIds.filter((id) => !nullLaunchIds.includes(id));
 if (missingFromQueue.length > 0) fail(`canonical null launch dates missing from queue: ${missingFromQueue.join(', ')}`);
@@ -130,9 +175,10 @@ if (typeof queue.source_review === 'string') {
     for (const id of queueIds) {
       if (!review.includes(id)) fail(`source_review is missing queue record ${id}`);
     }
+    if (!review.includes('GYEN is resolved to `2021-03-01`')) fail('source_review is missing the GYEN resolution statement');
   }
 }
 
 if (!process.exitCode) {
-  console.log(`launch-date unresolved queue valid: ${records.length} records (B ${categoryCounts.B}, C ${categoryCounts.C}, D ${categoryCounts.D}); PR #218 reviewed ${reviewedInPr218.size}`);
+  console.log(`launch-date unresolved queue valid: ${records.length} records (B ${categoryCounts.B}, C ${categoryCounts.C}, D ${categoryCounts.D}); GYEN resolved to 2021-03-01; PR #219 reviewed ${unresolvedReviewedInPr219.size} unresolved records`);
 }

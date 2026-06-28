@@ -14,9 +14,8 @@ Stable assets:                 92
 Organizations:                 86
 Organization relationships:   101
 Events:                       150
-Canonical evidence records:   455
-Public source identities:      410
-Evidence relations:            455
+Canonical evidence records:   457
+Evidence relations:            457
 Known unknowns:                253
 Deployments:                   130
 Reserve components:            125
@@ -29,10 +28,10 @@ Canonical count source: `docs/migration/registry-v3-baseline.json`.
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest completed work: PR #216 — visual mark correction
+Latest completed work: PR #218 — launch-date Category B/D source review
 Current phase: non-UI quality program
-Active work: PR #217 — workstream transition and queue alignment
-Next work: PR #218 — launch-date Category B/D source review
+Active work: PR #219 — historical launch-boundary review
+Next work: PR #220 — remaining current launch-boundary review
 Detailed UI review: deferred
 Gate V2-A: passed
 Gate V2-B: passed
@@ -65,20 +64,70 @@ PR #216  owner-review visual mark correction
 
 The current UI is an intermediate repository state. The 92-record and all-route visual audit resumes only when detailed owner review is practical. Gate V2-F remains pending.
 
-## Immediate work — PR #217
+## Completed non-UI work
 
-1. make `docs/quality/non-ui-quality-program.md` the active plan;
-2. update repository authority and schedule documents;
-3. mark the UI audit as deferred rather than completed;
-4. correct the stale human-readable launch-date queue totals;
-5. preserve canonical records, routes, counts, evidence relations, unknowns, deployments, and public output;
-6. perform no production deployment.
+### PR #217 — workstream transition
 
-## Non-UI quality sequence
+- established `docs/quality/non-ui-quality-program.md` as the active plan;
+- marked detailed UI review as deferred rather than passed;
+- aligned agent instructions, governance, deployment policy, and build validation;
+- preserved all canonical records and public output.
+
+### PR #218 — Category B/D launch-date source review
+
+- reviewed BRZ, HONEY, USDz, HUSD, TRYB, USYC, and AE Coin;
+- preserved all seven canonical dates as `null`;
+- replaced the source-missing category with source-backed boundary classifications;
+- changed the launch queue from `B 3 / C 13 / D 4` to `B 3 / C 17 / D 0`.
+
+## Immediate work — PR #219
+
+Review the historical boundary group:
 
 ```text
-PR #218      launch-date Category B/D review: 7 records
-PR #219–220  launch-date Category C reviews: 13 records
+Agora AUSD
+Dynamic Set Dollar
+Empty Set Dollar
+Euro Tether
+GYEN
+Magic Internet Money
+mStable USD
+```
+
+PR #219 resolves GYEN to `2021-03-01` using two official GMO sources that state issuance, redemption, and service began on that day. Agora AUSD, DSD, ESD, EURT, MIM, and mUSD remain unresolved because deployment, protocol start, first mint, public announcement, and public availability do not yet collapse into one evidenced day.
+
+Expected PR #219 queue state:
+
+```text
+Missing canonical launch dates: 19
+Category B: 3
+Category C: 16
+Category D: 0
+```
+
+## Next work — PR #220
+
+Review the remaining current-product and lineage group:
+
+```text
+HONEY
+HUSD
+MainStreetUSD
+Stables Labs USDX
+Staked USDe
+USD1
+Mento Dollar
+USYC
+Hyperliquid USDH
+AE Coin
+```
+
+PR #220 may resolve values or preserve `null`. Network launch, regulatory approval, fund inception, migration, rebrand, or contract deployment must not be substituted for the asset launch without matching evidence.
+
+## Remaining non-UI quality sequence
+
+```text
+PR #220      remaining launch-date boundary review
 PR #221      terminal-date and relationship-end review
 PR #222      reserve applicability review
 PR #223–225  evidence quality review
@@ -91,7 +140,7 @@ A quality PR may resolve a value or preserve an unknown. Completion means that t
 ## Preserved quality queues
 
 ```text
-Missing canonical launch dates:           20
+Missing canonical launch dates:           19 after PR #219
 Historical terminal dates unresolved:      4
 Historical relationship end dates:         7
 Reserve applicability queue:               12
