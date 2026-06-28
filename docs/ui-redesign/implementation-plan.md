@@ -25,13 +25,13 @@ The v2 contract controls visual composition and page implementation. The v1 mock
 ## 2. Current position
 
 ```text
-Latest merged UI-program PR: #209
-Latest merged main: 4e07907cf1e796882382e964c2e7852cfed21c07
+Latest merged UI-program PR: #210
+Latest merged main: ce3664f4ffa34d0df60b4182b8be821bc13f2945
 Gate V2-A: passed
 Gate V2-B: passed
 Current phase: V2-2 approved registry pages
-Active work: PR #210 Stablecoins index
-Next approved work: PR #211 Stablecoin detail
+Active work: PR #211 Stablecoin detail
+Next approved work: PR #212 Organizations index and detail
 Stable assets: 92
 Organizations: 86
 Relationships: 101
@@ -81,48 +81,51 @@ Merged. Gate V2-B passed.
 
 ### PR #209 — Approved Home
 
-Merged at `4e07907cf1e796882382e964c2e7852cfed21c07`.
+Merged at `4e07907cf1e796882382e964c2e7852cfed21c07` after all 18 checks passed.
+
+### PR #210 — Approved Stablecoins index
+
+Merged at `ce3664f4ffa34d0df60b4182b8be821bc13f2945` after all 18 checks passed.
 
 Completed:
 
-- approved v2 Home hierarchy;
-- static search across stablecoins, organizations, and events;
-- dynamic canonical metrics;
-- real registry and guide entry cards;
-- explicit slug-ordered selected records;
-- desktop table and equivalent compact cards;
-- Home validator in full and site builds;
-- all 18 pull-request checks passed;
+- approved v2 index hierarchy and metric cards;
+- six reviewed taxonomy filters and six sort modes;
+- URL and browser-history state;
+- nine protected desktop headers;
+- ticker badges, reviewed context, compact cards, and bounded comparison;
+- Stablecoins-index validator in full and site builds;
 - no canonical-count, route, or deployment change.
 
 ## 6. Active registry page work
 
-### PR #210 — Approved Stablecoins index
+### PR #211 — Approved Stablecoin detail
 
-Reference: `docs/ui-redesign/approved-mocks-v2/02-stablecoin-index.webp`.
+Reference: `docs/ui-redesign/approved-mocks-v2/03-stablecoin-detail.webp`.
 
 Work:
 
-- replace the legacy index composition with the approved v2 `PageHero` and metric-card hierarchy;
-- retain dynamic canonical counts for records, active lifecycle records, connected organizations, and source identities;
-- preserve search across names, symbols, aliases, domains, and organizations;
-- preserve URL-synchronized state and back/forward navigation;
-- preserve the six approved taxonomy filter groups: lifecycle, issuance, asset class, reference, backing, and stabilization;
-- preserve six sort modes;
-- preserve nine protected desktop columns;
-- add ticker badges to desktop rows and compact cards;
-- add last-reviewed, event, evidence, and known-unknown context without inventing values;
-- preserve compact record cards with all protected fields;
-- retain the existing bounded two-to-four-record comparison as a secondary historical context tool, not a ranking or mock-style account tray;
-- add a v2 Stablecoins-index validator to full and site builds;
-- make `AGENTS.md` defer current-work authority to the roadmap and implementation plan.
+- replace the legacy detail hero with the approved v2 record hero;
+- show ticker badge, lifecycle, issuance, canonical ID, and registry return action;
+- add six current-state metric cards for lifecycle, reference target, backing model, issuance, primary organization, and last reviewed;
+- preserve the approved eight-section dossier contract and local navigation;
+- preserve the identity table and equivalent compact cards;
+- preserve all current, ended, and unknown-state organization relationships, roles, governance, display selection, and control capability context;
+- replace stale placeholder copy with the completed mechanics section;
+- preserve reference, backing, stabilization, exit, valuation, yield, and classification fields;
+- preserve reserve components, reserve profile, redemption profile, reserve history, deployments, regulatory notices, model history, issuer-control events, event timeline, evidence, known unknowns, and record coverage;
+- split value-state rendering into `reserves`, `legal`, and `unknowns` modes so DOM order follows the dossier contract;
+- preserve all deployment, evidence, mobile, and value-state axes;
+- add registry, organization, event, guide, Methodology, Corrections, and data-manifest destinations;
+- add a v2 Stablecoin-detail validator to full and site builds;
+- remove the last hardcoded current-step statement from `AGENTS.md`.
 
 Non-scope:
 
 - no live price or market data;
 - no market capitalization, supply, holder, or transfer metrics;
+- no synthetic safety, transparency, or overall-assessment fields;
 - no saved views, accounts, watchlists, follows, or recent-history features;
-- no new export unless a verified public export already exists;
 - no new canonical records;
 - no route or count changes;
 - no production publication.
@@ -130,26 +133,18 @@ Non-scope:
 Completion:
 
 ```text
-Approved Stablecoins index hierarchy is implemented
-Canonical metric cards are dynamic
-Six taxonomy filters and six sort modes remain functional
-URL synchronization and browser history remain functional
-Nine protected desktop columns remain present
-Ticker badges and review context are visible
-Compact cards preserve protected information
-Comparison remains bounded and explicitly non-ranking
-Mock-only features are absent
-V2 Stablecoins validator and all repository checks pass
-Canonical routes and counts remain unchanged
+Approved detail hero and six current-state cards are implemented
+All eight dossier sections remain present and ordered
+Identity, organization, mechanics, deployment, history, evidence, unknown, and further-reading fields remain reachable
+Compact identity and organization representations remain available
+Reserve, legal, and unknown sections render in approved order
+Stale implementation placeholder text is absent
+Synthetic scores and mock-only fields are absent
+V2 Stablecoin-detail validator and all repository checks pass
+All 92 detail routes and canonical counts remain unchanged
 ```
 
-Gate V2-C does not pass at PR #210; it requires PRs #209 through #213.
-
-### PR #211 — Stablecoin detail
-
-Reference: `docs/ui-redesign/approved-mocks-v2/03-stablecoin-detail.webp`.
-
-Implement the record hero, current-state axes, profile summary, organizations and control, reserve/redemption/backing context, deployments, event history, evidence, known unknowns, secondary guides, and all value states. Exclude synthetic safety, transparency, or overall-assessment scores.
+Gate V2-C does not pass at PR #211; it requires PRs #209 through #213.
 
 ### PR #212 — Organizations index and detail
 

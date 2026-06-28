@@ -47,14 +47,14 @@ Canonical count source: `docs/migration/registry-v3-baseline.json`.
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest merged UI-program work: PR #209
-Latest merged main: 4e07907cf1e796882382e964c2e7852cfed21c07
+Latest merged UI-program work: PR #210
+Latest merged main: ce3664f4ffa34d0df60b4182b8be821bc13f2945
 Current public UI: partial repair implementation, not yet the completed UI v2 release
 Gate V2-A: passed
 Gate V2-B: passed
 Current phase: Phase V2-2 — approved registry pages
-Active work: PR #210 — approved Stablecoins index
-Next work: PR #211 — approved Stablecoin detail
+Active work: PR #211 — approved Stablecoin detail
+Next work: PR #212 — approved Organizations index and detail
 Approved visual direction: Modern Data Product
 Approved desktop reference pages: 8
 Routine record growth: paused at 92 assets
@@ -74,9 +74,10 @@ PR #202–206  emergency build and integrity repairs
 PR #207      approved UI v2 contract, eight page references, logo references, schedule, and AGENTS authority
 PR #208      approved S/G assets, v2 tokens, shared shell, reusable components, and foundation validator
 PR #209      approved Home, cross-registry search, canonical metrics, deterministic selected records, and Home validator
+PR #210      approved Stablecoins index, taxonomy filters, URL state, ticker badges, compact cards, and index validator
 ```
 
-PR #207 passed Gate V2-A. PR #208 passed Gate V2-B. PR #209 merged after all 18 pull-request checks passed. No completed v2 PR changed canonical record counts or published production.
+PR #207 passed Gate V2-A. PR #208 passed Gate V2-B. PRs #209 and #210 each merged after all 18 pull-request checks passed. No completed v2 PR changed canonical record counts or published production.
 
 ## Approved UI v2 reference set
 
@@ -120,8 +121,8 @@ Gate V2-B passed
 
 ```text
 PR #209  Home — complete
-PR #210  Stablecoins index — active
-PR #211  Stablecoin detail
+PR #210  Stablecoins index — complete
+PR #211  Stablecoin detail — active
 PR #212  Organizations index and detail
 PR #213  Events index and detail
 Gate V2-C
@@ -156,46 +157,44 @@ PR #217 or publication report  publish the exact approved candidate
 Gate V2-H  production parity verified
 ```
 
-## Immediate work — PR #210
+## Immediate work — PR #211
 
-Reference: `docs/ui-redesign/approved-mocks-v2/02-stablecoin-index.webp`.
+Reference: `docs/ui-redesign/approved-mocks-v2/03-stablecoin-detail.webp`.
 
 Implementation scope:
 
-1. Replace the legacy Stablecoins intro with the approved v2 hero and metric hierarchy.
-2. Preserve dynamic counts for all records, active lifecycle records, connected organizations, and source identities.
-3. Preserve search across name, symbol, alias, domain, and connected organization.
-4. Preserve URL-synchronized state, deterministic parameter order, browser back/forward handling, and clear actions.
-5. Preserve six approved taxonomy filters: lifecycle, issuance, asset class, reference, backing, and stabilization.
-6. Preserve six sort modes.
-7. Preserve nine protected desktop table headers.
-8. Add ticker badges to desktop rows and compact cards.
-9. Add last-reviewed, event, evidence, and known-unknown context from canonical records.
-10. Preserve compact cards for small screens.
-11. Preserve the bounded two-to-four-record comparison as secondary historical context, not a ranking or account feature.
-12. Add a PR #210-specific validator to full and site builds.
-13. Correct `AGENTS.md` so current-work authority comes from this roadmap and the implementation plan.
-14. Preserve canonical counts and routes.
+1. Replace the legacy detail hero with the approved v2 record hero, ticker badge, lifecycle, issuance, and registry return action.
+2. Add six current-state metric cards for lifecycle, reference target, backing model, issuance, primary organization, and last reviewed.
+3. Preserve the approved eight-section dossier contract and local navigation.
+4. Preserve the identity table and equivalent compact identity cards.
+5. Preserve every organization relationship, role, relationship state, governance field, and control-capability summary.
+6. Replace the stale mechanics placeholder with the completed mechanics section.
+7. Preserve reference, backing, stabilization, redemption/exit, valuation, yield, and classification fields.
+8. Preserve reserve components, reserve profile, redemption profile, reserve history, deployments, regulatory notices, model history, issuer-control events, event timeline, evidence, and known unknowns.
+9. Split reserve, legal, and unknown sections so DOM order follows the dossier contract.
+10. Preserve evidence axes, deployment axes, value states, and record coverage counts.
+11. Add Methodology, Corrections, registry, organization, event, guide, and data-manifest destinations.
+12. Add a PR #211-specific validator to full and site builds.
+13. Remove stale hardcoded current-work text from `AGENTS.md`; roadmap and implementation plan remain authoritative.
+14. Preserve all 92 routes and canonical counts.
 15. Do not deploy production.
 
-PR #210 completion criteria:
+PR #211 completion criteria:
 
 ```text
-Approved Stablecoins hierarchy is implemented
-Canonical metric cards remain dynamic
-Six filters and six sorts remain functional
-URL and browser history behavior remains functional
-Nine protected headers remain present
-Ticker badges and review context are visible
-Compact cards preserve protected information
-Comparison remains bounded and non-ranking
-Mock-only features are absent
-PR #210 validator and all repository checks pass
-Canonical routes and counts remain unchanged
+Approved detail hero and current-state hierarchy are implemented
+All eight dossier sections remain present and ordered
+All current identity, organization, mechanics, deployment, history, evidence, unknown, and further-reading fields remain reachable
+Compact identity and organization representations remain available
+Reserve, legal, and unknown sections render in the approved order
+Stale implementation placeholder text is absent
+Synthetic scores and mock-only fields are absent
+PR #211 validator and all repository checks pass
+All 92 detail routes and canonical counts remain unchanged
 No production deployment
 ```
 
-After PR #210 merges, the active item becomes PR #211 and must use `03-stablecoin-detail.webp`.
+After PR #211 merges, the active item becomes PR #212 and must use `04-organization-index.webp` and `05-organization-detail.webp`.
 
 ## Mock-only exclusions
 
@@ -258,7 +257,3 @@ Production branch: main
 ```
 
 Production success may be stated only after the deployed commit and public parity are verified.
-
-## Completion definition
-
-The v2 program is complete only when all approved page families match their contracts, the approved S/G brand is consistent, canonical semantics and counts remain correct, material mobile information is preserved, evidence and known unknowns remain connected, mock-only values are absent, and the explicitly approved candidate is deliberately published and verified.
