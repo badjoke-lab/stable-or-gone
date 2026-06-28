@@ -20,7 +20,7 @@ for (const page of pages) {
   if (!fs.existsSync(path.join(root, page))) continue;
   const source = read(page);
   check(source.includes('BaseLayout'), `${page}: BaseLayout is missing`);
-  check(source.includes('class="hero"') || source.includes("class='hero'"), `${page}: editorial hero is missing`);
+  check(/class=["'][^"']*\bhero\b/.test(source), `${page}: editorial hero is missing`);
   check(!source.includes('fetch('), `${page}: external runtime fetch is not allowed`);
 }
 const layout = read('src/layouts/BaseLayout.astro');
