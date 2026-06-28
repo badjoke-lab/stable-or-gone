@@ -28,11 +28,12 @@ requireText('docs/spec-governance.md', [
 ]);
 
 requireText('docs/roadmap.md', [
-  'Current phase: non-UI quality program',
-  'Active work: PR #217',
-  'Next work: PR #218',
-  'Gate V2-F: deferred and not passed',
-  'Routine record growth: paused at 92 assets'
+  'Latest completed: PR 218',
+  'Active: PR 219',
+  'Next: PR 220',
+  'Gate V2-F: not passed',
+  'Stable assets: 92',
+  'Record growth: paused'
 ]);
 
 requireText('docs/ui-redesign/implementation-plan.md', [
@@ -50,18 +51,13 @@ requireText('docs/deployment-policy.md', [
 
 requireText('docs/quality/non-ui-quality-program.md', [
   'Status: canonical implementation plan',
-  'PR #217 — workstream transition and queue alignment',
-  'PR #218 — launch-date source review',
+  'PR #219–#220 — launch-date boundary-conflict groups',
   'Gate V2-F remains pending'
 ]);
 
 const roadmap = read('docs/roadmap.md');
-if (/Next work:\s*PR #217.*all-route UI/i.test(roadmap)) {
-  failures.push('roadmap still assigns PR #217 to the deferred UI audit');
-}
-if (/Gate V2-F:\s*passed/i.test(roadmap)) {
-  failures.push('roadmap must not mark Gate V2-F as passed');
-}
+if (/Gate V2-F:\s*passed/i.test(roadmap)) failures.push('roadmap must not mark Gate V2-F as passed');
+if (/Active:\s*PR 21[78]/i.test(roadmap)) failures.push('roadmap still points to a completed work item');
 
 if (failures.length) {
   console.error('Active workstream validation failed:');
@@ -69,4 +65,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Active workstream validation passed: non-UI quality program is canonical and UI Gate V2-F remains deferred.');
+console.log('Active workstream validation passed: PR 219 is active and UI Gate V2-F remains deferred.');
