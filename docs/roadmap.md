@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #226
-Active: PR #227
-Next: PR #228
+Latest completed: PR #227
+Active: PR #228
+Next: PR #229
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: paused
@@ -46,34 +46,31 @@ PR #223 evidence reliability review
 PR #224 direct workflow placeholder review
 PR #225 evidence traceability and duplicate invariants
 PR #226 seed and extra deployment canonicality
+PR #227 remaining deployment canonicality
 ```
 
-## PR #227
-
-Remaining batch A–E deployment canonicality review:
+## PR #228
 
 ```text
-Reviewed deployments: 28
-Canonical bridge: 3
-Issuer native: 5
-Legacy: 8
-Native: 9
-Synthetic: 1
-Explicit unknown: 2
-Canonicality recorded registry-wide: 130
-Canonicality not recorded: 0
+Deployments reviewed: 130
+Verified: 0
+Identifier recorded, unverified: 45
+Source linked, identifier missing: 69
+Source review needed: 15
+Unknown: 1
+Verification status recorded: 130
+Verification status not recorded: 0
 ```
 
-EURS bridge representations on Arbitrum and Gnosis remain explicit unknown because the reviewed issuer source does not establish whether the bridge is canonical, issuer-controlled, or third-party.
+The canonical overlay records the conservative state already implied by identifier and evidence coverage. It does not promote any deployment to verified.
 
-Specification: `docs/quality/deployment-canonicality-batches-review-2026-06-28.md`
-Manifest: `data/quality/deployment-canonicality-pr227.json`
-Validator: `scripts/validate-deployment-canonicality-pr227.mjs`
+Specification: `docs/quality/deployment-verification-review-2026-06-28.md`
+Overlay: `data/deployment-verification-pr228.json`
+Validator: `scripts/validate-deployment-verification-pr228.mjs`
 
 ## Remaining sequence
 
 ```text
-PR #228 contract identity and verification status
 PR #229 deployment source-status finalization
 PR #230-232 review-only monitoring
 ```

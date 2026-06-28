@@ -14,7 +14,19 @@ import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 const root = process.cwd();
 const baseline = loadRegistryV2Baseline(root);
 const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-const rows = (baseline.data_groups.deployments ?? []).flatMap((file) => read(file).map((row) => ({ ...row, __file: file })));
+const verificationReview = read('data/deployment-verification-pr228.json');
+const verificationById = new Map(
+  Object.entries(verificationReview.status_ids ?? {}).flatMap(([status, ids]) =>
+    (ids ?? []).map((id) => [id, status])
+  )
+);
+const rows = (baseline.data_groups.deployments ?? []).flatMap((file) =>
+  read(file).map((row) => ({
+    ...row,
+    verification_status: verificationById.get(row.id) ?? row.verification_status,
+    __file: file
+  }))
+);
 
 function countBy(sourceRows, getter) {
   const counts = new Map();
@@ -31,7 +43,7 @@ function countBy(sourceRows, getter) {
 
 const records = rows.map((row) => {
   const contractIdentityState = getContractIdentityState(row.contract_address);
-  const record = {
+  return {
     id: row.id,
     file: row.__file,
     stablecoin_id: row.stablecoin_id ?? null,
@@ -65,7 +77,6 @@ const records = rows.map((row) => {
       !Array.isArray(row.evidence_ids) || row.evidence_ids.length === 0 ? 'missing_evidence_ids' : null
     ].filter(Boolean)
   };
-  return record;
 });
 
 const idCounts = new Map();
@@ -77,6 +88,11 @@ const report = {
   schema_version: '1.0',
   generated_at: new Date().toISOString(),
   baseline_id: baseline.baseline_id,
+  verification_review: {
+    schema_version: verificationReview.schema_version,
+    reviewed_at: verificationReview.reviewed_at,
+    expected_total: verificationReview.expected_total
+  },
   totals: {
     deployments: records.length,
     unique_ids: idCounts.size,

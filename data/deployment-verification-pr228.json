@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-06-28",
+  "source_review": "docs/quality/deployment-verification-review-2026-06-28.md",
+  "expected_total": 130,
+  "status_counts": {
+    "review_needed": 15,
+    "identifier_recorded_unverified": 45,
+    "unknown": 1,
+    "source_linked_no_identifier": 69
+  },
+  "status_ids": {
+    "review_needed": ["sog_dep_busd_ethereum_seed","sog_dep_crvusd_ethereum_seed","sog_dep_dai_ethereum_seed","sog_dep_fdusd_ethereum_seed","sog_dep_frax_ethereum_seed","sog_dep_gusd_ethereum_seed","sog_dep_lusd_ethereum_seed","sog_dep_pyusd_ethereum_seed","sog_dep_pyusd_solana_seed","sog_dep_susd_ethereum_seed","sog_dep_susd_optimism_legacy","sog_dep_tusd_ethereum_seed","sog_dep_usdd_tron_seed","sog_dep_usde_ethereum_seed","sog_dep_usdt_ethereum_seed"],
+    "identifier_recorded_unverified": ["sog_dep_acalaausd_acala_batch_k","sog_dep_agoraausd_ethereum_batch_f","sog_dep_bac_ethereum_batch_k","sog_dep_bold_ethereum_batch_c","sog_dep_dola_ethereum_batch_g","sog_dep_eurt_ethereum_batch_e","sog_dep_eurt_omni_batch_e","sog_dep_fei_ethereum","sog_dep_fxusd_ethereum_batch_m","sog_dep_husd_ethereum","sog_dep_iron_polygon_batch_d","sog_dep_lisusd_bnb_batch_g","sog_dep_mai_polygon_batch_m","sog_dep_mim_ethereum","sog_dep_mountainusdm_ethereum_batch_f","sog_dep_msusd_ethereum_v2_batch_n","sog_dep_musd_ethereum_batch_d","sog_dep_nuon_arbitrum_v1","sog_dep_nuon_base","sog_dep_paxg_ethereum","sog_dep_rai_ethereum","sog_dep_sai_ethereum_batch_d","sog_dep_sdai_ethereum_batch_h","sog_dep_spot_base","sog_dep_spot_ethereum","sog_dep_usd0_arbitrum_batch_c","sog_dep_usd0_base_batch_c","sog_dep_usd0_bnb_batch_c","sog_dep_usd0_ethereum_batch_c","sog_dep_usd1_bnb_batch_f","sog_dep_usd1_ethereum_batch_f","sog_dep_usdc_base_seed","sog_dep_usdc_ethereum_seed","sog_dep_usdc_solana_seed","sog_dep_usdf_ethereum_batch_l","sog_dep_usdm_celo_batch_e","sog_dep_usdp_ethereum_seed","sog_dep_usdp_solana_seed","sog_dep_usdq_ethereum_batch_f","sog_dep_usdq_xrpl_batch_f","sog_dep_usdt_tron","sog_dep_usdz_ethereum_batch_l","sog_dep_usr_ethereum_batch_c","sog_dep_vai_bnb_batch_g","sog_dep_xaut_ethereum"],
+    "unknown": ["sog_dep_ust_terra_seed"],
+    "source_linked_no_identifier": ["sog_dep_aecoin_unresolved_batch_p","sog_dep_agoraausd_solana_batch_f","sog_dep_alusd_ethereum_batch_e","sog_dep_brz_ethereum_batch_i","sog_dep_cashio_solana_batch_k","sog_dep_djed_cardano_batch_g","sog_dep_dsd_ethereum_batch_k","sog_dep_esd_ethereum_batch_k","sog_dep_eura_ethereum_batch_j","sog_dep_eurau_ethereum_batch_p","sog_dep_eurc_avalanche_seed","sog_dep_eurc_base_seed","sog_dep_eurc_ethereum_seed","sog_dep_eurc_solana_seed","sog_dep_eurc_stellar_seed","sog_dep_eurcv_ethereum_batch_j","sog_dep_euri_ethereum_batch_j","sog_dep_eurq_ethereum_batch_j","sog_dep_eurs_algorand_batch_e","sog_dep_eurs_arbitrum_batch_e","sog_dep_eurs_ethereum_batch_e","sog_dep_eurs_gnosis_batch_e","sog_dep_eurs_polygon_batch_e","sog_dep_eurs_xdc_batch_e","sog_dep_eurs_xrpl_batch_e","sog_dep_fdusd_pr033","sog_dep_frax_pr033","sog_dep_gho_ethereum_batch_c","sog_dep_gyd_ethereum_batch_m","sog_dep_gyen_ethereum_batch_i","sog_dep_honey_berachain_batch_m","sog_dep_iron_bnb_batch_d","sog_dep_jpyc_ethereum_batch_i","sog_dep_jpysc_ethereum_initial_batch_n","sog_dep_m0m_ethereum_batch_l","sog_dep_nobleusdn_noble_batch_p","sog_dep_ousd_ethereum_batch_o","sog_dep_pyusd_eth_pr033","sog_dep_pyusd_sol_pr033","sog_dep_rlusd_ethereum_seed","sog_dep_rlusd_xrpl_seed","sog_dep_sofiusd_ethereum_batch_o","sog_dep_sofiusd_solana_batch_o","sog_dep_solsticeusx_solana_batch_o","sog_dep_susde_ethereum_batch_h","sog_dep_susds_ethereum_batch_h","sog_dep_susds_ethereum_context","sog_dep_tryb_ethereum_batch_i","sog_dep_tusd_pr033","sog_dep_unitedu_bnb_batch_o","sog_dep_unitedu_ethereum_batch_o","sog_dep_usat_ethereum_batch_p","sog_dep_usda_ethereum_batch_l","sog_dep_usdd_tron_pr033","sog_dep_usdg_chain_seed","sog_dep_usdgo_solana_batch_o","sog_dep_usdh_hypercore_batch_p","sog_dep_usdh_hyperevm_batch_p","sog_dep_usdn_waves","sog_dep_usds_bridge_context","sog_dep_usds_ethereum","sog_dep_usdtb_ethereum_batch_f","sog_dep_usdx_ethereum_batch_m","sog_dep_usdy_ethereum_batch_h","sog_dep_usk_kujira_batch_g","sog_dep_usx_ethereum_batch_l","sog_dep_usyc_ethereum_batch_h","sog_dep_vchf_ethereum_batch_j","sog_dep_xsgd_ethereum_batch_i"]
+  },
+  "policy": {
+    "verified_requires_direct_confirmation": true,
+    "identifier_presence_is_not_verification": true,
+    "source_linked_without_identifier_is_explicit": true,
+    "review_needed_is_not_unknown": true,
+    "unknown_is_reserved_for_ambiguous_applicability": true,
+    "overlay_must_cover_every_canonical_deployment": true,
+    "verification_is_separate_from_canonicality_and_operational_state": true
+  }
+}

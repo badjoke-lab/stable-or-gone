@@ -58,7 +58,7 @@ export const deploymentTaxonomyBaseline = {
     recorded_network: 124,
     review_needed: 2
   },
-  verification_status_recorded: 0,
+  verification_status_recorded: 130,
   records_with_evidence: 130,
   records_with_control_events: 18
 };
