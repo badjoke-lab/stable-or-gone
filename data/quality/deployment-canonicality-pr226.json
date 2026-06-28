@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-06-28",
+  "source_review": "docs/quality/deployment-canonicality-review-2026-06-28.md",
+  "reviewed_source_files": [
+    "data/deployments.json",
+    "data/deployments-extra.json",
+    "data/deployments-issuer-control-2026.json"
+  ],
+  "reviewed_total": 39,
+  "decision_counts": {
+    "issuer_native": 25,
+    "native": 9,
+    "legacy": 3,
+    "unknown": 2
+  },
+  "expected_registry_counts": {
+    "canonical_bridge": 2,
+    "issuer_native": 55,
+    "legacy": 10,
+    "native": 31,
+    "unknown": 32
+  },
+  "expected_record_state_counts": {
+    "recorded": 102,
+    "not_recorded": 28
+  },
+  "issuer_native_ids": [
+    "sog_dep_usdt_ethereum_seed",
+    "sog_dep_usdc_ethereum_seed",
+    "sog_dep_usdc_base_seed",
+    "sog_dep_usdc_solana_seed",
+    "sog_dep_busd_ethereum_seed",
+    "sog_dep_tusd_ethereum_seed",
+    "sog_dep_fdusd_ethereum_seed",
+    "sog_dep_pyusd_ethereum_seed",
+    "sog_dep_pyusd_solana_seed",
+    "sog_dep_gusd_ethereum_seed",
+    "sog_dep_rlusd_xrpl_seed",
+    "sog_dep_rlusd_ethereum_seed",
+    "sog_dep_eurc_avalanche_seed",
+    "sog_dep_eurc_base_seed",
+    "sog_dep_eurc_ethereum_seed",
+    "sog_dep_eurc_solana_seed",
+    "sog_dep_eurc_stellar_seed",
+    "sog_dep_usdp_ethereum_seed",
+    "sog_dep_usdp_solana_seed",
+    "sog_dep_usdg_chain_seed",
+    "sog_dep_tusd_pr033",
+    "sog_dep_fdusd_pr033",
+    "sog_dep_pyusd_eth_pr033",
+    "sog_dep_pyusd_sol_pr033",
+    "sog_dep_usdt_tron"
+  ],
+  "native_ids": [
+    "sog_dep_dai_ethereum_seed",
+    "sog_dep_frax_ethereum_seed",
+    "sog_dep_usdd_tron_seed",
+    "sog_dep_lusd_ethereum_seed",
+    "sog_dep_crvusd_ethereum_seed",
+    "sog_dep_usde_ethereum_seed",
+    "sog_dep_usds_ethereum",
+    "sog_dep_frax_pr033",
+    "sog_dep_usdd_tron_pr033"
+  ],
+  "legacy_ids": [
+    "sog_dep_ust_terra_seed",
+    "sog_dep_susd_ethereum_seed",
+    "sog_dep_susd_optimism_legacy"
+  ],
+  "unknown_ids": [
+    "sog_dep_susds_ethereum_context",
+    "sog_dep_usds_bridge_context"
+  ],
+  "remaining_not_recorded_ids": [
+    "sog_dep_mim_ethereum",
+    "sog_dep_fei_ethereum",
+    "sog_dep_usdn_waves",
+    "sog_dep_rai_ethereum",
+    "sog_dep_paxg_ethereum",
+    "sog_dep_xaut_ethereum",
+    "sog_dep_gho_ethereum_batch_c",
+    "sog_dep_bold_ethereum_batch_c",
+    "sog_dep_usd0_ethereum_batch_c",
+    "sog_dep_usd0_arbitrum_batch_c",
+    "sog_dep_usd0_base_batch_c",
+    "sog_dep_usd0_bnb_batch_c",
+    "sog_dep_usr_ethereum_batch_c",
+    "sog_dep_sai_ethereum_batch_d",
+    "sog_dep_iron_bnb_batch_d",
+    "sog_dep_iron_polygon_batch_d",
+    "sog_dep_musd_ethereum_batch_d",
+    "sog_dep_eurs_ethereum_batch_e",
+    "sog_dep_eurs_polygon_batch_e",
+    "sog_dep_eurs_algorand_batch_e",
+    "sog_dep_eurs_xrpl_batch_e",
+    "sog_dep_eurs_xdc_batch_e",
+    "sog_dep_eurs_arbitrum_batch_e",
+    "sog_dep_eurs_gnosis_batch_e",
+    "sog_dep_eurt_ethereum_batch_e",
+    "sog_dep_eurt_omni_batch_e",
+    "sog_dep_usdm_celo_batch_e",
+    "sog_dep_alusd_ethereum_batch_e"
+  ],
+  "policy": {
+    "canonicality_is_separate_from_operational_status": true,
+    "issuer_native_does_not_mean_current_or_redeemable": true,
+    "legacy_does_not_replace_terminal_status": true,
+    "aggregate_or_related_asset_context_may_remain_unknown": true,
+    "contract_and_verification_review_remain_separate": true,
+    "no_value_inferred_from_chain_name_alone": true,
+    "remaining_batch_records_are_deferred_to_pr227": true
+  }
+}
