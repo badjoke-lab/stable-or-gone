@@ -42,16 +42,13 @@ export const deploymentTaxonomyBaseline = {
     recorded: 130
   },
   verification_states: {
+    verified: 16,
     identifier_recorded_unverified: 45,
-    review_needed: 15,
-    source_linked_no_identifier: 69,
-    unknown: 1
+    source_linked_no_identifier: 69
   },
   contract_identity_states: {
-    not_applicable_or_review_unresolved: 1,
-    not_recorded: 69,
-    recorded_identifier: 45,
-    review_needed: 15
+    not_recorded: 70,
+    recorded_identifier: 60
   },
   network_identity_states: {
     aggregate_context: 4,

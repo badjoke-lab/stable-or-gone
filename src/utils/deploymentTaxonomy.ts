@@ -1,3 +1,4 @@
+import verificationReview from '../../data/deployment-verification-pr229.json';
 import {
   getContractIdentityState,
   getContractIdentityStateLabel,
@@ -23,10 +24,18 @@ export type DeploymentTaxonomyRecord = {
   status?: string | null;
   canonicality?: string | null;
   verification_status?: string | null;
+  identifier_type?: string | null;
+  deployment_identifier?: string | null;
   contract_address?: string | null;
   chain?: string | null;
   evidence_ids?: string[] | null;
 };
+
+const verificationStatusByDeploymentId = new Map<string, string>(
+  Object.entries(verificationReview.status_ids ?? {}).flatMap(([status, ids]) =>
+    (ids ?? []).map((id) => [id, status] as [string, string])
+  )
+);
 
 const canonicalityRecordedByDeploymentId = new Map(
   getDeployments().map((deployment) => {
@@ -50,7 +59,11 @@ export function resolveDeploymentTaxonomy(deployment: DeploymentTaxonomyRecord) 
       ? 'recorded'
       : getDeploymentCanonicalityRecordState(deployment.canonicality);
   const contractIdentityState = getContractIdentityState(deployment.contract_address);
-  const verificationState = getDeploymentVerificationState(deployment);
+  const explicitVerificationStatus = deployment.id ? verificationStatusByDeploymentId.get(deployment.id) : undefined;
+  const verificationState = getDeploymentVerificationState({
+    ...deployment,
+    verification_status: explicitVerificationStatus ?? deployment.verification_status
+  });
   const networkIdentityState = getNetworkIdentityState(deployment.chain);
 
   return {

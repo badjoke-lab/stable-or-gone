@@ -173,7 +173,8 @@ export function getDeploymentCanonicalityRecordStateLabel(value) {
   return labelFor(deploymentCanonicalityRecordStates, value, 'Canonicality not recorded');
 }
 
-export function getContractIdentityState(contractAddress) {
+export function getContractIdentityState(contractAddress, deploymentIdentifier = null) {
+  if (deploymentIdentifier !== null && deploymentIdentifier !== undefined && deploymentIdentifier !== '') return 'recorded_identifier';
   if (contractAddress === null || contractAddress === undefined || contractAddress === '') return 'not_recorded';
   if (contractAddress === 'source_review_needed') return 'review_needed';
   if (contractAddress === 'not_applicable_or_source_review_needed') return 'not_applicable_or_review_unresolved';
@@ -198,7 +199,7 @@ export function getDeploymentVerificationState(deployment) {
   const explicit = deployment?.verification_status;
   if (deploymentVerificationStates.some((entry) => entry.value === explicit)) return explicit;
 
-  const contractState = getContractIdentityState(deployment?.contract_address);
+  const contractState = getContractIdentityState(deployment?.contract_address, deployment?.deployment_identifier);
   if (contractState === 'recorded_identifier') return 'identifier_recorded_unverified';
   if (contractState === 'review_needed') return 'review_needed';
   if (contractState === 'not_applicable_or_review_unresolved') return 'unknown';

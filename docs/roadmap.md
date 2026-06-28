@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-28
+Updated: 2026-06-29
 Status: canonical execution schedule
 
 Active plan: `docs/quality/non-ui-quality-program.md`
@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #227
-Active: PR #228
-Next: PR #229
+Latest completed: PR #228
+Active: PR #229
+Next: PR #230
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: paused
@@ -47,32 +47,33 @@ PR #224 direct workflow placeholder review
 PR #225 evidence traceability and duplicate invariants
 PR #226 seed and extra deployment canonicality
 PR #227 remaining deployment canonicality
+PR #228 deployment verification-state review
 ```
 
-## PR #228
+## PR #229
 
 ```text
-Deployments reviewed: 130
-Verified: 0
+Deployments reviewed in this pass: 16
+Verified identifiers: 16
 Identifier recorded, unverified: 45
 Source linked, identifier missing: 69
-Source review needed: 15
-Unknown: 1
-Verification status recorded: 130
-Verification status not recorded: 0
+Source review needed: 0
+Unknown verification state: 0
+Verification status recorded: 130 / 130
 ```
 
-The canonical overlay records the conservative state already implied by identifier and evidence coverage. It does not promote any deployment to verified.
+Historical UST is recorded as Terra Classic native denomination `uusd`; fifteen other rows receive reviewed contract or mint identifiers.
 
-Specification: `docs/quality/deployment-verification-review-2026-06-28.md`
-Overlay: `data/deployment-verification-pr228.json`
-Validator: `scripts/validate-deployment-verification-pr228.mjs`
+Specification: `docs/quality/deployment-source-status-review-2026-06-29.md`
+Overlay: `data/deployment-verification-pr229.json`
+Validator: `scripts/validate-deployment-source-status-pr229.mjs`
 
 ## Remaining sequence
 
 ```text
-PR #229 deployment source-status finalization
-PR #230-232 review-only monitoring
+PR #230 monitoring skeleton and canonical guard
+PR #231 official-source candidate generation
+PR #232 reviewable monitoring reports
 ```
 
 Normal quality work does not publish the site. Gate V2-F remains deferred.
