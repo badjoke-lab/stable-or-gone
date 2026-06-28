@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-06-28",
+  "source_review": "docs/quality/evidence-reliability-review-2026-06-28.md",
+  "source_files": [
+    "data/evidence-extra.json",
+    "data/evidence-pr033.json"
+  ],
+  "previous_normalized_unknown_total": 36,
+  "previous_raw_value_counts": {
+    "primary": 28,
+    "explorer": 3,
+    "primary_repository": 2,
+    "primary_repository_index": 1,
+    "primary_or_ecosystem_dashboard": 1,
+    "primary_interface": 1
+  },
+  "decision_counts": {
+    "high": 18,
+    "medium": 18,
+    "low": 0,
+    "unknown": 0
+  },
+  "expected_registry_reliability_counts": {
+    "high": 376,
+    "medium": 81,
+    "low": 0,
+    "unknown": 0
+  },
+  "policy": {
+    "reliability_is_not_primary_state": true,
+    "official_overview_pages_default_to_medium": true,
+    "direct_legal_technical_report_and_launch_records_may_be_high": true,
+    "live_interfaces_and_dashboards_default_to_medium": true,
+    "explorer_contract_identity_may_be_high_with_narrow_claim_scope": true,
+    "no_value_inferred_from_source_type_alone": true
+  },
+  "high_ids": [
+    "sog_src_rlusd_transparency_reports",
+    "sog_src_rlusd_user_terms",
+    "sog_src_rlusd_docs",
+    "sog_src_rlusd_implementation_repo",
+    "sog_src_eurc_transparency",
+    "sog_src_eurc_developer_docs",
+    "sog_src_usdp_transparency",
+    "sog_src_usdp_etherscan",
+    "sog_src_usdp_contracts_github",
+    "sog_src_usdp_solscan",
+    "sog_src_usds_developer_docs",
+    "sog_src_usds_sky_github",
+    "sog_src_husd_etherscan",
+    "sog_src_rlusd_launch_2024",
+    "sog_src_eurc_launch_2022",
+    "sog_src_frax_docs",
+    "sog_src_tusd_attestation_entry",
+    "sog_src_pyusd_transparency"
+  ],
+  "medium_ids": [
+    "sog_src_rlusd_ripple_page",
+    "sog_src_eurc_circle_page",
+    "sog_src_eurc_mint_page",
+    "sog_src_usdp_paxos_page",
+    "sog_src_usdg_global_dollar_page",
+    "sog_src_usdg_paxos_page",
+    "sog_src_usdg_network_terms",
+    "sog_src_usds_sky_page",
+    "sog_src_usds_susds_page",
+    "sog_src_usds_info_dashboard",
+    "sog_src_frax_app",
+    "sog_src_tusd_site",
+    "sog_src_fdusd_site",
+    "sog_src_fdusd_reserve_entry",
+    "sog_src_pyusd_paypal_page",
+    "sog_src_pyusd_paxos_page",
+    "sog_src_usdd_site",
+    "sog_src_usdd_tron_dao_reserve"
+  ]
+}
