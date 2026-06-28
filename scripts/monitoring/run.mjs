@@ -32,11 +32,31 @@ function resolveRunId(startedAt, commit) {
   return process.env.SOG_MONITORING_RUN_ID || `${compactUtc(startedAt)}-${String(commit).slice(0, 8)}`;
 }
 
+function buildContext(options) {
+  const startedAt = options.startedAt || new Date().toISOString();
+  const sourceCommit = options.sourceCommit || resolveCommit();
+  const mode = options.mode || process.env.SOG_MONITORING_MODE || 'health-only';
+  if (!['health-only', 'official-sources'].includes(mode)) throw new Error(`Unsupported monitoring mode: ${mode}`);
+  const runId = options.runId || resolveRunId(startedAt, sourceCommit);
+  const outputRoot = options.outputRoot || path.join(root, 'data-staging/monitoring');
+  const runDirectory = path.join(outputRoot, runId);
+  ensureDir(runDirectory);
+  return {
+    options,
+    startedAt,
+    sourceCommit,
+    sourceBranch: options.sourceBranch || resolveBranch(),
+    mode,
+    runId,
+    runDirectory,
+    before: captureCanonicalSnapshot(root),
+    health: runRepositoryHealthMonitor(root, startedAt)
+  };
+}
+
 function summaryText(manifest, health, official) {
   const guard = manifest.canonical_guard;
   const candidateCount = official?.candidate_count ?? 0;
-  const observationCount = official?.observation_count ?? 0;
-  const sourceErrors = official?.source_errors ?? 0;
   return [
     '# SOG Review-only Monitoring',
     '',
@@ -64,8 +84,8 @@ function summaryText(manifest, health, official) {
     '',
     '## Official-source observations',
     '',
-    `- Observations: ${observationCount}`,
-    `- Source errors: ${sourceErrors}`,
+    `- Observations: ${official?.observation_count ?? 0}`,
+    `- Source errors: ${official?.source_errors ?? 0}`,
     '',
     '## Candidate output',
     '',
@@ -85,51 +105,26 @@ function summaryText(manifest, health, official) {
   ].join('\n');
 }
 
-export async function runMonitoring(options = {}) {
-  const startedAt = options.startedAt || new Date().toISOString();
-  const sourceCommit = options.sourceCommit || resolveCommit();
-  const sourceBranch = options.sourceBranch || resolveBranch();
-  const runId = options.runId || resolveRunId(startedAt, sourceCommit);
-  const mode = options.mode || process.env.SOG_MONITORING_MODE || 'health-only';
-  if (!['health-only', 'official-sources'].includes(mode)) throw new Error(`Unsupported monitoring mode: ${mode}`);
-
-  const outputRoot = options.outputRoot || path.join(root, 'data-staging/monitoring');
-  const runDirectory = path.join(outputRoot, runId);
-  ensureDir(runDirectory);
-
-  const before = captureCanonicalSnapshot(root);
-  const health = runRepositoryHealthMonitor(root, startedAt);
-  const official = mode === 'official-sources'
-    ? await observeOfficialSources({
-        root,
-        observedAt: startedAt,
-        fetchImpl: options.fetchImpl,
-        sources: options.sources,
-        timeoutMs: options.timeoutMs,
-        maxBodyBytes: options.maxBodyBytes
-      })
-    : null;
+function finalizeMonitoring(context, official) {
   const after = captureCanonicalSnapshot(root);
-  const canonicalGuard = compareCanonicalSnapshots(before, after);
-  const finishedAt = new Date().toISOString();
-  const status = health.status === 'ok' && canonicalGuard.ok ? 'completed' : 'failed';
-  const outputFiles = mode === 'official-sources'
+  const canonicalGuard = compareCanonicalSnapshots(context.before, after);
+  const status = context.health.status === 'ok' && canonicalGuard.ok ? 'completed' : 'failed';
+  const outputFiles = context.mode === 'official-sources'
     ? ['manifest.json', 'health.json', 'official-source-observations.json', 'monitoring-candidates.json', 'summary.md']
     : ['manifest.json', 'health.json', 'summary.md'];
-
-  const monitors = [{ name: health.monitor, status: health.status, findings: health.findings.length }];
+  const monitors = [{ name: context.health.monitor, status: context.health.status, findings: context.health.findings.length }];
   if (official) monitors.push({ name: official.monitor, status: official.status, observations: official.observation_count, candidates: official.candidate_count, source_errors: official.source_errors });
 
   const manifest = {
     schema_version: '1.0',
-    run_id: runId,
-    mode,
-    started_at: startedAt,
-    finished_at: finishedAt,
+    run_id: context.runId,
+    mode: context.mode,
+    started_at: context.startedAt,
+    finished_at: new Date().toISOString(),
     status,
-    source_commit: sourceCommit,
-    source_branch: sourceBranch,
-    external_network_used: mode === 'official-sources',
+    source_commit: context.sourceCommit,
+    source_branch: context.sourceBranch,
+    external_network_used: context.mode === 'official-sources',
     observation_count: official?.observation_count ?? 0,
     candidate_count: official?.candidate_count ?? 0,
     source_errors: official?.source_errors ?? 0,
@@ -138,9 +133,9 @@ export async function runMonitoring(options = {}) {
     output_files: outputFiles
   };
 
-  writeJson(path.join(runDirectory, 'health.json'), health);
+  writeJson(path.join(context.runDirectory, 'health.json'), context.health);
   if (official) {
-    writeJson(path.join(runDirectory, 'official-source-observations.json'), {
+    writeJson(path.join(context.runDirectory, 'official-source-observations.json'), {
       schema_version: official.schema_version,
       monitor: official.monitor,
       status: official.status,
@@ -149,23 +144,36 @@ export async function runMonitoring(options = {}) {
       source_errors: official.source_errors,
       observations: official.observations
     });
-    writeJson(path.join(runDirectory, 'monitoring-candidates.json'), {
+    writeJson(path.join(context.runDirectory, 'monitoring-candidates.json'), {
       schema_version: official.schema_version,
       created_at: official.observed_at,
       candidate_count: official.candidate_count,
       candidates: official.candidates
     });
   }
-  writeJson(path.join(runDirectory, 'manifest.json'), manifest);
-  writeText(path.join(runDirectory, 'summary.md'), summaryText(manifest, health, official));
+  writeJson(path.join(context.runDirectory, 'manifest.json'), manifest);
+  writeText(path.join(context.runDirectory, 'summary.md'), summaryText(manifest, context.health, official));
 
-  const result = { run_directory: runDirectory, manifest, health, official };
+  const result = { run_directory: context.runDirectory, manifest, health: context.health, official };
   if (status !== 'completed') {
-    const error = new Error(`Monitoring run failed: health=${health.status}, canonical_guard=${canonicalGuard.ok}`);
+    const error = new Error(`Monitoring run failed: health=${context.health.status}, canonical_guard=${canonicalGuard.ok}`);
     error.result = result;
     throw error;
   }
   return result;
+}
+
+export function runMonitoring(options = {}) {
+  const context = buildContext(options);
+  if (context.mode === 'health-only') return finalizeMonitoring(context, null);
+  return observeOfficialSources({
+    root,
+    observedAt: context.startedAt,
+    fetchImpl: options.fetchImpl,
+    sources: options.sources,
+    timeoutMs: options.timeoutMs,
+    maxBodyBytes: options.maxBodyBytes
+  }).then((official) => finalizeMonitoring(context, official));
 }
 
 async function main() {
