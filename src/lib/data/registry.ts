@@ -72,6 +72,7 @@ import evidenceBatchMData from '../../../data/evidence-batch-m.json';
 import evidenceBatchNData from '../../../data/evidence-batch-n.json';
 import evidenceBatchOData from '../../../data/evidence-batch-o.json';
 import evidenceBatchPData from '../../../data/evidence-batch-p.json';
+import evidenceQualityPr219Data from '../../../data/evidence-quality-pr219.json';
 import reserveReportsBatchKData from '../../../data/reserve-reports-batch-k.json';
 import reserveReportsBatchLData from '../../../data/reserve-reports-batch-l.json';
 import reserveReportsBatchMAData from '../../../data/reserve-reports-batch-m-a.json';
@@ -103,7 +104,7 @@ stablecoin-classification-v2.json stablecoin-classification-batch-a.json stablec
 stablecoin-profiles-v2.json stablecoin-profiles-batch-a.json stablecoin-profiles-batch-b.json stablecoin-profiles-batch-c.json stablecoin-profiles-batch-d.json stablecoin-profiles-batch-e.json stablecoin-profiles-batch-f.json stablecoin-profiles-batch-g.json stablecoin-profiles-batch-h.json stablecoin-profiles-batch-i.json stablecoin-profiles-batch-j.json stablecoin-profiles-batch-k.json stablecoin-profiles-batch-l.json stablecoin-profiles-batch-m.json stablecoin-profiles-batch-n.json stablecoin-profiles-batch-o.json stablecoin-profiles-batch-p.json
 events.json events-pr036.json events-pr037.json events-pr038.json events-batch-a.json events-batch-b.json events-batch-c.json events-batch-d.json events-batch-e.json events-batch-f.json events-batch-g.json events-batch-h.json events-batch-i.json events-batch-j.json events-batch-k.json events-batch-l.json events-batch-m.json events-issuer-control-2026.json events-batch-n.json events-batch-o.json events-batch-p.json
 event-details-v2.json event-details-batch-a.json event-details-batch-b.json event-details-batch-c.json event-details-batch-d.json event-details-batch-e.json event-details-batch-f.json event-details-batch-g.json event-details-batch-h.json event-details-batch-i.json event-details-batch-j.json event-details-batch-k.json event-details-batch-l.json event-details-batch-m.json event-details-issuer-control-2026.json event-details-batch-n.json event-details-batch-o.json event-details-batch-p.json
-evidence.json evidence-extra.json evidence-pr033.json evidence-events-pr036.json evidence-events-pr037.json evidence-events-pr038.json evidence-batch-a.json evidence-batch-b.json evidence-batch-c.json evidence-batch-d.json evidence-batch-e.json evidence-batch-f.json evidence-batch-g.json evidence-batch-h.json evidence-batch-i.json evidence-batch-j.json evidence-batch-k.json evidence-batch-l-a.json evidence-batch-l-b.json evidence-batch-l-c.json evidence-batch-l-d1.json evidence-batch-l-d2.json evidence-batch-m.json evidence-issuer-control-2026.json evidence-batch-n.json evidence-batch-o.json evidence-batch-p.json
+evidence.json evidence-extra.json evidence-pr033.json evidence-events-pr036.json evidence-events-pr037.json evidence-events-pr038.json evidence-batch-a.json evidence-batch-b.json evidence-batch-c.json evidence-batch-d.json evidence-batch-e.json evidence-batch-f.json evidence-batch-g.json evidence-batch-h.json evidence-batch-i.json evidence-batch-j.json evidence-batch-k.json evidence-batch-l-a.json evidence-batch-l-b.json evidence-batch-l-c.json evidence-batch-l-d1.json evidence-batch-l-d2.json evidence-batch-m.json evidence-issuer-control-2026.json evidence-batch-n.json evidence-batch-o.json evidence-batch-p.json evidence-quality-pr219.json
 reserve-reports.json reserve-reports-extra.json reserve-reports-pr033.json reserve-reports-pr034.json reserve-reports-batch-b.json reserve-reports-batch-f.json reserve-reports-batch-g.json reserve-reports-batch-h.json reserve-reports-batch-i.json reserve-reports-batch-j.json reserve-reports-batch-k.json reserve-reports-batch-l.json reserve-reports-batch-m-a.json reserve-reports-batch-m-b.json reserve-reports-batch-n.json reserve-reports-batch-o.json reserve-reports-batch-p.json
 known-unknowns.json known-unknowns-extra.json known-unknowns-pr033.json known-unknowns-pr034.json known-unknowns-batch-a.json known-unknowns-batch-b.json known-unknowns-batch-c.json known-unknowns-batch-d.json known-unknowns-batch-e.json known-unknowns-batch-f.json known-unknowns-batch-g.json known-unknowns-batch-h.json known-unknowns-batch-i.json known-unknowns-batch-j.json known-unknowns-batch-k.json known-unknowns-batch-l-a.json known-unknowns-batch-l-b.json known-unknowns-batch-m.json known-unknowns-issuer-control-2026.json known-unknowns-batch-n.json known-unknowns-batch-o.json known-unknowns-batch-p.json
 regulatory-notes.json
@@ -184,7 +185,8 @@ const batchEvidence = [
   ...(evidenceBatchMData as EvidenceRow[]),
   ...(evidenceBatchNData as EvidenceRow[]),
   ...(evidenceBatchOData as EvidenceRow[]),
-  ...(evidenceBatchPData as EvidenceRow[])
+  ...(evidenceBatchPData as EvidenceRow[]),
+  ...(evidenceQualityPr219Data as EvidenceRow[])
 ].map((row) => ({
   ...row,
   stablecoin_ids: unique([...(row.stablecoin_ids ?? []), row.stablecoin_id]),
