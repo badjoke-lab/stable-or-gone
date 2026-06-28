@@ -111,6 +111,7 @@ const redemptionProfile = coin.redemption_profile;
 <BaseLayout title={title} description={description} canonicalPath={`/stablecoin/${coin.slug}/`} jsonLd={jsonLd}>
   <article class="stablecoin-dossier">
     <PageHero className="stablecoin-dossier-hero" eyebrow="Stablecoin record" title={coin.name} description={publicSummary}>
+      <Fragment slot="description"><p>{publicSummary}</p></Fragment>
       <div slot="actions" class="stablecoin-dossier-hero-actions">
         <span class={statusClass}>{formatLifecycleLabel(coin.lifecycle_status)}</span>
         <span class="ui-chip">{formatIssuanceLabel(coin.issuance_status)}</span>
