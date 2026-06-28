@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import MetricCard from '../../components/MetricCard.astro';
 import StructuredEventDetail from '../../components/StructuredEventDetail.astro';
 import EvidenceSourceTable from '../../components/EvidenceSourceTable.astro';
 import EventValueStateRows from '../../components/EventValueStateRows.astro';
@@ -25,10 +27,7 @@ const allEvidence = getEvidence();
 const subjectStablecoins = (event.subject_stablecoin_ids?.length ? event.subject_stablecoin_ids : event.stablecoin_id ? [event.stablecoin_id] : []).map((id) => allStablecoins.find((item) => item.id === id) ?? { id, name: id, slug: '' });
 const subjectOrganizations = (event.subject_organization_ids?.length ? event.subject_organization_ids : event.issuer_id ? [event.issuer_id] : []).map((id) => allOrganizations.find((item) => item.id === id) ?? { id, name: id, slug: '' });
 const relationSourceIds = getCanonicalEvidenceRelations().filter((relation) => relation.event_ids.includes(event.id)).map((relation) => relation.evidence_id);
-const directSourceIds = canonicalizeLinkedEvidenceIds([
-  ...(event.evidence_ids ?? []),
-  ...allEvidence.filter((source) => source.event_ids?.includes(event.id) || source.event_id === event.id).map((source) => source.id)
-]);
+const directSourceIds = canonicalizeLinkedEvidenceIds([...(event.evidence_ids ?? []), ...allEvidence.filter((source) => source.event_ids?.includes(event.id) || source.event_id === event.id).map((source) => source.id)]);
 const sourceIds = new Set([...relationSourceIds, ...directSourceIds]);
 const evidence = allEvidence.filter((source) => sourceIds.has(resolveEvidenceIdentityId(source.id)));
 const sourceIdentities = getEvidenceSourceIdentities().filter((source) => sourceIds.has(source.id));
@@ -39,73 +38,56 @@ const eventDescription = publicCopy?.description ?? event.description ?? 'A desc
 const taxonomy = resolveEventTaxonomy(event);
 const title = `${eventTitle} — Stablecoin Event | Stable or Gone`;
 const description = eventDescription;
-const detailFamilies = [
-  'depeg_detail', 'regulatory_detail', 'reserve_change_detail', 'redemption_change_detail',
-  'migration_detail', 'issuer_control_detail', 'security_incident_detail', 'oracle_failure_detail',
-  'collateral_impairment_detail', 'insolvency_detail', 'governance_change_detail',
-  'bridge_or_chain_incident_detail', 'termination_detail', 'launch_detail'
-];
+const detailFamilies = ['depeg_detail', 'regulatory_detail', 'reserve_change_detail', 'redemption_change_detail', 'migration_detail', 'issuer_control_detail', 'security_incident_detail', 'oracle_failure_detail', 'collateral_impairment_detail', 'insolvency_detail', 'governance_change_detail', 'bridge_or_chain_incident_detail', 'termination_detail', 'launch_detail'];
 const hasStructuredDetail = detailFamilies.some((field) => structuredEvent[field] && typeof structuredEvent[field] === 'object');
 const detailSummary = detailFamilies.map((field) => structuredEvent[field]?.cause_summary ?? structuredEvent[field]?.summary).find((value) => typeof value === 'string' && value.length > 0);
 const recoveryDate = structuredEvent.depeg_detail?.recovery_date ?? structuredEvent.recovery_date;
 const causeOrMechanism = detailSummary ?? structuredEvent.failure_mechanism;
+const subjectCount = subjectStablecoins.length + subjectOrganizations.length;
+const eventVisualCode = String(event.event_date ?? 'EVT').slice(0, 4);
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [...subjectStablecoins.map((item) => item.name), ...subjectOrganizations.map((item) => item.name), taxonomy.public_category_label, taxonomy.canonical_subtype_label, 'stablecoin event'].filter(Boolean) };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
-  <article class="event-detail-page">
-    <header class="panel event-detail-hero">
-      <div><div class="prompt">Stablecoin event record</div><h1>{eventTitle}</h1><p>{eventDescription}</p></div>
-      <dl class="event-detail-summary">
-        <div><dt>Date</dt><dd>{event.event_date ?? 'Not recorded'}</dd></div>
-        <div><dt>Category</dt><dd>{taxonomy.public_category_label}</dd></div>
-        <div><dt>Subtype</dt><dd>{taxonomy.canonical_subtype_label}</dd></div>
-        <div><dt>Status effect</dt><dd>{taxonomy.status_effect_label}</dd></div>
-        <div><dt>Recovery</dt><dd>{taxonomy.recovery_label}</dd></div>
-        <div><dt>Source identities</dt><dd>{sourceIdentities.length}</dd></div>
-      </dl>
-    </header>
+  <article class="event-detail-page" data-ui-v2-event-detail>
+    <PageHero eyebrow="Stablecoin event record" title={eventTitle} description={eventDescription} className="event-detail-hero-v2">
+      <div slot="actions" class="event-detail-hero-actions"><a class="ui-button" href="/events/">Back to Events</a>{subjectStablecoins[0]?.slug && <a class="ui-button ui-button--secondary" href={`/stablecoin/${subjectStablecoins[0].slug}/`}>Primary stablecoin</a>}</div>
+      <div slot="visual" class="event-detail-date-mark"><strong>{eventVisualCode}</strong><span>{event.id}</span></div>
+    </PageHero>
+
+    <section class="event-detail-metrics" aria-label="Event record summary">
+      <MetricCard label="Date" value={event.event_date ?? 'Not recorded'} detail={`${subjectCount} connected subjects`} icon="D" />
+      <MetricCard label="Category" value={taxonomy.public_category_label} detail="Public event category" icon="C" />
+      <MetricCard label="Subtype" value={taxonomy.canonical_subtype_label} detail={taxonomy.detail_kind_label} icon="T" />
+      <MetricCard label="Status effect" value={taxonomy.status_effect_label} detail="Lifecycle impact remains separate" icon="S" />
+      <MetricCard label="Recovery" value={taxonomy.recovery_label} detail={recoveryDate ?? 'Recovery date not recorded'} icon="R" />
+      <MetricCard label="Source identities" value={String(sourceIdentities.length)} detail={`${eventRelations.length} evidence relations`} icon="E" />
+    </section>
 
     <nav class="event-detail-nav" aria-label="Event record sections"><a href="#overview">Overview</a><a href="#subjects">Subjects</a>{hasStructuredDetail && <a href="#structured-detail">Structured detail</a>}<a href="#sources">Sources</a><a href="#corrections">Corrections</a></nav>
 
     <section class="panel event-detail-section" id="overview">
-      <div class="bar">Event overview</div>
+      <div class="event-detail-section-heading"><p>Reviewed state</p><h2>Event overview</h2><span>Date, taxonomy, impact, recovery, mechanism, confidence, and evidence remain separate.</span></div>
       <div class="event-detail-table"><table data-table-kind="event-details" data-mobile-table="scroll-preserve"><caption>Event overview and reviewed value states</caption><tbody><EventValueStateRows event={event} taxonomy={taxonomy} subjectStablecoins={subjectStablecoins} subjectOrganizations={subjectOrganizations} detailSummary={detailSummary} hasStructuredDetail={hasStructuredDetail} /></tbody></table></div>
       <dl class="event-overview-cards" data-mobile-representation-for="event-details">
-        <div><dt>Date</dt><dd><ValueStateText value={event.event_date} /></dd></div>
-        <div><dt>Public event category</dt><dd>{taxonomy.public_category_label}</dd></div>
-        <div><dt>Canonical event subtype</dt><dd>{taxonomy.canonical_subtype_label}</dd></div>
-        <div><dt>Structured detail kind</dt><dd>{taxonomy.detail_kind_label}</dd></div>
-        <div><dt>Impact</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
-        <div><dt>Effect on stablecoin lifecycle</dt><dd>{taxonomy.status_effect_label}</dd></div>
-        <div><dt>Recovery or reversal</dt><dd>{taxonomy.recovery_label}</dd></div>
-        <div><dt>Recovery date</dt><dd><ValueStateText value={recoveryDate} /></dd></div>
-        <div><dt>Cause or mechanism</dt><dd>{causeOrMechanism ? cleanPublicText(String(causeOrMechanism)) : 'Not recorded'}</dd></div>
-        <div><dt>Structured detail coverage</dt><dd>{hasStructuredDetail ? 'Structured fields available below' : 'Description and source record only'}</dd></div>
-        <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
-        <div><dt>Evidence relations</dt><dd>{eventRelations.length}</dd></div>
+        <div><dt>Date</dt><dd><ValueStateText value={event.event_date} /></dd></div><div><dt>Public event category</dt><dd>{taxonomy.public_category_label}</dd></div><div><dt>Canonical event subtype</dt><dd>{taxonomy.canonical_subtype_label}</dd></div><div><dt>Structured detail kind</dt><dd>{taxonomy.detail_kind_label}</dd></div><div><dt>Impact</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div><div><dt>Effect on stablecoin lifecycle</dt><dd>{taxonomy.status_effect_label}</dd></div><div><dt>Recovery or reversal</dt><dd>{taxonomy.recovery_label}</dd></div><div><dt>Recovery date</dt><dd><ValueStateText value={recoveryDate} /></dd></div><div><dt>Cause or mechanism</dt><dd>{causeOrMechanism ? cleanPublicText(String(causeOrMechanism)) : 'Not recorded'}</dd></div><div><dt>Structured detail coverage</dt><dd>{hasStructuredDetail ? 'Structured fields available below' : 'Description and source record only'}</dd></div><div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div><div><dt>Evidence relations</dt><dd>{eventRelations.length}</dd></div>
       </dl>
     </section>
 
     <section class="panel event-detail-section" id="subjects">
-      <div class="bar">Subjects</div>
-      <div class="event-subject-grid">
-        {subjectStablecoins.map((item) => <article class="event-subject-card"><span class="record-kicker">Stablecoin subject</span><h3>{item.slug ? <a href={`/stablecoin/${item.slug}/`}>{item.name}</a> : item.name}</h3><p>Open the stablecoin dossier for current state, organizations, deployments, events, evidence, and known unknowns.</p></article>)}
-        {subjectOrganizations.map((item) => <article class="event-subject-card"><span class="record-kicker">Organization subject</span><h3>{item.slug ? <a href={`/issuer/${item.slug}/`}>{item.name}</a> : item.name}</h3><p>Open the organization record for roles, current and historical relationships, events, and evidence.</p></article>)}
-      </div>
+      <div class="event-detail-section-heading"><p>Connected records</p><h2>Subjects</h2><span>Affected stablecoins and organizations remain explicit.</span></div>
+      <div class="event-subject-grid">{subjectStablecoins.map((item) => <article class="event-subject-card"><span class="record-kicker">Stablecoin subject</span><h3>{item.slug ? <a href={`/stablecoin/${item.slug}/`}>{item.name}</a> : item.name}</h3><p>Open the stablecoin dossier for current state, organizations, deployments, events, evidence, and known unknowns.</p></article>)}{subjectOrganizations.map((item) => <article class="event-subject-card"><span class="record-kicker">Organization subject</span><h3>{item.slug ? <a href={`/issuer/${item.slug}/`}>{item.name}</a> : item.name}</h3><p>Open the organization record for roles, current and historical relationships, events, and evidence.</p></article>)}</div>
       {subjectStablecoins.length === 0 && subjectOrganizations.length === 0 && <p class="event-detail-empty">No subject relationship is recorded.</p>}
     </section>
 
     <StructuredEventDetail event={structuredEvent} />
 
     <section class="panel event-detail-section" id="sources">
-      <div class="bar">Sources</div>
+      <div class="event-detail-section-heading"><p>Source record</p><h2>Evidence</h2><span>Source identity, publisher, publication date, reliability, archive, and relation count remain separate.</span></div>
       <div class="event-detail-table"><EvidenceSourceTable evidence={evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added yet." /></div>
-      <div class="event-source-cards" data-mobile-representation-for="event-sources">
-        {sourceIdentities.map((source) => <article><span class="record-kicker">Source identity</span><h3><a href={source.url}>{source.title}</a></h3><dl><div><dt>Publisher</dt><dd>{source.publisher ?? 'Not recorded'}</dd></div><div><dt>Published</dt><dd>{source.published_at ?? 'Not recorded'}</dd></div><div><dt>Reliability</dt><dd>{formatPublicLabel(source.reliability)}</dd></div><div><dt>Evidence relations</dt><dd>{eventRelations.filter((relation) => relation.evidence_id === source.id).length}</dd></div></dl>{source.archived_url && <a href={source.archived_url}>Open archive</a>}</article>)}
-      </div>
+      <div class="event-source-cards" data-mobile-representation-for="event-sources">{sourceIdentities.map((source) => <article><span class="record-kicker">Source identity</span><h3><a href={source.url}>{source.title}</a></h3><dl><div><dt>Publisher</dt><dd>{source.publisher ?? 'Not recorded'}</dd></div><div><dt>Published</dt><dd>{source.published_at ?? 'Not recorded'}</dd></div><div><dt>Reliability</dt><dd>{formatPublicLabel(source.reliability)}</dd></div><div><dt>Evidence relations</dt><dd>{eventRelations.filter((relation) => relation.evidence_id === source.id).length}</dd></div></dl>{source.archived_url && <a href={source.archived_url}>Open archive</a>}</article>)}</div>
       {sourceIdentities.length === 0 && <p class="event-detail-empty">No event-specific source identity has been added.</p>}
     </section>
 
-    <section class="panel event-detail-section" id="corrections"><div class="bar">Corrections and further reading</div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Read the methodology</a><a href="/events/">Back to Events</a></div></section>
+    <section class="panel event-detail-section" id="corrections"><div class="event-detail-section-heading"><p>Record maintenance</p><h2>Corrections and further reading</h2><span>Use the documented correction path and methodology.</span></div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Read the methodology</a><a href="/events/">Back to Events</a><a href="/data/manifest.json">Data manifest</a></div></section>
   </article>
 </BaseLayout>

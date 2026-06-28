@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import MetricCard from '../../components/MetricCard.astro';
 import EventIndexRow from '../../components/EventIndexRow.astro';
 import EventIndexCard from '../../components/EventIndexCard.astro';
 import '../../styles/event-index.css';
@@ -63,29 +65,35 @@ const filters = [
   { id: 'recovery', label: 'Recovery', options: getRecoveryFilterOptions().map((item) => option(item.value, item.public_label)) },
   { id: 'year', label: 'Year', options: unique(records.map((record) => record.year)).sort().reverse().map((value) => option(value, value === 'not_recorded' ? 'Not recorded' : value)) }
 ];
+const stablecoinSubjectCount = new Set(records.flatMap((record) => record.stablecoinIds)).size;
+const organizationSubjectCount = new Set(records.flatMap((record) => record.organizationIds)).size;
+const sourceIdentityCount = new Set(evidenceRelations.filter((relation) => relation.event_ids.length > 0).map((relation) => relation.evidence_id)).size;
 const title = 'Events — Stable or Gone';
 const description = 'Browse stablecoin lifecycle events by public category, precise subtype, status effect, recovery state, year, subjects, and evidence.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Events', url: 'https://sog.badjoke-lab.com/events/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/events/" jsonLd={jsonLd}>
-  <div class="event-index-page" data-event-index>
-    <section class="event-index-intro">
-      <div class="panel event-index-intro-main"><div class="prompt">Event registry</div><h1>Browse stablecoin events</h1><p>Events are chronological records, not status labels. Search titles, descriptions, record IDs, subjects, and source publishers while keeping public category, precise subtype, lifecycle effect, and recovery separate.</p></div>
-      <div class="panel event-index-intro-stats" aria-label="Event registry totals"><div class="event-index-stat"><span>Events</span><strong>{records.length}</strong></div><div class="event-index-stat"><span>Stablecoin subjects</span><strong>{new Set(records.flatMap((record) => record.stablecoinIds)).size}</strong></div><div class="event-index-stat"><span>Organization subjects</span><strong>{new Set(records.flatMap((record) => record.organizationIds)).size}</strong></div><div class="event-index-stat"><span>Source identities</span><strong>{new Set(evidenceRelations.filter((relation) => relation.event_ids.length > 0).map((relation) => relation.evidence_id)).size}</strong></div></div>
+  <div class="event-index-page" data-event-index data-ui-v2-events>
+    <PageHero eyebrow="Event registry" title="Changes that shaped stable assets" description="Events are chronological records, not current-status labels. Search titles, descriptions, record IDs, subjects, and publishers while keeping category, subtype, lifecycle effect, and recovery separate.">
+      <div slot="actions" class="event-index-hero-actions"><a class="ui-button" href="/stablecoins/">Browse stablecoins</a><a class="ui-button ui-button--secondary" href="/issuers/">Browse organizations</a></div>
+      <div slot="visual" class="event-index-hero-mark"><strong>EVT</strong><span>{records.length} dated records</span></div>
+    </PageHero>
+
+    <section class="event-index-metrics" aria-label="Event registry totals">
+      <MetricCard label="Events" value={String(records.length)} detail="Canonical event records" icon="E" />
+      <MetricCard label="Stablecoin subjects" value={String(stablecoinSubjectCount)} detail="Connected stablecoin records" icon="S" />
+      <MetricCard label="Organization subjects" value={String(organizationSubjectCount)} detail="Connected organization records" icon="O" />
+      <MetricCard label="Source identities" value={String(sourceIdentityCount)} detail="Deduplicated event evidence" icon="R" />
     </section>
 
     <section class="panel event-index-registry" aria-labelledby="event-index-heading">
-      <div class="bar" id="event-index-heading">All event records</div>
+      <div class="event-index-section-heading"><p>Chronological registry</p><h2 id="event-index-heading">All event records</h2><span>Filter by category, subtype, status effect, recovery, and year.</span></div>
       <div class="event-index-toolbar">
         <label><span>Search</span><input data-event-search type="search" name="q" placeholder="Title, description, ID, subject, publisher" autocomplete="off" /></label>
         <label><span>Sort</span><select data-event-sort name="sort"><option value="date_desc">Date: newest first</option><option value="date_asc">Date: oldest first</option><option value="title_asc">Title A–Z</option><option value="evidence_most">Most source identities</option></select></label>
         <button class="event-index-action" type="button" data-event-clear-all>Clear all</button>
       </div>
-
-      <div class="event-index-filter-grid" aria-label="Event filters" data-event-category>
-        {filters.map((filter) => <details class="event-index-filter"><summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-event-filter-count={filter.id}>0</span></summary><div class="event-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-event-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}</div></details>)}
-      </div>
-
+      <div class="event-index-filter-grid" aria-label="Event filters" data-event-category>{filters.map((filter) => <details class="event-index-filter"><summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-event-filter-count={filter.id}>0</span></summary><div class="event-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-event-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}</div></details>)}</div>
       <div class="event-index-summary"><div class="event-index-active-filters" data-event-active-filters aria-label="Active event filters"></div><div class="event-index-result-count" aria-live="polite"><span data-event-result-count>{records.length}</span> of {records.length} events</div></div>
       <div class="event-index-table"><table data-table-kind="event-index" data-mobile-table="scroll-preserve"><caption>Event registry results. Compact timeline cards follow in the same document for small screens.</caption><thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Impact</th><th>Status effect</th><th>Recovery</th><th>Sources</th></tr></thead><tbody data-event-body>{records.map((record) => <EventIndexRow record={record} />)}</tbody></table></div>
       <div class="event-index-cards" data-event-card-body aria-label="Event compact records">{records.map((record) => <EventIndexCard record={record} />)}</div>
