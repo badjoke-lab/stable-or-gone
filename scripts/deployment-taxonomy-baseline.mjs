@@ -47,8 +47,8 @@ export const deploymentTaxonomyBaseline = {
     source_linked_no_identifier: 69
   },
   contract_identity_states: {
-    not_recorded: 69,
-    recorded_identifier: 61
+    not_recorded: 70,
+    recorded_identifier: 60
   },
   network_identity_states: {
     aggregate_context: 4,
