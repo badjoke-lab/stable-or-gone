@@ -1,72 +1,9 @@
 [
-  {
-    "id": "sog_dep_gho_ethereum_batch_c",
-    "stablecoin_id": "sog_st_gho",
-    "chain": "Ethereum",
-    "deployment_type": "canonical_issuance",
-    "contract_address": null,
-    "status": "active",
-    "notes": "Canonical GHO issuance began on Ethereum through Aave DAO-approved facilitators. The current token address must be extracted from the maintained Aave address book before it is fixed in this record.",
-    "evidence_ids": ["sog_src_gho_launch_batch_c", "sog_src_gho_facilitators_batch_c"]
-  },
-  {
-    "id": "sog_dep_bold_ethereum_batch_c",
-    "stablecoin_id": "sog_st_bold",
-    "chain": "Ethereum",
-    "deployment_type": "canonical_issuance",
-    "contract_address": "0xb01dd87B29d187F3E3A4Bf6cdAebfb97F3D9aB98",
-    "status": "active",
-    "notes": "Canonical Liquity V2 BOLD token on Ethereum. sBOLD and other wrappers are separate assets and are not represented by this deployment.",
-    "evidence_ids": ["sog_src_bold_technical_batch_c", "sog_src_bold_redemptions_batch_c"]
-  },
-  {
-    "id": "sog_dep_usd0_ethereum_batch_c",
-    "stablecoin_id": "sog_st_usd0",
-    "chain": "Ethereum",
-    "deployment_type": "canonical_issuance",
-    "contract_address": "0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5",
-    "status": "active",
-    "notes": "Primary USD0 deployment and core issuance environment.",
-    "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c"]
-  },
-  {
-    "id": "sog_dep_usd0_arbitrum_batch_c",
-    "stablecoin_id": "sog_st_usd0",
-    "chain": "Arbitrum",
-    "deployment_type": "cross_chain_representation",
-    "contract_address": "0x35f1C5cB7Fb977E669fD244C567Da99d8a3a6850",
-    "status": "active",
-    "notes": "Official USD0 deployment listed by Usual. Issuance and collateral operations remain centered on the protocol's supported architecture rather than inferred from token presence alone.",
-    "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c"]
-  },
-  {
-    "id": "sog_dep_usd0_base_batch_c",
-    "stablecoin_id": "sog_st_usd0",
-    "chain": "Base",
-    "deployment_type": "cross_chain_representation",
-    "contract_address": "0x758a3e0b1F842C9306B783f8A4078C6C8C03a270",
-    "status": "active",
-    "notes": "Official USD0 deployment listed by Usual.",
-    "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c"]
-  },
-  {
-    "id": "sog_dep_usd0_bnb_batch_c",
-    "stablecoin_id": "sog_st_usd0",
-    "chain": "BNB Chain",
-    "deployment_type": "cross_chain_representation",
-    "contract_address": "0x758a3e0b1f842c9306b783f8A4078C6C8C03a270",
-    "status": "active",
-    "notes": "Official USD0 deployment listed by Usual.",
-    "evidence_ids": ["sog_src_usd0_fact_sheet_batch_c"]
-  },
-  {
-    "id": "sog_dep_usr_ethereum_batch_c",
-    "stablecoin_id": "sog_st_usr",
-    "chain": "Ethereum",
-    "deployment_type": "canonical_issuance",
-    "contract_address": "0x66a1e37c9b0eaddca17d3662d6c05f4decf3e110",
-    "status": "restricted",
-    "notes": "Canonical USR token listed in the official Resolv public contract repository. Current operational restrictions arise from incident response and do not imply that the contract address is inactive.",
-    "evidence_ids": ["sog_src_usr_contracts_batch_c", "sog_src_usr_postmortem_batch_c"]
-  }
+  {"id":"sog_dep_gho_ethereum_batch_c","stablecoin_id":"sog_st_gho","chain":"Ethereum","deployment_type":"canonical_issuance","canonicality":"native","contract_address":null,"status":"active","notes":"Canonical GHO issuance began on Ethereum through Aave DAO-approved facilitators. The current token address must be extracted from the maintained Aave address book before it is fixed in this record.","evidence_ids":["sog_src_gho_launch_batch_c","sog_src_gho_facilitators_batch_c"]},
+  {"id":"sog_dep_bold_ethereum_batch_c","stablecoin_id":"sog_st_bold","chain":"Ethereum","deployment_type":"canonical_issuance","canonicality":"native","contract_address":"0xb01dd87B29d187F3E3A4Bf6cdAebfb97F3D9aB98","status":"active","notes":"Canonical Liquity V2 BOLD token on Ethereum. sBOLD and other wrappers are separate assets and are not represented by this deployment.","evidence_ids":["sog_src_bold_technical_batch_c","sog_src_bold_redemptions_batch_c"]},
+  {"id":"sog_dep_usd0_ethereum_batch_c","stablecoin_id":"sog_st_usd0","chain":"Ethereum","deployment_type":"canonical_issuance","canonicality":"native","contract_address":"0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5","status":"active","notes":"Primary USD0 deployment and core issuance environment.","evidence_ids":["sog_src_usd0_fact_sheet_batch_c"]},
+  {"id":"sog_dep_usd0_arbitrum_batch_c","stablecoin_id":"sog_st_usd0","chain":"Arbitrum","deployment_type":"cross_chain_representation","canonicality":"canonical_bridge","contract_address":"0x35f1C5cB7Fb977E669fD244C567Da99d8a3a6850","status":"active","notes":"Official USD0 deployment listed by Usual. Issuance and collateral operations remain centered on the protocol's supported architecture rather than inferred from token presence alone.","evidence_ids":["sog_src_usd0_fact_sheet_batch_c"]},
+  {"id":"sog_dep_usd0_base_batch_c","stablecoin_id":"sog_st_usd0","chain":"Base","deployment_type":"cross_chain_representation","canonicality":"canonical_bridge","contract_address":"0x758a3e0b1F842C9306B783f8A4078C6C8C03a270","status":"active","notes":"Official USD0 deployment listed by Usual.","evidence_ids":["sog_src_usd0_fact_sheet_batch_c"]},
+  {"id":"sog_dep_usd0_bnb_batch_c","stablecoin_id":"sog_st_usd0","chain":"BNB Chain","deployment_type":"cross_chain_representation","canonicality":"canonical_bridge","contract_address":"0x758a3e0b1f842c9306b783f8A4078C6C8C03a270","status":"active","notes":"Official USD0 deployment listed by Usual.","evidence_ids":["sog_src_usd0_fact_sheet_batch_c"]},
+  {"id":"sog_dep_usr_ethereum_batch_c","stablecoin_id":"sog_st_usr","chain":"Ethereum","deployment_type":"canonical_issuance","canonicality":"native","contract_address":"0x66a1e37c9b0eaddca17d3662d6c05f4decf3e110","status":"restricted","notes":"Canonical USR token listed in the official Resolv public contract repository. Current operational restrictions arise from incident response and do not imply that the contract address is inactive.","evidence_ids":["sog_src_usr_contracts_batch_c","sog_src_usr_postmortem_batch_c"]}
 ]
