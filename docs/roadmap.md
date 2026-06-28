@@ -29,10 +29,10 @@ Canonical count source: `docs/migration/registry-v3-baseline.json`.
 ```text
 Repository: badjoke-lab/stable-or-gone
 Public site: https://sog.badjoke-lab.com/
-Latest completed work: PR #216 — visual mark correction
+Latest completed work: PR #217 — non-UI workstream transition and queue alignment
 Current phase: non-UI quality program
-Active work: PR #217 — workstream transition and queue alignment
-Next work: PR #218 — launch-date Category B/D source review
+Active work: PR #218 — launch-date Category B/D source review
+Next work: PR #219 — launch-date Category C review, group 1
 Detailed UI review: deferred
 Gate V2-A: passed
 Gate V2-B: passed
@@ -65,14 +65,25 @@ PR #216  owner-review visual mark correction
 
 The current UI is an intermediate repository state. The 92-record and all-route visual audit resumes only when detailed owner review is practical. Gate V2-F remains pending.
 
-## Immediate work — PR #217
+## Completed non-UI transition
 
-1. make `docs/quality/non-ui-quality-program.md` the active plan;
-2. update repository authority and schedule documents;
-3. mark the UI audit as deferred rather than completed;
-4. correct the stale human-readable launch-date queue totals;
-5. preserve canonical records, routes, counts, evidence relations, unknowns, deployments, and public output;
-6. perform no production deployment.
+PR #217 established `docs/quality/non-ui-quality-program.md` as the active plan, paused the UI audit without passing it, aligned repository authority and deployment documents, corrected the human-readable launch-date queue to 20 records, and added automated workstream and queue-to-audit consistency checks.
+
+## Immediate work — PR #218
+
+Audit the seven Category B/D launch-date records:
+
+```text
+BRZ
+HONEY
+USDz
+HUSD
+TRYB
+USYC
+AECoin
+```
+
+For each record, review the strongest first-party and on-chain evidence. The allowed outcomes are a supported canonical day, a stronger bounded range, a corrected reason code, or an explicitly preserved `null` with a better evidence trail. Do not coerce partial dates or use exchange listings as the launch boundary.
 
 ## Non-UI quality sequence
 
