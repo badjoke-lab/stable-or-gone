@@ -9,8 +9,10 @@ interface Props {
 }
 
 const { title, titleAccent, description, eyebrow, compact = false, className = '' } = Astro.props;
+const usesStablecoinIdentity = className.split(/\s+/).includes('stablecoin-dossier-hero');
+const heroStyle = usesStablecoinIdentity ? undefined : 'grid-template-columns:minmax(0,1fr)';
 ---
-<header class:list={['page-hero', compact && 'page-hero--compact', className]}>
+<header class:list={['page-hero', compact && 'page-hero--compact', className]} style={heroStyle}>
   <div class="page-hero__content">
     {eyebrow && <p class="page-hero__eyebrow">{eyebrow}</p>}
     <h1>{title}{titleAccent && <span>{titleAccent}</span>}</h1>
@@ -19,5 +21,5 @@ const { title, titleAccent, description, eyebrow, compact = false, className = '
     </slot>
     <slot name="actions" />
   </div>
-  <div class="page-hero__visual" aria-hidden="true"><slot name="visual" /></div>
+  {usesStablecoinIdentity && <div class="page-hero__visual" aria-hidden="true"><slot name="visual" /></div>}
 </header>
