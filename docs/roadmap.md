@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #229
-Active: PR #230
-Next: PR #231
+Latest completed: PR #230
+Active: PR #231
+Next: PR #232
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: paused
@@ -38,30 +38,32 @@ PR #216 Visual-mark correction
 ```text
 PR #217-#225 date, reserve, and evidence quality
 PR #226-#229 deployment quality
+PR #230 monitoring skeleton and canonical guard
 ```
 
-## PR #230
+## PR #231
 
 ```text
 Trigger: workflow_dispatch only
-Mode: health-only
-External network used: false
-Canonical writes: prohibited
-Candidate count: 0
+Modes: health-only / official-sources
+Official sources: 4
+Candidate status: needs_human_review
+Canonical action: none
 Output: private artifact only
 ```
 
-PR #230 adds the monitoring run manifest, repository-health report, Markdown summary, canonical snapshot guard, manual workflow, and validator. It does not observe external sources, create candidates, commit run output, open pull requests automatically, or publish findings.
+PR #231 observes allowlisted official pages, stores metadata and body digests without raw bodies, generates private candidates from allowlisted signals, and checks canonical targets and organization lineage.
 
-Specification: `docs/quality/monitoring-pipeline-spec.md`
-Workflow: `.github/workflows/monitoring-review.yml`
-Validator: `scripts/validate-monitoring-pipeline-pr230.mjs`
+Specifications:
+
+- `docs/quality/monitoring-pipeline-spec.md`
+- `docs/quality/monitoring-official-source-spec.md`
+- `docs/quality/monitoring-official-source-schema.md`
 
 ## Remaining sequence
 
 ```text
-PR #231 official-source candidate generation
-PR #232 reviewable monitoring reports
+PR #232 reviewable monitoring reports and PR material
 ```
 
 Normal quality work does not publish the site. Gate V2-F remains deferred.

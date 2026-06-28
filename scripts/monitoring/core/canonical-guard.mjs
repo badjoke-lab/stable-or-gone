@@ -11,27 +11,36 @@ const BASELINE_FILES = [
   'docs/migration/registry-v3-baseline.json'
 ];
 
-const COMPATIBILITY_FILES = [
-  'data/stablecoin-overrides-pr033.json',
-  'data/stablecoin-overrides-pr034.json'
-];
+const PROTECTED_ROOTS = ['data', 'config', 'src', 'public', 'docs/migration'];
 
 function flattenGroups(groups = {}) {
   return Object.values(groups).flatMap((files) => Array.isArray(files) ? files : []);
+}
+
+function listFiles(root, relativeDirectory) {
+  const absoluteDirectory = path.join(root, relativeDirectory);
+  if (!fs.existsSync(absoluteDirectory)) return [];
+  const results = [];
+  for (const entry of fs.readdirSync(absoluteDirectory, { withFileTypes: true })) {
+    const relativePath = path.posix.join(relativeDirectory.replaceAll('\\', '/'), entry.name);
+    if (entry.isDirectory()) results.push(...listFiles(root, relativePath));
+    else if (entry.isFile()) results.push(relativePath);
+  }
+  return results;
 }
 
 export function getProtectedPaths(root = process.cwd()) {
   const v2 = readJson(root, BASELINE_FILES[0]);
   const v3 = readJson(root, BASELINE_FILES[1]);
   const income = readJson(root, BASELINE_FILES[2]);
-  const paths = [
+  const baselineDeclared = [
     ...BASELINE_FILES,
     ...flattenGroups(v2.data_groups),
     ...flattenGroups(v3.data_groups),
-    ...(Array.isArray(income.data_files) ? income.data_files : []),
-    ...COMPATIBILITY_FILES.filter((relativePath) => fs.existsSync(path.join(root, relativePath)))
+    ...(Array.isArray(income.data_files) ? income.data_files : [])
   ];
-  return [...new Set(paths)].sort();
+  const protectedTree = PROTECTED_ROOTS.flatMap((relativeDirectory) => listFiles(root, relativeDirectory));
+  return [...new Set([...baselineDeclared, ...protectedTree])].sort();
 }
 
 export function captureCanonicalSnapshot(root = process.cwd()) {
@@ -54,7 +63,8 @@ export function captureCanonicalSnapshot(root = process.cwd()) {
     aggregate.update('\0');
   }
   return {
-    schema_version: '1.0',
+    schema_version: '1.1',
+    protected_roots: [...PROTECTED_ROOTS],
     protected_path_count: files.length,
     aggregate_sha256: aggregate.digest('hex'),
     files
@@ -83,17 +93,13 @@ export function compareCanonicalSnapshots(before, after) {
 export function verifyCanonicalSnapshot(before, root = process.cwd()) {
   const after = captureCanonicalSnapshot(root);
   const result = compareCanonicalSnapshots(before, after);
-  if (!result.ok) {
-    throw new Error(`Monitoring canonical guard failed: ${result.changed_paths.join(', ') || 'aggregate hash changed'}`);
-  }
+  if (!result.ok) throw new Error(`Monitoring canonical guard failed: ${result.changed_paths.join(', ') || 'aggregate hash changed'}`);
   return result;
 }
 
 async function main() {
   const [command, snapshotPath, resultPath] = process.argv.slice(2);
-  if (!['capture', 'verify'].includes(command) || !snapshotPath) {
-    throw new Error('Usage: canonical-guard.mjs <capture|verify> <snapshot.json> [result.json]');
-  }
+  if (!['capture', 'verify'].includes(command) || !snapshotPath) throw new Error('Usage: canonical-guard.mjs <capture|verify> <snapshot.json> [result.json]');
   if (command === 'capture') {
     const snapshot = captureCanonicalSnapshot();
     writeJson(snapshotPath, snapshot);
