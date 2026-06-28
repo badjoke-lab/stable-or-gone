@@ -15,6 +15,8 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
+      - name: Collect PR 223 evidence inventory
+        run: node scripts/collect-pr223.mjs > pr223-evidence.txt
       - name: Run build
         shell: bash
         run: |
@@ -33,4 +35,5 @@ jobs:
           path: |
             stablecoin-build.log
             stablecoin-consistency.log
+            pr223-evidence.txt
           if-no-files-found: error
