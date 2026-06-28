@@ -84,7 +84,12 @@ check(!indexSource.includes('uniqueSorted(stablecoins.map((coin) => coin.collate
 check(indexSource.includes('<th>Backing model</th>'), 'backing model heading is missing');
 const detailSource = readText('src/components/StablecoinDetailView.astro');
 for (const heading of ['Public backing model', 'Canonical backing types', 'Reserve component categories', 'Primary stabilization mechanism', 'Recorded model description']) check(detailSource.includes(`<th>${heading}</th>`) || detailSource.includes(`<dt>${heading}</dt>`), `detail heading is missing: ${heading}`);
-check(detailSource.includes('getReserveComponentsFor') && detailSource.includes('Historical model changes'), 'detail backing history is incomplete');
+check(
+  detailSource.includes('getReserveComponentsFor')
+    && detailSource.includes('modelHistoryEvents')
+    && (detailSource.includes('Historical model changes') || detailSource.includes('Model and lifecycle changes')),
+  'detail backing history is incomplete'
+);
 const machineSource = readText('src/lib/machine-readable.ts');
 check(machineSource.includes('public_model_category: countValues'), 'machine-readable public model breakdown is missing');
 check(machineSource.includes('backing_type_non_exclusive: countMultiValues'), 'machine-readable backing breakdown is missing');
