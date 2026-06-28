@@ -6,8 +6,15 @@ const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const css = read('src/styles/ui-v2-hardening.css');
+const markCss = read('src/styles/identity-badge-policy.css');
 const accessibility = read('src/styles/accessibility-utilities.css');
 const layout = read('src/layouts/BaseLayout.astro');
+const hero = read('src/components/PageHero.astro');
+const stablecoinSurfaces = [
+  read('src/components/StablecoinIndexRow.astro'),
+  read('src/components/StablecoinIndexCard.astro'),
+  read('src/components/StablecoinDetailView.astro')
+];
 const pageSources = [
   'src/pages/index.astro',
   'src/pages/stablecoins/index.astro',
@@ -20,6 +27,7 @@ const pageSources = [
 ].map(read).join('\n');
 
 check(accessibility.includes("@import './ui-v2-hardening.css'"), 'Global hardening stylesheet is not loaded');
+check(accessibility.includes("@import './identity-badge-policy.css'"), 'Visual mark correction stylesheet is not loaded');
 check(css.includes('@media (max-width: 359px)'), '320px-class compact hardening is missing');
 check(css.includes('@media (max-width: 719px)'), 'Compact breakpoint hardening is missing');
 check(css.includes('min-height: 44px'), 'Minimum action target size is missing');
@@ -33,6 +41,11 @@ check(!css.includes('nth-child') || !css.includes('display: none'), 'Generic num
 check(layout.includes('skip-link') && layout.includes('id="main-content"') && layout.includes('tabindex="-1"'), 'Skip-link and main-focus contract is incomplete');
 for (const marker of ['data-ui-v2-organizations', 'data-ui-v2-events', 'data-ui-v2-event-detail', 'stablecoin-dossier-nav']) check(pageSources.includes(marker), `Protected v2 surface marker is missing: ${marker}`);
 for (const compactMarker of ['data-mobile-representation-for="organization-overview"', 'data-mobile-representation-for="event-details"', 'stablecoin-identity-cards']) check(pageSources.includes(compactMarker), `Compact protected representation is missing: ${compactMarker}`);
+check(hero.includes("includes('stablecoin-dossier-hero')") && hero.includes('usesStablecoinIdentity &&'), 'Hero visuals must be limited to stablecoin identity');
+check(markCss.includes('.metric-card__icon') && markCss.includes('.home-entry-card__icon'), 'Decorative letter marks remain visible');
+check(markCss.includes('border-radius: 6px'), 'Filter count markers must not remain circular');
+for (const source of stablecoinSurfaces) check(source.includes('<TickerBadge'), 'Stablecoin ticker fallback must remain present');
+
 const report = { schema_version: '1.0', checked_at: new Date().toISOString(), ok: failures.length === 0, verified_width_floor_px: 320, zoom_target_percent: 200, failures };
 if (failures.length) { console.error(JSON.stringify(report, null, 2)); process.exit(1); }
 console.log(JSON.stringify(report, null, 2));
