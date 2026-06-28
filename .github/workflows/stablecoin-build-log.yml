@@ -15,8 +15,6 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
-      - name: Collect PR 226 deployment inventory
-        run: node scripts/collect-pr226.mjs > pr226-deployments.txt
       - name: Run build
         shell: bash
         run: |
@@ -35,5 +33,4 @@ jobs:
           path: |
             stablecoin-build.log
             stablecoin-consistency.log
-            pr226-deployments.txt
           if-no-files-found: error
