@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import './validate-launch-date-pr220-review.mjs';
 import './validate-terminal-relationship-review.mjs';
+import './collect-pr223.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -64,4 +65,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Active workstream validation passed: PR #222 is active; reserve applicability is classified at 10/2/0.');
+console.log('Active workstream validation passed: PR #222 is active; PR #223 evidence inventory generated.');
