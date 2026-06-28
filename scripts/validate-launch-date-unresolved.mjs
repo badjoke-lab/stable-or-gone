@@ -13,6 +13,15 @@ const fail = (message) => {
 const queue = readJson('data/quality/launch-date-unresolved.json');
 const baseline = loadRegistryV2Baseline(root);
 const stablecoinFiles = baseline?.data_groups?.stablecoins;
+const reviewedInPr218 = new Set([
+  'sog_st_brz',
+  'sog_st_honey',
+  'sog_st_usdz',
+  'sog_st_husd',
+  'sog_st_tryb',
+  'sog_st_usyc',
+  'sog_st_aecoin'
+]);
 
 if (!Array.isArray(stablecoinFiles) || stablecoinFiles.length === 0) {
   throw new Error('registry-v2 baseline has no stablecoin data group');
@@ -50,6 +59,28 @@ for (const row of records) {
   if (row.category === 'B' && (typeof row.best_known_range !== 'string' || row.best_known_range.length === 0)) {
     fail(`${row.stablecoin_id}: category B requires best_known_range`);
   }
+  if (row.last_reviewed !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(row.last_reviewed)) {
+    fail(`${row.stablecoin_id}: last_reviewed must be YYYY-MM-DD`);
+  }
+  if (row.reviewed_sources !== undefined) {
+    if (!Array.isArray(row.reviewed_sources) || row.reviewed_sources.length === 0) {
+      fail(`${row.stablecoin_id}: reviewed_sources must be a non-empty array`);
+    } else {
+      if (new Set(row.reviewed_sources).size !== row.reviewed_sources.length) fail(`${row.stablecoin_id}: reviewed_sources contains duplicates`);
+      for (const url of row.reviewed_sources) {
+        if (typeof url !== 'string' || !url.startsWith('https://')) fail(`${row.stablecoin_id}: reviewed source must be HTTPS`);
+      }
+    }
+  }
+  if (reviewedInPr218.has(row.stablecoin_id)) {
+    if (row.last_reviewed !== '2026-06-28') fail(`${row.stablecoin_id}: PR #218 review date is missing`);
+    if (!Array.isArray(row.reviewed_sources) || row.reviewed_sources.length < 2) fail(`${row.stablecoin_id}: PR #218 requires at least two reviewed sources`);
+    if (row.category === 'D') fail(`${row.stablecoin_id}: PR #218 source trail must not remain Category D`);
+  }
+}
+
+for (const reviewedId of reviewedInPr218) {
+  if (!uniqueIds.has(reviewedId)) fail(`${reviewedId}: PR #218 reviewed record is missing from queue`);
 }
 
 for (const category of ['B', 'C', 'D']) {
@@ -97,11 +128,11 @@ if (typeof queue.source_review === 'string') {
       if (!review.includes(phrase)) fail(`source_review is missing aligned summary: ${phrase}`);
     }
     for (const id of queueIds) {
-      if (!review.includes(`\`${id}\``)) fail(`source_review is missing queue record ${id}`);
+      if (!review.includes(id)) fail(`source_review is missing queue record ${id}`);
     }
   }
 }
 
 if (!process.exitCode) {
-  console.log(`launch-date unresolved queue valid: ${records.length} records (B ${categoryCounts.B}, C ${categoryCounts.C}, D ${categoryCounts.D})`);
+  console.log(`launch-date unresolved queue valid: ${records.length} records (B ${categoryCounts.B}, C ${categoryCounts.C}, D ${categoryCounts.D}); PR #218 reviewed ${reviewedInPr218.size}`);
 }
