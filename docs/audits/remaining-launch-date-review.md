@@ -5,89 +5,62 @@ Updated: 2026-06-28
 
 ## Purpose
 
-This document is the human-readable companion to `data/quality/launch-date-unresolved.json`. The machine-readable queue, this audit, and the canonical `launch_date: null` set must remain aligned. Day-level dates are added only when reviewed first-party or on-chain evidence supports the selected public launch boundary.
+This document summarizes the current canonical `launch_date: null` set. Machine-readable detail and reviewed source URLs are stored in `data/quality/launch-date-unresolved.json`. The current full source review is `docs/quality/launch-date-historical-boundary-review-2026-06-28.md`.
 
 ## Current queue
 
 ```text
-Total unresolved: 20
+Total unresolved: 19
 Category B: 3
-Category C: 13
-Category D: 4
+Category C: 16
+Category D: 0
 ```
-
-## Recently resolved bounded records
-
-- EURA — agEUR launch separated from the later EURA rebrand.
-- lisUSD — HAY launch separated from the lisUSD rebrand.
-- sUSD — eUSD, nUSD launch, and sUSD rename separated.
-- Nuon — v1 and v2 product boundaries separated.
-- SPOT — original launch separated from later protocol versions.
-- fxUSD — public availability separated from announcement, seeding, and V2 upgrade.
-- MAI — Polygon public launch separated from rename and V2 activation.
-- Savings DAI — contract deployment on 2023-01-17 separated from public Spark availability on 2023-05-09.
-- Basis Cash — original public launch fixed to 2020-11-30 while V2 activation and unresolved terminal boundaries remain separate.
-- Cashio Dollar — public mint, redemption, liquidity, and swap availability fixed to 2021-11-09 while the exact Solana mint remains unresolved.
-- DOLA — Ethereum contract creation on 2021-02-23 separated from the public Anchor and DOLA launch on 2021-02-25.
-- USD1 — deployments, introduction, testing, first issuance, and broad availability remain separate; public launch stays unresolved at April 2025 month level.
-- MIM — introduction, deployment, LP incentives, and live operation are bounded while the exact first Cauldron and public issuance boundary remain unresolved.
-- mUSD — contract verification, candidate mainnet availability, first mint, and later product activation remain separate.
-- USK — public launch fixed to 2022-09-12 while the later wind-down remains separate.
-- VAI — public launch fixed to 2020-11-24 when public VAI minting became available.
-- VCHF — original issuance is separated from later multichain deployments and listings.
-- IRON — original BSC protocol launch is separated from Polygon deployment, collapse, and later redesign.
 
 ## Category B — partial date only
 
-| Stable asset | ID | Best known range | Reason |
-|---|---|---|---|
-| Brazilian Digital Token | `sog_st_brz` | 2019 | First-party sources establish 2019 only. |
-| Berachain HONEY | `sog_st_honey` | 2025 | No HONEY-specific day-level public launch statement recovered. |
-| Anzen USDz | `sog_st_usdz` | 2024-06 | Official sources establish June 2024 only. |
+| Stable asset | ID | Best known range |
+|---|---|---|
+| Brazilian Digital Token | `sog_st_brz` | 2019; live by 2019-07-25 |
+| BiLira | `sog_st_tryb` | 2019 |
+| Anzen USDz | `sog_st_usdz` | 2024-06 |
 
-## Category C — boundary, version, or lineage conflict
+## Category C — boundary, version, lineage, or product conflict
 
-| Stable asset | ID | Best known range | Reason |
-|---|---|---|---|
-| Agora Dollar | `sog_st_agoraausd` | — | Contract deployment, first mint, approved access, and broad public availability differ. |
-| Dynamic Set Dollar | `sog_st_dsd` | — | Version, epoch, and distribution boundaries conflict. |
-| Empty Set Dollar | `sog_st_esd` | — | Deployment, epoch, and architecture boundaries conflict. |
-| Euro Tether | `sog_st_eurt` | — | Announcement, issuance, listings, and deployments differ. |
-| GYEN | `sog_st_gyen` | — | Issuance, availability, listings, and wind-down differ. |
-| Magic Internet Money | `sog_st_mim` | 2021-05 to 2021-06 | Introduction, deployment, first Cauldron, issuance, liquidity, incentives, and public UI differ. |
-| MainStreetUSD | `sog_st_msusd` | — | Announcement, issuance, deployment, and availability differ. |
-| mStable USD | `sog_st_musd` | 2020-05-29 | Contract verification, candidate mainnet availability, first mint, and Save activation differ. |
-| Stables Labs USDX | `sog_st_stablesusdx` | — | Announcement, issuance, deployment, and approved access differ. |
-| Staked USDe | `sog_st_susde` | — | USDe launch and staking activation differ. |
-| World Liberty Financial USD | `sog_st_usd1` | 2025-04 | Deployments, introduction, testing, first issuance, and broader availability differ. |
-| Mento Dollar | `sog_st_usdm` | — | Mento Dollar and earlier Celo-dollar history differ. |
-| Hyperliquid USDH | `sog_st_usdh` | — | Product announcement, first mint, HyperCore activation, HyperEVM linking, and migration boundaries differ. |
+| Stable asset | ID | Best known range or conflict |
+|---|---|---|
+| Agora Dollar | `sog_st_agoraausd` | 2024-07-07 contract deployment; public launch unresolved |
+| Dynamic Set Dollar | `sog_st_dsd` | 2020-11-26 protocol start to 2020-11-28 public announcement |
+| Empty Set Dollar | `sog_st_esd` | Launched before 2020-10-19; original launch post not recovered |
+| Euro Tether | `sog_st_eurt` | 2017 at year level |
+| Berachain HONEY | `sog_st_honey` | 2025-02-06 network boundary; first asset use unresolved |
+| HUSD | `sog_st_husd` | 2019-07-17 announcement to 2019-10-18 confirmed operation |
+| Magic Internet Money | `sog_st_mim` | 2021-05 to 2021-06 |
+| MainStreetUSD | `sog_st_msusd` | Announcement, issuance, deployment, and availability differ |
+| mStable USD | `sog_st_musd` | 2020-05-28 to 2020-06-05 |
+| Stables Labs USDX | `sog_st_stablesusdx` | Announcement, issuance, deployment, and approved access differ |
+| Staked USDe | `sog_st_susde` | USDe launch and staking activation differ |
+| World Liberty Financial USD | `sog_st_usd1` | 2025-04 at month level |
+| Mento Dollar | `sog_st_usdm` | Mento Dollar and earlier Celo-dollar lineage differ |
+| Hashnote US Yield Coin | `sog_st_usyc` | 2023-05-01 fund inception; token launch unresolved |
+| Hyperliquid USDH | `sog_st_usdh` | Announcement, first mint, network activation, and migration differ |
+| AE Coin | `sog_st_aecoin` | After 2025-01-17; live by 2025-05 |
 
-## Category D — adequate primary source not recovered
+## Resolved in PR #219
 
-| Stable asset | ID | Best known range | Reason |
-|---|---|---|---|
-| HUSD | `sog_st_husd` | — | No reliable issuer day-level launch source recovered. |
-| BiLira | `sog_st_tryb` | — | Current sources do not preserve the original launch day. |
-| Hashnote US Yield Coin | `sog_st_usyc` | — | Current documents do not establish the original launch day. |
-| AECoin | `sog_st_aecoin` | — | Current official and regulatory materials do not establish the exact first issuance or public circulation day. |
+GYEN was removed from the unresolved queue. Its canonical launch date is `2021-03-01`, when GMO Trust officially began issuance, redemption, and service. The later Binance listing and later network deployments remain separate distribution and deployment boundaries.
 
 ## Fixed policy
 
-- Require day-level primary or on-chain evidence for a canonical launch date.
-- Do not coerce month or year into a date.
-- Do not use exchange listings as the default launch boundary.
-- Do not substitute a rebrand, migration, contract deployment, testnet, guarded beta, or later product version for the original public boundary.
+- Require day-level first-party or on-chain evidence for a canonical launch date.
+- Do not coerce month or year into a day.
+- Do not use exchange listing, network launch, fund inception, approval, migration, rebrand, or contract deployment as the asset launch without matching evidence.
 - Keep unresolved values as `null`.
 
-## Current completion state
+## Review state
 
 ```text
-Original review scope: complete
-Current unresolved queue: 20
-Category B: 3
-Category C: 13
-Category D: 4
+Completed: PR #218 Category B/D review
+Active: PR #219 historical boundary review
+Next: PR #220 remaining current-product and lineage review
 Machine-readable queue: data/quality/launch-date-unresolved.json
-Next bounded review: PR #218 — Category B/D source review
 ```
