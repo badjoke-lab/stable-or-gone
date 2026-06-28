@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #222
-Active: PR #223
-Next: PR #224
+Latest completed: PR #223
+Active: PR #224
+Next: PR #225
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: paused
@@ -42,27 +42,27 @@ PR #219 historical launch-boundary review
 PR #220 remaining launch-boundary review
 PR #221 terminal and relationship-end review
 PR #222 reserve applicability review
+PR #223 evidence reliability review
 ```
 
-## PR #223
+## PR #224
 
 ```text
-Reviewed evidence records: 36
-High: 18
-Medium: 18
-Low: 0
-Unresolved: 0
-Registry reliability totals: high 376 / medium 81 / low 0 / unresolved 0
+Total findings: 112
+Replaceable after source review: 67
+Intentionally unknown after review: 0
+Invalid placeholder encoding: 45
 ```
 
-Specification: `docs/quality/evidence-reliability-review-2026-06-28.md`
-Manifest: `data/quality/evidence-reliability-pr223.json`
-Validator: `scripts/validate-evidence-reliability-pr223.mjs`
+Classification does not resolve or replace the underlying canonical facts. Deployment resolution remains scheduled for PR #226–#229. Invalid refers to field encoding, not automatically to the whole record.
+
+Specification: `docs/quality/direct-workflow-placeholder-review-2026-06-28.md`
+Manifest: `data/quality/direct-workflow-placeholder-review.json`
+Validator: `scripts/validate-direct-workflow-placeholders-pr224.mjs`
 
 ## Remaining sequence
 
 ```text
-PR #224 workflow-placeholder evidence review
 PR #225 evidence traceability and duplicate invariants
 PR #226-229 deployment quality
 PR #230-232 review-only monitoring
