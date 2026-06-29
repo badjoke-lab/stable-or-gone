@@ -31,6 +31,7 @@ import legalProfilesGrowthM from '../../../data/legal-profiles-v3-batch-growth-m
 import legalProfilesGrowthN from '../../../data/legal-profiles-v3-batch-growth-n.json';
 import legalProfilesGrowthO from '../../../data/legal-profiles-v3-batch-growth-o.json';
 import legalProfilesGrowthP from '../../../data/legal-profiles-v3-batch-growth-p.json';
+import legalProfilesGrowthQ from '../../../data/q-legal.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
@@ -45,6 +46,7 @@ import reserveComponentsBatchM from '../../../data/reserve-components-v3-batch-m
 import reserveComponentsBatchN from '../../../data/reserve-components-v3-batch-n.json';
 import reserveComponentsBatchO from '../../../data/reserve-components-v3-batch-o.json';
 import reserveComponentsBatchP from '../../../data/reserve-components-v3-batch-p.json';
+import reserveComponentsBatchQ from '../../../data/reserve-components-v3-batch-q.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -88,10 +90,11 @@ const legalProfiles = [
   ...legalProfilesGrowthM,
   ...legalProfilesGrowthN,
   ...legalProfilesGrowthO,
-  ...legalProfilesGrowthP
+  ...legalProfilesGrowthP,
+  ...legalProfilesGrowthQ
 ] as LegalProfileV3[];
 const stableAssetRelationships = [...stableAssetRelationshipsData, ...stableAssetRelationshipsBatchH] as StableAssetRelationshipV3[];
-const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL, ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP] as ReserveComponentV3[];
+const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL, ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP, ...reserveComponentsBatchQ] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
   canonicality: DeploymentCanonicality;
@@ -100,10 +103,7 @@ export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
 export function getLegalProfiles(): LegalProfileV3[] {
   return legalProfiles.map((row) => ({
     ...row,
-    classifications: row.classifications.map((entry) => ({
-      ...entry,
-      evidence_ids: [...entry.evidence_ids]
-    })),
+    classifications: row.classifications.map((entry) => ({ ...entry, evidence_ids: [...entry.evidence_ids] })),
     claim_against_organization_ids: [...row.claim_against_organization_ids],
     licensed_or_regulated_as: [...row.licensed_or_regulated_as],
     evidence_ids: [...row.evidence_ids]
@@ -115,10 +115,7 @@ export function getLegalProfile(stablecoinId: string): LegalProfileV3 | undefine
 }
 
 export function getStableAssetRelationships(): StableAssetRelationshipV3[] {
-  return stableAssetRelationships.map((row) => ({
-    ...row,
-    evidence_ids: [...row.evidence_ids]
-  }));
+  return stableAssetRelationships.map((row) => ({ ...row, evidence_ids: [...row.evidence_ids] }));
 }
 
 export function getStableAssetRelationshipsFor(stablecoinId: string): StableAssetRelationshipV3[] {
@@ -126,10 +123,7 @@ export function getStableAssetRelationshipsFor(stablecoinId: string): StableAsse
 }
 
 export function getReserveComponents(): ReserveComponentV3[] {
-  return reserveComponents.map((row) => ({
-    ...row,
-    evidence_ids: [...row.evidence_ids]
-  }));
+  return reserveComponents.map((row) => ({ ...row, evidence_ids: [...row.evidence_ids] }));
 }
 
 export function getReserveComponentsFor(stablecoinId: string): ReserveComponentV3[] {
