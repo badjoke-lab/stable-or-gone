@@ -1,0 +1,20 @@
+{
+  "schema_version":"1.0",
+  "base_manifest":"docs/migration/registry-v2-baseline.json",
+  "batch_id":"batch_018",
+  "minimum_counts":{"stablecoins":94,"organizations":89,"relationships":104,"classifications":94,"profiles":94,"events":155,"event_details":155,"evidence":466,"evidence_relations":466,"reserve_reports":102,"known_unknowns":263,"regulatory_notes":9,"deployments":132,"classification_extensions":2},
+  "data_group_additions":{
+    "stablecoins":["data/stablecoins-batch-q.json"],
+    "organizations":["data/organizations-batch-q.json"],
+    "relationships":["data/relationships-batch-q.json"],
+    "classifications":["data/stablecoin-classification-batch-q.json"],
+    "profiles":["data/stablecoin-profiles-batch-q.json"],
+    "events":["data/events-batch-q.json"],
+    "event_details":["data/event-details-batch-q.json"],
+    "evidence":["data/evidence-batch-q.json"],
+    "evidence_relations":["data/evidence-batch-q.json"],
+    "reserve_reports":["data/reserve-reports-batch-q.json"],
+    "known_unknowns":["data/q-open-items.json"],
+    "deployments":["data/deployments-batch-q.json"]
+  }
+}
