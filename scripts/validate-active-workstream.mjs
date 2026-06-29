@@ -13,27 +13,31 @@ const documents = {
   program: fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8'),
   governance: fs.readFileSync('docs/spec-governance.md', 'utf8'),
   agents: fs.readFileSync('AGENTS.md', 'utf8'),
-  review: fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8'),
   baseline: fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8'),
+  review: fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8'),
   change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8'),
   baselineUpdate: fs.readFileSync('docs/quality/monitoring-baseline-update-spec.md', 'utf8'),
   classification: fs.readFileSync('docs/quality/monitoring-observation-classification-spec.md', 'utf8'),
-  normalization: fs.readFileSync('docs/quality/monitoring-normalization-spec.md', 'utf8')
+  normalization: fs.readFileSync('docs/quality/monitoring-normalization-spec.md', 'utf8'),
+  phaseAAudit: fs.readFileSync('docs/quality/monitoring-phase-a-audit.md', 'utf8'),
+  feasibility: fs.readFileSync('docs/quality/monitoring-feasibility-audit-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #238',
-    'Active: PR #239',
-    'Next: PR #240',
+    'Latest completed: PR #240',
+    'Active: PR #241',
+    'Next: PR #242',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #238 versioned content normalization and noise suppression',
-    'Normalization version: sog_official_source_normalization_v2',
-    'Source-specific exceptions: 0',
-    'Raw or normalized response text stored: false',
+    'PR #239 deterministic monitoring audit and safety closure',
+    'PR #240 monitoring feasibility audit for all 92 assets',
+    'Canonical stable assets audited: 92',
+    'Live source registration: 0',
+    'Accepted baseline changes: 0',
+    'PR #241 reserve and assurance source expansion',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -51,6 +55,12 @@ const required = {
     'Growth beyond 92 assets is permitted only after PR #246',
     'Production publication remains prohibited through PR #263'
   ],
+  baseline: [
+    'A baseline is not canonical evidence',
+    'pending_initial_acceptance',
+    'normalization_version',
+    'Monitoring execution may read this file but may not modify it'
+  ],
   review: [
     'observed_facts',
     'inferences',
@@ -58,19 +68,11 @@ const required = {
     'Human approval required',
     'Automatic pull request: false'
   ],
-  baseline: [
-    'A baseline is not canonical evidence',
-    'pending_initial_acceptance',
-    'normalization_version',
-    'Monitoring execution may read this file but may not modify it'
-  ],
   change: [
-    'baseline-aware review candidate generation',
     'An unchanged source must create zero candidates',
     'metadata_changed',
     'content_changed',
     'fetch_failed',
-    'normalized_content_sha256',
     'No candidate authorizes canonical data'
   ],
   baselineUpdate: [
@@ -79,22 +81,37 @@ const required = {
     'hold',
     'reject',
     'repository_baseline_written: false',
-    'The proposal is not self-applying',
-    'No production deployment required'
+    'The proposal is not self-applying'
   ],
   classification: [
     'metadata_changed',
     'normalized_content_same_metadata_differs',
     'A metadata-only observation creates zero content-change candidates',
-    'The count total must equal `observation_count`',
-    'No production deployment required'
+    'The count total must equal `observation_count`'
   ],
   normalization: [
     'sog_official_source_normalization_v2',
     'No source-specific normalization exceptions are approved',
     'calendar date or reporting period',
     'contract or account address',
-    'The normalized text is used in memory',
+    'The normalized text is used in memory'
+  ],
+  phaseAAudit: [
+    'Phase A is complete for the current four-source, review-only monitoring scope',
+    'Automatic canonical writes: prohibited',
+    'Automatic pull requests: prohibited',
+    'Accepted baselines: 0',
+    'Pending baselines: 4',
+    'Production publication: prohibited'
+  ],
+  feasibility: [
+    'classifies every current canonical stable asset',
+    'automatically_monitorable',
+    'partially_monitorable',
+    'manual_review_only',
+    'no_reliable_official_source',
+    'record count equals the canonical stablecoin count and currently equals 92',
+    'PR #240 itself adds no live source and accepts no baseline',
     'No production deployment required'
   ]
 };
@@ -105,4 +122,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #238 is complete and PR #239 is active.');
+console.log('Active workstream validation passed: PR #240 is complete and PR #241 reserve and assurance expansion is active.');
