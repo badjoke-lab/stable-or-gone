@@ -41,6 +41,7 @@ function buildContext(options) {
   const runId = options.runId || resolveRunId(startedAt, sourceCommit);
   const outputRoot = options.outputRoot || path.join(root, 'data-staging/monitoring');
   const runDirectory = path.join(outputRoot, runId);
+  const reviewRequested = options.includeReviewMaterial ?? process.env.SOG_MONITORING_REVIEW_MATERIAL === 'true';
   ensureDir(runDirectory);
   return {
     options,
@@ -48,7 +49,7 @@ function buildContext(options) {
     sourceCommit,
     sourceBranch: options.sourceBranch || resolveBranch(),
     mode,
-    includeReviewMaterial: options.includeReviewMaterial ?? mode === 'official-sources',
+    includeReviewMaterial: mode === 'official-sources' && reviewRequested,
     runId,
     runDirectory,
     before: captureCanonicalSnapshot(root),
