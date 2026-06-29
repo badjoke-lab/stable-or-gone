@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_uxd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_uxd_overview_batch_s","sog_src_uxd_alm_batch_s"]},
+  {"id":"sog_st_doc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_doc_intro_batch_s","sog_src_doc_current_batch_s"]}
+]
