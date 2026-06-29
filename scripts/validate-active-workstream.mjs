@@ -9,6 +9,7 @@ import './validate-deployment-canonicality-pr227.mjs';
 import './validate-deployment-source-status-pr229.mjs';
 import './validate-monitoring-reserve-assurance-pr241.mjs';
 import './validate-monitoring-redemption-terms-pr242.mjs';
+import './validate-monitoring-issuer-lifecycle-pr243.mjs';
 
 const documents = {
   roadmap: fs.readFileSync('docs/roadmap.md', 'utf8'),
@@ -24,25 +25,26 @@ const documents = {
   phaseAAudit: fs.readFileSync('docs/quality/monitoring-phase-a-audit.md', 'utf8'),
   feasibility: fs.readFileSync('docs/quality/monitoring-feasibility-audit-spec.md', 'utf8'),
   reserveAssurance: fs.readFileSync('docs/quality/monitoring-reserve-assurance-expansion-spec.md', 'utf8'),
-  redemptionTerms: fs.readFileSync('docs/quality/monitoring-redemption-terms-expansion-spec.md', 'utf8')
+  redemptionTerms: fs.readFileSync('docs/quality/monitoring-redemption-terms-expansion-spec.md', 'utf8'),
+  issuerLifecycle: fs.readFileSync('docs/quality/monitoring-issuer-lifecycle-expansion-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #242',
-    'Active: PR #243',
-    'Next: PR #244',
+    'Latest completed: PR #243',
+    'Active: PR #244',
+    'Next: PR #245',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #241 reserve and assurance source expansion',
     'PR #242 redemption and terms source expansion',
-    'Enabled official sources: 14',
-    'Redemption and terms sources added: 5',
-    'Pending baselines: 14',
-    'Accepted baselines: 0',
     'PR #243 issuer, migration, and shutdown source expansion',
+    'Enabled official sources: 19',
+    'Issuer lifecycle sources added: 5',
+    'Pending baselines: 19',
+    'Accepted baselines: 0',
+    'PR #244 regulatory-source monitoring boundary',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -134,6 +136,14 @@ const required = {
     'No live response digest is committed in PR #242',
     'All nine sources present after PR #241 must remain enabled',
     'No production deployment required'
+  ],
+  issuerLifecycle: [
+    'expands review-only monitoring for issuer and protocol lifecycle statements',
+    'exactly five reviewed PR #243 sources are added',
+    'optional_upgrade_is_not_discontinuation: true',
+    'parallel_successor_is_not_migration: true',
+    'All fourteen sources present after PR #242 must remain enabled',
+    'No production deployment required'
   ]
 };
 
@@ -143,4 +153,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #242 is complete and PR #243 issuer lifecycle expansion is active.');
+console.log('Active workstream validation passed: PR #243 is complete and PR #244 regulatory monitoring boundary is active.');

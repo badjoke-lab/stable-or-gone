@@ -21,7 +21,27 @@ const SIGNAL_KEYWORDS = {
   reserve_update: ['reserve', 'reserves', 'backing assets', 'total reserves', 'portfolio composition'],
   assurance_update: ['assurance', 'attestation', 'attestations', 'independent third-party', 'report'],
   issuance_redemption_update: ['issuance', 'issued', 'redemption', 'redeemed', 'circulation'],
-  backing_attestation_update: ['custodian', 'attestation', 'backing assets', 'transparency']
+  backing_attestation_update: ['custodian', 'attestation', 'backing assets', 'transparency'],
+  lifecycle_update: [
+    'migration',
+    'migrate',
+    'upgrade',
+    'upgraded',
+    'optional',
+    'rebrand',
+    'renamed',
+    'now be known as',
+    'wind down',
+    'winding down',
+    'halt minting',
+    'cease issuance',
+    'shutdown',
+    'retire',
+    'retirement',
+    'conversion',
+    'convert',
+    'here to stay'
+  ]
 };
 
 function sha256(value) {

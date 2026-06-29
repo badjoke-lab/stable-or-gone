@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_issuer_lifecycle_source_review_pr243",
+  "reviewed_at": "2026-06-29T08:15:00.000Z",
+  "normalization_version": "sog_official_source_normalization_v2",
+  "scope": "issuer_migration_rebrand_and_shutdown_source_expansion",
+  "sources": [
+    {
+      "source_id": "paxos-busd-minting-halt",
+      "review_url": "https://www.paxos.com/newsroom/paxos-will-halt-minting-new-busd-tokens",
+      "final_url": "https://www.paxos.com/newsroom/paxos-will-halt-minting-new-busd-tokens",
+      "final_host": "www.paxos.com",
+      "content_type": "text/html",
+      "ownership_review": "official_paxos_domain",
+      "affected_stablecoin_ids": ["sog_st_busd"],
+      "affected_organization_ids": ["sog_issuer_paxos"],
+      "lifecycle_classification": "wind_down",
+      "visible_signal_terms": ["halt minting", "cease issuance", "end its relationship", "redeem", "convert"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "sky-dai-usds-upgrade",
+      "review_url": "https://sky.money/",
+      "final_url": "https://sky.money/",
+      "final_host": "sky.money",
+      "content_type": "text/html",
+      "ownership_review": "official_sky_protocol_domain",
+      "affected_stablecoin_ids": ["sog_st_dai"],
+      "affected_organization_ids": ["sog_issuer_makerdao_sky"],
+      "lifecycle_classification": "optional_reversible_upgrade",
+      "visible_signal_terms": ["upgrade DAI to USDS", "1:1", "optional", "USDS"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "acala-ausd-aseed-migration",
+      "review_url": "https://wiki.acala.network/acala-exodus-upgrade/ausd-seed-aseed",
+      "final_url": "https://wiki.acala.network/acala-exodus-upgrade/ausd-seed-aseed",
+      "final_host": "wiki.acala.network",
+      "content_type": "text/html",
+      "ownership_review": "official_acala_documentation_domain",
+      "affected_stablecoin_ids": ["sog_st_acalaausd"],
+      "affected_organization_ids": ["sog_issuer_acala"],
+      "lifecycle_classification": "migrated_same_identity",
+      "visible_signal_terms": ["aUSD", "aSEED", "converted", "asset registry", "redemption"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "liquity-lusd-v1-continuity",
+      "review_url": "https://docs.liquity.org/v2-faq/general",
+      "final_url": "https://docs.liquity.org/v2-faq/general",
+      "final_host": "docs.liquity.org",
+      "content_type": "text/html",
+      "ownership_review": "official_liquity_documentation_domain",
+      "affected_stablecoin_ids": ["sog_st_lusd"],
+      "affected_organization_ids": ["sog_issuer_liquity"],
+      "lifecycle_classification": "parallel_successor_no_migration",
+      "visible_signal_terms": ["Liquity V1", "here to stay", "LUSD", "Liquity V2", "BOLD"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "paxos-pax-usdp-rebrand",
+      "review_url": "https://www.paxos.com/blog/the-digital-dollar-that-always-equals-a-dollar-paxos-standard-pax-is-now-pax-dollar-usdp",
+      "final_url": "https://www.paxos.com/blog/the-digital-dollar-that-always-equals-a-dollar-paxos-standard-pax-is-now-pax-dollar-usdp",
+      "final_host": "www.paxos.com",
+      "content_type": "text/html",
+      "ownership_review": "official_paxos_domain",
+      "affected_stablecoin_ids": ["sog_st_usdp"],
+      "affected_organization_ids": ["sog_issuer_paxos"],
+      "lifecycle_classification": "rebrand_same_identity",
+      "visible_signal_terms": ["Paxos Standard", "PAX", "Pax Dollar", "USDP", "now be known as"],
+      "decision": "approve_pending_baseline"
+    }
+  ],
+  "interpretation_boundary": {
+    "issuer_announcement_is_not_automatic_asset_status_change": true,
+    "optional_upgrade_is_not_discontinuation": true,
+    "parallel_successor_is_not_migration": true,
+    "proposal_is_not_implementation": true,
+    "rebrand_preserves_identity_unless_evidence_says_otherwise": true,
+    "documentation_is_not_fresh_execution_proof": true
+  },
+  "policy": {
+    "raw_response_stored": false,
+    "baseline_status": "pending_initial_acceptance",
+    "canonical_action": "none",
+    "automatic_pull_request": false,
+    "public_output": false,
+    "production_publication": false
+  }
+}
