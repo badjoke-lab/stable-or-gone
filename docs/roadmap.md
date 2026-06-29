@@ -9,20 +9,18 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #245
-Active: PR #246
-Next: PR #247
+Latest completed: PR #246
+Active: PR #247
+Next: PR #248
 Stable assets: 92
 Gate V2-F: not passed
-Record growth: authorized after PR #246 candidate audit
+Record growth: Growth A authorized for selected candidates only
 Production publication: deferred
 ```
 
-## Non-UI boundary
+UI review remains unavailable. Gate V2-F remains not passed. Normal work must not approve the UI, deploy production, publish monitoring output, or write monitoring output directly to canonical records.
 
-UI review is unavailable. Gate V2-F remains not passed. Normal work may improve monitoring, records, data quality, machine-readable output, and release preparation, but may not approve the UI, deploy production, publish monitoring output, or write monitoring results directly to canonical data.
-
-## Completed sequence
+## Completed milestones
 
 ```text
 PR #207 approved v2 contract and governance
@@ -35,76 +33,66 @@ PR #213 Events index and detail
 PR #214 Editorial and project pages
 PR #215 Mobile and accessibility hardening
 PR #216 Visual-mark correction
-PR #217-#225 date, reserve, evidence, and record quality
+PR #217-#225 record quality
 PR #226-#229 deployment quality
-PR #230-#232 review-only monitoring foundation
-PR #233 non-UI continuation boundary
-PR #234-#239 baseline-aware change detection and safety closure
-PR #240 monitoring feasibility audit for all 92 assets
+PR #230-#239 monitoring foundation and safety
+PR #240 monitoring feasibility audit for 92 assets
 PR #241 reserve and assurance source expansion
 PR #242 redemption and terms source expansion
-PR #243 issuer, migration, and shutdown source expansion
+PR #243 issuer lifecycle source expansion
 PR #244 regulatory-source monitoring boundary
 PR #245 monitoring coverage report and validator
+PR #246 final-eight candidate audit and selection
 ```
 
-## Permanent monitoring safety
+## Monitoring state
 
 ```text
-Workflow trigger: manual only
-Workflow permission: contents read only
-Automatic baseline write: false
+Enabled official sources: 24
+Unique source URLs: 23
+Covered stable assets: 16
+Uncovered stable assets: 76
+Multi-family covered assets: 7
+Covered canonical organizations: 12
+Pending baselines: 24
+Accepted baselines: 0
 Automatic canonical write: false
-Automatic commit: false
 Automatic pull request: false
 Public monitoring output: false
 Production publication: false
 ```
 
-## Phase B result
+## Final eight selection
 
 ```text
-Canonical stable assets: 92
-Enabled official sources: 24
-Unique source URLs: 23
-Covered stable assets: 16
-Uncovered stable assets: 76
-Stable-asset coverage: 17.39%
-Multi-family covered assets: 7
-Covered canonical organizations: 12
-Pending baselines: 24
-Accepted baselines: 0
-Canonical records changed by monitoring: 0
+sog_cand_000093 DOLA
+sog_cand_000094 Origin Dollar / OUSD
+sog_cand_000095 Inter Stable Token / IST
+sog_cand_000096 NEAR USN
+sog_cand_000097 Venus VAI
+sog_cand_000098 Djed
+sog_cand_000099 Kava USDX
+sog_cand_000100 Berachain HONEY
 ```
 
-Reporting-family coverage:
+Selection is not canonical promotion. Each growth PR must still verify identity, dates, events, evidence, relationships, reserves, redemption, and deployments.
+
+Audit: `data/final-eight-candidate-audit-pr246.json`  
+Specification: `docs/quality/final-eight-candidate-audit-spec.md`
+
+## Phase C — reviewed growth
 
 ```text
-reserve_assurance: 9 sources / 11 assets
-redemption_terms: 5 sources / 7 assets
-issuer_lifecycle: 5 sources / 5 assets
-regulatory: 5 sources / 5 assets
+PR #246 final-eight candidate audit and selection — complete
+PR #247 Growth A: 92 -> 94 — DOLA, OUSD
+PR #248 Growth B: 94 -> 96 — IST, USN
+PR #249 Growth C: 96 -> 98 — VAI, Djed
+PR #250 Growth D: 98 -> 100 — USDX, HONEY
 ```
 
-Coverage means a reviewed source targets a canonical record. It is not a quality score, accepted baseline, current-reachability guarantee, or completeness claim. Private output remains under `data-staging/monitoring-coverage/`.
+Each growth PR is limited to two selected stable assets. Unknown values remain unknown. Non-applicable record groups must not receive invented placeholders.
 
-Specification: `docs/quality/monitoring-coverage-report-spec.md`
-
-## Phase C — reviewed growth from 92 to 100
-
-```text
-PR #246 final-eight candidate audit and selection
-PR #247 Growth A: 92 -> 94
-PR #248 Growth B: 94 -> 96
-PR #249 Growth C: 96 -> 98
-PR #250 Growth D: 98 -> 100
-```
-
-The final eight are not predetermined. PR #246 must review duplicate risk, aliases, issuer or protocol identity, launch and lifecycle boundaries, stabilization, redemption, reserve applicability, deployments, events, evidence, and historical value.
-
-Each growth PR is limited to two stable assets with all required supporting records. Unknown values remain unknown. Non-applicable record groups are documented rather than filled with placeholders.
-
-## Phase D — 100-record registry audit
+## Phase D — 100-record audit
 
 ```text
 PR #251 ID, slug, alias, and symbol uniqueness
@@ -129,15 +117,13 @@ PR #263 non-UI release-candidate material
 
 PR #263 does not authorize production publication.
 
-## UI resumption and publication gate
+## Publication gate
 
 ```text
-owner all-route visual review
+owner visual review
 -> Gate V2-F correction PRs
--> Gate V2-F pass decision
--> explicit publication checkpoint approval
--> manual production deployment
--> deployed-commit and public-parity verification
+-> Gate V2-F pass
+-> explicit publication approval
+-> manual deployment
+-> public parity verification
 ```
-
-Normal quality work does not publish the site.
