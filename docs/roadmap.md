@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #241
-Active: PR #242
-Next: PR #243
+Latest completed: PR #242
+Active: PR #243
+Next: PR #244
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -63,6 +63,7 @@ PR #238 versioned content normalization and noise suppression
 PR #239 deterministic monitoring audit and safety closure
 PR #240 monitoring feasibility audit for all 92 assets
 PR #241 reserve and assurance source expansion
+PR #242 redemption and terms source expansion
 ```
 
 ## Phase A closure
@@ -122,6 +123,29 @@ Specifications and review record:
 - `docs/quality/monitoring-reserve-assurance-expansion-spec.md`
 - `scripts/monitoring/sources/reserve-assurance-source-review-pr241.json`
 
+## PR #242 result
+
+```text
+Enabled official sources: 14
+Redemption and terms sources added: 5
+Pending baselines: 14
+Accepted baselines: 0
+Stable assets changed: 0
+Canonical evidence created: 0
+Workflow permissions changed: false
+Public output: false
+Production publication: false
+```
+
+PR #242 adds reviewed official pages for Tether redemption instructions, Tether fees and minimums, Circle Mint, Paxos stablecoin terms, and Gemini GUSD sale/redemption support. Every source targets existing canonical stablecoin and organization IDs through an existing relationship and uses the existing `issuance_redemption_update` signal only.
+
+The review boundary explicitly prevents SOG from treating every holder as directly eligible for issuer redemption. Eligibility, jurisdiction, account verification, fees, minimums, suspension, termination, and secondary-market exits remain separate review questions. All five new baselines remain `pending_initial_acceptance` with no committed response digest.
+
+Specifications and review record:
+
+- `docs/quality/monitoring-redemption-terms-expansion-spec.md`
+- `scripts/monitoring/sources/redemption-terms-source-review-pr242.json`
+
 ## Approved continuation sequence
 
 ### Phase A — material-change monitoring — complete
@@ -161,7 +185,7 @@ PR #245 monitoring coverage report and validator
 
 Source-count growth alone is not completion. Every monitored source requires official ownership, an allowlisted HTTPS host, canonical target IDs, signal scope, a reviewable baseline state, version-compatible normalization, and no automatic canonical action.
 
-PR #242 must add only currently reviewable official redemption, mint/burn, issuance, eligibility, fee, or terms pages. Every new source must receive a matching `pending_initial_acceptance` baseline and must not imply that direct redemption is available to every holder.
+PR #243 must add only currently reviewable official issuer lifecycle, migration, rebrand, wind-down, shutdown, or product-transition pages. It must distinguish an issuer-level announcement from an asset-level lifecycle change, preserve predecessor/successor uncertainty, and create only matching `pending_initial_acceptance` baselines.
 
 ### Phase C — reviewed growth from 92 to 100
 
