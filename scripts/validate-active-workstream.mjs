@@ -13,16 +13,19 @@ const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8'
 const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
 const agents = fs.readFileSync('AGENTS.md', 'utf8');
 const reviewSpec = fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8');
+const baselineSpec = fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #233',
-  'Active: PR #234',
-  'Next: PR #235',
+  'Latest completed: PR #234',
+  'Active: PR #235',
+  'Next: PR #236',
   'Stable assets: 92',
   'Gate V2-F: not passed',
   'Record growth: authorized after PR #246 candidate audit',
   'Production publication: deferred',
-  'PR #234 monitoring baseline specification',
+  'PR #234 monitoring baseline specification and pending source records',
+  'Initial state: pending_initial_acceptance',
+  'Live digests invented: false',
   'PR #246 final-eight candidate audit and selection',
   'PR #263 non-UI release-candidate material'
 ]) {
@@ -68,4 +71,14 @@ for (const phrase of [
   if (!reviewSpec.includes(phrase)) throw new Error(`PR #232 review specification missing: ${phrase}`);
 }
 
-console.log('Active workstream validation passed: PR #233 authorizes bounded non-UI continuation through PR #263.');
+for (const phrase of [
+  'A baseline is not canonical evidence',
+  'pending_initial_acceptance',
+  'Monitoring execution may read this file but may not modify it',
+  'No monitoring run may acquire write permission',
+  'No production deployment required'
+]) {
+  if (!baselineSpec.includes(phrase)) throw new Error(`PR #234 baseline specification missing: ${phrase}`);
+}
+
+console.log('Active workstream validation passed: PR #234 is complete and PR #235 baseline-aware detection is active.');
