@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rr_kavausdx_protocol_batch_r","stablecoin_id":"sog_st_kavausdx","issuer_id":"sog_issuer_kava","publisher":"Kava","report_type":"onchain_protocol_context","asset_categories":["crypto_collateral"],"url":"https://docs.kava.io/docs/cosmos/modules/cdp/","archived_url":"https://web.archive.org/web/*/https://docs.kava.io/docs/cosmos/modules/cdp/","confidence":"high","notes":"Official documentation describes the collateralized minting model."},
+  {"id":"sog_rr_bean_design_batch_r","stablecoin_id":"sog_st_bean","issuer_id":"sog_issuer_beanstalk","publisher":"Beanstalk","report_type":"protocol_design_context","asset_categories":["other"],"url":"https://docs.bean.money/almanac/introduction/how-beanstalk-works","archived_url":"https://web.archive.org/web/*/https://docs.bean.money/almanac/introduction/how-beanstalk-works","confidence":"high","notes":"Official documentation describes credit and incentive mechanics."}
+]
