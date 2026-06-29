@@ -7,6 +7,12 @@ import {
   loadOfficialSourceBaselines,
   validateOfficialSourceBaselines
 } from '../baselines/baseline-store.mjs';
+import {
+  OFFICIAL_SOURCE_NORMALIZATION_VERSION,
+  normalizeOfficialSourceBody
+} from '../normalization/official-source-normalizer.mjs';
+
+export { normalizeOfficialSourceBody } from '../normalization/official-source-normalizer.mjs';
 
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 const TIMEOUT_MS = 20_000;
@@ -69,20 +75,6 @@ export function validateOfficialSources(sources, canonicalIndex) {
   return failures;
 }
 
-export function normalizeOfficialSourceBody(bytes, contentType) {
-  const text = Buffer.from(bytes).toString('utf8');
-  if (String(contentType).includes('html')) {
-    return text.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
-      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/gi, ' ')
-      .replace(/&amp;/gi, '&')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-  return text.replace(/\s+/g, ' ').trim();
-}
-
 function detectSignals(source, normalizedText) {
   const lower = normalizedText.toLowerCase();
   const signalTypes = [];
@@ -143,8 +135,10 @@ function metadataDifferences(baseline, observed) {
   return differences;
 }
 
-function comparisonMetadata(baseline, observed) {
+function comparisonMetadata(baseline, observed, baselineNormalizationVersion) {
   return {
+    baseline_normalization_version: baselineNormalizationVersion ?? null,
+    observed_normalization_version: observed?.normalization_version ?? OFFICIAL_SOURCE_NORMALIZATION_VERSION,
     baseline_final_url: baseline?.accepted_final_url ?? null,
     observed_final_url: observed?.final_url ?? null,
     baseline_content_type: baseline?.content_type ?? null,
@@ -156,7 +150,7 @@ function comparisonMetadata(baseline, observed) {
   };
 }
 
-function buildBaselineComparison(baseline, observed) {
+function buildBaselineComparison(baseline, observed, baselineNormalizationVersion) {
   if (!baseline || baseline.status === 'pending_initial_acceptance') {
     return {
       state: 'new_source',
@@ -170,7 +164,7 @@ function buildBaselineComparison(baseline, observed) {
       normalized_content_changed: null,
       metadata_changed: null,
       metadata_changes: [],
-      ...comparisonMetadata(baseline, observed),
+      ...comparisonMetadata(baseline, observed, baselineNormalizationVersion),
       accepted_observed_at: baseline?.accepted_observed_at ?? null,
       accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
       accepted_review_reference: baseline?.accepted_review_reference ?? null
@@ -198,14 +192,14 @@ function buildBaselineComparison(baseline, observed) {
     normalized_content_changed: normalizedContentChanged,
     metadata_changed: metadataChanged,
     metadata_changes: changes,
-    ...comparisonMetadata(baseline, observed),
+    ...comparisonMetadata(baseline, observed, baselineNormalizationVersion),
     accepted_observed_at: baseline.accepted_observed_at,
     accepted_repository_commit: baseline.accepted_repository_commit,
     accepted_review_reference: baseline.accepted_review_reference
   };
 }
 
-function failedComparison(baseline) {
+function failedComparison(baseline, baselineNormalizationVersion) {
   return {
     state: 'fetch_failed',
     classification_reason: 'successful_observation_unavailable',
@@ -218,7 +212,7 @@ function failedComparison(baseline) {
     normalized_content_changed: null,
     metadata_changed: null,
     metadata_changes: [],
-    ...comparisonMetadata(baseline, null),
+    ...comparisonMetadata(baseline, null, baselineNormalizationVersion),
     accepted_observed_at: baseline?.accepted_observed_at ?? null,
     accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
     accepted_review_reference: baseline?.accepted_review_reference ?? null
@@ -284,13 +278,16 @@ export async function observeOfficialSources(options = {}) {
         etag: response.headers?.get?.('etag') ?? null,
         last_modified: response.headers?.get?.('last-modified') ?? null,
         body_sha256: bodyHash,
+        normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
         normalized_content_sha256: normalizedHash,
         body_bytes: bytes.byteLength,
         matched_signal_types: detected.signalTypes,
         matched_keywords: detected.keywords,
         error: response.ok ? null : `HTTP ${response.status}`
       };
-      observation.baseline_comparison = response.ok ? buildBaselineComparison(baseline, observation) : failedComparison(baseline);
+      observation.baseline_comparison = response.ok
+        ? buildBaselineComparison(baseline, observation, baselineSet.normalization_version)
+        : failedComparison(baseline, baselineSet.normalization_version);
       observations.push(observation);
 
       if (response.ok && detected.signalTypes.length > 0 && ['new_source', 'content_changed'].includes(observation.baseline_comparison.state)) {
@@ -301,6 +298,7 @@ export async function observeOfficialSources(options = {}) {
           observation_id: observationId,
           source_id: source.source_id,
           source_url: source.url,
+          normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
           change_state: observation.baseline_comparison.state,
           classification_reason: observation.baseline_comparison.classification_reason,
           baseline_comparison: observation.baseline_comparison,
@@ -327,11 +325,12 @@ export async function observeOfficialSources(options = {}) {
         etag: null,
         last_modified: null,
         body_sha256: null,
+        normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
         normalized_content_sha256: null,
         body_bytes: 0,
         matched_signal_types: [],
         matched_keywords: [],
-        baseline_comparison: failedComparison(baseline),
+        baseline_comparison: failedComparison(baseline, baselineSet.normalization_version),
         error: error instanceof Error ? error.message : String(error)
       });
     } finally {
@@ -346,6 +345,7 @@ export async function observeOfficialSources(options = {}) {
     status: sourceErrors === 0 ? 'ok' : sourceErrors === observations.length ? 'failed' : 'partial',
     observed_at: observedAt,
     baseline_set_id: baselineSet.baseline_set_id,
+    normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
     observation_count: observations.length,
     candidate_count: candidates.length,
     source_errors: sourceErrors,
