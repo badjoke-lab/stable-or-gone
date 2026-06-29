@@ -10,147 +10,42 @@ import './validate-deployment-source-status-pr229.mjs';
 import './validate-monitoring-reserve-assurance-pr241.mjs';
 import './validate-monitoring-redemption-terms-pr242.mjs';
 import './validate-monitoring-issuer-lifecycle-pr243.mjs';
+import './validate-monitoring-regulatory-boundary-pr244.mjs';
+import './validate-monitoring-coverage-pr245.mjs';
 
-const documents = {
-  roadmap: fs.readFileSync('docs/roadmap.md', 'utf8'),
-  program: fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8'),
-  governance: fs.readFileSync('docs/spec-governance.md', 'utf8'),
-  agents: fs.readFileSync('AGENTS.md', 'utf8'),
-  baseline: fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8'),
-  review: fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8'),
-  change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8'),
-  baselineUpdate: fs.readFileSync('docs/quality/monitoring-baseline-update-spec.md', 'utf8'),
-  classification: fs.readFileSync('docs/quality/monitoring-observation-classification-spec.md', 'utf8'),
-  normalization: fs.readFileSync('docs/quality/monitoring-normalization-spec.md', 'utf8'),
-  phaseAAudit: fs.readFileSync('docs/quality/monitoring-phase-a-audit.md', 'utf8'),
-  feasibility: fs.readFileSync('docs/quality/monitoring-feasibility-audit-spec.md', 'utf8'),
-  reserveAssurance: fs.readFileSync('docs/quality/monitoring-reserve-assurance-expansion-spec.md', 'utf8'),
-  redemptionTerms: fs.readFileSync('docs/quality/monitoring-redemption-terms-expansion-spec.md', 'utf8'),
-  issuerLifecycle: fs.readFileSync('docs/quality/monitoring-issuer-lifecycle-expansion-spec.md', 'utf8')
-};
+const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
+const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
+const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
+const agents = fs.readFileSync('AGENTS.md', 'utf8');
+const coverageSpec = fs.readFileSync('docs/quality/monitoring-coverage-report-spec.md', 'utf8');
 
-const required = {
-  roadmap: [
-    'Latest completed: PR #243',
-    'Active: PR #244',
-    'Next: PR #245',
-    'Stable assets: 92',
-    'Gate V2-F: not passed',
-    'Record growth: authorized after PR #246 candidate audit',
-    'Production publication: deferred',
-    'PR #242 redemption and terms source expansion',
-    'PR #243 issuer, migration, and shutdown source expansion',
-    'Enabled official sources: 19',
-    'Issuer lifecycle sources added: 5',
-    'Pending baselines: 19',
-    'Accepted baselines: 0',
-    'PR #244 regulatory-source monitoring boundary',
-    'PR #263 non-UI release-candidate material'
-  ],
-  program: [
-    'Growth is allowed only through PR #246-#250',
-    'No growth PR may contain more than two new stable assets',
-    'Production publication remains deferred through PR #263',
-    'After PR #263, continuation stops'
-  ],
-  governance: [
-    'An accepted monitoring baseline is a repository-reviewed comparison point',
-    'Monitoring executions remain read-only',
-    'PR #263 does not authorize publication'
-  ],
-  agents: [
-    'Growth beyond 92 assets is permitted only after PR #246',
-    'Production publication remains prohibited through PR #263'
-  ],
-  baseline: [
-    'A baseline is not canonical evidence',
-    'pending_initial_acceptance',
-    'normalization_version',
-    'Monitoring execution may read this file but may not modify it'
-  ],
-  review: [
-    'observed_facts',
-    'inferences',
-    'unresolved_questions',
-    'Human approval required',
-    'Automatic pull request: false'
-  ],
-  change: [
-    'An unchanged source must create zero candidates',
-    'metadata_changed',
-    'content_changed',
-    'fetch_failed',
-    'No candidate authorizes canonical data'
-  ],
-  baselineUpdate: [
-    'The flow produces a proposal bundle',
-    'accept',
-    'hold',
-    'reject',
-    'repository_baseline_written: false',
-    'The proposal is not self-applying'
-  ],
-  classification: [
-    'metadata_changed',
-    'normalized_content_same_metadata_differs',
-    'A metadata-only observation creates zero content-change candidates',
-    'The count total must equal `observation_count`'
-  ],
-  normalization: [
-    'sog_official_source_normalization_v2',
-    'No source-specific normalization exceptions are approved',
-    'calendar date or reporting period',
-    'contract or account address',
-    'The normalized text is used in memory'
-  ],
-  phaseAAudit: [
-    'Phase A is complete for the current four-source, review-only monitoring scope',
-    'Automatic canonical writes: prohibited',
-    'Automatic pull requests: prohibited',
-    'Accepted baselines: 0',
-    'Pending baselines: 4',
-    'Production publication: prohibited'
-  ],
-  feasibility: [
-    'classifies every current canonical stable asset',
-    'automatically_monitorable',
-    'partially_monitorable',
-    'manual_review_only',
-    'no_reliable_official_source',
-    'record count equals the canonical stablecoin count and currently equals 92',
-    'PR #240 itself adds no live source and accepts no baseline',
-    'No production deployment required'
-  ],
-  reserveAssurance: [
-    'expands review-only official-source monitoring',
-    'exactly five reviewed sources are added',
-    'keep that baseline `pending_initial_acceptance`',
-    'No live response digest is committed in PR #241',
-    'The four Phase A sources remain unchanged',
-    'No production deployment required'
-  ],
-  redemptionTerms: [
-    'expands review-only monitoring for issuer redemption',
-    'exactly five reviewed PR #242 sources are added',
-    'secondary_market_sale_is_not_issuer_redemption: true',
-    'No live response digest is committed in PR #242',
-    'All nine sources present after PR #241 must remain enabled',
-    'No production deployment required'
-  ],
-  issuerLifecycle: [
-    'expands review-only monitoring for issuer and protocol lifecycle statements',
-    'exactly five reviewed PR #243 sources are added',
-    'optional_upgrade_is_not_discontinuation: true',
-    'parallel_successor_is_not_migration: true',
-    'All fourteen sources present after PR #242 must remain enabled',
-    'No production deployment required'
-  ]
-};
+const checks = [
+  [roadmap, 'Latest completed: PR #245'],
+  [roadmap, 'Active: PR #246'],
+  [roadmap, 'Next: PR #247'],
+  [roadmap, 'Stable assets: 92'],
+  [roadmap, 'Gate V2-F: not passed'],
+  [roadmap, 'Record growth: authorized after PR #246 candidate audit'],
+  [roadmap, 'Production publication: deferred'],
+  [roadmap, 'Enabled official sources: 24'],
+  [roadmap, 'Covered stable assets: 16'],
+  [roadmap, 'Uncovered stable assets: 76'],
+  [roadmap, 'Accepted baselines: 0'],
+  [roadmap, 'PR #246 final-eight candidate audit and selection'],
+  [roadmap, 'PR #263 non-UI release-candidate material'],
+  [program, 'Growth is allowed only through PR #246-#250'],
+  [program, 'No growth PR may contain more than two new stable assets'],
+  [program, 'Production publication remains deferred through PR #263'],
+  [governance, 'Monitoring executions remain read-only'],
+  [governance, 'PR #263 does not authorize publication'],
+  [agents, 'Growth beyond 92 assets is permitted only after PR #246'],
+  [agents, 'Production publication remains prohibited through PR #263'],
+  [coverageSpec, 'PR #245 completes the reviewed source-coverage implementation phase'],
+  [coverageSpec, 'No production deployment required']
+];
 
-for (const [documentName, phrases] of Object.entries(required)) {
-  for (const phrase of phrases) {
-    if (!documents[documentName].includes(phrase)) throw new Error(`${documentName} missing: ${phrase}`);
-  }
+for (const [document, phrase] of checks) {
+  if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
 
-console.log('Active workstream validation passed: PR #243 is complete and PR #244 regulatory monitoring boundary is active.');
+console.log('Active workstream validation passed: Phase B is complete and PR #246 candidate selection is active.');
