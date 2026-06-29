@@ -15,21 +15,22 @@ const documents = {
   agents: fs.readFileSync('AGENTS.md', 'utf8'),
   review: fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8'),
   baseline: fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8'),
-  change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8')
+  change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8'),
+  baselineUpdate: fs.readFileSync('docs/quality/monitoring-baseline-update-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #235',
-    'Active: PR #236',
-    'Next: PR #237',
+    'Latest completed: PR #236',
+    'Active: PR #237',
+    'Next: PR #238',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #235 baseline-aware material-change detection',
-    'Unchanged source candidate count: 0',
-    'Content change requires signal match: true',
+    'PR #236 review-driven baseline update proposal flow',
+    'Repository baseline written: false',
+    'Automatic pull request: false',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -66,6 +67,15 @@ const required = {
     'fetch_failed',
     'normalized_content_sha256',
     'No candidate authorizes canonical data'
+  ],
+  baselineUpdate: [
+    'The flow produces a proposal bundle',
+    'accept',
+    'hold',
+    'reject',
+    'repository_baseline_written: false',
+    'The proposal is not self-applying',
+    'No production deployment required'
   ]
 };
 
@@ -75,4 +85,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #235 is complete and PR #236 is active.');
+console.log('Active workstream validation passed: PR #236 is complete and PR #237 is active.');
