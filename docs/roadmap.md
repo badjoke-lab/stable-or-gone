@@ -9,14 +9,27 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #232
-Active: post-monitoring decision gate
-Next: roadmap amendment required
+Latest completed: PR #233
+Active: PR #234
+Next: PR #235
 Stable assets: 92
 Gate V2-F: not passed
-Record growth: paused
+Record growth: authorized after PR #246 candidate audit
 Production publication: deferred
 ```
+
+## Fixed boundary while UI review is unavailable
+
+The owner cannot currently perform the required all-route desktop and mobile visual review. UI work therefore remains paused and Gate V2-F remains not passed.
+
+The non-UI continuation program may advance monitoring, reviewed record growth, registry-wide quality, machine-readable parity, build reproducibility, and release-candidate documentation. It must not:
+
+- approve the current UI;
+- pass Gate V2-F;
+- select or execute a production deployment;
+- publish monitored candidates automatically;
+- write monitoring output directly to canonical data;
+- claim public parity before an explicitly approved deployment.
 
 ## Completed UI sequence
 
@@ -41,51 +54,99 @@ PR #226-#229 deployment quality
 PR #230 monitoring skeleton and canonical guard
 PR #231 official-source observations and private candidates
 PR #232 review reports, evidence drafts, and draft PR material
+PR #233 non-UI continuation roadmap and safety boundary
 ```
 
-## PR #232 result
+## Approved continuation sequence
+
+### Phase A — material-change monitoring
 
 ```text
-Trigger: workflow_dispatch only
-Permissions: contents read
-Official-source output: private artifact only
-Review output files: 9
-Candidate status: needs_human_review
-Evidence status: draft_only
-Canonical action: none
-Automatic pull request: false
-Automatic canonical write: false
-Production publication: false
+PR #234 monitoring baseline specification
+PR #235 baseline-aware material-change detection
+PR #236 human-approved baseline update flow
+PR #237 observation change classification
+PR #238 content normalization and noise suppression
+PR #239 deterministic monitoring audit and safety closure
 ```
 
-PR #232 separates observed facts, unconfirmed low-confidence inferences, unresolved questions, and rejected duplicate candidates. It creates reviewable evidence drafts, an operator report, and DRAFT ONLY pull-request material while preserving the canonical repository snapshot.
-
-Specifications:
-
-- `docs/quality/monitoring-pipeline-spec.md`
-- `docs/quality/monitoring-official-source-spec.md`
-- `docs/quality/monitoring-official-source-schema.md`
-- `docs/quality/monitoring-review-material-spec.md`
-
-## Decision gate
-
-The PR #217–#232 non-UI quality and monitoring sequence is complete. No additional workstream starts automatically.
-
-The next roadmap amendment must explicitly choose one or more of:
+Phase A must establish the following behavior:
 
 ```text
-resume owner-led all-route UI review and Gate V2-F work
-select a repaired 92-record publication candidate
-approve reviewed growth toward 100 before publication
-extend monitoring source coverage under a separately approved scope
+unchanged source                    -> no monitoring candidate
+materially changed source           -> private candidate
+metadata-only change                -> classified separately
+fetch failure                       -> operational finding, not content change
+new source without accepted baseline -> explicit new_source state
+baseline update                     -> separate human-reviewed PR
+canonical write                     -> prohibited
 ```
 
-Until that amendment is merged:
+### Phase B — monitored-source coverage
 
-- Gate V2-F remains not passed;
-- record growth remains paused;
-- no release candidate is selected;
-- production publication remains deferred;
-- monitored candidates remain private review material.
+```text
+PR #240 monitoring feasibility audit for all 92 assets
+PR #241 reserve and assurance source expansion
+PR #242 redemption and terms source expansion
+PR #243 issuer, migration, and shutdown source expansion
+PR #244 regulatory-source monitoring boundary
+PR #245 monitoring coverage report and validator
+```
+
+Source-count growth alone is not completion. Every monitored source requires official ownership, an allowlisted HTTPS host, canonical target IDs, signal scope, a reviewable baseline state, and no automatic canonical action.
+
+### Phase C — reviewed growth from 92 to 100
+
+```text
+PR #246 final-eight candidate audit and selection
+PR #247 Growth A: 92 -> 94
+PR #248 Growth B: 94 -> 96
+PR #249 Growth C: 96 -> 98
+PR #250 Growth D: 98 -> 100
+```
+
+PR #246 must complete duplicate, alias, issuer/protocol, launch boundary, lifecycle, stabilization, redemption, reserve-applicability, deployment, event, evidence, and historical-significance review before any candidate is promoted.
+
+Each growth PR is limited to two stable assets and all required supporting records. Unknown values remain unknown. Non-applicable record groups must be documented rather than populated with invented placeholders.
+
+### Phase D — 100-record registry audit
+
+```text
+PR #251 ID, slug, alias, and symbol uniqueness
+PR #252 organization, issuer, and relationship integrity
+PR #253 evidence URL, source identity, and duplication integrity
+PR #254 reserve, redemption, and backing applicability
+PR #255 deployment, contract, and chain identity
+PR #256 launch, terminal, migration, and relationship boundaries
+PR #257 known-unknown and placeholder integrity
+PR #258 monitoring coverage recalculation for 100 assets
+```
+
+The goal is not to eliminate unknown values. The goal is to ensure each value is supported, explicitly unresolved, unavailable from an official source, or correctly non-applicable.
+
+### Phase E — non-UI release preparation
+
+```text
+PR #259 Registry v2/v3 and machine-readable parity
+PR #260 counts, manifest, version, and provenance integrity
+PR #261 reproducible build and generated-output audit
+PR #262 100-record canonical data freeze
+PR #263 non-UI release-candidate material
+```
+
+PR #263 may prepare release notes, known-unknown inventories, monitoring coverage, deployment and rollback checklists, and a candidate commit. It does not authorize production publication.
+
+## UI resumption and publication gate
+
+After PR #263, non-UI continuation stops at a prepared repository candidate. Work resumes only when the owner can inspect representative desktop and mobile routes.
+
+```text
+owner all-route visual review
+-> Gate V2-F correction PRs
+-> Gate V2-F pass decision
+-> explicit publication checkpoint approval
+-> manual production deployment
+-> deployed-commit and public-parity verification
+```
 
 Normal quality work does not publish the site.
