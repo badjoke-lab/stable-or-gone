@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_redemption_terms_source_review_pr242",
+  "reviewed_at": "2026-06-29T06:30:00.000Z",
+  "normalization_version": "sog_official_source_normalization_v2",
+  "scope": "redemption_and_terms_source_expansion",
+  "sources": [
+    {
+      "source_id": "tether-redemption-guide",
+      "review_url": "https://tether.to/en/redeem-tethers-to-fiat-currency/",
+      "final_url": "https://tether.to/en/redeem-tethers-to-fiat-currency/",
+      "final_host": "tether.to",
+      "content_type": "text/html",
+      "ownership_review": "official_tether_domain",
+      "affected_stablecoin_ids": ["sog_st_usdt"],
+      "affected_organization_ids": ["sog_issuer_tether"],
+      "visible_signal_terms": ["redeeming", "verified bank account", "verification process", "redemption"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "tether-fees",
+      "review_url": "https://tether.to/en/fees/",
+      "final_url": "https://tether.to/en/fees/",
+      "final_host": "tether.to",
+      "content_type": "text/html",
+      "ownership_review": "official_tether_domain",
+      "affected_stablecoin_ids": ["sog_st_usdt"],
+      "affected_organization_ids": ["sog_issuer_tether"],
+      "visible_signal_terms": ["minimum", "redemption amount", "fees", "acquisition"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "circle-mint",
+      "review_url": "https://www.circle.com/circle-mint",
+      "final_url": "https://www.circle.com/circle-mint",
+      "final_host": "www.circle.com",
+      "content_type": "text/html",
+      "ownership_review": "official_circle_domain",
+      "affected_stablecoin_ids": ["sog_st_usdc", "sog_st_eurc"],
+      "affected_organization_ids": ["sog_issuer_circle"],
+      "visible_signal_terms": ["mint", "redeem", "1:1 redemption", "countries", "wire transfer"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "paxos-stablecoin-terms",
+      "review_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+      "final_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+      "final_host": "www.paxos.com",
+      "content_type": "text/html",
+      "ownership_review": "official_paxos_domain",
+      "affected_stablecoin_ids": ["sog_st_usdp", "sog_st_pyusd", "sog_st_busd"],
+      "affected_organization_ids": ["sog_issuer_paxos"],
+      "visible_signal_terms": ["issuance", "redemption", "verified customer", "suspend", "terminate"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "gemini-gusd-redemption-support",
+      "review_url": "https://support.gemini.com/hc/en-gb/articles/360001352466-How-do-I-buy-or-sell-my-Gemini-dollar-GUSD",
+      "final_url": "https://support.gemini.com/hc/en-gb/articles/360001352466-How-do-I-buy-or-sell-my-Gemini-dollar-GUSD",
+      "final_host": "support.gemini.com",
+      "content_type": "text/html",
+      "ownership_review": "official_gemini_support_domain",
+      "affected_stablecoin_ids": ["sog_st_gusd"],
+      "affected_organization_ids": ["sog_issuer_gemini"],
+      "visible_signal_terms": ["redeemed", "sell GUSD", "credited", "account balance"],
+      "decision": "approve_pending_baseline"
+    }
+  ],
+  "interpretation_boundary": {
+    "direct_redemption_for_every_holder": false,
+    "eligibility_must_be_reviewed": true,
+    "jurisdiction_must_be_reviewed": true,
+    "fees_and_minimums_must_be_reviewed": true,
+    "secondary_market_sale_is_not_issuer_redemption": true
+  },
+  "policy": {
+    "raw_response_stored": false,
+    "baseline_status": "pending_initial_acceptance",
+    "canonical_action": "none",
+    "automatic_pull_request": false,
+    "public_output": false,
+    "production_publication": false
+  }
+}
