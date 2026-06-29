@@ -21,7 +21,27 @@ const SIGNAL_KEYWORDS = {
   reserve_update: ['reserve', 'reserves', 'backing assets', 'total reserves', 'portfolio composition'],
   assurance_update: ['assurance', 'attestation', 'attestations', 'independent third-party', 'report'],
   issuance_redemption_update: ['issuance', 'issued', 'redemption', 'redeemed', 'circulation'],
-  backing_attestation_update: ['custodian', 'attestation', 'backing assets', 'transparency']
+  backing_attestation_update: ['custodian', 'attestation', 'backing assets', 'transparency'],
+  lifecycle_update: [
+    'migration',
+    'migrate',
+    'upgrade',
+    'upgraded',
+    'optional',
+    'rebrand',
+    'renamed',
+    'now be known as',
+    'wind down',
+    'winding down',
+    'halt minting',
+    'cease issuance',
+    'shutdown',
+    'retire',
+    'retirement',
+    'conversion',
+    'convert',
+    'here to stay'
+  ]
 };
 
 function sha256(value) {
@@ -138,219 +158,122 @@ function metadataDifferences(baseline, observed) {
 function comparisonMetadata(baseline, observed, baselineNormalizationVersion) {
   return {
     baseline_normalization_version: baselineNormalizationVersion ?? null,
-    observed_normalization_version: observed?.normalization_version ?? OFFICIAL_SOURCE_NORMALIZATION_VERSION,
-    baseline_final_url: baseline?.accepted_final_url ?? null,
-    observed_final_url: observed?.final_url ?? null,
-    baseline_content_type: baseline?.content_type ?? null,
-    observed_content_type: observed?.content_type ?? null,
-    baseline_etag: baseline?.etag ?? null,
-    observed_etag: observed?.etag ?? null,
-    baseline_last_modified: baseline?.last_modified ?? null,
-    observed_last_modified: observed?.last_modified ?? null
-  };
-}
-
-function buildBaselineComparison(baseline, observed, baselineNormalizationVersion) {
-  if (!baseline || baseline.status === 'pending_initial_acceptance') {
-    return {
-      state: 'new_source',
-      classification_reason: baseline ? 'baseline_pending_initial_acceptance' : 'baseline_missing',
-      baseline_status: baseline?.status ?? 'missing',
-      baseline_body_sha256: baseline?.body_sha256 ?? null,
-      baseline_normalized_content_sha256: baseline?.normalized_content_sha256 ?? null,
-      observed_body_sha256: observed.body_sha256,
-      observed_normalized_content_sha256: observed.normalized_content_sha256,
-      exact_body_changed: null,
-      normalized_content_changed: null,
-      metadata_changed: null,
-      metadata_changes: [],
-      ...comparisonMetadata(baseline, observed, baselineNormalizationVersion),
-      accepted_observed_at: baseline?.accepted_observed_at ?? null,
-      accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
-      accepted_review_reference: baseline?.accepted_review_reference ?? null
-    };
-  }
-
-  const exactBodyChanged = baseline.body_sha256 !== observed.body_sha256;
-  const normalizedContentChanged = baseline.normalized_content_sha256 !== observed.normalized_content_sha256;
-  const changes = metadataDifferences(baseline, observed);
-  const metadataChanged = changes.length > 0;
-  const state = normalizedContentChanged ? 'content_changed' : metadataChanged ? 'metadata_changed' : 'unchanged';
-  return {
-    state,
-    classification_reason: normalizedContentChanged
-      ? 'normalized_content_digest_changed'
-      : metadataChanged
-        ? 'normalized_content_same_metadata_differs'
-        : 'normalized_content_and_metadata_match',
-    baseline_status: baseline.status,
-    baseline_body_sha256: baseline.body_sha256,
+    observed_normalization_version: observed.normalization_version ?? null,
     baseline_normalized_content_sha256: baseline.normalized_content_sha256,
-    observed_body_sha256: observed.body_sha256,
     observed_normalized_content_sha256: observed.normalized_content_sha256,
-    exact_body_changed: exactBodyChanged,
-    normalized_content_changed: normalizedContentChanged,
-    metadata_changed: metadataChanged,
-    metadata_changes: changes,
-    ...comparisonMetadata(baseline, observed, baselineNormalizationVersion),
-    accepted_observed_at: baseline.accepted_observed_at,
-    accepted_repository_commit: baseline.accepted_repository_commit,
-    accepted_review_reference: baseline.accepted_review_reference
+    baseline_body_sha256: baseline.body_sha256,
+    observed_body_sha256: observed.body_sha256,
+    baseline_final_url: baseline.accepted_final_url,
+    observed_final_url: observed.final_url,
+    normalization_version_compatible: baselineNormalizationVersion === observed.normalization_version
   };
 }
 
-function failedComparison(baseline, baselineNormalizationVersion) {
-  return {
-    state: 'fetch_failed',
-    classification_reason: 'successful_observation_unavailable',
-    baseline_status: baseline?.status ?? 'missing',
-    baseline_body_sha256: baseline?.body_sha256 ?? null,
-    baseline_normalized_content_sha256: baseline?.normalized_content_sha256 ?? null,
-    observed_body_sha256: null,
-    observed_normalized_content_sha256: null,
-    exact_body_changed: null,
-    normalized_content_changed: null,
-    metadata_changed: null,
-    metadata_changes: [],
-    ...comparisonMetadata(baseline, null, baselineNormalizationVersion),
-    accepted_observed_at: baseline?.accepted_observed_at ?? null,
-    accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
-    accepted_review_reference: baseline?.accepted_review_reference ?? null
-  };
+function classifyObservation({ baseline, observed, baselineNormalizationVersion }) {
+  if (observed.status === 'fetch_failed') return 'fetch_failed';
+  if (!baseline || baseline.status === 'pending_initial_acceptance') return 'new_source';
+  const normalizationCompatible = baselineNormalizationVersion === observed.normalization_version;
+  if (!normalizationCompatible) return 'normalization_version_changed';
+  const normalizedSame = baseline.normalized_content_sha256 === observed.normalized_content_sha256;
+  const metadataChanged = metadataDifferences(baseline, observed).length > 0;
+  if (normalizedSame && !metadataChanged) return 'unchanged';
+  if (normalizedSame && metadataChanged) return 'metadata_changed';
+  return 'content_changed';
 }
 
-function countChangeStates(observations) {
-  const counts = { unchanged: 0, metadata_changed: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
-  for (const observation of observations) {
-    const state = observation.baseline_comparison?.state;
-    if (state in counts) counts[state] += 1;
-  }
-  return counts;
-}
-
-export async function observeOfficialSources(options = {}) {
-  const root = options.root ?? process.cwd();
-  const observedAt = options.observedAt ?? new Date().toISOString();
-  const fetchImpl = options.fetchImpl ?? globalThis.fetch;
-  const sources = options.sources ?? loadOfficialSources(root);
+export async function observeOfficialSources({ root = process.cwd(), sources, baselineSet, fetchImpl = fetch }) {
   const canonicalIndex = loadCanonicalIndex(root);
-  const validationFailures = validateOfficialSources(sources, canonicalIndex);
-  if (validationFailures.length) throw new Error(`Official source allowlist invalid: ${validationFailures.join('; ')}`);
+  const failures = validateOfficialSources(sources, canonicalIndex);
+  const effectiveBaselineSet = baselineSubset(root, sources, baselineSet);
+  failures.push(...validateOfficialSourceBaselines(effectiveBaselineSet, sources));
+  if (failures.length > 0) throw new Error(`Official source validation failed:\n${failures.join('\n')}`);
 
-  const baselineSet = baselineSubset(root, sources, options.baselineSet);
-  const baselineFailures = validateOfficialSourceBaselines(baselineSet, sources);
-  if (baselineFailures.length) throw new Error(`Official source baselines invalid: ${baselineFailures.join('; ')}`);
-  const baselines = indexOfficialSourceBaselines(baselineSet);
-
+  const baselineIndex = indexOfficialSourceBaselines(effectiveBaselineSet);
   const observations = [];
-  const candidates = [];
   for (const source of sources) {
-    const baseline = baselines.get(source.source_id);
+    const startedAt = new Date().toISOString();
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? TIMEOUT_MS);
+    const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
     try {
       const response = await fetchImpl(source.url, {
         redirect: 'follow',
         signal: controller.signal,
-        headers: { 'user-agent': 'Stable-or-Gone-Review-Monitor/1.0', accept: 'text/html,application/json,text/plain;q=0.9,*/*;q=0.1' }
+        headers: { 'user-agent': 'Stable-or-Gone-monitoring-review/1.0' }
       });
-      const finalUrl = response.url || source.url;
-      const finalHost = new URL(finalUrl).hostname;
-      if (!source.allowed_hosts.includes(finalHost)) throw new Error(`redirected outside allowlist: ${finalHost}`);
-      const bytes = new Uint8Array(await response.arrayBuffer());
-      if (bytes.byteLength > (options.maxBodyBytes ?? MAX_BODY_BYTES)) throw new Error(`response exceeds ${options.maxBodyBytes ?? MAX_BODY_BYTES} bytes`);
-      const contentType = response.headers?.get?.('content-type') ?? null;
-      const bodyHash = sha256(bytes);
-      const normalized = normalizeOfficialSourceBody(bytes, contentType);
-      const normalizedHash = sha256(normalized);
-      const detected = response.ok ? detectSignals(source, normalized) : { signalTypes: [], keywords: [] };
-      const observationId = `obs_${sha256(`${source.source_id}|${bodyHash}`).slice(0, 20)}`;
-      const observation = {
-        observation_id: observationId,
+      const finalUrl = new URL(response.url || source.url);
+      const contentType = response.headers.get('content-type');
+      const allowedFinalHost = source.allowed_hosts.includes(finalUrl.hostname);
+      const contentLength = Number(response.headers.get('content-length') || '0');
+      if (!allowedFinalHost) throw new Error(`final host is not allowlisted: ${finalUrl.hostname}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!String(contentType || '').toLowerCase().includes('text/html')) throw new Error(`unsupported content type: ${contentType}`);
+      if (contentLength > MAX_BODY_BYTES) throw new Error(`response exceeds maximum body size: ${contentLength}`);
+      const body = await response.text();
+      if (Buffer.byteLength(body) > MAX_BODY_BYTES) throw new Error('response body exceeds maximum body size');
+      const normalized = normalizeOfficialSourceBody(body);
+      const signals = detectSignals(source, normalized.text);
+      const observed = {
         source_id: source.source_id,
-        source_identity: { display_name: source.display_name, source_kind: source.source_kind },
-        source_url: source.url,
-        final_url: finalUrl,
-        observed_at: observedAt,
-        fetch_status: response.ok ? 'ok' : 'http_error',
+        display_name: source.display_name,
+        source_kind: source.source_kind,
+        configured_url: source.url,
+        final_url: finalUrl.toString(),
+        final_host: finalUrl.hostname,
+        fetched_at: new Date().toISOString(),
+        started_at: startedAt,
+        status: 'ok',
         http_status: response.status,
         content_type: contentType,
-        etag: response.headers?.get?.('etag') ?? null,
-        last_modified: response.headers?.get?.('last-modified') ?? null,
-        body_sha256: bodyHash,
+        content_length: Buffer.byteLength(body),
+        body_sha256: sha256(body),
+        normalized_content_sha256: normalized.sha256,
         normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
-        normalized_content_sha256: normalizedHash,
-        body_bytes: bytes.byteLength,
-        matched_signal_types: detected.signalTypes,
-        matched_keywords: detected.keywords,
-        error: response.ok ? null : `HTTP ${response.status}`
+        etag: response.headers.get('etag'),
+        last_modified: response.headers.get('last-modified'),
+        signal_types: signals.signalTypes,
+        signal_keywords: signals.keywords,
+        affected_stablecoin_ids: source.affected_stablecoin_ids ?? [],
+        affected_organization_ids: source.affected_organization_ids ?? [],
+        duplicate_review: buildDuplicateReview(source, canonicalIndex),
+        lineage_review: buildLineageReview(source, canonicalIndex.relationships)
       };
-      observation.baseline_comparison = response.ok
-        ? buildBaselineComparison(baseline, observation, baselineSet.normalization_version)
-        : failedComparison(baseline, baselineSet.normalization_version);
-      observations.push(observation);
-
-      if (response.ok && detected.signalTypes.length > 0 && ['new_source', 'content_changed'].includes(observation.baseline_comparison.state)) {
-        candidates.push({
-          candidate_id: `candidate_${sha256(`${observationId}|${detected.signalTypes.join(',')}`).slice(0, 20)}`,
-          status: 'needs_human_review',
-          created_at: observedAt,
-          observation_id: observationId,
-          source_id: source.source_id,
-          source_url: source.url,
-          normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
-          change_state: observation.baseline_comparison.state,
-          classification_reason: observation.baseline_comparison.classification_reason,
-          baseline_comparison: observation.baseline_comparison,
-          affected_stablecoin_ids: [...(source.affected_stablecoin_ids ?? [])],
-          affected_organization_ids: [...(source.affected_organization_ids ?? [])],
-          signal_types: detected.signalTypes,
-          matched_keywords: detected.keywords,
-          duplicate_review: buildDuplicateReview(source, canonicalIndex),
-          lineage_review: buildLineageReview(source, canonicalIndex.relationships),
-          canonical_action: 'none'
-        });
-      }
-    } catch (error) {
+      const baseline = baselineIndex.get(source.source_id) ?? null;
+      const observationClass = classifyObservation({
+        baseline,
+        observed,
+        baselineNormalizationVersion: effectiveBaselineSet.normalization_version
+      });
       observations.push({
-        observation_id: `obs_${sha256(`${source.source_id}|${observedAt}|error`).slice(0, 20)}`,
+        ...observed,
+        observation_class: observationClass,
+        comparison: comparisonMetadata(baseline ?? {}, observed, effectiveBaselineSet.normalization_version),
+        metadata_differences: baseline ? metadataDifferences(baseline, observed) : []
+      });
+    } catch (error) {
+      const observed = {
         source_id: source.source_id,
-        source_identity: { display_name: source.display_name, source_kind: source.source_kind },
-        source_url: source.url,
-        final_url: null,
-        observed_at: observedAt,
-        fetch_status: 'error',
-        http_status: null,
-        content_type: null,
-        etag: null,
-        last_modified: null,
-        body_sha256: null,
+        display_name: source.display_name,
+        source_kind: source.source_kind,
+        configured_url: source.url,
+        fetched_at: new Date().toISOString(),
+        started_at: startedAt,
+        status: 'fetch_failed',
+        error: error instanceof Error ? error.message : String(error),
         normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
-        normalized_content_sha256: null,
-        body_bytes: 0,
-        matched_signal_types: [],
-        matched_keywords: [],
-        baseline_comparison: failedComparison(baseline, baselineSet.normalization_version),
-        error: error instanceof Error ? error.message : String(error)
+        affected_stablecoin_ids: source.affected_stablecoin_ids ?? [],
+        affected_organization_ids: source.affected_organization_ids ?? [],
+        duplicate_review: buildDuplicateReview(source, canonicalIndex),
+        lineage_review: buildLineageReview(source, canonicalIndex.relationships)
+      };
+      observations.push({
+        ...observed,
+        observation_class: 'fetch_failed',
+        comparison: comparisonMetadata(baselineIndex.get(source.source_id) ?? {}, observed, effectiveBaselineSet.normalization_version),
+        metadata_differences: []
       });
     } finally {
       clearTimeout(timeout);
     }
   }
-
-  const sourceErrors = observations.filter((row) => row.fetch_status !== 'ok').length;
-  return {
-    schema_version: '1.0',
-    monitor: 'official-source-observer',
-    status: sourceErrors === 0 ? 'ok' : sourceErrors === observations.length ? 'failed' : 'partial',
-    observed_at: observedAt,
-    baseline_set_id: baselineSet.baseline_set_id,
-    normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
-    observation_count: observations.length,
-    candidate_count: candidates.length,
-    source_errors: sourceErrors,
-    change_counts: countChangeStates(observations),
-    observations,
-    candidates
-  };
+  return observations;
 }
