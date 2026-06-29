@@ -10,11 +10,8 @@ import './validate-monitoring-baseline-update-pr236.mjs';
 import './validate-monitoring-observation-classification-pr237.mjs';
 import './validate-monitoring-normalization-pr238.mjs';
 import './validate-monitoring-phase-a-pr239.mjs';
-import './validate-monitoring-feasibility-pr240.mjs';
-import './validate-monitoring-reserve-assurance-pr241.mjs';
-import './validate-monitoring-redemption-terms-pr242.mjs';
-import './validate-monitoring-issuer-lifecycle-pr243.mjs';
-import './validate-monitoring-regulatory-boundary-pr244.mjs';
+import './validate-current-monitoring-configuration.mjs';
+import './validate-current-coverage.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
@@ -28,14 +25,14 @@ check(fs.readFileSync('.gitignore', 'utf8').split(/\r?\n/).includes('data-stagin
 check(packageJson.scripts?.['monitor:review'] === 'node scripts/monitoring/run.mjs', 'monitor:review script mismatch');
 check(String(packageJson.scripts?.build ?? '').includes('npm run validate:monitoring'), 'build must run monitoring validation');
 
-const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sog-monitoring-pr230-'));
+const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sog-monitoring-current-'));
 try {
   const result = runMonitoring({
     outputRoot: temporaryRoot,
     runId: '20260629T000000Z-test0000',
     startedAt: '2026-06-29T00:00:00.000Z',
     sourceCommit: 'test000000000000000000000000000000000000',
-    sourceBranch: 'pr230-test',
+    sourceBranch: 'growth-test',
     mode: 'health-only'
   });
   const files = fs.readdirSync(result.run_directory).sort();
@@ -48,12 +45,12 @@ try {
 } catch (error) {
   errors.push(error instanceof Error ? error.message : String(error));
 } finally {
-  fs.rmSync(temporaryRoot, { recursive: true, force: true });
+  fs.rmSync(temporaryRoot, { recursive:true, force:true });
 }
 
 if (errors.length) {
   console.error('Monitoring validation failed:');
-  for (const error of errors) console.error(`- ${error}`);
+  errors.forEach((error) => console.error(`- ${error}`));
   process.exit(1);
 }
-console.log('PR #230 through PR #244 monitoring validation passed.');
+console.log('Current monitoring validation passed for the growth registry.');
