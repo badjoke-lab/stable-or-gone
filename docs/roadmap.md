@@ -25,7 +25,16 @@ UI review is unavailable. Gate V2-F remains not passed. Normal work may improve 
 ## Completed sequence
 
 ```text
-PR #207-#216 UI v2 implementation and hardening
+PR #207 approved v2 contract and governance
+PR #208 shared visual foundation
+PR #209 Home
+PR #210 Stablecoins index
+PR #211 Stablecoin detail
+PR #212 Organizations index and detail
+PR #213 Events index and detail
+PR #214 Editorial and project pages
+PR #215 Mobile and accessibility hardening
+PR #216 Visual-mark correction
 PR #217-#225 date, reserve, evidence, and record quality
 PR #226-#229 deployment quality
 PR #230-#232 review-only monitoring foundation
