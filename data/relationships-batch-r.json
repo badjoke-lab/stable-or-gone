@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_kavausdx_protocol_batch_r","stablecoin_id":"sog_st_kavausdx","organization_id":"sog_issuer_kava","role":"protocol_operator","start_date":"2020-06-10","end_date":null,"status":"active","evidence_ids":["sog_src_kavausdx_launch_batch_r","sog_src_kavausdx_mint_batch_r","sog_src_kavausdx_cdp_batch_r"],"notes":"Kava operates the USDX protocol context."},
+  {"id":"sog_rel_bean_protocol_batch_r","stablecoin_id":"sog_st_bean","organization_id":"sog_issuer_beanstalk","role":"protocol_operator","start_date":"2021-08-06","end_date":null,"status":"active","evidence_ids":["sog_src_bean_disclosures_batch_r","sog_src_bean_mechanics_batch_r","sog_src_bean_governance_batch_r"],"notes":"Beanstalk operates the current Bean protocol context."}
+]
