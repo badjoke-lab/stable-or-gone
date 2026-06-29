@@ -17,21 +17,23 @@ const documents = {
   baseline: fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8'),
   change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8'),
   baselineUpdate: fs.readFileSync('docs/quality/monitoring-baseline-update-spec.md', 'utf8'),
-  classification: fs.readFileSync('docs/quality/monitoring-observation-classification-spec.md', 'utf8')
+  classification: fs.readFileSync('docs/quality/monitoring-observation-classification-spec.md', 'utf8'),
+  normalization: fs.readFileSync('docs/quality/monitoring-normalization-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #237',
-    'Active: PR #238',
-    'Next: PR #239',
+    'Latest completed: PR #238',
+    'Active: PR #239',
+    'Next: PR #240',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #237 observation change classification and comparison traceability',
-    'Metadata-only candidate count: 0',
-    'Prior and observed digests recorded: true',
+    'PR #238 versioned content normalization and noise suppression',
+    'Normalization version: sog_official_source_normalization_v2',
+    'Source-specific exceptions: 0',
+    'Raw or normalized response text stored: false',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -59,6 +61,7 @@ const required = {
   baseline: [
     'A baseline is not canonical evidence',
     'pending_initial_acceptance',
+    'normalization_version',
     'Monitoring execution may read this file but may not modify it'
   ],
   change: [
@@ -85,6 +88,14 @@ const required = {
     'A metadata-only observation creates zero content-change candidates',
     'The count total must equal `observation_count`',
     'No production deployment required'
+  ],
+  normalization: [
+    'sog_official_source_normalization_v2',
+    'No source-specific normalization exceptions are approved',
+    'calendar date or reporting period',
+    'contract or account address',
+    'The normalized text is used in memory',
+    'No production deployment required'
   ]
 };
 
@@ -94,4 +105,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #237 is complete and PR #238 is active.');
+console.log('Active workstream validation passed: PR #238 is complete and PR #239 is active.');
