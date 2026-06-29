@@ -1,1 +1,4 @@
-[]
+[
+  {"id":"sog_rel_uxd_protocol_batch_s","stablecoin_id":"sog_st_uxd","organization_id":"sog_issuer_uxd_protocol","role":"protocol_operator","start_date":"2022-01-18","end_date":null,"status":"active","evidence_ids":["sog_src_uxd_launch_batch_s","sog_src_uxd_overview_batch_s","sog_src_uxd_alm_batch_s"],"notes":"Active protocol relationship."},
+  {"id":"sog_rel_doc_protocol_batch_s","stablecoin_id":"sog_st_doc","organization_id":"sog_issuer_money_on_chain","role":"protocol_operator","start_date":"2019-10-05","end_date":null,"status":"active","evidence_ids":["sog_src_doc_milestones_batch_s","sog_src_doc_intro_batch_s","sog_src_doc_actions_batch_s"],"notes":"Active protocol relationship."}
+]
