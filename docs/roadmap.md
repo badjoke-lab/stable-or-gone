@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #236
-Active: PR #237
-Next: PR #238
+Latest completed: PR #237
+Active: PR #238
+Next: PR #239
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -58,24 +58,30 @@ PR #233 non-UI continuation roadmap and safety boundary
 PR #234 monitoring baseline specification and pending source records
 PR #235 baseline-aware material-change detection
 PR #236 review-driven baseline update proposal flow
+PR #237 observation change classification and comparison traceability
 ```
 
-## PR #236 result
+## PR #237 result
 
 ```text
-Decision states: accept / hold / reject
-Proposal files: 3 private files
-Repository baseline written: false
-Automatic commit: false
-Automatic pull request: false
+Comparison states: new_source / unchanged / metadata_changed / content_changed / fetch_failed
+Metadata-only candidate count: 0
+Content-change candidate requires signal: true
+Candidate classification reason recorded: true
+Prior and observed digests recorded: true
+Aggregate count total equals observations: true
+Output file sets changed: false
 Canonical action: none
-Public output: false
 Production publication: false
 ```
 
-PR #236 adds a deterministic local command that converts a private monitoring run and complete human decision file into a reviewable baseline proposal. Accepted observations update only the proposed baseline; hold and reject preserve current records. The proposal cannot apply itself and must be copied deliberately in a separate reviewed PR.
+PR #237 separates byte, redirect, content-type, ETag, and Last-Modified differences from normalized-content changes. Metadata-only differences remain visible in private observation reports but cannot create a content-change candidate. Signal-bearing content candidates carry the classification reason, baseline provenance, metadata differences, and prior/current digests for review.
 
-Specification: `docs/quality/monitoring-baseline-update-spec.md`
+Specifications:
+
+- `docs/quality/monitoring-change-detection-spec.md`
+- `docs/quality/monitoring-observation-classification-spec.md`
+- `docs/quality/monitoring-official-source-spec.md`
 
 ## Approved continuation sequence
 
