@@ -8,6 +8,7 @@ import { runRepositoryHealthMonitor } from './monitors/repository-health.mjs';
 import { buildReviewMaterial } from './review/build-review-material.mjs';
 
 const root = process.cwd();
+const EMPTY_CHANGE_COUNTS = { unchanged: 0, metadata_changed: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
 
 function gitValue(args, fallback) {
   try {
@@ -60,7 +61,7 @@ function buildContext(options) {
 function summaryText(manifest, health, official, review) {
   const guard = manifest.canonical_guard;
   const candidateCount = official?.candidate_count ?? 0;
-  const changeCounts = official?.change_counts ?? { unchanged: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
+  const changeCounts = official?.change_counts ?? EMPTY_CHANGE_COUNTS;
   return [
     '# SOG Review-only Monitoring',
     '',
@@ -91,6 +92,7 @@ function summaryText(manifest, health, official, review) {
     `- Baseline set: \`${official?.baseline_set_id ?? 'none'}\``,
     `- Observations: ${official?.observation_count ?? 0}`,
     `- Unchanged: ${changeCounts.unchanged}`,
+    `- Metadata changed: ${changeCounts.metadata_changed}`,
     `- Content changed: ${changeCounts.content_changed}`,
     `- New source: ${changeCounts.new_source}`,
     `- Fetch failed: ${changeCounts.fetch_failed}`,
@@ -100,6 +102,7 @@ function summaryText(manifest, health, official, review) {
     '',
     `- Candidates: ${candidateCount}`,
     '- Unchanged sources create candidates: false',
+    '- Metadata-only changes create candidates: false',
     '- Candidate status: needs_human_review',
     '- Canonical action: none',
     '- Public or canonical writes: 0',
@@ -182,7 +185,7 @@ function finalizeMonitoring(context, official) {
     observation_count: official?.observation_count ?? 0,
     candidate_count: official?.candidate_count ?? 0,
     source_errors: official?.source_errors ?? 0,
-    change_counts: official?.change_counts ?? { unchanged: 0, content_changed: 0, new_source: 0, fetch_failed: 0 },
+    change_counts: official?.change_counts ?? { ...EMPTY_CHANGE_COUNTS },
     review_material_enabled: Boolean(review),
     review_item_count: review?.reviewMaterial.counts.review_items ?? 0,
     evidence_draft_count: review?.evidenceDraftReport.draft_count ?? 0,
