@@ -24,11 +24,12 @@ const yieldProfiles = read('data/yield-profiles-v3-q.json');
 const reserveComponents = read('data/reserve-components-v3-batch-q.json');
 const promotions = read('data/candidate-promotions-batch-18.json');
 const overlay = read('docs/migration/registry-v2-baseline-batch-q.json');
+const batchQEvidence = read('data/evidence-batch-q.json');
 
 const qCoinIds = ['sog_st_ist','sog_st_nearusn'];
 const qOrganizationIds = ['sog_issuer_inter_protocol','sog_org_agoric','sog_issuer_decentral_bank'];
 const qEventIds = ['sog_ev_ist_launch_batch_q','sog_ev_ist_sunset_batch_q','sog_ev_usn_launch_batch_q','sog_ev_usn_v2_batch_q','sog_ev_usn_winddown_batch_q'];
-const qEvidenceIds = evidence.filter((row) => row.__source_file === 'data/evidence-batch-q.json').map((row) => row.id);
+const qEvidenceIds = batchQEvidence.map((row) => row.id);
 const stablecoinById = new Map(stablecoins.map((row) => [row.id, row]));
 const organizationIds = new Set(organizations.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
@@ -43,12 +44,12 @@ fail(read('data/stablecoin-classification-batch-q.json').length === 2, 'Batch Q 
 fail(read('data/stablecoin-profiles-batch-q.json').length === 2, 'Batch Q must contain two profiles');
 fail(read('data/events-batch-q.json').length === 5, 'Batch Q must contain five events');
 fail(read('data/event-details-batch-q.json').length === 5, 'Batch Q must contain five event details');
-fail(read('data/evidence-batch-q.json').length === 9, 'Batch Q must contain nine evidence records');
+fail(batchQEvidence.length === 9, 'Batch Q must contain nine evidence records');
 fail(read('data/reserve-reports-batch-q.json').length === 2, 'Batch Q must contain two reserve reports');
 fail(read('data/q-open-items.json').length === 10, 'Batch Q must contain ten explicit open items');
 fail(read('data/deployments-batch-q.json').length === 2, 'Batch Q must contain two deployments');
-fail(legal.length === 2 && yieldProfiles.length === 2 && reserveComponents.length === 2, 'Batch Q v3 supplemental layers must cover both assets');
-fail(overlay.defer_legacy_v3_full_coverage === true, 'legacy v3 full-coverage deferral must be explicit');
+fail(legal.length === 2 && yieldProfiles.length === 2 && reserveComponents.length === 2, 'Batch Q supplemental layers must cover both assets');
+fail(overlay.defer_legacy_v3_full_coverage === true, 'legacy full-coverage deferral must be explicit');
 
 for (const id of qCoinIds) {
   const coin = stablecoinById.get(id);
