@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #235
-Active: PR #236
-Next: PR #237
+Latest completed: PR #236
+Active: PR #237
+Next: PR #238
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -57,29 +57,25 @@ PR #232 review reports, evidence drafts, and draft PR material
 PR #233 non-UI continuation roadmap and safety boundary
 PR #234 monitoring baseline specification and pending source records
 PR #235 baseline-aware material-change detection
+PR #236 review-driven baseline update proposal flow
 ```
 
-## PR #235 result
+## PR #236 result
 
 ```text
-Comparison states: new_source / unchanged / content_changed / fetch_failed
-Normalized digest recorded: true
-Unchanged source candidate count: 0
-Content change requires signal match: true
-Pending source remains reviewable: true
-Fetch failure creates content candidate: false
-Output file sets changed: false
+Decision states: accept / hold / reject
+Proposal files: 3 private files
+Repository baseline written: false
+Automatic commit: false
+Automatic pull request: false
 Canonical action: none
+Public output: false
 Production publication: false
 ```
 
-PR #235 compares each successful official-source observation with its human-approved baseline. Standing keywords on an unchanged page no longer create recurring candidates. A normalized-content difference remains a private review prompt and does not establish a canonical fact.
+PR #236 adds a deterministic local command that converts a private monitoring run and complete human decision file into a reviewable baseline proposal. Accepted observations update only the proposed baseline; hold and reject preserve current records. The proposal cannot apply itself and must be copied deliberately in a separate reviewed PR.
 
-Specifications:
-
-- `docs/quality/monitoring-baseline-spec.md`
-- `docs/quality/monitoring-change-detection-spec.md`
-- `docs/quality/monitoring-official-source-spec.md`
+Specification: `docs/quality/monitoring-baseline-update-spec.md`
 
 ## Approved continuation sequence
 
