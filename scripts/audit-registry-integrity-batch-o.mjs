@@ -21,7 +21,7 @@ const baselineBase = readJson('docs/migration/registry-v2-baseline.json');
 const baselineGroups = { ...baselineBase.data_groups };
 const minimumCounts = { ...baselineBase.minimum_counts };
 const suffixes = [];
-for (const suffix of ['o', 'p', 'q']) {
+for (const suffix of ['o', 'p', 'q', 'r']) {
   const overlay = readJson(\`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`);
   suffixes.push(\`batch_\${suffix}\`);
   Object.assign(minimumCounts, overlay.minimum_counts ?? {});
@@ -41,15 +41,15 @@ const foundation = {
   ...foundationBase,
   data_groups: {
     ...foundationBase.data_groups,
-    legal_profiles: [...new Set([...(foundationBase.data_groups.legal_profiles ?? []), 'data/q-legal.json'])],
-    reserve_components: [...new Set([...(foundationBase.data_groups.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json'])]
+    legal_profiles: [...new Set([...(foundationBase.data_groups.legal_profiles ?? []), 'data/q-legal.json', 'data/r-legal.json'])],
+    reserve_components: [...new Set([...(foundationBase.data_groups.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json'])]
   }
 };`;
 const yieldReplacement = `
 const incomeManifestBase = readJson('docs/migration/registry-v3-income-profiles.json');
 const incomeManifest = {
   ...incomeManifestBase,
-  data_files: [...new Set([...(incomeManifestBase.data_files ?? []), 'data/yield-profiles-v3-q.json'])]
+  data_files: [...new Set([...(incomeManifestBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json'])]
 };`;
 const semanticJsonReplacement = `const currentJsonRaw = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';
   let currentJson = currentJsonRaw;
@@ -65,10 +65,12 @@ const patched = original
   .replace(foundationAnchor, foundationReplacement)
   .replace(yieldAnchor, yieldReplacement)
   .replace(currentJsonAnchor, semanticJsonReplacement)
-  .replaceAll('SOG 80-Record Final Registry Audit', 'SOG 94-Record Registry Audit')
-  .replaceAll('SOG 87-Record Registry Audit', 'SOG 94-Record Registry Audit')
-  .replaceAll('SOG 92-Record Registry Audit', 'SOG 94-Record Registry Audit')
-  .replaceAll('The 80-record canonical registry', 'The 94-record canonical registry')
-  .replaceAll('The 87-record canonical registry', 'The 94-record canonical registry')
-  .replaceAll('The 92-record canonical registry', 'The 94-record canonical registry');
+  .replaceAll('SOG 80-Record Final Registry Audit', 'SOG 96-Record Registry Audit')
+  .replaceAll('SOG 87-Record Registry Audit', 'SOG 96-Record Registry Audit')
+  .replaceAll('SOG 92-Record Registry Audit', 'SOG 96-Record Registry Audit')
+  .replaceAll('SOG 94-Record Registry Audit', 'SOG 96-Record Registry Audit')
+  .replaceAll('The 80-record canonical registry', 'The 96-record canonical registry')
+  .replaceAll('The 87-record canonical registry', 'The 96-record canonical registry')
+  .replaceAll('The 92-record canonical registry', 'The 96-record canonical registry')
+  .replaceAll('The 94-record canonical registry', 'The 96-record canonical registry');
 await import(`data:text/javascript;base64,${Buffer.from(patched).toString('base64')}`);
