@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2",
-  "status": "batch_017_promotion_complete",
+  "schema_version": "1.3",
+  "status": "batch_018_growth_a_in_progress",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -9,26 +9,31 @@
     "data/candidate-stable-assets-emergency-msusd.json",
     "data/candidate-stable-assets-emergency-jpysc.json",
     "data/candidate-stable-assets-growth-85.json",
-    "data/candidate-stable-assets-growth-90.json"
+    "data/candidate-stable-assets-growth-90.json",
+    "data/candidate-stable-assets-growth-100.json"
   ],
   "protected_minimums": {
-    "total_candidates": 92,
-    "promoted_candidates": 92,
-    "pending_candidates": 0
+    "total_candidates": 100,
+    "promoted_candidates": 94,
+    "pending_candidates": 6
   },
   "planned_batches": {
-    "batch_006": {"minimum_candidates": 5, "theme": "current USD and regulated assets"},
-    "batch_007": {"minimum_candidates": 5, "theme": "protocol stablecoins"},
-    "batch_008": {"minimum_candidates": 5, "theme": "yield-bearing wrappers"},
-    "batch_009": {"minimum_candidates": 5, "theme": "regional fiat stablecoins"},
-    "batch_010": {"minimum_candidates": 5, "theme": "regulated EUR and CHF stablecoins"},
-    "batch_011": {"minimum_candidates": 5, "theme": "historical failures"},
-    "batch_012": {"minimum_candidates": 5, "theme": "current modular, synthetic, protocol, RWA, and BTC-backed USD assets"},
-    "batch_013": {"minimum_candidates": 5, "theme": "current reserve-backed, collateralized, ecosystem-native, and delta-neutral protocol stablecoins"},
-    "batch_014": {"minimum_candidates": 1, "theme": "emergency incident record"},
-    "batch_015": {"minimum_candidates": 1, "theme": "time-sensitive regulated stablecoin launch"},
-    "batch_016": {"minimum_candidates": 5, "theme": "current bank, enterprise, ecosystem-native, and yield-bearing USD assets"},
-    "batch_017": {"minimum_candidates": 5, "theme": "current regulated, regional, ecosystem-native, and yield-bearing stablecoins"}
+    "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
+    "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
+    "batch_008":{"minimum_candidates":5,"theme":"yield-bearing wrappers"},
+    "batch_009":{"minimum_candidates":5,"theme":"regional fiat stablecoins"},
+    "batch_010":{"minimum_candidates":5,"theme":"regulated EUR and CHF stablecoins"},
+    "batch_011":{"minimum_candidates":5,"theme":"historical failures"},
+    "batch_012":{"minimum_candidates":5,"theme":"current modular synthetic protocol RWA and BTC-backed USD assets"},
+    "batch_013":{"minimum_candidates":5,"theme":"reserve-backed collateralized ecosystem-native and delta-neutral assets"},
+    "batch_014":{"minimum_candidates":1,"theme":"emergency incident record"},
+    "batch_015":{"minimum_candidates":1,"theme":"time-sensitive regulated launch"},
+    "batch_016":{"minimum_candidates":5,"theme":"bank enterprise ecosystem-native and yield-bearing USD assets"},
+    "batch_017":{"minimum_candidates":5,"theme":"regulated regional ecosystem-native and yield-bearing stablecoins"},
+    "batch_018":{"minimum_candidates":2,"theme":"interchain and historical NEAR stablecoins"},
+    "batch_019":{"minimum_candidates":2,"theme":"Kava CDP and Beanstalk credit stablecoins"},
+    "batch_020":{"minimum_candidates":2,"theme":"Solana multi-strategy and Rootstock BTC-backed stablecoins"},
+    "batch_021":{"minimum_candidates":2,"theme":"Mento euro and Reserve collateral-basket stablecoins"}
   },
   "promotion_policy": {
     "candidate_is_not_canonical": true,
@@ -36,19 +41,10 @@
     "identity_deduplication_required": true,
     "full_required_layer_draft_required": true,
     "promotion_occurs_in_separate_batch_prs": true,
-    "batch_013_boundary_review_complete": true,
-    "production_parity_at_75_passed": true,
-    "production_parity_required_at_80": true,
-    "no_80_to_85_work_without_production_parity": true,
-    "production_record_parity_at_82_passed": true,
-    "batch_013_promotion_complete": true,
-    "batch_014_is_emergency_incident_exception": true,
-    "batch_015_is_time_sensitive_launch_exception": true,
-    "batch_016_research_complete": true,
-    "batch_016_promotion_complete": true,
-    "batch_017_research_complete": true,
-    "batch_017_full_layer_draft_complete": true,
     "batch_017_promotion_complete": true,
-    "ordinary_growth_remains_blocked": false
+    "batch_018_corrected_duplicate_audit_required": true,
+    "batch_018_growth_a_authorized": true,
+    "ordinary_growth_remains_blocked": false,
+    "production_publication_deferred": true
   }
 }
