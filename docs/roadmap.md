@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #233
-Active: PR #234
-Next: PR #235
+Latest completed: PR #234
+Active: PR #235
+Next: PR #236
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -55,7 +55,26 @@ PR #230 monitoring skeleton and canonical guard
 PR #231 official-source observations and private candidates
 PR #232 review reports, evidence drafts, and draft PR material
 PR #233 non-UI continuation roadmap and safety boundary
+PR #234 monitoring baseline specification and pending source records
 ```
+
+## PR #234 result
+
+```text
+Baseline set: scripts/monitoring/baselines/official-source-baselines.json
+Enabled source records: 4
+Initial state: pending_initial_acceptance
+Live digests invented: false
+Monitoring write allowed: false
+Canonical evidence: false
+Public output: false
+Automatic pull request: false
+Production publication: false
+```
+
+PR #234 defines an accepted baseline as a human-reviewed comparison point, not evidence of a stablecoin fact. The four current official sources remain pending until a later reviewed observation is explicitly accepted. Repository validation rejects missing sources, URL mismatches, unsafe redirects, malformed digests, populated pending fields, raw content fields, and write/publication authority.
+
+Specification: `docs/quality/monitoring-baseline-spec.md`
 
 ## Approved continuation sequence
 
