@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_reserve_assurance_source_review_pr241",
+  "reviewed_at": "2026-06-29T05:30:00.000Z",
+  "normalization_version": "sog_official_source_normalization_v2",
+  "scope": "reserve_and_assurance_source_expansion",
+  "sources": [
+    {
+      "source_id": "first-digital-fdusd-transparency",
+      "review_url": "https://www.firstdigitallabs.com/transparency",
+      "final_url": "https://www.firstdigitallabs.com/transparency",
+      "final_host": "www.firstdigitallabs.com",
+      "content_type": "text/html",
+      "ownership_review": "official_first_digital_labs_domain",
+      "affected_stablecoin_ids": ["sog_st_fdusd"],
+      "affected_organization_ids": ["sog_issuer_first_digital"],
+      "visible_signal_terms": ["reserve", "reserves", "backed", "attested", "independent third-party"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "ripple-rlusd-overview",
+      "review_url": "https://docs.ripple.com/products/stablecoin/overview/rlusd",
+      "final_url": "https://docs.ripple.com/products/stablecoin/overview/rlusd",
+      "final_host": "docs.ripple.com",
+      "content_type": "text/html",
+      "ownership_review": "official_ripple_documentation_domain",
+      "affected_stablecoin_ids": ["sog_st_rlusd"],
+      "affected_organization_ids": ["sog_issuer_ripple"],
+      "visible_signal_terms": ["reserves", "monthly reserve reports", "attestations", "independent third-party accounting firm"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "gemini-gusd-dollar",
+      "review_url": "https://www.gemini.com/dollar",
+      "final_url": "https://www.gemini.com/dollar",
+      "final_host": "www.gemini.com",
+      "content_type": "text/html",
+      "ownership_review": "official_gemini_domain",
+      "affected_stablecoin_ids": ["sog_st_gusd"],
+      "affected_organization_ids": ["sog_issuer_gemini"],
+      "visible_signal_terms": ["reserves", "monthly reserve asset attestations", "independent accounting firm", "circulation"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "paxos-usdp-transparency",
+      "review_url": "https://www.paxos.com/usdp-transparency",
+      "final_url": "https://www.paxos.com/usdp-transparency",
+      "final_host": "www.paxos.com",
+      "content_type": "text/html",
+      "ownership_review": "official_paxos_domain",
+      "affected_stablecoin_ids": ["sog_st_usdp"],
+      "affected_organization_ids": ["sog_issuer_paxos"],
+      "visible_signal_terms": ["reserve reports", "attestation reports", "independent third-party accounting firm", "transparency"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "global-dollar-usdg-overview",
+      "review_url": "https://globaldollar.com/about-usdg",
+      "final_url": "https://globaldollar.com/about-usdg",
+      "final_host": "globaldollar.com",
+      "content_type": "text/html",
+      "ownership_review": "official_global_dollar_network_domain",
+      "affected_stablecoin_ids": ["sog_st_usdg"],
+      "affected_organization_ids": ["sog_issuer_global_dollar_network"],
+      "visible_signal_terms": ["fully backed", "monthly reserve reports", "issuer", "redeemable"],
+      "decision": "approve_pending_baseline"
+    }
+  ],
+  "policy": {
+    "raw_response_stored": false,
+    "baseline_status": "pending_initial_acceptance",
+    "canonical_action": "none",
+    "automatic_pull_request": false,
+    "public_output": false,
+    "production_publication": false
+  }
+}

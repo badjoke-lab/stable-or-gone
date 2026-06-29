@@ -7,6 +7,7 @@ import './validate-evidence-traceability-pr225.mjs';
 import './validate-deployment-canonicality-pr226.mjs';
 import './validate-deployment-canonicality-pr227.mjs';
 import './validate-deployment-source-status-pr229.mjs';
+import './validate-monitoring-reserve-assurance-pr241.mjs';
 
 const documents = {
   roadmap: fs.readFileSync('docs/roadmap.md', 'utf8'),
@@ -20,24 +21,26 @@ const documents = {
   classification: fs.readFileSync('docs/quality/monitoring-observation-classification-spec.md', 'utf8'),
   normalization: fs.readFileSync('docs/quality/monitoring-normalization-spec.md', 'utf8'),
   phaseAAudit: fs.readFileSync('docs/quality/monitoring-phase-a-audit.md', 'utf8'),
-  feasibility: fs.readFileSync('docs/quality/monitoring-feasibility-audit-spec.md', 'utf8')
+  feasibility: fs.readFileSync('docs/quality/monitoring-feasibility-audit-spec.md', 'utf8'),
+  reserveAssurance: fs.readFileSync('docs/quality/monitoring-reserve-assurance-expansion-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #240',
-    'Active: PR #241',
-    'Next: PR #242',
+    'Latest completed: PR #241',
+    'Active: PR #242',
+    'Next: PR #243',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #239 deterministic monitoring audit and safety closure',
     'PR #240 monitoring feasibility audit for all 92 assets',
-    'Canonical stable assets audited: 92',
-    'Live source registration: 0',
-    'Accepted baseline changes: 0',
     'PR #241 reserve and assurance source expansion',
+    'Enabled official sources: 9',
+    'Reserve and assurance sources added: 5',
+    'Pending baselines: 9',
+    'Accepted baselines: 0',
+    'PR #242 redemption and terms source expansion',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -113,6 +116,14 @@ const required = {
     'record count equals the canonical stablecoin count and currently equals 92',
     'PR #240 itself adds no live source and accepts no baseline',
     'No production deployment required'
+  ],
+  reserveAssurance: [
+    'expands review-only official-source monitoring',
+    'exactly five reviewed sources are added',
+    'keep that baseline `pending_initial_acceptance`',
+    'No live response digest is committed in PR #241',
+    'The four Phase A sources remain unchanged',
+    'No production deployment required'
   ]
 };
 
@@ -122,4 +133,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #240 is complete and PR #241 reserve and assurance expansion is active.');
+console.log('Active workstream validation passed: PR #241 is complete and PR #242 redemption and terms expansion is active.');
