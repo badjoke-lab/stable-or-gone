@@ -27,7 +27,7 @@ const deploymentTypesByCategory = {
   ],
   historical_or_legacy: [
     'historical_canonical_issuance', 'historical_issuer_supported_token', 'historical_original_issuance',
-    'historical_protocol_native_token', 'legacy_canonical_issuance', 'legacy_native',
+    'historical_protocol_native_token', 'historical_protocol_token', 'legacy_canonical_issuance', 'legacy_native',
     'legacy_protocol_token', 'native_historical'
   ],
   related_asset_or_wrapper: ['related_savings_token'],
