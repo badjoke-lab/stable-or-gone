@@ -9,6 +9,8 @@ import './validate-monitoring-change-detection-pr235.mjs';
 import './validate-monitoring-baseline-update-pr236.mjs';
 import './validate-monitoring-observation-classification-pr237.mjs';
 import './validate-monitoring-normalization-pr238.mjs';
+import './validate-monitoring-phase-a-pr239.mjs';
+import './validate-monitoring-feasibility-pr240.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
@@ -50,4 +52,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log('PR #230 through PR #238 monitoring validation passed.');
+console.log('PR #230 through PR #240 monitoring validation passed.');
