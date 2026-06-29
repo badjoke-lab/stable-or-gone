@@ -2,6 +2,11 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadRegistryV2Baseline } from '../../load-registry-v2-baseline.mjs';
+import {
+  indexOfficialSourceBaselines,
+  loadOfficialSourceBaselines,
+  validateOfficialSourceBaselines
+} from '../baselines/baseline-store.mjs';
 
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 const TIMEOUT_MS = 20_000;
@@ -64,7 +69,7 @@ export function validateOfficialSources(sources, canonicalIndex) {
   return failures;
 }
 
-function normalizeBody(bytes, contentType) {
+export function normalizeOfficialSourceBody(bytes, contentType) {
   const text = Buffer.from(bytes).toString('utf8');
   if (String(contentType).includes('html')) {
     return text.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
@@ -118,6 +123,75 @@ function buildDuplicateReview(source, canonicalIndex) {
   };
 }
 
+function baselineSubset(root, sources, providedBaselineSet) {
+  if (providedBaselineSet) return providedBaselineSet;
+  const full = loadOfficialSourceBaselines(root);
+  const sourceIds = new Set(sources.map((source) => source.source_id));
+  return {
+    ...full,
+    baselines: (full.baselines ?? []).filter((baseline) => sourceIds.has(baseline.source_id))
+  };
+}
+
+function buildBaselineComparison(baseline, observed) {
+  if (!baseline || baseline.status === 'pending_initial_acceptance') {
+    return {
+      state: 'new_source',
+      baseline_status: baseline?.status ?? 'missing',
+      baseline_body_sha256: baseline?.body_sha256 ?? null,
+      baseline_normalized_content_sha256: baseline?.normalized_content_sha256 ?? null,
+      observed_body_sha256: observed.body_sha256,
+      observed_normalized_content_sha256: observed.normalized_content_sha256,
+      exact_body_changed: null,
+      normalized_content_changed: null,
+      accepted_observed_at: baseline?.accepted_observed_at ?? null,
+      accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
+      accepted_review_reference: baseline?.accepted_review_reference ?? null
+    };
+  }
+
+  const exactBodyChanged = baseline.body_sha256 !== observed.body_sha256;
+  const normalizedContentChanged = baseline.normalized_content_sha256 !== observed.normalized_content_sha256;
+  return {
+    state: normalizedContentChanged ? 'content_changed' : 'unchanged',
+    baseline_status: baseline.status,
+    baseline_body_sha256: baseline.body_sha256,
+    baseline_normalized_content_sha256: baseline.normalized_content_sha256,
+    observed_body_sha256: observed.body_sha256,
+    observed_normalized_content_sha256: observed.normalized_content_sha256,
+    exact_body_changed: exactBodyChanged,
+    normalized_content_changed: normalizedContentChanged,
+    accepted_observed_at: baseline.accepted_observed_at,
+    accepted_repository_commit: baseline.accepted_repository_commit,
+    accepted_review_reference: baseline.accepted_review_reference
+  };
+}
+
+function failedComparison(baseline) {
+  return {
+    state: 'fetch_failed',
+    baseline_status: baseline?.status ?? 'missing',
+    baseline_body_sha256: baseline?.body_sha256 ?? null,
+    baseline_normalized_content_sha256: baseline?.normalized_content_sha256 ?? null,
+    observed_body_sha256: null,
+    observed_normalized_content_sha256: null,
+    exact_body_changed: null,
+    normalized_content_changed: null,
+    accepted_observed_at: baseline?.accepted_observed_at ?? null,
+    accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
+    accepted_review_reference: baseline?.accepted_review_reference ?? null
+  };
+}
+
+function countChangeStates(observations) {
+  const counts = { unchanged: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
+  for (const observation of observations) {
+    const state = observation.baseline_comparison?.state;
+    if (state in counts) counts[state] += 1;
+  }
+  return counts;
+}
+
 export async function observeOfficialSources(options = {}) {
   const root = options.root ?? process.cwd();
   const observedAt = options.observedAt ?? new Date().toISOString();
@@ -127,9 +201,15 @@ export async function observeOfficialSources(options = {}) {
   const validationFailures = validateOfficialSources(sources, canonicalIndex);
   if (validationFailures.length) throw new Error(`Official source allowlist invalid: ${validationFailures.join('; ')}`);
 
+  const baselineSet = baselineSubset(root, sources, options.baselineSet);
+  const baselineFailures = validateOfficialSourceBaselines(baselineSet, sources);
+  if (baselineFailures.length) throw new Error(`Official source baselines invalid: ${baselineFailures.join('; ')}`);
+  const baselines = indexOfficialSourceBaselines(baselineSet);
+
   const observations = [];
   const candidates = [];
   for (const source of sources) {
+    const baseline = baselines.get(source.source_id);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? TIMEOUT_MS);
     try {
@@ -145,7 +225,8 @@ export async function observeOfficialSources(options = {}) {
       if (bytes.byteLength > (options.maxBodyBytes ?? MAX_BODY_BYTES)) throw new Error(`response exceeds ${options.maxBodyBytes ?? MAX_BODY_BYTES} bytes`);
       const contentType = response.headers?.get?.('content-type') ?? null;
       const bodyHash = sha256(bytes);
-      const normalized = normalizeBody(bytes, contentType);
+      const normalized = normalizeOfficialSourceBody(bytes, contentType);
+      const normalizedHash = sha256(normalized);
       const detected = response.ok ? detectSignals(source, normalized) : { signalTypes: [], keywords: [] };
       const observationId = `obs_${sha256(`${source.source_id}|${bodyHash}`).slice(0, 20)}`;
       const observation = {
@@ -161,13 +242,22 @@ export async function observeOfficialSources(options = {}) {
         etag: response.headers?.get?.('etag') ?? null,
         last_modified: response.headers?.get?.('last-modified') ?? null,
         body_sha256: bodyHash,
+        normalized_content_sha256: normalizedHash,
         body_bytes: bytes.byteLength,
         matched_signal_types: detected.signalTypes,
         matched_keywords: detected.keywords,
         error: response.ok ? null : `HTTP ${response.status}`
       };
+      observation.baseline_comparison = response.ok
+        ? buildBaselineComparison(baseline, observation)
+        : failedComparison(baseline);
       observations.push(observation);
-      if (response.ok && detected.signalTypes.length > 0) {
+
+      if (
+        response.ok &&
+        detected.signalTypes.length > 0 &&
+        ['new_source', 'content_changed'].includes(observation.baseline_comparison.state)
+      ) {
         candidates.push({
           candidate_id: `candidate_${sha256(`${observationId}|${detected.signalTypes.join(',')}`).slice(0, 20)}`,
           status: 'needs_human_review',
@@ -175,6 +265,8 @@ export async function observeOfficialSources(options = {}) {
           observation_id: observationId,
           source_id: source.source_id,
           source_url: source.url,
+          change_state: observation.baseline_comparison.state,
+          baseline_comparison: observation.baseline_comparison,
           affected_stablecoin_ids: [...(source.affected_stablecoin_ids ?? [])],
           affected_organization_ids: [...(source.affected_organization_ids ?? [])],
           signal_types: detected.signalTypes,
@@ -198,9 +290,11 @@ export async function observeOfficialSources(options = {}) {
         etag: null,
         last_modified: null,
         body_sha256: null,
+        normalized_content_sha256: null,
         body_bytes: 0,
         matched_signal_types: [],
         matched_keywords: [],
+        baseline_comparison: failedComparison(baseline),
         error: error instanceof Error ? error.message : String(error)
       });
     } finally {
@@ -214,9 +308,11 @@ export async function observeOfficialSources(options = {}) {
     monitor: 'official-source-observer',
     status: sourceErrors === 0 ? 'ok' : sourceErrors === observations.length ? 'failed' : 'partial',
     observed_at: observedAt,
+    baseline_set_id: baselineSet.baseline_set_id,
     observation_count: observations.length,
     candidate_count: candidates.length,
     source_errors: sourceErrors,
+    change_counts: countChangeStates(observations),
     observations,
     candidates
   };
