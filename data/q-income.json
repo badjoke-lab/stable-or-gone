@@ -1,4 +1,4 @@
 [
 {"id":"sog_st_ist","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_ist_psm_batch_q","sog_src_ist_sunset_complete_batch_q"]},
-{"id":"sog_st_nearusn","availability":"historical","source":"staking_rewards","accrual":"external_distribution","rate":"variable","related_asset_ids":[],"evidence_ids":["sog_src_usn_launch_batch_q","sog_src_usn_v2_batch_q","sog_src_usn_winddown_batch_q"]}
+{"id":"sog_st_nearusn","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usn_launch_batch_q","sog_src_usn_v2_batch_q","sog_src_usn_winddown_batch_q"]}
 ]
