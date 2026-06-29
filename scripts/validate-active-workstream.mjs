@@ -16,21 +16,22 @@ const documents = {
   review: fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8'),
   baseline: fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8'),
   change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8'),
-  baselineUpdate: fs.readFileSync('docs/quality/monitoring-baseline-update-spec.md', 'utf8')
+  baselineUpdate: fs.readFileSync('docs/quality/monitoring-baseline-update-spec.md', 'utf8'),
+  classification: fs.readFileSync('docs/quality/monitoring-observation-classification-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #236',
-    'Active: PR #237',
-    'Next: PR #238',
+    'Latest completed: PR #237',
+    'Active: PR #238',
+    'Next: PR #239',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #236 review-driven baseline update proposal flow',
-    'Repository baseline written: false',
-    'Automatic pull request: false',
+    'PR #237 observation change classification and comparison traceability',
+    'Metadata-only candidate count: 0',
+    'Prior and observed digests recorded: true',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -63,6 +64,7 @@ const required = {
   change: [
     'baseline-aware review candidate generation',
     'An unchanged source must create zero candidates',
+    'metadata_changed',
     'content_changed',
     'fetch_failed',
     'normalized_content_sha256',
@@ -76,6 +78,13 @@ const required = {
     'repository_baseline_written: false',
     'The proposal is not self-applying',
     'No production deployment required'
+  ],
+  classification: [
+    'metadata_changed',
+    'normalized_content_same_metadata_differs',
+    'A metadata-only observation creates zero content-change candidates',
+    'The count total must equal `observation_count`',
+    'No production deployment required'
   ]
 };
 
@@ -85,4 +94,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #236 is complete and PR #237 is active.');
+console.log('Active workstream validation passed: PR #237 is complete and PR #238 is active.');
