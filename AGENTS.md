@@ -11,8 +11,8 @@ Before changing code, data, workflows, or documentation, read:
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. the canonical plan for the active work item
-6. the relevant data or UI specification
-7. any queue, validator, audit, and baseline named by the work item
+6. the relevant data, monitoring, or UI specification
+7. any queue, validator, audit, fixture, and baseline named by the work item
 
 For the active non-UI quality program, also read:
 
@@ -23,6 +23,15 @@ docs/classification-spec.md
 docs/data-model-v3-spec.md
 docs/stats-spec.md
 docs/migration/registry-v3-baseline.json
+```
+
+For monitoring work, also read:
+
+```text
+docs/quality/monitoring-pipeline-spec.md
+docs/quality/monitoring-official-source-spec.md
+docs/quality/monitoring-official-source-schema.md
+docs/quality/monitoring-review-material-spec.md
 ```
 
 For later UI work, read:
@@ -52,22 +61,38 @@ The active workstream is the non-UI quality program in:
 docs/quality/non-ui-quality-program.md
 ```
 
-Before starting or continuing work, read the `Current position` and `Immediate work` sections of `docs/roadmap.md`, then confirm the same PR item in the active implementation plan.
+Before starting or continuing work, read the `Current position` and approved sequence in `docs/roadmap.md`, then confirm the same PR item in the active implementation plan.
 
-The UI program is paused after PR #216 because detailed owner visual review is temporarily unavailable. The current UI is an intermediate repository state. Gate V2-F is not passed, no release candidate is selected, and production publication is not authorized.
+The UI program is paused after PR #216 because detailed owner visual review is temporarily unavailable. The current UI is an intermediate repository state. Gate V2-F is not passed, no production release is authorized, and no agent may claim that the current UI has owner approval.
 
-Routine growth beyond 92 canonical stable assets is paused. Do not start Batch 18 or resume a final-eight path without a deliberate roadmap amendment.
+PR #233 authorizes the bounded non-UI sequence through PR #263:
+
+```text
+PR #234-#239 material-change monitoring
+PR #240-#245 monitored-source coverage
+PR #246 final-eight candidate audit
+PR #247-#250 reviewed growth from 92 to 100
+PR #251-#258 100-record registry audit
+PR #259-#263 non-UI release preparation
+```
+
+Growth beyond 92 assets is permitted only after PR #246 selects the final reviewed set, and each growth PR is limited to two assets. Production publication remains prohibited through PR #263.
 
 ## Non-UI quality rules
 
-- Cite the exact queue, validator, audit, schema, and baseline used by each PR.
+- Cite the exact queue, validator, audit, schema, fixture, and baseline used by each PR.
 - Keep unknown values unknown unless reviewed evidence supports a canonical value.
 - Do not coerce month- or year-level evidence into a day-level date.
 - Do not use exchange listing, rebrand, migration start, testnet, or guarded access as a default launch boundary.
 - Do not use depeg, last commit, last website capture, or migration opening as a default terminal boundary.
 - Preserve evidence relations, known unknowns, deployments, and source identities.
 - Monitoring output is candidate material only and must not write directly to canonical public data.
+- Monitoring executions remain read-only and may not update their own accepted baseline.
+- A baseline change requires a separate human-reviewed repository change.
+- An unchanged normalized official source must not create a monitoring candidate.
+- Metadata-only changes and fetch failures must not masquerade as content changes.
 - A quality PR may validly preserve a queue item after strengthening its source trail.
+- A growth PR may add no more than two stable assets and must include all applicable supporting record groups.
 
 ## Visual authority
 
@@ -135,13 +160,16 @@ Do not:
 - use no-op commits to trigger publication;
 - retry an obsolete deployment after source changes;
 - reduce data, evidence, or validation requirements;
-- invent undocumented taxonomy, route, UI, monitoring, or missing-value behavior;
+- invent undocumented taxonomy, route, UI, monitoring, baseline, or missing-value behavior;
 - use externally hosted or unverified coin logos;
 - create public filter categories from arbitrary free-text values;
 - hide material mobile information through generic numbered-column rules;
 - change the approved PR sequence without updating the plan and roadmap;
 - use conversation history as a substitute for repository specifications;
-- automatically publish monitored candidates into canonical data.
+- automatically publish monitored candidates into canonical data;
+- let a monitoring execution commit, open a pull request, or mutate its accepted baseline;
+- begin growth before PR #246 or add more than two assets in a growth PR;
+- publish or deploy merely because PR #263 is complete.
 
 ## Deployment classifications
 
@@ -159,8 +187,8 @@ Every pull request must use one classification:
 - Run normal repository validation before merge.
 - Remove temporary artifacts unless the active plan explicitly retains them.
 - Update `docs/roadmap.md` when current position or sequence changes.
-- Update the relevant canonical specification when semantics, routes, information hierarchy, missing-value rules, monitoring behavior, or machine-readable output change.
-- Preserve canonical record-group counts unless an explicit audited migration approves a change.
+- Update the relevant canonical specification when semantics, routes, information hierarchy, missing-value rules, monitoring behavior, baseline behavior, or machine-readable output change.
+- Preserve canonical record-group counts unless an explicit audited growth or migration PR approves a change.
 - State the deployment classification in the PR body.
 
 Every non-trivial PR body must include:
@@ -180,6 +208,6 @@ A PR that cannot cite its approved specification and roadmap item must be paused
 
 ```text
 GitHub Actions builds and validates the repository
-→ a manual workflow uploads the prebuilt dist directory with Wrangler
-→ production consistency verifies the public origin
+-> a manual workflow uploads the prebuilt dist directory with Wrangler
+-> production consistency verifies the public origin
 ```

@@ -1,7 +1,7 @@
 # Stable or Gone specification governance
 
 Status: canonical governance specification  
-Updated: 2026-06-28
+Updated: 2026-06-29
 
 ## 1. Purpose
 
@@ -41,6 +41,15 @@ docs/data-model-v3-spec.md
 docs/stats-spec.md
 ```
 
+Monitoring semantics remain governed by:
+
+```text
+docs/quality/monitoring-pipeline-spec.md
+docs/quality/monitoring-official-source-spec.md
+docs/quality/monitoring-official-source-schema.md
+docs/quality/monitoring-review-material-spec.md
+```
+
 A UI or quality plan may define workflow, public labels, grouping, and review gates. It must not silently redefine canonical record meaning.
 
 ## 3. Mandatory reading order
@@ -52,8 +61,8 @@ Before changing code, data, workflows, or documentation:
 3. Read `docs/roadmap.md`.
 4. Read `docs/deployment-policy.md`.
 5. Read the canonical plan for the active work item.
-6. Read the relevant data or UI specification.
-7. Read each queue, validator, audit, and baseline named by the active work item.
+6. Read the relevant data, monitoring, or UI specification.
+7. Read each queue, validator, audit, fixture, and baseline named by the active work item.
 
 A pull request is not ready for review until the exact specification sections it implements are identified.
 
@@ -76,6 +85,7 @@ A change to any of the following requires a specification update in the same PR 
 - page information hierarchy;
 - mobile information suppression;
 - machine-readable output shape;
+- monitoring observation or baseline semantics;
 - production publication gates;
 - the approved PR sequence;
 - the active workstream or its pause/resumption state.
@@ -115,6 +125,8 @@ A PR that cannot cite an approved work item must pause until the roadmap or spec
 
 Do not rewrite completed history to make a changed plan appear unchanged. Record deviations and pauses explicitly.
 
+PR #233 authorizes the bounded continuation through PR #263 while visual review is unavailable. Later changes to that sequence require another deliberate roadmap amendment.
+
 ## 8. Specification status labels
 
 Use one of:
@@ -138,7 +150,7 @@ The paused UI program does not permit broad visual changes without renewed owner
 
 ## 10. Data-preservation rule
 
-UI, quality, taxonomy, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
+UI, quality, taxonomy, monitoring, growth, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
 
 ```text
 stable assets
@@ -162,7 +174,21 @@ income profiles
 
 Unknown values remain unknown unless evidence supports a canonical value. Intentional removals require record-by-record audit and explicit approval.
 
-## 11. Conflict-resolution procedure
+Growth PRs are allowed only under the reviewed PR #246-#250 sequence. Each growth PR is limited to two stable assets and must preserve or explicitly extend every applicable record group.
+
+## 11. Monitoring baseline governance
+
+An accepted monitoring baseline is a repository-reviewed comparison point, not canonical evidence of a stablecoin fact.
+
+- Monitoring executions remain read-only.
+- A live observation may compare against a baseline but may not replace it.
+- Baseline changes require a separate human-reviewed repository change.
+- An unchanged normalized source must not create candidate material.
+- A content change remains an unconfirmed review prompt until separately evidenced and approved.
+- Metadata-only changes, fetch failures, and new sources require distinct states.
+- Monitoring output must not write canonical or public data automatically.
+
+## 12. Conflict-resolution procedure
 
 1. Stop implementation of the conflicting area.
 2. Identify the authoritative document.
@@ -171,9 +197,9 @@ Unknown values remain unknown unless evidence supports a canonical value. Intent
 5. Update the roadmap if sequence or scope changes.
 6. Resume only after the documentation change is merged.
 
-## 12. Current binding workstream
+## 13. Current binding workstream
 
-As of 2026-06-28, the binding workstream is the non-UI quality program for the existing 92-record registry.
+As of 2026-06-29, the binding workstream is the non-UI continuation program for material-change monitoring, source-coverage expansion, reviewed growth from 92 to 100, registry-wide audit, and non-UI release preparation.
 
 Canonical documents:
 
@@ -183,4 +209,4 @@ docs/roadmap.md
 docs/spec-governance.md
 ```
 
-The UI program is paused after PR #216. Gate V2-F remains pending. Routine growth beyond 92 assets and production publication remain paused until a later roadmap amendment permits them.
+The UI program remains paused after PR #216 and Gate V2-F remains pending. PR #263 does not authorize publication. Production publication remains deferred until owner-led visual review, Gate V2-F approval, an explicit publication checkpoint, manual deployment, and public-parity verification.
