@@ -133,10 +133,34 @@ function baselineSubset(root, sources, providedBaselineSet) {
   };
 }
 
+function metadataDifferences(baseline, observed) {
+  const differences = [];
+  if (baseline.body_sha256 !== observed.body_sha256) differences.push('exact_body_sha256');
+  if (baseline.accepted_final_url !== observed.final_url) differences.push('final_url');
+  if (baseline.content_type !== observed.content_type) differences.push('content_type');
+  if (baseline.etag !== observed.etag) differences.push('etag');
+  if (baseline.last_modified !== observed.last_modified) differences.push('last_modified');
+  return differences;
+}
+
+function comparisonMetadata(baseline, observed) {
+  return {
+    baseline_final_url: baseline?.accepted_final_url ?? null,
+    observed_final_url: observed?.final_url ?? null,
+    baseline_content_type: baseline?.content_type ?? null,
+    observed_content_type: observed?.content_type ?? null,
+    baseline_etag: baseline?.etag ?? null,
+    observed_etag: observed?.etag ?? null,
+    baseline_last_modified: baseline?.last_modified ?? null,
+    observed_last_modified: observed?.last_modified ?? null
+  };
+}
+
 function buildBaselineComparison(baseline, observed) {
   if (!baseline || baseline.status === 'pending_initial_acceptance') {
     return {
       state: 'new_source',
+      classification_reason: baseline ? 'baseline_pending_initial_acceptance' : 'baseline_missing',
       baseline_status: baseline?.status ?? 'missing',
       baseline_body_sha256: baseline?.body_sha256 ?? null,
       baseline_normalized_content_sha256: baseline?.normalized_content_sha256 ?? null,
@@ -144,6 +168,9 @@ function buildBaselineComparison(baseline, observed) {
       observed_normalized_content_sha256: observed.normalized_content_sha256,
       exact_body_changed: null,
       normalized_content_changed: null,
+      metadata_changed: null,
+      metadata_changes: [],
+      ...comparisonMetadata(baseline, observed),
       accepted_observed_at: baseline?.accepted_observed_at ?? null,
       accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
       accepted_review_reference: baseline?.accepted_review_reference ?? null
@@ -152,8 +179,16 @@ function buildBaselineComparison(baseline, observed) {
 
   const exactBodyChanged = baseline.body_sha256 !== observed.body_sha256;
   const normalizedContentChanged = baseline.normalized_content_sha256 !== observed.normalized_content_sha256;
+  const changes = metadataDifferences(baseline, observed);
+  const metadataChanged = changes.length > 0;
+  const state = normalizedContentChanged ? 'content_changed' : metadataChanged ? 'metadata_changed' : 'unchanged';
   return {
-    state: normalizedContentChanged ? 'content_changed' : 'unchanged',
+    state,
+    classification_reason: normalizedContentChanged
+      ? 'normalized_content_digest_changed'
+      : metadataChanged
+        ? 'normalized_content_same_metadata_differs'
+        : 'normalized_content_and_metadata_match',
     baseline_status: baseline.status,
     baseline_body_sha256: baseline.body_sha256,
     baseline_normalized_content_sha256: baseline.normalized_content_sha256,
@@ -161,6 +196,9 @@ function buildBaselineComparison(baseline, observed) {
     observed_normalized_content_sha256: observed.normalized_content_sha256,
     exact_body_changed: exactBodyChanged,
     normalized_content_changed: normalizedContentChanged,
+    metadata_changed: metadataChanged,
+    metadata_changes: changes,
+    ...comparisonMetadata(baseline, observed),
     accepted_observed_at: baseline.accepted_observed_at,
     accepted_repository_commit: baseline.accepted_repository_commit,
     accepted_review_reference: baseline.accepted_review_reference
@@ -170,6 +208,7 @@ function buildBaselineComparison(baseline, observed) {
 function failedComparison(baseline) {
   return {
     state: 'fetch_failed',
+    classification_reason: 'successful_observation_unavailable',
     baseline_status: baseline?.status ?? 'missing',
     baseline_body_sha256: baseline?.body_sha256 ?? null,
     baseline_normalized_content_sha256: baseline?.normalized_content_sha256 ?? null,
@@ -177,6 +216,9 @@ function failedComparison(baseline) {
     observed_normalized_content_sha256: null,
     exact_body_changed: null,
     normalized_content_changed: null,
+    metadata_changed: null,
+    metadata_changes: [],
+    ...comparisonMetadata(baseline, null),
     accepted_observed_at: baseline?.accepted_observed_at ?? null,
     accepted_repository_commit: baseline?.accepted_repository_commit ?? null,
     accepted_review_reference: baseline?.accepted_review_reference ?? null
@@ -184,7 +226,7 @@ function failedComparison(baseline) {
 }
 
 function countChangeStates(observations) {
-  const counts = { unchanged: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
+  const counts = { unchanged: 0, metadata_changed: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
   for (const observation of observations) {
     const state = observation.baseline_comparison?.state;
     if (state in counts) counts[state] += 1;
@@ -248,16 +290,10 @@ export async function observeOfficialSources(options = {}) {
         matched_keywords: detected.keywords,
         error: response.ok ? null : `HTTP ${response.status}`
       };
-      observation.baseline_comparison = response.ok
-        ? buildBaselineComparison(baseline, observation)
-        : failedComparison(baseline);
+      observation.baseline_comparison = response.ok ? buildBaselineComparison(baseline, observation) : failedComparison(baseline);
       observations.push(observation);
 
-      if (
-        response.ok &&
-        detected.signalTypes.length > 0 &&
-        ['new_source', 'content_changed'].includes(observation.baseline_comparison.state)
-      ) {
+      if (response.ok && detected.signalTypes.length > 0 && ['new_source', 'content_changed'].includes(observation.baseline_comparison.state)) {
         candidates.push({
           candidate_id: `candidate_${sha256(`${observationId}|${detected.signalTypes.join(',')}`).slice(0, 20)}`,
           status: 'needs_human_review',
@@ -266,6 +302,7 @@ export async function observeOfficialSources(options = {}) {
           source_id: source.source_id,
           source_url: source.url,
           change_state: observation.baseline_comparison.state,
+          classification_reason: observation.baseline_comparison.classification_reason,
           baseline_comparison: observation.baseline_comparison,
           affected_stablecoin_ids: [...(source.affected_stablecoin_ids ?? [])],
           affected_organization_ids: [...(source.affected_organization_ids ?? [])],
