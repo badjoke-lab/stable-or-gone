@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #242
-Active: PR #243
-Next: PR #244
+Latest completed: PR #243
+Active: PR #244
+Next: PR #245
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -64,6 +64,7 @@ PR #239 deterministic monitoring audit and safety closure
 PR #240 monitoring feasibility audit for all 92 assets
 PR #241 reserve and assurance source expansion
 PR #242 redemption and terms source expansion
+PR #243 issuer, migration, and shutdown source expansion
 ```
 
 ## Phase A closure
@@ -146,6 +147,30 @@ Specifications and review record:
 - `docs/quality/monitoring-redemption-terms-expansion-spec.md`
 - `scripts/monitoring/sources/redemption-terms-source-review-pr242.json`
 
+## PR #243 result
+
+```text
+Enabled official sources: 19
+Issuer lifecycle sources added: 5
+Pending baselines: 19
+Accepted baselines: 0
+Stable assets changed: 0
+Canonical lifecycle fields changed: 0
+Canonical evidence created: 0
+Workflow permissions changed: false
+Public output: false
+Production publication: false
+```
+
+PR #243 adds reviewed official lifecycle pages for the BUSD minting halt and wind-down, the optional DAI-to-USDS upgrade, the aUSD-to-aSEED migration, the continued coexistence of Liquity V1/LUSD with Liquity V2/BOLD, and the PAX-to-USDP rebrand.
+
+The new `lifecycle_update` signal creates only private review prompts after baseline comparison. It does not change asset status, dates, identity, migration, predecessor/successor relationships, or implementation state. Optional upgrade, migration, parallel successor, rebrand, and wind-down remain separate classifications. All five new baselines remain `pending_initial_acceptance` with no committed response digest.
+
+Specifications and review record:
+
+- `docs/quality/monitoring-issuer-lifecycle-expansion-spec.md`
+- `scripts/monitoring/sources/issuer-lifecycle-source-review-pr243.json`
+
 ## Approved continuation sequence
 
 ### Phase A — material-change monitoring — complete
@@ -185,7 +210,7 @@ PR #245 monitoring coverage report and validator
 
 Source-count growth alone is not completion. Every monitored source requires official ownership, an allowlisted HTTPS host, canonical target IDs, signal scope, a reviewable baseline state, version-compatible normalization, and no automatic canonical action.
 
-PR #243 must add only currently reviewable official issuer lifecycle, migration, rebrand, wind-down, shutdown, or product-transition pages. It must distinguish an issuer-level announcement from an asset-level lifecycle change, preserve predecessor/successor uncertainty, and create only matching `pending_initial_acceptance` baselines.
+PR #244 must define which regulator and government sources may be monitored, how jurisdiction and issuer scope are recorded, how notices differ from final orders, and why a regulatory mention cannot automatically change stablecoin status. It may register only sources with explicit canonical targets and matching pending baselines.
 
 ### Phase C — reviewed growth from 92 to 100
 
