@@ -5,6 +5,7 @@ import { captureCanonicalSnapshot, compareCanonicalSnapshots } from './core/cano
 import { ensureDir, writeJson, writeText } from './core/fs-utils.mjs';
 import { observeOfficialSources } from './monitors/official-source-observer.mjs';
 import { runRepositoryHealthMonitor } from './monitors/repository-health.mjs';
+import { buildReviewMaterial } from './review/build-review-material.mjs';
 
 const root = process.cwd();
 
@@ -47,6 +48,7 @@ function buildContext(options) {
     sourceCommit,
     sourceBranch: options.sourceBranch || resolveBranch(),
     mode,
+    includeReviewMaterial: options.includeReviewMaterial ?? mode === 'official-sources',
     runId,
     runDirectory,
     before: captureCanonicalSnapshot(root),
@@ -54,7 +56,7 @@ function buildContext(options) {
   };
 }
 
-function summaryText(manifest, health, official) {
+function summaryText(manifest, health, official, review) {
   const guard = manifest.canonical_guard;
   const candidateCount = official?.candidate_count ?? 0;
   return [
@@ -94,26 +96,61 @@ function summaryText(manifest, health, official) {
     '- Canonical action: none',
     '- Public or canonical writes: 0',
     '',
+    '## Review material',
+    '',
+    `- Enabled: \`${manifest.review_material_enabled}\``,
+    `- Review items: ${review?.reviewMaterial.counts.review_items ?? 0}`,
+    `- Evidence drafts: ${review?.evidenceDraftReport.draft_count ?? 0}`,
+    `- Rejected duplicates: ${review?.reviewMaterial.counts.rejected_duplicates ?? 0}`,
+    `- Unresolved questions: ${review?.reviewMaterial.counts.unresolved_questions ?? 0}`,
+    '- Human approval required',
+    '- Canonical action: none',
+    '- Automatic pull request: false',
+    '',
     '## Operator action',
     '',
-    candidateCount > 0
-      ? 'Review private candidates and source observations. Open a separate canonical-data PR only after human approval.'
-      : manifest.status === 'completed'
-        ? 'No canonical action required.'
-        : 'Review the failed health or canonical-guard finding before any further work.',
+    review?.reviewMaterial.counts.review_items > 0
+      ? 'Review facts, unconfirmed inferences, unresolved questions, evidence drafts, and draft PR material. Open a separate canonical-data PR only after human approval.'
+      : candidateCount > 0
+        ? 'Review private candidates and source observations. Open a separate canonical-data PR only after human approval.'
+        : manifest.status === 'completed'
+          ? 'No canonical action required.'
+          : 'Review the failed health or canonical-guard finding before any further work.',
     ''
   ].join('\n');
 }
 
 function finalizeMonitoring(context, official) {
+  const review = official && context.includeReviewMaterial
+    ? buildReviewMaterial({ root, official, createdAt: context.startedAt })
+    : null;
   const after = captureCanonicalSnapshot(root);
   const canonicalGuard = compareCanonicalSnapshots(context.before, after);
   const status = context.health.status === 'ok' && canonicalGuard.ok ? 'completed' : 'failed';
   const outputFiles = context.mode === 'official-sources'
-    ? ['manifest.json', 'health.json', 'official-source-observations.json', 'monitoring-candidates.json', 'summary.md']
+    ? context.includeReviewMaterial
+      ? [
+          'manifest.json',
+          'health.json',
+          'official-source-observations.json',
+          'monitoring-candidates.json',
+          'review-material.json',
+          'evidence-drafts.json',
+          'review-report.md',
+          'pr-material.md',
+          'summary.md'
+        ]
+      : ['manifest.json', 'health.json', 'official-source-observations.json', 'monitoring-candidates.json', 'summary.md']
     : ['manifest.json', 'health.json', 'summary.md'];
   const monitors = [{ name: context.health.monitor, status: context.health.status, findings: context.health.findings.length }];
   if (official) monitors.push({ name: official.monitor, status: official.status, observations: official.observation_count, candidates: official.candidate_count, source_errors: official.source_errors });
+  if (review) monitors.push({
+    name: 'review-material-builder',
+    status: 'ok',
+    review_items: review.reviewMaterial.counts.review_items,
+    evidence_drafts: review.evidenceDraftReport.draft_count,
+    rejected_duplicates: review.reviewMaterial.counts.rejected_duplicates
+  });
 
   const manifest = {
     schema_version: '1.0',
@@ -128,6 +165,11 @@ function finalizeMonitoring(context, official) {
     observation_count: official?.observation_count ?? 0,
     candidate_count: official?.candidate_count ?? 0,
     source_errors: official?.source_errors ?? 0,
+    review_material_enabled: Boolean(review),
+    review_item_count: review?.reviewMaterial.counts.review_items ?? 0,
+    evidence_draft_count: review?.evidenceDraftReport.draft_count ?? 0,
+    rejected_duplicate_count: review?.reviewMaterial.counts.rejected_duplicates ?? 0,
+    unresolved_question_count: review?.reviewMaterial.counts.unresolved_questions ?? 0,
     canonical_guard: canonicalGuard,
     monitors,
     output_files: outputFiles
@@ -151,10 +193,16 @@ function finalizeMonitoring(context, official) {
       candidates: official.candidates
     });
   }
+  if (review) {
+    writeJson(path.join(context.runDirectory, 'review-material.json'), review.reviewMaterial);
+    writeJson(path.join(context.runDirectory, 'evidence-drafts.json'), review.evidenceDraftReport);
+    writeText(path.join(context.runDirectory, 'review-report.md'), review.reviewReport);
+    writeText(path.join(context.runDirectory, 'pr-material.md'), review.prMaterial);
+  }
   writeJson(path.join(context.runDirectory, 'manifest.json'), manifest);
-  writeText(path.join(context.runDirectory, 'summary.md'), summaryText(manifest, context.health, official));
+  writeText(path.join(context.runDirectory, 'summary.md'), summaryText(manifest, context.health, official, review));
 
-  const result = { run_directory: context.runDirectory, manifest, health: context.health, official };
+  const result = { run_directory: context.runDirectory, manifest, health: context.health, official, review };
   if (status !== 'completed') {
     const error = new Error(`Monitoring run failed: health=${context.health.status}, canonical_guard=${canonicalGuard.ok}`);
     error.result = result;
@@ -185,7 +233,10 @@ async function main() {
     canonical_guard: result.manifest.canonical_guard,
     observation_count: result.manifest.observation_count,
     candidate_count: result.manifest.candidate_count,
-    source_errors: result.manifest.source_errors
+    source_errors: result.manifest.source_errors,
+    review_item_count: result.manifest.review_item_count,
+    evidence_draft_count: result.manifest.evidence_draft_count,
+    rejected_duplicate_count: result.manifest.rejected_duplicate_count
   }, null, 2));
 }
 
