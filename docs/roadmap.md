@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #237
-Active: PR #238
-Next: PR #239
+Latest completed: PR #238
+Active: PR #239
+Next: PR #240
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -59,28 +59,31 @@ PR #234 monitoring baseline specification and pending source records
 PR #235 baseline-aware material-change detection
 PR #236 review-driven baseline update proposal flow
 PR #237 observation change classification and comparison traceability
+PR #238 versioned content normalization and noise suppression
 ```
 
-## PR #237 result
+## PR #238 result
 
 ```text
-Comparison states: new_source / unchanged / metadata_changed / content_changed / fetch_failed
-Metadata-only candidate count: 0
-Content-change candidate requires signal: true
-Candidate classification reason recorded: true
-Prior and observed digests recorded: true
-Aggregate count total equals observations: true
-Output file sets changed: false
+Normalization version: sog_official_source_normalization_v2
+Source-specific exceptions: 0
+HTML comments and script/style/template/svg noise suppressed: true
+Whitespace and equivalent Unicode noise suppressed: true
+JSON object-key order normalized: true
+JSON array order preserved: true
+Dates, quantities, percentages, identities, addresses, and lifecycle terms remain material: true
+Normalization version recorded in baseline, observations, candidates, comparisons, and private reports: true
+Raw or normalized response text stored: false
 Canonical action: none
 Production publication: false
 ```
 
-PR #237 separates byte, redirect, content-type, ETag, and Last-Modified differences from normalized-content changes. Metadata-only differences remain visible in private observation reports but cannot create a content-change candidate. Signal-bearing content candidates carry the classification reason, baseline provenance, metadata differences, and prior/current digests for review.
+PR #238 gives normalized digests an explicit version and suppresses only reviewed representation noise. It does not remove visible dates, numbers, reserve or redemption language, identities, addresses, or lifecycle statements. A future source-specific exception requires a new normalization version, positive and negative fixtures, and a reviewed baseline migration.
 
 Specifications:
 
-- `docs/quality/monitoring-change-detection-spec.md`
-- `docs/quality/monitoring-observation-classification-spec.md`
+- `docs/quality/monitoring-normalization-spec.md`
+- `docs/quality/monitoring-baseline-spec.md`
 - `docs/quality/monitoring-official-source-spec.md`
 
 ## Approved continuation sequence
