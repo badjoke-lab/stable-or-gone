@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #240
-Active: PR #241
-Next: PR #242
+Latest completed: PR #241
+Active: PR #242
+Next: PR #243
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -62,14 +62,13 @@ PR #237 observation change classification and comparison traceability
 PR #238 versioned content normalization and noise suppression
 PR #239 deterministic monitoring audit and safety closure
 PR #240 monitoring feasibility audit for all 92 assets
+PR #241 reserve and assurance source expansion
 ```
 
 ## Phase A closure
 
 ```text
-Enabled official sources: 4
-Accepted baselines: 0
-Pending baselines: 4
+Protected Phase A sources: 4
 Normalization version: sog_official_source_normalization_v2
 Workflow trigger: manual only
 Workflow repository permission: contents: read
@@ -81,7 +80,7 @@ Public monitoring output: false
 Production publication: false
 ```
 
-Phase A safety remains a permanent CI requirement. The monitoring workflow stays manual and read-only, all current baselines remain pending, and private observations or proposals cannot publish themselves.
+Phase A safety remains a permanent CI requirement. The original four source definitions remain protected while later Phase B sources may be added with matching pending baselines.
 
 Audit: `docs/quality/monitoring-phase-a-audit.md`
 
@@ -98,18 +97,30 @@ Public output: false
 Production publication: false
 ```
 
-PR #240 deterministically classifies every current stable asset as:
-
-```text
-automatically_monitorable
-partially_monitorable
-manual_review_only
-no_reliable_official_source
-```
-
-The classification is generated from checked-in Registry v2 stablecoin, relationship, organization, and evidence metadata. Detailed results remain private ignored staging output. The audit is not a quality score, risk score, or proof that a source is factually correct.
+PR #240 classifies every current stable asset as `automatically_monitorable`, `partially_monitorable`, `manual_review_only`, or `no_reliable_official_source` from checked-in Registry v2 metadata. Detailed output remains private staging material.
 
 Specification: `docs/quality/monitoring-feasibility-audit-spec.md`
+
+## PR #241 result
+
+```text
+Enabled official sources: 9
+Reserve and assurance sources added: 5
+Pending baselines: 9
+Accepted baselines: 0
+Stable assets changed: 0
+Canonical evidence created: 0
+Workflow permissions changed: false
+Public output: false
+Production publication: false
+```
+
+PR #241 adds reviewed official pages for FDUSD, RLUSD, GUSD, USDP, and USDG. Each configured URL, final host, content type, stablecoin target, organization target, canonical relationship, and visible reserve or assurance signal was reviewed before registration. All five new baselines remain `pending_initial_acceptance` with no committed response digest.
+
+Specifications and review record:
+
+- `docs/quality/monitoring-reserve-assurance-expansion-spec.md`
+- `scripts/monitoring/sources/reserve-assurance-source-review-pr241.json`
 
 ## Approved continuation sequence
 
@@ -150,7 +161,7 @@ PR #245 monitoring coverage report and validator
 
 Source-count growth alone is not completion. Every monitored source requires official ownership, an allowlisted HTTPS host, canonical target IDs, signal scope, a reviewable baseline state, version-compatible normalization, and no automatic canonical action.
 
-PR #241 must select reserve and assurance candidates from the PR #240 audit and verify each source's current ownership, URL, final redirect host, content type, target IDs, and visible signal scope before registration. Every new baseline must remain `pending_initial_acceptance`.
+PR #242 must add only currently reviewable official redemption, mint/burn, issuance, eligibility, fee, or terms pages. Every new source must receive a matching `pending_initial_acceptance` baseline and must not imply that direct redemption is available to every holder.
 
 ### Phase C — reviewed growth from 92 to 100
 
