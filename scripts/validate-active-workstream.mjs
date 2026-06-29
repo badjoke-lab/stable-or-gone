@@ -9,13 +9,26 @@ import './validate-deployment-canonicality-pr227.mjs';
 import './validate-deployment-source-status-pr229.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
-const overview = fs.readFileSync('docs/quality/monitoring-official-source-spec.md', 'utf8');
-const schema = fs.readFileSync('docs/quality/monitoring-official-source-schema.md', 'utf8');
-for (const phrase of ['Latest completed: PR #230', 'Active: PR #231', 'Next: PR #232', 'Gate V2-F: not passed']) {
+const reviewSpec = fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8');
+for (const phrase of [
+  'Latest completed: PR #232',
+  'Active: post-monitoring decision gate',
+  'Next: roadmap amendment required',
+  'Gate V2-F: not passed',
+  'Record growth: paused',
+  'Production publication: deferred'
+]) {
   if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
 }
-for (const phrase of ['status: needs_human_review', 'canonical_action: none', 'workflow_dispatch']) {
-  if (!overview.includes(phrase)) throw new Error(`official-source spec missing: ${phrase}`);
+for (const phrase of [
+  'observed_facts',
+  'inferences',
+  'unresolved_questions',
+  'rejected_duplicates',
+  'Human approval required',
+  'Automatic pull request: false',
+  'No production deployment required'
+]) {
+  if (!reviewSpec.includes(phrase)) throw new Error(`PR #232 review specification missing: ${phrase}`);
 }
-if (!schema.includes('signal_types')) throw new Error('official-source runtime schema is not fixed');
-console.log('Active workstream validation passed: PR #231 is active.');
+console.log('Active workstream validation passed: PR #232 is complete and the next workstream requires a roadmap amendment.');

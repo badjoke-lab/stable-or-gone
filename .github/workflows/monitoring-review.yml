@@ -38,6 +38,7 @@ jobs:
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           SOG_MONITORING_RUN_ID="$RUN_ID" \
           SOG_MONITORING_MODE="${{ inputs.mode }}" \
+          SOG_MONITORING_REVIEW_MATERIAL="${{ inputs.mode == 'official-sources' }}" \
           SOG_MONITORING_COMMIT="$GITHUB_SHA" \
           SOG_MONITORING_BRANCH="$GITHUB_REF_NAME" \
           npm run monitor:review
