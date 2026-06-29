@@ -11,6 +11,10 @@ import './validate-monitoring-observation-classification-pr237.mjs';
 import './validate-monitoring-normalization-pr238.mjs';
 import './validate-monitoring-phase-a-pr239.mjs';
 import './validate-monitoring-feasibility-pr240.mjs';
+import './validate-monitoring-reserve-assurance-pr241.mjs';
+import './validate-monitoring-redemption-terms-pr242.mjs';
+import './validate-monitoring-issuer-lifecycle-pr243.mjs';
+import './validate-monitoring-regulatory-boundary-pr244.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
@@ -52,4 +56,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log('PR #230 through PR #240 monitoring validation passed.');
+console.log('PR #230 through PR #244 monitoring validation passed.');
