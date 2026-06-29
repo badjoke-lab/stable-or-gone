@@ -152,5 +152,60 @@
     "affected_organization_ids": ["sog_issuer_gemini"],
     "signal_types": ["issuance_redemption_update"],
     "enabled": true
+  },
+  {
+    "source_id": "paxos-busd-minting-halt",
+    "display_name": "Paxos BUSD minting halt",
+    "url": "https://www.paxos.com/newsroom/paxos-will-halt-minting-new-busd-tokens",
+    "allowed_hosts": ["paxos.com", "www.paxos.com"],
+    "source_kind": "issuer_lifecycle_announcement",
+    "affected_stablecoin_ids": ["sog_st_busd"],
+    "affected_organization_ids": ["sog_issuer_paxos"],
+    "signal_types": ["lifecycle_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "sky-dai-usds-upgrade",
+    "display_name": "Sky DAI to USDS upgrade",
+    "url": "https://sky.money/",
+    "allowed_hosts": ["sky.money", "www.sky.money"],
+    "source_kind": "protocol_lifecycle_documentation",
+    "affected_stablecoin_ids": ["sog_st_dai"],
+    "affected_organization_ids": ["sog_issuer_makerdao_sky"],
+    "signal_types": ["lifecycle_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "acala-ausd-aseed-migration",
+    "display_name": "Acala aUSD to aSEED migration",
+    "url": "https://wiki.acala.network/acala-exodus-upgrade/ausd-seed-aseed",
+    "allowed_hosts": ["wiki.acala.network"],
+    "source_kind": "protocol_migration_documentation",
+    "affected_stablecoin_ids": ["sog_st_acalaausd"],
+    "affected_organization_ids": ["sog_issuer_acala"],
+    "signal_types": ["lifecycle_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "liquity-lusd-v1-continuity",
+    "display_name": "Liquity V1 and LUSD continuity",
+    "url": "https://docs.liquity.org/v2-faq/general",
+    "allowed_hosts": ["docs.liquity.org"],
+    "source_kind": "protocol_lifecycle_documentation",
+    "affected_stablecoin_ids": ["sog_st_lusd"],
+    "affected_organization_ids": ["sog_issuer_liquity"],
+    "signal_types": ["lifecycle_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "paxos-pax-usdp-rebrand",
+    "display_name": "Paxos Standard to Pax Dollar rebrand",
+    "url": "https://www.paxos.com/blog/the-digital-dollar-that-always-equals-a-dollar-paxos-standard-pax-is-now-pax-dollar-usdp",
+    "allowed_hosts": ["paxos.com", "www.paxos.com"],
+    "source_kind": "issuer_rebrand_announcement",
+    "affected_stablecoin_ids": ["sog_st_usdp"],
+    "affected_organization_ids": ["sog_issuer_paxos"],
+    "signal_types": ["lifecycle_update"],
+    "enabled": true
   }
 ]
