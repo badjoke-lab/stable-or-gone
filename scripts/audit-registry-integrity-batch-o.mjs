@@ -2,9 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
 
-// Integrity compares canonical groups against generated registry statistics.
-// Rebuild the statistics first so quality-only evidence/date changes cannot leave
-// the checked-in snapshot stale during CI or local validation.
 const regeneratedStats = buildRegistryStats();
 const statsPath = path.join(process.cwd(), 'data/generated/registry-stats.json');
 fs.mkdirSync(path.dirname(statsPath), { recursive: true });
@@ -13,15 +10,18 @@ fs.writeFileSync(statsPath, `${JSON.stringify(regeneratedStats, null, 2)}\n`);
 const basePath = new URL('./audit-registry-integrity.mjs', import.meta.url);
 const original = fs.readFileSync(basePath, 'utf8');
 const anchor = "const baseline = readJson('docs/migration/registry-v2-baseline.json');";
+const foundationAnchor = "const foundation = readJson('docs/migration/registry-v3-foundation.json');";
+const yieldAnchor = "const incomeManifest = readJson('docs/migration/registry-v3-income-profiles.json');";
 const currentJsonAnchor = "const currentJson = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';";
-if (!original.includes(anchor)) throw new Error('Registry integrity baseline patch anchor is missing');
-if (!original.includes(currentJsonAnchor)) throw new Error('Registry integrity JSON comparison patch anchor is missing');
+for (const [name, value] of Object.entries({ anchor, foundationAnchor, yieldAnchor, currentJsonAnchor })) {
+  if (!original.includes(value)) throw new Error(`Registry integrity patch anchor is missing: ${name}`);
+}
 const replacement = `
 const baselineBase = readJson('docs/migration/registry-v2-baseline.json');
 const baselineGroups = { ...baselineBase.data_groups };
 const minimumCounts = { ...baselineBase.minimum_counts };
 const suffixes = [];
-for (const suffix of ['o', 'p']) {
+for (const suffix of ['o', 'p', 'q']) {
   const overlay = readJson(\`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`);
   suffixes.push(\`batch_\${suffix}\`);
   Object.assign(minimumCounts, overlay.minimum_counts ?? {});
@@ -35,6 +35,22 @@ const baseline = {
   minimum_counts: minimumCounts,
   data_groups: baselineGroups
 };`;
+const foundationReplacement = `
+const foundationBase = readJson('docs/migration/registry-v3-foundation.json');
+const foundation = {
+  ...foundationBase,
+  data_groups: {
+    ...foundationBase.data_groups,
+    legal_profiles: [...new Set([...(foundationBase.data_groups.legal_profiles ?? []), 'data/q-legal.json'])],
+    reserve_components: [...new Set([...(foundationBase.data_groups.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json'])]
+  }
+};`;
+const yieldReplacement = `
+const incomeManifestBase = readJson('docs/migration/registry-v3-income-profiles.json');
+const incomeManifest = {
+  ...incomeManifestBase,
+  data_files: [...new Set([...(incomeManifestBase.data_files ?? []), 'data/yield-profiles-v3-q.json'])]
+};`;
 const semanticJsonReplacement = `const currentJsonRaw = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';
   let currentJson = currentJsonRaw;
   if (currentJsonRaw) {
@@ -46,9 +62,13 @@ const semanticJsonReplacement = `const currentJsonRaw = fs.existsSync(absolute(j
   }`;
 const patched = original
   .replace(anchor, replacement)
+  .replace(foundationAnchor, foundationReplacement)
+  .replace(yieldAnchor, yieldReplacement)
   .replace(currentJsonAnchor, semanticJsonReplacement)
-  .replaceAll('SOG 80-Record Final Registry Audit', 'SOG 92-Record Registry Audit')
-  .replaceAll('SOG 87-Record Registry Audit', 'SOG 92-Record Registry Audit')
-  .replaceAll('The 80-record canonical registry', 'The 92-record canonical registry')
-  .replaceAll('The 87-record canonical registry', 'The 92-record canonical registry');
+  .replaceAll('SOG 80-Record Final Registry Audit', 'SOG 94-Record Registry Audit')
+  .replaceAll('SOG 87-Record Registry Audit', 'SOG 94-Record Registry Audit')
+  .replaceAll('SOG 92-Record Registry Audit', 'SOG 94-Record Registry Audit')
+  .replaceAll('The 80-record canonical registry', 'The 94-record canonical registry')
+  .replaceAll('The 87-record canonical registry', 'The 94-record canonical registry')
+  .replaceAll('The 92-record canonical registry', 'The 94-record canonical registry');
 await import(`data:text/javascript;base64,${Buffer.from(patched).toString('base64')}`);
