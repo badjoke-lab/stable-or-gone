@@ -24,6 +24,7 @@ const priorIds = [
   'global-dollar-usdg-overview', 'paxos-pyusd-transparency',
   'paxos-usdp-transparency', 'ripple-rlusd-overview', 'tether-transparency'
 ];
+const requiredPr242Ids = [...priorIds, ...newIds];
 const nullFields = [
   'accepted_final_url', 'body_sha256', 'normalized_content_sha256',
   'content_type', 'etag', 'last_modified', 'accepted_observed_at',
@@ -47,12 +48,12 @@ const baselineById = new Map(baselineSet.baselines.map((row) => [row.source_id, 
 const reviewById = new Map(review.sources.map((row) => [row.source_id, row]));
 
 if (stablecoins.length !== 92) fail(`stablecoin count must remain 92, found ${stablecoins.length}`);
-if (sources.length !== 14 || baselineSet.baselines.length !== 14) fail('PR #242 requires 14 sources and 14 baselines');
-if (sourceById.size !== 14 || baselineById.size !== 14) fail('source or baseline IDs are duplicated');
+if (sources.length < 14 || baselineSet.baselines.length < 14) fail('PR #242 requires at least 14 sources and 14 baselines');
+if (sourceById.size !== sources.length || baselineById.size !== baselineSet.baselines.length) fail('source or baseline IDs are duplicated');
 if (JSON.stringify([...sourceById.keys()].sort()) !== JSON.stringify([...baselineById.keys()].sort())) fail('source and baseline IDs must match exactly');
 if (JSON.stringify([...reviewById.keys()].sort()) !== JSON.stringify(newIds)) fail('PR #242 review source set mismatch');
-for (const id of priorIds) {
-  if (!sourceById.has(id) || !baselineById.has(id)) fail(`${id}: prior source or baseline missing`);
+for (const id of requiredPr242Ids) {
+  if (!sourceById.has(id) || !baselineById.has(id)) fail(`${id}: PR #242 source or baseline missing`);
 }
 
 const canonicalIndex = { stablecoinIds, organizationIds, relationships };
@@ -105,4 +106,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('PR #242 redemption and terms expansion valid: five reviewed sources, pending baselines, and explicit eligibility boundaries.');
+console.log(`PR #242 redemption and terms invariants valid inside ${sources.length} total sources.`);
