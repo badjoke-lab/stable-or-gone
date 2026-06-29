@@ -8,32 +8,33 @@ const failures = [];
 const fail = (message) => failures.push(message);
 const sources = JSON.parse(fs.readFileSync('scripts/monitoring/sources/official-sources.json', 'utf8'));
 const baselineSet = JSON.parse(fs.readFileSync('scripts/monitoring/baselines/official-source-baselines.json', 'utf8'));
-const review = JSON.parse(fs.readFileSync('scripts/monitoring/sources/issuer-lifecycle-source-review-pr243.json', 'utf8'));
-const spec = fs.readFileSync('docs/quality/monitoring-issuer-lifecycle-expansion-spec.md', 'utf8');
+const review = JSON.parse(fs.readFileSync('scripts/monitoring/sources/regulatory-source-review-pr244.json', 'utf8'));
+const spec = fs.readFileSync('docs/quality/monitoring-regulatory-source-boundary-spec.md', 'utf8');
 const observer = fs.readFileSync('scripts/monitoring/monitors/official-source-observer.mjs', 'utf8');
 
 const newIds = [
-  'acala-ausd-aseed-migration',
-  'liquity-lusd-v1-continuity',
-  'paxos-busd-minting-halt',
-  'paxos-pax-usdp-rebrand',
-  'sky-dai-usds-upgrade'
+  'cftc-tether-2021-order',
+  'nydfs-gusd-product-approval',
+  'nydfs-pax-usdp-product-approval',
+  'nydfs-paxos-busd-notice',
+  'sec-terraform-ust-2023-charges'
 ];
 const priorIds = [
-  'circle-mint', 'circle-transparency', 'ethena-custodian-attestations',
-  'first-digital-fdusd-transparency', 'gemini-gusd-dollar',
-  'gemini-gusd-redemption-support', 'global-dollar-usdg-overview',
+  'acala-ausd-aseed-migration', 'circle-mint', 'circle-transparency',
+  'ethena-custodian-attestations', 'first-digital-fdusd-transparency',
+  'gemini-gusd-dollar', 'gemini-gusd-redemption-support',
+  'global-dollar-usdg-overview', 'liquity-lusd-v1-continuity',
+  'paxos-busd-minting-halt', 'paxos-pax-usdp-rebrand',
   'paxos-pyusd-transparency', 'paxos-stablecoin-terms',
-  'paxos-usdp-transparency', 'ripple-rlusd-overview', 'tether-fees',
-  'tether-redemption-guide', 'tether-transparency'
+  'paxos-usdp-transparency', 'ripple-rlusd-overview',
+  'sky-dai-usds-upgrade', 'tether-fees', 'tether-redemption-guide',
+  'tether-transparency'
 ];
-const requiredPr243Ids = [...priorIds, ...newIds];
-const lifecycleClasses = new Set([
-  'wind_down',
-  'optional_reversible_upgrade',
-  'migrated_same_identity',
-  'parallel_successor_no_migration',
-  'rebrand_same_identity'
+const regulatoryClasses = new Set([
+  'final_order_or_settlement',
+  'charges_or_complaint',
+  'consumer_notice_and_supervisory_action',
+  'product_authorization'
 ]);
 const nullFields = [
   'accepted_final_url', 'body_sha256', 'normalized_content_sha256',
@@ -58,11 +59,11 @@ const baselineById = new Map(baselineSet.baselines.map((row) => [row.source_id, 
 const reviewById = new Map(review.sources.map((row) => [row.source_id, row]));
 
 if (stablecoins.length !== 92) fail(`stablecoin count must remain 92, found ${stablecoins.length}`);
-if (sources.length < 19 || baselineSet.baselines.length < 19) fail('PR #243 requires at least 19 sources and 19 baselines');
-if (sourceById.size !== sources.length || baselineById.size !== baselineSet.baselines.length) fail('source or baseline IDs are duplicated');
+if (sources.length !== 24 || baselineSet.baselines.length !== 24) fail('PR #244 requires 24 sources and 24 baselines');
+if (sourceById.size !== 24 || baselineById.size !== 24) fail('source or baseline IDs are duplicated');
 if (JSON.stringify([...sourceById.keys()].sort()) !== JSON.stringify([...baselineById.keys()].sort())) fail('source and baseline IDs must match exactly');
-if (JSON.stringify([...reviewById.keys()].sort()) !== JSON.stringify(newIds)) fail('PR #243 review source set mismatch');
-for (const id of requiredPr243Ids) if (!sourceById.has(id) || !baselineById.has(id)) fail(`${id}: PR #243 source or baseline missing`);
+if (JSON.stringify([...reviewById.keys()].sort()) !== JSON.stringify(newIds)) fail('PR #244 review source set mismatch');
+for (const id of priorIds) if (!sourceById.has(id) || !baselineById.has(id)) fail(`${id}: prior source or baseline missing`);
 
 const canonicalIndex = { stablecoinIds, organizationIds, relationships };
 for (const message of validateOfficialSources(sources, canonicalIndex)) fail(message);
@@ -73,10 +74,11 @@ for (const id of newIds) {
   const baseline = baselineById.get(id);
   const reviewed = reviewById.get(id);
   if (!source || !baseline || !reviewed) continue;
-  if (JSON.stringify(source.signal_types) !== JSON.stringify(['lifecycle_update'])) fail(`${id}: lifecycle_update must be the only signal`);
-  if (!lifecycleClasses.has(reviewed.lifecycle_classification)) fail(`${id}: invalid lifecycle classification`);
+  if (JSON.stringify(source.signal_types) !== JSON.stringify(['regulatory_update'])) fail(`${id}: regulatory_update must be the only signal`);
+  if (!regulatoryClasses.has(reviewed.regulatory_classification)) fail(`${id}: invalid regulatory classification`);
+  if (!reviewed.authority?.trim() || !reviewed.jurisdiction?.trim()) fail(`${id}: authority and jurisdiction are required`);
   if (source.url !== reviewed.review_url || reviewed.decision !== 'approve_pending_baseline') fail(`${id}: review/config mismatch`);
-  if (!reviewed.visible_signal_terms?.length) fail(`${id}: visible lifecycle terms missing`);
+  if (!reviewed.visible_signal_terms?.length) fail(`${id}: visible regulatory terms missing`);
   const configured = new URL(source.url);
   const final = new URL(reviewed.final_url);
   if (configured.protocol !== 'https:' || final.protocol !== 'https:') fail(`${id}: HTTPS required`);
@@ -91,13 +93,23 @@ for (const id of newIds) {
   for (const field of nullFields) if (baseline[field] !== null) fail(`${id}: ${field} must be null`);
 }
 
+const duplicateUrls = new Map();
+for (const id of newIds) {
+  const url = sourceById.get(id)?.url;
+  if (!url) continue;
+  duplicateUrls.set(url, [...(duplicateUrls.get(url) ?? []), id]);
+}
+const duplicates = [...duplicateUrls.entries()].filter(([, ids]) => ids.length > 1);
+const expectedDuplicateIds = ['nydfs-gusd-product-approval', 'nydfs-pax-usdp-product-approval'];
+if (duplicates.length !== 1 || JSON.stringify(duplicates[0][1].sort()) !== JSON.stringify(expectedDuplicateIds)) fail('duplicate URL boundary mismatch');
+
 for (const key of [
-  'issuer_announcement_is_not_automatic_asset_status_change',
-  'optional_upgrade_is_not_discontinuation',
-  'parallel_successor_is_not_migration',
-  'proposal_is_not_implementation',
-  'rebrand_preserves_identity_unless_evidence_says_otherwise',
-  'documentation_is_not_fresh_execution_proof'
+  'charges_or_complaint_are_not_final_judgment',
+  'notice_is_not_always_final_order',
+  'product_authorization_is_not_safety_score',
+  'jurisdiction_scope_is_not_global_asset_status',
+  'issuer_enforcement_is_not_automatic_asset_failure',
+  'regulatory_source_does_not_override_canonical_review'
 ]) if (review.interpretation_boundary?.[key] !== true) fail(`interpretation boundary missing: ${key}`);
 
 for (const [key, expected] of Object.entries({
@@ -109,12 +121,12 @@ for (const [key, expected] of Object.entries({
   production_publication: false
 })) if (review.policy?.[key] !== expected) fail(`policy.${key} must be ${expected}`);
 
-for (const keyword of ['lifecycle_update', 'halt minting', 'here to stay', 'now be known as']) if (!observer.includes(keyword)) fail(`observer lifecycle keyword missing: ${keyword}`);
-for (const phrase of ['exactly five reviewed PR #243 sources are added', 'All fourteen sources present after PR #242 must remain enabled', 'No live response digest is committed in PR #243', 'No production deployment required']) if (!spec.includes(phrase)) fail(`spec missing: ${phrase}`);
+for (const keyword of ['regulatory_update', 'charges', 'approval', 'notice']) if (!observer.includes(keyword)) fail(`observer regulatory keyword missing: ${keyword}`);
+for (const phrase of ['exactly five reviewed PR #244 sources are added', 'total configured sources and baselines equal 24', 'All nineteen sources present after PR #243 must remain enabled', 'No live response digest is committed in PR #244', 'No production deployment required']) if (!spec.includes(phrase)) fail(`spec missing: ${phrase}`);
 
 if (failures.length) {
-  console.error('PR #243 issuer lifecycle validation failed:');
+  console.error('PR #244 regulatory monitoring boundary validation failed:');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`PR #243 issuer lifecycle invariants valid inside ${sources.length} total sources.`);
+console.log('PR #244 regulatory boundary valid: five official authority sources, twenty-four pending baselines, and no canonical authority.');

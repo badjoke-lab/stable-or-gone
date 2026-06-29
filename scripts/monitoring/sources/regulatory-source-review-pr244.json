@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_regulatory_source_review_pr244",
+  "reviewed_at": "2026-06-29T09:00:00.000Z",
+  "normalization_version": "sog_official_source_normalization_v2",
+  "scope": "regulatory_source_monitoring_boundary",
+  "sources": [
+    {
+      "source_id": "cftc-tether-2021-order",
+      "review_url": "https://www.cftc.gov/PressRoom/PressReleases/8450-21",
+      "final_url": "https://www.cftc.gov/PressRoom/PressReleases/8450-21",
+      "final_host": "www.cftc.gov",
+      "content_type": "text/html",
+      "authority": "U.S. Commodity Futures Trading Commission",
+      "jurisdiction": "United States",
+      "regulatory_classification": "final_order_or_settlement",
+      "affected_stablecoin_ids": ["sog_st_usdt"],
+      "affected_organization_ids": ["sog_issuer_tether"],
+      "visible_signal_terms": ["orders", "fines", "Tether", "misleading statements", "settlement"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "sec-terraform-ust-2023-charges",
+      "review_url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+      "final_url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+      "final_host": "www.sec.gov",
+      "content_type": "text/html",
+      "authority": "U.S. Securities and Exchange Commission",
+      "jurisdiction": "United States",
+      "regulatory_classification": "charges_or_complaint",
+      "affected_stablecoin_ids": ["sog_st_ust"],
+      "affected_organization_ids": ["sog_issuer_terraform_labs"],
+      "visible_signal_terms": ["charges", "Terraform Labs", "Terra USD", "complaint", "fraud"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "nydfs-paxos-busd-notice",
+      "review_url": "https://www.dfs.ny.gov/consumers/alerts/Paxos_and_Binance",
+      "final_url": "https://www.dfs.ny.gov/consumers/alerts/Paxos_and_Binance",
+      "final_host": "www.dfs.ny.gov",
+      "content_type": "text/html",
+      "authority": "New York State Department of Financial Services",
+      "jurisdiction": "New York, United States",
+      "regulatory_classification": "consumer_notice_and_supervisory_action",
+      "affected_stablecoin_ids": ["sog_st_busd"],
+      "affected_organization_ids": ["sog_issuer_paxos"],
+      "visible_signal_terms": ["notice", "Paxos-issued BUSD", "cease minting", "supervision", "restriction"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "nydfs-gusd-product-approval",
+      "review_url": "https://www.dfs.ny.gov/reports_and_publications/press_releases/pr1809101",
+      "final_url": "https://www.dfs.ny.gov/reports_and_publications/press_releases/pr1809101",
+      "final_host": "www.dfs.ny.gov",
+      "content_type": "text/html",
+      "authority": "New York State Department of Financial Services",
+      "jurisdiction": "New York, United States",
+      "regulatory_classification": "product_authorization",
+      "affected_stablecoin_ids": ["sog_st_gusd"],
+      "affected_organization_ids": ["sog_issuer_gemini"],
+      "visible_signal_terms": ["approval", "Gemini dollar", "authorized", "oversight", "requirements"],
+      "decision": "approve_pending_baseline"
+    },
+    {
+      "source_id": "nydfs-pax-usdp-product-approval",
+      "review_url": "https://www.dfs.ny.gov/reports_and_publications/press_releases/pr1809101",
+      "final_url": "https://www.dfs.ny.gov/reports_and_publications/press_releases/pr1809101",
+      "final_host": "www.dfs.ny.gov",
+      "content_type": "text/html",
+      "authority": "New York State Department of Financial Services",
+      "jurisdiction": "New York, United States",
+      "regulatory_classification": "product_authorization",
+      "affected_stablecoin_ids": ["sog_st_usdp"],
+      "affected_organization_ids": ["sog_issuer_paxos"],
+      "visible_signal_terms": ["approval", "Paxos Standard", "authorized", "oversight", "requirements"],
+      "decision": "approve_pending_baseline"
+    }
+  ],
+  "interpretation_boundary": {
+    "charges_or_complaint_are_not_final_judgment": true,
+    "notice_is_not_always_final_order": true,
+    "product_authorization_is_not_safety_score": true,
+    "jurisdiction_scope_is_not_global_asset_status": true,
+    "issuer_enforcement_is_not_automatic_asset_failure": true,
+    "regulatory_source_does_not_override_canonical_review": true
+  },
+  "policy": {
+    "raw_response_stored": false,
+    "baseline_status": "pending_initial_acceptance",
+    "canonical_action": "none",
+    "automatic_pull_request": false,
+    "public_output": false,
+    "production_publication": false
+  }
+}
