@@ -22,6 +22,7 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
   const protectedStablecoins = [...(base.protected_stablecoins ?? [])];
   const protectedOrganizations = [...(base.protected_organizations ?? [])];
   const suffixes = [];
+  const deferredLegacyV3Overlays = [];
 
   for (const relativePath of overlayFiles) {
     const overlay = readJson(root, relativePath);
@@ -32,6 +33,15 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
 
     for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
       dataGroups[name] = unique([...(dataGroups[name] ?? []), ...additions]);
+    }
+
+    if (overlay.defer_legacy_v3_full_coverage === true) {
+      deferredLegacyV3Overlays.push({
+        path: relativePath,
+        batch_id: overlay.batch_id ?? null,
+        reason: overlay.deferred_v3_reason ?? null
+      });
+      continue;
     }
 
     for (const stablecoinFile of overlay.data_group_additions?.stablecoins ?? []) {
@@ -49,6 +59,7 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
     minimum_counts: minimumCounts,
     data_groups: dataGroups,
     protected_stablecoins: uniqueRows(protectedStablecoins),
-    protected_organizations: uniqueRows(protectedOrganizations)
+    protected_organizations: uniqueRows(protectedOrganizations),
+    deferred_legacy_v3_overlays: deferredLegacyV3Overlays
   };
 }

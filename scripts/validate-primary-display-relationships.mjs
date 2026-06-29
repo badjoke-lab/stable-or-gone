@@ -35,9 +35,9 @@ const historicalEndDateNotRecorded = [];
 const assert = (condition, message) => { if (!condition) errors.push(message); };
 
 assert(fs.existsSync(auditPath), 'primary display relationship audit is missing');
-assert(stablecoins.length === 92, `expected 92 stablecoins, found ${stablecoins.length}`);
-assert(organizations.length === 86, `expected 86 organizations, found ${organizations.length}`);
-assert(relationships.length === 101, `expected 101 relationships, found ${relationships.length}`);
+assert(stablecoins.length === baseline.minimum_counts?.stablecoins, `expected ${baseline.minimum_counts?.stablecoins} stablecoins, found ${stablecoins.length}`);
+assert(organizations.length === baseline.minimum_counts?.organizations, `expected ${baseline.minimum_counts?.organizations} organizations, found ${organizations.length}`);
+assert(relationships.length === baseline.minimum_counts?.relationships, `expected ${baseline.minimum_counts?.relationships} relationships, found ${relationships.length}`);
 
 for (const relationship of relationships) {
   assert(typeof relationship.id === 'string' && relationship.id.length > 0, 'relationship id is missing');

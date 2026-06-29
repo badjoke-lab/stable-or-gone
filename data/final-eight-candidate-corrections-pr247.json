@@ -1,0 +1,14 @@
+[
+  {
+    "candidate_id":"sog_cand_000093",
+    "proposed_organization_id":"sog_issuer_inter_protocol",
+    "organization_name":"Inter Protocol",
+    "proposed_status":"discontinued",
+    "launch_date":"2022-10-27",
+    "launch_date_precision":"day",
+    "lifecycle_decision":"wind_down_after_protocol_sunset",
+    "event_plan":["mainnet_1_inter_protocol_launch","wind_down_plan","sunset_completion"],
+    "blocking_unknowns":["final_supply_and_residual_ibc_balances","final_reserve_liquidation","complete_contract_history"],
+    "notes":"Corrected during PR 247 after official 2025 sunset completion evidence was reviewed."
+  }
+]

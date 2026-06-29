@@ -28,8 +28,8 @@ const extensionById = new Map(extensions.map((row) => [row.id, row]));
 const categories = new Map(referenceComparisonCategories.map((item) => [item.value, item]));
 const records = [];
 
-check(stablecoins.length === 92, `expected 92 stablecoins, found ${stablecoins.length}`);
-check(classifications.length === 92, `expected 92 classifications, found ${classifications.length}`);
+check(stablecoins.length === baseline.minimum_counts.stablecoins, 'stablecoin count must match current baseline minimum');
+check(classifications.length === stablecoins.length, 'classification count must match stablecoin count');
 check(categories.size === referenceComparisonCategories.length, 'comparison category values must be unique');
 check(new Set(referenceComparisonCategories.map((item) => item.public_label)).size === referenceComparisonCategories.length, 'comparison labels must be unique');
 check(new Set(referenceComparisonCategories.map((item) => item.sort_order)).size === referenceComparisonCategories.length, 'comparison sort orders must be unique');

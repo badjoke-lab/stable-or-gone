@@ -1,0 +1,5 @@
+[
+{"id":"sog_issuer_inter_protocol","slug":"inter-protocol","name":"Inter Protocol","issuer_type":"protocol","jurisdiction":"Decentralized","related_stablecoins":["agoric-ist"],"official_url":"https://inter.trade/","summary":"Protocol associated with IST.","confidence":"high","last_verified_at":"2026-06-29","notes":"Batch Q."},
+{"id":"sog_org_agoric","slug":"agoric","name":"Agoric","issuer_type":"company","jurisdiction":"United States","related_stablecoins":["agoric-ist"],"official_url":"https://agoric.com/","summary":"Network organization associated with IST.","confidence":"high","last_verified_at":"2026-06-29","notes":"Batch Q support role."},
+{"id":"sog_issuer_decentral_bank","slug":"decentral-bank","name":"Decentral Bank","issuer_type":"protocol","jurisdiction":"NEAR ecosystem","related_stablecoins":["near-usn"],"official_url":"https://medium.com/@dcntrlbank","summary":"Protocol organization associated with USN.","confidence":"high","last_verified_at":"2026-06-29","notes":"Batch Q."}
+]
