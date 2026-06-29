@@ -16,14 +16,12 @@ const root = process.cwd();
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const readText = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
-
 function readRows(relativePath) {
   const value = JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
   if (Array.isArray(value)) return value;
   if (Array.isArray(value.records)) return value.records;
   throw new Error(`${relativePath}: expected an array or { records: [] }`);
 }
-
 function countBy(rows, getter) {
   const counts = new Map();
   for (const row of rows) {
@@ -53,8 +51,8 @@ const typedDetailFields = [
   'bridge_or_chain_incident_detail', 'termination_detail', 'launch_detail'
 ];
 
-check(events.length === 150, `expected 150 events, found ${events.length}`);
-check(eventDetails.length === 150, `expected 150 event detail records, found ${eventDetails.length}`);
+check(events.length === baseline.minimum_counts.events, 'event count must match current baseline minimum');
+check(eventDetails.length === events.length, 'event detail count must match event count');
 check(eventIds.size === events.length, 'event ids must be unique');
 check(detailIds.size === eventDetails.length, 'event detail ids must be unique');
 check([...eventIds].every((id) => detailIds.has(id)), 'every event must have an event detail record');
@@ -70,13 +68,8 @@ for (const list of [publicEventCategories, eventStatusEffectCategories, recovery
     check(Number.isInteger(entry.sort_order) && entry.sort_order > 0, `${entry.value}: sort order must be a positive integer`);
   }
 }
-
-for (const [subtype, category] of Object.entries(eventTypeCategoryMap)) {
-  check(categoryValues.has(category), `${subtype}: unknown public event category ${category}`);
-}
-for (const [rawValue, category] of Object.entries(eventStatusEffectCategoryMap)) {
-  check(statusCategoryValues.has(category), `${rawValue}: unknown status-effect category ${category}`);
-}
+for (const [subtype, category] of Object.entries(eventTypeCategoryMap)) check(categoryValues.has(category), `${subtype}: unknown public event category ${category}`);
+for (const [rawValue, category] of Object.entries(eventStatusEffectCategoryMap)) check(statusCategoryValues.has(category), `${rawValue}: unknown status-effect category ${category}`);
 
 const records = events.map((event) => {
   const detail = detailById.get(event.id) ?? {};
@@ -85,7 +78,6 @@ const records = events.map((event) => {
   const statusCategory = getEventStatusEffectCategory(merged.event_status_effect);
   const recoveryCategory = getRecoveryCategory(merged);
   const presentTypedDetails = typedDetailFields.filter((field) => merged[field] !== null && merged[field] !== undefined);
-
   check(typeof merged.event_type === 'string' && merged.event_type.length > 0, `${merged.id}: event type is missing`);
   check(Boolean(eventTypeCategoryMap[merged.event_type]), `${merged.id}: unmapped event subtype ${merged.event_type}`);
   check(categoryValues.has(publicCategory), `${merged.id}: invalid public event category ${publicCategory}`);
@@ -94,7 +86,6 @@ const records = events.map((event) => {
   check(statusCategory !== 'unknown', `${merged.id}: unmapped status effect ${merged.event_status_effect}`);
   check(recoveryValues.has(recoveryCategory), `${merged.id}: invalid recovery category ${recoveryCategory}`);
   check(typeof merged.impact_level === 'string' && merged.impact_level.length > 0, `${merged.id}: impact level is missing`);
-
   return {
     id: merged.id,
     event_type: merged.event_type,
@@ -113,11 +104,12 @@ const categoryCounts = countBy(records, (row) => row.public_event_category);
 const statusEffectCounts = countBy(records, (row) => row.public_status_effect_category);
 const recoveryCounts = countBy(records, (row) => row.recovery_category);
 const typedCoverageCounts = countBy(records, (row) => row.typed_detail_coverage);
-check(Object.values(categoryCounts).reduce((sum, value) => sum + value, 0) === 150, 'public event category counts must total 150');
+const descriptiveOnlyBaseline = 30;
+check(Object.values(categoryCounts).reduce((sum, value) => sum + value, 0) === events.length, 'public event category counts must total current event count');
 check((categoryCounts.other ?? 0) === 0, `current canonical events must not fall into other; found ${categoryCounts.other ?? 0}`);
 check(statusEffectCounts.unknown === undefined, 'current canonical status effects must not remain unknown');
-check(typedCoverageCounts.structured === 120, `expected 120 structured event details, found ${typedCoverageCounts.structured ?? 0}`);
-check(typedCoverageCounts.description_and_sources_only === 30, `expected 30 descriptive-only event details, found ${typedCoverageCounts.description_and_sources_only ?? 0}`);
+check(typedCoverageCounts.structured === events.length - descriptiveOnlyBaseline, `expected ${events.length - descriptiveOnlyBaseline} structured event details, found ${typedCoverageCounts.structured ?? 0}`);
+check(typedCoverageCounts.description_and_sources_only === descriptiveOnlyBaseline, `expected ${descriptiveOnlyBaseline} descriptive-only event details, found ${typedCoverageCounts.description_and_sources_only ?? 0}`);
 
 const indexSource = readText('src/pages/events/index.astro');
 check(indexSource.includes('getPublicEventCategoryFilterOptions'), 'event index must use approved public category options');
@@ -130,9 +122,7 @@ const detailPageSource = readText('src/pages/event/[id].astro');
 const detailRowsSource = readText('src/components/EventValueStateRows.astro');
 const structuredDetailSource = readText('src/components/StructuredEventDetail.astro');
 const detailSource = [detailPageSource, detailRowsSource, structuredDetailSource].join('\n');
-for (const heading of ['Public event category', 'Canonical event subtype', 'Structured detail kind', 'Effect on stablecoin lifecycle', 'Recovery or reversal']) {
-  check(detailSource.includes(`<th>${heading}</th>`), `event detail heading is missing: ${heading}`);
-}
+for (const heading of ['Public event category', 'Canonical event subtype', 'Structured detail kind', 'Effect on stablecoin lifecycle', 'Recovery or reversal']) check(detailSource.includes(`<th>${heading}</th>`), `event detail heading is missing: ${heading}`);
 check(detailPageSource.includes('resolveEventTaxonomy'), 'event detail must resolve normalized taxonomy');
 check(detailPageSource.includes('EventValueStateRows'), 'event detail must use the value-state summary rows component');
 check(detailPageSource.includes('StructuredEventDetail'), 'event detail must use the structured detail component');
@@ -142,55 +132,30 @@ check(detailRowsSource.includes('Description and source record only'), 'descript
 
 const stablecoinTimelineSource = readText('src/components/StablecoinEventTimeline.astro');
 check(stablecoinTimelineSource.includes('resolveEventTaxonomy'), 'stablecoin timeline must resolve normalized taxonomy');
-for (const heading of ['Category', 'Subtype', 'Status effect', 'Recovery']) {
-  check(stablecoinTimelineSource.includes(`<th>${heading}</th>`), `stablecoin timeline heading is missing: ${heading}`);
-}
+for (const heading of ['Category', 'Subtype', 'Status effect', 'Recovery']) check(stablecoinTimelineSource.includes(`<th>${heading}</th>`), `stablecoin timeline heading is missing: ${heading}`);
 const stablecoinDetailSource = readText('src/components/StablecoinDetailView.astro');
 check(stablecoinDetailSource.includes('<StablecoinEventTimeline events={events} />'), 'stablecoin detail must use the normalized event timeline component');
 check(!stablecoinDetailSource.includes('<th>Type</th><th>Detail kind</th><th>Recovered</th>'), 'legacy stablecoin event timeline remains inline');
 
 const organizationSource = readText('src/pages/issuer/[slug].astro');
 check(organizationSource.includes('resolveEventTaxonomy'), 'organization event table must resolve normalized taxonomy');
-for (const heading of ['Category', 'Subtype', 'Status effect']) {
-  check(organizationSource.includes(`<th>${heading}</th>`), `organization event heading is missing: ${heading}`);
-}
-
+for (const heading of ['Category', 'Subtype', 'Status effect']) check(organizationSource.includes(`<th>${heading}</th>`), `organization event heading is missing: ${heading}`);
 const machineSource = readText('src/lib/machine-readable.ts');
-for (const key of ['public_event_category', 'canonical_event_subtype', 'event_detail_kind', 'event_status_effect_category', 'event_recovery_category']) {
-  check(machineSource.includes(`${key}: countValues`), `machine-readable event breakdown is missing: ${key}`);
-}
+for (const key of ['public_event_category', 'canonical_event_subtype', 'event_detail_kind', 'event_status_effect_category', 'event_recovery_category']) check(machineSource.includes(`${key}: countValues`), `machine-readable event breakdown is missing: ${key}`);
 check(!machineSource.includes('event_type: countValues'), 'machine-readable public breakdown must not use raw event type as its unnamed category axis');
-
 const statsSource = readText('scripts/generate-registry-stats.mjs');
-for (const key of ['public_event_categories:', 'canonical_event_subtypes:', 'event_detail_kinds:', 'event_status_effect_categories:', 'event_recovery_categories:', 'event_impact_levels:']) {
-  check(statsSource.includes(key), `registry stats event axis is missing: ${key}`);
-}
+for (const key of ['public_event_categories:', 'canonical_event_subtypes:', 'event_detail_kinds:', 'event_status_effect_categories:', 'event_recovery_categories:', 'event_impact_levels:']) check(statsSource.includes(key), `registry stats event axis is missing: ${key}`);
 
 const report = {
-  schema_version: '1.0',
-  checked_at: new Date().toISOString(),
-  events: events.length,
-  event_details: eventDetails.length,
-  public_categories: publicEventCategories.length,
-  public_event_category_counts: categoryCounts,
-  canonical_event_subtype_counts: countBy(records, (row) => row.event_type),
-  event_detail_kind_counts: countBy(records, (row) => row.event_detail_kind),
-  public_status_effect_category_counts: statusEffectCounts,
-  recovery_category_counts: recoveryCounts,
-  impact_level_counts: countBy(records, (row) => row.impact_level),
-  typed_detail_coverage_counts: typedCoverageCounts,
-  records,
-  failures
+  schema_version: '1.0', checked_at: new Date().toISOString(), events: events.length, event_details: eventDetails.length,
+  public_categories: publicEventCategories.length, public_event_category_counts: categoryCounts,
+  canonical_event_subtype_counts: countBy(records, (row) => row.event_type), event_detail_kind_counts: countBy(records, (row) => row.event_detail_kind),
+  public_status_effect_category_counts: statusEffectCounts, recovery_category_counts: recoveryCounts,
+  impact_level_counts: countBy(records, (row) => row.impact_level), typed_detail_coverage_counts: typedCoverageCounts,
+  records, failures
 };
-
 const reportPath = path.join(root, 'data/generated/event-taxonomy-validation.json');
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
-
-if (failures.length > 0) {
-  console.error('Event taxonomy normalization failed:');
-  for (const failure of failures) console.error(`- ${failure}`);
-  process.exit(1);
-}
-
+if (failures.length > 0) { console.error('Event taxonomy normalization failed:'); for (const failure of failures) console.error(`- ${failure}`); process.exit(1); }
 console.log(JSON.stringify({ ...report, ok: true, records: undefined }, null, 2));
