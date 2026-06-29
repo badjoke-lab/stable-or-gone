@@ -26,6 +26,7 @@ const originalSourceIds = [
   'paxos-pyusd-transparency',
   'tether-transparency'
 ];
+const requiredPr241Ids = [...originalSourceIds, ...expectedNewSourceIds];
 const allowedSignalTypes = new Set(['reserve_update', 'assurance_update', 'backing_attestation_update']);
 const acceptedFields = [
   'accepted_final_url',
@@ -57,8 +58,8 @@ const organizationIds = new Set(organizations.map((row) => row.id));
 const relationshipPairs = new Set(relationships.map((row) => `${row.stablecoin_id}|${row.organization_id}`));
 
 if (stablecoins.length !== 92) fail(`stablecoin count must remain 92, found ${stablecoins.length}`);
-if (!Array.isArray(sources) || sources.length !== 9) fail(`expected 9 enabled sources after PR #241, found ${sources.length}`);
-if (!Array.isArray(baselineSet.baselines) || baselineSet.baselines.length !== 9) fail(`expected 9 baselines after PR #241, found ${baselineSet.baselines?.length}`);
+if (!Array.isArray(sources) || sources.length < 9) fail(`PR #241 requires at least 9 enabled sources, found ${sources.length}`);
+if (!Array.isArray(baselineSet.baselines) || baselineSet.baselines.length < 9) fail(`PR #241 requires at least 9 baselines, found ${baselineSet.baselines?.length}`);
 if (review.schema_version !== '1.0') fail('review schema_version must be 1.0');
 if (review.review_id !== 'sog_reserve_assurance_source_review_pr241') fail('review_id mismatch');
 if (review.normalization_version !== baselineSet.normalization_version) fail('review normalization version must match baseline set');
@@ -87,16 +88,12 @@ if (JSON.stringify([...sourceById.keys()].sort()) !== JSON.stringify([...baselin
 if (JSON.stringify([...reviewById.keys()].sort()) !== JSON.stringify(expectedNewSourceIds)) {
   fail(`reviewed new source IDs mismatch: ${[...reviewById.keys()].sort().join(', ')}`);
 }
-for (const sourceId of originalSourceIds) {
-  if (!sourceById.has(sourceId)) fail(`${sourceId}: original Phase A source missing`);
-  if (!baselineById.has(sourceId)) fail(`${sourceId}: original Phase A baseline missing`);
+for (const sourceId of requiredPr241Ids) {
+  if (!sourceById.has(sourceId)) fail(`${sourceId}: PR #241 source missing`);
+  if (!baselineById.has(sourceId)) fail(`${sourceId}: PR #241 baseline missing`);
 }
 
-const canonicalIndex = {
-  stablecoinIds,
-  organizationIds,
-  relationships
-};
+const canonicalIndex = { stablecoinIds, organizationIds, relationships };
 for (const message of validateOfficialSources(sources, canonicalIndex)) fail(`official source validator: ${message}`);
 for (const message of validateOfficialSourceBaselines(baselineSet, sources)) fail(`baseline validator: ${message}`);
 
@@ -182,4 +179,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('PR #241 reserve and assurance expansion valid: five reviewed sources added with pending baselines, canonical relationships, and no publication authority.');
+console.log(`PR #241 reserve and assurance invariants valid inside ${sources.length} total sources.`);

@@ -8,6 +8,7 @@ import './validate-deployment-canonicality-pr226.mjs';
 import './validate-deployment-canonicality-pr227.mjs';
 import './validate-deployment-source-status-pr229.mjs';
 import './validate-monitoring-reserve-assurance-pr241.mjs';
+import './validate-monitoring-redemption-terms-pr242.mjs';
 
 const documents = {
   roadmap: fs.readFileSync('docs/roadmap.md', 'utf8'),
@@ -22,25 +23,26 @@ const documents = {
   normalization: fs.readFileSync('docs/quality/monitoring-normalization-spec.md', 'utf8'),
   phaseAAudit: fs.readFileSync('docs/quality/monitoring-phase-a-audit.md', 'utf8'),
   feasibility: fs.readFileSync('docs/quality/monitoring-feasibility-audit-spec.md', 'utf8'),
-  reserveAssurance: fs.readFileSync('docs/quality/monitoring-reserve-assurance-expansion-spec.md', 'utf8')
+  reserveAssurance: fs.readFileSync('docs/quality/monitoring-reserve-assurance-expansion-spec.md', 'utf8'),
+  redemptionTerms: fs.readFileSync('docs/quality/monitoring-redemption-terms-expansion-spec.md', 'utf8')
 };
 
 const required = {
   roadmap: [
-    'Latest completed: PR #241',
-    'Active: PR #242',
-    'Next: PR #243',
+    'Latest completed: PR #242',
+    'Active: PR #243',
+    'Next: PR #244',
     'Stable assets: 92',
     'Gate V2-F: not passed',
     'Record growth: authorized after PR #246 candidate audit',
     'Production publication: deferred',
-    'PR #240 monitoring feasibility audit for all 92 assets',
     'PR #241 reserve and assurance source expansion',
-    'Enabled official sources: 9',
-    'Reserve and assurance sources added: 5',
-    'Pending baselines: 9',
-    'Accepted baselines: 0',
     'PR #242 redemption and terms source expansion',
+    'Enabled official sources: 14',
+    'Redemption and terms sources added: 5',
+    'Pending baselines: 14',
+    'Accepted baselines: 0',
+    'PR #243 issuer, migration, and shutdown source expansion',
     'PR #263 non-UI release-candidate material'
   ],
   program: [
@@ -124,6 +126,14 @@ const required = {
     'No live response digest is committed in PR #241',
     'The four Phase A sources remain unchanged',
     'No production deployment required'
+  ],
+  redemptionTerms: [
+    'expands review-only monitoring for issuer redemption',
+    'exactly five reviewed PR #242 sources are added',
+    'secondary_market_sale_is_not_issuer_redemption: true',
+    'No live response digest is committed in PR #242',
+    'All nine sources present after PR #241 must remain enabled',
+    'No production deployment required'
   ]
 };
 
@@ -133,4 +143,4 @@ for (const [documentName, phrases] of Object.entries(required)) {
   }
 }
 
-console.log('Active workstream validation passed: PR #241 is complete and PR #242 redemption and terms expansion is active.');
+console.log('Active workstream validation passed: PR #242 is complete and PR #243 issuer lifecycle expansion is active.');

@@ -97,5 +97,60 @@
     "affected_organization_ids": ["sog_issuer_global_dollar_network"],
     "signal_types": ["reserve_update", "assurance_update"],
     "enabled": true
+  },
+  {
+    "source_id": "tether-redemption-guide",
+    "display_name": "Tether fiat redemption guide",
+    "url": "https://tether.to/en/redeem-tethers-to-fiat-currency/",
+    "allowed_hosts": ["tether.to", "www.tether.to"],
+    "source_kind": "issuer_redemption_guide",
+    "affected_stablecoin_ids": ["sog_st_usdt"],
+    "affected_organization_ids": ["sog_issuer_tether"],
+    "signal_types": ["issuance_redemption_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "tether-fees",
+    "display_name": "Tether fees and minimums",
+    "url": "https://tether.to/en/fees/",
+    "allowed_hosts": ["tether.to", "www.tether.to"],
+    "source_kind": "issuer_terms",
+    "affected_stablecoin_ids": ["sog_st_usdt"],
+    "affected_organization_ids": ["sog_issuer_tether"],
+    "signal_types": ["issuance_redemption_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "circle-mint",
+    "display_name": "Circle Mint",
+    "url": "https://www.circle.com/circle-mint",
+    "allowed_hosts": ["circle.com", "www.circle.com"],
+    "source_kind": "issuer_mint_redemption",
+    "affected_stablecoin_ids": ["sog_st_usdc", "sog_st_eurc"],
+    "affected_organization_ids": ["sog_issuer_circle"],
+    "signal_types": ["issuance_redemption_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "paxos-stablecoin-terms",
+    "display_name": "Paxos stablecoin terms",
+    "url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+    "allowed_hosts": ["paxos.com", "www.paxos.com"],
+    "source_kind": "issuer_terms",
+    "affected_stablecoin_ids": ["sog_st_usdp", "sog_st_pyusd", "sog_st_busd"],
+    "affected_organization_ids": ["sog_issuer_paxos"],
+    "signal_types": ["issuance_redemption_update"],
+    "enabled": true
+  },
+  {
+    "source_id": "gemini-gusd-redemption-support",
+    "display_name": "Gemini GUSD redemption support",
+    "url": "https://support.gemini.com/hc/en-gb/articles/360001352466-How-do-I-buy-or-sell-my-Gemini-dollar-GUSD",
+    "allowed_hosts": ["support.gemini.com"],
+    "source_kind": "issuer_support",
+    "affected_stablecoin_ids": ["sog_st_gusd"],
+    "affected_organization_ids": ["sog_issuer_gemini"],
+    "signal_types": ["issuance_redemption_update"],
+    "enabled": true
   }
 ]
