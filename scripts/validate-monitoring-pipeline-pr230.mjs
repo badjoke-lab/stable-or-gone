@@ -5,6 +5,7 @@ import { runMonitoring } from './monitoring/run.mjs';
 import './validate-monitoring-pipeline-pr231.mjs';
 import './validate-monitoring-pipeline-pr232.mjs';
 import './validate-monitoring-baseline-pr234.mjs';
+import './validate-monitoring-change-detection-pr235.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
@@ -46,4 +47,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log('PR #230 through PR #234 monitoring validation passed.');
+console.log('PR #230 through PR #235 monitoring validation passed.');

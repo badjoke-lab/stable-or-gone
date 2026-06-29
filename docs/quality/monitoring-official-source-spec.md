@@ -2,13 +2,23 @@
 
 Status: canonical specification  
 Updated: 2026-06-29  
-Roadmap item: PR #231
+Roadmap items: PR #231, amended by PR #235
 
 ## Purpose
 
-PR #231 extends the review-only monitoring skeleton with allowlisted official-source observation and private candidate generation. Observations and candidates are research inputs, not canonical facts or public classifications.
+PR #231 introduced allowlisted official-source observation and private candidate generation. PR #235 makes candidate generation baseline-aware so recurring standing language does not produce a candidate on every run.
 
-This specification supplements `docs/quality/monitoring-pipeline-spec.md` and does not weaken its canonical guard, private-output rule, manual trigger, or publication prohibition.
+Observations, comparison states, and candidates are research inputs, not canonical facts or public classifications.
+
+This specification supplements:
+
+```text
+docs/quality/monitoring-pipeline-spec.md
+docs/quality/monitoring-baseline-spec.md
+docs/quality/monitoring-change-detection-spec.md
+```
+
+It does not weaken the canonical guard, private-output rule, manual trigger, baseline approval boundary, or publication prohibition.
 
 ## Trigger and permissions
 
@@ -19,16 +29,16 @@ workflow_dispatch
 contents: read
 ```
 
-PR #231 does not add a schedule, push trigger, pull-request trigger, write permission, automatic commit, automatic pull request, or production action.
+The workflow has no schedule, push trigger, pull-request trigger, write permission, automatic commit, automatic pull request, baseline mutation, or production action.
 
 ## Modes
 
 ```text
 health-only
-  PR #230 repository-health run without external network access.
+  Repository-health run without external network access.
 
 official-sources
-  Allowlisted HTTPS observation followed by private candidate generation.
+  Allowlisted HTTPS observation, accepted-baseline comparison, and private candidate generation.
 ```
 
 ## Allowlist
@@ -49,7 +59,7 @@ allowed_hosts
 source_kind
 affected_stablecoin_ids
 affected_organization_ids
-signal_rules
+signal_types
 enabled
 ```
 
@@ -60,12 +70,29 @@ Rules:
 - Redirects outside the allowlist fail that observation.
 - Source IDs must be unique.
 - Every affected stablecoin and organization ID must already exist in the canonical registry.
-- The allowlist must contain only issuer-, protocol-, or project-controlled pages.
+- The allowlist must contain only issuer-, protocol-, or project-controlled pages under the current PR #231 scope.
 - API keys, cookies, authenticated pages, social-login pages, and scraping bypasses are prohibited.
+
+## Baseline input
+
+Accepted comparison points are defined in:
+
+```text
+scripts/monitoring/baselines/official-source-baselines.json
+```
+
+Each enabled source requires one baseline record. A baseline may be:
+
+```text
+pending_initial_acceptance
+accepted
+```
+
+A monitoring execution may read a baseline but may not update or accept it. Baseline changes require a separate human-reviewed repository pull request.
 
 ## Initial sources
 
-The first allowlist is deliberately small:
+The initial allowlist remains deliberately small:
 
 ```text
 Tether transparency
@@ -93,13 +120,40 @@ content_type
 etag
 last_modified
 body_sha256
+normalized_content_sha256
 body_bytes
 matched_signal_types
 matched_keywords
+baseline_comparison
 error
 ```
 
-Raw response bodies are not stored. Only response metadata, the body digest, and matched allowlisted keywords are retained.
+`baseline_comparison` contains:
+
+```text
+state
+baseline_status
+baseline_body_sha256
+baseline_normalized_content_sha256
+observed_body_sha256
+observed_normalized_content_sha256
+exact_body_changed
+normalized_content_changed
+accepted_observed_at
+accepted_repository_commit
+accepted_review_reference
+```
+
+Allowed comparison states under PR #235:
+
+```text
+new_source
+unchanged
+content_changed
+fetch_failed
+```
+
+Raw response bodies and normalized page text are not stored. Only response metadata, digests, matched allowlisted keywords, and comparison metadata are retained.
 
 Fetch limits:
 
@@ -109,13 +163,21 @@ maximum response body: 2 MiB
 user agent: Stable-or-Gone-Review-Monitor/1.0
 ```
 
-A source outage or HTTP failure produces an error observation. It does not create a candidate and does not alter canonical data.
+A source outage, rejected redirect, size failure, or HTTP failure produces a `fetch_failed` observation. It does not create a content-change candidate and does not alter canonical data.
 
 ## Candidate contract
 
-`monitoring-candidates.json` contains private candidates only when a successful observation matches at least one configured signal rule.
+`monitoring-candidates.json` contains private candidates only when all conditions are true:
 
-Required fields:
+```text
+fetch_status == ok
+matched_signal_types is not empty
+baseline_comparison.state is new_source or content_changed
+```
+
+An accepted source with identical normalized content is `unchanged` and creates zero candidates, even when standing page text contains configured keywords.
+
+Required candidate fields:
 
 ```text
 candidate_id
@@ -124,6 +186,8 @@ created_at
 observation_id
 source_id
 source_url
+change_state
+baseline_comparison
 affected_stablecoin_ids
 affected_organization_ids
 signal_types
@@ -139,6 +203,8 @@ Fixed values:
 status: needs_human_review
 canonical_action: none
 ```
+
+`change_state` is `new_source` or `content_changed`. Neither state proves that a stablecoin fact changed.
 
 ### Duplicate review
 
@@ -162,11 +228,11 @@ canonical_relationships_found
 no_canonical_relationship_found
 ```
 
-Neither state approves a lifecycle, issuer, reserve, regulatory, or deployment change.
+Neither duplicate nor lineage state approves a lifecycle, issuer, reserve, regulatory, or deployment change.
 
 ## Output contract
 
-An `official-sources` run writes exactly:
+A review-disabled `official-sources` run writes exactly:
 
 ```text
 data-staging/monitoring/<run_id>/
@@ -177,13 +243,19 @@ data-staging/monitoring/<run_id>/
   summary.md
 ```
 
-The manifest records:
+A review-enabled run retains the nine-file PR #232 contract.
+
+The manifest and official-source reports record:
 
 ```text
-external_network_used: true
+baseline_set_id
 observation_count
 candidate_count
 source_errors
+change_counts.unchanged
+change_counts.content_changed
+change_counts.new_source
+change_counts.fetch_failed
 canonical_guard
 ```
 
@@ -191,22 +263,26 @@ The canonical before/after path set and SHA-256 digest must remain identical.
 
 ## Test rule
 
-Repository validation must not depend on live network availability. PR #231 validation uses an injected fixture fetch implementation and a fixture source set to verify:
+Repository validation must not depend on live network availability. Injected fixture fetch implementations verify:
 
-- allowlist validation;
+- allowlist and baseline validation;
 - body-size and redirect-host enforcement;
 - deterministic observation and candidate IDs;
+- pending baseline behavior;
+- identical accepted-baseline behavior with zero candidates;
+- material fixture change behavior;
+- fetch-failure behavior;
 - target duplicate review;
 - relationship lineage review;
 - zero canonical changes;
-- no raw body retention;
-- exact five-file output.
+- no raw or normalized body retention;
+- exact five-file and nine-file output contracts.
 
 Live official-source access occurs only in the manually dispatched workflow.
 
 ## Public-output rule
 
-Observations and candidates remain excluded from public pages, public JSON, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, sitemap output, and canonical counts.
+Observations, baselines, comparisons, and candidates remain excluded from public pages, public JSON, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, sitemap output, and canonical counts.
 
 ## Deployment classification
 

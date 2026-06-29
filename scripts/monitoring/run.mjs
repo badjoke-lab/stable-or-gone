@@ -60,6 +60,7 @@ function buildContext(options) {
 function summaryText(manifest, health, official, review) {
   const guard = manifest.canonical_guard;
   const candidateCount = official?.candidate_count ?? 0;
+  const changeCounts = official?.change_counts ?? { unchanged: 0, content_changed: 0, new_source: 0, fetch_failed: 0 };
   return [
     '# SOG Review-only Monitoring',
     '',
@@ -87,12 +88,18 @@ function summaryText(manifest, health, official, review) {
     '',
     '## Official-source observations',
     '',
+    `- Baseline set: \`${official?.baseline_set_id ?? 'none'}\``,
     `- Observations: ${official?.observation_count ?? 0}`,
+    `- Unchanged: ${changeCounts.unchanged}`,
+    `- Content changed: ${changeCounts.content_changed}`,
+    `- New source: ${changeCounts.new_source}`,
+    `- Fetch failed: ${changeCounts.fetch_failed}`,
     `- Source errors: ${official?.source_errors ?? 0}`,
     '',
     '## Candidate output',
     '',
     `- Candidates: ${candidateCount}`,
+    '- Unchanged sources create candidates: false',
     '- Candidate status: needs_human_review',
     '- Canonical action: none',
     '- Public or canonical writes: 0',
@@ -144,7 +151,15 @@ function finalizeMonitoring(context, official) {
       : ['manifest.json', 'health.json', 'official-source-observations.json', 'monitoring-candidates.json', 'summary.md']
     : ['manifest.json', 'health.json', 'summary.md'];
   const monitors = [{ name: context.health.monitor, status: context.health.status, findings: context.health.findings.length }];
-  if (official) monitors.push({ name: official.monitor, status: official.status, observations: official.observation_count, candidates: official.candidate_count, source_errors: official.source_errors });
+  if (official) monitors.push({
+    name: official.monitor,
+    status: official.status,
+    baseline_set_id: official.baseline_set_id,
+    observations: official.observation_count,
+    candidates: official.candidate_count,
+    source_errors: official.source_errors,
+    change_counts: official.change_counts
+  });
   if (review) monitors.push({
     name: 'review-material-builder',
     status: 'ok',
@@ -163,9 +178,11 @@ function finalizeMonitoring(context, official) {
     source_commit: context.sourceCommit,
     source_branch: context.sourceBranch,
     external_network_used: context.mode === 'official-sources',
+    baseline_set_id: official?.baseline_set_id ?? null,
     observation_count: official?.observation_count ?? 0,
     candidate_count: official?.candidate_count ?? 0,
     source_errors: official?.source_errors ?? 0,
+    change_counts: official?.change_counts ?? { unchanged: 0, content_changed: 0, new_source: 0, fetch_failed: 0 },
     review_material_enabled: Boolean(review),
     review_item_count: review?.reviewMaterial.counts.review_items ?? 0,
     evidence_draft_count: review?.evidenceDraftReport.draft_count ?? 0,
@@ -183,14 +200,18 @@ function finalizeMonitoring(context, official) {
       monitor: official.monitor,
       status: official.status,
       observed_at: official.observed_at,
+      baseline_set_id: official.baseline_set_id,
       observation_count: official.observation_count,
       source_errors: official.source_errors,
+      change_counts: official.change_counts,
       observations: official.observations
     });
     writeJson(path.join(context.runDirectory, 'monitoring-candidates.json'), {
       schema_version: official.schema_version,
       created_at: official.observed_at,
+      baseline_set_id: official.baseline_set_id,
       candidate_count: official.candidate_count,
+      change_counts: official.change_counts,
       candidates: official.candidates
     });
   }
@@ -220,6 +241,7 @@ export function runMonitoring(options = {}) {
     observedAt: context.startedAt,
     fetchImpl: options.fetchImpl,
     sources: options.sources,
+    baselineSet: options.baselineSet,
     timeoutMs: options.timeoutMs,
     maxBodyBytes: options.maxBodyBytes
   }).then((official) => finalizeMonitoring(context, official));
@@ -232,9 +254,11 @@ async function main() {
     run_id: result.manifest.run_id,
     status: result.manifest.status,
     canonical_guard: result.manifest.canonical_guard,
+    baseline_set_id: result.manifest.baseline_set_id,
     observation_count: result.manifest.observation_count,
     candidate_count: result.manifest.candidate_count,
     source_errors: result.manifest.source_errors,
+    change_counts: result.manifest.change_counts,
     review_item_count: result.manifest.review_item_count,
     evidence_draft_count: result.manifest.evidence_draft_count,
     rejected_duplicate_count: result.manifest.rejected_duplicate_count

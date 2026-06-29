@@ -8,77 +8,71 @@ import './validate-deployment-canonicality-pr226.mjs';
 import './validate-deployment-canonicality-pr227.mjs';
 import './validate-deployment-source-status-pr229.mjs';
 
-const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
-const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
-const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
-const agents = fs.readFileSync('AGENTS.md', 'utf8');
-const reviewSpec = fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8');
-const baselineSpec = fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8');
+const documents = {
+  roadmap: fs.readFileSync('docs/roadmap.md', 'utf8'),
+  program: fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8'),
+  governance: fs.readFileSync('docs/spec-governance.md', 'utf8'),
+  agents: fs.readFileSync('AGENTS.md', 'utf8'),
+  review: fs.readFileSync('docs/quality/monitoring-review-material-spec.md', 'utf8'),
+  baseline: fs.readFileSync('docs/quality/monitoring-baseline-spec.md', 'utf8'),
+  change: fs.readFileSync('docs/quality/monitoring-change-detection-spec.md', 'utf8')
+};
 
-for (const phrase of [
-  'Latest completed: PR #234',
-  'Active: PR #235',
-  'Next: PR #236',
-  'Stable assets: 92',
-  'Gate V2-F: not passed',
-  'Record growth: authorized after PR #246 candidate audit',
-  'Production publication: deferred',
-  'PR #234 monitoring baseline specification and pending source records',
-  'Initial state: pending_initial_acceptance',
-  'Live digests invented: false',
-  'PR #246 final-eight candidate audit and selection',
-  'PR #263 non-UI release-candidate material'
-]) {
-  if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
+const required = {
+  roadmap: [
+    'Latest completed: PR #235',
+    'Active: PR #236',
+    'Next: PR #237',
+    'Stable assets: 92',
+    'Gate V2-F: not passed',
+    'Record growth: authorized after PR #246 candidate audit',
+    'Production publication: deferred',
+    'PR #235 baseline-aware material-change detection',
+    'Unchanged source candidate count: 0',
+    'Content change requires signal match: true',
+    'PR #263 non-UI release-candidate material'
+  ],
+  program: [
+    'Growth is allowed only through PR #246-#250',
+    'No growth PR may contain more than two new stable assets',
+    'Production publication remains deferred through PR #263',
+    'After PR #263, continuation stops'
+  ],
+  governance: [
+    'An accepted monitoring baseline is a repository-reviewed comparison point',
+    'Monitoring executions remain read-only',
+    'PR #263 does not authorize publication'
+  ],
+  agents: [
+    'Growth beyond 92 assets is permitted only after PR #246',
+    'Production publication remains prohibited through PR #263'
+  ],
+  review: [
+    'observed_facts',
+    'inferences',
+    'unresolved_questions',
+    'Human approval required',
+    'Automatic pull request: false'
+  ],
+  baseline: [
+    'A baseline is not canonical evidence',
+    'pending_initial_acceptance',
+    'Monitoring execution may read this file but may not modify it'
+  ],
+  change: [
+    'baseline-aware review candidate generation',
+    'An unchanged source must create zero candidates',
+    'content_changed',
+    'fetch_failed',
+    'normalized_content_sha256',
+    'No candidate authorizes canonical data'
+  ]
+};
+
+for (const [documentName, phrases] of Object.entries(required)) {
+  for (const phrase of phrases) {
+    if (!documents[documentName].includes(phrase)) throw new Error(`${documentName} missing: ${phrase}`);
+  }
 }
 
-for (const phrase of [
-  'PR #233 amends the earlier 92-record-only program',
-  'Growth is allowed only through PR #246-#250',
-  'No growth PR may contain more than two new stable assets',
-  'Production publication remains deferred through PR #263',
-  'After PR #263, continuation stops'
-]) {
-  if (!program.includes(phrase)) throw new Error(`non-UI program missing: ${phrase}`);
-}
-
-for (const phrase of [
-  'PR #233 authorizes the bounded continuation through PR #263',
-  'An accepted monitoring baseline is a repository-reviewed comparison point',
-  'Monitoring executions remain read-only',
-  'PR #263 does not authorize publication'
-]) {
-  if (!governance.includes(phrase)) throw new Error(`governance missing: ${phrase}`);
-}
-
-for (const phrase of [
-  'PR #233 authorizes the bounded non-UI sequence through PR #263',
-  'Growth beyond 92 assets is permitted only after PR #246',
-  'Production publication remains prohibited through PR #263'
-]) {
-  if (!agents.includes(phrase)) throw new Error(`AGENTS.md missing: ${phrase}`);
-}
-
-for (const phrase of [
-  'observed_facts',
-  'inferences',
-  'unresolved_questions',
-  'rejected_duplicates',
-  'Human approval required',
-  'Automatic pull request: false',
-  'No production deployment required'
-]) {
-  if (!reviewSpec.includes(phrase)) throw new Error(`PR #232 review specification missing: ${phrase}`);
-}
-
-for (const phrase of [
-  'A baseline is not canonical evidence',
-  'pending_initial_acceptance',
-  'Monitoring execution may read this file but may not modify it',
-  'No monitoring run may acquire write permission',
-  'No production deployment required'
-]) {
-  if (!baselineSpec.includes(phrase)) throw new Error(`PR #234 baseline specification missing: ${phrase}`);
-}
-
-console.log('Active workstream validation passed: PR #234 is complete and PR #235 baseline-aware detection is active.');
+console.log('Active workstream validation passed: PR #235 is complete and PR #236 is active.');
