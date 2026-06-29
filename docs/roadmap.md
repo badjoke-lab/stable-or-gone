@@ -21,6 +21,7 @@ UI review remains paused. Normal work does not approve or publish the UI.
 
 ```text
 PR #207-#216 UI implementation before owner review
+PR #212 Organizations index and detail
 PR #217-#229 record and deployment quality
 PR #230-#245 monitoring foundation and coverage
 PR #246 candidate selection
