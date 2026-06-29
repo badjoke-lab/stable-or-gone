@@ -1,13 +1,13 @@
 export const deploymentTaxonomyBaseline = {
-  deployments: 130,
-  unique_ids: 130,
-  stablecoins_covered: 92,
+  deployments: 132,
+  unique_ids: 132,
+  stablecoins_covered: 94,
   public_deployment_categories: {
     canonical_or_native_issuance: 10,
     cross_chain_representation: 8,
     historical_or_legacy: 15,
     issuer_or_institution_supported: 59,
-    protocol_native_or_supported: 34,
+    protocol_native_or_supported: 36,
     related_asset_or_wrapper: 1,
     technical_standard_only: 3
   },
@@ -19,13 +19,13 @@ export const deploymentTaxonomyBaseline = {
     limited: 2,
     migrated: 1,
     restricted: 6,
-    terminated: 2,
+    terminated: 4,
     unknown: 23,
     winding_down: 2
   },
   change_states: {
     migration_recorded: 1,
-    none_recorded: 124,
+    none_recorded: 126,
     rebrand_or_transition_recorded: 1,
     retirement_proposed: 2,
     wind_down_recorded: 2
@@ -34,28 +34,26 @@ export const deploymentTaxonomyBaseline = {
     canonical_bridge: 5,
     issuer_native: 60,
     legacy: 18,
-    native: 40,
+    native: 42,
     synthetic: 1,
     unknown: 6
   },
-  canonicality_record_state: {
-    recorded: 130
-  },
+  canonicality_record_state: { recorded: 132 },
   verification_states: {
     verified: 16,
-    identifier_recorded_unverified: 45,
-    source_linked_no_identifier: 69
+    identifier_recorded_unverified: 46,
+    source_linked_no_identifier: 70
   },
   contract_identity_states: {
-    not_recorded: 70,
-    recorded_identifier: 60
+    not_recorded: 71,
+    recorded_identifier: 61
   },
   network_identity_states: {
     aggregate_context: 4,
-    recorded_network: 124,
+    recorded_network: 126,
     review_needed: 2
   },
   verification_status_recorded: 130,
-  records_with_evidence: 130,
+  records_with_evidence: 132,
   records_with_control_events: 18
 };
