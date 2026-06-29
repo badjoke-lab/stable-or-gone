@@ -8,13 +8,13 @@ const assignmentsByCategory = {
   ],
   crypto_collateralized: [
     'alusd', 'avalon-usda', 'berachain-honey', 'bold', 'cashio-dollar', 'crvusd', 'dai',
-    'dforce-usx', 'djed', 'dola', 'eura', 'fx-protocol-fxusd', 'gho', 'lisusd', 'lusd',
+    'dforce-usx', 'djed', 'dola', 'eura', 'fx-protocol-fxusd', 'gho', 'kava-usdx', 'lisusd', 'lusd',
     'mainstreet-msusd', 'mento-dollar', 'mim', 'mountain-usdm', 'origin-dollar', 'qidao-mai',
     'rai', 'sai', 'usdn', 'usds', 'usk', 'vai'
   ],
   tokenized_asset_backed: ['anzen-usdz', 'm0-m', 'noble-usdn', 'usd0', 'usdtb', 'usdy', 'usyc'],
   commodity_backed: ['paxg', 'xaut'],
-  algorithmic_or_unbacked: ['basis-cash', 'dynamic-set-dollar', 'empty-set-dollar', 'ust'],
+  algorithmic_or_unbacked: ['basis-cash', 'beanstalk-bean', 'dynamic-set-dollar', 'empty-set-dollar', 'ust'],
   synthetic_or_hedged: ['falcon-usdf', 'spot', 'stables-labs-usdx', 'susd', 'usde', 'usr'],
   hybrid_or_mixed: [
     'acala-ausd', 'agoric-ist', 'fei', 'frax', 'gyroscope-gyd', 'iron', 'musd', 'near-usn', 'nuon',

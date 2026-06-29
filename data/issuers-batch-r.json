@@ -1,0 +1,4 @@
+[
+  {"id":"sog_issuer_kava","slug":"kava","name":"Kava","issuer_type":"protocol","jurisdiction":"Kava network ecosystem","related_stablecoins":["kava-usdx"],"official_url":"https://www.kava.io/","summary":"Protocol and network context for USDX.","confidence":"high","last_verified_at":"2026-06-29","notes":"Batch R compatibility row."},
+  {"id":"sog_issuer_beanstalk","slug":"beanstalk","name":"Beanstalk","issuer_type":"protocol","jurisdiction":"Decentralized protocol governance","related_stablecoins":["beanstalk-bean"],"official_url":"https://bean.money/","summary":"Protocol and DAO context for Bean.","confidence":"high","last_verified_at":"2026-06-29","notes":"Batch R compatibility row."}
+]

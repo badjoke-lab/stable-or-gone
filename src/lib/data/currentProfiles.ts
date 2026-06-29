@@ -1,0 +1,49 @@
+import profileData from '../../../data/stablecoin-profiles-v2.json';
+import profileBatchAData from '../../../data/stablecoin-profiles-batch-a.json';
+import profileBatchBData from '../../../data/stablecoin-profiles-batch-b.json';
+import profileBatchCData from '../../../data/stablecoin-profiles-batch-c.json';
+import profileBatchDData from '../../../data/stablecoin-profiles-batch-d.json';
+import profileBatchEData from '../../../data/stablecoin-profiles-batch-e.json';
+import profileBatchFData from '../../../data/stablecoin-profiles-batch-f.json';
+import profileBatchGData from '../../../data/stablecoin-profiles-batch-g.json';
+import profileBatchHData from '../../../data/stablecoin-profiles-batch-h.json';
+import profileBatchIData from '../../../data/stablecoin-profiles-batch-i.json';
+import profileBatchJData from '../../../data/stablecoin-profiles-batch-j.json';
+import profileBatchKData from '../../../data/stablecoin-profiles-batch-k.json';
+import profileBatchLData from '../../../data/stablecoin-profiles-batch-l.json';
+import profileBatchMData from '../../../data/stablecoin-profiles-batch-m.json';
+import profileBatchNData from '../../../data/stablecoin-profiles-batch-n.json';
+import profileBatchOData from '../../../data/stablecoin-profiles-batch-o.json';
+import profileBatchPData from '../../../data/stablecoin-profiles-batch-p.json';
+import profileBatchQData from '../../../data/stablecoin-profiles-batch-q.json';
+import profileBatchRData from '../../../data/r-profiles.json';
+import type { ReserveProfileV2, RedemptionProfileV2 } from '../schema/registry-v2';
+
+export type CurrentProfile = {
+  id: string;
+  reserve_profile: ReserveProfileV2;
+  redemption_profile: RedemptionProfileV2;
+};
+
+const profiles = [
+  ...profileData, ...profileBatchAData, ...profileBatchBData, ...profileBatchCData,
+  ...profileBatchDData, ...profileBatchEData, ...profileBatchFData, ...profileBatchGData,
+  ...profileBatchHData, ...profileBatchIData, ...profileBatchJData, ...profileBatchKData,
+  ...profileBatchLData, ...profileBatchMData, ...profileBatchNData, ...profileBatchOData,
+  ...profileBatchPData, ...profileBatchQData, ...profileBatchRData
+] as CurrentProfile[];
+const byId = new Map(profiles.map((row) => [row.id, row] as const));
+const clone = (row: CurrentProfile): CurrentProfile => ({
+  ...row,
+  reserve_profile: { ...row.reserve_profile, backing_types: [...row.reserve_profile.backing_types], evidence_ids: [...(row.reserve_profile.evidence_ids ?? [])] },
+  redemption_profile: { ...row.redemption_profile, jurisdiction_restrictions: [...(row.redemption_profile.jurisdiction_restrictions ?? [])], evidence_ids: [...(row.redemption_profile.evidence_ids ?? [])] }
+});
+
+export function getCurrentProfiles(): CurrentProfile[] {
+  return profiles.map(clone);
+}
+
+export function getCurrentProfile(id: string): CurrentProfile | undefined {
+  const row = byId.get(id);
+  return row ? clone(row) : undefined;
+}

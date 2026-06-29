@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_kavausdx","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_kavausdx_mint_batch_r","sog_src_kavausdx_cdp_batch_r"]},
+  {"id":"sog_st_bean","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_bean_mechanics_batch_r","sog_src_bean_disclosures_batch_r"]}
+]
