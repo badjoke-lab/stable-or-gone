@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { OFFICIAL_SOURCE_NORMALIZATION_VERSION } from '../normalization/official-source-normalizer.mjs';
 
 const ALLOWED_STATUSES = new Set(['pending_initial_acceptance', 'accepted']);
 const ACCEPTED_FIELDS = [
@@ -63,6 +64,7 @@ export function validateOfficialSourceBaselines(baselineSet, sources) {
   const failures = [];
   if (baselineSet.schema_version !== '1.0') failures.push('baseline set schema_version must be 1.0');
   if (baselineSet.baseline_set_id !== 'sog_official_source_baselines_v1') failures.push('baseline_set_id mismatch');
+  if (baselineSet.normalization_version !== OFFICIAL_SOURCE_NORMALIZATION_VERSION) failures.push(`normalization_version must be ${OFFICIAL_SOURCE_NORMALIZATION_VERSION}`);
   if (!isIsoTimestamp(baselineSet.updated_at)) failures.push('updated_at must be an exact ISO-8601 timestamp');
   if (!Array.isArray(baselineSet.baselines)) failures.push('baselines must be an array');
 
