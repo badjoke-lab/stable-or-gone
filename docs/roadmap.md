@@ -9,9 +9,9 @@ Paused UI plan: `docs/ui-redesign/implementation-plan.md`
 ## Current position
 
 ```text
-Latest completed: PR #234
-Active: PR #235
-Next: PR #236
+Latest completed: PR #235
+Active: PR #236
+Next: PR #237
 Stable assets: 92
 Gate V2-F: not passed
 Record growth: authorized after PR #246 candidate audit
@@ -56,25 +56,30 @@ PR #231 official-source observations and private candidates
 PR #232 review reports, evidence drafts, and draft PR material
 PR #233 non-UI continuation roadmap and safety boundary
 PR #234 monitoring baseline specification and pending source records
+PR #235 baseline-aware material-change detection
 ```
 
-## PR #234 result
+## PR #235 result
 
 ```text
-Baseline set: scripts/monitoring/baselines/official-source-baselines.json
-Enabled source records: 4
-Initial state: pending_initial_acceptance
-Live digests invented: false
-Monitoring write allowed: false
-Canonical evidence: false
-Public output: false
-Automatic pull request: false
+Comparison states: new_source / unchanged / content_changed / fetch_failed
+Normalized digest recorded: true
+Unchanged source candidate count: 0
+Content change requires signal match: true
+Pending source remains reviewable: true
+Fetch failure creates content candidate: false
+Output file sets changed: false
+Canonical action: none
 Production publication: false
 ```
 
-PR #234 defines an accepted baseline as a human-reviewed comparison point, not evidence of a stablecoin fact. The four current official sources remain pending until a later reviewed observation is explicitly accepted. Repository validation rejects missing sources, URL mismatches, unsafe redirects, malformed digests, populated pending fields, raw content fields, and write/publication authority.
+PR #235 compares each successful official-source observation with its human-approved baseline. Standing keywords on an unchanged page no longer create recurring candidates. A normalized-content difference remains a private review prompt and does not establish a canonical fact.
 
-Specification: `docs/quality/monitoring-baseline-spec.md`
+Specifications:
+
+- `docs/quality/monitoring-baseline-spec.md`
+- `docs/quality/monitoring-change-detection-spec.md`
+- `docs/quality/monitoring-official-source-spec.md`
 
 ## Approved continuation sequence
 
