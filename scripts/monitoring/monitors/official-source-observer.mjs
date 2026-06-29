@@ -23,24 +23,14 @@ const SIGNAL_KEYWORDS = {
   issuance_redemption_update: ['issuance', 'issued', 'redemption', 'redeemed', 'circulation'],
   backing_attestation_update: ['custodian', 'attestation', 'backing assets', 'transparency'],
   lifecycle_update: [
-    'migration',
-    'migrate',
-    'upgrade',
-    'upgraded',
-    'optional',
-    'rebrand',
-    'renamed',
-    'now be known as',
-    'wind down',
-    'winding down',
-    'halt minting',
-    'cease issuance',
-    'shutdown',
-    'retire',
-    'retirement',
-    'conversion',
-    'convert',
-    'here to stay'
+    'migration', 'migrate', 'upgrade', 'upgraded', 'optional', 'rebrand', 'renamed',
+    'now be known as', 'wind down', 'winding down', 'halt minting', 'cease issuance',
+    'shutdown', 'retire', 'retirement', 'conversion', 'convert', 'here to stay'
+  ],
+  regulatory_update: [
+    'order', 'orders', 'charges', 'complaint', 'settlement', 'notice', 'approval',
+    'authorized', 'authorization', 'enforcement', 'penalty', 'fines', 'cease minting',
+    'supervision', 'restriction', 'requirements'
   ]
 };
 
