@@ -27,6 +27,7 @@ const priorIds = [
   'paxos-usdp-transparency', 'ripple-rlusd-overview', 'tether-fees',
   'tether-redemption-guide', 'tether-transparency'
 ];
+const requiredPr243Ids = [...priorIds, ...newIds];
 const lifecycleClasses = new Set([
   'wind_down',
   'optional_reversible_upgrade',
@@ -57,11 +58,11 @@ const baselineById = new Map(baselineSet.baselines.map((row) => [row.source_id, 
 const reviewById = new Map(review.sources.map((row) => [row.source_id, row]));
 
 if (stablecoins.length !== 92) fail(`stablecoin count must remain 92, found ${stablecoins.length}`);
-if (sources.length !== 19 || baselineSet.baselines.length !== 19) fail('PR #243 requires 19 sources and 19 baselines');
-if (sourceById.size !== 19 || baselineById.size !== 19) fail('source or baseline IDs are duplicated');
+if (sources.length < 19 || baselineSet.baselines.length < 19) fail('PR #243 requires at least 19 sources and 19 baselines');
+if (sourceById.size !== sources.length || baselineById.size !== baselineSet.baselines.length) fail('source or baseline IDs are duplicated');
 if (JSON.stringify([...sourceById.keys()].sort()) !== JSON.stringify([...baselineById.keys()].sort())) fail('source and baseline IDs must match exactly');
 if (JSON.stringify([...reviewById.keys()].sort()) !== JSON.stringify(newIds)) fail('PR #243 review source set mismatch');
-for (const id of priorIds) if (!sourceById.has(id) || !baselineById.has(id)) fail(`${id}: prior source or baseline missing`);
+for (const id of requiredPr243Ids) if (!sourceById.has(id) || !baselineById.has(id)) fail(`${id}: PR #243 source or baseline missing`);
 
 const canonicalIndex = { stablecoinIds, organizationIds, relationships };
 for (const message of validateOfficialSources(sources, canonicalIndex)) fail(message);
@@ -116,4 +117,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('PR #243 issuer lifecycle expansion valid: five distinct lifecycle sources, nineteen pending baselines, and no canonical authority.');
+console.log(`PR #243 issuer lifecycle invariants valid inside ${sources.length} total sources.`);
