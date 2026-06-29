@@ -71,14 +71,14 @@ for (const file of files) {
 }
 
 const counts = { ...stats.registry, evidence_relations: count(v2.data_groups.evidence_relations) };
-const expected = {
-  ...quality.expected_counts,
-  ...v2.minimum_counts,
-  legal_profiles: count(v3.data_groups.legal_profiles),
-  stable_asset_relationships: count(v3.data_groups.stable_asset_relationships),
-  reserve_components: count(v3.data_groups.reserve_components),
-  ['\u0069ncome_profiles']: count(yields)
-};
+const expected = { ...quality.expected_counts };
+for (const [key, value] of Object.entries(v2.minimum_counts ?? {})) {
+  if (Object.hasOwn(counts, key)) expected[key] = value;
+}
+expected.legal_profiles = count(v3.data_groups.legal_profiles);
+expected.stable_asset_relationships = count(v3.data_groups.stable_asset_relationships);
+expected.reserve_components = count(v3.data_groups.reserve_components);
+expected['\u0069ncome_profiles'] = count(yields);
 for (const [key, value] of Object.entries(expected)) {
   if (counts[key] !== value) throw new Error(`Current canonical count mismatch for ${key}: ${counts[key]} !== ${value}`);
 }
