@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_uxd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_uxd_overview_batch_s","sog_src_uxd_alm_docs_batch_s"],"notes":"Underlying strategies may generate protocol income, but the canonical UXD token does not itself accrue a holder balance yield in this record."},
+  {"id":"sog_st_doc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_doc_product_batch_s","sog_src_doc_mint_batch_s"],"notes":"DOC is a stable protocol token; BPRO and governance incentives are separate assets and mechanisms."}
+]
