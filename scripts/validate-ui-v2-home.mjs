@@ -26,7 +26,8 @@ check(page.includes('value={organizations.length}'), 'organization count must re
 check(page.includes('value={events.length}'), 'event count must remain canonical and dynamic');
 check(page.includes('value={evidenceSummary.source_identities}'), 'source identity count must remain canonical and dynamic');
 for (const route of ['/stablecoins/', '/issuers/', '/events/', '/guides/']) check(page.includes(`href="${route}"`), `primary Home destination is missing: ${route}`);
-for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(page.includes(`getGuide('${slug}')`), `approved guide card is missing: ${slug}`);
+for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'uk-stablecoin-capital-rules-2026']) check(page.includes(`getGuide('${slug}')`), `approved guide card is missing: ${slug}`);
+check(!page.includes("getGuide('jpyc-vs-jpysc'), theme: 'jp'"), 'JPYC comparison guide must remain in Guides but not occupy the current three-card Home feature set');
 const expectedSelection = "['usdt', 'usdc', 'dai', 'ust', 'busd', 'frax', 'tusd', 'fdusd', 'pyusd', 'usdd']";
 check(page.includes(expectedSelection), 'selected stablecoin slug rule changed');
 check(!page.includes('.slice(0, 10)'), 'selected records must not depend on raw array order');
@@ -55,9 +56,10 @@ const result = {
   approved_reference: referencePath,
   selected_record_rule: 'explicit_slug_order',
   selected_record_count: 10,
+  featured_guide_slugs: ['genius-act-stablecoins', 'mica-stablecoins', 'uk-stablecoin-capital-rules-2026'],
   search_record_families: ['stablecoin', 'organization', 'event'],
   canonical_record_changes: 0,
-  route_changes: 0,
+  route_changes: 1,
   failures
 };
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
