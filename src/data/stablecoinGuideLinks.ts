@@ -9,6 +9,7 @@ export interface StablecoinGuideLink {
 const guideCoverage: Record<string, string[]> = {
   'genius-act-stablecoins': ['usdc', 'usdt', 'pyusd', 'rlusd', 'usdg', 'dai', 'usds'],
   'mica-stablecoins': ['usdc', 'eurc', 'usdt', 'euri', 'eurcv', 'eurq', 'rlusd', 'dai', 'usds', 'frax'],
+  'uk-stablecoin-capital-rules-2026': ['usdc', 'usdt', 'pyusd', 'rlusd', 'dai', 'usds'],
   'jpyc-vs-jpysc': ['jpyc', 'jpysc', 'gyen']
 };
 
