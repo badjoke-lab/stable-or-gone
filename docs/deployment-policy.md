@@ -1,6 +1,6 @@
 # Deployment Policy
 
-Updated: 2026-06-30
+Updated: 2026-07-01
 
 ## Status
 
@@ -33,20 +33,34 @@ Article publication, ordinary UI changes, copy changes, and normal reviewed regi
 
 ## Guide publication
 
-Guide visibility is controlled by `src/data/guideCatalog.ts`.
+Guide visibility is controlled by `src/data/guideCatalog.ts`, but `publishedAt` is not a visibility switch for pre-existing evergreen guides.
 
 ```text
-publishedAt set
+catalog entry + public guide route
 → included in /guides/
+→ included in the sitemap
 
-featured: true
+publishedAt set
+→ exposes dated publication metadata
+
+featured: true + publishedAt set
 → eligible for the latest three homepage guide cards
 
-publishedAt set
-→ included in the sitemap
+publishedAt null
+→ allowed for evergreen guides that were already public
+→ must not remove them from /guides/ or the sitemap
 ```
 
-The homepage and Guides index must not require separate hard-coded article lists.
+The four established evergreen guides are:
+
+```text
+/guides/what-is-a-depeg/
+/guides/status-vs-event/
+/guides/reserve-disclosure-basics/
+/guides/stablecoin-lifecycle-terms/
+```
+
+The homepage and Guides index must not require separate hard-coded article lists. A change that hides an existing public guide requires explicit owner approval and a route-removal decision; it must not occur as a side effect of publication metadata handling.
 
 ## Validation boundaries
 
@@ -94,6 +108,7 @@ Every automatic deployment must verify:
 - `/guides/` responds successfully;
 - `/guides/uk-stablecoin-capital-rules-2026/` responds successfully;
 - the UK guide is linked from the homepage and Guides index;
+- every cataloged public guide remains linked from the Guides index and included in the sitemap;
 - machine-readable and public outputs remain internally consistent.
 
 ## Exceptions

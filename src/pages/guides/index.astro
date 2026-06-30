@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
-  getPublishedGuides,
+  guides,
   guideCategoryDescriptions,
   guideCategoryLabels,
   type GuideCategory
 } from '../../data/guideCatalog';
 
-const publishedGuides = getPublishedGuides();
+const visibleGuides = guides;
 const categoryOrder: GuideCategory[] = ['regulation', 'asset-comparisons', 'core-concepts'];
 const visibleCategories = categoryOrder
-  .map((category) => ({ category, entries: publishedGuides.filter((guide) => guide.category === category) }))
+  .map((category) => ({ category, entries: visibleGuides.filter((guide) => guide.category === category) }))
   .filter((group) => group.entries.length > 0);
 
 const title = 'Guides — Stable or Gone';
@@ -22,11 +22,11 @@ const jsonLd = {
   url: 'https://sog.badjoke-lab.com/guides/',
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  hasPart: publishedGuides.map((guide) => ({
+  hasPart: visibleGuides.map((guide) => ({
     '@type': 'Article',
     name: guide.title,
     url: `https://sog.badjoke-lab.com/guides/${guide.slug}/`,
-    datePublished: guide.publishedAt
+    ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {})
   }))
 };
 ---
@@ -38,7 +38,7 @@ const jsonLd = {
       <p>These guides explain regulation, legal and reserve structures, redemption, lifecycle events, and the distinctions used throughout the archive.</p>
     </div>
     <div class="panel stats">
-      <div class="stat"><span>Guides</span><strong>{publishedGuides.length}</strong></div>
+      <div class="stat"><span>Guides</span><strong>{visibleGuides.length}</strong></div>
       <div class="stat"><span>Sections</span><strong>{visibleCategories.length}</strong></div>
     </div>
   </section>
