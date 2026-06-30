@@ -65,18 +65,20 @@ Before starting or continuing work, read the `Current position` and approved seq
 
 The UI program is paused after PR #216 because detailed owner visual review is temporarily unavailable. The current UI is an intermediate repository state. Gate V2-F is not passed, no production release is authorized, and no agent may claim that the current UI has owner approval.
 
-PR #233 authorizes the bounded non-UI sequence through PR #263:
+PR #233 authorized the original bounded non-UI sequence through PR #263. PR #249 deliberately amends that sequence by inserting one owner-requested editorial guide and shifting the remaining numbered items through PR #264:
 
 ```text
 PR #234-#239 material-change monitoring
 PR #240-#245 monitored-source coverage
 PR #246 final-eight candidate audit
-PR #247-#250 reviewed growth from 92 to 100
-PR #251-#258 100-record registry audit
-PR #259-#263 non-UI release preparation
+PR #247-#248 reviewed growth from 92 to 96
+PR #249 UK stablecoin capital-rules guide
+PR #250-#251 reviewed growth from 96 to 100
+PR #252-#259 100-record registry audit
+PR #260-#264 non-UI release preparation
 ```
 
-Growth beyond 92 assets is permitted only after PR #246 selects the final reviewed set, and each growth PR is limited to two assets. Production publication remains prohibited through PR #263.
+Growth beyond 92 assets is permitted only after PR #246 selects the final reviewed set, and each growth PR is limited to two assets. PR #249 is limited to the UK stablecoin capital-rules guide within the existing Guides / Regulation structure and changes no canonical registry count. Production publication remains prohibited through PR #264.
 
 ## Non-UI quality rules
 
@@ -93,6 +95,7 @@ Growth beyond 92 assets is permitted only after PR #246 selects the final review
 - Metadata-only changes and fetch failures must not masquerade as content changes.
 - A quality PR may validly preserve a queue item after strengthening its source trail.
 - A growth PR may add no more than two stable assets and must include all applicable supporting record groups.
+- The PR #249 guide must distinguish issuer capital from backing assets, separate FCA and Bank of England scope, and label reported claims that are not yet verified against controlling final handbook text.
 
 ## Visual authority
 
@@ -169,13 +172,14 @@ Do not:
 - automatically publish monitored candidates into canonical data;
 - let a monitoring execution commit, open a pull request, or mutate its accepted baseline;
 - begin growth before PR #246 or add more than two assets in a growth PR;
-- publish or deploy merely because PR #263 is complete.
+- expand PR #249 into a new category, top-level route family, registry-data change, or UI redesign;
+- publish or deploy merely because PR #264 is complete.
 
 ## Deployment classifications
 
 Every pull request must use one classification:
 
-1. **No production deployment required** — default for documentation, data, validation, workflow, monitoring-candidate, and non-emergency code changes.
+1. **No production deployment required** — default for documentation, data, validation, workflow, monitoring-candidate, editorial-guide, and non-emergency code changes.
 2. **Publication checkpoint deployment required after explicit approval** — only for a defined public release.
 3. **Emergency production deployment required** — only for verified public breakage, security issues, or materially incorrect public state.
 

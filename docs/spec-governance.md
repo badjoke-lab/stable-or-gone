@@ -1,7 +1,7 @@
 # Stable or Gone specification governance
 
 Status: canonical governance specification  
-Updated: 2026-06-29
+Updated: 2026-06-30
 
 ## 1. Purpose
 
@@ -18,11 +18,14 @@ When documents disagree, use this order:
 5. Supporting audits, inventories, examples, and handoff documents.
 6. Conversation history, issue discussion, and unmerged drafts.
 
-The active workstream plan is:
+The active workstream plans are:
 
 ```text
 docs/quality/non-ui-quality-program.md
+docs/quality/pr249-uk-stablecoin-guide-amendment.md
 ```
+
+The PR #249 amendment governs only the inserted UK guide and the resulting one-number shift for remaining roadmap items. It does not replace the substantive quality requirements in the non-UI quality program.
 
 The paused UI workstream remains governed by:
 
@@ -125,7 +128,7 @@ A PR that cannot cite an approved work item must pause until the roadmap or spec
 
 Do not rewrite completed history to make a changed plan appear unchanged. Record deviations and pauses explicitly.
 
-PR #233 authorizes the bounded continuation through PR #263 while visual review is unavailable. Later changes to that sequence require another deliberate roadmap amendment.
+PR #233 authorized the original bounded continuation through PR #263 while visual review was unavailable. PR #249 deliberately inserts one owner-requested editorial guide and shifts the remaining numbered sequence through PR #264. The responsibilities of Growth C, Growth D, the 100-record audit, and non-UI release preparation do not otherwise change.
 
 ## 8. Specification status labels
 
@@ -150,7 +153,7 @@ The paused UI program does not permit broad visual changes without renewed owner
 
 ## 10. Data-preservation rule
 
-UI, quality, taxonomy, monitoring, growth, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
+UI, quality, taxonomy, monitoring, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
 
 ```text
 stable assets
@@ -174,7 +177,7 @@ income profiles
 
 Unknown values remain unknown unless evidence supports a canonical value. Intentional removals require record-by-record audit and explicit approval.
 
-Growth PRs are allowed only under the reviewed PR #246-#250 sequence. Each growth PR is limited to two stable assets and must preserve or explicitly extend every applicable record group.
+Growth PRs are allowed only after the reviewed PR #246 selection. Completed growth PRs are #247-#248; remaining growth PRs are #250-#251. Each growth PR is limited to two stable assets and must preserve or explicitly extend every applicable record group. PR #249 changes no canonical registry record or count.
 
 ## 11. Monitoring baseline governance
 
@@ -199,14 +202,15 @@ An accepted monitoring baseline is a repository-reviewed comparison point, not c
 
 ## 13. Current binding workstream
 
-As of 2026-06-29, the binding workstream is the non-UI continuation program for material-change monitoring, source-coverage expansion, reviewed growth from 92 to 100, registry-wide audit, and non-UI release preparation.
+As of 2026-06-30, the binding workstream is the non-UI continuation program with the PR #249 editorial amendment: material-change monitoring, source-coverage expansion, the UK stablecoin capital-rules guide, reviewed growth from 96 to 100, registry-wide audit, and non-UI release preparation.
 
 Canonical documents:
 
 ```text
 docs/quality/non-ui-quality-program.md
+docs/quality/pr249-uk-stablecoin-guide-amendment.md
 docs/roadmap.md
 docs/spec-governance.md
 ```
 
-The UI program remains paused after PR #216 and Gate V2-F remains pending. PR #263 does not authorize publication. Production publication remains deferred until owner-led visual review, Gate V2-F approval, an explicit publication checkpoint, manual deployment, and public-parity verification.
+The UI program remains paused after PR #216 and Gate V2-F remains pending. PR #264 does not authorize publication. Production publication remains deferred until owner-led visual review, Gate V2-F approval, an explicit publication checkpoint, manual deployment, and public-parity verification.
