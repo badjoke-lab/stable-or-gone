@@ -16,6 +16,7 @@ import batchO from '../../../data/\u0069ncome-profiles-v3-o.json';
 import batchP from '../../../data/\u0069ncome-profiles-v3-p.json';
 import batchQ from '../../../data/yield-profiles-v3-q.json';
 import batchR from '../../../data/r-returns.json';
+import batchS from '../../../data/s-returns.json';
 import type { YieldSource, AccrualMechanism, RateType } from '../schema/registry-v3';
 
 export type YieldAvailability = 'native' | 'via_wrapper' | 'none' | 'unknown';
@@ -30,7 +31,7 @@ export type YieldProfileV3 = {
   evidence_ids: string[];
 };
 
-const profiles = [...batchA, ...batchB, ...batchC, ...batchD, ...batchE, ...batchF, ...batchG, ...batchH, ...batchJ, ...batchK, ...batchL, ...batchMA, ...batchMB, ...batchN, ...batchO, ...batchP, ...batchQ, ...batchR] as YieldProfileV3[];
+const profiles = [...batchA, ...batchB, ...batchC, ...batchD, ...batchE, ...batchF, ...batchG, ...batchH, ...batchJ, ...batchK, ...batchL, ...batchMA, ...batchMB, ...batchN, ...batchO, ...batchP, ...batchQ, ...batchR, ...batchS] as YieldProfileV3[];
 
 export function getYieldProfilesV3(): YieldProfileV3[] {
   return profiles.map((row) => ({ ...row, related_asset_ids: [...row.related_asset_ids], evidence_ids: [...row.evidence_ids] }));
