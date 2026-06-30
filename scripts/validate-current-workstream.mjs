@@ -12,6 +12,7 @@ import './validate-current-coverage.mjs';
 import './validate-final-eight-candidate-audit-pr246.mjs';
 import './validate-batch18-growth-a.mjs';
 import './validate-batch19-growth-b.mjs';
+import './validate-batch20-growth-c.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -20,15 +21,15 @@ const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
 const agents = fs.readFileSync('AGENTS.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #248',
-  'Active: PR #249 — UK stablecoin capital rules guide',
-  'Next: PR #250 — Growth C',
-  'Stable assets: 96',
+  'Latest completed: PR #250',
+  'Active: PR #251 — Growth D',
+  'Next: PR #252 — 100-record identity audit',
+  'Stable assets: 98',
   'Gate V2-F: not passed',
-  'Record growth: Growth C authorized for corrected candidates after PR #249',
-  'PR #248 Growth B: 94 -> 96 — complete',
-  'PR #249 Editorial guide: 96 -> 96 — active',
-  'PR #250 Growth C: 96 -> 98',
+  'Record growth: Growth D authorized for corrected candidates only',
+  'PR #249 Editorial guide: 96 -> 96 — complete',
+  'PR #250 Growth C: 96 -> 98 — complete',
+  'PR #251 Growth D: 98 -> 100',
   'PR #264 does not authorize production publication'
 ]) {
   if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
@@ -48,4 +49,4 @@ for (const [document, phrase] of [
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
 
-console.log('Current workstream valid: Growth B is complete, PR #249 is the editorial guide interruption, and Growth C follows in PR #250.');
+console.log('Current workstream valid: Growth C is complete at 98 assets and Growth D follows in PR #251.');
