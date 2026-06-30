@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { guides } from '../data/guideCatalog';
+import { getPublishedGuides } from '../data/guideCatalog';
 import { getStablecoins, getOrganizations, getEvents } from '../lib/data/registry';
 
 const SITE = 'https://sog.badjoke-lab.com';
@@ -9,6 +9,7 @@ function url(path: string) {
 }
 
 export const GET: APIRoute = () => {
+  const publishedGuides = getPublishedGuides();
   const staticPaths = [
     '/',
     '/stablecoins/',
@@ -16,7 +17,7 @@ export const GET: APIRoute = () => {
     '/events/',
     '/models/',
     '/guides/',
-    ...guides.map((guide) => `/guides/${guide.slug}/`),
+    ...publishedGuides.map((guide) => `/guides/${guide.slug}/`),
     '/glossary/',
     '/methodology/',
     '/updates/',
