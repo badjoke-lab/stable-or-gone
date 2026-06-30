@@ -9,7 +9,7 @@ const normalize = (value) => String(value ?? '').normalize('NFKD').toLowerCase()
 const audit = read('data/final-eight-candidate-audit-pr246.json');
 const corrections = read('data/final-eight-candidate-corrections-pr247.json');
 const controls = read('data/candidate-stable-assets-growth-100.json');
-const promotions = [...read('data/candidate-promotions-batch-18.json'), ...read('data/candidate-promotions-batch-19.json')];
+const promotions = [...read('data/candidate-promotions-batch-18.json'), ...read('data/candidate-promotions-batch-19.json'), ...read('data/candidate-promotions-batch-20.json')];
 const baseline = loadRegistryV2Baseline(root);
 const group = (name) => (baseline.data_groups?.[name] ?? []).flatMap(read);
 const stablecoins = group('stablecoins');
@@ -67,7 +67,7 @@ for (const candidate of candidates) {
   }
   fail(Array.isArray(candidate.blocking_unknowns) && candidate.blocking_unknowns.length >= 2, `${id}: open items missing`);
   const canonical = stablecoinById.get(candidate.proposed_stablecoin_id);
-  if (candidate.target_growth_pr <= 248) {
+  if (candidate.target_growth_pr <= 250) {
     fail(Boolean(canonical), `${id}: promoted candidate missing`);
     fail(promotionById.get(id)?.status === 'promoted', `${id}: promotion row missing`);
     fail(classificationIds.has(candidate.proposed_stablecoin_id), `${id}: classification missing`);
@@ -80,8 +80,8 @@ for (const candidate of candidates) {
   }
 }
 
-fail(stablecoins.length === 96, `expected 96 canonical stablecoins, found ${stablecoins.length}`);
-for (const id of ['sog_st_ist','sog_st_nearusn','sog_st_kavausdx','sog_st_bean']) {
+fail(stablecoins.length === 98, `expected 98 canonical stablecoins, found ${stablecoins.length}`);
+for (const id of ['sog_st_ist','sog_st_nearusn','sog_st_kavausdx','sog_st_bean','sog_st_uxd','sog_st_doc']) {
   fail(relationships.some((row) => row.stablecoin_id === id), `${id}: relationship missing`);
   fail(events.some((row) => row.stablecoin_id === id), `${id}: event missing`);
   fail(evidence.some((row) => row.stablecoin_id === id || row.stablecoin_ids?.includes(id)), `${id}: evidence missing`);
@@ -92,4 +92,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log('Current final-eight validation passed: four records promoted through Growth B and four remain.');
+console.log('Current final-eight validation passed: six records promoted through Growth C and two remain.');
