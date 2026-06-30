@@ -17,4 +17,5 @@ jobs:
         with:
           node-version: 20
       - name: Validate Registry v3 income profiles
-        run: node scripts/validate-registry-v3-income-profiles.mjs
+        run: node scripts/validate-registry-v3-income-profiles-site.mjs
+        # Canonical validator: scripts/validate-registry-v3-income-profiles.mjs
