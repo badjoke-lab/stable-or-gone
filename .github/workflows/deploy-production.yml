@@ -1,17 +1,13 @@
 name: Deploy production
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
-      deployment_classification:
-        description: Why this production deployment is required
-        required: true
-        type: choice
-        options:
-          - publication-checkpoint
-          - emergency
       confirm:
-        description: Type DEPLOY to confirm production publication
+        description: Type DEPLOY to run a manual fallback deployment
         required: true
         type: string
 
@@ -20,7 +16,7 @@ permissions:
 
 concurrency:
   group: sog-production-deployment
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -28,23 +24,24 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Enforce main and explicit confirmation
+      - name: Validate trigger
         env:
+          EVENT_NAME: ${{ github.event_name }}
           CONFIRM: ${{ inputs.confirm }}
         run: |
           if [ "$GITHUB_REF_NAME" != "main" ]; then
-            echo "Production deployment must be dispatched from main." >&2
+            echo "Production deployment must use main." >&2
             exit 1
           fi
-          if [ "$CONFIRM" != "DEPLOY" ]; then
-            echo "Production deployment requires confirm=DEPLOY." >&2
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$CONFIRM" != "DEPLOY" ]; then
+            echo "Manual fallback deployment requires confirm=DEPLOY." >&2
             exit 1
           fi
 
-      - name: Checkout latest main
+      - name: Checkout deployed commit
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - name: Record source commit
@@ -59,13 +56,15 @@ jobs:
       - name: Install dependencies
         run: npm install --no-package-lock --no-audit --no-fund
 
-      - name: Run full repository build
+      - name: Validate guide publication metadata
+        run: npm run validate:guides
+
+      - name: Build publishable site
         env:
           SOG_BUILD_COMMIT: ${{ steps.source.outputs.sha }}
           SOG_BUILD_BRANCH: main
-        run: npm run build
+        run: npm run build:site
 
-      # Equivalent CLI operation: wrangler pages deploy dist
       - name: Upload prebuilt site to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
@@ -76,7 +75,7 @@ jobs:
             --project-name stable-or-gone
             --branch main
             --commit-hash ${{ steps.source.outputs.sha }}
-            --commit-message "Manual ${{ inputs.deployment_classification }} deployment"
+            --commit-message "Automatic main publication"
 
       - name: Verify deployed production
         env:
@@ -85,14 +84,31 @@ jobs:
           SOG_SMOKE_DELAY_MS: '15000'
         run: npm run check:production
 
+      - name: Verify UK guide publication
+        run: |
+          for attempt in $(seq 1 20); do
+            HOME_HTML="$(curl -fsS https://sog.badjoke-lab.com/ || true)"
+            GUIDES_HTML="$(curl -fsS https://sog.badjoke-lab.com/guides/ || true)"
+            ARTICLE_HTML="$(curl -fsS https://sog.badjoke-lab.com/guides/uk-stablecoin-capital-rules-2026/ || true)"
+            if printf '%s' "$HOME_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
+              && printf '%s' "$GUIDES_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
+              && printf '%s' "$ARTICLE_HTML" | grep -q 'Capital Does Not Mean 1% Backing'; then
+              echo "UK guide publication verified."
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "UK guide publication did not converge in time." >&2
+          exit 1
+
       - name: Write deployment summary
         env:
           SOURCE_SHA: ${{ steps.source.outputs.sha }}
-          DEPLOYMENT_CLASSIFICATION: ${{ inputs.deployment_classification }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           echo "## Production deployment complete" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Classification: $DEPLOYMENT_CLASSIFICATION" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: $EVENT_NAME" >> "$GITHUB_STEP_SUMMARY"
           echo "- Source commit: $SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
           echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
           echo "- Public origin: https://sog.badjoke-lab.com/" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Production consistency: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
