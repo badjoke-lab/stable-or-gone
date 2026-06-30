@@ -143,13 +143,13 @@ Only canonical data, approved editorial copy, and separately approved sourced in
 
 ## Non-negotiable deployment rule
 
-Development and production publication are separate processes.
+Development and production publication are connected by the automatic `main` publication workflow.
 
-- GitHub CI success is the completion condition for normal development work.
+- GitHub CI success is the completion condition for pull-request development work.
 - A normal pull request must not wait for Cloudflare Pages.
-- A normal `main` merge must not trigger or wait for production deployment.
-- Production deployment is allowed only through the manual production workflow at a defined publication checkpoint or for an approved emergency.
-- Production verification runs only after a deliberate deployment.
+- A normal `main` merge triggers the production deployment workflow automatically.
+- Production deployment for ordinary guide, copy, UI, and reviewed data changes is performed by `.github/workflows/deploy-production.yml` on `main` push.
+- Manual deployment is a fallback for infrastructure interruption or reserved exceptions such as DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route removal, or emergency rollback.
 - Production success may not be claimed before the deployed commit and public parity are verified.
 
 The canonical policy is `docs/deployment-policy.md`.
@@ -158,8 +158,8 @@ The canonical policy is `docs/deployment-policy.md`.
 
 Do not:
 
-- enable automatic Cloudflare production or preview deployments;
-- add production deployment commands to normal CI or data workflows;
+- enable Cloudflare Pages source-build publication outside the approved GitHub Actions upload path;
+- add production deployment commands to pull-request CI or data-only workflows;
 - use no-op commits to trigger publication;
 - retry an obsolete deployment after source changes;
 - reduce data, evidence, or validation requirements;
@@ -173,15 +173,15 @@ Do not:
 - let a monitoring execution commit, open a pull request, or mutate its accepted baseline;
 - begin growth before PR #246 or add more than two assets in a growth PR;
 - expand PR #249 into a new category, top-level route family, registry-data change, or UI redesign;
-- publish or deploy merely because PR #264 is complete.
+- claim publication before the automatic deployment for the intended `main` commit succeeds.
 
 ## Deployment classifications
 
 Every pull request must use one classification:
 
-1. **No production deployment required** — default for documentation, data, validation, workflow, monitoring-candidate, editorial-guide, and non-emergency code changes.
-2. **Publication checkpoint deployment required after explicit approval** — only for a defined public release.
-3. **Emergency production deployment required** — only for verified public breakage, security issues, or materially incorrect public state.
+1. **Automatic production deployment on main** — default for ordinary guide, copy, UI, workflow, validation, and reviewed data changes after merge.
+2. **Manual approval required before merge or dispatch** — only for DNS, secret, Cloudflare account, destructive schema migration, mass deletion, or major route-removal work.
+3. **Emergency production deployment required** — only for verified public breakage, security issues, materially incorrect public state, or rollback.
 
 ## Pull-request discipline
 
@@ -211,7 +211,8 @@ A PR that cannot cite its approved specification and roadmap item must be paused
 ## Current publication architecture
 
 ```text
-GitHub Actions builds and validates the repository
--> a manual workflow uploads the prebuilt dist directory with Wrangler
+GitHub Actions validates pull requests
+-> a main push runs the production deployment workflow
+-> Wrangler uploads the prebuilt dist directory
 -> production consistency verifies the public origin
 ```

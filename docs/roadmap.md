@@ -12,10 +12,10 @@ Next: PR #252 — 100-record identity audit
 Stable assets: 98
 Gate V2-F: not passed
 Record growth: Growth D authorized for corrected candidates only
-Production publication: deferred
+Production publication: automatic on main
 ```
 
-UI review remains paused. Normal work does not approve or publish the UI.
+UI review remains paused. The paused review does not block automatic publication of ordinary merged guide, copy, UI, workflow, validation, or reviewed data changes.
 
 PR #249 was an owner-requested editorial interruption. It added one dated regulation guide within the existing Guides / Regulation structure, changed no canonical registry records, and shifted the remaining numbered sequence by one without changing its substantive scope.
 
@@ -42,7 +42,7 @@ Uncovered stable assets: 82
 Pending baselines: 24
 Accepted baselines: 0
 Public monitoring output: false
-Production publication: false
+Production publication: automatic on main
 ```
 
 ## Editorial interruption
@@ -53,7 +53,7 @@ Canonical stable-asset count change: 0
 New guide category: no
 New top-level route family: no
 Existing route family: /guides/
-Production publication: not authorized by merge
+Production publication: automatic after merge to main
 ```
 
 ## Growth sequence
@@ -80,7 +80,7 @@ Added lifecycle events: 6
 Added evidence records: 13
 Added explicit open items: 10
 Added deployments: 3
-Production publication: false
+Production publication: automatic on main
 ```
 
 Growth C added UXD and Dollar on Chain. UXD is represented as one continuing Solana-native identity with a documented transition from its initial delta-neutral design to a broader Asset Liability Management model. Dollar on Chain is represented as one Rootstock-native identity with an official Arbitrum bridge representation and a resolved April 2026 oracle-related protocol pause.
@@ -93,4 +93,4 @@ PR #252-#259 100-record quality audit
 PR #260-#264 non-UI release preparation
 ```
 
-PR #264 does not authorize production publication.
+PR #264 is not a separate publication checkpoint; ordinary merged changes publish through the automatic main workflow.

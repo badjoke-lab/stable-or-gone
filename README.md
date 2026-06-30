@@ -176,9 +176,9 @@ The repair program adds build provenance, stale-output detection, full-route par
 
 ## Development and production deployment
 
-Development validation and production publication are separate. Normal pull requests and normal `main` merges complete through GitHub CI and do not wait for Cloudflare Pages.
+Normal pull requests are validated by GitHub CI and do not wait for Cloudflare Pages. After a pull request merges, the `main` push automatically runs `.github/workflows/deploy-production.yml`, validates guide metadata, builds the publishable site, uploads `dist` to the `stable-or-gone` Cloudflare Pages project with Wrangler, and verifies production.
 
-Production deployment is reserved for defined publication checkpoints or verified emergencies. The target workflow builds in GitHub Actions, uploads the prebuilt `dist` directory with Wrangler, and then verifies the public origin.
+Manual deployment is fallback-only for infrastructure interruption or reserved exceptions such as DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route removal, and emergency rollback.
 
 Canonical policy: `docs/deployment-policy.md`
 
@@ -187,7 +187,7 @@ Cloudflare operator setup: `docs/cloudflare-pages.md`
 Useful commands:
 
 ```bash
-npm run validate:deployment-policy
+npm run validate:guides
 npm run validate:finalization
 npm run verify:consistency
 npm run check:production

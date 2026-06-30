@@ -1,13 +1,16 @@
 # Roadmap Publication State
 
-This file preserves the operational publication checkpoint required by the deployment policy while `docs/roadmap.md` tracks the current repair and implementation sequence.
+Updated: 2026-06-30
+
+This file records the current publication path while `docs/roadmap.md` tracks the execution sequence.
 
 ```text
-Automatic production deployment: disabled
-Preview branch deployments: disabled
-Publication path: manual GitHub Actions workflow only
-Manual production publication activation — PASS
-Deployment workflow run: 27908380603
+Automatic production deployment: enabled
+Preview branch deployments: not part of the production path
+Publication path: main push -> GitHub Actions -> Wrangler upload -> production verification
+Manual workflow dispatch: fallback only
+Pages project: stable-or-gone
+Public origin: https://sog.badjoke-lab.com/
 ```
 
-The publication architecture remains manual. This record does not authorize a production deployment for PR #190 or any routine repair pull request.
+Ordinary guide, copy, UI, workflow, validation, and reviewed data changes publish after merge through the automatic `main` workflow. Manual approval is reserved for DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route removal, or emergency rollback work.

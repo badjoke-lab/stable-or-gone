@@ -70,7 +70,7 @@ PR #252-#259 100-record quality audit
 PR #260-#264 non-UI release preparation
 ```
 
-No growth PR may contain more than two new stable assets. Production publication remains deferred through PR #264.
+No growth PR may contain more than two new stable assets. Production publication is governed by `docs/deployment-policy.md` and is not deferred by the growth sequence or PR #264.
 
 ## Validation
 
@@ -88,7 +88,7 @@ PR #249 must pass:
 ## Deployment classification
 
 ```text
-No production deployment required
+Automatic production deployment on main
 ```
 
-Merge does not publish the guide. Any public release requires a separately approved publication checkpoint, manual production deployment, and public-parity verification under `docs/deployment-policy.md`.
+The guide is published by setting `publishedAt` in `src/data/guideCatalog.ts`; after merge, the automatic `main` deployment workflow publishes and verifies the route under `docs/deployment-policy.md`.

@@ -1,6 +1,6 @@
 # Cloudflare Pages Deployment
 
-Updated: 2026-06-22
+Updated: 2026-06-30
 
 ## Canonical policy
 
@@ -21,64 +21,41 @@ Pages project: stable-or-gone
 Public origin: https://sog.badjoke-lab.com/
 ```
 
-## Repository workflows
+## Repository workflow
 
-Manual production deployment:
+Production deployment is performed by:
 
 ```text
 .github/workflows/deploy-production.yml
 ```
 
-Manual standalone verification:
+The workflow runs automatically on every push to `main`. `workflow_dispatch` remains only as a fallback for rerunning the same automatic publication path after an infrastructure interruption, and manual fallback requires `confirm=DEPLOY`.
 
-```text
-.github/workflows/production-consistency.yml
-.github/workflows/production-smoke.yml
-```
-
-All three workflows are manual-only. Normal pull requests and normal `main` merges do not deploy or poll production.
-
-The production workflow requires:
-
-- dispatch from `main`
-- a deployment classification
-- exact `DEPLOY` confirmation
-- a successful full repository build
-- the GitHub `production` environment
-- configured Cloudflare repository secrets
-
-It uploads the prebuilt `dist` directory to the fixed Pages project and then runs production consistency against the deployed commit.
+Normal pull requests are validated by CI. After a PR merges, the resulting `main` push validates guide metadata, builds the publishable Astro site, uploads the prebuilt `dist` directory to Cloudflare Pages with Wrangler, and verifies production.
 
 ## Cloudflare dashboard controls
 
 Configured state:
 
 ```text
-Automatic production branch deployments: OFF
-Automatic preview branch deployments:    OFF
-Build cache:                              ON
-Build watch paths:                        *
+Production branch: main
+GitHub Actions production upload: enabled
+Build cache: ON
+Build output: dist
 ```
 
-The Git repository connection remains attached, but Git pushes do not trigger Pages builds. Publication occurs through Wrangler direct upload only.
+The repository workflow uploads prebuilt assets with Wrangler. Cloudflare Pages is not used as a separate source-build gate for publication.
 
 ## GitHub operator setup
 
-Configured state:
+Required repository secrets:
 
 ```text
-Repository secrets:
-- CLOUDFLARE_API_TOKEN
-- CLOUDFLARE_ACCOUNT_ID
-
-Environment:
-- production
-- deployment branch: main
-- required reviewers: none
-- wait timer: none
+CLOUDFLARE_API_TOKEN
+CLOUDFLARE_ACCOUNT_ID
 ```
 
-The Cloudflare token is account-scoped and limited to the Pages edit permission required by the deployment workflow.
+The GitHub `production` environment must allow the `main` deployment workflow to run without an additional routine publication approval.
 
 ## Equivalent operation
 
@@ -91,43 +68,21 @@ branch: main
 commit: checked-out main SHA
 ```
 
-## First controlled deployment
+## Verification
+
+Each automatic deployment verifies the homepage, Guides index, and UK guide route at:
 
 ```text
-Result: PASS
-Workflow run: 27908380603
-Job: 82581060887
-Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
-Deployment classification: publication-checkpoint
-Public origin: https://sog.badjoke-lab.com/
+https://sog.badjoke-lab.com/
+https://sog.badjoke-lab.com/guides/
+https://sog.badjoke-lab.com/guides/uk-stablecoin-capital-rules-2026/
 ```
 
-The run completed the full repository build, uploaded the prebuilt site to Cloudflare Pages, verified production, and wrote the deployment summary.
+The verification confirms HTTP success, homepage and Guides links to the UK guide, the UK article text, and the deployed commit/output parity checks implemented by the production check scripts.
 
-Audit:
+## Manual fallback and exceptions
 
-```text
-docs/audits/manual-production-activation-2026-06-22.md
-```
-
-## Retry rule
-
-Do not retry an old deployment after code has changed. Run one new manual deployment from the intended `main` commit.
-
-## Operational state
-
-```text
-Repository policy:              implemented
-Policy validator:               implemented
-Manual deployment workflow:     operational
-Production checks:              manual-only and operational
-Cloudflare dashboard controls:  configured
-GitHub credentials:             configured
-GitHub production environment:  configured
-First manual deployment:        passed
-```
-
-Normal GitHub development does not depend on Cloudflare availability. Production publication is performed only at planned checkpoints or verified emergencies.
+Manual action is reserved for DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route-removal, and emergency rollback work. Do not use a separate manual publication checkpoint for ordinary guide, copy, UI, or reviewed data changes.
 
 ## Official references
 
