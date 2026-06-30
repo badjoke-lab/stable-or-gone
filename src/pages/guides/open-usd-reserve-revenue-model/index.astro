@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('open-usd-reserve-revenue-model');
+const title = 'Open USD Explained: Who Gets the Reserve Income? — Stable or Gone';
+const description = 'A source-backed guide to Open USD, its participant revenue model, the difference between participant economics and holder yield, and the questions that remain before launch.';
+const canonicalPath = '/guides/open-usd-reserve-revenue-model/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Open USD Explained: Who Gets the Reserve Income?',
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['Open USD', 'OUSD', 'Open Standard', 'stablecoin reserve income', 'stablecoin distribution economics'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Compare a major issuer-centered dollar stablecoin with public reserve reporting and institution-focused direct redemption.' },
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review another large issuer-backed model where reserve economics, redemption access, and distribution are separate layers.' },
+  { href: '/stablecoin/pyusd/', title: 'PYUSD', summary: 'Review a branded stablecoin whose commercial distributor and legal issuer are recorded separately.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Review an issuer-backed dollar stablecoin with its own legal, reserve, redemption, and deployment structure.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="Open USD Explained: Who Gets the Reserve Income?"
+    description="What Open Standard announced, how participant revenue sharing differs from holder yield, and what must still be verified before Open USD becomes a live stablecoin."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>Open USD is a planned U.S.-dollar stablecoin whose reserve-generated revenue is intended to be shared mainly with participating businesses that adopt and distribute it.</strong> That is not the same as paying yield automatically to ordinary token holders.</p>
+    <p>Open Standard says more than 140 companies are participating, minting and redemption will carry no Open Standard fee, most reserve revenue will be returned to participants after a small management fee, and the stablecoin is expected to launch later in 2026. As of the information date for this guide, Open USD is an announced network and planned asset rather than a verified live token with public contracts, circulating supply, reserve reports, and complete redemption terms.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What was announced?</div>
+    <p>Open Standard presented Open USD, or OUSD, as shared infrastructure for payments, trading, financial institutions, platforms, and other businesses moving money. Its participant list includes payment networks, banks, asset managers, exchanges, wallets, technology companies, and commerce platforms.</p>
+    <table>
+      <thead><tr><th>Claim</th><th>What the published material supports</th><th>What it does not yet establish</th></tr></thead>
+      <tbody>
+        <tr><td>More than 140 participants</td><td>Open Standard publishes a large participant list and describes joining as adopting Open USD within a platform or service.</td><td>It does not make every participant a legal co-issuer, reserve custodian, board member, or equal voting owner.</td></tr>
+        <tr><td>No mint or redeem fee</td><td>Open Standard says it will not charge a fee to mint or redeem, even at scale.</td><td>It does not eliminate blockchain fees, banking fees, exchange fees, foreign-exchange costs, eligibility checks, or third-party service charges.</td></tr>
+        <tr><td>Shared reserve economics</td><td>Most reserve-generated revenue, minus a small management fee, is intended to return to participants that adopt and distribute OUSD.</td><td>The public material does not yet provide a complete allocation formula, payment schedule, eligibility threshold, or participant-by-participant entitlement.</td></tr>
+        <tr><td>Launch later in 2026</td><td>The official FAQ and Reuters describe a launch later this year.</td><td>The announcement is not proof of a live contract, live redemption system, circulating supply, or completed reserve report.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">How the reserve-income model is intended to work</div>
+    <p>A conventional fiat-backed stablecoin can earn income from cash equivalents and short-term government securities held as reserves. In an issuer-centered model, much of that income remains with the issuer or its corporate group, subject to operating costs, contractual arrangements, and regulation.</p>
+    <table>
+      <thead><tr><th>Stage</th><th>Open USD model described publicly</th></tr></thead>
+      <tbody>
+        <tr><td>1. Minting</td><td>An eligible business provides dollars and receives OUSD under terms that have not yet been fully published.</td></tr>
+        <tr><td>2. Reserve management</td><td>Open Standard says reserves will be maintained at major financial institutions in compliance with U.S. regulatory requirements.</td></tr>
+        <tr><td>3. Reserve revenue</td><td>Eligible reserve assets may generate income.</td></tr>
+        <tr><td>4. Management fee</td><td>A small fee is intended to fund technical, compliance, and operational work.</td></tr>
+        <tr><td>5. Participant distribution</td><td>Most remaining reserve-generated revenue is intended to be shared with participants that adopt and distribute OUSD.</td></tr>
+      </tbody>
+    </table>
+    <p>The commercial idea is straightforward: a payment company, exchange, wallet, bank, fintech, or platform may have a direct economic reason to integrate and grow OUSD rather than merely supporting a token whose reserve income stays primarily with another issuer.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Who may receive revenue?</div>
+    <p>The official language points to participating businesses that adopt and distribute Open USD. Depending on final agreements, that could include payment providers, exchanges, wallets, financial institutions, commerce platforms, and other distribution partners.</p>
+    <table>
+      <thead><tr><th>Group</th><th>Current reading</th></tr></thead>
+      <tbody>
+        <tr><td>Approved Open Standard participants</td><td>May have an opportunity to earn revenue based on OUSD usage, subject to the final commercial and governance terms.</td></tr>
+        <tr><td>Ordinary OUSD holders</td><td>No automatic holder-yield right is stated in the public Open Standard material reviewed for this guide.</td></tr>
+        <tr><td>Businesses outside the network</td><td>No reserve-revenue entitlement is established merely by holding, accepting, listing, or transferring a token called OUSD.</td></tr>
+      </tbody>
+    </table>
+    <p>This makes Open USD different from a yield-bearing token whose protocol income is distributed directly to holders. The revenue-sharing design is primarily a distribution incentive for participating companies, not a confirmed savings yield for every wallet balance.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Participation is not the same as joint issuance</div>
+    <p>Large company names make the announcement significant, but the participant list must be read carefully. A company can participate as an integrator, distributor, payment provider, exchange, wallet, technology provider, financial institution, or prospective governance participant without becoming the entity legally responsible for every OUSD redemption.</p>
+    <p>Before SOG treats Open USD as a normal live stable-asset record, the legal issuer, contractual redemption obligor, reserve owner, custodian, reserve manager, applicable regulatory permissions, and emergency-control structure must be identified from primary material.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">No-fee minting does not mean cost-free use</div>
+    <p>Open Standard's no-fee statement concerns the fee charged by the network for minting and redemption. Users and businesses may still face other costs.</p>
+    <table>
+      <thead><tr><th>Possible cost</th><th>Why it remains separate</th></tr></thead>
+      <tbody>
+        <tr><td>Network fees</td><td>Blockchains may charge transaction or execution fees.</td></tr>
+        <tr><td>Banking and settlement fees</td><td>Bank wires, correspondent banking, and currency conversion can carry separate charges.</td></tr>
+        <tr><td>Exchange or wallet fees</td><td>Third-party platforms set their own trading, withdrawal, custody, and service fees.</td></tr>
+        <tr><td>Compliance and access costs</td><td>Eligibility, onboarding, minimum amounts, jurisdiction, and account requirements can affect practical access.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The OUSD ticker collision</div>
+    <p><strong>OUSD is already the ticker for Origin Dollar, a separate yield-bearing stablecoin launched in 2020.</strong> Origin's current documentation describes Origin Dollar as a USDC-backed token that deploys collateral into onchain strategies and distributes generated yield through a rebasing design.</p>
+    <table>
+      <thead><tr><th>Asset</th><th>Associated project</th><th>Publicly described economic model</th></tr></thead>
+      <tbody>
+        <tr><td>Open USD (OUSD)</td><td>Open Standard</td><td>Planned reserve-revenue sharing with participating businesses that adopt and distribute the asset.</td></tr>
+        <tr><td>Origin Dollar (OUSD)</td><td>Origin Protocol</td><td>Existing yield-bearing stablecoin that distributes onchain strategy income to eligible holders through rebasing.</td></tr>
+      </tbody>
+    </table>
+    <p>A ticker is not a unique identity. Wallets, exchanges, researchers, and users must verify the full asset name, official domain, network, contract address, issuer or protocol, and product documentation. No Open Standard OUSD contract should be assumed to be official until Open Standard publishes and authenticates it.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What remains unknown before launch?</div>
+    <table>
+      <thead><tr><th>Open question</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Legal issuer and redemption obligor</td><td>Determines which entity owes value to eligible redeemers.</td></tr>
+        <tr><td>Regulatory permissions and jurisdiction</td><td>Determines the applicable issuance, reserve, disclosure, and redemption rules.</td></tr>
+        <tr><td>Reserve composition</td><td>Shows which assets support outstanding OUSD and what liquidity or credit risks they introduce.</td></tr>
+        <tr><td>Custodian and reserve manager</td><td>Shows where reserves are held, who controls them, and how responsibilities are divided.</td></tr>
+        <tr><td>Bankruptcy remoteness and asset ownership</td><td>Affects how reserves may be treated if an operating company fails.</td></tr>
+        <tr><td>Redemption eligibility, timing, and minimums</td><td>Determines whether direct redemption is practical for retail users, institutions, or only approved participants.</td></tr>
+        <tr><td>Revenue-allocation formula</td><td>Determines which participants are paid, on what basis, and how much Open Standard retains.</td></tr>
+        <tr><td>Governance rights</td><td>Determines board composition, voting power, special rights, and whether governance is materially neutral.</td></tr>
+        <tr><td>Networks and official contracts</td><td>Required to distinguish native issuance from bridged or fraudulent tokens.</td></tr>
+        <tr><td>Freeze, denylist, pause, and upgrade powers</td><td>Shows which entities can intervene in token transfers or contract operation.</td></tr>
+        <tr><td>Reserve assurance and publication schedule</td><td>Determines how outsiders can verify backing after launch.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">How SOG classifies the announcement today</div>
+    <table>
+      <tbody>
+        <tr><th>Project announced</th><td>Yes.</td></tr>
+        <tr><th>Stablecoin verified live</th><td>No, not from the sources reviewed through June 30, 2026.</td></tr>
+        <tr><th>Official circulating supply</th><td>Not yet available.</td></tr>
+        <tr><th>Official contracts</th><td>Not yet available.</td></tr>
+        <tr><th>Reserve reports</th><td>Not yet available.</td></tr>
+        <tr><th>Complete redemption terms</th><td>Not yet available.</td></tr>
+        <tr><th>Canonical SOG asset record</th><td>Deferred until launch identity, issuer, reserve, redemption, deployment, and evidence requirements can be met.</td></tr>
+      </tbody>
+    </table>
+    <p>The announcement is material enough for a dated guide, but announcement-stage claims should not be converted into a normal active stablecoin record. SOG separates project announcement, live issuance, legal identity, reserve evidence, redemption terms, deployments, and later material events.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What would trigger a SOG update?</div>
+    <ul>
+      <li>publication of the legal issuer and governing terms;</li>
+      <li>official reserve, custody, and redemption policies;</li>
+      <li>authenticated contract addresses and initial networks;</li>
+      <li>verified live issuance and circulating supply;</li>
+      <li>the first reserve report or assurance publication;</li>
+      <li>the participant revenue-allocation method;</li>
+      <li>governance, emergency-control, freeze, pause, and upgrade documentation.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources — full URLs displayed</div>
+    <ul>
+      <li>Open Standard — Open USD overview, participant list, economics, governance, minting and redemption, and FAQ: <a href="https://joinopenstandard.com/">https://joinopenstandard.com/</a></li>
+      <li>Reuters — consortium, participant count, planned launch timing, no-fee minting and redemption, and reserve-revenue sharing: <a href="https://www.reuters.com/business/consortium-including-visa-mastercard-jointly-launch-new-global-stablecoin-2026-06-30/">https://www.reuters.com/business/consortium-including-visa-mastercard-jointly-launch-new-global-stablecoin-2026-06-30/</a></li>
+      <li>Wall Street Journal — reported plans for Base, Solana, and other networks: <a href="https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-30-2026/card/blackrock-google-join-banks-and-crypto-firms-in-backing-new-stablecoin-czjc2S3yJVxmofXLQpzP">https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-30-2026/card/blackrock-google-join-banks-and-crypto-firms-in-backing-new-stablecoin-czjc2S3yJVxmofXLQpzP</a></li>
+      <li>Origin documentation — existing Origin Dollar (OUSD), launch history, backing, and yield model: <a href="https://docs.originprotocol.com/yield-bearing-tokens/origin-dollar-ousd">https://docs.originprotocol.com/yield-bearing-tokens/origin-dollar-ousd</a></li>
+      <li>Origin contract registry — existing Origin Dollar contract identity: <a href="https://docs.originprotocol.com/registry/contracts/ousd-registry">https://docs.originprotocol.com/registry/contracts/ousd-registry</a></li>
+    </ul>
+    <p>Open Standard's own material is the primary source for its intended model. Reuters and the Wall Street Journal are used for reported launch and network details. Origin's official documentation is used only to establish the separate pre-existing Origin Dollar identity. Where final legal, reserve, redemption, governance, contract, or revenue-allocation documents are unavailable, this guide labels the point as pending rather than filling the gap by inference.</p>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide explains the announcement and the publicly described economic structure of Open USD. It is not a safety rating and does not recommend buying, holding, using, integrating, or avoiding any asset. Open USD had not been verified as live through the information date. Terms, participants, networks, reserve arrangements, and launch plans may change. Verify current Open Standard documentation, authenticated contracts, issuer terms, reserve publications, and regulator records before relying on a claim.</p>
+  </section>
+</BaseLayout>

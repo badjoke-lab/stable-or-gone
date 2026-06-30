@@ -35,6 +35,19 @@ export const guideCategoryDescriptions: Record<GuideCategory, string> = {
 
 export const guides: GuideEntry[] = [
   {
+    slug: 'open-usd-reserve-revenue-model',
+    title: 'Open USD Explained: Who Gets the Reserve Income?',
+    summary: 'How Open USD proposes to share reserve-generated revenue with participating businesses, how that differs from holder yield, and what remains unknown before launch.',
+    category: 'core-concepts',
+    publishedAt: '2026-07-01',
+    informationCurrentThrough: '2026-06-30',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'neutral',
+    regionLabel: 'Global'
+  },
+  {
     slug: 'genius-act-stablecoins',
     title: 'GENIUS Act and Stablecoins',
     summary: 'A beginner-friendly guide to the U.S. payment-stablecoin law, its implementation timeline, and the questions it creates for representative dollar stablecoins.',
