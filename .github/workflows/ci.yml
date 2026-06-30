@@ -18,18 +18,8 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install
-      - name: Validate deployment policy
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run validate:deployment-policy 2>&1 | tee deployment-policy.log
-      - name: Upload deployment policy diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: deployment-policy-diagnostics-${{ github.run_id }}
-          if-no-files-found: warn
-          path: deployment-policy.log
+      - name: Validate guides
+        run: npm run validate:guides
       - name: Validate baseline
         run: npm run validate:baseline
       - name: Validate unresolved launch-date queue
