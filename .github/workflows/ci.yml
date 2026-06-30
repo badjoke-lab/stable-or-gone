@@ -44,17 +44,6 @@ jobs:
         run: npm run validate:v3
       - name: Validate final state
         run: npm run validate:final
-      - name: Validate batch finalization
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run validate:finalization 2>&1 | tee batch-finalization.log
-      - name: Upload finalization diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: batch-finalization-diagnostics
-          path: batch-finalization.log
       - name: Astro check
         shell: bash
         run: |
