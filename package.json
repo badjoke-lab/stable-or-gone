@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "npm run validate:guides && npm run build:site",
-    "build:site": "npm run generate:provenance && astro build",
+    "build:site": "npm run generate:deployment-taxonomy && npm run generate:provenance && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "monitor:review": "node scripts/monitoring/run.mjs",
