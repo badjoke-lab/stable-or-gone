@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_uxd_protocol_batch_s","stablecoin_id":"sog_st_uxd","organization_id":"sog_issuer_uxd_protocol","role":"protocol_operator","start_date":"2022-01-18","end_date":null,"status":"active","evidence_ids":["sog_src_uxd_launch_batch_s","sog_src_uxd_overview_batch_s","sog_src_uxd_alm_docs_batch_s"],"notes":"UXD Protocol operates the UXD protocol and strategy framework."},
+  {"id":"sog_rel_doc_protocol_batch_s","stablecoin_id":"sog_st_doc","organization_id":"sog_issuer_money_on_chain","role":"protocol_operator","start_date":"2019-12-12","end_date":null,"status":"active","evidence_ids":["sog_src_doc_launch_batch_s","sog_src_doc_product_batch_s","sog_src_doc_mint_batch_s"],"notes":"Money on Chain operates the Rootstock smart-contract and governance context for DOC."}
+]
