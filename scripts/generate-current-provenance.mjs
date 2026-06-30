@@ -46,11 +46,11 @@ const v3 = {
   ...v3base,
   data_groups: {
     ...v3base.data_groups,
-    legal_profiles: unique([...(v3base.data_groups?.legal_profiles ?? []), 'data/q-legal.json', 'data/r-legal.json']),
-    reserve_components: unique([...(v3base.data_groups?.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json'])
+    legal_profiles: unique([...(v3base.data_groups?.legal_profiles ?? []), 'data/q-legal.json', 'data/r-legal.json', 'data/s-legal.json']),
+    reserve_components: unique([...(v3base.data_groups?.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json', 'data/reserve-components-v3-batch-s.json'])
   }
 };
-const yields = unique([...(yieldBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json']);
+const yields = unique([...(yieldBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json']);
 
 const stats = buildRegistryStats();
 const statsPath = path.join(root, quality.generated_stats);
