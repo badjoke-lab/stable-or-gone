@@ -8,7 +8,7 @@ const assignmentsByCategory = {
   ],
   crypto_collateralized: [
     'alusd', 'avalon-usda', 'berachain-honey', 'bold', 'cashio-dollar', 'crvusd', 'dai',
-    'dforce-usx', 'djed', 'dola', 'eura', 'fx-protocol-fxusd', 'gho', 'kava-usdx', 'lisusd', 'lusd',
+    'dforce-usx', 'djed', 'dola', 'dollar-on-chain', 'eura', 'fx-protocol-fxusd', 'gho', 'kava-usdx', 'lisusd', 'lusd',
     'mainstreet-msusd', 'mento-dollar', 'mim', 'mountain-usdm', 'origin-dollar', 'qidao-mai',
     'rai', 'sai', 'usdn', 'usds', 'usk', 'vai'
   ],
@@ -18,7 +18,7 @@ const assignmentsByCategory = {
   synthetic_or_hedged: ['falcon-usdf', 'spot', 'stables-labs-usdx', 'susd', 'usde', 'usr'],
   hybrid_or_mixed: [
     'acala-ausd', 'agoric-ist', 'fei', 'frax', 'gyroscope-gyd', 'iron', 'musd', 'near-usn', 'nuon',
-    'solstice-usx', 'united-stables-u', 'usdd'
+    'solstice-usx', 'united-stables-u', 'usdd', 'uxd-protocol'
   ],
   wrapper_or_receipt: ['sdai', 'susde', 'susds'],
   other: [],
