@@ -9,7 +9,14 @@ const datedGuideSlugs = [
   'genius-act-stablecoins',
   'mica-stablecoins',
   'jpyc-vs-jpysc',
-  'uk-stablecoin-capital-rules-2026'
+  'uk-stablecoin-capital-rules-2026',
+  'open-usd-reserve-revenue-model'
+];
+const evergreenGuideSlugs = [
+  'what-is-a-depeg',
+  'status-vs-event',
+  'reserve-disclosure-basics',
+  'stablecoin-lifecycle-terms'
 ];
 const catalog = read('src/data/guideCatalog.ts');
 const slugs = catalog.split('\n').map((line) => line.trim()).filter((line) => line.startsWith("slug: '")).map((line) => line.slice(7).split("'")[0]).filter(Boolean);
@@ -21,6 +28,8 @@ check(catalog.includes('export function getFeaturedGuides(limit = 3)'), 'Feature
 check(catalog.includes("slug: 'uk-stablecoin-capital-rules-2026'"), 'UK guide catalog entry missing');
 check(catalog.includes("publishedAt: '2026-06-30'"), 'UK guide publication date missing');
 check(catalog.includes("regionLabel: 'United Kingdom'"), 'UK guide home metadata missing');
+check(catalog.includes("slug: 'open-usd-reserve-revenue-model'"), 'Open USD guide catalog entry missing');
+for (const slug of evergreenGuideSlugs) check(slugs.includes(slug), `Evergreen guide catalog entry missing: ${slug}`);
 
 for (const slug of slugs) {
   const pagePath = `src/pages/guides/${slug}/index.astro`;
@@ -35,13 +44,16 @@ for (const slug of slugs) {
 }
 
 const guideIndex = read('src/pages/guides/index.astro');
-check(guideIndex.includes('getPublishedGuides'), 'Guides index must use published-guide metadata');
-check(guideIndex.includes('publishedGuides.filter'), 'Guides index category filtering missing');
-check(!guideIndex.includes('entries: guides.filter'), 'Guides index must not list drafts directly');
+check(guideIndex.includes("import {\n  guides,"), 'Guides index must use the complete guide catalog');
+check(guideIndex.includes('const visibleGuides = guides;'), 'Guides index must expose all public guide pages');
+check(guideIndex.includes('visibleGuides.filter'), 'Guides index category filtering missing');
+check(!guideIndex.includes('getPublishedGuides'), 'Guides index must not hide evergreen guides behind publication dates');
+for (const slug of evergreenGuideSlugs) check(catalog.includes(`slug: '${slug}'`), `Evergreen guide is not represented in the visible catalog: ${slug}`);
 
 const sitemap = read('src/pages/sitemap-index.xml.ts');
-check(sitemap.includes("import { getPublishedGuides } from '../data/guideCatalog';"), 'Sitemap published-guide import missing');
-check(sitemap.includes('publishedGuides.map((guide) => `/guides/${guide.slug}/`)'), 'Published guide sitemap routes missing');
+check(sitemap.includes("import { guides } from '../data/guideCatalog';"), 'Sitemap complete-guide import missing');
+check(sitemap.includes('guides.map((guide) => `/guides/${guide.slug}/`)'), 'Sitemap must include every public guide route');
+check(!sitemap.includes('getPublishedGuides'), 'Sitemap must not hide evergreen guide routes behind publication dates');
 
 const home = read('src/pages/index.astro');
 check(home.includes("import { getFeaturedGuides } from '../data/guideCatalog';"), 'Homepage featured-guide metadata import missing');
@@ -61,4 +73,4 @@ const datedGuidesUpdate = updates.find((entry) => entry.id === 'sog_update_2026_
 check(Boolean(datedGuidesUpdate), 'Original dated-guide update entry missing');
 for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(datedGuidesUpdate.related_paths.includes(`/guides/${slug}/`), `Original update route missing: ${slug}`);
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, automatic_featured_guides: true, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, guide_slugs: slugs }, null, 2));
