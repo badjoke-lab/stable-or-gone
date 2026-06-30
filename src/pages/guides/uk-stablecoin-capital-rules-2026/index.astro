@@ -7,12 +7,12 @@ import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
 
 const guide = getGuide('uk-stablecoin-capital-rules-2026');
 const title = 'UK Stablecoin Rules: Why 1% Capital Does Not Mean 1% Backing — Stable or Gone';
-const description = 'A beginner-friendly guide to the UK stablecoin capital-rule change, the difference between issuer capital and backing assets, and the separate FCA and Bank of England regimes.';
+const description = 'A beginner-friendly guide to the reported UK stablecoin capital-rule change, the difference between issuer capital and backing assets, and the separate FCA and Bank of England regimes.';
 const canonicalPath = '/guides/uk-stablecoin-capital-rules-2026/';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'UK Stablecoin Rules: Capital Is Not Backing',
+  headline: 'UK Stablecoin Rules: Why 1% Capital Does Not Mean 1% Backing',
   description,
   url: `https://sog.badjoke-lab.com${canonicalPath}`,
   inLanguage: 'en',
@@ -34,7 +34,7 @@ const relatedRecords = [
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
   <GuideArticleHeader
     category={guideCategoryLabels[guide.category]}
-    title="UK Stablecoin Rules: Capital Is Not Backing"
+    title="UK Stablecoin Rules: Why 1% Capital Does Not Mean 1% Backing"
     description="What the reported reduction from a 2% to 1% issuer-capital requirement means, what it does not mean, and why the FCA and Bank of England frameworks must be read separately."
     publishedAt={guide.publishedAt}
     informationCurrentThrough={guide.informationCurrentThrough}
@@ -44,21 +44,22 @@ const relatedRecords = [
   <section class="panel registry">
     <div class="bar">30-second summary</div>
     <p><strong>The reported 2% to 1% change concerns capital held by a regulated issuer to absorb business losses.</strong> It is not a rule allowing a stablecoin to keep only one pound of backing assets for every one hundred pounds of tokens.</p>
-    <p>Backing assets, liquidity, redemption arrangements, and issuer capital solve different problems. The UK is also building two connected but distinct regimes: the FCA framework for most qualifying stablecoin activity and a Bank of England framework for sterling-denominated stablecoins that become systemic payment systems.</p>
+    <p>The reported coefficient belongs to the FCA issuer regime for issuing qualifying stablecoins in the UK and was described by Reuters as governing sterling-denominated stablecoin issuers. It is not a worldwide capital rule for every stablecoin already circulating in the UK.</p>
+    <p>Backing assets, liquidity, redemption arrangements, and issuer capital solve different problems. The UK is also building two connected but distinct regimes: the FCA framework for UK-issued qualifying stablecoins and other regulated cryptoasset activities, and a Bank of England framework for sterling-denominated stablecoins that become systemic payment systems.</p>
   </section>
 
   <section class="panel registry">
     <div class="bar">What changed in the headline?</div>
-    <p>On June 30, 2026, Reuters reported that the Financial Conduct Authority had reduced a key variable capital requirement for stablecoin issuers from 2% of the value of issued stablecoins to 1% after industry feedback. The wider cryptoasset framework is intended to begin in October 2027.</p>
+    <p>On June 30, 2026, Reuters reported that the Financial Conduct Authority had reduced a key variable capital requirement for stablecoin issuers from 2% of the value of issued stablecoins to 1% after industry feedback. The broader UK cryptoasset regime starts on October 25, 2027.</p>
     <table>
       <thead><tr><th>Headline number</th><th>What it refers to</th><th>What it does not establish</th></tr></thead>
       <tbody>
         <tr><td>2%</td><td>The earlier proposed level for a variable issuer-capital component described in the FCA prudential consultation process.</td><td>It was not the proposed backing ratio for tokens.</td></tr>
         <tr><td>1%</td><td>The lower final level reported after the FCA considered industry evidence and competitiveness concerns.</td><td>It does not mean the issuer may leave 99% of token liabilities unbacked.</td></tr>
-        <tr><td>October 2027</td><td>The start of the broader UK cryptoasset regulatory regime.</td><td>It does not mean every existing stablecoin becomes approved on that date.</td></tr>
+        <tr><td>October 25, 2027</td><td>The start of the broader UK cryptoasset regulatory regime.</td><td>It does not mean every existing stablecoin becomes approved on that date.</td></tr>
       </tbody>
     </table>
-    <p>The final handbook text and any accompanying FCA policy statements remain the controlling technical sources. This guide therefore treats the 1% figure as a reported final policy outcome and avoids converting it into a complete capital calculation for any individual firm.</p>
+    <p>The final FCA policy statements and Handbook text are the controlling technical sources. This guide therefore treats the 1% figure as a reported final policy outcome and avoids converting it into a complete capital calculation for any individual firm until the relevant final text is directly verified.</p>
   </section>
 
   <section class="panel registry">
@@ -78,7 +79,7 @@ const relatedRecords = [
 
   <section class="panel registry">
     <div class="bar">A simplified example</div>
-    <p>Assume a regulated issuer has £100 million of stablecoins outstanding. In a deliberately simplified illustration, a 2% variable capital component would equal £2 million, while a 1% component would equal £1 million.</p>
+    <p>Assume an in-scope issuer has £100 million of stablecoins outstanding. In a deliberately simplified illustration, a 2% variable capital component would equal £2 million, while a 1% component would equal £1 million.</p>
     <table>
       <thead><tr><th>Item</th><th>Simplified amount</th><th>Role</th></tr></thead>
       <tbody>
@@ -88,12 +89,12 @@ const relatedRecords = [
         <tr><td>Variable issuer capital at 1%</td><td>£1 million</td><td>Lower loss-absorbing company resources under the reported final adjustment.</td></tr>
       </tbody>
     </table>
-    <p>This example is not a complete FCA capital calculation. Fixed overhead requirements, other risk charges, group structure, permissions, deductions, and detailed handbook rules may change the actual requirement for a firm.</p>
+    <p>This example is not a complete FCA capital calculation. Fixed overhead requirements, other risk charges, group structure, permissions, deductions, and detailed Handbook rules may change the actual requirement for a firm.</p>
   </section>
 
   <section class="panel registry">
     <div class="bar">Why the FCA lowered the requirement</div>
-    <p>The policy problem is a trade-off. Higher capital can make issuers more resilient, but it also ties up more shareholder funding and can make a low-margin stablecoin business difficult to operate in the UK.</p>
+    <p>The policy problem is a trade-off. Higher capital can make issuers more resilient, but it also ties up more shareholder funding and can make a low-margin sterling stablecoin business difficult to operate in the UK.</p>
     <table>
       <thead><tr><th>Reason for a higher level</th><th>Reason for a lower level</th></tr></thead>
       <tbody>
@@ -102,7 +103,7 @@ const relatedRecords = [
         <tr><td>Greater resilience where the issuer depends on third parties, custodians, banks, or technology providers.</td><td>Closer alignment with evidence submitted by firms about viable business models.</td></tr>
       </tbody>
     </table>
-    <p>Reducing one requirement does not remove the wider framework. Firms still face authorization, governance, conduct, safeguarding, disclosure, prudential, operational, and financial-crime obligations.</p>
+    <p>Reducing one requirement does not remove the wider framework. In-scope firms still face authorization, governance, conduct, safeguarding, disclosure, prudential, operational, and financial-crime obligations.</p>
   </section>
 
   <section class="panel registry">
@@ -110,13 +111,13 @@ const relatedRecords = [
     <table>
       <thead><tr><th>Regime</th><th>Main target</th><th>What to watch</th></tr></thead>
       <tbody>
-        <tr><td>FCA</td><td>Most qualifying stablecoin issuance and related regulated cryptoasset activities.</td><td>Issuer authorization, backing and safeguarding, redemption, disclosure, conduct, prudential capital, and service-provider rules.</td></tr>
+        <tr><td>FCA</td><td>Issuing qualifying stablecoins in the United Kingdom and related non-systemic regulated cryptoasset activities.</td><td>Issuer authorization, backing and safeguarding, redemption, disclosure, conduct, prudential capital, and service-provider rules.</td></tr>
         <tr><td>Bank of England</td><td>Sterling-denominated stablecoins recognized as systemic payment systems.</td><td>System-wide resilience, central-bank deposits, permitted short-term UK government debt, issuance guardrails, liquidity support, and prompt redemption.</td></tr>
         <tr><td>HM Treasury</td><td>Legislation and recognition decisions that define the perimeter and identify systemic payment systems.</td><td>Which activities are regulated and when a stablecoin moves into the systemic framework.</td></tr>
       </tbody>
     </table>
-    <p>The Bank of England stated on June 22, 2026 that its systemic framework would allow up to 70% of backing assets in short-term UK government debt, with the remainder in central-bank deposits. It replaced proposed temporary individual holding limits with an initial £40 billion issuance guardrail for each systemic stablecoin.</p>
-    <p>The Bank also made clear that its regime does not cover non-systemic stablecoins used mainly for cryptoasset trading. Those remain within the FCA side of the framework.</p>
+    <p>The Bank of England stated on June 22, 2026 that its systemic framework would allow up to 70% of backing assets in short-term UK government debt, with the remainder in unremunerated central-bank deposits. It replaced proposed temporary individual holding limits with an initial £40 billion issuance guardrail for each systemic stablecoin.</p>
+    <p>The Bank also made clear that its regime does not cover non-systemic stablecoins used mainly for cryptoasset trading. Those uses remain outside the Bank's systemic-payment regime and are addressed through the FCA and wider UK regulatory perimeter.</p>
   </section>
 
   <section class="panel registry">
@@ -142,9 +143,9 @@ const relatedRecords = [
       <tbody>
         <tr><th>No immediate change to token balances</th><td>The announcement does not alter balances, contracts, or redemption rights by itself.</td></tr>
         <tr><th>No universal approval</th><td>USDT, USDC, PYUSD, RLUSD, DAI, and other assets do not become approved UK stablecoins merely because the framework is finalized.</td></tr>
-        <tr><th>No global 1% rule</th><td>The reported FCA adjustment is not a worldwide capital standard for every issuer or every currency.</td></tr>
-        <tr><th>Product and entity structure matter</th><td>A global brand may use a different legal issuer, token, or distribution arrangement for the UK market.</td></tr>
-        <tr><th>Systemic status is separate</th><td>A widely used sterling payment stablecoin may later move into the Bank of England framework.</td></tr>
+        <tr><th>No global 1% rule</th><td>The reported FCA adjustment concerns its issuer regime for sterling-denominated stablecoins. Global circulation or availability through a UK service does not by itself impose that issuer coefficient on every dollar stablecoin.</td></tr>
+        <tr><th>Product and entity structure matter</th><td>A global brand may use a different legal issuer, token, or distribution arrangement for a UK-issued product.</td></tr>
+        <tr><th>Systemic status is separate</th><td>A widely used sterling payment stablecoin may later move into the Bank of England framework after recognition by HM Treasury.</td></tr>
       </tbody>
     </table>
   </section>
@@ -156,7 +157,7 @@ const relatedRecords = [
       <thead><tr><th>Claim to verify</th><th>Evidence to look for</th></tr></thead>
       <tbody>
         <tr><td>Authorized issuer</td><td>FCA register entry, permissions, legal entity, and effective date.</td></tr>
-        <tr><td>Qualifying stablecoin</td><td>Token identity, reference currency, issuance entity, and current product documentation.</td></tr>
+        <tr><td>Qualifying stablecoin</td><td>Token identity, reference currency, issuance entity, place of issuance, and current product documentation.</td></tr>
         <tr><td>Backing</td><td>Eligible asset policy, custody structure, segregation, reporting period, and assurance source.</td></tr>
         <tr><td>Redemption</td><td>Eligible customers, minimums, fees, timing, settlement currency, and suspension terms.</td></tr>
         <tr><td>Capital</td><td>The applicable FCA formula, fixed and variable components, deductions, and consolidated treatment.</td></tr>
@@ -170,9 +171,9 @@ const relatedRecords = [
     <table>
       <thead><tr><th>Status</th><th>What can safely be said</th></tr></thead>
       <tbody>
-        <tr><td>Confirmed in official material</td><td>The regime starts on October 25, 2027; the FCA application window runs from September 30, 2026 to February 28, 2027; the Bank has published a separate systemic-stablecoin framework with a 70% short-term government-debt limit and an initial £40 billion issuance guardrail.</td></tr>
-        <tr><td>Reported final FCA outcome</td><td>Reuters reported that the key variable stablecoin issuer-capital requirement was reduced from 2% to 1% after consultation feedback.</td></tr>
-        <tr><td>Still requires technical verification</td><td>The exact handbook calculation for each firm, the interaction with other capital requirements, and the authorization status of any named future stablecoin product.</td></tr>
+        <tr><td>Confirmed in official material</td><td>The regime starts on October 25, 2027; the FCA application window runs from September 30, 2026 to February 28, 2027; and the Bank has published a separate systemic-stablecoin framework with a 70% short-term government-debt limit and an initial £40 billion issuance guardrail.</td></tr>
+        <tr><td>Reported final FCA outcome</td><td>Reuters reported that the key variable capital requirement for issuers governed by the FCA's sterling-stablecoin issuer rules was reduced from 2% to 1% after consultation feedback.</td></tr>
+        <tr><td>Still requires technical verification</td><td>The controlling final FCA rule references, the complete firm-level calculation, the interaction with other capital requirements, and the authorization status of any named future stablecoin product.</td></tr>
       </tbody>
     </table>
   </section>
@@ -182,12 +183,14 @@ const relatedRecords = [
     <ul>
       <li><a href="https://www.fca.org.uk/publications/consultation-papers/cp25-14-stablecoin-issuance-cryptoasset-custody">FCA CP25/14 — Stablecoin issuance and cryptoasset custody</a></li>
       <li><a href="https://www.fca.org.uk/publications/consultation-papers/cp25-15-prudential-regime-cryptoasset-firms">FCA CP25/15 — A prudential regime for cryptoasset firms</a></li>
+      <li><a href="https://www.fca.org.uk/publications/consultation-papers/cp25-42-prudential-regime-cryptoasset-firms">FCA CP25/42 — A prudential regime for cryptoasset firms</a></li>
+      <li><a href="https://www.fca.org.uk/firms/new-regime-cryptoasset-regulation/fsma-handbook">FCA — Cryptoasset regulated activities and the FCA Handbook</a></li>
       <li><a href="https://www.fca.org.uk/firms/new-regime-cryptoasset-regulation/what-you-need-to-do">FCA — Preparing for the new cryptoasset regulatory regime</a></li>
       <li><a href="https://www.bankofengland.co.uk/news/2026/june/boe-launches-policy-statement-and-draft-rules-on-regulating-systemic-stablecoins">Bank of England — Policy statement and draft rules for systemic stablecoins</a></li>
-      <li><a href="https://www.gov.uk/government/publications/regulatory-regime-for-cryptoassets-regulated-activities-draft-si-and-policy-note">HM Treasury — Cryptoasset regulated-activities legislation and policy material</a></li>
+      <li><a href="https://www.legislation.gov.uk/uksi/2026/102/contents/made">UK legislation — Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026</a></li>
       <li><a href="https://www.reuters.com/business/finance/uk-dilutes-stablecoin-capital-requirement-final-crypto-rulebook-2026-06-29/">Reuters — Report on the FCA's final capital adjustment</a></li>
     </ul>
-    <p>The Reuters report is used for the newly announced 1% figure while the final FCA policy-statement and handbook materials are being checked directly. If the controlling text differs, this guide must be corrected and the revision recorded.</p>
+    <p>The Reuters report is used for the newly announced 1% figure while the controlling final FCA policy-statement and Handbook references are being checked directly. If the controlling text differs, this guide must be corrected and the revision recorded.</p>
   </section>
 
   <RelatedSogRecords records={relatedRecords} />
