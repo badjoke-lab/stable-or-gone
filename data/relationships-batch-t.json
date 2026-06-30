@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_eurm_mento_batch_t","stablecoin_id":"sog_st_eurm","organization_id":"sog_issuer_mento","role":"protocol_operator","start_date":"2021-04-22","end_date":null,"status":"active","evidence_ids":["sog_src_eurm_launch_batch_t","sog_src_eurm_rebrand_batch_t","sog_src_eurm_reserve_batch_t"],"notes":"Mento Protocol operates the reserve, exchange, governance, and stable-token context for the same asset identity launched as cEUR and now displayed as EURm."},
+  {"id":"sog_rel_usd3_reserve_batch_t","stablecoin_id":"sog_st_usd3","organization_id":"sog_issuer_reserve_protocol","role":"protocol_operator","start_date":"2024-04-25","end_date":null,"status":"active","evidence_ids":["sog_src_usd3_launch_batch_t","sog_src_usd3_dtf_docs_batch_t","sog_src_usd3_q1_2026_batch_t"],"notes":"Reserve Protocol provides the permissionless RToken infrastructure; USD3 collateral and upgrades are governed by its own RSR-staker governance process."}
+]
