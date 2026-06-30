@@ -21,5 +21,6 @@ stablecoin-profiles-batch-o.json
 stablecoin-profiles-batch-p.json
 stablecoin-profiles-batch-q.json
 r-profiles.json
+s-profiles.json
 `;
 void profileLoaderInventory;
