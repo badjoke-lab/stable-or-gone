@@ -213,4 +213,4 @@ docs/roadmap.md
 docs/spec-governance.md
 ```
 
-The UI program remains paused after PR #216 and Gate V2-F remains pending. PR #264 does not authorize publication. Production publication remains deferred until owner-led visual review, Gate V2-F approval, an explicit publication checkpoint, manual deployment, and public-parity verification.
+The UI program remains paused after PR #216 and Gate V2-F remains pending. The pause does not block publication: ordinary merged changes publish automatically from `main` under `docs/deployment-policy.md`. PR #264 is not a separate publication checkpoint.

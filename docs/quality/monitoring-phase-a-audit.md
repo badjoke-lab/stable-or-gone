@@ -228,7 +228,7 @@ Phase A is closed only for the bounded review-only architecture above. The safet
 Phase A: complete
 Next: PR #240 monitoring feasibility audit for all 92 assets
 Gate V2-F: not passed
-Production publication: deferred
+Production publication: automatic on main for ordinary merged changes
 ```
 
 ## Deployment classification

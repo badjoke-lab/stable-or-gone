@@ -30,7 +30,7 @@ for (const phrase of [
   'PR #249 Editorial guide: 96 -> 96 — complete',
   'PR #250 Growth C: 96 -> 98 — complete',
   'PR #251 Growth D: 98 -> 100',
-  'PR #264 does not authorize production publication'
+  'PR #264 is not a separate publication checkpoint'
 ]) {
   if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
 }
@@ -38,12 +38,12 @@ for (const phrase of [
 for (const [document, phrase] of [
   [program, 'No growth PR may contain more than two new stable assets'],
   [amendment, 'PR #249 is an editorial interruption and changes no canonical registry count'],
-  [amendment, 'Production publication remains deferred through PR #264'],
+  [amendment, 'Production publication is governed by `docs/deployment-policy.md`'],
   [amendment, 'PR #250 Growth C: 96 -> 98'],
   [governance, 'Monitoring executions remain read-only'],
-  [governance, 'PR #264 does not authorize publication'],
+  [governance, 'PR #264 is not a separate publication checkpoint'],
   [agents, 'Growth beyond 92 assets is permitted only after PR #246'],
-  [agents, 'Production publication remains prohibited through PR #264'],
+  [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
   [agents, 'PR #249 is limited to the UK stablecoin capital-rules guide']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);

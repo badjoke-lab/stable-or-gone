@@ -6,9 +6,9 @@ Registry checkpoint: 92 canonical stable assets
 
 ## Purpose
 
-This program advances SOG while detailed visual review is temporarily unavailable. It does not approve the current UI, pass Gate V2-F, authorize production publication, or permit monitored findings to enter canonical data automatically.
+This program advances SOG while detailed visual review is temporarily unavailable. It does not approve the current UI, pass Gate V2-F, or permit monitored findings to enter canonical data automatically. Gate V2-F is not a publication blocker for ordinary merged changes under `docs/deployment-policy.md`.
 
-The UI implementation merged through PR #216 remains an intermediate repository state. Further visual corrections and the full all-route visual audit resume only when owner review is practical.
+The UI implementation merged through PR #216 remains an intermediate repository state. Further visual corrections and the full all-route visual audit resume only when owner review is practical, but that paused review does not block automatic publication of ordinary merged changes.
 
 PR #233 amends the earlier 92-record-only program. It authorizes a bounded non-UI continuation through material-change monitoring, monitored-source coverage, reviewed growth to 100, a 100-record integrity audit, and non-UI release preparation. The continuation stops before UI approval and publication.
 
@@ -48,10 +48,10 @@ docs/quality/monitoring-review-material-spec.md
 - Candidate monitoring output never writes directly to canonical public data.
 - Monitoring baselines are accepted only through a separate human-reviewed repository change.
 - Monitoring executions remain read-only and do not update their own baseline.
-- Normal quality PRs require no production deployment.
+- Normal pull requests do not wait for production, but merged ordinary changes publish automatically from `main`.
 - Growth is allowed only through PR #246-#250 and only after candidate audit.
 - No growth PR may contain more than two new stable assets.
-- Production publication remains deferred through PR #263.
+- Production publication is governed by `docs/deployment-policy.md` and is not deferred by this quality sequence.
 
 ## Completed foundation
 
@@ -86,13 +86,13 @@ PR #233:
 - keeps Gate V2-F pending and the UI program paused;
 - authorizes PR #234-#263 as the bounded non-UI sequence;
 - authorizes reviewed growth only after PR #246;
-- keeps production publication deferred;
+- keeps UI approval separate from publication while relying on the automatic main publication policy;
 - preserves all current canonical records and generated public output.
 
 Deployment classification:
 
 ```text
-No production deployment required
+Automatic production deployment on main
 ```
 
 ## Phase A — material-change monitoring
@@ -280,29 +280,20 @@ release-note draft
 candidate commit reference
 ```
 
-It must state visibly that UI review, Gate V2-F, publication approval, production deployment, and public-parity verification remain outstanding.
+It must state visibly that UI review and Gate V2-F remain outstanding while production publication follows `docs/deployment-policy.md`.
 
 ## UI resumption gate
 
 After PR #263, continuation stops. The deferred UI audit resumes only after the owner can inspect representative desktop and mobile pages. The roadmap then assigns separate correction PRs and a Gate V2-F decision.
 
-Production publication is permitted only after:
-
-```text
-owner all-route visual review
-Gate V2-F corrections
-explicit Gate V2-F pass
-explicit publication checkpoint approval
-manual production deployment
-public parity verification
-```
+Production publication is not blocked by this UI resumption gate. Ordinary merged changes publish automatically from `main`; owner all-route visual review, Gate V2-F corrections, and an explicit Gate V2-F pass remain UI-quality gates only.
 
 ## Deployment classification
 
 All PRs in this program default to:
 
 ```text
-No production deployment required
+Automatic production deployment on main
 ```
 
 Emergency publication remains governed exclusively by `docs/deployment-policy.md`.
