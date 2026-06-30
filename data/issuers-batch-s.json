@@ -1,0 +1,4 @@
+[
+  {"id":"sog_issuer_uxd_protocol","slug":"uxd-protocol","name":"UXD Protocol","issuer_type":"protocol","jurisdiction":"Decentralized protocol ecosystem","related_stablecoins":["uxd-protocol"],"official_url":"https://uxd.fi/","summary":"Protocol and governance context for UXD.","confidence":"high","last_verified_at":"2026-06-30","notes":"Batch S compatibility row."},
+  {"id":"sog_issuer_money_on_chain","slug":"money-on-chain","name":"Money on Chain","issuer_type":"protocol","jurisdiction":"Decentralized Rootstock protocol ecosystem","related_stablecoins":["dollar-on-chain"],"official_url":"https://moneyonchain.com/","summary":"Protocol and governance context for Dollar on Chain.","confidence":"high","last_verified_at":"2026-06-30","notes":"Batch S compatibility row."}
+]
