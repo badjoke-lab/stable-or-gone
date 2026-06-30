@@ -1,8 +1,4 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
-  sog_update_2026_06_30_uk_stablecoin_capital_guide: {
-    title: 'UK stablecoin capital-rules guide prepared',
-    summary: 'Added a dated guide explaining why the reported reduction of a UK issuer-capital requirement from 2% to 1% is not a reduction in stablecoin backing, and how the FCA and Bank of England regimes differ.'
-  },
   sog_update_2026_06_25_pr129_pr132_dated_guides: {
     title: 'Dated regulation and comparison guides added',
     summary: 'Added beginner-friendly guides to the GENIUS Act, MiCA, and the differences between JPYC and JPYSC, together with direct discovery from relevant record pages.'
