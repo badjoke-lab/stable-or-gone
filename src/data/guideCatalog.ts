@@ -51,6 +51,16 @@ export const guides: GuideEntry[] = [
     revisions: []
   },
   {
+    slug: 'uk-stablecoin-capital-rules-2026',
+    title: 'UK Stablecoin Rules: Capital Is Not Backing',
+    summary: 'What the reported cut from a 2% to 1% issuer-capital requirement means, why it does not halve stablecoin backing, and how the FCA and Bank of England regimes differ.',
+    category: 'regulation',
+    publishedAt: null,
+    informationCurrentThrough: '2026-06-30',
+    updatedAt: null,
+    revisions: []
+  },
+  {
     slug: 'jpyc-vs-jpysc',
     title: 'JPYC vs JPYSC',
     summary: 'A side-by-side guide to two Japanese-yen stablecoins with different issuers, legal structures, reserves, redemption routes, launch stages, and wallet availability.',
