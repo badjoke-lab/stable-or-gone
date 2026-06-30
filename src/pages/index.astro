@@ -9,7 +9,7 @@ import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '.
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { formatPublicBackingModelLabel } from '../utils/backingModel';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
-import { getGuide } from '../data/guideCatalog';
+import { getFeaturedGuides } from '../data/guideCatalog';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { getStablecoins, getOrganizations, getRelationships, getEvents } from '../lib/data/registry';
 import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
@@ -25,11 +25,11 @@ const primaryOrganizationName = (stablecoinId: string) => {
   return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
 };
 
-const featuredGuides = [
-  { guide: getGuide('genius-act-stablecoins'), theme: 'us', label: 'United States' },
-  { guide: getGuide('mica-stablecoins'), theme: 'eu', label: 'European Union' },
-  { guide: getGuide('uk-stablecoin-capital-rules-2026'), theme: 'uk', label: 'United Kingdom' }
-];
+const featuredGuides = getFeaturedGuides(3).map((guide) => ({
+  guide,
+  theme: guide.theme ?? 'neutral',
+  label: guide.regionLabel ?? 'Guide'
+}));
 
 const selectedSlugs = ['usdt', 'usdc', 'dai', 'ust', 'busd', 'frax', 'tusd', 'fdusd', 'pyusd', 'usdd'];
 const stablecoinBySlug = new Map(stablecoins.map((coin) => [coin.slug, coin] as const));

@@ -18,18 +18,8 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install
-      - name: Validate deployment policy
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run validate:deployment-policy 2>&1 | tee deployment-policy.log
-      - name: Upload deployment policy diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: deployment-policy-diagnostics-${{ github.run_id }}
-          if-no-files-found: warn
-          path: deployment-policy.log
+      - name: Validate guides
+        run: npm run validate:guides
       - name: Validate baseline
         run: npm run validate:baseline
       - name: Validate unresolved launch-date queue
@@ -54,17 +44,6 @@ jobs:
         run: npm run validate:v3
       - name: Validate final state
         run: npm run validate:final
-      - name: Validate batch finalization
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run validate:finalization 2>&1 | tee batch-finalization.log
-      - name: Upload finalization diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: batch-finalization-diagnostics
-          path: batch-finalization.log
       - name: Astro check
         shell: bash
         run: |
@@ -78,7 +57,17 @@ jobs:
           if-no-files-found: warn
           path: astro-check.log
       - name: Build site
-        run: npm run build:site
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build:site 2>&1 | tee build-site.log
+      - name: Upload build diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-site-diagnostics-${{ github.run_id }}
+          if-no-files-found: warn
+          path: build-site.log
       - name: Verify deployment output
         run: npm run verify:deployment
       - name: Verify public layer

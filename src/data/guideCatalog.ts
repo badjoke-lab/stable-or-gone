@@ -1,4 +1,5 @@
 export type GuideCategory = 'regulation' | 'asset-comparisons' | 'core-concepts';
+export type GuideTheme = 'us' | 'eu' | 'uk' | 'jp' | 'neutral';
 
 export interface GuideRevision {
   date: string;
@@ -15,6 +16,9 @@ export interface GuideEntry {
   informationCurrentThrough: string;
   updatedAt: string | null;
   revisions: GuideRevision[];
+  featured?: boolean;
+  theme?: GuideTheme;
+  regionLabel?: string;
 }
 
 export const guideCategoryLabels: Record<GuideCategory, string> = {
@@ -38,7 +42,10 @@ export const guides: GuideEntry[] = [
     publishedAt: '2026-06-25',
     informationCurrentThrough: '2026-06-25',
     updatedAt: null,
-    revisions: []
+    revisions: [],
+    featured: true,
+    theme: 'us',
+    regionLabel: 'United States'
   },
   {
     slug: 'mica-stablecoins',
@@ -48,17 +55,23 @@ export const guides: GuideEntry[] = [
     publishedAt: '2026-06-25',
     informationCurrentThrough: '2026-06-25',
     updatedAt: null,
-    revisions: []
+    revisions: [],
+    featured: true,
+    theme: 'eu',
+    regionLabel: 'European Union'
   },
   {
     slug: 'uk-stablecoin-capital-rules-2026',
     title: 'UK Stablecoin Rules: Capital Is Not Backing',
     summary: 'What the reported cut from a 2% to 1% issuer-capital requirement means, why it does not halve stablecoin backing, and how the FCA and Bank of England regimes differ.',
     category: 'regulation',
-    publishedAt: null,
+    publishedAt: '2026-06-30',
     informationCurrentThrough: '2026-06-30',
     updatedAt: null,
-    revisions: []
+    revisions: [],
+    featured: true,
+    theme: 'uk',
+    regionLabel: 'United Kingdom'
   },
   {
     slug: 'jpyc-vs-jpysc',
@@ -68,7 +81,9 @@ export const guides: GuideEntry[] = [
     publishedAt: '2026-06-25',
     informationCurrentThrough: '2026-06-25',
     updatedAt: null,
-    revisions: []
+    revisions: [],
+    theme: 'jp',
+    regionLabel: 'Japan'
   },
   {
     slug: 'what-is-a-depeg',
@@ -111,6 +126,19 @@ export const guides: GuideEntry[] = [
     revisions: []
   }
 ];
+
+const byPublishedDate = (a: GuideEntry, b: GuideEntry) => {
+  const dateOrder = String(b.publishedAt).localeCompare(String(a.publishedAt));
+  return dateOrder || a.title.localeCompare(b.title);
+};
+
+export function getPublishedGuides(): GuideEntry[] {
+  return guides.filter((entry) => Boolean(entry.publishedAt)).sort(byPublishedDate);
+}
+
+export function getFeaturedGuides(limit = 3): GuideEntry[] {
+  return getPublishedGuides().filter((entry) => entry.featured).slice(0, limit);
+}
 
 export function getGuide(slug: string): GuideEntry {
   const guide = guides.find((entry) => entry.slug === slug);

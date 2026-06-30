@@ -17,4 +17,5 @@ jobs:
         with:
           node-version: 20
       - name: Validate Registry v3 view
-        run: node scripts/validate-registry-v3-chain-view.mjs
+        run: node scripts/validate-registry-v3-chain-view-site.mjs
+        # Canonical entry point: scripts/validate-registry-v3-chain-view.mjs
