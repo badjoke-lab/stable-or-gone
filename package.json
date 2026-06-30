@@ -108,7 +108,11 @@
     "verify:consistency": "node scripts/verify-public-consistency-safe.mjs",
     "verify:deployment": "node scripts/verify-post-migration-deployment.mjs",
     "verify:public": "node scripts/verify-public-layer.mjs && node scripts/verify-public-layer-deployment-axes.mjs",
-    "check:production": "node scripts/check-production.mjs && node scripts/check-production-provenance.mjs && node scripts/check-production-output-parity.mjs"
+    "check:production": "node scripts/check-production.mjs && node scripts/check-production-provenance.mjs && node scripts/check-production-output-parity.mjs",
+    "screenshot:desktop": "node scripts/capture-site-screenshots.mjs --device desktop",
+    "screenshot:mobile": "node scripts/capture-site-screenshots.mjs --device mobile",
+    "screenshot:all": "npm run screenshot:desktop && npm run screenshot:mobile",
+    "screenshot:zip": "node scripts/capture-site-screenshots.mjs --device desktop --zip-only && node scripts/capture-site-screenshots.mjs --device mobile --zip-only"
   },
   "dependencies": {
     "@astrojs/check": "latest",
@@ -116,6 +120,7 @@
     "typescript": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest"
+    "@types/node": "latest",
+    "playwright": "latest"
   }
 }

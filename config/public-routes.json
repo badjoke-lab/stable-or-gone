@@ -1,0 +1,16 @@
+{
+  "routes": [
+    "/",
+    "/stablecoins/",
+    "/issuers/",
+    "/events/",
+    "/models/",
+    "/guides/",
+    "/glossary/",
+    "/methodology/",
+    "/updates/",
+    "/about/",
+    "/support/",
+    "/contact/"
+  ]
+}
