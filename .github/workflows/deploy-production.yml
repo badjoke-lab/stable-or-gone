@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: sog-production-deployment
@@ -112,3 +113,18 @@ jobs:
           echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
           echo "- Public origin: https://sog.badjoke-lab.com/" >> "$GITHUB_STEP_SUMMARY"
           echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report deployment result on PR 252
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const sha = context.sha;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 252,
+              body: `Production deployment status: **${status}**\n\n- Commit: \`${sha}\`\n- Run: ${runUrl}\n- Guide: https://sog.badjoke-lab.com/guides/uk-stablecoin-capital-rules-2026/`
+            });
