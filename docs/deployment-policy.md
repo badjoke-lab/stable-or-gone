@@ -1,234 +1,110 @@
 # Deployment Policy
 
-Updated: 2026-06-28
+Updated: 2026-06-30
 
 ## Status
 
-This file is the canonical deployment policy for Stable or Gone.
+Stable or Gone publishes the current `main` branch automatically.
 
 ```text
-Manual publication architecture: operational
-First controlled deployment: PASS
-Workflow run: 27908380603
-Source commit: 1aa87b0ca8251eea651af74f2af80f30c791e39c
+Source of truth: main
+Production workflow: .github/workflows/deploy-production.yml
 Pages project: stable-or-gone
 Public origin: https://sog.badjoke-lab.com/
-Current publication state: paused during the quality and UI repair programs
+Automatic main publication: enabled
+Manual workflow dispatch: fallback only
+UI review gate: not a publication blocker
 ```
 
-All deployment decisions, classifications, Cloudflare settings, production workflows, audits, and roadmaps must follow this file. Document authority and change control are defined in `docs/spec-governance.md`.
+## Core rule
 
-## Core principle
-
-Development and production publication are separate processes.
+A normal merged change must not require a separate publication decision.
 
 ```text
-Development completion
-= source changes complete
-+ repository validation complete
-+ GitHub CI successful
-
-Production publication completion
-= deliberate manual deployment
-+ deployed commit confirmed
-+ production consistency successful
+PR merged to main
+→ validate the publishable site
+→ build dist
+→ upload dist to Cloudflare Pages with Wrangler
+→ verify the deployed commit
+→ verify the public guide routes
 ```
 
-Cloudflare availability or queue length must not block ordinary repository development.
+Article publication, ordinary UI changes, copy changes, and normal reviewed registry changes follow this path.
 
-## Source-of-truth architecture
+## Guide publication
+
+Guide visibility is controlled by `src/data/guideCatalog.ts`.
 
 ```text
-latest intended main
-→ manual GitHub Actions dispatch
-→ install dependencies
-→ npm run build
-→ upload prebuilt dist with Wrangler
-→ verify the public origin against the deployed commit
+publishedAt set
+→ included in /guides/
+
+featured: true
+→ eligible for the latest three homepage guide cards
+
+publishedAt set
+→ included in the sitemap
 ```
 
-Cloudflare receives prebuilt assets. It is not the routine build system for branches, pull requests, or ordinary `main` merges.
+The homepage and Guides index must not require separate hard-coded article lists.
 
-## Pull-request deployment classifications
+## Validation boundaries
 
-Every PR selects exactly one classification.
-
-### No production deployment required
-
-Default for documentation, data enrichment, quality audits, taxonomy work, UI implementation, validators, monitoring-candidate workflows, roadmaps, and non-emergency corrections.
-
-Completion condition:
+Publication checks are limited to what is required to build and verify the public site.
 
 ```text
-GitHub CI successful
+Guide or copy change
+→ guide metadata and route validation
+→ Astro/site build
+→ production verification
+
+Registry data change
+→ schema, identity, evidence, relationship, count, and integrity checks
+
+Destructive infrastructure change
+→ explicit review before merge
 ```
 
-Cloudflare is not checked and production is not polled.
+A failed unrelated research or migration audit must not block publishing an otherwise buildable article.
 
-### Publication checkpoint deployment required after merge
+## Manual fallback
 
-Use only when `docs/roadmap.md` defines a planned public release and the owner explicitly approves the exact candidate.
+`workflow_dispatch` remains available only as a fallback when the automatic run must be repeated after an infrastructure interruption. Manual fallback requires `confirm=DEPLOY` and always deploys the selected `main` commit.
 
-Completion condition:
-
-```text
-PR merged
-→ intended main manually deployed
-→ deployed commit confirmed
-→ production consistency successful
-```
-
-### Emergency production deployment required
-
-Use only for a broken public site, corrupt public files, materially incorrect public data already visible, a security issue, rollback, or another verified emergency. Record the reason, source commit, workflow run, and verification result.
-
-## Current publication gate
-
-As of 2026-06-28, routine publication is paused while SOG performs the non-UI quality program and defers detailed UI review.
-
-Binding documents:
-
-```text
-docs/roadmap.md
-docs/quality/non-ui-quality-program.md
-docs/ui-redesign/implementation-plan.md
-```
-
-No release candidate is currently selected. The later roadmap must explicitly choose and define one publication path after the quality program and deferred UI gates:
-
-```text
-repaired 92-record release
-or
-reviewed growth path toward 100 before release
-```
-
-Neither path is authorized yet. Documentation, data, monitoring, validation, migration, UI, audit, and normal `main` merges do not deploy to production.
-
-A verified emergency may interrupt the sequence, but it must not be used to publish unfinished redesign or quality work.
-
-## Cloudflare dashboard policy
-
-Required settings:
+## Cloudflare configuration
 
 ```text
 Production branch: main
-Automatic production branch deployments: OFF
-Automatic preview branch deployments: OFF
-Build cache: ON
-Build command: npm run build
+GitHub Actions performs the production upload
+Cloudflare Pages project: stable-or-gone
 Build output: dist
-Build watch paths: *
+Required secrets:
+- CLOUDFLARE_API_TOKEN
+- CLOUDFLARE_ACCOUNT_ID
 ```
 
-The Git repository connection may remain attached. Automatic Git-triggered Pages builds remain disabled, while prebuilt assets are uploaded directly with Wrangler.
+The workflow uploads prebuilt assets using Wrangler. Cloudflare is not used as an independent source build system.
 
-## GitHub production controls
+## Production verification
 
-Required repository secrets:
+Every automatic deployment must verify:
 
-```text
-CLOUDFLARE_API_TOKEN
-CLOUDFLARE_ACCOUNT_ID
-```
+- the deployed commit is the intended `main` commit;
+- the homepage responds successfully;
+- `/guides/` responds successfully;
+- `/guides/uk-stablecoin-capital-rules-2026/` responds successfully;
+- the UK guide is linked from the homepage and Guides index;
+- machine-readable and public outputs remain internally consistent.
 
-The API token must be limited to the designated account and the Pages edit permission required for deployment. Secrets must never be written to repository files, PR bodies, issues, workflow output, or public documentation.
+## Exceptions
 
-Required environment:
+Manual approval is reserved for changes such as:
 
-```text
-Name: production
-Allowed deployment branch: main
-Required reviewers: none
-Wait timer: none
-Environment secrets: none required
-```
+- domain or DNS changes;
+- secret or Cloudflare account changes;
+- destructive schema migrations;
+- mass deletion;
+- major route removals;
+- emergency rollback.
 
-## Workflow policy
-
-Normal CI may install dependencies, validate canonical data, run integrity checks, run Astro checks, build the site, and verify generated files locally.
-
-Normal CI must not:
-
-- call `wrangler pages deploy`;
-- wait for Cloudflare Pages;
-- poll production for a new deployment;
-- require Cloudflare credentials.
-
-Production consistency is manual-only and must not run automatically on every `main` push.
-
-`.github/workflows/deploy-production.yml` must:
-
-- use `workflow_dispatch`;
-- require an explicit deployment classification;
-- require exact `DEPLOY` confirmation;
-- run only from `main`;
-- check out the latest intended `main`;
-- install dependencies and run the full repository build;
-- upload `dist` with Wrangler;
-- pass the source commit SHA to the deployment;
-- run production consistency after deployment;
-- write a deployment summary;
-- use the `production` environment;
-- prevent overlapping deployments.
-
-It must not have `push`, `pull_request`, or `schedule` triggers.
-
-## Publication frequency
-
-```text
-normal PR                         no deployment
-normal main merge                 no deployment
-quality-program PR                no deployment
-paused UI-program PR              no deployment
-verified emergency                one immediate manual deployment
-later approved release            one planned manual deployment
-```
-
-Short-interval repeated deployments and no-op trigger commits are prohibited.
-
-## Planned-release verification
-
-Before any later planned publication, verify:
-
-- deployed commit equals intended `main`;
-- build provenance identifies one canonical data snapshot;
-- page and machine-readable counts match canonical data;
-- every expected detail route exists;
-- no stale route family remains;
-- sitemap and metadata checks pass;
-- `version.json`, `data/manifest.json`, `llms.txt`, and `ai.txt` match the same snapshot;
-- search and shareable filter URLs work;
-- mobile checks preserve material information;
-- production has no material errors.
-
-A failed gate blocks publication but does not invalidate unrelated completed repository work.
-
-## Retry and rollback
-
-Do not retry an old failed deployment after source changes. Confirm intended `main`, fix the repository if needed, run one new manual deployment, and verify production. Use rollback only when a previously successful deployment is the correct emergency recovery target.
-
-## Reporting requirements
-
-A production report includes classification, source commit, provenance identifier when available, workflow result, Pages project, public origin, consistency result, route/count results, and remaining discrepancies.
-
-A normal no-deploy PR states only that production deployment was not required under this policy.
-
-## Completed activation checklist
-
-- [x] automatic production deployments disabled
-- [x] automatic preview deployments disabled
-- [x] Pages project confirmed as `stable-or-gone`
-- [x] least-privilege token created
-- [x] required GitHub secrets added
-- [x] `production` environment created
-- [x] deployment branch restricted to `main`
-- [x] manual deployment workflow executed successfully
-- [x] deployed production verified successfully
-
-Activation evidence:
-
-```text
-Workflow run: 27908380603
-Job: 82581060887
-Audit: docs/audits/manual-production-activation-2026-06-22.md
-```
+The current visual quality or an unfinished UI review is not, by itself, a reason to block publication.
