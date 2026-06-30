@@ -7,7 +7,8 @@ const check = (condition, message) => {
   if (!condition) throw new Error(message);
 };
 
-const datedGuideSlugs = ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc'];
+const datedGuideSlugs = ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc', 'uk-stablecoin-capital-rules-2026'];
+const homepageFeaturedGuideSlugs = ['genius-act-stablecoins', 'mica-stablecoins', 'uk-stablecoin-capital-rules-2026'];
 const catalog = read('src/data/guideCatalog.ts');
 const slugs = [];
 for (const line of catalog.split('\n')) {
@@ -39,9 +40,10 @@ check(sitemap.includes("import { guides } from '../data/guideCatalog';"), 'Sitem
 check(sitemap.includes('guides.map((guide) => `/guides/${guide.slug}/`)'), 'Dynamic guide sitemap routes missing');
 
 const home = read('src/pages/index.astro');
-for (const slug of datedGuideSlugs) {
+for (const slug of homepageFeaturedGuideSlugs) {
   check(home.includes(`getGuide('${slug}')`), `Homepage featured guide missing: ${slug}`);
 }
+check(!home.includes("getGuide('jpyc-vs-jpysc'), theme: 'jp'"), 'Homepage should retain three featured guide cards after the UK guide replacement');
 
 const linkMap = read('src/data/stablecoinGuideLinks.ts');
 for (const slug of datedGuideSlugs) {
@@ -54,15 +56,28 @@ check(detail.includes('<RelatedGuides guides={relatedGuides} />'), 'Stablecoin d
 check(detail.includes('subjectOf:'), 'Stablecoin detail guide metadata missing');
 
 const updates = JSON.parse(read('data/registry-updates.json'));
-const update = updates.find((entry) => entry.id === 'sog_update_2026_06_25_pr129_pr132_dated_guides');
-check(Boolean(update), 'Dated guide update entry missing');
-for (const slug of datedGuideSlugs) {
-  check(update.related_paths.includes(`/guides/${slug}/`), `Update route missing: ${slug}`);
+const updateRequirements = [
+  {
+    id: 'sog_update_2026_06_25_pr129_pr132_dated_guides',
+    slugs: ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']
+  },
+  {
+    id: 'sog_update_2026_06_30_uk_stablecoin_capital_guide',
+    slugs: ['uk-stablecoin-capital-rules-2026']
+  }
+];
+for (const requirement of updateRequirements) {
+  const update = updates.find((entry) => entry.id === requirement.id);
+  check(Boolean(update), `Guide update entry missing: ${requirement.id}`);
+  for (const slug of requirement.slugs) {
+    check(update.related_paths.includes(`/guides/${slug}/`), `Update route missing: ${slug}`);
+  }
 }
 
 console.log(JSON.stringify({
   ok: true,
   guides: slugs.length,
   dated_guides: datedGuideSlugs.length,
+  homepage_featured_guides: homepageFeaturedGuideSlugs.length,
   guide_slugs: slugs
 }, null, 2));
