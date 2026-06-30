@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_06_30_uk_stablecoin_capital_guide",
+    "date": "2026-06-30",
+    "title": "UK stablecoin capital-rules guide prepared",
+    "category": "content",
+    "summary": "Added a dated regulation guide explaining the reported reduction of a key UK stablecoin issuer-capital requirement from 2% to 1%, the distinction between issuer capital and backing assets, the separate FCA and Bank of England regimes, and the remaining need to verify controlling final handbook text.",
+    "related_paths": ["/guides/", "/guides/uk-stablecoin-capital-rules-2026/", "/stablecoin/usdc/", "/stablecoin/usdt/", "/stablecoin/pyusd/", "/stablecoin/rlusd/", "/stablecoin/dai/", "/stablecoin/usds/"]
+  },
+  {
     "id": "sog_update_2026_06_25_pr129_pr132_dated_guides",
     "date": "2026-06-25",
     "title": "Dated regulation and asset-comparison guides added",
