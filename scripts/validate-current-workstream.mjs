@@ -15,6 +15,7 @@ import './validate-batch19-growth-b.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
+const amendment = fs.readFileSync('docs/quality/pr249-uk-stablecoin-guide-amendment.md', 'utf8');
 const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
 const agents = fs.readFileSync('AGENTS.md', 'utf8');
 
@@ -35,8 +36,9 @@ for (const phrase of [
 
 for (const [document, phrase] of [
   [program, 'No growth PR may contain more than two new stable assets'],
-  [program, 'Production publication remains deferred through PR #264'],
-  [program, 'PR #249 is an editorial interruption and changes no canonical registry count'],
+  [amendment, 'PR #249 is an editorial interruption and changes no canonical registry count'],
+  [amendment, 'Production publication remains deferred through PR #264'],
+  [amendment, 'PR #250 Growth C: 96 -> 98'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #264 does not authorize publication'],
   [agents, 'Growth beyond 92 assets is permitted only after PR #246'],
