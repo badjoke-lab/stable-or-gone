@@ -12,6 +12,14 @@ on:
           - desktop
           - mobile
           - all
+      mode:
+        description: Capture scope
+        required: true
+        default: representative
+        type: choice
+        options:
+          - representative
+          - exhaustive
   push:
     branches:
       - main
@@ -27,6 +35,7 @@ jobs:
     timeout-minutes: 180
     env:
       CAPTURE_DEVICE: ${{ github.event.inputs.device || 'desktop' }}
+      CAPTURE_MODE: ${{ github.event.inputs.mode || 'representative' }}
       CAPTURE_BASE_URL: http://127.0.0.1:4173
     steps:
       - name: Checkout
@@ -63,14 +72,14 @@ jobs:
         run: |
           case "$CAPTURE_DEVICE" in
             desktop)
-              node scripts/capture-site-screenshots.mjs --device desktop --base-url "$CAPTURE_BASE_URL"
+              node scripts/capture-site-screenshots.mjs --device desktop --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
               ;;
             mobile)
-              node scripts/capture-site-screenshots.mjs --device mobile --base-url "$CAPTURE_BASE_URL"
+              node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
               ;;
             all)
-              node scripts/capture-site-screenshots.mjs --device desktop --base-url "$CAPTURE_BASE_URL"
-              node scripts/capture-site-screenshots.mjs --device mobile --base-url "$CAPTURE_BASE_URL"
+              node scripts/capture-site-screenshots.mjs --device desktop --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
+              node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
               ;;
             *)
               echo "Unsupported device: $CAPTURE_DEVICE" >&2
@@ -82,7 +91,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-full-page-screenshots-${{ env.CAPTURE_DEVICE }}-${{ github.run_id }}
+          name: sog-full-page-screenshots-${{ env.CAPTURE_DEVICE }}-${{ env.CAPTURE_MODE }}-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           path: |
@@ -95,17 +104,14 @@ jobs:
         run: |
           echo "## SOG screenshot capture" >> "$GITHUB_STEP_SUMMARY"
           echo "- Device: $CAPTURE_DEVICE" >> "$GITHUB_STEP_SUMMARY"
-          if [ -f artifacts/screenshots/routes.json ]; then
-            ROUTE_COUNT=$(node -e "const x=require('./artifacts/screenshots/routes.json'); console.log(x.route_count)")
-            ROUTE_SOURCE=$(node -e "const x=require('./artifacts/screenshots/routes.json'); console.log(x.source_type)")
-            echo "- Routes: $ROUTE_COUNT" >> "$GITHUB_STEP_SUMMARY"
-            echo "- Route source: $ROUTE_SOURCE" >> "$GITHUB_STEP_SUMMARY"
-          fi
+          echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
             if [ -f "$MANIFEST" ]; then
+              DISCOVERED=$(node -e "const x=require('./$MANIFEST'); console.log(x.discovered_route_count)")
+              SELECTED=$(node -e "const x=require('./$MANIFEST'); console.log(x.selected_route_count)")
               CAPTURED=$(node -e "const x=require('./$MANIFEST'); console.log(x.captured_count)")
               FAILED=$(node -e "const x=require('./$MANIFEST'); console.log(x.failed_count)")
-              echo "- $DEVICE: $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
+              echo "- $DEVICE: $DISCOVERED discovered / $SELECTED selected / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
