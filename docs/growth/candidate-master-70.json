@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.5",
-  "status": "batch_020_growth_c_complete",
+  "schema_version": "1.6",
+  "status": "batch_021_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -14,8 +14,8 @@
   ],
   "protected_minimums": {
     "total_candidates": 100,
-    "promoted_candidates": 98,
-    "pending_candidates": 2
+    "promoted_candidates": 100,
+    "pending_candidates": 0
   },
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
@@ -26,27 +26,13 @@
     "batch_011":{"minimum_candidates":5,"theme":"historical failures"},
     "batch_012":{"minimum_candidates":5,"theme":"current modular synthetic protocol RWA and BTC-backed USD assets"},
     "batch_013":{"minimum_candidates":5,"theme":"reserve-backed collateralized ecosystem-native and delta-neutral assets"},
-    "batch_014":{"minimum_candidates":1,"theme":"emergency incident record"},
-    "batch_015":{"minimum_candidates":1,"theme":"time-sensitive regulated launch"},
+    "batch_014":{"minimum_candidates":1,"theme":"incident record"},
+    "batch_015":{"minimum_candidates":1,"theme":"regulated launch"},
     "batch_016":{"minimum_candidates":5,"theme":"bank enterprise ecosystem-native and yield-bearing USD assets"},
     "batch_017":{"minimum_candidates":5,"theme":"regulated regional ecosystem-native and yield-bearing stablecoins"},
     "batch_018":{"minimum_candidates":2,"theme":"interchain and historical NEAR stablecoins"},
     "batch_019":{"minimum_candidates":2,"theme":"Kava CDP and Beanstalk credit stablecoins"},
-    "batch_020":{"minimum_candidates":2,"theme":"Solana multi-strategy and Rootstock BTC-backed stablecoins"},
-    "batch_021":{"minimum_candidates":2,"theme":"Mento euro and Reserve collateral-basket stablecoins"}
-  },
-  "promotion_policy": {
-    "candidate_is_not_canonical": true,
-    "manual_evidence_review_required": true,
-    "identity_deduplication_required": true,
-    "full_required_layer_draft_required": true,
-    "promotion_occurs_in_separate_batch_prs": true,
-    "batch_017_promotion_complete": true,
-    "batch_018_growth_a_complete": true,
-    "batch_019_growth_b_complete": true,
-    "batch_020_growth_c_complete": true,
-    "batch_021_growth_d_authorized": true,
-    "ordinary_growth_remains_blocked": false,
-    "production_publication_deferred": true
+    "batch_020":{"minimum_candidates":2,"theme":"Solana and Rootstock stablecoins"},
+    "batch_021":{"minimum_candidates":2,"theme":"Mento euro and Reserve basket stablecoins"}
   }
 }
