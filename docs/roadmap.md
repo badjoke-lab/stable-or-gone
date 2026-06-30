@@ -6,12 +6,12 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #250
-Active: PR #251 — Growth D
-Next: PR #252 — 100-record identity audit
-Stable assets: 98
+Latest completed: PR #251
+Active: PR #252 — 100-record identity audit
+Next: PR #253 — organization and relationship audit
+Stable assets: 100
 Gate V2-F: not passed
-Record growth: Growth D authorized for corrected candidates only
+Record growth: final-eight sequence complete
 Production publication: deferred
 ```
 
@@ -31,6 +31,7 @@ PR #247 corrected selection and Growth A
 PR #248 Growth B
 PR #249 UK stablecoin capital rules guide
 PR #250 Growth C
+PR #251 Growth D
 ```
 
 ## Monitoring snapshot
@@ -38,22 +39,11 @@ PR #250 Growth C
 ```text
 Enabled official sources: 24
 Covered stable assets: 16
-Uncovered stable assets: 82
+Uncovered stable assets: 84
 Pending baselines: 24
 Accepted baselines: 0
 Public monitoring output: false
 Production publication: false
-```
-
-## Editorial interruption
-
-```text
-PR #249 UK stablecoin capital rules guide — complete
-Canonical stable-asset count change: 0
-New guide category: no
-New top-level route family: no
-Existing route family: /guides/
-Production publication: not authorized by merge
 ```
 
 ## Growth sequence
@@ -63,34 +53,44 @@ PR #247 Growth A: 92 -> 94 — complete
 PR #248 Growth B: 94 -> 96 — complete
 PR #249 Editorial guide: 96 -> 96 — complete
 PR #250 Growth C: 96 -> 98 — complete
-PR #251 Growth D: 98 -> 100
+PR #251 Growth D: 98 -> 100 — complete
 ```
 
-Corrected candidate allocation remains defined by the final-eight audit and candidate control files. Each growth PR is limited to two records. Unknown values remain unknown.
+Corrected candidate allocation remains defined by the final-eight audit and candidate control files. Each growth PR was limited to two records. Unknown values remain unknown.
 
-## Growth C result
+## Growth D result
 
 ```text
-Canonical stable assets: 98
-Batch: S / batch_020
+Canonical stable assets: 100
+Batch: T / batch_021
 Added stablecoins: 2
 Added organizations: 2
 Added relationships: 2
 Added lifecycle events: 6
-Added evidence records: 13
-Added explicit open items: 10
-Added deployments: 3
+Added evidence records: 12
+Added explicit open items: 6
+Added deployments: 2
 Production publication: false
 ```
 
-Growth C added UXD and Dollar on Chain. UXD is represented as one continuing Solana-native identity with a documented transition from its initial delta-neutral design to a broader Asset Liability Management model. Dollar on Chain is represented as one Rootstock-native identity with an official Arbitrum bridge representation and a resolved April 2026 oracle-related protocol pause.
+Growth D added Mento Euro and Web 3 Dollar. Mento Euro continues the same asset identity launched as cEUR and renamed EURm without a new token contract or peg change. Web 3 Dollar is represented as one Reserve Protocol RToken identity with governed basket, yield, and upgrade context.
 
 ## Remaining work
 
 ```text
-PR #251 Growth D
-PR #252-#259 100-record quality audit
-PR #260-#264 non-UI release preparation
+PR #252 identity uniqueness audit
+PR #253 organization and relationship audit
+PR #254 evidence integrity audit
+PR #255 reserve, redemption, and applicability audit
+PR #256 deployment identity audit
+PR #257 lifecycle boundary audit
+PR #258 explicit unknown and placeholder audit
+PR #259 monitoring coverage recalculation
+PR #260 Registry and machine-readable parity
+PR #261 count and provenance integrity
+PR #262 reproducible build audit
+PR #263 100-record canonical data freeze
+PR #264 non-UI release-candidate material
 ```
 
 PR #264 does not authorize production publication.
