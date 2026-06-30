@@ -11,16 +11,16 @@ const datedGuideSlugs = [
   'jpyc-vs-jpysc',
   'uk-stablecoin-capital-rules-2026'
 ];
-const homepageFeaturedGuideSlugs = [
-  'genius-act-stablecoins',
-  'mica-stablecoins',
-  'uk-stablecoin-capital-rules-2026'
-];
 const catalog = read('src/data/guideCatalog.ts');
 const slugs = catalog.split('\n').map((line) => line.trim()).filter((line) => line.startsWith("slug: '")).map((line) => line.slice(7).split("'")[0]).filter(Boolean);
 
 check(slugs.length > 0, 'No guide slugs found in guideCatalog.ts');
 check(new Set(slugs).size === slugs.length, 'Duplicate guide slug found');
+check(catalog.includes('export function getPublishedGuides()'), 'Published-guide selector missing');
+check(catalog.includes('export function getFeaturedGuides(limit = 3)'), 'Featured-guide selector missing');
+check(catalog.includes("slug: 'uk-stablecoin-capital-rules-2026'"), 'UK guide catalog entry missing');
+check(catalog.includes("publishedAt: '2026-06-30'"), 'UK guide publication date missing');
+check(catalog.includes("regionLabel: 'United Kingdom'"), 'UK guide home metadata missing');
 
 for (const slug of slugs) {
   const pagePath = `src/pages/guides/${slug}/index.astro`;
@@ -34,13 +34,19 @@ for (const slug of slugs) {
   check(page.includes('<GuideRevisionHistory'), `${pagePath}: dated revision history missing`);
 }
 
+const guideIndex = read('src/pages/guides/index.astro');
+check(guideIndex.includes('getPublishedGuides'), 'Guides index must use published-guide metadata');
+check(guideIndex.includes('publishedGuides.filter'), 'Guides index category filtering missing');
+check(!guideIndex.includes('entries: guides.filter'), 'Guides index must not list drafts directly');
+
 const sitemap = read('src/pages/sitemap-index.xml.ts');
-check(sitemap.includes("import { guides } from '../data/guideCatalog';"), 'Sitemap guide catalog import missing');
-check(sitemap.includes('guides.map((guide) => `/guides/${guide.slug}/`)'), 'Dynamic guide sitemap routes missing');
+check(sitemap.includes("import { getPublishedGuides } from '../data/guideCatalog';"), 'Sitemap published-guide import missing');
+check(sitemap.includes('publishedGuides.map((guide) => `/guides/${guide.slug}/`)'), 'Published guide sitemap routes missing');
 
 const home = read('src/pages/index.astro');
-for (const slug of homepageFeaturedGuideSlugs) check(home.includes(`getGuide('${slug}')`), `Homepage featured guide missing: ${slug}`);
-check(!home.includes("getGuide('jpyc-vs-jpysc'), theme: 'jp'"), 'Homepage must keep three featured guide cards after the UK replacement');
+check(home.includes("import { getFeaturedGuides } from '../data/guideCatalog';"), 'Homepage featured-guide metadata import missing');
+check(home.includes('getFeaturedGuides(3)'), 'Homepage must select the latest three featured guides automatically');
+check(!home.includes("getGuide('genius-act-stablecoins')"), 'Homepage must not hard-code featured guide slugs');
 
 const linkMap = read('src/data/stablecoinGuideLinks.ts');
 for (const slug of datedGuideSlugs) check(linkMap.includes(`'${slug}': [`), `Stablecoin guide link map missing: ${slug}`);
@@ -55,4 +61,4 @@ const datedGuidesUpdate = updates.find((entry) => entry.id === 'sog_update_2026_
 check(Boolean(datedGuidesUpdate), 'Original dated-guide update entry missing');
 for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(datedGuidesUpdate.related_paths.includes(`/guides/${slug}/`), `Original update route missing: ${slug}`);
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, homepage_featured_guides: homepageFeaturedGuideSlugs.length, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, automatic_featured_guides: true, guide_slugs: slugs }, null, 2));
