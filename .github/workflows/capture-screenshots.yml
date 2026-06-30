@@ -1,0 +1,103 @@
+name: Capture full-page screenshots
+
+on:
+  workflow_dispatch:
+    inputs:
+      device:
+        description: Screenshot device set
+        required: true
+        default: desktop
+        type: choice
+        options:
+          - desktop
+          - mobile
+          - all
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/capture-screenshots.yml
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      CAPTURE_DEVICE: ${{ github.event.inputs.device || 'desktop' }}
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-screenshot-server.log 2>&1 &
+          echo $! > /tmp/sog-screenshot-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-screenshot-server.log
+          exit 1
+
+      - name: Capture screenshots
+        run: |
+          case "$CAPTURE_DEVICE" in
+            desktop)
+              node scripts/capture-site-screenshots.mjs --device desktop --base-url "$CAPTURE_BASE_URL"
+              ;;
+            mobile)
+              node scripts/capture-site-screenshots.mjs --device mobile --base-url "$CAPTURE_BASE_URL"
+              ;;
+            all)
+              node scripts/capture-site-screenshots.mjs --device desktop --base-url "$CAPTURE_BASE_URL"
+              node scripts/capture-site-screenshots.mjs --device mobile --base-url "$CAPTURE_BASE_URL"
+              ;;
+            *)
+              echo "Unsupported device: $CAPTURE_DEVICE" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Upload screenshot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-full-page-screenshots-${{ env.CAPTURE_DEVICE }}-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/screenshots/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
+
+      - name: Write summary
+        if: always()
+        run: |
+          echo "## SOG screenshot capture" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Device: $CAPTURE_DEVICE" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f artifacts/screenshots/routes.json ]; then
+            ROUTE_COUNT=$(node -e "const x=require('./artifacts/screenshots/routes.json'); console.log(x.route_count)")
+            ROUTE_SOURCE=$(node -e "const x=require('./artifacts/screenshots/routes.json'); console.log(x.source_type)")
+            echo "- Routes: $ROUTE_COUNT" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Route source: $ROUTE_SOURCE" >> "$GITHUB_STEP_SUMMARY"
+          fi
