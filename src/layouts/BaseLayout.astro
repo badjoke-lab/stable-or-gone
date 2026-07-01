@@ -213,7 +213,10 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
           const feedback = card?.querySelector('[data-copy-feedback]');
           button.textContent = copied ? 'Copied' : 'Copy failed';
           button.dataset.copyState = copied ? 'success' : 'error';
-          if (feedback instanceof HTMLElement) feedback.textContent = copied ? 'Full identifier copied to clipboard.' : 'Could not copy automatically. Select and copy the full identifier manually.';
+          if (feedback instanceof HTMLElement) {
+            feedback.setAttribute('aria-live', 'polite');
+            feedback.textContent = copied ? 'Full identifier copied to clipboard.' : 'Could not copy automatically. Select and copy the full identifier manually.';
+          }
           window.setTimeout(() => { button.textContent = original; delete button.dataset.copyState; }, 1800);
         });
       });
