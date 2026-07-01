@@ -1,0 +1,23 @@
+<script>
+  document.querySelectorAll('details:not([data-disclosure])').forEach((details, index) => {
+    if (!(details instanceof HTMLDetailsElement)) return;
+    const trigger = details.querySelector(':scope > summary');
+    if (!(trigger instanceof HTMLElement)) return;
+    let controlled = trigger.getAttribute('aria-controls');
+    const target = trigger.nextElementSibling;
+    if (!controlled && target instanceof HTMLElement) {
+      if (!target.id) target.id = `disclosure-panel-${index + 1}`;
+      controlled = target.id;
+      trigger.setAttribute('aria-controls', controlled);
+    }
+    const sync = () => trigger.setAttribute('aria-expanded', String(details.open));
+    sync();
+    details.addEventListener('toggle', sync);
+    details.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !details.open) return;
+      event.preventDefault();
+      details.open = false;
+      trigger.focus();
+    });
+  });
+</script>
