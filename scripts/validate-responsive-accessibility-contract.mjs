@@ -30,7 +30,7 @@ const expected = [
 check(audit.schema_version === '1.0', 'audit schema changed');
 check(responsiveBands.length === 3, 'responsive band count changed');
 check(pageFamilyContracts.length === 8, 'page family count changed');
-check(mobileTableSourceFiles.length === 16, 'table source count changed');
+check(mobileTableSourceFiles.length === 17, 'table source count changed');
 check(requiredMobileTableKinds.length === 25, 'table kind count changed');
 check(mobileTableContracts.length === 25, 'table contract count changed');
 check(new Set(mobileTableContracts.map((item) => item.kind)).size === 25, 'table contract IDs must be unique');
