@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import './validate-ui-v3-guides.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -28,10 +29,10 @@ for (const slug of slugs) {
   check(fs.existsSync(path.join(root, pagePath)), `Missing guide page: ${pagePath}`);
   const page = read(pagePath);
   check(page.includes(`/guides/${slug}/`), `${pagePath}: canonical guide route missing`);
+  check(page.includes(`getGuide('${slug}')`), `${pagePath}: guide catalog lookup mismatch`);
+  check(page.includes('<GuideArticleHeader'), `${pagePath}: Editorial Article header missing`);
   if (!datedGuideSlugs.includes(slug)) continue;
-  check(page.includes(`getGuide('${slug}')`), `${pagePath}: dated-guide catalog lookup mismatch`);
   check(page.includes(`const canonicalPath = '/guides/${slug}/'`), `${pagePath}: dated-guide canonical path mismatch`);
-  check(page.includes('<GuideArticleHeader'), `${pagePath}: dated article header missing`);
   check(page.includes('<GuideRevisionHistory'), `${pagePath}: dated revision history missing`);
 }
 
