@@ -133,8 +133,8 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
       const guideToc = document.querySelector('[data-guide-toc]');
       const guideTocList = document.querySelector('[data-guide-toc-list]');
       if (guideArticle instanceof HTMLElement && guideToc instanceof HTMLDetailsElement && guideTocList instanceof HTMLOListElement) {
-        const usedIds = new Set();
-        const makeId = (value) => {
+        const usedIds = new Set<string>();
+        const makeId = (value: string) => {
           const base = String(value || 'section').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
           let next = base;
           let suffix = 2;
