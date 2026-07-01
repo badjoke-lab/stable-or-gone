@@ -1,5 +1,5 @@
 ---
-import EventEditorialRecord from '../../components/EventEditorialRecord.astro';
+import EventEditorialRecordV3 from '../../components/EventEditorialRecordV3.astro';
 import { getEvents } from '../../lib/data/registry';
 
 export function getStaticPaths() {
@@ -8,4 +8,4 @@ export function getStaticPaths() {
 
 const { event } = Astro.props;
 ---
-<EventEditorialRecord event={event} />
+<EventEditorialRecordV3 event={event} />
