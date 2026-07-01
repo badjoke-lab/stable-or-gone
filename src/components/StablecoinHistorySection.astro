@@ -11,7 +11,7 @@ const { modelHistoryEvents, issuerControlEvents, events } = Astro.props;
   <section class="stablecoin-model-history" aria-labelledby="model-history-title">
     <h3 id="model-history-title">Model and lifecycle changes</h3>
     {modelHistoryEvents.length === 0 ? <p class="stablecoin-empty-state">No separate model-change event is currently recorded.</p> : (
-      <ol>{modelHistoryEvents.map((event) => <li><time datetime={event.event_date ?? undefined}><ValueStateText value={event.event_date} /></time><span><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><small>{formatPublicLabel(event.event_detail_kind ?? event.event_type)}</small></span></li>)}</ol>
+      <ol>{modelHistoryEvents.map((event: any) => <li><time datetime={event.event_date ?? undefined}><ValueStateText value={event.event_date} /></time><span><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><small>{formatPublicLabel(event.event_detail_kind ?? event.event_type)}</small></span></li>)}</ol>
     )}
   </section>
   <IssuerControlEvents events={issuerControlEvents} />
