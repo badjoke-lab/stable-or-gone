@@ -18,6 +18,7 @@ import './validate-ui-v3-home.mjs';
 import './validate-ui-v3-stablecoin-index.mjs';
 import './validate-ui-v3-stablecoin-dossier.mjs';
 import './validate-organization-index-detail-implementation.mjs';
+import './validate-ui-v3-guides.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -30,20 +31,22 @@ const uiV2 = fs.readFileSync('docs/architecture/approved-modern-data-product-ui-
 const mocksV3 = fs.readFileSync('docs/ui-redesign/approved-mocks-v3/README.md', 'utf8');
 const dossierAudit = fs.readFileSync('docs/audits/ui-v3-stablecoin-dossier-2026-07-01.md', 'utf8');
 const correctiveAudit = fs.readFileSync('docs/audits/ui-v3-organizations-events-corrective-2026-07-01.md', 'utf8');
+const guideAudit = fs.readFileSync('docs/audits/ui-v3-guides-2026-07-01.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #265 — Editorial Ledger Stablecoin dossier',
+  'Latest completed: PR #268 — Editorial Article Guides',
   'Partial precursor: PR #266',
-  'Active: PR #267 — corrective Organizations and Events completion',
-  'Next: PR #268 — Guides',
+  'Active: PR #269 — Reference and utility pages',
+  'Next: PR #270 — mobile and accessibility hardening',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
   'Gate V3-A: passed',
   'Gate V3-B: passed',
-  'Gate V3-C: pending PR #267 validation and merge',
-  'PR #266 — Organization and Event row compaction — partial precursor',
-  'PR #267 — corrective Organizations and Events completion — active',
+  'Gate V3-C: passed',
+  'Gate V3-D: pending PR #269 validation and merge',
+  'PR #268 — Guides — complete',
+  'PR #269 — Reference and utility pages — active',
   'PR #271 — representative all-family visual audit',
   'PR #273 — production verification and UI v3 closure',
   'Growth D to 100 records'
@@ -59,20 +62,21 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'Latest completed: PR #265 Editorial Ledger Stablecoin dossier'],
+  [agents, 'Latest completed: PR #268 Editorial Article Guides'],
   [agents, 'Partial precursor: PR #266 Organization and Event row compaction'],
-  [agents, 'Active: PR #267 corrective Organizations and Events completion'],
-  [agents, 'Next: PR #268 Guides'],
+  [agents, 'Active: PR #269 Reference and utility pages'],
+  [agents, 'Next: PR #270 mobile and accessibility hardening'],
   [agents, 'Closure: PR #273 production verification and UI v3 closure'],
+  [agents, 'Gate V3-D: pending PR #269 validation and merge'],
   [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
   [agents, 'The old PR #251 must not be merged as-is'],
   [design, 'Status: canonical design overview'],
   [design, 'Visual family: Editorial Ledger'],
   [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Completed through: PR #265 Editorial Ledger Stablecoin dossier'],
-  [uiPlan, 'Active work item: PR #267 corrective Organizations and Events completion'],
-  [uiPlan, 'Next implementation: PR #268 Guides'],
+  [uiPlan, 'Completed through: PR #268 Editorial Article Guides'],
+  [uiPlan, 'Active work item: PR #269 Reference and utility pages'],
+  [uiPlan, 'Next implementation: PR #270 mobile and accessibility hardening'],
   [uiPlan, 'PR #273 — production verification and closure'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
   [uiV3, 'The default public surface is light, not dark'],
@@ -81,10 +85,11 @@ for (const [document, phrase] of [
   [mocksV3, 'Status: canonical reference description'],
   [dossierAudit, 'Roadmap item: PR #265'],
   [dossierAudit, 'Canonical data changes: 0'],
-  [dossierAudit, 'Synthetic scores: 0'],
   [correctiveAudit, 'Merged PR #266 changed only the Organization and Event row components'],
   [correctiveAudit, 'Canonical stable assets changed: 0'],
-  [correctiveAudit, 'Gate V3-C may be recorded only after Astro check']
+  [guideAudit, 'Roadmap item: PR #268'],
+  [guideAudit, 'Guide article copy and source URLs changed: 0'],
+  [guideAudit, 'Gate V3-D remains pending until the Reference and utility page family is completed in PR #269']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
@@ -95,4 +100,4 @@ for (const source of [agents, roadmap, uiPlan]) {
   }
 }
 
-console.log('Current workstream valid: PR #266 is partial, corrective PR #267 is active, 98 canonical assets are preserved, Guides move to PR #268, and UI v3 closure moves to PR #273.');
+console.log('Current workstream valid: PR #268 Guides is complete, PR #269 Reference and utility pages is active, 98 canonical assets are preserved, and UI v3 closure remains PR #273.');
