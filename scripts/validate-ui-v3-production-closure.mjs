@@ -16,31 +16,32 @@ const packageJson = read('package.json');
 
 for (const marker of [
   'pull_request:',
-  'push:',
   '- main',
+  'github.event.pull_request.head.sha',
   'https://sog.badjoke-lab.com',
   'npm run check:production',
   '--device desktop',
   '--device mobile',
   'audit-representative-visuals.mjs',
   'write-ui-v3-production-closure-report.mjs',
-  'ui-v3/production-closure',
-  'ui-v3-closed-',
-  'gh pr comment 273',
   'ui-v3-production-closure.json',
-  'ui-v3-production-closure.md'
+  'ui-v3-production-closure.md',
+  'retention-days: 90'
 ]) check(workflow.includes(marker), `production closure workflow marker missing: ${marker}`);
 
 for (const marker of [
-  "phase === 'postmerge'",
+  'immutable_release_commit',
   'production commit',
   'canonical_data_hash',
   'primary_records !== 98',
   'canonical_only',
   'includes_unreviewed_candidates',
+  'includes_internal_monitoring',
+  'includes_private_notes',
   'captured_routes !== 24',
-  'Gate V3-G',
-  'Gate V3-H',
+  "gate: 'V3-G'",
+  "gate: 'V3-H'",
+  "status: 'passed'",
   'ui-v3-production-closure.json',
   'ui-v3-production-closure.md'
 ]) check(report.includes(marker), `closure report marker missing: ${marker}`);
@@ -52,7 +53,7 @@ for (const marker of [
   'machine-readable and public outputs remain internally consistent'
 ]) check(policy.includes(marker), `deployment policy marker missing: ${marker}`);
 for (const marker of ['push:', '- main', 'pages deploy dist', 'SOG_EXPECTED_COMMIT', 'npm run check:production']) check(deploy.includes(marker), `production deployment workflow marker missing: ${marker}`);
-for (const marker of ['Roadmap item: PR #273', 'Gate V3-G', 'Gate V3-H', 'immutable release tag', 'production representative screenshots', 'Canonical stable assets changed: 0']) check(audit.includes(marker), `closure audit document missing: ${marker}`);
+for (const marker of ['Roadmap item: PR #273', 'Gate V3-G', 'Gate V3-H', 'exact immutable commit', 'Production representative screenshots', 'Canonical stable assets changed: 0']) check(audit.includes(marker), `closure audit document missing: ${marker}`);
 for (const marker of ['Active: PR #273 — production verification and UI v3 closure', 'Gate V3-G: pending exact release-candidate approval', 'Gate V3-H: pending production commit and public parity verification']) check(roadmap.includes(marker), `roadmap closure marker missing: ${marker}`);
 for (const marker of ['Active work item: PR #273 production verification and closure', 'Gate V3-G: pending exact release-candidate approval', 'Gate V3-H: pending production commit and public parity verification']) check(plan.includes(marker), `implementation plan closure marker missing: ${marker}`);
 for (const marker of ['Active: PR #273 production verification and UI v3 closure', 'Gate V3-G: pending exact release-candidate approval', 'Gate V3-H: pending production commit and public parity verification']) check(agents.includes(marker), `AGENTS closure marker missing: ${marker}`);
@@ -63,7 +64,8 @@ const result = {
   schema_version: '1.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
-  gates: { V3_G: 'pending_merge_authorization', V3_H: 'pending_postmerge_verification' },
+  release_strategy: 'fast_forward_exact_pr_head',
+  gates: { V3_G: 'pending_fast_forward', V3_H: 'pending_production_verification' },
   failures
 };
 fs.mkdirSync('artifacts', { recursive: true });
