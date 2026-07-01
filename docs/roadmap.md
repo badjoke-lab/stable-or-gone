@@ -6,10 +6,10 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #270 — mobile and accessibility hardening
+Latest completed: PR #272 — accessibility, performance, and legacy cleanup
 Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
-Active: PR #271 — representative all-family visual audit
-Next: PR #272 — accessibility, performance, and legacy cleanup
+Active: PR #273 — production verification and UI v3 closure
+Next after UI closure: rebuild Growth D from latest main
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
@@ -19,6 +19,8 @@ Gate V3-C: passed
 Gate V3-D: passed
 Gate V3-E: passed
 Gate V3-F: passed
+Gate V3-G: pending exact release-candidate approval
+Gate V3-H: pending production commit and public parity verification
 Production publication: automatic on main
 ```
 
@@ -43,6 +45,7 @@ Reference: Models, Glossary, and Updates use scan-friendly indexes
 Long-form: Methodology and About use readable columns and generated contents navigation
 Utility: Contact/Corrections and Support preserve reporting, wallet, and copy functions
 Mobile: compact information-preserving representations, controlled disclosures, keyboard support, copy feedback, reduced motion, and forced-colors support
+Performance: PR #272 established passing source/build budgets and legacy-output guards
 ```
 
 PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
@@ -71,6 +74,8 @@ PR #267 corrective Editorial Ledger Organizations and Events completion
 PR #268 Editorial Ledger Guides and Editorial Article family
 PR #269 Reference, Long-form, and Utility page families
 PR #270 mobile and accessibility hardening
+PR #271 representative all-family visual audit and Gate V3-F
+PR #272 accessibility, performance, and legacy cleanup
 ```
 
 ## Fixed UI direction
@@ -160,23 +165,28 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 - added long-identifier wrapping, copy controls, polite success/failure feedback, visible focus, minimum targets, reduced motion, and forced-colors coverage;
 - passed all 18 pull-request workflows, Astro check, production build, public consistency, and Gate V3-E.
 
-### PR #271 — representative all-family visual audit — active; Gate V3-F passed
+### PR #271 — representative all-family visual audit — complete
 
 - captured all twelve unique public pages on desktop and mobile;
 - captured three stablecoin, organization, event, and guide detail representatives per device;
-- measured rendered horizontal overflow, H1 and main counts, broken images, approved brand use, legacy visual markers, and false initial empty states;
-- uploaded 48 screenshots, manifests, archives, and machine-readable/Markdown Gate V3-F reports;
-- reviewed the top, middle, and bottom regions of every image for hierarchy, clipping, density, false empty states, logo misuse, and remaining SaaS styling;
-- recorded zero automated failures and no visual defect requiring a source or CSS correction;
-- passed Gate V3-F.
+- uploaded and reviewed 48 full-page images;
+- recorded zero capture failures, horizontal overflow, broken images, brand violations, legacy visual markers, false empty states, H1 errors, or main-landmark errors;
+- passed all normal workflows, the rendered audit, human image review, and Gate V3-F;
+- established the continuing representative visual-regression contract.
 
-### PR #272 — accessibility, performance, and legacy cleanup
+### PR #272 — accessibility, performance, and legacy cleanup — complete
 
-Remove obsolete v2 CSS/components after replacement, then verify headings, tables, labels, contrast, focus, keyboard operation, canonical counts, route parity, and performance.
+- remove `PageHero.astro`, `MetricCard.astro`, and `editorial-v2.css` only after confirmed zero production references;
+- remove the superseded stylesheet import and obsolete Hero/KPI compatibility selectors from active v3 CSS;
+- preserve skip-link, focus, keyboard, Escape return, live announcements, 320px, 200 percent zoom, reduced motion, forced colors, long values, and protected mobile tables;
+- add a static legacy-reintroduction guard;
+- add post-build CSS, JavaScript, route, H1, main-landmark, and legacy-output measurements with explicit regression budgets;
+- rerun all normal workflows and the 48-image representative desktop/mobile regression;
+- change no canonical data, public route, logo, support destination, wallet value, or machine-readable schema.
 
-### PR #273 — production verification and UI v3 closure
+### PR #273 — production verification and UI v3 closure — active
 
-Verify automatic deployment, public provenance, machine-readable parity, production captures, Gate V3-F, and the exact immutable release commit.
+Verify automatic deployment, public provenance, machine-readable parity, production captures, Gate V3-G owner approval, Gate V3-H production parity, and the exact immutable release commit.
 
 ## UI acceptance gates
 

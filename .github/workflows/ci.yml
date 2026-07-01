@@ -44,6 +44,8 @@ jobs:
         run: npm run validate:v3
       - name: Validate final state
         run: npm run validate:final
+      - name: Validate UI v3 cleanup
+        run: npm run validate:ui-v3-cleanup
       - name: Astro check
         shell: bash
         run: |
@@ -61,6 +63,18 @@ jobs:
         run: |
           set -o pipefail
           npm run build:site 2>&1 | tee build-site.log
+      - name: Audit UI v3 cleanup and performance
+        run: npm run audit:ui-v3-cleanup
+      - name: Upload cleanup and performance audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-v3-cleanup-audit-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            artifacts/ui-v3-cleanup-validation.json
+            artifacts/ui-v3-cleanup-audit.json
+            artifacts/ui-v3-cleanup-audit.md
       - name: Upload build diagnostics
         if: failure()
         uses: actions/upload-artifact@v4

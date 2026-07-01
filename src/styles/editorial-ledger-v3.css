@@ -1,10 +1,4 @@
-/*
- * Editorial Ledger v3 compatibility layer.
- *
- * This file is loaded after the historical v2 shared styles so the new shell
- * can coexist with page-family migrations through PR #268. Page-specific v3
- * files should eventually replace these compatibility rules.
- */
+/* Shared Editorial Ledger v3 rules used by current page families. */
 
 html body {
   background: var(--sog-paper) !important;
@@ -15,64 +9,6 @@ html body :where(.ui-panel, .panel) {
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
-}
-
-html body .page-hero {
-  min-height: 0 !important;
-  padding: 0 0 clamp(1.2rem, 2.4vw, 2rem) !important;
-  display: block !important;
-  grid-template-columns: 1fr !important;
-  border: 0 !important;
-  border-bottom: 2px solid var(--sog-rule-strong) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  overflow: visible !important;
-}
-
-html body .page-hero__visual,
-html body .home-hero__visual,
-html body [class$="-hero__visual"] {
-  display: none !important;
-}
-
-html body .page-hero h1 {
-  color: var(--sog-ink) !important;
-  font-family: Georgia, Cambria, "Times New Roman", serif !important;
-  font-size: clamp(2rem, 4.2vw, 3.75rem) !important;
-  line-height: 1.02 !important;
-  letter-spacing: -0.035em !important;
-}
-
-html body .page-hero__eyebrow {
-  color: var(--sog-accent) !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-}
-
-html body .page-hero__description {
-  color: var(--sog-ink-muted) !important;
-}
-
-html body .metric-card {
-  min-height: auto !important;
-  border: 0 !important;
-  border-top: 1px solid var(--sog-rule) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-html body .metric-card__icon {
-  display: none !important;
-}
-
-html body .metric-card__label,
-html body .metric-card__detail {
-  color: var(--sog-ink-muted) !important;
-}
-
-html body .metric-card__value {
-  color: var(--sog-ink) !important;
 }
 
 html body :where(.ui-button, .report-actions a, .support-callout-action) {
@@ -129,8 +65,6 @@ html body :where(.home-search, .stablecoin-index-registry, .stablecoin-index-com
 }
 
 @media (forced-colors: active) {
-  html body .page-hero,
-  html body .metric-card,
   html body :where(.ui-panel, .panel) {
     forced-color-adjust: auto;
   }

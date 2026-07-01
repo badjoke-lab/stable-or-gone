@@ -61,10 +61,10 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #270 mobile and accessibility hardening
+Latest completed: PR #272 accessibility, performance, and legacy cleanup
 Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #271 representative all-family visual audit
-Next: PR #272 accessibility, performance, and legacy cleanup
+Active: PR #273 production verification and UI v3 closure
+Next after closure: rebuild Growth D from latest main
 Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
@@ -74,12 +74,12 @@ Gate V3-C: passed
 Gate V3-D: passed
 Gate V3-E: passed
 Gate V3-F: passed
+Gate V3-G: pending exact release-candidate approval
+Gate V3-H: pending production commit and public parity verification
 Production publication: automatic on main
 ```
 
-The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
-
-All page families now use Editorial Ledger v3 structures. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening and passed Gate V3-E. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. Cleanup and production closure remain. Do not treat the current state as redesign completion.
+All public page families now use Editorial Ledger v3 structures. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. PR #272 removed only verified-unused v2 presentation assets, established passing build budgets, and proved pixel-identical rendering with no accessibility regression. PR #273 is now the active production closure step.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
@@ -112,6 +112,8 @@ No agent may:
 - redesign a page from memory;
 - use the rejected SaaS dashboard mock direction;
 - reintroduce a giant hero, KPI card row, blue-purple glow, or repeated rounded-card composition as defaults;
+- restore `PageHero.astro`, `MetricCard.astro`, `editorial-v2.css`, `.page-hero`, or `.metric-card` to production source;
+- weaken the PR #272 performance ceilings without a measured replacement baseline;
 - implement mock-only data as canonical data;
 - alter the active UI sequence without updating the roadmap and implementation plan.
 
@@ -142,7 +144,10 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Mobile is a deliberate transformation and must retain protected information.
 - Representative screenshot sampling is the default.
 - Gate V3-F requires actual desktop and mobile image artifacts plus human review; static source checks alone are insufficient.
-- PR #271 established the passing rendered visual regression baseline: 24 routes per device, 48 reviewed full-page images, and zero automated rendered failures.
+- PR #271 established the passing baseline: 24 routes per device, 48 reviewed full-page images, and zero automated rendered failures.
+- PR #272 reran that baseline after removing the legacy layer and produced 48 pixel-identical images with zero rendered failures.
+- `scripts/validate-ui-v3-cleanup.mjs` is the source-level legacy and accessibility guard.
+- `scripts/audit-ui-v3-cleanup-performance.mjs` is the post-build asset and rendered-output budget guard.
 
 ## Data and quality rules
 
@@ -155,7 +160,7 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Monitoring executions remain read-only and may not update their own accepted baseline.
 - Metadata-only changes and fetch failures must not masquerade as content changes.
 - Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
-- Contact paths, wallet assets, networks, addresses, and copy functions must not change during visual or mobile hardening unless explicitly authorized.
+- Contact paths, wallet assets, networks, addresses, and copy functions must not change during cleanup unless explicitly authorized.
 - The old PR #251 must not be merged as-is. Growth D must be rebuilt from the latest main after UI v3 closes.
 
 ## Mock-only exclusions
