@@ -22,6 +22,7 @@ docs/architecture/approved-editorial-ledger-ui-v3.md
 docs/ui-redesign/approved-mocks-v3/README.md
 docs/ui-redesign/implementation-plan.md
 docs/public-taxonomy-spec.md
+DESIGN.md
 ```
 
 For data work, also read:
@@ -64,16 +65,20 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #260
-Active: PR #261 specification and schedule alignment
-Next: PR #262 shared Editorial Ledger shell
+Latest completed: PR #262 shared Editorial Ledger shell
+Active: PR #263 Home
+Next: PR #264 Stablecoins register
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
+Gate V3-A: passed
+Gate V3-B: passed
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 remains an intermediate repository state and may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
+
+The shared shell is now v3, but Home and all page families remain active migration work. Do not treat the shared-shell change as completion of the site redesign.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through the UI v3 closure sequence. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
