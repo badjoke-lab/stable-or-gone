@@ -1,141 +1,241 @@
 .stablecoin-dossier {
   display: grid;
+  gap: 0;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.stablecoin-dossier-masthead {
+  padding: 1.2rem 0 1.6rem;
+  border-top: 3px double var(--sog-rule-strong, #5d5850);
+  border-bottom: 2px solid var(--sog-rule-strong, #5d5850);
+}
+
+.stablecoin-dossier-overline,
+.stablecoin-dossier-title-row,
+.stablecoin-material-change > div,
+.stablecoin-model-history li,
+.stablecoin-further-reading a {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 1rem;
 }
 
-.stablecoin-dossier-hero {
-  min-height: 310px;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+.stablecoin-dossier-overline {
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 760;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
 }
 
-.stablecoin-dossier-hero h1 {
-  max-width: 15ch;
+.stablecoin-dossier-overline a {
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-.stablecoin-dossier-hero-actions {
-  margin-top: 1.15rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
+.stablecoin-dossier-title-row {
+  padding: 1.25rem 0 1rem;
   align-items: center;
 }
 
-.stablecoin-dossier-identity-mark {
-  width: min(100%, 300px);
-  min-height: 210px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 0.65rem;
-  border: 1px solid rgba(24, 182, 255, 0.35);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(24, 182, 255, 0.16), rgba(3, 11, 22, 0.5) 55%, transparent 72%);
-  box-shadow: inset 0 0 56px rgba(24, 182, 255, 0.08), 0 0 60px rgba(5, 142, 232, 0.12);
+.stablecoin-record-id {
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.stablecoin-dossier-identity-mark strong {
-  color: var(--sog-text);
-  font-size: 1.25rem;
+.stablecoin-dossier-title-row h1 {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em;
+  font-size: clamp(2.25rem, 6vw, 5.2rem);
+  line-height: 0.95;
+}
+
+.stablecoin-dossier-title-row h1 span {
+  color: var(--sog-accent, #7f242a);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43em;
   letter-spacing: 0.06em;
 }
 
-.stablecoin-dossier-identity-mark > span:last-child {
-  max-width: 17rem;
-  color: var(--sog-text-quiet);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
-  text-align: center;
-  overflow-wrap: anywhere;
+.stablecoin-dossier-title-row h1 i {
+  color: var(--line);
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: 0.72em;
+  font-style: normal;
+  font-weight: 400;
 }
 
-.stablecoin-current-state {
+.stablecoin-aliases {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+}
+
+.stablecoin-dossier-title-row > [class*="chip"],
+.stablecoin-dossier-title-row > [class*="status"] {
+  flex: 0 0 auto;
+}
+
+.stablecoin-dossier-facts,
+.stablecoin-identity-ledger,
+.stablecoin-mechanism-ledger,
+.stablecoin-control-summary {
+  margin: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
 }
 
-.stablecoin-current-state .metric-card {
-  min-height: 132px;
+.stablecoin-dossier-facts > div,
+.stablecoin-identity-ledger > div,
+.stablecoin-mechanism-ledger > div,
+.stablecoin-control-summary > div {
+  min-width: 0;
+  padding: 0.75rem 0.8rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
 }
 
-.stablecoin-current-state .metric-card__value {
-  font-size: clamp(1.05rem, 1.8vw, 1.55rem);
+.stablecoin-dossier-facts dt,
+.stablecoin-identity-ledger dt,
+.stablecoin-mechanism-ledger dt,
+.stablecoin-control-summary dt,
+.stablecoin-organization-cards dt {
+  margin: 0 0 0.28rem;
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 760;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.stablecoin-dossier-facts dd,
+.stablecoin-identity-ledger dd,
+.stablecoin-mechanism-ledger dd,
+.stablecoin-control-summary dd,
+.stablecoin-organization-cards dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.82rem;
+  line-height: 1.45;
   overflow-wrap: anywhere;
+}
+
+.stablecoin-dossier-facts small {
+  display: block;
+  margin-top: 0.22rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.stablecoin-material-change {
+  margin-top: 1rem;
+  padding: 0.85rem 0;
+  display: grid;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  gap: 1rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.stablecoin-material-change > span {
+  color: var(--sog-accent, #7f242a);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.stablecoin-material-change time {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.stablecoin-material-change p {
+  max-width: none;
+}
+
+.stablecoin-material-change small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .stablecoin-dossier-nav {
   position: sticky;
-  z-index: 20;
-  top: 78px;
-  padding: 0.55rem;
+  z-index: 15;
+  top: 64px;
   display: flex;
-  gap: 0.35rem;
+  gap: 0;
   overflow-x: auto;
-  border: 1px solid rgba(36, 80, 113, 0.78);
-  border-radius: var(--sog-radius-panel);
-  background: rgba(3, 11, 22, 0.94);
-  backdrop-filter: blur(18px) saturate(120%);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--sog-rule-strong, #5d5850);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
   scrollbar-width: thin;
 }
 
 .stablecoin-dossier-nav a {
-  min-height: 40px;
-  padding: 0.48rem 0.72rem;
+  min-height: 44px;
+  padding: 0.72rem 0.82rem;
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
-  border: 1px solid transparent;
-  border-radius: var(--sog-radius-compact);
-  color: var(--sog-text-muted);
+  border-right: 1px solid var(--line);
+  color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 720;
+  font-weight: 700;
   white-space: nowrap;
   text-decoration: none;
 }
 
 .stablecoin-dossier-nav a:hover,
 .stablecoin-dossier-nav a:focus-visible {
-  border-color: var(--sog-line);
-  background: var(--sog-surface-raised);
-  color: var(--sog-link);
+  color: var(--sog-accent, #7f242a);
+  background: var(--bg-soft);
   text-decoration: none;
 }
 
-.stablecoin-identity-section,
-.stablecoin-preview-section,
-.stablecoin-organizations-control,
-.stablecoin-reserve-components,
-.stablecoin-model-history,
-.stablecoin-evidence-section,
-.stablecoin-coverage-section,
-.stablecoin-reserve-profile,
-.stablecoin-redemption-profile,
-.stablecoin-reserve-history,
-.stablecoin-regulatory-notices,
-.stablecoin-open-questions {
-  overflow: visible;
+.stablecoin-dossier-section,
+.stablecoin-organizations-control {
+  padding: 2.1rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--sog-rule-strong, #5d5850);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .stablecoin-section-heading {
-  padding: 1.05rem 1.2rem;
+  margin-bottom: 1rem;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.55fr);
   grid-template-areas:
     "eyebrow note"
     "title note";
-  gap: 0.18rem 1.2rem;
-  align-items: center;
-  border-bottom: 1px solid var(--sog-line-subtle);
-  background: linear-gradient(90deg, rgba(24, 182, 255, 0.055), transparent 48%);
+  gap: 0.15rem 2rem;
+  align-items: end;
 }
 
 .stablecoin-section-heading > p {
   grid-area: eyebrow;
-  margin: 0;
-  color: var(--sog-link);
-  font-size: 0.66rem;
+  color: var(--sog-accent, #7f242a);
+  font-size: 0.67rem;
   font-weight: 820;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -143,188 +243,102 @@
 
 .stablecoin-section-heading h2 {
   grid-area: title;
-  margin: 0;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
+  line-height: 1.05;
 }
 
 .stablecoin-section-heading > span {
   grid-area: note;
-  max-width: 31rem;
-  color: var(--sog-text-muted);
-  font-size: 0.75rem;
+  color: var(--muted);
+  font-size: 0.77rem;
   line-height: 1.55;
-  text-align: right;
 }
 
-.stablecoin-dossier .bar {
-  padding: 0.85rem 1.1rem;
-  border-bottom: 1px solid var(--sog-line-subtle);
-  color: var(--sog-text);
-  background: linear-gradient(90deg, rgba(24, 182, 255, 0.055), transparent 55%);
-  font-size: 0.82rem;
-  font-weight: 780;
-  letter-spacing: 0.04em;
+.stablecoin-assessment-copy {
+  max-width: 76ch;
+  margin: 0 0 1.2rem;
+  color: var(--text);
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.65;
 }
 
-.stablecoin-identity-table,
-.stablecoin-organizations-table,
-.stablecoin-dossier .registry > table,
-.stablecoin-dossier .registry > .table-wrap {
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scrollbar-gutter: stable;
+.stablecoin-identity-ledger {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.stablecoin-identity-table table {
-  min-width: 760px;
+.stablecoin-coverage-disclosure {
+  margin-top: 1rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
-.stablecoin-organizations-table table {
-  min-width: 1260px;
-}
-
-.stablecoin-dossier table {
-  font-size: 0.76rem;
-}
-
-.stablecoin-dossier th,
-.stablecoin-dossier td {
-  padding: 0.78rem 0.85rem;
-  border-bottom-color: rgba(23, 52, 77, 0.78);
-}
-
-.stablecoin-dossier th {
-  color: var(--sog-text-quiet);
-  font-size: 0.64rem;
-}
-
-.stablecoin-dossier tbody tr:hover {
-  background: rgba(24, 182, 255, 0.04);
-}
-
-.stablecoin-identity-cards {
-  display: none;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  margin: 0;
-  background: var(--sog-line-subtle);
-}
-
-.stablecoin-identity-cards div,
-.stablecoin-preview-grid div,
-.stablecoin-control-summary div {
-  min-width: 0;
-  padding: 0.9rem;
-  display: grid;
-  gap: 0.3rem;
-  background: rgba(8, 23, 39, 0.94);
-}
-
-.stablecoin-identity-cards dt,
-.stablecoin-preview-grid dt,
-.stablecoin-control-summary dt,
-.stablecoin-organization-cards dt {
-  color: var(--sog-text-quiet);
-  font-size: 0.64rem;
-  font-weight: 780;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.stablecoin-identity-cards dd,
-.stablecoin-preview-grid dd,
-.stablecoin-control-summary dd,
-.stablecoin-organization-cards dd {
-  margin: 0;
-  color: var(--sog-text-muted);
-  font-size: 0.78rem;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.stablecoin-preview-grid,
-.stablecoin-control-summary {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  margin: 0;
-  background: var(--sog-line-subtle);
-}
-
-.stablecoin-control-note {
-  margin: 0;
-  padding: 0.9rem 1.1rem;
-  color: var(--sog-text-muted);
-  font-size: 0.76rem;
-  line-height: 1.6;
-  border-bottom: 1px solid var(--sog-line-subtle);
-}
-
-.stablecoin-control-summary {
-  border-bottom: 1px solid var(--sog-line-subtle);
-}
-
-.stablecoin-organization-cards {
-  display: none;
-  gap: 0.7rem;
-  padding: 0.8rem;
-}
-
-.stablecoin-organization-cards article {
-  padding: 0.95rem;
-  display: grid;
-  gap: 0.85rem;
-  border: 1px solid var(--sog-line-subtle);
-  border-radius: var(--sog-radius-panel);
-  background: rgba(8, 23, 39, 0.92);
-}
-
-.stablecoin-organization-cards header {
+.stablecoin-coverage-disclosure summary {
+  min-height: 44px;
+  padding: 0.65rem 0;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.8rem;
+  align-items: center;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 720;
 }
 
-.stablecoin-organization-cards h3 {
-  margin: 0.18rem 0 0;
+.stablecoin-mechanism-ledger {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.stablecoin-organization-cards header > span {
-  color: var(--sog-link);
-  font-size: 0.68rem;
-  font-weight: 760;
-  white-space: nowrap;
+.stablecoin-mechanism-ledger .wide {
+  grid-column: span 2;
 }
 
-.stablecoin-organization-cards dl {
+.stablecoin-reserve-components {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.stablecoin-reserve-components h3,
+.stablecoin-model-history h3,
+.stablecoin-related-guides h3 {
+  margin-bottom: 0.65rem;
+  font-size: 1rem;
+}
+
+.stablecoin-reserve-components ul,
+.stablecoin-model-history ol,
+.stablecoin-related-guides ul,
+.stablecoin-further-reading {
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem 0.85rem;
+  padding: 0;
+  list-style: none;
 }
 
-.stablecoin-reserve-components > ul,
-.stablecoin-model-history > ul {
-  margin: 0;
-  padding: 0.9rem 1.2rem 1.1rem 2.2rem;
+.stablecoin-reserve-components li {
+  padding: 0.65rem 0;
   display: grid;
-  gap: 0.65rem;
-  color: var(--sog-text-muted);
+  grid-template-columns: minmax(150px, 0.3fr) minmax(0, 1fr);
+  gap: 1rem;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.55;
 }
 
-.stablecoin-empty-state {
-  padding: 1rem 1.2rem;
-  color: var(--sog-text-muted);
-  font-size: 0.78rem;
+.stablecoin-reserve-components li:last-child {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.stablecoin-value-state-group,
+.stablecoin-legal-group,
+.stablecoin-unknown-group,
+.stablecoin-deployment-group,
+.stablecoin-history {
+  display: grid;
+  gap: 1.25rem;
 }
 
 .stablecoin-value-state-group {
-  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
 }
 
 .stablecoin-value-state-group > .stablecoin-reserve-history,
@@ -333,92 +347,227 @@
   grid-column: 1 / -1;
 }
 
-.stablecoin-value-state-group .registry,
-.stablecoin-deployment-group .registry,
-.stablecoin-dossier > .registry,
-.stablecoin-evidence-section,
-.stablecoin-coverage-section {
-  border: 1px solid rgba(36, 80, 113, 0.72);
-  border-radius: var(--sog-radius-panel);
-  background: linear-gradient(180deg, rgba(13, 33, 54, 0.42), rgba(8, 23, 39, 0.9));
-  box-shadow: var(--sog-shadow-accent);
-  overflow: hidden;
+.stablecoin-dossier .panel,
+.stablecoin-dossier .ui-panel,
+.stablecoin-dossier .registry,
+.stablecoin-dossier .stablecoin-organizations-control {
+  margin-top: 0;
+  overflow: visible;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.stablecoin-value-state-group .registry > table,
-.stablecoin-deployment-group .registry > table,
-.stablecoin-evidence-section table,
-.stablecoin-coverage-section table {
-  min-width: 720px;
+.stablecoin-organizations-control {
+  border-top: 0;
 }
 
-.stablecoin-deployment-group .registry {
+.stablecoin-dossier .bar {
+  padding: 0.68rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  background: transparent;
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.stablecoin-control-note {
+  max-width: 90ch;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+.stablecoin-control-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 0;
+}
+
+.stablecoin-organizations-table,
+.stablecoin-dossier .registry,
+.stablecoin-dossier .evidence-table,
+.stablecoin-deployment-group,
+.stablecoin-coverage-disclosure {
+  min-width: 0;
   overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.stablecoin-dossier table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+}
+
+.stablecoin-dossier th,
+.stablecoin-dossier td {
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  text-align: left;
+  vertical-align: top;
+}
+
+.stablecoin-dossier th {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 780;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.stablecoin-dossier tbody tr:hover {
+  background: color-mix(in srgb, var(--bg-soft) 45%, transparent);
+}
+
+.stablecoin-organizations-table table {
+  min-width: 1180px;
 }
 
 .stablecoin-deployment-group table {
-  min-width: 2300px;
+  min-width: 2200px;
 }
 
-.stablecoin-evidence-section > .evidence-table,
-.stablecoin-evidence-section > div:not(.stablecoin-section-heading) {
-  overflow-x: auto;
+.stablecoin-evidence-section table {
+  min-width: 1120px;
 }
 
-.stablecoin-more-group {
+.stablecoin-value-state-group table,
+.stablecoin-legal-group table,
+.stablecoin-unknown-group table {
+  min-width: 720px;
+}
+
+.stablecoin-organization-cards {
+  display: none;
+}
+
+.stablecoin-model-history {
+  padding-top: 0.2rem;
+}
+
+.stablecoin-model-history li {
+  padding: 0.72rem 0;
+  justify-content: flex-start;
+  border-top: 1px solid var(--line-soft);
+}
+
+.stablecoin-model-history li:last-child {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.stablecoin-model-history time {
+  min-width: 8rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.stablecoin-model-history li > span {
   display: grid;
-  gap: 1rem;
+  gap: 0.2rem;
+}
+
+.stablecoin-model-history small {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.stablecoin-empty-state {
+  padding: 0.75rem 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.stablecoin-related-guides {
+  margin-bottom: 1.25rem;
+}
+
+.stablecoin-related-guides li {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.stablecoin-related-guides li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.stablecoin-related-guides p {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
 }
 
 .stablecoin-further-reading {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
 }
 
-.stablecoin-further-reading > a {
-  min-height: 140px;
-  padding: 1rem;
-  display: grid;
-  align-content: center;
-  color: var(--sog-text);
+.stablecoin-further-reading li {
+  min-width: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.stablecoin-further-reading a {
+  min-height: 82px;
+  padding: 0.8rem;
+  color: var(--text);
   text-decoration: none;
 }
 
-.stablecoin-further-reading > a:hover {
-  border-color: var(--sog-link);
+.stablecoin-further-reading a:hover,
+.stablecoin-further-reading a:focus-visible {
+  background: var(--bg-soft);
   text-decoration: none;
 }
 
-.stablecoin-further-reading h2 {
-  margin: 0;
-  font-size: 1rem;
+.stablecoin-further-reading strong,
+.stablecoin-further-reading span {
+  display: block;
 }
 
-.stablecoin-further-reading p {
-  margin-top: 0.4rem;
-  color: var(--sog-text-muted);
-  font-size: 0.75rem;
-  line-height: 1.55;
+.stablecoin-further-reading span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
 }
 
 @media (max-width: 1040px) {
-  .stablecoin-current-state {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .stablecoin-dossier-facts,
+  .stablecoin-identity-ledger {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .stablecoin-further-reading {
+  .stablecoin-mechanism-ledger,
+  .stablecoin-control-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 900px) {
-  .stablecoin-dossier-hero {
+@media (max-width: 800px) {
+  .stablecoin-section-heading {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "eyebrow"
+      "title"
+      "note";
   }
 
-  .stablecoin-dossier-identity-mark {
-    min-height: 170px;
+  .stablecoin-section-heading > span {
+    margin-top: 0.35rem;
+  }
+
+  .stablecoin-material-change {
+    grid-template-columns: 1fr;
   }
 
   .stablecoin-value-state-group {
@@ -431,63 +580,89 @@
 }
 
 @media (max-width: 719px) {
-  .stablecoin-current-state,
-  .stablecoin-preview-grid,
+  .stablecoin-dossier-masthead {
+    padding-top: 0.7rem;
+  }
+
+  .stablecoin-dossier-title-row {
+    align-items: flex-start;
+  }
+
+  .stablecoin-dossier-title-row h1 {
+    font-size: clamp(2rem, 13vw, 3.4rem);
+  }
+
+  .stablecoin-dossier-facts,
+  .stablecoin-identity-ledger,
+  .stablecoin-mechanism-ledger,
   .stablecoin-control-summary,
-  .stablecoin-identity-cards,
-  .stablecoin-organization-cards dl,
   .stablecoin-further-reading {
     grid-template-columns: 1fr;
+  }
+
+  .stablecoin-mechanism-ledger .wide {
+    grid-column: 1;
   }
 
   .stablecoin-dossier-nav {
     position: static;
   }
 
-  .stablecoin-section-heading {
+  .stablecoin-reserve-components li {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "eyebrow"
-      "title"
-      "note";
+    gap: 0.25rem;
   }
 
-  .stablecoin-section-heading > span {
-    margin-top: 0.35rem;
-    text-align: left;
-  }
-
-  .stablecoin-identity-table,
   .stablecoin-organizations-table {
     display: none;
   }
 
-  .stablecoin-identity-cards,
   .stablecoin-organization-cards {
     display: grid;
+    gap: 0;
   }
 
-  .stablecoin-dossier .registry,
-  .stablecoin-value-state-group .registry,
-  .stablecoin-deployment-group .registry,
-  .stablecoin-evidence-section,
-  .stablecoin-coverage-section {
-    overflow-x: auto;
+  .stablecoin-organization-cards article {
+    padding: 0.85rem 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
   }
 
-  .stablecoin-dossier-hero-actions .ui-button {
-    width: 100%;
+  .stablecoin-organization-cards article:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stablecoin-organization-cards header {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  .stablecoin-organization-cards dl {
+    margin-top: 0.7rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
   }
 }
 
 @media (max-width: 440px) {
-  .stablecoin-dossier-hero-actions {
-    align-items: stretch;
+  .stablecoin-dossier-overline,
+  .stablecoin-dossier-title-row,
+  .stablecoin-material-change > div,
+  .stablecoin-organization-cards header {
+    flex-direction: column;
   }
 
-  .stablecoin-dossier-hero-actions > * {
-    width: 100%;
-    justify-content: center;
+  .stablecoin-dossier-title-row > [class*="chip"],
+  .stablecoin-dossier-title-row > [class*="status"] {
+    align-self: flex-start;
+  }
+
+  .stablecoin-organization-cards dl {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -498,11 +673,14 @@
 }
 
 @media (forced-colors: active) {
+  .stablecoin-dossier-masthead,
   .stablecoin-dossier-nav,
-  .stablecoin-dossier-identity-mark,
-  .stablecoin-value-state-group .registry,
-  .stablecoin-deployment-group .registry,
-  .stablecoin-further-reading > a {
+  .stablecoin-dossier-section,
+  .stablecoin-organizations-control,
+  .stablecoin-dossier-facts,
+  .stablecoin-identity-ledger,
+  .stablecoin-mechanism-ledger,
+  .stablecoin-further-reading {
     forced-color-adjust: auto;
   }
 }
