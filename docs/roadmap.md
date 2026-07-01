@@ -7,18 +7,20 @@ Status: canonical execution schedule
 
 ```text
 Latest completed: PR #265 — Editorial Ledger Stablecoin dossier
-Active: PR #266 — Organizations and Events
-Next: PR #267 — Guides
+Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
+Active: PR #267 — corrective Organizations and Events completion
+Next: PR #268 — Guides
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
 Gate V3-A: passed
 Gate V3-B: passed
+Gate V3-C: pending PR #267 validation and merge
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
-The former UI v2 Modern Data Product implementation is an intermediate state. Editorial Ledger is the binding visual direction. Growth D, the 100-record audit, and non-UI release preparation remain paused until PR #272 completes.
+The former UI v2 Modern Data Product implementation is an intermediate state. Editorial Ledger is the binding visual direction. Growth D, the 100-record audit, and non-UI release preparation remain paused until PR #273 completes.
 
 ## Current factual baseline
 
@@ -55,6 +57,7 @@ PR #262 shared Editorial Ledger shell
 PR #263 Editorial Ledger Home
 PR #264 Editorial Ledger Stablecoins register
 PR #265 Editorial Ledger Stablecoin dossier
+PR #266 partial Organization and Event row compaction; corrective completion moved to PR #267
 ```
 
 ## Fixed UI direction
@@ -69,9 +72,10 @@ minimal corner radius
 no decorative shadows
 existing approved S/G logo only
 no SaaS dashboard composition
-no oversized hero
-no KPI-card row
+no giant hero
+no KPI card row
 no repeated rounded-card grid
+no blue-purple glow
 ```
 
 Canonical visual authority:
@@ -112,34 +116,40 @@ Replaced the hero, KPI cards, filter panels, and nine-column dashboard table wit
 - added UI v3 dossier validation and retained the v2 command as a compatibility alias;
 - changed no canonical data, public route, logo, or machine-readable output.
 
-### PR #266 — Organizations and Events — active
+### PR #266 — Organization and Event row compaction — partial precursor
+
+This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astro`. It did not complete the page families and must not be treated as Gate V3-C completion.
+
+### PR #267 — corrective Organizations and Events completion — active
 
 - render organizations as responsible-body records, not corporate profile cards;
 - render events as incident/public-record files, not alert dashboards;
-- repair index density and false empty states;
-- retain relationships, evidence, and value states.
+- complete both indexes and both detail families;
+- preserve search, filters, sorting, responsive compact records, relationships, typed details, evidence, value states, and known unknowns;
+- update validators and responsive manifests for the split component architecture;
+- change no canonical records, public routes, logo assets, or machine-readable schema.
 
-### PR #267 — Guides
+### PR #268 — Guides
 
 Use a distinct editorial article family with readable body width, contents navigation, notes, tables, related guides, and unchanged published routes.
 
-### PR #268 — Reference and utility pages
+### PR #269 — Reference and utility pages
 
 Align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact while keeping distinct Reference, Long-form, and Utility families.
 
-### PR #269 — mobile transformation
+### PR #270 — mobile transformation
 
 Preserve material fields at 320px and 200 percent zoom with page-specific compact records, keyboard support, focus, reduced motion, and forced colors.
 
-### PR #270 — representative all-family visual audit
+### PR #271 — representative all-family visual audit
 
 Capture desktop and mobile representatives; inspect all unique pages and three samples per repeated detail family; fix overflow, false empty states, hierarchy, logo misuse, and remaining SaaS styling. Gate V3-F remains pending until this passes.
 
-### PR #271 — accessibility, performance, and legacy cleanup
+### PR #272 — accessibility, performance, and legacy cleanup
 
 Remove obsolete v2 CSS/components after replacement, then verify headings, tables, labels, contrast, focus, keyboard operation, canonical counts, and route parity.
 
-### PR #272 — production verification and UI v3 closure
+### PR #273 — production verification and UI v3 closure
 
 Verify automatic deployment, public provenance, machine-readable parity, production captures, Gate V3-F, and the exact immutable release commit.
 
@@ -148,7 +158,7 @@ Verify automatic deployment, public provenance, machine-readable parity, product
 ```text
 Gate V3-A  specification and visual authority aligned — passed
 Gate V3-B  shared shell complete — passed
-Gate V3-C  core registry page families complete — pending
+Gate V3-C  core registry page families complete — pending PR #267 validation and merge
 Gate V3-D  editorial/reference families complete — pending
 Gate V3-E  mobile and accessibility complete — pending
 Gate V3-F  representative visual audit passed — pending
