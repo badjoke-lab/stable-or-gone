@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('stablecoin-lifecycle-terms');
 const title = 'Stablecoin Lifecycle Terms — Stable or Gone';
 const description = 'A guide to stablecoin launches, migrations, rebrands, wind-downs, discontinuations, failures, successor assets, and post-collapse trading.';
 const jsonLd = {
@@ -13,13 +16,14 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/stablecoin-lifecycle-terms/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Guide to stablecoin histories</div>
-      <h1>How stablecoins change over time</h1>
-      <p>A stablecoin can launch, expand to new chains, migrate, rebrand, stop minting, enter a wind-down, fail, or continue trading after its original purpose has ended.</p>
-    </div>
-  </section>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="How stablecoins change over time"
+    description="A stablecoin can launch, expand to new chains, migrate, rebrand, stop minting, enter a wind-down, fail, or continue trading after its original purpose has ended."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
 
   <section class="panel registry">
     <div class="bar">Why lifecycle terms matter</div>
