@@ -1,262 +1,227 @@
 # DESIGN.md — Stable or Gone
 
-## 0. Purpose
+Status: canonical design overview  
+Updated: 2026-07-01  
+Visual family: Editorial Ledger
 
-This document is the visual source of truth for Stable or Gone (SOG).
+## 0. Authority
 
-SOG is a terminal-style stablecoin registry. It should feel like a structured archive terminal for stablecoin records, depeg events, issuers, reserve reports, redemption notes, and evidence.
+The binding visual and page-layout specification is:
 
-SOG is not:
-
-- a trading terminal
-- an MS-DOS clone
-- a DeFi dashboard
-- a cyberpunk crypto UI
-- a game-like 8-bit interface
-- a glossy SaaS landing page
-
-## 1. Core design direction
-
-Primary design direction:
-
-```txt
-Terminal Registry UI
+```text
+docs/architecture/approved-editorial-ledger-ui-v3.md
 ```
 
-Working phrase:
+The active implementation schedule is:
 
-```txt
-A terminal-style registry UI for stablecoins, depeg events, issuers, reserves, and evidence.
+```text
+docs/ui-redesign/implementation-plan.md
+docs/roadmap.md
 ```
 
-The UI may use terminal-inspired language, dense tables, log panels, evidence blocks, and monospace accents, but it must remain readable as a modern web registry.
+The active reference direction is:
 
-## 2. Product mood
-
-SOG should feel:
-
-- structured
-- investigative
-- archival
-- source-backed
-- technical but readable
-- quiet but sharper than HEI
-- registry-first
-
-SOG should not feel:
-
-- speculative
-- hype-driven
-- score/rating oriented
-- investment-advice oriented
-- neon crypto
-- exchange-like
-- price-dashboard-like
-
-## 3. Information density
-
-SOG is allowed to be dense.
-
-Rules:
-
-- prefer compact clarity over decorative whitespace
-- tables are acceptable and often preferred
-- cards are secondary, not the main structure
-- mobile should preserve information density
-- avoid giant marketing heroes
-- use concise summaries and clear record metadata
-
-## 4. Layout principles
-
-Registry pages should use:
-
-1. compact header
-2. command-inspired search/filter area
-3. summary strip
-4. dense table/list
-5. footer utility links
-
-Detail pages should use:
-
-1. record header
-2. status / peg / issuer facts
-3. reserve and redemption block
-4. depeg / event timeline
-5. lifecycle block
-6. evidence coverage
-7. source list
-8. known unknowns
-9. report/contact prompt
-
-## 5. Visual language
-
-Use:
-
-- dark navy / blue-black base
-- thin borders
-- terminal-like panels
-- monospace accents
-- restrained green / amber / red status colors
-- cyan/blue for evidence/archive/source links
-- log-like event rows
-- file-like evidence blocks
-
-Avoid:
-
-- full green-on-black hacker screen
-- old OS clone behavior
-- blinking cursors everywhere
-- fake command line navigation that blocks normal browsing
-- excessive ASCII art
-- animated counters
-- price-chart-first layout
-
-## 6. Color roles
-
-Suggested roles:
-
-- background: deep navy / near black
-- surface: slightly lighter blue-black
-- border: muted blue-gray
-- text: off-white
-- muted text: blue-gray
-- active/stable: subdued green
-- notable/warning: amber
-- failed/collapse: muted red
-- unknown: neutral gray
-- evidence/source: cyan or archival blue
-- support/donation: muted gold or amber
-
-Status colors must remain stable across pages.
-
-## 7. Typography
-
-Use a readable modern sans-serif for body text and a monospace font for:
-
-- command-inspired search labels
-- record IDs
-- JSON-like metadata snippets
-- log timestamps
-- evidence IDs
-- terminal-style headings
-
-Do not use decorative pixel fonts for body content.
-
-## 8. Components
-
-### Header
-
-Must include:
-
-- Stable or Gone wordmark/title
-- primary navigation
-- Support link
-- Contact / Submit correction utility
-
-### Search / command bar
-
-May appear as:
-
-```txt
-> search stablecoin, issuer, peg, event...
+```text
+docs/ui-redesign/approved-mocks-v3/README.md
 ```
 
-But it must behave like a normal search field.
+This overview must not override those documents. The former Terminal Registry and Modern Data Product directions are historical and do not authorize current visual work.
 
-### Tables
+## 1. Product identity
 
-Tables are core.
+Stable or Gone is a source-backed historical registry for stablecoins and closely related stable-value assets.
 
-Stablecoin registry columns should eventually include:
+It should feel like the intersection of:
 
-- Name
-- Symbol
-- Peg
-- Model
-- Issuer
-- Status
-- Major depeg
-- Redemption
-- Evidence
-
-### Chips
-
-Use chips for:
-
-- status
-- peg asset
-- collateral model
-- event type
-- evidence type
-- confidence
-- redemption status
-
-### Evidence coverage panel
-
-Show source coverage, not a score.
-
-Example:
-
-```txt
-Issuer statement: yes
-Market data: yes
-Reserve report: yes
-Regulatory source: no
-Archive: yes
+```text
+financial register
+research dossier
+public record
+editorial archive
+source index
 ```
 
-### Known unknowns
+It must not feel like:
 
-Known unknowns should be visible, not hidden.
+- a SaaS dashboard;
+- a trading terminal;
+- an exchange;
+- a portfolio tracker;
+- a market-cap dashboard;
+- a promotional crypto landing page;
+- a safety or recommendation product.
 
-They communicate that SOG does not force uncertain facts into false certainty.
+## 2. Visual direction
 
-## 9. Support/donation UI
+```text
+Editorial Ledger
+```
 
-Support must be present from v0, but it must be secondary.
+Core visual rules:
 
-Allowed placements:
+- paper-like off-white background;
+- dark ink;
+- muted dark-red accent used sparingly;
+- thin rules as the primary separation device;
+- square or nearly square corners;
+- no decorative shadows;
+- no blue-purple glow;
+- no giant marketing hero;
+- no KPI-card row;
+- no repeated rounded-card grid;
+- no cards inside cards;
+- no new logo.
 
-- header utility link
-- footer link
-- `/support/`
-- about page section
+Hierarchy is created through typography, rules, spacing, columns, labels, and data density rather than surface effects.
 
-Do not make donation the main hero CTA.
+## 3. Existing logo
 
-Good language:
+The approved S/G logo already exists and must be reused.
 
-- Support SOG
-- Support this registry
-- Help keep this project independent
+```text
+public/brand/sog-lockup-on-light.svg
+public/brand/sog-lockup-on-dark.svg
+public/brand/sog-mark-on-light.svg
+public/brand/sog-mark-on-dark.svg
+```
 
-Avoid:
+Default light Editorial Ledger surfaces use the `on-light` assets. Do not redraw, regenerate, imitate, or replace the logo.
 
-- Fund our ratings
-- Keep stablecoins safe
-- Donate for risk scores
+## 4. Exact shared tokens
 
-## 10. Mobile behavior
+The implementation source of truth for shared tokens is:
 
-Mobile should not become huge cards.
+```text
+config/ui-v3-foundation.mjs
+src/styles/shell.css
+```
 
-Use compact two-line rows where possible:
+Current foundation:
 
-Line 1:
+```text
+paper             #F4F1E9
+paper subtle      #ECE7DC
+paper emphasis    #E2DCCF
+ink               #1B1A18
+muted ink         #5C5851
+quiet ink         #7A746B
+rule              #C4BDB1
+strong rule       #5D5850
+accent            #7F242A
+accent strong     #641A1F
+focus             #1D5F85
+positive          #2F6B4F
+warning           #93651B
+critical          #8B2B2B
+unknown           #655C79
+```
 
-- name
-- symbol
-- status chip
+Typography:
 
-Line 2:
+```text
+display headings  Georgia / Cambria / Times New Roman
+body and controls Inter / system sans-serif
+IDs and dates     system monospace
+```
 
-- peg
-- model
-- issuer
-- evidence/depeg marker
+## 5. Shared shell
 
-## 11. Final rule
+Desktop primary navigation:
 
-SOG should look like a terminal-style historical registry, not a trading tool.
+```text
+approved logo
+Register
+Events
+Organizations
+Guides
+Search register
+About disclosure
+```
 
-The design exists to make stablecoin records, events, and evidence easier to inspect.
+The About disclosure and footer contain secondary destinations such as Methodology, Glossary, Models, Updates, Corrections, Support, Contact, and data access.
+
+The shell must preserve:
+
+- keyboard operation;
+- visible focus;
+- 44px interactive targets;
+- reduced-motion support;
+- forced-colors support;
+- mobile controlled disclosure;
+- existing routes and canonical data.
+
+## 6. Page families
+
+### Home
+
+A registry front page, not a product landing page.
+
+```text
+masthead and purpose
+one-line registry summary
+latest material changes
+current registry state
+recently updated records
+guides and reference entrypoints
+```
+
+### Stablecoins
+
+A table-first public register with compact search, filter, sort, and bounded pagination.
+
+### Stablecoin detail
+
+A research dossier that separates current state, mechanism, organizations, history, evidence, known unknowns, and corrections.
+
+### Organizations
+
+Responsible-body records, not corporate profile cards.
+
+### Events
+
+Incident and public-record files, not alert-dashboard cards.
+
+### Guides
+
+A distinct editorial article layout with a readable body column, table of contents, notes, tables, and related material.
+
+### Reference and utility pages
+
+Models and Glossary are reference pages. Methodology and About are long-form pages. Updates, Corrections, Support, and Contact are utility pages. They share the shell but do not use one generic card template.
+
+## 7. Mobile
+
+Mobile is a deliberate transformation, not desktop stacked into cards.
+
+- preserve field labels and values;
+- retain protected information;
+- use page-specific compact rows or deliberate comparison scrolling;
+- use expandable local navigation for long dossiers and guides;
+- support 320px width and 200 percent zoom;
+- avoid generic numbered-column hiding.
+
+## 8. Data truth
+
+The visual system must not invent:
+
+- live price or market data;
+- market capitalization or supply figures;
+- holder or transfer counts;
+- synthetic scores;
+- unsupported reserve totals;
+- unsupported verification or licensing claims;
+- invented evidence counts;
+- invented relative timestamps;
+- asset-specific facts stored only in rendering components.
+
+Canonical data, approved editorial copy, generated canonical counts, and reviewed local assets are the only default public inputs.
+
+## 9. Validation
+
+Shared-shell validation:
+
+```text
+npm run validate:ui-v3-foundation
+```
+
+Visual review uses representative desktop and mobile screenshot capture. Repeated detail templates are sampled by default rather than captured exhaustively.
