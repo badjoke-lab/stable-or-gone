@@ -25,7 +25,7 @@ const jsonLd = {
       <div class="guide-index-title"><h1>Guides</h1><p>Readable explanations of regulation, asset structures, reserve and redemption systems, lifecycle events, and the record distinctions used throughout Stable or Gone.</p></div>
       <dl class="guide-index-ledger" aria-label="Guide archive summary">
         <div><dt>Guide records</dt><dd>{guides.length}</dd></div>
-        <div><dt>Published</dt><dd>{published.length}</dd></div>
+        <div><dt>Dated publications</dt><dd>{published.length}</dd></div>
         <div><dt>Sections</dt><dd>{categories.length}</dd></div>
         <div><dt>Information current through</dt><dd>{currentThrough}</dd></div>
       </dl>
@@ -43,12 +43,12 @@ const jsonLd = {
           <table>
             <thead><tr><th>Guide</th><th>Region or scope</th><th>Publication</th><th>Current through</th></tr></thead>
             <tbody>
-              {entries.map((guide) => <tr><td><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p></td><td>{guide.regionLabel ?? guideCategoryLabels[guide.category]}</td><td><span class="guide-index-status">{guide.publishedAt ?? 'Editorial draft'}</span></td><td>{guide.informationCurrentThrough}</td></tr>)}
+              {entries.map((guide) => <tr><td><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p></td><td>{guide.regionLabel ?? guideCategoryLabels[guide.category]}</td><td><span class="guide-index-status">{guide.publishedAt ?? 'Publication date not recorded'}</span></td><td>{guide.informationCurrentThrough}</td></tr>)}
             </tbody>
           </table>
         </div>
         <div class="guide-index-mobile" aria-label={`${guideCategoryLabels[category]} guides`}>
-          {entries.map((guide) => <article><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p><p><small>{guide.regionLabel ?? guideCategoryLabels[guide.category]} · {guide.publishedAt ? `Published ${guide.publishedAt}` : 'Editorial draft'} · Current through {guide.informationCurrentThrough}</small></p></article>)}
+          {entries.map((guide) => <article><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p><p><small>{guide.regionLabel ?? guideCategoryLabels[guide.category]} · {guide.publishedAt ? `Published ${guide.publishedAt}` : 'Publication date not recorded'} · Current through {guide.informationCurrentThrough}</small></p></article>)}
         </div>
       </section>
     ))}
