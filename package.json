@@ -33,7 +33,7 @@
     "prepare:organization-taxonomy": "npm run generate:organization-taxonomy && npm run validate:organization-taxonomy",
     "generate:evidence-taxonomy": "node scripts/collect-evidence-taxonomy-migration.mjs",
     "validate:evidence-taxonomy": "node scripts/validate-evidence-taxonomy-normalization.mjs",
-    "prepare:evidence-taxonomy": "npm run generate:evidence-taxonomy-values && npm run generate:evidence-taxonomy && npm run validate:evidence-taxonomy",
+    "prepare:evidence-taxonomy": "npm run generate:evidence-taxonomy && npm run validate:evidence-taxonomy",
     "generate:deployment-taxonomy": "node scripts/collect-deployment-taxonomy-migration.mjs",
     "validate:deployment-taxonomy": "node scripts/validate-deployment-taxonomy-normalization.mjs",
     "prepare:deployment-taxonomy": "npm run generate:deployment-taxonomy && npm run validate:deployment-taxonomy",
