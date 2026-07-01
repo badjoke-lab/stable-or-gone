@@ -6,6 +6,7 @@ import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 type View = ReturnType<typeof buildEventDetailView>;
+type Subject = { id: string; name: string; slug: string };
 const { event, view } = Astro.props as { event: any; view: View };
 ---
 <section class="event-detail-section" id="overview">
@@ -19,8 +20,8 @@ const { event, view } = Astro.props as { event: any; view: View };
 <section class="event-detail-section" id="subjects">
   <div class="event-detail-section-heading"><p>Affected records</p><h2>Subjects</h2><span>Stablecoin and organization subjects remain separate record groups.</span></div>
   <div class="event-subject-grid">
-    {view.subjectStablecoins.map((item) => <article class="event-subject-card"><span>Stablecoin subject</span><h3>{item.slug ? <a href={'/stablecoin/' + item.slug + '/'}>{item.name}</a> : item.name}</h3><p>Open the stablecoin dossier for current state, organizations, deployments, evidence, and unknowns.</p></article>)}
-    {view.subjectOrganizations.map((item) => <article class="event-subject-card"><span>Organization subject</span><h3>{item.slug ? <a href={'/issuer/' + item.slug + '/'}>{item.name}</a> : item.name}</h3><p>Open the organization record for roles, relationships, events, evidence, and unknowns.</p></article>)}
+    {view.subjectStablecoins.map((item: Subject) => <article class="event-subject-card"><span>Stablecoin subject</span><h3>{item.slug ? <a href={'/stablecoin/' + item.slug + '/'}>{item.name}</a> : item.name}</h3><p>Open the stablecoin dossier for current state, organizations, deployments, evidence, and unknowns.</p></article>)}
+    {view.subjectOrganizations.map((item: Subject) => <article class="event-subject-card"><span>Organization subject</span><h3>{item.slug ? <a href={'/issuer/' + item.slug + '/'}>{item.name}</a> : item.name}</h3><p>Open the organization record for roles, relationships, events, evidence, and unknowns.</p></article>)}
     {view.subjectCount === 0 && <p class="event-detail-empty">No subject relationship is recorded.</p>}
   </div>
 </section>
