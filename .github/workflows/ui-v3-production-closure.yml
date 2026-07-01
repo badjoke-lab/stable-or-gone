@@ -1,0 +1,85 @@
+name: UI v3 production closure
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/ui-v3-production-closure.yml'
+      - 'scripts/write-ui-v3-production-closure-report.mjs'
+      - 'scripts/validate-ui-v3-production-closure.mjs'
+      - 'docs/audits/ui-v3-production-closure-2026-07-02.md'
+      - 'docs/roadmap.md'
+      - 'docs/ui-redesign/implementation-plan.md'
+      - 'AGENTS.md'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ui-v3-production-closure-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SOG_BASE_URL: https://sog.badjoke-lab.com
+      SOG_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
+      SOG_OWNER_APPROVAL_REF: project owner instruction to proceed with the fixed PR 261-273 sequence
+    steps:
+      - name: Checkout exact release candidate
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate production closure contract
+        run: npm run validate:ui-v3-production-closure
+
+      - name: Wait for exact release commit and verify production parity
+        env:
+          SOG_SMOKE_ATTEMPTS: '40'
+          SOG_SMOKE_DELAY_MS: '15000'
+          SOG_PARITY_CONCURRENCY: '12'
+        run: npm run check:production
+
+      - name: Capture production desktop representatives
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url "$SOG_BASE_URL"
+
+      - name: Capture production mobile representatives
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url "$SOG_BASE_URL"
+
+      - name: Audit production representatives
+        run: node scripts/audit-representative-visuals.mjs
+
+      - name: Write production closure report
+        run: npm run report:ui-v3-production-closure
+
+      - name: Upload production closure artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-v3-production-closure-${{ github.event.pull_request.head.sha }}-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            artifacts/ui-v3-production-closure-validation.json
+            artifacts/ui-v3-production-closure.json
+            artifacts/ui-v3-production-closure.md
+            artifacts/screenshots/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
