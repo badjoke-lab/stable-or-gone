@@ -24,7 +24,7 @@ const { view } = Astro.props as { view: View };
 
 <section class="organization-detail-section" id="unknowns">
   <div class="organization-detail-section-heading"><p>Uncertainty</p><h2>Known unknowns</h2><span>Reviewed gaps remain visible instead of being converted into false certainty.</span></div>
-  {view.knownUnknowns.length === 0 ? <p class="organization-detail-empty">No organization-specific known unknowns are currently recorded.</p> : <div class="organization-unknown-cards">{view.knownUnknowns.map((item) => <article><h3>{item.question}</h3><p>{item.notes ?? 'No public resolution is recorded.'}</p><dl><div><dt>Value state</dt><dd>{formatPublicLabel(item.value_state)}</dd></div><div><dt>Priority</dt><dd>{formatPublicLabel(item.priority)}</dd></div><div><dt>Last checked</dt><dd><ValueStateText value={item.last_checked_at} /></dd></div></dl></article>)}</div>}
+  {view.knownUnknowns.length === 0 ? <p class="organization-detail-empty">No organization-specific known unknowns are currently recorded.</p> : <div class="organization-unknown-cards">{view.knownUnknowns.map((item) => <article><h3>{item.topic}</h3><p>{item.description}</p><dl><div><dt>Severity</dt><dd>{formatPublicLabel(item.severity)}</dd></div><div><dt>Last checked</dt><dd><ValueStateText value={item.last_checked_at} /></dd></div></dl>{item.notes && <p>{item.notes}</p>}</article>)}</div>}
 </section>
 
 <section class="organization-detail-section" id="corrections">
