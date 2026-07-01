@@ -27,12 +27,11 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #270 mobile and accessibility hardening
+Completed through: PR #271 representative all-family visual audit
 Partial precursor: PR #266 Organization and Event row compaction
 Current UI: all page families use Editorial Ledger v3 structures
-Active work item: PR #271 representative all-family visual audit
-Next implementation: PR #272 accessibility, performance, and legacy cleanup
-Closure: PR #273 production verification and closure
+Active work item: PR #272 accessibility, performance, and legacy cleanup
+Next implementation: PR #273 production verification and closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
@@ -41,11 +40,13 @@ Gate V3-C: passed
 Gate V3-D: passed
 Gate V3-E: passed
 Gate V3-F: passed
+Gate V3-G: pending exact release-candidate approval
+Gate V3-H: pending production commit and public parity verification
 Release candidate: not selected
 Production publication: automatic on main
 ```
 
-The Modern Data Product direction is superseded. Remaining v2 implementations may be used only for reusable data mapping, interaction, accessibility, and approved logo behavior.
+The Modern Data Product direction is superseded. Historical v2 documents may remain as history, but production source must not load or reference obsolete v2 Hero/KPI presentation assets.
 
 ## Rejected visual patterns
 
@@ -101,57 +102,76 @@ Converted the guide archive and all nine routes to a shared Editorial Article fa
 
 ### PR #269 — Reference, Long-form, and Utility pages
 
-- converted Models, Glossary, and Updates into scan-friendly Reference indexes;
-- converted Methodology and About into Long-form pages with readable width and generated contents navigation;
-- converted Contact/Corrections and Support into Utility pages with clear action hierarchy;
-- retained `/contact/` as the canonical corrections route;
-- preserved Google Form and GitHub paths, support assets, networks, addresses, copy controls, fallback behavior, warnings, update records, and routes;
-- passed all 18 workflows and Gate V3-D.
+Converted Models, Glossary, and Updates to Reference indexes; Methodology and About to Long-form pages; Contact/Corrections and Support to Utility pages. Preserved correction paths, support values, routes, and data. Passed Gate V3-D.
 
 ### PR #270 — mobile and accessibility hardening
 
-- tested and protected all page families at 320px width and 200 percent zoom;
-- preserved labels, values, protected fields, and twenty-five table contracts;
-- added controlled navigation and contents disclosure, Escape focus return, keyboard support, visible focus, 44px targets, result and copy announcements, long-value wrapping, reduced motion, and forced-colors coverage;
-- passed all 18 workflows, Astro check, production build, output verification, public-layer verification, and Gate V3-E.
+Preserved protected information at 320px and 200 percent zoom; added controlled disclosures, Escape focus return, keyboard support, visible focus, target sizing, announcements, long-value wrapping, reduced motion, and forced-colors support. Passed Gate V3-E.
+
+### PR #271 — representative all-family visual audit
+
+Captured 24 representative routes per device, reviewed 48 full-page images, recorded zero rendered failures, and established the continuing desktop/mobile visual-regression contract. Passed Gate V3-F.
 
 ## Active sequence
 
-### PR #271 — representative all-family visual audit — Gate V3-F passed
-
-Captured on desktop and mobile:
-
-- all twelve unique index, reference, long-form, and utility routes;
-- three stablecoin details;
-- three organization details;
-- three event details;
-- three guide articles.
-
-Rendered results:
-
-- 378 public routes discovered;
-- 24 routes selected and 24 captured per device;
-- 48 full-page images reviewed;
-- zero capture failures;
-- zero horizontal overflow;
-- zero broken images;
-- zero unapproved brand assets;
-- zero visible legacy PageHero, MetricCard, blue-purple glow, or SaaS-dashboard markers;
-- zero false initial zero-result states;
-- exactly one `main` and one `h1` on every selected page.
-
-Human review confirmed clear hierarchy and reading order, no clipped labels or values, no false empty states, no logo misuse, no remaining dashboard composition, usable density, and legible mobile table/disclosure behavior. No source or CSS correction was required. Gate V3-F passed.
-
 ### PR #272 — accessibility, performance, and legacy cleanup
 
-Remove unused v2 CSS and obsolete components only after replacements exist. Verify headings, labels, tables, contrast, focus, keyboard operation, reduced motion, forced colors, counts, routes, performance, and build output.
+Remove only verified-unused production assets:
+
+```text
+src/components/PageHero.astro
+src/components/MetricCard.astro
+src/styles/editorial-v2.css
+```
+
+Remove the obsolete v2 stylesheet import and old `.page-hero` / `.metric-card` compatibility selectors. Keep historical documentation and data validators unless separately proven unused and safe to remove.
+
+Required accessibility preservation:
+
+- skip link and focusable main landmark;
+- keyboard focus and Escape return;
+- polite copy success/failure announcements;
+- 44-pixel target rules;
+- 320px and 200 percent zoom information preservation;
+- long-value wrapping;
+- reduced-motion and forced-colors behavior;
+- twenty-five protected mobile table contracts.
+
+Required static and build controls:
+
+- source scan blocks `PageHero`, `MetricCard`, `editorial-v2.css`, `.page-hero`, and `.metric-card` from returning;
+- active v3 stylesheet imports and accessibility markers are checked;
+- post-build audit checks CSS and JavaScript totals, largest assets, generated route count, required routes, one H1, one main landmark, skip links, and legacy output markers;
+- CI uploads JSON and Markdown measurements.
+
+Initial regression ceilings:
+
+```text
+source CSS total <= 250,000 bytes
+built CSS total <= 500,000 bytes
+largest CSS asset <= 220,000 bytes
+built JavaScript total <= 500,000 bytes
+largest JavaScript asset <= 250,000 bytes
+built HTML files >= 350
+```
+
+These are ceilings, not claims. Actual measurements must be recorded in the PR #272 audit before merge.
+
+Required rendered regression:
+
+- twelve unique pages and four repeated detail families;
+- 24 routes per device and 48 full-page images total;
+- zero capture, overflow, broken-image, brand, legacy-marker, false-empty-state, H1, or main-landmark failures;
+- human review for hierarchy, clipping, density, controls, tables, disclosures, and logo use.
 
 ### PR #273 — production verification and closure
 
-- verify automatic main deployment for the intended commit;
+- select and record the exact release candidate;
+- obtain Gate V3-G owner approval;
+- verify automatic main deployment for the intended immutable commit;
 - verify provenance and machine-readable parity;
-- verify representative production captures;
-- record Gate V3-G through Gate V3-H and the immutable production commit;
+- run representative captures against production;
+- record Gate V3-H and the production commit;
 - do not claim UI v3 completion before Gate V3-H.
 
 ## Validation rule
@@ -166,16 +186,18 @@ npm run validate:ui-v3-stablecoin-detail
 node scripts/validate-ui-v3-guides.mjs
 node scripts/validate-ui-v3-reference-utility.mjs
 node scripts/validate-ui-v3-representative-visual-audit.mjs
+npm run validate:ui-v3-cleanup
 npm run validate:active-workstream
 npm run validate:mobile-information
 npm run check
 npm run build
+npm run audit:ui-v3-cleanup
 npm run verify:consistency
 ```
 
 ## Screenshot rule
 
-Representative capture is the default. Repeated detail families are sampled at three records each rather than exhaustively captured. Full capture remains available for targeted debugging. PR #271 established the pull-request desktop/mobile rendered audit as the continuing visual regression contract.
+Representative capture is the default. Repeated detail families are sampled at three records each rather than exhaustively captured. Full capture remains available for targeted debugging. PR #271 established the baseline; PR #272 must prove that removal of the legacy layer does not change rendered behavior.
 
 ## Paused non-UI work
 
