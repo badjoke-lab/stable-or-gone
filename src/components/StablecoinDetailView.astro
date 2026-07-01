@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StablecoinDossierHeader from './StablecoinDossierHeader.astro';
-import IssuerControlEvents from './IssuerControlEvents.astro';
-import StablecoinEventTimeline from './StablecoinEventTimeline.astro';
-import EvidenceSourceTable from './EvidenceSourceTable.astro';
-import DeploymentTable from './DeploymentTable.astro';
-import StablecoinValueStateSections from './StablecoinValueStateSections.astro';
+import StablecoinReserveSection from './StablecoinReserveSection.astro';
+import StablecoinContextSections from './StablecoinContextSections.astro';
+import StablecoinHistorySection from './StablecoinHistorySection.astro';
+import StablecoinRelatedSection from './StablecoinRelatedSection.astro';
 import ValueStateText from './ValueStateText.astro';
 import StablecoinOrganizationsControl from './StablecoinOrganizationsControl.astro';
 import '../styles/stablecoin-dossier.css';
@@ -60,7 +59,16 @@ const aliases = Array.isArray(coin.aliases) ? coin.aliases.filter(Boolean) : [];
 const additionalRelationshipCount = Math.max(relationships.length - (primaryRelationship ? 1 : 0), 0);
 const title = `${coin.name} (${coin.symbol ?? coin.slug}) — Stablecoin History | Stable or Gone`;
 const description = `${coin.name} lifecycle, issuance, reference target, backing category, canonical backing types, stabilization mechanism, redemption terms, major events, reserve information, and sources.`;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Dataset', name: `${coin.name} stablecoin history`, url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`, description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, keywords: [coin.name, coin.symbol, coin.lifecycle_status, coin.issuance_status, reference.public_label, model.public_label].filter(Boolean) };
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: `${coin.name} stablecoin history`,
+  url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`,
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  keywords: [coin.name, coin.symbol, coin.lifecycle_status, coin.issuance_status, reference.public_label, model.public_label].filter(Boolean),
+  ...(relatedGuides.length > 0 ? { subjectOf: relatedGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://sog.badjoke-lab.com${guide.href}` })) } : {})
+};
 const coverageRows = [
   ['Organizations', relationships.length], ['Sources', evidence.length], ['Reserve reports', reserveReports.length],
   ['Reserve components', reserveComponents.length], ['Model-history events', modelHistoryEvents.length],
@@ -101,30 +109,9 @@ const redemptionProfile = coin.redemption_profile;
       </dl>
     </section>
 
-    <section class="stablecoin-dossier-section stablecoin-reserve-redemption" id="reserves-redemption">
-      <div class="stablecoin-section-heading"><p>Reserve and redemption</p><h2>Reserve and redemption</h2><span>Recorded components, disclosures, reports, and redemption conditions remain explicit.</span></div>
-      <section class="stablecoin-reserve-components" aria-labelledby="reserve-components-title"><h3 id="reserve-components-title">Reserve components</h3>{reserveComponents.length === 0 ? <p class="stablecoin-empty-state">No reserve components have been recorded.</p> : <ul>{reserveComponents.map((component) => <li><strong>{component.asset_label ?? formatPublicLabel(component.asset_category)}</strong><span><ValueStateText value={component.asset_category} displayValue={formatPublicLabel(component.asset_category)} />{component.share_percent !== null && component.share_percent !== undefined ? ` · ${component.share_percent}%` : ''}{component.notes ? ` · ${cleanPublicText(component.notes)}` : ''}</span></li>)}</ul>}</section>
-      <div class="stablecoin-value-state-group stablecoin-reserve-redemption-group"><StablecoinValueStateSections mode="reserves" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
-    </section>
-
-    <section class="stablecoin-dossier-section stablecoin-deployments-legal" id="deployments-legal-context">
-      <div class="stablecoin-section-heading"><p>Deployments and legal context</p><h2>Deployments and legal context</h2><span>Network state, contract identity, legal notices, and value states remain separate.</span></div>
-      <div class="stablecoin-deployment-group"><DeploymentTable deployments={deployments} /></div><div class="stablecoin-legal-group"><StablecoinValueStateSections mode="legal" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
-    </section>
-
-    <section class="stablecoin-dossier-section stablecoin-history" id="history">
-      <div class="stablecoin-section-heading"><p>Lifecycle</p><h2>History</h2><span>Current classification remains separate from dated changes and incidents.</span></div>
-      <section class="stablecoin-model-history" aria-labelledby="model-history-title"><h3 id="model-history-title">Model and lifecycle changes</h3>{modelHistoryEvents.length === 0 ? <p class="stablecoin-empty-state">No separate model-change event is currently recorded.</p> : <ol>{modelHistoryEvents.map((event) => <li><time datetime={event.event_date ?? undefined}><ValueStateText value={event.event_date} /></time><span><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><small>{formatPublicLabel(event.event_detail_kind ?? event.event_type)}</small></span></li>)}</ol>}</section><IssuerControlEvents events={issuerControlEvents} /><StablecoinEventTimeline events={events} />
-    </section>
-
-    <section class="stablecoin-dossier-section stablecoin-evidence-section" id="evidence"><div class="stablecoin-section-heading"><p>Evidence</p><h2>Evidence</h2><span>Publisher, provenance, supported claims, archive state, reliability, and publication date remain separate.</span></div><EvidenceSourceTable evidence={evidence} tableKind="stablecoin-sources" /></section>
-
-    <section class="stablecoin-dossier-section stablecoin-unknowns-section" aria-labelledby="unknowns-title"><div class="stablecoin-section-heading"><p>Known unknowns</p><h2 id="unknowns-title">Known unknowns and coverage</h2><span>Missing or disputed facts remain visible instead of being converted into certainty.</span></div><div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div></section>
-
-    <section class="stablecoin-dossier-section stablecoin-more" id="more">
-      <div class="stablecoin-section-heading"><p>Related records and corrections</p><h2>Corrections and further reading</h2><span>Open connected records, methodology, machine-readable data, or report a correction.</span></div>
-      {relatedGuides.length > 0 && <div class="stablecoin-related-guides"><h3>Related guides</h3><ul>{relatedGuides.map((guide) => <li><a href={guide.href}>{guide.title}</a><p>{guide.summary}</p></li>)}</ul></div>}
-      <ul class="stablecoin-further-reading" aria-label="Corrections and further reading"><li><a href="/stablecoins/"><strong>All stablecoins</strong><span>Compare this record with the rest of the archive.</span></a></li>{primaryOrganization && <li><a href={`/issuer/${primaryOrganization.slug}/`}><strong>{primaryOrganization.name}</strong><span>{primaryOrganizationTaxonomy?.jurisdiction_label ?? 'Open the connected organization record.'}</span></a></li>}<li><a href="/events/"><strong>Event registry</strong><span>{events.length} connected event{events.length === 1 ? '' : 's'} recorded.</span></a></li><li><a href="/methodology/"><strong>Methodology</strong><span>Read classification, evidence, and value-state rules.</span></a></li><li><a href="/contact/"><strong>Corrections</strong><span>Report a source, relationship, or record problem.</span></a></li><li><a href="/data/manifest.json"><strong>Data manifest</strong><span>Inspect the machine-readable public layer.</span></a></li></ul>
-    </section>
+    <StablecoinReserveSection coin={coin} reserveComponents={reserveComponents} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
+    <StablecoinContextSections coin={coin} deployments={deployments} evidence={evidence} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
+    <StablecoinHistorySection modelHistoryEvents={modelHistoryEvents} issuerControlEvents={issuerControlEvents} events={events} />
+    <StablecoinRelatedSection relatedGuides={relatedGuides} primaryOrganization={primaryOrganization} primaryOrganizationTaxonomy={primaryOrganizationTaxonomy} eventCount={events.length} />
   </article>
 </BaseLayout>
