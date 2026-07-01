@@ -25,8 +25,9 @@
   const createDefinitionRepresentation = (table: HTMLTableElement, kind: string) => {
     const list = document.createElement('dl');
     list.className = 'mobile-definition-list';
-    list.dataset.mobileRepresentationFor = kind;
-    list.dataset.generatedMobileTable = 'true';
+    const data = list.dataset;
+    data.mobileRepresentationFor = kind;
+    data.generatedMobileTable = 'true';
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
       const labelCell = row.querySelector(':scope > th');
       const valueCell = row.querySelector(':scope > td');
@@ -46,8 +47,9 @@
   const createRecordRepresentation = (table: HTMLTableElement, kind: string) => {
     const list = document.createElement('div');
     list.className = 'mobile-record-list';
-    list.dataset.mobileRepresentationFor = kind;
-    list.dataset.generatedMobileTable = 'true';
+    const data = list.dataset;
+    data.mobileRepresentationFor = kind;
+    data.generatedMobileTable = 'true';
     const headers = [...table.querySelectorAll(':scope > thead th')].map((cell) => cell.textContent?.trim() ?? 'Field');
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
       const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
