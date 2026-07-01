@@ -68,5 +68,7 @@ const result = {
   },
   failures
 };
+fs.mkdirSync('artifacts', { recursive: true });
+fs.writeFileSync('artifacts/ui-v3-cleanup-validation.json', `${JSON.stringify(result, null, 2)}\n`);
 console.log(JSON.stringify(result, null, 2));
 if (failures.length) process.exit(1);
