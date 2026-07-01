@@ -50,9 +50,9 @@ for (const phrase of [
   'Gate V3-C: passed',
   'Gate V3-D: passed',
   'Gate V3-E: passed',
-  'Gate V3-F: pending PR #271 rendered audit and human image review',
+  'Gate V3-F: passed',
   'PR #270 — mobile and accessibility hardening — complete',
-  'PR #271 — representative all-family visual audit — active',
+  'PR #271 — representative all-family visual audit — active; Gate V3-F passed',
   'PR #272 — accessibility, performance, and legacy cleanup',
   'PR #273 — production verification and UI v3 closure',
   'Growth D to 100 records'
@@ -74,7 +74,8 @@ for (const [document, phrase] of [
   [agents, 'Next: PR #272 accessibility, performance, and legacy cleanup'],
   [agents, 'Closure: PR #273 production verification and UI v3 closure'],
   [agents, 'Gate V3-E: passed'],
-  [agents, 'Gate V3-F: pending PR #271 rendered audit and human image review'],
+  [agents, 'Gate V3-F: passed'],
+  [agents, '48 reviewed full-page images'],
   [agents, 'A normal pull request must not wait for Cloudflare Pages'],
   [agents, 'The old PR #251 must not be merged as-is'],
   [design, 'Status: canonical design overview'],
@@ -84,6 +85,7 @@ for (const [document, phrase] of [
   [uiPlan, 'Completed through: PR #270 mobile and accessibility hardening'],
   [uiPlan, 'Active work item: PR #271 representative all-family visual audit'],
   [uiPlan, 'Next implementation: PR #272 accessibility, performance, and legacy cleanup'],
+  [uiPlan, 'Gate V3-F: passed'],
   [uiPlan, 'PR #273 — production verification and closure'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
   [uiV3, 'The default public surface is light, not dark'],
@@ -100,10 +102,11 @@ for (const [document, phrase] of [
   [referenceAudit, '`/contact/` remains the canonical Corrections and submissions route'],
   [visualAudit, 'Roadmap item: PR #271'],
   [visualAudit, 'Gate: V3-F'],
-  [visualAudit, 'three stablecoin detail records'],
-  [visualAudit, 'three organization detail records'],
-  [visualAudit, 'three event detail records'],
-  [visualAudit, 'three guide articles'],
+  [visualAudit, 'Status: passed'],
+  [visualAudit, 'Run ID: 28538275448'],
+  [visualAudit, 'total full-page images reviewed: 48'],
+  [visualAudit, 'zero automated failures'],
+  [visualAudit, 'Gate V3-F passed'],
   [visualAudit, 'Canonical stable assets changed: 0']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
@@ -115,4 +118,4 @@ for (const source of [agents, roadmap, uiPlan]) {
   }
 }
 
-console.log('Current workstream valid: PR #270 and Gate V3-E are complete, PR #271 representative visual audit is active, PR #272 is next, 98 canonical assets are preserved, and closure remains PR #273.');
+console.log('Current workstream valid: PR #270 and Gate V3-E are complete, PR #271 rendered audit passed Gate V3-F, PR #272 is next, 98 canonical assets are preserved, and closure remains PR #273.');
