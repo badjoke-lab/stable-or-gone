@@ -1,10 +1,22 @@
-# Approved UI v2 reference assets
+# UI v2 reference assets — superseded
 
-Status: canonical reference set  
+Status: historical reference set — superseded  
 Approved: 2026-06-27  
-Visual direction: Modern Data Product
+Superseded: 2026-07-01  
+Former visual direction: Modern Data Product
 
-## Page references
+## Replacement
+
+The active visual contract and reference direction are:
+
+```text
+docs/architecture/approved-editorial-ledger-ui-v3.md
+docs/ui-redesign/approved-mocks-v3/README.md
+```
+
+The images in this directory remain as historical evidence of the UI v2 implementation that produced PR #207 through PR #216. They no longer authorize production visual work.
+
+## Historical page references
 
 ```text
 01-home.webp                 Home
@@ -17,59 +29,34 @@ Visual direction: Modern Data Product
 08-methodology.webp          Methodology and editorial family
 ```
 
-Each file represents one page. These repository images are compact reference copies used to preserve the approved composition, hierarchy, density, visual direction, and page-family decisions.
-
-Implementation authority is defined in:
-
-```text
-docs/architecture/approved-modern-data-product-ui-v2.md
-```
-
 ## Logo references
 
-```text
-logo-lockup-light-reference.webp
-logo-symbol-light-reference.webp
-logo-lockup-dark-reference.webp
-logo-symbol-dark-reference.webp
-```
+The logo references remain valid only as historical source material for the existing approved production SVGs. The logo itself is retained in v3.
 
-The approved mark combines the letters S and G with a crossing horizontal line and a short broken coral segment on the right. These files are visual references for creating reviewed production SVG assets in PR #208. They are not production-ready logo files.
-
-The blue stacked-cube mark shown in rejected mock directions is prohibited.
-
-## Interpretation rules
-
-The images specify:
-
-- overall visual direction;
-- hierarchy;
-- approximate spacing and density;
-- component families;
-- page composition;
-- navigation treatment;
-- use of dark navy, bright blue, and restrained semantic colors;
-- ticker and organization-initial badge treatment.
-
-The images do not specify or authorize:
-
-- canonical values;
-- live data;
-- market prices or capitalization;
-- invented counts;
-- unsupported verification or licensing claims;
-- user accounts, saved views, watchlists, follows, or recent-history features;
-- safety or transparency scores;
-- arbitrary external coin logos.
-
-All public claims must come from canonical records or approved editorial data. Mock-only values must be removed during implementation.
-
-## Change control
-
-Do not replace, reinterpret, or add approved reference pages without updating all of the following in the same reviewed pull request:
+Production assets:
 
 ```text
-docs/architecture/approved-modern-data-product-ui-v2.md
-docs/ui-redesign/implementation-plan.md
-docs/roadmap.md
+public/brand/sog-lockup-on-light.svg
+public/brand/sog-lockup-on-dark.svg
+public/brand/sog-mark-on-light.svg
+public/brand/sog-mark-on-dark.svg
 ```
+
+No new logo may be generated from these files.
+
+## Superseded visual choices
+
+The following choices shown in the v2 page mocks are no longer approved:
+
+- dark navy default background;
+- bright blue dominant accent;
+- SaaS dashboard composition;
+- oversized hero areas;
+- KPI or count-card rows;
+- repeated rounded panels;
+- decorative glow;
+- common card treatment for unrelated page families.
+
+## Retained non-visual lessons
+
+The v2 implementation may still be consulted for canonical field mapping, route coverage, responsive behavior, accessibility, evidence, known unknowns, and public taxonomy. Those details remain subordinate to current specifications and the v3 visual contract.
