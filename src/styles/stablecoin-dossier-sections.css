@@ -1,24 +1,20 @@
-.stablecoin-dossier-hero .page-hero__content > p:not(.page-hero__eyebrow) {
-  max-width: 62ch;
-  margin: 1rem 0 0;
-  color: var(--sog-text-muted);
-  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
-  line-height: 1.65;
-}
-
 .stablecoin-legal-group,
 .stablecoin-unknown-group {
+  min-width: 0;
   display: grid;
   gap: 1rem;
 }
 
 .stablecoin-legal-group .registry,
 .stablecoin-unknown-group .registry {
+  min-width: 0;
   overflow-x: auto;
-  border: 1px solid rgba(36, 80, 113, 0.72);
-  border-radius: var(--sog-radius-panel);
-  background: linear-gradient(180deg, rgba(13, 33, 54, 0.42), rgba(8, 23, 39, 0.9));
-  box-shadow: var(--sog-shadow-accent);
+  overscroll-behavior-inline: contain;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .stablecoin-legal-group table,
@@ -27,16 +23,24 @@
 }
 
 .stablecoin-unknown-group .stablecoin-open-questions {
-  border-color: rgba(168, 139, 255, 0.46);
+  border-top: 2px solid var(--sog-rule-strong, #5d5850);
 }
 
 .stablecoin-unknown-group .bar {
-  background: linear-gradient(90deg, rgba(168, 139, 255, 0.09), transparent 55%);
+  color: var(--sog-accent, #7f242a);
+  background: transparent;
 }
 
 @media (max-width: 719px) {
   .stablecoin-legal-group,
   .stablecoin-unknown-group {
     min-width: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .stablecoin-legal-group .registry,
+  .stablecoin-unknown-group .registry {
+    forced-color-adjust: auto;
   }
 }

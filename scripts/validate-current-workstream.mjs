@@ -16,6 +16,7 @@ import './validate-batch20-growth-c.mjs';
 import './validate-ui-v3-foundation.mjs';
 import './validate-ui-v3-home.mjs';
 import './validate-ui-v3-stablecoin-index.mjs';
+import './validate-ui-v3-stablecoin-dossier.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -26,18 +27,19 @@ const uiPlan = fs.readFileSync('docs/ui-redesign/implementation-plan.md', 'utf8'
 const uiV3 = fs.readFileSync('docs/architecture/approved-editorial-ledger-ui-v3.md', 'utf8');
 const uiV2 = fs.readFileSync('docs/architecture/approved-modern-data-product-ui-v2.md', 'utf8');
 const mocksV3 = fs.readFileSync('docs/ui-redesign/approved-mocks-v3/README.md', 'utf8');
+const dossierAudit = fs.readFileSync('docs/audits/ui-v3-stablecoin-dossier-2026-07-01.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #264 — Editorial Ledger Stablecoins register',
-  'Active: PR #265 — Stablecoin dossier',
-  'Next: PR #266 — Organizations and Events',
+  'Latest completed: PR #265 — Editorial Ledger Stablecoin dossier',
+  'Active: PR #266 — Organizations and Events',
+  'Next: PR #267 — Guides',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
   'Gate V3-A: passed',
   'Gate V3-B: passed',
-  'PR #264 — Stablecoins register — complete',
-  'PR #265 — Stablecoin dossier — active',
+  'PR #265 — Stablecoin dossier — complete',
+  'PR #266 — Organizations and Events — active',
   'PR #270 — representative all-family visual audit',
   'PR #272 — production verification and UI v3 closure',
   'Growth D to 100 records'
@@ -53,25 +55,28 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'Latest completed: PR #264 Editorial Ledger Stablecoins register'],
-  [agents, 'Active: PR #265 Stablecoin dossier'],
+  [agents, 'Latest completed: PR #265 Editorial Ledger Stablecoin dossier'],
+  [agents, 'Active: PR #266 Organizations and Events'],
   [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
   [agents, 'The old PR #251 must not be merged as-is'],
   [design, 'Status: canonical design overview'],
   [design, 'Visual family: Editorial Ledger'],
   [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Completed through: PR #264 Editorial Ledger Stablecoins register'],
-  [uiPlan, 'Active work item: PR #265 Stablecoin dossier'],
+  [uiPlan, 'Completed through: PR #265 Editorial Ledger Stablecoin dossier'],
+  [uiPlan, 'Active work item: PR #266 Organizations and Events'],
   [uiPlan, 'Gate V3-B: passed'],
   [uiPlan, 'PR #272 — production verification and closure'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
   [uiV3, 'The default public surface is light, not dark'],
   [uiV3, 'do not create a new logo'],
   [uiV2, 'Status: historical plan — superseded'],
-  [mocksV3, 'Status: canonical reference description']
+  [mocksV3, 'Status: canonical reference description'],
+  [dossierAudit, 'Roadmap item: PR #265'],
+  [dossierAudit, 'Canonical data changes: 0'],
+  [dossierAudit, 'Synthetic scores: 0']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
 
-console.log('Current workstream valid: the Editorial Ledger Stablecoins register is complete, 98 canonical assets are preserved, and the Stablecoin dossier is active.');
+console.log('Current workstream valid: the Editorial Ledger Stablecoin dossier is complete, 98 canonical assets are preserved, and Organizations and Events are active.');

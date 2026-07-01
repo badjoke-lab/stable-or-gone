@@ -79,6 +79,7 @@
     "validate:ui-v3-foundation": "node scripts/validate-ui-v3-foundation.mjs",
     "validate:ui-v3-home": "node scripts/validate-ui-v3-home.mjs",
     "validate:ui-v3-stablecoin-index": "node scripts/validate-ui-v3-stablecoin-index.mjs",
+    "validate:ui-v3-stablecoin-detail": "node scripts/validate-ui-v3-stablecoin-detail.mjs",
     "validate:ui-v2-foundation": "node scripts/validate-ui-v2-foundation.mjs",
     "validate:ui-v2-home": "node scripts/validate-ui-v2-home.mjs",
     "validate:ui-v2-stablecoin-index": "node scripts/validate-ui-v2-stablecoin-index.mjs",

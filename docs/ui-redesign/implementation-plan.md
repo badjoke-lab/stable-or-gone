@@ -27,10 +27,10 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #264 Editorial Ledger Stablecoins register
-Current UI: shared v3 shell, v3 Home, and v3 Stablecoins register; remaining page families are transitional
-Active work item: PR #265 Stablecoin dossier
-Next implementation: PR #266 Organizations and Events
+Completed through: PR #265 Editorial Ledger Stablecoin dossier
+Current UI: shared v3 shell, v3 Home, v3 Stablecoins register, and v3 Stablecoin dossiers; remaining page families are transitional
+Active work item: PR #266 Organizations and Events
+Next implementation: PR #267 Guides
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
@@ -44,7 +44,7 @@ The Modern Data Product direction is superseded. Remaining v2 page implementatio
 
 ## Preservation rules
 
-Every v3 PR must preserve unless its scope explicitly and separately approves a change:
+Every v3 PR must preserve unless separately approved:
 
 - canonical stable assets;
 - organizations and relationships;
@@ -67,80 +67,19 @@ The UI may regroup or progressively disclose information. It may not erase prote
 
 ### PR #261 — documentation and authority alignment
 
-- added the canonical Editorial Ledger contract and reference direction;
-- updated roadmap, governance, required reading, and active-workstream validation;
-- marked UI v2 visual authority as superseded;
-- paused Growth D and the non-UI continuation;
-- preserved canonical data, routes, and logo assets.
+Established Editorial Ledger authority, superseded v2 visual references, paused Growth D, and preserved canonical data, routes, and logo assets.
 
 ### PR #262 — shared Editorial Ledger shell
 
-- retained the existing approved S/G production assets;
-- added exact paper, ink, rule, accent, status, typography, spacing, and width tokens;
-- replaced grouped SaaS navigation with compact primary navigation, truthful register search, About disclosure, mobile disclosure, and structured footer;
-- removed dark navy, gradients, glow, decorative shadows, and medium-radius dashboard defaults from shared primitives;
-- converted shared hero, metric, panel, button, field, chip, badge, and support-banner foundations to restrained editorial forms;
-- preserved focus, 44px controls, reduced motion, forced colors, semantic markup, canonical counts, and routes;
-- added `npm run validate:ui-v3-foundation`.
+Added paper, ink, rule, accent, typography, spacing, compact navigation, truthful search, structured footer, restrained primitives, and accessibility foundations.
 
 ### PR #263 — Editorial Ledger Home
 
-Deterministic selection rules:
-
-```text
-featured guides: published featured metadata, latest four
-material changes: dated canonical events, descending, first five
-recently reviewed records: stablecoin last_verified_at descending, first eight
-registry review date: latest recorded review, event, or guide-current date used on Home
-```
-
-Completed:
-
-- removed PageHero, MetricCard, SupportBanner, coin-stack illustration, KPI row, generic registry-entry card grid, and selected-slug showcase;
-- added an editorial masthead with a truthful review-through date;
-- added a one-line canonical summary for stable assets, organizations, events, and source identities;
-- preserved searchable stablecoin, organization, and event records;
-- added latest material changes, lifecycle counts, recently reviewed stablecoin records, metadata-driven guides, and reference entrypoints;
-- preserved canonical counts, routes, search behavior, and WebSite JSON-LD;
-- added UI v3 Home validation while retaining the old command as a workflow alias.
+Replaced the marketing landing composition with a registry masthead, one-line canonical summary, material changes, lifecycle counts, recently reviewed records, guides, and reference entrypoints.
 
 ### PR #264 — Editorial Ledger Stablecoins register
 
-Presentation:
-
-- removed PageHero, metric cards, decorative index illustration, dark filter panels, and nine-column dashboard composition;
-- added a register masthead with one canonical record count;
-- retained a table-first desktop presentation;
-- reduced the table to seven deliberate columns:
-
-```text
-Stablecoin
-Symbol
-Reference
-Status
-Primary organization
-Model
-Updated / evidence
-```
-
-Protected information:
-
-- lifecycle and issuance remain separate in the Status cell;
-- primary role and additional relationship count remain visible under the organization;
-- asset class and stabilization remain visible as supporting lines;
-- source identity, event, open-question, and review-date context remain visible;
-- compact mobile records preserve the full protected field set.
-
-Interaction:
-
-- six approved taxonomy filters and six sort modes remain;
-- search, filters, sort, comparison, and page state are URL synchronized;
-- pagination uses `page`, 20 records per page, and browser-history restoration;
-- search, filter, and sort changes reset to page one;
-- server output exposes only the first page visually before enhancement while all 98 records and links remain in HTML;
-- visible range and total result count are announced;
-- the zero-result state appears only when the matched result count is zero;
-- bounded comparison remains two to four records and explicitly non-ranking.
+Implemented the seven-column table-first register, six filters, six sorts, URL-synchronized state, bounded comparison, 20-record pagination, visible range, true zero-result handling, and protected compact records.
 
 Validation:
 
@@ -149,24 +88,21 @@ npm run validate:ui-v3-stablecoin-index
 npm run prepare:index-interaction-contract
 ```
 
-The legacy `validate:ui-v2-stablecoin-index` command is retained as a v3 compatibility alias.
+### PR #265 — Editorial Ledger Stablecoin dossier
 
-## Active sequence
-
-### PR #265 — Stablecoin dossier
-
-Required upper information:
+Upper record:
 
 - canonical name, symbol, aliases, and record ID;
 - lifecycle and issuance state;
 - reference target;
 - primary organization and additional relationship indication;
-- backing, stabilization, redemption, launch, and last review;
-- material change summary.
+- launch, redemption, backing, stabilization, and last review;
+- direct evidence access;
+- latest dated material change.
 
-Required body:
+Body hierarchy:
 
-- assessment or reviewed summary;
+- reviewed assessment;
 - organizations and control;
 - mechanism;
 - reserve and redemption;
@@ -176,12 +112,25 @@ Required body:
 - known unknowns;
 - corrections and further reading.
 
+Presentation:
+
+- removed PageHero, six MetricCards, circular glow art, dark rounded navigation, and repeated gradient panels;
+- replaced them with a ruled masthead, fact ledger, definition lists, timelines, tables, and controlled disclosure;
+- kept Evidence reachable from upper facts and local navigation and before the final unknown/related sections;
+- added explicit low-information states without inventing defaults;
+- preserved dense high-information records and every protected canonical field;
+- added `npm run validate:ui-v3-stablecoin-detail`;
+- retained `validate:ui-v2-stablecoin-detail` as a compatibility alias.
+
 Acceptance:
 
 - no synthetic score;
 - no repetitive identical card stack;
-- evidence is reachable before the absolute end of a long page;
-- low-, medium-, and high-information records all render intentionally.
+- no route, canonical data, logo, or machine-readable shape change;
+- evidence remains directly reachable;
+- low-, medium-, and high-information records render intentionally.
+
+## Active sequence
 
 ### PR #266 — Organizations and Events
 
@@ -203,12 +152,19 @@ Indexes:
 - reduce non-comparison columns;
 - add bounded pagination or equivalent rendering where needed.
 
+Acceptance:
+
+- Gate V3-C may pass only when the Stablecoins register, Stablecoin dossier, Organizations, and Events page families all satisfy the v3 contract;
+- all relationships, evidence, typed details, and value states remain reachable;
+- organization pages do not imply every connected body is an issuer;
+- event pages do not resemble monitoring alerts.
+
 ### PR #267 — Guides
 
 - distinct editorial article family;
 - title, deck, publication and revision dates;
 - readable body width and on-page contents;
-- editorial treatment for notes, quotations, and tables;
+- editorial notes, quotations, and tables;
 - related guides and glossary assistance;
 - all published and evergreen guide visibility preserved.
 
@@ -239,79 +195,59 @@ Acceptance:
 
 ### PR #270 — representative visual audit
 
-Capture mode:
-
-```text
-desktop representative
-mobile representative
-```
-
-Coverage:
-
-- Home;
-- every unique index and project page;
-- three stablecoin detail samples;
-- three organization detail samples;
-- three event detail samples;
-- three guide samples;
-- all unique reference and utility pages.
+Capture desktop and mobile representatives for Home, every unique index/project page, three stablecoin details, three organization details, three event details, three guides, and every unique reference/utility page.
 
 Acceptance:
 
-- zero capture failures;
-- zero false empty states;
-- zero uncontrolled horizontal overflow;
-- existing approved logo used correctly;
-- no visible legacy SaaS dashboard composition in migrated pages;
-- canonical count and route parity.
+- no legacy SaaS composition remains in the sampled release candidate;
+- no material overflow or false empty state;
+- approved logo use is consistent;
+- Gate V3-F is recorded only after the representative audit passes.
 
-Gate V3-F passes only after this audit and its repair list are complete.
+### PR #271 — accessibility, performance, and legacy cleanup
 
-### PR #271 — cleanup and release hardening
-
-- remove unused UI v2 CSS and components after confirmed non-use;
-- preserve reusable data, behavior, and accessibility logic;
-- verify headings, table semantics, labels, contrast, focus, and keyboard flow;
-- verify build size and unnecessary client JavaScript;
-- run full repository validation.
+- remove unused v2 CSS and obsolete components only after replacements exist;
+- verify headings, labels, tables, contrast, focus, keyboard operation, reduced motion, forced colors, counts, routes, and build output;
+- keep cleanup separate from page-family redesign.
 
 ### PR #272 — production verification and closure
 
-- merge the exact reviewed candidate to main;
-- verify automatic production deployment and deployed provenance;
-- verify routes, counts, sitemap, JSON-LD, version, manifest, and machine-readable parity;
-- run representative production desktop and mobile captures;
-- record Gate V3-G owner approval and Gate V3-H production result.
+- verify automatic main deployment for the intended commit;
+- verify provenance and machine-readable parity;
+- verify representative desktop/mobile production captures;
+- record Gate V3-F and the immutable production commit;
+- do not claim UI v3 completion before Gate V3-H.
 
-## Gate definitions
+## Validation rule
 
-```text
-Gate V3-A  canonical specifications and schedule aligned — passed
-Gate V3-B  shared shell complete — passed
-Gate V3-C  core registry families complete — pending
-Gate V3-D  editorial/reference families complete — pending
-Gate V3-E  mobile/accessibility complete — pending
-Gate V3-F  representative visual audit complete — pending
-Gate V3-G  owner approves exact immutable candidate — pending
-Gate V3-H  production commit and parity verified — pending
-```
-
-## Validation expectations
-
-Each implementation PR must run normal repository checks and the relevant page-family validator. Existing UI v2 commands may remain temporarily as aliases for current v3 validators so workflow wiring does not enforce superseded visual rules.
+Each implementation PR must run normal repository checks and the relevant page-family checks. Current v3 commands are:
 
 ```text
 npm run validate:ui-v3-foundation
 npm run validate:ui-v3-home
 npm run validate:ui-v3-stablecoin-index
+npm run validate:ui-v3-stablecoin-detail
+npm run validate:active-workstream
+npm run validate:mobile-information
+npm run check
+npm run build
+npm run verify:consistency
 ```
 
 ## Screenshot rule
 
-Representative mode is the default. Repeated record templates are sampled, not exhaustively captured. Exhaustive capture is reserved for a specific defect investigation or exceptional final audit.
+Representative capture is the default. Repeated detail families are sampled rather than exhaustively captured. Full capture remains available only for targeted debugging.
 
-## Growth and other work
+## Paused non-UI work
 
-Growth D, the 100-record audit, and non-UI release preparation remain paused through PR #272. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may use narrow interruption PRs.
+Until PR #272 completes:
 
-After PR #272, Growth D must be rebuilt from the then-current main. The old PR #251 must not be merged as-is.
+```text
+Growth D to 100 records
+100-record registry-wide audit
+non-UI release preparation
+new stats surface
+broad schema work
+new logo work
+alternative visual directions
+```

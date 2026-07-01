@@ -5,19 +5,8 @@ const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const check = (condition, message) => { if (!condition) throw new Error(message); };
 
-const datedGuideSlugs = [
-  'genius-act-stablecoins',
-  'mica-stablecoins',
-  'jpyc-vs-jpysc',
-  'uk-stablecoin-capital-rules-2026',
-  'open-usd-reserve-revenue-model'
-];
-const evergreenGuideSlugs = [
-  'what-is-a-depeg',
-  'status-vs-event',
-  'reserve-disclosure-basics',
-  'stablecoin-lifecycle-terms'
-];
+const datedGuideSlugs = ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc', 'uk-stablecoin-capital-rules-2026', 'open-usd-reserve-revenue-model'];
+const evergreenGuideSlugs = ['what-is-a-depeg', 'status-vs-event', 'reserve-disclosure-basics', 'stablecoin-lifecycle-terms'];
 const catalog = read('src/data/guideCatalog.ts');
 const slugs = catalog.split('\n').map((line) => line.trim()).filter((line) => line.startsWith("slug: '")).map((line) => line.slice(7).split("'")[0]).filter(Boolean);
 
@@ -76,8 +65,9 @@ const linkMap = read('src/data/stablecoinGuideLinks.ts');
 for (const slug of datedGuideSlugs) check(linkMap.includes(`'${slug}': [`), `Stablecoin guide link map missing: ${slug}`);
 
 const detail = read('src/components/StablecoinDetailView.astro');
+const relatedSection = read('src/components/StablecoinRelatedSection.astro');
 check(detail.includes('getRelatedGuidesForStablecoin'), 'Stablecoin detail related-guide lookup missing');
-check(detail.includes('<RelatedGuides guides={relatedGuides} />'), 'Stablecoin detail related-guide component missing');
+check(relatedSection.includes('<RelatedGuides guides={relatedGuides} />'), 'Stablecoin detail related-guide component missing');
 check(detail.includes('subjectOf:'), 'Stablecoin detail guide metadata missing');
 
 const updates = JSON.parse(read('data/registry-updates.json'));
