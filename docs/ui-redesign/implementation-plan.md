@@ -27,16 +27,17 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #265 Editorial Ledger Stablecoin dossier
+Completed through: PR #267 corrective Organizations and Events completion
 Partial precursor: PR #266 Organization and Event row compaction
-Active work item: PR #267 corrective Organizations and Events completion
-Next implementation: PR #268 Guides
+Current UI: shared shell, Home, Stablecoins, Stablecoin dossiers, Organizations, and Events use Editorial Ledger v3
+Active work item: PR #268 Guides
+Next implementation: PR #269 Reference and utility pages
 Closure: PR #273 production verification and closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
-Gate V3-C: pending PR #267 validation and merge
+Gate V3-C: passed
 Gate V3-F: not passed
 Release candidate: not selected
 Production publication: automatic on main
@@ -88,34 +89,32 @@ Removed PageHero, MetricCards, circular glow art, dark rounded navigation, and r
 
 This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astro`. It did not complete the four page families and is not Gate V3-C completion.
 
-## Active sequence
-
 ### PR #267 — corrective Organizations and Events completion
 
 Organizations:
 
-- responsible-body record hierarchy;
+- responsible-body register and record hierarchy;
 - category, regulatory character, jurisdiction, roles, connected assets, current and historical relationships;
 - material events, evidence, known unknowns, and correction paths;
 - no issuer assumption.
 
 Events:
 
-- incident/public-record hierarchy;
-- ID, date or timeframe, category, subtype, affected stablecoins and organizations, impact, status effect, recovery, typed detail, evidence, and corrections;
+- chronological register and incident/public-record hierarchy;
+- ID, date, category, subtype, affected stablecoins and organizations, impact, status effect, recovery, typed detail, evidence, and corrections;
 - no alert-dashboard composition.
 
-Indexes:
+Indexes and validation:
 
-- preserve search, five filters, sorts, URL state, zero-result behavior, desktop registers, and compact mobile records;
-- use six deliberate comparison columns instead of the former eight-column v2 layouts;
-- keep all canonical records server-rendered.
+- preserved search, five filters, sorts, URL state, zero-result behavior, desktop registers, and compact mobile records;
+- used six deliberate comparison columns instead of the former eight-column v2 layouts;
+- kept all canonical records server-rendered;
+- updated organization, interaction, responsive, build, public consistency, and workstream validation for the split component architecture;
+- passed all 18 pull-request workflows;
+- changed no canonical data, routes, logos, or machine-readable schemas;
+- passed Gate V3-C.
 
-Acceptance:
-
-- Gate V3-C passes only after all 18 workflows succeed and PR #267 merges;
-- all relationships, evidence, typed details, value states, and unknowns remain reachable;
-- canonical data, routes, logo assets, and machine-readable schemas remain unchanged.
+## Active sequence
 
 ### PR #268 — Guides
 
@@ -123,7 +122,14 @@ Acceptance:
 - title, deck, publication and revision dates;
 - readable body width and contents navigation;
 - restrained notes, quotations, tables, related guides, and glossary assistance;
-- published and evergreen routes remain visible.
+- published and evergreen routes remain visible;
+- article facts and dates remain unchanged.
+
+Acceptance:
+
+- no generic SaaS card stack;
+- guide metadata, JSON-LD, sitemap coverage, and related-guide links remain intact;
+- desktop and compact reading hierarchy remain deliberate.
 
 ### PR #269 — Reference and utility pages
 
