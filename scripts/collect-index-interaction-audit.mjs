@@ -31,6 +31,7 @@ function inspect(contract) {
     current_table_headers: [...source.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((match) => clean(match[1])).filter(Boolean),
     current_behavior: {
       result_count_present: /data-(?:organization-|event-)?result-count/.test(source),
+      visible_range_present: /data-visible-range/.test(source),
       zero_result_row_present: /data-(?:organization-|event-)?no-results/.test(source),
       aria_live_present: /aria-live=/.test(source),
       url_search_params_present: behavior.includes('URLSearchParams'),
@@ -39,6 +40,8 @@ function inspect(contract) {
       popstate_present: behavior.includes('popstate'),
       clear_all_present: /clear-all|clear filters|reset filters/i.test(behavior),
       comparison_present: /data-compare|comparison-panel|compare=/i.test(behavior),
+      pagination_present: /data-pagination|data-page-prev|data-page-next/.test(source),
+      page_state_present: /params\.get\(['"]page['"]\)|params\.set\(['"]page['"]/.test(client),
       server_rendered_rows_present: /records\.map|stablecoins\.map|organizations\.map|events\.map|\.map\(\(/.test(source)
     }
   };
@@ -50,10 +53,11 @@ const gaps = current.map((item) => ({
   url_state_missing: !item.current_behavior?.url_search_params_present,
   browser_history_restore_missing: !item.current_behavior?.popstate_present,
   clear_all_missing: !item.current_behavior?.clear_all_present,
-  comparison_missing: indexInteractionContracts.find((contract) => contract.id === item.id)?.comparison.enabled === true && !item.current_behavior?.comparison_present
+  comparison_missing: indexInteractionContracts.find((contract) => contract.id === item.id)?.comparison.enabled === true && !item.current_behavior?.comparison_present,
+  pagination_missing: indexInteractionContracts.find((contract) => contract.id === item.id)?.pagination?.enabled === true && (!item.current_behavior?.pagination_present || !item.current_behavior?.page_state_present)
 }));
 const audit = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   totals: {
     index_contracts: 3,
@@ -64,7 +68,8 @@ const audit = {
     mobile_row_fields: indexInteractionContracts.reduce((sum, item) => sum + item.mobile_row_fields.length, 0),
     comparison_enabled_indexes: indexInteractionContracts.filter((item) => item.comparison.enabled).length,
     comparison_disabled_indexes: indexInteractionContracts.filter((item) => !item.comparison.enabled).length,
-    implemented_indexes: gaps.filter((gap) => !gap.url_state_missing && !gap.browser_history_restore_missing && !gap.clear_all_missing && !gap.comparison_missing).length,
+    paginated_indexes: indexInteractionContracts.filter((item) => item.pagination?.enabled).length,
+    implemented_indexes: gaps.filter((gap) => !gap.url_state_missing && !gap.browser_history_restore_missing && !gap.clear_all_missing && !gap.comparison_missing && !gap.pagination_missing).length,
     route_changes: 0
   },
   current_implementation: current,

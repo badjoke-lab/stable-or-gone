@@ -65,9 +65,9 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #263 Editorial Ledger Home
-Active: PR #264 Stablecoins register
-Next: PR #265 Stablecoin dossier
+Latest completed: PR #264 Editorial Ledger Stablecoins register
+Active: PR #265 Stablecoin dossier
+Next: PR #266 Organizations and Events
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
@@ -78,7 +78,7 @@ Production publication: automatic on main
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 remains an intermediate repository state and may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-The shared shell and Home are now v3. Stablecoins, dossiers, Organizations, Events, Guides, reference pages, and final mobile behavior remain active migration work. Do not treat the current state as redesign completion.
+The shared shell, Home, and Stablecoins register are now v3. Dossiers, Organizations, Events, Guides, reference pages, and final mobile behavior remain active migration work. Do not treat the current state as redesign completion.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through the UI v3 closure sequence. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 

@@ -6,9 +6,9 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #263 — Editorial Ledger Home
-Active: PR #264 — Stablecoins register
-Next: PR #265 — Stablecoin dossier
+Latest completed: PR #264 — Editorial Ledger Stablecoins register
+Active: PR #265 — Stablecoin dossier
+Next: PR #266 — Organizations and Events
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
@@ -33,6 +33,7 @@ Production deployment: automatic after merge to main
 Screenshot audit: representative mode available for desktop and mobile
 Shared shell: Editorial Ledger v3
 Home: Editorial Ledger registry front page
+Stablecoins: seven-column table-first register, 20 records per page
 ```
 
 PR #251 was created from an older main base and contains the former Growth D implementation. It is not the active workstream and must not be merged as-is. After UI completion, Growth D must be rebuilt cleanly from the then-current main using only reviewed candidate data.
@@ -54,6 +55,7 @@ PR #258-#260 guide publication and Open USD editorial corrections
 PR #261 Editorial Ledger UI v3 specification and schedule alignment
 PR #262 shared Editorial Ledger shell
 PR #263 Editorial Ledger Home
+PR #264 Editorial Ledger Stablecoins register
 ```
 
 ## UI v3 direction
@@ -115,15 +117,19 @@ no repeated rounded-card grid
 - added metadata-driven guides and reference entrypoints;
 - preserved cross-registry search, canonical counts, routes, and JSON-LD.
 
-### PR #264 — Stablecoins register — active
+### PR #264 — Stablecoins register — complete
 
-- implement table-first public-register composition;
-- compact search/filter/sort row;
-- add bounded pagination or equivalent deliberate incremental rendering;
-- prevent uncontrolled word wrapping;
-- correct false empty-state behavior.
+- removed the Stablecoins hero illustration, metric cards, dark filter panels, and nine-column SaaS table;
+- introduced a table-first public-register header with one canonical record count;
+- reduced the desktop comparison table to seven deliberate columns while preserving protected facts through sublines and compact records;
+- retained six taxonomy filters, six sorts, URL-synchronized state, and bounded non-ranking comparison;
+- added URL-synchronized pagination at 20 records per page;
+- server-rendered only the first page as visible while retaining all records and links in the HTML;
+- added visible-range reporting and a true zero-result state that appears only when no records match;
+- kept all compact mobile fields and page-specific table-to-record transformation;
+- updated interaction contracts, audits, validators, and compatibility workflow commands.
 
-### PR #265 — Stablecoin dossier
+### PR #265 — Stablecoin dossier — active
 
 - replace stacked-card detail pages with a research dossier hierarchy;
 - prioritize current state, mechanism, history, evidence, and known unknowns;

@@ -10,9 +10,14 @@ if (foundRoot instanceof HTMLElement) {
   const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-registry-card]'));
   const filters = Array.from(root.querySelectorAll<HTMLInputElement>('[data-filter-group]'));
   const resultCount = root.querySelector<HTMLElement>('[data-result-count]');
+  const visibleRange = root.querySelector<HTMLElement>('[data-visible-range]');
   const activeSummary = root.querySelector<HTMLElement>('[data-active-filters]');
   const noResults = root.querySelector<HTMLElement>('[data-no-results]');
   const clearAll = Array.from(root.querySelectorAll<HTMLElement>('[data-clear-all]'));
+  const pagination = root.querySelector<HTMLElement>('[data-pagination]');
+  const pagePrevious = root.querySelector<HTMLButtonElement>('[data-page-prev]');
+  const pageNext = root.querySelector<HTMLButtonElement>('[data-page-next]');
+  const pageStatus = root.querySelector<HTMLElement>('[data-page-status]');
   const compareInputs = Array.from(root.querySelectorAll<HTMLInputElement>('[data-compare-select]'));
   const comparePanel = root.querySelector<HTMLElement>('[data-comparison-panel]');
   const compareGrid = root.querySelector<HTMLElement>('[data-comparison-grid]');
@@ -21,9 +26,11 @@ if (foundRoot instanceof HTMLElement) {
   const compareSources = new Map(Array.from(root.querySelectorAll<HTMLElement>('[data-comparison-source]')).map((source) => [source.dataset.recordSlug ?? '', source]));
   const groups = ['lifecycle', 'issuance', 'asset_class', 'reference', 'backing', 'stabilization'] as const;
   const dataAttribute = { lifecycle: 'data-lifecycle', issuance: 'data-issuance', asset_class: 'data-asset-class', reference: 'data-reference', backing: 'data-backing', stabilization: 'data-stabilization' } as const;
-  const parameterOrder = ['q', ...groups, 'sort', 'compare'];
+  const parameterOrder = ['q', ...groups, 'sort', 'page', 'compare'];
   const defaultSort = 'name_asc';
   const validSorts = new Set(['name_asc', 'name_desc', 'lifecycle_then_name', 'launch_oldest', 'launch_newest', 'evidence_most']);
+  const pageSize = Math.max(1, Number.parseInt(root.dataset.pageSize ?? '20', 10) || 20);
+  let currentPage = 1;
   let selectedComparisons = new Set<string>();
 
   const normalize = (value: unknown) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
@@ -39,10 +46,12 @@ if (foundRoot instanceof HTMLElement) {
       const allowed = new Set(filters.filter((input) => input.dataset.filterGroup === group).map((input) => input.value));
       return [group, [...new Set((params.get(group) ?? '').split(',').filter((value) => allowed.has(value)))]];
     })) as Record<(typeof groups)[number], string[]>;
+    const requestedPage = Number.parseInt(params.get('page') ?? '1', 10);
     return {
       q: params.get('q') ?? '',
       filters: selected,
       sort: validSorts.has(params.get('sort') ?? '') ? String(params.get('sort')) : defaultSort,
+      page: Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1,
       compare: [...new Set((params.get('compare') ?? '').split(',').filter((slug) => knownSlugs.has(slug)).slice(0, 4))]
     };
   }
@@ -51,6 +60,7 @@ if (foundRoot instanceof HTMLElement) {
     if (search) search.value = state.q;
     if (sort) sort.value = state.sort;
     for (const input of filters) input.checked = state.filters[input.dataset.filterGroup as (typeof groups)[number]]?.includes(input.value) ?? false;
+    currentPage = state.page;
     selectedComparisons = new Set(state.compare);
     syncComparisonInputs();
   }
@@ -63,6 +73,7 @@ if (foundRoot instanceof HTMLElement) {
       if (values.length) params.set(group, values.join(','));
     }
     if (sortValue() !== defaultSort) params.set('sort', sortValue());
+    if (currentPage > 1) params.set('page', String(currentPage));
     if (selectedComparisons.size) params.set('compare', [...selectedComparisons].join(','));
     const ordered = new URLSearchParams();
     for (const key of parameterOrder) if (params.has(key)) ordered.set(key, params.get(key) ?? '');
@@ -130,13 +141,29 @@ if (foundRoot instanceof HTMLElement) {
   }
 
   function renderResults() {
-    for (const row of [...rows].sort(compareElements)) tableBody?.append(row);
-    for (const card of [...cards].sort(compareElements)) cardBody?.append(card);
-    let visible = 0;
-    for (const row of rows) { const show = matches(row); row.hidden = !show; if (show) visible += 1; }
-    for (const card of cards) card.hidden = !matches(card);
-    if (resultCount) resultCount.textContent = String(visible);
-    if (noResults) noResults.hidden = visible !== 0;
+    const sortedRows = [...rows].sort(compareElements);
+    const sortedCards = [...cards].sort(compareElements);
+    for (const row of sortedRows) tableBody?.append(row);
+    for (const card of sortedCards) cardBody?.append(card);
+
+    const matchedRows = sortedRows.filter(matches);
+    const matchCount = matchedRows.length;
+    const pageCount = Math.max(1, Math.ceil(matchCount / pageSize));
+    currentPage = Math.min(Math.max(1, currentPage), pageCount);
+    const start = (currentPage - 1) * pageSize;
+    const pageRows = matchedRows.slice(start, start + pageSize);
+    const visibleSlugs = new Set(pageRows.map((row) => row.dataset.recordSlug ?? ''));
+
+    for (const row of rows) row.hidden = !visibleSlugs.has(row.dataset.recordSlug ?? '');
+    for (const card of cards) card.hidden = !visibleSlugs.has(card.dataset.recordSlug ?? '');
+
+    if (resultCount) resultCount.textContent = String(matchCount);
+    if (visibleRange) visibleRange.textContent = matchCount === 0 ? '0' : `${start + 1}–${Math.min(start + pageSize, matchCount)}`;
+    if (noResults) noResults.hidden = matchCount !== 0;
+    if (pagination) pagination.hidden = matchCount === 0 || pageCount <= 1;
+    if (pagePrevious) pagePrevious.disabled = currentPage <= 1;
+    if (pageNext) pageNext.disabled = currentPage >= pageCount;
+    if (pageStatus) pageStatus.textContent = `Page ${currentPage} of ${pageCount}`;
     renderActiveFilters();
   }
 
@@ -166,17 +193,39 @@ if (foundRoot instanceof HTMLElement) {
     if (mode) writeUrl(mode);
   }
 
-  search?.addEventListener('input', () => refresh('replace'));
-  sort?.addEventListener('change', () => refresh('push'));
-  for (const input of filters) input.addEventListener('change', () => refresh('push'));
+  function resetPageAndRefresh(mode: 'push' | 'replace') {
+    currentPage = 1;
+    refresh(mode);
+  }
+
+  search?.addEventListener('input', () => resetPageAndRefresh('replace'));
+  sort?.addEventListener('change', () => resetPageAndRefresh('push'));
+  for (const input of filters) input.addEventListener('change', () => resetPageAndRefresh('push'));
   activeSummary?.addEventListener('click', (event) => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-clear-key]') : null;
     if (!button) return;
     if (button.dataset.clearKey === 'q' && search) search.value = '';
     else for (const input of filters) if (input.dataset.filterGroup === button.dataset.clearKey && input.value === button.dataset.clearValue) input.checked = false;
+    resetPageAndRefresh('push');
+  });
+  for (const button of clearAll) button.addEventListener('click', () => {
+    if (search) search.value = '';
+    for (const input of filters) input.checked = false;
+    if (sort) sort.value = defaultSort;
+    currentPage = 1;
     refresh('push');
   });
-  for (const button of clearAll) button.addEventListener('click', () => { if (search) search.value = ''; for (const input of filters) input.checked = false; if (sort) sort.value = defaultSort; refresh('push'); });
+  pagePrevious?.addEventListener('click', () => {
+    if (currentPage <= 1) return;
+    currentPage -= 1;
+    refresh('push');
+    root.querySelector('.stablecoin-index-summary')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  });
+  pageNext?.addEventListener('click', () => {
+    currentPage += 1;
+    refresh('push');
+    root.querySelector('.stablecoin-index-summary')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  });
   for (const input of compareInputs) input.addEventListener('change', () => {
     if (input.checked && !selectedComparisons.has(input.value) && selectedComparisons.size >= 4) {
       input.checked = false;

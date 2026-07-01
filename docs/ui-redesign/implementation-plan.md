@@ -27,10 +27,10 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #263 Editorial Ledger Home
-Current UI: shared v3 shell and v3 Home; remaining page families still use transitional v2 content
-Active work item: PR #264 Stablecoins register
-Next implementation: PR #265 Stablecoin dossier
+Completed through: PR #264 Editorial Ledger Stablecoins register
+Current UI: shared v3 shell, v3 Home, and v3 Stablecoins register; remaining page families are transitional
+Active work item: PR #265 Stablecoin dossier
+Next implementation: PR #266 Organizations and Events
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
@@ -77,7 +77,6 @@ The UI may regroup or progressively disclose information. It may not erase prote
 
 - retained the existing approved S/G production assets;
 - added exact paper, ink, rule, accent, status, typography, spacing, and width tokens;
-- changed the default brand surface to the existing `on-light` assets;
 - replaced grouped SaaS navigation with compact primary navigation, truthful register search, About disclosure, mobile disclosure, and structured footer;
 - removed dark navy, gradients, glow, decorative shadows, and medium-radius dashboard defaults from shared primitives;
 - converted shared hero, metric, panel, button, field, chip, badge, and support-banner foundations to restrained editorial forms;
@@ -101,34 +100,58 @@ Completed:
 - added an editorial masthead with a truthful review-through date;
 - added a one-line canonical summary for stable assets, organizations, events, and source identities;
 - preserved searchable stablecoin, organization, and event records;
-- added latest material changes from canonical event records and reviewed public copy;
-- added lifecycle counts with an explicit statement that lifecycle is not a rating or recommendation;
-- added recently reviewed stablecoin records with primary organization and review date;
-- added metadata-driven guides plus Methodology, Glossary, Models, Updates, and Corrections entrypoints;
+- added latest material changes, lifecycle counts, recently reviewed stablecoin records, metadata-driven guides, and reference entrypoints;
 - preserved canonical counts, routes, search behavior, and WebSite JSON-LD;
 - added UI v3 Home validation while retaining the old command as a workflow alias.
 
+### PR #264 — Editorial Ledger Stablecoins register
+
+Presentation:
+
+- removed PageHero, metric cards, decorative index illustration, dark filter panels, and nine-column dashboard composition;
+- added a register masthead with one canonical record count;
+- retained a table-first desktop presentation;
+- reduced the table to seven deliberate columns:
+
+```text
+Stablecoin
+Symbol
+Reference
+Status
+Primary organization
+Model
+Updated / evidence
+```
+
+Protected information:
+
+- lifecycle and issuance remain separate in the Status cell;
+- primary role and additional relationship count remain visible under the organization;
+- asset class and stabilization remain visible as supporting lines;
+- source identity, event, open-question, and review-date context remain visible;
+- compact mobile records preserve the full protected field set.
+
+Interaction:
+
+- six approved taxonomy filters and six sort modes remain;
+- search, filters, sort, comparison, and page state are URL synchronized;
+- pagination uses `page`, 20 records per page, and browser-history restoration;
+- search, filter, and sort changes reset to page one;
+- server output exposes only the first page visually before enhancement while all 98 records and links remain in HTML;
+- visible range and total result count are announced;
+- the zero-result state appears only when the matched result count is zero;
+- bounded comparison remains two to four records and explicitly non-ranking.
+
+Validation:
+
+```text
+npm run validate:ui-v3-stablecoin-index
+npm run prepare:index-interaction-contract
+```
+
+The legacy `validate:ui-v2-stablecoin-index` command is retained as a v3 compatibility alias.
+
 ## Active sequence
-
-### PR #264 — Stablecoins register
-
-Required:
-
-- table-first desktop register;
-- compact search, filter, and sort line;
-- approved public taxonomy only;
-- bounded pagination or equivalent deliberate incremental rendering;
-- clear result count and active-filter state;
-- true empty state only;
-- page-specific mobile representation prepared for PR #269.
-
-Acceptance:
-
-- no unbounded 98-row initial page;
-- no word-by-word table wrapping at supported desktop width;
-- no hidden protected fields;
-- lifecycle and issuance remain separate;
-- query state remains shareable where the existing contract requires it.
 
 ### PR #265 — Stablecoin dossier
 
@@ -279,7 +302,8 @@ Each implementation PR must run normal repository checks and the relevant page-f
 
 ```text
 npm run validate:ui-v3-foundation
-node scripts/validate-ui-v3-home.mjs
+npm run validate:ui-v3-home
+npm run validate:ui-v3-stablecoin-index
 ```
 
 ## Screenshot rule
