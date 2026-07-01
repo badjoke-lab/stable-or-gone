@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
-import MetricCard from '../../components/MetricCard.astro';
 import StablecoinIndexRow from '../../components/StablecoinIndexRow.astro';
 import StablecoinIndexCard from '../../components/StablecoinIndexCard.astro';
 import StablecoinComparisonSource from '../../components/StablecoinComparisonSource.astro';
@@ -14,6 +12,7 @@ import { resolvePrimaryRelationshipForStablecoin } from '../../utils/primaryDisp
 import { getDeployments, getEvents, getKnownUnknowns, getOrganizations, getRelationships, getStablecoins } from '../../lib/data/registry';
 import { getCanonicalEvidenceRelations } from '../../lib/data/evidenceSources';
 
+const PAGE_SIZE = 20;
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
 const relationships = getRelationships();
@@ -102,42 +101,35 @@ const filters = [
   { id: 'backing', label: 'Backing', options: backingOptions },
   { id: 'stabilization', label: 'Stabilization', options: stabilizationOptions }
 ];
-const activeRecordCount = records.filter((record) => record.lifecycle === 'active').length;
-const sourceIdentityCount = new Set(evidenceRelations.map((relation) => relation.evidence_id)).size;
-const title = 'Stablecoin Registry — Stable or Gone';
+const title = 'Stablecoin Register — Stable or Gone';
 const description = 'Search and filter canonical stablecoin records by lifecycle, issuance, reference target, model, organization, evidence, and review context.';
-const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Registry', url: 'https://sog.badjoke-lab.com/stablecoins/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Register', url: 'https://sog.badjoke-lab.com/stablecoins/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/stablecoins/" jsonLd={jsonLd}>
-  <div class="stablecoin-index-page" data-stablecoin-index>
-    <PageHero
-      className="stablecoin-index-hero"
-      eyebrow="Registry / Stablecoins"
-      title="Stablecoin registry"
-      description="Search canonical names, symbols, aliases, domains, and connected organizations. Lifecycle, issuance, reference target, and backing remain separate review axes rather than one combined assessment."
-    >
-      <div slot="visual" class="stablecoin-index-hero__visual">
-        <span class="stablecoin-index-hero__coin">S</span>
-        <span class="stablecoin-index-hero__coin">G</span>
-        <span class="stablecoin-index-hero__coin">R</span>
+  <div class="stablecoin-index-page" data-stablecoin-index data-page-size={PAGE_SIZE}>
+    <header class="stablecoin-register-header">
+      <div>
+        <p class="stablecoin-index-eyebrow">Register / Stable assets</p>
+        <h1>Stablecoin register</h1>
+        <p>Canonical stable-asset records with lifecycle, issuance, reference target, primary organization, backing model, evidence context, and review date kept as separate facts.</p>
       </div>
-    </PageHero>
+      <div class="stablecoin-register-count" aria-label={`${records.length} canonical stablecoin records`}>
+        <strong>{records.length}</strong>
+        <span>records</span>
+      </div>
+    </header>
 
-    <section class="stablecoin-index-metrics" aria-label="Stablecoin registry totals">
-      <MetricCard label="Stable assets" value={records.length} detail="Canonical stablecoin records" icon="S" />
-      <MetricCard label="Active lifecycle" value={activeRecordCount} detail="Lifecycle status only" icon="A" />
-      <MetricCard label="Organizations" value={organizations.length} detail="Connected registry entities" href="/issuers/" icon="O" />
-      <MetricCard label="Source identities" value={sourceIdentityCount} detail="Deduplicated evidence sources" href="/methodology/" icon="✓" />
-    </section>
-
-    <section class="stablecoin-index-registry ui-panel" aria-labelledby="stablecoin-index-heading">
+    <section class="stablecoin-index-registry" aria-labelledby="stablecoin-index-heading">
       <div class="stablecoin-index-section-heading">
-        <div><p class="stablecoin-index-eyebrow">Canonical records</p><h2 id="stablecoin-index-heading">All stablecoins</h2><p>Filter reviewed taxonomy fields and share the resulting URL. Comparison remains bounded to two through four historical records.</p></div>
-        <span class="ui-chip">{records.length} records</span>
+        <div>
+          <h2 id="stablecoin-index-heading">Public register</h2>
+          <p>Search, filter, sort, and share the current register state. Twenty records are shown per page; all matching records remain available.</p>
+        </div>
+        <span class="stablecoin-index-page-size">{PAGE_SIZE} per page</span>
       </div>
 
       <div class="stablecoin-index-toolbar">
-        <label class="stablecoin-index-search"><span>Search records</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
+        <label class="stablecoin-index-search"><span>Search</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
         <label><span>Sort</span><select class="ui-field" data-index-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="lifecycle_then_name">Lifecycle, then name</option><option value="launch_oldest">Launch: oldest first</option><option value="launch_newest">Launch: newest first</option><option value="evidence_most">Most source identities</option></select></label>
         <button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button>
       </div>
@@ -155,22 +147,30 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
 
       <div class="stablecoin-index-summary">
         <div class="stablecoin-index-active-filters" data-active-filters aria-label="Active filters"></div>
-        <div class="stablecoin-index-result-count" aria-live="polite"><span data-result-count>{records.length}</span> of {records.length} records</div>
+        <div class="stablecoin-index-result-count" aria-live="polite">
+          <span data-visible-range>1–{Math.min(PAGE_SIZE, records.length)}</span> of <span data-result-count>{records.length}</span> records
+        </div>
       </div>
 
       <div class="stablecoin-index-table">
         <table data-table-kind="stablecoin-index" data-mobile-table="scroll-preserve">
-          <caption class="visually-hidden">Stablecoin registry results. Compact cards preserve the protected fields on small screens.</caption>
-          <thead><tr><th>Name</th><th>Symbol</th><th>Primary display organization</th><th>Primary display role</th><th>Reference target</th><th>Backing model</th><th>Lifecycle</th><th>Issuance</th><th>Evidence</th></tr></thead>
-          <tbody data-registry-body>{records.map((record) => <StablecoinIndexRow record={record} />)}</tbody>
+          <caption class="visually-hidden">Stablecoin register results. Lifecycle and issuance remain separate. Compact records preserve additional fields on small screens.</caption>
+          <thead><tr><th>Stablecoin</th><th>Symbol</th><th>Reference</th><th>Status</th><th>Primary organization</th><th>Model</th><th>Updated / evidence</th></tr></thead>
+          <tbody data-registry-body>{records.map((record, index) => <StablecoinIndexRow record={record} initiallyVisible={index < PAGE_SIZE} />)}</tbody>
         </table>
       </div>
 
-      <div class="stablecoin-index-cards" data-card-body aria-label="Stablecoin compact records">{records.map((record) => <StablecoinIndexCard record={record} />)}</div>
-      <div class="stablecoin-index-no-results" data-no-results hidden><strong>No stablecoins match this state.</strong><span>Clear search and filters to restore all records.</span><button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button></div>
+      <div class="stablecoin-index-cards" data-card-body aria-label="Stablecoin compact records">{records.map((record, index) => <StablecoinIndexCard record={record} initiallyVisible={index < PAGE_SIZE} />)}</div>
+      <div class="stablecoin-index-no-results" data-no-results hidden><strong>No stablecoins match this state.</strong><span>Clear the search and filters to restore the register.</span><button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button></div>
+
+      <nav class="stablecoin-index-pagination" data-pagination aria-label="Stablecoin register pages">
+        <button class="ui-button" type="button" data-page-prev>Previous</button>
+        <span data-page-status aria-live="polite">Page 1 of {Math.max(1, Math.ceil(records.length / PAGE_SIZE))}</span>
+        <button class="ui-button" type="button" data-page-next>Next</button>
+      </nav>
     </section>
 
-    <section class="stablecoin-index-comparison ui-panel" data-comparison-panel hidden aria-labelledby="comparison-heading">
+    <section class="stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
       <div class="comparison-heading"><div><p class="stablecoin-index-eyebrow">Bounded comparison</p><h2 id="comparison-heading">Compare historical records</h2><p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p></div><button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button></div>
       <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
       <div class="comparison-grid" data-comparison-grid></div>
