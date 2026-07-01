@@ -16,7 +16,7 @@ import './validate-batch20-growth-c.mjs';
 import './validate-ui-v3-foundation.mjs';
 import './validate-ui-v3-home.mjs';
 import './validate-ui-v3-stablecoin-index.mjs';
-import './validate-ui-v3-stablecoin-detail.mjs';
+import './validate-ui-v3-stablecoin-dossier.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
