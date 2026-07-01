@@ -11,7 +11,7 @@ const table = (kind, mobile_representation, options = {}) => Object.freeze({
 export const responsiveBands = Object.freeze([
   Object.freeze({ id: 'wide', min_width: 1024, max_width: null, columns: 'multi_column', navigation: 'grouped_desktop' }),
   Object.freeze({ id: 'medium', min_width: 720, max_width: 1023, columns: 'reduced_columns', navigation: 'grouped_compact' }),
-  Object.freeze({ id: 'compact', min_width: 0, max_width: 719, columns: 'single_column', navigation: 'disclosure_menu' })
+  Object.freeze({ id: 'compact', min_width: 320, max_width: 719, columns: 'single_column', navigation: 'disclosure_menu' })
 ]);
 
 export const pageFamilyContracts = Object.freeze([
@@ -19,10 +19,13 @@ export const pageFamilyContracts = Object.freeze([
   Object.freeze({ id: 'stablecoin_index', sources: Object.freeze(['src/pages/stablecoins/index.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'search', 'filters', 'sort', 'active_filters', 'result_summary', 'comparison_selection', 'results', 'footer']), mobile_rule: 'controls stack; rows become record summaries; comparison selection remains reachable' }),
   Object.freeze({ id: 'organization_index', sources: Object.freeze(['src/pages/issuers/index.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'search', 'filters', 'sort', 'active_filters', 'result_summary', 'results', 'footer']), mobile_rule: 'controls stack; multi-role and relationship summaries remain visible' }),
   Object.freeze({ id: 'event_index', sources: Object.freeze(['src/pages/events/index.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'search', 'filters', 'sort', 'active_filters', 'result_summary', 'results', 'footer']), mobile_rule: 'chronological cards preserve category, subtype, subjects, status effect, recovery, and source count' }),
-  Object.freeze({ id: 'stablecoin_dossier', sources: Object.freeze(['src/components/StablecoinDetailView.astro', 'src/components/StablecoinValueStateSections.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'record_heading', 'record_summary', 'local_dossier_navigation', 'identity', 'organizations', 'mechanics', 'deployments', 'history', 'evidence', 'known_unknowns', 'corrections_more', 'footer']), mobile_rule: 'eight mandatory dossier sections remain addressable and ordered; local navigation must not trap focus' }),
-  Object.freeze({ id: 'organization_detail', sources: Object.freeze(['src/pages/issuer/[slug].astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'record_heading', 'record_summary', 'overview', 'relationships', 'events', 'evidence', 'corrections', 'footer']), mobile_rule: 'all current and historical roles remain reachable; primary display does not replace relationship history' }),
-  Object.freeze({ id: 'event_detail', sources: Object.freeze(['src/pages/event/[id].astro', 'src/components/StructuredEventDetail.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'record_heading', 'event_summary', 'structured_details', 'affected_records', 'evidence', 'corrections', 'footer']), mobile_rule: 'event date, taxonomy, subjects, status effect, recovery, and evidence remain visible' }),
-  Object.freeze({ id: 'guides_project', sources: Object.freeze(['src/pages/guides/index.astro', 'src/pages/methodology/index.astro', 'src/pages/updates/index.astro', 'src/pages/about/index.astro', 'src/pages/contact/index.astro', 'src/pages/support/index.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'article_or_project_content', 'contextual_actions', 'footer']), mobile_rule: 'reading width remains bounded; tables and code-like values use explicit responsive representations' })
+  Object.freeze({ id: 'stablecoin_dossier', sources: Object.freeze(['src/components/StablecoinDetailView.astro', 'src/components/StablecoinValueStateSections.astro', 'src/components/MobileTableRuntime.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'record_heading', 'record_summary', 'local_dossier_navigation', 'identity', 'organizations', 'mechanics', 'deployments', 'history', 'evidence', 'known_unknowns', 'corrections_more', 'footer']), mobile_rule: 'all dossier sections remain addressable; every protected table has an equivalent compact representation and full table fallback' }),
+  Object.freeze({ id: 'organization_detail', sources: Object.freeze(['src/pages/issuer/[slug].astro', 'src/components/OrganizationEditorialIdentity.astro', 'src/components/OrganizationEditorialHistory.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'record_heading', 'record_summary', 'overview', 'relationships', 'events', 'evidence', 'corrections', 'footer']), mobile_rule: 'all current and historical roles remain reachable; primary display does not replace relationship history' }),
+  Object.freeze({ id: 'event_detail', sources: Object.freeze(['src/pages/event/[id].astro', 'src/components/StructuredEventDetail.astro', 'src/components/EventEditorialBody.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'record_heading', 'event_summary', 'structured_details', 'affected_records', 'evidence', 'corrections', 'footer']), mobile_rule: 'event date, taxonomy, subjects, status effect, recovery, and evidence remain visible' }),
+  Object.freeze({ id: 'guide_index', sources: Object.freeze(['src/pages/guides/index.astro', 'src/components/GuideEditorialIndex.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'category_navigation', 'guide_records', 'reference_actions', 'footer']), mobile_rule: 'guide cards preserve category, scope, publication state, current-through date, and route' }),
+  Object.freeze({ id: 'guide_article', sources: Object.freeze(['src/layouts/BaseLayout.astro', 'src/components/GuideArticleHeader.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'contents_disclosure', 'article_heading', 'article_sections', 'related_records', 'corrections', 'footer']), mobile_rule: 'contents disclosure starts collapsed, exposes aria-expanded and aria-controls, and closes on Escape' }),
+  Object.freeze({ id: 'reference_longform', sources: Object.freeze(['src/pages/models/index.astro', 'src/pages/glossary/index.astro', 'src/pages/updates/index.astro', 'src/pages/methodology/index.astro', 'src/pages/about/index.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'reference_or_contents_navigation', 'content_records', 'contextual_actions', 'footer']), mobile_rule: 'reference records and long-form contents preserve terms, dates, definitions, project rules, and source order' }),
+  Object.freeze({ id: 'utility', sources: Object.freeze(['src/pages/contact/index.astro', 'src/pages/support/index.astro']), focus_order: Object.freeze(['skip_link', 'brand', 'primary_navigation', 'main_heading', 'primary_action', 'secondary_actions', 'warnings', 'wallet_or_contact_records', 'feedback', 'footer']), mobile_rule: 'actions meet 44px minimum; full addresses, networks, warnings, correction routes, and copy feedback remain visible' })
 ]);
 
 export const mobileTableContracts = Object.freeze([
@@ -61,7 +64,7 @@ export const keyboardContracts = Object.freeze([
   Object.freeze({ id: 'active_filter_removal', keys: Object.freeze(['Tab', 'Shift+Tab', 'Enter', 'Space']), behavior: 'removes one named filter and announces result count' }),
   Object.freeze({ id: 'comparison_selection', keys: Object.freeze(['Tab', 'Shift+Tab', 'Space']), behavior: 'selection state exposed programmatically; maximum-four limit announced' }),
   Object.freeze({ id: 'comparison_panel', keys: Object.freeze(['Tab', 'Shift+Tab', 'Escape']), behavior: 'opening moves focus to heading only when user initiated; closing returns focus to trigger' }),
-  Object.freeze({ id: 'local_dossier_navigation', keys: Object.freeze(['Tab', 'Shift+Tab', 'Enter']), behavior: 'anchor navigation moves to section heading without trapping focus' }),
+  Object.freeze({ id: 'local_dossier_navigation', keys: Object.freeze(['Tab', 'Shift+Tab', 'Enter']), behavior: 'anchor navigation moves focus to section heading without trapping focus' }),
   Object.freeze({ id: 'disclosure', keys: Object.freeze(['Tab', 'Shift+Tab', 'Enter', 'Space', 'Escape']), behavior: 'aria-expanded and aria-controls remain synchronized' }),
   Object.freeze({ id: 'copy_identifier', keys: Object.freeze(['Tab', 'Shift+Tab', 'Enter', 'Space']), behavior: 'copies full identifier and announces success or failure without replacing visible value' })
 ]);
@@ -120,7 +123,7 @@ export const responsiveAccessibilityPolicies = Object.freeze({
   landmarks_have_unique_labels: true,
   native_controls_preferred: true,
   validation_errors_link_to_controls: true,
-  implementation_deferred: true,
-  implementation_starts_at_pr: 23,
+  implementation_deferred: false,
+  implementation_starts_at_pr: 270,
   route_changes_allowed: false
 });
