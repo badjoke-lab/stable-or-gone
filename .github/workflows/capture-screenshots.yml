@@ -114,6 +114,8 @@ jobs:
           retention-days: 14
           path: |
             artifacts/screenshots/**
+            artifacts/screenshots/representative-visual-audit.json
+            artifacts/screenshots/representative-visual-audit.md
             artifacts/screenshots-desktop.zip
             artifacts/screenshots-mobile.zip
 
