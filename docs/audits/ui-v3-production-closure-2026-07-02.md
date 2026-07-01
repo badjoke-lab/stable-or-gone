@@ -6,12 +6,11 @@ Status: execution pending
 
 ## Purpose
 
-PR #273 closes the Editorial Ledger UI v3 sequence by verifying the public site at `https://sog.badjoke-lab.com`.
+PR #273 closes the Editorial Ledger UI v3 sequence by verifying the public site at `https://sog.badjoke-lab.com` against one exact immutable commit.
 
-The process has two phases:
+The PR head becomes the release candidate. After normal pull-request workflows pass, `main` is fast-forwarded to that exact SHA. The PR production-closure workflow waits for the standard production deployment to publish the same SHA, then verifies provenance, exact public-output parity, and production desktop/mobile images.
 
-1. Pre-merge: verify the currently deployed `main` commit, production provenance, exact public-output parity, and representative desktop/mobile images.
-2. Post-merge: wait for the PR #273 merge commit to become the public commit, rerun the same checks, create an immutable release tag, and publish closure reports.
+This avoids guessing a future merge commit. The verified source commit, `main` commit, and production commit are identical.
 
 ## Existing deployment contract
 
@@ -21,21 +20,20 @@ Every `main` push builds the site, publishes `dist` to the existing Cloudflare P
 
 ## Gate V3-G
 
-The project owner instructed the active PR #261–#273 sequence to proceed. The exact PR #273 release candidate may merge only after:
+The project owner instructed the active PR #261–#273 sequence to proceed. The exact PR #273 head may become `main` only after:
 
 - normal pull-request workflows pass;
-- the pre-merge production baseline equals current `main`;
-- production provenance and route/output parity pass;
-- production representative images pass;
+- the source-level closure contract passes;
+- current production remains internally consistent while the release candidate is prepared;
 - PR #273 changes no canonical data, public route, logo, wallet value, or machine-readable schema.
 
-The final merge commit is verified after merge rather than guessed in advance.
+Moving `main` to the exact checked head is the release authorization recorded for Gate V3-G.
 
 ## Gate V3-H
 
-The post-merge verification must confirm:
+The production-closure workflow must confirm after `main` moves:
 
-- `/version.json` reports the exact merge commit;
+- `/version.json` reports the exact PR #273 head SHA;
 - `/data/manifest.json` reports identical build provenance;
 - the public branch is `main`;
 - canonical data hash and file count are present;
@@ -68,13 +66,17 @@ Required automated results:
 
 ## Immutable release record
 
-Successful post-merge verification creates an immutable release tag:
+The exact 40-character production commit SHA is the immutable release identifier. The production-closure workflow writes:
 
 ```text
-ui-v3-closed-<12-character-commit>
+artifacts/ui-v3-production-closure.json
+artifacts/ui-v3-production-closure.md
+artifacts/screenshots/**
+artifacts/screenshots-desktop.zip
+artifacts/screenshots-mobile.zip
 ```
 
-The release records the exact production commit and includes `ui-v3-production-closure.json` and `ui-v3-production-closure.md`. The same reports and images are retained as workflow artifacts. Commit status `ui-v3/production-closure` links the commit to its verification run.
+The reports contain the source/main/production SHA, build provenance, canonical data hash, record and route counts, Gate V3-G status, Gate V3-H status, and production image results. They are retained as the PR workflow artifact and copied into the PR record after verification.
 
 ## Preservation
 
@@ -88,4 +90,4 @@ The release records the exact production commit and includes `ui-v3-production-c
 
 ## Completion rule
 
-UI v3 closes only after the pre-merge baseline passes, Gate V3-G authorizes merge, the merge commit is published by the normal production workflow, post-merge parity and images pass, an immutable release tag is created, and Gate V3-H is recorded in the closure report.
+UI v3 closes only after normal PR checks pass, Gate V3-G fast-forwards `main` to the exact PR head, the standard deployment publishes that same commit, the PR production-closure workflow verifies production parity and 48 images, and Gate V3-H is recorded in the closure report and PR record.
