@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventEditorialHeader from './EventEditorialHeader.astro';
+import EventEditorialBody from './EventEditorialBody.astro';
+import '../styles/event-detail.css';
+import { buildEventDetailView } from '../lib/views/eventDetailView';
+const { event } = Astro.props;
+const view = buildEventDetailView(event);
+const title = `${view.eventTitle} — Stablecoin Event | Stable or Gone`;
+const description = view.eventDescription;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: view.eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: [...view.subjectStablecoins.map((item) => item.name), ...view.subjectOrganizations.map((item) => item.name), view.taxonomy.public_category_label, view.taxonomy.canonical_subtype_label, 'stablecoin event'].filter(Boolean) };
+---
+<BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
+  <article class="event-detail-page" data-ui-v3-event-detail>
+    <EventEditorialHeader event={event} view={view} />
+    <nav class="event-detail-nav" aria-label="Event record sections"><a href="#overview">Overview</a><a href="#subjects">Subjects</a>{view.hasStructuredDetail && <a href="#structured-detail">Structured detail</a>}<a href="#sources">Sources</a><a href="#corrections">Corrections</a></nav>
+    <EventEditorialBody event={event} view={view} />
+  </article>
+</BaseLayout>
