@@ -6,9 +6,9 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #264 — Editorial Ledger Stablecoins register
-Active: PR #265 — Stablecoin dossier
-Next: PR #266 — Organizations and Events
+Latest completed: PR #265 — Editorial Ledger Stablecoin dossier
+Active: PR #266 — Organizations and Events
+Next: PR #267 — Guides
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
@@ -18,25 +18,23 @@ Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
-The previous UI v2 implementation through PR #216 is an intermediate repository state. Owner review rejected the Modern Data Product visual direction as an acceptable final presentation. The replacement direction is Editorial Ledger.
-
-The UI remediation is the binding workstream. Growth D, the 100-record audit, and non-UI release preparation are paused until the UI remediation and representative desktop/mobile audit are complete.
+The former UI v2 Modern Data Product implementation is an intermediate state. Editorial Ledger is the binding visual direction. Growth D, the 100-record audit, and non-UI release preparation remain paused until PR #272 completes.
 
 ## Current factual baseline
 
 ```text
 Canonical stable assets: 98
-Organizations: generated from current canonical main
-Events: generated from current canonical main
+Organizations and events: generated from canonical main
 Guide publication: metadata-driven
 Production deployment: automatic after merge to main
-Screenshot audit: representative mode available for desktop and mobile
+Screenshot audit: representative desktop and mobile modes available
 Shared shell: Editorial Ledger v3
 Home: Editorial Ledger registry front page
 Stablecoins: seven-column table-first register, 20 records per page
+Stablecoin details: Editorial Ledger research dossiers
 ```
 
-PR #251 was created from an older main base and contains the former Growth D implementation. It is not the active workstream and must not be merged as-is. After UI completion, Growth D must be rebuilt cleanly from the then-current main using only reviewed candidate data.
+PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
 
 ## Completed work
 
@@ -50,26 +48,16 @@ PR #248 Growth B: 94 -> 96
 PR #249 UK stablecoin capital-rules guide
 PR #250 Growth C: 96 -> 98
 PR #252-#255 guide-publication and automatic-deployment corrections
-PR #256-#257 screenshot capture and one-click audit workflow
-PR #258-#260 guide publication and Open USD editorial corrections
+PR #256-#257 screenshot capture and audit workflow
+PR #258-#260 guide publication and Open USD corrections
 PR #261 Editorial Ledger UI v3 specification and schedule alignment
 PR #262 shared Editorial Ledger shell
 PR #263 Editorial Ledger Home
 PR #264 Editorial Ledger Stablecoins register
+PR #265 Editorial Ledger Stablecoin dossier
 ```
 
-## UI v3 direction
-
-Canonical visual authority:
-
-```text
-docs/architecture/approved-editorial-ledger-ui-v3.md
-docs/ui-redesign/approved-mocks-v3/README.md
-docs/ui-redesign/implementation-plan.md
-DESIGN.md
-```
-
-The v3 direction is fixed as:
+## Fixed UI direction
 
 ```text
 Editorial Ledger
@@ -86,101 +74,74 @@ no KPI-card row
 no repeated rounded-card grid
 ```
 
-## Active UI remediation sequence
+Canonical visual authority:
+
+```text
+docs/architecture/approved-editorial-ledger-ui-v3.md
+docs/ui-redesign/approved-mocks-v3/README.md
+docs/ui-redesign/implementation-plan.md
+DESIGN.md
+```
+
+## UI remediation sequence
 
 ### PR #261 — specification and schedule alignment — complete
 
-- established UI v3 as canonical visual authority;
-- marked UI v2 visual references as superseded;
-- updated roadmap, governance, required reading, and active-workstream validation;
-- preserved all canonical data and public routes.
+Established UI v3 authority, superseded v2 visual references, updated governance and the execution schedule, and preserved canonical data and routes.
 
 ### PR #262 — shared Editorial Ledger shell — complete
 
-- retained existing approved S/G logo assets;
-- replaced dark SaaS shell tokens with paper, ink, rule, and restrained-accent tokens;
-- simplified primary navigation;
-- added compact registry search and About disclosure;
-- replaced default hero, metric-card, panel, button, field, chip, and support-banner treatment with editorial primitives;
-- retained focus, reduced-motion, forced-colors, and 44px control foundations;
-- added UI v3 foundation validation;
-- changed no canonical data or public routes.
+Replaced dark SaaS shell defaults with paper, ink, rules, compact navigation, registry search, structured footer, restrained primitives, and accessibility foundations.
 
 ### PR #263 — Home — complete
 
-- removed the Home-specific marketing hero, coin illustration, KPI cards, entry-card grid, and support CTA banner;
-- added an editorial masthead and truthful registry review date;
-- added one-line canonical totals rather than metric cards;
-- added latest material changes from dated canonical events;
-- added current lifecycle counts with an explicit non-rating disclaimer;
-- added recently reviewed stablecoin records selected by `last_verified_at`;
-- added metadata-driven guides and reference entrypoints;
-- preserved cross-registry search, canonical counts, routes, and JSON-LD.
+Replaced the marketing landing composition with an editorial masthead, canonical summary line, material changes, lifecycle counts, recently reviewed records, guides, and reference entrypoints.
 
 ### PR #264 — Stablecoins register — complete
 
-- removed the Stablecoins hero illustration, metric cards, dark filter panels, and nine-column SaaS table;
-- introduced a table-first public-register header with one canonical record count;
-- reduced the desktop comparison table to seven deliberate columns while preserving protected facts through sublines and compact records;
-- retained six taxonomy filters, six sorts, URL-synchronized state, and bounded non-ranking comparison;
-- added URL-synchronized pagination at 20 records per page;
-- server-rendered only the first page as visible while retaining all records and links in the HTML;
-- added visible-range reporting and a true zero-result state that appears only when no records match;
-- kept all compact mobile fields and page-specific table-to-record transformation;
-- updated interaction contracts, audits, validators, and compatibility workflow commands.
+Replaced the hero, KPI cards, filter panels, and nine-column dashboard table with a seven-column public register, six taxonomy filters, six sorts, URL state, two-to-four-record comparison, and 20-record pagination.
 
-### PR #265 — Stablecoin dossier — active
+### PR #265 — Stablecoin dossier — complete
 
-- replace stacked-card detail pages with a research dossier hierarchy;
-- prioritize current state, mechanism, history, evidence, and known unknowns;
-- preserve every protected canonical field;
-- test low-, medium-, and high-information records.
+- removed PageHero, six MetricCards, circular glow art, dark panel navigation, and the repeated gradient-card stack;
+- added a ruled dossier masthead with name, symbol, aliases, record ID, lifecycle, issuance, reference, primary organization, launch, redemption, backing, stabilization, last review, evidence access, and latest material change;
+- ordered the body as assessment, organizations/control, mechanism, reserve/redemption, deployments/legal context, lifecycle history, evidence, known unknowns, and related records;
+- preserved every protected relationship, value state, deployment, event, evidence, reserve, regulatory, and uncertainty field;
+- placed evidence in upper facts and local navigation and before the final unknown/related sections;
+- added intentional empty states for low-information records;
+- added UI v3 dossier validation and retained the v2 command as a compatibility alias;
+- changed no canonical data, public route, logo, or machine-readable output.
 
-### PR #266 — Organizations and Events
+### PR #266 — Organizations and Events — active
 
 - render organizations as responsible-body records, not corporate profile cards;
 - render events as incident/public-record files, not alert dashboards;
 - repair index density and false empty states;
-- retain all relationships, evidence, and value states.
+- retain relationships, evidence, and value states.
 
 ### PR #267 — Guides
 
-- separate editorial article layout from registry records;
-- use a readable article column, table of contents, notes, tables, and related-guide rail;
-- preserve all published guide routes and metadata-driven visibility.
+Use a distinct editorial article family with readable body width, contents navigation, notes, tables, related guides, and unchanged published routes.
 
 ### PR #268 — Reference and utility pages
 
-- align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact;
-- use distinct Reference, Long-form, and Utility page families;
-- remove remaining UI v2 card composition.
+Align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact while keeping distinct Reference, Long-form, and Utility families.
 
 ### PR #269 — mobile transformation
 
-- implement page-specific compact records and long-form navigation;
-- preserve material fields;
-- support 320px width, 200 percent zoom, keyboard, focus, reduced motion, and forced colors.
+Preserve material fields at 320px and 200 percent zoom with page-specific compact records, keyboard support, focus, reduced motion, and forced colors.
 
 ### PR #270 — representative all-family visual audit
 
-- run desktop representative capture;
-- run mobile representative capture;
-- inspect all unique pages plus three samples per repeated detail family;
-- fix overflow, false empty states, broken hierarchy, logo misuse, and legacy SaaS remnants;
-- Gate V3-F remains pending until this PR passes.
+Capture desktop and mobile representatives; inspect all unique pages and three samples per repeated detail family; fix overflow, false empty states, hierarchy, logo misuse, and remaining SaaS styling. Gate V3-F remains pending until this passes.
 
 ### PR #271 — accessibility, performance, and legacy cleanup
 
-- remove unused UI v2 CSS and obsolete components only after replacement is complete;
-- verify headings, tables, labels, contrast, focus, and keyboard operation;
-- verify canonical count and route parity.
+Remove obsolete v2 CSS/components after replacement, then verify headings, tables, labels, contrast, focus, keyboard operation, canonical counts, and route parity.
 
 ### PR #272 — production verification and UI v3 closure
 
-- verify automatic main deployment for the intended commit;
-- verify public provenance and machine-readable parity;
-- verify representative desktop/mobile production captures;
-- record Gate V3-F result and exact immutable release commit.
+Verify automatic deployment, public provenance, machine-readable parity, production captures, Gate V3-F, and the exact immutable release commit.
 
 ## UI acceptance gates
 
@@ -199,8 +160,6 @@ No agent may claim UI v3 completion before Gate V3-H.
 
 ## Paused work
 
-The following are paused until PR #272 completes:
-
 ```text
 Growth D to 100 records
 100-record registry-wide quality audit
@@ -211,11 +170,9 @@ new logo work
 alternative visual-direction exploration
 ```
 
-Urgent factual corrections, source-backed guide corrections, security fixes, or verified public breakage may interrupt the sequence through a narrowly scoped PR.
+Urgent factual corrections, source-backed guide corrections, security fixes, or verified public breakage may interrupt through a narrowly scoped PR.
 
 ## Work after UI v3
-
-After PR #272:
 
 ```text
 1. close or archive stale PR #251;
@@ -225,5 +182,3 @@ After PR #272:
 5. run non-UI release preparation against the actual 100-record and UI v3 state;
 6. resume monitoring coverage expansion and later growth.
 ```
-
-The post-UI PR numbers are assigned only after PR #272 because intervening factual corrections may consume repository numbers. The roadmap must be updated before that work starts.
