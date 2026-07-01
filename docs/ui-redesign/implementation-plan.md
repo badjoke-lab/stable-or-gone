@@ -28,40 +28,39 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 
 ```text
 Completed through: PR #265 Editorial Ledger Stablecoin dossier
-Current UI: shared v3 shell, v3 Home, v3 Stablecoins register, and v3 Stablecoin dossiers; remaining page families are transitional
-Active work item: PR #266 Organizations and Events
-Next implementation: PR #267 Guides
+Partial precursor: PR #266 Organization and Event row compaction
+Active work item: PR #267 corrective Organizations and Events completion
+Next implementation: PR #268 Guides
+Closure: PR #273 production verification and closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
+Gate V3-C: pending PR #267 validation and merge
 Gate V3-F: not passed
 Release candidate: not selected
 Production publication: automatic on main
 ```
 
-The Modern Data Product direction is superseded. Remaining v2 page implementations are temporary migration content and sources of reusable data mapping, interaction, accessibility, and approved logo behavior only.
+The Modern Data Product direction is superseded. Remaining v2 implementations may be used only for reusable data mapping, interaction, accessibility, and approved logo behavior.
+
+## Rejected visual patterns
+
+```text
+SaaS dashboard
+giant hero
+KPI card row
+blue-purple glow
+repeated rounded-card grid
+decorative shadow stack
+new logo generation
+```
 
 ## Preservation rules
 
-Every v3 PR must preserve unless separately approved:
+Every v3 PR must preserve canonical stable assets, organizations, relationships, classifications, reserve and redemption profiles, events and typed details, evidence and evidence relations, reserve reports, known unknowns, regulatory notes, deployments, stable-asset relationships, income profiles, guide metadata, public routes, and machine-readable outputs.
 
-- canonical stable assets;
-- organizations and relationships;
-- classifications and public taxonomy meaning;
-- reserve and redemption profiles;
-- events and event details;
-- evidence and evidence relations;
-- reserve reports and context;
-- known unknowns;
-- regulatory notes;
-- deployments and legal profiles;
-- stable-asset relationships;
-- reserve components and income profiles;
-- guide publication metadata;
-- route families and machine-readable outputs.
-
-The UI may regroup or progressively disclose information. It may not erase protected fields or convert uncertainty into certainty.
+The UI may regroup or progressively disclose information. It may not erase protected fields, convert uncertainty into certainty, imply that every connected organization is an issuer, or present events as live alerts.
 
 ## Completed v3 work
 
@@ -71,156 +70,99 @@ Established Editorial Ledger authority, superseded v2 visual references, paused 
 
 ### PR #262 — shared Editorial Ledger shell
 
-Added paper, ink, rule, accent, typography, spacing, compact navigation, truthful search, structured footer, restrained primitives, and accessibility foundations.
+Added paper, ink, rules, muted dark-red accent, typography, compact navigation, truthful search, structured footer, restrained primitives, and accessibility foundations.
 
 ### PR #263 — Editorial Ledger Home
 
-Replaced the marketing landing composition with a registry masthead, one-line canonical summary, material changes, lifecycle counts, recently reviewed records, guides, and reference entrypoints.
+Replaced the marketing landing composition with a registry masthead, canonical summary, material changes, lifecycle counts, recently reviewed records, guides, and reference entrypoints.
 
 ### PR #264 — Editorial Ledger Stablecoins register
 
-Implemented the seven-column table-first register, six filters, six sorts, URL-synchronized state, bounded comparison, 20-record pagination, visible range, true zero-result handling, and protected compact records.
-
-Validation:
-
-```text
-npm run validate:ui-v3-stablecoin-index
-npm run prepare:index-interaction-contract
-```
+Implemented a seven-column table-first register, six filters, six sorts, URL-synchronized state, bounded comparison, 20-record pagination, visible range, zero-result handling, and protected compact records.
 
 ### PR #265 — Editorial Ledger Stablecoin dossier
 
-Upper record:
+Removed PageHero, MetricCards, circular glow art, dark rounded navigation, and repeated gradient panels. Added a ruled masthead, fact ledger, assessment, organizations/control, mechanism, reserve/redemption, deployments/legal context, lifecycle history, evidence, known unknowns, and correction paths without changing canonical data or routes.
 
-- canonical name, symbol, aliases, and record ID;
-- lifecycle and issuance state;
-- reference target;
-- primary organization and additional relationship indication;
-- launch, redemption, backing, stabilization, and last review;
-- direct evidence access;
-- latest dated material change.
+### PR #266 — partial Organization and Event row compaction
 
-Body hierarchy:
-
-- reviewed assessment;
-- organizations and control;
-- mechanism;
-- reserve and redemption;
-- deployments and legal context;
-- lifecycle and event history;
-- evidence;
-- known unknowns;
-- corrections and further reading.
-
-Presentation:
-
-- removed PageHero, six MetricCards, circular glow art, dark rounded navigation, and repeated gradient panels;
-- replaced them with a ruled masthead, fact ledger, definition lists, timelines, tables, and controlled disclosure;
-- kept Evidence reachable from upper facts and local navigation and before the final unknown/related sections;
-- added explicit low-information states without inventing defaults;
-- preserved dense high-information records and every protected canonical field;
-- added `npm run validate:ui-v3-stablecoin-detail`;
-- retained `validate:ui-v2-stablecoin-detail` as a compatibility alias.
-
-Acceptance:
-
-- no synthetic score;
-- no repetitive identical card stack;
-- no route, canonical data, logo, or machine-readable shape change;
-- evidence remains directly reachable;
-- low-, medium-, and high-information records render intentionally.
+This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astro`. It did not complete the four page families and is not Gate V3-C completion.
 
 ## Active sequence
 
-### PR #266 — Organizations and Events
+### PR #267 — corrective Organizations and Events completion
 
 Organizations:
 
 - responsible-body record hierarchy;
-- role, jurisdiction, connected assets, current and historical relationships, material changes, evidence, and known unknowns;
+- category, regulatory character, jurisdiction, roles, connected assets, current and historical relationships;
+- material events, evidence, known unknowns, and correction paths;
 - no issuer assumption.
 
 Events:
 
 - incident/public-record hierarchy;
-- ID, date or timeframe, category/subtype, affected records, actors, impact, summary, typed detail, evidence, and known unknowns;
+- ID, date or timeframe, category, subtype, affected stablecoins and organizations, impact, status effect, recovery, typed detail, evidence, and corrections;
 - no alert-dashboard composition.
 
 Indexes:
 
-- repair density and false empty states;
-- reduce non-comparison columns;
-- add bounded pagination or equivalent rendering where needed.
+- preserve search, five filters, sorts, URL state, zero-result behavior, desktop registers, and compact mobile records;
+- use six deliberate comparison columns instead of the former eight-column v2 layouts;
+- keep all canonical records server-rendered.
 
 Acceptance:
 
-- Gate V3-C may pass only when the Stablecoins register, Stablecoin dossier, Organizations, and Events page families all satisfy the v3 contract;
-- all relationships, evidence, typed details, and value states remain reachable;
-- organization pages do not imply every connected body is an issuer;
-- event pages do not resemble monitoring alerts.
+- Gate V3-C passes only after all 18 workflows succeed and PR #267 merges;
+- all relationships, evidence, typed details, value states, and unknowns remain reachable;
+- canonical data, routes, logo assets, and machine-readable schemas remain unchanged.
 
-### PR #267 — Guides
+### PR #268 — Guides
 
-- distinct editorial article family;
+- distinct Editorial Article family;
 - title, deck, publication and revision dates;
-- readable body width and on-page contents;
-- editorial notes, quotations, and tables;
-- related guides and glossary assistance;
-- all published and evergreen guide visibility preserved.
+- readable body width and contents navigation;
+- restrained notes, quotations, tables, related guides, and glossary assistance;
+- published and evergreen routes remain visible.
 
-### PR #268 — Reference and utility pages
+### PR #269 — Reference and utility pages
 
 ```text
-Reference: Models, Glossary
+Reference: Models, Glossary, Updates
 Long-form: Methodology, About
-Utility: Updates, Corrections, Support, Contact
+Utility: Corrections, Support, Contact
 ```
 
-Acceptance:
+Use one shared shell but distinct family-level layouts. Do not return to identical card stacks.
 
-- one shared shell;
-- distinct family-level layouts;
-- no return to identical card stacks;
-- machine-readable and correction entrypoints remain available.
-
-### PR #269 — mobile, accessibility, and compact-layout hardening
+### PR #270 — mobile and accessibility hardening
 
 - controlled navigation disclosure;
-- compact two-level register rows or deliberate comparison scrollers;
-- field labels remain attached to values;
-- expandable local contents for guides and long dossiers;
+- compact records or deliberate scroll-preserved tables;
+- labels remain attached to values;
 - 320px width and 200 percent zoom;
 - keyboard-only operation and visible focus;
-- result announcements, reduced motion, forced colors, and protected information parity.
+- result announcements, reduced motion, forced colors, and information parity.
 
-### PR #270 — representative visual audit
+### PR #271 — representative visual audit
 
-Capture desktop and mobile representatives for Home, every unique index/project page, three stablecoin details, three organization details, three event details, three guides, and every unique reference/utility page.
+Capture desktop and mobile representatives for Home, every unique index/project page, three stablecoin details, three organization details, three event details, three guides, and every unique reference/utility page. Gate V3-F passes only after overflow, false empty states, hierarchy, logo misuse, and remaining SaaS styling are resolved.
 
-Acceptance:
+### PR #272 — accessibility, performance, and legacy cleanup
 
-- no legacy SaaS composition remains in the sampled release candidate;
-- no material overflow or false empty state;
-- approved logo use is consistent;
-- Gate V3-F is recorded only after the representative audit passes.
+Remove unused v2 CSS and obsolete components only after replacements exist. Verify headings, labels, tables, contrast, focus, keyboard operation, reduced motion, forced colors, counts, routes, performance, and build output.
 
-### PR #271 — accessibility, performance, and legacy cleanup
-
-- remove unused v2 CSS and obsolete components only after replacements exist;
-- verify headings, labels, tables, contrast, focus, keyboard operation, reduced motion, forced colors, counts, routes, and build output;
-- keep cleanup separate from page-family redesign.
-
-### PR #272 — production verification and closure
+### PR #273 — production verification and closure
 
 - verify automatic main deployment for the intended commit;
 - verify provenance and machine-readable parity;
-- verify representative desktop/mobile production captures;
-- record Gate V3-F and the immutable production commit;
+- verify representative production captures;
+- record Gate V3-F through Gate V3-H and the immutable production commit;
 - do not claim UI v3 completion before Gate V3-H.
 
 ## Validation rule
 
-Each implementation PR must run normal repository checks and the relevant page-family checks. Current v3 commands are:
+Each implementation PR must run normal repository checks and relevant page-family checks:
 
 ```text
 npm run validate:ui-v3-foundation
@@ -236,11 +178,11 @@ npm run verify:consistency
 
 ## Screenshot rule
 
-Representative capture is the default. Repeated detail families are sampled rather than exhaustively captured. Full capture remains available only for targeted debugging.
+Representative capture is the default. Repeated detail families are sampled rather than exhaustively captured. Full capture remains available for targeted debugging.
 
 ## Paused non-UI work
 
-Until PR #272 completes:
+Until PR #273 completes:
 
 ```text
 Growth D to 100 records
