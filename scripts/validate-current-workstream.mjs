@@ -15,6 +15,7 @@ import './validate-batch19-growth-b.mjs';
 import './validate-batch20-growth-c.mjs';
 import './validate-ui-v3-foundation.mjs';
 import './validate-ui-v3-home.mjs';
+import './validate-ui-v3-stablecoin-index.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -27,16 +28,16 @@ const uiV2 = fs.readFileSync('docs/architecture/approved-modern-data-product-ui-
 const mocksV3 = fs.readFileSync('docs/ui-redesign/approved-mocks-v3/README.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #263 — Editorial Ledger Home',
-  'Active: PR #264 — Stablecoins register',
-  'Next: PR #265 — Stablecoin dossier',
+  'Latest completed: PR #264 — Editorial Ledger Stablecoins register',
+  'Active: PR #265 — Stablecoin dossier',
+  'Next: PR #266 — Organizations and Events',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
   'Gate V3-A: passed',
   'Gate V3-B: passed',
-  'PR #263 — Home — complete',
-  'PR #264 — Stablecoins register — active',
+  'PR #264 — Stablecoins register — complete',
+  'PR #265 — Stablecoin dossier — active',
   'PR #270 — representative all-family visual audit',
   'PR #272 — production verification and UI v3 closure',
   'Growth D to 100 records'
@@ -52,16 +53,16 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'Latest completed: PR #263 Editorial Ledger Home'],
-  [agents, 'Active: PR #264 Stablecoins register'],
+  [agents, 'Latest completed: PR #264 Editorial Ledger Stablecoins register'],
+  [agents, 'Active: PR #265 Stablecoin dossier'],
   [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
   [agents, 'The old PR #251 must not be merged as-is'],
   [design, 'Status: canonical design overview'],
   [design, 'Visual family: Editorial Ledger'],
   [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Completed through: PR #263 Editorial Ledger Home'],
-  [uiPlan, 'Active work item: PR #264 Stablecoins register'],
+  [uiPlan, 'Completed through: PR #264 Editorial Ledger Stablecoins register'],
+  [uiPlan, 'Active work item: PR #265 Stablecoin dossier'],
   [uiPlan, 'Gate V3-B: passed'],
   [uiPlan, 'PR #272 — production verification and closure'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
@@ -73,4 +74,4 @@ for (const [document, phrase] of [
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
 
-console.log('Current workstream valid: Editorial Ledger Home is complete, 98 canonical assets are preserved, and the Stablecoins register is active.');
+console.log('Current workstream valid: the Editorial Ledger Stablecoins register is complete, 98 canonical assets are preserved, and the Stablecoin dossier is active.');
