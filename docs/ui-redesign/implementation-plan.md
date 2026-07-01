@@ -19,6 +19,7 @@ docs/ui-redesign/approved-mocks-v3/README.md
 docs/ui-redesign/implementation-plan.md
 docs/roadmap.md
 docs/public-taxonomy-spec.md
+DESIGN.md
 ```
 
 Reference direction controls hierarchy and visual language, not public facts. Canonical data, approved editorial copy, reviewed local assets, and generated canonical counts are the only allowed public inputs.
@@ -26,35 +27,20 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #260
-Current UI: rejected intermediate UI v2 presentation
-Active work item: PR #261 specification and schedule alignment
-Next implementation: PR #262 shared Editorial Ledger shell
+Completed through: PR #262 shared Editorial Ledger shell
+Current UI: shared v3 shell with page-family migrations still pending
+Active work item: PR #263 Home
+Next implementation: PR #264 Stablecoins register
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
+Gate V3-A: passed
+Gate V3-B: passed
 Gate V3-F: not passed
 Release candidate: not selected
 Production publication: automatic on main
 ```
 
-Owner visual review has resumed. The Modern Data Product direction is no longer approved as the final SOG presentation. The replacement direction is Editorial Ledger.
-
-## Completed historical UI work
-
-```text
-PR #207  UI v2 contract and references
-PR #208  UI v2 visual foundation and approved S/G logo assets
-PR #209  UI v2 Home
-PR #210  UI v2 Stablecoins index
-PR #211  UI v2 Stablecoin detail
-PR #212  UI v2 Organizations
-PR #213  UI v2 Events
-PR #214  UI v2 editorial/project pages
-PR #215  UI v2 mobile and accessibility
-PR #216  UI v2 owner-review mark correction
-```
-
-These changes are retained as implementation history and as a source of reusable data and accessibility behavior. They are not the visual authority for v3.
+The Modern Data Product direction is superseded. Existing v2 page implementations remain only as temporary page-family content during migration and as sources of reusable data mapping, interaction, accessibility, and approved logo assets.
 
 ## Preservation rules
 
@@ -81,53 +67,36 @@ Every v3 PR must preserve unless its scope explicitly and separately approves a 
 
 The UI may regroup or progressively disclose information. It may not erase protected fields or convert uncertainty into certainty.
 
-## PR sequence
+## Completed v3 work
 
 ### PR #261 — documentation and authority alignment
 
-Scope:
+Completed:
 
-- add canonical v3 design contract;
-- update roadmap and required reading;
-- mark UI v2 visual authority as superseded;
-- pause Growth D and non-UI continuation;
-- update active-workstream validation.
-
-Non-scope:
-
-- no application UI implementation;
-- no canonical data changes;
-- no route changes;
-- no logo changes.
+- added the canonical Editorial Ledger design contract;
+- updated roadmap, governance, required reading, and active-workstream validation;
+- marked UI v2 visual authority as superseded;
+- paused Growth D and the non-UI continuation;
+- preserved canonical data, routes, and logo assets.
 
 ### PR #262 — shared Editorial Ledger shell
 
-Scope:
+Completed:
 
-- retain existing approved S/G production assets;
-- add paper, ink, rule, accent, status, typography, spacing, and table tokens;
-- simplify desktop and mobile navigation;
-- replace dashboard card primitives with editorial primitives;
-- preserve focus, reduced motion, forced colors, and semantic structure.
+- retained the existing approved S/G production assets;
+- added exact paper, ink, rule, accent, status, typography, spacing, and table tokens in `config/ui-v3-foundation.mjs`;
+- changed the default brand surface to the existing `on-light` logo assets;
+- replaced grouped SaaS navigation with a compact primary register navigation, truthful stablecoin search, About disclosure, mobile disclosure, and structured footer;
+- changed the shared background from dark navy to paper-like light;
+- removed gradients, glow, decorative shadows, and medium-radius dashboard defaults from shared primitives;
+- converted PageHero, MetricCard, panel, button, field, chip, ticker/organization badge, and support-banner foundations to restrained editorial forms;
+- added `src/styles/editorial-ledger-v3.css` as a migration compatibility layer;
+- added `npm run validate:ui-v3-foundation` and retained the old v2 command as a compatibility alias;
+- preserved focus, 44px controls, reduced motion, forced colors, semantic markup, canonical counts, and routes.
 
-Expected implementation areas:
+Gate V3-B is passed only for the shared shell. Home and all page families still require their dedicated PRs.
 
-```text
-src/layouts/BaseLayout.astro
-src/styles/global.css
-src/styles/shell.css
-shared navigation and brand components
-shared editorial/register primitives
-v3 foundation validator
-```
-
-Acceptance:
-
-- existing logo only;
-- no oversized hero primitive in the shared shell;
-- no default KPI-card row primitive;
-- no blue-purple glow;
-- no repeated medium-radius dashboard panels as the base page language.
+## Active sequence
 
 ### PR #263 — Home
 
@@ -143,11 +112,12 @@ Required hierarchy:
 
 Acceptance:
 
-- no marketing hero;
-- no metric-card row;
+- remove Home-specific marketing hero composition;
+- remove Home KPI-card row and generic entry-card grid;
 - canonical counts remain generated;
-- latest and selected records use deterministic rules;
-- page remains useful without decorative illustration.
+- latest and selected records use deterministic documented rules;
+- no decorative illustration is required for comprehension;
+- existing search behavior remains truthful and accessible.
 
 ### PR #264 — Stablecoins register
 
@@ -324,7 +294,7 @@ Required:
 
 Required:
 
-- merge exact reviewed candidate to main;
+- merge the exact reviewed candidate to main;
 - verify automatic production deployment;
 - verify deployed commit and provenance;
 - verify routes, counts, sitemap, JSON-LD, version, manifest, and machine-readable parity;
@@ -334,23 +304,29 @@ Required:
 ## Gate definitions
 
 ```text
-Gate V3-A  canonical specifications and schedule aligned
-Gate V3-B  shared shell complete
-Gate V3-C  core registry families complete
-Gate V3-D  editorial/reference families complete
-Gate V3-E  mobile/accessibility complete
-Gate V3-F  representative visual audit complete
-Gate V3-G  owner approves exact immutable candidate
-Gate V3-H  production commit and parity verified
+Gate V3-A  canonical specifications and schedule aligned — passed
+Gate V3-B  shared shell complete — passed
+Gate V3-C  core registry families complete — pending
+Gate V3-D  editorial/reference families complete — pending
+Gate V3-E  mobile/accessibility complete — pending
+Gate V3-F  representative visual audit complete — pending
+Gate V3-G  owner approves exact immutable candidate — pending
+Gate V3-H  production commit and parity verified — pending
 ```
 
 ## Validation expectations
 
-Each implementation PR must run the normal repository checks and the relevant page-family validator. During migration, existing UI v2 validators may remain as data-preservation or behavior checks, but they must not be treated as visual authority. New v3 validators replace or amend visual assertions as each page family moves.
+Each implementation PR must run the normal repository checks and the relevant page-family validator. Existing UI v2 validators may remain temporarily as data-preservation or behavior checks, but they are not visual authority. New v3 validators replace or amend visual assertions as each page family moves.
+
+Shared-shell validation:
+
+```text
+npm run validate:ui-v3-foundation
+```
 
 ## Screenshot rule
 
-Representative mode is the default. Repeated record templates are sampled, not exhaustively captured. Exhaustive capture is reserved for a specific defect investigation or final exceptional audit and is never the default growth path.
+Representative mode is the default. Repeated record templates are sampled, not exhaustively captured. Exhaustive capture is reserved for a specific defect investigation or exceptional final audit.
 
 ## Growth and other work
 
