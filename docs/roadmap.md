@@ -18,7 +18,7 @@ Gate V3-B: passed
 Gate V3-C: passed
 Gate V3-D: passed
 Gate V3-E: passed
-Gate V3-F: pending PR #271 rendered audit and human image review
+Gate V3-F: passed
 Production publication: automatic on main
 ```
 
@@ -31,7 +31,7 @@ Canonical stable assets: 98
 Organizations and events: Editorial Ledger registers and record files
 Guide publication: metadata-driven
 Production deployment: automatic after merge to main
-Screenshot audit: representative desktop and mobile modes available
+Screenshot audit: desktop and mobile representative Gate V3-F audit passed
 Shared shell: Editorial Ledger v3
 Home: Editorial Ledger registry front page
 Stablecoins: seven-column table-first register, 20 records per page
@@ -160,14 +160,15 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 - added long-identifier wrapping, copy controls, polite success/failure feedback, visible focus, minimum targets, reduced motion, and forced-colors coverage;
 - passed all 18 pull-request workflows, Astro check, production build, public consistency, and Gate V3-E.
 
-### PR #271 — representative all-family visual audit — active
+### PR #271 — representative all-family visual audit — active; Gate V3-F passed
 
-- capture all twelve unique public pages on desktop and mobile;
-- capture at least three stablecoin, organization, event, and guide detail representatives per device;
-- measure rendered horizontal overflow, H1 and main counts, broken images, approved brand use, legacy visual markers, and false initial empty states;
-- upload screenshots, manifests, archives, and machine-readable/Markdown Gate V3-F reports;
-- inspect the actual images for hierarchy, clipping, density, false empty states, logo misuse, and remaining SaaS styling;
-- pass Gate V3-F only after automated checks and human image review both succeed.
+- captured all twelve unique public pages on desktop and mobile;
+- captured three stablecoin, organization, event, and guide detail representatives per device;
+- measured rendered horizontal overflow, H1 and main counts, broken images, approved brand use, legacy visual markers, and false initial empty states;
+- uploaded 48 screenshots, manifests, archives, and machine-readable/Markdown Gate V3-F reports;
+- reviewed the top, middle, and bottom regions of every image for hierarchy, clipping, density, false empty states, logo misuse, and remaining SaaS styling;
+- recorded zero automated failures and no visual defect requiring a source or CSS correction;
+- passed Gate V3-F.
 
 ### PR #272 — accessibility, performance, and legacy cleanup
 
@@ -185,7 +186,7 @@ Gate V3-B  shared shell complete — passed
 Gate V3-C  core registry page families complete — passed
 Gate V3-D  editorial/reference families complete — passed
 Gate V3-E  mobile and accessibility complete — passed
-Gate V3-F  representative visual audit passed — pending PR #271 rendered audit and human review
+Gate V3-F  representative visual audit passed — passed
 Gate V3-G  owner approves exact release candidate — pending
 Gate V3-H  production commit and public parity verified — pending
 ```
