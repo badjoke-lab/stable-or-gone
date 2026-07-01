@@ -40,10 +40,10 @@ const visualAudit = fs.readFileSync('docs/audits/ui-v3-representative-visual-aud
 const cleanupAudit = fs.readFileSync('docs/audits/ui-v3-accessibility-performance-legacy-cleanup-2026-07-02.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #271 — representative all-family visual audit',
+  'Latest completed: PR #272 — accessibility, performance, and legacy cleanup',
   'Partial precursor: PR #266',
-  'Active: PR #272 — accessibility, performance, and legacy cleanup',
-  'Next: PR #273 — production verification and UI v3 closure',
+  'Active: PR #273 — production verification and UI v3 closure',
+  'Next after UI closure: rebuild Growth D from latest main',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
@@ -56,8 +56,8 @@ for (const phrase of [
   'Gate V3-G: pending exact release-candidate approval',
   'Gate V3-H: pending production commit and public parity verification',
   'PR #271 — representative all-family visual audit — complete',
-  'PR #272 — accessibility, performance, and legacy cleanup — active',
-  'PR #273 — production verification and UI v3 closure',
+  'PR #272 — accessibility, performance, and legacy cleanup — complete',
+  'PR #273 — production verification and UI v3 closure — active',
   'Growth D to 100 records'
 ]) {
   if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
@@ -71,10 +71,10 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'Latest completed: PR #271 representative all-family visual audit'],
+  [agents, 'Latest completed: PR #272 accessibility, performance, and legacy cleanup'],
   [agents, 'Partial precursor: PR #266 Organization and Event row compaction'],
-  [agents, 'Active: PR #272 accessibility, performance, and legacy cleanup'],
-  [agents, 'Next: PR #273 production verification and UI v3 closure'],
+  [agents, 'Active: PR #273 production verification and UI v3 closure'],
+  [agents, 'Next after closure: rebuild Growth D from latest main'],
   [agents, 'Closure: PR #273 production verification and UI v3 closure'],
   [agents, 'Gate V3-F: passed'],
   [agents, 'Gate V3-G: pending exact release-candidate approval'],
@@ -87,9 +87,9 @@ for (const [document, phrase] of [
   [design, 'Visual family: Editorial Ledger'],
   [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Completed through: PR #271 representative all-family visual audit'],
-  [uiPlan, 'Active work item: PR #272 accessibility, performance, and legacy cleanup'],
-  [uiPlan, 'Next implementation: PR #273 production verification and closure'],
+  [uiPlan, 'Completed through: PR #272 accessibility, performance, and legacy cleanup'],
+  [uiPlan, 'Active work item: PR #273 production verification and closure'],
+  [uiPlan, 'Next after closure: rebuild Growth D from latest main'],
   [uiPlan, 'Gate V3-F: passed'],
   [uiPlan, 'source CSS total <= 250,000 bytes'],
   [uiPlan, '48 full-page images total'],
@@ -115,7 +115,10 @@ for (const [document, phrase] of [
   [cleanupAudit, 'editorial-v2.css'],
   [cleanupAudit, 'performance budgets'],
   [cleanupAudit, 'representative screenshot regression'],
-  [cleanupAudit, 'Canonical stable assets changed: 0']
+  [cleanupAudit, 'Canonical stable assets changed: 0'],
+  [cleanupAudit, 'Status: passed'],
+  [cleanupAudit, 'Source CSS total | 128,528 bytes'],
+  [cleanupAudit, '0 changed images out of 48']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
@@ -126,4 +129,4 @@ for (const source of [agents, roadmap, uiPlan]) {
   }
 }
 
-console.log('Current workstream valid: PR #271 and Gate V3-F are complete, PR #272 cleanup is active with measured build budgets and visual regression, PR #273 is next, 98 canonical assets are preserved, and production closure remains pending.');
+console.log('Current workstream valid: PR #272 cleanup is complete with passing measured budgets and pixel-identical visual regression, PR #273 production verification is active, 98 canonical assets are preserved, and Gate V3-G/V3-H remain pending.');

@@ -61,10 +61,10 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #271 representative all-family visual audit
+Latest completed: PR #272 accessibility, performance, and legacy cleanup
 Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #272 accessibility, performance, and legacy cleanup
-Next: PR #273 production verification and UI v3 closure
+Active: PR #273 production verification and UI v3 closure
+Next after closure: rebuild Growth D from latest main
 Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
@@ -79,7 +79,7 @@ Gate V3-H: pending production commit and public parity verification
 Production publication: automatic on main
 ```
 
-All public page families now use Editorial Ledger v3 structures. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. PR #272 removes only verified-unused v2 presentation assets, establishes build budgets, and proves no visual or accessibility regression. PR #273 remains the production closure step.
+All public page families now use Editorial Ledger v3 structures. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. PR #272 removed only verified-unused v2 presentation assets, established passing build budgets, and proved pixel-identical rendering with no accessibility regression. PR #273 is now the active production closure step.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
@@ -145,7 +145,7 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Representative screenshot sampling is the default.
 - Gate V3-F requires actual desktop and mobile image artifacts plus human review; static source checks alone are insufficient.
 - PR #271 established the passing baseline: 24 routes per device, 48 reviewed full-page images, and zero automated rendered failures.
-- PR #272 must rerun that baseline after removing the legacy layer.
+- PR #272 reran that baseline after removing the legacy layer and produced 48 pixel-identical images with zero rendered failures.
 - `scripts/validate-ui-v3-cleanup.mjs` is the source-level legacy and accessibility guard.
 - `scripts/audit-ui-v3-cleanup-performance.mjs` is the post-build asset and rendered-output budget guard.
 

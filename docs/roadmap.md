@@ -6,10 +6,10 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #271 — representative all-family visual audit
+Latest completed: PR #272 — accessibility, performance, and legacy cleanup
 Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
-Active: PR #272 — accessibility, performance, and legacy cleanup
-Next: PR #273 — production verification and UI v3 closure
+Active: PR #273 — production verification and UI v3 closure
+Next after UI closure: rebuild Growth D from latest main
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
@@ -45,7 +45,7 @@ Reference: Models, Glossary, and Updates use scan-friendly indexes
 Long-form: Methodology and About use readable columns and generated contents navigation
 Utility: Contact/Corrections and Support preserve reporting, wallet, and copy functions
 Mobile: compact information-preserving representations, controlled disclosures, keyboard support, copy feedback, reduced motion, and forced-colors support
-Performance: PR #272 establishes measured source/build budgets and legacy-output guards
+Performance: PR #272 established passing source/build budgets and legacy-output guards
 ```
 
 PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
@@ -75,6 +75,7 @@ PR #268 Editorial Ledger Guides and Editorial Article family
 PR #269 Reference, Long-form, and Utility page families
 PR #270 mobile and accessibility hardening
 PR #271 representative all-family visual audit and Gate V3-F
+PR #272 accessibility, performance, and legacy cleanup
 ```
 
 ## Fixed UI direction
@@ -173,7 +174,7 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 - passed all normal workflows, the rendered audit, human image review, and Gate V3-F;
 - established the continuing representative visual-regression contract.
 
-### PR #272 — accessibility, performance, and legacy cleanup — active
+### PR #272 — accessibility, performance, and legacy cleanup — complete
 
 - remove `PageHero.astro`, `MetricCard.astro`, and `editorial-v2.css` only after confirmed zero production references;
 - remove the superseded stylesheet import and obsolete Hero/KPI compatibility selectors from active v3 CSS;
@@ -183,7 +184,7 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 - rerun all normal workflows and the 48-image representative desktop/mobile regression;
 - change no canonical data, public route, logo, support destination, wallet value, or machine-readable schema.
 
-### PR #273 — production verification and UI v3 closure
+### PR #273 — production verification and UI v3 closure — active
 
 Verify automatic deployment, public provenance, machine-readable parity, production captures, Gate V3-G owner approval, Gate V3-H production parity, and the exact immutable release commit.
 

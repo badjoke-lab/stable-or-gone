@@ -27,11 +27,11 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #271 representative all-family visual audit
+Completed through: PR #272 accessibility, performance, and legacy cleanup
 Partial precursor: PR #266 Organization and Event row compaction
 Current UI: all page families use Editorial Ledger v3 structures
-Active work item: PR #272 accessibility, performance, and legacy cleanup
-Next implementation: PR #273 production verification and closure
+Active work item: PR #273 production verification and closure
+Next after closure: rebuild Growth D from latest main
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
@@ -114,7 +114,7 @@ Captured 24 representative routes per device, reviewed 48 full-page images, reco
 
 ## Active sequence
 
-### PR #272 — accessibility, performance, and legacy cleanup
+### PR #272 — accessibility, performance, and legacy cleanup — complete
 
 Remove only verified-unused production assets:
 
@@ -155,7 +155,7 @@ largest JavaScript asset <= 250,000 bytes
 built HTML files >= 350
 ```
 
-These are ceilings, not claims. Actual measurements must be recorded in the PR #272 audit before merge.
+The PR #272 audit recorded 128,528 source-CSS bytes, 111,078 built-CSS bytes, 16,203 built-JavaScript bytes, 378 HTML files, zero warnings, and zero failures. The 48 final images were pixel-identical to the prior passing capture.
 
 Required rendered regression:
 
@@ -164,7 +164,7 @@ Required rendered regression:
 - zero capture, overflow, broken-image, brand, legacy-marker, false-empty-state, H1, or main-landmark failures;
 - human review for hierarchy, clipping, density, controls, tables, disclosures, and logo use.
 
-### PR #273 — production verification and closure
+### PR #273 — production verification and closure — active
 
 - select and record the exact release candidate;
 - obtain Gate V3-G owner approval;
