@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('reserve-disclosure-basics');
 const title = 'How to Read Stablecoin Reserve Disclosures — Stable or Gone';
 const description = 'How to compare issuer statements, attestations, audits, protocol collateral data, and incident-specific reserve disclosures.';
 const jsonLd = {
@@ -13,13 +16,14 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/reserve-disclosure-basics/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Guide to reserve information</div>
-      <h1>How to read reserve disclosures</h1>
-      <p>Not every reserve page, attestation, audit, or protocol dashboard tells you the same thing. The source type, date, scope, and publisher all matter.</p>
-    </div>
-  </section>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="How to read reserve disclosures"
+    description="Not every reserve page, attestation, audit, or protocol dashboard tells you the same thing. The source type, date, scope, and publisher all matter."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
 
   <section class="panel registry">
     <div class="bar">Start with the stablecoin model</div>
