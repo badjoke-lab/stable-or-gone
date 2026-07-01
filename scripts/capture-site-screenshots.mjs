@@ -106,6 +106,49 @@ async function selectRoutes(routes, mode, samplesPerFamily) {
   return { routes: [...new Set(selected)].sort(), families };
 }
 
+async function measurePage(page) {
+  return page.evaluate(() => {
+    const visible = (element) => {
+      if (!(element instanceof HTMLElement)) return false;
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+    };
+    const root = document.documentElement;
+    const overflowPx = Math.max(0, root.scrollWidth - root.clientWidth);
+    const brokenImages = [...document.images].filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.getAttribute('src') ?? 'missing-src');
+    const approvedBrandPaths = new Set([
+      '/brand/sog-lockup-on-light.svg',
+      '/brand/sog-lockup-on-dark.svg',
+      '/brand/sog-mark-on-light.svg',
+      '/brand/sog-mark-on-dark.svg'
+    ]);
+    const brandViolations = [...document.querySelectorAll('.brand-lockup img')]
+      .map((image) => image.getAttribute('src') ?? '')
+      .filter((src) => {
+        try { return !approvedBrandPaths.has(new URL(src, location.origin).pathname); }
+        catch { return true; }
+      });
+    const legacyVisualSelectors = ['.page-hero', '.metric-card', '[class*="blue-purple"]', '[class*="glow-art"]', '[data-saas-dashboard]'];
+    const legacyVisualMarkers = legacyVisualSelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
+    const unexpectedEmptySelectors = ['[data-stablecoin-no-results]', '[data-organization-no-results]', '[data-event-no-results]'];
+    const unexpectedEmptyStates = unexpectedEmptySelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
+    return {
+      title: document.title,
+      h1Count: document.querySelectorAll('h1').length,
+      mainCount: document.querySelectorAll('main').length,
+      horizontalOverflowPx: overflowPx,
+      horizontalOverflow: overflowPx > 2,
+      brokenImages,
+      brandViolations,
+      legacyVisualMarkers,
+      unexpectedEmptyStates,
+      bodyHeight: Math.round(document.body.getBoundingClientRect().height),
+      viewportWidth: root.clientWidth
+    };
+  });
+}
+
 async function main() {
   const deviceName = argValue('device', 'desktop');
   if (!DEVICES[deviceName]) throw new Error(`Unsupported device: ${deviceName}`);
@@ -127,7 +170,7 @@ async function main() {
   await mkdir(device.dir, { recursive: true });
 
   const browser = await chromium.launch();
-  const context = await browser.newContext({ viewport: device.viewport, deviceScaleFactor: 1, isMobile: device.isMobile ?? false, hasTouch: device.hasTouch ?? false });
+  const context = await browser.newContext({ viewport: device.viewport, deviceScaleFactor: 1, isMobile: device.isMobile ?? false, hasTouch: device.hasTouch ?? false, reducedMotion: 'reduce' });
   const page = await context.newPage();
   const records = [];
   const failures = [];
@@ -138,8 +181,11 @@ async function main() {
     try {
       const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
       if (!response || !response.ok()) throw new Error(`HTTP ${response?.status() ?? 'no response'}`);
+      await page.evaluate(() => document.fonts?.ready);
+      const metrics = await measurePage(page);
       await page.screenshot({ path: file, fullPage: true });
-      records.push({ url, path: route, device: deviceName, file });
+      const screenshotBytes = (await stat(file)).size;
+      records.push({ url, path: route, device: deviceName, file, screenshot_bytes: screenshotBytes, metrics });
       console.log(`[${deviceName}] captured ${route}`);
     } catch (error) {
       failures.push({ url, path: route, device: deviceName, error: error.message });
@@ -149,6 +195,7 @@ async function main() {
 
   await browser.close();
   const manifest = {
+    schema_version: '2.0',
     generated_at: new Date().toISOString(),
     device: deviceName,
     viewport: device.viewport,
