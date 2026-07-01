@@ -61,23 +61,24 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #267 corrective Organizations and Events completion
+Latest completed: PR #268 Editorial Article Guides
 Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #268 Guides
-Next: PR #269 Reference and utility pages
+Active: PR #269 Reference and utility pages
+Next: PR #270 mobile and accessibility hardening
 Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
+Gate V3-D: pending PR #269 validation and merge
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-The shared shell, Home, Stablecoins register, Stablecoin dossiers, Organizations, and Events are v3. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed the four Organizations and Events page families and passed all 18 workflows. Guides, reference pages, final mobile behavior, visual audit, cleanup, and production closure remain migration work. Do not treat the current state as redesign completion.
+The shared shell, Home, Stablecoins register, Stablecoin dossiers, Organizations, Events, and Guides are v3. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed the four Organizations and Events page families. PR #268 completed the Guide archive and all nine Editorial Article routes. Reference and utility pages, final mobile behavior, visual audit, cleanup, and production closure remain migration work. Do not treat the current state as redesign completion.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
@@ -133,7 +134,7 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Stablecoin details use a research dossier.
 - Organizations use responsible-body records.
 - Events use incident/public-record files.
-- Guides use a distinct editorial article layout.
+- Guides use a distinct editorial article layout with explicit publication value states and on-page contents navigation.
 - Reference, long-form, and utility families must not collapse into one generic card template.
 - Mobile is a deliberate transformation and must retain protected information.
 - Representative screenshot sampling is the default.
