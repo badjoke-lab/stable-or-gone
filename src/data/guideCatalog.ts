@@ -37,12 +37,18 @@ export const guides: GuideEntry[] = [
   {
     slug: 'open-usd-reserve-revenue-model',
     title: 'Open USD Explained: Who Gets the Reserve Income?',
-    summary: 'How Open USD proposes to share reserve-generated revenue with participating businesses, how that differs from holder yield, and what remains unknown before launch.',
+    summary: 'Open Standard says partners will receive all reserve earnings after a small management fee. This guide separates that partner model from holder yield and records what is still unknown before launch.',
     category: 'core-concepts',
     publishedAt: '2026-07-01',
-    informationCurrentThrough: '2026-06-30',
-    updatedAt: null,
-    revisions: [],
+    informationCurrentThrough: '2026-07-01',
+    updatedAt: '2026-07-01',
+    revisions: [
+      {
+        date: '2026-07-01',
+        note: 'Updated from Open Standard’s official launch announcement: clarified that partners are promised all reserve earnings after a small management fee, added the no-artificial-volume-limit claim, recorded the partner-composed board claim, and added the official announcement URL.',
+        kind: 'correction'
+      }
+    ],
     featured: true,
     theme: 'neutral',
     regionLabel: 'Global'
