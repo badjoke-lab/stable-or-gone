@@ -1,0 +1,56 @@
+name: Apply PR 272 legacy CSS cleanup
+
+on:
+  push:
+    branches:
+      - ui-v3-accessibility-performance-legacy-cleanup
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ui-v3-accessibility-performance-legacy-cleanup
+      - name: Remove verified-unused legacy CSS
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          home_v2 = Path('src/styles/home-v2.css')
+          if home_v2.exists():
+              home_v2.unlink()
+
+          badge = Path('src/styles/identity-badge-policy.css')
+          badge_text = badge.read_text()
+          badge_text = re.sub(r'^\.metric-card__icon\s*\{[^}]*\}\s*\n?', '', badge_text, count=1, flags=re.M)
+          badge.write_text(badge_text)
+
+          shell = Path('src/styles/shell.css')
+          shell_text = shell.read_text()
+          updated, count = re.subn(
+              r'\n\.page-hero\s*\{[\s\S]*?\n\.support-banner\s*\{',
+              '\n.support-banner {',
+              shell_text,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit(f'Expected one legacy PageHero/MetricCard block, removed {count}')
+          shell.write_text(updated)
+          PY
+      - name: Commit cleanup
+        run: |
+          if git diff --quiet; then
+            echo "No cleanup changes remain."
+            exit 0
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/styles/home-v2.css src/styles/identity-badge-policy.css src/styles/shell.css
+          git commit -m "Remove remaining unused v2 CSS compatibility rules"
+          git push origin HEAD:ui-v3-accessibility-performance-legacy-cleanup
