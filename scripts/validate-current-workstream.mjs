@@ -20,6 +20,7 @@ import './validate-ui-v3-stablecoin-dossier.mjs';
 import './validate-organization-index-detail-implementation.mjs';
 import './validate-ui-v3-guides.mjs';
 import './validate-ui-v3-reference-utility.mjs';
+import './validate-ui-v3-representative-visual-audit.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -34,12 +35,13 @@ const dossierAudit = fs.readFileSync('docs/audits/ui-v3-stablecoin-dossier-2026-
 const correctiveAudit = fs.readFileSync('docs/audits/ui-v3-organizations-events-corrective-2026-07-01.md', 'utf8');
 const guideAudit = fs.readFileSync('docs/audits/ui-v3-guides-2026-07-01.md', 'utf8');
 const referenceAudit = fs.readFileSync('docs/audits/ui-v3-reference-utility-2026-07-01.md', 'utf8');
+const visualAudit = fs.readFileSync('docs/audits/ui-v3-representative-visual-audit-2026-07-02.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #269 — Reference, Long-form, and Utility pages',
+  'Latest completed: PR #270 — mobile and accessibility hardening',
   'Partial precursor: PR #266',
-  'Active: PR #270 — mobile and accessibility hardening',
-  'Next: PR #271 — representative all-family visual audit',
+  'Active: PR #271 — representative all-family visual audit',
+  'Next: PR #272 — accessibility, performance, and legacy cleanup',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
@@ -47,10 +49,11 @@ for (const phrase of [
   'Gate V3-B: passed',
   'Gate V3-C: passed',
   'Gate V3-D: passed',
-  'Gate V3-E: pending PR #270 validation and merge',
-  'PR #269 — Reference and utility pages — complete',
-  'PR #270 — mobile and accessibility hardening — active',
-  'PR #271 — representative all-family visual audit',
+  'Gate V3-E: passed',
+  'Gate V3-F: passed',
+  'PR #270 — mobile and accessibility hardening — complete',
+  'PR #271 — representative all-family visual audit — active; Gate V3-F passed',
+  'PR #272 — accessibility, performance, and legacy cleanup',
   'PR #273 — production verification and UI v3 closure',
   'Growth D to 100 records'
 ]) {
@@ -65,22 +68,24 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'Latest completed: PR #269 Reference, Long-form, and Utility pages'],
+  [agents, 'Latest completed: PR #270 mobile and accessibility hardening'],
   [agents, 'Partial precursor: PR #266 Organization and Event row compaction'],
-  [agents, 'Active: PR #270 mobile and accessibility hardening'],
-  [agents, 'Next: PR #271 representative all-family visual audit'],
+  [agents, 'Active: PR #271 representative all-family visual audit'],
+  [agents, 'Next: PR #272 accessibility, performance, and legacy cleanup'],
   [agents, 'Closure: PR #273 production verification and UI v3 closure'],
-  [agents, 'Gate V3-D: passed'],
-  [agents, 'Gate V3-E: pending PR #270 validation and merge'],
-  [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
+  [agents, 'Gate V3-E: passed'],
+  [agents, 'Gate V3-F: passed'],
+  [agents, '48 reviewed full-page images'],
+  [agents, 'A normal pull request must not wait for Cloudflare Pages'],
   [agents, 'The old PR #251 must not be merged as-is'],
   [design, 'Status: canonical design overview'],
   [design, 'Visual family: Editorial Ledger'],
   [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Completed through: PR #269 Reference, Long-form, and Utility pages'],
-  [uiPlan, 'Active work item: PR #270 mobile and accessibility hardening'],
-  [uiPlan, 'Next implementation: PR #271 representative all-family visual audit'],
+  [uiPlan, 'Completed through: PR #270 mobile and accessibility hardening'],
+  [uiPlan, 'Active work item: PR #271 representative all-family visual audit'],
+  [uiPlan, 'Next implementation: PR #272 accessibility, performance, and legacy cleanup'],
+  [uiPlan, 'Gate V3-F: passed'],
   [uiPlan, 'PR #273 — production verification and closure'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
   [uiV3, 'The default public surface is light, not dark'],
@@ -95,8 +100,14 @@ for (const [document, phrase] of [
   [guideAudit, 'Guide article copy and source URLs changed: 0'],
   [referenceAudit, 'Roadmap item: PR #269'],
   [referenceAudit, '`/contact/` remains the canonical Corrections and submissions route'],
-  [referenceAudit, 'Support wallet assets, networks, and addresses changed: 0'],
-  [referenceAudit, 'Gate V3-D may pass only after Astro check']
+  [visualAudit, 'Roadmap item: PR #271'],
+  [visualAudit, 'Gate: V3-F'],
+  [visualAudit, 'Status: passed'],
+  [visualAudit, 'Run ID: 28538275448'],
+  [visualAudit, 'total full-page images reviewed: 48'],
+  [visualAudit, 'zero automated failures'],
+  [visualAudit, 'Gate V3-F passed'],
+  [visualAudit, 'Canonical stable assets changed: 0']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
@@ -107,4 +118,4 @@ for (const source of [agents, roadmap, uiPlan]) {
   }
 }
 
-console.log('Current workstream valid: PR #269 is complete, Gate V3-D passed, PR #270 mobile and accessibility hardening is active, 98 canonical assets are preserved, and closure remains PR #273.');
+console.log('Current workstream valid: PR #270 and Gate V3-E are complete, PR #271 rendered audit passed Gate V3-F, PR #272 is next, 98 canonical assets are preserved, and closure remains PR #273.');

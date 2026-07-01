@@ -1,15 +1,15 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-01  
+Updated: 2026-07-02  
 Status: canonical execution schedule
 
 ## Current position
 
 ```text
-Latest completed: PR #269 — Reference, Long-form, and Utility pages
+Latest completed: PR #270 — mobile and accessibility hardening
 Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
-Active: PR #270 — mobile and accessibility hardening
-Next: PR #271 — representative all-family visual audit
+Active: PR #271 — representative all-family visual audit
+Next: PR #272 — accessibility, performance, and legacy cleanup
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
@@ -17,8 +17,8 @@ Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
 Gate V3-D: passed
-Gate V3-E: pending PR #270 validation and merge
-Gate V3-F: not passed
+Gate V3-E: passed
+Gate V3-F: passed
 Production publication: automatic on main
 ```
 
@@ -31,7 +31,7 @@ Canonical stable assets: 98
 Organizations and events: Editorial Ledger registers and record files
 Guide publication: metadata-driven
 Production deployment: automatic after merge to main
-Screenshot audit: representative desktop and mobile modes available
+Screenshot audit: desktop and mobile representative Gate V3-F audit passed
 Shared shell: Editorial Ledger v3
 Home: Editorial Ledger registry front page
 Stablecoins: seven-column table-first register, 20 records per page
@@ -42,6 +42,7 @@ Guides: Editorial Ledger archive and nine Editorial Article routes with on-page 
 Reference: Models, Glossary, and Updates use scan-friendly indexes
 Long-form: Methodology and About use readable columns and generated contents navigation
 Utility: Contact/Corrections and Support preserve reporting, wallet, and copy functions
+Mobile: compact information-preserving representations, controlled disclosures, keyboard support, copy feedback, reduced motion, and forced-colors support
 ```
 
 PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
@@ -69,6 +70,7 @@ PR #266 partial Organization and Event row compaction
 PR #267 corrective Editorial Ledger Organizations and Events completion
 PR #268 Editorial Ledger Guides and Editorial Article family
 PR #269 Reference, Long-form, and Utility page families
+PR #270 mobile and accessibility hardening
 ```
 
 ## Fixed UI direction
@@ -118,7 +120,6 @@ Replaced the hero, KPI cards, filter panels, and nine-column dashboard table wit
 
 ### PR #265 — Stablecoin dossier — complete
 
-- removed PageHero, six MetricCards, circular glow art, dark panel navigation, and the repeated gradient-card stack;
 - added a ruled dossier masthead and protected fact ledger;
 - ordered the body as assessment, organizations/control, mechanism, reserve/redemption, deployments/legal context, lifecycle history, evidence, known unknowns, and related records;
 - preserved relationships, value states, deployments, events, evidence, reserve, regulatory, and uncertainty fields;
@@ -132,34 +133,42 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 
 - rebuilt Organizations as a six-column responsible-body register and evidence-backed record files;
 - rebuilt Events as a six-column chronological register and incident/public-record files;
-- preserved search, five filters per index, sorting, URL state, zero-result behavior, desktop tables, compact mobile records, taxonomy, relationships, typed details, subjects, evidence, recovery, value states, and known unknowns;
-- passed all 18 pull-request workflows;
-- changed no canonical records, public routes, logo assets, or machine-readable schema.
+- preserved search, filters, sorting, URL state, responsive records, taxonomy, relationships, typed details, subjects, evidence, recovery, value states, and known unknowns;
+- passed all 18 pull-request workflows and Gate V3-C.
 
 ### PR #268 — Guides — complete
 
 - replaced the Guides hero, KPI strip, category panels, and repeated mini-card grid with an Editorial Ledger guide archive;
 - converted all nine guide routes to a shared Editorial Article family;
-- added readable article columns, desktop rails, generated contents navigation, mobile disclosure, editorial tables, related records, revision history, glossary, methodology, and correction access;
-- preserved article claims, source URLs, guide catalog records, JSON-LD, sitemap coverage, related-guide links, routes, logos, and machine-readable schemas.
+- added readable article columns, generated contents navigation, mobile disclosure, editorial tables, related records, revision history, glossary, methodology, and correction access;
+- preserved article claims, source URLs, metadata, JSON-LD, sitemap coverage, related-guide links, routes, logos, and schemas.
 
 ### PR #269 — Reference and utility pages — complete
 
 - converted Models, Glossary, and Updates into distinct scan-friendly Reference indexes;
 - converted Methodology and About into Long-form pages with readable width and generated contents navigation;
 - converted Contact/Corrections and Support into Utility pages with restrained action hierarchy;
-- retained `/contact/` as the canonical corrections route and introduced no duplicate `/corrections/` route;
-- preserved Google Form and GitHub reporting paths, all nine support assets, networks, addresses, copy controls, fallback behavior, warnings, update history, public routes, and data;
-- updated the meaningful-change collector to follow the explicit Editorial Updates table marker while preserving the four-column contract;
+- retained `/contact/` as the canonical corrections route;
+- preserved reporting paths, support assets, networks, addresses, copy controls, fallback behavior, warnings, update history, public routes, and data;
 - passed all 18 pull-request workflows and Gate V3-D.
 
-### PR #270 — mobile and accessibility hardening — active
+### PR #270 — mobile and accessibility hardening — complete
 
-Preserve material fields at 320px and 200 percent zoom with page-specific compact records, controlled navigation and contents disclosure, keyboard support, visible focus, reduced motion, forced colors, and information parity.
+- preserved all protected material fields at 320px and 200 percent zoom;
+- added controlled navigation and contents disclosures with Escape focus return;
+- retained twenty-five protected table contracts and compact mobile representations;
+- added long-identifier wrapping, copy controls, polite success/failure feedback, visible focus, minimum targets, reduced motion, and forced-colors coverage;
+- passed all 18 pull-request workflows, Astro check, production build, public consistency, and Gate V3-E.
 
-### PR #271 — representative all-family visual audit
+### PR #271 — representative all-family visual audit — active; Gate V3-F passed
 
-Capture desktop and mobile representatives; inspect all unique pages and three samples per repeated detail family; fix overflow, false empty states, hierarchy, logo misuse, and remaining SaaS styling. Gate V3-F remains pending until this passes.
+- captured all twelve unique public pages on desktop and mobile;
+- captured three stablecoin, organization, event, and guide detail representatives per device;
+- measured rendered horizontal overflow, H1 and main counts, broken images, approved brand use, legacy visual markers, and false initial empty states;
+- uploaded 48 screenshots, manifests, archives, and machine-readable/Markdown Gate V3-F reports;
+- reviewed the top, middle, and bottom regions of every image for hierarchy, clipping, density, false empty states, logo misuse, and remaining SaaS styling;
+- recorded zero automated failures and no visual defect requiring a source or CSS correction;
+- passed Gate V3-F.
 
 ### PR #272 — accessibility, performance, and legacy cleanup
 
@@ -176,8 +185,8 @@ Gate V3-A  specification and visual authority aligned — passed
 Gate V3-B  shared shell complete — passed
 Gate V3-C  core registry page families complete — passed
 Gate V3-D  editorial/reference families complete — passed
-Gate V3-E  mobile and accessibility complete — pending PR #270 validation and merge
-Gate V3-F  representative visual audit passed — pending
+Gate V3-E  mobile and accessibility complete — passed
+Gate V3-F  representative visual audit passed — passed
 Gate V3-G  owner approves exact release candidate — pending
 Gate V3-H  production commit and public parity verified — pending
 ```

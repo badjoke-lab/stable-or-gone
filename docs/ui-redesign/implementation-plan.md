@@ -1,7 +1,7 @@
 # Stable or Gone UI implementation plan v3
 
 Status: canonical implementation schedule — active  
-Updated: 2026-07-01  
+Updated: 2026-07-02  
 Registry checkpoint: 98 canonical stable assets  
 Visual direction: Editorial Ledger
 
@@ -27,11 +27,11 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #269 Reference, Long-form, and Utility pages
+Completed through: PR #270 mobile and accessibility hardening
 Partial precursor: PR #266 Organization and Event row compaction
 Current UI: all page families use Editorial Ledger v3 structures
-Active work item: PR #270 mobile and accessibility hardening
-Next implementation: PR #271 representative all-family visual audit
+Active work item: PR #271 representative all-family visual audit
+Next implementation: PR #272 accessibility, performance, and legacy cleanup
 Closure: PR #273 production verification and closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
@@ -39,8 +39,8 @@ Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
 Gate V3-D: passed
-Gate V3-E: pending PR #270 validation and merge
-Gate V3-F: not passed
+Gate V3-E: passed
+Gate V3-F: passed
 Release candidate: not selected
 Production publication: automatic on main
 ```
@@ -105,30 +105,42 @@ Converted the guide archive and all nine routes to a shared Editorial Article fa
 - converted Methodology and About into Long-form pages with readable width and generated contents navigation;
 - converted Contact/Corrections and Support into Utility pages with clear action hierarchy;
 - retained `/contact/` as the canonical corrections route;
-- preserved Google Form and GitHub paths, all support assets, networks, addresses, copy controls, fallback behavior, warnings, update records, and routes;
-- updated the change-history collector to follow an explicit Editorial Updates table marker without changing the legacy four-column contract;
-- connected `validate-ui-v3-reference-utility.mjs` through the existing normal build gate;
+- preserved Google Form and GitHub paths, support assets, networks, addresses, copy controls, fallback behavior, warnings, update records, and routes;
 - passed all 18 workflows and Gate V3-D.
-
-## Active sequence
 
 ### PR #270 — mobile and accessibility hardening
 
-Requirements:
+- tested and protected all page families at 320px width and 200 percent zoom;
+- preserved labels, values, protected fields, and twenty-five table contracts;
+- added controlled navigation and contents disclosure, Escape focus return, keyboard support, visible focus, 44px targets, result and copy announcements, long-value wrapping, reduced motion, and forced-colors coverage;
+- passed all 18 workflows, Astro check, production build, output verification, public-layer verification, and Gate V3-E.
 
-- test every page family at 320px width and 200 percent zoom;
-- keep labels attached to values and preserve information parity;
-- use compact records or deliberate scroll-preserved tables rather than generic column hiding;
-- verify mobile navigation, guide contents, long-form contents, filters, sorts, comparison, pagination, zero-result states, forms, copy controls, and local anchors;
-- verify keyboard-only operation, logical focus order, visible focus, escape behavior, and minimum 44px interactive targets;
-- verify announcements for result changes and copy results;
-- verify reduced motion, forced colors, overflow wrapping, and long identifiers;
-- add or update deterministic contracts where page-family transformations introduced new sources or representations;
-- pass Gate V3-E only after all mobile and accessibility checks succeed.
+## Active sequence
 
-### PR #271 — representative visual audit
+### PR #271 — representative all-family visual audit — Gate V3-F passed
 
-Capture desktop and mobile representatives for Home, every unique index/project page, three stablecoin details, three organization details, three event details, three guides, and every unique reference/utility page. Gate V3-F passes only after overflow, false empty states, hierarchy, logo misuse, and remaining SaaS styling are resolved.
+Captured on desktop and mobile:
+
+- all twelve unique index, reference, long-form, and utility routes;
+- three stablecoin details;
+- three organization details;
+- three event details;
+- three guide articles.
+
+Rendered results:
+
+- 378 public routes discovered;
+- 24 routes selected and 24 captured per device;
+- 48 full-page images reviewed;
+- zero capture failures;
+- zero horizontal overflow;
+- zero broken images;
+- zero unapproved brand assets;
+- zero visible legacy PageHero, MetricCard, blue-purple glow, or SaaS-dashboard markers;
+- zero false initial zero-result states;
+- exactly one `main` and one `h1` on every selected page.
+
+Human review confirmed clear hierarchy and reading order, no clipped labels or values, no false empty states, no logo misuse, no remaining dashboard composition, usable density, and legible mobile table/disclosure behavior. No source or CSS correction was required. Gate V3-F passed.
 
 ### PR #272 — accessibility, performance, and legacy cleanup
 
@@ -139,7 +151,7 @@ Remove unused v2 CSS and obsolete components only after replacements exist. Veri
 - verify automatic main deployment for the intended commit;
 - verify provenance and machine-readable parity;
 - verify representative production captures;
-- record Gate V3-F through Gate V3-H and the immutable production commit;
+- record Gate V3-G through Gate V3-H and the immutable production commit;
 - do not claim UI v3 completion before Gate V3-H.
 
 ## Validation rule
@@ -153,6 +165,7 @@ npm run validate:ui-v3-stablecoin-index
 npm run validate:ui-v3-stablecoin-detail
 node scripts/validate-ui-v3-guides.mjs
 node scripts/validate-ui-v3-reference-utility.mjs
+node scripts/validate-ui-v3-representative-visual-audit.mjs
 npm run validate:active-workstream
 npm run validate:mobile-information
 npm run check
@@ -162,7 +175,7 @@ npm run verify:consistency
 
 ## Screenshot rule
 
-Representative capture is the default. Repeated detail families are sampled rather than exhaustively captured. Full capture remains available for targeted debugging.
+Representative capture is the default. Repeated detail families are sampled at three records each rather than exhaustively captured. Full capture remains available for targeted debugging. PR #271 established the pull-request desktop/mobile rendered audit as the continuing visual regression contract.
 
 ## Paused non-UI work
 

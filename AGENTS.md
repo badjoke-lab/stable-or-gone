@@ -61,10 +61,10 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #269 Reference, Long-form, and Utility pages
+Latest completed: PR #270 mobile and accessibility hardening
 Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #270 mobile and accessibility hardening
-Next: PR #271 representative all-family visual audit
+Active: PR #271 representative all-family visual audit
+Next: PR #272 accessibility, performance, and legacy cleanup
 Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
@@ -72,14 +72,14 @@ Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
 Gate V3-D: passed
-Gate V3-E: pending PR #270 validation and merge
-Gate V3-F: not passed
+Gate V3-E: passed
+Gate V3-F: passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-All page families now use Editorial Ledger v3 structures. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages while preserving `/contact/` as the Corrections route and all Support wallet functions. Mobile hardening, visual audit, cleanup, and production closure remain. Do not treat the current state as redesign completion.
+All page families now use Editorial Ledger v3 structures. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening and passed Gate V3-E. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. Cleanup and production closure remain. Do not treat the current state as redesign completion.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
@@ -141,6 +141,8 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Contact/Corrections and Support use the Utility family and must preserve reporting and payment functions.
 - Mobile is a deliberate transformation and must retain protected information.
 - Representative screenshot sampling is the default.
+- Gate V3-F requires actual desktop and mobile image artifacts plus human review; static source checks alone are insufficient.
+- PR #271 established the passing rendered visual regression baseline: 24 routes per device, 48 reviewed full-page images, and zero automated rendered failures.
 
 ## Data and quality rules
 
@@ -168,70 +170,3 @@ Development and production publication are connected by the automatic `main` pub
 
 - GitHub CI success is the completion condition for pull-request development work.
 - A normal pull request must not wait for Cloudflare Pages.
-- A normal `main` merge triggers the production deployment workflow automatically.
-- Ordinary guide, copy, UI, workflow, validation, and reviewed data changes deploy through `.github/workflows/deploy-production.yml` on `main` push.
-- Manual deployment is a fallback only for infrastructure interruption or reserved exceptions such as DNS, secrets, Cloudflare account changes, destructive schema migration, mass deletion, major route removal, or emergency rollback.
-- Production success may not be claimed before the deployed commit and public parity are verified.
-
-The canonical policy is `docs/deployment-policy.md`.
-
-## Prohibited behavior
-
-Do not:
-
-- enable Cloudflare Pages source-build publication outside the approved GitHub Actions upload path;
-- add production deployment commands to pull-request CI or data-only workflows;
-- use no-op commits to trigger publication;
-- retry an obsolete deployment after source changes;
-- reduce data, evidence, or validation requirements;
-- invent undocumented taxonomy, route, UI, monitoring, baseline, or missing-value behavior;
-- use externally hosted or unverified logos;
-- create public filter categories from arbitrary free-text values;
-- hide material mobile information through generic numbered-column rules;
-- add a duplicate `/corrections/` route when `/contact/` is the canonical Corrections route;
-- alter contact links or payment addresses through styling work;
-- change the approved PR sequence without updating the plan and roadmap;
-- use conversation history as a substitute for repository specifications;
-- automatically publish monitored candidates into canonical data;
-- let a monitoring execution mutate its accepted baseline;
-- claim publication before automatic deployment for the intended main commit succeeds.
-
-## Deployment classifications
-
-Every pull request must use one classification:
-
-1. **Automatic production deployment on main** — default for ordinary reviewed changes.
-2. **Manual approval required before merge or dispatch** — only for DNS, secrets, Cloudflare account, destructive schema migration, mass deletion, or major route removal.
-3. **Emergency production deployment required** — only for verified public breakage, security issues, materially incorrect public state, or rollback.
-
-## Pull-request discipline
-
-- Start from the latest confirmed `main`.
-- Keep each PR within one approved responsibility.
-- Cite the exact active plan item and relevant canonical specification.
-- Run normal repository validation before merge.
-- Remove temporary artifacts unless the active plan retains them.
-- Update `docs/roadmap.md` when current position changes.
-- Update canonical specifications when semantics, routes, hierarchy, missing-value rules, monitoring, baseline, machine-readable output, or visual authority changes.
-- Preserve canonical record-group counts unless an explicit audited data PR approves a change.
-- State the deployment classification in the PR body.
-
-Every non-trivial PR body must include:
-
-```text
-Specification references
-Roadmap item
-Scope and non-scope
-Data-preservation checks
-Validation performed
-Deployment classification
-```
-
-## Current publication architecture
-
-```text
-GitHub Actions validates pull requests
--> a main push runs the production deployment workflow
--> Wrangler uploads the prebuilt dist directory
--> production consistency verifies the public origin
-```
