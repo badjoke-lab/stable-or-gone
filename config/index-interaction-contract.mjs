@@ -44,6 +44,15 @@ export const indexInteractionContracts = Object.freeze([
       sort('launch_newest', 'launch_date', 'desc', 'last'),
       sort('evidence_most', 'public_source_identity_count', 'desc')
     ]),
+    pagination: Object.freeze({
+      enabled: true,
+      query_param: 'page',
+      page_size: 20,
+      resets_on_search_filter_or_sort: true,
+      browser_history_restores_page: true,
+      server_rendered_first_page: true,
+      all_records_remain_in_html_for_no_script_and_link_parity: true
+    }),
     mobile_row_fields: Object.freeze([
       'canonical_name', 'symbol', 'lifecycle_status', 'issuance_status',
       'reference_comparison_category', 'public_model_category',
@@ -142,6 +151,7 @@ export const sharedInteractionPolicy = Object.freeze({
   clear_all_required: true,
   per_filter_clear_required: true,
   result_count_required: true,
+  visible_range_required_for_paginated_indexes: true,
   zero_result_state_required: true,
   zero_result_state_must_offer_clear: true,
   keyboard_operable: true,
@@ -150,8 +160,6 @@ export const sharedInteractionPolicy = Object.freeze({
   primary_relationship_does_not_replace_multi_role_summary: true,
   server_rendered_unfiltered_fallback_required: true,
   javascript_enhancement_only: true,
-  implementation_deferred: true,
-  implementation_starts_at_pr: 24,
   route_changes_allowed: false
 });
 
