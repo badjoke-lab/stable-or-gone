@@ -14,7 +14,7 @@ const { category, title, description, publishedAt, informationCurrentThrough, up
   <h1>{title}</h1>
   <p class="guide-article-deck">{description}</p>
   <dl class="guide-article-meta" aria-label="Guide publication information">
-    <div><dt>Published</dt><dd>{publishedAt ?? 'Editorial draft'}</dd></div>
+    <div><dt>Published</dt><dd>{publishedAt ?? 'Publication date not recorded'}</dd></div>
     <div><dt>Information current through</dt><dd>{informationCurrentThrough}</dd></div>
     <div><dt>Last updated</dt><dd>{updatedAt ?? publishedAt ?? 'Not recorded'}</dd></div>
   </dl>
