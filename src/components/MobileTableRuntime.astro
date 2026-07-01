@@ -79,6 +79,41 @@
     return list;
   };
 
+  const fallbackCopy = (value: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    return copied;
+  };
+
+  const bindGeneratedCopyControls = () => {
+    document.querySelectorAll('[data-generated-mobile-table] [data-copy-value]').forEach((control) => {
+      if (!(control instanceof HTMLButtonElement) || control.dataset.copyBound === 'true') return;
+      control.dataset.copyBound = 'true';
+      control.addEventListener('click', async () => {
+        const value = control.dataset.copyValue ?? '';
+        const original = control.textContent ?? 'Copy full identifier';
+        let copied = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(value); copied = true; }
+          else copied = fallbackCopy(value);
+        } catch { copied = fallbackCopy(value); }
+        const container = control.closest('[data-copy-container]');
+        const feedback = container?.parentElement?.querySelector('[data-copy-feedback]');
+        control.textContent = copied ? 'Copied' : 'Copy failed';
+        control.dataset.copyState = copied ? 'success' : 'error';
+        if (feedback instanceof HTMLElement) feedback.textContent = copied ? 'Full identifier copied to clipboard.' : 'Could not copy automatically. Select and copy the full identifier manually.';
+        window.setTimeout(() => { control.textContent = original; delete control.dataset.copyState; }, 1800);
+      });
+    });
+  };
+
   const buildMobileTableRepresentations = () => {
     document.querySelectorAll('table[data-table-kind][data-mobile-table="scroll-preserve"]').forEach((table) => {
       if (!(table instanceof HTMLTableElement)) return;
@@ -88,6 +123,7 @@
       const representation = hasColumnHeaders ? createRecordRepresentation(table, kind) : createDefinitionRepresentation(table, kind);
       table.insertAdjacentElement('afterend', representation);
     });
+    bindGeneratedCopyControls();
   };
 
   buildMobileTableRepresentations();
