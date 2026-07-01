@@ -12,7 +12,7 @@
     const button = document.createElement('button');
     button.type = 'button';
     button.textContent = 'Copy full identifier';
-    button.dataset.copyValue = value;
+    button.dataset.generatedCopyValue = value;
     button.setAttribute('aria-label', `Copy full ${label.toLowerCase()}`);
     const feedback = document.createElement('p');
     feedback.className = 'mobile-copy-feedback';
@@ -93,11 +93,11 @@
   };
 
   const bindGeneratedCopyControls = () => {
-    document.querySelectorAll('[data-generated-mobile-table] [data-copy-value]').forEach((control) => {
+    document.querySelectorAll('[data-generated-mobile-table] [data-generated-copy-value]').forEach((control) => {
       if (!(control instanceof HTMLButtonElement) || control.dataset.copyBound === 'true') return;
       control.dataset.copyBound = 'true';
       control.addEventListener('click', async () => {
-        const value = control.dataset.copyValue ?? '';
+        const value = control.dataset.generatedCopyValue ?? '';
         const original = control.textContent ?? 'Copy full identifier';
         let copied = false;
         try {
