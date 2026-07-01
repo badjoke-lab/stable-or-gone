@@ -22,6 +22,7 @@ import './validate-ui-v3-guides.mjs';
 import './validate-ui-v3-reference-utility.mjs';
 import './validate-ui-v3-representative-visual-audit.mjs';
 import './validate-ui-v3-cleanup.mjs';
+import './validate-ui-v3-production-closure.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -38,6 +39,7 @@ const guideAudit = fs.readFileSync('docs/audits/ui-v3-guides-2026-07-01.md', 'ut
 const referenceAudit = fs.readFileSync('docs/audits/ui-v3-reference-utility-2026-07-01.md', 'utf8');
 const visualAudit = fs.readFileSync('docs/audits/ui-v3-representative-visual-audit-2026-07-02.md', 'utf8');
 const cleanupAudit = fs.readFileSync('docs/audits/ui-v3-accessibility-performance-legacy-cleanup-2026-07-02.md', 'utf8');
+const closureAudit = fs.readFileSync('docs/audits/ui-v3-production-closure-2026-07-02.md', 'utf8');
 
 for (const phrase of [
   'Latest completed: PR #272 — accessibility, performance, and legacy cleanup',
@@ -110,15 +112,16 @@ for (const [document, phrase] of [
   [visualAudit, 'Gate V3-F passed'],
   [visualAudit, 'total full-page images reviewed: 48'],
   [cleanupAudit, 'Roadmap item: PR #272'],
-  [cleanupAudit, 'PageHero.astro'],
-  [cleanupAudit, 'MetricCard.astro'],
-  [cleanupAudit, 'editorial-v2.css'],
-  [cleanupAudit, 'performance budgets'],
-  [cleanupAudit, 'representative screenshot regression'],
-  [cleanupAudit, 'Canonical stable assets changed: 0'],
   [cleanupAudit, 'Status: passed'],
   [cleanupAudit, 'Source CSS total | 128,528 bytes'],
-  [cleanupAudit, '0 changed images out of 48']
+  [cleanupAudit, '0 changed images out of 48'],
+  [closureAudit, 'Roadmap item: PR #273'],
+  [closureAudit, 'Gate V3-G'],
+  [closureAudit, 'Gate V3-H'],
+  [closureAudit, 'The PR head becomes the release candidate'],
+  [closureAudit, 'exact immutable commit'],
+  [closureAudit, 'Production representative screenshots'],
+  [closureAudit, 'Canonical stable assets changed: 0']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
@@ -129,4 +132,4 @@ for (const source of [agents, roadmap, uiPlan]) {
   }
 }
 
-console.log('Current workstream valid: PR #272 cleanup is complete with passing measured budgets and pixel-identical visual regression, PR #273 production verification is active, 98 canonical assets are preserved, and Gate V3-G/V3-H remain pending.');
+console.log('Current workstream valid: PR #272 cleanup is complete, PR #273 exact-head production closure is active, 98 canonical assets are preserved, and Gate V3-G/V3-H remain pending until the exact head is public and verified.');
