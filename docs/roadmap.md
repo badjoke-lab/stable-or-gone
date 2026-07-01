@@ -1,96 +1,207 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-06-30
+Updated: 2026-07-01  
 Status: canonical execution schedule
 
 ## Current position
 
 ```text
-Latest completed: PR #250
-Active: PR #251 — Growth D
-Next: PR #252 — 100-record identity audit
-Stable assets: 98
-Gate V2-F: not passed
-Record growth: Growth D authorized for corrected candidates only
+Latest completed: PR #260 — Open USD guide source correction
+Active: PR #261 — Editorial Ledger UI v3 specification and schedule alignment
+Next: PR #262 — shared Editorial Ledger shell
+Canonical stable assets: 98
+Open stale draft: PR #251 — Growth D; do not merge as-is
+Active workstream: UI remediation
+Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
-UI review remains paused. The paused review does not block automatic publication of ordinary merged guide, copy, UI, workflow, validation, or reviewed data changes.
+The previous UI v2 implementation through PR #216 is an intermediate repository state. Owner review has now resumed and rejected the Modern Data Product visual direction as an acceptable final presentation. The replacement direction is Editorial Ledger.
 
-PR #249 was an owner-requested editorial interruption. It added one dated regulation guide within the existing Guides / Regulation structure, changed no canonical registry records, and shifted the remaining numbered sequence by one without changing its substantive scope.
+The UI remediation is now the binding next workstream. Growth D, the 100-record audit, and non-UI release preparation are paused until the UI remediation and representative desktop/mobile audit are complete.
+
+## Current factual baseline
+
+```text
+Canonical stable assets: 98
+Organizations: generated from current canonical main
+Events: generated from current canonical main
+Guide publication: metadata-driven
+Production deployment: automatic after merge to main
+Screenshot audit: representative mode available for desktop and mobile
+```
+
+PR #251 was created from an older main base and contains the former Growth D implementation. It is not the active workstream and must not be merged as-is. After UI completion, Growth D must be rebuilt cleanly from the then-current main using only reviewed candidate data.
 
 ## Completed work
 
 ```text
-PR #207-#216 UI implementation before owner review
-PR #212 Organizations index and detail
+PR #207-#216 UI v2 implementation before final owner review
 PR #217-#229 record and deployment quality
 PR #230-#245 monitoring foundation and coverage
-PR #246 candidate selection
-PR #247 corrected selection and Growth A
-PR #248 Growth B
-PR #249 UK stablecoin capital rules guide
-PR #250 Growth C
+PR #246 final-eight candidate audit
+PR #247 Growth A: 92 -> 94
+PR #248 Growth B: 94 -> 96
+PR #249 UK stablecoin capital-rules guide
+PR #250 Growth C: 96 -> 98
+PR #252-#255 guide-publication and automatic-deployment corrections
+PR #256-#257 screenshot capture and one-click audit workflow
+PR #258-#260 guide publication and Open USD editorial corrections
 ```
 
-## Monitoring snapshot
+## UI v3 direction
+
+Canonical visual authority:
 
 ```text
-Enabled official sources: 24
-Covered stable assets: 16
-Uncovered stable assets: 82
-Pending baselines: 24
-Accepted baselines: 0
-Public monitoring output: false
-Production publication: automatic on main
+docs/architecture/approved-editorial-ledger-ui-v3.md
+docs/ui-redesign/approved-mocks-v3/README.md
+docs/ui-redesign/implementation-plan.md
 ```
 
-## Editorial interruption
+The v3 direction is fixed as:
 
 ```text
-PR #249 UK stablecoin capital rules guide — complete
-Canonical stable-asset count change: 0
-New guide category: no
-New top-level route family: no
-Existing route family: /guides/
-Production publication: automatic after merge to main
+Editorial Ledger
+paper-like light background
+dark ink
+muted dark-red accent
+thin rules
+minimal corner radius
+no decorative shadows
+existing approved S/G logo only
+no SaaS dashboard composition
+no oversized hero
+no KPI-card row
+no repeated rounded-card grid
 ```
 
-## Growth sequence
+## Active UI remediation sequence
+
+### PR #261 — specification and schedule alignment
+
+- establish UI v3 as canonical visual authority;
+- mark UI v2 visual references as superseded;
+- update roadmap, governance, required reading, and active-workstream validation;
+- preserve all canonical data and public routes.
+
+### PR #262 — shared Editorial Ledger shell
+
+- use the existing approved S/G logo assets;
+- replace dark SaaS shell tokens with paper, ink, rule, and restrained-accent tokens;
+- simplify primary navigation;
+- replace repeated card primitives with editorial layout primitives;
+- retain accessibility foundations.
+
+### PR #263 — Home
+
+- remove oversized hero and KPI cards;
+- implement masthead, one-line registry summary, latest material changes, current registry status, recent updates, and guides/reference entrypoints;
+- preserve canonical counts and deterministic record selection.
+
+### PR #264 — Stablecoins register
+
+- implement table-first public-register composition;
+- compact search/filter/sort row;
+- add bounded pagination or equivalent deliberate incremental rendering;
+- prevent uncontrolled word wrapping;
+- correct false empty-state behavior.
+
+### PR #265 — Stablecoin dossier
+
+- replace stacked-card detail pages with a research dossier hierarchy;
+- prioritize current state, mechanism, history, evidence, and known unknowns;
+- preserve every protected canonical field;
+- test low-, medium-, and high-information records.
+
+### PR #266 — Organizations and Events
+
+- render organizations as responsible-body records, not corporate profile cards;
+- render events as incident/public-record files, not alert dashboards;
+- repair index density and false empty states;
+- retain all relationships, evidence, and value states.
+
+### PR #267 — Guides
+
+- separate editorial article layout from registry records;
+- use a readable article column, table of contents, notes, tables, and related-guide rail;
+- preserve all published guide routes and metadata-driven visibility.
+
+### PR #268 — Reference and utility pages
+
+- align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact;
+- use distinct Reference, Long-form, and Utility page families;
+- remove remaining UI v2 card composition.
+
+### PR #269 — mobile transformation
+
+- implement page-specific compact records and long-form navigation;
+- preserve material fields;
+- support 320px width, 200 percent zoom, keyboard, focus, reduced motion, and forced colors.
+
+### PR #270 — representative all-family visual audit
+
+- run desktop representative capture;
+- run mobile representative capture;
+- inspect all unique pages plus three samples per repeated detail family;
+- fix overflow, false empty states, broken hierarchy, logo misuse, and legacy SaaS remnants;
+- Gate V3-F remains pending until this PR passes.
+
+### PR #271 — accessibility, performance, and legacy cleanup
+
+- remove unused UI v2 CSS and obsolete components only after replacement is complete;
+- verify headings, tables, labels, contrast, focus, and keyboard operation;
+- verify canonical count and route parity.
+
+### PR #272 — production verification and UI v3 closure
+
+- verify automatic main deployment for the intended commit;
+- verify public provenance and machine-readable parity;
+- verify representative desktop/mobile production captures;
+- record Gate V3-F result and exact immutable release commit.
+
+## UI acceptance gates
 
 ```text
-PR #247 Growth A: 92 -> 94 — complete
-PR #248 Growth B: 94 -> 96 — complete
-PR #249 Editorial guide: 96 -> 96 — complete
-PR #250 Growth C: 96 -> 98 — complete
-PR #251 Growth D: 98 -> 100
+Gate V3-A  specification and visual authority aligned
+Gate V3-B  shared shell complete
+Gate V3-C  core registry page families complete
+Gate V3-D  editorial/reference families complete
+Gate V3-E  mobile and accessibility complete
+Gate V3-F  representative visual audit passed
+Gate V3-G  owner approves exact release candidate
+Gate V3-H  production commit and public parity verified
 ```
 
-Corrected candidate allocation remains defined by the final-eight audit and candidate control files. Each growth PR is limited to two records. Unknown values remain unknown.
+No agent may claim UI v3 completion before Gate V3-H.
 
-## Growth C result
+## Paused work
+
+The following are paused until PR #272 completes:
 
 ```text
-Canonical stable assets: 98
-Batch: S / batch_020
-Added stablecoins: 2
-Added organizations: 2
-Added relationships: 2
-Added lifecycle events: 6
-Added evidence records: 13
-Added explicit open items: 10
-Added deployments: 3
-Production publication: automatic on main
+Growth D to 100 records
+100-record registry-wide quality audit
+non-UI release-candidate preparation
+new statistics surface work
+broad machine-readable schema changes
+new logo work
+alternative visual-direction exploration
 ```
 
-Growth C added UXD and Dollar on Chain. UXD is represented as one continuing Solana-native identity with a documented transition from its initial delta-neutral design to a broader Asset Liability Management model. Dollar on Chain is represented as one Rootstock-native identity with an official Arbitrum bridge representation and a resolved April 2026 oracle-related protocol pause.
+Urgent factual corrections, source-backed guide corrections, security fixes, or verified public breakage may interrupt the sequence through a narrowly scoped PR.
 
-## Remaining work
+## Work after UI v3
+
+After PR #272:
 
 ```text
-PR #251 Growth D
-PR #252-#259 100-record quality audit
-PR #260-#264 non-UI release preparation
+1. close or archive stale PR #251;
+2. rebuild Growth D from latest main;
+3. promote two reviewed assets from 98 to 100;
+4. run the 100-record registry audit;
+5. run non-UI release preparation against the actual 100-record and UI v3 state;
+6. resume monitoring coverage expansion and later growth.
 ```
 
-PR #264 is not a separate publication checkpoint; ordinary merged changes publish through the automatic main workflow.
+The post-UI PR numbers are assigned only after PR #272 because intervening factual corrections may consume repository numbers. The roadmap must be updated before that work starts.

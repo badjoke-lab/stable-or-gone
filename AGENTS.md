@@ -11,13 +11,22 @@ Before changing code, data, workflows, or documentation, read:
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. the canonical plan for the active work item
-6. the relevant data, monitoring, or UI specification
-7. any queue, validator, audit, fixture, and baseline named by the work item
+6. the relevant data, monitoring, editorial, or UI specification
+7. every queue, validator, audit, fixture, and baseline named by the work item
 
-For the active non-UI quality program, also read:
+For the active UI remediation, also read:
 
 ```text
-docs/quality/non-ui-quality-program.md
+docs/ui-redesign/master-spec.md
+docs/architecture/approved-editorial-ledger-ui-v3.md
+docs/ui-redesign/approved-mocks-v3/README.md
+docs/ui-redesign/implementation-plan.md
+docs/public-taxonomy-spec.md
+```
+
+For data work, also read:
+
+```text
 docs/stable-asset-scope.md
 docs/classification-spec.md
 docs/data-model-v3-spec.md
@@ -34,99 +43,121 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
-For later UI work, read:
-
-```text
-docs/ui-redesign/master-spec.md
-docs/architecture/approved-modern-data-product-ui-v2.md
-docs/ui-redesign/implementation-plan.md
-docs/public-taxonomy-spec.md
-```
-
-For data work, inspect current generated statistics, the protected baseline, the integrity audit, and the exact quality queue before editing canonical records.
-
 ## Repository source of truth
 
 Repository specifications outrank chat memory, handoff prose, external mock copies, issue discussion, and unmerged drafts.
 
 A decision becomes binding only when the relevant canonical repository document is updated and merged. If implementation conflicts with a canonical specification, treat the implementation as defective until the specification is deliberately changed through review.
 
-The document-authority and change-control rules are in `docs/spec-governance.md`.
+Document authority and change control are defined in `docs/spec-governance.md`.
 
 ## Current workstream
 
-The active workstream is the non-UI quality program in:
+The active workstream is the Editorial Ledger UI v3 remediation defined by:
 
 ```text
-docs/quality/non-ui-quality-program.md
+docs/architecture/approved-editorial-ledger-ui-v3.md
+docs/ui-redesign/implementation-plan.md
+docs/roadmap.md
 ```
 
-Before starting or continuing work, read the `Current position` and approved sequence in `docs/roadmap.md`, then confirm the same PR item in the active implementation plan.
-
-The UI program is paused after PR #216 because detailed owner visual review is temporarily unavailable. The current UI is an intermediate repository state. Gate V2-F is not passed, no production release is authorized, and no agent may claim that the current UI has owner approval.
-
-PR #233 authorized the original bounded non-UI sequence through PR #263. PR #249 deliberately amends that sequence by inserting one owner-requested editorial guide and shifting the remaining numbered items through PR #264:
+Current position:
 
 ```text
-PR #234-#239 material-change monitoring
-PR #240-#245 monitored-source coverage
-PR #246 final-eight candidate audit
-PR #247-#248 reviewed growth from 92 to 96
-PR #249 UK stablecoin capital-rules guide
-PR #250-#251 reviewed growth from 96 to 100
-PR #252-#259 100-record registry audit
-PR #260-#264 non-UI release preparation
+Latest completed: PR #260
+Active: PR #261 specification and schedule alignment
+Next: PR #262 shared Editorial Ledger shell
+Canonical stable assets: 98
+Growth D PR #251: stale draft; do not merge as-is
+Gate V3-F: not passed
+Production publication: automatic on main
 ```
 
-Growth beyond 92 assets is permitted only after PR #246 selects the final reviewed set, and each growth PR is limited to two assets. PR #249 is limited to the UK stablecoin capital-rules guide within the existing Guides / Regulation structure and changes no canonical registry count. Production publication remains prohibited through PR #264.
+The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 remains an intermediate repository state and may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-## Non-UI quality rules
+Growth D, the 100-record audit, and non-UI release preparation are paused through the UI v3 closure sequence. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
+
+## Visual authority
+
+The binding visual and page-layout authority is:
+
+```text
+docs/architecture/approved-editorial-ledger-ui-v3.md
+```
+
+The active reference direction is:
+
+```text
+docs/ui-redesign/approved-mocks-v3/README.md
+```
+
+The following are historical and must not override v3:
+
+```text
+docs/architecture/approved-modern-data-product-ui-v2.md
+docs/ui-redesign/approved-mocks-v2/
+docs/architecture/visual-system-and-mocks-v1.md
+```
+
+No agent may:
+
+- invent another visual direction;
+- substitute or generate another logo;
+- redesign a page from memory;
+- use the rejected dashboard mock direction;
+- reintroduce oversized heroes, KPI-card rows, blue-purple glow, or repeated rounded-card composition as defaults;
+- implement mock-only data as canonical data;
+- alter the active UI sequence without updating the roadmap and implementation plan.
+
+The existing approved S/G production assets must be reused:
+
+```text
+public/brand/sog-lockup-on-light.svg
+public/brand/sog-lockup-on-dark.svg
+public/brand/sog-mark-on-light.svg
+public/brand/sog-mark-on-dark.svg
+```
+
+Stablecoin identity may use a reviewed local official logo when available and approved; otherwise it uses the existing ticker fallback. Do not hotlink or generate imitation coin or organization logos.
+
+## UI v3 operating rules
+
+- The default public surface is a light paper-like background with dark ink.
+- Typography, rules, spacing, columns, and hierarchy replace dashboard panels as the main visual tools.
+- Home is a registry front page, not a product landing page.
+- Stablecoins use a table-first public register.
+- Stablecoin details use a research dossier.
+- Organizations use responsible-body records.
+- Events use incident/public-record files.
+- Guides use a distinct editorial article layout.
+- Reference, long-form, and utility page families must not collapse into one generic card template.
+- Mobile is a deliberate transformation and must retain protected information.
+- Screenshot audit uses representative mode by default; repeated detail templates are sampled rather than exhaustively captured.
+
+## Data and quality rules
 
 - Cite the exact queue, validator, audit, schema, fixture, and baseline used by each PR.
 - Keep unknown values unknown unless reviewed evidence supports a canonical value.
 - Do not coerce month- or year-level evidence into a day-level date.
-- Do not use exchange listing, rebrand, migration start, testnet, or guarded access as a default launch boundary.
-- Do not use depeg, last commit, last website capture, or migration opening as a default terminal boundary.
-- Preserve evidence relations, known unknowns, deployments, and source identities.
+- Preserve evidence relations, known unknowns, deployments, source identities, and value states.
+- UI work must not clear quality queues through hiding, defaults, or relabeling.
 - Monitoring output is candidate material only and must not write directly to canonical public data.
 - Monitoring executions remain read-only and may not update their own accepted baseline.
 - A baseline change requires a separate human-reviewed repository change.
-- An unchanged normalized official source must not create a monitoring candidate.
 - Metadata-only changes and fetch failures must not masquerade as content changes.
-- A quality PR may validly preserve a queue item after strengthening its source trail.
-- A growth PR may add no more than two stable assets and must include all applicable supporting record groups.
-- The PR #249 guide must distinguish issuer capital from backing assets, separate FCA and Bank of England scope, and label reported claims that are not yet verified against controlling final handbook text.
-
-## Visual authority
-
-The active visual and page-layout authority remains:
-
-```text
-docs/architecture/approved-modern-data-product-ui-v2.md
-```
-
-`docs/architecture/visual-system-and-mocks-v1.md` is historical and must not override v2.
-
-No agent may:
-
-- invent a new visual direction;
-- substitute another logo;
-- redesign a page from memory;
-- implement mock-only data as canonical data;
-- alter the UI pause or PR sequence without updating the roadmap and relevant plan.
-
-Stablecoin identity uses a reviewed local official logo when available and approved; otherwise it uses the ticker fallback. Organizations and events do not use initials or circular letter fallbacks. Do not hotlink or generate imitation logos.
+- Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
+- The old PR #251 must not be merged as-is. Growth D must be rebuilt from the latest main after UI v3 closes.
 
 ## Mock-only exclusions
 
-Do not add the following merely because they appear in a reference mock:
+Do not add the following merely because they appear in a mock or design discussion:
 
 - live prices;
 - market capitalization;
 - circulating supply;
 - holder or transfer counts;
 - market charts;
-- monthly growth deltas;
+- growth deltas;
 - saved views;
 - watchlists;
 - follow buttons;
@@ -137,9 +168,9 @@ Do not add the following merely because they appear in a reference mock:
 - invented reserve totals;
 - invented evidence counts;
 - invented relative timestamps;
-- unsupported licensing claims.
+- unsupported licensing or legal claims.
 
-Only canonical data, approved editorial copy, and separately approved sourced integrations may become public claims.
+Only canonical data, approved editorial copy, generated canonical counts, and separately approved sourced integrations may become public claims.
 
 ## Non-negotiable deployment rule
 
@@ -148,8 +179,8 @@ Development and production publication are connected by the automatic `main` pub
 - GitHub CI success is the completion condition for pull-request development work.
 - A normal pull request must not wait for Cloudflare Pages.
 - A normal `main` merge triggers the production deployment workflow automatically.
-- Production deployment for ordinary guide, copy, UI, and reviewed data changes is performed by `.github/workflows/deploy-production.yml` on `main` push.
-- Manual deployment is a fallback for infrastructure interruption or reserved exceptions such as DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route removal, or emergency rollback.
+- Ordinary guide, copy, UI, workflow, validation, and reviewed data changes deploy through `.github/workflows/deploy-production.yml` on `main` push.
+- Manual deployment is a fallback only for infrastructure interruption or reserved exceptions such as DNS, secrets, Cloudflare account changes, destructive schema migration, mass deletion, major route removal, or emergency rollback.
 - Production success may not be claimed before the deployed commit and public parity are verified.
 
 The canonical policy is `docs/deployment-policy.md`.
@@ -164,15 +195,13 @@ Do not:
 - retry an obsolete deployment after source changes;
 - reduce data, evidence, or validation requirements;
 - invent undocumented taxonomy, route, UI, monitoring, baseline, or missing-value behavior;
-- use externally hosted or unverified coin logos;
+- use externally hosted or unverified logos;
 - create public filter categories from arbitrary free-text values;
 - hide material mobile information through generic numbered-column rules;
 - change the approved PR sequence without updating the plan and roadmap;
 - use conversation history as a substitute for repository specifications;
 - automatically publish monitored candidates into canonical data;
-- let a monitoring execution commit, open a pull request, or mutate its accepted baseline;
-- begin growth before PR #246 or add more than two assets in a growth PR;
-- expand PR #249 into a new category, top-level route family, registry-data change, or UI redesign;
+- let a monitoring execution mutate its accepted baseline;
 - claim publication before the automatic deployment for the intended `main` commit succeeds.
 
 ## Deployment classifications
@@ -191,8 +220,8 @@ Every pull request must use one classification:
 - Run normal repository validation before merge.
 - Remove temporary artifacts unless the active plan explicitly retains them.
 - Update `docs/roadmap.md` when current position or sequence changes.
-- Update the relevant canonical specification when semantics, routes, information hierarchy, missing-value rules, monitoring behavior, baseline behavior, or machine-readable output change.
-- Preserve canonical record-group counts unless an explicit audited growth or migration PR approves a change.
+- Update the relevant canonical specification when semantics, routes, information hierarchy, missing-value rules, monitoring behavior, baseline behavior, machine-readable output, or visual authority changes.
+- Preserve canonical record-group counts unless an explicit audited data PR approves a change.
 - State the deployment classification in the PR body.
 
 Every non-trivial PR body must include:
@@ -206,7 +235,7 @@ Validation performed
 Deployment classification
 ```
 
-A PR that cannot cite its approved specification and roadmap item must be paused.
+A PR that cannot cite its approved specification and roadmap item must pause.
 
 ## Current publication architecture
 

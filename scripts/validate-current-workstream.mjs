@@ -16,37 +16,50 @@ import './validate-batch20-growth-c.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
-const amendment = fs.readFileSync('docs/quality/pr249-uk-stablecoin-guide-amendment.md', 'utf8');
 const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
 const agents = fs.readFileSync('AGENTS.md', 'utf8');
+const uiPlan = fs.readFileSync('docs/ui-redesign/implementation-plan.md', 'utf8');
+const uiV3 = fs.readFileSync('docs/architecture/approved-editorial-ledger-ui-v3.md', 'utf8');
+const uiV2 = fs.readFileSync('docs/architecture/approved-modern-data-product-ui-v2.md', 'utf8');
+const mocksV3 = fs.readFileSync('docs/ui-redesign/approved-mocks-v3/README.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #250',
-  'Active: PR #251 — Growth D',
-  'Next: PR #252 — 100-record identity audit',
-  'Stable assets: 98',
-  'Gate V2-F: not passed',
-  'Record growth: Growth D authorized for corrected candidates only',
-  'PR #249 Editorial guide: 96 -> 96 — complete',
-  'PR #250 Growth C: 96 -> 98 — complete',
-  'PR #251 Growth D: 98 -> 100',
-  'PR #264 is not a separate publication checkpoint'
+  'Latest completed: PR #260',
+  'Active: PR #261 — Editorial Ledger UI v3 specification and schedule alignment',
+  'Next: PR #262 — shared Editorial Ledger shell',
+  'Canonical stable assets: 98',
+  'Open stale draft: PR #251 — Growth D; do not merge as-is',
+  'Active workstream: UI remediation',
+  'PR #262 — shared Editorial Ledger shell',
+  'PR #270 — representative all-family visual audit',
+  'PR #272 — production verification and UI v3 closure',
+  'Growth D to 100 records'
 ]) {
   if (!roadmap.includes(phrase)) throw new Error(`roadmap missing: ${phrase}`);
 }
 
 for (const [document, phrase] of [
+  [program, 'Status: canonical implementation schedule — paused'],
+  [program, 'Growth D PR #251: stale draft; do not merge as-is'],
   [program, 'No growth PR may contain more than two new stable assets'],
-  [amendment, 'PR #249 is an editorial interruption and changes no canonical registry count'],
-  [amendment, 'Production publication is governed by `docs/deployment-policy.md`'],
-  [amendment, 'PR #250 Growth C: 96 -> 98'],
+  [program, 'After UI v3 closes through PR #272'],
+  [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
-  [governance, 'PR #264 is not a separate publication checkpoint'],
-  [agents, 'Growth beyond 92 assets is permitted only after PR #246'],
+  [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
+  [agents, 'The active workstream is the Editorial Ledger UI v3 remediation'],
   [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
-  [agents, 'PR #249 is limited to the UK stablecoin capital-rules guide']
+  [agents, 'The old PR #251 must not be merged as-is'],
+  [uiPlan, 'Status: canonical implementation schedule — active'],
+  [uiPlan, 'Visual direction: Editorial Ledger'],
+  [uiPlan, 'PR #262 — shared Editorial Ledger shell'],
+  [uiPlan, 'PR #272 — production verification and closure'],
+  [uiV3, 'Status: canonical visual and page-implementation contract'],
+  [uiV3, 'The default public surface is light, not dark'],
+  [uiV3, 'do not create a new logo'],
+  [uiV2, 'Status: historical plan — superseded'],
+  [mocksV3, 'Status: canonical reference description']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
 
-console.log('Current workstream valid: Growth C is complete at 98 assets and Growth D follows in PR #251.');
+console.log('Current workstream valid: 98 canonical assets are preserved and Editorial Ledger UI v3 is active through PR #272.');
