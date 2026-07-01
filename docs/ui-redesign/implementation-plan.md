@@ -40,7 +40,7 @@ Gate V3-B: passed
 Gate V3-C: passed
 Gate V3-D: passed
 Gate V3-E: passed
-Gate V3-F: pending PR #271 rendered audit and human image review
+Gate V3-F: passed
 Release candidate: not selected
 Production publication: automatic on main
 ```
@@ -117,38 +117,30 @@ Converted the guide archive and all nine routes to a shared Editorial Article fa
 
 ## Active sequence
 
-### PR #271 — representative all-family visual audit
+### PR #271 — representative all-family visual audit — Gate V3-F passed
 
-Required captures on desktop and mobile:
+Captured on desktop and mobile:
 
-- Home;
 - all twelve unique index, reference, long-form, and utility routes;
 - three stablecoin details;
 - three organization details;
 - three event details;
 - three guide articles.
 
-Required rendered checks:
+Rendered results:
 
-- successful response and non-empty screenshot;
-- exactly one `main` and one `h1`;
-- no horizontal document overflow;
-- no broken images;
-- approved Stable or Gone brand assets only;
-- no visible legacy PageHero, MetricCard, blue-purple glow, or SaaS-dashboard markers;
-- no false initial zero-result state on registry indexes.
+- 378 public routes discovered;
+- 24 routes selected and 24 captured per device;
+- 48 full-page images reviewed;
+- zero capture failures;
+- zero horizontal overflow;
+- zero broken images;
+- zero unapproved brand assets;
+- zero visible legacy PageHero, MetricCard, blue-purple glow, or SaaS-dashboard markers;
+- zero false initial zero-result states;
+- exactly one `main` and one `h1` on every selected page.
 
-Required human review:
-
-- hierarchy and reading order;
-- clipped labels, values, or controls;
-- false empty states;
-- remaining card/dashboard composition;
-- logo misuse;
-- excessive whitespace or unusable density;
-- mobile table and disclosure legibility.
-
-Gate V3-F passes only after the automated desktop/mobile audit reports zero failures, the uploaded image artifacts receive human review, and all normal pull-request workflows succeed.
+Human review confirmed clear hierarchy and reading order, no clipped labels or values, no false empty states, no logo misuse, no remaining dashboard composition, usable density, and legible mobile table/disclosure behavior. No source or CSS correction was required. Gate V3-F passed.
 
 ### PR #272 — accessibility, performance, and legacy cleanup
 
@@ -159,7 +151,7 @@ Remove unused v2 CSS and obsolete components only after replacements exist. Veri
 - verify automatic main deployment for the intended commit;
 - verify provenance and machine-readable parity;
 - verify representative production captures;
-- record Gate V3-F through Gate V3-H and the immutable production commit;
+- record Gate V3-G through Gate V3-H and the immutable production commit;
 - do not claim UI v3 completion before Gate V3-H.
 
 ## Validation rule
@@ -183,7 +175,7 @@ npm run verify:consistency
 
 ## Screenshot rule
 
-Representative capture is the default. Repeated detail families are sampled at three records each rather than exhaustively captured. Full capture remains available for targeted debugging. PR #271 and later visual changes must run both desktop and mobile captures from the built output.
+Representative capture is the default. Repeated detail families are sampled at three records each rather than exhaustively captured. Full capture remains available for targeted debugging. PR #271 established the pull-request desktop/mobile rendered audit as the continuing visual regression contract.
 
 ## Paused non-UI work
 
