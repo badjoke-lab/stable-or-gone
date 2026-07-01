@@ -158,10 +158,10 @@ const stablecoinsText = visibleText(stablecoinsHtml);
 const organizationsText = visibleText(organizationsHtml);
 const eventsText = visibleText(eventsHtml);
 
-assert(homeText.includes(`Stablecoins ${counts.stablecoins}`), `home stablecoin count mismatch: expected ${counts.stablecoins}`);
-assert(homeText.includes(`Organizations ${counts.organizations}`), `home organization count mismatch: expected ${counts.organizations}`);
-assert(homeText.includes(`Events ${counts.events}`), `home event count mismatch: expected ${counts.events}`);
-assert(homeText.includes(`Sources ${counts.evidence}`), `home evidence count mismatch: expected ${counts.evidence}`);
+assert(homeText.includes(`${counts.stablecoins} stable assets`), `home stablecoin count mismatch: expected ${counts.stablecoins}`);
+assert(homeText.includes(`${counts.organizations} organizations`), `home organization count mismatch: expected ${counts.organizations}`);
+assert(homeText.includes(`${counts.events} events`), `home event count mismatch: expected ${counts.events}`);
+assert(homeText.includes(`${counts.evidence} source records`), `home evidence count mismatch: expected ${counts.evidence}`);
 assert(stablecoinsText.includes(`Stable assets ${counts.stablecoins}`), 'stablecoin index record count mismatch');
 assert(stablecoinsText.includes(`Organizations ${counts.organizations}`), 'stablecoin index organization count mismatch');
 assert(stablecoinsText.includes(`${counts.stablecoins} of ${counts.stablecoins} records`), 'stablecoin index visible result count mismatch');
@@ -220,16 +220,15 @@ if (fs.existsSync(sitemapPath)) {
   const listedStablecoins = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/stablecoin\/([^<]+)\/<\/loc>/g);
   const listedOrganizations = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/issuer\/([^<]+)\/<\/loc>/g);
   const listedEvents = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/event\/([^<]+)\/<\/loc>/g);
-  assert(listedStablecoins.size === counts.stablecoins, `sitemap stablecoin count ${listedStablecoins.size}, expected ${counts.stablecoins}`);
-  assert(listedOrganizations.size === counts.organizations, `sitemap organization count ${listedOrganizations.size}, expected ${counts.organizations}`);
-  assert(listedEvents.size === counts.events, `sitemap event count ${listedEvents.size}, expected ${counts.events}`);
+  assert(listedStablecoins.size === counts.stablecoins, `sitemap stablecoin routes ${listedStablecoins.size}, expected ${counts.stablecoins}`);
+  assert(listedOrganizations.size === counts.organizations, `sitemap organization routes ${listedOrganizations.size}, expected ${counts.organizations}`);
+  assert(listedEvents.size === counts.events, `sitemap event routes ${listedEvents.size}, expected ${counts.events}`);
 }
 
-const report = { checked_at: new Date().toISOString(), counts, failures };
-fs.writeFileSync(path.join(root, 'data/generated/public-consistency-report.json'), `${JSON.stringify(report, null, 2)}\n`);
 if (failures.length > 0) {
   console.error('Public consistency verification failed:');
-  failures.forEach((failure) => console.error(`- ${failure}`));
+  for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(JSON.stringify({ ...report, ok: true }, null, 2));
+
+console.log(JSON.stringify({ ok: true, counts, verified_routes: { stablecoin_details: stablecoins.length, organization_details: organizations.length, event_details: events.length } }, null, 2));
