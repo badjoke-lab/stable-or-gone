@@ -1,4 +1,5 @@
 ---
+import '../styles/guide-article.css';
 interface Props {
   category: string;
   title: string;
@@ -7,42 +8,48 @@ interface Props {
   informationCurrentThrough: string;
   updatedAt: string | null;
 }
-
-const {
-  category,
-  title,
-  description,
-  publishedAt,
-  informationCurrentThrough,
-  updatedAt
-} = Astro.props;
+const { category, title, description, publishedAt, informationCurrentThrough, updatedAt } = Astro.props;
 ---
-<section class="hero">
-  <div class="panel hero-main">
-    <div class="prompt">Guides / {category}</div>
+<header class="guide-article-masthead" data-ui-v3-guide-article>
+  <div class="guide-article-overline">
+    <p>Editorial guide / {category}</p>
+    <a href="/guides/">Return to all guides</a>
+  </div>
+  <div class="guide-article-heading">
     <h1>{title}</h1>
     <p>{description}</p>
   </div>
-</section>
-
-<section class="panel registry" aria-label="Guide publication information">
-  <div class="bar">Publication information</div>
-  <table>
-    <tbody>
-      <tr>
-        <th>Published</th>
-        <td>{publishedAt ?? 'Pending production publication'}</td>
-      </tr>
-      <tr>
-        <th>Information current through</th>
-        <td>{informationCurrentThrough}</td>
-      </tr>
-      {updatedAt && (
-        <tr>
-          <th>Last updated</th>
-          <td>{updatedAt}</td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-</section>
+  <dl class="guide-article-meta" aria-label="Guide publication information">
+    <div><dt>Published</dt><dd>{publishedAt ?? 'Evergreen guide'}</dd></div>
+    <div><dt>Information current through</dt><dd>{informationCurrentThrough}</dd></div>
+    <div><dt>Revision state</dt><dd>{updatedAt ? `Updated ${updatedAt}` : 'No later revision recorded'}</dd></div>
+  </dl>
+  <nav class="guide-article-toc" aria-label="On this page" data-guide-toc hidden>
+    <h2>On this page</h2>
+    <ol></ol>
+  </nav>
+</header>
+<script>
+  const initGuideToc = () => {
+    const root = document.querySelector('[data-ui-v3-guide-article]');
+    const toc = root?.querySelector('[data-guide-toc]');
+    const list = toc?.querySelector('ol');
+    const container = root?.parentElement;
+    if (!(root instanceof HTMLElement) || !(toc instanceof HTMLElement) || !(list instanceof HTMLOListElement) || !container) return;
+    const headings = [...container.querySelectorAll(':scope > section.panel.registry > .bar')].filter((heading) => !heading.closest('.guide-revision-history'));
+    if (headings.length < 2) return;
+    headings.forEach((heading, index) => {
+      if (!(heading instanceof HTMLElement)) return;
+      const base = heading.textContent?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || `section-${index + 1}`;
+      heading.id ||= `guide-${base}`;
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent?.trim() || `Section ${index + 1}`;
+      item.append(link);
+      list.append(item);
+    });
+    toc.hidden = false;
+  };
+  initGuideToc();
+</script>
