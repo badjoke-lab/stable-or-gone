@@ -1,57 +1,25 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('reserve-disclosure-basics');
 const title = 'How to Read Stablecoin Reserve Disclosures — Stable or Gone';
 const description = 'How to compare issuer statements, attestations, audits, protocol collateral data, and incident-specific reserve disclosures.';
+const canonicalPath = '/guides/reserve-disclosure-basics/';
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
-  description,
-  url: 'https://sog.badjoke-lab.com/guides/reserve-disclosure-basics/',
+  '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin reserves', 'reserve disclosure', 'stablecoin attestations', 'protocol collateral']
+  about: ['stablecoin reserves', 'reserve disclosure', 'stablecoin attestations', 'protocol collateral'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}), ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
 };
 ---
-<BaseLayout title={title} description={description} canonicalPath="/guides/reserve-disclosure-basics/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Guide to reserve information</div>
-      <h1>How to read reserve disclosures</h1>
-      <p>Not every reserve page, attestation, audit, or protocol dashboard tells you the same thing. The source type, date, scope, and publisher all matter.</p>
-    </div>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Start with the stablecoin model</div>
-    <p>A fiat-backed stablecoin may publish a reserve breakdown, bank or custodian information, and a periodic attestation. A protocol-based stablecoin may instead expose collateral balances, vault parameters, debt positions, or liquidation rules on-chain.</p>
-    <p>Those sources answer different questions. A current transparency page describes the present. A dated report covers a specific period. A protocol dashboard may update continuously. An emergency statement may explain only one incident.</p>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Common disclosure types</div>
-    <table><tbody>
-      <tr><th>Issuer statement</th><td>A page or announcement from the organization responsible for the stablecoin.</td></tr>
-      <tr><th>Attestation</th><td>An assurance report covering selected balances or claims at a stated date or period.</td></tr>
-      <tr><th>Audit</th><td>A formal audit only when the source itself clearly uses and supports that term.</td></tr>
-      <tr><th>Protocol data</th><td>On-chain collateral, debt, vault, or mechanism information for protocol-based stablecoins.</td></tr>
-      <tr><th>Incident disclosure</th><td>A statement tied to a specific event, such as bank exposure, reserve intervention, or redemption disruption.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Questions to ask</div>
-    <table><tbody>
-      <tr><th>Date</th><td>When was the information measured, published, or last updated?</td></tr>
-      <tr><th>Scope</th><td>Does the source cover all reserves, selected accounts, one chain, or only one product?</td></tr>
-      <tr><th>Publisher</th><td>Was it issued by the stablecoin operator, an accounting firm, a regulator, a custodian, or a protocol dashboard?</td></tr>
-      <tr><th>Frequency</th><td>Is it a one-time report, monthly attestation, annual audit, or continuously updated data source?</td></tr>
-      <tr><th>Redemption link</th><td>Do the disclosed assets match the way holders can redeem or exit?</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="section-grid" aria-label="Examples">
-    <a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC</h2><p>Issuer reserve reports, direct redemption terms, and the March 2023 banking event.</p></a>
-    <a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI</h2><p>Protocol collateral and exit mechanisms rather than a simple issuer redemption model.</p></a>
-    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST</h2><p>Reserve intervention during a collapse, not routine reserve reporting.</p></a>
-  </section>
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader category={guideCategoryLabels[guide.category]} title="How to read reserve disclosures" description="Not every reserve page, attestation, audit, or protocol dashboard tells you the same thing. The source type, date, scope, and publisher all matter." publishedAt={guide.publishedAt} informationCurrentThrough={guide.informationCurrentThrough} updatedAt={guide.updatedAt} />
+  <section class="panel registry"><div class="bar">Start with the stablecoin model</div><p>A fiat-backed stablecoin may publish a reserve breakdown, bank or custodian information, and a periodic attestation. A protocol-based stablecoin may instead expose collateral balances, vault parameters, debt positions, or liquidation rules on-chain.</p><p>Those sources answer different questions. A current transparency page describes the present. A dated report covers a specific period. A protocol dashboard may update continuously. An emergency statement may explain only one incident.</p></section>
+  <section class="panel registry"><div class="bar">Common disclosure types</div><table><tbody><tr><th>Issuer statement</th><td>A page or announcement from the organization responsible for the stablecoin.</td></tr><tr><th>Attestation</th><td>An assurance report covering selected balances or claims at a stated date or period.</td></tr><tr><th>Audit</th><td>A formal audit only when the source itself clearly uses and supports that term.</td></tr><tr><th>Protocol data</th><td>On-chain collateral, debt, vault, or mechanism information for protocol-based stablecoins.</td></tr><tr><th>Incident disclosure</th><td>A statement tied to a specific event, such as bank exposure, reserve intervention, or redemption disruption.</td></tr></tbody></table></section>
+  <section class="panel registry"><div class="bar">Questions to ask</div><table><tbody><tr><th>Date</th><td>When was the information measured, published, or last updated?</td></tr><tr><th>Scope</th><td>Does the source cover all reserves, selected accounts, one chain, or only one product?</td></tr><tr><th>Publisher</th><td>Was it issued by the stablecoin operator, an accounting firm, a regulator, a custodian, or a protocol dashboard?</td></tr><tr><th>Frequency</th><td>Is it a one-time report, monthly attestation, annual audit, or continuously updated data source?</td></tr><tr><th>Redemption link</th><td>Do the disclosed assets match the way holders can redeem or exit?</td></tr></tbody></table></section>
+  <section class="section-grid" aria-label="Examples"><a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC</h2><p>Issuer reserve reports, direct redemption terms, and the March 2023 banking event.</p></a><a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI</h2><p>Protocol collateral and exit mechanisms rather than a simple issuer redemption model.</p></a><a class="panel mini-card" href="/stablecoin/ust/"><h2>UST</h2><p>Reserve intervention during a collapse, not routine reserve reporting.</p></a></section>
+  <GuideRevisionHistory revisions={guide.revisions} />
 </BaseLayout>

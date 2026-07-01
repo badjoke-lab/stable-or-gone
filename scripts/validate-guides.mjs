@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import './validate-ui-v3-guides.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -44,11 +45,12 @@ check(openUsdPage.includes('Stripe says Open USD will be the default stablecoin 
 check(openUsdPage.includes('not the same as announcing a finalized custody or banking role'), 'Open USD BNY role caveat missing');
 check(openUsdPage.includes('No automatic holder-yield right'), 'Open USD holder-yield distinction missing');
 
-const guideIndex = read('src/pages/guides/index.astro');
-check(guideIndex.includes("import {\n  guides,"), 'Guides index must use the complete guide catalog');
-check(guideIndex.includes('const visibleGuides = guides;'), 'Guides index must expose all public guide pages');
-check(guideIndex.includes('visibleGuides.filter'), 'Guides index category filtering missing');
-check(!guideIndex.includes('getPublishedGuides'), 'Guides index must not hide evergreen guides behind publication dates');
+const guideIndexRoute = read('src/pages/guides/index.astro');
+const guideIndex = read('src/components/GuideEditorialIndex.astro');
+check(guideIndexRoute.includes('GuideEditorialIndex'), 'Guides route must use GuideEditorialIndex');
+check(guideIndex.includes("import { guides, guideCategoryDescriptions, guideCategoryLabels"), 'Guide index must use the complete guide catalog');
+check(guideIndex.includes('guides.filter'), 'Guide index category filtering missing');
+check(!guideIndex.includes('getPublishedGuides'), 'Guide index must not hide evergreen guides behind publication dates');
 for (const slug of evergreenGuideSlugs) check(catalog.includes(`slug: '${slug}'`), `Evergreen guide is not represented in the visible catalog: ${slug}`);
 
 const sitemap = read('src/pages/sitemap-index.xml.ts');
@@ -75,4 +77,4 @@ const datedGuidesUpdate = updates.find((entry) => entry.id === 'sog_update_2026_
 check(Boolean(datedGuidesUpdate), 'Original dated-guide update entry missing');
 for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(datedGuidesUpdate.related_paths.includes(`/guides/${slug}/`), `Original update route missing: ${slug}`);
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, guide_slugs: slugs }, null, 2));

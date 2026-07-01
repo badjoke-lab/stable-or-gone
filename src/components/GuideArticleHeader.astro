@@ -7,42 +7,15 @@ interface Props {
   informationCurrentThrough: string;
   updatedAt: string | null;
 }
-
-const {
-  category,
-  title,
-  description,
-  publishedAt,
-  informationCurrentThrough,
-  updatedAt
-} = Astro.props;
+const { category, title, description, publishedAt, informationCurrentThrough, updatedAt } = Astro.props;
 ---
-<section class="hero">
-  <div class="panel hero-main">
-    <div class="prompt">Guides / {category}</div>
-    <h1>{title}</h1>
-    <p>{description}</p>
-  </div>
-</section>
-
-<section class="panel registry" aria-label="Guide publication information">
-  <div class="bar">Publication information</div>
-  <table>
-    <tbody>
-      <tr>
-        <th>Published</th>
-        <td>{publishedAt ?? 'Pending production publication'}</td>
-      </tr>
-      <tr>
-        <th>Information current through</th>
-        <td>{informationCurrentThrough}</td>
-      </tr>
-      {updatedAt && (
-        <tr>
-          <th>Last updated</th>
-          <td>{updatedAt}</td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-</section>
+<header class="guide-article-masthead">
+  <div class="guide-article-overline"><span>Guides / {category}</span><a href="/guides/">Return to guide archive</a></div>
+  <h1>{title}</h1>
+  <p class="guide-article-deck">{description}</p>
+  <dl class="guide-article-meta" aria-label="Guide publication information">
+    <div><dt>Published</dt><dd>{publishedAt ?? 'Publication date not recorded'}</dd></div>
+    <div><dt>Information current through</dt><dd>{informationCurrentThrough}</dd></div>
+    <div><dt>Last updated</dt><dd>{updatedAt ?? publishedAt ?? 'Not recorded'}</dd></div>
+  </dl>
+</header>

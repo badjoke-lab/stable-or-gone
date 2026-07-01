@@ -27,17 +27,18 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #267 corrective Organizations and Events completion
+Completed through: PR #268 Editorial Article Guides
 Partial precursor: PR #266 Organization and Event row compaction
-Current UI: shared shell, Home, Stablecoins, Stablecoin dossiers, Organizations, and Events use Editorial Ledger v3
-Active work item: PR #268 Guides
-Next implementation: PR #269 Reference and utility pages
+Current UI: shared shell, Home, Stablecoins, Stablecoin dossiers, Organizations, Events, and Guides use Editorial Ledger v3
+Active work item: PR #269 Reference and utility pages
+Next implementation: PR #270 mobile and accessibility hardening
 Closure: PR #273 production verification and closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
+Gate V3-D: pending PR #269 validation and merge
 Gate V3-F: not passed
 Release candidate: not selected
 Production publication: automatic on main
@@ -61,7 +62,7 @@ new logo generation
 
 Every v3 PR must preserve canonical stable assets, organizations, relationships, classifications, reserve and redemption profiles, events and typed details, evidence and evidence relations, reserve reports, known unknowns, regulatory notes, deployments, stable-asset relationships, income profiles, guide metadata, public routes, and machine-readable outputs.
 
-The UI may regroup or progressively disclose information. It may not erase protected fields, convert uncertainty into certainty, imply that every connected organization is an issuer, or present events as live alerts.
+The UI may regroup or progressively disclose information. It may not erase protected fields, convert uncertainty into certainty, imply that every connected organization is an issuer, present events as live alerts, or invent publication states for undated guide records.
 
 ## Completed v3 work
 
@@ -91,45 +92,23 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 
 ### PR #267 — corrective Organizations and Events completion
 
-Organizations:
+- built responsible-body Organization registers and record files;
+- built chronological Event registers and incident/public-record files;
+- preserved search, filters, sorts, URL state, zero-result behavior, desktop registers, compact mobile records, relationships, evidence, typed details, value states, and known unknowns;
+- passed all 18 workflows and Gate V3-C;
+- changed no canonical data, routes, logos, or machine-readable schemas.
 
-- responsible-body register and record hierarchy;
-- category, regulatory character, jurisdiction, roles, connected assets, current and historical relationships;
-- material events, evidence, known unknowns, and correction paths;
-- no issuer assumption.
+### PR #268 — Editorial Article Guides
 
-Events:
-
-- chronological register and incident/public-record hierarchy;
-- ID, date, category, subtype, affected stablecoins and organizations, impact, status effect, recovery, typed detail, evidence, and corrections;
-- no alert-dashboard composition.
-
-Indexes and validation:
-
-- preserved search, five filters, sorts, URL state, zero-result behavior, desktop registers, and compact mobile records;
-- used six deliberate comparison columns instead of the former eight-column v2 layouts;
-- kept all canonical records server-rendered;
-- updated organization, interaction, responsive, build, public consistency, and workstream validation for the split component architecture;
-- passed all 18 pull-request workflows;
-- changed no canonical data, routes, logos, or machine-readable schemas;
-- passed Gate V3-C.
+- replaced the Guides hero, KPI strip, panel grouping, and repeated mini-card archive with an Editorial Ledger index;
+- converted all nine guide routes to a shared Editorial Article family;
+- added a readable body column, desktop rail, generated on-page contents navigation, mobile contents disclosure, editorial tables, related records, revision history, glossary assistance, methodology access, and correction access;
+- applied one masthead and explicit publication-value-state contract to dated and evergreen articles;
+- preserved article copy, source URLs, guide metadata, JSON-LD, sitemap coverage, related-guide discovery, and routes;
+- connected `validate-ui-v3-guides.mjs` to the normal guide build gate;
+- changed no canonical data, routes, logos, or machine-readable schemas.
 
 ## Active sequence
-
-### PR #268 — Guides
-
-- distinct Editorial Article family;
-- title, deck, publication and revision dates;
-- readable body width and contents navigation;
-- restrained notes, quotations, tables, related guides, and glossary assistance;
-- published and evergreen routes remain visible;
-- article facts and dates remain unchanged.
-
-Acceptance:
-
-- no generic SaaS card stack;
-- guide metadata, JSON-LD, sitemap coverage, and related-guide links remain intact;
-- desktop and compact reading hierarchy remain deliberate.
 
 ### PR #269 — Reference and utility pages
 
@@ -139,11 +118,19 @@ Long-form: Methodology, About
 Utility: Corrections, Support, Contact
 ```
 
-Use one shared shell but distinct family-level layouts. Do not return to identical card stacks.
+Requirements:
+
+- use one shared shell but distinct family-level layouts;
+- preserve each route, claim, correction path, support function, and machine-readable link;
+- do not return to identical card stacks;
+- provide deliberate long-form reading width for Methodology and About;
+- use indexed, scan-friendly records for Models, Glossary, and Updates;
+- use restrained form and action hierarchy for Corrections, Support, and Contact;
+- pass Gate V3-D only after every editorial/reference family is complete and validated.
 
 ### PR #270 — mobile and accessibility hardening
 
-- controlled navigation disclosure;
+- controlled navigation and guide contents disclosure;
 - compact records or deliberate scroll-preserved tables;
 - labels remain attached to values;
 - 320px width and 200 percent zoom;
@@ -175,6 +162,7 @@ npm run validate:ui-v3-foundation
 npm run validate:ui-v3-home
 npm run validate:ui-v3-stablecoin-index
 npm run validate:ui-v3-stablecoin-detail
+node scripts/validate-ui-v3-guides.mjs
 npm run validate:active-workstream
 npm run validate:mobile-information
 npm run check

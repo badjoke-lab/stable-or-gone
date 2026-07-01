@@ -1,58 +1,25 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('stablecoin-lifecycle-terms');
 const title = 'Stablecoin Lifecycle Terms — Stable or Gone';
 const description = 'A guide to stablecoin launches, migrations, rebrands, wind-downs, discontinuations, failures, successor assets, and post-collapse trading.';
+const canonicalPath = '/guides/stablecoin-lifecycle-terms/';
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
-  url: 'https://sog.badjoke-lab.com/guides/stablecoin-lifecycle-terms/',
-  description,
+  '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin lifecycle', 'stablecoin wind-down', 'stablecoin failure', 'stablecoin migration']
+  about: ['stablecoin lifecycle', 'stablecoin wind-down', 'stablecoin failure', 'stablecoin migration'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}), ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
 };
 ---
-<BaseLayout title={title} description={description} canonicalPath="/guides/stablecoin-lifecycle-terms/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Guide to stablecoin histories</div>
-      <h1>How stablecoins change over time</h1>
-      <p>A stablecoin can launch, expand to new chains, migrate, rebrand, stop minting, enter a wind-down, fail, or continue trading after its original purpose has ended.</p>
-    </div>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Why lifecycle terms matter</div>
-    <p>Stablecoin histories are rarely a simple move from active to failed. Some products remain available with limits. Some stop minting while redemptions continue. Others move to a new token, brand, contract, or protocol design. A token may also keep trading after the original stablecoin has failed.</p>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Key terms</div>
-    <table><tbody>
-      <tr><th>Launch</th><td>The first public release or availability of a stablecoin or major new version.</td></tr>
-      <tr><th>Migration</th><td>A move to a new token, contract, blockchain, issuer structure, or protocol design.</td></tr>
-      <tr><th>Rebrand</th><td>A name or brand change that may or may not include a technical migration.</td></tr>
-      <tr><th>Wind-down</th><td>A planned process to end issuance, redemption, conversion, exchange support, or general availability.</td></tr>
-      <tr><th>Discontinued</th><td>Issuance or support has ended, without necessarily involving a market collapse.</td></tr>
-      <tr><th>Failure</th><td>The stablecoin no longer functions as intended and does not recover.</td></tr>
-      <tr><th>Post-collapse trading</th><td>The token still trades after failure, but the original peg or redemption function has not returned.</td></tr>
-      <tr><th>Successor or parallel asset</th><td>A related token that replaces, extends, or coexists with an earlier stablecoin.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Examples</div>
-    <table><tbody>
-      <tr><th>UST</th><td>The May 2022 collapse supports the failed status. Later USTC trading is recorded separately from the original stablecoin function.</td></tr>
-      <tr><th>BUSD</th><td>New issuance stopped and the product entered a wind-down. That is a discontinuation, not a collapse.</td></tr>
-      <tr><th>DAI and USDS</th><td>The relationship between the earlier asset, newer product, and Sky ecosystem requires a clear timeline rather than one combined label.</td></tr>
-      <tr><th>LUSD and BOLD</th><td>Liquity V1 and V2 involve related but distinct stablecoins and protocol designs.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="section-grid" aria-label="Lifecycle examples">
-    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST / TerraUSD</h2><p>Collapse, failed status, and post-collapse trading.</p></a>
-    <a class="panel mini-card" href="/stablecoin/busd/"><h2>BUSD</h2><p>Issuer wind-down and discontinued status.</p></a>
-    <a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI</h2><p>Protocol transition and relationship to newer Sky products.</p></a>
-  </section>
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader category={guideCategoryLabels[guide.category]} title="How stablecoins change over time" description="A stablecoin can launch, expand to new chains, migrate, rebrand, stop minting, enter a wind-down, fail, or continue trading after its original purpose has ended." publishedAt={guide.publishedAt} informationCurrentThrough={guide.informationCurrentThrough} updatedAt={guide.updatedAt} />
+  <section class="panel registry"><div class="bar">Why lifecycle terms matter</div><p>Stablecoin histories are rarely a simple move from active to failed. Some products remain available with limits. Some stop minting while redemptions continue. Others move to a new token, brand, contract, or protocol design. A token may also keep trading after the original stablecoin has failed.</p></section>
+  <section class="panel registry"><div class="bar">Key terms</div><table><tbody><tr><th>Launch</th><td>The first public release or availability of a stablecoin or major new version.</td></tr><tr><th>Migration</th><td>A move to a new token, contract, blockchain, issuer structure, or protocol design.</td></tr><tr><th>Rebrand</th><td>A name or brand change that may or may not include a technical migration.</td></tr><tr><th>Wind-down</th><td>A planned process to end issuance, redemption, conversion, exchange support, or general availability.</td></tr><tr><th>Discontinued</th><td>Issuance or support has ended, without necessarily involving a market collapse.</td></tr><tr><th>Failure</th><td>The stablecoin no longer functions as intended and does not recover.</td></tr><tr><th>Post-collapse trading</th><td>The token still trades after failure, but the original peg or redemption function has not returned.</td></tr><tr><th>Successor or parallel asset</th><td>A related token that replaces, extends, or coexists with an earlier stablecoin.</td></tr></tbody></table></section>
+  <section class="panel registry"><div class="bar">Examples</div><table><tbody><tr><th>UST</th><td>The May 2022 collapse supports the failed status. Later USTC trading is recorded separately from the original stablecoin function.</td></tr><tr><th>BUSD</th><td>New issuance stopped and the product entered a wind-down. That is a discontinuation, not a collapse.</td></tr><tr><th>DAI and USDS</th><td>The relationship between the earlier asset, newer product, and Sky ecosystem requires a clear timeline rather than one combined label.</td></tr><tr><th>LUSD and BOLD</th><td>Liquity V1 and V2 involve related but distinct stablecoins and protocol designs.</td></tr></tbody></table></section>
+  <section class="section-grid" aria-label="Lifecycle examples"><a class="panel mini-card" href="/stablecoin/ust/"><h2>UST / TerraUSD</h2><p>Collapse, failed status, and post-collapse trading.</p></a><a class="panel mini-card" href="/stablecoin/busd/"><h2>BUSD</h2><p>Issuer wind-down and discontinued status.</p></a><a class="panel mini-card" href="/stablecoin/dai/"><h2>DAI</h2><p>Protocol transition and relationship to newer Sky products.</p></a></section>
+  <GuideRevisionHistory revisions={guide.revisions} />
 </BaseLayout>

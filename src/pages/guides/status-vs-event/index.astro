@@ -1,66 +1,26 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('status-vs-event');
 const title = 'Stablecoin Status and Event Records — Stable or Gone';
 const description = 'Why Stable or Gone keeps a stablecoin’s current status separate from dated events such as depegs, launches, migrations, wind-downs, and collapses.';
+const canonicalPath = '/guides/status-vs-event/';
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
-  url: 'https://sog.badjoke-lab.com/guides/status-vs-event/',
-  description,
+  '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin status', 'stablecoin events', 'stablecoin history']
+  about: ['stablecoin status', 'stablecoin events', 'stablecoin history'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}), ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
 };
 ---
-<BaseLayout title={title} description={description} canonicalPath="/guides/status-vs-event/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Reading stablecoin records</div>
-      <h1>Status and events are different</h1>
-      <p>A status describes the stablecoin’s present or final state. An event records something that happened at a particular time.</p>
-    </div>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Why this matters</div>
-    <p>A stablecoin can suffer a serious depeg and later continue operating. Another can stop minting without collapsing. A third can migrate to a successor product. Keeping status and events separate preserves those differences.</p>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Status labels</div>
-    <table><tbody>
-      <tr><th>Active</th><td>Operating or available according to the latest sources reviewed.</td></tr>
-      <tr><th>Limited</th><td>Still operating, but with important restrictions on access, minting, redemption, geography, or availability.</td></tr>
-      <tr><th>Discontinued</th><td>Issuance, support, or operation has ended or entered a formal wind-down.</td></tr>
-      <tr><th>Failed</th><td>The stablecoin no longer functions as intended after a severe event or collapse.</td></tr>
-      <tr><th>Migrated / rebranded</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Event records</div>
-    <table><tbody>
-      <tr><th>Launch</th><td>The stablecoin or a major new version became publicly available.</td></tr>
-      <tr><th>Depeg</th><td>The market or redemption value moved materially away from the target.</td></tr>
-      <tr><th>Recovery</th><td>The stablecoin returned close to its target and normal operations resumed.</td></tr>
-      <tr><th>Wind-down</th><td>An issuer, exchange, regulator, or protocol began ending support or availability.</td></tr>
-      <tr><th>Collapse</th><td>The stablecoin lost its intended function and did not recover.</td></tr>
-      <tr><th>Regulatory action</th><td>A public enforcement action, restriction, settlement, or other official intervention.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Examples</div>
-    <table><tbody>
-      <tr><th>USDC</th><td>The March 2023 depeg is recorded as an event; USDC later recovered and remains active.</td></tr>
-      <tr><th>BUSD</th><td>The product entered a wind-down and is recorded as discontinued, without a collapse event.</td></tr>
-      <tr><th>UST</th><td>The May 2022 collapse is recorded as an event and supports the failed status.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="section-grid" aria-label="Related records">
-    <a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC</h2><p>Recovered depeg with active status.</p></a>
-    <a class="panel mini-card" href="/stablecoin/busd/"><h2>BUSD</h2><p>Issuer wind-down with discontinued status.</p></a>
-    <a class="panel mini-card" href="/stablecoin/ust/"><h2>UST</h2><p>Collapse followed by failed status.</p></a>
-  </section>
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader category={guideCategoryLabels[guide.category]} title="Status and events are different" description="A status describes the stablecoin’s present or final state. An event records something that happened at a particular time." publishedAt={guide.publishedAt} informationCurrentThrough={guide.informationCurrentThrough} updatedAt={guide.updatedAt} />
+  <section class="panel registry"><div class="bar">Why this matters</div><p>A stablecoin can suffer a serious depeg and later continue operating. Another can stop minting without collapsing. A third can migrate to a successor product. Keeping status and events separate preserves those differences.</p></section>
+  <section class="panel registry"><div class="bar">Status labels</div><table><tbody><tr><th>Active</th><td>Operating or available according to the latest sources reviewed.</td></tr><tr><th>Limited</th><td>Still operating, but with important restrictions on access, minting, redemption, geography, or availability.</td></tr><tr><th>Discontinued</th><td>Issuance, support, or operation has ended or entered a formal wind-down.</td></tr><tr><th>Failed</th><td>The stablecoin no longer functions as intended after a severe event or collapse.</td></tr><tr><th>Migrated / rebranded</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr></tbody></table></section>
+  <section class="panel registry"><div class="bar">Event records</div><table><tbody><tr><th>Launch</th><td>The stablecoin or a major new version became publicly available.</td></tr><tr><th>Depeg</th><td>The market or redemption value moved materially away from the target.</td></tr><tr><th>Recovery</th><td>The stablecoin returned close to its target and normal operations resumed.</td></tr><tr><th>Wind-down</th><td>An issuer, exchange, regulator, or protocol began ending support or availability.</td></tr><tr><th>Collapse</th><td>The stablecoin lost its intended function and did not recover.</td></tr><tr><th>Regulatory action</th><td>A public enforcement action, restriction, settlement, or other official intervention.</td></tr></tbody></table></section>
+  <section class="panel registry"><div class="bar">Examples</div><table><tbody><tr><th>USDC</th><td>The March 2023 depeg is recorded as an event; USDC later recovered and remains active.</td></tr><tr><th>BUSD</th><td>The product entered a wind-down and is recorded as discontinued, without a collapse event.</td></tr><tr><th>UST</th><td>The May 2022 collapse is recorded as an event and supports the failed status.</td></tr></tbody></table></section>
+  <section class="section-grid" aria-label="Related records"><a class="panel mini-card" href="/stablecoin/usdc/"><h2>USDC</h2><p>Recovered depeg with active status.</p></a><a class="panel mini-card" href="/stablecoin/busd/"><h2>BUSD</h2><p>Issuer wind-down with discontinued status.</p></a><a class="panel mini-card" href="/stablecoin/ust/"><h2>UST</h2><p>Collapse followed by failed status.</p></a></section>
+  <GuideRevisionHistory revisions={guide.revisions} />
 </BaseLayout>
