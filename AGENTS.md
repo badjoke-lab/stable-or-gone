@@ -62,21 +62,24 @@ Current position:
 
 ```text
 Latest completed: PR #265 Editorial Ledger Stablecoin dossier
-Active: PR #266 Organizations and Events
-Next: PR #267 Guides
+Partial precursor: PR #266 Organization and Event row compaction
+Active: PR #267 corrective Organizations and Events completion
+Next: PR #268 Guides
+Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
+Gate V3-C: pending PR #267 validation and merge
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-The shared shell, Home, Stablecoins register, and Stablecoin dossiers are now v3. Organizations, Events, Guides, reference pages, and final mobile behavior remain active migration work. Do not treat the current state as redesign completion.
+The shared shell, Home, Stablecoins register, and Stablecoin dossiers are v3. PR #266 changed only two index-row components and is not Gate V3-C completion. PR #267 completes Organizations and Events. Guides, reference pages, final mobile behavior, visual audit, cleanup, and production closure remain migration work. Do not treat the current state as redesign completion.
 
-Growth D, the 100-record audit, and non-UI release preparation are paused through PR #272. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
+Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
 ## Visual authority
 
@@ -105,8 +108,8 @@ No agent may:
 - invent another visual direction;
 - substitute or generate another logo;
 - redesign a page from memory;
-- use the rejected dashboard mock direction;
-- reintroduce oversized heroes, KPI-card rows, blue-purple glow, or repeated rounded-card composition as defaults;
+- use the rejected SaaS dashboard mock direction;
+- reintroduce a giant hero, KPI card row, blue-purple glow, or repeated rounded-card composition as defaults;
 - implement mock-only data as canonical data;
 - alter the active UI sequence without updating the roadmap and implementation plan.
 
