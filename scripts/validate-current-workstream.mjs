@@ -21,6 +21,7 @@ import './validate-organization-index-detail-implementation.mjs';
 import './validate-ui-v3-guides.mjs';
 import './validate-ui-v3-reference-utility.mjs';
 import './validate-ui-v3-representative-visual-audit.mjs';
+import './validate-ui-v3-cleanup.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
@@ -36,12 +37,13 @@ const correctiveAudit = fs.readFileSync('docs/audits/ui-v3-organizations-events-
 const guideAudit = fs.readFileSync('docs/audits/ui-v3-guides-2026-07-01.md', 'utf8');
 const referenceAudit = fs.readFileSync('docs/audits/ui-v3-reference-utility-2026-07-01.md', 'utf8');
 const visualAudit = fs.readFileSync('docs/audits/ui-v3-representative-visual-audit-2026-07-02.md', 'utf8');
+const cleanupAudit = fs.readFileSync('docs/audits/ui-v3-accessibility-performance-legacy-cleanup-2026-07-02.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #270 — mobile and accessibility hardening',
+  'Latest completed: PR #271 — representative all-family visual audit',
   'Partial precursor: PR #266',
-  'Active: PR #271 — representative all-family visual audit',
-  'Next: PR #272 — accessibility, performance, and legacy cleanup',
+  'Active: PR #272 — accessibility, performance, and legacy cleanup',
+  'Next: PR #273 — production verification and UI v3 closure',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
@@ -51,9 +53,10 @@ for (const phrase of [
   'Gate V3-D: passed',
   'Gate V3-E: passed',
   'Gate V3-F: passed',
-  'PR #270 — mobile and accessibility hardening — complete',
-  'PR #271 — representative all-family visual audit — active; Gate V3-F passed',
-  'PR #272 — accessibility, performance, and legacy cleanup',
+  'Gate V3-G: pending exact release-candidate approval',
+  'Gate V3-H: pending production commit and public parity verification',
+  'PR #271 — representative all-family visual audit — complete',
+  'PR #272 — accessibility, performance, and legacy cleanup — active',
   'PR #273 — production verification and UI v3 closure',
   'Growth D to 100 records'
 ]) {
@@ -68,25 +71,28 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'Latest completed: PR #270 mobile and accessibility hardening'],
+  [agents, 'Latest completed: PR #271 representative all-family visual audit'],
   [agents, 'Partial precursor: PR #266 Organization and Event row compaction'],
-  [agents, 'Active: PR #271 representative all-family visual audit'],
-  [agents, 'Next: PR #272 accessibility, performance, and legacy cleanup'],
+  [agents, 'Active: PR #272 accessibility, performance, and legacy cleanup'],
+  [agents, 'Next: PR #273 production verification and UI v3 closure'],
   [agents, 'Closure: PR #273 production verification and UI v3 closure'],
-  [agents, 'Gate V3-E: passed'],
   [agents, 'Gate V3-F: passed'],
-  [agents, '48 reviewed full-page images'],
+  [agents, 'Gate V3-G: pending exact release-candidate approval'],
+  [agents, 'Gate V3-H: pending production commit and public parity verification'],
+  [agents, 'scripts/validate-ui-v3-cleanup.mjs'],
+  [agents, 'scripts/audit-ui-v3-cleanup-performance.mjs'],
   [agents, 'A normal pull request must not wait for Cloudflare Pages'],
   [agents, 'The old PR #251 must not be merged as-is'],
   [design, 'Status: canonical design overview'],
   [design, 'Visual family: Editorial Ledger'],
   [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Completed through: PR #270 mobile and accessibility hardening'],
-  [uiPlan, 'Active work item: PR #271 representative all-family visual audit'],
-  [uiPlan, 'Next implementation: PR #272 accessibility, performance, and legacy cleanup'],
+  [uiPlan, 'Completed through: PR #271 representative all-family visual audit'],
+  [uiPlan, 'Active work item: PR #272 accessibility, performance, and legacy cleanup'],
+  [uiPlan, 'Next implementation: PR #273 production verification and closure'],
   [uiPlan, 'Gate V3-F: passed'],
-  [uiPlan, 'PR #273 — production verification and closure'],
+  [uiPlan, 'source CSS total <= 250,000 bytes'],
+  [uiPlan, '48 full-page images total'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
   [uiV3, 'The default public surface is light, not dark'],
   [uiV3, 'do not create a new logo'],
@@ -101,13 +107,15 @@ for (const [document, phrase] of [
   [referenceAudit, 'Roadmap item: PR #269'],
   [referenceAudit, '`/contact/` remains the canonical Corrections and submissions route'],
   [visualAudit, 'Roadmap item: PR #271'],
-  [visualAudit, 'Gate: V3-F'],
-  [visualAudit, 'Status: passed'],
-  [visualAudit, 'Run ID: 28538275448'],
-  [visualAudit, 'total full-page images reviewed: 48'],
-  [visualAudit, 'zero automated failures'],
   [visualAudit, 'Gate V3-F passed'],
-  [visualAudit, 'Canonical stable assets changed: 0']
+  [visualAudit, 'total full-page images reviewed: 48'],
+  [cleanupAudit, 'Roadmap item: PR #272'],
+  [cleanupAudit, 'PageHero.astro'],
+  [cleanupAudit, 'MetricCard.astro'],
+  [cleanupAudit, 'editorial-v2.css'],
+  [cleanupAudit, 'performance budgets'],
+  [cleanupAudit, 'representative screenshot regression'],
+  [cleanupAudit, 'Canonical stable assets changed: 0']
 ]) {
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
@@ -118,4 +126,4 @@ for (const source of [agents, roadmap, uiPlan]) {
   }
 }
 
-console.log('Current workstream valid: PR #270 and Gate V3-E are complete, PR #271 rendered audit passed Gate V3-F, PR #272 is next, 98 canonical assets are preserved, and closure remains PR #273.');
+console.log('Current workstream valid: PR #271 and Gate V3-F are complete, PR #272 cleanup is active with measured build budgets and visual regression, PR #273 is next, 98 canonical assets are preserved, and production closure remains pending.');
