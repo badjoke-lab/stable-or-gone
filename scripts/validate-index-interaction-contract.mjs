@@ -11,17 +11,18 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 check(fs.existsSync(auditPath), 'index interaction audit is missing');
 if (!fs.existsSync(auditPath)) process.exit(1);
 const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
-check(audit.schema_version === '1.0', 'audit schema changed');
+check(audit.schema_version === '1.1', 'audit schema changed');
 check(indexInteractionContracts.length === 3, 'three index contracts are required');
 check(audit.totals?.search_fields === 18, 'search field total changed');
 check(audit.totals?.filters === 16, 'filter total changed');
 check(audit.totals?.sorts === 15, 'sort total changed');
 check(audit.totals?.mobile_row_fields === 26, 'mobile field total changed');
-check(audit.totals?.implemented_indexes === 3, 'all three registry indexes must be implemented at PR 26');
+check(audit.totals?.paginated_indexes === 1, 'only the Stablecoins register should be paginated in this PR');
+check(audit.totals?.implemented_indexes === 3, 'all three registry indexes must remain implemented');
 check(audit.totals?.route_changes === 0, 'routes must not change');
 
 const expected = {
-  stablecoins: { route: '/stablecoins/', inputs: 2, selects: 1, headers: 9, client: 'src/scripts/stablecoin-index.ts' },
+  stablecoins: { route: '/stablecoins/', inputs: 2, selects: 1, headers: 7, client: 'src/scripts/stablecoin-index.ts' },
   organizations: { route: '/issuers/', inputs: 2, selects: 1, headers: 8, client: 'src/scripts/organization-index.ts' },
   events: { route: '/events/', inputs: 2, selects: 1, headers: 8, client: 'src/scripts/event-index.ts' }
 };
@@ -46,24 +47,30 @@ for (const contract of indexInteractionContracts) {
 
 const stable = audit.current_implementation.find((item) => item.id === 'stablecoins');
 check(stable?.current_behavior?.comparison_present === true, 'stablecoin comparison is missing');
+check(stable?.current_behavior?.pagination_present === true, 'stablecoin pagination controls are missing');
+check(stable?.current_behavior?.page_state_present === true, 'stablecoin page URL state is missing');
+check(stable?.current_behavior?.visible_range_present === true, 'stablecoin visible range is missing');
 const stableGap = audit.implementation_gaps.find((item) => item.id === 'stablecoins');
 check(stableGap?.comparison_missing === false, 'stablecoin comparison gap remains');
+check(stableGap?.pagination_missing === false, 'stablecoin pagination gap remains');
 for (const id of ['organizations', 'events']) {
   const current = audit.current_implementation.find((item) => item.id === id);
   check(current?.current_behavior?.comparison_present === false, `${id}: generic comparison must remain disabled`);
   const gap = audit.implementation_gaps.find((item) => item.id === id);
   check(gap?.comparison_missing === false, `${id}: comparison gap state changed`);
+  check(gap?.pagination_missing === false, `${id}: unexpected pagination requirement appeared`);
 }
 
 const stableContract = indexInteractionContracts.find((item) => item.id === 'stablecoins');
 check(stableContract?.comparison.enabled === true && stableContract?.comparison.minimum_records === 2 && stableContract?.comparison.maximum_records === 4, 'stablecoin comparison contract changed');
+check(stableContract?.pagination?.enabled === true && stableContract?.pagination?.page_size === 20 && stableContract?.pagination?.query_param === 'page', 'stablecoin pagination contract is incomplete');
 for (const id of ['organizations', 'events']) check(indexInteractionContracts.find((item) => item.id === id)?.comparison.enabled === false, `${id}: generic comparison must remain disabled`);
 
 const validation = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
-  totals: { index_contracts: 3, implemented_indexes: 3, deferred_indexes: 0, failures: failures.length },
+  totals: { index_contracts: 3, implemented_indexes: 3, paginated_indexes: 1, deferred_indexes: 0, failures: failures.length },
   failures
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(validation, null, 2)}\n`);
