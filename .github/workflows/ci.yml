@@ -72,6 +72,7 @@ jobs:
           name: ui-v3-cleanup-audit-${{ github.run_id }}
           if-no-files-found: warn
           path: |
+            artifacts/ui-v3-cleanup-validation.json
             artifacts/ui-v3-cleanup-audit.json
             artifacts/ui-v3-cleanup-audit.md
       - name: Upload build diagnostics
