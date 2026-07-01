@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import './validate-ui-v3-mobile-accessibility.mjs';
 import { mobileTableContracts, pageFamilyContracts, responsiveAccessibilityPolicies, responsiveBands } from '../config/responsive-accessibility-contract.mjs';
 import { implementedMobileTableRepresentations, mobileTableSourceFiles, requiredMobileTableKinds } from './mobile-table-manifest.mjs';
 
