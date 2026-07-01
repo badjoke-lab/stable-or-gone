@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import './validate-ui-v3-guides.mjs';
+import './validate-ui-v3-reference-utility.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -77,4 +78,4 @@ const datedGuidesUpdate = updates.find((entry) => entry.id === 'sog_update_2026_
 check(Boolean(datedGuidesUpdate), 'Original dated-guide update entry missing');
 for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(datedGuidesUpdate.related_paths.includes(`/guides/${slug}/`), `Original update route missing: ${slug}`);
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, reference_utility_v3: true, guide_slugs: slugs }, null, 2));
