@@ -73,13 +73,13 @@ Gate V3-B: passed
 Gate V3-C: passed
 Gate V3-D: passed
 Gate V3-E: passed
-Gate V3-F: pending PR #271 rendered audit and human image review
+Gate V3-F: passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-All page families now use Editorial Ledger v3 structures. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening and passed Gate V3-E. The representative visual audit, cleanup, and production closure remain. Do not treat the current state as redesign completion.
+All page families now use Editorial Ledger v3 structures. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening and passed Gate V3-E. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. Cleanup and production closure remain. Do not treat the current state as redesign completion.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
@@ -142,6 +142,7 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Mobile is a deliberate transformation and must retain protected information.
 - Representative screenshot sampling is the default.
 - Gate V3-F requires actual desktop and mobile image artifacts plus human review; static source checks alone are insufficient.
+- PR #271 established the passing rendered visual regression baseline: 24 routes per device, 48 reviewed full-page images, and zero automated rendered failures.
 
 ## Data and quality rules
 
