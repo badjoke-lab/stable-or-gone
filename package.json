@@ -33,7 +33,7 @@
     "prepare:organization-taxonomy": "npm run generate:organization-taxonomy && npm run validate:organization-taxonomy",
     "generate:evidence-taxonomy": "node scripts/collect-evidence-taxonomy-migration.mjs",
     "validate:evidence-taxonomy": "node scripts/validate-evidence-taxonomy-normalization.mjs",
-    "prepare:evidence-taxonomy": "npm run generate:evidence-taxonomy && npm run validate:evidence-taxonomy",
+    "prepare:evidence-taxonomy": "npm run generate:evidence-taxonomy-values && npm run generate:evidence-taxonomy && npm run validate:evidence-taxonomy",
     "generate:deployment-taxonomy": "node scripts/collect-deployment-taxonomy-migration.mjs",
     "validate:deployment-taxonomy": "node scripts/validate-deployment-taxonomy-normalization.mjs",
     "prepare:deployment-taxonomy": "npm run generate:deployment-taxonomy && npm run validate:deployment-taxonomy",
@@ -80,6 +80,7 @@
     "validate:ui-v3-home": "node scripts/validate-ui-v3-home.mjs",
     "validate:ui-v3-stablecoin-index": "node scripts/validate-ui-v3-stablecoin-index.mjs",
     "validate:ui-v3-stablecoin-detail": "node scripts/validate-ui-v3-stablecoin-detail.mjs",
+    "validate:ui-v3-visual-audit": "node scripts/validate-ui-v3-representative-visual-audit.mjs",
     "validate:ui-v2-foundation": "node scripts/validate-ui-v2-foundation.mjs",
     "validate:ui-v2-home": "node scripts/validate-ui-v2-home.mjs",
     "validate:ui-v2-stablecoin-index": "node scripts/validate-ui-v2-stablecoin-index.mjs",
@@ -116,7 +117,8 @@
     "screenshot:desktop": "node scripts/capture-site-screenshots.mjs --device desktop",
     "screenshot:mobile": "node scripts/capture-site-screenshots.mjs --device mobile",
     "screenshot:all": "npm run screenshot:desktop && npm run screenshot:mobile",
-    "screenshot:zip": "node scripts/capture-site-screenshots.mjs --device desktop --zip-only && node scripts/capture-site-screenshots.mjs --device mobile --zip-only"
+    "screenshot:zip": "node scripts/capture-site-screenshots.mjs --device desktop --zip-only && node scripts/capture-site-screenshots.mjs --device mobile --zip-only",
+    "audit:visual-representatives": "node scripts/audit-representative-visuals.mjs"
   },
   "dependencies": {
     "@astrojs/check": "latest",
