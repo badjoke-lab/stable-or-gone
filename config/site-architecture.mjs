@@ -45,6 +45,56 @@ export const utilityNavigation = Object.freeze([
   Object.freeze({ id: 'support', label: 'Support', href: '/support/', prominence: 'secondary_utility' })
 ]);
 
+export const primaryNavigation = Object.freeze([
+  Object.freeze({ id: 'register', label: 'Register', href: '/stablecoins/' }),
+  Object.freeze({ id: 'events', label: 'Events', href: '/events/' }),
+  Object.freeze({ id: 'organizations', label: 'Organizations', href: '/issuers/' }),
+  Object.freeze({ id: 'guides', label: 'Guides', href: '/guides/' })
+]);
+
+export const aboutNavigation = Object.freeze([
+  Object.freeze({ id: 'about', label: 'About', href: '/about/' }),
+  Object.freeze({ id: 'methodology', label: 'Methodology', href: '/methodology/' }),
+  Object.freeze({ id: 'glossary', label: 'Glossary', href: '/glossary/' }),
+  Object.freeze({ id: 'models', label: 'Models', href: '/models/' }),
+  Object.freeze({ id: 'updates', label: 'Updates', href: '/updates/' }),
+  Object.freeze({ id: 'corrections', label: 'Corrections', href: '/contact/' }),
+  Object.freeze({ id: 'support', label: 'Support', href: '/support/' })
+]);
+
+export const footerNavigationGroups = Object.freeze([
+  Object.freeze({
+    id: 'registry',
+    label: 'Registry',
+    items: Object.freeze([
+      Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
+      Object.freeze({ label: 'Organizations', href: '/issuers/' }),
+      Object.freeze({ label: 'Events', href: '/events/' }),
+      Object.freeze({ label: 'Guides', href: '/guides/' })
+    ])
+  }),
+  Object.freeze({
+    id: 'reference',
+    label: 'Reference',
+    items: Object.freeze([
+      Object.freeze({ label: 'Glossary', href: '/glossary/' }),
+      Object.freeze({ label: 'Models', href: '/models/' }),
+      Object.freeze({ label: 'Methodology', href: '/methodology/' }),
+      Object.freeze({ label: 'Updates', href: '/updates/' })
+    ])
+  }),
+  Object.freeze({
+    id: 'project',
+    label: 'Project',
+    items: Object.freeze([
+      Object.freeze({ label: 'About', href: '/about/' }),
+      Object.freeze({ label: 'Corrections', href: '/contact/' }),
+      Object.freeze({ label: 'Support', href: '/support/' }),
+      Object.freeze({ label: 'GitHub Issues', href: 'https://github.com/badjoke-lab/stable-or-gone/issues' })
+    ])
+  })
+]);
+
 export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/', source_file: 'src/pages/index.astro', output_kind: 'html', group: 'entry', role: 'registry_home', decision: 'keep', navigation: 'brand' }),
   Object.freeze({ pattern: '/about/', source_file: 'src/pages/about/index.astro', output_kind: 'html', group: 'project', role: 'project_about', decision: 'keep', navigation: 'project' }),
@@ -98,10 +148,11 @@ export const compatibilityRoutePolicy = Object.freeze({
 
 export const routeMigrationPolicy = Object.freeze({
   current_pr_changes_routes: false,
-  current_pr_changes_navigation_markup: false,
+  current_pr_changes_navigation_markup: true,
   all_current_routes_preserved: true,
   redirects_introduced: Object.freeze([]),
   removals_introduced: Object.freeze([]),
   compatibility_changes_require_dedicated_migration: true,
-  grouped_navigation_implementation_deferred_to_pr: 23
+  navigation_model: 'editorial_ledger_v3',
+  navigation_implemented_in_pr: 262
 });
