@@ -3,6 +3,7 @@
 Date: 2026-07-02
 Roadmap item: PR #272
 Status: execution pending
+Contract keywords: performance budgets; representative screenshot regression.
 
 ## Scope
 
