@@ -29,6 +29,8 @@ export const requiredMobileTableKinds = [
   'methodology-primary-display-relationships', 'methodology-evidence-source-identities'
 ];
 
+const generatedByRuntime = 'src/components/MobileTableRuntime.astro';
+
 export const implementedMobileTableRepresentations = Object.freeze({
   'stablecoin-index': 'src/components/StablecoinIndexCard.astro',
   'stablecoin-overview': 'src/components/StablecoinDetailView.astro',
@@ -41,5 +43,18 @@ export const implementedMobileTableRepresentations = Object.freeze({
   'event-index': 'src/components/EventIndexCard.astro',
   'event-details': 'src/components/EventEditorialBody.astro',
   'event-detail-overlay': 'src/components/StructuredEventDetail.astro',
-  'event-sources': 'src/components/EventEditorialBody.astro'
+  'event-sources': 'src/components/EventEditorialBody.astro',
+  'stablecoin-reserve-profile': 'src/components/StablecoinValueStateSections.astro',
+  'stablecoin-redemption-profile': 'src/components/StablecoinValueStateSections.astro',
+  'stablecoin-record-coverage': generatedByRuntime,
+  'issuer-control-events': generatedByRuntime,
+  'stablecoin-event-timeline': generatedByRuntime,
+  'stablecoin-reserve-history': 'src/components/StablecoinValueStateSections.astro',
+  'stablecoin-regulatory-notices': 'src/components/StablecoinValueStateSections.astro',
+  'stablecoin-deployments': generatedByRuntime,
+  'stablecoin-sources': generatedByRuntime,
+  'stablecoin-open-questions': 'src/components/StablecoinValueStateSections.astro',
+  'methodology-value-states': generatedByRuntime,
+  'methodology-primary-display-relationships': generatedByRuntime,
+  'methodology-evidence-source-identities': generatedByRuntime
 });

@@ -1,0 +1,131 @@
+<script>
+  const mobileRepresentationSelector = (kind: string) => `[data-mobile-representation-for="${CSS.escape(kind)}"]`;
+
+  const appendCopyControl = (container: HTMLElement, label: string, value: string) => {
+    if (!/Contract or identifier/i.test(label) || !value || /not recorded|unknown/i.test(value)) return;
+    const row = document.createElement('div');
+    row.className = 'mobile-copy-row';
+    row.dataset.copyContainer = 'true';
+    const code = document.createElement('code');
+    code.textContent = value;
+    code.dataset.longValue = 'true';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = 'Copy full identifier';
+    const data = button.dataset;
+    data.generatedCopyValue = value;
+    button.setAttribute('aria-label', `Copy full ${label.toLowerCase()}`);
+    const feedback = document.createElement('p');
+    feedback.className = 'mobile-copy-feedback';
+    feedback.dataset.copyFeedback = 'true';
+    feedback.setAttribute('aria-live', 'polite');
+    row.append(code, button);
+    container.append(row, feedback);
+  };
+
+  const createDefinitionRepresentation = (table: HTMLTableElement, kind: string) => {
+    const list = document.createElement('dl');
+    list.className = 'mobile-definition-list';
+    const data = list.dataset;
+    data.mobileRepresentationFor = kind;
+    data.generatedMobileTable = 'true';
+    table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
+      const labelCell = row.querySelector(':scope > th');
+      const valueCell = row.querySelector(':scope > td');
+      if (!(labelCell instanceof HTMLTableCellElement) || !(valueCell instanceof HTMLTableCellElement)) return;
+      const item = document.createElement('div');
+      const term = document.createElement('dt');
+      term.innerHTML = labelCell.innerHTML;
+      const value = document.createElement('dd');
+      value.innerHTML = valueCell.innerHTML;
+      item.append(term, value);
+      list.append(item);
+      appendCopyControl(item, labelCell.textContent?.trim() ?? '', valueCell.textContent?.trim() ?? '');
+    });
+    return list;
+  };
+
+  const createRecordRepresentation = (table: HTMLTableElement, kind: string) => {
+    const list = document.createElement('div');
+    list.className = 'mobile-record-list';
+    const data = list.dataset;
+    data.mobileRepresentationFor = kind;
+    data.generatedMobileTable = 'true';
+    const headers = [...table.querySelectorAll(':scope > thead th')].map((cell) => cell.textContent?.trim() ?? 'Field');
+    table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
+      const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
+      if (cells.length === 1 && cells[0] instanceof HTMLTableCellElement && Number(cells[0].colSpan) > 1) {
+        const empty = document.createElement('p');
+        empty.className = 'mobile-empty-record';
+        empty.innerHTML = cells[0].innerHTML;
+        list.append(empty);
+        return;
+      }
+      const article = document.createElement('article');
+      const definition = document.createElement('dl');
+      cells.forEach((cell, index) => {
+        const item = document.createElement('div');
+        const term = document.createElement('dt');
+        const label = headers[index] || `Field ${index + 1}`;
+        term.textContent = label;
+        const value = document.createElement('dd');
+        value.innerHTML = cell.innerHTML;
+        item.append(term, value);
+        definition.append(item);
+        appendCopyControl(item, label, cell.textContent?.trim() ?? '');
+      });
+      article.append(definition);
+      list.append(article);
+    });
+    return list;
+  };
+
+  const fallbackCopy = (value: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    return copied;
+  };
+
+  const bindGeneratedCopyControls = () => {
+    document.querySelectorAll('[data-generated-mobile-table] [data-generated-copy-value]').forEach((control) => {
+      if (!(control instanceof HTMLButtonElement) || control.dataset.copyBound === 'true') return;
+      control.dataset.copyBound = 'true';
+      control.addEventListener('click', async () => {
+        const value = control.dataset.generatedCopyValue ?? '';
+        const original = control.textContent ?? 'Copy full identifier';
+        let copied = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(value); copied = true; }
+          else copied = fallbackCopy(value);
+        } catch { copied = fallbackCopy(value); }
+        const container = control.closest('[data-copy-container]');
+        const feedback = container?.parentElement?.querySelector('[data-copy-feedback]');
+        control.textContent = copied ? 'Copied' : 'Copy failed';
+        control.dataset.copyState = copied ? 'success' : 'error';
+        if (feedback instanceof HTMLElement) feedback.textContent = copied ? 'Full identifier copied to clipboard.' : 'Could not copy automatically. Select and copy the full identifier manually.';
+        window.setTimeout(() => { control.textContent = original; delete control.dataset.copyState; }, 1800);
+      });
+    });
+  };
+
+  const buildMobileTableRepresentations = () => {
+    document.querySelectorAll('table[data-table-kind][data-mobile-table="scroll-preserve"]').forEach((table) => {
+      if (!(table instanceof HTMLTableElement)) return;
+      const kind = table.dataset.tableKind;
+      if (!kind || document.querySelector(mobileRepresentationSelector(kind))) return;
+      const hasColumnHeaders = table.querySelector(':scope > thead th') !== null;
+      const representation = hasColumnHeaders ? createRecordRepresentation(table, kind) : createDefinitionRepresentation(table, kind);
+      table.insertAdjacentElement('afterend', representation);
+    });
+    bindGeneratedCopyControls();
+  };
+
+  buildMobileTableRepresentations();
+</script>
