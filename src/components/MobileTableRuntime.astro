@@ -2,7 +2,7 @@
   const mobileRepresentationSelector = (kind: string) => `[data-mobile-representation-for="${CSS.escape(kind)}"]`;
 
   const appendCopyControl = (container: HTMLElement, label: string, value: string) => {
-    if (!/contract or identifier/i.test(label) || !value || /not recorded|unknown/i.test(value)) return;
+    if (!/Contract or identifier/i.test(label) || !value || /not recorded|unknown/i.test(value)) return;
     const row = document.createElement('div');
     row.className = 'mobile-copy-row';
     row.dataset.copyContainer = 'true';
