@@ -10,7 +10,7 @@ const { coin, reserveComponents, reserveProfile, redemptionProfile, model, reser
   <section class="stablecoin-reserve-components" aria-labelledby="reserve-components-title">
     <h3 id="reserve-components-title">Reserve components</h3>
     {reserveComponents.length === 0 ? <p class="stablecoin-empty-state">No reserve components have been recorded.</p> : (
-      <ul>{reserveComponents.map((component) => <li><strong>{component.asset_label ?? formatPublicLabel(component.asset_category)}</strong><span><ValueStateText value={component.asset_category} displayValue={formatPublicLabel(component.asset_category)} />{component.share_percent !== null && component.share_percent !== undefined ? ` · ${component.share_percent}%` : ''}{component.notes ? ` · ${cleanPublicText(component.notes)}` : ''}</span></li>)}</ul>
+      <ul>{reserveComponents.map((component: any) => <li><strong>{component.asset_label ?? formatPublicLabel(component.asset_category)}</strong><span><ValueStateText value={component.asset_category} displayValue={formatPublicLabel(component.asset_category)} />{component.share_percent !== null && component.share_percent !== undefined ? ` · ${component.share_percent}%` : ''}{component.notes ? ` · ${cleanPublicText(component.notes)}` : ''}</span></li>)}</ul>
     )}
   </section>
   <div class="stablecoin-value-state-group stablecoin-reserve-redemption-group"><StablecoinValueStateSections mode="reserves" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
