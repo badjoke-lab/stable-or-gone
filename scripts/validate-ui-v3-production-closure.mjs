@@ -12,18 +12,18 @@ const audit = read('docs/audits/ui-v3-production-closure-2026-07-02.md');
 const roadmap = read('docs/roadmap.md');
 const plan = read('docs/ui-redesign/implementation-plan.md');
 const agents = read('AGENTS.md');
-const packageJson = read('package.json');
 
 for (const marker of [
   'pull_request:',
   '- main',
   'github.event.pull_request.head.sha',
   'https://sog.badjoke-lab.com',
+  'node scripts/validate-ui-v3-production-closure.mjs',
   'npm run check:production',
   '--device desktop',
   '--device mobile',
   'audit-representative-visuals.mjs',
-  'write-ui-v3-production-closure-report.mjs',
+  'node scripts/write-ui-v3-production-closure-report.mjs',
   'ui-v3-production-closure.json',
   'ui-v3-production-closure.md',
   'retention-days: 90'
@@ -57,8 +57,6 @@ for (const marker of ['Roadmap item: PR #273', 'Gate V3-G', 'Gate V3-H', 'exact 
 for (const marker of ['Active: PR #273 — production verification and UI v3 closure', 'Gate V3-G: pending exact release-candidate approval', 'Gate V3-H: pending production commit and public parity verification']) check(roadmap.includes(marker), `roadmap closure marker missing: ${marker}`);
 for (const marker of ['Active work item: PR #273 production verification and closure', 'Gate V3-G: pending exact release-candidate approval', 'Gate V3-H: pending production commit and public parity verification']) check(plan.includes(marker), `implementation plan closure marker missing: ${marker}`);
 for (const marker of ['Active: PR #273 production verification and UI v3 closure', 'Gate V3-G: pending exact release-candidate approval', 'Gate V3-H: pending production commit and public parity verification']) check(agents.includes(marker), `AGENTS closure marker missing: ${marker}`);
-check(packageJson.includes('"validate:ui-v3-production-closure"'), 'package production closure validator command missing');
-check(packageJson.includes('"report:ui-v3-production-closure"'), 'package production closure report command missing');
 
 const result = {
   schema_version: '1.0',
