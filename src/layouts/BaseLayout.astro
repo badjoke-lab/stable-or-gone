@@ -3,8 +3,9 @@ import '../styles/global.css';
 import '../styles/shell.css';
 import '../styles/accessibility-utilities.css';
 import '../styles/editorial-v2.css';
+import '../styles/editorial-ledger-v3.css';
 import BrandLockup from '../components/BrandLockup.astro';
-import { globalNavigationGroups, utilityNavigation } from '../../config/site-architecture.mjs';
+import { aboutNavigation, footerNavigationGroups, primaryNavigation } from '../../config/site-architecture.mjs';
 interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
@@ -21,6 +22,7 @@ const routeFamilies: Record<string, string[]> = {
 const editorialPrefixes = ['/guides/', '/glossary/', '/models/', '/methodology/', '/updates/', '/about/', '/contact/', '/support/'];
 const pageFamily = editorialPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix)) ? 'editorial' : 'registry';
 const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
+const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
 ---
 <!doctype html>
 <html lang="en">
@@ -29,7 +31,7 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/brand/sog-mark-on-dark.svg" type="image/svg+xml" />
+    <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
@@ -43,19 +45,63 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <header class="site-header"><div class="site-header-inner">
-      <BrandLockup class="site-brand" />
-      <nav class="grouped-navigation" aria-label="Primary navigation">{globalNavigationGroups.map((group) => <div class="navigation-group"><span class="navigation-group-label">{group.label}</span><div class="navigation-group-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></div>)}</nav>
-      <nav class="utility-navigation" aria-label="Utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
-      <details class="mobile-navigation" data-mobile-navigation><summary aria-label="Open navigation menu">Menu</summary><div class="mobile-navigation-panel">{globalNavigationGroups.map((group) => <section class="mobile-navigation-group" aria-labelledby={`mobile-navigation-${group.id}`}><span class="navigation-group-label" id={`mobile-navigation-${group.id}`}>{group.label}</span><div class="mobile-navigation-links">{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</div></section>)}<nav class="mobile-navigation-utilities" aria-label="Mobile utility navigation">{utilityNavigation.map((item) => <a class={item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary'} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav></div></details>
-    </div></header>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <BrandLockup class="site-brand" surface="light" />
+        <nav class="site-primary-navigation" aria-label="Primary navigation">
+          {primaryNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+        <form class="site-search" action="/stablecoins/" method="get" role="search">
+          <label class="visually-hidden" for="site-search-input">Search stablecoin records</label>
+          <input id="site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <details class="site-about-menu">
+          <summary aria-current={isAboutCurrent ? 'page' : undefined}>About</summary>
+          <nav class="site-about-panel" aria-label="About and project navigation">
+            {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+          </nav>
+        </details>
+        <details class="mobile-navigation" data-mobile-navigation>
+          <summary aria-label="Open navigation menu">Menu</summary>
+          <div class="mobile-navigation-panel">
+            <nav class="mobile-navigation-links" aria-label="Mobile primary navigation">
+              {primaryNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+            </nav>
+            <form class="mobile-site-search" action="/stablecoins/" method="get" role="search">
+              <label for="mobile-site-search-input">Search stablecoin records</label>
+              <div><input id="mobile-site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" /><button type="submit">Search</button></div>
+            </form>
+            <nav class="mobile-navigation-secondary" aria-label="Mobile project navigation">
+              {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+            </nav>
+          </div>
+        </details>
+      </div>
+    </header>
     <main id="main-content" class="site-main" tabindex="-1" data-page-family={pageFamily}><slot /></main>
-    <footer class="site-footer"><div class="site-footer-inner">
-      <div class="site-footer-brand"><BrandLockup /></div>
-      <p class="site-footer-summary">Historical information only. SOG is a registry, not a ranking or recommendation service.</p>
-      <nav class="site-footer-links" aria-label="Footer navigation"><a href="/methodology/">Methodology</a><a href="/updates/">Updates</a><a href="/about/">About</a><a href="/contact/">Corrections</a><a href="/support/">Support</a><a href="https://github.com/badjoke-lab/stable-or-gone/issues">GitHub Issues</a><a href="/version.json">Version JSON</a><a href="/data/manifest.json">Data manifest</a><a href="/llms.txt">LLM guide</a><a href="/ai.txt">AI entrypoint</a></nav>
-      <span class="site-footer-meta">Registry, evidence, and known-unknown information are preserved across desktop and compact layouts.</span>
-    </div></footer>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="site-footer-intro">
+          <BrandLockup surface="light" />
+          <p>Historical information only. Stable or Gone is a source-backed registry, not a ranking or recommendation service.</p>
+        </div>
+        {footerNavigationGroups.map((group) => (
+          <nav class="site-footer-group" aria-labelledby={`footer-${group.id}`}>
+            <h2 id={`footer-${group.id}`}>{group.label}</h2>
+            {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+          </nav>
+        ))}
+        <nav class="site-footer-group site-footer-data" aria-labelledby="footer-data">
+          <h2 id="footer-data">Data access</h2>
+          <a href="/version.json">Version JSON</a>
+          <a href="/data/manifest.json">Data manifest</a>
+          <a href="/llms.txt">LLM guide</a>
+          <a href="/ai.txt">AI entrypoint</a>
+        </nav>
+        <p class="site-footer-meta">Canonical records, evidence relations, and known unknowns are preserved across desktop and compact layouts.</p>
+      </div>
+    </footer>
     <script>
       const navigation = document.querySelector('[data-mobile-navigation]');
       if (navigation instanceof HTMLDetailsElement) {
@@ -63,6 +109,11 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
         navigation.addEventListener('keydown', (event) => { if (event.key !== 'Escape' || !navigation.open) return; event.preventDefault(); navigation.open = false; if (trigger instanceof HTMLElement) trigger.focus(); });
         navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.open = false; }));
       }
+      document.addEventListener('click', (event) => {
+        document.querySelectorAll('.site-about-menu[open]').forEach((menu) => {
+          if (menu instanceof HTMLDetailsElement && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+        });
+      });
     </script>
   </body>
 </html>
