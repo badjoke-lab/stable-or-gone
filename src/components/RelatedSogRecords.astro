@@ -1,21 +1,13 @@
 ---
-interface RelatedRecord {
-  href: string;
-  title: string;
-  summary: string;
-}
-
-interface Props {
-  records: RelatedRecord[];
-}
-
+interface RelatedRecord { href: string; title: string; summary: string; }
+interface Props { records: RelatedRecord[]; }
 const { records } = Astro.props;
 ---
-<section class="section-grid" aria-label="Related Stable or Gone records">
-  {records.map((record) => (
-    <a class="panel mini-card" href={record.href}>
-      <h2>{record.title}</h2>
-      <p>{record.summary}</p>
-    </a>
-  ))}
+<section class="guide-related-records" aria-labelledby="related-sog-records-title">
+  <h2 id="related-sog-records-title">Related Stable or Gone records</h2>
+  <div class="guide-related-list">
+    {records.map((record) => (
+      <a href={record.href}><h3>{record.title}</h3><p>{record.summary}</p></a>
+    ))}
+  </div>
 </section>
