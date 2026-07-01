@@ -6,6 +6,9 @@ export type NavigationTreatment = 'brand' | 'registry' | 'learn' | 'project' | '
 export type NavigationItem = { label: string; href: string };
 export type NavigationGroup = { id: 'registry' | 'learn' | 'project'; label: string; purpose: string; items: readonly NavigationItem[] };
 export type UtilityNavigationItem = { id: 'corrections' | 'support'; label: string; href: string; prominence: string };
+export type PrimaryNavigationItem = { id: 'register' | 'events' | 'organizations' | 'guides'; label: string; href: string };
+export type AboutNavigationItem = { id: 'about' | 'methodology' | 'glossary' | 'models' | 'updates' | 'corrections' | 'support'; label: string; href: string };
+export type FooterNavigationGroup = { id: 'registry' | 'reference' | 'project'; label: string; items: readonly NavigationItem[] };
 export type ArchitectureRoute = {
   pattern: string;
   source_file: string;
@@ -20,6 +23,9 @@ export type ContentOwnership = { owner_role: string; route: string; responsibili
 export const architectureGroups: readonly ArchitectureGroup[];
 export const globalNavigationGroups: readonly NavigationGroup[];
 export const utilityNavigation: readonly UtilityNavigationItem[];
+export const primaryNavigation: readonly PrimaryNavigationItem[];
+export const aboutNavigation: readonly AboutNavigationItem[];
+export const footerNavigationGroups: readonly FooterNavigationGroup[];
 export const siteArchitectureRoutes: readonly ArchitectureRoute[];
 export const recordContentOwnership: readonly ContentOwnership[];
 export const compatibilityRoutePolicy: Readonly<{
@@ -37,5 +43,6 @@ export const routeMigrationPolicy: Readonly<{
   redirects_introduced: readonly string[];
   removals_introduced: readonly string[];
   compatibility_changes_require_dedicated_migration: boolean;
-  grouped_navigation_implementation_deferred_to_pr: number;
+  navigation_model: string;
+  navigation_implemented_in_pr: number;
 }>;
