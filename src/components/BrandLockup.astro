@@ -1,5 +1,5 @@
 ---
-import { uiV2BrandAssets } from '../../config/ui-v2-foundation.mjs';
+import { uiV3BrandAssets } from '../../config/ui-v3-foundation.mjs';
 
 interface Props {
   compact?: boolean;
@@ -10,13 +10,13 @@ interface Props {
 
 const {
   compact = false,
-  surface = 'dark',
+  surface = 'light',
   href = '/',
   class: className = ''
 } = Astro.props;
 const asset = compact
-  ? (surface === 'dark' ? uiV2BrandAssets.mark_on_dark : uiV2BrandAssets.mark_on_light)
-  : (surface === 'dark' ? uiV2BrandAssets.lockup_on_dark : uiV2BrandAssets.lockup_on_light);
+  ? (surface === 'dark' ? uiV3BrandAssets.mark_on_dark : uiV3BrandAssets.mark_on_light)
+  : (surface === 'dark' ? uiV3BrandAssets.lockup_on_dark : uiV3BrandAssets.lockup_on_light);
 ---
 <a class:list={['brand-lockup', compact && 'brand-lockup--compact', className]} href={href} aria-label="Stable or Gone home">
   <img src={asset} alt="Stable or Gone" width={compact ? 56 : 228} height={compact ? 56 : 56} decoding="async" />

@@ -13,24 +13,28 @@ import './validate-final-eight-candidate-audit-pr246.mjs';
 import './validate-batch18-growth-a.mjs';
 import './validate-batch19-growth-b.mjs';
 import './validate-batch20-growth-c.mjs';
+import './validate-ui-v3-foundation.mjs';
 
 const roadmap = fs.readFileSync('docs/roadmap.md', 'utf8');
 const program = fs.readFileSync('docs/quality/non-ui-quality-program.md', 'utf8');
 const governance = fs.readFileSync('docs/spec-governance.md', 'utf8');
 const agents = fs.readFileSync('AGENTS.md', 'utf8');
+const design = fs.readFileSync('DESIGN.md', 'utf8');
 const uiPlan = fs.readFileSync('docs/ui-redesign/implementation-plan.md', 'utf8');
 const uiV3 = fs.readFileSync('docs/architecture/approved-editorial-ledger-ui-v3.md', 'utf8');
 const uiV2 = fs.readFileSync('docs/architecture/approved-modern-data-product-ui-v2.md', 'utf8');
 const mocksV3 = fs.readFileSync('docs/ui-redesign/approved-mocks-v3/README.md', 'utf8');
 
 for (const phrase of [
-  'Latest completed: PR #260',
-  'Active: PR #261 — Editorial Ledger UI v3 specification and schedule alignment',
-  'Next: PR #262 — shared Editorial Ledger shell',
+  'Latest completed: PR #262 — shared Editorial Ledger shell',
+  'Active: PR #263 — Home',
+  'Next: PR #264 — Stablecoins register',
   'Canonical stable assets: 98',
   'Open stale draft: PR #251 — Growth D; do not merge as-is',
   'Active workstream: UI remediation',
-  'PR #262 — shared Editorial Ledger shell',
+  'Gate V3-A: passed',
+  'Gate V3-B: passed',
+  'PR #263 — Home — active',
   'PR #270 — representative all-family visual audit',
   'PR #272 — production verification and UI v3 closure',
   'Growth D to 100 records'
@@ -46,12 +50,17 @@ for (const [document, phrase] of [
   [governance, 'the binding workstream is the Editorial Ledger UI v3 remediation'],
   [governance, 'Monitoring executions remain read-only'],
   [governance, 'PR #251 is a stale Growth D draft and must not be merged as-is'],
-  [agents, 'The active workstream is the Editorial Ledger UI v3 remediation'],
+  [agents, 'Latest completed: PR #262 shared Editorial Ledger shell'],
+  [agents, 'Active: PR #263 Home'],
   [agents, 'A normal `main` merge triggers the production deployment workflow automatically'],
   [agents, 'The old PR #251 must not be merged as-is'],
+  [design, 'Status: canonical design overview'],
+  [design, 'Visual family: Editorial Ledger'],
+  [design, 'public/brand/sog-lockup-on-light.svg'],
   [uiPlan, 'Status: canonical implementation schedule — active'],
-  [uiPlan, 'Visual direction: Editorial Ledger'],
-  [uiPlan, 'PR #262 — shared Editorial Ledger shell'],
+  [uiPlan, 'Completed through: PR #262 shared Editorial Ledger shell'],
+  [uiPlan, 'Active work item: PR #263 Home'],
+  [uiPlan, 'Gate V3-B: passed'],
   [uiPlan, 'PR #272 — production verification and closure'],
   [uiV3, 'Status: canonical visual and page-implementation contract'],
   [uiV3, 'The default public surface is light, not dark'],
@@ -62,4 +71,4 @@ for (const [document, phrase] of [
   if (!document.includes(phrase)) throw new Error(`active workstream document missing: ${phrase}`);
 }
 
-console.log('Current workstream valid: 98 canonical assets are preserved and Editorial Ledger UI v3 is active through PR #272.');
+console.log('Current workstream valid: the Editorial Ledger shell is complete, 98 canonical assets are preserved, and Home is the active UI v3 item.');

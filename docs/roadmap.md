@@ -6,19 +6,21 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #260 — Open USD guide source correction
-Active: PR #261 — Editorial Ledger UI v3 specification and schedule alignment
-Next: PR #262 — shared Editorial Ledger shell
+Latest completed: PR #262 — shared Editorial Ledger shell
+Active: PR #263 — Home
+Next: PR #264 — Stablecoins register
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
+Gate V3-A: passed
+Gate V3-B: passed
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
-The previous UI v2 implementation through PR #216 is an intermediate repository state. Owner review has now resumed and rejected the Modern Data Product visual direction as an acceptable final presentation. The replacement direction is Editorial Ledger.
+The previous UI v2 implementation through PR #216 is an intermediate repository state. Owner review rejected the Modern Data Product visual direction as an acceptable final presentation. The replacement direction is Editorial Ledger.
 
-The UI remediation is now the binding next workstream. Growth D, the 100-record audit, and non-UI release preparation are paused until the UI remediation and representative desktop/mobile audit are complete.
+The UI remediation is the binding workstream. Growth D, the 100-record audit, and non-UI release preparation are paused until the UI remediation and representative desktop/mobile audit are complete.
 
 ## Current factual baseline
 
@@ -29,6 +31,7 @@ Events: generated from current canonical main
 Guide publication: metadata-driven
 Production deployment: automatic after merge to main
 Screenshot audit: representative mode available for desktop and mobile
+Shared shell: Editorial Ledger v3
 ```
 
 PR #251 was created from an older main base and contains the former Growth D implementation. It is not the active workstream and must not be merged as-is. After UI completion, Growth D must be rebuilt cleanly from the then-current main using only reviewed candidate data.
@@ -47,6 +50,8 @@ PR #250 Growth C: 96 -> 98
 PR #252-#255 guide-publication and automatic-deployment corrections
 PR #256-#257 screenshot capture and one-click audit workflow
 PR #258-#260 guide publication and Open USD editorial corrections
+PR #261 Editorial Ledger UI v3 specification and schedule alignment
+PR #262 shared Editorial Ledger shell
 ```
 
 ## UI v3 direction
@@ -57,6 +62,7 @@ Canonical visual authority:
 docs/architecture/approved-editorial-ledger-ui-v3.md
 docs/ui-redesign/approved-mocks-v3/README.md
 docs/ui-redesign/implementation-plan.md
+DESIGN.md
 ```
 
 The v3 direction is fixed as:
@@ -78,24 +84,27 @@ no repeated rounded-card grid
 
 ## Active UI remediation sequence
 
-### PR #261 — specification and schedule alignment
+### PR #261 — specification and schedule alignment — complete
 
-- establish UI v3 as canonical visual authority;
-- mark UI v2 visual references as superseded;
-- update roadmap, governance, required reading, and active-workstream validation;
-- preserve all canonical data and public routes.
+- established UI v3 as canonical visual authority;
+- marked UI v2 visual references as superseded;
+- updated roadmap, governance, required reading, and active-workstream validation;
+- preserved all canonical data and public routes.
 
-### PR #262 — shared Editorial Ledger shell
+### PR #262 — shared Editorial Ledger shell — complete
 
-- use the existing approved S/G logo assets;
-- replace dark SaaS shell tokens with paper, ink, rule, and restrained-accent tokens;
-- simplify primary navigation;
-- replace repeated card primitives with editorial layout primitives;
-- retain accessibility foundations.
+- retained existing approved S/G logo assets;
+- replaced dark SaaS shell tokens with paper, ink, rule, and restrained-accent tokens;
+- simplified primary navigation;
+- added compact registry search and About disclosure;
+- replaced default hero, metric-card, panel, button, field, chip, and support-banner treatment with editorial primitives;
+- retained focus, reduced-motion, forced-colors, and 44px control foundations;
+- added UI v3 foundation validation;
+- changed no canonical data or public routes.
 
-### PR #263 — Home
+### PR #263 — Home — active
 
-- remove oversized hero and KPI cards;
+- remove the remaining Home-specific marketing composition;
 - implement masthead, one-line registry summary, latest material changes, current registry status, recent updates, and guides/reference entrypoints;
 - preserve canonical counts and deterministic record selection.
 
@@ -163,14 +172,14 @@ no repeated rounded-card grid
 ## UI acceptance gates
 
 ```text
-Gate V3-A  specification and visual authority aligned
-Gate V3-B  shared shell complete
-Gate V3-C  core registry page families complete
-Gate V3-D  editorial/reference families complete
-Gate V3-E  mobile and accessibility complete
-Gate V3-F  representative visual audit passed
-Gate V3-G  owner approves exact release candidate
-Gate V3-H  production commit and public parity verified
+Gate V3-A  specification and visual authority aligned — passed
+Gate V3-B  shared shell complete — passed
+Gate V3-C  core registry page families complete — pending
+Gate V3-D  editorial/reference families complete — pending
+Gate V3-E  mobile and accessibility complete — pending
+Gate V3-F  representative visual audit passed — pending
+Gate V3-G  owner approves exact release candidate — pending
+Gate V3-H  production commit and public parity verified — pending
 ```
 
 No agent may claim UI v3 completion before Gate V3-H.
