@@ -6,9 +6,9 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #262 — shared Editorial Ledger shell
-Active: PR #263 — Home
-Next: PR #264 — Stablecoins register
+Latest completed: PR #263 — Editorial Ledger Home
+Active: PR #264 — Stablecoins register
+Next: PR #265 — Stablecoin dossier
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
@@ -32,6 +32,7 @@ Guide publication: metadata-driven
 Production deployment: automatic after merge to main
 Screenshot audit: representative mode available for desktop and mobile
 Shared shell: Editorial Ledger v3
+Home: Editorial Ledger registry front page
 ```
 
 PR #251 was created from an older main base and contains the former Growth D implementation. It is not the active workstream and must not be merged as-is. After UI completion, Growth D must be rebuilt cleanly from the then-current main using only reviewed candidate data.
@@ -52,6 +53,7 @@ PR #256-#257 screenshot capture and one-click audit workflow
 PR #258-#260 guide publication and Open USD editorial corrections
 PR #261 Editorial Ledger UI v3 specification and schedule alignment
 PR #262 shared Editorial Ledger shell
+PR #263 Editorial Ledger Home
 ```
 
 ## UI v3 direction
@@ -102,13 +104,18 @@ no repeated rounded-card grid
 - added UI v3 foundation validation;
 - changed no canonical data or public routes.
 
-### PR #263 — Home — active
+### PR #263 — Home — complete
 
-- remove the remaining Home-specific marketing composition;
-- implement masthead, one-line registry summary, latest material changes, current registry status, recent updates, and guides/reference entrypoints;
-- preserve canonical counts and deterministic record selection.
+- removed the Home-specific marketing hero, coin illustration, KPI cards, entry-card grid, and support CTA banner;
+- added an editorial masthead and truthful registry review date;
+- added one-line canonical totals rather than metric cards;
+- added latest material changes from dated canonical events;
+- added current lifecycle counts with an explicit non-rating disclaimer;
+- added recently reviewed stablecoin records selected by `last_verified_at`;
+- added metadata-driven guides and reference entrypoints;
+- preserved cross-registry search, canonical counts, routes, and JSON-LD.
 
-### PR #264 — Stablecoins register
+### PR #264 — Stablecoins register — active
 
 - implement table-first public-register composition;
 - compact search/filter/sort row;
