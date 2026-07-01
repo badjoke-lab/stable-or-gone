@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('status-vs-event');
 const title = 'Stablecoin Status and Event Records — Stable or Gone';
 const description = 'Why Stable or Gone keeps a stablecoin’s current status separate from dated events such as depegs, launches, migrations, wind-downs, and collapses.';
 const jsonLd = {
@@ -13,13 +16,14 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/status-vs-event/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Reading stablecoin records</div>
-      <h1>Status and events are different</h1>
-      <p>A status describes the stablecoin’s present or final state. An event records something that happened at a particular time.</p>
-    </div>
-  </section>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="Status and events are different"
+    description="A status describes the stablecoin’s present or final state. An event records something that happened at a particular time."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
 
   <section class="panel registry">
     <div class="bar">Why this matters</div>
