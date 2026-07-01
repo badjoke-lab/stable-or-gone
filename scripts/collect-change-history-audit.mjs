@@ -84,7 +84,7 @@ for (const definition of signalDefinitions) {
 }
 
 const currentPageSource = fs.readFileSync(path.join(root, 'src/pages/updates/index.astro'), 'utf8');
-const updateHistoryTable = currentPageSource.match(/<div class="bar">Update history<\/div>([\s\S]*?)<\/table>/)?.[1] ?? '';
+const updateHistoryTable = currentPageSource.match(/<table data-change-history-table>([\s\S]*?)<\/table>/)?.[1] ?? '';
 const currentHeaders = [...updateHistoryTable.matchAll(/<th>([^<]+)<\/th>/g)].map((match) => match[1].trim());
 const currentPageSignals = {
   uses_registry_updates: currentPageSource.includes('getRegistryUpdates'),

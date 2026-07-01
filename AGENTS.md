@@ -61,24 +61,25 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #268 Editorial Article Guides
+Latest completed: PR #269 Reference, Long-form, and Utility pages
 Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #269 Reference and utility pages
-Next: PR #270 mobile and accessibility hardening
+Active: PR #270 mobile and accessibility hardening
+Next: PR #271 representative all-family visual audit
 Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
-Gate V3-D: pending PR #269 validation and merge
+Gate V3-D: passed
+Gate V3-E: pending PR #270 validation and merge
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-The shared shell, Home, Stablecoins register, Stablecoin dossiers, Organizations, Events, and Guides are v3. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed the four Organizations and Events page families. PR #268 completed the Guide archive and all nine Editorial Article routes. Reference and utility pages, final mobile behavior, visual audit, cleanup, and production closure remain migration work. Do not treat the current state as redesign completion.
+All page families now use Editorial Ledger v3 structures. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages while preserving `/contact/` as the Corrections route and all Support wallet functions. Mobile hardening, visual audit, cleanup, and production closure remain. Do not treat the current state as redesign completion.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
@@ -135,7 +136,9 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Organizations use responsible-body records.
 - Events use incident/public-record files.
 - Guides use a distinct editorial article layout with explicit publication value states and on-page contents navigation.
-- Reference, long-form, and utility families must not collapse into one generic card template.
+- Models, Glossary, and Updates use scan-friendly Reference indexes.
+- Methodology and About use the Long-form family with readable width and contents navigation.
+- Contact/Corrections and Support use the Utility family and must preserve reporting and payment functions.
 - Mobile is a deliberate transformation and must retain protected information.
 - Representative screenshot sampling is the default.
 
@@ -150,6 +153,7 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Monitoring executions remain read-only and may not update their own accepted baseline.
 - Metadata-only changes and fetch failures must not masquerade as content changes.
 - Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
+- Contact paths, wallet assets, networks, addresses, and copy functions must not change during visual or mobile hardening unless explicitly authorized.
 - The old PR #251 must not be merged as-is. Growth D must be rebuilt from the latest main after UI v3 closes.
 
 ## Mock-only exclusions
@@ -184,6 +188,8 @@ Do not:
 - use externally hosted or unverified logos;
 - create public filter categories from arbitrary free-text values;
 - hide material mobile information through generic numbered-column rules;
+- add a duplicate `/corrections/` route when `/contact/` is the canonical Corrections route;
+- alter contact links or payment addresses through styling work;
 - change the approved PR sequence without updating the plan and roadmap;
 - use conversation history as a substitute for repository specifications;
 - automatically publish monitored candidates into canonical data;

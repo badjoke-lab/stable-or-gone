@@ -6,17 +6,18 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #268 — Editorial Article Guides
+Latest completed: PR #269 — Reference, Long-form, and Utility pages
 Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
-Active: PR #269 — Reference and utility pages
-Next: PR #270 — mobile and accessibility hardening
+Active: PR #270 — mobile and accessibility hardening
+Next: PR #271 — representative all-family visual audit
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
 Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
-Gate V3-D: pending PR #269 validation and merge
+Gate V3-D: passed
+Gate V3-E: pending PR #270 validation and merge
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
@@ -38,6 +39,9 @@ Stablecoin details: Editorial Ledger research dossiers
 Organizations: six-column responsible-body register and record files
 Events: six-column chronological register and incident/public-record files
 Guides: Editorial Ledger archive and nine Editorial Article routes with on-page contents navigation
+Reference: Models, Glossary, and Updates use scan-friendly indexes
+Long-form: Methodology and About use readable columns and generated contents navigation
+Utility: Contact/Corrections and Support preserve reporting, wallet, and copy functions
 ```
 
 PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
@@ -64,6 +68,7 @@ PR #265 Editorial Ledger Stablecoin dossier
 PR #266 partial Organization and Event row compaction
 PR #267 corrective Editorial Ledger Organizations and Events completion
 PR #268 Editorial Ledger Guides and Editorial Article family
+PR #269 Reference, Long-form, and Utility page families
 ```
 
 ## Fixed UI direction
@@ -127,8 +132,7 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 
 - rebuilt Organizations as a six-column responsible-body register and evidence-backed record files;
 - rebuilt Events as a six-column chronological register and incident/public-record files;
-- preserved search, five filters per index, sorting, URL state, zero-result behavior, desktop tables, and compact mobile records;
-- preserved taxonomy, jurisdiction, current and historical relationships, functional roles, typed event details, subjects, evidence, recovery, value states, and known unknowns;
+- preserved search, five filters per index, sorting, URL state, zero-result behavior, desktop tables, compact mobile records, taxonomy, relationships, typed details, subjects, evidence, recovery, value states, and known unknowns;
 - passed all 18 pull-request workflows;
 - changed no canonical records, public routes, logo assets, or machine-readable schema.
 
@@ -136,19 +140,22 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 
 - replaced the Guides hero, KPI strip, category panels, and repeated mini-card grid with an Editorial Ledger guide archive;
 - converted all nine guide routes to a shared Editorial Article family;
-- added a readable article column, desktop rail, generated on-page table of contents, mobile contents disclosure, editorial tables, related records, revision history, glossary, methodology, and correction access;
-- converted dated and evergreen guide headers to the same masthead and explicit publication-value-state contract;
-- preserved article claims, source URLs, guide catalog records, JSON-LD, sitemap coverage, related-guide links, and every public route;
-- added deterministic `validate-ui-v3-guides.mjs` coverage through the normal guide build gate;
-- changed no canonical registry data, route, logo, or machine-readable schema.
+- added readable article columns, desktop rails, generated contents navigation, mobile disclosure, editorial tables, related records, revision history, glossary, methodology, and correction access;
+- preserved article claims, source URLs, guide catalog records, JSON-LD, sitemap coverage, related-guide links, routes, logos, and machine-readable schemas.
 
-### PR #269 — Reference and utility pages — active
+### PR #269 — Reference and utility pages — complete
 
-Align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact while keeping distinct Reference, Long-form, and Utility families. Gate V3-D remains pending until this work completes and passes validation.
+- converted Models, Glossary, and Updates into distinct scan-friendly Reference indexes;
+- converted Methodology and About into Long-form pages with readable width and generated contents navigation;
+- converted Contact/Corrections and Support into Utility pages with restrained action hierarchy;
+- retained `/contact/` as the canonical corrections route and introduced no duplicate `/corrections/` route;
+- preserved Google Form and GitHub reporting paths, all nine support assets, networks, addresses, copy controls, fallback behavior, warnings, update history, public routes, and data;
+- updated the meaningful-change collector to follow the explicit Editorial Updates table marker while preserving the four-column contract;
+- passed all 18 pull-request workflows and Gate V3-D.
 
-### PR #270 — mobile and accessibility hardening
+### PR #270 — mobile and accessibility hardening — active
 
-Preserve material fields at 320px and 200 percent zoom with page-specific compact records, keyboard support, focus, reduced motion, forced colors, and information parity.
+Preserve material fields at 320px and 200 percent zoom with page-specific compact records, controlled navigation and contents disclosure, keyboard support, visible focus, reduced motion, forced colors, and information parity.
 
 ### PR #271 — representative all-family visual audit
 
@@ -168,8 +175,8 @@ Verify automatic deployment, public provenance, machine-readable parity, product
 Gate V3-A  specification and visual authority aligned — passed
 Gate V3-B  shared shell complete — passed
 Gate V3-C  core registry page families complete — passed
-Gate V3-D  editorial/reference families complete — pending PR #269 validation and merge
-Gate V3-E  mobile and accessibility complete — pending
+Gate V3-D  editorial/reference families complete — passed
+Gate V3-E  mobile and accessibility complete — pending PR #270 validation and merge
 Gate V3-F  representative visual audit passed — pending
 Gate V3-G  owner approves exact release candidate — pending
 Gate V3-H  production commit and public parity verified — pending

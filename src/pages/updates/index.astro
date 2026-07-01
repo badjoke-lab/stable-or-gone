@@ -1,71 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { updatePublicCopy } from '../../data/updatePublicCopy';
 import { getRegistryUpdates } from '../../lib/data/registry';
-
 const updates = getRegistryUpdates().sort((a, b) => b.date.localeCompare(a.date));
-const categoryClass = (category: string) => `chip ${category === 'data' ? 'active' : category === 'foundation' ? 'limited' : 'unknown'}`;
-const latestUpdateDate = updates[0]?.date ?? '—';
+const latestUpdateDate = updates[0]?.date ?? 'Not recorded';
 const title = 'Updates — Stable or Gone';
 const description = 'Recent additions, corrections, source reviews, and page changes across Stable or Gone.';
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: title,
-  url: 'https://sog.badjoke-lab.com/updates/',
-  description,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['stablecoin record updates', 'source reviews', 'archive changes']
-};
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, url: 'https://sog.badjoke-lab.com/updates/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: ['stablecoin record updates', 'source reviews', 'archive changes'] };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/updates/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Archive change history</div>
-      <h1>What changed</h1>
-      <p>Recent additions, corrections, source reviews, new guides, and changes to how records are presented.</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Published updates</span><strong>{updates.length}</strong></div>
-      <div class="stat"><span>Latest update</span><strong>{latestUpdateDate}</strong></div>
-    </div>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Update history</div>
-    <table>
-      <thead><tr><th>Date</th><th>Category</th><th>Change</th><th>Related pages</th></tr></thead>
-      <tbody>
-        {updates.map((update) => {
-          const publicCopy = updatePublicCopy[update.id];
-          return (
-            <tr>
-              <td>{update.date}</td>
-              <td><span class={categoryClass(update.category)}>{formatPublicLabel(update.category)}</span></td>
-              <td><strong>{publicCopy?.title ?? update.title}</strong><br /><span>{publicCopy?.summary ?? update.summary}</span></td>
-              <td>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </section>
-
-  <section class="panel support-callout support-callout-updates" aria-labelledby="support-updates-title">
-    <div>
-      <div class="prompt">Support ongoing maintenance</div>
-      <h2 id="support-updates-title">Help fund the next round of updates</h2>
-      <p>Support helps cover research, source checks, broken-link review, and new records. It does not affect editorial decisions.</p>
-    </div>
-    <a class="support-callout-action" href="/support/">Support SOG</a>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Submitting a correction</div>
-    <table><tbody>
-      <tr><th>Report an error</th><td>Use the <a href="/contact/">contact page</a> to report incorrect wording, missing sources, broken links, or missing records.</td></tr>
-      <tr><th>Public discussion</th><td>GitHub Issues can be used for corrections and additions with supporting sources.</td></tr>
-    </tbody></table>
-  </section>
+  <article class="editorial-reference-page" data-ui-v3-reference="updates">
+    <EditorialPageHeader kind="reference" eyebrow="Reference / change history" title="What changed" description="Recent additions, corrections, source reviews, new guides, and changes to how records are presented." facts={[{ label: 'Published updates', value: updates.length }, { label: 'Latest update', value: latestUpdateDate }, { label: 'Ordering', value: 'Newest first' }]} />
+    <section class="reference-section" id="update-history">
+      <div class="reference-section-heading"><h2>Update history</h2><p>This register records public changes. It is not a substitute for the canonical record, evidence relation, or repository diff.</p></div>
+      <div class="reference-table"><table data-change-history-table><thead><tr><th>Date</th><th>Category</th><th>Change</th><th>Related pages</th></tr></thead><tbody>{updates.map((update) => { const publicCopy = updatePublicCopy[update.id]; return <tr><td>{update.date}</td><td>{formatPublicLabel(update.category)}</td><td><strong class="reference-update-title">{publicCopy?.title ?? update.title}</strong><span>{publicCopy?.summary ?? update.summary}</span></td><td>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</td></tr>; })}</tbody></table></div>
+      <div class="reference-mobile-records" aria-label="Update history">{updates.map((update) => { const publicCopy = updatePublicCopy[update.id]; return <article><p><small>{update.date} · {formatPublicLabel(update.category)}</small></p><h3>{publicCopy?.title ?? update.title}</h3><p>{publicCopy?.summary ?? update.summary}</p><p>{(update.related_paths ?? []).map((path, index) => (<><a href={path}>{path}</a>{index < (update.related_paths?.length ?? 0) - 1 ? <span> · </span> : null}</>))}</p></article>; })}</div>
+    </section>
+    <section class="reference-section">
+      <div class="reference-section-heading"><h2>Corrections and maintenance</h2><p>Support does not affect inclusion, wording, corrections, or status labels. Source-backed reports remain open to everyone.</p></div>
+      <nav class="reference-actions" aria-label="Update maintenance links"><a href="/contact/"><strong>Submit a correction</strong><span>Report incorrect wording, missing sources, broken links, or missing records.</span></a><a href="/support/"><strong>Support maintenance</strong><span>Help fund research, source checks, broken-link review, and new records.</span></a><a href="/data/manifest.json"><strong>Data manifest</strong><span>Inspect the machine-readable public record inventory and safety declaration.</span></a></nav>
+    </section>
+  </article>
 </BaseLayout>

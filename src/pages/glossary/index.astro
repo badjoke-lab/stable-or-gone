@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
+import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
 const terms = [
   ['Active', 'The stablecoin is operating or available according to the latest sources reviewed.'],
   ['Attestation', 'A report that provides assurance about reserves or related financial information for a specific date or period.'],
@@ -29,39 +29,17 @@ const terms = [
   ['Wind-down', 'A planned process to end issuance, redemption, support, or availability.']
 ];
 ---
-<BaseLayout title="Glossary — Stable or Gone" description="Definitions of common stablecoin and Registry v2 terms used throughout Stable or Gone.">
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin glossary</div>
-      <h1>Terms used throughout the archive</h1>
-      <p>Plain-language definitions for lifecycle status, issuance, event types, reserve profiles, redemption profiles, evidence relations, and stablecoin history.</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Terms</span><strong>{terms.length}</strong></div>
-      <div class="stat"><span>Format</span><strong>A–Z</strong></div>
-    </div>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Glossary</div>
-    <table>
-      <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-      <tbody>
-        {terms.map(([term, definition]) => (
-          <tr><td>{term}</td><td>{definition}</td></tr>
-        ))}
-      </tbody>
-    </table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">Related guides</div>
-    <table><tbody>
-      <tr><th>Depegs</th><td><a href="/guides/what-is-a-depeg/">What Is a Depeg?</a></td></tr>
-      <tr><th>Status and events</th><td><a href="/guides/status-vs-event/">Status and Event Records</a></td></tr>
-      <tr><th>Reserves</th><td><a href="/guides/reserve-disclosure-basics/">Reading Reserve Disclosures</a></td></tr>
-      <tr><th>Lifecycle</th><td><a href="/guides/stablecoin-lifecycle-terms/">Stablecoin Lifecycle Terms</a></td></tr>
-      <tr><th>Methodology</th><td><a href="/methodology/">Registry methodology and field definitions</a></td></tr>
-    </tbody></table>
-  </section>
+<BaseLayout title="Glossary — Stable or Gone" description="Definitions of common stablecoin and Registry v2 terms used throughout Stable or Gone." canonicalPath="/glossary/">
+  <article class="editorial-reference-page" data-ui-v3-reference="glossary">
+    <EditorialPageHeader kind="reference" eyebrow="Reference / glossary" title="Terms used throughout the archive" description="Plain-language definitions for lifecycle status, issuance, event types, reserve profiles, redemption profiles, evidence relations, and stablecoin history." facts={[{ label: 'Terms', value: terms.length }, { label: 'Order', value: 'A–Z' }, { label: 'Definitions', value: 'Plain language' }]} />
+    <section class="reference-section" id="glossary-index">
+      <div class="reference-section-heading"><h2>Glossary</h2><p>Definitions describe how terms are used in Stable or Gone. They do not replace issuer terms, legal definitions, or source-specific language.</p></div>
+      <div class="reference-table"><table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>{terms.map(([term, definition]) => <tr><td>{term}</td><td>{definition}</td></tr>)}</tbody></table></div>
+      <div class="reference-mobile-records" aria-label="Glossary terms">{terms.map(([term, definition]) => <article><h3>{term}</h3><p>{definition}</p></article>)}</div>
+    </section>
+    <section class="reference-section">
+      <div class="reference-section-heading"><h2>Related guides</h2><p>Use these explainers when a definition needs event, reserve, or lifecycle context.</p></div>
+      <nav class="reference-actions" aria-label="Related glossary guides"><a href="/guides/what-is-a-depeg/"><strong>Depegs</strong><span>What a depeg is and how recoveries differ from collapses.</span></a><a href="/guides/status-vs-event/"><strong>Status and events</strong><span>Why current state and dated history remain separate.</span></a><a href="/guides/reserve-disclosure-basics/"><strong>Reserve disclosures</strong><span>How issuer statements, attestations, audits, and protocol data differ.</span></a></nav>
+    </section>
+  </article>
 </BaseLayout>

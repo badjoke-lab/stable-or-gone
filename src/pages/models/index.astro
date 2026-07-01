@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
 const models = [
   ['Fiat-backed', 'Backed by cash or other off-chain reserve assets.'],
   ['Crypto-collateralized', 'Backed by crypto assets held in smart contracts or protocol positions.'],
@@ -13,23 +14,17 @@ const models = [
 ];
 ---
 <BaseLayout title="Stablecoin Backing Models — Stable or Gone" description="A plain-language guide to fiat-backed, crypto-collateralized, algorithmic, synthetic, hybrid, and other stablecoin models." canonicalPath="/models/">
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin backing models</div>
-      <h1>How stablecoins try to hold their value</h1>
-      <p>Stablecoins use different reserve, collateral, and stabilization methods. These categories describe the main design used by each record.</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Models</span><strong>{models.length}</strong></div>
-      <div class="stat"><span>Purpose</span><strong>Comparison</strong></div>
-    </div>
-  </section>
-  <section class="section-grid">
-    {models.map(([name, description]) => (
-      <div class="panel mini-card">
-        <h2>{name}</h2>
-        <p>{description}</p>
+  <article class="editorial-reference-page" data-ui-v3-reference="models">
+    <EditorialPageHeader kind="reference" eyebrow="Reference / models" title="How stablecoins try to hold their value" description="Stablecoins use different reserve, collateral, and stabilization methods. These categories describe the main design used by each record." facts={[{ label: 'Model records', value: models.length }, { label: 'Purpose', value: 'Comparison' }, { label: 'Unknown state', value: 'Preserved' }]} />
+    <section class="reference-section" id="model-index">
+      <div class="reference-section-heading"><h2>Backing and stabilization models</h2><p>These labels summarize the dominant public design. Hybrid and uncertain records remain explicit instead of being forced into a single category.</p></div>
+      <div class="reference-entry-grid">
+        {models.map(([name, modelDescription]) => <article><h2>{name}</h2><p>{modelDescription}</p></article>)}
       </div>
-    ))}
-  </section>
+    </section>
+    <section class="reference-section">
+      <div class="reference-section-heading"><h2>Use with record evidence</h2><p>A model label is a navigation aid, not a complete risk assessment or reserve claim.</p></div>
+      <nav class="reference-actions" aria-label="Model reference links"><a href="/stablecoins/"><strong>Stablecoin register</strong><span>Compare the model labels attached to canonical records.</span></a><a href="/methodology/"><strong>Methodology</strong><span>Review backing, reserve, redemption, and value-state rules.</span></a><a href="/guides/reserve-disclosure-basics/"><strong>Reserve guide</strong><span>Learn how disclosure types differ across models.</span></a></nav>
+    </section>
+  </article>
 </BaseLayout>

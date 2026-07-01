@@ -27,18 +27,19 @@ Reference direction controls hierarchy and visual language, not public facts. Ca
 ## Current position
 
 ```text
-Completed through: PR #268 Editorial Article Guides
+Completed through: PR #269 Reference, Long-form, and Utility pages
 Partial precursor: PR #266 Organization and Event row compaction
-Current UI: shared shell, Home, Stablecoins, Stablecoin dossiers, Organizations, Events, and Guides use Editorial Ledger v3
-Active work item: PR #269 Reference and utility pages
-Next implementation: PR #270 mobile and accessibility hardening
+Current UI: all page families use Editorial Ledger v3 structures
+Active work item: PR #270 mobile and accessibility hardening
+Next implementation: PR #271 representative all-family visual audit
 Closure: PR #273 production verification and closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
-Gate V3-D: pending PR #269 validation and merge
+Gate V3-D: passed
+Gate V3-E: pending PR #270 validation and merge
 Gate V3-F: not passed
 Release candidate: not selected
 Production publication: automatic on main
@@ -60,9 +61,9 @@ new logo generation
 
 ## Preservation rules
 
-Every v3 PR must preserve canonical stable assets, organizations, relationships, classifications, reserve and redemption profiles, events and typed details, evidence and evidence relations, reserve reports, known unknowns, regulatory notes, deployments, stable-asset relationships, income profiles, guide metadata, public routes, and machine-readable outputs.
+Every v3 PR must preserve canonical stable assets, organizations, relationships, classifications, reserve and redemption profiles, events and typed details, evidence and evidence relations, reserve reports, known unknowns, regulatory notes, deployments, stable-asset relationships, income profiles, guide metadata, public routes, contact paths, support wallet records, and machine-readable outputs.
 
-The UI may regroup or progressively disclose information. It may not erase protected fields, convert uncertainty into certainty, imply that every connected organization is an issuer, present events as live alerts, or invent publication states for undated guide records.
+The UI may regroup or progressively disclose information. It may not erase protected fields, convert uncertainty into certainty, imply that every connected organization is an issuer, present events as live alerts, invent publication states, add a duplicate corrections route, or alter payment addresses through styling work.
 
 ## Completed v3 work
 
@@ -84,58 +85,46 @@ Implemented a seven-column table-first register, six filters, six sorts, URL-syn
 
 ### PR #265 — Editorial Ledger Stablecoin dossier
 
-Removed PageHero, MetricCards, circular glow art, dark rounded navigation, and repeated gradient panels. Added a ruled masthead, fact ledger, assessment, organizations/control, mechanism, reserve/redemption, deployments/legal context, lifecycle history, evidence, known unknowns, and correction paths without changing canonical data or routes.
+Added the ruled research dossier hierarchy while preserving canonical data, routes, evidence, relationships, events, reserve/redemption details, value states, and known unknowns.
 
 ### PR #266 — partial Organization and Event row compaction
 
-This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astro`. It did not complete the four page families and is not Gate V3-C completion.
+This merged PR changed only two row components and was not Gate V3-C completion.
 
 ### PR #267 — corrective Organizations and Events completion
 
-- built responsible-body Organization registers and record files;
-- built chronological Event registers and incident/public-record files;
-- preserved search, filters, sorts, URL state, zero-result behavior, desktop registers, compact mobile records, relationships, evidence, typed details, value states, and known unknowns;
-- passed all 18 workflows and Gate V3-C;
-- changed no canonical data, routes, logos, or machine-readable schemas.
+Built responsible-body Organization registers and records plus chronological Event registers and incident/public-record files. Preserved interaction, responsive records, relationships, evidence, typed details, value states, and known unknowns. Passed Gate V3-C.
 
 ### PR #268 — Editorial Article Guides
 
-- replaced the Guides hero, KPI strip, panel grouping, and repeated mini-card archive with an Editorial Ledger index;
-- converted all nine guide routes to a shared Editorial Article family;
-- added a readable body column, desktop rail, generated on-page contents navigation, mobile contents disclosure, editorial tables, related records, revision history, glossary assistance, methodology access, and correction access;
-- applied one masthead and explicit publication-value-state contract to dated and evergreen articles;
-- preserved article copy, source URLs, guide metadata, JSON-LD, sitemap coverage, related-guide discovery, and routes;
-- connected `validate-ui-v3-guides.mjs` to the normal guide build gate;
-- changed no canonical data, routes, logos, or machine-readable schemas.
+Converted the guide archive and all nine routes to a shared Editorial Article family with readable columns, generated contents navigation, mobile disclosure, editorial tables, related records, revision history, explicit publication states, and normal build validation.
+
+### PR #269 — Reference, Long-form, and Utility pages
+
+- converted Models, Glossary, and Updates into scan-friendly Reference indexes;
+- converted Methodology and About into Long-form pages with readable width and generated contents navigation;
+- converted Contact/Corrections and Support into Utility pages with clear action hierarchy;
+- retained `/contact/` as the canonical corrections route;
+- preserved Google Form and GitHub paths, all support assets, networks, addresses, copy controls, fallback behavior, warnings, update records, and routes;
+- updated the change-history collector to follow an explicit Editorial Updates table marker without changing the legacy four-column contract;
+- connected `validate-ui-v3-reference-utility.mjs` through the existing normal build gate;
+- passed all 18 workflows and Gate V3-D.
 
 ## Active sequence
 
-### PR #269 — Reference and utility pages
-
-```text
-Reference: Models, Glossary, Updates
-Long-form: Methodology, About
-Utility: Corrections, Support, Contact
-```
+### PR #270 — mobile and accessibility hardening
 
 Requirements:
 
-- use one shared shell but distinct family-level layouts;
-- preserve each route, claim, correction path, support function, and machine-readable link;
-- do not return to identical card stacks;
-- provide deliberate long-form reading width for Methodology and About;
-- use indexed, scan-friendly records for Models, Glossary, and Updates;
-- use restrained form and action hierarchy for Corrections, Support, and Contact;
-- pass Gate V3-D only after every editorial/reference family is complete and validated.
-
-### PR #270 — mobile and accessibility hardening
-
-- controlled navigation and guide contents disclosure;
-- compact records or deliberate scroll-preserved tables;
-- labels remain attached to values;
-- 320px width and 200 percent zoom;
-- keyboard-only operation and visible focus;
-- result announcements, reduced motion, forced colors, and information parity.
+- test every page family at 320px width and 200 percent zoom;
+- keep labels attached to values and preserve information parity;
+- use compact records or deliberate scroll-preserved tables rather than generic column hiding;
+- verify mobile navigation, guide contents, long-form contents, filters, sorts, comparison, pagination, zero-result states, forms, copy controls, and local anchors;
+- verify keyboard-only operation, logical focus order, visible focus, escape behavior, and minimum 44px interactive targets;
+- verify announcements for result changes and copy results;
+- verify reduced motion, forced colors, overflow wrapping, and long identifiers;
+- add or update deterministic contracts where page-family transformations introduced new sources or representations;
+- pass Gate V3-E only after all mobile and accessibility checks succeed.
 
 ### PR #271 — representative visual audit
 
@@ -163,6 +152,7 @@ npm run validate:ui-v3-home
 npm run validate:ui-v3-stablecoin-index
 npm run validate:ui-v3-stablecoin-detail
 node scripts/validate-ui-v3-guides.mjs
+node scripts/validate-ui-v3-reference-utility.mjs
 npm run validate:active-workstream
 npm run validate:mobile-information
 npm run check
