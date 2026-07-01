@@ -61,23 +61,23 @@ docs/roadmap.md
 Current position:
 
 ```text
-Latest completed: PR #265 Editorial Ledger Stablecoin dossier
+Latest completed: PR #267 corrective Organizations and Events completion
 Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #267 corrective Organizations and Events completion
-Next: PR #268 Guides
+Active: PR #268 Guides
+Next: PR #269 Reference and utility pages
 Closure: PR #273 production verification and UI v3 closure
 Canonical stable assets: 98
 Growth D PR #251: stale draft; do not merge as-is
 Gate V3-A: passed
 Gate V3-B: passed
-Gate V3-C: pending PR #267 validation and merge
+Gate V3-C: passed
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
 
 The former UI v2 Modern Data Product direction is superseded. Its implementation through PR #216 may be reused only for data mapping, routes, behavior, accessibility, and approved logo assets where compatible with v3.
 
-The shared shell, Home, Stablecoins register, and Stablecoin dossiers are v3. PR #266 changed only two index-row components and is not Gate V3-C completion. PR #267 completes Organizations and Events. Guides, reference pages, final mobile behavior, visual audit, cleanup, and production closure remain migration work. Do not treat the current state as redesign completion.
+The shared shell, Home, Stablecoins register, Stablecoin dossiers, Organizations, and Events are v3. PR #266 changed only two index-row components and remains a partial precursor. PR #267 completed the four Organizations and Events page families and passed all 18 workflows. Guides, reference pages, final mobile behavior, visual audit, cleanup, and production closure remain migration work. Do not treat the current state as redesign completion.
 
 Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
 
