@@ -6,16 +6,17 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #267 — corrective Organizations and Events completion
+Latest completed: PR #268 — Editorial Article Guides
 Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
-Active: PR #268 — Guides
-Next: PR #269 — Reference and utility pages
+Active: PR #269 — Reference and utility pages
+Next: PR #270 — mobile and accessibility hardening
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
 Gate V3-A: passed
 Gate V3-B: passed
 Gate V3-C: passed
+Gate V3-D: pending PR #269 validation and merge
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
@@ -36,6 +37,7 @@ Stablecoins: seven-column table-first register, 20 records per page
 Stablecoin details: Editorial Ledger research dossiers
 Organizations: six-column responsible-body register and record files
 Events: six-column chronological register and incident/public-record files
+Guides: Editorial Ledger archive and nine Editorial Article routes with on-page contents navigation
 ```
 
 PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
@@ -61,6 +63,7 @@ PR #264 Editorial Ledger Stablecoins register
 PR #265 Editorial Ledger Stablecoin dossier
 PR #266 partial Organization and Event row compaction
 PR #267 corrective Editorial Ledger Organizations and Events completion
+PR #268 Editorial Ledger Guides and Editorial Article family
 ```
 
 ## Fixed UI direction
@@ -111,12 +114,9 @@ Replaced the hero, KPI cards, filter panels, and nine-column dashboard table wit
 ### PR #265 — Stablecoin dossier — complete
 
 - removed PageHero, six MetricCards, circular glow art, dark panel navigation, and the repeated gradient-card stack;
-- added a ruled dossier masthead with name, symbol, aliases, record ID, lifecycle, issuance, reference, primary organization, launch, redemption, backing, stabilization, last review, evidence access, and latest material change;
+- added a ruled dossier masthead and protected fact ledger;
 - ordered the body as assessment, organizations/control, mechanism, reserve/redemption, deployments/legal context, lifecycle history, evidence, known unknowns, and related records;
-- preserved every protected relationship, value state, deployment, event, evidence, reserve, regulatory, and uncertainty field;
-- placed evidence in upper facts and local navigation and before the final unknown/related sections;
-- added intentional empty states for low-information records;
-- added UI v3 dossier validation and retained the v2 command as a compatibility alias;
+- preserved relationships, value states, deployments, events, evidence, reserve, regulatory, and uncertainty fields;
 - changed no canonical data, public route, logo, or machine-readable output.
 
 ### PR #266 — Organization and Event row compaction — partial precursor
@@ -129,21 +129,26 @@ This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astr
 - rebuilt Events as a six-column chronological register and incident/public-record files;
 - preserved search, five filters per index, sorting, URL state, zero-result behavior, desktop tables, and compact mobile records;
 - preserved taxonomy, jurisdiction, current and historical relationships, functional roles, typed event details, subjects, evidence, recovery, value states, and known unknowns;
-- updated interaction, responsive, organization, build, public consistency, and workstream validation for the split component architecture;
 - passed all 18 pull-request workflows;
 - changed no canonical records, public routes, logo assets, or machine-readable schema.
 
-### PR #268 — Guides — active
+### PR #268 — Guides — complete
 
-Use a distinct editorial article family with readable body width, contents navigation, notes, tables, related guides, and unchanged published routes.
+- replaced the Guides hero, KPI strip, category panels, and repeated mini-card grid with an Editorial Ledger guide archive;
+- converted all nine guide routes to a shared Editorial Article family;
+- added a readable article column, desktop rail, generated on-page table of contents, mobile contents disclosure, editorial tables, related records, revision history, glossary, methodology, and correction access;
+- converted dated and evergreen guide headers to the same masthead and explicit publication-value-state contract;
+- preserved article claims, source URLs, guide catalog records, JSON-LD, sitemap coverage, related-guide links, and every public route;
+- added deterministic `validate-ui-v3-guides.mjs` coverage through the normal guide build gate;
+- changed no canonical registry data, route, logo, or machine-readable schema.
 
-### PR #269 — Reference and utility pages
+### PR #269 — Reference and utility pages — active
 
-Align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact while keeping distinct Reference, Long-form, and Utility families.
+Align Models, Glossary, Methodology, Updates, About, Corrections, Support, and Contact while keeping distinct Reference, Long-form, and Utility families. Gate V3-D remains pending until this work completes and passes validation.
 
-### PR #270 — mobile transformation
+### PR #270 — mobile and accessibility hardening
 
-Preserve material fields at 320px and 200 percent zoom with page-specific compact records, keyboard support, focus, reduced motion, and forced colors.
+Preserve material fields at 320px and 200 percent zoom with page-specific compact records, keyboard support, focus, reduced motion, forced colors, and information parity.
 
 ### PR #271 — representative all-family visual audit
 
@@ -151,7 +156,7 @@ Capture desktop and mobile representatives; inspect all unique pages and three s
 
 ### PR #272 — accessibility, performance, and legacy cleanup
 
-Remove obsolete v2 CSS/components after replacement, then verify headings, tables, labels, contrast, focus, keyboard operation, canonical counts, and route parity.
+Remove obsolete v2 CSS/components after replacement, then verify headings, tables, labels, contrast, focus, keyboard operation, canonical counts, route parity, and performance.
 
 ### PR #273 — production verification and UI v3 closure
 
@@ -163,7 +168,7 @@ Verify automatic deployment, public provenance, machine-readable parity, product
 Gate V3-A  specification and visual authority aligned — passed
 Gate V3-B  shared shell complete — passed
 Gate V3-C  core registry page families complete — passed
-Gate V3-D  editorial/reference families complete — pending
+Gate V3-D  editorial/reference families complete — pending PR #269 validation and merge
 Gate V3-E  mobile and accessibility complete — pending
 Gate V3-F  representative visual audit passed — pending
 Gate V3-G  owner approves exact release candidate — pending
