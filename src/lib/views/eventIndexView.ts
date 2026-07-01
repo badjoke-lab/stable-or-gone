@@ -22,6 +22,7 @@ export function buildEventIndexView() {
     const organizationIds = unique([...(event.subject_organization_ids ?? []), ...(event.issuer_id ? [event.issuer_id] : [])]);
     const stablecoinNames = stablecoinIds.map((id) => stablecoinById.get(id)?.name ?? id);
     const organizationNames = organizationIds.map((id) => organizationById.get(id)?.name ?? id);
+    const subjectNames = [...stablecoinNames, ...organizationNames];
     const relationSourceIds = evidenceRelations.filter((relation) => relation.event_ids.includes(event.id)).map((relation) => relation.evidence_id);
     const directSourceIds = evidence.filter((source) => source.event_id === event.id || source.event_ids?.includes(event.id)).map((source) => source.id);
     const sourceIds = unique([...(event.evidence_ids ?? []), ...relationSourceIds, ...directSourceIds]);
@@ -43,11 +44,12 @@ export function buildEventIndexView() {
       statusEffectLabel: taxonomy.status_effect_label,
       recovery: taxonomy.recovery_category,
       recoveryLabel: taxonomy.recovery_label,
+      subjectNames,
       stablecoinIds,
       organizationIds,
       sourceIdentityCount: sourceIds.length,
       confidenceLabel: event.confidence ? event.confidence.replaceAll('_', ' ') : 'Not recorded',
-      search: [title, description, event.id, ...stablecoinNames, ...organizationNames, ...publishers].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ')
+      search: [title, description, event.id, ...subjectNames, ...publishers].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ')
     };
   }).sort((left, right) => right.eventDate.localeCompare(left.eventDate) || left.title.localeCompare(right.title));
 
