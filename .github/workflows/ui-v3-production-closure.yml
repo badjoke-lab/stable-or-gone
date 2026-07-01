@@ -12,7 +12,6 @@ on:
       - 'docs/roadmap.md'
       - 'docs/ui-redesign/implementation-plan.md'
       - 'AGENTS.md'
-      - 'package.json'
 
 permissions:
   contents: read
@@ -48,7 +47,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Validate production closure contract
-        run: npm run validate:ui-v3-production-closure
+        run: node scripts/validate-ui-v3-production-closure.mjs
 
       - name: Wait for exact release commit and verify production parity
         env:
@@ -67,7 +66,7 @@ jobs:
         run: node scripts/audit-representative-visuals.mjs
 
       - name: Write production closure report
-        run: npm run report:ui-v3-production-closure
+        run: node scripts/write-ui-v3-production-closure-report.mjs
 
       - name: Upload production closure artifacts
         if: always()
