@@ -38,10 +38,10 @@ try {
   const source = fs.readFileSync(verifyPath, 'utf8');
   const baselineAnchor = "const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));";
   if (!source.includes(baselineAnchor)) throw new Error('Public consistency baseline patch anchor is missing');
-  const homeSourceAnchor = 'assert(homeText.includes(`Sources ${counts.evidence}`), `home evidence count mismatch: expected ${counts.evidence}`);';
+  const homeSourceAnchor = 'assert(homeText.includes(`${counts.evidence} source records`), `home evidence count mismatch: expected ${counts.evidence}`);';
   if (!source.includes(homeSourceAnchor)) throw new Error('Public consistency home source-count patch anchor is missing');
   const injectedBaseline = `const baseline = ${JSON.stringify(baseline)};`;
-  const injectedHomeSourceAssertion = `assert(homeText.includes(\`Source identities ${publicSourceIdentityCount}\`), \`home source identity count mismatch: expected ${publicSourceIdentityCount}\`);`;
+  const injectedHomeSourceAssertion = `assert(homeText.includes(\`${publicSourceIdentityCount} Source identities\`), \`home source identity count mismatch: expected ${publicSourceIdentityCount}\`);`;
   const patchedSource = source
     .replace(baselineAnchor, injectedBaseline)
     .replace(homeSourceAnchor, injectedHomeSourceAssertion);

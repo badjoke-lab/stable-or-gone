@@ -69,7 +69,7 @@ check(!sitemap.includes('getPublishedGuides'), 'Sitemap must not hide evergreen 
 
 const home = read('src/pages/index.astro');
 check(home.includes("import { getFeaturedGuides } from '../data/guideCatalog';"), 'Homepage featured-guide metadata import missing');
-check(home.includes('getFeaturedGuides(3)'), 'Homepage must select the latest three featured guides automatically');
+check(home.includes('getFeaturedGuides(4)'), 'Editorial Ledger Home must select the latest four featured guides automatically');
 check(!home.includes("getGuide('genius-act-stablecoins')"), 'Homepage must not hard-code featured guide slugs');
 
 const linkMap = read('src/data/stablecoinGuideLinks.ts');
@@ -85,4 +85,4 @@ const datedGuidesUpdate = updates.find((entry) => entry.id === 'sog_update_2026_
 check(Boolean(datedGuidesUpdate), 'Original dated-guide update entry missing');
 for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(datedGuidesUpdate.related_paths.includes(`/guides/${slug}/`), `Original update route missing: ${slug}`);
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, guide_slugs: slugs }, null, 2));
