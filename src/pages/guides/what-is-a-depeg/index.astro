@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+const guide = getGuide('what-is-a-depeg');
 const title = 'What Is a Stablecoin Depeg? — Stable or Gone';
 const description = 'What a stablecoin depeg is, how recoveries differ from collapses, and what details matter when reviewing an event.';
 const jsonLd = {
@@ -13,13 +16,14 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/what-is-a-depeg/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Guide to depegs</div>
-      <h1>What is a depeg?</h1>
-      <p>A depeg happens when a stablecoin moves meaningfully away from the value it is designed to track. The important question is not only how far it moved, but what happened next.</p>
-    </div>
-  </section>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="What is a depeg?"
+    description="A depeg happens when a stablecoin moves meaningfully away from the value it is designed to track. The important question is not only how far it moved, but what happened next."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
 
   <section class="panel registry">
     <div class="bar">The basic idea</div>
