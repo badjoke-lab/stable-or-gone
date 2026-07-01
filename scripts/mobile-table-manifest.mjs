@@ -1,7 +1,7 @@
 export const mobileTableSourceFiles = [
   'src/pages/stablecoins/index.astro',
-  'src/pages/issuers/index.astro',
-  'src/pages/events/index.astro',
+  'src/components/OrganizationEditorialRegister.astro',
+  'src/components/EventEditorialRegister.astro',
   'src/components/StablecoinDetailView.astro',
   'src/components/StablecoinOrganizationsControl.astro',
   'src/components/StablecoinValueStateSections.astro',
@@ -13,8 +13,9 @@ export const mobileTableSourceFiles = [
   'src/components/StructuredEventDetail.astro',
   'src/components/DeploymentTable.astro',
   'src/components/EvidenceSourceTable.astro',
-  'src/pages/issuer/[slug].astro',
-  'src/pages/event/[id].astro'
+  'src/components/OrganizationEditorialIdentity.astro',
+  'src/components/OrganizationEditorialHistory.astro',
+  'src/components/EventEditorialBody.astro'
 ];
 
 export const requiredMobileTableKinds = [
@@ -33,12 +34,12 @@ export const implementedMobileTableRepresentations = Object.freeze({
   'stablecoin-overview': 'src/components/StablecoinDetailView.astro',
   'stablecoin-organizations': 'src/components/StablecoinOrganizationsControl.astro',
   'organization-index': 'src/components/OrganizationIndexCard.astro',
-  'organization-overview': 'src/pages/issuer/[slug].astro',
-  'organization-relationships': 'src/pages/issuer/[slug].astro',
-  'organization-events': 'src/pages/issuer/[slug].astro',
-  'organization-sources': 'src/pages/issuer/[slug].astro',
+  'organization-overview': 'src/components/OrganizationEditorialIdentity.astro',
+  'organization-relationships': 'src/components/OrganizationEditorialIdentity.astro',
+  'organization-events': 'src/components/OrganizationEditorialHistory.astro',
+  'organization-sources': 'src/components/OrganizationEditorialHistory.astro',
   'event-index': 'src/components/EventIndexCard.astro',
-  'event-details': 'src/pages/event/[id].astro',
+  'event-details': 'src/components/EventEditorialBody.astro',
   'event-detail-overlay': 'src/components/StructuredEventDetail.astro',
-  'event-sources': 'src/pages/event/[id].astro'
+  'event-sources': 'src/components/EventEditorialBody.astro'
 });
