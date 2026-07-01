@@ -1,85 +1,68 @@
 .stablecoin-index-page {
   display: grid;
-  gap: 1rem;
+  gap: 0;
 }
 
-.stablecoin-index-hero {
-  min-height: 245px;
-  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
-}
-
-.stablecoin-index-hero h1 {
-  max-width: 14ch;
-}
-
-.stablecoin-index-hero__visual {
-  width: min(100%, 380px);
-  min-height: 180px;
-  position: relative;
+.stablecoin-register-header {
+  padding: 1.2rem 0 2rem;
   display: grid;
-  place-items: center;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  border-top: 2px solid var(--sog-rule-strong);
+  border-bottom: 2px solid var(--sog-rule-strong);
 }
 
-.stablecoin-index-hero__visual::before,
-.stablecoin-index-hero__visual::after {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(24, 182, 255, 0.3);
-  border-radius: 50%;
+.stablecoin-index-eyebrow {
+  margin: 0 0 0.55rem;
+  color: var(--sog-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.stablecoin-index-hero__visual::before {
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(24, 182, 255, 0.12), transparent 68%);
+.stablecoin-register-header h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6.5vw, 6.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  font-weight: 600;
 }
 
-.stablecoin-index-hero__visual::after {
-  width: 190px;
-  height: 190px;
-  border-style: dashed;
+.stablecoin-register-header > div:first-child > p:last-child {
+  max-width: 76ch;
+  margin: 1rem 0 0;
+  color: var(--sog-ink-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
 }
 
-.stablecoin-index-hero__coin {
-  position: relative;
-  z-index: 1;
-  width: 86px;
-  height: 86px;
+.stablecoin-register-count {
+  min-width: 132px;
+  padding-left: 1.5rem;
   display: grid;
-  place-items: center;
-  border: 2px solid var(--sog-link);
-  border-radius: 50%;
-  background: linear-gradient(145deg, rgba(24, 182, 255, 0.28), rgba(3, 11, 22, 0.95));
-  color: var(--sog-text);
-  font-size: 1.4rem;
-  font-weight: 850;
-  box-shadow: 0 0 36px rgba(24, 182, 255, 0.24);
+  justify-items: end;
+  border-left: 1px solid var(--sog-rule-strong);
 }
 
-.stablecoin-index-hero__coin:nth-child(1) {
-  transform: translate(0, -42px);
+.stablecoin-register-count strong {
+  color: var(--sog-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(2.3rem, 4vw, 4.4rem);
+  font-weight: 500;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
 }
 
-.stablecoin-index-hero__coin:nth-child(2) {
-  position: absolute;
-  left: 18%;
-  bottom: 16%;
-  width: 68px;
-  height: 68px;
-}
-
-.stablecoin-index-hero__coin:nth-child(3) {
-  position: absolute;
-  right: 18%;
-  bottom: 16%;
-  width: 68px;
-  height: 68px;
-}
-
-.stablecoin-index-metrics {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
+.stablecoin-register-count span {
+  margin-top: 0.35rem;
+  color: var(--sog-ink-quiet);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .stablecoin-index-registry {
@@ -87,66 +70,70 @@
 }
 
 .stablecoin-index-section-heading {
-  padding: 1.15rem 1.25rem;
+  padding: 1.5rem 0 1.1rem;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid var(--sog-line-subtle);
+  border-bottom: 1px solid var(--sog-rule-strong);
 }
 
 .stablecoin-index-section-heading h2 {
   margin: 0;
-  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+  line-height: 1.02;
 }
 
-.stablecoin-index-section-heading p:not(.stablecoin-index-eyebrow) {
-  margin-top: 0.35rem;
-  font-size: 0.8rem;
+.stablecoin-index-section-heading p {
+  max-width: 76ch;
+  margin: 0.45rem 0 0;
+  color: var(--sog-ink-muted);
+  font-size: 0.78rem;
 }
 
-.stablecoin-index-eyebrow {
-  margin: 0 0 0.3rem;
-  color: var(--sog-link);
+.stablecoin-index-page-size {
+  flex: 0 0 auto;
+  color: var(--sog-ink-quiet);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .stablecoin-index-toolbar {
-  padding: 1rem 1.15rem;
+  padding: 0.9rem 0;
   display: grid;
-  grid-template-columns: minmax(280px, 1.5fr) minmax(210px, 0.65fr) auto;
-  gap: 0.75rem;
+  grid-template-columns: minmax(300px, 1.4fr) minmax(220px, 0.55fr) auto;
+  gap: 1rem;
   align-items: end;
-  border-bottom: 1px solid var(--sog-line-subtle);
-  background: rgba(13, 33, 54, 0.35);
+  border-bottom: 1px solid var(--sog-rule);
 }
 
 .stablecoin-index-toolbar label {
   display: grid;
-  gap: 0.38rem;
+  gap: 0.32rem;
 }
 
 .stablecoin-index-toolbar label > span,
 .stablecoin-index-filter summary,
 .stablecoin-index-card-grid dt,
 .comparison-record dt {
-  color: var(--sog-text-muted);
-  font-size: 0.68rem;
-  font-weight: 760;
-  letter-spacing: 0.07em;
+  color: var(--sog-ink-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .stablecoin-index-toolbar .ui-field {
-  min-height: 48px;
+  min-height: 44px;
+  border: 0;
+  border-bottom: 1px solid var(--sog-rule-strong);
+  border-radius: 0;
+  padding-inline: 0.15rem;
 }
 
-.stablecoin-index-search .ui-field {
-  border-color: rgba(24, 182, 255, 0.48);
-  background: rgba(3, 11, 22, 0.9);
+.stablecoin-index-toolbar .ui-field:focus-visible {
+  border-color: var(--sog-focus);
 }
 
 .stablecoin-index-action {
@@ -154,32 +141,34 @@
 }
 
 .stablecoin-index-filter-grid {
-  padding: 0.9rem 1.15rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.65rem;
-  border-bottom: 1px solid var(--sog-line-subtle);
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--sog-rule-strong);
+  scrollbar-gutter: stable;
 }
 
 .stablecoin-index-filter {
   position: relative;
-  border: 1px solid var(--sog-line-subtle);
-  border-radius: var(--sog-radius-compact);
-  background: rgba(3, 11, 22, 0.54);
+  flex: 1 0 154px;
+  border-right: 1px solid var(--sog-rule);
+}
+
+.stablecoin-index-filter:first-child {
+  border-left: 1px solid var(--sog-rule);
 }
 
 .stablecoin-index-filter[open] {
-  border-color: rgba(24, 182, 255, 0.64);
-  background: var(--sog-surface-raised);
+  background: var(--sog-paper-subtle);
 }
 
 .stablecoin-index-filter summary {
   min-height: 44px;
-  padding: 0.65rem 0.75rem;
-  display: flex;
+  padding: 0.58rem 0.7rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.7rem;
   cursor: pointer;
   list-style: none;
 }
@@ -189,102 +178,110 @@
 }
 
 .stablecoin-index-filter summary > span:last-child {
-  min-width: 24px;
-  height: 24px;
+  min-width: 22px;
+  height: 22px;
   display: inline-grid;
   place-items: center;
-  border: 1px solid var(--sog-line);
-  border-radius: 50%;
-  color: var(--sog-link);
-  font-size: 0.68rem;
+  border: 1px solid var(--sog-rule);
+  border-radius: var(--sog-radius-compact);
+  color: var(--sog-accent);
+  font-size: 0.64rem;
 }
 
 .stablecoin-index-filter summary::after {
   content: attr(data-summary-label);
-  color: var(--sog-text-quiet);
-  font-size: 0.66rem;
+  grid-column: 1 / -1;
+  color: var(--sog-ink-quiet);
+  font-size: 0.62rem;
   font-weight: 600;
-  text-transform: none;
   letter-spacing: 0;
+  text-transform: none;
 }
 
 .stablecoin-index-filter-options {
   max-height: 250px;
   overflow-y: auto;
-  padding: 0.2rem 0.65rem 0.7rem;
+  padding: 0.3rem 0.55rem 0.65rem;
   display: grid;
-  gap: 0.15rem;
+  gap: 0.1rem;
+  border-top: 1px solid var(--sog-rule);
 }
 
 .stablecoin-index-filter-options label {
   min-height: 38px;
-  padding: 0.35rem 0.4rem;
+  padding: 0.32rem 0.2rem;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  border-radius: 6px;
-  color: var(--sog-text-muted);
-  font-size: 0.78rem;
+  gap: 0.55rem;
+  color: var(--sog-ink-muted);
+  font-size: 0.75rem;
   cursor: pointer;
 }
 
 .stablecoin-index-filter-options label:hover {
-  background: rgba(24, 182, 255, 0.06);
-  color: var(--sog-text);
+  color: var(--sog-accent);
 }
 
 .stablecoin-index-filter-options input,
 .comparison-choice input {
   width: 18px;
   height: 18px;
-  accent-color: var(--sog-link);
+  accent-color: var(--sog-accent);
 }
 
 .stablecoin-index-summary {
-  min-height: 56px;
-  padding: 0.7rem 1.15rem;
+  min-height: 54px;
+  padding: 0.7rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid var(--sog-line-subtle);
-  background: rgba(8, 23, 39, 0.66);
+  border-bottom: 1px solid var(--sog-rule-strong);
+  scroll-margin-top: 6rem;
 }
 
 .stablecoin-index-active-filters {
   min-width: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.35rem 0.55rem;
 }
 
 .active-filter-chip {
-  min-height: 34px;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--sog-line);
-  border-radius: var(--sog-radius-pill);
-  background: var(--sog-surface-raised);
-  color: var(--sog-text);
+  min-height: 32px;
+  padding: 0.28rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--sog-rule-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--sog-ink-muted);
   font: inherit;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   cursor: pointer;
 }
 
-.active-filter-chip:hover {
-  border-color: var(--sog-link);
+.active-filter-chip:hover,
+.active-filter-chip:focus-visible {
+  color: var(--sog-accent);
+  border-color: var(--sog-accent);
 }
 
 .active-filter-empty {
-  color: var(--sog-text-quiet);
-  font-size: 0.74rem;
+  color: var(--sog-ink-quiet);
+  font-size: 0.72rem;
 }
 
 .stablecoin-index-result-count {
   flex: 0 0 auto;
-  color: var(--sog-positive);
-  font-size: 0.78rem;
-  font-weight: 760;
+  color: var(--sog-ink-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
+}
+
+.stablecoin-index-result-count [data-result-count] {
+  color: var(--sog-ink);
+  font-weight: 800;
 }
 
 .stablecoin-index-table {
@@ -294,35 +291,82 @@
 }
 
 .stablecoin-index-table table {
-  min-width: 1220px;
+  min-width: 1120px;
   font-size: 0.76rem;
 }
 
 .stablecoin-index-table th {
   position: sticky;
-  top: 78px;
+  top: 74px;
   z-index: 2;
-  padding: 0.75rem;
-  background: rgba(6, 18, 33, 0.98);
-  color: var(--sog-text-quiet);
-  font-size: 0.62rem;
+  padding: 0.7rem 0.65rem;
+  background: var(--sog-paper);
+  color: var(--sog-ink-quiet);
+  font-size: 0.6rem;
+  white-space: nowrap;
 }
 
 .stablecoin-index-table td {
-  padding: 0.85rem 0.75rem;
-  border-bottom-color: rgba(23, 52, 77, 0.78);
-}
-
-.stablecoin-index-table tbody tr {
-  background: rgba(3, 11, 22, 0.2);
+  padding: 0.82rem 0.65rem;
+  border-bottom-color: var(--sog-rule);
+  color: var(--sog-ink);
+  line-height: 1.45;
 }
 
 .stablecoin-index-table tbody tr:hover {
-  background: rgba(24, 182, 255, 0.045);
+  background: var(--sog-paper-subtle);
 }
 
-.stablecoin-index-table td:first-child {
-  min-width: 220px;
+.stablecoin-index-table th:nth-child(1),
+.stablecoin-index-table td:nth-child(1) {
+  min-width: 210px;
+}
+
+.stablecoin-index-table th:nth-child(2),
+.stablecoin-index-table td:nth-child(2) {
+  width: 84px;
+}
+
+.stablecoin-index-table th:nth-child(3),
+.stablecoin-index-table td:nth-child(3) {
+  min-width: 145px;
+}
+
+.stablecoin-index-table th:nth-child(4),
+.stablecoin-index-table td:nth-child(4) {
+  min-width: 140px;
+}
+
+.stablecoin-index-table th:nth-child(5),
+.stablecoin-index-table td:nth-child(5) {
+  min-width: 195px;
+}
+
+.stablecoin-index-table th:nth-child(6),
+.stablecoin-index-table td:nth-child(6) {
+  min-width: 170px;
+}
+
+.stablecoin-index-table th:nth-child(7),
+.stablecoin-index-table td:nth-child(7) {
+  min-width: 170px;
+}
+
+.stablecoin-index-table tr[hidden],
+.stablecoin-index-card[hidden],
+.stablecoin-index-no-results[hidden],
+.stablecoin-index-pagination[hidden],
+.stablecoin-index-comparison[hidden] {
+  display: none !important;
+}
+
+.stablecoin-index-table td small,
+.stablecoin-index-card small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--sog-ink-quiet);
+  font-size: 0.64rem;
+  line-height: 1.45;
 }
 
 .stablecoin-record-identity {
@@ -335,58 +379,50 @@
   min-width: 0;
 }
 
-.stablecoin-record-identity small,
-.evidence-context,
-.stablecoin-index-card-identity small {
-  display: block;
-  margin-top: 0.18rem;
-  color: var(--sog-text-quiet);
-  font-size: 0.65rem;
-  line-height: 1.4;
+.record-name {
+  color: var(--sog-ink);
+  font-weight: 800;
+  text-decoration: none;
 }
 
-.record-name {
-  color: var(--sog-text);
-  font-weight: 760;
+.record-name:hover {
+  color: var(--sog-accent);
 }
 
 .record-symbol {
-  color: var(--sog-link);
+  color: var(--sog-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.72rem;
-  font-weight: 780;
-  letter-spacing: 0.04em;
-}
-
-.relationship-summary {
-  display: block;
-  margin-top: 0.3rem;
-  color: var(--sog-text-quiet);
+  font-weight: 800;
+  letter-spacing: 0.03em;
 }
 
 .organization-summary {
-  margin-top: 0.4rem;
+  margin-top: 0.35rem;
 }
 
 .organization-summary summary {
-  color: var(--sog-link);
-  font-size: 0.68rem;
+  min-height: 30px;
+  color: var(--sog-accent);
+  font-size: 0.65rem;
   cursor: pointer;
 }
 
 .organization-summary p {
-  margin-top: 0.4rem;
-  font-size: 0.72rem;
+  margin: 0.25rem 0 0;
+  color: var(--sog-ink-muted);
+  font-size: 0.68rem;
   line-height: 1.5;
 }
 
 .comparison-choice {
-  min-height: 34px;
-  margin: 0.45rem 0 0 2.55rem;
+  min-height: 30px;
+  margin: 0.32rem 0 0 2.5rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  color: var(--sog-text-quiet);
-  font-size: 0.68rem;
+  gap: 0.4rem;
+  color: var(--sog-ink-quiet);
+  font-size: 0.64rem;
   cursor: pointer;
 }
 
@@ -395,7 +431,8 @@
 }
 
 .stablecoin-index-card {
-  padding: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--sog-rule-strong);
 }
 
 .stablecoin-index-card-heading {
@@ -413,190 +450,230 @@
 }
 
 .stablecoin-index-card h2 {
-  margin: 0.12rem 0 0;
-  font-size: 1rem;
+  margin: 0;
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1.08;
 }
 
 .stablecoin-index-card h2 a {
-  color: var(--sog-text);
+  color: var(--sog-ink);
+  text-decoration: none;
 }
 
-.stablecoin-index-card-grid,
-.comparison-record dl {
-  margin: 1rem 0;
+.stablecoin-index-card h2 a:hover {
+  color: var(--sog-accent);
+}
+
+.stablecoin-index-card-grid {
+  margin: 0.9rem 0 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem 0.8rem;
+  border-top: 1px solid var(--sog-rule);
 }
 
-.stablecoin-index-card-grid div,
-.comparison-record dl div {
-  min-width: 0;
+.stablecoin-index-card-grid > div {
+  padding: 0.58rem 0;
+  display: grid;
+  grid-template-columns: minmax(92px, 0.75fr) minmax(0, 1fr);
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--sog-rule);
 }
 
-.stablecoin-index-card-grid dd,
-.comparison-record dd {
-  margin: 0.18rem 0 0;
-  color: var(--sog-text-muted);
-  font-size: 0.76rem;
-  overflow-wrap: anywhere;
+.stablecoin-index-card-grid > div:nth-child(odd) {
+  padding-right: 0.85rem;
+}
+
+.stablecoin-index-card-grid > div:nth-child(even) {
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--sog-rule);
+}
+
+.stablecoin-index-card-grid dt,
+.stablecoin-index-card-grid dd {
+  margin: 0;
+}
+
+.stablecoin-index-card-grid dd {
+  color: var(--sog-ink);
+  font-size: 0.72rem;
 }
 
 .comparison-choice-card {
-  width: 100%;
-  min-height: 44px;
-  margin: 0.8rem 0 0;
-  padding: 0.5rem 0.7rem;
-  justify-content: center;
-  border: 1px solid var(--sog-line);
-  border-radius: var(--sog-radius-compact);
-  background: rgba(3, 11, 22, 0.56);
+  margin-left: 0;
 }
 
 .stablecoin-index-no-results {
-  padding: 2rem 1.15rem;
+  padding: 2.2rem 0;
   display: grid;
-  gap: 0.7rem;
   justify-items: start;
-  border-top: 1px solid var(--sog-line-subtle);
+  gap: 0.45rem;
+  border-bottom: 1px solid var(--sog-rule-strong);
 }
 
-.stablecoin-index-no-results[hidden] {
-  display: none;
+.stablecoin-index-no-results strong {
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.stablecoin-index-no-results span {
+  color: var(--sog-ink-muted);
+  font-size: 0.78rem;
+}
+
+.stablecoin-index-pagination {
+  min-height: 64px;
+  padding: 0.75rem 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--sog-rule-strong);
+}
+
+.stablecoin-index-pagination [data-page-status] {
+  justify-self: center;
+  color: var(--sog-ink-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+}
+
+.stablecoin-index-pagination button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
 }
 
 .stablecoin-index-comparison {
-  padding: 1.2rem;
-  display: grid;
-  gap: 1rem;
-}
-
-.stablecoin-index-comparison[hidden] {
-  display: none;
+  margin-top: 2.5rem;
+  padding: 1.4rem 0 0;
+  border-top: 2px solid var(--sog-rule-strong);
 }
 
 .comparison-heading {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
 }
 
 .comparison-heading h2 {
   margin: 0;
-  font-size: 1.45rem;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
 }
 
 .comparison-heading p:not(.stablecoin-index-eyebrow) {
-  margin-top: 0.35rem;
-  font-size: 0.8rem;
+  margin: 0.4rem 0 0;
+  color: var(--sog-ink-muted);
+  font-size: 0.76rem;
 }
 
 .comparison-alert {
-  min-height: 1.4em;
-  color: var(--sog-warning);
-  font-size: 0.78rem;
+  min-height: 1.2rem;
+  margin-top: 0.6rem;
+  color: var(--sog-critical);
+  font-size: 0.72rem;
 }
 
 .comparison-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 1fr));
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--sog-rule-strong);
 }
 
 .comparison-record {
-  min-width: 250px;
+  min-width: 0;
   padding: 1rem;
-  display: grid;
-  align-content: start;
-  gap: 0.8rem;
-  border: 1px solid var(--sog-line-subtle);
-  border-radius: var(--sog-radius-panel);
-  background: rgba(3, 11, 22, 0.5);
+  border-right: 1px solid var(--sog-rule);
+  border-bottom: 1px solid var(--sog-rule);
 }
 
-.comparison-record header,
-.comparison-record section {
-  display: grid;
-  gap: 0.45rem;
+.comparison-record:first-child {
+  border-left: 1px solid var(--sog-rule);
 }
 
-.comparison-record section {
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--sog-line-subtle);
+.comparison-record h3 {
+  margin: 0;
+  font-size: 1.15rem;
 }
 
 .comparison-record dl {
-  grid-template-columns: 1fr;
+  margin: 0.8rem 0 0;
+}
+
+.comparison-record dl > div {
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--sog-rule);
+}
+
+.comparison-record dd,
+.comparison-record dt {
   margin: 0;
 }
 
-.comparison-record h3,
-.comparison-record h4 {
-  margin: 0;
+.comparison-record dd {
+  margin-top: 0.2rem;
+  color: var(--sog-ink);
+  font-size: 0.72rem;
 }
 
-.comparison-record p,
 .comparison-disclaimer {
-  color: var(--sog-text-muted);
-  font-size: 0.76rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  color: var(--sog-ink-quiet);
+  font-size: 0.7rem;
 }
 
-.comparison-source {
-  display: none;
-}
+@media (max-width: 1180px) {
+  .stablecoin-index-filter {
+    flex-basis: 180px;
+  }
 
-@media (max-width: 1040px) {
-  .stablecoin-index-metrics {
+  .comparison-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .stablecoin-index-toolbar {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .stablecoin-index-toolbar .stablecoin-index-action {
-    grid-column: 1 / -1;
-    width: fit-content;
-  }
 }
 
-@media (max-width: 820px) {
-  .stablecoin-index-hero {
+@media (max-width: 900px) {
+  .stablecoin-register-header {
     grid-template-columns: 1fr;
   }
 
-  .stablecoin-index-hero__visual {
-    min-height: 130px;
+  .stablecoin-register-count {
+    min-width: 0;
+    padding: 0.8rem 0 0;
+    grid-template-columns: auto 1fr;
+    justify-items: start;
+    align-items: baseline;
+    gap: 0.5rem;
+    border-top: 1px solid var(--sog-rule);
+    border-left: 0;
   }
 
-  .stablecoin-index-filter-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .stablecoin-index-toolbar {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 0.55fr);
+  }
+
+  .stablecoin-index-action {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
 }
 
 @media (max-width: 719px) {
-  .stablecoin-index-metrics,
-  .stablecoin-index-toolbar,
-  .stablecoin-index-filter-grid,
-  .stablecoin-index-card-grid {
-    grid-template-columns: 1fr;
-  }
-
   .stablecoin-index-section-heading,
   .stablecoin-index-summary,
   .comparison-heading {
-    display: grid;
+    align-items: flex-start;
+    flex-direction: column;
   }
 
-  .stablecoin-index-section-heading .ui-chip {
-    width: fit-content;
+  .stablecoin-index-toolbar {
+    grid-template-columns: 1fr;
   }
 
-  .stablecoin-index-toolbar .stablecoin-index-action {
-    width: 100%;
+  .stablecoin-index-filter-grid {
+    margin-inline: -0.625rem;
+    padding-inline: 0.625rem;
   }
 
   .stablecoin-index-table {
@@ -604,31 +681,63 @@
   }
 
   .stablecoin-index-cards {
-    padding: 0.8rem;
+    padding: 0;
     display: grid;
-    gap: 0.7rem;
+  }
+
+  .stablecoin-index-pagination {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stablecoin-index-pagination [data-page-status] {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .stablecoin-index-pagination [data-page-next] {
+    justify-self: end;
   }
 
   .comparison-grid {
-    grid-template-columns: repeat(4, minmax(280px, 88vw));
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-record,
+  .comparison-record:first-child {
+    border-left: 0;
+    border-right: 0;
   }
 }
 
-@media (max-width: 480px) {
-  .stablecoin-index-card-heading {
-    display: grid;
+@media (max-width: 520px) {
+  .stablecoin-index-card-grid {
+    grid-template-columns: 1fr;
   }
 
-  .stablecoin-index-card-heading > .chip {
-    width: fit-content;
+  .stablecoin-index-card-grid > div:nth-child(odd),
+  .stablecoin-index-card-grid > div:nth-child(even) {
+    padding-inline: 0;
+    border-left: 0;
+  }
+
+  .stablecoin-index-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stablecoin-index-page * {
+    scroll-behavior: auto !important;
   }
 }
 
 @media (forced-colors: active) {
   .stablecoin-index-filter,
+  .stablecoin-index-pagination,
   .stablecoin-index-card,
   .comparison-record,
-  .stablecoin-index-hero__coin {
+  .active-filter-chip {
     forced-color-adjust: auto;
   }
 }
