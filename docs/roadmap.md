@@ -6,16 +6,16 @@ Status: canonical execution schedule
 ## Current position
 
 ```text
-Latest completed: PR #265 — Editorial Ledger Stablecoin dossier
+Latest completed: PR #267 — corrective Organizations and Events completion
 Partial precursor: PR #266 — Organization and Event row compaction; not Gate V3-C completion
-Active: PR #267 — corrective Organizations and Events completion
-Next: PR #268 — Guides
+Active: PR #268 — Guides
+Next: PR #269 — Reference and utility pages
 Canonical stable assets: 98
 Open stale draft: PR #251 — Growth D; do not merge as-is
 Active workstream: UI remediation
 Gate V3-A: passed
 Gate V3-B: passed
-Gate V3-C: pending PR #267 validation and merge
+Gate V3-C: passed
 Gate V3-F: not passed
 Production publication: automatic on main
 ```
@@ -26,7 +26,7 @@ The former UI v2 Modern Data Product implementation is an intermediate state. Ed
 
 ```text
 Canonical stable assets: 98
-Organizations and events: generated from canonical main
+Organizations and events: Editorial Ledger registers and record files
 Guide publication: metadata-driven
 Production deployment: automatic after merge to main
 Screenshot audit: representative desktop and mobile modes available
@@ -34,6 +34,8 @@ Shared shell: Editorial Ledger v3
 Home: Editorial Ledger registry front page
 Stablecoins: seven-column table-first register, 20 records per page
 Stablecoin details: Editorial Ledger research dossiers
+Organizations: six-column responsible-body register and record files
+Events: six-column chronological register and incident/public-record files
 ```
 
 PR #251 was created from an older main base. It must not be merged as-is. Growth D must later be rebuilt from the then-current main.
@@ -57,7 +59,8 @@ PR #262 shared Editorial Ledger shell
 PR #263 Editorial Ledger Home
 PR #264 Editorial Ledger Stablecoins register
 PR #265 Editorial Ledger Stablecoin dossier
-PR #266 partial Organization and Event row compaction; corrective completion moved to PR #267
+PR #266 partial Organization and Event row compaction
+PR #267 corrective Editorial Ledger Organizations and Events completion
 ```
 
 ## Fixed UI direction
@@ -120,16 +123,17 @@ Replaced the hero, KPI cards, filter panels, and nine-column dashboard table wit
 
 This merged PR changed only `OrganizationIndexRow.astro` and `EventIndexRow.astro`. It did not complete the page families and must not be treated as Gate V3-C completion.
 
-### PR #267 — corrective Organizations and Events completion — active
+### PR #267 — corrective Organizations and Events completion — complete
 
-- render organizations as responsible-body records, not corporate profile cards;
-- render events as incident/public-record files, not alert dashboards;
-- complete both indexes and both detail families;
-- preserve search, filters, sorting, responsive compact records, relationships, typed details, evidence, value states, and known unknowns;
-- update validators and responsive manifests for the split component architecture;
-- change no canonical records, public routes, logo assets, or machine-readable schema.
+- rebuilt Organizations as a six-column responsible-body register and evidence-backed record files;
+- rebuilt Events as a six-column chronological register and incident/public-record files;
+- preserved search, five filters per index, sorting, URL state, zero-result behavior, desktop tables, and compact mobile records;
+- preserved taxonomy, jurisdiction, current and historical relationships, functional roles, typed event details, subjects, evidence, recovery, value states, and known unknowns;
+- updated interaction, responsive, organization, build, public consistency, and workstream validation for the split component architecture;
+- passed all 18 pull-request workflows;
+- changed no canonical records, public routes, logo assets, or machine-readable schema.
 
-### PR #268 — Guides
+### PR #268 — Guides — active
 
 Use a distinct editorial article family with readable body width, contents navigation, notes, tables, related guides, and unchanged published routes.
 
@@ -158,7 +162,7 @@ Verify automatic deployment, public provenance, machine-readable parity, product
 ```text
 Gate V3-A  specification and visual authority aligned — passed
 Gate V3-B  shared shell complete — passed
-Gate V3-C  core registry page families complete — pending PR #267 validation and merge
+Gate V3-C  core registry page families complete — passed
 Gate V3-D  editorial/reference families complete — pending
 Gate V3-E  mobile and accessibility complete — pending
 Gate V3-F  representative visual audit passed — pending
