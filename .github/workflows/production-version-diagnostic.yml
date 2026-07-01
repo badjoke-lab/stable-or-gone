@@ -1,0 +1,53 @@
+name: Production version diagnostic
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/production-version-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch production provenance
+        run: |
+          mkdir -p artifacts
+          node <<'NODE'
+          import fs from 'node:fs';
+          const base = 'https://sog.badjoke-lab.com';
+          const read = async (pathname) => {
+            const response = await fetch(`${base}${pathname}`, {
+              headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-production-diagnostic/1.0' }
+            });
+            return { pathname, status: response.status, headers: Object.fromEntries(response.headers), body: await response.text() };
+          };
+          const [versionResponse, manifestResponse] = await Promise.all([read('/version.json'), read('/data/manifest.json')]);
+          const parse = (value) => { try { return JSON.parse(value); } catch { return null; } };
+          const version = parse(versionResponse.body);
+          const manifest = parse(manifestResponse.body);
+          const result = {
+            fetched_at: new Date().toISOString(),
+            base_url: base,
+            version_response: { ...versionResponse, body: version },
+            manifest_response: { ...manifestResponse, body: manifest },
+            production_commit: version?.build?.commit ?? null,
+            production_branch: version?.build?.branch ?? null,
+            canonical_data_hash: version?.build?.canonical_data_hash ?? null,
+            record_counts: version?.data?.record_counts ?? null,
+            build_provenance_equal: JSON.stringify(version?.build ?? null) === JSON.stringify(manifest?.build ?? null)
+          };
+          fs.writeFileSync('artifacts/production-version-diagnostic.json', `${JSON.stringify(result, null, 2)}\n`);
+          console.log(JSON.stringify({ production_commit: result.production_commit, production_branch: result.production_branch, build_provenance_equal: result.build_provenance_equal }, null, 2));
+          NODE
+      - name: Upload production diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-version-diagnostic-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 7
+          path: artifacts/production-version-diagnostic.json
