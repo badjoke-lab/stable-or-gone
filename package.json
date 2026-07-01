@@ -77,6 +77,8 @@
     "validate:v3-baseline": "node scripts/validate-registry-v3-baseline.mjs",
     "validate:ui-repair-baseline": "node scripts/validate-ui-repair-baseline.mjs",
     "validate:ui-v3-foundation": "node scripts/validate-ui-v3-foundation.mjs",
+    "validate:ui-v3-home": "node scripts/validate-ui-v3-home.mjs",
+    "validate:ui-v3-stablecoin-index": "node scripts/validate-ui-v3-stablecoin-index.mjs",
     "validate:ui-v2-foundation": "node scripts/validate-ui-v2-foundation.mjs",
     "validate:ui-v2-home": "node scripts/validate-ui-v2-home.mjs",
     "validate:ui-v2-stablecoin-index": "node scripts/validate-ui-v2-stablecoin-index.mjs",
