@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/guide-index.css';
 import {
   guides,
   guideCategoryDescriptions,
@@ -12,6 +13,10 @@ const categoryOrder: GuideCategory[] = ['regulation', 'asset-comparisons', 'core
 const visibleCategories = categoryOrder
   .map((category) => ({ category, entries: visibleGuides.filter((guide) => guide.category === category) }))
   .filter((group) => group.entries.length > 0);
+const datedGuides = visibleGuides.filter((guide) => Boolean(guide.publishedAt));
+const featuredGuide = [...datedGuides]
+  .filter((guide) => guide.featured)
+  .sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)) || a.title.localeCompare(b.title))[0] ?? datedGuides[0];
 
 const title = 'Guides — Stable or Gone';
 const description = 'Beginner-friendly guides to stablecoin regulation, asset structures, depegs, reserves, redemption, lifecycle events, and the records behind each claim.';
@@ -31,52 +36,75 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="panel hero-main">
-      <div class="prompt">Stablecoin guides and explainers</div>
-      <h1>Understand stablecoins and the rules around them</h1>
-      <p>These guides explain regulation, legal and reserve structures, redemption, lifecycle events, and the distinctions used throughout the archive.</p>
-    </div>
-    <div class="panel stats">
-      <div class="stat"><span>Guides</span><strong>{visibleGuides.length}</strong></div>
-      <div class="stat"><span>Sections</span><strong>{visibleCategories.length}</strong></div>
-    </div>
-  </section>
-
-  {visibleCategories.map(({ category, entries }) => (
-    <section aria-labelledby={`guide-category-${category}`}>
-      <div class="panel registry">
-        <div class="bar" id={`guide-category-${category}`}>{guideCategoryLabels[category]}</div>
-        <p>{guideCategoryDescriptions[category]}</p>
+  <article class="guide-index-page" data-ui-v3-guides-index>
+    <header class="guide-index-masthead">
+      <div class="guide-index-overline"><span>Editorial guides</span><span>Stablecoin regulation, structure, and history</span></div>
+      <div class="guide-index-heading">
+        <h1>Guides</h1>
+        <p>Source-backed explanations for reading stablecoin laws, reserve structures, redemption systems, lifecycle changes, and the records behind each claim.</p>
       </div>
-      <div class="section-grid">
-        {entries.map((guide) => (
-          <a class="panel mini-card" href={`/guides/${guide.slug}/`}>
-            <h2>{guide.title}</h2>
-            <p>{guide.summary}</p>
-            <p><small>Information current through {guide.informationCurrentThrough}</small></p>
-          </a>
-        ))}
+      <dl class="guide-index-summary" aria-label="Guide collection summary">
+        <div><dt>Public guides</dt><dd>{visibleGuides.length}</dd></div>
+        <div><dt>Dated articles</dt><dd>{datedGuides.length}</dd></div>
+        <div><dt>Sections</dt><dd>{visibleCategories.length}</dd></div>
+      </dl>
+    </header>
+
+    <nav class="guide-index-nav" aria-label="Guide categories">
+      {visibleCategories.map(({ category }) => <a href={`#guide-category-${category}`}>{guideCategoryLabels[category]}</a>)}
+    </nav>
+
+    {featuredGuide && (
+      <section class="guide-index-feature" aria-labelledby="featured-guide-title">
+        <div>
+          <p>Latest featured guide</p>
+          <h2 id="featured-guide-title"><a href={`/guides/${featuredGuide.slug}/`}>{featuredGuide.title}</a></h2>
+        </div>
+        <div>
+          <p>{featuredGuide.summary}</p>
+          <small>{featuredGuide.regionLabel ?? guideCategoryLabels[featuredGuide.category]} · information current through {featuredGuide.informationCurrentThrough}</small>
+          <a href={`/guides/${featuredGuide.slug}/`}>Read the guide</a>
+        </div>
+      </section>
+    )}
+
+    {visibleCategories.map(({ category, entries }) => (
+      <section class="guide-category" id={`guide-category-${category}`} aria-labelledby={`guide-category-title-${category}`}>
+        <div class="guide-category-heading">
+          <h2 id={`guide-category-title-${category}`}>{guideCategoryLabels[category]}</h2>
+          <p>{guideCategoryDescriptions[category]}</p>
+        </div>
+        <div class="guide-index-list">
+          {entries.map((guide) => (
+            <article class="guide-index-entry">
+              <div class="guide-index-entry-meta">
+                <span>{guide.regionLabel ?? guideCategoryLabels[guide.category]}</span>
+                <time datetime={guide.publishedAt ?? undefined}>{guide.publishedAt ?? 'Evergreen'}</time>
+              </div>
+              <div class="guide-index-entry-copy">
+                <h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3>
+                <p>{guide.summary}</p>
+              </div>
+              <div class="guide-index-entry-action">
+                <a href={`/guides/${guide.slug}/`}>Open guide</a>
+                <small>Current through {guide.informationCurrentThrough}</small>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="guide-index-reference" aria-labelledby="guide-reference-title">
+      <div><h2 id="guide-reference-title">Read the archive with the guides</h2></div>
+      <div>
+        <p>Guide articles explain concepts and regulatory transitions. Canonical stablecoin, organization, event, and evidence records remain the source-backed registry layer.</p>
+        <nav aria-label="Related reference pages">
+          <a href="/stablecoins/">Browse stablecoin records</a>
+          <a href="/glossary/">Open the glossary</a>
+          <a href="/methodology/">Read the methodology</a>
+        </nav>
       </div>
     </section>
-  ))}
-
-  <section class="panel registry">
-    <div class="bar">How to read a Stable or Gone record</div>
-    <table><tbody>
-      <tr><th>Stablecoin page</th><td>Start with lifecycle status, issuance status, peg reference, backing types, organization roles, reserve profile, redemption profile, event timeline, and sources.</td></tr>
-      <tr><th>Event page</th><td>Use event pages for dated changes such as depegs, regulatory actions, reserve changes, redemption changes, migrations, wind-downs, and collapses.</td></tr>
-      <tr><th>Evidence scope</th><td>Sources are scoped to the specific stablecoin, organization, event, and claim they support. A source does not automatically support every field on a page.</td></tr>
-      <tr><th>Open questions</th><td>When public information is incomplete, the archive records the gap instead of guessing.</td></tr>
-    </tbody></table>
-  </section>
-
-  <section class="panel registry">
-    <div class="bar">More reference pages</div>
-    <table><tbody>
-      <tr><th>Glossary</th><td><a href="/glossary/">Definitions of common terms used across the archive</a></td></tr>
-      <tr><th>Methodology</th><td><a href="/methodology/">How records, events, relationships, and status labels are reviewed</a></td></tr>
-      <tr><th>Stablecoins</th><td><a href="/stablecoins/">Browse all stablecoin records</a></td></tr>
-    </tbody></table>
-  </section>
+  </article>
 </BaseLayout>
