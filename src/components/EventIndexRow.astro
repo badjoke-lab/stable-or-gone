@@ -14,11 +14,9 @@ const data = {
 ---
 <tr data-event-row {...data}>
   <td>{record.eventDate || 'Not recorded'}</td>
-  <td><a class="record-name" href={`/event/${record.id}/`}>{record.title}</a></td>
-  <td>{record.categoryLabel}</td>
+  <td><a class="record-name" href={`/event/${record.id}/`}>{record.title}</a><small>{record.categoryLabel}</small></td>
   <td>{record.subtypeLabel}</td>
-  <td>{record.impactLabel}</td>
-  <td>{record.statusEffectLabel}</td>
+  <td>{record.impactLabel}<small>{record.statusEffectLabel}</small></td>
   <td>{record.recoveryLabel}</td>
-  <td>{record.sourceIdentityCount} sources</td>
+  <td>{record.sourceIdentityCount} source{record.sourceIdentityCount === 1 ? '' : 's'}</td>
 </tr>
