@@ -1,0 +1,28 @@
+---
+interface Fact { label: string; value: string | number; note?: string; }
+interface Props {
+  kind: 'reference' | 'longform' | 'utility';
+  eyebrow: string;
+  title: string;
+  description: string;
+  facts?: Fact[];
+  returnHref?: string;
+  returnLabel?: string;
+}
+const { kind, eyebrow, title, description, facts = [], returnHref, returnLabel = 'Return' } = Astro.props;
+---
+<header class={`editorial-page-masthead editorial-page-masthead--${kind}`} data-editorial-page-header={kind}>
+  <div class="editorial-page-overline">
+    <span>{eyebrow}</span>
+    {returnHref ? <a href={returnHref}>{returnLabel}</a> : <span>Stable or Gone</span>}
+  </div>
+  <div class="editorial-page-title">
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </div>
+  {facts.length > 0 && (
+    <dl class="editorial-page-ledger" aria-label={`${title} summary`}>
+      {facts.map((fact) => <div><dt>{fact.label}</dt><dd>{fact.value}{fact.note && <small>{fact.note}</small>}</dd></div>)}
+    </dl>
+  )}
+</header>
