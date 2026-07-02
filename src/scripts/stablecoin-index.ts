@@ -20,6 +20,8 @@ if (foundRoot instanceof HTMLElement) {
   const pageStatus = root.querySelector<HTMLElement>('[data-page-status]');
   const compareInputs = Array.from(root.querySelectorAll<HTMLInputElement>('[data-compare-select]'));
   const comparePanel = root.querySelector<HTMLElement>('[data-comparison-panel]');
+  const compareDock = root.querySelector<HTMLElement>('[data-comparison-dock]');
+  const compareDockStatus = root.querySelector<HTMLElement>('[data-comparison-dock-status]');
   const compareGrid = root.querySelector<HTMLElement>('[data-comparison-grid]');
   const compareStatus = root.querySelector<HTMLElement>('[data-comparison-status]');
   const compareAlert = root.querySelector<HTMLElement>('[data-comparison-alert]');
@@ -118,7 +120,7 @@ if (foundRoot instanceof HTMLElement) {
     for (const group of groups) for (const value of selectedFor(group)) entries.push({ key: group, value, label: `${group.replace('_', ' ')}: ${labelFor(group, value)}` });
     if (!entries.length) {
       const empty = document.createElement('span');
-      empty.textContent = 'No active filters';
+      empty.textContent = 'Showing the complete register';
       empty.className = 'active-filter-empty';
       activeSummary.append(empty);
     }
@@ -133,10 +135,11 @@ if (foundRoot instanceof HTMLElement) {
       activeSummary.append(button);
     }
     for (const group of groups) {
+      const selectedCount = selectedFor(group).length;
       const count = root.querySelector<HTMLElement>(`[data-filter-count="${group}"]`);
-      if (count) count.textContent = String(selectedFor(group).length);
+      if (count) count.textContent = selectedCount ? String(selectedCount) : 'All';
       const summary = count?.closest('summary');
-      if (summary) summary.setAttribute('data-summary-label', `${selectedFor(group).length} selected`);
+      if (summary) summary.setAttribute('data-summary-label', selectedCount ? `${selectedCount} selected` : 'All options');
     }
   }
 
@@ -145,7 +148,6 @@ if (foundRoot instanceof HTMLElement) {
     const sortedCards = [...cards].sort(compareElements);
     for (const row of sortedRows) tableBody?.append(row);
     for (const card of sortedCards) cardBody?.append(card);
-
     const matchedRows = sortedRows.filter(matches);
     const matchCount = matchedRows.length;
     const pageCount = Math.max(1, Math.ceil(matchCount / pageSize));
@@ -153,10 +155,8 @@ if (foundRoot instanceof HTMLElement) {
     const start = (currentPage - 1) * pageSize;
     const pageRows = matchedRows.slice(start, start + pageSize);
     const visibleSlugs = new Set(pageRows.map((row) => row.dataset.recordSlug ?? ''));
-
     for (const row of rows) row.hidden = !visibleSlugs.has(row.dataset.recordSlug ?? '');
     for (const card of cards) card.hidden = !visibleSlugs.has(card.dataset.recordSlug ?? '');
-
     if (resultCount) resultCount.textContent = String(matchCount);
     if (visibleRange) visibleRange.textContent = matchCount === 0 ? '0' : `${start + 1}–${Math.min(start + pageSize, matchCount)}`;
     if (noResults) noResults.hidden = matchCount !== 0;
@@ -179,12 +179,20 @@ if (foundRoot instanceof HTMLElement) {
       const source = compareSources.get(slug);
       if (!source) continue;
       const clone = source.cloneNode(true);
-      if (clone instanceof HTMLElement) { clone.hidden = false; clone.removeAttribute('data-comparison-source'); clone.classList.remove('comparison-source'); clone.classList.add('comparison-record'); }
+      if (clone instanceof HTMLElement) {
+        clone.hidden = false;
+        clone.removeAttribute('data-comparison-source');
+        clone.classList.remove('comparison-source');
+        clone.classList.add('comparison-record');
+      }
       compareGrid.append(clone);
     }
-    comparePanel.hidden = selectedComparisons.size === 0;
-    if (compareStatus) compareStatus.textContent = selectedComparisons.size < 2 ? `${selectedComparisons.size} selected. Select one more record to compare.` : `${selectedComparisons.size} records selected for comparison.`;
-    comparePanel.dataset.ready = String(selectedComparisons.size >= 2);
+    const count = selectedComparisons.size;
+    comparePanel.hidden = count === 0;
+    if (compareDock) compareDock.hidden = count === 0;
+    if (compareDockStatus) compareDockStatus.textContent = count < 2 ? `${count} selected · choose one more to compare` : `${count} records ready to compare`;
+    if (compareStatus) compareStatus.textContent = count < 2 ? `${count} selected. Select one more record to compare.` : `${count} records selected for comparison.`;
+    comparePanel.dataset.ready = String(count >= 2);
   }
 
   function refresh(mode?: 'push' | 'replace') {
@@ -237,9 +245,12 @@ if (foundRoot instanceof HTMLElement) {
     renderComparison();
     writeUrl('push');
   });
-  root.querySelector('[data-clear-comparison]')?.addEventListener('click', () => { selectedComparisons.clear(); renderComparison(); writeUrl('push'); });
+  for (const button of root.querySelectorAll<HTMLElement>('[data-clear-comparison]')) button.addEventListener('click', () => {
+    selectedComparisons.clear();
+    renderComparison();
+    writeUrl('push');
+  });
   window.addEventListener('popstate', () => { applyState(stateFromUrl()); refresh(); });
-
   applyState(stateFromUrl());
   refresh('replace');
 }
