@@ -1,0 +1,80 @@
+name: UI primary template review
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/styles/home-v3.css'
+      - 'src/styles/stablecoin-index.css'
+      - 'src/styles/stablecoin-dossier-v3-overrides.css'
+      - 'src/styles/mobile-accessibility-v3.css'
+      - 'src/pages/stablecoins/index.astro'
+      - 'src/scripts/stablecoin-index.ts'
+      - 'src/components/StablecoinDetailView.astro'
+      - '.github/workflows/ui-primary-template-review.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ui-primary-template-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          npx astro preview --host 127.0.0.1 --port 4173 > /tmp/sog-ui-preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/sog-ui-preview.log
+          exit 1
+
+      - name: Capture desktop representatives
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url http://127.0.0.1:4173
+
+      - name: Capture mobile representatives
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url http://127.0.0.1:4173
+
+      - name: Audit representative captures
+        run: node scripts/audit-representative-visuals.mjs
+
+      - name: Require completed audit
+        run: |
+          test -f artifacts/screenshots/representative-visual-audit.json
+          node -e "const fs=require('fs');const p='artifacts/screenshots/representative-visual-audit.json';const a=JSON.parse(fs.readFileSync(p,'utf8'));if(a.ok!==true||a.failures?.length)process.exit(1);"
+
+      - name: Upload review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-primary-template-review-${{ github.event.pull_request.head.sha }}-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            artifacts/screenshots/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
