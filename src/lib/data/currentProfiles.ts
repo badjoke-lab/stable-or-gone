@@ -18,6 +18,7 @@ import profileBatchPData from '../../../data/stablecoin-profiles-batch-p.json';
 import profileBatchQData from '../../../data/stablecoin-profiles-batch-q.json';
 import profileBatchRData from '../../../data/r-profiles.json';
 import profileBatchSData from '../../../data/s-profiles.json';
+import profileBatchTData from '../../../data/batch-t-reserve-redemption.json';
 import type { ReserveProfileV2, RedemptionProfileV2 } from '../schema/registry-v2';
 
 export type CurrentProfile = {
@@ -31,7 +32,8 @@ const profiles = [
   ...profileBatchDData, ...profileBatchEData, ...profileBatchFData, ...profileBatchGData,
   ...profileBatchHData, ...profileBatchIData, ...profileBatchJData, ...profileBatchKData,
   ...profileBatchLData, ...profileBatchMData, ...profileBatchNData, ...profileBatchOData,
-  ...profileBatchPData, ...profileBatchQData, ...profileBatchRData, ...profileBatchSData
+  ...profileBatchPData, ...profileBatchQData, ...profileBatchRData, ...profileBatchSData,
+  ...profileBatchTData
 ] as CurrentProfile[];
 const byId = new Map(profiles.map((row) => [row.id, row] as const));
 const clone = (row: CurrentProfile): CurrentProfile => ({

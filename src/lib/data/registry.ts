@@ -36,6 +36,7 @@ import stablecoinsBatchPData from '../../../data/stablecoins-batch-p.json';
 import stablecoinsBatchQData from '../../../data/stablecoins-batch-q.json';
 import stablecoinsBatchRData from '../../../data/stablecoins-batch-r.json';
 import stablecoinsBatchSData from '../../../data/stablecoins-batch-s.json';
+import stablecoinsBatchTData from '../../../data/stablecoins-batch-t.json';
 
 import stablecoinClassificationBatchKData from '../../../data/stablecoin-classification-batch-k.json';
 import stablecoinClassificationBatchLData from '../../../data/stablecoin-classification-batch-l.json';
@@ -46,6 +47,7 @@ import stablecoinClassificationBatchPData from '../../../data/stablecoin-classif
 import stablecoinClassificationBatchQData from '../../../data/stablecoin-classification-batch-q.json';
 import stablecoinClassificationBatchRData from '../../../data/stablecoin-classification-batch-r.json';
 import stablecoinClassificationBatchSData from '../../../data/stablecoin-classification-batch-s.json';
+import stablecoinClassificationBatchTData from '../../../data/stablecoin-classification-batch-t.json';
 
 import organizationsBatchKData from '../../../data/organizations-batch-k.json';
 import organizationsBatchLData from '../../../data/organizations-batch-l.json';
@@ -56,6 +58,7 @@ import organizationsBatchPData from '../../../data/organizations-batch-p.json';
 import organizationsBatchQData from '../../../data/organizations-batch-q.json';
 import organizationsBatchRData from '../../../data/organizations-batch-r.json';
 import organizationsBatchSData from '../../../data/organizations-batch-s.json';
+import organizationsBatchTData from '../../../data/organizations-batch-t.json';
 
 import relationshipsBatchKData from '../../../data/relationships-batch-k.json';
 import relationshipsBatchLData from '../../../data/relationships-batch-l.json';
@@ -66,6 +69,7 @@ import relationshipsBatchPData from '../../../data/relationships-batch-p.json';
 import relationshipsBatchQData from '../../../data/relationships-batch-q.json';
 import relationshipsBatchRData from '../../../data/relationships-batch-r.json';
 import relationshipsBatchSData from '../../../data/relationships-batch-s.json';
+import relationshipsBatchTData from '../../../data/relationships-batch-t.json';
 
 import eventsBatchKData from '../../../data/events-batch-k.json';
 import eventsBatchLData from '../../../data/events-batch-l.json';
@@ -76,6 +80,7 @@ import eventsBatchPData from '../../../data/events-batch-p.json';
 import eventsBatchQData from '../../../data/events-batch-q.json';
 import eventsBatchRData from '../../../data/events-batch-r.json';
 import eventsBatchSData from '../../../data/events-batch-s.json';
+import eventsBatchTData from '../../../data/events-batch-t.json';
 
 import eventDetailsBatchKData from '../../../data/event-details-batch-k.json';
 import eventDetailsBatchLData from '../../../data/event-details-batch-l.json';
@@ -86,6 +91,8 @@ import eventDetailsBatchPData from '../../../data/event-details-batch-p.json';
 import eventDetailsBatchQData from '../../../data/event-details-batch-q.json';
 import eventDetailsBatchRData from '../../../data/event-details-batch-r.json';
 import eventDetailsBatchSData from '../../../data/event-details-batch-s.json';
+import eventDetailsBatchTAData from '../../../data/event-details-batch-t-a.json';
+import eventDetailsBatchTBData from '../../../data/event-details-batch-t-b.json';
 
 import evidenceBatchKData from '../../../data/evidence-batch-k.json';
 import evidenceBatchLAData from '../../../data/evidence-batch-l-a.json';
@@ -100,6 +107,9 @@ import evidenceBatchPData from '../../../data/evidence-batch-p.json';
 import evidenceBatchQData from '../../../data/evidence-batch-q.json';
 import evidenceBatchRData from '../../../data/evidence-batch-r.json';
 import evidenceBatchSData from '../../../data/evidence-batch-s.json';
+import evidenceBatchTData from '../../../data/evidence-batch-t.json';
+import evidenceBatchTB1Data from '../../../data/evidence-batch-t-b1.json';
+import evidenceBatchTB2Data from '../../../data/evidence-batch-t-b2.json';
 import evidenceQualityPr219Data from '../../../data/evidence-quality-pr219.json';
 
 import reserveReportsBatchKData from '../../../data/reserve-reports-batch-k.json';
@@ -112,6 +122,7 @@ import reserveReportsBatchPData from '../../../data/reserve-reports-batch-p.json
 import reserveReportsBatchQData from '../../../data/reserve-reports-batch-q.json';
 import reserveReportsBatchRData from '../../../data/r-protocol-context.json';
 import reserveReportsBatchSData from '../../../data/s-protocol-context.json';
+import reserveReportsBatchTData from '../../../data/batch-t-context.json';
 
 import knownUnknownsBatchKData from '../../../data/known-unknowns-batch-k.json';
 import knownUnknownsBatchLAData from '../../../data/known-unknowns-batch-l-a.json';
@@ -123,6 +134,7 @@ import knownUnknownsBatchPData from '../../../data/known-unknowns-batch-p.json';
 import knownUnknownsBatchQData from '../../../data/q-open-items.json';
 import knownUnknownsBatchRData from '../../../data/r-open-items.json';
 import knownUnknownsBatchSData from '../../../data/s-open-items.json';
+import knownUnknownsBatchTData from '../../../data/batch-t-review-gaps.json';
 
 import deploymentsBatchKData from '../../../data/deployments-batch-k.json';
 import deploymentsBatchLData from '../../../data/deployments-batch-l.json';
@@ -133,20 +145,21 @@ import deploymentsBatchPData from '../../../data/deployments-batch-p.json';
 import deploymentsBatchQData from '../../../data/deployments-batch-q.json';
 import deploymentsBatchRData from '../../../data/deployments-batch-r.json';
 import deploymentsBatchSData from '../../../data/deployments-batch-s.json';
+import deploymentsBatchTData from '../../../data/batch-t-deployments.json';
 
 const registryBaseRuntimeFiles = `
-stablecoins.json stablecoins-extra.json stablecoins-batch-b.json stablecoins-batch-c.json stablecoins-batch-d.json stablecoins-batch-e.json stablecoins-batch-f.json stablecoins-batch-g.json stablecoins-batch-h.json stablecoins-batch-i.json stablecoins-batch-j.json stablecoins-batch-k.json stablecoins-batch-l.json stablecoins-batch-m.json stablecoins-batch-n.json stablecoins-batch-o.json stablecoins-batch-p.json stablecoins-batch-q.json stablecoins-batch-r.json stablecoins-batch-s.json
-organizations.json organizations-batch-b.json organizations-batch-c.json organizations-batch-d.json organizations-batch-e.json organizations-batch-f.json organizations-batch-g.json organizations-batch-h.json organizations-batch-i.json organizations-batch-j.json organizations-batch-k.json organizations-batch-l.json organizations-batch-m.json organizations-batch-n.json organizations-batch-o.json organizations-batch-p.json organizations-batch-q.json organizations-batch-r.json organizations-batch-s.json
-relationships.json relationships-batch-b.json relationships-batch-c.json relationships-batch-d.json relationships-batch-e.json relationships-batch-f.json relationships-batch-g.json relationships-batch-h.json relationships-batch-i.json relationships-batch-j.json relationships-batch-k.json relationships-batch-l.json relationships-batch-m.json relationships-batch-n.json relationships-batch-o.json relationships-batch-p.json relationships-batch-q.json relationships-batch-r.json relationships-batch-s.json
-stablecoin-classification-v2.json stablecoin-classification-batch-a.json stablecoin-classification-batch-b.json stablecoin-classification-batch-c.json stablecoin-classification-batch-d.json stablecoin-classification-batch-e.json stablecoin-classification-batch-f.json stablecoin-classification-batch-g.json stablecoin-classification-batch-h.json stablecoin-classification-batch-i.json stablecoin-classification-batch-j.json stablecoin-classification-batch-k.json stablecoin-classification-batch-l.json stablecoin-classification-batch-m.json stablecoin-classification-extension-batch-a.json stablecoin-classification-batch-n.json stablecoin-classification-batch-o.json stablecoin-classification-batch-p.json stablecoin-classification-batch-q.json stablecoin-classification-batch-r.json stablecoin-classification-batch-s.json
-stablecoin-profiles-v2.json stablecoin-profiles-batch-a.json stablecoin-profiles-batch-b.json stablecoin-profiles-batch-c.json stablecoin-profiles-batch-d.json stablecoin-profiles-batch-e.json stablecoin-profiles-batch-f.json stablecoin-profiles-batch-g.json stablecoin-profiles-batch-h.json stablecoin-profiles-batch-i.json stablecoin-profiles-batch-j.json stablecoin-profiles-batch-k.json stablecoin-profiles-batch-l.json stablecoin-profiles-batch-m.json stablecoin-profiles-batch-n.json stablecoin-profiles-batch-o.json stablecoin-profiles-batch-p.json stablecoin-profiles-batch-q.json r-profiles.json s-profiles.json
-events.json events-pr036.json events-pr037.json events-pr038.json events-batch-a.json events-batch-b.json events-batch-c.json events-batch-d.json events-batch-e.json events-batch-f.json events-batch-g.json events-batch-h.json events-batch-i.json events-batch-j.json events-batch-k.json events-batch-l.json events-batch-m.json events-issuer-control-2026.json events-batch-n.json events-batch-o.json events-batch-p.json events-batch-q.json events-batch-r.json events-batch-s.json
-event-details-v2.json event-details-batch-a.json event-details-batch-b.json event-details-batch-c.json event-details-batch-d.json event-details-batch-e.json event-details-batch-f.json event-details-batch-g.json event-details-batch-h.json event-details-batch-i.json event-details-batch-j.json event-details-batch-k.json event-details-batch-l.json event-details-batch-m.json event-details-issuer-control-2026.json event-details-batch-n.json event-details-batch-o.json event-details-batch-p.json event-details-batch-q.json event-details-batch-r.json event-details-batch-s.json
-evidence.json evidence-extra.json evidence-pr033.json evidence-events-pr036.json evidence-events-pr037.json evidence-events-pr038.json evidence-batch-a.json evidence-batch-b.json evidence-batch-c.json evidence-batch-d.json evidence-batch-e.json evidence-batch-f.json evidence-batch-g.json evidence-batch-h.json evidence-batch-i.json evidence-batch-j.json evidence-batch-k.json evidence-batch-l-a.json evidence-batch-l-b.json evidence-batch-l-c.json evidence-batch-l-d1.json evidence-batch-l-d2.json evidence-batch-m.json evidence-issuer-control-2026.json evidence-batch-n.json evidence-batch-o.json evidence-batch-p.json evidence-batch-q.json evidence-batch-r.json evidence-batch-s.json evidence-quality-pr219.json
-reserve-reports.json reserve-reports-extra.json reserve-reports-pr033.json reserve-reports-pr034.json reserve-reports-batch-b.json reserve-reports-batch-f.json reserve-reports-batch-g.json reserve-reports-batch-h.json reserve-reports-batch-i.json reserve-reports-batch-j.json reserve-reports-batch-k.json reserve-reports-batch-l.json reserve-reports-batch-m-a.json reserve-reports-batch-m-b.json reserve-reports-batch-n.json reserve-reports-batch-o.json reserve-reports-batch-p.json reserve-reports-batch-q.json r-protocol-context.json s-protocol-context.json
-known-unknowns.json known-unknowns-extra.json known-unknowns-pr033.json known-unknowns-pr034.json known-unknowns-batch-a.json known-unknowns-batch-b.json known-unknowns-batch-c.json known-unknowns-batch-d.json known-unknowns-batch-e.json known-unknowns-batch-f.json known-unknowns-batch-g.json known-unknowns-batch-h.json known-unknowns-batch-i.json known-unknowns-batch-j.json known-unknowns-batch-k.json known-unknowns-batch-l-a.json known-unknowns-batch-l-b.json known-unknowns-batch-m.json known-unknowns-issuer-control-2026.json known-unknowns-batch-n.json known-unknowns-batch-o.json known-unknowns-batch-p.json q-open-items.json r-open-items.json s-open-items.json
+stablecoins.json stablecoins-extra.json stablecoins-batch-b.json stablecoins-batch-c.json stablecoins-batch-d.json stablecoins-batch-e.json stablecoins-batch-f.json stablecoins-batch-g.json stablecoins-batch-h.json stablecoins-batch-i.json stablecoins-batch-j.json stablecoins-batch-k.json stablecoins-batch-l.json stablecoins-batch-m.json stablecoins-batch-n.json stablecoins-batch-o.json stablecoins-batch-p.json stablecoins-batch-q.json stablecoins-batch-r.json stablecoins-batch-s.json stablecoins-batch-t.json
+organizations.json organizations-batch-b.json organizations-batch-c.json organizations-batch-d.json organizations-batch-e.json organizations-batch-f.json organizations-batch-g.json organizations-batch-h.json organizations-batch-i.json organizations-batch-j.json organizations-batch-k.json organizations-batch-l.json organizations-batch-m.json organizations-batch-n.json organizations-batch-o.json organizations-batch-p.json organizations-batch-q.json organizations-batch-r.json organizations-batch-s.json organizations-batch-t.json
+relationships.json relationships-batch-b.json relationships-batch-c.json relationships-batch-d.json relationships-batch-e.json relationships-batch-f.json relationships-batch-g.json relationships-batch-h.json relationships-batch-i.json relationships-batch-j.json relationships-batch-k.json relationships-batch-l.json relationships-batch-m.json relationships-batch-n.json relationships-batch-o.json relationships-batch-p.json relationships-batch-q.json relationships-batch-r.json relationships-batch-s.json relationships-batch-t.json
+stablecoin-classification-v2.json stablecoin-classification-batch-a.json stablecoin-classification-batch-b.json stablecoin-classification-batch-c.json stablecoin-classification-batch-d.json stablecoin-classification-batch-e.json stablecoin-classification-batch-f.json stablecoin-classification-batch-g.json stablecoin-classification-batch-h.json stablecoin-classification-batch-i.json stablecoin-classification-batch-j.json stablecoin-classification-batch-k.json stablecoin-classification-batch-l.json stablecoin-classification-batch-m.json stablecoin-classification-extension-batch-a.json stablecoin-classification-batch-n.json stablecoin-classification-batch-o.json stablecoin-classification-batch-p.json stablecoin-classification-batch-q.json stablecoin-classification-batch-r.json stablecoin-classification-batch-s.json stablecoin-classification-batch-t.json
+stablecoin-profiles-v2.json stablecoin-profiles-batch-a.json stablecoin-profiles-batch-b.json stablecoin-profiles-batch-c.json stablecoin-profiles-batch-d.json stablecoin-profiles-batch-e.json stablecoin-profiles-batch-f.json stablecoin-profiles-batch-g.json stablecoin-profiles-batch-h.json stablecoin-profiles-batch-i.json stablecoin-profiles-batch-j.json stablecoin-profiles-batch-k.json stablecoin-profiles-batch-l.json stablecoin-profiles-batch-m.json stablecoin-profiles-batch-n.json stablecoin-profiles-batch-o.json stablecoin-profiles-batch-p.json stablecoin-profiles-batch-q.json r-profiles.json s-profiles.json batch-t-reserve-redemption.json
+events.json events-pr036.json events-pr037.json events-pr038.json events-batch-a.json events-batch-b.json events-batch-c.json events-batch-d.json events-batch-e.json events-batch-f.json events-batch-g.json events-batch-h.json events-batch-i.json events-batch-j.json events-batch-k.json events-batch-l.json events-batch-m.json events-issuer-control-2026.json events-batch-n.json events-batch-o.json events-batch-p.json events-batch-q.json events-batch-r.json events-batch-s.json events-batch-t.json
+event-details-v2.json event-details-batch-a.json event-details-batch-b.json event-details-batch-c.json event-details-batch-d.json event-details-batch-e.json event-details-batch-f.json event-details-batch-g.json event-details-batch-h.json event-details-batch-i.json event-details-batch-j.json event-details-batch-k.json event-details-batch-l.json event-details-batch-m.json event-details-issuer-control-2026.json event-details-batch-n.json event-details-batch-o.json event-details-batch-p.json event-details-batch-q.json event-details-batch-r.json event-details-batch-s.json event-details-batch-t-a.json event-details-batch-t-b.json
+evidence.json evidence-extra.json evidence-pr033.json evidence-events-pr036.json evidence-events-pr037.json evidence-events-pr038.json evidence-batch-a.json evidence-batch-b.json evidence-batch-c.json evidence-batch-d.json evidence-batch-e.json evidence-batch-f.json evidence-batch-g.json evidence-batch-h.json evidence-batch-i.json evidence-batch-j.json evidence-batch-k.json evidence-batch-l-a.json evidence-batch-l-b.json evidence-batch-l-c.json evidence-batch-l-d1.json evidence-batch-l-d2.json evidence-batch-m.json evidence-issuer-control-2026.json evidence-batch-n.json evidence-batch-o.json evidence-batch-p.json evidence-batch-q.json evidence-batch-r.json evidence-batch-s.json evidence-batch-t.json evidence-batch-t-b1.json evidence-batch-t-b2.json evidence-quality-pr219.json
+reserve-reports.json reserve-reports-extra.json reserve-reports-pr033.json reserve-reports-pr034.json reserve-reports-batch-b.json reserve-reports-batch-f.json reserve-reports-batch-g.json reserve-reports-batch-h.json reserve-reports-batch-i.json reserve-reports-batch-j.json reserve-reports-batch-k.json reserve-reports-batch-l.json reserve-reports-batch-m-a.json reserve-reports-batch-m-b.json reserve-reports-batch-n.json reserve-reports-batch-o.json reserve-reports-batch-p.json reserve-reports-batch-q.json r-protocol-context.json s-protocol-context.json batch-t-context.json
+known-unknowns.json known-unknowns-extra.json known-unknowns-pr033.json known-unknowns-pr034.json known-unknowns-batch-a.json known-unknowns-batch-b.json known-unknowns-batch-c.json known-unknowns-batch-d.json known-unknowns-batch-e.json known-unknowns-batch-f.json known-unknowns-batch-g.json known-unknowns-batch-h.json known-unknowns-batch-i.json known-unknowns-batch-j.json known-unknowns-batch-k.json known-unknowns-batch-l-a.json known-unknowns-batch-l-b.json known-unknowns-batch-m.json known-unknowns-issuer-control-2026.json known-unknowns-batch-n.json known-unknowns-batch-o.json known-unknowns-batch-p.json q-open-items.json r-open-items.json s-open-items.json batch-t-review-gaps.json
 regulatory-notes.json
-deployments.json deployments-extra.json deployments-batch-a.json deployments-batch-b.json deployments-batch-c.json deployments-batch-d.json deployments-batch-e.json deployments-batch-f.json deployments-batch-g.json deployments-batch-h.json deployments-batch-i.json deployments-batch-j.json deployments-batch-k.json deployments-batch-l.json deployments-batch-m.json deployments-issuer-control-2026.json deployments-batch-n.json deployments-batch-o.json deployments-batch-p.json deployments-batch-q.json deployments-batch-r.json deployments-batch-s.json
+deployments.json deployments-extra.json deployments-batch-a.json deployments-batch-b.json deployments-batch-c.json deployments-batch-d.json deployments-batch-e.json deployments-batch-f.json deployments-batch-g.json deployments-batch-h.json deployments-batch-i.json deployments-batch-j.json deployments-batch-k.json deployments-batch-l.json deployments-batch-m.json deployments-issuer-control-2026.json deployments-batch-n.json deployments-batch-o.json deployments-batch-p.json deployments-batch-q.json deployments-batch-r.json deployments-batch-s.json batch-t-deployments.json
 `;
 void registryBaseRuntimeFiles;
 
@@ -158,42 +171,43 @@ const classificationById = new Map([
   ...(stablecoinClassificationBatchMData as StablecoinRow[]), ...(stablecoinClassificationBatchNData as StablecoinRow[]),
   ...(stablecoinClassificationBatchOData as StablecoinRow[]), ...(stablecoinClassificationBatchPData as StablecoinRow[]),
   ...(stablecoinClassificationBatchQData as StablecoinRow[]), ...(stablecoinClassificationBatchRData as StablecoinRow[]),
-  ...(stablecoinClassificationBatchSData as StablecoinRow[])
+  ...(stablecoinClassificationBatchSData as StablecoinRow[]), ...(stablecoinClassificationBatchTData as StablecoinRow[])
 ].map((row) => [row.id, row] as const));
 const detailsById = new Map([
   ...(eventDetailsBatchKData as EventRow[]), ...(eventDetailsBatchLData as EventRow[]),
   ...(eventDetailsBatchMData as EventRow[]), ...(eventDetailsBatchNData as EventRow[]),
   ...(eventDetailsBatchOData as EventRow[]), ...(eventDetailsBatchPData as EventRow[]),
   ...(eventDetailsBatchQData as EventRow[]), ...(eventDetailsBatchRData as EventRow[]),
-  ...(eventDetailsBatchSData as EventRow[])
+  ...(eventDetailsBatchSData as EventRow[]), ...(eventDetailsBatchTAData as EventRow[]),
+  ...(eventDetailsBatchTBData as EventRow[])
 ].map((row) => [row.id, row] as const));
 const batchStablecoins = [
   ...(stablecoinsBatchKData as StablecoinRow[]), ...(stablecoinsBatchLData as StablecoinRow[]),
   ...(stablecoinsBatchMData as StablecoinRow[]), ...(stablecoinsBatchNData as StablecoinRow[]),
   ...(stablecoinsBatchOData as StablecoinRow[]), ...(stablecoinsBatchPData as StablecoinRow[]),
   ...(stablecoinsBatchQData as StablecoinRow[]), ...(stablecoinsBatchRData as StablecoinRow[]),
-  ...(stablecoinsBatchSData as StablecoinRow[])
+  ...(stablecoinsBatchSData as StablecoinRow[]), ...(stablecoinsBatchTData as StablecoinRow[])
 ].map((row) => ({ ...row, ...(classificationById.get(row.id) ?? {}), ...(getStablecoinProfile(row.id) ?? {}) }));
 const batchOrganizations = [
   ...(organizationsBatchKData as OrganizationRow[]), ...(organizationsBatchLData as OrganizationRow[]),
   ...(organizationsBatchMData as OrganizationRow[]), ...(organizationsBatchNData as OrganizationRow[]),
   ...(organizationsBatchOData as OrganizationRow[]), ...(organizationsBatchPData as OrganizationRow[]),
   ...(organizationsBatchQData as OrganizationRow[]), ...(organizationsBatchRData as OrganizationRow[]),
-  ...(organizationsBatchSData as OrganizationRow[])
+  ...(organizationsBatchSData as OrganizationRow[]), ...(organizationsBatchTData as OrganizationRow[])
 ].map((row) => ({ ...row, issuer_type: row.legacy_issuer_type ?? row.organization_type }));
 const batchRelationships = [
   ...(relationshipsBatchKData as RelationshipRow[]), ...(relationshipsBatchLData as RelationshipRow[]),
   ...(relationshipsBatchMData as RelationshipRow[]), ...(relationshipsBatchNData as RelationshipRow[]),
   ...(relationshipsBatchOData as RelationshipRow[]), ...(relationshipsBatchPData as RelationshipRow[]),
   ...(relationshipsBatchQData as RelationshipRow[]), ...(relationshipsBatchRData as RelationshipRow[]),
-  ...(relationshipsBatchSData as RelationshipRow[])
+  ...(relationshipsBatchSData as RelationshipRow[]), ...(relationshipsBatchTData as RelationshipRow[])
 ];
 const batchEvents = [
   ...(eventsBatchKData as EventRow[]), ...(eventsBatchLData as EventRow[]),
   ...(eventsBatchMData as EventRow[]), ...(eventsBatchNData as EventRow[]),
   ...(eventsBatchOData as EventRow[]), ...(eventsBatchPData as EventRow[]),
   ...(eventsBatchQData as EventRow[]), ...(eventsBatchRData as EventRow[]),
-  ...(eventsBatchSData as EventRow[])
+  ...(eventsBatchSData as EventRow[]), ...(eventsBatchTData as EventRow[])
 ].map((row) => ({ ...row, ...(detailsById.get(row.id) ?? {}) }));
 const batchEvidence = [
   ...(evidenceBatchKData as EvidenceRow[]), ...(evidenceBatchLAData as EvidenceRow[]),
@@ -202,7 +216,9 @@ const batchEvidence = [
   ...(evidenceBatchMData as EvidenceRow[]), ...(evidenceBatchNData as EvidenceRow[]),
   ...(evidenceBatchOData as EvidenceRow[]), ...(evidenceBatchPData as EvidenceRow[]),
   ...(evidenceBatchQData as EvidenceRow[]), ...(evidenceBatchRData as EvidenceRow[]),
-  ...(evidenceBatchSData as EvidenceRow[]), ...(evidenceQualityPr219Data as EvidenceRow[])
+  ...(evidenceBatchSData as EvidenceRow[]), ...(evidenceBatchTData as EvidenceRow[]),
+  ...(evidenceBatchTB1Data as EvidenceRow[]), ...(evidenceBatchTB2Data as EvidenceRow[]),
+  ...(evidenceQualityPr219Data as EvidenceRow[])
 ].map((row) => ({
   ...row,
   stablecoin_ids: unique([...(row.stablecoin_ids ?? []), row.stablecoin_id]),
@@ -226,10 +242,10 @@ export function getRelationships(): RelationshipRow[] { return [...getBaseRelati
 export function getEvents(): EventRow[] { return [...getBaseEvents(), ...batchEvents].map((row) => ({ ...row, subject_stablecoin_ids: [...(row.subject_stablecoin_ids ?? [])], subject_organization_ids: [...(row.subject_organization_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getEvidence(): EvidenceRow[] { return [...getBaseEvidence(), ...batchEvidence].map((row) => ({ ...row, stablecoin_ids: [...(row.stablecoin_ids ?? [])], organization_ids: [...(row.organization_ids ?? [])], event_ids: [...(row.event_ids ?? [])], claim_scopes: [...(row.claim_scopes ?? [])] })); }
 export function getEvidenceRelations(): EvidenceRelationRow[] { return [...getBaseEvidenceRelations(), ...batchEvidenceRelations].map((row) => ({ ...row, stablecoin_ids: [...row.stablecoin_ids], organization_ids: [...row.organization_ids], event_ids: [...row.event_ids], claim_scopes: [...row.claim_scopes] })); }
-export function getReserveReports(): ReserveReportRow[] { return [...getBaseReserveReports(), ...(reserveReportsBatchKData as ReserveReportRow[]), ...(reserveReportsBatchLData as ReserveReportRow[]), ...(reserveReportsBatchMAData as ReserveReportRow[]), ...(reserveReportsBatchMBData as ReserveReportRow[]), ...(reserveReportsBatchNData as ReserveReportRow[]), ...(reserveReportsBatchOData as ReserveReportRow[]), ...(reserveReportsBatchPData as ReserveReportRow[]), ...(reserveReportsBatchQData as ReserveReportRow[]), ...(reserveReportsBatchRData as ReserveReportRow[]), ...(reserveReportsBatchSData as ReserveReportRow[])].map((row) => ({ ...row })); }
-export function getKnownUnknowns(): KnownUnknownRow[] { return [...getBaseKnownUnknowns(), ...(knownUnknownsBatchKData as KnownUnknownRow[]), ...(knownUnknownsBatchLAData as KnownUnknownRow[]), ...(knownUnknownsBatchLBData as KnownUnknownRow[]), ...(knownUnknownsBatchMData as KnownUnknownRow[]), ...(knownUnknownsBatchNData as KnownUnknownRow[]), ...(knownUnknownsBatchOData as KnownUnknownRow[]), ...(knownUnknownsBatchPData as KnownUnknownRow[]), ...(knownUnknownsBatchQData as KnownUnknownRow[]), ...(knownUnknownsBatchRData as KnownUnknownRow[]), ...(knownUnknownsBatchSData as KnownUnknownRow[])].map((row) => ({ ...row })); }
+export function getReserveReports(): ReserveReportRow[] { return [...getBaseReserveReports(), ...(reserveReportsBatchKData as ReserveReportRow[]), ...(reserveReportsBatchLData as ReserveReportRow[]), ...(reserveReportsBatchMAData as ReserveReportRow[]), ...(reserveReportsBatchMBData as ReserveReportRow[]), ...(reserveReportsBatchNData as ReserveReportRow[]), ...(reserveReportsBatchOData as ReserveReportRow[]), ...(reserveReportsBatchPData as ReserveReportRow[]), ...(reserveReportsBatchQData as ReserveReportRow[]), ...(reserveReportsBatchRData as ReserveReportRow[]), ...(reserveReportsBatchSData as ReserveReportRow[]), ...(reserveReportsBatchTData as ReserveReportRow[])].map((row) => ({ ...row })); }
+export function getKnownUnknowns(): KnownUnknownRow[] { return [...getBaseKnownUnknowns(), ...(knownUnknownsBatchKData as KnownUnknownRow[]), ...(knownUnknownsBatchLAData as KnownUnknownRow[]), ...(knownUnknownsBatchLBData as KnownUnknownRow[]), ...(knownUnknownsBatchMData as KnownUnknownRow[]), ...(knownUnknownsBatchNData as KnownUnknownRow[]), ...(knownUnknownsBatchOData as KnownUnknownRow[]), ...(knownUnknownsBatchPData as KnownUnknownRow[]), ...(knownUnknownsBatchQData as KnownUnknownRow[]), ...(knownUnknownsBatchRData as KnownUnknownRow[]), ...(knownUnknownsBatchSData as KnownUnknownRow[]), ...(knownUnknownsBatchTData as KnownUnknownRow[])].map((row) => ({ ...row })); }
 export { getRegulatoryNotes, getRegistryUpdates };
-export function getDeployments(): DeploymentRow[] { return [...getBaseDeployments(), ...(deploymentsBatchKData as DeploymentRow[]), ...(deploymentsBatchLData as DeploymentRow[]), ...(deploymentsBatchMData as DeploymentRow[]), ...(deploymentsBatchNData as DeploymentRow[]), ...(deploymentsBatchOData as DeploymentRow[]), ...(deploymentsBatchPData as DeploymentRow[]), ...(deploymentsBatchQData as DeploymentRow[]), ...(deploymentsBatchRData as DeploymentRow[]), ...(deploymentsBatchSData as DeploymentRow[])].map((row) => ({ ...row, control_event_ids: [...(row.control_event_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
+export function getDeployments(): DeploymentRow[] { return [...getBaseDeployments(), ...(deploymentsBatchKData as DeploymentRow[]), ...(deploymentsBatchLData as DeploymentRow[]), ...(deploymentsBatchMData as DeploymentRow[]), ...(deploymentsBatchNData as DeploymentRow[]), ...(deploymentsBatchOData as DeploymentRow[]), ...(deploymentsBatchPData as DeploymentRow[]), ...(deploymentsBatchQData as DeploymentRow[]), ...(deploymentsBatchRData as DeploymentRow[]), ...(deploymentsBatchSData as DeploymentRow[]), ...(deploymentsBatchTData as DeploymentRow[])].map((row) => ({ ...row, control_event_ids: [...(row.control_event_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getPrimaryRelationship(stablecoinId: string): RelationshipRow | undefined {
   const preferredRoles: OrganizationRole[] = ['legal_issuer', 'protocol_operator', 'brand_owner', 'reserve_manager', 'governance_body', 'redemption_agent', 'custodian', 'technology_provider', 'other'];
   return getRelationships().filter((row) => row.stablecoin_id === stablecoinId).sort((a, b) => preferredRoles.indexOf(a.role) - preferredRoles.indexOf(b.role))[0];

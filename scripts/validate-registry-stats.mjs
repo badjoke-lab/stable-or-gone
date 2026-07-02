@@ -5,6 +5,7 @@ import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
 import { buildValueStateStats } from './build-value-state-stats.mjs';
 import { buildPrimaryDisplayRelationshipStats } from './build-primary-display-relationship-stats.mjs';
 import { applyEvidenceSourceIdentityStats } from './build-evidence-source-identity-stats.mjs';
+import { evidenceSourceIdentityGroupCount } from '../config/evidence-source-identities.mjs';
 
 const root = process.cwd();
 const contractPath = 'docs/stats/registry-stats-contract.json';
@@ -116,8 +117,8 @@ if (sourceIdentities?.public_duplicate_url_groups !== 0) {
 if ((sourceIdentities?.orphan_relation_source_ids ?? []).length !== 0) {
   failures.push('evidence relations must not point to missing public source identities');
 }
-if (sourceIdentities?.source_identity_groups !== 32) {
-  failures.push('evidence source identity group count must remain 32');
+if (sourceIdentities?.source_identity_groups !== evidenceSourceIdentityGroupCount) {
+  failures.push(`evidence source identity group count must equal configured groups (${evidenceSourceIdentityGroupCount})`);
 }
 
 try {

@@ -40,17 +40,17 @@ function timestamp() {
 
 const v2 = loadRegistryV2Baseline(root);
 const v3base = read('docs/migration/registry-v3-foundation.json');
-const yieldBase = read('docs/migration/registry-v3-\u0069ncome-profiles.json');
+const yieldBase = read('docs/migration/registry-v3-income-profiles.json');
 const quality = read('docs/migration/registry-v3-baseline.json');
 const v3 = {
   ...v3base,
   data_groups: {
     ...v3base.data_groups,
-    legal_profiles: unique([...(v3base.data_groups?.legal_profiles ?? []), 'data/q-legal.json', 'data/r-legal.json', 'data/s-legal.json']),
-    reserve_components: unique([...(v3base.data_groups?.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json', 'data/reserve-components-v3-batch-s.json'])
+    legal_profiles: unique([...(v3base.data_groups?.legal_profiles ?? []), 'data/q-legal.json', 'data/r-legal.json', 'data/s-legal.json', 'data/t-legal.json']),
+    reserve_components: unique([...(v3base.data_groups?.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json', 'data/reserve-components-v3-batch-s.json', 'data/batch-t-components.json'])
   }
 };
-const yields = unique([...(yieldBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json']);
+const yields = unique([...(yieldBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json', 'data/batch-t-income.json']);
 
 const stats = buildRegistryStats();
 const statsPath = path.join(root, quality.generated_stats);
@@ -78,7 +78,7 @@ for (const [key, value] of Object.entries(v2.minimum_counts ?? {})) {
 expected.legal_profiles = count(v3.data_groups.legal_profiles);
 expected.stable_asset_relationships = count(v3.data_groups.stable_asset_relationships);
 expected.reserve_components = count(v3.data_groups.reserve_components);
-expected['\u0069ncome_profiles'] = count(yields);
+expected.income_profiles = count(yields);
 for (const [key, value] of Object.entries(expected)) {
   if (counts[key] !== value) throw new Error(`Current canonical count mismatch for ${key}: ${counts[key]} !== ${value}`);
 }

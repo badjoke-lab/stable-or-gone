@@ -17,8 +17,8 @@ const assignmentsByCategory = {
   algorithmic_or_unbacked: ['basis-cash', 'beanstalk-bean', 'dynamic-set-dollar', 'empty-set-dollar', 'ust'],
   synthetic_or_hedged: ['falcon-usdf', 'spot', 'stables-labs-usdx', 'susd', 'usde', 'usr'],
   hybrid_or_mixed: [
-    'acala-ausd', 'agoric-ist', 'fei', 'frax', 'gyroscope-gyd', 'iron', 'musd', 'near-usn', 'nuon',
-    'solstice-usx', 'united-stables-u', 'usdd', 'uxd-protocol'
+    'acala-ausd', 'agoric-ist', 'fei', 'frax', 'gyroscope-gyd', 'iron', 'mento-eurm', 'musd', 'near-usn', 'nuon',
+    'reserve-usd3', 'solstice-usx', 'united-stables-u', 'usdd', 'uxd-protocol'
   ],
   wrapper_or_receipt: ['sdai', 'susde', 'susds'],
   other: [],
