@@ -16,12 +16,13 @@ const register = fs.readFileSync(paths.register, 'utf8');
 const page = fs.readFileSync(paths.page, 'utf8');
 const runtime = fs.readFileSync(paths.runtime, 'utf8');
 
-const declarationBlock = (source, selector, from = 0) => {
-  const start = source.indexOf(selector, from);
+const declarationBlock = (source, selector) => {
+  const marker = `${selector} {`;
+  const start = source.indexOf(marker);
   if (start < 0) return '';
-  const open = source.indexOf('{', start);
+  const open = start + marker.length - 1;
   const close = source.indexOf('}', open + 1);
-  return open >= 0 && close >= 0 ? source.slice(open + 1, close) : '';
+  return close >= 0 ? source.slice(open + 1, close) : '';
 };
 
 const requiredHome = [
@@ -33,13 +34,15 @@ const requiredHome = [
   '.home-recent',
   '.home-reference'
 ];
-for (const selector of requiredHome) if (!home.includes(selector)) throw new Error(`missing Home selector: ${selector}`);
+for (const selector of requiredHome) if (!home.includes(`${selector} {`) && !home.includes(`${selector},`)) throw new Error(`missing Home selector: ${selector}`);
 
 const homeSearchBlock = declarationBlock(home, '.home-search__form');
 if (!/grid-template-columns:\s*minmax\(0,\s*1fr\)\s+auto/.test(homeSearchBlock)) {
   throw new Error('Home search must remain one integrated field-and-button control');
 }
-const mobile520 = home.slice(home.indexOf('@media (max-width: 520px)'));
+const mobile520Start = home.indexOf('@media (max-width: 520px)');
+if (mobile520Start < 0) throw new Error('Home narrow-mobile breakpoint is missing');
+const mobile520 = home.slice(mobile520Start);
 const mobileHomeSearchBlock = declarationBlock(mobile520, '.home-search__form');
 if (/grid-template-columns:\s*1fr\s*;/.test(mobileHomeSearchBlock)) {
   throw new Error('Home mobile search may not split the button onto a second row');
@@ -54,7 +57,7 @@ const requiredRegister = [
   '.stablecoin-index-cards',
   '.stablecoin-index-pagination'
 ];
-for (const selector of requiredRegister) if (!register.includes(selector)) throw new Error(`missing register selector: ${selector}`);
+for (const selector of requiredRegister) if (!register.includes(`${selector} {`) && !register.includes(`${selector},`)) throw new Error(`missing register selector: ${selector}`);
 
 const filterGridBlock = declarationBlock(register, '.stablecoin-index-filter-grid');
 if (!/display:\s*grid/.test(filterGridBlock)) throw new Error('Stablecoin filters must use a bounded grid');
@@ -63,7 +66,9 @@ if (/overflow-x:\s*auto/.test(filterGridBlock)) throw new Error('Stablecoin filt
 const tableHeadingBlock = declarationBlock(register, '.stablecoin-index-table th');
 if (!/font-size:\s*0\.75rem/.test(tableHeadingBlock)) throw new Error('Stablecoin table headings must meet the 12px minimum');
 
-const mobile719 = register.slice(register.indexOf('@media (max-width: 719px)'));
+const mobile719Start = register.indexOf('@media (max-width: 719px)');
+if (mobile719Start < 0) throw new Error('Register mobile breakpoint is missing');
+const mobile719 = register.slice(mobile719Start);
 const mobileCardsBlock = declarationBlock(mobile719, '.stablecoin-index-cards');
 if (!/display:\s*grid/.test(mobileCardsBlock)) throw new Error('Register must provide deliberate mobile cards');
 
