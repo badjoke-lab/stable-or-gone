@@ -1,6 +1,7 @@
 ---
 const { record } = Astro.props as { record: { search: string; title: string; category: string; subtype: string; statusEffect: string; recovery: string; year: string; eventDate: string; sourceIdentityCount: number; id: string; categoryLabel: string; subtypeLabel: string; impactLabel: string; statusEffectLabel: string; recoveryLabel: string } };
 const data = {
+  'data-record-id': record.id,
   'data-search': record.search,
   'data-title': record.title.toLocaleLowerCase(),
   'data-category': record.category,

@@ -1,6 +1,7 @@
 ---
 const { record } = Astro.props;
 const data = {
+  'data-record-id': record.id,
   'data-search': record.search,
   'data-title': record.title.toLocaleLowerCase(),
   'data-category': record.category,

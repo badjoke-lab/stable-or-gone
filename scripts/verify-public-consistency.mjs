@@ -6,6 +6,7 @@ const root = process.cwd();
 const distDir = path.join(root, 'dist');
 const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
 const failures = [];
+const INDEX_PAGE_SIZE = 20;
 
 function fail(message) { failures.push(message); }
 function assert(condition, message) { if (!condition) fail(message); }
@@ -167,8 +168,9 @@ assert(stablecoinsText.includes(`Organizations ${counts.organizations}`), 'stabl
 assert(stablecoinsText.includes(`${counts.stablecoins} of ${counts.stablecoins} records`), 'stablecoin index visible result count mismatch');
 assert(organizationsText.includes(`Organizations ${counts.organizations}`), 'organization index count mismatch');
 assert(organizationsText.includes(`Relationships ${counts.relationships}`), 'organization index relationship count mismatch');
+assert(organizationsText.includes(`1–${Math.min(INDEX_PAGE_SIZE, counts.organizations)} of ${counts.organizations} organizations`), 'organization index bounded visible result count mismatch');
 assert(eventsText.includes(`Events ${counts.events}`), 'event index count mismatch');
-assert(eventsText.includes(`${counts.events} of ${counts.events} events`), 'event index visible result count mismatch');
+assert(eventsText.includes(`1–${Math.min(INDEX_PAGE_SIZE, counts.events)} of ${counts.events} events`), 'event index bounded visible result count mismatch');
 
 const stablecoinLinks = uniqueInternalLinks(stablecoinsHtml, '/stablecoin/');
 const organizationLinks = uniqueInternalLinks(organizationsHtml, '/issuer/');
