@@ -16,7 +16,8 @@ jobs:
     timeout-minutes: 60
     env:
       SOG_BASE_URL: https://sog.badjoke-lab.com
-      SOG_EXPECTED_COMMIT: 0923644d88c1c278041da678269cef15dd0be6c9
+      SOG_EXPECTED_COMMIT: e26a548b17d3b283a735ac8af73cf1b4b1b0da0c
+      SOG_EXPECTED_PRIMARY_RECORDS: '100'
       SOG_SMOKE_ATTEMPTS: '40'
       SOG_SMOKE_DELAY_MS: '15000'
       SOG_PARITY_CONCURRENCY: '12'
@@ -25,7 +26,7 @@ jobs:
       - name: Checkout exact merged Growth D source
         uses: actions/checkout@v4
         with:
-          ref: 0923644d88c1c278041da678269cef15dd0be6c9
+          ref: e26a548b17d3b283a735ac8af73cf1b4b1b0da0c
           fetch-depth: 1
       - name: Setup Node
         uses: actions/setup-node@v4
