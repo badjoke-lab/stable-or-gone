@@ -8,6 +8,7 @@ on:
       - '.github/workflows/ui-v3-production-closure.yml'
       - 'scripts/write-ui-v3-production-closure-report.mjs'
       - 'scripts/validate-ui-v3-production-closure.mjs'
+      - 'scripts/check-production.mjs'
       - 'docs/audits/ui-v3-production-closure-2026-07-02.md'
       - 'docs/roadmap.md'
       - 'docs/ui-redesign/implementation-plan.md'
