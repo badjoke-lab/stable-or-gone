@@ -12,8 +12,8 @@
 
 .organization-index-pagination[hidden],
 .event-index-pagination[hidden],
-.organization-index-row[hidden],
-.event-index-row[hidden],
+[data-organization-row][hidden],
+[data-event-row][hidden],
 .organization-index-card[hidden],
 .event-index-card[hidden] {
   display: none !important;
