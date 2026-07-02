@@ -1,0 +1,75 @@
+name: Verify Growth D production
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/verify-growth-d-production.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SOG_BASE_URL: https://sog.badjoke-lab.com
+      SOG_EXPECTED_COMMIT: 0923644d88c1c278041da678269cef15dd0be6c9
+      SOG_SMOKE_ATTEMPTS: '40'
+      SOG_SMOKE_DELAY_MS: '15000'
+      SOG_PARITY_CONCURRENCY: '12'
+      SOG_OWNER_APPROVAL_REF: project owner instruction to complete Growth D production verification
+    steps:
+      - name: Checkout exact merged Growth D source
+        uses: actions/checkout@v4
+        with:
+          ref: 0923644d88c1c278041da678269cef15dd0be6c9
+          fetch-depth: 1
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Verify production smoke
+        shell: bash
+        run: |
+          mkdir -p artifacts/growth-d-production
+          set -o pipefail
+          node scripts/check-production.mjs 2>&1 | tee artifacts/growth-d-production/smoke.log
+      - name: Verify production provenance
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/check-production-provenance.mjs 2>&1 | tee artifacts/growth-d-production/provenance.log
+      - name: Verify exact production output parity
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/check-production-output-parity.mjs 2>&1 | tee artifacts/growth-d-production/output-parity.log
+      - name: Capture production desktop representatives
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url "$SOG_BASE_URL"
+      - name: Capture production mobile representatives
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url "$SOG_BASE_URL"
+      - name: Audit production representatives
+        run: node scripts/audit-representative-visuals.mjs
+      - name: Write production closure report
+        run: node scripts/write-ui-v3-production-closure-report.mjs
+      - name: Upload Growth D production verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: growth-d-production-verification-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            artifacts/growth-d-production/**
+            artifacts/ui-v3-production-closure.json
+            artifacts/ui-v3-production-closure.md
+            artifacts/screenshots/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
