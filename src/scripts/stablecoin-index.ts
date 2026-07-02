@@ -133,10 +133,15 @@ if (foundRoot instanceof HTMLElement) {
       activeSummary.append(button);
     }
     for (const group of groups) {
+      const selectedCount = selectedFor(group).length;
       const count = root.querySelector<HTMLElement>(`[data-filter-count="${group}"]`);
-      if (count) count.textContent = String(selectedFor(group).length);
+      const optionTotal = count?.dataset.optionTotal ?? '';
+      if (count) {
+        count.textContent = selectedCount > 0 ? String(selectedCount) : optionTotal;
+        count.toggleAttribute('data-selected', selectedCount > 0);
+      }
       const summary = count?.closest('summary');
-      if (summary) summary.setAttribute('data-summary-label', `${selectedFor(group).length} selected`);
+      if (summary) summary.setAttribute('data-summary-label', selectedCount > 0 ? `${selectedCount} selected` : 'All');
     }
   }
 
