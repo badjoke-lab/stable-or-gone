@@ -13,14 +13,16 @@ permissions:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     env:
       SOG_BASE_URL: https://sog.badjoke-lab.com
       SOG_EXPECTED_COMMIT: 8f5235f75bfa15c42ab833dcac948b59f6571ffd
       SOG_SMOKE_ATTEMPTS: '1'
       SOG_SMOKE_DELAY_MS: '0'
       SOG_PARITY_CONCURRENCY: '12'
+      SOG_OWNER_APPROVAL_REF: project owner instruction to proceed with the fixed PR 261-273 sequence
     steps:
-      - name: Checkout main
+      - name: Checkout exact production source
         uses: actions/checkout@v4
         with:
           ref: 8f5235f75bfa15c42ab833dcac948b59f6571ffd
@@ -33,6 +35,9 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
       - name: Fetch production provenance
         run: |
           mkdir -p artifacts
@@ -41,7 +46,7 @@ jobs:
           const base = 'https://sog.badjoke-lab.com';
           const read = async (pathname) => {
             const response = await fetch(`${base}${pathname}`, {
-              headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-production-diagnostic/2.0' }
+              headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-production-diagnostic/3.0' }
             });
             return { pathname, status: response.status, headers: Object.fromEntries(response.headers), body: await response.text() };
           };
@@ -64,31 +69,50 @@ jobs:
           console.log(JSON.stringify({ production_commit: result.production_commit, production_branch: result.production_branch, build_provenance_equal: result.build_provenance_equal }, null, 2));
           NODE
 
-      - name: Run production smoke once
-        continue-on-error: true
+      - name: Verify production smoke
         shell: bash
         run: |
           set -o pipefail
           node scripts/check-production.mjs 2>&1 | tee artifacts/check-production.log
 
-      - name: Run production provenance once
-        continue-on-error: true
+      - name: Verify production provenance
         shell: bash
         run: |
           set -o pipefail
           node scripts/check-production-provenance.mjs 2>&1 | tee artifacts/check-production-provenance.log
 
-      - name: Run exact production output parity once
-        continue-on-error: true
+      - name: Verify exact production output parity
         shell: bash
         run: |
           set -o pipefail
           node scripts/check-production-output-parity.mjs 2>&1 | tee artifacts/check-production-output-parity.log
 
-      - name: Upload production diagnostic
+      - name: Capture production desktop representatives
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url "$SOG_BASE_URL"
+
+      - name: Capture production mobile representatives
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url "$SOG_BASE_URL"
+
+      - name: Audit production representatives
+        run: node scripts/audit-representative-visuals.mjs
+
+      - name: Write production closure report
+        run: node scripts/write-ui-v3-production-closure-report.mjs
+
+      - name: Upload production closure diagnostic
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: production-version-diagnostic-${{ github.run_id }}
-          if-no-files-found: error
-          retention-days: 7
-          path: artifacts/**
+          name: production-ui-v3-closure-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            artifacts/production-version-diagnostic.json
+            artifacts/check-production.log
+            artifacts/check-production-provenance.log
+            artifacts/check-production-output-parity.log
+            artifacts/ui-v3-production-closure.json
+            artifacts/ui-v3-production-closure.md
+            artifacts/screenshots/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
