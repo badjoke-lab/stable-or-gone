@@ -15,11 +15,12 @@ UI completion: withdrawn
 Active workstream: Terminal UI restoration
 Tracking issue: #281
 Rejected directions: Modern Data Product, Editorial Ledger, Modern Evidence Registry
-Active PR: #288 — restore terminal visual baseline over current structure
+Current main: e81a2052023a1b23a0fd05080ae4ca37d6f0cf4f
+Current stage: exact-main production and artifact verification
 Restoration source: 3df568eab0a179d7690a88efb599156b0d659ab7
 ```
 
-The current semantic structure, interactions, data, routes, accessibility work, and machine-readable outputs remain protected. The visual system returns to the original dark terminal family.
+The current semantic structure, interactions, data, routes, accessibility work, and machine-readable outputs remain protected. The visual system uses the restored dark terminal family.
 
 ## Why the UI was reopened
 
@@ -63,66 +64,91 @@ docs/roadmap.md
 
 - removed the PR #285 Modern Evidence Registry shell from main.
 
-## Active work
-
 ### PR #288 — restore the original terminal visual family
 
-- retain current 100-record data and all current routes;
-- retain current Home information, search, and editorial data selection;
-- retain register pagination, filters, sort, URL state, comparison, desktop table, and mobile cards;
-- retain current dossier hierarchy and field ownership;
-- restore deep navy/near-black backgrounds;
-- restore cyan links and actions;
-- restore monospace interface typography;
-- restore square panels and controls;
-- restore compact research-terminal density;
-- preserve current responsive and accessibility behavior;
-- run full desktop/mobile screenshot capture and visual audit;
-- do not call the UI complete after this restoration PR.
+- restored the deep navy/near-black terminal foundation;
+- restored cyan actions, monospace interface typography, square panels, and terminal density;
+- retained current data, routes, page semantics, interactions, responsive behavior, and accessibility behavior;
+- passed all normal workflows and exact-head desktop/mobile screenshot audit;
+- merged as `884351842fc01c028eeceb32bcd9fcc1ef7ffa09`.
 
-## Next sequence after PR #288
+### PR #289 — bound Events and Organizations indexes
 
-### Terminal pass 2 — page-specific correction
+- replaced 94-record and 172-record unbounded mobile dumps with 20-record pagination;
+- added URL page state, visible ranges, Previous/Next controls, and truthful inactive-filter totals;
+- fixed mobile heading overflow;
+- reduced representative mobile page heights from approximately 57,190px and 98,029px to approximately 13,813px and 13,593px;
+- passed all workflows and desktop/mobile screenshot audit;
+- merged as `409c7ea6b9d3e2aa5376ee7f500cecfe9306f9ca`.
 
-Review the exact restored screenshots and correct only concrete defects:
+### PR #290 — repair Stablecoin register filters
 
-- Home spacing, search, and material-change hierarchy;
-- Register filter readability, pagination, table density, and mobile cards;
-- Dossier current-state hierarchy, reserve/redemption visibility, long values, and mobile presentation;
-- Events and Organizations density, grouping, and responsive behavior;
-- Guides and long-form reading comfort.
+- replaced the clipped horizontal mobile filter strip with a three/two/one-column terminal grid;
+- replaced inactive `0 selected` states with option totals and `All`;
+- preserved pagination, URL state, comparison, desktop table, and mobile cards;
+- passed all workflows and desktop/mobile screenshot audit;
+- merged as `dd71d75c8256a54f5e4e0b28444af336dff98b7a`.
+
+### PR #291 — repair footer and long-form readability
+
+- separated Registry, Reference, Project, and Data access footer groups;
+- converted mobile footer destinations into distinct rows;
+- improved long-form reading width, wrapping, and reference navigation;
+- preserved terminal palette and content;
+- passed all workflows and desktop/mobile screenshot audit;
+- merged as `e81a2052023a1b23a0fd05080ae4ca37d6f0cf4f`.
+
+## Current verified implementation state
+
+```text
+Terminal visual family restored: yes
+Canonical data changes from UI work: 0
+Route changes from UI work: 0
+Home desktop/mobile representative audit: passed technically
+Stablecoin Register desktop/mobile representative audit: passed technically
+Stablecoin dossier active/failed/migrated representatives: passed technically
+Events desktop/mobile representative audit: passed technically
+Organizations desktop/mobile representative audit: passed technically
+Guides/long-form desktop/mobile representative audit: passed technically
+Required screenshot audit step skipped: no
+Owner completion approval: not recorded
+UI completion: not claimed
+```
+
+Technical artifact review is not owner approval. The visual acceptance manifest remains incomplete until the exact production commit and screenshots receive explicit approval.
+
+## Active work
+
+### Terminal pass 3 — exact-main artifact and production verification
+
+1. publish or confirm publication of exact main `e81a2052023a1b23a0fd05080ae4ca37d6f0cf4f` or the later documentation-only checkpoint commit;
+2. verify `/version.json` and `/data/manifest.json` production provenance;
+3. verify all public output and detail-route parity;
+4. capture production Home, Register, representative dossiers, Events, Organizations, Guides, and long-form pages on desktop and mobile;
+5. compare production output with the merged artifact state;
+6. record the exact run and commit used for owner review;
+7. do not mark the UI complete without explicit owner approval.
+
+### Terminal pass 4 — closure or concrete correction
+
+After exact production screenshots are available:
+
+- if rejected, correct only named defects within the terminal visual family;
+- if approved, update `config/ui-v4-visual-acceptance.json` with the exact commit, artifact run, template approvals, and owner reference;
+- run production closure checks;
+- only then declare UI restoration complete.
 
 No new palette, typography family, card system, or unrelated visual concept may be introduced.
-
-### Terminal pass 3 — exact-state artifact review
-
-Capture and review:
-
-- Home desktop/mobile;
-- Register default/search/filter/compare desktop/mobile;
-- active, failed/terminated, migrated, and incomplete-data dossiers;
-- Events desktop/mobile;
-- Organizations desktop/mobile;
-- Guides and long-form desktop/mobile.
-
-### Terminal pass 4 — production closure
-
-- merge only after normal checks pass;
-- verify exact production commit provenance;
-- verify all public route and output parity;
-- verify production screenshots;
-- record owner approval for the exact commit and artifact run;
-- only then set the visual acceptance manifest to complete.
 
 ## Acceptance gates
 
 ```text
 Gate T-A  rejected shell removed — passed in PR #287
-Gate T-B  terminal baseline restored over current structure — active in PR #288
-Gate T-C  Home/Register/Dossier concrete defects corrected
-Gate T-D  Events/Organizations/Guides concrete defects corrected
-Gate T-E  full desktop/mobile artifact review complete
-Gate T-F  exact production commit and owner approval complete
+Gate T-B  terminal baseline restored over current structure — passed in PR #288
+Gate T-C  primary register defects technically corrected — passed in PRs #289 and #290
+Gate T-D  footer and long-form defects technically corrected — passed in PR #291
+Gate T-E  merged representative desktop/mobile artifact audit — passed technically
+Gate T-F  exact production commit and owner approval — active
 ```
 
 No agent may claim UI completion before Gate T-F.
