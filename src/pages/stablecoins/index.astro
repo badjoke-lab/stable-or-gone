@@ -4,6 +4,7 @@ import StablecoinIndexRow from '../../components/StablecoinIndexRow.astro';
 import StablecoinIndexCard from '../../components/StablecoinIndexCard.astro';
 import StablecoinComparisonSource from '../../components/StablecoinComparisonSource.astro';
 import '../../styles/stablecoin-index.css';
+import '../../styles/terminal-stablecoin-filter-repair.css';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel } from '../../utils/publicTaxonomy';
 import { getReferenceFilterOptions, resolveReferenceTarget } from '../../utils/referenceTarget';
@@ -137,7 +138,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <div class="stablecoin-index-filter-grid" aria-label="Stablecoin filters">
         {filters.map((filter) => (
           <details class="stablecoin-index-filter">
-            <summary data-summary-label="0 selected"><span>{filter.label}</span><span aria-hidden="true" data-filter-count={filter.id}>0</span></summary>
+            <summary data-summary-label="All"><span>{filter.label}</span><span aria-hidden="true" data-filter-count={filter.id} data-option-total={filter.options.length}>{filter.options.length}</span></summary>
             <div class="stablecoin-index-filter-options">
               {filter.options.map((item) => <label><input type="checkbox" data-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}
             </div>
