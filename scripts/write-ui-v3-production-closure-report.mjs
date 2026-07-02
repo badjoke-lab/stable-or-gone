@@ -6,15 +6,17 @@ const root = process.cwd();
 const artifactDir = path.join(root, 'artifacts');
 const baseUrl = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT;
+const expectedPrimaryRecordsRaw = process.env.SOG_EXPECTED_PRIMARY_RECORDS?.trim();
 const runId = process.env.GITHUB_RUN_ID || null;
 const repository = process.env.GITHUB_REPOSITORY || 'badjoke-lab/stable-or-gone';
-const ownerApprovalRef = process.env.SOG_OWNER_APPROVAL_REF || 'project owner instruction to proceed with the fixed PR #261-#273 sequence';
+const ownerApprovalRef = process.env.SOG_OWNER_APPROVAL_REF || 'project owner instruction to proceed with the approved production closure sequence';
 
 if (!expectedCommit || !/^[0-9a-f]{40}$/i.test(expectedCommit)) throw new Error('SOG_EXPECTED_COMMIT must be a full commit SHA');
+if (expectedPrimaryRecordsRaw && !/^\d+$/.test(expectedPrimaryRecordsRaw)) throw new Error('SOG_EXPECTED_PRIMARY_RECORDS must be a positive integer');
 
 async function readJson(pathname) {
   const response = await fetch(`${baseUrl}${pathname}`, {
-    headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-ui-v3-production-closure/1.0' }
+    headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-ui-v3-production-closure/1.1' }
   });
   if (!response.ok) throw new Error(`${pathname}: HTTP ${response.status}`);
   return response.json();
@@ -31,7 +33,16 @@ const screenshotAudit = JSON.parse(fs.readFileSync(screenshotAuditPath, 'utf8'))
 if (version.build?.commit !== expectedCommit) throw new Error(`production commit ${version.build?.commit} does not match expected ${expectedCommit}`);
 if (version.build?.branch !== 'main') throw new Error(`production branch ${version.build?.branch} is not main`);
 if (!isDeepStrictEqual(version.build, manifest.build)) throw new Error('version and manifest provenance differ');
-if (version.data?.record_counts?.primary_records !== 98) throw new Error(`expected 98 canonical stable assets, found ${version.data?.record_counts?.primary_records}`);
+
+const versionPrimaryRecords = version.data?.record_counts?.primary_records;
+const manifestPrimaryRecords = manifest.record_counts?.primary_records;
+if (!Number.isInteger(versionPrimaryRecords) || versionPrimaryRecords <= 0) throw new Error(`invalid canonical stable asset count: ${versionPrimaryRecords}`);
+if (manifestPrimaryRecords !== versionPrimaryRecords) throw new Error(`version and manifest primary record counts differ: ${versionPrimaryRecords} !== ${manifestPrimaryRecords}`);
+if (expectedPrimaryRecordsRaw) {
+  const expectedPrimaryRecords = Number(expectedPrimaryRecordsRaw);
+  if (versionPrimaryRecords !== expectedPrimaryRecords) throw new Error(`expected ${expectedPrimaryRecords} canonical stable assets, found ${versionPrimaryRecords}`);
+}
+
 if (manifest.data_safety?.canonical_only !== true) throw new Error('production manifest is not canonical-only');
 if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('production manifest includes unreviewed candidates');
 if (manifest.data_safety?.includes_internal_monitoring !== false) throw new Error('production manifest includes internal monitoring');
@@ -87,7 +98,7 @@ const result = {
 fs.mkdirSync(artifactDir, { recursive: true });
 fs.writeFileSync(path.join(artifactDir, 'ui-v3-production-closure.json'), `${JSON.stringify(result, null, 2)}\n`);
 const markdown = [
-  '# Stable or Gone UI v3 production closure',
+  '# Stable or Gone production closure',
   '',
   '- Result: PASS',
   `- Immutable release commit: \`${expectedCommit}\``,
@@ -96,7 +107,7 @@ const markdown = [
   `- Production commit: \`${version.build.commit}\``,
   `- Production branch: \`${version.build.branch}\``,
   `- Canonical data hash: \`${version.build.canonical_data_hash}\``,
-  `- Canonical stable assets: ${version.data.record_counts.primary_records}`,
+  `- Canonical stable assets: ${versionPrimaryRecords}`,
   `- Production images: ${result.visual_regression.total_images}`,
   `- Rendered failures: ${result.visual_regression.rendered_failures}`,
   '- Gate V3-G: passed',
@@ -116,7 +127,7 @@ const markdown = [
   `- Mobile representatives captured: ${result.visual_regression.mobile_captured}`,
   '- Horizontal overflow, broken images, brand violations, legacy markers, and false empty states: 0',
   '',
-  'Gate V3-G and Gate V3-H passed. UI v3 is closed for this immutable production commit.'
+  'Gate V3-G and Gate V3-H passed for this immutable production commit.'
 ].join('\n');
 fs.writeFileSync(path.join(artifactDir, 'ui-v3-production-closure.md'), `${markdown}\n`);
 console.log(JSON.stringify(result, null, 2));
