@@ -6,5 +6,6 @@ export const evidenceSourceGroupsD = [
   ['sog_src_usdq_launch_batch_f', ['sog_src_eurq_issuance_start_2024'], 'https://www.quantoz.com/blog/quantoz-payments-issues-euro-and-us-dollar-stablecoins'],
   ['sog_src_eurq_product_batch_j', ['sog_src_eurq_reserves_batch_j', 'sog_src_eurq_redemption_batch_j'], 'https://www.quantoz.com/products/eurq-usdq'],
   ['sog_src_ust_sec_2023_32', ['sog_src_ust_sec_event'], 'https://www.sec.gov/newsroom/press-releases/2023-32'],
-  ['sog_src_eurcv_product_batch_j', ['sog_src_eurcv_reserves_batch_j', 'sog_src_eurcv_redemption_batch_j'], 'https://www.sgforge.com/product/coinvertible/']
+  ['sog_src_eurcv_product_batch_j', ['sog_src_eurcv_reserves_batch_j', 'sog_src_eurcv_redemption_batch_j'], 'https://www.sgforge.com/product/coinvertible/'],
+  ['sog_src_usdm_rebrand_batch_e', ['sog_src_eurm_rebrand_batch_t'], 'https://www.mento.org/blog/a-new-chapter-in-multichain-fx-the-evolution-of-mento-stablecoins']
 ];

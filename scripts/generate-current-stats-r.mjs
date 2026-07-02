@@ -22,12 +22,12 @@ export function buildRegistryStats() {
     data_groups: {
       ...foundation.data_groups,
       legal_profiles: [...new Set([...(foundation.data_groups.legal_profiles ?? []), 'data/q-legal.json', 'data/r-legal.json', 'data/s-legal.json'])],
-      reserve_components: [...new Set([...(foundation.data_groups.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json', 'data/reserve-components-v3-batch-s.json'])]
+      reserve_components: [...new Set([...(foundation.data_groups.reserve_components ?? []), 'data/reserve-components-v3-batch-q.json', 'data/reserve-components-v3-batch-r.json', 'data/reserve-components-v3-batch-s.json', 'data/batch-t-components.json'])]
     }
   };
   const mergedReturns = {
     ...returnManifest,
-    data_files: [...new Set([...(returnManifest.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json'])]
+    data_files: [...new Set([...(returnManifest.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json', 'data/batch-t-income.json'])]
   };
   try {
     fs.writeFileSync(baselinePath, `${JSON.stringify(mergedBaseline, null, 2)}\n`);
