@@ -26,7 +26,7 @@ const ids = ['sog_st_eurm', 'sog_st_usd3'];
 
 check(stablecoins.length === 100, `expected 100 stablecoins, found ${stablecoins.length}`);
 check(read('data/stablecoins-batch-t.json').length === 2, 'Batch T must contain two stablecoins');
-check(read('data/organizations-batch-t.json').length === 2, 'Batch T must contain two organizations');
+check(read('data/organizations-batch-t.json').length === 1, 'Batch T must add only the new Reserve Protocol organization; Mento must reuse the existing canonical identity');
 check(read('data/relationships-batch-t.json').length === 2, 'Batch T must contain two relationships');
 check(read('data/events-batch-t.json').length === 6, 'Batch T must contain six events');
 check(read('data/event-details-batch-t-a.json').length + read('data/event-details-batch-t-b.json').length === 6, 'Batch T must contain six event details');
@@ -52,6 +52,7 @@ for (const id of ids) {
 }
 
 check(organizations.some((row) => row.id === 'sog_issuer_mento'), 'Mento organization missing');
+check(organizations.filter((row) => row.id === 'sog_issuer_mento').length === 1, 'Mento organization identity must remain unique');
 check(organizations.some((row) => row.id === 'sog_issuer_reserve_protocol'), 'Reserve Protocol organization missing');
 for (const event of events.filter((row) => ids.includes(row.stablecoin_id))) {
   check(details.some((row) => row.id === event.id), `${event.id}: detail missing`);
