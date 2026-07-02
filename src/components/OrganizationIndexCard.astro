@@ -2,6 +2,7 @@
 import { formatPublicLabel } from '../utils/displayLabels';
 const { record } = Astro.props as { record: { search: string; name: string; category: string; regulatory: string; jurisdictionScope: string; roles: string[]; relationshipStatuses: string[]; assetCount: number; relationshipCount: number; sourceIdentityCount: number; slug: string; categoryLabel: string; regulatoryLabel: string; jurisdictionLabel: string; confidenceLabel: string; assetNames: string[] } };
 const data = {
+  'data-record-slug': record.slug,
   'data-search': record.search,
   'data-name': record.name.toLocaleLowerCase(),
   'data-category': record.category,
