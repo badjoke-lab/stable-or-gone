@@ -22,6 +22,8 @@ jobs:
         run: npm run validate:guides
       - name: Validate baseline
         run: npm run validate:baseline
+      - name: Validate Growth D 100-record workstream
+        run: npm run validate:active-workstream
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
       - name: Validate unresolved terminal-date queue
