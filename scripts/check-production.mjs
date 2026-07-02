@@ -45,7 +45,7 @@ async function read(pathname, expectedContentType) {
   const response = await fetch(`${baseUrl}${pathname}`, {
     headers: {
       accept: expectedContentType,
-      'user-agent': 'sog-public-consistency-smoke/2.0',
+      'user-agent': 'sog-public-consistency-smoke/3.0',
       'cache-control': 'no-cache'
     }
   });
@@ -92,7 +92,7 @@ async function checkOnce() {
   assert(Number.isInteger(counts?.primary_records) && counts.primary_records > 0, 'stablecoin count invalid');
   assert(Number.isInteger(counts?.events) && counts.events > 0, 'event count invalid');
   assert(Number.isInteger(counts?.evidence) && counts.evidence > 0, 'evidence count invalid');
-  for (const key of ['organizations', 'relationships', 'reserve_reports', 'deployments', 'known_unknowns', 'regulatory_notes']) {
+  for (const key of ['organizations', 'relationships', 'reserve_reports', 'deployments', 'known_unknowns', 'regulatory_notes', 'evidence_source_identities']) {
     assert(Number.isInteger(breakdown?.[key]), `${key} count missing`);
   }
 
@@ -115,10 +115,10 @@ async function checkOnce() {
   const organizationsText = visibleText(organizationsResponse.text);
   const eventsText = visibleText(eventsResponse.text);
 
-  assert(homeText.includes(`Stablecoins ${counts.primary_records}`), 'home stablecoin count mismatch');
-  assert(homeText.includes(`Organizations ${breakdown.organizations}`), 'home organization count mismatch');
-  assert(homeText.includes(`Events ${counts.events}`), 'home event count mismatch');
-  assert(homeText.includes(`Sources ${counts.evidence}`), 'home evidence count mismatch');
+  assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');
+  assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');
+  assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');
+  assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');
   assert(stablecoinsText.includes(`Records ${counts.primary_records}`), 'stablecoin index record count mismatch');
   assert(stablecoinsText.includes(`Organizations ${breakdown.organizations}`), 'stablecoin index organization count mismatch');
   assert(stablecoinsText.includes(`${counts.primary_records} of ${counts.primary_records} records`), 'stablecoin index result count mismatch');
@@ -184,6 +184,7 @@ async function checkOnce() {
       organizations: breakdown.organizations,
       events: counts.events,
       evidence: counts.evidence,
+      source_identities: breakdown.evidence_source_identities,
       reserve_reports: breakdown.reserve_reports,
       deployments: breakdown.deployments,
       known_unknowns: breakdown.known_unknowns,
