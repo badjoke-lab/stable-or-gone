@@ -19,10 +19,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Rebuild integrity audit
-        run: npm run audit:integrity
+        run: node scripts/audit-registry-integrity-batch-t.mjs
       - name: Validate generated integrity audit
         if: success()
-        run: npm run validate:integrity
+        run: node scripts/audit-registry-integrity-batch-t.mjs --check
       - name: Upload integrity audit
         if: always()
         uses: actions/upload-artifact@v4
