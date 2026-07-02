@@ -7,16 +7,17 @@ const artifactDir = path.join(root, 'artifacts');
 const baseUrl = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT;
 const expectedPrimaryRecordsRaw = process.env.SOG_EXPECTED_PRIMARY_RECORDS?.trim();
+const visualApprovalRef = process.env.SOG_VISUAL_APPROVAL_REF?.trim();
 const runId = process.env.GITHUB_RUN_ID || null;
 const repository = process.env.GITHUB_REPOSITORY || 'badjoke-lab/stable-or-gone';
-const ownerApprovalRef = process.env.SOG_OWNER_APPROVAL_REF || 'project owner instruction to proceed with the approved production closure sequence';
 
 if (!expectedCommit || !/^[0-9a-f]{40}$/i.test(expectedCommit)) throw new Error('SOG_EXPECTED_COMMIT must be a full commit SHA');
 if (expectedPrimaryRecordsRaw && !/^\d+$/.test(expectedPrimaryRecordsRaw)) throw new Error('SOG_EXPECTED_PRIMARY_RECORDS must be a positive integer');
+if (!visualApprovalRef || visualApprovalRef.length < 8) throw new Error('SOG_VISUAL_APPROVAL_REF is required; automated rendering success is not owner design approval');
 
 async function readJson(pathname) {
   const response = await fetch(`${baseUrl}${pathname}`, {
-    headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-ui-v3-production-closure/1.1' }
+    headers: { accept: 'application/json', 'cache-control': 'no-cache', 'user-agent': 'sog-ui-production-closure/2.0' }
   });
   if (!response.ok) throw new Error(`${pathname}: HTTP ${response.status}`);
   return response.json();
@@ -27,7 +28,7 @@ const [version, manifest] = await Promise.all([
   readJson('/data/manifest.json')
 ]);
 const screenshotAuditPath = path.join(artifactDir, 'screenshots', 'representative-visual-audit.json');
-if (!fs.existsSync(screenshotAuditPath)) throw new Error('Production representative visual audit is missing');
+if (!fs.existsSync(screenshotAuditPath)) throw new Error('Production representative visual audit is missing; skipped audits cannot pass closure');
 const screenshotAudit = JSON.parse(fs.readFileSync(screenshotAuditPath, 'utf8'));
 
 if (version.build?.commit !== expectedCommit) throw new Error(`production commit ${version.build?.commit} does not match expected ${expectedCommit}`);
@@ -57,26 +58,22 @@ for (const device of screenshotAudit.devices) {
 }
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '2.0',
   generated_at: new Date().toISOString(),
   project_id: 'stable-or-gone',
-  phase: 'exact_release_commit',
+  phase: 'owner_approved_production_visual_closure',
   ok: true,
   base_url: baseUrl,
   repository,
   workflow_run_id: runId,
   immutable_release_commit: expectedCommit,
-  source_commit: expectedCommit,
-  main_commit: expectedCommit,
   production_commit: version.build.commit,
   production_branch: version.build.branch,
-  owner_approval: {
-    gate: 'V3-G',
-    status: 'passed',
-    reference: ownerApprovalRef
+  visual_approval: {
+    status: 'recorded',
+    reference: visualApprovalRef
   },
   production_parity: {
-    gate: 'V3-H',
     status: 'passed',
     canonical_data_hash: version.build.canonical_data_hash,
     canonical_file_count: version.build.canonical_file_count,
@@ -98,24 +95,17 @@ const result = {
 fs.mkdirSync(artifactDir, { recursive: true });
 fs.writeFileSync(path.join(artifactDir, 'ui-v3-production-closure.json'), `${JSON.stringify(result, null, 2)}\n`);
 const markdown = [
-  '# Stable or Gone production closure',
+  '# Stable or Gone owner-approved production visual closure',
   '',
   '- Result: PASS',
   `- Immutable release commit: \`${expectedCommit}\``,
-  `- Source commit: \`${expectedCommit}\``,
-  `- Main commit: \`${expectedCommit}\``,
   `- Production commit: \`${version.build.commit}\``,
   `- Production branch: \`${version.build.branch}\``,
   `- Canonical data hash: \`${version.build.canonical_data_hash}\``,
   `- Canonical stable assets: ${versionPrimaryRecords}`,
   `- Production images: ${result.visual_regression.total_images}`,
   `- Rendered failures: ${result.visual_regression.rendered_failures}`,
-  '- Gate V3-G: passed',
-  '- Gate V3-H: passed',
-  '',
-  '## Owner authorization',
-  '',
-  ownerApprovalRef,
+  `- Visual approval reference: ${visualApprovalRef}`,
   '',
   '## Production parity',
   '',
@@ -127,7 +117,7 @@ const markdown = [
   `- Mobile representatives captured: ${result.visual_regression.mobile_captured}`,
   '- Horizontal overflow, broken images, brand violations, legacy markers, and false empty states: 0',
   '',
-  'Gate V3-G and Gate V3-H passed for this immutable production commit.'
+  'Automated rendering and production parity passed, and the rendered artifact approval reference was recorded.'
 ].join('\n');
 fs.writeFileSync(path.join(artifactDir, 'ui-v3-production-closure.md'), `${markdown}\n`);
 console.log(JSON.stringify(result, null, 2));

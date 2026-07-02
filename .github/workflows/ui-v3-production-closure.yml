@@ -1,25 +1,28 @@
-name: UI v3 production closure
+name: UI production visual closure
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/ui-v3-production-closure.yml'
-      - 'scripts/write-ui-v3-production-closure-report.mjs'
-      - 'scripts/validate-ui-v3-production-closure.mjs'
-      - 'scripts/check-production.mjs'
-      - 'docs/audits/ui-v3-production-closure-2026-07-02.md'
-      - 'docs/roadmap.md'
-      - 'docs/ui-redesign/implementation-plan.md'
-      - 'AGENTS.md'
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Full deployed main commit SHA
+        required: true
+        type: string
+      expected_primary_records:
+        description: Expected canonical stablecoin count
+        required: true
+        default: '100'
+        type: string
+      visual_approval_ref:
+        description: Owner-approved screenshot artifact run or review reference
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: ui-v3-production-closure-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  group: ui-production-visual-closure
+  cancel-in-progress: false
 
 jobs:
   verify:
@@ -27,13 +30,15 @@ jobs:
     timeout-minutes: 60
     env:
       SOG_BASE_URL: https://sog.badjoke-lab.com
-      SOG_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
-      SOG_OWNER_APPROVAL_REF: project owner instruction to proceed with the fixed PR 261-273 sequence
+      SOG_EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+      SOG_EXPECTED_PRIMARY_RECORDS: ${{ inputs.expected_primary_records }}
+      SOG_VISUAL_APPROVAL_REF: ${{ inputs.visual_approval_ref }}
+      SOG_OWNER_APPROVAL_REF: ${{ inputs.visual_approval_ref }}
     steps:
-      - name: Checkout exact release candidate
+      - name: Checkout exact approved release
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ inputs.expected_commit }}
           fetch-depth: 1
 
       - name: Setup Node
@@ -47,10 +52,10 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Validate production closure contract
+      - name: Validate closure contract
         run: node scripts/validate-ui-v3-production-closure.mjs
 
-      - name: Wait for exact release commit and verify production parity
+      - name: Verify exact production parity
         env:
           SOG_SMOKE_ATTEMPTS: '40'
           SOG_SMOKE_DELAY_MS: '15000'
@@ -66,15 +71,18 @@ jobs:
       - name: Audit production representatives
         run: node scripts/audit-representative-visuals.mjs
 
-      - name: Write production closure report
+      - name: Require rendered audit output
+        run: test -f artifacts/screenshots/representative-visual-audit.json
+
+      - name: Write owner-approved production closure report
         run: node scripts/write-ui-v3-production-closure-report.mjs
 
       - name: Upload production closure artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ui-v3-production-closure-${{ github.event.pull_request.head.sha }}-${{ github.run_id }}
-          if-no-files-found: warn
+          name: ui-production-visual-closure-${{ inputs.expected_commit }}-${{ github.run_id }}
+          if-no-files-found: error
           retention-days: 90
           path: |
             artifacts/ui-v3-production-closure-validation.json
