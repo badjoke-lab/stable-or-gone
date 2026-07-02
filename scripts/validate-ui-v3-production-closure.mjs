@@ -12,6 +12,7 @@ const audit = read('docs/audits/ui-v3-production-closure-2026-07-02.md');
 const roadmap = read('docs/roadmap.md');
 const plan = read('docs/ui-redesign/implementation-plan.md');
 const agents = read('AGENTS.md');
+const productionSmoke = read('scripts/check-production.mjs');
 
 for (const marker of [
   'pull_request:',
@@ -26,7 +27,8 @@ for (const marker of [
   'node scripts/write-ui-v3-production-closure-report.mjs',
   'ui-v3-production-closure.json',
   'ui-v3-production-closure.md',
-  'retention-days: 90'
+  'retention-days: 90',
+  "'scripts/check-production.mjs'"
 ]) check(workflow.includes(marker), `production closure workflow marker missing: ${marker}`);
 
 for (const marker of [
@@ -45,6 +47,29 @@ for (const marker of [
   'ui-v3-production-closure.json',
   'ui-v3-production-closure.md'
 ]) check(report.includes(marker), `closure report marker missing: ${marker}`);
+
+for (const marker of [
+  '${counts.primary_records} stable assets',
+  '${breakdown.organizations} organizations',
+  '${counts.events} events',
+  '${breakdown.evidence_source_identities} Source identities',
+  'Identity and current state',
+  'Organizations and control',
+  'How the asset works',
+  'Reserve and redemption',
+  'Deployments and legal context',
+  'History',
+  'Evidence',
+  'Known unknowns and coverage'
+]) check(productionSmoke.includes(marker), `production smoke v3 marker missing: ${marker}`);
+for (const marker of [
+  'Stablecoins ${counts.primary_records}',
+  'Sources ${counts.evidence}',
+  'Redemption profile',
+  'Reserve and attestation history',
+  'Regulatory and official notices',
+  'Blockchain deployments'
+]) check(!productionSmoke.includes(marker), `superseded production smoke marker remains: ${marker}`);
 
 for (const marker of [
   'Production workflow: .github/workflows/deploy-production.yml',
