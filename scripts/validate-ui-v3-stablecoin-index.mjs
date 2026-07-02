@@ -54,9 +54,12 @@ for (const field of ['Issuance', 'Reference', 'Backing', 'Asset class', 'Organiz
 check(source.card?.includes('data-mobile-representation-for="stablecoin-index"'), 'compact marker missing');
 
 for (const marker of ['.stablecoin-register-header', '.stablecoin-index-toolbar', '.stablecoin-index-filter-grid', '.stablecoin-index-table', '.stablecoin-index-cards', '.stablecoin-index-pagination', '.comparison-grid', '@media (max-width: 719px)']) check(source.styles?.includes(marker), `style marker missing: ${marker}`);
-check(source.styles?.includes('.stablecoin-index-table {\n    display: none;') && source.styles?.includes('.stablecoin-index-cards {\n    padding: 0;\n    display: grid;'), 'mobile table-to-record transformation incomplete');
-const compactStyles = source.styles?.replaceAll(' ', '').toLocaleLowerCase() ?? '';
-for (const forbidden of ['radial-gradient(', 'linear-gradient(', 'box-shadow:', 'rgba(24,182,255']) check(!compactStyles.includes(forbidden.replaceAll(' ', '').toLocaleLowerCase()), `forbidden Stablecoins style remains: ${forbidden}`);
+const mobileSection = source.styles?.slice(source.styles.indexOf('@media (max-width: 719px)')) ?? '';
+check(mobileSection.includes('.stablecoin-index-table {\n    display: none;'), 'mobile table must be hidden');
+check(mobileSection.includes('.stablecoin-index-cards {') && mobileSection.includes('display: grid;'), 'mobile table-to-record transformation incomplete');
+check(source.styles?.includes('.stablecoin-index-filter-grid {') && source.styles?.includes('grid-template-columns: repeat(3, minmax(0, 1fr));'), 'bounded desktop filter grid missing');
+check(!source.page?.includes('data-summary-label="0 selected"'), 'misleading zero-selected filter label remains');
+check(source.page?.includes('data-summary-label="All"') && source.page?.includes('data-option-total={filter.options.length}'), 'filter option-total state missing');
 
 for (const marker of ['URLSearchParams', 'replaceState', 'pushState', 'popstate', 'selectedComparisons.size >= 4', "const groups = ['lifecycle', 'issuance', 'asset_class', 'reference', 'backing', 'stabilization']", "params.get('page')", "params.set('page'", 'pageSize', 'currentPage', 'visibleSlugs', 'data-page-status']) check(source.client?.includes(marker), `interaction marker missing: ${marker}`);
 check(source.client?.includes('noResults.hidden = matchCount !== 0'), 'false empty-state prevention missing');
@@ -68,10 +71,10 @@ for (const prohibited of ['market capitalization', 'circulating supply', 'holder
 check(!combined.includes('fetch('), 'register must not depend on external runtime fetch');
 
 const result = {
-  schema_version: '2.0',
+  schema_version: '3.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
-  visual_family: 'editorial_ledger_v3',
+  visual_family: 'modern_evidence_registry_v4',
   canonical_record_changes: 0,
   route_changes: 0,
   filter_groups: 6,
