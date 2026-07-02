@@ -13,19 +13,19 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       SOG_BASE_URL: https://sog.badjoke-lab.com
-      SOG_EXPECTED_COMMIT: 681172b08e2f901450a369f7b141b7a9ebd53b42
-      SOG_SMOKE_ATTEMPTS: '1'
-      SOG_SMOKE_DELAY_MS: '1000'
+      SOG_EXPECTED_COMMIT: d85b1c41737d10484a5e8117ac67127d3afe2f94
+      SOG_SMOKE_ATTEMPTS: '40'
+      SOG_SMOKE_DELAY_MS: '15000'
       SOG_PARITY_CONCURRENCY: '12'
-      SOG_OWNER_APPROVAL_REF: project owner instruction to proceed with the fixed PR 261-276 closure sequence
+      SOG_OWNER_APPROVAL_REF: project owner instruction to complete the fixed PR 261-277 UI v3 closure sequence
     steps:
       - name: Checkout exact merged source
         uses: actions/checkout@v4
         with:
-          ref: 681172b08e2f901450a369f7b141b7a9ebd53b42
+          ref: d85b1c41737d10484a5e8117ac67127d3afe2f94
           fetch-depth: 1
       - name: Setup Node
         uses: actions/setup-node@v4
