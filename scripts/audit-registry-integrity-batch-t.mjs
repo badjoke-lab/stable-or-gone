@@ -3,6 +3,7 @@ const from = new URL('./audit-registry-integrity-batch-o.mjs', import.meta.url);
 const to = new URL('./tmp-batch-t-audit.mjs', import.meta.url);
 let text = fs.readFileSync(from, 'utf8');
 text = text.replace("['o', 'p', 'q', 'r', 's']", "['o', 'p', 'q', 'r', 's', 't']");
+text = text.replace("'data/s-legal.json'])", "'data/s-legal.json', 'data/t-legal.json'])");
 text = text.replace("'data/reserve-components-v3-batch-s.json'])", "'data/reserve-components-v3-batch-s.json', 'data/batch-t-components.json'])");
 text = text.replace("'data/s-returns.json'])", "'data/s-returns.json', 'data/batch-t-income.json'])");
 text = text.replaceAll('98-Record', '100-Record');
