@@ -1,0 +1,40 @@
+name: Merge verified PR 276
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/merge-pr276-after-checks.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EXPECTED_HEAD: 09bdbc6d648b13e7a141043d97594e8db7e4b161
+    steps:
+      - name: Verify PR 276 exact head and completed checks
+        shell: bash
+        run: |
+          ACTUAL_HEAD="$(gh api repos/$GITHUB_REPOSITORY/pulls/276 --jq .head.sha)"
+          STATE="$(gh api repos/$GITHUB_REPOSITORY/pulls/276 --jq .state)"
+          MERGED="$(gh api repos/$GITHUB_REPOSITORY/pulls/276 --jq .merged)"
+          test "$ACTUAL_HEAD" = "$EXPECTED_HEAD"
+          test "$STATE" = "open"
+          test "$MERGED" = "false"
+          gh pr checks 276 --repo "$GITHUB_REPOSITORY" --watch --fail-fast
+
+      - name: Squash merge exact verified head
+        run: |
+          gh pr merge 276 \
+            --repo "$GITHUB_REPOSITORY" \
+            --squash \
+            --match-head-commit "$EXPECTED_HEAD" \
+            --subject "Align production smoke with Stablecoin register pagination (#276)" \
+            --body "Validate the approved 20-record pagination contract while preserving full record, sitemap, provenance, and output-parity checks."
