@@ -10,9 +10,14 @@ if (foundRoot instanceof HTMLElement) {
   const cardBody = root.querySelector<HTMLElement>('[data-event-card-body]');
   const filters = Array.from(root.querySelectorAll<HTMLInputElement>('[data-event-filter-group]'));
   const resultCount = root.querySelector<HTMLElement>('[data-event-result-count]');
+  const visibleRange = root.querySelector<HTMLElement>('[data-event-visible-range]');
   const activeSummary = root.querySelector<HTMLElement>('[data-event-active-filters]');
   const noResults = root.querySelector<HTMLElement>('[data-event-no-results]');
   const clearButtons = Array.from(root.querySelectorAll<HTMLElement>('[data-event-clear-all]'));
+  const pagination = root.querySelector<HTMLElement>('[data-event-pagination]');
+  const pagePrevious = root.querySelector<HTMLButtonElement>('[data-event-page-prev]');
+  const pageNext = root.querySelector<HTMLButtonElement>('[data-event-page-next]');
+  const pageStatus = root.querySelector<HTMLElement>('[data-event-page-status]');
   const groups = ['category', 'subtype', 'status_effect', 'recovery', 'year'] as const;
   const attributes = {
     category: 'data-category',
@@ -23,6 +28,9 @@ if (foundRoot instanceof HTMLElement) {
   } as const;
   const defaultSort = 'date_desc';
   const validSorts = new Set(['date_desc', 'date_asc', 'title_asc', 'evidence_most']);
+  const pageSize = Math.max(1, Number.parseInt(root.dataset.pageSize ?? '20', 10) || 20);
+  let currentPage = 1;
+
   const normalize = (value: unknown) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
   const selectedFor = (group: string) => filters.filter((input) => input.dataset.eventFilterGroup === group && input.checked).map((input) => input.value);
   const labelFor = (group: string, value: string) => filters.find((input) => input.dataset.eventFilterGroup === group && input.value === value)?.dataset.label ?? value;
@@ -34,10 +42,12 @@ if (foundRoot instanceof HTMLElement) {
       const allowed = new Set(filters.filter((input) => input.dataset.eventFilterGroup === group).map((input) => input.value));
       return [group, [...new Set((params.get(group) ?? '').split(',').filter((value) => allowed.has(value)))]];
     })) as Record<(typeof groups)[number], string[]>;
+    const requestedPage = Number.parseInt(params.get('page') ?? '1', 10);
     return {
       q: params.get('q') ?? '',
       filters: selected,
-      sort: validSorts.has(params.get('sort') ?? '') ? String(params.get('sort')) : defaultSort
+      sort: validSorts.has(params.get('sort') ?? '') ? String(params.get('sort')) : defaultSort,
+      page: Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1
     };
   }
 
@@ -45,6 +55,7 @@ if (foundRoot instanceof HTMLElement) {
     if (search) search.value = state.q;
     if (sort) sort.value = state.sort;
     for (const input of filters) input.checked = state.filters[input.dataset.eventFilterGroup as (typeof groups)[number]]?.includes(input.value) ?? false;
+    currentPage = state.page;
   }
 
   function writeUrl(mode: 'push' | 'replace') {
@@ -55,8 +66,9 @@ if (foundRoot instanceof HTMLElement) {
       if (values.length) params.set(group, values.join(','));
     }
     if (sortValue() !== defaultSort) params.set('sort', sortValue());
+    if (currentPage > 1) params.set('page', String(currentPage));
     const ordered = new URLSearchParams();
-    for (const key of ['q', ...groups, 'sort']) if (params.has(key)) ordered.set(key, params.get(key) ?? '');
+    for (const key of ['q', ...groups, 'sort', 'page']) if (params.has(key)) ordered.set(key, params.get(key) ?? '');
     const next = `${window.location.pathname}${ordered.size ? `?${ordered.toString()}` : ''}${window.location.hash}`;
     if (mode === 'push') window.history.pushState({}, '', next);
     else window.history.replaceState({}, '', next);
@@ -110,24 +122,40 @@ if (foundRoot instanceof HTMLElement) {
       activeSummary.append(button);
     }
     for (const group of groups) {
+      const selectedCount = selectedFor(group).length;
       const count = root.querySelector<HTMLElement>(`[data-event-filter-count="${group}"]`);
-      if (count) count.textContent = String(selectedFor(group).length);
-      count?.closest('summary')?.setAttribute('data-summary-label', `${selectedFor(group).length} selected`);
+      const optionTotal = count?.dataset.optionTotal ?? '';
+      if (count) {
+        count.textContent = selectedCount > 0 ? String(selectedCount) : optionTotal;
+        count.toggleAttribute('data-selected', selectedCount > 0);
+      }
+      count?.closest('summary')?.setAttribute('data-summary-label', selectedCount > 0 ? `${selectedCount} selected` : 'All');
     }
   }
 
   function render() {
-    for (const row of [...rows].sort(compare)) rowBody?.append(row);
-    for (const card of [...cards].sort(compare)) cardBody?.append(card);
-    let visible = 0;
-    for (const row of rows) {
-      const show = matches(row);
-      row.hidden = !show;
-      if (show) visible += 1;
-    }
-    for (const card of cards) card.hidden = !matches(card);
-    if (resultCount) resultCount.textContent = String(visible);
-    if (noResults) noResults.hidden = visible !== 0;
+    const sortedRows = [...rows].sort(compare);
+    const sortedCards = [...cards].sort(compare);
+    for (const row of sortedRows) rowBody?.append(row);
+    for (const card of sortedCards) cardBody?.append(card);
+
+    const matchedRows = sortedRows.filter(matches);
+    const matchCount = matchedRows.length;
+    const pageCount = Math.max(1, Math.ceil(matchCount / pageSize));
+    currentPage = Math.min(Math.max(1, currentPage), pageCount);
+    const start = (currentPage - 1) * pageSize;
+    const pageRows = matchedRows.slice(start, start + pageSize);
+    const visibleIds = new Set(pageRows.map((row) => row.dataset.recordId ?? ''));
+
+    for (const row of rows) row.hidden = !visibleIds.has(row.dataset.recordId ?? '');
+    for (const card of cards) card.hidden = !visibleIds.has(card.dataset.recordId ?? '');
+    if (resultCount) resultCount.textContent = String(matchCount);
+    if (visibleRange) visibleRange.textContent = matchCount === 0 ? '0' : `${start + 1}–${Math.min(start + pageSize, matchCount)}`;
+    if (noResults) noResults.hidden = matchCount !== 0;
+    if (pagination) pagination.hidden = matchCount === 0 || pageCount <= 1;
+    if (pagePrevious) pagePrevious.disabled = currentPage <= 1;
+    if (pageNext) pageNext.disabled = currentPage >= pageCount;
+    if (pageStatus) pageStatus.textContent = `Page ${currentPage} of ${pageCount}`;
     renderActiveFilters();
   }
 
@@ -136,21 +164,38 @@ if (foundRoot instanceof HTMLElement) {
     if (mode) writeUrl(mode);
   }
 
-  search?.addEventListener('input', () => refresh('replace'));
-  sort?.addEventListener('change', () => refresh('push'));
-  for (const input of filters) input.addEventListener('change', () => refresh('push'));
+  function resetPageAndRefresh(mode: 'push' | 'replace') {
+    currentPage = 1;
+    refresh(mode);
+  }
+
+  search?.addEventListener('input', () => resetPageAndRefresh('replace'));
+  sort?.addEventListener('change', () => resetPageAndRefresh('push'));
+  for (const input of filters) input.addEventListener('change', () => resetPageAndRefresh('push'));
   activeSummary?.addEventListener('click', (event) => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-event-clear-key]') : null;
     if (!button) return;
     if (button.dataset.eventClearKey === 'q' && search) search.value = '';
     else for (const input of filters) if (input.dataset.eventFilterGroup === button.dataset.eventClearKey && input.value === button.dataset.eventClearValue) input.checked = false;
-    refresh('push');
+    resetPageAndRefresh('push');
   });
   for (const button of clearButtons) button.addEventListener('click', () => {
     if (search) search.value = '';
     for (const input of filters) input.checked = false;
     if (sort) sort.value = defaultSort;
+    currentPage = 1;
     refresh('push');
+  });
+  pagePrevious?.addEventListener('click', () => {
+    if (currentPage <= 1) return;
+    currentPage -= 1;
+    refresh('push');
+    root.querySelector('.event-index-summary')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  });
+  pageNext?.addEventListener('click', () => {
+    currentPage += 1;
+    refresh('push');
+    root.querySelector('.event-index-summary')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
   });
   window.addEventListener('popstate', () => {
     applyState(stateFromUrl());
