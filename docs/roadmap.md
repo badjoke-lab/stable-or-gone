@@ -11,25 +11,27 @@ Organizations: 94
 Events: 172
 Evidence: 501
 Production data and routes: healthy
-UI v3 visual completion: withdrawn
-Active workstream: UI rebuild v4
+UI completion: withdrawn
+Active workstream: Terminal UI restoration
 Tracking issue: #281
-Current PR stage: A — design contract and failure gates
+Rejected directions: Modern Data Product, Editorial Ledger, Modern Evidence Registry
+Active PR: #288 — restore terminal visual baseline over current structure
+Restoration source: 3df568eab0a179d7690a88efb599156b0d659ab7
 ```
 
-The Editorial Ledger implementation is an intermediate technical state, not the accepted finished product. Data integrity, route generation, machine-readable outputs, provenance, accessibility contracts, and production rendering remain protected.
+The current semantic structure, interactions, data, routes, accessibility work, and machine-readable outputs remain protected. The visual system returns to the original dark terminal family.
 
 ## Why the UI was reopened
 
-Run `28599680752` generated representative desktop screenshots but skipped the representative visual-audit step. The resulting pages also failed owner design review. A green capture workflow was incorrectly treated as visual completion.
+Run `28599680752` generated representative screenshots but skipped the representative visual-audit step. The pages then failed owner design review. Subsequent unrelated redesign directions also failed owner review.
 
 The project now distinguishes:
 
 ```text
 technical rendering success != visual design approval
 screenshot capture != screenshot review
-zero overflow != usable interface
-complete data output != finished information design
+new visual concept != improvement
+restore the accepted direction before adding another direction
 ```
 
 ## Binding authority
@@ -38,76 +40,96 @@ complete data output != finished information design
 DESIGN.md
 docs/ui-redesign/rebuild-contract-v4.md
 config/ui-v4-visual-acceptance.json
+docs/roadmap.md
 ```
 
-The former Editorial Ledger authority is superseded for new visual work.
+## Completed recovery work
 
-## UI rebuild sequence
+### PR #284 — completion withdrawal and visual gates
 
-### PR A — design contract and failure gates — active
+- withdrew the prior UI completion claim;
+- added machine-readable visual acceptance state;
+- prohibited completion without exact artifact and owner approval.
 
-- withdraw UI v3 completion;
-- document failed visual direction;
-- establish the Modern Evidence Registry direction;
-- add a machine-validated visual acceptance manifest;
-- prohibit completion when required audit steps are skipped;
-- require exact artifact and owner approval for closure.
+### PR #285 — rejected shared shell
 
-### PR B — shared shell and navigation
+- merged and subsequently rejected in owner review.
 
-- rebuild header, brand area, search, navigation, page frame, surfaces, buttons, links, states, and footer;
-- remove giant decorative hierarchy;
-- preserve routes, data, metadata, accessibility, and machine-readable outputs.
+### PR #286 — rejected Home/Register direction
 
-### PR C — Home and stablecoin register prototype
+- closed without merge.
 
-- make Home a registry entrypoint;
-- implement prominent search and direct exploration paths;
-- rebuild filters, active-filter state, clear action, sort, pagination, and compare behavior;
-- produce desktop and mobile artifacts before expanding scope.
+### PR #287 — remove rejected shared shell
 
-### PR D — stablecoin dossier prototype
+- removed the PR #285 Modern Evidence Registry shell from main.
 
-- prioritize status, redemption, backing, issuer/control, material events, timeline, evidence, and unresolved questions;
-- move raw schema fields below the decision-useful summary;
-- produce active, failed/terminated, migrated, and incomplete-data examples.
+## Active work
 
-### PR E — Events and Organizations
+### PR #288 — restore the original terminal visual family
 
-- replace unbounded data dumps with bounded browsing;
-- add useful grouping, sticky context, event distinctions, relationship views, filters, and responsive layouts.
+- retain current 100-record data and all current routes;
+- retain current Home information, search, and editorial data selection;
+- retain register pagination, filters, sort, URL state, comparison, desktop table, and mobile cards;
+- retain current dossier hierarchy and field ownership;
+- restore deep navy/near-black backgrounds;
+- restore cyan links and actions;
+- restore monospace interface typography;
+- restore square panels and controls;
+- restore compact research-terminal density;
+- preserve current responsive and accessibility behavior;
+- run full desktop/mobile screenshot capture and visual audit;
+- do not call the UI complete after this restoration PR.
 
-### PR F — Guides and secondary pages
+## Next sequence after PR #288
 
-- improve reading width, contents navigation, summaries, callouts, examples, tables, and source presentation.
+### Terminal pass 2 — page-specific correction
 
-### PR G — full visual closure
+Review the exact restored screenshots and correct only concrete defects:
 
-- capture all unique templates and required states on desktop and mobile;
-- run every required audit without skips;
-- manually review artifact contact sheets;
-- record explicit owner approval for the exact commit and run;
-- verify route, canonical data, provenance, accessibility, and machine-readable parity;
-- only then set the acceptance manifest to complete.
+- Home spacing, search, and material-change hierarchy;
+- Register filter readability, pagination, table density, and mobile cards;
+- Dossier current-state hierarchy, reserve/redemption visibility, long values, and mobile presentation;
+- Events and Organizations density, grouping, and responsive behavior;
+- Guides and long-form reading comfort.
+
+No new palette, typography family, card system, or unrelated visual concept may be introduced.
+
+### Terminal pass 3 — exact-state artifact review
+
+Capture and review:
+
+- Home desktop/mobile;
+- Register default/search/filter/compare desktop/mobile;
+- active, failed/terminated, migrated, and incomplete-data dossiers;
+- Events desktop/mobile;
+- Organizations desktop/mobile;
+- Guides and long-form desktop/mobile.
+
+### Terminal pass 4 — production closure
+
+- merge only after normal checks pass;
+- verify exact production commit provenance;
+- verify all public route and output parity;
+- verify production screenshots;
+- record owner approval for the exact commit and artifact run;
+- only then set the visual acceptance manifest to complete.
 
 ## Acceptance gates
 
 ```text
-Gate V4-A  rebuild authority and failure gates
-Gate V4-B  shared shell approved
-Gate V4-C  Home and register approved
-Gate V4-D  dossier approved
-Gate V4-E  Events and Organizations approved
-Gate V4-F  Guides and secondary pages approved
-Gate V4-G  desktop and mobile artifact review complete
-Gate V4-H  exact production commit and owner approval complete
+Gate T-A  rejected shell removed — passed in PR #287
+Gate T-B  terminal baseline restored over current structure — active in PR #288
+Gate T-C  Home/Register/Dossier concrete defects corrected
+Gate T-D  Events/Organizations/Guides concrete defects corrected
+Gate T-E  full desktop/mobile artifact review complete
+Gate T-F  exact production commit and owner approval complete
 ```
 
-No agent may claim UI completion before Gate V4-H.
+No agent may claim UI completion before Gate T-F.
 
 ## Protected work
 
-The UI rebuild must not regress:
+The restoration must not regress:
 
 - 100 canonical stable assets;
 - 94 organizations;
@@ -117,13 +139,13 @@ The UI rebuild must not regress:
 - 366 detail routes;
 - machine-readable outputs;
 - production provenance;
+- current record hierarchy;
+- current register interactions;
 - keyboard and focus support;
 - reduced motion and forced colors;
 - 320px and 200 percent zoom behavior.
 
-## Work after UI closure
-
-After the UI is genuinely approved:
+## Work after genuine UI closure
 
 1. non-UI release documentation;
 2. monitoring and record-growth resumption;
