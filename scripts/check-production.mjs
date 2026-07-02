@@ -145,7 +145,7 @@ async function checkOnce() {
     const response = await read(sampleStablecoin, 'text/html');
     requireMetadata(response.text, sampleStablecoin);
     const text = visibleText(response.text);
-    for (const heading of ['Redemption profile', 'Reserve and attestation history', 'Regulatory and official notices', 'Blockchain deployments', 'Open questions', 'Sources']) {
+    for (const heading of ['Identity and current state', 'Organizations and control', 'How the asset works', 'Reserve and redemption', 'Deployments and legal context', 'History', 'Evidence', 'Known unknowns and coverage']) {
       assert(text.includes(heading), `${sampleStablecoin}: missing ${heading}`);
     }
   }
