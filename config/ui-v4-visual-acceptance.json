@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "tracking_issue": 281,
+  "phase": "rebuild_in_progress",
+  "closure_allowed": false,
+  "required_audit_steps_skipped": false,
+  "desktop_artifacts_reviewed": false,
+  "mobile_artifacts_reviewed": false,
+  "owner_approval": {
+    "approved": false,
+    "reference": null,
+    "commit": null,
+    "artifact_run_id": null
+  },
+  "templates": {
+    "home": false,
+    "stablecoin_register": false,
+    "stablecoin_dossier": false,
+    "events": false,
+    "organizations": false,
+    "guides_longform": false
+  },
+  "protected_contracts": {
+    "canonical_data_unchanged_by_design_only_prs": true,
+    "routes_preserved": true,
+    "machine_readable_outputs_preserved": true,
+    "accessibility_checks_required": true,
+    "provenance_checks_required": true
+  }
+}
