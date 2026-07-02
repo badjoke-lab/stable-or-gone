@@ -1,0 +1,60 @@
+name: Final UI v3 production closure
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/final-ui-v3-production-closure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SOG_BASE_URL: https://sog.badjoke-lab.com
+      SOG_EXPECTED_COMMIT: 681172b08e2f901450a369f7b141b7a9ebd53b42
+      SOG_SMOKE_ATTEMPTS: '30'
+      SOG_SMOKE_DELAY_MS: '15000'
+      SOG_PARITY_CONCURRENCY: '12'
+      SOG_OWNER_APPROVAL_REF: project owner instruction to proceed with the fixed PR 261-276 closure sequence
+    steps:
+      - name: Checkout exact merged source
+        uses: actions/checkout@v4
+        with:
+          ref: 681172b08e2f901450a369f7b141b7a9ebd53b42
+          fetch-depth: 1
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Verify production smoke, provenance, and output parity
+        run: npm run check:production
+      - name: Capture production desktop representatives
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url "$SOG_BASE_URL"
+      - name: Capture production mobile representatives
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url "$SOG_BASE_URL"
+      - name: Audit production representatives
+        run: node scripts/audit-representative-visuals.mjs
+      - name: Write production closure report
+        run: node scripts/write-ui-v3-production-closure-report.mjs
+      - name: Upload final production closure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-ui-v3-production-closure-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            artifacts/ui-v3-production-closure.json
+            artifacts/ui-v3-production-closure.md
+            artifacts/screenshots/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
