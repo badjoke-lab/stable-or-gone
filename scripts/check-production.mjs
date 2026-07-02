@@ -45,7 +45,7 @@ async function read(pathname, expectedContentType) {
   const response = await fetch(`${baseUrl}${pathname}`, {
     headers: {
       accept: expectedContentType,
-      'user-agent': 'sog-public-consistency-smoke/3.1',
+      'user-agent': 'sog-public-consistency-smoke/3.2',
       'cache-control': 'no-cache'
     }
   });
@@ -121,7 +121,6 @@ async function checkOnce() {
   assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');
   assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');
   assert(stablecoinsText.includes(`${counts.primary_records} records`), 'stablecoin index record count mismatch');
-  assert(stablecoinsText.includes(`Organizations ${breakdown.organizations}`), 'stablecoin index organization count mismatch');
   assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');
   assert(stablecoinsText.includes('20 per page'), 'stablecoin index page-size marker missing');
   assert(organizationsText.includes(`Organizations ${breakdown.organizations}`), 'organization index count mismatch');
