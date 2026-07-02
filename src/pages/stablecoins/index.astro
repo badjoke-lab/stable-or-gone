@@ -111,33 +111,33 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <div>
         <p class="stablecoin-index-eyebrow">Register / Stable assets</p>
         <h1>Stablecoin register</h1>
-        <p>Canonical stable-asset records with lifecycle, issuance, reference target, primary organization, backing model, evidence context, and review date kept as separate facts.</p>
+        <p>Search reviewed stablecoin records by current lifecycle, issuance, reference, backing model, responsible organization, evidence coverage, and unresolved questions.</p>
       </div>
       <div class="stablecoin-register-count" aria-label={`${records.length} canonical stablecoin records`}>
         <strong>{records.length}</strong>
-        <span>records</span>
+        <span>canonical records</span>
       </div>
     </header>
 
     <section class="stablecoin-index-registry" aria-labelledby="stablecoin-index-heading">
       <div class="stablecoin-index-section-heading">
         <div>
-          <h2 id="stablecoin-index-heading">Public register</h2>
-          <p>Search, filter, sort, and share the current register state. Twenty records are shown per page; all matching records remain available.</p>
+          <h2 id="stablecoin-index-heading">Explore the register</h2>
+          <p>Twenty records are shown per page. Search and filter state is preserved in the URL so a specific view can be shared.</p>
         </div>
         <span class="stablecoin-index-page-size">{PAGE_SIZE} per page</span>
       </div>
 
       <div class="stablecoin-index-toolbar">
-        <label class="stablecoin-index-search"><span>Search</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
-        <label><span>Sort</span><select class="ui-field" data-index-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="lifecycle_then_name">Lifecycle, then name</option><option value="launch_oldest">Launch: oldest first</option><option value="launch_newest">Launch: newest first</option><option value="evidence_most">Most source identities</option></select></label>
+        <label class="stablecoin-index-search"><span>Search records</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, or organization" autocomplete="off" /></label>
+        <label><span>Sort results</span><select class="ui-field" data-index-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="lifecycle_then_name">Lifecycle, then name</option><option value="launch_oldest">Launch: oldest first</option><option value="launch_newest">Launch: newest first</option><option value="evidence_most">Most source identities</option></select></label>
         <button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button>
       </div>
 
       <div class="stablecoin-index-filter-grid" aria-label="Stablecoin filters">
         {filters.map((filter) => (
           <details class="stablecoin-index-filter">
-            <summary data-summary-label="0 selected"><span>{filter.label}</span><span aria-hidden="true" data-filter-count={filter.id}>0</span></summary>
+            <summary data-summary-label="All options"><span>{filter.label}</span><span aria-hidden="true" data-filter-count={filter.id}>All</span></summary>
             <div class="stablecoin-index-filter-options">
               {filter.options.map((item) => <label><input type="checkbox" data-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}
             </div>
@@ -147,9 +147,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
 
       <div class="stablecoin-index-summary">
         <div class="stablecoin-index-active-filters" data-active-filters aria-label="Active filters"></div>
-        <div class="stablecoin-index-result-count" aria-live="polite">
-          <span data-visible-range>1–{Math.min(PAGE_SIZE, records.length)}</span> of <span data-result-count>{records.length}</span> records
-        </div>
+        <div class="stablecoin-index-result-count" aria-live="polite"><span data-visible-range>1–{Math.min(PAGE_SIZE, records.length)}</span> of <span data-result-count>{records.length}</span> records</div>
       </div>
 
       <div class="stablecoin-index-table">
@@ -169,6 +167,11 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
         <button class="ui-button" type="button" data-page-next>Next</button>
       </nav>
     </section>
+
+    <div class="stablecoin-compare-dock" data-comparison-dock hidden aria-live="polite">
+      <div><strong>Comparison selection</strong><span data-comparison-dock-status>0 records selected</span></div>
+      <div class="stablecoin-compare-dock__actions"><a href="#comparison-heading">Open comparison</a><button class="ui-button" type="button" data-clear-comparison>Clear</button></div>
+    </div>
 
     <section class="stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
       <div class="comparison-heading"><div><p class="stablecoin-index-eyebrow">Bounded comparison</p><h2 id="comparison-heading">Compare historical records</h2><p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p></div><button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button></div>
