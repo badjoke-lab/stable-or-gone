@@ -17,8 +17,8 @@ jobs:
     env:
       SOG_BASE_URL: https://sog.badjoke-lab.com
       SOG_EXPECTED_COMMIT: 681172b08e2f901450a369f7b141b7a9ebd53b42
-      SOG_SMOKE_ATTEMPTS: '30'
-      SOG_SMOKE_DELAY_MS: '15000'
+      SOG_SMOKE_ATTEMPTS: '1'
+      SOG_SMOKE_DELAY_MS: '1000'
       SOG_PARITY_CONCURRENCY: '12'
       SOG_OWNER_APPROVAL_REF: project owner instruction to proceed with the fixed PR 261-276 closure sequence
     steps:
@@ -35,8 +35,32 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Verify production smoke, provenance, and output parity
-        run: npm run check:production
+      - name: Run production checks and retain every log
+        shell: bash
+        run: |
+          mkdir -p artifacts/production-checks
+          set +e
+          node scripts/check-production.mjs 2>&1 | tee artifacts/production-checks/smoke.log
+          printf '%s\n' "${PIPESTATUS[0]}" > artifacts/production-checks/smoke.exit
+          node scripts/check-production-provenance.mjs 2>&1 | tee artifacts/production-checks/provenance.log
+          printf '%s\n' "${PIPESTATUS[0]}" > artifacts/production-checks/provenance.exit
+          node scripts/check-production-output-parity.mjs 2>&1 | tee artifacts/production-checks/output-parity.log
+          printf '%s\n' "${PIPESTATUS[0]}" > artifacts/production-checks/output-parity.exit
+          set -e
+      - name: Upload production check diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-ui-v3-production-checks-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 90
+          path: artifacts/production-checks/**
+      - name: Require all production checks
+        shell: bash
+        run: |
+          test "$(cat artifacts/production-checks/smoke.exit)" = "0"
+          test "$(cat artifacts/production-checks/provenance.exit)" = "0"
+          test "$(cat artifacts/production-checks/output-parity.exit)" = "0"
       - name: Capture production desktop representatives
         run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url "$SOG_BASE_URL"
       - name: Capture production mobile representatives
