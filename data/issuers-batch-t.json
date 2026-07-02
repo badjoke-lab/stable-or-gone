@@ -1,4 +1,3 @@
 [
-{"id":"sog_issuer_mento","slug":"mento-protocol","name":"Mento Protocol","issuer_type":"protocol","jurisdiction":"Decentralized Celo protocol ecosystem","related_stablecoins":["mento-eurm"],"official_url":"https://www.mento.org/","summary":"Protocol and reserve context for Mento Euro.","confidence":"high","last_verified_at":"2026-06-30","notes":"Batch T compatibility row."},
 {"id":"sog_issuer_reserve_protocol","slug":"reserve-protocol","name":"Reserve Protocol","issuer_type":"protocol","jurisdiction":"Decentralized Ethereum protocol ecosystem","related_stablecoins":["reserve-usd3"],"official_url":"https://reserve.org/","summary":"Protocol and governance context for Web 3 Dollar.","confidence":"high","last_verified_at":"2026-06-30","notes":"Batch T compatibility row."}
 ]
