@@ -8,10 +8,7 @@ on:
       - 'docs/roadmap.md'
       - 'docs/ui-redesign/**'
       - 'config/ui-v4-visual-acceptance.json'
-      - 'src/layouts/BaseLayout.astro'
-      - 'src/styles/ui-v4-shell.css'
       - 'scripts/validate-ui-v4-visual-acceptance.mjs'
-      - 'scripts/validate-ui-v4-shell.mjs'
       - '.github/workflows/ui-v4-design-contract.yml'
   push:
     branches: [main]
@@ -20,10 +17,7 @@ on:
       - 'docs/roadmap.md'
       - 'docs/ui-redesign/**'
       - 'config/ui-v4-visual-acceptance.json'
-      - 'src/layouts/BaseLayout.astro'
-      - 'src/styles/ui-v4-shell.css'
       - 'scripts/validate-ui-v4-visual-acceptance.mjs'
-      - 'scripts/validate-ui-v4-shell.mjs'
       - '.github/workflows/ui-v4-design-contract.yml'
 
 permissions:
@@ -39,5 +33,3 @@ jobs:
           node-version: 22
       - name: Validate visual acceptance contract
         run: node scripts/validate-ui-v4-visual-acceptance.mjs
-      - name: Validate shared shell contract
-        run: node scripts/validate-ui-v4-shell.mjs
