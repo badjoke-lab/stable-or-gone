@@ -1,0 +1,4 @@
+[
+{"id":"sog_st_eurm","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurm_reserve_batch_t","sog_src_eurm_celo_route_batch_t"],"notes":"EURm does not itself accrue holder yield in this record."},
+{"id":"sog_st_usd3","availability":"native","source":"mixed","accrual":"exchange_rate_increase","rate":"protocol_determined","related_asset_ids":[],"evidence_ids":["sog_src_usd3_launch_batch_t","sog_src_usd3_q1_2026_batch_t","sog_src_usd3_dtf_docs_batch_t"],"notes":"Collateral revenue allocated to holders is reflected through NAV appreciation rather than balance rebase."}
+]
