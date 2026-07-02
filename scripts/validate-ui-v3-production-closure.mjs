@@ -53,6 +53,9 @@ for (const marker of [
   '${breakdown.organizations} organizations',
   '${counts.events} events',
   '${breakdown.evidence_source_identities} Source identities',
+  'initialStablecoinRangeEnd = Math.min(20, counts.primary_records)',
+  '1–${initialStablecoinRangeEnd} of ${counts.primary_records} records',
+  '20 per page',
   'Identity and current state',
   'Organizations and control',
   'How the asset works',
@@ -65,6 +68,8 @@ for (const marker of [
 for (const marker of [
   'Stablecoins ${counts.primary_records}',
   'Sources ${counts.evidence}',
+  'Records ${counts.primary_records}',
+  '${counts.primary_records} of ${counts.primary_records} records',
   'Redemption profile',
   'Reserve and attestation history',
   'Regulatory and official notices',

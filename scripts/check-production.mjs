@@ -45,7 +45,7 @@ async function read(pathname, expectedContentType) {
   const response = await fetch(`${baseUrl}${pathname}`, {
     headers: {
       accept: expectedContentType,
-      'user-agent': 'sog-public-consistency-smoke/3.0',
+      'user-agent': 'sog-public-consistency-smoke/3.1',
       'cache-control': 'no-cache'
     }
   });
@@ -114,14 +114,16 @@ async function checkOnce() {
   const stablecoinsText = visibleText(stablecoinsResponse.text);
   const organizationsText = visibleText(organizationsResponse.text);
   const eventsText = visibleText(eventsResponse.text);
+  const initialStablecoinRangeEnd = Math.min(20, counts.primary_records);
 
   assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');
   assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');
   assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');
   assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');
-  assert(stablecoinsText.includes(`Records ${counts.primary_records}`), 'stablecoin index record count mismatch');
+  assert(stablecoinsText.includes(`${counts.primary_records} records`), 'stablecoin index record count mismatch');
   assert(stablecoinsText.includes(`Organizations ${breakdown.organizations}`), 'stablecoin index organization count mismatch');
-  assert(stablecoinsText.includes(`${counts.primary_records} of ${counts.primary_records} records`), 'stablecoin index result count mismatch');
+  assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');
+  assert(stablecoinsText.includes('20 per page'), 'stablecoin index page-size marker missing');
   assert(organizationsText.includes(`Organizations ${breakdown.organizations}`), 'organization index count mismatch');
   assert(organizationsText.includes(`Relationships ${breakdown.relationships}`), 'organization relationship count mismatch');
   assert(eventsText.includes(`Events ${counts.events}`), 'event index count mismatch');
