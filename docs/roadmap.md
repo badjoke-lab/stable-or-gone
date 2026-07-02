@@ -15,7 +15,8 @@ UI v3 visual completion: withdrawn
 Active workstream: UI rebuild v4
 Tracking issue: #281
 PR A: complete in #284
-Current PR stage: B — shared shell and navigation
+PR B: complete in #285
+Current PR stage: C — Home and stablecoin register prototype
 ```
 
 The Editorial Ledger implementation is an intermediate technical state, not the accepted finished product. Data integrity, route generation, machine-readable outputs, provenance, accessibility contracts, and production rendering remain protected.
@@ -56,22 +57,27 @@ Merged as PR #284.
 - prohibited completion when required audit steps are skipped;
 - required exact artifact and owner approval for closure.
 
-### PR B — shared shell and navigation — active
+### PR B — shared shell and navigation — complete
 
-- replace paper-only tokens with neutral application background and distinct content surfaces;
-- replace Georgia display hierarchy with a readable sans-serif system;
-- rebuild sticky header, current navigation state, search control, About disclosure, and mobile navigation;
-- rebuild page frame, panel surfaces, controls, chips, table typography, and dark reference footer;
-- establish 16px body text, 14px table data, and 12px minimum table headings;
-- add a machine-validated shell contract;
-- preserve routes, data, metadata, accessibility, and machine-readable outputs.
+Merged as PR #285.
 
-### PR C — Home and stablecoin register prototype
+- replaced paper-only tokens with a neutral application background and distinct content surfaces;
+- replaced Georgia display hierarchy with a readable sans-serif system;
+- rebuilt sticky header, navigation states, search, disclosures, mobile navigation, page frame, controls, tables, and footer;
+- established 16px body text, 14px table data, and 12px minimum table headings;
+- added a machine-validated shared-shell contract;
+- passed all normal workflows and a 48-image desktop/mobile technical audit.
 
-- make Home a registry entrypoint;
-- implement prominent search and direct exploration paths;
-- rebuild filters, active-filter state, clear action, sort, pagination, and compare behavior;
-- produce desktop and mobile artifacts before expanding scope.
+### PR C — Home and stablecoin register prototype — active
+
+- rebuild Home as a clear registry entrypoint rather than an editorial front page;
+- keep Home search as one integrated control on desktop and mobile;
+- give register totals, material changes, lifecycle state, recent reviews, guides, and reference access deliberate product surfaces;
+- rebuild the stablecoin register as a bounded surface with readable controls, filter cards, active-filter chips, pagination, desktop table, and mobile record cards;
+- replace misleading unselected filter `0` values with option totals and an explicit `All` state;
+- remove the mobile horizontal filter strip;
+- add a machine-validated Home/Register contract;
+- produce and review desktop and mobile screenshot artifacts before merge.
 
 ### PR D — stablecoin dossier prototype
 
@@ -101,8 +107,8 @@ Merged as PR #284.
 
 ```text
 Gate V4-A  rebuild authority and failure gates — passed
-Gate V4-B  shared shell approved — active
-Gate V4-C  Home and register approved
+Gate V4-B  shared shell approved — passed
+Gate V4-C  Home and register approved — active
 Gate V4-D  dossier approved
 Gate V4-E  Events and Organizations approved
 Gate V4-F  Guides and secondary pages approved
