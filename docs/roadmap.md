@@ -14,7 +14,8 @@ Production data and routes: healthy
 UI v3 visual completion: withdrawn
 Active workstream: UI rebuild v4
 Tracking issue: #281
-Current PR stage: A — design contract and failure gates
+PR A: complete in #284
+Current PR stage: B — shared shell and navigation
 ```
 
 The Editorial Ledger implementation is an intermediate technical state, not the accepted finished product. Data integrity, route generation, machine-readable outputs, provenance, accessibility contracts, and production rendering remain protected.
@@ -44,19 +45,25 @@ The former Editorial Ledger authority is superseded for new visual work.
 
 ## UI rebuild sequence
 
-### PR A — design contract and failure gates — active
+### PR A — design contract and failure gates — complete
 
-- withdraw UI v3 completion;
-- document failed visual direction;
-- establish the Modern Evidence Registry direction;
-- add a machine-validated visual acceptance manifest;
-- prohibit completion when required audit steps are skipped;
-- require exact artifact and owner approval for closure.
+Merged as PR #284.
 
-### PR B — shared shell and navigation
+- withdrew UI v3 completion;
+- documented the failed visual direction;
+- established the Modern Evidence Registry direction;
+- added a machine-validated visual acceptance manifest;
+- prohibited completion when required audit steps are skipped;
+- required exact artifact and owner approval for closure.
 
-- rebuild header, brand area, search, navigation, page frame, surfaces, buttons, links, states, and footer;
-- remove giant decorative hierarchy;
+### PR B — shared shell and navigation — active
+
+- replace paper-only tokens with neutral application background and distinct content surfaces;
+- replace Georgia display hierarchy with a readable sans-serif system;
+- rebuild sticky header, current navigation state, search control, About disclosure, and mobile navigation;
+- rebuild page frame, panel surfaces, controls, chips, table typography, and dark reference footer;
+- establish 16px body text, 14px table data, and 12px minimum table headings;
+- add a machine-validated shell contract;
 - preserve routes, data, metadata, accessibility, and machine-readable outputs.
 
 ### PR C — Home and stablecoin register prototype
@@ -93,8 +100,8 @@ The former Editorial Ledger authority is superseded for new visual work.
 ## Acceptance gates
 
 ```text
-Gate V4-A  rebuild authority and failure gates
-Gate V4-B  shared shell approved
+Gate V4-A  rebuild authority and failure gates — passed
+Gate V4-B  shared shell approved — active
 Gate V4-C  Home and register approved
 Gate V4-D  dossier approved
 Gate V4-E  Events and Organizations approved
