@@ -2,6 +2,12 @@
   const mobileRepresentationSelector = (kind: string) => `[data-mobile-representation-for="${CSS.escape(kind)}"]`;
   const evidenceKinds = new Set(['stablecoin-sources', 'organization-sources', 'event-sources']);
 
+  const markMobileRepresentation = (element: HTMLElement, kind: string) => {
+    const data = element.dataset;
+    data.mobileRepresentationFor = kind;
+    data.generatedMobileTable = 'true';
+  };
+
   const appendCopyControl = (container: HTMLElement, label: string, value: string) => {
     if (!/Contract or identifier/i.test(label) || !value || /not recorded|unknown/i.test(value)) return;
     const row = document.createElement('div');
@@ -26,8 +32,7 @@
   const createDefinitionRepresentation = (table: HTMLTableElement, kind: string) => {
     const list = document.createElement('dl');
     list.className = 'mobile-definition-list';
-    list.dataset.mobileRepresentationFor = kind;
-    list.dataset.generatedMobileTable = 'true';
+    markMobileRepresentation(list, kind);
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
       const labelCell = row.querySelector(':scope > th');
       const valueCell = row.querySelector(':scope > td');
@@ -47,8 +52,7 @@
   const createRecordRepresentation = (table: HTMLTableElement, kind: string) => {
     const list = document.createElement('div');
     list.className = 'mobile-record-list';
-    list.dataset.mobileRepresentationFor = kind;
-    list.dataset.generatedMobileTable = 'true';
+    markMobileRepresentation(list, kind);
     const headers = [...table.querySelectorAll(':scope > thead th')].map((cell) => cell.textContent?.trim() ?? 'Field');
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
       const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
@@ -81,8 +85,7 @@
   const createEvidenceRepresentation = (table: HTMLTableElement, kind: string) => {
     const list = document.createElement('div');
     list.className = 'mobile-record-list mobile-evidence-list';
-    list.dataset.mobileRepresentationFor = kind;
-    list.dataset.generatedMobileTable = 'true';
+    markMobileRepresentation(list, kind);
     const headers = [...table.querySelectorAll(':scope > thead th')].map((cell) => cell.textContent?.trim() ?? 'Field');
 
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
