@@ -1,0 +1,129 @@
+<script>
+  const humanizeLabel = (value: string) => {
+    const acronyms: Record<string, string> = { api: 'API', dao: 'DAO', defi: 'DeFi', psm: 'PSM', sec: 'SEC', ui: 'UI', usd: 'USD' };
+    return value
+      .split('_')
+      .filter(Boolean)
+      .map((word, index) => {
+        const lower = word.toLowerCase();
+        if (acronyms[lower]) return acronyms[lower];
+        if (index > 0 && ['and', 'or', 'of', 'to', 'via', 'with', 'for', 'from', 'as'].includes(lower)) return lower;
+        return lower.charAt(0).toUpperCase() + lower.slice(1);
+      })
+      .join(' ');
+  };
+
+  const humanizeMachineLabels = () => {
+    document.querySelectorAll('h1,h2,h3,h4,dt,strong').forEach((element) => {
+      if (!(element instanceof HTMLElement) || element.children.length > 0) return;
+      const text = element.textContent?.trim() ?? '';
+      if (!/^[a-z0-9]+(?:_[a-z0-9]+)+$/.test(text)) return;
+      element.textContent = humanizeLabel(text);
+    });
+  };
+
+  const repairEvidenceSummaries = () => {
+    document.querySelectorAll<HTMLElement>('[data-mobile-representation-for]').forEach((list) => {
+      const kind = list.dataset.mobileRepresentationFor;
+      if (!kind || !['stablecoin-sources', 'organization-sources', 'event-sources'].includes(kind)) return;
+      const table = document.querySelector<HTMLTableElement>(`table[data-table-kind="${CSS.escape(kind)}"]`);
+      if (!table) return;
+      const rows = [...table.querySelectorAll(':scope > tbody > tr')];
+      const records = [...list.querySelectorAll<HTMLElement>('.mobile-evidence-record')];
+      records.forEach((record, index) => {
+        const row = rows[index];
+        const summary = record.querySelector(':scope > summary');
+        if (!(row instanceof HTMLTableRowElement) || !(summary instanceof HTMLElement)) return;
+        const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
+        const title = row.querySelector(':scope > td:first-child a')?.textContent?.trim()
+          || cells[0]?.textContent?.replace(/Published\s+.+$/i, '').trim()
+          || 'Evidence source';
+        const publishedRaw = row.querySelector(':scope > td:first-child small')?.textContent?.trim().replace(/^Published\s*/i, '') || 'Not recorded';
+        const publisher = cells[1]?.textContent?.trim() || 'Publisher not recorded';
+        const reliability = cells.at(-1)?.textContent?.trim() || 'Reliability not recorded';
+        const strong = summary.querySelector('strong');
+        const meta = summary.querySelector('span');
+        if (strong) strong.textContent = title;
+        if (meta) meta.textContent = `Published ${publishedRaw} · ${publisher} · ${reliability}`;
+      });
+    });
+  };
+
+  const buildLongformMobileTables = () => {
+    document.querySelectorAll<HTMLTableElement>('.guide-article-content table, .longform-content table').forEach((table, tableIndex) => {
+      if (table.dataset.terminalMobileTableBuilt === 'true') return;
+      const headers = [...table.querySelectorAll(':scope > thead th')].map((cell, index) => cell.textContent?.trim() || `Field ${index + 1}`);
+      if (!headers.length) return;
+      const container = document.createElement('div');
+      container.className = 'terminal-mobile-table';
+      container.dataset.mobileRepresentationFor = `longform-${tableIndex + 1}`;
+      table.querySelectorAll(':scope > tbody > tr').forEach((row, rowIndex) => {
+        const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
+        if (!cells.length) return;
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        const title = document.createElement('strong');
+        title.textContent = cells[0]?.textContent?.trim() || `Row ${rowIndex + 1}`;
+        const meta = document.createElement('span');
+        meta.textContent = cells[1]?.textContent?.trim() || `${cells.length} fields`;
+        summary.append(title, meta);
+        const dl = document.createElement('dl');
+        cells.forEach((cell, index) => {
+          const item = document.createElement('div');
+          const dt = document.createElement('dt');
+          dt.textContent = headers[index] || `Field ${index + 1}`;
+          const dd = document.createElement('dd');
+          dd.innerHTML = cell.innerHTML;
+          item.append(dt, dd);
+          dl.append(item);
+        });
+        details.append(summary, dl);
+        container.append(details);
+      });
+      table.dataset.terminalMobileTableBuilt = 'true';
+      table.insertAdjacentElement('afterend', container);
+    });
+  };
+
+  const buildCompactDossierSections = () => {
+    const selectors = [
+      '.stablecoin-dossier-section.stablecoin-deployments-legal',
+      '.stablecoin-dossier-section.stablecoin-evidence-section',
+      '.stablecoin-dossier-section.stablecoin-unknowns-section',
+      '.stablecoin-dossier-section.stablecoin-history'
+    ];
+    selectors.forEach((selector) => {
+      document.querySelectorAll<HTMLElement>(selector).forEach((section) => {
+        if (section.dataset.terminalDisclosureBuilt === 'true') return;
+        const heading = section.querySelector<HTMLElement>(':scope > .stablecoin-section-heading');
+        const title = heading?.querySelector('h2')?.textContent?.trim();
+        if (!heading || !title) return;
+        const details = document.createElement('details');
+        details.className = 'terminal-mobile-section';
+        details.open = !window.matchMedia('(max-width: 719px)').matches;
+        const summary = document.createElement('summary');
+        summary.textContent = title;
+        const panel = document.createElement('div');
+        panel.className = 'terminal-mobile-section-panel';
+        [...section.children].forEach((child) => {
+          if (child !== heading) panel.append(child);
+        });
+        details.append(summary, panel);
+        section.append(details);
+        section.dataset.terminalDisclosureBuilt = 'true';
+      });
+    });
+  };
+
+  const run = () => {
+    buildLongformMobileTables();
+    buildCompactDossierSections();
+    window.requestAnimationFrame(() => {
+      repairEvidenceSummaries();
+      humanizeMachineLabels();
+    });
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
+  else run();
+</script>

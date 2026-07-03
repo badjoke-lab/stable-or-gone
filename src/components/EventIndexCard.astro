@@ -15,14 +15,19 @@ const data = {
 ---
 <article class="event-index-card" data-event-card data-mobile-representation-for="event-index" {...data}>
   <header><time>{record.eventDate || 'Date not recorded'}</time><h2><a href={`/event/${record.id}/`}>{record.title}</a></h2></header>
-  <dl class="event-index-card-grid">
+  <dl class="mobile-card-primary">
     <div><dt>Category</dt><dd>{record.categoryLabel}</dd></div>
-    <div><dt>Subtype</dt><dd>{record.subtypeLabel}</dd></div>
     <div><dt>Subjects</dt><dd>{record.subjectNames.join(', ') || 'Not recorded'}</dd></div>
     <div><dt>Status effect</dt><dd>{record.statusEffectLabel}</dd></div>
-    <div><dt>Recovery</dt><dd>{record.recoveryLabel}</dd></div>
     <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
-    <div><dt>Record confidence</dt><dd>{record.confidenceLabel}</dd></div>
-    <div><dt>Event ID</dt><dd><code>{record.id}</code></dd></div>
   </dl>
+  <details class="mobile-card-details">
+    <summary>More event details</summary>
+    <dl>
+      <div><dt>Subtype</dt><dd>{record.subtypeLabel}</dd></div>
+      <div><dt>Recovery</dt><dd>{record.recoveryLabel}</dd></div>
+      <div><dt>Record confidence</dt><dd>{record.confidenceLabel}</dd></div>
+      <div><dt>Event ID</dt><dd><code>{record.id}</code></dd></div>
+    </dl>
+  </details>
 </article>
