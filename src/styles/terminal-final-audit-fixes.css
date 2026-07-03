@@ -1,4 +1,7 @@
 /* Exact-head screenshot audit fixes. */
+:root {
+  --sog-spacing-audit-revision: 20260704;
+}
 
 html body .guide-index-title h1,
 html body .guide-article-masthead h1,
