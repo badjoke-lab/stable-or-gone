@@ -27,8 +27,9 @@ check(brand.includes('MobileTableRuntime') && brand.includes('DisclosureRuntime'
 for (const marker of [
   'buildMobileTableRepresentations', 'table[data-table-kind][data-mobile-table="scroll-preserve"]',
   'data.mobileRepresentationFor = kind', 'createDefinitionRepresentation', 'createRecordRepresentation',
-  'Contract or identifier', 'Copy full identifier', 'data.generatedCopyValue', "aria-live', 'polite'"
+  'createEvidenceRepresentation', 'Contract or identifier', 'Copy full identifier', "aria-live', 'polite'"
 ]) check(runtime.includes(marker), `mobile table runtime missing: ${marker}`);
+check(runtime.includes('data.generatedCopyValue') || runtime.includes('button.dataset.generatedCopyValue'), 'mobile table runtime missing generated copy value');
 for (const marker of ["details:not([data-disclosure])", "setAttribute('aria-expanded', String(details.open))", "event.key !== 'Escape'", 'trigger.focus()', "setAttribute('aria-controls'"]) check(disclosureRuntime.includes(marker), `disclosure runtime missing: ${marker}`);
 for (const kind of ['stablecoin-reserve-profile', 'stablecoin-redemption-profile', 'stablecoin-reserve-history', 'stablecoin-regulatory-notices', 'stablecoin-open-questions']) check(valueSections.includes(`data-mobile-representation-for="${kind}"`), `explicit dossier mobile representation missing: ${kind}`);
 for (const marker of [
@@ -43,7 +44,7 @@ check(generatedKinds.length === 8, 'generated compact representation count chang
 for (const kind of ['stablecoin-record-coverage', 'issuer-control-events', 'stablecoin-event-timeline', 'stablecoin-deployments', 'stablecoin-sources', 'methodology-value-states', 'methodology-primary-display-relationships', 'methodology-evidence-source-identities']) check(generatedKinds.includes(kind), `runtime-generated compact representation missing: ${kind}`);
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   ok: failures.length === 0,
   gate: 'V3-E',
   page_families: pageFamilyContracts.length,
