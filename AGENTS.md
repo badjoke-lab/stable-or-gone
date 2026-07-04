@@ -33,15 +33,11 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
-For statistics work, also read:
-
-```text
-docs/stats-spec.md
-```
+For statistics work, also read `docs/stats-spec.md`.
 
 ## Repository source of truth
 
-Repository specifications outrank chat memory, handoff prose, external mock copies, issue discussion, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
+Repository specifications outrank chat memory, handoff prose, issue discussion, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
 
 ## Current workstream
 
@@ -57,31 +53,31 @@ docs/roadmap.md
 Current position:
 
 ```text
-Current main checkpoint: f97df82c023646220f44c72de9227eab7549d228
+Current main checkpoint: 235330adcbb3b0ebe6440a25dc1ff9c9886f0393
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
 Events: 172
 Evidence: 501
+Public source identities: 455
 Detail routes: 366
-Growth D: complete
-100-record production verification: recorded
 Dedicated UI program: stopped after PR #295
 UI mode: maintenance-only
-Active: PR #298 organization and relationship integrity audit
-Next: PR #299 evidence and source-identity integrity audit
+Active: PR #299 evidence and source-identity integrity audit
+Next: PR #300 reserve, redemption, and backing applicability audit
 ```
 
 ## Active sequence
 
 ```text
-PR #296       resume core workstream and synchronize authority — complete
-PR #297       identity uniqueness and lineage audit — complete
-PR #298-#304  remaining 100-record registry-wide audit — active
+PR #296       workstream resumption — complete
+PR #297       identity and lineage audit — complete
+PR #298       organization and relationship audit — complete
+PR #299-#304  remaining 100-record registry-wide audit — active
 PR #305-#309  non-UI release hardening
 PR #310-#313  monitoring expansion and scheduled read-only operation
 PR #314-#317  statistics implementation
-PR #318        next candidate audit
+PR #318       next candidate audit
 PR #319-#323  controlled growth from 100 to 110
 ```
 
@@ -89,45 +85,21 @@ Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
 
 ## UI maintenance rules
 
-There is no active redesign sequence.
+There is no active redesign sequence. A UI PR is allowed only for a concrete verified defect or explicit owner-directed change.
 
-A UI PR is allowed only for a concrete verified defect or an explicit owner-directed change. A maintenance PR must:
+A maintenance PR must remain narrow, preserve the current terminal family unless explicitly changed, preserve canonical data and route meaning unless separately authorized, use actual rendered desktop/mobile evidence for visual claims, and not displace the active core schedule.
 
-- remain narrow;
-- preserve the current terminal visual family unless the owner explicitly changes direction;
-- preserve canonical data, route meaning, machine-readable output, and accessibility contracts unless separately authorized;
-- use actual rendered desktop/mobile evidence for visual or responsive claims;
-- not displace the active core schedule.
-
-No agent may:
-
-- invent another visual direction;
-- substitute or generate another logo;
-- redesign a page from memory;
-- revive rejected Modern Data Product, Editorial Ledger, or Modern Evidence Registry directions as active authority;
-- implement mock-only data as canonical data;
-- alter the core PR sequence without updating the roadmap and canonical plan.
-
-Approved production assets:
-
-```text
-public/brand/sog-lockup-on-light.svg
-public/brand/sog-lockup-on-dark.svg
-public/brand/sog-mark-on-light.svg
-public/brand/sog-mark-on-dark.svg
-```
-
-Stablecoin identity may use a reviewed local official logo when available; otherwise use the ticker fallback. Do not hotlink or generate imitation coin or organization logos.
+Do not invent another visual direction, substitute a logo, revive rejected redesign directions, or alter the core PR sequence without updating repository authority.
 
 ## Data and quality rules
 
 - Cite the exact queue, validator, audit, schema, fixture, and baseline used by each PR.
 - Keep unknown values unknown unless reviewed evidence supports a value.
-- Do not coerce month- or year-level evidence into a day-level date.
+- Do not coerce partial-date evidence into a day-level date.
 - Preserve evidence relations, known unknowns, deployments, source identities, and value states.
-- UI work must not clear quality queues through hiding, defaults, or relabeling.
 - Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
 - A rebrand, migration continuation, wrapped representation, deployment, or alias must not become a separate canonical asset without scope support and lineage review.
+- Archive absence is a quality queue item, not permission to fabricate an archive URL.
 
 ## Monitoring rules
 
@@ -159,12 +131,6 @@ When growth resumes:
 - duplicate and lineage checks required;
 - all applicable supporting record groups required;
 - unknown information remains explicit.
-
-## Mock-only and unsupported-data exclusions
-
-Do not add mock-only live prices, market capitalization, circulating supply, holder counts, market charts, growth deltas, saved views, watchlists, accounts, follow buttons, unsupported badges, transparency or safety scores, invented reserve totals, invented evidence counts, invented timestamps, or unsupported legal claims.
-
-Only canonical data, approved editorial copy, generated canonical counts, and separately approved sourced integrations may become public claims.
 
 ## Deployment rule
 
