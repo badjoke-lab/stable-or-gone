@@ -30,6 +30,8 @@ jobs:
         run: node scripts/validate-registry-organization-relationship-audit.mjs
       - name: Validate 501-record evidence integrity audit
         run: node scripts/validate-registry-evidence-integrity-audit.mjs
+      - name: Validate reserve redemption backing audit
+        run: node scripts/validate-registry-reserve-redemption-backing-audit.mjs
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
       - name: Validate unresolved terminal-date queue
