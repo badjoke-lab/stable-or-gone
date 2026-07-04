@@ -26,6 +26,8 @@ jobs:
         run: npm run validate:active-workstream
       - name: Validate 100-record identity and lineage audit
         run: node scripts/validate-registry-identity-lineage-audit.mjs
+      - name: Validate organization and relationship integrity audit
+        run: node scripts/validate-registry-organization-relationship-audit.mjs
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
       - name: Validate unresolved terminal-date queue
