@@ -53,7 +53,7 @@ docs/roadmap.md
 Current position:
 
 ```text
-Current main checkpoint: 235330adcbb3b0ebe6440a25dc1ff9c9886f0393
+Current main checkpoint: 349b38c7641578e6a7be58a91256092722bcdb4f
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -63,8 +63,8 @@ Public source identities: 455
 Detail routes: 366
 Dedicated UI program: stopped after PR #295
 UI mode: maintenance-only
-Active: PR #299 evidence and source-identity integrity audit
-Next: PR #300 reserve, redemption, and backing applicability audit
+Active: PR #300 reserve, redemption, and backing applicability audit
+Next: PR #301 deployment and chain identity audit
 ```
 
 ## Active sequence
@@ -73,7 +73,8 @@ Next: PR #300 reserve, redemption, and backing applicability audit
 PR #296       workstream resumption — complete
 PR #297       identity and lineage audit — complete
 PR #298       organization and relationship audit — complete
-PR #299-#304  remaining 100-record registry-wide audit — active
+PR #299       evidence and source-identity audit — complete
+PR #300-#304  remaining 100-record registry-wide audit — active
 PR #305-#309  non-UI release hardening
 PR #310-#313  monitoring expansion and scheduled read-only operation
 PR #314-#317  statistics implementation
@@ -100,6 +101,8 @@ Do not invent another visual direction, substitute a logo, revive rejected redes
 - Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
 - A rebrand, migration continuation, wrapped representation, deployment, or alias must not become a separate canonical asset without scope support and lineage review.
 - Archive absence is a quality queue item, not permission to fabricate an archive URL.
+- An undated reserve-context or index row must not be assigned a period-specific date without reviewed evidence.
+- Do not collapse a historical redemption review state into `terminated` without verifying current contract or interface availability.
 
 ## Monitoring rules
 
