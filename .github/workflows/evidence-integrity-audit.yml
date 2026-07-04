@@ -1,0 +1,31 @@
+name: Evidence integrity audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run 501-record evidence integrity audit
+        run: node scripts/audit-registry-evidence-integrity.mjs
+      - name: Upload evidence integrity audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-integrity-audit-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            data/generated/registry-evidence-integrity-audit.json
+            docs/audits/registry-501-evidence-integrity-audit.md
