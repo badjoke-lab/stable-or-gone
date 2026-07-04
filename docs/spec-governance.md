@@ -1,7 +1,7 @@
 # Stable or Gone specification governance
 
 Status: canonical governance specification  
-Updated: 2026-07-01
+Updated: 2026-07-05
 
 ## 1. Purpose
 
@@ -18,31 +18,14 @@ When documents disagree, use this order:
 5. Supporting audits, inventories, examples, and handoff documents.
 6. Conversation history, issue discussion, and unmerged drafts.
 
-The active UI workstream is governed by:
-
-```text
-docs/ui-redesign/master-spec.md
-docs/architecture/approved-editorial-ledger-ui-v3.md
-docs/ui-redesign/approved-mocks-v3/README.md
-docs/ui-redesign/implementation-plan.md
-```
-
-The former UI v2 visual contract and mock set are historical and superseded:
-
-```text
-docs/architecture/approved-modern-data-product-ui-v2.md
-docs/ui-redesign/approved-mocks-v2/
-```
-
-They may be consulted only for implementation history and compatible data, route, accessibility, and logo behavior. They do not authorize current visual work.
-
-The paused non-UI continuation is documented by:
+The active core workstream is governed by:
 
 ```text
 docs/quality/non-ui-quality-program.md
+docs/roadmap.md
 ```
 
-Canonical data semantics remain governed by:
+Canonical data semantics are governed by:
 
 ```text
 docs/stable-asset-scope.md
@@ -51,7 +34,7 @@ docs/data-model-v3-spec.md
 docs/stats-spec.md
 ```
 
-Monitoring semantics remain governed by:
+Monitoring semantics are governed by:
 
 ```text
 docs/quality/monitoring-pipeline-spec.md
@@ -60,7 +43,7 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
-A UI or quality plan may define workflow, public labels, grouping, and review gates. It must not silently redefine canonical record meaning.
+UI is maintenance-only. The current production visual direction is the restored terminal family implemented through PR #288-#295. Historical UI plans and rejected visual directions are implementation history, not an active workstream and not authority for new redesign work.
 
 ## 3. Mandatory reading order
 
@@ -71,16 +54,14 @@ Before changing code, data, workflows, or documentation:
 3. Read `docs/roadmap.md`.
 4. Read `docs/deployment-policy.md`.
 5. Read the canonical plan for the active work item.
-6. Read the relevant data, monitoring, editorial, or UI specification.
+6. Read the relevant data, monitoring, statistics, editorial, or maintenance specification.
 7. Read each queue, validator, audit, fixture, and baseline named by the active work item.
 
-A pull request is not ready for review until the exact specification sections it implements are identified.
+A pull request is not ready for review until the exact specification sections and roadmap item it implements are identified.
 
 ## 4. Source-of-truth rule
 
 A decision becomes binding only when it is written into the relevant canonical repository document and merged. Chat answers, issue comments, unmerged branches, generated reports, and old handoffs do not change the approved specification by themselves.
-
-A mock is not independently authoritative. It must be interpreted through the current canonical visual contract.
 
 If implementation and specification disagree, implementation is defective unless the specification is deliberately updated through review.
 
@@ -97,11 +78,12 @@ A change to any of the following requires a specification update in the same PR 
 - page information hierarchy;
 - mobile information suppression;
 - machine-readable output shape;
+- statistics denominator or grouping semantics;
 - monitoring observation or baseline semantics;
 - production publication gates;
 - the approved PR sequence;
 - the active workstream or its pause/resumption state;
-- visual direction, background family, logo, navigation hierarchy, register composition, dossier hierarchy, or page-family composition.
+- visual direction, logo, navigation hierarchy, register composition, dossier hierarchy, or page-family composition.
 
 No implementation PR may introduce an undocumented alternative.
 
@@ -138,17 +120,19 @@ A PR that cannot cite an approved work item must pause until the roadmap or spec
 
 Do not rewrite completed history to make a changed plan appear unchanged. Record deviations, consumed PR numbers, pauses, superseded visual directions, and stale branches explicitly.
 
-As of 2026-07-01:
+Current execution state:
 
 ```text
-PR #260 is the latest completed work.
-PR #261 aligns the repository to UI v3.
-PR #262-#272 are reserved for the Editorial Ledger remediation sequence.
-PR #251 is a stale Growth D draft and must not be merged as-is.
-Growth D, the 100-record audit, and non-UI release preparation are paused through PR #272.
+100 canonical stable assets reached
+100-record production verification recorded
+dedicated UI program stopped after PR #295
+UI maintenance-only
+100-record registry-wide audit active
+PR #296 repository authority synchronization
+PR #297 next implementation item: identity uniqueness and lineage audit
 ```
 
-Urgent factual corrections or verified public breakage may consume an intervening PR number. When that occurs, the roadmap must be renumbered before implementation resumes.
+Urgent factual corrections, verified public breakage, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
 
 ## 8. Specification status labels
 
@@ -156,7 +140,8 @@ Use one of:
 
 ```text
 canonical specification
-canonical implementation plan
+canonical governance specification
+canonical implementation plan — active
 canonical implementation schedule — active
 canonical implementation schedule — paused
 supporting audit
@@ -167,35 +152,34 @@ working draft — not approved
 
 A superseded document must point to its replacement and must not remain in an active required-reading list except where explicitly identified as historical context.
 
-## 9. Mock and design authority
+## 9. UI maintenance governance
 
-The binding visual authority is:
+There is no active redesign sequence.
+
+A UI maintenance PR must:
+
+- start from a concrete observed defect;
+- preserve the terminal visual family unless an explicit owner decision changes direction;
+- preserve canonical data, route meaning, machine-readable output, and accessibility contracts unless separately authorized;
+- use actual rendered desktop/mobile evidence when the defect is visual or responsive;
+- remain narrow enough not to displace the active core roadmap.
+
+No agent may invent a new visual direction, substitute a new logo, or revive a rejected redesign program without a roadmap and specification amendment.
+
+Approved production brand assets remain:
 
 ```text
-docs/architecture/approved-editorial-ledger-ui-v3.md
+public/brand/sog-lockup-on-light.svg
+public/brand/sog-lockup-on-dark.svg
+public/brand/sog-mark-on-light.svg
+public/brand/sog-mark-on-dark.svg
 ```
 
-The active reference description is:
-
-```text
-docs/ui-redesign/approved-mocks-v3/README.md
-```
-
-The approved direction is Editorial Ledger: paper-like light background, dark ink, restrained dark-red accent, thin rules, existing S/G logo, and page-specific register, dossier, record, and article families.
-
-The following are prohibited without a later approved specification:
-
-- new or replacement logo;
-- dashboard sidebar;
-- oversized marketing hero;
-- KPI-card row;
-- blue-purple glow;
-- repeated rounded-card grid as the default composition;
-- another visual direction invented from memory.
+Stablecoin identity may use a reviewed local official logo when available; otherwise use the ticker fallback. Do not hotlink or generate imitation coin or organization logos.
 
 ## 10. Data-preservation rule
 
-UI, quality, taxonomy, monitoring, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
+UI, quality, taxonomy, monitoring, statistics, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
 
 ```text
 stable assets
@@ -219,56 +203,52 @@ income profiles
 
 Unknown values remain unknown unless evidence supports a canonical value. Intentional removals require record-by-record audit and explicit approval.
 
-UI v3 work changes presentation and information hierarchy only unless a PR explicitly states a separately approved data correction.
-
 ## 11. Growth governance
 
-Canonical stable assets remain at 98 during the UI v3 sequence.
+The registry has reached the audited-growth target of 100 canonical stable assets. Further growth is not automatic.
 
-The old Growth D PR #251 is not the active plan and must not be merged as-is. After PR #272, Growth D must be rebuilt from the latest main with:
+The next controlled growth phase begins only after:
 
+```text
+100-record registry-wide audit
+non-UI release hardening
+monitoring expansion
+statistics implementation
+next candidate audit
+```
+
+Then growth may proceed from 100 to 110 under the roadmap:
+
+- no more than two new stable assets per growth PR;
 - reviewed candidates only;
-- no more than two new stable assets;
 - full duplicate and lineage checks;
 - all applicable supporting record groups;
 - explicit unknown preservation;
-- updated roadmap authorization.
+- current-main branch base;
+- roadmap authorization.
 
 ## 12. Monitoring baseline governance
 
 An accepted monitoring baseline is a repository-reviewed comparison point, not canonical evidence of a stablecoin fact.
 
-- Monitoring executions remain read-only.
-- A live observation may compare against a baseline but may not replace it.
-- Baseline changes require a separate human-reviewed repository change.
-- An unchanged normalized source must not create candidate material.
-- A content change remains an unconfirmed review prompt until separately evidenced and approved.
-- Metadata-only changes, fetch failures, and new sources require distinct states.
-- Monitoring output must not write canonical or public data automatically.
+Monitoring execution remains read-only. It may observe sources, compare against accepted baselines, classify changes, and produce private review material. It may not:
 
-## 13. Conflict-resolution procedure
+- update its own accepted baseline;
+- write canonical data;
+- create branches or pull requests automatically;
+- publish candidate findings;
+- deploy.
 
-1. Stop implementation of the conflicting area.
-2. Identify the authoritative document.
-3. Record the conflict in the active PR or audit.
-4. Update the correct canonical specification.
-5. Update the roadmap if sequence or scope changes.
-6. Resume only after the documentation change is merged.
+A baseline change requires a separate human-reviewed repository change.
 
-## 14. Current binding workstream
+## 13. Statistics governance
 
-As of 2026-07-01, the binding workstream is the Editorial Ledger UI v3 remediation.
+Statistics derive from reviewed canonical loaders at build time. A statistics page or machine-readable statistics output must not:
 
-Canonical documents:
+- manually maintain counts that can diverge from canonical loaders;
+- silently discard unknown categories;
+- present multi-select dimensions as mutually exclusive;
+- confuse asset count with deployment count;
+- become a live price, market-cap, yield, safety, or risk ranking.
 
-```text
-docs/architecture/approved-editorial-ledger-ui-v3.md
-docs/ui-redesign/approved-mocks-v3/README.md
-docs/ui-redesign/implementation-plan.md
-docs/roadmap.md
-docs/spec-governance.md
-```
-
-The active sequence starts with documentation alignment in PR #261 and proceeds through shared shell, page families, mobile hardening, representative visual audit, cleanup, and production verification through PR #272.
-
-Ordinary merged changes publish automatically from `main` under `docs/deployment-policy.md`. UI quality and owner approval remain separate gates; production success may be claimed only after the intended deployed commit and public parity are verified.
+`docs/stats-spec.md` is the binding statistics implementation specification.

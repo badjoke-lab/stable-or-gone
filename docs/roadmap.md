@@ -1,153 +1,323 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-03
-Status: canonical execution schedule
+Updated: 2026-07-05  
+Status: canonical execution schedule — active
 
 ## Current position
 
 ```text
+Current main checkpoint: 8dfde0222b66e255d13285a5154d7508261dfc55
 Canonical stable assets: 100
 Organizations: 94
 Events: 172
 Evidence: 501
+Detail routes: 366
 Production data and routes: healthy
-UI completion: withdrawn
-Active workstream: Terminal UI restoration
-Tracking issue: #281
-Rejected directions: Modern Data Product, Editorial Ledger, Modern Evidence Registry
-Active PR: #288 — restore terminal visual baseline over current structure
-Restoration source: 3df568eab0a179d7690a88efb599156b0d659ab7
+UI status: maintenance-only; no active redesign program
+Active workstream: 100-record registry-wide audit
+Current item: PR #296 workstream resumption and schedule synchronization
+Next implementation item: PR #297 identity uniqueness and lineage audit
 ```
 
-The current semantic structure, interactions, data, routes, accessibility work, and machine-readable outputs remain protected. The visual system returns to the original dark terminal family.
+The owner ended the dedicated UI correction program after PR #295. UI defects may be corrected through narrow maintenance PRs when concrete problems are found, but UI work is no longer the active workstream and must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
 
-## Why the UI was reopened
+## Completed foundation
 
-Run `28599680752` generated representative screenshots but skipped the representative visual-audit step. The pages then failed owner design review. Subsequent unrelated redesign directions also failed owner review.
+### Data and quality
 
-The project now distinguishes:
+- date, reserve, evidence, relationship, source-identity, and deployment quality programs completed;
+- review-only monitoring foundation and coverage work completed through PR #245;
+- reviewed final-eight growth completed;
+- Growth D rebuilt and merged from current implementation lineage;
+- production verification recorded for the 100-record state.
+
+### Current verified baseline
 
 ```text
-technical rendering success != visual design approval
-screenshot capture != screenshot review
-new visual concept != improvement
-restore the accepted direction before adding another direction
+Stable assets: 100
+Organizations: 94
+Relationships: 110
+Events: 172
+Evidence: 501
+Detail routes: 366
 ```
 
-## Binding authority
+Growth D added the final two reviewed assets required for the 100-record checkpoint. The registry-wide audit planned for the 100-record state has not yet been executed as a complete current-main sequence.
+
+### UI maintenance checkpoint
+
+The terminal visual family is the current production direction. PR #288 restored the terminal baseline and PR #289-#295 corrected concrete index, filter, footer, typography, mobile, long-form, and spacing defects. The dedicated UI program is now stopped.
+
+Rules from this point:
+
+- no autonomous redesign sequence;
+- no new visual direction without explicit owner decision and roadmap amendment;
+- verified UI defects may be fixed in narrow maintenance PRs;
+- core work continues independently of optional UI maintenance.
+
+## Phase A — 100-record registry-wide audit
+
+### PR #296 — resume the core workstream
+
+- replace stale UI-active roadmap state;
+- mark UI as maintenance-only;
+- activate the 100-record registry-wide audit;
+- synchronize `AGENTS.md`, governance, non-UI plan, and active-workstream validation;
+- preserve canonical data and public output.
+
+### PR #297 — identity uniqueness and lineage
+
+Audit all 100 assets for:
 
 ```text
-DESIGN.md
-docs/ui-redesign/rebuild-contract-v4.md
-config/ui-v4-visual-acceptance.json
-docs/roadmap.md
+id
+slug
+name
+symbol
+aliases
+official domains
+historical names
+rebrands
+migrations
+token upgrades
+chain-specific representations
 ```
 
-## Completed recovery work
+Fail on duplicated canonical identity or unresolved lineage conflicts. A rebrand, migration continuation, wrapped representation, or deployment must not become a second canonical asset without explicit scope support.
 
-### PR #284 — completion withdrawal and visual gates
+### PR #298 — organization and relationship integrity
 
-- withdrew the prior UI completion claim;
-- added machine-readable visual acceptance state;
-- prohibited completion without exact artifact and owner approval.
+Audit:
 
-### PR #285 — rejected shared shell
+- organization identity uniqueness;
+- legal issuer versus brand owner versus protocol operator;
+- governance and reserve-management roles;
+- current and historical relationships;
+- primary display relationship selection;
+- relationship status and end-boundary consistency.
 
-- merged and subsequently rejected in owner review.
+### PR #299 — evidence integrity
 
-### PR #286 — rejected Home/Register direction
+Audit all evidence and source identities for:
 
-- closed without merge.
+- exact and normalized URL duplication;
+- source-identity grouping;
+- claim scope;
+- evidence relation preservation;
+- publisher identity;
+- reliability value;
+- archive coverage;
+- orphan evidence and orphan relations.
 
-### PR #287 — remove rejected shared shell
+### PR #300 — reserve, redemption, and backing applicability
 
-- removed the PR #285 Modern Evidence Registry shell from main.
+Audit every asset across:
 
-## Active work
+- reserve applicability;
+- reserve-report availability;
+- backing model;
+- stabilization mechanism;
+- redemption status and access;
+- fee and minimum disclosure;
+- eligibility and jurisdiction restrictions;
+- unknown versus not-applicable semantics.
 
-### PR #288 — restore the original terminal visual family
+### PR #301 — deployment and chain identity
 
-- retain current 100-record data and all current routes;
-- retain current Home information, search, and editorial data selection;
-- retain register pagination, filters, sort, URL state, comparison, desktop table, and mobile cards;
-- retain current dossier hierarchy and field ownership;
-- restore deep navy/near-black backgrounds;
-- restore cyan links and actions;
-- restore monospace interface typography;
-- restore square panels and controls;
-- restore compact research-terminal density;
-- preserve current responsive and accessibility behavior;
-- run full desktop/mobile screenshot capture and visual audit;
-- do not call the UI complete after this restoration PR.
+Audit:
 
-## Next sequence after PR #288
+- chain and network identity;
+- contract or identifier uniqueness;
+- deployment status;
+- verification state;
+- issuer-native versus bridged versus wrapped versus synthetic status;
+- canonical and third-party bridge relationships;
+- legacy deployments;
+- freeze, blacklist, and control-capability knowledge state.
 
-### Terminal pass 2 — page-specific correction
+### PR #302 — lifecycle boundary audit
 
-Review the exact restored screenshots and correct only concrete defects:
+Audit:
 
-- Home spacing, search, and material-change hierarchy;
-- Register filter readability, pagination, table density, and mobile cards;
-- Dossier current-state hierarchy, reserve/redemption visibility, long values, and mobile presentation;
-- Events and Organizations density, grouping, and responsive behavior;
-- Guides and long-form reading comfort.
+- launch boundaries;
+- terminal boundaries;
+- migration boundaries;
+- wind-down dates;
+- rebrand dates;
+- relationship end dates;
+- redemption deadlines versus actual terminal boundaries.
 
-No new palette, typography family, card system, or unrelated visual concept may be introduced.
+Contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, and terminal state remain separate concepts.
 
-### Terminal pass 3 — exact-state artifact review
+### PR #303 — known-unknown and placeholder integrity
 
-Capture and review:
+Audit:
 
-- Home desktop/mobile;
-- Register default/search/filter/compare desktop/mobile;
-- active, failed/terminated, migrated, and incomplete-data dossiers;
-- Events desktop/mobile;
-- Organizations desktop/mobile;
-- Guides and long-form desktop/mobile.
+- known unknowns;
+- `unknown_after_review`;
+- `not_recorded`;
+- `not_public`;
+- `not_applicable`;
+- future-event placeholders;
+- conflicting-source states;
+- stale unknowns that can now be resolved;
+- internal placeholder leakage into public output.
 
-### Terminal pass 4 — production closure
+### PR #304 — monitoring coverage recalculation for 100 assets
 
-- merge only after normal checks pass;
-- verify exact production commit provenance;
-- verify all public route and output parity;
-- verify production screenshots;
-- record owner approval for the exact commit and artifact run;
-- only then set the visual acceptance manifest to complete.
-
-## Acceptance gates
+Recalculate the monitoring coverage report against the actual 100-asset registry. Classify each asset as:
 
 ```text
-Gate T-A  rejected shell removed — passed in PR #287
-Gate T-B  terminal baseline restored over current structure — active in PR #288
-Gate T-C  Home/Register/Dossier concrete defects corrected
-Gate T-D  Events/Organizations/Guides concrete defects corrected
-Gate T-E  full desktop/mobile artifact review complete
-Gate T-F  exact production commit and owner approval complete
+automatically_monitorable
+partially_monitorable
+manual_review_only
+no_reliable_official_source
 ```
 
-No agent may claim UI completion before Gate T-F.
+Monitoring output remains review-only and may not modify canonical data or accepted baselines automatically.
 
-## Protected work
+## Phase B — non-UI release hardening
 
-The restoration must not regress:
+### PR #305 — Registry v2/v3 and machine-readable parity
 
-- 100 canonical stable assets;
-- 94 organizations;
-- 172 events;
-- 501 evidence records;
-- canonical-only public data;
-- 366 detail routes;
-- machine-readable outputs;
-- production provenance;
-- current record hierarchy;
-- current register interactions;
-- keyboard and focus support;
-- reduced motion and forced colors;
-- 320px and 200 percent zoom behavior.
+Verify exact parity between canonical loaders, public HTML ownership, machine-readable outputs, and route families.
 
-## Work after genuine UI closure
+### PR #306 — counts, manifest, version, and provenance integrity
 
-1. non-UI release documentation;
-2. monitoring and record-growth resumption;
-3. statistics surface improvements;
-4. later machine-readable expansion.
+Require the same current counts and commit provenance across generated stats, manifests, version output, build provenance, and public-layer verification.
+
+### PR #307 — reproducible build and generated-output audit
+
+Verify a clean checkout can reproduce required generated outputs and complete validation, Astro check, build, and public-layer verification without hidden local artifacts.
+
+### PR #308 — 100-record canonical checkpoint
+
+Record the audited 100-record checkpoint and the exact registry-wide audit results. This is a comparison checkpoint, not a permanent growth ceiling.
+
+### PR #309 — non-UI release material
+
+Generate reviewed internal release material:
+
+```text
+100-record count summary
+change history
+quality-audit results
+known-unknown inventory
+monitoring coverage summary
+deployment checklist
+rollback checklist
+release-note draft
+checkpoint commit reference
+```
+
+## Phase C — monitoring expansion and operation
+
+### PR #310 — 100-asset monitoring baseline synchronization
+
+Reconcile monitored targets, official-source registrations, baseline state, and missing coverage against the audited 100-asset registry.
+
+### PR #311 — reserve and redemption source expansion
+
+Expand reviewed monitoring coverage for attestations, reserve reports, transparency pages, redemption terms, fees, minimums, eligibility, and suspension signals.
+
+### PR #312 — lifecycle and regulatory source expansion
+
+Expand reviewed monitoring coverage for mint halts, wind-downs, migrations, rebrands, shutdowns, regulator notices, and primary enforcement material.
+
+### PR #313 — scheduled read-only monitoring
+
+Add bounded scheduled execution that produces private review material only:
+
+```text
+official-source observation
+-> baseline comparison
+-> change classification
+-> private candidate artifact
+-> review material
+-> human decision
+```
+
+Automatic canonical writes, baseline mutation, branch creation, PR creation, publication, and deployment remain prohibited.
+
+## Phase D — statistics implementation
+
+The binding specification is `docs/stats-spec.md`.
+
+### PR #314 — deterministic statistics generator and validator
+
+Implement:
+
+```text
+scripts/build-stats.mjs
+scripts/validate-stats.mjs
+/data/stats.json
+```
+
+All values must derive from reviewed canonical loaders at build time.
+
+### PR #315 — checkpoint history
+
+Implement `/data/stats-history.json` as reviewed immutable checkpoint snapshots, including the existing historical checkpoints through 100.
+
+### PR #316 — `/stats/` foundation
+
+Publish exact-count statistics for:
+
+- total assets and lifecycle groups;
+- organizations, events, and evidence;
+- asset class and reference targets;
+- backing and stabilization;
+- issuance and redemption.
+
+### PR #317 — historical, deployment, organization, and quality statistics
+
+Add:
+
+- events by year;
+- depeg outcomes;
+- failures and lifecycle transitions;
+- deployments by chain and type;
+- organization roles;
+- data-quality coverage;
+- known-unknown coverage;
+- verification recency.
+
+Statistics must not become price, market-cap, yield, safety, or risk rankings.
+
+## Phase E — controlled growth from 100 to 110
+
+### PR #318 — next candidate audit
+
+Audit the next growth pool for duplicate identity, lineage, issuer identity, launch boundary, lifecycle, reference target, backing, redemption, reserve applicability, deployments, event history, and primary-source availability.
+
+### PR #319-#323 — two assets per PR
+
+```text
+PR #319  100 -> 102
+PR #320  102 -> 104
+PR #321  104 -> 106
+PR #322  106 -> 108
+PR #323  108 -> 110
+```
+
+Each growth PR is limited to two assets and must preserve all applicable supporting record groups. Unknown information remains explicit.
+
+## Operating rules
+
+- Repository specifications are the source of truth.
+- UI is maintenance-only unless the roadmap is deliberately amended.
+- Every non-trivial PR cites the exact specification, queue, audit, fixture, baseline, and validator it changes.
+- Unknown values remain unknown unless reviewed evidence supports a value.
+- Monitoring candidates never write directly to canonical public data.
+- Monitoring executions remain read-only and never update their own accepted baseline.
+- Normal merged changes publish from `main` under `docs/deployment-policy.md`.
+- Growth PRs contain no more than two new stable assets.
+- A phase transition updates this roadmap before the next implementation sequence continues.
+
+## Immediate next item
+
+```text
+PR #296  Resume core workstream and synchronize repository authority
+then
+PR #297  100-record identity uniqueness and lineage audit
+```
