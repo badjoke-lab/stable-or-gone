@@ -57,7 +57,7 @@ docs/roadmap.md
 Current position:
 
 ```text
-Current main checkpoint before resumption PR: 8dfde0222b66e255d13285a5154d7508261dfc55
+Current main checkpoint: 51b3acd075dc1a661930574339e9128d718c7b75
 Canonical stable assets: 100
 Organizations: 94
 Events: 172
@@ -67,15 +67,15 @@ Growth D: complete
 100-record production verification: recorded
 Dedicated UI program: stopped after PR #295
 UI mode: maintenance-only
-Active: PR #296 workstream resumption and repository-authority synchronization
-Next: PR #297 identity uniqueness and lineage audit
+Active: PR #297 identity uniqueness and lineage audit
+Next: PR #298 organization and relationship integrity audit
 ```
 
 ## Active sequence
 
 ```text
-PR #296       resume core workstream and synchronize authority
-PR #297-#304  100-record registry-wide audit
+PR #296       resume core workstream and synchronize authority — complete
+PR #297-#304  100-record registry-wide audit — active
 PR #305-#309  non-UI release hardening
 PR #310-#313  monitoring expansion and scheduled read-only operation
 PR #314-#317  statistics implementation

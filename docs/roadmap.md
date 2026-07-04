@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: 8dfde0222b66e255d13285a5154d7508261dfc55
+Current main checkpoint: 51b3acd075dc1a661930574339e9128d718c7b75
 Canonical stable assets: 100
 Organizations: 94
 Events: 172
@@ -15,8 +15,8 @@ Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
 Active workstream: 100-record registry-wide audit
-Current item: PR #296 workstream resumption and schedule synchronization
-Next implementation item: PR #297 identity uniqueness and lineage audit
+Current item: PR #297 identity uniqueness and lineage audit
+Next implementation item: PR #298 organization and relationship integrity audit
 ```
 
 The owner ended the dedicated UI correction program after PR #295. UI defects may be corrected through narrow maintenance PRs when concrete problems are found, but UI work is no longer the active workstream and must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
@@ -29,7 +29,8 @@ The owner ended the dedicated UI correction program after PR #295. UI defects ma
 - review-only monitoring foundation and coverage work completed through PR #245;
 - reviewed final-eight growth completed;
 - Growth D rebuilt and merged from current implementation lineage;
-- production verification recorded for the 100-record state.
+- production verification recorded for the 100-record state;
+- PR #296 resumed the core workstream and synchronized repository authority.
 
 ### Current verified baseline
 
@@ -42,7 +43,7 @@ Evidence: 501
 Detail routes: 366
 ```
 
-Growth D added the final two reviewed assets required for the 100-record checkpoint. The registry-wide audit planned for the 100-record state has not yet been executed as a complete current-main sequence.
+Growth D added the final two reviewed assets required for the 100-record checkpoint. The registry-wide audit is now executing against the current 100-record baseline.
 
 ### UI maintenance checkpoint
 
@@ -57,15 +58,21 @@ Rules from this point:
 
 ## Phase A — 100-record registry-wide audit
 
-### PR #296 — resume the core workstream
+### PR #296 — resume the core workstream — complete
 
-- replace stale UI-active roadmap state;
-- mark UI as maintenance-only;
-- activate the 100-record registry-wide audit;
-- synchronize `AGENTS.md`, governance, non-UI plan, and active-workstream validation;
-- preserve canonical data and public output.
+- replaced stale UI-active roadmap state;
+- marked UI as maintenance-only;
+- activated the 100-record registry-wide audit;
+- synchronized `AGENTS.md`, governance, non-UI plan, and active-workstream validation;
+- preserved canonical data and public output.
 
-### PR #297 — identity uniqueness and lineage
+Merge checkpoint:
+
+```text
+51b3acd075dc1a661930574339e9128d718c7b75
+```
+
+### PR #297 — identity uniqueness and lineage — active
 
 Audit all 100 assets for:
 
@@ -83,9 +90,20 @@ token upgrades
 chain-specific representations
 ```
 
-Fail on duplicated canonical identity or unresolved lineage conflicts. A rebrand, migration continuation, wrapped representation, or deployment must not become a second canonical asset without explicit scope support.
+Current audit result:
 
-### PR #298 — organization and relationship integrity
+```text
+stable assets audited: 100
+promoted candidate mappings: 100
+critical identity findings: 0
+candidate alias gaps after correction: 0
+explicit lineage relationships: 4
+lineage cycles: 0
+```
+
+The first audit run found one reviewed candidate alias missing from the canonical Acala identity. `Acala USD` was restored to the canonical alias set. Shared symbols remain review-visible but do not prove duplicate canonical identity. Organization-domain and HUSD source-boundary warnings are carried into PR #298.
+
+### PR #298 — organization and relationship integrity — next
 
 Audit:
 
@@ -94,7 +112,8 @@ Audit:
 - governance and reserve-management roles;
 - current and historical relationships;
 - primary display relationship selection;
-- relationship status and end-boundary consistency.
+- relationship status and end-boundary consistency;
+- organization official-domain ownership and historical-source boundaries.
 
 ### PR #299 — evidence integrity
 
@@ -317,7 +336,7 @@ Each growth PR is limited to two assets and must preserve all applicable support
 ## Immediate next item
 
 ```text
-PR #296  Resume core workstream and synchronize repository authority
+PR #297  Complete and merge the 100-record identity uniqueness and lineage audit
 then
-PR #297  100-record identity uniqueness and lineage audit
+PR #298  Audit organization identity and relationship integrity
 ```
