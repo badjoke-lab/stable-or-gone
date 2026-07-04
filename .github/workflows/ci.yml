@@ -22,8 +22,10 @@ jobs:
         run: npm run validate:guides
       - name: Validate baseline
         run: npm run validate:baseline
-      - name: Validate Growth D 100-record workstream
+      - name: Validate 100-record core workstream
         run: npm run validate:active-workstream
+      - name: Validate 100-record identity and lineage audit
+        run: node scripts/validate-registry-identity-lineage-audit.mjs
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
       - name: Validate unresolved terminal-date queue
