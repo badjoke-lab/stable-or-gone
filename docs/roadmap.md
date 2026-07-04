@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: 235330adcbb3b0ebe6440a25dc1ff9c9886f0393
+Current main checkpoint: 349b38c7641578e6a7be58a91256092722bcdb4f
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -17,8 +17,8 @@ Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
 Active workstream: 100-record registry-wide audit
-Current item: PR #299 evidence and source-identity integrity audit
-Next implementation item: PR #300 reserve, redemption, and backing applicability audit
+Current item: PR #300 reserve, redemption, and backing applicability audit
+Next implementation item: PR #301 deployment and chain identity audit
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
@@ -28,12 +28,13 @@ The dedicated UI correction program ended after PR #295. Verified UI defects may
 - PR #296 resumed the core workstream and synchronized repository authority.
 - PR #297 completed identity uniqueness and lineage audit.
 - PR #298 completed organization and relationship integrity audit.
+- PR #299 completed evidence and source-identity integrity audit.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry has reached the verified 100-record checkpoint.
 
 ## Phase A — 100-record registry-wide audit
 
-### PR #296 — complete
+### PR #296 — workstream resumption — complete
 
 Merge checkpoint:
 
@@ -80,7 +81,7 @@ legacy issuer compatibility gaps: 0
 orphan organizations: 0
 ```
 
-Bounded review queues remain explicit:
+Bounded queues remain explicit:
 
 ```text
 historical organization without official URL: 1
@@ -88,11 +89,15 @@ intentional shared USYC product URL: 1
 ended relationships with unresolved exact end date: 4
 ```
 
-### PR #299 — evidence and source-identity integrity — active
+### PR #299 — evidence and source-identity integrity — complete
 
-Audit all 501 canonical evidence records, their 455 public source identities, and all 501 evidence relations.
+Merge checkpoint:
 
-Current result:
+```text
+349b38c7641578e6a7be58a91256092722bcdb4f
+```
+
+Result:
 
 ```text
 canonical evidence records: 501
@@ -101,32 +106,54 @@ evidence relations: 501
 source identity groups: 33
 source aliases: 46
 critical findings: 0
-normalized-only duplicate URL groups: 0
 public duplicate URL groups: 0
 orphan relation source identities: 0
-public source identities without relations: 0
-publisher gaps: 0
-reliability gaps: 0
-claim-scope gaps: 0
+publisher/reliability/claim-scope gaps: 0
 unknown taxonomy/provenance/primary/reliability: 0
+archive not recorded queue: 173
 ```
 
-Archive coverage remains explicit:
+### PR #300 — reserve, redemption, and backing applicability — active
+
+Current result:
 
 ```text
-archive index recorded: 328
-archive not recorded: 173
+stable assets: 100
+classifications: 100
+reserve/redemption profiles: 100
+reserve-context rows: 108
+assets covered by reserve-context rows: 88
+assets covered by explicit applicability decisions: 12
+overlap: 0
+uncovered: 0
+critical findings: 0
+backing mismatches: 0
+invalid reserve/redemption references: 0
 ```
 
-An absent archive reference is a quality queue item, not an invalid evidence record, and must not be filled with an unverified archive URL.
+Bounded review queues:
 
-### PR #300 — reserve, redemption, and backing applicability — next
+```text
+reserve-context rows without period-specific report_date: 64
+FEI lifecycle/redemption review item: 1
+redemption source-review-needed fields: 10
+reserve source-status unresolved assets: 2
+```
 
-Audit every asset across reserve applicability, reserve-report availability, backing model, stabilization mechanism, redemption status and access, fee and minimum disclosure, eligibility and jurisdiction restrictions, and unknown versus not-applicable semantics.
+The audit treats undated transparency indexes, protocol context pages, and source entry points as valid context rows rather than fabricating period-specific dates. FEI remains reviewable rather than being silently rewritten.
 
-### PR #301 — deployment and chain identity
+### PR #301 — deployment and chain identity — next
 
-Audit chain/network identity, contract uniqueness, deployment status, verification state, native/bridged/wrapped/synthetic classification, bridge relationships, legacy deployments, and control-capability knowledge state.
+Audit:
+
+- chain and network identity;
+- contract or identifier uniqueness;
+- deployment status;
+- verification state;
+- issuer-native versus bridged versus wrapped versus synthetic status;
+- canonical and third-party bridge relationships;
+- legacy deployments;
+- freeze, blacklist, and control-capability knowledge state.
 
 ### PR #302 — lifecycle boundary audit
 
@@ -200,7 +227,7 @@ Each growth PR is limited to two assets and must preserve all applicable support
 ## Immediate next item
 
 ```text
-PR #299 complete and merge evidence and source-identity integrity audit
+PR #300 complete and merge reserve, redemption, and backing applicability audit
 then
-PR #300 audit reserve, redemption, and backing applicability across 100 assets
+PR #301 audit deployment and chain identity across the 100-record registry
 ```
