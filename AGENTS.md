@@ -11,27 +11,16 @@ Before changing code, data, workflows, or documentation, read:
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. the canonical plan for the active work item
-6. the relevant data, monitoring, editorial, or UI specification
+6. the relevant data, monitoring, statistics, editorial, or UI-maintenance specification
 7. every queue, validator, audit, fixture, and baseline named by the work item
 
-For the active UI remediation, also read:
+For active core data work, also read:
 
 ```text
-docs/ui-redesign/master-spec.md
-docs/architecture/approved-editorial-ledger-ui-v3.md
-docs/ui-redesign/approved-mocks-v3/README.md
-docs/ui-redesign/implementation-plan.md
-docs/public-taxonomy-spec.md
-DESIGN.md
-```
-
-For data work, also read:
-
-```text
+docs/quality/non-ui-quality-program.md
 docs/stable-asset-scope.md
 docs/classification-spec.md
 docs/data-model-v3-spec.md
-docs/stats-spec.md
 docs/migration/registry-v3-baseline.json
 ```
 
@@ -44,78 +33,78 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
+For statistics work, also read:
+
+```text
+docs/stats-spec.md
+```
+
 ## Repository source of truth
 
 Repository specifications outrank chat memory, handoff prose, external mock copies, issue discussion, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
 
 ## Current workstream
 
-The active workstream is the Editorial Ledger UI v3 remediation defined by:
+The dedicated UI program is stopped. UI is maintenance-only.
+
+The active workstream is the 100-record registry-wide audit defined by:
 
 ```text
-docs/architecture/approved-editorial-ledger-ui-v3.md
-docs/ui-redesign/implementation-plan.md
+docs/quality/non-ui-quality-program.md
 docs/roadmap.md
 ```
 
 Current position:
 
 ```text
-Latest completed: PR #272 accessibility, performance, and legacy cleanup
-Partial precursor: PR #266 Organization and Event row compaction
-Active: PR #273 production verification and UI v3 closure
-Next after closure: rebuild Growth D from latest main
-Closure: PR #273 production verification and UI v3 closure
-Canonical stable assets: 98
-Growth D PR #251: stale draft; do not merge as-is
-Gate V3-A: passed
-Gate V3-B: passed
-Gate V3-C: passed
-Gate V3-D: passed
-Gate V3-E: passed
-Gate V3-F: passed
-Gate V3-G: pending exact release-candidate approval
-Gate V3-H: pending production commit and public parity verification
-Production publication: automatic on main
+Current main checkpoint before resumption PR: 8dfde0222b66e255d13285a5154d7508261dfc55
+Canonical stable assets: 100
+Organizations: 94
+Events: 172
+Evidence: 501
+Detail routes: 366
+Growth D: complete
+100-record production verification: recorded
+Dedicated UI program: stopped after PR #295
+UI mode: maintenance-only
+Active: PR #296 workstream resumption and repository-authority synchronization
+Next: PR #297 identity uniqueness and lineage audit
 ```
 
-All public page families now use Editorial Ledger v3 structures. PR #267 completed Organizations and Events. PR #268 completed Guides. PR #269 completed Reference, Long-form, and Utility pages. PR #270 completed mobile and accessibility hardening. PR #271 completed the rendered desktop/mobile audit and passed Gate V3-F. PR #272 removed only verified-unused v2 presentation assets, established passing build budgets, and proved pixel-identical rendering with no accessibility regression. PR #273 is now the active production closure step.
-
-Growth D, the 100-record audit, and non-UI release preparation are paused through PR #273. Urgent factual corrections, source-backed editorial corrections, verified public breakage, and security fixes may interrupt through a narrow PR.
-
-## Visual authority
-
-The binding visual and page-layout authority is:
+## Active sequence
 
 ```text
-docs/architecture/approved-editorial-ledger-ui-v3.md
+PR #296       resume core workstream and synchronize authority
+PR #297-#304  100-record registry-wide audit
+PR #305-#309  non-UI release hardening
+PR #310-#313  monitoring expansion and scheduled read-only operation
+PR #314-#317  statistics implementation
+PR #318        next candidate audit
+PR #319-#323  controlled growth from 100 to 110
 ```
 
-The active reference direction is:
+Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
 
-```text
-docs/ui-redesign/approved-mocks-v3/README.md
-```
+## UI maintenance rules
 
-Historical references must not override v3:
+There is no active redesign sequence.
 
-```text
-docs/architecture/approved-modern-data-product-ui-v2.md
-docs/ui-redesign/approved-mocks-v2/
-docs/architecture/visual-system-and-mocks-v1.md
-```
+A UI PR is allowed only for a concrete verified defect or an explicit owner-directed change. A maintenance PR must:
+
+- remain narrow;
+- preserve the current terminal visual family unless the owner explicitly changes direction;
+- preserve canonical data, route meaning, machine-readable output, and accessibility contracts unless separately authorized;
+- use actual rendered desktop/mobile evidence for visual or responsive claims;
+- not displace the active core schedule.
 
 No agent may:
 
 - invent another visual direction;
 - substitute or generate another logo;
 - redesign a page from memory;
-- use the rejected SaaS dashboard mock direction;
-- reintroduce a giant hero, KPI card row, blue-purple glow, or repeated rounded-card composition as defaults;
-- restore `PageHero.astro`, `MetricCard.astro`, `editorial-v2.css`, `.page-hero`, or `.metric-card` to production source;
-- weaken the PR #272 performance ceilings without a measured replacement baseline;
+- revive rejected Modern Data Product, Editorial Ledger, or Modern Evidence Registry directions as active authority;
 - implement mock-only data as canonical data;
-- alter the active UI sequence without updating the roadmap and implementation plan.
+- alter the core PR sequence without updating the roadmap and canonical plan.
 
 Approved production assets:
 
@@ -128,27 +117,6 @@ public/brand/sog-mark-on-dark.svg
 
 Stablecoin identity may use a reviewed local official logo when available; otherwise use the ticker fallback. Do not hotlink or generate imitation coin or organization logos.
 
-## UI v3 operating rules
-
-- The default public surface is a light paper-like background with dark ink.
-- Typography, rules, spacing, columns, and hierarchy replace dashboard panels.
-- Home is a registry front page, not a product landing page.
-- Stablecoins use a table-first public register.
-- Stablecoin details use a research dossier.
-- Organizations use responsible-body records.
-- Events use incident/public-record files.
-- Guides use a distinct editorial article layout with explicit publication value states and on-page contents navigation.
-- Models, Glossary, and Updates use scan-friendly Reference indexes.
-- Methodology and About use the Long-form family with readable width and contents navigation.
-- Contact/Corrections and Support use the Utility family and must preserve reporting and payment functions.
-- Mobile is a deliberate transformation and must retain protected information.
-- Representative screenshot sampling is the default.
-- Gate V3-F requires actual desktop and mobile image artifacts plus human review; static source checks alone are insufficient.
-- PR #271 established the passing baseline: 24 routes per device, 48 reviewed full-page images, and zero automated rendered failures.
-- PR #272 reran that baseline after removing the legacy layer and produced 48 pixel-identical images with zero rendered failures.
-- `scripts/validate-ui-v3-cleanup.mjs` is the source-level legacy and accessibility guard.
-- `scripts/audit-ui-v3-cleanup-performance.mjs` is the post-build asset and rendered-output budget guard.
-
 ## Data and quality rules
 
 - Cite the exact queue, validator, audit, schema, fixture, and baseline used by each PR.
@@ -156,22 +124,50 @@ Stablecoin identity may use a reviewed local official logo when available; other
 - Do not coerce month- or year-level evidence into a day-level date.
 - Preserve evidence relations, known unknowns, deployments, source identities, and value states.
 - UI work must not clear quality queues through hiding, defaults, or relabeling.
+- Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
+- A rebrand, migration continuation, wrapped representation, deployment, or alias must not become a separate canonical asset without scope support and lineage review.
+
+## Monitoring rules
+
 - Monitoring output is candidate material only and must not write directly to canonical public data.
 - Monitoring executions remain read-only and may not update their own accepted baseline.
+- An unchanged normalized official source must not create a candidate.
 - Metadata-only changes and fetch failures must not masquerade as content changes.
-- Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
-- Contact paths, wallet assets, networks, addresses, and copy functions must not change during cleanup unless explicitly authorized.
-- The old PR #251 must not be merged as-is. Growth D must be rebuilt from the latest main after UI v3 closes.
+- Monitoring may not create branches, pull requests, publications, or deployments automatically.
+- A baseline change requires a separate human-reviewed repository change.
 
-## Mock-only exclusions
+## Statistics rules
+
+- `docs/stats-spec.md` is binding.
+- Statistics derive from canonical loader output at build time.
+- Unknown categories remain visible.
+- Multi-select dimensions are not presented as mutually exclusive.
+- Asset counts and deployment counts remain distinct.
+- Do not add live price, market-cap, yield, safety, transparency, or risk rankings.
+
+## Growth rules
+
+Growth beyond 100 begins only after the preceding audit, hardening, monitoring, statistics, and candidate-audit phases in `docs/roadmap.md`.
+
+When growth resumes:
+
+- no more than two new stable assets per PR;
+- fresh branch from current main;
+- reviewed candidates only;
+- duplicate and lineage checks required;
+- all applicable supporting record groups required;
+- unknown information remains explicit.
+
+## Mock-only and unsupported-data exclusions
 
 Do not add mock-only live prices, market capitalization, circulating supply, holder counts, market charts, growth deltas, saved views, watchlists, accounts, follow buttons, unsupported badges, transparency or safety scores, invented reserve totals, invented evidence counts, invented timestamps, or unsupported legal claims.
 
 Only canonical data, approved editorial copy, generated canonical counts, and separately approved sourced integrations may become public claims.
 
-## Non-negotiable deployment rule
+## Deployment rule
 
-Development and production publication are connected by the automatic `main` publication workflow.
+Development and production publication are connected by the `main` publication workflow described in `docs/deployment-policy.md`.
 
-- GitHub CI success is the completion condition for pull-request development work.
-- A normal pull request must not wait for Cloudflare Pages.
+- GitHub CI success is the completion condition for normal pull-request development work.
+- Monitoring execution remains publication-neutral and read-only.
+- Do not claim production parity without the repository's production provenance and output-parity checks.
