@@ -7,7 +7,7 @@ const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const check = (condition, message) => { if (!condition) throw new Error(message); };
 
-const datedGuideSlugs = ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc', 'uk-stablecoin-capital-rules-2026', 'open-usd-reserve-revenue-model'];
+const datedGuideSlugs = ['eu-stablecoin-access-after-mica', 'genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc', 'uk-stablecoin-capital-rules-2026', 'open-usd-reserve-revenue-model'];
 const evergreenGuideSlugs = ['what-is-a-depeg', 'status-vs-event', 'reserve-disclosure-basics', 'stablecoin-lifecycle-terms'];
 const catalog = read('src/data/guideCatalog.ts');
 const slugs = catalog.split('\n').map((line) => line.trim()).filter((line) => line.startsWith("slug: '")).map((line) => line.slice(7).split("'")[0]).filter(Boolean);
@@ -23,6 +23,11 @@ check(catalog.includes("slug: 'open-usd-reserve-revenue-model'"), 'Open USD guid
 check(catalog.includes("informationCurrentThrough: '2026-07-01'"), 'Open USD information date was not updated');
 check(catalog.includes("updatedAt: '2026-07-01'"), 'Open USD updated date missing');
 check(catalog.includes('all reserve earnings after a small management fee'), 'Open USD catalog summary does not reflect the official earnings claim');
+check(catalog.includes("slug: 'eu-stablecoin-access-after-mica'"), 'EU stablecoin access guide catalog entry missing');
+check(catalog.includes("title: 'After MiCA: Which Stablecoins Can Europeans Actually Use?'"), 'EU stablecoin access guide title missing');
+check(catalog.includes("publishedAt: '2026-07-05'"), 'EU stablecoin access guide publication date missing');
+check(catalog.includes("informationCurrentThrough: '2026-07-05'"), 'EU stablecoin access guide information date missing');
+check(catalog.includes("regionLabel: 'European Union / EEA'"), 'EU stablecoin access guide regional metadata missing');
 for (const slug of evergreenGuideSlugs) check(slugs.includes(slug), `Evergreen guide catalog entry missing: ${slug}`);
 
 for (const slug of slugs) {
@@ -46,6 +51,35 @@ check(openUsdPage.includes('Stripe says Open USD will be the default stablecoin 
 check(openUsdPage.includes('not the same as announcing a finalized custody or banking role'), 'Open USD BNY role caveat missing');
 check(openUsdPage.includes('No automatic holder-yield right'), 'Open USD holder-yield distinction missing');
 
+const euAccessPage = read('src/pages/guides/eu-stablecoin-access-after-mica/index.astro');
+const euAccessGateReview = read('docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md');
+const euAccessFunctionBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-function-batch-03.json'));
+check(euAccessGateReview.includes('publication gate:                               pass'), 'EU market access publication gate was not recorded as passed');
+check(euAccessGateReview.includes('A. Asset-specific function evidence'), 'EU market access gate review missing A-level evidence contract');
+check(euAccessGateReview.includes('B. Current platform-wide service-state evidence'), 'EU market access gate review missing B-level evidence contract');
+check(euAccessGateReview.includes('C. General service/licensing context'), 'EU market access gate review missing C-level evidence contract');
+check(euAccessFunctionBatch.gate_effect?.publication_ready === false, 'Checkpoint 03 source batch must remain a research checkpoint rather than self-authorizing publication');
+check(euAccessPage.includes('This guide is a reviewed snapshot current through July 5, 2026.'), 'EU market access guide snapshot date missing');
+check(euAccessPage.includes('/guides/mica-stablecoins/'), 'EU market access guide must link to the MiCA framework guide');
+check(euAccessPage.includes('Reported from customer-notice coverage') || euAccessPage.includes('reported from customer-notice'), 'EU market access guide must preserve conservative reported Revolut treatment');
+check(euAccessPage.includes('Reviewed asset-specific function examples'), 'EU market access guide A-level comparison section missing');
+check(euAccessPage.includes('Current platform service state can override an older token table'), 'EU market access guide B-level service-state section missing');
+for (const url of [
+  'https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica',
+  'https://www.binance.com/en/support/announcement/detail/bcaa1f68d6a6450099056ff694ad6c46',
+  'https://support.kraken.com/articles/stablecoin-offerings-for-eea-clients',
+  'https://blog.bitstamp.net/post/mica-regulation-update-on-select-assets-in-the-eueea/',
+  'https://www.okx.com/en-eu/buy-usdt',
+  'https://www.okx.com/en-eu/buy-usdc',
+  'https://crypto.com/eea',
+  'https://www.bybit.eu/en-EU/help-center/article/Everything-You-Need-to-Know-to-Get-Started-on-Bybit',
+  'https://support.gemini.com/hc/en-gb',
+  'https://uphold.com/en-eu',
+  'https://www.coinbase.com/en-de/price/tether',
+  'https://www.coinbase.com/en-de/price/dai',
+  'https://www.coinbase.com/en-de/price/paypal-usd'
+]) check(euAccessPage.includes(url), `EU market access guide missing reviewed source URL: ${url}`);
+
 const guideIndexRoute = read('src/pages/guides/index.astro');
 const guideIndex = read('src/components/GuideEditorialIndex.astro');
 check(guideIndexRoute.includes('GuideEditorialIndex'), 'Guides route must use GuideEditorialIndex');
@@ -66,6 +100,7 @@ check(!home.includes("getGuide('genius-act-stablecoins')"), 'Homepage must not h
 
 const linkMap = read('src/data/stablecoinGuideLinks.ts');
 for (const slug of datedGuideSlugs) check(linkMap.includes(`'${slug}': [`), `Stablecoin guide link map missing: ${slug}`);
+for (const stablecoinSlug of ['usdt', 'usdc', 'eurc', 'dai', 'pyusd', 'rlusd', 'euri', 'eurcv', 'eurq', 'usdq', 'usdg']) check(linkMap.includes(`'${stablecoinSlug}'`) || linkMap.includes(`'${stablecoinSlug}',`) || linkMap.includes(`, '${stablecoinSlug}'`), `EU market access guide link coverage missing: ${stablecoinSlug}`);
 
 const detail = read('src/components/StablecoinDetailView.astro');
 const relatedSection = read('src/components/StablecoinRelatedSection.astro');
@@ -77,5 +112,8 @@ const updates = JSON.parse(read('data/registry-updates.json'));
 const datedGuidesUpdate = updates.find((entry) => entry.id === 'sog_update_2026_06_25_pr129_pr132_dated_guides');
 check(Boolean(datedGuidesUpdate), 'Original dated-guide update entry missing');
 for (const slug of ['genius-act-stablecoins', 'mica-stablecoins', 'jpyc-vs-jpysc']) check(datedGuidesUpdate.related_paths.includes(`/guides/${slug}/`), `Original update route missing: ${slug}`);
+const euAccessUpdate = updates.find((entry) => entry.id === 'sog_update_2026_07_05_eu_stablecoin_access_guide');
+check(Boolean(euAccessUpdate), 'EU stablecoin access guide registry update entry missing');
+check(euAccessUpdate.related_paths.includes('/guides/eu-stablecoin-access-after-mica/'), 'EU stablecoin access guide update route missing');
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, reference_utility_v3: true, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, reference_utility_v3: true, eu_market_access_gate_reviewed: true, guide_slugs: slugs }, null, 2));
