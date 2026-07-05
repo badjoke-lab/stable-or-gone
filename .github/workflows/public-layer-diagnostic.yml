@@ -1,0 +1,21 @@
+name: Public layer diagnostic
+
+on:
+  pull_request:
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: Build site
+        run: npm run build:site
+      - name: Diagnose public breakdown mismatch
+        run: node scripts/verify-public-layer-diagnostic.mjs
