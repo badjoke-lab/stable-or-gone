@@ -34,5 +34,23 @@
     "organization_ids": ["sog_issuer_gmo_trust"],
     "claim_scopes": ["launch_date", "service_start", "issuer_history"],
     "notes": "The later official retrospective independently states that GYEN and ZUSD service began on 2021-03-01 New York time."
+  },
+  {
+    "id": "sog_src_usdf_contracts_pr301",
+    "stablecoin_id": "sog_st_usdf",
+    "issuer_id": "sog_issuer_falcon_finance",
+    "source_type": "official_documentation",
+    "title": "Falcon Finance Smart Contracts",
+    "url": "https://docs.falcon.finance/resources/smart-contracts",
+    "publisher": "Falcon Finance",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.falcon.finance/resources/smart-contracts",
+    "accessed_at": "2026-07-05",
+    "reliability": "high",
+    "claim_scope": "official_contract_identity",
+    "stablecoin_ids": ["sog_st_usdf"],
+    "organization_ids": ["sog_issuer_falcon_finance"],
+    "claim_scopes": ["contract_address", "deployment", "network", "verification"],
+    "event_ids": []
   }
 ]
