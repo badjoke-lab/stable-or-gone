@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: ed6fe84ecf1cf7998f6be751b1af0df084dda735
+Current main checkpoint: afaffd6b200803a873208d0fc8718d2642b0b9c8
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -18,15 +18,14 @@ Deployments: 140
 Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
-Active workstream: 100-record registry-wide audit
-Current item: PR #302 lifecycle and relationship boundary audit
-Owner-directed insertion: PR #303 specification and schedule amendment for EU stablecoin market access
-Next public implementation after PR #302: PR #304 reviewed EU stablecoin market-access guide
+Active workstream: EU/EEA stablecoin market-access research checkpoint
+Current item: PR #304 reviewed research matrix, checkpoints, and schedule synchronization
+Next item: PR #305 reviewed EU stablecoin market-access guide after publication gates pass
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
 
-The owner-directed EU stablecoin market-access work is a bounded editorial and monitoring extension. Research may proceed in parallel with PR #302 after PR #303 is merged. The public article implementation waits until PR #302 is merged. After the article PR, the core audit sequence resumes immediately.
+The market-access article is not yet publishable. Research has met the breadth floor of ten platforms with reviewed findings or service context, but several platforms still lack scoped first-party function-level evidence. The article remains blocked until the publication gate in `docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md` is satisfied.
 
 ## Completed foundation
 
@@ -36,22 +35,19 @@ The owner-directed EU stablecoin market-access work is a bounded editorial and m
 - PR #299 completed evidence and source-identity integrity audit.
 - PR #300 completed reserve, redemption, and backing applicability audit.
 - PR #301 completed deployment and chain identity audit.
+- PR #302 completed lifecycle and relationship boundary audit.
+- PR #303 merged the EU stablecoin market-access research, publication, and monitoring specification and revised execution schedule.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry has reached the verified 100-record checkpoint.
 
-## Owner-directed EU stablecoin market-access insertion
+## EU stablecoin market-access insertion
 
-### PR #303 — specification and schedule amendment — active
+### PR #303 — specification and schedule amendment — complete
 
-Purpose:
+Merge checkpoint:
 
 ```text
-freeze the research question
-freeze the platform/asset/function matrix
-freeze source hierarchy and publication gates
-freeze article placement and revision policy
-freeze the later monitoring extension
-record the revised PR sequence
+39f6ef36ec381f25135e6369699af37537fef812
 ```
 
 Binding specification:
@@ -60,11 +56,57 @@ Binding specification:
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-This PR is documentation and schedule authority only. It does not publish the article, change canonical stablecoin data, expand live monitoring sources, add a schedule, or deploy.
+The specification fixes:
 
-### PR #304 — reviewed EU stablecoin market-access guide
+```text
+research question
+platform × asset × function × region/legal-entity matrix
+source hierarchy
+publication gate
+article route and revision policy
+material-change rules
+later monitoring cadence
+read-only monitoring safety boundary
+```
 
-Begins only after PR #302 is merged.
+### PR #304 — research checkpoint and schedule synchronization — active
+
+Purpose:
+
+```text
+store reviewed research findings outside canonical registry data
+record source hierarchy and unresolved evidence gaps
+separate platform licensing/service context from stablecoin function availability
+record current Binance 2026 service context separately from its 2025 stablecoin policy
+record official Revolut CASP legal-entity context separately from unresolved USDT policy details
+synchronize repository authority after PR #302 and PR #303 merges
+```
+
+Research artifacts:
+
+```text
+data/editorial-research/eu-stablecoin-market-access.json
+data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
+docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
+```
+
+Current research gate:
+
+```text
+minimum platform breadth:                    met
+platforms with reviewed findings/context:    10
+minimum stable-asset breadth:                met as touched-by-reviewed-findings breadth
+function-level matrix complete:              no
+ESMA register cross-check started:           yes
+Revolut USDT policy scope confirmed:         no
+publication-date current-state recheck:       no
+article publishable:                         no
+```
+
+The stable-asset breadth result does not mean every asset has a complete cross-platform matrix. It means the research has touched at least fifteen assets through reviewed findings. Publication still requires adequate function-level evidence for the comparative claims actually used in the article.
+
+### PR #305 — reviewed EU stablecoin market-access guide — next after gate completion
 
 Target route:
 
@@ -77,11 +119,12 @@ Required preconditions:
 ```text
 at least 10 platforms researched
 at least 15 stable assets reviewed
-function-level access matrix complete enough for publication
+function-level access states separated
 EU/EEA/legal-entity scope preserved
-major claims backed primarily by regulator or first-party sources
+major platform claims backed primarily by regulator or first-party sources
 ESMA or relevant register cross-check completed
 Revolut scope represented conservatively if first-party confirmation remains incomplete
+article source list reviewed
 publication-date current-state recheck completed
 ```
 
@@ -89,212 +132,77 @@ The article is a dated reviewed editorial snapshot. It is not a live dashboard a
 
 ## Phase A — 100-record registry-wide audit
 
-### PR #296 — workstream resumption — complete
-
-Merge checkpoint:
+Completed:
 
 ```text
-51b3acd075dc1a661930574339e9128d718c7b75
+PR #297 identity uniqueness and lineage
+PR #298 organization and relationship integrity
+PR #299 evidence and source-identity integrity
+PR #300 reserve, redemption, and backing applicability
+PR #301 deployment and chain identity
+PR #302 lifecycle and relationship boundaries
 ```
 
-### PR #297 — identity uniqueness and lineage — complete
-
-Merge checkpoint:
+PR #302 merge checkpoint:
 
 ```text
-f97df82c023646220f44c72de9227eab7549d228
+afaffd6b200803a873208d0fc8718d2642b0b9c8
 ```
 
-Result:
+The audit preserved separate boundaries for contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, wind-down start, terminal state, relationship end, and rebrand transition.
 
-```text
-stable assets audited: 100
-promoted candidate mappings: 100
-critical identity findings: 0
-candidate alias gaps after correction: 0
-explicit lineage relationships: 4
-lineage cycles: 0
-```
-
-### PR #298 — organization and relationship integrity — complete
-
-Merge checkpoint:
-
-```text
-235330adcbb3b0ebe6440a25dc1ff9c9886f0393
-```
-
-Result:
-
-```text
-organizations audited: 94
-relationships audited: 110
-critical findings: 0
-invalid primary selections: 0
-ambiguous primary selections: 0
-legacy issuer compatibility gaps: 0
-orphan organizations: 0
-```
-
-Bounded queues remain explicit:
-
-```text
-historical organization without official URL: 1
-intentional shared USYC product URL: 1
-ended relationships with unresolved exact end date: 4
-```
-
-### PR #299 — evidence and source-identity integrity — complete
-
-Merge checkpoint:
-
-```text
-349b38c7641578e6a7be58a91256092722bcdb4f
-```
-
-Current baseline after the reviewed source addition in PR #301:
-
-```text
-canonical evidence records: 502
-public source identities: 456
-evidence relations: 502
-source identity groups: 33
-source aliases: 46
-critical findings: 0
-archive not recorded queue: 173
-```
-
-### PR #300 — reserve, redemption, and backing applicability — complete
-
-Merge checkpoint:
-
-```text
-8d1d3dce7faa0c3efe0f541a548aa7f6b65a31fa
-```
-
-Result:
-
-```text
-stable assets: 100
-classifications: 100
-reserve/redemption profiles: 100
-reserve-context rows: 108
-assets covered by reserve-context rows: 88
-assets covered by explicit applicability decisions: 12
-overlap: 0
-uncovered: 0
-critical findings: 0
-backing mismatches: 0
-invalid reserve/redemption references: 0
-```
-
-Bounded review queues:
-
-```text
-reserve-context rows without period-specific report_date: 64
-FEI lifecycle/redemption review item: 1
-redemption source-review-needed fields: 10
-reserve source-status unresolved assets: 2
-```
-
-### PR #301 — deployment and chain identity — complete
-
-Merge checkpoint:
-
-```text
-ed6fe84ecf1cf7998f6be751b1af0df084dda735
-```
-
-Result:
-
-```text
-deployments: 140
-stable assets with deployment rows: 100
-recorded chain labels: 35
-critical findings: 0
-duplicate identifier groups: 0
-invalid origin references: 0
-origin cycles: 0
-duplicate primary deployments: 0
-verification overlay ids: 140
-verification review-needed: 0
-verification not-recorded/unknown: 0
-```
-
-Verification distribution:
-
-```text
-verified: 19
-identifier_recorded_unverified: 45
-source_linked_no_identifier: 76
-```
-
-PR #301 detected and corrected a real USDf Ethereum contract-identity error, added one official Falcon Finance contract source, and expanded the deployment verification overlay from 130 to 140 rows.
-
-Bounded review queues:
-
-```text
-identifier not recorded: 76
-network review-needed: 2
-aggregate network context: 4
-freeze capability not recorded: 139
-blacklist capability not recorded: 139
-```
-
-### PR #302 — lifecycle and relationship boundary audit — active
-
-Audit:
-
-- launch boundaries;
-- terminal boundaries;
-- migration boundaries;
-- wind-down dates;
-- rebrand dates;
-- relationship end dates;
-- redemption deadlines versus actual terminal boundaries;
-- event chronology consistency;
-- lifecycle/status consistency.
-
-Contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, and terminal state remain separate concepts.
-
-### PR #305 — known-unknown and placeholder integrity
+### PR #306 — known-unknown and placeholder integrity
 
 Audit known unknowns, missing-value states, future-event placeholders, conflicting-source states, stale resolvable unknowns, and internal placeholder leakage into public output.
 
-### PR #306 — monitoring coverage recalculation for 100 assets
+### PR #307 — monitoring coverage recalculation for 100 assets
 
-Classify every asset as automatically monitorable, partially monitorable, manual-review-only, or without a reliable official source. Monitoring remains review-only.
+Classify every asset as automatically monitorable, partially monitorable, manual-review-only, or without a reliable official source.
 
-The report must separately identify market-access monitoring coverage introduced by the EU market-access specification rather than treating issuer-source reach as proof of platform-policy coverage.
+The report must separately identify issuer/protocol monitoring coverage from EU market-access platform-policy coverage. Existing issuer-source reach is not evidence that a platform's buy, trade, deposit, withdrawal, custody, or conversion policy is monitored.
 
 ## Phase B — non-UI release hardening
 
 ```text
-PR #307 Registry v2/v3 and machine-readable parity
-PR #308 counts, manifest, version, and provenance integrity
-PR #309 reproducible build and generated-output audit
-PR #310 audited 100-record canonical checkpoint
-PR #311 non-UI release material
+PR #308 Registry v2/v3 and machine-readable parity
+PR #309 counts, manifest, version, and provenance integrity
+PR #310 reproducible build and generated-output audit
+PR #311 audited 100-record canonical checkpoint
+PR #312 non-UI release material
 ```
 
 ## Phase C — monitoring expansion and operation
 
 ```text
-PR #312 100-asset monitoring baseline synchronization
-PR #313 reserve and redemption source expansion
-PR #314 lifecycle, regulatory, and EU market-access source/schema expansion
-PR #315 bounded scheduled read-only monitoring
+PR #313 100-asset monitoring baseline synchronization
+PR #314 reserve and redemption source expansion
+PR #315 lifecycle, regulatory, and EU market-access source/schema expansion
+PR #316 bounded scheduled read-only monitoring
 ```
 
-PR #314 must implement the approved market-access observation family described in:
+PR #315 implements the approved market-access observation family described in:
 
 ```text
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-The market-access extension must distinguish platform policy, regulatory-register state, issuer state, geographic scope, legal entity, product function, and effective date. It must not infer one function state from another.
+The implementation must distinguish:
 
-Target schedule after PR #315:
+```text
+platform policy
+regulatory-register state
+issuer state
+geographic scope
+legal entity
+stablecoin
+product function
+announcement date
+effective date
+source identity
+review state
+```
+
+Target schedule after PR #316:
 
 ```text
 platform policy sources: daily
@@ -312,10 +220,10 @@ Monitoring may observe, compare, classify, and create private review material. I
 The binding specification is `docs/stats-spec.md`.
 
 ```text
-PR #316 deterministic statistics generator and validator
-PR #317 immutable checkpoint history
-PR #318 /stats/ foundation
-PR #319 historical, deployment, organization, and data-quality statistics
+PR #317 deterministic statistics generator and validator
+PR #318 immutable checkpoint history
+PR #319 /stats/ foundation
+PR #320 historical, deployment, organization, and data-quality statistics
 ```
 
 Statistics derive from reviewed canonical data and must not become price, market-cap, yield, safety, or risk rankings.
@@ -323,15 +231,15 @@ Statistics derive from reviewed canonical data and must not become price, market
 ## Phase E — controlled growth from 100 to 110
 
 ```text
-PR #320 next candidate audit
-PR #321 100 -> 102
-PR #322 102 -> 104
-PR #323 104 -> 106
-PR #324 106 -> 108
-PR #325 108 -> 110
+PR #321 next candidate audit
+PR #322 100 -> 102
+PR #323 102 -> 104
+PR #324 104 -> 106
+PR #325 106 -> 108
+PR #326 108 -> 110
 ```
 
-Each growth PR is limited to two assets and must preserve all applicable supporting record groups. Unknown information remains explicit.
+Each growth PR is limited to two new stable assets and must preserve all applicable supporting record groups. Unknown information remains explicit.
 
 ## Operating rules
 
@@ -339,18 +247,22 @@ Each growth PR is limited to two assets and must preserve all applicable support
 - UI is maintenance-only unless the roadmap is deliberately amended.
 - Every non-trivial PR cites the exact specification, queue, audit, fixture, baseline, and validator it changes.
 - Unknown values remain unknown unless reviewed evidence supports a value.
-- Monitoring executions remain read-only and never update their own accepted baseline.
 - Market-access research preserves function-level and geographic scope instead of flattening access into an allowed/banned label.
+- A platform licence is not proof of stablecoin function availability.
+- A Global product page is not proof of EU/EEA service scope.
 - A source change never updates the public market-access guide automatically.
+- Monitoring executions remain read-only and never update their own accepted baseline.
 - Growth PRs contain no more than two new stable assets.
 - A phase transition updates this roadmap before the next implementation sequence continues.
 
 ## Immediate next items
 
 ```text
-1. Merge PR #303 specification and schedule amendment.
-2. Continue and merge PR #302 lifecycle and relationship boundary audit.
-3. Complete the reviewed EU/EEA market-access research matrix in parallel after PR #303 merge.
-4. Implement PR #304 reviewed EU stablecoin market-access guide only after PR #302 merge.
-5. Resume the core registry-wide audit at PR #305.
+1. Merge PR #304 research checkpoint and schedule synchronization.
+2. Continue first-party platform-policy research against the merged specification.
+3. Resolve or conservatively bound Revolut USDT scope and schedule.
+4. Resolve additional scoped function-level sources for Coinbase, OKX Europe, Crypto.com, Bybit EU, Bitpanda, Gemini, and Uphold where available.
+5. Recheck current state at publication time.
+6. Implement PR #305 only after the publication gate passes.
+7. Resume the core registry-wide audit at PR #306.
 ```
