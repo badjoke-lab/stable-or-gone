@@ -12,7 +12,7 @@ Before changing code, data, workflows, or documentation, read:
 4. `docs/deployment-policy.md`
 5. the canonical plan for the active work item
 6. the relevant data, monitoring, statistics, editorial, or UI-maintenance specification
-7. every queue, validator, audit, fixture, and baseline named by the work item
+7. every queue, validator, audit, fixture, baseline, and research checkpoint named by the work item
 
 For active core data work, also read:
 
@@ -37,29 +37,26 @@ For EU/EEA stablecoin market-access research, article work, or monitoring change
 
 ```text
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
+data/editorial-research/eu-stablecoin-market-access.json
+data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
+docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
 ```
 
 For statistics work, also read `docs/stats-spec.md`.
 
 ## Repository source of truth
 
-Repository specifications outrank chat memory, handoff prose, issue discussion, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
+Repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
 
 ## Current workstream
 
 The dedicated UI program is stopped. UI is maintenance-only.
 
-The active workstream is the 100-record registry-wide audit defined by:
-
-```text
-docs/quality/non-ui-quality-program.md
-docs/roadmap.md
-```
-
 Current position:
 
 ```text
-Current main checkpoint: ed6fe84ecf1cf7998f6be751b1af0df084dda735
+Current main checkpoint: afaffd6b200803a873208d0fc8718d2642b0b9c8
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -71,29 +68,30 @@ Deployments: 140
 Detail routes: 366
 Dedicated UI program: stopped after PR #295
 UI mode: maintenance-only
-Active: PR #302 lifecycle and relationship boundary audit
-Owner-directed insertion: PR #303 EU market-access specification and schedule amendment
-Next public implementation after PR #302: PR #304 reviewed EU stablecoin market-access guide
+PR #302 lifecycle and relationship boundary audit: complete
+PR #303 EU market-access specification and schedule amendment: complete
+Active: PR #304 EU/EEA market-access research checkpoint and schedule synchronization
+Next public implementation: PR #305 reviewed EU stablecoin market-access guide after publication gates pass
 ```
 
 ## Active sequence
 
 ```text
-PR #296-#301  resumed audit work through deployment and chain identity — complete
-PR #302       lifecycle and relationship boundary audit — active
-PR #303       EU market-access specification and schedule amendment — owner-directed insertion
-PR #304       reviewed EU stablecoin market-access guide after PR #302 merge
-PR #305-#306  remaining 100-record registry-wide audit
-PR #307-#311  non-UI release hardening
-PR #312-#315  monitoring expansion and scheduled read-only operation
-PR #316-#319  statistics implementation
-PR #320       next candidate audit
-PR #321-#325  controlled growth from 100 to 110
+PR #296-#302  registry-wide audit through lifecycle boundaries — complete
+PR #303       EU market-access specification and schedule amendment — complete
+PR #304       research checkpoint and schedule synchronization — active
+PR #305       reviewed EU stablecoin market-access guide after publication gate passes
+PR #306-#307  remaining 100-record registry-wide audit
+PR #308-#312  non-UI release hardening
+PR #313-#316  monitoring expansion and scheduled read-only operation
+PR #317-#320  statistics implementation
+PR #321       next candidate audit
+PR #322-#326  controlled growth from 100 to 110
 ```
 
 Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
 
-EU market-access research may proceed in parallel with PR #302 only after the market-access specification amendment is merged. Public article implementation waits until PR #302 is merged.
+The article is not automatically authorized merely because the ten-platform breadth floor is met. PR #305 begins only after the publication gate in the market-access specification passes.
 
 ## UI maintenance rules
 
@@ -105,7 +103,7 @@ Do not invent another visual direction, substitute a logo, revive rejected redes
 
 ## Data and quality rules
 
-- Cite the exact queue, validator, audit, schema, fixture, and baseline used by each PR.
+- Cite the exact queue, validator, audit, schema, fixture, baseline, and research checkpoint used by each PR.
 - Keep unknown values unknown unless reviewed evidence supports a value.
 - Do not coerce partial-date evidence into a day-level date.
 - Preserve evidence relations, known unknowns, deployments, source identities, and value states.
@@ -120,7 +118,7 @@ Do not invent another visual direction, substitute a logo, revive rejected redes
 
 ## Lifecycle boundary rules
 
-PR #302 must preserve distinct boundaries for:
+PR #302 completed the lifecycle-boundary audit. Future work must preserve distinct boundaries for:
 
 ```text
 contract deployment
@@ -143,13 +141,17 @@ Do not infer one boundary from another unless reviewed evidence explicitly suppo
 
 - Do not reduce EU/EEA stablecoin access to an allowed/banned boolean.
 - Preserve platform, legal entity, region, stablecoin, function, announcement date, and effective date separately.
-- Do not infer deposit, withdrawal, custody, trading, or conversion state from another function.
+- Do not infer deposit, withdrawal, custody, trading, Earn, margin, or conversion state from another function.
 - Do not rewrite EEA as EU when the source scope is EEA.
 - Do not generalize a customer-cohort or legal-entity notice to every global user.
 - Prefer regulators and official registers for regulatory claims.
 - Prefer first-party platform policy pages for function-level access claims.
-- Media and social posts may identify leads but do not by themselves fill an entire access matrix.
+- High-quality reporting may establish context or a reported notice but may not fill unsupported function cells.
+- A platform licence is not proof of stablecoin function availability.
+- A Global product page is not proof of EU/EEA service scope.
 - The public guide is a reviewed dated snapshot and never updates automatically from monitoring output.
+- Keep `not_confirmed` when evidence does not support a function state.
+- Distinguish historical platform stablecoin policy from later platform-wide service or licensing changes.
 
 ## Monitoring rules
 
@@ -159,7 +161,7 @@ Do not infer one boundary from another unless reviewed evidence explicitly suppo
 - Metadata-only changes and fetch failures must not masquerade as content changes.
 - Monitoring may not create branches, pull requests, publications, guide edits, or deployments automatically.
 - A baseline change requires a separate human-reviewed repository change.
-- Platform-policy monitoring must preserve function-level and geographic scope.
+- Platform-policy monitoring must preserve function-level, legal-entity, and geographic scope.
 
 ## Statistics rules
 

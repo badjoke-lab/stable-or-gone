@@ -1,0 +1,219 @@
+{
+  "schema_version": "0.1",
+  "research_id": "eu-stablecoin-market-access-2026",
+  "batch_id": "platform-context-batch-02",
+  "status": "research_in_progress",
+  "created_at": "2026-07-05",
+  "governing_spec": "docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md",
+  "purpose": "Record current CASP/service context and additional researched platforms without inventing stablecoin function states that are not yet supported by scoped platform sources.",
+  "reviewed_sources": [
+    {
+      "source_id": "ft-eu-casp-transition-2026-07-01",
+      "publisher": "Financial Times",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://www.ft.com/content/e19a0352-f76d-4293-870b-9ed5e01050fd",
+      "published_at": "2026-07-01",
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "ft-binance-eu-wind-down-2026-06-26",
+      "publisher": "Financial Times",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://www.ft.com/content/c1765ad5-022c-4bc3-9295-ef80791a2977",
+      "published_at": "2026-06-26",
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "reuters-binance-eu-licence-risk-2026-06-16",
+      "publisher": "Reuters",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://www.reuters.com/business/finance/binance-set-lose-eu-licence-bid-permission-offer-services-bloc-sources-say-2026-06-16/",
+      "published_at": "2026-06-16",
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed_historical_pre_deadline_context"
+    },
+    {
+      "source_id": "reuters-mica-licensing-rift-2025-06-13",
+      "publisher": "Reuters",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://www.reuters.com/sustainability/boards-policy-regulation/crypto-giants-set-eu-green-light-amid-growing-regulatory-rift-sources-say-2025-06-13/",
+      "published_at": "2025-06-13",
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed_licensing_context"
+    },
+    {
+      "source_id": "bybit-eu-spain-launch-cincodias-2025-10-16",
+      "publisher": "Cinco Días",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://cincodias.elpais.com/criptoactivos/2025-10-16/la-plataforma-cripto-bybit-empieza-a-operar-en-espana.html",
+      "published_at": "2025-10-16",
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed_service_context_primary_register_recheck_needed"
+    },
+    {
+      "source_id": "revolut-cysec-casp-register",
+      "publisher": "Cyprus Securities and Exchange Commission",
+      "source_type": "regulator_register_entry",
+      "tier": "A",
+      "url": "https://www.cysec.gov.cy/en-GB/entities/Crypto-Assets-Entities-%28MiCAR%29/MiCAR-CASPs/Licensees-%28Article-63%29/101097/",
+      "published_at": null,
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "gemini-mica-malta-cincodias-2025-08-21",
+      "publisher": "Cinco Días",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://cincodias.elpais.com/criptoactivos/2025-08-21/gemini-la-plataforma-cripto-de-los-hermanos-winklevoss-obtiene-la-licencia-mica-en-malta.html",
+      "published_at": "2025-08-21",
+      "last_checked_at": "2026-07-05",
+      "review_state": "reviewed_service_context_primary_register_recheck_needed"
+    }
+  ],
+  "platform_context_findings": [
+    {
+      "platform": "Binance",
+      "region_scope": "European Union",
+      "context_as_of": "2026-07-01",
+      "review_state": "reviewed_current_service_context",
+      "platform_service_state": "wind_down_or_exit_only_for_affected_eu_clients",
+      "details": [
+        "The 2025 Binance stablecoin policy remains useful as historical evidence of function-specific non-MiCA stablecoin restrictions.",
+        "That 2025 policy must not be presented as the complete current July 2026 EU access state because Binance did not have a MiCA licence by the end of the transition period.",
+        "Current high-quality reporting says affected EU customers are in a wind-down state rather than normal service, with selling and withdrawal/transfer actions preserved for exit management.",
+        "The article must separate Binance's 2025 stablecoin-specific restrictions from its broader 2026 CASP service interruption."
+      ],
+      "source_ids": [
+        "ft-eu-casp-transition-2026-07-01",
+        "ft-binance-eu-wind-down-2026-06-26",
+        "reuters-binance-eu-licence-risk-2026-06-16"
+      ]
+    },
+    {
+      "platform": "OKX Europe",
+      "region_scope": "European Union / passported EU service context",
+      "context_as_of": "2026-07-01",
+      "review_state": "reviewed_service_context_function_matrix_unresolved",
+      "platform_service_state": "licensed_service_context_reported",
+      "details": [
+        "Financial Times identified OKX among large platforms licensed to continue serving EU customers after the July 1, 2026 transition point.",
+        "Reuters previously reported Malta's MiCA approval of OKX in the licensing rollout context.",
+        "Stablecoin-specific buy, sell, trade, deposit, withdrawal, custody, and conversion states remain unconfirmed pending scoped first-party platform sources."
+      ],
+      "source_ids": ["ft-eu-casp-transition-2026-07-01", "reuters-mica-licensing-rift-2025-06-13"]
+    },
+    {
+      "platform": "Crypto.com",
+      "region_scope": "European Union / passported EU service context",
+      "context_as_of": "2025-06-13",
+      "review_state": "reviewed_licensing_context_current_function_matrix_unresolved",
+      "platform_service_state": "mica_licence_reported",
+      "details": [
+        "Reuters reported that Malta had granted a MiCA licence to Crypto.com during the 2025 rollout.",
+        "A current stablecoin-specific EU/EEA function source has not yet been located.",
+        "Do not infer USDT, USDC, DAI, deposit, withdrawal, custody, or conversion availability from the licence alone."
+      ],
+      "source_ids": ["reuters-mica-licensing-rift-2025-06-13"]
+    },
+    {
+      "platform": "Bybit EU",
+      "region_scope": "European Union service context; Spain launch described",
+      "context_as_of": "2025-10-16",
+      "review_state": "reviewed_service_context_function_matrix_unresolved",
+      "platform_service_state": "authorised_eu_service_context_reported",
+      "details": [
+        "Cinco Días reported that Bybit entered Spain after Austrian authorization and EU passporting.",
+        "The reported Spain offering included crypto buying and selling, fixed-reward products, and Bybit Card functionality.",
+        "The source does not establish stablecoin-by-stablecoin function states; those remain not confirmed."
+      ],
+      "source_ids": ["bybit-eu-spain-launch-cincodias-2025-10-16"]
+    },
+    {
+      "platform": "Revolut",
+      "platform_legal_entity": "Revolut Digital Assets (Europe) Ltd",
+      "region_scope": "Cyprus authorization with listed cross-border EEA member-state services",
+      "context_as_of": "2026-07-05",
+      "review_state": "reviewed_regulator_context_usdt_policy_scope_unresolved",
+      "platform_service_state": "authorised_micar_casp",
+      "details": [
+        "CySEC lists Revolut Digital Assets (Europe) Ltd as an authorised Article 63 MiCAR CASP with registration date 2025-10-20 and licence number CASP001/25.",
+        "The register lists custody, trading-platform operation, exchange for funds, crypto-to-crypto exchange, placing, and transfer services.",
+        "The register lists cross-border services across EU/EEA member states.",
+        "This authorization evidence does not confirm the reported USDT phase-out dates, customer cohort, or automatic-conversion rule; those remain separately unresolved."
+      ],
+      "source_ids": ["revolut-cysec-casp-register"]
+    },
+    {
+      "platform": "Gemini",
+      "region_scope": "European Union / passported EU service context",
+      "context_as_of": "2025-08-21",
+      "review_state": "reviewed_additional_platform_context_function_matrix_unresolved",
+      "platform_service_state": "mica_licence_reported",
+      "details": [
+        "Cinco Días reported that Gemini obtained a MiCA licence in Malta with EU passporting scope.",
+        "Gemini is an additional researched platform beyond the initial ten-platform priority set.",
+        "Stablecoin-specific EU function states, including treatment of GUSD and third-party stablecoins, remain unresolved pending first-party platform sources."
+      ],
+      "source_ids": ["gemini-mica-malta-cincodias-2025-08-21"]
+    }
+  ],
+  "research_gate_effect": {
+    "platforms_with_reviewed_findings_before_batch": 5,
+    "new_platforms_with_reviewed_context_in_batch": 5,
+    "platforms_with_reviewed_findings_or_context_after_batch": 10,
+    "minimum_platform_research_target_met": true,
+    "function_level_matrix_complete": false,
+    "publication_ready": false,
+    "note": "The ten-platform research floor is now met only as a breadth threshold. The article remains blocked because several platforms have licensing/service context but no scoped stablecoin function matrix."
+  },
+  "next_priority_queue": [
+    {
+      "platform": "Revolut",
+      "priority": 1,
+      "next_action": "Locate first-party or directly reviewable customer-notice evidence for the reported USDT purchase, deposit, withdrawal, custody, and automatic-conversion schedule."
+    },
+    {
+      "platform": "Coinbase",
+      "priority": 2,
+      "next_action": "Locate first-party EEA stablecoin restriction and function-level source."
+    },
+    {
+      "platform": "OKX Europe",
+      "priority": 3,
+      "next_action": "Locate scoped first-party EU stablecoin asset list and function-level availability source."
+    },
+    {
+      "platform": "Crypto.com",
+      "priority": 4,
+      "next_action": "Locate current first-party EU/EEA stablecoin restriction or availability source."
+    },
+    {
+      "platform": "Bybit EU",
+      "priority": 5,
+      "next_action": "Locate first-party EU stablecoin asset and function-level availability source."
+    },
+    {
+      "platform": "Bitpanda",
+      "priority": 6,
+      "next_action": "Replace Global product-page inference risk with scoped EU/EEA policy evidence."
+    },
+    {
+      "platform": "Gemini",
+      "priority": 7,
+      "next_action": "Locate first-party EU stablecoin availability and GUSD treatment source."
+    },
+    {
+      "platform": "Uphold",
+      "priority": 8,
+      "next_action": "Determine whether a scoped EU/EEA policy source is available; keep out of article matrix until evidence is found."
+    }
+  ]
+}
