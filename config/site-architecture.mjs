@@ -105,6 +105,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/events/', source_file: 'src/pages/events/index.astro', output_kind: 'html', group: 'registry', role: 'event_index', decision: 'keep', navigation: 'registry' }),
   Object.freeze({ pattern: '/glossary/', source_file: 'src/pages/glossary/index.astro', output_kind: 'html', group: 'learn', role: 'glossary', decision: 'keep', navigation: 'learn' }),
   Object.freeze({ pattern: '/guides/', source_file: 'src/pages/guides/index.astro', output_kind: 'html', group: 'learn', role: 'guide_index', decision: 'keep', navigation: 'learn' }),
+  Object.freeze({ pattern: '/guides/eu-stablecoin-access-after-mica/', source_file: 'src/pages/guides/eu-stablecoin-access-after-mica/index.astro', output_kind: 'html', group: 'learn', role: 'guide_article', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/guides/genius-act-stablecoins/', source_file: 'src/pages/guides/genius-act-stablecoins/index.astro', output_kind: 'html', group: 'learn', role: 'guide_article', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/guides/jpyc-vs-jpysc/', source_file: 'src/pages/guides/jpyc-vs-jpysc/index.astro', output_kind: 'html', group: 'learn', role: 'guide_article', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/guides/mica-stablecoins/', source_file: 'src/pages/guides/mica-stablecoins/index.astro', output_kind: 'html', group: 'learn', role: 'guide_article', decision: 'keep', navigation: 'contextual' }),
@@ -147,8 +148,8 @@ export const compatibilityRoutePolicy = Object.freeze({
 });
 
 export const routeMigrationPolicy = Object.freeze({
-  current_pr_changes_routes: false,
-  current_pr_changes_navigation_markup: true,
+  current_pr_changes_routes: true,
+  current_pr_changes_navigation_markup: false,
   all_current_routes_preserved: true,
   redirects_introduced: Object.freeze([]),
   removals_introduced: Object.freeze([]),
