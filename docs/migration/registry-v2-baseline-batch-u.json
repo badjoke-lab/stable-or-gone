@@ -4,7 +4,7 @@
   "batch_id": "quality_pr301",
   "captured_at": "2026-07-05",
   "defer_legacy_v3_full_coverage": true,
-  "deferred_v3_reason": "PR #301 adds one reviewed official contract-identity evidence row for USDf without changing the 100-asset canonical set.",
+  "deferred_v3_reason": "PR #301 adds one reviewed official contract-identity evidence row for USDf through the current quality evidence layer without changing the 100-asset canonical set.",
   "minimum_counts": {
     "stablecoins": 100,
     "organizations": 94,
@@ -21,8 +21,5 @@
     "deployments": 140,
     "classification_extensions": 2
   },
-  "data_group_additions": {
-    "evidence": ["data/evidence-pr301.json"],
-    "evidence_relations": ["data/evidence-pr301.json"]
-  }
+  "data_group_additions": {}
 }
