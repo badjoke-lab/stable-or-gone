@@ -1,0 +1,334 @@
+{
+  "schema_version": "0.1",
+  "research_id": "eu-stablecoin-market-access-2026",
+  "status": "research_in_progress",
+  "created_at": "2026-07-05",
+  "information_current_through": "2026-07-05",
+  "governing_spec": "docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md",
+  "target_route": "/guides/eu-stablecoin-access-after-mica/",
+  "publication_gate": {
+    "minimum_platforms_researched": 10,
+    "minimum_stable_assets_reviewed": 15,
+    "current_platforms_with_reviewed_findings": 5,
+    "current_stable_assets_touched_by_reviewed_findings": 17,
+    "function_level_matrix_complete": false,
+    "esma_register_cross_check_started": true,
+    "revolut_scope_confirmed": false,
+    "publication_date_recheck_complete": false,
+    "publishable": false
+  },
+  "target_platforms": [
+    "Binance",
+    "Coinbase",
+    "Kraken",
+    "Bitstamp",
+    "Crypto.com",
+    "OKX Europe",
+    "Bybit EU",
+    "Bitpanda",
+    "Revolut",
+    "Uphold"
+  ],
+  "target_stable_assets": [
+    "USDT",
+    "DAI",
+    "PYUSD",
+    "RLUSD",
+    "TUSD",
+    "FDUSD",
+    "USDP",
+    "GUSD",
+    "USDD",
+    "USDS",
+    "EURT",
+    "USDC",
+    "EURC",
+    "EURI",
+    "EURCV",
+    "EURQ",
+    "USDQ",
+    "USDG"
+  ],
+  "allowed_function_states": [
+    "available",
+    "unavailable",
+    "restricted",
+    "convert_only",
+    "withdraw_only",
+    "sell_only",
+    "deadline_pending",
+    "auto_conversion_scheduled",
+    "not_applicable",
+    "not_confirmed"
+  ],
+  "reviewed_sources": [
+    {
+      "source_id": "binance-eea-non-mica-stablecoin-delisting-2025",
+      "publisher": "Binance",
+      "source_type": "platform_official_announcement",
+      "tier": "B",
+      "url": "https://www.binance.com/en/support/announcement/detail/bcaa1f68d6a6450099056ff694ad6c46",
+      "published_at": "2025-03-03",
+      "last_checked_at": "2026-07-05",
+      "scope": "European Economic Area",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "kraken-eea-stablecoin-offerings-2026",
+      "publisher": "Kraken",
+      "source_type": "platform_official_support",
+      "tier": "B",
+      "url": "https://support.kraken.com/articles/stablecoin-offerings-for-eea-clients",
+      "published_at": null,
+      "page_last_updated": "2026-04-13",
+      "last_checked_at": "2026-07-05",
+      "scope": "European Economic Area",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "bitstamp-europe-mica-select-assets-2025",
+      "publisher": "Bitstamp",
+      "source_type": "platform_official_announcement",
+      "tier": "B",
+      "url": "https://blog.bitstamp.net/post/mica-regulation-update-on-select-assets-in-the-eueea/",
+      "published_at": "2025-03-31",
+      "last_checked_at": "2026-07-05",
+      "scope": "Bitstamp Europe S.A. customers in EU/EEA",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "coinbase-eea-stablecoin-policy-reuters-2024",
+      "publisher": "Reuters",
+      "source_type": "high_quality_reporting",
+      "tier": "C",
+      "url": "https://www.reuters.com/technology/coinbase-delist-some-stablecoins-europe-ahead-new-regulations-2024-10-04/",
+      "published_at": "2024-10-04",
+      "last_checked_at": "2026-07-05",
+      "scope": "European Economic Area",
+      "review_state": "reviewed_with_primary_source_gap"
+    },
+    {
+      "source_id": "bitpanda-usdt-public-product-page-2026",
+      "publisher": "Bitpanda",
+      "source_type": "platform_public_product_page",
+      "tier": "B",
+      "url": "https://www.bitpanda.com/en/prices/tether-usdt",
+      "published_at": null,
+      "last_checked_at": "2026-07-05",
+      "scope": "Public page presented with Global region selector; EU/EEA function scope not established by this page alone",
+      "review_state": "reviewed_scope_unresolved"
+    },
+    {
+      "source_id": "esma-interim-mica-register-page-2026-07-03",
+      "publisher": "ESMA",
+      "source_type": "regulator_register_hub",
+      "tier": "A",
+      "url": "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica",
+      "published_at": null,
+      "page_register_last_update": "2026-07-03",
+      "last_checked_at": "2026-07-05",
+      "scope": "European Union MiCA interim register",
+      "review_state": "reviewed"
+    }
+  ],
+  "platform_findings": [
+    {
+      "platform": "Binance",
+      "platform_legal_entity": null,
+      "region_scope": "EEA",
+      "review_state": "reviewed_platform_policy",
+      "announcement_date": "2025-03-03",
+      "effective_dates": {
+        "margin_restriction": "2025-03-27T07:00:00Z",
+        "spot_restriction": "2025-03-31T23:59:00Z"
+      },
+      "affected_assets": ["USDT", "FDUSD", "TUSD", "USDP", "DAI", "AEUR", "XUSD", "PAXG"],
+      "continuing_assets_named": ["USDC", "EURI"],
+      "function_states": {
+        "buy_status": "not_confirmed",
+        "sell_status": "sell_only",
+        "spot_trading_status": "unavailable",
+        "margin_status": "unavailable",
+        "earn_status": "restricted",
+        "deposit_status": "available",
+        "withdraw_status": "available",
+        "custody_status": "available",
+        "convert_status": "available",
+        "auto_conversion_status": "restricted"
+      },
+      "notes": [
+        "The announcement states that custody, deposits, and withdrawals continue for affected non-MiCA stablecoins.",
+        "After spot delisting, remaining affected stablecoins can be sold through Binance Convert.",
+        "Margin treatment included automatic USDC conversion or settlement for specified margin contexts; this is not recorded as a universal custody auto-conversion rule.",
+        "The source explicitly names USDC and EURI as continuing examples."
+      ],
+      "source_ids": ["binance-eea-non-mica-stablecoin-delisting-2025"]
+    },
+    {
+      "platform": "Kraken",
+      "platform_legal_entity": null,
+      "region_scope": "EEA",
+      "review_state": "reviewed_platform_policy",
+      "announcement_date": null,
+      "effective_dates": {},
+      "affected_assets": ["DAI", "PYUSD", "RLUSD", "UST", "EURT", "USDT", "TUSD", "USDD", "USDS"],
+      "function_states": {
+        "buy_status": "unavailable",
+        "sell_status": "unavailable",
+        "spot_trading_status": "unavailable",
+        "margin_status": "not_confirmed",
+        "earn_status": "not_confirmed",
+        "deposit_status": "available",
+        "withdraw_status": "available",
+        "custody_status": "restricted",
+        "convert_status": "not_confirmed",
+        "auto_conversion_status": "not_applicable"
+      },
+      "notes": [
+        "Kraken's page says the listed assets cannot be traded and can only be deposited or withdrawn.",
+        "Deposits are explicitly not recommended because EEA residents can no longer trade, buy, or sell the assets on Kraken.",
+        "Custody is marked restricted rather than fully available because the source frames the remaining usable actions as deposit and withdrawal only."
+      ],
+      "source_ids": ["kraken-eea-stablecoin-offerings-2026"]
+    },
+    {
+      "platform": "Bitstamp",
+      "platform_legal_entity": "Bitstamp Europe S.A.",
+      "region_scope": "EU/EEA customers of Bitstamp Europe S.A.",
+      "review_state": "reviewed_platform_policy",
+      "announcement_date": "2025-03-31",
+      "effective_dates": {
+        "usdt_earn_end": "2025-04-14",
+        "deposit_withdraw_halt": "2025-05-05",
+        "automatic_conversion_start": "2025-05-06",
+        "replacement_credit_target": "2025-05-08"
+      },
+      "affected_assets": ["USDT", "DAI", "PYUSD", "VEUR", "VCHF", "DGLD", "WBTC"],
+      "function_states": {
+        "buy_status": "unavailable",
+        "sell_status": "unavailable",
+        "spot_trading_status": "unavailable",
+        "margin_status": "not_confirmed",
+        "earn_status": "unavailable",
+        "deposit_status": "unavailable",
+        "withdraw_status": "unavailable",
+        "custody_status": "auto_conversion_scheduled",
+        "convert_status": "auto_conversion_scheduled",
+        "auto_conversion_status": "auto_conversion_scheduled"
+      },
+      "notes": [
+        "Trading had already been disabled in January 2025 for the affected asset set across Basic, Pro, and OTC RFQ.",
+        "USDT Earn Lending ended April 14, 2025.",
+        "Deposits and withdrawals were halted May 5, 2025.",
+        "USDT, DAI, PYUSD, VEUR, VCHF, and DGLD balances were scheduled for automatic conversion to USDC, with USDC credit targeted for May 8."
+      ],
+      "source_ids": ["bitstamp-europe-mica-select-assets-2025"]
+    },
+    {
+      "platform": "Coinbase",
+      "platform_legal_entity": null,
+      "region_scope": "EEA",
+      "review_state": "reviewed_policy_direction_primary_source_gap",
+      "announcement_date": "2024-10-04",
+      "effective_dates": {
+        "policy_target": "2024-12-30"
+      },
+      "affected_assets": [],
+      "continuing_assets_named": ["USDC", "EURC"],
+      "function_states": {
+        "buy_status": "not_confirmed",
+        "sell_status": "not_confirmed",
+        "spot_trading_status": "not_confirmed",
+        "margin_status": "not_confirmed",
+        "earn_status": "not_confirmed",
+        "deposit_status": "not_confirmed",
+        "withdraw_status": "not_confirmed",
+        "custody_status": "not_confirmed",
+        "convert_status": "not_confirmed",
+        "auto_conversion_status": "not_confirmed"
+      },
+      "notes": [
+        "Reuters reported Coinbase's plan to restrict services for EEA users in connection with stablecoins that did not meet MiCA requirements by December 30, 2024.",
+        "Reuters reported transition options toward USDC and EURC.",
+        "This source does not support filling the function-level matrix or a complete affected-asset list; a first-party source remains required."
+      ],
+      "source_ids": ["coinbase-eea-stablecoin-policy-reuters-2024"]
+    },
+    {
+      "platform": "Bitpanda",
+      "platform_legal_entity": null,
+      "region_scope": "unresolved_for_usdt_product_page",
+      "review_state": "reviewed_public_page_scope_unresolved",
+      "announcement_date": null,
+      "effective_dates": {},
+      "affected_assets": ["USDT"],
+      "function_states": {
+        "buy_status": "not_confirmed",
+        "sell_status": "not_confirmed",
+        "spot_trading_status": "not_confirmed",
+        "margin_status": "not_confirmed",
+        "earn_status": "not_confirmed",
+        "deposit_status": "not_confirmed",
+        "withdraw_status": "not_confirmed",
+        "custody_status": "not_confirmed",
+        "convert_status": "not_confirmed",
+        "auto_conversion_status": "not_confirmed"
+      },
+      "notes": [
+        "The current public USDT product page contains buy/sell marketing copy, but the page is shown with a Global region selector and does not establish an EU/EEA function-level policy by itself.",
+        "Do not use this page alone to claim EU/EEA USDT availability. A scoped first-party support or policy source is still required."
+      ],
+      "source_ids": ["bitpanda-usdt-public-product-page-2026"]
+    }
+  ],
+  "regulatory_findings": [
+    {
+      "regulator": "ESMA",
+      "finding_type": "interim_register_structure_and_update_frequency",
+      "review_state": "reviewed",
+      "details": [
+        "The MiCA register hub exposes separate datasets for non-ART/EMT white papers, ART issuers, EMT issuers, authorised CASPs, and non-compliant entities.",
+        "The page displayed a register update date of 2026-07-03 when checked on 2026-07-05.",
+        "ESMA states that the interim register is published on weekly intervals."
+      ],
+      "source_ids": ["esma-interim-mica-register-page-2026-07-03"]
+    }
+  ],
+  "unresolved_platform_queue": [
+    {
+      "platform": "Crypto.com",
+      "next_action": "locate first-party EU/EEA asset restriction or current stablecoin availability source",
+      "status": "needs_research"
+    },
+    {
+      "platform": "OKX Europe",
+      "next_action": "locate first-party EU platform asset list and stablecoin policy sources",
+      "status": "needs_research"
+    },
+    {
+      "platform": "Bybit EU",
+      "next_action": "locate first-party EU asset availability and function-level stablecoin sources",
+      "status": "needs_research"
+    },
+    {
+      "platform": "Revolut",
+      "next_action": "confirm customer legal entity, geographic scope, purchase/deposit/withdrawal deadlines, custody deadline, and auto-conversion rule from first-party evidence if publicly available",
+      "status": "needs_research"
+    },
+    {
+      "platform": "Uphold",
+      "next_action": "locate scoped first-party EU/EEA stablecoin availability and restriction sources",
+      "status": "needs_research"
+    },
+    {
+      "platform": "Coinbase",
+      "next_action": "locate first-party EEA asset list and function-level restriction source; retain Reuters only as Tier C policy-direction evidence until then",
+      "status": "needs_research"
+    },
+    {
+      "platform": "Bitpanda",
+      "next_action": "locate scoped EU/EEA platform policy source rather than relying on the Global public product page",
+      "status": "needs_research"
+    }
+  ]
+}
