@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "base_manifest": "docs/migration/registry-v2-baseline.json",
+  "batch_id": "quality_pr301",
+  "captured_at": "2026-07-05",
+  "defer_legacy_v3_full_coverage": true,
+  "deferred_v3_reason": "PR #301 adds one reviewed official contract-identity evidence row for USDf without changing the 100-asset canonical set.",
+  "minimum_counts": {
+    "stablecoins": 100,
+    "organizations": 94,
+    "relationships": 110,
+    "classifications": 100,
+    "profiles": 100,
+    "events": 172,
+    "event_details": 172,
+    "evidence": 502,
+    "evidence_relations": 502,
+    "reserve_reports": 108,
+    "known_unknowns": 289,
+    "regulatory_notes": 9,
+    "deployments": 140,
+    "classification_extensions": 2
+  },
+  "data_group_additions": {
+    "evidence": ["data/evidence-pr301.json"],
+    "evidence_relations": ["data/evidence-pr301.json"]
+  }
+}
