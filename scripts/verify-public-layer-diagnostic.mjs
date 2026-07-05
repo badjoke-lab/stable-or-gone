@@ -11,7 +11,10 @@ const replacement = `if (!isDeepStrictEqual(version.data?.record_count_breakdown
   const differences = keys
     .filter((key) => !isDeepStrictEqual(expectedBreakdown[key], actualBreakdown[key]))
     .map((key) => ({ key, expected: expectedBreakdown[key], actual: actualBreakdown[key] }));
-  console.error(JSON.stringify({ breakdown_differences: differences }, null, 2));
+  const diagnostic = { breakdown_differences: differences };
+  fs.mkdirSync('artifacts', { recursive: true });
+  fs.writeFileSync('artifacts/public-layer-breakdown-diff.json', JSON.stringify(diagnostic, null, 2) + '\\n');
+  console.error(JSON.stringify(diagnostic, null, 2));
   throw new Error('version breakdown does not match canonical data');
 }`;
 source = source.replace(anchor, replacement);
