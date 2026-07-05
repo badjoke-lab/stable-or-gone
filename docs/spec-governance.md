@@ -41,6 +41,13 @@ docs/quality/monitoring-pipeline-spec.md
 docs/quality/monitoring-official-source-spec.md
 docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
+docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
+```
+
+EU/EEA market-access research, the dated market-access guide, its review matrix, and the later platform/regulatory monitoring extension are governed by:
+
+```text
+docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
 UI is maintenance-only. The current production visual direction is the restored terminal family implemented through PR #288-#295. Historical UI plans and rejected visual directions are implementation history, not an active workstream and not authority for new redesign work.
@@ -128,11 +135,12 @@ Current execution state:
 dedicated UI program stopped after PR #295
 UI maintenance-only
 100-record registry-wide audit active
-PR #296 repository authority synchronization
-PR #297 next implementation item: identity uniqueness and lineage audit
+PR #301 deployment and chain identity audit complete
+PR #302 lifecycle and relationship boundary audit active
+owner-directed EU stablecoin market-access research and monitoring specification inserted before the remaining audit sequence
 ```
 
-Urgent factual corrections, verified public breakage, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
+Urgent factual corrections, verified public breakage, owner-directed dated editorial work, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
 
 ## 8. Specification status labels
 
@@ -240,6 +248,8 @@ Monitoring execution remains read-only. It may observe sources, compare against 
 - deploy.
 
 A baseline change requires a separate human-reviewed repository change.
+
+EU/EEA market-access monitoring inherits the same rule. Platform-policy and regulatory-register observations may create private review candidates only. A source change must not update the public market-access guide or its research matrix automatically.
 
 ## 13. Statistics governance
 

@@ -33,6 +33,12 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
+For EU/EEA stablecoin market-access research, article work, or monitoring changes, also read:
+
+```text
+docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
+```
+
 For statistics work, also read `docs/stats-spec.md`.
 
 ## Repository source of truth
@@ -53,7 +59,7 @@ docs/roadmap.md
 Current position:
 
 ```text
-Current main checkpoint: 8d1d3dce7faa0c3efe0f541a548aa7f6b65a31fa
+Current main checkpoint: ed6fe84ecf1cf7998f6be751b1af0df084dda735
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -65,27 +71,29 @@ Deployments: 140
 Detail routes: 366
 Dedicated UI program: stopped after PR #295
 UI mode: maintenance-only
-Active: PR #301 deployment and chain identity audit
-Next: PR #302 lifecycle and relationship boundary audit
+Active: PR #302 lifecycle and relationship boundary audit
+Owner-directed insertion: PR #303 EU market-access specification and schedule amendment
+Next public implementation after PR #302: PR #304 reviewed EU stablecoin market-access guide
 ```
 
 ## Active sequence
 
 ```text
-PR #296       workstream resumption — complete
-PR #297       identity and lineage audit — complete
-PR #298       organization and relationship audit — complete
-PR #299       evidence and source-identity audit — complete
-PR #300       reserve, redemption, and backing applicability audit — complete
-PR #301-#304  remaining 100-record registry-wide audit — active
-PR #305-#309  non-UI release hardening
-PR #310-#313  monitoring expansion and scheduled read-only operation
-PR #314-#317  statistics implementation
-PR #318       next candidate audit
-PR #319-#323  controlled growth from 100 to 110
+PR #296-#301  resumed audit work through deployment and chain identity — complete
+PR #302       lifecycle and relationship boundary audit — active
+PR #303       EU market-access specification and schedule amendment — owner-directed insertion
+PR #304       reviewed EU stablecoin market-access guide after PR #302 merge
+PR #305-#306  remaining 100-record registry-wide audit
+PR #307-#311  non-UI release hardening
+PR #312-#315  monitoring expansion and scheduled read-only operation
+PR #316-#319  statistics implementation
+PR #320       next candidate audit
+PR #321-#325  controlled growth from 100 to 110
 ```
 
 Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
+
+EU market-access research may proceed in parallel with PR #302 only after the market-access specification amendment is merged. Public article implementation waits until PR #302 is merged.
 
 ## UI maintenance rules
 
@@ -131,14 +139,27 @@ rebrand transition
 
 Do not infer one boundary from another unless reviewed evidence explicitly supports the equivalence.
 
+## EU market-access rules
+
+- Do not reduce EU/EEA stablecoin access to an allowed/banned boolean.
+- Preserve platform, legal entity, region, stablecoin, function, announcement date, and effective date separately.
+- Do not infer deposit, withdrawal, custody, trading, or conversion state from another function.
+- Do not rewrite EEA as EU when the source scope is EEA.
+- Do not generalize a customer-cohort or legal-entity notice to every global user.
+- Prefer regulators and official registers for regulatory claims.
+- Prefer first-party platform policy pages for function-level access claims.
+- Media and social posts may identify leads but do not by themselves fill an entire access matrix.
+- The public guide is a reviewed dated snapshot and never updates automatically from monitoring output.
+
 ## Monitoring rules
 
 - Monitoring output is candidate material only and must not write directly to canonical public data.
 - Monitoring executions remain read-only and may not update their own accepted baseline.
 - An unchanged normalized official source must not create a candidate.
 - Metadata-only changes and fetch failures must not masquerade as content changes.
-- Monitoring may not create branches, pull requests, publications, or deployments automatically.
+- Monitoring may not create branches, pull requests, publications, guide edits, or deployments automatically.
 - A baseline change requires a separate human-reviewed repository change.
+- Platform-policy monitoring must preserve function-level and geographic scope.
 
 ## Statistics rules
 
