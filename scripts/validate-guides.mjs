@@ -53,17 +53,32 @@ check(openUsdPage.includes('No automatic holder-yield right'), 'Open USD holder-
 
 const euAccessPage = read('src/pages/guides/eu-stablecoin-access-after-mica/index.astro');
 const euAccessGateReview = read('docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md');
+const euAccessReaudit = read('docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md');
 const euAccessFunctionBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-function-batch-03.json'));
+const euAccessReauditBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json'));
 check(euAccessGateReview.includes('publication gate:                               pass'), 'EU market access publication gate was not recorded as passed');
 check(euAccessGateReview.includes('A. Asset-specific function evidence'), 'EU market access gate review missing A-level evidence contract');
 check(euAccessGateReview.includes('B. Current platform-wide service-state evidence'), 'EU market access gate review missing B-level evidence contract');
 check(euAccessGateReview.includes('C. General service/licensing context'), 'EU market access gate review missing C-level evidence contract');
 check(euAccessFunctionBatch.gate_effect?.publication_ready === false, 'Checkpoint 03 source batch must remain a research checkpoint rather than self-authorizing publication');
+check(euAccessReaudit.includes('article revision from re-audit: complete'), 'EU market access reaudit must record article revision completion');
+check(euAccessReaudit.includes('merge authorized: no'), 'EU market access reaudit must preserve human merge gate');
+check(euAccessReauditBatch.article_gate_effect?.full_asset_and_platform_reaudit_complete === true, 'EU market access batch 04 reaudit completion missing');
+check(euAccessReauditBatch.article_gate_effect?.article_requires_additional_revision === true, 'Batch 04 must preserve its original finding that article revision was required');
 check(euAccessPage.includes('This guide is a reviewed snapshot current through July 5, 2026.'), 'EU market access guide snapshot date missing');
 check(euAccessPage.includes('/guides/mica-stablecoins/'), 'EU market access guide must link to the MiCA framework guide');
-check(euAccessPage.includes('Recent reporting based on a customer notice'), 'EU market access guide must preserve conservative reported Revolut treatment');
+check(euAccessPage.includes('Reporting based on a customer notice said Revolut would phase out USDT support.'), 'EU market access guide must preserve conservative reported Revolut treatment');
 check(euAccessPage.includes('Reviewed asset-specific function examples'), 'EU market access guide A-level comparison section missing');
-check(euAccessPage.includes('Current platform service state can override an older token table'), 'EU market access guide B-level service-state section missing');
+check(euAccessPage.includes('Platform state and product surfaces are different evidence layers'), 'EU market access guide bounded platform-context section missing');
+check(euAccessPage.includes('RLUSD: one asset, four separate layers'), 'EU market access guide RLUSD four-layer correction missing');
+check(euAccessPage.includes('product surfaces, not proof of uniform EEA-wide asset availability'), 'EU market access guide OKX scope downgrade missing');
+check(euAccessPage.includes('Paxos Issuance Europe under FIN-FSA supervision'), 'EU market access guide USDG European issuance path missing');
+check(euAccessPage.includes('Redemption-Only Mode'), 'EU market access guide EUROe redemption-only context missing');
+check(euAccessPage.includes('EURAU'), 'EU market access guide EURAU bounded example missing');
+check(euAccessPage.includes('EUROD'), 'EU market access guide EUROD bounded example missing');
+check(euAccessPage.includes('does not issue any stablecoins or tokens yet'), 'EU market access guide Qivalis future-only boundary missing');
+check(euAccessPage.includes('At least eight layers can move independently'), 'EU market access guide eight-layer framework missing');
+check(euAccessPage.includes('payment-services authorization layer'), 'EU market access guide payment-services layer missing');
 for (const url of [
   'https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica',
   'https://www.binance.com/en/support/announcement/detail/bcaa1f68d6a6450099056ff694ad6c46',
@@ -77,7 +92,16 @@ for (const url of [
   'https://uphold.com/en-eu',
   'https://www.coinbase.com/en-de/price/tether',
   'https://www.coinbase.com/en-de/price/dai',
-  'https://www.coinbase.com/en-de/price/paypal-usd'
+  'https://www.coinbase.com/en-de/price/paypal-usd',
+  'https://ripple.com/ripple-press/ripple-receives-full-eu-electronic-money-institution-license-in-luxembourg/',
+  'https://ripple.com/ripple-press/ripple-secures-preliminary-MiCA-CASP-license/',
+  'https://ripple.com/legal/stablecoin/',
+  'https://www.paxos.com/eu',
+  'https://globaldollar.com/',
+  'https://allunity.com/',
+  'https://www.oddo-bhf.com/eurod-stablecoin/',
+  'https://qivalis.eu/',
+  'https://sky.money/'
 ]) check(euAccessPage.includes(url), `EU market access guide missing reviewed source URL: ${url}`);
 
 const guideIndexRoute = read('src/pages/guides/index.astro');
@@ -116,4 +140,4 @@ const euAccessUpdate = updates.find((entry) => entry.id === 'sog_update_2026_07_
 check(Boolean(euAccessUpdate), 'EU stablecoin access guide registry update entry missing');
 check(euAccessUpdate.related_paths.includes('/guides/eu-stablecoin-access-after-mica/'), 'EU stablecoin access guide update route missing');
 
-console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, reference_utility_v3: true, eu_market_access_gate_reviewed: true, guide_slugs: slugs }, null, 2));
+console.log(JSON.stringify({ ok: true, guides: slugs.length, dated_guides: datedGuideSlugs.length, evergreen_guides: evergreenGuideSlugs.length, automatic_featured_guides: true, home_featured_guide_limit: 4, editorial_article_v3: true, reference_utility_v3: true, eu_market_access_gate_reviewed: true, eu_market_access_reaudit_applied: true, guide_slugs: slugs }, null, 2));
