@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('eu-stablecoin-access-after-mica');
+const title = 'After MiCA: Which Stablecoins Can Europeans Actually Use? — Stable or Gone';
+const description = 'A reviewed platform-by-platform guide to stablecoin access in Europe after MiCA, separating trading, deposits, withdrawals, custody, conversion, legal entity, geography, and current platform service state.';
+const canonicalPath = '/guides/eu-stablecoin-access-after-mica/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'After MiCA: Which Stablecoins Can Europeans Actually Use?',
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['MiCA', 'European stablecoin access', 'USDT', 'USDC', 'DAI', 'PYUSD', 'RLUSD', 'crypto-asset service providers'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the global dollar stablecoin separately from the changing policies of regulated European service providers.' },
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review Circle’s dollar stablecoin, issuer structure, reserves, redemption access, and European distribution context.' },
+  { href: '/stablecoin/eurc/', title: 'EURC', summary: 'Review Circle’s euro stablecoin and its EEA issuer, redemption, deployment, and regulatory context.' },
+  { href: '/stablecoin/dai/', title: 'DAI', summary: 'Review the protocol-issued stablecoin that appears in several European platform-restriction policies.' },
+  { href: '/stablecoin/pyusd/', title: 'PYUSD', summary: 'Review PayPal USD and separate its issuer structure from platform-by-platform European access.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Review RLUSD while keeping issuer, token, service-provider authorization, and actual platform access separate.' },
+  { href: '/stablecoin/euri/', title: 'EURI', summary: 'Review Banking Circle’s euro token and its regulated European issuance and distribution model.' },
+  { href: '/stablecoin/eurcv/', title: 'EURCV', summary: 'Review Société Générale-FORGE’s euro stablecoin structure and current regulated distribution context.' },
+  { href: '/stablecoin/eurq/', title: 'EURQ', summary: 'Review the Quantoz euro electronic-money token and its issuer, reserves, redemption, and deployment record.' },
+  { href: '/stablecoin/usdq/', title: 'USDQ', summary: 'Review the Quantoz dollar electronic-money token separately from similarly named protocol assets.' },
+  { href: '/stablecoin/usdg/', title: 'USDG', summary: 'Review Global Dollar and the distinction between issuer authorization, distribution network, and platform availability.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="After MiCA: Which Stablecoins Can Europeans Actually Use?"
+    description="A platform-by-platform map of what ‘available’ actually means after MiCA: buying, selling, trading, depositing, withdrawing, holding, converting, and winding down are not the same thing."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>There is no single useful answer to the question “Is this stablecoin available in Europe?”</strong> Access depends on the platform, legal entity, country or regional scope, product function, and date.</p>
+    <p>One provider may stop spot trading but keep deposits and withdrawals. Another may stop deposits and withdrawals and convert remaining balances. A third may leave the token technically depositable and withdrawable while blocking buying, selling, and trading. A platform-wide account closure or wind-down can also supersede an older token-specific policy.</p>
+    <p>This guide therefore does not publish a winner-versus-loser ranking. It records reviewed examples of what users can and cannot do, separates current platform service state from historical stablecoin policy, and leaves unsupported functions unclaimed.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why Revolut is the entry point, not the whole story</div>
+    <p>Recent reporting based on a customer notice said Revolut would phase out USDT support, citing regulatory and risk concerns. The report is useful as a signal, but the public first-party policy details needed for a complete matrix row were not available in our publication review.</p>
+    <p>SOG therefore treats the Revolut development conservatively: the official CySEC register confirms the European crypto legal entity and its MiCAR CASP authorization, while the reported USDT purchase, deposit, withdrawal, custody, and conversion schedule remains a separate reported policy layer.</p>
+    <p>The larger story was already visible elsewhere. Binance, Kraken, Bitstamp, Coinbase, and other platforms have applied materially different restrictions to USDT and to other stablecoins including DAI, PYUSD, RLUSD, TUSD, FDUSD, USDP, USDD, and USDS.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What “available” actually means</div>
+    <table>
+      <thead><tr><th>Function</th><th>Question</th><th>Why it must be separate</th></tr></thead>
+      <tbody>
+        <tr><td>Buy</td><td>Can a customer acquire the asset with fiat or another supported funding route?</td><td>A platform can disable trading pairs while leaving a direct purchase or conversion route.</td></tr>
+        <tr><td>Sell</td><td>Can the asset be sold back to fiat or another supported asset?</td><td>Wind-down and exit-only states may allow selling even when ordinary service stops.</td></tr>
+        <tr><td>Spot trading</td><td>Can the asset trade on an order book or ordinary spot market?</td><td>Spot delisting does not automatically prove deposit or withdrawal status.</td></tr>
+        <tr><td>Margin</td><td>Can the asset be used in margin products or collateral contexts?</td><td>Margin restrictions can have separate deadlines and settlement rules.</td></tr>
+        <tr><td>Earn</td><td>Can the asset enter a lending, rewards, or yield product?</td><td>Earn may stop before custody or withdrawals.</td></tr>
+        <tr><td>Deposit</td><td>Can an external wallet send the token into the platform?</td><td>A delisted token may remain depositable on one platform and blocked on another.</td></tr>
+        <tr><td>Withdraw</td><td>Can the user send the token to an external wallet?</td><td>Withdrawal can remain as an exit route during broader service restrictions.</td></tr>
+        <tr><td>Custody</td><td>Can the platform continue holding the asset for the customer?</td><td>Custody can be temporary, deadline-bound, or superseded by automatic conversion.</td></tr>
+        <tr><td>Convert</td><td>Can the asset be exchanged outside ordinary spot trading?</td><td>A sell-only or conversion route may survive after order-book trading stops.</td></tr>
+        <tr><td>Auto-conversion</td><td>Will the platform replace a remaining balance automatically?</td><td>This is materially different from voluntary sale or self-directed withdrawal.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">MiCA timeline: the two deadlines people often mix together</div>
+    <p>This article focuses on observed platform access. For the legal framework, EMT and ART categories, and the full CASP transition explanation, read <a href="/guides/mica-stablecoins/">MiCA and Stablecoins</a>.</p>
+    <table>
+      <thead><tr><th>Date</th><th>What changed</th><th>What it does not mean</th></tr></thead>
+      <tbody>
+        <tr><td>2024-06-30</td><td>MiCA provisions for ART and EMT issuers became applicable.</td><td>It did not create one instant platform policy for every stablecoin.</td></tr>
+        <tr><td>2024-12-30</td><td>The broader MiCA framework, including the CASP authorization regime, became applicable.</td><td>It did not erase national transitional arrangements immediately.</td></tr>
+        <tr><td>By end of Q1 2025</td><td>ESMA expected authorities to ensure CASPs aligned services involving non-MiCA-compliant ARTs and EMTs.</td><td>It did not require every provider to use the same operational sequence.</td></tr>
+        <tr><td>2026-07-01</td><td>The maximum CASP transitional period ended.</td><td>This is a service-provider transition boundary, not a blockchain deletion date for USDT or another token.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Reviewed asset-specific function examples</div>
+    <p>The table below includes only functions supported by the reviewed sources. A dash does not mean “available” or “unavailable”; it means this guide is not making that claim from the cited source.</p>
+    <table>
+      <thead><tr><th>Platform / scope</th><th>Asset set</th><th>Reviewed function result</th><th>Timing or context</th></tr></thead>
+      <tbody>
+        <tr><td>Binance / EEA</td><td>USDT, FDUSD, TUSD, USDP, DAI, AEUR, XUSD, PAXG</td><td>2025 policy: spot unavailable after delisting; margin removed; custody, deposits, and withdrawals continued; remaining affected balances could be sold through Convert.</td><td>Historical stablecoin-specific policy. Current 2026 EU platform service state is discussed separately below.</td></tr>
+        <tr><td>Kraken / EEA</td><td>DAI, PYUSD, RLUSD, UST, EURT, USDT, TUSD, USDD, USDS</td><td>No trading, buying, or selling; deposit and withdrawal remain available.</td><td>Kraken support page reviewed through 2026-07-05.</td></tr>
+        <tr><td>Bitstamp Europe / EU-EEA</td><td>USDT, DAI, PYUSD, VEUR, VCHF, DGLD; WBTC had a separate BTC conversion path</td><td>Trading already disabled; USDT Earn ended; deposits and withdrawals halted; selected balances converted automatically to USDC.</td><td>Staged deadlines in April and May 2025.</td></tr>
+        <tr><td>OKX Europe pages</td><td>USDT, USDC</td><td>Reviewed Europe-locale pages explicitly present buy and sell flows for both assets.</td><td>Other asset-specific functions are not inferred from general help pages.</td></tr>
+        <tr><td>Coinbase / Germany locale</td><td>USDT, DAI, PYUSD</td><td>Germany-locale product pages state that each asset is not tradable on Coinbase.</td><td>This is member-state page evidence and is not generalized to every EEA country.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Current platform service state can override an older token table</div>
+    <p>Token-specific policy is only one layer. By July 2026, some platforms had broader service-state changes that must be read separately.</p>
+    <table>
+      <thead><tr><th>Platform</th><th>Reviewed current context</th><th>How SOG uses it</th></tr></thead>
+      <tbody>
+        <tr><td>Binance</td><td>High-quality reporting around the July 2026 MiCA transition described an EU wind-down or exit-only context after Binance failed to secure the required authorization by the transition deadline.</td><td>The 2025 stablecoin policy remains historical evidence, but it is not presented as the complete current July 2026 EU service state.</td></tr>
+        <tr><td>Gemini</td><td>Gemini’s official support surface says customer accounts in the UK, EEA, and Australia were closed effective April 6, 2026.</td><td>This is a platform-wide service-state conclusion, not a fabricated GUSD-only restriction row.</td></tr>
+        <tr><td>Uphold Europe</td><td>The current Europe notice says the MiCAR application remains under review and temporary service restrictions apply after the transition point; it also says assets remain secure and may be withdrawn.</td><td>Withdrawal availability is kept separate from other restricted or unconfirmed functions.</td></tr>
+        <tr><td>Crypto.com Europe</td><td>The official regional page supports current European service, EUR funding, and broad crypto buy/sell/trade context.</td><td>The page is not used to invent stablecoin-by-stablecoin function states.</td></tr>
+        <tr><td>Bybit EU</td><td>The official EU starter guide describes general deposit, fiat buy/sell, spot, and Earn functions.</td><td>General product context is not converted into USDT, USDC, or other asset-specific claims.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">USDT is the largest headline, but not the only restricted asset</div>
+    <table>
+      <thead><tr><th>Asset</th><th>Observed pattern in this review</th><th>Important boundary</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/stablecoin/usdt/">USDT</a></td><td>Appears in Binance’s 2025 EEA policy, Kraken’s EEA delisted set, Bitstamp Europe’s staged shutdown/conversion process, and Coinbase Germany’s non-tradable product page. OKX Europe simultaneously exposes reviewed USDT buy/sell pages.</td><td>“USDT unavailable in Europe” is too broad. Platform, scope, function, and date change the answer.</td></tr>
+        <tr><td><a href="/stablecoin/dai/">DAI</a></td><td>Appears in Binance, Kraken, and Bitstamp restrictions and on Coinbase Germany as not tradable.</td><td>The access shift is not only about Tether or one corporate issuer.</td></tr>
+        <tr><td><a href="/stablecoin/pyusd/">PYUSD</a></td><td>Appears in Kraken’s EEA delisted set, Bitstamp Europe’s conversion process, and Coinbase Germany’s non-tradable page.</td><td>A large consumer brand does not automatically guarantee platform access in every European market.</td></tr>
+        <tr><td><a href="/stablecoin/rlusd/">RLUSD</a></td><td>Kraken lists RLUSD among assets unavailable for trading, buying, or selling to EEA clients while deposit and withdrawal remain.</td><td>Company authorization, token status, and actual platform availability are separate questions.</td></tr>
+        <tr><td><a href="/stablecoin/usdc/">USDC</a></td><td>Named as a continuing example in Binance’s 2025 notice, used as Bitstamp’s conversion destination for selected assets, and exposed through current OKX Europe buy/sell pages.</td><td>Distribution expansion is observable, but this is not a safety ranking or proof of universal availability.</td></tr>
+        <tr><td><a href="/stablecoin/eurc/">EURC</a></td><td>Circle’s European issuer structure and regulated euro-token model provide a different distribution path from offshore dollar-token access.</td><td>Issuer status must still be separated from actual platform availability.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The other half of the story: new regulated distribution paths</div>
+    <p>Access contraction is only half the European market transition. Regulated issuers and platforms are also building new distribution paths.</p>
+    <table>
+      <thead><tr><th>Asset</th><th>Starting point reviewed by SOG</th><th>What still needs separate verification</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/stablecoin/usdc/">USDC</a> / <a href="/stablecoin/eurc/">EURC</a></td><td>Circle describes EEA issuance through its French electronic-money institution and positions the assets within its MiCA framework.</td><td>Actual support still varies by platform, function, country, and customer entity.</td></tr>
+        <tr><td><a href="/stablecoin/euri/">EURI</a></td><td>Banking Circle describes EURI as a bank-issued, MiCA-regulated euro stablecoin and announced exchange distribution.</td><td>Platform-by-platform function availability still needs its own evidence.</td></tr>
+        <tr><td><a href="/stablecoin/eurcv/">EURCV</a></td><td>Société Générale-FORGE restructured the euro stablecoin around a European electronic-money institution model.</td><td>Authorization, deployments, eligible customers, redemption, and platform access remain separate layers.</td></tr>
+        <tr><td><a href="/stablecoin/eurq/">EURQ</a> / <a href="/stablecoin/usdq/">USDQ</a></td><td>Quantoz presents EURQ and USDQ as electronic-money tokens issued through its regulated payments entity.</td><td>Issuer claims, register status, redemption access, and real platform distribution must be checked independently.</td></tr>
+        <tr><td><a href="/stablecoin/usdg/">USDG</a></td><td>Global Dollar uses a regulated issuer and network-distribution model that differs from a single-exchange listing strategy.</td><td>European regulatory status and each platform’s actual product availability remain distinct questions.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why this is not a winner-versus-loser table</div>
+    <p>A simple “USDT lost, USDC won” story removes too much information. At least seven layers can move independently:</p>
+    <ol>
+      <li>the legal issuer and its authorization;</li>
+      <li>the token’s regulatory or notification status;</li>
+      <li>the CASP’s authorization and legal entity;</li>
+      <li>the platform’s internal product and risk policy;</li>
+      <li>the customer’s country or regional service scope;</li>
+      <li>the exact function: buy, sell, trade, deposit, withdraw, custody, Earn, margin, or convert;</li>
+      <li>the effective date and any wind-down or migration period.</li>
+    </ol>
+    <p>The ESMA interim MiCA register itself separates different issuer, white-paper, CASP, and non-compliant-entity datasets. SOG follows the same principle: one authorization or one delisting notice cannot answer every layer.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What users should check</div>
+    <table>
+      <thead><tr><th>Check</th><th>Question to ask</th></tr></thead>
+      <tbody>
+        <tr><td>Legal entity</td><td>Which company actually provides my account, custody, trading, or transfer service?</td></tr>
+        <tr><td>Scope</td><td>Does the source say EU, EEA, one member state, or a specific migrated customer cohort?</td></tr>
+        <tr><td>Buy and sell</td><td>Can I acquire the token, exit it, or only convert it through a special route?</td></tr>
+        <tr><td>Trading</td><td>Is ordinary spot trading available, or is the token only withdrawable or sellable?</td></tr>
+        <tr><td>Deposit and withdrawal</td><td>Can I still move the token in and out of the platform?</td></tr>
+        <tr><td>Custody deadline</td><td>Can the balance remain indefinitely, or is there a conversion or closure deadline?</td></tr>
+        <tr><td>Auto-conversion</td><td>Will the platform replace the balance automatically, and into which asset or currency?</td></tr>
+        <tr><td>Self-custody</td><td>Am I reading a regulated-platform restriction as if it erased the token from its blockchain?</td></tr>
+        <tr><td>Date</td><td>Is the page describing current service, a future deadline, or an old historical transition?</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Primary, regulator, and reporting sources</div>
+    <ul>
+      <li><a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica">ESMA — MiCA register hub and current register datasets</a></li>
+      <li><a href="https://www.esma.europa.eu/press-news/esma-news/esma-and-european-commission-publish-guidance-non-mica-compliant-arts-and-emts">ESMA and European Commission — Guidance on non-compliant ARTs and EMTs</a></li>
+      <li><a href="https://www.binance.com/en/support/announcement/detail/bcaa1f68d6a6450099056ff694ad6c46">Binance — 2025 EEA non-MiCA stablecoin transition notice</a></li>
+      <li><a href="https://support.kraken.com/articles/stablecoin-offerings-for-eea-clients">Kraken — Stablecoin offerings for EEA clients</a></li>
+      <li><a href="https://blog.bitstamp.net/post/mica-regulation-update-on-select-assets-in-the-eueea/">Bitstamp — EU/EEA MiCA update on selected assets</a></li>
+      <li><a href="https://www.okx.com/en-eu/buy-usdt">OKX Europe — USDT buy/sell page</a></li>
+      <li><a href="https://www.okx.com/en-eu/buy-usdc">OKX Europe — USDC buy/sell page</a></li>
+      <li><a href="https://crypto.com/eea">Crypto.com — Europe/EEA regional service page</a></li>
+      <li><a href="https://www.bybit.eu/en-EU/help-center/article/Everything-You-Need-to-Know-to-Get-Started-on-Bybit">Bybit EU — Getting started and general product context</a></li>
+      <li><a href="https://support.gemini.com/hc/en-gb">Gemini — UK, EEA, and Australia account-closure notice surface</a></li>
+      <li><a href="https://uphold.com/en-eu">Uphold Europe — Transition-period service notice</a></li>
+      <li><a href="https://www.coinbase.com/en-de/price/tether">Coinbase Germany — USDT product page</a></li>
+      <li><a href="https://www.coinbase.com/en-de/price/dai">Coinbase Germany — DAI product page</a></li>
+      <li><a href="https://www.coinbase.com/en-de/price/paypal-usd">Coinbase Germany — PYUSD product page</a></li>
+      <li><a href="https://www.cysec.gov.cy/en-GB/entities/Crypto-Assets-Entities-%28MiCAR%29/MiCAR-CASPs/Licensees-%28Article-63%29/101097/">CySEC — Revolut Digital Assets (Europe) Ltd CASP register entry</a></li>
+      <li><a href="https://www.circle.com/pressroom/circle-is-first-global-stablecoin-issuer-to-comply-with-mica-eus-landmark-crypto-law">Circle — EEA MiCA issuer announcement for USDC and EURC</a></li>
+      <li><a href="https://www.bankingcircle.com/banking-circle-launches-the-first-bank-backed-mica-compliant-stablecoin-euri/">Banking Circle — EURI launch and regulatory positioning</a></li>
+      <li><a href="https://www.sgforge.com/stablecoin-elevation/">Société Générale-FORGE — EURCV regulatory restructuring statement</a></li>
+      <li><a href="https://www.quantoz.com/products/eurq-usdq">Quantoz — EURQ and USDQ product and regulatory information</a></li>
+      <li><a href="https://www.ft.com/content/c1765ad5-022c-4bc3-9295-ef80791a2977">Financial Times — Binance EU service wind-down context</a></li>
+      <li><a href="https://www.reuters.com/business/finance/binance-set-lose-eu-licence-bid-permission-offer-services-bloc-sources-say-2026-06-16/">Reuters — Binance MiCA authorization context before the deadline</a></li>
+      <li><a href="https://www.tradingview.com/news/cointelegraph%3A387312cff094b%3A0-revolut-to-delist-usdt-in-august-citing-regulatory-and-risk-concerns/">Cointelegraph report syndicated by TradingView — reported Revolut USDT customer-notice change</a></li>
+    </ul>
+    <p>Platform policies can change. The most specific current platform page and regulator register should take priority over this article when a newer policy appears. Reported Revolut token-policy details remain separated from the official CASP legal-entity record because a public first-party USDT policy page was not available in the publication review.</p>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope, method, and revision policy</div>
+    <p>This guide is a reviewed snapshot current through July 5, 2026. It is not a complete legal opinion for every EU or EEA country, every customer entity, every stablecoin, or every platform function. “Not confirmed” is not the same as unavailable.</p>
+    <p>SOG separates asset-specific function evidence, platform-wide service state, and general licensing or service context. Future material changes require source review, an editorial revision, an updated information-current-through date, and a revision-history entry. Monitoring output never updates this page automatically.</p>
+    <p>This guide is not investment, legal, financial, or tax advice.</p>
+  </section>
+</BaseLayout>
