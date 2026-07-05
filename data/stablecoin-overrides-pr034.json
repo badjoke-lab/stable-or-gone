@@ -28,5 +28,11 @@
     "summary": "Synthetic USD asset from the Synthetix ecosystem. SOG records sUSD as active or protocol-legacy context while separating debt-pool mechanics, Synthetix V2/V3 lifecycle, collateral, and market exits.",
     "redemption_notes": "PR-034 adds Synthetix site and docs references. sUSD exits should be described through protocol mechanics and market access, not fiat-backed issuer redemption.",
     "notes": "PR-034 bottom-up pass. sUSD needs V2/V3 lifecycle treatment, collateral/debt-pool review, and current role clarification."
+  },
+  {
+    "id": "sog_st_fei",
+    "discontinued_date": null,
+    "last_verified_at": "2026-07-05",
+    "notes": "PR #302 keeps the 2022-09-22 governance milestone separate from the unresolved final effective end date. Execution completion, residual distribution, and current route availability remain unresolved."
   }
 ]
