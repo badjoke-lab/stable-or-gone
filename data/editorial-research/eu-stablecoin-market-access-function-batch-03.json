@@ -1,0 +1,314 @@
+{
+  "schema_version": "0.1",
+  "research_id": "eu-stablecoin-market-access-2026",
+  "batch_id": "function-matrix-batch-03",
+  "status": "reviewed_research_checkpoint",
+  "created_at": "2026-07-05",
+  "governing_spec": "docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md",
+  "purpose": "Record additional first-party and regulator-backed current-state findings while preserving asset-specific function evidence separately from platform-wide service context.",
+  "reviewed_sources": [
+    {
+      "source_id": "okx-europe-help-hub",
+      "publisher": "OKX Europe",
+      "source_type": "platform_official_help",
+      "tier": "B",
+      "url": "https://www.okx.com/en-eu/help",
+      "last_checked_at": "2026-07-05",
+      "scope": "OKX Europe public help surface",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "okx-europe-buy-usdt",
+      "publisher": "OKX Europe",
+      "source_type": "platform_official_product_page",
+      "tier": "B",
+      "url": "https://www.okx.com/en-eu/buy-usdt",
+      "last_checked_at": "2026-07-05",
+      "scope": "OKX Europe locale; page-level availability subject to regional availability",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "okx-europe-buy-usdc",
+      "publisher": "OKX Europe",
+      "source_type": "platform_official_product_page",
+      "tier": "B",
+      "url": "https://www.okx.com/en-eu/buy-usdc",
+      "last_checked_at": "2026-07-05",
+      "scope": "OKX Europe locale; page-level availability subject to regional availability",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "okx-eea-beginners-guide",
+      "publisher": "OKX Europe",
+      "source_type": "platform_official_help",
+      "tier": "B",
+      "url": "https://www.okx.com/en-eu/help/okx-beginners-guide-eea",
+      "last_checked_at": "2026-07-05",
+      "scope": "EEA",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "crypto-com-eea-current-service-page",
+      "publisher": "Crypto.com",
+      "source_type": "platform_official_regional_page",
+      "tier": "B",
+      "url": "https://crypto.com/eea",
+      "last_checked_at": "2026-07-05",
+      "scope": "Europe/EEA regional service page",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "bybit-eu-get-started-guide",
+      "publisher": "Bybit EU",
+      "source_type": "platform_official_help",
+      "tier": "B",
+      "url": "https://www.bybit.eu/en-EU/help-center/article/Everything-You-Need-to-Know-to-Get-Started-on-Bybit",
+      "page_last_updated": "2025-08-25",
+      "last_checked_at": "2026-07-05",
+      "scope": "Bybit EU",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "gemini-uk-eea-account-closure-notice",
+      "publisher": "Gemini",
+      "source_type": "platform_official_support_notice",
+      "tier": "B",
+      "url": "https://support.gemini.com/hc/en-gb",
+      "last_checked_at": "2026-07-05",
+      "scope": "UK, EEA, and Australia customer accounts",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "uphold-europe-transition-restriction-notice",
+      "publisher": "Uphold",
+      "source_type": "platform_official_regional_notice",
+      "tier": "B",
+      "url": "https://uphold.com/en-eu",
+      "last_checked_at": "2026-07-05",
+      "scope": "Uphold Europe regional page and European legal entity context",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "coinbase-germany-usdt-page",
+      "publisher": "Coinbase",
+      "source_type": "platform_official_member_state_product_page",
+      "tier": "B",
+      "url": "https://www.coinbase.com/en-de/price/tether",
+      "last_checked_at": "2026-07-05",
+      "scope": "Germany locale",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "coinbase-germany-dai-page",
+      "publisher": "Coinbase",
+      "source_type": "platform_official_member_state_product_page",
+      "tier": "B",
+      "url": "https://www.coinbase.com/en-de/price/dai",
+      "last_checked_at": "2026-07-05",
+      "scope": "Germany locale",
+      "review_state": "reviewed"
+    },
+    {
+      "source_id": "coinbase-germany-pyusd-page",
+      "publisher": "Coinbase",
+      "source_type": "platform_official_member_state_product_page",
+      "tier": "B",
+      "url": "https://www.coinbase.com/en-de/price/paypal-usd",
+      "last_checked_at": "2026-07-05",
+      "scope": "Germany locale",
+      "review_state": "reviewed"
+    }
+  ],
+  "platform_findings": [
+    {
+      "platform": "OKX Europe",
+      "platform_legal_entity": "OKX Europe Limited",
+      "region_scope": "OKX Europe locale with EEA service context",
+      "review_state": "reviewed_asset_specific_buy_sell_plus_general_service_context",
+      "platform_service_state": "current_service_context_available",
+      "asset_findings": [
+        {
+          "asset_symbol": "USDT",
+          "buy_status": "available",
+          "sell_status": "available",
+          "spot_trading_status": "not_confirmed",
+          "margin_status": "not_confirmed",
+          "earn_status": "not_confirmed",
+          "deposit_status": "not_confirmed",
+          "withdraw_status": "not_confirmed",
+          "custody_status": "not_confirmed",
+          "convert_status": "not_confirmed",
+          "auto_conversion_status": "not_applicable",
+          "source_ids": ["okx-europe-buy-usdt"]
+        },
+        {
+          "asset_symbol": "USDC",
+          "buy_status": "available",
+          "sell_status": "available",
+          "spot_trading_status": "not_confirmed",
+          "margin_status": "not_confirmed",
+          "earn_status": "not_confirmed",
+          "deposit_status": "not_confirmed",
+          "withdraw_status": "not_confirmed",
+          "custody_status": "not_confirmed",
+          "convert_status": "not_confirmed",
+          "auto_conversion_status": "not_applicable",
+          "source_ids": ["okx-europe-buy-usdc"]
+        }
+      ],
+      "notes": [
+        "The Europe-locale USDT and USDC pages explicitly present buy and sell flows.",
+        "General EEA help pages establish broader platform service context, but asset-specific deposit, withdrawal, custody, spot, margin, Earn, and Convert states are not inferred from navigation or general guides.",
+        "The product pages note regional availability caveats, so the finding is limited to the reviewed Europe-locale product surfaces rather than rewritten as a universal worldwide statement."
+      ],
+      "source_ids": ["okx-europe-help-hub", "okx-europe-buy-usdt", "okx-europe-buy-usdc", "okx-eea-beginners-guide"]
+    },
+    {
+      "platform": "Crypto.com",
+      "platform_legal_entity": "Foris DAX MT Limited",
+      "region_scope": "Europe/EEA regional service context",
+      "review_state": "reviewed_general_service_context_stablecoin_matrix_unresolved",
+      "platform_service_state": "current_service_context_available",
+      "general_function_context": {
+        "fiat_eur_deposit": "available",
+        "crypto_buy_sell_trade_in_eur": "available_general_context",
+        "earn": "available_general_context_with_separate_regulatory_caveat",
+        "staking": "available_general_context_with_separate_regulatory_caveat"
+      },
+      "stablecoin_function_matrix_state": "not_confirmed",
+      "notes": [
+        "The official EEA page presents current European service context, EUR deposits, and broad buy/sell/trade functionality.",
+        "The same page identifies Foris DAX MT Limited and current CASP service categories.",
+        "The page does not support stablecoin-by-stablecoin function states, so no USDT, USDC, DAI, deposit, withdrawal, custody, or conversion cells are inferred."
+      ],
+      "source_ids": ["crypto-com-eea-current-service-page"]
+    },
+    {
+      "platform": "Bybit EU",
+      "platform_legal_entity": null,
+      "region_scope": "Bybit EU",
+      "review_state": "reviewed_general_function_context_stablecoin_matrix_unresolved",
+      "platform_service_state": "current_service_context_available",
+      "general_function_context": {
+        "crypto_deposit": "available_general_context",
+        "fiat_buy_sell": "available_general_context",
+        "spot_trading": "available_general_context",
+        "earn": "available_general_context"
+      },
+      "stablecoin_function_matrix_state": "not_confirmed",
+      "notes": [
+        "The official Bybit EU starter guide describes deposit, fiat buy/sell, spot trading, and Earn functionality.",
+        "The guide is not an asset-specific stablecoin policy page and does not establish USDT, USDC, DAI, or other stablecoin function states.",
+        "No stablecoin-specific cells are filled from the general guide."
+      ],
+      "source_ids": ["bybit-eu-get-started-guide"]
+    },
+    {
+      "platform": "Gemini",
+      "platform_legal_entity": null,
+      "region_scope": "EEA customer accounts",
+      "review_state": "reviewed_platform_wide_service_closure_context",
+      "platform_service_state": "closed_for_eea_customer_accounts",
+      "effective_date": "2026-04-06",
+      "stablecoin_function_matrix_state": "not_required_for_current_platform_access_conclusion",
+      "notes": [
+        "Gemini's official UK/EEA support surface states that all customer accounts in the UK, EEA, and Australia are closed effective 2026-04-06.",
+        "This supersedes earlier licensing-context-only treatment for current EEA platform access.",
+        "The finding is recorded as a platform-wide service-state change rather than inventing GUSD or third-party stablecoin function rows."
+      ],
+      "source_ids": ["gemini-uk-eea-account-closure-notice"]
+    },
+    {
+      "platform": "Uphold",
+      "platform_legal_entity": "Uphold Digital Assets Europe Unipessoal, Lda",
+      "region_scope": "Europe regional service context",
+      "review_state": "reviewed_transition_restriction_context",
+      "platform_service_state": "temporary_service_restrictions",
+      "effective_context_date": "2026-07-01",
+      "general_function_context": {
+        "withdraw_status": "available",
+        "other_service_functions": "restricted_or_not_confirmed"
+      },
+      "stablecoin_function_matrix_state": "not_confirmed",
+      "notes": [
+        "The current Europe page states that the MiCAR application remains under active review and that temporary service restrictions apply after the July 1, 2026 transition point.",
+        "The same notice states that assets remain secure and can be withdrawn at any time.",
+        "Marketing content lower on the page is not used to override the current restriction notice or to infer stablecoin-specific buy, sell, trade, stake, or conversion states."
+      ],
+      "source_ids": ["uphold-europe-transition-restriction-notice"]
+    },
+    {
+      "platform": "Coinbase",
+      "platform_legal_entity": null,
+      "region_scope": "Germany locale only for these first-party product pages",
+      "review_state": "reviewed_member_state_asset_tradability",
+      "platform_service_state": "current_member_state_product_context",
+      "asset_findings": [
+        {
+          "asset_symbol": "USDT",
+          "spot_trading_status": "unavailable",
+          "buy_status": "not_confirmed",
+          "sell_status": "not_confirmed",
+          "deposit_status": "not_confirmed",
+          "withdraw_status": "not_confirmed",
+          "custody_status": "not_confirmed",
+          "convert_status": "not_confirmed",
+          "source_ids": ["coinbase-germany-usdt-page"]
+        },
+        {
+          "asset_symbol": "DAI",
+          "spot_trading_status": "unavailable",
+          "buy_status": "not_confirmed",
+          "sell_status": "not_confirmed",
+          "deposit_status": "not_confirmed",
+          "withdraw_status": "not_confirmed",
+          "custody_status": "not_confirmed",
+          "convert_status": "not_confirmed",
+          "source_ids": ["coinbase-germany-dai-page"]
+        },
+        {
+          "asset_symbol": "PYUSD",
+          "spot_trading_status": "unavailable",
+          "buy_status": "not_confirmed",
+          "sell_status": "not_confirmed",
+          "deposit_status": "not_confirmed",
+          "withdraw_status": "not_confirmed",
+          "custody_status": "not_confirmed",
+          "convert_status": "not_confirmed",
+          "source_ids": ["coinbase-germany-pyusd-page"]
+        }
+      ],
+      "notes": [
+        "The Germany-locale product pages state that USDT, DAI, and PYUSD are not tradable on Coinbase.",
+        "The finding is limited to Germany-locale product pages and is not generalized to every EEA member state.",
+        "Compatibility or network-support copy is not used to infer deposit, withdrawal, or custody availability."
+      ],
+      "source_ids": ["coinbase-germany-usdt-page", "coinbase-germany-dai-page", "coinbase-germany-pyusd-page"]
+    },
+    {
+      "platform": "Revolut",
+      "platform_legal_entity": "Revolut Digital Assets (Europe) Ltd",
+      "region_scope": "official CASP legal-entity context confirmed; reported USDT customer cohort unresolved",
+      "review_state": "official_legal_entity_confirmed_usdt_policy_source_gap_continues",
+      "platform_service_state": "authorised_micar_casp",
+      "stablecoin_function_matrix_state": "reported_usdt_policy_not_first_party_confirmed",
+      "notes": [
+        "Checkpoint 02 already records the official CySEC CASP legal-entity context.",
+        "No first-party public Revolut page confirming the reported USDT purchase, deposit, withdrawal, custody, and automatic-conversion schedule was located in the reviewed search pass.",
+        "The article must continue to label the USDT change as reported from a customer notice or secondary reporting unless first-party evidence becomes available before publication."
+      ],
+      "source_ids": []
+    }
+  ],
+  "gate_effect": {
+    "platform_breadth_floor_met": true,
+    "stable_asset_breadth_floor_met": true,
+    "function_level_evidence_depth_improved": true,
+    "current_service_state_coverage_improved": true,
+    "revolut_first_party_policy_confirmed": false,
+    "publication_date_recheck_complete": false,
+    "article_source_list_review_complete": false,
+    "publication_ready": false,
+    "next_action": "Re-evaluate comparative-claim scope, perform publication-date recheck, finalize source list, and keep the article blocked until those gates pass."
+  }
+}
