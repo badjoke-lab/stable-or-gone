@@ -61,7 +61,7 @@ check(euAccessGateReview.includes('C. General service/licensing context'), 'EU m
 check(euAccessFunctionBatch.gate_effect?.publication_ready === false, 'Checkpoint 03 source batch must remain a research checkpoint rather than self-authorizing publication');
 check(euAccessPage.includes('This guide is a reviewed snapshot current through July 5, 2026.'), 'EU market access guide snapshot date missing');
 check(euAccessPage.includes('/guides/mica-stablecoins/'), 'EU market access guide must link to the MiCA framework guide');
-check(euAccessPage.includes('Reported from customer-notice coverage') || euAccessPage.includes('reported from customer-notice'), 'EU market access guide must preserve conservative reported Revolut treatment');
+check(euAccessPage.includes('Recent reporting based on a customer notice'), 'EU market access guide must preserve conservative reported Revolut treatment');
 check(euAccessPage.includes('Reviewed asset-specific function examples'), 'EU market access guide A-level comparison section missing');
 check(euAccessPage.includes('Current platform service state can override an older token table'), 'EU market access guide B-level service-state section missing');
 for (const url of [
