@@ -8,7 +8,7 @@ Applies to: EU/EEA stablecoin access research, the reviewed market-access guide,
 
 This specification governs how Stable or Gone researches, publishes, and later monitors EU/EEA stablecoin market access.
 
-The target question is not whether a token is simply "allowed" or "banned" in Europe. The research must answer the narrower operational question:
+The target question is not whether a token is simply "allowed" or "banned" in Europe. Research must answer the narrower operational question:
 
 ```text
 Which stablecoin
@@ -24,7 +24,7 @@ The initial public article route is fixed as:
 /guides/eu-stablecoin-access-after-mica/
 ```
 
-The article complements, and does not replace, the existing framework guide:
+It complements, and does not replace:
 
 ```text
 /guides/mica-stablecoins/
@@ -40,31 +40,36 @@ Research and monitoring must preserve these separate layers:
 issuer legal status
 stablecoin legal or regulatory status
 CASP authorization status
-platform policy
+platform service state
+platform stablecoin policy
 customer legal entity
 geographic scope
 product/function availability
 self-custody availability
+announcement date
 effective date
 ```
 
-No single layer may be used as a substitute for another.
+No layer may substitute for another.
 
-Examples of prohibited simplification:
+Prohibited simplifications include:
 
 ```text
 MiCA-authorized company -> every related stablecoin is automatically available
+platform licence -> every supported asset and function is known
 platform trading halt -> token is banned from the EU
 withdrawal still available -> full trading support remains
 issuer compliance claim -> current ESMA register status is proven
-media report -> platform policy is confirmed for every EU/EEA customer
+Global product page -> EU/EEA function availability is proven
+media report -> every function cell is confirmed
+historical stablecoin policy -> current platform-wide service state is unchanged
 ```
 
 ## 3. Research scope for the initial article
 
 ### 3.1 Platform coverage target
 
-The publication target is at least 10 researched platforms, including representation from:
+Publication requires at least 10 researched platforms with representation from:
 
 ```text
 large global exchanges
@@ -88,13 +93,15 @@ Revolut
 Uphold
 ```
 
-Additional platforms may be added when they materially improve EU/EEA coverage.
+Additional platforms may be added when they materially improve EU/EEA coverage. Gemini has been added as one such additional research platform.
 
 The article does not need equal-length prose for every researched platform. The research matrix should be broader than the narrative case studies.
 
+Meeting the 10-platform breadth floor does not authorize publication. A platform counted for research breadth may still have unresolved function-level access states.
+
 ### 3.2 Stablecoin coverage target
 
-The publication target is at least 15 reviewed stable assets and should cover both restriction and expansion patterns.
+Publication requires at least 15 reviewed stable assets and should cover both restriction and expansion patterns.
 
 Priority access-contraction or restriction set:
 
@@ -124,15 +131,18 @@ USDQ
 USDG
 ```
 
-Complex protocol-issued or lineage cases may be included when they are needed to explain why access decisions cannot be reduced to issuer branding.
+Complex protocol-issued or lineage cases may be included when needed to explain why access decisions cannot be reduced to issuer branding.
+
+A stable asset being touched by a reviewed platform finding counts toward research breadth only. It does not mean the asset has a complete cross-platform matrix.
 
 ## 4. Research matrix
 
-The working research matrix must distinguish at least these fields:
+The working research matrix must distinguish at least:
 
 ```text
 platform
 platform_legal_entity
+platform_service_state
 region_scope
 asset_id
 asset_symbol
@@ -156,7 +166,7 @@ review_state
 notes
 ```
 
-Allowed functional states are:
+Allowed functional states:
 
 ```text
 available
@@ -171,9 +181,9 @@ not_applicable
 not_confirmed
 ```
 
-Unknown or unconfirmed cells remain `not_confirmed`. They must not be filled by inference from another function.
+Unknown or unsupported cells remain `not_confirmed`.
 
-For example, a spot-trading restriction does not imply a deposit restriction. A custody statement does not imply a withdrawal statement.
+A spot-trading restriction does not imply a deposit restriction. A custody statement does not imply a withdrawal statement. A CASP licence does not imply a stablecoin function state.
 
 ## 5. Geography and legal-entity rule
 
@@ -189,9 +199,9 @@ specific regulated legal entity
 specific customer migration cohort
 ```
 
-Do not rewrite EEA as EU when the source says EEA. Do not generalize a legal-entity migration notice to every customer worldwide.
+Do not rewrite EEA as EU when the source says EEA. Do not generalize a legal-entity migration notice or customer cohort to every user worldwide.
 
-If a public source does not establish scope, record the claim as scope-unresolved and do not use it to support a universal statement.
+If a source does not establish scope, record the claim as scope-unresolved and do not use it to support a universal statement.
 
 ## 6. Source hierarchy
 
@@ -214,8 +224,8 @@ Preferred for product availability and policy claims:
 ```text
 platform help center
 platform legal notice
-platform delisting notice
-platform product-availability page
+platform delisting or relisting notice
+platform product-availability page with scoped geography
 issuer regulatory page
 issuer product page
 issuer white paper
@@ -223,7 +233,7 @@ issuer white paper
 
 ### Tier C — high-quality reporting
 
-Reuters and similarly strong reporting may be used when first-party public material is incomplete, removed, unavailable, or needed to establish the existence of a customer notice.
+Reuters, Financial Times, and similarly strong reporting may be used when first-party public material is incomplete, removed, unavailable, or needed to establish current service context or the existence of a customer notice.
 
 Tier C alone must not populate a complete function matrix unless the report explicitly supports each relevant field.
 
@@ -231,9 +241,42 @@ Tier C alone must not populate a complete function matrix unless the report expl
 
 Social posts, search results, forums, screenshots, and secondary aggregators may identify a lead. They do not by themselves confirm a market-access row.
 
-## 7. Revolut handling rule
+## 7. Research-state rules established by checkpoint work
 
-The initial article may use the reported Revolut USDT change as the narrative entry point, but the detailed matrix row is not considered fully confirmed until the research establishes, as far as public evidence allows:
+### 7.1 Historical policy versus current platform service state
+
+A platform's earlier stablecoin-specific policy may remain historically valid while later platform-wide licensing or service changes alter current access.
+
+The article must separate these layers when both matter.
+
+Current required example:
+
+```text
+Binance 2025: stablecoin-specific EEA restrictions by function
+Binance 2026: broader EU service interruption or wind-down context after the MiCA transition deadline
+```
+
+Do not present the 2025 Binance function table as a complete July 2026 current-service table.
+
+### 7.2 Licensing context versus function matrix
+
+The following are distinct evidence states:
+
+```text
+licensed service context reviewed
+platform service state reviewed
+stablecoin-specific function policy reviewed
+```
+
+A platform may count toward research breadth through reviewed licensing or service context while remaining unsuitable for a function-level comparison until scoped first-party evidence is found.
+
+### 7.3 Public marketing page scope
+
+A Global product page may establish that a platform markets or describes a token, but it does not establish EU/EEA customer access unless the page or related terms establish that scope.
+
+## 8. Revolut handling rule
+
+The article may use the reported Revolut USDT change as the narrative entry point, but the detailed policy row is not fully confirmed until research establishes, as far as public evidence allows:
 
 ```text
 target legal entity
@@ -246,21 +289,24 @@ auto-conversion rule
 conversion destination or base-currency rule
 ```
 
-If first-party public material remains unavailable, the article must label the claim as reported from a customer notice or secondary reporting and must not present unresolved scope as a global Revolut policy.
+The official CASP legal-entity layer is separately recorded when supported by regulator evidence. That evidence must not be treated as confirmation of the reported USDT schedule.
 
-## 8. Publication gate for the initial guide
+If first-party public material remains unavailable, the article must label the change as reported from a customer notice or secondary reporting and must not present unresolved scope as a global Revolut policy.
+
+## 9. Publication gate for the initial guide
 
 The article is publishable only when all of the following are satisfied:
 
 ```text
 at least 10 platforms researched
 at least 15 stable assets reviewed
-function-level access states separated
+function-level access states separated for the comparative claims actually used
 region/legal-entity scope recorded where supported
 major platform claims backed primarily by Tier A or Tier B sources
 ESMA or relevant register cross-check completed
 Revolut scope represented conservatively if still unresolved
 article source list reviewed
+current platform service context separated from historical policy where necessary
 publication-date current-state recheck completed
 ```
 
@@ -276,7 +322,7 @@ related stablecoin links for material assets
 scope disclaimer
 ```
 
-## 9. Article structure
+## 10. Article structure
 
 The initial narrative structure is fixed at a high level:
 
@@ -292,9 +338,9 @@ The initial narrative structure is fixed at a high level:
 9. Conclusion and revision policy
 ```
 
-The article must not become a safety ranking, investment recommendation, or market-share ranking.
+The article must not become a safety ranking, investment recommendation, market-share ranking, or issuer scorecard.
 
-## 10. Snapshot and revision governance
+## 11. Snapshot and revision governance
 
 The article is a reviewed dated editorial surface, not a live dashboard.
 
@@ -309,9 +355,9 @@ source list when needed
 related guide mapping when needed
 ```
 
-A change in a monitored source does not automatically update the public article.
+A monitored source change does not automatically update the public article.
 
-The required flow is:
+Required flow:
 
 ```text
 source change
@@ -324,13 +370,11 @@ source change
 -> merge to main
 ```
 
-## 11. Market-access monitoring extension
+## 12. Market-access monitoring extension
 
-The existing review-only monitoring architecture remains the base implementation. The market-access extension adds observation coverage, not a separate automatic publishing system.
+The existing review-only monitoring architecture remains the base implementation. Market-access monitoring adds observation coverage, not a separate publishing system.
 
-Monitoring layers:
-
-### 11.1 Platform policy watch
+### 12.1 Platform policy watch
 
 Observe reviewed first-party pages for:
 
@@ -340,6 +384,7 @@ regional asset restrictions
 delisting or relisting
 buy/sell restrictions
 spot or margin restrictions
+Earn restrictions
 deposit or withdrawal changes
 custody-only states
 convert-only states
@@ -347,7 +392,7 @@ auto-conversion deadlines
 customer legal-entity migration notices
 ```
 
-### 11.2 Regulatory register watch
+### 12.2 Regulatory register watch
 
 Observe reviewed regulator or official register sources for:
 
@@ -360,17 +405,17 @@ relevant non-compliant entity changes
 material national authority actions
 ```
 
-### 11.3 Issuer status watch
+### 12.3 Issuer status watch
 
-Reuse the existing issuer, reserve, redemption, lifecycle, and regulatory monitoring where relevant. Market-access monitoring must not duplicate existing issuer-source coverage merely to create a second candidate stream.
+Reuse the existing issuer, reserve, redemption, lifecycle, and regulatory monitoring where relevant. Do not duplicate existing issuer-source coverage merely to create a second candidate stream.
 
-### 11.4 News discovery
+### 12.4 News discovery
 
-News discovery may be used to identify leads, but discovery output is not a canonical fact and is not sufficient for public article revision.
+News discovery may identify leads and current service-context changes, but discovery output is not a canonical fact and is insufficient for automatic article revision.
 
-## 12. Material-change rule
+## 13. Material-change rule
 
-The market-access monitoring extension should create review candidates only for material access or scope changes, including:
+Market-access monitoring should create review candidates only for material access or scope changes, including:
 
 ```text
 available -> unavailable
@@ -384,6 +429,7 @@ convert-only transition
 auto-conversion deadline added or changed
 region scope changed
 customer legal entity changed
+platform-wide service state changed
 new stablecoin support
 stablecoin support removal
 regulatory register status changed
@@ -391,26 +437,24 @@ regulatory register status changed
 
 Layout changes, footer changes, cookie text, analytics markup, and metadata-only changes are not market-access candidates.
 
-## 13. Monitoring schedule target
+## 14. Monitoring schedule target
 
-The target cadence for the later scheduled implementation is:
+Target cadence for the later scheduled implementation:
 
 ```text
 platform policy sources: daily
 platform announcement sources: daily
 news discovery: daily
 ESMA and regulatory registers: weekly
-issuer regulatory/transparency sources: weekly unless an existing cadence is already stricter
+issuer regulatory/transparency sources: weekly unless an existing cadence is stricter
 article stale-state review: weekly
 ```
 
 The schedule remains bounded and read-only. No job may run more frequently merely because the source is easy to fetch.
 
-## 14. Safety boundary
+## 15. Safety boundary
 
-Market-access monitoring inherits the repository monitoring safety boundary.
-
-It may:
+Market-access monitoring may:
 
 ```text
 fetch allowlisted sources
@@ -433,28 +477,33 @@ publish the article automatically
 deploy
 ```
 
-## 15. Implementation sequencing
+## 16. Implementation sequencing
 
-Research may begin immediately after this specification is merged and may proceed in parallel with PR #302.
-
-The public article implementation occurs only after PR #302 is merged.
-
-The canonical schedule is maintained in `docs/roadmap.md`. The intended sequence is:
+Completed:
 
 ```text
+PR #302  lifecycle and relationship boundary audit
 PR #303  specification and schedule amendment for EU market-access research and monitoring
-PR #304  reviewed EU stablecoin market-access article and initial snapshot
-PR #305  known-unknown and placeholder integrity audit
-PR #306  100-asset monitoring coverage recalculation
-PR #307-#311  non-UI release hardening
-PR #312-#315  monitoring expansion and scheduled read-only operation, including market-access coverage
-PR #316-#319  statistics implementation
-PR #320-#325  controlled growth from 100 to 110
 ```
 
-The roadmap, not this section alone, is authoritative for current position and exact next work.
+Active and next:
 
-## 16. Required reading for this workstream
+```text
+PR #304  reviewed research matrix, checkpoints, and schedule synchronization
+PR #305  reviewed EU stablecoin market-access article after publication gate passes
+PR #306  known-unknown and placeholder integrity audit
+PR #307  100-asset monitoring coverage recalculation
+PR #308-#312  non-UI release hardening
+PR #313-#316  monitoring expansion and scheduled read-only operation, including market-access coverage
+PR #317-#320  statistics implementation
+PR #321-#326  candidate audit and controlled growth from 100 to 110
+```
+
+The canonical schedule is maintained in `docs/roadmap.md`. The roadmap is authoritative for the current item and exact next PR number.
+
+Research checkpoints may be merged before the article when they improve reproducibility, record unresolved source gaps, or correct current-state interpretation. Research checkpoints do not publish the article.
+
+## 17. Required reading for this workstream
 
 Before research, article implementation, or market-access monitoring changes, read:
 
@@ -471,18 +520,27 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
+For current research work, also read:
+
+```text
+data/editorial-research/eu-stablecoin-market-access.json
+data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
+docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
+```
+
 Article implementation must also inspect:
 
 ```text
 src/data/guideCatalog.ts
 src/data/stablecoinGuideLinks.ts
 scripts/validate-guides.mjs
-/guides/mica-stablecoins/ implementation
+src/pages/guides/mica-stablecoins/index.astro
 ```
 
-## 17. Deployment classification
+## 18. Deployment classification
 
-Specification and monitoring-plan changes:
+Specification, research checkpoint, and monitoring-plan changes:
 
 ```text
 No production deployment required
