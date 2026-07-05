@@ -15,7 +15,7 @@ When documents disagree, use this order:
 2. `docs/spec-governance.md` for document authority and change control.
 3. `docs/roadmap.md` for the current phase and next approved work.
 4. The canonical specification or implementation plan for the active workstream.
-5. Supporting audits, inventories, examples, and research checkpoints.
+5. Supporting audits, inventories, examples, publication-gate reviews, and research checkpoints.
 6. Conversation history, issue discussion, generated output, and unmerged drafts.
 
 The active core program is governed by:
@@ -50,7 +50,7 @@ EU/EEA market-access research, the dated guide, its research matrix, and the lat
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-Supporting research checkpoints named by the active work item are review inputs, not substitutes for the specification. Current checkpoint files are:
+Supporting research and publication review files named by the active work item are review inputs, not substitutes for the specification. Current files are:
 
 ```text
 data/editorial-research/eu-stablecoin-market-access.json
@@ -59,6 +59,7 @@ data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
 ```
 
 UI is maintenance-only. The current production visual direction is the restored terminal family implemented through PR #288-#295. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
@@ -73,7 +74,7 @@ Before changing code, data, workflows, or documentation:
 4. Read `docs/deployment-policy.md`.
 5. Read the canonical plan for the active work item.
 6. Read the relevant data, monitoring, statistics, editorial, or maintenance specification.
-7. Read each queue, validator, audit, fixture, baseline, and research checkpoint named by the active work item.
+7. Read each queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint named by the active work item.
 
 A pull request is not ready for review until the exact specification sections and roadmap item it implements are identified.
 
@@ -83,7 +84,7 @@ A decision becomes binding only when it is written into the relevant canonical r
 
 If implementation and specification disagree, implementation is defective unless the specification is deliberately updated through review.
 
-Supporting research may record a fact, unresolved state, or source gap. It does not authorize publication until the applicable publication gate passes.
+Supporting research may record a fact, unresolved state, or source gap. It does not authorize publication until the applicable publication gate passes through a reviewed gate record.
 
 ## 5. Change-control rule
 
@@ -139,7 +140,7 @@ A PR that cannot cite an approved work item must pause until the roadmap or spec
 
 `docs/roadmap.md` is the canonical execution schedule. Update it when a phase changes, a PR is merged or reordered, counts change, a publication checkpoint changes, or a blocker changes the next work item.
 
-Do not rewrite completed history to make a changed plan appear unchanged. Record deviations, consumed PR numbers, research-only checkpoints, superseded visual directions, and stale branches explicitly.
+Do not rewrite completed history to make a changed plan appear unchanged. Record deviations, consumed PR numbers, research-only checkpoints, publication-gate reviews, superseded visual directions, and stale branches explicitly.
 
 Current execution state:
 
@@ -152,12 +153,12 @@ PR #302 lifecycle and relationship boundary audit complete
 PR #303 EU market-access specification and schedule amendment complete
 PR #304 reviewed market-access matrix and checkpoints 01-02 complete
 PR #305 checkpoint 03 schedule amendment complete
-PR #306 function-matrix checkpoint 03 active
-PR #307 market-access guide blocked until publication gates pass
-remaining core audit resumes at PR #308
+PR #306 function-matrix checkpoint 03 complete
+PR #307 reviewed market-access guide and publication-gate record active
+PR #308 known-unknown and placeholder integrity audit next
 ```
 
-Checkpoint 03 adds reviewed evidence in three distinct layers:
+The publication gate review passes only for a bounded article design that preserves three evidence layers:
 
 ```text
 A. asset-specific function evidence
@@ -238,7 +239,7 @@ income profiles
 
 Unknown values remain unknown unless evidence supports a canonical value. Intentional removals require record-by-record audit and explicit approval.
 
-Editorial research files remain outside canonical registry counts and must not masquerade as canonical records.
+Editorial research files and gate-review files remain outside canonical registry counts and must not masquerade as canonical records.
 
 ## 11. Growth governance
 
@@ -285,7 +286,9 @@ EU/EEA market-access monitoring inherits the same rule. Platform-policy and regu
 
 The market-access article is a reviewed dated editorial snapshot, not a live dashboard.
 
-Publication requires the gate in `docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md` to pass. In particular:
+The publication gate in `docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md` passed after current-state rechecks and source-list review. That pass is limited to the bounded article design and does not convert every research row into a confirmed universal matrix.
+
+Publication rules remain:
 
 - platform breadth alone is insufficient;
 - asset breadth alone is insufficient;
@@ -296,7 +299,10 @@ Publication requires the gate in `docs/quality/eu-stablecoin-market-access-resea
 - EU, EEA, member-state, legal-entity, and customer-cohort scopes remain separate;
 - historical policy must be separated from later service-state changes;
 - current service context must be rechecked at publication time;
-- the final source list must be reviewed before article implementation.
+- the final source list must be reviewed;
+- Revolut official CASP evidence must remain separate from reported USDT policy details when a public first-party policy page is unavailable.
+
+Future article revisions require reviewed source confirmation, `informationCurrentThrough` and `updatedAt` handling, and a revision-history entry. Monitoring output alone never edits the guide.
 
 ## 14. Statistics governance
 
