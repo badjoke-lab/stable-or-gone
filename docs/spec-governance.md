@@ -50,16 +50,16 @@ EU/EEA market-access research, the dated guide, its research matrix, and the lat
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-Merged supporting research checkpoints are:
+Supporting research checkpoints named by the active work item are review inputs, not substitutes for the specification. Current checkpoint files are:
 
 ```text
 data/editorial-research/eu-stablecoin-market-access.json
 data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
+data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 ```
-
-Checkpoint 03 artifacts become supporting research authority only after their reviewed PR merges.
 
 UI is maintenance-only. The current production visual direction is the restored terminal family implemented through PR #288-#295. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
 
@@ -151,13 +151,21 @@ UI maintenance-only
 PR #302 lifecycle and relationship boundary audit complete
 PR #303 EU market-access specification and schedule amendment complete
 PR #304 reviewed market-access matrix and checkpoints 01-02 complete
-PR #305 checkpoint 03 schedule amendment active
-PR #306 function-matrix checkpoint 03 next
+PR #305 checkpoint 03 schedule amendment complete
+PR #306 function-matrix checkpoint 03 active
 PR #307 market-access guide blocked until publication gates pass
 remaining core audit resumes at PR #308
 ```
 
-The additional schedule amendment is justified because new source review produced material current-state findings that must be recorded before publication, including platform-wide service changes that cannot be safely folded into earlier historical policy rows.
+Checkpoint 03 adds reviewed evidence in three distinct layers:
+
+```text
+A. asset-specific function evidence
+B. current platform-wide service-state evidence
+C. general service/licensing context without asset-specific function support
+```
+
+Only A-level evidence may populate direct function comparisons. B-level evidence may explain current access context. C-level evidence remains bounded context.
 
 Urgent factual corrections, verified public breakage, owner-directed dated editorial work, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
 
@@ -287,7 +295,8 @@ Publication requires the gate in `docs/quality/eu-stablecoin-market-access-resea
 - high-quality reporting may establish context but may not populate unsupported function fields;
 - EU, EEA, member-state, legal-entity, and customer-cohort scopes remain separate;
 - historical policy must be separated from later service-state changes;
-- current service context must be rechecked at publication time.
+- current service context must be rechecked at publication time;
+- the final source list must be reviewed before article implementation.
 
 ## 14. Statistics governance
 
