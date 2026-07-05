@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 22
       - name: Run lifecycle and relationship boundary audit
-        run: node scripts/audit-registry-lifecycle-boundaries.mjs
+        run: node scripts/run-registry-lifecycle-boundary-audit.mjs
       - name: Upload lifecycle boundary audit
         if: always()
         uses: actions/upload-artifact@v4
