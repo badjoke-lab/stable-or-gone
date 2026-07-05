@@ -12,12 +12,16 @@ const baselineReplacement = `
 const baselineBase = readJson(baselinePath) ?? {};
 const baselineGroups = { ...(baselineBase.data_groups ?? {}) };
 const minimumCounts = { ...(baselineBase.minimum_counts ?? {}) };
-for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', 'docs/migration/registry-v2-baseline-batch-p.json', 'docs/migration/registry-v2-baseline-batch-u.json']) {
+for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', 'docs/migration/registry-v2-baseline-batch-p.json']) {
   const overlay = readJson(overlayPath) ?? {};
   Object.assign(minimumCounts, overlay.minimum_counts ?? {});
   for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
     baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
   }
+}
+const evidenceOverlay = readJson('docs/migration/registry-v2-baseline-batch-u.json') ?? {};
+for (const [name, additions] of Object.entries(evidenceOverlay.data_group_additions ?? {})) {
+  baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
 }
 const baseline = { ...baselineBase, minimum_counts: minimumCounts, data_groups: baselineGroups };
 `;
