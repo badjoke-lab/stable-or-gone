@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "frozen_at": "2026-06-25",
-  "source_review": "docs/audits/terminal-date-checkpoint-2026-06-25.md",
+  "frozen_at": "2026-07-05",
+  "source_review": "docs/audits/registry-100-lifecycle-boundary-audit.md",
   "policy": {
     "canonical_day_required": true,
     "keep_null_without_matching_terminal_boundary_evidence": true,
@@ -10,7 +10,7 @@
     "forbid_migration_start_as_default_final_end": true,
     "forbid_retrospective_source_date_as_effective_date": true
   },
-  "expected_total": 4,
+  "expected_total": 6,
   "records": [
     {
       "stablecoin_id": "sog_st_bac",
@@ -63,6 +63,32 @@
       "review_note": "GMO Trust's official notice confirms that the initial redemption period remains open until 2026-11-11. The wind-down start, purchase disablement, and notice date are not final token termination boundaries.",
       "rejected_shortcuts": ["wind_down_start_as_final_end","purchase_disable_date_as_redemption_end","notice_publication_as_token_termination"],
       "future_review_target": "official_final_redemption_deadline_or_termination_notice"
+    },
+    {
+      "stablecoin_id": "sog_st_fei",
+      "canonical_status": "discontinued",
+      "strongest_known_boundary": "2022-09-22",
+      "boundary_type": "final_redemption_governance_boundary",
+      "last_confirmed_activity": "2022-09-22 final-redemption governance package; exact final execution and residual distribution completion unresolved",
+      "first_confirmed_successor_or_inactive": null,
+      "formal_shutdown_announcement": "final_redemption_governance_recovered_final_effective_end_unresolved",
+      "reason_code": "governance_boundary_not_final_effective_end",
+      "review_note": "The 2022-09-22 governance boundary is recorded, but the exact final execution timestamp, residual distribution completion, and current route availability remain unresolved. The governance date is not coerced into a final effective end day.",
+      "rejected_shortcuts": ["governance_vote_date_as_final_end","redemption_design_approval_as_route_disablement","historical_interface_state_as_final_route_end"],
+      "future_review_target": "executed_final_redemption_completion_residual_distribution_end_or_final_route_shutdown"
+    },
+    {
+      "stablecoin_id": "sog_st_nearusn",
+      "canonical_status": "discontinued",
+      "strongest_known_boundary": "2022-10-24",
+      "boundary_type": "controlled_wind_down_start",
+      "last_confirmed_activity": "2022-10-24 permanent minting cessation and Protection Programme wind-down start; final programme close and residual settlement unresolved",
+      "first_confirmed_successor_or_inactive": "2022-10-24 controlled wind-down and Protection Programme start",
+      "formal_shutdown_announcement": "controlled_wind_down_recovered_final_settlement_unresolved",
+      "reason_code": "protection_program_terminal_date_unresolved",
+      "review_note": "The 2022-10-24 boundary establishes permanent minting cessation and the start of the controlled wind-down and Protection Programme. Existing known-unknown records state that the final programme close date, payout completion, residual obligations, final supply, and later market state remain unresolved, so the wind-down start is not treated as the final terminal day.",
+      "rejected_shortcuts": ["wind_down_start_as_final_end","permanent_mint_stop_as_final_settlement","protection_program_launch_as_completion","market_liquidity_decline_as_terminal_date"],
+      "future_review_target": "official_protection_program_close_payout_completion_residual_obligation_settlement_or_final_token_end_state"
     }
   ]
 }
