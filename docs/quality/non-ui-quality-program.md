@@ -13,8 +13,8 @@ This program governs the core workstream after the dedicated UI correction progr
 -> EU market-access specification — complete
 -> reviewed market-access checkpoints 01-02 — complete
 -> checkpoint 03 schedule amendment — complete
--> function-matrix checkpoint 03 — active
--> reviewed market-access article after publication gate passes
+-> function-matrix checkpoint 03 — complete
+-> reviewed market-access article and publication-gate record — active
 -> remaining registry-wide audit
 -> non-UI release hardening
 -> monitoring expansion and scheduled read-only operation
@@ -52,8 +52,9 @@ PR #302 lifecycle and relationship boundary audit: complete
 PR #303 EU market-access specification amendment: complete
 PR #304 reviewed matrix and checkpoints 01-02: complete
 PR #305 checkpoint 03 schedule amendment: complete
-PR #306 function-matrix checkpoint 03: active
-PR #307 article: blocked until publication gates pass
+PR #306 function-matrix checkpoint 03: complete
+PR #307 reviewed article and publication-gate record: active
+PR #308 known-unknown and placeholder integrity audit: next
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
 Growth beyond 100: not yet authorized until candidate audit phase
@@ -70,7 +71,7 @@ Before changing canonical data, evidence, monitoring, statistics, workflows, qua
 5. this document
 6. the relevant canonical data, monitoring, editorial, or statistics specification
 7. `docs/migration/registry-v3-baseline.json`
-8. every queue, validator, fixture, baseline, supporting audit, and research checkpoint named by the work item
+8. every queue, validator, fixture, baseline, supporting audit, publication-gate review, and research checkpoint named by the work item
 
 Relevant canonical specifications include:
 
@@ -89,7 +90,7 @@ docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ## Fixed operating rules
 
 - Repository specifications remain the source of truth.
-- Every non-trivial PR cites the exact queue, audit, schema, fixture, baseline, validator, and research checkpoint it changes.
+- Every non-trivial PR cites the exact queue, audit, schema, fixture, baseline, validator, publication-gate review, and research checkpoint it changes.
 - Unknown values remain unknown unless reviewed evidence supports a canonical value.
 - Month- or year-level evidence is not coerced into a day-level date.
 - UI work must not clear quality queues through hiding, defaults, or relabeling.
@@ -123,6 +124,7 @@ PR #296-#302   registry-wide audit through lifecycle and relationship boundaries
 PR #303         EU stablecoin market-access research, publication, and monitoring specification
 PR #304         reviewed matrix and market-access checkpoints 01-02
 PR #305         checkpoint 03 schedule amendment
+PR #306         function-matrix checkpoint 03
 ```
 
 Completed monitoring architecture already includes:
@@ -160,11 +162,13 @@ publication-date current-state recheck complete: no
 article publishable: no
 ```
 
+This state is preserved as a historical research checkpoint, not overwritten retroactively.
+
 ### PR #305 — checkpoint 03 schedule amendment — complete
 
 This authority-only PR reserved checkpoint 03 before article implementation and shifted downstream PR numbering once.
 
-### PR #306 — function-matrix checkpoint 03 — active
+### PR #306 — function-matrix checkpoint 03 — complete
 
 Checkpoint artifacts:
 
@@ -173,14 +177,7 @@ data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 ```
 
-Checkpoint 03 requirements:
-
-- preserve asset-specific function evidence separately from general service context;
-- preserve Germany-specific Coinbase pages as Germany scope unless broader first-party evidence is found;
-- record Gemini EEA closure as platform service context rather than invented coin-by-coin restrictions;
-- record Uphold general withdrawal availability separately from other temporarily restricted or unconfirmed services;
-- keep unsupported function cells `not_confirmed`;
-- keep Revolut USDT policy details unresolved or explicitly reported when no first-party notice is available.
+Checkpoint 03 added reviewed evidence for OKX Europe, Crypto.com Europe, Bybit EU, Gemini EEA, Uphold Europe, Coinbase Germany, and continued conservative Revolut treatment.
 
 Checkpoint 03 evidence layers:
 
@@ -192,7 +189,29 @@ C. general service/licensing context without asset-specific function support
 
 Only A-level evidence should populate direct function comparisons. B-level findings explain current access context. C-level findings remain bounded context.
 
-### PR #307 — reviewed article and initial market-access snapshot
+### Publication gate review — complete
+
+Record:
+
+```text
+docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
+```
+
+The gate passed on 2026-07-05 for a bounded article design after:
+
+```text
+platform and asset breadth review
+comparative-claim scoping
+current-state source rechecks
+ESMA/register cross-check
+source-list review
+historical policy vs current service-state separation
+renewed first-party Revolut policy search
+```
+
+The pass does not turn every research row into a complete matrix. It authorizes publication only when unsupported functions remain unclaimed and the three evidence layers remain separate.
+
+### PR #307 — reviewed article and publication-gate record — active
 
 Target route:
 
@@ -200,7 +219,24 @@ Target route:
 /guides/eu-stablecoin-access-after-mica/
 ```
 
-PR #307 begins only after the publication gate in the canonical market-access specification passes. The article must use reviewed sources, include an information-current-through date, support revision history, and remain separate from raw monitoring output.
+Implementation requirements:
+
+```text
+dated guide metadata
+information-current-through date
+reviewed source links
+MiCA framework guide cross-link
+asset-specific function comparison from A-level evidence only
+current platform service-state context from B-level evidence
+general service/licensing context kept bounded
+conservative Revolut wording
+related-guide links from material stablecoin dossiers
+existing guide catalog, sitemap, and homepage discovery paths
+registry-update entry
+guide validation and workstream validation
+```
+
+The article must remain separate from raw monitoring output. Future material changes require reviewed source confirmation, editorial revision, date update, and revision-history entry.
 
 ## Remaining Phase A — 100-record registry-wide audit
 
@@ -300,4 +336,4 @@ Each growth PR contains no more than two new stable assets and must add every ap
 
 ## Deployment classification
 
-Quality, monitoring, statistics, growth, and editorial research PRs follow `docs/deployment-policy.md`. Normal merged changes publish from `main`; monitoring execution itself remains read-only and publication-neutral.
+Quality, monitoring, statistics, growth, editorial research, and dated guide PRs follow `docs/deployment-policy.md`. Normal merged changes publish from `main`; monitoring execution itself remains read-only and publication-neutral.
