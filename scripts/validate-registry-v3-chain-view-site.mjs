@@ -12,7 +12,7 @@ const baselineReplacement = `
 const baselineBase = readJson(baselinePath) ?? {};
 const baselineGroups = { ...(baselineBase.data_groups ?? {}) };
 const minimumCounts = { ...(baselineBase.minimum_counts ?? {}) };
-for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', 'docs/migration/registry-v2-baseline-batch-p.json']) {
+for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', 'docs/migration/registry-v2-baseline-batch-p.json', 'docs/migration/registry-v2-baseline-batch-u.json']) {
   const overlay = readJson(overlayPath) ?? {};
   Object.assign(minimumCounts, overlay.minimum_counts ?? {});
   for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
