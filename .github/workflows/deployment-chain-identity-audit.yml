@@ -1,0 +1,31 @@
+name: Deployment and chain identity audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run deployment and chain identity audit
+        run: node scripts/audit-registry-deployment-chain-identity.mjs
+      - name: Upload deployment identity audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-chain-identity-audit-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            data/generated/registry-deployment-chain-identity-audit.json
+            docs/audits/registry-100-deployment-chain-identity-audit.md

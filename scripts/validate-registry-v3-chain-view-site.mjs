@@ -19,6 +19,10 @@ for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', '
     baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
   }
 }
+const evidenceOverlay = readJson('docs/migration/registry-v2-baseline-batch-u.json') ?? {};
+for (const [name, additions] of Object.entries(evidenceOverlay.data_group_additions ?? {})) {
+  baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
+}
 const baseline = { ...baselineBase, minimum_counts: minimumCounts, data_groups: baselineGroups };
 `;
 source = source.replace(baselineAnchor, baselineReplacement).replace(buildChainCheck, '');

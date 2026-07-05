@@ -53,18 +53,20 @@ docs/roadmap.md
 Current position:
 
 ```text
-Current main checkpoint: 349b38c7641578e6a7be58a91256092722bcdb4f
+Current main checkpoint: 8d1d3dce7faa0c3efe0f541a548aa7f6b65a31fa
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
 Events: 172
-Evidence: 501
-Public source identities: 455
+Evidence: 502
+Public source identities: 456
+Evidence relations: 502
+Deployments: 140
 Detail routes: 366
 Dedicated UI program: stopped after PR #295
 UI mode: maintenance-only
-Active: PR #300 reserve, redemption, and backing applicability audit
-Next: PR #301 deployment and chain identity audit
+Active: PR #301 deployment and chain identity audit
+Next: PR #302 lifecycle and relationship boundary audit
 ```
 
 ## Active sequence
@@ -74,7 +76,8 @@ PR #296       workstream resumption — complete
 PR #297       identity and lineage audit — complete
 PR #298       organization and relationship audit — complete
 PR #299       evidence and source-identity audit — complete
-PR #300-#304  remaining 100-record registry-wide audit — active
+PR #300       reserve, redemption, and backing applicability audit — complete
+PR #301-#304  remaining 100-record registry-wide audit — active
 PR #305-#309  non-UI release hardening
 PR #310-#313  monitoring expansion and scheduled read-only operation
 PR #314-#317  statistics implementation
@@ -103,6 +106,30 @@ Do not invent another visual direction, substitute a logo, revive rejected redes
 - Archive absence is a quality queue item, not permission to fabricate an archive URL.
 - An undated reserve-context or index row must not be assigned a period-specific date without reviewed evidence.
 - Do not collapse a historical redemption review state into `terminated` without verifying current contract or interface availability.
+- A deployment identifier is not `verified` merely because a value is recorded; direct source confirmation is required.
+- Missing freeze or blacklist capability data means unknown knowledge state, not `false`.
+- Aggregate network-context rows must not be coerced into a single chain identity.
+
+## Lifecycle boundary rules
+
+PR #302 must preserve distinct boundaries for:
+
+```text
+contract deployment
+first mint
+guarded beta
+public launch
+exchange listing
+migration announcement
+migration start
+redemption deadline
+wind-down start
+terminal state
+relationship end
+rebrand transition
+```
+
+Do not infer one boundary from another unless reviewed evidence explicitly supports the equivalence.
 
 ## Monitoring rules
 

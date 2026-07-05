@@ -42,6 +42,16 @@ const read = (file) => {
   if (Array.isArray(value.records)) return value.records;
   throw new Error(`${file}: expected an array or records array`);
 };
+const deploymentVerificationReview = JSON.parse(fs.readFileSync(path.join(root, 'data/deployment-verification-pr229.json'), 'utf8'));
+const deploymentVerificationStatusById = new Map(
+  Object.entries(deploymentVerificationReview.status_ids ?? {}).flatMap(([status, ids]) =>
+    (ids ?? []).map((id) => [id, status])
+  )
+);
+const withDeploymentVerification = (row) => ({
+  ...row,
+  verification_status: deploymentVerificationStatusById.get(row.id) ?? row.verification_status
+});
 const group = (name) => (baseline.data_groups?.[name] || []).flatMap(read);
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const countValues = (values) => values.reduce((counts, raw) => {
@@ -90,7 +100,7 @@ const deploymentCanonicalityValueState = (row) => {
   return 'known';
 };
 const deploymentVerificationValueState = (row) => {
-  const verification = getDeploymentVerificationState(row);
+  const verification = getDeploymentVerificationState(withDeploymentVerification(row));
   if (verification === 'verified') return 'known';
   if (verification === 'unknown') return 'unknown_after_review';
   return 'unverified';
@@ -141,7 +151,7 @@ const publicDeploymentCategories = deployments.map((row) => getPublicDeploymentC
 const deploymentOperationalStates = deployments.map((row) => getDeploymentOperationalState(row.status));
 const deploymentChangeStates = deployments.map((row) => getDeploymentChangeState(row.status));
 const deploymentCanonicalityRecordStates = deployments.map((row) => getDeploymentCanonicalityRecordState(row.canonicality));
-const deploymentVerificationStates = deployments.map((row) => getDeploymentVerificationState(row));
+const deploymentVerificationStates = deployments.map((row) => getDeploymentVerificationState(withDeploymentVerification(row)));
 const deploymentContractIdentityStates = deployments.map((row) => getContractIdentityState(row.contract_address));
 const deploymentNetworkIdentityStates = deployments.map((row) => getNetworkIdentityState(row.chain));
 const primaryDisplayStats = buildPrimaryDisplayRelationshipStats(root);

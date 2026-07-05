@@ -6,19 +6,21 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: 349b38c7641578e6a7be58a91256092722bcdb4f
+Current main checkpoint: 8d1d3dce7faa0c3efe0f541a548aa7f6b65a31fa
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
 Events: 172
-Evidence: 501
-Public source identities: 455
+Evidence: 502
+Public source identities: 456
+Evidence relations: 502
+Deployments: 140
 Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
 Active workstream: 100-record registry-wide audit
-Current item: PR #300 reserve, redemption, and backing applicability audit
-Next implementation item: PR #301 deployment and chain identity audit
+Current item: PR #301 deployment and chain identity audit
+Next implementation item: PR #302 lifecycle and relationship boundary audit
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
@@ -29,6 +31,7 @@ The dedicated UI correction program ended after PR #295. Verified UI defects may
 - PR #297 completed identity uniqueness and lineage audit.
 - PR #298 completed organization and relationship integrity audit.
 - PR #299 completed evidence and source-identity integrity audit.
+- PR #300 completed reserve, redemption, and backing applicability audit.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry has reached the verified 100-record checkpoint.
 
@@ -97,25 +100,27 @@ Merge checkpoint:
 349b38c7641578e6a7be58a91256092722bcdb4f
 ```
 
-Result:
+PR #299 closed at the 501 / 455 / 501 evidence checkpoint. PR #301 adds one reviewed official USDf contract source, so the current baseline is now:
 
 ```text
-canonical evidence records: 501
-public source identities: 455
-evidence relations: 501
+canonical evidence records: 502
+public source identities: 456
+evidence relations: 502
 source identity groups: 33
 source aliases: 46
 critical findings: 0
-public duplicate URL groups: 0
-orphan relation source identities: 0
-publisher/reliability/claim-scope gaps: 0
-unknown taxonomy/provenance/primary/reliability: 0
 archive not recorded queue: 173
 ```
 
-### PR #300 — reserve, redemption, and backing applicability — active
+### PR #300 — reserve, redemption, and backing applicability — complete
 
-Current result:
+Merge checkpoint:
+
+```text
+8d1d3dce7faa0c3efe0f541a548aa7f6b65a31fa
+```
+
+Result:
 
 ```text
 stable assets: 100
@@ -140,24 +145,59 @@ redemption source-review-needed fields: 10
 reserve source-status unresolved assets: 2
 ```
 
-The audit treats undated transparency indexes, protocol context pages, and source entry points as valid context rows rather than fabricating period-specific dates. FEI remains reviewable rather than being silently rewritten.
+### PR #301 — deployment and chain identity — active
 
-### PR #301 — deployment and chain identity — next
+Current result:
+
+```text
+deployments: 140
+stable assets with deployment rows: 100
+recorded chain labels: 35
+critical findings: 0
+duplicate identifier groups: 0
+invalid origin references: 0
+origin cycles: 0
+duplicate primary deployments: 0
+verification overlay ids: 140
+verification review-needed: 0
+verification not-recorded/unknown: 0
+```
+
+Verification distribution:
+
+```text
+verified: 19
+identifier_recorded_unverified: 45
+source_linked_no_identifier: 76
+```
+
+PR #301 detected and corrected a real USDf Ethereum contract-identity error, added one official Falcon Finance contract source, and expanded the deployment verification overlay from 130 to 140 rows.
+
+Bounded review queues:
+
+```text
+identifier not recorded: 76
+network review-needed: 2
+aggregate network context: 4
+freeze capability not recorded: 139
+blacklist capability not recorded: 139
+```
+
+### PR #302 — lifecycle and relationship boundary audit — next
 
 Audit:
 
-- chain and network identity;
-- contract or identifier uniqueness;
-- deployment status;
-- verification state;
-- issuer-native versus bridged versus wrapped versus synthetic status;
-- canonical and third-party bridge relationships;
-- legacy deployments;
-- freeze, blacklist, and control-capability knowledge state.
+- launch boundaries;
+- terminal boundaries;
+- migration boundaries;
+- wind-down dates;
+- rebrand dates;
+- relationship end dates;
+- redemption deadlines versus actual terminal boundaries;
+- event chronology consistency;
+- lifecycle/status consistency.
 
-### PR #302 — lifecycle boundary audit
-
-Audit launch, terminal, migration, wind-down, rebrand, relationship-end, and redemption-deadline boundaries. Contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, and terminal state remain separate concepts.
+Contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, and terminal state remain separate concepts.
 
 ### PR #303 — known-unknown and placeholder integrity
 
@@ -227,7 +267,7 @@ Each growth PR is limited to two assets and must preserve all applicable support
 ## Immediate next item
 
 ```text
-PR #300 complete and merge reserve, redemption, and backing applicability audit
+PR #301 complete and merge deployment and chain identity audit
 then
-PR #301 audit deployment and chain identity across the 100-record registry
+PR #302 audit lifecycle and relationship boundaries across the 100-record registry
 ```
