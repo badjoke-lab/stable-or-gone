@@ -61,6 +61,7 @@ platform trading halt -> token is banned from the EU
 withdrawal still available -> full trading support remains
 issuer compliance claim -> current ESMA register status is proven
 Global product page -> EU/EEA function availability is proven
+member-state page -> EEA-wide policy is proven
 media report -> every function cell is confirmed
 historical stablecoin policy -> current platform-wide service state is unchanged
 ```
@@ -93,7 +94,7 @@ Revolut
 Uphold
 ```
 
-Additional platforms may be added when they materially improve EU/EEA coverage. Gemini has been added as one such additional research platform.
+Additional platforms may be added when they materially improve EU/EEA coverage. Gemini is an additional research platform because its later EEA service exit is relevant current-state context.
 
 The article does not need equal-length prose for every researched platform. The research matrix should be broader than the narrative case studies.
 
@@ -183,7 +184,7 @@ not_confirmed
 
 Unknown or unsupported cells remain `not_confirmed`.
 
-A spot-trading restriction does not imply a deposit restriction. A custody statement does not imply a withdrawal statement. A CASP licence does not imply a stablecoin function state.
+A spot-trading restriction does not imply a deposit restriction. A custody statement does not imply a withdrawal statement. A CASP licence does not imply a stablecoin function state. A platform-wide account closure can establish current platform service unavailability without requiring invented coin-specific function rows.
 
 ## 5. Geography and legal-entity rule
 
@@ -199,7 +200,7 @@ specific regulated legal entity
 specific customer migration cohort
 ```
 
-Do not rewrite EEA as EU when the source says EEA. Do not generalize a legal-entity migration notice or customer cohort to every user worldwide.
+Do not rewrite EEA as EU when the source says EEA. Do not generalize a legal-entity migration notice or customer cohort to every user worldwide. Do not generalize a Germany-specific product page to the whole EEA without broader evidence.
 
 If a source does not establish scope, record the claim as scope-unresolved and do not use it to support a universal statement.
 
@@ -241,7 +242,7 @@ Tier C alone must not populate a complete function matrix unless the report expl
 
 Social posts, search results, forums, screenshots, and secondary aggregators may identify a lead. They do not by themselves confirm a market-access row.
 
-## 7. Research-state rules established by checkpoint work
+## 7. Research-state rules
 
 ### 7.1 Historical policy versus current platform service state
 
@@ -273,6 +274,22 @@ A platform may count toward research breadth through reviewed licensing or servi
 ### 7.3 Public marketing page scope
 
 A Global product page may establish that a platform markets or describes a token, but it does not establish EU/EEA customer access unless the page or related terms establish that scope.
+
+### 7.4 Platform-wide service changes
+
+A platform-wide customer account closure, wind-down, or transition-period service restriction is a separate research layer from asset-specific policy.
+
+Research must preserve:
+
+```text
+platform-wide service state
+asset-specific function state
+narrowest supported geography
+legal entity where known
+effective date where known
+```
+
+Checkpoint 03 is required because additional first-party research identified platform-wide and regional service states that materially qualify earlier access assumptions.
 
 ## 8. Revolut handling rule
 
@@ -390,6 +407,7 @@ custody-only states
 convert-only states
 auto-conversion deadlines
 customer legal-entity migration notices
+platform-wide service-state changes
 ```
 
 ### 12.2 Regulatory register watch
@@ -484,26 +502,52 @@ Completed:
 ```text
 PR #302  lifecycle and relationship boundary audit
 PR #303  specification and schedule amendment for EU market-access research and monitoring
+PR #304  reviewed research matrix and checkpoints 01-02
 ```
 
 Active and next:
 
 ```text
-PR #304  reviewed research matrix, checkpoints, and schedule synchronization
-PR #305  reviewed EU stablecoin market-access article after publication gate passes
-PR #306  known-unknown and placeholder integrity audit
-PR #307  100-asset monitoring coverage recalculation
-PR #308-#312  non-UI release hardening
-PR #313-#316  monitoring expansion and scheduled read-only operation, including market-access coverage
-PR #317-#320  statistics implementation
-PR #321-#326  candidate audit and controlled growth from 100 to 110
+PR #305  checkpoint 03 schedule amendment
+PR #306  function-matrix research checkpoint 03
+PR #307  reviewed EU stablecoin market-access article after publication gate passes
+PR #308  known-unknown and placeholder integrity audit
+PR #309  100-asset monitoring coverage recalculation
+PR #310-#314  non-UI release hardening
+PR #315-#318  monitoring expansion and scheduled read-only operation, including market-access coverage
+PR #319-#322  statistics implementation
+PR #323-#328  candidate audit and controlled growth from 100 to 110
 ```
 
 The canonical schedule is maintained in `docs/roadmap.md`. The roadmap is authoritative for the current item and exact next PR number.
 
 Research checkpoints may be merged before the article when they improve reproducibility, record unresolved source gaps, or correct current-state interpretation. Research checkpoints do not publish the article.
 
-## 17. Required reading for this workstream
+## 17. Checkpoint 03 minimum content
+
+Checkpoint 03 must review and record, without over-inference, the additional source set identified after checkpoint 02. At minimum it should evaluate:
+
+```text
+OKX Europe asset-specific USDT and USDC buy/sell pages
+Crypto.com Europe current service and legal-entity page
+Bybit EU current general product/function guide
+Gemini official UK/EEA/Australia customer-account closure notice
+Uphold Europe current transition-period restriction notice
+Coinbase Germany first-party USDT, DAI, and PYUSD tradability pages
+Revolut first-party policy availability or continued source gap
+```
+
+The checkpoint must state whether each finding is:
+
+```text
+asset-specific function evidence
+platform-wide service-state evidence
+legal-entity or authorization evidence
+regional or member-state evidence
+unresolved policy evidence
+```
+
+## 18. Required reading for this workstream
 
 Before research, article implementation, or market-access monitoring changes, read:
 
@@ -538,9 +582,9 @@ scripts/validate-guides.mjs
 src/pages/guides/mica-stablecoins/index.astro
 ```
 
-## 18. Deployment classification
+## 19. Deployment classification
 
-Specification, research checkpoint, and monitoring-plan changes:
+Specification, schedule-amendment, research-checkpoint, and monitoring-plan changes:
 
 ```text
 No production deployment required

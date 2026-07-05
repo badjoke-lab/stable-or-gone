@@ -43,6 +43,8 @@ docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
 ```
 
+After PR #306 merges, checkpoint 03 artifacts named by the roadmap become required reading as well.
+
 For statistics work, also read `docs/stats-spec.md`.
 
 ## Repository source of truth
@@ -53,10 +55,8 @@ Repository specifications outrank chat memory, handoff prose, issue discussion, 
 
 The dedicated UI program is stopped. UI is maintenance-only.
 
-Current position:
-
 ```text
-Current main checkpoint: afaffd6b200803a873208d0fc8718d2642b0b9c8
+Current main checkpoint: 7c0dc8be7cd09a95982fd65c3f818a2c5bea3bdf
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -66,12 +66,12 @@ Public source identities: 456
 Evidence relations: 502
 Deployments: 140
 Detail routes: 366
-Dedicated UI program: stopped after PR #295
-UI mode: maintenance-only
 PR #302 lifecycle and relationship boundary audit: complete
 PR #303 EU market-access specification and schedule amendment: complete
-Active: PR #304 EU/EEA market-access research checkpoint and schedule synchronization
-Next public implementation: PR #305 reviewed EU stablecoin market-access guide after publication gates pass
+PR #304 reviewed research matrix and checkpoints: complete
+Active: PR #305 checkpoint 03 schedule amendment
+Next research: PR #306 function-matrix research checkpoint 03
+Next public implementation: PR #307 reviewed EU stablecoin market-access guide after publication gates pass
 ```
 
 ## Active sequence
@@ -79,19 +79,21 @@ Next public implementation: PR #305 reviewed EU stablecoin market-access guide a
 ```text
 PR #296-#302  registry-wide audit through lifecycle boundaries — complete
 PR #303       EU market-access specification and schedule amendment — complete
-PR #304       research checkpoint and schedule synchronization — active
-PR #305       reviewed EU stablecoin market-access guide after publication gate passes
-PR #306-#307  remaining 100-record registry-wide audit
-PR #308-#312  non-UI release hardening
-PR #313-#316  monitoring expansion and scheduled read-only operation
-PR #317-#320  statistics implementation
-PR #321       next candidate audit
-PR #322-#326  controlled growth from 100 to 110
+PR #304       reviewed matrix and checkpoints 01-02 — complete
+PR #305       checkpoint 03 schedule amendment — active
+PR #306       function-matrix research checkpoint 03
+PR #307       reviewed market-access guide after publication gate passes
+PR #308-#309  remaining 100-record registry-wide audit
+PR #310-#314  non-UI release hardening
+PR #315-#318  monitoring expansion and scheduled read-only operation
+PR #319-#322  statistics implementation
+PR #323       next candidate audit
+PR #324-#328  controlled growth from 100 to 110
 ```
 
 Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
 
-The article is not automatically authorized merely because the ten-platform breadth floor is met. PR #305 begins only after the publication gate in the market-access specification passes.
+The article is not automatically authorized merely because platform and asset breadth floors are met. PR #307 begins only after the publication gate in the market-access specification passes.
 
 ## UI maintenance rules
 
@@ -118,7 +120,7 @@ Do not invent another visual direction, substitute a logo, revive rejected redes
 
 ## Lifecycle boundary rules
 
-PR #302 completed the lifecycle-boundary audit. Future work must preserve distinct boundaries for:
+The lifecycle-boundary audit is complete. Future work must preserve distinct boundaries for:
 
 ```text
 contract deployment
@@ -140,18 +142,19 @@ Do not infer one boundary from another unless reviewed evidence explicitly suppo
 ## EU market-access rules
 
 - Do not reduce EU/EEA stablecoin access to an allowed/banned boolean.
-- Preserve platform, legal entity, region, stablecoin, function, announcement date, and effective date separately.
+- Preserve platform, legal entity, platform service state, region, stablecoin, function, announcement date, and effective date separately.
 - Do not infer deposit, withdrawal, custody, trading, Earn, margin, or conversion state from another function.
 - Do not rewrite EEA as EU when the source scope is EEA.
-- Do not generalize a customer-cohort or legal-entity notice to every global user.
-- Prefer regulators and official registers for regulatory claims.
+- Do not generalize a customer cohort, legal entity, member-state page, or Global product page beyond its supported scope.
+- Prefer regulators and official registers for authorization claims.
 - Prefer first-party platform policy pages for function-level access claims.
 - High-quality reporting may establish context or a reported notice but may not fill unsupported function cells.
 - A platform licence is not proof of stablecoin function availability.
-- A Global product page is not proof of EU/EEA service scope.
 - The public guide is a reviewed dated snapshot and never updates automatically from monitoring output.
 - Keep `not_confirmed` when evidence does not support a function state.
-- Distinguish historical platform stablecoin policy from later platform-wide service or licensing changes.
+- Distinguish historical stablecoin-specific policy from later platform-wide service or licensing changes.
+
+Checkpoint 03 must apply these rules to additional primary-source findings for OKX Europe, Crypto.com Europe, Bybit EU, Gemini EEA, Uphold Europe, and Coinbase Germany, while continuing conservative Revolut treatment.
 
 ## Monitoring rules
 
@@ -161,7 +164,7 @@ Do not infer one boundary from another unless reviewed evidence explicitly suppo
 - Metadata-only changes and fetch failures must not masquerade as content changes.
 - Monitoring may not create branches, pull requests, publications, guide edits, or deployments automatically.
 - A baseline change requires a separate human-reviewed repository change.
-- Platform-policy monitoring must preserve function-level, legal-entity, and geographic scope.
+- Platform-policy monitoring must preserve function-level, legal-entity, service-state, and geographic scope.
 
 ## Statistics rules
 

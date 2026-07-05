@@ -50,7 +50,7 @@ EU/EEA market-access research, the dated guide, its research matrix, and the lat
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-The following files are supporting research checkpoints, not substitutes for the specification:
+Merged supporting research checkpoints are:
 
 ```text
 data/editorial-research/eu-stablecoin-market-access.json
@@ -58,6 +58,8 @@ data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
 ```
+
+Checkpoint 03 artifacts become supporting research authority only after their reviewed PR merges.
 
 UI is maintenance-only. The current production visual direction is the restored terminal family implemented through PR #288-#295. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
 
@@ -137,7 +139,7 @@ A PR that cannot cite an approved work item must pause until the roadmap or spec
 
 `docs/roadmap.md` is the canonical execution schedule. Update it when a phase changes, a PR is merged or reordered, counts change, a publication checkpoint changes, or a blocker changes the next work item.
 
-Do not rewrite completed history to make a changed plan appear unchanged. Record deviations, consumed PR numbers, pauses, research-only checkpoints, superseded visual directions, and stale branches explicitly.
+Do not rewrite completed history to make a changed plan appear unchanged. Record deviations, consumed PR numbers, research-only checkpoints, superseded visual directions, and stale branches explicitly.
 
 Current execution state:
 
@@ -148,10 +150,14 @@ dedicated UI program stopped after PR #295
 UI maintenance-only
 PR #302 lifecycle and relationship boundary audit complete
 PR #303 EU market-access specification and schedule amendment complete
-PR #304 market-access research checkpoint and schedule synchronization active
-PR #305 market-access guide blocked until publication gates pass
-remaining core audit resumes at PR #306
+PR #304 reviewed market-access matrix and checkpoints 01-02 complete
+PR #305 checkpoint 03 schedule amendment active
+PR #306 function-matrix checkpoint 03 next
+PR #307 market-access guide blocked until publication gates pass
+remaining core audit resumes at PR #308
 ```
+
+The additional schedule amendment is justified because new source review produced material current-state findings that must be recorded before publication, including platform-wide service changes that cannot be safely folded into earlier historical policy rows.
 
 Urgent factual corrections, verified public breakage, owner-directed dated editorial work, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
 
@@ -274,10 +280,13 @@ The market-access article is a reviewed dated editorial snapshot, not a live das
 Publication requires the gate in `docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md` to pass. In particular:
 
 - platform breadth alone is insufficient;
+- asset breadth alone is insufficient;
 - a platform licence is not proof of stablecoin function availability;
 - a Global product page is not proof of EU/EEA scope;
+- a member-state page is not automatically an EEA-wide statement;
 - high-quality reporting may establish context but may not populate unsupported function fields;
 - EU, EEA, member-state, legal-entity, and customer-cohort scopes remain separate;
+- historical policy must be separated from later service-state changes;
 - current service context must be rechecked at publication time.
 
 ## 14. Statistics governance
