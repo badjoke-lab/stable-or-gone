@@ -39,11 +39,11 @@ For EU/EEA stablecoin market-access research, article work, or monitoring change
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 data/editorial-research/eu-stablecoin-market-access.json
 data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
+data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 ```
-
-After PR #306 merges, checkpoint 03 artifacts named by the roadmap become required reading as well.
 
 For statistics work, also read `docs/stats-spec.md`.
 
@@ -56,7 +56,7 @@ Repository specifications outrank chat memory, handoff prose, issue discussion, 
 The dedicated UI program is stopped. UI is maintenance-only.
 
 ```text
-Current main checkpoint: 7c0dc8be7cd09a95982fd65c3f818a2c5bea3bdf
+Current main checkpoint: c26487f33f27f57518d18c66a6f6cf3d0fcd71a5
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -68,9 +68,9 @@ Deployments: 140
 Detail routes: 366
 PR #302 lifecycle and relationship boundary audit: complete
 PR #303 EU market-access specification and schedule amendment: complete
-PR #304 reviewed research matrix and checkpoints: complete
-Active: PR #305 checkpoint 03 schedule amendment
-Next research: PR #306 function-matrix research checkpoint 03
+PR #304 reviewed research matrix and checkpoints 01-02: complete
+PR #305 checkpoint 03 schedule amendment: complete
+Active: PR #306 function-matrix research checkpoint 03
 Next public implementation: PR #307 reviewed EU stablecoin market-access guide after publication gates pass
 ```
 
@@ -80,8 +80,8 @@ Next public implementation: PR #307 reviewed EU stablecoin market-access guide a
 PR #296-#302  registry-wide audit through lifecycle boundaries — complete
 PR #303       EU market-access specification and schedule amendment — complete
 PR #304       reviewed matrix and checkpoints 01-02 — complete
-PR #305       checkpoint 03 schedule amendment — active
-PR #306       function-matrix research checkpoint 03
+PR #305       checkpoint 03 schedule amendment — complete
+PR #306       function-matrix research checkpoint 03 — active
 PR #307       reviewed market-access guide after publication gate passes
 PR #308-#309  remaining 100-record registry-wide audit
 PR #310-#314  non-UI release hardening
@@ -150,11 +150,20 @@ Do not infer one boundary from another unless reviewed evidence explicitly suppo
 - Prefer first-party platform policy pages for function-level access claims.
 - High-quality reporting may establish context or a reported notice but may not fill unsupported function cells.
 - A platform licence is not proof of stablecoin function availability.
+- A platform-wide account closure or transition restriction is a separate evidence layer from asset-specific function policy.
 - The public guide is a reviewed dated snapshot and never updates automatically from monitoring output.
 - Keep `not_confirmed` when evidence does not support a function state.
 - Distinguish historical stablecoin-specific policy from later platform-wide service or licensing changes.
 
-Checkpoint 03 must apply these rules to additional primary-source findings for OKX Europe, Crypto.com Europe, Bybit EU, Gemini EEA, Uphold Europe, and Coinbase Germany, while continuing conservative Revolut treatment.
+Checkpoint 03 evidence layers are fixed as:
+
+```text
+A. asset-specific function evidence
+B. current platform-wide service-state evidence
+C. general service/licensing context without asset-specific function support
+```
+
+Only A-level evidence should populate direct function comparisons. B-level evidence may explain current access context. C-level evidence must remain bounded context.
 
 ## Monitoring rules
 
