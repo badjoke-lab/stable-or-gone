@@ -12,8 +12,8 @@ This program governs the core workstream after the dedicated UI correction progr
 100-record registry-wide audit through lifecycle boundaries — complete
 -> EU market-access specification — complete
 -> reviewed market-access checkpoints 01-02 — complete
--> checkpoint 03 schedule amendment — active
--> function-matrix checkpoint 03
+-> checkpoint 03 schedule amendment — complete
+-> function-matrix checkpoint 03 — active
 -> reviewed market-access article after publication gate passes
 -> remaining registry-wide audit
 -> non-UI release hardening
@@ -51,8 +51,8 @@ Growth D: complete
 PR #302 lifecycle and relationship boundary audit: complete
 PR #303 EU market-access specification amendment: complete
 PR #304 reviewed matrix and checkpoints 01-02: complete
-PR #305 checkpoint 03 schedule amendment: active
-PR #306 function-matrix checkpoint 03: next
+PR #305 checkpoint 03 schedule amendment: complete
+PR #306 function-matrix checkpoint 03: active
 PR #307 article: blocked until publication gates pass
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
@@ -122,6 +122,7 @@ PR #284-#295   UI recovery and concrete maintenance fixes; dedicated UI program 
 PR #296-#302   registry-wide audit through lifecycle and relationship boundaries
 PR #303         EU stablecoin market-access research, publication, and monitoring specification
 PR #304         reviewed matrix and market-access checkpoints 01-02
+PR #305         checkpoint 03 schedule amendment
 ```
 
 Completed monitoring architecture already includes:
@@ -143,24 +144,11 @@ The pipeline is review-only. It must not commit, open a pull request, update can
 
 ### PR #303 — specification and schedule amendment — complete
 
-Fixed:
-
-```text
-research scope
-platform coverage target
-asset coverage target
-function-level matrix
-source hierarchy
-geographic and legal-entity scoping
-publication gate
-article route and revision policy
-material-change rule
-later monitoring cadence and safety boundary
-```
+Fixed research scope, matrix, source hierarchy, geography/legal-entity rules, publication gate, route, revision policy, monitoring cadence, and safety boundary.
 
 ### PR #304 — research matrix and checkpoints 01-02 — complete
 
-Merged research state:
+Merged research state before checkpoint 03:
 
 ```text
 platform breadth floor: met
@@ -172,20 +160,37 @@ publication-date current-state recheck complete: no
 article publishable: no
 ```
 
-### PR #305 — checkpoint 03 schedule amendment — active
+### PR #305 — checkpoint 03 schedule amendment — complete
 
-This authority-only PR reserves one additional reviewed research checkpoint before article implementation. The change is required because further source review identified current platform service-state and function evidence that materially changes or qualifies the article matrix.
+This authority-only PR reserved checkpoint 03 before article implementation and shifted downstream PR numbering once.
 
-### PR #306 — function-matrix checkpoint 03
+### PR #306 — function-matrix checkpoint 03 — active
 
-Checkpoint 03 must record reviewed findings for the additional source set described by `docs/roadmap.md`. It must:
+Checkpoint artifacts:
 
-- preserve asset-specific function evidence separately from general platform service context;
+```text
+data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
+docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
+```
+
+Checkpoint 03 requirements:
+
+- preserve asset-specific function evidence separately from general service context;
 - preserve Germany-specific Coinbase pages as Germany scope unless broader first-party evidence is found;
-- record Gemini EEA closure as platform service context rather than inventing coin-by-coin restrictions;
-- record Uphold withdrawal availability separately from other temporarily restricted services;
+- record Gemini EEA closure as platform service context rather than invented coin-by-coin restrictions;
+- record Uphold general withdrawal availability separately from other temporarily restricted or unconfirmed services;
 - keep unsupported function cells `not_confirmed`;
 - keep Revolut USDT policy details unresolved or explicitly reported when no first-party notice is available.
+
+Checkpoint 03 evidence layers:
+
+```text
+A. asset-specific function evidence
+B. current platform-wide service-state evidence
+C. general service/licensing context without asset-specific function support
+```
+
+Only A-level evidence should populate direct function comparisons. B-level findings explain current access context. C-level findings remain bounded context.
 
 ### PR #307 — reviewed article and initial market-access snapshot
 
@@ -217,15 +222,7 @@ PR #308 known-unknown and placeholder integrity
 PR #309 monitoring coverage recalculation for 100 assets
 ```
 
-An audit result may:
-
-- resolve a value from reviewed evidence;
-- preserve a value as unknown;
-- record that no reliable official source is available;
-- record a bounded unresolved conflict;
-- identify a duplicate or lineage issue for separate reviewed correction.
-
-It must not reduce uncertainty by guessing.
+An audit result may resolve a value from reviewed evidence, preserve a value as unknown, record that no reliable official source is available, record a bounded unresolved conflict, or identify a duplicate/lineage issue for separate reviewed correction. It must not reduce uncertainty by guessing.
 
 PR #309 must distinguish issuer/protocol monitoring coverage from market-access platform-policy coverage. Existing issuer-source reach is not evidence that a platform's buy, sell, trade, deposit, withdrawal, custody, Earn, margin, or conversion policy is monitored.
 
