@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_07_06_audited_100_asset_checkpoint",
+    "date": "2026-07-06",
+    "title": "Audited 100-asset checkpoint recorded",
+    "category": "data",
+    "summary": "Recorded the reviewed 100-asset canonical checkpoint with 94 organizations, 110 relationships, 172 events, 502 evidence records, 140 deployments, deterministic canonical identity and content digests, release-integrity linkage, reproducible-build linkage, and production parity verification. The checkpoint does not imply complete monitoring, regulatory, reserve, redemption, or market-access coverage.",
+    "related_paths": ["/stablecoins/", "/issuers/", "/events/", "/methodology/", "/updates/", "/data/manifest.json", "/version.json"]
+  },
+  {
     "id": "sog_update_2026_07_05_eu_stablecoin_access_guide",
     "date": "2026-07-05",
     "title": "EU stablecoin market-access guide added",
