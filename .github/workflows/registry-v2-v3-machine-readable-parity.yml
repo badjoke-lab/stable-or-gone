@@ -18,8 +18,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate Registry v2/v3 and machine-readable parity
-        run: node scripts/validate-registry-v2-v3-machine-readable-parity.mjs
+      - name: Install dependencies
+        run: npm install
+      - name: Validate Registry v3 parity suite
+        run: npm run validate:parity-suite
       - name: Upload parity audit
         if: always()
         uses: actions/upload-artifact@v4
