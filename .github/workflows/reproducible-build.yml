@@ -24,6 +24,8 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Validate reproducible build contract
+        run: npm run validate:reproducible-build
       - name: Validate release integrity
         run: npm run validate:release-integrity
       - name: First fixed-context build
@@ -57,6 +59,7 @@ jobs:
           name: reproducible-build-audit-${{ github.run_id }}
           if-no-files-found: error
           path: |
+            artifacts/reproducible-build-contract-audit.json
             artifacts/reproducible-build-first.json
             artifacts/reproducible-build-second.json
             artifacts/reproducible-build-compare.json
