@@ -5,9 +5,9 @@ Updated: 2026-07-06
 
 ## 1. Purpose
 
-This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, inserted urgent work handling, monitoring boundaries, comparison boundaries, and publication safety.
+This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, monitoring boundaries, comparison boundaries, and publication safety.
 
-SOG work must not depend on chat memory, an old handoff, or an unstated interpretation. Merged repository specifications are the source of truth.
+Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts do not override merged repository authority.
 
 ## 2. Authority order
 
@@ -16,40 +16,36 @@ When documents disagree, use this order:
 1. `docs/deployment-policy.md` for publication and Cloudflare rules.
 2. `docs/spec-governance.md` for document authority and change control.
 3. `docs/roadmap.md` for current phase, active item, next item, and PR numbering.
-4. Active merged roadmap amendments explicitly named by the roadmap.
-5. The canonical specification or implementation plan for the active workstream.
-6. Supporting audits, inventories, baselines, examples, publication-gate reviews, and research checkpoints.
-7. Conversation history, issue discussion, generated output, and unmerged drafts.
+4. Active merged roadmap amendments named by the roadmap.
+5. The canonical specification for the active workstream.
+6. Supporting audits, inventories, baselines, fixtures, publication-gate reviews, and research checkpoints.
+7. Conversation history and unmerged drafts.
 
-Current schedule amendment:
+Current schedule amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
+docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 ```
 
-For PR numbering after the July 6 editorial insertions, the roadmap and that amendment supersede older numeric labels in subordinate plans. Work order and scope remain unchanged unless deliberately amended.
+For PR numbering after inserted editorial or maintenance work, the roadmap and every active amendment named there supersede older numeric labels in subordinate plans unless the roadmap is deliberately amended again.
 
 ## 3. Governing specifications
 
-Core workstream:
+Current release-hardening work is governed by:
 
 ```text
 docs/quality/non-ui-quality-program.md
 docs/roadmap.md
-```
-
-Current release-hardening work:
-
-```text
 docs/counts-manifest-version-provenance-integrity-spec.md
 docs/migration/registry-release-integrity-baseline.json
-docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
-docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
+docs/audited-100-asset-canonical-checkpoint-spec.md
+docs/migration/audited-100-asset-canonical-checkpoint.json
 ```
 
-Canonical data semantics:
+Canonical data semantics remain governed by:
 
 ```text
 docs/stable-asset-scope.md
@@ -59,115 +55,69 @@ docs/migration/registry-v3-parity-baseline.json
 docs/stats-spec.md
 ```
 
-Monitoring semantics:
-
-```text
-docs/quality/monitoring-pipeline-spec.md
-docs/quality/monitoring-official-source-spec.md
-docs/quality/monitoring-official-source-schema.md
-docs/quality/monitoring-review-material-spec.md
-docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
-```
-
-Post-110 product semantics:
-
-```text
-docs/comparison-and-change-product-spec.md
-```
+Monitoring semantics remain governed by the monitoring specifications under `docs/quality/`. Post-110 product semantics remain governed by `docs/comparison-and-change-product-spec.md` together with the active roadmap amendments.
 
 ## 4. Mandatory reading order
 
 Before changing code, data, workflows, or documentation:
 
-1. Read `AGENTS.md`.
-2. Read this file.
-3. Read `docs/roadmap.md`.
-4. Read `docs/deployment-policy.md`.
-5. Read every active roadmap amendment named by the roadmap.
-6. Read the canonical specification for the active work item.
-7. Read every named queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint.
+1. read `AGENTS.md`;
+2. read this file;
+3. read `docs/roadmap.md`;
+4. read `docs/deployment-policy.md`;
+5. read every active roadmap amendment named by the roadmap;
+6. read the canonical specification for the active work item;
+7. read every named queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint.
 
 A non-trivial PR is not ready for review until it identifies the exact specification and roadmap item it implements.
 
-## 5. Source-of-truth rule
-
-A decision becomes binding only when it is written into the relevant canonical repository document and merged.
-
-If implementation and specification disagree, implementation is defective unless the specification is deliberately updated through review.
-
-Supporting research may record facts, unresolved states, or source gaps. It does not authorize publication until the applicable review gate passes.
-
-Monitoring observations and editorial research matrices are not canonical Market Access Records.
-
-## 6. Change-control rule
+## 5. Change control
 
 A change to any of the following requires a specification update in the same PR or an earlier dependency PR:
 
 - canonical enum meaning;
 - public status grouping;
-- primary-relationship selection;
 - evidence interpretation;
-- unknown or missing-value semantics;
+- unknown-state semantics;
 - route families or canonical URLs;
 - machine-readable output shape;
 - count or denominator semantics;
 - build provenance semantics;
 - canonical hash boundary;
-- dependency-lock or pinned runtime semantics for release builds;
+- audited checkpoint source commit or digest boundary;
+- dependency-lock or pinned runtime semantics;
 - reproducible-build timestamp context;
-- generated-output roles or protected historical input boundaries;
-- statistics denominator or grouping semantics;
-- comparison projection shape or semantics;
-- facet-freshness derivation semantics;
-- monitoring observation, source-family, coverage, or baseline semantics;
+- generated-output roles or protected-input boundaries;
+- statistics semantics;
+- comparison projection semantics;
+- monitoring coverage or baseline semantics;
 - canonical Market Access Record semantics;
-- Access & Regulation Explorer indexing semantics;
-- Change Timeline projection semantics;
-- reviewed public update derivation semantics;
 - production publication gates;
-- the approved PR sequence;
-- the active workstream or its pause/resumption state.
+- approved PR sequence;
+- active workstream state.
 
 No implementation PR may introduce an undocumented alternative.
 
-## 7. Pull-request traceability
+## 6. Pull-request traceability
 
-Every non-trivial PR body must include:
+Every non-trivial PR body must identify:
 
 ```text
-Specification references:
-- file and section
-
-Roadmap item:
-- phase and PR number
-
-Scope:
-- what changes
-- what explicitly does not change
-
-Data preservation:
-- record groups and counts checked
-
-Validation:
-- commands and checks run
-
-Deployment classification:
-- one value from docs/deployment-policy.md
+Specification references
+Roadmap item
+Scope
+Explicit non-goals
+Data preservation
+Validation
+Deployment classification
 ```
 
-A PR that cannot cite an approved work item must pause until the roadmap or specification is corrected.
+A PR that cannot cite an approved work item must pause until repository authority is corrected.
 
-## 8. Roadmap discipline
-
-`docs/roadmap.md` is the canonical execution schedule. Update it when a phase changes, a PR is merged or reordered, counts change, a publication checkpoint changes, or a blocker changes the next work item.
-
-Do not rewrite completed history to make a changed plan appear unchanged. Record deviations, consumed PR numbers, research-only checkpoints, publication-gate reviews, superseded visual directions, and stale branches explicitly.
-
-Current execution state:
+## 7. Current execution state
 
 ```text
 100 canonical stable assets reached
-100-record production verification recorded
 UI maintenance-only after PR #295
 PR #302 lifecycle and relationship boundary audit complete
 PR #303-#307 EU market-access specification, research, and guide publication complete
@@ -179,31 +129,31 @@ PR #313 first EEA-scope follow-up closed without merge
 PR #314 corrected guide follow-up complete
 PR #315 schedule amendment and PR renumbering complete
 PR #316 counts, manifest, version, and provenance integrity complete
-PR #317 reproducible build and generated-output audit active
-PR #318 audited 100-record canonical checkpoint next
-PR #316-#333 current pre-110 sequence
-PR #334-#347 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
+PR #317 reproducible build and generated-output audit complete
+PR #318 audited 100-record canonical checkpoint active
+PR #319 guide article spacing maintenance complete, inserted work
+PR #320 non-UI release material next planned item
+PR #318-#334 current pre-110 sequence after consumed PR #319
+PR #335-#348 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
 ```
 
-## 9. Inserted urgent work and consumed PR numbers
+Do not rewrite completed history to make a changed plan appear unchanged. Record consumed PR numbers, closed attempts, inserted work, and phase transitions explicitly.
 
-Urgent factual corrections, verified public breakage, owner-directed dated editorial work, or security fixes may interrupt the planned sequence through a narrow PR.
+## 8. Inserted-work numbering rule
 
-When an interruption consumes preallocated PR numbers:
+When urgent factual, editorial, security, or narrow verified-maintenance work consumes a PR number allocated to the roadmap:
 
 ```text
-1. record the inserted work and exact merge/closure status;
-2. preserve any unmerged attempt as explicit history;
-3. identify which planned work item actually completed, if implementation moved to another PR;
-4. create a roadmap amendment before planned work resumes;
-5. renumber every remaining planned item without changing work order unless separately approved;
-6. update the active-workstream validator;
-7. keep subordinate specification content unchanged except for numbering supersession unless scope is deliberately amended.
+1. record the actual merged or closed work;
+2. do not mark the displaced planned work complete;
+3. move the displaced planned item to the next unused PR number;
+4. renumber every later unused planned item without changing order or scope;
+5. update roadmap, active amendments, authority docs, and workstream guards before planned work resumes.
 ```
 
-The July 6 implementation is recorded in the current roadmap amendment.
+PR #319 is governed by `docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md`.
 
-## 10. Release-integrity governance
+## 9. Release-integrity governance
 
 PR #316 is governed by:
 
@@ -214,19 +164,16 @@ docs/migration/registry-release-integrity-baseline.json
 
 Binding rules:
 
-- canonical counts are derived from composed canonical manifests and files;
-- `version.json` and `data/manifest.json` use shared machine-readable count and build getters;
+- canonical counts derive from composed canonical manifests and files;
+- `version.json` and `data/manifest.json` use shared count and build getters;
 - public count-path semantics remain stable unless explicitly versioned;
-- the checked-in build-provenance file is an explicit sentinel template, not valid runtime provenance;
-- the sentinel must carry current reviewed counts and route counts;
-- build-time provenance must replace sentinel commit, timestamp, hash, and file-count fields with real values;
-- runtime provenance must use a non-zero sha256 canonical-data hash and positive canonical file count;
-- version and manifest build provenance must match after build;
+- checked-in build provenance is an explicit sentinel template, not runtime provenance;
+- runtime provenance must contain real commit, branch, timestamp, non-zero canonical hash, and positive canonical file count;
+- version and manifest provenance must match after build;
 - generated detail routes must match canonical stablecoin, organization, and event sets;
-- candidate, monitoring, editorial-research, and private material are excluded from canonical machine-readable provenance and public count surfaces;
-- source-state integrity validation complements, but does not replace, built-output and production provenance verification.
+- candidate, monitoring, editorial-research, and private material remain outside canonical public count surfaces and provenance boundaries.
 
-## 11. Reproducible-build governance
+## 10. Reproducible-build governance
 
 PR #317 is governed by:
 
@@ -239,17 +186,37 @@ docs/migration/reproducible-build-output-baseline.json
 Binding rules:
 
 - CI, reproducibility audit, and production deployment use the reviewed package lock through `npm ci --no-audit --no-fund`;
-- release-hardening CI, reproducibility audit, and production deployment pin Node 22.22.0;
-- `SOG_BUILD_TIMESTAMP` is the explicit timestamp override and `SOURCE_DATE_EPOCH` is the standard deterministic fallback;
-- production build timestamp and epoch derive from the deployed commit;
-- timestamped generators covered by PR #317 use the shared build-timestamp helper;
-- normal site build must not overwrite the tracked historical `data/generated/registry-stats.json` quality-baseline input;
-- the two-pass audit runs two builds with identical source commit, branch label, timestamp, epoch, dependency graph, Node runtime, and runner class;
-- audited outputs include `dist/**`, generated build provenance, and generated deployment-taxonomy diagnostic output;
-- comparison must check tree digest, file count, total bytes, per-file byte count, and per-file SHA-256;
-- protected historical inputs named by the baseline must remain unchanged through both builds;
-- reproducibility claims are scoped to the pinned GitHub Actions Linux runtime class, pinned Node runtime, reviewed lockfile, and fixed build context;
-- production provenance verification remains required and is not replaced by local or CI byte reproducibility.
+- release-hardening workflows pin Node 22.22.0;
+- `SOG_BUILD_TIMESTAMP` and `SOURCE_DATE_EPOCH` provide deterministic build timestamp context;
+- production timestamp and epoch derive from the deployed commit;
+- normal site build must not overwrite the tracked historical registry-stats baseline input;
+- two fixed-context builds must compare tree digest, file count, total bytes, per-file byte count, and per-file SHA-256;
+- protected historical inputs remain unchanged through both builds;
+- reproducibility claims are scoped to the pinned Actions runtime class, Node runtime, lockfile, and fixed build context;
+- production provenance and output-parity checks remain required.
+
+## 11. Audited checkpoint governance
+
+PR #318 is governed by:
+
+```text
+docs/audited-100-asset-canonical-checkpoint-spec.md
+docs/migration/audited-100-asset-canonical-checkpoint.json
+.github/workflows/audited-100-checkpoint.yml
+```
+
+Binding rules:
+
+- checkpoint source commit is `9a106f0938e6323de833c941d6ae863050f1f03b`;
+- checkpoint generation covers canonical Registry v2 data, additive Registry v3 data, income-profile data, and approved compatibility overlays within the current provenance boundary;
+- each source group records count, source file count, identity SHA-256, and content SHA-256;
+- global canonical identity and content digests remain separate contracts;
+- checkpoint release-integrity and reproducible-build baseline IDs must match current binding baselines;
+- package-lock and package manifest digests are checkpoint inputs;
+- the accepted PR #317 two-pass reproducibility result is checkpointed explicitly;
+- PR #318 must not change canonical record content;
+- production verification may observe a later noncanonical `main` release, but it must still pass public output verification, provenance verification, exact route/output parity, canonical checkpoint hash parity, canonical file-count parity, and reviewed canonical count parity;
+- later canonical content, package graph, baseline identity, or checkpoint digest changes require deliberate review and must not silently overwrite this checkpoint.
 
 ## 12. Unknown-value and placeholder governance
 
@@ -265,11 +232,9 @@ source_review_needed
 
 These states are not structural placeholders and must not be overwritten merely to satisfy completeness or comparison presentation.
 
-Structural placeholders such as TODO/TBD identity fields, fake URLs, fabricated dates, and placeholder addresses, contracts, or identifiers are defects.
+Structural placeholders such as TODO/TBD identity fields, fake URLs, fabricated dates, and placeholder identifiers are defects.
 
 ## 13. Monitoring coverage governance
-
-PR #309 completed coverage recalculation from the checked-in source allowlist and baseline state. It was an audit item, not source expansion.
 
 Coverage remains multidimensional:
 
@@ -286,47 +251,43 @@ EU/EEA market-access function reach
 accepted-baseline reach
 ```
 
-Governance rules:
+Rules:
 
-- A registered source is not an accepted baseline.
-- A pending baseline is not accepted monitoring coverage.
-- Issuer/protocol reach is not platform-policy coverage.
-- Regulatory action pages are not regulatory-register coverage.
-- A generic issuer or product page is not function-level market-access coverage.
-- Zero coverage for a required domain is a valid audit result and must not be filled by inference.
-- Monitoring baseline synchronization is PR #320.
-- Source and schema expansion is PR #321-#322.
-- Scheduled read-only operation is PR #323.
-- Monitoring output remains private candidate material until reviewed.
-- Monitoring observation schema does not itself create a canonical Market Access Record family.
+- a registered source is not an accepted baseline;
+- a pending baseline is not accepted monitoring coverage;
+- issuer/protocol reach is not platform-policy coverage;
+- regulatory action pages are not regulatory-register coverage;
+- a generic issuer or product page is not function-level market-access coverage;
+- Zero coverage for a required domain is a valid audit result and must not be filled by inference;
+- monitoring baseline synchronization is PR #321;
+- reserve and redemption source expansion is PR #322;
+- lifecycle, regulatory, and EU market-access source/schema expansion is PR #323;
+- scheduled read-only operation is PR #324;
+- monitoring output remains private candidate material until reviewed.
 
-## 14. Comparison and change-product governance
+## 14. Statistics governance
 
-Phase F-I is governed by `docs/comparison-and-change-product-spec.md` together with the current numbering amendment.
+`docs/stats-spec.md` is binding for PR #325-#328.
+
+Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
+
+## 15. Comparison and change-product governance
+
+Phase F-I remains governed by `docs/comparison-and-change-product-spec.md` and the active numbering amendments.
 
 Binding boundaries:
 
-- Phase F starts only after the reviewed 110-asset checkpoint.
-- Asset lifecycle, issuance/redemption, legal/regulatory state, and market access remain separate analytical layers.
-- Legal and regulatory claims remain jurisdiction-scoped and evidence-backed.
-- Canonical Market Access Records remain distinct from monitoring observations and editorial research matrices.
-- Compare derives from reviewed canonical data and preserves unresolved states.
-- Facet freshness derives from authoritative record families.
-- Access and regulation may share an exploration surface while retaining separate canonical record families.
-- Change Timeline is a derived projection and may not replace source record families with a lossy generic event object.
-- Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
-- Safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
+- Phase F starts only after the reviewed 110-asset checkpoint;
+- asset lifecycle, issuance/redemption, legal/regulatory state, and market access remain separate analytical layers;
+- canonical Market Access Records remain distinct from monitoring observations and editorial research matrices;
+- Compare derives from reviewed canonical data and preserves unresolved states;
+- facet freshness derives from authoritative record families;
+- Change Timeline is a derived projection and does not replace source record families;
+- public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds;
+- safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
 
-## 15. UI maintenance and approved product UI governance
-
-There is no free-standing redesign sequence. Narrow UI maintenance must start from a concrete observed defect and must not displace the active roadmap.
-
-Approved product surfaces such as Compare, Access & Regulation Explorer, and Change Timeline are governed by their canonical specification and roadmap item when their phases become active.
-
-## 16. Data-preservation rule
+## 16. Data preservation
 
 UI, quality, taxonomy, monitoring, statistics, growth, editorial, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
 
-Before and after relevant changes, verify canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline.
-
-After canonical Market Access Records are introduced, relevant PRs must also verify count, referential integrity, evidence linkage, scope fields, date semantics, and exclusion of private monitoring candidate data.
+Before and after relevant changes, verify canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline and audited checkpoint.

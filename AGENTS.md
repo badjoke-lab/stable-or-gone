@@ -14,10 +14,11 @@ Before changing code, data, workflows, or documentation, read:
 6. the canonical specification for the active work item
 7. every queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint named by that work item
 
-Current schedule amendment:
+Current schedule amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
+docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 ```
 
 Current release-hardening specifications and baselines:
@@ -33,20 +34,28 @@ docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
 docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
+docs/audited-100-asset-canonical-checkpoint-spec.md
+docs/migration/audited-100-asset-canonical-checkpoint.json
+docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
 ```
 
-Monitoring work must also read the monitoring specifications under `docs/quality/`. Statistics work must read `docs/stats-spec.md`. Phase F-I work must read `docs/comparison-and-change-product-spec.md` together with the current roadmap numbering amendment.
+Monitoring work must also read the monitoring specifications under `docs/quality/`. Statistics work must read `docs/stats-spec.md`. Phase F-I work must read `docs/comparison-and-change-product-spec.md` together with the current roadmap amendments.
 
 ## Repository source of truth
 
 Merged repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
-For PR numbering after the July 6 editorial insertions, `docs/roadmap.md` and the July 6 roadmap amendment override older numeric labels in subordinate plans. The approved work order and scope remain unchanged unless the roadmap explicitly says otherwise.
+For PR numbering after inserted editorial or maintenance work, `docs/roadmap.md` and every active roadmap amendment named there override older numeric labels in subordinate plans. Approved work order and scope remain unchanged unless the roadmap explicitly says otherwise.
 
 ## Current workstream
 
 ```text
-Current reviewed main checkpoint before PR #317: 47c110b69ec7fd61121cbeee247f4ef12d466117
+Audited canonical source checkpoint before PR #318:
+9a106f0938e6323de833c941d6ae863050f1f03b
+
+Current production source after inserted maintenance:
+547c639df35e39f657a77bbfd82a49a988877367
+
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -63,23 +72,27 @@ PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
 PR #316 counts, manifest, version, and provenance integrity: complete
-Active: PR #317 reproducible build and generated-output audit
-Next: PR #318 audited 100-record canonical checkpoint
+PR #317 reproducible build and generated-output audit: complete
+Active: PR #318 audited 100-record canonical checkpoint
+PR #319 guide article spacing maintenance: complete, inserted work
+Next planned: PR #320 non-UI release material
 ```
 
-Approved sequence:
+Approved remaining sequence:
 
 ```text
-PR #316-#319  remaining non-UI release hardening
-PR #320-#323  monitoring expansion and scheduled read-only operation
-PR #324-#327  statistics implementation
-PR #328       next candidate audit
-PR #329-#333  controlled growth from 100 to 110
-PR #334-#338  Comparison Foundation
-PR #339-#341  Compare
-PR #342-#345  Change Research Tools
-PR #346-#347  Reviewed Public Update Layer
-PR #348+      optional natural-language filter translation after separate approval
+PR #318       audited 100-record canonical checkpoint
+PR #319       inserted guide maintenance — complete
+PR #320       non-UI release material
+PR #321-#324  monitoring expansion and scheduled read-only operation
+PR #325-#328  statistics implementation
+PR #329       next candidate audit
+PR #330-#334  controlled growth from 100 to 110
+PR #335-#339  Comparison Foundation
+PR #340-#342  Compare
+PR #343-#346  Change Research Tools
+PR #347-#348  Reviewed Public Update Layer
+PR #349+      optional natural-language filter translation after separate approval
 ```
 
 Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
@@ -107,7 +120,8 @@ source_review_needed
 ## Release-integrity rules
 
 - `docs/migration/registry-release-integrity-baseline.json` remains binding for source-state count, manifest, version, route, and provenance semantics.
-- `docs/migration/reproducible-build-output-baseline.json` is binding for PR #317 and later reproducibility-sensitive release work until deliberately replaced.
+- `docs/migration/reproducible-build-output-baseline.json` remains binding for reproducibility-sensitive release work until deliberately replaced.
+- `docs/migration/audited-100-asset-canonical-checkpoint.json` is binding for PR #318 and the 100-asset release checkpoint.
 - `version.json` and `data/manifest.json` derive counts and build metadata from shared machine-readable getters.
 - The checked-in `data/generated/build-provenance.json` is an explicit sentinel template, not valid runtime provenance.
 - The sentinel carries current reviewed counts and route counts while commit, timestamp, hash, and canonical file count remain sentinel values.
@@ -120,7 +134,7 @@ source_review_needed
 
 - CI, reproducibility audit, and production deployment use the reviewed `package-lock.json` through `npm ci --no-audit --no-fund`.
 - Release-hardening CI, reproducibility audit, and production deployment pin Node 22.22.0.
-- Reproducibility audit and production deployment must provide deterministic build timestamp context.
+- Reproducibility audit and production deployment provide deterministic build timestamp context.
 - Production timestamp and epoch derive from the deployed commit.
 - `scripts/lib/build-timestamp.mjs` is the shared resolver for timestamped build generators covered by PR #317.
 - Normal site build must not overwrite the tracked historical `data/generated/registry-stats.json` quality-baseline input.
@@ -128,12 +142,24 @@ source_review_needed
 - Protected historical baseline inputs must remain unchanged through both builds.
 - A reproducibility result is scoped to the pinned Linux Actions runtime, pinned Node runtime, reviewed lockfile, and fixed build context.
 
+## Audited checkpoint rules
+
+- The PR #318 checkpoint source commit is `9a106f0938e6323de833c941d6ae863050f1f03b`.
+- The checkpoint records per-group count, identity SHA-256, and content SHA-256 for canonical Registry v2 and additive Registry v3 source groups.
+- Global canonical content and identity digests remain separate contracts.
+- The checkpoint links exact release-integrity and reproducible-build baseline IDs.
+- The checkpoint links package-lock and package.json digests.
+- The accepted PR #317 reproducibility result remains part of the checkpoint contract.
+- PR #318 must not change canonical record content.
+- Production verification may observe a later noncanonical `main` release, such as PR #319, but must still pass public output verification, provenance verification, exact route/output parity, checkpoint canonical-data hash parity, canonical file-count parity, and reviewed count parity.
+- A later canonical content, package graph, or checkpoint baseline change requires deliberate checkpoint review rather than silent baseline drift.
+
 ## Market-access rules
 
 - Do not reduce access to a universal allowed/banned boolean.
 - Preserve issuer identity, token regulatory path, service-provider authorization, legal entity, platform service state, geography, customer scope, function or access route, supported network, announcement date, and effective date separately.
 - A platform licence is not proof of stablecoin function availability.
-- Monitoring observations and editorial research matrices are not canonical market-access records.
+- Monitoring observations and editorial research matrices are not canonical Market Access Records.
 - The public guide is a reviewed dated snapshot and is never edited automatically from monitoring output.
 
 ## Monitoring rules
@@ -143,12 +169,13 @@ source_review_needed
 - Regulatory action pages are not regulatory-register coverage.
 - Monitoring output is candidate material only.
 - Monitoring may not write canonical data, accept its own baselines, create branches or PRs automatically, edit guides automatically, publish candidates, or deploy.
-- Source/schema expansion is scheduled for PR #321-#322.
-- Scheduled read-only monitoring is PR #323.
+- Monitoring baseline synchronization is PR #321.
+- Source/schema expansion is scheduled for PR #322-#323.
+- Scheduled read-only monitoring is PR #324.
 
 ## Statistics and comparison rules
 
-- `docs/stats-spec.md` is binding for PR #324-#327.
+- `docs/stats-spec.md` is binding for PR #325-#328.
 - Statistics derive from reviewed canonical data and do not become live price, market-cap, APY, safety, transparency, or risk rankings.
 - Phase F-I begins only after the reviewed 110-asset checkpoint.
 - Preserve separate analytical layers for lifecycle, issuance/redemption, legal/regulatory state, and market access.

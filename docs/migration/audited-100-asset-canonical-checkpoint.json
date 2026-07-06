@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "status": "audited",
+  "checkpoint_id": "sog_audited_100_asset_checkpoint_pr318_2026_07_06",
+  "checkpoint_kind": "audited_100_asset_canonical_checkpoint",
+  "recorded_at": "2026-07-06",
+  "source_commit": "9a106f0938e6323de833c941d6ae863050f1f03b",
+  "release_integrity_baseline_id": "sog_release_integrity_pr316_2026_07_06",
+  "reproducible_build_baseline_id": "sog_reproducible_build_pr317_2026_07_06",
+  "canonical_file_count": 334,
+  "canonical_content_sha256": "8fa08219d1e587a0628576cdfcf0e64722348282897558016651a04ebea5a881",
+  "canonical_identity_sha256": "cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd",
+  "package_lock_sha256": "e838b3ef0ca6293cc3ee707615e835ff01296c835c0fb7ec2853484dd1d2f0e1",
+  "package_json_sha256": "7efdf178a2d1b7101eeb7b402218d89bd210a98036457d660e2970e63acbcf50",
+  "v2_groups": {
+    "stablecoins": {"record_count": 100, "file_count": 21, "identity_sha256": "be4038cd866a593ac17ef27cf1e04551e3d80a3321b8159e3bc841f79bf48e9e", "content_sha256": "827059c9c5fd679d69ca856e047e990247d616045c3a0a3638a8c989f8564948"},
+    "organizations": {"record_count": 94, "file_count": 20, "identity_sha256": "68ccc0112fa85fee0e4936b03b690ac44a4292a8b795e17b59b89baee41a9a79", "content_sha256": "3a6623506f2bc46c9ed23159fc9252d0c36791529e48606268521d2bd4d16e5a"},
+    "relationships": {"record_count": 110, "file_count": 20, "identity_sha256": "8994d1667af5776519ccc51c3c442b87cef77371d21e6232840a64423a25fa8d", "content_sha256": "96128c796f93f36fd16209bdf8e964d1f507de40caa817f3c3fa9d13b32a92f6"},
+    "classifications": {"record_count": 100, "file_count": 21, "identity_sha256": "be4038cd866a593ac17ef27cf1e04551e3d80a3321b8159e3bc841f79bf48e9e", "content_sha256": "f6cc7c6498659fc740aa5f130abe01822d845eb8c94e986a318815d350b3776e"},
+    "classification_extensions": {"record_count": 2, "file_count": 1, "identity_sha256": "24ea2bd3675d2532469f8c87f049b591ae339206e16ed87b2507138b07d5f709", "content_sha256": "06ae07d3a52c37bfd7ee09714e2da9d896db8724f814a7ef1de1ea2bcdad9b4f"},
+    "profiles": {"record_count": 100, "file_count": 21, "identity_sha256": "be4038cd866a593ac17ef27cf1e04551e3d80a3321b8159e3bc841f79bf48e9e", "content_sha256": "e4471cf9e73ded3e0cd1312daf11ac97417438da28df5de4360a60b2c3f2d127"},
+    "events": {"record_count": 172, "file_count": 25, "identity_sha256": "0dc638a36d9f13e30c9e0d14642ca1c1d8104e2cd81f6d74af78dd572c04346c", "content_sha256": "c3bc0a35912aaf836f120c279f609020cf503df3f290e354ac3f5dad032b01c6"},
+    "event_details": {"record_count": 172, "file_count": 23, "identity_sha256": "0dc638a36d9f13e30c9e0d14642ca1c1d8104e2cd81f6d74af78dd572c04346c", "content_sha256": "be777dc947538a55472fb6c4d24fdbba8437fc88719e400c9b56d378e68566f4"},
+    "evidence": {"record_count": 502, "file_count": 34, "identity_sha256": "8cb91cb0bb5ebd0fbb7b3aa3c4aee43918553d6b150cbf295f78618c4ab4069b", "content_sha256": "67da6aea309e982590610f82b08044544ad3426f8d7beb882a5f619a9a8f476f"},
+    "evidence_relations": {"record_count": 502, "file_count": 34, "identity_sha256": "8cb91cb0bb5ebd0fbb7b3aa3c4aee43918553d6b150cbf295f78618c4ab4069b", "content_sha256": "67da6aea309e982590610f82b08044544ad3426f8d7beb882a5f619a9a8f476f"},
+    "reserve_reports": {"record_count": 108, "file_count": 21, "identity_sha256": "addaa673015057f0e96723911d986cfeece1020f1ccafdc949a7ef32cb7778b0", "content_sha256": "537122e6baed8481ea3a7b5186ab7700fbd0bb3e34af70c2b90ace5da62d0e95"},
+    "known_unknowns": {"record_count": 289, "file_count": 26, "identity_sha256": "e85ff2bf2dacec8f0d611d575086b439579f2e57405a027dd961ba35c94f5396", "content_sha256": "4097bb6637b76940d4f9413f8dfdef0947c12725d3e38dacf03d2b80a7a839f7"},
+    "regulatory_notes": {"record_count": 9, "file_count": 1, "identity_sha256": "c58a14ccfff2cd89ed27e57340466d46cd0b48a92c51430c73d5022110576195", "content_sha256": "a5c0ab8853faedf74e8b2eed1f810c010e330a87aa3835d0e8ebebd939b61eed"},
+    "deployments": {"record_count": 140, "file_count": 23, "identity_sha256": "36953a743e35c8c034e62a13b116786f5809eed2d7c9d8db12028e9315dae093", "content_sha256": "1816b91a63568d6ae45b3e113e1efc21a325b2a7e5151249293b9f8ab9e91541"}
+  },
+  "v3_groups": {
+    "legal_profiles": {"record_count": 100, "file_count": 37, "identity_sha256": "be4038cd866a593ac17ef27cf1e04551e3d80a3321b8159e3bc841f79bf48e9e", "content_sha256": "b23dec3616697e97e010584d0056b2a1a7154f9d01e1303e91cd8db3e8a0f226"},
+    "stable_asset_relationships": {"record_count": 4, "file_count": 2, "identity_sha256": "25f3c0abf8363da27b87700b0d06be98dca96db132e545a7d854c5b915948111", "content_sha256": "49ec611187b6527851a6b6c80167b75f14aa3736e61c24eba30c351894cb9c7a"},
+    "reserve_components": {"record_count": 133, "file_count": 16, "identity_sha256": "a56712411ead1108b2fbc99ce2c39ad84bf8918f8ac8e79b812a8be097a3e5dd", "content_sha256": "f338cbfce5c3ea055e8dd777864c59cec2c0f8099d62d131db2580fdc43af56c"},
+    "income_profiles": {"record_count": 100, "file_count": 20, "identity_sha256": "be4038cd866a593ac17ef27cf1e04551e3d80a3321b8159e3bc841f79bf48e9e", "content_sha256": "cf18fb5c1b3228821fbc623c689d4a8f8d07229c7baf2d2b088fe957e6a4e231"}
+  },
+  "compatibility_files": ["data/stablecoin-overrides-pr033.json", "data/stablecoin-overrides-pr034.json"],
+  "release_expected_counts": {
+    "v2": {"stablecoins": 100, "organizations": 94, "relationships": 110, "classifications": 100, "profiles": 100, "events": 172, "event_details": 172, "evidence": 502, "evidence_relations": 502, "reserve_reports": 108, "known_unknowns": 289, "regulatory_notes": 9, "deployments": 140},
+    "v3": {"legal_profiles": 100, "stable_asset_relationships": 4, "reserve_components": 133, "income_profiles": 100, "deployment_view": 140},
+    "routes": {"stablecoin_detail": 100, "organization_detail": 94, "event_detail": 172, "total_detail": 366, "declared_main_routes": 13}
+  },
+  "reproducibility_checkpoint": {
+    "audited_pr_head": "41ae5cdc07f8e5bae74642cd6f8ada3c7ebba96f",
+    "tree_sha256": "21fd8cbf5db373e1f0483dc5d74203b825c0203d08ba1ff7f34b8235495981a4",
+    "file_count": 414,
+    "total_bytes": 15178769,
+    "failures": 0,
+    "reproducible": true
+  },
+  "production_verification": {
+    "checkpoint_source_commit": "9a106f0938e6323de833c941d6ae863050f1f03b",
+    "public_output_command": "env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA npm run check:production",
+    "checkpoint_parity_command": "node scripts/check-production-audited-checkpoint.mjs",
+    "requires_exact_commit_match": false,
+    "allows_later_noncanonical_release": true,
+    "requires_checkpoint_hash_match": true,
+    "requires_checkpoint_file_count_match": true,
+    "requires_provenance_check": true,
+    "requires_exact_output_parity": true
+  },
+  "generator": "scripts/generate-audited-100-checkpoint.mjs",
+  "validator": "scripts/validate-audited-100-checkpoint.mjs",
+  "workflow": ".github/workflows/audited-100-checkpoint.yml"
+}
