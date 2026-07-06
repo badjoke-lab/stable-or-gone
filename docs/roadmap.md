@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: 3fa7f2fe7d84f4fc2a0ba4e0dc8b11e1b1b789b9
+Current main checkpoint: 020957942615af875afef391c57f31cc8dd1abc2
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -18,9 +18,9 @@ Deployments: 140
 Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
-Active workstream: monitoring coverage recalculation
-Current item: PR #309 monitoring coverage recalculation for 100 assets
-Next item: PR #310 Registry v2/v3 and machine-readable parity
+Active workstream: non-UI release hardening
+Current item: PR #310 Registry v2/v3 and machine-readable parity
+Next item: PR #311 counts, manifest, version, and provenance integrity
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
@@ -42,6 +42,7 @@ The EU/EEA stablecoin market-access article was published through PR #307 after 
 - PR #306 merged function-matrix checkpoint 03 and current platform service-state research.
 - PR #307 published the reviewed EU/EEA stablecoin market-access guide.
 - PR #308 completed known-unknown and placeholder integrity audit.
+- PR #309 completed monitoring coverage recalculation against all 100 assets.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry remains at the verified 100-record checkpoint.
 
@@ -139,7 +140,7 @@ Published route:
 
 The article is a dated reviewed editorial snapshot current through 2026-07-06. Monitoring output never edits it automatically.
 
-## Phase A — 100-record registry-wide audit
+## Phase A — 100-record registry-wide audit — complete
 
 Completed:
 
@@ -151,6 +152,7 @@ PR #300 reserve, redemption, and backing applicability
 PR #301 deployment and chain identity
 PR #302 lifecycle and relationship boundaries
 PR #308 known-unknown and placeholder integrity
+PR #309 monitoring coverage recalculation
 ```
 
 ### PR #308 — known-unknown and placeholder integrity — complete
@@ -182,38 +184,71 @@ not_applicable
 source_review_needed
 ```
 
-## PR #309 — monitoring coverage recalculation for 100 assets — active
+### PR #309 — monitoring coverage recalculation — complete
 
-PR #309 recalculates current monitoring reach from the checked-in 24-source configuration against the 100-asset registry.
-
-The audit must separate:
+Merge checkpoint:
 
 ```text
-issuer/protocol source reach
-reserve/assurance reach
-redemption/mint terms reach
-issuer lifecycle reach
-regulatory action/guidance reach
-platform-policy reach
-platform service-state reach
-regulatory-register reach
-EU/EEA market-access function reach
-accepted-baseline reach
+020957942615af875afef391c57f31cc8dd1abc2
 ```
 
-A registered source is not an accepted baseline. Current issuer or protocol reach is not evidence that a platform's buy, sell, trade, deposit, withdrawal, custody, Earn, margin, conversion, direct mint, direct redemption, payment-rail, or network-specific policy is monitored.
+Reviewed result:
 
-PR #309 is an audit/recalculation item. It must not add platform-policy sources, extend the market-access monitoring schema, schedule workflows, accept baselines, write canonical data, or edit the public article. Those changes remain reserved for PR #315-#318 according to the monitoring phase.
+```text
+canonical stable assets: 100
+registered official sources: 24
+assets reached by registered sources: 16
+uncovered assets: 84
+accepted sources: 0
+pending_initial_acceptance baselines: 24
+platform-policy source coverage: 0
+platform service-state source coverage: 0
+regulatory-register source coverage: 0
+EU/EEA function-level market-access source coverage: 0
+```
+
+Registered issuer/protocol source reach is not accepted baseline coverage and is not platform-policy coverage.
 
 ## Phase B — non-UI release hardening
 
 ```text
-PR #310 Registry v2/v3 and machine-readable parity
-PR #311 counts, manifest, version, and provenance integrity
+PR #310 Registry v2/v3 and machine-readable parity — active
+PR #311 counts, manifest, version, and provenance integrity — next
 PR #312 reproducible build and generated-output audit
 PR #313 audited 100-record canonical checkpoint
 PR #314 non-UI release material
 ```
+
+### PR #310 — Registry v2/v3 and machine-readable parity — active
+
+Binding specification:
+
+```text
+docs/quality/registry-v2-v3-machine-readable-parity-spec.md
+```
+
+PR #310 must compare the current 100-asset Registry v2 compatibility layer, additive Registry v3 layers, runtime composed loaders, protected baselines, generated stats/audit artifacts, and machine-readable metadata.
+
+Required checks:
+
+```text
+current V2 composed baseline vs runtime loader IDs and counts
+V3 legal-profile coverage
+V3 income-profile coverage
+V3 deployment view parity
+stable-asset relationship reference integrity
+reserve-component reference integrity
+V3 loader-manifest parity
+stale baseline/artifact detection
+/version.json runtime count parity
+/data/manifest.json runtime count parity
+machine-readable data-safety boundary
+reviewed decision on omitted V3 groups in public data-model declaration
+```
+
+Registry v3 remains additive and backward-compatible. PR #310 must not rename the public schema or remove Registry v2 fields merely because additive V3 layers exist.
+
+The merge gate requires current 100-asset parity and removal of stale-baseline ambiguity. A 92-record baseline and 92-record generated artifact must not validate each other as if they represented the current 100-record checkpoint.
 
 ## Phase C — monitoring expansion and operation
 
@@ -304,15 +339,17 @@ Each growth PR is limited to two new stable assets and must preserve all applica
 - Monitoring executions remain read-only and never update their own accepted baseline.
 - Registered monitoring reach is not accepted baseline coverage.
 - Issuer/protocol coverage is not platform-policy coverage.
+- Registry v3 remains additive and backward-compatible.
+- Current parity must be derived from current loaders/manifests, not stale artifacts that agree only with each other.
 - Growth PRs contain no more than two new stable assets.
 - A phase transition updates this roadmap before the next implementation sequence continues.
 
 ## Immediate next items
 
 ```text
-1. Complete PR #309 monitoring coverage recalculation against all 100 assets.
-2. Preserve separate issuer/protocol, regulatory, platform-policy, register, and market-access function coverage conclusions.
-3. Merge PR #309 only after exact-head audit and repository CI pass.
-4. Continue with PR #310 Registry v2/v3 and machine-readable parity.
-5. Keep market-access source/schema expansion reserved for PR #317 and scheduled read-only operation for PR #318.
+1. Complete PR #310 Registry v2/v3 and machine-readable parity audit and repairs.
+2. Remove stale-baseline ambiguity without breaking Registry v2 compatibility.
+3. Merge PR #310 only after exact-head parity validation and repository CI pass.
+4. Continue with PR #311 counts, manifest, version, and provenance integrity.
+5. Keep monitoring source/schema expansion reserved for PR #315-#317 and scheduled operation for PR #318.
 ```
