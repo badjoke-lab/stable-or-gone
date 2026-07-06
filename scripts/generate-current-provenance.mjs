@@ -4,6 +4,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
+import { resolveBuildTimestamp } from './lib/build-timestamp.mjs';
 
 const root = process.cwd();
 const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
@@ -30,14 +31,6 @@ function branch() {
   return process.env.SOG_BUILD_BRANCH || process.env.CF_PAGES_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME || 'main';
 }
 
-function timestamp() {
-  const explicit = process.env.SOG_BUILD_TIMESTAMP?.trim();
-  if (!explicit) return new Date().toISOString();
-  const parsed = new Date(explicit);
-  if (Number.isNaN(parsed.valueOf())) throw new Error(`Invalid SOG_BUILD_TIMESTAMP: ${explicit}`);
-  return parsed.toISOString();
-}
-
 const v2 = loadRegistryV2Baseline(root);
 const v3base = read('docs/migration/registry-v3-foundation.json');
 const yieldBase = read('docs/migration/registry-v3-income-profiles.json');
@@ -53,9 +46,6 @@ const v3 = {
 const yields = unique([...(yieldBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json', 'data/batch-t-income.json']);
 
 const stats = buildRegistryStats();
-const statsPath = path.join(root, quality.generated_stats);
-fs.mkdirSync(path.dirname(statsPath), { recursive: true });
-fs.writeFileSync(statsPath, `${JSON.stringify(stats, null, 2)}\n`);
 
 const compatibility = ['data/stablecoin-overrides-pr033.json', 'data/stablecoin-overrides-pr034.json']
   .filter((file) => fs.existsSync(path.join(root, file)));
@@ -95,7 +85,7 @@ const output = {
   schema_version: '1.0',
   source_commit: commit(),
   source_branch: branch(),
-  generated_at: timestamp(),
+  generated_at: resolveBuildTimestamp(process.env.SOG_BUILD_TIMESTAMP),
   canonical_data_hash: `sha256:${digest.digest('hex')}`,
   canonical_file_count: files.length,
   canonical_record_counts: counts,

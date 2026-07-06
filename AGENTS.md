@@ -30,6 +30,9 @@ docs/migration/registry-v3-parity-baseline.json
 docs/counts-manifest-version-provenance-integrity-spec.md
 docs/migration/registry-release-integrity-baseline.json
 docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
+docs/reproducible-build-generated-output-audit-spec.md
+docs/migration/reproducible-build-output-baseline.json
+docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
 ```
 
 Monitoring work must also read the monitoring specifications under `docs/quality/`. Statistics work must read `docs/stats-spec.md`. Phase F-I work must read `docs/comparison-and-change-product-spec.md` together with the current roadmap numbering amendment.
@@ -43,7 +46,7 @@ For PR numbering after the July 6 editorial insertions, `docs/roadmap.md` and th
 ## Current workstream
 
 ```text
-Current reviewed main checkpoint before PR #316: 4d90b6dffee88f45e3f985ef73ea973e83dfec2f
+Current reviewed main checkpoint before PR #317: 47c110b69ec7fd61121cbeee247f4ef12d466117
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -59,8 +62,9 @@ PR #312 Ripple EU CASP guide update: complete
 PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
-Active: PR #316 counts, manifest, version, and provenance integrity
-Next: PR #317 reproducible build and generated-output audit
+PR #316 counts, manifest, version, and provenance integrity: complete
+Active: PR #317 reproducible build and generated-output audit
+Next: PR #318 audited 100-record canonical checkpoint
 ```
 
 Approved sequence:
@@ -102,7 +106,8 @@ source_review_needed
 
 ## Release-integrity rules
 
-- `docs/migration/registry-release-integrity-baseline.json` is binding for PR #316 and subsequent release-hardening work until deliberately replaced.
+- `docs/migration/registry-release-integrity-baseline.json` remains binding for source-state count, manifest, version, route, and provenance semantics.
+- `docs/migration/reproducible-build-output-baseline.json` is binding for PR #317 and later reproducibility-sensitive release work until deliberately replaced.
 - `version.json` and `data/manifest.json` derive counts and build metadata from shared machine-readable getters.
 - The checked-in `data/generated/build-provenance.json` is an explicit sentinel template, not valid runtime provenance.
 - The sentinel carries current reviewed counts and route counts while commit, timestamp, hash, and canonical file count remain sentinel values.
@@ -110,6 +115,18 @@ source_review_needed
 - Version and manifest build provenance must match after build.
 - Generated detail routes must match canonical stablecoin, organization, and event sets.
 - Candidate, monitoring, editorial-research, and private material remain outside canonical machine-readable provenance and public count surfaces.
+
+## Reproducible-build rules
+
+- CI, reproducibility audit, and production deployment use the reviewed `package-lock.json` through `npm ci --no-audit --no-fund`.
+- Release-hardening CI, reproducibility audit, and production deployment pin Node 22.22.0.
+- Reproducibility audit and production deployment must provide deterministic build timestamp context.
+- Production timestamp and epoch derive from the deployed commit.
+- `scripts/lib/build-timestamp.mjs` is the shared resolver for timestamped build generators covered by PR #317.
+- Normal site build must not overwrite the tracked historical `data/generated/registry-stats.json` quality-baseline input.
+- Two fixed-context builds must produce identical audited bytes for `dist/**`, generated build provenance, and deployment-taxonomy diagnostic output.
+- Protected historical baseline inputs must remain unchanged through both builds.
+- A reproducibility result is scoped to the pinned Linux Actions runtime, pinned Node runtime, reviewed lockfile, and fixed build context.
 
 ## Market-access rules
 

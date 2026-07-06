@@ -45,17 +45,22 @@ jobs:
           ref: ${{ github.sha }}
           fetch-depth: 1
 
-      - name: Record source commit
+      - name: Record deterministic source context
         id: source
-        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+        shell: bash
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "timestamp=$(git show -s --format=%cI HEAD)" >> "$GITHUB_OUTPUT"
+          echo "epoch=$(git show -s --format=%ct HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 22.22.0
+          cache: npm
 
-      - name: Install dependencies
-        run: npm install --no-package-lock --no-audit --no-fund
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
 
       - name: Validate guide publication metadata
         run: npm run validate:guides
@@ -64,6 +69,8 @@ jobs:
         env:
           SOG_BUILD_COMMIT: ${{ steps.source.outputs.sha }}
           SOG_BUILD_BRANCH: main
+          SOG_BUILD_TIMESTAMP: ${{ steps.source.outputs.timestamp }}
+          SOURCE_DATE_EPOCH: ${{ steps.source.outputs.epoch }}
         run: npm run build
 
       - name: Upload prebuilt site to Cloudflare Pages
@@ -113,4 +120,3 @@ jobs:
           echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
           echo "- Public origin: https://sog.badjoke-lab.com/" >> "$GITHUB_STEP_SUMMARY"
           echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
-

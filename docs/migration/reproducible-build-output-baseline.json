@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "status": "current",
+  "baseline_id": "sog_reproducible_build_pr317_2026_07_06",
+  "recorded_at": "2026-07-06",
+  "source_checkpoint_commit": "47c110b69ec7fd61121cbeee247f4ef12d466117",
+  "runtime": {
+    "node_version": "22.22.0",
+    "package_manager": "npm",
+    "lockfile": "package-lock.json",
+    "lockfile_version": 3,
+    "lockfile_sha256": "e838b3ef0ca6293cc3ee707615e835ff01296c835c0fb7ec2853484dd1d2f0e1",
+    "install_command": "npm ci --no-audit --no-fund"
+  },
+  "resolved_direct_versions": {
+    "astro": "7.0.6",
+    "@astrojs/check": "0.9.9",
+    "typescript": "6.0.3",
+    "@types/node": "26.1.0",
+    "playwright": "1.61.1"
+  },
+  "deterministic_build_context": {
+    "sog_build_branch": "reproducible-audit",
+    "sog_build_timestamp": "2026-07-06T00:00:00.000Z",
+    "source_date_epoch": "1783296000",
+    "source_commit_mode": "pull_request_head_or_workflow_sha"
+  },
+  "hashed_output_roots": [
+    "dist",
+    "data/generated/build-provenance.json",
+    "data/generated/deployment-taxonomy-migration.json"
+  ],
+  "protected_historical_inputs": [
+    "data/generated/registry-stats.json",
+    "docs/migration/registry-v2-baseline.json",
+    "docs/migration/registry-v3-foundation.json",
+    "docs/migration/registry-v3-income-profiles.json"
+  ],
+  "tracked_generated_file_roles": {
+    "data/generated/build-provenance.json": "sentinel_template_replaced_during_build",
+    "data/generated/registry-stats.json": "historical_quality_baseline_input_do_not_mutate_during_build"
+  },
+  "ephemeral_generated_file_roles": {
+    "data/generated/deployment-taxonomy-migration.json": "build_diagnostic_generated_during_build"
+  },
+  "timestamp_contract": {
+    "shared_helper": "scripts/lib/build-timestamp.mjs",
+    "explicit_env": "SOG_BUILD_TIMESTAMP",
+    "standard_epoch_env": "SOURCE_DATE_EPOCH",
+    "fallback": "current_time_only_outside_reproducibility_or_production_fixed_context"
+  },
+  "audit_scripts": {
+    "capture": "scripts/capture-build-output-hashes.mjs",
+    "compare": "scripts/compare-build-output-hashes.mjs"
+  },
+  "workflow": ".github/workflows/reproducible-build.yml",
+  "validator": "scripts/validate-reproducible-build-contract.mjs",
+  "audit_report": "docs/audits/reproducible-build-generated-output-audit-2026-07-06.md"
+}
