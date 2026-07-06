@@ -70,7 +70,7 @@
     "validate:responsive-accessibility-contract": "node scripts/validate-responsive-accessibility-contract.mjs",
     "prepare:responsive-accessibility-contract": "npm run generate:responsive-accessibility-audit && npm run validate:responsive-accessibility-contract",
     "generate:visual-system-mocks": "node scripts/generate-ui-mock-svgs.mjs",
-    "validate:visual-system-mocks": "node scripts/validate-ui-mock-svgs.mjs",
+    "validate:visual-system-mocks": "node scripts/validate-visual-system-mocks.mjs",
     "prepare:visual-system-mocks": "npm run generate:visual-system-mocks && npm run validate:visual-system-mocks",
     "validate:active-workstream": "node scripts/validate-active-workstream.mjs",
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
