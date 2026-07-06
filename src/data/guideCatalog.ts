@@ -37,10 +37,10 @@ export const guides: GuideEntry[] = [
   {
     slug: 'eu-stablecoin-access-after-mica',
     title: 'After MiCA: Which Stablecoins Can Europeans Actually Use?',
-    summary: 'A reviewed platform-by-platform guide to European stablecoin access, separating buying, selling, trading, deposits, withdrawals, custody, conversion, regional scope, and current platform service state.',
+    summary: 'A reviewed guide to EU/EEA stablecoin access, separating issuer status, platform state, customer scope, product functions, direct mint and redemption routes, payment rails, supported networks, and dates.',
     category: 'regulation',
-    publishedAt: '2026-07-05',
-    informationCurrentThrough: '2026-07-05',
+    publishedAt: '2026-07-06',
+    informationCurrentThrough: '2026-07-06',
     updatedAt: null,
     revisions: [],
     featured: true,
