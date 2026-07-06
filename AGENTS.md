@@ -10,73 +10,40 @@ Before changing code, data, workflows, or documentation, read:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. the canonical plan for the active work item
-6. the relevant data, monitoring, statistics, comparison, change-research, editorial, or UI-maintenance specification
-7. every queue, validator, audit, fixture, baseline, publication-gate review, research checkpoint, and roadmap amendment named by the work item
+5. every active roadmap amendment named by the roadmap
+6. the canonical specification for the active work item
+7. every queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint named by that work item
 
-For current schedule-sensitive work, also read:
+Current schedule amendment:
 
 ```text
 docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
 ```
 
-For active core data work, also read:
+Current release-hardening specifications and baselines:
 
 ```text
 docs/quality/non-ui-quality-program.md
-docs/stable-asset-scope.md
-docs/classification-spec.md
 docs/data-model-v3-spec.md
-docs/migration/registry-v3-baseline.json
 docs/registry-v2-v3-machine-readable-parity-spec.md
 docs/migration/registry-v3-parity-baseline.json
+docs/counts-manifest-version-provenance-integrity-spec.md
+docs/migration/registry-release-integrity-baseline.json
+docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 ```
 
-For monitoring work, also read:
-
-```text
-docs/quality/monitoring-pipeline-spec.md
-docs/quality/monitoring-official-source-spec.md
-docs/quality/monitoring-official-source-schema.md
-docs/quality/monitoring-review-material-spec.md
-scripts/monitoring/sources/official-sources.json
-scripts/monitoring/baselines/official-source-baselines.json
-scripts/monitoring/audits/build-coverage-report.mjs
-scripts/validate-current-coverage.mjs
-```
-
-For EU/EEA stablecoin market-access work, also read:
-
-```text
-docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
-data/editorial-research/eu-stablecoin-market-access.json
-data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
-data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
-data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json
-docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
-docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
-```
-
-For statistics work, also read `docs/stats-spec.md`.
-
-For Phase F-I work after the reviewed 110-asset checkpoint, also read:
-
-```text
-docs/comparison-and-change-product-spec.md
-```
+Monitoring work must also read the monitoring specifications under `docs/quality/`. Statistics work must read `docs/stats-spec.md`. Phase F-I work must read `docs/comparison-and-change-product-spec.md` together with the current roadmap numbering amendment.
 
 ## Repository source of truth
 
-Repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
+Merged repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
-For PR numbering after the July 6 editorial insertions, `docs/roadmap.md` and `docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md` override older numeric labels in subordinate plans. The approved work order and scope remain unchanged.
+For PR numbering after the July 6 editorial insertions, `docs/roadmap.md` and the July 6 roadmap amendment override older numeric labels in subordinate plans. The approved work order and scope remain unchanged unless the roadmap explicitly says otherwise.
 
 ## Current workstream
 
-The dedicated UI program is stopped. UI is maintenance-only until the roadmap reaches an approved product UI phase or is deliberately amended.
-
 ```text
-Current reviewed main checkpoint before PR #315: 24c7d9e87becfa3fe182d42ee70b02332c00f8d2
+Current reviewed main checkpoint before PR #316: 4d90b6dffee88f45e3f985ef73ea973e83dfec2f
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -86,29 +53,19 @@ Public source identities: 456
 Evidence relations: 502
 Deployments: 140
 Detail routes: 366
-PR #307 reviewed EU/EEA market-access guide: complete and published
-PR #308 known-unknown and placeholder integrity audit: complete
-PR #309 monitoring coverage recalculation: complete
-Registry v2/v3 and machine-readable parity: complete via PR #311
+
+PR #311 Registry v2/v3 and machine-readable parity: complete
 PR #312 Ripple EU CASP guide update: complete
-PR #313 first follow-up implementation: closed without merge
+PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
-Active: PR #315 schedule amendment and PR renumbering
-Next: PR #316 counts, manifest, version, and provenance integrity
+PR #315 schedule amendment and PR renumbering: complete
+Active: PR #316 counts, manifest, version, and provenance integrity
+Next: PR #317 reproducible build and generated-output audit
 ```
 
-## Approved sequence
+Approved sequence:
 
 ```text
-PR #296-#302  registry-wide audit through lifecycle boundaries — complete
-PR #303-#307  EU market-access research and guide publication — complete
-PR #308       known-unknown and placeholder integrity audit — complete
-PR #309       monitoring coverage recalculation — complete
-PR #311       Registry v2/v3 and machine-readable parity — complete
-PR #312       Ripple EU CASP guide update — complete
-PR #313       first EEA-scope follow-up — closed without merge
-PR #314       corrected guide follow-up — complete
-PR #315       schedule amendment and PR renumbering — active
 PR #316-#319  remaining non-UI release hardening
 PR #320-#323  monitoring expansion and scheduled read-only operation
 PR #324-#327  statistics implementation
@@ -121,21 +78,19 @@ PR #346-#347  Reviewed Public Update Layer
 PR #348+      optional natural-language filter translation after separate approval
 ```
 
-Do not skip ahead unless `docs/roadmap.md` is deliberately amended. The post-110 sequence activates only after the reviewed 110-asset checkpoint and is governed by `docs/comparison-and-change-product-spec.md` together with the current roadmap numbering amendment.
+Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
 
 ## Core data rules
 
-- Cite the exact queue, validator, audit, schema, fixture, baseline, publication-gate review, research checkpoint, and roadmap amendment used by each PR.
 - Keep unknown values unknown unless reviewed evidence supports a value.
 - Do not coerce partial-date evidence into a day-level date.
 - Preserve evidence relations, known unknowns, deployments, source identities, and value states.
-- Canonical record-group counts remain unchanged unless an explicit audited data PR authorizes a change.
-- A rebrand, migration continuation, wrapped representation, deployment, or alias must not become a separate canonical asset without scope support and lineage review.
+- Canonical counts change only through an explicit audited data PR.
+- Rebrand, migration continuation, wrapped representation, deployment, or alias records must not become separate canonical assets without scope support and lineage review.
 - Archive absence is a quality queue item, not permission to fabricate an archive URL.
-- A deployment identifier is not verified merely because a value is recorded; direct source confirmation is required.
-- Missing freeze or blacklist capability data means unknown knowledge state, not `false`.
+- Missing capability data means unknown knowledge state, not `false`.
 
-## Protected unresolved states
+Protected unresolved states:
 
 ```text
 null
@@ -145,66 +100,49 @@ not_applicable
 source_review_needed
 ```
 
-These states must not be erased merely to make records or comparison tables look complete. Structural fake values remain defects. A missing comparison value must not be converted into `false`, `no`, `available`, or `unavailable` merely to fill a cell.
+## Release-integrity rules
 
-## Lifecycle boundary rules
-
-Preserve distinct boundaries for contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, wind-down start, terminal state, relationship end, and rebrand transition. Do not infer one boundary from another without direct evidence.
+- `docs/migration/registry-release-integrity-baseline.json` is binding for PR #316 and subsequent release-hardening work until deliberately replaced.
+- `version.json` and `data/manifest.json` derive counts and build metadata from shared machine-readable getters.
+- The checked-in `data/generated/build-provenance.json` is an explicit sentinel template, not valid runtime provenance.
+- The sentinel carries current reviewed counts and route counts while commit, timestamp, hash, and canonical file count remain sentinel values.
+- Build-time provenance must replace sentinel values with the real commit, branch, timestamp, non-zero hash, and positive canonical file count.
+- Version and manifest build provenance must match after build.
+- Generated detail routes must match canonical stablecoin, organization, and event sets.
+- Candidate, monitoring, editorial-research, and private material remain outside canonical machine-readable provenance and public count surfaces.
 
 ## Market-access rules
 
-- Do not reduce access to an allowed/banned boolean.
-- Preserve issuer identity, token regulatory path, platform legal entity, platform service state, region, customer scope, stablecoin, function or access route, supported network, announcement date, and effective date separately.
-- Do not infer one function state from another function.
-- Do not generalize a customer cohort, legal entity, member-state page, or global product page beyond its supported scope.
-- Prefer regulators and official registers for authorization claims.
-- Prefer first-party platform policy pages for function-level access claims.
+- Do not reduce access to a universal allowed/banned boolean.
+- Preserve issuer identity, token regulatory path, service-provider authorization, legal entity, platform service state, geography, customer scope, function or access route, supported network, announcement date, and effective date separately.
 - A platform licence is not proof of stablecoin function availability.
-- The public guide is a reviewed dated snapshot and never updates automatically from monitoring output.
 - Monitoring observations and editorial research matrices are not canonical market-access records.
+- The public guide is a reviewed dated snapshot and is never edited automatically from monitoring output.
 
 ## Monitoring rules
 
 - Registered source reach is not accepted monitoring coverage.
-- A pending baseline is not an accepted baseline.
-- Issuer/protocol source reach is not platform-policy coverage.
+- Issuer/protocol reach is not platform-policy coverage.
 - Regulatory action pages are not regulatory-register coverage.
-- A generic product or issuer page is not function-level market-access monitoring.
-- Monitoring output is candidate material only and must not write directly to canonical public data.
-- Monitoring executions remain read-only and may not update their own accepted baseline.
-- Monitoring may not create branches, pull requests, publications, guide edits, or deployments automatically.
-- Source expansion and schema expansion are scheduled for PR #321-#322.
-- Scheduled read-only operation is scheduled for PR #323.
+- Monitoring output is candidate material only.
+- Monitoring may not write canonical data, accept its own baselines, create branches or PRs automatically, edit guides automatically, publish candidates, or deploy.
+- Source/schema expansion is scheduled for PR #321-#322.
+- Scheduled read-only monitoring is PR #323.
 
-## Statistics rules
+## Statistics and comparison rules
 
 - `docs/stats-spec.md` is binding for PR #324-#327.
-- Statistics derive from canonical loader output at build time.
-- Unknown categories remain visible.
-- Multi-select dimensions are not presented as mutually exclusive.
-- Asset counts and deployment counts remain distinct.
-- Do not add live price, market-cap, yield, safety, transparency, or risk rankings.
-
-## Comparison and change-product rules
-
-For Phase F-I, `docs/comparison-and-change-product-spec.md` is binding together with the current roadmap numbering amendment.
-
+- Statistics derive from reviewed canonical data and do not become live price, market-cap, APY, safety, transparency, or risk rankings.
+- Phase F-I begins only after the reviewed 110-asset checkpoint.
 - Preserve separate analytical layers for lifecycle, issuance/redemption, legal/regulatory state, and market access.
-- Do not rebuild lifecycle or redemption semantics merely for comparison UI convenience.
-- Legal and regulatory claims remain jurisdiction-scoped and evidence-backed.
-- Canonical market-access records remain separate from monitoring observations and editorial matrices.
-- Comparison projections derive from reviewed canonical data only.
-- Compare must expose unknown and not-applicable states rather than filling them by inference.
-- Facet freshness derives from authoritative record families; do not duplicate display-only timestamps into root asset records.
-- Access and regulation may share an exploration surface but retain separate canonical record families.
-- Change Timeline is a derived projection and must not replace source record families with a lossy generic event model.
-- Public update surfaces derive from reviewed merged canonical changes, not raw monitoring candidates.
-- Do not introduce safety scores, risk scores, best-asset rankings, or universal country availability maps.
+- Compare uses reviewed canonical data, preserves unknown states, and does not score or recommend assets.
+- Change Timeline is a derived projection and does not replace source record families.
+- Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
 
-## Growth rules
+## Growth rule
 
-Growth beyond 100 begins only after the preceding hardening, monitoring, statistics, and candidate-audit phases in `docs/roadmap.md`. Growth PRs contain no more than two new stable assets, use a fresh branch from current `main`, preserve supporting record groups, and keep unknown information explicit.
+Growth beyond 100 begins only after the preceding hardening, monitoring, statistics, and candidate-audit phases. Growth PRs contain no more than two new stable assets and preserve all applicable supporting record groups.
 
 ## Deployment rule
 
-Development and production publication are connected by the `main` publication workflow described in `docs/deployment-policy.md`. GitHub CI success is the completion condition for normal pull-request development work. Monitoring execution remains publication-neutral and read-only. Do not claim production parity without the repository's production provenance and output-parity checks.
+Normal merged changes publish from `main` under `docs/deployment-policy.md`. GitHub CI success is the development completion gate. Production parity must be established through the repository's provenance and output-parity checks.
