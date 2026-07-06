@@ -22,10 +22,9 @@ const latestUpdate = guideLatestUpdates[title];
     <div><dt>Last updated</dt><dd>{updatedAt ?? publishedAt ?? 'Not recorded'}</dd></div>
   </dl>
   {latestUpdate && (
-    <aside class="panel registry" aria-label="Latest reviewed update">
-      <div class="bar">{latestUpdate.title}</div>
-      <p>{latestUpdate.body}</p>
-      <p><a href={latestUpdate.sourceUrl}>{latestUpdate.sourceLabel}</a></p>
+    <aside class="guide-article-update" aria-label="Latest reviewed update">
+      <div class="guide-article-overline"><span>{latestUpdate.title}</span><a href={latestUpdate.sourceUrl}>Source</a></div>
+      <p class="guide-article-deck">{latestUpdate.body}</p>
     </aside>
   )}
 </header>
