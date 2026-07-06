@@ -13,11 +13,17 @@ import {
   getStablecoins,
 } from './data/registry';
 import {
+  getDeploymentsV3,
+  getLegalProfiles,
+  getReserveComponents,
+  getStableAssetRelationships,
+} from './data/registryV3';
+import { getIncomeProfilesV3 } from './data/incomeProfilesV3';
+import {
   getCanonicalEvidenceRelations,
   getEvidenceSourceIdentities,
   getEvidenceSourceIdentitySummary,
 } from './data/evidenceSources';
-import { getDeploymentsV3 } from './data/registryV3';
 import { getPublicValueStateBreakdown } from './value-state-breakdown';
 import { getPrimaryDisplayRelationshipBreakdown } from './primary-display-breakdown';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
@@ -120,6 +126,31 @@ export function getRecordCounts() {
     primary_records: getStablecoins().length,
     events: getEvents().length,
     evidence: getEvidence().length,
+  };
+}
+
+export function getRegistryV3Summary() {
+  const stablecoinCount = getStablecoins().length;
+  const legalProfiles = getLegalProfiles();
+  const incomeProfiles = getIncomeProfilesV3();
+  const reserveComponents = getReserveComponents();
+  return {
+    schema_version: 'sog_registry_v3',
+    mode: 'additive',
+    base_schema_version: DATA_SCHEMA_VERSION,
+    protected_stable_assets: stablecoinCount,
+    record_counts: {
+      legal_profiles: legalProfiles.length,
+      stable_asset_relationships: getStableAssetRelationships().length,
+      reserve_components: reserveComponents.length,
+      income_profiles: incomeProfiles.length,
+      deployments: getDeploymentsV3().length,
+    },
+    coverage: {
+      legal_profiles: new Set(legalProfiles.map((row) => row.id)).size,
+      income_profiles: new Set(incomeProfiles.map((row) => row.id)).size,
+      reserve_component_assets: new Set(reserveComponents.map((row) => row.stablecoin_id)).size,
+    },
   };
 }
 
