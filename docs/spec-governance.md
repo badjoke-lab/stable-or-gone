@@ -25,12 +25,14 @@ docs/quality/non-ui-quality-program.md
 docs/roadmap.md
 ```
 
-Canonical data semantics are governed by:
+Canonical data and parity semantics are governed by:
 
 ```text
 docs/stable-asset-scope.md
 docs/classification-spec.md
 docs/data-model-v3-spec.md
+docs/quality/registry-v2-v3-machine-readable-parity-spec.md
+docs/migration/registry-v3-parity-baseline.json
 docs/stats-spec.md
 ```
 
@@ -97,7 +99,8 @@ A change to any of the following requires a specification update in the same PR 
 - route families or canonical URLs;
 - page information hierarchy;
 - mobile information suppression;
-- machine-readable output shape;
+- machine-readable output shape or compatibility boundary;
+- Registry v2/v3 loader, manifest, or baseline authority;
 - statistics denominator or grouping semantics;
 - monitoring observation, coverage, source-family, or baseline semantics;
 - market-access research fields or publication gates;
@@ -155,8 +158,9 @@ PR #305 checkpoint 03 schedule amendment complete
 PR #306 function-matrix checkpoint 03 complete
 PR #307 reviewed market-access guide published
 PR #308 known-unknown and placeholder integrity audit complete
-PR #309 monitoring coverage recalculation active
-PR #310 Registry v2/v3 and machine-readable parity next
+PR #309 monitoring coverage recalculation complete
+PR #310 Registry v2/v3 and machine-readable parity active
+PR #311 counts, manifest, version, and provenance integrity next
 ```
 
 The market-access publication evidence layers remain:
@@ -191,21 +195,16 @@ Structural placeholders such as TODO/TBD identity fields, fake example URLs, fab
 
 ## 9. Monitoring coverage governance
 
-PR #309 recalculates coverage from the current checked-in source allowlist and baseline state. It is an audit item, not a source-expansion item.
-
-Coverage must remain multidimensional and separated at minimum into:
+PR #309 established the current checked-in coverage boundary:
 
 ```text
-issuer/protocol source reach
-reserve/assurance reach
-redemption/mint terms reach
-issuer lifecycle reach
-regulatory action/guidance reach
-platform-policy reach
-platform service-state reach
-regulatory-register reach
-EU/EEA market-access function reach
-accepted-baseline reach
+registered sources: 24
+registered asset reach: 16/100
+accepted sources: 0
+platform-policy coverage: 0
+platform service-state coverage: 0
+regulatory-register coverage: 0
+EU/EEA function-level market-access coverage: 0
 ```
 
 Governance rules:
@@ -216,10 +215,44 @@ Governance rules:
 - Regulatory action pages are not regulatory-register coverage.
 - A generic issuer or product page is not function-level market-access coverage.
 - Zero coverage for a required domain is a valid audit result and must not be filled by inference.
-- PR #309 may report gaps but may not add platform-policy sources, extend schemas, accept baselines, schedule monitoring, write canonical data, or edit the public article.
 - Source and schema expansion remains scheduled for PR #315-#317; scheduled read-only operation remains PR #318.
 
-## 10. Specification status labels
+## 10. Registry v2/v3 and machine-readable parity governance
+
+PR #310 is governed by:
+
+```text
+docs/quality/registry-v2-v3-machine-readable-parity-spec.md
+docs/migration/registry-v3-parity-baseline.json
+```
+
+Governance rules:
+
+- Registry v3 is additive and backward-compatible with the public Registry v2 contract.
+- Current parity is derived from current composed manifests and runtime loaders.
+- Historical baselines remain reproducible but must be labeled historical and must not masquerade as current parity.
+- A stale baseline and stale generated artifact agreeing with one another is not proof of current parity.
+- Current canonical assets require legal-profile and income-profile coverage; explicit unknown values are valid when evidence is unresolved.
+- Reserve-component coverage remains optional and time-scoped.
+- Stable-asset relationship rows remain applicability-based rather than universal.
+- Active manifest files and runtime loader imports must be mutually represented.
+- The public machine-readable schema remains V2-compatible unless a separate reviewed public-contract change approves expansion.
+- Omission of additive V3-only internal groups from the current public data-model declaration is an intentional compatibility boundary for PR #310, not permission to misstate public record counts.
+- Machine-readable data safety remains canonical-only and excludes unreviewed candidates, internal monitoring, and private notes.
+
+The historical 92-asset Registry v3 quality baseline is retained in:
+
+```text
+docs/migration/registry-v3-baseline.json
+```
+
+The current 100-asset parity authority is:
+
+```text
+docs/migration/registry-v3-parity-baseline.json
+```
+
+## 11. Specification status labels
 
 Use one of:
 
@@ -237,7 +270,7 @@ working draft — not approved
 
 A superseded document must point to its replacement and must not remain in an active required-reading list except where explicitly identified as historical context.
 
-## 11. UI maintenance governance
+## 12. UI maintenance governance
 
 There is no active redesign sequence. A UI maintenance PR must start from a concrete observed defect, preserve the terminal visual family unless explicitly changed, preserve canonical data and route meaning, use rendered evidence for visual claims, and remain narrow enough not to displace the active roadmap.
 
@@ -250,6 +283,6 @@ public/brand/sog-mark-on-light.svg
 public/brand/sog-mark-on-dark.svg
 ```
 
-## 12. Data-preservation rule
+## 13. Data-preservation rule
 
 UI, quality, taxonomy, monitoring, statistics, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum the canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline.
