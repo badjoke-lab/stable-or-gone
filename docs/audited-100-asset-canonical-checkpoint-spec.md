@@ -19,11 +19,11 @@ reviewed canonical source state
 + canonical content digests
 + package graph digests
 + PR #317 reproducibility result
-+ production commit/provenance/output-parity verification
++ current production public-output/provenance/checkpoint parity verification
 = audited 100-asset checkpoint
 ```
 
-PR #318 does not add records and does not create release material. PR #319 remains responsible for non-UI release material.
+PR #318 does not add records and does not create release material. PR #319 was consumed by narrow guide maintenance. PR #320 remains responsible for non-UI release material.
 
 ## 2. Binding checkpoint
 
@@ -57,6 +57,8 @@ The checkpoint source is the merged PR #317 main commit:
 ```
 
 PR #318 may add checkpoint specifications, validators, reports, and workflows, but it must not change canonical record content or package inputs protected by the checkpoint.
+
+A later noncanonical `main` release does not replace the checkpoint source commit. Production verification must instead prove that the later release still publishes the same audited canonical checkpoint.
 
 ## 4. Canonical data boundary
 
@@ -161,16 +163,18 @@ The checkpoint validator verifies this linkage exactly.
 
 The checkpoint is not complete from source state alone.
 
-The dedicated checkpoint workflow verifies production with:
+The dedicated checkpoint workflow performs two production layers.
+
+### 10.1 Current public-output verification
 
 ```text
-SOG_EXPECTED_COMMIT=9a106f0938e6323de833c941d6ae863050f1f03b
-npm run check:production
+env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA npm run check:production
 ```
+
+This verifies the current production release without requiring it to use the older checkpoint source commit.
 
 The existing production chain checks:
 
-- intended deployed commit;
 - homepage and public route availability;
 - version and manifest contract;
 - public record counts;
@@ -186,7 +190,20 @@ The existing production chain checks:
 - detail-page canonical URLs;
 - detail-page JSON-LD URLs.
 
-Production verification remains a workflow result, not a field copied into canonical data.
+### 10.2 Audited checkpoint parity
+
+```text
+node scripts/check-production-audited-checkpoint.mjs
+```
+
+This compares current production provenance with the audited checkpoint and fails on:
+
+- canonical data hash mismatch;
+- canonical file-count mismatch;
+- reviewed Registry v2 canonical count mismatch;
+- reviewed route-count mismatch.
+
+A later noncanonical release is allowed only when all current public-output checks and checkpoint parity checks pass.
 
 ## 11. Generator
 
@@ -239,9 +256,10 @@ npm ci
 -> validate active workstream
 -> validate parity suite
 -> validate final state
--> validate registry integrity
+-> rebuild and validate current registry integrity
 -> validate audited 100-asset checkpoint
--> verify production at the PR #317 merge commit
+-> verify current production public outputs and provenance
+-> verify production canonical checkpoint parity
 -> upload checkpoint validation result
 ```
 
@@ -301,7 +319,8 @@ general CI runs checkpoint validation
 dedicated checkpoint workflow exists
 source counts and digests match checkpoint
 PR #317 reproducibility result is linked and validated
-production verifies the PR #317 merge commit
-roadmap and workstream authority show PR #318 active / PR #319 next
+current production public outputs and provenance pass
+production canonical hash/file-count/count/route parity match checkpoint
+roadmap and workstream authority show PR #318 active / PR #320 next planned item
 full CI and checkpoint workflow are green
 ```
