@@ -1,0 +1,15 @@
+name: PR318 production diagnostic
+
+on:
+  pull_request:
+
+jobs:
+  diagnostic:
+    if: github.head_ref == 'pr318-audited-100-checkpoint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print production version build
+        shell: bash
+        run: |
+          curl -fsS -H 'cache-control: no-cache' https://sog.badjoke-lab.com/version.json > /tmp/version.json
+          node -e "const v=require('/tmp/version.json'); console.log(JSON.stringify({commit:v.build?.commit,branch:v.build?.branch,generated_at:v.build?.generated_at,counts:v.data?.record_counts},null,2))"
