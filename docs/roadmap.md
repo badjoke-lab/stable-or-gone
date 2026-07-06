@@ -6,8 +6,8 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current reviewed main checkpoint before PR #316:
-4d90b6dffee88f45e3f985ef73ea973e83dfec2f
+Current reviewed main checkpoint before PR #317:
+47c110b69ec7fd61121cbeee247f4ef12d466117
 
 Canonical stable assets: 100
 Organizations: 94
@@ -27,10 +27,11 @@ PR #312 Ripple EU CASP guide update: complete
 PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
+PR #316 counts, manifest, version, and provenance integrity: complete
 
 Active workstream: non-UI release hardening
-Current item: PR #316 counts, manifest, version, and provenance integrity
-Next item: PR #317 reproducible build and generated-output audit
+Current item: PR #317 reproducible build and generated-output audit
+Next item: PR #318 audited 100-record canonical checkpoint
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, record-growth, comparison, and change-research schedule without a deliberate roadmap amendment.
@@ -65,6 +66,7 @@ PR #312  Ripple EU CASP guide update
 PR #313  first EEA-scope follow-up — closed without merge
 PR #314  corrected guide follow-up
 PR #315  schedule amendment and PR renumbering
+PR #316  counts, manifest, version, and provenance integrity
 ```
 
 The registry remains at the reviewed 100-record checkpoint.
@@ -162,7 +164,7 @@ Merge checkpoint:
 4d90b6dffee88f45e3f985ef73ea973e83dfec2f
 ```
 
-## PR #316 — counts, manifest, version, and provenance integrity — active
+## PR #316 — counts, manifest, version, and provenance integrity — complete
 
 Binding specification:
 
@@ -182,35 +184,69 @@ Supporting audit:
 docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 ```
 
+Merged checkpoint:
+
+```text
+47c110b69ec7fd61121cbeee247f4ef12d466117
+```
+
+PR #316 tied composed canonical counts, public machine-readable count surfaces, route counts, and provenance semantics to the reviewed 100-asset checkpoint. It also aligned the checked-in provenance sentinel with current counts while preserving explicit sentinel semantics before build.
+
+## PR #317 — reproducible build and generated-output audit — active
+
+Binding specification:
+
+```text
+docs/reproducible-build-generated-output-audit-spec.md
+```
+
+Binding baseline:
+
+```text
+docs/migration/reproducible-build-output-baseline.json
+```
+
+Supporting audit:
+
+```text
+docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
+```
+
 Purpose:
 
-- tie composed canonical counts to a reviewed release-integrity baseline;
-- ensure `version.json` and `data/manifest.json` use shared count and build getters;
-- ensure public count paths remain stable;
-- align the checked-in provenance sentinel with the 100-record checkpoint;
-- preserve explicit sentinel semantics before build;
-- verify provenance-generator wiring;
-- verify expected detail-route arithmetic;
-- add source-state integrity validation before final-state and build validation.
+- lock dependency resolution with a reviewed package lock;
+- use `npm ci` in CI, reproducibility audit, and production deployment;
+- pin the release-hardening Node runtime;
+- make build timestamp resolution deterministic through `SOG_BUILD_TIMESTAMP` and `SOURCE_DATE_EPOCH`;
+- derive production build timestamp and epoch from the deployed commit;
+- stop normal build from mutating the historical tracked registry-stats baseline input;
+- run two fixed-context builds and compare audited output bytes;
+- hash `dist/**`, generated build provenance, and deployment-taxonomy diagnostic output;
+- guard protected historical inputs from build-time mutation.
 
 Completion condition:
 
 ```text
-release-integrity baseline exists
-source-state validator exists
-provenance sentinel carries current reviewed counts and route counts
-version/manifest source contracts are guarded
-provenance generator wiring is guarded
-CI runs validate:release-integrity after parity validation
-roadmap and workstream guard show PR #316 active / PR #317 next
-full CI green
+package-lock.json is reviewed and committed
+CI and production use npm ci
+release-hardening workflows pin Node 22.22.0
+deterministic timestamp helper is used by timestamped build generators
+production build context derives from deployed commit
+historical registry stats are not mutated by normal build
+reproducibility baseline exists
+source-level reproducibility validator exists
+two-pass fixed-context build audit exists
+both builds produce identical audited bytes
+protected historical inputs remain unchanged
+roadmap and workstream guard show PR #317 active / PR #318 next
+full CI and reproducibility workflow green
 ```
 
 ## Phase B — remaining non-UI release hardening
 
 ```text
-PR #316 counts, manifest, version, and provenance integrity — active
-PR #317 reproducible build and generated-output audit
+PR #316 counts, manifest, version, and provenance integrity — complete
+PR #317 reproducible build and generated-output audit — active
 PR #318 audited 100-record canonical checkpoint
 PR #319 non-UI release material
 ```
@@ -351,9 +387,9 @@ The natural-language layer may translate requests into structured filters. It mu
 ## Immediate next items
 
 ```text
-1. Complete PR #316 counts, manifest, version, and provenance integrity.
-2. Start PR #317 reproducible build and generated-output audit from current main.
-3. Continue PR #318-#319 release hardening.
+1. Complete PR #317 reproducible build and generated-output audit.
+2. Start PR #318 audited 100-record canonical checkpoint from current main.
+3. Continue PR #319 non-UI release material.
 4. Keep monitoring expansion in PR #320-#322 and scheduled read-only operation in PR #323.
 5. Keep statistics in PR #324-#327 and candidate audit/growth in PR #328-#333.
 6. After the reviewed 110-asset checkpoint, activate Phase F at PR #334.
