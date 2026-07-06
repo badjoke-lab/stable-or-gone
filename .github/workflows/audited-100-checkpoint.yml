@@ -34,10 +34,14 @@ jobs:
         run: node scripts/audit-registry-integrity-batch-t.mjs --check
       - name: Validate audited 100-asset checkpoint
         run: node scripts/validate-audited-100-checkpoint.mjs
-      - name: Verify current production public outputs
-        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA npm run check:production
+      - name: Verify current production public smoke
+        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production.mjs
+      - name: Verify current production provenance
+        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-provenance.mjs
+      - name: Verify current production exact output parity
+        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-output-parity.mjs
       - name: Verify production canonical checkpoint parity
-        run: node scripts/check-production-audited-checkpoint.mjs
+        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-audited-checkpoint.mjs
       - name: Upload checkpoint validation
         if: always()
         uses: actions/upload-artifact@v4
