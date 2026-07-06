@@ -57,9 +57,6 @@ data/editorial-research/eu-stablecoin-market-access.json
 data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
 data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json
-docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
-docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
-docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
 ```
@@ -102,7 +99,7 @@ A change to any of the following requires a specification update in the same PR 
 - mobile information suppression;
 - machine-readable output shape;
 - statistics denominator or grouping semantics;
-- monitoring observation or baseline semantics;
+- monitoring observation, coverage, source-family, or baseline semantics;
 - market-access research fields or publication gates;
 - production publication gates;
 - the approved PR sequence;
@@ -157,8 +154,9 @@ PR #304 reviewed market-access matrix and checkpoints 01-02 complete
 PR #305 checkpoint 03 schedule amendment complete
 PR #306 function-matrix checkpoint 03 complete
 PR #307 reviewed market-access guide published
-PR #308 known-unknown and placeholder integrity audit active
-PR #309 monitoring coverage recalculation next
+PR #308 known-unknown and placeholder integrity audit complete
+PR #309 monitoring coverage recalculation active
+PR #310 Registry v2/v3 and machine-readable parity next
 ```
 
 The market-access publication evidence layers remain:
@@ -187,11 +185,41 @@ source_review_needed
 
 These states are not structural placeholders and must not be overwritten merely to satisfy completeness. A known-unknown record is a reviewed statement of unresolved knowledge and remains canonical until reviewed evidence resolves it.
 
-PR #308 may audit and report stale review age, duplicate topics, weak wording, broken references, invalid severity/date fields, and structural placeholder-like values. It may not resolve unknowns by inference or substitute fabricated IDs, URLs, dates, addresses, contracts, or identifiers.
+PR #308 audited stale review age, duplicate topics, weak wording, broken references, invalid severity/date fields, and structural placeholder-like values. Its result does not authorize automatic resolution or deletion of unresolved rows.
 
 Structural placeholders such as TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses/contracts/identifiers are defects.
 
-## 9. Specification status labels
+## 9. Monitoring coverage governance
+
+PR #309 recalculates coverage from the current checked-in source allowlist and baseline state. It is an audit item, not a source-expansion item.
+
+Coverage must remain multidimensional and separated at minimum into:
+
+```text
+issuer/protocol source reach
+reserve/assurance reach
+redemption/mint terms reach
+issuer lifecycle reach
+regulatory action/guidance reach
+platform-policy reach
+platform service-state reach
+regulatory-register reach
+EU/EEA market-access function reach
+accepted-baseline reach
+```
+
+Governance rules:
+
+- A registered source is not an accepted baseline.
+- A pending initial baseline is not accepted monitoring coverage.
+- Issuer/protocol reach is not platform-policy coverage.
+- Regulatory action pages are not regulatory-register coverage.
+- A generic issuer or product page is not function-level market-access coverage.
+- Zero coverage for a required domain is a valid audit result and must not be filled by inference.
+- PR #309 may report gaps but may not add platform-policy sources, extend schemas, accept baselines, schedule monitoring, write canonical data, or edit the public article.
+- Source and schema expansion remains scheduled for PR #315-#317; scheduled read-only operation remains PR #318.
+
+## 10. Specification status labels
 
 Use one of:
 
@@ -209,7 +237,7 @@ working draft — not approved
 
 A superseded document must point to its replacement and must not remain in an active required-reading list except where explicitly identified as historical context.
 
-## 10. UI maintenance governance
+## 11. UI maintenance governance
 
 There is no active redesign sequence. A UI maintenance PR must start from a concrete observed defect, preserve the terminal visual family unless explicitly changed, preserve canonical data and route meaning, use rendered evidence for visual claims, and remain narrow enough not to displace the active roadmap.
 
@@ -222,6 +250,6 @@ public/brand/sog-mark-on-light.svg
 public/brand/sog-mark-on-dark.svg
 ```
 
-## 11. Data-preservation rule
+## 12. Data-preservation rule
 
 UI, quality, taxonomy, monitoring, statistics, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum the canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline.

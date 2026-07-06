@@ -31,6 +31,10 @@ docs/quality/monitoring-pipeline-spec.md
 docs/quality/monitoring-official-source-spec.md
 docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
+scripts/monitoring/sources/official-sources.json
+scripts/monitoring/baselines/official-source-baselines.json
+scripts/monitoring/audits/build-coverage-report.mjs
+scripts/validate-current-coverage.mjs
 ```
 
 For EU/EEA stablecoin market-access work, also read:
@@ -41,9 +45,6 @@ data/editorial-research/eu-stablecoin-market-access.json
 data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
 data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json
-docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
-docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
-docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
 ```
@@ -59,7 +60,7 @@ Repository specifications outrank chat memory, handoff prose, issue discussion, 
 The dedicated UI program is stopped. UI is maintenance-only.
 
 ```text
-Current main checkpoint: 4d7b12936b5ca8497219c09392e743947c1109b9
+Current main checkpoint: 3fa7f2fe7d84f4fc2a0ba4e0dc8b11e1b1b789b9
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -69,14 +70,10 @@ Public source identities: 456
 Evidence relations: 502
 Deployments: 140
 Detail routes: 366
-PR #302 lifecycle and relationship boundary audit: complete
-PR #303 EU market-access specification and schedule amendment: complete
-PR #304 reviewed research matrix and checkpoints 01-02: complete
-PR #305 checkpoint 03 schedule amendment: complete
-PR #306 function-matrix research checkpoint 03: complete
 PR #307 reviewed EU/EEA market-access guide: complete and published
-Active: PR #308 known-unknown and placeholder integrity audit
-Next: PR #309 monitoring coverage recalculation for 100 assets
+PR #308 known-unknown and placeholder integrity audit: complete
+Active: PR #309 monitoring coverage recalculation for 100 assets
+Next: PR #310 Registry v2/v3 and machine-readable parity
 ```
 
 ## Active sequence
@@ -84,8 +81,8 @@ Next: PR #309 monitoring coverage recalculation for 100 assets
 ```text
 PR #296-#302  registry-wide audit through lifecycle boundaries — complete
 PR #303-#307  EU market-access specification, research, re-audit, and guide publication — complete
-PR #308       known-unknown and placeholder integrity audit — active
-PR #309       monitoring coverage recalculation — next
+PR #308       known-unknown and placeholder integrity audit — complete
+PR #309       monitoring coverage recalculation — active
 PR #310-#314  non-UI release hardening
 PR #315-#318  monitoring expansion and scheduled read-only operation
 PR #319-#322  statistics implementation
@@ -116,7 +113,7 @@ There is no active redesign sequence. A UI PR is allowed only for a concrete ver
 
 ## Known-unknown and placeholder integrity rules
 
-PR #308 must preserve the distinction between an explicit unknown state and a structural placeholder.
+PR #308 established the current audited boundary.
 
 Intentional unresolved semantics include:
 
@@ -128,9 +125,7 @@ not_applicable
 source_review_needed
 ```
 
-These values must not be erased merely to make records look complete. A known-unknown row must have a unique ID, a canonical asset reference, a valid issuer reference when present, a specific topic, a meaningful description, a valid severity, and a non-future review date.
-
-Structural fake values are defects, including TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses/contracts/identifiers. Stale review age is a review queue, not permission to resolve or delete a known unknown.
+These values must not be erased merely to make records look complete. Structural fake values remain defects. Stale review age is a review queue, not permission to resolve or delete a known unknown.
 
 ## Lifecycle boundary rules
 
@@ -160,7 +155,36 @@ B. current platform-wide service-state evidence
 C. general service/licensing context without asset-specific function support
 ```
 
-## Monitoring rules
+## Monitoring coverage rules
+
+PR #309 is a recalculation and audit of the current checked-in monitoring configuration. It does not expand the source allowlist or monitoring schema.
+
+Coverage must be reported separately for:
+
+```text
+issuer/protocol source reach
+reserve/assurance reach
+redemption/mint terms reach
+issuer lifecycle reach
+regulatory action/guidance reach
+platform-policy reach
+platform service-state reach
+regulatory-register reach
+EU/EEA market-access function reach
+accepted-baseline reach
+```
+
+Fixed distinctions:
+
+- Registered source reach is not accepted monitoring coverage.
+- A pending baseline is not an accepted baseline.
+- Issuer/protocol source reach is not platform-policy coverage.
+- Regulatory action pages are not regulatory-register coverage.
+- A generic product or issuer page is not function-level market-access monitoring.
+- Zero market-access coverage is a valid audit conclusion and must not be filled by inference.
+- PR #309 may report gaps but may not add platform-policy sources, schema fields, schedules, baseline acceptance, canonical writes, or article edits.
+
+## Monitoring safety rules
 
 - Monitoring output is candidate material only and must not write directly to canonical public data.
 - Monitoring executions remain read-only and may not update their own accepted baseline.
