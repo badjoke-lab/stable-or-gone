@@ -34,6 +34,8 @@ jobs:
         run: node scripts/validate-registry-reserve-redemption-backing-audit.mjs
       - name: Validate deployment and chain identity audit
         run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
+      - name: Validate known-unknown and placeholder integrity audit
+        run: node scripts/validate-registry-known-unknown-placeholder-integrity-audit.mjs
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
       - name: Validate unresolved terminal-date queue
