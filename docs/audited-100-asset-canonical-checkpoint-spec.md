@@ -23,9 +23,9 @@ reviewed canonical source state
 = audited 100-asset checkpoint
 ```
 
-PR #318 does not add records and does not create release marketing material. PR #319 remains responsible for non-UI release material.
+PR #318 does not add records and does not create release material. PR #319 remains responsible for non-UI release material.
 
-## 2. Binding checkpoint file
+## 2. Binding checkpoint
 
 The binding checkpoint is:
 
@@ -36,10 +36,8 @@ docs/migration/audited-100-asset-canonical-checkpoint.json
 It records:
 
 - checkpoint source commit;
-- reviewed Registry v2 counts;
-- additive Registry v3 counts;
-- per-group identity digests;
-- per-group content digests;
+- Registry v2 group counts and digests;
+- additive Registry v3 group counts and digests;
 - global canonical identity digest;
 - global canonical content digest;
 - canonical file count;
@@ -47,22 +45,22 @@ It records:
 - package.json digest;
 - release-integrity baseline ID;
 - reproducible-build baseline ID;
-- PR #317 audited output tree digest, file count, total bytes, and result;
-- required production verification contract.
+- PR #317 audited output tree result;
+- production verification contract.
 
 ## 3. Source checkpoint
 
-The source checkpoint for PR #318 is the merged PR #317 main commit.
+The checkpoint source is the merged PR #317 main commit:
 
 ```text
 9a106f0938e6323de833c941d6ae863050f1f03b
 ```
 
-PR #318 itself may add checkpoint specifications, validators, reports, and workflows, but it must not change canonical record content. The checkpoint generator therefore computes canonical digests from the same canonical data boundary used by release provenance while recording the merged PR #317 source checkpoint separately.
+PR #318 may add checkpoint specifications, validators, reports, and workflows, but it must not change canonical record content or package inputs protected by the checkpoint.
 
 ## 4. Canonical data boundary
 
-The checkpoint canonical content boundary includes:
+The checkpoint content boundary includes:
 
 - every Registry v2 canonical data-group file loaded through `docs/migration/registry-v2-baseline.json`;
 - additive Registry v3 legal-profile files;
@@ -71,21 +69,13 @@ The checkpoint canonical content boundary includes:
 - additive income-profile files;
 - approved compatibility overlay files used by current provenance generation.
 
-The boundary excludes:
-
-- candidate data;
-- private monitoring output;
-- editorial research matrices;
-- private review notes;
-- artifacts;
-- generated audit reports;
-- public build output.
+The boundary excludes candidate data, private monitoring output, editorial research matrices, private review notes, artifacts, generated audit reports, and public build output.
 
 The checkpoint content boundary must remain aligned with the canonical provenance boundary unless an explicit specification update changes both contracts.
 
 ## 5. Per-group checkpoint contract
 
-Each canonical record group records:
+Each source record group records:
 
 ```text
 record_count
@@ -94,28 +84,13 @@ identity_sha256
 content_sha256
 ```
 
-### 5.1 Identity digest
+The group identity digest is SHA-256 over sorted record IDs joined by newline.
 
-For a group, the identity digest is SHA-256 over sorted record IDs joined by newline.
+The group content digest is SHA-256 over sorted file path and exact file byte pairs.
 
-Purpose:
-
-- detect added or removed identities;
-- detect replacement of record IDs;
-- allow content edits to be distinguished from identity-set edits.
-
-### 5.2 Content digest
-
-For a group, the content digest is SHA-256 over sorted file path and exact file byte pairs.
-
-Purpose:
-
-- detect any canonical content change within the group;
-- preserve exact source checkpoint identity without duplicating all rows into the checkpoint file.
+Identity and content digests remain separate so identity-set changes can be distinguished from content edits.
 
 ## 6. Global canonical digests
-
-### 6.1 Canonical content digest
 
 The global canonical content digest hashes the sorted canonical file list using:
 
@@ -128,22 +103,29 @@ NUL
 
 for each file.
 
-### 6.2 Canonical identity digest
-
 The global canonical identity digest hashes sorted group names and their group identity digests.
 
-These digests serve different purposes and must not be collapsed into one field.
+Observed binding values:
+
+```text
+canonical files: 334
+canonical content SHA-256:
+8fa08219d1e587a0628576cdfcf0e64722348282897558016651a04ebea5a881
+
+canonical identity SHA-256:
+cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
+```
 
 ## 7. Baseline linkage
 
-The checkpoint must reference the exact baseline IDs for:
+The checkpoint references exact baseline IDs for:
 
 ```text
 release integrity
 reproducible build
 ```
 
-The validator must fail if the current baseline IDs differ from the checkpoint.
+The validator fails if current baseline IDs differ from the checkpoint.
 
 This prevents a later baseline replacement from silently inheriting the old checkpoint approval.
 
@@ -158,50 +140,35 @@ package_json_sha256
 
 The lock digest must match the reproducible-build baseline.
 
-A package manifest or lockfile change after PR #318 requires a new reviewed checkpoint or a deliberate release-hardening update, depending on roadmap phase.
+PR #318 intentionally does not modify `package.json` or `package-lock.json`, because those files are checkpoint inputs from the PR #317 main source state.
 
 ## 9. Reproducibility result linkage
-
-The checkpoint records the accepted PR #317 two-pass result:
-
-```text
-audited PR head
-output tree SHA-256
-file count
-total bytes
-failure count
-reproducible boolean
-```
 
 The accepted PR #317 result is:
 
 ```text
 audited PR head: 41ae5cdc07f8e5bae74642cd6f8ada3c7ebba96f
+output tree SHA-256: 21fd8cbf5db373e1f0483dc5d74203b825c0203d08ba1ff7f34b8235495981a4
 file count: 414
 total bytes: 15178769
 failures: 0
 reproducible: true
 ```
 
-The exact tree SHA-256 is stored in the checkpoint file.
+The checkpoint validator verifies this linkage exactly.
 
 ## 10. Production verification layer
 
 The checkpoint is not complete from source state alone.
 
-The checkpoint workflow must verify production against the merged PR #317 source commit using the existing production checks:
-
-```text
-npm run check:production
-```
-
-with:
+The dedicated checkpoint workflow verifies production with:
 
 ```text
 SOG_EXPECTED_COMMIT=9a106f0938e6323de833c941d6ae863050f1f03b
+npm run check:production
 ```
 
-The production verification chain checks:
+The existing production chain checks:
 
 - intended deployed commit;
 - homepage and public route availability;
@@ -229,18 +196,7 @@ The observation generator is:
 scripts/generate-audited-100-checkpoint.mjs
 ```
 
-It deterministically derives:
-
-- actual group counts;
-- group identity digests;
-- group content digests;
-- global canonical content digest;
-- global canonical identity digest;
-- package digests;
-- baseline IDs;
-- accepted PR #317 reproducibility result linkage.
-
-The final validator recomputes the observation and compares it with the binding checkpoint.
+It deterministically derives actual group counts, group identity/content digests, global canonical digests, package digests, baseline IDs, and the accepted PR #317 reproducibility-result linkage.
 
 ## 12. Validator
 
@@ -250,7 +206,7 @@ The binding validator is:
 scripts/validate-audited-100-checkpoint.mjs
 ```
 
-It must fail on:
+It regenerates the current observation and fails on:
 
 - source checkpoint mismatch;
 - release-integrity baseline ID mismatch;
@@ -260,21 +216,18 @@ It must fail on:
 - global canonical identity digest mismatch;
 - package-lock digest mismatch;
 - package manifest digest mismatch;
-- any Registry v2 group count mismatch;
-- any Registry v2 group identity mismatch;
-- any Registry v2 group content mismatch;
-- any additive Registry v3 group count mismatch;
-- any additive Registry v3 group identity mismatch;
-- any additive Registry v3 group content mismatch;
+- Registry v2 group count, identity, or content mismatch;
+- additive Registry v3 group count, identity, or content mismatch;
 - PR #317 reproducibility-result mismatch;
-- release expected count mismatch.
+- release expected count mismatch;
+- production verification contract mismatch.
 
 ## 13. CI and checkpoint workflow
 
 General CI runs:
 
 ```text
-npm run validate:checkpoint-100
+node scripts/validate-audited-100-checkpoint.mjs
 ```
 
 after release-integrity and reproducibility source-contract validation.
@@ -287,14 +240,14 @@ npm ci
 -> validate parity suite
 -> validate final state
 -> validate registry integrity
--> validate 100-asset checkpoint
+-> validate audited 100-asset checkpoint
 -> verify production at the PR #317 merge commit
 -> upload checkpoint validation result
 ```
 
 ## 14. Data preservation
 
-The checkpoint protects the reviewed state:
+The checkpoint protects:
 
 ```text
 stable assets: 100
@@ -342,10 +295,11 @@ PR #318 is complete when:
 ```text
 observed canonical digests are captured from the PR #317 main checkpoint
 binding checkpoint file exists
+checkpoint generator exists
 checkpoint validator exists
 general CI runs checkpoint validation
 dedicated checkpoint workflow exists
-source counts and digests match the checkpoint
+source counts and digests match checkpoint
 PR #317 reproducibility result is linked and validated
 production verifies the PR #317 merge commit
 roadmap and workstream authority show PR #318 active / PR #319 next
