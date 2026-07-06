@@ -34,6 +34,12 @@ docs/data-model-v3-spec.md
 docs/stats-spec.md
 ```
 
+Post-110 comparison, market-access canonicalization, change research tools, and reviewed update surfaces are governed by:
+
+```text
+docs/comparison-and-change-product-spec.md
+```
+
 Monitoring semantics are governed by:
 
 ```text
@@ -44,7 +50,7 @@ docs/quality/monitoring-review-material-spec.md
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-EU/EEA market-access research, the dated guide, its research matrix, and the later platform/regulatory monitoring extension are governed by:
+EU/EEA market-access research, the dated guide, its research matrix, and platform/regulatory monitoring extension are governed by:
 
 ```text
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
@@ -61,7 +67,7 @@ docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
 ```
 
-UI is maintenance-only. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
+UI is maintenance-only until the roadmap reaches an approved product UI phase. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
 
 ## 3. Mandatory reading order
 
@@ -72,10 +78,12 @@ Before changing code, data, workflows, or documentation:
 3. Read `docs/roadmap.md`.
 4. Read `docs/deployment-policy.md`.
 5. Read the canonical plan for the active work item.
-6. Read the relevant data, monitoring, statistics, editorial, or maintenance specification.
+6. Read the relevant data, monitoring, statistics, comparison, change-research, editorial, or maintenance specification.
 7. Read each queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint named by the active work item.
 
 A pull request is not ready for review until the exact specification sections and roadmap item it implements are identified.
+
+For any Phase F-I work, `docs/comparison-and-change-product-spec.md` is mandatory reading.
 
 ## 4. Source-of-truth rule
 
@@ -83,7 +91,9 @@ A decision becomes binding only when it is written into the relevant canonical r
 
 If implementation and specification disagree, implementation is defective unless the specification is deliberately updated through review.
 
-Supporting research may record a fact, unresolved state, or source gap. It does not authorize publication until the applicable publication gate passes through a reviewed gate record.
+Supporting research may record a fact, unresolved state, or source gap. It does not authorize publication until the applicable review or publication gate passes.
+
+Monitoring observations and editorial research matrices are not canonical market-access records. Canonical market-access publication requires the reviewed record family and governance approved under the post-110 product specification.
 
 ## 5. Change-control rule
 
@@ -99,8 +109,14 @@ A change to any of the following requires a specification update in the same PR 
 - mobile information suppression;
 - machine-readable output shape;
 - statistics denominator or grouping semantics;
+- comparison projection shape or comparison semantics;
+- facet-freshness derivation semantics;
 - monitoring observation, coverage, source-family, or baseline semantics;
 - market-access research fields or publication gates;
+- canonical market-access record semantics;
+- Access & Regulation Explorer indexing semantics;
+- Change Timeline projection semantics;
+- reviewed public update derivation semantics;
 - production publication gates;
 - the approved PR sequence;
 - the active workstream or its pause/resumption state;
@@ -147,7 +163,7 @@ Current execution state:
 100 canonical stable assets reached
 100-record production verification recorded
 dedicated UI program stopped after PR #295
-UI maintenance-only
+UI maintenance-only until an approved product UI phase
 PR #302 lifecycle and relationship boundary audit complete
 PR #303 EU market-access specification and schedule amendment complete
 PR #304 reviewed market-access matrix and checkpoints 01-02 complete
@@ -155,16 +171,11 @@ PR #305 checkpoint 03 schedule amendment complete
 PR #306 function-matrix checkpoint 03 complete
 PR #307 reviewed market-access guide published
 PR #308 known-unknown and placeholder integrity audit complete
-PR #309 monitoring coverage recalculation active
-PR #310 Registry v2/v3 and machine-readable parity next
-```
-
-The market-access publication evidence layers remain:
-
-```text
-A. asset-specific function evidence
-B. current platform-wide service-state evidence
-C. general service/licensing context without asset-specific function support
+PR #309 monitoring coverage recalculation complete
+PR #310 Registry v2/v3 and machine-readable parity active
+PR #311 counts, manifest, version, and provenance integrity next
+PR #310-#328 current sequence unchanged
+PR #329-#342 post-110 comparison and change-product sequence approved but not active before reviewed 110-asset checkpoint
 ```
 
 Urgent factual corrections, verified public breakage, owner-directed dated editorial work, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
@@ -183,17 +194,17 @@ not_applicable
 source_review_needed
 ```
 
-These states are not structural placeholders and must not be overwritten merely to satisfy completeness. A known-unknown record is a reviewed statement of unresolved knowledge and remains canonical until reviewed evidence resolves it.
+These states are not structural placeholders and must not be overwritten merely to satisfy completeness or comparison presentation. A known-unknown record is a reviewed statement of unresolved knowledge and remains canonical until reviewed evidence resolves it.
 
-PR #308 audited stale review age, duplicate topics, weak wording, broken references, invalid severity/date fields, and structural placeholder-like values. Its result does not authorize automatic resolution or deletion of unresolved rows.
+Comparison projections must expose unresolved states rather than converting them to false factual claims.
 
-Structural placeholders such as TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses/contracts/identifiers are defects.
+Structural placeholders such as TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses, contracts, or identifiers are defects.
 
 ## 9. Monitoring coverage governance
 
-PR #309 recalculates coverage from the current checked-in source allowlist and baseline state. It is an audit item, not a source-expansion item.
+PR #309 completed coverage recalculation from the checked-in source allowlist and baseline state. It was an audit item, not a source-expansion item.
 
-Coverage must remain multidimensional and separated at minimum into:
+Coverage remains multidimensional and separated at minimum into:
 
 ```text
 issuer/protocol source reach
@@ -216,10 +227,31 @@ Governance rules:
 - Regulatory action pages are not regulatory-register coverage.
 - A generic issuer or product page is not function-level market-access coverage.
 - Zero coverage for a required domain is a valid audit result and must not be filled by inference.
-- PR #309 may report gaps but may not add platform-policy sources, extend schemas, accept baselines, schedule monitoring, write canonical data, or edit the public article.
-- Source and schema expansion remains scheduled for PR #315-#317; scheduled read-only operation remains PR #318.
+- Source and schema expansion remain scheduled for PR #315-#317.
+- Scheduled read-only operation remains PR #318.
+- Monitoring output remains private candidate material until reviewed through the approved boundary.
+- Monitoring observation schema does not by itself create a canonical Market Access Record family.
 
-## 10. Specification status labels
+## 10. Comparison and change-product governance
+
+Phase F-I is governed by `docs/comparison-and-change-product-spec.md`.
+
+Binding boundaries include:
+
+- The current PR #310-#328 sequence remains unchanged.
+- Phase F starts only after the reviewed 110-asset checkpoint.
+- Asset lifecycle, issuance/redemption, legal/regulatory state, and market access remain separate analytical layers.
+- Existing lifecycle and redemption semantics are not replaced merely for comparison convenience.
+- Legal and regulatory claims remain jurisdiction-scoped and evidence-backed.
+- Canonical market-access records remain distinct from monitoring observations and editorial research matrices.
+- Compare derives from reviewed canonical data and preserves unresolved states.
+- Facet freshness derives from authoritative record families and distinguishes source period, effective date, and review date.
+- Access and regulation may share an exploration surface while retaining separate canonical record families.
+- Change Timeline is a derived projection and may not replace source record families with a lossy generic event object.
+- Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
+- Safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
+
+## 11. Specification status labels
 
 Use one of:
 
@@ -237,9 +269,11 @@ working draft — not approved
 
 A superseded document must point to its replacement and must not remain in an active required-reading list except where explicitly identified as historical context.
 
-## 11. UI maintenance governance
+## 12. UI maintenance and approved product UI governance
 
-There is no active redesign sequence. A UI maintenance PR must start from a concrete observed defect, preserve the terminal visual family unless explicitly changed, preserve canonical data and route meaning, use rendered evidence for visual claims, and remain narrow enough not to displace the active roadmap.
+There is no free-standing redesign sequence. A UI maintenance PR must start from a concrete observed defect, preserve the terminal visual family unless explicitly changed, preserve canonical data and route meaning, use rendered evidence for visual claims, and remain narrow enough not to displace the active roadmap.
+
+When the roadmap reaches approved product UI phases such as Compare, Access & Regulation Explorer, or Change Timeline, those implementations are governed by the relevant canonical specification and roadmap PR item. Approval of those product surfaces does not reopen an unrestricted site-wide redesign program.
 
 Approved production brand assets remain:
 
@@ -250,6 +284,10 @@ public/brand/sog-mark-on-light.svg
 public/brand/sog-mark-on-dark.svg
 ```
 
-## 12. Data-preservation rule
+## 13. Data-preservation rule
 
-UI, quality, taxonomy, monitoring, statistics, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum the canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline.
+UI, quality, taxonomy, monitoring, statistics, growth, editorial, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
+
+Before and after a relevant change, verify at minimum the canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline.
+
+After canonical market-access records are introduced, relevant PRs must also verify their count, referential integrity, evidence linkage, scope fields, date semantics, and exclusion from private monitoring candidate data.
