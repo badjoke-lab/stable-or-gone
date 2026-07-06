@@ -1,7 +1,7 @@
 # Stable or Gone specification governance
 
 Status: canonical governance specification  
-Updated: 2026-07-05
+Updated: 2026-07-06
 
 ## 1. Purpose
 
@@ -50,19 +50,21 @@ EU/EEA market-access research, the dated guide, its research matrix, and the lat
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 ```
 
-Supporting research and publication review files named by the active work item are review inputs, not substitutes for the specification. Current files are:
+Supporting market-access review files include:
 
 ```text
 data/editorial-research/eu-stablecoin-market-access.json
 data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
 data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
+data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
 ```
 
-UI is maintenance-only. The current production visual direction is the restored terminal family implemented through PR #288-#295. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
+UI is maintenance-only. Historical UI plans and rejected visual directions are implementation history, not authority for new redesign work.
 
 ## 3. Mandatory reading order
 
@@ -154,11 +156,12 @@ PR #303 EU market-access specification and schedule amendment complete
 PR #304 reviewed market-access matrix and checkpoints 01-02 complete
 PR #305 checkpoint 03 schedule amendment complete
 PR #306 function-matrix checkpoint 03 complete
-PR #307 reviewed market-access guide and publication-gate record active
-PR #308 known-unknown and placeholder integrity audit next
+PR #307 reviewed market-access guide published
+PR #308 known-unknown and placeholder integrity audit active
+PR #309 monitoring coverage recalculation next
 ```
 
-The publication gate review passes only for a bounded article design that preserves three evidence layers:
+The market-access publication evidence layers remain:
 
 ```text
 A. asset-specific function evidence
@@ -166,11 +169,29 @@ B. current platform-wide service-state evidence
 C. general service/licensing context without asset-specific function support
 ```
 
-Only A-level evidence may populate direct function comparisons. B-level evidence may explain current access context. C-level evidence remains bounded context.
-
 Urgent factual corrections, verified public breakage, owner-directed dated editorial work, or security fixes may interrupt the sequence through a narrow PR. When that happens, the roadmap must be updated before the planned sequence resumes.
 
-## 8. Specification status labels
+## 8. Unknown-value and placeholder governance
+
+Unknown or missing-value semantics are protected data semantics.
+
+Intentional unresolved states include:
+
+```text
+null
+unknown
+not_recorded
+not_applicable
+source_review_needed
+```
+
+These states are not structural placeholders and must not be overwritten merely to satisfy completeness. A known-unknown record is a reviewed statement of unresolved knowledge and remains canonical until reviewed evidence resolves it.
+
+PR #308 may audit and report stale review age, duplicate topics, weak wording, broken references, invalid severity/date fields, and structural placeholder-like values. It may not resolve unknowns by inference or substitute fabricated IDs, URLs, dates, addresses, contracts, or identifiers.
+
+Structural placeholders such as TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses/contracts/identifiers are defects.
+
+## 9. Specification status labels
 
 Use one of:
 
@@ -188,19 +209,9 @@ working draft — not approved
 
 A superseded document must point to its replacement and must not remain in an active required-reading list except where explicitly identified as historical context.
 
-## 9. UI maintenance governance
+## 10. UI maintenance governance
 
-There is no active redesign sequence.
-
-A UI maintenance PR must:
-
-- start from a concrete observed defect;
-- preserve the terminal visual family unless an explicit owner decision changes direction;
-- preserve canonical data, route meaning, machine-readable output, and accessibility contracts unless separately authorized;
-- use actual rendered desktop/mobile evidence when the defect is visual or responsive;
-- remain narrow enough not to displace the active core roadmap.
-
-No agent may invent a new visual direction, substitute a new logo, or revive a rejected redesign program without a roadmap and specification amendment.
+There is no active redesign sequence. A UI maintenance PR must start from a concrete observed defect, preserve the terminal visual family unless explicitly changed, preserve canonical data and route meaning, use rendered evidence for visual claims, and remain narrow enough not to displace the active roadmap.
 
 Approved production brand assets remain:
 
@@ -211,107 +222,6 @@ public/brand/sog-mark-on-light.svg
 public/brand/sog-mark-on-dark.svg
 ```
 
-Stablecoin identity may use a reviewed local official logo when available; otherwise use the ticker fallback. Do not hotlink or generate imitation coin or organization logos.
+## 11. Data-preservation rule
 
-## 10. Data-preservation rule
-
-UI, quality, taxonomy, monitoring, statistics, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum:
-
-```text
-stable assets
-organizations
-relationships
-classifications
-reserve/redemption profiles
-events
-event details
-evidence
-evidence relations
-reserve reports/context
-known unknowns
-regulatory notes
-deployments
-legal profiles
-stable-asset relationships
-reserve components
-income profiles
-```
-
-Unknown values remain unknown unless evidence supports a canonical value. Intentional removals require record-by-record audit and explicit approval.
-
-Editorial research files and gate-review files remain outside canonical registry counts and must not masquerade as canonical records.
-
-## 11. Growth governance
-
-The registry has reached the audited-growth target of 100 canonical stable assets. Further growth is not automatic.
-
-The next controlled growth phase begins only after:
-
-```text
-remaining 100-record registry-wide audit
-non-UI release hardening
-monitoring expansion
-statistics implementation
-next candidate audit
-```
-
-Then growth may proceed from 100 to 110 under the roadmap:
-
-- no more than two new stable assets per growth PR;
-- reviewed candidates only;
-- full duplicate and lineage checks;
-- all applicable supporting record groups;
-- explicit unknown preservation;
-- current-main branch base;
-- roadmap authorization.
-
-## 12. Monitoring baseline governance
-
-An accepted monitoring baseline is a repository-reviewed comparison point, not canonical evidence of a stablecoin fact.
-
-Monitoring execution remains read-only. It may observe sources, compare against accepted baselines, classify changes, and produce private review material. It may not:
-
-- update its own accepted baseline;
-- write canonical data;
-- edit editorial guides automatically;
-- create branches or pull requests automatically;
-- publish candidate findings;
-- deploy.
-
-A baseline change requires a separate human-reviewed repository change.
-
-EU/EEA market-access monitoring inherits the same rule. Platform-policy and regulatory-register observations may create private review candidates only. A source change must not update the public market-access guide or its research matrix automatically.
-
-## 13. Market-access publication governance
-
-The market-access article is a reviewed dated editorial snapshot, not a live dashboard.
-
-The publication gate in `docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md` passed after current-state rechecks and source-list review. That pass is limited to the bounded article design and does not convert every research row into a confirmed universal matrix.
-
-Publication rules remain:
-
-- platform breadth alone is insufficient;
-- asset breadth alone is insufficient;
-- a platform licence is not proof of stablecoin function availability;
-- a Global product page is not proof of EU/EEA scope;
-- a member-state page is not automatically an EEA-wide statement;
-- high-quality reporting may establish context but may not populate unsupported function fields;
-- EU, EEA, member-state, legal-entity, and customer-cohort scopes remain separate;
-- historical policy must be separated from later service-state changes;
-- current service context must be rechecked at publication time;
-- the final source list must be reviewed;
-- Revolut official CASP evidence must remain separate from reported USDT policy details when a public first-party policy page is unavailable.
-
-Future article revisions require reviewed source confirmation, `informationCurrentThrough` and `updatedAt` handling, and a revision-history entry. Monitoring output alone never edits the guide.
-
-## 14. Statistics governance
-
-Statistics derive from reviewed canonical loaders at build time. A statistics page or machine-readable statistics output must not:
-
-- manually maintain counts that can diverge from canonical loaders;
-- silently discard unknown categories;
-- present multi-select dimensions as mutually exclusive;
-- confuse asset count with deployment count;
-- become a live price, market-cap, yield, safety, or risk ranking.
-
-`docs/stats-spec.md` is the binding statistics implementation specification.
+UI, quality, taxonomy, monitoring, statistics, growth, editorial, and migration work must not silently reduce canonical coverage. Before and after a relevant change, verify at minimum the canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline.
