@@ -71,17 +71,20 @@ check(basenamesPresent(registryV3Loader, foundation.data_groups?.reserve_compone
 check(basenamesPresent(incomeLoader, incomeManifest.data_files), 'Income profile loader is missing a manifest file');
 
 const machineReadable = readText('src/lib/machine-readable.ts');
+const versionBase = readText('src/lib/versionBase.ts');
 const manifestBase = readText('src/lib/data/manifestBase.ts');
-const verifyPublic = readText('scripts/verify-public-layer.mjs');
-check(machineReadable.includes("DATA_SCHEMA_VERSION = 'sog_registry_v3'"), 'machine-readable data schema must be sog_registry_v3');
+check(machineReadable.includes("DATA_SCHEMA_VERSION = 'sog_registry_v2'"), 'existing v2 machine-readable contract must remain additive during PR #310');
+check(machineReadable.includes("schema_version: 'sog_registry_v3'"), 'Registry v3 additive summary schema marker is missing');
+check(machineReadable.includes('export function getRegistryV3Summary()'), 'Registry v3 machine-readable summary getter is missing');
 for (const getter of ['getLegalProfiles', 'getStableAssetRelationships', 'getReserveComponents', 'getIncomeProfilesV3']) {
-  check(machineReadable.includes(getter), `machine-readable layer missing ${getter}`);
+  check(machineReadable.includes(getter), `machine-readable v3 summary missing ${getter}`);
 }
 for (const family of ['legal_profile', 'stable_asset_relationship', 'reserve_component', 'income_profile']) {
   check(manifestBase.includes(`'${family}'`), `public manifest missing ${family}`);
 }
-check(manifestBase.includes('data_schema_version: DATA_SCHEMA_VERSION'), 'public manifest must expose data_schema_version');
-check(verifyPublic.includes("sog_registry_v3"), 'public verifier must require sog_registry_v3');
+check(versionBase.includes('registry_v3: getRegistryV3Summary()'), 'version endpoint missing Registry v3 summary');
+check(manifestBase.includes('registry_v3: getRegistryV3Summary()'), 'manifest endpoint missing Registry v3 summary');
+check(manifestBase.includes('data_schema_version: DATA_SCHEMA_VERSION'), 'public manifest must expose base data_schema_version');
 
 const privatePathPattern = /(?:candidate|monitoring|private|editorial-research)/i;
 for (const file of [
@@ -99,11 +102,13 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
+  mode: 'additive',
+  base_data_schema_version: 'sog_registry_v2',
+  registry_v3_schema_version: 'sog_registry_v3',
   stablecoins: stablecoins.length,
   legal_profiles: legalProfiles.length,
   stable_asset_relationships: assetRelationships.length,
   reserve_components: reserveComponents.length,
   income_profiles: incomeProfiles.length,
-  deployments: deployments.length,
-  data_schema_version: 'sog_registry_v3'
+  deployments: deployments.length
 }, null, 2));
