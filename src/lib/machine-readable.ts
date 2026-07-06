@@ -13,11 +13,17 @@ import {
   getStablecoins,
 } from './data/registry';
 import {
+  getDeploymentsV3,
+  getLegalProfiles,
+  getReserveComponents,
+  getStableAssetRelationships,
+} from './data/registryV3';
+import { getIncomeProfilesV3 } from './data/incomeProfilesV3';
+import {
   getCanonicalEvidenceRelations,
   getEvidenceSourceIdentities,
   getEvidenceSourceIdentitySummary,
 } from './data/evidenceSources';
-import { getDeploymentsV3 } from './data/registryV3';
 import { getPublicValueStateBreakdown } from './value-state-breakdown';
 import { getPrimaryDisplayRelationshipBreakdown } from './primary-display-breakdown';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
@@ -28,7 +34,7 @@ import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
 import { resolveDeploymentTaxonomy } from '../utils/deploymentTaxonomy';
 
 export const MACHINE_READABLE_SCHEMA_VERSION = '1.0.0';
-export const DATA_SCHEMA_VERSION = 'sog_registry_v2';
+export const DATA_SCHEMA_VERSION = 'sog_registry_v3';
 
 export const PROJECT = {
   projectId: 'stable-or-gone',
@@ -137,6 +143,10 @@ export function getRecordCountBreakdown() {
   const knownUnknowns = getKnownUnknowns();
   const regulatoryNotes = getRegulatoryNotes();
   const deployments = getDeploymentsV3();
+  const legalProfiles = getLegalProfiles();
+  const stableAssetRelationships = getStableAssetRelationships();
+  const reserveComponents = getReserveComponents();
+  const incomeProfiles = getIncomeProfilesV3();
   const registryUpdates = getRegistryUpdates();
   const referenceTargets = stablecoins.map((coin) => resolveReferenceTarget(coin));
   const backingModels = stablecoins.map((coin) => resolveBackingModel(coin));
@@ -162,6 +172,10 @@ export function getRecordCountBreakdown() {
     known_unknowns: knownUnknowns.length,
     regulatory_notes: regulatoryNotes.length,
     deployments: deployments.length,
+    legal_profiles: legalProfiles.length,
+    stable_asset_relationships: stableAssetRelationships.length,
+    reserve_components: reserveComponents.length,
+    income_profiles: incomeProfiles.length,
     registry_updates: registryUpdates.length,
     lifecycle_status: countValues(stablecoins.map((coin) => coin.lifecycle_status)),
     issuance_status: countValues(stablecoins.map((coin) => coin.issuance_status)),
