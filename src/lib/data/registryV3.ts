@@ -48,6 +48,7 @@ import reserveComponentsBatchN from '../../../data/reserve-components-v3-batch-n
 import reserveComponentsBatchO from '../../../data/reserve-components-v3-batch-o.json';
 import reserveComponentsBatchP from '../../../data/reserve-components-v3-batch-p.json';
 import reserveComponentsBatchQ from '../../../data/reserve-components-v3-batch-q.json';
+import reserveComponentsBatchRST from '../../../data/reserve-components-v3-batch-rst.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -114,7 +115,8 @@ const reserveComponents = [
   ...reserveComponentsBatchN,
   ...reserveComponentsBatchO,
   ...reserveComponentsBatchP,
-  ...reserveComponentsBatchQ
+  ...reserveComponentsBatchQ,
+  ...reserveComponentsBatchRST
 ] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
