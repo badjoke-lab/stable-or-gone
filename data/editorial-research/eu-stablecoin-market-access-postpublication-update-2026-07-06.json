@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1",
+  "research_id": "eu-stablecoin-market-access-2026",
+  "batch_id": "postpublication-update-2026-07-06-ripple-casp",
+  "status": "reviewed_postpublication_update",
+  "created_at": "2026-07-06",
+  "information_current_through": "2026-07-06",
+  "governing_spec": "docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md",
+  "purpose": "Record the post-publication change from Ripple's preliminary, condition-dependent MiCA CASP approval state to Ripple's announcement that it had obtained an EU CASP licence, while preserving the guide's separation between group authorization, RLUSD issuer identity, token-level regulatory treatment, and platform-specific access.",
+  "updates": [
+    {
+      "id": "ripple-casp-preliminary-to-obtained",
+      "severity": "material_status_update",
+      "subject": "Ripple European CASP authorization",
+      "previous_interpretation": "Ripple had announced preliminary, condition-dependent approval for a MiCA CASP licence through a Green Light Letter, with full approval still required.",
+      "reviewed_interpretation": "On 2026-07-06, Ripple announced that it had obtained an EU CASP licence and described its European crypto operations as fully MiCA compliant. This changes the Ripple service-provider authorization layer, but does not by itself establish RLUSD token-level MiCA status or uniform platform availability across the EU or EEA.",
+      "article_action": "Update the RLUSD comparison row and the dedicated four-layer RLUSD section, add the new first-party announcement source, and record a guide revision without collapsing service-provider authorization into RLUSD token status or platform access.",
+      "source_urls": [
+        "https://ripple.com/ripple-press/ripple-secures-preliminary-MiCA-CASP-license/",
+        "https://on.ripple.com/3TOsoWU",
+        "https://ripple.com/legal/stablecoin/",
+        "https://support.kraken.com/articles/stablecoin-offerings-for-eea-clients"
+      ]
+    }
+  ],
+  "article_gate_effect": {
+    "material_status_update_found": true,
+    "article_revision_required": true,
+    "article_revision_applied_in_same_change_set": true,
+    "canonical_registry_change_required": false,
+    "reason": "The change updates the article's Ripple service-provider authorization layer. It does not, by itself, justify a canonical RLUSD status change or a claim of uniform EU/EEA platform access."
+  }
+}

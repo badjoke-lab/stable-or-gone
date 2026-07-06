@@ -41,8 +41,14 @@ export const guides: GuideEntry[] = [
     category: 'regulation',
     publishedAt: '2026-07-06',
     informationCurrentThrough: '2026-07-06',
-    updatedAt: null,
-    revisions: [],
+    updatedAt: '2026-07-06',
+    revisions: [
+      {
+        date: '2026-07-06',
+        note: "Updated Ripple's European regulatory status after Ripple announced that it had obtained an EU CASP licence. Preserved the distinction between Ripple group authorizations, RLUSD issuer identity, token-level regulatory status, and platform-specific access.",
+        kind: 'update'
+      }
+    ],
     featured: true,
     theme: 'eu',
     regionLabel: 'European Union / EEA'
