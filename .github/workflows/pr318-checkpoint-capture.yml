@@ -1,0 +1,32 @@
+name: PR318 checkpoint capture
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: github.head_ref == 'pr318-audited-100-checkpoint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Generate observed checkpoint
+        env:
+          SOG_CHECKPOINT_SOURCE_COMMIT: 9a106f0938e6323de833c941d6ae863050f1f03b
+        run: node scripts/generate-audited-100-checkpoint.mjs
+      - name: Upload observed checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr318-observed-checkpoint
+          path: artifacts/audited-100-checkpoint-observed.json
+          if-no-files-found: error
