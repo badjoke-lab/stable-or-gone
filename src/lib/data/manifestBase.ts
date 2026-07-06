@@ -1,11 +1,13 @@
 import {
   DATA_SAFETY,
+  DATA_SCHEMA_VERSION,
   MACHINE_READABLE_SCHEMA_VERSION,
   MAIN_ROUTES,
   PROJECT,
   getBuildMetadata,
   getRecordCountBreakdown,
   getRecordCounts,
+  getRegistryV3Summary,
 } from '../../lib/machine-readable';
 import { getEvidenceSourceIdentitySummary } from './evidenceSources';
 
@@ -14,6 +16,7 @@ export function GET() {
   const evidenceSourceIdentity = getEvidenceSourceIdentitySummary();
   const manifest = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
+    data_schema_version: DATA_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
     title: PROJECT.siteName,
     description: PROJECT.description,
@@ -35,8 +38,13 @@ export function GET() {
         'known_unknown',
         'regulatory_note',
         'deployment',
+        'legal_profile',
+        'stable_asset_relationship',
+        'reserve_component',
+        'income_profile',
       ],
     },
+    registry_v3: getRegistryV3Summary(),
     public_files: {
       version: '/version.json',
       manifest: '/data/manifest.json',
