@@ -32,6 +32,7 @@ import legalProfilesGrowthN from '../../../data/legal-profiles-v3-batch-growth-n
 import legalProfilesGrowthO from '../../../data/legal-profiles-v3-batch-growth-o.json';
 import legalProfilesGrowthP from '../../../data/legal-profiles-v3-batch-growth-p.json';
 import legalProfilesGrowthQ from '../../../data/q-legal.json';
+import legalProfilesGrowthRST from '../../../data/legal-profiles-v3-batch-rst.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
@@ -91,10 +92,30 @@ const legalProfiles = [
   ...legalProfilesGrowthN,
   ...legalProfilesGrowthO,
   ...legalProfilesGrowthP,
-  ...legalProfilesGrowthQ
+  ...legalProfilesGrowthQ,
+  ...legalProfilesGrowthRST
 ] as LegalProfileV3[];
-const stableAssetRelationships = [...stableAssetRelationshipsData, ...stableAssetRelationshipsBatchH] as StableAssetRelationshipV3[];
-const reserveComponents = [...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL, ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP, ...reserveComponentsBatchQ] as ReserveComponentV3[];
+
+const stableAssetRelationships = [
+  ...stableAssetRelationshipsData,
+  ...stableAssetRelationshipsBatchH
+] as StableAssetRelationshipV3[];
+
+const reserveComponents = [
+  ...reserveComponentsData,
+  ...reserveComponentsBatchF,
+  ...reserveComponentsBatchG,
+  ...reserveComponentsBatchH,
+  ...reserveComponentsBatchI,
+  ...reserveComponentsBatchJ,
+  ...reserveComponentsBatchK,
+  ...reserveComponentsBatchL,
+  ...reserveComponentsBatchM,
+  ...reserveComponentsBatchN,
+  ...reserveComponentsBatchO,
+  ...reserveComponentsBatchP,
+  ...reserveComponentsBatchQ
+] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
   canonicality: DeploymentCanonicality;
