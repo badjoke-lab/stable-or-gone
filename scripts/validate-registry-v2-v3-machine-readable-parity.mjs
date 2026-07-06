@@ -20,8 +20,20 @@ const foundation = readJson('docs/migration/registry-v3-foundation.json');
 const incomeManifest = readJson('docs/migration/registry-v3-income-profiles.json');
 const deploymentView = readJson('docs/migration/registry-v3-view-67.json');
 const migrationAudit = readJson('docs/migration/registry-v3-migration-audit.json');
+const parityBaseline = readJson('docs/migration/registry-v3-parity-baseline.json');
 
 const stablecoins = rows(baseline.data_groups?.stablecoins);
+const organizations = rows(baseline.data_groups?.organizations);
+const relationships = rows(baseline.data_groups?.relationships);
+const classifications = rows(baseline.data_groups?.classifications);
+const profiles = rows(baseline.data_groups?.profiles);
+const events = rows(baseline.data_groups?.events);
+const eventDetails = rows(baseline.data_groups?.event_details);
+const evidence = rows(baseline.data_groups?.evidence);
+const evidenceRelations = rows(baseline.data_groups?.evidence_relations);
+const reserveReports = rows(baseline.data_groups?.reserve_reports);
+const knownUnknowns = rows(baseline.data_groups?.known_unknowns);
+const regulatoryNotes = rows(baseline.data_groups?.regulatory_notes);
 const deployments = rows(baseline.data_groups?.deployments);
 const legalProfiles = rows(foundation.data_groups?.legal_profiles);
 const assetRelationships = rows(foundation.data_groups?.stable_asset_relationships);
@@ -32,36 +44,73 @@ const stablecoinIds = uniqueIds(stablecoins);
 const legalIds = uniqueIds(legalProfiles);
 const incomeIds = uniqueIds(incomeProfiles);
 const reserveAssetIds = new Set(reserveComponents.map((row) => row.stablecoin_id));
+const deploymentAssetIds = new Set(deployments.map((row) => row.stablecoin_id));
 
-check(stablecoins.length === 100, `v2 canonical stablecoin count must be 100, found ${stablecoins.length}`);
-check(stablecoinIds.size === 100, `v2 canonical stablecoin IDs must be unique, found ${stablecoinIds.size}`);
-check(legalProfiles.length === 100, `v3 legal profile count must be 100, found ${legalProfiles.length}`);
-check(legalIds.size === 100, `v3 legal profile IDs must be unique, found ${legalIds.size}`);
-check(assetRelationships.length === 4, `v3 stable-asset relationship count must be 4, found ${assetRelationships.length}`);
-check(reserveComponents.length === 133, `v3 reserve component count must be 133, found ${reserveComponents.length}`);
-check(incomeProfiles.length === 100, `v3 income profile count must be 100, found ${incomeProfiles.length}`);
-check(incomeIds.size === 100, `v3 income profile IDs must be unique, found ${incomeIds.size}`);
-check(deployments.length === 140, `v3 deployment view source count must be 140, found ${deployments.length}`);
+const v2Counts = {
+  stablecoins: stablecoins.length,
+  organizations: organizations.length,
+  relationships: relationships.length,
+  classifications: classifications.length,
+  profiles: profiles.length,
+  events: events.length,
+  event_details: eventDetails.length,
+  evidence: evidence.length,
+  evidence_relations: evidenceRelations.length,
+  reserve_reports: reserveReports.length,
+  known_unknowns: knownUnknowns.length,
+  regulatory_notes: regulatoryNotes.length,
+  deployments: deployments.length,
+};
+const v3Counts = {
+  legal_profiles: legalProfiles.length,
+  stable_asset_relationships: assetRelationships.length,
+  reserve_components: reserveComponents.length,
+  income_profiles: incomeProfiles.length,
+  deployment_view: deployments.length,
+};
+const v3Coverage = {
+  legal_profiles: [...legalIds].filter((id) => stablecoinIds.has(id)).length,
+  income_profiles: [...incomeIds].filter((id) => stablecoinIds.has(id)).length,
+  reserve_component_assets: [...reserveAssetIds].filter((id) => stablecoinIds.has(id)).length,
+  deployment_view_assets: [...deploymentAssetIds].filter((id) => stablecoinIds.has(id)).length,
+};
+
+check(parityBaseline.status === 'current', 'Registry v3 parity baseline must be current');
+for (const [name, expected] of Object.entries(parityBaseline.expected_v2_counts ?? {})) {
+  check(v2Counts[name] === expected, `v2 ${name} count must be ${expected}, found ${v2Counts[name]}`);
+}
+for (const [name, expected] of Object.entries(parityBaseline.expected_v3_counts ?? {})) {
+  check(v3Counts[name] === expected, `v3 ${name} count must be ${expected}, found ${v3Counts[name]}`);
+}
+for (const [name, expected] of Object.entries(parityBaseline.expected_v3_coverage ?? {})) {
+  check(v3Coverage[name] === expected, `v3 ${name} coverage must be ${expected}, found ${v3Coverage[name]}`);
+}
+
+check(stablecoinIds.size === stablecoins.length, `v2 canonical stablecoin IDs must be unique, found ${stablecoinIds.size} unique of ${stablecoins.length}`);
+check(legalIds.size === legalProfiles.length, `v3 legal profile IDs must be unique, found ${legalIds.size} unique of ${legalProfiles.length}`);
+check(incomeIds.size === incomeProfiles.length, `v3 income profile IDs must be unique, found ${incomeIds.size} unique of ${incomeProfiles.length}`);
 
 for (const id of stablecoinIds) {
   check(legalIds.has(id), `legal profile missing for ${id}`);
   check(incomeIds.has(id), `income profile missing for ${id}`);
   check(reserveAssetIds.has(id), `reserve component coverage missing for ${id}`);
+  check(deploymentAssetIds.has(id), `deployment view coverage missing for ${id}`);
 }
 for (const id of legalIds) check(stablecoinIds.has(id), `orphan legal profile ${id}`);
 for (const id of incomeIds) check(stablecoinIds.has(id), `orphan income profile ${id}`);
 for (const id of reserveAssetIds) check(stablecoinIds.has(id), `orphan reserve component asset ${id}`);
+for (const id of deploymentAssetIds) check(stablecoinIds.has(id), `orphan deployment asset ${id}`);
 
-check(foundation.minimum_counts?.legal_profiles === 100, 'foundation legal profile minimum must be 100');
-check(foundation.minimum_counts?.stable_asset_relationships === 4, 'foundation relationship minimum must be 4');
-check(foundation.minimum_counts?.reserve_components === 133, 'foundation reserve component minimum must be 133');
-check(incomeManifest.minimum_count === 100, 'income profile minimum must be 100');
-check(deploymentView.minimum_count === 140, 'deployment view minimum must be 140');
-check(migrationAudit.coverage?.protected_stablecoins === 100, 'migration audit protected stablecoin coverage must be 100');
-check(migrationAudit.minimum_counts?.legal_profiles === 100, 'migration audit legal profile minimum must be 100');
-check(migrationAudit.minimum_counts?.reserve_components === 133, 'migration audit reserve component minimum must be 133');
-check(migrationAudit.minimum_counts?.deployments === 140, 'migration audit deployment minimum must be 140');
-check(migrationAudit.minimum_counts?.income_profiles === 100, 'migration audit income profile minimum must be 100');
+check(foundation.minimum_counts?.legal_profiles === parityBaseline.expected_v3_counts?.legal_profiles, 'foundation legal profile minimum does not match current parity baseline');
+check(foundation.minimum_counts?.stable_asset_relationships === parityBaseline.expected_v3_counts?.stable_asset_relationships, 'foundation relationship minimum does not match current parity baseline');
+check(foundation.minimum_counts?.reserve_components === parityBaseline.expected_v3_counts?.reserve_components, 'foundation reserve component minimum does not match current parity baseline');
+check(incomeManifest.minimum_count === parityBaseline.expected_v3_counts?.income_profiles, 'income profile minimum does not match current parity baseline');
+check(deploymentView.minimum_count === parityBaseline.expected_v3_counts?.deployment_view, 'deployment view minimum does not match current parity baseline');
+check(migrationAudit.coverage?.protected_stablecoins === parityBaseline.expected_v2_counts?.stablecoins, 'migration audit protected stablecoin coverage does not match parity baseline');
+check(migrationAudit.minimum_counts?.legal_profiles === parityBaseline.expected_v3_counts?.legal_profiles, 'migration audit legal profile minimum mismatch');
+check(migrationAudit.minimum_counts?.reserve_components === parityBaseline.expected_v3_counts?.reserve_components, 'migration audit reserve component minimum mismatch');
+check(migrationAudit.minimum_counts?.deployments === parityBaseline.expected_v3_counts?.deployment_view, 'migration audit deployment minimum mismatch');
+check(migrationAudit.minimum_counts?.income_profiles === parityBaseline.expected_v3_counts?.income_profiles, 'migration audit income profile minimum mismatch');
 
 const registryV3Loader = readText(foundation.loader);
 const incomeLoader = readText(incomeManifest.loader);
@@ -85,6 +134,7 @@ for (const family of ['legal_profile', 'stable_asset_relationship', 'reserve_com
 check(versionBase.includes('registry_v3: getRegistryV3Summary()'), 'version endpoint missing Registry v3 summary');
 check(manifestBase.includes('registry_v3: getRegistryV3Summary()'), 'manifest endpoint missing Registry v3 summary');
 check(manifestBase.includes('data_schema_version: DATA_SCHEMA_VERSION'), 'public manifest must expose base data_schema_version');
+check(parityBaseline.machine_readable_contract?.compatibility_mode === 'v2_public_contract_with_additive_v3_summary', 'parity baseline machine-readable compatibility mode mismatch');
 
 const privatePathPattern = /(?:candidate|monitoring|private|editorial-research)/i;
 for (const file of [
@@ -94,21 +144,26 @@ for (const file of [
   check(!privatePathPattern.test(file), `canonical v3 manifest includes non-canonical path: ${file}`);
 }
 
+const report = {
+  schema_version: '1.0',
+  audit_id: 'sog_registry_v2_v3_machine_readable_parity_pr310',
+  audit_date: '2026-07-06',
+  parity_baseline_id: parityBaseline.baseline_id,
+  mode: 'additive',
+  base_data_schema_version: 'sog_registry_v2',
+  registry_v3_schema_version: 'sog_registry_v3',
+  counts: { v2: v2Counts, v3: v3Counts },
+  coverage: v3Coverage,
+  failures,
+  ok: failures.length === 0,
+};
+fs.mkdirSync(path.join(root, 'data/generated'), { recursive: true });
+fs.writeFileSync(path.join(root, 'data/generated/registry-v2-v3-machine-readable-parity-audit.json'), `${JSON.stringify(report, null, 2)}\n`);
+
 if (failures.length) {
   console.error('Registry v2/v3 machine-readable parity validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
-console.log(JSON.stringify({
-  ok: true,
-  mode: 'additive',
-  base_data_schema_version: 'sog_registry_v2',
-  registry_v3_schema_version: 'sog_registry_v3',
-  stablecoins: stablecoins.length,
-  legal_profiles: legalProfiles.length,
-  stable_asset_relationships: assetRelationships.length,
-  reserve_components: reserveComponents.length,
-  income_profiles: incomeProfiles.length,
-  deployments: deployments.length
-}, null, 2));
+console.log(JSON.stringify(report, null, 2));
