@@ -1,4 +1,8 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
+  sog_update_2026_07_05_eu_stablecoin_access_guide: {
+    title: 'EU stablecoin access guide added',
+    summary: 'Published a reviewed guide to MiCA-era European stablecoin access, separating issuer status, platform service state, country scope, and individual product functions.'
+  },
   sog_update_2026_06_25_pr129_pr132_dated_guides: {
     title: 'Dated regulation and comparison guides added',
     summary: 'Added beginner-friendly guides to the GENIUS Act, MiCA, and the differences between JPYC and JPYSC, together with direct discovery from relevant record pages.'

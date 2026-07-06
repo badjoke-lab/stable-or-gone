@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_07_05_eu_stablecoin_access_guide",
+    "date": "2026-07-05",
+    "title": "EU stablecoin market-access guide added",
+    "category": "content",
+    "summary": "Published a reviewed EU/EEA stablecoin market-access guide that separates asset-specific functions, platform-wide service state, legal entity, geographic scope, and dates. The guide links the MiCA framework to observed platform policies without flattening access into a universal allowed-or-banned label.",
+    "related_paths": ["/guides/eu-stablecoin-access-after-mica/", "/guides/mica-stablecoins/", "/stablecoin/usdt/", "/stablecoin/usdc/", "/stablecoin/dai/", "/stablecoin/pyusd/", "/stablecoin/rlusd/"]
+  },
+  {
     "id": "sog_update_2026_06_25_pr129_pr132_dated_guides",
     "date": "2026-06-25",
     "title": "Dated regulation and asset-comparison guides added",

@@ -14,9 +14,9 @@ const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
 const routeMap = new Map(siteArchitectureRoutes.map((route) => [route.pattern, route]));
 
 check(audit.schema_version === '1.0', 'architecture schema changed');
-check(audit.totals?.route_patterns === 29, 'route count changed');
-check(audit.totals?.page_source_files === 29, 'page source count changed');
-check(audit.totals?.html_route_patterns === 24, 'HTML route count changed');
+check(audit.totals?.route_patterns === 30, 'route count changed');
+check(audit.totals?.page_source_files === 30, 'page source count changed');
+check(audit.totals?.html_route_patterns === 25, 'HTML route count changed');
 check(audit.totals?.machine_readable_route_patterns === 5, 'machine route count changed');
 check(audit.totals?.dynamic_route_families === 3, 'dynamic route count changed');
 for (const key of ['duplicate_routes', 'navigation_without_route', 'declared_without_source', 'configured_without_source', 'source_without_configuration', 'unassigned_routes']) check(audit.totals?.[key] === 0, `inventory failure: ${key}`);
@@ -57,7 +57,7 @@ const validation = {
     grouped_navigation_items: grouped.length,
     utility_navigation_items: utilities.length,
     implemented_navigation_items: current.length,
-    route_changes: 1,
+    route_changes: 2,
     failures: failures.length
   },
   implemented_navigation: current,

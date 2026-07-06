@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: c26487f33f27f57518d18c66a6f6cf3d0fcd71a5
+Current main checkpoint: b03149c022b29d2b14e29948492cbacad5ea1d7e
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -18,14 +18,14 @@ Deployments: 140
 Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
-Active workstream: EU/EEA stablecoin market-access research
-Current item: PR #306 function-matrix research checkpoint 03
-Next public item: PR #307 reviewed EU stablecoin market-access guide after publication gates pass
+Active workstream: EU/EEA stablecoin market-access editorial publication
+Current item: PR #307 reviewed EU stablecoin market-access guide and publication-gate record
+Next item: PR #308 known-unknown and placeholder integrity audit
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
 
-The market-access article remains publication-gated. Checkpoint 03 improves asset-specific and current platform service-state evidence, but the article still requires final comparative-claim scoping, publication-date current-state rechecks, source-list review, and conservative Revolut treatment before implementation.
+The market-access publication gate was reviewed on 2026-07-05 after checkpoints 01-03, current-state source rechecks, comparative-claim scoping, source-list review, and a renewed first-party Revolut policy search. The guide may proceed with bounded evidence layers and conservative reported Revolut treatment.
 
 ## Completed foundation
 
@@ -39,6 +39,7 @@ The market-access article remains publication-gated. Checkpoint 03 improves asse
 - PR #303 merged the EU stablecoin market-access research, publication, and monitoring specification and revised schedule.
 - PR #304 merged the first reviewed market-access matrix, two research checkpoints, current-service context, and publication-gate status.
 - PR #305 merged the checkpoint 03 schedule amendment and shifted downstream PR numbers once.
+- PR #306 merged the function-matrix checkpoint 03 and current platform service-state research.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry remains at the verified 100-record checkpoint.
 
@@ -83,16 +84,13 @@ Merge checkpoint:
 c26487f33f27f57518d18c66a6f6cf3d0fcd71a5
 ```
 
-Result:
+### PR #306 — function-matrix research checkpoint 03 — complete
+
+Merge checkpoint:
 
 ```text
-PR #306 reserved for function-matrix checkpoint 03
-PR #307 reserved for the reviewed article after gate completion
-downstream audit, hardening, monitoring, stats, and growth numbers shifted explicitly
-checkpoint 03 source-review scope frozen before research publication
+b03149c022b29d2b14e29948492cbacad5ea1d7e
 ```
-
-### PR #306 — function-matrix research checkpoint 03 — active
 
 Checkpoint artifacts:
 
@@ -101,7 +99,7 @@ data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 ```
 
-Checkpoint 03 records, with scope boundaries preserved:
+Checkpoint 03 recorded, with scope boundaries preserved:
 
 ```text
 OKX Europe asset-specific USDT and USDC buy/sell evidence
@@ -113,20 +111,7 @@ Coinbase Germany first-party non-tradable status for USDT, DAI, and PYUSD
 continued unresolved first-party Revolut USDT policy details
 ```
 
-Current checkpoint 03 gate effect:
-
-```text
-platform breadth floor:                     met
-stable-asset breadth floor:                 met
-function-level evidence depth:              improved
-current platform service-state coverage:    improved
-Revolut first-party USDT policy confirmed:  no
-publication-date current-state recheck:      no
-article source-list review complete:         no
-article publishable:                         no
-```
-
-Checkpoint 03 confirms that the article must separate three evidence layers:
+Checkpoint 03 fixed three evidence layers:
 
 ```text
 A. asset-specific function evidence
@@ -134,9 +119,35 @@ B. current platform-wide service-state evidence
 C. general service/licensing context without asset-specific function support
 ```
 
-Only A-level evidence should populate direct function comparisons. B-level evidence should explain current access context. C-level evidence must remain bounded context.
+Only A-level evidence may populate direct function comparisons. B-level evidence explains current access context. C-level evidence remains bounded context.
 
-### PR #307 — reviewed EU stablecoin market-access guide — after gate completion
+### Publication gate review — complete
+
+Review record:
+
+```text
+docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
+```
+
+Gate decision:
+
+```text
+platform breadth floor:                         pass
+stable-asset breadth floor:                     pass
+function-level claim separation:                pass for claims selected for publication
+region/legal-entity scope preservation:         pass
+major platform source hierarchy:                pass with documented Tier C current-service exceptions
+ESMA/register cross-check:                      pass
+Revolut conservative treatment:                 pass
+source-list review:                             pass
+current service context vs historical policy:   pass
+publication-date current-state recheck:         pass on 2026-07-05
+publication gate:                               pass
+```
+
+The pass does not turn every research row into a complete matrix. Publication is allowed because the article limits direct comparisons to supported function claims, treats platform-wide service state separately, and leaves unsupported cells unclaimed.
+
+### PR #307 — reviewed EU stablecoin market-access guide — active
 
 Target route:
 
@@ -144,19 +155,27 @@ Target route:
 /guides/eu-stablecoin-access-after-mica/
 ```
 
-Required preconditions:
+Implementation scope:
 
 ```text
-at least 10 platforms researched
-at least 15 stable assets reviewed
-function-level access states separated for comparative claims actually used
-EU/EEA/member-state/legal-entity scope preserved
-major platform claims backed primarily by regulator or first-party sources
-ESMA or relevant register cross-check completed
-Revolut represented conservatively if first-party policy confirmation remains incomplete
-article source list reviewed
-current platform service context separated from historical policy where necessary
-publication-date current-state recheck completed
+reviewed dated guide page
+guide catalog metadata
+homepage/guide-index discovery through existing catalog selectors
+related-guide links from material stablecoin dossiers
+dynamic sitemap inclusion through existing guide catalog mapping
+registry update entry
+guide and publication-gate validation
+```
+
+The guide must preserve:
+
+```text
+asset-specific function evidence
+current platform-wide service-state context
+general service/licensing context as bounded context
+EU/EEA/member-state/legal-entity distinctions
+historical Binance stablecoin policy separate from 2026 EU service context
+reported Revolut policy details separate from official CASP legal-entity evidence
 ```
 
 The article is a dated reviewed editorial snapshot. It is not a live dashboard and must not update automatically from monitoring output.
@@ -283,11 +302,9 @@ Each growth PR is limited to two new stable assets and must preserve all applica
 ## Immediate next items
 
 ```text
-1. Merge PR #306 checkpoint 03 after exact-head validation.
-2. Re-evaluate the article publication gate against checkpoints 01-03.
-3. Define the final comparative table from asset-specific function evidence only.
-4. Perform publication-date current-state rechecks for every major platform claim.
-5. Review the final source list and recheck for first-party Revolut policy material.
-6. Implement PR #307 only after the publication gate passes.
-7. Resume the core registry-wide audit at PR #308.
+1. Validate PR #307 on the exact article head.
+2. Review the rendered guide route, related-guide links, catalog discovery, sitemap inclusion, and registry-update entry.
+3. Merge PR #307 only if all required checks pass.
+4. Resume the core registry-wide audit at PR #308.
+5. Preserve the approved market-access monitoring extension for PR #317-#318 rather than adding ad-hoc monitoring writes during article publication.
 ```

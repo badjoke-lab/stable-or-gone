@@ -1,0 +1,169 @@
+{
+  "schema_version": "0.1",
+  "research_id": "eu-stablecoin-market-access-2026",
+  "batch_id": "prepublication-reaudit-batch-04",
+  "status": "reviewed_research_checkpoint",
+  "created_at": "2026-07-05",
+  "information_current_through": "2026-07-05",
+  "governing_spec": "docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md",
+  "purpose": "Re-audit the article's stablecoin, issuer, exchange, CASP, service-state, and adjacent payment-services claims after the RLUSD review showed that group authorization, token status, and platform access could diverge materially.",
+  "reviewed_source_families": [
+    "ESMA MiCA register hub and guidance",
+    "first-party stablecoin issuer and white-paper surfaces",
+    "first-party platform policy, help, and product surfaces",
+    "first-party CASP and regulated-entity pages",
+    "high-quality reporting for current service-state and unresolved EU policy disputes"
+  ],
+  "corrections_and_additions": [
+    {
+      "id": "okx-product-page-scope-downgrade",
+      "severity": "material_interpretation_correction",
+      "subject": "OKX Europe USDT and USDC product pages",
+      "previous_interpretation": "Europe-locale product pages were treated as direct EEA asset-specific buy/sell availability evidence.",
+      "reviewed_interpretation": "The pages expose buy/sell UI and marketing copy but repeatedly make availability conditional on region, supported country, and payment method. They are evidence of Europe-locale product surfaces, not proof of uniform EEA-wide availability for every country or account.",
+      "article_action": "Remove OKX from direct A-level function comparison and describe the product surfaces as bounded context with member-state/account availability unresolved.",
+      "source_urls": [
+        "https://www.okx.com/en-eu/buy-usdt",
+        "https://www.okx.com/en-eu/buy-usdc"
+      ]
+    },
+    {
+      "id": "rlusd-four-layer-separation",
+      "severity": "material_omission_correction",
+      "subject": "RLUSD and Ripple European authorization",
+      "previous_interpretation": "RLUSD appeared mainly as a Kraken EEA restriction example.",
+      "reviewed_interpretation": "Ripple's European payments entity has a full Luxembourg EMI licence and Ripple announced preliminary, condition-dependent MiCA CASP approval, while Ripple's public RLUSD terms identify Standard Custody & Trust Company LLC as issuer. Kraken EEA restricts RLUSD trading/buying/selling while preserving deposits/withdrawals, and Bitpanda exposes a public RLUSD product surface. These are separate layers.",
+      "article_action": "Add a dedicated four-layer RLUSD section and preserve preliminary-versus-final CASP wording.",
+      "source_urls": [
+        "https://ripple.com/ripple-press/ripple-receives-full-eu-electronic-money-institution-license-in-luxembourg/",
+        "https://ripple.com/ripple-press/ripple-secures-preliminary-MiCA-CASP-license/",
+        "https://ripple.com/legal/stablecoin/",
+        "https://support.kraken.com/articles/stablecoin-offerings-for-eea-clients",
+        "https://www.bitpanda.com/en/prices/ripple-usd-rlusd"
+      ]
+    },
+    {
+      "id": "paxos-token-path-separation",
+      "severity": "material_omission_correction",
+      "subject": "USDG, PYUSD, USDP, and EUROe",
+      "previous_interpretation": "USDG was described only as a regulated issuer and network-distribution model; PYUSD appeared mainly as a restricted asset.",
+      "reviewed_interpretation": "Global Dollar states that USDG is also issued by Paxos Issuance Europe under FIN-FSA supervision and in compliance with MiCA. Paxos's EU MiCA page centers USDG and separately lists PYUSD and USDP among Paxos-issued assets; group affiliation must not be used to transfer USDG's EU issuance path to every Paxos-branded asset. The same Paxos EU page states that EUROe is being decommissioned and is in redemption-only mode.",
+      "article_action": "Make the USDG EU issuance path explicit, add the same-group/different-token-path warning, and add EUROe as a regulated-but-redemption-only counterexample.",
+      "source_urls": [
+        "https://globaldollar.com/",
+        "https://www.paxos.com/eu"
+      ]
+    },
+    {
+      "id": "multi-issuance-policy-caveat",
+      "severity": "material_policy_context_addition",
+      "subject": "Cross-jurisdiction fungible stablecoin issuance",
+      "previous_interpretation": "The expansion section risked implying that a MiCA issuance path fully settles the European policy question.",
+      "reviewed_interpretation": "The EBA says MiCA contains safeguards but is awaiting European Commission clarification, while the ECB, ESRB, and some national authorities have raised concerns about fungible multi-issuance models spanning EU and non-EU issuers.",
+      "article_action": "Add a policy caveat that regulated European issuance can coexist with unresolved policy debate about cross-jurisdiction fungibility and redemption concentration.",
+      "source_urls": [
+        "https://www.reuters.com/sustainability/boards-policy-regulation/existing-eu-crypto-rules-address-stablecoin-risk-banking-regulator-says-2025-11-12/",
+        "https://www.reuters.com/business/finance/bank-italy-urges-clarity-rules-multi-issuance-stablecoins-2025-09-18/"
+      ]
+    },
+    {
+      "id": "euri-historical-distribution-boundary",
+      "severity": "scope_clarification",
+      "subject": "EURI",
+      "previous_interpretation": "EURI was described as a bank-issued MiCA-regulated euro stablecoin with exchange distribution.",
+      "reviewed_interpretation": "Banking Circle's 2024 launch source states that EURI would first be available via Binance, but that historical launch distribution cannot be used as proof of current July 2026 Binance EU service availability.",
+      "article_action": "Preserve EURI's bank-issued MiCA path and explicitly separate 2024 launch distribution from current Binance service state.",
+      "source_urls": [
+        "https://www.bankingcircle.com/banking-circle-launches-the-first-bank-backed-mica-compliant-stablecoin-euri/"
+      ]
+    },
+    {
+      "id": "eurcv-historical-distribution-boundary",
+      "severity": "scope_clarification",
+      "subject": "EURCV",
+      "previous_interpretation": "EURCV was described as a restructured European EMI model.",
+      "reviewed_interpretation": "SG-FORGE states that EURCV was restructured as a MiCA-compliant EMT, SG-FORGE holds a French EMI licence, and Bitstamp was a preferred exchange in the July 2024 announcement. That historical distribution statement does not prove current Bitstamp access.",
+      "article_action": "Keep the issuer-path description and state that the 2024 Bitstamp distribution reference is historical rather than a current-access claim.",
+      "source_urls": [
+        "https://www.sgforge.com/stablecoin-elevation/"
+      ]
+    },
+    {
+      "id": "eurq-usdq-explicit-eu-path",
+      "severity": "evidence_depth_addition",
+      "subject": "EURQ and USDQ",
+      "previous_interpretation": "Quantoz was described generally as a regulated payments entity.",
+      "reviewed_interpretation": "Quantoz states that EURQ and USDQ are minted in the Netherlands, issued with European regulation and MiCA compliance, backed by segregated reserves, and distributed through multiple channel types. Specific exchange availability still requires source-specific confirmation.",
+      "article_action": "Make the regulated European issuance path more explicit while refusing to infer specific exchange support from logos or generic partner claims.",
+      "source_urls": [
+        "https://www.quantoz.com/products/eurq-usdq"
+      ]
+    },
+    {
+      "id": "additional-regulated-euro-paths",
+      "severity": "coverage_omission_correction",
+      "subject": "EURAU and EUROD",
+      "previous_interpretation": "The regulated expansion section omitted two material European euro-stablecoin paths.",
+      "reviewed_interpretation": "AllUnity describes EURAU as a MiCAR-compliant EMT and explicitly states that its website offering is B2B-only, not retail. ODDO BHF describes EUROD as MiCA compliant and says individuals and small businesses access it through partner exchange platforms; the page also showed zero circulating EUROD as of 2026-06-04, demonstrating that regulatory readiness and actual distribution scale are different dimensions.",
+      "article_action": "Add both as bounded examples and preserve B2B/access/scale distinctions.",
+      "source_urls": [
+        "https://allunity.com/",
+        "https://www.oddo-bhf.com/eurod-stablecoin/"
+      ]
+    },
+    {
+      "id": "qivalis-not-live-boundary",
+      "severity": "future_pipeline_clarification",
+      "subject": "Qivalis",
+      "previous_interpretation": "Not included.",
+      "reviewed_interpretation": "Qivalis describes a planned fully regulated euro stablecoin but explicitly states that it does not issue any stablecoins or tokens yet and will announce availability officially.",
+      "article_action": "Mention only as a future pipeline example, never as a currently accessible stablecoin.",
+      "source_urls": [
+        "https://qivalis.eu/"
+      ]
+    },
+    {
+      "id": "protocol-issued-dai-usds-distinction",
+      "severity": "conceptual_clarification",
+      "subject": "DAI and USDS",
+      "previous_interpretation": "DAI appeared in platform restriction lists without enough explanation that the issuer model differs from corporate fiat-backed issuers.",
+      "reviewed_interpretation": "Sky.money describes USDS as the native stablecoin of Sky Protocol, exposes protocol-governed and non-custodial system context, and reports total supply across USDS and DAI. Platform restrictions on DAI/USDS should not be explained as if a single corporate issuer simply failed to obtain an EMI licence.",
+      "article_action": "Strengthen the protocol-issued case distinction in the asset-pattern section.",
+      "source_urls": [
+        "https://sky.money/"
+      ]
+    },
+    {
+      "id": "payment-services-authorization-layer",
+      "severity": "regulatory_layer_addition",
+      "subject": "EMT payment and transfer services",
+      "previous_interpretation": "The article separated issuer, token, and CASP layers but did not explain the additional payment-services layer that can apply to some EMT transfer/payment activities.",
+      "reviewed_interpretation": "Recent Spanish cases involving Bit2Me and Crossmint show that MiCA CASP authorization can coexist with an additional payment-services authorization layer for EMT transfer/payment activities.",
+      "article_action": "Add an eighth practical layer: where applicable, separate payment-services authorization from MiCA CASP and EMT issuer status.",
+      "source_urls": [
+        "https://cincodias.elpais.com/criptoactivos/2026-06-29/el-banco-de-espana-concede-a-bit2me-la-primera-licencia-para-prestar-servicios-de-stablecoins.html",
+        "https://cincodias.elpais.com/criptoactivos/2026-07-03/crossmint-obtiene-la-licencia-de-entidad-de-pago-para-operar-con-stablecoins.html"
+      ]
+    },
+    {
+      "id": "gemini-gusd-platform-token-separation",
+      "severity": "context_addition",
+      "subject": "Gemini and GUSD",
+      "previous_interpretation": "Gemini closure was correctly treated as platform-wide service state, but the group/token distinction was not made explicit.",
+      "reviewed_interpretation": "Gemini's EEA account closure is a platform-wide access fact. It should not be rewritten as a GUSD issuer-status conclusion. A stablecoin can retain its own issuer and reserve structure while the affiliated platform exits a region.",
+      "article_action": "Use Gemini/GUSD as another concise example of group-level and token-level divergence where useful.",
+      "source_urls": [
+        "https://support.gemini.com/hc/en-gb"
+      ]
+    }
+  ],
+  "article_gate_effect": {
+    "rlusd_section_corrected": true,
+    "full_asset_and_platform_reaudit_complete": true,
+    "material_interpretation_corrections_found": true,
+    "coverage_omissions_found": true,
+    "article_requires_additional_revision": true,
+    "publication_ready_after_batch_creation": false,
+    "reason": "The article must incorporate the OKX scope downgrade, regulated-asset additions, Paxos token-path distinctions, multi-issuance caveat, protocol-issued distinction, and payment-services layer before the final exact-head publication review."
+  }
+}

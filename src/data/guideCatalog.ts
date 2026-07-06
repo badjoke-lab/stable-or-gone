@@ -35,6 +35,19 @@ export const guideCategoryDescriptions: Record<GuideCategory, string> = {
 
 export const guides: GuideEntry[] = [
   {
+    slug: 'eu-stablecoin-access-after-mica',
+    title: 'After MiCA: Which Stablecoins Can Europeans Actually Use?',
+    summary: 'A reviewed guide to EU/EEA stablecoin access, separating issuer status, platform state, customer scope, product functions, direct mint and redemption routes, payment rails, supported networks, and dates.',
+    category: 'regulation',
+    publishedAt: '2026-07-06',
+    informationCurrentThrough: '2026-07-06',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'eu',
+    regionLabel: 'European Union / EEA'
+  },
+  {
     slug: 'open-usd-reserve-revenue-model',
     title: 'Open USD Explained: Who Gets the Reserve Income?',
     summary: 'Open Standard says partners will receive all reserve earnings after a small management fee. This guide separates that partner model from holder yield and records what is still unknown before launch.',
