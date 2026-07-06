@@ -16,8 +16,9 @@ This program governs the core workstream after the dedicated UI correction progr
 -> Registry v2/v3 and machine-readable parity — complete
 -> schedule normalization after inserted editorial work — complete
 -> counts, manifest, version, and provenance integrity — complete
--> reproducible build and generated-output audit — active
--> audited 100-record checkpoint and non-UI release material
+-> reproducible build and generated-output audit — complete
+-> audited 100-record canonical checkpoint — active
+-> non-UI release material
 -> monitoring expansion and scheduled read-only operation
 -> statistics implementation
 -> controlled growth from 100 to 110
@@ -50,8 +51,9 @@ PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
 PR #316 counts, manifest, version, and provenance integrity: complete
-PR #317 reproducible build and generated-output audit: active
-PR #318 audited 100-record canonical checkpoint: next
+PR #317 reproducible build and generated-output audit: complete
+PR #318 audited 100-record canonical checkpoint: active
+PR #319 non-UI release material: next
 
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
@@ -82,6 +84,9 @@ docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
 docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
+docs/audited-100-asset-canonical-checkpoint-spec.md
+docs/migration/audited-100-asset-canonical-checkpoint.json
+docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
 ```
 
 ## Fixed operating rules
@@ -121,6 +126,7 @@ PR #312         Ripple EU CASP guide update
 PR #314         corrected guide follow-up
 PR #315         schedule amendment and PR renumbering
 PR #316         counts, manifest, version, and provenance integrity
+PR #317         reproducible build and generated-output audit
 ```
 
 The monitoring pipeline remains review-only:
@@ -179,14 +185,58 @@ Source and schema expansion remains scheduled for PR #321-#322. Scheduled read-o
 
 ```text
 PR #316 counts, manifest, version, and provenance integrity — complete
-PR #317 reproducible build and generated-output audit — active
-PR #318 audited 100-record canonical checkpoint
+PR #317 reproducible build and generated-output audit — complete
+PR #318 audited 100-record canonical checkpoint — active
 PR #319 non-UI release material
 ```
 
 PR #316 established the source-state contract tying canonical counts, machine-readable public count paths, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
 
-PR #317 establishes dependency-lock, pinned-runtime, deterministic timestamp, generated-output role, source-mutation, and two-pass byte-reproducibility contracts. PR #318 records the audited canonical checkpoint. PR #319 prepares non-UI release material.
+PR #317 established dependency-lock, pinned-runtime, deterministic timestamp, generated-output role, protected-input, and two-pass byte-reproducibility contracts.
+
+PR #318 binds those contracts into a deterministic audited checkpoint. PR #319 prepares non-UI release material.
+
+## PR #318 checkpoint boundaries
+
+Binding files:
+
+```text
+docs/audited-100-asset-canonical-checkpoint-spec.md
+docs/migration/audited-100-asset-canonical-checkpoint.json
+docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
+scripts/generate-audited-100-checkpoint.mjs
+scripts/validate-audited-100-checkpoint.mjs
+.github/workflows/audited-100-checkpoint.yml
+```
+
+The checkpoint binds:
+
+```text
+source commit 9a106f0938e6323de833c941d6ae863050f1f03b
+334 canonical source files
+Registry v2 group counts and digests
+additive Registry v3 group counts and digests
+global canonical content SHA-256
+global canonical identity SHA-256
+package-lock SHA-256
+package.json SHA-256
+PR #316 baseline ID
+PR #317 baseline ID
+PR #317 reproducible output tree result
+production commit/provenance/output-parity verification contract
+```
+
+Observed global digests:
+
+```text
+canonical content:
+8fa08219d1e587a0628576cdfcf0e64722348282897558016651a04ebea5a881
+
+canonical identity:
+cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
+```
+
+PR #318 changes no canonical record content.
 
 ## PR #317 reproducible-build boundaries
 
@@ -201,30 +251,15 @@ scripts/capture-build-output-hashes.mjs
 scripts/compare-build-output-hashes.mjs
 ```
 
-The audit scope is:
+Accepted result:
 
 ```text
-reviewed package-lock dependency graph
-Node 22.22.0
-fixed source commit
-fixed branch label
-fixed build timestamp
-fixed SOURCE_DATE_EPOCH
-first build output hash inventory
-protected historical input guard
-second build with identical context
-byte-level output comparison
+output files: 414
+total bytes: 15178769
+tree SHA-256: 21fd8cbf5db373e1f0483dc5d74203b825c0203d08ba1ff7f34b8235495981a4
+failures: 0
+reproducible: true
 ```
-
-Hashed output roots:
-
-```text
-dist/**
-data/generated/build-provenance.json
-data/generated/deployment-taxonomy-migration.json
-```
-
-Protected historical inputs include the tracked historical registry-stats quality baseline and the migration baseline manifests named by the reproducibility baseline.
 
 Normal build must not rewrite `data/generated/registry-stats.json`.
 
