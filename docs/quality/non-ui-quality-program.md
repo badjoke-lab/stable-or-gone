@@ -15,7 +15,9 @@ This program governs the core workstream after the dedicated UI correction progr
 -> monitoring coverage recalculation — complete
 -> Registry v2/v3 and machine-readable parity — complete
 -> schedule normalization after inserted editorial work — complete
--> non-UI release hardening — active
+-> counts, manifest, version, and provenance integrity — complete
+-> reproducible build and generated-output audit — active
+-> audited 100-record checkpoint and non-UI release material
 -> monitoring expansion and scheduled read-only operation
 -> statistics implementation
 -> controlled growth from 100 to 110
@@ -47,8 +49,9 @@ PR #312 Ripple EU CASP guide update: complete
 PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
-PR #316 counts, manifest, version, and provenance integrity: active
-PR #317 reproducible build and generated-output audit: next
+PR #316 counts, manifest, version, and provenance integrity: complete
+PR #317 reproducible build and generated-output audit: active
+PR #318 audited 100-record canonical checkpoint: next
 
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
@@ -69,13 +72,16 @@ Before changing canonical data, evidence, workflows, monitoring, statistics, com
 7. the canonical specification for the active work item
 8. every named baseline, validator, audit, queue, fixture, publication-gate review, and research checkpoint
 
-Current release-integrity work must read:
+Current release-hardening work must read:
 
 ```text
 docs/counts-manifest-version-provenance-integrity-spec.md
 docs/migration/registry-release-integrity-baseline.json
 docs/migration/registry-v3-parity-baseline.json
 docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
+docs/reproducible-build-generated-output-audit-spec.md
+docs/migration/reproducible-build-output-baseline.json
+docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
 ```
 
 ## Fixed operating rules
@@ -114,6 +120,7 @@ PR #311         Registry v2/v3 and machine-readable parity
 PR #312         Ripple EU CASP guide update
 PR #314         corrected guide follow-up
 PR #315         schedule amendment and PR renumbering
+PR #316         counts, manifest, version, and provenance integrity
 ```
 
 The monitoring pipeline remains review-only:
@@ -171,15 +178,55 @@ Source and schema expansion remains scheduled for PR #321-#322. Scheduled read-o
 ## Phase B — non-UI release hardening — active
 
 ```text
-PR #316 counts, manifest, version, and provenance integrity — active
-PR #317 reproducible build and generated-output audit
+PR #316 counts, manifest, version, and provenance integrity — complete
+PR #317 reproducible build and generated-output audit — active
 PR #318 audited 100-record canonical checkpoint
 PR #319 non-UI release material
 ```
 
-PR #316 establishes the source-state contract tying canonical counts, machine-readable public count paths, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
+PR #316 established the source-state contract tying canonical counts, machine-readable public count paths, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
 
-PR #317 then audits reproducibility and generated-output behavior. PR #318 records the audited canonical checkpoint. PR #319 prepares non-UI release material.
+PR #317 establishes dependency-lock, pinned-runtime, deterministic timestamp, generated-output role, source-mutation, and two-pass byte-reproducibility contracts. PR #318 records the audited canonical checkpoint. PR #319 prepares non-UI release material.
+
+## PR #317 reproducible-build boundaries
+
+Binding files:
+
+```text
+docs/reproducible-build-generated-output-audit-spec.md
+docs/migration/reproducible-build-output-baseline.json
+.github/workflows/reproducible-build.yml
+scripts/validate-reproducible-build-contract.mjs
+scripts/capture-build-output-hashes.mjs
+scripts/compare-build-output-hashes.mjs
+```
+
+The audit scope is:
+
+```text
+reviewed package-lock dependency graph
+Node 22.22.0
+fixed source commit
+fixed branch label
+fixed build timestamp
+fixed SOURCE_DATE_EPOCH
+first build output hash inventory
+protected historical input guard
+second build with identical context
+byte-level output comparison
+```
+
+Hashed output roots:
+
+```text
+dist/**
+data/generated/build-provenance.json
+data/generated/deployment-taxonomy-migration.json
+```
+
+Protected historical inputs include the tracked historical registry-stats quality baseline and the migration baseline manifests named by the reproducibility baseline.
+
+Normal build must not rewrite `data/generated/registry-stats.json`.
 
 ## Phase C — monitoring expansion and operation
 
