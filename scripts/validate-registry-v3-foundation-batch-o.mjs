@@ -7,7 +7,8 @@ if (!original.includes(anchor)) throw new Error('Registry v3 foundation baseline
 const replacement = `
 const baselineBase = readJson('docs/migration/registry-v2-baseline.json') ?? {};
 const baselineGroups = { ...baselineBase.data_groups };
-for (const overlayPath of ['docs/migration/registry-v2-baseline-batch-o.json', 'docs/migration/registry-v2-baseline-batch-p.json']) {
+for (const suffix of ['o', 'p', 'q', 'r', 's', 't', 'u']) {
+  const overlayPath = \`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`;
   const overlay = readJson(overlayPath) ?? {};
   for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
     baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
