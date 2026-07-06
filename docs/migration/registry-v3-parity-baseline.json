@@ -25,21 +25,25 @@
   "expected_v3_counts": {
     "legal_profiles": 100,
     "stable_asset_relationships": 4,
-    "reserve_components": 127,
+    "reserve_components": 133,
     "income_profiles": 100,
     "deployment_view": 140
   },
   "expected_v3_coverage": {
     "legal_profiles": 100,
     "income_profiles": 100,
+    "reserve_component_assets": 100,
     "deployment_view_assets": 100
   },
   "machine_readable_contract": {
     "schema_version": "1.0.0",
     "data_schema_version": "sog_registry_v2",
-    "compatibility_mode": "v2_public_contract_with_additive_v3_internal_layers",
-    "v3_public_record_group_declaration": "intentional_compatibility_boundary",
-    "reason": "Registry v3 is additive and backward-compatible. PR #310 establishes internal parity and current runtime count parity without changing the existing public machine-readable record-family contract. Any public schema expansion requires a separate reviewed contract change.",
+    "compatibility_mode": "v2_public_contract_with_additive_v3_summary",
+    "registry_v3_summary": true,
+    "summary_locations": [
+      "version.data.registry_v3",
+      "manifest.registry_v3"
+    ],
     "data_safety": {
       "canonical_only": true,
       "includes_unreviewed_candidates": false,
@@ -47,7 +51,6 @@
       "includes_private_notes": false
     }
   },
-  "audit_output": "data/generated/registry-v2-v3-machine-readable-parity-audit.json",
-  "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-2026-07-06.md",
+  "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs"
 }
