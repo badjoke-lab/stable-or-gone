@@ -66,6 +66,8 @@ jobs:
         run: npm run validate:migration-v3
       - name: Validate Registry v2/v3 machine-readable parity
         run: npm run validate:parity
+      - name: Validate counts, manifest, version, and provenance integrity
+        run: npm run validate:release-integrity
       - name: Validate final state
         run: npm run validate:final
       - name: Validate UI v3 cleanup

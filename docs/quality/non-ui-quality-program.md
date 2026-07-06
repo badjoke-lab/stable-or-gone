@@ -10,10 +10,11 @@ This program governs the core workstream after the dedicated UI correction progr
 
 ```text
 100-record registry-wide audit — complete
--> EU market-access specification and research — complete
--> reviewed market-access article publication — complete
+-> EU market-access specification, research, publication, and reviewed updates — complete
 -> known-unknown and placeholder integrity audit — complete
 -> monitoring coverage recalculation — complete
+-> Registry v2/v3 and machine-readable parity — complete
+-> schedule normalization after inserted editorial work — complete
 -> non-UI release hardening — active
 -> monitoring expansion and scheduled read-only operation
 -> statistics implementation
@@ -24,23 +25,9 @@ This program governs the core workstream after the dedicated UI correction progr
 -> Reviewed Public Update Layer
 ```
 
-The canonical execution order and current PR number are defined by `docs/roadmap.md`.
+The canonical execution order and PR numbers are defined by `docs/roadmap.md` together with the July 6 roadmap amendment.
 
-UI is maintenance-only until the roadmap reaches an approved product UI phase. A concrete verified UI defect may be corrected through a narrow PR, but UI work must not displace the approved sequence without an explicit roadmap amendment.
-
-The EU stablecoin market-access work is governed by:
-
-```text
-docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
-```
-
-The post-110 comparison and change-product program is governed by:
-
-```text
-docs/comparison-and-change-product-spec.md
-```
-
-The public market-access article is a dated reviewed snapshot, not a live dashboard and not an automatic monitoring output.
+UI is maintenance-only until the roadmap reaches an approved product UI phase. Narrow verified UI fixes may not displace the approved sequence without a deliberate roadmap amendment.
 
 ## Current status
 
@@ -54,74 +41,58 @@ Public source identities: 456
 Evidence relations: 502
 Deployments: 140
 Detail routes: 366
-Growth D: complete
-100-record production verification: complete
-PR #307 reviewed article: complete
-PR #308 known-unknown and placeholder integrity audit: complete
-PR #309 monitoring coverage recalculation: complete
-PR #310 Registry v2/v3 and machine-readable parity: active
-PR #311 counts, manifest, version, and provenance integrity: next
+
+PR #311 Registry v2/v3 and machine-readable parity: complete
+PR #312 Ripple EU CASP guide update: complete
+PR #313 first EEA-scope follow-up: closed without merge
+PR #314 corrected guide follow-up: complete
+PR #315 schedule amendment and PR renumbering: complete
+PR #316 counts, manifest, version, and provenance integrity: active
+PR #317 reproducible build and generated-output audit: next
+
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
-Growth beyond 100: not yet authorized until candidate-audit phase
-Post-110 comparison program: approved but not active before reviewed 110-asset checkpoint
+Growth beyond 100: blocked until the candidate-audit phase
+Post-110 comparison program: approved but inactive before the reviewed 110-asset checkpoint
 ```
 
 ## Required reading order
 
-Before changing canonical data, evidence, monitoring, statistics, workflows, quality documentation, comparison/change-product surfaces, or EU market-access editorial material:
+Before changing canonical data, evidence, workflows, monitoring, statistics, comparison surfaces, or release integrity:
 
 1. `AGENTS.md`
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. this document
-6. the relevant canonical data, monitoring, editorial, statistics, comparison, or change-product specification
-7. `docs/migration/registry-v3-baseline.json` when registry-v3 scope is relevant
-8. every queue, validator, fixture, baseline, supporting audit, publication-gate review, and research checkpoint named by the work item
+5. the July 6 roadmap amendment
+6. this document
+7. the canonical specification for the active work item
+8. every named baseline, validator, audit, queue, fixture, publication-gate review, and research checkpoint
 
-Relevant canonical specifications include:
+Current release-integrity work must read:
 
 ```text
-docs/stable-asset-scope.md
-docs/classification-spec.md
-docs/data-model-v3-spec.md
-docs/stats-spec.md
-docs/comparison-and-change-product-spec.md
-docs/quality/monitoring-pipeline-spec.md
-docs/quality/monitoring-official-source-spec.md
-docs/quality/monitoring-official-source-schema.md
-docs/quality/monitoring-review-material-spec.md
-docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
+docs/counts-manifest-version-provenance-integrity-spec.md
+docs/migration/registry-release-integrity-baseline.json
+docs/migration/registry-v3-parity-baseline.json
+docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 ```
 
 ## Fixed operating rules
 
 - Repository specifications remain the source of truth.
-- Every non-trivial PR cites the exact queue, audit, schema, fixture, baseline, validator, publication-gate review, and research checkpoint it changes.
 - Unknown values remain unknown unless reviewed evidence supports a canonical value.
-- Month- or year-level evidence is not coerced into a day-level date.
-- UI work must not clear quality queues through hiding, defaults, or relabeling.
+- Partial dates are not coerced into day-level dates.
 - Candidate monitoring output never writes directly to canonical public data.
 - Monitoring baselines are accepted only through a separate human-reviewed repository change.
 - Monitoring executions remain read-only and do not update their own baseline.
-- An unchanged normalized official source must not create a candidate.
-- Metadata-only changes and fetch failures must not masquerade as content changes.
-- Platform-policy market access must preserve function or access route, service state, legal entity, customer scope, supported network where relevant, geography, and dates.
+- Platform-policy access preserves function or route, service state, legal entity, customer scope, supported network, geography, and dates.
 - A platform licence is not proof of stablecoin function availability.
 - A global product page is not proof of EU/EEA service scope.
-- A member-state page is not automatically an EEA-wide statement.
-- Historical platform policy must be separated from later service-state changes.
-- A market-access source change must not edit the public guide automatically.
-- Registered source reach is not accepted baseline coverage.
-- Issuer/protocol monitoring reach is not platform-policy coverage.
-- Regulatory action pages are not regulatory-register coverage.
-- Monitoring observations and editorial research matrices are not canonical market-access records.
-- Comparison projections use reviewed canonical data only.
-- Comparison work preserves protected unresolved states and must not fill gaps by inference.
-- Facet freshness is derived from authoritative record families rather than copied into root asset records for display convenience.
+- Monitoring observations and editorial research matrices are not canonical Market Access Records.
+- Comparison projections use reviewed canonical data only and preserve unresolved states.
+- Facet freshness derives from authoritative record families rather than display-only root timestamps.
 - No growth PR may contain more than two new stable assets.
-- Growth must use a fresh branch from current `main` and preserve all applicable record groups.
 - Ordinary merged changes publish from `main` under `docs/deployment-policy.md`.
 
 ## Completed foundation
@@ -131,7 +102,7 @@ PR #217-#225  date, reserve, evidence, and traceability quality
 PR #226-#229  deployment quality
 PR #230-#245  review-only monitoring foundation and source coverage
 PR #246         final-eight candidate audit
-PR #247-#250   controlled growth through 98 records, with consumed-number deviations recorded in history
+PR #247-#250   controlled growth through 98 records, with consumed-number deviations recorded
 PR #278         rebuilt Growth D to 100 records from current implementation lineage
 PR #279-#280   production verification and count-aware closure hardening
 PR #284-#295   UI recovery and maintenance fixes; dedicated UI program stopped
@@ -139,53 +110,30 @@ PR #296-#302   registry-wide audit through lifecycle and relationship boundaries
 PR #303-#307   EU market-access specification, research, re-audit, and publication
 PR #308         known-unknown and placeholder integrity audit
 PR #309         monitoring coverage recalculation
+PR #311         Registry v2/v3 and machine-readable parity
+PR #312         Ripple EU CASP guide update
+PR #314         corrected guide follow-up
+PR #315         schedule amendment and PR renumbering
 ```
 
-Completed monitoring architecture already includes:
+The monitoring pipeline remains review-only:
 
 ```text
 official-source observation
 -> accepted-baseline comparison
 -> change classification
--> private monitoring candidate
+-> private candidate
 -> review material
 -> evidence draft
 -> draft PR material
 -> human approval before canonical publication
 ```
 
-The pipeline is review-only. It must not commit, open a pull request, update canonical data, mutate accepted baselines, publish, or deploy automatically.
+It must not commit canonical data, accept its own baseline, publish, edit guides automatically, or deploy.
 
-## EU market-access insertion — complete
+## 100-record quality boundaries
 
-The research and publication sequence completed through PR #307. The final published article is current through 2026-07-06 and preserves:
-
-```text
-issuer identity
-token regulatory path
-CASP or service legal entity
-payment-services layer where applicable
-platform service state
-EU, EEA, or member-state scope
-customer cohort and B2B/retail eligibility
-function or access route
-supported network where relevant
-effective date and transition period
-```
-
-Publication evidence layers remain:
-
-```text
-A. asset-specific function evidence
-B. current platform-wide service-state evidence
-C. general service/licensing context without asset-specific function support
-```
-
-The article remains separate from raw monitoring output. Future material changes require reviewed source confirmation, editorial revision, date update, and revision-history entry.
-
-## Phase A closure — complete
-
-PR #308 completed known-unknown and placeholder integrity with:
+Known-unknown integrity:
 
 ```text
 stable assets: 100
@@ -195,9 +143,7 @@ stale-over-30-days review queue: 44
 structural placeholder findings: 0
 ```
 
-PR #309 completed current monitoring-coverage recalculation against the checked-in 24-source configuration.
-
-Reviewed PR #309 conclusions include:
+Monitoring coverage recalculation:
 
 ```text
 registered official sources: 24
@@ -210,7 +156,7 @@ accepted asset reach: 0
 pending_initial_acceptance baselines: 24
 ```
 
-Zero current checked-in coverage was recorded for:
+Zero current checked-in coverage remains recorded for:
 
 ```text
 platform-policy sources
@@ -220,67 +166,55 @@ market-access schema-capable sources
 accepted baselines
 ```
 
-The audit preserved these distinctions:
-
-```text
-registered source != accepted baseline
-pending baseline != accepted monitoring coverage
-issuer/protocol page != platform-policy coverage
-regulatory action page != regulatory-register coverage
-generic product page != function-level market-access coverage
-source count != completeness score
-```
-
-Source and schema expansion remain reserved for PR #315-#317. Scheduled read-only operation remains PR #318.
+Source and schema expansion remains scheduled for PR #321-#322. Scheduled read-only operation remains PR #323.
 
 ## Phase B — non-UI release hardening — active
 
 ```text
-PR #310 Registry v2/v3 and machine-readable parity
-PR #311 counts, manifest, version, and provenance integrity
-PR #312 reproducible build and generated-output audit
-PR #313 audited 100-record canonical checkpoint
-PR #314 non-UI release material
+PR #316 counts, manifest, version, and provenance integrity — active
+PR #317 reproducible build and generated-output audit
+PR #318 audited 100-record canonical checkpoint
+PR #319 non-UI release material
 ```
 
-Phase B establishes reliable data and output parity before later monitoring, statistics, growth, and comparison work.
+PR #316 establishes the source-state contract tying canonical counts, machine-readable public count paths, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
+
+PR #317 then audits reproducibility and generated-output behavior. PR #318 records the audited canonical checkpoint. PR #319 prepares non-UI release material.
 
 ## Phase C — monitoring expansion and operation
 
 ```text
-PR #315 100-asset monitoring baseline synchronization
-PR #316 reserve and redemption source expansion
-PR #317 lifecycle, regulatory, and EU market-access source/schema expansion
-PR #318 bounded scheduled read-only monitoring
+PR #320 100-asset monitoring baseline synchronization
+PR #321 reserve and redemption source expansion
+PR #322 lifecycle, regulatory, and EU market-access source/schema expansion
+PR #323 bounded scheduled read-only monitoring
 ```
 
-PR #317 expands the approved observation family. It does not create the later canonical Market Access Record family.
+PR #322 expands the approved observation family but does not create the later canonical Market Access Record family.
 
 ## Phase D — statistics implementation
 
 ```text
-PR #319 deterministic statistics generator and validator
-PR #320 immutable checkpoint history
-PR #321 /stats/ foundation
-PR #322 historical, deployment, organization, and data-quality statistics
+PR #324 deterministic statistics generator and validator
+PR #325 immutable checkpoint history
+PR #326 /stats/ foundation
+PR #327 historical, deployment, organization, and data-quality statistics
 ```
 
-Statistics derive from reviewed canonical data and must not become price, market-cap, yield, safety, transparency, or risk rankings.
+Statistics derive from reviewed canonical data and must not become price, market-cap, APY, safety, transparency, or risk rankings.
 
-The existing statistics phase remains unchanged. Post-110 extensions require a reviewed specification amendment and must not delay PR #319-#322.
-
-## Phase E — controlled growth from 100 to 110
+## Phase E — candidate audit and controlled growth from 100 to 110
 
 ```text
-PR #323 next candidate audit
-PR #324 100 -> 102
-PR #325 102 -> 104
-PR #326 104 -> 106
-PR #327 106 -> 108
-PR #328 108 -> 110
+PR #328 next candidate audit
+PR #329 100 -> 102
+PR #330 102 -> 104
+PR #331 104 -> 106
+PR #332 106 -> 108
+PR #333 108 -> 110
 ```
 
-Growth remains blocked until the preceding hardening, monitoring, statistics, and candidate-audit phases complete.
+Growth remains blocked until release hardening, monitoring, statistics, and candidate audit complete.
 
 ## Phase F — Comparison Foundation
 
@@ -291,32 +225,21 @@ docs/comparison-and-change-product-spec.md
 ```
 
 ```text
-PR #329 define Comparison Readiness contract and audit method
-PR #330 audit all 110 assets for comparison readiness
-PR #331 normalize comparison-critical gaps and validators
-PR #332 define canonical Market Access Record schema and governance
-PR #333 define facet-freshness derivation contract and validators
+PR #334 define Comparison Readiness contract and audit method
+PR #335 audit all 110 assets for comparison readiness
+PR #336 normalize comparison-critical gaps and validators
+PR #337 define canonical Market Access Record schema and governance
+PR #338 define facet-freshness derivation contract and validators
 ```
 
-This phase is data- and contract-first. Compare UI work must not begin before readiness and normalization are complete.
-
-The audit preserves four analytical layers:
-
-```text
-asset lifecycle
-issuance and redemption
-legal and regulatory state
-market access
-```
-
-The first three build on existing canonical record families. Market access becomes a separately governed canonical family and remains distinct from monitoring observations and editorial matrices.
+Phase F is data- and contract-first. Compare UI work must not begin before readiness and normalization are complete.
 
 ## Phase G — Compare
 
 ```text
-PR #334 deterministic comparison projection generator and machine-readable output
-PR #335 /compare/ v1
-PR #336 Compare presets
+PR #339 deterministic comparison projection generator and machine-readable output
+PR #340 /compare/ v1
+PR #341 Compare presets
 ```
 
 Compare presents factual materials under shared definitions. It does not score, rank, recommend, or fill missing values by inference.
@@ -324,10 +247,10 @@ Compare presents factual materials under shared definitions. It does not score, 
 ## Phase H — Change Research Tools
 
 ```text
-PR #337 access and regulation index generator
-PR #338 Access & Regulation Explorer
-PR #339 change-timeline projection generator
-PR #340 Change Timeline UI
+PR #342 access and regulation index generator
+PR #343 Access & Regulation Explorer
+PR #344 change-timeline projection generator
+PR #345 Change Timeline UI
 ```
 
 Access and regulation may share a discovery surface while retaining separate canonical record families. The timeline is a derived projection and does not replace source record families.
@@ -335,8 +258,8 @@ Access and regulation may share a discovery surface while retaining separate can
 ## Phase I — Reviewed Public Update Layer
 
 ```text
-PR #341 SOG Registry Update feed/page
-PR #342 Monthly Stablecoin Change Log
+PR #346 SOG Registry Update feed/page
+PR #347 Monthly Stablecoin Change Log
 ```
 
 These surfaces derive from reviewed merged canonical changes. They are not raw monitoring feeds and are not automatic news digests.
@@ -344,7 +267,7 @@ These surfaces derive from reviewed merged canonical changes. They are not raw m
 ## Optional Phase J — Query Translation
 
 ```text
-PR #343+ natural-language filter translation after separate approval
+PR #348+ natural-language filter translation after separate approval
 ```
 
 This optional layer may translate natural-language requests into structured filters only after the structured product surfaces are stable. It must not bypass canonical evidence or unresolved-state semantics.
