@@ -1,5 +1,6 @@
 import {
   DATA_SAFETY,
+  DATA_SCHEMA_VERSION,
   MACHINE_READABLE_SCHEMA_VERSION,
   MAIN_ROUTES,
   PROJECT,
@@ -14,6 +15,7 @@ export function GET() {
   const evidenceSourceIdentity = getEvidenceSourceIdentitySummary();
   const manifest = {
     schema_version: MACHINE_READABLE_SCHEMA_VERSION,
+    data_schema_version: DATA_SCHEMA_VERSION,
     project_id: PROJECT.projectId,
     title: PROJECT.siteName,
     description: PROJECT.description,
@@ -35,6 +37,10 @@ export function GET() {
         'known_unknown',
         'regulatory_note',
         'deployment',
+        'legal_profile',
+        'stable_asset_relationship',
+        'reserve_component',
+        'income_profile',
       ],
     },
     public_files: {
