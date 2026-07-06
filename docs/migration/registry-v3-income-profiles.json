@@ -19,7 +19,10 @@
     "data/income-profiles-v3-n.json",
     "data/income-profiles-v3-o.json",
     "data/income-profiles-v3-p.json",
-    "data/income-profiles-v3-q-t.json"
+    "data/yield-profiles-v3-q.json",
+    "data/r-returns.json",
+    "data/s-returns.json",
+    "data/batch-t-income.json"
   ],
   "minimum_count": 100,
   "loader": "src/lib/data/incomeProfilesV3.ts",
