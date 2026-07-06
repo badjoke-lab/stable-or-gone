@@ -34,7 +34,7 @@ The checked-in 24-source configuration provides:
 ```text
 issuer/protocol sources: 19 sources / 15 assets
 reserve/assurance signals: 9 sources / 11 assets
-redemption/mint-term signals: 5 sources / 7 assets
+redemption/mint-term signals: 6 sources / 7 assets
 issuer lifecycle signals: 5 sources / 5 assets
 regulatory action/guidance sources: 5 sources / 5 assets
 ```
