@@ -5,7 +5,7 @@ Updated: 2026-07-06
 
 ## 1. Purpose
 
-This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, inserted urgent work handling, monitoring boundaries, comparison boundaries, and publication safety.
+This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, inserted urgent work handling, monitoring boundaries, comparison boundaries, and publication safety.
 
 SOG work must not depend on chat memory, an old handoff, or an unstated interpretation. Merged repository specifications are the source of truth.
 
@@ -38,12 +38,15 @@ docs/quality/non-ui-quality-program.md
 docs/roadmap.md
 ```
 
-Current release-integrity work:
+Current release-hardening work:
 
 ```text
 docs/counts-manifest-version-provenance-integrity-spec.md
 docs/migration/registry-release-integrity-baseline.json
 docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
+docs/reproducible-build-generated-output-audit-spec.md
+docs/migration/reproducible-build-output-baseline.json
+docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
 ```
 
 Canonical data semantics:
@@ -110,6 +113,9 @@ A change to any of the following requires a specification update in the same PR 
 - count or denominator semantics;
 - build provenance semantics;
 - canonical hash boundary;
+- dependency-lock or pinned runtime semantics for release builds;
+- reproducible-build timestamp context;
+- generated-output roles or protected historical input boundaries;
 - statistics denominator or grouping semantics;
 - comparison projection shape or semantics;
 - facet-freshness derivation semantics;
@@ -172,8 +178,9 @@ PR #312 Ripple EU CASP guide update complete
 PR #313 first EEA-scope follow-up closed without merge
 PR #314 corrected guide follow-up complete
 PR #315 schedule amendment and PR renumbering complete
-PR #316 counts, manifest, version, and provenance integrity active
-PR #317 reproducible build and generated-output audit next
+PR #316 counts, manifest, version, and provenance integrity complete
+PR #317 reproducible build and generated-output audit active
+PR #318 audited 100-record canonical checkpoint next
 PR #316-#333 current pre-110 sequence
 PR #334-#347 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
 ```
@@ -219,7 +226,32 @@ Binding rules:
 - candidate, monitoring, editorial-research, and private material are excluded from canonical machine-readable provenance and public count surfaces;
 - source-state integrity validation complements, but does not replace, built-output and production provenance verification.
 
-## 11. Unknown-value and placeholder governance
+## 11. Reproducible-build governance
+
+PR #317 is governed by:
+
+```text
+docs/reproducible-build-generated-output-audit-spec.md
+docs/migration/reproducible-build-output-baseline.json
+.github/workflows/reproducible-build.yml
+```
+
+Binding rules:
+
+- CI, reproducibility audit, and production deployment use the reviewed package lock through `npm ci --no-audit --no-fund`;
+- release-hardening CI, reproducibility audit, and production deployment pin Node 22.22.0;
+- `SOG_BUILD_TIMESTAMP` is the explicit timestamp override and `SOURCE_DATE_EPOCH` is the standard deterministic fallback;
+- production build timestamp and epoch derive from the deployed commit;
+- timestamped generators covered by PR #317 use the shared build-timestamp helper;
+- normal site build must not overwrite the tracked historical `data/generated/registry-stats.json` quality-baseline input;
+- the two-pass audit runs two builds with identical source commit, branch label, timestamp, epoch, dependency graph, Node runtime, and runner class;
+- audited outputs include `dist/**`, generated build provenance, and generated deployment-taxonomy diagnostic output;
+- comparison must check tree digest, file count, total bytes, per-file byte count, and per-file SHA-256;
+- protected historical inputs named by the baseline must remain unchanged through both builds;
+- reproducibility claims are scoped to the pinned GitHub Actions Linux runtime class, pinned Node runtime, reviewed lockfile, and fixed build context;
+- production provenance verification remains required and is not replaced by local or CI byte reproducibility.
+
+## 12. Unknown-value and placeholder governance
 
 Protected unresolved states include:
 
@@ -235,7 +267,7 @@ These states are not structural placeholders and must not be overwritten merely 
 
 Structural placeholders such as TODO/TBD identity fields, fake URLs, fabricated dates, and placeholder addresses, contracts, or identifiers are defects.
 
-## 12. Monitoring coverage governance
+## 13. Monitoring coverage governance
 
 PR #309 completed coverage recalculation from the checked-in source allowlist and baseline state. It was an audit item, not source expansion.
 
@@ -268,7 +300,7 @@ Governance rules:
 - Monitoring output remains private candidate material until reviewed.
 - Monitoring observation schema does not itself create a canonical Market Access Record family.
 
-## 13. Comparison and change-product governance
+## 14. Comparison and change-product governance
 
 Phase F-I is governed by `docs/comparison-and-change-product-spec.md` together with the current numbering amendment.
 
@@ -285,13 +317,13 @@ Binding boundaries:
 - Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
 - Safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
 
-## 14. UI maintenance and approved product UI governance
+## 15. UI maintenance and approved product UI governance
 
 There is no free-standing redesign sequence. Narrow UI maintenance must start from a concrete observed defect and must not displace the active roadmap.
 
 Approved product surfaces such as Compare, Access & Regulation Explorer, and Change Timeline are governed by their canonical specification and roadmap item when their phases become active.
 
-## 15. Data-preservation rule
+## 16. Data-preservation rule
 
 UI, quality, taxonomy, monitoring, statistics, growth, editorial, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
 
