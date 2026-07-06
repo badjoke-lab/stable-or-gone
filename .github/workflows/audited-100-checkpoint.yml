@@ -35,12 +35,19 @@ jobs:
       - name: Validate audited 100-asset checkpoint
         run: node scripts/validate-audited-100-checkpoint.mjs
       - name: Verify current production public smoke
-        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production.mjs
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p artifacts
+          env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production.mjs 2>&1 | tee artifacts/production-public-smoke.log
       - name: Verify current production provenance
+        if: always()
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-provenance.mjs
       - name: Verify current production exact output parity
+        if: always()
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-output-parity.mjs
       - name: Verify production canonical checkpoint parity
+        if: always()
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-audited-checkpoint.mjs
       - name: Upload checkpoint validation
         if: always()
@@ -51,3 +58,4 @@ jobs:
           path: |
             artifacts/audited-100-checkpoint-current.json
             artifacts/audited-100-checkpoint-validation.json
+            artifacts/production-public-smoke.log
