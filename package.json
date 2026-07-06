@@ -105,6 +105,7 @@
     "validate:income-v3": "node scripts/validate-registry-v3-income-profiles.mjs",
     "validate:migration-v3": "node scripts/validate-registry-v3-migration-audit.mjs",
     "validate:parity": "node scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
+    "validate:parity-suite": "npm run validate:v3 && npm run validate:deployments-v3 && npm run validate:income-v3 && npm run validate:migration-v3 && npm run validate:parity",
     "validate:final": "node scripts/validate-registry-v2-final.mjs",
     "validate:finalization": "npm run validate:migration-v3 && node scripts/validate-batch-finalization.mjs",
     "validate:integrity": "node scripts/audit-registry-integrity-batch-o.mjs --check",
