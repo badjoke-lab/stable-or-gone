@@ -46,9 +46,6 @@ const v3 = {
 const yields = unique([...(yieldBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json', 'data/batch-t-income.json']);
 
 const stats = buildRegistryStats();
-const statsPath = path.join(root, quality.generated_stats);
-fs.mkdirSync(path.dirname(statsPath), { recursive: true });
-fs.writeFileSync(statsPath, `${JSON.stringify(stats, null, 2)}\n`);
 
 const compatibility = ['data/stablecoin-overrides-pr033.json', 'data/stablecoin-overrides-pr034.json']
   .filter((file) => fs.existsSync(path.join(root, file)));
