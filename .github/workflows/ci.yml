@@ -36,6 +36,8 @@ jobs:
         run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
       - name: Validate known-unknown and placeholder integrity audit
         run: node scripts/validate-registry-known-unknown-placeholder-integrity-audit.mjs
+      - name: Validate monitoring coverage recalculation
+        run: node scripts/validate-monitoring-coverage-recalculation-100-assets.mjs
       - name: Validate unresolved launch-date queue
         run: npm run validate:launch-queue
       - name: Validate unresolved terminal-date queue
