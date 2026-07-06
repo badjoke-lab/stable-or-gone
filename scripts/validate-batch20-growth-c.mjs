@@ -34,8 +34,8 @@ const canonicalOrganizationIds = new Set(organizations.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 const eventDetailIds = new Set(eventDetails.map((row) => row.id));
 
-fail(stablecoins.length === 98, `canonical stablecoin count must be 98, found ${stablecoins.length}`);
-fail(baseline.minimum_counts?.stablecoins === 98, 'baseline minimum stablecoin count must be 98');
+fail(stablecoins.length === 100, `canonical stablecoin count must be 100 after parity integration, found ${stablecoins.length}`);
+fail(baseline.minimum_counts?.stablecoins === 100, 'baseline minimum stablecoin count must be 100 after parity integration');
 fail(read('data/stablecoins-batch-s.json').length === 2, 'Batch S must contain two stablecoins');
 fail(read('data/organizations-batch-s.json').length === 2, 'Batch S must contain two organizations');
 fail(read('data/relationships-batch-s.json').length === 2, 'Batch S must contain two relationships');
@@ -48,7 +48,7 @@ fail(read('data/s-protocol-context.json').length === 2, 'Batch S must contain tw
 fail(read('data/s-open-items.json').length === 10, 'Batch S must contain ten open items');
 fail(read('data/deployments-batch-s.json').length === 3, 'Batch S must contain three deployments');
 fail(legal.length === 2 && returnProfiles.length === 2 && reserveComponents.length === 2, 'Batch S supplemental layers must cover both assets');
-fail(overlay.defer_legacy_v3_full_coverage === true, 'legacy full-coverage deferral must be explicit');
+fail(overlay.defer_legacy_v3_full_coverage === false, 'Batch S v3 parity deferral must be closed');
 
 for (const id of coinIds) {
   const coin = stablecoinById.get(id);
@@ -88,4 +88,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log('Batch 20 Growth C valid: UXD and Dollar on Chain promoted as active assets; canonical count is 98.');
+console.log('Batch 20 Growth C valid at the 100-asset parity checkpoint: UXD and Dollar on Chain remain canonical active assets.');
