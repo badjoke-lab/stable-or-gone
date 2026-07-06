@@ -6,8 +6,8 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current reviewed main checkpoint before PR #317:
-47c110b69ec7fd61121cbeee247f4ef12d466117
+Current reviewed main checkpoint before PR #318:
+9a106f0938e6323de833c941d6ae863050f1f03b
 
 Canonical stable assets: 100
 Organizations: 94
@@ -28,10 +28,11 @@ PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
 PR #316 counts, manifest, version, and provenance integrity: complete
+PR #317 reproducible build and generated-output audit: complete
 
 Active workstream: non-UI release hardening
-Current item: PR #317 reproducible build and generated-output audit
-Next item: PR #318 audited 100-record canonical checkpoint
+Current item: PR #318 audited 100-record canonical checkpoint
+Next item: PR #319 non-UI release material
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, record-growth, comparison, and change-research schedule without a deliberate roadmap amendment.
@@ -67,6 +68,7 @@ PR #313  first EEA-scope follow-up — closed without merge
 PR #314  corrected guide follow-up
 PR #315  schedule amendment and PR renumbering
 PR #316  counts, manifest, version, and provenance integrity
+PR #317  reproducible build and generated-output audit
 ```
 
 The registry remains at the reviewed 100-record checkpoint.
@@ -192,7 +194,7 @@ Merged checkpoint:
 
 PR #316 tied composed canonical counts, public machine-readable count surfaces, route counts, and provenance semantics to the reviewed 100-asset checkpoint. It also aligned the checked-in provenance sentinel with current counts while preserving explicit sentinel semantics before build.
 
-## PR #317 — reproducible build and generated-output audit — active
+## PR #317 — reproducible build and generated-output audit — complete
 
 Binding specification:
 
@@ -212,42 +214,88 @@ Supporting audit:
 docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
 ```
 
+Merged checkpoint:
+
+```text
+9a106f0938e6323de833c941d6ae863050f1f03b
+```
+
+PR #317 completed dependency-lock, pinned-runtime, deterministic-timestamp, generated-output-role, protected-input, and two-pass byte-reproducibility hardening.
+
+Accepted reproducibility result:
+
+```text
+audited PR head: 41ae5cdc07f8e5bae74642cd6f8ada3c7ebba96f
+output files: 414
+total bytes: 15178769
+tree SHA-256: 21fd8cbf5db373e1f0483dc5d74203b825c0203d08ba1ff7f34b8235495981a4
+failures: 0
+reproducible: true
+```
+
+## PR #318 — audited 100-record canonical checkpoint — active
+
+Binding specification:
+
+```text
+docs/audited-100-asset-canonical-checkpoint-spec.md
+```
+
+Binding checkpoint:
+
+```text
+docs/migration/audited-100-asset-canonical-checkpoint.json
+```
+
+Supporting audit:
+
+```text
+docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
+```
+
 Purpose:
 
-- lock dependency resolution with a reviewed package lock;
-- use `npm ci` in CI, reproducibility audit, and production deployment;
-- pin the release-hardening Node runtime;
-- make build timestamp resolution deterministic through `SOG_BUILD_TIMESTAMP` and `SOURCE_DATE_EPOCH`;
-- derive production build timestamp and epoch from the deployed commit;
-- stop normal build from mutating the historical tracked registry-stats baseline input;
-- run two fixed-context builds and compare audited output bytes;
-- hash `dist/**`, generated build provenance, and deployment-taxonomy diagnostic output;
-- guard protected historical inputs from build-time mutation.
+- bind the merged PR #317 main checkpoint as the reviewed 100-asset source state;
+- record per-group count, identity digest, and content digest;
+- record global canonical identity and content digests;
+- link the PR #316 release-integrity baseline;
+- link the PR #317 reproducible-build baseline and accepted output result;
+- bind package-lock and package manifest digests;
+- validate the checkpoint deterministically in general CI;
+- verify production at the PR #317 merge commit through existing production checks.
+
+Observed checkpoint:
+
+```text
+source commit: 9a106f0938e6323de833c941d6ae863050f1f03b
+canonical files: 334
+canonical content SHA-256: 8fa08219d1e587a0628576cdfcf0e64722348282897558016651a04ebea5a881
+canonical identity SHA-256: cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
+```
 
 Completion condition:
 
 ```text
-package-lock.json is reviewed and committed
-CI and production use npm ci
-release-hardening workflows pin Node 22.22.0
-deterministic timestamp helper is used by timestamped build generators
-production build context derives from deployed commit
-historical registry stats are not mutated by normal build
-reproducibility baseline exists
-source-level reproducibility validator exists
-two-pass fixed-context build audit exists
-both builds produce identical audited bytes
-protected historical inputs remain unchanged
-roadmap and workstream guard show PR #317 active / PR #318 next
-full CI and reproducibility workflow green
+binding checkpoint exists
+checkpoint generator exists
+checkpoint validator exists
+general CI runs checkpoint validation
+dedicated checkpoint workflow exists
+source counts and digests match checkpoint
+release and reproducibility baseline IDs match
+package digests match
+accepted PR #317 reproducibility result matches
+production verifies PR #317 merge commit
+roadmap and workstream guard show PR #318 active / PR #319 next
+full CI and checkpoint workflow green
 ```
 
 ## Phase B — remaining non-UI release hardening
 
 ```text
 PR #316 counts, manifest, version, and provenance integrity — complete
-PR #317 reproducible build and generated-output audit — active
-PR #318 audited 100-record canonical checkpoint
+PR #317 reproducible build and generated-output audit — complete
+PR #318 audited 100-record canonical checkpoint — active
 PR #319 non-UI release material
 ```
 
@@ -387,10 +435,10 @@ The natural-language layer may translate requests into structured filters. It mu
 ## Immediate next items
 
 ```text
-1. Complete PR #317 reproducible build and generated-output audit.
-2. Start PR #318 audited 100-record canonical checkpoint from current main.
-3. Continue PR #319 non-UI release material.
-4. Keep monitoring expansion in PR #320-#322 and scheduled read-only operation in PR #323.
-5. Keep statistics in PR #324-#327 and candidate audit/growth in PR #328-#333.
+1. Complete PR #318 audited 100-record canonical checkpoint.
+2. Start PR #319 non-UI release material from current main.
+3. Continue monitoring expansion in PR #320-#322 and scheduled read-only operation in PR #323.
+4. Continue statistics in PR #324-#327.
+5. Continue candidate audit and controlled growth in PR #328-#333.
 6. After the reviewed 110-asset checkpoint, activate Phase F at PR #334.
 ```
