@@ -12,7 +12,13 @@ Before changing code, data, workflows, or documentation, read:
 4. `docs/deployment-policy.md`
 5. the canonical plan for the active work item
 6. the relevant data, monitoring, statistics, comparison, change-research, editorial, or UI-maintenance specification
-7. every queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint named by the work item
+7. every queue, validator, audit, fixture, baseline, publication-gate review, research checkpoint, and roadmap amendment named by the work item
+
+For current schedule-sensitive work, also read:
+
+```text
+docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
+```
 
 For active core data work, also read:
 
@@ -22,6 +28,8 @@ docs/stable-asset-scope.md
 docs/classification-spec.md
 docs/data-model-v3-spec.md
 docs/migration/registry-v3-baseline.json
+docs/registry-v2-v3-machine-readable-parity-spec.md
+docs/migration/registry-v3-parity-baseline.json
 ```
 
 For monitoring work, also read:
@@ -61,12 +69,14 @@ docs/comparison-and-change-product-spec.md
 
 Repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts. A decision becomes binding only when the relevant canonical repository document is updated and merged.
 
+For PR numbering after the July 6 editorial insertions, `docs/roadmap.md` and `docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md` override older numeric labels in subordinate plans. The approved work order and scope remain unchanged.
+
 ## Current workstream
 
 The dedicated UI program is stopped. UI is maintenance-only until the roadmap reaches an approved product UI phase or is deliberately amended.
 
 ```text
-Current main checkpoint: 020957942615af875afef391c57f31cc8dd1abc2
+Current reviewed main checkpoint before PR #315: 24c7d9e87becfa3fe182d42ee70b02332c00f8d2
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -79,8 +89,12 @@ Detail routes: 366
 PR #307 reviewed EU/EEA market-access guide: complete and published
 PR #308 known-unknown and placeholder integrity audit: complete
 PR #309 monitoring coverage recalculation: complete
-Active: PR #310 Registry v2/v3 and machine-readable parity
-Next: PR #311 counts, manifest, version, and provenance integrity
+Registry v2/v3 and machine-readable parity: complete via PR #311
+PR #312 Ripple EU CASP guide update: complete
+PR #313 first follow-up implementation: closed without merge
+PR #314 corrected guide follow-up: complete
+Active: PR #315 schedule amendment and PR renumbering
+Next: PR #316 counts, manifest, version, and provenance integrity
 ```
 
 ## Approved sequence
@@ -90,23 +104,28 @@ PR #296-#302  registry-wide audit through lifecycle boundaries — complete
 PR #303-#307  EU market-access research and guide publication — complete
 PR #308       known-unknown and placeholder integrity audit — complete
 PR #309       monitoring coverage recalculation — complete
-PR #310-#314  non-UI release hardening — active
-PR #315-#318  monitoring expansion and scheduled read-only operation
-PR #319-#322  statistics implementation
-PR #323       next candidate audit
-PR #324-#328  controlled growth from 100 to 110
-PR #329-#333  Comparison Foundation
-PR #334-#336  Compare
-PR #337-#340  Change Research Tools
-PR #341-#342  Reviewed Public Update Layer
-PR #343+      optional natural-language filter translation after separate approval
+PR #311       Registry v2/v3 and machine-readable parity — complete
+PR #312       Ripple EU CASP guide update — complete
+PR #313       first EEA-scope follow-up — closed without merge
+PR #314       corrected guide follow-up — complete
+PR #315       schedule amendment and PR renumbering — active
+PR #316-#319  remaining non-UI release hardening
+PR #320-#323  monitoring expansion and scheduled read-only operation
+PR #324-#327  statistics implementation
+PR #328       next candidate audit
+PR #329-#333  controlled growth from 100 to 110
+PR #334-#338  Comparison Foundation
+PR #339-#341  Compare
+PR #342-#345  Change Research Tools
+PR #346-#347  Reviewed Public Update Layer
+PR #348+      optional natural-language filter translation after separate approval
 ```
 
-Do not skip ahead unless `docs/roadmap.md` is deliberately amended. PR #310-#328 remains unchanged. The post-110 sequence activates only after the reviewed 110-asset checkpoint and is governed by `docs/comparison-and-change-product-spec.md`.
+Do not skip ahead unless `docs/roadmap.md` is deliberately amended. The post-110 sequence activates only after the reviewed 110-asset checkpoint and is governed by `docs/comparison-and-change-product-spec.md` together with the current roadmap numbering amendment.
 
 ## Core data rules
 
-- Cite the exact queue, validator, audit, schema, fixture, baseline, publication-gate review, and research checkpoint used by each PR.
+- Cite the exact queue, validator, audit, schema, fixture, baseline, publication-gate review, research checkpoint, and roadmap amendment used by each PR.
 - Keep unknown values unknown unless reviewed evidence supports a value.
 - Do not coerce partial-date evidence into a day-level date.
 - Preserve evidence relations, known unknowns, deployments, source identities, and value states.
@@ -154,12 +173,12 @@ Preserve distinct boundaries for contract deployment, first mint, guarded beta, 
 - Monitoring output is candidate material only and must not write directly to canonical public data.
 - Monitoring executions remain read-only and may not update their own accepted baseline.
 - Monitoring may not create branches, pull requests, publications, guide edits, or deployments automatically.
-- Source expansion and schema expansion remain PR #315-#317 work.
-- Scheduled read-only operation remains PR #318 work.
+- Source expansion and schema expansion are scheduled for PR #321-#322.
+- Scheduled read-only operation is scheduled for PR #323.
 
 ## Statistics rules
 
-- `docs/stats-spec.md` is binding for PR #319-#322.
+- `docs/stats-spec.md` is binding for PR #324-#327.
 - Statistics derive from canonical loader output at build time.
 - Unknown categories remain visible.
 - Multi-select dimensions are not presented as mutually exclusive.
@@ -168,7 +187,7 @@ Preserve distinct boundaries for contract deployment, first mint, guarded beta, 
 
 ## Comparison and change-product rules
 
-For Phase F-I, `docs/comparison-and-change-product-spec.md` is binding.
+For Phase F-I, `docs/comparison-and-change-product-spec.md` is binding together with the current roadmap numbering amendment.
 
 - Preserve separate analytical layers for lifecycle, issuance/redemption, legal/regulatory state, and market access.
 - Do not rebuild lifecycle or redemption semantics merely for comparison UI convenience.
@@ -184,7 +203,7 @@ For Phase F-I, `docs/comparison-and-change-product-spec.md` is binding.
 
 ## Growth rules
 
-Growth beyond 100 begins only after the preceding audit, hardening, monitoring, statistics, and candidate-audit phases in `docs/roadmap.md`. Growth PRs contain no more than two new stable assets, use a fresh branch from current `main`, preserve supporting record groups, and keep unknown information explicit.
+Growth beyond 100 begins only after the preceding hardening, monitoring, statistics, and candidate-audit phases in `docs/roadmap.md`. Growth PRs contain no more than two new stable assets, use a fresh branch from current `main`, preserve supporting record groups, and keep unknown information explicit.
 
 ## Deployment rule
 
