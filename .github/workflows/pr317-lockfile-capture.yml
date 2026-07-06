@@ -1,0 +1,27 @@
+name: PR317 lockfile capture
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: github.head_ref == 'pr317-reproducible-build-audit'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate package lock
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Upload package lock
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr317-package-lock
+          path: package-lock.json
+          if-no-files-found: error
