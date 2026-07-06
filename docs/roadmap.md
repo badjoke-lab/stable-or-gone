@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Current main checkpoint: 3fa7f2fe7d84f4fc2a0ba4e0dc8b11e1b1b789b9
+Current main checkpoint: 020957942615af875afef391c57f31cc8dd1abc2
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -18,14 +18,17 @@ Deployments: 140
 Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
-Active workstream: monitoring coverage recalculation
-Current item: PR #309 monitoring coverage recalculation for 100 assets
-Next item: PR #310 Registry v2/v3 and machine-readable parity
+PR #309 monitoring coverage recalculation: complete
+Active workstream: non-UI release hardening
+Current item: PR #310 Registry v2/v3 and machine-readable parity
+Next item: PR #311 counts, manifest, version, and provenance integrity
 ```
 
-The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
+The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, record-growth, comparison, and change-research schedule without a deliberate roadmap amendment.
 
 The EU/EEA stablecoin market-access article was published through PR #307 after checkpoints 01-03, publication-gate review, a full prepublication re-audit, owner review, exact-head validation, and final article corrections. The article is a dated reviewed snapshot and is not an automatic monitoring output.
+
+The current PR #310-#328 sequence remains unchanged. After the reviewed 110-asset checkpoint, the approved product sequence continues through Comparison Foundation, Compare, Change Research Tools, and the Reviewed Public Update Layer under `docs/comparison-and-change-product-spec.md`.
 
 ## Completed foundation
 
@@ -42,6 +45,7 @@ The EU/EEA stablecoin market-access article was published through PR #307 after 
 - PR #306 merged function-matrix checkpoint 03 and current platform service-state research.
 - PR #307 published the reviewed EU/EEA stablecoin market-access guide.
 - PR #308 completed known-unknown and placeholder integrity audit.
+- PR #309 completed monitoring coverage recalculation for all 100 canonical assets.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry remains at the verified 100-record checkpoint.
 
@@ -139,7 +143,7 @@ Published route:
 
 The article is a dated reviewed editorial snapshot current through 2026-07-06. Monitoring output never edits it automatically.
 
-## Phase A — 100-record registry-wide audit
+## Phase A — 100-record registry-wide audit — complete
 
 Completed:
 
@@ -151,6 +155,7 @@ PR #300 reserve, redemption, and backing applicability
 PR #301 deployment and chain identity
 PR #302 lifecycle and relationship boundaries
 PR #308 known-unknown and placeholder integrity
+PR #309 monitoring coverage recalculation
 ```
 
 ### PR #308 — known-unknown and placeholder integrity — complete
@@ -182,28 +187,42 @@ not_applicable
 source_review_needed
 ```
 
-## PR #309 — monitoring coverage recalculation for 100 assets — active
+### PR #309 — monitoring coverage recalculation for 100 assets — complete
 
-PR #309 recalculates current monitoring reach from the checked-in 24-source configuration against the 100-asset registry.
-
-The audit must separate:
+Merge checkpoint:
 
 ```text
-issuer/protocol source reach
-reserve/assurance reach
-redemption/mint terms reach
-issuer lifecycle reach
-regulatory action/guidance reach
-platform-policy reach
-platform service-state reach
-regulatory-register reach
-EU/EEA market-access function reach
-accepted-baseline reach
+020957942615af875afef391c57f31cc8dd1abc2
+```
+
+Reviewed result:
+
+```text
+canonical stable assets: 100
+canonical organizations: 94
+registered official sources: 24
+assets reached by at least one registered source: 16
+registered asset reach: 16.00%
+uncovered assets: 84
+organizations reached: 12
+accepted sources: 0
+accepted asset reach: 0
+pending_initial_acceptance baselines: 24
+```
+
+Coverage remains multidimensional. PR #309 found zero current checked-in coverage for:
+
+```text
+platform-policy sources
+platform service-state sources
+regulatory-register sources
+market-access schema-capable sources
+accepted baselines
 ```
 
 A registered source is not an accepted baseline. Current issuer or protocol reach is not evidence that a platform's buy, sell, trade, deposit, withdrawal, custody, Earn, margin, conversion, direct mint, direct redemption, payment-rail, or network-specific policy is monitored.
 
-PR #309 is an audit/recalculation item. It must not add platform-policy sources, extend the market-access monitoring schema, schedule workflows, accept baselines, write canonical data, or edit the public article. Those changes remain reserved for PR #315-#318 according to the monitoring phase.
+PR #309 was audit-only. Source and schema expansion remain reserved for PR #315-#317 and bounded scheduled read-only operation remains PR #318.
 
 ## Phase B — non-UI release hardening
 
@@ -214,6 +233,8 @@ PR #312 reproducible build and generated-output audit
 PR #313 audited 100-record canonical checkpoint
 PR #314 non-UI release material
 ```
+
+Phase B establishes a reliable release boundary before monitoring and product expansion. It does not add comparison UI or the future canonical market-access record family.
 
 ## Phase C — monitoring expansion and operation
 
@@ -261,6 +282,8 @@ article stale-state review: weekly
 
 Monitoring may observe, compare, classify, and create private review material. It may not write canonical data, edit guides automatically, mutate accepted baselines, create branches or pull requests automatically, publish candidates, or deploy.
 
+Monitoring observation records are not canonical market-access records. The future canonical Market Access Record is defined and implemented only in the post-110 sequence under `docs/comparison-and-change-product-spec.md`.
+
 ## Phase D — statistics implementation
 
 The binding specification is `docs/stats-spec.md`.
@@ -273,6 +296,8 @@ PR #322 historical, deployment, organization, and data-quality statistics
 ```
 
 Statistics derive from reviewed canonical data and must not become price, market-cap, yield, safety, or risk rankings.
+
+The existing statistics phase remains unchanged. Future post-110 extensions for market-access coverage, facet-freshness bands, or comparison-readiness coverage require a separate reviewed specification amendment and must not delay PR #319-#322.
 
 ## Phase E — controlled growth from 100 to 110
 
@@ -287,13 +312,92 @@ PR #328 108 -> 110
 
 Each growth PR is limited to two new stable assets and must preserve all applicable supporting record groups. Unknown information remains explicit.
 
+Phase E closes at a reviewed 110-asset checkpoint. Phase F may not begin before that checkpoint is complete and the roadmap transition is recorded.
+
+## Phase F — Comparison Foundation
+
+Binding specification:
+
+```text
+docs/comparison-and-change-product-spec.md
+```
+
+```text
+PR #329 define Comparison Readiness contract and audit method
+PR #330 audit all 110 assets for comparison readiness
+PR #331 normalize comparison-critical gaps and validators
+PR #332 define canonical Market Access Record schema and governance
+PR #333 define facet-freshness derivation contract and validators
+```
+
+Phase F is data- and contract-first. It must not begin with Compare UI implementation.
+
+The audit must preserve separate analytical layers for:
+
+```text
+asset lifecycle
+issuance and redemption
+legal and regulatory state
+market access
+```
+
+The first three layers build on existing canonical record families. Market access becomes a separately governed canonical record family and must remain distinct from monitoring observations and editorial research matrices.
+
+## Phase G — Compare
+
+```text
+PR #334 deterministic comparison projection generator and machine-readable output
+PR #335 /compare/ v1
+PR #336 Compare presets
+```
+
+Compare is a factual side-by-side research tool. It must preserve unknown states, evidence scope, date scope, jurisdiction scope, and multi-select dimensions.
+
+Compare must not become a safety score, risk score, recommendation engine, live price table, market-cap ranking, or APY ranking.
+
+## Phase H — Change Research Tools
+
+```text
+PR #337 access and regulation index generator
+PR #338 Access & Regulation Explorer
+PR #339 change-timeline projection generator
+PR #340 Change Timeline UI
+```
+
+The Access & Regulation Explorer may combine discovery surfaces while keeping canonical market-access and regulatory records distinct.
+
+The Change Timeline is a derived projection across canonical record families. It must not replace those record families with a lossy generic event model.
+
+A universal green/red country availability map is not approved because access can differ by platform, legal entity, customer scope, function, supported network, and date.
+
+## Phase I — Reviewed Public Update Layer
+
+```text
+PR #341 SOG Registry Update feed/page
+PR #342 Monthly Stablecoin Change Log
+```
+
+Public update surfaces derive from reviewed merged canonical changes. They are not raw monitoring feeds or automatic news digests.
+
+The Monthly Stablecoin Change Log may cover launches, migrations, discontinuations, regulatory actions, market-access changes, redemption changes, major depeg events, and material reserve-framework changes when supported by reviewed canonical records.
+
+## Optional Phase J — Query Translation
+
+```text
+PR #343+ natural-language filter translation, only if separately approved after structured surfaces are stable
+```
+
+The natural-language layer may translate user requests into structured filters. It must not bypass canonical data, evidence, unknown-state semantics, or scoped query constraints.
+
+PR numbers after #342 are not preallocated beyond this optional marker.
+
 ## Operating rules
 
 - Repository specifications are the source of truth.
-- UI is maintenance-only unless the roadmap is deliberately amended.
+- UI is maintenance-only until the roadmap reaches an approved UI product phase or is deliberately amended.
 - Every non-trivial PR cites the exact specification, queue, audit, fixture, baseline, validator, publication-gate review, and research checkpoint it changes.
 - Unknown values remain unknown unless reviewed evidence supports a value.
-- Explicit unknown-value semantics are not placeholders and must not be erased by completeness audits.
+- Explicit unknown-value semantics are not placeholders and must not be erased by completeness or comparison audits.
 - Structural fake values in identity, URL, date, address, contract, or identifier fields are defects.
 - Market-access research preserves function-level, service-state, legal-entity, geographic, customer-scope, payment-rail, network, and date distinctions.
 - A platform licence is not proof of stablecoin function availability.
@@ -304,15 +408,19 @@ Each growth PR is limited to two new stable assets and must preserve all applica
 - Monitoring executions remain read-only and never update their own accepted baseline.
 - Registered monitoring reach is not accepted baseline coverage.
 - Issuer/protocol coverage is not platform-policy coverage.
+- Monitoring observations and editorial research matrices are not canonical market-access records.
+- Comparison projections derive from reviewed canonical data and preserve unresolved states.
+- Facet freshness is derived from authoritative record families; display timestamps must not be duplicated into root asset records merely for convenience.
 - Growth PRs contain no more than two new stable assets.
 - A phase transition updates this roadmap before the next implementation sequence continues.
 
 ## Immediate next items
 
 ```text
-1. Complete PR #309 monitoring coverage recalculation against all 100 assets.
-2. Preserve separate issuer/protocol, regulatory, platform-policy, register, and market-access function coverage conclusions.
-3. Merge PR #309 only after exact-head audit and repository CI pass.
-4. Continue with PR #310 Registry v2/v3 and machine-readable parity.
-5. Keep market-access source/schema expansion reserved for PR #317 and scheduled read-only operation for PR #318.
+1. Start PR #310 Registry v2/v3 and machine-readable parity from current main.
+2. Preserve Registry v2 readability while validating Registry v3 and public machine-readable parity.
+3. Continue PR #311-#314 non-UI release hardening without inserting future Compare or Market Access canonical work.
+4. Keep monitoring source/schema expansion in PR #315-#317 and scheduled read-only operation in PR #318.
+5. Keep PR #319-#322 statistics and PR #323-#328 controlled growth unchanged.
+6. After the reviewed 110-asset checkpoint, activate Phase F under docs/comparison-and-change-product-spec.md.
 ```
