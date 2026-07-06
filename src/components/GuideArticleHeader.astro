@@ -1,4 +1,6 @@
 ---
+import { guideLatestUpdates } from '../data/guideLatestUpdates';
+
 interface Props {
   category: string;
   title: string;
@@ -8,6 +10,7 @@ interface Props {
   updatedAt: string | null;
 }
 const { category, title, description, publishedAt, informationCurrentThrough, updatedAt } = Astro.props;
+const latestUpdate = guideLatestUpdates[title];
 ---
 <header class="guide-article-masthead">
   <div class="guide-article-overline"><span>Guides / {category}</span><a href="/guides/">Return to guide archive</a></div>
@@ -18,4 +21,10 @@ const { category, title, description, publishedAt, informationCurrentThrough, up
     <div><dt>Information current through</dt><dd>{informationCurrentThrough}</dd></div>
     <div><dt>Last updated</dt><dd>{updatedAt ?? publishedAt ?? 'Not recorded'}</dd></div>
   </dl>
+  {latestUpdate && (
+    <aside class="guide-article-update" aria-label="Latest reviewed update">
+      <div class="guide-article-overline"><span>{latestUpdate.title}</span><a href={latestUpdate.sourceUrl}>Source</a></div>
+      <p class="guide-article-deck">{latestUpdate.body}</p>
+    </aside>
+  )}
 </header>
