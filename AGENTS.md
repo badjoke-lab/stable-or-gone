@@ -33,6 +33,9 @@ docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
 docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
+docs/audited-100-asset-canonical-checkpoint-spec.md
+docs/migration/audited-100-asset-canonical-checkpoint.json
+docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
 ```
 
 Monitoring work must also read the monitoring specifications under `docs/quality/`. Statistics work must read `docs/stats-spec.md`. Phase F-I work must read `docs/comparison-and-change-product-spec.md` together with the current roadmap numbering amendment.
@@ -46,7 +49,7 @@ For PR numbering after the July 6 editorial insertions, `docs/roadmap.md` and th
 ## Current workstream
 
 ```text
-Current reviewed main checkpoint before PR #317: 47c110b69ec7fd61121cbeee247f4ef12d466117
+Current reviewed main checkpoint before PR #318: 9a106f0938e6323de833c941d6ae863050f1f03b
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -63,8 +66,9 @@ PR #313 first EEA-scope follow-up: closed without merge
 PR #314 corrected guide follow-up: complete
 PR #315 schedule amendment and PR renumbering: complete
 PR #316 counts, manifest, version, and provenance integrity: complete
-Active: PR #317 reproducible build and generated-output audit
-Next: PR #318 audited 100-record canonical checkpoint
+PR #317 reproducible build and generated-output audit: complete
+Active: PR #318 audited 100-record canonical checkpoint
+Next: PR #319 non-UI release material
 ```
 
 Approved sequence:
@@ -107,7 +111,8 @@ source_review_needed
 ## Release-integrity rules
 
 - `docs/migration/registry-release-integrity-baseline.json` remains binding for source-state count, manifest, version, route, and provenance semantics.
-- `docs/migration/reproducible-build-output-baseline.json` is binding for PR #317 and later reproducibility-sensitive release work until deliberately replaced.
+- `docs/migration/reproducible-build-output-baseline.json` remains binding for reproducibility-sensitive release work until deliberately replaced.
+- `docs/migration/audited-100-asset-canonical-checkpoint.json` is binding for PR #318 and the 100-asset release checkpoint.
 - `version.json` and `data/manifest.json` derive counts and build metadata from shared machine-readable getters.
 - The checked-in `data/generated/build-provenance.json` is an explicit sentinel template, not valid runtime provenance.
 - The sentinel carries current reviewed counts and route counts while commit, timestamp, hash, and canonical file count remain sentinel values.
@@ -120,13 +125,25 @@ source_review_needed
 
 - CI, reproducibility audit, and production deployment use the reviewed `package-lock.json` through `npm ci --no-audit --no-fund`.
 - Release-hardening CI, reproducibility audit, and production deployment pin Node 22.22.0.
-- Reproducibility audit and production deployment must provide deterministic build timestamp context.
+- Reproducibility audit and production deployment provide deterministic build timestamp context.
 - Production timestamp and epoch derive from the deployed commit.
 - `scripts/lib/build-timestamp.mjs` is the shared resolver for timestamped build generators covered by PR #317.
 - Normal site build must not overwrite the tracked historical `data/generated/registry-stats.json` quality-baseline input.
 - Two fixed-context builds must produce identical audited bytes for `dist/**`, generated build provenance, and deployment-taxonomy diagnostic output.
 - Protected historical baseline inputs must remain unchanged through both builds.
 - A reproducibility result is scoped to the pinned Linux Actions runtime, pinned Node runtime, reviewed lockfile, and fixed build context.
+
+## Audited checkpoint rules
+
+- The PR #318 checkpoint source commit is `9a106f0938e6323de833c941d6ae863050f1f03b`.
+- The checkpoint records per-group count, identity SHA-256, and content SHA-256 for canonical Registry v2 and additive Registry v3 source groups.
+- Global canonical content and identity digests remain separate contracts.
+- The checkpoint links exact release-integrity and reproducible-build baseline IDs.
+- The checkpoint links package-lock and package.json digests.
+- The accepted PR #317 reproducibility result remains part of the checkpoint contract.
+- PR #318 must not change canonical record content.
+- Production checkpoint verification must match the PR #317 merge commit and must run provenance and exact output-parity checks.
+- A later canonical content, package graph, or checkpoint baseline change requires deliberate checkpoint review rather than silent baseline drift.
 
 ## Market-access rules
 
