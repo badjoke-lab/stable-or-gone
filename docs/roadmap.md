@@ -1,12 +1,12 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-05  
+Updated: 2026-07-06  
 Status: canonical execution schedule — active
 
 ## Current position
 
 ```text
-Current main checkpoint: b03149c022b29d2b14e29948492cbacad5ea1d7e
+Current main checkpoint: 4d7b12936b5ca8497219c09392e743947c1109b9
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -18,14 +18,14 @@ Deployments: 140
 Detail routes: 366
 Production data and routes: healthy
 UI status: maintenance-only; no active redesign program
-Active workstream: EU/EEA stablecoin market-access editorial publication
-Current item: PR #307 reviewed EU stablecoin market-access guide and publication-gate record
-Next item: PR #308 known-unknown and placeholder integrity audit
+Active workstream: 100-record registry-wide audit
+Current item: PR #308 known-unknown and placeholder integrity audit
+Next item: PR #309 monitoring coverage recalculation for 100 assets
 ```
 
 The dedicated UI correction program ended after PR #295. Verified UI defects may be corrected through narrow maintenance PRs, but UI work must not displace the core data, monitoring, statistics, and record-growth schedule without a deliberate roadmap amendment.
 
-The market-access publication gate was reviewed on 2026-07-05 after checkpoints 01-03, current-state source rechecks, comparative-claim scoping, source-list review, and a renewed first-party Revolut policy search. The guide may proceed with bounded evidence layers and conservative reported Revolut treatment.
+The EU/EEA stablecoin market-access article was published through PR #307 after checkpoints 01-03, publication-gate review, a full prepublication re-audit, owner review, exact-head validation, and final article corrections. The article is a dated reviewed snapshot and is not an automatic monitoring output.
 
 ## Completed foundation
 
@@ -36,14 +36,15 @@ The market-access publication gate was reviewed on 2026-07-05 after checkpoints 
 - PR #300 completed reserve, redemption, and backing applicability audit.
 - PR #301 completed deployment and chain identity audit.
 - PR #302 completed lifecycle and relationship boundary audit.
-- PR #303 merged the EU stablecoin market-access research, publication, and monitoring specification and revised schedule.
-- PR #304 merged the first reviewed market-access matrix, two research checkpoints, current-service context, and publication-gate status.
-- PR #305 merged the checkpoint 03 schedule amendment and shifted downstream PR numbers once.
-- PR #306 merged the function-matrix checkpoint 03 and current platform service-state research.
+- PR #303 merged the EU market-access research, publication, and monitoring specification and revised schedule.
+- PR #304 merged the reviewed market-access matrix and checkpoints 01-02.
+- PR #305 merged the checkpoint 03 schedule amendment.
+- PR #306 merged function-matrix checkpoint 03 and current platform service-state research.
+- PR #307 published the reviewed EU/EEA stablecoin market-access guide.
 - Monitoring foundation and reviewed source coverage exist through the prior non-UI quality program.
 - The registry remains at the verified 100-record checkpoint.
 
-## EU stablecoin market-access insertion
+## EU stablecoin market-access insertion — complete
 
 ### PR #303 — specification and schedule amendment — complete
 
@@ -67,7 +68,7 @@ Merge checkpoint:
 7c0dc8be7cd09a95982fd65c3f818a2c5bea3bdf
 ```
 
-Merged research artifacts:
+Research artifacts:
 
 ```text
 data/editorial-research/eu-stablecoin-market-access.json
@@ -99,18 +100,6 @@ data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 ```
 
-Checkpoint 03 recorded, with scope boundaries preserved:
-
-```text
-OKX Europe asset-specific USDT and USDC buy/sell evidence
-Crypto.com Europe current general service and legal-entity context
-Bybit EU current general product/function context
-Gemini EEA customer-account closure context effective 2026-04-06
-Uphold Europe temporary service restrictions with general withdrawal availability
-Coinbase Germany first-party non-tradable status for USDT, DAI, and PYUSD
-continued unresolved first-party Revolut USDT policy details
-```
-
 Checkpoint 03 fixed three evidence layers:
 
 ```text
@@ -121,64 +110,33 @@ C. general service/licensing context without asset-specific function support
 
 Only A-level evidence may populate direct function comparisons. B-level evidence explains current access context. C-level evidence remains bounded context.
 
-### Publication gate review — complete
+### Publication gate and re-audit — complete
 
-Review record:
+Review records:
 
 ```text
 docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
+data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json
 ```
 
-Gate decision:
+The final article preserves issuer identity, token regulatory path, service legal entity, payment-services layer where applicable, platform service state, geography, customer cohort, function or access route, supported network, and effective date as separate dimensions.
+
+### PR #307 — reviewed EU stablecoin market-access guide — complete
+
+Merge checkpoint:
 
 ```text
-platform breadth floor:                         pass
-stable-asset breadth floor:                     pass
-function-level claim separation:                pass for claims selected for publication
-region/legal-entity scope preservation:         pass
-major platform source hierarchy:                pass with documented Tier C current-service exceptions
-ESMA/register cross-check:                      pass
-Revolut conservative treatment:                 pass
-source-list review:                             pass
-current service context vs historical policy:   pass
-publication-date current-state recheck:         pass on 2026-07-05
-publication gate:                               pass
+4d7b12936b5ca8497219c09392e743947c1109b9
 ```
 
-The pass does not turn every research row into a complete matrix. Publication is allowed because the article limits direct comparisons to supported function claims, treats platform-wide service state separately, and leaves unsupported cells unclaimed.
-
-### PR #307 — reviewed EU stablecoin market-access guide — active
-
-Target route:
+Published route:
 
 ```text
 /guides/eu-stablecoin-access-after-mica/
 ```
 
-Implementation scope:
-
-```text
-reviewed dated guide page
-guide catalog metadata
-homepage/guide-index discovery through existing catalog selectors
-related-guide links from material stablecoin dossiers
-dynamic sitemap inclusion through existing guide catalog mapping
-registry update entry
-guide and publication-gate validation
-```
-
-The guide must preserve:
-
-```text
-asset-specific function evidence
-current platform-wide service-state context
-general service/licensing context as bounded context
-EU/EEA/member-state/legal-entity distinctions
-historical Binance stablecoin policy separate from 2026 EU service context
-reported Revolut policy details separate from official CASP legal-entity evidence
-```
-
-The article is a dated reviewed editorial snapshot. It is not a live dashboard and must not update automatically from monitoring output.
+The article is a dated reviewed editorial snapshot current through 2026-07-06. Monitoring output never edits it automatically.
 
 ## Remaining Phase A — 100-record registry-wide audit
 
@@ -193,14 +151,36 @@ PR #301 deployment and chain identity
 PR #302 lifecycle and relationship boundaries
 ```
 
-Remaining after the article insertion:
+Active and next:
 
 ```text
-PR #308 known-unknown and placeholder integrity
-PR #309 monitoring coverage recalculation for 100 assets
+PR #308 known-unknown and placeholder integrity — active
+PR #309 monitoring coverage recalculation for 100 assets — next
 ```
 
-PR #309 must distinguish issuer/protocol monitoring coverage from EU market-access platform-policy coverage. Existing issuer-source reach is not evidence that a platform's buy, sell, trade, deposit, withdrawal, custody, Earn, margin, or conversion policy is monitored.
+### PR #308 — known-unknown and placeholder integrity — active
+
+Audit all canonical known-unknown records and structural placeholder risk across the current registry.
+
+Required checks:
+
+```text
+known-unknown ID uniqueness
+canonical stable-asset and issuer references
+100-asset known-unknown coverage
+severity and last-checked date validity
+specific, non-generic topics and descriptions
+normalized duplicate topic/description review queues
+stale-review inventory without silent resolution
+structural placeholder-like values in IDs, URLs, dates, addresses, contracts, and identifiers
+explicit unknown / not_recorded / not_applicable / source_review_needed value states preserved as intentional semantics
+```
+
+Unknown values remain unknown unless reviewed evidence resolves them. `null`, `unknown`, `not_recorded`, `not_applicable`, and `source_review_needed` are not to be erased merely to satisfy completeness. Structural placeholders such as fake URLs, TODO/TBD identity fields, or fabricated identifiers are defects.
+
+### PR #309 — monitoring coverage recalculation for 100 assets — next
+
+PR #309 must distinguish issuer/protocol monitoring coverage from EU market-access platform-policy coverage. Existing issuer-source reach is not evidence that a platform's buy, sell, trade, deposit, withdrawal, custody, Earn, margin, conversion, direct mint, direct redemption, payment-rail, or network-specific policy is monitored.
 
 ## Phase B — non-UI release hardening
 
@@ -237,7 +217,8 @@ issuer state
 geographic scope
 legal entity
 stablecoin
-product function
+product function or access route
+supported network where relevant
 announcement date
 effective date
 source identity
@@ -287,9 +268,11 @@ Each growth PR is limited to two new stable assets and must preserve all applica
 
 - Repository specifications are the source of truth.
 - UI is maintenance-only unless the roadmap is deliberately amended.
-- Every non-trivial PR cites the exact specification, queue, audit, fixture, baseline, validator, and research checkpoint it changes.
+- Every non-trivial PR cites the exact specification, queue, audit, fixture, baseline, validator, publication-gate review, and research checkpoint it changes.
 - Unknown values remain unknown unless reviewed evidence supports a value.
-- Market-access research preserves function-level, service-state, legal-entity, and geographic scope instead of flattening access into an allowed/banned label.
+- Explicit unknown-value semantics are not placeholders and must not be erased by completeness audits.
+- Structural fake values in identity, URL, date, address, contract, or identifier fields are defects.
+- Market-access research preserves function-level, service-state, legal-entity, geographic, customer-scope, payment-rail, network, and date distinctions.
 - A platform licence is not proof of stablecoin function availability.
 - A Global product page is not proof of EU/EEA service scope.
 - A member-state page is not automatically an EEA-wide statement.
@@ -302,9 +285,9 @@ Each growth PR is limited to two new stable assets and must preserve all applica
 ## Immediate next items
 
 ```text
-1. Validate PR #307 on the exact article head.
-2. Review the rendered guide route, related-guide links, catalog discovery, sitemap inclusion, and registry-update entry.
-3. Merge PR #307 only if all required checks pass.
-4. Resume the core registry-wide audit at PR #308.
-5. Preserve the approved market-access monitoring extension for PR #317-#318 rather than adding ad-hoc monitoring writes during article publication.
+1. Complete PR #308 known-unknown and placeholder integrity audit.
+2. Preserve unresolved review queues rather than filling them with guessed values.
+3. Merge PR #308 only after exact-head audit and repository CI pass.
+4. Continue with PR #309 monitoring coverage recalculation for all 100 assets.
+5. Preserve the approved market-access monitoring extension for PR #317-#318.
 ```
