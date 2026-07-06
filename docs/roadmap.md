@@ -6,11 +6,11 @@ Status: canonical execution schedule — active
 ## Current position
 
 ```text
-Audited canonical source checkpoint before PR #318:
+Audited canonical source checkpoint:
 9a106f0938e6323de833c941d6ae863050f1f03b
 
-Current production source after inserted maintenance:
-547c639df35e39f657a77bbfd82a49a988877367
+PR #318 merge checkpoint:
+b275178f3816d1ebf3828f223b546f04de1edae7
 
 Canonical stable assets: 100
 Organizations: 94
@@ -21,20 +21,17 @@ Public source identities: 456
 Evidence relations: 502
 Deployments: 140
 Detail routes: 366
-Production canonical data and routes: unchanged and healthy
 UI status: maintenance-only; no active redesign program
 
 PR #316 counts, manifest, version, and provenance integrity: complete
 PR #317 reproducible build and generated-output audit: complete
-PR #318 audited 100-record canonical checkpoint: active
+PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide article spacing maintenance: complete, inserted work
 
 Active workstream: non-UI release hardening
-Current item: PR #318 audited 100-record canonical checkpoint
-Next planned item: PR #320 non-UI release material
+Current item: PR #320 non-UI release material
+Next item: PR #321 100-asset monitoring baseline synchronization
 ```
-
-The dedicated UI correction program ended after PR #295. Verified UI defects may still be corrected through narrow maintenance PRs, but inserted maintenance must be recorded and must not silently consume planned roadmap work.
 
 Current numbering authority:
 
@@ -43,9 +40,9 @@ docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
 docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 ```
 
-For PR numbering, this roadmap and the active amendments supersede older numeric labels in subordinate implementation plans. Work order and scope remain unchanged unless deliberately amended.
+This roadmap and the active amendments supersede older numeric labels in subordinate plans. Work order and scope remain unchanged unless deliberately amended.
 
-## Completed foundation
+## Completed sequence through the 100-asset checkpoint
 
 ```text
 PR #296  resume core workstream and synchronize repository authority
@@ -69,14 +66,15 @@ PR #314  corrected guide follow-up
 PR #315  schedule amendment and PR renumbering
 PR #316  counts, manifest, version, and provenance integrity
 PR #317  reproducible build and generated-output audit
+PR #318  audited 100-record canonical checkpoint
 PR #319  guide article list clipping and spacing maintenance — inserted maintenance
 ```
 
-The registry remains at the reviewed 100-record checkpoint.
+The registry remains at the reviewed 100-asset checkpoint while Phase B closes.
 
-## 100-record audit boundaries
+## 100-record quality boundaries
 
-### Known-unknown integrity
+### Known unknowns
 
 ```text
 stable assets: 100
@@ -141,7 +139,7 @@ deployment view rows: 140
 
 The public machine-readable contract remains Registry v2-compatible with additive Registry v3 summary data.
 
-## PR #316 — counts, manifest, version, and provenance integrity — complete
+## PR #316 — release integrity — complete
 
 Binding files:
 
@@ -159,7 +157,7 @@ Merged checkpoint:
 
 PR #316 tied canonical counts, public machine-readable count surfaces, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
 
-## PR #317 — reproducible build and generated-output audit — complete
+## PR #317 — reproducible build — complete
 
 Binding files:
 
@@ -175,7 +173,7 @@ Merged checkpoint:
 9a106f0938e6323de833c941d6ae863050f1f03b
 ```
 
-Accepted reproducibility result:
+Accepted result:
 
 ```text
 audited PR head: 41ae5cdc07f8e5bae74642cd6f8ada3c7ebba96f
@@ -186,9 +184,7 @@ failures: 0
 reproducible: true
 ```
 
-PR #317 completed dependency-lock, pinned-runtime, deterministic-timestamp, generated-output-role, protected-input, and two-pass byte-reproducibility hardening.
-
-## PR #318 — audited 100-record canonical checkpoint — active
+## PR #318 — audited 100-asset canonical checkpoint — complete
 
 Binding files:
 
@@ -198,7 +194,13 @@ docs/migration/audited-100-asset-canonical-checkpoint.json
 docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
 ```
 
-Observed source checkpoint:
+Merge checkpoint:
+
+```text
+b275178f3816d1ebf3828f223b546f04de1edae7
+```
+
+Observed checkpoint:
 
 ```text
 source commit: 9a106f0938e6323de833c941d6ae863050f1f03b
@@ -207,35 +209,7 @@ canonical content SHA-256: 8fa08219d1e587a0628576cdfcf0e64722348282897558016651a
 canonical identity SHA-256: cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
 ```
 
-Purpose:
-
-- record per-group count, identity digest, and content digest;
-- record global canonical identity and content digests;
-- link the PR #316 release-integrity baseline;
-- link the PR #317 reproducible-build baseline and accepted output result;
-- bind package-lock and package manifest digests;
-- validate the checkpoint deterministically in general CI;
-- verify current production public output, provenance, exact route parity, and canonical checkpoint hash/file-count parity.
-
-Production may contain a later noncanonical release, such as the merged PR #319 guide-layout fix, provided the canonical checkpoint hash, canonical file count, reviewed counts, routes, provenance, and exact public output parity remain valid.
-
-Completion condition:
-
-```text
-binding checkpoint exists
-checkpoint generator exists
-checkpoint validator exists
-general CI runs checkpoint validation
-dedicated checkpoint workflow exists
-source counts and digests match checkpoint
-release and reproducibility baseline IDs match
-package digests match
-accepted PR #317 reproducibility result matches
-current production passes public output and provenance verification
-production canonical hash and file count match the audited checkpoint
-roadmap and workstream guard show PR #318 active / PR #320 next planned item
-full CI and checkpoint workflow green
-```
+PR #318 bound source counts, group identity/content digests, global canonical identity/content digests, package graph linkage, release-integrity baseline, reproducible-build baseline, accepted reproducibility result, current production provenance, exact output parity, and canonical checkpoint parity.
 
 ## PR #319 — guide article spacing maintenance — complete, inserted work
 
@@ -246,21 +220,64 @@ PR #319 Fix guide article list clipping and spacing
 Merge commit: 547c639df35e39f657a77bbfd82a49a988877367
 ```
 
-This was a narrow guide presentation fix and did not perform the planned non-UI release-material work. The displaced work and every later unused planned item are renumbered by:
+This was a narrow guide presentation fix and did not perform the planned non-UI release-material work. Remaining unused work was renumbered by:
 
 ```text
 docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 ```
 
-## Phase B — remaining non-UI release hardening
+## PR #320 — non-UI release material — active
+
+Binding specification:
 
 ```text
-PR #318 audited 100-record canonical checkpoint — active
-PR #319 guide article spacing maintenance — complete, inserted work
-PR #320 non-UI release material
+docs/non-ui-release-material-spec.md
 ```
 
-Phase B establishes a reliable release boundary before monitoring and product expansion. It does not add Compare UI or the future canonical Market Access Record family.
+Required outputs:
+
+```text
+README.md
+docs/releases/100-asset-checkpoint-2026-07-06.md
+data/registry-updates.json
+scripts/validate-non-ui-release-material.mjs
+```
+
+Purpose:
+
+- replace stale 92-asset README claims with the reviewed 100-asset checkpoint;
+- publish a repository release note tied to the audited checkpoint;
+- add one reviewed checkpoint entry to the existing public update history;
+- expose existing machine-readable entry points without creating a second count authority;
+- state public data-safety and monitoring boundaries explicitly;
+- state the approved next roadmap sequence without claiming unimplemented products.
+
+PR #320 does not modify canonical asset, organization, event, evidence, reserve, relationship, deployment, or Registry v3 source records.
+
+Completion condition:
+
+```text
+README matches the binding checkpoint
+release note matches checkpoint counts, digests, baselines, and reproducibility result
+reviewed update entry exists exactly once
+release material validator passes
+general CI runs release material validation
+PR #318 remains reproducibly and canonically protected
+authority shows PR #320 active / PR #321 next
+full CI and relevant independent workflows green
+```
+
+## Phase B — non-UI release hardening
+
+```text
+PR #316 counts, manifest, version, and provenance integrity — complete
+PR #317 reproducible build and generated-output audit — complete
+PR #318 audited 100-record canonical checkpoint — complete
+PR #319 guide article spacing maintenance — complete, inserted work
+PR #320 non-UI release material — active
+```
+
+Phase B closes when PR #320 merges.
 
 ## Phase C — monitoring expansion and operation
 
@@ -280,11 +297,11 @@ platform policy sources: daily
 platform announcement sources: daily
 news discovery: daily
 ESMA and regulatory registers: weekly
-issuer regulatory/transparency sources: weekly unless a stricter cadence is already defined
+issuer regulatory/transparency sources: weekly unless stricter cadence applies
 article stale-state review: weekly
 ```
 
-Monitoring may observe, compare, classify, and create private review material. It may not write canonical data, edit guides automatically, mutate accepted baselines, create branches or pull requests automatically, publish candidates, or deploy.
+Monitoring may observe, compare, classify, and create private review material. It may not write canonical data, edit guides automatically, mutate accepted baselines, create branches or canonical PRs automatically, publish candidates, or deploy.
 
 ## Phase D — statistics implementation
 
@@ -316,7 +333,7 @@ PR #334 108 -> 110
 
 Each growth PR is limited to two new stable assets and must preserve all applicable supporting record groups. Unknown information remains explicit.
 
-Phase E closes at a reviewed 110-asset checkpoint. Phase F may not begin before that checkpoint is complete and the roadmap transition is recorded.
+Phase E closes at a reviewed 110-asset checkpoint. Phase F may not begin before that checkpoint is complete.
 
 ## Phase F — Comparison Foundation
 
@@ -393,9 +410,9 @@ The natural-language layer may translate requests into structured filters. It mu
 ## Immediate next items
 
 ```text
-1. Complete PR #318 audited 100-record canonical checkpoint.
-2. Start PR #320 non-UI release material from current main.
-3. Continue monitoring expansion in PR #321-#323 and scheduled read-only operation in PR #324.
+1. Complete PR #320 non-UI release material.
+2. Start PR #321 100-asset monitoring baseline synchronization.
+3. Continue monitoring expansion in PR #322-#323 and scheduled read-only operation in PR #324.
 4. Continue statistics in PR #325-#328.
 5. Continue candidate audit and controlled growth in PR #329-#334.
 6. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
