@@ -1,8 +1,9 @@
-import { MAIN_ROUTES, PROJECT, getRecordCountBreakdown, getRecordCounts } from '../lib/machine-readable';
+import { MAIN_ROUTES, PROJECT, getRecordCountBreakdown, getRecordCounts, getRegistryV3Summary } from '../lib/machine-readable';
 
 export function GET() {
   const counts = getRecordCounts();
   const breakdown = getRecordCountBreakdown();
+  const registryV3 = getRegistryV3Summary();
   const body = [
     'Stable or Gone',
     '',
@@ -15,11 +16,15 @@ export function GET() {
     `Organizations: ${breakdown.organizations}`,
     `Events: ${counts.events}`,
     `Evidence records: ${counts.evidence}`,
+    `Registry v3 legal profiles: ${registryV3.record_counts.legal_profiles}`,
+    `Registry v3 reserve components: ${registryV3.record_counts.reserve_components}`,
+    `Registry v3 income profiles: ${registryV3.record_counts.income_profiles}`,
     '',
     'Important routes:',
     ...MAIN_ROUTES,
     '',
     'Safety note: Public files expose reviewed public registry information only. They do not include unreviewed candidates, internal monitoring output, or non-public review material.',
+    'Registry note: Registry v3 is exposed as an additive reviewed summary while the existing v2 public contract remains compatible during the parity phase.',
     'Interpretation note: This registry is not live market data, investment advice, legal advice, tax advice, wallet support, issuer support, or redemption support.',
     '',
   ].join('\n');
