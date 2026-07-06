@@ -71,6 +71,8 @@ jobs:
         run: npm run validate:release-integrity
       - name: Validate reproducible build contract
         run: npm run validate:reproducible-build
+      - name: Validate audited 100-asset canonical checkpoint
+        run: node scripts/validate-audited-100-checkpoint.mjs
       - name: Validate final state
         run: npm run validate:final
       - name: Validate UI v3 cleanup
