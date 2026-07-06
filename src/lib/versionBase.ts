@@ -7,6 +7,7 @@ import {
   getRecordCountBreakdown,
   getRecordCounts,
   getRecordsLastReviewedAt,
+  getRegistryV3Summary,
 } from '../lib/machine-readable';
 import { getEvidenceSourceIdentitySummary } from './data/evidenceSources';
 
@@ -29,6 +30,7 @@ export function GET() {
       records_last_reviewed_at: getRecordsLastReviewedAt(),
       record_counts: getRecordCounts(),
       record_count_breakdown: getRecordCountBreakdown(),
+      registry_v3: getRegistryV3Summary(),
       evidence_source_identity: evidenceSourceIdentity,
     },
     routes: ROUTES,
