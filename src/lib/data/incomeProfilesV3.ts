@@ -14,6 +14,10 @@ import batchMB from '../../../data/income-profiles-v3-m-b.json';
 import batchN from '../../../data/income-profiles-v3-n.json';
 import batchO from '../../../data/income-profiles-v3-o.json';
 import batchP from '../../../data/income-profiles-v3-p.json';
+import batchQ from '../../../data/yield-profiles-v3-q.json';
+import batchR from '../../../data/r-returns.json';
+import batchS from '../../../data/s-returns.json';
+import batchT from '../../../data/batch-t-income.json';
 import type { YieldSource, AccrualMechanism, RateType } from '../schema/registry-v3';
 
 export type IncomeAvailability = 'native' | 'via_wrapper' | 'none' | 'unknown';
@@ -26,9 +30,31 @@ export type IncomeProfileV3 = {
   rate: RateType;
   related_asset_ids: string[];
   evidence_ids: string[];
+  notes?: string;
 };
 
-const profiles = [...batchA, ...batchB, ...batchC, ...batchD, ...batchE, ...batchF, ...batchG, ...batchH, ...batchJ, ...batchK, ...batchL, ...batchMA, ...batchMB, ...batchN, ...batchO, ...batchP] as IncomeProfileV3[];
+const profiles = [
+  ...batchA,
+  ...batchB,
+  ...batchC,
+  ...batchD,
+  ...batchE,
+  ...batchF,
+  ...batchG,
+  ...batchH,
+  ...batchJ,
+  ...batchK,
+  ...batchL,
+  ...batchMA,
+  ...batchMB,
+  ...batchN,
+  ...batchO,
+  ...batchP,
+  ...batchQ,
+  ...batchR,
+  ...batchS,
+  ...batchT
+] as IncomeProfileV3[];
 
 export function getIncomeProfilesV3(): IncomeProfileV3[] {
   return profiles.map((row) => ({
