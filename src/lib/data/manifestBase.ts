@@ -7,6 +7,7 @@ import {
   getBuildMetadata,
   getRecordCountBreakdown,
   getRecordCounts,
+  getRegistryV3Summary,
 } from '../../lib/machine-readable';
 import { getEvidenceSourceIdentitySummary } from './evidenceSources';
 
@@ -43,6 +44,7 @@ export function GET() {
         'income_profile',
       ],
     },
+    registry_v3: getRegistryV3Summary(),
     public_files: {
       version: '/version.json',
       manifest: '/data/manifest.json',
