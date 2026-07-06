@@ -21,13 +21,14 @@ When documents disagree, use this order:
 6. Supporting audits, inventories, baselines, fixtures, publication-gate reviews, and research checkpoints.
 7. Conversation history and unmerged drafts.
 
-Current schedule amendment:
+Current schedule amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
+docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 ```
 
-For PR numbering after the July 6 editorial insertions, the roadmap and that amendment supersede older numeric labels in subordinate plans unless the roadmap is deliberately amended again.
+For PR numbering after inserted editorial or maintenance work, the roadmap and every active amendment named there supersede older numeric labels in subordinate plans unless the roadmap is deliberately amended again.
 
 ## 3. Governing specifications
 
@@ -54,7 +55,7 @@ docs/migration/registry-v3-parity-baseline.json
 docs/stats-spec.md
 ```
 
-Monitoring semantics remain governed by the monitoring specifications under `docs/quality/`. Post-110 product semantics remain governed by `docs/comparison-and-change-product-spec.md` together with the current numbering amendment.
+Monitoring semantics remain governed by the monitoring specifications under `docs/quality/`. Post-110 product semantics remain governed by `docs/comparison-and-change-product-spec.md` together with the active roadmap amendments.
 
 ## 4. Mandatory reading order
 
@@ -130,14 +131,29 @@ PR #315 schedule amendment and PR renumbering complete
 PR #316 counts, manifest, version, and provenance integrity complete
 PR #317 reproducible build and generated-output audit complete
 PR #318 audited 100-record canonical checkpoint active
-PR #319 non-UI release material next
-PR #316-#333 current pre-110 sequence
-PR #334-#347 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
+PR #319 guide article spacing maintenance complete, inserted work
+PR #320 non-UI release material next planned item
+PR #318-#334 current pre-110 sequence after consumed PR #319
+PR #335-#348 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
 ```
 
 Do not rewrite completed history to make a changed plan appear unchanged. Record consumed PR numbers, closed attempts, inserted work, and phase transitions explicitly.
 
-## 8. Release-integrity governance
+## 8. Inserted-work numbering rule
+
+When urgent factual, editorial, security, or narrow verified-maintenance work consumes a PR number allocated to the roadmap:
+
+```text
+1. record the actual merged or closed work;
+2. do not mark the displaced planned work complete;
+3. move the displaced planned item to the next unused PR number;
+4. renumber every later unused planned item without changing order or scope;
+5. update roadmap, active amendments, authority docs, and workstream guards before planned work resumes.
+```
+
+PR #319 is governed by `docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md`.
+
+## 9. Release-integrity governance
 
 PR #316 is governed by:
 
@@ -157,7 +173,7 @@ Binding rules:
 - generated detail routes must match canonical stablecoin, organization, and event sets;
 - candidate, monitoring, editorial-research, and private material remain outside canonical public count surfaces and provenance boundaries.
 
-## 9. Reproducible-build governance
+## 10. Reproducible-build governance
 
 PR #317 is governed by:
 
@@ -179,7 +195,7 @@ Binding rules:
 - reproducibility claims are scoped to the pinned Actions runtime class, Node runtime, lockfile, and fixed build context;
 - production provenance and output-parity checks remain required.
 
-## 10. Audited checkpoint governance
+## 11. Audited checkpoint governance
 
 PR #318 is governed by:
 
@@ -199,11 +215,10 @@ Binding rules:
 - package-lock and package manifest digests are checkpoint inputs;
 - the accepted PR #317 two-pass reproducibility result is checkpointed explicitly;
 - PR #318 must not change canonical record content;
-- checkpoint validation regenerates current observations and compares them with the binding checkpoint;
-- production verification must match the checkpoint source commit and run provenance plus exact output-parity checks;
+- production verification may observe a later noncanonical `main` release, but it must still pass public output verification, provenance verification, exact route/output parity, canonical checkpoint hash parity, canonical file-count parity, and reviewed canonical count parity;
 - later canonical content, package graph, baseline identity, or checkpoint digest changes require deliberate review and must not silently overwrite this checkpoint.
 
-## 11. Unknown-value and placeholder governance
+## 12. Unknown-value and placeholder governance
 
 Protected unresolved states include:
 
@@ -219,7 +234,7 @@ These states are not structural placeholders and must not be overwritten merely 
 
 Structural placeholders such as TODO/TBD identity fields, fake URLs, fabricated dates, and placeholder identifiers are defects.
 
-## 12. Monitoring coverage governance
+## 13. Monitoring coverage governance
 
 Coverage remains multidimensional:
 
@@ -244,14 +259,21 @@ Rules:
 - regulatory action pages are not regulatory-register coverage;
 - a generic issuer or product page is not function-level market-access coverage;
 - Zero coverage for a required domain is a valid audit result and must not be filled by inference;
-- monitoring baseline synchronization is PR #320;
-- source and schema expansion is PR #321-#322;
-- scheduled read-only operation is PR #323;
+- monitoring baseline synchronization is PR #321;
+- reserve and redemption source expansion is PR #322;
+- lifecycle, regulatory, and EU market-access source/schema expansion is PR #323;
+- scheduled read-only operation is PR #324;
 - monitoring output remains private candidate material until reviewed.
 
-## 13. Comparison and change-product governance
+## 14. Statistics governance
 
-Phase F-I remains governed by `docs/comparison-and-change-product-spec.md` and the current numbering amendment.
+`docs/stats-spec.md` is binding for PR #325-#328.
+
+Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
+
+## 15. Comparison and change-product governance
+
+Phase F-I remains governed by `docs/comparison-and-change-product-spec.md` and the active numbering amendments.
 
 Binding boundaries:
 
@@ -264,7 +286,7 @@ Binding boundaries:
 - public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds;
 - safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
 
-## 14. Data preservation
+## 16. Data preservation
 
 UI, quality, taxonomy, monitoring, statistics, growth, editorial, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
 
