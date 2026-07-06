@@ -1,0 +1,29 @@
+name: Monitoring coverage recalculation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate 100-asset monitoring coverage recalculation
+        run: node scripts/validate-monitoring-coverage-recalculation-100-assets.mjs
+      - name: Upload monitoring coverage recalculation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-coverage-recalculation-${{ github.run_id }}
+          if-no-files-found: error
+          path: data/generated/monitoring-coverage-recalculation-100-assets.json
