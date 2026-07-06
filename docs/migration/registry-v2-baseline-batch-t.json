@@ -2,8 +2,8 @@
   "schema_version":"1.0",
   "base_manifest":"docs/migration/registry-v2-baseline.json",
   "batch_id":"batch_021",
-  "defer_legacy_v3_full_coverage":true,
-  "deferred_v3_reason":"Batch T supplemental rows remain outside the older full-coverage manifests until the planned parity phase.",
+  "defer_legacy_v3_full_coverage":false,
+  "deferred_v3_reason":"Registry v3 supplemental rows were integrated into the canonical v3 manifests during the 100-record parity phase.",
   "minimum_counts":{"stablecoins":100,"organizations":94,"relationships":110,"classifications":100,"profiles":100,"events":172,"event_details":172,"evidence":501,"evidence_relations":501,"reserve_reports":108,"known_unknowns":289,"regulatory_notes":9,"deployments":140,"classification_extensions":2},
   "data_group_additions":{
     "stablecoins":["data/stablecoins-batch-t.json"],
