@@ -12,8 +12,8 @@ This program governs the core workstream after the dedicated UI correction progr
 100-record registry-wide audit through lifecycle boundaries — complete
 -> EU market-access specification and research — complete
 -> reviewed market-access article publication — complete
--> known-unknown and placeholder integrity audit — active
--> monitoring coverage recalculation
+-> known-unknown and placeholder integrity audit — complete
+-> monitoring coverage recalculation — active
 -> non-UI release hardening
 -> monitoring expansion and scheduled read-only operation
 -> statistics implementation
@@ -46,14 +46,10 @@ Deployments: 140
 Detail routes: 366
 Growth D: complete
 100-record production verification: complete
-PR #302 lifecycle and relationship boundary audit: complete
-PR #303 EU market-access specification amendment: complete
-PR #304 reviewed matrix and checkpoints 01-02: complete
-PR #305 checkpoint 03 schedule amendment: complete
-PR #306 function-matrix checkpoint 03: complete
 PR #307 reviewed article: complete
-PR #308 known-unknown and placeholder integrity audit: active
-PR #309 monitoring coverage recalculation: next
+PR #308 known-unknown and placeholder integrity audit: complete
+PR #309 monitoring coverage recalculation: active
+PR #310 Registry v2/v3 and machine-readable parity: next
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
 Growth beyond 100: not yet authorized until candidate audit phase
@@ -104,6 +100,9 @@ docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 - A member-state page is not automatically an EEA-wide statement.
 - Historical platform policy must be separated from later service-state changes.
 - A market-access source change must not edit the public guide automatically.
+- Registered source reach is not accepted baseline coverage.
+- Issuer/protocol monitoring reach is not platform-policy coverage.
+- Regulatory action pages are not regulatory-register coverage.
 - No growth PR may contain more than two new stable assets.
 - Growth must use a fresh branch from current `main` and preserve all applicable record groups.
 - Ordinary merged changes publish from `main` under `docs/deployment-policy.md`.
@@ -120,11 +119,8 @@ PR #278         rebuilt Growth D to 100 records from current implementation line
 PR #279-#280   production verification and count-aware closure hardening
 PR #284-#295   UI recovery and maintenance fixes; dedicated UI program now stopped
 PR #296-#302   registry-wide audit through lifecycle and relationship boundaries
-PR #303         EU stablecoin market-access specification
-PR #304         reviewed matrix and checkpoints 01-02
-PR #305         checkpoint 03 schedule amendment
-PR #306         function-matrix checkpoint 03
-PR #307         reviewed article publication after gate, re-audit, and final review
+PR #303-#307   EU market-access specification, research, re-audit, and publication
+PR #308         known-unknown and placeholder integrity audit
 ```
 
 Completed monitoring architecture already includes:
@@ -169,68 +165,72 @@ C. general service/licensing context without asset-specific function support
 
 The article remains separate from raw monitoring output. Future material changes require reviewed source confirmation, editorial revision, date update, and revision-history entry.
 
-## Remaining Phase A — 100-record registry-wide audit
+## Phase A closure item — PR #309 monitoring coverage recalculation
 
-Completed audit sequence:
-
-```text
-PR #297 identity uniqueness and lineage
-PR #298 organization and relationship integrity
-PR #299 evidence and source-identity integrity
-PR #300 reserve, redemption, and backing applicability
-PR #301 deployment and chain identity
-PR #302 lifecycle and relationship boundaries
-```
-
-Remaining:
+PR #308 completed known-unknown and placeholder integrity with:
 
 ```text
-PR #308 known-unknown and placeholder integrity — active
-PR #309 monitoring coverage recalculation for 100 assets — next
+stable assets: 100
+known unknowns: 289
+assets with known-unknown coverage: 100
+stale-over-30-days review queue: 44
+structural placeholder findings: 0
 ```
 
-### PR #308 audit contract
+PR #309 is the final audit/recalculation item before non-UI release hardening.
 
-The audit covers all canonical known-unknown rows and structural placeholder risk across current baseline data groups.
+### PR #309 audit contract
 
-Required checks:
+Recalculate current coverage from the checked-in 24-source monitoring allowlist and current baseline state against all 100 canonical assets.
+
+Coverage dimensions must be reported independently:
 
 ```text
-289 known-unknown rows at the current 100-asset checkpoint
-all 100 assets covered by at least one known-unknown row
-unique known-unknown IDs
-valid stablecoin references
-valid issuer references when present
-severity enum validity
-valid, non-future last_checked_at dates
-specific non-generic topics
-meaningful non-generic descriptions
-normalized duplicate asset/topic review queue
-normalized duplicate-description review queue
-stale-over-30-days review queue
-structural placeholder scan over identity, URL, date, address, contract, and identifier fields
-explicit value-state inventory for source_review_needed / unknown / not_recorded / not_applicable
+issuer/protocol source reach
+reserve/assurance reach
+redemption/mint terms reach
+issuer lifecycle reach
+regulatory action/guidance reach
+platform-policy reach
+platform service-state reach
+regulatory-register reach
+EU/EEA market-access function reach
+accepted-baseline reach
 ```
 
-The audit must distinguish intentional unknown semantics from structural placeholders.
-
-Intentional unresolved values:
+The audit must preserve these distinctions:
 
 ```text
-null
-unknown
-not_recorded
-not_applicable
-source_review_needed
+registered source != accepted baseline
+pending baseline != accepted monitoring coverage
+issuer/protocol page != platform-policy coverage
+regulatory action page != live regulatory-register coverage
+generic product page != function-level market-access coverage
+source count != completeness score
 ```
 
-These are not defects merely because they are unresolved. Structural fake values such as TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses/contracts/identifiers are defects.
+PR #309 may expose zero-coverage domains. It must not fill them through inference.
 
-Stale review age is a bounded queue and does not authorize automatic resolution, deletion, or replacement of a known unknown.
+Explicit non-goals:
 
-### PR #309 monitoring coverage recalculation
+```text
+no new platform-policy source additions
+no market-access schema extension
+no baseline acceptance
+no workflow scheduling
+no canonical writes
+no automatic guide edits
+no publication or deployment action
+```
 
-PR #309 must distinguish issuer/protocol source reach from platform-policy monitoring coverage. Existing issuer monitoring is not proof that buy, sell, trade, deposit, withdrawal, custody, Earn, margin, conversion, direct mint, direct redemption, payment rail, or network-specific access policy is monitored.
+Those changes remain reserved for:
+
+```text
+PR #315 baseline synchronization
+PR #316 reserve and redemption source expansion
+PR #317 lifecycle, regulatory, and EU market-access source/schema expansion
+PR #318 bounded scheduled read-only monitoring
+```
 
 ## Phase B — non-UI release hardening
 
