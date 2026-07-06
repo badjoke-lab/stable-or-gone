@@ -58,6 +58,14 @@ jobs:
         run: npm run validate:evidence-relations-v2
       - name: Validate Registry v3 foundation
         run: npm run validate:v3
+      - name: Validate Registry v3 deployment view
+        run: npm run validate:deployments-v3
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
+      - name: Validate Registry v3 migration audit
+        run: npm run validate:migration-v3
+      - name: Validate Registry v2/v3 machine-readable parity
+        run: npm run validate:parity
       - name: Validate final state
         run: npm run validate:final
       - name: Validate UI v3 cleanup

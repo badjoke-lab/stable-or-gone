@@ -35,8 +35,8 @@ const organizationIds = new Set(organizations.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 const eventDetailIds = new Set(eventDetails.map((row) => row.id));
 
-fail(stablecoins.length === 94, `canonical stablecoin count must be 94, found ${stablecoins.length}`);
-fail(baseline.minimum_counts?.stablecoins === 94, 'baseline minimum stablecoin count must be 94');
+fail(stablecoins.length === 100, `canonical stablecoin count must be 100 after parity integration, found ${stablecoins.length}`);
+fail(baseline.minimum_counts?.stablecoins === 100, 'baseline minimum stablecoin count must be 100 after parity integration');
 fail(read('data/stablecoins-batch-q.json').length === 2, 'Batch Q must contain two stablecoins');
 fail(read('data/organizations-batch-q.json').length === 3, 'Batch Q must contain three organizations');
 fail(read('data/relationships-batch-q.json').length === 3, 'Batch Q must contain three relationships');
@@ -49,7 +49,7 @@ fail(read('data/reserve-reports-batch-q.json').length === 2, 'Batch Q must conta
 fail(read('data/q-open-items.json').length === 10, 'Batch Q must contain ten explicit open items');
 fail(read('data/deployments-batch-q.json').length === 2, 'Batch Q must contain two deployments');
 fail(legal.length === 2 && yieldProfiles.length === 2 && reserveComponents.length === 2, 'Batch Q supplemental layers must cover both assets');
-fail(overlay.defer_legacy_v3_full_coverage === true, 'legacy full-coverage deferral must be explicit');
+fail(overlay.defer_legacy_v3_full_coverage === false, 'Batch Q v3 parity deferral must be closed');
 
 for (const id of qCoinIds) {
   const coin = stablecoinById.get(id);
@@ -92,4 +92,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log('Batch 18 Growth A valid: IST and USN promoted as discontinued historical assets; canonical count is 94.');
+console.log('Batch 18 Growth A valid at the 100-asset parity checkpoint: IST and USN remain canonical discontinued historical assets.');
