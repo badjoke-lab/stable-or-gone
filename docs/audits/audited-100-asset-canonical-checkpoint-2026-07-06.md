@@ -8,7 +8,9 @@ Source checkpoint: `9a106f0938e6323de833c941d6ae863050f1f03b`
 
 This report records the audited 100-asset canonical checkpoint after source-integrity hardening in PR #316 and reproducible-build hardening in PR #317.
 
-The checkpoint does not add data. It binds the reviewed registry state to compact deterministic digests and verifies that source, release-integrity, reproducibility, and production layers agree before PR #319 prepares non-UI release material.
+The checkpoint does not add data. It binds the reviewed registry state to compact deterministic digests and verifies that source, release-integrity, reproducibility, and current production layers agree before PR #320 prepares non-UI release material.
+
+PR #319 was consumed by a narrow guide-layout maintenance fix and did not change the canonical registry checkpoint.
 
 ## Binding checkpoint
 
@@ -55,9 +57,9 @@ canonical identity SHA-256:
 cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
 ```
 
-The content digest covers the canonical Registry v2 files, additive Registry v3 files, income-profile files, and approved compatibility overlays used by the current canonical provenance boundary.
+The content digest covers canonical Registry v2 files, additive Registry v3 files, income-profile files, and approved compatibility overlays used by the current canonical provenance boundary.
 
-The identity digest is separate from content digest so identity-set changes can be distinguished from content edits.
+The identity digest remains separate from the content digest so identity-set changes can be distinguished from content edits.
 
 ## Package linkage
 
@@ -111,7 +113,7 @@ income profiles: 100
 deployment view rows: 140
 ```
 
-The first four source groups have explicit group count, identity digest, and content digest in the checkpoint. Deployment view count remains linked through the release-integrity expected counts and the 140 canonical deployment records.
+The first four source groups have explicit group count, identity digest, and content digest in the checkpoint. Deployment view count remains linked through release-integrity expected counts and the 140 canonical deployment records.
 
 ## Public route checkpoint
 
@@ -189,27 +191,34 @@ It rejects drift in:
 
 ## Production verification layer
 
-The dedicated checkpoint workflow verifies production with:
+The public deployment can move beyond the checkpoint source commit through later noncanonical releases. PR #319 is the concrete example: it changed guide presentation while leaving canonical registry data unchanged.
+
+Therefore the dedicated checkpoint workflow uses two layers.
+
+### Current public-output verification
 
 ```text
-SOG_EXPECTED_COMMIT=9a106f0938e6323de833c941d6ae863050f1f03b
-npm run check:production
+env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA npm run check:production
 ```
 
-The existing production chain verifies:
+This checks current public availability, version/manifest consistency, public counts, safety flags, provenance, route arithmetic, exact index link sets, sitemap route sets, detail canonical URLs, and detail JSON-LD URL parity.
 
-- intended deployed commit;
-- public availability;
-- version/manifest contract;
-- canonical-only safety flags;
-- public count consistency;
-- build provenance;
-- canonical hash shape and file count;
-- route-count arithmetic;
-- exact index link sets;
-- exact sitemap route sets;
-- detail-page canonical URLs;
-- detail-page JSON-LD URL parity.
+### Canonical checkpoint parity
+
+```text
+node scripts/check-production-audited-checkpoint.mjs
+```
+
+This compares current production provenance with the audited checkpoint and rejects drift in:
+
+```text
+canonical data hash
+canonical file count
+reviewed Registry v2 counts
+reviewed route counts
+```
+
+A later noncanonical release is acceptable only when both layers pass.
 
 Production success is a workflow acceptance gate and does not write status back into canonical data.
 
@@ -248,15 +257,16 @@ reproducible-build contract validation
 final-state validation
 registry integrity validation
 audited 100-asset checkpoint validation
-production commit verification
+current production public-output verification
 production provenance verification
 production exact output parity verification
+production canonical checkpoint hash/file-count/count/route parity
 general CI
 relevant independent audit workflows
 ```
 
 ## Conclusion
 
-The reviewed 100-asset SOG registry is now representable as a compact deterministic checkpoint rather than only as a set of mutable count statements.
+The reviewed 100-asset SOG registry is representable as a compact deterministic checkpoint rather than only as a set of mutable count statements.
 
-The checkpoint binds identity, exact canonical content, release-integrity baseline, reproducibility baseline, dependency graph, reproducible output result, and production verification contract while preserving the existing canonical data and public schema.
+The checkpoint binds identity, exact canonical content, release-integrity baseline, reproducibility baseline, dependency graph, reproducible output result, and production parity contract while preserving the existing canonical data and public schema.
