@@ -1,8 +1,9 @@
-import { MAIN_ROUTES, PROJECT, getRecordCountBreakdown, getRecordCounts } from '../lib/machine-readable';
+import { MAIN_ROUTES, PROJECT, getRecordCountBreakdown, getRecordCounts, getRegistryV3Summary } from '../lib/machine-readable';
 
 export function GET() {
   const counts = getRecordCounts();
   const breakdown = getRecordCountBreakdown();
+  const registryV3 = getRegistryV3Summary();
   const body = [
     '# Stable or Gone',
     '',
@@ -28,12 +29,21 @@ export function GET() {
     `- Known unknowns: ${breakdown.known_unknowns}`,
     `- Deployments: ${breakdown.deployments}`,
     '',
+    'Registry v3 additive layers:',
+    `- Protected stable assets: ${registryV3.protected_stable_assets}`,
+    `- Legal profiles: ${registryV3.record_counts.legal_profiles}`,
+    `- Stable-asset relationships: ${registryV3.record_counts.stable_asset_relationships}`,
+    `- Reserve components: ${registryV3.record_counts.reserve_components}`,
+    `- Income profiles: ${registryV3.record_counts.income_profiles}`,
+    `- Deployment view rows: ${registryV3.record_counts.deployments}`,
+    '',
     'Use notes:',
     '- This is historical reference material, not live market data.',
     '- This is not legal, tax, investment, wallet, issuer, or redemption support.',
     '- Evidence is scoped to the stablecoin, organization, event, and claim it supports.',
     '- Use methodology, event details, evidence tables, reserve reports, and known-unknown records when interpreting entries.',
     '- Public machine-readable files contain reviewed public registry information only.',
+    '- Registry v3 layers are additive to the existing v2 public contract during the parity phase.',
     '- Record data may be incomplete or revised.',
     '',
   ].join('\n');
