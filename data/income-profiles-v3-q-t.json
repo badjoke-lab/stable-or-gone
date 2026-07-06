@@ -1,0 +1,10 @@
+[
+  {"id":"sog_st_ist","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_ist_sunset_complete_batch_q"]},
+  {"id":"sog_st_nearusn","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usn_winddown_batch_q"]},
+  {"id":"sog_st_kavausdx","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_kavausdx_mint_batch_r"]},
+  {"id":"sog_st_bean","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_bean_mechanics_batch_r"]},
+  {"id":"sog_st_uxd","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_uxd_overview_batch_s"]},
+  {"id":"sog_st_doc","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_doc_product_batch_s"]},
+  {"id":"sog_st_eurm","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_eurm_reserve_batch_t"]},
+  {"id":"sog_st_usd3","availability":"native","source":"mixed","accrual":"exchange_rate_increase","rate":"variable","related_asset_ids":[],"evidence_ids":["sog_src_usd3_launch_batch_t","sog_src_usd3_q1_2026_batch_t","sog_src_usd3_dtf_docs_batch_t"]}
+]
