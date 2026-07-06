@@ -7,6 +7,7 @@ const roadmap = read('docs/roadmap.md');
 const agents = read('AGENTS.md');
 const governance = read('docs/spec-governance.md');
 const nonUiPlan = read('docs/quality/non-ui-quality-program.md');
+const amendment = read('docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md');
 const marketAccessSpec = read('docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md');
 const matrix = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access.json'));
 const contextBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-context-batch-02.json'));
@@ -20,28 +21,29 @@ const requireText = (body, text, file) => {
   if (!body.includes(text)) failures.push(`${file}: missing required workstream marker: ${text}`);
 };
 
-requireText(roadmap, 'Current item: PR #310 Registry v2/v3 and machine-readable parity', 'docs/roadmap.md');
-requireText(roadmap, 'Next item: PR #311 counts, manifest, version, and provenance integrity', 'docs/roadmap.md');
-requireText(roadmap, 'PR #309 completed monitoring coverage recalculation for all 100 canonical assets.', 'docs/roadmap.md');
-requireText(roadmap, 'PR #317 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
-requireText(roadmap, 'PR #319 deterministic statistics generator and validator', 'docs/roadmap.md');
-requireText(roadmap, 'PR #324 100 -> 102', 'docs/roadmap.md');
+requireText(roadmap, 'Current item: PR #315 schedule amendment and PR renumbering', 'docs/roadmap.md');
+requireText(roadmap, 'Next item: PR #316 counts, manifest, version, and provenance integrity', 'docs/roadmap.md');
+requireText(roadmap, 'Registry v2/v3 and machine-readable parity: complete via PR #311', 'docs/roadmap.md');
+requireText(roadmap, 'PR #322 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
+requireText(roadmap, 'PR #324 deterministic statistics generator and validator', 'docs/roadmap.md');
+requireText(roadmap, 'PR #329 100 -> 102', 'docs/roadmap.md');
 requireText(roadmap, 'Issuer/protocol coverage is not platform-policy coverage.', 'docs/roadmap.md');
 
-requireText(agents, 'Active: PR #310 Registry v2/v3 and machine-readable parity', 'AGENTS.md');
-requireText(agents, 'Next: PR #311 counts, manifest, version, and provenance integrity', 'AGENTS.md');
+requireText(agents, 'Active: PR #315 schedule amendment and PR renumbering', 'AGENTS.md');
+requireText(agents, 'Next: PR #316 counts, manifest, version, and provenance integrity', 'AGENTS.md');
+requireText(agents, 'Registry v2/v3 and machine-readable parity: complete via PR #311', 'AGENTS.md');
 requireText(agents, 'Registered source reach is not accepted monitoring coverage.', 'AGENTS.md');
 requireText(agents, 'Regulatory action pages are not regulatory-register coverage.', 'AGENTS.md');
 
-requireText(governance, 'PR #309 monitoring coverage recalculation complete', 'docs/spec-governance.md');
-requireText(governance, 'PR #310 Registry v2/v3 and machine-readable parity active', 'docs/spec-governance.md');
-requireText(governance, 'PR #311 counts, manifest, version, and provenance integrity next', 'docs/spec-governance.md');
+requireText(governance, 'PR #315 schedule amendment and PR renumbering active', 'docs/spec-governance.md');
+requireText(governance, 'PR #316 counts, manifest, version, and provenance integrity next', 'docs/spec-governance.md');
+requireText(governance, 'Registry v2/v3 and machine-readable parity complete via PR #311', 'docs/spec-governance.md');
 requireText(governance, 'Zero coverage for a required domain is a valid audit result', 'docs/spec-governance.md');
 
 requireText(nonUiPlan, 'PR #309 monitoring coverage recalculation: complete', 'docs/quality/non-ui-quality-program.md');
-requireText(nonUiPlan, 'PR #310 Registry v2/v3 and machine-readable parity: active', 'docs/quality/non-ui-quality-program.md');
-requireText(nonUiPlan, 'PR #311 counts, manifest, version, and provenance integrity: next', 'docs/quality/non-ui-quality-program.md');
-requireText(nonUiPlan, 'platform-policy sources', 'docs/quality/non-ui-quality-program.md');
+requireText(amendment, 'PR #315  this schedule amendment and renumbering — active', 'roadmap amendment');
+requireText(amendment, 'PR #316  counts, manifest, version, and provenance integrity', 'roadmap amendment');
+requireText(amendment, 'PR #348+  natural-language filter translation only after separate approval', 'roadmap amendment');
 
 requireText(marketAccessSpec, 'PR #307  reviewed EU stablecoin market-access article after publication gate passes', 'docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md');
 if (matrix.research_id !== 'eu-stablecoin-market-access-2026') failures.push('research matrix id mismatch');
@@ -60,4 +62,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('100-record core workstream checks passed: PR #309 is complete, PR #310 is active, and PR #311 remains next.');
+console.log('100-record core workstream checks passed: parity is complete via PR #311, PR #315 is the active schedule amendment, and PR #316 remains next.');
