@@ -1,0 +1,62 @@
+name: Reproducible build audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  reproducible-build:
+    runs-on: ubuntu-latest
+    env:
+      SOG_BUILD_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      SOG_BUILD_BRANCH: reproducible-audit
+      SOG_BUILD_TIMESTAMP: 2026-07-06T00:00:00.000Z
+      SOURCE_DATE_EPOCH: "1783296000"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+      - name: First fixed-context build
+        run: npm run build:site
+      - name: Capture first build hashes
+        env:
+          SOG_REPRO_CAPTURE_FILE: artifacts/reproducible-build-first.json
+        run: node scripts/capture-build-output-hashes.mjs
+      - name: Verify protected historical generated inputs are unchanged
+        run: git diff --exit-code -- data/generated/registry-stats.json docs/migration/registry-v2-baseline.json docs/migration/registry-v3-foundation.json docs/migration/registry-v3-income-profiles.json
+      - name: Remove first build output
+        run: rm -rf dist .astro data/generated/deployment-taxonomy-migration.json
+      - name: Second fixed-context build
+        run: npm run build:site
+      - name: Capture second build hashes
+        env:
+          SOG_REPRO_CAPTURE_FILE: artifacts/reproducible-build-second.json
+        run: node scripts/capture-build-output-hashes.mjs
+      - name: Compare build outputs
+        env:
+          SOG_REPRO_FIRST: artifacts/reproducible-build-first.json
+          SOG_REPRO_SECOND: artifacts/reproducible-build-second.json
+          SOG_REPRO_COMPARE: artifacts/reproducible-build-compare.json
+        run: node scripts/compare-build-output-hashes.mjs
+      - name: Verify protected historical generated inputs remain unchanged
+        run: git diff --exit-code -- data/generated/registry-stats.json docs/migration/registry-v2-baseline.json docs/migration/registry-v3-foundation.json docs/migration/registry-v3-income-profiles.json
+      - name: Upload reproducibility audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reproducible-build-audit-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            artifacts/reproducible-build-first.json
+            artifacts/reproducible-build-second.json
+            artifacts/reproducible-build-compare.json
