@@ -10,6 +10,7 @@ import {
   getPublicDeploymentCategory
 } from '../config/deployment-taxonomy.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
+import { resolveBuildTimestamp } from './lib/build-timestamp.mjs';
 
 const root = process.cwd();
 const baseline = loadRegistryV2Baseline(root);
@@ -88,7 +89,7 @@ for (const issue of records.flatMap((row) => row.issues)) issueCounts[issue] = (
 
 const report = {
   schema_version: '1.0',
-  generated_at: new Date().toISOString(),
+  generated_at: resolveBuildTimestamp(),
   baseline_id: baseline.baseline_id,
   verification_review: {
     schema_version: verificationReview.schema_version,
