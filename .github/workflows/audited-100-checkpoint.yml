@@ -10,7 +10,6 @@ jobs:
   checkpoint:
     runs-on: ubuntu-latest
     env:
-      SOG_EXPECTED_COMMIT: 9a106f0938e6323de833c941d6ae863050f1f03b
       SOG_SMOKE_ATTEMPTS: "8"
       SOG_SMOKE_DELAY_MS: "15000"
     steps:
@@ -35,8 +34,10 @@ jobs:
         run: node scripts/audit-registry-integrity-batch-t.mjs --check
       - name: Validate audited 100-asset checkpoint
         run: node scripts/validate-audited-100-checkpoint.mjs
-      - name: Verify production checkpoint commit and outputs
-        run: npm run check:production
+      - name: Verify current production public outputs
+        run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA npm run check:production
+      - name: Verify production canonical checkpoint parity
+        run: node scripts/check-production-audited-checkpoint.mjs
       - name: Upload checkpoint validation
         if: always()
         uses: actions/upload-artifact@v4
