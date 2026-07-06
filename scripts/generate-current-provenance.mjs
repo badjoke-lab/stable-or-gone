@@ -4,6 +4,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 import { buildRegistryStats } from './generate-registry-stats-batch-o.mjs';
+import { resolveBuildTimestamp } from './lib/build-timestamp.mjs';
 
 const root = process.cwd();
 const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
@@ -28,14 +29,6 @@ function commit() {
 
 function branch() {
   return process.env.SOG_BUILD_BRANCH || process.env.CF_PAGES_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME || 'main';
-}
-
-function timestamp() {
-  const explicit = process.env.SOG_BUILD_TIMESTAMP?.trim();
-  if (!explicit) return new Date().toISOString();
-  const parsed = new Date(explicit);
-  if (Number.isNaN(parsed.valueOf())) throw new Error(`Invalid SOG_BUILD_TIMESTAMP: ${explicit}`);
-  return parsed.toISOString();
 }
 
 const v2 = loadRegistryV2Baseline(root);
@@ -95,7 +88,7 @@ const output = {
   schema_version: '1.0',
   source_commit: commit(),
   source_branch: branch(),
-  generated_at: timestamp(),
+  generated_at: resolveBuildTimestamp(),
   canonical_data_hash: `sha256:${digest.digest('hex')}`,
   canonical_file_count: files.length,
   canonical_record_counts: counts,
