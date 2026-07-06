@@ -12,6 +12,8 @@ const releaseSpec = read('docs/counts-manifest-version-provenance-integrity-spec
 const releaseBaseline = JSON.parse(read('docs/migration/registry-release-integrity-baseline.json'));
 const reproducibleSpec = read('docs/reproducible-build-generated-output-audit-spec.md');
 const reproducibleBaseline = JSON.parse(read('docs/migration/reproducible-build-output-baseline.json'));
+const checkpointSpec = read('docs/audited-100-asset-canonical-checkpoint-spec.md');
+const checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
 const marketAccessSpec = read('docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md');
 const matrix = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access.json'));
 const contextBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-context-batch-02.json'));
@@ -25,23 +27,23 @@ const requireText = (body, text, file) => {
   if (!body.includes(text)) failures.push(`${file}: missing required workstream marker: ${text}`);
 };
 
-requireText(roadmap, 'Current item: PR #317 reproducible build and generated-output audit', 'docs/roadmap.md');
-requireText(roadmap, 'Next item: PR #318 audited 100-record canonical checkpoint', 'docs/roadmap.md');
-requireText(roadmap, 'PR #316 counts, manifest, version, and provenance integrity: complete', 'docs/roadmap.md');
+requireText(roadmap, 'Current item: PR #318 audited 100-record canonical checkpoint', 'docs/roadmap.md');
+requireText(roadmap, 'Next item: PR #319 non-UI release material', 'docs/roadmap.md');
+requireText(roadmap, 'PR #317 reproducible build and generated-output audit: complete', 'docs/roadmap.md');
 requireText(roadmap, 'PR #322 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
 requireText(roadmap, 'PR #324 deterministic statistics generator and validator', 'docs/roadmap.md');
 requireText(roadmap, 'PR #329 100 -> 102', 'docs/roadmap.md');
 requireText(roadmap, 'Issuer/protocol reach is not platform-policy coverage.', 'docs/roadmap.md');
 
-requireText(agents, 'Active: PR #317 reproducible build and generated-output audit', 'AGENTS.md');
-requireText(agents, 'Next: PR #318 audited 100-record canonical checkpoint', 'AGENTS.md');
-requireText(agents, 'PR #316 counts, manifest, version, and provenance integrity: complete', 'AGENTS.md');
+requireText(agents, 'Active: PR #318 audited 100-record canonical checkpoint', 'AGENTS.md');
+requireText(agents, 'Next: PR #319 non-UI release material', 'AGENTS.md');
+requireText(agents, 'PR #317 reproducible build and generated-output audit: complete', 'AGENTS.md');
 requireText(agents, 'Registered source reach is not accepted monitoring coverage.', 'AGENTS.md');
 requireText(agents, 'Regulatory action pages are not regulatory-register coverage.', 'AGENTS.md');
 
 requireText(governance, 'Zero coverage for a required domain is a valid audit result', 'docs/spec-governance.md');
-requireText(governance, 'docs/roadmap.md', 'docs/spec-governance.md');
-requireText(nonUiPlan, 'PR #317 reproducible build and generated-output audit: active', 'docs/quality/non-ui-quality-program.md');
+requireText(governance, 'Audited checkpoint governance', 'docs/spec-governance.md');
+requireText(nonUiPlan, 'PR #318 audited 100-record canonical checkpoint: active', 'docs/quality/non-ui-quality-program.md');
 requireText(amendment, 'PR #316  counts, manifest, version, and provenance integrity', 'roadmap amendment');
 requireText(amendment, 'PR #348+  natural-language filter translation only after separate approval', 'roadmap amendment');
 
@@ -56,6 +58,17 @@ requireText(reproducibleSpec, 'npm run validate:reproducible-build', 'reproducib
 if (reproducibleBaseline.status !== 'current') failures.push('reproducible-build baseline must be current');
 if (reproducibleBaseline.runtime?.node_version !== '22.22.0') failures.push('reproducible-build baseline must pin Node 22.22.0');
 if (!Array.isArray(reproducibleBaseline.hashed_output_roots) || !reproducibleBaseline.hashed_output_roots.includes('dist')) failures.push('reproducible-build baseline must hash dist output');
+
+requireText(checkpointSpec, 'audited canonical checkpoint', 'audited checkpoint specification');
+requireText(checkpointSpec, 'scripts/validate-audited-100-checkpoint.mjs', 'audited checkpoint specification');
+if (checkpoint.status !== 'audited') failures.push('audited checkpoint status must be audited');
+if (checkpoint.source_commit !== '9a106f0938e6323de833c941d6ae863050f1f03b') failures.push('audited checkpoint source commit mismatch');
+if (checkpoint.canonical_file_count !== 334) failures.push('audited checkpoint must protect 334 canonical files');
+if (checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('audited checkpoint must protect 100 stable assets');
+if (checkpoint.v2_groups?.events?.record_count !== 172) failures.push('audited checkpoint must protect 172 events');
+if (checkpoint.v2_groups?.evidence?.record_count !== 502) failures.push('audited checkpoint must protect 502 evidence records');
+if (checkpoint.release_expected_counts?.routes?.total_detail !== 366) failures.push('audited checkpoint must protect 366 detail routes');
+if (checkpoint.reproducibility_checkpoint?.reproducible !== true) failures.push('audited checkpoint reproducibility result must be true');
 
 requireText(marketAccessSpec, 'PR #307  reviewed EU stablecoin market-access article after publication gate passes', 'docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md');
 if (matrix.research_id !== 'eu-stablecoin-market-access-2026') failures.push('research matrix id mismatch');
@@ -74,4 +87,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('100-record core workstream checks passed: release integrity is complete, PR #317 is active, and PR #318 remains next.');
+console.log('100-record core workstream checks passed: PR #317 is complete, PR #318 is active, and PR #319 remains next.');
