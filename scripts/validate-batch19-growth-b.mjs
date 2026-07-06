@@ -34,8 +34,8 @@ const canonicalOrganizationIds = new Set(organizations.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
 const eventDetailIds = new Set(eventDetails.map((row) => row.id));
 
-fail(stablecoins.length === 96, `canonical stablecoin count must be 96, found ${stablecoins.length}`);
-fail(baseline.minimum_counts?.stablecoins === 96, 'baseline minimum stablecoin count must be 96');
+fail(stablecoins.length === 100, `canonical stablecoin count must be 100 after parity integration, found ${stablecoins.length}`);
+fail(baseline.minimum_counts?.stablecoins === 100, 'baseline minimum stablecoin count must be 100 after parity integration');
 fail(read('data/stablecoins-batch-r.json').length === 2, 'Batch R must contain two stablecoins');
 fail(read('data/organizations-batch-r.json').length === 2, 'Batch R must contain two organizations');
 fail(read('data/relationships-batch-r.json').length === 2, 'Batch R must contain two relationships');
@@ -48,7 +48,7 @@ fail(read('data/r-protocol-context.json').length === 2, 'Batch R must contain tw
 fail(read('data/r-open-items.json').length === 10, 'Batch R must contain ten open items');
 fail(read('data/deployments-batch-r.json').length === 3, 'Batch R must contain three deployments');
 fail(legal.length === 2 && returnProfiles.length === 2 && reserveComponents.length === 2, 'Batch R supplemental layers must cover both assets');
-fail(overlay.defer_legacy_v3_full_coverage === true, 'legacy full-coverage deferral must be explicit');
+fail(overlay.defer_legacy_v3_full_coverage === false, 'Batch R v3 parity deferral must be closed');
 
 for (const id of coinIds) {
   const coin = stablecoinById.get(id);
@@ -87,4 +87,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log('Batch 19 Growth B valid: Kava USDX and Bean promoted as active assets; canonical count is 96.');
+console.log('Batch 19 Growth B valid at the 100-asset parity checkpoint: Kava USDX and Bean remain canonical active assets.');
