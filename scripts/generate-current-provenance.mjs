@@ -85,7 +85,7 @@ const output = {
   schema_version: '1.0',
   source_commit: commit(),
   source_branch: branch(),
-  generated_at: resolveBuildTimestamp(),
+  generated_at: resolveBuildTimestamp(process.env.SOG_BUILD_TIMESTAMP),
   canonical_data_hash: `sha256:${digest.digest('hex')}`,
   canonical_file_count: files.length,
   canonical_record_counts: counts,
