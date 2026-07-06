@@ -33,17 +33,19 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-review-material-spec.md
 ```
 
-For EU/EEA stablecoin market-access research, article work, or monitoring changes, also read:
+For EU/EEA stablecoin market-access work, also read:
 
 ```text
 docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md
 data/editorial-research/eu-stablecoin-market-access.json
 data/editorial-research/eu-stablecoin-market-access-context-batch-02.json
 data/editorial-research/eu-stablecoin-market-access-function-batch-03.json
+data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json
 docs/audits/eu-stablecoin-market-access-research-checkpoint-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-02-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md
 docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md
+docs/audits/eu-stablecoin-market-access-prepublication-reaudit-2026-07-05.md
 ```
 
 For statistics work, also read `docs/stats-spec.md`.
@@ -57,7 +59,7 @@ Repository specifications outrank chat memory, handoff prose, issue discussion, 
 The dedicated UI program is stopped. UI is maintenance-only.
 
 ```text
-Current main checkpoint: b03149c022b29d2b14e29948492cbacad5ea1d7e
+Current main checkpoint: 4d7b12936b5ca8497219c09392e743947c1109b9
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -72,20 +74,18 @@ PR #303 EU market-access specification and schedule amendment: complete
 PR #304 reviewed research matrix and checkpoints 01-02: complete
 PR #305 checkpoint 03 schedule amendment: complete
 PR #306 function-matrix research checkpoint 03: complete
-Active: PR #307 reviewed EU stablecoin market-access guide and publication-gate record
-Next: PR #308 known-unknown and placeholder integrity audit
+PR #307 reviewed EU/EEA market-access guide: complete and published
+Active: PR #308 known-unknown and placeholder integrity audit
+Next: PR #309 monitoring coverage recalculation for 100 assets
 ```
 
 ## Active sequence
 
 ```text
 PR #296-#302  registry-wide audit through lifecycle boundaries — complete
-PR #303       EU market-access specification and schedule amendment — complete
-PR #304       reviewed matrix and checkpoints 01-02 — complete
-PR #305       checkpoint 03 schedule amendment — complete
-PR #306       function-matrix research checkpoint 03 — complete
-PR #307       reviewed market-access guide and publication-gate record — active
-PR #308-#309  remaining 100-record registry-wide audit
+PR #303-#307  EU market-access specification, research, re-audit, and guide publication — complete
+PR #308       known-unknown and placeholder integrity audit — active
+PR #309       monitoring coverage recalculation — next
 PR #310-#314  non-UI release hardening
 PR #315-#318  monitoring expansion and scheduled read-only operation
 PR #319-#322  statistics implementation
@@ -95,15 +95,9 @@ PR #324-#328  controlled growth from 100 to 110
 
 Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
 
-The publication gate was reviewed and passed for a bounded article design that uses supported function claims only, keeps platform-wide service state separate, and treats Revolut policy details conservatively when first-party public evidence remains unavailable.
-
 ## UI maintenance rules
 
-There is no active redesign sequence. A UI PR is allowed only for a concrete verified defect or explicit owner-directed change.
-
-A maintenance PR must remain narrow, preserve the current terminal family unless explicitly changed, preserve canonical data and route meaning unless separately authorized, use actual rendered desktop/mobile evidence for visual claims, and not displace the active core schedule.
-
-Do not invent another visual direction, substitute a logo, revive rejected redesign directions, or alter the core PR sequence without updating repository authority.
+There is no active redesign sequence. A UI PR is allowed only for a concrete verified defect or explicit owner-directed change. Preserve the current terminal visual family, canonical data, route meaning, machine-readable output, and accessibility contracts unless separately authorized.
 
 ## Data and quality rules
 
@@ -120,59 +114,50 @@ Do not invent another visual direction, substitute a logo, revive rejected redes
 - Missing freeze or blacklist capability data means unknown knowledge state, not `false`.
 - Aggregate network-context rows must not be coerced into a single chain identity.
 
-## Lifecycle boundary rules
+## Known-unknown and placeholder integrity rules
 
-The lifecycle-boundary audit is complete. Future work must preserve distinct boundaries for:
+PR #308 must preserve the distinction between an explicit unknown state and a structural placeholder.
+
+Intentional unresolved semantics include:
 
 ```text
-contract deployment
-first mint
-guarded beta
-public launch
-exchange listing
-migration announcement
-migration start
-redemption deadline
-wind-down start
-terminal state
-relationship end
-rebrand transition
+null
+unknown
+not_recorded
+not_applicable
+source_review_needed
 ```
 
-Do not infer one boundary from another unless reviewed evidence explicitly supports the equivalence.
+These values must not be erased merely to make records look complete. A known-unknown row must have a unique ID, a canonical asset reference, a valid issuer reference when present, a specific topic, a meaningful description, a valid severity, and a non-future review date.
+
+Structural fake values are defects, including TODO/TBD identity fields, fake example URLs, fabricated dates, and placeholder addresses/contracts/identifiers. Stale review age is a review queue, not permission to resolve or delete a known unknown.
+
+## Lifecycle boundary rules
+
+Preserve distinct boundaries for contract deployment, first mint, guarded beta, public launch, exchange listing, migration announcement, migration start, redemption deadline, wind-down start, terminal state, relationship end, and rebrand transition. Do not infer one boundary from another without direct evidence.
 
 ## EU market-access rules
 
 - Do not reduce EU/EEA stablecoin access to an allowed/banned boolean.
-- Preserve platform, legal entity, platform service state, region, stablecoin, function, announcement date, and effective date separately.
-- Do not infer deposit, withdrawal, custody, trading, Earn, margin, or conversion state from another function.
+- Preserve issuer identity, token regulatory path, platform legal entity, platform service state, region, customer scope, stablecoin, function or access route, supported network, announcement date, and effective date separately.
+- Do not infer deposit, withdrawal, custody, trading, Earn, margin, conversion, mint, redemption, or payment-rail state from another function.
 - Do not rewrite EEA as EU when the source scope is EEA.
 - Do not generalize a customer cohort, legal entity, member-state page, or Global product page beyond its supported scope.
 - Prefer regulators and official registers for authorization claims.
 - Prefer first-party platform policy pages for function-level access claims.
 - High-quality reporting may establish context or a reported notice but may not fill unsupported function cells.
 - A platform licence is not proof of stablecoin function availability.
-- A platform-wide account closure or transition restriction is a separate evidence layer from asset-specific function policy.
+- A platform-wide account closure or transition restriction is separate from asset-specific function policy.
 - The public guide is a reviewed dated snapshot and never updates automatically from monitoring output.
-- Keep unsupported or unavailable evidence unclaimed rather than filling a false universal matrix.
+- Keep unsupported evidence unclaimed rather than filling a false universal matrix.
 - Distinguish historical stablecoin-specific policy from later platform-wide service or licensing changes.
 
-Publication evidence layers are fixed as:
+Publication evidence layers remain:
 
 ```text
 A. asset-specific function evidence
 B. current platform-wide service-state evidence
 C. general service/licensing context without asset-specific function support
-```
-
-Only A-level evidence should populate direct function comparisons. B-level evidence may explain current access context. C-level evidence must remain bounded context.
-
-Revolut handling remains:
-
-```text
-official CASP legal entity: regulator-confirmed
-reported USDT policy schedule: not first-party publicly confirmed in the publication review
-article wording: reported customer-notice coverage, no worldwide generalization, no fabricated complete matrix row
 ```
 
 ## Monitoring rules
@@ -183,8 +168,7 @@ article wording: reported customer-notice coverage, no worldwide generalization,
 - Metadata-only changes and fetch failures must not masquerade as content changes.
 - Monitoring may not create branches, pull requests, publications, guide edits, or deployments automatically.
 - A baseline change requires a separate human-reviewed repository change.
-- Platform-policy monitoring must preserve function-level, legal-entity, service-state, and geographic scope.
-- Article publication must not add ad-hoc monitoring writes ahead of the approved PR #317-#318 monitoring phase.
+- Platform-policy monitoring must preserve function-level, legal-entity, service-state, geographic, customer-scope, payment-rail, and network context.
 
 ## Statistics rules
 
@@ -197,21 +181,8 @@ article wording: reported customer-notice coverage, no worldwide generalization,
 
 ## Growth rules
 
-Growth beyond 100 begins only after the preceding audit, hardening, monitoring, statistics, and candidate-audit phases in `docs/roadmap.md`.
-
-When growth resumes:
-
-- no more than two new stable assets per PR;
-- fresh branch from current main;
-- reviewed candidates only;
-- duplicate and lineage checks required;
-- all applicable supporting record groups required;
-- unknown information remains explicit.
+Growth beyond 100 begins only after the preceding audit, hardening, monitoring, statistics, and candidate-audit phases in `docs/roadmap.md`. Growth PRs contain no more than two new stable assets, use a fresh branch from current `main`, preserve supporting record groups, and keep unknown information explicit.
 
 ## Deployment rule
 
-Development and production publication are connected by the `main` publication workflow described in `docs/deployment-policy.md`.
-
-- GitHub CI success is the completion condition for normal pull-request development work.
-- Monitoring execution remains publication-neutral and read-only.
-- Do not claim production parity without the repository's production provenance and output-parity checks.
+Development and production publication are connected by the `main` publication workflow described in `docs/deployment-policy.md`. GitHub CI success is the completion condition for normal pull-request development work. Monitoring execution remains publication-neutral and read-only. Do not claim production parity without the repository's production provenance and output-parity checks.
