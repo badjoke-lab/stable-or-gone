@@ -53,6 +53,18 @@ function lifecycleGroup(status) {
   return 'other';
 }
 
+function lifecycleTransitions(statuses) {
+  const count = (status) => statuses.filter((value) => value === status).length;
+  return {
+    migrations: count('migrated'),
+    rebrands: count('rebranded'),
+    orderly_wind_downs: count('winding_down'),
+    terminations: count('terminated'),
+    inactive_unresolved: count('inactive'),
+    collapses: count('collapsed')
+  };
+}
+
 function recencyBand(dateValue, generatedAt) {
   if (!dateValue || !Number.isFinite(Date.parse(dateValue))) return 'unknown';
   const days = Math.max(0, Math.floor((Date.parse(generatedAt) - Date.parse(dateValue)) / 86_400_000));
@@ -199,6 +211,7 @@ export function buildStatsModel(input, options = {}) {
     lifecycle: {
       groups: dist(lifecycleGroups, totalAssets),
       statuses: dist(lifecycleStatuses, totalAssets),
+      transitions: lifecycleTransitions(lifecycleStatuses),
       group_definitions: LIFECYCLE_GROUPS
     },
     classification: {
