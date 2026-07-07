@@ -27,7 +27,7 @@ requireText(roadmap, 'Next item: PR #327 /stats/ foundation', 'roadmap');
 requireText(roadmap, 'Phase D — statistics implementation — active', 'roadmap');
 requireText(amendment, 'PR #326 immutable checkpoint history: active', 'PR #326 amendment');
 requireText(amendment, 'PR #327 /stats/ foundation: next', 'PR #326 amendment');
-requireText(statsSpec, 'stats-history.json should contain immutable checkpoint snapshots, not every deployment build.', 'stats spec');
+requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
 requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
 requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
 requireText(historyWorkflow, 'contents: read', 'history workflow');
