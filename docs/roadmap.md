@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-07  
+Updated: 2026-07-08  
 Status: canonical execution schedule — active
 
 ## Current position
@@ -24,6 +24,9 @@ PR #322 merge checkpoint:
 PR #323 merge checkpoint:
 9f588537b82bc1ed916e65114ce9877f812cd634
 
+PR #324 merge checkpoint:
+f4d54293862168356f8314d8b6f0d79004873dcf
+
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -41,22 +44,24 @@ PR #320 non-UI release material: complete
 PR #321 100-asset monitoring baseline synchronization: complete
 PR #322 reserve and redemption source expansion: complete
 PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete
+PR #324 bounded scheduled read-only monitoring: complete
 
-Active workstream: monitoring expansion and operation
-Current item: PR #324 bounded scheduled read-only monitoring
-Next item: PR #325 deterministic statistics generator and validator
+Active workstream: statistics implementation
+Current item: PR #325 deterministic statistics generator and validator
+Next item: PR #326 immutable checkpoint history
 ```
 
-Current numbering authority:
+## Current numbering authority
 
 ```text
 docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
 docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
+docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md
 ```
 
-This roadmap and active amendments supersede older numeric labels in subordinate plans.
+This roadmap and active amendments supersede older numeric labels or stale current-position wording in subordinate plans.
 
-## Completed sequence through PR #323
+## Completed sequence through PR #324
 
 ```text
 PR #296  resume core workstream and synchronize repository authority
@@ -86,6 +91,7 @@ PR #320  non-UI release material
 PR #321  100-asset monitoring baseline synchronization
 PR #322  reserve and redemption source expansion
 PR #323  lifecycle, regulatory, and EU market-access source/schema expansion
+PR #324  bounded scheduled read-only monitoring
 ```
 
 ## Audited 100-asset checkpoint
@@ -133,7 +139,7 @@ source_review_needed
 
 ## Monitoring checkpoint history
 
-### Historical PR #321 synchronization checkpoint
+### PR #321 historical synchronization checkpoint
 
 ```text
 snapshot:
@@ -150,7 +156,7 @@ accepted asset reach: 0
 multi-family assets: 7
 ```
 
-### Historical PR #322 reserve/redemption expansion checkpoint
+### PR #322 historical reserve/redemption expansion checkpoint
 
 ```text
 snapshot:
@@ -167,22 +173,7 @@ accepted asset reach: 0
 multi-family assets: 11
 ```
 
-PR #322 historical family reach:
-
-```text
-reserve_assurance: 14 sources / 16 assets
-redemption_terms: 11 sources / 12 assets
-issuer_lifecycle: 5 sources / 5 assets
-regulatory: 5 sources / 5 assets
-platform_policy: 0
-platform_service_state: 0
-regulatory_register: 0
-market-access schema-capable sources: 0
-```
-
-Historical snapshots are immutable. Successor expansion records current state separately.
-
-## PR #323 current monitoring boundary
+### PR #323 current reviewed monitoring boundary
 
 Binding specification:
 
@@ -195,8 +186,6 @@ Binding current snapshot:
 ```text
 scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
-
-Current deterministic boundary:
 
 ```text
 sources: 39
@@ -237,178 +226,42 @@ scoped region values: 4
 
 Platform/register scope is not divided by the 100-asset denominator.
 
-Current digests:
-
-```text
-asset sync SHA-256:
-aad839e01ce17ce9904a3a10de4fbb48155a1aeba214694c3545209a4b5329c4
-
-organization sync SHA-256:
-89b8bbecbbf24ef827111f57ced2309165b621f3ec20c3b499f729255c00f92a
-
-source/baseline sync SHA-256:
-088c6b6f9d8706be3eadc4a92a90f847f7c66c9dcd049ffc095b02c787a80a95
-
-monitoring scope SHA-256:
-763e383489cc33cdfbf8227a49eaa0a747255bc4cc9d10ac76677dd4b35a4282
-
-uncovered asset queue SHA-256:
-3e68607f3edeee151db90ef9f7ac4652977afaea80da9a54fbd73ec492c32329
-```
-
-## PR #323 — lifecycle, regulatory, and EU market-access source/schema expansion — complete
-
-PR #323 added four bounded issuer lifecycle/regulatory sources and five scoped platform/register sources.
-
-Issuer lifecycle/regulatory additions:
-
-```text
-ripple-eu-emi-license
-ripple-preliminary-mica-casp
-banking-circle-euri-launch
-sgforge-eurcv-stablecoin-elevation
-```
-
-Scoped market-access/register additions:
-
-```text
-binance-eea-stablecoin-policy
-kraken-eea-stablecoin-offerings
-bitstamp-europe-mica-assets
-gemini-eea-account-closure
-esma-mica-interim-register-hub
-```
-
-PR #323:
-
-- added reviewed `monitoring_scope` metadata;
-- separated platform policy, platform service state, and regulatory-register scope;
-- preserved platform legal entity, region, function, and register family context;
-- propagated scope into private observations and private review candidates;
-- avoided fake canonical platform or issuer IDs;
-- separated platform/register counts from the 100-asset denominator;
-- kept every baseline pending;
-- preserved zero accepted coverage;
-- kept monitoring private, review-only, read-only, and non-publishing.
-
-## PR #324 — bounded scheduled read-only monitoring — active
-
-Binding specification:
-
-```text
-docs/quality/monitoring-bounded-scheduled-read-only-spec.md
-```
-
-PR #324 activates two deterministic scheduled groups:
-
-```text
-daily
-weekly
-```
-
-Daily group:
-
-```text
-platform_policy sources
-platform_service_state sources
-bounded private news discovery
-
-reviewed official sources: 4
-```
-
-Weekly group:
-
-```text
-all remaining reviewed official sources
-issuer reserve/transparency sources
-redemption and mint-term sources
-issuer lifecycle sources
-issuer/token regulatory sources
-regulatory action sources
-ESMA regulatory-register source
-article/research stale-state review
-
-reviewed official sources: 35
-```
-
-Partition contract:
-
-```text
-daily sources: 4
-weekly sources: 35
-overlap: 0
-union: all 39 reviewed sources
-source/baseline parity: true for both groups
-all repository baselines remain pending: true
-```
-
-Bounded news-discovery contract:
-
-```text
-maximum queries per run: 4
-maximum items retained per query: 20
-maximum response body per feed: 1 MiB
-raw response retention: false
-discovery only: true
-canonical action: none
-public output: false
-```
-
-Article stale-state review is weekly and read-only. It may flag review_due, stale, severely_stale, or missing_date states but may not edit the guide, research matrix, or canonical data.
-
-Workflow permissions remain:
-
-```text
-contents: read
-```
-
-The scheduled workflow may upload private artifacts. It may not write canonical data, accept its own baselines, edit guides automatically, create branches or canonical pull requests automatically, publish candidates or discovery leads, or deploy monitoring output.
-
-Completion condition:
-
-```text
-daily selector contains exactly 4 reviewed sources
-weekly selector contains exactly 35 reviewed sources
-daily/weekly overlap is zero
-daily/weekly union is all 39 reviewed sources
-source/baseline parity is exact for each group
-all 39 baselines remain pending
-accepted baseline count remains zero
-accepted asset reach remains zero
-bounded news discovery fixture passes
-article stale-state fixture passes
-daily scheduled runner fixture passes
-weekly scheduled runner fixture passes
-manual monitoring remains backward compatible
-scheduled workflow uses contents: read only
-full monitoring chain passes
-authority shows PR #324 active / PR #325 next
-full CI and independent audit workflows are green
-```
-
-## Phase C — monitoring expansion and operation — active
+## Phase C — monitoring expansion and operation — complete
 
 ```text
 PR #321 100-asset monitoring baseline synchronization — complete
 PR #322 reserve and redemption source expansion — complete
 PR #323 lifecycle, regulatory, and EU market-access source/schema expansion — complete
-PR #324 bounded scheduled read-only monitoring — active
+PR #324 bounded scheduled read-only monitoring — complete
 ```
 
-Target cadence under PR #324:
+PR #324 completed deterministic daily and weekly monitoring groups.
+
+```text
+daily reviewed official sources: 4
+weekly reviewed official sources: 35
+overlap: 0
+union: all 39 reviewed sources
+source/baseline parity: exact for both groups
+all 39 repository baselines: pending_initial_acceptance
+accepted baselines: 0
+accepted asset reach: 0
+```
+
+Target cadence:
 
 ```text
 platform policy sources: daily
 platform service-state / platform announcement sources: daily
-news discovery: daily
+bounded news discovery: daily
 ESMA and regulatory registers: weekly
 issuer regulatory/transparency sources: weekly unless stricter cadence applies
 article stale-state review: weekly
 ```
 
-Monitoring may observe, compare, classify, create private review material, create private discovery leads, and create private stale-state reports. It may not write canonical data, accept its own baselines, edit guides automatically, create canonical pull requests automatically, publish candidates or leads, or deploy.
+Monitoring output remains private artifact material. Monitoring may observe, compare, classify, prepare private review material, discover bounded news leads, and report stale review state. It may not write canonical data, accept its own baselines, create canonical pull requests automatically, edit guides automatically, publish candidates or leads, or deploy monitoring output.
 
-## Phase D — statistics implementation
+## Phase D — statistics implementation — active
 
 Binding specification:
 
@@ -417,13 +270,34 @@ docs/stats-spec.md
 ```
 
 ```text
-PR #325 deterministic statistics generator and validator
-PR #326 immutable checkpoint history
+PR #325 deterministic statistics generator and validator — active
+PR #326 immutable checkpoint history — next
 PR #327 /stats/ foundation
 PR #328 historical, deployment, organization, and data-quality statistics
 ```
 
-Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
+### PR #325 active contract
+
+PR #325 derives statistics only from reviewed canonical Registry v2 and Registry v3 inputs.
+
+Required outputs and checks:
+
+```text
+canonical input loader driven by registry manifests
+deterministic statistics model
+generated private CI artifact
+canonical total parity
+single-select denominator integrity
+multi-select semantics preserved
+unknown values preserved
+candidate/monitoring/editorial/private inputs excluded
+live market metrics excluded
+same inputs produce byte-equivalent model output
+```
+
+PR #325 does not publish `/data/stats.json`, create or mutate immutable `stats-history.json` checkpoints, or implement `/stats/` UI.
+
+Statistics must not become live price, market-cap, APY, yield ranking, safety, transparency, or risk rankings.
 
 ## Phase E — candidate audit and controlled growth from 100 to 110
 
@@ -495,24 +369,26 @@ PR #349+ natural-language filter translation only after separate approval
 - Repository specifications are the source of truth.
 - UI remains maintenance-only until an approved product UI phase.
 - Unknown values remain unknown unless reviewed evidence supports a value.
+- Candidate, monitoring, discovery, stale-state, editorial-research, and private material remain outside canonical statistics inputs.
+- Historical monitoring snapshots remain immutable.
 - Monitoring executions remain read-only and never update their own accepted baseline.
-- Scheduled monitoring output remains private artifact material.
 - Registered source reach is not accepted monitoring coverage.
 - Issuer/protocol reach is not platform-policy coverage.
 - Regulatory action pages are not regulatory-register coverage.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
 - News-discovery leads are not canonical facts or public content.
-- Stale-state findings do not edit public guides automatically.
-- Platform policy, service state, issuer/token regulation, CASP authorization, geography, and function scope remain separate.
-- Comparison projections derive from reviewed canonical data and preserve unresolved states.
+- Statistics use reviewed canonical repository data only.
+- Multi-select dimensions are not presented as mutually exclusive.
+- Unknown categories are not silently dropped.
+- Live market, price, market-cap, APY, yield-ranking, safety-score, and risk-score data are excluded from canonical stats output.
 - Growth PRs contain no more than two new stable assets.
 - A phase transition updates this roadmap before the next implementation sequence continues.
 
 ## Immediate next items
 
 ```text
-1. Complete PR #324 bounded scheduled read-only monitoring.
-2. Start PR #325 deterministic statistics generator and validator.
+1. Complete PR #325 deterministic statistics generator and validator.
+2. Start PR #326 immutable checkpoint history.
 3. Continue statistics through PR #328.
 4. Continue candidate audit and controlled growth in PR #329-#334.
 5. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
