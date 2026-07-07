@@ -29,7 +29,7 @@ try {
 
 if (baselineSet) {
   if (baselineSet.baselines.length !== sources.length) fail('baseline count must equal enabled official source count');
-  if (baselineSet.baselines.some((row) => row.status !== 'pending_initial_acceptance')) fail('PR #234 initial baselines must remain pending initial acceptance');
+  if (baselineSet.baselines.some((row) => row.status !== 'pending_initial_acceptance')) fail('current monitoring baselines must remain pending initial acceptance');
 
   const sourceIds = sources.map((row) => row.source_id).sort();
   const baselineIds = baselineSet.baselines.map((row) => row.source_id).sort();
@@ -40,7 +40,20 @@ if (baselineSet) {
     if (serialized.includes(forbidden)) fail(`baseline set contains prohibited content field ${forbidden}`);
   }
 
-  const acceptedFixture = structuredClone(baselineSet);
+  const historicalFixtureIds = [
+    'tether-transparency',
+    'circle-transparency',
+    'paxos-pyusd-transparency',
+    'ethena-custodian-attestations'
+  ];
+  const fixtureSources = sources.filter((row) => historicalFixtureIds.includes(row.source_id));
+  const fixtureBaselineSet = {
+    ...structuredClone(baselineSet),
+    baselines: baselineSet.baselines.filter((row) => historicalFixtureIds.includes(row.source_id))
+  };
+  if (fixtureSources.length !== 4 || fixtureBaselineSet.baselines.length !== 4) fail('PR #234 historical four-source fixture is incomplete');
+
+  const acceptedFixture = structuredClone(fixtureBaselineSet);
   acceptedFixture.updated_at = '2026-06-29T01:00:00.000Z';
   acceptedFixture.baselines = acceptedFixture.baselines.map((row, index) => ({
     ...row,
@@ -55,24 +68,24 @@ if (baselineSet) {
     accepted_repository_commit: 'a'.repeat(40),
     accepted_review_reference: 'PR #234'
   }));
-  const acceptedFailures = validateOfficialSourceBaselines(acceptedFixture, sources);
+  const acceptedFailures = validateOfficialSourceBaselines(acceptedFixture, fixtureSources);
   if (acceptedFailures.length) fail(`valid accepted fixture rejected: ${acceptedFailures.join('; ')}`);
 
   const outsideHost = structuredClone(acceptedFixture);
   outsideHost.baselines[0].accepted_final_url = 'https://example.invalid/transparency';
-  if (!validateOfficialSourceBaselines(outsideHost, sources).some((message) => message.includes('host is not allowlisted'))) fail('outside-host accepted URL must be rejected');
+  if (!validateOfficialSourceBaselines(outsideHost, fixtureSources).some((message) => message.includes('host is not allowlisted'))) fail('outside-host accepted URL must be rejected');
 
   const malformedDigest = structuredClone(acceptedFixture);
   malformedDigest.baselines[0].normalized_content_sha256 = 'not-a-digest';
-  if (!validateOfficialSourceBaselines(malformedDigest, sources).some((message) => message.includes('normalized_content_sha256'))) fail('malformed normalized digest must be rejected');
+  if (!validateOfficialSourceBaselines(malformedDigest, fixtureSources).some((message) => message.includes('normalized_content_sha256'))) fail('malformed normalized digest must be rejected');
 
-  const missingSource = structuredClone(baselineSet);
+  const missingSource = structuredClone(fixtureBaselineSet);
   missingSource.baselines.pop();
-  if (!validateOfficialSourceBaselines(missingSource, sources).some((message) => message.includes('missing a baseline record'))) fail('missing source baseline must be rejected');
+  if (!validateOfficialSourceBaselines(missingSource, fixtureSources).some((message) => message.includes('missing a baseline record'))) fail('missing source baseline must be rejected');
 
-  const populatedPending = structuredClone(baselineSet);
+  const populatedPending = structuredClone(fixtureBaselineSet);
   populatedPending.baselines[0].etag = 'must-not-be-populated';
-  if (!validateOfficialSourceBaselines(populatedPending, sources).some((message) => message.includes('must be null while pending'))) fail('populated pending baseline must be rejected');
+  if (!validateOfficialSourceBaselines(populatedPending, fixtureSources).some((message) => message.includes('must be null while pending'))) fail('populated pending baseline must be rejected');
 }
 
 const spec = fs.readFileSync(path.join(root, 'docs/quality/monitoring-baseline-spec.md'), 'utf8');
@@ -82,7 +95,7 @@ for (const phrase of [
   'normalized_content_sha256',
   'Monitoring execution may read this file but may not modify it',
   'No monitoring run may acquire write permission',
-  'no live page digest is invented or silently accepted',
+  'No live page digest is invented, inferred, or silently accepted',
   'No production deployment required'
 ]) {
   if (!spec.includes(phrase)) fail(`monitoring baseline specification missing: ${phrase}`);
@@ -94,4 +107,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('PR #234 monitoring baselines valid: four pending records, strict accepted-state validation, no write or publication authority.');
+console.log(`PR #234 baseline contract valid: historical four-source fixture passes and current ${sources.length}-source baseline set remains pending, private, and read-only.`);
