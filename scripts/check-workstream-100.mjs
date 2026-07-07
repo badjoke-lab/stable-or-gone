@@ -12,7 +12,8 @@ const checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-c
 const historical321 = JSON.parse(read('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json'));
 const historical322 = JSON.parse(read('scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json'));
 const current323 = JSON.parse(read('scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json'));
-const expansionSpec = read('docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md');
+const scheduledSpec = read('docs/quality/monitoring-bounded-scheduled-read-only-spec.md');
+const scheduledWorkflow = read('.github/workflows/monitoring-bounded-scheduled-read-only.yml');
 const baselineSpec = read('docs/quality/monitoring-baseline-spec.md');
 
 const failures = [];
@@ -20,16 +21,20 @@ const requireText = (body, text, file) => {
   if (!body.includes(text)) failures.push(`${file}: missing ${text}`);
 };
 
-requireText(roadmap, 'Current item: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'roadmap');
-requireText(roadmap, 'Next item: PR #324 bounded scheduled read-only monitoring', 'roadmap');
-requireText(roadmap, 'PR #322 reserve and redemption source expansion: complete', 'roadmap');
-requireText(agents, 'Active: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'AGENTS');
-requireText(agents, 'Next: PR #324 bounded scheduled read-only monitoring', 'AGENTS');
-requireText(governance, 'PR #323 lifecycle/regulatory/market-access source and schema governance', 'governance');
-requireText(nonUiPlan, 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: active', 'non-UI plan');
-requireText(nonUiPlan, 'PR #324 bounded scheduled read-only monitoring: next', 'non-UI plan');
-requireText(expansionSpec, 'lifecycle, regulatory, and market-access monitoring expansion specification', 'PR #323 spec');
-requireText(expansionSpec, 'scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json', 'PR #323 spec');
+requireText(roadmap, 'Current item: PR #324 bounded scheduled read-only monitoring', 'roadmap');
+requireText(roadmap, 'Next item: PR #325 deterministic statistics generator and validator', 'roadmap');
+requireText(roadmap, 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete', 'roadmap');
+requireText(agents, 'Active: PR #324 bounded scheduled read-only monitoring', 'AGENTS');
+requireText(agents, 'Next: PR #325 deterministic statistics generator and validator', 'AGENTS');
+requireText(governance, 'PR #324 bounded scheduled read-only monitoring governance', 'governance');
+requireText(nonUiPlan, 'PR #324 bounded scheduled read-only monitoring: active', 'non-UI plan');
+requireText(nonUiPlan, 'PR #325 deterministic statistics generator and validator: next', 'non-UI plan');
+requireText(scheduledSpec, 'bounded scheduled read-only monitoring specification', 'PR #324 spec');
+requireText(scheduledSpec, 'daily count = 4', 'PR #324 spec');
+requireText(scheduledSpec, 'weekly count = 35', 'PR #324 spec');
+requireText(scheduledWorkflow, 'contents: read', 'PR #324 workflow');
+requireText(scheduledWorkflow, "cron: '17 3 * * *'", 'PR #324 workflow');
+requireText(scheduledWorkflow, "cron: '23 4 * * 0'", 'PR #324 workflow');
 requireText(baselineSpec, 'sources: 39', 'baseline spec');
 requireText(baselineSpec, 'pending_initial_acceptance: 39', 'baseline spec');
 
@@ -74,4 +79,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #322 complete, PR #323 active, PR #324 next.');
+console.log('Workstream valid: PR #323 complete, PR #324 active, PR #325 next.');
