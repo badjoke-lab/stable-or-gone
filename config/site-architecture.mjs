@@ -11,11 +11,12 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'registry',
     label: 'Registry',
-    purpose: 'Browse canonical stablecoin, organization, and event records.',
+    purpose: 'Browse canonical stablecoin, organization, event, and derived statistics records.',
     items: Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
-      Object.freeze({ label: 'Events', href: '/events/' })
+      Object.freeze({ label: 'Events', href: '/events/' }),
+      Object.freeze({ label: 'Stats', href: '/stats/' })
     ])
   }),
   Object.freeze({
@@ -49,6 +50,7 @@ export const primaryNavigation = Object.freeze([
   Object.freeze({ id: 'register', label: 'Register', href: '/stablecoins/' }),
   Object.freeze({ id: 'events', label: 'Events', href: '/events/' }),
   Object.freeze({ id: 'organizations', label: 'Organizations', href: '/issuers/' }),
+  Object.freeze({ id: 'stats', label: 'Stats', href: '/stats/' }),
   Object.freeze({ id: 'guides', label: 'Guides', href: '/guides/' })
 ]);
 
@@ -70,6 +72,7 @@ export const footerNavigationGroups = Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
       Object.freeze({ label: 'Events', href: '/events/' }),
+      Object.freeze({ label: 'Stats', href: '/stats/' }),
       Object.freeze({ label: 'Guides', href: '/guides/' })
     ])
   }),
@@ -101,6 +104,8 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/ai.txt', source_file: 'src/pages/ai.txt.ts', output_kind: 'text', group: 'data_access', role: 'ai_entrypoint', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/contact/', source_file: 'src/pages/contact/index.astro', output_kind: 'html', group: 'project', role: 'corrections_and_submissions', decision: 'keep', navigation: 'utility' }),
   Object.freeze({ pattern: '/data/manifest.json', source_file: 'src/pages/data/manifest.json.ts', output_kind: 'json', group: 'data_access', role: 'public_data_manifest', decision: 'keep', navigation: 'footer_data' }),
+  Object.freeze({ pattern: '/data/stats-history.json', source_file: 'src/pages/data/stats-history.json.ts', output_kind: 'json', group: 'data_access', role: 'statistics_checkpoint_history', decision: 'add', navigation: 'stats' }),
+  Object.freeze({ pattern: '/data/stats.json', source_file: 'src/pages/data/stats.json.ts', output_kind: 'json', group: 'data_access', role: 'current_registry_statistics', decision: 'add', navigation: 'stats' }),
   Object.freeze({ pattern: '/event/{id}/', source_file: 'src/pages/event/[id].astro', output_kind: 'html', group: 'registry', role: 'event_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/events/', source_file: 'src/pages/events/index.astro', output_kind: 'html', group: 'registry', role: 'event_index', decision: 'keep', navigation: 'registry' }),
   Object.freeze({ pattern: '/glossary/', source_file: 'src/pages/glossary/index.astro', output_kind: 'html', group: 'learn', role: 'glossary', decision: 'keep', navigation: 'learn' }),
@@ -123,6 +128,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/sitemap-index.xml', source_file: 'src/pages/sitemap-index.xml.ts', output_kind: 'xml', group: 'discovery', role: 'sitemap_index', decision: 'keep', navigation: 'none' }),
   Object.freeze({ pattern: '/stablecoin/{slug}/', source_file: 'src/pages/stablecoin/[slug].astro', output_kind: 'html', group: 'registry', role: 'stablecoin_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/stablecoins/', source_file: 'src/pages/stablecoins/index.astro', output_kind: 'html', group: 'registry', role: 'stablecoin_index', decision: 'keep', navigation: 'registry' }),
+  Object.freeze({ pattern: '/stats/', source_file: 'src/pages/stats/index.astro', output_kind: 'html', group: 'discovery', role: 'registry_statistics', decision: 'add', navigation: 'primary' }),
   Object.freeze({ pattern: '/support/', source_file: 'src/pages/support/index.astro', output_kind: 'html', group: 'project', role: 'project_support', decision: 'keep', navigation: 'utility' }),
   Object.freeze({ pattern: '/updates/', source_file: 'src/pages/updates/index.astro', output_kind: 'html', group: 'project', role: 'registry_updates', decision: 'keep', navigation: 'project' }),
   Object.freeze({ pattern: '/version.json', source_file: 'src/pages/version.json.ts', output_kind: 'json', group: 'data_access', role: 'build_and_data_version', decision: 'keep', navigation: 'footer_data' })
@@ -132,6 +138,7 @@ export const recordContentOwnership = Object.freeze([
   Object.freeze({ owner_role: 'stablecoin_record', route: '/stablecoin/{slug}/', responsibilities: Object.freeze(['identity_and_current_state', 'organization_relationships', 'reserve_and_redemption', 'deployments', 'legal_and_regulatory_context', 'history', 'evidence', 'known_unknowns', 'corrections_and_further_reading']) }),
   Object.freeze({ owner_role: 'organization_record', route: '/issuer/{slug}/', responsibilities: Object.freeze(['organization_identity', 'current_and_historical_roles', 'connected_assets', 'events', 'evidence', 'corrections']) }),
   Object.freeze({ owner_role: 'event_record', route: '/event/{id}/', responsibilities: Object.freeze(['event_identity', 'subjects', 'status_effect', 'recovery', 'structured_detail', 'evidence', 'corrections']) }),
+  Object.freeze({ owner_role: 'registry_statistics', route: '/stats/', responsibilities: Object.freeze(['derived_registry_totals', 'lifecycle_composition', 'reviewed_checkpoint_history', 'statistics_methodology_links']) }),
   Object.freeze({ owner_role: 'methodology', route: '/methodology/', responsibilities: Object.freeze(['taxonomy_definitions', 'value_state_semantics', 'evidence_model', 'relationship_model', 'selection_rules']) }),
   Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['public_change_history']) }),
   Object.freeze({ owner_role: 'corrections_and_submissions', route: '/contact/', responsibilities: Object.freeze(['correction_submission', 'source_submission']) }),
@@ -149,11 +156,11 @@ export const compatibilityRoutePolicy = Object.freeze({
 
 export const routeMigrationPolicy = Object.freeze({
   current_pr_changes_routes: true,
-  current_pr_changes_navigation_markup: false,
+  current_pr_changes_navigation_markup: true,
   all_current_routes_preserved: true,
   redirects_introduced: Object.freeze([]),
   removals_introduced: Object.freeze([]),
   compatibility_changes_require_dedicated_migration: true,
   navigation_model: 'editorial_ledger_v3',
-  navigation_implemented_in_pr: 262
+  navigation_implemented_in_pr: 327
 });
