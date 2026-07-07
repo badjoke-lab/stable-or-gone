@@ -194,9 +194,9 @@ for (const marker of [
   'weekly count = 35',
   'maximum queries per run: 4',
   'maximum items retained per query: 20',
-  'automatic_guide_edit',
+  'edit the EU/EEA guide automatically',
   'contents: read',
-  'No production deployment'
+  'deploy monitoring output'
 ]) {
   check(spec.includes(marker), `PR #324 specification missing marker: ${marker}`);
 }
