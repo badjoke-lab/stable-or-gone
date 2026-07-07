@@ -20,8 +20,8 @@ This program governs the core workstream after the dedicated UI correction progr
 -> non-UI release material — complete
 -> monitoring baseline synchronization — complete
 -> reserve and redemption source expansion — complete
--> lifecycle/regulatory/access source and schema expansion — active
--> bounded scheduled read-only monitoring
+-> lifecycle/regulatory/access source and schema expansion — complete
+-> bounded scheduled read-only monitoring — active
 -> statistics implementation
 -> controlled growth from 100 to 110
 -> Comparison Foundation
@@ -32,7 +32,7 @@ This program governs the core workstream after the dedicated UI correction progr
 
 The canonical execution order and PR numbers are defined by `docs/roadmap.md` and active roadmap amendments.
 
-UI remains maintenance-only until the roadmap reaches an approved product UI phase. Narrow maintenance may not silently consume planned roadmap work.
+UI remains maintenance-only until the roadmap reaches an approved product UI phase.
 
 ## Current status
 
@@ -52,8 +52,9 @@ PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
 PR #321 100-asset monitoring baseline synchronization: complete
 PR #322 reserve and redemption source expansion: complete
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: active
-PR #324 bounded scheduled read-only monitoring: next
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete
+PR #324 bounded scheduled read-only monitoring: active
+PR #325 deterministic statistics generator and validator: next
 ```
 
 ## Required reading order
@@ -69,21 +70,23 @@ Before changing canonical data, evidence, workflows, monitoring, statistics, com
 7. the canonical specification for the active work item
 8. every named baseline, validator, audit, queue, fixture, release note, publication-gate review, and research checkpoint
 
-Current PR #323 work must read:
+Current PR #324 work must read:
 
 ```text
 docs/quality/monitoring-pipeline-spec.md
 docs/quality/monitoring-official-source-spec.md
 docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-baseline-spec.md
-docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
 docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
 scripts/monitoring/sources/official-sources.json
 scripts/monitoring/baselines/official-source-baselines.json
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+scripts/monitoring/scheduling/source-groups.mjs
+scripts/monitoring/monitors/news-discovery.mjs
+scripts/monitoring/monitors/article-stale-state-review.mjs
 ```
 
 ## Fixed operating rules
@@ -94,6 +97,9 @@ scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expan
 - Candidate monitoring output never writes directly to canonical public data.
 - Monitoring baselines are accepted only through a separate human-reviewed repository change.
 - Monitoring executions remain read-only and do not update their own baseline.
+- Scheduled output remains private workflow artifact material.
+- News discovery is discovery-only and does not create canonical facts.
+- Stale-state findings do not edit guides or research matrices automatically.
 - Platform access preserves function, service state, legal entity, customer scope, supported network, geography, and dates.
 - A platform licence is not proof of stablecoin function availability.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
@@ -128,6 +134,7 @@ PR #319         guide maintenance, inserted work
 PR #320         non-UI release material
 PR #321         100-asset monitoring baseline synchronization
 PR #322         reserve and redemption source expansion
+PR #323         lifecycle, regulatory, and EU market-access source/schema expansion
 ```
 
 ## Monitoring pipeline boundary
@@ -144,50 +151,44 @@ official-source observation
 -> human approval before canonical publication
 ```
 
-It must not commit canonical data, accept its own baseline, publish candidates, edit guides automatically, create automatic canonical PRs, or deploy.
-
-## Historical PR #321 monitoring checkpoint
+Scheduled auxiliary lanes add:
 
 ```text
-sources: 24
-baseline rows: 24
-pending: 24
-accepted: 0
-registered asset reach: 16
-uncovered assets: 84
-covered organizations: 12
-accepted asset reach: 0
-multi-family assets: 7
+bounded news discovery -> private discovery leads
+article stale-state review -> private review findings
 ```
 
-Historical binding snapshot:
+The pipeline must not commit canonical data, accept its own baseline, publish candidates or discovery leads, edit guides automatically, create automatic canonical PRs, or deploy.
+
+## Historical monitoring checkpoints
+
+PR #321:
 
 ```text
-scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+24 sources
+24 pending baselines
+16 assets reached
+84 uncovered assets
+12 organizations reached
+0 accepted baselines
+0 accepted asset reach
+7 multi-family assets
 ```
 
-## Historical PR #322 monitoring checkpoint
+PR #322:
 
 ```text
-sources: 30
-baseline rows: 30
-pending: 30
-accepted: 0
-missing: 0
-registered asset reach: 22
-uncovered assets: 78
-covered organizations: 18
-accepted asset reach: 0
-multi-family assets: 11
+30 sources
+30 pending baselines
+22 assets reached
+78 uncovered assets
+18 organizations reached
+0 accepted baselines
+0 accepted asset reach
+11 multi-family assets
 ```
 
-Historical binding snapshot:
-
-```text
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-```
-
-PR #321 and PR #322 snapshots are immutable. Successor source expansion uses a separate current snapshot.
+PR #321 and PR #322 snapshots are immutable.
 
 ## Current PR #323 monitoring boundary
 
@@ -216,17 +217,6 @@ platform_service_state: 1 source / 0 mapped assets
 regulatory_register: 1 source / 0 mapped assets
 ```
 
-Current scoped coverage:
-
-```text
-platform-policy sources: 3
-platform service-state sources: 1
-regulatory-register sources: 1
-market-access schema-capable sources: 5
-scoped platforms: 4
-scoped region values: 4
-```
-
 Binding current snapshot:
 
 ```text
@@ -250,44 +240,60 @@ PR #320 non-UI release material — complete
 ```text
 PR #321 100-asset monitoring baseline synchronization — complete
 PR #322 reserve and redemption source expansion — complete
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion — active
-PR #324 bounded scheduled read-only monitoring — next
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion — complete
+PR #324 bounded scheduled read-only monitoring — active
 ```
 
-### PR #323 contract
+### PR #324 contract
 
 Binding files:
 
 ```text
-docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
-docs/quality/monitoring-official-source-schema.md
-scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
-scripts/validate-monitoring-scoped-source-schema-pr323.mjs
-scripts/validate-monitoring-lifecycle-regulatory-market-access-expansion-100-assets.mjs
-.github/workflows/monitoring-lifecycle-regulatory-market-access-expansion.yml
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
+scripts/monitoring/scheduling/source-groups.mjs
+scripts/monitoring/monitors/news-discovery.mjs
+scripts/monitoring/monitors/article-stale-state-review.mjs
+scripts/validate-bounded-scheduled-monitoring-pr324.mjs
+.github/workflows/monitoring-bounded-scheduled-read-only.yml
 ```
 
-PR #323:
+Scheduled partition:
 
-- adds four reviewed issuer lifecycle/regulatory source rows;
-- adds three platform-policy source rows;
-- adds one platform-wide service-state source row;
-- adds one regulatory-register source row;
-- adds matching pending baseline rows;
-- introduces optional reviewed `monitoring_scope` metadata;
-- preserves legal entity, region, function scope, and register-family context;
-- propagates scope into private observations and candidates;
-- avoids fake canonical IDs for platform or register subjects;
-- increases registered asset reach from 22 to 23;
-- reduces uncovered queue from 78 to 77;
-- increases multi-family asset count from 11 to 17;
-- keeps every baseline pending;
-- keeps accepted coverage at zero;
-- performs no network access during deterministic snapshot generation;
-- performs no canonical action;
-- creates no public monitoring output.
+```text
+daily sources: 4
+weekly sources: 35
+overlap: 0
+union: all 39 reviewed sources
+source/baseline parity: exact for both groups
+all 39 baselines remain pending
+accepted baselines: 0
+accepted asset reach: 0
+```
 
-PR #324 alone activates bounded schedule triggers.
+Daily group:
+
+```text
+platform_policy sources
+platform_service_state sources
+bounded private news discovery
+```
+
+Weekly group:
+
+```text
+all remaining reviewed official sources
+ESMA regulatory-register source
+issuer reserve/transparency sources
+redemption and mint-term sources
+issuer lifecycle and regulatory sources
+article/research stale-state review
+```
+
+News discovery is bounded to four queries and twenty retained items per query, uses a 1 MiB body limit, retains no raw response body, and remains `discovery_only` with `canonical_action: none` and `public_output: false`.
+
+Article stale-state review is read-only and may report `current`, `review_due`, `stale`, `severely_stale`, or `missing_date`. It may not edit the public guide, research matrix, or canonical data.
+
+The scheduled workflow uses `contents: read` only and uploads private artifacts. It may not create branches or canonical pull requests, accept baselines, publish candidates or leads, use Cloudflare deployment credentials, or deploy monitoring output.
 
 ## Phase D — statistics implementation
 
@@ -333,8 +339,6 @@ PR #341 /compare/ v1
 PR #342 Compare presets
 ```
 
-Compare presents factual materials under shared definitions. It does not score, rank, recommend, or fill missing values by inference.
-
 ## Phase H — Change Research Tools
 
 ```text
@@ -343,8 +347,6 @@ PR #344 Access & Regulation Explorer
 PR #345 change-timeline projection generator
 PR #346 Change Timeline UI
 ```
-
-Access and regulation may share a discovery surface while retaining separate canonical record families. Change Timeline is derived and does not replace source record families.
 
 ## Phase I — Reviewed Public Update Layer
 
