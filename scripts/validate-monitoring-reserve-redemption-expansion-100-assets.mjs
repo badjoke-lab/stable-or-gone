@@ -31,6 +31,10 @@ const expansionSourceIds = [
   'trueusd-transparency',
   'vnx-vchf-overview',
 ];
+const currentWithExpansion = {
+  ...current,
+  expansion_source_ids: expansionSourceIds,
+};
 const expectedSources = {
   'trueusd-transparency': {
     url: 'https://tusd.io/transparency',
@@ -76,7 +80,7 @@ const expectedSources = {
   },
 };
 
-check(isDeepStrictEqual(snapshot, current), 'current monitoring expansion observation differs from binding PR #322 snapshot');
+check(isDeepStrictEqual(snapshot, currentWithExpansion), 'current monitoring expansion observation differs from binding PR #322 snapshot');
 check(snapshot.source_baseline_sync?.source_count === 30, 'expanded source count must be 30');
 check(snapshot.source_baseline_sync?.baseline_count === 30, 'expanded baseline count must be 30');
 check(snapshot.source_baseline_sync?.source_baseline_id_parity === true, 'source/baseline ID parity must remain true');
