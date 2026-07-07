@@ -83,12 +83,14 @@ if (checkpointUpdate) {
 
 requireText(roadmap, 'PR #320 non-UI release material: complete', 'docs/roadmap.md');
 requireText(roadmap, 'PR #321 100-asset monitoring baseline synchronization: complete', 'docs/roadmap.md');
-requireText(roadmap, 'Current item: PR #322 reserve and redemption source expansion', 'docs/roadmap.md');
-requireText(roadmap, 'Next item: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
+requireText(roadmap, 'PR #322 reserve and redemption source expansion: complete', 'docs/roadmap.md');
+requireText(roadmap, 'Current item: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
+requireText(roadmap, 'Next item: PR #324 bounded scheduled read-only monitoring', 'docs/roadmap.md');
 requireText(agents, 'PR #320 non-UI release material: complete', 'AGENTS.md');
 requireText(agents, 'PR #321 100-asset monitoring baseline synchronization: complete', 'AGENTS.md');
-requireText(agents, 'Active: PR #322 reserve and redemption source expansion', 'AGENTS.md');
-requireText(agents, 'Next: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'AGENTS.md');
+requireText(agents, 'PR #322 reserve and redemption source expansion: complete', 'AGENTS.md');
+requireText(agents, 'Active: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'AGENTS.md');
+requireText(agents, 'Next: PR #324 bounded scheduled read-only monitoring', 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -105,6 +107,6 @@ console.log(JSON.stringify({
   evidence: checkpoint.v2_groups.evidence.record_count,
   canonical_file_count: checkpoint.canonical_file_count,
   update_id: updateId,
-  active_roadmap_item: 'PR #322 reserve and redemption source expansion',
-  next_roadmap_item: 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion',
+  active_roadmap_item: 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion',
+  next_roadmap_item: 'PR #324 bounded scheduled read-only monitoring',
 }, null, 2));
