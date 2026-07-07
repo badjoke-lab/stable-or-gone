@@ -1,0 +1,34 @@
+name: PR323 scoped monitoring capture
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: github.head_ref == 'pr323-lifecycle-regulatory-market-access-expansion'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate scoped source schema and canonical targets
+        run: node scripts/validate-monitoring-scoped-source-schema-pr323.mjs
+      - name: Generate PR 323 current monitoring observation
+        env:
+          SOG_MONITORING_SYNC_OUTPUT: artifacts/monitoring-lifecycle-regulatory-market-access-current.json
+        run: node scripts/generate-monitoring-baseline-sync-100-assets.mjs
+      - name: Upload PR 323 current monitoring observation
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr323-monitoring-scope-observation
+          path: artifacts/monitoring-lifecycle-regulatory-market-access-current.json
+          if-no-files-found: error
