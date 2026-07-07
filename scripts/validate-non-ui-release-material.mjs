@@ -34,14 +34,13 @@ const expectedReadmeCounts = [
 ];
 for (const marker of expectedReadmeCounts) requireText(readme, marker, 'README.md');
 
-requireText(readme, '/version.json', 'README.md');
-requireText(readme, '/data/manifest.json', 'README.md');
-requireText(readme, '/llms.txt', 'README.md');
-requireText(readme, '/ai.txt', 'README.md');
-requireText(readme, 'canonical_only = true', 'README.md');
-requireText(readme, 'includes_unreviewed_candidates = false', 'README.md');
-requireText(readme, 'includes_internal_monitoring = false', 'README.md');
-requireText(readme, 'includes_private_notes = false', 'README.md');
+for (const route of ['/version.json', '/data/manifest.json', '/llms.txt', '/ai.txt']) requireText(readme, route, 'README.md');
+for (const boundary of [
+  'canonical_only = true',
+  'includes_unreviewed_candidates = false',
+  'includes_internal_monitoring = false',
+  'includes_private_notes = false',
+]) requireText(readme, boundary, 'README.md');
 
 requireText(release, checkpoint.checkpoint_id, 'release note');
 requireText(release, checkpoint.source_commit, 'release note');
@@ -55,17 +54,13 @@ requireText(release, `output files: ${checkpoint.reproducibility_checkpoint.file
 requireText(release, `total bytes: ${checkpoint.reproducibility_checkpoint.total_bytes}`, 'release note');
 requireText(release, 'reproducible: true', 'release note');
 
-for (const route of ['/version.json', '/data/manifest.json', '/llms.txt', '/ai.txt']) {
-  requireText(release, route, 'release note');
-}
+for (const route of ['/version.json', '/data/manifest.json', '/llms.txt', '/ai.txt']) requireText(release, route, 'release note');
 for (const boundary of [
   'canonical_only = true',
   'includes_unreviewed_candidates = false',
   'includes_internal_monitoring = false',
   'includes_private_notes = false',
-]) {
-  requireText(release, boundary, 'release note');
-}
+]) requireText(release, boundary, 'release note');
 
 check(checkpoint.release_integrity_baseline_id === releaseBaseline.baseline_id, 'checkpoint/release-integrity baseline ID mismatch');
 check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'checkpoint/reproducible-build baseline ID mismatch');
@@ -86,11 +81,12 @@ if (checkpointUpdate) {
   }
 }
 
-requireText(roadmap, 'Current item: PR #320 non-UI release material', 'docs/roadmap.md');
-requireText(roadmap, 'Next item: PR #321 100-asset monitoring baseline synchronization', 'docs/roadmap.md');
-requireText(roadmap, 'PR #318 audited 100-record canonical checkpoint: complete', 'docs/roadmap.md');
-requireText(agents, 'Active: PR #320 non-UI release material', 'AGENTS.md');
-requireText(agents, 'Next: PR #321 100-asset monitoring baseline synchronization', 'AGENTS.md');
+requireText(roadmap, 'PR #320 non-UI release material: complete', 'docs/roadmap.md');
+requireText(roadmap, 'Current item: PR #321 100-asset monitoring baseline synchronization', 'docs/roadmap.md');
+requireText(roadmap, 'Next item: PR #322 reserve and redemption source expansion', 'docs/roadmap.md');
+requireText(agents, 'PR #320 non-UI release material: complete', 'AGENTS.md');
+requireText(agents, 'Active: PR #321 100-asset monitoring baseline synchronization', 'AGENTS.md');
+requireText(agents, 'Next: PR #322 reserve and redemption source expansion', 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -107,5 +103,6 @@ console.log(JSON.stringify({
   evidence: checkpoint.v2_groups.evidence.record_count,
   canonical_file_count: checkpoint.canonical_file_count,
   update_id: updateId,
-  next_roadmap_item: 'PR #321 100-asset monitoring baseline synchronization',
+  active_roadmap_item: 'PR #321 100-asset monitoring baseline synchronization',
+  next_roadmap_item: 'PR #322 reserve and redemption source expansion',
 }, null, 2));
