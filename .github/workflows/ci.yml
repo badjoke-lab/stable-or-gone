@@ -67,6 +67,17 @@ jobs:
         run: npm run validate:migration-v3
       - name: Validate Registry v2/v3 machine-readable parity
         run: npm run validate:parity
+      - name: Generate deterministic statistics
+        run: npm run stats:build
+      - name: Validate deterministic statistics
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json npm run validate:stats
+      - name: Upload deterministic statistics artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stats-current-${{ github.run_id }}
+          if-no-files-found: warn
+          path: artifacts/stats-current.json
       - name: Validate counts, manifest, version, and provenance integrity
         run: npm run validate:release-integrity
       - name: Validate reproducible build contract
