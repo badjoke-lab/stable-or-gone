@@ -17,7 +17,7 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 check(layout.includes("import '../styles/shell.css'"), 'shell stylesheet is not imported');
 check(layout.includes("import '../styles/editorial-ledger-v3.css'"), 'terminal compatibility stylesheet is not imported');
 check(layout.includes("import { aboutNavigation, footerNavigationGroups, primaryNavigation }"), 'navigation is not generated from the architecture contract');
-check(primaryNavigation.length === 4, 'four primary navigation links are required');
+check(primaryNavigation.length === 5, 'five primary navigation links are required');
 check(aboutNavigation.length === 7, 'seven About/project links are required');
 check(footerNavigationGroups.length === 3, 'three footer navigation groups are required');
 check(layout.includes('primaryNavigation.map'), 'primary navigation renderer is missing');
