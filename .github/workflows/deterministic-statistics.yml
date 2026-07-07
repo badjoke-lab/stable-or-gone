@@ -29,9 +29,9 @@ jobs:
       - name: Validate Registry v3 income profiles
         run: npm run validate:income-v3
       - name: Generate statistics
-        run: npm run stats:build
+        run: node scripts/build-stats.mjs
       - name: Validate statistics
-        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json npm run validate:stats
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
       - name: Upload generated statistics
         if: always()
         uses: actions/upload-artifact@v4
