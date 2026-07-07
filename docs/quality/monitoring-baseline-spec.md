@@ -2,52 +2,36 @@
 
 Status: canonical specification  
 Updated: 2026-07-07  
-Roadmap item: PR #234, amended by PR #238, PR #321, and PR #322
+Roadmap item: PR #234, amended by PR #238, PR #321, PR #322, and PR #323
 
 ## Purpose
 
 A baseline is not canonical evidence. It is a human-reviewed comparison point for an official source.
 
-PR #321 synchronized the first 24-source configuration with the audited 100-asset registry checkpoint without accepting live page digests.
-
-PR #322 expands reserve and redemption source reach to 30 reviewed official sources while preserving the same zero-accepted baseline boundary.
+The current monitoring configuration contains 39 reviewed sources and 39 baseline rows. All 39 remain `pending_initial_acceptance`.
 
 ## Storage
 
-The live internal baseline set is stored at:
+Live internal baseline set:
 
 ```text
 scripts/monitoring/baselines/official-source-baselines.json
 ```
 
-Monitoring execution may read this file but may not modify it.
-
-Historical PR #321 synchronization state is stored at:
+Historical and successor snapshots:
 
 ```text
+PR #321
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-```
 
-Current PR #322 expansion state is stored at:
-
-```text
+PR #322
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+
+PR #323 current
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
 
-Both snapshots are internal monitoring contracts. Neither is a replacement baseline set and neither is canonical evidence.
-
-## Required top-level fields
-
-```text
-schema_version
-baseline_set_id
-normalization_version
-updated_at
-baselines
-policy
-```
-
-`normalization_version` must remain `sog_official_source_normalization_v2`. A digest produced under another normalization version is not comparable and requires separate reviewed migration.
+Historical snapshots remain immutable. Later source expansion creates a successor snapshot rather than rewriting earlier counts or digests.
 
 ## Record states
 
@@ -56,12 +40,12 @@ pending_initial_acceptance
 accepted
 ```
 
-A `pending_initial_acceptance` record keeps all accepted-only fields null.
+A pending record keeps all accepted-only fields null.
 
-An accepted record requires:
+An accepted record requires reviewed observation provenance under the current normalization version:
 
 ```text
-allowlisted accepted_final_url
+accepted_final_url
 body_sha256
 normalized_content_sha256
 content_type
@@ -70,43 +54,33 @@ accepted_repository_commit
 accepted_review_reference
 ```
 
-Optional response metadata such as ETag and Last-Modified may remain null when unavailable.
+Monitoring execution may read the baseline set but may not modify or accept it.
 
-## Historical PR #321 state
-
-PR #321 recorded:
+## Historical PR #321 boundary
 
 ```text
-reviewed official sources: 24
+sources: 24
 baseline rows: 24
-pending_initial_acceptance: 24
+pending: 24
 accepted: 0
-missing: 0
 registered asset reach: 16
 uncovered assets: 84
-accepted asset reach: 0
 ```
 
-That snapshot remains immutable historical state and is not rewritten by later source expansion.
-
-## Current PR #322 reviewed state
-
-After reserve and redemption source expansion:
+## Historical PR #322 boundary
 
 ```text
-reviewed official sources: 30
+sources: 30
 baseline rows: 30
-pending_initial_acceptance: 30
+pending: 30
 accepted: 0
-missing: 0
 registered asset reach: 22
 uncovered assets: 78
 covered organizations: 18
-accepted asset reach: 0
 multi-family assets: 11
 ```
 
-Current family reach:
+PR #322 historical family reach:
 
 ```text
 reserve_assurance: 14 sources / 16 assets
@@ -115,71 +89,77 @@ issuer_lifecycle: 5 sources / 5 assets
 regulatory: 5 sources / 5 assets
 ```
 
-All 30 baseline records remain pending. No live page digest is invented, inferred, or silently accepted.
+## Current PR #323 boundary
 
-PR #322 adds only pending rows for TUSD, EURA, EURCV, EURI, EURQ, and VCHF first-party source pages.
+```text
+sources: 39
+baseline rows: 39
+pending_initial_acceptance: 39
+accepted: 0
+missing: 0
+registered asset reach: 23
+uncovered assets: 77
+covered organizations: 18
+accepted asset reach: 0
+multi-family assets: 17
+```
 
-## Acceptance boundary
+Current source-family reach:
 
-A future pending-to-accepted transition requires a separate reviewed baseline-acceptance change with:
+```text
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
+issuer_lifecycle: 7 sources / 7 assets
+regulatory: 9 sources / 8 assets
+platform_policy: 3 sources / 12 mapped assets
+platform_service_state: 1 source / 0 mapped assets
+regulatory_register: 1 source / 0 mapped assets
+```
 
-- a live observation produced under the current normalization version;
-- an allowlisted final URL;
-- exact and normalized SHA-256 digests;
-- content type;
-- exact observation timestamp;
-- reviewed repository commit SHA;
-- `PR #<number>` review reference;
-- human review.
+Current scoped coverage:
 
-Monitoring execution itself may never accept its own baseline.
+```text
+platform-policy sources: 3
+platform service-state sources: 1
+regulatory-register sources: 1
+market-access schema-capable sources: 5
+scoped platforms: 4
+scoped region values: 4
+```
+
+Platform and register scope are not divided by the 100-asset denominator.
 
 ## Normalization
 
-Canonical normalization rules are defined in:
+`normalization_version` remains:
 
 ```text
-docs/quality/monitoring-normalization-spec.md
+sog_official_source_normalization_v2
 ```
 
-Raw bodies and normalized page text are prohibited in the baseline file.
+Raw bodies and normalized page text are prohibited in the baseline file. A normalization change requires a separate reviewed migration.
 
-A normalization version change requires a separate reviewed baseline migration. No monitoring run may acquire write permission because baseline updates exist.
+## PR #323 governance
 
-## Historical synchronization rule
-
-PR #321 remains governed by:
+PR #323 is governed by:
 
 ```text
-docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
-scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-official-source-schema.md
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
 
-Its historical validator protects the original 24-source counts and digests directly.
+Validation requires:
 
-## Current reserve/redemption expansion rule
-
-PR #322 is governed by:
-
-```text
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-```
-
-Current expansion validation verifies:
-
-- 100 canonical stable assets remain the registry boundary;
-- 94 canonical organizations and 110 relationships remain the boundary;
-- 30 enabled source IDs match 30 baseline IDs exactly;
-- all configured canonical references resolve;
-- all 30 baseline rows remain pending;
-- accepted baseline count remains zero;
-- accepted monitoring asset reach remains zero;
-- six approved PR #322 source rows exist exactly once;
-- reserve/assurance and redemption family counts match the reviewed expansion snapshot;
-- deterministic current-state digests match the reviewed PR #322 snapshot.
-
-Neither synchronization nor expansion authorizes baseline acceptance, schedule activation, canonical writes, guide edits, automatic canonical pull requests, candidate publication, or deployment.
+- exact 39-source / 39-baseline ID parity;
+- all 39 rows pending;
+- accepted count zero;
+- accepted asset reach zero;
+- canonical target references resolve;
+- reviewed `monitoring_scope` values validate;
+- platform, legal-entity, region, function, and register scope survive observation and candidate generation;
+- current deterministic observation matches the PR #323 snapshot exactly;
+- PR #321 and PR #322 historical snapshots remain unchanged.
 
 ## Fixed policy
 
@@ -190,36 +170,15 @@ canonical_evidence: false
 public_output: false
 automatic_pull_request: false
 production_publication: false
-```
-
-Snapshot generators additionally record:
-
-```text
-network_access_used: false
+network_access_used_for_snapshot: false
 canonical_action: none
 ```
 
-## Validation
-
-Validation rejects:
-
-- missing or duplicate source/baseline records;
-- unknown canonical references;
-- source/baseline ID mismatch;
-- source URL mismatch;
-- stale normalization version;
-- malformed accepted digests or provenance;
-- populated accepted-only fields on pending rows;
-- content-bearing fields;
-- unsafe policy values;
-- expansion snapshot digest drift;
-- unapproved PR #322 source IDs;
-- lifecycle/regulatory signal expansion inside PR #322 rows;
-- accepted coverage claims unsupported by reviewed accepted rows.
+Neither baseline synchronization nor source expansion authorizes schedule activation, canonical writes, guide edits, automatic branches or canonical pull requests, candidate publication, or deployment.
 
 ## Public-output rule
 
-The baseline set and monitoring synchronization/expansion snapshots remain internal. They are excluded from public pages, public JSON, public machine-readable files, sitemap output, and canonical evidence.
+The baseline set and monitoring snapshots remain internal. They are excluded from public pages, public JSON, public machine-readable files, sitemap output, and canonical evidence.
 
 ## Deployment classification
 
