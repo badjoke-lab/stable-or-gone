@@ -22,6 +22,22 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Validate historical source observer contract
+        run: node scripts/validate-monitoring-pipeline-pr231.mjs
+      - name: Validate historical source fetch contract
+        run: node scripts/validate-monitoring-pipeline-pr232.mjs
+      - name: Validate historical baseline contract
+        run: node scripts/validate-monitoring-baseline-pr234.mjs
+      - name: Validate historical change detection contract
+        run: node scripts/validate-monitoring-change-detection-pr235.mjs
+      - name: Validate historical baseline proposal contract
+        run: node scripts/validate-monitoring-baseline-update-pr236.mjs
+      - name: Validate historical observation classification contract
+        run: node scripts/validate-monitoring-observation-classification-pr237.mjs
+      - name: Validate historical normalization contract
+        run: node scripts/validate-monitoring-normalization-pr238.mjs
+      - name: Validate historical Phase A contract
+        run: node scripts/validate-monitoring-phase-a-pr239.mjs
       - name: Validate historical PR 321 synchronization snapshot
         run: node scripts/validate-monitoring-baseline-sync-100-assets.mjs
       - name: Validate current monitoring configuration
