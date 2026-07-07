@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-06  
+Updated: 2026-07-07  
 Status: canonical execution schedule — active
 
 ## Current position
@@ -11,6 +11,9 @@ Audited canonical source checkpoint:
 
 PR #318 merge checkpoint:
 b275178f3816d1ebf3828f223b546f04de1edae7
+
+PR #320 merge checkpoint:
+5c742177ee52aa661a115b7c5364526d8ad46aef
 
 Canonical stable assets: 100
 Organizations: 94
@@ -23,14 +26,15 @@ Deployments: 140
 Detail routes: 366
 UI status: maintenance-only; no active redesign program
 
-PR #316 counts, manifest, version, and provenance integrity: complete
-PR #317 reproducible build and generated-output audit: complete
+PR #316 release integrity: complete
+PR #317 reproducible build audit: complete
 PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide article spacing maintenance: complete, inserted work
+PR #320 non-UI release material: complete
 
-Active workstream: non-UI release hardening
-Current item: PR #320 non-UI release material
-Next item: PR #321 100-asset monitoring baseline synchronization
+Active workstream: monitoring expansion and operation
+Current item: PR #321 100-asset monitoring baseline synchronization
+Next item: PR #322 reserve and redemption source expansion
 ```
 
 Current numbering authority:
@@ -42,7 +46,7 @@ docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 
 This roadmap and the active amendments supersede older numeric labels in subordinate plans. Work order and scope remain unchanged unless deliberately amended.
 
-## Completed sequence through the 100-asset checkpoint
+## Completed sequence through Phase B
 
 ```text
 PR #296  resume core workstream and synchronize repository authority
@@ -68,9 +72,10 @@ PR #316  counts, manifest, version, and provenance integrity
 PR #317  reproducible build and generated-output audit
 PR #318  audited 100-record canonical checkpoint
 PR #319  guide article list clipping and spacing maintenance — inserted maintenance
+PR #320  non-UI release material
 ```
 
-The registry remains at the reviewed 100-asset checkpoint while Phase B closes.
+Phase B is complete. The registry remains at the reviewed 100-asset checkpoint while Phase C synchronizes and expands review-only monitoring.
 
 ## 100-record quality boundaries
 
@@ -95,10 +100,11 @@ not_applicable
 source_review_needed
 ```
 
-### Monitoring coverage boundary
+### Monitoring coverage boundary before source expansion
 
 ```text
 registered official sources: 24
+baseline rows: 24
 assets reached by at least one registered source: 16
 registered asset reach: 16.00%
 uncovered assets: 84
@@ -106,6 +112,17 @@ organizations reached: 12
 accepted sources: 0
 accepted asset reach: 0
 pending_initial_acceptance baselines: 24
+accepted baselines: 0
+missing baselines: 0
+```
+
+Current source-family reach:
+
+```text
+reserve_assurance: 9 sources / 11 assets
+redemption_terms: 6 sources / 7 assets
+issuer_lifecycle: 5 sources / 5 assets
+regulatory: 5 sources / 5 assets
 ```
 
 Zero checked-in coverage remains recorded for:
@@ -118,7 +135,7 @@ market-access schema-capable sources
 accepted baselines
 ```
 
-A registered source is not an accepted baseline. Issuer/protocol reach is not platform-policy coverage. Regulatory action pages are not regulatory-register coverage. A generic issuer or product page is not function-level market-access coverage.
+A registered source is not an accepted baseline. A pending baseline is not accepted monitoring coverage. Issuer/protocol reach is not platform-policy coverage. Regulatory action pages are not regulatory-register coverage. A generic issuer or product page is not function-level market-access coverage.
 
 ### Registry v2/v3 parity boundary
 
@@ -139,38 +156,28 @@ deployment view rows: 140
 
 The public machine-readable contract remains Registry v2-compatible with additive Registry v3 summary data.
 
-## PR #316 — release integrity — complete
+## Release hardening history
 
-Binding files:
-
-```text
-docs/counts-manifest-version-provenance-integrity-spec.md
-docs/migration/registry-release-integrity-baseline.json
-docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
-```
-
-Merged checkpoint:
+### PR #316 — release integrity — complete
 
 ```text
+Merge checkpoint:
 47c110b69ec7fd61121cbeee247f4ef12d466117
+
+Binding baseline:
+docs/migration/registry-release-integrity-baseline.json
 ```
 
 PR #316 tied canonical counts, public machine-readable count surfaces, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
 
-## PR #317 — reproducible build — complete
-
-Binding files:
+### PR #317 — reproducible build — complete
 
 ```text
-docs/reproducible-build-generated-output-audit-spec.md
-docs/migration/reproducible-build-output-baseline.json
-docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
-```
-
-Merged checkpoint:
-
-```text
+Merge checkpoint:
 9a106f0938e6323de833c941d6ae863050f1f03b
+
+Binding baseline:
+docs/migration/reproducible-build-output-baseline.json
 ```
 
 Accepted result:
@@ -184,20 +191,14 @@ failures: 0
 reproducible: true
 ```
 
-## PR #318 — audited 100-asset canonical checkpoint — complete
-
-Binding files:
+### PR #318 — audited 100-asset checkpoint — complete
 
 ```text
-docs/audited-100-asset-canonical-checkpoint-spec.md
-docs/migration/audited-100-asset-canonical-checkpoint.json
-docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
-```
-
 Merge checkpoint:
-
-```text
 b275178f3816d1ebf3828f223b546f04de1edae7
+
+Binding checkpoint:
+docs/migration/audited-100-asset-canonical-checkpoint.json
 ```
 
 Observed checkpoint:
@@ -209,24 +210,21 @@ canonical content SHA-256: 8fa08219d1e587a0628576cdfcf0e64722348282897558016651a
 canonical identity SHA-256: cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
 ```
 
-PR #318 bound source counts, group identity/content digests, global canonical identity/content digests, package graph linkage, release-integrity baseline, reproducible-build baseline, accepted reproducibility result, current production provenance, exact output parity, and canonical checkpoint parity.
-
-## PR #319 — guide article spacing maintenance — complete, inserted work
-
-Actual merge:
+### PR #319 — guide maintenance — complete, inserted work
 
 ```text
-PR #319 Fix guide article list clipping and spacing
-Merge commit: 547c639df35e39f657a77bbfd82a49a988877367
+Merge commit:
+547c639df35e39f657a77bbfd82a49a988877367
 ```
 
-This was a narrow guide presentation fix and did not perform the planned non-UI release-material work. Remaining unused work was renumbered by:
+This was a narrow guide presentation fix. Remaining unused work was renumbered by `docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md`.
+
+### PR #320 — non-UI release material — complete
 
 ```text
-docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
+Merge checkpoint:
+5c742177ee52aa661a115b7c5364526d8ad46aef
 ```
-
-## PR #320 — non-UI release material — active
 
 Binding specification:
 
@@ -234,59 +232,99 @@ Binding specification:
 docs/non-ui-release-material-spec.md
 ```
 
-Required outputs:
+Outputs include the 100-asset README state, checkpoint release note, reviewed update-history entry, public-copy overlay, release-material validator, CI gate, and authority synchronization.
+
+## PR #321 — 100-asset monitoring baseline synchronization — active
+
+Binding specification:
 
 ```text
-README.md
-docs/releases/100-asset-checkpoint-2026-07-06.md
-data/registry-updates.json
-scripts/validate-non-ui-release-material.mjs
+docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
+```
+
+Binding synchronization snapshot:
+
+```text
+scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 ```
 
 Purpose:
 
-- replace stale 92-asset README claims with the reviewed 100-asset checkpoint;
-- publish a repository release note tied to the audited checkpoint;
-- add one reviewed checkpoint entry to the existing public update history;
-- expose existing machine-readable entry points without creating a second count authority;
-- state public data-safety and monitoring boundaries explicitly;
-- state the approved next roadmap sequence without claiming unimplemented products.
+- synchronize the current 24 reviewed official-source rows with 24 baseline rows;
+- verify exact source/baseline ID parity;
+- project all 100 canonical assets into explicit registered-source coverage states;
+- project all 94 organizations into monitoring-source reach states;
+- bind current coverage and uncovered queues with deterministic digests;
+- preserve 24 pending baselines and zero accepted baselines honestly;
+- preserve zero accepted asset reach;
+- prohibit network access, canonical action, public output, automatic pull requests, and production publication;
+- update old 92-asset and four-source baseline wording to the current reviewed boundary.
 
-PR #320 does not modify canonical asset, organization, event, evidence, reserve, relationship, deployment, or Registry v3 source records.
+Binding synchronization values:
+
+```text
+stable assets: 100
+organizations: 94
+relationships: 110
+sources: 24
+baseline rows: 24
+source/baseline ID parity: true
+pending_initial_acceptance: 24
+accepted: 0
+missing: 0
+registered asset reach: 16
+uncovered assets: 84
+covered organizations: 12
+accepted asset reach: 0
+multi-family assets: 7
+```
+
+Deterministic synchronization digests:
+
+```text
+asset sync SHA-256:
+ed55574e1e0fab657ab401bec4e4e186f7d27866a163f40caed8eeffebf8e033
+
+organization sync SHA-256:
+6ae5056633e31777a93f10492417e28dca931230690b928afd0196ff84c199db
+
+source/baseline sync SHA-256:
+47e0891e1a33820d9977fe3a8d4e807c90d3d6fb038cc2f55c09f960cd611909
+
+uncovered asset queue SHA-256:
+a77912ebd0d48f80bd99630679a94e3b2b5e43d266013855b1fac0d99a8531b5
+```
 
 Completion condition:
 
 ```text
-README matches the binding checkpoint
-release note matches checkpoint counts, digests, baselines, and reproducibility result
-reviewed update entry exists exactly once
-release material validator passes
-general CI runs release material validation
-PR #318 remains reproducibly and canonically protected
-authority shows PR #320 active / PR #321 next
-full CI and relevant independent workflows green
+binding synchronization snapshot exists
+generator exists
+validator exists
+baseline spec reflects 24 pending rows
+current monitoring configuration requires exactly 100 assets
+source/baseline IDs match exactly
+all 24 baselines remain pending
+accepted-only fields remain null
+100 asset states are covered by deterministic sync digest
+registered reach remains 16 and uncovered queue remains 84
+accepted coverage remains zero
+monitoring validation chain includes synchronization validation
+dedicated synchronization CI workflow passes
+authority shows PR #321 active / PR #322 next
+full CI and monitoring workflows green
 ```
 
-## Phase B — non-UI release hardening
+## Phase C — monitoring expansion and operation — active
 
 ```text
-PR #316 counts, manifest, version, and provenance integrity — complete
-PR #317 reproducible build and generated-output audit — complete
-PR #318 audited 100-record canonical checkpoint — complete
-PR #319 guide article spacing maintenance — complete, inserted work
-PR #320 non-UI release material — active
-```
-
-Phase B closes when PR #320 merges.
-
-## Phase C — monitoring expansion and operation
-
-```text
-PR #321 100-asset monitoring baseline synchronization
+PR #321 100-asset monitoring baseline synchronization — active
 PR #322 reserve and redemption source expansion
 PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
 PR #324 bounded scheduled read-only monitoring
 ```
+
+PR #321 does not add or accept sources. PR #322-#323 expand reviewed source/schema coverage. PR #324 activates bounded scheduled read-only operation.
 
 PR #323 expands the approved observation family. It does not create the later canonical Market Access Record family.
 
@@ -351,7 +389,7 @@ PR #338 define canonical Market Access Record schema and governance
 PR #339 define facet-freshness derivation contract and validators
 ```
 
-Phase F is data- and contract-first. It preserves separate analytical layers for asset lifecycle, issuance/redemption, legal/regulatory state, and market access.
+Phase F is data- and contract-first. It preserves separate analytical layers for lifecycle, issuance/redemption, legal/regulatory state, and market access.
 
 ## Phase G — Compare
 
@@ -372,9 +410,7 @@ PR #345 change-timeline projection generator
 PR #346 Change Timeline UI
 ```
 
-Access and regulation may share discovery surfaces while preserving distinct canonical record families. Change Timeline is a derived projection and must not replace source record families with a lossy generic event model.
-
-A universal green/red country availability map is not approved because access can differ by platform, legal entity, customer scope, function, supported network, and date.
+Access and regulation may share discovery surfaces while preserving distinct canonical record families. Change Timeline is derived and must not replace source record families with a lossy generic event model.
 
 ## Phase I — Reviewed Public Update Layer
 
@@ -397,10 +433,9 @@ The natural-language layer may translate requests into structured filters. It mu
 
 - Repository specifications are the source of truth.
 - UI remains maintenance-only until an approved product UI phase.
-- Every non-trivial PR cites the exact specification, queue, audit, fixture, baseline, validator, publication-gate review, research checkpoint, and roadmap amendment it changes.
 - Unknown values remain unknown unless reviewed evidence supports a value.
-- Structural fake values in identity, URL, date, address, contract, or identifier fields are defects.
 - Monitoring executions remain read-only and never update their own accepted baseline.
+- Registered source reach is not accepted monitoring coverage.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
 - Comparison projections derive from reviewed canonical data and preserve unresolved states.
 - Growth PRs contain no more than two new stable assets.
@@ -410,10 +445,11 @@ The natural-language layer may translate requests into structured filters. It mu
 ## Immediate next items
 
 ```text
-1. Complete PR #320 non-UI release material.
-2. Start PR #321 100-asset monitoring baseline synchronization.
-3. Continue monitoring expansion in PR #322-#323 and scheduled read-only operation in PR #324.
-4. Continue statistics in PR #325-#328.
-5. Continue candidate audit and controlled growth in PR #329-#334.
-6. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
+1. Complete PR #321 100-asset monitoring baseline synchronization.
+2. Start PR #322 reserve and redemption source expansion.
+3. Continue lifecycle, regulatory, and EU market-access source/schema expansion in PR #323.
+4. Activate bounded scheduled read-only monitoring in PR #324.
+5. Continue statistics in PR #325-#328.
+6. Continue candidate audit and controlled growth in PR #329-#334.
+7. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
 ```
