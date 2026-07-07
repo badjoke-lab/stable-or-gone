@@ -12,7 +12,7 @@ Before changing code, data, workflows, or documentation, read:
 4. `docs/deployment-policy.md`
 5. every active roadmap amendment named by the roadmap
 6. the canonical specification for the active work item
-7. every queue, validator, audit, fixture, baseline, publication-gate review, release note, and research checkpoint named by that work item
+7. every queue, validator, audit, fixture, baseline, release note, publication-gate review, and research checkpoint named by that work item
 
 Current schedule amendments:
 
@@ -29,12 +29,14 @@ docs/quality/monitoring-official-source-spec.md
 docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
+docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
 scripts/monitoring/sources/official-sources.json
 scripts/monitoring/baselines/official-source-baselines.json
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 ```
 
-Release-hardening checkpoints remain binding:
+Release/checkpoint authority remains binding:
 
 ```text
 docs/migration/registry-release-integrity-baseline.json
@@ -49,14 +51,11 @@ Statistics work must read `docs/stats-spec.md`. Phase F-I work must read `docs/c
 
 Merged repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
-For PR numbering after inserted work, `docs/roadmap.md` and every active roadmap amendment named there override older numeric labels in subordinate plans.
+For PR numbering after inserted work, `docs/roadmap.md` and active roadmap amendments override older numeric labels in subordinate plans.
 
 ## Current workstream
 
 ```text
-Audited canonical source checkpoint:
-9a106f0938e6323de833c941d6ae863050f1f03b
-
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -68,16 +67,17 @@ Detail routes: 366
 PR #316 release integrity: complete
 PR #317 reproducible build audit: complete
 PR #318 audited 100-record canonical checkpoint: complete
-PR #319 guide article spacing maintenance: complete, inserted work
+PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
-Active: PR #321 100-asset monitoring baseline synchronization
-Next: PR #322 reserve and redemption source expansion
+PR #321 100-asset monitoring baseline synchronization: complete
+Active: PR #322 reserve and redemption source expansion
+Next: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
 ```
 
 Approved remaining sequence:
 
 ```text
-PR #321-#324  monitoring expansion and scheduled read-only operation
+PR #322-#324  monitoring expansion and scheduled read-only operation
 PR #325-#328  statistics implementation
 PR #329       next candidate audit
 PR #330-#334  controlled growth from 100 to 110
@@ -112,27 +112,87 @@ source_review_needed
 
 ## Release and checkpoint rules
 
-- `docs/migration/registry-release-integrity-baseline.json` remains binding for source-state count, manifest, version, route, and provenance semantics.
-- `docs/migration/reproducible-build-output-baseline.json` remains binding for reproducibility-sensitive release work until deliberately replaced.
-- `docs/migration/audited-100-asset-canonical-checkpoint.json` remains binding for the reviewed 100-asset checkpoint.
-- Candidate, monitoring, editorial-research, and private material remain outside canonical machine-readable provenance and public count surfaces.
-- Production verification must continue to pass public output, provenance, route/output parity, canonical hash parity, canonical file-count parity, and reviewed count parity.
+- Release-integrity, reproducible-build, and audited 100-asset checkpoint files remain binding.
+- Candidate, monitoring, editorial-research, and private material remain outside canonical public count surfaces and provenance boundaries.
+- Production must continue to pass public output, provenance, route/output parity, canonical hash parity, canonical file-count parity, and reviewed count parity.
 
-## PR #321 monitoring synchronization rules
+## Historical monitoring checkpoint rules
 
-- `docs/quality/monitoring-baseline-synchronization-100-assets-spec.md` is binding for PR #321.
-- `scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json` is the binding synchronization snapshot.
-- Current boundary is 100 assets, 94 organizations, 110 relationships, 24 sources, and 24 baseline rows.
-- Source and baseline IDs must match exactly.
-- All 24 baseline rows remain `pending_initial_acceptance`.
-- Accepted baseline count remains zero.
-- Accepted monitoring asset reach remains zero.
-- Registered source reach is 16 assets; 84 assets remain explicitly uncovered.
-- Current covered organization count is 12.
-- Current multi-family asset count is 7.
-- Synchronization is deterministic, offline, private, and read-only.
-- PR #321 may not accept baselines, fetch live pages for acceptance, add sources, expand schema, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical PRs, publish candidates, or deploy.
-- Source expansion remains PR #322-#323. Scheduled read-only operation remains PR #324.
+The PR #321 snapshot is historical and immutable:
+
+```text
+scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+```
+
+It preserves:
+
+```text
+24 sources
+24 pending baselines
+16 assets reached
+84 uncovered assets
+12 organizations reached
+0 accepted baselines
+0 accepted asset reach
+7 multi-family assets
+```
+
+Later source expansion must not overwrite these historical counts or digests.
+
+## PR #322 reserve/redemption expansion rules
+
+Binding files:
+
+```text
+docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
+.github/workflows/monitoring-reserve-redemption-expansion.yml
+```
+
+Current reviewed monitoring boundary:
+
+```text
+100 assets
+94 organizations
+110 relationships
+30 sources
+30 baseline rows
+30 pending_initial_acceptance
+0 accepted
+0 missing
+22 assets with registered source reach
+78 uncovered assets
+18 organizations reached
+0 accepted asset reach
+11 multi-family assets
+```
+
+PR #322 adds exactly six first-party source rows and six pending baseline rows:
+
+```text
+trueusd-transparency
+angle-eura-overview
+sgforge-eurcv-coinvertible
+eurite-euri-overview
+quantoz-eurq-usdq
+vnx-vchf-overview
+```
+
+Scope rules:
+
+- new PR #322 rows may use only `reserve_update`, `assurance_update`, and `issuance_redemption_update`;
+- all six baselines remain pending;
+- accepted-only fields remain null;
+- reserve/assurance source count is 14 and asset reach is 16;
+- redemption-terms source count is 11 and asset reach is 12;
+- lifecycle source count remains 5 and asset reach remains 5;
+- regulatory source count remains 5 and asset reach remains 5;
+- source/baseline ID parity must be exact;
+- synchronization generator is offline and performs no canonical action;
+- monitoring remains private, review-only, and read-only.
+
+PR #322 may not accept baselines, add lifecycle/regulatory/access sources, change normalization version, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical PRs, publish candidates, or deploy.
 
 ## Market-access rules
 
@@ -150,6 +210,8 @@ source_review_needed
 - Regulatory action pages are not regulatory-register coverage.
 - Monitoring output is private candidate material only.
 - Monitoring may not write canonical data, accept its own baselines, create branches or canonical PRs automatically, edit guides automatically, publish candidates, or deploy.
+- PR #323 handles lifecycle, regulatory, platform/access, and schema expansion.
+- PR #324 handles bounded scheduled read-only operation.
 
 ## Statistics and comparison rules
 
@@ -158,7 +220,7 @@ source_review_needed
 - Phase F-I begins only after the reviewed 110-asset checkpoint.
 - Preserve separate analytical layers for lifecycle, issuance/redemption, legal/regulatory state, and market access.
 - Compare uses reviewed canonical data, preserves unknown states, and does not score or recommend assets.
-- Change Timeline is a derived projection and does not replace source record families.
+- Change Timeline is derived and does not replace source record families.
 - Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
 
 ## Growth rule
@@ -167,4 +229,4 @@ Growth beyond 100 begins only after monitoring, statistics, and candidate-audit 
 
 ## Deployment rule
 
-Normal merged changes publish from `main` under `docs/deployment-policy.md`. Monitoring synchronization remains internal and does not authorize monitoring output publication or canonical writes.
+Normal merged changes publish from `main` under `docs/deployment-policy.md`. Monitoring source expansion remains internal and does not authorize monitoring artifact publication, canonical writes, guide edits, or automatic pull requests.
