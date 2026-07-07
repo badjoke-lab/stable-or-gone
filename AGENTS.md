@@ -31,6 +31,7 @@ docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
 docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
 docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
 scripts/monitoring/sources/official-sources.json
 scripts/monitoring/baselines/official-source-baselines.json
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
@@ -73,14 +74,15 @@ PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
 PR #321 100-asset monitoring baseline synchronization: complete
 PR #322 reserve and redemption source expansion: complete
-Active: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
-Next: PR #324 bounded scheduled read-only monitoring
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete
+Active: PR #324 bounded scheduled read-only monitoring
+Next: PR #325 deterministic statistics generator and validator
 ```
 
 Approved remaining sequence:
 
 ```text
-PR #323-#324  monitoring expansion and scheduled read-only operation
+PR #324       bounded scheduled read-only monitoring
 PR #325-#328  statistics implementation
 PR #329       next candidate audit
 PR #330-#334  controlled growth from 100 to 110
@@ -229,7 +231,85 @@ Scope rules:
 - Snapshot generation is offline and performs no canonical action.
 - Monitoring remains private, review-only, read-only, and non-publishing.
 
-PR #323 may not accept baselines, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical PRs, publish candidates, create canonical Market Access Records, or deploy.
+PR #323 completed source/schema expansion without accepting baselines, writing canonical data, editing guides automatically, publishing candidates, creating canonical Market Access Records, or deploying monitoring output.
+
+## PR #324 bounded scheduled read-only monitoring rules
+
+Binding files:
+
+```text
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
+scripts/monitoring/scheduling/source-groups.mjs
+scripts/monitoring/monitors/news-discovery.mjs
+scripts/monitoring/monitors/article-stale-state-review.mjs
+scripts/validate-bounded-scheduled-monitoring-pr324.mjs
+.github/workflows/monitoring-bounded-scheduled-read-only.yml
+```
+
+Scheduled groups are exactly:
+
+```text
+daily
+weekly
+```
+
+Daily group:
+
+```text
+4 reviewed official sources
+platform_policy
+platform_service_state
+bounded private news discovery
+```
+
+Weekly group:
+
+```text
+35 reviewed official sources
+all reviewed sources not in daily group
+ESMA regulatory-register source
+issuer reserve/transparency sources
+redemption and mint-term sources
+issuer lifecycle sources
+issuer/token regulatory sources
+article/research stale-state review
+```
+
+Partition rules:
+
+```text
+daily source count: 4
+weekly source count: 35
+overlap: 0
+union: all 39 reviewed sources
+source/baseline parity: exact for both groups
+all 39 repository baselines: pending_initial_acceptance
+accepted baselines: 0
+accepted asset reach: 0
+```
+
+News discovery boundaries:
+
+```text
+maximum queries per run: 4
+maximum items retained per query: 20
+maximum feed body: 1 MiB
+raw response retention: false
+discovery only: true
+canonical action: none
+public output: false
+```
+
+Article stale-state review is local and read-only. It may classify review_due, stale, severely_stale, and missing_date states but may not edit the public guide, editorial research, or canonical data.
+
+The scheduled workflow must use:
+
+```text
+permissions:
+  contents: read
+```
+
+PR #324 may not accept baselines, write canonical data, create automatic branches or canonical pull requests, edit guides automatically, publish candidates or news leads, publish stale-state findings, use Cloudflare credentials, or deploy monitoring output.
 
 ## Market-access rules
 
@@ -245,10 +325,11 @@ PR #323 may not accept baselines, schedule monitoring, write canonical data, edi
 - A pending baseline is not an accepted baseline.
 - Issuer/protocol reach is not platform-policy coverage.
 - Regulatory action pages are not regulatory-register coverage.
-- Monitoring output is private candidate material only.
-- Monitoring may not write canonical data, accept its own baselines, create branches or canonical PRs automatically, edit guides automatically, publish candidates, or deploy.
-- PR #323 handles lifecycle, regulatory, platform/access, and schema expansion.
-- PR #324 handles bounded scheduled read-only operation.
+- Monitoring output, discovery leads, and stale-state findings remain private artifact material.
+- Scheduled monitoring may observe, compare, classify, prepare private review material, discover bounded news leads, and report stale review state.
+- Monitoring may not write canonical data, accept its own baselines, create branches or canonical PRs automatically, edit guides automatically, publish candidates or leads, or deploy.
+- PR #324 closes Phase C scheduled operation.
+- PR #325 begins statistics implementation after PR #324 completes.
 
 ## Statistics and comparison rules
 
@@ -266,4 +347,4 @@ Growth beyond 100 begins only after monitoring, statistics, and candidate-audit 
 
 ## Deployment rule
 
-Normal merged changes publish from `main` under `docs/deployment-policy.md`. Monitoring source expansion remains internal and does not authorize monitoring artifact publication, canonical writes, guide edits, or automatic pull requests.
+Normal merged changes publish from `main` under `docs/deployment-policy.md`. Scheduled monitoring remains artifact-only and does not authorize monitoring artifact publication, canonical writes, guide edits, automatic pull requests, or Cloudflare deployment.

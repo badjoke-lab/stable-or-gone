@@ -5,6 +5,9 @@ import { captureCanonicalSnapshot, compareCanonicalSnapshots } from './core/cano
 import { ensureDir, writeJson, writeText } from './core/fs-utils.mjs';
 import { observeOfficialSources } from './monitors/official-source-observer.mjs';
 import { runRepositoryHealthMonitor } from './monitors/repository-health.mjs';
+import { runNewsDiscovery } from './monitors/news-discovery.mjs';
+import { runArticleStaleStateReview } from './monitors/article-stale-state-review.mjs';
+import { selectScheduledSourceGroup } from './scheduling/source-groups.mjs';
 import { buildReviewMaterial } from './review/build-review-material.mjs';
 
 const root = process.cwd();
@@ -39,6 +42,9 @@ function buildContext(options) {
   const sourceCommit = options.sourceCommit || resolveCommit();
   const mode = options.mode || process.env.SOG_MONITORING_MODE || 'health-only';
   if (!['health-only', 'official-sources'].includes(mode)) throw new Error(`Unsupported monitoring mode: ${mode}`);
+  const scheduleGroup = options.scheduleGroup ?? process.env.SOG_MONITORING_SCHEDULE_GROUP ?? null;
+  if (scheduleGroup !== null && !['daily', 'weekly'].includes(scheduleGroup)) throw new Error(`Unsupported monitoring schedule group: ${scheduleGroup}`);
+  if (scheduleGroup !== null && mode !== 'official-sources') throw new Error('Scheduled monitoring groups require official-sources mode');
   const runId = options.runId || resolveRunId(startedAt, sourceCommit);
   const outputRoot = options.outputRoot || path.join(root, 'data-staging/monitoring');
   const runDirectory = path.join(outputRoot, runId);
@@ -50,6 +56,7 @@ function buildContext(options) {
     sourceCommit,
     sourceBranch: options.sourceBranch || resolveBranch(),
     mode,
+    scheduleGroup,
     includeReviewMaterial: mode === 'official-sources' && reviewRequested,
     runId,
     runDirectory,
@@ -58,7 +65,7 @@ function buildContext(options) {
   };
 }
 
-function summaryText(manifest, health, official, review) {
+function summaryText(manifest, health, official, review, news, stale) {
   const guard = manifest.canonical_guard;
   const candidateCount = official?.candidate_count ?? 0;
   const changeCounts = official?.change_counts ?? EMPTY_CHANGE_COUNTS;
@@ -69,6 +76,7 @@ function summaryText(manifest, health, official, review) {
     '',
     `- Run ID: \`${manifest.run_id}\``,
     `- Mode: \`${manifest.mode}\``,
+    `- Schedule group: \`${manifest.schedule_group ?? 'none'}\``,
     `- Status: \`${manifest.status}\``,
     `- Source commit: \`${manifest.source_commit}\``,
     `- External network used: \`${manifest.external_network_used}\``,
@@ -91,6 +99,7 @@ function summaryText(manifest, health, official, review) {
     '',
     `- Baseline set: \`${official?.baseline_set_id ?? 'none'}\``,
     `- Normalization version: \`${official?.normalization_version ?? 'none'}\``,
+    `- Selected official sources: ${manifest.official_source_selection_count}`,
     `- Observations: ${official?.observation_count ?? 0}`,
     `- Unchanged: ${changeCounts.unchanged}`,
     `- Metadata changed: ${changeCounts.metadata_changed}`,
@@ -108,6 +117,25 @@ function summaryText(manifest, health, official, review) {
     '- Canonical action: none',
     '- Public or canonical writes: 0',
     '',
+    '## News discovery',
+    '',
+    `- Enabled: \`${Boolean(news)}\``,
+    `- Discovery items: ${news?.item_count ?? 0}`,
+    `- Feed errors: ${news?.error_count ?? 0}`,
+    '- Discovery only: true',
+    '- Canonical action: none',
+    '- Public output: false',
+    '',
+    '## Article stale-state review',
+    '',
+    `- Enabled: \`${Boolean(stale)}\``,
+    `- Findings: ${stale?.finding_count ?? 0}`,
+    `- Review due: ${stale?.counts.review_due ?? 0}`,
+    `- Stale: ${stale?.counts.stale ?? 0}`,
+    `- Severely stale: ${stale?.counts.severely_stale ?? 0}`,
+    '- Automatic guide edit: false',
+    '- Canonical action: none',
+    '',
     '## Review material',
     '',
     `- Enabled: \`${manifest.review_material_enabled}\``,
@@ -123,8 +151,8 @@ function summaryText(manifest, health, official, review) {
     '',
     review?.reviewMaterial.counts.review_items > 0
       ? 'Review facts, unconfirmed inferences, unresolved questions, evidence drafts, and draft PR material. Open a separate canonical-data PR only after human approval.'
-      : candidateCount > 0
-        ? 'Review private candidates and source observations. Open a separate canonical-data PR only after human approval.'
+      : candidateCount > 0 || (news?.item_count ?? 0) > 0 || ((stale?.counts.review_due ?? 0) + (stale?.counts.stale ?? 0) + (stale?.counts.severely_stale ?? 0)) > 0
+        ? 'Review private monitoring candidates, discovery leads, and stale-state findings. Open a separate reviewed PR only after source confirmation and human approval.'
         : manifest.status === 'completed'
           ? 'No canonical action required.'
           : 'Review the failed health or canonical-guard finding before any further work.',
@@ -132,7 +160,9 @@ function summaryText(manifest, health, official, review) {
   ].join('\n');
 }
 
-function finalizeMonitoring(context, official) {
+function finalizeMonitoring(context, official, extras = {}) {
+  const news = extras.news ?? null;
+  const stale = extras.stale ?? null;
   const review = official && context.includeReviewMaterial
     ? buildReviewMaterial({ root, official, createdAt: context.startedAt })
     : null;
@@ -150,9 +180,19 @@ function finalizeMonitoring(context, official) {
           'evidence-drafts.json',
           'review-report.md',
           'pr-material.md',
+          ...(news ? ['news-discovery.json'] : []),
+          ...(stale ? ['article-stale-state-review.json'] : []),
           'summary.md'
         ]
-      : ['manifest.json', 'health.json', 'official-source-observations.json', 'monitoring-candidates.json', 'summary.md']
+      : [
+          'manifest.json',
+          'health.json',
+          'official-source-observations.json',
+          'monitoring-candidates.json',
+          ...(news ? ['news-discovery.json'] : []),
+          ...(stale ? ['article-stale-state-review.json'] : []),
+          'summary.md'
+        ]
     : ['manifest.json', 'health.json', 'summary.md'];
   const monitors = [{ name: context.health.monitor, status: context.health.status, findings: context.health.findings.length }];
   if (official) monitors.push({
@@ -165,6 +205,19 @@ function finalizeMonitoring(context, official) {
     source_errors: official.source_errors,
     change_counts: official.change_counts
   });
+  if (news) monitors.push({
+    name: news.monitor,
+    status: news.status,
+    query_count: news.query_count,
+    item_count: news.item_count,
+    error_count: news.error_count
+  });
+  if (stale) monitors.push({
+    name: stale.monitor,
+    status: stale.status,
+    finding_count: stale.finding_count,
+    counts: stale.counts
+  });
   if (review) monitors.push({
     name: 'review-material-builder',
     status: 'ok',
@@ -174,9 +227,10 @@ function finalizeMonitoring(context, official) {
   });
 
   const manifest = {
-    schema_version: '1.0',
+    schema_version: '1.1',
     run_id: context.runId,
     mode: context.mode,
+    schedule_group: context.scheduleGroup,
     started_at: context.startedAt,
     finished_at: new Date().toISOString(),
     status,
@@ -185,10 +239,14 @@ function finalizeMonitoring(context, official) {
     external_network_used: context.mode === 'official-sources',
     baseline_set_id: official?.baseline_set_id ?? null,
     normalization_version: official?.normalization_version ?? null,
+    official_source_selection_count: official?.observation_count ?? 0,
     observation_count: official?.observation_count ?? 0,
     candidate_count: official?.candidate_count ?? 0,
     source_errors: official?.source_errors ?? 0,
     change_counts: official?.change_counts ?? { ...EMPTY_CHANGE_COUNTS },
+    news_discovery_item_count: news?.item_count ?? 0,
+    news_discovery_error_count: news?.error_count ?? 0,
+    article_stale_finding_count: stale?.finding_count ?? 0,
     review_material_enabled: Boolean(review),
     review_item_count: review?.reviewMaterial.counts.review_items ?? 0,
     evidence_draft_count: review?.evidenceDraftReport.draft_count ?? 0,
@@ -223,6 +281,8 @@ function finalizeMonitoring(context, official) {
       candidates: official.candidates
     });
   }
+  if (news) writeJson(path.join(context.runDirectory, 'news-discovery.json'), news);
+  if (stale) writeJson(path.join(context.runDirectory, 'article-stale-state-review.json'), stale);
   if (review) {
     writeJson(path.join(context.runDirectory, 'review-material.json'), review.reviewMaterial);
     writeJson(path.join(context.runDirectory, 'evidence-drafts.json'), review.evidenceDraftReport);
@@ -230,9 +290,9 @@ function finalizeMonitoring(context, official) {
     writeText(path.join(context.runDirectory, 'pr-material.md'), review.prMaterial);
   }
   writeJson(path.join(context.runDirectory, 'manifest.json'), manifest);
-  writeText(path.join(context.runDirectory, 'summary.md'), summaryText(manifest, context.health, official, review));
+  writeText(path.join(context.runDirectory, 'summary.md'), summaryText(manifest, context.health, official, review, news, stale));
 
-  const result = { run_directory: context.runDirectory, manifest, health: context.health, official, review };
+  const result = { run_directory: context.runDirectory, manifest, health: context.health, official, review, news, stale };
   if (status !== 'completed') {
     const error = new Error(`Monitoring run failed: health=${context.health.status}, canonical_guard=${canonicalGuard.ok}`);
     error.result = result;
@@ -244,15 +304,44 @@ function finalizeMonitoring(context, official) {
 export function runMonitoring(options = {}) {
   const context = buildContext(options);
   if (context.mode === 'health-only') return finalizeMonitoring(context, null);
+
+  let sources = options.sources;
+  let baselineSet = options.baselineSet;
+  if (context.scheduleGroup) {
+    const selected = selectScheduledSourceGroup(context.scheduleGroup, { root, sources, baselineSet });
+    sources = selected.sources;
+    baselineSet = selected.baselineSet;
+  }
+
   return observeOfficialSources({
     root,
     observedAt: context.startedAt,
     fetchImpl: options.fetchImpl,
-    sources: options.sources,
-    baselineSet: options.baselineSet,
+    sources,
+    baselineSet,
     timeoutMs: options.timeoutMs,
     maxBodyBytes: options.maxBodyBytes
-  }).then((official) => finalizeMonitoring(context, official));
+  }).then(async (official) => {
+    const news = context.scheduleGroup === 'daily'
+      ? await runNewsDiscovery({
+          discoveredAt: context.startedAt,
+          fetchImpl: options.newsFetchImpl,
+          queries: options.newsQueries,
+          timeoutMs: options.newsTimeoutMs,
+          maxBodyBytes: options.newsMaxBodyBytes,
+          maxItemsPerQuery: options.newsMaxItemsPerQuery
+        })
+      : null;
+    const stale = context.scheduleGroup === 'weekly'
+      ? runArticleStaleStateReview({
+          root,
+          checkedAt: context.startedAt,
+          research: options.articleResearch,
+          researchPath: options.articleResearchPath
+        })
+      : null;
+    return finalizeMonitoring(context, official, { news, stale });
+  });
 }
 
 async function main() {
@@ -261,13 +350,18 @@ async function main() {
     run_directory: result.run_directory,
     run_id: result.manifest.run_id,
     status: result.manifest.status,
+    schedule_group: result.manifest.schedule_group,
     canonical_guard: result.manifest.canonical_guard,
     baseline_set_id: result.manifest.baseline_set_id,
     normalization_version: result.manifest.normalization_version,
+    official_source_selection_count: result.manifest.official_source_selection_count,
     observation_count: result.manifest.observation_count,
     candidate_count: result.manifest.candidate_count,
     source_errors: result.manifest.source_errors,
     change_counts: result.manifest.change_counts,
+    news_discovery_item_count: result.manifest.news_discovery_item_count,
+    news_discovery_error_count: result.manifest.news_discovery_error_count,
+    article_stale_finding_count: result.manifest.article_stale_finding_count,
     review_item_count: result.manifest.review_item_count,
     evidence_draft_count: result.manifest.evidence_draft_count,
     rejected_duplicate_count: result.manifest.rejected_duplicate_count
