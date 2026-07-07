@@ -12,6 +12,7 @@ import './validate-monitoring-normalization-pr238.mjs';
 import './validate-monitoring-phase-a-pr239.mjs';
 import './validate-current-monitoring-configuration.mjs';
 import './validate-current-coverage.mjs';
+import './validate-monitoring-baseline-sync-100-assets.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
@@ -53,4 +54,4 @@ if (errors.length) {
   errors.forEach((error) => console.error(`- ${error}`));
   process.exit(1);
 }
-console.log('Current monitoring validation passed for the growth registry.');
+console.log('Current monitoring validation passed for the 100-asset synchronized registry boundary.');

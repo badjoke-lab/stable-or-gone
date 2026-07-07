@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "sync_kind": "monitoring_baseline_sync_observation",
+  "checkpoint_id": "sog_audited_100_asset_checkpoint_pr318_2026_07_06",
+  "normalization_version": "sog_official_source_normalization_v2",
+  "canonical_counts": {
+    "stablecoins": 100,
+    "organizations": 94,
+    "relationships": 110
+  },
+  "source_baseline_sync": {
+    "source_count": 24,
+    "baseline_count": 24,
+    "source_baseline_id_parity": true,
+    "pending_initial_acceptance": 24,
+    "accepted": 0,
+    "missing": 0
+  },
+  "coverage": {
+    "registered_asset_reach_count": 16,
+    "uncovered_asset_count": 84,
+    "covered_organization_count": 12,
+    "accepted_asset_reach_count": 0,
+    "multi_family_asset_count": 7
+  },
+  "source_family_counts": {
+    "reserve_assurance": 9,
+    "redemption_terms": 6,
+    "issuer_lifecycle": 5,
+    "regulatory": 5
+  },
+  "stablecoin_family_counts": {
+    "reserve_assurance": 11,
+    "redemption_terms": 7,
+    "issuer_lifecycle": 5,
+    "regulatory": 5
+  },
+  "asset_sync_sha256": "ed55574e1e0fab657ab401bec4e4e186f7d27866a163f40caed8eeffebf8e033",
+  "organization_sync_sha256": "6ae5056633e31777a93f10492417e28dca931230690b928afd0196ff84c199db",
+  "source_baseline_sync_sha256": "47e0891e1a33820d9977fe3a8d4e807c90d3d6fb038cc2f55c09f960cd611909",
+  "uncovered_asset_ids_sha256": "a77912ebd0d48f80bd99630679a94e3b2b5e43d266013855b1fac0d99a8531b5",
+  "source_allowlist_sha256": "76bf64e1ddeb9d90c980bb0ef8a238117e6f82f7b5501e5e5f7a452718e58e9f",
+  "baseline_file_sha256": "f9f99a4979b7047684593c7e44bac79e0e3c27794b2b85c8646227b091598f07",
+  "policy": {
+    "human_review_required": true,
+    "monitoring_write_allowed": false,
+    "canonical_evidence": false,
+    "public_output": false,
+    "automatic_pull_request": false,
+    "production_publication": false,
+    "network_access_used": false,
+    "canonical_action": "none"
+  }
+}

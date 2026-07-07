@@ -164,7 +164,7 @@ export function buildMonitoringCoverageReport(root = process.cwd()) {
 
   return {
     schema_version: '1.0',
-    report_id: 'sog_monitoring_coverage_92_assets_24_sources_v1',
+    report_id: `sog_monitoring_coverage_${stablecoins.length}_assets_${sourceRows.length}_sources_v1`,
     generated_from: 'canonical_registry_v2_and_reviewed_monitoring_configuration',
     summary: {
       canonical_stablecoin_count: stablecoins.length,

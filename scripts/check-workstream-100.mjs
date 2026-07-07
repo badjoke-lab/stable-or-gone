@@ -9,96 +9,76 @@ const governance = read('docs/spec-governance.md');
 const nonUiPlan = read('docs/quality/non-ui-quality-program.md');
 const editorialAmendment = read('docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md');
 const maintenanceAmendment = read('docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md');
-const releaseIntegritySpec = read('docs/counts-manifest-version-provenance-integrity-spec.md');
 const releaseBaseline = JSON.parse(read('docs/migration/registry-release-integrity-baseline.json'));
-const reproducibleSpec = read('docs/reproducible-build-generated-output-audit-spec.md');
 const reproducibleBaseline = JSON.parse(read('docs/migration/reproducible-build-output-baseline.json'));
-const checkpointSpec = read('docs/audited-100-asset-canonical-checkpoint-spec.md');
 const checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
-const releaseMaterialSpec = read('docs/non-ui-release-material-spec.md');
-const releaseNote = read('docs/releases/100-asset-checkpoint-2026-07-06.md');
+const syncSpec = read('docs/quality/monitoring-baseline-synchronization-100-assets-spec.md');
+const syncSnapshot = JSON.parse(read('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json'));
+const baselineSpec = read('docs/quality/monitoring-baseline-spec.md');
 const marketAccessSpec = read('docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md');
 const matrix = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access.json'));
-const contextBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-context-batch-02.json'));
-const functionBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-function-batch-03.json'));
 const reauditBatch = JSON.parse(read('data/editorial-research/eu-stablecoin-market-access-reaudit-batch-04.json'));
-const checkpoint03 = read('docs/audits/eu-stablecoin-market-access-research-checkpoint-03-2026-07-05.md');
-const gateReview = read('docs/audits/eu-stablecoin-market-access-publication-gate-review-2026-07-05.md');
 
 const failures = [];
 const requireText = (body, text, file) => {
   if (!body.includes(text)) failures.push(`${file}: missing required workstream marker: ${text}`);
 };
 
-requireText(roadmap, 'Current item: PR #320 non-UI release material', 'docs/roadmap.md');
-requireText(roadmap, 'Next item: PR #321 100-asset monitoring baseline synchronization', 'docs/roadmap.md');
-requireText(roadmap, 'PR #318 audited 100-record canonical checkpoint: complete', 'docs/roadmap.md');
-requireText(roadmap, 'PR #319 guide article spacing maintenance: complete, inserted work', 'docs/roadmap.md');
+requireText(roadmap, 'Current item: PR #321 100-asset monitoring baseline synchronization', 'docs/roadmap.md');
+requireText(roadmap, 'Next item: PR #322 reserve and redemption source expansion', 'docs/roadmap.md');
+requireText(roadmap, 'PR #320 non-UI release material: complete', 'docs/roadmap.md');
 requireText(roadmap, 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
 requireText(roadmap, 'PR #325 deterministic statistics generator and validator', 'docs/roadmap.md');
 requireText(roadmap, 'PR #330 100 -> 102', 'docs/roadmap.md');
-requireText(roadmap, 'Issuer/protocol reach is not platform-policy coverage.', 'docs/roadmap.md');
 
-requireText(agents, 'Active: PR #320 non-UI release material', 'AGENTS.md');
-requireText(agents, 'Next: PR #321 100-asset monitoring baseline synchronization', 'AGENTS.md');
-requireText(agents, 'PR #318 audited 100-record canonical checkpoint: complete', 'AGENTS.md');
-requireText(agents, 'PR #319 guide article spacing maintenance: complete, inserted work', 'AGENTS.md');
+requireText(agents, 'Active: PR #321 100-asset monitoring baseline synchronization', 'AGENTS.md');
+requireText(agents, 'Next: PR #322 reserve and redemption source expansion', 'AGENTS.md');
 requireText(agents, 'Registered source reach is not accepted monitoring coverage.', 'AGENTS.md');
-requireText(agents, 'Regulatory action pages are not regulatory-register coverage.', 'AGENTS.md');
+requireText(agents, 'A pending baseline is not an accepted baseline.', 'AGENTS.md');
 
-requireText(governance, 'Non-UI release-material governance', 'docs/spec-governance.md');
-requireText(governance, 'PR #320 non-UI release material active', 'docs/spec-governance.md');
-requireText(governance, 'Zero coverage for a required domain is a valid audit result', 'docs/spec-governance.md');
-requireText(nonUiPlan, 'PR #320 non-UI release material: active', 'docs/quality/non-ui-quality-program.md');
-requireText(nonUiPlan, 'PR #321 100-asset monitoring baseline synchronization: next', 'docs/quality/non-ui-quality-program.md');
+requireText(governance, 'Monitoring baseline synchronization governance', 'docs/spec-governance.md');
+requireText(governance, 'PR #321 100-asset monitoring baseline synchronization active', 'docs/spec-governance.md');
+requireText(governance, 'zero coverage for a required domain is a valid audit result', 'docs/spec-governance.md');
+requireText(nonUiPlan, 'PR #321 100-asset monitoring baseline synchronization: active', 'docs/quality/non-ui-quality-program.md');
+requireText(nonUiPlan, 'PR #322 reserve and redemption source expansion: next', 'docs/quality/non-ui-quality-program.md');
 
 requireText(editorialAmendment, 'PR #316  counts, manifest, version, and provenance integrity', 'editorial roadmap amendment');
-requireText(maintenanceAmendment, 'PR #319 guide article spacing maintenance — complete, inserted work', 'PR #319 maintenance amendment');
 requireText(maintenanceAmendment, 'PR #320 non-UI release material', 'PR #319 maintenance amendment');
 requireText(maintenanceAmendment, 'PR #349+ natural-language filter translation only after separate approval', 'PR #319 maintenance amendment');
 
-requireText(releaseIntegritySpec, 'source-to-public integrity boundary', 'release integrity specification');
-requireText(releaseIntegritySpec, 'npm run validate:release-integrity', 'release integrity specification');
 if (releaseBaseline.status !== 'current') failures.push('release-integrity baseline must be current');
 if (releaseBaseline.expected_v2_counts?.stablecoins !== 100) failures.push('release-integrity baseline must protect 100 stable assets');
-if (releaseBaseline.expected_route_counts?.total_detail !== 366) failures.push('release-integrity baseline must protect 366 detail routes');
-
-requireText(reproducibleSpec, 'locked dependency graph', 'reproducible build specification');
-requireText(reproducibleSpec, 'npm run validate:reproducible-build', 'reproducible build specification');
 if (reproducibleBaseline.status !== 'current') failures.push('reproducible-build baseline must be current');
-if (reproducibleBaseline.runtime?.node_version !== '22.22.0') failures.push('reproducible-build baseline must pin Node 22.22.0');
-if (!Array.isArray(reproducibleBaseline.hashed_output_roots) || !reproducibleBaseline.hashed_output_roots.includes('dist')) failures.push('reproducible-build baseline must hash dist output');
-
-requireText(checkpointSpec, 'audited canonical checkpoint', 'audited checkpoint specification');
-requireText(checkpointSpec, 'scripts/validate-audited-100-checkpoint.mjs', 'audited checkpoint specification');
 if (checkpoint.status !== 'audited') failures.push('audited checkpoint status must be audited');
-if (checkpoint.source_commit !== '9a106f0938e6323de833c941d6ae863050f1f03b') failures.push('audited checkpoint source commit mismatch');
-if (checkpoint.canonical_file_count !== 334) failures.push('audited checkpoint must protect 334 canonical files');
 if (checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('audited checkpoint must protect 100 stable assets');
-if (checkpoint.v2_groups?.events?.record_count !== 172) failures.push('audited checkpoint must protect 172 events');
-if (checkpoint.v2_groups?.evidence?.record_count !== 502) failures.push('audited checkpoint must protect 502 evidence records');
-if (checkpoint.release_expected_counts?.routes?.total_detail !== 366) failures.push('audited checkpoint must protect 366 detail routes');
-if (checkpoint.reproducibility_checkpoint?.reproducible !== true) failures.push('audited checkpoint reproducibility result must be true');
 
-requireText(releaseMaterialSpec, 'non-UI release material specification', 'release material specification');
-requireText(releaseMaterialSpec, 'scripts/validate-non-ui-release-material.mjs', 'release material specification');
-requireText(releaseMaterialSpec, 'README.md', 'release material specification');
-requireText(releaseNote, checkpoint.checkpoint_id, '100-asset release note');
-requireText(releaseNote, checkpoint.canonical_content_sha256, '100-asset release note');
-requireText(releaseNote, checkpoint.canonical_identity_sha256, '100-asset release note');
-requireText(releaseNote, '/data/manifest.json', '100-asset release note');
-requireText(releaseNote, 'canonical_only = true', '100-asset release note');
+requireText(syncSpec, '100-asset monitoring baseline synchronization specification', 'monitoring sync specification');
+requireText(syncSpec, 'scripts/validate-monitoring-baseline-sync-100-assets.mjs', 'monitoring sync specification');
+requireText(syncSpec, 'PR #321 must not change a pending row to accepted.', 'monitoring sync specification');
+requireText(baselineSpec, 'reviewed official sources: 24', 'monitoring baseline specification');
+requireText(baselineSpec, 'pending_initial_acceptance: 24', 'monitoring baseline specification');
+requireText(baselineSpec, 'accepted: 0', 'monitoring baseline specification');
 
-requireText(marketAccessSpec, 'PR #307  reviewed EU stablecoin market-access article after publication gate passes', 'docs/quality/eu-stablecoin-market-access-research-and-monitoring-spec.md');
+if (syncSnapshot.checkpoint_id !== checkpoint.checkpoint_id) failures.push('monitoring sync checkpoint ID mismatch');
+if (syncSnapshot.canonical_counts?.stablecoins !== 100) failures.push('monitoring sync must protect 100 assets');
+if (syncSnapshot.canonical_counts?.organizations !== 94) failures.push('monitoring sync must protect 94 organizations');
+if (syncSnapshot.canonical_counts?.relationships !== 110) failures.push('monitoring sync must protect 110 relationships');
+if (syncSnapshot.source_baseline_sync?.source_count !== 24) failures.push('monitoring sync must protect 24 sources');
+if (syncSnapshot.source_baseline_sync?.baseline_count !== 24) failures.push('monitoring sync must protect 24 baselines');
+if (syncSnapshot.source_baseline_sync?.source_baseline_id_parity !== true) failures.push('monitoring source/baseline parity must be true');
+if (syncSnapshot.source_baseline_sync?.pending_initial_acceptance !== 24) failures.push('monitoring sync must preserve 24 pending baselines');
+if (syncSnapshot.source_baseline_sync?.accepted !== 0) failures.push('monitoring sync accepted baseline count must remain zero');
+if (syncSnapshot.source_baseline_sync?.missing !== 0) failures.push('monitoring sync missing baseline count must remain zero');
+if (syncSnapshot.coverage?.registered_asset_reach_count !== 16) failures.push('monitoring registered asset reach must remain 16');
+if (syncSnapshot.coverage?.uncovered_asset_count !== 84) failures.push('monitoring uncovered asset count must remain 84');
+if (syncSnapshot.coverage?.accepted_asset_reach_count !== 0) failures.push('accepted asset reach must remain zero');
+if (syncSnapshot.policy?.network_access_used !== false) failures.push('monitoring synchronization must remain offline');
+if (syncSnapshot.policy?.canonical_action !== 'none') failures.push('monitoring synchronization canonical action must remain none');
+if (syncSnapshot.policy?.public_output !== false) failures.push('monitoring synchronization public output must remain disabled');
+
+requireText(marketAccessSpec, 'PR #307  reviewed EU stablecoin market-access article after publication gate passes', 'EU market-access specification');
 if (matrix.research_id !== 'eu-stablecoin-market-access-2026') failures.push('research matrix id mismatch');
-if (matrix.status !== 'research_in_progress') failures.push('base research matrix status must remain historical research state');
-if (matrix.publication_gate?.publishable !== false) failures.push('base research matrix must preserve pre-gate historical state');
-if (contextBatch.research_gate_effect?.publication_ready !== false) failures.push('context batch must preserve historical not-ready state');
-if (functionBatch.gate_effect?.publication_ready !== false) failures.push('checkpoint 03 must preserve historical not-ready state');
-if (reauditBatch.article_gate_effect?.full_asset_and_platform_reaudit_complete !== true) failures.push('reaudit batch completion missing');
-
-requireText(checkpoint03, 'A. asset-specific function evidence', 'checkpoint 03 audit');
-requireText(gateReview, 'publication gate:                               pass', 'publication gate review');
+if (reauditBatch.article_gate_effect?.full_asset_and_platform_reaudit_complete !== true) failures.push('EU market-access reaudit completion missing');
 
 if (failures.length) {
   console.error('100-record core workstream validation failed:');
@@ -106,4 +86,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('100-record core workstream checks passed: PR #318 is complete, PR #320 is active, and PR #321 remains next.');
+console.log('100-record core workstream checks passed: PR #320 is complete, PR #321 is active, and PR #322 remains next.');

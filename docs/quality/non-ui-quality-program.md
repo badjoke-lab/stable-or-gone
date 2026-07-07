@@ -1,7 +1,7 @@
 # Stable or Gone non-UI quality program
 
 Status: canonical implementation plan — active  
-Updated: 2026-07-06  
+Updated: 2026-07-07  
 Registry checkpoint: 100 canonical stable assets
 
 ## Purpose
@@ -17,8 +17,10 @@ This program governs the core workstream after the dedicated UI correction progr
 -> release integrity — complete
 -> reproducible build audit — complete
 -> audited 100-record canonical checkpoint — complete
--> non-UI release material — active
--> monitoring expansion and scheduled read-only operation
+-> non-UI release material — complete
+-> monitoring baseline synchronization — active
+-> monitoring source/schema expansion
+-> bounded scheduled read-only monitoring
 -> statistics implementation
 -> controlled growth from 100 to 110
 -> Comparison Foundation
@@ -27,7 +29,7 @@ This program governs the core workstream after the dedicated UI correction progr
 -> Reviewed Public Update Layer
 ```
 
-The canonical execution order and PR numbers are defined by `docs/roadmap.md` and the active roadmap amendments.
+The canonical execution order and PR numbers are defined by `docs/roadmap.md` and active roadmap amendments.
 
 UI remains maintenance-only until the roadmap reaches an approved product UI phase. Narrow verified maintenance may not silently consume planned roadmap work.
 
@@ -48,8 +50,9 @@ PR #316 release integrity: complete
 PR #317 reproducible build audit: complete
 PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide article spacing maintenance: complete, inserted work
-PR #320 non-UI release material: active
-PR #321 100-asset monitoring baseline synchronization: next
+PR #320 non-UI release material: complete
+PR #321 100-asset monitoring baseline synchronization: active
+PR #322 reserve and redemption source expansion: next
 
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
@@ -68,19 +71,26 @@ Before changing canonical data, evidence, workflows, monitoring, statistics, com
 5. every active roadmap amendment named by the roadmap
 6. this document
 7. the canonical specification for the active work item
-8. every named baseline, validator, audit, queue, fixture, publication-gate review, and research checkpoint
+8. every named baseline, validator, audit, queue, fixture, publication-gate review, release note, and research checkpoint
 
-Current release-hardening work must read:
+Current monitoring synchronization work must read:
 
 ```text
-docs/counts-manifest-version-provenance-integrity-spec.md
+docs/quality/monitoring-pipeline-spec.md
+docs/quality/monitoring-official-source-spec.md
+docs/quality/monitoring-baseline-spec.md
+docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
+scripts/monitoring/sources/official-sources.json
+scripts/monitoring/baselines/official-source-baselines.json
+scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+```
+
+Release checkpoints remain binding:
+
+```text
 docs/migration/registry-release-integrity-baseline.json
-docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
-docs/audited-100-asset-canonical-checkpoint-spec.md
 docs/migration/audited-100-asset-canonical-checkpoint.json
-docs/non-ui-release-material-spec.md
-docs/releases/100-asset-checkpoint-2026-07-06.md
 ```
 
 ## Fixed operating rules
@@ -97,7 +107,6 @@ docs/releases/100-asset-checkpoint-2026-07-06.md
 - Comparison projections use reviewed canonical data only and preserve unresolved states.
 - Facet freshness derives from authoritative record families rather than display-only root timestamps.
 - No growth PR may contain more than two new stable assets.
-- Ordinary merged changes publish from `main` under `docs/deployment-policy.md`.
 
 ## Completed foundation
 
@@ -122,6 +131,7 @@ PR #316         counts, manifest, version, and provenance integrity
 PR #317         reproducible build and generated-output audit
 PR #318         audited 100-record canonical checkpoint
 PR #319         guide article spacing maintenance, inserted work
+PR #320         non-UI release material
 ```
 
 ## Monitoring pipeline boundary
@@ -140,29 +150,32 @@ official-source observation
 
 It must not commit canonical data, accept its own baseline, publish candidates, edit guides automatically, create automatic canonical PRs, or deploy.
 
-## 100-record quality boundaries
-
-Known-unknown integrity:
+## 100-record monitoring boundary
 
 ```text
 stable assets: 100
-known unknowns: 289
-assets with known-unknown coverage: 100
-stale-over-30-days review queue: 44
-structural placeholder findings: 0
-```
-
-Monitoring coverage recalculation:
-
-```text
+organizations: 94
+relationships: 110
 registered official sources: 24
-assets reached by at least one registered source: 16
-registered asset reach: 16.00%
+baseline rows: 24
+registered asset reach: 16
 uncovered assets: 84
-organizations reached: 12
+covered organizations: 12
 accepted sources: 0
 accepted asset reach: 0
-pending_initial_acceptance baselines: 24
+pending_initial_acceptance: 24
+accepted baselines: 0
+missing baselines: 0
+multi-family assets: 7
+```
+
+Current source-family reach:
+
+```text
+reserve_assurance: 9 sources / 11 assets
+redemption_terms: 6 sources / 7 assets
+issuer_lifecycle: 5 sources / 5 assets
+regulatory: 5 sources / 5 assets
 ```
 
 Zero current checked-in coverage remains recorded for:
@@ -175,49 +188,53 @@ market-access schema-capable sources
 accepted baselines
 ```
 
-Monitoring baseline synchronization is PR #321. Source expansion is PR #322-#323. Scheduled read-only operation is PR #324.
-
-## Phase B — non-UI release hardening — active
+## Phase B — non-UI release hardening — complete
 
 ```text
 PR #316 release integrity — complete
 PR #317 reproducible build audit — complete
 PR #318 audited 100-record canonical checkpoint — complete
 PR #319 guide maintenance — complete, inserted work
-PR #320 non-UI release material — active
+PR #320 non-UI release material — complete
 ```
 
-PR #320 converts the reviewed checkpoint into accurate release material without changing canonical registry data.
+Phase B is closed.
 
-Required outputs:
-
-```text
-README.md
-docs/non-ui-release-material-spec.md
-docs/releases/100-asset-checkpoint-2026-07-06.md
-data/registry-updates.json
-scripts/validate-non-ui-release-material.mjs
-```
-
-Release material must:
-
-- use binding checkpoint counts and digests;
-- distinguish checkpoint source from later noncanonical production sources;
-- point to existing `/version.json`, `/data/manifest.json`, `/llms.txt`, and `/ai.txt` entry points;
-- preserve public data-safety boundaries;
-- avoid claims of complete monitoring or unimplemented product surfaces;
-- avoid creating a second count authority.
-
-## Phase C — monitoring expansion and operation
+## Phase C — monitoring expansion and operation — active
 
 ```text
-PR #321 100-asset monitoring baseline synchronization
+PR #321 100-asset monitoring baseline synchronization — active
 PR #322 reserve and redemption source expansion
 PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
 PR #324 bounded scheduled read-only monitoring
 ```
 
-PR #323 expands the approved observation family but does not create the later canonical Market Access Record family.
+### PR #321 synchronization contract
+
+Binding files:
+
+```text
+docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
+scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+scripts/generate-monitoring-baseline-sync-100-assets.mjs
+scripts/validate-monitoring-baseline-sync-100-assets.mjs
+.github/workflows/monitoring-baseline-sync-100.yml
+```
+
+PR #321:
+
+- synchronizes current 24 source rows with 24 baseline rows;
+- requires exact source/baseline ID parity;
+- projects all 100 assets and all 94 organizations into deterministic synchronization digests;
+- preserves 24 pending baselines and zero accepted baselines;
+- preserves registered reach 16 / uncovered queue 84;
+- preserves zero accepted asset reach;
+- performs no network access;
+- performs no canonical action;
+- creates no public output;
+- adds no sources and accepts no baselines.
+
+PR #322-#323 perform later reviewed source/schema expansion. PR #324 alone activates bounded schedule triggers.
 
 ## Phase D — statistics implementation
 
@@ -241,7 +258,7 @@ PR #333 106 -> 108
 PR #334 108 -> 110
 ```
 
-Growth remains blocked until release hardening, monitoring, statistics, and candidate audit complete.
+Growth remains blocked until monitoring, statistics, and candidate audit complete.
 
 ## Phase F — Comparison Foundation
 
