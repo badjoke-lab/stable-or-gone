@@ -1,14 +1,14 @@
 # Stable or Gone review-only monitoring pipeline
 
 Status: canonical specification  
-Updated: 2026-06-29  
-Applies to: PR #230–#232
+Updated: 2026-07-07  
+Applies to: PR #230–#232, extended by PR #324
 
 ## Purpose
 
 The monitoring pipeline observes official and high-value source changes, records private candidate material, performs duplicate and lineage checks, drafts evidence, and prepares reviewable material. It does not publish monitored findings or modify canonical records automatically.
 
-The binding sequence is:
+The binding review sequence is:
 
 ```text
 official-source observation
@@ -18,6 +18,15 @@ official-source observation
 → reviewable PR material
 → human approval before canonical publication
 ```
+
+PR #324 adds two private auxiliary lanes:
+
+```text
+bounded news discovery → private discovery leads
+article stale-state review → private review findings
+```
+
+Neither lane creates canonical facts or public output.
 
 ## Non-negotiable safety boundary
 
@@ -43,7 +52,7 @@ data-staging/monitoring/<run_id>/
 
 Monitoring output must not be included in `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, the sitemap, public routes, or canonical record counts.
 
-## PR responsibilities
+## Historical PR responsibilities
 
 ### PR #230 — skeleton and canonical guard
 
@@ -69,9 +78,9 @@ PR #231 must not modify canonical records or treat a signal as a final classific
 
 PR #232 may create reviewable evidence drafts and pull-request material. Human approval remains mandatory before any separate canonical-data PR. Monitoring reports must distinguish observed facts, inferences, unresolved questions, and rejected duplicates.
 
-## PR #230 trigger and permissions
+## Historical PR #230 trigger and permissions
 
-The PR #230 workflow is manual-only:
+The PR #230 workflow remains manual-only:
 
 ```text
 workflow_dispatch
@@ -97,9 +106,11 @@ Required permission:
 contents: read
 ```
 
-## PR #230 output contract
+The historical manual workflow remains available and is not converted into the PR #324 scheduled workflow.
 
-Each run writes exactly one run directory:
+## Historical PR #230 output contract
+
+Each health-only run writes exactly one run directory:
 
 ```text
 data-staging/monitoring/<run_id>/
@@ -116,7 +127,7 @@ YYYYMMDDTHHMMSSZ-<short_commit>
 
 ### manifest.json
 
-Required fields:
+Core fields:
 
 ```text
 schema_version
@@ -133,7 +144,7 @@ monitors
 output_files
 ```
 
-For PR #230:
+For PR #230 health-only mode:
 
 ```text
 mode: health-only
@@ -142,6 +153,22 @@ status: completed | failed
 canonical_guard.before_hash
 canonical_guard.after_hash
 canonical_guard.changed_paths
+```
+
+PR #324 extends scheduled manifests with:
+
+```text
+schedule_group
+official_source_selection_count
+news_discovery_item_count
+news_discovery_error_count
+article_stale_finding_count
+```
+
+Manual unscheduled runs use:
+
+```text
+schedule_group: null
 ```
 
 ### health.json
@@ -162,7 +189,7 @@ candidate_count
 findings
 ```
 
-PR #230 must produce:
+Health-only mode must produce:
 
 ```text
 candidate_count: 0
@@ -170,7 +197,7 @@ candidate_count: 0
 
 ### summary.md
 
-Required sections:
+Core sections remain:
 
 ```text
 # SOG Review-only Monitoring
@@ -181,7 +208,9 @@ Required sections:
 ## Operator action
 ```
 
-The operator action for a successful PR #230 health-only run is `No canonical action required`.
+Scheduled runs may add private sections for news discovery and article stale-state review.
+
+The operator action for a successful health-only run remains `No canonical action required`.
 
 ## Canonical snapshot guard
 
@@ -205,9 +234,96 @@ The guard does not authorize writes merely because a file is outside the protect
 
 ## Private-output rule
 
-`data-staging/monitoring/**` is ignored by Git and uploaded only as a workflow artifact during PR #230. Later PRs may deliberately retain reviewed monitoring fixtures, but raw monitoring runs remain untracked.
+`data-staging/monitoring/**` is ignored by Git and uploaded only as a workflow artifact. Later PRs may deliberately retain reviewed monitoring fixtures, but raw monitoring runs remain untracked.
 
-No raw monitoring URL, finding, candidate, or internal score may be surfaced publicly without a separate reviewed canonical-data or editorial PR.
+No raw monitoring URL, finding, candidate, discovery lead, stale-state finding, or internal score may be surfaced publicly without a separate reviewed canonical-data or editorial PR.
+
+## PR #324 bounded scheduled read-only operation
+
+Binding specification:
+
+```text
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
+```
+
+PR #324 activates exactly two scheduled groups:
+
+```text
+daily
+weekly
+```
+
+The current deterministic partition is:
+
+```text
+daily source count: 4
+weekly source count: 35
+overlap: 0
+union: all 39 reviewed official sources
+source/baseline parity: exact for both groups
+all 39 baselines remain pending_initial_acceptance
+```
+
+Daily group:
+
+```text
+platform_policy sources
+platform_service_state sources
+bounded private news discovery
+```
+
+Weekly group:
+
+```text
+all remaining reviewed official sources
+ESMA regulatory-register source
+issuer reserve/transparency sources
+redemption and mint-term sources
+issuer lifecycle and regulatory sources
+article/research stale-state review
+```
+
+The scheduled workflow uses:
+
+```text
+permissions:
+  contents: read
+```
+
+It may upload private artifacts. It must not create branches, commits, canonical pull requests, guide edits, candidate publication, discovery publication, baseline acceptance, canonical writes, or deployment actions.
+
+## Bounded news discovery
+
+News discovery is private lead generation only.
+
+Bounds:
+
+```text
+maximum queries per run: 4
+maximum items retained per query: 20
+maximum response body: 1 MiB
+request timeout: 15 seconds
+raw response retention: false
+status: discovery_only
+canonical_action: none
+public_output: false
+```
+
+Feed failures are private monitoring errors and must not be converted into availability, regulatory, lifecycle, or canonical conclusions.
+
+## Article stale-state review
+
+Weekly stale-state review reads reviewed research timestamps and classifies:
+
+```text
+current: 0-7 days
+review_due: 8-14 days
+stale: 15-30 days
+severely_stale: 31+ days
+missing_date: no usable date
+```
+
+The output is private review material only. It does not edit the guide, editorial research matrix, monitoring source configuration, or canonical data.
 
 ## Failure behavior
 
@@ -219,13 +335,20 @@ A monitoring run fails when:
 - monitoring writes outside its output root;
 - canonical before/after hashes differ;
 - required output files are missing or invalid;
+- schedule group is invalid;
+- daily/weekly source partition overlaps or does not cover all reviewed sources;
+- selected source/baseline IDs differ;
 - the health monitor reports a fatal repository-integrity problem.
+
+Individual source fetch failures, individual news-feed failures, and stale review dates are recorded as private review outcomes and do not authorize inference.
 
 A failed monitoring run does not change canonical data and does not trigger production deployment.
 
 ## Data preservation
 
-PR #230–#232 must preserve the current canonical registry counts unless a separate approved data PR changes them. Monitoring artifacts are excluded from all canonical counts.
+Monitoring work preserves current canonical registry counts unless a separate approved data PR changes them. Monitoring artifacts, discovery leads, and stale-state findings are excluded from all canonical counts.
+
+All 39 repository monitoring baselines remain pending in PR #324. Accepted baseline count and accepted asset reach remain zero.
 
 ## Deployment classification
 
