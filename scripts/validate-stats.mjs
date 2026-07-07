@@ -54,6 +54,20 @@ for (const [name, distribution] of [
   ['yield.rate_type', first.yield.rate_type]
 ]) check(sum(distribution) === total, `${name} must sum to asset denominator ${total}`);
 
+const transitionStatusMap = {
+  migrations: 'migrated',
+  rebrands: 'rebranded',
+  orderly_wind_downs: 'winding_down',
+  terminations: 'terminated',
+  inactive_unresolved: 'inactive',
+  collapses: 'collapsed'
+};
+for (const [transition, status] of Object.entries(transitionStatusMap)) {
+  const expectedCount = first.lifecycle.statuses?.[status]?.count ?? 0;
+  check(first.lifecycle.transitions?.[transition] === expectedCount, `lifecycle.transitions.${transition} must equal ${status} status count ${expectedCount}`);
+}
+check(first.failures.count === first.lifecycle.transitions.collapses, 'failure count must equal lifecycle collapse transition count');
+
 check(first.deployments.total_deployments === first.totals.deployments, 'deployment total mismatch');
 check(first.deployments.assets_with_deployments === first.data_quality.coverage.deployment.count, 'deployment coverage mismatch');
 check(first.organizations.total_organizations === first.totals.organizations, 'organization total mismatch');
@@ -91,5 +105,6 @@ console.log(JSON.stringify({
   checkpoint_id: first.checkpoint_id,
   totals: first.totals,
   lifecycle_groups: first.lifecycle.groups,
+  lifecycle_transitions: first.lifecycle.transitions,
   validated_output: requestedOutput ?? null
 }, null, 2));
