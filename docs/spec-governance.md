@@ -48,8 +48,10 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
 docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
 
 Canonical data semantics remain governed by current scope, classification, data-model, and migration specifications. Statistics work is governed by `docs/stats-spec.md`. Phase F-I work is governed by `docs/comparison-and-change-product-spec.md` together with active numbering amendments.
@@ -86,6 +88,8 @@ A change to any of the following requires a specification update in the same PR 
 - monitoring checkpoint/snapshot digest boundary;
 - monitoring source-family classification;
 - monitoring coverage semantics;
+- `monitoring_scope` semantics;
+- platform/legal-entity/region/function/register scope semantics;
 - schedule trigger or permission boundary;
 - statistics semantics;
 - comparison projection semantics;
@@ -121,9 +125,9 @@ reproducible build audit complete
 audited 100-record canonical checkpoint complete
 non-UI release material complete
 PR #321 100-asset monitoring baseline synchronization complete
-PR #322 reserve and redemption source expansion active
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion next
-PR #324 bounded scheduled read-only monitoring later
+PR #322 reserve and redemption source expansion complete
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion active
+PR #324 bounded scheduled read-only monitoring next
 PR #325-#328 statistics
 PR #329-#334 candidate audit and controlled growth to 110
 PR #335-#348 post-110 product sequence approved but inactive before reviewed 110-asset checkpoint
@@ -169,7 +173,28 @@ Its historical validator checks fixed counts and digests directly. Later source 
 
 The historical PR #309 coverage validator also uses historical checkpoint state rather than current allowlist recalculation.
 
+The PR #322 snapshot is historical and immutable:
+
+```text
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+```
+
+It preserves:
+
+```text
+30 sources
+30 pending baseline rows
+22 assets reached
+78 uncovered assets
+18 organizations reached
+0 accepted baselines
+0 accepted asset reach
+11 multi-family assets
+```
+
 ## 10. PR #322 reserve/redemption source-expansion governance
+
+PR #322 reserve/redemption source-expansion governance remains historical and binding for its checkpoint.
 
 PR #322 is governed by:
 
@@ -180,7 +205,7 @@ scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
 .github/workflows/monitoring-reserve-redemption-expansion.yml
 ```
 
-Binding current boundary:
+Historical boundary:
 
 ```text
 100 assets
@@ -209,7 +234,7 @@ quantoz-eurq-usdq
 vnx-vchf-overview
 ```
 
-Binding source-family boundary:
+Historical source-family boundary:
 
 ```text
 reserve_assurance: 14 sources / 16 assets
@@ -218,22 +243,81 @@ issuer_lifecycle: 5 sources / 5 assets
 regulatory: 5 sources / 5 assets
 ```
 
+PR #322 rows may not be retroactively rewritten as lifecycle, regulatory, platform-policy, service-state, register, or access-schema rows.
+
+## 11. PR #323 lifecycle/regulatory/market-access source and schema governance
+
+PR #323 is governed by:
+
+```text
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-official-source-schema.md
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+scripts/validate-monitoring-scoped-source-schema-pr323.mjs
+scripts/validate-monitoring-lifecycle-regulatory-market-access-expansion-100-assets.mjs
+.github/workflows/monitoring-lifecycle-regulatory-market-access-expansion.yml
+```
+
+Binding current boundary:
+
+```text
+100 assets
+94 organizations
+110 relationships
+39 reviewed source rows
+39 baseline rows
+39 pending_initial_acceptance
+0 accepted
+0 missing
+23 assets with registered source reach
+77 uncovered assets
+18 organizations reached
+0 accepted asset reach
+17 multi-family assets
+```
+
+Binding source-family boundary:
+
+```text
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
+issuer_lifecycle: 7 sources / 7 assets
+regulatory: 9 sources / 8 assets
+platform_policy: 3 sources / 12 mapped assets
+platform_service_state: 1 source / 0 mapped assets
+regulatory_register: 1 source / 0 mapped assets
+```
+
+Binding scoped coverage:
+
+```text
+platform-policy sources: 3
+platform service-state sources: 1
+regulatory-register sources: 1
+market-access schema-capable sources: 5
+scoped platforms: 4
+scoped region values: 4
+```
+
 Rules:
 
-- PR #322 rows may use only reserve, assurance, and issuance/redemption signals;
-- each new source has exactly one matching pending baseline row;
+- every new source has exactly one matching pending baseline row;
 - accepted-only baseline fields remain null;
 - accepted baseline count remains zero;
 - accepted asset reach remains zero;
 - source/baseline ID parity remains exact;
-- deterministic current-state observation must match the PR #322 snapshot exactly;
-- lifecycle and regulatory family counts remain unchanged;
+- deterministic current-state observation must match the PR #323 snapshot exactly;
+- `monitoring_scope` is descriptive private review context, not a canonical Market Access Record;
+- platform name, legal entity, region, function scope, authority identity, and register families remain explicit;
+- platform-wide service-state sources do not require fake stablecoin targets;
+- regulatory-register sources do not require fake stablecoin or issuer targets;
+- platform/register scope counts are not divided by the 100-asset denominator;
 - snapshot generation is offline and authorizes no canonical action;
 - monitoring snapshots and baseline files remain internal and non-public.
 
-PR #322 may not accept baselines, add lifecycle/regulatory/platform-policy/regulatory-register/access-schema sources, change normalization version, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical pull requests, publish candidates, or deploy monitoring output.
+PR #323 may not accept baselines, change normalization version, activate schedules, write canonical data, edit guides automatically, create automatic canonical pull requests, publish candidates, create canonical Market Access Records, or deploy monitoring output.
 
-## 11. Monitoring coverage governance
+## 12. Monitoring coverage governance
 
 Coverage remains multidimensional:
 
@@ -261,7 +345,7 @@ Rules:
 - PR #324 activates bounded scheduled read-only operation;
 - monitoring output remains private candidate material until reviewed.
 
-## 12. Monitoring safety boundary
+## 13. Monitoring safety boundary
 
 Monitoring must remain review-only and read-only with respect to canonical data.
 
@@ -278,7 +362,7 @@ no production deployment
 
 Scheduled operation in PR #324 must preserve read-only permissions and the existing no-write boundary.
 
-## 13. Unknown-value governance
+## 14. Unknown-value governance
 
 Protected unresolved states include:
 
@@ -292,13 +376,13 @@ source_review_needed
 
 These states are not structural placeholders and must not be overwritten merely to satisfy completeness or comparison presentation.
 
-## 14. Statistics governance
+## 15. Statistics governance
 
 `docs/stats-spec.md` is binding for PR #325-#328.
 
 Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
 
-## 15. Comparison and change-product governance
+## 16. Comparison and change-product governance
 
 Phase F-I remains governed by `docs/comparison-and-change-product-spec.md` and active numbering amendments.
 
@@ -313,7 +397,7 @@ Binding boundaries:
 - public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds;
 - safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
 
-## 16. Data preservation
+## 17. Data preservation
 
 UI, quality, taxonomy, monitoring, statistics, growth, editorial, release-material, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
 
