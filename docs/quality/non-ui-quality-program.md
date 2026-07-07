@@ -18,8 +18,9 @@ This program governs the core workstream after the dedicated UI correction progr
 -> reproducible build audit — complete
 -> audited 100-record canonical checkpoint — complete
 -> non-UI release material — complete
--> monitoring baseline synchronization — active
--> monitoring source/schema expansion
+-> monitoring baseline synchronization — complete
+-> reserve and redemption source expansion — active
+-> lifecycle/regulatory/access source and schema expansion
 -> bounded scheduled read-only monitoring
 -> statistics implementation
 -> controlled growth from 100 to 110
@@ -31,7 +32,7 @@ This program governs the core workstream after the dedicated UI correction progr
 
 The canonical execution order and PR numbers are defined by `docs/roadmap.md` and active roadmap amendments.
 
-UI remains maintenance-only until the roadmap reaches an approved product UI phase. Narrow verified maintenance may not silently consume planned roadmap work.
+UI remains maintenance-only until the roadmap reaches an approved product UI phase. Narrow maintenance may not silently consume planned roadmap work.
 
 ## Current status
 
@@ -41,23 +42,17 @@ Organizations: 94
 Relationships: 110
 Events: 172
 Evidence: 502
-Public source identities: 456
-Evidence relations: 502
 Deployments: 140
 Detail routes: 366
 
 PR #316 release integrity: complete
 PR #317 reproducible build audit: complete
 PR #318 audited 100-record canonical checkpoint: complete
-PR #319 guide article spacing maintenance: complete, inserted work
+PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
-PR #321 100-asset monitoring baseline synchronization: active
-PR #322 reserve and redemption source expansion: next
-
-Monitoring foundation: implemented
-Statistics specification: implemented as specification; page and public stats outputs not yet implemented
-Growth beyond 100: blocked until the candidate-audit phase
-Post-110 comparison program: approved but inactive before the reviewed 110-asset checkpoint
+PR #321 100-asset monitoring baseline synchronization: complete
+PR #322 reserve and redemption source expansion: active
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: next
 ```
 
 ## Required reading order
@@ -71,26 +66,20 @@ Before changing canonical data, evidence, workflows, monitoring, statistics, com
 5. every active roadmap amendment named by the roadmap
 6. this document
 7. the canonical specification for the active work item
-8. every named baseline, validator, audit, queue, fixture, publication-gate review, release note, and research checkpoint
+8. every named baseline, validator, audit, queue, fixture, release note, publication-gate review, and research checkpoint
 
-Current monitoring synchronization work must read:
+Current PR #322 work must read:
 
 ```text
 docs/quality/monitoring-pipeline-spec.md
 docs/quality/monitoring-official-source-spec.md
 docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
+docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
 scripts/monitoring/sources/official-sources.json
 scripts/monitoring/baselines/official-source-baselines.json
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-```
-
-Release checkpoints remain binding:
-
-```text
-docs/migration/registry-release-integrity-baseline.json
-docs/migration/reproducible-build-output-baseline.json
-docs/migration/audited-100-asset-canonical-checkpoint.json
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 ```
 
 ## Fixed operating rules
@@ -101,7 +90,7 @@ docs/migration/audited-100-asset-canonical-checkpoint.json
 - Candidate monitoring output never writes directly to canonical public data.
 - Monitoring baselines are accepted only through a separate human-reviewed repository change.
 - Monitoring executions remain read-only and do not update their own baseline.
-- Platform-policy access preserves function or route, service state, legal entity, customer scope, supported network, geography, and dates.
+- Platform access preserves function, service state, legal entity, customer scope, supported network, geography, and dates.
 - A platform licence is not proof of stablecoin function availability.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
 - Comparison projections use reviewed canonical data only and preserve unresolved states.
@@ -127,11 +116,12 @@ PR #311         Registry v2/v3 and machine-readable parity
 PR #312         Ripple EU CASP guide update
 PR #314         corrected guide follow-up
 PR #315         schedule amendment and PR renumbering
-PR #316         counts, manifest, version, and provenance integrity
-PR #317         reproducible build and generated-output audit
+PR #316         release integrity
+PR #317         reproducible build audit
 PR #318         audited 100-record canonical checkpoint
-PR #319         guide article spacing maintenance, inserted work
+PR #319         guide maintenance, inserted work
 PR #320         non-UI release material
+PR #321         100-asset monitoring baseline synchronization
 ```
 
 ## Monitoring pipeline boundary
@@ -150,45 +140,63 @@ official-source observation
 
 It must not commit canonical data, accept its own baseline, publish candidates, edit guides automatically, create automatic canonical PRs, or deploy.
 
-## 100-record monitoring boundary
+## Historical PR #321 monitoring checkpoint
 
 ```text
-stable assets: 100
-organizations: 94
-relationships: 110
-registered official sources: 24
+sources: 24
 baseline rows: 24
+pending: 24
+accepted: 0
 registered asset reach: 16
 uncovered assets: 84
 covered organizations: 12
-accepted sources: 0
 accepted asset reach: 0
-pending_initial_acceptance: 24
-accepted baselines: 0
-missing baselines: 0
 multi-family assets: 7
 ```
 
-Current source-family reach:
+Historical binding snapshot:
 
 ```text
-reserve_assurance: 9 sources / 11 assets
-redemption_terms: 6 sources / 7 assets
+scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+```
+
+The PR #321 snapshot is immutable. Successor source expansion uses a separate current snapshot.
+
+## Current PR #322 monitoring boundary
+
+```text
+sources: 30
+baseline rows: 30
+pending: 30
+accepted: 0
+missing: 0
+registered asset reach: 22
+uncovered assets: 78
+covered organizations: 18
+accepted asset reach: 0
+multi-family assets: 11
+```
+
+Current family reach:
+
+```text
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
 issuer_lifecycle: 5 sources / 5 assets
 regulatory: 5 sources / 5 assets
 ```
 
-Zero current checked-in coverage remains recorded for:
+Binding current snapshot:
 
 ```text
-platform-policy sources
-platform service-state sources
-regulatory-register sources
-market-access schema-capable sources
-accepted baselines
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 ```
 
-## Phase B — non-UI release hardening — complete
+PR #322 adds exactly six first-party source rows and six pending baseline rows for TUSD, EURA, EURCV, EURI, EURQ, and VCHF.
+
+No baseline is accepted. Accepted asset reach remains zero.
+
+## Phase B — release hardening — complete
 
 ```text
 PR #316 release integrity — complete
@@ -198,43 +206,43 @@ PR #319 guide maintenance — complete, inserted work
 PR #320 non-UI release material — complete
 ```
 
-Phase B is closed.
-
 ## Phase C — monitoring expansion and operation — active
 
 ```text
-PR #321 100-asset monitoring baseline synchronization — active
-PR #322 reserve and redemption source expansion
+PR #321 100-asset monitoring baseline synchronization — complete
+PR #322 reserve and redemption source expansion — active
 PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
 PR #324 bounded scheduled read-only monitoring
 ```
 
-### PR #321 synchronization contract
+### PR #322 contract
 
 Binding files:
 
 ```text
-docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
-scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-scripts/generate-monitoring-baseline-sync-100-assets.mjs
-scripts/validate-monitoring-baseline-sync-100-assets.mjs
-.github/workflows/monitoring-baseline-sync-100.yml
+docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
+.github/workflows/monitoring-reserve-redemption-expansion.yml
 ```
 
-PR #321:
+PR #322:
 
-- synchronizes current 24 source rows with 24 baseline rows;
-- requires exact source/baseline ID parity;
-- projects all 100 assets and all 94 organizations into deterministic synchronization digests;
-- preserves 24 pending baselines and zero accepted baselines;
-- preserves registered reach 16 / uncovered queue 84;
-- preserves zero accepted asset reach;
-- performs no network access;
+- adds six reviewed first-party source rows;
+- adds six matching pending baseline rows;
+- increases registered asset reach from 16 to 22;
+- reduces uncovered queue from 84 to 78;
+- expands reserve/assurance asset reach from 11 to 16;
+- expands redemption-terms asset reach from 7 to 12;
+- keeps lifecycle and regulatory family counts unchanged;
+- preserves historical PR #309/#321 checkpoints;
+- keeps every baseline pending;
+- keeps accepted coverage at zero;
+- performs no network access during deterministic snapshot generation;
 - performs no canonical action;
-- creates no public output;
-- adds no sources and accepts no baselines.
+- creates no public monitoring output.
 
-PR #322-#323 perform later reviewed source/schema expansion. PR #324 alone activates bounded schedule triggers.
+PR #323 handles lifecycle, regulatory, platform/access, and schema expansion. PR #324 alone activates bounded schedule triggers.
 
 ## Phase D — statistics implementation
 
