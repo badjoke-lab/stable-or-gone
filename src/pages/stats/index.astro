@@ -8,14 +8,14 @@ const history = getPublicStatsHistory();
 const reviewDate = getStatsReviewDate(stats, history);
 
 const groupOrder = ['operating', 'constrained', 'historical_non_failure', 'failed', 'other'];
-const groupLabels = {
+const groupLabels: Record<string, string> = {
   operating: 'Operating',
   constrained: 'Constrained',
   historical_non_failure: 'Historical non-failure',
   failed: 'Failed',
   other: 'Other'
 };
-const statusLabels = {
+const statusLabels: Record<string, string> = {
   active: 'Active',
   restricted: 'Restricted',
   suspended: 'Suspended',
@@ -46,7 +46,16 @@ const kpis = [
   { label: 'Evidence', value: stats.totals.evidence, note: 'Evidence records' }
 ];
 
-const snapshots = history.snapshots ?? [];
+type StatsSnapshot = {
+  recorded_at: string;
+  asset_count: number;
+  totals: {
+    events: number;
+    evidence: number;
+  };
+};
+
+const snapshots = (history.snapshots ?? []) as StatsSnapshot[];
 const latestSnapshot = snapshots.at(-1);
 const title = 'Registry Statistics — Stable or Gone';
 const description = 'Derived statistics for the Stable or Gone canonical stablecoin registry, including lifecycle composition, record totals, and reviewed checkpoint history.';
