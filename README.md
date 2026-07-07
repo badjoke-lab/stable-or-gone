@@ -8,45 +8,63 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 
 ## Current registry checkpoint
 
-The canonical GitHub checkpoint contains:
+The reviewed canonical checkpoint contains:
 
 ```text
-92 stable assets
-86 organizations
-101 stablecoin-organization relationships
-92 classification records
-92 reserve/redemption profiles
-150 events
-150 Event v2 detail records
-455 evidence records
-455 evidence relation projections
-100 reserve-report or reserve-context records
-253 known unknowns
+100 stable assets
+94 organizations
+110 stablecoin-organization relationships
+100 classification records
+100 reserve/redemption profiles
+172 events
+172 Event v2 detail records
+502 evidence records
+502 evidence relation projections
+108 reserve-report or reserve-context records
+289 known unknowns
 9 regulatory notes
-130 deployments
-92 legal profiles
+140 deployments
+100 legal profiles
 4 stable-asset relationships
-125 reserve components
-92 income profiles
+133 reserve components
+100 income profiles
+140 deployment view rows
+366 detail routes
 ```
 
-These counts are generated from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and the sitemap. They must not be maintained independently by hand.
+These counts are derived from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and route generation. They are protected by release-integrity checks and must not be maintained independently by hand.
+
+The audited 100-asset checkpoint also records deterministic group and global identity/content digests, exact baseline linkage, package graph linkage, and the accepted reproducible-build result. Current production may move to a later noncanonical `main` commit only while provenance, canonical hash, file-count, reviewed count, and exact route parity remain valid.
+
+Release note:
+
+```text
+docs/releases/100-asset-checkpoint-2026-07-06.md
+```
+
+Binding checkpoint:
+
+```text
+docs/migration/audited-100-asset-canonical-checkpoint.json
+```
 
 ## Current workstream
 
-Routine record growth is paused at 92 assets while SOG completes the 100-record UI and public-information repair program.
+The registry has reached the reviewed 100-asset checkpoint. The active roadmap item is non-UI release material.
 
-The repair covers:
+The next approved sequence is:
 
-- production-snapshot and route parity;
-- public lifecycle, peg, backing, event, organization, evidence, deployment, and value-state taxonomy;
-- explicit primary organization relationships;
-- evidence deduplication with claim-relation preservation;
-- removal of internal work values from public pages;
-- stablecoin, organization, and event information architecture;
-- desktop and mobile registry behavior;
-- accessibility, performance, SEO, and machine-readable parity;
-- a full audit of all 92 current records before the final eight records are promoted.
+```text
+PR #321  100-asset monitoring baseline synchronization
+PR #322  reserve and redemption source expansion
+PR #323  lifecycle, regulatory, and EU market-access source/schema expansion
+PR #324  bounded scheduled read-only monitoring
+PR #325-#328  statistics implementation
+PR #329       next candidate audit
+PR #330-#334  controlled growth from 100 to 110
+```
+
+After a reviewed 110-asset checkpoint, approved later work begins with Comparison Foundation, followed by Compare, Access & Regulation Explorer, Change Timeline, and reviewed public update surfaces.
 
 The repository source of truth is:
 
@@ -55,11 +73,9 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/ui-redesign/master-spec.md
-docs/ui-redesign/implementation-plan.md
 ```
 
-Do not infer the active schedule from old handoffs or previous migration plans. See `docs/roadmap.md` for the current gate and next approved work item.
+Do not infer the active schedule from old handoffs or superseded migration plans. See `docs/roadmap.md` and the active roadmap amendments for the current gate and next approved work item.
 
 ## What the registry tracks
 
@@ -133,7 +149,50 @@ Current canonical data groups include:
 - reserve components;
 - income profiles.
 
-Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, and the sitemap are generated or validated against the same canonical groups. Unreviewed candidates, internal monitoring output, staging data, and private notes are excluded from the public machine-readable layer.
+Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, and the sitemap are generated or validated against the reviewed canonical groups.
+
+The public machine-readable layer exposes reviewed canonical information only:
+
+```text
+canonical_only = true
+includes_unreviewed_candidates = false
+includes_internal_monitoring = false
+includes_private_notes = false
+```
+
+Unreviewed candidates, pending monitoring baselines, internal monitoring output, editorial research matrices that have not become canonical records, and private notes remain outside public canonical release claims.
+
+## Machine-readable entry points
+
+Public machine-readable discovery starts at:
+
+```text
+/version.json
+/data/manifest.json
+/llms.txt
+/ai.txt
+```
+
+`version.json` exposes project identity, build provenance, reviewed counts, and additive Registry v3 summary data.
+
+`data/manifest.json` describes the public data model, count surfaces, and data-safety boundary.
+
+SOG does not maintain a second manually edited public count authority.
+
+## Monitoring boundary
+
+Monitoring is review-only and read-only with respect to canonical data.
+
+The monitoring pipeline may observe sources, compare accepted baselines, classify changes, and create private review material. It may not:
+
+- write canonical data automatically;
+- accept its own baseline;
+- edit guides automatically;
+- publish candidates automatically;
+- create automatic canonical PRs;
+- deploy.
+
+At the current 100-asset checkpoint, registered source reach and accepted monitoring coverage are separate concepts. Source and schema expansion remains scheduled work; zero coverage in a required monitoring domain is recorded honestly rather than filled by inference.
 
 ## Specification and change control
 
@@ -155,43 +214,35 @@ See `docs/spec-governance.md`.
 ## Validation and build
 
 ```bash
-npm install
+npm ci --no-audit --no-fund
 npm run dev
 npm run build
 ```
 
-The build chain runs deployment-policy, baseline, launch-queue, terminal-queue, reserve-applicability, candidate, data, compatibility, classification, profile, event, evidence-relation, Registry v3, deployment, income-profile, final-state, batch-finalization, and integrity validation before Astro check and site generation.
+The release-hardening path pins Node 22.22.0 and uses the reviewed `package-lock.json`.
 
-After generation it also verifies:
+The validation chain covers canonical data, compatibility, classification, profiles, events, evidence relations, Registry v3 additive data, release integrity, reproducible-build contracts, the audited 100-asset checkpoint, final state, registry integrity, Astro validation, site generation, machine-readable output, route parity, metadata, provenance, and production consistency.
 
-- HTML list counts against canonical JSON counts;
-- stablecoin, organization, and event detail-route counts;
-- reserve-report, deployment, known-unknown, and regulatory-note references;
-- `version.json` and `data/manifest.json` count parity;
-- sitemap detail-route coverage;
-- canonical, hreflang, meta description, Open Graph, and JSON-LD metadata;
-- absence of stale legacy count strings.
+Useful commands include:
 
-The repair program adds build provenance, stale-output detection, full-route parity, public-taxonomy validation, mobile information-preservation checks, and repaired-UI audit gates according to `docs/ui-redesign/implementation-plan.md`.
+```bash
+npm run validate:guides
+npm run validate:parity-suite
+npm run validate:release-integrity
+npm run validate:reproducible-build
+node scripts/validate-audited-100-checkpoint.mjs
+npm run check:production
+```
 
 ## Development and production deployment
 
-Normal pull requests are validated by GitHub CI and do not wait for Cloudflare Pages. After a pull request merges, the `main` push automatically runs `.github/workflows/deploy-production.yml`, validates guide metadata, builds the publishable site, uploads `dist` to the `stable-or-gone` Cloudflare Pages project with Wrangler, and verifies production.
+Normal pull requests are validated by GitHub CI and do not wait for Cloudflare Pages. After a pull request merges, the `main` push automatically runs `.github/workflows/deploy-production.yml`, validates the publishable site, builds `dist`, uploads it to the `stable-or-gone` Cloudflare Pages project with Wrangler, and verifies production.
 
 Manual deployment is fallback-only for infrastructure interruption or reserved exceptions such as DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route removal, and emergency rollback.
 
 Canonical policy: `docs/deployment-policy.md`
 
 Cloudflare operator setup: `docs/cloudflare-pages.md`
-
-Useful commands:
-
-```bash
-npm run validate:guides
-npm run validate:finalization
-npm run verify:consistency
-npm run check:production
-```
 
 ## Reporting and corrections
 

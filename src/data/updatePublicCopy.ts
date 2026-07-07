@@ -1,4 +1,8 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
+  sog_update_2026_07_06_audited_100_asset_checkpoint: {
+    title: 'Audited 100-asset checkpoint recorded',
+    summary: 'Recorded the reviewed 100-asset checkpoint with deterministic canonical digests, reproducible-build linkage, and production parity checks while keeping monitoring and other unreviewed material outside the canonical public layer.'
+  },
   sog_update_2026_07_05_eu_stablecoin_access_guide: {
     title: 'EU stablecoin access guide added',
     summary: 'Published a reviewed guide to MiCA-era European stablecoin access, separating issuer status, platform service state, country scope, and individual product functions.'

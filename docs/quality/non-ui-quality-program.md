@@ -10,15 +10,14 @@ This program governs the core workstream after the dedicated UI correction progr
 
 ```text
 100-record registry-wide audit — complete
--> EU market-access specification, research, publication, and reviewed updates — complete
+-> EU market-access research and reviewed guide publication — complete
 -> known-unknown and placeholder integrity audit — complete
 -> monitoring coverage recalculation — complete
 -> Registry v2/v3 and machine-readable parity — complete
--> schedule normalization after inserted editorial work — complete
--> counts, manifest, version, and provenance integrity — complete
--> reproducible build and generated-output audit — complete
--> audited 100-record canonical checkpoint — active
--> non-UI release material
+-> release integrity — complete
+-> reproducible build audit — complete
+-> audited 100-record canonical checkpoint — complete
+-> non-UI release material — active
 -> monitoring expansion and scheduled read-only operation
 -> statistics implementation
 -> controlled growth from 100 to 110
@@ -28,9 +27,9 @@ This program governs the core workstream after the dedicated UI correction progr
 -> Reviewed Public Update Layer
 ```
 
-The canonical execution order and PR numbers are defined by `docs/roadmap.md` together with the active roadmap amendments.
+The canonical execution order and PR numbers are defined by `docs/roadmap.md` and the active roadmap amendments.
 
-UI remains maintenance-only until the roadmap reaches an approved product UI phase. Narrow verified maintenance may not silently consume planned roadmap work; consumed PR numbers must be recorded and the remaining plan renumbered before the main sequence resumes.
+UI remains maintenance-only until the roadmap reaches an approved product UI phase. Narrow verified maintenance may not silently consume planned roadmap work.
 
 ## Current status
 
@@ -45,16 +44,12 @@ Evidence relations: 502
 Deployments: 140
 Detail routes: 366
 
-PR #311 Registry v2/v3 and machine-readable parity: complete
-PR #312 Ripple EU CASP guide update: complete
-PR #313 first EEA-scope follow-up: closed without merge
-PR #314 corrected guide follow-up: complete
-PR #315 schedule amendment and PR renumbering: complete
-PR #316 counts, manifest, version, and provenance integrity: complete
-PR #317 reproducible build and generated-output audit: complete
-PR #318 audited 100-record canonical checkpoint: active
+PR #316 release integrity: complete
+PR #317 reproducible build audit: complete
+PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide article spacing maintenance: complete, inserted work
-PR #320 non-UI release material: next planned item
+PR #320 non-UI release material: active
+PR #321 100-asset monitoring baseline synchronization: next
 
 Monitoring foundation: implemented
 Statistics specification: implemented as specification; page and public stats outputs not yet implemented
@@ -80,14 +75,12 @@ Current release-hardening work must read:
 ```text
 docs/counts-manifest-version-provenance-integrity-spec.md
 docs/migration/registry-release-integrity-baseline.json
-docs/migration/registry-v3-parity-baseline.json
-docs/audits/counts-manifest-version-provenance-integrity-100-assets.md
 docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
-docs/audits/reproducible-build-generated-output-audit-2026-07-06.md
 docs/audited-100-asset-canonical-checkpoint-spec.md
 docs/migration/audited-100-asset-canonical-checkpoint.json
-docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
+docs/non-ui-release-material-spec.md
+docs/releases/100-asset-checkpoint-2026-07-06.md
 ```
 
 ## Fixed operating rules
@@ -100,7 +93,6 @@ docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
 - Monitoring executions remain read-only and do not update their own baseline.
 - Platform-policy access preserves function or route, service state, legal entity, customer scope, supported network, geography, and dates.
 - A platform licence is not proof of stablecoin function availability.
-- A global product page is not proof of EU/EEA service scope.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
 - Comparison projections use reviewed canonical data only and preserve unresolved states.
 - Facet freshness derives from authoritative record families rather than display-only root timestamps.
@@ -114,7 +106,7 @@ PR #217-#225  date, reserve, evidence, and traceability quality
 PR #226-#229  deployment quality
 PR #230-#245  review-only monitoring foundation and source coverage
 PR #246         final-eight candidate audit
-PR #247-#250   controlled growth through 98 records, with consumed-number deviations recorded
+PR #247-#250   controlled growth through 98 records with recorded deviations
 PR #278         rebuilt Growth D to 100 records from current implementation lineage
 PR #279-#280   production verification and count-aware closure hardening
 PR #284-#295   UI recovery and maintenance fixes; dedicated UI program stopped
@@ -128,8 +120,11 @@ PR #314         corrected guide follow-up
 PR #315         schedule amendment and PR renumbering
 PR #316         counts, manifest, version, and provenance integrity
 PR #317         reproducible build and generated-output audit
+PR #318         audited 100-record canonical checkpoint
 PR #319         guide article spacing maintenance, inserted work
 ```
+
+## Monitoring pipeline boundary
 
 The monitoring pipeline remains review-only:
 
@@ -140,11 +135,10 @@ official-source observation
 -> private candidate
 -> review material
 -> evidence draft
--> draft PR material
 -> human approval before canonical publication
 ```
 
-It must not commit canonical data, accept its own baseline, publish, edit guides automatically, or deploy.
+It must not commit canonical data, accept its own baseline, publish candidates, edit guides automatically, create automatic canonical PRs, or deploy.
 
 ## 100-record quality boundaries
 
@@ -181,94 +175,38 @@ market-access schema-capable sources
 accepted baselines
 ```
 
-Source and schema expansion is scheduled for PR #322-#323. Scheduled read-only operation is PR #324.
+Monitoring baseline synchronization is PR #321. Source expansion is PR #322-#323. Scheduled read-only operation is PR #324.
 
 ## Phase B — non-UI release hardening — active
 
 ```text
-PR #316 counts, manifest, version, and provenance integrity — complete
-PR #317 reproducible build and generated-output audit — complete
-PR #318 audited 100-record canonical checkpoint — active
-PR #319 guide article spacing maintenance — complete, inserted work
-PR #320 non-UI release material
+PR #316 release integrity — complete
+PR #317 reproducible build audit — complete
+PR #318 audited 100-record canonical checkpoint — complete
+PR #319 guide maintenance — complete, inserted work
+PR #320 non-UI release material — active
 ```
 
-PR #316 established the source-state contract tying canonical counts, machine-readable public count paths, route counts, and provenance semantics to the reviewed 100-asset checkpoint.
+PR #320 converts the reviewed checkpoint into accurate release material without changing canonical registry data.
 
-PR #317 established dependency-lock, pinned-runtime, deterministic timestamp, generated-output role, protected-input, and two-pass byte-reproducibility contracts.
-
-PR #318 binds those contracts into a deterministic audited checkpoint. PR #319 was a narrow guide maintenance insertion and did not complete the planned release-material work. PR #320 now prepares non-UI release material.
-
-## PR #318 checkpoint boundaries
-
-Binding files:
+Required outputs:
 
 ```text
-docs/audited-100-asset-canonical-checkpoint-spec.md
-docs/migration/audited-100-asset-canonical-checkpoint.json
-docs/audits/audited-100-asset-canonical-checkpoint-2026-07-06.md
-scripts/generate-audited-100-checkpoint.mjs
-scripts/validate-audited-100-checkpoint.mjs
-scripts/check-production-audited-checkpoint.mjs
-.github/workflows/audited-100-checkpoint.yml
+README.md
+docs/non-ui-release-material-spec.md
+docs/releases/100-asset-checkpoint-2026-07-06.md
+data/registry-updates.json
+scripts/validate-non-ui-release-material.mjs
 ```
 
-The checkpoint binds:
+Release material must:
 
-```text
-source commit 9a106f0938e6323de833c941d6ae863050f1f03b
-334 canonical source files
-Registry v2 group counts and digests
-additive Registry v3 group counts and digests
-global canonical content SHA-256
-global canonical identity SHA-256
-package-lock SHA-256
-package.json SHA-256
-PR #316 baseline ID
-PR #317 baseline ID
-PR #317 reproducible output tree result
-production public-output/provenance/output-parity contract
-production canonical hash/file-count/count parity contract
-```
-
-Observed global digests:
-
-```text
-canonical content:
-8fa08219d1e587a0628576cdfcf0e64722348282897558016651a04ebea5a881
-
-canonical identity:
-cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
-```
-
-PR #318 changes no canonical record content.
-
-Production may contain a later noncanonical `main` release, including PR #319, only when public outputs, provenance, routes, canonical data hash, canonical file count, and reviewed counts remain consistent with the audited checkpoint.
-
-## PR #317 reproducible-build boundaries
-
-Binding files:
-
-```text
-docs/reproducible-build-generated-output-audit-spec.md
-docs/migration/reproducible-build-output-baseline.json
-.github/workflows/reproducible-build.yml
-scripts/validate-reproducible-build-contract.mjs
-scripts/capture-build-output-hashes.mjs
-scripts/compare-build-output-hashes.mjs
-```
-
-Accepted result:
-
-```text
-output files: 414
-total bytes: 15178769
-tree SHA-256: 21fd8cbf5db373e1f0483dc5d74203b825c0203d08ba1ff7f34b8235495981a4
-failures: 0
-reproducible: true
-```
-
-Normal build must not rewrite `data/generated/registry-stats.json`.
+- use binding checkpoint counts and digests;
+- distinguish checkpoint source from later noncanonical production sources;
+- point to existing `/version.json`, `/data/manifest.json`, `/llms.txt`, and `/ai.txt` entry points;
+- preserve public data-safety boundaries;
+- avoid claims of complete monitoring or unimplemented product surfaces;
+- avoid creating a second count authority.
 
 ## Phase C — monitoring expansion and operation
 
@@ -307,12 +245,6 @@ Growth remains blocked until release hardening, monitoring, statistics, and cand
 
 ## Phase F — Comparison Foundation
 
-Binding specification:
-
-```text
-docs/comparison-and-change-product-spec.md
-```
-
 ```text
 PR #335 define Comparison Readiness contract and audit method
 PR #336 audit all 110 assets for comparison readiness
@@ -342,7 +274,7 @@ PR #345 change-timeline projection generator
 PR #346 Change Timeline UI
 ```
 
-Access and regulation may share a discovery surface while retaining separate canonical record families. The timeline is a derived projection and does not replace source record families.
+Access and regulation may share a discovery surface while retaining separate canonical record families. Change Timeline is derived and does not replace source record families.
 
 ## Phase I — Reviewed Public Update Layer
 
@@ -351,7 +283,7 @@ PR #347 SOG Registry Update feed/page
 PR #348 Monthly Stablecoin Change Log
 ```
 
-These surfaces derive from reviewed merged canonical changes. They are not raw monitoring feeds and are not automatic news digests.
+These future surfaces derive from reviewed merged canonical changes. They are not raw monitoring feeds or automatic news digests.
 
 ## Optional Phase J — Query Translation
 
@@ -359,4 +291,4 @@ These surfaces derive from reviewed merged canonical changes. They are not raw m
 PR #349+ natural-language filter translation after separate approval
 ```
 
-This optional layer may translate natural-language requests into structured filters only after the structured product surfaces are stable. It must not bypass canonical evidence or unresolved-state semantics.
+This optional layer may translate natural-language requests into structured filters only after structured product surfaces are stable. It must not bypass canonical evidence or unresolved-state semantics.

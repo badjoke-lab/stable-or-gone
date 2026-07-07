@@ -5,7 +5,7 @@ Updated: 2026-07-06
 
 ## 1. Purpose
 
-This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, monitoring boundaries, comparison boundaries, and publication safety.
+This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, release-material boundaries, monitoring boundaries, comparison boundaries, and publication safety.
 
 Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts do not override merged repository authority.
 
@@ -18,7 +18,7 @@ When documents disagree, use this order:
 3. `docs/roadmap.md` for current phase, active item, next item, and PR numbering.
 4. Active merged roadmap amendments named by the roadmap.
 5. The canonical specification for the active workstream.
-6. Supporting audits, inventories, baselines, fixtures, publication-gate reviews, and research checkpoints.
+6. Supporting audits, inventories, baselines, fixtures, publication-gate reviews, release notes, and research checkpoints.
 7. Conversation history and unmerged drafts.
 
 Current schedule amendments:
@@ -43,6 +43,8 @@ docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
 docs/audited-100-asset-canonical-checkpoint-spec.md
 docs/migration/audited-100-asset-canonical-checkpoint.json
+docs/non-ui-release-material-spec.md
+docs/releases/100-asset-checkpoint-2026-07-06.md
 ```
 
 Canonical data semantics remain governed by:
@@ -67,7 +69,7 @@ Before changing code, data, workflows, or documentation:
 4. read `docs/deployment-policy.md`;
 5. read every active roadmap amendment named by the roadmap;
 6. read the canonical specification for the active work item;
-7. read every named queue, validator, audit, fixture, baseline, publication-gate review, and research checkpoint.
+7. read every named queue, validator, audit, fixture, baseline, publication-gate review, release note, and research checkpoint.
 
 A non-trivial PR is not ready for review until it identifies the exact specification and roadmap item it implements.
 
@@ -88,6 +90,7 @@ A change to any of the following requires a specification update in the same PR 
 - dependency-lock or pinned runtime semantics;
 - reproducible-build timestamp context;
 - generated-output roles or protected-input boundaries;
+- release-material derivation semantics;
 - statistics semantics;
 - comparison projection semantics;
 - monitoring coverage or baseline semantics;
@@ -130,10 +133,11 @@ PR #314 corrected guide follow-up complete
 PR #315 schedule amendment and PR renumbering complete
 PR #316 counts, manifest, version, and provenance integrity complete
 PR #317 reproducible build and generated-output audit complete
-PR #318 audited 100-record canonical checkpoint active
+PR #318 audited 100-record canonical checkpoint complete
 PR #319 guide article spacing maintenance complete, inserted work
-PR #320 non-UI release material next planned item
-PR #318-#334 current pre-110 sequence after consumed PR #319
+PR #320 non-UI release material active
+PR #321 100-asset monitoring baseline synchronization next
+PR #320-#334 current pre-110 sequence after consumed PR #319
 PR #335-#348 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
 ```
 
@@ -214,11 +218,33 @@ Binding rules:
 - checkpoint release-integrity and reproducible-build baseline IDs must match current binding baselines;
 - package-lock and package manifest digests are checkpoint inputs;
 - the accepted PR #317 two-pass reproducibility result is checkpointed explicitly;
-- PR #318 must not change canonical record content;
 - production verification may observe a later noncanonical `main` release, but it must still pass public output verification, provenance verification, exact route/output parity, canonical checkpoint hash parity, canonical file-count parity, and reviewed canonical count parity;
 - later canonical content, package graph, baseline identity, or checkpoint digest changes require deliberate review and must not silently overwrite this checkpoint.
 
-## 12. Unknown-value and placeholder governance
+## 12. Non-UI release-material governance
+
+PR #320 is governed by:
+
+```text
+docs/non-ui-release-material-spec.md
+docs/releases/100-asset-checkpoint-2026-07-06.md
+scripts/validate-non-ui-release-material.mjs
+```
+
+Binding rules:
+
+- README, release note, and reviewed update history must agree with the audited 100-asset checkpoint;
+- release material derives counts, checkpoint ID, checkpoint source commit, canonical file count, canonical content digest, canonical identity digest, baseline IDs, and reproducibility result from binding repository sources;
+- PR #320 must not create a second public count authority or a manually maintained release API;
+- existing public machine-readable entry points remain `/version.json`, `/data/manifest.json`, `/llms.txt`, and `/ai.txt`;
+- public release claims preserve `canonical_only = true`, `includes_unreviewed_candidates = false`, `includes_internal_monitoring = false`, and `includes_private_notes = false`;
+- release material must distinguish checkpoint source commit from later noncanonical production commits;
+- release material may not claim complete monitoring coverage, complete regulatory coverage, complete market-access coverage, safety ranking, risk scoring, automated canonical writes, or unimplemented product surfaces;
+- PR #320 must not change canonical asset, organization, event, evidence, reserve, deployment, relationship, or Registry v3 source records;
+- `package.json` and `package-lock.json` remain unchanged because they are audited checkpoint inputs;
+- the existing `/updates/` history may receive the reviewed checkpoint entry, but this does not replace the later Phase I Reviewed Public Update Layer.
+
+## 13. Unknown-value and placeholder governance
 
 Protected unresolved states include:
 
@@ -234,7 +260,7 @@ These states are not structural placeholders and must not be overwritten merely 
 
 Structural placeholders such as TODO/TBD identity fields, fake URLs, fabricated dates, and placeholder identifiers are defects.
 
-## 13. Monitoring coverage governance
+## 14. Monitoring coverage governance
 
 Coverage remains multidimensional:
 
@@ -265,13 +291,13 @@ Rules:
 - scheduled read-only operation is PR #324;
 - monitoring output remains private candidate material until reviewed.
 
-## 14. Statistics governance
+## 15. Statistics governance
 
 `docs/stats-spec.md` is binding for PR #325-#328.
 
 Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
 
-## 15. Comparison and change-product governance
+## 16. Comparison and change-product governance
 
 Phase F-I remains governed by `docs/comparison-and-change-product-spec.md` and the active numbering amendments.
 
@@ -286,8 +312,8 @@ Binding boundaries:
 - public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds;
 - safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
 
-## 16. Data preservation
+## 17. Data preservation
 
-UI, quality, taxonomy, monitoring, statistics, growth, editorial, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
+UI, quality, taxonomy, monitoring, statistics, growth, editorial, release-material, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
 
 Before and after relevant changes, verify canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline and audited checkpoint.
