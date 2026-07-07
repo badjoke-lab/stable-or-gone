@@ -6,10 +6,11 @@ const checkpoint = readJson('docs/migration/audited-100-asset-canonical-checkpoi
 const releaseBaseline = readJson('docs/migration/registry-release-integrity-baseline.json');
 const reproducibleBaseline = readJson('docs/migration/reproducible-build-output-baseline.json');
 const updates = readJson('data/registry-updates.json');
+const history = readJson('data/stats-history.json');
 const readme = read('README.md');
 const release = read('docs/releases/100-asset-checkpoint-2026-07-06.md');
 const roadmap = read('docs/roadmap.md');
-const amendment = read('docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md');
+const amendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-activation.md');
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const requireText = (body, text, label) => check(body.includes(text), `${label}: missing ${text}`);
@@ -39,6 +40,8 @@ for (const boundary of ['canonical_only = true','includes_unreviewed_candidates 
 
 check(checkpoint.release_integrity_baseline_id === releaseBaseline.baseline_id, 'checkpoint/release-integrity baseline ID mismatch');
 check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'checkpoint/reproducible-build baseline ID mismatch');
+check(history.snapshots?.[0]?.checkpoint_id === checkpoint.checkpoint_id, 'stats history initial checkpoint ID mismatch');
+check(history.snapshots?.[0]?.asset_count === 100, 'stats history initial asset count must be 100');
 
 const updateId = 'sog_update_2026_07_06_audited_100_asset_checkpoint';
 const matchingUpdates = updates.filter((row) => row.id === updateId);
@@ -55,14 +58,15 @@ for (const marker of [
   'PR #322 reserve and redemption source expansion: complete',
   'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete',
   'PR #324 bounded scheduled read-only monitoring: complete',
-  'Current item: PR #325 deterministic statistics generator and validator',
-  'Next item: PR #326 immutable checkpoint history'
+  'PR #325 deterministic statistics generator and validator: complete',
+  'Current item: PR #326 immutable checkpoint history',
+  'Next item: PR #327 /stats/ foundation'
 ]) requireText(roadmap, marker, 'docs/roadmap.md');
 for (const marker of [
-  'PR #324 bounded scheduled read-only monitoring: complete',
-  'PR #325 deterministic statistics generator and validator: active',
-  'PR #326 immutable checkpoint history: next'
-]) requireText(amendment, marker, 'PR #325 roadmap amendment');
+  'PR #325 deterministic statistics generator and validator: complete',
+  'PR #326 immutable checkpoint history: active',
+  'PR #327 /stats/ foundation: next'
+]) requireText(amendment, marker, 'PR #326 roadmap amendment');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -79,6 +83,7 @@ console.log(JSON.stringify({
   evidence: checkpoint.v2_groups.evidence.record_count,
   canonical_file_count: checkpoint.canonical_file_count,
   update_id: updateId,
-  active_roadmap_item: 'PR #325 deterministic statistics generator and validator',
-  next_roadmap_item: 'PR #326 immutable checkpoint history'
+  stats_history_snapshot_count: history.snapshots?.length ?? 0,
+  active_roadmap_item: 'PR #326 immutable checkpoint history',
+  next_roadmap_item: 'PR #327 /stats/ foundation'
 }, null, 2));
