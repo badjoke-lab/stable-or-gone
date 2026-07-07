@@ -128,7 +128,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/sitemap-index.xml', source_file: 'src/pages/sitemap-index.xml.ts', output_kind: 'xml', group: 'discovery', role: 'sitemap_index', decision: 'keep', navigation: 'none' }),
   Object.freeze({ pattern: '/stablecoin/{slug}/', source_file: 'src/pages/stablecoin/[slug].astro', output_kind: 'html', group: 'registry', role: 'stablecoin_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/stablecoins/', source_file: 'src/pages/stablecoins/index.astro', output_kind: 'html', group: 'registry', role: 'stablecoin_index', decision: 'keep', navigation: 'registry' }),
-  Object.freeze({ pattern: '/stats/', source_file: 'src/pages/stats/index.astro', output_kind: 'html', group: 'discovery', role: 'registry_statistics', decision: 'add', navigation: 'primary' }),
+  Object.freeze({ pattern: '/stats/', source_file: 'src/pages/stats/index.astro', output_kind: 'html', group: 'registry', role: 'registry_statistics', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/support/', source_file: 'src/pages/support/index.astro', output_kind: 'html', group: 'project', role: 'project_support', decision: 'keep', navigation: 'utility' }),
   Object.freeze({ pattern: '/updates/', source_file: 'src/pages/updates/index.astro', output_kind: 'html', group: 'project', role: 'registry_updates', decision: 'keep', navigation: 'project' }),
   Object.freeze({ pattern: '/version.json', source_file: 'src/pages/version.json.ts', output_kind: 'json', group: 'data_access', role: 'build_and_data_version', decision: 'keep', navigation: 'footer_data' })
