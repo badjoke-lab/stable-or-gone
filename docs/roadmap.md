@@ -18,6 +18,9 @@ PR #320 merge checkpoint:
 PR #321 merge checkpoint:
 ec7c41142977114c111409a2aa6584e0480e7454
 
+PR #322 merge checkpoint:
+3f1cd3e603f39a5327febc2b376b652897c1b825
+
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -33,10 +36,11 @@ PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
 PR #321 100-asset monitoring baseline synchronization: complete
+PR #322 reserve and redemption source expansion: complete
 
 Active workstream: monitoring expansion and operation
-Current item: PR #322 reserve and redemption source expansion
-Next item: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
+Current item: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
+Next item: PR #324 bounded scheduled read-only monitoring
 ```
 
 Current numbering authority:
@@ -46,9 +50,9 @@ docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
 docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 ```
 
-This roadmap and active amendments supersede older numeric labels in subordinate plans. Work order and scope remain unchanged unless deliberately amended.
+This roadmap and active amendments supersede older numeric labels in subordinate plans.
 
-## Completed sequence through PR #321
+## Completed sequence through PR #322
 
 ```text
 PR #296  resume core workstream and synchronize repository authority
@@ -76,6 +80,7 @@ PR #318  audited 100-record canonical checkpoint
 PR #319  guide spacing maintenance — inserted work
 PR #320  non-UI release material
 PR #321  100-asset monitoring baseline synchronization
+PR #322  reserve and redemption source expansion
 ```
 
 ## Audited 100-asset checkpoint
@@ -121,22 +126,18 @@ not_applicable
 source_review_needed
 ```
 
-## Monitoring history and current boundary
+## Monitoring checkpoint history
 
 ### Historical PR #321 synchronization checkpoint
 
-Binding historical snapshot:
-
 ```text
+snapshot:
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-```
 
-```text
 sources: 24
 baseline rows: 24
 pending: 24
 accepted: 0
-missing: 0
 registered asset reach: 16
 uncovered assets: 84
 covered organizations: 12
@@ -144,42 +145,16 @@ accepted asset reach: 0
 multi-family assets: 7
 ```
 
-The PR #321 snapshot is historical and immutable. Later source expansion is recorded in successor snapshots rather than overwriting PR #321 history.
-
-### PR #322 current reserve/redemption expansion boundary
-
-Binding specification:
+### Historical PR #322 reserve/redemption expansion checkpoint
 
 ```text
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
-```
-
-Binding current snapshot:
-
-```text
+snapshot:
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-```
 
-PR #322 adds six first-party source rows and six matching pending baseline rows for:
-
-```text
-TUSD
-EURA
-EURCV
-EURI
-EURQ
-VCHF
-```
-
-Current deterministic boundary:
-
-```text
 sources: 30
 baseline rows: 30
-source/baseline ID parity: true
-pending_initial_acceptance: 30
+pending: 30
 accepted: 0
-missing: 0
 registered asset reach: 22
 uncovered assets: 78
 covered organizations: 18
@@ -187,87 +162,160 @@ accepted asset reach: 0
 multi-family assets: 11
 ```
 
-Current source-family reach:
+PR #322 historical family reach:
 
 ```text
 reserve_assurance: 14 sources / 16 assets
 redemption_terms: 11 sources / 12 assets
 issuer_lifecycle: 5 sources / 5 assets
 regulatory: 5 sources / 5 assets
+platform_policy: 0
+platform_service_state: 0
+regulatory_register: 0
+market-access schema-capable sources: 0
 ```
 
-Current expansion digests:
+Historical snapshots are immutable. Successor expansion records current state separately.
+
+## PR #323 current monitoring boundary
+
+Binding specification:
+
+```text
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+```
+
+Binding current snapshot:
+
+```text
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+```
+
+Current deterministic boundary:
+
+```text
+sources: 39
+baseline rows: 39
+source/baseline ID parity: true
+pending_initial_acceptance: 39
+accepted: 0
+missing: 0
+registered asset reach: 23
+uncovered assets: 77
+covered organizations: 18
+accepted asset reach: 0
+multi-family assets: 17
+```
+
+Current source-family reach:
+
+```text
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
+issuer_lifecycle: 7 sources / 7 assets
+regulatory: 9 sources / 8 assets
+platform_policy: 3 sources / 12 mapped assets
+platform_service_state: 1 source / 0 mapped assets
+regulatory_register: 1 source / 0 mapped assets
+```
+
+Current scoped coverage:
+
+```text
+platform-policy sources: 3
+platform service-state sources: 1
+regulatory-register sources: 1
+market-access schema-capable sources: 5
+scoped platforms: 4
+scoped region values: 4
+```
+
+Platform/register scope is not divided by the 100-asset denominator.
+
+Current digests:
 
 ```text
 asset sync SHA-256:
-c9005a7ab4ad6a69de03058d19e0c0cf62cd792025788362293aa80caf8f5240
+aad839e01ce17ce9904a3a10de4fbb48155a1aeba214694c3545209a4b5329c4
 
 organization sync SHA-256:
-d48c0dc2c6fef802b96c35973bdb72a428879ca861d0aec588ccb96f9232b316
+89b8bbecbbf24ef827111f57ced2309165b621f3ec20c3b499f729255c00f92a
 
 source/baseline sync SHA-256:
-53f13c8d231e69593afd3ebca59c77f2b80702ccab9cc1f5071c19a7bb43c834
+088c6b6f9d8706be3eadc4a92a90f847f7c66c9dcd049ffc095b02c787a80a95
+
+monitoring scope SHA-256:
+763e383489cc33cdfbf8227a49eaa0a747255bc4cc9d10ac76677dd4b35a4282
 
 uncovered asset queue SHA-256:
-3e89c2e87db491290221630512afba56bb75752076e61ebb81d1cdf9188df8c0
+3e68607f3edeee151db90ef9f7ac4652977afaea80da9a54fbd73ec492c32329
 ```
 
-Zero checked-in coverage remains recorded for:
+## PR #323 — lifecycle, regulatory, and EU market-access source/schema expansion — active
+
+PR #323 adds four bounded issuer lifecycle/regulatory sources and five scoped platform/register sources.
+
+Issuer lifecycle/regulatory additions:
 
 ```text
-platform-policy sources
-platform service-state sources
-regulatory-register sources
-market-access schema-capable sources
-accepted baselines
+ripple-eu-emi-license
+ripple-preliminary-mica-casp
+banking-circle-euri-launch
+sgforge-eurcv-stablecoin-elevation
 ```
 
-A registered source is not an accepted baseline. A pending baseline is not accepted monitoring coverage. Issuer/protocol reach is not platform-policy coverage. Regulatory action pages are not regulatory-register coverage. A generic issuer or product page is not function-level market-access coverage.
+Scoped market-access/register additions:
 
-## PR #322 — reserve and redemption source expansion — active
+```text
+binance-eea-stablecoin-policy
+kraken-eea-stablecoin-offerings
+bitstamp-europe-mica-assets
+gemini-eea-account-closure
+esma-mica-interim-register-hub
+```
 
-Purpose:
+PR #323 also:
 
-- add six approved first-party reserve/redemption source rows;
-- add six matching pending baseline rows;
-- preserve zero accepted baselines and zero accepted asset reach;
-- increase registered asset reach from 16 to 22;
-- reduce uncovered queue from 84 to 78;
-- increase reserve/assurance family reach from 11 to 16 assets;
-- increase redemption-terms family reach from 7 to 12 assets;
-- preserve lifecycle and regulatory family counts unchanged;
-- preserve historical PR #309/#321 checkpoints;
-- validate current 30-source state with deterministic snapshot digests;
-- keep monitoring private, read-only, review-only, and non-publishing.
+- adds reviewed `monitoring_scope` metadata;
+- separates platform policy, platform service state, and regulatory-register scope;
+- preserves platform legal entity, region, function, and register family context;
+- propagates scope into private observations and private review candidates;
+- avoids fake canonical platform or issuer IDs;
+- separates platform/register counts from the 100-asset denominator;
+- keeps every baseline pending;
+- preserves zero accepted coverage;
+- keeps monitoring private, review-only, read-only, and non-publishing.
 
 Completion condition:
 
 ```text
-six approved source rows exist
-six matching pending baseline rows exist
-all 30 baselines remain pending
+39 source rows and 39 matching baseline rows exist
+all 39 baselines remain pending
 accepted baseline count remains zero
 accepted asset reach remains zero
-historical PR #321 snapshot remains unchanged and valid
-current PR #322 snapshot matches deterministic observation exactly
-current monitoring configuration validates 30 sources and 30 baselines
-current coverage validates reach 22 / uncovered 78
-monitoring validation chain includes PR #322 validator
-dedicated reserve/redemption expansion workflow passes
-authority shows PR #322 active / PR #323 next
-full CI and monitoring-related workflows green
+historical PR #321 snapshot remains valid
+historical PR #322 snapshot remains valid
+current PR #323 snapshot matches deterministic observation exactly
+source/baseline ID parity remains true
+scope fixture preserves platform/legal entity/region/function/register context
+current coverage validates reach 23 / uncovered 77
+platform-policy/service-state/register families remain separate
+full monitoring chain passes
+dedicated PR #323 workflow passes
+authority shows PR #323 active / PR #324 next
+full CI and independent audit workflows are green
 ```
 
 ## Phase C — monitoring expansion and operation — active
 
 ```text
 PR #321 100-asset monitoring baseline synchronization — complete
-PR #322 reserve and redemption source expansion — active
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
+PR #322 reserve and redemption source expansion — complete
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion — active
 PR #324 bounded scheduled read-only monitoring
 ```
 
-PR #322 adds only reserve/assurance/redemption source coverage. PR #323 handles lifecycle, regulatory, platform/access, and schema expansion. PR #324 alone activates bounded schedule triggers.
+PR #324 alone activates bounded schedule triggers.
 
 Target schedule after PR #324:
 
@@ -310,9 +358,7 @@ PR #333 106 -> 108
 PR #334 108 -> 110
 ```
 
-Each growth PR is limited to two new stable assets and must preserve all applicable supporting record groups. Unknown information remains explicit.
-
-Phase E closes at a reviewed 110-asset checkpoint. Phase F may not begin before that checkpoint is complete.
+Each growth PR is limited to two new stable assets and preserves all applicable supporting record groups. Phase E closes at a reviewed 110-asset checkpoint.
 
 ## Phase F — Comparison Foundation
 
@@ -330,7 +376,7 @@ PR #338 define canonical Market Access Record schema and governance
 PR #339 define facet-freshness derivation contract and validators
 ```
 
-Phase F is data- and contract-first. Lifecycle, issuance/redemption, legal/regulatory state, and market access remain separate analytical layers.
+Phase F starts only after the reviewed 110-asset checkpoint.
 
 ## Phase G — Compare
 
@@ -340,7 +386,7 @@ PR #341 /compare/ v1
 PR #342 Compare presets
 ```
 
-Compare is factual side-by-side research. It preserves unknown states, evidence scope, date scope, jurisdiction scope, and multi-select dimensions. It must not become a score, recommendation engine, live price table, market-cap ranking, or APY ranking.
+Compare is factual side-by-side research and must not become a score or recommendation engine.
 
 ## Phase H — Change Research Tools
 
@@ -351,8 +397,6 @@ PR #345 change-timeline projection generator
 PR #346 Change Timeline UI
 ```
 
-Access and regulation may share discovery surfaces while preserving distinct canonical record families. Change Timeline is derived and must not replace source record families with a lossy generic event model.
-
 ## Phase I — Reviewed Public Update Layer
 
 ```text
@@ -360,15 +404,13 @@ PR #347 SOG Registry Update feed/page
 PR #348 Monthly Stablecoin Change Log
 ```
 
-Public update surfaces derive from reviewed merged canonical changes. They are not raw monitoring feeds or automatic news digests.
+Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
 
 ## Optional Phase J — Query Translation
 
 ```text
 PR #349+ natural-language filter translation only after separate approval
 ```
-
-The natural-language layer may translate requests into structured filters. It must not bypass canonical data, evidence, unknown-state semantics, or scoped query constraints.
 
 ## Operating rules
 
@@ -377,19 +419,20 @@ The natural-language layer may translate requests into structured filters. It mu
 - Unknown values remain unknown unless reviewed evidence supports a value.
 - Monitoring executions remain read-only and never update their own accepted baseline.
 - Registered source reach is not accepted monitoring coverage.
+- Issuer/protocol reach is not platform-policy coverage.
+- Regulatory action pages are not regulatory-register coverage.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
+- Platform policy, service state, issuer/token regulation, CASP authorization, geography, and function scope remain separate.
 - Comparison projections derive from reviewed canonical data and preserve unresolved states.
 - Growth PRs contain no more than two new stable assets.
 - A phase transition updates this roadmap before the next implementation sequence continues.
-- Inserted work must record consumed PR numbers before planned work resumes.
 
 ## Immediate next items
 
 ```text
-1. Complete PR #322 reserve and redemption source expansion.
-2. Start PR #323 lifecycle, regulatory, and EU market-access source/schema expansion.
-3. Activate bounded scheduled read-only monitoring in PR #324.
-4. Continue statistics in PR #325-#328.
-5. Continue candidate audit and controlled growth in PR #329-#334.
-6. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
+1. Complete PR #323 lifecycle, regulatory, and EU market-access source/schema expansion.
+2. Start PR #324 bounded scheduled read-only monitoring.
+3. Continue statistics in PR #325-#328.
+4. Continue candidate audit and controlled growth in PR #329-#334.
+5. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
 ```

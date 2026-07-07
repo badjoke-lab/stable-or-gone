@@ -14,11 +14,13 @@ import './validate-current-monitoring-configuration.mjs';
 import './validate-current-coverage.mjs';
 import './validate-monitoring-baseline-sync-100-assets.mjs';
 import './validate-monitoring-reserve-redemption-expansion-100-assets.mjs';
+import './validate-monitoring-scoped-source-schema-pr323.mjs';
+import './validate-monitoring-lifecycle-regulatory-market-access-expansion-100-assets.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
 const workflow = fs.readFileSync('.github/workflows/monitoring-review.yml', 'utf8');
-const expansionWorkflow = fs.readFileSync('.github/workflows/monitoring-reserve-redemption-expansion.yml', 'utf8');
+const scopedWorkflow = fs.readFileSync('.github/workflows/monitoring-lifecycle-regulatory-market-access-expansion.yml', 'utf8');
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
 for (const token of ['workflow_dispatch:', 'contents: read', 'npm run monitor:review', 'actions/upload-artifact']) check(workflow.includes(token), `workflow missing ${token}`);
@@ -27,11 +29,9 @@ check(!/^\s*push:/m.test(workflow), 'workflow must not use push trigger');
 check(fs.readFileSync('.gitignore', 'utf8').split(/\r?\n/).includes('data-staging/monitoring/'), 'monitoring output must be ignored');
 check(packageJson.scripts?.['monitor:review'] === 'node scripts/monitoring/run.mjs', 'monitor:review script mismatch');
 check(packageJson.scripts?.['validate:monitoring'] === 'node scripts/validate-monitoring-pipeline-pr230.mjs', 'validate:monitoring script mismatch');
-for (const token of [
-  'Validate full monitoring chain',
-  'npm run validate:monitoring',
-  'contents: read',
-]) check(expansionWorkflow.includes(token), `monitoring expansion CI missing ${token}`);
+for (const token of ['Validate full monitoring chain', 'npm run validate:monitoring', 'contents: read']) {
+  check(scopedWorkflow.includes(token), `PR #323 monitoring CI missing ${token}`);
+}
 
 const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sog-monitoring-current-'));
 try {
@@ -40,7 +40,7 @@ try {
     runId: '20260707T000000Z-test0000',
     startedAt: '2026-07-07T00:00:00.000Z',
     sourceCommit: 'test000000000000000000000000000000000000',
-    sourceBranch: 'monitoring-expansion-test',
+    sourceBranch: 'monitoring-scoped-expansion-test',
     mode: 'health-only'
   });
   const files = fs.readdirSync(result.run_directory).sort();
@@ -61,4 +61,4 @@ if (errors.length) {
   errors.forEach((error) => console.error(`- ${error}`));
   process.exit(1);
 }
-console.log('Current monitoring validation passed for the 100-asset, 30-source reserve/redemption-expanded boundary.');
+console.log('Current monitoring validation passed for the 100-asset, 39-source lifecycle/regulatory/market-access-expanded boundary.');

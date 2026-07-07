@@ -17,6 +17,14 @@ export { normalizeOfficialSourceBody } from '../normalization/official-source-no
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 const TIMEOUT_MS = 20_000;
 
+const FUNCTION_SCOPE_VALUES = new Set([
+  'buy', 'sell', 'spot_trading', 'margin', 'earn', 'deposit', 'withdraw', 'custody', 'convert', 'auto_conversion'
+]);
+const REGISTER_FAMILIES = new Set([
+  'non_art_emt_white_papers', 'art_issuers', 'emt_issuers', 'casps', 'non_compliant_entities'
+]);
+const SCOPE_KINDS = new Set(['platform_policy', 'platform_service_state', 'regulatory_register']);
+
 const SIGNAL_KEYWORDS = {
   reserve_update: ['reserve', 'reserves', 'backing assets', 'total reserves', 'portfolio composition'],
   assurance_update: ['assurance', 'attestation', 'attestations', 'independent third-party', 'report'],
@@ -25,12 +33,24 @@ const SIGNAL_KEYWORDS = {
   lifecycle_update: [
     'migration', 'migrate', 'upgrade', 'upgraded', 'optional', 'rebrand', 'renamed',
     'now be known as', 'wind down', 'winding down', 'halt minting', 'cease issuance',
-    'shutdown', 'retire', 'retirement', 'conversion', 'convert', 'here to stay'
+    'shutdown', 'retire', 'retirement', 'conversion', 'convert', 'here to stay', 'launch', 'launched'
   ],
   regulatory_update: [
     'order', 'orders', 'charges', 'complaint', 'settlement', 'notice', 'approval',
-    'authorized', 'authorization', 'enforcement', 'penalty', 'fines', 'cease minting',
-    'supervision', 'restriction', 'requirements'
+    'authorized', 'authorised', 'authorization', 'authorisation', 'enforcement', 'penalty', 'fines',
+    'cease minting', 'supervision', 'restriction', 'requirements', 'licence', 'license', 'mica', 'micar'
+  ],
+  platform_policy_update: [
+    'stablecoin', 'stablecoins', 'delist', 'delisting', 'trading', 'trade', 'buy', 'sell',
+    'deposit', 'withdraw', 'withdrawal', 'custody', 'convert', 'conversion', 'earn', 'margin'
+  ],
+  platform_service_state_update: [
+    'service', 'services', 'restriction', 'restrictions', 'account', 'accounts', 'closed', 'closure',
+    'wind down', 'winding down', 'withdraw', 'withdrawal', 'transition', 'available', 'unavailable'
+  ],
+  regulatory_register_update: [
+    'register', 'registers', 'art issuer', 'emt issuer', 'authorised casp', 'authorized casp',
+    'non-compliant', 'non compliant', 'white paper', 'mica', 'micar'
   ]
 };
 
@@ -63,6 +83,47 @@ export function loadOfficialSources(root = process.cwd(), relativePath = 'script
   return sources.filter((source) => source.enabled !== false);
 }
 
+function validateMonitoringScope(source) {
+  const failures = [];
+  const scope = source.monitoring_scope;
+  if (!scope) return failures;
+  if (!SCOPE_KINDS.has(scope.kind)) {
+    failures.push(`${source.source_id}: unknown monitoring_scope kind ${scope.kind ?? 'missing'}`);
+    return failures;
+  }
+  if (typeof scope.region_scope !== 'string' || scope.region_scope.trim() === '') {
+    failures.push(`${source.source_id}: monitoring_scope region_scope is required`);
+  }
+  if (scope.kind === 'platform_policy' || scope.kind === 'platform_service_state') {
+    if (typeof scope.platform_name !== 'string' || scope.platform_name.trim() === '') {
+      failures.push(`${source.source_id}: platform_name is required`);
+    }
+    if (!(scope.platform_legal_entity === null || typeof scope.platform_legal_entity === 'string')) {
+      failures.push(`${source.source_id}: platform_legal_entity must be string or null`);
+    }
+    if (!Array.isArray(scope.function_scope)) {
+      failures.push(`${source.source_id}: function_scope must be an array`);
+    } else {
+      for (const value of scope.function_scope) {
+        if (!FUNCTION_SCOPE_VALUES.has(value)) failures.push(`${source.source_id}: unknown function_scope value ${value}`);
+      }
+    }
+  }
+  if (scope.kind === 'regulatory_register') {
+    if (typeof scope.authority_name !== 'string' || scope.authority_name.trim() === '') {
+      failures.push(`${source.source_id}: authority_name is required`);
+    }
+    if (!Array.isArray(scope.register_families) || scope.register_families.length === 0) {
+      failures.push(`${source.source_id}: register_families must be a non-empty array`);
+    } else {
+      for (const value of scope.register_families) {
+        if (!REGISTER_FAMILIES.has(value)) failures.push(`${source.source_id}: unknown register family ${value}`);
+      }
+    }
+  }
+  return failures;
+}
+
 export function validateOfficialSources(sources, canonicalIndex) {
   const failures = [];
   const ids = new Set();
@@ -78,9 +139,15 @@ export function validateOfficialSources(sources, canonicalIndex) {
     }
     if (!Array.isArray(source.allowed_hosts) || source.allowed_hosts.length === 0) failures.push(`${source.source_id}: allowed_hosts missing`);
     else if (parsed && !source.allowed_hosts.includes(parsed.hostname)) failures.push(`${source.source_id}: configured host is not allowlisted`);
+    if (!Array.isArray(source.affected_stablecoin_ids)) failures.push(`${source.source_id}: affected_stablecoin_ids must be an array`);
+    if (!Array.isArray(source.affected_organization_ids)) failures.push(`${source.source_id}: affected_organization_ids must be an array`);
     for (const id of source.affected_stablecoin_ids ?? []) if (!canonicalIndex.stablecoinIds.has(id)) failures.push(`${source.source_id}: unknown stablecoin ${id}`);
     for (const id of source.affected_organization_ids ?? []) if (!canonicalIndex.organizationIds.has(id)) failures.push(`${source.source_id}: unknown organization ${id}`);
+    if (!Array.isArray(source.signal_types) || source.signal_types.length === 0) failures.push(`${source.source_id}: signal_types missing`);
     for (const signalType of source.signal_types ?? []) if (!SIGNAL_KEYWORDS[signalType]) failures.push(`${source.source_id}: unknown signal type ${signalType}`);
+    failures.push(...validateMonitoringScope(source));
+    const hasCanonicalTargets = (source.affected_stablecoin_ids?.length ?? 0) > 0 || (source.affected_organization_ids?.length ?? 0) > 0;
+    if (!hasCanonicalTargets && !source.monitoring_scope) failures.push(`${source.source_id}: canonical target context or monitoring_scope is required`);
   }
   return failures;
 }
@@ -105,6 +172,11 @@ function detectSignals(source, normalizedText) {
 function buildLineageReview(source, relationships) {
   const stablecoinIds = new Set(source.affected_stablecoin_ids ?? []);
   const organizationIds = new Set(source.affected_organization_ids ?? []);
+  if (stablecoinIds.size === 0 || organizationIds.size === 0) {
+    return source.monitoring_scope
+      ? { state: 'not_applicable_noncanonical_subject_scope', relationship_ids: [], relationship_count: 0 }
+      : { state: 'no_canonical_relationship_found', relationship_ids: [], relationship_count: 0 };
+  }
   const matches = relationships.filter((row) => stablecoinIds.has(row.stablecoin_id) && organizationIds.has(row.organization_id));
   return {
     state: matches.length > 0 ? 'canonical_relationships_found' : 'no_canonical_relationship_found',
@@ -116,8 +188,13 @@ function buildLineageReview(source, relationships) {
 function buildDuplicateReview(source, canonicalIndex) {
   const missingStablecoins = (source.affected_stablecoin_ids ?? []).filter((id) => !canonicalIndex.stablecoinIds.has(id));
   const missingOrganizations = (source.affected_organization_ids ?? []).filter((id) => !canonicalIndex.organizationIds.has(id));
+  const hasCanonicalTargets = (source.affected_stablecoin_ids?.length ?? 0) > 0 || (source.affected_organization_ids?.length ?? 0) > 0;
   return {
-    state: missingStablecoins.length === 0 && missingOrganizations.length === 0 ? 'existing_targets_confirmed' : 'missing_target_reference',
+    state: missingStablecoins.length > 0 || missingOrganizations.length > 0
+      ? 'missing_target_reference'
+      : hasCanonicalTargets
+        ? 'existing_targets_confirmed'
+        : 'scoped_noncanonical_subject_confirmed',
     matched_stablecoin_ids: (source.affected_stablecoin_ids ?? []).filter((id) => canonicalIndex.stablecoinIds.has(id)),
     matched_organization_ids: (source.affected_organization_ids ?? []).filter((id) => canonicalIndex.organizationIds.has(id)),
     missing_stablecoin_ids: missingStablecoins,
@@ -180,7 +257,6 @@ function buildBaselineComparison(baseline, observed, baselineNormalizationVersio
       accepted_review_reference: baseline?.accepted_review_reference ?? null
     };
   }
-
   const exactBodyChanged = baseline.body_sha256 !== observed.body_sha256;
   const normalizedContentChanged = baseline.normalized_content_sha256 !== observed.normalized_content_sha256;
   const changes = metadataDifferences(baseline, observed);
@@ -280,6 +356,7 @@ export async function observeOfficialSources(options = {}) {
         source_id: source.source_id,
         source_identity: { display_name: source.display_name, source_kind: source.source_kind },
         source_url: source.url,
+        monitoring_scope: source.monitoring_scope ? structuredClone(source.monitoring_scope) : null,
         final_url: finalUrl,
         observed_at: observedAt,
         fetch_status: response.ok ? 'ok' : 'http_error',
@@ -308,6 +385,7 @@ export async function observeOfficialSources(options = {}) {
           observation_id: observationId,
           source_id: source.source_id,
           source_url: source.url,
+          monitoring_scope: source.monitoring_scope ? structuredClone(source.monitoring_scope) : null,
           normalization_version: OFFICIAL_SOURCE_NORMALIZATION_VERSION,
           change_state: observation.baseline_comparison.state,
           classification_reason: observation.baseline_comparison.classification_reason,
@@ -327,6 +405,7 @@ export async function observeOfficialSources(options = {}) {
         source_id: source.source_id,
         source_identity: { display_name: source.display_name, source_kind: source.source_kind },
         source_url: source.url,
+        monitoring_scope: source.monitoring_scope ? structuredClone(source.monitoring_scope) : null,
         final_url: null,
         observed_at: observedAt,
         fetch_status: 'error',

@@ -7,7 +7,10 @@ export const SOURCE_FAMILIES = [
   'reserve_assurance',
   'redemption_terms',
   'issuer_lifecycle',
-  'regulatory'
+  'regulatory',
+  'platform_policy',
+  'platform_service_state',
+  'regulatory_register'
 ];
 
 const SIGNAL_TO_FAMILY = {
@@ -16,7 +19,10 @@ const SIGNAL_TO_FAMILY = {
   backing_attestation_update: 'reserve_assurance',
   issuance_redemption_update: 'redemption_terms',
   lifecycle_update: 'issuer_lifecycle',
-  regulatory_update: 'regulatory'
+  regulatory_update: 'regulatory',
+  platform_policy_update: 'platform_policy',
+  platform_service_state_update: 'platform_service_state',
+  regulatory_register_update: 'regulatory_register'
 };
 
 function readJson(root, relativePath) {
@@ -54,11 +60,7 @@ function coverageClass(families) {
 }
 
 function baselineCounts(sourceIds, baselineById) {
-  const counts = {
-    pending_initial_acceptance: 0,
-    accepted: 0,
-    missing: 0
-  };
+  const counts = { pending_initial_acceptance: 0, accepted: 0, missing: 0 };
   for (const sourceId of sourceIds) {
     const baseline = baselineById.get(sourceId);
     if (!baseline) counts.missing += 1;
@@ -136,6 +138,7 @@ export function buildMonitoringCoverageReport(root = process.cwd()) {
       signal_types: unique(source.signal_types ?? []),
       stablecoin_ids: unique(source.affected_stablecoin_ids ?? []),
       organization_ids: unique(source.affected_organization_ids ?? []),
+      monitoring_scope: source.monitoring_scope ?? null,
       baseline_status: baselineById.get(source.source_id)?.status ?? 'missing',
       canonical_action: 'none'
     }))
@@ -156,6 +159,11 @@ export function buildMonitoringCoverageReport(root = process.cwd()) {
     assetRows.filter((row) => row.source_families.includes(family)).length
   ]));
 
+  const platformScopedRows = sourceRows.filter((row) => ['platform_policy', 'platform_service_state'].includes(row.monitoring_scope?.kind));
+  const registerScopedRows = sourceRows.filter((row) => row.monitoring_scope?.kind === 'regulatory_register');
+  const scopedPlatforms = unique(platformScopedRows.map((row) => row.monitoring_scope?.platform_name));
+  const scopedRegions = unique(sourceRows.map((row) => row.monitoring_scope?.region_scope));
+
   const baselineStatusCounts = {
     pending_initial_acceptance: sourceRows.filter((row) => row.baseline_status === 'pending_initial_acceptance').length,
     accepted: sourceRows.filter((row) => row.baseline_status !== 'pending_initial_acceptance' && row.baseline_status !== 'missing').length,
@@ -163,7 +171,7 @@ export function buildMonitoringCoverageReport(root = process.cwd()) {
   };
 
   return {
-    schema_version: '1.0',
+    schema_version: '1.1',
     report_id: `sog_monitoring_coverage_${stablecoins.length}_assets_${sourceRows.length}_sources_v1`,
     generated_from: 'canonical_registry_v2_and_reviewed_monitoring_configuration',
     summary: {
@@ -183,6 +191,12 @@ export function buildMonitoringCoverageReport(root = process.cwd()) {
       organization_coverage_percent: percent(coveredOrganizations.length, organizationRows.length),
       source_family_counts: sourceFamilyCounts,
       stablecoin_family_counts: assetFamilyCounts,
+      platform_policy_source_count: sourceFamilyCounts.platform_policy,
+      platform_service_state_source_count: sourceFamilyCounts.platform_service_state,
+      regulatory_register_source_count: sourceFamilyCounts.regulatory_register,
+      market_access_schema_capable_source_count: platformScopedRows.length + registerScopedRows.length,
+      scoped_platform_count: scopedPlatforms.length,
+      scoped_region_count: scopedRegions.length,
       baseline_status_counts: baselineStatusCounts
     },
     policy: {
@@ -191,11 +205,14 @@ export function buildMonitoringCoverageReport(root = process.cwd()) {
       pending_source_is_not_active_monitoring_proof: true,
       uncovered_is_not_unmonitorable: true,
       source_count_is_not_completeness: true,
+      platform_register_scope_not_divided_by_asset_denominator: true,
       canonical_action: 'none',
       network_access: false,
       public_output: false,
       production_publication: false
     },
+    scoped_platform_names: scopedPlatforms,
+    scoped_region_values: scopedRegions,
     uncovered_stablecoin_ids: assetRows.filter((row) => row.source_count === 0).map((row) => row.stablecoin_id),
     uncovered_organization_ids: organizationRows.filter((row) => row.source_count === 0).map((row) => row.organization_id),
     stablecoins: assetRows,
@@ -219,26 +236,24 @@ function markdown(report) {
     '',
     `- Canonical stable assets: ${s.canonical_stablecoin_count}`,
     `- Registered official sources: ${s.registered_source_count}`,
-    `- Unique source URLs: ${s.unique_source_url_count}`,
     `- Assets with at least one registered source: ${s.covered_stablecoin_count} (${s.stablecoin_coverage_percent}%)`,
     `- Assets without a registered source: ${s.uncovered_stablecoin_count}`,
-    `- Assets with multiple source families: ${s.multi_family_stablecoin_count} (${s.multi_family_coverage_percent}%)`,
     `- Assets with accepted monitoring coverage: ${s.accepted_coverage_stablecoin_count}`,
-    `- Covered organizations: ${s.covered_organization_count} (${s.organization_coverage_percent}%)`,
+    `- Scoped platforms: ${s.scoped_platform_count}`,
+    `- Market-access schema-capable sources: ${s.market_access_schema_capable_source_count}`,
     `- Pending baselines: ${s.baseline_status_counts.pending_initial_acceptance}`,
     `- Accepted baselines: ${s.baseline_status_counts.accepted}`,
     '',
     '## Source families',
     '',
-    ...SOURCE_FAMILIES.map((family) => `- ${family}: ${s.source_family_counts[family]} sources / ${s.stablecoin_family_counts[family]} assets`),
+    ...SOURCE_FAMILIES.map((family) => `- ${family}: ${s.source_family_counts[family]} sources / ${s.stablecoin_family_counts[family]} mapped assets`),
     '',
-    '## Covered assets',
+    '## Scoped platform and register coverage',
     '',
-    ...report.stablecoins.filter((row) => row.source_count > 0).map((row) => `- ${row.stablecoin_id} — ${row.name}: ${row.source_count} sources; ${row.source_families.join(', ')}`),
-    '',
-    '## Uncovered assets',
-    '',
-    ...report.uncovered_stablecoin_ids.map((id) => `- ${id}`),
+    `- Platform-policy sources: ${s.platform_policy_source_count}`,
+    `- Platform service-state sources: ${s.platform_service_state_source_count}`,
+    `- Regulatory-register sources: ${s.regulatory_register_source_count}`,
+    `- Scoped platforms: ${report.scoped_platform_names.join(', ') || 'none'}`,
     '',
     'Canonical action: none. Network access: false. Public output: false. Production publication: false.',
     ''

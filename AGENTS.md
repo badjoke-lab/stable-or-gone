@@ -30,10 +30,12 @@ docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
 docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
 scripts/monitoring/sources/official-sources.json
 scripts/monitoring/baselines/official-source-baselines.json
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
 
 Release/checkpoint authority remains binding:
@@ -70,14 +72,15 @@ PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
 PR #321 100-asset monitoring baseline synchronization: complete
-Active: PR #322 reserve and redemption source expansion
-Next: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
+PR #322 reserve and redemption source expansion: complete
+Active: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
+Next: PR #324 bounded scheduled read-only monitoring
 ```
 
 Approved remaining sequence:
 
 ```text
-PR #322-#324  monitoring expansion and scheduled read-only operation
+PR #323-#324  monitoring expansion and scheduled read-only operation
 PR #325-#328  statistics implementation
 PR #329       next candidate audit
 PR #330-#334  controlled growth from 100 to 110
@@ -137,17 +140,38 @@ It preserves:
 7 multi-family assets
 ```
 
-Later source expansion must not overwrite these historical counts or digests.
+The PR #322 snapshot is also historical and immutable:
 
-## PR #322 reserve/redemption expansion rules
+```text
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+```
+
+It preserves:
+
+```text
+30 sources
+30 pending baselines
+22 assets reached
+78 uncovered assets
+18 organizations reached
+0 accepted baselines
+0 accepted asset reach
+11 multi-family assets
+```
+
+Later source expansion must not overwrite either historical checkpoint.
+
+## PR #323 lifecycle/regulatory/market-access expansion rules
 
 Binding files:
 
 ```text
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
-.github/workflows/monitoring-reserve-redemption-expansion.yml
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-official-source-schema.md
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+scripts/validate-monitoring-scoped-source-schema-pr323.mjs
+scripts/validate-monitoring-lifecycle-regulatory-market-access-expansion-100-assets.mjs
+.github/workflows/monitoring-lifecycle-regulatory-market-access-expansion.yml
 ```
 
 Current reviewed monitoring boundary:
@@ -156,43 +180,56 @@ Current reviewed monitoring boundary:
 100 assets
 94 organizations
 110 relationships
-30 sources
-30 baseline rows
-30 pending_initial_acceptance
+39 sources
+39 baseline rows
+39 pending_initial_acceptance
 0 accepted
 0 missing
-22 assets with registered source reach
-78 uncovered assets
+23 assets with registered source reach
+77 uncovered assets
 18 organizations reached
 0 accepted asset reach
-11 multi-family assets
+17 multi-family assets
 ```
 
-PR #322 adds exactly six first-party source rows and six pending baseline rows:
+Current source-family boundary:
 
 ```text
-trueusd-transparency
-angle-eura-overview
-sgforge-eurcv-coinvertible
-eurite-euri-overview
-quantoz-eurq-usdq
-vnx-vchf-overview
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
+issuer_lifecycle: 7 sources / 7 assets
+regulatory: 9 sources / 8 assets
+platform_policy: 3 sources / 12 mapped assets
+platform_service_state: 1 source / 0 mapped assets
+regulatory_register: 1 source / 0 mapped assets
+```
+
+Current scoped coverage:
+
+```text
+platform-policy sources: 3
+platform service-state sources: 1
+regulatory-register sources: 1
+market-access schema-capable sources: 5
+scoped platforms: 4
+scoped region values: 4
 ```
 
 Scope rules:
 
-- new PR #322 rows may use only `reserve_update`, `assurance_update`, and `issuance_redemption_update`;
-- all six baselines remain pending;
-- accepted-only fields remain null;
-- reserve/assurance source count is 14 and asset reach is 16;
-- redemption-terms source count is 11 and asset reach is 12;
-- lifecycle source count remains 5 and asset reach remains 5;
-- regulatory source count remains 5 and asset reach remains 5;
-- source/baseline ID parity must be exact;
-- synchronization generator is offline and performs no canonical action;
-- monitoring remains private, review-only, and read-only.
+- `monitoring_scope` may represent `platform_policy`, `platform_service_state`, or `regulatory_register`.
+- Platform name, legal entity, region, function scope, authority identity, and register family must remain explicit.
+- A platform licence is not proof of stablecoin function availability.
+- Platform-wide service state must not be rewritten as asset status.
+- Regulatory-register sources may use reviewed noncanonical subject scope without fake stablecoin or issuer IDs.
+- Platform/register scope counts are not divided by the 100-asset denominator.
+- All 39 baselines remain pending.
+- Accepted-only fields remain null.
+- Source/baseline ID parity must be exact.
+- Snapshot generation is offline and performs no canonical action.
+- Monitoring remains private, review-only, read-only, and non-publishing.
 
-PR #322 may not accept baselines, add lifecycle/regulatory/access sources, change normalization version, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical PRs, publish candidates, or deploy.
+PR #323 may not accept baselines, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical PRs, publish candidates, create canonical Market Access Records, or deploy.
 
 ## Market-access rules
 

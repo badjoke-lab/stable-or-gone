@@ -23,7 +23,8 @@ try {
     const parsed = new URL(source.url);
     if (parsed.protocol !== 'https:') fail(`${source.source_id}: HTTPS required`);
     if (!source.allowed_hosts?.includes(parsed.hostname)) fail(`${source.source_id}: host not allowlisted`);
-    if (!source.affected_stablecoin_ids?.length || !source.affected_organization_ids?.length) fail(`${source.source_id}: canonical targets required`);
+    const hasCanonicalTargetContext = (source.affected_stablecoin_ids?.length ?? 0) > 0 || (source.affected_organization_ids?.length ?? 0) > 0;
+    if (!hasCanonicalTargetContext && !source.monitoring_scope) fail(`${source.source_id}: canonical target context or monitoring_scope required`);
     if (!source.signal_types?.length) fail(`${source.source_id}: signal types required`);
   }
   fixtureSources = allSources.filter((row) => historicalIds.includes(row.source_id));

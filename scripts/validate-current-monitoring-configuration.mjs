@@ -21,10 +21,10 @@ const baselineIds = (baselineSet.baselines ?? []).map((row) => row.source_id);
 fail(stablecoins.length === 100, `canonical monitoring boundary must contain exactly 100 stable assets, found ${stablecoins.length}`);
 fail(organizations.length === 94, `canonical monitoring boundary must contain exactly 94 organizations, found ${organizations.length}`);
 fail(relationships.length === 110, `canonical monitoring boundary must contain exactly 110 relationships, found ${relationships.length}`);
-fail(sources.length === 30, `current monitoring configuration must contain 30 sources, found ${sources.length}`);
-fail(baselineSet.baselines?.length === 30, `current monitoring configuration must contain 30 baselines, found ${baselineSet.baselines?.length ?? 0}`);
-fail(new Set(sourceIds).size === 30, 'monitoring source IDs must be unique');
-fail(new Set(baselineIds).size === 30, 'monitoring baseline IDs must be unique');
+fail(sources.length === 39, `current monitoring configuration must contain 39 sources, found ${sources.length}`);
+fail(baselineSet.baselines?.length === 39, `current monitoring configuration must contain 39 baselines, found ${baselineSet.baselines?.length ?? 0}`);
+fail(new Set(sourceIds).size === 39, 'monitoring source IDs must be unique');
+fail(new Set(baselineIds).size === 39, 'monitoring baseline IDs must be unique');
 fail(JSON.stringify([...sourceIds].sort()) === JSON.stringify([...baselineIds].sort()), 'source and baseline IDs must match exactly');
 
 const canonicalIndex = {
@@ -40,6 +40,9 @@ for (const row of baselineSet.baselines ?? []) {
 }
 for (const token of ['workflow_dispatch:','contents: read','actions/upload-artifact']) fail(workflow.includes(token), `workflow missing ${token}`);
 for (const token of ['schedule:','contents: write','pull-requests: write','wrangler','CLOUDFLARE_']) fail(!workflow.includes(token), `workflow contains prohibited ${token}`);
+fail(sources.filter((row) => row.monitoring_scope?.kind === 'platform_policy').length === 3, 'current configuration must contain three platform-policy sources');
+fail(sources.filter((row) => row.monitoring_scope?.kind === 'platform_service_state').length === 1, 'current configuration must contain one platform service-state source');
+fail(sources.filter((row) => row.monitoring_scope?.kind === 'regulatory_register').length === 1, 'current configuration must contain one regulatory-register source');
 fail(baselineSet.policy?.monitoring_write_allowed === false, 'monitoring write must remain disabled');
 fail(baselineSet.policy?.canonical_evidence === false, 'monitoring baseline data must not become canonical evidence');
 fail(baselineSet.policy?.public_output === false, 'monitoring public output must remain disabled');
@@ -51,4 +54,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring configuration valid: 30 pending sources synchronized against ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);
+console.log(`Current monitoring configuration valid: 39 pending sources synchronized against ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);

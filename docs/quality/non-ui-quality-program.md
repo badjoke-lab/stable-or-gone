@@ -19,8 +19,8 @@ This program governs the core workstream after the dedicated UI correction progr
 -> audited 100-record canonical checkpoint — complete
 -> non-UI release material — complete
 -> monitoring baseline synchronization — complete
--> reserve and redemption source expansion — active
--> lifecycle/regulatory/access source and schema expansion
+-> reserve and redemption source expansion — complete
+-> lifecycle/regulatory/access source and schema expansion — active
 -> bounded scheduled read-only monitoring
 -> statistics implementation
 -> controlled growth from 100 to 110
@@ -51,8 +51,9 @@ PR #318 audited 100-record canonical checkpoint: complete
 PR #319 guide spacing maintenance: complete, inserted work
 PR #320 non-UI release material: complete
 PR #321 100-asset monitoring baseline synchronization: complete
-PR #322 reserve and redemption source expansion: active
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: next
+PR #322 reserve and redemption source expansion: complete
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: active
+PR #324 bounded scheduled read-only monitoring: next
 ```
 
 ## Required reading order
@@ -68,18 +69,21 @@ Before changing canonical data, evidence, workflows, monitoring, statistics, com
 7. the canonical specification for the active work item
 8. every named baseline, validator, audit, queue, fixture, release note, publication-gate review, and research checkpoint
 
-Current PR #322 work must read:
+Current PR #323 work must read:
 
 ```text
 docs/quality/monitoring-pipeline-spec.md
 docs/quality/monitoring-official-source-spec.md
+docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
 docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
 scripts/monitoring/sources/official-sources.json
 scripts/monitoring/baselines/official-source-baselines.json
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
 
 ## Fixed operating rules
@@ -93,6 +97,7 @@ scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.
 - Platform access preserves function, service state, legal entity, customer scope, supported network, geography, and dates.
 - A platform licence is not proof of stablecoin function availability.
 - Monitoring observations and editorial research matrices are not canonical Market Access Records.
+- Platform-policy, platform service-state, issuer/token regulation, CASP authorization, geography, and function scope remain separate.
 - Comparison projections use reviewed canonical data only and preserve unresolved states.
 - Facet freshness derives from authoritative record families rather than display-only root timestamps.
 - No growth PR may contain more than two new stable assets.
@@ -122,6 +127,7 @@ PR #318         audited 100-record canonical checkpoint
 PR #319         guide maintenance, inserted work
 PR #320         non-UI release material
 PR #321         100-asset monitoring baseline synchronization
+PR #322         reserve and redemption source expansion
 ```
 
 ## Monitoring pipeline boundary
@@ -160,9 +166,7 @@ Historical binding snapshot:
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 ```
 
-The PR #321 snapshot is immutable. Successor source expansion uses a separate current snapshot.
-
-## Current PR #322 monitoring boundary
+## Historical PR #322 monitoring checkpoint
 
 ```text
 sources: 30
@@ -177,24 +181,59 @@ accepted asset reach: 0
 multi-family assets: 11
 ```
 
-Current family reach:
-
-```text
-reserve_assurance: 14 sources / 16 assets
-redemption_terms: 11 sources / 12 assets
-issuer_lifecycle: 5 sources / 5 assets
-regulatory: 5 sources / 5 assets
-```
-
-Binding current snapshot:
+Historical binding snapshot:
 
 ```text
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 ```
 
-PR #322 adds exactly six first-party source rows and six pending baseline rows for TUSD, EURA, EURCV, EURI, EURQ, and VCHF.
+PR #321 and PR #322 snapshots are immutable. Successor source expansion uses a separate current snapshot.
 
-No baseline is accepted. Accepted asset reach remains zero.
+## Current PR #323 monitoring boundary
+
+```text
+sources: 39
+baseline rows: 39
+pending: 39
+accepted: 0
+missing: 0
+registered asset reach: 23
+uncovered assets: 77
+covered organizations: 18
+accepted asset reach: 0
+multi-family assets: 17
+```
+
+Current family reach:
+
+```text
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
+issuer_lifecycle: 7 sources / 7 assets
+regulatory: 9 sources / 8 assets
+platform_policy: 3 sources / 12 mapped assets
+platform_service_state: 1 source / 0 mapped assets
+regulatory_register: 1 source / 0 mapped assets
+```
+
+Current scoped coverage:
+
+```text
+platform-policy sources: 3
+platform service-state sources: 1
+regulatory-register sources: 1
+market-access schema-capable sources: 5
+scoped platforms: 4
+scoped region values: 4
+```
+
+Binding current snapshot:
+
+```text
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+```
+
+All 39 baselines remain pending. Accepted asset reach remains zero.
 
 ## Phase B — release hardening — complete
 
@@ -210,39 +249,45 @@ PR #320 non-UI release material — complete
 
 ```text
 PR #321 100-asset monitoring baseline synchronization — complete
-PR #322 reserve and redemption source expansion — active
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion
-PR #324 bounded scheduled read-only monitoring
+PR #322 reserve and redemption source expansion — complete
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion — active
+PR #324 bounded scheduled read-only monitoring — next
 ```
 
-### PR #322 contract
+### PR #323 contract
 
 Binding files:
 
 ```text
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
-.github/workflows/monitoring-reserve-redemption-expansion.yml
+docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-official-source-schema.md
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+scripts/validate-monitoring-scoped-source-schema-pr323.mjs
+scripts/validate-monitoring-lifecycle-regulatory-market-access-expansion-100-assets.mjs
+.github/workflows/monitoring-lifecycle-regulatory-market-access-expansion.yml
 ```
 
-PR #322:
+PR #323:
 
-- adds six reviewed first-party source rows;
-- adds six matching pending baseline rows;
-- increases registered asset reach from 16 to 22;
-- reduces uncovered queue from 84 to 78;
-- expands reserve/assurance asset reach from 11 to 16;
-- expands redemption-terms asset reach from 7 to 12;
-- keeps lifecycle and regulatory family counts unchanged;
-- preserves historical PR #309/#321 checkpoints;
+- adds four reviewed issuer lifecycle/regulatory source rows;
+- adds three platform-policy source rows;
+- adds one platform-wide service-state source row;
+- adds one regulatory-register source row;
+- adds matching pending baseline rows;
+- introduces optional reviewed `monitoring_scope` metadata;
+- preserves legal entity, region, function scope, and register-family context;
+- propagates scope into private observations and candidates;
+- avoids fake canonical IDs for platform or register subjects;
+- increases registered asset reach from 22 to 23;
+- reduces uncovered queue from 78 to 77;
+- increases multi-family asset count from 11 to 17;
 - keeps every baseline pending;
 - keeps accepted coverage at zero;
 - performs no network access during deterministic snapshot generation;
 - performs no canonical action;
 - creates no public monitoring output.
 
-PR #323 handles lifecycle, regulatory, platform/access, and schema expansion. PR #324 alone activates bounded schedule triggers.
+PR #324 alone activates bounded schedule triggers.
 
 ## Phase D — statistics implementation
 
