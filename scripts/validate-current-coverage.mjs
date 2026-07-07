@@ -12,7 +12,7 @@ const organizations = (baseline.data_groups?.organizations ?? []).flatMap(readRo
 const relationships = (baseline.data_groups?.relationships ?? []).flatMap(readRows);
 const report = buildMonitoringCoverageReport(root);
 const again = buildMonitoringCoverageReport(root);
-const expectedId = `sog_monitoring_coverage_${stablecoins.length}_assets_24_sources_v1`;
+const expectedId = `sog_monitoring_coverage_${stablecoins.length}_assets_30_sources_v1`;
 const pairs = new Set(relationships.map((row) => `${row.stablecoin_id}|${row.organization_id}`));
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 
@@ -20,14 +20,18 @@ fail(JSON.stringify(report) === JSON.stringify(again), 'report must be determini
 fail(report.report_id === expectedId, `report id must be ${expectedId}`);
 fail(report.stablecoins.length === stablecoins.length, 'asset rows must match canonical count');
 fail(report.organizations.length === organizations.length, 'organization rows must match canonical count');
-fail(report.sources.length === 24, 'registered source count must remain 24');
-fail(report.summary.covered_stablecoin_count === 16, 'covered stablecoin count must remain 16');
-fail(report.summary.uncovered_stablecoin_count === stablecoins.length - 16, 'uncovered count must follow registry growth');
-fail(report.summary.multi_family_stablecoin_count === 7, 'multi-family count must remain 7');
-fail(report.summary.covered_organization_count === 12, 'covered organization count must remain 12');
+fail(report.sources.length === 30, 'registered source count must be 30');
+fail(report.summary.covered_stablecoin_count === 22, 'covered stablecoin count must be 22');
+fail(report.summary.uncovered_stablecoin_count === stablecoins.length - 22, 'uncovered count must follow the 22-asset registered reach boundary');
+fail(report.summary.multi_family_stablecoin_count === 11, 'multi-family count must be 11');
+fail(report.summary.covered_organization_count === 18, 'covered organization count must be 18');
 fail(report.summary.accepted_coverage_stablecoin_count === 0, 'accepted coverage must remain zero');
-fail(report.summary.baseline_status_counts.pending_initial_acceptance === 24, 'pending baseline count must remain 24');
+fail(report.summary.baseline_status_counts.pending_initial_acceptance === 30, 'pending baseline count must be 30');
 fail(report.summary.baseline_status_counts.accepted === 0 && report.summary.baseline_status_counts.missing === 0, 'accepted and missing baseline counts must remain zero');
+fail(report.summary.source_family_counts.reserve_assurance === 14, 'reserve/assurance source count must be 14');
+fail(report.summary.source_family_counts.redemption_terms === 11, 'redemption-terms source count must be 11');
+fail(report.summary.stablecoin_family_counts.reserve_assurance === 16, 'reserve/assurance asset reach must be 16');
+fail(report.summary.stablecoin_family_counts.redemption_terms === 12, 'redemption-terms asset reach must be 12');
 fail(report.canonical_reference_check.stablecoin_ids_resolved === true, 'stablecoin references must resolve');
 fail(report.canonical_reference_check.organization_ids_resolved === true, 'organization references must resolve');
 
@@ -47,4 +51,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring coverage valid: 16 of ${stablecoins.length} assets covered by 24 pending sources.`);
+console.log(`Current monitoring coverage valid: 22 of ${stablecoins.length} assets covered by 30 pending sources.`);
