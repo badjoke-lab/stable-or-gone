@@ -10,6 +10,8 @@ A baseline is not canonical evidence. It is a human-reviewed comparison point fo
 
 The current monitoring configuration contains 39 reviewed sources and 39 baseline rows. All 39 remain `pending_initial_acceptance`.
 
+No live page digest is invented, inferred, or silently accepted.
+
 ## Storage
 
 Live internal baseline set:
@@ -17,6 +19,8 @@ Live internal baseline set:
 ```text
 scripts/monitoring/baselines/official-source-baselines.json
 ```
+
+Monitoring execution may read this file but may not modify it.
 
 Historical and successor snapshots:
 
@@ -55,6 +59,8 @@ accepted_review_reference
 ```
 
 Monitoring execution may read the baseline set but may not modify or accept it.
+
+No monitoring run may acquire write permission because baseline update or comparison capability exists.
 
 ## Historical PR #321 boundary
 
