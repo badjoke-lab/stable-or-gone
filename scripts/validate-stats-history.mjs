@@ -13,6 +13,15 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const isSha256 = (value) => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 
+function prefixFailures(previousSnapshots, currentSnapshots) {
+  const issues = [];
+  if (currentSnapshots.length < previousSnapshots.length) issues.push('history snapshot list was truncated');
+  for (let index = 0; index < previousSnapshots.length; index += 1) {
+    if (!isDeepStrictEqual(currentSnapshots[index], previousSnapshots[index])) issues.push(`historical snapshot rewritten or reordered at index ${index}`);
+  }
+  return issues;
+}
+
 const history = JSON.parse(fs.readFileSync(path.join(root, historyPath), 'utf8'));
 const snapshots = Array.isArray(history.snapshots) ? history.snapshots : [];
 
@@ -78,6 +87,19 @@ for (const [index, snapshot] of snapshots.entries()) {
   }
 }
 
+if (snapshots.length > 0) {
+  const fixtureBase = [structuredClone(snapshots[0])];
+  const fixtureAppend = structuredClone(snapshots[0]);
+  fixtureAppend.checkpoint_id = 'fixture_future_checkpoint';
+  fixtureAppend.asset_count += 1;
+  check(prefixFailures(fixtureBase, [...fixtureBase, fixtureAppend]).length === 0, 'immutability fixture rejected a valid append');
+
+  const fixtureRewrite = [structuredClone(snapshots[0])];
+  fixtureRewrite[0].recorded_at = '2099-01-01';
+  check(prefixFailures(fixtureBase, fixtureRewrite).length > 0, 'immutability fixture failed to reject historical rewrite');
+  check(prefixFailures(fixtureBase, []).length > 0, 'immutability fixture failed to reject history truncation');
+}
+
 const currentSnapshot = generateCurrentHistorySnapshot({ root });
 const currentIndex = snapshots.findIndex((snapshot) => snapshot.checkpoint_id === currentSnapshot.checkpoint_id);
 check(currentIndex >= 0, `current checkpoint missing from history: ${currentSnapshot.checkpoint_id}`);
@@ -94,10 +116,7 @@ if (baseRef) {
     check(history.schema_version === previous.schema_version, 'history schema_version changed without explicit migration');
     check(history.history_id === previous.history_id, 'history_id changed without explicit migration');
     check(history.checkpoint_policy === previous.checkpoint_policy, 'checkpoint_policy changed without explicit migration');
-    check(snapshots.length >= previousSnapshots.length, 'history snapshot list was truncated');
-    for (let index = 0; index < previousSnapshots.length; index += 1) {
-      check(isDeepStrictEqual(snapshots[index], previousSnapshots[index]), `historical snapshot rewritten or reordered at index ${index}`);
-    }
+    for (const issue of prefixFailures(previousSnapshots, snapshots)) check(false, issue);
   } catch (error) {
     const stderr = String(error?.stderr ?? '');
     if (!stderr.includes('exists on disk, but not in') && !stderr.includes('does not exist in')) {
@@ -115,6 +134,7 @@ const report = {
   current_snapshot_sha256: currentSnapshot.snapshot_sha256,
   base_ref: baseRef ?? null,
   base_prefix_count: basePrefixCount,
+  immutability_negative_fixtures: snapshots.length > 0 ? 'passed' : 'not_run',
   failures,
   ok: failures.length === 0
 };
