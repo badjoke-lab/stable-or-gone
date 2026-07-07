@@ -17,5 +17,6 @@ export function getStatsReviewDate(stats, history) {
     .filter(Boolean)
     .sort()
     .at(-1);
-  return latestHistoryDate ?? String(stats.generated_at ?? '').slice(0, 10) || 'Not recorded';
+  const generatedDate = String(stats.generated_at ?? '').slice(0, 10);
+  return latestHistoryDate || generatedDate || 'Not recorded';
 }
