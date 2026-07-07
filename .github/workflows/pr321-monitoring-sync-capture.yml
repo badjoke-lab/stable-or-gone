@@ -1,0 +1,30 @@
+name: PR321 monitoring sync capture
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: github.head_ref == 'pr321-monitoring-baseline-sync-100'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Generate monitoring baseline synchronization observation
+        run: node scripts/generate-monitoring-baseline-sync-100-assets.mjs
+      - name: Upload monitoring synchronization observation
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr321-monitoring-sync-observation
+          path: artifacts/monitoring-baseline-sync-current.json
+          if-no-files-found: error
