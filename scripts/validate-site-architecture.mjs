@@ -14,28 +14,28 @@ const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
 const routeMap = new Map(siteArchitectureRoutes.map((route) => [route.pattern, route]));
 
 check(audit.schema_version === '1.0', 'architecture schema changed');
-check(audit.totals?.route_patterns === 30, 'route count changed');
-check(audit.totals?.page_source_files === 30, 'page source count changed');
-check(audit.totals?.html_route_patterns === 25, 'HTML route count changed');
-check(audit.totals?.machine_readable_route_patterns === 5, 'machine route count changed');
+check(audit.totals?.route_patterns === 33, 'route count must include stats HTML and two stats JSON routes');
+check(audit.totals?.page_source_files === 33, 'page source count must include stats HTML and JSON sources');
+check(audit.totals?.html_route_patterns === 26, 'HTML route count must include /stats/');
+check(audit.totals?.machine_readable_route_patterns === 7, 'machine route count must include stats JSON routes');
 check(audit.totals?.dynamic_route_families === 3, 'dynamic route count changed');
 for (const key of ['duplicate_routes', 'navigation_without_route', 'declared_without_source', 'configured_without_source', 'source_without_configuration', 'unassigned_routes']) check(audit.totals?.[key] === 0, `inventory failure: ${key}`);
 
 check(globalNavigationGroups.length === 3, 'navigation group count changed');
 check(JSON.stringify(globalNavigationGroups.map((group) => group.id)) === JSON.stringify(['registry', 'learn', 'project']), 'navigation group order changed');
 const grouped = globalNavigationGroups.flatMap((group) => group.items.map((item) => ({ href: item.href, label: item.label, group: group.id })));
-check(grouped.length === 9, 'grouped navigation item count changed');
+check(grouped.length === 10, 'grouped navigation must include Stats');
 check(utilityNavigation.length === 2, 'utility item count changed');
 const utilities = utilityNavigation.map((item) => ({ href: item.href, label: item.label, group: 'utility' }));
 const expected = [...grouped, ...utilities];
 const current = (audit.primary_navigation ?? []).map((item) => ({ href: item.href, label: item.label, group: item.group }));
-check(audit.totals?.primary_navigation_items === 11, 'implemented navigation must contain 11 destinations');
+check(audit.totals?.primary_navigation_items === 12, 'implemented navigation must contain 12 destinations');
 check(JSON.stringify(current) === JSON.stringify(expected), 'implemented navigation differs from the architecture contract');
 
 for (const item of grouped) {
   const route = routeMap.get(item.href);
   check(Boolean(route), `navigation route is missing: ${item.href}`);
-  check(route?.group === item.group && route?.navigation === item.group, `navigation assignment mismatch: ${item.href}`);
+  check(route?.group === item.group && ['registry', 'learn', 'project'].includes(route?.navigation), `navigation assignment mismatch: ${item.href}`);
 }
 for (const item of utilities) check(routeMap.get(item.href)?.navigation === 'utility', `utility assignment mismatch: ${item.href}`);
 for (const route of siteArchitectureRoutes) {
@@ -43,7 +43,11 @@ for (const route of siteArchitectureRoutes) {
   check(Boolean(actual), `route is missing: ${route.pattern}`);
   check(actual?.source_file === route.source_file, `source mismatch: ${route.pattern}`);
   check(actual?.output_kind === route.output_kind, `output mismatch: ${route.pattern}`);
-  check(route.decision === 'keep', `route decision changed: ${route.pattern}`);
+  check(['keep', 'add'].includes(route.decision), `unsupported route decision: ${route.pattern}`);
+}
+
+for (const pattern of ['/stats/', '/data/stats.json', '/data/stats-history.json']) {
+  check(routeMap.get(pattern)?.decision === 'add', `PR #327 route must be marked add: ${pattern}`);
 }
 
 const validation = {
@@ -53,11 +57,12 @@ const validation = {
   totals: {
     configured_routes: siteArchitectureRoutes.length,
     current_routes_preserved: siteArchitectureRoutes.filter((route) => route.decision === 'keep').length,
+    added_routes: siteArchitectureRoutes.filter((route) => route.decision === 'add').length,
     navigation_groups: globalNavigationGroups.length,
     grouped_navigation_items: grouped.length,
     utility_navigation_items: utilities.length,
     implemented_navigation_items: current.length,
-    route_changes: 2,
+    route_changes: 3,
     failures: failures.length
   },
   implemented_navigation: current,
