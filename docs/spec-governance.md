@@ -5,7 +5,7 @@ Updated: 2026-07-07
 
 ## 1. Purpose
 
-This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, monitoring checkpoint history, source-expansion boundaries, scheduled-operation boundaries, comparison boundaries, and publication safety.
+This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, monitoring checkpoint history, source-expansion boundaries, scheduled-operation boundaries, statistics boundaries, comparison boundaries, and publication safety.
 
 Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts do not override merged repository authority.
 
@@ -49,12 +49,13 @@ docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
 docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
 docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
 ```
 
-Canonical data semantics remain governed by current scope, classification, data-model, and migration specifications. Statistics work is governed by `docs/stats-spec.md`. Phase F-I work is governed by `docs/comparison-and-change-product-spec.md` together with active numbering amendments.
+Statistics work is governed by `docs/stats-spec.md`. Phase F-I work is governed by `docs/comparison-and-change-product-spec.md` together with active numbering amendments.
 
 ## 4. Mandatory reading order
 
@@ -90,7 +91,9 @@ A change to any of the following requires a specification update in the same PR 
 - monitoring coverage semantics;
 - `monitoring_scope` semantics;
 - platform/legal-entity/region/function/register scope semantics;
-- schedule trigger or permission boundary;
+- schedule trigger, schedule group, or permission boundary;
+- news-discovery query or retention bounds;
+- article stale-state freshness bands;
 - statistics semantics;
 - comparison projection semantics;
 - canonical Market Access Record semantics;
@@ -126,14 +129,15 @@ audited 100-record canonical checkpoint complete
 non-UI release material complete
 PR #321 100-asset monitoring baseline synchronization complete
 PR #322 reserve and redemption source expansion complete
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion active
-PR #324 bounded scheduled read-only monitoring next
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion complete
+PR #324 bounded scheduled read-only monitoring active
+PR #325 deterministic statistics generator and validator next
 PR #325-#328 statistics
 PR #329-#334 candidate audit and controlled growth to 110
 PR #335-#348 post-110 product sequence approved but inactive before reviewed 110-asset checkpoint
 ```
 
-Do not rewrite completed history to make a changed plan appear unchanged. Historical monitoring snapshots remain immutable and successor expansion states use new snapshots.
+Do not rewrite completed history to make a changed plan appear unchanged. Historical monitoring snapshots remain immutable.
 
 ## 8. Release and checkpoint governance
 
@@ -142,7 +146,7 @@ Binding rules:
 - canonical counts derive from composed canonical manifests and files;
 - public count-path semantics remain stable unless explicitly versioned;
 - runtime provenance uses real commit, branch, timestamp, non-zero canonical hash, and positive canonical file count;
-- candidate, monitoring, editorial-research, and private material remain outside canonical public count surfaces and provenance boundaries;
+- candidate, monitoring, editorial-research, discovery, and private material remain outside canonical public count surfaces and provenance boundaries;
 - reproducibility-sensitive workflows use the reviewed lockfile and pinned Node runtime;
 - protected historical inputs are not mutated by normal build;
 - the audited checkpoint keeps identity and content digests separate;
@@ -150,15 +154,10 @@ Binding rules:
 
 ## 9. Historical monitoring checkpoint governance
 
-The PR #321 snapshot is historical and immutable:
+PR #321 snapshot:
 
 ```text
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-```
-
-It preserves:
-
-```text
 24 sources
 24 pending baseline rows
 16 assets reached
@@ -169,19 +168,10 @@ It preserves:
 7 multi-family assets
 ```
 
-Its historical validator checks fixed counts and digests directly. Later source expansion must not regenerate PR #321 history against current configuration.
-
-The historical PR #309 coverage validator also uses historical checkpoint state rather than current allowlist recalculation.
-
-The PR #322 snapshot is historical and immutable:
+PR #322 snapshot:
 
 ```text
 scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-```
-
-It preserves:
-
-```text
 30 sources
 30 pending baseline rows
 22 assets reached
@@ -192,60 +182,9 @@ It preserves:
 11 multi-family assets
 ```
 
-## 10. PR #322 reserve/redemption source-expansion governance
+Historical validators check fixed counts and digests directly. Later source expansion or scheduling must not regenerate historical checkpoints against current configuration.
 
-PR #322 reserve/redemption source-expansion governance remains historical and binding for its checkpoint.
-
-PR #322 is governed by:
-
-```text
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
-.github/workflows/monitoring-reserve-redemption-expansion.yml
-```
-
-Historical boundary:
-
-```text
-100 assets
-94 organizations
-110 relationships
-30 reviewed source rows
-30 baseline rows
-30 pending_initial_acceptance
-0 accepted
-0 missing
-22 assets with registered source reach
-78 uncovered assets
-18 organizations reached
-0 accepted asset reach
-11 multi-family assets
-```
-
-Exactly six PR #322 source IDs are approved:
-
-```text
-trueusd-transparency
-angle-eura-overview
-sgforge-eurcv-coinvertible
-eurite-euri-overview
-quantoz-eurq-usdq
-vnx-vchf-overview
-```
-
-Historical source-family boundary:
-
-```text
-reserve_assurance: 14 sources / 16 assets
-redemption_terms: 11 sources / 12 assets
-issuer_lifecycle: 5 sources / 5 assets
-regulatory: 5 sources / 5 assets
-```
-
-PR #322 rows may not be retroactively rewritten as lifecycle, regulatory, platform-policy, service-state, register, or access-schema rows.
-
-## 11. PR #323 lifecycle/regulatory/market-access source and schema governance
+## 10. PR #323 lifecycle/regulatory/market-access source and schema governance
 
 PR #323 is governed by:
 
@@ -299,23 +238,79 @@ scoped platforms: 4
 scoped region values: 4
 ```
 
-Rules:
+`monitoring_scope` is private review context, not a canonical Market Access Record. Platform name, legal entity, region, function scope, authority identity, and register families remain explicit. Platform/register scope counts are not divided by the 100-asset denominator.
 
-- every new source has exactly one matching pending baseline row;
-- accepted-only baseline fields remain null;
-- accepted baseline count remains zero;
-- accepted asset reach remains zero;
-- source/baseline ID parity remains exact;
-- deterministic current-state observation must match the PR #323 snapshot exactly;
-- `monitoring_scope` is descriptive private review context, not a canonical Market Access Record;
-- platform name, legal entity, region, function scope, authority identity, and register families remain explicit;
-- platform-wide service-state sources do not require fake stablecoin targets;
-- regulatory-register sources do not require fake stablecoin or issuer targets;
-- platform/register scope counts are not divided by the 100-asset denominator;
-- snapshot generation is offline and authorizes no canonical action;
-- monitoring snapshots and baseline files remain internal and non-public.
+## 11. PR #324 bounded scheduled read-only monitoring governance
 
-PR #323 may not accept baselines, change normalization version, activate schedules, write canonical data, edit guides automatically, create automatic canonical pull requests, publish candidates, create canonical Market Access Records, or deploy monitoring output.
+PR #324 is governed by:
+
+```text
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
+scripts/monitoring/scheduling/source-groups.mjs
+scripts/monitoring/monitors/news-discovery.mjs
+scripts/monitoring/monitors/article-stale-state-review.mjs
+scripts/validate-bounded-scheduled-monitoring-pr324.mjs
+.github/workflows/monitoring-bounded-scheduled-read-only.yml
+```
+
+Scheduled groups are exactly:
+
+```text
+daily
+weekly
+```
+
+Partition boundary:
+
+```text
+daily source count: 4
+weekly source count: 35
+overlap: 0
+union: all 39 reviewed sources
+daily source/baseline parity: exact
+weekly source/baseline parity: exact
+all 39 repository baselines: pending_initial_acceptance
+accepted baselines: 0
+accepted asset reach: 0
+```
+
+Daily group contains reviewed `platform_policy` and `platform_service_state` sources plus bounded private news discovery.
+
+Weekly group contains the remaining 35 reviewed official sources, including the ESMA regulatory-register source, plus article/research stale-state review.
+
+News-discovery bounds:
+
+```text
+maximum queries per run: 4
+maximum items retained per query: 20
+maximum feed response body: 1 MiB
+request timeout: 15 seconds
+raw response retention: false
+discovery only: true
+canonical action: none
+public output: false
+```
+
+Article stale-state bands:
+
+```text
+current: 0-7 days
+review_due: 8-14 days
+stale: 15-30 days
+severely_stale: 31+ days
+missing_date: no usable review date
+```
+
+Stale-state findings are private and do not edit the public guide, research matrix, or canonical data.
+
+Scheduled workflow permission boundary:
+
+```text
+permissions:
+  contents: read
+```
+
+The workflow may upload private artifacts. It may not use write permissions, create branches or canonical pull requests automatically, accept baselines, publish candidates or discovery leads, edit guides automatically, use Cloudflare deployment credentials, or deploy monitoring output.
 
 ## 12. Monitoring coverage governance
 
@@ -341,13 +336,11 @@ Rules:
 - regulatory action pages are not regulatory-register coverage;
 - generic issuer/product pages are not function-level market-access coverage;
 - zero coverage for a required domain is a valid audit result and must not be filled by inference;
-- PR #323 expands lifecycle, regulatory, and EU market-access source/schema coverage;
-- PR #324 activates bounded scheduled read-only operation;
-- monitoring output remains private candidate material until reviewed.
+- monitoring output, discovery leads, and stale-state findings remain private until separately reviewed.
 
 ## 13. Monitoring safety boundary
 
-Monitoring must remain review-only and read-only with respect to canonical data.
+Monitoring remains review-only and read-only with respect to canonical data.
 
 Fixed prohibitions:
 
@@ -356,11 +349,11 @@ no canonical write
 no self-accepting baseline
 no automatic guide edit
 no automatic canonical pull request
-no candidate publication
+no candidate or discovery publication
 no production deployment
 ```
 
-Scheduled operation in PR #324 must preserve read-only permissions and the existing no-write boundary.
+Scheduled operation preserves read-only permissions and the existing no-write boundary.
 
 ## 14. Unknown-value governance
 
