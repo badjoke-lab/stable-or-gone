@@ -82,11 +82,13 @@ if (checkpointUpdate) {
 }
 
 requireText(roadmap, 'PR #320 non-UI release material: complete', 'docs/roadmap.md');
-requireText(roadmap, 'Current item: PR #321 100-asset monitoring baseline synchronization', 'docs/roadmap.md');
-requireText(roadmap, 'Next item: PR #322 reserve and redemption source expansion', 'docs/roadmap.md');
+requireText(roadmap, 'PR #321 100-asset monitoring baseline synchronization: complete', 'docs/roadmap.md');
+requireText(roadmap, 'Current item: PR #322 reserve and redemption source expansion', 'docs/roadmap.md');
+requireText(roadmap, 'Next item: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'docs/roadmap.md');
 requireText(agents, 'PR #320 non-UI release material: complete', 'AGENTS.md');
-requireText(agents, 'Active: PR #321 100-asset monitoring baseline synchronization', 'AGENTS.md');
-requireText(agents, 'Next: PR #322 reserve and redemption source expansion', 'AGENTS.md');
+requireText(agents, 'PR #321 100-asset monitoring baseline synchronization: complete', 'AGENTS.md');
+requireText(agents, 'Active: PR #322 reserve and redemption source expansion', 'AGENTS.md');
+requireText(agents, 'Next: PR #323 lifecycle, regulatory, and EU market-access source/schema expansion', 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -103,6 +105,6 @@ console.log(JSON.stringify({
   evidence: checkpoint.v2_groups.evidence.record_count,
   canonical_file_count: checkpoint.canonical_file_count,
   update_id: updateId,
-  active_roadmap_item: 'PR #321 100-asset monitoring baseline synchronization',
-  next_roadmap_item: 'PR #322 reserve and redemption source expansion',
+  active_roadmap_item: 'PR #322 reserve and redemption source expansion',
+  next_roadmap_item: 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion',
 }, null, 2));
