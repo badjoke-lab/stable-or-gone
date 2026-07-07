@@ -97,7 +97,7 @@ try {
 }
 
 const spec = fs.readFileSync(path.join(root, 'docs/quality/monitoring-official-source-spec.md'), 'utf8');
-for (const phrase of ['status: needs_human_review','canonical_action: none','maximum response body: 2 MiB','Live official-source access occurs only in the manually dispatched workflow.']) {
+for (const phrase of ['status: needs_human_review','canonical_action: none','maximum response body: 2 MiB','Live official-source access occurs only in the approved manual or later bounded scheduled read-only workflow.']) {
   if (!spec.includes(phrase)) fail(`source specification missing: ${phrase}`);
 }
 
