@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/stats-foundation.css';
+import { getPublicStats, getPublicStatsHistory, getStatsReviewDate } from '../../lib/statsData.mjs';
+
+const stats = getPublicStats();
+const history = getPublicStatsHistory();
+const reviewDate = getStatsReviewDate(stats, history);
+
+const groupOrder = ['operating', 'constrained', 'historical_non_failure', 'failed', 'other'];
+const groupLabels: Record<string, string> = {
+  operating: 'Operating',
+  constrained: 'Constrained',
+  historical_non_failure: 'Historical non-failure',
+  failed: 'Failed',
+  other: 'Other'
+};
+const statusLabels: Record<string, string> = {
+  active: 'Active',
+  restricted: 'Restricted',
+  suspended: 'Suspended',
+  winding_down: 'Winding down',
+  inactive: 'Inactive',
+  terminated: 'Terminated',
+  migrated: 'Migrated',
+  rebranded: 'Rebranded',
+  collapsed: 'Collapsed',
+  announced: 'Announced',
+  unknown: 'Unknown'
+};
+const lifecycleGroups = groupOrder
+  .filter((key) => stats.lifecycle.groups[key])
+  .map((key) => ({ key, label: groupLabels[key], ...stats.lifecycle.groups[key] }));
+const lifecycleStatuses = Object.entries(stats.lifecycle.statuses)
+  .map(([key, row]) => ({ key, label: statusLabels[key] ?? key.replaceAll('_', ' '), ...row }))
+  .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
+
+const kpis = [
+  { label: 'Total assets', value: stats.totals.assets, note: 'Canonical stable assets' },
+  { label: 'Operating', value: stats.lifecycle.groups.operating?.count ?? 0, note: `${stats.lifecycle.groups.operating?.percentage ?? 0}% of assets` },
+  { label: 'Constrained', value: stats.lifecycle.groups.constrained?.count ?? 0, note: `${stats.lifecycle.groups.constrained?.percentage ?? 0}% of assets` },
+  { label: 'Historical non-failure', value: stats.lifecycle.groups.historical_non_failure?.count ?? 0, note: `${stats.lifecycle.groups.historical_non_failure?.percentage ?? 0}% of assets` },
+  { label: 'Failed', value: stats.lifecycle.groups.failed?.count ?? 0, note: `${stats.lifecycle.groups.failed?.percentage ?? 0}% of assets` },
+  { label: 'Organizations', value: stats.totals.organizations, note: 'Canonical organization records' },
+  { label: 'Events', value: stats.totals.events, note: 'Material historical events' },
+  { label: 'Evidence', value: stats.totals.evidence, note: 'Evidence records' }
+];
+
+type StatsSnapshot = {
+  recorded_at: string;
+  asset_count: number;
+  totals: {
+    events: number;
+    evidence: number;
+  };
+};
+
+const snapshots = (history.snapshots ?? []) as StatsSnapshot[];
+const latestSnapshot = snapshots.at(-1);
+const title = 'Registry Statistics — Stable or Gone';
+const description = 'Derived statistics for the Stable or Gone canonical stablecoin registry, including lifecycle composition, record totals, and reviewed checkpoint history.';
+---
+<BaseLayout title={title} description={description} canonicalPath="/stats/">
+  <article class="stats-page" data-stats-foundation>
+    <header class="stats-header">
+      <div>
+        <p class="stats-kicker">Registry analysis</p>
+        <h1>Statistics</h1>
+        <p class="stats-lead">A derived view of registry composition and reviewed checkpoint history. These statistics describe the records in Stable or Gone; they are not market rankings, safety scores, or investment recommendations.</p>
+      </div>
+      <dl class="stats-header-meta">
+        <div><dt>Reviewed checkpoint</dt><dd><time datetime={reviewDate}>{reviewDate}</time></dd></div>
+        <div><dt>Asset denominator</dt><dd>{stats.totals.assets}</dd></div>
+        <div><dt>History snapshots</dt><dd>{snapshots.length}</dd></div>
+      </dl>
+    </header>
+
+    <aside class="stats-methodology-notice" aria-labelledby="stats-methodology-title">
+      <div>
+        <p class="stats-kicker">How to read this page</p>
+        <h2 id="stats-methodology-title">Counts come from reviewed canonical records</h2>
+      </div>
+      <p>Unknown states remain visible. Multi-select dimensions may exceed 100% when expanded later. Live price, market cap, APY, yield ranking, safety scoring, and risk scoring are excluded.</p>
+      <a href="/methodology/">Read methodology</a>
+    </aside>
+
+    <section class="stats-section" aria-labelledby="stats-kpi-title">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Current checkpoint</p><h2 id="stats-kpi-title">Registry at a glance</h2></div>
+        <p>Exact counts derived from the audited canonical registry and Registry v3 supporting records.</p>
+      </div>
+      <dl class="stats-kpi-grid">
+        {kpis.map((kpi) => (
+          <div class="stats-kpi">
+            <dt>{kpi.label}</dt>
+            <dd>{kpi.value}</dd>
+            <p>{kpi.note}</p>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="stats-section stats-lifecycle" aria-labelledby="stats-lifecycle-title">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Lifecycle</p><h2 id="stats-lifecycle-title">Recorded lifecycle composition</h2></div>
+        <p>Lifecycle groups keep operating, constrained, historical non-failure, and failed records distinct.</p>
+      </div>
+      <div class="stats-lifecycle-layout">
+        <div class="stats-bar-list" aria-label="Lifecycle groups">
+          {lifecycleGroups.map((group) => (
+            <div class="stats-bar-row">
+              <div class="stats-bar-row__label"><span>{group.label}</span><strong>{group.count}</strong></div>
+              <div class="stats-bar-track" aria-hidden="true"><span style={`width: ${Math.max(group.percentage, 1)}%`}></span></div>
+              <p>{group.percentage}% of {stats.totals.assets} assets</p>
+            </div>
+          ))}
+        </div>
+        <div class="stats-table-wrap">
+          <table>
+            <caption>Canonical lifecycle statuses and shares of the asset denominator.</caption>
+            <thead><tr><th scope="col">Status</th><th scope="col">Count</th><th scope="col">Share</th></tr></thead>
+            <tbody>
+              {lifecycleStatuses.map((status) => (
+                <tr><th scope="row">{status.label}</th><td>{status.count}</td><td>{status.percentage}%</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-history-title">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Checkpoint history</p><h2 id="stats-history-title">Reviewed snapshots only</h2></div>
+        <p>History is append-only and records explicit reviewed checkpoints, not every deployment build.</p>
+      </div>
+      {snapshots.length === 1 && latestSnapshot ? (
+        <div class="stats-checkpoint-single">
+          <div><span>Checkpoint</span><strong>{latestSnapshot.asset_count} assets</strong></div>
+          <div><span>Recorded</span><strong>{latestSnapshot.recorded_at}</strong></div>
+          <div><span>Events</span><strong>{latestSnapshot.totals.events}</strong></div>
+          <div><span>Evidence</span><strong>{latestSnapshot.totals.evidence}</strong></div>
+          <p>A trend line is intentionally not shown until at least two reviewed checkpoints exist.</p>
+        </div>
+      ) : (
+        <div class="stats-table-wrap">
+          <table>
+            <caption>Reviewed immutable statistics checkpoints.</caption>
+            <thead><tr><th scope="col">Recorded</th><th scope="col">Assets</th><th scope="col">Events</th><th scope="col">Evidence</th></tr></thead>
+            <tbody>{snapshots.map((snapshot) => <tr><th scope="row">{snapshot.recorded_at}</th><td>{snapshot.asset_count}</td><td>{snapshot.totals.events}</td><td>{snapshot.totals.evidence}</td></tr>)}</tbody>
+          </table>
+        </div>
+      )}
+    </section>
+
+    <section class="stats-section stats-data-access" aria-labelledby="stats-data-title">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Machine-readable data</p><h2 id="stats-data-title">Use the exact derived output</h2></div>
+        <p>The page and JSON routes are derived from the same deterministic statistics model and immutable checkpoint history.</p>
+      </div>
+      <nav aria-label="Statistics data access">
+        <a href="/data/stats.json"><strong>Current statistics JSON</strong><span>Deterministic current registry statistics.</span></a>
+        <a href="/data/stats-history.json"><strong>Checkpoint history JSON</strong><span>Reviewed append-only statistics snapshots.</span></a>
+        <a href="/data/manifest.json"><strong>Data manifest</strong><span>Public data inventory and safety boundary.</span></a>
+        <a href="/methodology/"><strong>Methodology</strong><span>Definitions, evidence rules, and unknown-state semantics.</span></a>
+      </nav>
+    </section>
+  </article>
+</BaseLayout>

@@ -4,7 +4,9 @@ import './validate-current-final-eight.mjs';
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 const roadmap = read('docs/roadmap.md');
-const amendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-activation.md');
+const historyAmendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-activation.md');
+const foundationAmendment = read('docs/roadmap-amendments/2026-07-08-pr327-stats-foundation-activation.md');
+const foundationSpec = read('docs/stats-foundation-spec.md');
 const statsSpec = read('docs/stats-spec.md');
 const historySpec = read('docs/stats-history-spec.md');
 const historyWorkflow = read('.github/workflows/immutable-statistics-history.yml');
@@ -22,11 +24,15 @@ const requireText = (body, text, file) => {
 };
 
 requireText(roadmap, 'PR #325 deterministic statistics generator and validator: complete', 'roadmap');
-requireText(roadmap, 'Current item: PR #326 immutable checkpoint history', 'roadmap');
-requireText(roadmap, 'Next item: PR #327 /stats/ foundation', 'roadmap');
 requireText(roadmap, 'Phase D — statistics implementation — active', 'roadmap');
-requireText(amendment, 'PR #326 immutable checkpoint history: active', 'PR #326 amendment');
-requireText(amendment, 'PR #327 /stats/ foundation: next', 'PR #326 amendment');
+requireText(historyAmendment, 'PR #326 immutable checkpoint history: active', 'PR #326 amendment');
+requireText(historyAmendment, 'PR #327 /stats/ foundation: next', 'PR #326 amendment');
+requireText(foundationAmendment, 'PR #326 immutable checkpoint history: complete', 'PR #327 amendment');
+requireText(foundationAmendment, 'PR #327 /stats/ foundation: active', 'PR #327 amendment');
+requireText(foundationAmendment, 'PR #328 historical, deployment, organization, and data-quality statistics: next', 'PR #327 amendment');
+requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
+requireText(foundationSpec, '/data/stats.json', 'stats foundation spec');
+requireText(foundationSpec, '/data/stats-history.json', 'stats foundation spec');
 requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
 requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
 requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
@@ -37,7 +43,7 @@ requireText(historyValidator, 'historical snapshot rewritten or reordered', 'his
 
 if (history.schema_version !== '1.0') failures.push('stats history schema version must be 1.0');
 if (history.checkpoint_policy !== 'append_only_reviewed_pr') failures.push('stats history policy mismatch');
-if (history.snapshots?.length !== 1) failures.push('PR #326 must establish exactly one initial history snapshot');
+if (history.snapshots?.length !== 1) failures.push('statistics foundation expects exactly one reviewed initial history snapshot');
 if (history.snapshots?.[0]?.asset_count !== 100) failures.push('initial stats history snapshot must be the 100-asset checkpoint');
 if (history.snapshots?.[0]?.checkpoint_id !== checkpoint.checkpoint_id) failures.push('initial stats history checkpoint ID mismatch');
 
@@ -77,4 +83,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #325 complete, PR #326 active, PR #327 next.');
+console.log('Workstream valid: PR #326 complete, PR #327 active, PR #328 next.');
