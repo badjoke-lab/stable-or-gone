@@ -14,6 +14,7 @@ export const GET: APIRoute = () => {
     '/stablecoins/',
     '/issuers/',
     '/events/',
+    '/stats/',
     '/models/',
     '/guides/',
     ...guides.map((guide) => `/guides/${guide.slug}/`),
