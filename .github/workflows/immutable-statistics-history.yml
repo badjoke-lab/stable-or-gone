@@ -33,7 +33,10 @@ jobs:
       - name: Validate deterministic statistics
         run: node scripts/validate-stats.mjs
       - name: Generate current checkpoint snapshot candidate
-        run: node scripts/stats/build-history-snapshot.mjs > artifacts/stats-history-current-snapshot.json
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          node scripts/stats/build-history-snapshot.mjs > artifacts/stats-history-current-snapshot.json
       - name: Validate immutable statistics history
         shell: bash
         run: |
