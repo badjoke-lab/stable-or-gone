@@ -292,6 +292,12 @@ scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.
 
 PR #323 creates a successor current-state snapshot rather than rewriting historical counts or digests.
 
+Binding PR #323 successor snapshot:
+
+```text
+scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+```
+
 The exact post-expansion counts and digests are derived by deterministic generator output and fixed only after capture. They must not be guessed.
 
 ## 11. Required fixtures
