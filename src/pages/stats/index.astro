@@ -7,6 +7,45 @@ const stats = getPublicStats();
 const history = getPublicStatsHistory();
 const reviewDate = getStatsReviewDate(stats, history);
 
+type DistRow = { count: number; percentage: number };
+type DistRecord = Record<string, DistRow>;
+type StatsSnapshot = {
+  recorded_at: string;
+  asset_count: number;
+  totals: { events: number; evidence: number };
+};
+type CoverageRow = { count: number; denominator: number; percentage: number };
+
+type EventYearRow = {
+  year: string;
+  total: number;
+  eventTypes: Record<string, number>;
+};
+
+type DeploymentChainRow = {
+  chain: string;
+  assetCount: number;
+  deploymentCount: number;
+};
+
+type OrganizationRoleRow = {
+  role: string;
+  relationshipCount: number;
+  organizationCount: number;
+  assetCount: number;
+};
+
+const formatLabel = (value: string) => value
+  .replaceAll('_', ' ')
+  .replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+const distributionRows = (distribution: DistRecord, limit?: number) => {
+  const rows = Object.entries(distribution ?? {})
+    .map(([key, row]) => ({ key, label: formatLabel(key), ...row }))
+    .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
+  return typeof limit === 'number' ? rows.slice(0, limit) : rows;
+};
+
 const groupOrder = ['operating', 'constrained', 'historical_non_failure', 'failed', 'other'];
 const groupLabels: Record<string, string> = {
   operating: 'Operating',
@@ -28,11 +67,12 @@ const statusLabels: Record<string, string> = {
   announced: 'Announced',
   unknown: 'Unknown'
 };
+
 const lifecycleGroups = groupOrder
   .filter((key) => stats.lifecycle.groups[key])
   .map((key) => ({ key, label: groupLabels[key], ...stats.lifecycle.groups[key] }));
-const lifecycleStatuses = Object.entries(stats.lifecycle.statuses)
-  .map(([key, row]) => ({ key, label: statusLabels[key] ?? key.replaceAll('_', ' '), ...row }))
+const lifecycleStatuses = Object.entries(stats.lifecycle.statuses as DistRecord)
+  .map(([key, row]) => ({ key, label: statusLabels[key] ?? formatLabel(key), ...row }))
   .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
 
 const kpis = [
@@ -46,27 +86,77 @@ const kpis = [
   { label: 'Evidence', value: stats.totals.evidence, note: 'Evidence records' }
 ];
 
-type StatsSnapshot = {
-  recorded_at: string;
-  asset_count: number;
-  totals: {
-    events: number;
-    evidence: number;
-  };
+const classificationPanels = [
+  { title: 'Asset class', note: 'Single-select economic classification.', rows: distributionRows(stats.classification.asset_class) },
+  { title: 'Reference target', note: 'What the asset is designed to reference.', rows: distributionRows(stats.classification.reference_target) },
+  { title: 'Stabilization mechanism', note: 'Primary recorded stabilization mechanism.', rows: distributionRows(stats.classification.stabilization_mechanism) },
+  { title: 'Governance model', note: 'Recorded governance structure.', rows: distributionRows(stats.classification.governance_model) }
+];
+const backingRows = distributionRows(stats.classification.backing_type);
+const fiatCurrencyRows = distributionRows(stats.classification.fiat_currency);
+const legalClassificationRows = distributionRows(stats.classification.legal_classification);
+
+const eventYearRows: EventYearRow[] = Object.entries(stats.events.by_year as Record<string, { total: number; event_types: Record<string, number> }>)
+  .map(([year, row]) => ({ year, total: row.total, eventTypes: row.event_types }))
+  .sort((left, right) => left.year.localeCompare(right.year));
+const maxEventYearTotal = Math.max(1, ...eventYearRows.map((row) => row.total));
+const eventTypeRows = distributionRows(stats.events.by_type);
+const eventDetailRows = distributionRows(stats.events.detail_kind);
+const depegOutcomeRows = distributionRows(stats.events.depeg_outcomes);
+const transitionRows = Object.entries(stats.lifecycle.transitions as Record<string, number>)
+  .map(([key, count]) => ({ key, label: formatLabel(key), count }))
+  .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
+
+const failurePanels = [
+  { title: 'By stabilization mechanism', rows: distributionRows(stats.failures.by_stabilization_mechanism) },
+  { title: 'By backing type', rows: distributionRows(stats.failures.by_backing_type) },
+  { title: 'By governance model', rows: distributionRows(stats.failures.by_governance_model) },
+  { title: 'By launch year', rows: distributionRows(stats.failures.by_launch_year) },
+  { title: 'By collapse year', rows: distributionRows(stats.failures.by_collapse_year) }
+];
+
+const deploymentChainRows: DeploymentChainRow[] = Object.entries(stats.deployments.by_chain as Record<string, { asset_count: number; deployment_count: number }>)
+  .map(([chain, row]) => ({ chain, assetCount: row.asset_count, deploymentCount: row.deployment_count }))
+  .sort((left, right) => right.deploymentCount - left.deploymentCount || left.chain.localeCompare(right.chain));
+const maxDeploymentCount = Math.max(1, ...deploymentChainRows.map((row) => row.deploymentCount));
+const deploymentPanels = [
+  { title: 'Canonicality', rows: distributionRows(stats.deployments.canonicality) },
+  { title: 'Deployment type', rows: distributionRows(stats.deployments.deployment_type) },
+  { title: 'Verification status', rows: distributionRows(stats.deployments.verification_status) }
+];
+
+const organizationRoleRows: OrganizationRoleRow[] = Object.entries(stats.organizations.by_role as Record<string, { relationship_count: number; organization_count: number; asset_count: number }>)
+  .map(([role, row]) => ({ role, relationshipCount: row.relationship_count, organizationCount: row.organization_count, assetCount: row.asset_count }))
+  .sort((left, right) => right.relationshipCount - left.relationshipCount || left.role.localeCompare(right.role));
+
+const coverageLabels: Record<string, string> = {
+  classification: 'Classification',
+  reserve_redemption_profile: 'Reserve / redemption profile',
+  legal_profile: 'Legal profile',
+  deployment: 'Deployment',
+  stable_asset_relationship: 'Stable-asset relationship',
+  reserve_component: 'Reserve component',
+  archive_evidence: 'Archive evidence'
 };
+const coverageRows = Object.entries(stats.data_quality.coverage as Record<string, CoverageRow>)
+  .map(([key, row]) => ({ key, label: coverageLabels[key] ?? formatLabel(key), ...row }))
+  .sort((left, right) => right.percentage - left.percentage || left.label.localeCompare(right.label));
+const evidenceDepthRows = distributionRows(stats.data_quality.evidence_per_asset.distribution);
+const verificationRecencyRows = distributionRows(stats.data_quality.verification_recency);
+const typedEventCoverage = stats.data_quality.typed_event_details as CoverageRow;
 
 const snapshots = (history.snapshots ?? []) as StatsSnapshot[];
 const latestSnapshot = snapshots.at(-1);
 const title = 'Registry Statistics — Stable or Gone';
-const description = 'Derived statistics for the Stable or Gone canonical stablecoin registry, including lifecycle composition, record totals, and reviewed checkpoint history.';
+const description = 'Derived statistics for the Stable or Gone canonical stablecoin registry, including lifecycle, classifications, historical events, deployments, organizations, and data-quality coverage.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/stats/">
-  <article class="stats-page" data-stats-foundation>
+  <article class="stats-page" data-stats-foundation data-stats-analysis-expansion>
     <header class="stats-header">
       <div>
         <p class="stats-kicker">Registry analysis</p>
         <h1>Statistics</h1>
-        <p class="stats-lead">A derived view of registry composition and reviewed checkpoint history. These statistics describe the records in Stable or Gone; they are not market rankings, safety scores, or investment recommendations.</p>
+        <p class="stats-lead">A derived view of registry composition, historical change, infrastructure coverage, and evidence quality. These statistics describe reviewed records in Stable or Gone; they are not market rankings, scores, or investment recommendations.</p>
       </div>
       <dl class="stats-header-meta">
         <div><dt>Reviewed checkpoint</dt><dd><time datetime={reviewDate}>{reviewDate}</time></dd></div>
@@ -80,7 +170,7 @@ const description = 'Derived statistics for the Stable or Gone canonical stablec
         <p class="stats-kicker">How to read this page</p>
         <h2 id="stats-methodology-title">Counts come from reviewed canonical records</h2>
       </div>
-      <p>Unknown states remain visible. Multi-select dimensions may exceed 100% when expanded later. Live price, market cap, APY, yield ranking, safety scoring, and risk scoring are excluded.</p>
+      <p>Unknown states remain visible. Multi-select dimensions such as backing type and organization role may exceed 100%. Live price, market cap, APY, yield ranking, safety scoring, transparency scoring, and risk scoring are excluded.</p>
       <a href="/methodology/">Read methodology</a>
     </aside>
 
@@ -103,7 +193,7 @@ const description = 'Derived statistics for the Stable or Gone canonical stablec
     <section class="stats-section stats-lifecycle" aria-labelledby="stats-lifecycle-title">
       <div class="stats-section-heading">
         <div><p class="stats-kicker">Lifecycle</p><h2 id="stats-lifecycle-title">Recorded lifecycle composition</h2></div>
-        <p>Lifecycle groups keep operating, constrained, historical non-failure, and failed records distinct.</p>
+        <p>Lifecycle groups keep operating, constrained, historical non-failure, and failed records distinct. Termination, migration, or rebranding is not silently rewritten as failure.</p>
       </div>
       <div class="stats-lifecycle-layout">
         <div class="stats-bar-list" aria-label="Lifecycle groups">
@@ -126,6 +216,224 @@ const description = 'Derived statistics for the Stable or Gone canonical stablec
             </tbody>
           </table>
         </div>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-classification-title" data-analysis-family="classification">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Classification</p><h2 id="stats-classification-title">What the registry contains</h2></div>
+        <p>Economic class, reference target, mechanism, governance, backing, and legal classifications are kept as separate analytical dimensions.</p>
+      </div>
+      <div class="stats-analysis-grid">
+        {classificationPanels.map((panel) => (
+          <section class="stats-analysis-panel">
+            <h3>{panel.title}</h3>
+            <p>{panel.note}</p>
+            <div class="stats-compact-bars">
+              {panel.rows.map((row) => (
+                <div class="stats-compact-bar">
+                  <div><span>{row.label}</span><strong>{row.count}</strong></div>
+                  <div class="stats-bar-track" aria-hidden="true"><span style={`width: ${Math.min(100, Math.max(row.percentage, 1))}%`}></span></div>
+                  <small>{row.percentage}%</small>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+      <div class="stats-analysis-grid stats-analysis-grid--three">
+        <section class="stats-analysis-panel">
+          <h3>Backing type</h3>
+          <p>Multi-select: percentages may exceed 100% in total.</p>
+          <div class="stats-table-wrap">
+            <table><caption>Backing-type presence across assets.</caption><thead><tr><th>Backing type</th><th>Count</th><th>Share</th></tr></thead><tbody>{backingRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table>
+          </div>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Fiat reference currency</h3>
+          <p>Separate distribution for assets with fiat reference targets.</p>
+          <div class="stats-table-wrap">
+            <table><caption>Recorded fiat reference currencies.</caption><thead><tr><th>Currency</th><th>Count</th><th>Share</th></tr></thead><tbody>{fiatCurrencyRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table>
+          </div>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Legal classification</h3>
+          <p>Jurisdiction-scoped legal classifications remain distinct from economic asset class.</p>
+          <div class="stats-table-wrap">
+            <table><caption>Recorded legal classifications.</caption><thead><tr><th>Classification</th><th>Count</th><th>Share</th></tr></thead><tbody>{legalClassificationRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-history-analysis-title" data-analysis-family="historical-events-failures">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Historical analysis</p><h2 id="stats-history-analysis-title">Events, transitions, and failures</h2></div>
+        <p>Event history is shown separately from failure analysis so incidents, migrations, regulatory actions, orderly wind-downs, and collapses do not collapse into one category.</p>
+      </div>
+      <div class="stats-analysis-grid">
+        <section class="stats-analysis-panel">
+          <h3>Events by year</h3>
+          <p>Material canonical events, grouped by recorded event year.</p>
+          <div class="stats-year-list" aria-label="Events by year">
+            {eventYearRows.map((row) => (
+              <div class="stats-year-row">
+                <span>{row.year}</span>
+                <div class="stats-year-track" aria-hidden="true"><span style={`width: ${(row.total / maxEventYearTotal) * 100}%`}></span></div>
+                <strong>{row.total}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Event types</h3>
+          <p>Exact distribution of canonical event types.</p>
+          <div class="stats-table-wrap">
+            <table><caption>Canonical event types.</caption><thead><tr><th>Event type</th><th>Count</th><th>Share</th></tr></thead><tbody>{eventTypeRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table>
+          </div>
+        </section>
+      </div>
+      <div class="stats-analysis-grid stats-analysis-grid--three">
+        <section class="stats-analysis-panel">
+          <h3>Lifecycle transitions</h3>
+          <p>Current canonical transition-state counts.</p>
+          <dl class="stats-metric-list">{transitionRows.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Event detail kinds</h3>
+          <p>Typed supporting event-detail records.</p>
+          <dl class="stats-metric-list">{eventDetailRows.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Depeg outcomes</h3>
+          <p>Recovery outcome where a reviewed depeg detail exists.</p>
+          <dl class="stats-metric-list">{depegOutcomeRows.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl>
+        </section>
+      </div>
+      <div class="stats-failure-header">
+        <div><p class="stats-kicker">Failure analysis</p><h3>{stats.failures.count} failed assets</h3></div>
+        <p>Failure breakdowns use the canonical failed lifecycle group. Backing type is multi-select and is not a mutually exclusive composition.</p>
+      </div>
+      <div class="stats-analysis-grid stats-analysis-grid--three">
+        {failurePanels.map((panel) => (
+          <section class="stats-analysis-panel">
+            <h3>{panel.title}</h3>
+            <div class="stats-table-wrap">
+              <table><caption>{panel.title}.</caption><thead><tr><th>Category</th><th>Count</th><th>Share</th></tr></thead><tbody>{panel.rows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table>
+            </div>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-deployment-title" data-analysis-family="deployments">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Deployments</p><h2 id="stats-deployment-title">Chain and deployment structure</h2></div>
+        <p>Deployment rows and distinct asset reach are shown separately. A multi-chain asset is still one canonical asset.</p>
+      </div>
+      <dl class="stats-mini-kpi-grid">
+        <div><dt>Total deployments</dt><dd>{stats.deployments.total_deployments}</dd></div>
+        <div><dt>Assets with deployments</dt><dd>{stats.deployments.assets_with_deployments}</dd></div>
+        <div><dt>Freeze capability known</dt><dd>{stats.deployments.control_capability_knowledge.freeze_capability_known}</dd></div>
+        <div><dt>Blacklist capability known</dt><dd>{stats.deployments.control_capability_knowledge.blacklist_capability_known}</dd></div>
+        <div><dt>Control capability unknown</dt><dd>{stats.deployments.control_capability_knowledge.control_capability_unknown}</dd></div>
+      </dl>
+      <div class="stats-analysis-grid">
+        <section class="stats-analysis-panel">
+          <h3>Chain coverage</h3>
+          <p>Deployment count and distinct asset count by chain.</p>
+          <div class="stats-chain-list" aria-label="Deployment count by chain">
+            {deploymentChainRows.map((row) => (
+              <div class="stats-chain-row">
+                <div><strong>{formatLabel(row.chain)}</strong><span>{row.assetCount} assets</span></div>
+                <div class="stats-year-track" aria-hidden="true"><span style={`width: ${(row.deploymentCount / maxDeploymentCount) * 100}%`}></span></div>
+                <strong>{row.deploymentCount}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Exact chain counts</h3>
+          <p>Asset reach and deployment rows are separate measures.</p>
+          <div class="stats-table-wrap">
+            <table><caption>Deployment records by chain.</caption><thead><tr><th>Chain</th><th>Assets</th><th>Deployments</th></tr></thead><tbody>{deploymentChainRows.map((row) => <tr><th scope="row">{formatLabel(row.chain)}</th><td>{row.assetCount}</td><td>{row.deploymentCount}</td></tr>)}</tbody></table>
+          </div>
+        </section>
+      </div>
+      <div class="stats-analysis-grid stats-analysis-grid--three">
+        {deploymentPanels.map((panel) => (
+          <section class="stats-analysis-panel">
+            <h3>{panel.title}</h3>
+            <dl class="stats-metric-list">{panel.rows.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-organization-title" data-analysis-family="organizations">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Organizations</p><h2 id="stats-organization-title">Roles around stable assets</h2></div>
+        <p>An organization may hold multiple roles. Role rows therefore describe relationship structure, not a mutually exclusive organization classification.</p>
+      </div>
+      <dl class="stats-mini-kpi-grid stats-mini-kpi-grid--compact">
+        <div><dt>Organizations</dt><dd>{stats.organizations.total_organizations}</dd></div>
+        <div><dt>Relationships</dt><dd>{stats.organizations.total_relationships}</dd></div>
+        <div><dt>Recorded role types</dt><dd>{organizationRoleRows.length}</dd></div>
+      </dl>
+      <div class="stats-table-wrap">
+        <table class="stats-wide-table">
+          <caption>Organization roles and their relationship, organization, and asset reach.</caption>
+          <thead><tr><th>Role</th><th>Relationships</th><th>Organizations</th><th>Asset reach</th></tr></thead>
+          <tbody>{organizationRoleRows.map((row) => <tr><th scope="row">{formatLabel(row.role)}</th><td>{row.relationshipCount}</td><td>{row.organizationCount}</td><td>{row.assetCount}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-quality-title" data-analysis-family="data-quality">
+      <div class="stats-section-heading">
+        <div><p class="stats-kicker">Data quality</p><h2 id="stats-quality-title">Coverage, evidence depth, and freshness</h2></div>
+        <p>These metrics describe registry completeness and review coverage. They are not safety, transparency, or risk scores for the underlying assets.</p>
+      </div>
+      <div class="stats-analysis-grid">
+        <section class="stats-analysis-panel">
+          <h3>Coverage</h3>
+          <p>Exact numerator, denominator, and coverage percentage.</p>
+          <div class="stats-table-wrap">
+            <table><caption>Registry coverage metrics.</caption><thead><tr><th>Metric</th><th>Coverage</th><th>Share</th></tr></thead><tbody>{coverageRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count} / {row.denominator}</td><td>{row.percentage}%</td></tr>)}</tbody></table>
+          </div>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Evidence and known unknowns</h3>
+          <p>Evidence depth and unresolved-state visibility remain explicit.</p>
+          <dl class="stats-metric-list">
+            <div><dt>Average evidence per asset</dt><dd>{stats.data_quality.evidence_per_asset.average}</dd></div>
+            <div><dt>Median evidence per asset</dt><dd>{stats.data_quality.evidence_per_asset.median}</dd></div>
+            <div><dt>Known unknowns</dt><dd>{stats.data_quality.known_unknowns.total}</dd></div>
+            <div><dt>High / critical unknowns</dt><dd>{stats.data_quality.known_unknowns.high_or_critical_count}</dd></div>
+            <div><dt>Assets with high / critical unknowns</dt><dd>{stats.data_quality.known_unknowns.assets_with_high_or_critical}</dd></div>
+            <div><dt>Typed event details</dt><dd>{typedEventCoverage.count} / {typedEventCoverage.denominator}</dd></div>
+          </dl>
+        </section>
+      </div>
+      <div class="stats-analysis-grid">
+        <section class="stats-analysis-panel">
+          <h3>Evidence depth</h3>
+          <p>Number of evidence records attached per canonical asset.</p>
+          <div class="stats-compact-bars">
+            {evidenceDepthRows.map((row) => (
+              <div class="stats-compact-bar"><div><span>{row.label}</span><strong>{row.count}</strong></div><div class="stats-bar-track" aria-hidden="true"><span style={`width: ${Math.max(row.percentage, 1)}%`}></span></div><small>{row.percentage}%</small></div>
+            ))}
+          </div>
+        </section>
+        <section class="stats-analysis-panel">
+          <h3>Verification recency</h3>
+          <p>Age bands derived from canonical `last_verified_at` values.</p>
+          <div class="stats-compact-bars">
+            {verificationRecencyRows.map((row) => (
+              <div class="stats-compact-bar"><div><span>{row.label}</span><strong>{row.count}</strong></div><div class="stats-bar-track" aria-hidden="true"><span style={`width: ${Math.max(row.percentage, 1)}%`}></span></div><small>{row.percentage}%</small></div>
+            ))}
+          </div>
+        </section>
       </div>
     </section>
 
