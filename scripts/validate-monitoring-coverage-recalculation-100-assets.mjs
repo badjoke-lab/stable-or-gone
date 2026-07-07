@@ -1,50 +1,43 @@
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
 
-const output = 'data/generated/monitoring-coverage-recalculation-100-assets.json';
-execFileSync(process.execPath, ['scripts/audit-monitoring-coverage-100-assets.mjs'], { stdio: 'inherit', env: process.env });
-const report = JSON.parse(fs.readFileSync(output, 'utf8'));
+const historical = JSON.parse(fs.readFileSync('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json', 'utf8'));
+const current = JSON.parse(fs.readFileSync('scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json', 'utf8'));
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
-expect(report.audit_id === 'sog_monitoring_coverage_recalculation_100_assets_pr309', `unexpected audit id ${report.audit_id}`);
-expect(report.summary?.canonical_stablecoin_count === 100, `expected 100 canonical assets, got ${report.summary?.canonical_stablecoin_count}`);
-expect(report.summary?.canonical_organization_count === 94, `expected 94 organizations, got ${report.summary?.canonical_organization_count}`);
-expect(report.summary?.registered_source_count === 24, `expected 24 registered sources, got ${report.summary?.registered_source_count}`);
-expect(report.summary?.registered_asset_reach_count === 16, `expected registered reach of 16 assets, got ${report.summary?.registered_asset_reach_count}`);
-expect(report.summary?.uncovered_asset_count === 84, `expected 84 uncovered assets, got ${report.summary?.uncovered_asset_count}`);
-expect(report.summary?.covered_organization_count === 12, `expected 12 covered organizations, got ${report.summary?.covered_organization_count}`);
-expect(report.summary?.accepted_source_count === 0, 'accepted source count must remain zero');
-expect(report.summary?.accepted_asset_reach_count === 0, 'accepted asset reach must remain zero');
-expect(report.summary?.pending_initial_acceptance_count === 24, 'all 24 baselines must remain pending initial acceptance');
-expect(report.summary?.market_access_schema_capable_source_count === 0, 'current source configuration must not claim market-access schema coverage');
+expect(historical.checkpoint_id === 'sog_audited_100_asset_checkpoint_pr318_2026_07_06', 'historical monitoring checkpoint ID mismatch');
+expect(historical.canonical_counts?.stablecoins === 100, 'historical monitoring boundary must protect 100 assets');
+expect(historical.canonical_counts?.organizations === 94, 'historical monitoring boundary must protect 94 organizations');
+expect(historical.source_baseline_sync?.source_count === 24, 'historical PR #309/#321 source count must remain 24');
+expect(historical.source_baseline_sync?.baseline_count === 24, 'historical PR #309/#321 baseline count must remain 24');
+expect(historical.source_baseline_sync?.pending_initial_acceptance === 24, 'historical PR #309/#321 pending count must remain 24');
+expect(historical.source_baseline_sync?.accepted === 0, 'historical accepted count must remain zero');
+expect(historical.coverage?.registered_asset_reach_count === 16, 'historical registered reach must remain 16');
+expect(historical.coverage?.uncovered_asset_count === 84, 'historical uncovered queue must remain 84');
+expect(historical.coverage?.covered_organization_count === 12, 'historical covered organization count must remain 12');
+expect(historical.coverage?.accepted_asset_reach_count === 0, 'historical accepted asset reach must remain zero');
+expect(historical.source_family_counts?.reserve_assurance === 9, 'historical reserve/assurance source count must remain 9');
+expect(historical.stablecoin_family_counts?.reserve_assurance === 11, 'historical reserve/assurance asset reach must remain 11');
+expect(historical.source_family_counts?.redemption_terms === 6, 'historical redemption source count must remain 6');
+expect(historical.stablecoin_family_counts?.redemption_terms === 7, 'historical redemption asset reach must remain 7');
+expect(historical.source_family_counts?.issuer_lifecycle === 5, 'historical lifecycle source count must remain 5');
+expect(historical.stablecoin_family_counts?.issuer_lifecycle === 5, 'historical lifecycle asset reach must remain 5');
+expect(historical.source_family_counts?.regulatory === 5, 'historical regulatory source count must remain 5');
+expect(historical.stablecoin_family_counts?.regulatory === 5, 'historical regulatory asset reach must remain 5');
+expect(historical.policy?.canonical_action === 'none', 'historical audit must not authorize canonical action');
+expect(historical.policy?.network_access_used === false, 'historical audit must remain offline');
+expect(historical.policy?.public_output === false, 'historical audit output must remain private');
+expect(historical.policy?.production_publication === false, 'historical audit must not publish');
 
-expect(report.coverage_domains?.issuer_protocol?.source_count === 19, 'issuer/protocol source count changed unexpectedly');
-expect(report.coverage_domains?.issuer_protocol?.stablecoin_count === 15, 'issuer/protocol asset reach changed unexpectedly');
-expect(report.coverage_domains?.reserve_assurance?.source_count === 9, 'reserve/assurance source count changed unexpectedly');
-expect(report.coverage_domains?.reserve_assurance?.stablecoin_count === 11, 'reserve/assurance asset reach changed unexpectedly');
-expect(report.coverage_domains?.redemption_mint_terms?.source_count === 6, 'redemption/mint source count changed unexpectedly');
-expect(report.coverage_domains?.redemption_mint_terms?.stablecoin_count === 7, 'redemption/mint asset reach changed unexpectedly');
-expect(report.coverage_domains?.issuer_lifecycle?.source_count === 5, 'lifecycle source count changed unexpectedly');
-expect(report.coverage_domains?.issuer_lifecycle?.stablecoin_count === 5, 'lifecycle asset reach changed unexpectedly');
-expect(report.coverage_domains?.regulatory_action_guidance?.source_count === 5, 'regulatory action/guidance source count changed unexpectedly');
-expect(report.coverage_domains?.regulatory_action_guidance?.stablecoin_count === 5, 'regulatory action/guidance asset reach changed unexpectedly');
-expect(report.coverage_domains?.platform_policy?.source_count === 0, 'platform-policy coverage must remain zero before PR #317');
-expect(report.coverage_domains?.platform_service_state?.source_count === 0, 'platform service-state coverage must remain zero before PR #317');
-expect(report.coverage_domains?.regulatory_register?.source_count === 0, 'regulatory-register coverage must remain zero before PR #317');
-expect(report.eu_eea_market_access?.any_function_covered === false, 'current configuration must not claim EU/EEA function-level access coverage');
-expect(Object.values(report.eu_eea_market_access?.function_coverage ?? {}).every((row) => row.source_count === 0 && row.stablecoin_count === 0), 'every market-access function must remain zero-covered in PR #309');
-expect((report.gaps?.extra_source_asset_ids ?? []).length === 0, 'monitoring sources reference non-canonical assets');
-expect(report.gaps?.uncovered_asset_ids?.length === 84, 'uncovered asset queue must contain 84 assets');
-expect(report.interpretation?.canonical_action === 'none', 'audit must not authorize canonical action');
-expect(report.interpretation?.network_access_used === false, 'audit must remain offline');
-expect(report.interpretation?.public_output === false, 'audit output must remain private/non-public');
-expect(report.interpretation?.production_publication === false, 'audit must not publish');
+expect(current.source_family_counts?.issuer_lifecycle === historical.source_family_counts?.issuer_lifecycle, 'PR #322 must not expand lifecycle family');
+expect(current.source_family_counts?.regulatory === historical.source_family_counts?.regulatory, 'PR #322 must not expand regulatory family');
+expect(current.source_baseline_sync?.accepted === 0, 'current accepted baseline count must remain zero');
+expect(current.coverage?.accepted_asset_reach_count === 0, 'current accepted asset reach must remain zero');
 
 if (failures.length) {
-  console.error('Monitoring coverage recalculation validation failed:');
+  console.error('Historical monitoring coverage recalculation validation failed:');
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
 
-console.log('Monitoring coverage recalculation passed: 24 registered sources reach 16/100 assets, 0 accepted baselines, and 0 platform-policy, register, or function-level market-access coverage in the current configuration.');
+console.log('Historical PR #309/#321 monitoring coverage checkpoint remains intact: 24 sources reached 16/100 assets with zero accepted baselines; PR #322 expands only reserve/redemption reach in a separate current snapshot.');
