@@ -13,10 +13,12 @@ import './validate-monitoring-phase-a-pr239.mjs';
 import './validate-current-monitoring-configuration.mjs';
 import './validate-current-coverage.mjs';
 import './validate-monitoring-baseline-sync-100-assets.mjs';
+import './validate-monitoring-reserve-redemption-expansion-100-assets.mjs';
 
 const errors = [];
 const check = (value, message) => { if (!value) errors.push(message); };
 const workflow = fs.readFileSync('.github/workflows/monitoring-review.yml', 'utf8');
+const expansionWorkflow = fs.readFileSync('.github/workflows/monitoring-reserve-redemption-expansion.yml', 'utf8');
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
 for (const token of ['workflow_dispatch:', 'contents: read', 'npm run monitor:review', 'actions/upload-artifact']) check(workflow.includes(token), `workflow missing ${token}`);
@@ -24,16 +26,21 @@ for (const token of ['schedule:', 'pull_request:', 'workflow_run:', 'contents: w
 check(!/^\s*push:/m.test(workflow), 'workflow must not use push trigger');
 check(fs.readFileSync('.gitignore', 'utf8').split(/\r?\n/).includes('data-staging/monitoring/'), 'monitoring output must be ignored');
 check(packageJson.scripts?.['monitor:review'] === 'node scripts/monitoring/run.mjs', 'monitor:review script mismatch');
-check(String(packageJson.scripts?.build ?? '').includes('npm run validate:monitoring'), 'build must run monitoring validation');
+check(packageJson.scripts?.['validate:monitoring'] === 'node scripts/validate-monitoring-pipeline-pr230.mjs', 'validate:monitoring script mismatch');
+for (const token of [
+  'Validate full monitoring chain',
+  'npm run validate:monitoring',
+  'contents: read',
+]) check(expansionWorkflow.includes(token), `monitoring expansion CI missing ${token}`);
 
 const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sog-monitoring-current-'));
 try {
   const result = runMonitoring({
     outputRoot: temporaryRoot,
-    runId: '20260629T000000Z-test0000',
-    startedAt: '2026-06-29T00:00:00.000Z',
+    runId: '20260707T000000Z-test0000',
+    startedAt: '2026-07-07T00:00:00.000Z',
     sourceCommit: 'test000000000000000000000000000000000000',
-    sourceBranch: 'growth-test',
+    sourceBranch: 'monitoring-expansion-test',
     mode: 'health-only'
   });
   const files = fs.readdirSync(result.run_directory).sort();
@@ -54,4 +61,4 @@ if (errors.length) {
   errors.forEach((error) => console.error(`- ${error}`));
   process.exit(1);
 }
-console.log('Current monitoring validation passed for the 100-asset synchronized registry boundary.');
+console.log('Current monitoring validation passed for the 100-asset, 30-source reserve/redemption-expanded boundary.');

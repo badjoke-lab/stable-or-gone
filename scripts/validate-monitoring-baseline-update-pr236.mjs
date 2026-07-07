@@ -14,8 +14,21 @@ const failures = [];
 const fail = (message) => failures.push(message);
 const sources = loadOfficialSources(root);
 const currentBaselineSet = loadOfficialSourceBaselines(root);
+const historicalFixtureIds = [
+  'tether-transparency',
+  'circle-transparency',
+  'paxos-pyusd-transparency',
+  'ethena-custodian-attestations'
+];
+const fixtureSources = sources.filter((row) => historicalFixtureIds.includes(row.source_id));
+const fixtureBaselineSet = {
+  ...structuredClone(currentBaselineSet),
+  baselines: currentBaselineSet.baselines.filter((row) => historicalFixtureIds.includes(row.source_id))
+};
 const canonicalBaselinePath = path.join(root, 'scripts/monitoring/baselines/official-source-baselines.json');
 const canonicalBefore = fs.readFileSync(canonicalBaselinePath, 'utf8');
+
+if (fixtureSources.length !== 4 || fixtureBaselineSet.baselines.length !== 4) fail('PR #236 historical four-source fixture is incomplete');
 
 function expectThrow(fn, expected, label) {
   try {
@@ -35,7 +48,7 @@ const bodies = new Map([
 ]);
 
 const fixtureFetch = async (url) => {
-  const source = sources.find((row) => row.url === url);
+  const source = fixtureSources.find((row) => row.url === url);
   if (!source) throw new Error(`unexpected fixture URL: ${url}`);
   return new Response(bodies.get(source.source_id), {
     status: 200,
@@ -58,8 +71,8 @@ try {
     sourceBranch: 'pr236-test',
     mode: 'official-sources',
     fetchImpl: fixtureFetch,
-    sources,
-    baselineSet: currentBaselineSet
+    sources: fixtureSources,
+    baselineSet: fixtureBaselineSet
   });
   const manifest = JSON.parse(fs.readFileSync(path.join(run.run_directory, 'manifest.json'), 'utf8'));
   const observationReport = JSON.parse(fs.readFileSync(path.join(run.run_directory, 'official-source-observations.json'), 'utf8'));
@@ -69,26 +82,10 @@ try {
     reviewer: 'fixture-human-reviewer',
     reviewed_at: '2026-06-29T04:30:00.000Z',
     decisions: [
-      {
-        source_id: 'tether-transparency',
-        decision: 'accept',
-        rationale: 'Reviewed as the initial official comparison point for this source.'
-      },
-      {
-        source_id: 'circle-transparency',
-        decision: 'accept',
-        rationale: 'Reviewed as the initial official comparison point for this source.'
-      },
-      {
-        source_id: 'paxos-pyusd-transparency',
-        decision: 'hold',
-        rationale: 'Hold until the linked period-specific assurance document is reviewed.'
-      },
-      {
-        source_id: 'ethena-custodian-attestations',
-        decision: 'reject',
-        rationale: 'Reject this observation as an unsuitable initial comparison snapshot.'
-      }
+      { source_id: 'tether-transparency', decision: 'accept', rationale: 'Reviewed as the initial official comparison point for this source.' },
+      { source_id: 'circle-transparency', decision: 'accept', rationale: 'Reviewed as the initial official comparison point for this source.' },
+      { source_id: 'paxos-pyusd-transparency', decision: 'hold', rationale: 'Hold until the linked period-specific assurance document is reviewed.' },
+      { source_id: 'ethena-custodian-attestations', decision: 'reject', rationale: 'Reject this observation as an unsuitable initial comparison snapshot.' }
     ]
   };
 
@@ -97,8 +94,8 @@ try {
     manifest,
     observationReport,
     decisionSet,
-    sources,
-    baselineSet: currentBaselineSet
+    sources: fixtureSources,
+    baselineSet: fixtureBaselineSet
   });
 
   if (proposal.proposalManifest.status !== 'proposal_only') fail('proposal status must be proposal_only');
@@ -117,7 +114,7 @@ try {
   }
 
   const proposedById = new Map(proposal.proposedBaselineSet.baselines.map((row) => [row.source_id, row]));
-  const currentById = new Map(currentBaselineSet.baselines.map((row) => [row.source_id, row]));
+  const currentById = new Map(fixtureBaselineSet.baselines.map((row) => [row.source_id, row]));
   for (const sourceId of ['tether-transparency', 'circle-transparency']) {
     const proposed = proposedById.get(sourceId);
     const observation = observationReport.observations.find((row) => row.source_id === sourceId);
@@ -129,7 +126,7 @@ try {
     if (JSON.stringify(proposedById.get(sourceId)) !== JSON.stringify(currentById.get(sourceId))) fail(`${sourceId}: hold or reject must preserve the current baseline record exactly`);
   }
 
-  const proposalFailures = validateOfficialSourceBaselines(proposal.proposedBaselineSet, sources);
+  const proposalFailures = validateOfficialSourceBaselines(proposal.proposedBaselineSet, fixtureSources);
   if (proposalFailures.length) fail(`proposed baseline failed canonical validator: ${proposalFailures.join('; ')}`);
 
   const targetDirectory = path.join(bundleRoot, 'proposal');
@@ -144,21 +141,13 @@ try {
   for (const phrase of ['Proposal only','Decision: `accept`','Decision: `hold`','Decision: `reject`','Repository baseline written: false','Automatic pull request: false','Production publication: false']) {
     if (!proposal.report.includes(phrase)) fail(`proposal report missing: ${phrase}`);
   }
-  expectThrow(
-    () => writeBaselineUpdateBundle(targetDirectory, proposal, { root, enforceStagingPath: false }),
-    'refusing to overwrite existing proposal file',
-    'existing bundle overwrite'
-  );
-  expectThrow(
-    () => writeBaselineUpdateBundle(bundleRoot, proposal, { root, enforceStagingPath: true }),
-    'output must be a proposal subdirectory',
-    'staging path boundary'
-  );
+  expectThrow(() => writeBaselineUpdateBundle(targetDirectory, proposal, { root, enforceStagingPath: false }), 'refusing to overwrite existing proposal file', 'existing bundle overwrite');
+  expectThrow(() => writeBaselineUpdateBundle(bundleRoot, proposal, { root, enforceStagingPath: true }), 'output must be a proposal subdirectory', 'staging path boundary');
 
   const missingDecision = structuredClone(decisionSet);
   missingDecision.decisions.pop();
   expectThrow(
-    () => prepareBaselineUpdateProposal({ root, manifest, observationReport, decisionSet: missingDecision, sources, baselineSet: currentBaselineSet }),
+    () => prepareBaselineUpdateProposal({ root, manifest, observationReport, decisionSet: missingDecision, sources: fixtureSources, baselineSet: fixtureBaselineSet }),
     'decision source IDs must exactly match',
     'missing decision'
   );
@@ -166,7 +155,7 @@ try {
   const duplicateDecision = structuredClone(decisionSet);
   duplicateDecision.decisions.push(structuredClone(duplicateDecision.decisions[0]));
   expectThrow(
-    () => prepareBaselineUpdateProposal({ root, manifest, observationReport, decisionSet: duplicateDecision, sources, baselineSet: currentBaselineSet }),
+    () => prepareBaselineUpdateProposal({ root, manifest, observationReport, decisionSet: duplicateDecision, sources: fixtureSources, baselineSet: fixtureBaselineSet }),
     'duplicate decision',
     'duplicate decision'
   );
@@ -174,7 +163,7 @@ try {
   const badReference = structuredClone(decisionSet);
   badReference.review_reference = 'chat approval';
   expectThrow(
-    () => prepareBaselineUpdateProposal({ root, manifest, observationReport, decisionSet: badReference, sources, baselineSet: currentBaselineSet }),
+    () => prepareBaselineUpdateProposal({ root, manifest, observationReport, decisionSet: badReference, sources: fixtureSources, baselineSet: fixtureBaselineSet }),
     'review_reference must use PR #<number>',
     'malformed review reference'
   );
@@ -183,7 +172,7 @@ try {
   failedObservation.observations[0].fetch_status = 'error';
   failedObservation.observations[0].baseline_comparison.state = 'fetch_failed';
   expectThrow(
-    () => prepareBaselineUpdateProposal({ root, manifest, observationReport: failedObservation, decisionSet, sources, baselineSet: currentBaselineSet }),
+    () => prepareBaselineUpdateProposal({ root, manifest, observationReport: failedObservation, decisionSet, sources: fixtureSources, baselineSet: fixtureBaselineSet }),
     'failed observation cannot be accepted',
     'accept failed observation'
   );
@@ -191,7 +180,7 @@ try {
   const unchangedObservation = structuredClone(observationReport);
   unchangedObservation.observations[0].baseline_comparison.state = 'unchanged';
   expectThrow(
-    () => prepareBaselineUpdateProposal({ root, manifest, observationReport: unchangedObservation, decisionSet, sources, baselineSet: currentBaselineSet }),
+    () => prepareBaselineUpdateProposal({ root, manifest, observationReport: unchangedObservation, decisionSet, sources: fixtureSources, baselineSet: fixtureBaselineSet }),
     'only new_source or content_changed observations may be accepted',
     'accept unchanged observation'
   );
@@ -199,7 +188,7 @@ try {
   const badManifest = structuredClone(manifest);
   badManifest.canonical_guard.ok = false;
   expectThrow(
-    () => prepareBaselineUpdateProposal({ root, manifest: badManifest, observationReport, decisionSet, sources, baselineSet: currentBaselineSet }),
+    () => prepareBaselineUpdateProposal({ root, manifest: badManifest, observationReport, decisionSet, sources: fixtureSources, baselineSet: fixtureBaselineSet }),
     'canonical guard must pass',
     'failed canonical guard'
   );
@@ -232,7 +221,7 @@ for (const phrase of [
   'reject',
   'repository_baseline_written: false',
   'The proposal is not self-applying',
-  'must not modify the repository baseline',
+  'It does not modify the repository baseline',
   'No production deployment required'
 ]) {
   if (!spec.includes(phrase)) fail(`PR #236 specification missing: ${phrase}`);
@@ -244,4 +233,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('PR #236 baseline update proposal valid: reviewed decisions produce a private proposal only and the repository baseline remains unchanged.');
+console.log(`PR #236 baseline update proposal valid: historical four-source fixture passes against the current ${sources.length}-source configuration and the repository baseline remains unchanged.`);

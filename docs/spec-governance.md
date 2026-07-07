@@ -5,7 +5,7 @@ Updated: 2026-07-07
 
 ## 1. Purpose
 
-This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, release-material boundaries, monitoring synchronization boundaries, monitoring expansion boundaries, comparison boundaries, and publication safety.
+This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, monitoring checkpoint history, source-expansion boundaries, scheduled-operation boundaries, comparison boundaries, and publication safety.
 
 Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts do not override merged repository authority.
 
@@ -33,11 +33,8 @@ docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 Release/checkpoint authority:
 
 ```text
-docs/counts-manifest-version-provenance-integrity-spec.md
 docs/migration/registry-release-integrity-baseline.json
-docs/reproducible-build-generated-output-audit-spec.md
 docs/migration/reproducible-build-output-baseline.json
-docs/audited-100-asset-canonical-checkpoint-spec.md
 docs/migration/audited-100-asset-canonical-checkpoint.json
 docs/non-ui-release-material-spec.md
 ```
@@ -47,12 +44,15 @@ Current monitoring authority:
 ```text
 docs/quality/monitoring-pipeline-spec.md
 docs/quality/monitoring-official-source-spec.md
+docs/quality/monitoring-official-source-schema.md
 docs/quality/monitoring-baseline-spec.md
 docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
+docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
 ```
 
-Canonical data semantics remain governed by `docs/stable-asset-scope.md`, `docs/classification-spec.md`, `docs/data-model-v3-spec.md`, and the current registry baselines. Statistics work is governed by `docs/stats-spec.md`. Phase F-I work is governed by `docs/comparison-and-change-product-spec.md` together with active numbering amendments.
+Canonical data semantics remain governed by current scope, classification, data-model, and migration specifications. Statistics work is governed by `docs/stats-spec.md`. Phase F-I work is governed by `docs/comparison-and-change-product-spec.md` together with active numbering amendments.
 
 ## 4. Mandatory reading order
 
@@ -73,23 +73,20 @@ A non-trivial PR is not ready for review until it identifies the exact specifica
 A change to any of the following requires a specification update in the same PR or an earlier dependency PR:
 
 - canonical enum meaning;
-- public status grouping;
 - evidence interpretation;
 - unknown-state semantics;
-- route families or canonical URLs;
-- machine-readable output shape;
+- route families or machine-readable output shape;
 - count or denominator semantics;
-- build provenance semantics;
-- canonical hash boundary;
+- build provenance or canonical hash boundary;
 - audited checkpoint source commit or digest boundary;
-- dependency-lock or runtime semantics;
-- reproducible-build timestamp context;
+- dependency-lock or reproducible-build semantics;
 - release-material derivation semantics;
 - monitoring source schema;
-- monitoring baseline state semantics;
-- monitoring synchronization digest boundary;
+- monitoring baseline-state semantics;
+- monitoring checkpoint/snapshot digest boundary;
+- monitoring source-family classification;
 - monitoring coverage semantics;
-- scheduled trigger or permission boundary;
+- schedule trigger or permission boundary;
 - statistics semantics;
 - comparison projection semantics;
 - canonical Market Access Record semantics;
@@ -119,37 +116,22 @@ A PR that cannot cite an approved work item must pause until repository authorit
 
 ```text
 100 canonical stable assets reached
-UI maintenance-only after PR #295
-PR #309 monitoring coverage recalculation complete
-PR #311 Registry v2/v3 and machine-readable parity complete
-PR #316 release integrity complete
-PR #317 reproducible build audit complete
-PR #318 audited 100-record canonical checkpoint complete
-PR #319 guide maintenance complete, inserted work
-PR #320 non-UI release material complete
-PR #321 100-asset monitoring baseline synchronization active
-PR #322 reserve and redemption source expansion next
-PR #321-#334 current pre-110 sequence
-PR #335-#348 post-110 comparison and change-product sequence approved but inactive before reviewed 110-asset checkpoint
+release integrity complete
+reproducible build audit complete
+audited 100-record canonical checkpoint complete
+non-UI release material complete
+PR #321 100-asset monitoring baseline synchronization complete
+PR #322 reserve and redemption source expansion active
+PR #323 lifecycle, regulatory, and EU market-access source/schema expansion next
+PR #324 bounded scheduled read-only monitoring later
+PR #325-#328 statistics
+PR #329-#334 candidate audit and controlled growth to 110
+PR #335-#348 post-110 product sequence approved but inactive before reviewed 110-asset checkpoint
 ```
 
-Do not rewrite completed history to make a changed plan appear unchanged. Record consumed PR numbers, closed attempts, inserted work, and phase transitions explicitly.
+Do not rewrite completed history to make a changed plan appear unchanged. Historical monitoring snapshots remain immutable and successor expansion states use new snapshots.
 
-## 8. Inserted-work numbering rule
-
-When urgent factual, editorial, security, or narrow verified-maintenance work consumes a roadmap PR number:
-
-```text
-1. record the actual merged or closed work;
-2. do not mark displaced planned work complete;
-3. move displaced work to the next unused PR number;
-4. renumber every later unused planned item without changing order or scope;
-5. update roadmap, amendments, authority docs, and workstream guards before planned work resumes.
-```
-
-PR #319 is governed by `docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md`.
-
-## 9. Release and checkpoint governance
+## 8. Release and checkpoint governance
 
 Binding rules:
 
@@ -158,48 +140,104 @@ Binding rules:
 - runtime provenance uses real commit, branch, timestamp, non-zero canonical hash, and positive canonical file count;
 - candidate, monitoring, editorial-research, and private material remain outside canonical public count surfaces and provenance boundaries;
 - reproducibility-sensitive workflows use the reviewed lockfile and pinned Node runtime;
-- normal build does not overwrite protected historical baseline inputs;
+- protected historical inputs are not mutated by normal build;
 - the audited checkpoint keeps identity and content digests separate;
-- production may advance through later noncanonical commits only while public output, provenance, route/output parity, canonical hash parity, canonical file-count parity, and reviewed count parity remain valid.
+- later noncanonical production commits are allowed only while public output, provenance, route/output parity, canonical hash parity, canonical file-count parity, and reviewed count parity remain valid.
 
-## 10. Monitoring baseline synchronization governance
+## 9. Historical monitoring checkpoint governance
 
-PR #321 is governed by:
+The PR #321 snapshot is historical and immutable:
 
 ```text
-docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
 scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-scripts/generate-monitoring-baseline-sync-100-assets.mjs
-scripts/validate-monitoring-baseline-sync-100-assets.mjs
-.github/workflows/monitoring-baseline-sync-100.yml
 ```
 
-Binding rules:
+It preserves:
 
-- synchronization boundary is exactly 100 assets, 94 organizations, and 110 relationships;
-- current configuration contains 24 reviewed enabled source rows and 24 baseline rows;
-- source IDs and baseline IDs match exactly;
-- all 24 baseline rows remain `pending_initial_acceptance`;
+```text
+24 sources
+24 pending baseline rows
+16 assets reached
+84 uncovered assets
+12 organizations reached
+0 accepted baselines
+0 accepted asset reach
+7 multi-family assets
+```
+
+Its historical validator checks fixed counts and digests directly. Later source expansion must not regenerate PR #321 history against current configuration.
+
+The historical PR #309 coverage validator also uses historical checkpoint state rather than current allowlist recalculation.
+
+## 10. PR #322 reserve/redemption source-expansion governance
+
+PR #322 is governed by:
+
+```text
+docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
+scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
+scripts/validate-monitoring-reserve-redemption-expansion-100-assets.mjs
+.github/workflows/monitoring-reserve-redemption-expansion.yml
+```
+
+Binding current boundary:
+
+```text
+100 assets
+94 organizations
+110 relationships
+30 reviewed source rows
+30 baseline rows
+30 pending_initial_acceptance
+0 accepted
+0 missing
+22 assets with registered source reach
+78 uncovered assets
+18 organizations reached
+0 accepted asset reach
+11 multi-family assets
+```
+
+Exactly six PR #322 source IDs are approved:
+
+```text
+trueusd-transparency
+angle-eura-overview
+sgforge-eurcv-coinvertible
+eurite-euri-overview
+quantoz-eurq-usdq
+vnx-vchf-overview
+```
+
+Binding source-family boundary:
+
+```text
+reserve_assurance: 14 sources / 16 assets
+redemption_terms: 11 sources / 12 assets
+issuer_lifecycle: 5 sources / 5 assets
+regulatory: 5 sources / 5 assets
+```
+
+Rules:
+
+- PR #322 rows may use only reserve, assurance, and issuance/redemption signals;
+- each new source has exactly one matching pending baseline row;
+- accepted-only baseline fields remain null;
 - accepted baseline count remains zero;
-- missing baseline count remains zero;
-- registered source reach is 16 assets and uncovered queue is 84 assets;
-- covered organization count is 12;
-- accepted monitoring asset reach remains zero;
-- multi-family asset count is 7;
-- current source-family counts and asset-family reach are fixed by the synchronization snapshot;
-- asset, organization, source/baseline, uncovered-queue, source-file, and baseline-file digests are deterministic contracts;
-- synchronization performs no network access and authorizes no canonical action;
-- synchronization snapshot and baseline data remain private/internal and are excluded from public machine-readable output;
-- PR #321 may not accept baselines, add sources, expand market-access schema, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical PRs, publish candidates, or deploy.
+- accepted asset reach remains zero;
+- source/baseline ID parity remains exact;
+- deterministic current-state observation must match the PR #322 snapshot exactly;
+- lifecycle and regulatory family counts remain unchanged;
+- snapshot generation is offline and authorizes no canonical action;
+- monitoring snapshots and baseline files remain internal and non-public.
 
-A future pending-to-accepted baseline transition requires a separate human-reviewed change with live observation provenance under the current normalization version.
+PR #322 may not accept baselines, add lifecycle/regulatory/platform-policy/regulatory-register/access-schema sources, change normalization version, schedule monitoring, write canonical data, edit guides automatically, create automatic canonical pull requests, publish candidates, or deploy monitoring output.
 
 ## 11. Monitoring coverage governance
 
 Coverage remains multidimensional:
 
 ```text
-issuer/protocol source reach
 reserve/assurance reach
 redemption/mint terms reach
 issuer lifecycle reach
@@ -217,9 +255,8 @@ Rules:
 - a pending baseline is not accepted monitoring coverage;
 - issuer/protocol reach is not platform-policy coverage;
 - regulatory action pages are not regulatory-register coverage;
-- a generic issuer or product page is not function-level market-access coverage;
+- generic issuer/product pages are not function-level market-access coverage;
 - zero coverage for a required domain is a valid audit result and must not be filled by inference;
-- PR #322 expands reserve and redemption sources;
 - PR #323 expands lifecycle, regulatory, and EU market-access source/schema coverage;
 - PR #324 activates bounded scheduled read-only operation;
 - monitoring output remains private candidate material until reviewed.
@@ -234,14 +271,14 @@ Fixed prohibitions:
 no canonical write
 no self-accepting baseline
 no automatic guide edit
-no automatic canonical PR
+no automatic canonical pull request
 no candidate publication
 no production deployment
 ```
 
-Scheduled operation in PR #324 must preserve `contents: read` and the existing no-write boundary.
+Scheduled operation in PR #324 must preserve read-only permissions and the existing no-write boundary.
 
-## 13. Unknown-value and placeholder governance
+## 13. Unknown-value governance
 
 Protected unresolved states include:
 
@@ -254,8 +291,6 @@ source_review_needed
 ```
 
 These states are not structural placeholders and must not be overwritten merely to satisfy completeness or comparison presentation.
-
-Structural placeholders such as TODO/TBD identity fields, fake URLs, fabricated dates, and placeholder identifiers are defects.
 
 ## 14. Statistics governance
 
@@ -274,7 +309,7 @@ Binding boundaries:
 - canonical Market Access Records remain distinct from monitoring observations and editorial research matrices;
 - Compare derives from reviewed canonical data and preserves unresolved states;
 - facet freshness derives from authoritative record families;
-- Change Timeline is a derived projection and does not replace source record families;
+- Change Timeline is derived and does not replace source record families;
 - public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds;
 - safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
 

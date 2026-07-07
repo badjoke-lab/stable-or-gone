@@ -18,13 +18,13 @@ const fail = (condition, message) => { if (!condition) failures.push(message); }
 
 const sourceIds = sources.map((row) => row.source_id);
 const baselineIds = (baselineSet.baselines ?? []).map((row) => row.source_id);
-fail(stablecoins.length === 100, `canonical monitoring synchronization boundary must contain exactly 100 stable assets, found ${stablecoins.length}`);
-fail(organizations.length === 94, `canonical monitoring synchronization boundary must contain exactly 94 organizations, found ${organizations.length}`);
-fail(relationships.length === 110, `canonical monitoring synchronization boundary must contain exactly 110 relationships, found ${relationships.length}`);
-fail(sources.length === 24, 'current monitoring configuration must contain 24 sources');
-fail(baselineSet.baselines?.length === 24, 'current monitoring configuration must contain 24 baselines');
-fail(new Set(sourceIds).size === 24, 'monitoring source IDs must be unique');
-fail(new Set(baselineIds).size === 24, 'monitoring baseline IDs must be unique');
+fail(stablecoins.length === 100, `canonical monitoring boundary must contain exactly 100 stable assets, found ${stablecoins.length}`);
+fail(organizations.length === 94, `canonical monitoring boundary must contain exactly 94 organizations, found ${organizations.length}`);
+fail(relationships.length === 110, `canonical monitoring boundary must contain exactly 110 relationships, found ${relationships.length}`);
+fail(sources.length === 30, `current monitoring configuration must contain 30 sources, found ${sources.length}`);
+fail(baselineSet.baselines?.length === 30, `current monitoring configuration must contain 30 baselines, found ${baselineSet.baselines?.length ?? 0}`);
+fail(new Set(sourceIds).size === 30, 'monitoring source IDs must be unique');
+fail(new Set(baselineIds).size === 30, 'monitoring baseline IDs must be unique');
 fail(JSON.stringify([...sourceIds].sort()) === JSON.stringify([...baselineIds].sort()), 'source and baseline IDs must match exactly');
 
 const canonicalIndex = {
@@ -51,4 +51,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring configuration valid: 24 pending sources synchronized against ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);
+console.log(`Current monitoring configuration valid: 30 pending sources synchronized against ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);
