@@ -47,13 +47,19 @@ const sourceProjection = report.sources
     organization_ids: sorted(row.organization_ids ?? []),
     source_families: sorted(row.source_families ?? []),
     signal_types: sorted(row.signal_types ?? []),
+    monitoring_scope: row.monitoring_scope ?? null,
   }))
+  .sort((a, b) => a.source_id.localeCompare(b.source_id));
+
+const scopeProjection = report.sources
+  .filter((row) => row.monitoring_scope)
+  .map((row) => ({ source_id: row.source_id, monitoring_scope: row.monitoring_scope }))
   .sort((a, b) => a.source_id.localeCompare(b.source_id));
 
 const uncoveredAssetIds = sorted(report.uncovered_stablecoin_ids ?? []);
 
 const output = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   sync_kind: 'monitoring_baseline_sync_observation',
   checkpoint_id: checkpoint.checkpoint_id,
   normalization_version: baselineSet.normalization_version,
@@ -77,11 +83,20 @@ const output = {
     accepted_asset_reach_count: report.summary.accepted_coverage_stablecoin_count,
     multi_family_asset_count: report.summary.multi_family_stablecoin_count,
   },
+  scoped_coverage: {
+    platform_policy_source_count: report.summary.platform_policy_source_count,
+    platform_service_state_source_count: report.summary.platform_service_state_source_count,
+    regulatory_register_source_count: report.summary.regulatory_register_source_count,
+    market_access_schema_capable_source_count: report.summary.market_access_schema_capable_source_count,
+    scoped_platform_count: report.summary.scoped_platform_count,
+    scoped_region_count: report.summary.scoped_region_count,
+  },
   source_family_counts: report.summary.source_family_counts,
   stablecoin_family_counts: report.summary.stablecoin_family_counts,
   asset_sync_sha256: digestJson(assetProjection),
   organization_sync_sha256: digestJson(organizationProjection),
   source_baseline_sync_sha256: digestJson(sourceProjection),
+  monitoring_scope_sha256: digestJson(scopeProjection),
   uncovered_asset_ids_sha256: digestJson(uncoveredAssetIds),
   source_allowlist_sha256: sha256(fs.readFileSync(path.join(root, sourcesPath))),
   baseline_file_sha256: sha256(fs.readFileSync(path.join(root, baselinesPath))),
@@ -107,6 +122,8 @@ console.log(JSON.stringify({
   canonical_counts: output.canonical_counts,
   source_baseline_sync: output.source_baseline_sync,
   coverage: output.coverage,
+  scoped_coverage: output.scoped_coverage,
   asset_sync_sha256: output.asset_sync_sha256,
   source_baseline_sync_sha256: output.source_baseline_sync_sha256,
+  monitoring_scope_sha256: output.monitoring_scope_sha256,
 }, null, 2));
