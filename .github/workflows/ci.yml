@@ -71,13 +71,17 @@ jobs:
         run: node scripts/build-stats.mjs
       - name: Validate deterministic statistics
         run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+      - name: Validate immutable statistics history
+        run: node scripts/validate-stats-history.mjs
       - name: Upload deterministic statistics artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: stats-current-${{ github.run_id }}
           if-no-files-found: warn
-          path: artifacts/stats-current.json
+          path: |
+            artifacts/stats-current.json
+            artifacts/stats-history-validation.json
       - name: Validate counts, manifest, version, and provenance integrity
         run: npm run validate:release-integrity
       - name: Validate reproducible build contract

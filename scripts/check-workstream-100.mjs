@@ -4,11 +4,12 @@ import './validate-current-final-eight.mjs';
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 const roadmap = read('docs/roadmap.md');
-const amendment = read('docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md');
+const amendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-activation.md');
 const statsSpec = read('docs/stats-spec.md');
-const statsWorkflow = read('.github/workflows/deterministic-statistics.yml');
-const statsBuilder = read('scripts/build-stats.mjs');
-const statsValidator = read('scripts/validate-stats.mjs');
+const historySpec = read('docs/stats-history-spec.md');
+const historyWorkflow = read('.github/workflows/immutable-statistics-history.yml');
+const historyValidator = read('scripts/validate-stats-history.mjs');
+const history = JSON.parse(read('data/stats-history.json'));
 const releaseBaseline = JSON.parse(read('docs/migration/registry-release-integrity-baseline.json'));
 const checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
 const historical321 = JSON.parse(read('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json'));
@@ -20,20 +21,25 @@ const requireText = (body, text, file) => {
   if (!body.includes(text)) failures.push(`${file}: missing ${text}`);
 };
 
-requireText(roadmap, 'PR #324 bounded scheduled read-only monitoring: complete', 'roadmap');
-requireText(roadmap, 'Current item: PR #325 deterministic statistics generator and validator', 'roadmap');
-requireText(roadmap, 'Next item: PR #326 immutable checkpoint history', 'roadmap');
+requireText(roadmap, 'PR #325 deterministic statistics generator and validator: complete', 'roadmap');
+requireText(roadmap, 'Current item: PR #326 immutable checkpoint history', 'roadmap');
+requireText(roadmap, 'Next item: PR #327 /stats/ foundation', 'roadmap');
 requireText(roadmap, 'Phase D — statistics implementation — active', 'roadmap');
-requireText(amendment, 'PR #325 deterministic statistics generator and validator: active', 'PR #325 amendment');
-requireText(amendment, 'PR #326 immutable checkpoint history: next', 'PR #325 amendment');
-requireText(statsSpec, 'All statistics are derived from reviewed canonical repository data at build time.', 'stats spec');
-requireText(statsSpec, 'scripts/build-stats.mjs', 'stats spec');
-requireText(statsSpec, 'scripts/validate-stats.mjs', 'stats spec');
-requireText(statsWorkflow, 'contents: read', 'stats workflow');
-requireText(statsWorkflow, 'node scripts/build-stats.mjs', 'stats workflow');
-requireText(statsWorkflow, 'node scripts/validate-stats.mjs', 'stats workflow');
-requireText(statsBuilder, "artifacts/stats-current.json", 'stats builder');
-requireText(statsValidator, 'same inputs must generate byte-equivalent statistics models', 'stats validator');
+requireText(amendment, 'PR #326 immutable checkpoint history: active', 'PR #326 amendment');
+requireText(amendment, 'PR #327 /stats/ foundation: next', 'PR #326 amendment');
+requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
+requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
+requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
+requireText(historyWorkflow, 'contents: read', 'history workflow');
+requireText(historyWorkflow, 'fetch-depth: 0', 'history workflow');
+requireText(historyWorkflow, 'SOG_STATS_HISTORY_BASE_REF', 'history workflow');
+requireText(historyValidator, 'historical snapshot rewritten or reordered', 'history validator');
+
+if (history.schema_version !== '1.0') failures.push('stats history schema version must be 1.0');
+if (history.checkpoint_policy !== 'append_only_reviewed_pr') failures.push('stats history policy mismatch');
+if (history.snapshots?.length !== 1) failures.push('PR #326 must establish exactly one initial history snapshot');
+if (history.snapshots?.[0]?.asset_count !== 100) failures.push('initial stats history snapshot must be the 100-asset checkpoint');
+if (history.snapshots?.[0]?.checkpoint_id !== checkpoint.checkpoint_id) failures.push('initial stats history checkpoint ID mismatch');
 
 if (releaseBaseline.status !== 'current') failures.push('release baseline must be current');
 if (releaseBaseline.expected_v2_counts?.stablecoins !== 100) failures.push('release baseline must protect 100 assets');
@@ -71,4 +77,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #324 complete, PR #325 active, PR #326 next.');
+console.log('Workstream valid: PR #325 complete, PR #326 active, PR #327 next.');

@@ -27,6 +27,9 @@ PR #323 merge checkpoint:
 PR #324 merge checkpoint:
 f4d54293862168356f8314d8b6f0d79004873dcf
 
+PR #325 merge checkpoint:
+8f0b9dcf8a22e74f5f00b0b3f41952f572f546f1
+
 Canonical stable assets: 100
 Organizations: 94
 Relationships: 110
@@ -45,10 +48,11 @@ PR #321 100-asset monitoring baseline synchronization: complete
 PR #322 reserve and redemption source expansion: complete
 PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete
 PR #324 bounded scheduled read-only monitoring: complete
+PR #325 deterministic statistics generator and validator: complete
 
 Active workstream: statistics implementation
-Current item: PR #325 deterministic statistics generator and validator
-Next item: PR #326 immutable checkpoint history
+Current item: PR #326 immutable checkpoint history
+Next item: PR #327 /stats/ foundation
 ```
 
 ## Current numbering authority
@@ -57,11 +61,12 @@ Next item: PR #326 immutable checkpoint history
 docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
 docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
 docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md
+docs/roadmap-amendments/2026-07-08-pr326-history-activation.md
 ```
 
 This roadmap and active amendments supersede older numeric labels or stale current-position wording in subordinate plans.
 
-## Completed sequence through PR #324
+## Completed sequence through PR #325
 
 ```text
 PR #296  resume core workstream and synchronize repository authority
@@ -92,6 +97,7 @@ PR #321  100-asset monitoring baseline synchronization
 PR #322  reserve and redemption source expansion
 PR #323  lifecycle, regulatory, and EU market-access source/schema expansion
 PR #324  bounded scheduled read-only monitoring
+PR #325  deterministic statistics generator and validator
 ```
 
 ## Audited 100-asset checkpoint
@@ -263,24 +269,25 @@ Monitoring output remains private artifact material. Monitoring may observe, com
 
 ## Phase D — statistics implementation — active
 
-Binding specification:
+Binding specifications:
 
 ```text
 docs/stats-spec.md
+docs/stats-history-spec.md
 ```
 
 ```text
-PR #325 deterministic statistics generator and validator — active
-PR #326 immutable checkpoint history — next
-PR #327 /stats/ foundation
+PR #325 deterministic statistics generator and validator — complete
+PR #326 immutable checkpoint history — active
+PR #327 /stats/ foundation — next
 PR #328 historical, deployment, organization, and data-quality statistics
 ```
 
-### PR #325 active contract
+### PR #325 deterministic generator contract — complete
 
 PR #325 derives statistics only from reviewed canonical Registry v2 and Registry v3 inputs.
 
-Required outputs and checks:
+Implemented outputs and checks:
 
 ```text
 canonical input loader driven by registry manifests
@@ -293,9 +300,39 @@ unknown values preserved
 candidate/monitoring/editorial/private inputs excluded
 live market metrics excluded
 same inputs produce byte-equivalent model output
+lifecycle transition/status parity
 ```
 
-PR #325 does not publish `/data/stats.json`, create or mutate immutable `stats-history.json` checkpoints, or implement `/stats/` UI.
+PR #325 did not publish `/data/stats.json`, create immutable history checkpoints, or implement `/stats/` UI.
+
+### PR #326 immutable checkpoint history — active
+
+PR #326 creates the first reviewed immutable statistics history checkpoint at the audited 100-asset boundary.
+
+Binding source:
+
+```text
+data/stats-history.json
+```
+
+Required contract:
+
+```text
+append-only reviewed checkpoint history
+first reviewed snapshot at 100 assets
+unique checkpoint_id
+unique asset_count checkpoint
+strictly increasing asset_count order
+non-decreasing recorded_at order
+input digest SHA-256
+stats-model SHA-256
+snapshot SHA-256
+current deterministic stats/history parity
+base-branch historical prefix immutability
+no automatic append on build
+```
+
+PR #326 does not reconstruct unaudited earlier checkpoints, does not change PR #325 statistics semantics, and does not implement `/stats/` UI.
 
 Statistics must not become live price, market-cap, APY, yield ranking, safety, transparency, or risk rankings.
 
@@ -371,6 +408,8 @@ PR #349+ natural-language filter translation only after separate approval
 - Unknown values remain unknown unless reviewed evidence supports a value.
 - Candidate, monitoring, discovery, stale-state, editorial-research, and private material remain outside canonical statistics inputs.
 - Historical monitoring snapshots remain immutable.
+- Statistics history snapshots are append-only reviewed checkpoints.
+- Existing history snapshots must remain an exact prefix during normal append PRs.
 - Monitoring executions remain read-only and never update their own accepted baseline.
 - Registered source reach is not accepted monitoring coverage.
 - Issuer/protocol reach is not platform-policy coverage.
@@ -387,9 +426,9 @@ PR #349+ natural-language filter translation only after separate approval
 ## Immediate next items
 
 ```text
-1. Complete PR #325 deterministic statistics generator and validator.
-2. Start PR #326 immutable checkpoint history.
-3. Continue statistics through PR #328.
+1. Complete PR #326 immutable checkpoint history.
+2. Start PR #327 /stats/ foundation.
+3. Complete statistics implementation through PR #328.
 4. Continue candidate audit and controlled growth in PR #329-#334.
 5. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
 ```

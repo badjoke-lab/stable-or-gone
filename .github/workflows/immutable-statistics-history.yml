@@ -1,0 +1,53 @@
+name: Immutable statistics history
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+      - name: Validate Registry v3 deployment view
+        run: npm run validate:deployments-v3
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
+      - name: Validate deterministic statistics
+        run: node scripts/validate-stats.mjs
+      - name: Generate current checkpoint snapshot candidate
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          node scripts/stats/build-history-snapshot.mjs > artifacts/stats-history-current-snapshot.json
+      - name: Validate immutable statistics history
+        shell: bash
+        run: |
+          BASE_REF="origin/${GITHUB_BASE_REF:-main}"
+          SOG_STATS_HISTORY_BASE_REF="$BASE_REF" node scripts/validate-stats-history.mjs
+      - name: Upload history validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: immutable-statistics-history-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            artifacts/stats-history-current-snapshot.json
+            artifacts/stats-history-validation.json
