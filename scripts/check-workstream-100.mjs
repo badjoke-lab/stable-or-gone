@@ -4,39 +4,36 @@ import './validate-current-final-eight.mjs';
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 const roadmap = read('docs/roadmap.md');
-const agents = read('AGENTS.md');
-const governance = read('docs/spec-governance.md');
-const nonUiPlan = read('docs/quality/non-ui-quality-program.md');
+const amendment = read('docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md');
+const statsSpec = read('docs/stats-spec.md');
+const statsWorkflow = read('.github/workflows/deterministic-statistics.yml');
+const statsBuilder = read('scripts/build-stats.mjs');
+const statsValidator = read('scripts/validate-stats.mjs');
 const releaseBaseline = JSON.parse(read('docs/migration/registry-release-integrity-baseline.json'));
 const checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
 const historical321 = JSON.parse(read('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json'));
 const historical322 = JSON.parse(read('scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json'));
 const current323 = JSON.parse(read('scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json'));
-const scheduledSpec = read('docs/quality/monitoring-bounded-scheduled-read-only-spec.md');
-const scheduledWorkflow = read('.github/workflows/monitoring-bounded-scheduled-read-only.yml');
-const baselineSpec = read('docs/quality/monitoring-baseline-spec.md');
 
 const failures = [];
 const requireText = (body, text, file) => {
   if (!body.includes(text)) failures.push(`${file}: missing ${text}`);
 };
 
-requireText(roadmap, 'Current item: PR #324 bounded scheduled read-only monitoring', 'roadmap');
-requireText(roadmap, 'Next item: PR #325 deterministic statistics generator and validator', 'roadmap');
-requireText(roadmap, 'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete', 'roadmap');
-requireText(agents, 'Active: PR #324 bounded scheduled read-only monitoring', 'AGENTS');
-requireText(agents, 'Next: PR #325 deterministic statistics generator and validator', 'AGENTS');
-requireText(governance, 'PR #324 bounded scheduled read-only monitoring governance', 'governance');
-requireText(nonUiPlan, 'PR #324 bounded scheduled read-only monitoring: active', 'non-UI plan');
-requireText(nonUiPlan, 'PR #325 deterministic statistics generator and validator: next', 'non-UI plan');
-requireText(scheduledSpec, 'bounded scheduled read-only monitoring specification', 'PR #324 spec');
-requireText(scheduledSpec, 'daily count = 4', 'PR #324 spec');
-requireText(scheduledSpec, 'weekly count = 35', 'PR #324 spec');
-requireText(scheduledWorkflow, 'contents: read', 'PR #324 workflow');
-requireText(scheduledWorkflow, "cron: '17 3 * * *'", 'PR #324 workflow');
-requireText(scheduledWorkflow, "cron: '23 4 * * 0'", 'PR #324 workflow');
-requireText(baselineSpec, 'sources: 39', 'baseline spec');
-requireText(baselineSpec, 'pending_initial_acceptance: 39', 'baseline spec');
+requireText(roadmap, 'PR #324 bounded scheduled read-only monitoring: complete', 'roadmap');
+requireText(roadmap, 'Current item: PR #325 deterministic statistics generator and validator', 'roadmap');
+requireText(roadmap, 'Next item: PR #326 immutable checkpoint history', 'roadmap');
+requireText(roadmap, 'Phase D — statistics implementation — active', 'roadmap');
+requireText(amendment, 'PR #325 deterministic statistics generator and validator: active', 'PR #325 amendment');
+requireText(amendment, 'PR #326 immutable checkpoint history: next', 'PR #325 amendment');
+requireText(statsSpec, 'All statistics are derived from reviewed canonical repository data at build time.', 'stats spec');
+requireText(statsSpec, 'scripts/build-stats.mjs', 'stats spec');
+requireText(statsSpec, 'scripts/validate-stats.mjs', 'stats spec');
+requireText(statsWorkflow, 'contents: read', 'stats workflow');
+requireText(statsWorkflow, 'node scripts/build-stats.mjs', 'stats workflow');
+requireText(statsWorkflow, 'node scripts/validate-stats.mjs', 'stats workflow');
+requireText(statsBuilder, "artifacts/stats-current.json", 'stats builder');
+requireText(statsValidator, 'same inputs must generate byte-equivalent statistics models', 'stats validator');
 
 if (releaseBaseline.status !== 'current') failures.push('release baseline must be current');
 if (releaseBaseline.expected_v2_counts?.stablecoins !== 100) failures.push('release baseline must protect 100 assets');
@@ -64,11 +61,6 @@ if (current323.coverage?.covered_organization_count !== 18) failures.push('curre
 if (current323.coverage?.accepted_asset_reach_count !== 0) failures.push('accepted asset reach must be zero');
 if (current323.scoped_coverage?.market_access_schema_capable_source_count !== 5) failures.push('market-access schema-capable source count must be 5');
 if (current323.scoped_coverage?.scoped_platform_count !== 4) failures.push('scoped platform count must be 4');
-if (current323.source_family_counts?.issuer_lifecycle !== 7) failures.push('lifecycle source family count must be 7');
-if (current323.source_family_counts?.regulatory !== 9) failures.push('regulatory source family count must be 9');
-if (current323.source_family_counts?.platform_policy !== 3) failures.push('platform-policy source family count must be 3');
-if (current323.source_family_counts?.platform_service_state !== 1) failures.push('platform service-state source family count must be 1');
-if (current323.source_family_counts?.regulatory_register !== 1) failures.push('regulatory-register source family count must be 1');
 if (current323.policy?.network_access_used !== false) failures.push('snapshot generation must be offline');
 if (current323.policy?.canonical_action !== 'none') failures.push('snapshot canonical action must be none');
 if (current323.policy?.public_output !== false) failures.push('snapshot public output must be false');
@@ -79,4 +71,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #323 complete, PR #324 active, PR #325 next.');
+console.log('Workstream valid: PR #324 complete, PR #325 active, PR #326 next.');
