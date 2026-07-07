@@ -221,7 +221,7 @@ for (const phrase of [
   'reject',
   'repository_baseline_written: false',
   'The proposal is not self-applying',
-  'must not modify the repository baseline',
+  'It does not modify the repository baseline',
   'No production deployment required'
 ]) {
   if (!spec.includes(phrase)) fail(`PR #236 specification missing: ${phrase}`);
