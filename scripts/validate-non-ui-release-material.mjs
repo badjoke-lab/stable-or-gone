@@ -9,7 +9,7 @@ const updates = readJson('data/registry-updates.json');
 const readme = read('README.md');
 const release = read('docs/releases/100-asset-checkpoint-2026-07-06.md');
 const roadmap = read('docs/roadmap.md');
-const agents = read('AGENTS.md');
+const amendment = read('docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md');
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const requireText = (body, text, label) => check(body.includes(text), `${label}: missing ${text}`);
@@ -54,17 +54,15 @@ for (const marker of [
   'PR #321 100-asset monitoring baseline synchronization: complete',
   'PR #322 reserve and redemption source expansion: complete',
   'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete',
-  'Current item: PR #324 bounded scheduled read-only monitoring',
-  'Next item: PR #325 deterministic statistics generator and validator'
+  'PR #324 bounded scheduled read-only monitoring: complete',
+  'Current item: PR #325 deterministic statistics generator and validator',
+  'Next item: PR #326 immutable checkpoint history'
 ]) requireText(roadmap, marker, 'docs/roadmap.md');
 for (const marker of [
-  'PR #320 non-UI release material: complete',
-  'PR #321 100-asset monitoring baseline synchronization: complete',
-  'PR #322 reserve and redemption source expansion: complete',
-  'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete',
-  'Active: PR #324 bounded scheduled read-only monitoring',
-  'Next: PR #325 deterministic statistics generator and validator'
-]) requireText(agents, marker, 'AGENTS.md');
+  'PR #324 bounded scheduled read-only monitoring: complete',
+  'PR #325 deterministic statistics generator and validator: active',
+  'PR #326 immutable checkpoint history: next'
+]) requireText(amendment, marker, 'PR #325 roadmap amendment');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -81,6 +79,6 @@ console.log(JSON.stringify({
   evidence: checkpoint.v2_groups.evidence.record_count,
   canonical_file_count: checkpoint.canonical_file_count,
   update_id: updateId,
-  active_roadmap_item: 'PR #324 bounded scheduled read-only monitoring',
-  next_roadmap_item: 'PR #325 deterministic statistics generator and validator'
+  active_roadmap_item: 'PR #325 deterministic statistics generator and validator',
+  next_roadmap_item: 'PR #326 immutable checkpoint history'
 }, null, 2));
