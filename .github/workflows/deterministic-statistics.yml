@@ -1,0 +1,41 @@
+name: Deterministic statistics
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+      - name: Validate Registry v3 deployment view
+        run: npm run validate:deployments-v3
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
+      - name: Generate statistics
+        run: npm run stats:build
+      - name: Validate statistics
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json npm run validate:stats
+      - name: Upload generated statistics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deterministic-statistics-${{ github.run_id }}
+          path: artifacts/stats-current.json
+          if-no-files-found: error
