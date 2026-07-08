@@ -1,0 +1,25 @@
+[
+  {
+    "candidate_id": "sog_cand_000102",
+    "proposed_stablecoin_id": "sog_st_1gbp",
+    "proposed_slug": "poundtoken",
+    "canonical_name": "poundtoken",
+    "symbol": "1GBP",
+    "aliases": ["1GBP", "poundtoken"],
+    "proposed_status": "unknown",
+    "duplicate_review": {
+      "name_match": false,
+      "slug_match": false,
+      "symbol_match": false,
+      "id_match": false,
+      "decision": "correct_pr329_misidentification_from_gbpt_to_1gbp"
+    },
+    "blocking_unknowns": [
+      "current_issuer_service_state",
+      "current_mint_and_redemption_availability",
+      "current_reserve_and_assurance_reporting",
+      "exact_launch_day"
+    ],
+    "notes": "Promotion review corrected the PR #329 audit-stage symbol and identity from GBPT to the verified Ethereum token poundtoken (1GBP). Current issuer service state remains unresolved and is not inferred from legacy product metadata or a still-existing token contract."
+  }
+]
