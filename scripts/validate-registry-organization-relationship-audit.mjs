@@ -9,13 +9,15 @@ execFileSync(process.execPath, ['scripts/audit-registry-organization-relationshi
 });
 
 const report = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
+const expectedCounts = checkpoint.expected_counts ?? {};
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
 expect(report.audit_id === 'sog_registry_100_organization_relationship_pr298', `unexpected audit_id ${report.audit_id}`);
-expect(report.audited_counts?.stable_assets === 100, `expected 100 stable assets, got ${report.audited_counts?.stable_assets}`);
-expect(report.audited_counts?.organizations === 94, `expected 94 organizations, got ${report.audited_counts?.organizations}`);
-expect(report.audited_counts?.relationships === 110, `expected 110 relationships, got ${report.audited_counts?.relationships}`);
+expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} stable assets from current checkpoint, got ${report.audited_counts?.stable_assets}`);
+expect(report.audited_counts?.organizations === expectedCounts.organizations, `expected ${expectedCounts.organizations} organizations from current checkpoint, got ${report.audited_counts?.organizations}`);
+expect(report.audited_counts?.relationships === expectedCounts.relationships, `expected ${expectedCounts.relationships} relationships from current checkpoint, got ${report.audited_counts?.relationships}`);
 expect((report.findings?.critical ?? []).length === 0, `critical findings remain: ${(report.findings?.critical ?? []).length}`);
 expect((report.primary_display?.invalid_selections ?? []).length === 0, 'invalid primary-display selections remain');
 expect((report.primary_display?.ambiguous_selections ?? []).length === 0, 'ambiguous primary-display selections remain');
@@ -41,4 +43,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Organization and relationship audit validation passed: 94 organizations, 110 relationships, deterministic primary display, and bounded unresolved source/end-date queues.');
+console.log(`Organization and relationship audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${report.audited_counts.organizations} organizations, ${report.audited_counts.relationships} relationships, deterministic primary display, and bounded unresolved source/end-date queues.`);
