@@ -22,9 +22,11 @@ const deployments = group('deployments');
 const promotions = read('data/candidate-promotions-batch-21.json');
 const components = read('data/batch-t-components.json');
 const income = read('data/batch-t-income.json');
+const currentCheckpoint = read('docs/migration/current-canonical-checkpoint.json');
 const ids = ['sog_st_eurm', 'sog_st_usd3'];
 
-check(stablecoins.length === 100, `expected 100 stablecoins, found ${stablecoins.length}`);
+check(Number.isInteger(currentCheckpoint.asset_count) && currentCheckpoint.asset_count >= 100, 'current checkpoint must preserve at least the completed 100-asset boundary');
+check(stablecoins.length === currentCheckpoint.asset_count, `canonical stablecoin count must match current checkpoint ${currentCheckpoint.asset_count}, found ${stablecoins.length}`);
 check(read('data/stablecoins-batch-t.json').length === 2, 'Batch T must contain two stablecoins');
 check(read('data/organizations-batch-t.json').length === 1, 'Batch T must add only the new Reserve Protocol organization; Mento must reuse the existing canonical identity');
 check(read('data/relationships-batch-t.json').length === 2, 'Batch T must contain two relationships');
@@ -65,4 +67,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log('Batch 21 Growth D valid: Mento Euro and Web 3 Dollar promoted; canonical count is 100.');
+console.log(`Batch 21 Growth D valid: Mento Euro and Web 3 Dollar remain promoted; canonical count matches the current ${currentCheckpoint.asset_count}-asset checkpoint.`);
