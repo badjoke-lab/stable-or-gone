@@ -24,9 +24,9 @@ const sourceTypesByCategory = {
   ],
   official_documentation_or_product: [
     'developer_docs', 'issuer_or_network_page', 'issuer_or_product_page', 'issuer_page',
-    'issuer_support', 'official_application', 'official_documentation', 'official_protocol_guide',
-    'official_protocol_roadmap', 'official_website', 'product_page', 'protocol_app',
-    'protocol_docs', 'protocol_or_reserve_page', 'protocol_page'
+    'issuer_support', 'official_application', 'official_developer_documentation', 'official_documentation',
+    'official_product_page', 'official_protocol_guide', 'official_protocol_roadmap', 'official_website',
+    'product_page', 'protocol_app', 'protocol_docs', 'protocol_or_reserve_page', 'protocol_page'
   ],
   governance_record: [
     'governance_proposal', 'governance_reference', 'official_governance_documentation',
@@ -35,22 +35,25 @@ const sourceTypesByCategory = {
   legal_or_terms: [
     'legal_terms', 'network_terms_or_docs', 'official_terms', 'risk_disclosure', 'terms_of_service'
   ],
-  regulatory_or_court: ['regulatory_notice', 'regulatory_source'],
+  regulatory_or_court: ['regulator_register', 'regulatory_notice', 'regulatory_source'],
   reserve_or_assurance_report: [
     'official_attestation', 'official_report', 'reserve_report', 'reserve_report_index',
     'reserve_transparency_page'
   ],
   technical_or_repository: [
-    'code_repository', 'official_repository', 'official_whitepaper', 'repository',
-    'repository_index', 'whitepaper'
+    'code_repository', 'historical_official_document_reference', 'official_repository', 'official_whitepaper',
+    'repository', 'repository_index', 'whitepaper'
   ],
-  onchain_record_or_explorer: ['explorer', 'onchain_contract', 'onchain_explorer', 'onchain_transaction'],
+  onchain_record_or_explorer: [
+    'blockchain_explorer', 'explorer', 'onchain_contract', 'onchain_explorer', 'onchain_transaction'
+  ],
   independent_news_or_analysis: ['news_analysis', 'news_article', 'news_report', 'wire_service'],
   research_or_security_report: [
     'investigator_report', 'research_paper', 'research_report', 'security_analysis', 'security_audit'
   ],
   archive_or_historical_record: [
-    'archive_capture', 'archived_official_site', 'contemporaneous_record', 'registry_snapshot'
+    'archive_capture', 'archived_official_site', 'contemporaneous_record', 'registry_snapshot',
+    'website_state_observation'
   ],
   data_or_market_reference: [
     'analytics_dashboard', 'database_reference', 'market_data_page', 'market_reference'
@@ -76,25 +79,26 @@ export const evidenceProvenances = [
 
 const sourceTypesByProvenance = {
   subject_controlled: [
-    'developer_docs', 'exchange_notice', 'issuer_contract_event', 'issuer_or_network_page',
-    'issuer_or_product_page', 'issuer_page', 'issuer_statement', 'issuer_support', 'legal_terms',
-    'network_terms_or_docs', 'official_application', 'official_blog', 'official_documentation',
-    'official_ecosystem_announcement', 'official_ecosystem_publication', 'official_incident_report',
-    'official_launch_announcement', 'official_postmortem', 'official_protocol_announcement',
+    'developer_docs', 'exchange_notice', 'historical_official_document_reference', 'issuer_contract_event',
+    'issuer_or_network_page', 'issuer_or_product_page', 'issuer_page', 'issuer_statement', 'issuer_support',
+    'legal_terms', 'network_terms_or_docs', 'official_application', 'official_blog',
+    'official_developer_documentation', 'official_documentation', 'official_ecosystem_announcement',
+    'official_ecosystem_publication', 'official_incident_report', 'official_launch_announcement',
+    'official_postmortem', 'official_product_page', 'official_protocol_announcement',
     'official_protocol_guide', 'official_protocol_milestone', 'official_protocol_roadmap',
     'official_protocol_update', 'official_social', 'official_social_statement', 'official_statement',
     'official_terms', 'official_website', 'official_whitepaper', 'product_page', 'protocol_app',
     'protocol_docs', 'protocol_or_reserve_page', 'protocol_page', 'protocol_postmortem',
-    'reserve_or_governance_page', 'reserve_transparency_page', 'risk_disclosure',
-    'terms_of_service', 'whitepaper'
+    'reserve_or_governance_page', 'reserve_transparency_page', 'risk_disclosure', 'terms_of_service',
+    'website_state_observation', 'whitepaper'
   ],
-  government_or_legal: ['regulatory_notice', 'regulatory_source'],
+  government_or_legal: ['regulator_register', 'regulatory_notice', 'regulatory_source'],
   assurance_or_financial_report: [
     'official_attestation', 'official_report', 'reserve_report', 'reserve_report_index'
   ],
   technical_primary: [
-    'code_repository', 'explorer', 'official_repository', 'onchain_contract', 'onchain_explorer',
-    'onchain_transaction', 'repository', 'repository_index'
+    'blockchain_explorer', 'code_repository', 'explorer', 'official_repository', 'onchain_contract',
+    'onchain_explorer', 'onchain_transaction', 'repository', 'repository_index'
   ],
   governance_primary: [
     'governance_proposal', 'governance_reference', 'official_governance_documentation',
