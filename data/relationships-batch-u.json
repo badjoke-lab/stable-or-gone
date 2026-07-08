@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_eure_monerium_batch_u","stablecoin_id":"sog_st_eure","organization_id":"sog_issuer_monerium","role":"legal_issuer","start_date":null,"end_date":null,"status":"active","evidence_ids":["sog_src_eure_product_batch_u","sog_src_eure_regulator_batch_u"],"notes":"Monerium issues EURe as regulated electronic money and provides issuance and redemption infrastructure."},
+  {"id":"sog_rel_1gbp_blackfridge_batch_u","stablecoin_id":"sog_st_1gbp","organization_id":"sog_issuer_blackfridge","role":"legal_issuer","start_date":null,"end_date":null,"status":"unknown","evidence_ids":["sog_src_1gbp_whitepaper_metadata_batch_u","sog_src_1gbp_etherscan_batch_u"],"notes":"Historical issuer relationship retained; current issuer operation and redemption service state remain unresolved."}
+]
