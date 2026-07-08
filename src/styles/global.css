@@ -110,6 +110,58 @@ th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spa
 @media (max-width: 620px) {
   .support-callout { display: grid; gap: 16px; padding: 17px; }
   .support-callout-action { width: 100%; }
+
+  .longform-definition-table {
+    overflow: hidden;
+  }
+
+  .longform-definition-table table,
+  .longform-definition-table table[data-mobile-table="scroll-preserve"] {
+    min-width: 0;
+    font-size: 13px;
+  }
+
+  .longform-definition-table thead {
+    display: none;
+  }
+
+  .longform-definition-table tbody,
+  .longform-definition-table tr,
+  .longform-definition-table th,
+  .longform-definition-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .longform-definition-table tr {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .longform-definition-table tr:last-child {
+    border-bottom: 0;
+  }
+
+  .longform-definition-table th,
+  .longform-definition-table td {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .longform-definition-table th {
+    margin-bottom: 6px;
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    overflow-wrap: anywhere;
+  }
+
+  .longform-definition-table td {
+    color: var(--muted);
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
 }
 @media (max-width: 560px) {
   .wrap { width: min(100% - 20px, 1120px); }
