@@ -5,6 +5,8 @@ import { evidenceSourceAliasCount } from '../config/evidence-source-identities.m
 
 const jsonPath = 'data/generated/registry-evidence-integrity-audit.json';
 const baseline = loadRegistryV2Baseline(process.cwd());
+const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
+const checkpointCounts = checkpoint.expected_counts ?? {};
 const expectedEvidence = baseline.minimum_counts?.evidence;
 const expectedRelations = baseline.minimum_counts?.evidence_relations ?? expectedEvidence;
 const expectedPublicSources = expectedEvidence - evidenceSourceAliasCount;
@@ -21,9 +23,9 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
 expect(report.audit_id === 'sog_registry_501_evidence_integrity_pr299', `unexpected audit_id ${report.audit_id}`);
-expect(report.audited_counts?.stable_assets === 100, `expected 100 stable assets, got ${report.audited_counts?.stable_assets}`);
-expect(report.audited_counts?.organizations === 94, `expected 94 organizations, got ${report.audited_counts?.organizations}`);
-expect(report.audited_counts?.events === 172, `expected 172 events, got ${report.audited_counts?.events}`);
+expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} stable assets, got ${report.audited_counts?.stable_assets}`);
+expect(report.audited_counts?.organizations === checkpointCounts.organizations, `expected ${checkpointCounts.organizations} organizations, got ${report.audited_counts?.organizations}`);
+expect(report.audited_counts?.events === checkpointCounts.events, `expected ${checkpointCounts.events} events, got ${report.audited_counts?.events}`);
 expect(report.audited_counts?.canonical_evidence_records === expectedEvidence, `expected ${expectedEvidence} evidence records, got ${report.audited_counts?.canonical_evidence_records}`);
 expect(report.audited_counts?.public_source_identities === expectedPublicSources, `expected ${expectedPublicSources} public source identities, got ${report.audited_counts?.public_source_identities}`);
 expect(report.audited_counts?.evidence_relations === expectedRelations, `expected ${expectedRelations} evidence relations, got ${report.audited_counts?.evidence_relations}`);
@@ -51,4 +53,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Evidence integrity audit validation passed: ${expectedEvidence} canonical records, ${expectedPublicSources} public identities, ${expectedRelations} relations, 0 structural gaps, archive queue fixed at ${expectedArchiveNotRecorded} not-recorded records.`);
+console.log(`Evidence integrity audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${expectedEvidence} canonical records, ${expectedPublicSources} public identities, ${expectedRelations} relations, 0 structural gaps, archive queue fixed at ${expectedArchiveNotRecorded} not-recorded records.`);
