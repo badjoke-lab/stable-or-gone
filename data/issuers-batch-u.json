@@ -1,0 +1,28 @@
+[
+  {
+    "id":"sog_issuer_monerium",
+    "slug":"monerium",
+    "name":"Monerium hf.",
+    "issuer_type":"company",
+    "jurisdiction":"Iceland / European Economic Area",
+    "related_stablecoins":["monerium-eure"],
+    "official_url":"https://monerium.com/",
+    "summary":"Electronic money institution issuing EURe and providing regulated e-money, wallet IBAN, issuance, redemption, and payment infrastructure.",
+    "confidence":"high",
+    "last_verified_at":"2026-07-08",
+    "notes":"Batch U compatibility row. Canonical organization identity is sog_issuer_monerium."
+  },
+  {
+    "id":"sog_issuer_blackfridge",
+    "slug":"blackfridge",
+    "name":"Blackfridge SC Limited",
+    "issuer_type":"company",
+    "jurisdiction":"Isle of Man",
+    "related_stablecoins":["poundtoken"],
+    "official_url":null,
+    "summary":"Historical issuer identity associated with poundtoken (1GBP); current operating, redemption, reserve-reporting, and service status remain unresolved.",
+    "confidence":"medium",
+    "last_verified_at":"2026-07-08",
+    "notes":"Batch U compatibility row. No current official issuer URL is asserted. Canonical organization identity is sog_issuer_blackfridge."
+  }
+]
