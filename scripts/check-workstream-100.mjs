@@ -32,7 +32,7 @@ const requireText = (body, text, file) => {
 };
 
 requireText(roadmap, 'PR #325 deterministic statistics generator and validator: complete', 'roadmap');
-requireText(roadmap, 'Phase D — statistics implementation — active', 'roadmap');
+requireText(roadmap, 'Active workstream: statistics implementation', 'roadmap');
 requireText(historyAmendment, 'PR #326 immutable checkpoint history: active', 'PR #326 amendment');
 requireText(historyAmendment, 'PR #327 /stats/ foundation: next', 'PR #326 amendment');
 requireText(foundationAmendment, 'PR #326 immutable checkpoint history: complete', 'PR #327 amendment');
