@@ -69,9 +69,9 @@ for (const [device, viewport] of Object.entries(DEVICES)) {
       };
     };
 
-    const effectiveBackground = (element) => {
+    const resolveBackgroundLayers = (start) => {
       const layers = [];
-      let current = element;
+      let current = start;
       while (current instanceof HTMLElement) {
         const color = parseColor(getComputedStyle(current).backgroundColor);
         if (color && color.a > 0) layers.push(color);
@@ -81,6 +81,13 @@ for (const [device, viewport] of Object.entries(DEVICES)) {
       let result = layers.length ? layers[layers.length - 1] : { r: 6, g: 16, b: 24, a: 1 };
       for (let index = layers.length - 2; index >= 0; index -= 1) result = over(layers[index], result);
       return result;
+    };
+
+    const effectiveBackground = (element) => resolveBackgroundLayers(element);
+    const backgroundFromAncestors = (element) => resolveBackgroundLayers(element.parentElement);
+    const paintBackground = (element, behind) => {
+      const own = parseColor(getComputedStyle(element).backgroundColor);
+      return own && own.a > 0 ? over(own, behind) : behind;
     };
 
     const channel = (value) => {
@@ -119,8 +126,9 @@ for (const [device, viewport] of Object.entries(DEVICES)) {
       for (const fill of fills) {
         const track = fill.closest(pair.track) ?? fill.parentElement;
         if (!(track instanceof HTMLElement)) continue;
-        const fillColor = effectiveBackground(fill);
-        const trackColor = effectiveBackground(track);
+        const baseColor = backgroundFromAncestors(track);
+        const trackColor = paintBackground(track, baseColor);
+        const fillColor = paintBackground(fill, trackColor);
         graphicSamples.push({
           name: pair.name,
           ratio: Number(contrast(fillColor, trackColor).toFixed(2)),
