@@ -111,7 +111,7 @@
 .stats-bar-track span { display: block; height: 100%; background: var(--stats-bar); }
 .stats-bar-row p { margin: 6px 0 0; font-size: 0.78rem; color: var(--stats-muted); }
 
-.stats-table-wrap { overflow-x: auto; }
+.stats-table-wrap { overflow: auto; scrollbar-gutter: stable; }
 .stats-table-wrap table { width: 100%; border-collapse: collapse; min-width: 440px; }
 .stats-table-wrap caption { padding: 0 0 10px; text-align: left; font-size: 0.78rem; color: var(--stats-muted); }
 .stats-table-wrap th,
@@ -234,4 +234,44 @@
   .stats-year-row,
   .stats-chain-row { grid-template-columns: minmax(48px, auto) minmax(80px, 1fr) minmax(28px, auto); gap: 8px; }
   .stats-chain-row > div:first-child { min-width: 112px; }
+
+  .stats-table-wrap table:not(.stats-wide-table) {
+    min-width: 100%;
+    table-layout: fixed;
+  }
+
+  .stats-table-wrap table:not(.stats-wide-table) th:first-child {
+    width: 54%;
+    overflow-wrap: anywhere;
+  }
+
+  .stats-analysis-panel .stats-table-wrap,
+  .stats-year-list,
+  .stats-chain-list,
+  .stats-metric-list {
+    max-height: 30rem;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  .stats-table-wrap:has(.stats-wide-table)::before {
+    content: "Swipe horizontally to view all columns";
+    display: block;
+    padding: 0 0 8px;
+    color: var(--stats-muted);
+    font-size: 0.72rem;
+  }
+
+  .stats-wide-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--stats-panel);
+  }
+
+  .stats-wide-table thead th:first-child {
+    z-index: 2;
+    background: var(--stats-panel-2);
+  }
 }
