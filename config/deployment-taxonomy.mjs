@@ -11,7 +11,7 @@ export const publicDeploymentCategories = [
 
 const deploymentTypesByCategory = {
   issuer_or_institution_supported: [
-    'issuer_native_fiat_token', 'issuer_native_tokenized_fund_share', 'issuer_native_tokenized_note',
+    'issuer_native_fiat_token', 'issuer_native_token', 'issuer_native_tokenized_fund_share', 'issuer_native_tokenized_note',
     'issuer_or_network_supported_token', 'issuer_supported', 'issuer_supported_native_token',
     'issuer_supported_token', 'native_or_issuer_supported', 'erc20_or_issuer_supported', 'trust_issued_token'
   ],
