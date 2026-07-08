@@ -25,7 +25,7 @@ jobs:
       - name: Validate candidate controls
         run: npm run validate:candidates
       - name: Validate audited 100-asset checkpoint
-        run: node scripts/validate-audited-100-asset-checkpoint.mjs
+        run: node scripts/validate-audited-100-checkpoint.mjs
       - name: Validate PR 329 candidate audit
         run: node scripts/validate-next-growth-candidate-audit-pr329.mjs
       - name: Validate active workstream
