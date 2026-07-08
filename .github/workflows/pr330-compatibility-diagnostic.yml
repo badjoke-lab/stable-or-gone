@@ -1,0 +1,25 @@
+name: PR 330 compatibility diagnostic
+
+on:
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'docs/migration/**'
+      - 'scripts/validate-registry-v2-compat.mjs'
+      - '.github/workflows/pr330-compatibility-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - name: Validate Registry v2 compatibility
+        run: node scripts/validate-registry-v2-compat.mjs
