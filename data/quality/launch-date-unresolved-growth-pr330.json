@@ -1,0 +1,25 @@
+{
+  "schema_version":"1.0",
+  "recorded_at":"2026-07-08",
+  "source_review":"docs/roadmap-amendments/2026-07-08-pr330-growth-eure-1gbp-activation.md",
+  "records":[
+    {
+      "stablecoin_id":"sog_st_eure",
+      "category":"C",
+      "best_known_range":"current regulated availability verified by 2026-07-08; original launch day unresolved",
+      "reason_code":"current_availability_not_original_launch_day",
+      "review_note":"Current Monerium product and regulator sources verify active EURe issuance, redemption, reserve backing, and exact current contracts, but the reviewed sources do not establish the original first public issuance or redemption day.",
+      "last_reviewed":"2026-07-08",
+      "reviewed_sources":["https://monerium.com/eure/","https://cb.is/financial-supervision/regulated-activities/supervised-entities/","https://monerium.dev/docs/tokens"]
+    },
+    {
+      "stablecoin_id":"sog_st_1gbp",
+      "category":"C",
+      "best_known_range":"historical 2022 product documentation and verified Ethereum token identity; exact launch day unresolved",
+      "reason_code":"historical_product_identity_without_day_level_launch_boundary",
+      "review_note":"The Ethereum token identity is verified as poundtoken with symbol 1GBP and historical product documentation exists, but contract persistence and historical documentation do not establish the exact first public issuance or redemption day.",
+      "last_reviewed":"2026-07-08",
+      "reviewed_sources":["https://etherscan.io/token/0x86b4dbe5d203e634a12364c0e428fa242a3fba98","https://resources.poundtoken.io/wp-content/uploads/2022/04/Blackfridge-Whitepaper-March-2022_updated.pdf"]
+    }
+  ]
+}
