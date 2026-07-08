@@ -1,0 +1,26 @@
+[
+  {
+    "target_batch": "batch_023",
+    "original_planned_pr": 331,
+    "actual_target_pr": 332,
+    "reason": "PR #331 was used for the reviewed UI remediation workstream before the next growth PR opened. Candidate allocation is unchanged; only the executable PR number moves."
+  },
+  {
+    "target_batch": "batch_024",
+    "original_planned_pr": 332,
+    "actual_target_pr": 333,
+    "reason": "Sequential renumbering after the PR #331 UI remediation insertion."
+  },
+  {
+    "target_batch": "batch_025",
+    "original_planned_pr": 333,
+    "actual_target_pr": 334,
+    "reason": "Sequential renumbering after the PR #331 UI remediation insertion."
+  },
+  {
+    "target_batch": "batch_026",
+    "original_planned_pr": 334,
+    "actual_target_pr": 335,
+    "reason": "Sequential renumbering after the PR #331 UI remediation insertion."
+  }
+]
