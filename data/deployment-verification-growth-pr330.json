@@ -1,0 +1,28 @@
+{
+  "schema_version":"1.0",
+  "reviewed_at":"2026-07-08",
+  "source_review":"docs/roadmap-amendments/2026-07-08-pr330-growth-eure-1gbp-activation.md",
+  "status_ids":{
+    "verified":[
+      "sog_dep_eure_ethereum_batch_u",
+      "sog_dep_eure_polygon_batch_u",
+      "sog_dep_eure_gnosis_batch_u",
+      "sog_dep_eure_arbitrum_batch_u",
+      "sog_dep_eure_base_batch_u",
+      "sog_dep_eure_linea_batch_u"
+    ],
+    "identifier_recorded_unverified":["sog_dep_1gbp_ethereum_batch_u"],
+    "source_linked_no_identifier":[],
+    "review_needed":[],
+    "unknown":[],
+    "not_recorded":[]
+  },
+  "reviewed_records":[
+    {"id":"sog_dep_eure_ethereum_batch_u","identifier_type":"evm_contract","identifier":"0x39b8B6385416f4cA36a20319F70D28621895279D","source_url":"https://monerium.com/eure/"},
+    {"id":"sog_dep_eure_polygon_batch_u","identifier_type":"evm_contract","identifier":"0xE0aEa583266584DafBB3f9C3211d5588c73fEa8d","source_url":"https://monerium.com/eure/"},
+    {"id":"sog_dep_eure_gnosis_batch_u","identifier_type":"evm_contract","identifier":"0x420CA0f9B9b604cE0fd9C18EF134C705e5Fa3430","source_url":"https://monerium.com/eure/"},
+    {"id":"sog_dep_eure_arbitrum_batch_u","identifier_type":"evm_contract","identifier":"0x0c06cCF38114ddfc35e07427B9424adcca9F44F8","source_url":"https://monerium.com/eure/"},
+    {"id":"sog_dep_eure_base_batch_u","identifier_type":"evm_contract","identifier":"0xbf6e2966A9C3D99C9E4D069E04f7Bdb9C8aa762C","source_url":"https://monerium.com/eure/"},
+    {"id":"sog_dep_eure_linea_batch_u","identifier_type":"evm_contract","identifier":"0x3ff47c5Bf409C86533FE1f4907524d304062428D","source_url":"https://monerium.com/eure/"}
+  ]
+}
