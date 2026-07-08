@@ -1,0 +1,9 @@
+{
+  "schema_version":"1.0",
+  "growth_pr":332,
+  "added_count":2,
+  "records":[
+    {"stablecoin_id":"sog_st_eurr","category":"C","best_known_range":"current regulated product and May-June 2026 incident history verified; original launch day unresolved","reason_code":"current_product_and_incident_history_without_original_launch_boundary","review_note":"Current StablR product, regulatory, deployment, reserve, and incident-recovery sources establish EURR identity and current restricted service state, but do not establish the exact first public issuance or redemption day.","last_reviewed":"2026-07-09","reviewed_sources":["https://stablr.com/eurr","https://docs.stablr.com/docs/smart-contract","https://stablr.com/insights/stablr-discloses-cybersecurity-incident-affecting-usdr-and-eurr-token-operations"]},
+    {"stablecoin_id":"sog_st_stablrusdr","category":"C","best_known_range":"current regulated product and May-June 2026 incident history verified; original launch day unresolved","reason_code":"current_product_and_incident_history_without_original_launch_boundary","review_note":"Current StablR product, regulatory, deployment, reserve, and incident-recovery sources establish USDR identity and current restricted service state, but do not establish the exact first public issuance or redemption day.","last_reviewed":"2026-07-09","reviewed_sources":["https://stablr.com/usdr","https://docs.stablr.com/docs/smart-contract","https://stablr.com/insights/stablr-discloses-cybersecurity-incident-affecting-usdr-and-eurr-token-operations"]}
+  ]
+}
