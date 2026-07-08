@@ -69,7 +69,7 @@ if (history.snapshots?.[1]?.asset_count !== 102) failures.push('second stats his
 if (history.snapshots?.[1]?.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('102-asset history checkpoint ID mismatch');
 
 if (releaseBaseline.status !== 'current') failures.push('release baseline must be current');
-if (releaseBaseline.expected_v2_counts?.stablecoins !== 100) failures.push('historical release-integrity baseline must continue to protect the audited 100-asset release checkpoint');
+if (releaseBaseline.expected_v2_counts?.stablecoins !== 102) failures.push('current release-integrity baseline must protect the 102-asset growth checkpoint');
 if (audited100Checkpoint.status !== 'audited') failures.push('100-asset checkpoint must remain audited');
 if (audited100Checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('audited checkpoint must continue to protect 100 assets');
 if (currentCheckpoint.status !== 'reviewed_growth_checkpoint') failures.push('current checkpoint must be a reviewed growth checkpoint');
