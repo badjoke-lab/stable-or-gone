@@ -9,7 +9,7 @@ const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex'
 const digestJson = (value) => sha256(Buffer.from(JSON.stringify(value)));
 const sorted = (values) => [...values].sort();
 
-const checkpoint = readJson('docs/migration/audited-100-asset-canonical-checkpoint.json');
+const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const sourcesPath = 'scripts/monitoring/sources/official-sources.json';
 const baselinesPath = 'scripts/monitoring/baselines/official-source-baselines.json';
 const sources = readJson(sourcesPath).filter((row) => row.enabled !== false);
