@@ -26,7 +26,10 @@ expect((report.relationships?.active_with_end_date ?? []).length === 0, 'active 
 expect((report.relationships?.start_after_end ?? []).length === 0, 'start-after-end relationship boundaries remain');
 expect((report.relationships?.duplicate_active_role_edges ?? []).length === 0, 'duplicate active organization-role edges remain');
 expect((report.organizations?.orphan_organizations ?? []).length === 0, 'orphan organizations remain');
-expect(JSON.stringify(report.organizations?.without_official_url ?? []) === JSON.stringify(['sog_issuer_stable_universal']), 'unexpected organization official-url gap set');
+expect(JSON.stringify(report.organizations?.without_official_url ?? []) === JSON.stringify([
+  'sog_issuer_stable_universal',
+  'sog_issuer_blackfridge'
+]), 'unexpected organization official-url gap set');
 expect((report.organizations?.exact_shared_official_urls ?? []).length === 1, 'unexpected exact shared official URL count');
 expect(report.organizations?.exact_shared_official_urls?.[0]?.url === 'https://circle.com/usyc', 'unexpected shared USYC product URL boundary');
 expect(JSON.stringify(report.relationships?.ended_without_end_date ?? []) === JSON.stringify([
@@ -43,4 +46,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Organization and relationship audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${report.audited_counts.organizations} organizations, ${report.audited_counts.relationships} relationships, deterministic primary display, and bounded unresolved source/end-date queues.`);
+console.log(`Organization and relationship audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${report.audited_counts.organizations} organizations, ${report.audited_counts.relationships} relationships, deterministic primary display, and bounded official-URL/end-date review queues.`);
