@@ -21,7 +21,8 @@ const countBy = (values) => Object.fromEntries([...values.reduce((map, raw) => {
 const normalize = (value) => String(value ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
 const isIsoDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(String(value ?? '')) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
 const daysBetween = (a, b) => Math.floor((Date.parse(`${b}T00:00:00Z`) - Date.parse(`${a}T00:00:00Z`)) / 86400000);
-const auditDate = '2026-07-06';
+const currentCheckpoint = readJson('docs/migration/current-canonical-checkpoint.json');
+const auditDate = currentCheckpoint.recorded_at;
 
 const baseline = loadRegistryV2Baseline(root);
 const stablecoins = loadFiles(baseline.data_groups?.stablecoins ?? []);
@@ -169,13 +170,14 @@ const maxCoverage = Math.max(...coverageCounts.map((row) => row.count));
 
 observations.push(`Audited ${knownUnknowns.length} known-unknown records across ${stablecoins.length} canonical stable assets.`);
 observations.push(`Known-unknown coverage ranges from ${minCoverage} to ${maxCoverage} rows per asset.`);
-observations.push(`${staleReviewRows.length} known-unknown rows are older than 30 days at the 2026-07-06 audit checkpoint.`);
+observations.push(`${staleReviewRows.length} known-unknown rows are older than 30 days at the ${auditDate} audit checkpoint.`);
 observations.push(`Structural placeholder scan found ${placeholderFindings.length} findings.`);
 
 const report = {
-  schema_version: '1.0',
-  audit_id: 'sog_registry_100_known_unknown_placeholder_integrity_pr308',
+  schema_version: '1.1',
+  audit_id: `sog_registry_${stablecoins.length}_known_unknown_placeholder_integrity_${currentCheckpoint.checkpoint_id}`,
   audit_date: auditDate,
+  checkpoint_id: currentCheckpoint.checkpoint_id,
   baseline_id: baseline.baseline_id,
   audited_counts: {
     stable_assets: stablecoins.length,
