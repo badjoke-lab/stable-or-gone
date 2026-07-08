@@ -10,7 +10,7 @@ const baseline = loadRegistryV2Baseline(root);
 const group = (name) => (baseline.data_groups?.[name] ?? []).flatMap(readJson);
 const stablecoins = group('stablecoins');
 const rawCandidates = audit.candidates ?? [];
-const plan = audit.growth_plan ?? [];
+const rawPlan = audit.growth_plan ?? [];
 const policy = audit.policy ?? {};
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 const normalize = (value) => String(value ?? '').trim().toLowerCase();
@@ -18,7 +18,17 @@ const normalize = (value) => String(value ?? '').trim().toLowerCase();
 const correctionFile = 'data/next-growth-candidate-corrections-pr330.json';
 const corrections = fs.existsSync(path.join(root, correctionFile)) ? readJson(correctionFile) : [];
 const correctionById = new Map(corrections.map((row) => [row.candidate_id, row]));
-const candidates = rawCandidates.map((row) => ({ ...row, ...(correctionById.get(row.candidate_id) ?? {}) }));
+
+const numberingCorrectionFile = 'data/next-growth-pr-numbering-corrections-pr330.json';
+const numberingCorrections = fs.existsSync(path.join(root, numberingCorrectionFile)) ? readJson(numberingCorrectionFile) : [];
+const effectivePrByOriginal = new Map(numberingCorrections.map((row) => [row.original_planned_pr, row.actual_target_pr]));
+const effectivePr = (value) => effectivePrByOriginal.get(value) ?? value;
+
+const candidates = rawCandidates.map((row) => {
+  const identityCorrected = { ...row, ...(correctionById.get(row.candidate_id) ?? {}) };
+  return { ...identityCorrected, target_growth_pr: effectivePr(identityCorrected.target_growth_pr) };
+});
+const plan = rawPlan.map((row) => ({ ...row, pr: effectivePr(row.pr) }));
 
 const promotionFiles = fs.readdirSync(path.join(root, 'data'))
   .filter((name) => /^candidate-promotions-batch-(?:2[2-6])\.json$/.test(name))
@@ -28,7 +38,7 @@ const promotions = promotionFiles.flatMap(readJson);
 const promotionById = new Map(promotions.map((row) => [row.candidate_id, row]));
 
 const expectedCandidateIds = Array.from({ length: 10 }, (_, index) => `sog_cand_${String(101 + index).padStart(6, '0')}`);
-const expectedPrs = [330, 331, 332, 333, 334];
+const expectedPrs = [330, 332, 333, 334, 335];
 const expectedTransitions = [
   [100, 102],
   [102, 104],
@@ -37,11 +47,29 @@ const expectedTransitions = [
   [108, 110]
 ];
 const expectedBatches = ['batch_022', 'batch_023', 'batch_024', 'batch_025', 'batch_026'];
+const expectedNumberingCorrections = [
+  ['batch_023', 331, 332],
+  ['batch_024', 332, 333],
+  ['batch_025', 333, 334],
+  ['batch_026', 334, 335]
+];
 
 fail(audit.schema_version === '1.0', 'schema_version must be 1.0');
 fail(audit.canonical_stablecoin_count_before_growth === 100, 'audit must preserve the 100-asset pre-growth boundary');
 fail(candidates.length === 10, `candidate count must be 10, found ${candidates.length}`);
 fail(plan.length === 5, `growth plan must contain five PR allocations, found ${plan.length}`);
+
+if (fs.existsSync(path.join(root, numberingCorrectionFile))) {
+  fail(numberingCorrections.length === expectedNumberingCorrections.length, `numbering correction count must be ${expectedNumberingCorrections.length}`);
+  for (const [index, expected] of expectedNumberingCorrections.entries()) {
+    const row = numberingCorrections[index] ?? {};
+    const [batch, originalPr, actualPr] = expected;
+    fail(row.target_batch === batch, `numbering correction row ${index + 1}: target batch must be ${batch}`);
+    fail(row.original_planned_pr === originalPr, `numbering correction row ${index + 1}: original PR must be #${originalPr}`);
+    fail(row.actual_target_pr === actualPr, `numbering correction row ${index + 1}: actual PR must be #${actualPr}`);
+    fail(typeof row.reason === 'string' && row.reason.length > 0, `numbering correction row ${index + 1}: reason is required`);
+  }
+}
 
 const candidateIds = candidates.map((row) => row.candidate_id);
 fail(JSON.stringify(candidateIds) === JSON.stringify(expectedCandidateIds), 'candidate IDs must be exactly sog_cand_000101 through sog_cand_000110 in order');
@@ -146,6 +174,7 @@ console.log(JSON.stringify({
   selected_candidates: candidates.length,
   promoted_next_growth_candidates: promotedNextGrowth.length,
   growth_prs: expectedPrs,
+  numbering_corrections_applied: numberingCorrections.length,
   final_target_count: 110,
   canonical_write_allowed_at_selection_stage: policy.canonical_write_allowed,
   public_output_at_selection_stage: policy.public_output
