@@ -1,14 +1,17 @@
 import fs from 'node:fs';
 import './validate-batch21-growth-d.mjs';
 import './validate-current-final-eight.mjs';
+import './validate-next-growth-candidate-audit-pr329.mjs';
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 const roadmap = read('docs/roadmap.md');
 const historyAmendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-activation.md');
 const foundationAmendment = read('docs/roadmap-amendments/2026-07-08-pr327-stats-foundation-activation.md');
 const analysisAmendment = read('docs/roadmap-amendments/2026-07-08-pr328-stats-analysis-activation.md');
+const candidateAmendment = read('docs/roadmap-amendments/2026-07-08-pr329-next-growth-candidate-audit-activation.md');
 const foundationSpec = read('docs/stats-foundation-spec.md');
 const analysisSpec = read('docs/stats-analysis-expansion-spec.md');
+const candidateSpec = read('docs/quality/next-growth-candidate-audit-pr329-spec.md');
 const statsSpec = read('docs/stats-spec.md');
 const historySpec = read('docs/stats-history-spec.md');
 const historyWorkflow = read('.github/workflows/immutable-statistics-history.yml');
@@ -35,12 +38,14 @@ requireText(foundationAmendment, 'PR #328 historical, deployment, organization, 
 requireText(analysisAmendment, 'PR #327 /stats/ foundation: complete', 'PR #328 amendment');
 requireText(analysisAmendment, 'PR #328 historical, deployment, organization, and data-quality statistics: active', 'PR #328 amendment');
 requireText(analysisAmendment, 'PR #329 next candidate audit: next', 'PR #328 amendment');
+requireText(candidateAmendment, 'PR #328 statistics analysis expansion: complete', 'PR #329 amendment');
+requireText(candidateAmendment, 'PR #329 next-growth candidate audit: active', 'PR #329 amendment');
+requireText(candidateAmendment, 'PR #330 100 -> 102 controlled growth: next', 'PR #329 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
-requireText(analysisSpec, 'Historical events and failures', 'stats analysis spec');
-requireText(analysisSpec, 'Deployment analysis', 'stats analysis spec');
-requireText(analysisSpec, 'Organization analysis', 'stats analysis spec');
-requireText(analysisSpec, 'Data-quality analysis', 'stats analysis spec');
+requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
+requireText(candidateSpec, 'PR #330  100 -> 102: EURe, GBPT', 'candidate audit spec');
+requireText(candidateSpec, 'PR #334  108 -> 110: AUDD, NZDS', 'candidate audit spec');
 requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
 requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
 requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
@@ -51,7 +56,7 @@ requireText(historyValidator, 'historical snapshot rewritten or reordered', 'his
 
 if (history.schema_version !== '1.0') failures.push('stats history schema version must be 1.0');
 if (history.checkpoint_policy !== 'append_only_reviewed_pr') failures.push('stats history policy mismatch');
-if (history.snapshots?.length !== 1) failures.push('PR #328 expects exactly one reviewed initial history snapshot before controlled growth');
+if (history.snapshots?.length !== 1) failures.push('PR #329 expects exactly one reviewed initial history snapshot before controlled growth');
 if (history.snapshots?.[0]?.asset_count !== 100) failures.push('initial stats history snapshot must be the 100-asset checkpoint');
 if (history.snapshots?.[0]?.checkpoint_id !== checkpoint.checkpoint_id) failures.push('initial stats history checkpoint ID mismatch');
 
@@ -91,4 +96,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #327 complete, PR #328 active, PR #329 next.');
+console.log('Workstream valid: PR #328 complete, PR #329 active, PR #330 next.');
