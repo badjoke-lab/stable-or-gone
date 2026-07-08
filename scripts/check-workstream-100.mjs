@@ -1,8 +1,15 @@
 import fs from 'node:fs';
-import './validate-batch21-growth-d.mjs';
-import './validate-current-final-eight.mjs';
-import './validate-next-growth-candidate-audit-pr329.mjs';
-import './validate-batch22-growth-e.mjs';
+
+const originalLog = console.log;
+console.log = () => {};
+try {
+  await import('./validate-batch21-growth-d.mjs');
+  await import('./validate-current-final-eight.mjs');
+  await import('./validate-next-growth-candidate-audit-pr329.mjs');
+  await import('./validate-batch22-growth-e.mjs');
+} finally {
+  console.log = originalLog;
+}
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 const roadmap = read('docs/roadmap.md');
