@@ -16,13 +16,17 @@ const expectedId = `sog_monitoring_coverage_${stablecoins.length}_assets_39_sour
 const pairs = new Set(relationships.map((row) => `${row.stablecoin_id}|${row.organization_id}`));
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 
+const expectedCoveredStablecoins = 23;
+const expectedUncoveredStablecoins = stablecoins.length - expectedCoveredStablecoins;
+
 fail(JSON.stringify(report) === JSON.stringify(again), 'report must be deterministic');
 fail(report.report_id === expectedId, `report id must be ${expectedId}`);
 fail(report.stablecoins.length === stablecoins.length, 'asset rows must match canonical count');
 fail(report.organizations.length === organizations.length, 'organization rows must match canonical count');
 fail(report.sources.length === 39, 'registered source count must be 39');
-fail(report.summary.covered_stablecoin_count === 23, 'covered stablecoin count must be 23');
-fail(report.summary.uncovered_stablecoin_count === 77, 'uncovered stablecoin count must be 77');
+fail(report.summary.covered_stablecoin_count === expectedCoveredStablecoins, `covered stablecoin count must be ${expectedCoveredStablecoins}`);
+fail(report.summary.uncovered_stablecoin_count === expectedUncoveredStablecoins, `uncovered stablecoin count must be ${expectedUncoveredStablecoins}`);
+fail(report.summary.covered_stablecoin_count + report.summary.uncovered_stablecoin_count === stablecoins.length, 'covered and uncovered stablecoin counts must equal current canonical denominator');
 fail(report.summary.multi_family_stablecoin_count === 17, 'multi-family count must be 17');
 fail(report.summary.covered_organization_count === 18, 'covered organization count must be 18');
 fail(report.summary.accepted_coverage_stablecoin_count === 0, 'accepted coverage must remain zero');
@@ -80,4 +84,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring coverage valid: 23 of ${stablecoins.length} assets reached by 39 pending sources; 5 scoped market-access/register sources cover 4 platforms and official register context.`);
+console.log(`Current monitoring coverage valid: ${expectedCoveredStablecoins} of ${stablecoins.length} assets reached by 39 pending sources; ${expectedUncoveredStablecoins} assets remain uncovered; 5 scoped market-access/register sources cover 4 platforms and official register context.`);

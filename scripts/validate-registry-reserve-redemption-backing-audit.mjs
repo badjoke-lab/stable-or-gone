@@ -9,16 +9,21 @@ execFileSync(process.execPath, ['scripts/audit-registry-reserve-redemption-backi
 });
 
 const report = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
+const expectedCounts = checkpoint.expected_counts ?? {};
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
+const expectedApplicabilityQueueAssets = 12;
+const expectedCoveredAssets = checkpoint.asset_count - expectedApplicabilityQueueAssets;
+const expectedNoDateRows = 66;
 
 expect(report.audit_id === 'sog_registry_100_reserve_redemption_backing_pr300', `unexpected audit_id ${report.audit_id}`);
-expect(report.audited_counts?.stable_assets === 100, `expected 100 assets, got ${report.audited_counts?.stable_assets}`);
-expect(report.audited_counts?.classifications === 100, `expected 100 classifications, got ${report.audited_counts?.classifications}`);
-expect(report.audited_counts?.profiles === 100, `expected 100 profiles, got ${report.audited_counts?.profiles}`);
-expect(report.audited_counts?.reserve_context_rows === 108, `expected 108 reserve-context rows, got ${report.audited_counts?.reserve_context_rows}`);
-expect(report.audited_counts?.reserve_report_covered_assets === 88, `expected 88 context-covered assets, got ${report.audited_counts?.reserve_report_covered_assets}`);
-expect(report.audited_counts?.applicability_queue_assets === 12, `expected 12 applicability decisions, got ${report.audited_counts?.applicability_queue_assets}`);
+expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} assets, got ${report.audited_counts?.stable_assets}`);
+expect(report.audited_counts?.classifications === checkpoint.asset_count, `expected ${checkpoint.asset_count} classifications, got ${report.audited_counts?.classifications}`);
+expect(report.audited_counts?.profiles === checkpoint.asset_count, `expected ${checkpoint.asset_count} profiles, got ${report.audited_counts?.profiles}`);
+expect(report.audited_counts?.reserve_context_rows === expectedCounts.reserve_reports, `expected ${expectedCounts.reserve_reports} reserve-context rows, got ${report.audited_counts?.reserve_context_rows}`);
+expect(report.audited_counts?.reserve_report_covered_assets === expectedCoveredAssets, `expected ${expectedCoveredAssets} context-covered assets, got ${report.audited_counts?.reserve_report_covered_assets}`);
+expect(report.audited_counts?.applicability_queue_assets === expectedApplicabilityQueueAssets, `expected ${expectedApplicabilityQueueAssets} applicability decisions, got ${report.audited_counts?.applicability_queue_assets}`);
 expect((report.findings?.critical ?? []).length === 0, `critical findings remain: ${(report.findings?.critical ?? []).length}`);
 expect((report.partition?.overlap_ids ?? []).length === 0, 'reserve applicability overlap remains');
 expect((report.partition?.uncovered_ids ?? []).length === 0, 'uncovered reserve applicability assets remain');
@@ -30,7 +35,7 @@ expect((report.consistency?.missing_reserve_evidence_refs ?? []).length === 0, '
 expect((report.consistency?.missing_redemption_evidence_refs ?? []).length === 0, 'missing redemption evidence references remain');
 expect((report.consistency?.invalid_redemption_urls ?? []).length === 0, 'invalid redemption URLs remain');
 expect((report.consistency?.queue_evidence_gaps ?? []).length === 0, 'applicability queue evidence gaps remain');
-expect((report.review_queues?.reserve_context_rows_without_report_date ?? []).length === 64, 'reserve context no-date queue changed');
+expect((report.review_queues?.reserve_context_rows_without_report_date ?? []).length === expectedNoDateRows, `reserve context no-date queue changed: expected ${expectedNoDateRows}`);
 expect(JSON.stringify(report.review_queues?.lifecycle_redemption_warnings ?? []) === JSON.stringify([
   { stablecoin_id: 'sog_st_fei', lifecycle_status: 'terminated', redemption_status: 'restricted' }
 ]), 'FEI lifecycle/redemption review queue changed');
@@ -46,4 +51,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Reserve, redemption, and backing audit validation passed: complete 88+12 applicability partition, 0 critical inconsistencies, and bounded review queues.');
+console.log(`Reserve, redemption, and backing audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: complete ${expectedCoveredAssets}+${expectedApplicabilityQueueAssets} applicability partition, 0 critical inconsistencies, and bounded review queues.`);

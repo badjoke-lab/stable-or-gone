@@ -7,20 +7,23 @@ import { validateOfficialSources } from './monitoring/monitors/official-source-o
 const root = process.cwd();
 const failures = [];
 const readRows = (file) => { const value = JSON.parse(fs.readFileSync(path.join(root, file), 'utf8')); return Array.isArray(value) ? value : value.records ?? []; };
+const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const baseline = loadRegistryV2Baseline(root);
 const stablecoins = (baseline.data_groups?.stablecoins ?? []).flatMap(readRows);
 const organizations = (baseline.data_groups?.organizations ?? []).flatMap(readRows);
 const relationships = (baseline.data_groups?.relationships ?? []).flatMap(readRows);
-const sources = JSON.parse(fs.readFileSync('scripts/monitoring/sources/official-sources.json', 'utf8'));
-const baselineSet = JSON.parse(fs.readFileSync('scripts/monitoring/baselines/official-source-baselines.json', 'utf8'));
+const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
+const sources = readJson('scripts/monitoring/sources/official-sources.json');
+const baselineSet = readJson('scripts/monitoring/baselines/official-source-baselines.json');
 const workflow = fs.readFileSync('.github/workflows/monitoring-review.yml', 'utf8');
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 
 const sourceIds = sources.map((row) => row.source_id);
 const baselineIds = (baselineSet.baselines ?? []).map((row) => row.source_id);
-fail(stablecoins.length === 100, `canonical monitoring boundary must contain exactly 100 stable assets, found ${stablecoins.length}`);
-fail(organizations.length === 94, `canonical monitoring boundary must contain exactly 94 organizations, found ${organizations.length}`);
-fail(relationships.length === 110, `canonical monitoring boundary must contain exactly 110 relationships, found ${relationships.length}`);
+const expected = checkpoint.expected_counts ?? {};
+fail(stablecoins.length === checkpoint.asset_count, `canonical monitoring boundary must match current checkpoint asset count ${checkpoint.asset_count}, found ${stablecoins.length}`);
+fail(organizations.length === expected.organizations, `canonical monitoring boundary must match current checkpoint organizations ${expected.organizations}, found ${organizations.length}`);
+fail(relationships.length === expected.relationships, `canonical monitoring boundary must match current checkpoint relationships ${expected.relationships}, found ${relationships.length}`);
 fail(sources.length === 39, `current monitoring configuration must contain 39 sources, found ${sources.length}`);
 fail(baselineSet.baselines?.length === 39, `current monitoring configuration must contain 39 baselines, found ${baselineSet.baselines?.length ?? 0}`);
 fail(new Set(sourceIds).size === 39, 'monitoring source IDs must be unique');
@@ -54,4 +57,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring configuration valid: 39 pending sources synchronized against ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);
+console.log(`Current monitoring configuration valid: 39 pending sources synchronized against current checkpoint ${checkpoint.checkpoint_id} with ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);

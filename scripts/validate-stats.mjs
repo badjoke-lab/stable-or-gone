@@ -15,23 +15,11 @@ const firstJson = JSON.stringify(first);
 check(firstJson === JSON.stringify(second), 'same inputs must generate byte-equivalent statistics models');
 check(/^[a-f0-9]{64}$/.test(first.input_digest_sha256 ?? ''), 'input digest must be lowercase SHA-256');
 
-const checkpoint = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/audited-100-asset-canonical-checkpoint.json'), 'utf8'));
-const expected = {
-  assets: checkpoint.v2_groups.stablecoins.record_count,
-  organizations: checkpoint.v2_groups.organizations.record_count,
-  relationships: checkpoint.v2_groups.relationships.record_count,
-  events: checkpoint.v2_groups.events.record_count,
-  evidence: checkpoint.v2_groups.evidence.record_count,
-  reserve_reports: checkpoint.v2_groups.reserve_reports.record_count,
-  known_unknowns: checkpoint.v2_groups.known_unknowns.record_count,
-  regulatory_notes: checkpoint.v2_groups.regulatory_notes.record_count,
-  deployments: checkpoint.v2_groups.deployments.record_count,
-  legal_profiles: checkpoint.v3_groups.legal_profiles.record_count,
-  stable_asset_relationships: checkpoint.v3_groups.stable_asset_relationships.record_count,
-  reserve_components: checkpoint.v3_groups.reserve_components.record_count,
-  income_profiles: checkpoint.v3_groups.income_profiles.record_count
-};
+const checkpoint = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/current-canonical-checkpoint.json'), 'utf8'));
+const expected = checkpoint.expected_counts ?? {};
 for (const [key, count] of Object.entries(expected)) check(first.totals[key] === count, `totals.${key} expected ${count}, found ${first.totals[key]}`);
+check(first.checkpoint_id === checkpoint.checkpoint_id, 'statistics checkpoint_id must match current canonical checkpoint');
+check(first.totals.assets === checkpoint.asset_count, 'statistics asset count must match current canonical checkpoint asset_count');
 
 const total = first.totals.assets;
 for (const [name, distribution] of [

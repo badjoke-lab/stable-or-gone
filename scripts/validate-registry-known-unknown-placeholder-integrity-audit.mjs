@@ -2,17 +2,21 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
 const jsonPath = 'data/generated/registry-known-unknown-placeholder-integrity-audit.json';
+const checkpointPath = 'docs/migration/current-canonical-checkpoint.json';
 execFileSync(process.execPath, ['scripts/audit-registry-known-unknown-placeholder-integrity.mjs'], { stdio: 'inherit', env: process.env });
 const report = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+const checkpoint = JSON.parse(fs.readFileSync(checkpointPath, 'utf8'));
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
-expect(report.audit_id === 'sog_registry_100_known_unknown_placeholder_integrity_pr308', `unexpected audit_id ${report.audit_id}`);
-expect(report.audit_date === '2026-07-06', `unexpected audit date ${report.audit_date}`);
-expect(report.audited_counts?.stable_assets === 100, `expected 100 assets, got ${report.audited_counts?.stable_assets}`);
-expect(report.audited_counts?.organizations === 94, `expected 94 organizations, got ${report.audited_counts?.organizations}`);
-expect(report.audited_counts?.known_unknowns === 289, `expected 289 known unknowns, got ${report.audited_counts?.known_unknowns}`);
-expect(report.audited_counts?.assets_with_known_unknowns === 100, `expected all 100 assets to have known unknown coverage, got ${report.audited_counts?.assets_with_known_unknowns}`);
+const expected = checkpoint.expected_counts ?? {};
+expect(report.audit_id === `sog_registry_${checkpoint.asset_count}_known_unknown_placeholder_integrity_${checkpoint.checkpoint_id}`, `unexpected audit_id ${report.audit_id}`);
+expect(report.audit_date === checkpoint.recorded_at, `unexpected audit date ${report.audit_date}`);
+expect(report.checkpoint_id === checkpoint.checkpoint_id, `unexpected checkpoint_id ${report.checkpoint_id}`);
+expect(report.audited_counts?.stable_assets === expected.assets, `expected ${expected.assets} assets, got ${report.audited_counts?.stable_assets}`);
+expect(report.audited_counts?.organizations === expected.organizations, `expected ${expected.organizations} organizations, got ${report.audited_counts?.organizations}`);
+expect(report.audited_counts?.known_unknowns === expected.known_unknowns, `expected ${expected.known_unknowns} known unknowns, got ${report.audited_counts?.known_unknowns}`);
+expect(report.audited_counts?.assets_with_known_unknowns === expected.assets, `expected all ${expected.assets} assets to have known unknown coverage, got ${report.audited_counts?.assets_with_known_unknowns}`);
 expect((report.findings?.critical ?? []).length === 0, `critical findings remain: ${(report.findings?.critical ?? []).length}`);
 expect((report.coverage?.uncovered_asset_ids ?? []).length === 0, 'assets without known-unknown coverage remain');
 expect((report.integrity?.duplicate_ids ?? []).length === 0, 'duplicate known-unknown IDs remain');
@@ -32,4 +36,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Known-unknown and placeholder integrity audit validation passed: ${report.audited_counts.known_unknowns} rows cover all ${report.audited_counts.stable_assets} assets, with zero critical findings and zero structural placeholder findings.`);
+console.log(`Known-unknown and placeholder integrity audit validation passed: ${report.audited_counts.known_unknowns} rows cover all ${report.audited_counts.stable_assets} assets at checkpoint ${checkpoint.checkpoint_id}, with zero critical findings and zero structural placeholder findings.`);

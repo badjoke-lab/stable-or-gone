@@ -3,7 +3,7 @@ import { publicTaxonomy } from './public-taxonomy.mjs';
 const assignmentsByCategory = {
   fiat_and_cash_equivalent: [
     'agora-ausd', 'brz', 'busd', 'eurau', 'eurc', 'eurcv', 'euri', 'eurq', 'eurs', 'eurt',
-    'fdusd', 'gusd', 'gyen', 'husd', 'jpyc', 'jpysc', 'pyusd', 'rlusd', 'sofiusd', 'tryb',
+    'fdusd', 'gusd', 'gyen', 'husd', 'jpyc', 'jpysc', 'monerium-eure', 'poundtoken', 'pyusd', 'rlusd', 'sofiusd', 'tryb',
     'tusd', 'usat', 'usd1', 'usdc', 'usdg', 'usdgo', 'usdh', 'usdp', 'usdq', 'usdt', 'xsgd'
   ],
   crypto_collateralized: [

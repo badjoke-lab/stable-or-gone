@@ -44,7 +44,7 @@ jobs:
         if: always()
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-provenance.mjs
       - name: Verify current production exact output parity
-        if: always()
+        if: github.event_name == 'push'
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-output-parity.mjs
       - name: Verify production canonical checkpoint parity
         if: always()

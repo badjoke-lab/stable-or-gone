@@ -7,6 +7,7 @@ const root = process.cwd();
 const snapshotPath = 'scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json';
 const currentPath = 'artifacts/monitoring-lifecycle-regulatory-market-access-current.json';
 const snapshot = JSON.parse(fs.readFileSync(path.join(root, snapshotPath), 'utf8'));
+const checkpoint = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/current-canonical-checkpoint.json'), 'utf8'));
 const sources = JSON.parse(fs.readFileSync(path.join(root, 'scripts/monitoring/sources/official-sources.json'), 'utf8'));
 const baselineSet = JSON.parse(fs.readFileSync(path.join(root, 'scripts/monitoring/baselines/official-source-baselines.json'), 'utf8'));
 const failures = [];
@@ -19,29 +20,56 @@ execFileSync(process.execPath, ['scripts/generate-monitoring-baseline-sync-100-a
   env: { ...process.env, SOG_MONITORING_SYNC_OUTPUT: currentPath },
 });
 const current = JSON.parse(fs.readFileSync(path.join(root, currentPath), 'utf8'));
-check(isDeepStrictEqual(snapshot, current), 'current PR #323 monitoring observation differs from binding snapshot');
+
+check(snapshot.schema_version === '1.1', 'PR #323 historical snapshot schema version changed');
+check(snapshot.checkpoint_id === 'sog_audited_100_asset_checkpoint_pr318_2026_07_06', 'PR #323 historical checkpoint ID changed');
+check(isDeepStrictEqual(snapshot.canonical_counts, {
+  stablecoins: 100,
+  organizations: 94,
+  relationships: 110,
+}), 'PR #323 historical canonical counts changed');
+check(snapshot.coverage?.registered_asset_reach_count === 23, 'historical registered asset reach must be 23');
+check(snapshot.coverage?.uncovered_asset_count === 77, 'historical uncovered asset count must be 77');
+check(snapshot.coverage?.covered_organization_count === 18, 'historical covered organization count must be 18');
+check(snapshot.coverage?.accepted_asset_reach_count === 0, 'historical accepted asset reach must remain zero');
+check(snapshot.coverage?.multi_family_asset_count === 17, 'historical multi-family asset count must be 17');
+
+const expectedCurrent = checkpoint.expected_counts ?? {};
+check(current.checkpoint_id === checkpoint.checkpoint_id, `current observation checkpoint must be ${checkpoint.checkpoint_id}`);
+check(current.canonical_counts?.stablecoins === checkpoint.asset_count, `current observation stablecoin count must be ${checkpoint.asset_count}`);
+check(current.canonical_counts?.organizations === expectedCurrent.organizations, `current observation organization count must be ${expectedCurrent.organizations}`);
+check(current.canonical_counts?.relationships === expectedCurrent.relationships, `current observation relationship count must be ${expectedCurrent.relationships}`);
+check(current.coverage?.registered_asset_reach_count === 23, 'current registered asset reach must remain 23 until monitoring source scope expands');
+check(current.coverage?.uncovered_asset_count === checkpoint.asset_count - 23, `current uncovered asset count must be ${checkpoint.asset_count - 23}`);
+check(current.coverage?.covered_organization_count === 18, 'current covered organization count must remain 18');
+check(current.coverage?.accepted_asset_reach_count === 0, 'current accepted asset reach must remain zero');
+check(current.coverage?.multi_family_asset_count === 17, 'current multi-family asset count must remain 17');
 
 check(snapshot.source_baseline_sync?.source_count === 39, 'PR #323 source count must be 39');
 check(snapshot.source_baseline_sync?.baseline_count === 39, 'PR #323 baseline count must be 39');
 check(snapshot.source_baseline_sync?.source_baseline_id_parity === true, 'PR #323 source/baseline ID parity must be true');
-check(snapshot.source_baseline_sync?.pending_initial_acceptance === 39, 'all 39 baselines must remain pending');
-check(snapshot.source_baseline_sync?.accepted === 0, 'accepted baseline count must remain zero');
-check(snapshot.source_baseline_sync?.missing === 0, 'missing baseline count must remain zero');
-check(snapshot.coverage?.registered_asset_reach_count === 23, 'registered asset reach must be 23');
-check(snapshot.coverage?.uncovered_asset_count === 77, 'uncovered asset count must be 77');
-check(snapshot.coverage?.covered_organization_count === 18, 'covered organization count must be 18');
-check(snapshot.coverage?.accepted_asset_reach_count === 0, 'accepted asset reach must remain zero');
-check(snapshot.coverage?.multi_family_asset_count === 17, 'multi-family asset count must be 17');
+check(snapshot.source_baseline_sync?.pending_initial_acceptance === 39, 'all 39 historical baselines must remain pending');
+check(snapshot.source_baseline_sync?.accepted === 0, 'historical accepted baseline count must remain zero');
+check(snapshot.source_baseline_sync?.missing === 0, 'historical missing baseline count must remain zero');
+check(current.source_baseline_sync?.source_count === 39, 'current source count must be 39');
+check(current.source_baseline_sync?.baseline_count === 39, 'current baseline count must be 39');
+check(current.source_baseline_sync?.source_baseline_id_parity === true, 'current source/baseline ID parity must be true');
+check(current.source_baseline_sync?.pending_initial_acceptance === 39, 'all 39 current baselines must remain pending');
+check(current.source_baseline_sync?.accepted === 0, 'current accepted baseline count must remain zero');
+check(current.source_baseline_sync?.missing === 0, 'current missing baseline count must remain zero');
 
-check(isDeepStrictEqual(snapshot.scoped_coverage, {
+const expectedScopedCoverage = {
   platform_policy_source_count: 3,
   platform_service_state_source_count: 1,
   regulatory_register_source_count: 1,
   market_access_schema_capable_source_count: 5,
   scoped_platform_count: 4,
   scoped_region_count: 4,
-}), 'PR #323 scoped coverage summary mismatch');
-check(isDeepStrictEqual(snapshot.source_family_counts, {
+};
+check(isDeepStrictEqual(snapshot.scoped_coverage, expectedScopedCoverage), 'PR #323 historical scoped coverage summary mismatch');
+check(isDeepStrictEqual(current.scoped_coverage, expectedScopedCoverage), 'current scoped coverage summary mismatch');
+
+const expectedSourceFamilyCounts = {
   reserve_assurance: 14,
   redemption_terms: 11,
   issuer_lifecycle: 7,
@@ -49,8 +77,8 @@ check(isDeepStrictEqual(snapshot.source_family_counts, {
   platform_policy: 3,
   platform_service_state: 1,
   regulatory_register: 1,
-}), 'PR #323 source-family counts mismatch');
-check(isDeepStrictEqual(snapshot.stablecoin_family_counts, {
+};
+const expectedStablecoinFamilyCounts = {
   reserve_assurance: 16,
   redemption_terms: 12,
   issuer_lifecycle: 7,
@@ -58,7 +86,11 @@ check(isDeepStrictEqual(snapshot.stablecoin_family_counts, {
   platform_policy: 12,
   platform_service_state: 0,
   regulatory_register: 0,
-}), 'PR #323 asset-family reach mismatch');
+};
+check(isDeepStrictEqual(snapshot.source_family_counts, expectedSourceFamilyCounts), 'PR #323 historical source-family counts mismatch');
+check(isDeepStrictEqual(snapshot.stablecoin_family_counts, expectedStablecoinFamilyCounts), 'PR #323 historical asset-family reach mismatch');
+check(isDeepStrictEqual(current.source_family_counts, expectedSourceFamilyCounts), 'current source-family counts mismatch');
+check(isDeepStrictEqual(current.stablecoin_family_counts, expectedStablecoinFamilyCounts), 'current asset-family reach mismatch');
 
 const approvedSourceIds = [
   'ripple-eu-emi-license',
@@ -101,10 +133,11 @@ for (const field of [
   'source_allowlist_sha256',
   'baseline_file_sha256',
 ]) {
-  check(/^[a-f0-9]{64}$/.test(snapshot[field] ?? ''), `${field} must be a lowercase SHA-256 digest`);
+  check(/^[a-f0-9]{64}$/.test(snapshot[field] ?? ''), `historical ${field} must be a lowercase SHA-256 digest`);
+  check(/^[a-f0-9]{64}$/.test(current[field] ?? ''), `current ${field} must be a lowercase SHA-256 digest`);
 }
 
-check(isDeepStrictEqual(snapshot.policy, {
+const expectedPolicy = {
   human_review_required: true,
   monitoring_write_allowed: false,
   canonical_evidence: false,
@@ -113,7 +146,9 @@ check(isDeepStrictEqual(snapshot.policy, {
   production_publication: false,
   network_access_used: false,
   canonical_action: 'none',
-}), 'PR #323 safety policy changed');
+};
+check(isDeepStrictEqual(snapshot.policy, expectedPolicy), 'PR #323 historical safety policy changed');
+check(isDeepStrictEqual(current.policy, expectedPolicy), 'current safety policy changed');
 
 if (failures.length) {
   console.error('PR #323 lifecycle/regulatory/market-access expansion validation failed:');
@@ -123,9 +158,11 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
-  source_baseline_sync: snapshot.source_baseline_sync,
-  coverage: snapshot.coverage,
-  scoped_coverage: snapshot.scoped_coverage,
-  source_family_counts: snapshot.source_family_counts,
-  monitoring_scope_sha256: snapshot.monitoring_scope_sha256,
+  historical_checkpoint_id: snapshot.checkpoint_id,
+  current_checkpoint_id: current.checkpoint_id,
+  historical_coverage: snapshot.coverage,
+  current_coverage: current.coverage,
+  scoped_coverage: current.scoped_coverage,
+  source_family_counts: current.source_family_counts,
+  monitoring_scope_sha256: current.monitoring_scope_sha256,
 }, null, 2));

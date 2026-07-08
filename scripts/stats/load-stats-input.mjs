@@ -24,7 +24,7 @@ export function loadStatsInput(root = process.cwd()) {
   const v2 = loadRegistryV2Baseline(root);
   const v3 = readJson(root, 'docs/migration/registry-v3-foundation.json');
   const incomeManifest = readJson(root, 'docs/migration/registry-v3-income-profiles.json');
-  const checkpoint = readJson(root, 'docs/migration/audited-100-asset-canonical-checkpoint.json');
+  const checkpoint = readJson(root, 'docs/migration/current-canonical-checkpoint.json');
   const v2Groups = Object.fromEntries(Object.entries(v2.data_groups ?? {}).map(([name, files]) => [name, loadFiles(root, files)]));
   const v3Groups = Object.fromEntries(Object.entries(v3.data_groups ?? {}).map(([name, files]) => [name, loadFiles(root, files)]));
   const extensions = v2Groups.classification_extensions ?? [];

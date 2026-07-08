@@ -9,6 +9,7 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'u
 
 const stats = generateStats({ root });
 const history = JSON.parse(read('data/stats-history.json'));
+const checkpoint = JSON.parse(read('docs/migration/current-canonical-checkpoint.json'));
 const page = read('src/pages/stats/index.astro');
 const css = read('src/styles/stats-foundation.css');
 const adapter = read('src/lib/statsData.mjs');
@@ -21,10 +22,12 @@ const llms = read('src/pages/llms.txt.ts');
 const ai = read('src/pages/ai.txt.ts');
 const machineReadable = read('src/lib/machine-readable.ts');
 
-check(stats.totals.assets === 100, `stats asset denominator must be 100, found ${stats.totals.assets}`);
-check(stats.totals.organizations === 94, `stats organization total must be 94, found ${stats.totals.organizations}`);
-check(stats.totals.events === 172, `stats event total must be 172, found ${stats.totals.events}`);
-check(stats.totals.evidence === 502, `stats evidence total must be 502, found ${stats.totals.evidence}`);
+const expected = checkpoint.expected_counts ?? {};
+check(stats.checkpoint_id === checkpoint.checkpoint_id, `stats checkpoint must match current checkpoint ${checkpoint.checkpoint_id}, found ${stats.checkpoint_id}`);
+check(stats.totals.assets === checkpoint.asset_count, `stats asset denominator must be ${checkpoint.asset_count}, found ${stats.totals.assets}`);
+check(stats.totals.organizations === expected.organizations, `stats organization total must be ${expected.organizations}, found ${stats.totals.organizations}`);
+check(stats.totals.events === expected.events, `stats event total must be ${expected.events}, found ${stats.totals.events}`);
+check(stats.totals.evidence === expected.evidence, `stats evidence total must be ${expected.evidence}, found ${stats.totals.evidence}`);
 check(history.checkpoint_policy === 'append_only_reviewed_pr', 'stats history policy mismatch');
 check(Array.isArray(history.snapshots) && history.snapshots.length >= 1, 'stats history requires at least one reviewed snapshot');
 check(history.snapshots.some((snapshot) => snapshot.checkpoint_id === stats.checkpoint_id), 'current stats checkpoint missing from history');
@@ -48,8 +51,8 @@ for (const marker of [
   'excludes_live_market_metrics: true'
 ]) check(manifestSource.includes(marker) || architecture.includes(marker) || machineReadable.includes(marker), `public statistics contract missing marker: ${marker}`);
 
-check(adapter.includes("generateStats"), 'stats adapter must reuse deterministic PR #325 generator');
-check(adapter.includes("data/stats-history.json"), 'stats adapter must read canonical stats history source');
+check(adapter.includes('generateStats'), 'stats adapter must reuse deterministic PR #325 generator');
+check(adapter.includes('data/stats-history.json'), 'stats adapter must read canonical stats history source');
 check(statsRoute.includes('getPublicStats'), 'current stats route must use shared stats adapter');
 check(historyRoute.includes('getPublicStatsHistory'), 'stats history route must use shared stats adapter');
 
@@ -120,6 +123,7 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
+  checkpoint_id: checkpoint.checkpoint_id,
   asset_denominator: stats.totals.assets,
   organizations: stats.totals.organizations,
   events: stats.totals.events,

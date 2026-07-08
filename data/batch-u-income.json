@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_eure","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eure_product_batch_u"],"notes":"Monerium states that its e-money tokens do not pay interest or offer returns."},
+  {"id":"sog_st_1gbp","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_1gbp_etherscan_batch_u"],"notes":"No current canonical income or yield mechanism is asserted; current issuer service state remains unresolved."}
+]

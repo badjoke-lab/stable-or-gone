@@ -17,6 +17,7 @@ const profiles = group('profiles');
 const relationships = group('relationships');
 const events = group('events');
 const evidence = group('evidence');
+const currentCheckpoint = read('docs/migration/current-canonical-checkpoint.json');
 const correctionById = new Map(corrections.map((row) => [row.candidate_id, row]));
 const candidates = (audit.candidates ?? []).map((row) => ({ ...row, ...(correctionById.get(row.candidate_id) ?? {}) }));
 const promotionById = new Map(promotions.map((row) => [row.candidate_id, row]));
@@ -29,7 +30,8 @@ const fail = (condition, message) => { if (!condition) failures.push(message); }
 
 fail(candidates.length === 8, 'candidate count must be eight');
 fail(promotions.length === 8, 'promotion count must be eight');
-fail(stablecoins.length === 100, `expected 100 canonical stablecoins, found ${stablecoins.length}`);
+fail(Number.isInteger(currentCheckpoint.asset_count) && currentCheckpoint.asset_count >= 100, 'current checkpoint must preserve at least the completed 100-asset boundary');
+fail(stablecoins.length === currentCheckpoint.asset_count, `canonical stablecoin count must match current checkpoint ${currentCheckpoint.asset_count}, found ${stablecoins.length}`);
 for (const candidate of candidates) {
   const recordId = candidate.proposed_stablecoin_id;
   fail(stablecoinIds.has(recordId), `${recordId}: stablecoin missing`);
@@ -48,4 +50,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log('Current final-eight validation passed: all eight reviewed candidates are canonical and the registry contains 100 stable assets.');
+console.log(`Current final-eight validation passed: all eight reviewed candidates remain canonical and the registry matches the current ${currentCheckpoint.asset_count}-asset checkpoint.`);

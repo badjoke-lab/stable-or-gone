@@ -18,6 +18,7 @@ import batchQ from '../../../data/yield-profiles-v3-q.json';
 import batchR from '../../../data/r-returns.json';
 import batchS from '../../../data/s-returns.json';
 import batchT from '../../../data/batch-t-income.json';
+import batchU from '../../../data/batch-u-income.json';
 import type { YieldSource, AccrualMechanism, RateType } from '../schema/registry-v3';
 
 export type IncomeAvailability = 'native' | 'via_wrapper' | 'none' | 'unknown';
@@ -53,7 +54,8 @@ const profiles = [
   ...batchQ,
   ...batchR,
   ...batchS,
-  ...batchT
+  ...batchT,
+  ...batchU
 ] as IncomeProfileV3[];
 
 export function getIncomeProfilesV3(): IncomeProfileV3[] {

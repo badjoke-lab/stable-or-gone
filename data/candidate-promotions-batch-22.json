@@ -1,0 +1,4 @@
+[
+  {"candidate_id":"sog_cand_000101","status":"promoted","promotion_pr":330,"promoted_record_id":"sog_st_eure","notes":"Promoted after current Monerium product, reserve, redemption, regulatory, and exact multi-chain contract review."},
+  {"candidate_id":"sog_cand_000102","status":"promoted","promotion_pr":330,"promoted_record_id":"sog_st_1gbp","notes":"Promotion review corrected the PR #329 provisional GBPT identity to poundtoken (1GBP). Canonical lifecycle is unknown because current issuer, mint, redemption, and reserve-reporting state remain unresolved."}
+]
