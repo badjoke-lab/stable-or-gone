@@ -18,15 +18,21 @@ const organizations = group(baseline.data_groups?.organizations);
 const relationships = group(baseline.data_groups?.relationships);
 const events = group(baseline.data_groups?.events);
 const evidence = group(baseline.data_groups?.evidence);
-const legacyIssuers = group([
-  'data/issuers.json','data/issuers-extra.json','data/issuers-batch-b.json','data/issuers-batch-c.json','data/issuers-batch-d.json','data/issuers-batch-e.json','data/issuers-batch-f.json','data/issuers-batch-g.json','data/issuers-batch-h.json','data/issuers-batch-i.json','data/issuers-batch-j.json','data/issuers-batch-k.json','data/issuers-batch-l.json','data/issuers-batch-m.json','data/issuers-batch-n.json','data/issuers-batch-o.json','data/issuers-batch-p.json','data/issuers-batch-q.json','data/issuers-batch-r.json'
-]);
+const issuerFiles = fs.readdirSync(path.join(root, 'data'))
+  .filter((name) => /^issuers(?:-extra|-batch-[a-z0-9-]+)?\.json$/i.test(name))
+  .sort()
+  .map((name) => `data/${name}`);
+const legacyIssuers = group(issuerFiles);
 
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const organizationIds = new Set(organizations.map((row) => row.id));
 const eventIds = new Set(events.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
-const legacyById = new Map(legacyIssuers.map((row) => [row.id, row]));
+const legacyById = new Map();
+for (const row of legacyIssuers) {
+  if (legacyById.has(row.id)) failures.push(`${label(row)} duplicates legacy issuer compatibility ID ${row.id}`);
+  legacyById.set(row.id, row);
+}
 
 for (const organization of organizations) {
   const legacy = legacyById.get(organization.id);
@@ -73,4 +79,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log(`Registry v2 compatibility validation passed: ${stablecoins.length} stablecoins, ${organizations.length} organizations, ${relationships.length} relationships, ${events.length} events, ${evidence.length} evidence records, ${warnings.length} warnings.`);
+console.log(`Registry v2 compatibility validation passed: ${stablecoins.length} stablecoins, ${organizations.length} organizations, ${relationships.length} relationships, ${events.length} events, ${evidence.length} evidence records, ${legacyIssuers.length} legacy issuer compatibility rows, ${warnings.length} warnings.`);
