@@ -26,8 +26,20 @@ jobs:
         run: npm run validate:data
       - name: Validate candidate controls
         run: npm run validate:candidates
-      - name: Validate Registry v3 parity suite
-        run: npm run validate:parity-suite
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+      - name: Validate Registry v3 deployments
+        run: npm run validate:deployments-v3
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
+      - name: Validate Registry v3 migration audit
+        run: npm run validate:migration-v3
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+      - name: Validate reproducible build contract
+        run: npm run validate:reproducible-build
       - name: Validate PR 330 growth contract
         run: node scripts/validate-batch22-growth-e.mjs
       - name: Validate deterministic statistics
