@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import './validate-batch21-growth-d.mjs';
 import './validate-current-final-eight.mjs';
 import './validate-next-growth-candidate-audit-pr329.mjs';
+import './validate-batch22-growth-e.mjs';
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 const roadmap = read('docs/roadmap.md');
@@ -9,6 +10,7 @@ const historyAmendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-
 const foundationAmendment = read('docs/roadmap-amendments/2026-07-08-pr327-stats-foundation-activation.md');
 const analysisAmendment = read('docs/roadmap-amendments/2026-07-08-pr328-stats-analysis-activation.md');
 const candidateAmendment = read('docs/roadmap-amendments/2026-07-08-pr329-next-growth-candidate-audit-activation.md');
+const growthAmendment = read('docs/roadmap-amendments/2026-07-08-pr330-growth-eure-1gbp-activation.md');
 const foundationSpec = read('docs/stats-foundation-spec.md');
 const analysisSpec = read('docs/stats-analysis-expansion-spec.md');
 const candidateSpec = read('docs/quality/next-growth-candidate-audit-pr329-spec.md');
@@ -18,7 +20,8 @@ const historyWorkflow = read('.github/workflows/immutable-statistics-history.yml
 const historyValidator = read('scripts/validate-stats-history.mjs');
 const history = JSON.parse(read('data/stats-history.json'));
 const releaseBaseline = JSON.parse(read('docs/migration/registry-release-integrity-baseline.json'));
-const checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
+const audited100Checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
+const currentCheckpoint = JSON.parse(read('docs/migration/current-canonical-checkpoint.json'));
 const historical321 = JSON.parse(read('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json'));
 const historical322 = JSON.parse(read('scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json'));
 const current323 = JSON.parse(read('scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json'));
@@ -41,6 +44,9 @@ requireText(analysisAmendment, 'PR #329 next candidate audit: next', 'PR #328 am
 requireText(candidateAmendment, 'PR #328 statistics analysis expansion: complete', 'PR #329 amendment');
 requireText(candidateAmendment, 'PR #329 next-growth candidate audit: active', 'PR #329 amendment');
 requireText(candidateAmendment, 'PR #330 100 -> 102 controlled growth: next', 'PR #329 amendment');
+requireText(growthAmendment, 'PR #329 next-growth candidate audit: complete', 'PR #330 amendment');
+requireText(growthAmendment, 'PR #330 100 -> 102 controlled growth: active', 'PR #330 amendment');
+requireText(growthAmendment, 'PR #331 102 -> 104 controlled growth: next', 'PR #330 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
@@ -56,14 +62,19 @@ requireText(historyValidator, 'historical snapshot rewritten or reordered', 'his
 
 if (history.schema_version !== '1.0') failures.push('stats history schema version must be 1.0');
 if (history.checkpoint_policy !== 'append_only_reviewed_pr') failures.push('stats history policy mismatch');
-if (history.snapshots?.length !== 1) failures.push('PR #329 expects exactly one reviewed initial history snapshot before controlled growth');
-if (history.snapshots?.[0]?.asset_count !== 100) failures.push('initial stats history snapshot must be the 100-asset checkpoint');
-if (history.snapshots?.[0]?.checkpoint_id !== checkpoint.checkpoint_id) failures.push('initial stats history checkpoint ID mismatch');
+if (history.snapshots?.length !== 2) failures.push('PR #330 requires exactly two reviewed history snapshots after the 102-asset append');
+if (history.snapshots?.[0]?.asset_count !== 100) failures.push('first stats history snapshot must remain the 100-asset checkpoint');
+if (history.snapshots?.[0]?.checkpoint_id !== audited100Checkpoint.checkpoint_id) failures.push('immutable 100-asset history checkpoint ID mismatch');
+if (history.snapshots?.[1]?.asset_count !== 102) failures.push('second stats history snapshot must be the 102-asset checkpoint');
+if (history.snapshots?.[1]?.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('102-asset history checkpoint ID mismatch');
 
 if (releaseBaseline.status !== 'current') failures.push('release baseline must be current');
-if (releaseBaseline.expected_v2_counts?.stablecoins !== 100) failures.push('release baseline must protect 100 assets');
-if (checkpoint.status !== 'audited') failures.push('checkpoint must be audited');
-if (checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('checkpoint must protect 100 assets');
+if (releaseBaseline.expected_v2_counts?.stablecoins !== 100) failures.push('historical release-integrity baseline must continue to protect the audited 100-asset release checkpoint');
+if (audited100Checkpoint.status !== 'audited') failures.push('100-asset checkpoint must remain audited');
+if (audited100Checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('audited checkpoint must continue to protect 100 assets');
+if (currentCheckpoint.status !== 'reviewed_growth_checkpoint') failures.push('current checkpoint must be a reviewed growth checkpoint');
+if (currentCheckpoint.asset_count !== 102) failures.push('current checkpoint must bind 102 assets');
+if (currentCheckpoint.previous_checkpoint_id !== audited100Checkpoint.checkpoint_id) failures.push('current checkpoint must link to the audited 100-asset checkpoint');
 
 if (historical321.source_baseline_sync?.source_count !== 24) failures.push('PR #321 historical source count changed');
 if (historical321.coverage?.registered_asset_reach_count !== 16) failures.push('PR #321 historical reach changed');
@@ -75,25 +86,19 @@ if (historical322.coverage?.registered_asset_reach_count !== 22) failures.push('
 if (historical322.coverage?.uncovered_asset_count !== 78) failures.push('PR #322 historical uncovered queue changed');
 if (historical322.source_baseline_sync?.accepted !== 0) failures.push('PR #322 historical accepted count changed');
 
-if (current323.source_baseline_sync?.source_count !== 39) failures.push('current source count must be 39');
-if (current323.source_baseline_sync?.baseline_count !== 39) failures.push('current baseline count must be 39');
-if (current323.source_baseline_sync?.pending_initial_acceptance !== 39) failures.push('current pending count must be 39');
-if (current323.source_baseline_sync?.accepted !== 0) failures.push('current accepted count must be zero');
-if (current323.source_baseline_sync?.missing !== 0) failures.push('current missing count must be zero');
-if (current323.coverage?.registered_asset_reach_count !== 23) failures.push('current reach must be 23');
-if (current323.coverage?.uncovered_asset_count !== 77) failures.push('current uncovered queue must be 77');
-if (current323.coverage?.covered_organization_count !== 18) failures.push('current covered organization count must be 18');
-if (current323.coverage?.accepted_asset_reach_count !== 0) failures.push('accepted asset reach must be zero');
-if (current323.scoped_coverage?.market_access_schema_capable_source_count !== 5) failures.push('market-access schema-capable source count must be 5');
-if (current323.scoped_coverage?.scoped_platform_count !== 4) failures.push('scoped platform count must be 4');
-if (current323.policy?.network_access_used !== false) failures.push('snapshot generation must be offline');
-if (current323.policy?.canonical_action !== 'none') failures.push('snapshot canonical action must be none');
-if (current323.policy?.public_output !== false) failures.push('snapshot public output must be false');
+if (current323.source_baseline_sync?.source_count !== 39) failures.push('current monitoring source count must remain 39');
+if (current323.source_baseline_sync?.baseline_count !== 39) failures.push('current monitoring baseline count must remain 39');
+if (current323.source_baseline_sync?.pending_initial_acceptance !== 39) failures.push('current monitoring pending count must remain 39');
+if (current323.source_baseline_sync?.accepted !== 0) failures.push('current monitoring accepted count must remain zero');
+if (current323.source_baseline_sync?.missing !== 0) failures.push('current monitoring missing count must remain zero');
+if (current323.policy?.network_access_used !== false) failures.push('monitoring checkpoint generation must remain offline');
+if (current323.policy?.canonical_action !== 'none') failures.push('monitoring checkpoint canonical action must remain none');
+if (current323.policy?.public_output !== false) failures.push('monitoring checkpoint public output must remain false');
 
 if (failures.length) {
-  console.error('100-record core workstream validation failed:');
+  console.error('PR #330 controlled-growth workstream validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #328 complete, PR #329 active, PR #330 next.');
+console.log('Workstream valid: PR #329 complete, PR #330 active, PR #331 next; immutable 100 and reviewed 102 statistics checkpoints are bound.');
