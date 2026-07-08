@@ -3,6 +3,7 @@ import fs from 'node:fs';
 const read = (file) => fs.readFileSync(file, 'utf8');
 const readJson = (file) => JSON.parse(read(file));
 const checkpoint = readJson('docs/migration/audited-100-asset-canonical-checkpoint.json');
+const currentCheckpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const releaseBaseline = readJson('docs/migration/registry-release-integrity-baseline.json');
 const reproducibleBaseline = readJson('docs/migration/reproducible-build-output-baseline.json');
 const updates = readJson('data/registry-updates.json');
@@ -38,10 +39,16 @@ for (const marker of [
 for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(release, route, 'release note');
 for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(release, boundary, 'release note');
 
-check(checkpoint.release_integrity_baseline_id === releaseBaseline.baseline_id, 'checkpoint/release-integrity baseline ID mismatch');
-check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'checkpoint/reproducible-build baseline ID mismatch');
+check(checkpoint.release_integrity_baseline_id === 'sog_release_integrity_pr316_2026_07_06', 'historical 100-asset release-integrity baseline ID changed');
+check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'historical checkpoint/reproducible-build baseline ID mismatch');
+check(releaseBaseline.status === 'current', 'current release-integrity baseline must remain current');
+check(releaseBaseline.expected_v2_counts?.stablecoins === currentCheckpoint.asset_count, 'current release-integrity baseline must match current checkpoint asset count');
+check(releaseBaseline.expected_v2_counts?.organizations === currentCheckpoint.expected_counts?.organizations, 'current release-integrity baseline must match current checkpoint organization count');
+check(releaseBaseline.expected_v2_counts?.events === currentCheckpoint.expected_counts?.events, 'current release-integrity baseline must match current checkpoint event count');
+check(releaseBaseline.expected_v2_counts?.evidence === currentCheckpoint.expected_counts?.evidence, 'current release-integrity baseline must match current checkpoint evidence count');
 check(history.snapshots?.[0]?.checkpoint_id === checkpoint.checkpoint_id, 'stats history initial checkpoint ID mismatch');
 check(history.snapshots?.[0]?.asset_count === 100, 'stats history initial asset count must be 100');
+check(history.snapshots?.some((snapshot) => snapshot.checkpoint_id === currentCheckpoint.checkpoint_id), 'stats history current checkpoint snapshot missing');
 
 const updateId = 'sog_update_2026_07_06_audited_100_asset_checkpoint';
 const matchingUpdates = updates.filter((row) => row.id === updateId);
@@ -76,14 +83,13 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
-  checkpoint_id: checkpoint.checkpoint_id,
-  stable_assets: checkpoint.v2_groups.stablecoins.record_count,
-  organizations: checkpoint.v2_groups.organizations.record_count,
-  events: checkpoint.v2_groups.events.record_count,
-  evidence: checkpoint.v2_groups.evidence.record_count,
-  canonical_file_count: checkpoint.canonical_file_count,
+  historical_checkpoint_id: checkpoint.checkpoint_id,
+  historical_stable_assets: checkpoint.v2_groups.stablecoins.record_count,
+  current_checkpoint_id: currentCheckpoint.checkpoint_id,
+  current_stable_assets: currentCheckpoint.asset_count,
+  historical_release_integrity_baseline_id: checkpoint.release_integrity_baseline_id,
+  current_release_integrity_baseline_id: releaseBaseline.baseline_id,
+  reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
-  stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_roadmap_item: 'PR #326 immutable checkpoint history',
-  next_roadmap_item: 'PR #327 /stats/ foundation'
+  stats_history_snapshot_count: history.snapshots?.length ?? 0
 }, null, 2));
