@@ -1,0 +1,12 @@
+{
+  "schema_version":"1.0",
+  "status":"reviewed_growth_checkpoint",
+  "checkpoint_id":"sog_controlled_growth_102_checkpoint_pr330_2026_07_08",
+  "checkpoint_kind":"controlled_growth_checkpoint",
+  "recorded_at":"2026-07-08",
+  "source_commit":"pr330-growth-eure-1gbp",
+  "asset_count":102,
+  "previous_checkpoint_id":"sog_audited_100_asset_checkpoint_pr318_2026_07_06",
+  "growth_pr":330,
+  "notes":"Current deterministic statistics checkpoint pointer for the reviewed 100 -> 102 controlled-growth transition. The audited 100-asset checkpoint remains immutable historical evidence."
+}
