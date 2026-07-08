@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.6",
-  "status": "batch_021_complete",
+  "schema_version": "1.7",
+  "status": "batch_022_active",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -10,12 +10,13 @@
     "data/candidate-stable-assets-emergency-jpysc.json",
     "data/candidate-stable-assets-growth-85.json",
     "data/candidate-stable-assets-growth-90.json",
-    "data/candidate-stable-assets-growth-100.json"
+    "data/candidate-stable-assets-growth-100.json",
+    "data/candidate-stable-assets-growth-110.json"
   ],
   "protected_minimums": {
-    "total_candidates": 100,
-    "promoted_candidates": 100,
-    "pending_candidates": 0
+    "total_candidates": 110,
+    "promoted_candidates": 102,
+    "pending_candidates": 8
   },
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
@@ -33,6 +34,11 @@
     "batch_018":{"minimum_candidates":2,"theme":"interchain and historical NEAR stablecoins"},
     "batch_019":{"minimum_candidates":2,"theme":"Kava CDP and Beanstalk credit stablecoins"},
     "batch_020":{"minimum_candidates":2,"theme":"Solana and Rootstock stablecoins"},
-    "batch_021":{"minimum_candidates":2,"theme":"Mento euro and Reserve basket stablecoins"}
+    "batch_021":{"minimum_candidates":2,"theme":"Mento euro and Reserve basket stablecoins"},
+    "batch_022":{"minimum_candidates":2,"theme":"Monerium euro e-money and historical poundtoken GBP stablecoin"},
+    "batch_023":{"minimum_candidates":2,"theme":"StablR EUR and USD incident-state review"},
+    "batch_024":{"minimum_candidates":2,"theme":"Philippine peso and Indonesian rupiah stablecoins"},
+    "batch_025":{"minimum_candidates":2,"theme":"Canadian dollar and South African rand stablecoins"},
+    "batch_026":{"minimum_candidates":2,"theme":"Australian and New Zealand dollar stablecoins"}
   }
 }
