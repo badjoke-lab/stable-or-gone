@@ -28,6 +28,7 @@ on:
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/collect-public-routes.mjs'
       - 'scripts/audit-representative-visuals.mjs'
+      - 'scripts/audit-stats-contrast.mjs'
       - 'scripts/validate-ui-v3-representative-visual-audit.mjs'
       - '.github/workflows/capture-screenshots.yml'
       - 'package.json'
@@ -82,6 +83,9 @@ jobs:
           cat /tmp/sog-screenshot-server.log
           exit 1
 
+      - name: Audit Stats contrast
+        run: node scripts/audit-stats-contrast.mjs
+
       - name: Capture screenshots
         run: |
           case "$CAPTURE_DEVICE" in
@@ -114,6 +118,7 @@ jobs:
           retention-days: 14
           path: |
             artifacts/screenshots/**
+            artifacts/screenshots/stats-contrast-audit.json
             artifacts/screenshots/representative-visual-audit.json
             artifacts/screenshots/representative-visual-audit.md
             artifacts/screenshots-desktop.zip
@@ -135,6 +140,10 @@ jobs:
               echo "- $DEVICE: $DISCOVERED discovered / $SELECTED selected / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+          if [ -f artifacts/screenshots/stats-contrast-audit.json ]; then
+            STATS_RESULT=$(node -e "const x=require('./artifacts/screenshots/stats-contrast-audit.json'); console.log(x.ok ? 'PASS' : 'FAIL')")
+            echo "- Stats contrast audit: $STATS_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f artifacts/screenshots/representative-visual-audit.json ]; then
             RESULT=$(node -e "const x=require('./artifacts/screenshots/representative-visual-audit.json'); console.log(x.ok ? 'PASS' : 'FAIL')")
             echo "- Gate V3-F automated audit: $RESULT" >> "$GITHUB_STEP_SUMMARY"
