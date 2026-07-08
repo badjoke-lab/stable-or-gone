@@ -1,0 +1,3 @@
+[
+  {"id":"sog_issuer_stablr","slug":"stablr","name":"StablR Ltd.","issuer_type":"company","jurisdiction":"Malta / European Economic Area","related_stablecoins":["stablr-eurr","stablr-usdr"],"official_url":"https://stablr.com/","summary":"Malta-regulated financial institution and issuer of EURR and USDR electronic money tokens.","confidence":"high","last_verified_at":"2026-07-09","notes":"Batch V legacy issuer compatibility row. Canonical organization identity is sog_issuer_stablr."}
+]
