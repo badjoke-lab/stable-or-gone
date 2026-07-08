@@ -35,6 +35,7 @@ import legalProfilesGrowthQ from '../../../data/q-legal.json';
 import legalProfilesGrowthR from '../../../data/r-legal.json';
 import legalProfilesGrowthS from '../../../data/s-legal.json';
 import legalProfilesGrowthT from '../../../data/t-legal.json';
+import legalProfilesGrowthU from '../../../data/u-legal.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
@@ -53,6 +54,7 @@ import reserveComponentsBatchQ from '../../../data/reserve-components-v3-batch-q
 import reserveComponentsBatchR from '../../../data/reserve-components-v3-batch-r.json';
 import reserveComponentsBatchS from '../../../data/reserve-components-v3-batch-s.json';
 import reserveComponentsBatchT from '../../../data/batch-t-components.json';
+import reserveComponentsBatchU from '../../../data/batch-u-components.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -100,7 +102,8 @@ const legalProfiles = [
   ...legalProfilesGrowthQ,
   ...legalProfilesGrowthR,
   ...legalProfilesGrowthS,
-  ...legalProfilesGrowthT
+  ...legalProfilesGrowthT,
+  ...legalProfilesGrowthU
 ] as LegalProfileV3[];
 
 const stableAssetRelationships = [
@@ -124,7 +127,8 @@ const reserveComponents = [
   ...reserveComponentsBatchQ,
   ...reserveComponentsBatchR,
   ...reserveComponentsBatchS,
-  ...reserveComponentsBatchT
+  ...reserveComponentsBatchT,
+  ...reserveComponentsBatchU
 ] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
