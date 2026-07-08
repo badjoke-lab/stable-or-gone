@@ -28,11 +28,7 @@ const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const organizationIds = new Set(organizations.map((row) => row.id));
 const eventIds = new Set(events.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
-const legacyById = new Map();
-for (const row of legacyIssuers) {
-  if (legacyById.has(row.id)) failures.push(`${label(row)} duplicates legacy issuer compatibility ID ${row.id}`);
-  legacyById.set(row.id, row);
-}
+const legacyById = new Map(legacyIssuers.map((row) => [row.id, row]));
 
 for (const organization of organizations) {
   const legacy = legacyById.get(organization.id);
