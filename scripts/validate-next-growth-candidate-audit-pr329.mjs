@@ -9,11 +9,23 @@ const audit = readJson('data/next-growth-candidate-audit-pr329.json');
 const baseline = loadRegistryV2Baseline(root);
 const group = (name) => (baseline.data_groups?.[name] ?? []).flatMap(readJson);
 const stablecoins = group('stablecoins');
-const candidates = audit.candidates ?? [];
+const rawCandidates = audit.candidates ?? [];
 const plan = audit.growth_plan ?? [];
 const policy = audit.policy ?? {};
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 const normalize = (value) => String(value ?? '').trim().toLowerCase();
+
+const correctionFile = 'data/next-growth-candidate-corrections-pr330.json';
+const corrections = fs.existsSync(path.join(root, correctionFile)) ? readJson(correctionFile) : [];
+const correctionById = new Map(corrections.map((row) => [row.candidate_id, row]));
+const candidates = rawCandidates.map((row) => ({ ...row, ...(correctionById.get(row.candidate_id) ?? {}) }));
+
+const promotionFiles = fs.readdirSync(path.join(root, 'data'))
+  .filter((name) => /^candidate-promotions-batch-(?:2[2-6])\.json$/.test(name))
+  .sort()
+  .map((name) => `data/${name}`);
+const promotions = promotionFiles.flatMap(readJson);
+const promotionById = new Map(promotions.map((row) => [row.candidate_id, row]));
 
 const expectedCandidateIds = Array.from({ length: 10 }, (_, index) => `sog_cand_${String(101 + index).padStart(6, '0')}`);
 const expectedPrs = [330, 331, 332, 333, 334];
@@ -27,8 +39,7 @@ const expectedTransitions = [
 const expectedBatches = ['batch_022', 'batch_023', 'batch_024', 'batch_025', 'batch_026'];
 
 fail(audit.schema_version === '1.0', 'schema_version must be 1.0');
-fail(audit.canonical_stablecoin_count_before_growth === 100, 'audit must start from 100 canonical assets');
-fail(stablecoins.length === 100, `canonical stablecoin count must remain 100, found ${stablecoins.length}`);
+fail(audit.canonical_stablecoin_count_before_growth === 100, 'audit must preserve the 100-asset pre-growth boundary');
 fail(candidates.length === 10, `candidate count must be 10, found ${candidates.length}`);
 fail(plan.length === 5, `growth plan must contain five PR allocations, found ${plan.length}`);
 
@@ -38,18 +49,26 @@ fail(new Set(candidateIds).size === candidates.length, 'candidate IDs must be un
 
 const proposedIds = candidates.map((row) => row.proposed_stablecoin_id);
 const proposedSlugs = candidates.map((row) => normalize(row.proposed_slug));
-fail(new Set(proposedIds).size === candidates.length, 'proposed stablecoin IDs must be unique');
-fail(new Set(proposedSlugs).size === candidates.length, 'proposed slugs must be unique');
+fail(new Set(proposedIds).size === candidates.length, 'effective proposed stablecoin IDs must be unique');
+fail(new Set(proposedSlugs).size === candidates.length, 'effective proposed slugs must be unique');
 
 const canonicalIds = new Set(stablecoins.map((row) => row.id));
 const canonicalSlugs = new Set(stablecoins.map((row) => normalize(row.slug)));
 for (const row of candidates) {
   const id = row.candidate_id ?? '(missing)';
+  const promotion = promotionById.get(row.candidate_id);
   fail(/^sog_cand_\d{6}$/.test(row.candidate_id ?? ''), `${id}: invalid candidate_id`);
   fail(/^sog_st_[a-z0-9]+$/.test(row.proposed_stablecoin_id ?? ''), `${id}: invalid proposed_stablecoin_id`);
   fail(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.proposed_slug ?? ''), `${id}: invalid proposed_slug`);
-  fail(!canonicalIds.has(row.proposed_stablecoin_id), `${id}: proposed stablecoin ID already canonical`);
-  fail(!canonicalSlugs.has(normalize(row.proposed_slug)), `${id}: proposed slug already canonical`);
+
+  if (promotion?.status === 'promoted') {
+    fail(promotion.promoted_record_id === row.proposed_stablecoin_id, `${id}: promotion target must match effective audited identity`);
+    fail(canonicalIds.has(row.proposed_stablecoin_id), `${id}: promoted candidate must exist canonically`);
+    fail(canonicalSlugs.has(normalize(row.proposed_slug)), `${id}: promoted candidate slug must exist canonically`);
+  } else {
+    fail(!canonicalIds.has(row.proposed_stablecoin_id), `${id}: unpromoted candidate ID already canonical`);
+    fail(!canonicalSlugs.has(normalize(row.proposed_slug)), `${id}: unpromoted candidate slug already canonical`);
+  }
 
   for (const field of [
     'canonical_name',
@@ -92,7 +111,7 @@ for (const [index, row] of plan.entries()) {
   fail(row.from_count === expectedTransitions[index][0], `PR #${row.pr}: invalid from_count`);
   fail(row.to_count === expectedTransitions[index][1], `PR #${row.pr}: invalid to_count`);
   fail(Array.isArray(row.candidate_ids) && row.candidate_ids.length === 2, `PR #${row.pr}: exactly two candidates required`);
-  for (const id of row.candidate_ids ?? []) planCandidateIds.push(id);
+  for (const candidateId of row.candidate_ids ?? []) planCandidateIds.push(candidateId);
 }
 fail(JSON.stringify(planCandidateIds) === JSON.stringify(expectedCandidateIds), 'growth plan candidate order must exactly cover 101 through 110');
 fail(new Set(planCandidateIds).size === 10, 'growth plan candidates must appear exactly once');
@@ -103,11 +122,16 @@ for (const [index, batch] of expectedBatches.entries()) {
   fail(rows.every((row) => row.target_growth_pr === expectedPrs[index]), `${batch}: target growth PR mismatch`);
 }
 
+const promotedNextGrowth = promotions.filter((row) => row.status === 'promoted');
+fail(stablecoins.length === 100 + promotedNextGrowth.length, `canonical stablecoin count must equal 100 plus promoted next-growth candidates; found ${stablecoins.length} assets and ${promotedNextGrowth.length} promotions`);
+fail(promotedNextGrowth.length % 2 === 0, 'next-growth promotions must advance in two-candidate steps');
+fail(promotedNextGrowth.length <= 10, 'next-growth promotions cannot exceed ten candidates');
+
 fail(policy.manual_review_required === true, 'manual review must remain required');
 fail(policy.candidate_selection_is_not_canonical_promotion === true, 'candidate selection must not equal canonical promotion');
-fail(policy.canonical_write_allowed === false, 'canonical writes must be disabled');
-fail(policy.public_output === false, 'public output must be disabled');
-fail(policy.production_publication === false, 'production publication must be disabled');
+fail(policy.canonical_write_allowed === false, 'PR #329 audit policy must preserve canonical write disabled at selection stage');
+fail(policy.public_output === false, 'PR #329 audit policy must preserve public output disabled');
+fail(policy.production_publication === false, 'PR #329 audit policy must preserve production publication disabled');
 
 if (failures.length) {
   console.error('PR #329 next-growth candidate audit validation failed:');
@@ -117,10 +141,12 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
-  canonical_assets: stablecoins.length,
+  pre_growth_canonical_assets: audit.canonical_stablecoin_count_before_growth,
+  current_canonical_assets: stablecoins.length,
   selected_candidates: candidates.length,
+  promoted_next_growth_candidates: promotedNextGrowth.length,
   growth_prs: expectedPrs,
   final_target_count: 110,
-  canonical_write_allowed: policy.canonical_write_allowed,
-  public_output: policy.public_output
+  canonical_write_allowed_at_selection_stage: policy.canonical_write_allowed,
+  public_output_at_selection_stage: policy.public_output
 }, null, 2));
