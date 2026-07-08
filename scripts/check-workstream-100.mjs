@@ -46,7 +46,10 @@ requireText(candidateAmendment, 'PR #329 next-growth candidate audit: active', '
 requireText(candidateAmendment, 'PR #330 100 -> 102 controlled growth: next', 'PR #329 amendment');
 requireText(growthAmendment, 'PR #329 next-growth candidate audit: complete', 'PR #330 amendment');
 requireText(growthAmendment, 'PR #330 100 -> 102 controlled growth: active', 'PR #330 amendment');
-requireText(growthAmendment, 'PR #331 102 -> 104 controlled growth: next', 'PR #330 amendment');
+requireText(growthAmendment, 'PR #331 UI remediation: complete', 'PR #330 amendment');
+requireText(growthAmendment, 'PR #332 102 -> 104 controlled growth: next', 'PR #330 amendment');
+requireText(growthAmendment, 'planned #331 -> actual #332', 'PR #330 amendment');
+requireText(growthAmendment, 'planned #334 -> actual #335', 'PR #330 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
@@ -101,4 +104,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #329 complete, PR #330 active, PR #331 next; immutable 100 and reviewed 102 statistics checkpoints are bound.');
+console.log('Workstream valid: PR #329 complete, PR #330 active, PR #331 UI remediation complete, PR #332 growth next; immutable 100 and reviewed 102 statistics checkpoints are bound.');
