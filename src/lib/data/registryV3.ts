@@ -37,6 +37,7 @@ import legalProfilesGrowthS from '../../../data/s-legal.json';
 import legalProfilesGrowthT from '../../../data/t-legal.json';
 import legalProfilesGrowthU from '../../../data/u-legal.json';
 import legalProfilesGrowthV from '../../../data/v-legal.json';
+import legalProfilesGrowthW from '../../../data/w-legal.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
@@ -57,9 +58,16 @@ import reserveComponentsBatchS from '../../../data/reserve-components-v3-batch-s
 import reserveComponentsBatchT from '../../../data/batch-t-components.json';
 import reserveComponentsBatchU from '../../../data/batch-u-components.json';
 import reserveComponentsBatchV from '../../../data/batch-v-components.json';
+import reserveComponentsBatchW from '../../../data/batch-w-components.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
-import type { LegalProfileV3, StableAssetRelationshipV3, ReserveComponentV3, DeploymentV3Fields, DeploymentCanonicality } from '../schema/registry-v3';
+import type {
+  LegalProfileV3,
+  StableAssetRelationshipV3,
+  ReserveComponentV3,
+  DeploymentV3Fields,
+  DeploymentCanonicality,
+} from '../schema/registry-v3';
 
 const legalProfiles = [
   ...legalProfilesBase, ...legalProfilesBatchB, ...legalProfilesBatchC1, ...legalProfilesBatchC2,
@@ -71,32 +79,36 @@ const legalProfiles = [
   ...legalProfilesGrowthH, ...legalProfilesGrowthI, ...legalProfilesGrowthJ, ...legalProfilesGrowthK,
   ...legalProfilesGrowthL, ...legalProfilesGrowthM, ...legalProfilesGrowthN, ...legalProfilesGrowthO,
   ...legalProfilesGrowthP, ...legalProfilesGrowthQ, ...legalProfilesGrowthR, ...legalProfilesGrowthS,
-  ...legalProfilesGrowthT, ...legalProfilesGrowthU, ...legalProfilesGrowthV
+  ...legalProfilesGrowthT, ...legalProfilesGrowthU, ...legalProfilesGrowthV, ...legalProfilesGrowthW,
 ] as LegalProfileV3[];
 
 const stableAssetRelationships = [
   ...stableAssetRelationshipsData,
-  ...stableAssetRelationshipsBatchH
+  ...stableAssetRelationshipsBatchH,
 ] as StableAssetRelationshipV3[];
 
 const reserveComponents = [
-  ...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG,
-  ...reserveComponentsBatchH, ...reserveComponentsBatchI, ...reserveComponentsBatchJ,
-  ...reserveComponentsBatchK, ...reserveComponentsBatchL, ...reserveComponentsBatchM,
-  ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP,
-  ...reserveComponentsBatchQ, ...reserveComponentsBatchR, ...reserveComponentsBatchS,
-  ...reserveComponentsBatchT, ...reserveComponentsBatchU, ...reserveComponentsBatchV
+  ...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH,
+  ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL,
+  ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP,
+  ...reserveComponentsBatchQ, ...reserveComponentsBatchR, ...reserveComponentsBatchS, ...reserveComponentsBatchT,
+  ...reserveComponentsBatchU, ...reserveComponentsBatchV, ...reserveComponentsBatchW,
 ] as ReserveComponentV3[];
 
-export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & { canonicality: DeploymentCanonicality };
+export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
+  canonicality: DeploymentCanonicality;
+};
 
 export function getLegalProfiles(): LegalProfileV3[] {
   return legalProfiles.map((row) => ({
     ...row,
-    classifications: row.classifications.map((entry) => ({ ...entry, evidence_ids: [...entry.evidence_ids] })),
+    classifications: row.classifications.map((entry) => ({
+      ...entry,
+      evidence_ids: [...entry.evidence_ids],
+    })),
     claim_against_organization_ids: [...row.claim_against_organization_ids],
     licensed_or_regulated_as: [...row.licensed_or_regulated_as],
-    evidence_ids: [...row.evidence_ids]
+    evidence_ids: [...row.evidence_ids],
   }));
 }
 
@@ -105,15 +117,23 @@ export function getLegalProfile(stablecoinId: string): LegalProfileV3 | undefine
 }
 
 export function getStableAssetRelationships(): StableAssetRelationshipV3[] {
-  return stableAssetRelationships.map((row) => ({ ...row, evidence_ids: [...row.evidence_ids] }));
+  return stableAssetRelationships.map((row) => ({
+    ...row,
+    evidence_ids: [...row.evidence_ids],
+  }));
 }
 
 export function getStableAssetRelationshipsFor(stablecoinId: string): StableAssetRelationshipV3[] {
-  return getStableAssetRelationships().filter((row) => row.from_asset_id === stablecoinId || row.to_asset_id === stablecoinId);
+  return getStableAssetRelationships().filter(
+    (row) => row.from_asset_id === stablecoinId || row.to_asset_id === stablecoinId,
+  );
 }
 
 export function getReserveComponents(): ReserveComponentV3[] {
-  return reserveComponents.map((row) => ({ ...row, evidence_ids: [...row.evidence_ids] }));
+  return reserveComponents.map((row) => ({
+    ...row,
+    evidence_ids: [...row.evidence_ids],
+  }));
 }
 
 export function getReserveComponentsFor(stablecoinId: string): ReserveComponentV3[] {
@@ -127,7 +147,7 @@ export function getDeploymentsV3(): DeploymentV3View[] {
       ...deployment,
       canonicality: deployment.canonicality ?? 'unknown',
       control_event_ids: [...(deployment.control_event_ids ?? [])],
-      evidence_ids: [...(deployment.evidence_ids ?? [])]
+      evidence_ids: [...(deployment.evidence_ids ?? [])],
     };
   });
 }

@@ -1,0 +1,4 @@
+[
+  {"id":"sog_issuer_coins_ph","slug":"coins-ph","name":"Coins.ph","issuer_type":"company","jurisdiction":"Philippines","related_stablecoins":["coins-phpc"],"official_url":"https://www.coins.ph/en-ph","summary":"Philippine regulated crypto and e-money platform that issues PHPC.","confidence":"high","last_verified_at":"2026-07-09","notes":"Batch W legacy issuer compatibility row. Canonical organization identity is sog_issuer_coins_ph."},
+  {"id":"sog_issuer_straitsx_indonesia","slug":"straitsx-indonesia","name":"PT Xfers StraitsX Indonesia","issuer_type":"company","jurisdiction":"Indonesia","related_stablecoins":["straitsx-xidr"],"official_url":"https://www.straitsx.com/xidr","summary":"Indonesian StraitsX group issuer identified in XIDR launch materials.","confidence":"high","last_verified_at":"2026-07-09","notes":"Batch W legacy issuer compatibility row. Canonical organization identity is sog_issuer_straitsx_indonesia."}
+]

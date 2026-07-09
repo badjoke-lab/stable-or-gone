@@ -1,0 +1,4 @@
+[
+  {"candidate_id":"sog_cand_000105","status":"promoted","promotion_pr":333,"promoted_record_id":"sog_st_phpc","notes":"Promoted after review of the current Coins.ph PHPC whitepaper, BSP sandbox context, Ronin official launch and contract identity, and post-sandbox remittance use evidence. Lifecycle remains restricted through legacy limited status because current general-access mint and redemption scope is not fully established."},
+  {"candidate_id":"sog_cand_000106","status":"promoted","promotion_pr":333,"promoted_record_id":"sog_st_xidr","notes":"Promoted after current StraitsX product, launch, cash-backing, regulatory trust, redemption, and exact Ethereum/Polygon/Zilliqa deployment review."}
+]
