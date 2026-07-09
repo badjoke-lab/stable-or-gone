@@ -72,7 +72,7 @@ requireText(comparison337, 'PR #337 audit all 110 assets for comparison readines
 requireText(comparison337, 'PR #338 normalize comparison-critical gaps and validators: next', 'PR #337 amendment');
 requireText(normalization338, 'PR #337 audit all 110 assets for comparison readiness: complete', 'PR #338 amendment');
 requireText(normalization338, 'PR #338 normalize comparison-critical gaps and validators: active', 'PR #338 amendment');
-requireText(normalization338, 'PR #339 define canonical Market Access Record schema and governance: next', 'PR #338 amendment');
+requireText(normalization338, 'PR #340 define canonical Market Access Record schema and governance: next', 'PR #338 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
@@ -132,4 +132,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Workstream valid: PR #337 all-asset audit complete, PR #338 normalizes the reviewed 20-row asset_class queue, and PR #339 is next for Market Access Record schema and governance.');
+console.log('Workstream valid: PR #337 all-asset audit complete, PR #338 normalizes the reviewed 20-row asset_class queue, PR #339 is the inserted Japan access publication, and PR #340 is next for Market Access Record schema and governance.');
