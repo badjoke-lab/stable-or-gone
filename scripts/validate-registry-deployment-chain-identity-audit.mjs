@@ -16,12 +16,13 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const expectedVerificationCounts = verification.status_counts ?? {};
 const expectedControlNotRecorded = expectedCounts.deployments - 1;
+const expectedRecordedChains = 39;
 
 expect(report.audit_id === 'sog_registry_100_deployment_chain_identity_pr301', `unexpected audit_id ${report.audit_id}`);
 expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} stable assets, got ${report.audited_counts?.stable_assets}`);
 expect(report.audited_counts?.deployments === expectedCounts.deployments, `expected ${expectedCounts.deployments} deployments, got ${report.audited_counts?.deployments}`);
 expect(report.audited_counts?.stablecoins_with_deployments === checkpoint.asset_count, `expected deployment coverage for ${checkpoint.asset_count} assets, got ${report.audited_counts?.stablecoins_with_deployments}`);
-expect(report.audited_counts?.chains_recorded === 37, `expected 37 recorded chain labels, got ${report.audited_counts?.chains_recorded}`);
+expect(report.audited_counts?.chains_recorded === expectedRecordedChains, `expected ${expectedRecordedChains} recorded chain labels, got ${report.audited_counts?.chains_recorded}`);
 expect(report.audited_counts?.verification_overlay_ids === verification.expected_total, `expected verification overlay coverage of ${verification.expected_total}, got ${report.audited_counts?.verification_overlay_ids}`);
 expect((report.findings?.critical ?? []).length === 0, `critical findings remain: ${(report.findings?.critical ?? []).length}`);
 expect((report.identity?.duplicate_identifier_groups ?? []).length === 0, 'duplicate deployment identifier groups remain');
@@ -54,4 +55,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Deployment and chain identity audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${expectedCounts.deployments} deployments, complete ${checkpoint.asset_count}-asset coverage, 0 identity/reference failures, and bounded verification/network/control-capability queues.`);
+console.log(`Deployment and chain identity audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${expectedCounts.deployments} deployments across ${expectedRecordedChains} recorded chain labels, complete ${checkpoint.asset_count}-asset coverage, 0 identity/reference failures, and bounded verification/network/control-capability queues.`);

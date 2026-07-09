@@ -1,0 +1,15 @@
+[
+  {
+    "id":"sog_issuer_stablr",
+    "slug":"stablr",
+    "name":"StablR Ltd.",
+    "organization_type":"regulated_financial_institution",
+    "legacy_issuer_type":"company",
+    "jurisdiction":"Malta / European Economic Area",
+    "official_url":"https://stablr.com/",
+    "summary":"Malta-based regulated electronic-money institution and issuer of StablR Euro (EURR) and StablR USD (USDR).",
+    "confidence":"high",
+    "last_verified_at":"2026-07-09",
+    "notes":"Current official product pages state that StablR Ltd. is licensed and regulated in Malta and authorized to issue electronic money tokens under MiCA."
+  }
+]

@@ -1,0 +1,4 @@
+[
+  {"candidate_id":"sog_cand_000103","status":"promoted","promotion_pr":332,"promoted_record_id":"sog_st_eurr","notes":"Promoted after current StablR product, reserve, regulatory, incident-recovery, and official multi-chain deployment review. Canonical lifecycle is restricted because minting and redemption remain suspended in the latest reviewed official recovery update."},
+  {"candidate_id":"sog_cand_000104","status":"promoted","promotion_pr":332,"promoted_record_id":"sog_st_stablrusdr","notes":"Promoted after current StablR product, reserve, regulatory, incident-recovery, and official multi-chain deployment review. Canonical lifecycle is restricted because minting and redemption remain suspended in the latest reviewed official recovery update."}
+]

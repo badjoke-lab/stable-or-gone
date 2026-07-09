@@ -123,7 +123,7 @@ for (const [key, owners] of identityOwners) {
 
 const classificationById = new Map(classifications.map((row) => [row.id, row]));
 const compatibility = {
-  active: new Set(['active']), limited: new Set(['restricted']), impaired: new Set(['restricted', 'suspended']),
+  active: new Set(['active']), limited: new Set(['restricted']), restricted: new Set(['restricted']), impaired: new Set(['restricted', 'suspended']),
   discontinued: new Set(['winding_down', 'inactive', 'terminated']), failed: new Set(['collapsed']),
   rebranded: new Set(['rebranded']), migrated: new Set(['migrated']), unknown: new Set(['unknown'])
 };

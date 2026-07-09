@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_eurr","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurr_product_batch_v"],"notes":"No canonical EURR holder-yield mechanism is asserted. Reserve income, if any, is not treated as token-holder yield without explicit distribution terms."},
+  {"id":"sog_st_stablrusdr","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdr_product_batch_v"],"notes":"No canonical USDR holder-yield mechanism is asserted. Reserve income, if any, is not treated as token-holder yield without explicit distribution terms."}
+]

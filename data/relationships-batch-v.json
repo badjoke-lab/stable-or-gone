@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_eurr_stablr_batch_v","stablecoin_id":"sog_st_eurr","organization_id":"sog_issuer_stablr","role":"legal_issuer","start_date":null,"end_date":null,"status":"active","evidence_ids":["sog_src_eurr_product_batch_v","sog_src_stablr_recovery_20260529_batch_v"],"notes":"StablR Ltd. is the regulated issuer of EURR. The issuer relationship remains active while token minting and redemption are temporarily suspended under the recovery plan."},
+  {"id":"sog_rel_usdr_stablr_batch_v","stablecoin_id":"sog_st_stablrusdr","organization_id":"sog_issuer_stablr","role":"legal_issuer","start_date":null,"end_date":null,"status":"active","evidence_ids":["sog_src_usdr_product_batch_v","sog_src_stablr_recovery_20260529_batch_v"],"notes":"StablR Ltd. is the regulated issuer of USDR. The issuer relationship remains active while token minting and redemption are temporarily suspended under the recovery plan."}
+]

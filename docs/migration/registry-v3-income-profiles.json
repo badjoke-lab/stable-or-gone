@@ -23,9 +23,10 @@
     "data/r-returns.json",
     "data/s-returns.json",
     "data/batch-t-income.json",
-    "data/batch-u-income.json"
+    "data/batch-u-income.json",
+    "data/batch-v-income.json"
   ],
-  "minimum_count": 102,
+  "minimum_count": 104,
   "loader": "src/lib/data/incomeProfilesV3.ts",
   "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"

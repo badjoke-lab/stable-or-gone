@@ -15,14 +15,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - name: Install dependencies
-        run: npm install
-      - name: Rebuild integrity audit
-        run: node scripts/audit-registry-integrity-batch-t.mjs
-      - name: Validate generated integrity audit
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Rebuild current integrity audit
+        run: node scripts/audit-registry-integrity-batch-o.mjs
+      - name: Validate generated current integrity audit
         if: success()
-        run: node scripts/audit-registry-integrity-batch-t.mjs --check
+        run: node scripts/audit-registry-integrity-batch-o.mjs --check
       - name: Upload integrity audit
         if: always()
         uses: actions/upload-artifact@v4

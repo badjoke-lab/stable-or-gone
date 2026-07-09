@@ -12,8 +12,7 @@ const original = fs.readFileSync(basePath, 'utf8');
 const anchor = "const baseline = readJson('docs/migration/registry-v2-baseline.json');";
 const foundationAnchor = "const foundation = readJson('docs/migration/registry-v3-foundation.json');";
 const yieldAnchor = "const incomeManifest = readJson('docs/migration/registry-v3-income-profiles.json');";
-const currentJsonAnchor = "const currentJson = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';";
-for (const [name, value] of Object.entries({ anchor, foundationAnchor, yieldAnchor, currentJsonAnchor })) {
+for (const [name, value] of Object.entries({ anchor, foundationAnchor, yieldAnchor })) {
   if (!original.includes(value)) throw new Error(`Registry integrity patch anchor is missing: ${name}`);
 }
 
@@ -63,21 +62,10 @@ const incomeManifest = {
   data_files: [...new Set([...(incomeManifestBase.data_files ?? []), 'data/yield-profiles-v3-q.json', 'data/r-returns.json', 'data/s-returns.json', 'data/batch-t-income.json'])]
 };`;
 
-const semanticJsonReplacement = `const currentJsonRaw = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';
-  let currentJson = currentJsonRaw;
-  if (currentJsonRaw) {
-    try {
-      currentJson = serialize(JSON.parse(currentJsonRaw));
-    } catch {
-      currentJson = currentJsonRaw;
-    }
-  }`;
-
 const patched = original
   .replace(anchor, replacement)
   .replace(foundationAnchor, foundationReplacement)
   .replace(yieldAnchor, yieldReplacement)
-  .replace(currentJsonAnchor, semanticJsonReplacement)
   .replaceAll('SOG 80-Record Final Registry Audit', 'SOG Current Registry Audit')
   .replaceAll('SOG 87-Record Registry Audit', 'SOG Current Registry Audit')
   .replaceAll('SOG 92-Record Registry Audit', 'SOG Current Registry Audit')

@@ -29,9 +29,9 @@ jobs:
       - name: Validate final state
         run: npm run validate:final
       - name: Rebuild current registry integrity audit
-        run: node scripts/audit-registry-integrity-batch-t.mjs
+        run: node scripts/audit-registry-integrity-batch-o.mjs
       - name: Validate current registry integrity audit
-        run: node scripts/audit-registry-integrity-batch-t.mjs --check
+        run: node scripts/audit-registry-integrity-batch-o.mjs --check
       - name: Validate audited 100-asset checkpoint
         run: node scripts/validate-audited-100-checkpoint.mjs
       - name: Verify current production public smoke
@@ -47,7 +47,7 @@ jobs:
         if: github.event_name == 'push'
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-output-parity.mjs
       - name: Verify production canonical checkpoint parity
-        if: always()
+        if: github.event_name == 'push'
         run: env -u SOG_EXPECTED_COMMIT -u GITHUB_SHA node scripts/check-production-audited-checkpoint.mjs
       - name: Upload checkpoint validation
         if: always()
