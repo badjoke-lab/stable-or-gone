@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { buildComparisonReadinessAudit, serializeAudit } from './comparison/build-readiness-audit-pr337.mjs';
+import { buildComparisonReadinessAudit } from './comparison/build-readiness-audit-pr337.mjs';
+import { buildCompactComparisonReadinessAudit, serializeCompactAudit } from './comparison/compact-readiness-audit-pr337.mjs';
 
 const root = process.cwd();
 const contract = JSON.parse(fs.readFileSync(path.join(root, 'data/quality/comparison-readiness-contract-v1.json'), 'utf8'));
@@ -87,6 +88,15 @@ for (const summary of audit.summary?.dimension_states ?? []) {
 }
 expect((audit.summary?.dimension_states ?? []).length === 19, 'dimension summary must contain 19 rows');
 
+const compact = buildCompactComparisonReadinessAudit();
+expect(compact.comparison_cell_count === 2090, `compact artifact must encode 2090 cells, found ${compact.comparison_cell_count}`);
+expect(JSON.stringify(compact.dimension_order) === JSON.stringify(contractDimensionIds), 'compact dimension order mismatch');
+expect((compact.assets ?? []).length === 110, 'compact artifact must contain 110 assets');
+for (const row of compact.assets ?? []) {
+  expect(typeof row.dimension_state_codes === 'string' && row.dimension_state_codes.length === 19, `${row.asset_id}: compact state-code string must have length 19`);
+  expect(/^[runb]{19}$/.test(row.dimension_state_codes), `${row.asset_id}: compact state-code string contains invalid code`);
+}
+
 const forbiddenExactKeys = new Set(['score', 'ranking', 'recommendation']);
 const visit = (value, pathParts = []) => {
   if (Array.isArray(value)) return value.forEach((item, index) => visit(item, [...pathParts, String(index)]));
@@ -97,12 +107,13 @@ const visit = (value, pathParts = []) => {
   }
 };
 visit(audit);
+visit(compact);
 
 const committedPath = path.join(root, 'data/quality/comparison-readiness-audit-pr337.json');
 if (fs.existsSync(committedPath)) {
   const committed = fs.readFileSync(committedPath, 'utf8');
-  const regenerated = serializeAudit(audit);
-  expect(committed === regenerated, 'committed readiness audit must equal deterministic regeneration byte-for-byte');
+  const regenerated = serializeCompactAudit(compact);
+  expect(committed === regenerated, 'committed compact readiness audit must equal deterministic regeneration byte-for-byte');
 } else if (process.env.SOG_REQUIRE_COMMITTED_READINESS_AUDIT === '1') {
   failures.push('committed readiness audit artifact is required');
 }
