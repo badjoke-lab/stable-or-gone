@@ -61,36 +61,93 @@ import reserveComponentsBatchV from '../../../data/batch-v-components.json';
 import reserveComponentsBatchW from '../../../data/batch-w-components.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
-import type { LegalProfileV3, StableAssetRelationshipV3, ReserveComponentV3, DeploymentV3Fields, DeploymentCanonicality } from '../schema/registry-v3';
+import type {
+  LegalProfileV3,
+  StableAssetRelationshipV3,
+  ReserveComponentV3,
+  DeploymentV3Fields,
+  DeploymentCanonicality,
+} from '../schema/registry-v3';
 
 const legalProfiles = [
-  ...legalProfilesBase,...legalProfilesBatchB,...legalProfilesBatchC1,...legalProfilesBatchC2,
-  ...legalProfilesBatchD1,...legalProfilesBatchD2a,...legalProfilesBatchE1,...legalProfilesBatchE2,
-  ...legalProfilesBatchE3,...legalProfilesBatchF1,...legalProfilesGho,...legalProfilesBold,
-  ...legalProfilesUsd0,...legalProfilesUsr,...legalProfilesSai,...legalProfilesHusd,
-  ...legalProfilesIron,...legalProfilesMusd,...legalProfilesEurs,...legalProfilesEurt,
-  ...legalProfilesUsdm,...legalProfilesAlusd,...legalProfilesGrowthF,...legalProfilesGrowthG,
-  ...legalProfilesGrowthH,...legalProfilesGrowthI,...legalProfilesGrowthJ,...legalProfilesGrowthK,
-  ...legalProfilesGrowthL,...legalProfilesGrowthM,...legalProfilesGrowthN,...legalProfilesGrowthO,
-  ...legalProfilesGrowthP,...legalProfilesGrowthQ,...legalProfilesGrowthR,...legalProfilesGrowthS,
-  ...legalProfilesGrowthT,...legalProfilesGrowthU,...legalProfilesGrowthV,...legalProfilesGrowthW
+  ...legalProfilesBase, ...legalProfilesBatchB, ...legalProfilesBatchC1, ...legalProfilesBatchC2,
+  ...legalProfilesBatchD1, ...legalProfilesBatchD2a, ...legalProfilesBatchE1, ...legalProfilesBatchE2,
+  ...legalProfilesBatchE3, ...legalProfilesBatchF1, ...legalProfilesGho, ...legalProfilesBold,
+  ...legalProfilesUsd0, ...legalProfilesUsr, ...legalProfilesSai, ...legalProfilesHusd,
+  ...legalProfilesIron, ...legalProfilesMusd, ...legalProfilesEurs, ...legalProfilesEurt,
+  ...legalProfilesUsdm, ...legalProfilesAlusd, ...legalProfilesGrowthF, ...legalProfilesGrowthG,
+  ...legalProfilesGrowthH, ...legalProfilesGrowthI, ...legalProfilesGrowthJ, ...legalProfilesGrowthK,
+  ...legalProfilesGrowthL, ...legalProfilesGrowthM, ...legalProfilesGrowthN, ...legalProfilesGrowthO,
+  ...legalProfilesGrowthP, ...legalProfilesGrowthQ, ...legalProfilesGrowthR, ...legalProfilesGrowthS,
+  ...legalProfilesGrowthT, ...legalProfilesGrowthU, ...legalProfilesGrowthV, ...legalProfilesGrowthW,
 ] as LegalProfileV3[];
 
-const stableAssetRelationships = [...stableAssetRelationshipsData,...stableAssetRelationshipsBatchH] as StableAssetRelationshipV3[];
+const stableAssetRelationships = [
+  ...stableAssetRelationshipsData,
+  ...stableAssetRelationshipsBatchH,
+] as StableAssetRelationshipV3[];
 
 const reserveComponents = [
-  ...reserveComponentsData,...reserveComponentsBatchF,...reserveComponentsBatchG,...reserveComponentsBatchH,
-  ...reserveComponentsBatchI,...reserveComponentsBatchJ,...reserveComponentsBatchK,...reserveComponentsBatchL,
-  ...reserveComponentsBatchM,...reserveComponentsBatchN,...reserveComponentsBatchO,...reserveComponentsBatchP,
-  ...reserveComponentsBatchQ,...reserveComponentsBatchR,...reserveComponentsBatchS,...reserveComponentsBatchT,
-  ...reserveComponentsBatchU,...reserveComponentsBatchV,...reserveComponentsBatchW
+  ...reserveComponentsData, ...reserveComponentsBatchF, ...reserveComponentsBatchG, ...reserveComponentsBatchH,
+  ...reserveComponentsBatchI, ...reserveComponentsBatchJ, ...reserveComponentsBatchK, ...reserveComponentsBatchL,
+  ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP,
+  ...reserveComponentsBatchQ, ...reserveComponentsBatchR, ...reserveComponentsBatchS, ...reserveComponentsBatchT,
+  ...reserveComponentsBatchU, ...reserveComponentsBatchV, ...reserveComponentsBatchW,
 ] as ReserveComponentV3[];
 
-export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & { canonicality:DeploymentCanonicality };
-export function getLegalProfiles():LegalProfileV3[] { return legalProfiles.map((row)=>({...row,classifications:row.classifications.map((entry)=>({...entry,evidence_ids:[...entry.evidence_ids]})),claim_against_organization_ids:[...row.claim_against_organization_ids],licensed_or_regulated_as:[...row.licensed_or_regulated_as],evidence_ids:[...row.evidence_ids]})); }
-export function getLegalProfile(stablecoinId:string):LegalProfileV3|undefined { return getLegalProfiles().find((row)=>row.id===stablecoinId); }
-export function getStableAssetRelationships():StableAssetRelationshipV3[] { return stableAssetRelationships.map((row)=>({...row,evidence_ids:[...row.evidence_ids]})); }
-export function getStableAssetRelationshipsFor(stablecoinId:string):StableAssetRelationshipV3[] { return getStableAssetRelationships().filter((row)=>row.from_asset_id===stablecoinId||row.to_asset_id===stablecoinId); }
-export function getReserveComponents():ReserveComponentV3[] { return reserveComponents.map((row)=>({...row,evidence_ids:[...row.evidence_ids]})); }
-export function getReserveComponentsFor(stablecoinId:string):ReserveComponentV3[] { return getReserveComponents().filter((row)=>row.stablecoin_id===stablecoinId); }
-export function getDeploymentsV3():DeploymentV3View[] { return getDeployments().map((row)=>{ const deployment=row as DeploymentRow & DeploymentV3Fields; return {...deployment,canonicality:deployment.canonicality??'unknown',control_event_ids:[...(deployment.control_event_ids??[])],evidence_ids:[...(deployment.evidence_ids??[])]}; }); }
+export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
+  canonicality: DeploymentCanonicality;
+};
+
+export function getLegalProfiles(): LegalProfileV3[] {
+  return legalProfiles.map((row) => ({
+    ...row,
+    classifications: row.classifications.map((entry) => ({
+      ...entry,
+      evidence_ids: [...entry.evidence_ids],
+    })),
+    claim_against_organization_ids: [...row.claim_against_organization_ids],
+    licensed_or_regulated_as: [...row.licensed_or_regulated_as],
+    evidence_ids: [...row.evidence_ids],
+  }));
+}
+
+export function getLegalProfile(stablecoinId: string): LegalProfileV3 | undefined {
+  return getLegalProfiles().find((row) => row.id === stablecoinId);
+}
+
+export function getStableAssetRelationships(): StableAssetRelationshipV3[] {
+  return stableAssetRelationships.map((row) => ({
+    ...row,
+    evidence_ids: [...row.evidence_ids],
+  }));
+}
+
+export function getStableAssetRelationshipsFor(stablecoinId: string): StableAssetRelationshipV3[] {
+  return getStableAssetRelationships().filter(
+    (row) => row.from_asset_id === stablecoinId || row.to_asset_id === stablecoinId,
+  );
+}
+
+export function getReserveComponents(): ReserveComponentV3[] {
+  return reserveComponents.map((row) => ({
+    ...row,
+    evidence_ids: [...row.evidence_ids],
+  }));
+}
+
+export function getReserveComponentsFor(stablecoinId: string): ReserveComponentV3[] {
+  return getReserveComponents().filter((row) => row.stablecoin_id === stablecoinId);
+}
+
+export function getDeploymentsV3(): DeploymentV3View[] {
+  return getDeployments().map((row) => {
+    const deployment = row as DeploymentRow & DeploymentV3Fields;
+    return {
+      ...deployment,
+      canonicality: deployment.canonicality ?? 'unknown',
+      control_event_ids: [...(deployment.control_event_ids ?? [])],
+      evidence_ids: [...(deployment.evidence_ids ?? [])],
+    };
+  });
+}
