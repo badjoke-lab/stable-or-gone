@@ -4,7 +4,6 @@ const originalLog = console.log;
 console.log = () => {};
 try {
   await import('./validate-next-growth-candidate-audit-pr329.mjs');
-  await import('./validate-batch25-growth-h.mjs');
   await import('./validate-batch26-growth-i.mjs');
 } finally {
   console.log = originalLog;
