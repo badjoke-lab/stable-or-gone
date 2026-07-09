@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_phpc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_phpc_whitepaper_batch_w"],"notes":"No canonical PHPC holder-yield mechanism is asserted."},
+  {"id":"sog_st_xidr","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_xidr_product_batch_w","sog_src_xidr_stability_batch_w"],"notes":"No canonical native XIDR holder-yield mechanism is asserted. Third-party DeFi liquidity rewards are not treated as issuer-native yield."}
+]
