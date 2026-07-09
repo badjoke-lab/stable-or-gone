@@ -7,6 +7,7 @@ const checkpointPath = 'docs/migration/audited-100-asset-canonical-checkpoint.js
 const reportPath = 'artifacts/audited-100-checkpoint-validation.json';
 const checkpoint = JSON.parse(fs.readFileSync(path.join(root, checkpointPath), 'utf8'));
 const currentCheckpoint = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/current-canonical-checkpoint.json'), 'utf8'));
+const history = JSON.parse(fs.readFileSync(path.join(root, 'data/stats-history.json'), 'utf8'));
 const reproducibleBaseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/reproducible-build-output-baseline.json'), 'utf8'));
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -77,11 +78,18 @@ check(production.requires_checkpoint_file_count_match === true, 'production chec
 check(production.requires_provenance_check === true, 'production provenance check must remain required');
 check(production.requires_exact_output_parity === true, 'production output parity must remain required');
 
-check(currentCheckpoint.previous_checkpoint_id === checkpoint.checkpoint_id, 'current growth checkpoint must preserve audited 100 checkpoint as predecessor');
+const snapshots = Array.isArray(history.snapshots) ? history.snapshots : [];
+const currentIndex = snapshots.findIndex((snapshot) => snapshot.checkpoint_id === currentCheckpoint.checkpoint_id);
+const currentHistoryPredecessor = currentIndex > 0 ? snapshots[currentIndex - 1]?.checkpoint_id : null;
+const historicalChainValid = snapshots.length >= 1
+  && snapshots[0]?.checkpoint_id === checkpoint.checkpoint_id
+  && currentIndex === snapshots.length - 1
+  && currentHistoryPredecessor === currentCheckpoint.previous_checkpoint_id;
+check(historicalChainValid, 'statistics history must preserve audited 100 checkpoint at the root and link the current checkpoint to the immediately previous reviewed snapshot');
 check(currentCheckpoint.asset_count >= 100, 'current checkpoint cannot regress below audited 100 assets');
 
 const report = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   audit_id: 'sog_audited_100_asset_checkpoint_historical_integrity_validation',
   checkpoint_id: checkpoint.checkpoint_id,
   source_commit: checkpoint.source_commit,
@@ -95,7 +103,9 @@ const report = {
   detail_routes: checkpoint.release_expected_counts?.routes?.total_detail,
   current_checkpoint_id: currentCheckpoint.checkpoint_id,
   current_asset_count: currentCheckpoint.asset_count,
-  predecessor_link_valid: currentCheckpoint.previous_checkpoint_id === checkpoint.checkpoint_id,
+  current_predecessor_checkpoint_id: currentCheckpoint.previous_checkpoint_id,
+  history_snapshot_count: snapshots.length,
+  historical_chain_valid: historicalChainValid,
   reproducible: checkpoint.reproducibility_checkpoint?.reproducible,
   failures,
   ok: failures.length === 0
