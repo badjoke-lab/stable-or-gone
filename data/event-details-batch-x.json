@@ -1,0 +1,4 @@
+[
+  {"id":"sog_ev_cadc_loon_transition_batch_x","title":"Loon acquires CADC and assumes issuer responsibility","subject_stablecoin_ids":["sog_st_cadc"],"subject_organization_ids":["sog_issuer_loon_technology"],"evidence_ids":["sog_src_cadc_loon_acquisition_batch_x","sog_src_cadc_meet_batch_x"],"event_detail_kind":"migration"},
+  {"id":"sog_ev_zarp_solana_migration_batch_x","title":"ZARP migrates to a Solana Token-2022 mint","subject_stablecoin_ids":["sog_st_zarp"],"subject_organization_ids":["sog_issuer_zarp_stablecoin"],"evidence_ids":["sog_src_zarp_news_batch_x","sog_src_zarp_blockchains_batch_x"],"event_detail_kind":"migration"}
+]
