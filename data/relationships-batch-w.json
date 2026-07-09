@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_phpc_coins_ph_batch_w","stablecoin_id":"sog_st_phpc","organization_id":"sog_issuer_coins_ph","role":"legal_issuer","start_date":null,"end_date":null,"status":"active","evidence_ids":["sog_src_phpc_whitepaper_batch_w","sog_src_phpc_sandbox_20240513_batch_w"],"notes":"Coins.ph is identified as PHPC issuer in the official PHPC whitepaper."},
+  {"id":"sog_rel_xidr_straitsx_indonesia_batch_w","stablecoin_id":"sog_st_xidr","organization_id":"sog_issuer_straitsx_indonesia","role":"legal_issuer","start_date":"2021-11-18","end_date":null,"status":"active","evidence_ids":["sog_src_xidr_launch_batch_w","sog_src_xidr_product_batch_w"],"notes":"PT Xfers StraitsX Indonesia is identified by StraitsX as XIDR issuer."}
+]
