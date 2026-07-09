@@ -71,8 +71,8 @@ requireText(analysisSpec, 'Status: canonical implementation specification — PR
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
 requireText(comparisonSpec, 'Status: canonical implementation specification', 'comparison readiness spec');
 requireText(comparisonSpec, 'exactly nineteen dimensions are defined', 'comparison readiness spec');
-requireText(comparisonAuditSpec, 'exactly 110 canonical assets', 'comparison readiness audit spec');
-requireText(comparisonAuditSpec, 'nineteen dimension rows for every asset', 'comparison readiness audit spec');
+requireText(comparisonAuditSpec, 'PR #337 applies the PR #336 Comparison Readiness contract to all 110 canonical stable assets.', 'comparison readiness audit spec');
+requireText(comparisonAuditSpec, 'nineteen dimension-level states per asset;', 'comparison readiness audit spec');
 requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
 requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
 requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
