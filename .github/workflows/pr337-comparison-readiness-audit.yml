@@ -32,7 +32,7 @@ jobs:
       - name: Build deterministic 110-asset readiness audit
         run: |
           mkdir -p artifacts
-          node scripts/comparison/build-readiness-audit-pr337.mjs artifacts/comparison-readiness-audit-pr337.json
+          node scripts/comparison/compact-readiness-audit-pr337.mjs artifacts/comparison-readiness-audit-pr337.json
       - name: Validate readiness audit structure
         run: node scripts/validate-comparison-readiness-audit-pr337.mjs
       - name: Validate active workstream
