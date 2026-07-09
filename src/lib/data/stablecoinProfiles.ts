@@ -25,5 +25,6 @@ s-profiles.json
 batch-t-reserve-redemption.json
 batch-u-reserve-redemption.json
 batch-v-reserve-redemption.json
+batch-w-reserve-redemption.json
 `;
 void profileLoaderInventory;
