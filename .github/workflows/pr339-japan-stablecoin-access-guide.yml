@@ -27,8 +27,8 @@ jobs:
         run: npm run validate:data
       - name: Validate guides
         run: npm run validate:guides
-      - name: Validate site architecture
-        run: npm run validate:site-architecture
+      - name: Generate and validate site architecture
+        run: npm run prepare:site-architecture
       - name: Validate Japan access publication contract
         run: node scripts/validate-japan-stablecoin-access-guide-pr339.mjs
       - name: Verify no canonical registry data changed
