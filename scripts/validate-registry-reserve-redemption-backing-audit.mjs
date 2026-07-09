@@ -15,7 +15,7 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const expectedApplicabilityQueueAssets = 12;
 const expectedCoveredAssets = checkpoint.asset_count - expectedApplicabilityQueueAssets;
-const expectedNoDateRows = 68;
+const expectedNoDateRows = 70;
 
 expect(report.audit_id === 'sog_registry_100_reserve_redemption_backing_pr300', `unexpected audit_id ${report.audit_id}`);
 expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} assets, got ${report.audited_counts?.stable_assets}`);
