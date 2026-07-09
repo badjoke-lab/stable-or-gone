@@ -1,7 +1,7 @@
 # PR #338 Comparison Readiness normalization activation
 
 Status: active roadmap amendment  
-Updated: 2026-07-09
+Updated: 2026-07-10
 
 ## Authoritative current workstream
 
@@ -10,7 +10,8 @@ Phase E controlled growth to 110 assets: complete
 PR #336 Comparison Readiness contract and audit method: complete
 PR #337 audit all 110 assets for comparison readiness: complete
 PR #338 normalize comparison-critical gaps and validators: active
-PR #339 define canonical Market Access Record schema and governance: next
+PR #339 Japan stablecoin access guide and reviewed research checkpoint: inserted and merged separately
+PR #340 define canonical Market Access Record schema and governance: next
 ```
 
 ## Binding source queue
@@ -57,7 +58,9 @@ This does not assert that all factual unknowns are resolved. Explicit unknowns r
 
 ## Market-access boundary
 
-Market access remains outside canonical comparison readiness until PR #339 defines its schema and governance.
+Market access remains outside canonical comparison readiness until PR #340 defines its schema and governance.
+
+The separately merged PR #339 Japan stablecoin access guide and research checkpoint does not change this boundary. Its jurisdiction-access rows remain reviewed editorial research support outside canonical public counts and are not canonical Market Access Records.
 
 For all 110 assets:
 
@@ -84,4 +87,4 @@ PR #338 completes when:
 
 ## Next item
 
-After PR #338 merges, PR #339 is authorized to define the canonical Market Access Record schema and governance. PR #339 is a schema/governance item, not a license to publish monitoring observations directly.
+After PR #338 merges, PR #340 is authorized to define the canonical Market Access Record schema and governance. PR #340 is a schema/governance item, not a license to publish monitoring observations directly. The reviewed research checkpoint merged in PR #339 can be considered for migration only after PR #340 establishes the canonical schema and review rules.
