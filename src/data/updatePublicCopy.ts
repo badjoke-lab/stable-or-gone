@@ -1,4 +1,8 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
+  sog_update_2026_07_10_japan_stablecoin_access_guide: {
+    title: 'Japan stablecoin access guide added',
+    summary: 'Published a reviewed comparison of USDC, RLUSD, and JPYSC in Japan, separating legal route, platform functions, network scope, external-transfer availability, and effective dates.'
+  },
   sog_update_2026_07_06_audited_100_asset_checkpoint: {
     title: 'Audited 100-asset checkpoint recorded',
     summary: 'Recorded the reviewed 100-asset checkpoint with deterministic canonical digests, reproducible-build linkage, and production parity checks while keeping monitoring and other unreviewed material outside the canonical public layer.'

@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('japan-stablecoin-access-usdc-rlusd-jpysc');
+const title = 'RLUSD’s Japan Launch Is Only Part of the Story — Stable or Gone';
+const description = 'What USDC, RLUSD, and JPYSC reveal about Japan’s emerging stablecoin access model, legal routes, platform functions, and the difference between availability and unrestricted circulation.';
+const canonicalPath = '/guides/japan-stablecoin-access-usdc-rlusd-jpysc/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'RLUSD’s Japan Launch Is Only Part of the Story',
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['USDC', 'RLUSD', 'JPYSC', 'Japan stablecoin regulation', 'stablecoin market access'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'The first foreign-issued U.S. dollar stablecoin made available to general users through SBI VC Trade.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Ripple USD, launched on SBI VC Trade in Japan on June 24, 2026.' },
+  { href: '/stablecoin/jpysc/', title: 'JPYSC', summary: 'A trust-issued Japanese-yen stablecoin launched in an account-internal phase on the same date.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="RLUSD’s Japan Launch Is Only Part of the Story"
+    description="USDC, RLUSD, and JPYSC now sit side by side in Japan’s regulated distribution framework, but they reached that market through different legal structures and with different levels of practical access."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>RLUSD’s Japanese launch matters, but the more revealing story is the market structure around it.</strong> By June 24, 2026, Japan’s Financial Services Agency register listed SBI VC Trade as handling USDC, RLUSD, and JPYSC. Those three assets do not share one legal route or one practical access model.</p>
+    <p>USDC established the first general-user foreign-dollar stablecoin path through SBI VC Trade in March 2025. RLUSD added a second dollar stablecoin in June 2026, with SBI VC Trade describing its Japanese handling route as Category 4. JPYSC launched the same day under a trust-issued Category 3 structure, but initially remained inside SBI VC Trade accounts and could not be withdrawn to external wallets.</p>
+    <p>The useful question is no longer simply whether Japan “allows stablecoins.” The better framework is <strong>stablecoin × jurisdiction × platform × function × date</strong>: what can a user actually do, where, through which regulated route, and as of when?</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The RLUSD headline is only the starting point</div>
+    <p>On June 24, 2026, Ripple announced that RLUSD was officially available in Japan through SBI VC Trade. Ripple described the launch as following JFSA regulatory approval. The Japanese side of the record is more precise: the FSA’s register dated June 24 lists SBI VC Trade as the sole registered electronic payment instrument intermediary and lists USDC, RLUSD, and JPYSC among the instruments it handles.</p>
+    <p>The FSA also makes an important distinction. Inclusion in the register confirms, on the basis of the intermediary’s explanation, that the handled instruments fall within the relevant statutory definitions. It is not a government guarantee of value and it is not an investment endorsement.</p>
+    <p>That distinction matters because marketing language, issuer status, the token’s legal characterization, intermediary registration, platform availability, network support, and individual product functions are separate layers. Treating them as one universal “approval” status loses information.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">USDC was the first practical reference point</div>
+    <p>Japan’s current regulated stablecoin-access story did not begin with RLUSD. SBI VC Trade announced general-user USDC service from March 26, 2025. The launch included buying and selling against Japanese yen, deposits, and withdrawals, with Ethereum as the supported network for deposits and withdrawals at that stage.</p>
+    <p>The launch also came with practical limits. SBI VC Trade announced a JPY 1 million-equivalent cap per buy or sell transaction and per withdrawal, along with additional platform and compliance conditions.</p>
+    <p>An FSA consultation-response document published in 2026 refers to USDC as a current example of a foreign electronic payment instrument falling within Category 1. That makes USDC a useful baseline for comparison: a foreign-issued dollar stablecoin distributed to Japanese users through a registered domestic intermediary, with asset access and intermediary obligations separated from the foreign issuer itself.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">RLUSD added more than another dollar ticker</div>
+    <p>RLUSD expanded the Japanese market from one handled U.S. dollar stablecoin to two, but the more interesting point is the legal route described for the asset.</p>
+    <p>SBI VC Trade states that RLUSD is not a trust beneficiary right under U.S. law and that, for its handling in Japan, the company organized RLUSD as a Category 4 electronic payment instrument under Japanese law. The FSA’s 2026 consultation-response material explains the policy background for bringing certain foreign trust-based stablecoin structures into the electronic-payment-instrument framework when the required equivalence conditions are met.</p>
+    <p>At launch, SBI VC Trade offered RLUSD buying and selling, deposits, and withdrawals. The supported deposit and withdrawal network was Ethereum. The platform announced a JPY 1 million-equivalent maximum order and a JPY 1 million-equivalent withdrawal cap per request, along with other conditions and monitoring measures.</p>
+    <p><strong>“Available in Japan” therefore does not mean “available without limits.”</strong> A market-access record needs to preserve the platform, customer route, function, network, amount limits, and observation date instead of collapsing them into a single yes-or-no flag.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">JPYSC took a different route on the same day</div>
+    <p>June 24 also brought a separate development: the launch of JPYSC, a yen-denominated stablecoin issued by SBI Shinsei Trust &amp; Banking and distributed through SBI VC Trade. SBI describes JPYSC as a Category 3 electronic payment instrument built on a trust structure.</p>
+    <p>The launch state was deliberately narrower than the USDC and RLUSD access paths. JPYSC initially became available only inside SBI VC Trade accounts. External-wallet withdrawals were not available, and the announcement said public-chain circulation would follow only after the relevant legal and tax treatment had been worked through and subject to regulatory confirmation.</p>
+    <p>SBI also distinguishes the trust-issued structure from the compared Category 1 route by noting that it does not carry the same JPY 1 million statutory ceiling on retention, trading, and withdrawal. That does <strong>not</strong> mean JPYSC was already unrestricted. At launch, the decisive practical constraint was more basic: the asset remained account-internal.</p>
+    <p>JPYSC is therefore not simply “RLUSD in yen.” The reference currency, issuer type, legal route, distribution model, and initial transfer availability are all different.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Three assets, three access paths</div>
+    <table>
+      <thead><tr><th>Question</th><th>USDC</th><th>RLUSD</th><th>JPYSC</th></tr></thead>
+      <tbody>
+        <tr><th>Reference currency</th><td>U.S. dollar</td><td>U.S. dollar</td><td>Japanese yen</td></tr>
+        <tr><th>Issuer location / structure</th><td>Foreign-issued</td><td>Foreign-issued</td><td>Japanese trust-bank issuer</td></tr>
+        <tr><th>Japanese legal-route description used in reviewed sources</th><td>FSA document cites USDC as a current foreign Category 1 example</td><td>SBI VC Trade describes its Japanese handling as Category 4</td><td>SBI describes JPYSC as Category 3 / trust-issued</td></tr>
+        <tr><th>General SBI VC Trade access date used here</th><td>March 26, 2025</td><td>June 24, 2026</td><td>June 24, 2026</td></tr>
+        <tr><th>Buy / sell at reviewed stage</th><td>Available</td><td>Available</td><td>Available inside SBI VC Trade</td></tr>
+        <tr><th>Deposit / withdrawal at reviewed stage</th><td>Available on supported network, subject to platform conditions</td><td>Available on supported network, subject to platform conditions</td><td>External withdrawal unavailable at initial launch</td></tr>
+        <tr><th>External-wallet transfer at reviewed stage</th><td>Available on Ethereum through the platform route</td><td>Available on Ethereum through the platform route</td><td>Unavailable at initial launch</td></tr>
+        <tr><th>What the case demonstrates</th><td>First practical foreign-dollar access baseline</td><td>A second foreign-dollar asset through a different described Japanese route</td><td>Domestic yen trust model with a narrower initial distribution stage</td></tr>
+      </tbody>
+    </table>
+    <p>This table is a dated access comparison, not a permanent legal summary. Product functions, limits, networks, and regulatory interpretations can change and should be recorded as later changes rather than silently rewritten into the historical launch state.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What about USDT, DAI, and other stablecoins?</div>
+    <p>The FSA register snapshot dated June 24, 2026 lists USDC, RLUSD, and JPYSC as the electronic payment instruments handled by SBI VC Trade. That fact should not be stretched into a universal blacklist.</p>
+    <p><strong>Absence from that handled-asset list does not, by itself, prove that another stablecoin is banned, illegal, or permanently unavailable in Japan.</strong> The register identifies registered intermediaries and the electronic payment instruments they handle. It is not a master list assigning a universal legal status to every stable asset in existence.</p>
+    <p>This is why USDT, DAI, USDe, and other assets should be researched through their own issuer or protocol structure, Japanese intermediary access, product functions, customer scope, and dates rather than inferred from a missing row in one platform-linked register snapshot.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The better unit of analysis is market access, not just market cap</div>
+    <p>Stablecoin coverage is often reduced to supply rankings and exchange volume. Those metrics answer one set of questions, but they do not tell a user whether an asset can actually be bought, sold, deposited, withdrawn, redeemed, or moved to a self-custody wallet in a particular jurisdiction.</p>
+    <p>Japan now provides a useful illustration. USDC arrived first through one practical access path. RLUSD added another dollar stablecoin with a different Japanese legal-route description. JPYSC entered through a domestic trust structure but began with a narrower account-internal distribution stage.</p>
+    <p>For a historical registry, the meaningful observation unit is closer to:</p>
+    <p><strong>Stablecoin × Jurisdiction × Platform × Function × Access status × Effective date</strong></p>
+    <p>That model can also capture movement in the opposite direction: an asset may gain access in one country while losing trading, deposit, withdrawal, or customer access elsewhere. A single global status cannot represent those changes accurately.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">How SOG records this change</div>
+    <p>SOG already records the June 24 RLUSD Japan handling milestone as a regional distribution event rather than a second global launch. It also records JPYSC as a separate asset with a limited initial state, preserving the fact that external-wallet transfer was unavailable at launch.</p>
+    <p>For the jurisdiction-level layer, this guide is backed by a reviewed Japan market-access research checkpoint covering USDC, RLUSD, and JPYSC. Those research rows preserve asset, jurisdiction, platform, function, network scope, effective date, source basis, and access state.</p>
+    <p>They are <strong>not yet canonical Market Access Records</strong>. SOG’s current Comparison Foundation workstream has deliberately deferred the canonical market-access schema. The reviewed research checkpoint is therefore kept outside canonical public counts and can be migrated only after the schema and governance rules are approved.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Regulatory, distributor, and issuer sources</div>
+    <ul>
+      <li><a href="https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf">Financial Services Agency — Register of Electronic Payment Instrument Service Providers, June 24, 2026 snapshot</a></li>
+      <li><a href="https://www.fsa.go.jp/news/r7/sonota/20260519/01.pdf">Financial Services Agency — consultation comments and agency responses on electronic payment instrument rule changes</a></li>
+      <li><a href="https://www.fsa.go.jp/singi/singi_kinyu/tosin/20250122/1.pdf">Financial Services Agency — Working Group report on payment systems</a></li>
+      <li><a href="https://www.sbivc.co.jp/newsview/2mjic5dcvjtv">SBI VC Trade — general-user USDC handling launch announcement</a></li>
+      <li><a href="https://www.sbivc.co.jp/usdc">SBI VC Trade — USDC product and service page</a></li>
+      <li><a href="https://www.sbivc.co.jp/newsview/bsqs09vn_yzv">SBI VC Trade — RLUSD handling launch announcement</a></li>
+      <li><a href="https://www.sbivc.co.jp/rlusd">SBI VC Trade — RLUSD product and service page</a></li>
+      <li><a href="https://www.sbivc.co.jp/newsview/fx4zmjwbl">SBI VC Trade — JPYSC launch and initial access conditions</a></li>
+      <li><a href="https://www.sbivc.co.jp/jpysc">SBI VC Trade — JPYSC product and service page</a></li>
+      <li><a href="https://www.shinseitrust.com/stablecoin/jpysc.html">SBI Shinsei Trust &amp; Banking — JPYSC issuer and product information</a></li>
+      <li><a href="https://ripple.com/ripple-press/ripple-and-sbi-group-partner-to-launch-ripple-usd-in-japan/">Ripple — RLUSD Japan launch announcement</a></li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Notes on wording and scope</div>
+    <p><strong>“JFSA approval” and register inclusion are not interchangeable claims.</strong> Ripple uses approval language in its launch announcement. For Japanese legal-route descriptions, this guide relies primarily on the FSA register, FSA rule material, and SBI VC Trade’s own characterization of the assets it handles. The FSA register itself says inclusion is not a value guarantee or recommendation.</p>
+    <p><strong>Market access is platform-specific and time-specific.</strong> This guide does not claim that every Japanese resident, every account type, or every platform has identical access. It records reviewed access paths through SBI VC Trade and the dated FSA register snapshot.</p>
+    <p><strong>Later functionality should be recorded as a later change.</strong> In particular, future JPYSC external-wallet transfer or public-chain circulation should not be backfilled into the June 2026 account-internal launch state.</p>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide is a historical and regulatory-access explainer, not legal, financial, tax, or investment advice. Laws, interpretations, product terms, customer eligibility, limits, networks, and service availability can change. Check current regulator, issuer, and distributor documentation before relying on any access route.</p>
+  </section>
+</BaseLayout>

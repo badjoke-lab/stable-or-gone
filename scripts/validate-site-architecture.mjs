@@ -14,9 +14,9 @@ const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
 const routeMap = new Map(siteArchitectureRoutes.map((route) => [route.pattern, route]));
 
 check(audit.schema_version === '1.0', 'architecture schema changed');
-check(audit.totals?.route_patterns === 33, 'route count must include stats HTML and two stats JSON routes');
-check(audit.totals?.page_source_files === 33, 'page source count must include stats HTML and JSON sources');
-check(audit.totals?.html_route_patterns === 26, 'HTML route count must include /stats/');
+check(audit.totals?.route_patterns === 34, 'route count must include the Japan access guide and stats routes');
+check(audit.totals?.page_source_files === 34, 'page source count must include the Japan access guide and stats sources');
+check(audit.totals?.html_route_patterns === 27, 'HTML route count must include the Japan access guide and /stats/');
 check(audit.totals?.machine_readable_route_patterns === 7, 'machine route count must include stats JSON routes');
 check(audit.totals?.dynamic_route_families === 3, 'dynamic route count changed');
 for (const key of ['duplicate_routes', 'navigation_without_route', 'declared_without_source', 'configured_without_source', 'source_without_configuration', 'unassigned_routes']) check(audit.totals?.[key] === 0, `inventory failure: ${key}`);
@@ -49,6 +49,7 @@ for (const route of siteArchitectureRoutes) {
 for (const pattern of ['/stats/', '/data/stats.json', '/data/stats-history.json']) {
   check(routeMap.get(pattern)?.decision === 'add', `PR #327 route must be marked add: ${pattern}`);
 }
+check(routeMap.get('/guides/japan-stablecoin-access-usdc-rlusd-jpysc/')?.decision === 'add', 'PR #339 Japan guide route must be marked add');
 
 const validation = {
   schema_version: '1.0',
@@ -62,7 +63,7 @@ const validation = {
     grouped_navigation_items: grouped.length,
     utility_navigation_items: utilities.length,
     implemented_navigation_items: current.length,
-    route_changes: 3,
+    route_changes: 4,
     failures: failures.length
   },
   implemented_navigation: current,

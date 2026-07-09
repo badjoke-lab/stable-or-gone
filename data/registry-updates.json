@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_07_10_japan_stablecoin_access_guide",
+    "date": "2026-07-10",
+    "title": "Japan stablecoin access guide added",
+    "category": "content",
+    "summary": "Published a reviewed Japan market-access guide comparing USDC, RLUSD, and JPYSC across legal route, platform function, network scope, transfer availability, and effective date. Added a reviewed noncanonical jurisdiction-access research checkpoint while preserving the deferred canonical Market Access Record boundary.",
+    "related_paths": ["/guides/japan-stablecoin-access-usdc-rlusd-jpysc/", "/stablecoin/usdc/", "/stablecoin/rlusd/", "/stablecoin/jpysc/"]
+  },
+  {
     "id": "sog_update_2026_07_06_audited_100_asset_checkpoint",
     "date": "2026-07-06",
     "title": "Audited 100-asset checkpoint recorded",
@@ -93,7 +101,7 @@
     "title": "Top five records deepened",
     "category": "data",
     "summary": "Strengthened USDT, USDC, DAI, UST, and BUSD with additional evidence, reserve references, deployment notes, regulatory context, and known unknowns.",
-    "related_paths": ["/stablecoin/usdt/", "/stablecoin/usdc/", "/stablecoin/dai/", "/stablecoin/ust/", "/stablecoin/busd/"]
+    "related_paths": ["/stablecoins/"]
   },
   {
     "id": "sog_update_2026_06_02_pr017_15_records",

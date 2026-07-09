@@ -35,6 +35,19 @@ export const guideCategoryDescriptions: Record<GuideCategory, string> = {
 
 export const guides: GuideEntry[] = [
   {
+    slug: 'japan-stablecoin-access-usdc-rlusd-jpysc',
+    title: 'RLUSD’s Japan Launch Is Only Part of the Story',
+    summary: 'What USDC, RLUSD, and JPYSC reveal about Japan’s emerging stablecoin access model, legal routes, platform functions, and the difference between availability and unrestricted circulation.',
+    category: 'regulation',
+    publishedAt: '2026-07-10',
+    informationCurrentThrough: '2026-07-10',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'jp',
+    regionLabel: 'Japan'
+  },
+  {
     slug: 'eu-stablecoin-access-after-mica',
     title: 'After MiCA: Which Stablecoins Can Europeans Actually Use?',
     summary: 'A reviewed guide to EU/EEA stablecoin access, separating issuer status, platform state, customer scope, product functions, direct mint and redemption routes, payment rails, supported networks, and dates.',

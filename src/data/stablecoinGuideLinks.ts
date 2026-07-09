@@ -7,6 +7,7 @@ export interface StablecoinGuideLink {
 }
 
 const guideCoverage: Record<string, string[]> = {
+  'japan-stablecoin-access-usdc-rlusd-jpysc': ['usdc', 'rlusd', 'jpysc'],
   'eu-stablecoin-access-after-mica': ['usdt', 'usdc', 'eurc', 'dai', 'pyusd', 'rlusd', 'tusd', 'fdusd', 'usdp', 'gusd', 'usdd', 'usds', 'eurt', 'euri', 'eurcv', 'eurq', 'usdq', 'usdg'],
   'genius-act-stablecoins': ['usdc', 'usdt', 'pyusd', 'rlusd', 'usdg', 'dai', 'usds'],
   'mica-stablecoins': ['usdc', 'eurc', 'usdt', 'euri', 'eurcv', 'eurq', 'rlusd', 'dai', 'usds', 'frax'],
