@@ -76,13 +76,13 @@ fail(batchEvidence.length === 6, `Batch 26 evidence count must be 6, found ${bat
 const batchEvents = events.filter((row) => ids.includes(row.stablecoin_id));
 fail(batchEvents.length === 0, `Batch 26 must not invent lifecycle events, found ${batchEvents.length}`);
 const batchDeployments = deployments.filter((row) => ids.includes(row.stablecoin_id));
-fail(batchDeployments.length === 2, `Batch 26 must contain exactly two explicit unknown deployment-coverage rows, found ${batchDeployments.length}`);
+fail(batchDeployments.length === 2, `Batch 26 must contain exactly two explicit unresolved deployment-coverage rows, found ${batchDeployments.length}`);
 for (const row of batchDeployments) {
-  fail(row.chain === 'Unknown', `${row.id}: chain must remain Unknown until current first-party network scope is verified`);
-  fail(row.status === 'unknown', `${row.id}: deployment status must remain unknown`);
+  fail(row.chain === 'source_review_needed', `${row.id}: chain must remain source_review_needed until current first-party network scope is verified`);
+  fail(row.status === 'source_review_needed', `${row.id}: deployment status must remain source_review_needed`);
   fail(row.canonicality === 'unknown', `${row.id}: canonicality must remain unknown`);
   fail(row.contract_address === null, `${row.id}: contract address must remain null`);
-  fail(verification.status_ids?.unknown?.includes(row.id), `${row.id}: deployment verification must explicitly classify the row as unknown`);
+  fail(verification.status_ids?.source_linked_no_identifier?.includes(row.id), `${row.id}: deployment verification must classify the row as source_linked_no_identifier`);
 }
 fail(verification.expected_total === 170, `deployment verification expected_total must be 170, found ${verification.expected_total}`);
 
