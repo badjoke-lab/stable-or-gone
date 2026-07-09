@@ -1,0 +1,36 @@
+{
+  "schema_version":"1.0",
+  "reviewed_at":"2026-07-09",
+  "source_review":"docs/roadmap-amendments/2026-07-09-pr334-growth-cadc-zarp-activation.md",
+  "expected_additions":9,
+  "status_counts":{"verified":9,"identifier_recorded_unverified":0,"source_linked_no_identifier":0,"review_needed":0,"unknown":0,"not_recorded":0},
+  "status_ids":{
+    "verified":[
+      "sog_dep_cadc_ethereum_batch_x",
+      "sog_dep_cadc_base_batch_x",
+      "sog_dep_cadc_polygon_batch_x",
+      "sog_dep_cadc_arbitrum_batch_x",
+      "sog_dep_cadc_solana_batch_x",
+      "sog_dep_zarp_base_batch_x",
+      "sog_dep_zarp_ethereum_batch_x",
+      "sog_dep_zarp_polygon_batch_x",
+      "sog_dep_zarp_solana_batch_x"
+    ],
+    "identifier_recorded_unverified":[],
+    "source_linked_no_identifier":[],
+    "review_needed":[],
+    "unknown":[],
+    "not_recorded":[]
+  },
+  "reviewed_records":[
+    {"id":"sog_dep_cadc_ethereum_batch_x","identifier_type":"evm_contract","identifier":"0xcadc0acd4b445166f12d2c07eac6e2544fbe2eef","source_url":"https://loon.finance/access-cadc/"},
+    {"id":"sog_dep_cadc_base_batch_x","identifier_type":"evm_contract","identifier":"0x043eb4b75d0805c43d7c834902e335621983cf03","source_url":"https://loon.finance/access-cadc/"},
+    {"id":"sog_dep_cadc_polygon_batch_x","identifier_type":"evm_contract","identifier":"0x9de41aff9f55219d5bf4359f167d1d0c772a396d","source_url":"https://loon.finance/access-cadc/"},
+    {"id":"sog_dep_cadc_arbitrum_batch_x","identifier_type":"evm_contract","identifier":"0x2b28E826b55e399F4d4699b85f68666AC51e6f70","source_url":"https://loon.finance/access-cadc/"},
+    {"id":"sog_dep_cadc_solana_batch_x","identifier_type":"solana_mint","identifier":"9ewjJpmD1ES83RDRFnHs7V2hUdH76WAVjdvu6UV6WNo7","source_url":"https://loon.finance/access-cadc/"},
+    {"id":"sog_dep_zarp_base_batch_x","identifier_type":"evm_contract","identifier":"0xb755506531786C8aC63B756BaB1ac387bACB0C04","source_url":"https://docs.zarpstablecoin.com/zarp-stablecoin/blockchains"},
+    {"id":"sog_dep_zarp_ethereum_batch_x","identifier_type":"evm_contract","identifier":"0xb755506531786C8aC63B756BaB1ac387bACB0C04","source_url":"https://docs.zarpstablecoin.com/zarp-stablecoin/blockchains"},
+    {"id":"sog_dep_zarp_polygon_batch_x","identifier_type":"evm_contract","identifier":"0xb755506531786C8aC63B756BaB1ac387bACB0C04","source_url":"https://docs.zarpstablecoin.com/zarp-stablecoin/blockchains"},
+    {"id":"sog_dep_zarp_solana_batch_x","identifier_type":"solana_mint","identifier":"dngKhBQM3BGvsDHKhrLnjvRKfY5Q7gEnYGToj9Lk8rk","source_url":"https://docs.zarpstablecoin.com/zarp-stablecoin/blockchains"}
+  ]
+}

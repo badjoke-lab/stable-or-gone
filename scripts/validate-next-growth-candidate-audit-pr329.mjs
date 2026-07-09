@@ -15,9 +15,16 @@ const policy = audit.policy ?? {};
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 const normalize = (value) => String(value ?? '').trim().toLowerCase();
 
-const correctionFile = 'data/next-growth-candidate-corrections-pr330.json';
-const corrections = fs.existsSync(path.join(root, correctionFile)) ? readJson(correctionFile) : [];
-const correctionById = new Map(corrections.map((row) => [row.candidate_id, row]));
+const correctionFiles = fs.readdirSync(path.join(root, 'data'))
+  .filter((name) => /^next-growth-candidate-corrections-pr\d+\.json$/.test(name))
+  .sort()
+  .map((name) => `data/${name}`);
+const corrections = correctionFiles.flatMap(readJson);
+const correctionById = new Map();
+for (const row of corrections) {
+  if (correctionById.has(row.candidate_id)) failures.push(`duplicate candidate correction for ${row.candidate_id}`);
+  correctionById.set(row.candidate_id, row);
+}
 
 const numberingCorrectionFile = 'data/next-growth-pr-numbering-corrections-pr330.json';
 const numberingCorrections = fs.existsSync(path.join(root, numberingCorrectionFile)) ? readJson(numberingCorrectionFile) : [];
@@ -39,19 +46,10 @@ const promotionById = new Map(promotions.map((row) => [row.candidate_id, row]));
 
 const expectedCandidateIds = Array.from({ length: 10 }, (_, index) => `sog_cand_${String(101 + index).padStart(6, '0')}`);
 const expectedPrs = [330, 332, 333, 334, 335];
-const expectedTransitions = [
-  [100, 102],
-  [102, 104],
-  [104, 106],
-  [106, 108],
-  [108, 110]
-];
-const expectedBatches = ['batch_022', 'batch_023', 'batch_024', 'batch_025', 'batch_026'];
+const expectedTransitions = [[100,102],[102,104],[104,106],[106,108],[108,110]];
+const expectedBatches = ['batch_022','batch_023','batch_024','batch_025','batch_026'];
 const expectedNumberingCorrections = [
-  ['batch_023', 331, 332],
-  ['batch_024', 332, 333],
-  ['batch_025', 333, 334],
-  ['batch_026', 334, 335]
+  ['batch_023',331,332],['batch_024',332,333],['batch_025',333,334],['batch_026',334,335]
 ];
 
 fail(audit.schema_version === '1.0', 'schema_version must be 1.0');
@@ -74,7 +72,6 @@ if (fs.existsSync(path.join(root, numberingCorrectionFile))) {
 const candidateIds = candidates.map((row) => row.candidate_id);
 fail(JSON.stringify(candidateIds) === JSON.stringify(expectedCandidateIds), 'candidate IDs must be exactly sog_cand_000101 through sog_cand_000110 in order');
 fail(new Set(candidateIds).size === candidates.length, 'candidate IDs must be unique');
-
 const proposedIds = candidates.map((row) => row.proposed_stablecoin_id);
 const proposedSlugs = candidates.map((row) => normalize(row.proposed_slug));
 fail(new Set(proposedIds).size === candidates.length, 'effective proposed stablecoin IDs must be unique');
@@ -88,7 +85,6 @@ for (const row of candidates) {
   fail(/^sog_cand_\d{6}$/.test(row.candidate_id ?? ''), `${id}: invalid candidate_id`);
   fail(/^sog_st_[a-z0-9]+$/.test(row.proposed_stablecoin_id ?? ''), `${id}: invalid proposed_stablecoin_id`);
   fail(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.proposed_slug ?? ''), `${id}: invalid proposed_slug`);
-
   if (promotion?.status === 'promoted') {
     fail(promotion.promoted_record_id === row.proposed_stablecoin_id, `${id}: promotion target must match effective audited identity`);
     fail(canonicalIds.has(row.proposed_stablecoin_id), `${id}: promoted candidate must exist canonically`);
@@ -97,26 +93,9 @@ for (const row of candidates) {
     fail(!canonicalIds.has(row.proposed_stablecoin_id), `${id}: unpromoted candidate ID already canonical`);
     fail(!canonicalSlugs.has(normalize(row.proposed_slug)), `${id}: unpromoted candidate slug already canonical`);
   }
-
-  for (const field of [
-    'canonical_name',
-    'symbol',
-    'proposed_organization_id',
-    'organization_name',
-    'proposed_status',
-    'launch_date_precision',
-    'mechanism',
-    'stabilization',
-    'reserve_applicability',
-    'redemption_model',
-    'lifecycle_decision',
-    'deployment_scope',
-    'historical_value',
-    'target_growth_pr',
-    'target_batch',
-    'selection_decision'
-  ]) fail(row[field] !== undefined && row[field] !== null && row[field] !== '', `${id}: missing ${field}`);
-
+  for (const field of ['canonical_name','symbol','proposed_organization_id','organization_name','proposed_status','launch_date_precision','mechanism','stabilization','reserve_applicability','redemption_model','lifecycle_decision','deployment_scope','historical_value','target_growth_pr','target_batch','selection_decision']) {
+    fail(row[field] !== undefined && row[field] !== null && row[field] !== '', `${id}: missing ${field}`);
+  }
   fail(Array.isArray(row.aliases), `${id}: aliases must be an array`);
   fail(Array.isArray(row.value_contribution) && row.value_contribution.length >= 1, `${id}: value_contribution must be non-empty`);
   fail(Array.isArray(row.event_plan) && row.event_plan.length >= 1, `${id}: event_plan must be non-empty`);
@@ -124,7 +103,6 @@ for (const row of candidates) {
   fail(row.duplicate_review && typeof row.duplicate_review === 'object', `${id}: duplicate_review is required`);
   fail(typeof row.duplicate_review?.decision === 'string' && row.duplicate_review.decision.length > 0, `${id}: duplicate decision is required`);
   fail(Array.isArray(row.evidence_leads) && row.evidence_leads.length >= 3, `${id}: at least three evidence leads are required`);
-
   for (const [index, lead] of (row.evidence_leads ?? []).entries()) {
     fail(/^https:\/\//.test(lead.url ?? ''), `${id}: evidence lead ${index + 1} must use HTTPS`);
     fail(lead.official === true, `${id}: evidence lead ${index + 1} must be official`);
@@ -143,18 +121,15 @@ for (const [index, row] of plan.entries()) {
 }
 fail(JSON.stringify(planCandidateIds) === JSON.stringify(expectedCandidateIds), 'growth plan candidate order must exactly cover 101 through 110');
 fail(new Set(planCandidateIds).size === 10, 'growth plan candidates must appear exactly once');
-
 for (const [index, batch] of expectedBatches.entries()) {
   const rows = candidates.filter((row) => row.target_batch === batch);
   fail(rows.length === 2, `${batch}: exactly two candidates required`);
   fail(rows.every((row) => row.target_growth_pr === expectedPrs[index]), `${batch}: target growth PR mismatch`);
 }
-
 const promotedNextGrowth = promotions.filter((row) => row.status === 'promoted');
 fail(stablecoins.length === 100 + promotedNextGrowth.length, `canonical stablecoin count must equal 100 plus promoted next-growth candidates; found ${stablecoins.length} assets and ${promotedNextGrowth.length} promotions`);
 fail(promotedNextGrowth.length % 2 === 0, 'next-growth promotions must advance in two-candidate steps');
 fail(promotedNextGrowth.length <= 10, 'next-growth promotions cannot exceed ten candidates');
-
 fail(policy.manual_review_required === true, 'manual review must remain required');
 fail(policy.candidate_selection_is_not_canonical_promotion === true, 'candidate selection must not equal canonical promotion');
 fail(policy.canonical_write_allowed === false, 'PR #329 audit policy must preserve canonical write disabled at selection stage');
@@ -166,16 +141,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-
-console.log(JSON.stringify({
-  ok: true,
-  pre_growth_canonical_assets: audit.canonical_stablecoin_count_before_growth,
-  current_canonical_assets: stablecoins.length,
-  selected_candidates: candidates.length,
-  promoted_next_growth_candidates: promotedNextGrowth.length,
-  growth_prs: expectedPrs,
-  numbering_corrections_applied: numberingCorrections.length,
-  final_target_count: 110,
-  canonical_write_allowed_at_selection_stage: policy.canonical_write_allowed,
-  public_output_at_selection_stage: policy.public_output
-}, null, 2));
+console.log(JSON.stringify({ok:true,pre_growth_canonical_assets:audit.canonical_stablecoin_count_before_growth,current_canonical_assets:stablecoins.length,selected_candidates:candidates.length,promoted_next_growth_candidates:promotedNextGrowth.length,growth_prs:expectedPrs,identity_corrections_applied:corrections.length,numbering_corrections_applied:numberingCorrections.length,final_target_count:110,canonical_write_allowed_at_selection_stage:policy.canonical_write_allowed,public_output_at_selection_stage:policy.public_output}, null, 2));

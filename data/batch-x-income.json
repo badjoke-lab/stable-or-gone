@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_cadc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_cadc_loon_home_batch_x","sog_src_cadc_meet_batch_x"],"notes":"No canonical issuer-native CADC holder-yield mechanism is asserted. Third-party DeFi opportunities are not treated as native stablecoin yield."},
+  {"id":"sog_st_zarp","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_zarp_home_batch_x","sog_src_zarp_transparency_batch_x"],"notes":"No canonical issuer-native ZARP holder-yield mechanism is asserted. Third-party exchange or DeFi returns are not treated as issuer-native yield."}
+]

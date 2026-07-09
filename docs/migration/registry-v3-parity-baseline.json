@@ -1,8 +1,8 @@
 {
-  "schema_version":"3.0-parity-baseline","status":"current","baseline_id":"sog_registry_v3_parity_pr333_106_assets_2026_07_09","recorded_at":"2026-07-09","data_checkpoint_commit":"pr333-growth-phpc-xidr","v2_composed_baseline":"docs/migration/registry-v2-baseline.json","v3_foundation":"docs/migration/registry-v3-foundation.json","v3_income_profiles":"docs/migration/registry-v3-income-profiles.json",
-  "expected_v2_counts":{"stablecoins":106,"organizations":99,"relationships":116,"classifications":106,"profiles":106,"events":183,"event_details":183,"evidence":525,"evidence_relations":525,"reserve_reports":114,"known_unknowns":307,"regulatory_notes":9,"deployments":159},
-  "expected_v3_counts":{"legal_profiles":106,"stable_asset_relationships":4,"reserve_components":139,"income_profiles":106,"deployment_view":159},
-  "expected_v3_coverage":{"legal_profiles":106,"income_profiles":106,"reserve_component_assets":106,"deployment_view_assets":106},
+  "schema_version":"3.0-parity-baseline","status":"current","baseline_id":"sog_registry_v3_parity_pr334_108_assets_2026_07_09","recorded_at":"2026-07-09","data_checkpoint_commit":"pr334-growth-cadc-zarp","v2_composed_baseline":"docs/migration/registry-v2-baseline.json","v3_foundation":"docs/migration/registry-v3-foundation.json","v3_income_profiles":"docs/migration/registry-v3-income-profiles.json",
+  "expected_v2_counts":{"stablecoins":108,"organizations":101,"relationships":118,"classifications":108,"profiles":108,"events":185,"event_details":185,"evidence":537,"evidence_relations":537,"reserve_reports":116,"known_unknowns":313,"regulatory_notes":9,"deployments":168},
+  "expected_v3_counts":{"legal_profiles":108,"stable_asset_relationships":4,"reserve_components":141,"income_profiles":108,"deployment_view":168},
+  "expected_v3_coverage":{"legal_profiles":108,"income_profiles":108,"reserve_component_assets":108,"deployment_view_assets":108},
   "machine_readable_contract":{"schema_version":"1.0.0","data_schema_version":"sog_registry_v2","compatibility_mode":"v2_public_contract_with_additive_v3_summary","registry_v3_summary":true,"summary_locations":["version.data.registry_v3","manifest.registry_v3"],"data_safety":{"canonical_only":true,"includes_unreviewed_candidates":false,"includes_internal_monitoring":false,"includes_private_notes":false}},
   "audit_report":"docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md","validator":"scripts/validate-registry-v2-v3-machine-readable-parity.mjs"
 }

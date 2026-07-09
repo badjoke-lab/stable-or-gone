@@ -1,16 +1,17 @@
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { loadDeploymentVerification } from './load-deployment-verification.mjs';
 
 const jsonPath = 'data/generated/registry-deployment-chain-identity-audit.json';
 
-execFileSync(process.execPath, ['scripts/audit-registry-deployment-chain-identity.mjs'], {
+execFileSync(process.execPath, ['scripts/audit-registry-deployment-chain-identity-current.mjs'], {
   stdio: 'inherit',
   env: process.env
 });
 
 const report = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
-const verification = JSON.parse(fs.readFileSync('data/deployment-verification-pr229.json', 'utf8'));
+const verification = loadDeploymentVerification(process.cwd());
 const expectedCounts = checkpoint.expected_counts ?? {};
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };

@@ -1,8 +1,8 @@
 {
-  "schema_version":"1.9",
-  "status":"batch_024_active",
+  "schema_version":"2.0",
+  "status":"batch_025_active",
   "candidate_files":["data/candidate-stable-assets.json","data/candidate-stable-assets-growth-70.json","data/candidate-stable-assets-growth-75.json","data/candidate-stable-assets-growth-80.json","data/candidate-stable-assets-emergency-msusd.json","data/candidate-stable-assets-emergency-jpysc.json","data/candidate-stable-assets-growth-85.json","data/candidate-stable-assets-growth-90.json","data/candidate-stable-assets-growth-100.json","data/candidate-stable-assets-growth-110.json"],
-  "protected_minimums":{"total_candidates":110,"promoted_candidates":106,"pending_candidates":4},
+  "protected_minimums":{"total_candidates":110,"promoted_candidates":108,"pending_candidates":2},
   "planned_batches":{
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},

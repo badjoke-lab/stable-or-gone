@@ -1,0 +1,4 @@
+[
+  {"candidate_id":"sog_cand_000107","status":"promoted","promotion_pr":334,"promoted_record_id":"sog_st_cadc","notes":"Promoted after correcting the PR #329 Stablecorp/QCAD issuer misattribution. Current Loon primary sources establish CADC identity, Loon issuer responsibility, 1:1 Canadian-dollar backing, ATB Financial reserve custody, monthly attestations, immediate 1:1 redemption, and current five-network availability."},
+  {"candidate_id":"sog_cand_000108","status":"promoted","promotion_pr":334,"promoted_record_id":"sog_st_zarp","notes":"Promoted after current ZARP product, reserve, redemption, compliance, native-chain, exact contract identity, and Solana migration review. Current native issuance/redemption scope is Base, Ethereum, Polygon, and Solana; Gnosis branding on the homepage is not treated as a current native deployment because the official blockchain documentation does not list it as officially supported issuance/redemption infrastructure."}
+]

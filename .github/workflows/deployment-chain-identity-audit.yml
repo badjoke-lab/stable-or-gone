@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 22
       - name: Run deployment and chain identity audit
-        run: node scripts/audit-registry-deployment-chain-identity.mjs
+        run: node scripts/audit-registry-deployment-chain-identity-current.mjs
       - name: Upload deployment identity audit
         if: always()
         uses: actions/upload-artifact@v4

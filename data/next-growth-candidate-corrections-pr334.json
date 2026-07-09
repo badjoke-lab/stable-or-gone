@@ -1,0 +1,21 @@
+[
+  {
+    "candidate_id":"sog_cand_000107",
+    "proposed_stablecoin_id":"sog_st_cadc",
+    "proposed_slug":"loon-cadc",
+    "canonical_name":"CADC",
+    "symbol":"CADC",
+    "aliases":["CADC","CAD Coin","Canadian Dollar Coin"],
+    "proposed_organization_id":"sog_issuer_loon_technology",
+    "organization_name":"Loon Technology Inc.",
+    "proposed_status":"active",
+    "duplicate_review":{"name_match":false,"slug_match":false,"symbol_match":false,"id_match":false,"decision":"correct_pr329_issuer_misattribution_from_stablecorp_qcad_to_loon_cadc"},
+    "blocking_unknowns":["exact_launch_day","complete_historical_paytrie_issuer_lineage","bridge_operator_details_by_network"],
+    "evidence_leads":[
+      {"url":"https://loon.finance/","publisher":"Loon","claim_scope":"current_cadc_identity_issuer_backing_and_redemption","official":true},
+      {"url":"https://loon.finance/transparency/","publisher":"Loon","claim_scope":"reserve_custody_and_monthly_attestations","official":true},
+      {"url":"https://loon.finance/access-cadc/","publisher":"Loon","claim_scope":"current_networks_contracts_and_access","official":true}
+    ],
+    "notes":"Promotion review corrected the PR #329 audit-stage issuer attribution. Stablecorp's current official product is QCAD, while current CADC primary sources identify Loon as issuer and describe Loon's 2025 acquisition of the CADC stablecoin originally launched by PayTrie in 2021."
+  }
+]
