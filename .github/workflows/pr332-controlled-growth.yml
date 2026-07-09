@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr332-growth-stablr-eurr-usdr'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
