@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_comparison_readiness_normalization_queue_pr337",
+  "source_audit_id": "sog_comparison_readiness_audit_pr337_110_assets",
+  "source_checkpoint_id": "sog_controlled_growth_110_checkpoint_pr335_2026_07_09",
+  "source_input_digest_sha256": "7201149f8b4c5fc346d9668e44cecf52024e00b2c708843a93fb22cc443e58a2",
+  "reviewed_at": "2026-07-09",
+  "queue_count": 20,
+  "dimension_counts": {
+    "asset_class": 20
+  },
+  "rows": [
+    {"asset_id":"sog_st_busd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_crvusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_dai","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_eurc","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_fdusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_frax","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_gusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_lusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_pyusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_rlusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_susd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_tusd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usdc","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usdd","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usde","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usdg","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usdp","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usds","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_usdt","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"},
+    {"asset_id":"sog_st_ust","dimension_id":"asset_class","state":"needs_normalization","severity":"medium","reason_code":"missing_asset_class"}
+  ]
+}
