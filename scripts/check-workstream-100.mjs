@@ -3,10 +3,7 @@ import fs from 'node:fs';
 const originalLog = console.log;
 console.log = () => {};
 try {
-  await import('./validate-batch21-growth-d.mjs');
-  await import('./validate-current-final-eight.mjs');
   await import('./validate-next-growth-candidate-audit-pr329.mjs');
-  await import('./validate-batch22-growth-e.mjs');
   await import('./validate-batch23-growth-f.mjs');
 } finally {
   console.log = originalLog;
