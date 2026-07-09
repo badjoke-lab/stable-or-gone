@@ -1,0 +1,46 @@
+name: PR 337 Comparison Readiness audit
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr337-comparison-readiness-audit'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+      - name: Validate Comparison Readiness contract
+        run: node scripts/validate-comparison-readiness-contract-pr336.mjs
+      - name: Build deterministic 110-asset readiness audit
+        run: |
+          mkdir -p artifacts
+          node scripts/comparison/compact-readiness-audit-pr337.mjs artifacts/comparison-readiness-audit-pr337.json
+      - name: Validate readiness audit structure
+        run: node scripts/validate-comparison-readiness-audit-pr337.mjs
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+      - name: Upload readiness audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr337-comparison-readiness-audit-${{ github.run_id }}
+          if-no-files-found: error
+          path: artifacts/comparison-readiness-audit-pr337.json
