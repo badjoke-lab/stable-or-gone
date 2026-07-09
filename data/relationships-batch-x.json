@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_cadc_loon_batch_x","stablecoin_id":"sog_st_cadc","organization_id":"sog_issuer_loon_technology","role":"legal_issuer","start_date":"2025-10-27","end_date":null,"status":"active","evidence_ids":["sog_src_cadc_loon_home_batch_x","sog_src_cadc_loon_acquisition_batch_x"],"notes":"Loon announced acquisition of CADC and assumption of issuer responsibility on 2025-10-27."},
+  {"id":"sog_rel_zarp_company_batch_x","stablecoin_id":"sog_st_zarp","organization_id":"sog_issuer_zarp_stablecoin","role":"legal_issuer","start_date":null,"end_date":null,"status":"active","evidence_ids":["sog_src_zarp_home_batch_x","sog_src_zarp_compliance_batch_x"],"notes":"ZARP's current official product, transparency, and compliance surfaces identify ZARP Stablecoin (Pty) Ltd as the operating issuer organization."}
+]
