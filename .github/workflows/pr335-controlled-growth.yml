@@ -62,7 +62,13 @@ jobs:
       - name: Validate active workstream
         run: npm run validate:active-workstream
       - name: Astro check
-        run: npm run check
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set +e
+          npm run check 2>&1 | tee artifacts/astro-check.log
+          status=${PIPESTATUS[0]}
+          exit "$status"
       - name: Build static site
         run: npm run build:site
       - name: Upload growth validation artifacts
@@ -74,3 +80,4 @@ jobs:
           path: |
             artifacts/pr335-110-snapshot.json
             artifacts/stats-history-validation.json
+            artifacts/astro-check.log
