@@ -123,15 +123,9 @@ for (const [key, owners] of identityOwners) {
 
 const classificationById = new Map(classifications.map((row) => [row.id, row]));
 const compatibility = {
-  active: new Set(['active']),
-  limited: new Set(['restricted']),
-  restricted: new Set(['restricted']),
-  impaired: new Set(['restricted', 'suspended']),
-  discontinued: new Set(['winding_down', 'inactive', 'terminated']),
-  failed: new Set(['collapsed']),
-  rebranded: new Set(['rebranded']),
-  migrated: new Set(['migrated']),
-  unknown: new Set(['unknown'])
+  active: new Set(['active']), limited: new Set(['restricted']), restricted: new Set(['restricted']), impaired: new Set(['restricted', 'suspended']),
+  discontinued: new Set(['winding_down', 'inactive', 'terminated']), failed: new Set(['collapsed']),
+  rebranded: new Set(['rebranded']), migrated: new Set(['migrated']), unknown: new Set(['unknown'])
 };
 for (const coin of stablecoins) {
   const classification = classificationById.get(coin.id);
@@ -254,121 +248,143 @@ for (const row of assetRelationships) {
   validateIds(row.id, row.evidence_ids, evidenceIds, 'evidence');
 }
 
-const promotedCandidates = candidates.filter((row) => row.status === 'promoted');
-const pendingCandidates = candidates.filter((row) => row.status === 'pending');
-for (const row of promotedCandidates) {
-  if (!row.promoted_record_id || !stablecoinIds.has(row.promoted_record_id)) critical.push(`${row.candidate_id} is promoted without canonical record`);
+const canonicalById = new Map(stablecoins.map((row) => [row.id, row]));
+const promoted = candidates.filter((row) => row.status === 'promoted');
+const promotedByRecord = new Map();
+for (const row of promoted) {
+  if (promotedByRecord.has(row.proposed_record_id)) critical.push(`Multiple promoted candidates map to ${row.proposed_record_id}`);
+  promotedByRecord.set(row.proposed_record_id, row);
+  const coin = canonicalById.get(row.proposed_record_id);
+  if (!coin) critical.push(`${row.candidate_id} is promoted but canonical record ${row.proposed_record_id} is missing`);
+  else {
+    if (coin.slug !== row.slug) critical.push(`${row.candidate_id} slug differs from canonical ${coin.slug}`);
+    if (normalize(coin.name) !== normalize(row.name)) critical.push(`${row.candidate_id} name differs from canonical ${coin.name}`);
+    if (normalize(coin.symbol) !== normalize(row.symbol)) critical.push(`${row.candidate_id} symbol differs from canonical ${coin.symbol}`);
+  }
 }
-if (candidateContract.protected_minimums?.total_candidates !== candidates.length) critical.push(`candidate total ${candidates.length} != protected ${candidateContract.protected_minimums?.total_candidates}`);
-if (candidateContract.protected_minimums?.promoted_candidates !== promotedCandidates.length) critical.push(`promoted candidate count ${promotedCandidates.length} != protected ${candidateContract.protected_minimums?.promoted_candidates}`);
-if (candidateContract.protected_minimums?.pending_candidates !== pendingCandidates.length) critical.push(`pending candidate count ${pendingCandidates.length} != protected ${candidateContract.protected_minimums?.pending_candidates}`);
+for (const coin of stablecoins) if (!promotedByRecord.has(coin.id)) critical.push(`${coin.id} has no promoted Candidate Master entry`);
+if (promoted.length !== stablecoins.length) critical.push(`Promoted candidate count ${promoted.length} differs from canonical count ${stablecoins.length}`);
 
-const staleThreshold = Date.parse(`${auditDate}T00:00:00Z`) - 365 * 86400000;
-const staleIds = stablecoins.filter((row) => !Number.isFinite(dateValue(row.last_verified_at)) || dateValue(row.last_verified_at) < staleThreshold).map((row) => row.id);
-const missingLaunchDateIds = stablecoins.filter((row) => !row.launch_date).map((row) => row.id);
-const terminalStatuses = new Set(['collapsed', 'terminated', 'migrated', 'rebranded']);
-const historicalMissingDiscontinued = stablecoins.filter((row) => terminalStatuses.has(classificationById.get(row.id)?.lifecycle_status) && !row.discontinued_date).map((row) => row.id);
-const unknownIncomeIds = incomeProfiles.filter((row) => ['availability','source','accrual','rate'].every((field) => row[field] === 'unknown')).map((row) => row.id);
-observations.push(`${staleIds.length} records have missing or older-than-one-year last_verified_at values: ${staleIds.join(', ') || 'none'}.`);
-observations.push(`${missingLaunchDateIds.length} records have no launch_date: ${missingLaunchDateIds.join(', ') || 'none'}.`);
-observations.push(`${historicalMissingDiscontinued.length} historical-side records have no discontinued_date: ${historicalMissingDiscontinued.join(', ') || 'none'}.`);
-observations.push(`${unknownIncomeIds.length} income profiles remain entirely unknown: ${unknownIncomeIds.join(', ') || 'none'}.`);
-
-const counts = {
-  stablecoins: stablecoins.length,
-  organizations: organizations.length,
-  relationships: relationships.length,
-  classifications: classifications.length,
-  profiles: profiles.length,
-  events: events.length,
-  event_details: eventDetails.length,
-  evidence: evidence.length,
-  reserve_reports: reserveReports.length,
-  known_unknowns: knownUnknowns.length,
-  regulatory_notes: groups.regulatory_notes.length,
-  deployments: deployments.length,
-  legal_profiles: legalProfiles.length,
-  stable_asset_relationships: assetRelationships.length,
-  reserve_components: reserveComponents.length,
+const expectedCounts = {
+  stablecoins: stablecoins.length, organizations: organizations.length, relationships: relationships.length,
+  classifications: classifications.length, profiles: profiles.length, events: events.length,
+  event_details: eventDetails.length, evidence: evidence.length, reserve_reports: reserveReports.length,
+  known_unknowns: knownUnknowns.length, regulatory_notes: groups.regulatory_notes.length,
+  deployments: deployments.length, legal_profiles: legalProfiles.length,
+  stable_asset_relationships: assetRelationships.length, reserve_components: reserveComponents.length,
   income_profiles: incomeProfiles.length
 };
-const report = {
+for (const [key, actual] of Object.entries(expectedCounts)) {
+  if (generatedStats.registry?.[key] !== actual) critical.push(`Generated stats ${key}=${generatedStats.registry?.[key]}, actual=${actual}`);
+  if (baseline.minimum_counts?.[key] !== undefined && actual < baseline.minimum_counts[key]) {
+    critical.push(`Baseline minimum ${key}=${baseline.minimum_counts[key]} exceeds actual=${actual}`);
+  }
+}
+if (generatedStats.baseline_id !== baseline.baseline_id) {
+  critical.push(`Generated stats baseline_id ${generatedStats.baseline_id} differs from ${baseline.baseline_id}`);
+}
+
+const now = dateValue(auditDate);
+const stale = stablecoins.filter((row) => !Number.isFinite(dateValue(row.last_verified_at)) || now - dateValue(row.last_verified_at) > 365 * 86400000);
+const missingLaunch = stablecoins.filter((row) => !row.launch_date);
+const terminalLifecycleStatuses = new Set(['collapsed', 'inactive', 'terminated', 'migrated', 'rebranded']);
+const missingEnd = stablecoins.filter((row) => {
+  const lifecycle = classificationById.get(row.id)?.lifecycle_status;
+  return terminalLifecycleStatuses.has(lifecycle) && !row.discontinued_date;
+});
+const unknownIncome = incomeProfiles.filter((row) => [row.availability, row.source, row.accrual, row.rate].every((value) => value === 'unknown'));
+const sortedIds = (rows) => rows.map((row) => row.id).sort();
+const staleIds = sortedIds(stale);
+const missingLaunchIds = sortedIds(missingLaunch);
+const missingEndIds = sortedIds(missingEnd);
+const unknownIncomeIds = sortedIds(unknownIncome);
+observations.push(`${stale.length} records have missing or older-than-one-year last_verified_at values: ${staleIds.join(', ') || 'none'}.`);
+observations.push(`${missingLaunch.length} records have no launch_date: ${missingLaunchIds.join(', ') || 'none'}.`);
+observations.push(`${missingEnd.length} historical-side records have no discontinued_date: ${missingEndIds.join(', ') || 'none'}.`);
+observations.push(`${unknownIncome.length} income profiles remain entirely unknown: ${unknownIncomeIds.join(', ') || 'none'}.`);
+
+const summary = {
   audited_at: auditDate,
   baseline_id: baseline.baseline_id,
-  counts,
-  coverage: Object.fromEntries(Object.entries(allCoverage).map(([label, covered]) => [label, { covered: covered.size, total: stablecoinIds.size, required: requiredCoverage.has(label), expectation: coverageExpectation(label) }])),
-  candidate_promotions: { total: candidates.length, promoted: promotedCandidates.length, pending: pendingCandidates.length },
+  counts: expectedCounts,
+  coverage: Object.fromEntries(Object.entries(allCoverage).map(([label, covered]) => [label, {
+    covered: covered.size,
+    total: stablecoinIds.size,
+    required: requiredCoverage.has(label),
+    expectation: coverageExpectation(label)
+  }])),
+  candidate_promotions: { total: candidates.length, promoted: promoted.length, pending: candidates.length - promoted.length },
   identity: {
-    canonical_name_collisions: duplicateValues(stablecoins, 'name', normalize).length,
-    alias_collision_warnings: warnings.filter((value) => value.startsWith('Name/alias')).length
+    canonical_name_collisions: critical.filter((value) => value.startsWith('Canonical-name collision')).length,
+    alias_collision_warnings: warnings.filter((value) => value.startsWith('Name/alias token')).length
   },
   quality: {
-    stale_or_missing_last_verified: staleIds.length,
+    stale_or_missing_last_verified: stale.length,
     stale_or_missing_last_verified_ids: staleIds,
-    missing_launch_date: missingLaunchDateIds.length,
-    missing_launch_date_ids: missingLaunchDateIds,
-    historical_missing_discontinued_date: historicalMissingDiscontinued.length,
-    historical_missing_discontinued_date_ids: historicalMissingDiscontinued,
-    all_unknown_income_profiles: unknownIncomeIds.length,
+    missing_launch_date: missingLaunch.length,
+    missing_launch_date_ids: missingLaunchIds,
+    historical_missing_discontinued_date: missingEnd.length,
+    historical_missing_discontinued_date_ids: missingEndIds,
+    all_unknown_income_profiles: unknownIncome.length,
     all_unknown_income_profile_ids: unknownIncomeIds,
-    reserve_report_context_coverage: { covered: allCoverage.reserve_reports.size, total: stablecoinIds.size }
+    reserve_report_context_coverage: {
+      covered: allCoverage.reserve_reports.size,
+      total: stablecoinIds.size
+    }
   },
   findings: { critical, warnings, observations }
 };
-fs.mkdirSync(path.dirname(absolute(jsonPath)), { recursive: true });
-fs.writeFileSync(absolute(jsonPath), serialize(report));
 
-const lines = [
-  '# SOG 80-Record Final Registry Audit',
-  '',
+const section = (title, rows, empty) => [`## ${title}`, '', ...(rows.length ? rows.map((row) => `- ${row}`) : [`- ${empty}`]), ''].join('\n');
+const markdown = [
+  '# SOG 80-Record Final Registry Audit', '',
   `- Audited at: ${auditDate}`,
   `- Baseline: \`${baseline.baseline_id}\``,
   `- Canonical stable assets: **${stablecoins.length}**`,
-  `- Promoted candidates: **${promotedCandidates.length} / ${candidates.length}**`,
+  `- Promoted candidates: **${promoted.length} / ${candidates.length}**`,
   `- Critical findings: **${critical.length}**`,
-  `- Warnings: **${warnings.length}**`,
-  '',
-  '## Scope',
-  '',
+  `- Warnings: **${warnings.length}**`, '',
+  '## Scope', '',
   '- Canonical identity uniqueness and candidate-to-record mapping',
   '- Legacy status and Registry v2 lifecycle compatibility',
   '- Organization, event, evidence, deployment, and Registry v3 references',
   '- Full-record coverage across required Registry v2/v3 layers',
   '- Required, optional-review, and informational coverage visibility',
   '- Generated registry statistics consistency',
-  '- Date freshness and explicit known-unknown inventory',
-  '',
-  '## Registry Counts',
-  '',
-  '| Layer | Count |',
-  '|---|---:|',
-  ...Object.entries(counts).map(([key, value]) => `| ${key} | ${value} |`),
-  '',
-  '## Coverage',
-  '',
-  '| Layer | Covered | Expectation |',
-  '|---|---:|---|',
-  ...Object.entries(allCoverage).map(([key, covered]) => `| ${key} | ${covered.size} / ${stablecoinIds.size} | ${coverageExpectation(key)} |`),
-  '',
-  '## Critical Findings',
-  '',
-  ...(critical.length ? critical.map((item) => `- ${item}`) : ['- None.']),
-  '',
-  '## Warnings',
-  '',
-  ...(warnings.length ? warnings.map((item) => `- ${item}`) : ['- None.']),
-  '',
-  '## Quality Observations',
-  '',
-  ...observations.map((item) => `- ${item}`),
-  '',
-  '## Result',
-  '',
-  critical.length === 0
-    ? 'The current canonical registry passes the final integrity audit. Warnings remain explicit review queues rather than blockers.'
-    : 'The current canonical registry does not pass the final audit until all critical findings are resolved.',
-  ''
-];
-fs.writeFileSync(absolute(reportPath), `${lines.join('\n')}\n`);
+  '- Date freshness and explicit known-unknown inventory', '',
+  '## Registry Counts', '',
+  '| Layer | Count |', '|---|---:|',
+  ...Object.entries(expectedCounts).map(([key, value]) => `| ${key} | ${value} |`), '',
+  '## Coverage', '',
+  '| Layer | Covered | Expectation |', '|---|---:|---|',
+  ...Object.entries(allCoverage).map(([label, covered]) => `| ${label} | ${covered.size} / ${stablecoinIds.size} | ${coverageExpectation(label)} |`), '',
+  section('Critical Findings', critical, 'None.'),
+  section('Warnings', warnings, 'None.'),
+  section('Quality Observations', observations, 'None.'),
+  '## Result', '',
+  critical.length === 0 && warnings.length === 0
+    ? 'The 80-record canonical registry passes the cross-layer integrity audit with no critical findings or warnings. Informational coverage metrics remain visible without implying universal applicability.'
+    : critical.length === 0
+      ? 'The 80-record canonical registry passes the cross-layer integrity audit. Warnings remain non-blocking review queues and do not represent broken references or duplicate canonical identities.'
+      : 'The registry does not pass the final audit until all critical findings are resolved.', ''
+].join('\n');
 
-if (process.argv.includes('--check') && critical.length) process.exitCode = 1;
+const expectedJson = serialize(summary);
+const expectedMarkdown = markdown.endsWith('\n') ? markdown : `${markdown}\n`;
+const checkOnly = process.argv.includes('--check');
+if (checkOnly) {
+  const currentJson = fs.existsSync(absolute(jsonPath)) ? fs.readFileSync(absolute(jsonPath), 'utf8') : '';
+  const currentMarkdown = fs.existsSync(absolute(reportPath)) ? fs.readFileSync(absolute(reportPath), 'utf8') : '';
+  if (currentJson !== expectedJson || currentMarkdown !== expectedMarkdown) {
+    console.error('Registry integrity audit outputs are stale or missing.');
+    process.exit(1);
+  }
+} else {
+  fs.mkdirSync(path.dirname(absolute(jsonPath)), { recursive: true });
+  fs.mkdirSync(path.dirname(absolute(reportPath)), { recursive: true });
+  fs.writeFileSync(absolute(jsonPath), expectedJson);
+  fs.writeFileSync(absolute(reportPath), expectedMarkdown);
+}
+
+console.log(`Registry integrity audit: ${critical.length} critical, ${warnings.length} warnings, ${observations.length} observations.`);
+if (critical.length) process.exit(1);
