@@ -23,10 +23,11 @@ import profileBatchUData from '../../../data/batch-u-reserve-redemption.json';
 import profileBatchVData from '../../../data/batch-v-reserve-redemption.json';
 import profileBatchWData from '../../../data/batch-w-reserve-redemption.json';
 import profileBatchXData from '../../../data/batch-x-reserve-redemption.json';
+import profileBatchYData from '../../../data/batch-y-reserve-redemption.json';
 import type { ReserveProfileV2, RedemptionProfileV2 } from '../schema/registry-v2';
 
 export type CurrentProfile = { id:string; reserve_profile:ReserveProfileV2; redemption_profile:RedemptionProfileV2; };
-const profiles = [...profileData,...profileBatchAData,...profileBatchBData,...profileBatchCData,...profileBatchDData,...profileBatchEData,...profileBatchFData,...profileBatchGData,...profileBatchHData,...profileBatchIData,...profileBatchJData,...profileBatchKData,...profileBatchLData,...profileBatchMData,...profileBatchNData,...profileBatchOData,...profileBatchPData,...profileBatchQData,...profileBatchRData,...profileBatchSData,...profileBatchTData,...profileBatchUData,...profileBatchVData,...profileBatchWData,...profileBatchXData] as CurrentProfile[];
+const profiles = [...profileData,...profileBatchAData,...profileBatchBData,...profileBatchCData,...profileBatchDData,...profileBatchEData,...profileBatchFData,...profileBatchGData,...profileBatchHData,...profileBatchIData,...profileBatchJData,...profileBatchKData,...profileBatchLData,...profileBatchMData,...profileBatchNData,...profileBatchOData,...profileBatchPData,...profileBatchQData,...profileBatchRData,...profileBatchSData,...profileBatchTData,...profileBatchUData,...profileBatchVData,...profileBatchWData,...profileBatchXData,...profileBatchYData] as CurrentProfile[];
 const byId = new Map(profiles.map((row) => [row.id,row] as const));
 const clone = (row:CurrentProfile):CurrentProfile => ({...row,reserve_profile:{...row.reserve_profile,backing_types:[...row.reserve_profile.backing_types],evidence_ids:[...(row.reserve_profile.evidence_ids ?? [])]},redemption_profile:{...row.redemption_profile,jurisdiction_restrictions:[...(row.redemption_profile.jurisdiction_restrictions ?? [])],evidence_ids:[...(row.redemption_profile.evidence_ids ?? [])]}});
 export function getCurrentProfiles():CurrentProfile[] { return profiles.map(clone); }

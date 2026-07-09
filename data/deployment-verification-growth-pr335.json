@@ -1,0 +1,12 @@
+{
+  "schema_version":"1.0",
+  "reviewed_at":"2026-07-09",
+  "source_review":"docs/roadmap-amendments/2026-07-09-pr335-growth-audd-nzds-activation.md",
+  "expected_additions":2,
+  "status_counts":{"verified":0,"identifier_recorded_unverified":0,"source_linked_no_identifier":2,"review_needed":0,"unknown":0,"not_recorded":0},
+  "status_ids":{"verified":[],"identifier_recorded_unverified":[],"source_linked_no_identifier":["sog_dep_audd_unknown_batch_y","sog_dep_nzds_unknown_batch_y"],"review_needed":[],"unknown":[],"not_recorded":[]},
+  "reviewed_records":[
+    {"id":"sog_dep_audd_unknown_batch_y","identifier_type":"not_recorded","identifier":null,"source_url":"https://audd.digital/"},
+    {"id":"sog_dep_nzds_unknown_batch_y","identifier_type":"not_recorded","identifier":null,"source_url":"https://nzds.com/"}
+  ]
+}

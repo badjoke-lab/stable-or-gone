@@ -4,7 +4,7 @@ const originalLog = console.log;
 console.log = () => {};
 try {
   await import('./validate-next-growth-candidate-audit-pr329.mjs');
-  await import('./validate-batch25-growth-h.mjs');
+  await import('./validate-batch26-growth-i.mjs');
 } finally {
   console.log = originalLog;
 }
@@ -19,6 +19,7 @@ const growth330 = read('docs/roadmap-amendments/2026-07-08-pr330-growth-eure-1gb
 const growth332 = read('docs/roadmap-amendments/2026-07-09-pr332-growth-stablr-eurr-usdr-activation.md');
 const growth333 = read('docs/roadmap-amendments/2026-07-09-pr333-growth-phpc-xidr-activation.md');
 const growth334 = read('docs/roadmap-amendments/2026-07-09-pr334-growth-cadc-zarp-activation.md');
+const growth335 = read('docs/roadmap-amendments/2026-07-09-pr335-growth-audd-nzds-activation.md');
 const foundationSpec = read('docs/stats-foundation-spec.md');
 const analysisSpec = read('docs/stats-analysis-expansion-spec.md');
 const candidateSpec = read('docs/quality/next-growth-candidate-audit-pr329-spec.md');
@@ -38,7 +39,6 @@ const failures = [];
 const requireText = (body, text, file) => { if (!body.includes(text)) failures.push(`${file}: missing ${text}`); };
 
 requireText(roadmap, 'PR #325 deterministic statistics generator and validator: complete', 'roadmap');
-requireText(roadmap, 'Active workstream: statistics implementation', 'roadmap');
 requireText(historyAmendment, 'PR #326 immutable checkpoint history: active', 'PR #326 amendment');
 requireText(historyAmendment, 'PR #327 /stats/ foundation: next', 'PR #326 amendment');
 requireText(foundationAmendment, 'PR #326 immutable checkpoint history: complete', 'PR #327 amendment');
@@ -49,10 +49,11 @@ requireText(growth330, 'PR #330 100 -> 102 controlled growth: active', 'PR #330 
 requireText(growth330, 'planned #331 -> actual #332', 'PR #330 amendment');
 requireText(growth332, 'PR #332 102 -> 104 controlled growth: active', 'PR #332 amendment');
 requireText(growth333, 'PR #333 104 -> 106 controlled growth: active', 'PR #333 amendment');
-requireText(growth333, 'PR #334 106 -> 108 controlled growth: next', 'PR #333 amendment');
-requireText(growth334, 'PR #333 104 -> 106 controlled growth: complete', 'PR #334 amendment');
 requireText(growth334, 'PR #334 106 -> 108 controlled growth: active', 'PR #334 amendment');
-requireText(growth334, 'PR #335 108 -> 110 controlled growth: next', 'PR #334 amendment');
+requireText(growth335, 'PR #334 106 -> 108 controlled growth: complete', 'PR #335 amendment');
+requireText(growth335, 'PR #335 108 -> 110 controlled growth: active', 'PR #335 amendment');
+requireText(growth335, 'PR #336 Comparison Readiness contract and audit method: next', 'PR #335 amendment');
+requireText(growth335, 'PR #350+ natural-language filter translation only after separate approval', 'PR #335 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
@@ -66,23 +67,22 @@ requireText(historyValidator, 'historical snapshot rewritten or reordered', 'his
 
 if (history.schema_version !== '1.0') failures.push('stats history schema version must be 1.0');
 if (history.checkpoint_policy !== 'append_only_reviewed_pr') failures.push('stats history policy mismatch');
-if (history.snapshots?.length !== 5) failures.push('PR #334 requires exactly five reviewed history snapshots after the 108-asset append');
-if (history.snapshots?.[0]?.asset_count !== 100) failures.push('first stats history snapshot must remain the 100-asset checkpoint');
+if (history.snapshots?.length !== 6) failures.push('PR #335 requires exactly six reviewed history snapshots after the 110-asset append');
+const expectedAssetCounts = [100,102,104,106,108,110];
+for (let index = 0; index < expectedAssetCounts.length; index += 1) {
+  if (history.snapshots?.[index]?.asset_count !== expectedAssetCounts[index]) failures.push(`stats history snapshot ${index + 1} must bind ${expectedAssetCounts[index]} assets`);
+}
 if (history.snapshots?.[0]?.checkpoint_id !== audited100Checkpoint.checkpoint_id) failures.push('immutable 100-asset history checkpoint ID mismatch');
-if (history.snapshots?.[1]?.asset_count !== 102) failures.push('second stats history snapshot must remain the 102-asset checkpoint');
-if (history.snapshots?.[2]?.asset_count !== 104) failures.push('third stats history snapshot must remain the 104-asset checkpoint');
-if (history.snapshots?.[3]?.asset_count !== 106) failures.push('fourth stats history snapshot must remain the 106-asset checkpoint');
-if (history.snapshots?.[3]?.checkpoint_id !== currentCheckpoint.previous_checkpoint_id) failures.push('106-asset predecessor checkpoint ID mismatch');
-if (history.snapshots?.[4]?.asset_count !== 108) failures.push('fifth stats history snapshot must be the 108-asset checkpoint');
-if (history.snapshots?.[4]?.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('108-asset history checkpoint ID mismatch');
+if (history.snapshots?.[4]?.checkpoint_id !== currentCheckpoint.previous_checkpoint_id) failures.push('108-asset predecessor checkpoint ID mismatch');
+if (history.snapshots?.[5]?.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('110-asset history checkpoint ID mismatch');
 
 if (releaseBaseline.status !== 'current') failures.push('release baseline must be current');
-if (releaseBaseline.expected_v2_counts?.stablecoins !== 108) failures.push('current release-integrity baseline must protect the 108-asset growth checkpoint');
+if (releaseBaseline.expected_v2_counts?.stablecoins !== 110) failures.push('current release-integrity baseline must protect the 110-asset growth checkpoint');
 if (audited100Checkpoint.status !== 'audited') failures.push('100-asset checkpoint must remain audited');
 if (audited100Checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('audited checkpoint must continue to protect 100 assets');
 if (currentCheckpoint.status !== 'reviewed_growth_checkpoint') failures.push('current checkpoint must be a reviewed growth checkpoint');
-if (currentCheckpoint.asset_count !== 108) failures.push('current checkpoint must bind 108 assets');
-if (currentCheckpoint.previous_checkpoint_id !== 'sog_controlled_growth_106_checkpoint_pr333_2026_07_09') failures.push('current checkpoint must link to reviewed 106-asset checkpoint');
+if (currentCheckpoint.asset_count !== 110) failures.push('current checkpoint must bind 110 assets');
+if (currentCheckpoint.previous_checkpoint_id !== 'sog_controlled_growth_108_checkpoint_pr334_2026_07_09') failures.push('current checkpoint must link to reviewed 108-asset checkpoint');
 
 if (historical321.source_baseline_sync?.source_count !== 24 || historical321.coverage?.uncovered_asset_count !== 84) failures.push('PR #321 historical monitoring checkpoint changed');
 if (historical322.source_baseline_sync?.source_count !== 30 || historical322.coverage?.uncovered_asset_count !== 78) failures.push('PR #322 historical monitoring checkpoint changed');
@@ -95,8 +95,8 @@ for (const checkpoint of [historical321, historical322, historical323]) {
 }
 
 if (failures.length) {
-  console.error('PR #334 controlled-growth workstream validation failed:');
+  console.error('PR #335 controlled-growth workstream validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Workstream valid: PR #333 growth complete, PR #334 growth active, PR #335 growth next; immutable 100/102/104/106 and reviewed 108 statistics checkpoints are bound.');
+console.log('Workstream valid: Phase E final growth active at PR #335, 110 assets bound, and post-110 Phase F starts at PR #336.');

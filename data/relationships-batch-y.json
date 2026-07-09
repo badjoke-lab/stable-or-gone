@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_audd_issuer_batch_y","stablecoin_id":"sog_st_audd","organization_id":"sog_issuer_audd","role":"legal_issuer","start_date":null,"end_date":null,"status":"unknown","evidence_ids":["sog_src_audd_home_batch_y","sog_src_audd_terms_batch_y"],"notes":"Historical and product materials associate AUDD with the AUDD issuer organization; current legal-entity and operational state require renewed first-party verification."},
+  {"id":"sog_rel_nzds_techemynt_batch_y","stablecoin_id":"sog_st_nzds","organization_id":"sog_issuer_techemynt","role":"legal_issuer","start_date":null,"end_date":null,"status":"unknown","evidence_ids":["sog_src_nzds_home_batch_y","sog_src_techemynt_home_batch_y"],"notes":"Historical issuer materials associate NZDS with Techemynt. Current issuer responsibility and operating structure remain under review."}
+]

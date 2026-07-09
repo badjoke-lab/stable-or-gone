@@ -42,6 +42,8 @@ expect(report.verification?.state_counts?.source_linked_no_identifier === expect
 expect((report.verification?.identifiers_not_recorded ?? []).length === expectedVerificationCounts.source_linked_no_identifier, 'identifier-not-recorded review queue changed');
 expect(JSON.stringify(report.taxonomy?.network_review_needed ?? []) === JSON.stringify([
   'sog_dep_aecoin_unresolved_batch_p',
+  'sog_dep_audd_unknown_batch_y',
+  'sog_dep_nzds_unknown_batch_y',
   'sog_dep_usdg_chain_seed'
 ]), 'network review-needed queue changed');
 expect((report.taxonomy?.aggregate_network_context ?? []).length === 4, 'aggregate network-context queue changed');

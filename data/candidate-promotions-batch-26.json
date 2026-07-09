@@ -1,0 +1,4 @@
+[
+  {"candidate_id":"sog_cand_000109","status":"promoted","promotion_pr":335,"promoted_record_id":"sog_st_audd","notes":"Promoted conservatively as a canonical historical AUDD identity. Current lifecycle, issuer legal-entity detail, reserve-reporting state, redemption availability, and exact deployment lineage remain explicit unresolved states rather than being inferred from historical product claims or third-party listings."},
+  {"candidate_id":"sog_cand_000110","status":"promoted","promotion_pr":335,"promoted_record_id":"sog_st_nzds","notes":"Promoted conservatively as the canonical NZDS identity historically associated with Techemynt. Current issuer structure, service availability, reserve-reporting state, redemption access, and exact deployment lineage remain explicit unresolved states pending renewed first-party verification."}
+]
