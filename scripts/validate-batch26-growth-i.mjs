@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
+import { loadDeploymentVerification } from './load-deployment-verification.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -27,11 +28,12 @@ const reserveComponents = (foundation.data_groups?.reserve_components ?? []).fla
 const incomeProfiles = (incomeManifest.data_files ?? []).flatMap(read);
 const promotions = read('data/candidate-promotions-batch-26.json');
 const checkpoint = read('docs/migration/current-canonical-checkpoint.json');
+const verification = loadDeploymentVerification(root);
 
 const expectedCounts = {
   stablecoins:110, organizations:103, relationships:120, classifications:110, profiles:110,
   events:185, event_details:185, evidence:543, reserve_reports:118, known_unknowns:319,
-  deployments:168, legal_profiles:110, reserve_components:143, income_profiles:110
+  deployments:170, legal_profiles:110, reserve_components:143, income_profiles:110
 };
 const rowsByName = {
   stablecoins, organizations, relationships, classifications, profiles, events,
@@ -39,9 +41,7 @@ const rowsByName = {
   known_unknowns:knownUnknowns, deployments, legal_profiles:legalProfiles,
   reserve_components:reserveComponents, income_profiles:incomeProfiles
 };
-for (const [name, count] of Object.entries(expectedCounts)) {
-  fail(rowsByName[name].length === count, `${name}: expected ${count}, found ${rowsByName[name].length}`);
-}
+for (const [name, count] of Object.entries(expectedCounts)) fail(rowsByName[name].length === count, `${name}: expected ${count}, found ${rowsByName[name].length}`);
 
 const ids = ['sog_st_audd','sog_st_nzds'];
 const stablecoinById = new Map(stablecoins.map((row) => [row.id, row]));
@@ -76,7 +76,15 @@ fail(batchEvidence.length === 6, `Batch 26 evidence count must be 6, found ${bat
 const batchEvents = events.filter((row) => ids.includes(row.stablecoin_id));
 fail(batchEvents.length === 0, `Batch 26 must not invent lifecycle events, found ${batchEvents.length}`);
 const batchDeployments = deployments.filter((row) => ids.includes(row.stablecoin_id));
-fail(batchDeployments.length === 0, `Batch 26 must not publish unverified deployment identifiers, found ${batchDeployments.length}`);
+fail(batchDeployments.length === 2, `Batch 26 must contain exactly two explicit unknown deployment-coverage rows, found ${batchDeployments.length}`);
+for (const row of batchDeployments) {
+  fail(row.chain === 'Unknown', `${row.id}: chain must remain Unknown until current first-party network scope is verified`);
+  fail(row.status === 'unknown', `${row.id}: deployment status must remain unknown`);
+  fail(row.canonicality === 'unknown', `${row.id}: canonicality must remain unknown`);
+  fail(row.contract_address === null, `${row.id}: contract address must remain null`);
+  fail(verification.status_ids?.unknown?.includes(row.id), `${row.id}: deployment verification must explicitly classify the row as unknown`);
+}
+fail(verification.expected_total === 170, `deployment verification expected_total must be 170, found ${verification.expected_total}`);
 
 const requiredTopics = {
   sog_st_audd:['launch_date','issuer_structure','reserve_reporting_and_deployment_lineage'],
@@ -92,7 +100,7 @@ fail(checkpoint.asset_count === 110, 'current checkpoint asset_count must be 110
 fail(checkpoint.previous_checkpoint_id === 'sog_controlled_growth_108_checkpoint_pr334_2026_07_09', 'previous checkpoint linkage mismatch');
 const checkpointExpected = {
   assets:110, organizations:103, relationships:120, events:185, evidence:543,
-  reserve_reports:118, known_unknowns:319, regulatory_notes:9, deployments:168,
+  reserve_reports:118, known_unknowns:319, regulatory_notes:9, deployments:170,
   legal_profiles:110, stable_asset_relationships:4, reserve_components:143, income_profiles:110
 };
 for (const [key, count] of Object.entries(checkpoint.expected_counts ?? {})) fail(count === checkpointExpected[key], `checkpoint expected_counts.${key} mismatch`);
@@ -111,5 +119,6 @@ console.log(JSON.stringify({
   batch_events:batchEvents.length,
   batch_evidence:batchEvidence.length,
   batch_deployments:batchDeployments.length,
+  deployment_verification_total:verification.expected_total,
   lifecycle_statuses:ids.map((id) => [id, classificationById.get(id)?.lifecycle_status])
 }, null, 2));
