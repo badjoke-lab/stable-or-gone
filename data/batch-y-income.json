@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_audd","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_audd_home_batch_y"],"notes":"No current canonical issuer-native AUDD income or yield mechanism is asserted; current issuer service state remains unresolved."},
+  {"id":"sog_st_nzds","availability":"unknown","source":"unknown","accrual":"unknown","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_nzds_home_batch_y","sog_src_techemynt_home_batch_y"],"notes":"No current canonical issuer-native NZDS income or yield mechanism is asserted; current issuer service state remains unresolved."}
+]
