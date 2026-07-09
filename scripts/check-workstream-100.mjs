@@ -6,6 +6,7 @@ try {
   await import('./validate-next-growth-candidate-audit-pr329.mjs');
   await import('./validate-batch26-growth-i.mjs');
   await import('./validate-comparison-readiness-contract-pr336.mjs');
+  await import('./validate-comparison-readiness-audit-pr337.mjs');
 } finally {
   console.log = originalLog;
 }
@@ -22,10 +23,12 @@ const growth333 = read('docs/roadmap-amendments/2026-07-09-pr333-growth-phpc-xid
 const growth334 = read('docs/roadmap-amendments/2026-07-09-pr334-growth-cadc-zarp-activation.md');
 const growth335 = read('docs/roadmap-amendments/2026-07-09-pr335-growth-audd-nzds-activation.md');
 const comparison336 = read('docs/roadmap-amendments/2026-07-09-pr336-comparison-readiness-contract-activation.md');
+const comparison337 = read('docs/roadmap-amendments/2026-07-09-pr337-comparison-readiness-audit-activation.md');
 const foundationSpec = read('docs/stats-foundation-spec.md');
 const analysisSpec = read('docs/stats-analysis-expansion-spec.md');
 const candidateSpec = read('docs/quality/next-growth-candidate-audit-pr329-spec.md');
 const comparisonSpec = read('docs/quality/comparison-readiness-contract-pr336-spec.md');
+const comparisonAuditSpec = read('docs/quality/comparison-readiness-audit-pr337-spec.md');
 const statsSpec = read('docs/stats-spec.md');
 const historySpec = read('docs/stats-history-spec.md');
 const historyWorkflow = read('.github/workflows/immutable-statistics-history.yml');
@@ -60,12 +63,16 @@ requireText(growth335, 'PR #336 Comparison Readiness contract and audit method: 
 requireText(comparison336, 'PR #335 108 -> 110 controlled growth: complete', 'PR #336 amendment');
 requireText(comparison336, 'PR #336 Comparison Readiness contract and audit method: active', 'PR #336 amendment');
 requireText(comparison336, 'PR #337 audit all 110 assets for comparison readiness: next', 'PR #336 amendment');
-requireText(comparison336, 'PR #338 normalize comparison-critical gaps and validators: queued', 'PR #336 amendment');
+requireText(comparison337, 'PR #336 Comparison Readiness contract and audit method: complete', 'PR #337 amendment');
+requireText(comparison337, 'PR #337 audit all 110 assets for comparison readiness: active', 'PR #337 amendment');
+requireText(comparison337, 'PR #338 normalize comparison-critical gaps and validators: next', 'PR #337 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
 requireText(comparisonSpec, 'Status: canonical implementation specification', 'comparison readiness spec');
 requireText(comparisonSpec, 'exactly nineteen dimensions are defined', 'comparison readiness spec');
+requireText(comparisonAuditSpec, 'exactly 110 canonical assets', 'comparison readiness audit spec');
+requireText(comparisonAuditSpec, 'nineteen dimension rows for every asset', 'comparison readiness audit spec');
 requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
 requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
 requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
@@ -109,8 +116,8 @@ for (const checkpoint of [historical321, historical322, historical323]) {
 }
 
 if (failures.length) {
-  console.error('PR #336 Comparison Readiness workstream validation failed:');
+  console.error('PR #337 Comparison Readiness audit workstream validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Workstream valid: Phase E complete at 110 assets, Phase F active at PR #336, PR #337 is the next 110-asset readiness audit, and PR #338 remains normalization.');
+console.log('Workstream valid: PR #336 contract complete, PR #337 audits all 110 assets across 19 dimensions, and PR #338 remains bounded normalization.');
