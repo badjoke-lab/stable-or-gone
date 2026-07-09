@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_comparison_readiness_contract_pr336_v1",
+  "status": "canonical_internal_audit_contract",
+  "checkpoint_id": "sog_controlled_growth_110_checkpoint_pr335_2026_07_09",
+  "asset_denominator": 110,
+  "readiness_states": [
+    "ready",
+    "ready_with_unknowns",
+    "needs_normalization",
+    "integrity_blocked"
+  ],
+  "protected_unresolved_states": [
+    "null",
+    "unknown",
+    "not_recorded",
+    "not_applicable",
+    "source_review_needed"
+  ],
+  "applicability_modes": [
+    "all_assets",
+    "record_present",
+    "conditional",
+    "inventory_only",
+    "future_canonical_schema"
+  ],
+  "severity_levels": [
+    "critical",
+    "high",
+    "medium",
+    "low",
+    "info"
+  ],
+  "canonical_source_allowlist": [
+    "stable_assets",
+    "organizations",
+    "relationships",
+    "classifications",
+    "profiles",
+    "reserve_reports",
+    "legal_profiles",
+    "reserve_components",
+    "deployments",
+    "events",
+    "event_details",
+    "evidence",
+    "evidence_relations",
+    "known_unknowns",
+    "regulatory_notes",
+    "stable_asset_relationships",
+    "income_profiles",
+    "current_checkpoint",
+    "launch_date_unresolved_queue"
+  ],
+  "excluded_source_families": [
+    "candidate_allocations",
+    "candidate_research",
+    "monitoring_observations",
+    "monitoring_candidates",
+    "news_discovery",
+    "editorial_research",
+    "article_drafts",
+    "private_notes",
+    "unpublished_review_material",
+    "live_price",
+    "market_cap",
+    "apy",
+    "risk_feed"
+  ],
+  "dimensions": [
+    {
+      "id": "identity_consistency",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets"],
+      "required_fields": ["id", "slug", "name"],
+      "comparison_fields": ["name", "symbol", "aliases"],
+      "unknown_policy": "explicit_unresolved_symbol_or_alias_state_is_renderable",
+      "integrity_blockers": ["duplicate_identity", "duplicate_slug", "conflicting_canonical_identity"]
+    },
+    {
+      "id": "issuer_asset_boundary",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets", "organizations", "relationships"],
+      "required_fields": ["organization_relationship"],
+      "comparison_fields": ["issuer_or_governing_organization", "relationship_role"],
+      "unknown_policy": "explicit_unknown_organization_role_is_renderable",
+      "integrity_blockers": ["missing_relationship", "broken_organization_reference", "issuer_asset_identity_collapse"]
+    },
+    {
+      "id": "lifecycle_semantics",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets", "classifications"],
+      "required_fields": ["lifecycle_status"],
+      "comparison_fields": ["lifecycle_status", "derived_lifecycle_group"],
+      "unknown_policy": "unknown_is_renderable",
+      "integrity_blockers": ["legacy_v2_v3_lifecycle_conflict", "invalid_lifecycle_enum"]
+    },
+    {
+      "id": "reference_target_and_currency",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets", "classifications"],
+      "required_fields": ["peg_reference.kind"],
+      "comparison_fields": ["reference_target", "reference_asset", "target_value"],
+      "unknown_policy": "unknown_reference_must_not_default_to_usd",
+      "integrity_blockers": ["legacy_peg_reference_conflict"]
+    },
+    {
+      "id": "asset_class",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["classifications"],
+      "required_fields": ["asset_class"],
+      "comparison_fields": ["asset_class"],
+      "unknown_policy": "unknown_is_renderable",
+      "integrity_blockers": ["invalid_asset_class"]
+    },
+    {
+      "id": "backing_model_representation",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["classifications", "profiles", "reserve_components"],
+      "required_fields": ["backing_types"],
+      "comparison_fields": ["backing_types", "reserve_component_categories", "reserve_component_percentages_when_published"],
+      "unknown_policy": "multi_select_and_unknown_states_are_preserved",
+      "integrity_blockers": ["empty_backing_types", "invented_component_percentage"]
+    },
+    {
+      "id": "stabilization_mechanism_representation",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["classifications"],
+      "required_fields": ["stabilization_mechanism"],
+      "comparison_fields": ["stabilization_mechanism", "governance_model"],
+      "unknown_policy": "unknown_is_renderable",
+      "integrity_blockers": ["invalid_stabilization_mechanism", "invalid_governance_model"]
+    },
+    {
+      "id": "reserve_disclosure_comparability",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["profiles", "reserve_reports", "reserve_components"],
+      "required_fields": ["reserve_profile.disclosure_status"],
+      "comparison_fields": ["disclosure_status", "latest_report_id", "structured_component_availability"],
+      "unknown_policy": "historical_source_presence_must_not_become_current_disclosure_availability",
+      "integrity_blockers": ["invalid_latest_report_reference", "reserve_applicability_partition_gap"]
+    },
+    {
+      "id": "reserve_report_date_semantics",
+      "applicability": "record_present",
+      "readiness_scored": true,
+      "source_families": ["reserve_reports", "reserve_components"],
+      "required_fields": [],
+      "comparison_fields": ["report_date", "as_of_date", "review_date"],
+      "unknown_policy": "missing_report_date_is_renderable_when_not_coerced",
+      "integrity_blockers": ["date_semantic_coercion", "invalid_date_format"]
+    },
+    {
+      "id": "issuance_comparability",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["classifications", "profiles"],
+      "required_fields": ["issuance_status"],
+      "comparison_fields": ["issuance_status"],
+      "unknown_policy": "unknown_is_renderable_and_must_not_be_derived_from_lifecycle",
+      "integrity_blockers": ["invalid_issuance_status", "lifecycle_to_issuance_inference"]
+    },
+    {
+      "id": "redemption_comparability",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["profiles"],
+      "required_fields": ["redemption_profile.status"],
+      "comparison_fields": ["status", "retail_access", "institutional_access", "eligible_parties", "minimum_amount_text", "jurisdiction_restrictions"],
+      "unknown_policy": "unknown_eligibility_and_minimums_are_renderable",
+      "integrity_blockers": ["invalid_redemption_status", "lifecycle_to_redemption_inference"]
+    },
+    {
+      "id": "legal_classification_comparability",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["legal_profiles", "evidence", "evidence_relations"],
+      "required_fields": ["legal_profile"],
+      "comparison_fields": ["classification", "jurisdiction", "effective_from", "effective_to", "authority_or_basis"],
+      "unknown_policy": "jurisdiction_scoped_unknowns_are_renderable",
+      "integrity_blockers": ["missing_legal_profile", "broken_legal_evidence_reference", "universal_compliance_boolean"]
+    },
+    {
+      "id": "regulatory_action_scope",
+      "applicability": "record_present",
+      "readiness_scored": true,
+      "source_families": ["regulatory_notes", "organizations", "stable_assets", "evidence", "evidence_relations"],
+      "required_fields": [],
+      "comparison_fields": ["jurisdiction", "authority", "action_type", "announcement_date", "effective_date", "scope"],
+      "unknown_policy": "absence_of_record_is_not_no_action_claim",
+      "integrity_blockers": ["broken_regulatory_reference", "scope_loss"]
+    },
+    {
+      "id": "market_access_applicability",
+      "applicability": "future_canonical_schema",
+      "readiness_scored": false,
+      "source_families": ["current_checkpoint"],
+      "required_fields": [],
+      "comparison_fields": [],
+      "unknown_policy": "emit_deferred_canonical_schema_only",
+      "integrity_blockers": ["monitoring_or_editorial_research_used_as_canonical_access_data"]
+    },
+    {
+      "id": "launch_date_semantics",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets", "launch_date_unresolved_queue"],
+      "required_fields": [],
+      "comparison_fields": ["launch_date", "launch_date_unknown_reason"],
+      "unknown_policy": "null_is_ready_with_unknowns_when_deliberately_tracked",
+      "integrity_blockers": ["untracked_date_coercion", "listing_migration_or_deployment_date_used_as_launch"]
+    },
+    {
+      "id": "verification_date_semantics",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets", "profiles", "legal_profiles", "reserve_reports"],
+      "required_fields": ["review_or_verification_metadata"],
+      "comparison_fields": ["last_verified_at", "reviewed_at"],
+      "unknown_policy": "review_date_must_remain_distinct_from_source_period_and_effective_dates",
+      "integrity_blockers": ["verification_date_semantic_coercion"]
+    },
+    {
+      "id": "unknown_state_semantics",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["stable_assets", "classifications", "profiles", "legal_profiles", "deployments", "known_unknowns"],
+      "required_fields": [],
+      "comparison_fields": ["protected_unresolved_states"],
+      "unknown_policy": "all_protected_states_must_survive_projection_without_boolean_coercion",
+      "integrity_blockers": ["unknown_to_false_coercion", "missing_to_not_applicable_coercion"]
+    },
+    {
+      "id": "evidence_scope_and_relation_depth",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["evidence", "evidence_relations", "stable_assets", "events", "relationships", "profiles", "legal_profiles"],
+      "required_fields": ["evidence_relation_integrity"],
+      "comparison_fields": ["evidence_depth", "claim_scope_links"],
+      "unknown_policy": "readiness_is_structural_and_does_not_rank_publishers",
+      "integrity_blockers": ["broken_evidence_reference", "missing_comparison_critical_claim_scope"]
+    },
+    {
+      "id": "known_unknown_visibility",
+      "applicability": "all_assets",
+      "readiness_scored": true,
+      "source_families": ["known_unknowns"],
+      "required_fields": [],
+      "comparison_fields": ["known_unknown_count", "relevant_topics"],
+      "unknown_policy": "canonical_known_unknowns_must_remain_visible_and_linkable",
+      "integrity_blockers": ["known_unknown_suppression"]
+    }
+  ],
+  "audit_output_contract": {
+    "next_pr": 337,
+    "asset_count": 110,
+    "per_asset_dimension_states_required": true,
+    "single_composite_score_forbidden": true,
+    "normalization_queue_required": true,
+    "result_file_visibility": "internal_reviewed_audit"
+  },
+  "normalization_boundary": {
+    "target_pr": 338,
+    "allowed": [
+      "align_field_semantics",
+      "add_explicit_applicability_states",
+      "add_validators",
+      "repair_evidence_linkage",
+      "add_reviewed_schema_extensions",
+      "preserve_explicit_unknown_states"
+    ],
+    "forbidden": [
+      "invent_missing_facts",
+      "rewrite_lifecycle_history_for_display",
+      "collapse_issuer_and_asset_identity",
+      "convert_historical_source_presence_to_current_availability",
+      "convert_missing_regulatory_or_access_records_to_negative_claims",
+      "promote_monitoring_or_editorial_research_without_canonical_review"
+    ]
+  },
+  "non_goals": [
+    "audit_all_110_assets",
+    "comparison_ui",
+    "comparison_projection",
+    "market_access_records",
+    "live_price",
+    "market_cap",
+    "apy",
+    "safety_score",
+    "risk_score",
+    "ranking",
+    "recommendation"
+  ]
+}
