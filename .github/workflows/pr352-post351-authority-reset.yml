@@ -1,0 +1,64 @@
+name: PR 352 Post-351 authority reset
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr352-post351-authority-reset'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate post-351 authority reset
+        run: node scripts/validate-post351-authority-reset-pr352.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify no product output changes are required by authority reset
+        shell: bash
+        run: |
+          test -f dist/data/manifest.json
+          test -f dist/updates/index.html
+          test -f dist/timeline/index.html
+          test -f dist/maintenance/index.html
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          for (const route of ['/compare/', '/access-regulation/', '/timeline/', '/updates/', '/maintenance/']) {
+            if (!manifest.main_routes?.includes(route)) throw new Error(`manifest main route missing after authority reset: ${route}`);
+          }
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only public safety boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
+          console.log('Authority reset preserved public route and data-safety contracts.');
+          NODE
