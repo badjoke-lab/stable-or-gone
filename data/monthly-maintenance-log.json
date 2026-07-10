@@ -1,0 +1,33 @@
+[
+  {
+    "month": "2026-07",
+    "status": "in_progress",
+    "as_of": "2026-07-10",
+    "public_summary": "July maintenance is focused on completing the current public-surface expansion sequence while preserving canonical data, statistics-history immutability, date semantics, and public/private research boundaries.",
+    "checks": [
+      {"check_id":"canonical_data_validation","result":"passed","summary":"Canonical registry validation remains green for the reviewed public data set."},
+      {"check_id":"registry_v2_v3_parity","result":"passed","summary":"Registry v2/v3 machine-readable parity remains green."},
+      {"check_id":"statistics_history_immutability","result":"passed","summary":"Immutable statistics history validation remains green."},
+      {"check_id":"site_architecture_contract","result":"passed","summary":"Public route inventory and navigation architecture remain contract-valid."},
+      {"check_id":"responsive_accessibility_contract","result":"passed","summary":"Responsive and accessibility contract validation remains green on the reviewed public surfaces."},
+      {"check_id":"publication_feed_contract","result":"passed","summary":"The Update Feed remains bound to registry publication history and separate from historical subject-change dates."}
+    ],
+    "counts": {
+      "canonical_stable_assets": 110,
+      "publication_feed_entries": 16
+    },
+    "public_surface_releases": [
+      {"id":"compare_presets","label":"Compare presets","route":"/compare/"},
+      {"id":"access_regulation_index","label":"Access and regulation index","route":"/data/access-regulation-index.json"},
+      {"id":"access_regulation_explorer","label":"Access & Regulation Explorer","route":"/access-regulation/"},
+      {"id":"change_timeline_projection","label":"Change Timeline projection","route":"/data/change-timeline.json"},
+      {"id":"change_timeline_ui","label":"Change Timeline UI","route":"/timeline/"},
+      {"id":"update_feed","label":"Update Feed","route":"/updates/"}
+    ],
+    "next_focus": [
+      "Close the July maintenance entry after month-end review.",
+      "Continue Market Access promotion review under the canonical evidence and governance boundary.",
+      "Continue source-link, correction, and public-surface contract review without exposing internal monitoring rows or unreviewed candidates."
+    ]
+  }
+]
