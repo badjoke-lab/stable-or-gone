@@ -24,16 +24,23 @@ When documents disagree, use this order:
 7. Named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and publication-gate reviews.
 8. Conversation history and unmerged drafts.
 
-Current active amendment:
+Current active amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 ```
 
 Current operating specification:
 
 ```text
 docs/post-351-data-growth-operating-spec.md
+```
+
+Current work-item specification:
+
+```text
+docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
 Historical amendments remain historical records. They do not override the current position.
@@ -59,16 +66,17 @@ A non-trivial PR is not ready for implementation until the exact roadmap item an
 Canonical stable assets: 110
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
-PR #352 post-351 authority reset: active
-PR #353 Record Depth & Coverage Baseline: next
+PR #352 post-351 authority reset: complete
+PR #353 Record Depth & Coverage Baseline: active
+PR #354 Tier A Dossier Deepening — Batch 1: next
 ```
 
-Approved near-term sequence:
+Approved bounded sequence:
 
 ```text
-PR #352  post-351 authority reset and specification/schedule synchronization
-PR #353  Record Depth & Coverage Baseline
-PR #354  Tier A Dossier Deepening — Batch 1
+PR #352  post-351 authority reset and specification/schedule synchronization — complete
+PR #353  Record Depth & Coverage Baseline — active
+PR #354  Tier A Dossier Deepening — Batch 1 — next
 PR #355  Tier A Dossier Deepening — Batch 2
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
@@ -98,10 +106,12 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 ```
 
-### Record Depth Baseline
+### Active PR #353 Record Depth Baseline
 
 ```text
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
+config/record-depth-baseline-v1.json
 ```
 
 ### Statistics
@@ -126,7 +136,7 @@ Update Feed specification
 Monthly Maintenance Log specification
 ```
 
-Schedule portions in historical product specifications are superseded by `docs/roadmap.md` and the current active amendment. Their semantic boundaries remain binding unless deliberately amended.
+Schedule portions in historical product specifications are superseded by `docs/roadmap.md` and the current active amendments. Their semantic boundaries remain binding unless deliberately amended.
 
 ### Monitoring
 
@@ -164,6 +174,7 @@ A change to any of the following requires a specification update in the same PR 
 - statistics semantics;
 - Comparison Readiness semantics;
 - facet freshness semantics;
+- Record Depth planning-state semantics;
 - canonical Market Access Record semantics;
 - Timeline date semantics;
 - Update Feed publication-date semantics;
@@ -197,7 +208,7 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/post-351-data-growth-operating-spec.md
-active roadmap amendment
+active roadmap amendments
 work-item-specific specification
 named baseline/queue/audit/research checkpoint
 ```
@@ -277,6 +288,8 @@ A pending baseline is not accepted monitoring coverage.
 
 Monitoring observations are not canonical Market Access Records.
 
+PR #353 must not read monitoring artifacts, news discovery leads, unreviewed candidates, unpromoted editorial research rows, private notes, private queues, or candidate URLs.
+
 ## 11. Market Access governance
 
 Market Access remains separate from:
@@ -308,25 +321,39 @@ A platform licence is not proof that a specific asset/function combination is av
 
 Access must not be reduced to a universal allowed/banned boolean.
 
+Absence of a canonical Market Access Record is a planning coverage state only and must not be interpreted as unavailable.
+
 ## 12. Record Depth Baseline governance
 
 PR #353 is governed by:
 
 ```text
 docs/quality/record-depth-coverage-baseline-spec.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
+config/record-depth-baseline-v1.json
 ```
 
-The baseline is an internal planning instrument.
+The baseline is an internal planning instrument over all 110 canonical assets.
 
-It must not become:
+Required dimensions:
 
 ```text
-risk score
-safety score
-quality ranking
-transparency ranking
-investment recommendation
-public leaderboard
+identity
+lifecycle
+organization_relationships
+mechanism_classification
+reserve_structure
+redemption
+issuance
+deployment
+legal_profile
+regulatory_notes
+events
+evidence_depth
+known_unknowns
+comparison_readiness
+facet_freshness_support
+canonical_market_access
 ```
 
 Allowed planning states:
@@ -340,7 +367,35 @@ absent
 not_applicable
 ```
 
+It must not become:
+
+```text
+risk score
+safety score
+quality ranking
+transparency ranking
+numeric composite score
+asset rank
+investment recommendation
+public leaderboard
+```
+
 State derivation must be deterministic and auditable.
+
+Queue order must be deterministic and non-ranking. Every queue member must cite explicit selection reasons.
+
+Planning absence must not be converted into a factual negative claim:
+
+```text
+no Regulatory Note row
+!= no regulatory issue
+
+no Market Access Record
+!= unavailable
+
+no known-unknown row
+!= nothing is unknown
+```
 
 ## 13. Growth governance
 
@@ -349,6 +404,8 @@ Dossier deepening and new-asset growth are distinct operations.
 Tier A dossier batches normally cover no more than five existing assets.
 
 Dossier batches may add supporting canonical records but do not add new canonical assets unless explicitly approved as combined growth work.
+
+PR #354 must select its assets from the reviewed PR #353 baseline and candidate queue and cite explicit selection reasons.
 
 If a growth PR adds new canonical stable assets:
 
@@ -383,6 +440,8 @@ Compare uses reviewed canonical data, preserves unresolved states, and does not 
 Comparison Readiness remains separate from value truth and facet freshness.
 
 Facet freshness derives from authoritative record families and does not replace factual record values.
+
+Record Depth uses reviewed canonical inventory plus reviewed Readiness/Freshness derivations for internal planning only; it does not replace those contracts.
 
 Change Timeline preserves date semantics and does not convert review/freshness dates into historical change items.
 
