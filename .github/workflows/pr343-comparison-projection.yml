@@ -1,0 +1,87 @@
+name: PR 343 Comparison projection
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr343-comparison-projection'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Build deterministic comparison projection artifact
+        run: node scripts/comparison/build-comparison-projection-pr343.mjs artifacts/comparison-projection-pr343.json
+
+      - name: Validate comparison projection contract
+        run: node scripts/validate-comparison-projection-pr343.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify built comparison endpoint parity
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { isDeepStrictEqual } from 'node:util';
+          const expected = JSON.parse(fs.readFileSync('artifacts/comparison-projection-pr343.json', 'utf8'));
+          const built = JSON.parse(fs.readFileSync('dist/data/comparison.json', 'utf8'));
+          if (!isDeepStrictEqual(built, expected)) throw new Error('built /data/comparison.json differs from deterministic builder artifact');
+          if (built.asset_count !== 110 || built.dimension_count !== 19 || built.cell_count !== 2090) throw new Error('built comparison projection count contract mismatch');
+          if (built.single_composite_score !== false) throw new Error('built comparison projection must not emit composite score');
+          console.log('Built comparison endpoint matches deterministic projection artifact exactly.');
+          NODE
+
+      - name: Verify built manifest discovery
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.comparison !== '/data/comparison.json') throw new Error('built manifest does not advertise comparison endpoint');
+          if (manifest.deterministic_comparison?.readiness_and_freshness_separate !== true) throw new Error('built manifest lost readiness/freshness separation boundary');
+          if (manifest.deterministic_comparison?.single_composite_score !== false) throw new Error('built manifest must state no composite score');
+          if (manifest.deterministic_comparison?.excludes_unreviewed_candidates !== true) throw new Error('built manifest must exclude unreviewed candidates');
+          if (manifest.deterministic_comparison?.excludes_internal_monitoring !== true) throw new Error('built manifest must exclude internal monitoring');
+          if (manifest.deterministic_comparison?.excludes_editorial_research !== true) throw new Error('built manifest must exclude editorial research');
+          console.log('Built manifest discovery and comparison safety boundaries valid.');
+          NODE
+
+      - name: Upload comparison projection artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr343-comparison-projection-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/comparison-projection-pr343.json
+            dist/data/comparison.json
+            dist/data/manifest.json
