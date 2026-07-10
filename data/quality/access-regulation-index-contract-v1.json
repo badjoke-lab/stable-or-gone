@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_access_regulation_index_pr346_v1",
+  "status": "canonical_public_index_contract",
+  "source_projection_id": "sog_comparison_projection_pr343_v1",
+  "market_access_governance_id": "sog_market_access_governance_v1_pr341",
+  "endpoint": "/data/access-regulation-index.json",
+  "asset_count": 110,
+  "source_dimensions": [
+    "lifecycle_semantics",
+    "legal_classification_comparability",
+    "regulatory_action_scope",
+    "market_access_applicability"
+  ],
+  "index_axes": [
+    "lifecycle_status",
+    "legal_profile_state",
+    "legal_classification",
+    "legal_jurisdiction",
+    "licensed_or_regulated_as",
+    "regulatory_record_state",
+    "regulatory_note_type",
+    "regulatory_jurisdiction",
+    "regulatory_authority_or_source",
+    "market_access_record_state",
+    "market_access_jurisdiction",
+    "market_access_function",
+    "market_access_state",
+    "market_access_platform"
+  ],
+  "absence_semantics": {
+    "no_regulatory_note_means_no_action": false,
+    "no_market_access_record_means_unavailable": false,
+    "unclassified_legal_profile_means_illegal": false,
+    "unclassified_legal_profile_means_unregulated": false,
+    "record_presence_is_risk_score": false,
+    "record_count_is_risk_score": false
+  },
+  "data_safety": {
+    "canonical_only": true,
+    "includes_unreviewed_candidates": false,
+    "includes_internal_monitoring": false,
+    "includes_editorial_research": false,
+    "includes_private_notes": false,
+    "includes_raw_source_discovery": false
+  },
+  "projection_rules": {
+    "one_row_per_canonical_asset": true,
+    "stable_sorting_required": true,
+    "readiness_and_freshness_preserved": true,
+    "single_composite_score": false,
+    "risk_ranking": false,
+    "legal_or_access_conclusion_from_absence": false
+  },
+  "next_pr": 347
+}
