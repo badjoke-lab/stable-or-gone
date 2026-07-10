@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_comparison_projection_contract_pr343_v1",
+  "status": "canonical_public_projection_contract",
+  "readiness_contract_id": "sog_comparison_readiness_contract_pr336_v1",
+  "freshness_contract_id": "sog_facet_freshness_contract_pr342_v1",
+  "endpoint": "/data/comparison.json",
+  "asset_count": 110,
+  "dimension_count": 19,
+  "cell_count": 2090,
+  "data_safety": {
+    "canonical_only": true,
+    "includes_unreviewed_candidates": false,
+    "includes_internal_monitoring": false,
+    "includes_private_notes": false,
+    "includes_normalization_queue": false,
+    "includes_editorial_research": false
+  },
+  "projection_rules": {
+    "one_asset_row_per_canonical_asset": true,
+    "one_facet_per_comparison_dimension": true,
+    "readiness_and_freshness_are_separate_axes": true,
+    "single_composite_score": false,
+    "missing_record_is_not_negative_claim": true,
+    "unknown_states_preserved": true,
+    "stable_sorting_required": true
+  },
+  "public_cell_fields": [
+    "dimension_id",
+    "value",
+    "readiness",
+    "freshness"
+  ],
+  "public_readiness_fields": [
+    "state",
+    "scored"
+  ],
+  "public_freshness_fields": [
+    "state",
+    "anchor_date",
+    "age_days",
+    "date_semantics",
+    "inherited_review_anchor"
+  ],
+  "excluded_internal_fields": [
+    "normalization_queue",
+    "reason_codes",
+    "supporting_inventory",
+    "monitoring_observations",
+    "monitoring_candidates",
+    "editorial_research_rows",
+    "private_review_notes"
+  ],
+  "next_pr": 344
+}
