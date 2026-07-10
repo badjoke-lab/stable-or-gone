@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_change_timeline_projection_pr348_v1",
+  "status": "canonical_public_projection_contract",
+  "endpoint": "/data/change-timeline.json",
+  "source_families": [
+    "stable_asset_identity",
+    "canonical_event",
+    "organization_relationship",
+    "legal_classification",
+    "regulatory_note",
+    "market_access_record"
+  ],
+  "date_kinds": [
+    "asset_launch_date",
+    "event_date",
+    "event_recovery_date",
+    "relationship_start_date",
+    "relationship_end_date",
+    "legal_effective_from",
+    "legal_effective_to",
+    "regulatory_note_date",
+    "market_access_effective_from",
+    "market_access_effective_to"
+  ],
+  "boundary_kinds": [
+    "milestone",
+    "start",
+    "end"
+  ],
+  "excluded_date_semantics": [
+    "last_verified_at",
+    "reviewed_at",
+    "last_checked_at",
+    "freshness_anchor_date",
+    "market_access_observed_at",
+    "evidence_accessed_at"
+  ],
+  "data_safety": {
+    "canonical_only": true,
+    "includes_unreviewed_candidates": false,
+    "includes_internal_monitoring": false,
+    "includes_editorial_research": false,
+    "includes_private_notes": false
+  },
+  "projection_rules": {
+    "one_item_per_source_date_boundary": true,
+    "date_semantics_preserved": true,
+    "cross_source_deduplication": false,
+    "stable_sorting_required": true,
+    "sort_order": "date_desc_then_source_priority_then_item_id",
+    "single_generic_timestamp": false,
+    "review_dates_are_change_items": false,
+    "freshness_dates_are_change_items": false,
+    "single_composite_score": false,
+    "risk_ranking": false
+  },
+  "next_pr": 349
+}
