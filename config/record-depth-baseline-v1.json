@@ -49,9 +49,25 @@
   "queue_policy": {
     "order": "asset_slug_ascending_non_ranking",
     "minimum_priority_gap_count": 2,
+    "material_dossier_gap_dimensions": [
+      "identity",
+      "lifecycle",
+      "organization_relationships",
+      "mechanism_classification",
+      "reserve_structure",
+      "redemption",
+      "issuance",
+      "legal_profile",
+      "events",
+      "evidence_depth",
+      "known_unknowns"
+    ],
+    "historical_material_gap_min": 2,
+    "regional_material_gap_min": 2,
+    "comparison_preset_material_gap_min": 1,
     "eligible_if_historical_and_gapped": true,
     "eligible_if_compare_and_evidence_leverage": true,
-    "eligible_if_access_regulation_and_gapped": false,
+    "eligible_if_comparison_preset_member_and_gapped": true,
     "eligible_if_regional_and_gapped": true
   },
   "public_output": false,
