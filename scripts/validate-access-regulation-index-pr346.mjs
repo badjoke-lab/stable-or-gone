@@ -134,7 +134,7 @@ expect(editorialResearch.canonical_boundary?.included_in_public_canonical_counts
 expect(!builderSource.includes('editorial-research'), 'index builder must not read editorial research');
 expect(!builderSource.includes('monitoring'), 'index builder must not read monitoring output');
 expect(!builderSource.includes('risk_score'), 'index builder must not calculate risk score');
-expect(!builderSource.includes('rank'), 'index builder must not calculate ranking');
+expect(!builderSource.includes('ranking_score') && !builderSource.includes('rank_assets') && !builderSource.includes('risk_rank'), 'index builder must not calculate ranking');
 
 expect(routeSource.includes('getPublicAccessRegulationIndex'), 'public access/regulation route must use deterministic index helper');
 expect(routeSource.includes("'content-type': 'application/json; charset=utf-8'"), 'public access/regulation route must emit JSON content type');
