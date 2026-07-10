@@ -35,10 +35,11 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'project',
     label: 'Project',
-    purpose: 'Review methodology, changes, scope, and project identity.',
+    purpose: 'Review methodology, changes, maintenance, scope, and project identity.',
     items: Object.freeze([
       Object.freeze({ label: 'Methodology', href: '/methodology/' }),
       Object.freeze({ label: 'Updates', href: '/updates/' }),
+      Object.freeze({ label: 'Maintenance', href: '/maintenance/' }),
       Object.freeze({ label: 'About', href: '/about/' })
     ])
   })
@@ -64,6 +65,7 @@ export const aboutNavigation = Object.freeze([
   Object.freeze({ id: 'glossary', label: 'Glossary', href: '/glossary/' }),
   Object.freeze({ id: 'models', label: 'Models', href: '/models/' }),
   Object.freeze({ id: 'updates', label: 'Updates', href: '/updates/' }),
+  Object.freeze({ id: 'maintenance', label: 'Maintenance', href: '/maintenance/' }),
   Object.freeze({ id: 'corrections', label: 'Corrections', href: '/contact/' }),
   Object.freeze({ id: 'support', label: 'Support', href: '/support/' })
 ]);
@@ -98,6 +100,7 @@ export const footerNavigationGroups = Object.freeze([
     label: 'Project',
     items: Object.freeze([
       Object.freeze({ label: 'About', href: '/about/' }),
+      Object.freeze({ label: 'Maintenance', href: '/maintenance/' }),
       Object.freeze({ label: 'Corrections', href: '/contact/' }),
       Object.freeze({ label: 'Support', href: '/support/' }),
       Object.freeze({ label: 'GitHub Issues', href: 'https://github.com/badjoke-lab/stable-or-gone/issues' })
@@ -115,6 +118,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/data/access-regulation-index.json', source_file: 'src/pages/data/access-regulation-index.json.ts', output_kind: 'json', group: 'data_access', role: 'access_regulation_index', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/data/change-timeline.json', source_file: 'src/pages/data/change-timeline.json.ts', output_kind: 'json', group: 'data_access', role: 'change_timeline_projection', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/data/comparison.json', source_file: 'src/pages/data/comparison.json.ts', output_kind: 'json', group: 'data_access', role: 'deterministic_comparison_projection', decision: 'add', navigation: 'data_manifest' }),
+  Object.freeze({ pattern: '/data/maintenance-log.json', source_file: 'src/pages/data/maintenance-log.json.ts', output_kind: 'json', group: 'data_access', role: 'monthly_maintenance_log', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/data/manifest.json', source_file: 'src/pages/data/manifest.json.ts', output_kind: 'json', group: 'data_access', role: 'public_data_manifest', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/data/stats-history.json', source_file: 'src/pages/data/stats-history.json.ts', output_kind: 'json', group: 'data_access', role: 'statistics_checkpoint_history', decision: 'add', navigation: 'stats' }),
   Object.freeze({ pattern: '/data/stats.json', source_file: 'src/pages/data/stats.json.ts', output_kind: 'json', group: 'data_access', role: 'current_registry_statistics', decision: 'add', navigation: 'stats' }),
@@ -137,6 +141,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/issuer/{slug}/', source_file: 'src/pages/issuer/[slug].astro', output_kind: 'html', group: 'registry', role: 'organization_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/issuers/', source_file: 'src/pages/issuers/index.astro', output_kind: 'html', group: 'registry', role: 'organization_index', decision: 'keep', navigation: 'registry' }),
   Object.freeze({ pattern: '/llms.txt', source_file: 'src/pages/llms.txt.ts', output_kind: 'text', group: 'data_access', role: 'llm_guide', decision: 'keep', navigation: 'footer_data' }),
+  Object.freeze({ pattern: '/maintenance/', source_file: 'src/pages/maintenance/index.astro', output_kind: 'html', group: 'project', role: 'monthly_maintenance_log', decision: 'add', navigation: 'project' }),
   Object.freeze({ pattern: '/methodology/', source_file: 'src/pages/methodology/index.astro', output_kind: 'html', group: 'project', role: 'methodology', decision: 'keep', navigation: 'project' }),
   Object.freeze({ pattern: '/models/', source_file: 'src/pages/models/index.astro', output_kind: 'html', group: 'learn', role: 'model_explainer', decision: 'keep', navigation: 'learn' }),
   Object.freeze({ pattern: '/sitemap-index.xml', source_file: 'src/pages/sitemap-index.xml.ts', output_kind: 'xml', group: 'discovery', role: 'sitemap_index', decision: 'keep', navigation: 'none' }),
@@ -157,6 +162,7 @@ export const recordContentOwnership = Object.freeze([
   Object.freeze({ owner_role: 'comparison_explorer', route: '/compare/', responsibilities: Object.freeze(['bounded_asset_selection', 'canonical_facet_comparison', 'readiness_visibility', 'freshness_visibility', 'shareable_query_state']) }),
   Object.freeze({ owner_role: 'access_regulation_explorer', route: '/access-regulation/', responsibilities: Object.freeze(['canonical_legal_filtering', 'regulatory_note_filtering', 'market_access_record_filtering', 'readiness_visibility', 'freshness_visibility', 'shareable_filter_state', 'absence_semantics']) }),
   Object.freeze({ owner_role: 'change_timeline_ui', route: '/timeline/', responsibilities: Object.freeze(['canonical_change_history', 'date_semantics_visibility', 'boundary_kind_visibility', 'source_family_visibility', 'shareable_filter_state']) }),
+  Object.freeze({ owner_role: 'monthly_maintenance_log', route: '/maintenance/', responsibilities: Object.freeze(['public_safe_operational_outcomes', 'monthly_contract_checks', 'public_count_snapshots', 'released_surface_inventory', 'next_maintenance_focus']) }),
   Object.freeze({ owner_role: 'methodology', route: '/methodology/', responsibilities: Object.freeze(['taxonomy_definitions', 'value_state_semantics', 'evidence_model', 'relationship_model', 'selection_rules']) }),
   Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['registry_publication_history', 'publication_date_semantics', 'publication_change_search', 'shareable_filter_state', 'timeline_boundary_explanation']) }),
   Object.freeze({ owner_role: 'corrections_and_submissions', route: '/contact/', responsibilities: Object.freeze(['correction_submission', 'source_submission']) }),
