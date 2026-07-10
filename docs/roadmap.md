@@ -49,6 +49,13 @@ Current work-item specification:
 docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
+Current reviewed planning outputs:
+
+```text
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+```
+
 Earlier roadmap amendments remain historical records but do not override this current position.
 
 ## 3. Completed program through PR #352
@@ -108,6 +115,13 @@ docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
+Reviewed handoff checkpoints:
+
+```text
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+```
+
 PR #353 evaluates all 110 canonical assets across exactly these planning dimensions:
 
 ```text
@@ -140,14 +154,32 @@ absent
 not_applicable
 ```
 
-PR #353 must produce deterministic internal planning outputs:
+PR #353 produces deterministic internal planning outputs:
 
 ```text
 record depth baseline
 summary counts by dimension and state
-Tier A candidate queue with explicit reasons
+reviewed Tier A candidate queue with explicit reasons
 input digests
+committed reviewed summary checkpoint
+committed reviewed queue checkpoint
 ```
+
+The committed reviewed summary currently binds:
+
+```text
+110 assets
+16 dimensions
+1,760 planning cells
+strong: 589
+usable: 687
+partial: 267
+sparse: 0
+absent: 217
+not_applicable: 0
+```
+
+The committed reviewed Tier A queue currently binds 18 candidates in deterministic non-ranking slug order.
 
 PR #353 must not produce:
 
@@ -162,11 +194,18 @@ investment recommendation
 public leaderboard
 ```
 
-PR #353 does not deepen dossiers, add canonical assets, create Market Access Records, change Readiness, change Freshness, change Timeline semantics, change Update Feed entries, change Maintenance Log month data, or add a public product surface.
+PR #353 does not deepen dossiers, add canonical assets, create Market Access Records, change Readiness, change Freshness, change Compare preset behavior, change Timeline semantics, change Update Feed entries, change Maintenance Log month data, or add a public product surface.
 
 ## 6. PR #354, #355, #357 — Tier A Dossier Deepening
 
-Selection is driven by the reviewed PR #353 baseline and candidate queue.
+Selection is driven by the reviewed PR #353 baseline and queue checkpoints:
+
+```text
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+```
+
+PR #354 must select assets from the reviewed queue and cite each selected asset's explicit reasons and material dossier gaps.
 
 Selection considerations:
 
@@ -360,6 +399,7 @@ Small correctness, accessibility, readability, broken-link, and maintenance fixe
 - Monitoring observations are not canonical Market Access Records.
 - A platform licence is not proof of asset/function availability.
 - Comparison Readiness remains separate from value truth and facet freshness.
+- Record Depth planning states remain internal planning coverage states and do not replace canonical facts, Readiness, or Freshness.
 - Timeline date semantics remain separate from review and freshness dates.
 - Update Feed publication dates remain separate from historical subject dates.
 - Maintenance Log remains aggregate-only and public-safe.
