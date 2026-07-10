@@ -34,16 +34,17 @@ Current position:
 
 ```text
 PR #351 Monthly Maintenance Log: complete
-PR #352 post-351 authority reset: active
-PR #353 Record Depth & Coverage Baseline: next
+PR #352 post-351 authority reset: complete
+PR #353 Record Depth & Coverage Baseline: active
+PR #354 Tier A Dossier Deepening — Batch 1: next
 ```
 
-Approved near-term sequence:
+Approved bounded sequence:
 
 ```text
-PR #352  post-351 authority reset and specification/schedule synchronization
-PR #353  Record Depth & Coverage Baseline
-PR #354  Tier A Dossier Deepening — Batch 1
+PR #352  post-351 authority reset and specification/schedule synchronization — complete
+PR #353  Record Depth & Coverage Baseline — active
+PR #354  Tier A Dossier Deepening — Batch 1 — next
 PR #355  Tier A Dossier Deepening — Batch 2
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
@@ -64,6 +65,8 @@ docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
+docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
 Do not infer the active schedule from old handoffs or superseded PR numbering.
@@ -183,6 +186,8 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
+The Record Depth & Coverage Baseline is internal planning infrastructure and is not a public endpoint or manifest surface.
+
 ## Monitoring boundary
 
 Monitoring is review-only and read-only with respect to canonical data.
@@ -220,6 +225,23 @@ A platform licence is not proof that a specific asset/function combination is av
 
 Access is not reduced to one universal allowed/banned boolean.
 
+## Record Depth baseline boundary
+
+PR #353 evaluates all 110 canonical assets across 16 planning dimensions using deterministic reviewed-data rules.
+
+Allowed planning states are:
+
+```text
+strong
+usable
+partial
+sparse
+absent
+not_applicable
+```
+
+The baseline and Tier A candidate queue are internal planning instruments. They do not create a risk score, safety score, quality ranking, transparency ranking, asset rank, investment recommendation, or public leaderboard.
+
 ## Specification and change control
 
 Repository specifications are authoritative.
@@ -231,7 +253,7 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/post-351-data-growth-operating-spec.md
-active roadmap amendment
+active roadmap amendments
 work-item-specific specification
 named baseline/queue/audit/research checkpoint or prior output
 ```
