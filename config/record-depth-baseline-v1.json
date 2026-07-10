@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_record_depth_baseline_pr353_v1",
+  "asset_count": 110,
+  "planning_states": ["strong", "usable", "partial", "sparse", "absent", "not_applicable"],
+  "dimensions": [
+    "identity",
+    "lifecycle",
+    "organization_relationships",
+    "mechanism_classification",
+    "reserve_structure",
+    "redemption",
+    "issuance",
+    "deployment",
+    "legal_profile",
+    "regulatory_notes",
+    "events",
+    "evidence_depth",
+    "known_unknowns",
+    "comparison_readiness",
+    "facet_freshness_support",
+    "canonical_market_access"
+  ],
+  "thresholds": {
+    "reserve_reports_strong_min": 2,
+    "reserve_components_strong_min": 2,
+    "relationships_strong_min": 2,
+    "deployments_strong_min": 2,
+    "regulatory_notes_strong_min": 2,
+    "events_strong_min": 3,
+    "evidence_strong_min": 5,
+    "evidence_usable_min": 3,
+    "evidence_partial_min": 2,
+    "known_unknowns_strong_min": 3,
+    "market_access_strong_min": 4,
+    "market_access_usable_min": 2,
+    "freshness_support_usable_max_unsupported": 2,
+    "freshness_support_partial_max_unsupported": 5
+  },
+  "readiness_state_map": {
+    "ready": "strong",
+    "ready_with_unknowns": "usable",
+    "needs_normalization": "partial",
+    "integrity_blocked": "sparse"
+  },
+  "freshness_supported_states": ["fresh", "aging", "stale"],
+  "freshness_unsupported_states": ["undated", "no_canonical_record"],
+  "freshness_excluded_dimensions": ["market_access_applicability"],
+  "queue_policy": {
+    "order": "asset_slug_ascending_non_ranking",
+    "minimum_priority_gap_count": 2,
+    "eligible_if_historical_and_gapped": true,
+    "eligible_if_compare_and_evidence_leverage": true,
+    "eligible_if_access_regulation_and_gapped": true,
+    "eligible_if_regional_and_gapped": true
+  },
+  "public_output": false,
+  "single_composite_score": false,
+  "asset_rank": false
+}
