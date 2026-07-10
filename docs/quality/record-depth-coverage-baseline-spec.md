@@ -40,7 +40,10 @@ canonical income profiles
 Comparison Readiness output
 facet freshness output
 canonical Market Access Records
+reviewed Compare preset configuration for product-leverage membership only
 ```
+
+Compare preset membership may influence Tier A planning selection because it identifies assets already used by an existing public research surface. It must not change any dimension state, canonical value, readiness state, or freshness state.
 
 Forbidden planning inputs:
 
@@ -180,7 +183,10 @@ access_regulation_leverage
 evidence_maintenance_leverage
 historical_importance
 regional_relevance
+comparison_preset_member
 ```
+
+`comparison_preset_member` is derived only from the reviewed Compare preset configuration. It is a product-leverage flag, not a statement of market importance or asset quality.
 
 Flags must be boolean or categorical planning signals, not numeric composite scores.
 
@@ -190,15 +196,27 @@ PR #353 must prepare a proposed Tier A priority queue for PR #354, #355, and #35
 
 The queue must explain selection through explicit gap and leverage reasons.
 
+Queue membership may use deterministic conditions based on:
+
+```text
+material dossier gaps
+historical importance with material gaps
+comparison and evidence-maintenance leverage
+reviewed Compare preset membership with material gaps
+regional relevance with material gaps
+```
+
+Common cross-registry gaps must not automatically make every asset a Tier A candidate. In particular, universal absence of canonical Market Access Records or broad freshness/deployment gaps must not by themselves make the queue non-selective.
+
+Queue order must be deterministic and non-ranking. Slug order is permitted for stable output ordering.
+
 Example reason structure:
 
 ```text
 asset: example
 reasons:
-  - high comparison leverage
-  - sparse legal/regulatory depth
-  - important historical event family
-  - Market Access research potential
+  - comparison preset member with material dossier gap
+  - historical importance with multiple material dossier gaps
 ```
 
 The queue does not become canonical public data.
@@ -217,8 +235,10 @@ PR #353 must prove:
 8. repeated builds from identical inputs are byte-identical;
 9. summary counts reconcile with asset rows;
 10. priority queue membership cites explicit gap/leverage reasons;
-11. canonical data remains unchanged;
-12. public route behavior remains unchanged.
+11. reviewed Compare preset membership is derived exactly from the preset config;
+12. reviewed Tier A queue remains selective and bounded;
+13. canonical data remains unchanged;
+14. public route behavior remains unchanged.
 
 ## 11. PR #353 non-goals
 
@@ -229,6 +249,7 @@ PR #353 does not:
 - create canonical Market Access Records;
 - modify Comparison Readiness;
 - modify facet freshness;
+- change Compare preset membership or behavior;
 - change Timeline projection semantics;
 - change Update Feed entries;
 - change Maintenance Log month records;
@@ -247,6 +268,7 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
-PR #353 baseline artifact and priority queue
+PR #353 reviewed baseline summary and Tier A candidate queue
 ```
