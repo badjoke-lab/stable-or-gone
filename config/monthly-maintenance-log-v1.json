@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_monthly_maintenance_log_pr351_v1",
+  "source_file": "data/monthly-maintenance-log.json",
+  "source_endpoint": "/data/maintenance-log.json",
+  "route": "/maintenance/",
+  "ordering": "month_desc",
+  "entry_policy": {
+    "one_entry_per_month": true,
+    "closed_months_immutable": true,
+    "current_month_may_be_in_progress": true,
+    "closed_months_append_only": true
+  },
+  "public_safety": {
+    "aggregate_outcomes_only": true,
+    "includes_internal_monitoring_rows": false,
+    "includes_unreviewed_candidates": false,
+    "includes_private_notes": false,
+    "includes_private_source_queues": false,
+    "includes_candidate_urls": false,
+    "includes_secrets": false
+  },
+  "allowed_statuses": ["in_progress", "closed"],
+  "allowed_check_results": ["passed", "attention_required", "not_run", "not_applicable"],
+  "required_check_ids": [
+    "canonical_data_validation",
+    "registry_v2_v3_parity",
+    "statistics_history_immutability",
+    "site_architecture_contract",
+    "responsive_accessibility_contract",
+    "publication_feed_contract"
+  ],
+  "count_fields": [
+    "canonical_stable_assets",
+    "publication_feed_entries"
+  ],
+  "semantics": {
+    "operational_log_not_subject_history": true,
+    "operational_log_not_publication_feed": true,
+    "check_result_not_risk_score": true,
+    "no_live_monitoring_feed": true,
+    "single_composite_score": false,
+    "risk_ranking": false
+  },
+  "next_state": "public_surface_expansion_sequence_complete"
+}

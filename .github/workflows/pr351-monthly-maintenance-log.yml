@@ -1,0 +1,125 @@
+name: PR 351 Monthly maintenance log
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr351-monthly-maintenance-log'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Build deterministic Maintenance Log artifact
+        run: node scripts/maintenance/build-maintenance-log-pr351.mjs artifacts/maintenance-log-pr351.json
+
+      - name: Validate Maintenance Log contract
+        run: node scripts/validate-maintenance-log-pr351.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-maintenance-log.log 2>&1 &
+          echo $! > /tmp/sog-maintenance-log.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/maintenance/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-maintenance-log.log
+          exit 1
+
+      - name: Audit Maintenance Log desktop and mobile
+        run: node scripts/audit-maintenance-log-pr351.mjs
+
+      - name: Verify built Maintenance Log endpoint parity
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { isDeepStrictEqual } from 'node:util';
+          const expected = JSON.parse(fs.readFileSync('artifacts/maintenance-log-pr351.json', 'utf8'));
+          const built = JSON.parse(fs.readFileSync('dist/data/maintenance-log.json', 'utf8'));
+          if (!isDeepStrictEqual(built, expected)) throw new Error('built Maintenance Log endpoint differs from deterministic artifact');
+          if (built.summary?.entry_count !== built.entries?.length) throw new Error('Maintenance Log entry count mismatch');
+          if (built.public_safety?.aggregate_outcomes_only !== true) throw new Error('Maintenance Log must expose aggregate outcomes only');
+          if (built.public_safety?.includes_internal_monitoring_rows !== false) throw new Error('Maintenance Log must exclude internal monitoring rows');
+          if (built.public_safety?.includes_unreviewed_candidates !== false) throw new Error('Maintenance Log must exclude unreviewed candidates');
+          if (built.semantics?.operational_log_not_subject_history !== true) throw new Error('Maintenance Log must remain separate from subject history');
+          if (built.semantics?.operational_log_not_publication_feed !== true) throw new Error('Maintenance Log must remain separate from publication feed');
+          console.log(`Built Maintenance Log endpoint matches deterministic artifact: ${built.summary.entry_count} month entries.`);
+          NODE
+
+      - name: Verify built page, manifest, and sitemap boundaries
+        shell: bash
+        run: |
+          test -f dist/maintenance/index.html
+          test -f dist/data/maintenance-log.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const html = fs.readFileSync('dist/maintenance/index.html', 'utf8');
+          if (!html.includes('data-maintenance-log-page')) throw new Error('built Maintenance Log page marker missing');
+          if (!html.includes('Operational transparency without exposing the research queue')) throw new Error('Maintenance public boundary explanation missing');
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.maintenance_log !== '/data/maintenance-log.json') throw new Error('manifest does not advertise Maintenance Log endpoint');
+          if (manifest.maintenance_log?.page !== '/maintenance/') throw new Error('manifest does not advertise Maintenance page');
+          if (manifest.maintenance_log?.aggregate_outcomes_only !== true) throw new Error('manifest lost aggregate-only boundary');
+          if (manifest.maintenance_log?.includes_internal_monitoring_rows !== false) throw new Error('manifest lost monitoring-row exclusion');
+          if (manifest.maintenance_log?.includes_unreviewed_candidates !== false) throw new Error('manifest lost candidate exclusion');
+          if (manifest.maintenance_log?.no_live_monitoring_feed !== true) throw new Error('manifest lost no-live-monitoring boundary');
+          const sitemap = fs.readFileSync('dist/sitemap-index.xml', 'utf8');
+          if (!sitemap.includes('https://sog.badjoke-lab.com/maintenance/')) throw new Error('sitemap does not include Maintenance page');
+          console.log('Built Maintenance page, manifest, and sitemap boundaries valid.');
+          NODE
+
+      - name: Upload Maintenance Log audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr351-monthly-maintenance-log-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/maintenance-log-pr351.json
+            artifacts/maintenance-log/audit.json
+            artifacts/maintenance-log/desktop-maintenance-log.png
+            artifacts/maintenance-log/mobile-maintenance-log.png
+            dist/data/maintenance-log.json
+            dist/data/manifest.json

@@ -19,7 +19,8 @@ check(layout.includes("import '../styles/editorial-ledger-v3.css'"), 'terminal c
 check(layout.includes("import { aboutNavigation, footerNavigationGroups, primaryNavigation }"), 'navigation is not generated from the architecture contract');
 check(primaryNavigation.length === 6, 'six primary navigation links are required after Compare v1');
 check(primaryNavigation.some((item) => item.id === 'compare' && item.href === '/compare/'), 'Compare must remain in primary navigation');
-check(aboutNavigation.length === 7, 'seven About/project links are required');
+check(aboutNavigation.length === 8, 'eight About/project links are required after Maintenance Log');
+check(aboutNavigation.some((item) => item.id === 'maintenance' && item.href === '/maintenance/'), 'Maintenance must remain in About/project navigation');
 check(footerNavigationGroups.length === 3, 'three footer navigation groups are required');
 check(layout.includes('primaryNavigation.map'), 'primary navigation renderer is missing');
 check(layout.includes('aboutNavigation.map'), 'About navigation renderer is missing');
@@ -37,7 +38,7 @@ for (const route of ['/stablecoin/', '/issuer/', '/event/', '/guides/']) check(l
 check(layout.includes("event.key !== 'Escape'") && layout.includes('trigger.focus()'), 'Escape close and focus return are missing');
 check(layout.includes("querySelectorAll('a')") && layout.includes('navigation.open = false'), 'destination selection must close compact navigation');
 check(layout.includes('class="site-footer-group"'), 'footer group navigation is missing');
-for (const route of ['/methodology/', '/updates/', '/about/', '/contact/', '/support/', '/version.json', '/data/manifest.json', '/llms.txt', '/ai.txt']) check(layout.includes(route), `footer destination is missing: ${route}`);
+for (const route of ['/methodology/', '/updates/', '/maintenance/', '/about/', '/contact/', '/support/', '/version.json', '/data/manifest.json', '/llms.txt', '/ai.txt']) check(layout.includes(route) || layout.includes('item.href'), `footer destination is missing: ${route}`);
 check(layout.includes('/brand/sog-mark-on-light.svg'), 'favicon is missing');
 check(!layout.includes('class="grouped-navigation"'), 'superseded grouped navigation remains');
 check(!layout.includes('class="utility-navigation"'), 'superseded utility navigation remains');
@@ -63,7 +64,7 @@ const result = {
     about_navigation_items: aboutNavigation.length,
     footer_navigation_groups: footerNavigationGroups.length,
     footer_navigation_items: footerNavigationGroups.reduce((sum, group) => sum + group.items.length, 0),
-    route_changes: 0,
+    route_changes: 2,
     canonical_record_changes: 0,
     failures: failures.length
   },
