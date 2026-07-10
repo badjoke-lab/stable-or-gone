@@ -1,0 +1,55 @@
+.maintenance-page { display:grid; gap:0; }
+.maintenance-eyebrow { margin:0 0 .45rem; color:var(--sog-accent); font-size:.66rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
+.maintenance-masthead { padding:1.2rem 0 2rem; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:clamp(2rem,5vw,5rem); align-items:end; border-top:2px solid var(--sog-rule-strong); border-bottom:2px solid var(--sog-rule-strong); }
+.maintenance-masthead h1 { max-width:12ch; margin:0; font-size:clamp(2.8rem,6vw,6.2rem); font-weight:600; line-height:.94; letter-spacing:-.055em; }
+.maintenance-masthead > div > p:last-child { max-width:84ch; margin:1rem 0 0; color:var(--sog-ink-body); font-size:.92rem; line-height:1.7; }
+.maintenance-contract-summary { min-width:330px; margin:0; display:grid; grid-template-columns:repeat(3,minmax(90px,1fr)); border-top:1px solid var(--sog-rule-strong); border-left:1px solid var(--sog-rule-strong); }
+.maintenance-contract-summary > div { padding:.8rem; border-right:1px solid var(--sog-rule-strong); border-bottom:1px solid var(--sog-rule-strong); }
+.maintenance-contract-summary dt,.maintenance-contract-summary dd { margin:0; }
+.maintenance-contract-summary dt { color:var(--sog-ink-muted); font-size:.6rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.maintenance-contract-summary dd { margin-top:.25rem; color:var(--sog-ink); font-size:1.02rem; }
+.maintenance-boundary,.maintenance-ledger,.maintenance-related { padding:2rem 0; border-bottom:1px solid var(--sog-rule-strong); }
+.maintenance-boundary h2,.maintenance-section-heading h2,.maintenance-related h2 { margin:0; font-size:clamp(1.65rem,3vw,2.5rem); line-height:1.05; }
+.maintenance-boundary-grid,.maintenance-related-grid { margin-top:1rem; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--sog-rule-strong); border-left:1px solid var(--sog-rule-strong); }
+.maintenance-boundary-grid article,.maintenance-related-grid a { padding:1rem; border-right:1px solid var(--sog-rule-strong); border-bottom:1px solid var(--sog-rule-strong); }
+.maintenance-boundary-grid h3,.maintenance-related-grid strong { margin:0; color:var(--sog-ink); font-size:.9rem; }
+.maintenance-boundary-grid p,.maintenance-related-grid span { display:block; margin:.45rem 0 0; color:var(--sog-ink-body); font-size:.74rem; line-height:1.55; }
+.maintenance-related-grid a { text-decoration:none; }
+.maintenance-related-grid a:hover strong { color:var(--sog-accent); }
+.maintenance-section-heading { display:flex; align-items:end; justify-content:space-between; gap:2rem; margin-bottom:1rem; }
+.maintenance-section-heading > div > p:last-child { max-width:80ch; margin:.5rem 0 0; color:var(--sog-ink-body); font-size:.78rem; line-height:1.6; }
+.maintenance-machine-link { flex:0 0 auto; margin:0; color:var(--sog-ink-muted); font-size:.7rem; }
+.maintenance-entry-list { display:grid; gap:1rem; }
+.maintenance-entry { border-top:2px solid var(--sog-rule-strong); border-bottom:2px solid var(--sog-rule-strong); }
+.maintenance-entry__header { padding:1rem 0; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2rem; align-items:start; }
+.maintenance-entry__month { margin:0; color:var(--sog-accent); font-size:.66rem; font-weight:800; letter-spacing:.08em; }
+.maintenance-entry__header h3 { margin:.25rem 0 0; font-size:clamp(1.3rem,2.5vw,2rem); }
+.maintenance-entry__header > div > p:last-child { max-width:90ch; margin:.55rem 0 0; color:var(--sog-ink-body); font-size:.78rem; line-height:1.6; }
+.maintenance-entry__header dl { min-width:220px; margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--sog-rule); border-left:1px solid var(--sog-rule); }
+.maintenance-entry__header dl > div { padding:.65rem; border-right:1px solid var(--sog-rule); border-bottom:1px solid var(--sog-rule); }
+.maintenance-entry__header dt,.maintenance-entry__header dd { margin:0; }
+.maintenance-entry__header dt { color:var(--sog-ink-muted); font-size:.56rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+.maintenance-entry__header dd { margin-top:.2rem; color:var(--sog-ink); font-size:.72rem; text-transform:capitalize; }
+.maintenance-entry section { padding:1rem 0; border-top:1px solid var(--sog-rule-strong); }
+.maintenance-entry h4 { margin:0 0 .65rem; color:var(--sog-ink); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; }
+.maintenance-check-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--sog-rule); border-left:1px solid var(--sog-rule); }
+.maintenance-check { min-width:0; padding:.75rem; border-right:1px solid var(--sog-rule); border-bottom:1px solid var(--sog-rule); }
+.maintenance-check > span { display:inline-block; padding:.2rem .35rem; border:1px solid var(--sog-rule); color:var(--sog-ink-muted); font-size:.56rem; font-weight:800; text-transform:uppercase; }
+.maintenance-check[data-result="passed"] > span { color:var(--sog-positive); }
+.maintenance-check[data-result="attention_required"] > span { color:var(--sog-warning); }
+.maintenance-check strong { display:block; margin-top:.5rem; color:var(--sog-ink); font-size:.7rem; text-transform:capitalize; }
+.maintenance-check p { margin:.35rem 0 0; color:var(--sog-ink-body); font-size:.68rem; line-height:1.5; }
+.maintenance-counts dl { margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--sog-rule); border-left:1px solid var(--sog-rule); }
+.maintenance-counts dl > div { padding:.75rem; border-right:1px solid var(--sog-rule); border-bottom:1px solid var(--sog-rule); }
+.maintenance-counts dt,.maintenance-counts dd { margin:0; }
+.maintenance-counts dt { color:var(--sog-ink-muted); font-size:.58rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+.maintenance-counts dd { margin-top:.25rem; color:var(--sog-ink); font-size:1.2rem; }
+.maintenance-releases > div { display:flex; flex-wrap:wrap; gap:.4rem; }
+.maintenance-releases a { padding:.3rem .45rem; border:1px solid var(--sog-rule); color:var(--sog-ink-body); font-size:.64rem; text-decoration:none; }
+.maintenance-releases a:hover { color:var(--sog-accent); border-color:var(--sog-rule-strong); }
+.maintenance-next-focus ol { margin:0; padding-left:1.25rem; color:var(--sog-ink-body); }
+.maintenance-next-focus li { margin:.35rem 0; font-size:.72rem; line-height:1.55; }
+@media (max-width:1000px) { .maintenance-masthead,.maintenance-entry__header { grid-template-columns:1fr; } .maintenance-contract-summary,.maintenance-entry__header dl { min-width:0; max-width:620px; } .maintenance-check-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:719px) { .maintenance-section-heading { align-items:start; flex-direction:column; gap:.6rem; } .maintenance-boundary-grid,.maintenance-related-grid,.maintenance-check-grid,.maintenance-counts dl { grid-template-columns:1fr; } }
+@media (max-width:480px) { .maintenance-contract-summary,.maintenance-entry__header dl { grid-template-columns:1fr; } }
+@media (forced-colors:active) { .maintenance-contract-summary,.maintenance-boundary-grid,.maintenance-related-grid,.maintenance-check-grid,.maintenance-counts dl,.maintenance-releases a { forced-color-adjust:auto; } }
