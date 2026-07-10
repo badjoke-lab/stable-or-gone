@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/maintenance-log.css';
+import { getPublicMaintenanceLog } from '../../lib/maintenanceLogData.mjs';
+
+const log = getPublicMaintenanceLog();
+const title = 'Maintenance Log — Stable or Gone';
+const description = 'Monthly public maintenance checkpoints for Stable or Gone, limited to public-safe aggregate outcomes, contract checks, released surfaces, and next maintenance priorities.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: 'https://sog.badjoke-lab.com/maintenance/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
+};
+---
+<BaseLayout title={title} description={description} canonicalPath="/maintenance/" jsonLd={jsonLd}>
+  <div class="maintenance-page" data-maintenance-log-page>
+    <header class="maintenance-masthead">
+      <div>
+        <p class="maintenance-eyebrow">Project / Public operations</p>
+        <h1>Maintenance Log</h1>
+        <p>Monthly public checkpoints for registry maintenance. The log records aggregate outcomes, contract checks, released public surfaces, and next priorities without publishing internal monitoring rows, unreviewed candidates, private notes, or source queues.</p>
+      </div>
+      <dl class="maintenance-contract-summary" aria-label="Maintenance log summary">
+        <div><dt>Months</dt><dd>{log.summary.entry_count}</dd></div>
+        <div><dt>Latest</dt><dd>{log.summary.latest_month ?? 'None'}</dd></div>
+        <div><dt>Safety</dt><dd>Public-safe only</dd></div>
+      </dl>
+    </header>
+
+    <section class="maintenance-boundary" aria-labelledby="maintenance-boundary-heading">
+      <p class="maintenance-eyebrow">Public boundary</p>
+      <h2 id="maintenance-boundary-heading">Operational transparency without exposing the research queue</h2>
+      <div class="maintenance-boundary-grid">
+        <article><h3>What is public</h3><p>Monthly aggregate counts, contract outcomes, public-surface releases, maintenance status, and next public priorities.</p></article>
+        <article><h3>What stays internal</h3><p>Monitoring rows, unreviewed candidates, private source queues, private notes, candidate URLs, and secrets.</p></article>
+        <article><h3>What this is not</h3><p>This is not historical subject change, the publication feed, a live monitoring feed, a risk score, or a ranking.</p></article>
+      </div>
+    </section>
+
+    <section class="maintenance-ledger" aria-labelledby="maintenance-ledger-heading">
+      <div class="maintenance-section-heading">
+        <div>
+          <p class="maintenance-eyebrow">Monthly checkpoints</p>
+          <h2 id="maintenance-ledger-heading">Public maintenance record</h2>
+          <p>Entries are ordered newest first. Closed months are immutable and append-only; the current month may remain in progress until month-end review.</p>
+        </div>
+        <p class="maintenance-machine-link"><a href="/data/maintenance-log.json">Machine-readable log</a> · aggregate outcomes only</p>
+      </div>
+
+      <div class="maintenance-entry-list">
+        {log.entries.map((entry) => (
+          <article class="maintenance-entry" data-maintenance-month={entry.month}>
+            <header class="maintenance-entry__header">
+              <div>
+                <p class="maintenance-entry__month">{entry.month}</p>
+                <h3>{entry.status === 'closed' ? 'Closed monthly checkpoint' : 'Maintenance in progress'}</h3>
+                <p>{entry.public_summary}</p>
+              </div>
+              <dl>
+                <div><dt>Status</dt><dd>{entry.status.replaceAll('_', ' ')}</dd></div>
+                <div><dt>As of</dt><dd>{entry.as_of}</dd></div>
+              </dl>
+            </header>
+
+            <section class="maintenance-checks" aria-label={`${entry.month} contract checks`}>
+              <h4>Contract checks</h4>
+              <div class="maintenance-check-grid">
+                {entry.checks.map((check) => (
+                  <div class="maintenance-check" data-result={check.result}>
+                    <span>{check.result.replaceAll('_', ' ')}</span>
+                    <strong>{check.check_id.replaceAll('_', ' ')}</strong>
+                    <p>{check.summary}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section class="maintenance-counts" aria-label={`${entry.month} public counts`}>
+              <h4>Public counts at checkpoint</h4>
+              <dl>
+                {Object.entries(entry.counts).map(([key, value]) => (
+                  <div><dt>{key.replaceAll('_', ' ')}</dt><dd>{value}</dd></div>
+                ))}
+              </dl>
+            </section>
+
+            <section class="maintenance-releases" aria-label={`${entry.month} public surface releases`}>
+              <h4>Public surfaces in this maintenance sequence</h4>
+              <div>
+                {entry.public_surface_releases.map((release) => <a href={release.route}>{release.label}</a>)}
+              </div>
+            </section>
+
+            <section class="maintenance-next-focus" aria-label={`${entry.month} next focus`}>
+              <h4>Next focus</h4>
+              <ol>{entry.next_focus.map((item) => <li>{item}</li>)}</ol>
+            </section>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="maintenance-related">
+      <p class="maintenance-eyebrow">Related public layers</p>
+      <h2>Read the right record for the right question</h2>
+      <div class="maintenance-related-grid">
+        <a href="/updates/"><strong>Update Feed</strong><span>When did the registry publish a reviewed public change?</span></a>
+        <a href="/timeline/"><strong>Change Timeline</strong><span>When did the historical subject change?</span></a>
+        <a href="/methodology/"><strong>Methodology</strong><span>How are records, uncertainty, evidence, and public boundaries handled?</span></a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
