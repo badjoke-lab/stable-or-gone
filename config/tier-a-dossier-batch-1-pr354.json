@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_tier_a_dossier_batch_1_pr354_v1",
+  "source_summary": "docs/migration/record-depth-baseline-pr353-summary.json",
+  "source_queue": "docs/migration/tier-a-candidate-queue-pr353.json",
+  "max_assets": 5,
+  "selected_assets": [
+    {
+      "asset_slug": "busd",
+      "asset_id": "sog_st_busd",
+      "queue_reasons": [
+        "comparison_preset_member_with_material_dossier_gap",
+        "historical_importance_with_multiple_material_dossier_gaps"
+      ],
+      "material_dossier_gaps": ["legal_profile", "redemption"],
+      "target_dimensions": ["legal_profile", "redemption"]
+    },
+    {
+      "asset_slug": "dai",
+      "asset_id": "sog_st_dai",
+      "queue_reasons": ["comparison_preset_member_with_material_dossier_gap"],
+      "material_dossier_gaps": ["legal_profile"],
+      "target_dimensions": ["legal_profile"]
+    },
+    {
+      "asset_slug": "rlusd",
+      "asset_id": "sog_st_rlusd",
+      "queue_reasons": [
+        "comparison_preset_member_with_material_dossier_gap",
+        "historical_importance_with_multiple_material_dossier_gaps"
+      ],
+      "material_dossier_gaps": ["legal_profile", "redemption"],
+      "target_dimensions": ["legal_profile", "redemption"]
+    },
+    {
+      "asset_slug": "usdc",
+      "asset_id": "sog_st_usdc",
+      "queue_reasons": ["comparison_preset_member_with_material_dossier_gap"],
+      "material_dossier_gaps": ["legal_profile"],
+      "target_dimensions": ["legal_profile"]
+    },
+    {
+      "asset_slug": "usdt",
+      "asset_id": "sog_st_usdt",
+      "queue_reasons": ["comparison_preset_member_with_material_dossier_gap"],
+      "material_dossier_gaps": ["legal_profile"],
+      "target_dimensions": ["legal_profile"]
+    }
+  ],
+  "authorized_record_families": [
+    "legal_profiles",
+    "evidence",
+    "evidence_relations",
+    "regulatory_notes"
+  ],
+  "authorized_redemption_asset_slugs": ["busd", "rlusd"],
+  "new_canonical_assets_allowed": false,
+  "market_access_records_allowed": false,
+  "new_public_surface_allowed": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "next_pr": 355
+}
