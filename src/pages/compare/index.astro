@@ -5,10 +5,17 @@ import '../../styles/compare-v1-accessibility.css';
 import compareConfig from '../../../config/compare-v1-dimensions.json';
 import { getPublicComparisonProjection } from '../../lib/comparisonData.mjs';
 
+type CompareAssetOption = {
+  asset_id: string;
+  slug: string;
+  name: string;
+  symbol: string | null;
+};
+
 const projection = getPublicComparisonProjection();
-const assets = projection.assets
-  .map((asset) => ({ asset_id: asset.asset_id, slug: asset.slug, name: asset.name, symbol: asset.symbol }))
-  .sort((left, right) => left.name.localeCompare(right.name) || left.slug.localeCompare(right.slug));
+const assets: CompareAssetOption[] = projection.assets
+  .map((asset: CompareAssetOption) => ({ asset_id: asset.asset_id, slug: asset.slug, name: asset.name, symbol: asset.symbol }))
+  .sort((left: CompareAssetOption, right: CompareAssetOption) => left.name.localeCompare(right.name) || left.slug.localeCompare(right.slug));
 const title = 'Compare Stablecoin Records — Stable or Gone';
 const description = 'Compare two to four canonical stablecoin records across nineteen dimensions while keeping values, Comparison Readiness, freshness, and explicit unknowns separate.';
 const jsonLd = {
@@ -52,7 +59,7 @@ const configJson = JSON.stringify(compareConfig).replace(/</g, '\u003c');
             <span>Asset {index + 1}</span>
             <select class="ui-field" data-compare-slot data-slot-index={index} aria-label={`Comparison asset ${index + 1}`}>
               <option value="">Choose a stablecoin</option>
-              {assets.map((asset) => <option value={asset.slug}>{asset.name}{asset.symbol ? ` (${asset.symbol})` : ''}</option>)}
+              {assets.map((asset: CompareAssetOption) => <option value={asset.slug}>{asset.name}{asset.symbol ? ` (${asset.symbol})` : ''}</option>)}
             </select>
           </label>
         ))}
