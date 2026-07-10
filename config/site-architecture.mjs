@@ -118,6 +118,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/data/manifest.json', source_file: 'src/pages/data/manifest.json.ts', output_kind: 'json', group: 'data_access', role: 'public_data_manifest', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/data/stats-history.json', source_file: 'src/pages/data/stats-history.json.ts', output_kind: 'json', group: 'data_access', role: 'statistics_checkpoint_history', decision: 'add', navigation: 'stats' }),
   Object.freeze({ pattern: '/data/stats.json', source_file: 'src/pages/data/stats.json.ts', output_kind: 'json', group: 'data_access', role: 'current_registry_statistics', decision: 'add', navigation: 'stats' }),
+  Object.freeze({ pattern: '/data/update-feed.json', source_file: 'src/pages/data/update-feed.json.ts', output_kind: 'json', group: 'data_access', role: 'registry_publication_feed', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/event/{id}/', source_file: 'src/pages/event/[id].astro', output_kind: 'html', group: 'registry', role: 'event_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/events/', source_file: 'src/pages/events/index.astro', output_kind: 'html', group: 'registry', role: 'event_index', decision: 'keep', navigation: 'registry' }),
   Object.freeze({ pattern: '/glossary/', source_file: 'src/pages/glossary/index.astro', output_kind: 'html', group: 'learn', role: 'glossary', decision: 'keep', navigation: 'learn' }),
@@ -157,7 +158,7 @@ export const recordContentOwnership = Object.freeze([
   Object.freeze({ owner_role: 'access_regulation_explorer', route: '/access-regulation/', responsibilities: Object.freeze(['canonical_legal_filtering', 'regulatory_note_filtering', 'market_access_record_filtering', 'readiness_visibility', 'freshness_visibility', 'shareable_filter_state', 'absence_semantics']) }),
   Object.freeze({ owner_role: 'change_timeline_ui', route: '/timeline/', responsibilities: Object.freeze(['canonical_change_history', 'date_semantics_visibility', 'boundary_kind_visibility', 'source_family_visibility', 'shareable_filter_state']) }),
   Object.freeze({ owner_role: 'methodology', route: '/methodology/', responsibilities: Object.freeze(['taxonomy_definitions', 'value_state_semantics', 'evidence_model', 'relationship_model', 'selection_rules']) }),
-  Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['public_change_history']) }),
+  Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['registry_publication_history', 'publication_date_semantics', 'publication_change_search', 'shareable_filter_state', 'timeline_boundary_explanation']) }),
   Object.freeze({ owner_role: 'corrections_and_submissions', route: '/contact/', responsibilities: Object.freeze(['correction_submission', 'source_submission']) }),
   Object.freeze({ owner_role: 'public_data_manifest', route: '/data/manifest.json', responsibilities: Object.freeze(['machine_readable_inventory', 'canonical_data_safety']) })
 ]);
