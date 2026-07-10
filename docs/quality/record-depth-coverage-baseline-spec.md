@@ -172,6 +172,41 @@ input_digest
 
 The artifact must also include summary counts by dimension and planning state.
 
+PR #353 commits two reviewed handoff checkpoints:
+
+```text
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+```
+
+The summary checkpoint binds:
+
+```text
+110 assets
+16 dimensions
+1,760 planning cells
+planning state distribution
+dimension-level state distribution
+source contract identities
+reviewed input digest
+```
+
+The queue checkpoint binds:
+
+```text
+18 reviewed Tier A candidates
+non-ranking slug order
+explicit candidate reasons
+priority gaps
+material dossier gaps
+product leverage flags
+reviewed input digest
+```
+
+Both checkpoints are internal planning inputs, not public product outputs.
+
+A parity validator must prove that regenerating the reviewed baseline from the same repository state reproduces both committed checkpoints exactly.
+
 ## 8. Product leverage flags
 
 The baseline may derive non-ranking planning flags such as:
@@ -237,8 +272,10 @@ PR #353 must prove:
 10. priority queue membership cites explicit gap/leverage reasons;
 11. reviewed Compare preset membership is derived exactly from the preset config;
 12. reviewed Tier A queue remains selective and bounded;
-13. canonical data remains unchanged;
-14. public route behavior remains unchanged.
+13. committed reviewed summary snapshot matches regenerated baseline summary exactly;
+14. committed reviewed queue snapshot matches regenerated reviewed queue exactly;
+15. canonical data remains unchanged;
+16. public route behavior remains unchanged.
 
 ## 11. PR #353 non-goals
 
@@ -258,7 +295,7 @@ PR #353 does not:
 
 ## 12. Handoff
 
-After PR #353 merges, PR #354 selects the first Tier A dossier batch from the reviewed baseline output.
+After PR #353 merges, PR #354 selects the first Tier A dossier batch from the reviewed baseline outputs.
 
 PR #354 must read:
 
@@ -270,5 +307,8 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
-PR #353 reviewed baseline summary and Tier A candidate queue
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
 ```
+
+PR #354 must cite the selected assets' explicit queue reasons and material dossier gaps from the committed reviewed queue snapshot.
