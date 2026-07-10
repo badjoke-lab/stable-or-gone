@@ -12,6 +12,7 @@ export const GET: APIRoute = () => {
   const staticPaths = [
     '/',
     '/stablecoins/',
+    '/compare/',
     '/issuers/',
     '/events/',
     '/stats/',

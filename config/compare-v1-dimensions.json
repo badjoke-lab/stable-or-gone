@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_compare_v1_dimensions_pr344",
+  "groups": [
+    {
+      "id": "identity_state",
+      "label": "Identity and current state",
+      "description": "Canonical identity, organization boundary, lifecycle, reference target, asset class, issuance, and date semantics.",
+      "dimensions": [
+        {"id":"identity_consistency","label":"Identity","description":"Canonical name, symbol, and aliases."},
+        {"id":"issuer_asset_boundary","label":"Organizations and roles","description":"Recorded organization relationships remain separate from the asset itself."},
+        {"id":"lifecycle_semantics","label":"Lifecycle","description":"Recorded lifecycle state, separate from issuance and market access."},
+        {"id":"reference_target_and_currency","label":"Reference target","description":"Reference target and currency semantics."},
+        {"id":"asset_class","label":"Asset class","description":"Canonical asset-class classification."},
+        {"id":"issuance_comparability","label":"Issuance","description":"Recorded issuance state."},
+        {"id":"launch_date_semantics","label":"Launch date","description":"Historical launch date and explicit unresolved tracking remain distinct."},
+        {"id":"verification_date_semantics","label":"Last reviewed","description":"Canonical asset review date."}
+      ]
+    },
+    {
+      "id": "mechanism_reserves",
+      "label": "Mechanism, reserves, and redemption",
+      "description": "Backing structure, stabilization, reserve disclosure, report dates, and redemption terms are compared as separate facts.",
+      "dimensions": [
+        {"id":"backing_model_representation","label":"Backing model","description":"Canonical backing types and reserve-component records."},
+        {"id":"stabilization_mechanism_representation","label":"Stabilization and governance","description":"Recorded stabilization mechanism and governance model."},
+        {"id":"reserve_disclosure_comparability","label":"Reserve disclosure","description":"Disclosure profile and canonical reserve-record coverage."},
+        {"id":"reserve_report_date_semantics","label":"Reserve reports","description":"Report count and latest canonical report date semantics."},
+        {"id":"redemption_comparability","label":"Redemption","description":"Eligibility, settlement, limits, fees, restrictions, and review context."}
+      ]
+    },
+    {
+      "id": "legal_access",
+      "label": "Legal, regulatory, and access context",
+      "description": "Jurisdiction-scoped legal classifications, regulatory notes, and canonical Market Access Records remain bounded to their source scope.",
+      "dimensions": [
+        {"id":"legal_classification_comparability","label":"Legal classification","description":"Jurisdiction-scoped classifications and structural holder/reserve fields."},
+        {"id":"regulatory_action_scope","label":"Regulatory notes","description":"Canonical regulatory-note records; absence is not proof that no action exists."},
+        {"id":"market_access_applicability","label":"Market access","description":"Canonical provider- and function-scoped access records only."}
+      ]
+    },
+    {
+      "id": "evidence_uncertainty",
+      "label": "Evidence and uncertainty",
+      "description": "Unknown states, evidence scope, and unresolved questions are shown rather than converted into scores.",
+      "dimensions": [
+        {"id":"unknown_state_semantics","label":"Protected unknown state","description":"Whether unresolved state remains visible and how many canonical known-unknown rows are linked."},
+        {"id":"evidence_scope_and_relation_depth","label":"Evidence scope","description":"Canonical evidence count and claim-scope categories."},
+        {"id":"known_unknown_visibility","label":"Known unknowns","description":"Count, topics, and severity distribution of explicit unresolved questions."}
+      ]
+    }
+  ]
+}
