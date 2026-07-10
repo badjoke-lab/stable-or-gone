@@ -128,7 +128,7 @@ for (const text of [
   'matchingItems',
   'visibleLimit = config.initial_result_limit',
   'visibleLimit += config.result_limit_increment',
-  'data-route-families'
+  'dataset.routeFamilies'
 ]) expect(scriptSource.includes(text), `Update Feed script missing behavior: ${text}`);
 expect(!scriptSource.includes('.sort('), 'Update Feed UI must not resort feed entries');
 
