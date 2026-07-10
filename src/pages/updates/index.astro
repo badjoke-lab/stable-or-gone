@@ -6,8 +6,19 @@ import { formatPublicLabel } from '../../utils/displayLabels';
 import { updatePublicCopy } from '../../data/updatePublicCopy';
 import { getPublicUpdateFeed } from '../../lib/updateFeedData.mjs';
 
+type UpdateFeedEntry = {
+  update_id: string;
+  publication_date: string;
+  year: string;
+  category: string;
+  title: string;
+  summary: string;
+  related_paths: string[];
+  route_families: string[];
+};
+
 const feed = getPublicUpdateFeed();
-const entries = feed.entries;
+const entries = feed.entries as UpdateFeedEntry[];
 const latestUpdateDate = feed.summary.latest_publication_date ?? 'Not recorded';
 const title = 'Updates — Stable or Gone';
 const description = 'Registry publication changes: additions, corrections, source reviews, guide releases, and interface changes across Stable or Gone.';
