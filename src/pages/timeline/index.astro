@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/change-timeline-ui.css';
+import timelineConfig from '../../../config/change-timeline-ui-v1.json';
+
+const title = 'Change Timeline — Stable or Gone';
+const description = 'Explore canonical historical change items across stable asset launches, events, organization relationships, legal classifications, Regulatory Notes, and Market Access Records while preserving each date boundary\'s meaning.';
+const configJson = JSON.stringify(timelineConfig).replace(/</g, '\\u003c');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Stable or Gone Change Timeline',
+  url: 'https://sog.badjoke-lab.com/timeline/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
+};
+---
+<BaseLayout title={title} description={description} canonicalPath="/timeline/" jsonLd={jsonLd}>
+  <div class="timeline-page" data-timeline-page>
+    <header class="timeline-masthead">
+      <div>
+        <p class="timeline-eyebrow">Registry / Canonical change projection</p>
+        <h1>Change Timeline</h1>
+        <p>Explore reviewed historical change boundaries across the registry. Event dates, recovery dates, relationship boundaries, legal effective dates, Regulatory Note dates, and Market Access effective dates keep their original semantics instead of being flattened into one generic timestamp.</p>
+      </div>
+      <dl class="timeline-contract-summary" aria-label="Timeline contract">
+        <div><dt>Source</dt><dd>Canonical</dd></div>
+        <div><dt>Score</dt><dd>None</dd></div>
+        <div><dt>Live feed</dt><dd>No</dd></div>
+      </dl>
+    </header>
+
+    <section class="timeline-boundary" aria-labelledby="timeline-boundary-heading">
+      <p class="timeline-eyebrow">Date boundary</p>
+      <h2 id="timeline-boundary-heading">A date is shown only for what that date actually means</h2>
+      <div class="timeline-boundary-grid">
+        <p><strong>Historical subject dates</strong><span>Launch, event, recovery, effective-start, effective-end, and relationship boundary dates may appear.</span></p>
+        <p><strong>Review dates excluded</strong><span>Reviewed-at, last-verified, freshness-anchor, and evidence-access dates are not change items.</span></p>
+        <p><strong>Observation is not change</strong><span>Market Access observed-at timestamps may remain metadata, but do not create timeline items.</span></p>
+      </div>
+    </section>
+
+    <section class="timeline-controls" aria-labelledby="timeline-controls-heading">
+      <div class="timeline-section-heading">
+        <div>
+          <p class="timeline-eyebrow">Filter</p>
+          <h2 id="timeline-controls-heading">Narrow the canonical timeline</h2>
+          <p>Search by title, summary, asset, organization, or change type. Filters use deterministic catalogs from the PR #348 projection. Result order always follows the projection's canonical date-descending order.</p>
+        </div>
+        <p class="timeline-machine-link"><a href="/data/change-timeline.json">Machine-readable timeline</a> · canonical data only</p>
+      </div>
+
+      <div class="timeline-search-row">
+        <label class="timeline-search-field">
+          <span>Search timeline items</span>
+          <input type="search" data-timeline-search placeholder="Search change history" autocomplete="off" />
+        </label>
+        <button type="button" class="ui-button" data-timeline-clear>Clear filters</button>
+        <button type="button" class="ui-button" data-timeline-copy>Copy filtered view</button>
+        <span data-timeline-copy-status aria-live="polite"></span>
+      </div>
+
+      <div class="timeline-filter-groups" data-timeline-filter-groups>
+        <fieldset class="timeline-filter-group"><legend>Provenance</legend><div data-timeline-filter-slot="provenance"></div></fieldset>
+        <fieldset class="timeline-filter-group"><legend>Date semantics</legend><div data-timeline-filter-slot="date_semantics"></div></fieldset>
+        <fieldset class="timeline-filter-group"><legend>Subject</legend><div data-timeline-filter-slot="subject"></div></fieldset>
+        <fieldset class="timeline-filter-group"><legend>Time</legend><div data-timeline-filter-slot="time"></div></fieldset>
+        <fieldset class="timeline-filter-group"><legend>Scope</legend><div data-timeline-filter-slot="scope"></div></fieldset>
+      </div>
+
+      <div class="timeline-active-filters" data-timeline-active-filters aria-live="polite"></div>
+      <div class="timeline-alert" data-timeline-alert role="alert" aria-live="assertive"></div>
+    </section>
+
+    <section class="timeline-results-section" aria-labelledby="timeline-results-heading">
+      <div class="timeline-results-heading">
+        <div>
+          <p class="timeline-eyebrow">Results</p>
+          <h2 id="timeline-results-heading">Canonical change items</h2>
+        </div>
+        <p><strong data-timeline-result-count>0</strong> matching items · <span data-timeline-result-range>loading projection</span></p>
+      </div>
+
+      <div class="timeline-loading" data-timeline-loading>Loading canonical change timeline…</div>
+      <div class="timeline-empty" data-timeline-empty hidden>
+        <strong>No matching change items</strong>
+        <p>Clear one or more filters. A zero-result intersection only means that the current canonical projection has no matching item.</p>
+      </div>
+      <div class="timeline-results" data-timeline-results hidden></div>
+      <div class="timeline-show-more-row" data-timeline-show-more-row hidden>
+        <button type="button" class="ui-button" data-timeline-show-more>Show more timeline items</button>
+      </div>
+    </section>
+
+    <section class="timeline-method" aria-labelledby="timeline-method-heading">
+      <p class="timeline-eyebrow">Reading the timeline</p>
+      <h2 id="timeline-method-heading">Source family, date kind, and boundary remain separate</h2>
+      <div class="timeline-method-grid">
+        <article><h3>Source family</h3><p>Shows which canonical record family produced the item: identity, event, relationship, legal classification, Regulatory Note, or Market Access.</p></article>
+        <article><h3>Date kind</h3><p>Shows what the date represents, such as an event date, recovery date, relationship start, or legal effective boundary.</p></article>
+        <article><h3>Boundary kind</h3><p>Separates milestones from start and end boundaries. The same calendar date may contain multiple provenance items.</p></article>
+      </div>
+      <p class="timeline-disclaimer">Historical registry context only. This timeline is not a live incident feed, ranking, risk score, recommendation, legal opinion, or investment assessment.</p>
+    </section>
+  </div>
+  <script id="timeline-ui-config" type="application/json" set:html={configJson}></script>
+  <script>
+    import '../../scripts/change-timeline-ui';
+  </script>
+</BaseLayout>

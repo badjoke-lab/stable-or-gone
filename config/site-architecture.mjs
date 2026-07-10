@@ -11,11 +11,12 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'registry',
     label: 'Registry',
-    purpose: 'Browse canonical stablecoin, comparison, access/regulation, organization, event, and derived statistics records.',
+    purpose: 'Browse canonical stablecoin, comparison, access/regulation, timeline, organization, event, and derived statistics records.',
     items: Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Compare', href: '/compare/' }),
       Object.freeze({ label: 'Access & Regulation', href: '/access-regulation/' }),
+      Object.freeze({ label: 'Timeline', href: '/timeline/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
       Object.freeze({ label: 'Events', href: '/events/' }),
       Object.freeze({ label: 'Stats', href: '/stats/' })
@@ -75,6 +76,7 @@ export const footerNavigationGroups = Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Compare', href: '/compare/' }),
       Object.freeze({ label: 'Access & Regulation', href: '/access-regulation/' }),
+      Object.freeze({ label: 'Timeline', href: '/timeline/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
       Object.freeze({ label: 'Events', href: '/events/' }),
       Object.freeze({ label: 'Stats', href: '/stats/' }),
@@ -111,6 +113,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/compare/', source_file: 'src/pages/compare/index.astro', output_kind: 'html', group: 'registry', role: 'comparison_explorer', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/contact/', source_file: 'src/pages/contact/index.astro', output_kind: 'html', group: 'project', role: 'corrections_and_submissions', decision: 'keep', navigation: 'utility' }),
   Object.freeze({ pattern: '/data/access-regulation-index.json', source_file: 'src/pages/data/access-regulation-index.json.ts', output_kind: 'json', group: 'data_access', role: 'access_regulation_index', decision: 'add', navigation: 'data_manifest' }),
+  Object.freeze({ pattern: '/data/change-timeline.json', source_file: 'src/pages/data/change-timeline.json.ts', output_kind: 'json', group: 'data_access', role: 'change_timeline_projection', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/data/comparison.json', source_file: 'src/pages/data/comparison.json.ts', output_kind: 'json', group: 'data_access', role: 'deterministic_comparison_projection', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/data/manifest.json', source_file: 'src/pages/data/manifest.json.ts', output_kind: 'json', group: 'data_access', role: 'public_data_manifest', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/data/stats-history.json', source_file: 'src/pages/data/stats-history.json.ts', output_kind: 'json', group: 'data_access', role: 'statistics_checkpoint_history', decision: 'add', navigation: 'stats' }),
@@ -140,6 +143,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/stablecoins/', source_file: 'src/pages/stablecoins/index.astro', output_kind: 'html', group: 'registry', role: 'stablecoin_index', decision: 'keep', navigation: 'registry' }),
   Object.freeze({ pattern: '/stats/', source_file: 'src/pages/stats/index.astro', output_kind: 'html', group: 'registry', role: 'registry_statistics', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/support/', source_file: 'src/pages/support/index.astro', output_kind: 'html', group: 'project', role: 'project_support', decision: 'keep', navigation: 'utility' }),
+  Object.freeze({ pattern: '/timeline/', source_file: 'src/pages/timeline/index.astro', output_kind: 'html', group: 'registry', role: 'change_timeline_ui', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/updates/', source_file: 'src/pages/updates/index.astro', output_kind: 'html', group: 'project', role: 'registry_updates', decision: 'keep', navigation: 'project' }),
   Object.freeze({ pattern: '/version.json', source_file: 'src/pages/version.json.ts', output_kind: 'json', group: 'data_access', role: 'build_and_data_version', decision: 'keep', navigation: 'footer_data' })
 ]);
@@ -151,6 +155,7 @@ export const recordContentOwnership = Object.freeze([
   Object.freeze({ owner_role: 'registry_statistics', route: '/stats/', responsibilities: Object.freeze(['derived_registry_totals', 'lifecycle_composition', 'reviewed_checkpoint_history', 'statistics_methodology_links']) }),
   Object.freeze({ owner_role: 'comparison_explorer', route: '/compare/', responsibilities: Object.freeze(['bounded_asset_selection', 'canonical_facet_comparison', 'readiness_visibility', 'freshness_visibility', 'shareable_query_state']) }),
   Object.freeze({ owner_role: 'access_regulation_explorer', route: '/access-regulation/', responsibilities: Object.freeze(['canonical_legal_filtering', 'regulatory_note_filtering', 'market_access_record_filtering', 'readiness_visibility', 'freshness_visibility', 'shareable_filter_state', 'absence_semantics']) }),
+  Object.freeze({ owner_role: 'change_timeline_ui', route: '/timeline/', responsibilities: Object.freeze(['canonical_change_history', 'date_semantics_visibility', 'boundary_kind_visibility', 'source_family_visibility', 'shareable_filter_state']) }),
   Object.freeze({ owner_role: 'methodology', route: '/methodology/', responsibilities: Object.freeze(['taxonomy_definitions', 'value_state_semantics', 'evidence_model', 'relationship_model', 'selection_rules']) }),
   Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['public_change_history']) }),
   Object.freeze({ owner_role: 'corrections_and_submissions', route: '/contact/', responsibilities: Object.freeze(['correction_submission', 'source_submission']) }),
