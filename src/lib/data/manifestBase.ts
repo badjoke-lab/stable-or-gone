@@ -93,6 +93,7 @@ export function GET() {
     },
     change_timeline_projection: {
       current: '/data/change-timeline.json',
+      ui: '/timeline/',
       source_boundary: 'reviewed_canonical_records_only',
       date_semantics_preserved: true,
       cross_source_deduplication: false,
@@ -105,7 +106,7 @@ export function GET() {
       excludes_internal_monitoring: true,
       excludes_editorial_research: true,
     },
-    main_routes: [...MAIN_ROUTES, '/compare/', '/access-regulation/'],
+    main_routes: [...MAIN_ROUTES, '/compare/', '/access-regulation/', '/timeline/'],
     record_counts: getRecordCounts(),
     record_count_breakdown: getRecordCountBreakdown(),
     evidence_source_identity: evidenceSourceIdentity,
