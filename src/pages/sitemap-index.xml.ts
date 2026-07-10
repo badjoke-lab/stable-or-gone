@@ -24,6 +24,7 @@ export const GET: APIRoute = () => {
     '/glossary/',
     '/methodology/',
     '/updates/',
+    '/maintenance/',
     '/about/',
     '/support/',
     '/contact/'
