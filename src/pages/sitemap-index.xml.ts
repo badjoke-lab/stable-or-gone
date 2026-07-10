@@ -14,6 +14,7 @@ export const GET: APIRoute = () => {
     '/stablecoins/',
     '/compare/',
     '/access-regulation/',
+    '/timeline/',
     '/issuers/',
     '/events/',
     '/stats/',
