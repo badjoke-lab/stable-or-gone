@@ -51,7 +51,16 @@
   .stablecoin-assessment-copy p,
   .stablecoin-material-change p,
   .stablecoin-control-note,
-  .stablecoin-related-guides p
+  .stablecoin-related-guides p,
+  .stats-lead,
+  .stats-methodology-notice > p,
+  .stats-section-heading > p,
+  .stats-kpi p,
+  .stats-bar-row p,
+  .stats-analysis-panel > p,
+  .stats-failure-header > p,
+  .stats-checkpoint-single > p,
+  .stats-data-access nav span
 ) {
   color: var(--sog-ink-body) !important;
 }
@@ -85,7 +94,17 @@
   .stablecoin-dossier th,
   .stablecoin-model-history time,
   .stablecoin-model-history small,
-  .stablecoin-empty-state
+  .stablecoin-empty-state,
+  .stats-kicker,
+  .stats-header-meta dt,
+  .stats-kpi dt,
+  .stats-table-wrap caption,
+  .stats-table-wrap thead th,
+  .stats-compact-bar small,
+  .stats-chain-row > div:first-child span,
+  .stats-metric-list dt,
+  .stats-mini-kpi-grid dt,
+  .stats-checkpoint-single span
 ) {
   color: var(--sog-ink-muted) !important;
 }
