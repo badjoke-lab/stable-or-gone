@@ -1,13 +1,15 @@
 # Stable or Gone specification governance
 
 Status: canonical governance specification  
-Updated: 2026-07-07
+Updated: 2026-07-10
 
 ## 1. Purpose
 
-This file defines document authority, conflict resolution, change control, roadmap discipline, release integrity, reproducible-build boundaries, audited checkpoint boundaries, monitoring checkpoint history, source-expansion boundaries, scheduled-operation boundaries, statistics boundaries, comparison boundaries, and publication safety.
+This file defines repository document authority, conflict resolution, change control, PR traceability, data-preservation boundaries, monitoring safety, product-surface control, and post-351 operating governance.
 
-Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts do not override merged repository authority.
+Merged repository specifications are the source of truth.
+
+Chat memory, handoff prose, issue discussion, generated reports, stale roadmap text, and unmerged drafts do not override merged repository authority.
 
 ## 2. Authority order
 
@@ -17,47 +19,26 @@ When documents disagree, use this order:
 2. `docs/spec-governance.md` for document authority and change control.
 3. `docs/roadmap.md` for current phase, active item, next item, and PR numbering.
 4. Active merged roadmap amendments named by the roadmap.
-5. The canonical specification for the active workstream.
-6. Supporting audits, inventories, baselines, fixtures, release notes, publication-gate reviews, and research checkpoints.
-7. Conversation history and unmerged drafts.
+5. Canonical operating specification for the active program.
+6. Work-item-specific canonical specification.
+7. Named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and publication-gate reviews.
+8. Conversation history and unmerged drafts.
 
-Current schedule amendments:
-
-```text
-docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
-docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
-```
-
-## 3. Governing specifications
-
-Release/checkpoint authority:
+Current active amendment:
 
 ```text
-docs/migration/registry-release-integrity-baseline.json
-docs/migration/reproducible-build-output-baseline.json
-docs/migration/audited-100-asset-canonical-checkpoint.json
-docs/non-ui-release-material-spec.md
+docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 ```
 
-Current monitoring authority:
+Current operating specification:
 
 ```text
-docs/quality/monitoring-pipeline-spec.md
-docs/quality/monitoring-official-source-spec.md
-docs/quality/monitoring-official-source-schema.md
-docs/quality/monitoring-baseline-spec.md
-docs/quality/monitoring-baseline-synchronization-100-assets-spec.md
-docs/quality/monitoring-reserve-redemption-source-expansion-spec.md
-docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
-docs/quality/monitoring-bounded-scheduled-read-only-spec.md
-scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
+docs/post-351-data-growth-operating-spec.md
 ```
 
-Statistics work is governed by `docs/stats-spec.md`. Phase F-I work is governed by `docs/comparison-and-change-product-spec.md` together with active numbering amendments.
+Historical amendments remain historical records. They do not override the current position.
 
-## 4. Mandatory reading order
+## 3. Mandatory reading order
 
 Before changing code, data, workflows, or documentation:
 
@@ -65,13 +46,104 @@ Before changing code, data, workflows, or documentation:
 2. read this file;
 3. read `docs/roadmap.md`;
 4. read `docs/deployment-policy.md`;
-5. read every active roadmap amendment named by the roadmap;
-6. read the canonical specification for the active work item;
-7. read every named queue, validator, audit, fixture, baseline, release note, publication-gate review, and research checkpoint.
+5. read `docs/post-351-data-growth-operating-spec.md`;
+6. read every active roadmap amendment named by the roadmap;
+7. read the canonical work-item specification;
+8. read every named queue, validator, audit, fixture, baseline, release note, research checkpoint, or prior output required by the work item.
 
-A non-trivial PR is not ready for review until it identifies the exact specification and roadmap item it implements.
+A non-trivial PR is not ready for implementation until the exact roadmap item and governing specification are identified.
 
-## 5. Change control
+## 4. Current execution state
+
+```text
+Canonical stable assets: 110
+PR #351 Monthly Maintenance Log: complete
+current public-surface expansion sequence: complete
+PR #352 post-351 authority reset: active
+PR #353 Record Depth & Coverage Baseline: next
+```
+
+Approved near-term sequence:
+
+```text
+PR #352  post-351 authority reset and specification/schedule synchronization
+PR #353  Record Depth & Coverage Baseline
+PR #354  Tier A Dossier Deepening — Batch 1
+PR #355  Tier A Dossier Deepening — Batch 2
+PR #356  Market Access Pilot 1
+PR #357  Tier A Dossier Deepening — Batch 3
+PR #358  Record Growth Batch 1
+PR #359  Market Access Pilot 2
+PR #360  Evidence and Correction Batch
+REVIEW GATE
+```
+
+No sequence beyond the review gate is pre-authorized.
+
+## 5. Governing specification families
+
+### Repository and deployment
+
+```text
+docs/deployment-policy.md
+docs/spec-governance.md
+docs/roadmap.md
+AGENTS.md
+```
+
+### Post-351 operating mode
+
+```text
+docs/post-351-data-growth-operating-spec.md
+docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+```
+
+### Record Depth Baseline
+
+```text
+docs/quality/record-depth-coverage-baseline-spec.md
+```
+
+### Statistics
+
+```text
+docs/stats-spec.md
+docs/stats-history-spec.md
+```
+
+### Comparison, freshness, access, timeline, update, and maintenance semantics
+
+The completed public-surface program remains governed by its merged canonical specifications and validators, including:
+
+```text
+docs/comparison-and-change-product-spec.md
+Comparison Readiness specifications and validators
+Facet Freshness specifications and validators
+canonical Market Access schema and governance
+Access & Regulation index and Explorer specifications
+Change Timeline projection and UI specifications
+Update Feed specification
+Monthly Maintenance Log specification
+```
+
+Schedule portions in historical product specifications are superseded by `docs/roadmap.md` and the current active amendment. Their semantic boundaries remain binding unless deliberately amended.
+
+### Monitoring
+
+Monitoring authority includes:
+
+```text
+docs/quality/monitoring-pipeline-spec.md
+docs/quality/monitoring-official-source-spec.md
+docs/quality/monitoring-official-source-schema.md
+docs/quality/monitoring-baseline-spec.md
+docs/quality/monitoring-bounded-scheduled-read-only-spec.md
+reviewed source registries and historical baseline snapshots
+```
+
+Historical snapshots remain immutable.
+
+## 6. Change control
 
 A change to any of the following requires a specification update in the same PR or an earlier dependency PR:
 
@@ -81,29 +153,29 @@ A change to any of the following requires a specification update in the same PR 
 - route families or machine-readable output shape;
 - count or denominator semantics;
 - build provenance or canonical hash boundary;
-- audited checkpoint source commit or digest boundary;
+- audited checkpoint source or digest boundary;
 - dependency-lock or reproducible-build semantics;
-- release-material derivation semantics;
 - monitoring source schema;
 - monitoring baseline-state semantics;
-- monitoring checkpoint/snapshot digest boundary;
-- monitoring source-family classification;
-- monitoring coverage semantics;
-- `monitoring_scope` semantics;
-- platform/legal-entity/region/function/register scope semantics;
-- schedule trigger, schedule group, or permission boundary;
-- news-discovery query or retention bounds;
-- article stale-state freshness bands;
+- monitoring source-family or coverage semantics;
+- schedule trigger, group, or permission boundary;
+- news-discovery or retention bounds;
+- article stale-state bands;
 - statistics semantics;
-- comparison projection semantics;
+- Comparison Readiness semantics;
+- facet freshness semantics;
 - canonical Market Access Record semantics;
+- Timeline date semantics;
+- Update Feed publication-date semantics;
+- Maintenance Log public-safety semantics;
 - production publication gates;
 - approved PR sequence;
-- active workstream state.
+- active workstream state;
+- product-surface freeze boundary.
 
 No implementation PR may introduce an undocumented alternative.
 
-## 6. Pull-request traceability
+## 7. Pull-request traceability
 
 Every non-trivial PR body must identify:
 
@@ -112,248 +184,179 @@ Specification references
 Roadmap item
 Scope
 Explicit non-goals
+Named inputs and prior outputs
 Data preservation
 Validation
 Deployment classification
 ```
 
+For post-351 work, every non-trivial PR must cite:
+
+```text
+AGENTS.md
+docs/spec-governance.md
+docs/roadmap.md
+docs/post-351-data-growth-operating-spec.md
+active roadmap amendment
+work-item-specific specification
+named baseline/queue/audit/research checkpoint
+```
+
 A PR that cannot cite an approved work item must pause until repository authority is corrected.
 
-## 7. Current execution state
+## 8. Product-surface governance
+
+The current public-surface expansion sequence is complete.
+
+The existing surfaces are sufficient for the current operating phase:
 
 ```text
-100 canonical stable assets reached
-release integrity complete
-reproducible build audit complete
-audited 100-record canonical checkpoint complete
-non-UI release material complete
-PR #321 100-asset monitoring baseline synchronization complete
-PR #322 reserve and redemption source expansion complete
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion complete
-PR #324 bounded scheduled read-only monitoring active
-PR #325 deterministic statistics generator and validator next
-PR #325-#328 statistics
-PR #329-#334 candidate audit and controlled growth to 110
-PR #335-#348 post-110 product sequence approved but inactive before reviewed 110-asset checkpoint
+Registry records
+Stats
+Compare
+Compare presets
+Access & Regulation Explorer
+Change Timeline
+Update Feed
+Maintenance Log
+machine-readable projections and manifest discovery
 ```
 
-Do not rewrite completed history to make a changed plan appear unchanged. Historical monitoring snapshots remain immutable.
+A new page, explorer, dashboard, ranking surface, or navigation family requires:
 
-## 8. Release and checkpoint governance
+1. an identified user or research need;
+2. evidence that current surfaces cannot answer it;
+3. a reviewed roadmap amendment;
+4. a canonical specification;
+5. route and machine-output preservation analysis.
 
-Binding rules:
+Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
 
-- canonical counts derive from composed canonical manifests and files;
-- public count-path semantics remain stable unless explicitly versioned;
-- runtime provenance uses real commit, branch, timestamp, non-zero canonical hash, and positive canonical file count;
-- candidate, monitoring, editorial-research, discovery, and private material remain outside canonical public count surfaces and provenance boundaries;
-- reproducibility-sensitive workflows use the reviewed lockfile and pinned Node runtime;
-- protected historical inputs are not mutated by normal build;
-- the audited checkpoint keeps identity and content digests separate;
-- later noncanonical production commits are allowed only while public output, provenance, route/output parity, canonical hash parity, canonical file-count parity, and reviewed count parity remain valid.
+## 9. Canonical/public boundary
 
-## 9. Historical monitoring checkpoint governance
-
-PR #321 snapshot:
+Public machine-readable and HTML release claims remain canonical-only.
 
 ```text
-scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
-24 sources
-24 pending baseline rows
-16 assets reached
-84 uncovered assets
-12 organizations reached
-0 accepted baselines
-0 accepted asset reach
-7 multi-family assets
+canonical_only = true
+includes_unreviewed_candidates = false
+includes_internal_monitoring = false
+includes_private_notes = false
 ```
 
-PR #322 snapshot:
+Candidate, monitoring, discovery, editorial-research, and private material remain outside canonical public count surfaces unless separately reviewed and promoted through the proper canonical process.
+
+## 10. Monitoring governance
+
+Monitoring remains private, review-only, and read-only with respect to canonical data.
+
+Monitoring may:
 
 ```text
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-30 sources
-30 pending baseline rows
-22 assets reached
-78 uncovered assets
-18 organizations reached
-0 accepted baselines
-0 accepted asset reach
-11 multi-family assets
+observe
+compare
+classify
+identify stale review state
+prepare private review material
+discover bounded leads
 ```
 
-Historical validators check fixed counts and digests directly. Later source expansion or scheduling must not regenerate historical checkpoints against current configuration.
-
-## 10. PR #323 lifecycle/regulatory/market-access source and schema governance
-
-PR #323 is governed by:
+Monitoring may not:
 
 ```text
-docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
-docs/quality/monitoring-official-source-schema.md
-scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
-scripts/validate-monitoring-scoped-source-schema-pr323.mjs
-scripts/validate-monitoring-lifecycle-regulatory-market-access-expansion-100-assets.mjs
-.github/workflows/monitoring-lifecycle-regulatory-market-access-expansion.yml
+write canonical data
+self-accept baselines
+edit guides automatically
+create canonical pull requests automatically
+publish candidates or discovery leads
+deploy
 ```
 
-Binding current boundary:
+A registered source is not an accepted baseline.
+
+A pending baseline is not accepted monitoring coverage.
+
+Monitoring observations are not canonical Market Access Records.
+
+## 11. Market Access governance
+
+Market Access remains separate from:
 
 ```text
-100 assets
-94 organizations
-110 relationships
-39 reviewed source rows
-39 baseline rows
-39 pending_initial_acceptance
-0 accepted
-0 missing
-23 assets with registered source reach
-77 uncovered assets
-18 organizations reached
-0 accepted asset reach
-17 multi-family assets
+asset lifecycle
+legal status
+regulatory action
+platform authorization
+monitoring observation
+editorial research
 ```
 
-Binding source-family boundary:
+Canonical promotion flow:
 
 ```text
-reserve_assurance: 14 sources / 16 assets
-redemption_terms: 11 sources / 12 assets
-issuer_lifecycle: 7 sources / 7 assets
-regulatory: 9 sources / 8 assets
-platform_policy: 3 sources / 12 mapped assets
-platform_service_state: 1 source / 0 mapped assets
-regulatory_register: 1 source / 0 mapped assets
+research or monitoring signal
+-> duplicate and scope review
+-> source confirmation
+-> evidence relation
+-> bounded claim drafting
+-> manual canonical review
+-> reviewed repository PR
+-> merge
+-> public canonical output
 ```
 
-Binding scoped coverage:
+A platform licence is not proof that a specific asset/function combination is available.
+
+Access must not be reduced to a universal allowed/banned boolean.
+
+## 12. Record Depth Baseline governance
+
+PR #353 is governed by:
 
 ```text
-platform-policy sources: 3
-platform service-state sources: 1
-regulatory-register sources: 1
-market-access schema-capable sources: 5
-scoped platforms: 4
-scoped region values: 4
+docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
-`monitoring_scope` is private review context, not a canonical Market Access Record. Platform name, legal entity, region, function scope, authority identity, and register families remain explicit. Platform/register scope counts are not divided by the 100-asset denominator.
+The baseline is an internal planning instrument.
 
-## 11. PR #324 bounded scheduled read-only monitoring governance
-
-PR #324 is governed by:
+It must not become:
 
 ```text
-docs/quality/monitoring-bounded-scheduled-read-only-spec.md
-scripts/monitoring/scheduling/source-groups.mjs
-scripts/monitoring/monitors/news-discovery.mjs
-scripts/monitoring/monitors/article-stale-state-review.mjs
-scripts/validate-bounded-scheduled-monitoring-pr324.mjs
-.github/workflows/monitoring-bounded-scheduled-read-only.yml
+risk score
+safety score
+quality ranking
+transparency ranking
+investment recommendation
+public leaderboard
 ```
 
-Scheduled groups are exactly:
+Allowed planning states:
 
 ```text
-daily
-weekly
+strong
+usable
+partial
+sparse
+absent
+not_applicable
 ```
 
-Partition boundary:
+State derivation must be deterministic and auditable.
+
+## 13. Growth governance
+
+Dossier deepening and new-asset growth are distinct operations.
+
+Tier A dossier batches normally cover no more than five existing assets.
+
+Dossier batches may add supporting canonical records but do not add new canonical assets unless explicitly approved as combined growth work.
+
+If a growth PR adds new canonical stable assets:
 
 ```text
-daily source count: 4
-weekly source count: 35
-overlap: 0
-union: all 39 reviewed sources
-daily source/baseline parity: exact
-weekly source/baseline parity: exact
-all 39 repository baselines: pending_initial_acceptance
-accepted baselines: 0
-accepted asset reach: 0
+maximum two new canonical stable assets per growth PR
 ```
 
-Daily group contains reviewed `platform_policy` and `platform_service_state` sources plus bounded private news discovery.
-
-Weekly group contains the remaining 35 reviewed official sources, including the ESMA regulatory-register source, plus article/research stale-state review.
-
-News-discovery bounds:
-
-```text
-maximum queries per run: 4
-maximum items retained per query: 20
-maximum feed response body: 1 MiB
-request timeout: 15 seconds
-raw response retention: false
-discovery only: true
-canonical action: none
-public output: false
-```
-
-Article stale-state bands:
-
-```text
-current: 0-7 days
-review_due: 8-14 days
-stale: 15-30 days
-severely_stale: 31+ days
-missing_date: no usable review date
-```
-
-Stale-state findings are private and do not edit the public guide, research matrix, or canonical data.
-
-Scheduled workflow permission boundary:
-
-```text
-permissions:
-  contents: read
-```
-
-The workflow may upload private artifacts. It may not use write permissions, create branches or canonical pull requests automatically, accept baselines, publish candidates or discovery leads, edit guides automatically, use Cloudflare deployment credentials, or deploy monitoring output.
-
-## 12. Monitoring coverage governance
-
-Coverage remains multidimensional:
-
-```text
-reserve/assurance reach
-redemption/mint terms reach
-issuer lifecycle reach
-regulatory action/guidance reach
-platform-policy reach
-platform service-state reach
-regulatory-register reach
-EU/EEA market-access function reach
-accepted-baseline reach
-```
-
-Rules:
-
-- a registered source is not an accepted baseline;
-- a pending baseline is not accepted monitoring coverage;
-- issuer/protocol reach is not platform-policy coverage;
-- regulatory action pages are not regulatory-register coverage;
-- generic issuer/product pages are not function-level market-access coverage;
-- zero coverage for a required domain is a valid audit result and must not be filled by inference;
-- monitoring output, discovery leads, and stale-state findings remain private until separately reviewed.
-
-## 13. Monitoring safety boundary
-
-Monitoring remains review-only and read-only with respect to canonical data.
-
-Fixed prohibitions:
-
-```text
-no canonical write
-no self-accepting baseline
-no automatic guide edit
-no automatic canonical pull request
-no candidate or discovery publication
-no production deployment
-```
-
-Scheduled operation preserves read-only permissions and the existing no-write boundary.
+All applicable supporting record groups and evidence boundaries remain preserved.
 
 ## 14. Unknown-value governance
 
@@ -367,31 +370,66 @@ not_applicable
 source_review_needed
 ```
 
-These states are not structural placeholders and must not be overwritten merely to satisfy completeness or comparison presentation.
+These states must not be overwritten merely to satisfy completeness, baseline appearance, comparison presentation, or Market Access row count.
 
-## 15. Statistics governance
+Missing capability data is unknown knowledge state, not `false`.
 
-`docs/stats-spec.md` is binding for PR #325-#328.
+## 15. Derived-surface governance
 
 Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
 
-## 16. Comparison and change-product governance
+Compare uses reviewed canonical data, preserves unresolved states, and does not score or recommend assets.
 
-Phase F-I remains governed by `docs/comparison-and-change-product-spec.md` and active numbering amendments.
+Comparison Readiness remains separate from value truth and facet freshness.
 
-Binding boundaries:
+Facet freshness derives from authoritative record families and does not replace factual record values.
 
-- Phase F starts only after the reviewed 110-asset checkpoint;
-- lifecycle, issuance/redemption, legal/regulatory state, and market access remain separate analytical layers;
-- canonical Market Access Records remain distinct from monitoring observations and editorial research matrices;
-- Compare derives from reviewed canonical data and preserves unresolved states;
-- facet freshness derives from authoritative record families;
-- Change Timeline is derived and does not replace source record families;
-- public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds;
-- safety scores, risk scores, best-asset rankings, and universal country availability claims are not approved.
+Change Timeline preserves date semantics and does not convert review/freshness dates into historical change items.
 
-## 17. Data preservation
+Update Feed publication dates remain separate from historical subject dates.
 
-UI, quality, taxonomy, monitoring, statistics, growth, editorial, release-material, comparison, market-access, timeline, and update-surface work must not silently reduce canonical coverage.
+Maintenance Log remains public-safe and aggregate-only.
 
-Before and after relevant changes, verify canonical asset, organization, relationship, event, evidence, reserve-context, known-unknown, regulatory-note, deployment, and route counts governed by the active baseline and audited checkpoint.
+## 16. Historical checkpoint governance
+
+Release-integrity, reproducible-build, audited checkpoint, statistics history, monitoring baseline, and completed monthly maintenance records retain their original immutability rules.
+
+Do not regenerate or rewrite historical snapshots against current configuration merely because the current registry grew or the active program changed.
+
+Historical detail remains available in:
+
+```text
+docs/migration/
+docs/releases/
+docs/quality/
+docs/roadmap-amendments/
+scripts/monitoring/baselines/
+data/stats-history.json
+data/monthly-maintenance-log.json
+```
+
+## 17. Review-gate governance
+
+After PR #360, the next sequence must be selected from reviewed evidence.
+
+The review gate examines:
+
+```text
+remaining sparse record families
+Tier A dossier improvement
+Compare utility
+Timeline historical density
+canonical Market Access utility
+monitoring signal usefulness
+correction burden
+monthly maintenance burden
+external usage evidence when available
+```
+
+Only then may the roadmap authorize the next bounded sequence.
+
+## 18. Deployment governance
+
+Normal merged changes publish from `main` under `docs/deployment-policy.md`.
+
+Scheduled monitoring remains artifact-only and does not authorize monitoring artifact publication, canonical writes, guide edits, automatic pull requests, or Cloudflare deployment.

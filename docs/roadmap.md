@@ -1,139 +1,357 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-08  
+Updated: 2026-07-10  
 Status: canonical execution schedule — active
 
-## Current position
+## 1. Current position
 
 ```text
-Audited canonical source checkpoint:
-9a106f0938e6323de833c941d6ae863050f1f03b
+Canonical stable assets: 110
 
-PR #318 merge checkpoint:
-b275178f3816d1ebf3828f223b546f04de1edae7
-
-PR #320 merge checkpoint:
-5c742177ee52aa661a115b7c5364526d8ad46aef
-
-PR #321 merge checkpoint:
-ec7c41142977114c111409a2aa6584e0480e7454
-
-PR #322 merge checkpoint:
-3f1cd3e603f39a5327febc2b376b652897c1b825
-
-PR #323 merge checkpoint:
-9f588537b82bc1ed916e65114ce9877f812cd634
-
-PR #324 merge checkpoint:
-f4d54293862168356f8314d8b6f0d79004873dcf
-
-PR #325 merge checkpoint:
-8f0b9dcf8a22e74f5f00b0b3f41952f572f546f1
-
-Canonical stable assets: 100
-Organizations: 94
-Relationships: 110
-Events: 172
-Evidence: 502
-Deployments: 140
-Detail routes: 366
-UI status: maintenance-only; no active redesign program
-
-PR #316 release integrity: complete
-PR #317 reproducible build audit: complete
-PR #318 audited 100-record canonical checkpoint: complete
-PR #319 guide spacing maintenance: complete, inserted work
-PR #320 non-UI release material: complete
-PR #321 100-asset monitoring baseline synchronization: complete
-PR #322 reserve and redemption source expansion: complete
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete
-PR #324 bounded scheduled read-only monitoring: complete
-PR #325 deterministic statistics generator and validator: complete
-
-Active workstream: statistics implementation
-Current item: PR #326 immutable checkpoint history
-Next item: PR #327 /stats/ foundation
+PR #351 Monthly Maintenance Log: complete
+current public-surface expansion sequence: complete
+PR #352 post-351 authority reset: active
+PR #353 Record Depth & Coverage Baseline: next
 ```
 
-## Current numbering authority
+The current operating mode is no longer public-surface expansion.
+
+The default operating mode is:
 
 ```text
-docs/roadmap-amendments/2026-07-06-editorial-insertions-and-pr-renumbering.md
-docs/roadmap-amendments/2026-07-06-pr319-maintenance-and-renumbering.md
-docs/roadmap-amendments/2026-07-08-pr325-statistics-activation.md
-docs/roadmap-amendments/2026-07-08-pr326-history-activation.md
+reviewed data growth
+canonical Market Access promotion
+monitoring review without automatic promotion
+corrections and evidence maintenance
+monthly maintenance
 ```
 
-This roadmap and active amendments supersede older numeric labels or stale current-position wording in subordinate plans.
+A new public-surface sequence requires a separate reviewed roadmap amendment and canonical specification.
 
-## Completed sequence through PR #325
+## 2. Current authority
+
+Read in this order:
 
 ```text
-PR #296  resume core workstream and synchronize repository authority
-PR #297  identity uniqueness and lineage audit
-PR #298  organization and relationship integrity audit
-PR #299  evidence and source-identity integrity audit
-PR #300  reserve, redemption, and backing applicability audit
-PR #301  deployment and chain identity audit
-PR #302  lifecycle and relationship boundary audit
-PR #303  EU market-access specification and schedule amendment
-PR #304  reviewed market-access matrix and checkpoints 01-02
-PR #305  checkpoint 03 schedule amendment
-PR #306  function-matrix checkpoint 03 and platform service-state research
-PR #307  reviewed EU/EEA market-access guide publication
-PR #308  known-unknown and placeholder integrity audit
-PR #309  monitoring coverage recalculation for 100 assets
-PR #311  Registry v2/v3 and machine-readable parity
-PR #312  Ripple EU CASP guide update
-PR #313  first EEA-scope follow-up — closed without merge
-PR #314  corrected guide follow-up
-PR #315  schedule amendment and PR renumbering
-PR #316  release integrity
-PR #317  reproducible build audit
-PR #318  audited 100-record canonical checkpoint
-PR #319  guide spacing maintenance — inserted work
-PR #320  non-UI release material
-PR #321  100-asset monitoring baseline synchronization
-PR #322  reserve and redemption source expansion
-PR #323  lifecycle, regulatory, and EU market-access source/schema expansion
-PR #324  bounded scheduled read-only monitoring
-PR #325  deterministic statistics generator and validator
+AGENTS.md
+docs/spec-governance.md
+docs/roadmap.md
+docs/deployment-policy.md
+docs/post-351-data-growth-operating-spec.md
+docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+work-item-specific specification
+named baseline, queue, audit, research checkpoint, or release note
 ```
 
-## Audited 100-asset checkpoint
-
-Binding checkpoint:
+The active schedule amendment is:
 
 ```text
-docs/migration/audited-100-asset-canonical-checkpoint.json
+docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 ```
+
+Earlier roadmap amendments remain historical records but do not override this current position.
+
+## 3. Completed program through PR #351
+
+The repository completed these broad programs:
 
 ```text
-source commit: 9a106f0938e6323de833c941d6ae863050f1f03b
-canonical files: 334
-canonical content SHA-256: 8fa08219d1e587a0628576cdfcf0e64722348282897558016651a04ebea5a881
-canonical identity SHA-256: cec075cd1fbe71d65370328ee2a43adca8534eacfe4922584b4392cf249265cd
+core integrity and lineage audits
+EU/EEA market-access research and public guide work
+release integrity and reproducible-build hardening
+audited 100-asset checkpoint
+monitoring baseline synchronization and source expansion
+bounded scheduled read-only monitoring
+deterministic statistics and immutable history
+controlled growth from 100 to 110 assets
+Comparison Readiness and normalization
+canonical Market Access schema and governance
+facet freshness derivation
+machine-readable comparison projection
+Compare UI and presets
+Access & Regulation index and Explorer
+Change Timeline projection and UI
+Update Feed
+Monthly Maintenance Log
 ```
 
-Registry boundary:
+Historical PR numbering and checkpoint detail remain documented in release notes, historical roadmap amendments, quality specifications, and migration/checkpoint files.
+
+Do not rewrite historical checkpoints merely because the active program changed.
+
+## 4. Current near-term sequence
+
+The approved bounded sequence is:
 
 ```text
-stable assets: 100
-organizations: 94
-relationships: 110
-events: 172
-evidence: 502
-known unknowns: 289
-deployments: 140
-legal profiles: 100
-income profiles: 100
-stable-asset relationships: 4
-reserve components: 133
-deployment view rows: 140
-detail routes: 366
+PR #352  post-351 authority reset and specification/schedule synchronization
+PR #353  Record Depth & Coverage Baseline
+PR #354  Tier A Dossier Deepening — Batch 1
+PR #355  Tier A Dossier Deepening — Batch 2
+PR #356  Market Access Pilot 1
+PR #357  Tier A Dossier Deepening — Batch 3
+PR #358  Record Growth Batch 1
+PR #359  Market Access Pilot 2
+PR #360  Evidence and Correction Batch
+REVIEW GATE
 ```
 
-Protected unresolved states remain:
+No PR number after the review gate is pre-authorized by this roadmap.
+
+## 5. PR #352 — post-351 authority reset — active
+
+Binding documents:
+
+```text
+docs/post-351-data-growth-operating-spec.md
+docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/quality/record-depth-coverage-baseline-spec.md
+```
+
+PR #352 synchronizes:
+
+```text
+README.md
+AGENTS.md
+docs/spec-governance.md
+docs/roadmap.md
+active-workstream validation
+```
+
+PR #352 does not change canonical data, public projections, statistics history, monitoring snapshots, or public route behavior.
+
+## 6. PR #353 — Record Depth & Coverage Baseline — next
+
+Binding specification:
+
+```text
+docs/quality/record-depth-coverage-baseline-spec.md
+```
+
+Purpose:
+
+- evaluate all 110 canonical assets;
+- measure reviewed depth across required record families;
+- identify sparse and absent dimensions;
+- identify product leverage for Compare, Timeline, Access & Regulation, and evidence maintenance;
+- prepare the Tier A priority queue.
+
+The baseline is an internal planning instrument.
+
+It must not become:
+
+```text
+risk score
+safety score
+quality ranking
+transparency ranking
+investment recommendation
+public leaderboard
+```
+
+## 7. PR #354, #355, #357 — Tier A Dossier Deepening
+
+Selection is driven by PR #353 baseline results.
+
+Selection considerations:
+
+```text
+market significance
+historical importance
+comparison leverage
+regulatory relevance
+regional relevance
+Market Access research potential
+evidence gap severity
+```
+
+Each batch should normally cover no more than five assets.
+
+A dossier batch may deepen:
+
+```text
+identity and lineage
+organization relationships
+lifecycle history
+reserve and backing structure
+issuance and redemption
+deployments
+legal profiles
+regulatory notes
+events
+evidence relations
+known unknowns
+```
+
+Dossier batches do not add new canonical assets unless explicitly approved as combined growth work.
+
+## 8. PR #356 and #359 — Market Access pilots
+
+Canonical Market Access promotion is governed by the Market Access foundation introduced by PR #341 and the post-351 operating specification.
+
+Each pilot must define a bounded:
+
+```text
+jurisdiction set
+asset set
+platform/service set
+function set
+access-state vocabulary
+effective-date rules
+evidence requirements
+review cutoff
+```
+
+The approved flow is:
+
+```text
+research or monitoring signal
+-> duplicate and scope review
+-> source confirmation
+-> evidence relation
+-> bounded claim drafting
+-> manual canonical review
+-> reviewed repository PR
+-> merge
+-> public projection
+```
+
+No monitoring observation, editorial research row, guide statement, generic platform availability statement, or platform licence is promoted automatically.
+
+## 9. PR #358 — Record Growth Batch 1
+
+This PR returns to broader evidence-backed registry growth.
+
+If new canonical stable assets are added:
+
+```text
+maximum two new canonical stable assets per growth PR
+```
+
+Supporting record groups must be preserved as applicable.
+
+Research grouping should be coherent when practical:
+
+```text
+issuer-backed
+protocol-backed
+synthetic or delta-neutral
+regional and non-USD
+failed, discontinued, migrated, or rebranded
+under-documented long tail
+```
+
+## 10. PR #360 — Evidence and Correction Batch
+
+Priority work:
+
+```text
+broken-link repair
+archive supplementation
+official-source replacement
+evidence relation correction
+record wording correction
+date correction
+organization relationship correction
+known-unknown resolution
+source identity maintenance
+```
+
+This phase exists because registry quality is not measured only by asset count.
+
+## 11. Review gate after PR #360
+
+Review:
+
+```text
+record families that remain sparse
+Tier A dossier depth improvement
+Compare utility improvement
+Timeline historical density
+canonical Market Access utility
+monitoring signal usefulness
+correction and source-maintenance burden
+monthly maintenance burden
+external usage or referral evidence when available
+```
+
+Only then define the next bounded sequence.
+
+Possible outcomes include:
+
+```text
+more Tier A batches
+more Market Access pilots
+broader record growth
+evidence cleanup
+monitoring source work
+separately justified public-surface amendment
+```
+
+## 12. Parallel operating lanes
+
+### Data growth
+
+Deepen existing records and add new canonical assets only through reviewed evidence-backed PRs.
+
+### Market Access
+
+Promote only bounded evidence-backed claims through manual review.
+
+### Monitoring
+
+Monitoring remains private, review-only, and read-only with respect to canonical data.
+
+It may observe, compare, classify, identify stale states, discover bounded leads, and prepare private review material.
+
+It may not write canonical data, self-accept baselines, publish candidates, create canonical PRs automatically, edit guides automatically, or deploy.
+
+### Corrections and evidence maintenance
+
+Broken links, archives, evidence relations, source identities, dates, relationships, wording, and known unknowns are continuing work.
+
+### Monthly maintenance
+
+The current month may remain `in_progress` until month-end review.
+
+Closed months are immutable and history grows append-only.
+
+## 13. Product-surface policy
+
+The existing public product set is sufficient for the current operating phase.
+
+Normal work should improve the data that powers:
+
+```text
+Registry records
+Stats
+Compare
+Access & Regulation Explorer
+Change Timeline
+Update Feed
+Maintenance Log
+machine-readable projections
+```
+
+New pages, explorers, dashboards, ranking surfaces, or navigation families are not automatically approved.
+
+Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
+
+## 14. Core data rules
+
+- Unknown values remain unknown unless reviewed evidence supports a value.
+- Do not coerce partial dates into day-level dates.
+- Preserve evidence relations, known unknowns, deployments, source identities, and value states.
+- Candidate, monitoring, editorial-research, discovery, and private material remain outside canonical public release claims.
+- Monitoring observations are not canonical Market Access Records.
+- A platform licence is not proof of asset/function availability.
+- Comparison Readiness remains separate from value truth and facet freshness.
+- Timeline date semantics remain separate from review and freshness dates.
+- Update Feed publication dates remain separate from historical subject dates.
+- Maintenance Log remains aggregate-only and public-safe.
+- SOG does not create composite asset risk scores or rankings.
+
+Protected unresolved states include:
 
 ```text
 null
@@ -143,292 +361,17 @@ not_applicable
 source_review_needed
 ```
 
-## Monitoring checkpoint history
+## 15. Mandatory pre-implementation check
 
-### PR #321 historical synchronization checkpoint
+Before every non-trivial post-351 PR:
 
-```text
-snapshot:
-scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json
+1. read the repository authority chain;
+2. confirm the active roadmap item;
+3. read the work-item specification;
+4. read named inputs and prior outputs;
+5. state scope and non-goals;
+6. state data-preservation checks;
+7. state validation plan;
+8. confirm deployment classification.
 
-sources: 24
-baseline rows: 24
-pending: 24
-accepted: 0
-registered asset reach: 16
-uncovered assets: 84
-covered organizations: 12
-accepted asset reach: 0
-multi-family assets: 7
-```
-
-### PR #322 historical reserve/redemption expansion checkpoint
-
-```text
-snapshot:
-scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json
-
-sources: 30
-baseline rows: 30
-pending: 30
-accepted: 0
-registered asset reach: 22
-uncovered assets: 78
-covered organizations: 18
-accepted asset reach: 0
-multi-family assets: 11
-```
-
-### PR #323 current reviewed monitoring boundary
-
-Binding specification:
-
-```text
-docs/quality/monitoring-lifecycle-regulatory-market-access-expansion-spec.md
-```
-
-Binding current snapshot:
-
-```text
-scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json
-```
-
-```text
-sources: 39
-baseline rows: 39
-source/baseline ID parity: true
-pending_initial_acceptance: 39
-accepted: 0
-missing: 0
-registered asset reach: 23
-uncovered assets: 77
-covered organizations: 18
-accepted asset reach: 0
-multi-family assets: 17
-```
-
-Current source-family reach:
-
-```text
-reserve_assurance: 14 sources / 16 assets
-redemption_terms: 11 sources / 12 assets
-issuer_lifecycle: 7 sources / 7 assets
-regulatory: 9 sources / 8 assets
-platform_policy: 3 sources / 12 mapped assets
-platform_service_state: 1 source / 0 mapped assets
-regulatory_register: 1 source / 0 mapped assets
-```
-
-Current scoped coverage:
-
-```text
-platform-policy sources: 3
-platform service-state sources: 1
-regulatory-register sources: 1
-market-access schema-capable sources: 5
-scoped platforms: 4
-scoped region values: 4
-```
-
-Platform/register scope is not divided by the 100-asset denominator.
-
-## Phase C — monitoring expansion and operation — complete
-
-```text
-PR #321 100-asset monitoring baseline synchronization — complete
-PR #322 reserve and redemption source expansion — complete
-PR #323 lifecycle, regulatory, and EU market-access source/schema expansion — complete
-PR #324 bounded scheduled read-only monitoring — complete
-```
-
-PR #324 completed deterministic daily and weekly monitoring groups.
-
-```text
-daily reviewed official sources: 4
-weekly reviewed official sources: 35
-overlap: 0
-union: all 39 reviewed sources
-source/baseline parity: exact for both groups
-all 39 repository baselines: pending_initial_acceptance
-accepted baselines: 0
-accepted asset reach: 0
-```
-
-Target cadence:
-
-```text
-platform policy sources: daily
-platform service-state / platform announcement sources: daily
-bounded news discovery: daily
-ESMA and regulatory registers: weekly
-issuer regulatory/transparency sources: weekly unless stricter cadence applies
-article stale-state review: weekly
-```
-
-Monitoring output remains private artifact material. Monitoring may observe, compare, classify, prepare private review material, discover bounded news leads, and report stale review state. It may not write canonical data, accept its own baselines, create canonical pull requests automatically, edit guides automatically, publish candidates or leads, or deploy monitoring output.
-
-## Phase D — statistics implementation — active
-
-Binding specifications:
-
-```text
-docs/stats-spec.md
-docs/stats-history-spec.md
-```
-
-```text
-PR #325 deterministic statistics generator and validator — complete
-PR #326 immutable checkpoint history — active
-PR #327 /stats/ foundation — next
-PR #328 historical, deployment, organization, and data-quality statistics
-```
-
-### PR #325 deterministic generator contract — complete
-
-PR #325 derives statistics only from reviewed canonical Registry v2 and Registry v3 inputs.
-
-Implemented outputs and checks:
-
-```text
-canonical input loader driven by registry manifests
-deterministic statistics model
-generated private CI artifact
-canonical total parity
-single-select denominator integrity
-multi-select semantics preserved
-unknown values preserved
-candidate/monitoring/editorial/private inputs excluded
-live market metrics excluded
-same inputs produce byte-equivalent model output
-lifecycle transition/status parity
-```
-
-PR #325 did not publish `/data/stats.json`, create immutable history checkpoints, or implement `/stats/` UI.
-
-### PR #326 immutable checkpoint history — active
-
-PR #326 creates the first reviewed immutable statistics history checkpoint at the audited 100-asset boundary.
-
-Binding source:
-
-```text
-data/stats-history.json
-```
-
-Required contract:
-
-```text
-append-only reviewed checkpoint history
-first reviewed snapshot at 100 assets
-unique checkpoint_id
-unique asset_count checkpoint
-strictly increasing asset_count order
-non-decreasing recorded_at order
-input digest SHA-256
-stats-model SHA-256
-snapshot SHA-256
-current deterministic stats/history parity
-base-branch historical prefix immutability
-no automatic append on build
-```
-
-PR #326 does not reconstruct unaudited earlier checkpoints, does not change PR #325 statistics semantics, and does not implement `/stats/` UI.
-
-Statistics must not become live price, market-cap, APY, yield ranking, safety, transparency, or risk rankings.
-
-## Phase E — candidate audit and controlled growth from 100 to 110
-
-```text
-PR #329 next candidate audit
-PR #330 100 -> 102
-PR #331 102 -> 104
-PR #332 104 -> 106
-PR #333 106 -> 108
-PR #334 108 -> 110
-```
-
-Each growth PR is limited to two new stable assets and preserves all applicable supporting record groups. Phase E closes at a reviewed 110-asset checkpoint.
-
-## Phase F — Comparison Foundation
-
-Binding specification:
-
-```text
-docs/comparison-and-change-product-spec.md
-```
-
-```text
-PR #335 define Comparison Readiness contract and audit method
-PR #336 audit all 110 assets for comparison readiness
-PR #337 normalize comparison-critical gaps and validators
-PR #338 define canonical Market Access Record schema and governance
-PR #339 define facet-freshness derivation contract and validators
-```
-
-Phase F starts only after the reviewed 110-asset checkpoint.
-
-## Phase G — Compare
-
-```text
-PR #340 deterministic comparison projection generator and machine-readable output
-PR #341 /compare/ v1
-PR #342 Compare presets
-```
-
-Compare is factual side-by-side research and must not become a score or recommendation engine.
-
-## Phase H — Change Research Tools
-
-```text
-PR #343 access and regulation index generator
-PR #344 Access & Regulation Explorer
-PR #345 change-timeline projection generator
-PR #346 Change Timeline UI
-```
-
-## Phase I — Reviewed Public Update Layer
-
-```text
-PR #347 SOG Registry Update feed/page
-PR #348 Monthly Stablecoin Change Log
-```
-
-Public update surfaces derive from reviewed merged canonical changes, not raw monitoring feeds.
-
-## Optional Phase J — Query Translation
-
-```text
-PR #349+ natural-language filter translation only after separate approval
-```
-
-## Operating rules
-
-- Repository specifications are the source of truth.
-- UI remains maintenance-only until an approved product UI phase.
-- Unknown values remain unknown unless reviewed evidence supports a value.
-- Candidate, monitoring, discovery, stale-state, editorial-research, and private material remain outside canonical statistics inputs.
-- Historical monitoring snapshots remain immutable.
-- Statistics history snapshots are append-only reviewed checkpoints.
-- Existing history snapshots must remain an exact prefix during normal append PRs.
-- Monitoring executions remain read-only and never update their own accepted baseline.
-- Registered source reach is not accepted monitoring coverage.
-- Issuer/protocol reach is not platform-policy coverage.
-- Regulatory action pages are not regulatory-register coverage.
-- Monitoring observations and editorial research matrices are not canonical Market Access Records.
-- News-discovery leads are not canonical facts or public content.
-- Statistics use reviewed canonical repository data only.
-- Multi-select dimensions are not presented as mutually exclusive.
-- Unknown categories are not silently dropped.
-- Live market, price, market-cap, APY, yield-ranking, safety-score, and risk-score data are excluded from canonical stats output.
-- Growth PRs contain no more than two new stable assets.
-- A phase transition updates this roadmap before the next implementation sequence continues.
-
-## Immediate next items
-
-```text
-1. Complete PR #326 immutable checkpoint history.
-2. Start PR #327 /stats/ foundation.
-3. Complete statistics implementation through PR #328.
-4. Continue candidate audit and controlled growth in PR #329-#334.
-5. After the reviewed 110-asset checkpoint, activate Phase F at PR #335.
-```
+A PR that cannot cite an approved roadmap item and governing specification must pause until repository authority is corrected.
