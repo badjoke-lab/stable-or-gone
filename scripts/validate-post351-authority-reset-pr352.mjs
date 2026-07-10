@@ -28,13 +28,21 @@ const operatingSpec = readText(files.operatingSpec);
 const amendment = readText(files.activeAmendment);
 const baselineSpec = readText(files.baselineSpec);
 
+requireText(readme, 'contains 110 stable assets', files.readme);
+for (const [file, body] of [
+  [files.agents, agents],
+  [files.governance, governance],
+  [files.roadmap, roadmap]
+]) {
+  requireText(body, 'Canonical stable assets: 110', file);
+}
+
 for (const [file, body] of [
   [files.readme, readme],
   [files.agents, agents],
   [files.governance, governance],
   [files.roadmap, roadmap]
 ]) {
-  requireText(body, 'Canonical stable assets: 110', file);
   requireText(body, 'PR #351 Monthly Maintenance Log: complete', file);
   requireText(body, 'PR #352 post-351 authority reset: active', file);
   requireText(body, 'PR #353 Record Depth & Coverage Baseline: next', file);
