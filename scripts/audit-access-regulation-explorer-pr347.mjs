@@ -88,13 +88,13 @@ if (zeroIntersection.result_count !== 0) failures.push(`desktop zero intersectio
 if (!zeroIntersection.results_hidden || zeroIntersection.empty_hidden) failures.push('desktop zero intersection: empty/results visibility contract failed');
 
 await desktop.click('[data-ar-clear]');
-await desktop.fill('[data-ar-search]', 'usdt');
+await desktop.fill('[data-ar-search]', 'rlusd');
 await desktop.waitForTimeout(250);
 await desktop.waitForFunction(() => document.querySelector('[data-ar-result-count]')?.textContent === '1');
-const searchUsdt = await snapshot(desktop);
-results.push({ step: 'desktop_search_usdt', ...searchUsdt });
-if (searchUsdt.result_count !== 1 || searchUsdt.rendered_card_count !== 1) failures.push(`desktop search usdt: expected 1 result/card, found ${searchUsdt.result_count}/${searchUsdt.rendered_card_count}`);
-if (!searchUsdt.url.includes('q=usdt')) failures.push(`desktop search usdt: URL search state missing ${searchUsdt.url}`);
+const searchRlusd = await snapshot(desktop);
+results.push({ step: 'desktop_search_rlusd', ...searchRlusd });
+if (searchRlusd.result_count !== 1 || searchRlusd.rendered_card_count !== 1) failures.push(`desktop search rlusd: expected 1 result/card, found ${searchRlusd.result_count}/${searchRlusd.rendered_card_count}`);
+if (!searchRlusd.url.includes('q=rlusd')) failures.push(`desktop search rlusd: URL search state missing ${searchRlusd.url}`);
 
 await desktop.click('[data-ar-clear]');
 await desktop.waitForFunction(() => document.querySelector('[data-ar-result-count]')?.textContent === '110');
@@ -142,6 +142,7 @@ const output = {
     regulatory_record_assets: 5,
     regulatory_action_assets: 2,
     zero_intersection_assets: 0,
+    unique_search_rlusd_assets: 1,
     market_access_no_record_assets: 110,
     min_control_height: 44,
     max_page_overflow_px: 2
