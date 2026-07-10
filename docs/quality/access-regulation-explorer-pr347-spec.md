@@ -64,7 +64,7 @@ The UI does not delete or reinterpret those machine axes.
 
 ## 4. Search
 
-The Explorer supports text search across:
+The Explorer supports case-insensitive substring search across:
 
 ```text
 asset name
@@ -77,6 +77,8 @@ The search parameter is:
 ```text
 q
 ```
+
+Because matching is substring-based, an audit must use a term that is unique in the current canonical identity set when it expects exactly one result. PR #347 uses `rlusd` for the reviewed single-result search audit rather than assuming that `usdt` cannot also match another canonical slug or symbol containing that substring.
 
 Search does not inspect private notes, editorial research, or monitoring text.
 
@@ -277,7 +279,7 @@ PR #347 validators and Actions must prove:
 8. Regulatory Note presence filter yields 5 assets;
 9. `regulatory_action` note-type filter yields 2 assets;
 10. explicit legal profile + regulatory record presence yields zero assets at the current checkpoint;
-11. `q=usdt` yields one asset;
+11. unique substring search `q=rlusd` yields one asset at the current checkpoint;
 12. `access_record_state=no_canonical_record` yields 110 assets;
 13. empty Market Access state axis remains disabled;
 14. URL filter state restores on desktop and mobile;
