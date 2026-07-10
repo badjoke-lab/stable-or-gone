@@ -55,7 +55,10 @@ jobs:
           npm run check 2>&1 | tee artifacts/update-feed/astro-check.log
 
       - name: Build site
-        run: npm run build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee artifacts/update-feed/build.log
 
       - name: Start local site
         run: |
@@ -119,6 +122,7 @@ jobs:
           path: |
             artifacts/update-feed-pr350.json
             artifacts/update-feed/astro-check.log
+            artifacts/update-feed/build.log
             artifacts/update-feed/audit.json
             artifacts/update-feed/desktop-category-filter.png
             artifacts/update-feed/mobile-category-filter.png
