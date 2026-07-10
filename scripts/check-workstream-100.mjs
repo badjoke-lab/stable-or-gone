@@ -34,6 +34,7 @@ const comparisonAuditSpec = read('docs/quality/comparison-readiness-audit-pr337-
 const normalizationSpec = read('docs/quality/comparison-readiness-normalization-pr338-spec.md');
 const statsSpec = read('docs/stats-spec.md');
 const historySpec = read('docs/stats-history-spec.md');
+const historyForwardExtension = read('docs/stats-history-forward-checkpoint-extension-pr338.md');
 const historyWorkflow = read('.github/workflows/immutable-statistics-history.yml');
 const historyValidator = read('scripts/validate-stats-history.mjs');
 const history = JSON.parse(read('data/stats-history.json'));
@@ -42,6 +43,7 @@ const normalizationQueue = JSON.parse(read('data/quality/comparison-readiness-no
 const releaseBaseline = JSON.parse(read('docs/migration/registry-release-integrity-baseline.json'));
 const audited100Checkpoint = JSON.parse(read('docs/migration/audited-100-asset-canonical-checkpoint.json'));
 const currentCheckpoint = JSON.parse(read('docs/migration/current-canonical-checkpoint.json'));
+const currentHistoryCheckpoint = JSON.parse(read('docs/migration/current-stats-history-checkpoint.json'));
 const historical321 = JSON.parse(read('scripts/monitoring/baselines/monitoring-baseline-sync-100-assets.json'));
 const historical322 = JSON.parse(read('scripts/monitoring/baselines/monitoring-reserve-redemption-expansion-100-assets.json'));
 const historical323 = JSON.parse(read('scripts/monitoring/baselines/monitoring-lifecycle-regulatory-market-access-expansion-100-assets.json'));
@@ -72,7 +74,7 @@ requireText(comparison337, 'PR #337 audit all 110 assets for comparison readines
 requireText(comparison337, 'PR #338 normalize comparison-critical gaps and validators: next', 'PR #337 amendment');
 requireText(normalization338, 'PR #337 audit all 110 assets for comparison readiness: complete', 'PR #338 amendment');
 requireText(normalization338, 'PR #338 normalize comparison-critical gaps and validators: active', 'PR #338 amendment');
-requireText(normalization338, 'PR #340 define canonical Market Access Record schema and governance: next', 'PR #338 amendment');
+requireText(normalization338, 'PR #341 define canonical Market Access Record schema and governance: next', 'PR #338 amendment');
 requireText(foundationSpec, 'Status: canonical implementation specification — PR #327', 'stats foundation spec');
 requireText(analysisSpec, 'Status: canonical implementation specification — PR #328', 'stats analysis spec');
 requireText(candidateSpec, 'Status: canonical implementation specification — PR #329', 'candidate audit spec');
@@ -85,30 +87,42 @@ requireText(normalizationSpec, '"asset_class": "stablecoin"', 'comparison normal
 requireText(statsSpec, 'immutable checkpoint snapshots, not every deployment build.', 'stats spec');
 requireText(historySpec, 'append_only_reviewed_pr', 'stats history spec');
 requireText(historySpec, 'all snapshots already present on the base branch must remain an exact prefix', 'stats history spec');
+requireText(historyForwardExtension, 'stats_history_forward_checkpoint_extension_pr338_2026_07_10', 'stats history forward extension');
+requireText(historyForwardExtension, 'asset_count is non-decreasing', 'stats history forward extension');
+requireText(historyForwardExtension, 'same-count checkpoint must source the immediately preceding history checkpoint', 'stats history forward extension');
 requireText(historyWorkflow, 'contents: read', 'history workflow');
 requireText(historyWorkflow, 'fetch-depth: 0', 'history workflow');
 requireText(historyWorkflow, 'SOG_STATS_HISTORY_BASE_REF', 'history workflow');
 requireText(historyValidator, 'historical snapshot rewritten or reordered', 'history validator');
+requireText(historyValidator, 'asset_count order must be non-decreasing', 'history validator');
 
 if (history.schema_version !== '1.0') failures.push('stats history schema version must be 1.0');
 if (history.checkpoint_policy !== 'append_only_reviewed_pr') failures.push('stats history policy mismatch');
-if (history.snapshots?.length !== 6) failures.push('post-110 workstream requires exactly six reviewed history snapshots');
-const expectedAssetCounts = [100,102,104,106,108,110];
+if (history.snapshots?.length !== 7) failures.push('PR #338 workstream requires seven reviewed history snapshots');
+const expectedAssetCounts = [100,102,104,106,108,110,110];
 for (let index = 0; index < expectedAssetCounts.length; index += 1) {
   if (history.snapshots?.[index]?.asset_count !== expectedAssetCounts[index]) failures.push(`stats history snapshot ${index + 1} must bind ${expectedAssetCounts[index]} assets`);
 }
 if (history.snapshots?.[0]?.checkpoint_id !== audited100Checkpoint.checkpoint_id) failures.push('immutable 100-asset history checkpoint ID mismatch');
 if (history.snapshots?.[4]?.checkpoint_id !== currentCheckpoint.previous_checkpoint_id) failures.push('108-asset predecessor checkpoint ID mismatch');
-if (history.snapshots?.[5]?.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('110-asset history checkpoint ID mismatch');
+if (history.snapshots?.[5]?.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('source 110-asset growth history checkpoint ID mismatch');
+if (history.snapshots?.[6]?.checkpoint_id !== currentHistoryCheckpoint.checkpoint_id) failures.push('PR #338 non-growth history checkpoint ID mismatch');
+if (history.snapshots?.[6]?.source_checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('PR #338 history source checkpoint mismatch');
+if (history.snapshots?.[6]?.checkpoint_kind !== 'non_growth_normalization_checkpoint') failures.push('PR #338 history checkpoint kind mismatch');
 
 if (releaseBaseline.status !== 'current') failures.push('release baseline must be current');
 if (releaseBaseline.expected_v2_counts?.stablecoins !== 110) failures.push('current release-integrity baseline must protect the 110-asset checkpoint');
 if (audited100Checkpoint.status !== 'audited') failures.push('100-asset checkpoint must remain audited');
 if (audited100Checkpoint.v2_groups?.stablecoins?.record_count !== 100) failures.push('audited checkpoint must continue to protect 100 assets');
-if (currentCheckpoint.status !== 'reviewed_growth_checkpoint') failures.push('current checkpoint must remain the reviewed 110-asset growth checkpoint');
-if (currentCheckpoint.asset_count !== 110) failures.push('current checkpoint must bind 110 assets');
-if (currentCheckpoint.previous_checkpoint_id !== 'sog_controlled_growth_108_checkpoint_pr334_2026_07_09') failures.push('current checkpoint must link to reviewed 108-asset checkpoint');
-if (comparisonContract.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('comparison readiness contract must bind current 110-asset checkpoint');
+if (currentCheckpoint.status !== 'reviewed_growth_checkpoint') failures.push('canonical current checkpoint must remain the reviewed 110-asset growth checkpoint');
+if (currentCheckpoint.asset_count !== 110) failures.push('canonical current checkpoint must bind 110 assets');
+if (currentCheckpoint.previous_checkpoint_id !== 'sog_controlled_growth_108_checkpoint_pr334_2026_07_09') failures.push('canonical current checkpoint must link to reviewed 108-asset checkpoint');
+if (currentHistoryCheckpoint.status !== 'reviewed_non_growth_checkpoint') failures.push('current stats-history checkpoint must be reviewed non-growth');
+if (currentHistoryCheckpoint.asset_count !== 110) failures.push('current stats-history checkpoint must bind 110 assets');
+if (currentHistoryCheckpoint.source_checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('current stats-history checkpoint must source PR #335 110 checkpoint');
+if (currentHistoryCheckpoint.previous_history_checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('current stats-history predecessor mismatch');
+if (currentHistoryCheckpoint.normalization_pr !== 338) failures.push('current stats-history checkpoint must bind PR #338');
+if (comparisonContract.checkpoint_id !== currentCheckpoint.checkpoint_id) failures.push('comparison readiness contract must remain bound to canonical PR #335 110 checkpoint');
 if (comparisonContract.asset_denominator !== 110) failures.push('comparison readiness contract denominator must be 110');
 if (comparisonContract.dimensions?.length !== 19) failures.push('comparison readiness contract must define 19 dimensions');
 if (comparisonContract.audit_output_contract?.next_pr !== 337) failures.push('comparison readiness audit must remain PR #337');
@@ -132,4 +146,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Workstream valid: PR #337 all-asset audit complete, PR #338 normalizes the reviewed 20-row asset_class queue, PR #339 is the inserted Japan access publication, and PR #340 is next for Market Access Record schema and governance.');
+console.log('Workstream valid: PR #337 audit is complete, PR #338 normalizes the reviewed 20-row asset_class queue and appends an immutable same-count stats checkpoint, PR #339 and PR #340 are merged insertions, and PR #341 is next for Market Access Record schema and governance.');
