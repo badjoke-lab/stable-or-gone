@@ -4,6 +4,7 @@ const originalLog = console.log;
 console.log = () => {};
 try {
   await import('./validate-record-depth-baseline-pr353.mjs');
+  await import('./validate-reviewed-tier-a-queue-pr353.mjs');
 } finally {
   console.log = originalLog;
 }
@@ -41,4 +42,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #352 authority reset is complete, PR #353 Record Depth & Coverage Baseline is active, PR #354 Tier A Dossier Batch 1 is next, and the bounded sequence remains review-gated after PR #360.');
+console.log('Workstream valid: PR #352 authority reset is complete, PR #353 Record Depth & Coverage Baseline is active with reviewed non-ranking Tier A queue refinement, PR #354 Tier A Dossier Batch 1 is next, and the bounded sequence remains review-gated after PR #360.');
