@@ -10,13 +10,12 @@ Canonical stable assets: 110
 
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
-PR #352 post-351 authority reset: active
-PR #353 Record Depth & Coverage Baseline: next
+PR #352 post-351 authority reset: complete
+PR #353 Record Depth & Coverage Baseline: active
+PR #354 Tier A Dossier Deepening — Batch 1: next
 ```
 
-The current operating mode is no longer public-surface expansion.
-
-The default operating mode is:
+The current operating mode is:
 
 ```text
 reviewed data growth
@@ -39,21 +38,22 @@ docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 work-item-specific specification
 named baseline, queue, audit, research checkpoint, or release note
 ```
 
-The active schedule amendment is:
+Current work-item specification:
 
 ```text
-docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
 Earlier roadmap amendments remain historical records but do not override this current position.
 
-## 3. Completed program through PR #351
+## 3. Completed program through PR #352
 
-The repository completed these broad programs:
+The repository has completed these broad programs:
 
 ```text
 core integrity and lineage audits
@@ -73,20 +73,19 @@ Access & Regulation index and Explorer
 Change Timeline projection and UI
 Update Feed
 Monthly Maintenance Log
+post-351 repository authority reset
 ```
 
-Historical PR numbering and checkpoint detail remain documented in release notes, historical roadmap amendments, quality specifications, and migration/checkpoint files.
+Historical PR numbering and checkpoint detail remain documented in release notes, historical roadmap amendments, quality specifications, migration files, and immutable history files.
 
 Do not rewrite historical checkpoints merely because the active program changed.
 
-## 4. Current near-term sequence
-
-The approved bounded sequence is:
+## 4. Current bounded sequence
 
 ```text
-PR #352  post-351 authority reset and specification/schedule synchronization
-PR #353  Record Depth & Coverage Baseline
-PR #354  Tier A Dossier Deepening — Batch 1
+PR #352  post-351 authority reset and specification/schedule synchronization — complete
+PR #353  Record Depth & Coverage Baseline — active
+PR #354  Tier A Dossier Deepening — Batch 1 — next
 PR #355  Tier A Dossier Deepening — Batch 2
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
@@ -98,65 +97,80 @@ REVIEW GATE
 
 No PR number after the review gate is pre-authorized by this roadmap.
 
-## 5. PR #352 — post-351 authority reset — active
+## 5. PR #353 — Record Depth & Coverage Baseline — active
 
-Binding documents:
+Binding references:
 
 ```text
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
-PR #352 synchronizes:
+PR #353 evaluates all 110 canonical assets across exactly these planning dimensions:
 
 ```text
-README.md
-AGENTS.md
-docs/spec-governance.md
-docs/roadmap.md
-active-workstream validation
+identity
+lifecycle
+organization_relationships
+mechanism_classification
+reserve_structure
+redemption
+issuance
+deployment
+legal_profile
+regulatory_notes
+events
+evidence_depth
+known_unknowns
+comparison_readiness
+facet_freshness_support
+canonical_market_access
 ```
 
-PR #352 does not change canonical data, public projections, statistics history, monitoring snapshots, or public route behavior.
-
-## 6. PR #353 — Record Depth & Coverage Baseline — next
-
-Binding specification:
+Allowed planning states:
 
 ```text
-docs/quality/record-depth-coverage-baseline-spec.md
+strong
+usable
+partial
+sparse
+absent
+not_applicable
 ```
 
-Purpose:
+PR #353 must produce deterministic internal planning outputs:
 
-- evaluate all 110 canonical assets;
-- measure reviewed depth across required record families;
-- identify sparse and absent dimensions;
-- identify product leverage for Compare, Timeline, Access & Regulation, and evidence maintenance;
-- prepare the Tier A priority queue.
+```text
+record depth baseline
+summary counts by dimension and state
+Tier A candidate queue with explicit reasons
+input digests
+```
 
-The baseline is an internal planning instrument.
-
-It must not become:
+PR #353 must not produce:
 
 ```text
 risk score
 safety score
 quality ranking
 transparency ranking
+numeric composite score
+asset rank
 investment recommendation
 public leaderboard
 ```
 
-## 7. PR #354, #355, #357 — Tier A Dossier Deepening
+PR #353 does not deepen dossiers, add canonical assets, create Market Access Records, change Readiness, change Freshness, change Timeline semantics, change Update Feed entries, change Maintenance Log month data, or add a public product surface.
 
-Selection is driven by PR #353 baseline results.
+## 6. PR #354, #355, #357 — Tier A Dossier Deepening
+
+Selection is driven by the reviewed PR #353 baseline and candidate queue.
 
 Selection considerations:
 
 ```text
-market significance
 historical importance
 comparison leverage
 regulatory relevance
@@ -185,9 +199,9 @@ known unknowns
 
 Dossier batches do not add new canonical assets unless explicitly approved as combined growth work.
 
-## 8. PR #356 and #359 — Market Access pilots
+## 7. PR #356 and #359 — Market Access pilots
 
-Canonical Market Access promotion is governed by the Market Access foundation introduced by PR #341 and the post-351 operating specification.
+Canonical Market Access promotion remains governed by the Market Access foundation and post-351 operating specification.
 
 Each pilot must define a bounded:
 
@@ -202,7 +216,7 @@ evidence requirements
 review cutoff
 ```
 
-The approved flow is:
+Approved promotion flow:
 
 ```text
 research or monitoring signal
@@ -218,7 +232,7 @@ research or monitoring signal
 
 No monitoring observation, editorial research row, guide statement, generic platform availability statement, or platform licence is promoted automatically.
 
-## 9. PR #358 — Record Growth Batch 1
+## 8. PR #358 — Record Growth Batch 1
 
 This PR returns to broader evidence-backed registry growth.
 
@@ -241,7 +255,7 @@ failed, discontinued, migrated, or rebranded
 under-documented long tail
 ```
 
-## 10. PR #360 — Evidence and Correction Batch
+## 9. PR #360 — Evidence and Correction Batch
 
 Priority work:
 
@@ -257,9 +271,9 @@ known-unknown resolution
 source identity maintenance
 ```
 
-This phase exists because registry quality is not measured only by asset count.
+Registry quality is not measured only by asset count.
 
-## 11. Review gate after PR #360
+## 10. Review gate after PR #360
 
 Review:
 
@@ -288,7 +302,7 @@ monitoring source work
 separately justified public-surface amendment
 ```
 
-## 12. Parallel operating lanes
+## 11. Parallel operating lanes
 
 ### Data growth
 
@@ -316,7 +330,7 @@ The current month may remain `in_progress` until month-end review.
 
 Closed months are immutable and history grows append-only.
 
-## 13. Product-surface policy
+## 12. Product-surface policy
 
 The existing public product set is sufficient for the current operating phase.
 
@@ -337,7 +351,7 @@ New pages, explorers, dashboards, ranking surfaces, or navigation families are n
 
 Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
 
-## 14. Core data rules
+## 13. Core data rules
 
 - Unknown values remain unknown unless reviewed evidence supports a value.
 - Do not coerce partial dates into day-level dates.
@@ -361,7 +375,7 @@ not_applicable
 source_review_needed
 ```
 
-## 15. Mandatory pre-implementation check
+## 14. Mandatory pre-implementation check
 
 Before every non-trivial post-351 PR:
 
