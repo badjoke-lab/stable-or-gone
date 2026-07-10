@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_change_timeline_ui_pr349_v1",
+  "source_endpoint": "/data/change-timeline.json",
+  "route": "/timeline/",
+  "initial_result_limit": 40,
+  "result_limit_increment": 20,
+  "filters": [
+    {"id":"source_family","label":"Source family","query_param":"source","group":"provenance"},
+    {"id":"date_kind","label":"Date kind","query_param":"date_kind","group":"date_semantics"},
+    {"id":"boundary_kind","label":"Boundary","query_param":"boundary","group":"date_semantics"},
+    {"id":"asset_slug","label":"Stable asset","query_param":"asset","group":"subject"},
+    {"id":"year","label":"Year","query_param":"year","group":"time"},
+    {"id":"jurisdiction","label":"Jurisdiction","query_param":"jurisdiction","group":"scope"}
+  ],
+  "preserved_machine_axes": ["change_type"],
+  "url_contract": {
+    "search_param": "q",
+    "filter_params_are_single_value": true,
+    "unknown_values_ignored": true,
+    "empty_values_removed": true,
+    "back_forward_restores_state": true
+  },
+  "presentation_contract": {
+    "preserve_projection_order": true,
+    "show_date_kind": true,
+    "show_date_semantics": true,
+    "show_boundary_kind": true,
+    "show_source_family": true,
+    "single_generic_timestamp": false,
+    "review_dates_are_change_items": false,
+    "freshness_dates_are_change_items": false,
+    "single_composite_score": false,
+    "risk_ranking": false
+  },
+  "next_pr": 350
+}
