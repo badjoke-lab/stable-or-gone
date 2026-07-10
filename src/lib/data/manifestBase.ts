@@ -78,6 +78,7 @@ export function GET() {
     },
     access_regulation_index: {
       current: '/data/access-regulation-index.json',
+      explorer: '/access-regulation/',
       source_boundary: 'reviewed_canonical_projection_only',
       legal_regulatory_and_access_layers_separate: true,
       readiness_and_freshness_preserved: true,
@@ -88,7 +89,7 @@ export function GET() {
       excludes_internal_monitoring: true,
       excludes_editorial_research: true,
     },
-    main_routes: MAIN_ROUTES,
+    main_routes: [...MAIN_ROUTES, '/compare/', '/access-regulation/'],
     record_counts: getRecordCounts(),
     record_count_breakdown: getRecordCountBreakdown(),
     evidence_source_identity: evidenceSourceIdentity,

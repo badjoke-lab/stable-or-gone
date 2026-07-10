@@ -11,10 +11,11 @@ export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'registry',
     label: 'Registry',
-    purpose: 'Browse canonical stablecoin, comparison, organization, event, and derived statistics records.',
+    purpose: 'Browse canonical stablecoin, comparison, access/regulation, organization, event, and derived statistics records.',
     items: Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Compare', href: '/compare/' }),
+      Object.freeze({ label: 'Access & Regulation', href: '/access-regulation/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
       Object.freeze({ label: 'Events', href: '/events/' }),
       Object.freeze({ label: 'Stats', href: '/stats/' })
@@ -73,6 +74,7 @@ export const footerNavigationGroups = Object.freeze([
     items: Object.freeze([
       Object.freeze({ label: 'Stablecoins', href: '/stablecoins/' }),
       Object.freeze({ label: 'Compare', href: '/compare/' }),
+      Object.freeze({ label: 'Access & Regulation', href: '/access-regulation/' }),
       Object.freeze({ label: 'Organizations', href: '/issuers/' }),
       Object.freeze({ label: 'Events', href: '/events/' }),
       Object.freeze({ label: 'Stats', href: '/stats/' }),
@@ -104,6 +106,7 @@ export const footerNavigationGroups = Object.freeze([
 export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/', source_file: 'src/pages/index.astro', output_kind: 'html', group: 'entry', role: 'registry_home', decision: 'keep', navigation: 'brand' }),
   Object.freeze({ pattern: '/about/', source_file: 'src/pages/about/index.astro', output_kind: 'html', group: 'project', role: 'project_about', decision: 'keep', navigation: 'project' }),
+  Object.freeze({ pattern: '/access-regulation/', source_file: 'src/pages/access-regulation/index.astro', output_kind: 'html', group: 'registry', role: 'access_regulation_explorer', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/ai.txt', source_file: 'src/pages/ai.txt.ts', output_kind: 'text', group: 'data_access', role: 'ai_entrypoint', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/compare/', source_file: 'src/pages/compare/index.astro', output_kind: 'html', group: 'registry', role: 'comparison_explorer', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/contact/', source_file: 'src/pages/contact/index.astro', output_kind: 'html', group: 'project', role: 'corrections_and_submissions', decision: 'keep', navigation: 'utility' }),
@@ -147,6 +150,7 @@ export const recordContentOwnership = Object.freeze([
   Object.freeze({ owner_role: 'event_record', route: '/event/{id}/', responsibilities: Object.freeze(['event_identity', 'subjects', 'status_effect', 'recovery', 'structured_detail', 'evidence', 'corrections']) }),
   Object.freeze({ owner_role: 'registry_statistics', route: '/stats/', responsibilities: Object.freeze(['derived_registry_totals', 'lifecycle_composition', 'reviewed_checkpoint_history', 'statistics_methodology_links']) }),
   Object.freeze({ owner_role: 'comparison_explorer', route: '/compare/', responsibilities: Object.freeze(['bounded_asset_selection', 'canonical_facet_comparison', 'readiness_visibility', 'freshness_visibility', 'shareable_query_state']) }),
+  Object.freeze({ owner_role: 'access_regulation_explorer', route: '/access-regulation/', responsibilities: Object.freeze(['canonical_legal_filtering', 'regulatory_note_filtering', 'market_access_record_filtering', 'readiness_visibility', 'freshness_visibility', 'shareable_filter_state', 'absence_semantics']) }),
   Object.freeze({ owner_role: 'methodology', route: '/methodology/', responsibilities: Object.freeze(['taxonomy_definitions', 'value_state_semantics', 'evidence_model', 'relationship_model', 'selection_rules']) }),
   Object.freeze({ owner_role: 'registry_updates', route: '/updates/', responsibilities: Object.freeze(['public_change_history']) }),
   Object.freeze({ owner_role: 'corrections_and_submissions', route: '/contact/', responsibilities: Object.freeze(['correction_submission', 'source_submission']) }),

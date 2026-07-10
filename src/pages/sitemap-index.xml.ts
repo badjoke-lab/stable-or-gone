@@ -13,6 +13,7 @@ export const GET: APIRoute = () => {
     '/',
     '/stablecoins/',
     '/compare/',
+    '/access-regulation/',
     '/issuers/',
     '/events/',
     '/stats/',

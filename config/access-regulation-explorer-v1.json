@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_access_regulation_explorer_pr347_v1",
+  "source_endpoint": "/data/access-regulation-index.json",
+  "route": "/access-regulation/",
+  "initial_result_limit": 50,
+  "result_limit_increment": 25,
+  "filters": [
+    {"id":"lifecycle_status","label":"Lifecycle","query_param":"lifecycle","group":"record_state"},
+    {"id":"legal_profile_state","label":"Legal profile state","query_param":"legal_state","group":"legal"},
+    {"id":"legal_classification","label":"Legal classification","query_param":"legal_class","group":"legal"},
+    {"id":"legal_jurisdiction","label":"Legal jurisdiction","query_param":"legal_jurisdiction","group":"legal"},
+    {"id":"regulatory_record_state","label":"Regulatory record state","query_param":"reg_state","group":"regulatory"},
+    {"id":"regulatory_note_type","label":"Regulatory note type","query_param":"reg_type","group":"regulatory"},
+    {"id":"regulatory_jurisdiction","label":"Regulatory jurisdiction","query_param":"reg_jurisdiction","group":"regulatory"},
+    {"id":"market_access_record_state","label":"Market Access record state","query_param":"access_record_state","group":"market_access"},
+    {"id":"market_access_state","label":"Market Access state","query_param":"access_state","group":"market_access"}
+  ],
+  "preserved_machine_axes": [
+    "licensed_or_regulated_as",
+    "regulatory_authority_or_source",
+    "market_access_jurisdiction",
+    "market_access_function",
+    "market_access_platform"
+  ],
+  "url_contract": {
+    "search_param": "q",
+    "filter_params_are_single_value": true,
+    "unknown_values_ignored": true,
+    "empty_values_removed": true,
+    "back_forward_restores_state": true
+  },
+  "presentation_contract": {
+    "single_composite_score": false,
+    "risk_ranking": false,
+    "sort_order": "canonical_asset_id",
+    "no_absence_inference": true,
+    "readiness_and_freshness_visible": true
+  },
+  "next_pr": 348
+}
