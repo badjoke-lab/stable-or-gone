@@ -14,7 +14,11 @@ const results = [];
 
 const snapshot = async (page) => page.evaluate(() => {
   const controls = [...document.querySelectorAll('[data-ar-search], [data-ar-clear], [data-ar-copy], [data-ar-filter-id], [data-ar-show-more]')]
-    .filter((element) => element instanceof HTMLElement && !element.hidden && getComputedStyle(element).display !== 'none');
+    .filter((element) => {
+      if (!(element instanceof HTMLElement) || element.hidden || getComputedStyle(element).display === 'none') return false;
+      const rect = element.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    });
   return {
     url: window.location.pathname + window.location.search,
     result_count: Number(document.querySelector('[data-ar-result-count]')?.textContent ?? 0),
