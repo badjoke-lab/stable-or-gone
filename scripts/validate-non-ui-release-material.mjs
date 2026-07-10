@@ -12,18 +12,24 @@ const readme = read('README.md');
 const release = read('docs/releases/100-asset-checkpoint-2026-07-06.md');
 const roadmap = read('docs/roadmap.md');
 const amendment = read('docs/roadmap-amendments/2026-07-08-pr326-history-activation.md');
+const activeAmendment = read('docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md');
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const requireText = (body, text, label) => check(body.includes(text), `${label}: missing ${text}`);
 
 for (const marker of [
-  '100 stable assets','94 organizations','110 stablecoin-organization relationships','172 events','502 evidence records',
-  '289 known unknowns','140 deployments','100 legal profiles','133 reserve components','100 income profiles','366 detail routes'
+  'contains 110 stable assets',
+  'PR #351 Monthly Maintenance Log: complete',
+  'PR #352 post-351 authority reset: complete',
+  'PR #353 Record Depth & Coverage Baseline: active',
+  'PR #354 Tier A Dossier Deepening — Batch 1: next'
 ]) requireText(readme, marker, 'README.md');
 for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(readme, route, 'README.md');
 for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(readme, boundary, 'README.md');
 
 for (const marker of [
+  'stable assets: 100','organizations: 94','relationships: 110','events: 172','evidence: 502',
+  'known unknowns: 289','deployments: 140','legal profiles: 100','reserve components: 133','income profiles: 100','detail routes: 366',
   checkpoint.checkpoint_id,
   checkpoint.source_commit,
   `canonical files: ${checkpoint.canonical_file_count}`,
@@ -35,9 +41,9 @@ for (const marker of [
   `output files: ${checkpoint.reproducibility_checkpoint.file_count}`,
   `total bytes: ${checkpoint.reproducibility_checkpoint.total_bytes}`,
   'reproducible: true'
-]) requireText(release, marker, 'release note');
-for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(release, route, 'release note');
-for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(release, boundary, 'release note');
+]) requireText(release, marker, 'historical 100-asset release note');
+for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(release, route, 'historical 100-asset release note');
+for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(release, boundary, 'historical 100-asset release note');
 
 check(checkpoint.release_integrity_baseline_id === 'sog_release_integrity_pr316_2026_07_06', 'historical 100-asset release-integrity baseline ID changed');
 check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'historical checkpoint/reproducible-build baseline ID mismatch');
@@ -60,20 +66,24 @@ if (matchingUpdates[0]) {
 }
 
 for (const marker of [
-  'PR #320 non-UI release material: complete',
-  'PR #321 100-asset monitoring baseline synchronization: complete',
-  'PR #322 reserve and redemption source expansion: complete',
-  'PR #323 lifecycle, regulatory, and EU market-access source/schema expansion: complete',
-  'PR #324 bounded scheduled read-only monitoring: complete',
-  'PR #325 deterministic statistics generator and validator: complete',
-  'Current item: PR #326 immutable checkpoint history',
-  'Next item: PR #327 /stats/ foundation'
-]) requireText(roadmap, marker, 'docs/roadmap.md');
-for (const marker of [
   'PR #325 deterministic statistics generator and validator: complete',
   'PR #326 immutable checkpoint history: active',
   'PR #327 /stats/ foundation: next'
-]) requireText(amendment, marker, 'PR #326 roadmap amendment');
+]) requireText(amendment, marker, 'historical PR #326 roadmap amendment');
+
+for (const marker of [
+  'Canonical stable assets: 110',
+  'PR #352 post-351 authority reset: complete',
+  'PR #353 Record Depth & Coverage Baseline: active',
+  'PR #354 Tier A Dossier Deepening — Batch 1: next',
+  'REVIEW GATE'
+]) requireText(roadmap, marker, 'current roadmap');
+
+for (const marker of [
+  'PR #353 Record Depth & Coverage Baseline: active',
+  'PR #354 Tier A Dossier Deepening — Batch 1: next',
+  'Queue order must be deterministic and non-ranking.'
+]) requireText(activeAmendment, marker, 'active PR #353 roadmap amendment');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -91,5 +101,6 @@ console.log(JSON.stringify({
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
-  stats_history_snapshot_count: history.snapshots?.length ?? 0
+  stats_history_snapshot_count: history.snapshots?.length ?? 0,
+  active_workstream: 'pr353_record_depth_coverage_baseline'
 }, null, 2));

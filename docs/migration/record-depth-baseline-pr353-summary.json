@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "baseline_id": "sog_record_depth_baseline_pr353_v1",
+  "status": "reviewed_internal_planning_checkpoint",
+  "public_output": false,
+  "review_pr": 353,
+  "reviewed_at": "2026-07-10",
+  "asset_count": 110,
+  "dimension_count": 16,
+  "cell_count": 1760,
+  "planning_states": [
+    "strong",
+    "usable",
+    "partial",
+    "sparse",
+    "absent",
+    "not_applicable"
+  ],
+  "dimension_order": [
+    "identity",
+    "lifecycle",
+    "organization_relationships",
+    "mechanism_classification",
+    "reserve_structure",
+    "redemption",
+    "issuance",
+    "deployment",
+    "legal_profile",
+    "regulatory_notes",
+    "events",
+    "evidence_depth",
+    "known_unknowns",
+    "comparison_readiness",
+    "facet_freshness_support",
+    "canonical_market_access"
+  ],
+  "input_digest_sha256": "22b4740001fb34188fc4829cd580ff59d6a54a8b78c57ebcd8353e0e3f56d5f9",
+  "source_contracts": {
+    "comparison_readiness_audit_id": "sog_comparison_readiness_audit_pr337_110_assets",
+    "comparison_readiness_input_digest_sha256": "d6417429d03fc7ac61f64c75bd85eadc1d58184b0eca7927a24676fe20358e3e",
+    "facet_freshness_audit_id": "sog_facet_freshness_audit_pr342_110_assets",
+    "facet_freshness_input_digest_sha256": "871e3b71a11d06c9882c1714c16019ba77387a7e215e88cb371a9e2b90bb14af",
+    "market_access_source": "data/market-access-records-v1.json",
+    "comparison_preset_config_id": "sog_compare_presets_pr345_v1",
+    "comparison_preset_source": "config/compare-v1-presets.json"
+  },
+  "summary": {
+    "state_counts": {
+      "strong": 589,
+      "usable": 687,
+      "partial": 267,
+      "sparse": 0,
+      "absent": 217,
+      "not_applicable": 0
+    },
+    "dimension_states": [
+      {"dimension_id":"identity","state_counts":{"strong":82,"usable":28,"partial":0,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"lifecycle","state_counts":{"strong":49,"usable":58,"partial":3,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"organization_relationships","state_counts":{"strong":9,"usable":96,"partial":5,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"mechanism_classification","state_counts":{"strong":106,"usable":4,"partial":0,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"reserve_structure","state_counts":{"strong":4,"usable":106,"partial":0,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"redemption","state_counts":{"strong":94,"usable":4,"partial":12,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"issuance","state_counts":{"strong":105,"usable":5,"partial":0,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"deployment","state_counts":{"strong":8,"usable":10,"partial":92,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"legal_profile","state_counts":{"strong":0,"usable":48,"partial":62,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"regulatory_notes","state_counts":{"strong":3,"usable":2,"partial":0,"sparse":0,"absent":105,"not_applicable":0}},
+      {"dimension_id":"events","state_counts":{"strong":20,"usable":88,"partial":0,"sparse":0,"absent":2,"not_applicable":0}},
+      {"dimension_id":"evidence_depth","state_counts":{"strong":58,"usable":49,"partial":3,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"known_unknowns","state_counts":{"strong":51,"usable":59,"partial":0,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"comparison_readiness","state_counts":{"strong":0,"usable":110,"partial":0,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"facet_freshness_support","state_counts":{"strong":0,"usable":20,"partial":90,"sparse":0,"absent":0,"not_applicable":0}},
+      {"dimension_id":"canonical_market_access","state_counts":{"strong":0,"usable":0,"partial":0,"sparse":0,"absent":110,"not_applicable":0}}
+    ],
+    "tier_a_candidate_count": 18
+  }
+}

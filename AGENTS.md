@@ -15,19 +15,20 @@ Before changing code, canonical data, workflows, monitoring, or documentation, r
 7. the canonical specification for the active work item
 8. every named baseline, queue, validator, audit, fixture, research checkpoint, release note, or prior output required by that work item
 
-Current active amendment:
+Current active amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 ```
 
-Current post-351 operating specification:
+Current operating specification:
 
 ```text
 docs/post-351-data-growth-operating-spec.md
 ```
 
-Current next-work specification:
+Current work-item specification:
 
 ```text
 docs/quality/record-depth-coverage-baseline-spec.md
@@ -47,7 +48,7 @@ unmerged drafts
 mock images
 ```
 
-PR numbering, active workstream state, and next approved work come from `docs/roadmap.md` plus the current active amendment.
+PR numbering, active workstream state, and next approved work come from `docs/roadmap.md` plus the active amendments named there.
 
 Do not infer the schedule from old PR numbers in historical documents.
 
@@ -57,16 +58,17 @@ Do not infer the schedule from old PR numbers in historical documents.
 Canonical stable assets: 110
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
-PR #352 post-351 authority reset: active
-PR #353 Record Depth & Coverage Baseline: next
+PR #352 post-351 authority reset: complete
+PR #353 Record Depth & Coverage Baseline: active
+PR #354 Tier A Dossier Deepening — Batch 1: next
 ```
 
-Approved near-term sequence:
+Approved bounded sequence:
 
 ```text
-PR #352  post-351 authority reset and specification/schedule synchronization
-PR #353  Record Depth & Coverage Baseline
-PR #354  Tier A Dossier Deepening — Batch 1
+PR #352  post-351 authority reset and specification/schedule synchronization — complete
+PR #353  Record Depth & Coverage Baseline — active
+PR #354  Tier A Dossier Deepening — Batch 1 — next
 PR #355  Tier A Dossier Deepening — Batch 2
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
@@ -84,7 +86,7 @@ No PR number after the review gate is pre-authorized.
 
 The public-surface expansion sequence is complete.
 
-Default work now belongs to one of these lanes:
+Default work now belongs to:
 
 ```text
 reviewed data depth and record growth
@@ -107,7 +109,7 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/post-351-data-growth-operating-spec.md
-active roadmap amendment
+active roadmap amendments
 work-item-specific specification
 named baseline/queue/audit/research checkpoint or prior output
 ```
@@ -127,7 +129,80 @@ Deployment classification
 
 A PR that cannot identify its roadmap item and governing specification must pause.
 
-## 6. Core data rules
+## 6. PR #353 Record Depth Baseline rules
+
+PR #353 is governed by:
+
+```text
+docs/quality/record-depth-coverage-baseline-spec.md
+docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
+```
+
+The baseline is an internal planning instrument over all 110 canonical assets.
+
+Required dimensions:
+
+```text
+identity
+lifecycle
+organization_relationships
+mechanism_classification
+reserve_structure
+redemption
+issuance
+deployment
+legal_profile
+regulatory_notes
+events
+evidence_depth
+known_unknowns
+comparison_readiness
+facet_freshness_support
+canonical_market_access
+```
+
+Allowed planning states:
+
+```text
+strong
+usable
+partial
+sparse
+absent
+not_applicable
+```
+
+The baseline must not become:
+
+```text
+risk score
+safety score
+quality ranking
+transparency ranking
+numeric composite score
+asset rank
+investment recommendation
+public leaderboard
+```
+
+State derivation must be deterministic and auditable.
+
+Queue membership must contain explicit reasons and must use deterministic non-ranking order.
+
+Absence of a canonical record is a planning coverage state only. For example:
+
+```text
+no Regulatory Note row
+!= no regulatory issue
+
+no Market Access Record
+!= unavailable
+
+no known-unknown row
+!= nothing is unknown
+```
+
+## 7. Core data rules
 
 - Keep unknown values unknown unless reviewed evidence supports a value.
 - Do not coerce partial-date evidence into a day-level date.
@@ -147,7 +222,7 @@ not_applicable
 source_review_needed
 ```
 
-## 7. Canonical/public safety boundary
+## 8. Canonical/public safety boundary
 
 Public release claims remain canonical-only.
 
@@ -160,7 +235,9 @@ includes_private_notes = false
 
 Candidate, monitoring, discovery, editorial-research, and private material remain outside canonical public release claims until separately reviewed and promoted through the proper canonical process.
 
-## 8. Monitoring rules
+PR #353 may read reviewed canonical data and reviewed Readiness/Freshness derivations only. It must not read monitoring artifacts, news discovery leads, unreviewed candidates, editorial research rows not promoted to canonical data, private notes, private queues, or candidate URLs.
+
+## 9. Monitoring rules
 
 Monitoring remains private, review-only, and read-only with respect to canonical data.
 
@@ -192,7 +269,7 @@ A pending baseline is not accepted monitoring coverage.
 
 Monitoring output is not canonical data.
 
-## 9. Market Access rules
+## 10. Market Access rules
 
 Canonical Market Access promotion must follow:
 
@@ -210,58 +287,17 @@ research or monitoring signal
 
 Do not reduce access to a universal allowed/banned boolean.
 
-Preserve:
-
-```text
-asset
-platform/service
-platform legal entity when supported
-jurisdiction or region
-customer scope when supported
-function or access route
-access state
-supported network when material
-announcement date
-effective date
-review date
-source identity
-evidence relation
-```
-
 A platform licence is not proof that a specific asset/function combination is available.
 
 Monitoring observations and editorial matrices are not canonical Market Access Records.
-
-## 10. Record Depth Baseline rules
-
-PR #353 is governed by:
-
-```text
-docs/quality/record-depth-coverage-baseline-spec.md
-```
-
-The baseline is an internal planning instrument.
-
-Allowed planning states:
-
-```text
-strong
-usable
-partial
-sparse
-absent
-not_applicable
-```
-
-The baseline must not become a risk score, safety score, quality ranking, transparency ranking, investment recommendation, or public leaderboard.
-
-Every state assignment must be deterministic and auditable.
 
 ## 11. Dossier and growth rules
 
 Tier A dossier batches normally cover no more than five existing assets.
 
 They may deepen supporting canonical records and evidence but do not add new canonical assets unless explicitly approved as combined growth work.
+
+PR #354 must select its assets from the reviewed PR #353 baseline and candidate queue and cite explicit selection reasons.
 
 If a growth PR adds new canonical stable assets:
 
