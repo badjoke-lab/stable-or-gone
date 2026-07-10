@@ -23,7 +23,7 @@ requireText(amendment, 'PR #348 change-timeline projection generator: complete',
 requireText(amendment, 'PR #349 Change Timeline UI: active', 'PR #349 amendment');
 requireText(amendment, 'PR #350 Update Feed: next', 'PR #349 amendment');
 requireText(spec, 'The UI exposes reviewed canonical change history while preserving each source date\'s meaning.', 'Change Timeline UI spec');
-requireText(spec, 'Review dates excluded', 'Change Timeline page contract');
+requireText(spec, 'reviewed-at dates;', 'Change Timeline UI spec');
 requireText(spec, 'After PR #349 merges, PR #350 is authorized to implement the public Update Feed.', 'Change Timeline UI spec');
 
 expect(config.schema_version === '1.0', 'PR #349 Timeline UI config schema version mismatch');
