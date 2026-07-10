@@ -22,12 +22,13 @@ type CompareDimensionConfig = {
 const presetRoot = document.querySelector('[data-compare-page]');
 
 if (presetRoot instanceof HTMLElement) {
-  const slots = Array.from(presetRoot.querySelectorAll<HTMLSelectElement>('[data-compare-slot]'));
-  const presetButtons = Array.from(presetRoot.querySelectorAll<HTMLButtonElement>('[data-compare-preset-id]'));
-  const groupToggles = Array.from(presetRoot.querySelectorAll<HTMLInputElement>('[data-compare-group-toggle]'));
-  const presetStatus = presetRoot.querySelector<HTMLElement>('[data-compare-preset-status]');
-  const alert = presetRoot.querySelector<HTMLElement>('[data-compare-alert]');
-  const groupsContainer = presetRoot.querySelector<HTMLElement>('[data-compare-groups]');
+  const root = presetRoot;
+  const slots = Array.from(root.querySelectorAll<HTMLSelectElement>('[data-compare-slot]'));
+  const presetButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-compare-preset-id]'));
+  const groupToggles = Array.from(root.querySelectorAll<HTMLInputElement>('[data-compare-group-toggle]'));
+  const presetStatus = root.querySelector<HTMLElement>('[data-compare-preset-status]');
+  const alert = root.querySelector<HTMLElement>('[data-compare-alert]');
+  const groupsContainer = root.querySelector<HTMLElement>('[data-compare-groups]');
   const presetConfigElement = document.querySelector<HTMLScriptElement>('#compare-preset-config');
   const dimensionConfigElement = document.querySelector<HTMLScriptElement>('#compare-dimension-config');
   const presetConfig = presetConfigElement?.textContent
@@ -75,7 +76,7 @@ if (presetRoot instanceof HTMLElement) {
 
   function syncRenderedGroupVisibility() {
     const selected = new Set(selectedGroupIds());
-    for (const section of presetRoot.querySelectorAll<HTMLElement>('[data-compare-group]')) {
+    for (const section of root.querySelectorAll<HTMLElement>('[data-compare-group]')) {
       section.hidden = !selected.has(section.dataset.compareGroup ?? '');
     }
   }
