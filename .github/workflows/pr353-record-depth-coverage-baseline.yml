@@ -33,12 +33,12 @@ jobs:
       - name: Validate Registry v2 v3 parity
         run: npm run validate:parity
 
-      - name: Build deterministic Record Depth baseline
+      - name: Build deterministic reviewed Record Depth baseline
         run: |
           mkdir -p artifacts/record-depth
-          node scripts/growth/build-record-depth-baseline-pr353.mjs artifacts/record-depth/record-depth-baseline-pr353.json
+          node scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs artifacts/record-depth/record-depth-baseline-pr353.json
 
-      - name: Extract Tier A candidate queue artifact
+      - name: Extract reviewed Tier A candidate queue artifact
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -52,14 +52,18 @@ jobs:
             queue_order: baseline.queue_order,
             candidate_count: baseline.tier_a_candidate_queue.length,
             input_digest_sha256: baseline.input_digest_sha256,
+            source_contracts: baseline.source_contracts,
             candidates: baseline.tier_a_candidate_queue
           };
           fs.writeFileSync('artifacts/record-depth/tier-a-candidate-queue-pr353.json', `${JSON.stringify(queue, null, 2)}\n`);
-          console.log(`Tier A candidate queue: ${queue.candidate_count} assets`);
+          console.log(`Reviewed Tier A candidate queue: ${queue.candidate_count} assets`);
           NODE
 
-      - name: Validate Record Depth baseline contract
+      - name: Validate Record Depth dimension contract
         run: node scripts/validate-record-depth-baseline-pr353.mjs
+
+      - name: Validate reviewed Tier A queue contract
+        run: node scripts/validate-reviewed-tier-a-queue-pr353.mjs
 
       - name: Validate active workstream
         run: npm run validate:active-workstream
@@ -76,12 +80,14 @@ jobs:
           if (baseline.single_composite_score !== false) throw new Error('Record Depth baseline must not emit composite score');
           if (baseline.asset_rank !== false) throw new Error('Record Depth baseline must not rank assets');
           if (baseline.queue_order !== 'asset_slug_ascending_non_ranking') throw new Error('Tier A queue must use non-ranking slug order');
+          if (baseline.summary.tier_a_candidate_count > 30) throw new Error(`reviewed Tier A queue too broad: ${baseline.summary.tier_a_candidate_count}`);
           console.log(JSON.stringify({
             asset_count: baseline.asset_count,
             dimension_count: baseline.dimension_count,
             cell_count: baseline.cell_count,
             state_counts: baseline.summary.state_counts,
             tier_a_candidate_count: baseline.summary.tier_a_candidate_count,
+            candidate_slugs: baseline.tier_a_candidate_queue.map((row) => row.asset_slug),
             queue_order: baseline.queue_order
           }, null, 2));
           NODE
