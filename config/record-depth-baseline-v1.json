@@ -51,7 +51,7 @@
     "minimum_priority_gap_count": 2,
     "eligible_if_historical_and_gapped": true,
     "eligible_if_compare_and_evidence_leverage": true,
-    "eligible_if_access_regulation_and_gapped": true,
+    "eligible_if_access_regulation_and_gapped": false,
     "eligible_if_regional_and_gapped": true
   },
   "public_output": false,
