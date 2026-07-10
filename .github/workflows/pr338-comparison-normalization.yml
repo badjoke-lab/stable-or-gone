@@ -1,0 +1,79 @@
+name: PR 338 Comparison Readiness normalization
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr338-comparison-normalization'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+      - name: Validate Comparison Readiness contract
+        run: node scripts/validate-comparison-readiness-contract-pr336.mjs
+      - name: Validate PR 337 audit structure
+        run: node scripts/validate-comparison-readiness-audit-pr337.mjs
+      - name: Validate PR 338 normalization
+        run: node scripts/validate-comparison-readiness-normalization-pr338.mjs
+      - name: Verify bounded classification diff
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import fs from 'node:fs';
+
+          const file = 'data/stablecoin-classification-v2.json';
+          const before = JSON.parse(execFileSync('git', ['show', `origin/main:${file}`], { encoding: 'utf8' }));
+          const after = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const queue = JSON.parse(fs.readFileSync('data/quality/comparison-readiness-normalization-queue-pr337.json', 'utf8'));
+          const targets = new Set(queue.rows.map((row) => row.asset_id));
+          const beforeById = new Map(before.map((row) => [row.id, row]));
+          const afterById = new Map(after.map((row) => [row.id, row]));
+
+          if (before.length !== after.length) throw new Error('classification row count changed');
+          if (targets.size !== 20) throw new Error(`expected 20 targets, found ${targets.size}`);
+
+          for (const [id, beforeRow] of beforeById) {
+            const afterRow = afterById.get(id);
+            if (!afterRow) throw new Error(`${id}: row removed`);
+            if (targets.has(id)) {
+              const expected = { ...beforeRow, asset_class: 'stablecoin' };
+              if (JSON.stringify(afterRow) !== JSON.stringify(expected)) throw new Error(`${id}: target diff exceeds asset_class normalization`);
+            } else if (JSON.stringify(afterRow) !== JSON.stringify(beforeRow)) {
+              throw new Error(`${id}: non-target row changed`);
+            }
+          }
+          console.log('Bounded diff valid: exactly 20 target rows add only asset_class=stablecoin.');
+          NODE
+      - name: Build compact post-normalization audit
+        run: |
+          mkdir -p artifacts
+          node scripts/comparison/compact-readiness-audit-pr337.mjs artifacts/comparison-readiness-audit-pr338.json
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+      - name: Upload post-normalization audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr338-comparison-readiness-audit-${{ github.run_id }}
+          if-no-files-found: error
+          path: artifacts/comparison-readiness-audit-pr338.json

@@ -1,19 +1,42 @@
 import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { generateStats } from '../build-stats.mjs';
 
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
+const historyCheckpointPath = 'docs/migration/current-stats-history-checkpoint.json';
 
 function countsOnly(distribution = {}) {
   return Object.fromEntries(Object.entries(distribution).map(([key, row]) => [key, row.count]));
 }
 
-export function buildHistorySnapshot(stats) {
+function loadHistoryCheckpoint(root) {
+  const absolute = path.join(root, historyCheckpointPath);
+  if (!fs.existsSync(absolute)) return null;
+  return JSON.parse(fs.readFileSync(absolute, 'utf8'));
+}
+
+export function buildHistorySnapshot(stats, options = {}) {
+  const historyCheckpoint = options.historyCheckpoint ?? null;
+  if (historyCheckpoint) {
+    if (historyCheckpoint.asset_count !== stats.totals.assets) {
+      throw new Error(`History checkpoint asset_count ${historyCheckpoint.asset_count} does not match deterministic stats asset count ${stats.totals.assets}`);
+    }
+    if (historyCheckpoint.source_checkpoint_id !== stats.checkpoint_id) {
+      throw new Error(`History checkpoint source ${historyCheckpoint.source_checkpoint_id} does not match deterministic stats checkpoint ${stats.checkpoint_id}`);
+    }
+  }
+
   const snapshot = {
-    checkpoint_id: stats.checkpoint_id,
-    recorded_at: stats.generated_at.slice(0, 10),
+    checkpoint_id: historyCheckpoint?.checkpoint_id ?? stats.checkpoint_id,
+    ...(historyCheckpoint ? {
+      checkpoint_kind: historyCheckpoint.checkpoint_kind,
+      source_checkpoint_id: historyCheckpoint.source_checkpoint_id
+    } : {}),
+    recorded_at: historyCheckpoint?.recorded_at ?? stats.generated_at.slice(0, 10),
     asset_count: stats.totals.assets,
-    registry_version: stats.registry_version,
+    registry_version: historyCheckpoint?.registry_version ?? stats.registry_version,
     input_digest_sha256: stats.input_digest_sha256,
     stats_model_sha256: sha256(JSON.stringify(stats)),
     totals: stats.totals,
@@ -39,7 +62,9 @@ export function buildHistorySnapshot(stats) {
 }
 
 export function generateCurrentHistorySnapshot(options = {}) {
-  return buildHistorySnapshot(generateStats(options));
+  const root = options.root ?? process.cwd();
+  const historyCheckpoint = loadHistoryCheckpoint(root);
+  return buildHistorySnapshot(generateStats(options), { historyCheckpoint });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

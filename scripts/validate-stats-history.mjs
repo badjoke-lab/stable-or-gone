@@ -7,6 +7,7 @@ import { generateCurrentHistorySnapshot } from './stats/build-history-snapshot.m
 
 const root = process.cwd();
 const historyPath = 'data/stats-history.json';
+const historyCheckpointPath = 'docs/migration/current-stats-history-checkpoint.json';
 const reportPath = 'artifacts/stats-history-validation.json';
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -22,8 +23,39 @@ function prefixFailures(previousSnapshots, currentSnapshots) {
   return issues;
 }
 
+function orderingFailures(rows) {
+  const issues = [];
+  let previousAssetCount = -1;
+  let previousRecordedAt = '';
+  let previousCheckpointId = null;
+
+  for (const [index, snapshot] of rows.entries()) {
+    const label = `snapshot[${index}] ${snapshot.checkpoint_id ?? '<missing>'}`;
+    if (snapshot.asset_count < previousAssetCount) issues.push(`${label}: asset_count order must be non-decreasing`);
+    if (snapshot.recorded_at < previousRecordedAt) issues.push(`${label}: recorded_at order must be non-decreasing`);
+
+    if (snapshot.asset_count === previousAssetCount) {
+      if (snapshot.checkpoint_kind !== 'non_growth_normalization_checkpoint') issues.push(`${label}: repeated asset_count requires non_growth_normalization_checkpoint kind`);
+      if (snapshot.source_checkpoint_id !== previousCheckpointId) issues.push(`${label}: same-count checkpoint must source the immediately preceding history checkpoint`);
+    }
+
+    if (snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind === 'non_growth_normalization_checkpoint') {
+      issues.push(`${label}: non-growth checkpoint may not increase asset_count`);
+    }
+
+    previousAssetCount = snapshot.asset_count;
+    previousRecordedAt = snapshot.recorded_at;
+    previousCheckpointId = snapshot.checkpoint_id;
+  }
+
+  return issues;
+}
+
 const history = JSON.parse(fs.readFileSync(path.join(root, historyPath), 'utf8'));
 const snapshots = Array.isArray(history.snapshots) ? history.snapshots : [];
+const historyCheckpoint = fs.existsSync(path.join(root, historyCheckpointPath))
+  ? JSON.parse(fs.readFileSync(path.join(root, historyCheckpointPath), 'utf8'))
+  : null;
 
 check(history.schema_version === '1.0', 'history schema_version must be 1.0');
 check(history.history_id === 'sog_stats_checkpoint_history_v1', 'history_id mismatch');
@@ -31,9 +63,6 @@ check(history.checkpoint_policy === 'append_only_reviewed_pr', 'checkpoint_polic
 check(Array.isArray(history.snapshots) && snapshots.length > 0, 'history must contain at least one checkpoint snapshot');
 
 const checkpointIds = new Set();
-const assetCounts = new Set();
-let previousAssetCount = -1;
-let previousRecordedAt = '';
 
 const transitionStatusMap = {
   migrations: 'migrated',
@@ -44,6 +73,8 @@ const transitionStatusMap = {
   collapses: 'collapsed'
 };
 
+for (const issue of orderingFailures(snapshots)) check(false, issue);
+
 for (const [index, snapshot] of snapshots.entries()) {
   const label = `snapshot[${index}] ${snapshot.checkpoint_id ?? '<missing>'}`;
   check(typeof snapshot.checkpoint_id === 'string' && snapshot.checkpoint_id.length > 0, `${label}: checkpoint_id missing`);
@@ -51,14 +82,7 @@ for (const [index, snapshot] of snapshots.entries()) {
   checkpointIds.add(snapshot.checkpoint_id);
 
   check(Number.isInteger(snapshot.asset_count) && snapshot.asset_count > 0, `${label}: asset_count must be a positive integer`);
-  check(!assetCounts.has(snapshot.asset_count), `${label}: duplicate asset_count checkpoint`);
-  assetCounts.add(snapshot.asset_count);
-  check(snapshot.asset_count > previousAssetCount, `${label}: asset_count order must be strictly increasing`);
-  previousAssetCount = snapshot.asset_count;
-
   check(/^\d{4}-\d{2}-\d{2}$/.test(snapshot.recorded_at ?? ''), `${label}: recorded_at must be YYYY-MM-DD`);
-  check(snapshot.recorded_at >= previousRecordedAt, `${label}: recorded_at order must be non-decreasing`);
-  previousRecordedAt = snapshot.recorded_at;
 
   check(isSha256(snapshot.input_digest_sha256), `${label}: input_digest_sha256 invalid`);
   check(isSha256(snapshot.stats_model_sha256), `${label}: stats_model_sha256 invalid`);
@@ -89,10 +113,16 @@ for (const [index, snapshot] of snapshots.entries()) {
 
 if (snapshots.length > 0) {
   const fixtureBase = [structuredClone(snapshots[0])];
-  const fixtureAppend = structuredClone(snapshots[0]);
-  fixtureAppend.checkpoint_id = 'fixture_future_checkpoint';
-  fixtureAppend.asset_count += 1;
-  check(prefixFailures(fixtureBase, [...fixtureBase, fixtureAppend]).length === 0, 'immutability fixture rejected a valid append');
+  const fixtureGrowthAppend = structuredClone(snapshots[0]);
+  fixtureGrowthAppend.checkpoint_id = 'fixture_future_growth_checkpoint';
+  fixtureGrowthAppend.asset_count += 1;
+  check(prefixFailures(fixtureBase, [...fixtureBase, fixtureGrowthAppend]).length === 0, 'immutability fixture rejected a valid growth append');
+
+  const fixtureSameCountAppend = structuredClone(snapshots[0]);
+  fixtureSameCountAppend.checkpoint_id = 'fixture_future_non_growth_checkpoint';
+  fixtureSameCountAppend.checkpoint_kind = 'non_growth_normalization_checkpoint';
+  fixtureSameCountAppend.source_checkpoint_id = snapshots[0].checkpoint_id;
+  check(orderingFailures([...fixtureBase, fixtureSameCountAppend]).length === 0, 'ordering fixture rejected a valid reviewed same-count append');
 
   const fixtureRewrite = [structuredClone(snapshots[0])];
   fixtureRewrite[0].recorded_at = '2099-01-01';
@@ -104,6 +134,14 @@ const currentSnapshot = generateCurrentHistorySnapshot({ root });
 const currentIndex = snapshots.findIndex((snapshot) => snapshot.checkpoint_id === currentSnapshot.checkpoint_id);
 check(currentIndex >= 0, `current checkpoint missing from history: ${currentSnapshot.checkpoint_id}`);
 if (currentIndex >= 0) check(isDeepStrictEqual(snapshots[currentIndex], currentSnapshot), 'current checkpoint snapshot differs from deterministic current stats snapshot');
+
+if (historyCheckpoint) {
+  check(historyCheckpoint.status === 'reviewed_non_growth_checkpoint', 'current stats-history checkpoint status mismatch');
+  check(historyCheckpoint.checkpoint_kind === 'non_growth_normalization_checkpoint', 'current stats-history checkpoint kind mismatch');
+  check(historyCheckpoint.checkpoint_id === currentSnapshot.checkpoint_id, 'current stats-history checkpoint ID differs from deterministic snapshot');
+  check(historyCheckpoint.asset_count === currentSnapshot.asset_count, 'current stats-history checkpoint asset count mismatch');
+  check(historyCheckpoint.source_checkpoint_id === currentSnapshot.source_checkpoint_id, 'current stats-history source checkpoint mismatch');
+}
 
 const baseRef = process.env.SOG_STATS_HISTORY_BASE_REF;
 let basePrefixCount = null;
@@ -134,6 +172,7 @@ const report = {
   current_snapshot_sha256: currentSnapshot.snapshot_sha256,
   base_ref: baseRef ?? null,
   base_prefix_count: basePrefixCount,
+  ordering_policy: 'checkpoint_progression_non_decreasing_asset_count',
   immutability_negative_fixtures: snapshots.length > 0 ? 'passed' : 'not_run',
   failures,
   ok: failures.length === 0
