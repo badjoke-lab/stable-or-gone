@@ -1,0 +1,94 @@
+name: PR 348 Change timeline projection
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr348-change-timeline-projection'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Build deterministic change timeline artifact
+        run: node scripts/timeline/build-change-timeline-pr348.mjs artifacts/change-timeline-pr348.json
+
+      - name: Validate change timeline contract
+        run: node scripts/validate-change-timeline-pr348.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify built timeline endpoint parity
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { isDeepStrictEqual } from 'node:util';
+          const expected = JSON.parse(fs.readFileSync('artifacts/change-timeline-pr348.json', 'utf8'));
+          const built = JSON.parse(fs.readFileSync('dist/data/change-timeline.json', 'utf8'));
+          if (!isDeepStrictEqual(built, expected)) throw new Error('built change timeline endpoint differs from deterministic generator artifact');
+          if (built.item_count <= 0) throw new Error('timeline must contain at least one item');
+          if (built.projection_rules?.single_generic_timestamp !== false) throw new Error('timeline must preserve date semantics');
+          if (built.projection_rules?.review_dates_are_change_items !== false) throw new Error('review dates must remain excluded');
+          if (built.projection_rules?.freshness_dates_are_change_items !== false) throw new Error('freshness dates must remain excluded');
+          console.log(`Built timeline endpoint matches deterministic artifact: ${built.item_count} items.`);
+          NODE
+
+      - name: Verify built manifest discovery and date semantics
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.change_timeline !== '/data/change-timeline.json') throw new Error('manifest does not advertise change timeline endpoint');
+          if (manifest.change_timeline_projection?.date_semantics_preserved !== true) throw new Error('manifest lost date-semantics preservation');
+          if (manifest.change_timeline_projection?.cross_source_deduplication !== false) throw new Error('manifest must preserve cross-source provenance');
+          if (manifest.change_timeline_projection?.review_dates_excluded !== true) throw new Error('manifest must exclude review dates');
+          if (manifest.change_timeline_projection?.freshness_dates_excluded !== true) throw new Error('manifest must exclude freshness dates');
+          if (manifest.change_timeline_projection?.single_generic_timestamp !== false) throw new Error('manifest must reject generic timestamp collapse');
+          if (manifest.change_timeline_projection?.excludes_internal_monitoring !== true) throw new Error('manifest must exclude monitoring output');
+          if (manifest.change_timeline_projection?.excludes_editorial_research !== true) throw new Error('manifest must exclude editorial research');
+          console.log('Built manifest timeline discovery and date-semantics boundaries valid.');
+          NODE
+
+      - name: Upload timeline artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr348-change-timeline-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/change-timeline-pr348.json
+            dist/data/change-timeline.json
+            dist/data/manifest.json
