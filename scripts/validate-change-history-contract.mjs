@@ -80,14 +80,19 @@ assert((audit.legacy_updates?.duplicate_ids ?? []).length === 0, 'legacy duplica
 assert((audit.legacy_updates?.missing_public_copy ?? []).length === 0, 'legacy missing-copy list must be empty');
 assert((audit.legacy_updates?.target_ready_ids ?? []).length === 0, 'legacy entries require explicit manual migration');
 
-assert(audit.current_updates_page?.uses_registry_updates === true, 'Updates page must still use registry updates');
-assert(audit.current_updates_page?.sorts_by_single_date === true, 'current single-date sorting must remain visible in the audit');
-assert(audit.current_updates_page?.uses_legacy_category === true, 'current legacy category rendering must remain visible');
+assert(audit.current_updates_page?.presentation_model === 'filterable_publication_feed', 'Updates page must use the reviewed publication-feed presentation model');
+assert(audit.current_updates_page?.uses_registry_updates === true, 'Update Feed must remain bound to registry-updates.json');
+assert(audit.current_updates_page?.uses_publication_feed_projection === true, 'Updates page must consume the deterministic publication-feed projection');
+assert(audit.current_updates_page?.orders_by_publication_date === true, 'Update Feed must preserve publication-date ordering');
+assert(audit.current_updates_page?.exposes_legacy_category_filter === true, 'legacy publication categories must remain visibly filterable without becoming change types');
 assert(audit.current_updates_page?.uses_public_copy_overlay === true, 'current update public-copy overlay must remain in use');
-assert(audit.current_updates_page?.exposes_before_after === false, 'current page unexpectedly exposes before/after fields; re-audit required');
-assert(audit.current_updates_page?.exposes_affected_records === false, 'current page unexpectedly exposes affected-record fields; re-audit required');
-assert(audit.current_updates_page?.exposes_evidence === false, 'current page unexpectedly exposes evidence linkage; re-audit required');
-assert(JSON.stringify(audit.current_updates_page?.table_headers) === JSON.stringify(['Date', 'Category', 'Change', 'Related pages']), 'current Updates table structure changed without contract review');
+assert(audit.current_updates_page?.publication_subject_boundary_visible === true, 'Updates page must visibly distinguish publication history from historical subject change');
+assert(audit.current_updates_page?.timeline_items_excluded === true, 'Timeline items must remain excluded from the publication feed');
+assert(audit.current_updates_page?.historical_subject_dates_excluded === true, 'historical subject dates must not become feed publication dates');
+assert(audit.current_updates_page?.machine_feed_endpoint === '/data/update-feed.json', 'Update Feed machine endpoint mismatch');
+assert(audit.current_updates_page?.exposes_before_after === false, 'publication feed unexpectedly exposes structured before/after fields; re-audit required');
+assert(audit.current_updates_page?.exposes_affected_records === false, 'publication feed unexpectedly exposes structured affected-record fields; re-audit required');
+assert(audit.current_updates_page?.exposes_evidence === false, 'publication feed unexpectedly exposes structured evidence linkage; re-audit required');
 
 assert(audit.totals?.scanned_date_signals > 0, 'date signal inventory must not be empty');
 assert(audit.totals?.review_only_date_signals > 0, 'review-only date signals must be inventoried');

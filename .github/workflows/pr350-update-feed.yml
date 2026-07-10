@@ -1,0 +1,130 @@
+name: PR 350 Update Feed
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr350-update-feed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Build deterministic Update Feed artifact
+        run: node scripts/updates/build-update-feed-pr350.mjs artifacts/update-feed-pr350.json
+
+      - name: Validate Update Feed contract
+        run: node scripts/validate-update-feed-pr350.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Astro check
+        shell: bash
+        run: |
+          mkdir -p artifacts/update-feed
+          set -o pipefail
+          npm run check 2>&1 | tee artifacts/update-feed/astro-check.log
+
+      - name: Build site
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee artifacts/update-feed/build.log
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-update-feed.log 2>&1 &
+          echo $! > /tmp/sog-update-feed.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/updates/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-update-feed.log
+          exit 1
+
+      - name: Audit Update Feed desktop and mobile interactions
+        run: node scripts/audit-update-feed-pr350.mjs
+
+      - name: Verify built Update Feed endpoint parity
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { isDeepStrictEqual } from 'node:util';
+          const expected = JSON.parse(fs.readFileSync('artifacts/update-feed-pr350.json', 'utf8'));
+          const built = JSON.parse(fs.readFileSync('dist/data/update-feed.json', 'utf8'));
+          if (!isDeepStrictEqual(built, expected)) throw new Error('built Update Feed endpoint differs from deterministic artifact');
+          if (built.item_count !== built.entries?.length) throw new Error('Update Feed item_count mismatch');
+          if (built.semantics?.date_field !== 'publication_date') throw new Error('Update Feed date field must be publication_date');
+          if (built.semantics?.publication_change_not_subject_change !== true) throw new Error('publication-vs-subject boundary missing');
+          if (built.semantics?.timeline_items_are_feed_items !== false) throw new Error('Timeline items must not become feed items');
+          if (built.semantics?.live_monitoring_feed !== false) throw new Error('Update Feed must not become live monitoring feed');
+          console.log(`Built Update Feed endpoint matches deterministic artifact: ${built.item_count} entries.`);
+          NODE
+
+      - name: Verify built page and manifest boundaries
+        shell: bash
+        run: |
+          test -f dist/updates/index.html
+          test -f dist/data/update-feed.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const html = fs.readFileSync('dist/updates/index.html', 'utf8');
+          if (!html.includes('data-update-feed-page')) throw new Error('built Update Feed page marker missing');
+          if (!html.includes('Two timelines, two different questions')) throw new Error('publication/history boundary explanation missing');
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.update_feed !== '/data/update-feed.json') throw new Error('manifest does not advertise Update Feed endpoint');
+          if (manifest.update_feed?.page !== '/updates/') throw new Error('manifest does not advertise Update Feed page');
+          if (manifest.update_feed?.publication_change_not_subject_change !== true) throw new Error('manifest lost publication-vs-subject boundary');
+          if (manifest.update_feed?.timeline_items_are_feed_items !== false) throw new Error('manifest lost Timeline exclusion');
+          if (manifest.update_feed?.live_monitoring_feed !== false) throw new Error('manifest lost live-monitoring boundary');
+          console.log('Built Update Feed page and manifest boundaries valid.');
+          NODE
+
+      - name: Upload Update Feed audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr350-update-feed-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/update-feed-pr350.json
+            artifacts/update-feed/astro-check.log
+            artifacts/update-feed/build.log
+            artifacts/update-feed/audit.json
+            artifacts/update-feed/desktop-category-filter.png
+            artifacts/update-feed/mobile-category-filter.png
+            dist/data/update-feed.json
+            dist/data/manifest.json

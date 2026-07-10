@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_update_feed_pr350_v1",
+  "source_file": "data/registry-updates.json",
+  "source_endpoint": "/data/update-feed.json",
+  "route": "/updates/",
+  "ordering": "publication_date_desc_then_update_id",
+  "initial_result_limit": 20,
+  "result_limit_increment": 20,
+  "filters": [
+    {"id":"category","label":"Category","query_param":"category"},
+    {"id":"year","label":"Publication year","query_param":"year"},
+    {"id":"route_family","label":"Related route family","query_param":"route_family"}
+  ],
+  "route_family_rules": [
+    {"id":"stablecoin","prefix":"/stablecoin/"},
+    {"id":"stablecoin_index","exact":"/stablecoins/"},
+    {"id":"organization","prefix":"/issuer/"},
+    {"id":"organization_index","exact":"/issuers/"},
+    {"id":"event","prefix":"/event/"},
+    {"id":"event_index","exact":"/events/"},
+    {"id":"guide","prefix":"/guides/"},
+    {"id":"timeline","exact":"/timeline/"},
+    {"id":"access_regulation","exact":"/access-regulation/"},
+    {"id":"compare","exact":"/compare/"},
+    {"id":"methodology","exact":"/methodology/"},
+    {"id":"updates","exact":"/updates/"},
+    {"id":"data","prefix":"/data/"},
+    {"id":"version","exact":"/version.json"},
+    {"id":"other_site_route","prefix":"/"}
+  ],
+  "semantics": {
+    "date_field": "publication_date",
+    "publication_change_not_subject_change": true,
+    "timeline_items_are_feed_items": false,
+    "historical_subject_dates_are_feed_dates": false,
+    "live_monitoring_feed": false,
+    "single_composite_score": false,
+    "risk_ranking": false
+  },
+  "url_contract": {
+    "search_param": "q",
+    "unknown_values_ignored": true,
+    "empty_values_removed": true,
+    "back_forward_restores_state": true
+  },
+  "next_pr": 351
+}

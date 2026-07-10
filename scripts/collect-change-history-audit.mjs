@@ -84,17 +84,24 @@ for (const definition of signalDefinitions) {
 }
 
 const currentPageSource = fs.readFileSync(path.join(root, 'src/pages/updates/index.astro'), 'utf8');
-const updateHistoryTable = currentPageSource.match(/<table data-change-history-table>([\s\S]*?)<\/table>/)?.[1] ?? '';
-const currentHeaders = [...updateHistoryTable.matchAll(/<th>([^<]+)<\/th>/g)].map((match) => match[1].trim());
+const updateFeedConfig = JSON.parse(fs.readFileSync(path.join(root, 'config/update-feed-v1.json'), 'utf8'));
+const updateFeedBuilderSource = fs.readFileSync(path.join(root, 'scripts/updates/build-update-feed-pr350.mjs'), 'utf8');
 const currentPageSignals = {
-  uses_registry_updates: currentPageSource.includes('getRegistryUpdates'),
-  sorts_by_single_date: /\.sort\(\(a, b\) => b\.date\.localeCompare\(a\.date\)\)/.test(currentPageSource),
-  uses_legacy_category: currentPageSource.includes('update.category'),
+  presentation_model: currentPageSource.includes('data-update-feed-page') ? 'filterable_publication_feed' : 'unknown',
+  uses_registry_updates: updateFeedConfig.source_file === legacyUpdatePolicy.source_file
+    && updateFeedBuilderSource.includes("const UPDATES_PATH = 'data/registry-updates.json'"),
+  uses_publication_feed_projection: currentPageSource.includes('getPublicUpdateFeed'),
+  orders_by_publication_date: updateFeedConfig.ordering === 'publication_date_desc_then_update_id',
+  exposes_legacy_category_filter: currentPageSource.includes('data-update-feed-filter-id="category"'),
   uses_public_copy_overlay: currentPageSource.includes('updatePublicCopy'),
-  exposes_before_after: /before|after/i.test(currentHeaders.join(' ')),
-  exposes_affected_records: /affected/i.test(currentHeaders.join(' ')),
-  exposes_evidence: /evidence|source/i.test(currentHeaders.join(' ')),
-  table_headers: currentHeaders
+  publication_subject_boundary_visible: currentPageSource.includes('Two timelines, two different questions')
+    && currentPageSource.includes('Open Change Timeline'),
+  timeline_items_excluded: updateFeedConfig.semantics?.timeline_items_are_feed_items === false,
+  historical_subject_dates_excluded: updateFeedConfig.semantics?.historical_subject_dates_are_feed_dates === false,
+  machine_feed_endpoint: updateFeedConfig.source_endpoint,
+  exposes_before_after: currentPageSource.includes('data-change-before') || currentPageSource.includes('data-change-after'),
+  exposes_affected_records: currentPageSource.includes('data-change-affected-records'),
+  exposes_evidence: currentPageSource.includes('data-change-evidence')
 };
 
 const audit = {
