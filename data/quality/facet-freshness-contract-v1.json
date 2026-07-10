@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_facet_freshness_contract_pr342_v1",
+  "status": "canonical_internal_derivation_contract",
+  "as_of_date": "2026-07-10",
+  "comparison_contract_id": "sog_comparison_readiness_contract_pr336_v1",
+  "market_access_governance_id": "sog_market_access_governance_v1_pr341",
+  "freshness_states": [
+    "fresh",
+    "aging",
+    "stale",
+    "undated",
+    "no_canonical_record",
+    "not_applicable"
+  ],
+  "separation_contract": {
+    "freshness_is_readiness": false,
+    "freshness_is_confidence": false,
+    "freshness_is_truth": false,
+    "freshness_is_safety_score": false,
+    "single_composite_freshness_score": false,
+    "historical_effective_date_may_be_used_as_review_anchor": false,
+    "future_date_clamp_allowed": false
+  },
+  "threshold_profiles": {
+    "standard_review": {"fresh_max_days": 90, "aging_max_days": 180},
+    "reserve_disclosure": {"fresh_max_days": 45, "aging_max_days": 90},
+    "reserve_report": {"fresh_max_days": 45, "aging_max_days": 90},
+    "redemption_terms": {"fresh_max_days": 90, "aging_max_days": 180},
+    "legal_review": {"fresh_max_days": 180, "aging_max_days": 365},
+    "regulatory_review": {"fresh_max_days": 180, "aging_max_days": 365},
+    "market_access": {"fresh_max_days": 30, "aging_max_days": 90},
+    "evidence_review": {"fresh_max_days": 90, "aging_max_days": 180},
+    "known_unknown_review": {"fresh_max_days": 90, "aging_max_days": 180}
+  },
+  "source_boundaries": {
+    "canonical_only": true,
+    "allowed_source_families": [
+      "stable_assets",
+      "profiles",
+      "reserve_reports",
+      "legal_profiles",
+      "regulatory_notes",
+      "market_access_records",
+      "evidence",
+      "known_unknowns"
+    ],
+    "excluded_source_families": [
+      "monitoring_observations",
+      "monitoring_candidates",
+      "editorial_research",
+      "candidate_research",
+      "news_discovery",
+      "private_notes",
+      "live_price",
+      "market_cap",
+      "apy",
+      "risk_feed"
+    ]
+  },
+  "dimension_rules": [
+    {"dimension_id":"identity_consistency","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date","inherited_review_anchor":false},
+    {"dimension_id":"issuer_asset_boundary","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_relationship_surface","inherited_review_anchor":true},
+    {"dimension_id":"lifecycle_semantics","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_classification_surface","inherited_review_anchor":true},
+    {"dimension_id":"reference_target_and_currency","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_classification_surface","inherited_review_anchor":true},
+    {"dimension_id":"asset_class","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_classification_surface","inherited_review_anchor":true},
+    {"dimension_id":"backing_model_representation","anchor_kind":"reserve_profile_as_of_date","threshold_profile":"reserve_disclosure","no_date_state":"undated","date_semantics":"profile_as_of_date","inherited_review_anchor":false},
+    {"dimension_id":"stabilization_mechanism_representation","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_classification_surface","inherited_review_anchor":true},
+    {"dimension_id":"reserve_disclosure_comparability","anchor_kind":"reserve_profile_as_of_date","threshold_profile":"reserve_disclosure","no_date_state":"undated","date_semantics":"profile_as_of_date","inherited_review_anchor":false},
+    {"dimension_id":"reserve_report_date_semantics","anchor_kind":"latest_reserve_report_date","threshold_profile":"reserve_report","no_record_state":"no_canonical_record","no_date_state":"undated","date_semantics":"source_report_date","inherited_review_anchor":false},
+    {"dimension_id":"issuance_comparability","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_classification_surface","inherited_review_anchor":true},
+    {"dimension_id":"redemption_comparability","anchor_kind":"redemption_profile_as_of_date","threshold_profile":"redemption_terms","no_date_state":"undated","date_semantics":"profile_as_of_date","inherited_review_anchor":false},
+    {"dimension_id":"legal_classification_comparability","anchor_kind":"legal_profile_review_date","threshold_profile":"legal_review","no_date_state":"undated","date_semantics":"explicit_legal_review_date_only","inherited_review_anchor":false},
+    {"dimension_id":"regulatory_action_scope","anchor_kind":"latest_regulatory_review_date","threshold_profile":"regulatory_review","no_record_state":"no_canonical_record","no_date_state":"undated","date_semantics":"explicit_review_or_last_checked_date_only","inherited_review_anchor":false},
+    {"dimension_id":"market_access_applicability","anchor_kind":"latest_market_access_observed_at","threshold_profile":"market_access","no_record_state":"no_canonical_record","no_date_state":"undated","date_semantics":"observation_date","inherited_review_anchor":false},
+    {"dimension_id":"launch_date_semantics","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_not_launch_date","inherited_review_anchor":false},
+    {"dimension_id":"verification_date_semantics","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date","inherited_review_anchor":false},
+    {"dimension_id":"unknown_state_semantics","anchor_kind":"asset_last_verified_at","threshold_profile":"standard_review","no_date_state":"undated","date_semantics":"review_date_proxy_for_unknown_state_surface","inherited_review_anchor":true},
+    {"dimension_id":"evidence_scope_and_relation_depth","anchor_kind":"latest_evidence_accessed_at","threshold_profile":"evidence_review","no_record_state":"no_canonical_record","no_date_state":"undated","date_semantics":"evidence_access_date","inherited_review_anchor":false},
+    {"dimension_id":"known_unknown_visibility","anchor_kind":"latest_known_unknown_checked_at","threshold_profile":"known_unknown_review","no_record_state":"no_canonical_record","no_date_state":"undated","date_semantics":"known_unknown_last_checked_date","inherited_review_anchor":false}
+  ],
+  "output_contract": {
+    "asset_count": 110,
+    "dimension_count": 19,
+    "cell_count": 2090,
+    "per_asset_per_dimension_required": true,
+    "single_composite_score_forbidden": true,
+    "public_output": false,
+    "next_pr": 343
+  }
+}
