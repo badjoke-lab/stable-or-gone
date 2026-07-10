@@ -2,7 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/compare-v1.css';
 import '../../styles/compare-v1-accessibility.css';
+import '../../styles/compare-presets.css';
 import compareConfig from '../../../config/compare-v1-dimensions.json';
+import comparePresets from '../../../config/compare-v1-presets.json';
 import { getPublicComparisonProjection } from '../../lib/comparisonData.mjs';
 
 type CompareAssetOption = {
@@ -12,10 +14,26 @@ type CompareAssetOption = {
   symbol: string | null;
 };
 
+type CompareGroupOption = {
+  id: string;
+  label: string;
+  description: string;
+};
+
+type ComparePresetOption = {
+  id: string;
+  label: string;
+  description: string;
+  asset_slugs: string[];
+  visible_group_ids: string[];
+};
+
 const projection = getPublicComparisonProjection();
 const assets: CompareAssetOption[] = projection.assets
   .map((asset: CompareAssetOption) => ({ asset_id: asset.asset_id, slug: asset.slug, name: asset.name, symbol: asset.symbol }))
   .sort((left: CompareAssetOption, right: CompareAssetOption) => left.name.localeCompare(right.name) || left.slug.localeCompare(right.slug));
+const groups: CompareGroupOption[] = compareConfig.groups.map((group: CompareGroupOption) => ({ id: group.id, label: group.label, description: group.description }));
+const presets: ComparePresetOption[] = comparePresets.presets;
 const title = 'Compare Stablecoin Records — Stable or Gone';
 const description = 'Compare two to four canonical stablecoin records across nineteen dimensions while keeping values, Comparison Readiness, freshness, and explicit unknowns separate.';
 const jsonLd = {
@@ -27,6 +45,7 @@ const jsonLd = {
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
 };
 const configJson = JSON.stringify(compareConfig).replace(/</g, '\u003c');
+const presetJson = JSON.stringify(comparePresets).replace(/</g, '\u003c');
 ---
 <BaseLayout title={title} description={description} canonicalPath="/compare/" jsonLd={jsonLd}>
   <div class="compare-page" data-compare-page data-min-assets="2" data-max-assets="4">
@@ -48,10 +67,29 @@ const configJson = JSON.stringify(compareConfig).replace(/</g, '\u003c');
         <div>
           <p class="compare-eyebrow">Selection</p>
           <h2 id="compare-selection-heading">Choose records</h2>
-          <p>Select two to four assets. The URL updates with the selected slugs so the comparison state can be shared.</p>
+          <p>Select two to four assets manually or apply a bounded preset. Presets only choose assets and visible facet groups; they never change canonical values, readiness, freshness, or scoring policy.</p>
         </div>
         <p class="compare-projection-note"><a href="/data/comparison.json">Machine-readable projection</a> · canonical data only</p>
       </div>
+
+      <section class="compare-preset-panel" aria-labelledby="compare-preset-heading">
+        <div class="compare-preset-heading">
+          <div>
+            <p class="compare-eyebrow">Quick comparisons</p>
+            <h3 id="compare-preset-heading">Apply a preset</h3>
+          </div>
+          <p>Preset state is shareable in the URL and remains editable after application.</p>
+        </div>
+        <div class="compare-preset-grid" data-compare-preset-list>
+          {presets.map((preset: ComparePresetOption) => (
+            <button class="compare-preset" type="button" data-compare-preset-id={preset.id} aria-pressed="false">
+              <strong>{preset.label}</strong>
+              <span>{preset.description}</span>
+              <small>{preset.asset_slugs.join(' · ')}</small>
+            </button>
+          ))}
+        </div>
+      </section>
 
       <div class="compare-slot-grid" aria-label="Stablecoin comparison selection">
         {[0, 1, 2, 3].map((index) => (
@@ -65,12 +103,28 @@ const configJson = JSON.stringify(compareConfig).replace(/</g, '\u003c');
         ))}
       </div>
 
+      <fieldset class="compare-group-filter" data-compare-group-filter>
+        <legend>Visible facet groups</legend>
+        <div class="compare-group-filter__grid">
+          {groups.map((group: CompareGroupOption) => (
+            <label class="compare-group-toggle">
+              <input type="checkbox" value={group.id} data-compare-group-toggle checked />
+              <span>
+                <strong>{group.label}</strong>
+                <small>{group.description}</small>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       <div class="compare-actions">
         <button class="ui-button" type="button" data-compare-clear>Clear selection</button>
         <button class="ui-button" type="button" data-compare-copy>Copy comparison link</button>
         <span data-compare-link-status aria-live="polite"></span>
       </div>
       <div class="compare-selection-status" data-compare-status aria-live="polite">Choose at least two stablecoins to start a comparison.</div>
+      <div class="compare-preset-status" data-compare-preset-status aria-live="polite"></div>
       <div class="compare-alert" data-compare-alert role="alert" aria-live="assertive"></div>
     </section>
 
@@ -103,11 +157,13 @@ const configJson = JSON.stringify(compareConfig).replace(/</g, '\u003c');
         <article><h3>Readiness</h3><p>Structural comparison state. Explicit unknowns are preserved instead of being converted to false certainty.</p></article>
         <article><h3>Freshness</h3><p>Age of the permitted canonical review, as-of, observation, access, or last-checked anchor.</p></article>
       </div>
-      <p class="compare-disclaimer">Historical registry context only. This comparison is not a ranking, recommendation, risk score, legal opinion, or investment assessment.</p>
+      <p class="compare-disclaimer">Historical registry context only. Presets are editorial shortcuts for selecting records and facet groups; this comparison is not a ranking, recommendation, risk score, legal opinion, or investment assessment.</p>
     </section>
   </div>
   <script id="compare-dimension-config" type="application/json" set:html={configJson}></script>
+  <script id="compare-preset-config" type="application/json" set:html={presetJson}></script>
   <script>
     import '../../scripts/compare-v1';
+    import '../../scripts/compare-presets';
   </script>
 </BaseLayout>

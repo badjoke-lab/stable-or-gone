@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_compare_presets_pr345_v1",
+  "selection_contract": {
+    "minimum_assets": 2,
+    "maximum_assets": 4,
+    "presets_change_values": false,
+    "presets_change_readiness": false,
+    "presets_change_freshness": false,
+    "presets_create_scores": false
+  },
+  "presets": [
+    {
+      "id": "usd-issuer-comparison",
+      "label": "USD issuer-backed",
+      "description": "Compare four active USD-backed issuer models without turning reserve or redemption differences into a score.",
+      "asset_slugs": ["usdt", "usdc", "rlusd", "fdusd"],
+      "visible_group_ids": ["identity_state", "mechanism_reserves", "legal_access", "evidence_uncertainty"]
+    },
+    {
+      "id": "model-contrast",
+      "label": "Model contrast",
+      "description": "Compare fiat-backed, multi-collateral, hybrid, and failed algorithmic stablecoin histories.",
+      "asset_slugs": ["usdc", "dai", "frax", "ust"],
+      "visible_group_ids": ["identity_state", "mechanism_reserves"]
+    },
+    {
+      "id": "lifecycle-outcomes",
+      "label": "Lifecycle outcomes",
+      "description": "Compare active, discontinued, failed, and wind-down records while keeping lifecycle separate from risk scoring.",
+      "asset_slugs": ["usdt", "busd", "ust", "fei"],
+      "visible_group_ids": ["identity_state", "evidence_uncertainty"]
+    },
+    {
+      "id": "protocol-stablecoins",
+      "label": "Protocol stablecoins",
+      "description": "Compare protocol-based stablecoin mechanisms, reserve structures, redemption paths, and explicit unknowns.",
+      "asset_slugs": ["dai", "usds", "frax", "mim"],
+      "visible_group_ids": ["mechanism_reserves", "evidence_uncertainty"]
+    },
+    {
+      "id": "legal-access-focus",
+      "label": "Legal and access focus",
+      "description": "Focus the matrix on jurisdiction-scoped legal, regulatory, market-access, evidence, and uncertainty context.",
+      "asset_slugs": ["usdc", "rlusd", "busd", "usdp"],
+      "visible_group_ids": ["legal_access", "evidence_uncertainty"]
+    }
+  ]
+}
