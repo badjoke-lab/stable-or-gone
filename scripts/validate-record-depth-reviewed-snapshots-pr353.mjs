@@ -36,7 +36,7 @@ expect(isDeepStrictEqual(summarySnapshot.summary, baseline.summary), 'summary sn
 
 expect(queueSnapshot.schema_version === baseline.schema_version, 'queue snapshot schema version mismatch');
 expect(queueSnapshot.baseline_id === baseline.baseline_id, 'queue snapshot baseline ID mismatch');
-expect(queueSnapshot.status === 'reviewed_internal_planning_queue', 'queue snapshot status mismatch');
+expect(queueSnapshot.status === 'internal_reviewed_planning_queue', 'queue snapshot status mismatch');
 expect(queueSnapshot.public_output === false, 'queue snapshot must remain internal');
 expect(queueSnapshot.asset_rank === false, 'queue snapshot must not rank assets');
 expect(queueSnapshot.review_pr === 353, 'queue snapshot review PR mismatch');
