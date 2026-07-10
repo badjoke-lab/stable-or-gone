@@ -1,0 +1,111 @@
+name: PR 347 Access Regulation Explorer
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr347-access-regulation-explorer'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate Access Regulation Explorer source contract
+        run: node scripts/validate-access-regulation-explorer-pr347.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-access-regulation-explorer.log 2>&1 &
+          echo $! > /tmp/sog-access-regulation-explorer.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/access-regulation/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-access-regulation-explorer.log
+          exit 1
+
+      - name: Audit Explorer desktop and mobile interactions
+        run: node scripts/audit-access-regulation-explorer-pr347.mjs
+
+      - name: Verify built Explorer and index contracts
+        shell: bash
+        run: |
+          test -f dist/access-regulation/index.html
+          test -f dist/data/access-regulation-index.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const index = JSON.parse(fs.readFileSync('dist/data/access-regulation-index.json', 'utf8'));
+          if (index.asset_count !== 110) throw new Error(`asset_count must remain 110, found ${index.asset_count}`);
+          if (index.filters?.length !== 14) throw new Error(`index filter axis count must remain 14, found ${index.filters?.length}`);
+          if (index.single_composite_score !== false) throw new Error('Explorer source index must not emit composite score');
+          if (index.risk_ranking !== false) throw new Error('Explorer source index must not emit risk ranking');
+          const html = fs.readFileSync('dist/access-regulation/index.html', 'utf8');
+          if (!html.includes('data-ar-explorer')) throw new Error('built Explorer page marker missing');
+          if (!html.includes('No Market Access Record')) throw new Error('built Explorer absence-semantics notice missing');
+          console.log('Built Explorer and source index contracts valid.');
+          NODE
+
+      - name: Verify built manifest Explorer discovery
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.access_regulation_index?.explorer !== '/access-regulation/') throw new Error('manifest does not advertise Explorer route');
+          if (!manifest.main_routes?.includes('/access-regulation/')) throw new Error('manifest main routes do not include Explorer');
+          if (!manifest.main_routes?.includes('/compare/')) throw new Error('manifest main routes do not include Compare');
+          if (manifest.access_regulation_index?.no_absence_inference !== true) throw new Error('manifest lost no-absence-inference boundary');
+          if (manifest.access_regulation_index?.risk_ranking !== false) throw new Error('manifest lost no-ranking boundary');
+          console.log('Built manifest Explorer discovery and safety boundaries valid.');
+          NODE
+
+      - name: Upload Explorer audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr347-access-regulation-explorer-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/access-regulation-explorer/audit.json
+            artifacts/access-regulation-explorer/desktop-regulatory-presence.png
+            artifacts/access-regulation-explorer/mobile-regulatory-action.png
