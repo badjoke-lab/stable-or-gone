@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_non_growth_checkpoint",
+  "checkpoint_id": "sog_comparison_readiness_normalization_110_checkpoint_pr338_2026_07_10",
+  "checkpoint_kind": "non_growth_normalization_checkpoint",
+  "recorded_at": "2026-07-10",
+  "registry_version": "pr338-comparison-normalization",
+  "asset_count": 110,
+  "source_checkpoint_id": "sog_controlled_growth_110_checkpoint_pr335_2026_07_09",
+  "previous_history_checkpoint_id": "sog_controlled_growth_110_checkpoint_pr335_2026_07_09",
+  "normalization_pr": 338,
+  "notes": "Reviewed forward checkpoint for the bounded PR #338 Comparison Readiness asset_class normalization. The source 110-asset growth checkpoint remains immutable and canonical counts do not change."
+}
