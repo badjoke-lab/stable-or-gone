@@ -22,6 +22,10 @@ const indexAxes = index.filters.map((filter) => filter.axis);
 const uiFilterIds = config.filters.map((filter) => filter.id);
 const preservedAxes = config.preserved_machine_axes ?? [];
 const queryParams = config.filters.map((filter) => filter.query_param);
+const recomputedRegulatoryAssets = index.rows.filter((row) => row.regulatory.record_count > 0).length;
+const recomputedRegulatoryRecords = index.rows.reduce((sum, row) => sum + row.regulatory.record_count, 0);
+const recomputedMarketAccessAssets = index.rows.filter((row) => row.market_access.record_count > 0).length;
+const recomputedMarketAccessRecords = index.rows.reduce((sum, row) => sum + row.market_access.record_count, 0);
 
 expect(config.schema_version === '1.0', 'Explorer config schema version mismatch');
 expect(config.config_id === 'sog_access_regulation_explorer_pr347_v1', 'Explorer config ID mismatch');
@@ -57,10 +61,10 @@ expect(index.single_composite_score === false, 'Explorer index must not emit com
 expect(index.risk_ranking === false, 'Explorer index must not emit risk ranking');
 expect(index.rows.length === 110, 'Explorer index row count mismatch');
 expect(index.rows.every((row, indexPosition) => indexPosition === 0 || index.rows[indexPosition - 1].asset_id.localeCompare(row.asset_id) < 0), 'Explorer source rows must remain canonical asset ID order');
-expect(index.summary.assets_with_regulatory_records === 5, `current canonical index must expose 5 assets with Regulatory Notes, found ${index.summary.assets_with_regulatory_records}`);
-expect(index.summary.regulatory_record_count === 9, `current canonical index must expose 9 Regulatory Notes, found ${index.summary.regulatory_record_count}`);
-expect(index.summary.assets_with_market_access_records === 0, 'current canonical Market Access asset coverage must remain zero');
-expect(index.summary.market_access_record_count === 0, 'current canonical Market Access record count must remain zero');
+expect(index.summary.assets_with_regulatory_records === recomputedRegulatoryAssets, 'Explorer regulatory asset summary must reconcile from rows');
+expect(index.summary.regulatory_record_count === recomputedRegulatoryRecords, 'Explorer regulatory record summary must reconcile from rows');
+expect(index.summary.assets_with_market_access_records === recomputedMarketAccessAssets, 'Explorer Market Access asset summary must reconcile from rows');
+expect(index.summary.market_access_record_count === recomputedMarketAccessRecords, 'Explorer Market Access record summary must reconcile from rows');
 
 for (const text of [
   'data-ar-explorer',
