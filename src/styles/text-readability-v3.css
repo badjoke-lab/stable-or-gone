@@ -1,0 +1,103 @@
+:root {
+  --body: #b8cbd2;
+  --muted: #9ab0ba;
+  --sog-ink-body: #b8cbd2;
+  --sog-ink-muted: #9ab0ba;
+  --sog-ink-quiet: #829aa5;
+  --sog-text-muted: #9ab0ba;
+  --shell-text-muted: #9ab0ba;
+}
+
+/*
+ * Text hierarchy contract
+ * ink   = headings, primary labels, canonical values
+ * body  = prose and explanatory copy meant for continuous reading
+ * muted = secondary labels, navigation, notes, and table headings
+ * quiet = dates, compact metadata, and tertiary context only
+ */
+
+:where(
+  .home-masthead__title p,
+  .home-material-list p,
+  .home-guide-list p,
+  .home-reference-index nav a span,
+  .guide-index-title p,
+  .guide-index-section-heading p,
+  .guide-index-table p,
+  .guide-index-mobile p,
+  .guide-article-deck,
+  .guide-article-content > .hero p,
+  .guide-article-content > section p,
+  .guide-article-content > section li,
+  .guide-related-records p,
+  .guide-article-content > .section-grid p,
+  .editorial-page-title p,
+  .reference-section-heading p,
+  .utility-section-heading p,
+  .reference-entry-grid p,
+  .reference-actions span,
+  .reference-actions p,
+  .longform-content > section p,
+  .longform-content > section li,
+  .longform-content > .support-callout p,
+  .utility-action-grid p,
+  .contact-actions p,
+  .section-heading > p,
+  .support-intro-body p,
+  .support-footer-body p,
+  .support-callout p,
+  .mobile-record-list p,
+  .mobile-card-grid p,
+  .stablecoin-assessment-copy p,
+  .stablecoin-material-change p,
+  .stablecoin-control-note,
+  .stablecoin-related-guides p
+) {
+  color: var(--sog-ink-body) !important;
+}
+
+:where(
+  .home-masthead__edition,
+  .home-register-strip a,
+  .home-section-heading > a,
+  .home-registry-links a,
+  .guide-index-overline,
+  .guide-index-ledger dt,
+  .guide-article-overline,
+  .guide-article-meta dt,
+  .guide-article-toc a,
+  .guide-article-content blockquote,
+  .guide-article-content th,
+  .editorial-page-overline,
+  .editorial-page-ledger dt,
+  .editorial-page-ledger small,
+  .reference-table th,
+  .longform-toc a,
+  .longform-content th,
+  .stablecoin-dossier-overline,
+  .stablecoin-record-id,
+  .stablecoin-dossier-facts dt,
+  .stablecoin-identity-ledger dt,
+  .stablecoin-mechanism-ledger dt,
+  .stablecoin-control-summary dt,
+  .stablecoin-section-heading > span,
+  .stablecoin-dossier-nav a,
+  .stablecoin-dossier th,
+  .stablecoin-model-history time,
+  .stablecoin-model-history small,
+  .stablecoin-empty-state
+) {
+  color: var(--sog-ink-muted) !important;
+}
+
+:where(
+  .home-search__heading p,
+  .home-search__field::placeholder,
+  .home-search__popular,
+  .home-search__copy span,
+  .home-material-list__meta,
+  .home-registry-state__note,
+  .home-guide-list__meta
+) {
+  color: var(--sog-ink-quiet) !important;
+}
