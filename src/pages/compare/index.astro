@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/compare-v1.css';
+import compareConfig from '../../../config/compare-v1-dimensions.json';
+import { getPublicComparisonProjection } from '../../lib/comparisonData.mjs';
+
+const projection = getPublicComparisonProjection();
+const assets = projection.assets
+  .map((asset) => ({ asset_id: asset.asset_id, slug: asset.slug, name: asset.name, symbol: asset.symbol }))
+  .sort((left, right) => left.name.localeCompare(right.name) || left.slug.localeCompare(right.slug));
+const title = 'Compare Stablecoin Records — Stable or Gone';
+const description = 'Compare two to four canonical stablecoin records across nineteen dimensions while keeping values, Comparison Readiness, freshness, and explicit unknowns separate.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Compare stablecoin records',
+  url: 'https://sog.badjoke-lab.com/compare/',
+  description,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }
+};
+const configJson = JSON.stringify(compareConfig).replace(/</g, '\u003c');
+---
+<BaseLayout title={title} description={description} canonicalPath="/compare/" jsonLd={jsonLd}>
+  <div class="compare-page" data-compare-page data-min-assets="2" data-max-assets="4">
+    <header class="compare-masthead">
+      <div class="compare-masthead__copy">
+        <p class="compare-eyebrow">Register / Deterministic comparison</p>
+        <h1>Compare stablecoin records</h1>
+        <p>Place two to four canonical records side by side. Values, readiness, freshness, and unresolved states remain separate; no score or ranking is generated.</p>
+      </div>
+      <dl class="compare-contract-summary" aria-label="Comparison projection contract">
+        <div><dt>Assets</dt><dd>{projection.asset_count}</dd></div>
+        <div><dt>Facets</dt><dd>{projection.dimension_count}</dd></div>
+        <div><dt>Score</dt><dd>None</dd></div>
+      </dl>
+    </header>
+
+    <section class="compare-controls" aria-labelledby="compare-selection-heading">
+      <div class="compare-section-heading">
+        <div>
+          <p class="compare-eyebrow">Selection</p>
+          <h2 id="compare-selection-heading">Choose records</h2>
+          <p>Select two to four assets. The URL updates with the selected slugs so the comparison state can be shared.</p>
+        </div>
+        <p class="compare-projection-note"><a href="/data/comparison.json">Machine-readable projection</a> · canonical data only</p>
+      </div>
+
+      <div class="compare-slot-grid" aria-label="Stablecoin comparison selection">
+        {[0, 1, 2, 3].map((index) => (
+          <label class="compare-slot">
+            <span>Asset {index + 1}</span>
+            <select class="ui-field" data-compare-slot data-slot-index={index} aria-label={`Comparison asset ${index + 1}`}>
+              <option value="">Choose a stablecoin</option>
+              {assets.map((asset) => <option value={asset.slug}>{asset.name}{asset.symbol ? ` (${asset.symbol})` : ''}</option>)}
+            </select>
+          </label>
+        ))}
+      </div>
+
+      <div class="compare-actions">
+        <button class="ui-button" type="button" data-compare-clear>Clear selection</button>
+        <button class="ui-button" type="button" data-compare-copy>Copy comparison link</button>
+        <span data-compare-link-status aria-live="polite"></span>
+      </div>
+      <div class="compare-selection-status" data-compare-status aria-live="polite">Choose at least two stablecoins to start a comparison.</div>
+      <div class="compare-alert" data-compare-alert role="alert" aria-live="assertive"></div>
+    </section>
+
+    <section class="compare-matrix-section" aria-labelledby="compare-matrix-heading">
+      <div class="compare-section-heading">
+        <div>
+          <p class="compare-eyebrow">Comparison matrix</p>
+          <h2 id="compare-matrix-heading">Nineteen canonical facets</h2>
+          <p>Readiness reports whether a facet is structurally usable for comparison. Freshness reports the age or absence of its explicit canonical date anchor. Neither is a quality or safety score.</p>
+        </div>
+      </div>
+
+      <div class="compare-empty" data-compare-empty>
+        <strong>No records selected</strong>
+        <p>Choose two to four stablecoins above. Unknown, undated, stale, and missing-record states remain explicit in the matrix.</p>
+      </div>
+
+      <div class="compare-output" data-compare-output hidden>
+        <div class="compare-column-header" data-compare-column-header></div>
+        <div class="compare-groups" data-compare-groups></div>
+      </div>
+      <noscript><p class="compare-noscript">JavaScript is required for the interactive comparison matrix. The same canonical projection is available at <a href="/data/comparison.json">/data/comparison.json</a>.</p></noscript>
+    </section>
+
+    <section class="compare-method-note" aria-labelledby="compare-method-heading">
+      <p class="compare-eyebrow">Reading the matrix</p>
+      <h2 id="compare-method-heading">Separate facts, separate states</h2>
+      <div class="compare-method-grid">
+        <article><h3>Value</h3><p>The canonical registry value or bounded record set for that facet.</p></article>
+        <article><h3>Readiness</h3><p>Structural comparison state. Explicit unknowns are preserved instead of being converted to false certainty.</p></article>
+        <article><h3>Freshness</h3><p>Age of the permitted canonical review, as-of, observation, access, or last-checked anchor.</p></article>
+      </div>
+      <p class="compare-disclaimer">Historical registry context only. This comparison is not a ranking, recommendation, risk score, legal opinion, or investment assessment.</p>
+    </section>
+  </div>
+  <script id="compare-dimension-config" type="application/json" set:html={configJson}></script>
+  <script>
+    import '../../scripts/compare-v1';
+  </script>
+</BaseLayout>
