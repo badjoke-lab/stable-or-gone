@@ -103,6 +103,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/about/', source_file: 'src/pages/about/index.astro', output_kind: 'html', group: 'project', role: 'project_about', decision: 'keep', navigation: 'project' }),
   Object.freeze({ pattern: '/ai.txt', source_file: 'src/pages/ai.txt.ts', output_kind: 'text', group: 'data_access', role: 'ai_entrypoint', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/contact/', source_file: 'src/pages/contact/index.astro', output_kind: 'html', group: 'project', role: 'corrections_and_submissions', decision: 'keep', navigation: 'utility' }),
+  Object.freeze({ pattern: '/data/comparison.json', source_file: 'src/pages/data/comparison.json.ts', output_kind: 'json', group: 'data_access', role: 'deterministic_comparison_projection', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/data/manifest.json', source_file: 'src/pages/data/manifest.json.ts', output_kind: 'json', group: 'data_access', role: 'public_data_manifest', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/data/stats-history.json', source_file: 'src/pages/data/stats-history.json.ts', output_kind: 'json', group: 'data_access', role: 'statistics_checkpoint_history', decision: 'add', navigation: 'stats' }),
   Object.freeze({ pattern: '/data/stats.json', source_file: 'src/pages/data/stats.json.ts', output_kind: 'json', group: 'data_access', role: 'current_registry_statistics', decision: 'add', navigation: 'stats' }),
