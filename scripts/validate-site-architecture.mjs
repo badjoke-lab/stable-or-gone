@@ -14,10 +14,10 @@ const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
 const routeMap = new Map(siteArchitectureRoutes.map((route) => [route.pattern, route]));
 
 check(audit.schema_version === '1.0', 'architecture schema changed');
-check(audit.totals?.route_patterns === 40, 'route count must include Timeline UI, timeline projection, Explorer, comparison, Japan guide, and stats routes');
-check(audit.totals?.page_source_files === 40, 'page source count must include Timeline UI/projection and all existing routes');
-check(audit.totals?.html_route_patterns === 30, 'HTML route count must include Timeline and Access & Regulation Explorer');
-check(audit.totals?.machine_readable_route_patterns === 10, 'machine route count must include timeline, access/regulation, comparison, and stats JSON routes');
+check(audit.totals?.route_patterns === 41, 'route count must include Update Feed endpoint, Timeline UI/projection, Explorer, comparison, Japan guide, and stats routes');
+check(audit.totals?.page_source_files === 41, 'page source count must include Update Feed endpoint and all existing routes');
+check(audit.totals?.html_route_patterns === 30, 'HTML route count changed unexpectedly');
+check(audit.totals?.machine_readable_route_patterns === 11, 'machine route count must include update feed, timeline, access/regulation, comparison, and stats JSON routes');
 check(audit.totals?.dynamic_route_families === 3, 'dynamic route count changed');
 for (const key of ['duplicate_routes', 'navigation_without_route', 'declared_without_source', 'configured_without_source', 'source_without_configuration', 'unassigned_routes']) check(audit.totals?.[key] === 0, `inventory failure: ${key}`);
 
@@ -65,6 +65,11 @@ check(routeMap.get('/data/change-timeline.json')?.navigation === 'data_manifest'
 check(routeMap.get('/timeline/')?.decision === 'add', 'PR #349 Timeline UI route must be marked add');
 check(routeMap.get('/timeline/')?.role === 'change_timeline_ui', 'PR #349 Timeline UI role mismatch');
 check(routeMap.get('/timeline/')?.navigation === 'registry', 'PR #349 Timeline UI must be in Registry navigation');
+check(routeMap.get('/updates/')?.role === 'registry_updates', 'PR #350 Update Feed page role mismatch');
+check(routeMap.get('/updates/')?.navigation === 'project', 'PR #350 Update Feed page must remain Project navigation');
+check(routeMap.get('/data/update-feed.json')?.decision === 'add', 'PR #350 Update Feed endpoint must be marked add');
+check(routeMap.get('/data/update-feed.json')?.role === 'registry_publication_feed', 'PR #350 Update Feed endpoint role mismatch');
+check(routeMap.get('/data/update-feed.json')?.navigation === 'data_manifest', 'PR #350 Update Feed endpoint must use data manifest discovery');
 
 const validation = {
   schema_version: '1.0',
@@ -78,7 +83,7 @@ const validation = {
     grouped_navigation_items: grouped.length,
     utility_navigation_items: utilities.length,
     implemented_navigation_items: current.length,
-    route_changes: 10,
+    route_changes: 11,
     failures: failures.length
   },
   implemented_navigation: current,
