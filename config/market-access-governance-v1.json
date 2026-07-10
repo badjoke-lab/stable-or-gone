@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "governance_id": "sog_market_access_governance_v1_pr341",
+  "status": "canonical_contract",
+  "record_schema": "schemas/market-access-record-v1.schema.json",
+  "canonical_data_path": "data/market-access-records-v1.json",
+  "record_unit": [
+    "asset_id",
+    "jurisdiction.country_code",
+    "jurisdiction.subdivision_code",
+    "platform.name",
+    "platform.service",
+    "function",
+    "access_state",
+    "effective_from"
+  ],
+  "identity_rule": "One canonical record represents one asset, jurisdiction, platform/service, function, access state, and effective-from date. Multi-function source rows must be flattened before canonical review.",
+  "promotion_policy": {
+    "automatic_promotion": false,
+    "review_required": true,
+    "editorial_research_is_canonical_source": false,
+    "monitoring_output_is_canonical_source": false,
+    "minimum_canonical_evidence_records": 1,
+    "required_checks": [
+      "asset_exists_in_canonical_registry",
+      "jurisdiction_is_explicit",
+      "platform_and_service_are_explicit",
+      "single_function_is_explicit",
+      "access_state_is_explicit",
+      "effective_from_is_source_supported",
+      "observed_at_is_recorded",
+      "network_scope_is_explicit_or_unknown",
+      "customer_scope_is_explicit_or_unknown",
+      "canonical_evidence_ids_exist",
+      "claim_scope_does_not_exceed_source_scope",
+      "no_country_wide_inference_from_single_platform",
+      "no_illegality_inference_from_registry_absence",
+      "future_state_changes_are_new_dated_records"
+    ]
+  },
+  "source_policy": {
+    "preferred_layers": [
+      "regulator_or_official_register",
+      "platform_or_service_provider",
+      "issuer_or_protocol",
+      "reputable_secondary_source"
+    ],
+    "availability_claim_requires": [
+      "platform_or_service_provider_or_regulator_evidence"
+    ],
+    "legal_route_claim_requires": [
+      "regulator_or_official_register_or_provider_legal_characterization"
+    ],
+    "marketing_language_must_not_be_promoted_to": [
+      "government_guarantee",
+      "government_recommendation",
+      "universal_jurisdiction_availability",
+      "universal_legal_approval"
+    ]
+  },
+  "temporal_policy": {
+    "append_history": true,
+    "backfill_future_state_into_old_record": false,
+    "effective_to_may_be_null_for_current_state": true,
+    "supersession_requires_new_record": true,
+    "state_change_requires_new_effective_from": true
+  },
+  "publication_policy": {
+    "raw_monitoring_public": false,
+    "unreviewed_candidates_public": false,
+    "reviewed_canonical_records_public": true,
+    "empty_canonical_foundation_public_count": 0
+  },
+  "pr341_boundary": {
+    "create_schema_and_governance": true,
+    "create_empty_canonical_entrypoint": true,
+    "review_pr339_migration_eligibility": true,
+    "promote_pr339_rows_to_canonical": false,
+    "change_comparison_readiness_output": false,
+    "publish_raw_monitoring": false
+  }
+}

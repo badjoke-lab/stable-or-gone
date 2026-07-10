@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sog.badjoke-lab.com/schema/market-access-record-v1.schema.json",
+  "title": "Stable or Gone Market Access Record v1",
+  "description": "Canonical provider-scoped, function-scoped, jurisdiction-scoped and time-bounded market-access observation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schema_version",
+    "asset_id",
+    "jurisdiction",
+    "platform",
+    "function",
+    "access_state",
+    "effective_from",
+    "observed_at",
+    "network_scope",
+    "customer_scope",
+    "conditions",
+    "evidence_ids",
+    "confidence",
+    "review_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^sog_ma_[a-z0-9_]+$"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "asset_id": {
+      "type": "string",
+      "pattern": "^sog_st_[a-z0-9_]+$"
+    },
+    "jurisdiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["country_code"],
+      "properties": {
+        "country_code": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "subdivision_code": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z]{2}-[A-Z0-9]{1,3}$"
+        }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "service"],
+      "properties": {
+        "organization_id": {
+          "type": ["string", "null"],
+          "pattern": "^sog_(issuer|org)_[a-z0-9_]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "service": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "function": {
+      "enum": [
+        "buy_sell",
+        "deposit",
+        "withdrawal",
+        "external_wallet_transfer",
+        "direct_issuer_mint",
+        "direct_issuer_redemption"
+      ]
+    },
+    "access_state": {
+      "enum": [
+        "available",
+        "available_with_conditions",
+        "account_internal_only",
+        "unavailable",
+        "temporarily_unavailable",
+        "restricted_customer_scope",
+        "restricted_network_scope",
+        "not_assessed",
+        "unknown"
+      ]
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "effective_to": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "date_precision": {
+      "enum": ["day", "month", "approximate"]
+    },
+    "network_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "network_ids", "note"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "any_platform_supported_network",
+            "specific_networks",
+            "account_internal_only",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "network_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "note": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "customer_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "note"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "all_supported_customers",
+            "retail",
+            "institutional",
+            "business",
+            "qualified_only",
+            "mixed_or_platform_defined",
+            "unknown"
+          ]
+        },
+        "note": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "description"],
+        "properties": {
+          "type": {
+            "enum": [
+              "transaction_limit",
+              "withdrawal_limit",
+              "customer_eligibility",
+              "network_support",
+              "account_internal",
+              "geographic_scope",
+              "service_condition",
+              "other"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "legal_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "description"],
+      "properties": {
+        "status": {
+          "enum": ["documented", "provider_characterization", "not_assessed", "unknown"]
+        },
+        "description": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sog_src_[a-z0-9_]+$"
+      }
+    },
+    "confidence": {
+      "enum": ["high", "medium", "low"]
+    },
+    "review_status": {
+      "const": "reviewed"
+    },
+    "supersedes_record_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sog_ma_[a-z0-9_]+$"
+      }
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  }
+}
