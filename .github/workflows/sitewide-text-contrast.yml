@@ -1,0 +1,88 @@
+name: Site-wide text contrast
+
+on:
+  pull_request:
+    paths:
+      - 'src/styles/**'
+      - 'src/pages/**'
+      - 'src/components/**'
+      - 'scripts/audit-representative-text-contrast.mjs'
+      - '.github/workflows/sitewide-text-contrast.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-text-contrast-server.log 2>&1 &
+          echo $! > /tmp/sog-text-contrast-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-text-contrast-server.log
+          exit 1
+
+      - name: Audit representative text contrast
+        run: node scripts/audit-representative-text-contrast.mjs
+
+      - name: Upload contrast audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-sitewide-text-contrast-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/screenshots/representative-text-contrast-audit.json
+
+      - name: Write summary
+        if: always()
+        run: |
+          echo '## SOG site-wide text contrast audit' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f artifacts/screenshots/representative-text-contrast-audit.json ]; then
+            node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const audit = require('./artifacts/screenshots/representative-text-contrast-audit.json');
+          console.log(`- Result: ${audit.ok ? 'PASS' : 'FAIL'}`);
+          console.log(`- Routes: ${audit.routes.length}`);
+          console.log(`- Thresholds: body ${audit.thresholds.body}:1 / muted ${audit.thresholds.muted}:1 / quiet ${audit.thresholds.quiet}:1`);
+          for (const device of audit.devices) {
+            const counts = Object.entries(device.role_sample_counts).map(([role, count]) => `${role} ${count}`).join(', ');
+            console.log(`- ${device.device}: ${counts}`);
+          }
+          if (audit.failures.length) {
+            console.log('');
+            console.log('### Failures');
+            for (const failure of audit.failures.slice(0, 20)) console.log(`- ${failure}`);
+          }
+          NODE
+          else
+            echo '- Result: audit artifact missing' >> "$GITHUB_STEP_SUMMARY"
+          fi
