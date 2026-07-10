@@ -28,8 +28,8 @@ for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt'
 for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(readme, boundary, 'README.md');
 
 for (const marker of [
-  '100 stable assets','94 organizations','110 stablecoin-organization relationships','172 events','502 evidence records',
-  '289 known unknowns','140 deployments','100 legal profiles','133 reserve components','100 income profiles','366 detail routes',
+  'stable assets: 100','organizations: 94','relationships: 110','events: 172','evidence: 502',
+  'known unknowns: 289','deployments: 140','legal profiles: 100','reserve components: 133','income profiles: 100','detail routes: 366',
   checkpoint.checkpoint_id,
   checkpoint.source_commit,
   `canonical files: ${checkpoint.canonical_file_count}`,
