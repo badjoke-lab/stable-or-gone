@@ -48,7 +48,11 @@ jobs:
         run: npm run validate:active-workstream
 
       - name: Astro check
-        run: npm run check
+        shell: bash
+        run: |
+          mkdir -p artifacts/update-feed
+          set -o pipefail
+          npm run check 2>&1 | tee artifacts/update-feed/astro-check.log
 
       - name: Build site
         run: npm run build
@@ -114,6 +118,7 @@ jobs:
           retention-days: 14
           path: |
             artifacts/update-feed-pr350.json
+            artifacts/update-feed/astro-check.log
             artifacts/update-feed/audit.json
             artifacts/update-feed/desktop-category-filter.png
             artifacts/update-feed/mobile-category-filter.png
