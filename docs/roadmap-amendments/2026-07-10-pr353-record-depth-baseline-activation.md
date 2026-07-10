@@ -26,7 +26,9 @@ docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
 ```
 
-PR #353 must also read and reuse the reviewed Comparison Readiness and Facet Freshness derivation implementations rather than inventing conflicting readiness or freshness semantics.
+PR #353 must reuse reviewed Comparison Readiness and Facet Freshness derivations rather than invent conflicting readiness or freshness semantics.
+
+Reviewed Compare preset configuration may be used only for product-leverage membership in Tier A queue refinement. It must not change dimension states, canonical values, readiness, freshness, or public Compare behavior.
 
 ## PR #353 purpose
 
@@ -72,7 +74,7 @@ Required outputs:
 
 ```text
 record depth baseline artifact
-Tier A candidate queue with explicit reasons
+reviewed Tier A candidate queue with explicit reasons
 summary counts by dimension and planning state
 input digests
 ```
@@ -89,6 +91,8 @@ investment recommendation
 
 Queue order must be deterministic and non-ranking.
 
+The reviewed Tier A queue must remain selective and bounded. Common cross-registry gaps must not automatically make every asset a candidate.
+
 ## Source boundary
 
 Allowed inputs:
@@ -100,6 +104,7 @@ reviewed income profile manifest data
 Comparison Readiness derivation
 Facet Freshness derivation
 canonical Market Access Records
+reviewed Compare preset configuration for product-leverage membership only
 ```
 
 Forbidden inputs:
@@ -129,6 +134,8 @@ Facet Freshness support state
 canonical Market Access record presence
 ```
 
+Compare preset membership does not affect planning dimension states. It may affect queue membership only when the asset also has a material dossier gap under documented deterministic rules.
+
 A state must not infer a factual negative claim.
 
 For example:
@@ -146,6 +153,27 @@ no known-unknown row
 
 These are planning coverage states only.
 
+## Tier A queue refinement boundary
+
+Queue membership may be justified by deterministic combinations of:
+
+```text
+historical importance with multiple material dossier gaps
+comparison and evidence-maintenance leverage
+reviewed Compare preset membership with material dossier gap
+regional relevance with multiple material dossier gaps
+```
+
+Material dossier gaps exclude universal or broad cross-registry conditions that would make the queue non-selective by themselves.
+
+Queue order remains:
+
+```text
+asset_slug_ascending_non_ranking
+```
+
+No queue position is an asset rank or priority score.
+
 ## Completion condition
 
 PR #353 completes when:
@@ -157,6 +185,8 @@ PR #353 completes when:
 - repeated builds are byte-identical;
 - summary counts reconcile with asset rows;
 - Tier A queue members have explicit reasons;
+- reviewed Compare preset membership is derived exactly from the preset configuration;
+- reviewed Tier A queue remains selective and bounded;
 - no numeric composite score or asset rank is emitted;
 - forbidden private/candidate/monitoring inputs are not read;
 - canonical data is unchanged;
