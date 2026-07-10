@@ -3,7 +3,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/maintenance-log.css';
 import { getPublicMaintenanceLog } from '../../lib/maintenanceLogData.mjs';
 
+type MaintenanceCheck = { check_id: string; result: string; summary: string };
+type MaintenanceRelease = { id: string; label: string; route: string };
+type MaintenanceEntry = {
+  month: string;
+  status: string;
+  as_of: string;
+  public_summary: string;
+  checks: MaintenanceCheck[];
+  counts: Record<string, number>;
+  public_surface_releases: MaintenanceRelease[];
+  next_focus: string[];
+};
+
 const log = getPublicMaintenanceLog();
+const entries = log.entries as MaintenanceEntry[];
 const title = 'Maintenance Log — Stable or Gone';
 const description = 'Monthly public maintenance checkpoints for Stable or Gone, limited to public-safe aggregate outcomes, contract checks, released surfaces, and next maintenance priorities.';
 const jsonLd = {
@@ -51,7 +65,7 @@ const jsonLd = {
       </div>
 
       <div class="maintenance-entry-list">
-        {log.entries.map((entry) => (
+        {entries.map((entry) => (
           <article class="maintenance-entry" data-maintenance-month={entry.month}>
             <header class="maintenance-entry__header">
               <div>
