@@ -1,81 +1,88 @@
 # Stable or Gone
 
-Stable or Gone (SOG) is a public historical registry for stablecoins and closely related stable-value assets. It records how assets are issued, backed, stabilized, redeemed, governed, migrated, restricted, wound down, or collapsed, together with the organizations, deployments, events, and evidence behind each claim.
+Stable or Gone (SOG) is a public historical registry for stablecoins and closely related stable-value assets. It records how assets are issued, backed, stabilized, redeemed, governed, migrated, restricted, wound down, or collapsed, together with the organizations, deployments, events, evidence, legal context, access context, and unresolved questions behind each claim.
 
 Public site: https://sog.badjoke-lab.com/
 
-SOG is not a live price dashboard, trading terminal, safety ranking, market-cap ranking, or source of investment advice.
+SOG is not a live price dashboard, trading terminal, safety ranking, market-cap ranking, yield leaderboard, or source of investment advice.
 
-## Current registry checkpoint
+## Current registry position
 
-The reviewed canonical checkpoint contains:
+The reviewed canonical registry contains 110 stable assets.
 
-```text
-100 stable assets
-94 organizations
-110 stablecoin-organization relationships
-100 classification records
-100 reserve/redemption profiles
-172 events
-172 Event v2 detail records
-502 evidence records
-502 evidence relation projections
-108 reserve-report or reserve-context records
-289 known unknowns
-9 regulatory notes
-140 deployments
-100 legal profiles
-4 stable-asset relationships
-133 reserve components
-100 income profiles
-140 deployment view rows
-366 detail routes
-```
+All other public counts derive from repository canonical data groups and generated/validated public projections. They must not be maintained as a second manually edited count authority in this README.
 
-These counts are derived from the same canonical data groups used by the public HTML pages, `version.json`, `data/manifest.json`, and route generation. They are protected by release-integrity checks and must not be maintained independently by hand.
-
-The audited 100-asset checkpoint also records deterministic group and global identity/content digests, exact baseline linkage, package graph linkage, and the accepted reproducible-build result. Current production may move to a later noncanonical `main` commit only while provenance, canonical hash, file-count, reviewed count, and exact route parity remain valid.
-
-Release note:
+The current public research surfaces include:
 
 ```text
-docs/releases/100-asset-checkpoint-2026-07-06.md
-```
-
-Binding checkpoint:
-
-```text
-docs/migration/audited-100-asset-canonical-checkpoint.json
+Registry records
+Stats
+Compare
+Compare presets
+Access & Regulation Explorer
+Change Timeline
+Update Feed
+Maintenance Log
+machine-readable projections and manifest discovery
 ```
 
 ## Current workstream
 
-The registry has reached the reviewed 100-asset checkpoint. The active roadmap item is non-UI release material.
+The public-surface expansion sequence through PR #351 is complete.
 
-The next approved sequence is:
+Current position:
 
 ```text
-PR #321  100-asset monitoring baseline synchronization
-PR #322  reserve and redemption source expansion
-PR #323  lifecycle, regulatory, and EU market-access source/schema expansion
-PR #324  bounded scheduled read-only monitoring
-PR #325-#328  statistics implementation
-PR #329       next candidate audit
-PR #330-#334  controlled growth from 100 to 110
+PR #351 Monthly Maintenance Log: complete
+PR #352 post-351 authority reset: active
+PR #353 Record Depth & Coverage Baseline: next
 ```
 
-After a reviewed 110-asset checkpoint, approved later work begins with Comparison Foundation, followed by Compare, Access & Regulation Explorer, Change Timeline, and reviewed public update surfaces.
+Approved near-term sequence:
 
-The repository source of truth is:
+```text
+PR #352  post-351 authority reset and specification/schedule synchronization
+PR #353  Record Depth & Coverage Baseline
+PR #354  Tier A Dossier Deepening — Batch 1
+PR #355  Tier A Dossier Deepening — Batch 2
+PR #356  Market Access Pilot 1
+PR #357  Tier A Dossier Deepening — Batch 3
+PR #358  Record Growth Batch 1
+PR #359  Market Access Pilot 2
+PR #360  Evidence and Correction Batch
+REVIEW GATE
+```
+
+After the review gate, the next bounded sequence is chosen from reviewed evidence rather than pre-authorized indefinitely.
+
+Repository authority:
 
 ```text
 AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
+docs/post-351-data-growth-operating-spec.md
+docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 ```
 
-Do not infer the active schedule from old handoffs or superseded migration plans. See `docs/roadmap.md` and the active roadmap amendments for the current gate and next approved work item.
+Do not infer the active schedule from old handoffs or superseded PR numbering.
+
+## Post-351 operating mode
+
+The default operating mode is now:
+
+```text
+reviewed data depth and record growth
+canonical Market Access promotion
+monitoring review without automatic promotion
+corrections and evidence maintenance
+monthly maintenance
+```
+
+A new public page, explorer, dashboard, ranking surface, or navigation family requires a separate reviewed roadmap amendment and canonical specification.
+
+Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
 
 ## What the registry tracks
 
@@ -87,7 +94,25 @@ SOG records:
 - reserve disclosure, reserve-report history, redemption access, eligibility, settlement terms, and restrictions;
 - launches, depegs, regulatory actions, reserve changes, redemption changes, migrations, wind-downs, failures, issuer-control actions, and other material events;
 - chain deployments, contract identities, control capabilities, and deployment status;
+- legal profiles and regulatory notes;
+- canonical Market Access Records when reviewed evidence supports bounded asset × jurisdiction × platform/service × function claims;
 - source-backed evidence, claim scopes, known unknowns, and unresolved questions.
+
+## Public research workflow
+
+The site now supports a connected research flow:
+
+```text
+find a stable asset or organization
+-> read the canonical dossier
+-> compare selected assets
+-> explore legal/regulatory/access records
+-> inspect historical subject changes in the Timeline
+-> inspect registry publication changes in the Update Feed
+-> inspect public-safe operational maintenance checkpoints
+```
+
+These surfaces answer different questions and preserve separate semantics.
 
 ## Scope
 
@@ -124,6 +149,7 @@ SOG does not provide:
 - yield rankings;
 - live depeg alerts;
 - live price or market-cap rankings;
+- universal green/red country availability claims;
 - issuer, exchange, wallet, or account support;
 - investment, legal, financial, tax, or regulatory advice.
 
@@ -131,36 +157,9 @@ SOG does not provide:
 
 The registry is built from repository-managed JSON data and static Astro pages.
 
-Current canonical data groups include:
+Canonical data families include stable assets, organizations, relationships, classifications, reserve/redemption profiles, events, evidence, evidence relations, reserve reports, known unknowns, regulatory notes, deployments, legal profiles, stable-asset relationships, reserve components, income profiles, and canonical Market Access Records when reviewed records exist.
 
-- stable-asset records;
-- organization records;
-- stablecoin-organization relationships;
-- classification records;
-- reserve and redemption profiles;
-- event records and Event v2 details;
-- evidence records and evidence relations;
-- reserve-report references;
-- known unknowns;
-- regulatory notes;
-- deployment records;
-- legal profiles;
-- stable-asset relationships;
-- reserve components;
-- income profiles.
-
-Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, and the sitemap are generated or validated against the reviewed canonical groups.
-
-The public machine-readable layer exposes reviewed canonical information only:
-
-```text
-canonical_only = true
-includes_unreviewed_candidates = false
-includes_internal_monitoring = false
-includes_private_notes = false
-```
-
-Unreviewed candidates, pending monitoring baselines, internal monitoring output, editorial research matrices that have not become canonical records, and private notes remain outside public canonical release claims.
+Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, the sitemap, and public research projections are generated or validated against reviewed repository data and explicit public-safety boundaries.
 
 ## Machine-readable entry points
 
@@ -173,40 +172,68 @@ Public machine-readable discovery starts at:
 /ai.txt
 ```
 
-`version.json` exposes project identity, build provenance, reviewed counts, and additive Registry v3 summary data.
+Additional public projections include statistics, comparison, access/regulation, timeline, update-feed, and maintenance-log endpoints discovered through the manifest.
 
-`data/manifest.json` describes the public data model, count surfaces, and data-safety boundary.
+The public machine-readable layer exposes reviewed canonical or explicitly public-safe derived information only.
 
-SOG does not maintain a second manually edited public count authority.
+```text
+canonical_only = true
+includes_unreviewed_candidates = false
+includes_internal_monitoring = false
+includes_private_notes = false
+```
 
 ## Monitoring boundary
 
 Monitoring is review-only and read-only with respect to canonical data.
 
-The monitoring pipeline may observe sources, compare accepted baselines, classify changes, and create private review material. It may not:
+It may observe sources, compare accepted baselines, classify changes, identify stale review states, discover bounded leads, and create private review material.
+
+It may not:
 
 - write canonical data automatically;
 - accept its own baseline;
 - edit guides automatically;
-- publish candidates automatically;
+- publish candidates or monitoring rows automatically;
 - create automatic canonical PRs;
 - deploy.
 
-At the current 100-asset checkpoint, registered source reach and accepted monitoring coverage are separate concepts. Source and schema expansion remains scheduled work; zero coverage in a required monitoring domain is recorded honestly rather than filled by inference.
+Monitoring observations and editorial research matrices are not canonical Market Access Records.
+
+## Market Access boundary
+
+Canonical Market Access Records represent bounded reviewed claims.
+
+Conceptual identity:
+
+```text
+asset
+× jurisdiction or region
+× platform or service
+× function or access route
+× state
+× effective-date context
+× evidence
+```
+
+A platform licence is not proof that a specific asset/function combination is available.
+
+Access is not reduced to one universal allowed/banned boolean.
 
 ## Specification and change control
 
-Repository specifications are authoritative. Chat history, old handoffs, unmerged drafts, and mock images do not change the approved implementation by themselves.
+Repository specifications are authoritative.
 
-Every non-trivial pull request must cite:
+Every post-351 non-trivial PR must cite:
 
 ```text
-Specification references
-Roadmap item
-Scope and non-scope
-Data-preservation checks
-Validation performed
-Deployment classification
+AGENTS.md
+docs/spec-governance.md
+docs/roadmap.md
+docs/post-351-data-growth-operating-spec.md
+active roadmap amendment
+work-item-specific specification
+named baseline/queue/audit/research checkpoint or prior output
 ```
 
 See `docs/spec-governance.md`.
@@ -219,40 +246,21 @@ npm run dev
 npm run build
 ```
 
-The release-hardening path pins Node 22.22.0 and uses the reviewed `package-lock.json`.
-
-The validation chain covers canonical data, compatibility, classification, profiles, events, evidence relations, Registry v3 additive data, release integrity, reproducible-build contracts, the audited 100-asset checkpoint, final state, registry integrity, Astro validation, site generation, machine-readable output, route parity, metadata, provenance, and production consistency.
-
-Useful commands include:
-
-```bash
-npm run validate:guides
-npm run validate:parity-suite
-npm run validate:release-integrity
-npm run validate:reproducible-build
-node scripts/validate-audited-100-checkpoint.mjs
-npm run check:production
-```
+The validation chain covers canonical data, compatibility, classification, profiles, events, evidence relations, Registry v3 additive data, release integrity, reproducible-build contracts, statistics history, active-workstream authority, public output, route parity, metadata, provenance, and production consistency.
 
 ## Development and production deployment
 
-Normal pull requests are validated by GitHub CI and do not wait for Cloudflare Pages. After a pull request merges, the `main` push automatically runs `.github/workflows/deploy-production.yml`, validates the publishable site, builds `dist`, uploads it to the `stable-or-gone` Cloudflare Pages project with Wrangler, and verifies production.
+Normal pull requests are validated by GitHub CI and do not wait for Cloudflare Pages.
+
+After merge, `main` publication follows `docs/deployment-policy.md`.
 
 Manual deployment is fallback-only for infrastructure interruption or reserved exceptions such as DNS, secret, Cloudflare account, destructive schema migration, mass deletion, major route removal, and emergency rollback.
 
-Canonical policy: `docs/deployment-policy.md`
-
-Cloudflare operator setup: `docs/cloudflare-pages.md`
-
 ## Reporting and corrections
 
-Use the contact page to choose the correct route:
+Use the contact page for normal contact, non-public reports, missing records, broken links, and source suggestions:
 
 https://sog.badjoke-lab.com/contact/
-
-Use the Google Form for normal contact, non-public reports, missing records, broken links, and source suggestions:
-
-https://docs.google.com/forms/d/e/1FAIpQLSeEUxdPktIm46X0HgwuYvk8vpx0N3R0EezOaC2fz64nfE6JjA/viewform?usp=dialog
 
 Use GitHub Issues only for public, source-backed corrections that can be discussed openly:
 
