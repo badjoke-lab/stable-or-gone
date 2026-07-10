@@ -65,6 +65,9 @@ jobs:
       - name: Validate reviewed Tier A queue contract
         run: node scripts/validate-reviewed-tier-a-queue-pr353.mjs
 
+      - name: Validate committed reviewed snapshot parity
+        run: node scripts/validate-record-depth-reviewed-snapshots-pr353.mjs
+
       - name: Validate active workstream
         run: npm run validate:active-workstream
 
