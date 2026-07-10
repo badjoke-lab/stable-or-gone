@@ -43,7 +43,7 @@ source_checkpoint_id: immediately preceding history checkpoint ID
 asset_count: equal to immediately preceding history checkpoint asset_count
 ```
 
-A `non_growth_normalization_checkpoint` may not increase the asset count.
+A same-count checkpoint must source the immediately preceding history checkpoint. A `non_growth_normalization_checkpoint` may not increase the asset count.
 
 ## 4. PR #338 checkpoint
 
