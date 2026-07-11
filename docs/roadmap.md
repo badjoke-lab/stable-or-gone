@@ -1,18 +1,18 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-10  
+Updated: 2026-07-11  
 Status: canonical execution schedule — active
 
 ## 1. Current position
 
 ```text
 Canonical stable assets: 110
-
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
-PR #353 Record Depth & Coverage Baseline: active
-PR #354 Tier A Dossier Deepening — Batch 1: next
+PR #353 Record Depth & Coverage Baseline: complete
+PR #354 Tier A Dossier Deepening — Batch 1: active
+PR #355 Tier A Dossier Deepening — Batch 2: next
 ```
 
 The current operating mode is:
@@ -39,32 +39,22 @@ docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
-work-item-specific specification
-named baseline, queue, audit, research checkpoint, or release note
-```
-
-Current work-item specification:
-
-```text
-docs/quality/record-depth-coverage-baseline-spec.md
-```
-
-Current reviewed planning outputs:
-
-```text
+docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
+docs/quality/tier-a-dossier-batch-1-pr354-spec.md
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
+named validators, audits, and current work-item outputs
 ```
 
-Earlier roadmap amendments remain historical records but do not override this current position.
+Earlier amendments remain historical records and do not override the current position.
 
-## 3. Completed program through PR #352
+## 3. Completed program through PR #353
 
-The repository has completed these broad programs:
+Completed broad programs include:
 
 ```text
 core integrity and lineage audits
-EU/EEA market-access research and public guide work
+EU/EEA market-access research and guide work
 release integrity and reproducible-build hardening
 audited 100-asset checkpoint
 monitoring baseline synchronization and source expansion
@@ -76,24 +66,24 @@ canonical Market Access schema and governance
 facet freshness derivation
 machine-readable comparison projection
 Compare UI and presets
-Access & Regulation index and Explorer
+Access & Regulation Explorer
 Change Timeline projection and UI
 Update Feed
 Monthly Maintenance Log
-post-351 repository authority reset
+post-351 authority reset
+Record Depth & Coverage Baseline
+reviewed 18-asset Tier A candidate queue
 ```
 
-Historical PR numbering and checkpoint detail remain documented in release notes, historical roadmap amendments, quality specifications, migration files, and immutable history files.
-
-Do not rewrite historical checkpoints merely because the active program changed.
+Historical checkpoints remain immutable. Do not rewrite them because current canonical data deepens.
 
 ## 4. Current bounded sequence
 
 ```text
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
-PR #353  Record Depth & Coverage Baseline — active
-PR #354  Tier A Dossier Deepening — Batch 1 — next
-PR #355  Tier A Dossier Deepening — Batch 2
+PR #353  Record Depth & Coverage Baseline — complete
+PR #354  Tier A Dossier Deepening — Batch 1 — active
+PR #355  Tier A Dossier Deepening — Batch 2 — next
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
 PR #358  Record Growth Batch 1
@@ -104,68 +94,16 @@ REVIEW GATE
 
 No PR number after the review gate is pre-authorized by this roadmap.
 
-## 5. PR #353 — Record Depth & Coverage Baseline — active
+## 5. PR #353 handoff checkpoints — complete and immutable
 
-Binding references:
-
-```text
-docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
-docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
-docs/quality/record-depth-coverage-baseline-spec.md
-```
-
-Reviewed handoff checkpoints:
+PR #353 reviewed all 110 canonical assets across 16 planning dimensions and committed:
 
 ```text
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
 ```
 
-PR #353 evaluates all 110 canonical assets across exactly these planning dimensions:
-
-```text
-identity
-lifecycle
-organization_relationships
-mechanism_classification
-reserve_structure
-redemption
-issuance
-deployment
-legal_profile
-regulatory_notes
-events
-evidence_depth
-known_unknowns
-comparison_readiness
-facet_freshness_support
-canonical_market_access
-```
-
-Allowed planning states:
-
-```text
-strong
-usable
-partial
-sparse
-absent
-not_applicable
-```
-
-PR #353 produces deterministic internal planning outputs:
-
-```text
-record depth baseline
-summary counts by dimension and state
-reviewed Tier A candidate queue with explicit reasons
-input digests
-committed reviewed summary checkpoint
-committed reviewed queue checkpoint
-```
-
-The committed reviewed summary currently binds:
+The reviewed summary binds:
 
 ```text
 110 assets
@@ -179,46 +117,88 @@ absent: 217
 not_applicable: 0
 ```
 
-The committed reviewed Tier A queue currently binds 18 candidates in deterministic non-ranking slug order.
+The reviewed Tier A queue binds 18 candidates in deterministic non-ranking slug order.
 
-PR #353 must not produce:
+These files are historical planning checkpoints. PR #354 and later work may recompute current planning state but must not rewrite the PR #353 snapshots.
 
-```text
-risk score
-safety score
-quality ranking
-transparency ranking
-numeric composite score
-asset rank
-investment recommendation
-public leaderboard
-```
+## 6. PR #354 — Tier A Dossier Deepening — Batch 1 — active
 
-PR #353 does not deepen dossiers, add canonical assets, create Market Access Records, change Readiness, change Freshness, change Compare preset behavior, change Timeline semantics, change Update Feed entries, change Maintenance Log month data, or add a public product surface.
-
-## 6. PR #354, #355, #357 — Tier A Dossier Deepening
-
-Selection is driven by the reviewed PR #353 baseline and queue checkpoints:
+Binding references:
 
 ```text
+docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
+docs/quality/tier-a-dossier-batch-1-pr354-spec.md
+config/tier-a-dossier-batch-1-pr354.json
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
 ```
 
-PR #354 must select assets from the reviewed queue and cite each selected asset's explicit reasons and material dossier gaps.
-
-Selection considerations:
+Selected assets:
 
 ```text
-historical importance
-comparison leverage
-regulatory relevance
-regional relevance
-Market Access research potential
-evidence gap severity
+BUSD
+DAI
+RLUSD
+USDC
+USDT
 ```
 
-Each batch should normally cover no more than five assets.
+This selection is not a ranking.
+
+Authorized target dimensions:
+
+```text
+USDT   legal_profile
+USDC   legal_profile
+DAI    legal_profile
+RLUSD  legal_profile, redemption
+BUSD   legal_profile, redemption
+```
+
+PR #354 may deepen reviewed legal profiles, evidence linkage, and the two authorized redemption profiles.
+
+PR #354 must not:
+
+```text
+add canonical stable assets
+add Market Access Records
+add a public product surface
+change Compare preset membership
+change Comparison Readiness semantics
+change Facet Freshness semantics
+rewrite PR #353 planning snapshots
+rank assets
+create a composite score
+```
+
+Completion requires:
+
+```text
+exactly five selected queue members
+selection reasons and material gaps preserved from PR #353
+primary evidence linkage for changed legal claims
+BUSD/RLUSD redemption changes only where reviewed evidence supports them
+canonical asset count remains 110
+Market Access record count remains unchanged
+current planning impact is deterministic
+non-selected records remain unchanged
+Astro/build and non-regression workflows green
+```
+
+## 7. PR #355 and #357 — later Tier A dossier batches
+
+PR #355 becomes active only after PR #354 merges.
+
+It must read:
+
+```text
+PR #353 immutable summary checkpoint
+PR #353 immutable Tier A queue
+PR #354 reviewed post-change impact output
+current recomputed planning state
+```
+
+Each Tier A batch should normally cover no more than five assets.
 
 A dossier batch may deepen:
 
@@ -238,11 +218,9 @@ known unknowns
 
 Dossier batches do not add new canonical assets unless explicitly approved as combined growth work.
 
-## 7. PR #356 and #359 — Market Access pilots
+## 8. PR #356 and #359 — Market Access pilots
 
-Canonical Market Access promotion remains governed by the Market Access foundation and post-351 operating specification.
-
-Each pilot must define a bounded:
+Each pilot must define bounded:
 
 ```text
 jurisdiction set
@@ -269,11 +247,9 @@ research or monitoring signal
 -> public projection
 ```
 
-No monitoring observation, editorial research row, guide statement, generic platform availability statement, or platform licence is promoted automatically.
+Monitoring observations, editorial research rows, guide statements, generic platform availability statements, and platform licences are not promoted automatically.
 
-## 8. PR #358 — Record Growth Batch 1
-
-This PR returns to broader evidence-backed registry growth.
+## 9. PR #358 — Record Growth Batch 1
 
 If new canonical stable assets are added:
 
@@ -281,20 +257,9 @@ If new canonical stable assets are added:
 maximum two new canonical stable assets per growth PR
 ```
 
-Supporting record groups must be preserved as applicable.
+Supporting record groups and evidence boundaries remain preserved.
 
-Research grouping should be coherent when practical:
-
-```text
-issuer-backed
-protocol-backed
-synthetic or delta-neutral
-regional and non-USD
-failed, discontinued, migrated, or rebranded
-under-documented long tail
-```
-
-## 9. PR #360 — Evidence and Correction Batch
+## 10. PR #360 — Evidence and Correction Batch
 
 Priority work:
 
@@ -312,12 +277,12 @@ source identity maintenance
 
 Registry quality is not measured only by asset count.
 
-## 10. Review gate after PR #360
+## 11. Review gate after PR #360
 
 Review:
 
 ```text
-record families that remain sparse
+remaining sparse record families
 Tier A dossier depth improvement
 Compare utility improvement
 Timeline historical density
@@ -330,50 +295,26 @@ external usage or referral evidence when available
 
 Only then define the next bounded sequence.
 
-Possible outcomes include:
-
-```text
-more Tier A batches
-more Market Access pilots
-broader record growth
-evidence cleanup
-monitoring source work
-separately justified public-surface amendment
-```
-
-## 11. Parallel operating lanes
+## 12. Parallel operating lanes
 
 ### Data growth
-
-Deepen existing records and add new canonical assets only through reviewed evidence-backed PRs.
+Deepen existing records and add new assets only through reviewed evidence-backed PRs.
 
 ### Market Access
-
 Promote only bounded evidence-backed claims through manual review.
 
 ### Monitoring
-
-Monitoring remains private, review-only, and read-only with respect to canonical data.
-
-It may observe, compare, classify, identify stale states, discover bounded leads, and prepare private review material.
-
-It may not write canonical data, self-accept baselines, publish candidates, create canonical PRs automatically, edit guides automatically, or deploy.
+Monitoring remains private, review-only, and read-only with respect to canonical data. It may observe, compare, classify, discover bounded leads, and prepare review material. It may not write canonical data, self-accept baselines, publish candidates, create canonical PRs automatically, edit guides automatically, or deploy.
 
 ### Corrections and evidence maintenance
-
 Broken links, archives, evidence relations, source identities, dates, relationships, wording, and known unknowns are continuing work.
 
 ### Monthly maintenance
+The current month may remain `in_progress` until month-end review. Closed months are immutable and history grows append-only.
 
-The current month may remain `in_progress` until month-end review.
+## 13. Product-surface policy
 
-Closed months are immutable and history grows append-only.
-
-## 12. Product-surface policy
-
-The existing public product set is sufficient for the current operating phase.
-
-Normal work should improve the data that powers:
+The existing public product set is sufficient for the current phase:
 
 ```text
 Registry records
@@ -390,7 +331,7 @@ New pages, explorers, dashboards, ranking surfaces, or navigation families are n
 
 Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
 
-## 13. Core data rules
+## 14. Core data rules
 
 - Unknown values remain unknown unless reviewed evidence supports a value.
 - Do not coerce partial dates into day-level dates.
@@ -399,8 +340,8 @@ Small correctness, accessibility, readability, broken-link, and maintenance fixe
 - Monitoring observations are not canonical Market Access Records.
 - A platform licence is not proof of asset/function availability.
 - Comparison Readiness remains separate from value truth and facet freshness.
-- Record Depth planning states remain internal planning coverage states and do not replace canonical facts, Readiness, or Freshness.
-- Timeline date semantics remain separate from review and freshness dates.
+- Record Depth planning states remain internal planning coverage states and do not replace canonical facts.
+- Timeline dates remain separate from review and freshness dates.
 - Update Feed publication dates remain separate from historical subject dates.
 - Maintenance Log remains aggregate-only and public-safe.
 - SOG does not create composite asset risk scores or rankings.
@@ -415,7 +356,7 @@ not_applicable
 source_review_needed
 ```
 
-## 14. Mandatory pre-implementation check
+## 15. Mandatory pre-implementation check
 
 Before every non-trivial post-351 PR:
 
