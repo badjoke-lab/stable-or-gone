@@ -1,0 +1,115 @@
+name: PR 354 Tier A Dossier Batch 1
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr354-tier-a-dossier-batch-1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate Tier A batch selection contract
+        run: node scripts/validate-tier-a-dossier-batch-1-selection-pr354.mjs
+
+      - name: Build deterministic dossier impact report
+        run: |
+          mkdir -p artifacts/pr354
+          node scripts/growth/build-tier-a-batch-1-impact-pr354.mjs artifacts/pr354/tier-a-batch-1-impact-pr354.json
+
+      - name: Validate dossier impact and preservation contracts
+        run: node scripts/validate-tier-a-dossier-batch-1-impact-pr354.mjs
+
+      - name: Verify PR 353 planning snapshots are byte-unchanged
+        run: |
+          git diff --exit-code origin/main...HEAD -- \
+            docs/migration/record-depth-baseline-pr353-summary.json \
+            docs/migration/tier-a-candidate-queue-pr353.json
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate historical Registry v2 profiles
+        run: npm run validate:profiles
+
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+
+      - name: Validate Registry v3
+        run: npm run validate:v3
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Verify PR 354 canonical/public boundaries
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const config = JSON.parse(fs.readFileSync('config/tier-a-dossier-batch-1-pr354.json', 'utf8'));
+          const marketAccess = JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8'));
+          const summary = JSON.parse(fs.readFileSync('docs/migration/record-depth-baseline-pr353-summary.json', 'utf8'));
+          if (config.selected_assets.length !== 5) throw new Error('PR #354 must remain a five-asset batch');
+          if (summary.asset_count !== 110) throw new Error('historical PR #353 asset count changed');
+          if (marketAccess.length !== 0) throw new Error('PR #354 must not add Market Access Records');
+          if (config.new_canonical_assets_allowed !== false) throw new Error('new canonical asset creation must remain forbidden');
+          if (config.new_public_surface_allowed !== false) throw new Error('new public surface must remain forbidden');
+          if (config.asset_rank !== false || config.single_composite_score !== false) throw new Error('score/rank boundary changed');
+          console.log('PR #354 canonical/public boundaries preserved.');
+          NODE
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify existing public routes and no planning endpoint leakage
+        run: |
+          test -f dist/data/manifest.json
+          test -f dist/compare/index.html
+          test -f dist/access-regulation/index.html
+          test -f dist/timeline/index.html
+          test -f dist/updates/index.html
+          test -f dist/maintenance/index.html
+          test ! -e dist/data/record-depth-baseline.json
+          test ! -e dist/data/tier-a-batch-1-impact.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.record_depth_baseline) throw new Error('Record Depth planning data leaked into public manifest');
+          if (manifest.public_files?.tier_a_dossier_impact) throw new Error('Tier A impact report leaked into public manifest');
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
+          console.log('PR #354 public product boundary unchanged.');
+          NODE
+
+      - name: Upload PR 354 impact artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr354-tier-a-batch-1-impact-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: artifacts/pr354/tier-a-batch-1-impact-pr354.json
