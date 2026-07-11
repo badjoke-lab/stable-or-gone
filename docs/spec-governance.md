@@ -1,11 +1,11 @@
 # Stable or Gone specification governance
 
 Status: canonical governance specification  
-Updated: 2026-07-10
+Updated: 2026-07-11
 
 ## 1. Purpose
 
-This file defines repository document authority, conflict resolution, change control, PR traceability, data-preservation boundaries, monitoring safety, product-surface control, and post-351 operating governance.
+This file defines repository document authority, conflict resolution, change control, PR traceability, data-preservation boundaries, monitoring safety, product-surface control, dossier-deepening rules, and post-351 operating governance.
 
 Merged repository specifications are the source of truth.
 
@@ -21,7 +21,7 @@ When documents disagree, use this order:
 4. Active merged roadmap amendments named by the roadmap.
 5. Canonical operating specification for the active program.
 6. Work-item-specific canonical specification.
-7. Named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and publication-gate reviews.
+7. Named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
 8. Conversation history and unmerged drafts.
 
 Current active amendments:
@@ -29,6 +29,7 @@ Current active amendments:
 ```text
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
+docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 ```
 
 Current operating specification:
@@ -40,10 +41,17 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/record-depth-coverage-baseline-spec.md
+docs/quality/tier-a-dossier-batch-1-pr354-spec.md
 ```
 
-Historical amendments remain historical records. They do not override the current position.
+Current required prior outputs:
+
+```text
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+```
+
+Historical amendments remain historical records and do not override the current position.
 
 ## 3. Mandatory reading order
 
@@ -67,17 +75,18 @@ Canonical stable assets: 110
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
-PR #353 Record Depth & Coverage Baseline: active
-PR #354 Tier A Dossier Deepening — Batch 1: next
+PR #353 Record Depth & Coverage Baseline: complete
+PR #354 Tier A Dossier Deepening — Batch 1: active
+PR #355 Tier A Dossier Deepening — Batch 2: next
 ```
 
 Approved bounded sequence:
 
 ```text
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
-PR #353  Record Depth & Coverage Baseline — active
-PR #354  Tier A Dossier Deepening — Batch 1 — next
-PR #355  Tier A Dossier Deepening — Batch 2
+PR #353  Record Depth & Coverage Baseline — complete
+PR #354  Tier A Dossier Deepening — Batch 1 — active
+PR #355  Tier A Dossier Deepening — Batch 2 — next
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
 PR #358  Record Growth Batch 1
@@ -106,52 +115,52 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 ```
 
-### Active PR #353 Record Depth Baseline
+### Historical PR #353 Record Depth foundation
 
 ```text
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/quality/record-depth-coverage-baseline-spec.md
 config/record-depth-baseline-v1.json
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
 ```
 
-### Statistics
+The PR #353 snapshots are immutable historical planning checkpoints.
+
+### Active PR #354 Tier A dossier batch
 
 ```text
-docs/stats-spec.md
-docs/stats-history-spec.md
+docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
+docs/quality/tier-a-dossier-batch-1-pr354-spec.md
+config/tier-a-dossier-batch-1-pr354.json
+scripts/validate-tier-a-dossier-batch-1-selection-pr354.mjs
+scripts/growth/build-tier-a-batch-1-impact-pr354.mjs
+scripts/validate-tier-a-dossier-batch-1-impact-pr354.mjs
 ```
 
-### Comparison, freshness, access, timeline, update, and maintenance semantics
+### Completed derived-surface semantics
 
-The completed public-surface program remains governed by its merged canonical specifications and validators, including:
+The completed public-surface program remains governed by merged canonical specifications and validators for:
 
 ```text
-docs/comparison-and-change-product-spec.md
-Comparison Readiness specifications and validators
-Facet Freshness specifications and validators
-canonical Market Access schema and governance
-Access & Regulation index and Explorer specifications
-Change Timeline projection and UI specifications
-Update Feed specification
-Monthly Maintenance Log specification
+statistics and immutable history
+Comparison Readiness
+Facet Freshness
+canonical Market Access schema
+Compare and presets
+Access & Regulation Explorer
+Change Timeline
+Update Feed
+Monthly Maintenance Log
 ```
 
-Schedule portions in historical product specifications are superseded by `docs/roadmap.md` and the current active amendments. Their semantic boundaries remain binding unless deliberately amended.
+Schedule portions in historical product specifications are superseded by `docs/roadmap.md` and active amendments. Their semantic boundaries remain binding unless deliberately amended.
 
 ### Monitoring
 
-Monitoring authority includes:
+Monitoring authority remains in merged monitoring pipeline, official-source, baseline, bounded scheduled read-only specifications, reviewed source registries, and historical monitoring snapshots.
 
-```text
-docs/quality/monitoring-pipeline-spec.md
-docs/quality/monitoring-official-source-spec.md
-docs/quality/monitoring-official-source-schema.md
-docs/quality/monitoring-baseline-spec.md
-docs/quality/monitoring-bounded-scheduled-read-only-spec.md
-reviewed source registries and historical baseline snapshots
-```
-
-Historical snapshots remain immutable.
+Historical monitoring snapshots remain immutable.
 
 ## 6. Change control
 
@@ -165,16 +174,12 @@ A change to any of the following requires a specification update in the same PR 
 - build provenance or canonical hash boundary;
 - audited checkpoint source or digest boundary;
 - dependency-lock or reproducible-build semantics;
-- monitoring source schema;
-- monitoring baseline-state semantics;
-- monitoring source-family or coverage semantics;
-- schedule trigger, group, or permission boundary;
-- news-discovery or retention bounds;
-- article stale-state bands;
+- monitoring source, baseline-state, source-family, schedule, permission, or retention semantics;
 - statistics semantics;
 - Comparison Readiness semantics;
-- facet freshness semantics;
+- Facet Freshness semantics;
 - Record Depth planning-state semantics;
+- Tier A dossier selection or target-dimension semantics;
 - canonical Market Access Record semantics;
 - Timeline date semantics;
 - Update Feed publication-date semantics;
@@ -210,7 +215,7 @@ docs/roadmap.md
 docs/post-351-data-growth-operating-spec.md
 active roadmap amendments
 work-item-specific specification
-named baseline/queue/audit/research checkpoint
+named baseline/queue/audit/research checkpoint or prior output
 ```
 
 A PR that cannot cite an approved work item must pause until repository authority is corrected.
@@ -219,7 +224,7 @@ A PR that cannot cite an approved work item must pause until repository authorit
 
 The current public-surface expansion sequence is complete.
 
-The existing surfaces are sufficient for the current operating phase:
+Existing surfaces are sufficient for the current phase:
 
 ```text
 Registry records
@@ -254,7 +259,9 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
-Candidate, monitoring, discovery, editorial-research, and private material remain outside canonical public count surfaces unless separately reviewed and promoted through the proper canonical process.
+Candidate, monitoring, discovery, editorial-research, and private material remain outside canonical public surfaces unless separately reviewed and promoted through the proper canonical process.
+
+Record Depth baselines, Tier A queues, and dossier-impact reports remain internal planning infrastructure.
 
 ## 10. Monitoring governance
 
@@ -282,13 +289,9 @@ publish candidates or discovery leads
 deploy
 ```
 
-A registered source is not an accepted baseline.
+A registered source is not an accepted baseline. A pending baseline is not accepted monitoring coverage. Monitoring observations are not canonical Market Access Records.
 
-A pending baseline is not accepted monitoring coverage.
-
-Monitoring observations are not canonical Market Access Records.
-
-PR #353 must not read monitoring artifacts, news discovery leads, unreviewed candidates, unpromoted editorial research rows, private notes, private queues, or candidate URLs.
+PR #354 canonical claims must come from reviewed evidence, not monitoring artifacts or unpromoted editorial research.
 
 ## 11. Market Access governance
 
@@ -321,42 +324,13 @@ A platform licence is not proof that a specific asset/function combination is av
 
 Access must not be reduced to a universal allowed/banned boolean.
 
-Absence of a canonical Market Access Record is a planning coverage state only and must not be interpreted as unavailable.
+PR #354 must not add rows to `data/market-access-records-v1.json`.
 
-## 12. Record Depth Baseline governance
+## 12. Record Depth and Tier A governance
 
-PR #353 is governed by:
+PR #353 created an internal planning baseline over all 110 canonical assets and an 18-asset reviewed Tier A queue.
 
-```text
-docs/quality/record-depth-coverage-baseline-spec.md
-docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
-config/record-depth-baseline-v1.json
-```
-
-The baseline is an internal planning instrument over all 110 canonical assets.
-
-Required dimensions:
-
-```text
-identity
-lifecycle
-organization_relationships
-mechanism_classification
-reserve_structure
-redemption
-issuance
-deployment
-legal_profile
-regulatory_notes
-events
-evidence_depth
-known_unknowns
-comparison_readiness
-facet_freshness_support
-canonical_market_access
-```
-
-Allowed planning states:
+Required planning states remain:
 
 ```text
 strong
@@ -367,7 +341,7 @@ absent
 not_applicable
 ```
 
-It must not become:
+The planning system must not become:
 
 ```text
 risk score
@@ -380,32 +354,53 @@ investment recommendation
 public leaderboard
 ```
 
-State derivation must be deterministic and auditable.
-
-Queue order must be deterministic and non-ranking. Every queue member must cite explicit selection reasons.
-
-Planning absence must not be converted into a factual negative claim:
+PR #354 selects exactly five queue members:
 
 ```text
-no Regulatory Note row
-!= no regulatory issue
-
-no Market Access Record
-!= unavailable
-
-no known-unknown row
-!= nothing is unknown
+BUSD
+DAI
+RLUSD
+USDC
+USDT
 ```
 
-## 13. Growth governance
+Target dimensions:
+
+```text
+USDT   legal_profile
+USDC   legal_profile
+DAI    legal_profile
+RLUSD  legal_profile, redemption
+BUSD   legal_profile, redemption
+```
+
+Queue reasons and historical material gaps must match the PR #353 snapshot exactly.
+
+Planning improvement is not permission to infer unsupported factual claims. Unknown values remain unknown unless reviewed evidence supports replacement.
+
+## 13. Dossier evidence discipline
+
+Every changed legal-profile field must have reviewed evidence linkage.
+
+For PR #354:
+
+- official legal terms, official issuer statements, official protocol documentation, and regulator publications are preferred;
+- legal entity scope must not be broadened beyond the source;
+- reserve segregation and bankruptcy-remoteness claims must remain separate;
+- direct issuer redemption must remain separate from exchange or secondary-market exit;
+- customer eligibility and jurisdiction restrictions must remain explicit;
+- RLUSD's exact legal issuer must not be collapsed into a broader organization identity when the exact legal entity is not modeled;
+- BUSD canonical scope must distinguish Paxos-issued BUSD from unrelated wrapped or Binance-Peg representations.
+
+Only BUSD and RLUSD are authorized for redemption field changes in PR #354.
+
+## 14. Growth governance
 
 Dossier deepening and new-asset growth are distinct operations.
 
 Tier A dossier batches normally cover no more than five existing assets.
 
 Dossier batches may add supporting canonical records but do not add new canonical assets unless explicitly approved as combined growth work.
-
-PR #354 must select its assets from the reviewed PR #353 baseline and candidate queue and cite explicit selection reasons.
 
 If a growth PR adds new canonical stable assets:
 
@@ -415,7 +410,7 @@ maximum two new canonical stable assets per growth PR
 
 All applicable supporting record groups and evidence boundaries remain preserved.
 
-## 14. Unknown-value governance
+## 15. Unknown-value governance
 
 Protected unresolved states include:
 
@@ -427,11 +422,11 @@ not_applicable
 source_review_needed
 ```
 
-These states must not be overwritten merely to satisfy completeness, baseline appearance, comparison presentation, or Market Access row count.
+These states must not be overwritten merely to satisfy completeness, baseline appearance, comparison presentation, dossier targets, or Market Access row count.
 
 Missing capability data is unknown knowledge state, not `false`.
 
-## 15. Derived-surface governance
+## 16. Derived-surface governance
 
 Statistics derive from reviewed canonical data and must not become live price, market-cap, APY, safety, transparency, or risk rankings.
 
@@ -439,21 +434,19 @@ Compare uses reviewed canonical data, preserves unresolved states, and does not 
 
 Comparison Readiness remains separate from value truth and facet freshness.
 
-Facet freshness derives from authoritative record families and does not replace factual record values.
+Facet Freshness derives from authoritative record families and does not replace factual record values.
 
-Record Depth uses reviewed canonical inventory plus reviewed Readiness/Freshness derivations for internal planning only; it does not replace those contracts.
+Record Depth uses reviewed canonical inventory and reviewed Readiness/Freshness derivations for internal planning only.
 
-Change Timeline preserves date semantics and does not convert review/freshness dates into historical change items.
+PR #354 may recompute current planning state but must not rewrite historical PR #353 snapshots.
 
-Update Feed publication dates remain separate from historical subject dates.
+Change Timeline preserves historical date semantics. Update Feed publication dates remain separate from historical subject dates. Maintenance Log remains public-safe and aggregate-only.
 
-Maintenance Log remains public-safe and aggregate-only.
+## 17. Historical checkpoint governance
 
-## 16. Historical checkpoint governance
+Release-integrity, reproducible-build, audited asset checkpoints, statistics history, monitoring baselines, PR #353 planning snapshots, and completed monthly maintenance records retain their immutability rules.
 
-Release-integrity, reproducible-build, audited checkpoint, statistics history, monitoring baseline, and completed monthly maintenance records retain their original immutability rules.
-
-Do not regenerate or rewrite historical snapshots against current configuration merely because the current registry grew or the active program changed.
+Do not regenerate or rewrite historical snapshots against current data merely because dossiers deepen.
 
 Historical detail remains available in:
 
@@ -467,7 +460,7 @@ data/stats-history.json
 data/monthly-maintenance-log.json
 ```
 
-## 17. Review-gate governance
+## 18. Review-gate governance
 
 After PR #360, the next sequence must be selected from reviewed evidence.
 
@@ -487,7 +480,7 @@ external usage evidence when available
 
 Only then may the roadmap authorize the next bounded sequence.
 
-## 18. Deployment governance
+## 19. Deployment governance
 
 Normal merged changes publish from `main` under `docs/deployment-policy.md`.
 
