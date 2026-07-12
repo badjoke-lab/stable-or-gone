@@ -8,7 +8,7 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 
 ## Current registry position
 
-The reviewed canonical registry contains 110 stable assets.
+Canonical stable assets: 110
 
 All other public counts derive from repository canonical data groups and generated/validated public projections. They must not be maintained as a second manually edited count authority in this README.
 
@@ -36,8 +36,9 @@ Current position:
 PR #351 Monthly Maintenance Log: complete
 PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
-PR #354 Tier A Dossier Deepening — Batch 1: active
-PR #355 Tier A Dossier Deepening — Batch 2: next
+PR #354 Tier A Dossier Deepening — Batch 1: complete
+PR #355 Tier A Dossier Deepening — Batch 2: active
+PR #356 Market Access Pilot 1: next
 ```
 
 Approved bounded sequence:
@@ -45,9 +46,9 @@ Approved bounded sequence:
 ```text
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
 PR #353  Record Depth & Coverage Baseline — complete
-PR #354  Tier A Dossier Deepening — Batch 1 — active
-PR #355  Tier A Dossier Deepening — Batch 2 — next
-PR #356  Market Access Pilot 1
+PR #354  Tier A Dossier Deepening — Batch 1 — complete
+PR #355  Tier A Dossier Deepening — Batch 2 — active
+PR #356  Market Access Pilot 1 — next
 PR #357  Tier A Dossier Deepening — Batch 3
 PR #358  Record Growth Batch 1
 PR #359  Market Access Pilot 2
@@ -68,38 +69,62 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
-docs/quality/tier-a-dossier-batch-1-pr354-spec.md
+docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
+docs/quality/tier-a-dossier-batch-2-pr355-spec.md
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
 Do not infer the active schedule from old handoffs or superseded PR numbering.
 
-## Active PR #354 batch
+## Completed PR #354 batch
 
-PR #354 deepens five existing dossiers selected from the reviewed PR #353 Tier A queue:
+PR #354 deepened:
 
 ```text
-BUSD
-DAI
-RLUSD
-USDC
-USDT
+BUSD   legal_profile, redemption
+DAI    legal_profile
+RLUSD  legal_profile, redemption
+USDC   legal_profile
+USDT   legal_profile
+```
+
+Reviewed handoff:
+
+```text
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+```
+
+PR #354 preserved 110 canonical assets, advanced canonical evidence and evidence relations to 547, added no Market Access Record, introduced no score or ranking, and added no public product surface.
+
+## Active PR #355 batch
+
+PR #355 deepens five remaining dossiers selected from the immutable PR #353 Tier A queue:
+
+```text
+FDUSD
+FRAX
+PYUSD
+USDP
+UST
 ```
 
 The selection is not a ranking.
 
-Authorized target dimensions are:
+Authorized target dimensions:
 
 ```text
-USDT   legal_profile
-USDC   legal_profile
-DAI    legal_profile
-RLUSD  legal_profile, redemption
-BUSD   legal_profile, redemption
+FDUSD  legal_profile
+FRAX   legal_profile, redemption
+PYUSD  legal_profile, redemption
+USDP   legal_profile, redemption
+UST    legal_profile
 ```
 
-PR #354 does not add stable assets, Market Access Records, rankings, scores, or new public product surfaces.
+Only FRAX, PYUSD, and USDP are authorized for redemption field-value changes.
+
+PR #355 does not add stable assets, Market Access Records, rankings, scores, or public product surfaces. It must not modify canonical data for the five assets completed in PR #354.
 
 ## Post-351 operating mode
 
@@ -133,8 +158,6 @@ SOG records:
 
 ## Public research workflow
 
-The site supports a connected research flow:
-
 ```text
 find a stable asset or organization
 -> read the canonical dossier
@@ -149,19 +172,9 @@ These surfaces answer different questions and preserve separate semantics.
 
 ## Scope
 
-The canonical registry may include:
+The canonical registry may include fiat-backed, crypto-collateralized, algorithmic, partially collateralized, hybrid, synthetic, delta-neutral, RWA-backed, government-security-backed, commodity-referenced, basket/index/CPI/floating-target, yield-bearing, rebasing, historical failed, terminated, migrated, rebranded, and inactive stable-value assets.
 
-- fiat-backed stablecoins;
-- crypto-collateralized and overcollateralized stablecoins;
-- algorithmic, partially collateralized, and hybrid designs;
-- synthetic and delta-neutral stable assets;
-- RWA- and government-security-backed stablecoins;
-- commodity-referenced stable-value assets;
-- basket-, index-, CPI-, and floating-target assets;
-- independent yield-bearing or rebasing stable assets;
-- historical failed, terminated, migrated, rebranded, and inactive assets.
-
-Tokenized deposits, fund shares, yield receipts, reserve assets, and other adjacent instruments are included only when their relevance to stable-value systems is clear and their legal and economic nature can be classified separately.
+Tokenized deposits, fund shares, yield receipts, reserve assets, and adjacent instruments are included only when their relevance to stable-value systems is clear and their legal and economic nature can be classified separately.
 
 Simple bridged versions, wrappers, LP tokens, vault shares, and ordinary yield wrappers are not separate canonical assets by default. They are represented through deployment or stable-asset relationship records when appropriate.
 
@@ -196,8 +209,6 @@ Public HTML, route generation, `version.json`, `data/manifest.json`, `llms.txt`,
 
 ## Machine-readable entry points
 
-Public machine-readable discovery starts at:
-
 ```text
 /version.json
 /data/manifest.json
@@ -216,7 +227,7 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
-Record Depth baseline outputs, Tier A queues, and dossier-impact reports are internal planning infrastructure and are not public endpoints or manifest surfaces.
+Record Depth baselines, Tier A queues, dossier handoffs, and dossier-impact reports are internal planning infrastructure and are not public endpoints or manifest surfaces.
 
 ## Monitoring boundary
 
@@ -224,22 +235,13 @@ Monitoring is review-only and read-only with respect to canonical data.
 
 It may observe sources, compare accepted baselines, classify changes, identify stale review states, discover bounded leads, and create private review material.
 
-It may not:
-
-- write canonical data automatically;
-- accept its own baseline;
-- edit guides automatically;
-- publish candidates or monitoring rows automatically;
-- create automatic canonical PRs;
-- deploy.
+It may not write canonical data automatically, accept its own baseline, edit guides automatically, publish candidates or monitoring rows automatically, create automatic canonical PRs, or deploy.
 
 Monitoring observations and editorial research matrices are not canonical Market Access Records.
 
 ## Market Access boundary
 
-Canonical Market Access Records represent bounded reviewed claims.
-
-Conceptual identity:
+Canonical Market Access Records represent bounded reviewed claims:
 
 ```text
 asset
@@ -259,13 +261,13 @@ Access is not reduced to one universal allowed/banned boolean.
 
 PR #353 evaluated all 110 canonical assets across 16 planning dimensions and committed an immutable reviewed summary and 18-asset non-ranking Tier A queue.
 
-PR #354 uses those checkpoints to deepen exactly five dossiers. The planning baseline is not a risk score, safety score, quality ranking, transparency ranking, asset rank, investment recommendation, or public leaderboard.
+PR #354 completed the first five-asset batch. PR #355 uses the immutable queue plus the reviewed PR #354 handoff to deepen the next five assets.
+
+The planning baseline is not a risk score, safety score, quality ranking, transparency ranking, asset rank, investment recommendation, or public leaderboard.
 
 A post-change planning state is evidence of repository coverage improvement only. It does not replace canonical facts or imply asset safety.
 
 ## Specification and change control
-
-Repository specifications are authoritative.
 
 Every post-351 non-trivial PR must cite:
 
