@@ -33,6 +33,9 @@ jobs:
       - name: Validate active workstream authority
         run: npm run validate:active-workstream
 
+      - name: Build deterministic prechange dossier audit
+        run: node scripts/growth/build-tier-a-batch-3-current-audit-pr357.mjs artifacts/pr357/tier-a-batch-3-current-audit.json
+
       - name: Verify immutable prior outputs
         run: |
           git diff --exit-code origin/main...HEAD -- \
@@ -107,12 +110,25 @@ jobs:
         run: |
           test ! -e dist/data/tier-a-batch-3-selection.json
           test ! -e dist/data/pr356-reviewed-handoff.json
+          test ! -e dist/data/tier-a-batch-3-current-audit.json
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
           if (manifest.public_files?.tier_a_batch_3_selection) throw new Error('PR #357 planning selection leaked into public manifest');
           if (manifest.public_files?.pr356_reviewed_handoff) throw new Error('PR #356 handoff leaked into public manifest');
+          if (manifest.public_files?.tier_a_batch_3_current_audit) throw new Error('PR #357 internal audit leaked into public manifest');
           if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
           console.log('PR #357 internal planning material remains outside public output.');
           NODE
+
+      - name: Upload PR 357 audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr357-tier-a-batch-3-audit-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            artifacts/pr357/
+            artifacts/stats-current.json
