@@ -44,7 +44,7 @@ requireText(activeAmendment, 'PR #356 Market Access Pilot 1: active', 'PR #356 a
 requireText(activeAmendment, 'PR #357 Tier A Dossier Deepening — Batch 3: next', 'PR #356 amendment');
 requireText(activeAmendment, 'jp_access_usdc_sbivc_2025_03_26', 'PR #356 amendment');
 requireText(workItemSpec, 'sog_st_usdc — USDC', 'PR #356 work-item spec');
-requireText(workItemSpec, 'maximum canonical rows', 'PR #356 work-item spec');
+requireText(workItemSpec, '### Maximum canonical rows', 'PR #356 work-item spec');
 requireText(workItemSpec, 'direct_issuer_mint', 'PR #356 work-item spec');
 requireText(workItemSpec, 'direct_issuer_redemption', 'PR #356 work-item spec');
 requireText(handoff, 'b192c4c920e3a3626d006dd8b80f44e806f40da9', 'PR #355 reviewed handoff');
@@ -62,7 +62,7 @@ expect(roadmap.includes('REVIEW GATE'), 'roadmap review gate missing');
 expect(governance.includes('A PR that cannot cite an approved work item must pause'), 'governance must enforce roadmap/spec traceability');
 expect(agents.includes('A PR that cannot identify its roadmap item and governing specification must pause.'), 'AGENTS must enforce pre-implementation authority check');
 expect(activeAmendment.includes('maximum canonical rows: 4'), 'PR #356 amendment must preserve four-record maximum');
-expect(workItemSpec.includes('The candidate audit does not change `data/market-access-records-v1.json`.'), 'PR #356 candidate-audit boundary missing');
+expect(workItemSpec.includes('A function may be promoted only after `config/market-access-pilot-1-pr356.json` explicitly names approved canonical Evidence IDs for that function.'), 'PR #356 reviewed promotion gate missing');
 
 if (failures.length) {
   console.error('PR #356 active workstream validation failed:');
