@@ -7,6 +7,7 @@ const sourceQueue = JSON.parse(fs.readFileSync('docs/migration/tier-a-candidate-
 const sourceSummary = JSON.parse(fs.readFileSync('docs/migration/record-depth-baseline-pr353-summary.json', 'utf8'));
 const marketAccess = JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8'));
 const evidenceExtra = JSON.parse(fs.readFileSync('data/evidence-extra.json', 'utf8'));
+const evidencePr354 = JSON.parse(fs.readFileSync('data/evidence-pr354-tier-a-batch-1.json', 'utf8'));
 const legalBase = JSON.parse(fs.readFileSync('data/legal-profiles-v3.json', 'utf8'));
 const legalD1 = JSON.parse(fs.readFileSync('data/legal-profiles-v3-batch-d1.json', 'utf8'));
 const profileOverrides = JSON.parse(fs.readFileSync('data/stablecoin-profiles-pr354-tier-a-batch-1.json', 'utf8'));
@@ -74,7 +75,7 @@ for (const selected of report.selected_assets) {
   expect(selected.legal_profile?.exact_evidence_present === true, `${selected.asset_slug}: exact evidence linkage unresolved`);
 }
 
-const evidenceById = new Map(evidenceExtra.map((row) => [row.id, row]));
+const evidenceById = new Map([...evidenceExtra, ...evidencePr354].map((row) => [row.id, row]));
 for (const evidenceId of expectedEvidenceIds) {
   const row = evidenceById.get(evidenceId);
   expect(Boolean(row), `required PR #354 evidence row missing: ${evidenceId}`);
@@ -137,6 +138,7 @@ console.log(JSON.stringify({
   redemption_override_assets: profileOverrides.map((row) => row.id),
   canonical_asset_count: report.constraints.canonical_asset_count_actual,
   market_access_record_count: marketAccess.length,
+  exact_primary_evidence_count: expectedEvidenceIds.size,
   current_baseline_input_digest_sha256: report.current_baseline_input_digest_sha256,
   impact_input_digest_sha256: report.input_digest_sha256
 }, null, 2));
