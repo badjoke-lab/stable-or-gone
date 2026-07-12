@@ -23,6 +23,7 @@ docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
 docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
+docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
 ```
 
 Current operating specification:
@@ -34,7 +35,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/market-access-pilot-1-pr356-spec.md
+docs/quality/tier-a-dossier-batch-3-pr357-spec.md
 ```
 
 Current required prior outputs:
@@ -44,7 +45,7 @@ docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
-data/editorial-research/japan-stablecoin-market-access-2026.json
+docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
 ## 2. Repository source of truth
@@ -75,8 +76,9 @@ PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
 PR #355 Tier A Dossier Deepening — Batch 2: complete
-PR #356 Market Access Pilot 1: active
-PR #357 Tier A Dossier Deepening — Batch 3: next
+PR #356 Market Access Pilot 1: complete
+PR #357 Tier A Dossier Deepening — Batch 3: active
+PR #358 Record Growth Batch 1: next
 ```
 
 Approved bounded sequence:
@@ -86,9 +88,9 @@ PR #352  post-351 authority reset and specification/schedule synchronization —
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — complete
-PR #356  Market Access Pilot 1 — active
-PR #357  Tier A Dossier Deepening — Batch 3 — next
-PR #358  Record Growth Batch 1
+PR #356  Market Access Pilot 1 — complete
+PR #357  Tier A Dossier Deepening — Batch 3 — active
+PR #358  Record Growth Batch 1 — next
 PR #359  Market Access Pilot 2
 PR #360  Evidence and Correction Batch
 REVIEW GATE
@@ -213,26 +215,26 @@ usdc
 usdt
 ```
 
-## 8. Completed PR #355 and active PR #356 rules
+## 8. Completed PR #355, completed PR #356, and active PR #357 rules
 
-PR #355 completed the authorized FDUSD, FRAX, PYUSD, USDP, and UST dossier deepening. Its binding handoff is:
+PR #355 completed FDUSD, FRAX, PYUSD, USDP, and UST dossier deepening.
 
-```text
-docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
-```
-
-PR #356 is governed by:
+PR #356 completed the bounded USDC / Japan / SBI VC Trade Market Access pilot. Its binding handoff is:
 
 ```text
-docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
-docs/quality/market-access-pilot-1-pr356-spec.md
-config/market-access-pilot-1-pr356.json
-scripts/validate-market-access-pilot-1-pr356.mjs
+docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-Its scope is exactly USDC in Japan on SBI VC Trade / VCTRADE for buy/sell, deposit, withdrawal, and external-wallet transfer, with a maximum of four canonical records.
+PR #357 is governed by:
 
-PR #356 must not promote RLUSD, JPYSC, issuer mint, issuer redemption, a universal Japan-wide claim, monitoring output, or editorial research without canonical Evidence and function-specific review.
+```text
+docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
+docs/quality/tier-a-dossier-batch-3-pr357-spec.md
+config/tier-a-dossier-batch-3-pr357.json
+scripts/validate-tier-a-dossier-batch-3-selection-pr357.mjs
+```
+
+Its selected assets are exactly AUDD, FEI, HUSD, MIM, and NZDS. Completed Batch 1 and Batch 2 assets must not be selected again. PR #357 must preserve four canonical Market Access Records and add no public product surface.
 
 ## 9. Dossier evidence discipline
 

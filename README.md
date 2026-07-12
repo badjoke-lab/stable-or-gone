@@ -38,8 +38,9 @@ PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
 PR #355 Tier A Dossier Deepening — Batch 2: complete
-PR #356 Market Access Pilot 1: active
-PR #357 Tier A Dossier Deepening — Batch 3: next
+PR #356 Market Access Pilot 1: complete
+PR #357 Tier A Dossier Deepening — Batch 3: active
+PR #358 Record Growth Batch 1: next
 ```
 
 Approved bounded sequence:
@@ -49,9 +50,9 @@ PR #352  post-351 authority reset and specification/schedule synchronization —
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — complete
-PR #356  Market Access Pilot 1 — active
-PR #357  Tier A Dossier Deepening — Batch 3 — next
-PR #358  Record Growth Batch 1
+PR #356  Market Access Pilot 1 — complete
+PR #357  Tier A Dossier Deepening — Batch 3 — active
+PR #358  Record Growth Batch 1 — next
 PR #359  Market Access Pilot 2
 PR #360  Evidence and Correction Batch
 REVIEW GATE
@@ -72,6 +73,10 @@ docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
 docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
+docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
+docs/quality/tier-a-dossier-batch-3-pr357-spec.md
+config/tier-a-dossier-batch-3-pr357.json
+docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 docs/quality/market-access-pilot-1-pr356-spec.md
 docs/market-access-record-spec.md
 config/market-access-pilot-1-pr356.json
@@ -116,21 +121,27 @@ docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
 
 PR #355 preserved 110 canonical assets, advanced canonical evidence and evidence relations to 549, added no Market Access Record, introduced no score or ranking, and added no public product surface.
 
-## Active PR #356 Market Access Pilot 1
+## Completed PR #356 Market Access Pilot 1
 
-PR #356 is bounded to:
+PR #356 promoted four provider-scoped USDC Market Access records for Japan / SBI VC Trade and advanced canonical Evidence to 551. Its reviewed handoff is:
 
 ```text
-jurisdiction: JP / Japan
-asset: USDC / sog_st_usdc
-platform: SBI VC Trade
-service: VCTRADE
-functions: buy_sell, deposit, withdrawal, external_wallet_transfer
-maximum canonical records: 4
-review cutoff: 2026-07-10
+docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-Direct issuer mint/redemption, RLUSD, and JPYSC are excluded from Pilot 1. Editorial research remains noncanonical until source URLs are represented by canonical Evidence identities and each function claim scope is manually reviewed.
+## Active PR #357 Tier A Dossier Deepening — Batch 3
+
+PR #357 is bounded to five existing assets selected deterministically from the remaining PR #353 queue:
+
+```text
+AUDD
+FEI
+HUSD
+MIM
+NZDS
+```
+
+It may deepen only the authorized events, lifecycle, organization-relationship, redemption, and legal-profile dimensions. It adds no stable asset, changes no Market Access record, and adds no public product surface.
 
 ## Post-351 operating mode
 
