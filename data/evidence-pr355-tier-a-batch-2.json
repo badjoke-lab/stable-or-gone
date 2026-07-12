@@ -83,20 +83,5 @@
     "reliability": "high",
     "claim_scope": "Paxos issuer identity, OCC oversight context, one-to-one redemption, reserve segregation, and bankruptcy remoteness",
     "notes": "Primary USDP product page. Supports asset-specific issuer, oversight, segregation, bankruptcy-remoteness, and redemption statements without reusing BUSD wind-down evidence."
-  },
-  {
-    "id": "sog_src_ust_sec_pr355",
-    "stablecoin_id": "sog_st_ust",
-    "issuer_id": "sog_issuer_terraform_labs",
-    "event_id": null,
-    "source_type": "regulatory_notice",
-    "title": "SEC Charges Terraform and CEO Do Kwon with Defrauding Investors in Crypto Schemes",
-    "url": "https://www.sec.gov/newsroom/press-releases/2023-32",
-    "publisher": "U.S. Securities and Exchange Commission",
-    "published_at": "2023-02-16",
-    "accessed_at": "2026-07-12",
-    "reliability": "high",
-    "claim_scope": "Terraform Labs relationship, UST algorithmic design description, LUNA interchange mechanism, collapse context, and U.S. enforcement allegations",
-    "notes": "Official regulator publication. Allegations and enforcement characterizations are recorded as U.S. regulatory context, not converted into a universal legal classification or final court finding."
   }
 ]
