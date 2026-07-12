@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_tier_a_dossier_batch_2_pr355_v1",
+  "source_summary": "docs/migration/record-depth-baseline-pr353-summary.json",
+  "source_queue": "docs/migration/tier-a-candidate-queue-pr353.json",
+  "prior_batch_handoff": "docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json",
+  "max_assets": 5,
+  "selected_assets": [
+    {
+      "asset_slug": "fdusd",
+      "asset_id": "sog_st_fdusd",
+      "queue_reasons": ["comparison_preset_member_with_material_dossier_gap"],
+      "material_dossier_gaps": ["legal_profile"],
+      "target_dimensions": ["legal_profile"]
+    },
+    {
+      "asset_slug": "frax",
+      "asset_id": "sog_st_frax",
+      "queue_reasons": ["comparison_preset_member_with_material_dossier_gap"],
+      "material_dossier_gaps": ["legal_profile", "redemption"],
+      "target_dimensions": ["legal_profile", "redemption"]
+    },
+    {
+      "asset_slug": "pyusd",
+      "asset_id": "sog_st_pyusd",
+      "queue_reasons": ["historical_importance_with_multiple_material_dossier_gaps"],
+      "material_dossier_gaps": ["legal_profile", "redemption"],
+      "target_dimensions": ["legal_profile", "redemption"]
+    },
+    {
+      "asset_slug": "usdp",
+      "asset_id": "sog_st_usdp",
+      "queue_reasons": [
+        "comparison_and_evidence_maintenance_leverage",
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "material_dossier_gaps": ["legal_profile", "redemption"],
+      "target_dimensions": ["legal_profile", "redemption"]
+    },
+    {
+      "asset_slug": "ust",
+      "asset_id": "sog_st_ust",
+      "queue_reasons": ["comparison_preset_member_with_material_dossier_gap"],
+      "material_dossier_gaps": ["legal_profile"],
+      "target_dimensions": ["legal_profile"]
+    }
+  ],
+  "excluded_completed_asset_slugs": ["busd", "dai", "rlusd", "usdc", "usdt"],
+  "authorized_record_families": [
+    "legal_profiles",
+    "stablecoin_profiles",
+    "evidence",
+    "evidence_relations",
+    "regulatory_notes"
+  ],
+  "authorized_redemption_asset_slugs": ["frax", "pyusd", "usdp"],
+  "new_canonical_assets_allowed": false,
+  "market_access_records_allowed": false,
+  "new_public_surface_allowed": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "next_pr": 356
+}
