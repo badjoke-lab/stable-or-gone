@@ -33,7 +33,7 @@ jobs:
       - name: Validate active workstream authority
         run: npm run validate:active-workstream
 
-      - name: Build deterministic prechange dossier audit
+      - name: Build deterministic dossier audit
         run: node scripts/growth/build-tier-a-batch-3-current-audit-pr357.mjs artifacts/pr357/tier-a-batch-3-current-audit.json
 
       - name: Verify immutable prior outputs
@@ -58,6 +58,9 @@ jobs:
 
       - name: Validate profiles
         run: npm run validate:profiles
+
+      - name: Validate Batch 3 legal profile boundaries
+        run: node scripts/validate-tier-a-dossier-batch-3-legal-pr357.mjs
 
       - name: Validate evidence relations
         run: npm run validate:evidence-relations-v2
