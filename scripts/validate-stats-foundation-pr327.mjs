@@ -9,7 +9,8 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'u
 
 const stats = generateStats({ root });
 const history = JSON.parse(read('data/stats-history.json'));
-const checkpoint = JSON.parse(read('docs/migration/current-canonical-checkpoint.json'));
+const canonicalCheckpoint = JSON.parse(read('docs/migration/current-canonical-checkpoint.json'));
+const statsCheckpoint = JSON.parse(read('docs/migration/current-stats-history-checkpoint.json'));
 const page = read('src/pages/stats/index.astro');
 const css = read('src/styles/stats-foundation.css');
 const adapter = read('src/lib/statsData.mjs');
@@ -22,9 +23,10 @@ const llms = read('src/pages/llms.txt.ts');
 const ai = read('src/pages/ai.txt.ts');
 const machineReadable = read('src/lib/machine-readable.ts');
 
-const expected = checkpoint.expected_counts ?? {};
-check(stats.checkpoint_id === checkpoint.checkpoint_id, `stats checkpoint must match current checkpoint ${checkpoint.checkpoint_id}, found ${stats.checkpoint_id}`);
-check(stats.totals.assets === checkpoint.asset_count, `stats asset denominator must be ${checkpoint.asset_count}, found ${stats.totals.assets}`);
+const expected = canonicalCheckpoint.expected_counts ?? {};
+check(statsCheckpoint.canonical_checkpoint_id === canonicalCheckpoint.checkpoint_id, 'stats checkpoint must bind the current canonical checkpoint');
+check(stats.checkpoint_id === statsCheckpoint.checkpoint_id, `stats checkpoint must match current stats-history checkpoint ${statsCheckpoint.checkpoint_id}, found ${stats.checkpoint_id}`);
+check(stats.totals.assets === canonicalCheckpoint.asset_count, `stats asset denominator must be ${canonicalCheckpoint.asset_count}, found ${stats.totals.assets}`);
 check(stats.totals.organizations === expected.organizations, `stats organization total must be ${expected.organizations}, found ${stats.totals.organizations}`);
 check(stats.totals.events === expected.events, `stats event total must be ${expected.events}, found ${stats.totals.events}`);
 check(stats.totals.evidence === expected.evidence, `stats evidence total must be ${expected.evidence}, found ${stats.totals.evidence}`);
@@ -123,7 +125,8 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
-  checkpoint_id: checkpoint.checkpoint_id,
+  canonical_checkpoint_id: canonicalCheckpoint.checkpoint_id,
+  stats_checkpoint_id: statsCheckpoint.checkpoint_id,
   asset_denominator: stats.totals.assets,
   organizations: stats.totals.organizations,
   events: stats.totals.events,
