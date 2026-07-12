@@ -14,7 +14,7 @@
     "organizations": 103,
     "relationships": 120,
     "events": 185,
-    "evidence": 546,
+    "evidence": 547,
     "reserve_reports": 118,
     "known_unknowns": 319,
     "regulatory_notes": 9,
@@ -24,5 +24,5 @@
     "reserve_components": 143,
     "income_profiles": 110
   },
-  "notes": "Current deterministic canonical checkpoint after reviewed PR #354 Tier A dossier deepening. Asset count remains 110; three reviewed primary evidence rows advance evidence and evidence-relation totals from 543 to 546. Earlier growth and normalization checkpoints remain immutable."
+  "notes": "Current deterministic canonical checkpoint after reviewed PR #354 Tier A dossier deepening. Asset count remains 110; four exact reviewed primary evidence rows advance evidence and evidence-relation totals from 543 to 547. Earlier growth and normalization checkpoints remain immutable."
 }
