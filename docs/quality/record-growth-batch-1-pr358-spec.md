@@ -26,21 +26,25 @@ PR #358 is the first broad growth batch after the reviewed 110-asset checkpoint.
 The selected context group is:
 
 ```text
-current USD reserve-backed institutional stablecoins
+current regulated bank and payment stablecoins
 ```
 
 The selected candidates are:
 
 ```text
-Global Dollar / USDG
-World Liberty Financial USD1 / USD1
+StraitsX USD / XUSD
+SoFiUSD / SoFiUSD
 ```
 
 This selection is not a ranking, market-cap list, endorsement, or safety judgment.
 
+The originally proposed USDG and USD1 candidates were rejected at the candidate stage because both identities already existed in the 110-asset canonical registry. Their rejection is evidence that duplicate review is a blocking gate rather than a documentation formality.
+
 ## 3. Selection rationale
 
-USDG and USD1 are grouped because both are current USD-referenced, reserve-backed assets with institution-facing issuer or custody structures, while presenting materially different governance, issuer, regulatory, network, and redemption contexts.
+XUSD and SoFiUSD are grouped because both are current USD-referenced assets issued in regulated financial or payment contexts, while presenting materially different issuer, legal, distribution, deployment, reserve, and redemption structures.
+
+XUSD adds Singapore payment-institution and regional payment-infrastructure context. SoFiUSD adds a United States national-bank issuer, enterprise settlement history, and consumer banking-app distribution context.
 
 The pair adds historical and structural comparison value rather than isolated record count.
 
@@ -81,38 +85,37 @@ known-unknown rows for unresolved material fields
 
 A thin listed-reference record is forbidden.
 
-## 6. USDG review scope
+## 6. XUSD review scope
 
 Review must distinguish:
 
 ```text
-Global Dollar Network from the USDG asset
-Paxos Digital Singapore from Paxos Issuance Europe
-issuer role from network-partner role
-one-to-one issuer redemption from exchange or platform liquidity
-Singapore and EU issuance/regulatory scope
+StraitsX brand and platform from the legal issuer
+XUSD from XSGD and XIDR
+issuer redemption from exchange or platform liquidity
+Singapore payment-institution context from deposit insurance or government guarantee
+launch announcement from first public mint or trading date
 deployment expansion from asset identity
-network reward economics from holder yield
+reserve-account language from legal segregation or bankruptcy remoteness
 ```
 
-Official Global Dollar and Paxos materials are preferred for product, issuer, redemption, deployment, and regulatory claims.
+Official StraitsX product, terms, regulatory, reserve, and deployment materials are preferred. Secondary reporting may support launch chronology but must not establish legal or redemption claims by itself.
 
-## 7. USD1 review scope
+## 7. SoFiUSD review scope
 
 Review must distinguish:
 
 ```text
-World Liberty Financial brand/operator identity
-current legal issuer identity
-BitGo custody and infrastructure roles
-reserve custody from legal reserve ownership
-announcement date from first mint or public trading date
-issuer redemption from secondary-market liquidity
-2026 social-account attack from smart-contract or wallet compromise
-short depeg event from permanent impairment
+SoFi Technologies from SoFi Bank, N.A.
+national-bank charter from token-specific legal protections
+December 2025 enterprise launch from May 2026 consumer rollout
+cash reserves from FDIC-insured deposits
+issuer redemption from app conversion or secondary-market liquidity
+Ethereum and Solana deployment rows from the canonical asset identity
+SoFiUSD from future tokenized-deposit products
 ```
 
-Political ownership or conflict reporting may be included only when directly relevant to issuer or control structure and supported by high-quality evidence. It must not replace product-level evidence.
+The token must not be described as FDIC insured merely because the issuer is a bank. Official SoFi and bank materials are preferred for issuer, product, terms, reserve, and redemption claims. High-quality reporting may support launch and distribution chronology.
 
 ## 8. Evidence rules
 
@@ -121,7 +124,7 @@ Preferred source order:
 ```text
 official issuer or product documentation
 terms and redemption documentation
-regulator or charter documentation
+regulator, charter, or licensing documentation
 reserve reports or attestations
 official contract or deployment documentation
 high-quality reporting for launch and historical events
@@ -130,7 +133,7 @@ reviewed archive capture where current pages no longer preserve the claim
 
 Every Evidence record must identify the claim scope it supports.
 
-A news article may support launch or incident chronology, but it does not by itself establish current redemption rights, reserve segregation, bankruptcy remoteness, or licensing status.
+A news article may support launch or distribution chronology, but it does not by itself establish current redemption rights, reserve segregation, bankruptcy remoteness, deposit insurance, or licensing status.
 
 ## 9. Required preservation
 
@@ -164,8 +167,8 @@ change Compare preset membership
 change Comparison Readiness definitions
 change Facet Freshness definitions
 publish candidate research or internal review artifacts
-infer legal protections from reserve or custody marketing
-turn partner rewards into holder yield
+infer legal protections from reserve, bank, or custody marketing
+turn bank or platform economics into holder yield
 ```
 
 ## 11. Validation
@@ -180,7 +183,7 @@ reviewed PR #357 handoff identity and counts
 manual-promotion boundary
 full-record minimum after promotion
 minimum event and Evidence counts
-evidence relation parity
+Evidence Relation parity
 organization and relationship integrity
 legal, reserve, redemption, deployment, and income profiles
 known-unknown preservation
