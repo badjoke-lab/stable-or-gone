@@ -43,7 +43,7 @@ for (const [file, body] of [
 
 requireText(operatingSpec, 'PR #355  Tier A Dossier Deepening — Batch 2', 'post-351 operating spec');
 requireText(programAmendment, 'PR #355  Tier A Dossier Deepening — Batch 2', 'post-351 program amendment');
-requireText(baselineAmendment, 'PR #355 Tier A Dossier Deepening — Batch 2', 'PR #353 handoff amendment');
+requireText(baselineAmendment, 'PR #354 Tier A Dossier Deepening — Batch 1: active', 'historical PR #353 handoff amendment');
 requireText(priorAmendment, 'PR #355 Tier A Dossier Deepening — Batch 2: next', 'PR #354 amendment');
 requireText(activeAmendment, 'PR #355 Tier A Dossier Deepening — Batch 2: active', 'PR #355 amendment');
 requireText(activeAmendment, 'PR #356 Market Access Pilot 1: next', 'PR #355 amendment');
