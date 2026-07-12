@@ -29,5 +29,6 @@ batch-w-reserve-redemption.json
 batch-x-reserve-redemption.json
 batch-y-reserve-redemption.json
 stablecoin-profiles-pr354-tier-a-batch-1.json
+stablecoin-profiles-pr355-tier-a-batch-2.json
 `;
 void profileLoaderInventory;

@@ -5,10 +5,9 @@ import {
   MAIN_ROUTES,
   PROJECT,
   getBuildMetadata,
-  getRecordCountBreakdown,
-  getRecordCounts,
   getRegistryV3Summary,
 } from '../../lib/machine-readable';
+import { getRecordCountBreakdown, getRecordCounts } from '../canonicalPublicCounts';
 import { getEvidenceSourceIdentitySummary } from './evidenceSources';
 
 export function GET() {

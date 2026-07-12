@@ -10,12 +10,14 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'u
 const stats = generateStats({ root });
 const history = JSON.parse(read('data/stats-history.json'));
 const checkpoint = JSON.parse(read('docs/migration/current-canonical-checkpoint.json'));
+const historyCheckpoint = JSON.parse(read('docs/migration/current-stats-history-checkpoint.json'));
 const page = read('src/pages/stats/index.astro');
 const css = read('src/styles/stats-foundation.css');
 const spec = read('docs/stats-analysis-expansion-spec.md');
 const amendment = read('docs/roadmap-amendments/2026-07-08-pr328-stats-analysis-activation.md');
 const expected = checkpoint.expected_counts ?? {};
 
+check(historyCheckpoint.canonical_checkpoint_id === checkpoint.checkpoint_id, 'current stats-history checkpoint must bind the current canonical checkpoint');
 check(stats.checkpoint_id === checkpoint.checkpoint_id, `stats checkpoint must match current checkpoint ${checkpoint.checkpoint_id}, found ${stats.checkpoint_id}`);
 check(stats.totals.assets === checkpoint.asset_count, `stats asset denominator must be ${checkpoint.asset_count}, found ${stats.totals.assets}`);
 check(stats.totals.organizations === expected.organizations, `organization total must be ${expected.organizations}, found ${stats.totals.organizations}`);
@@ -24,7 +26,13 @@ check(stats.totals.evidence === expected.evidence, `evidence total must be ${exp
 check(stats.totals.deployments === expected.deployments, `deployment total must be ${expected.deployments}, found ${stats.totals.deployments}`);
 check(history.checkpoint_policy === 'append_only_reviewed_pr', 'stats history policy mismatch');
 check(Array.isArray(history.snapshots) && history.snapshots.length >= 1, 'reviewed stats history snapshot is required');
-check(history.snapshots.some((snapshot) => snapshot.checkpoint_id === checkpoint.checkpoint_id), 'current checkpoint must exist in reviewed stats history');
+check(
+  history.snapshots.some((snapshot) => (
+    snapshot.checkpoint_id === historyCheckpoint.checkpoint_id
+    && snapshot.canonical_checkpoint_id === checkpoint.checkpoint_id
+  )),
+  'current reviewed stats-history checkpoint must exist and bind the current canonical checkpoint'
+);
 
 for (const marker of [
   'data-stats-foundation',
@@ -122,7 +130,8 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
-  checkpoint_id: checkpoint.checkpoint_id,
+  canonical_checkpoint_id: checkpoint.checkpoint_id,
+  history_checkpoint_id: historyCheckpoint.checkpoint_id,
   assets: stats.totals.assets,
   organizations: stats.totals.organizations,
   events: stats.totals.events,

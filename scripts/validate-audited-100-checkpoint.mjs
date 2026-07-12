@@ -83,25 +83,25 @@ check(production.requires_provenance_check === true, 'production provenance chec
 check(production.requires_exact_output_parity === true, 'production output parity must remain required');
 
 const snapshots = Array.isArray(history.snapshots) ? history.snapshots : [];
-const canonicalIndex = snapshots.findIndex((snapshot) => snapshot.checkpoint_id === currentCheckpoint.checkpoint_id);
-const canonicalHistoryPredecessor = canonicalIndex > 0 ? snapshots[canonicalIndex - 1]?.checkpoint_id : null;
 const latestSnapshot = snapshots.at(-1) ?? null;
+const previousSnapshot = snapshots.length > 1 ? snapshots.at(-2) : null;
 const latestHistoryValid = currentHistoryCheckpoint
   ? latestSnapshot?.checkpoint_id === currentHistoryCheckpoint.checkpoint_id
-    && latestSnapshot?.source_checkpoint_id === currentCheckpoint.checkpoint_id
-    && latestSnapshot?.checkpoint_kind === 'non_growth_normalization_checkpoint'
+    && latestSnapshot?.canonical_checkpoint_id === currentCheckpoint.checkpoint_id
+    && latestSnapshot?.source_checkpoint_id === currentHistoryCheckpoint.source_checkpoint_id
+    && currentHistoryCheckpoint.previous_history_checkpoint_id === previousSnapshot?.checkpoint_id
+    && currentHistoryCheckpoint.canonical_checkpoint_id === currentCheckpoint.checkpoint_id
+    && latestSnapshot?.checkpoint_kind === currentHistoryCheckpoint.checkpoint_kind
     && latestSnapshot?.asset_count === currentCheckpoint.asset_count
   : latestSnapshot?.checkpoint_id === currentCheckpoint.checkpoint_id;
 const historicalChainValid = snapshots.length >= 1
   && snapshots[0]?.checkpoint_id === checkpoint.checkpoint_id
-  && canonicalIndex >= 1
-  && canonicalHistoryPredecessor === currentCheckpoint.previous_checkpoint_id
   && latestHistoryValid;
-check(historicalChainValid, 'statistics history must preserve the audited 100 checkpoint root, canonical growth predecessor link, and reviewed latest history checkpoint chain');
+check(historicalChainValid, 'statistics history must preserve the audited 100 checkpoint root and bind the latest reviewed history checkpoint to the current canonical checkpoint');
 check(currentCheckpoint.asset_count >= 100, 'current checkpoint cannot regress below audited 100 assets');
 
 const report = {
-  schema_version: '1.3',
+  schema_version: '1.4',
   audit_id: 'sog_audited_100_asset_checkpoint_historical_integrity_validation',
   checkpoint_id: checkpoint.checkpoint_id,
   source_commit: checkpoint.source_commit,
@@ -117,6 +117,7 @@ const report = {
   current_asset_count: currentCheckpoint.asset_count,
   current_predecessor_checkpoint_id: currentCheckpoint.previous_checkpoint_id,
   current_history_checkpoint_id: currentHistoryCheckpoint?.checkpoint_id ?? currentCheckpoint.checkpoint_id,
+  current_history_predecessor_id: currentHistoryCheckpoint?.previous_history_checkpoint_id ?? null,
   history_snapshot_count: snapshots.length,
   historical_chain_valid: historicalChainValid,
   reproducible: checkpoint.reproducibility_checkpoint?.reproducible,

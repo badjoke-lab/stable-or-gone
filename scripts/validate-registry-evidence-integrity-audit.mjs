@@ -10,7 +10,10 @@ const checkpointCounts = checkpoint.expected_counts ?? {};
 const expectedEvidence = baseline.minimum_counts?.evidence;
 const expectedRelations = baseline.minimum_counts?.evidence_relations ?? expectedEvidence;
 const expectedPublicSources = expectedEvidence - evidenceSourceAliasCount;
-const expectedArchiveNotRecorded = 173;
+// PR #354 established the reviewed 177-record no-archive queue. PR #355 adds two
+// evidence rows with archive indexes, so this queue must remain unchanged rather
+// than reverting to the pre-PR #354 value of 173.
+const expectedArchiveNotRecorded = 177;
 const expectedArchiveIndex = expectedEvidence - expectedArchiveNotRecorded;
 
 execFileSync(process.execPath, ['scripts/audit-registry-evidence-integrity.mjs'], {

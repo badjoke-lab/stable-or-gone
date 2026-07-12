@@ -21,6 +21,7 @@ Current active amendments:
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
+docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
 ```
 
 Current operating specification:
@@ -32,7 +33,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/tier-a-dossier-batch-1-pr354-spec.md
+docs/quality/tier-a-dossier-batch-2-pr355-spec.md
 ```
 
 Current required prior outputs:
@@ -40,6 +41,7 @@ Current required prior outputs:
 ```text
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
 ## 2. Repository source of truth
@@ -68,8 +70,9 @@ PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
-PR #354 Tier A Dossier Deepening — Batch 1: active
-PR #355 Tier A Dossier Deepening — Batch 2: next
+PR #354 Tier A Dossier Deepening — Batch 1: complete
+PR #355 Tier A Dossier Deepening — Batch 2: active
+PR #356 Market Access Pilot 1: next
 ```
 
 Approved bounded sequence:
@@ -77,9 +80,9 @@ Approved bounded sequence:
 ```text
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
 PR #353  Record Depth & Coverage Baseline — complete
-PR #354  Tier A Dossier Deepening — Batch 1 — active
-PR #355  Tier A Dossier Deepening — Batch 2 — next
-PR #356  Market Access Pilot 1
+PR #354  Tier A Dossier Deepening — Batch 1 — complete
+PR #355  Tier A Dossier Deepening — Batch 2 — active
+PR #356  Market Access Pilot 1 — next
 PR #357  Tier A Dossier Deepening — Batch 3
 PR #358  Record Growth Batch 1
 PR #359  Market Access Pilot 2
@@ -138,11 +141,11 @@ Deployment classification
 
 A PR that cannot identify its roadmap item and governing specification must pause.
 
-## 6. PR #353 historical planning foundation
+## 6. Historical planning foundation
 
 PR #353 is complete.
 
-Its reviewed immutable planning checkpoints are:
+Its immutable reviewed planning checkpoints are:
 
 ```text
 docs/migration/record-depth-baseline-pr353-summary.json
@@ -173,26 +176,58 @@ investment recommendation
 public leaderboard
 ```
 
-PR #354 may recompute current planning state but must not rewrite historical PR #353 checkpoints.
+Current work may recompute planning state but must not rewrite PR #353 checkpoints.
 
-## 7. PR #354 Tier A Batch 1 rules
+## 7. PR #354 reviewed handoff — complete
 
-PR #354 is governed by:
+PR #354 completed legal-profile deepening for BUSD, DAI, RLUSD, USDC, and USDT, plus bounded BUSD/RLUSD redemption deepening.
+
+Binding handoff:
 
 ```text
-docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
-docs/quality/tier-a-dossier-batch-1-pr354-spec.md
-config/tier-a-dossier-batch-1-pr354.json
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+```
+
+The handoff binds:
+
+```text
+merge commit: d8a10676aec2f190bc32923fdc547ef359feb5c8
+canonical stable assets: 110
+canonical evidence: 547
+canonical evidence relations: 547
+Market Access Records: 0
+new public surface: false
+```
+
+Completed PR #354 assets must not be selected again in PR #355:
+
+```text
+busd
+dai
+rlusd
+usdc
+usdt
+```
+
+## 8. PR #355 Tier A Batch 2 rules
+
+PR #355 is governed by:
+
+```text
+docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
+docs/quality/tier-a-dossier-batch-2-pr355-spec.md
+config/tier-a-dossier-batch-2-pr355.json
+scripts/validate-tier-a-dossier-batch-2-selection-pr355.mjs
 ```
 
 Selected assets are exactly:
 
 ```text
-BUSD
-DAI
-RLUSD
-USDC
-USDT
+FDUSD
+FRAX
+PYUSD
+USDP
+UST
 ```
 
 This selection is not a ranking.
@@ -200,40 +235,43 @@ This selection is not a ranking.
 Authorized target dimensions:
 
 ```text
-USDT   legal_profile
-USDC   legal_profile
-DAI    legal_profile
-RLUSD  legal_profile, redemption
-BUSD   legal_profile, redemption
+FDUSD  legal_profile
+FRAX   legal_profile, redemption
+PYUSD  legal_profile, redemption
+USDP   legal_profile, redemption
+UST    legal_profile
 ```
 
-Only BUSD and RLUSD are authorized for redemption field changes.
+Only FRAX, PYUSD, and USDP are authorized for redemption field-value changes.
 
-Every selected asset must remain a reviewed PR #353 queue member and preserve its exact queue reasons and material dossier gaps.
+Every selected asset must remain a reviewed PR #353 queue member and preserve exact queue reasons and material dossier gaps.
 
-PR #354 must not:
+PR #355 must not:
 
 ```text
 add canonical stable assets
 add Market Access Records
+change PR #354 completed asset canonical data
 add a public page, explorer, dashboard, ranking, or navigation family
 change Compare preset membership
 change Comparison Readiness semantics
 change Facet Freshness semantics
 rewrite PR #353 snapshots
+rewrite the PR #354 reviewed handoff
 rank selected assets
 create a composite score
 ```
 
-## 8. PR #354 evidence discipline
+## 9. Dossier evidence discipline
 
-Changed legal-profile fields must be supported by reviewed evidence.
+Changed legal-profile and redemption fields must be supported by reviewed evidence.
 
 Preferred evidence:
 
 ```text
 official issuer terms
 official stablecoin terms
+official redemption or mint/redeem documentation
 official reserve/transparency documentation
 official protocol documentation
 official governance documentation
@@ -244,14 +282,16 @@ official court or enforcement publications when directly relevant
 Rules:
 
 - legal entity scope must not be broadened beyond the source;
-- reserve ownership, reserve segregation, and bankruptcy remoteness are separate fields and claims;
+- reserve ownership, reserve segregation, and bankruptcy remoteness are separate claims;
 - direct issuer redemption is separate from exchange or market exit;
 - customer eligibility, restrictions, and effective dates remain explicit;
-- missing evidence is not permission to fill a planning gap;
-- RLUSD's exact legal issuer named in the reviewed terms must not be collapsed into a broader Ripple organization row until that legal entity is modeled;
-- BUSD canonical scope must distinguish Paxos-issued BUSD from Binance-Peg or unrelated wrapped representations.
+- duplicate evidence URLs must use evidence identity/alias maintenance rather than redundant source rows;
+- PayPal distribution and branding roles must not be collapsed into the PYUSD legal issuer role;
+- BUSD-specific Paxos wind-down claims must not be reused as USDP claims without USDP-specific evidence;
+- protocol-backed FRAX and UST must not be forced into issuer-backed fields where the model does not apply;
+- missing evidence is not permission to fill a planning gap.
 
-## 9. Core data rules
+## 10. Core data rules
 
 - Keep unknown values unknown unless reviewed evidence supports a value.
 - Do not coerce partial-date evidence into a day-level date.
@@ -271,7 +311,7 @@ not_applicable
 source_review_needed
 ```
 
-## 10. Canonical/public safety boundary
+## 11. Canonical/public safety boundary
 
 Public release claims remain canonical-only.
 
@@ -282,39 +322,21 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
-Candidate, monitoring, discovery, editorial-research, and private material remain outside canonical public release claims until separately reviewed and promoted through the proper canonical process.
+Candidate, monitoring, discovery, editorial-research, and private material remain outside canonical public release claims until separately reviewed and promoted.
 
-Record Depth baselines, Tier A queues, and dossier-impact reports remain internal planning infrastructure.
+Record Depth baselines, Tier A queues, dossier handoffs, and dossier-impact reports remain internal planning infrastructure.
 
-## 11. Monitoring rules
+## 12. Monitoring rules
 
 Monitoring remains private, review-only, and read-only with respect to canonical data.
 
-Monitoring may:
+Monitoring may observe, compare, classify, identify stale review state, prepare private review material, and discover bounded leads.
 
-```text
-observe
-compare
-classify
-identify stale review state
-prepare private review material
-discover bounded leads
-```
+Monitoring may not write canonical data, self-accept baselines, edit guides automatically, create canonical pull requests automatically, publish candidates, or deploy.
 
-Monitoring may not:
+A registered source is not an accepted baseline. Monitoring output is not canonical data.
 
-```text
-write canonical data
-self-accept baselines
-edit guides automatically
-create canonical pull requests automatically
-publish candidates or leads
-deploy
-```
-
-A registered source is not an accepted baseline. A pending baseline is not accepted monitoring coverage. Monitoring output is not canonical data.
-
-## 12. Market Access rules
+## 13. Market Access rules
 
 Canonical Market Access promotion must follow:
 
@@ -334,17 +356,17 @@ Do not reduce access to a universal allowed/banned boolean.
 
 A platform licence is not proof that a specific asset/function combination is available.
 
-Monitoring observations and editorial matrices are not canonical Market Access Records.
+Monitoring observations, legal-profile facts, and editorial matrices are not canonical Market Access Records.
 
-PR #354 must not add rows to `data/market-access-records-v1.json`.
+PR #355 must not add rows to `data/market-access-records-v1.json`.
 
-## 13. Dossier and growth rules
+## 14. Dossier and growth rules
 
 Tier A dossier batches normally cover no more than five existing assets.
 
 They may deepen supporting canonical records and evidence but do not add new canonical assets unless explicitly approved as combined growth work.
 
-PR #355 must read the immutable PR #353 snapshots and the reviewed PR #354 post-change impact output before selecting the next batch.
+PR #356 must read merged PR #355 authority before implementing Market Access Pilot 1.
 
 If a growth PR adds new canonical stable assets:
 
@@ -354,11 +376,11 @@ maximum two new canonical stable assets per growth PR
 
 All applicable supporting record groups must be preserved.
 
-## 14. Derived-surface rules
+## 15. Derived-surface rules
 
 Statistics derive from reviewed canonical data and do not become live price, market-cap, APY, safety, transparency, or risk rankings.
 
-Compare uses reviewed canonical data, preserves unresolved states, and does not score or recommend assets.
+Compare preserves unresolved states and does not score or recommend assets.
 
 Comparison Readiness remains separate from factual value truth and facet freshness.
 
@@ -366,15 +388,15 @@ Facet Freshness derives from authoritative record families.
 
 Record Depth planning state remains internal and does not replace canonical facts.
 
-Change Timeline preserves source date semantics and does not turn review/freshness dates into historical events.
+Change Timeline preserves source date semantics.
 
 Update Feed publication dates remain separate from historical subject dates.
 
 Maintenance Log remains public-safe and aggregate-only.
 
-## 15. Historical checkpoint rules
+## 16. Historical checkpoint rules
 
-Do not rewrite historical checkpoints merely because the registry or current dossier depth changed.
+Do not rewrite historical checkpoints because current canonical data or dossier depth changed.
 
 Binding historical material includes:
 
@@ -385,18 +407,17 @@ audited asset checkpoints
 monitoring snapshots
 statistics history
 PR #353 planning snapshots
+PR #354 reviewed handoff
 closed Maintenance Log months
 ```
 
-Historical detail remains in repository release, migration, quality, roadmap-amendment, monitoring-baseline, and history files.
-
-## 16. Deployment rule
+## 17. Deployment rule
 
 Normal merged changes publish from `main` under `docs/deployment-policy.md`.
 
-Scheduled monitoring remains artifact-only and does not authorize monitoring artifact publication, canonical writes, guide edits, automatic pull requests, or Cloudflare deployment.
+Scheduled monitoring remains artifact-only and does not authorize canonical writes, guide edits, automatic canonical pull requests, or deployment.
 
-## 17. Review gate
+## 18. Review gate
 
 After PR #360, stop and review:
 
