@@ -30,27 +30,27 @@
     "id": "sog_st_husd",
     "reserve_profile": {
       "backing_types": ["cash", "bank_deposits", "unknown"],
-      "summary": "Historical descriptions presented HUSD as a fiat-backed stablecoin. Current reserve composition, custodian state, attestations, and final asset disposition could not be verified from durable primary sources.",
+      "summary": "Historical issuer materials and reviewed reserve-account analysis described HUSD as a fiat-backed stablecoin supported by U.S.-dollar reserve accounts. Current reserve composition, custody, attestations, and final asset disposition remain unverified.",
       "disclosure_status": "historical_and_incomplete",
       "as_of_date": null,
       "latest_report_id": null,
-      "confidence": "low",
-      "evidence_ids": ["sog_src_husd_background_batch_d", "sog_src_husd_depeg_batch_d"]
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_husd_background_batch_d", "sog_src_husd_legal_attestation_status_2026"]
     },
     "redemption_profile": {
       "status": "unknown",
-      "settlement_asset": "Historically U.S. dollars through issuer processes",
-      "eligible_parties": "Historical issuer-account and compliance requirements applied; current eligibility is unconfirmed.",
+      "settlement_asset": "Historically U.S. dollars through Stable Universal issuer processes",
+      "eligible_parties": "Historical verified issuer-account holders subject to compliance requirements; current eligibility and service availability are unconfirmed.",
       "retail_access": "unknown_or_unavailable",
       "institutional_access": "unknown_or_unavailable",
       "minimum_amount_text": "Unknown.",
       "fee_text": "Unknown.",
       "settlement_time_text": "Unknown.",
-      "jurisdiction_restrictions": ["Historical compliance restrictions applied.", "Current direct-redemption availability is unconfirmed."],
+      "jurisdiction_restrictions": ["Historical issuer compliance and eligibility restrictions applied.", "Current direct-redemption availability and jurisdiction scope are unconfirmed."],
       "redemption_url": null,
-      "as_of_date": "2026-06-14",
-      "confidence": "low",
-      "evidence_ids": ["sog_src_husd_depeg_batch_d", "sog_src_husd_delisting_batch_d"]
+      "as_of_date": "2026-07-13",
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_husd_background_batch_d", "sog_src_husd_legal_attestation_status_2026"]
     }
   },
   {
