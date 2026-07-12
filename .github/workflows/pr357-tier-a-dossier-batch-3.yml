@@ -36,6 +36,12 @@ jobs:
       - name: Build deterministic dossier audit
         run: node scripts/growth/build-tier-a-batch-3-current-audit-pr357.mjs artifacts/pr357/tier-a-batch-3-current-audit.json
 
+      - name: Build deterministic dossier impact
+        run: node scripts/growth/build-tier-a-batch-3-impact-pr357.mjs artifacts/pr357/tier-a-batch-3-impact.json
+
+      - name: Validate dossier impact
+        run: node scripts/validate-tier-a-dossier-batch-3-impact-pr357.mjs
+
       - name: Verify immutable prior outputs
         run: |
           git diff --exit-code origin/main...HEAD -- \
@@ -109,20 +115,22 @@ jobs:
       - name: Verify public layer
         run: npm run verify:public
 
-      - name: Verify planning and handoff files remain non-public
+      - name: Verify planning, outcome, and handoff files remain non-public
         run: |
           test ! -e dist/data/tier-a-batch-3-selection.json
           test ! -e dist/data/pr356-reviewed-handoff.json
           test ! -e dist/data/tier-a-batch-3-current-audit.json
+          test ! -e dist/data/tier-a-batch-3-impact.json
+          test ! -e dist/data/tier-a-batch-3-review-outcomes.json
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
-          if (manifest.public_files?.tier_a_batch_3_selection) throw new Error('PR #357 planning selection leaked into public manifest');
-          if (manifest.public_files?.pr356_reviewed_handoff) throw new Error('PR #356 handoff leaked into public manifest');
-          if (manifest.public_files?.tier_a_batch_3_current_audit) throw new Error('PR #357 internal audit leaked into public manifest');
+          for (const key of ['tier_a_batch_3_selection','pr356_reviewed_handoff','tier_a_batch_3_current_audit','tier_a_batch_3_impact','tier_a_batch_3_review_outcomes']) {
+            if (manifest.public_files?.[key]) throw new Error(`Internal PR #357 material leaked into public manifest: ${key}`);
+          }
           if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
-          console.log('PR #357 internal planning material remains outside public output.');
+          console.log('PR #357 internal planning and review material remains outside public output.');
           NODE
 
       - name: Upload PR 357 audit artifacts
