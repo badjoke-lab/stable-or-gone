@@ -22,7 +22,7 @@ function countMultiValues(values: unknown[][]) {
   return countValues(values.flat());
 }
 
-export function getCanonicalPublicRecordCounts() {
+export function getRecordCounts() {
   const evidence = getCompleteEvidence();
   return {
     ...getBaseRecordCounts(),
@@ -30,7 +30,7 @@ export function getCanonicalPublicRecordCounts() {
   };
 }
 
-export function getCanonicalPublicRecordCountBreakdown() {
+export function getRecordCountBreakdown() {
   const evidence = getCompleteEvidence();
   const evidenceRelations = getCanonicalEvidenceRelations();
   const sourceIdentities = getEvidenceSourceIdentities();
