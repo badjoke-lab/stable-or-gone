@@ -1,0 +1,38 @@
+name: PR 357 Authority Sync
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.head_ref == 'pr357-tier-a-dossier-batch-3'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR 357 branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr357-tier-a-dossier-batch-3
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+
+      - name: Synchronize repository authority
+        run: node scripts/activate-pr357-authority.mjs
+
+      - name: Commit authority synchronization
+        run: |
+          if git diff --quiet; then
+            echo 'PR #357 authority already synchronized.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md
+          git commit -m 'Activate PR 357 repository authority'
+          git push origin HEAD:pr357-tier-a-dossier-batch-3
