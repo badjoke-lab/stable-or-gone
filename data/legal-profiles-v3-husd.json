@@ -1,1 +1,32 @@
-[{"id":"sog_st_husd","classifications":[{"classification":"unclassified","evidence_ids":[]}],"holder_claim_type":"unknown","claim_against_organization_ids":[],"reserve_ownership":"unknown","reserve_segregation":"unknown","bankruptcy_remoteness":"unknown","licensed_or_regulated_as":[],"evidence_ids":[]}]
+[
+  {
+    "id": "sog_st_husd",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "United States / historical Stable Universal issuer context",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "Archived Stable Universal HUSD product materials and reviewed reserve-account analysis",
+        "confidence": "medium",
+        "evidence_ids": [
+          "sog_src_husd_background_batch_d",
+          "sog_src_husd_legal_attestation_status_2026"
+        ]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": [
+      "sog_issuer_stable_universal"
+    ],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "operationally_separate",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": [
+      "sog_src_husd_background_batch_d",
+      "sog_src_husd_legal_attestation_status_2026"
+    ],
+    "notes": "This is a historical claim-structure profile based on archived issuer materials and reviewed analysis of reserve-account language. It does not establish current reserve custody, current direct-redemption availability, or legal bankruptcy remoteness after the 2022 depeg and market withdrawal. Operational separation describes the historical reserve-account representation only."
+  }
+]
