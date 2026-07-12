@@ -1,20 +1,21 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_tier_a_dossier_batch_2_canonical_110_checkpoint_pr355_2026_07_12",
-  "checkpoint_kind": "non_growth_normalization_checkpoint",
+  "checkpoint_id": "sog_market_access_pilot_1_canonical_110_checkpoint_pr356_2026_07_12",
+  "checkpoint_kind": "non_growth_market_access_checkpoint",
   "recorded_at": "2026-07-12",
-  "source_commit": "pr355-tier-a-dossier-batch-2",
+  "source_commit": "pr356-market-access-pilot-1",
   "asset_count": 110,
-  "source_checkpoint_id": "sog_tier_a_dossier_batch_1_canonical_110_checkpoint_pr354_2026_07_12",
-  "previous_checkpoint_id": "sog_tier_a_dossier_batch_1_canonical_110_checkpoint_pr354_2026_07_12",
-  "dossier_pr": 355,
+  "source_checkpoint_id": "sog_tier_a_dossier_batch_2_canonical_110_checkpoint_pr355_2026_07_12",
+  "previous_checkpoint_id": "sog_tier_a_dossier_batch_2_canonical_110_checkpoint_pr355_2026_07_12",
+  "market_access_pr": 356,
   "expected_counts": {
     "assets": 110,
     "organizations": 103,
     "relationships": 120,
     "events": 185,
-    "evidence": 549,
+    "evidence": 551,
+    "market_access_records": 4,
     "reserve_reports": 118,
     "known_unknowns": 319,
     "regulatory_notes": 9,
@@ -24,5 +25,5 @@
     "reserve_components": 143,
     "income_profiles": 110
   },
-  "notes": "Current deterministic canonical checkpoint after reviewed PR #355 Tier A dossier deepening. Asset count remains 110; two new reviewed primary evidence rows advance evidence and evidence-relation totals from 547 to 549. FDUSD, PYUSD, USDP, and UST reuse reviewed canonical evidence identities. Earlier checkpoints remain immutable."
+  "notes": "Current deterministic canonical checkpoint after PR #356 Market Access Pilot 1. Asset count remains 110; two reviewed primary Evidence rows advance Evidence and Evidence Relations from 549 to 551, and four bounded USDC / Japan / SBI VC Trade function-scoped Market Access Records are promoted. Earlier checkpoints remain immutable."
 }
