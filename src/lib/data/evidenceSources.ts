@@ -6,15 +6,36 @@ import {
   evidenceSourceIdentityGroupCount,
   resolveEvidenceIdentityId
 } from '../../../config/evidence-source-identities.mjs';
-import { getEvidence, getEvidenceRelations } from './registry';
+import { getEvidence as getRegistryEvidence, getEvidenceRelations as getRegistryEvidenceRelations } from './registry';
+import { getPost351Evidence, getPost351EvidenceRelations } from './post351Evidence';
 import type { EvidenceRelationRow, EvidenceRow } from './registryBase';
 
 export type EvidenceSourceIdentityRow = EvidenceRow & {
   source_alias_ids: string[];
 };
 
+export function getCompleteEvidence(): EvidenceRow[] {
+  return [...getRegistryEvidence(), ...getPost351Evidence()].map((row) => ({
+    ...row,
+    stablecoin_ids: [...(row.stablecoin_ids ?? [])],
+    organization_ids: [...(row.organization_ids ?? [])],
+    event_ids: [...(row.event_ids ?? [])],
+    claim_scopes: [...(row.claim_scopes ?? [])],
+  }));
+}
+
+export function getCompleteEvidenceRelations(): EvidenceRelationRow[] {
+  return [...getRegistryEvidenceRelations(), ...getPost351EvidenceRelations()].map((row) => ({
+    ...row,
+    stablecoin_ids: [...row.stablecoin_ids],
+    organization_ids: [...row.organization_ids],
+    event_ids: [...row.event_ids],
+    claim_scopes: [...row.claim_scopes],
+  }));
+}
+
 export function getEvidenceSourceIdentities(): EvidenceSourceIdentityRow[] {
-  return deduplicateEvidenceRecords(getEvidence()).map((row) => ({
+  return deduplicateEvidenceRecords(getCompleteEvidence()).map((row) => ({
     ...row,
     stablecoin_ids: [...(row.stablecoin_ids ?? [])],
     organization_ids: [...(row.organization_ids ?? [])],
@@ -25,7 +46,7 @@ export function getEvidenceSourceIdentities(): EvidenceSourceIdentityRow[] {
 }
 
 export function getCanonicalEvidenceRelations(): EvidenceRelationRow[] {
-  return getEvidenceRelations().map((relation) => ({
+  return getCompleteEvidenceRelations().map((relation) => ({
     ...relation,
     evidence_id: resolveEvidenceIdentityId(relation.evidence_id),
     stablecoin_ids: [...relation.stablecoin_ids],
@@ -40,7 +61,7 @@ export function canonicalizeLinkedEvidenceIds(ids?: Array<string | null | undefi
 }
 
 export function getEvidenceSourceIdentitySummary() {
-  const rawEvidenceRecords = getEvidence();
+  const rawEvidenceRecords = getCompleteEvidence();
   const sourceIdentities = getEvidenceSourceIdentities();
   const relations = getCanonicalEvidenceRelations();
   const relationEvidenceIds = new Set(relations.map((relation) => relation.evidence_id));
