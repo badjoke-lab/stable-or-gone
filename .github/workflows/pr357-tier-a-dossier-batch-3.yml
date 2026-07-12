@@ -1,0 +1,118 @@
+name: PR 357 Tier A Dossier Batch 3
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr357-tier-a-dossier-batch-3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate deterministic Batch 3 selection
+        run: node scripts/validate-tier-a-dossier-batch-3-selection-pr357.mjs
+
+      - name: Validate active workstream authority
+        run: npm run validate:active-workstream
+
+      - name: Verify immutable prior outputs
+        run: |
+          git diff --exit-code origin/main...HEAD -- \
+            docs/migration/record-depth-baseline-pr353-summary.json \
+            docs/migration/tier-a-candidate-queue-pr353.json \
+            docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json \
+            docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const handoff = JSON.parse(fs.readFileSync('docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json', 'utf8'));
+          if (handoff.source_merge_commit !== 'ff48267a54333bd05c2fae1606c7744c3d5e200d') throw new Error('PR #356 handoff merge commit mismatch');
+          if (handoff.canonical_counts?.assets !== 110) throw new Error('PR #356 handoff asset count mismatch');
+          if (handoff.canonical_counts?.evidence !== 551) throw new Error('PR #356 handoff Evidence count mismatch');
+          if (handoff.canonical_counts?.market_access_records !== 4) throw new Error('PR #356 handoff Market Access count mismatch');
+          console.log('Historical PR #353 snapshots and reviewed PR #354-#356 handoffs preserved.');
+          NODE
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate profiles
+        run: npm run validate:profiles
+
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+
+      - name: Validate deterministic statistics
+        run: |
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+
+      - name: Validate immutable statistics history
+        run: SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+
+      - name: Verify PR 357 boundaries
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const config = JSON.parse(fs.readFileSync('config/tier-a-dossier-batch-3-pr357.json', 'utf8'));
+          const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
+          const marketAccess = JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8'));
+          const selected = config.selected_assets.map((row) => row.asset_slug);
+          if (JSON.stringify(selected) !== JSON.stringify(['audd','fei','husd','mim','nzds'])) throw new Error('PR #357 selected set changed');
+          if (checkpoint.asset_count !== 110) throw new Error('PR #357 must preserve 110 canonical assets');
+          if (marketAccess.length !== 4) throw new Error('PR #357 must preserve exactly four Market Access records');
+          if (config.new_canonical_assets_allowed !== false) throw new Error('New canonical assets must remain forbidden');
+          if (config.market_access_records_allowed !== false) throw new Error('Market Access changes must remain forbidden');
+          if (config.new_public_surface_allowed !== false) throw new Error('New public surface must remain forbidden');
+          if (config.asset_rank !== false || config.single_composite_score !== false) throw new Error('Rank/score boundary changed');
+          console.log('PR #357 selection and canonical/public boundaries preserved.');
+          NODE
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify public layer
+        run: npm run verify:public
+
+      - name: Verify planning and handoff files remain non-public
+        run: |
+          test ! -e dist/data/tier-a-batch-3-selection.json
+          test ! -e dist/data/pr356-reviewed-handoff.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.tier_a_batch_3_selection) throw new Error('PR #357 planning selection leaked into public manifest');
+          if (manifest.public_files?.pr356_reviewed_handoff) throw new Error('PR #356 handoff leaked into public manifest');
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
+          console.log('PR #357 internal planning material remains outside public output.');
+          NODE
