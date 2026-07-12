@@ -1,0 +1,149 @@
+name: PR 358 Record Growth Batch 1
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr358-record-growth-batch-1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate bounded candidate selection
+        run: node scripts/validate-record-growth-batch-1-selection-pr358.mjs
+
+      - name: Validate active workstream authority
+        run: npm run validate:active-workstream
+
+      - name: Verify reviewed PR 357 handoff
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const handoff = JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json', 'utf8'));
+          if (handoff.source_merge_commit !== 'b849bfd582209aad217dd1af2198c755ff0760ab') throw new Error('PR #357 merge commit mismatch');
+          if (handoff.canonical_counts?.assets !== 110) throw new Error('PR #357 asset count mismatch');
+          if (handoff.canonical_counts?.evidence !== 551) throw new Error('PR #357 Evidence count mismatch');
+          if (handoff.canonical_counts?.market_access_records !== 4) throw new Error('PR #357 Market Access count mismatch');
+          if (handoff.next_work_item !== 'PR #358 Record Growth Batch 1') throw new Error('PR #357 next work item mismatch');
+          console.log('Reviewed PR #357 handoff valid.');
+          NODE
+
+      - name: Verify candidate-stage canonical boundary
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { loadRegistryV2Baseline } from './scripts/load-registry-v2-baseline.mjs';
+          const root = process.cwd();
+          const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
+          const rows = (file) => {
+            const value = readJson(file);
+            return Array.isArray(value) ? value : value.records;
+          };
+          const baseline = loadRegistryV2Baseline(root);
+          const assets = (baseline.data_groups?.stablecoins ?? []).flatMap(rows);
+          const ids = new Set(assets.map((row) => row.id));
+          const slugs = new Set(assets.map((row) => row.slug));
+          if (assets.length !== 110) throw new Error(`Candidate-stage asset count must remain 110, found ${assets.length}`);
+          for (const id of ['sog_st_usdg','sog_st_usd1']) if (ids.has(id)) throw new Error(`Candidate promoted before full review: ${id}`);
+          for (const slug of ['global-dollar-usdg','world-liberty-financial-usd1']) if (slugs.has(slug)) throw new Error(`Candidate slug promoted before full review: ${slug}`);
+          const marketAccess = readJson('data/market-access-records-v1.json');
+          if (marketAccess.length !== 4) throw new Error(`Market Access count changed: ${marketAccess.length}`);
+          console.log('Candidate-stage canonical boundary valid.');
+          NODE
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+
+      - name: Validate deterministic statistics
+        run: |
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+
+      - name: Validate immutable statistics history
+        run: SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify public layer
+        run: npm run verify:public
+
+      - name: Verify candidate research remains non-public
+        run: |
+          test ! -e dist/data/record-growth-batch-1-pr358-candidates.json
+          test ! -e dist/data/pr357-reviewed-handoff.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          for (const key of ['record_growth_batch_1_candidates','pr357_reviewed_handoff']) {
+            if (manifest.public_files?.[key]) throw new Error(`Internal PR #358 material leaked into public manifest: ${key}`);
+          }
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
+          console.log('PR #358 candidate research remains outside public output.');
+          NODE
+
+      - name: Publish PR 358 candidate-stage summary
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- pr358-record-growth-status -->';
+            const config = JSON.parse(fs.readFileSync('config/record-growth-batch-1-pr358.json', 'utf8'));
+            const research = JSON.parse(fs.readFileSync('data/editorial-research/record-growth-batch-1-pr358-candidates.json', 'utf8'));
+            const body = `${marker}
+            ## PR #358 Record Growth Batch 1 status
+
+            - Workflow status: **${{ job.status }}**
+            - Stage: \`${config.status}\`
+            - Context group: \`${config.context_group}\`
+            - Selected candidates: ${research.candidates.map((row) => `\`${row.symbol}\``).join(', ')}
+            - Canonical assets before promotion: **${config.canonical_count_before}**
+            - Maximum new assets: **${config.maximum_new_assets}**
+            - Maximum post-PR assets: **${config.planned_canonical_count_after}**
+            - Automatic promotion: **disabled**
+            - Thin records: **forbidden**
+            - Head: \`${context.sha}\`
+            `;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body});
+            } else {
+              await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number, body});
+            }
