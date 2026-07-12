@@ -1,0 +1,38 @@
+name: PR 356 Authority Sync
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.head_ref == 'pr356-market-access-pilot-1'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pilot branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr356-market-access-pilot-1
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+
+      - name: Synchronize authority documents
+        run: node scripts/activate-pr356-authority.mjs
+
+      - name: Commit synchronized authority
+        run: |
+          if git diff --quiet; then
+            echo 'Authority already synchronized.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md
+          git commit -m 'Activate PR 356 repository authority'
+          git push origin HEAD:pr356-market-access-pilot-1
