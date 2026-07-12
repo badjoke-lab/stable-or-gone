@@ -9,14 +9,16 @@ import {
   getEvidenceSourceIdentitySummary,
 } from './data/evidenceSources';
 import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
+import { getEvidenceRelationKind } from '../../config/evidence-relation-kinds.mjs';
 import { resolvePublicValueState } from '../../config/value-states.mjs';
 
 function countValues(values: unknown[]) {
-  return values.reduce<Record<string, number>>((counts, rawValue) => {
+  const counts = values.reduce<Map<string, number>>((result, rawValue) => {
     const value = rawValue === null || rawValue === undefined || rawValue === '' ? 'unknown' : String(rawValue);
-    counts[value] = (counts[value] || 0) + 1;
-    return counts;
-  }, {});
+    result.set(value, (result.get(value) ?? 0) + 1);
+    return result;
+  }, new Map());
+  return Object.fromEntries([...counts.entries()].sort(([left], [right]) => left.localeCompare(right)));
 }
 
 function countMultiValues(values: unknown[][]) {
@@ -56,7 +58,7 @@ export function getRecordCountBreakdown() {
     evidence_reliability: countValues(evidenceTaxonomies.map((item) => item.reliability)),
     canonical_evidence_reliability_raw: countValues(evidenceTaxonomies.map((item) => item.canonical_reliability_raw)),
     evidence_archive_state: countValues(evidenceTaxonomies.map((item) => item.archive_state)),
-    evidence_relation_kind: countValues(evidenceRelations.map((item) => item.relation_kind)),
+    evidence_relation_kind: countValues(evidence.map((item) => getEvidenceRelationKind(item.id))),
     evidence_published_at_value_state: countValues(evidence.map((item) => resolvePublicValueState(item.published_at))),
     public_evidence_source_identity_category: countValues(sourceIdentityTaxonomies.map((item) => item.public_category)),
     evidence_source_identity_provenance: countValues(sourceIdentityTaxonomies.map((item) => item.provenance)),
