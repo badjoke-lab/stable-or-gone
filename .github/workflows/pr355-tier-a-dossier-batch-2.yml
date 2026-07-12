@@ -59,13 +59,23 @@ jobs:
       - name: Validate dossier impact and evidence contracts
         run: node scripts/validate-tier-a-dossier-batch-2-impact-pr355.mjs
 
-      - name: Validate canonical boundaries
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate stablecoin profiles
+        run: npm run validate:profiles
+
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate PR 355 canonical boundaries
         run: |
-          npm run validate:data
-          npm run validate:profiles
-          npm run validate:evidence-relations-v2
-          npm run validate:v3
-          npm run validate:parity
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const config = JSON.parse(fs.readFileSync('config/tier-a-dossier-batch-2-pr355.json', 'utf8'));
