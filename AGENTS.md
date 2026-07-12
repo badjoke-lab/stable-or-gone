@@ -35,7 +35,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/tier-a-dossier-batch-3-pr357-spec.md
+docs/quality/record-growth-batch-1-pr358-spec.md
 ```
 
 Current required prior outputs:
@@ -77,8 +77,9 @@ PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
 PR #355 Tier A Dossier Deepening — Batch 2: complete
 PR #356 Market Access Pilot 1: complete
-PR #357 Tier A Dossier Deepening — Batch 3: active
-PR #358 Record Growth Batch 1: next
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
+PR #359 Market Access Pilot 2: next
 ```
 
 Approved bounded sequence:
@@ -89,9 +90,9 @@ PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — complete
-PR #357  Tier A Dossier Deepening — Batch 3 — active
-PR #358  Record Growth Batch 1 — next
-PR #359  Market Access Pilot 2
+PR #357  Tier A Dossier Deepening — Batch 3 — complete
+PR #358  Record Growth Batch 1 — active
+PR #359  Market Access Pilot 2 — next
 PR #360  Evidence and Correction Batch
 REVIEW GATE
 ```
@@ -416,8 +417,8 @@ Current work item:
 
 ```text
 PR #356 Market Access Pilot 1: complete
-PR #357 Tier A Dossier Deepening — Batch 3: active
-PR #358 Record Growth Batch 1: next
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
 ```
 
 Binding references:
@@ -444,4 +445,39 @@ NZDS
 ```
 
 This is deterministic queue consumption, not a ranking. PR #357 preserves 110 canonical stable assets, four canonical Market Access Records, canonical-only publication, and the existing public-surface boundary.
+
+## PR #358 active authority
+
+Current work item:
+
+```text
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
+PR #359 Market Access Pilot 2: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+data/editorial-research/record-growth-batch-1-pr358-candidates.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
+```
+
+Selected context group:
+
+```text
+current USD reserve-backed institutional stablecoins
+```
+
+Selected candidates:
+
+```text
+Global Dollar / USDG / sog_st_usdg
+World Liberty Financial USD1 / USD1 / sog_st_usd1
+```
+
+Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
 

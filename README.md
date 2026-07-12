@@ -39,8 +39,9 @@ PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
 PR #355 Tier A Dossier Deepening — Batch 2: complete
 PR #356 Market Access Pilot 1: complete
-PR #357 Tier A Dossier Deepening — Batch 3: active
-PR #358 Record Growth Batch 1: next
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
+PR #359 Market Access Pilot 2: next
 ```
 
 Approved bounded sequence:
@@ -51,9 +52,9 @@ PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — complete
-PR #357  Tier A Dossier Deepening — Batch 3 — active
-PR #358  Record Growth Batch 1 — next
-PR #359  Market Access Pilot 2
+PR #357  Tier A Dossier Deepening — Batch 3 — complete
+PR #358  Record Growth Batch 1 — active
+PR #359  Market Access Pilot 2 — next
 PR #360  Evidence and Correction Batch
 REVIEW GATE
 ```
@@ -129,7 +130,7 @@ PR #356 promoted four provider-scoped USDC Market Access records for Japan / SBI
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-## Active PR #357 Tier A Dossier Deepening — Batch 3
+## Completed PR #357 Tier A Dossier Deepening — Batch 3
 
 PR #357 is bounded to five existing assets selected deterministically from the remaining PR #353 queue:
 
@@ -142,6 +143,10 @@ NZDS
 ```
 
 It may deepen only the authorized events, lifecycle, organization-relationship, redemption, and legal-profile dimensions. It adds no stable asset, changes no Market Access record, and adds no public product surface.
+
+## Active PR #358 Record Growth Batch 1
+
+PR #358 is bounded to full-record review of Global Dollar (USDG) and World Liberty Financial USD1 (USD1). Candidate selection remains noncanonical until duplicate, evidence, organization, profile, deployment, event, and known-unknown requirements are satisfied.
 
 ## Post-351 operating mode
 
@@ -352,8 +357,8 @@ Current work item:
 
 ```text
 PR #356 Market Access Pilot 1: complete
-PR #357 Tier A Dossier Deepening — Batch 3: active
-PR #358 Record Growth Batch 1: next
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
 ```
 
 Binding references:
@@ -380,4 +385,39 @@ NZDS
 ```
 
 This is deterministic queue consumption, not a ranking. PR #357 preserves 110 canonical stable assets, four canonical Market Access Records, canonical-only publication, and the existing public-surface boundary.
+
+## PR #358 active authority
+
+Current work item:
+
+```text
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
+PR #359 Market Access Pilot 2: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+data/editorial-research/record-growth-batch-1-pr358-candidates.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
+```
+
+Selected context group:
+
+```text
+current USD reserve-backed institutional stablecoins
+```
+
+Selected candidates:
+
+```text
+Global Dollar / USDG / sog_st_usdg
+World Liberty Financial USD1 / USD1 / sog_st_usd1
+```
+
+Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
 
