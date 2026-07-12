@@ -1,20 +1,5 @@
 [
   {
-    "id": "sog_src_fdusd_product_pr355",
-    "stablecoin_id": "sog_st_fdusd",
-    "issuer_id": "sog_issuer_first_digital",
-    "event_id": null,
-    "source_type": "official_product_page",
-    "title": "First Digital USD (FDUSD)",
-    "url": "https://www.firstdigitallabs.com/fdusd",
-    "publisher": "First Digital Labs",
-    "published_at": null,
-    "accessed_at": "2026-07-12",
-    "reliability": "high",
-    "claim_scope": "issuer identity, one-to-one backing, reserve custody, trust structure, redemption eligibility, retail limitation, and U.S.-person restriction",
-    "notes": "Primary FDUSD product and disclosure page. Supports bounded statements that FD121 (BVI) Limited issues FDUSD, First Digital Trust Limited provides reserve custody, reserves are described as held in a bankruptcy-remote trust structure, and direct mint/redemption is limited to eligible clients rather than retail customers."
-  },
-  {
     "id": "sog_src_frax_v3_overview_pr355",
     "stablecoin_id": "sog_st_frax",
     "issuer_id": "sog_issuer_frax_finance",
@@ -52,36 +37,6 @@
       "bankruptcy remoteness",
       "jurisdiction restrictions"
     ],
-    "notes": "Shared primary legal terms for Paxos-issued USD stablecoins. Multi-subject relation intentionally avoids duplicate evidence rows for the same canonical URL."
-  },
-  {
-    "id": "sog_src_pyusd_product_pr355",
-    "stablecoin_id": "sog_st_pyusd",
-    "issuer_id": "sog_issuer_paxos",
-    "event_id": null,
-    "source_type": "official_product_page",
-    "title": "PayPal USD (PYUSD)",
-    "url": "https://www.paxos.com/pyusd",
-    "publisher": "Paxos",
-    "published_at": null,
-    "accessed_at": "2026-07-12",
-    "reliability": "high",
-    "claim_scope": "Paxos issuer identity, PayPal product role, one-to-one backing, segregation, bankruptcy remoteness, and PayPal/Paxos conversion context",
-    "notes": "Primary PYUSD product page. Supports separation of Paxos as issuer from PayPal as product/distribution brand and describes segregated bankruptcy-remote customer assets."
-  },
-  {
-    "id": "sog_src_usdp_product_pr355",
-    "stablecoin_id": "sog_st_usdp",
-    "issuer_id": "sog_issuer_paxos",
-    "event_id": null,
-    "source_type": "official_product_page",
-    "title": "Pax Dollar (USDP)",
-    "url": "https://www.paxos.com/usdp",
-    "publisher": "Paxos",
-    "published_at": null,
-    "accessed_at": "2026-07-12",
-    "reliability": "high",
-    "claim_scope": "Paxos issuer identity, OCC oversight context, one-to-one redemption, reserve segregation, and bankruptcy remoteness",
-    "notes": "Primary USDP product page. Supports asset-specific issuer, oversight, segregation, bankruptcy-remoteness, and redemption statements without reusing BUSD wind-down evidence."
+    "notes": "Shared primary legal terms for Paxos-issued USD stablecoins. Multi-subject relation intentionally avoids duplicate evidence rows for the same canonical URL. Existing FDUSD, PYUSD, and USDP product-page source identities are reused rather than duplicated."
   }
 ]
