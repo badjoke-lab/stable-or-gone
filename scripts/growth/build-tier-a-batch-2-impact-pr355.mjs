@@ -17,7 +17,13 @@ const paths = {
   evidence: 'data/evidence-pr355-tier-a-batch-2.json',
   checkpoint: 'docs/migration/current-canonical-checkpoint.json'
 };
-const reviewedExistingEvidenceIds = new Set(['sog_src_ust_sec_2023_32']);
+const reviewedExistingEvidenceIds = new Set([
+  'sog_src_fdusd_site',
+  'sog_src_pyusd_paxos_page',
+  'sog_src_usdp_paxos_page',
+  'sog_src_ust_sec_2023_32'
+]);
+const unresolvedLegalValues = new Set(['unclassified', 'unknown', 'not_recorded', 'source_review_needed', 'unclear']);
 
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const readJson = (file) => JSON.parse(readText(file));
@@ -31,6 +37,28 @@ const digestFiles = (files) => {
   }
   return digest.digest('hex');
 };
+
+function reviewedLegalPlanningState(legal, fallback) {
+  if (!legal) return fallback;
+  const classifications = legal.classifications ?? [];
+  const completeClassifications = classifications.length > 0 && classifications.every((entry) => (
+    typeof entry.classification === 'string'
+    && !unresolvedLegalValues.has(entry.classification)
+    && typeof entry.jurisdiction === 'string'
+    && entry.jurisdiction.length > 0
+    && ['high', 'medium'].includes(entry.confidence)
+    && Array.isArray(entry.evidence_ids)
+    && entry.evidence_ids.length > 0
+  ));
+  const completeCore = [
+    legal.holder_claim_type,
+    legal.reserve_ownership,
+    legal.reserve_segregation,
+    legal.bankruptcy_remoteness
+  ].every((value) => typeof value === 'string' && !unresolvedLegalValues.has(value));
+  const hasEvidence = Array.isArray(legal.evidence_ids) && legal.evidence_ids.length > 0;
+  return completeClassifications && completeCore && hasEvidence ? 'usable' : fallback;
+}
 
 export function buildTierABatch2Impact() {
   const config = readJson(paths.config);
@@ -72,7 +100,7 @@ export function buildTierABatch2Impact() {
       historical_material_dossier_gaps: queueRow?.material_dossier_gaps ?? [],
       target_dimensions: selected.target_dimensions,
       current_planning_states: {
-        legal_profile: dimension('legal_profile'),
+        legal_profile: reviewedLegalPlanningState(legal, dimension('legal_profile')),
         redemption: dimension('redemption')
       },
       legal_profile: legal ? {
@@ -129,7 +157,7 @@ export function buildTierABatch2Impact() {
     constraints: {
       canonical_asset_count_expected: 110,
       canonical_asset_count_actual: currentBaseline.asset_count,
-      canonical_evidence_count_expected: 552,
+      canonical_evidence_count_expected: 549,
       canonical_evidence_count_actual: checkpoint.expected_counts.evidence,
       market_access_record_count_expected: 0,
       completed_pr354_assets_unchanged: true,
