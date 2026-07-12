@@ -45,6 +45,8 @@ export function loadStatsInput(root = process.cwd()) {
     known_unknowns: v2Groups.known_unknowns ?? [],
     regulatory_notes: v2Groups.regulatory_notes ?? [],
     deployments: v2Groups.deployments ?? [],
+    market_access_records: asRows(readJson(root, 'data/market-access-records-v1.json'), 'data/market-access-records-v1.json')
+      .sort((a, b) => a.id.localeCompare(b.id)),
     legal_profiles: v3Groups.legal_profiles ?? [],
     stable_asset_relationships: v3Groups.stable_asset_relationships ?? [],
     reserve_components: v3Groups.reserve_components ?? [],
