@@ -1,0 +1,160 @@
+name: PR 356 Market Access Pilot 1
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr356-market-access-pilot-1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build bounded Market Access candidate review
+        run: node scripts/build-market-access-pilot-1-review-pr356.mjs artifacts/pr356/market-access-pilot-1-review.json
+
+      - name: Validate Market Access Pilot 1
+        run: node scripts/validate-market-access-pilot-1-pr356.mjs
+
+      - name: Validate canonical Market Access rows
+        run: node scripts/validate-market-access-canonical-pr356.mjs
+
+      - name: Validate active workstream authority
+        run: npm run validate:active-workstream
+
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+
+      - name: Validate Access Regulation projection
+        run: node scripts/validate-pr356-access-regulation-projection.mjs
+
+      - name: Generate current statistics snapshot candidate
+        run: |
+          mkdir -p artifacts/pr356
+          node scripts/stats/build-history-snapshot.mjs > artifacts/pr356/stats-history-current-snapshot.json
+
+      - name: Verify bounded pilot boundary
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const config = JSON.parse(fs.readFileSync('config/market-access-pilot-1-pr356.json', 'utf8'));
+          const records = JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8'));
+          const handoff = JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json', 'utf8'));
+          if (handoff.source_merge_commit !== 'b192c4c920e3a3626d006dd8b80f44e806f40da9') throw new Error('PR #355 handoff merge commit mismatch');
+          if (config.maximum_canonical_records !== 4) throw new Error('Pilot maximum must remain four records');
+          if (records.length !== 4) throw new Error(`Pilot must contain four records: ${records.length}`);
+          if (config.boundaries?.new_canonical_assets_allowed !== false) throw new Error('New canonical assets must remain forbidden');
+          if (config.boundaries?.new_public_surface_allowed !== false) throw new Error('New public surface must remain forbidden');
+          if (config.boundaries?.universal_japan_availability_claim_allowed !== false) throw new Error('Universal Japan availability claim must remain forbidden');
+          console.log(`PR #356 bounded pilot boundary valid at stage ${config.status}; canonical rows=${records.length}.`);
+          NODE
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify public layer
+        run: npm run verify:public
+
+      - name: Verify internal review is not public
+        run: |
+          test ! -e dist/data/market-access-pilot-1-review.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.public_files?.market_access_pilot_review) throw new Error('Internal pilot review leaked into public manifest');
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('Canonical-only boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('Candidate publication boundary changed');
+          console.log('Internal PR #356 review remains outside public output.');
+          NODE
+
+      - name: Publish validation summary to PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- pr356-market-access-pilot-status -->';
+            let review = null;
+            let snapshot = null;
+            try {
+              review = JSON.parse(fs.readFileSync('artifacts/pr356/market-access-pilot-1-review.json', 'utf8'));
+            } catch {}
+            try {
+              snapshot = JSON.parse(fs.readFileSync('artifacts/pr356/stats-history-current-snapshot.json', 'utf8'));
+            } catch {}
+            const matched = review?.exact_canonical_evidence_ids ?? [];
+            const unmatched = review?.unmatched_source_urls ?? [];
+            const body = `${marker}
+            ## PR #356 Market Access Pilot status
+
+            - Workflow status: **${{ job.status }}**
+            - Stage: \`${review?.status ?? 'review-not-built'}\`
+            - Candidate functions: **${review?.candidate_count ?? 0}**
+            - Promotion-ready: **${review?.promotion_ready_count ?? 0}**
+            - Exact canonical Evidence IDs: ${matched.length ? matched.map((id) => `\`${id}\``).join(', ') : 'none'}
+            - Unmatched reviewed source URLs: **${unmatched.length}**
+            - Canonical Market Access rows: **${JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8')).length}**
+            - Stats Evidence total: **${snapshot?.totals?.evidence ?? 'not-generated'}**
+            - Stats model SHA-256: \`${snapshot?.stats_model_sha256 ?? 'not-generated'}\`
+            - Snapshot SHA-256: \`${snapshot?.snapshot_sha256 ?? 'not-generated'}\`
+            - Head: \`${context.sha}\`
+            `;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Upload Market Access candidate review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr356-market-access-pilot-1-review-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: artifacts/pr356/

@@ -23,8 +23,9 @@ for (const marker of [
   'PR #351 Monthly Maintenance Log: complete',
   'PR #352 post-351 authority reset: complete',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
-  'PR #355 Tier A Dossier Deepening — Batch 2: active',
-  'PR #356 Market Access Pilot 1: next'
+  'PR #355 Tier A Dossier Deepening — Batch 2: complete',
+  'PR #356 Market Access Pilot 1: active',
+  'PR #357 Tier A Dossier Deepening — Batch 3: next'
 ]) requireText(readme, marker, 'README.md');
 for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(readme, route, 'README.md');
 for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(readme, boundary, 'README.md');
@@ -59,6 +60,7 @@ check(history.snapshots?.[0]?.asset_count === 100, 'stats history initial asset 
 const latestSnapshot = history.snapshots?.at(-1);
 check(latestSnapshot?.checkpoint_id === currentHistoryCheckpoint.checkpoint_id, 'stats history current reviewed checkpoint snapshot missing');
 check(latestSnapshot?.canonical_checkpoint_id === currentCheckpoint.checkpoint_id, 'stats history latest snapshot must bind the current canonical checkpoint');
+check(latestSnapshot?.totals?.market_access_records === currentCheckpoint.expected_counts?.market_access_records, 'stats history latest snapshot must include the current Market Access record count');
 check(currentHistoryCheckpoint.canonical_checkpoint_id === currentCheckpoint.checkpoint_id, 'current history checkpoint canonical binding mismatch');
 
 const updateId = 'sog_update_2026_07_06_audited_100_asset_checkpoint';
@@ -79,8 +81,9 @@ for (const marker of [
 for (const marker of [
   'Canonical stable assets: 110',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
-  'PR #355 Tier A Dossier Deepening — Batch 2: active',
-  'PR #356 Market Access Pilot 1: next',
+  'PR #355 Tier A Dossier Deepening — Batch 2: complete',
+  'PR #356 Market Access Pilot 1: active',
+  'PR #357 Tier A Dossier Deepening — Batch 3: next',
   'REVIEW GATE'
 ]) requireText(roadmap, marker, 'current roadmap');
 
@@ -103,11 +106,12 @@ console.log(JSON.stringify({
   current_checkpoint_id: currentCheckpoint.checkpoint_id,
   current_history_checkpoint_id: currentHistoryCheckpoint.checkpoint_id,
   current_stable_assets: currentCheckpoint.asset_count,
+  current_market_access_records: latestSnapshot?.totals?.market_access_records ?? 0,
   historical_release_integrity_baseline_id: checkpoint.release_integrity_baseline_id,
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
   stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_workstream: 'pr355_tier_a_dossier_batch_2',
-  next_workstream: 'pr356_market_access_pilot_1'
+  active_workstream: 'pr356_market_access_pilot_1',
+  next_workstream: 'pr357_tier_a_dossier_batch_3'
 }, null, 2));

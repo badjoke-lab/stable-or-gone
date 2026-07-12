@@ -12,8 +12,9 @@ current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
-PR #355 Tier A Dossier Deepening — Batch 2: active
-PR #356 Market Access Pilot 1: next
+PR #355 Tier A Dossier Deepening — Batch 2: complete
+PR #356 Market Access Pilot 1: active
+PR #357 Tier A Dossier Deepening — Batch 3: next
 ```
 
 The current operating mode is:
@@ -42,7 +43,12 @@ docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
-docs/quality/tier-a-dossier-batch-2-pr355-spec.md
+docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
+docs/quality/market-access-pilot-1-pr356-spec.md
+docs/market-access-record-spec.md
+config/market-access-pilot-1-pr356.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+data/editorial-research/japan-stablecoin-market-access-2026.json
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
@@ -51,7 +57,7 @@ named validators, audits, and current work-item outputs
 
 Earlier amendments remain historical records and do not override this current position.
 
-## 3. Completed program through PR #354
+## 3. Completed program through PR #355
 
 Completed broad programs include:
 
@@ -77,6 +83,7 @@ post-351 authority reset
 Record Depth & Coverage Baseline
 reviewed 18-asset Tier A candidate queue
 Tier A Dossier Deepening — Batch 1
+Tier A Dossier Deepening — Batch 2
 ```
 
 PR #354 completed reviewed dossier deepening for:
@@ -95,14 +102,14 @@ Its reviewed handoff is:
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
-Current reviewed canonical checkpoint after PR #354:
+Current reviewed canonical checkpoint after PR #356:
 
 ```text
 110 stable assets
-547 evidence records
-547 evidence relations
+551 evidence records
+551 evidence relations
 110 legal profiles
-0 canonical Market Access Records
+4 canonical Market Access Records
 ```
 
 Historical checkpoints remain immutable. Do not rewrite them because current canonical data deepens.
@@ -113,9 +120,9 @@ Historical checkpoints remain immutable. Do not rewrite them because current can
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
-PR #355  Tier A Dossier Deepening — Batch 2 — active
-PR #356  Market Access Pilot 1 — next
-PR #357  Tier A Dossier Deepening — Batch 3
+PR #355  Tier A Dossier Deepening — Batch 2 — complete
+PR #356  Market Access Pilot 1 — active
+PR #357  Tier A Dossier Deepening — Batch 3 — next
 PR #358  Record Growth Batch 1
 PR #359  Market Access Pilot 2
 PR #360  Evidence and Correction Batch
@@ -174,95 +181,47 @@ usdt
 
 PR #354 added no canonical asset, no Market Access Record, no ranking, and no public product surface.
 
-## 7. PR #355 — Tier A Dossier Deepening — Batch 2 — active
+## 7. PR #355 — Tier A Dossier Deepening — Batch 2 — complete
+
+Binding reviewed handoff:
+
+```text
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+```
+
+PR #355 completed reviewed deepening for FDUSD, FRAX, PYUSD, USDP, and UST. It preserved 110 assets, advanced Evidence and Evidence Relations to 549, and left canonical Market Access at zero records.
+
+## 8. PR #356 — Market Access Pilot 1 — active
 
 Binding references:
 
 ```text
-docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
-docs/quality/tier-a-dossier-batch-2-pr355-spec.md
-config/tier-a-dossier-batch-2-pr355.json
-docs/migration/record-depth-baseline-pr353-summary.json
-docs/migration/tier-a-candidate-queue-pr353.json
-docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
+docs/quality/market-access-pilot-1-pr356-spec.md
+config/market-access-pilot-1-pr356.json
+docs/market-access-record-spec.md
+schemas/market-access-record-v1.schema.json
+config/market-access-governance-v1.json
+data/editorial-research/japan-stablecoin-market-access-2026.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
 ```
 
-Selected assets:
+Exact bounded scope:
 
 ```text
-FDUSD
-FRAX
-PYUSD
-USDP
-UST
+jurisdiction: JP / Japan
+asset: USDC / sog_st_usdc
+platform: SBI VC Trade
+service: VCTRADE
+functions: buy_sell, deposit, withdrawal, external_wallet_transfer
+maximum canonical records: 4
+effective_from: 2025-03-26
+review cutoff: 2026-07-10
 ```
 
-This selection is not a ranking.
+The pilot first audits canonical Evidence identity and function-specific claim scope. Editorial research remains noncanonical. RLUSD, JPYSC, direct issuer mint, and direct issuer redemption are outside Pilot 1.
 
-Authorized target dimensions:
-
-```text
-FDUSD  legal_profile
-FRAX   legal_profile, redemption
-PYUSD  legal_profile, redemption
-USDP   legal_profile, redemption
-UST    legal_profile
-```
-
-Only FRAX, PYUSD, and USDP are authorized for redemption field-value changes.
-
-PR #355 may deepen reviewed legal profiles, evidence linkage, evidence-source identity maintenance, and the three authorized redemption profiles.
-
-PR #355 must not:
-
-```text
-add canonical stable assets
-add Market Access Records
-change canonical data for PR #354 completed assets
-add a public product surface
-change Compare preset membership
-change Comparison Readiness semantics
-change Facet Freshness semantics
-rewrite PR #353 planning snapshots
-rewrite the PR #354 reviewed handoff
-rank assets
-create a composite score
-```
-
-Completion requires:
-
-```text
-exactly five selected remaining queue members
-selection reasons and material gaps preserved from PR #353
-PR #354 completed assets excluded
-primary evidence linkage for changed legal claims
-FRAX/PYUSD/USDP redemption changes only where reviewed evidence supports them
-canonical asset count remains 110
-Market Access record count remains zero
-current planning impact is deterministic
-non-selected records remain unchanged except audited shared evidence maintenance
-Astro/build and non-regression workflows green
-```
-
-## 8. PR #356 — Market Access Pilot 1 — next
-
-PR #356 becomes active only after PR #355 merges.
-
-It must use the canonical Market Access model:
-
-```text
-asset
-jurisdiction
-platform or service
-function
-access state
-effective date
-evidence
-```
-
-Dossier facts, issuer licences, monitoring observations, guide statements, and editorial matrices are not automatically canonical Market Access Records.
-
-PR #356 must define a bounded jurisdiction set, asset set, platform/service set, function set, evidence standard, and review cutoff before promotion.
+Completion requires reviewed canonical Evidence mappings, no more than four supported function-scoped records, deterministic validation, green CI, and a PR #356 reviewed handoff.
 
 ## 9. PR #357 — Tier A Dossier Deepening — Batch 3
 

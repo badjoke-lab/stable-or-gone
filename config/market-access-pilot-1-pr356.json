@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "pilot_id": "sog_market_access_pilot_1_pr356",
+  "status": "canonical_promotion_reviewed",
+  "review_pr": 356,
+  "source_handoff_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+  "source_research_id": "japan-stablecoin-market-access-2026",
+  "source_research_record_ids": ["jp_access_usdc_sbivc_2025_03_26"],
+  "jurisdictions": [{"country_code":"JP","label":"Japan","subdivision_code":null}],
+  "assets": [{"asset_id":"sog_st_usdc","symbol":"USDC"}],
+  "platforms": [{"name":"SBI VC Trade","service":"VCTRADE","organization_id":null}],
+  "functions": ["buy_sell","deposit","withdrawal","external_wallet_transfer"],
+  "excluded_functions": ["direct_issuer_mint","direct_issuer_redemption"],
+  "effective_from": "2025-03-26",
+  "observed_at": "2026-07-10",
+  "review_cutoff": "2026-07-10",
+  "maximum_canonical_records": 4,
+  "source_url_dispositions": {
+    "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf": {
+      "status": "canonical_evidence_promoted",
+      "evidence_id": "sog_src_jfsa_electronic_payment_instrument_register_pr356",
+      "reason": "Primary provider-registration and handled-asset scope."
+    },
+    "https://www.sbivc.co.jp/newsview/2mjic5dcvjtv": {
+      "status": "canonical_evidence_promoted",
+      "evidence_id": "sog_src_usdc_sbivc_public_launch_pr356",
+      "reason": "Primary function, network, launch-date, and platform-condition source."
+    },
+    "https://www.fsa.go.jp/news/r7/sonota/20260519/01.pdf": {
+      "status": "supplementary_not_required_for_promoted_claims",
+      "evidence_id": null,
+      "reason": "Reviewed legal-context source; the promoted provider-scoped rows do not require this broader consultation-response document."
+    },
+    "https://www.sbivc.co.jp/usdc": {
+      "status": "supplementary_not_required_for_promoted_claims",
+      "evidence_id": null,
+      "reason": "Reviewed product page; function-specific launch and condition claims are already supported by the canonical launch announcement."
+    }
+  },
+  "canonical_promotion": {
+    "automatic": false,
+    "manual_review_required": true,
+    "minimum_canonical_evidence_records_per_function": 1,
+    "require_function_specific_claim_scope": true,
+    "approved_evidence_ids_by_function": {
+      "buy_sell": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "deposit": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "withdrawal": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "external_wallet_transfer": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"]
+    }
+  },
+  "boundaries": {
+    "new_canonical_assets_allowed": false,
+    "new_public_surface_allowed": false,
+    "comparison_readiness_change_allowed": false,
+    "facet_freshness_semantics_change_allowed": false,
+    "monitoring_promotion_allowed": false,
+    "editorial_research_direct_promotion_allowed": false,
+    "universal_japan_availability_claim_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false
+  }
+}

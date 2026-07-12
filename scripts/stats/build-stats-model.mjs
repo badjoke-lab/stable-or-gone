@@ -203,6 +203,7 @@ export function buildStatsModel(input, options = {}) {
       known_unknowns: input.known_unknowns.length,
       regulatory_notes: input.regulatory_notes.length,
       deployments: input.deployments.length,
+      market_access_records: input.market_access_records.length,
       legal_profiles: input.legal_profiles.length,
       stable_asset_relationships: input.stable_asset_relationships.length,
       reserve_components: input.reserve_components.length,
@@ -264,6 +265,7 @@ export function buildStatsModel(input, options = {}) {
         events: input.events.length,
         evidence: input.evidence.length,
         deployments: input.deployments.length,
+        market_access_records: input.market_access_records.length,
         legal_profiles: input.legal_profiles.length,
         income_profiles: input.income_profiles.length
       },
@@ -282,6 +284,7 @@ export function buildStatsModel(input, options = {}) {
     event_ids: input.events.map((row) => row.id),
     evidence_ids: input.evidence.map((row) => row.id),
     deployment_ids: input.deployments.map((row) => row.id),
+    market_access_record_ids: input.market_access_records.map((row) => row.id),
     legal_profile_ids: input.legal_profiles.map((row) => row.id),
     income_profile_ids: input.income_profiles.map((row) => row.id)
   }));

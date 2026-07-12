@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sog_src_usdc_sbivc_public_launch_pr356",
+    "stablecoin_id": "sog_st_usdc",
+    "event_id": null,
+    "source_type": "official_launch_announcement",
+    "title": "〖国内初〗ユーエスディーシー（USDC）一般向け取扱い開始のお知らせ",
+    "url": "https://www.sbivc.co.jp/newsview/2mjic5dcvjtv",
+    "archived_url": "https://web.archive.org/web/*/https://www.sbivc.co.jp/newsview/2mjic5dcvjtv",
+    "publisher": "SBI VC Trade",
+    "published_at": "2025-03-25",
+    "accessed_at": "2026-07-12",
+    "reliability": "high",
+    "claim_scopes": [
+      "USDC buy and sell availability on SBI VC Trade VCTRADE",
+      "USDC deposit availability",
+      "USDC withdrawal availability",
+      "USDC external wallet transfer through supported withdrawal",
+      "Ethereum-only network support at the reviewed launch stage",
+      "JPY 1 million-equivalent buy/sell transaction limit",
+      "JPY 1 million-equivalent withdrawal limit",
+      "platform service conditions"
+    ],
+    "notes": "Primary SBI VC Trade launch announcement. It explicitly states the 2025-03-26 retail launch, buy/sell, deposit and withdrawal support, Ethereum-only deposit/withdrawal support, and reviewed launch-stage limits. Claims remain provider-scoped and do not establish universal Japan-wide availability."
+  },
+  {
+    "id": "sog_src_jfsa_electronic_payment_instrument_register_pr356",
+    "stablecoin_id": "sog_st_usdc",
+    "event_id": null,
+    "source_type": "regulator_register",
+    "title": "電子決済手段等取引業者登録一覧",
+    "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+    "archived_url": "https://web.archive.org/web/*/https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+    "publisher": "Financial Services Agency, Japan",
+    "published_at": "2026-06-24",
+    "accessed_at": "2026-07-12",
+    "reliability": "high",
+    "claim_scopes": [
+      "SBI VC Trade registration as an electronic payment instrument service provider",
+      "USDC listed among electronic payment instruments handled by SBI VC Trade",
+      "Japan provider and legal-route scope"
+    ],
+    "notes": "Primary JFSA register snapshot dated 2026-06-24. It supports the provider registration and handled-asset scope only. The register explicitly does not constitute a value guarantee or recommendation and is not treated as universal Japan-wide availability."
+  }
+]

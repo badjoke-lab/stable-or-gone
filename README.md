@@ -37,8 +37,9 @@ PR #351 Monthly Maintenance Log: complete
 PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
-PR #355 Tier A Dossier Deepening — Batch 2: active
-PR #356 Market Access Pilot 1: next
+PR #355 Tier A Dossier Deepening — Batch 2: complete
+PR #356 Market Access Pilot 1: active
+PR #357 Tier A Dossier Deepening — Batch 3: next
 ```
 
 Approved bounded sequence:
@@ -47,9 +48,9 @@ Approved bounded sequence:
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
-PR #355  Tier A Dossier Deepening — Batch 2 — active
-PR #356  Market Access Pilot 1 — next
-PR #357  Tier A Dossier Deepening — Batch 3
+PR #355  Tier A Dossier Deepening — Batch 2 — complete
+PR #356  Market Access Pilot 1 — active
+PR #357  Tier A Dossier Deepening — Batch 3 — next
 PR #358  Record Growth Batch 1
 PR #359  Market Access Pilot 2
 PR #360  Evidence and Correction Batch
@@ -70,7 +71,12 @@ docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
-docs/quality/tier-a-dossier-batch-2-pr355-spec.md
+docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
+docs/quality/market-access-pilot-1-pr356-spec.md
+docs/market-access-record-spec.md
+config/market-access-pilot-1-pr356.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+data/editorial-research/japan-stablecoin-market-access-2026.json
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
@@ -98,33 +104,33 @@ docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 
 PR #354 preserved 110 canonical assets, advanced canonical evidence and evidence relations to 547, added no Market Access Record, introduced no score or ranking, and added no public product surface.
 
-## Active PR #355 batch
+## Completed PR #355 batch
 
-PR #355 deepens five remaining dossiers selected from the immutable PR #353 Tier A queue:
+PR #355 deepened FDUSD, FRAX, PYUSD, USDP, and UST for the authorized legal-profile and redemption dimensions.
 
-```text
-FDUSD
-FRAX
-PYUSD
-USDP
-UST
-```
-
-The selection is not a ranking.
-
-Authorized target dimensions:
+Reviewed handoff:
 
 ```text
-FDUSD  legal_profile
-FRAX   legal_profile, redemption
-PYUSD  legal_profile, redemption
-USDP   legal_profile, redemption
-UST    legal_profile
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
 ```
 
-Only FRAX, PYUSD, and USDP are authorized for redemption field-value changes.
+PR #355 preserved 110 canonical assets, advanced canonical evidence and evidence relations to 549, added no Market Access Record, introduced no score or ranking, and added no public product surface.
 
-PR #355 does not add stable assets, Market Access Records, rankings, scores, or public product surfaces. It must not modify canonical data for the five assets completed in PR #354.
+## Active PR #356 Market Access Pilot 1
+
+PR #356 is bounded to:
+
+```text
+jurisdiction: JP / Japan
+asset: USDC / sog_st_usdc
+platform: SBI VC Trade
+service: VCTRADE
+functions: buy_sell, deposit, withdrawal, external_wallet_transfer
+maximum canonical records: 4
+review cutoff: 2026-07-10
+```
+
+Direct issuer mint/redemption, RLUSD, and JPYSC are excluded from Pilot 1. Editorial research remains noncanonical until source URLs are represented by canonical Evidence identities and each function claim scope is manually reviewed.
 
 ## Post-351 operating mode
 
@@ -261,7 +267,7 @@ Access is not reduced to one universal allowed/banned boolean.
 
 PR #353 evaluated all 110 canonical assets across 16 planning dimensions and committed an immutable reviewed summary and 18-asset non-ranking Tier A queue.
 
-PR #354 completed the first five-asset batch. PR #355 uses the immutable queue plus the reviewed PR #354 handoff to deepen the next five assets.
+PR #354 and PR #355 completed two reviewed five-asset dossier batches. PR #356 uses the merged PR #355 handoff and the reviewed Japan research checkpoint for a bounded Market Access pilot.
 
 The planning baseline is not a risk score, safety score, quality ranking, transparency ranking, asset rank, investment recommendation, or public leaderboard.
 
