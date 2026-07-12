@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "pilot_id": "sog_market_access_pilot_1_pr356",
+  "status": "bounded_candidate_audit_then_manual_promotion",
+  "review_pr": 356,
+  "source_handoff_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+  "source_research_id": "japan-stablecoin-market-access-2026",
+  "source_research_record_ids": ["jp_access_usdc_sbivc_2025_03_26"],
+  "jurisdictions": [
+    {
+      "country_code": "JP",
+      "label": "Japan",
+      "subdivision_code": null
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "sog_st_usdc",
+      "symbol": "USDC"
+    }
+  ],
+  "platforms": [
+    {
+      "name": "SBI VC Trade",
+      "service": "VCTRADE",
+      "organization_id": null
+    }
+  ],
+  "functions": ["buy_sell", "deposit", "withdrawal", "external_wallet_transfer"],
+  "excluded_functions": ["direct_issuer_mint", "direct_issuer_redemption"],
+  "effective_from": "2025-03-26",
+  "observed_at": "2026-07-10",
+  "review_cutoff": "2026-07-10",
+  "maximum_canonical_records": 4,
+  "canonical_promotion": {
+    "automatic": false,
+    "manual_review_required": true,
+    "minimum_canonical_evidence_records_per_function": 1,
+    "require_function_specific_claim_scope": true,
+    "approved_evidence_ids_by_function": {}
+  },
+  "boundaries": {
+    "new_canonical_assets_allowed": false,
+    "new_public_surface_allowed": false,
+    "comparison_readiness_change_allowed": false,
+    "facet_freshness_semantics_change_allowed": false,
+    "monitoring_promotion_allowed": false,
+    "editorial_research_direct_promotion_allowed": false,
+    "universal_japan_availability_claim_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false
+  }
+}
