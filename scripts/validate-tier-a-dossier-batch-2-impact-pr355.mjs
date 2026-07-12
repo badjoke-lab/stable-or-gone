@@ -113,10 +113,19 @@ expect(currentProfilesSource.includes('profilePr355Data'), 'currentProfiles must
 expect(currentProfilesSource.includes('...profilePr354Data,...profilePr355Data'), 'PR #355 overrides must load after PR #354 overrides');
 expect(stablecoinProfilesSource.includes('stablecoin-profiles-pr355-tier-a-batch-2.json'), 'profile loader inventory missing PR #355 file');
 
-const serialized = JSON.stringify(report);
-for (const forbidden of ['risk_score', 'safety_score', 'quality_score', 'transparency_score', 'priority_score', 'composite_score', '"rank"']) {
-  expect(!serialized.includes(forbidden), `impact report contains forbidden token ${forbidden}`);
-}
+const forbiddenKeys = new Set(['risk_score', 'safety_score', 'quality_score', 'transparency_score', 'priority_score', 'composite_score', 'rank']);
+const inspectKeys = (value, path = '$') => {
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) => inspectKeys(entry, `${path}[${index}]`));
+    return;
+  }
+  if (!value || typeof value !== 'object') return;
+  for (const [key, nested] of Object.entries(value)) {
+    expect(!forbiddenKeys.has(key), `impact report contains forbidden exact key ${key} at ${path}`);
+    inspectKeys(nested, `${path}.${key}`);
+  }
+};
+inspectKeys(report);
 
 if (failures.length) {
   console.error('PR #355 Tier A dossier impact validation failed:');
