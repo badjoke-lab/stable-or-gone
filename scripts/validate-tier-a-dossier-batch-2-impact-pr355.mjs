@@ -21,8 +21,8 @@ const expectedNewEvidenceIds = [
   'sog_src_paxos_stablecoin_terms_pr355'
 ];
 const expectedReusedEvidenceIds = [
-  'sog_src_fdusd_site',
-  'sog_src_pyusd_paxos_page',
+  'sog_src_fdusd_official_site',
+  'sog_src_pyusd_paxos_official',
   'sog_src_usdp_paxos_page',
   'sog_src_ust_sec_2023_32'
 ];
@@ -73,9 +73,9 @@ for (const row of report.selected_assets) {
 }
 
 const fdusd = report.selected_assets.find((row) => row.asset_slug === 'fdusd');
-expect(fdusd?.exact_pr355_evidence_ids.includes('sog_src_fdusd_site'), 'FDUSD must reuse the reviewed canonical product source');
+expect(fdusd?.exact_pr355_evidence_ids.includes('sog_src_fdusd_official_site'), 'FDUSD must reuse the reviewed canonical product source');
 const pyusd = report.selected_assets.find((row) => row.asset_slug === 'pyusd');
-expect(pyusd?.exact_pr355_evidence_ids.includes('sog_src_pyusd_paxos_page'), 'PYUSD must reuse the reviewed canonical Paxos product source');
+expect(pyusd?.exact_pr355_evidence_ids.includes('sog_src_pyusd_paxos_official'), 'PYUSD must reuse the reviewed canonical Paxos product source');
 const usdp = report.selected_assets.find((row) => row.asset_slug === 'usdp');
 expect(usdp?.exact_pr355_evidence_ids.includes('sog_src_usdp_paxos_page'), 'USDP must reuse the reviewed canonical Paxos product source');
 const ust = report.selected_assets.find((row) => row.asset_slug === 'ust');
