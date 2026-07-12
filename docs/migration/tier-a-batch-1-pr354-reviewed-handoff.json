@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+  "status": "reviewed_merged_internal_handoff",
+  "public_output": false,
+  "source_pr": 354,
+  "source_merge_commit": "d8a10676aec2f190bc32923fdc547ef359feb5c8",
+  "reviewed_at": "2026-07-12",
+  "source_queue": "docs/migration/tier-a-candidate-queue-pr353.json",
+  "source_summary": "docs/migration/record-depth-baseline-pr353-summary.json",
+  "selected_asset_slugs": ["busd", "dai", "rlusd", "usdc", "usdt"],
+  "improved_dimensions": {
+    "busd": ["legal_profile", "redemption"],
+    "dai": ["legal_profile"],
+    "rlusd": ["legal_profile", "redemption"],
+    "usdc": ["legal_profile"],
+    "usdt": ["legal_profile"]
+  },
+  "redemption_override_asset_slugs": ["busd", "rlusd"],
+  "canonical_checkpoint_id": "sog_tier_a_dossier_batch_1_canonical_110_checkpoint_pr354_2026_07_12",
+  "statistics_checkpoint_id": "sog_tier_a_dossier_batch_1_110_checkpoint_pr354_2026_07_12",
+  "canonical_counts": {
+    "assets": 110,
+    "evidence": 547,
+    "evidence_relations": 547,
+    "legal_profiles": 110
+  },
+  "historical_pr353_snapshots_unchanged": true,
+  "market_access_record_count": 0,
+  "new_public_surface_added": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "completed_asset_exclusions_for_next_batch": ["busd", "dai", "rlusd", "usdc", "usdt"],
+  "notes": "Reviewed merged handoff for PR #355 selection. This is internal planning infrastructure and does not replace canonical asset facts, Comparison Readiness, Facet Freshness, or public product data."
+}
