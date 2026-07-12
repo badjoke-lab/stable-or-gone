@@ -31,9 +31,12 @@ jobs:
         run: node scripts/validate-tier-a-dossier-batch-1-selection-pr354.mjs
 
       - name: Build deterministic dossier impact report
+        shell: bash
         run: |
           mkdir -p artifacts/pr354
-          node scripts/growth/build-tier-a-batch-1-impact-pr354.mjs artifacts/pr354/tier-a-batch-1-impact-pr354.json
+          set -o pipefail
+          node scripts/growth/build-tier-a-batch-1-impact-pr354.mjs artifacts/pr354/tier-a-batch-1-impact-pr354.json \
+            2>&1 | tee artifacts/pr354/build-impact.log
 
       - name: Validate dossier impact and preservation contracts
         run: node scripts/validate-tier-a-dossier-batch-1-impact-pr354.mjs
@@ -112,4 +115,4 @@ jobs:
           name: pr354-tier-a-batch-1-impact-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 30
-          path: artifacts/pr354/tier-a-batch-1-impact-pr354.json
+          path: artifacts/pr354/
