@@ -102,14 +102,14 @@ Its reviewed handoff is:
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
-Current reviewed canonical checkpoint after PR #355:
+Current reviewed canonical checkpoint after PR #356:
 
 ```text
 110 stable assets
-549 evidence records
-549 evidence relations
+551 evidence records
+551 evidence relations
 110 legal profiles
-0 canonical Market Access Records
+4 canonical Market Access Records
 ```
 
 Historical checkpoints remain immutable. Do not rewrite them because current canonical data deepens.
@@ -120,7 +120,7 @@ Historical checkpoints remain immutable. Do not rewrite them because current can
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
-PR #355  Tier A Dossier Deepening — Batch 2 — active
+PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — active
 PR #357  Tier A Dossier Deepening — Batch 3 — next
 PR #358  Record Growth Batch 1

@@ -85,7 +85,7 @@ Approved bounded sequence:
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
-PR #355  Tier A Dossier Deepening — Batch 2 — active
+PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — active
 PR #357  Tier A Dossier Deepening — Batch 3 — next
 PR #358  Record Growth Batch 1
