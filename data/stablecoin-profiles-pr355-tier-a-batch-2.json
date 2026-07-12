@@ -53,7 +53,7 @@
       "redemption_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
       "as_of_date": "2026-07-12",
       "confidence": "high",
-      "evidence_ids": ["sog_src_paxos_stablecoin_terms_pr355", "sog_src_pyusd_paxos_page"]
+      "evidence_ids": ["sog_src_paxos_stablecoin_terms_pr355", "sog_src_pyusd_paxos_official"]
     }
   },
   {
