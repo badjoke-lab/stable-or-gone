@@ -14,7 +14,7 @@
     "organizations": 103,
     "relationships": 120,
     "events": 185,
-    "evidence": 552,
+    "evidence": 549,
     "reserve_reports": 118,
     "known_unknowns": 319,
     "regulatory_notes": 9,
@@ -24,5 +24,5 @@
     "reserve_components": 143,
     "income_profiles": 110
   },
-  "notes": "Current deterministic canonical checkpoint after reviewed PR #355 Tier A dossier deepening. Asset count remains 110; five new reviewed primary evidence rows advance evidence and evidence-relation totals from 547 to 552, while UST reuses an existing canonical SEC source identity. Earlier checkpoints remain immutable."
+  "notes": "Current deterministic canonical checkpoint after reviewed PR #355 Tier A dossier deepening. Asset count remains 110; two new reviewed primary evidence rows advance evidence and evidence-relation totals from 547 to 549. FDUSD, PYUSD, USDP, and UST reuse reviewed canonical evidence identities. Earlier checkpoints remain immutable."
 }
