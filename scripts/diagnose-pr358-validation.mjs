@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 
 const checks = [
+  ['canonical_collisions', process.execPath, ['scripts/report-pr358-canonical-collisions.mjs']],
   ['selection', process.execPath, ['scripts/validate-record-growth-batch-1-selection-pr358.mjs']],
   ['active_workstream', process.execPath, ['scripts/check-workstream-118.mjs']],
   ['canonical_data', 'npm', ['run', 'validate:data']],
