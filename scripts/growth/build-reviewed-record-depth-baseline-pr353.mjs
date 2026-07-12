@@ -71,13 +71,14 @@ function refineCandidateQueue(assets, config, presetSlugs) {
 
 function redemptionPlanningRow(redemption, asOfDate) {
   if (!redemption) return null;
-  const compared = [redemption.status, redemption.retail_access, redemption.institutional_access, redemption.minimum_amount_text];
+  const compared = [redemption.retail_access, redemption.institutional_access, redemption.minimum_amount_text];
+  if (redemption.status !== 'not_applicable') compared.unshift(redemption.status);
   if (compared.some(isUnresolved)) {
     return {
       dimension_id: 'redemption',
       state: 'partial',
       reason_codes: ['redemption_structure_incomplete_or_unknown'],
-      freshness_state: redemption.as_of_date ? 'undated' : 'undated'
+      freshness_state: 'undated'
     };
   }
 
