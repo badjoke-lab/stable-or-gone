@@ -7,10 +7,7 @@ import {
   getRecordsLastReviewedAt,
   getRegistryV3Summary,
 } from '../lib/machine-readable';
-import {
-  getCanonicalPublicRecordCountBreakdown,
-  getCanonicalPublicRecordCounts,
-} from './canonicalPublicCounts';
+import { getRecordCountBreakdown, getRecordCounts } from './canonicalPublicCounts';
 import { getEvidenceSourceIdentitySummary } from './data/evidenceSources';
 
 export function GET() {
@@ -30,8 +27,8 @@ export function GET() {
       data_schema_version: DATA_SCHEMA_VERSION,
       generated_at: build.generated_at,
       records_last_reviewed_at: getRecordsLastReviewedAt(),
-      record_counts: getCanonicalPublicRecordCounts(),
-      record_count_breakdown: getCanonicalPublicRecordCountBreakdown(),
+      record_counts: getRecordCounts(),
+      record_count_breakdown: getRecordCountBreakdown(),
       registry_v3: getRegistryV3Summary(),
       evidence_source_identity: evidenceSourceIdentity,
     },
