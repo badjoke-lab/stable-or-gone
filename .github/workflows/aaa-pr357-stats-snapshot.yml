@@ -1,0 +1,78 @@
+name: AAA PR357 Stats Snapshot
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  snapshot:
+    if: github.head_ref == 'pr357-tier-a-dossier-batch-3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr357-tier-a-dossier-batch-3
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Apply deterministic PR 357 snapshot
+        run: node scripts/apply-pr357-stats-snapshot.mjs > artifacts-pr357-stats-apply.json
+      - name: Commit reviewed history snapshot
+        run: |
+          if git diff --quiet -- data/stats-history.json; then
+            echo 'PR #357 snapshot already present.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/stats-history.json
+          git commit -m 'Append PR 357 reviewed statistics snapshot'
+          git push origin HEAD:pr357-tier-a-dossier-batch-3
+      - name: Validate immutable history
+        run: SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+      - name: Publish snapshot status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- pr357-stats-snapshot -->';
+            let snapshot = null;
+            let error = null;
+            try {
+              const history = JSON.parse(fs.readFileSync('data/stats-history.json', 'utf8'));
+              snapshot = history.snapshots.at(-1);
+            } catch (err) { error = String(err); }
+            const body = `${marker}
+            ## PR #357 deterministic stats snapshot
+
+            - Workflow status: **${{ job.status }}**
+            - Checkpoint: \`${snapshot?.checkpoint_id ?? 'not-generated'}\`
+            - Canonical checkpoint: \`${snapshot?.canonical_checkpoint_id ?? 'not-generated'}\`
+            - Evidence total: **${snapshot?.totals?.evidence ?? 'not-generated'}**
+            - Market Access records: **${snapshot?.totals?.market_access_records ?? 'not-generated'}**
+            - Stats model SHA-256: \`${snapshot?.stats_model_sha256 ?? 'not-generated'}\`
+            - Snapshot SHA-256: \`${snapshot?.snapshot_sha256 ?? 'not-generated'}\`
+            - Error: ${error ? `\`${error}\`` : 'none'}
+            - Head: \`${context.sha}\`
+            `;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body});
+            } else {
+              await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number, body});
+            }
