@@ -19,7 +19,7 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const requireText = (body, text, label) => check(body.includes(text), `${label}: missing ${text}`);
 
 for (const marker of [
-  'contains 110 stable assets',
+  'Canonical stable assets: 110',
   'PR #351 Monthly Maintenance Log: complete',
   'PR #352 post-351 authority reset: complete',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
