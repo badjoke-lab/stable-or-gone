@@ -4,6 +4,7 @@ const originalLog = console.log;
 console.log = () => {};
 try {
   await import('./validate-market-access-pilot-1-pr356.mjs');
+  await import('./validate-market-access-canonical-pr356.mjs');
 } finally {
   console.log = originalLog;
 }
