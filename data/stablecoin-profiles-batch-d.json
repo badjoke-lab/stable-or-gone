@@ -48,7 +48,7 @@
       "settlement_time_text": "Unknown.",
       "jurisdiction_restrictions": ["Historical issuer compliance and eligibility restrictions applied.", "Current direct-redemption availability and jurisdiction scope are unconfirmed."],
       "redemption_url": null,
-      "as_of_date": "2026-07-13",
+      "as_of_date": "2026-07-12",
       "confidence": "medium",
       "evidence_ids": ["sog_src_husd_background_batch_d", "sog_src_husd_legal_attestation_status_2026"]
     }
