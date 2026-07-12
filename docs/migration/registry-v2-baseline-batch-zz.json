@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "base_manifest": "docs/migration/registry-v2-baseline.json",
+  "batch_id": "pr354_non_growth_dossier_depth",
+  "defer_legacy_v3_full_coverage": false,
+  "checkpoint_kind": "non_growth_normalization_checkpoint",
+  "source_checkpoint_id": "sog_comparison_readiness_normalization_110_checkpoint_pr338_2026_07_10",
+  "minimum_counts": {
+    "stablecoins": 110,
+    "organizations": 103,
+    "relationships": 120,
+    "classifications": 110,
+    "profiles": 110,
+    "events": 185,
+    "event_details": 185,
+    "evidence": 546,
+    "evidence_relations": 546,
+    "reserve_reports": 118,
+    "known_unknowns": 319,
+    "regulatory_notes": 9,
+    "deployments": 170,
+    "classification_extensions": 2
+  },
+  "data_group_additions": {},
+  "notes": "Forward-only non-growth count checkpoint for three reviewed primary evidence rows added by PR #354. Historical batch-z counts remain unchanged."
+}
