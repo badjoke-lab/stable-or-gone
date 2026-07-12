@@ -31,6 +31,7 @@ docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
 docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
+docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
 ```
 
 Current operating specification:
@@ -42,7 +43,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/tier-a-dossier-batch-2-pr355-spec.md
+docs/quality/market-access-pilot-1-pr356-spec.md
 ```
 
 Current required prior outputs:
@@ -51,6 +52,8 @@ Current required prior outputs:
 docs/migration/record-depth-baseline-pr353-summary.json
 docs/migration/tier-a-candidate-queue-pr353.json
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+data/editorial-research/japan-stablecoin-market-access-2026.json
 ```
 
 Historical amendments remain historical records and do not override the current position.
@@ -79,8 +82,9 @@ current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
 PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
-PR #355 Tier A Dossier Deepening — Batch 2: active
-PR #356 Market Access Pilot 1: next
+PR #355 Tier A Dossier Deepening — Batch 2: complete
+PR #356 Market Access Pilot 1: active
+PR #357 Tier A Dossier Deepening — Batch 3: next
 ```
 
 Approved bounded sequence:
@@ -90,8 +94,8 @@ PR #352  post-351 authority reset and specification/schedule synchronization —
 PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — active
-PR #356  Market Access Pilot 1 — next
-PR #357  Tier A Dossier Deepening — Batch 3
+PR #356  Market Access Pilot 1 — active
+PR #357  Tier A Dossier Deepening — Batch 3 — next
 PR #358  Record Growth Batch 1
 PR #359  Market Access Pilot 2
 PR #360  Evidence and Correction Batch
@@ -139,14 +143,29 @@ config/tier-a-dossier-batch-1-pr354.json
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
-### Active PR #355 Tier A dossier batch
+### Completed PR #355 Tier A dossier batch
 
 ```text
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
 docs/quality/tier-a-dossier-batch-2-pr355-spec.md
 config/tier-a-dossier-batch-2-pr355.json
-scripts/validate-tier-a-dossier-batch-2-selection-pr355.mjs
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
 ```
+
+### Active PR #356 Market Access Pilot 1
+
+```text
+docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
+docs/quality/market-access-pilot-1-pr356-spec.md
+config/market-access-pilot-1-pr356.json
+docs/market-access-record-spec.md
+schemas/market-access-record-v1.schema.json
+config/market-access-governance-v1.json
+data/editorial-research/japan-stablecoin-market-access-2026.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+```
+
+The pilot is bounded to USDC, Japan, SBI VC Trade / VCTRADE, four function-scoped observations, and no more than four reviewed canonical records.
 
 ### Completed derived-surface semantics
 
