@@ -6,22 +6,22 @@
   "source_handoff": "docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json",
   "source_research": "data/editorial-research/record-growth-batch-1-pr358-candidates.json",
   "selection_rule": "context_grouped_reviewed_new_identity_non_ranking",
-  "context_group": "current_usd_reserve_backed_institutional_stablecoins",
+  "context_group": "current_regulated_bank_and_payment_stablecoins",
   "canonical_count_before": 110,
   "maximum_new_assets": 2,
   "planned_canonical_count_after": 112,
   "selected_candidates": [
     {
-      "candidate_id": "sog_cand_pr358_usdg",
-      "proposed_asset_id": "sog_st_usdg",
-      "proposed_slug": "global-dollar-usdg",
-      "symbol": "USDG"
+      "candidate_id": "sog_cand_pr358_xusd",
+      "proposed_asset_id": "sog_st_xusd",
+      "proposed_slug": "straitsx-usd-xusd",
+      "symbol": "XUSD"
     },
     {
-      "candidate_id": "sog_cand_pr358_usd1",
-      "proposed_asset_id": "sog_st_usd1",
-      "proposed_slug": "world-liberty-financial-usd1",
-      "symbol": "USD1"
+      "candidate_id": "sog_cand_pr358_sofiusd",
+      "proposed_asset_id": "sog_st_sofiusd",
+      "proposed_slug": "sofiusd",
+      "symbol": "SoFiUSD"
     }
   ],
   "full_record_minimum": {
