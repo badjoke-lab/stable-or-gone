@@ -35,6 +35,9 @@ jobs:
       - name: Validate Market Access Pilot 1
         run: node scripts/validate-market-access-pilot-1-pr356.mjs
 
+      - name: Validate canonical Market Access rows
+        run: node scripts/validate-market-access-canonical-pr356.mjs
+
       - name: Validate active workstream authority
         run: npm run validate:active-workstream
 
@@ -46,6 +49,9 @@ jobs:
 
       - name: Validate release integrity
         run: npm run validate:release-integrity
+
+      - name: Validate Access Regulation projection
+        run: node scripts/validate-pr356-access-regulation-projection.mjs
 
       - name: Generate current statistics snapshot candidate
         run: |
@@ -61,7 +67,7 @@ jobs:
           const handoff = JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json', 'utf8'));
           if (handoff.source_merge_commit !== 'b192c4c920e3a3626d006dd8b80f44e806f40da9') throw new Error('PR #355 handoff merge commit mismatch');
           if (config.maximum_canonical_records !== 4) throw new Error('Pilot maximum must remain four records');
-          if (records.length > 4) throw new Error(`Pilot exceeds four records: ${records.length}`);
+          if (records.length !== 4) throw new Error(`Pilot must contain four records: ${records.length}`);
           if (config.boundaries?.new_canonical_assets_allowed !== false) throw new Error('New canonical assets must remain forbidden');
           if (config.boundaries?.new_public_surface_allowed !== false) throw new Error('New public surface must remain forbidden');
           if (config.boundaries?.universal_japan_availability_claim_allowed !== false) throw new Error('Universal Japan availability claim must remain forbidden');
