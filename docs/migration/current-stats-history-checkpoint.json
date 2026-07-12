@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_tier_a_dossier_batch_2_110_checkpoint_pr355_2026_07_12",
-  "checkpoint_kind": "non_growth_normalization_checkpoint",
+  "checkpoint_id": "sog_market_access_pilot_1_110_checkpoint_pr356_2026_07_12",
+  "checkpoint_kind": "non_growth_market_access_checkpoint",
   "recorded_at": "2026-07-12",
-  "registry_version": "pr355-tier-a-dossier-batch-2",
+  "registry_version": "pr356-market-access-pilot-1",
   "asset_count": 110,
-  "source_checkpoint_id": "sog_tier_a_dossier_batch_1_110_checkpoint_pr354_2026_07_12",
-  "canonical_checkpoint_id": "sog_tier_a_dossier_batch_2_canonical_110_checkpoint_pr355_2026_07_12",
-  "previous_history_checkpoint_id": "sog_tier_a_dossier_batch_1_110_checkpoint_pr354_2026_07_12",
-  "dossier_pr": 355,
-  "notes": "Reviewed forward same-count checkpoint for PR #355 Tier A dossier deepening. It sources the immediately preceding PR #354 history checkpoint while binding deterministic statistics to the separate current PR #355 canonical checkpoint. Historical snapshots remain immutable."
+  "source_checkpoint_id": "sog_tier_a_dossier_batch_2_110_checkpoint_pr355_2026_07_12",
+  "canonical_checkpoint_id": "sog_market_access_pilot_1_canonical_110_checkpoint_pr356_2026_07_12",
+  "previous_history_checkpoint_id": "sog_tier_a_dossier_batch_2_110_checkpoint_pr355_2026_07_12",
+  "market_access_pr": 356,
+  "notes": "Reviewed forward same-count checkpoint for PR #356 Market Access Pilot 1. It sources the immediately preceding PR #355 history checkpoint while binding deterministic statistics to the separate current PR #356 canonical checkpoint. Historical snapshots remain immutable."
 }
