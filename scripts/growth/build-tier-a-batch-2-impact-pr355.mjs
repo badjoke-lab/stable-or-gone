@@ -18,8 +18,8 @@ const paths = {
   checkpoint: 'docs/migration/current-canonical-checkpoint.json'
 };
 const reviewedExistingEvidenceIds = new Set([
-  'sog_src_fdusd_site',
-  'sog_src_pyusd_paxos_page',
+  'sog_src_fdusd_official_site',
+  'sog_src_pyusd_paxos_official',
   'sog_src_usdp_paxos_page',
   'sog_src_ust_sec_2023_32'
 ]);
