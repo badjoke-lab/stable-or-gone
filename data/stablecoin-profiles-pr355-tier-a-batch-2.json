@@ -1,0 +1,88 @@
+[
+  {
+    "id": "sog_st_frax",
+    "reserve_profile": {
+      "backing_types": ["mixed"],
+      "summary": "Protocol collateral and balance-sheet mechanisms are tracked separately from issuer-style reserve attestations.",
+      "disclosure_status": "partial",
+      "as_of_date": "2026-06-02",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": []
+    },
+    "redemption_profile": {
+      "status": "not_applicable",
+      "settlement_asset": "No guaranteed specific financial instrument or token",
+      "eligible_parties": "FRAX holders do not have a guaranteed direct redemption right for a specific instrument or token under the reviewed V3 documentation.",
+      "retail_access": "not_available_as_direct_redemption",
+      "institutional_access": "not_available_as_direct_redemption",
+      "minimum_amount_text": "Not applicable to direct redemption.",
+      "fee_text": "Protocol and secondary-market exit costs may apply; no direct redemption fee schedule applies.",
+      "settlement_time_text": "No direct issuer or protocol redemption settlement is established.",
+      "jurisdiction_restrictions": [],
+      "redemption_url": "https://docs.frax.finance/frax-v3-100-cr-and-more/overview",
+      "as_of_date": "2026-07-12",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_frax_v3_overview_pr355"]
+    }
+  },
+  {
+    "id": "sog_st_pyusd",
+    "reserve_profile": {
+      "backing_types": ["cash", "government_securities"],
+      "summary": "Paxos reserve and attestation records are tracked separately as historical records.",
+      "disclosure_status": "available",
+      "as_of_date": "2026-06-02",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": []
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD",
+      "eligible_parties": "Direct Paxos redemption requires an eligible verified Paxos account. PayPal or Venmo conversion is a separate product route and is not treated as universal direct issuer redemption.",
+      "retail_access": "payPal_or_venmo_conversion_subject_to_product_terms_or_verified_paxos_account",
+      "institutional_access": "available_to_verified_paxos_customers_subject_to_terms",
+      "minimum_amount_text": "Paxos may impose and update a minimum redemption amount under current terms and the Paxos User Guide.",
+      "fee_text": "Paxos states it does not charge a redemption fee; bank, wallet, network, or transfer fees may apply.",
+      "settlement_time_text": "Processed after compliance checks according to the applicable Paxos redemption schedule and banking operations.",
+      "jurisdiction_restrictions": [
+        "Account eligibility, supported jurisdiction, sanctions, compliance, and product restrictions apply.",
+        "PayPal and Venmo availability is separate from Paxos issuer-account eligibility."
+      ],
+      "redemption_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+      "as_of_date": "2026-07-12",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_paxos_stablecoin_terms_pr355", "sog_src_pyusd_product_pr355"]
+    }
+  },
+  {
+    "id": "sog_st_usdp",
+    "reserve_profile": {
+      "backing_types": ["mixed"],
+      "summary": "Paxos reserve and attestation records are tracked separately as historical records.",
+      "disclosure_status": "available",
+      "as_of_date": "2026-06-05",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": []
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD",
+      "eligible_parties": "Direct one-to-one redemption requires an eligible verified Paxos account and completion of current compliance checks.",
+      "retail_access": "available_to_verified_paxos_customers_subject_to_terms",
+      "institutional_access": "available_to_verified_paxos_customers_subject_to_terms",
+      "minimum_amount_text": "Paxos may impose and update a minimum redemption amount under current terms and the Paxos User Guide.",
+      "fee_text": "Paxos states it does not charge a redemption fee; bank, wallet, network, or transfer fees may apply.",
+      "settlement_time_text": "Processed after compliance checks according to the applicable Paxos redemption schedule and banking operations.",
+      "jurisdiction_restrictions": [
+        "Account eligibility, supported jurisdiction, sanctions, compliance, and platform restrictions apply."
+      ],
+      "redemption_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+      "as_of_date": "2026-07-12",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_paxos_stablecoin_terms_pr355", "sog_src_usdp_product_pr355"]
+    }
+  }
+]
