@@ -168,8 +168,6 @@ export function resolvePublicValueState(value, options = {}) {
   return 'known';
 }
 
-export const getPublicValueState = resolvePublicValueState;
-
 export function resolveValueStatePresentation(value, options = {}) {
   const state = resolvePublicValueState(value, options);
   const label = getPublicValueStateLabel(state);
