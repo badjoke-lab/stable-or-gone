@@ -1,0 +1,51 @@
+name: AAA PR356 Refresh Statistics
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.head_ref == 'pr356-market-access-pilot-1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout pilot branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr356-market-access-pilot-1
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Refresh deterministic PR 356 snapshot
+        run: node scripts/refresh-pr356-stats-snapshot.mjs
+
+      - name: Validate deterministic statistics
+        run: |
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+
+      - name: Commit refreshed statistics history
+        run: |
+          if git diff --quiet -- data/stats-history.json; then
+            echo 'PR #356 snapshot already current.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/stats-history.json
+          git commit -m 'Refresh PR 356 Market Access statistics snapshot'
+          git push origin HEAD:pr356-market-access-pilot-1
+
+      - name: Validate immutable statistics history
+        run: SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
