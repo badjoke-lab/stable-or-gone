@@ -9,99 +9,49 @@
     "automatic_promotion": false,
     "manual_review_required": true
   },
-  "context_group": "current_usd_reserve_backed_institutional_stablecoins",
+  "context_group": "current_regulated_bank_and_payment_stablecoins",
   "candidates": [
     {
-      "candidate_id": "sog_cand_pr358_usdg",
-      "proposed_asset_id": "sog_st_usdg",
-      "proposed_slug": "global-dollar-usdg",
-      "canonical_name": "Global Dollar",
-      "symbol": "USDG",
-      "aliases": ["USDG", "Global Dollar USDG"],
+      "candidate_id": "sog_cand_pr358_xusd",
+      "proposed_asset_id": "sog_st_xusd",
+      "proposed_slug": "straitsx-usd-xusd",
+      "canonical_name": "StraitsX USD",
+      "symbol": "XUSD",
+      "aliases": ["XUSD", "StraitsX XUSD", "StraitsX USD"],
       "proposed_status": "active",
-      "proposed_issuer_organization_ids": [
-        "sog_issuer_paxos_digital_singapore",
-        "sog_issuer_paxos_issuance_europe"
-      ],
-      "issuer_names": [
-        "Paxos Digital Singapore Pte. Ltd.",
-        "Paxos Issuance Europe"
-      ],
+      "proposed_issuer_organization_ids": ["sog_issuer_straitsx_singapore"],
+      "issuer_names": ["StraitsX Singapore"],
       "reference_asset": "USD",
       "mechanism": "fiat_backed_stablecoin",
       "stabilization": "one_to_one_us_dollar_issuance_and_redemption",
-      "historical_value": "multi_jurisdiction_regulated_global_dollar_network_stablecoin",
-      "value_contribution": [
-        "current_usd_coverage",
-        "regulated_issuer_structure",
-        "network_incentive_model",
-        "multi_jurisdiction_issuance"
-      ],
-      "proposed_event_plan": [
-        "2024_network_and_stablecoin_launch",
-        "issuer_jurisdiction_expansion",
-        "deployment_expansions"
-      ],
-      "proposed_record_families": [
-        "stablecoins",
-        "organizations",
-        "relationships",
-        "classifications",
-        "stablecoin_profiles",
-        "events",
-        "event_details",
-        "evidence",
-        "evidence_relations",
-        "deployments",
-        "legal_profiles",
-        "reserve_components",
-        "income_profiles",
-        "known_unknowns"
-      ],
+      "historical_value": "singapore_payment_institution_usd_stablecoin_with_regional_payment_and_multichain_context",
+      "value_contribution": ["current_usd_coverage", "singapore_payment_institution_context", "regional_payment_infrastructure", "issuer_redemption_model"],
+      "proposed_event_plan": ["2024_xusd_launch", "public_blockchain_deployment_expansion", "payment_and_exchange_distribution_expansion"],
+      "proposed_record_families": ["stablecoins", "organizations", "relationships", "classifications", "stablecoin_profiles", "events", "event_details", "evidence", "evidence_relations", "deployments", "legal_profiles", "reserve_components", "income_profiles", "known_unknowns"],
       "source_leads": [
         {
-          "url": "https://globaldollar.com/about-usdg",
-          "publisher": "Global Dollar Network / Paxos",
+          "url": "https://www.straitsx.com/xusd",
+          "publisher": "StraitsX",
           "source_type": "official_product_documentation",
-          "claim_scopes": [
-            "asset_identity",
-            "one_to_one_redemption",
-            "issuer_identity",
-            "regulatory_scope",
-            "deployment_scope"
-          ],
+          "claim_scopes": ["asset_identity", "issuer_identity", "one_to_one_redemption", "reserve_model", "deployment_scope"],
           "official": true
         },
         {
-          "url": "https://globaldollar.com/",
-          "publisher": "Global Dollar Network / Paxos",
-          "source_type": "official_network_documentation",
-          "claim_scopes": [
-            "network_identity",
-            "issuer_identity",
-            "redemption_model",
-            "network_economic_model"
-          ],
+          "url": "https://www.straitsx.com/sg",
+          "publisher": "StraitsX",
+          "source_type": "official_issuer_documentation",
+          "claim_scopes": ["issuer_identity", "singapore_regulatory_context", "platform_scope"],
           "official": true
         },
         {
-          "url": "https://www.reuters.com/technology/crypto-firms-including-robinhood-kraken-launch-global-stablecoin-network-2024-11-04/",
-          "publisher": "Reuters",
-          "source_type": "news_article",
-          "claim_scopes": [
-            "launch_event",
-            "network_partners",
-            "paxos_issuance"
-          ],
+          "url": "https://www.ledger.com/academy/topics/crypto/straitsx-launches-xusd",
+          "publisher": "Ledger",
+          "source_type": "industry_article",
+          "claim_scopes": ["launch_event", "initial_network_scope", "reserve_and_redemption_summary"],
           "official": false
         }
       ],
-      "blocking_unknowns": [
-        "exact_first_mint_day",
-        "complete_issuer_transition_timeline",
-        "complete_deployment_lineage",
-        "full_historical_reserve_report_series"
-      ],
+      "blocking_unknowns": ["exact_first_public_mint_timestamp", "complete_deployment_lineage", "complete_historical_reserve_report_series", "full_direct_redemption_fee_and_minimum_history"],
       "duplicate_review": {
         "asset_id_match": false,
         "slug_match": false,
@@ -112,95 +62,46 @@
       "selection_decision": "selected_for_full_record_review"
     },
     {
-      "candidate_id": "sog_cand_pr358_usd1",
-      "proposed_asset_id": "sog_st_usd1",
-      "proposed_slug": "world-liberty-financial-usd1",
-      "canonical_name": "USD1",
-      "symbol": "USD1",
-      "aliases": ["USD1", "World Liberty Financial USD1"],
+      "candidate_id": "sog_cand_pr358_sofiusd",
+      "proposed_asset_id": "sog_st_sofiusd",
+      "proposed_slug": "sofiusd",
+      "canonical_name": "SoFiUSD",
+      "symbol": "SoFiUSD",
+      "aliases": ["SoFiUSD", "SOFIUSD", "SoFi USD"],
       "proposed_status": "active",
-      "proposed_issuer_organization_ids": [
-        "sog_issuer_world_liberty_financial"
-      ],
-      "proposed_custodian_organization_ids": [
-        "sog_org_bitgo"
-      ],
-      "issuer_names": ["World Liberty Financial"],
-      "custodian_names": ["BitGo"],
+      "proposed_issuer_organization_ids": ["sog_issuer_sofi_bank_na"],
+      "issuer_names": ["SoFi Bank, N.A."],
       "reference_asset": "USD",
       "mechanism": "fiat_backed_stablecoin",
-      "stabilization": "us_dollar_cash_equivalent_and_treasury_reserve_backing",
-      "historical_value": "large_institutional_usd_stablecoin_with_distinct_issuer_custodian_structure",
-      "value_contribution": [
-        "current_usd_coverage",
-        "issuer_custodian_separation",
-        "institutional_use_history",
-        "2026_social_account_attack_and_short_depeg_context"
-      ],
-      "proposed_event_plan": [
-        "2025_launch_announcement",
-        "institutional_transaction_use",
-        "2026_social_account_attack_and_temporary_depeg",
-        "issuer_or_charter_structure_changes"
-      ],
-      "proposed_record_families": [
-        "stablecoins",
-        "organizations",
-        "relationships",
-        "classifications",
-        "stablecoin_profiles",
-        "events",
-        "event_details",
-        "evidence",
-        "evidence_relations",
-        "deployments",
-        "legal_profiles",
-        "reserve_components",
-        "income_profiles",
-        "known_unknowns"
-      ],
+      "stabilization": "one_to_one_cash_reserve_backing_and_bank_redemption",
+      "historical_value": "national_bank_issued_public_blockchain_stablecoin_with_enterprise_and_consumer_distribution",
+      "value_contribution": ["current_usd_coverage", "us_national_bank_issuer_structure", "enterprise_settlement_history", "consumer_banking_app_distribution"],
+      "proposed_event_plan": ["2025_enterprise_launch", "2026_consumer_rollout", "ethereum_and_solana_distribution"],
+      "proposed_record_families": ["stablecoins", "organizations", "relationships", "classifications", "stablecoin_profiles", "events", "event_details", "evidence", "evidence_relations", "deployments", "legal_profiles", "reserve_components", "income_profiles", "known_unknowns"],
       "source_leads": [
         {
-          "url": "https://www.worldlibertyfinancial.com/",
-          "publisher": "World Liberty Financial",
+          "url": "https://www.sofi.com/",
+          "publisher": "SoFi",
           "source_type": "official_issuer_website",
-          "claim_scopes": [
-            "issuer_identity",
-            "product_context"
-          ],
+          "claim_scopes": ["issuer_identity", "bank_and_product_context"],
           "official": true
         },
         {
-          "url": "https://www.reuters.com/technology/trumps-world-liberty-financial-crypto-venture-says-it-will-launch-stablecoin-2025-03-25/",
-          "publisher": "Reuters",
+          "url": "https://www.barrons.com/articles/sofi-stablecoin-stock-launch-crypto-13217c43",
+          "publisher": "Barron's",
           "source_type": "news_article",
-          "claim_scopes": [
-            "launch_announcement",
-            "reserve_model",
-            "initial_deployment_scope"
-          ],
+          "claim_scopes": ["2025_launch_event", "sofi_bank_issuer_identity", "cash_reserve_model", "immediate_redemption_claim", "enterprise_use_scope"],
           "official": false
         },
         {
-          "url": "https://www.reuters.com/sustainability/boards-policy-regulation/trump-backed-crypto-stablecoin-dips-following-attack-quickly-recovers-2026-02-23/",
-          "publisher": "Reuters",
+          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-05-27-2026/card/exclusive-sofi-makes-its-stablecoin-available-to-15-million-customers-gOavVfurYooazZoJWtNV",
+          "publisher": "The Wall Street Journal",
           "source_type": "news_article",
-          "claim_scopes": [
-            "temporary_depeg_event",
-            "social_account_attack_context",
-            "no_reported_contract_or_wallet_breach",
-            "continued_active_status"
-          ],
+          "claim_scopes": ["2026_consumer_rollout", "ethereum_and_solana_scope", "banking_app_distribution", "continued_active_status"],
           "official": false
         }
       ],
-      "blocking_unknowns": [
-        "exact_first_mint_day",
-        "current_legal_issuer_entity",
-        "complete_reserve_report_series",
-        "direct_redemption_eligibility_and_process",
-        "complete_deployment_lineage"
-      ],
+      "blocking_unknowns": ["official_stablecoin_terms_url", "complete_contract_address_and_deployment_lineage", "complete_reserve_report_series", "direct_redemption_terms_outside_sofi_channels"],
       "duplicate_review": {
         "asset_id_match": false,
         "slug_match": false,
