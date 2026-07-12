@@ -1,0 +1,36 @@
+name: AAA PR356 Stats Snapshot
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    if: github.head_ref == 'pr356-market-access-pilot-1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr356-market-access-pilot-1
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic snapshot candidate
+        run: node scripts/stats/build-history-snapshot.mjs > docs/migration/pr356-stats-snapshot-candidate.json
+      - name: Commit snapshot candidate
+        run: |
+          if git diff --quiet; then
+            echo 'Snapshot candidate already current.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/migration/pr356-stats-snapshot-candidate.json
+          git commit -m 'Generate PR 356 statistics snapshot candidate'
+          git push origin HEAD:pr356-market-access-pilot-1
