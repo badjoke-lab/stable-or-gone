@@ -47,6 +47,11 @@ jobs:
       - name: Validate release integrity
         run: npm run validate:release-integrity
 
+      - name: Generate current statistics snapshot candidate
+        run: |
+          mkdir -p artifacts/pr356
+          node scripts/stats/build-history-snapshot.mjs > artifacts/pr356/stats-history-current-snapshot.json
+
       - name: Verify bounded pilot boundary
         run: |
           node --input-type=module <<'NODE'
@@ -92,8 +97,12 @@ jobs:
             const fs = require('fs');
             const marker = '<!-- pr356-market-access-pilot-status -->';
             let review = null;
+            let snapshot = null;
             try {
               review = JSON.parse(fs.readFileSync('artifacts/pr356/market-access-pilot-1-review.json', 'utf8'));
+            } catch {}
+            try {
+              snapshot = JSON.parse(fs.readFileSync('artifacts/pr356/stats-history-current-snapshot.json', 'utf8'));
             } catch {}
             const matched = review?.exact_canonical_evidence_ids ?? [];
             const unmatched = review?.unmatched_source_urls ?? [];
@@ -107,6 +116,9 @@ jobs:
             - Exact canonical Evidence IDs: ${matched.length ? matched.map((id) => `\`${id}\``).join(', ') : 'none'}
             - Unmatched reviewed source URLs: **${unmatched.length}**
             - Canonical Market Access rows: **${JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8')).length}**
+            - Stats Evidence total: **${snapshot?.totals?.evidence ?? 'not-generated'}**
+            - Stats model SHA-256: \`${snapshot?.stats_model_sha256 ?? 'not-generated'}\`
+            - Snapshot SHA-256: \`${snapshot?.snapshot_sha256 ?? 'not-generated'}\`
             - Head: \`${context.sha}\`
             `;
             const comments = await github.paginate(github.rest.issues.listComments, {
