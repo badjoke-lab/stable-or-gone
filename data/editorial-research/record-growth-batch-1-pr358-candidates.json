@@ -1,0 +1,214 @@
+{
+  "schema_version": "1.0",
+  "research_id": "sog_record_growth_batch_1_pr358_candidates_2026_07_13",
+  "status": "reviewed_candidate_checkpoint_not_canonical",
+  "review_pr": 358,
+  "recorded_at": "2026-07-13",
+  "canonical_boundary": {
+    "included_in_public_canonical_counts": false,
+    "automatic_promotion": false,
+    "manual_review_required": true
+  },
+  "context_group": "current_usd_reserve_backed_institutional_stablecoins",
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr358_usdg",
+      "proposed_asset_id": "sog_st_usdg",
+      "proposed_slug": "global-dollar-usdg",
+      "canonical_name": "Global Dollar",
+      "symbol": "USDG",
+      "aliases": ["USDG", "Global Dollar USDG"],
+      "proposed_status": "active",
+      "proposed_issuer_organization_ids": [
+        "sog_issuer_paxos_digital_singapore",
+        "sog_issuer_paxos_issuance_europe"
+      ],
+      "issuer_names": [
+        "Paxos Digital Singapore Pte. Ltd.",
+        "Paxos Issuance Europe"
+      ],
+      "reference_asset": "USD",
+      "mechanism": "fiat_backed_stablecoin",
+      "stabilization": "one_to_one_us_dollar_issuance_and_redemption",
+      "historical_value": "multi_jurisdiction_regulated_global_dollar_network_stablecoin",
+      "value_contribution": [
+        "current_usd_coverage",
+        "regulated_issuer_structure",
+        "network_incentive_model",
+        "multi_jurisdiction_issuance"
+      ],
+      "proposed_event_plan": [
+        "2024_network_and_stablecoin_launch",
+        "issuer_jurisdiction_expansion",
+        "deployment_expansions"
+      ],
+      "proposed_record_families": [
+        "stablecoins",
+        "organizations",
+        "relationships",
+        "classifications",
+        "stablecoin_profiles",
+        "events",
+        "event_details",
+        "evidence",
+        "evidence_relations",
+        "deployments",
+        "legal_profiles",
+        "reserve_components",
+        "income_profiles",
+        "known_unknowns"
+      ],
+      "source_leads": [
+        {
+          "url": "https://globaldollar.com/about-usdg",
+          "publisher": "Global Dollar Network / Paxos",
+          "source_type": "official_product_documentation",
+          "claim_scopes": [
+            "asset_identity",
+            "one_to_one_redemption",
+            "issuer_identity",
+            "regulatory_scope",
+            "deployment_scope"
+          ],
+          "official": true
+        },
+        {
+          "url": "https://globaldollar.com/",
+          "publisher": "Global Dollar Network / Paxos",
+          "source_type": "official_network_documentation",
+          "claim_scopes": [
+            "network_identity",
+            "issuer_identity",
+            "redemption_model",
+            "network_economic_model"
+          ],
+          "official": true
+        },
+        {
+          "url": "https://www.reuters.com/technology/crypto-firms-including-robinhood-kraken-launch-global-stablecoin-network-2024-11-04/",
+          "publisher": "Reuters",
+          "source_type": "news_article",
+          "claim_scopes": [
+            "launch_event",
+            "network_partners",
+            "paxos_issuance"
+          ],
+          "official": false
+        }
+      ],
+      "blocking_unknowns": [
+        "exact_first_mint_day",
+        "complete_issuer_transition_timeline",
+        "complete_deployment_lineage",
+        "full_historical_reserve_report_series"
+      ],
+      "duplicate_review": {
+        "asset_id_match": false,
+        "slug_match": false,
+        "canonical_name_match": false,
+        "symbol_match": false,
+        "decision": "new_identity_pending_full_canonical_duplicate_audit"
+      },
+      "selection_decision": "selected_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr358_usd1",
+      "proposed_asset_id": "sog_st_usd1",
+      "proposed_slug": "world-liberty-financial-usd1",
+      "canonical_name": "USD1",
+      "symbol": "USD1",
+      "aliases": ["USD1", "World Liberty Financial USD1"],
+      "proposed_status": "active",
+      "proposed_issuer_organization_ids": [
+        "sog_issuer_world_liberty_financial"
+      ],
+      "proposed_custodian_organization_ids": [
+        "sog_org_bitgo"
+      ],
+      "issuer_names": ["World Liberty Financial"],
+      "custodian_names": ["BitGo"],
+      "reference_asset": "USD",
+      "mechanism": "fiat_backed_stablecoin",
+      "stabilization": "us_dollar_cash_equivalent_and_treasury_reserve_backing",
+      "historical_value": "large_institutional_usd_stablecoin_with_distinct_issuer_custodian_structure",
+      "value_contribution": [
+        "current_usd_coverage",
+        "issuer_custodian_separation",
+        "institutional_use_history",
+        "2026_social_account_attack_and_short_depeg_context"
+      ],
+      "proposed_event_plan": [
+        "2025_launch_announcement",
+        "institutional_transaction_use",
+        "2026_social_account_attack_and_temporary_depeg",
+        "issuer_or_charter_structure_changes"
+      ],
+      "proposed_record_families": [
+        "stablecoins",
+        "organizations",
+        "relationships",
+        "classifications",
+        "stablecoin_profiles",
+        "events",
+        "event_details",
+        "evidence",
+        "evidence_relations",
+        "deployments",
+        "legal_profiles",
+        "reserve_components",
+        "income_profiles",
+        "known_unknowns"
+      ],
+      "source_leads": [
+        {
+          "url": "https://www.worldlibertyfinancial.com/",
+          "publisher": "World Liberty Financial",
+          "source_type": "official_issuer_website",
+          "claim_scopes": [
+            "issuer_identity",
+            "product_context"
+          ],
+          "official": true
+        },
+        {
+          "url": "https://www.reuters.com/technology/trumps-world-liberty-financial-crypto-venture-says-it-will-launch-stablecoin-2025-03-25/",
+          "publisher": "Reuters",
+          "source_type": "news_article",
+          "claim_scopes": [
+            "launch_announcement",
+            "reserve_model",
+            "initial_deployment_scope"
+          ],
+          "official": false
+        },
+        {
+          "url": "https://www.reuters.com/sustainability/boards-policy-regulation/trump-backed-crypto-stablecoin-dips-following-attack-quickly-recovers-2026-02-23/",
+          "publisher": "Reuters",
+          "source_type": "news_article",
+          "claim_scopes": [
+            "temporary_depeg_event",
+            "social_account_attack_context",
+            "no_reported_contract_or_wallet_breach",
+            "continued_active_status"
+          ],
+          "official": false
+        }
+      ],
+      "blocking_unknowns": [
+        "exact_first_mint_day",
+        "current_legal_issuer_entity",
+        "complete_reserve_report_series",
+        "direct_redemption_eligibility_and_process",
+        "complete_deployment_lineage"
+      ],
+      "duplicate_review": {
+        "asset_id_match": false,
+        "slug_match": false,
+        "canonical_name_match": false,
+        "symbol_match": false,
+        "decision": "new_identity_pending_full_canonical_duplicate_audit"
+      },
+      "selection_decision": "selected_for_full_record_review"
+    }
+  ]
+}
