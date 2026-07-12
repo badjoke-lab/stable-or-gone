@@ -1,0 +1,55 @@
+name: AAA PR357 Validation Diagnostic
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  diagnose:
+    if: github.head_ref == 'pr357-tier-a-dossier-batch-3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/diagnose-pr357-validation.mjs
+      - name: Publish diagnostics
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- pr357-validation-diagnostic -->';
+            let report = null;
+            try { report = JSON.parse(fs.readFileSync('artifacts/pr357/validation-matrix.json', 'utf8')); } catch {}
+            const rows = report?.results ?? [];
+            const detail = rows.map((row) => `- ${row.ok ? '✅' : '❌'} **${row.name}**\n\n\`\`\`text\n${row.output_tail || '(no output)'}\n\`\`\``).join('\n');
+            const body = `${marker}\n## PR #357 validation diagnostic\n\n${detail || 'Diagnostic report was not generated.'}\n\nHead: \`${context.sha}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body});
+            } else {
+              await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number, body});
+            }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr357-validation-diagnostic-${{ github.run_id }}
+          path: artifacts/pr357/validation-matrix.json
+          if-no-files-found: error
