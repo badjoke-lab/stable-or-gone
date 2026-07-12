@@ -6,12 +6,12 @@
     "event_id": null,
     "source_type": "legal_terms",
     "title": "Tether Token Terms of Sale and Service",
-    "url": "https://tether.to/en/legal/",
+    "url": "https://tether.to/legal/",
     "publisher": "Tether",
     "published_at": null,
     "accessed_at": "2026-07-11",
     "reliability": "high",
     "claim_scope": "issuer relationship, verified-customer redemption claim, reserve ownership language, governing-law scope, eligibility, fees, and restrictions",
-    "notes": "PR #354 exact primary legal source. Use for the bounded direct-claim and issuer-owned-reserve statements. It does not establish reserve segregation or bankruptcy remoteness, which remain unknown."
+    "notes": "PR #354 exact primary legal source. Official Tether legal route serving the Token Terms of Sale and Service. Use for bounded direct-claim and issuer-owned-reserve statements. It does not establish reserve segregation or bankruptcy remoteness, which remain unknown."
   }
 ]
