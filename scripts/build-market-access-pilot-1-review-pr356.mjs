@@ -121,14 +121,17 @@ export function buildMarketAccessPilot1Review() {
   if (!sourceRow) throw new Error('Configured source research row was not found.');
 
   const sourceUrls = unique(sourceRow.source_urls ?? []);
+  const dispositions = config.source_url_dispositions ?? {};
   const urlReview = sourceUrls.map((url) => {
     const exactMatches = evidenceByExactUrl.get(url) ?? [];
     const normalizedMatches = evidenceByNormalizedUrl.get(normalizeUrl(url)) ?? [];
+    const disposition = dispositions[url] ?? null;
     return {
       url,
       normalized_url: normalizeUrl(url),
       exact_match_ids: unique(exactMatches.map((row) => row.id)),
       normalized_match_ids: unique(normalizedMatches.map((row) => row.id)),
+      disposition,
       exact_matches: exactMatches.map((row) => ({
         id: row.id,
         title: row.title ?? null,
@@ -191,7 +194,7 @@ export function buildMarketAccessPilot1Review() {
         observed_at: config.observed_at,
         date_precision: 'day',
         network_scope: {
-          kind: functionName === 'buy_sell' ? 'specific_networks' : 'specific_networks',
+          kind: 'specific_networks',
           network_ids: ['ethereum'],
           note: 'Scope reflects the reviewed SBI VC Trade launch-stage USDC support described by the source research row.',
         },
@@ -214,6 +217,13 @@ export function buildMarketAccessPilot1Review() {
   });
 
   const promotionReady = candidates.filter((row) => row.promotion_status === 'approved_candidate_pending_canonical_write');
+  const supplementarySourceUrls = urlReview
+    .filter((row) => row.exact_match_ids.length === 0 && row.disposition?.status === 'supplementary_not_required_for_promoted_claims')
+    .map((row) => ({ url: row.url, ...row.disposition }));
+  const unresolvedSourceUrls = urlReview
+    .filter((row) => row.exact_match_ids.length === 0 && !row.disposition)
+    .map((row) => row.url);
+
   return {
     schema_version: '1.0',
     review_id: 'sog_market_access_pilot_1_pr356_review',
@@ -237,7 +247,8 @@ export function buildMarketAccessPilot1Review() {
     asset_exists: assetIds.has(sourceRow.asset_id),
     source_url_review: urlReview,
     exact_canonical_evidence_ids: allExactEvidenceIds,
-    unmatched_source_urls: urlReview.filter((row) => row.exact_match_ids.length === 0).map((row) => row.url),
+    supplementary_source_urls: supplementarySourceUrls,
+    unmatched_source_urls: unresolvedSourceUrls,
     candidate_count: candidates.length,
     promotion_ready_count: promotionReady.length,
     candidates,
@@ -258,6 +269,7 @@ if (isCli) {
     output,
     candidate_count: report.candidate_count,
     exact_canonical_evidence_ids: report.exact_canonical_evidence_ids,
+    supplementary_source_url_count: report.supplementary_source_urls.length,
     unmatched_source_url_count: report.unmatched_source_urls.length,
     promotion_ready_count: report.promotion_ready_count,
     input_digest_sha256: report.input_digest_sha256,
