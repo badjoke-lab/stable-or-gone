@@ -62,6 +62,13 @@ expect(sourceRow?.jurisdiction_code === 'JP', 'source research jurisdiction mism
 expect(sourceRow?.platform === 'SBI VC Trade', 'source research platform mismatch');
 expect(sourceRow?.platform_service === 'VCTRADE', 'source research service mismatch');
 expect(sourceRow?.effective_date === '2025-03-26', 'source research effective date mismatch');
+const sourceUrls = [...(sourceRow?.source_urls ?? [])].sort();
+const dispositionUrls = Object.keys(config.source_url_dispositions ?? {}).sort();
+expect(isDeepStrictEqual(dispositionUrls, sourceUrls), 'every reviewed source URL must have an explicit disposition');
+const dispositions = Object.values(config.source_url_dispositions ?? {});
+expect(dispositions.filter((row) => row.status === 'canonical_evidence_promoted').length === 2, 'exactly two source URLs must be promoted to canonical Evidence');
+expect(dispositions.filter((row) => row.status === 'supplementary_not_required_for_promoted_claims').length === 2, 'exactly two source URLs must be explicitly supplementary');
+expect(dispositions.every((row) => typeof row.reason === 'string' && row.reason.length > 0), 'every source URL disposition requires a reason');
 
 expect(governance.promotion_policy?.automatic_promotion === false, 'governance automatic promotion changed');
 expect(governance.promotion_policy?.review_required === true, 'governance manual review changed');
@@ -81,6 +88,10 @@ expect(report.candidate_count === 4, 'review report must contain four function c
 expect(report.candidates.length === 4, 'review candidate list must contain four rows');
 expect(isDeepStrictEqual(report.bounded_scope.functions, expectedFunctions), 'review report function scope mismatch');
 expect(report.bounded_scope.maximum_canonical_records === 4, 'review report maximum record count mismatch');
+expect(report.exact_canonical_evidence_ids.length === 2, 'review report must contain two exact canonical Evidence identities');
+expect(report.supplementary_source_urls.length === 2, 'review report must contain two reviewed supplementary URLs');
+expect(report.unmatched_source_urls.length === 0, 'review report must have no unresolved source URLs');
+expect(report.source_url_review.every((row) => row.disposition), 'review report source URL disposition missing');
 expect(serializeMarketAccessPilot1Review(report) === serializeMarketAccessPilot1Review(repeat), 'review report must be byte deterministic');
 expect(isDeepStrictEqual(report, repeat), 'review report repeated object mismatch');
 expect(/^[a-f0-9]{64}$/.test(report.input_digest_sha256), 'review report input digest invalid');
@@ -140,6 +151,7 @@ console.log(JSON.stringify({
   source_merge_commit: handoff.source_merge_commit,
   candidate_count: report.candidate_count,
   exact_canonical_evidence_ids: report.exact_canonical_evidence_ids,
+  supplementary_source_url_count: report.supplementary_source_urls.length,
   unmatched_source_url_count: report.unmatched_source_urls.length,
   promotion_ready_count: report.promotion_ready_count,
   canonical_market_access_record_count: canonicalRecords.length,
