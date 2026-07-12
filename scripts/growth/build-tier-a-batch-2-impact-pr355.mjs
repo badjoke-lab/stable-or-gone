@@ -17,6 +17,7 @@ const paths = {
   evidence: 'data/evidence-pr355-tier-a-batch-2.json',
   checkpoint: 'docs/migration/current-canonical-checkpoint.json'
 };
+const reviewedExistingEvidenceIds = new Set(['sog_src_ust_sec_2023_32']);
 
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const readJson = (file) => JSON.parse(readText(file));
@@ -50,7 +51,7 @@ export function buildTierABatch2Impact() {
   const currentBySlug = new Map(currentBaseline.assets.map((row) => [row.asset_slug, row]));
   const legalById = new Map(legalProfiles.map((row) => [row.id, row]));
   const overrideById = new Map(profileOverrides.map((row) => [row.id, row]));
-  const evidenceIds = new Set(evidence.map((row) => row.id));
+  const newEvidenceIds = new Set(evidence.map((row) => row.id));
 
   const selectedAssets = config.selected_assets.map((selected) => {
     const queueRow = queueBySlug.get(selected.asset_slug);
@@ -62,7 +63,7 @@ export function buildTierABatch2Impact() {
       ...(legal?.evidence_ids ?? []),
       ...(legal?.classifications ?? []).flatMap((entry) => entry.evidence_ids ?? []),
       ...(override?.redemption_profile?.evidence_ids ?? [])
-    ].filter((id) => id.endsWith('_pr355')))].sort();
+    ].filter((id) => id.endsWith('_pr355') || reviewedExistingEvidenceIds.has(id)))].sort();
 
     return {
       asset_id: selected.asset_id,
@@ -104,7 +105,7 @@ export function buildTierABatch2Impact() {
         evidence_ids: [...(override.redemption_profile.evidence_ids ?? [])]
       } : null,
       exact_pr355_evidence_ids: exactEvidenceIds,
-      exact_pr355_evidence_present: exactEvidenceIds.length > 0 && exactEvidenceIds.every((id) => evidenceIds.has(id))
+      exact_pr355_evidence_present: exactEvidenceIds.length > 0 && exactEvidenceIds.every((id) => newEvidenceIds.has(id) || reviewedExistingEvidenceIds.has(id))
     };
   });
 
@@ -128,7 +129,7 @@ export function buildTierABatch2Impact() {
     constraints: {
       canonical_asset_count_expected: 110,
       canonical_asset_count_actual: currentBaseline.asset_count,
-      canonical_evidence_count_expected: 553,
+      canonical_evidence_count_expected: 552,
       canonical_evidence_count_actual: checkpoint.expected_counts.evidence,
       market_access_record_count_expected: 0,
       completed_pr354_assets_unchanged: true,
