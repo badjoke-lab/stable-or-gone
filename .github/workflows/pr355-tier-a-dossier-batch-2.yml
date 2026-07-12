@@ -99,6 +99,9 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Diagnose public record breakdown
+        run: node scripts/diagnose-public-record-breakdown-pr355.mjs dist
+
       - name: Verify public layer
         run: npm run verify:public
 
