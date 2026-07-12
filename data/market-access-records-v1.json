@@ -1,1 +1,103 @@
-[]
+[
+  {
+    "id": "sog_ma_usdc_jp_sbivc_vctrade_buy_sell_20250326",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usdc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":null,"name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "buy_sell",
+    "access_state": "available",
+    "effective_from": "2025-03-26",
+    "effective_to": null,
+    "observed_at": "2026-07-10",
+    "date_precision": "day",
+    "network_scope": {"kind":"specific_networks","network_ids":["ethereum"],"note":"The reviewed launch-stage USDC service used the Ethereum network."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"transaction_limit","description":"SBI VC Trade announced a JPY 1 million-equivalent limit per buy/sell transaction at the reviewed launch stage."},
+      {"type":"service_condition","description":"Availability and execution remain subject to SBI VC Trade service terms, maintenance, compliance checks, and platform controls."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register dated 2026-06-24 lists SBI VC Trade as a registered electronic payment instrument service provider handling USDC."},
+    "evidence_ids": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Japan observation. This record does not assert universal Japan-wide availability."
+  },
+  {
+    "id": "sog_ma_usdc_jp_sbivc_vctrade_deposit_20250326",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usdc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":null,"name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "deposit",
+    "access_state": "available",
+    "effective_from": "2025-03-26",
+    "effective_to": null,
+    "observed_at": "2026-07-10",
+    "date_precision": "day",
+    "network_scope": {"kind":"specific_networks","network_ids":["ethereum"],"note":"At the reviewed launch stage, SBI VC Trade accepted USDC deposits only on Ethereum."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"network_support","description":"Only Ethereum-network USDC was accepted at the reviewed launch stage."},
+      {"type":"service_condition","description":"Deposits above the announced threshold could require additional time before account reflection, and deposit reflection could be paused under stated platform conditions."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register dated 2026-06-24 lists SBI VC Trade as a registered electronic payment instrument service provider handling USDC."},
+    "evidence_ids": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Japan observation. This record does not assert universal Japan-wide availability or support on non-Ethereum networks."
+  },
+  {
+    "id": "sog_ma_usdc_jp_sbivc_vctrade_withdrawal_20250326",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usdc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":null,"name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "withdrawal",
+    "access_state": "available",
+    "effective_from": "2025-03-26",
+    "effective_to": null,
+    "observed_at": "2026-07-10",
+    "date_precision": "day",
+    "network_scope": {"kind":"specific_networks","network_ids":["ethereum"],"note":"At the reviewed launch stage, SBI VC Trade supported USDC withdrawal only on Ethereum."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"withdrawal_limit","description":"SBI VC Trade announced a JPY 1 million-equivalent limit per withdrawal at the reviewed launch stage."},
+      {"type":"network_support","description":"Only Ethereum-network USDC withdrawal was supported at the reviewed launch stage."},
+      {"type":"service_condition","description":"Withdrawal processing time and availability remain subject to SBI VC Trade service controls and maintenance."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register dated 2026-06-24 lists SBI VC Trade as a registered electronic payment instrument service provider handling USDC."},
+    "evidence_ids": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Japan observation. This record does not assert universal Japan-wide availability or support on non-Ethereum networks."
+  },
+  {
+    "id": "sog_ma_usdc_jp_sbivc_vctrade_external_wallet_transfer_20250326",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usdc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":null,"name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "external_wallet_transfer",
+    "access_state": "restricted_network_scope",
+    "effective_from": "2025-03-26",
+    "effective_to": null,
+    "observed_at": "2026-07-10",
+    "date_precision": "day",
+    "network_scope": {"kind":"specific_networks","network_ids":["ethereum"],"note":"External USDC transfer through the reviewed withdrawal route was limited to Ethereum."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"network_support","description":"External transfer was available through the withdrawal route only on Ethereum at the reviewed launch stage."},
+      {"type":"withdrawal_limit","description":"The reviewed external transfer route inherited the announced JPY 1 million-equivalent per-withdrawal limit."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register dated 2026-06-24 lists SBI VC Trade as a registered electronic payment instrument service provider handling USDC."},
+    "evidence_ids": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Japan observation. This record does not assert universal Japan-wide availability or support on non-Ethereum networks."
+  }
+]
