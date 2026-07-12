@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
   validate:
@@ -81,6 +83,54 @@ jobs:
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('Candidate publication boundary changed');
           console.log('Internal PR #356 review remains outside public output.');
           NODE
+
+      - name: Publish validation summary to PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- pr356-market-access-pilot-status -->';
+            let review = null;
+            try {
+              review = JSON.parse(fs.readFileSync('artifacts/pr356/market-access-pilot-1-review.json', 'utf8'));
+            } catch {}
+            const matched = review?.exact_canonical_evidence_ids ?? [];
+            const unmatched = review?.unmatched_source_urls ?? [];
+            const body = `${marker}
+            ## PR #356 Market Access Pilot status
+
+            - Workflow status: **${{ job.status }}**
+            - Stage: \`${review?.status ?? 'review-not-built'}\`
+            - Candidate functions: **${review?.candidate_count ?? 0}**
+            - Promotion-ready: **${review?.promotion_ready_count ?? 0}**
+            - Exact canonical Evidence IDs: ${matched.length ? matched.map((id) => `\`${id}\``).join(', ') : 'none'}
+            - Unmatched reviewed source URLs: **${unmatched.length}**
+            - Canonical Market Access rows: **${JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8')).length}**
+            - Head: \`${context.sha}\`
+            `;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
 
       - name: Upload Market Access candidate review
         if: always()
