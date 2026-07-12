@@ -1,43 +1,37 @@
 {
   "schema_version": "1.0",
   "pilot_id": "sog_market_access_pilot_1_pr356",
-  "status": "bounded_candidate_audit_then_manual_promotion",
+  "status": "canonical_promotion_reviewed",
   "review_pr": 356,
   "source_handoff_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
   "source_research_id": "japan-stablecoin-market-access-2026",
   "source_research_record_ids": ["jp_access_usdc_sbivc_2025_03_26"],
-  "jurisdictions": [
-    {
-      "country_code": "JP",
-      "label": "Japan",
-      "subdivision_code": null
-    }
-  ],
-  "assets": [
-    {
-      "asset_id": "sog_st_usdc",
-      "symbol": "USDC"
-    }
-  ],
-  "platforms": [
-    {
-      "name": "SBI VC Trade",
-      "service": "VCTRADE",
-      "organization_id": null
-    }
-  ],
-  "functions": ["buy_sell", "deposit", "withdrawal", "external_wallet_transfer"],
-  "excluded_functions": ["direct_issuer_mint", "direct_issuer_redemption"],
+  "jurisdictions": [{"country_code":"JP","label":"Japan","subdivision_code":null}],
+  "assets": [{"asset_id":"sog_st_usdc","symbol":"USDC"}],
+  "platforms": [{"name":"SBI VC Trade","service":"VCTRADE","organization_id":null}],
+  "functions": ["buy_sell","deposit","withdrawal","external_wallet_transfer"],
+  "excluded_functions": ["direct_issuer_mint","direct_issuer_redemption"],
   "effective_from": "2025-03-26",
   "observed_at": "2026-07-10",
   "review_cutoff": "2026-07-10",
   "maximum_canonical_records": 4,
+  "approved_access_state_by_function": {
+    "buy_sell": "available_with_conditions",
+    "deposit": "restricted_network_scope",
+    "withdrawal": "available_with_conditions",
+    "external_wallet_transfer": "restricted_network_scope"
+  },
   "canonical_promotion": {
     "automatic": false,
     "manual_review_required": true,
     "minimum_canonical_evidence_records_per_function": 1,
     "require_function_specific_claim_scope": true,
-    "approved_evidence_ids_by_function": {}
+    "approved_evidence_ids_by_function": {
+      "buy_sell": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "deposit": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "withdrawal": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "external_wallet_transfer": ["sog_src_usdc_sbivc_public_launch_pr356","sog_src_jfsa_electronic_payment_instrument_register_pr356"]
+    }
   },
   "boundaries": {
     "new_canonical_assets_allowed": false,
