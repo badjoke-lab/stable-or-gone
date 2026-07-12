@@ -100,7 +100,10 @@ jobs:
         run: npm run build
 
       - name: Diagnose public record breakdown
-        run: node scripts/diagnose-public-record-breakdown-pr355.mjs dist
+        run: |
+          mkdir -p artifacts/pr355
+          node scripts/diagnose-public-record-breakdown-pr355.mjs dist \
+            > artifacts/pr355/public-breakdown-diagnostic.log 2>&1 || true
 
       - name: Verify public layer
         run: npm run verify:public
