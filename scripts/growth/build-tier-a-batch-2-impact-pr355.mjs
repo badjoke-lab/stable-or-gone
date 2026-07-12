@@ -45,7 +45,7 @@ export function buildTierABatch2Impact() {
   ];
   const evidence = readJson(paths.evidence);
   const checkpoint = readJson(paths.checkpoint);
-  const currentBaseline = buildReviewedRecordDepthBaseline();
+  const currentBaseline = buildReviewedRecordDepthBaseline({ profileOverrideFiles: [paths.profileOverrides] });
 
   const queueBySlug = new Map(queue.candidates.map((row) => [row.asset_slug, row]));
   const currentBySlug = new Map(currentBaseline.assets.map((row) => [row.asset_slug, row]));
