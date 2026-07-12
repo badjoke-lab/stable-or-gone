@@ -13,8 +13,8 @@
     "profiles": 110,
     "events": 185,
     "event_details": 185,
-    "evidence": 552,
-    "evidence_relations": 552,
+    "evidence": 549,
+    "evidence_relations": 549,
     "reserve_reports": 118,
     "known_unknowns": 319,
     "regulatory_notes": 9,
@@ -25,5 +25,5 @@
     "evidence": ["data/evidence-pr355-tier-a-batch-2.json"],
     "evidence_relations": ["data/evidence-pr355-tier-a-batch-2.json"]
   },
-  "notes": "Forward-only non-growth count checkpoint for five new reviewed primary evidence rows added by PR #355. UST reuses the existing canonical SEC source identity. Historical PR #354 and earlier checkpoints remain unchanged."
+  "notes": "Forward-only non-growth checkpoint for two new reviewed primary evidence rows added by PR #355. FDUSD, PYUSD, USDP, and UST reuse existing canonical evidence identities. Historical PR #354 and earlier checkpoints remain unchanged."
 }
