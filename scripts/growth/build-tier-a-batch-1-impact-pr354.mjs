@@ -12,6 +12,7 @@ const PROFILE_OVERRIDE_PATH = 'data/stablecoin-profiles-pr354-tier-a-batch-1.jso
 const LEGAL_BASE_PATH = 'data/legal-profiles-v3.json';
 const LEGAL_D1_PATH = 'data/legal-profiles-v3-batch-d1.json';
 const EVIDENCE_EXTRA_PATH = 'data/evidence-extra.json';
+const EVIDENCE_PR354_PATH = 'data/evidence-pr354-tier-a-batch-1.json';
 
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const readJson = (file) => JSON.parse(readText(file));
@@ -33,13 +34,13 @@ export function buildTierABatch1Impact() {
   const currentBaseline = buildReviewedRecordDepthBaseline();
   const profileOverrides = readJson(PROFILE_OVERRIDE_PATH);
   const legalProfiles = [...readJson(LEGAL_BASE_PATH), ...readJson(LEGAL_D1_PATH)];
-  const evidenceExtra = readJson(EVIDENCE_EXTRA_PATH);
+  const evidenceRows = [...readJson(EVIDENCE_EXTRA_PATH), ...readJson(EVIDENCE_PR354_PATH)];
 
   const queueBySlug = new Map(sourceQueue.candidates.map((row) => [row.asset_slug, row]));
   const currentBySlug = new Map(currentBaseline.assets.map((row) => [row.asset_slug, row]));
   const legalById = new Map(legalProfiles.map((row) => [row.id, row]));
   const overrideById = new Map(profileOverrides.map((row) => [row.id, row]));
-  const evidenceIds = new Set(evidenceExtra.map((row) => row.id));
+  const evidenceIds = new Set(evidenceRows.map((row) => row.id));
 
   const selectedAssets = config.selected_assets.map((selected) => {
     const sourceQueueRow = queueBySlug.get(selected.asset_slug);
@@ -95,7 +96,8 @@ export function buildTierABatch1Impact() {
     PROFILE_OVERRIDE_PATH,
     LEGAL_BASE_PATH,
     LEGAL_D1_PATH,
-    EVIDENCE_EXTRA_PATH
+    EVIDENCE_EXTRA_PATH,
+    EVIDENCE_PR354_PATH
   ];
 
   return {
