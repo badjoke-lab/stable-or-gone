@@ -48,16 +48,31 @@ jobs:
           console.log('Historical PR #353 snapshots and reviewed PR #354 handoff preserved.');
           NODE
 
+      - name: Build deterministic dossier impact report
+        shell: bash
+        run: |
+          mkdir -p artifacts/pr355
+          set -o pipefail
+          node scripts/growth/build-tier-a-batch-2-impact-pr355.mjs artifacts/pr355/tier-a-batch-2-impact-pr355.json \
+            2>&1 | tee artifacts/pr355/build-impact.log
+
+      - name: Validate dossier impact and evidence contracts
+        run: node scripts/validate-tier-a-dossier-batch-2-impact-pr355.mjs
+
       - name: Validate canonical boundaries
         run: |
           npm run validate:data
+          npm run validate:profiles
+          npm run validate:evidence-relations-v2
           npm run validate:v3
           npm run validate:parity
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const config = JSON.parse(fs.readFileSync('config/tier-a-dossier-batch-2-pr355.json', 'utf8'));
+          const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
           const marketAccess = JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8'));
           if (config.selected_assets.length !== 5) throw new Error('PR #355 must remain a five-asset batch');
+          if (checkpoint.asset_count !== 110 || checkpoint.expected_counts.evidence !== 553) throw new Error('PR #355 canonical checkpoint mismatch');
           if (marketAccess.length !== 0) throw new Error('PR #355 must not add Market Access Records');
           if (config.new_canonical_assets_allowed !== false) throw new Error('new canonical asset creation must remain forbidden');
           if (config.new_public_surface_allowed !== false) throw new Error('new public surface must remain forbidden');
@@ -87,3 +102,12 @@ jobs:
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
           console.log('PR #355 public product boundary unchanged.');
           NODE
+
+      - name: Upload PR 355 impact artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr355-tier-a-batch-2-impact-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: artifacts/pr355/
