@@ -24,8 +24,9 @@ for (const marker of [
   'PR #352 post-351 authority reset: complete',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
   'PR #355 Tier A Dossier Deepening — Batch 2: complete',
-  'PR #356 Market Access Pilot 1: active',
-  'PR #357 Tier A Dossier Deepening — Batch 3: next'
+  'PR #356 Market Access Pilot 1: complete',
+  'PR #357 Tier A Dossier Deepening — Batch 3: active',
+  'PR #358 Record Growth Batch 1: next'
 ]) requireText(readme, marker, 'README.md');
 for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(readme, route, 'README.md');
 for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(readme, boundary, 'README.md');
@@ -82,8 +83,9 @@ for (const marker of [
   'Canonical stable assets: 110',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
   'PR #355 Tier A Dossier Deepening — Batch 2: complete',
-  'PR #356 Market Access Pilot 1: active',
-  'PR #357 Tier A Dossier Deepening — Batch 3: next',
+  'PR #356 Market Access Pilot 1: complete',
+  'PR #357 Tier A Dossier Deepening — Batch 3: active',
+  'PR #358 Record Growth Batch 1: next',
   'REVIEW GATE'
 ]) requireText(roadmap, marker, 'current roadmap');
 
@@ -112,6 +114,6 @@ console.log(JSON.stringify({
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
   stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_workstream: 'pr356_market_access_pilot_1',
-  next_workstream: 'pr357_tier_a_dossier_batch_3'
+  active_workstream: 'pr357_tier_a_dossier_batch_3',
+  next_workstream: 'pr358_record_growth_batch_1'
 }, null, 2));
