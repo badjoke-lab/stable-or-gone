@@ -35,17 +35,18 @@ Current position:
 ```text
 PR #351 Monthly Maintenance Log: complete
 PR #352 post-351 authority reset: complete
-PR #353 Record Depth & Coverage Baseline: active
-PR #354 Tier A Dossier Deepening — Batch 1: next
+PR #353 Record Depth & Coverage Baseline: complete
+PR #354 Tier A Dossier Deepening — Batch 1: active
+PR #355 Tier A Dossier Deepening — Batch 2: next
 ```
 
 Approved bounded sequence:
 
 ```text
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
-PR #353  Record Depth & Coverage Baseline — active
-PR #354  Tier A Dossier Deepening — Batch 1 — next
-PR #355  Tier A Dossier Deepening — Batch 2
+PR #353  Record Depth & Coverage Baseline — complete
+PR #354  Tier A Dossier Deepening — Batch 1 — active
+PR #355  Tier A Dossier Deepening — Batch 2 — next
 PR #356  Market Access Pilot 1
 PR #357  Tier A Dossier Deepening — Batch 3
 PR #358  Record Growth Batch 1
@@ -66,14 +67,43 @@ docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
-docs/quality/record-depth-coverage-baseline-spec.md
+docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
+docs/quality/tier-a-dossier-batch-1-pr354-spec.md
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
 ```
 
 Do not infer the active schedule from old handoffs or superseded PR numbering.
 
+## Active PR #354 batch
+
+PR #354 deepens five existing dossiers selected from the reviewed PR #353 Tier A queue:
+
+```text
+BUSD
+DAI
+RLUSD
+USDC
+USDT
+```
+
+The selection is not a ranking.
+
+Authorized target dimensions are:
+
+```text
+USDT   legal_profile
+USDC   legal_profile
+DAI    legal_profile
+RLUSD  legal_profile, redemption
+BUSD   legal_profile, redemption
+```
+
+PR #354 does not add stable assets, Market Access Records, rankings, scores, or new public product surfaces.
+
 ## Post-351 operating mode
 
-The default operating mode is now:
+The default operating mode is:
 
 ```text
 reviewed data depth and record growth
@@ -103,7 +133,7 @@ SOG records:
 
 ## Public research workflow
 
-The site now supports a connected research flow:
+The site supports a connected research flow:
 
 ```text
 find a stable asset or organization
@@ -186,7 +216,7 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
-The Record Depth & Coverage Baseline is internal planning infrastructure and is not a public endpoint or manifest surface.
+Record Depth baseline outputs, Tier A queues, and dossier-impact reports are internal planning infrastructure and are not public endpoints or manifest surfaces.
 
 ## Monitoring boundary
 
@@ -225,22 +255,13 @@ A platform licence is not proof that a specific asset/function combination is av
 
 Access is not reduced to one universal allowed/banned boolean.
 
-## Record Depth baseline boundary
+## Record Depth and dossier boundary
 
-PR #353 evaluates all 110 canonical assets across 16 planning dimensions using deterministic reviewed-data rules.
+PR #353 evaluated all 110 canonical assets across 16 planning dimensions and committed an immutable reviewed summary and 18-asset non-ranking Tier A queue.
 
-Allowed planning states are:
+PR #354 uses those checkpoints to deepen exactly five dossiers. The planning baseline is not a risk score, safety score, quality ranking, transparency ranking, asset rank, investment recommendation, or public leaderboard.
 
-```text
-strong
-usable
-partial
-sparse
-absent
-not_applicable
-```
-
-The baseline and Tier A candidate queue are internal planning instruments. They do not create a risk score, safety score, quality ranking, transparency ranking, asset rank, investment recommendation, or public leaderboard.
+A post-change planning state is evidence of repository coverage improvement only. It does not replace canonical facts or imply asset safety.
 
 ## Specification and change control
 

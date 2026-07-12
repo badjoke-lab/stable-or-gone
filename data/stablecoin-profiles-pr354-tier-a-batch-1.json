@@ -1,0 +1,66 @@
+[
+  {
+    "id": "sog_st_busd",
+    "reserve_profile": {
+      "backing_types": ["cash", "government_securities"],
+      "summary": "Historical Paxos reserve and attestation records remain available for the wind-down period.",
+      "disclosure_status": "wind_down_available",
+      "as_of_date": "2026-06-04",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": []
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD_or_USDP",
+      "eligible_parties": "Paxos customers eligible under current Paxos account and product terms.",
+      "retail_access": "eligible_paxos_customers_or_market_exit",
+      "institutional_access": "eligible_paxos_customers_direct",
+      "minimum_amount_text": "Subject to current Paxos terms and account route.",
+      "fee_text": "Subject to current Paxos and banking terms.",
+      "settlement_time_text": "Subject to Paxos processing and banking operations.",
+      "jurisdiction_restrictions": [
+        "Paxos customer eligibility, compliance, account, and jurisdiction restrictions apply."
+      ],
+      "redemption_url": "https://www.paxos.com/busd",
+      "as_of_date": "2026-07-11",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_busd_paxos_statement_pr354",
+        "sog_src_busd_paxos_issuer_update"
+      ]
+    }
+  },
+  {
+    "id": "sog_st_rlusd",
+    "reserve_profile": {
+      "backing_types": ["mixed"],
+      "summary": "Ripple reserve transparency and attestation records are tracked separately as historical records.",
+      "disclosure_status": "available",
+      "as_of_date": "2026-06-05",
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": []
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD",
+      "eligible_parties": "RLUSD holders who are eligible to become, and do become, Ripple customers under the applicable customer agreement.",
+      "retail_access": "indirect_or_customer_onboarding_required",
+      "institutional_access": "available_through_ripple_mint_subject_to_customer_agreement",
+      "minimum_amount_text": "Subject to the applicable RLUSD Customer Agreement and route.",
+      "fee_text": "Fees may apply under the applicable customer agreement and settlement route.",
+      "settlement_time_text": "Subject to Ripple customer processing and banking operations.",
+      "jurisdiction_restrictions": [
+        "Customer eligibility, compliance, jurisdiction, and supported-network restrictions apply."
+      ],
+      "redemption_url": "https://ripple.com/solutions/stablecoin/",
+      "as_of_date": "2026-07-11",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_rlusd_user_terms",
+        "sog_src_rlusd_ripple_page"
+      ]
+    }
+  }
+]

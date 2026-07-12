@@ -23,8 +23,9 @@ export function buildHistorySnapshot(stats, options = {}) {
     if (historyCheckpoint.asset_count !== stats.totals.assets) {
       throw new Error(`History checkpoint asset_count ${historyCheckpoint.asset_count} does not match deterministic stats asset count ${stats.totals.assets}`);
     }
-    if (historyCheckpoint.source_checkpoint_id !== stats.checkpoint_id) {
-      throw new Error(`History checkpoint source ${historyCheckpoint.source_checkpoint_id} does not match deterministic stats checkpoint ${stats.checkpoint_id}`);
+    const canonicalCheckpointId = historyCheckpoint.canonical_checkpoint_id ?? historyCheckpoint.source_checkpoint_id;
+    if (canonicalCheckpointId !== stats.checkpoint_id) {
+      throw new Error(`History checkpoint canonical source ${canonicalCheckpointId} does not match deterministic stats checkpoint ${stats.checkpoint_id}`);
     }
   }
 
@@ -32,7 +33,8 @@ export function buildHistorySnapshot(stats, options = {}) {
     checkpoint_id: historyCheckpoint?.checkpoint_id ?? stats.checkpoint_id,
     ...(historyCheckpoint ? {
       checkpoint_kind: historyCheckpoint.checkpoint_kind,
-      source_checkpoint_id: historyCheckpoint.source_checkpoint_id
+      source_checkpoint_id: historyCheckpoint.source_checkpoint_id,
+      ...(historyCheckpoint.canonical_checkpoint_id ? { canonical_checkpoint_id: historyCheckpoint.canonical_checkpoint_id } : {})
     } : {}),
     recorded_at: historyCheckpoint?.recorded_at ?? stats.generated_at.slice(0, 10),
     asset_count: stats.totals.assets,
