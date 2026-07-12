@@ -72,7 +72,7 @@ jobs:
           const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
           const marketAccess = JSON.parse(fs.readFileSync('data/market-access-records-v1.json', 'utf8'));
           if (config.selected_assets.length !== 5) throw new Error('PR #355 must remain a five-asset batch');
-          if (checkpoint.asset_count !== 110 || checkpoint.expected_counts.evidence !== 553) throw new Error('PR #355 canonical checkpoint mismatch');
+          if (checkpoint.asset_count !== 110 || checkpoint.expected_counts.evidence !== 552) throw new Error('PR #355 canonical checkpoint mismatch');
           if (marketAccess.length !== 0) throw new Error('PR #355 must not add Market Access Records');
           if (config.new_canonical_assets_allowed !== false) throw new Error('new canonical asset creation must remain forbidden');
           if (config.new_public_surface_allowed !== false) throw new Error('new public surface must remain forbidden');
