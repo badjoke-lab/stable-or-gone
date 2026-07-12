@@ -17,13 +17,16 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 
 const expectedSlugs = ['fdusd', 'frax', 'pyusd', 'usdp', 'ust'];
 const expectedNewEvidenceIds = [
-  'sog_src_fdusd_product_pr355',
   'sog_src_frax_v3_overview_pr355',
-  'sog_src_paxos_stablecoin_terms_pr355',
-  'sog_src_pyusd_product_pr355',
-  'sog_src_usdp_product_pr355'
+  'sog_src_paxos_stablecoin_terms_pr355'
 ];
-const mappedSourceTypes = new Set(['official_product_page', 'protocol_docs', 'legal_terms']);
+const expectedReusedEvidenceIds = [
+  'sog_src_fdusd_site',
+  'sog_src_pyusd_paxos_page',
+  'sog_src_usdp_paxos_page',
+  'sog_src_ust_sec_2023_32'
+];
+const mappedSourceTypes = new Set(['protocol_docs', 'legal_terms']);
 
 expect(report.schema_version === '1.0', 'impact schema version mismatch');
 expect(report.report_id === 'sog_tier_a_dossier_batch_2_pr355_impact', 'impact report ID mismatch');
@@ -37,7 +40,7 @@ expect(report.prior_batch_handoff_id === handoff.handoff_id, 'prior handoff ID m
 expect(report.prior_batch_merge_commit === handoff.source_merge_commit, 'prior handoff merge commit mismatch');
 expect(report.current_canonical_checkpoint_id === 'sog_tier_a_dossier_batch_2_canonical_110_checkpoint_pr355_2026_07_12', 'current checkpoint mismatch');
 expect(report.constraints.canonical_asset_count_actual === 110, 'canonical asset count changed');
-expect(report.constraints.canonical_evidence_count_actual === 552, 'canonical evidence count must be 552');
+expect(report.constraints.canonical_evidence_count_actual === 549, 'canonical evidence count must be 549');
 expect(marketAccess.length === 0, 'PR #355 must not add Market Access Records');
 expect(report.constraints.market_access_record_count_expected === 0, 'Market Access count contract changed');
 expect(report.constraints.new_public_surface_allowed === false, 'new public surface boundary changed');
@@ -69,6 +72,12 @@ for (const row of report.selected_assets) {
   expect(row.exact_pr355_evidence_present === true, `${row.asset_slug}: exact reviewed evidence unresolved`);
 }
 
+const fdusd = report.selected_assets.find((row) => row.asset_slug === 'fdusd');
+expect(fdusd?.exact_pr355_evidence_ids.includes('sog_src_fdusd_site'), 'FDUSD must reuse the reviewed canonical product source');
+const pyusd = report.selected_assets.find((row) => row.asset_slug === 'pyusd');
+expect(pyusd?.exact_pr355_evidence_ids.includes('sog_src_pyusd_paxos_page'), 'PYUSD must reuse the reviewed canonical Paxos product source');
+const usdp = report.selected_assets.find((row) => row.asset_slug === 'usdp');
+expect(usdp?.exact_pr355_evidence_ids.includes('sog_src_usdp_paxos_page'), 'USDP must reuse the reviewed canonical Paxos product source');
 const ust = report.selected_assets.find((row) => row.asset_slug === 'ust');
 expect(ust?.legal_profile?.evidence_ids.includes('sog_src_ust_sec_2023_32'), 'UST must reuse existing canonical SEC evidence identity');
 expect(ust?.exact_pr355_evidence_ids.includes('sog_src_ust_sec_2023_32'), 'UST impact must include reviewed existing SEC source');
@@ -92,7 +101,7 @@ expect(overrides.length === 3, `expected three redemption overrides, found ${ove
 expect(isDeepStrictEqual(overrides.map((row) => row.id).sort(), ['sog_st_frax', 'sog_st_pyusd', 'sog_st_usdp']), 'override asset set mismatch');
 
 const evidenceById = new Map(evidence.map((row) => [row.id, row]));
-expect(evidence.length === 5, `expected five new evidence rows, found ${evidence.length}`);
+expect(evidence.length === 2, `expected two new evidence rows, found ${evidence.length}`);
 expect(new Set(evidence.map((row) => row.url)).size === evidence.length, 'PR #355 new evidence URLs must be unique');
 for (const id of expectedNewEvidenceIds) {
   const row = evidenceById.get(id);
@@ -139,7 +148,7 @@ console.log(JSON.stringify({
   legal_states: Object.fromEntries(report.selected_assets.map((row) => [row.asset_slug, row.current_planning_states.legal_profile])),
   redemption_states: Object.fromEntries(report.selected_assets.map((row) => [row.asset_slug, row.current_planning_states.redemption])),
   new_primary_evidence_count: evidence.length,
-  reused_existing_evidence_ids: ['sog_src_ust_sec_2023_32'],
+  reused_existing_evidence_ids: expectedReusedEvidenceIds,
   canonical_asset_count: report.constraints.canonical_asset_count_actual,
   canonical_evidence_count: report.constraints.canonical_evidence_count_actual,
   market_access_record_count: marketAccess.length,
