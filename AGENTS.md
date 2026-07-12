@@ -409,3 +409,39 @@ external usage evidence when available
 ```
 
 Only then define the next bounded sequence.
+
+## PR #357 active authority
+
+Current work item:
+
+```text
+PR #356 Market Access Pilot 1: complete
+PR #357 Tier A Dossier Deepening — Batch 3: active
+PR #358 Record Growth Batch 1: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
+docs/quality/tier-a-dossier-batch-3-pr357-spec.md
+config/tier-a-dossier-batch-3-pr357.json
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
+```
+
+Selected assets:
+
+```text
+AUDD
+FEI
+HUSD
+MIM
+NZDS
+```
+
+This is deterministic queue consumption, not a ranking. PR #357 preserves 110 canonical stable assets, four canonical Market Access Records, canonical-only publication, and the existing public-surface boundary.
+
