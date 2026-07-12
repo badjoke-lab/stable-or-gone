@@ -1041,8 +1041,8 @@
       "recorded_at": "2026-07-12",
       "asset_count": 110,
       "registry_version": "pr356-market-access-pilot-1",
-      "input_digest_sha256": "5ef0acfd77fd68fdf849267aca519d8fe40d8474bfb2c6b9f3a8744c9a08b3b4",
-      "stats_model_sha256": "8f9b1851f58ca97bc1b0ce512c5ac1c9d831b19df4cf602b93f0fa64cd7018f1",
+      "input_digest_sha256": "392f60a75b9338f5f6b5f57555379b3bbe716a7875bdd43533d3f275ffb7b904",
+      "stats_model_sha256": "8bd3be3f13571f3d340a36317c46c49bcc3b054bb72d66a541f9a8f927abfb8c",
       "totals": {
         "assets": 110,
         "organizations": 103,
@@ -1053,6 +1053,7 @@
         "known_unknowns": 319,
         "regulatory_notes": 9,
         "deployments": 170,
+        "market_access_records": 4,
         "legal_profiles": 110,
         "stable_asset_relationships": 4,
         "reserve_components": 143,
@@ -1148,7 +1149,7 @@
           "percentage": 100
         }
       },
-      "snapshot_sha256": "86d4824a851130ec11184df1f329c6065315ec74135e4217b24ff0c942ec14fc"
+      "snapshot_sha256": "160191ea506d0f6a64341c112f9b1a0eb9360b8fe97f0635298b400fa065fc8d"
     }
   ]
 }
