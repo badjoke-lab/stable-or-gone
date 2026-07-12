@@ -1,13 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_comparison_readiness_normalization_110_checkpoint_pr338_2026_07_10",
+  "checkpoint_id": "sog_tier_a_dossier_batch_1_110_checkpoint_pr354_2026_07_12",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
-  "recorded_at": "2026-07-10",
-  "registry_version": "pr338-comparison-normalization",
+  "recorded_at": "2026-07-12",
+  "registry_version": "pr354-tier-a-dossier-batch-1",
   "asset_count": 110,
-  "source_checkpoint_id": "sog_controlled_growth_110_checkpoint_pr335_2026_07_09",
-  "previous_history_checkpoint_id": "sog_controlled_growth_110_checkpoint_pr335_2026_07_09",
-  "normalization_pr": 338,
-  "notes": "Reviewed forward checkpoint for the bounded PR #338 Comparison Readiness asset_class normalization. The source 110-asset growth checkpoint remains immutable and canonical counts do not change."
+  "source_checkpoint_id": "sog_comparison_readiness_normalization_110_checkpoint_pr338_2026_07_10",
+  "canonical_checkpoint_id": "sog_tier_a_dossier_batch_1_canonical_110_checkpoint_pr354_2026_07_12",
+  "previous_history_checkpoint_id": "sog_comparison_readiness_normalization_110_checkpoint_pr338_2026_07_10",
+  "dossier_pr": 354,
+  "notes": "Reviewed forward same-count checkpoint for PR #354 Tier A dossier deepening. It sources the immediately preceding PR #338 history checkpoint while binding deterministic statistics to the separate current PR #354 canonical checkpoint. Historical snapshots remain immutable."
 }
