@@ -7,10 +7,7 @@ import {
   getBuildMetadata,
   getRegistryV3Summary,
 } from '../../lib/machine-readable';
-import {
-  getCanonicalPublicRecordCountBreakdown,
-  getCanonicalPublicRecordCounts,
-} from '../canonicalPublicCounts';
+import { getRecordCountBreakdown, getRecordCounts } from '../canonicalPublicCounts';
 import { getEvidenceSourceIdentitySummary } from './evidenceSources';
 
 export function GET() {
@@ -144,8 +141,8 @@ export function GET() {
       risk_ranking: false,
     },
     main_routes: [...MAIN_ROUTES, '/compare/', '/access-regulation/', '/timeline/', '/maintenance/'],
-    record_counts: getCanonicalPublicRecordCounts(),
-    record_count_breakdown: getCanonicalPublicRecordCountBreakdown(),
+    record_counts: getRecordCounts(),
+    record_count_breakdown: getRecordCountBreakdown(),
     evidence_source_identity: evidenceSourceIdentity,
     data_safety: DATA_SAFETY,
     correction_links: {
