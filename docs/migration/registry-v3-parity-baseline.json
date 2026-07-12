@@ -17,8 +17,8 @@
     "profiles": 110,
     "events": 185,
     "event_details": 185,
-    "evidence": 552,
-    "evidence_relations": 552,
+    "evidence": 549,
+    "evidence_relations": 549,
     "reserve_reports": 118,
     "known_unknowns": 319,
     "regulatory_notes": 9,
@@ -52,5 +52,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline advances evidence and evidence-relation counts to 552 while preserving the 110-asset additive v2/v3 contract. Historical checkpoint files and statistics snapshots remain append-only."
+  "notes": "Current parity baseline advances evidence and evidence-relation counts to 549 while preserving the 110-asset additive v2/v3 contract. Historical checkpoint files and statistics snapshots remain append-only."
 }
