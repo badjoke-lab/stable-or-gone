@@ -9,6 +9,7 @@ try {
 }
 
 const read = (file) => fs.readFileSync(file, 'utf8');
+const readJson = (file) => JSON.parse(read(file));
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const requireText = (body, text, file) => expect(body.includes(text), `${file}: missing ${text}`);
@@ -20,6 +21,8 @@ const roadmap = read('docs/roadmap.md');
 const amendment = read('docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md');
 const spec = read('docs/quality/record-growth-batch-1-pr358-spec.md');
 const handoff = read('docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json');
+const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
+const config = readJson('config/record-growth-batch-1-pr358.json');
 
 for (const [file, body] of [
   ['README.md', readme],
@@ -27,7 +30,7 @@ for (const [file, body] of [
   ['docs/spec-governance.md', governance],
   ['docs/roadmap.md', roadmap]
 ]) {
-  requireText(body, 'Canonical stable assets: 110', file);
+  requireText(body, 'Canonical stable assets: 112', file);
   requireText(body, 'PR #357 Tier A Dossier Deepening — Batch 3: complete', file);
   requireText(body, 'PR #358 Record Growth Batch 1: active', file);
   requireText(body, 'PR #359 Market Access Pilot 2: next', file);
@@ -48,6 +51,13 @@ requireText(handoff, 'b849bfd582209aad217dd1af2198c755ff0760ab', 'PR #357 review
 requireText(handoff, '"assets": 110', 'PR #357 reviewed handoff');
 requireText(handoff, '"evidence": 551', 'PR #357 reviewed handoff');
 requireText(handoff, '"market_access_records": 4', 'PR #357 reviewed handoff');
+expect(checkpoint.checkpoint_id === 'sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13', 'current canonical checkpoint must be PR #358 112-asset checkpoint');
+expect(checkpoint.asset_count === 112, 'current canonical checkpoint must contain 112 assets');
+expect(checkpoint.expected_counts?.evidence === 557, 'current canonical checkpoint must contain 557 Evidence records');
+expect(checkpoint.expected_counts?.deployments === 174, 'current canonical checkpoint must contain 174 deployments');
+expect(checkpoint.expected_counts?.market_access_records === 4, 'current canonical checkpoint must preserve four Market Access records');
+expect(config.status === 'reviewed_full_record_promotion_pending_checkpoint', 'PR #358 config must remain at reviewed full-record promotion stage until merge');
+expect(config.canonical_count_after === 112, 'PR #358 config must bind 112 post-promotion assets');
 expect(roadmap.includes('PR #360  Evidence and Correction Batch'), 'roadmap must preserve the bounded sequence through PR #360');
 expect(roadmap.includes('REVIEW GATE'), 'roadmap review gate missing');
 expect(governance.includes('A non-trivial PR is not ready for implementation until the exact roadmap item and governing specification are identified.'), 'governance traceability rule missing');
@@ -62,4 +72,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #357 is complete, PR #358 is active for the bounded XUSD/USDB full-record growth batch, and PR #359 is next.');
+console.log('Workstream valid: PR #357 is complete, PR #358 is active with reviewed XUSD/USDB full records at 112 assets, and PR #359 is next.');
