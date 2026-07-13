@@ -6,7 +6,7 @@
   "source_handoff": "docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json",
   "source_research": "data/editorial-research/record-growth-batch-1-pr358-candidates.json",
   "selection_rule": "context_grouped_reviewed_new_identity_non_ranking",
-  "context_group": "current_regulated_bank_and_payment_stablecoins",
+  "context_group": "current_usd_payment_stablecoins_with_distinct_stabilization_models",
   "canonical_count_before": 110,
   "maximum_new_assets": 2,
   "planned_canonical_count_after": 112,
@@ -18,10 +18,10 @@
       "symbol": "XUSD"
     },
     {
-      "candidate_id": "sog_cand_pr358_sofiusd",
-      "proposed_asset_id": "sog_st_sofiusd",
-      "proposed_slug": "sofiusd",
-      "symbol": "SoFiUSD"
+      "candidate_id": "sog_cand_pr358_usdb",
+      "proposed_asset_id": "sog_st_usdb",
+      "proposed_slug": "blast-usdb",
+      "symbol": "USDB"
     }
   ],
   "full_record_minimum": {
