@@ -29,8 +29,11 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Validate bounded candidate selection
+      - name: Validate reviewed selection and promotion
         run: node scripts/validate-record-growth-batch-1-selection-pr358.mjs
+
+      - name: Validate complete XUSD and USDB records
+        run: node scripts/validate-record-growth-batch-1-full-records-pr358.mjs
 
       - name: Validate active workstream authority
         run: npm run validate:active-workstream
@@ -44,35 +47,29 @@ jobs:
           if (handoff.canonical_counts?.assets !== 110) throw new Error('PR #357 asset count mismatch');
           if (handoff.canonical_counts?.evidence !== 551) throw new Error('PR #357 Evidence count mismatch');
           if (handoff.canonical_counts?.market_access_records !== 4) throw new Error('PR #357 Market Access count mismatch');
-          if (handoff.next_work_item !== 'PR #358 Record Growth Batch 1') throw new Error('PR #357 next work item mismatch');
           console.log('Reviewed PR #357 handoff valid.');
-          NODE
-
-      - name: Verify candidate-stage canonical boundary
-        run: |
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          import { loadRegistryV2Baseline } from './scripts/load-registry-v2-baseline.mjs';
-          const root = process.cwd();
-          const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
-          const rows = (file) => {
-            const value = readJson(file);
-            return Array.isArray(value) ? value : value.records;
-          };
-          const baseline = loadRegistryV2Baseline(root);
-          const assets = (baseline.data_groups?.stablecoins ?? []).flatMap(rows);
-          const ids = new Set(assets.map((row) => row.id));
-          const slugs = new Set(assets.map((row) => row.slug));
-          if (assets.length !== 110) throw new Error(`Candidate-stage asset count must remain 110, found ${assets.length}`);
-          for (const id of ['sog_st_xusd','sog_st_usdb']) if (ids.has(id)) throw new Error(`Candidate promoted before full review: ${id}`);
-          for (const slug of ['straitsx-usd-xusd','blast-usdb']) if (slugs.has(slug)) throw new Error(`Candidate slug promoted before full review: ${slug}`);
-          const marketAccess = readJson('data/market-access-records-v1.json');
-          if (marketAccess.length !== 4) throw new Error(`Market Access count changed: ${marketAccess.length}`);
-          console.log('Candidate-stage canonical boundary valid.');
           NODE
 
       - name: Validate canonical data
         run: npm run validate:data
+
+      - name: Validate classifications
+        run: npm run validate:classification
+
+      - name: Validate reserve and redemption profiles
+        run: npm run validate:profiles
+
+      - name: Validate event overlays
+        run: npm run validate:events-v2
+
+      - name: Validate Evidence relations
+        run: npm run validate:evidence-relations-v2
+
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
 
       - name: Validate Registry v2 v3 parity
         run: npm run validate:parity
@@ -97,7 +94,7 @@ jobs:
       - name: Verify public layer
         run: npm run verify:public
 
-      - name: Verify candidate research remains non-public
+      - name: Verify internal research remains non-public
         run: |
           test ! -e dist/data/record-growth-batch-1-pr358-candidates.json
           test ! -e dist/data/pr357-reviewed-handoff.json
@@ -109,10 +106,10 @@ jobs:
           }
           if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
-          console.log('PR #358 candidate research remains outside public output.');
+          console.log('Internal PR #358 research remains outside public output.');
           NODE
 
-      - name: Publish PR 358 candidate-stage summary
+      - name: Publish PR 358 full-record summary
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
@@ -120,17 +117,16 @@ jobs:
             const fs = require('fs');
             const marker = '<!-- pr358-record-growth-status -->';
             const config = JSON.parse(fs.readFileSync('config/record-growth-batch-1-pr358.json', 'utf8'));
-            const research = JSON.parse(fs.readFileSync('data/editorial-research/record-growth-batch-1-pr358-candidates.json', 'utf8'));
             const body = `${marker}
             ## PR #358 Record Growth Batch 1 status
 
             - Workflow status: **${{ job.status }}**
             - Stage: \`${config.status}\`
-            - Context group: \`${config.context_group}\`
-            - Selected candidates: ${research.candidates.map((row) => `\`${row.symbol}\``).join(', ')}
-            - Canonical assets before promotion: **${config.canonical_count_before}**
-            - Maximum new assets: **${config.maximum_new_assets}**
-            - Maximum post-PR assets: **${config.planned_canonical_count_after}**
+            - Promoted assets: \`XUSD\`, \`USDB\`
+            - Canonical assets: **${config.expected_post_promotion_counts.assets}**
+            - Evidence: **${config.expected_post_promotion_counts.evidence}**
+            - Deployments: **${config.expected_post_promotion_counts.deployments}**
+            - Market Access records: **${config.expected_post_promotion_counts.market_access_records}**
             - Automatic promotion: **disabled**
             - Thin records: **forbidden**
             - Head: \`${context.sha}\`
