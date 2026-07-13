@@ -48,7 +48,7 @@ current USD payment stablecoins with distinct stabilization models
 
 ```text
 StraitsX USD / XUSD / proposed ID sog_st_xusd
-USDB / USDB / proposed ID sog_st_usdb
+Blast USDB / USDB / proposed ID sog_st_usdb
 ```
 
 This is a context-grouped selection and not a ranking, endorsement, market-cap judgment, or safety score.
