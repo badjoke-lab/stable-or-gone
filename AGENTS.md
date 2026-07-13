@@ -69,7 +69,7 @@ Do not infer the schedule from old PR numbers in historical documents.
 ## 3. Current workstream
 
 ```text
-Canonical stable assets: 110
+Canonical stable assets: 112
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
@@ -216,7 +216,7 @@ usdc
 usdt
 ```
 
-## 8. Completed PR #355, completed PR #356, and active PR #357 rules
+## 8. Completed PR #355–#357 and active PR #358 rules
 
 PR #355 completed FDUSD, FRAX, PYUSD, USDP, and UST dossier deepening.
 

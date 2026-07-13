@@ -77,7 +77,7 @@ A non-trivial PR is not ready for implementation until the exact roadmap item an
 ## 4. Current execution state
 
 ```text
-Canonical stable assets: 110
+Canonical stable assets: 112
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
@@ -164,7 +164,7 @@ config/market-access-pilot-1-pr356.json
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-### Active PR #357 Tier A Dossier Deepening — Batch 3
+### Completed PR #357 Tier A Dossier Deepening — Batch 3
 
 ```text
 docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
@@ -177,7 +177,18 @@ docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-The selected assets are AUDD, FEI, HUSD, MIM, and NZDS. Changes are limited to authorized dossier dimensions and must preserve 110 assets and four canonical Market Access Records.
+The selected assets were AUDD, FEI, HUSD, MIM, and NZDS. PR #357 preserved 110 assets and four canonical Market Access Records before handing off to PR #358.
+
+### Active PR #358 Record Growth Batch 1
+
+```text
+docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
+```
+
+The active branch promotes complete reviewed XUSD and USDB records, advances the canonical checkpoint from 110 to 112 assets, preserves four Market Access Records, prohibits automatic promotion and thin records, and adds no new public product surface.
 
 ### Completed derived-surface semantics
 

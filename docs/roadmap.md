@@ -6,7 +6,7 @@ Status: canonical execution schedule — active
 ## 1. Current position
 
 ```text
-Canonical stable assets: 110
+Canonical stable assets: 112
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
@@ -49,6 +49,9 @@ docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
 docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
 docs/quality/tier-a-dossier-batch-3-pr357-spec.md
 config/tier-a-dossier-batch-3-pr357.json
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 docs/quality/market-access-pilot-1-pr356-spec.md
 docs/market-access-record-spec.md
@@ -63,7 +66,7 @@ named validators, audits, and current work-item outputs
 
 Earlier amendments remain historical records and do not override this current position.
 
-## 3. Completed program through PR #357
+## 3. Completed program through PR #357 and active PR #358 growth
 
 Completed broad programs include:
 
@@ -75,7 +78,7 @@ audited 100-asset checkpoint
 monitoring baseline synchronization and source expansion
 bounded scheduled read-only monitoring
 deterministic statistics and immutable history
-controlled growth from 100 to 110 assets
+controlled growth from 100 to 112 assets
 Comparison Readiness and normalization
 canonical Market Access schema and governance
 facet freshness derivation
@@ -110,13 +113,14 @@ Its reviewed handoff is:
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
-Current reviewed canonical checkpoint after PR #356:
+Current reviewed branch checkpoint in PR #358:
 
 ```text
-110 stable assets
-551 evidence records
-551 evidence relations
-110 legal profiles
+112 stable assets
+557 evidence records
+557 evidence relations
+112 legal profiles
+174 deployments
 4 canonical Market Access Records
 ```
 
@@ -139,7 +143,11 @@ REVIEW GATE
 
 No PR number after the review gate is pre-authorized by this roadmap.
 
-## 5. PR #353 historical planning foundation — complete and immutable
+## 5. PR #358 Record Growth Batch 1 — active
+
+PR #358 promotes complete reviewed records for StraitsX USD (XUSD) and Blast USDB. The branch advances canonical counts to 112 assets and 557 Evidence records while preserving four Market Access Records and adding no new public product surface. Merge requires all deterministic statistics, release-integrity, immutable-history, build, and public-safety checks to pass.
+
+## 6. PR #353 historical planning foundation — complete and immutable
 
 PR #353 reviewed all 110 canonical assets across 16 planning dimensions and committed:
 
@@ -166,7 +174,7 @@ The reviewed Tier A queue binds 18 candidates in deterministic non-ranking slug 
 
 These files remain historical planning checkpoints. Later work may recompute current planning state but must not rewrite them.
 
-## 6. PR #354 Tier A Dossier Batch 1 — complete
+## 7. PR #354 Tier A Dossier Batch 1 — complete
 
 Binding historical references:
 

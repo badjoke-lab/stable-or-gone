@@ -8,7 +8,7 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 
 ## Current registry position
 
-Canonical stable assets: 110
+Canonical stable assets: 112
 
 All other public counts derive from repository canonical data groups and generated/validated public projections. They must not be maintained as a second manually edited count authority in this README.
 
@@ -77,6 +77,10 @@ docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
 docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
 docs/quality/tier-a-dossier-batch-3-pr357-spec.md
 config/tier-a-dossier-batch-3-pr357.json
+docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 docs/quality/market-access-pilot-1-pr356-spec.md
 docs/market-access-record-spec.md
@@ -146,7 +150,7 @@ It may deepen only the authorized events, lifecycle, organization-relationship, 
 
 ## Active PR #358 Record Growth Batch 1
 
-PR #358 is bounded to full-record review of StraitsX USD (XUSD) and USDB. Candidate selection remains noncanonical until duplicate, evidence, organization, profile, deployment, event, and known-unknown requirements are satisfied.
+PR #358 has promoted complete reviewed records for StraitsX USD (XUSD) and Blast USDB on its branch. The current branch checkpoint contains 112 canonical assets, 557 Evidence records, 174 deployments, full v2/v3 coverage, and four preserved Market Access Records. Merge remains blocked until deterministic statistics history and all release/CI contracts are green.
 
 ## Post-351 operating mode
 
