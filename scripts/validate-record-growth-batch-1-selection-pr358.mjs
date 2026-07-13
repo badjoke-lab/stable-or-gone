@@ -27,7 +27,7 @@ fail(config.config_id === 'sog_record_growth_batch_1_pr358_v1', 'config ID misma
 fail(config.status === 'bounded_candidate_audit_then_manual_full_record_promotion', 'config status mismatch');
 fail(config.review_pr === 358, 'review PR must be 358');
 fail(config.selection_rule === 'context_grouped_reviewed_new_identity_non_ranking', 'selection rule mismatch');
-fail(config.context_group === 'current_usd_reserve_backed_institutional_stablecoins', 'context group mismatch');
+fail(config.context_group === 'current_usd_payment_stablecoins_with_distinct_stabilization_models', 'context group mismatch');
 fail(config.canonical_count_before === 110, 'pre-growth canonical count must be 110');
 fail(config.maximum_new_assets === 2, 'maximum new assets must be two');
 fail(config.planned_canonical_count_after === 112, 'maximum planned post-growth count must be 112');
@@ -51,10 +51,14 @@ fail(research.canonical_boundary?.automatic_promotion === false, 'research must 
 fail(research.canonical_boundary?.manual_review_required === true, 'research must require manual review');
 fail(research.candidates?.length === 2, 'research must contain exactly two candidates');
 
-const expectedCandidateIds = ['sog_cand_pr358_usdg', 'sog_cand_pr358_usd1'];
-const expectedAssetIds = ['sog_st_usdg', 'sog_st_usd1'];
-const expectedSlugs = ['global-dollar-usdg', 'world-liberty-financial-usd1'];
-const expectedSymbols = ['USDG', 'USD1'];
+const expectedCandidateIds = ['sog_cand_pr358_xusd', 'sog_cand_pr358_usdb'];
+const expectedAssetIds = ['sog_st_xusd', 'sog_st_usdb'];
+const expectedSlugs = ['straitsx-usd-xusd', 'blast-usdb'];
+const expectedSymbols = ['XUSD', 'USDB'];
+const expectedMechanisms = new Map([
+  ['sog_cand_pr358_xusd', 'fiat_backed_stablecoin'],
+  ['sog_cand_pr358_usdb', 'protocol_bridged_yield_bearing_stablecoin']
+]);
 fail(JSON.stringify(config.selected_candidates.map((row) => row.candidate_id)) === JSON.stringify(expectedCandidateIds), 'candidate order or identity mismatch');
 fail(JSON.stringify(config.selected_candidates.map((row) => row.proposed_asset_id)) === JSON.stringify(expectedAssetIds), 'proposed asset ID order mismatch');
 fail(JSON.stringify(config.selected_candidates.map((row) => row.proposed_slug)) === JSON.stringify(expectedSlugs), 'proposed slug order mismatch');
@@ -85,7 +89,8 @@ for (const selected of config.selected_candidates) {
   fail(selected.symbol === candidate.symbol, `${label}: config/research symbol mismatch`);
   fail(candidate.proposed_status === 'active', `${label}: proposed status must be active`);
   fail(candidate.reference_asset === 'USD', `${label}: reference asset must be USD`);
-  fail(candidate.mechanism === 'fiat_backed_stablecoin', `${label}: mechanism mismatch`);
+  fail(candidate.mechanism === expectedMechanisms.get(label), `${label}: mechanism mismatch`);
+  fail(typeof candidate.stabilization === 'string' && candidate.stabilization.length > 0, `${label}: stabilization description missing`);
   fail(candidate.selection_decision === 'selected_for_full_record_review', `${label}: selection decision mismatch`);
   fail(Array.isArray(candidate.aliases), `${label}: aliases must be an array`);
   fail(Array.isArray(candidate.value_contribution) && candidate.value_contribution.length >= 2, `${label}: value contribution must contain at least two entries`);
