@@ -5,6 +5,13 @@ const unique = (items) => [...new Set(items)];
 const uniqueRows = (rows) => [...new Map(rows.map((row) => [row.id, row])).values()];
 const readJson = (root, relativePath) => JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
 
+function mergeMinimumCounts(target, source = {}) {
+  for (const [name, value] of Object.entries(source)) {
+    if (Number.isFinite(value) && Number.isFinite(target[name])) target[name] = Math.max(target[name], value);
+    else target[name] = value;
+  }
+}
+
 export function loadRegistryV2Baseline(root = process.cwd()) {
   const baseRelativePath = 'docs/migration/registry-v2-baseline.json';
   const base = readJson(root, baseRelativePath);
@@ -28,7 +35,7 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
     const overlay = readJson(root, relativePath);
     const suffix = path.basename(relativePath).match(/batch-([a-z]+)\.json$/i)?.[1];
     if (suffix) suffixes.push(`batch_${suffix.toLowerCase()}`);
-    Object.assign(minimumCounts, overlay.minimum_counts ?? {});
+    mergeMinimumCounts(minimumCounts, overlay.minimum_counts ?? {});
     capturedAt = overlay.captured_at ?? capturedAt;
 
     for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
