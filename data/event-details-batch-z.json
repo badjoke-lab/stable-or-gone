@@ -1,0 +1,57 @@
+[
+  {
+    "id": "sog_ev_xusd_attestation_start_pr358",
+    "title": "XUSD reserve attestation history is published from February 2024",
+    "subject_stablecoin_ids": [
+      "sog_st_xusd"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_straitsx_singapore"
+    ],
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358",
+      "sog_src_xusd_sg_pr358"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Earliest dated official XUSD reserve-attestation checkpoint in the reviewed source set.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_xusd_ethereum_pr358",
+        "sog_dep_xusd_bsc_pr358",
+        "sog_dep_xusd_solana_pr358"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_straitsx_singapore"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_usdb_blast_launch_pr358",
+    "title": "Blast mainnet introduces native USDB",
+    "subject_stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "subject_organization_ids": [
+      "sog_org_blast"
+    ],
+    "evidence_ids": [
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_contract_pr358",
+      "sog_src_usdb_about_pr358"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Blast mainnet launch context for the native auto-rebasing USDB contract.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_usdb_blast_pr358"
+      ],
+      "related_organization_ids": [
+        "sog_org_blast"
+      ]
+    }
+  }
+]

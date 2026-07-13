@@ -1,0 +1,59 @@
+[
+  {
+    "id": "sog_st_xusd",
+    "slug": "straitsx-usd-xusd",
+    "name": "StraitsX USD",
+    "symbol": "XUSD",
+    "aliases": [
+      "XUSD",
+      "StraitsX XUSD",
+      "StraitsX USD"
+    ],
+    "status": "active",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "peg_asset": "USD",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "monthly_attestations_published",
+    "redemption_status": "eligible_customers_only",
+    "who_can_redeem": "Eligible StraitsX customers may convert XUSD to US dollars subject to account onboarding, product availability, fees, limits, and applicable jurisdiction restrictions.",
+    "retail_redemption": "available_subject_to_onboarding",
+    "institutional_redemption": "available_subject_to_onboarding",
+    "minimum_redemption": "not_stated_in_reviewed_public_source",
+    "redemption_region_notes": "Availability depends on StraitsX onboarding and jurisdiction rules. The public product page documents USD transfer and XUSD transfer pricing but does not establish universal access.",
+    "redemption_notes": "The official product page states that XUSD is fully backed by reserve assets and redeemable 1:1 for US dollars. This record does not infer deposit insurance, bankruptcy remoteness, or universal redemption eligibility.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "US-dollar stablecoin issued under the StraitsX product family, with official Ethereum, BNB Smart Chain, and Solana identifiers, published reserve attestations, and issuer-mediated 1:1 US-dollar redemption.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-13",
+    "notes": "PR #358 full-record promotion. Exact first public issuance date and the current legal issuer entity name remain explicit known unknowns."
+  },
+  {
+    "id": "sog_st_usdb",
+    "slug": "blast-usdb",
+    "name": "USDB",
+    "symbol": "USDB",
+    "aliases": [
+      "Blast USDB",
+      "Blast USD"
+    ],
+    "status": "active",
+    "issuer_id": "sog_org_blast",
+    "peg_asset": "USD",
+    "collateral_model": "protocol_bridged_stablecoin_with_native_rebase",
+    "reserve_disclosure_status": "official_protocol_backing_description_no_asset_level_attestation",
+    "redemption_status": "protocol_based",
+    "who_can_redeem": "Users may bridge USDB back to Ethereum for DAI through the Blast bridge, subject to bridge operation, protocol rules, and applicable access conditions.",
+    "retail_redemption": "protocol_bridge_available",
+    "institutional_redemption": "protocol_bridge_available",
+    "minimum_redemption": "not_stated_in_reviewed_public_source",
+    "redemption_region_notes": "Protocol bridge access is not equivalent to a direct fiat redemption right and may depend on wallet, bridge, network, and interface availability.",
+    "redemption_notes": "Blast documentation describes USDB as an auto-rebasing native stablecoin received when bridging stablecoins and redeemable for DAI when bridging back to Ethereum. No direct fiat claim or legal issuer claim is inferred.",
+    "launch_date": "2024-02-29",
+    "discontinued_date": null,
+    "summary": "Blast-native auto-rebasing USD-referenced stablecoin. Official protocol documentation describes DAI bridge redemption and yield historically sourced from MakerDAO on-chain T-bill infrastructure.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-13",
+    "notes": "PR #358 full-record promotion. Legal claim counterparty, bridge custody terms, current yield-source allocation, and governance controls remain explicit known unknowns."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_rel_xusd_straitsx_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "organization_id": "sog_issuer_straitsx_singapore",
+    "role": "legal_issuer",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358",
+      "sog_src_xusd_sg_pr358"
+    ],
+    "notes": "Official StraitsX product and Singapore pages associate XUSD with StraitsX. Exact legal-entity naming remains subject to terms-level verification."
+  },
+  {
+    "id": "sog_rel_usdb_blast_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "organization_id": "sog_org_blast",
+    "role": "protocol_operator",
+    "start_date": "2024-02-29",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_contract_pr358"
+    ],
+    "notes": "Blast operates the protocol, bridge, rebasing, and deployment context associated with USDB. This is not a legal-issuer assertion."
+  }
+]

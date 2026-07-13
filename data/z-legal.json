@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_xusd",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "Singapore",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "Official StraitsX XUSD product and Singapore platform materials",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_xusd_product_pr358",
+          "sog_src_xusd_sg_pr358"
+        ]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": [
+      "sog_issuer_straitsx_singapore"
+    ],
+    "reserve_ownership": "unclear",
+    "reserve_segregation": "unknown",
+    "bankruptcy_remoteness": "unknown",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358",
+      "sog_src_xusd_sg_pr358"
+    ],
+    "notes": "Official materials support issuer redemption and fiat-backed classification. Exact legal issuer name, reserve ownership, segregation, deposit insurance, and bankruptcy remoteness remain unresolved."
+  },
+  {
+    "id": "sog_st_usdb",
+    "classifications": [
+      {
+        "classification": "protocol_asset",
+        "jurisdiction": "Decentralized / protocol",
+        "effective_from": "2024-02-29",
+        "effective_to": null,
+        "authority_or_basis": "Official Blast protocol, bridge, and contract documentation",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_usdb_docs_pr358",
+          "sog_src_usdb_contract_pr358",
+          "sog_src_usdb_about_pr358"
+        ]
+      }
+    ],
+    "holder_claim_type": "protocol_redemption_right",
+    "claim_against_organization_ids": [],
+    "reserve_ownership": "protocol_controlled",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": [
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_contract_pr358",
+      "sog_src_usdb_about_pr358"
+    ],
+    "notes": "USDB provides protocol bridge redemption into DAI. No direct fiat issuer claim, legal reserve segregation, or bankruptcy-remoteness conclusion is inferred."
+  }
+]

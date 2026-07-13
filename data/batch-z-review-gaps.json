@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_ku_xusd_launch_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "topic": "launch_date",
+    "description": "The reviewed official page publishes an attestation checkpoint from 29 February 2024, but the exact first mint or public launch date is not established.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-13",
+    "notes": "No launch date is inferred from the attestation date."
+  },
+  {
+    "id": "sog_ku_xusd_legal_entity_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "topic": "legal_issuer_identity",
+    "description": "The StraitsX issuer family is clear, but the exact legal entity against which every XUSD holder claim runs requires terms-level verification.",
+    "severity": "high",
+    "last_checked_at": "2026-07-13",
+    "notes": "The organization record does not invent a company suffix."
+  },
+  {
+    "id": "sog_ku_xusd_reserve_protection_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "topic": "reserve_segregation_and_bankruptcy_remoteness",
+    "description": "Full reserve backing and recurring attestations are documented, but legal segregation, reserve ownership, deposit insurance, and bankruptcy remoteness are not established by the reviewed sources.",
+    "severity": "high",
+    "last_checked_at": "2026-07-13",
+    "notes": "Marketing and assurance statements are not converted into legal-protection conclusions."
+  },
+  {
+    "id": "sog_ku_usdb_legal_claim_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "topic": "legal_claim_counterparty",
+    "description": "Official protocol documentation establishes USDB mechanics but does not establish a direct legal issuer or corporate claim counterparty.",
+    "severity": "high",
+    "last_checked_at": "2026-07-13",
+    "notes": "Blast is modeled as protocol operator only."
+  },
+  {
+    "id": "sog_ku_usdb_bridge_terms_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "topic": "bridge_custody_and_redemption_terms",
+    "description": "DAI bridge redemption is documented, but complete bridge custody, failure, fee, delay, governance, and recovery terms remain unresolved.",
+    "severity": "high",
+    "last_checked_at": "2026-07-13",
+    "notes": "Protocol redemption is not treated as fiat redemption."
+  },
+  {
+    "id": "sog_ku_usdb_yield_governance_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "topic": "yield_source_and_governance",
+    "description": "Historical documentation identifies MakerDAO on-chain T-bill infrastructure as the yield source while allowing future replacement; current allocation, counterparties, rate policy, and governance controls require continuing review.",
+    "severity": "high",
+    "last_checked_at": "2026-07-13",
+    "notes": "No fixed or risk-free yield claim is recorded."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_st_xusd",
+    "lifecycle_status": "active",
+    "issuance_status": "open",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "target_value": 1,
+      "notes": "XUSD targets one US dollar through issuer reserve backing and redemption."
+    },
+    "backing_types": [
+      "cash",
+      "bank_deposits"
+    ],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "yield_source": "none",
+      "accrual_mechanism": "none",
+      "rate_type": "none",
+      "rate_source": null,
+      "notes": "No issuer-native XUSD yield or balance rebase is asserted."
+    },
+    "classification_notes": "Fiat-reserve-backed issuer stablecoin with direct issuer-mediated USD conversion, monthly attestation publication, and multiple issuer-native deployments."
+  },
+  {
+    "id": "sog_st_usdb",
+    "lifecycle_status": "active",
+    "issuance_status": "protocol_based",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "target_value": 1,
+      "notes": "USDB is USD-referenced and redeemable through the Blast bridge for DAI rather than directly for fiat."
+    },
+    "backing_types": [
+      "stablecoin_collateral",
+      "tokenized_fund"
+    ],
+    "stabilization_mechanism": "hybrid",
+    "governance_model": "protocol_governed",
+    "asset_class": "yield_bearing_stable_receipt",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "yield_or_rebase_profile": {
+      "mode": "rebasing",
+      "accrual_target": "asset",
+      "yield_source": "reserve_income",
+      "accrual_mechanism": "balance_rebase",
+      "rate_type": "protocol_determined",
+      "rate_source": "Blast protocol documentation",
+      "notes": "USDB balances rebase automatically. Historical documentation identifies MakerDAO on-chain T-bill infrastructure as the yield source, while allowing future replacement."
+    },
+    "classification_notes": "Protocol-native, bridge-issued, auto-rebasing stablecoin with DAI bridge redemption and external yield-source dependency."
+  }
+]

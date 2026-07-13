@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sog_issuer_straitsx_singapore",
+    "slug": "straitsx-singapore",
+    "name": "StraitsX Singapore",
+    "organization_type": "regulated_payment_token_issuer",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Singapore",
+    "official_url": "https://www.straitsx.com/sg",
+    "summary": "StraitsX operating and issuer organization associated with XUSD and the StraitsX stablecoin platform in Singapore.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-13",
+    "notes": "The public StraitsX site establishes the brand and issuer family. The exact legal entity name responsible for every XUSD holder claim remains separately tracked as a known unknown."
+  },
+  {
+    "id": "sog_org_blast",
+    "slug": "blast",
+    "name": "Blast",
+    "organization_type": "protocol_ecosystem",
+    "legacy_issuer_type": "protocol",
+    "jurisdiction": "Decentralized / protocol",
+    "official_url": "https://blast.io/",
+    "summary": "Ethereum layer-2 protocol ecosystem that operates the native-yield and bridge infrastructure associated with USDB.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-13",
+    "notes": "Blast is modeled as protocol operator, not asserted as a legal fiat issuer or direct holder-claim counterparty."
+  }
+]

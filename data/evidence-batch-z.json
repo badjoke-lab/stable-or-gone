@@ -1,0 +1,183 @@
+[
+  {
+    "id": "sog_src_xusd_product_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "event_id": "sog_ev_xusd_attestation_start_pr358",
+    "source_type": "official_website",
+    "title": "XUSD — StraitsX digital US Dollar",
+    "url": "https://www.straitsx.com/xusd",
+    "publisher": "StraitsX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/xusd",
+    "accessed_at": "2026-07-13",
+    "reliability": "high",
+    "claim_scope": "xusd_identity_reserve_redemption_attestation_and_deployment_context",
+    "stablecoin_ids": [
+      "sog_st_xusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx_singapore"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "reserve",
+      "redemption",
+      "deployment",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_xusd_attestation_start_pr358"
+    ]
+  },
+  {
+    "id": "sog_src_xusd_sg_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "event_id": "sog_ev_xusd_attestation_start_pr358",
+    "source_type": "official_website",
+    "title": "StraitsX Singapore",
+    "url": "https://www.straitsx.com/sg",
+    "publisher": "StraitsX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/sg",
+    "accessed_at": "2026-07-13",
+    "reliability": "high",
+    "claim_scope": "straitsx_singapore_organization_and_platform_context",
+    "stablecoin_ids": [
+      "sog_st_xusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx_singapore"
+    ],
+    "claim_scopes": [
+      "organization_identity",
+      "issuer",
+      "jurisdiction",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_xusd_attestation_start_pr358"
+    ]
+  },
+  {
+    "id": "sog_src_xusd_ledger_launch_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "source_type": "news_article",
+    "title": "StraitsX launches XUSD",
+    "url": "https://www.ledger.com/academy/topics/crypto/straitsx-launches-xusd",
+    "publisher": "Ledger",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.ledger.com/academy/topics/crypto/straitsx-launches-xusd",
+    "accessed_at": "2026-07-13",
+    "reliability": "medium",
+    "claim_scope": "secondary_launch_network_reserve_and_redemption_context",
+    "stablecoin_ids": [
+      "sog_st_xusd"
+    ],
+    "organization_ids": [
+      "sog_issuer_straitsx_singapore"
+    ],
+    "claim_scopes": [
+      "launch_context",
+      "deployment",
+      "reserve",
+      "redemption"
+    ],
+    "event_ids": []
+  },
+  {
+    "id": "sog_src_usdb_docs_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_id": "sog_ev_usdb_blast_launch_pr358",
+    "source_type": "official_documentation",
+    "title": "About Blast",
+    "url": "https://docs.blast.io/about-blast",
+    "publisher": "Blast",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.blast.io/about-blast",
+    "accessed_at": "2026-07-13",
+    "reliability": "high",
+    "claim_scope": "usdb_identity_rebasing_yield_source_and_dai_bridge_redemption",
+    "stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "organization_ids": [
+      "sog_org_blast"
+    ],
+    "claim_scopes": [
+      "identity",
+      "protocol_operator",
+      "income",
+      "redemption",
+      "backing",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_usdb_blast_launch_pr358"
+    ]
+  },
+  {
+    "id": "sog_src_usdb_contract_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_id": "sog_ev_usdb_blast_launch_pr358",
+    "source_type": "official_documentation",
+    "title": "Blast bridged token addresses",
+    "url": "https://docs.blast.io/building/bridged-token-addresses",
+    "publisher": "Blast",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.blast.io/building/bridged-token-addresses",
+    "accessed_at": "2026-07-13",
+    "reliability": "high",
+    "claim_scope": "usdb_blast_mainnet_contract_identity",
+    "stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "organization_ids": [
+      "sog_org_blast"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "contract_identity",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_usdb_blast_launch_pr358"
+    ]
+  },
+  {
+    "id": "sog_src_usdb_about_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_id": "sog_ev_usdb_blast_launch_pr358",
+    "source_type": "official_website",
+    "title": "Blast — native yield for ETH and stablecoins",
+    "url": "https://blast.io/en/about",
+    "publisher": "Blast",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://blast.io/en/about",
+    "accessed_at": "2026-07-13",
+    "reliability": "high",
+    "claim_scope": "usdb_protocol_product_rebasing_and_dai_redemption_context",
+    "stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "organization_ids": [
+      "sog_org_blast"
+    ],
+    "claim_scopes": [
+      "identity",
+      "income",
+      "redemption",
+      "protocol_context",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_usdb_blast_launch_pr358"
+    ]
+  }
+]
