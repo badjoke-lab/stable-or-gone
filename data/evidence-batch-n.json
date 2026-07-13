@@ -212,9 +212,9 @@
     "publisher": "SBI VC Trade",
     "published_at": "2026-06-24",
     "archived_url": "https://web.archive.org/web/*/https://www.sbivc.co.jp/newsview/bsqs09vn_yzv",
-    "accessed_at": "2026-06-24",
+    "accessed_at": "2026-07-13",
     "reliability": "high",
-    "claim_scope": "japan_distribution_and_regulatory_classification",
+    "claim_scope": "japan_provider_distribution_functions_network_limits_fees_conditions_and_regulatory_classification",
     "stablecoin_ids": [
       "sog_st_rlusd"
     ],
@@ -226,11 +226,21 @@
       "Japan_handling_start",
       "Type_4_electronic_payment_instrument",
       "SBI_VC_Trade_distribution",
-      "deposit_and_withdrawal"
+      "deposit_and_withdrawal",
+      "buy_sell",
+      "deposit",
+      "withdrawal",
+      "external_wallet_transfer",
+      "Ethereum_only_platform_transfer_scope",
+      "JPY_1_million_buy_sell_limit",
+      "JPY_1_million_withdrawal_limit",
+      "fee_free_deposit_and_withdrawal_at_reviewed_launch",
+      "platform_service_and_reflection_conditions"
     ],
     "event_ids": [
       "sog_ev_rlusd_japan_handling_2026"
-    ]
+    ],
+    "notes": "Primary SBI VC Trade RLUSD launch source reused by PR #359. It supports provider-scoped buy/sell, deposit, withdrawal, Ethereum-only external transfer through the withdrawal route, launch-stage limits, fees, service conditions, and SBI VC Trade's Japanese Category 4 characterization. It does not establish universal Japan-wide availability, XRPL support through VCTRADE, direct issuer mint or redemption, government guarantee, or recommendation."
   },
   {
     "id": "sog_src_rlusd_japan_mou_sbi_2025",
