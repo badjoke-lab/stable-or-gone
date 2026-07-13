@@ -35,9 +35,11 @@ for (const [file, body] of [
   requireText(body, 'docs/quality/record-growth-batch-1-pr358-spec.md', file);
   requireText(body, 'config/record-growth-batch-1-pr358.json', file);
   requireText(body, 'docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json', file);
+  requireText(body, 'StraitsX USD / XUSD / sog_st_xusd', file);
+  requireText(body, 'USDB / USDB / sog_st_usdb', file);
 }
 
-for (const marker of ['Global Dollar', 'USDG', 'World Liberty Financial USD1', 'USD1']) {
+for (const marker of ['StraitsX USD', 'XUSD', 'USDB', 'Blast']) {
   requireText(amendment, marker, 'PR #358 amendment');
   requireText(spec, marker, 'PR #358 specification');
 }
@@ -60,4 +62,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Workstream valid: PR #357 is complete, PR #358 is active for the bounded USDG/USD1 full-record growth batch, and PR #359 is next.');
+console.log('Workstream valid: PR #357 is complete, PR #358 is active for the bounded XUSD/USDB full-record growth batch, and PR #359 is next.');
