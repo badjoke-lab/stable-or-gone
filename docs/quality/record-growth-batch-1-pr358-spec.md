@@ -26,25 +26,25 @@ PR #358 is the first broad growth batch after the reviewed 110-asset checkpoint.
 The selected context group is:
 
 ```text
-current regulated bank and payment stablecoins
+current USD payment stablecoins with distinct stabilization models
 ```
 
 The selected candidates are:
 
 ```text
 StraitsX USD / XUSD
-SoFiUSD / SoFiUSD
+USDB / USDB
 ```
 
 This selection is not a ranking, market-cap list, endorsement, or safety judgment.
 
-The originally proposed USDG and USD1 candidates were rejected at the candidate stage because both identities already existed in the 110-asset canonical registry. Their rejection is evidence that duplicate review is a blocking gate rather than a documentation formality.
+USDG, USD1, and SoFiUSD were rejected at the candidate stage because those identities already existed in the 110-asset canonical registry. Their rejection is evidence that duplicate review is a blocking gate rather than a documentation formality.
 
 ## 3. Selection rationale
 
-XUSD and SoFiUSD are grouped because both are current USD-referenced assets issued in regulated financial or payment contexts, while presenting materially different issuer, legal, distribution, deployment, reserve, and redemption structures.
+XUSD and USDB are grouped because both are current USD-referenced assets used for payments or settlement, while presenting sharply different stabilization, redemption, reserve, yield, legal, and deployment structures.
 
-XUSD adds Singapore payment-institution and regional payment-infrastructure context. SoFiUSD adds a United States national-bank issuer, enterprise settlement history, and consumer banking-app distribution context.
+XUSD adds a Singapore payment-institution, fiat-reserve, direct-redemption, and multichain context. USDB adds an L2-native auto-rebasing model, DAI bridge redemption, and dependency on external yield infrastructure.
 
 The pair adds historical and structural comparison value rather than isolated record count.
 
@@ -55,9 +55,9 @@ Candidate selection does not equal canonical promotion.
 Before any canonical write, PR #358 must:
 
 1. run exact and normalized duplicate checks against all 110 canonical assets;
-2. review aliases, symbols, issuer names, domains, contracts, and predecessor/successor possibilities;
+2. review aliases, symbols, issuer or operator names, domains, contracts, and predecessor/successor possibilities;
 3. verify asset identity and current status;
-4. identify the legal issuer, operator, custodian, and material distributors without conflating roles;
+4. identify the legal issuer, operator, custodian, bridge, reserve, and material distributors without conflating roles;
 5. verify launch chronology and at least one meaningful event per asset;
 6. collect at least three reviewed canonical Evidence records per asset;
 7. preserve unresolved fields as known unknowns;
@@ -101,29 +101,29 @@ reserve-account language from legal segregation or bankruptcy remoteness
 
 Official StraitsX product, terms, regulatory, reserve, and deployment materials are preferred. Secondary reporting may support launch chronology but must not establish legal or redemption claims by itself.
 
-## 7. SoFiUSD review scope
+## 7. USDB review scope
 
 Review must distinguish:
 
 ```text
-SoFi Technologies from SoFi Bank, N.A.
-national-bank charter from token-specific legal protections
-December 2025 enterprise launch from May 2026 consumer rollout
-cash reserves from FDIC-insured deposits
-issuer redemption from app conversion or secondary-market liquidity
-Ethereum and Solana deployment rows from the canonical asset identity
-SoFiUSD from future tokenized-deposit products
+Blast network and contributor identity from a legal issuer or claim counterparty
+USDB from DAI and from other Blast bridge assets
+native rebasing from contractual holder yield
+bridge redemption for DAI from direct fiat redemption
+underlying yield source from reserve ownership or bankruptcy remoteness
+L2 contract identity from canonical asset identity
+current protocol behavior from historical launch marketing
 ```
 
-The token must not be described as FDIC insured merely because the issuer is a bank. Official SoFi and bank materials are preferred for issuer, product, terms, reserve, and redemption claims. High-quality reporting may support launch and distribution chronology.
+Official Blast documentation is preferred for asset identity, bridge redemption, rebasing, yield source, and contract deployment. No legal issuer, direct fiat claim, reserve segregation, or bankruptcy-remoteness conclusion may be inferred from protocol documentation alone.
 
 ## 8. Evidence rules
 
 Preferred source order:
 
 ```text
-official issuer or product documentation
-terms and redemption documentation
+official issuer, operator, protocol, or product documentation
+terms, bridge, redemption, and custody documentation
 regulator, charter, or licensing documentation
 reserve reports or attestations
 official contract or deployment documentation
@@ -133,7 +133,7 @@ reviewed archive capture where current pages no longer preserve the claim
 
 Every Evidence record must identify the claim scope it supports.
 
-A news article may support launch or distribution chronology, but it does not by itself establish current redemption rights, reserve segregation, bankruptcy remoteness, deposit insurance, or licensing status.
+A product page or news article may support launch or distribution chronology, but it does not by itself establish current legal claims, reserve segregation, bankruptcy remoteness, deposit insurance, or licensing status.
 
 ## 9. Required preservation
 
@@ -167,8 +167,8 @@ change Compare preset membership
 change Comparison Readiness definitions
 change Facet Freshness definitions
 publish candidate research or internal review artifacts
-infer legal protections from reserve, bank, or custody marketing
-turn bank or platform economics into holder yield
+infer legal protections from reserve, bank, bridge, or protocol marketing
+turn protocol rebasing or platform economics into a risk-free-yield claim
 ```
 
 ## 11. Validation
