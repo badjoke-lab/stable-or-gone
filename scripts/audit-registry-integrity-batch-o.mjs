@@ -30,7 +30,10 @@ for (const fileName of overlayFiles) {
   const overlay = readJson(\`docs/migration/\${fileName}\`);
   const suffix = fileName.match(/batch-([a-z]+)\\.json$/i)?.[1];
   if (suffix) suffixes.push(\`batch_\${suffix.toLowerCase()}\`);
-  Object.assign(minimumCounts, overlay.minimum_counts ?? {});
+  for (const [name, value] of Object.entries(overlay.minimum_counts ?? {})) {
+    if (Number.isFinite(value) && Number.isFinite(minimumCounts[name])) minimumCounts[name] = Math.max(minimumCounts[name], value);
+    else minimumCounts[name] = value;
+  }
   capturedAt = overlay.captured_at ?? capturedAt;
   for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
     baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
