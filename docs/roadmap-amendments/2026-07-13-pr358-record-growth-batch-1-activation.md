@@ -41,19 +41,19 @@ docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
 ## 3. Selected context group
 
 ```text
-current regulated bank and payment stablecoins
+current USD payment stablecoins with distinct stabilization models
 ```
 
 ## 4. Selected candidates
 
 ```text
 StraitsX USD / XUSD / proposed ID sog_st_xusd
-SoFiUSD / SoFiUSD / proposed ID sog_st_sofiusd
+USDB / USDB / proposed ID sog_st_usdb
 ```
 
 This is a context-grouped selection and not a ranking, endorsement, market-cap judgment, or safety score.
 
-The originally proposed USDG and USD1 candidates were rejected because both already existed in the canonical 110-asset registry. They must not be promoted again.
+USDG, USD1, and SoFiUSD were rejected because all three already existed in the canonical 110-asset registry. They must not be promoted again.
 
 ## 5. Starting boundary
 
@@ -73,7 +73,7 @@ Candidate selection is not canonical promotion.
 1. bind the reviewed PR #357 handoff
 2. validate candidate identity and zero canonical collisions
 3. review current official and high-quality sources
-4. determine issuer, operator, regulatory, and distribution roles
+4. determine issuer, operator, bridge, reserve, legal-claim, and distribution roles
 5. build complete entity/event/evidence/profile/deployment drafts
 6. preserve unresolved material fields as known unknowns
 7. run full-record readiness and deterministic impact validation
@@ -98,7 +98,7 @@ publish candidate research
 rank assets
 create a composite score
 automatically promote monitoring output
-infer deposit insurance or legal protection from issuer marketing
+infer legal protection from issuer, reserve, bridge, or protocol marketing
 ```
 
 ## 8. Completion and handoff
