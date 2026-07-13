@@ -64,8 +64,8 @@ jobs:
           const ids = new Set(assets.map((row) => row.id));
           const slugs = new Set(assets.map((row) => row.slug));
           if (assets.length !== 110) throw new Error(`Candidate-stage asset count must remain 110, found ${assets.length}`);
-          for (const id of ['sog_st_usdg','sog_st_usd1']) if (ids.has(id)) throw new Error(`Candidate promoted before full review: ${id}`);
-          for (const slug of ['global-dollar-usdg','world-liberty-financial-usd1']) if (slugs.has(slug)) throw new Error(`Candidate slug promoted before full review: ${slug}`);
+          for (const id of ['sog_st_xusd','sog_st_usdb']) if (ids.has(id)) throw new Error(`Candidate promoted before full review: ${id}`);
+          for (const slug of ['straitsx-usd-xusd','blast-usdb']) if (slugs.has(slug)) throw new Error(`Candidate slug promoted before full review: ${slug}`);
           const marketAccess = readJson('data/market-access-records-v1.json');
           if (marketAccess.length !== 4) throw new Error(`Market Access count changed: ${marketAccess.length}`);
           console.log('Candidate-stage canonical boundary valid.');
