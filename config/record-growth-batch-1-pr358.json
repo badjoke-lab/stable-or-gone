@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "config_id": "sog_record_growth_batch_1_pr358_v1",
-  "status": "bounded_candidate_audit_then_manual_full_record_promotion",
+  "status": "reviewed_full_record_promotion_pending_checkpoint",
   "review_pr": 358,
   "source_handoff": "docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json",
   "source_research": "data/editorial-research/record-growth-batch-1-pr358-candidates.json",
@@ -10,6 +10,7 @@
   "canonical_count_before": 110,
   "maximum_new_assets": 2,
   "planned_canonical_count_after": 112,
+  "canonical_count_after": 112,
   "selected_candidates": [
     {
       "candidate_id": "sog_cand_pr358_xusd",
@@ -37,6 +38,22 @@
     "evidence_per_asset_minimum": 3,
     "evidence_relation_parity": true,
     "known_unknowns_for_unresolved_fields": true
+  },
+  "expected_post_promotion_counts": {
+    "assets": 112,
+    "organizations": 105,
+    "relationships": 122,
+    "events": 187,
+    "evidence": 557,
+    "market_access_records": 4,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "legal_profiles": 112,
+    "stable_asset_relationships": 5,
+    "reserve_components": 145,
+    "income_profiles": 112
   },
   "promotion_policy": {
     "automatic": false,
