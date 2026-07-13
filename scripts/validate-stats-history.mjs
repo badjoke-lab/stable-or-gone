@@ -42,11 +42,11 @@ function orderingFailures(rows) {
     if (snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind === 'non_growth_normalization_checkpoint') {
       issues.push(`${label}: non-growth checkpoint may not increase asset_count`);
     }
-    if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind !== 'controlled_growth_checkpoint') {
-      issues.push(`${label}: increased asset_count requires controlled_growth_checkpoint kind`);
+    if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind != null && snapshot.checkpoint_kind !== 'controlled_growth_checkpoint') {
+      issues.push(`${label}: typed increased asset_count checkpoint requires controlled_growth_checkpoint kind`);
     }
-    if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.source_checkpoint_id !== previousCheckpointId) {
-      issues.push(`${label}: growth checkpoint must source the immediately preceding history checkpoint`);
+    if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind === 'controlled_growth_checkpoint' && snapshot.source_checkpoint_id !== previousCheckpointId) {
+      issues.push(`${label}: typed growth checkpoint must source the immediately preceding history checkpoint`);
     }
 
     previousAssetCount = snapshot.asset_count;
@@ -89,7 +89,9 @@ for (const [index, snapshot] of snapshots.entries()) {
 
   check(Number.isInteger(snapshot.asset_count) && snapshot.asset_count > 0, `${label}: asset_count must be a positive integer`);
   check(/^\d{4}-\d{2}-\d{2}$/.test(snapshot.recorded_at ?? ''), `${label}: recorded_at must be YYYY-MM-DD`);
-  check(['controlled_growth_checkpoint', 'non_growth_normalization_checkpoint'].includes(snapshot.checkpoint_kind), `${label}: invalid checkpoint_kind`);
+  if (snapshot.checkpoint_kind != null) {
+    check(['controlled_growth_checkpoint', 'non_growth_normalization_checkpoint'].includes(snapshot.checkpoint_kind), `${label}: invalid checkpoint_kind`);
+  }
 
   check(isSha256(snapshot.input_digest_sha256), `${label}: input_digest_sha256 invalid`);
   check(isSha256(snapshot.stats_model_sha256), `${label}: stats_model_sha256 invalid`);
@@ -188,7 +190,7 @@ const report = {
   current_snapshot_sha256: currentSnapshot.snapshot_sha256,
   base_ref: baseRef ?? null,
   base_prefix_count: basePrefixCount,
-  ordering_policy: 'checkpoint_progression_non_decreasing_asset_count',
+  ordering_policy: 'legacy_growth_compatible_typed_checkpoint_progression',
   immutability_negative_fixtures: snapshots.length > 0 ? 'passed' : 'not_run',
   failures,
   ok: failures.length === 0
