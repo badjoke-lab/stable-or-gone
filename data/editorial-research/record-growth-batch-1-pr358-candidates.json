@@ -9,7 +9,7 @@
     "automatic_promotion": false,
     "manual_review_required": true
   },
-  "context_group": "current_regulated_bank_and_payment_stablecoins",
+  "context_group": "current_usd_payment_stablecoins_with_distinct_stabilization_models",
   "candidates": [
     {
       "candidate_id": "sog_cand_pr358_xusd",
@@ -62,46 +62,46 @@
       "selection_decision": "selected_for_full_record_review"
     },
     {
-      "candidate_id": "sog_cand_pr358_sofiusd",
-      "proposed_asset_id": "sog_st_sofiusd",
-      "proposed_slug": "sofiusd",
-      "canonical_name": "SoFiUSD",
-      "symbol": "SoFiUSD",
-      "aliases": ["SoFiUSD", "SOFIUSD", "SoFi USD"],
+      "candidate_id": "sog_cand_pr358_usdb",
+      "proposed_asset_id": "sog_st_usdb",
+      "proposed_slug": "blast-usdb",
+      "canonical_name": "USDB",
+      "symbol": "USDB",
+      "aliases": ["USDB", "Blast USDB", "Blast USD"],
       "proposed_status": "active",
-      "proposed_issuer_organization_ids": ["sog_issuer_sofi_bank_na"],
-      "issuer_names": ["SoFi Bank, N.A."],
+      "proposed_operator_organization_ids": ["sog_org_blast"],
+      "operator_names": ["Blast"],
       "reference_asset": "USD",
-      "mechanism": "fiat_backed_stablecoin",
-      "stabilization": "one_to_one_cash_reserve_backing_and_bank_redemption",
-      "historical_value": "national_bank_issued_public_blockchain_stablecoin_with_enterprise_and_consumer_distribution",
-      "value_contribution": ["current_usd_coverage", "us_national_bank_issuer_structure", "enterprise_settlement_history", "consumer_banking_app_distribution"],
-      "proposed_event_plan": ["2025_enterprise_launch", "2026_consumer_rollout", "ethereum_and_solana_distribution"],
+      "mechanism": "protocol_bridged_yield_bearing_stablecoin",
+      "stabilization": "stablecoin_bridge_receipt_redeemable_for_dai_with_protocol_native_rebasing",
+      "historical_value": "l2_native_auto_rebasing_stablecoin_with_bridge_redemption_and_external_yield_source",
+      "value_contribution": ["current_usd_coverage", "l2_native_stablecoin_model", "automatic_rebasing", "bridge_redemption_dependency", "external_yield_source_dependency"],
+      "proposed_event_plan": ["2024_blast_mainnet_and_usdb_launch", "native_yield_model_activation", "bridge_and_contract_deployment_history"],
       "proposed_record_families": ["stablecoins", "organizations", "relationships", "classifications", "stablecoin_profiles", "events", "event_details", "evidence", "evidence_relations", "deployments", "legal_profiles", "reserve_components", "income_profiles", "known_unknowns"],
       "source_leads": [
         {
-          "url": "https://www.sofi.com/",
-          "publisher": "SoFi",
-          "source_type": "official_issuer_website",
-          "claim_scopes": ["issuer_identity", "bank_and_product_context"],
+          "url": "https://docs.blast.io/about-blast",
+          "publisher": "Blast",
+          "source_type": "official_protocol_documentation",
+          "claim_scopes": ["asset_identity", "automatic_rebasing", "yield_source", "dai_bridge_redemption", "continued_active_status"],
           "official": true
         },
         {
-          "url": "https://www.barrons.com/articles/sofi-stablecoin-stock-launch-crypto-13217c43",
-          "publisher": "Barron's",
-          "source_type": "news_article",
-          "claim_scopes": ["2025_launch_event", "sofi_bank_issuer_identity", "cash_reserve_model", "immediate_redemption_claim", "enterprise_use_scope"],
-          "official": false
+          "url": "https://docs.blast.io/building/bridged-token-addresses",
+          "publisher": "Blast",
+          "source_type": "official_deployment_documentation",
+          "claim_scopes": ["mainnet_contract_address", "deployment_identity"],
+          "official": true
         },
         {
-          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-05-27-2026/card/exclusive-sofi-makes-its-stablecoin-available-to-15-million-customers-gOavVfurYooazZoJWtNV",
-          "publisher": "The Wall Street Journal",
-          "source_type": "news_article",
-          "claim_scopes": ["2026_consumer_rollout", "ethereum_and_solana_scope", "banking_app_distribution", "continued_active_status"],
-          "official": false
+          "url": "https://blast.io/en/about",
+          "publisher": "Blast",
+          "source_type": "official_product_documentation",
+          "claim_scopes": ["asset_identity", "bridge_issuance_context", "dai_redemption", "yield_source_history"],
+          "official": true
         }
       ],
-      "blocking_unknowns": ["official_stablecoin_terms_url", "complete_contract_address_and_deployment_lineage", "complete_reserve_report_series", "direct_redemption_terms_outside_sofi_channels"],
+      "blocking_unknowns": ["exact_legal_issuer_or_claim_counterparty", "complete_bridge_custody_and_redemption_terms", "current_underlying_yield_source_allocation", "complete_contract_governance_and_upgrade_history"],
       "duplicate_review": {
         "asset_id_match": false,
         "slug_match": false,
