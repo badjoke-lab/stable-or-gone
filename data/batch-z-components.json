@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_rc_xusd_reserve_assets_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "reserve_report_id": "sog_rr_xusd_attestation_index_pr358",
+    "asset_category": "other",
+    "asset_label": "US-dollar reserve assets supporting XUSD; exact current allocation is report-specific",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-07-13",
+    "confidence": "high",
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358"
+    ],
+    "notes": "Official material establishes full reserve backing and recurring attestations but the aggregate page does not establish a single fixed instrument allocation."
+  },
+  {
+    "id": "sog_rc_usdb_dai_rwa_context_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "reserve_report_id": "sog_rr_usdb_protocol_backing_pr358",
+    "asset_category": "stablecoin_collateral",
+    "asset_label": "DAI bridge-redemption context with historical MakerDAO on-chain T-bill yield sourcing",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-07-13",
+    "confidence": "high",
+    "evidence_ids": [
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_about_pr358"
+    ],
+    "notes": "This component records documented protocol dependency without asserting asset-level custody, allocation percentage, or bankruptcy protection."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_rr_xusd_attestation_index_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "publisher": "StraitsX",
+    "report_type": "monthly_reserve_attestation_index",
+    "asset_categories": [
+      "cash",
+      "bank_deposits"
+    ],
+    "url": "https://www.straitsx.com/xusd",
+    "archived_url": "https://web.archive.org/web/*/https://www.straitsx.com/xusd",
+    "confidence": "high",
+    "notes": "The product page publishes recurring attestation links and states full reserve backing. This aggregate index does not invent report-level reserve percentages."
+  },
+  {
+    "id": "sog_rr_usdb_protocol_backing_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "publisher": "Blast",
+    "report_type": "official_protocol_backing_description",
+    "asset_categories": [
+      "stablecoin_collateral",
+      "tokenized_fund"
+    ],
+    "url": "https://docs.blast.io/about-blast",
+    "archived_url": "https://web.archive.org/web/*/https://docs.blast.io/about-blast",
+    "confidence": "high",
+    "notes": "Official protocol documentation describes DAI bridge redemption and historical MakerDAO T-bill yield sourcing. This is not an audited asset-level reserve report."
+  }
+]

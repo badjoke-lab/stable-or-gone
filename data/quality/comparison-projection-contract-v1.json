@@ -5,9 +5,9 @@
   "readiness_contract_id": "sog_comparison_readiness_contract_pr336_v1",
   "freshness_contract_id": "sog_facet_freshness_contract_pr342_v1",
   "endpoint": "/data/comparison.json",
-  "asset_count": 110,
+  "asset_count": 112,
   "dimension_count": 19,
-  "cell_count": 2090,
+  "cell_count": 2128,
   "data_safety": {
     "canonical_only": true,
     "includes_unreviewed_candidates": false,

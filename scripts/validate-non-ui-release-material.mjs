@@ -19,14 +19,17 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const requireText = (body, text, label) => check(body.includes(text), `${label}: missing ${text}`);
 
 for (const marker of [
-  'Canonical stable assets: 110',
+  'Canonical stable assets: 112',
   'PR #351 Monthly Maintenance Log: complete',
   'PR #352 post-351 authority reset: complete',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
   'PR #355 Tier A Dossier Deepening — Batch 2: complete',
   'PR #356 Market Access Pilot 1: complete',
-  'PR #357 Tier A Dossier Deepening — Batch 3: active',
-  'PR #358 Record Growth Batch 1: next'
+  'PR #357 Tier A Dossier Deepening — Batch 3: complete',
+  'PR #358 Record Growth Batch 1: active',
+  'PR #359 Market Access Pilot 2: next',
+  'StraitsX USD (XUSD)',
+  'Blast USDB'
 ]) requireText(readme, marker, 'README.md');
 for (const route of ['/version.json','/data/manifest.json','/llms.txt','/ai.txt']) requireText(readme, route, 'README.md');
 for (const boundary of ['canonical_only = true','includes_unreviewed_candidates = false','includes_internal_monitoring = false','includes_private_notes = false']) requireText(readme, boundary, 'README.md');
@@ -52,15 +55,22 @@ for (const boundary of ['canonical_only = true','includes_unreviewed_candidates 
 check(checkpoint.release_integrity_baseline_id === 'sog_release_integrity_pr316_2026_07_06', 'historical 100-asset release-integrity baseline ID changed');
 check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'historical checkpoint/reproducible-build baseline ID mismatch');
 check(releaseBaseline.status === 'current', 'current release-integrity baseline must remain current');
+check(releaseBaseline.baseline_id === 'sog_release_integrity_pr358_112_assets_2026_07_13', 'current release-integrity baseline must be PR #358 112-asset baseline');
+check(currentCheckpoint.checkpoint_id === 'sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13', 'current canonical checkpoint must be PR #358 112-asset checkpoint');
+check(currentCheckpoint.asset_count === 112, 'current canonical checkpoint must contain 112 assets');
 check(releaseBaseline.expected_v2_counts?.stablecoins === currentCheckpoint.asset_count, 'current release-integrity baseline must match current checkpoint asset count');
 check(releaseBaseline.expected_v2_counts?.organizations === currentCheckpoint.expected_counts?.organizations, 'current release-integrity baseline must match current checkpoint organization count');
 check(releaseBaseline.expected_v2_counts?.events === currentCheckpoint.expected_counts?.events, 'current release-integrity baseline must match current checkpoint event count');
 check(releaseBaseline.expected_v2_counts?.evidence === currentCheckpoint.expected_counts?.evidence, 'current release-integrity baseline must match current checkpoint evidence count');
+check(releaseBaseline.expected_v2_counts?.deployments === currentCheckpoint.expected_counts?.deployments, 'current release-integrity baseline must match current checkpoint deployment count');
 check(history.snapshots?.[0]?.checkpoint_id === checkpoint.checkpoint_id, 'stats history initial checkpoint ID mismatch');
 check(history.snapshots?.[0]?.asset_count === 100, 'stats history initial asset count must be 100');
 const latestSnapshot = history.snapshots?.at(-1);
 check(latestSnapshot?.checkpoint_id === currentHistoryCheckpoint.checkpoint_id, 'stats history current reviewed checkpoint snapshot missing');
 check(latestSnapshot?.canonical_checkpoint_id === currentCheckpoint.checkpoint_id, 'stats history latest snapshot must bind the current canonical checkpoint');
+check(latestSnapshot?.totals?.assets === 112, 'stats history latest snapshot must contain 112 assets');
+check(latestSnapshot?.totals?.evidence === 557, 'stats history latest snapshot must contain 557 Evidence records');
+check(latestSnapshot?.totals?.deployments === 174, 'stats history latest snapshot must contain 174 deployments');
 check(latestSnapshot?.totals?.market_access_records === currentCheckpoint.expected_counts?.market_access_records, 'stats history latest snapshot must include the current Market Access record count');
 check(currentHistoryCheckpoint.canonical_checkpoint_id === currentCheckpoint.checkpoint_id, 'current history checkpoint canonical binding mismatch');
 
@@ -80,12 +90,16 @@ for (const marker of [
 ]) requireText(amendment, marker, 'historical PR #326 roadmap amendment');
 
 for (const marker of [
-  'Canonical stable assets: 110',
+  'Canonical stable assets: 112',
   'PR #354 Tier A Dossier Deepening — Batch 1: complete',
   'PR #355 Tier A Dossier Deepening — Batch 2: complete',
   'PR #356 Market Access Pilot 1: complete',
-  'PR #357 Tier A Dossier Deepening — Batch 3: active',
-  'PR #358 Record Growth Batch 1: next',
+  'PR #357 Tier A Dossier Deepening — Batch 3: complete',
+  'PR #358 Record Growth Batch 1: active',
+  'PR #359 Market Access Pilot 2: next',
+  '112 stable assets',
+  '557 evidence records',
+  '174 deployments',
   'REVIEW GATE'
 ]) requireText(roadmap, marker, 'current roadmap');
 
@@ -108,12 +122,14 @@ console.log(JSON.stringify({
   current_checkpoint_id: currentCheckpoint.checkpoint_id,
   current_history_checkpoint_id: currentHistoryCheckpoint.checkpoint_id,
   current_stable_assets: currentCheckpoint.asset_count,
+  current_evidence: latestSnapshot?.totals?.evidence ?? 0,
+  current_deployments: latestSnapshot?.totals?.deployments ?? 0,
   current_market_access_records: latestSnapshot?.totals?.market_access_records ?? 0,
   historical_release_integrity_baseline_id: checkpoint.release_integrity_baseline_id,
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
   stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_workstream: 'pr357_tier_a_dossier_batch_3',
-  next_workstream: 'pr358_record_growth_batch_1'
+  active_workstream: 'pr358_record_growth_batch_1',
+  next_workstream: 'pr359_market_access_pilot_2'
 }, null, 2));

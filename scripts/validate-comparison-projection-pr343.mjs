@@ -25,6 +25,10 @@ const manifestSource = readText('src/lib/data/manifestBase.ts');
 
 const stablecoins = (baseline.data_groups?.stablecoins ?? []).flatMap(readJson).sort((a, b) => a.id.localeCompare(b.id));
 const expectedAssetIds = stablecoins.map((row) => row.id);
+const expectedAssetCount = expectedAssetIds.length;
+const expectedDimensionCount = 19;
+const expectedCellCount = expectedAssetCount * expectedDimensionCount;
+const marketAccessAssetIds = new Set((marketAccess ?? []).map((row) => row.asset_id).filter(Boolean));
 const forbiddenKeys = new Set(contract.excluded_internal_fields ?? []);
 const discoveredForbidden = [];
 const walk = (value, currentPath = '$') => {
@@ -45,9 +49,9 @@ expect(contract.status === 'canonical_public_projection_contract', 'projection c
 expect(contract.readiness_contract_id === readiness.contract_id, 'projection contract readiness binding mismatch');
 expect(contract.freshness_contract_id === freshness.contract_id, 'projection contract freshness binding mismatch');
 expect(contract.endpoint === '/data/comparison.json', 'projection endpoint mismatch');
-expect(contract.asset_count === 110, 'projection contract asset count mismatch');
-expect(contract.dimension_count === 19, 'projection contract dimension count mismatch');
-expect(contract.cell_count === 2090, 'projection contract cell count mismatch');
+expect(contract.asset_count === expectedAssetCount, `projection contract asset count must be ${expectedAssetCount}`);
+expect(contract.dimension_count === expectedDimensionCount, 'projection contract dimension count mismatch');
+expect(contract.cell_count === expectedCellCount, `projection contract cell count must be ${expectedCellCount}`);
 expect(contract.data_safety?.canonical_only === true, 'projection must be canonical-only');
 expect(contract.data_safety?.includes_unreviewed_candidates === false, 'projection must exclude unreviewed candidates');
 expect(contract.data_safety?.includes_internal_monitoring === false, 'projection must exclude monitoring');
@@ -68,12 +72,12 @@ expect(projection.readiness_contract_id === readiness.contract_id, 'projection r
 expect(projection.freshness_contract_id === freshness.contract_id, 'projection freshness contract mismatch');
 expect(projection.projection_contract_id === contract.contract_id, 'projection contract ID mismatch');
 expect(isDeepStrictEqual(projection.data_safety, contract.data_safety), 'projection data safety differs from contract');
-expect(projection.asset_count === 110, `projection asset count must be 110, found ${projection.asset_count}`);
-expect(projection.dimension_count === 19, `projection dimension count must be 19, found ${projection.dimension_count}`);
-expect(projection.cell_count === 2090, `projection cell count must be 2090, found ${projection.cell_count}`);
+expect(projection.asset_count === expectedAssetCount, `projection asset count must be ${expectedAssetCount}, found ${projection.asset_count}`);
+expect(projection.dimension_count === expectedDimensionCount, `projection dimension count must be ${expectedDimensionCount}, found ${projection.dimension_count}`);
+expect(projection.cell_count === expectedCellCount, `projection cell count must be ${expectedCellCount}, found ${projection.cell_count}`);
 expect(projection.single_composite_score === false, 'projection must not emit composite score');
-expect(projection.dimensions?.length === 19, 'projection dimension metadata must contain 19 rows');
-expect(projection.assets?.length === 110, 'projection must contain 110 asset rows');
+expect(projection.dimensions?.length === expectedDimensionCount, `projection dimension metadata must contain ${expectedDimensionCount} rows`);
+expect(projection.assets?.length === expectedAssetCount, `projection must contain ${expectedAssetCount} asset rows`);
 expect(discoveredForbidden.length === 0, `projection contains forbidden internal fields: ${discoveredForbidden.join(', ')}`);
 
 const projectedAssetIds = projection.assets.map((row) => row.asset_id);
@@ -90,9 +94,9 @@ for (const asset of projection.assets) {
   expect(Boolean(readinessAsset), `${asset.asset_id}: missing readiness source row`);
   expect(Boolean(freshnessAsset), `${asset.asset_id}: missing freshness source row`);
   expect(asset.overall_readiness === readinessAsset?.overall_state, `${asset.asset_id}: overall readiness mismatch`);
-  expect(asset.facets?.length === 19, `${asset.asset_id}: projection must contain 19 facets`);
+  expect(asset.facets?.length === expectedDimensionCount, `${asset.asset_id}: projection must contain ${expectedDimensionCount} facets`);
   expect(isDeepStrictEqual(asset.facets.map((row) => row.dimension_id), dimensionOrder), `${asset.asset_id}: facet ordering differs from readiness contract order`);
-  expect(new Set(asset.facets.map((row) => row.dimension_id)).size === 19, `${asset.asset_id}: duplicate projected dimension`);
+  expect(new Set(asset.facets.map((row) => row.dimension_id)).size === expectedDimensionCount, `${asset.asset_id}: duplicate projected dimension`);
 
   for (const facet of asset.facets ?? []) {
     const readinessRow = readinessAsset?.dimensions.find((row) => row.dimension_id === facet.dimension_id);
@@ -111,28 +115,36 @@ for (const asset of projection.assets) {
     expect(Object.prototype.hasOwnProperty.call(facet, 'readiness'), `${asset.asset_id}/${facet.dimension_id}: readiness field missing`);
     expect(Object.prototype.hasOwnProperty.call(facet, 'freshness'), `${asset.asset_id}/${facet.dimension_id}: freshness field missing`);
   }
+
+  const accessFacet = asset.facets.find((row) => row.dimension_id === 'market_access_applicability');
+  const hasCanonicalAccess = marketAccessAssetIds.has(asset.asset_id);
+  if (hasCanonicalAccess) {
+    expect(accessFacet?.value?.record_state === 'canonical_records_present', `${asset.asset_id}: canonical Market Access records not projected`);
+    expect(accessFacet?.value?.record_count > 0, `${asset.asset_id}: canonical Market Access record count missing`);
+    expect(accessFacet?.freshness?.state !== 'no_canonical_record', `${asset.asset_id}: canonical Market Access freshness incorrectly absent`);
+  } else {
+    expect(accessFacet?.value?.record_state === 'no_canonical_record', `${asset.asset_id}: missing Market Access must project no_canonical_record`);
+    expect(accessFacet?.value?.record_count === 0 && accessFacet?.value?.records?.length === 0, `${asset.asset_id}: missing Market Access must not fabricate records`);
+    expect(accessFacet?.freshness?.state === 'no_canonical_record', `${asset.asset_id}: missing Market Access freshness must remain no_canonical_record`);
+  }
 }
 
 const allFacets = projection.assets.flatMap((asset) => asset.facets);
-expect(allFacets.length === 2090, 'flattened projection cell count mismatch');
+expect(allFacets.length === expectedCellCount, 'flattened projection cell count mismatch');
 const marketAccessFacets = allFacets.filter((row) => row.dimension_id === 'market_access_applicability');
-expect(marketAccessFacets.length === 110, 'Market Access projection must contain 110 facets');
-expect(Array.isArray(marketAccess) && marketAccess.length === 0, 'PR #343 assumes canonical Market Access remains empty');
-expect(marketAccessFacets.every((facet) => facet.value?.record_state === 'no_canonical_record'), 'empty canonical Market Access must project no_canonical_record for every asset');
-expect(marketAccessFacets.every((facet) => facet.value?.record_count === 0 && facet.value?.records?.length === 0), 'empty Market Access projection must contain no fabricated records');
-expect(marketAccessFacets.every((facet) => facet.freshness?.state === 'no_canonical_record'), 'Market Access freshness must remain no_canonical_record');
-expect(editorialResearch.canonical_boundary?.canonical_action === 'none', 'editorial research canonical boundary changed');
+expect(marketAccessFacets.length === expectedAssetCount, `Market Access projection must contain ${expectedAssetCount} facets`);
+expect(Array.isArray(marketAccess), 'canonical Market Access records must be an array');
 expect(editorialResearch.canonical_boundary?.included_in_public_canonical_counts === false, 'editorial research entered canonical counts');
 
 const readinessSummaryCount = Object.values(projection.summary?.readiness_asset_states ?? {}).reduce((sum, value) => sum + value, 0);
 const freshnessSummaryCount = Object.values(projection.summary?.freshness_states ?? {}).reduce((sum, value) => sum + value, 0);
-expect(readinessSummaryCount === 110, `projection readiness asset summary must total 110, found ${readinessSummaryCount}`);
-expect(freshnessSummaryCount === 2090, `projection freshness summary must total 2090, found ${freshnessSummaryCount}`);
+expect(readinessSummaryCount === expectedAssetCount, `projection readiness asset summary must total ${expectedAssetCount}, found ${readinessSummaryCount}`);
+expect(freshnessSummaryCount === expectedCellCount, `projection freshness summary must total ${expectedCellCount}, found ${freshnessSummaryCount}`);
 
-expect(routeSource.includes("getPublicComparisonProjection"), 'public comparison route must use deterministic comparison data helper');
+expect(routeSource.includes('getPublicComparisonProjection'), 'public comparison route must use deterministic comparison data helper');
 expect(routeSource.includes("'content-type': 'application/json; charset=utf-8'"), 'public comparison route must emit JSON content type');
 expect(manifestSource.includes("comparison: '/data/comparison.json'"), 'manifest must advertise comparison endpoint');
-expect(manifestSource.includes("deterministic_comparison_projection"), 'manifest must declare comparison projection data model');
+expect(manifestSource.includes('deterministic_comparison_projection'), 'manifest must declare comparison projection data model');
 expect(manifestSource.includes('readiness_and_freshness_separate: true'), 'manifest must preserve separate readiness/freshness axes');
 expect(manifestSource.includes('single_composite_score: false'), 'manifest must state no composite comparison score');
 
@@ -149,6 +161,7 @@ console.log(JSON.stringify({
   cell_count: projection.cell_count,
   readiness_asset_states: projection.summary.readiness_asset_states,
   freshness_states: projection.summary.freshness_states,
+  market_access_assets: marketAccessAssetIds.size,
   market_access_no_canonical_record: marketAccessFacets.filter((facet) => facet.value.record_state === 'no_canonical_record').length,
   endpoint: contract.endpoint,
   next_pr: contract.next_pr

@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "research_id": "sog_record_growth_batch_1_pr358_candidates_2026_07_13",
+  "status": "reviewed_candidate_checkpoint_not_canonical",
+  "review_pr": 358,
+  "recorded_at": "2026-07-13",
+  "canonical_boundary": {
+    "included_in_public_canonical_counts": false,
+    "automatic_promotion": false,
+    "manual_review_required": true
+  },
+  "context_group": "current_usd_payment_stablecoins_with_distinct_stabilization_models",
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr358_xusd",
+      "proposed_asset_id": "sog_st_xusd",
+      "proposed_slug": "straitsx-usd-xusd",
+      "canonical_name": "StraitsX USD",
+      "symbol": "XUSD",
+      "aliases": ["XUSD", "StraitsX XUSD", "StraitsX USD"],
+      "proposed_status": "active",
+      "proposed_issuer_organization_ids": ["sog_issuer_straitsx_singapore"],
+      "issuer_names": ["StraitsX Singapore"],
+      "reference_asset": "USD",
+      "mechanism": "fiat_backed_stablecoin",
+      "stabilization": "one_to_one_us_dollar_issuance_and_redemption",
+      "historical_value": "singapore_payment_institution_usd_stablecoin_with_regional_payment_and_multichain_context",
+      "value_contribution": ["current_usd_coverage", "singapore_payment_institution_context", "regional_payment_infrastructure", "issuer_redemption_model"],
+      "proposed_event_plan": ["2024_xusd_launch", "public_blockchain_deployment_expansion", "payment_and_exchange_distribution_expansion"],
+      "proposed_record_families": ["stablecoins", "organizations", "relationships", "classifications", "stablecoin_profiles", "events", "event_details", "evidence", "evidence_relations", "deployments", "legal_profiles", "reserve_components", "income_profiles", "known_unknowns"],
+      "source_leads": [
+        {
+          "url": "https://www.straitsx.com/xusd",
+          "publisher": "StraitsX",
+          "source_type": "official_product_documentation",
+          "claim_scopes": ["asset_identity", "issuer_identity", "one_to_one_redemption", "reserve_model", "deployment_scope"],
+          "official": true
+        },
+        {
+          "url": "https://www.straitsx.com/sg",
+          "publisher": "StraitsX",
+          "source_type": "official_issuer_documentation",
+          "claim_scopes": ["issuer_identity", "singapore_regulatory_context", "platform_scope"],
+          "official": true
+        },
+        {
+          "url": "https://www.ledger.com/academy/topics/crypto/straitsx-launches-xusd",
+          "publisher": "Ledger",
+          "source_type": "industry_article",
+          "claim_scopes": ["launch_event", "initial_network_scope", "reserve_and_redemption_summary"],
+          "official": false
+        }
+      ],
+      "blocking_unknowns": ["exact_first_public_mint_timestamp", "complete_deployment_lineage", "complete_historical_reserve_report_series", "full_direct_redemption_fee_and_minimum_history"],
+      "duplicate_review": {
+        "asset_id_match": false,
+        "slug_match": false,
+        "canonical_name_match": false,
+        "symbol_match": false,
+        "decision": "new_identity_pending_full_canonical_duplicate_audit"
+      },
+      "selection_decision": "selected_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr358_usdb",
+      "proposed_asset_id": "sog_st_usdb",
+      "proposed_slug": "blast-usdb",
+      "canonical_name": "USDB",
+      "symbol": "USDB",
+      "aliases": ["USDB", "Blast USDB", "Blast USD"],
+      "proposed_status": "active",
+      "proposed_operator_organization_ids": ["sog_org_blast"],
+      "operator_names": ["Blast"],
+      "reference_asset": "USD",
+      "mechanism": "protocol_bridged_yield_bearing_stablecoin",
+      "stabilization": "stablecoin_bridge_receipt_redeemable_for_dai_with_protocol_native_rebasing",
+      "historical_value": "l2_native_auto_rebasing_stablecoin_with_bridge_redemption_and_external_yield_source",
+      "value_contribution": ["current_usd_coverage", "l2_native_stablecoin_model", "automatic_rebasing", "bridge_redemption_dependency", "external_yield_source_dependency"],
+      "proposed_event_plan": ["2024_blast_mainnet_and_usdb_launch", "native_yield_model_activation", "bridge_and_contract_deployment_history"],
+      "proposed_record_families": ["stablecoins", "organizations", "relationships", "classifications", "stablecoin_profiles", "events", "event_details", "evidence", "evidence_relations", "deployments", "legal_profiles", "reserve_components", "income_profiles", "known_unknowns"],
+      "source_leads": [
+        {
+          "url": "https://docs.blast.io/about-blast",
+          "publisher": "Blast",
+          "source_type": "official_protocol_documentation",
+          "claim_scopes": ["asset_identity", "automatic_rebasing", "yield_source", "dai_bridge_redemption", "continued_active_status"],
+          "official": true
+        },
+        {
+          "url": "https://docs.blast.io/building/bridged-token-addresses",
+          "publisher": "Blast",
+          "source_type": "official_deployment_documentation",
+          "claim_scopes": ["mainnet_contract_address", "deployment_identity"],
+          "official": true
+        },
+        {
+          "url": "https://blast.io/en/about",
+          "publisher": "Blast",
+          "source_type": "official_product_documentation",
+          "claim_scopes": ["asset_identity", "bridge_issuance_context", "dai_redemption", "yield_source_history"],
+          "official": true
+        }
+      ],
+      "blocking_unknowns": ["exact_legal_issuer_or_claim_counterparty", "complete_bridge_custody_and_redemption_terms", "current_underlying_yield_source_allocation", "complete_contract_governance_and_upgrade_history"],
+      "duplicate_review": {
+        "asset_id_match": false,
+        "slug_match": false,
+        "canonical_name_match": false,
+        "symbol_match": false,
+        "decision": "new_identity_pending_full_canonical_duplicate_audit"
+      },
+      "selection_decision": "selected_for_full_record_review"
+    }
+  ]
+}

@@ -40,8 +40,10 @@ import legalProfilesGrowthV from '../../../data/v-legal.json';
 import legalProfilesGrowthW from '../../../data/w-legal.json';
 import legalProfilesGrowthX from '../../../data/x-legal.json';
 import legalProfilesGrowthY from '../../../data/y-legal.json';
+import legalProfilesGrowthZ from '../../../data/z-legal.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
+import stableAssetRelationshipsPr358 from '../../../data/stable-asset-relationships-v3-pr358.json';
 import reserveComponentsData from '../../../data/reserve-components-v3.json';
 import reserveComponentsBatchF from '../../../data/reserve-components-v3-batch-f.json';
 import reserveComponentsBatchG from '../../../data/reserve-components-v3-batch-g.json';
@@ -63,6 +65,7 @@ import reserveComponentsBatchV from '../../../data/batch-v-components.json';
 import reserveComponentsBatchW from '../../../data/batch-w-components.json';
 import reserveComponentsBatchX from '../../../data/batch-x-components.json';
 import reserveComponentsBatchY from '../../../data/batch-y-components.json';
+import reserveComponentsBatchZ from '../../../data/batch-z-components.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -84,12 +87,12 @@ const legalProfiles = [
   ...legalProfilesGrowthL, ...legalProfilesGrowthM, ...legalProfilesGrowthN, ...legalProfilesGrowthO,
   ...legalProfilesGrowthP, ...legalProfilesGrowthQ, ...legalProfilesGrowthR, ...legalProfilesGrowthS,
   ...legalProfilesGrowthT, ...legalProfilesGrowthU, ...legalProfilesGrowthV, ...legalProfilesGrowthW,
-  ...legalProfilesGrowthX, ...legalProfilesGrowthY,
+  ...legalProfilesGrowthX, ...legalProfilesGrowthY, ...legalProfilesGrowthZ,
 ] as LegalProfileV3[];
 
 const stableAssetRelationships = [
   ...stableAssetRelationshipsData,
-  ...stableAssetRelationshipsBatchH,
+  ...stableAssetRelationshipsBatchH, ...stableAssetRelationshipsPr358,
 ] as StableAssetRelationshipV3[];
 
 const reserveComponents = [
@@ -98,7 +101,7 @@ const reserveComponents = [
   ...reserveComponentsBatchM, ...reserveComponentsBatchN, ...reserveComponentsBatchO, ...reserveComponentsBatchP,
   ...reserveComponentsBatchQ, ...reserveComponentsBatchR, ...reserveComponentsBatchS, ...reserveComponentsBatchT,
   ...reserveComponentsBatchU, ...reserveComponentsBatchV, ...reserveComponentsBatchW, ...reserveComponentsBatchX,
-  ...reserveComponentsBatchY,
+  ...reserveComponentsBatchY, ...reserveComponentsBatchZ,
 ] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {

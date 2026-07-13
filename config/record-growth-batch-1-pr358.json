@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_record_growth_batch_1_pr358_v1",
+  "status": "reviewed_full_record_promotion_pending_checkpoint",
+  "review_pr": 358,
+  "source_handoff": "docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json",
+  "source_research": "data/editorial-research/record-growth-batch-1-pr358-candidates.json",
+  "selection_rule": "context_grouped_reviewed_new_identity_non_ranking",
+  "context_group": "current_usd_payment_stablecoins_with_distinct_stabilization_models",
+  "canonical_count_before": 110,
+  "maximum_new_assets": 2,
+  "planned_canonical_count_after": 112,
+  "canonical_count_after": 112,
+  "selected_candidates": [
+    {
+      "candidate_id": "sog_cand_pr358_xusd",
+      "proposed_asset_id": "sog_st_xusd",
+      "proposed_slug": "straitsx-usd-xusd",
+      "symbol": "XUSD"
+    },
+    {
+      "candidate_id": "sog_cand_pr358_usdb",
+      "proposed_asset_id": "sog_st_usdb",
+      "proposed_slug": "blast-usdb",
+      "symbol": "USDB"
+    }
+  ],
+  "full_record_minimum": {
+    "entity": true,
+    "classification": true,
+    "profile": true,
+    "legal_profile": true,
+    "income_profile": true,
+    "reserve_components": true,
+    "organization_relationships": true,
+    "deployments": true,
+    "events_per_asset_minimum": 1,
+    "evidence_per_asset_minimum": 3,
+    "evidence_relation_parity": true,
+    "known_unknowns_for_unresolved_fields": true
+  },
+  "expected_post_promotion_counts": {
+    "assets": 112,
+    "organizations": 105,
+    "relationships": 122,
+    "events": 187,
+    "evidence": 557,
+    "market_access_records": 4,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "legal_profiles": 112,
+    "stable_asset_relationships": 5,
+    "reserve_components": 145,
+    "income_profiles": 112
+  },
+  "promotion_policy": {
+    "automatic": false,
+    "manual_review_required": true,
+    "candidate_selection_is_not_canonical_promotion": true,
+    "thin_record_allowed": false,
+    "promotion_requires_deterministic_impact_report": true,
+    "promotion_requires_full_duplicate_review": true,
+    "promotion_requires_current_source_review": true
+  },
+  "boundaries": {
+    "new_public_surface_allowed": false,
+    "market_access_records_allowed": false,
+    "compare_preset_membership_change_allowed": false,
+    "comparison_readiness_semantics_change_allowed": false,
+    "facet_freshness_semantics_change_allowed": false,
+    "monitoring_auto_promotion_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false
+  },
+  "next_pr": 359
+}

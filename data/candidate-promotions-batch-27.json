@@ -1,0 +1,16 @@
+[
+  {
+    "candidate_id": "sog_cand_000111",
+    "status": "promoted",
+    "promotion_pr": 358,
+    "promoted_record_id": "sog_st_xusd",
+    "notes": "Promoted by PR #358 after full duplicate review and complete canonical-record validation. XUSD is retained as a distinct StraitsX USD identity with reviewed issuer, redemption, reserve, deployment, legal, event, Evidence, and known-unknown records."
+  },
+  {
+    "candidate_id": "sog_cand_000112",
+    "status": "promoted",
+    "promotion_pr": 358,
+    "promoted_record_id": "sog_st_usdb",
+    "notes": "Promoted by PR #358 after full duplicate review and complete canonical-record validation. USDB is retained as a distinct Blast-native rebasing stablecoin with reviewed bridge, reserve, redemption, deployment, lineage, income, event, Evidence, and known-unknown records."
+  }
+]

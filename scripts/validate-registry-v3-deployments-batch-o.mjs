@@ -8,10 +8,13 @@ const replacement = `
 const baselineBase = readJson(baselinePath) ?? {};
 const baselineGroups = { ...(baselineBase.data_groups ?? {}) };
 const minimumCounts = { ...(baselineBase.minimum_counts ?? {}) };
-for (const suffix of ['o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']) {
+for (const suffix of ['o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'za']) {
   const overlayPath = \`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`;
   const overlay = readJson(overlayPath) ?? {};
-  Object.assign(minimumCounts, overlay.minimum_counts ?? {});
+  for (const [name, value] of Object.entries(overlay.minimum_counts ?? {})) {
+    if (Number.isFinite(value) && Number.isFinite(minimumCounts[name])) minimumCounts[name] = Math.max(minimumCounts[name], value);
+    else minimumCounts[name] = value;
+  }
   for (const [name, additions] of Object.entries(overlay.data_group_additions ?? {})) {
     baselineGroups[name] = [...new Set([...(baselineGroups[name] ?? []), ...additions])];
   }

@@ -1,6 +1,6 @@
 {
   "schema_version":"1.0","source_commit":"unknown","source_branch":"main","generated_at":"1970-01-01T00:00:00.000Z","canonical_data_hash":"sha256:0000000000000000000000000000000000000000000000000000000000000000","canonical_file_count":0,
-  "canonical_record_counts":{"stablecoins":110,"organizations":103,"relationships":120,"classifications":110,"profiles":110,"events":185,"event_details":185,"evidence":551,"evidence_relations":551,"reserve_reports":118,"known_unknowns":319,"regulatory_notes":9,"deployments":170,"legal_profiles":110,"stable_asset_relationships":4,"reserve_components":143,"income_profiles":110},
-  "route_counts":{"stablecoin_detail":110,"organization_detail":103,"event_detail":185,"total_detail":398,"declared_main_routes":13},
+  "canonical_record_counts":{"stablecoins":112,"organizations":105,"relationships":122,"classifications":112,"profiles":112,"events":187,"event_details":187,"evidence":557,"evidence_relations":557,"reserve_reports":120,"known_unknowns":325,"regulatory_notes":9,"deployments":174,"legal_profiles":112,"stable_asset_relationships":5,"reserve_components":145,"income_profiles":112},
+  "route_counts":{"stablecoin_detail":112,"organization_detail":105,"event_detail":187,"total_detail":404,"declared_main_routes":13},
   "verification_marker":"sog_build_provenance_v1"
 }

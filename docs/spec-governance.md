@@ -44,7 +44,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/tier-a-dossier-batch-3-pr357-spec.md
+docs/quality/record-growth-batch-1-pr358-spec.md
 ```
 
 Current required prior outputs:
@@ -77,7 +77,7 @@ A non-trivial PR is not ready for implementation until the exact roadmap item an
 ## 4. Current execution state
 
 ```text
-Canonical stable assets: 110
+Canonical stable assets: 112
 PR #351 Monthly Maintenance Log: complete
 current public-surface expansion sequence: complete
 PR #352 post-351 authority reset: complete
@@ -85,8 +85,9 @@ PR #353 Record Depth & Coverage Baseline: complete
 PR #354 Tier A Dossier Deepening — Batch 1: complete
 PR #355 Tier A Dossier Deepening — Batch 2: complete
 PR #356 Market Access Pilot 1: complete
-PR #357 Tier A Dossier Deepening — Batch 3: active
-PR #358 Record Growth Batch 1: next
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
+PR #359 Market Access Pilot 2: next
 ```
 
 Approved bounded sequence:
@@ -97,9 +98,9 @@ PR #353  Record Depth & Coverage Baseline — complete
 PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — complete
-PR #357  Tier A Dossier Deepening — Batch 3 — active
-PR #358  Record Growth Batch 1 — next
-PR #359  Market Access Pilot 2
+PR #357  Tier A Dossier Deepening — Batch 3 — complete
+PR #358  Record Growth Batch 1 — active
+PR #359  Market Access Pilot 2 — next
 PR #360  Evidence and Correction Batch
 REVIEW GATE
 ```
@@ -163,7 +164,7 @@ config/market-access-pilot-1-pr356.json
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-### Active PR #357 Tier A Dossier Deepening — Batch 3
+### Completed PR #357 Tier A Dossier Deepening — Batch 3
 
 ```text
 docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
@@ -176,7 +177,18 @@ docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
 docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
 ```
 
-The selected assets are AUDD, FEI, HUSD, MIM, and NZDS. Changes are limited to authorized dossier dimensions and must preserve 110 assets and four canonical Market Access Records.
+The selected assets were AUDD, FEI, HUSD, MIM, and NZDS. PR #357 preserved 110 assets and four canonical Market Access Records before handing off to PR #358.
+
+### Active PR #358 Record Growth Batch 1
+
+```text
+docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
+```
+
+The active branch promotes complete reviewed XUSD and USDB records, advances the canonical checkpoint from 110 to 112 assets, preserves four Market Access Records, prohibits automatic promotion and thin records, and adds no new public product surface.
 
 ### Completed derived-surface semantics
 
@@ -485,8 +497,8 @@ Current work item:
 
 ```text
 PR #356 Market Access Pilot 1: complete
-PR #357 Tier A Dossier Deepening — Batch 3: active
-PR #358 Record Growth Batch 1: next
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
 ```
 
 Binding references:
@@ -513,4 +525,39 @@ NZDS
 ```
 
 This is deterministic queue consumption, not a ranking. PR #357 preserves 110 canonical stable assets, four canonical Market Access Records, canonical-only publication, and the existing public-surface boundary.
+
+## PR #358 active authority
+
+Current work item:
+
+```text
+PR #357 Tier A Dossier Deepening — Batch 3: complete
+PR #358 Record Growth Batch 1: active
+PR #359 Market Access Pilot 2: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-13-pr358-record-growth-batch-1-activation.md
+docs/quality/record-growth-batch-1-pr358-spec.md
+config/record-growth-batch-1-pr358.json
+data/editorial-research/record-growth-batch-1-pr358-candidates.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
+```
+
+Selected context group:
+
+```text
+current USD payment stablecoins with distinct stabilization models
+```
+
+Selected candidates:
+
+```text
+StraitsX USD / XUSD / sog_st_xusd
+USDB / USDB / sog_st_usdb
+```
+
+Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
 

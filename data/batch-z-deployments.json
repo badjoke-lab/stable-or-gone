@@ -1,0 +1,77 @@
+[
+  {
+    "id": "sog_dep_xusd_ethereum_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "chain": "ethereum",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "erc20",
+    "contract_address": "0xC08e7E23C235073C6807C2EFE7021304cb7c2815",
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "issuer_controlled",
+    "verification_status": "verified",
+    "control_event_ids": [],
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358"
+    ],
+    "notes": "Official XUSD product page publishes this Ethereum ERC-20 contract."
+  },
+  {
+    "id": "sog_dep_xusd_bsc_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "chain": "bnb_smart_chain",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "bep20",
+    "contract_address": "0xF81aC2E1A0373ddE1BCE01E2Fe694a9b7E3bfcB9",
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": false,
+    "mint_authority_type": "issuer_controlled",
+    "verification_status": "verified",
+    "control_event_ids": [],
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358"
+    ],
+    "notes": "Official XUSD product page publishes this BNB Smart Chain BEP-20 contract."
+  },
+  {
+    "id": "sog_dep_xusd_solana_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "chain": "solana",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "spl_token",
+    "contract_address": "4UbvZiomFvXDnZSz6vdHiDNiHozH2ykTEqjhhbVHiv9z",
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": false,
+    "mint_authority_type": "issuer_controlled",
+    "verification_status": "verified",
+    "control_event_ids": [],
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358"
+    ],
+    "notes": "Official XUSD product page publishes this Solana token identifier."
+  },
+  {
+    "id": "sog_dep_usdb_blast_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "chain": "blast",
+    "deployment_type": "protocol_native_token",
+    "token_standard": "erc20",
+    "contract_address": "0x4300000000000000000000000000000000000003",
+    "status": "active",
+    "canonicality": "native",
+    "is_primary": true,
+    "mint_authority_type": "bridge_and_protocol_controlled",
+    "verification_status": "verified",
+    "control_event_ids": [
+      "sog_ev_usdb_blast_launch_pr358"
+    ],
+    "evidence_ids": [
+      "sog_src_usdb_contract_pr358",
+      "sog_src_usdb_docs_pr358"
+    ],
+    "notes": "Blast documentation publishes this USDB mainnet contract and describes native rebasing and bridge redemption."
+  }
+]

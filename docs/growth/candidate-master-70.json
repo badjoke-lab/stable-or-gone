@@ -1,8 +1,8 @@
 {
   "schema_version":"2.0",
-  "status":"batch_026_complete",
-  "candidate_files":["data/candidate-stable-assets.json","data/candidate-stable-assets-growth-70.json","data/candidate-stable-assets-growth-75.json","data/candidate-stable-assets-growth-80.json","data/candidate-stable-assets-emergency-msusd.json","data/candidate-stable-assets-emergency-jpysc.json","data/candidate-stable-assets-growth-85.json","data/candidate-stable-assets-growth-90.json","data/candidate-stable-assets-growth-100.json","data/candidate-stable-assets-growth-110.json"],
-  "protected_minimums":{"total_candidates":110,"promoted_candidates":110,"pending_candidates":0},
+  "status":"batch_027_complete",
+  "candidate_files":["data/candidate-stable-assets.json","data/candidate-stable-assets-growth-70.json","data/candidate-stable-assets-growth-75.json","data/candidate-stable-assets-growth-80.json","data/candidate-stable-assets-emergency-msusd.json","data/candidate-stable-assets-emergency-jpysc.json","data/candidate-stable-assets-growth-85.json","data/candidate-stable-assets-growth-90.json","data/candidate-stable-assets-growth-100.json","data/candidate-stable-assets-growth-110.json","data/candidate-stable-assets-growth-112.json"],
+  "protected_minimums":{"total_candidates":112,"promoted_candidates":112,"pending_candidates":0},
   "planned_batches":{
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -24,6 +24,7 @@
     "batch_023":{"minimum_candidates":2,"theme":"StablR EUR and USD incident-state review"},
     "batch_024":{"minimum_candidates":2,"theme":"Philippine peso and Indonesian rupiah stablecoins"},
     "batch_025":{"minimum_candidates":2,"theme":"Canadian dollar and South African rand stablecoins"},
-    "batch_026":{"minimum_candidates":2,"theme":"Australian and New Zealand dollar stablecoins"}
+    "batch_026":{"minimum_candidates":2,"theme":"Australian and New Zealand dollar stablecoins"},
+    "batch_027":{"minimum_candidates":2,"theme":"current USD payment stablecoins with distinct stabilization models"}
   }
 }

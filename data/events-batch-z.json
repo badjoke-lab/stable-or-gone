@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_ev_xusd_attestation_start_pr358",
+    "stablecoin_id": "sog_st_xusd",
+    "issuer_id": "sog_issuer_straitsx_singapore",
+    "event_type": "mainnet_availability_report",
+    "event_date": "2024-02-29",
+    "title": "XUSD reserve attestation history is published from February 2024",
+    "description": "The current StraitsX XUSD product page publishes a reserve-attestation series beginning with a 29 February 2024 report and later continuing on a monthly cadence.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "notes": "This is the earliest dated official XUSD checkpoint in the reviewed source set; it is not asserted as the exact first mint or launch date."
+  },
+  {
+    "id": "sog_ev_usdb_blast_launch_pr358",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_type": "launch",
+    "event_date": "2024-02-29",
+    "title": "Blast mainnet introduces native USDB",
+    "description": "Blast mainnet made USDB available as its native auto-rebasing stablecoin, with stablecoin bridge deposits represented as USDB and bridge-back redemption described in DAI.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "active",
+    "notes": "The event records protocol launch context and does not establish a direct fiat issuer claim."
+  }
+]

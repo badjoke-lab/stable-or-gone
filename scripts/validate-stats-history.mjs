@@ -42,6 +42,12 @@ function orderingFailures(rows) {
     if (snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind === 'non_growth_normalization_checkpoint') {
       issues.push(`${label}: non-growth checkpoint may not increase asset_count`);
     }
+    if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind != null && snapshot.checkpoint_kind !== 'controlled_growth_checkpoint') {
+      issues.push(`${label}: typed increased asset_count checkpoint requires controlled_growth_checkpoint kind`);
+    }
+    if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind === 'controlled_growth_checkpoint' && snapshot.source_checkpoint_id !== previousCheckpointId) {
+      issues.push(`${label}: typed growth checkpoint must source the immediately preceding history checkpoint`);
+    }
 
     previousAssetCount = snapshot.asset_count;
     previousRecordedAt = snapshot.recorded_at;
@@ -83,6 +89,9 @@ for (const [index, snapshot] of snapshots.entries()) {
 
   check(Number.isInteger(snapshot.asset_count) && snapshot.asset_count > 0, `${label}: asset_count must be a positive integer`);
   check(/^\d{4}-\d{2}-\d{2}$/.test(snapshot.recorded_at ?? ''), `${label}: recorded_at must be YYYY-MM-DD`);
+  if (snapshot.checkpoint_kind != null) {
+    check(['controlled_growth_checkpoint', 'non_growth_normalization_checkpoint'].includes(snapshot.checkpoint_kind), `${label}: invalid checkpoint_kind`);
+  }
 
   check(isSha256(snapshot.input_digest_sha256), `${label}: input_digest_sha256 invalid`);
   check(isSha256(snapshot.stats_model_sha256), `${label}: stats_model_sha256 invalid`);
@@ -116,6 +125,10 @@ if (snapshots.length > 0) {
   const fixtureGrowthAppend = structuredClone(snapshots[0]);
   fixtureGrowthAppend.checkpoint_id = 'fixture_future_growth_checkpoint';
   fixtureGrowthAppend.asset_count += 1;
+  fixtureGrowthAppend.totals.assets += 1;
+  fixtureGrowthAppend.checkpoint_kind = 'controlled_growth_checkpoint';
+  fixtureGrowthAppend.source_checkpoint_id = snapshots[0].checkpoint_id;
+  check(orderingFailures([...fixtureBase, fixtureGrowthAppend]).length === 0, 'ordering fixture rejected a valid growth append');
   check(prefixFailures(fixtureBase, [...fixtureBase, fixtureGrowthAppend]).length === 0, 'immutability fixture rejected a valid growth append');
 
   const fixtureSameCountAppend = structuredClone(snapshots[0]);
@@ -136,8 +149,13 @@ check(currentIndex >= 0, `current checkpoint missing from history: ${currentSnap
 if (currentIndex >= 0) check(isDeepStrictEqual(snapshots[currentIndex], currentSnapshot), 'current checkpoint snapshot differs from deterministic current stats snapshot');
 
 if (historyCheckpoint) {
-  check(historyCheckpoint.status === 'reviewed_non_growth_checkpoint', 'current stats-history checkpoint status mismatch');
-  check(historyCheckpoint.checkpoint_kind === 'non_growth_normalization_checkpoint', 'current stats-history checkpoint kind mismatch');
+  const checkpointContracts = {
+    reviewed_growth_checkpoint: 'controlled_growth_checkpoint',
+    reviewed_non_growth_checkpoint: 'non_growth_normalization_checkpoint'
+  };
+  const expectedKind = checkpointContracts[historyCheckpoint.status];
+  check(Boolean(expectedKind), 'current stats-history checkpoint status mismatch');
+  if (expectedKind) check(historyCheckpoint.checkpoint_kind === expectedKind, 'current stats-history checkpoint kind mismatch');
   check(historyCheckpoint.checkpoint_id === currentSnapshot.checkpoint_id, 'current stats-history checkpoint ID differs from deterministic snapshot');
   check(historyCheckpoint.asset_count === currentSnapshot.asset_count, 'current stats-history checkpoint asset count mismatch');
   check(historyCheckpoint.source_checkpoint_id === currentSnapshot.source_checkpoint_id, 'current stats-history source checkpoint mismatch');
@@ -172,7 +190,7 @@ const report = {
   current_snapshot_sha256: currentSnapshot.snapshot_sha256,
   base_ref: baseRef ?? null,
   base_prefix_count: basePrefixCount,
-  ordering_policy: 'checkpoint_progression_non_decreasing_asset_count',
+  ordering_policy: 'legacy_growth_compatible_typed_checkpoint_progression',
   immutability_negative_fixtures: snapshots.length > 0 ? 'passed' : 'not_run',
   failures,
   ok: failures.length === 0

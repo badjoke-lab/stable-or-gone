@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "contract_id": "sog_facet_freshness_contract_pr342_v1",
   "status": "canonical_internal_derivation_contract",
-  "as_of_date": "2026-07-12",
+  "as_of_date": "2026-07-13",
   "comparison_contract_id": "sog_comparison_readiness_contract_pr336_v1",
   "market_access_governance_id": "sog_market_access_governance_v1_pr341",
   "freshness_states": [
@@ -80,9 +80,9 @@
     {"dimension_id":"known_unknown_visibility","anchor_kind":"latest_known_unknown_checked_at","threshold_profile":"known_unknown_review","no_record_state":"no_canonical_record","no_date_state":"undated","date_semantics":"known_unknown_last_checked_date","inherited_review_anchor":false}
   ],
   "output_contract": {
-    "asset_count": 110,
+    "asset_count": 112,
     "dimension_count": 19,
-    "cell_count": 2090,
+    "cell_count": 2128,
     "per_asset_per_dimension_required": true,
     "single_composite_score_forbidden": true,
     "public_output": false,

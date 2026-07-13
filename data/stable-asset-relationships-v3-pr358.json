@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sog_ar_usdb_redeemable_into_dai_pr358",
+    "from_asset_id": "sog_st_usdb",
+    "to_asset_id": "sog_st_dai",
+    "relationship_type": "redeemable_into",
+    "status": "active",
+    "start_date": "2024-02-29",
+    "end_date": null,
+    "evidence_ids": [
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_about_pr358"
+    ],
+    "conversion_terms": "USDB is described as redeemable for DAI when bridging back to Ethereum.",
+    "notes": "This relation records protocol bridge conversion, not a direct one-dollar fiat redemption claim."
+  }
+]

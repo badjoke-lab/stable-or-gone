@@ -1,0 +1,29 @@
+[
+  {
+    "id": "sog_st_xusd",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": [
+      "sog_src_xusd_product_pr358"
+    ],
+    "notes": "No issuer-native XUSD yield or balance rebase is asserted. Third-party DeFi opportunities are outside this profile."
+  },
+  {
+    "id": "sog_st_usdb",
+    "availability": "native",
+    "source": "reserve_income",
+    "accrual": "balance_rebase",
+    "rate": "protocol_determined",
+    "related_asset_ids": [
+      "sog_st_dai"
+    ],
+    "evidence_ids": [
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_about_pr358"
+    ],
+    "notes": "USDB is described as auto-rebasing. Historical documentation names MakerDAO on-chain T-bill infrastructure as the yield source and allows future replacement; no fixed rate is asserted."
+  }
+]

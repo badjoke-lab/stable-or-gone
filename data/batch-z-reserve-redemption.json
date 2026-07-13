@@ -1,0 +1,80 @@
+[
+  {
+    "id": "sog_st_xusd",
+    "reserve_profile": {
+      "backing_types": [
+        "cash",
+        "bank_deposits"
+      ],
+      "summary": "StraitsX states that XUSD is fully backed by reserve assets and publishes reserve attestation reports from an ISCA-listed auditing firm on a monthly basis.",
+      "disclosure_status": "monthly_attestations_published",
+      "as_of_date": "2026-07-13",
+      "latest_report_id": "sog_rr_xusd_attestation_index_pr358",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_xusd_product_pr358",
+        "sog_src_xusd_sg_pr358"
+      ]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD",
+      "eligible_parties": "Eligible StraitsX customers subject to onboarding, product availability, fees, limits, and jurisdiction restrictions.",
+      "retail_access": "available_subject_to_onboarding",
+      "institutional_access": "available_subject_to_onboarding",
+      "minimum_amount_text": "Not established in the reviewed public source set.",
+      "fee_text": "The public product page lists transfer pricing; complete issuer-redemption pricing and account-tier terms require terms-level review.",
+      "settlement_time_text": "Not established in the reviewed public source set.",
+      "jurisdiction_restrictions": [
+        "StraitsX onboarding and jurisdiction restrictions apply.",
+        "No universal global redemption eligibility is inferred."
+      ],
+      "redemption_url": "https://www.straitsx.com/xusd",
+      "as_of_date": "2026-07-13",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_xusd_product_pr358",
+        "sog_src_xusd_sg_pr358"
+      ]
+    }
+  },
+  {
+    "id": "sog_st_usdb",
+    "reserve_profile": {
+      "backing_types": [
+        "stablecoin_collateral",
+        "tokenized_fund"
+      ],
+      "summary": "Blast documentation describes USDB as issued when users bridge stablecoins, historically linked to DAI and MakerDAO on-chain T-bill yield. This is a protocol backing description, not an issuer reserve attestation.",
+      "disclosure_status": "official_protocol_description_no_asset_level_attestation",
+      "as_of_date": "2026-07-13",
+      "latest_report_id": "sog_rr_usdb_protocol_backing_pr358",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_usdb_docs_pr358",
+        "sog_src_usdb_about_pr358"
+      ]
+    },
+    "redemption_profile": {
+      "status": "protocol_based",
+      "settlement_asset": "DAI",
+      "eligible_parties": "Users able to access and operate the Blast bridge.",
+      "retail_access": "protocol_bridge_available",
+      "institutional_access": "protocol_bridge_available",
+      "minimum_amount_text": "Not established in the reviewed public source set.",
+      "fee_text": "Bridge and network fees may apply; exact terms require current bridge review.",
+      "settlement_time_text": "Depends on bridge and network operation.",
+      "jurisdiction_restrictions": [
+        "Protocol and interface access conditions apply.",
+        "DAI bridge redemption is not direct fiat redemption."
+      ],
+      "redemption_url": null,
+      "as_of_date": "2026-07-13",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_usdb_docs_pr358",
+        "sog_src_usdb_about_pr358"
+      ]
+    }
+  }
+]

@@ -1,41 +1,41 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_pr357_110_assets_2026_07_13",
+  "baseline_id": "sog_registry_v3_parity_pr358_112_assets_2026_07_13",
   "recorded_at": "2026-07-13",
-  "data_checkpoint_commit": "pr357-tier-a-dossier-batch-3",
-  "source_baseline_id": "sog_registry_v3_parity_pr356_110_assets_2026_07_12",
-  "canonical_checkpoint_id": "sog_tier_a_dossier_batch_3_canonical_110_checkpoint_pr357_2026_07_13",
+  "data_checkpoint_commit": "pr358-record-growth-batch-1",
+  "source_baseline_id": "sog_registry_v3_parity_pr357_110_assets_2026_07_13",
+  "canonical_checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
   "expected_v2_counts": {
-    "stablecoins": 110,
-    "organizations": 103,
-    "relationships": 120,
-    "classifications": 110,
-    "profiles": 110,
-    "events": 185,
-    "event_details": 185,
-    "evidence": 551,
-    "evidence_relations": 551,
-    "reserve_reports": 118,
-    "known_unknowns": 319,
+    "stablecoins": 112,
+    "organizations": 105,
+    "relationships": 122,
+    "classifications": 112,
+    "profiles": 112,
+    "events": 187,
+    "event_details": 187,
+    "evidence": 557,
+    "evidence_relations": 557,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
     "regulatory_notes": 9,
-    "deployments": 170
+    "deployments": 174
   },
   "expected_v3_counts": {
-    "legal_profiles": 110,
-    "stable_asset_relationships": 4,
-    "reserve_components": 143,
-    "income_profiles": 110,
-    "deployment_view": 170
+    "legal_profiles": 112,
+    "stable_asset_relationships": 5,
+    "reserve_components": 145,
+    "income_profiles": 112,
+    "deployment_view": 174
   },
   "expected_v3_coverage": {
-    "legal_profiles": 110,
-    "income_profiles": 110,
-    "reserve_component_assets": 110,
-    "deployment_view_assets": 110
+    "legal_profiles": 112,
+    "income_profiles": 112,
+    "reserve_component_assets": 112,
+    "deployment_view_assets": 112
   },
   "machine_readable_contract": {
     "schema_version": "1.0.0",
@@ -52,5 +52,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline preserves all 110-asset v2/v3 counts while binding reviewed FEI, HUSD, and MIM legal-profile and redemption-context improvements to the PR #357 canonical checkpoint. Four canonical Market Access Records remain governed separately by Market Access v1. Historical checkpoints remain append-only."
+  "notes": "Current parity baseline binds the complete reviewed XUSD and USDB growth records to the PR #358 canonical 112-asset checkpoint. XUSD contributes issuer-mediated fiat redemption and three verified deployments. USDB contributes protocol bridge redemption into DAI, native rebasing, one verified Blast deployment, and one stable-asset relationship. Four canonical Market Access Records remain governed separately."
 }
