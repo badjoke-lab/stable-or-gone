@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_growth_overlay",
+  "review_pr": 358,
+  "reviewed_at": "2026-07-13",
+  "expected_additions": 4,
+  "status_counts": {
+    "verified": 4,
+    "identifier_recorded_unverified": 0,
+    "source_linked_no_identifier": 0,
+    "review_needed": 0,
+    "unknown": 0,
+    "not_recorded": 0
+  },
+  "status_ids": {
+    "verified": [
+      "sog_dep_xusd_ethereum_pr358",
+      "sog_dep_xusd_bsc_pr358",
+      "sog_dep_xusd_solana_pr358",
+      "sog_dep_usdb_blast_pr358"
+    ],
+    "identifier_recorded_unverified": [],
+    "source_linked_no_identifier": [],
+    "review_needed": [],
+    "unknown": [],
+    "not_recorded": []
+  },
+  "reviewed_records": [
+    {
+      "id": "sog_dep_xusd_ethereum_pr358",
+      "identifier_type": "evm_contract",
+      "identifier": "0xC08e7E23C235073C6807C2EFE7021304cb7c2815",
+      "source_url": "https://www.straitsx.com/xusd"
+    },
+    {
+      "id": "sog_dep_xusd_bsc_pr358",
+      "identifier_type": "evm_contract",
+      "identifier": "0xF81aC2E1A0373ddE1BCE01E2Fe694a9b7E3bfcB9",
+      "source_url": "https://www.straitsx.com/xusd"
+    },
+    {
+      "id": "sog_dep_xusd_solana_pr358",
+      "identifier_type": "solana_mint",
+      "identifier": "4UbvZiomFvXDnZSz6vdHiDNiHozH2ykTEqjhhbVHiv9z",
+      "source_url": "https://www.straitsx.com/xusd"
+    },
+    {
+      "id": "sog_dep_usdb_blast_pr358",
+      "identifier_type": "evm_contract",
+      "identifier": "0x4300000000000000000000000000000000000003",
+      "source_url": "https://docs.blast.io/about-blast"
+    }
+  ]
+}
