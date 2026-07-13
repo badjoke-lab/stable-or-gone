@@ -538,14 +538,14 @@ docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
 Selected context group:
 
 ```text
-current USD reserve-backed institutional stablecoins
+current USD payment stablecoins with distinct stabilization models
 ```
 
 Selected candidates:
 
 ```text
-Global Dollar / USDG / sog_st_usdg
-World Liberty Financial USD1 / USD1 / sog_st_usd1
+StraitsX USD / XUSD / sog_st_xusd
+USDB / USDB / sog_st_usdb
 ```
 
 Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.

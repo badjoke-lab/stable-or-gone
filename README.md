@@ -146,7 +146,7 @@ It may deepen only the authorized events, lifecycle, organization-relationship, 
 
 ## Active PR #358 Record Growth Batch 1
 
-PR #358 is bounded to full-record review of Global Dollar (USDG) and World Liberty Financial USD1 (USD1). Candidate selection remains noncanonical until duplicate, evidence, organization, profile, deployment, event, and known-unknown requirements are satisfied.
+PR #358 is bounded to full-record review of StraitsX USD (XUSD) and USDB. Candidate selection remains noncanonical until duplicate, evidence, organization, profile, deployment, event, and known-unknown requirements are satisfied.
 
 ## Post-351 operating mode
 
@@ -409,14 +409,14 @@ docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
 Selected context group:
 
 ```text
-current USD reserve-backed institutional stablecoins
+current USD payment stablecoins with distinct stabilization models
 ```
 
 Selected candidates:
 
 ```text
-Global Dollar / USDG / sog_st_usdg
-World Liberty Financial USD1 / USD1 / sog_st_usd1
+StraitsX USD / XUSD / sog_st_xusd
+USDB / USDB / sog_st_usdb
 ```
 
 Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
