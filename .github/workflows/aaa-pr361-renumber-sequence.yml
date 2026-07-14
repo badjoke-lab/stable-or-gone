@@ -1,0 +1,49 @@
+name: AAA PR361 Renumber Sequence
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  renumber:
+    if: github.head_ref == 'pr361-post-pr360-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr361-post-pr360-review-gate
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Renumber approved sequence and rebuild report
+        run: node scripts/renumber-pr361-sequence-after-duplicate.mjs
+
+      - name: Validate review gate
+        run: |
+          node scripts/validate-post-pr360-review-gate-pr361.mjs
+          npm run validate:active-workstream
+
+      - name: Remove one-time repair files
+        run: |
+          rm scripts/renumber-pr361-sequence-after-duplicate.mjs
+          rm .github/workflows/aaa-pr361-renumber-sequence.yml
+
+      - name: Commit corrected sequence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Align post-review-gate sequence with available PR numbers'
+          git push origin HEAD:pr361-post-pr360-review-gate
