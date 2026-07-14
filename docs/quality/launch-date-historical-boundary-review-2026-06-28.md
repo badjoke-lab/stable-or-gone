@@ -2,8 +2,8 @@
 
 Status: supporting audit  
 Date: 2026-06-28  
-Updated for controlled growth: 2026-07-09  
-Roadmap items: PR #219 base review, PR #330 queue extension, PR #332 queue extension, PR #333 queue extension, PR #334 queue extension, PR #335 queue extension
+Updated for controlled growth: 2026-07-13  
+Roadmap items: PR #219 base review, PR #330 queue extension, PR #332 queue extension, PR #333 queue extension, PR #334 queue extension, PR #335 queue extension, PR #358 queue extension
 
 ## Scope
 
@@ -19,22 +19,22 @@ Magic Internet Money
 mStable USD
 ```
 
-PR #330 extends the same unresolved-date discipline to EURe and poundtoken (1GBP). PR #332 extends it to StablR Euro (EURR) and StablR USD (USDR). PR #333 extends it to PHPC. PR #334 extends it to CADC and ZARP. PR #335 extends it to AUDD and NZDS. The review separates issuer service start, contract deployment, first mint, public interface availability, exchange listing, version activation, later deployment events, current product availability, sandbox testing, network launch, issuer transition, token migration, and incident-response chronology.
+PR #330 extends the same unresolved-date discipline to EURe and poundtoken (1GBP). PR #332 extends it to StablR Euro (EURR) and StablR USD (USDR). PR #333 extends it to PHPC. PR #334 extends it to CADC and ZARP. PR #335 extends it to AUDD and NZDS. PR #358 extends it to XUSD. The review separates issuer service start, contract deployment, first mint, public interface availability, exchange listing, version activation, later deployment events, current product availability, sandbox testing, network launch, issuer transition, token migration, and incident-response chronology.
 
 ## Result
 
 GYEN is resolved to `2021-03-01`. GMO's official launch release states that GMO Trust began GYEN issuance, redemption, and service on that date, and a later official retrospective independently repeats the same service-start date.
 
-Other queued assets remain `null` where day-level evidence for the exact SOG asset-launch boundary is not established. PR #330 does not convert current EURe availability or historical 1GBP contract/product evidence into an invented launch day. PR #332 likewise does not treat current StablR product pages, later deployment documentation, or May-June 2026 incident history as evidence of the original EURR or USDR launch day. PR #333 does not coerce PHPC sandbox testing or the dated Ronin network deployment launch into the original PHPC asset-launch day. PR #334 does not coerce CADC's 2021 year-level origin or 2025 issuer transition, nor ZARP's current availability or 2025 Solana migration, into original day-level launch dates. PR #335 does not convert historical AUDD or NZDS product identity, issuer association, or source-linked deployment context into an invented first issuance or redemption day.
+Other queued assets remain `null` where day-level evidence for the exact SOG asset-launch boundary is not established. PR #330 does not convert current EURe availability or historical 1GBP contract/product evidence into an invented launch day. PR #332 likewise does not treat current StablR product pages, later deployment documentation, or May-June 2026 incident history as evidence of the original EURR or USDR launch day. PR #333 does not coerce PHPC sandbox testing or the dated Ronin network deployment launch into the original PHPC asset-launch day. PR #334 does not coerce CADC's 2021 year-level origin or 2025 issuer transition, nor ZARP's current availability or 2025 Solana migration, into original day-level launch dates. PR #335 does not convert historical AUDD or NZDS product identity, issuer association, or source-linked deployment context into an invented first issuance or redemption day. PR #358 does not convert XUSD's verified current product, redemption, reserve, or deployment availability into an invented original launch day.
 
 ```text
-Total unresolved: 28
+Total unresolved: 29
 Category B: 3
-Category C: 25
+Category C: 26
 Category D: 0
 ```
 
-The registry has advanced to 110 stable assets through PR #335 controlled growth. The launch queue expands by AUDD and NZDS while the audited 100-asset and reviewed 102/104/106/108-asset checkpoints remain historical evidence.
+The registry has advanced to 112 stable assets through PR #358 controlled growth. The launch queue includes XUSD while the audited 100-asset and reviewed 102/104/106/108/110-asset checkpoints remain historical evidence.
 
 ## Decisions
 
@@ -56,6 +56,7 @@ The registry has advanced to 110 stable assets through PR #335 controlled growth
 | ZARP | Preserve `null` | Current product, reserve, redemption, and deployment documentation and a dated 2025 Solana migration are verified, but none establishes the original first public issuance or redemption day. |
 | AUDD | Preserve `null` | Historical AUDD product identity and Australian-dollar reference do not establish the exact first public issuance, first mint, or first redeemable-service day. |
 | NZDS | Preserve `null` | Historical NZDS identity and Techemynt association do not establish the exact first public issuance, first mint, or first redeemable-service day. |
+| XUSD | Preserve `null` | Current StraitsX product, redemption, reserve, and deployment records establish current availability but not the exact original first public issuance or redemption day. |
 
 ## Full unresolved queue snapshot
 
@@ -88,6 +89,7 @@ sog_st_cadc
 sog_st_zarp
 sog_st_audd
 sog_st_nzds
+sog_st_xusd
 ```
 
 ## Fixed rules applied
@@ -98,34 +100,3 @@ sog_st_nzds
 - Current product availability does not establish original launch day.
 - Sandbox testing does not establish the original public asset launch day.
 - A later network deployment launch does not replace the original asset launch day.
-- An issuer transition or acquisition date does not replace the original asset launch day.
-- A token migration date does not replace the original asset launch day.
-- Incident or recovery chronology does not establish original asset launch day.
-- A retrospective protocol-start date and a later public announcement remain separate boundaries unless the source explicitly equates them.
-- Version launches do not replace the original asset launch.
-- Month- and year-level evidence is not coerced into a day.
-- Historical token persistence does not establish current issuer service availability.
-
-## Data and validation changes
-
-- `sog_st_gyen.launch_date` remains resolved to `2021-03-01`.
-- Existing official GYEN launch evidence remains required.
-- PR #330 adds EURe and 1GBP to the unresolved launch-date queue.
-- PR #332 adds EURR and USDR to the unresolved launch-date queue.
-- PR #333 adds PHPC to the unresolved launch-date queue.
-- PR #334 adds CADC and ZARP to the unresolved launch-date queue.
-- PR #335 adds AUDD and NZDS to the unresolved launch-date queue.
-- Queue distribution becomes `B 3 / C 25 / D 0`.
-- The validator requires GYEN to remain outside the unresolved queue with the canonical date and launch evidence present.
-- The six unresolved PR #219 records retain review dates and reviewed-source arrays.
-- PR #330 Growth E records retain explicit review dates and reviewed-source arrays.
-- PR #332 Growth F records retain explicit review dates and reviewed-source arrays.
-- PR #333 Growth G PHPC retains an explicit review date and reviewed-source array.
-- PR #334 Growth H CADC and ZARP records retain explicit review dates and reviewed-source arrays.
-- PR #335 Growth I AUDD and NZDS records retain explicit review dates and reviewed-source arrays.
-
-## Deployment classification
-
-```text
-No production deployment required
-```
