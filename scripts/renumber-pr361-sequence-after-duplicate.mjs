@@ -2,8 +2,6 @@ import fs from 'node:fs';
 import { buildReviewGate, serializeReviewGate } from './build-post-pr360-review-gate-pr361.mjs';
 
 // One-time deterministic repair after the closed duplicate PR consumed #362.
-// The generated files are exported as an artifact and committed through the contents API.
-// This update triggers the artifact-locator workflow after its final configuration change.
 const textFiles = [
   'README.md',
   'AGENTS.md',
@@ -14,21 +12,34 @@ const textFiles = [
   '.github/workflows/pr361-post-pr360-review-gate.yml'
 ];
 
-const oldItems = [
+const plainOld = [
   'PR #362 Record Depth and Coverage Baseline Refresh',
   'PR #363 Tier A Dossier Deepening Batch 4',
   'PR #364 Evidence and Archive Maintenance Batch 2'
 ];
-const newItems = [
+const plainNew = [
   'PR #363 Record Depth and Coverage Baseline Refresh',
   'PR #364 Tier A Dossier Deepening Batch 4',
   'PR #365 Evidence and Archive Maintenance Batch 2'
 ];
-const placeholders = ['__SOG_NEXT_BASELINE__', '__SOG_NEXT_DOSSIER__', '__SOG_NEXT_EVIDENCE__'];
+const dashOld = [
+  'PR #362 — Record Depth and Coverage Baseline Refresh',
+  'PR #363 — Tier A Dossier Deepening Batch 4',
+  'PR #364 — Evidence and Archive Maintenance Batch 2'
+];
+const dashNew = [
+  'PR #363 — Record Depth and Coverage Baseline Refresh',
+  'PR #364 — Tier A Dossier Deepening Batch 4',
+  'PR #365 — Evidence and Archive Maintenance Batch 2'
+];
+const plainPlaceholders = ['__SOG_NEXT_BASELINE__', '__SOG_NEXT_DOSSIER__', '__SOG_NEXT_EVIDENCE__'];
+const dashPlaceholders = ['__SOG_NEXT_BASELINE_DASH__', '__SOG_NEXT_DOSSIER_DASH__', '__SOG_NEXT_EVIDENCE_DASH__'];
 
 function renumber(body) {
-  for (let i = 0; i < oldItems.length; i += 1) body = body.replaceAll(oldItems[i], placeholders[i]);
-  for (let i = 0; i < newItems.length; i += 1) body = body.replaceAll(placeholders[i], newItems[i]);
+  for (let i = 0; i < plainOld.length; i += 1) body = body.replaceAll(plainOld[i], plainPlaceholders[i]);
+  for (let i = 0; i < dashOld.length; i += 1) body = body.replaceAll(dashOld[i], dashPlaceholders[i]);
+  for (let i = 0; i < plainNew.length; i += 1) body = body.replaceAll(plainPlaceholders[i], plainNew[i]);
+  for (let i = 0; i < dashNew.length; i += 1) body = body.replaceAll(dashPlaceholders[i], dashNew[i]);
 
   const replacements = [
     ['PR #362–#364', 'PR #363–#365'],
@@ -36,6 +47,7 @@ function renumber(body) {
     ['[362,363,364]', '[363,364,365]'],
     ['[362, 363, 364]', '[363, 364, 365]'],
     ['after PR #364', 'after PR #365'],
+    ['After PR #364', 'After PR #365'],
     ['through PR #364', 'through PR #365'],
     ['PR #362 baseline refresh decision', 'PR #363 baseline refresh decision'],
     ['PR #363 dossier decision', 'PR #364 dossier decision'],
@@ -45,7 +57,8 @@ function renumber(body) {
     ['limited to PR #362–#364', 'limited to PR #363–#365'],
     ['approved sequence must be PR #362–#364', 'approved sequence must be PR #363–#365'],
     ['review gate must recur after PR #364', 'review gate must recur after PR #365'],
-    ['PR #362 must follow PR #361', 'PR #363 must follow PR #361']
+    ['PR #362 must follow PR #361', 'PR #363 must follow PR #361'],
+    ['PR #361 as active and PR #362 as next', 'PR #361 as active and PR #363 as next']
   ];
   for (const [from, to] of replacements) body = body.replaceAll(from, to);
   return body;
@@ -55,6 +68,7 @@ for (const file of textFiles) {
   const before = fs.readFileSync(file, 'utf8');
   const after = renumber(before);
   if (before === after) throw new Error(`${file}: no sequence marker was updated`);
+  if (/PR #362(?: | — )Record Depth and Coverage Baseline Refresh/.test(after)) throw new Error(`${file}: stale PR #362 work-item marker remains`);
   fs.writeFileSync(file, after);
 }
 
