@@ -73,10 +73,10 @@ jobs:
         run: npm run validate:evidence-relations-v2
 
       - name: Validate Evidence integrity
-        run: npm run validate:evidence-integrity
+        run: node scripts/validate-registry-evidence-integrity-audit.mjs
 
       - name: Validate organization and relationship integrity
-        run: npm run validate:organizations
+        run: node scripts/validate-registry-organization-relationship-audit.mjs
 
       - name: Validate lifecycle boundary
         run: node scripts/run-registry-lifecycle-boundary-audit.mjs
