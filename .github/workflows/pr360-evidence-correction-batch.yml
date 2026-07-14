@@ -32,6 +32,9 @@ jobs:
       - name: Validate active workstream authority
         run: npm run validate:active-workstream
 
+      - name: Validate bounded Evidence corrections
+        run: node scripts/validate-evidence-correction-batch-pr360.mjs
+
       - name: Validate canonical data
         run: npm run validate:data
 
@@ -133,6 +136,8 @@ jobs:
             - Workflow status: **${{ job.status }}**
             - Selected Evidence records: **${queue?.selected_count ?? 0}**
             - Corrected Evidence records: **${outcomes?.changed_count ?? 0}**
+            - Dated archives added or replaced: **${outcomes?.dated_archive_added_or_replaced_count ?? 0}**
+            - Invalid wildcard archives removed: **${outcomes?.invalid_wildcard_removed_count ?? 0}**
             - Reviewed with no safe change: **${outcomes?.reviewed_no_change_count ?? 0}**
             - Archive indexes: **${outcomes?.archive_index_count_after ?? queue?.archive_index_count ?? 'not-generated'}**
             - Archive not recorded: **${outcomes?.archive_not_recorded_count_after ?? queue?.archive_not_recorded_count ?? 'not-generated'}**
