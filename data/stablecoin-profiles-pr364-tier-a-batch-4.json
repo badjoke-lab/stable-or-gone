@@ -1,0 +1,39 @@
+[
+  {
+    "id": "sog_st_usdg",
+    "reserve_profile": {
+      "backing_types": ["cash", "government_securities"],
+      "summary": "Paxos terms state that USDG issued by Paxos Digital Singapore or Paxos Issuance Europe is backed one-to-one by U.S.-dollar deposits or permitted U.S.-dollar-denominated debt instruments held in segregated accounts for token holders.",
+      "disclosure_status": "official_terms_and_monthly_reports_available",
+      "as_of_date": "2026-07-14",
+      "latest_report_id": null,
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD",
+      "eligible_parties": "Fully verified Paxos customers served by Paxos Digital Singapore or Paxos Issuance Europe where the applicable entity and jurisdiction permit USDG issuance or redemption.",
+      "retail_access": "customer_account_and_identity_verification_required",
+      "institutional_access": "eligible_paxos_customers_direct",
+      "minimum_amount_text": "Paxos may require a redemption minimum equal to the applicable bank wire fee; the minimum may change and redemptions are rounded down to the nearest U.S. cent.",
+      "fee_text": "Paxos states that it does not charge a USD Stablecoin redemption fee, while banking, wallet, transfer, account, or other third-party fees may apply.",
+      "settlement_time_text": "Paxos states that U.S.-dollar withdrawals may take up to two days, with larger withdrawals potentially taking substantially longer; compliance review may also delay processing.",
+      "jurisdiction_restrictions": [
+        "Only verified Paxos customers may redeem directly.",
+        "Service availability depends on residence and the Paxos entity with which the customer is registered.",
+        "Paxos may refuse or suspend issuance or redemption for compliance, account, legal, or platform reasons."
+      ],
+      "redemption_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+      "as_of_date": "2026-07-14",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ]
+    }
+  }
+]
