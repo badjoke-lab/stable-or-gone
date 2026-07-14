@@ -33,6 +33,18 @@ jobs:
       - name: Activate PR 364 authority
         run: node scripts/activate-pr364-tier-a-batch-4.mjs
 
+      - name: Normalize finalizer manifest contract
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const file='scripts/finalize-tier-a-dossier-batch-4-pr364.mjs';
+          const before=fs.readFileSync(file,'utf8');
+          const from='const incomeProfiles = incomeManifest.data_groups.income_profiles.flatMap(readRows);';
+          const to='const incomeProfiles = incomeManifest.data_files.flatMap(readRows);';
+          if (!before.includes(from) && !before.includes(to)) throw new Error('PR #364 finalizer income manifest marker missing');
+          fs.writeFileSync(file,before.replace(from,to));
+          NODE
+
       - name: Generate PR 364 checkpoints
         id: generate
         shell: bash
@@ -92,6 +104,7 @@ jobs:
             scripts/check-workstream-123.mjs \
             scripts/validate-active-workstream.mjs \
             scripts/validate-non-ui-release-material.mjs \
+            scripts/finalize-tier-a-dossier-batch-4-pr364.mjs \
             docs/migration/current-canonical-checkpoint.json \
             docs/migration/current-stats-history-checkpoint.json \
             docs/migration/registry-v3-parity-baseline.json \
