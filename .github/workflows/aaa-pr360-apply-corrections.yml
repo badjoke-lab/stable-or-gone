@@ -1,0 +1,38 @@
+name: AAA PR360 Apply Corrections
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.head_ref == 'pr360-evidence-correction-batch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr360-evidence-correction-batch
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Apply reviewed Evidence corrections
+        run: node scripts/apply-evidence-corrections-pr360.mjs
+      - name: Validate canonical data after correction
+        run: npm run validate:data
+      - name: Commit reviewed corrections
+        run: |
+          if git diff --quiet; then
+            echo 'PR #360 corrections already applied.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data docs/migration/evidence-correction-outcomes-pr360.json
+          git commit -m 'Apply reviewed PR 360 Evidence archive corrections'
+          git push origin HEAD:pr360-evidence-correction-batch
