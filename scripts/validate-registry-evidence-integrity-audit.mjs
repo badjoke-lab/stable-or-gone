@@ -30,6 +30,8 @@ const archiveStateCounts = report.metadata_quality?.archive_state_counts ?? {};
 const actualArchiveRecorded = (archiveStateCounts.direct_snapshot ?? 0)
   + (archiveStateCounts.archive_index ?? 0)
   + (archiveStateCounts.other_archive ?? 0);
+const actualArchiveNotRecorded = archiveStateCounts.not_recorded ?? 0;
+const actualArchiveStateTotal = actualArchiveRecorded + actualArchiveNotRecorded;
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
@@ -54,13 +56,16 @@ expect((report.metadata_quality?.unknown_public_categories ?? []).length === 0, 
 expect((report.metadata_quality?.unknown_provenance ?? []).length === 0, 'unknown evidence provenance remains');
 expect((report.metadata_quality?.unknown_primary_state ?? []).length === 0, 'unknown primary-state classification remains');
 expect((report.metadata_quality?.unknown_reliability ?? []).length === 0, 'unknown reliability classification remains');
+expect(actualArchiveStateTotal === expectedEvidence, `archive-state taxonomy must cover all ${expectedEvidence} Evidence rows, got ${actualArchiveStateTotal}`);
 expect(actualArchiveRecorded === expectedArchiveRecorded, `archive-recorded count changed: expected ${expectedArchiveRecorded}, got ${actualArchiveRecorded}`);
-expect((archiveStateCounts.not_recorded ?? 0) === expectedArchiveNotRecorded, `archive not-recorded queue changed: expected ${expectedArchiveNotRecorded}`);
+expect(actualArchiveNotRecorded === expectedArchiveNotRecorded, `archive not-recorded queue changed: expected ${expectedArchiveNotRecorded}, got ${actualArchiveNotRecorded}`);
 expect(['pass', 'pass_with_review_queues'].includes(report.result), `audit result is not passing: ${report.result}`);
 
 if (correctionOutcome) {
   expect(correctionOutcome.canonical_evidence_count_after === expectedEvidence, 'PR #360 correction report Evidence count mismatch');
   expect(correctionOutcome.evidence_relation_count_after === expectedRelations, 'PR #360 correction report Evidence Relation count mismatch');
+  expect(correctionOutcome.archive_index_count_after === actualArchiveRecorded, 'PR #360 correction report archive-recorded total differs from taxonomy total');
+  expect(correctionOutcome.archive_not_recorded_count_after === actualArchiveNotRecorded, 'PR #360 correction report no-archive total differs from taxonomy total');
   expect(correctionOutcome.changed_count <= correctionConfig.maximum_canonical_evidence_records_touched, 'PR #360 correction report exceeds Evidence touch maximum');
   expect(correctionOutcome.constraints?.new_evidence_identities === 0, 'PR #360 correction report added Evidence identities');
   expect(correctionOutcome.constraints?.evidence_relation_changes === 0, 'PR #360 correction report changed Evidence Relations');
@@ -72,4 +77,13 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Evidence integrity audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${expectedEvidence} canonical records, ${expectedPublicSources} public identities, ${expectedRelations} relations, ${actualArchiveRecorded} archive-recorded rows, and ${expectedArchiveNotRecorded} not-recorded rows.`);
+console.log(JSON.stringify({
+  ok: true,
+  checkpoint_id: checkpoint.checkpoint_id,
+  canonical_evidence_records: expectedEvidence,
+  public_source_identities: expectedPublicSources,
+  evidence_relations: expectedRelations,
+  archive_states: archiveStateCounts,
+  archive_recorded_total: actualArchiveRecorded,
+  archive_not_recorded: actualArchiveNotRecorded
+}, null, 2));
