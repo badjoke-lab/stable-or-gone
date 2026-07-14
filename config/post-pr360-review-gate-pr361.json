@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr360_review_gate_pr361_v1",
+  "status": "deterministic_review_gate",
+  "review_pr": 361,
+  "source_handoff": "docs/migration/evidence-correction-batch-pr360-reviewed-handoff.json",
+  "historical_depth_baseline": "docs/migration/record-depth-baseline-pr353-summary.json",
+  "evaluation_axes": [
+    "record_family_sparsity",
+    "tier_a_dossier_depth",
+    "compare_utility",
+    "timeline_historical_density",
+    "canonical_market_access_utility",
+    "monitoring_signal_usefulness",
+    "correction_and_source_maintenance_burden",
+    "monthly_maintenance_burden",
+    "external_usage_or_referral_evidence"
+  ],
+  "decision_rules": {
+    "record_depth_refresh_required_if_asset_count_changed": true,
+    "record_depth_refresh_required_if_canonical_digest_changed": true,
+    "market_access_pilot_requires_minimum_assets": 4,
+    "market_access_pilot_requires_minimum_platforms": 2,
+    "market_access_pilot_requires_minimum_jurisdictions": 2,
+    "evidence_maintenance_priority_if_no_archive_count_at_least": 150,
+    "dossier_batch_maximum_assets": 5,
+    "evidence_maintenance_maximum_records": 10,
+    "growth_requires_refreshed_depth_baseline": true,
+    "public_surface_requires_separate_approval": true
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 362,
+      "work_item": "Record Depth and Coverage Baseline Refresh",
+      "scope": "Recompute all 16 planning dimensions over exactly 112 canonical assets and replace no historical snapshot.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 363,
+      "work_item": "Tier A Dossier Deepening Batch 4",
+      "scope": "Select no more than five assets from the refreshed non-ranking queue and deepen only reviewed material dossier gaps.",
+      "maximum_assets": 5,
+      "new_asset_allowed": false,
+      "market_access_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 364,
+      "work_item": "Evidence and Archive Maintenance Batch 2",
+      "scope": "Review no more than ten high-priority Evidence records from the refreshed archive/source-maintenance queue.",
+      "maximum_evidence_records_touched": 10,
+      "new_asset_allowed": false,
+      "market_access_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion"
+  ],
+  "review_gate_after_sequence": true
+}
