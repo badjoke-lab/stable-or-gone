@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { buildReviewGate, serializeReviewGate } from './build-post-pr360-review-gate-pr361.mjs';
 
 // One-time deterministic repair after the closed duplicate PR consumed #362.
+// The generated files are exported as an artifact and committed through the contents API.
 const textFiles = [
   'README.md',
   'AGENTS.md',
