@@ -18,7 +18,7 @@ PR #357 Tier A Dossier Deepening — Batch 3: complete
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
 PR #360 Evidence and Correction Batch: complete
-PR #361 Post-PR #360 Review Gate: active
+PR #361 Post-PR #360 Review Gate: complete
 ```
 
 The current operating mode is:
@@ -535,7 +535,7 @@ Current work item:
 ```text
 PR #359 Market Access Pilot 2: complete
 PR #360 Evidence and Correction Batch: complete
-PR #361 Post-PR #360 Review Gate: active
+PR #361 Post-PR #360 Review Gate: complete
 ```
 
 Binding references:
@@ -567,8 +567,8 @@ Current work item:
 
 ```text
 PR #360 Evidence and Correction Batch: complete
-PR #361 Post-PR #360 Review Gate: active
-PR #363 Record Depth and Coverage Baseline Refresh: next
+PR #361 Post-PR #360 Review Gate: complete
+PR #363 Record Depth and Coverage Baseline Refresh: active
 ```
 
 Approved bounded sequence after review:
@@ -599,3 +599,37 @@ docs/migration/evidence-correction-batch-pr360-reviewed-handoff.json
 docs/migration/post-pr360-review-gate-pr361.json
 ```
 
+
+PR #364 Tier A Dossier Deepening Batch 4: next
+
+
+## PR #363 active Record Depth refresh authority
+
+Current work item:
+
+```text
+PR #361 Post-PR #360 Review Gate: complete
+PR #363 Record Depth and Coverage Baseline Refresh: active
+PR #364 Tier A Dossier Deepening Batch 4: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-14-pr363-record-depth-refresh-activation.md
+docs/quality/record-depth-baseline-refresh-pr363-spec.md
+config/record-depth-baseline-refresh-pr363.json
+docs/migration/post-pr360-review-gate-pr361.json
+docs/migration/record-depth-baseline-pr353-summary.json
+docs/migration/tier-a-candidate-queue-pr353.json
+```
+
+Required outputs:
+
+```text
+docs/migration/record-depth-baseline-pr363-summary.json
+docs/migration/record-depth-baseline-pr363-delta.json
+docs/migration/tier-a-candidate-queue-pr363.json
+```
+
+PR #363 changes no canonical data or public product surface. The refreshed queue is internal, deterministic, and non-ranking. PR #364 may select at most five assets only after manual source review.

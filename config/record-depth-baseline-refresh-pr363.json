@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_record_depth_baseline_refresh_pr363_v1",
+  "status": "review_gate_authorized_internal_baseline_refresh",
+  "review_pr": 363,
+  "reviewed_at": "2026-07-14",
+  "source_review_gate": "docs/migration/post-pr360-review-gate-pr361.json",
+  "historical_baseline": "docs/migration/record-depth-baseline-pr353-summary.json",
+  "historical_candidate_queue": "docs/migration/tier-a-candidate-queue-pr353.json",
+  "record_growth_handoff": "docs/migration/record-growth-batch-1-pr358-reviewed-handoff.json",
+  "canonical_checkpoint": "docs/migration/current-canonical-checkpoint.json",
+  "expected": {
+    "asset_count": 112,
+    "dimension_count": 16,
+    "cell_count": 1792,
+    "candidate_count": 10,
+    "historical_asset_count": 110,
+    "historical_candidate_count": 18,
+    "promoted_asset_ids_since_historical_baseline": ["sog_st_usdb", "sog_st_xusd"]
+  },
+  "required_outputs": [
+    "docs/migration/record-depth-baseline-pr363-summary.json",
+    "docs/migration/record-depth-baseline-pr363-delta.json",
+    "docs/migration/tier-a-candidate-queue-pr363.json"
+  ],
+  "queue_policy": {
+    "order": "asset_slug_ascending_non_ranking",
+    "asset_rank": false,
+    "single_composite_score": false,
+    "manual_review_required_for_pr364_selection": true,
+    "maximum_assets_in_pr364": 5
+  },
+  "boundaries": {
+    "canonical_write_allowed": false,
+    "market_access_write_allowed": false,
+    "monitoring_auto_promotion_allowed": false,
+    "editorial_research_auto_promotion_allowed": false,
+    "public_output_allowed": false,
+    "new_public_surface_allowed": false,
+    "historical_checkpoint_rewrite_allowed": false,
+    "comparison_readiness_semantics_change_allowed": false,
+    "facet_freshness_semantics_change_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false,
+    "investment_recommendation": false
+  },
+  "next_work_item": "PR #364 Tier A Dossier Deepening Batch 4"
+}
