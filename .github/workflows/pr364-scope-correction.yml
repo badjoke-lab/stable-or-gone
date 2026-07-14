@@ -59,53 +59,8 @@ jobs:
           fs.writeFileSync(validatorFile,validator);
           NODE
 
-      - name: Restore pre-PR364 checkpoint inputs
-        run: |
-          git checkout origin/main -- \
-            docs/migration/current-canonical-checkpoint.json \
-            docs/migration/current-stats-history-checkpoint.json \
-            docs/migration/registry-v3-parity-baseline.json \
-            docs/migration/registry-release-integrity-baseline.json \
-            data/stats-history.json
-
-      - name: Rebuild PR 364 forward checkpoints
-        run: |
-          git show 6ffbd2e4c67669aed32d15c54321adf721a55ed9:scripts/finalize-tier-a-dossier-batch-4-pr364.mjs > scripts/.pr364-finalize-temp.mjs
-          node scripts/.pr364-finalize-temp.mjs
-          rm scripts/.pr364-finalize-temp.mjs
-
-      - name: Synchronize current release validators and provenance
-        run: |
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          const validatorFile='scripts/validate-non-ui-release-material.mjs';
-          let validator=fs.readFileSync(validatorFile,'utf8');
-          validator=validator
-            .replaceAll('sog_release_integrity_pr360_112_assets_2026_07_14','sog_release_integrity_pr364_112_assets_2026_07_14')
-            .replaceAll('sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14','sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14')
-            .replaceAll('current release-integrity baseline must remain the PR #360 canonical baseline','current release-integrity baseline must remain the PR #364 canonical baseline')
-            .replaceAll('current canonical checkpoint must remain the PR #360 correction checkpoint','current canonical checkpoint must remain the PR #364 dossier checkpoint')
-            .replace('currentCheckpoint.evidence_quality?.archive_not_recorded_count === 170','currentCheckpoint.evidence_quality?.archive_not_recorded_count === 172')
-            .replace('current canonical checkpoint must bind 170 no-archive rows','current canonical checkpoint must bind 172 no-archive rows')
-            .replace("releaseBaseline.evidence_quality?.archive_index_count === correctionOutcome.archive_index_count_after", "releaseBaseline.evidence_quality?.archive_index_count === currentCheckpoint.evidence_quality?.archive_index_count")
-            .replace("releaseBaseline.evidence_quality?.archive_not_recorded_count === correctionOutcome.archive_not_recorded_count_after", "releaseBaseline.evidence_quality?.archive_not_recorded_count === currentCheckpoint.evidence_quality?.archive_not_recorded_count")
-            .replace('latestSnapshot?.totals?.evidence === 557','latestSnapshot?.totals?.evidence === 559')
-            .replace('stats history latest snapshot must contain 557 Evidence records','stats history latest snapshot must contain 559 Evidence records');
-          fs.writeFileSync(validatorFile,validator);
-
-          const release=JSON.parse(fs.readFileSync('docs/migration/registry-release-integrity-baseline.json','utf8'));
-          const provenanceFile='data/generated/build-provenance.json';
-          const provenance=JSON.parse(fs.readFileSync(provenanceFile,'utf8'));
-          provenance.canonical_record_counts={
-            ...release.expected_v2_counts,
-            legal_profiles:release.expected_v3_counts.legal_profiles,
-            stable_asset_relationships:release.expected_v3_counts.stable_asset_relationships,
-            reserve_components:release.expected_v3_counts.reserve_components,
-            income_profiles:release.expected_v3_counts.income_profiles
-          };
-          provenance.route_counts=release.expected_route_counts;
-          fs.writeFileSync(provenanceFile,`${JSON.stringify(provenance,null,2)}\n`);
-          NODE
+      - name: Rebuild affected statistics snapshot and handoff hashes
+        run: node scripts/rebuild-pr364-stats-snapshot.mjs
 
       - name: Validate corrected PR 364 state
         run: |
@@ -131,7 +86,7 @@ jobs:
           SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
           SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
 
-      - name: Commit corrected scope and checkpoints
+      - name: Commit corrected scope and statistics
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -140,13 +95,7 @@ jobs:
             config/primary-display-relationships.mjs \
             scripts/validate-tier-a-dossier-batch-4-pr364.mjs \
             scripts/validate-registry-evidence-integrity-audit.mjs \
-            scripts/validate-non-ui-release-material.mjs \
-            docs/migration/current-canonical-checkpoint.json \
-            docs/migration/current-stats-history-checkpoint.json \
-            docs/migration/registry-v3-parity-baseline.json \
-            docs/migration/registry-release-integrity-baseline.json \
             docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json \
-            data/generated/build-provenance.json \
             data/stats-history.json
           if git diff --cached --quiet; then
             echo 'PR #364 scope correction is already synchronized.'
