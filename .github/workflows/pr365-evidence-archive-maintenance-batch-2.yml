@@ -38,6 +38,11 @@ jobs:
           node scripts/validate-registry-evidence-integrity-audit.mjs
           npm run validate:data
           npm run validate:evidence-relations-v2
+      - name: Validate maintained audit invariants
+        run: |
+          node scripts/validate-registry-deployment-chain-identity-audit.mjs
+          node scripts/validate-next-growth-candidate-audit-pr329.mjs
+          npm run validate:final
       - name: Validate registry and release integrity
         run: |
           npm run validate:v3
@@ -81,7 +86,7 @@ jobs:
             const marker='<!-- pr365-evidence-archive-maintenance-status -->';
             let handoff=null;
             try{handoff=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json','utf8'));}catch{}
-            const body=`${marker}\n## PR #365 Evidence and Archive Maintenance Batch 2\n\n- Workflow: **${{ job.status }}**\n- Reviewed: **${handoff?.evidence_quality?.selected??0}**\n- Dated archives added: **${handoff?.evidence_quality?.changed??0}**\n- Reviewed no-safe-change: **${handoff?.evidence_quality?.reviewed_no_safe_change??0}**\n- Archive recorded / not recorded: **${handoff?.evidence_quality?.archive_recorded??'n/a'} / ${handoff?.evidence_quality?.archive_not_recorded??'n/a'}**\n- Evidence identities / relations: **${handoff?.canonical_counts?.evidence??'n/a'} / ${handoff?.canonical_counts?.evidence_relations??'n/a'}**\n- Stats model: \`${handoff?.stats_model_sha256??'n/a'}\`\n- Stats snapshot: \`${handoff?.stats_snapshot_sha256??'n/a'}\`\n- Next authority: **review gate required**\n- Head: \`${context.sha}\`\n`;
+            const body=`${marker}\n## PR #365 Evidence and Archive Maintenance Batch 2\n\n- Workflow: **${{ job.status }}**\n- Reviewed: **${handoff?.evidence_quality?.selected??0}**\n- Dated archives added: **${handoff?.evidence_quality?.changed??0}**\n- Reviewed no-safe-change: **${handoff?.evidence_quality?.reviewed_no_safe_change??0}**\n- Archive recorded / not recorded: **${handoff?.evidence_quality?.archive_recorded??'n/a'} / ${handoff?.evidence_quality?.archive_not_recorded??'n/a'}**\n- Evidence identities / relations: **${handoff?.canonical_counts?.evidence??'n/a'} / ${handoff?.canonical_counts?.evidence_relations??'n/a'}**\n- Deployment audit: **45 recorded chain labels**\n- Historical PR #329 plan: **100→110 complete; current 112**\n- Stats model: \`${handoff?.stats_model_sha256??'n/a'}\`\n- Stats snapshot: \`${handoff?.stats_snapshot_sha256??'n/a'}\`\n- Next authority: **review gate required**\n- Head: \`${context.sha}\`\n`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
