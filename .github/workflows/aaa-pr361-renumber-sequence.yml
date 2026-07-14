@@ -37,27 +37,55 @@ jobs:
           node scripts/validate-post-pr360-review-gate-pr361.mjs
           npm run validate:active-workstream
 
-      - name: Commit corrected sequence
+      - name: Diagnose and apply corrected sequence
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md docs/quality/post-pr360-review-gate-pr361-spec.md docs/migration/post-pr360-review-gate-pr361.json scripts/validate-post-pr360-review-gate-pr361.mjs .github/workflows/pr361-post-pr360-review-gate.yml
-          git commit -m 'Align post-review-gate sequence with available PR numbers'
-          git pull --rebase origin pr361-post-pr360-review-gate
-          git push origin HEAD:pr361-post-pr360-review-gate
+          set +e
+          LOG="$RUNNER_TEMP/pr361-git-debug.log"
+          : > "$LOG"
+          git config user.name 'github-actions[bot]' 2>&1 | tee -a "$LOG"
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com' 2>&1 | tee -a "$LOG"
+          echo '--- status before add ---' | tee -a "$LOG"
+          git status --short 2>&1 | tee -a "$LOG"
+          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md docs/quality/post-pr360-review-gate-pr361-spec.md docs/migration/post-pr360-review-gate-pr361.json scripts/validate-post-pr360-review-gate-pr361.mjs .github/workflows/pr361-post-pr360-review-gate.yml 2>&1 | tee -a "$LOG"
+          echo "add_exit=${PIPESTATUS[0]}" | tee -a "$LOG"
+          echo '--- cached diff ---' | tee -a "$LOG"
+          git diff --cached --stat 2>&1 | tee -a "$LOG"
+          git commit -m 'Align post-review-gate sequence with available PR numbers' 2>&1 | tee -a "$LOG"
+          COMMIT_EXIT=${PIPESTATUS[0]}
+          echo "commit_exit=$COMMIT_EXIT" | tee -a "$LOG"
+          if [ "$COMMIT_EXIT" -eq 0 ]; then
+            git pull --rebase origin pr361-post-pr360-review-gate 2>&1 | tee -a "$LOG"
+            PULL_EXIT=${PIPESTATUS[0]}
+            echo "pull_exit=$PULL_EXIT" | tee -a "$LOG"
+            if [ "$PULL_EXIT" -eq 0 ]; then
+              git push origin HEAD:pr361-post-pr360-review-gate 2>&1 | tee -a "$LOG"
+              PUSH_EXIT=${PIPESTATUS[0]}
+              echo "push_exit=$PUSH_EXIT" | tee -a "$LOG"
+            fi
+          fi
+          cp "$LOG" artifacts-pr361-git-debug.log
+          exit 0
 
-      - name: Publish repair status
+      - name: Publish repair status and git diagnostics
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require('fs');
             const marker = '<!-- pr361-renumber-artifact -->';
+            let log = 'diagnostic log unavailable';
+            try { log = fs.readFileSync('artifacts-pr361-git-debug.log','utf8'); } catch {}
+            if (log.length > 12000) log = log.slice(-12000);
             const body = `${marker}
             ## PR #361 sequence repair
 
             - Workflow status: **${{ job.status }}**
             - Run ID: **${context.runId}**
             - Corrected sequence: **PR #363 → #364 → #365 → review gate**
+
+            \`\`\`text
+            ${log}
+            \`\`\`
             `;
             const comments = await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing = comments.find((comment)=>comment.body?.includes(marker));
