@@ -1,4 +1,4 @@
-name: PR 364 Evidence Loader Sync Cleanup
+name: PR 364 Public Loader Sync Cleanup
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: pr364-evidence-loader-sync-cleanup
+  group: pr364-public-loader-sync-cleanup
   cancel-in-progress: true
 
 jobs:
@@ -23,24 +23,38 @@ jobs:
           ref: pr364-tier-a-dossier-batch-4
           fetch-depth: 0
 
+      - name: Synchronize organization and relationship loader
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const file='src/lib/data/registry.ts';
+          let text=fs.readFileSync(file,'utf8');
+          const importAnchor="import evidenceQualityPr219Data from '../../../data/evidence-quality-pr219.json';";
+          const imports=`${importAnchor}\nimport organizationsPr364Data from '../../../data/organizations-pr364-tier-a-batch-4.json';\nimport relationshipsPr364Data from '../../../data/relationships-pr364-tier-a-batch-4.json';`;
+          if(!text.includes('organizationsPr364Data')) text=text.replace(importAnchor,imports);
+          text=text.replace(
+            "...(organizationsBatchYData as OrganizationRow[]), ...(organizationsBatchZData as OrganizationRow[])\n].map",
+            "...(organizationsBatchYData as OrganizationRow[]), ...(organizationsBatchZData as OrganizationRow[]),\n  ...(organizationsPr364Data as OrganizationRow[])\n].map"
+          );
+          text=text.replace(
+            "...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[])\n];",
+            "...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[]),\n  ...(relationshipsPr364Data as RelationshipRow[])\n];"
+          );
+          if(!text.includes('...(organizationsPr364Data as OrganizationRow[])')) throw new Error('PR #364 organization loader append failed');
+          if(!text.includes('...(relationshipsPr364Data as RelationshipRow[])')) throw new Error('PR #364 relationship loader append failed');
+          fs.writeFileSync(file,text);
+          NODE
+
       - name: Synchronize dedicated workflow boundary
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const file='.github/workflows/pr364-tier-a-dossier-batch-4.yml';
           let text=fs.readFileSync(file,'utf8');
-          const before=`      - name: Verify prohibited canonical and public families are unchanged
-        run: |
-          git diff --exit-code origin/main...HEAD -- \\
-            data/stablecoins*.json \\
-            data/market-access-records-v1.json \\
-            data/deployments*.json \\
-            data/reserve-reports*.json \\
-            data/reserve-components*.json \\
-            data/income-profiles*.json \\
-            src/
-          echo 'PR #364 adds no asset, Market Access record, deployment, reserve report/component, income profile, or public application source.'`;
-          const after=`      - name: Verify prohibited canonical and public families are unchanged
+          const start=text.indexOf('      - name: Verify prohibited canonical and public families are unchanged');
+          const end=text.indexOf('\n      - name: Validate canonical data',start);
+          if(start<0||end<0) throw new Error('Dedicated workflow boundary block not found');
+          const replacement=`      - name: Verify prohibited canonical and public families are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- \\
             data/stablecoins*.json \\
@@ -50,12 +64,16 @@ jobs:
             data/reserve-components*.json \\
             data/income-profiles*.json \\
             src/ \\
-            ':(exclude)src/lib/data/post351Evidence.ts'
-          test "$(git diff --name-only origin/main...HEAD -- src/)" = 'src/lib/data/post351Evidence.ts'
+            ':(exclude)src/lib/data/post351Evidence.ts' \\
+            ':(exclude)src/lib/data/registry.ts'
+          expected_src=$(printf '%s\\n' 'src/lib/data/post351Evidence.ts' 'src/lib/data/registry.ts')
+          test "$(git diff --name-only origin/main...HEAD -- src/)" = "$expected_src"
           grep -q "evidence-pr364-tier-a-batch-4.json" src/lib/data/post351Evidence.ts
-          echo 'PR #364 adds no asset, Market Access record, deployment, reserve report/component, income profile, route, or UI surface; only the reviewed Evidence loader is synchronized.'`;
-          if(!text.includes(before)) throw new Error('Dedicated workflow boundary block not found');
-          text=text.replace(before,after);
+          grep -q "organizations-pr364-tier-a-batch-4.json" src/lib/data/registry.ts
+          grep -q "relationships-pr364-tier-a-batch-4.json" src/lib/data/registry.ts
+          echo 'PR #364 adds no asset, Market Access record, deployment, reserve report/component, income profile, route, or UI surface; only reviewed canonical public loaders are synchronized.'
+`;
+          text=text.slice(0,start)+replacement+text.slice(end);
           fs.writeFileSync(file,text);
           NODE
 
@@ -67,24 +85,27 @@ jobs:
       - name: Verify permanent loader sync
         run: |
           grep -q "evidencePr364Data" src/lib/data/post351Evidence.ts
-          grep -q "exclude)src/lib/data/post351Evidence.ts" .github/workflows/pr364-tier-a-dossier-batch-4.yml
+          grep -q "organizationsPr364Data" src/lib/data/registry.ts
+          grep -q "relationshipsPr364Data" src/lib/data/registry.ts
+          grep -q "exclude)src/lib/data/registry.ts" .github/workflows/pr364-tier-a-dossier-batch-4.yml
           test ! -e .github/workflows/pr364-public-evidence-loader-diagnostic.yml
           test ! -e .github/workflows/pr364-loader-sync-cleanup.yml
 
-      - name: Commit loader synchronization
+      - name: Commit public loader synchronization
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add \
             src/lib/data/post351Evidence.ts \
+            src/lib/data/registry.ts \
             .github/workflows/pr364-tier-a-dossier-batch-4.yml \
             .github/workflows/pr364-public-evidence-loader-diagnostic.yml \
             .github/workflows/pr364-loader-sync-cleanup.yml
           if git diff --cached --quiet; then
-            echo 'PR #364 Evidence loader synchronization already complete.'
+            echo 'PR #364 public loader synchronization already complete.'
             exit 0
           fi
-          git commit -m 'Synchronize PR 364 Evidence with the public registry loader'
+          git commit -m 'Synchronize PR 364 records with public registry loaders'
           git reset --hard HEAD
           git clean -fd
           git fetch origin pr364-tier-a-dossier-batch-4
