@@ -1,45 +1,9 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import {loadRegistryV2Baseline} from './load-registry-v2-baseline.mjs';
-import {evidenceAliasIds} from '../config/evidence-source-identities.mjs';
-
-const root=process.cwd();
-const output='docs/migration/evidence-archive-maintenance-queue-pr365.json';
-const read=(file)=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
-const rows=(value,file)=>{const result=Array.isArray(value)?value:value?.records;if(!Array.isArray(result))throw new Error(`${file}: invalid rows`);return result;};
-const text=(...values)=>values.filter(Boolean).join(' ').toLowerCase();
-const config=read('config/evidence-archive-maintenance-batch-2-pr365.json');
-const prior=read('docs/migration/evidence-correction-queue-pr360.json');
-const excluded=new Set((prior.selected_candidates??[]).map((row)=>row.evidence_id));
-const baseline=loadRegistryV2Baseline(root);
-const files=baseline.data_groups?.evidence??[];
-const evidence=files.flatMap((file)=>rows(read(file),file).map((row)=>({...row,__source_file:file})));
-const classify=(row)=>{
-  const value=text(row.source_type,row.title,row.publisher,row.url,...(row.claim_scopes??[]));
-  if(/regulat|court|legal|terms|enforcement|attorney general|cftc|sec\b|government|legislation/.test(value))return{rank:1,bucket:'regulator_court_legal'};
-  if(/reserve|attestation|assurance|audit|transparency|composition/.test(value))return{rank:3,bucket:'reserve_attestation_audit'};
-  if(/issuer|protocol|official|product|documentation|docs\.|governance|foundation|stablecoin page|app interface/.test(value))return{rank:2,bucket:'official_issuer_protocol_product'};
-  if(/reuters|bloomberg|coindesk|the block|research|analysis|reporting|news/.test(value))return{rank:4,bucket:'high_quality_reporting_research'};
-  return{rank:5,bucket:'other_reviewed_source'};
-};
-const candidates=evidence
-  .filter((row)=>row.id&&String(row.url??'').trim())
-  .filter((row)=>!evidenceAliasIds.has(row.id))
-  .filter((row)=>!String(row.archived_url??'').trim())
-  .filter((row)=>!String(row.url).startsWith('https://web.archive.org/'))
-  .filter((row)=>!excluded.has(row.id))
-  .map((row)=>({row,priority:classify(row)}))
-  .sort((a,b)=>a.priority.rank-b.priority.rank||a.row.id.localeCompare(b.row.id));
-const selected=candidates.slice(0,config.maximum_canonical_evidence_records_touched);
-if(selected.length!==10)throw new Error(`expected 10 candidates, found ${selected.length}`);
-const archived=evidence.filter((row)=>String(row.archived_url??'').trim()).length;
-const queue={
-  schema_version:'1.1',queue_id:'sog_evidence_archive_maintenance_queue_pr365_2026_07_14',status:'internal_review_queue_not_canonical_change',public_output:false,review_pr:365,
-  source_review_gate:config.source_review_gate,source_handoff:config.source_handoff,selection_rule:config.queue_selection.mode,source_identity_scope:'canonical_identities_only',
-  canonical_evidence_count:evidence.length,archive_index_count:archived,archive_not_recorded_count:evidence.length-archived,excluded_pr360_selected_count:excluded.size,excluded_source_alias_count:evidenceAliasIds.size,
-  selected_count:selected.length,maximum_selected_count:10,priority_order:config.queue_selection.priority_order,
-  selected_candidates:selected.map(({row,priority})=>({evidence_id:row.id,source_file:row.__source_file,priority_rank:priority.rank,priority_bucket:priority.bucket,title:row.title??null,publisher:row.publisher??null,source_type:row.source_type??null,url:row.url,published_at:row.published_at??null,stablecoin_ids:[...(row.stablecoin_ids??[])].sort(),organization_ids:[...(row.organization_ids??[])].sort(),event_ids:[...(row.event_ids??[])].sort(),claim_scopes:[...(row.claim_scopes??[])],review_reasons:['archive_not_recorded',priority.bucket],review_status:'pending_manual_review',canonical_change_authorized:false}))
-};
-const serialized=`${JSON.stringify(queue,null,2)}\n`;
-if(process.argv.includes('--check')){if(fs.readFileSync(path.join(root,output),'utf8')!==serialized){console.error(`${output} is stale`);process.exit(1);}console.log('PR #365 queue is deterministic.');}
-else{fs.writeFileSync(path.join(root,output),serialized);console.log(`Wrote ${output}`);}
+import fs from'node:fs';import path from'node:path';import{execFileSync}from'node:child_process';import{loadRegistryV2Baseline}from'./load-registry-v2-baseline.mjs';import{evidenceAliasIds}from'../config/evidence-source-identities.mjs';
+const root=process.cwd(),output='docs/migration/evidence-archive-maintenance-queue-pr365.json';
+const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),rows=(value,file)=>{const result=Array.isArray(value)?value:value?.records;if(!Array.isArray(result))throw new Error(`${file}: invalid rows`);return result},text=(...values)=>values.filter(Boolean).join(' ').toLowerCase();
+const readBaseline=file=>{try{return JSON.parse(execFileSync('git',['show',`origin/main:${file}`],{cwd:root,encoding:'utf8'}))}catch{return read(file)}};
+const config=read('config/evidence-archive-maintenance-batch-2-pr365.json'),prior=read('docs/migration/evidence-correction-queue-pr360.json'),excluded=new Set((prior.selected_candidates??[]).map(row=>row.evidence_id)),baseline=loadRegistryV2Baseline(root),files=baseline.data_groups?.evidence??[],evidence=files.flatMap(file=>rows(readBaseline(file),file).map(row=>({...row,__source_file:file})));
+const classify=row=>{const value=text(row.source_type,row.title,row.publisher,row.url,...(row.claim_scopes??[]));if(/regulat|court|legal|terms|enforcement|attorney general|cftc|sec\b|government|legislation/.test(value))return{rank:1,bucket:'regulator_court_legal'};if(/reserve|attestation|assurance|audit|transparency|composition/.test(value))return{rank:3,bucket:'reserve_attestation_audit'};if(/issuer|protocol|official|product|documentation|docs\.|governance|foundation|stablecoin page|app interface/.test(value))return{rank:2,bucket:'official_issuer_protocol_product'};if(/reuters|bloomberg|coindesk|the block|research|analysis|reporting|news/.test(value))return{rank:4,bucket:'high_quality_reporting_research'};return{rank:5,bucket:'other_reviewed_source'}};
+const selected=evidence.filter(row=>row.id&&String(row.url??'').trim()).filter(row=>!evidenceAliasIds.has(row.id)).filter(row=>!String(row.archived_url??'').trim()).filter(row=>!String(row.url).startsWith('https://web.archive.org/')).filter(row=>!excluded.has(row.id)).map(row=>({row,priority:classify(row)})).sort((a,b)=>a.priority.rank-b.priority.rank||a.row.id.localeCompare(b.row.id)).slice(0,10);if(selected.length!==10)throw new Error(`expected 10 candidates, found ${selected.length}`);
+const archived=evidence.filter(row=>String(row.archived_url??'').trim()).length,queue={schema_version:'1.1',queue_id:'sog_evidence_archive_maintenance_queue_pr365_2026_07_14',status:'internal_review_queue_not_canonical_change',public_output:false,review_pr:365,source_review_gate:config.source_review_gate,source_handoff:config.source_handoff,selection_rule:config.queue_selection.mode,selection_baseline:'origin/main',source_identity_scope:'canonical_identities_only',canonical_evidence_count:evidence.length,archive_index_count:archived,archive_not_recorded_count:evidence.length-archived,excluded_pr360_selected_count:excluded.size,excluded_source_alias_count:evidenceAliasIds.size,selected_count:10,maximum_selected_count:10,priority_order:config.queue_selection.priority_order,selected_candidates:selected.map(({row,priority})=>({evidence_id:row.id,source_file:row.__source_file,priority_rank:priority.rank,priority_bucket:priority.bucket,title:row.title??null,publisher:row.publisher??null,source_type:row.source_type??null,url:row.url,published_at:row.published_at??null,stablecoin_ids:[...(row.stablecoin_ids??[])].sort(),organization_ids:[...(row.organization_ids??[])].sort(),event_ids:[...(row.event_ids??[])].sort(),claim_scopes:[...(row.claim_scopes??[])],review_reasons:['archive_not_recorded',priority.bucket],review_status:'pending_manual_review',canonical_change_authorized:false}))};
+const serialized=`${JSON.stringify(queue,null,2)}\n`;if(process.argv.includes('--check')){if(fs.readFileSync(path.join(root,output),'utf8')!==serialized){console.error(`${output} is stale`);process.exit(1)}console.log('PR #365 queue is deterministic.')}else{fs.writeFileSync(path.join(root,output),serialized);console.log(`Wrote ${output}`)}
