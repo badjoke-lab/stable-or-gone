@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "queue_id": "sog_evidence_archive_maintenance_queue_pr365_2026_07_14",
   "status": "internal_review_queue_not_canonical_change",
   "public_output": false,
@@ -7,10 +7,12 @@
   "source_review_gate": "docs/migration/post-pr360-review-gate-pr361.json",
   "source_handoff": "docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json",
   "selection_rule": "deterministic_priority_then_evidence_id",
+  "source_identity_scope": "canonical_identities_only",
   "canonical_evidence_count": 559,
   "archive_index_count": 387,
   "archive_not_recorded_count": 172,
   "excluded_pr360_selected_count": 10,
+  "excluded_source_alias_count": 48,
   "selected_count": 10,
   "maximum_selected_count": 10,
   "priority_order": [
@@ -21,83 +23,6 @@
     "other_reviewed_source"
   ],
   "selected_candidates": [
-    {
-      "evidence_id": "sog_src_usdg_network_terms",
-      "source_file": "data/evidence-extra.json",
-      "priority_rank": 1,
-      "priority_bucket": "regulator_court_legal",
-      "title": "Global Dollar Network documentation entry point",
-      "publisher": "Global Dollar Network",
-      "source_type": "network_terms_or_docs",
-      "url": "https://www.globaldollar.com/",
-      "published_at": null,
-      "stablecoin_ids": [],
-      "organization_ids": [],
-      "event_ids": [],
-      "claim_scopes": [],
-      "review_reasons": [
-        "archive_not_recorded",
-        "regulator_court_legal"
-      ],
-      "review_status": "pending_manual_review",
-      "canonical_change_authorized": false
-    },
-    {
-      "evidence_id": "sog_src_usdg_paxos_stablecoin_terms_pr364",
-      "source_file": "data/evidence-pr364-tier-a-batch-4.json",
-      "priority_rank": 1,
-      "priority_bucket": "regulator_court_legal",
-      "title": "US Dollar-Backed Stablecoin Terms and Conditions",
-      "publisher": "Paxos",
-      "source_type": "legal_terms",
-      "url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
-      "published_at": "2026-06-30",
-      "stablecoin_ids": [
-        "sog_st_usdg"
-      ],
-      "organization_ids": [
-        "sog_issuer_paxos_digital_singapore",
-        "sog_issuer_paxos_issuance_europe"
-      ],
-      "event_ids": [],
-      "claim_scopes": [
-        "legal_issuer_identity",
-        "licensing_context",
-        "customer_only_direct_redemption",
-        "one_to_one_redemption",
-        "redemption_minimum",
-        "fees",
-        "settlement_timing",
-        "reserve_segregation"
-      ],
-      "review_reasons": [
-        "archive_not_recorded",
-        "regulator_court_legal"
-      ],
-      "review_status": "pending_manual_review",
-      "canonical_change_authorized": false
-    },
-    {
-      "evidence_id": "sog_src_ust_sec_event",
-      "source_file": "data/evidence-events-pr036.json",
-      "priority_rank": 1,
-      "priority_bucket": "regulator_court_legal",
-      "title": "SEC charges Terraform and Do Kwon with fraud",
-      "publisher": "SEC",
-      "source_type": "regulatory_source",
-      "url": "https://www.sec.gov/newsroom/press-releases/2023-32",
-      "published_at": "2023-02-16",
-      "stablecoin_ids": [],
-      "organization_ids": [],
-      "event_ids": [],
-      "claim_scopes": [],
-      "review_reasons": [
-        "archive_not_recorded",
-        "regulator_court_legal"
-      ],
-      "review_status": "pending_manual_review",
-      "canonical_change_authorized": false
-    },
     {
       "evidence_id": "sog_src_xaut_legal_batch_b",
       "source_file": "data/evidence-batch-b.json",
@@ -233,15 +158,15 @@
       "canonical_change_authorized": false
     },
     {
-      "evidence_id": "sog_src_busd_binance_phaseout_event",
-      "source_file": "data/evidence-events-pr036.json",
+      "evidence_id": "sog_src_busd_paxos_issuer_update",
+      "source_file": "data/evidence.json",
       "priority_rank": 2,
       "priority_bucket": "official_issuer_protocol_product",
-      "title": "Binance will gradually cease support for BUSD products",
-      "publisher": "Binance",
-      "source_type": "exchange_notice",
-      "url": "https://www.binance.com/en/support/announcement/binance-will-gradually-cease-support-for-busd-products-38d49e7aa3ed456f8b2fe4a8e2e8e102",
-      "published_at": "2023-08-31",
+      "title": "Paxos BUSD issuer context",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "url": "https://paxos.com/busd/",
+      "published_at": null,
       "stablecoin_ids": [],
       "organization_ids": [],
       "event_ids": [],
@@ -254,14 +179,77 @@
       "canonical_change_authorized": false
     },
     {
-      "evidence_id": "sog_src_busd_paxos_issuer_update",
+      "evidence_id": "sog_src_busd_paxos_statement_pr354",
+      "source_file": "data/evidence-extra.json",
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Paxos Will Halt Minting New BUSD Tokens",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "url": "https://www.paxos.com/newsroom/paxos-will-halt-minting-new-busd-tokens",
+      "published_at": "2023-02-13",
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_reasons": [
+        "archive_not_recorded",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_circle_stability_update_2023_03_13",
       "source_file": "data/evidence.json",
       "priority_rank": 2,
       "priority_bucket": "official_issuer_protocol_product",
-      "title": "Paxos BUSD issuer context",
-      "publisher": "Paxos",
+      "title": "Circle update after federal banking actions in March 2023",
+      "publisher": "Circle",
       "source_type": "issuer_statement",
-      "url": "https://paxos.com/busd/",
+      "url": "https://www.circle.com/blog/usdc-operations-will-open-for-business-on-monday-morning",
+      "published_at": "2023-03-12",
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_reasons": [
+        "archive_not_recorded",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_circle_svb_update",
+      "source_file": "data/evidence.json",
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Circle update on USDC and Silicon Valley Bank exposure",
+      "publisher": "Circle",
+      "source_type": "issuer_statement",
+      "url": "https://www.circle.com/blog/an-update-on-usdc-and-silicon-valley-bank",
+      "published_at": "2023-03-11",
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_reasons": [
+        "archive_not_recorded",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_circle_usdc_contract_addresses",
+      "source_file": "data/evidence.json",
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "USDC contract addresses",
+      "publisher": "Circle Developers",
+      "source_type": "protocol_docs",
+      "url": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
       "published_at": null,
       "stablecoin_ids": [],
       "organization_ids": [],
