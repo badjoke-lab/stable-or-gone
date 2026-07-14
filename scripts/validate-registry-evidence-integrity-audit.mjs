@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
-import { evidenceSourceAliasCount } from '../config/evidence-source-identities.mjs';
+import { evidenceSourceAliasCount, evidenceSourceIdentityGroupCount } from '../config/evidence-source-identities.mjs';
 
 const jsonPath = 'data/generated/registry-evidence-integrity-audit.json';
 const baseline = loadRegistryV2Baseline(process.cwd());
@@ -44,7 +44,7 @@ expect(report.audited_counts?.events === checkpointCounts.events, `expected ${ch
 expect(report.audited_counts?.canonical_evidence_records === expectedEvidence, `expected ${expectedEvidence} evidence records, got ${report.audited_counts?.canonical_evidence_records}`);
 expect(report.audited_counts?.public_source_identities === expectedPublicSources, `expected ${expectedPublicSources} public source identities, got ${report.audited_counts?.public_source_identities}`);
 expect(report.audited_counts?.evidence_relations === expectedRelations, `expected ${expectedRelations} evidence relations, got ${report.audited_counts?.evidence_relations}`);
-expect(report.audited_counts?.source_identity_groups === 33, `expected 33 source identity groups, got ${report.audited_counts?.source_identity_groups}`);
+expect(report.audited_counts?.source_identity_groups === evidenceSourceIdentityGroupCount, `expected ${evidenceSourceIdentityGroupCount} source identity groups, got ${report.audited_counts?.source_identity_groups}`);
 expect(report.audited_counts?.source_aliases === evidenceSourceAliasCount, `expected ${evidenceSourceAliasCount} source aliases, got ${report.audited_counts?.source_aliases}`);
 expect((report.findings?.critical ?? []).length === 0, `critical findings remain: ${(report.findings?.critical ?? []).length}`);
 expect((report.identity?.normalized_only_duplicate_url_groups ?? []).length === 0, 'normalized-only duplicate URL groups remain');
@@ -87,6 +87,8 @@ console.log(JSON.stringify({
   canonical_evidence_records: expectedEvidence,
   public_source_identities: expectedPublicSources,
   evidence_relations: expectedRelations,
+  source_identity_groups: evidenceSourceIdentityGroupCount,
+  source_aliases: evidenceSourceAliasCount,
   archive_states: archiveStateCounts,
   archive_recorded_total: actualArchiveRecorded,
   archive_not_recorded: actualArchiveNotRecorded,
