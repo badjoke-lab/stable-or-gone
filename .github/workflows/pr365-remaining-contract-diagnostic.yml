@@ -1,0 +1,37 @@
+name: PR 365 Remaining Contract Diagnostic
+
+on:
+  push:
+    branches: [pr365-evidence-archive-maintenance-batch-2]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Compatibility
+        run: npm run validate:compat
+      - name: Classification
+        run: npm run validate:classification
+      - name: Profiles
+        run: npm run validate:profiles
+      - name: Events
+        run: npm run validate:events-v2
+      - name: Migration
+        run: npm run validate:migration-v3
+      - name: Reproducibility
+        run: npm run validate:reproducible-build
+      - name: Audited checkpoint
+        run: node scripts/validate-audited-100-checkpoint.mjs
+      - name: Non-UI release
+        run: node scripts/validate-non-ui-release-material.mjs
+      - name: UI cleanup
+        run: npm run validate:ui-v3-cleanup
