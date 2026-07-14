@@ -1,23 +1,212 @@
 [
-  {"id":"sog_unknown_rlusd_redemption_terms","stablecoin_id":"sog_st_rlusd","issuer_id":"sog_issuer_ripple","topic":"redemption_terms","description":"RLUSD customer redemption access, user vs customer distinction, supported jurisdictions, suspension conditions, and operational redemption limits need exact source extraction from Ripple legal terms before final display.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028A refined known unknown. Ripple states RLUSD is redeemable 1:1, but detailed availability is terms-dependent and jurisdiction-dependent."},
-  {"id":"sog_unknown_rlusd_reserve_attestation_history","stablecoin_id":"sog_st_rlusd","issuer_id":"sog_issuer_ripple","topic":"reserve_attestation_history","description":"RLUSD monthly reserve report history and exact third-party attestation periods need period-level records before SOG displays a historical reserve timeline.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028A added the transparency and attestation archive page, but not exact period-level entries."},
-  {"id":"sog_unknown_rlusd_deployment_identifiers","stablecoin_id":"sog_st_rlusd","issuer_id":"sog_issuer_ripple","topic":"deployment_identifiers","description":"RLUSD XRP Ledger issuer/token identifiers and Ethereum contract address need official docs, implementation, or verified explorer sources before final address display.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028A keeps XRP Ledger and Ethereum deployment rows as issuer-supported source-review areas."},
-  {"id":"sog_unknown_eurc_mica_context","stablecoin_id":"sog_st_eurc","issuer_id":"sog_issuer_circle","topic":"mica_context","description":"EURC MiCA compliance and EU regulatory context should be backed by direct Circle and official regulatory sources before SOG treats it as a complete jurisdictional record.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028B separates MiCA context from reserve and deployment topics."},
-  {"id":"sog_unknown_eurc_reserve_report_history","stablecoin_id":"sog_st_eurc","issuer_id":"sog_issuer_circle","topic":"reserve_report_history","description":"EURC monthly reserve or attestation report history needs exact period-level report URLs before SOG displays a historical reserve timeline.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028B added Circle transparency as an entry point only."},
-  {"id":"sog_unknown_eurc_circle_mint_access","stablecoin_id":"sog_st_eurc","issuer_id":"sog_issuer_circle","topic":"circle_mint_access","description":"EURC conversion through Circle Mint, account eligibility, business access, geography, and retail availability need source-specific explanation.","severity":"medium","last_checked_at":"2026-06-05","notes":"Keep Circle Mint access separate from exchange trading and wallet availability."},
-  {"id":"sog_unknown_eurc_chain_contracts","stablecoin_id":"sog_st_eurc","issuer_id":"sog_issuer_circle","topic":"chain_contracts","description":"EURC chain-by-chain contract, token mint, or asset issuer references for Avalanche, Base, Ethereum, Solana, and Stellar need official source review before final address display.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028B split deployment rows by chain but leaves exact identifiers as source-review needed."},
-  {"id":"sog_unknown_usdp_reserve_report_history","stablecoin_id":"sog_st_usdp","issuer_id":"sog_issuer_paxos","topic":"reserve_report_history","description":"USDP reserve report archive entries need period-level report rows before SOG displays a historical reserve timeline.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028C added Paxos transparency entry point but not exact monthly report rows."},
-  {"id":"sog_unknown_usdp_redemption_terms","stablecoin_id":"sog_st_usdp","issuer_id":"sog_issuer_paxos","topic":"redemption_terms","description":"USDP direct redemption eligibility, customer onboarding, jurisdiction, minimum amounts, and current Paxos terms need source-specific extraction before final redemption availability is displayed.","severity":"medium","last_checked_at":"2026-06-05","notes":"Keep Paxos issuer redemption separate from exchange liquidity and secondary-market trading."},
-  {"id":"sog_unknown_usdp_solana_status","stablecoin_id":"sog_st_usdp","issuer_id":"sog_issuer_paxos","topic":"solana_deployment_status","description":"USDP Solana token status, issuer support level, and exact lifecycle context should be reviewed against Paxos sources and explorer data before being treated as final chain coverage.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028C added Solscan reference because Paxos links to a Solana token page."},
-  {"id":"sog_unknown_usdg_issuer_entity","stablecoin_id":"sog_st_usdg","issuer_id":"sog_issuer_global_dollar_network","topic":"issuer_entity","description":"USDG issuer entity, Paxos-related issuing entity roles, Singapore or EU entity context, and Global Dollar Network responsibilities need source-specific separation before final issuer modeling.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028D separates issuer-entity questions from network partner questions."},
-  {"id":"sog_unknown_usdg_reserve_reports","stablecoin_id":"sog_st_usdg","issuer_id":"sog_issuer_global_dollar_network","topic":"reserve_report_history","description":"USDG reserve report source and period-level reserve reporting history need exact source-backed entries before SOG displays a reserve timeline.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028D added network and Paxos reserve entry points only."},
-  {"id":"sog_unknown_usdg_redemption_path","stablecoin_id":"sog_st_usdg","issuer_id":"sog_issuer_global_dollar_network","topic":"redemption_path","description":"USDG redemption path, eligible customers, partner-mediated access, and direct Paxos or network redemption wording need source-specific extraction before final redemption availability is displayed.","severity":"medium","last_checked_at":"2026-06-05","notes":"Keep redemption access separate from partner network participation and exchange liquidity."},
-  {"id":"sog_unknown_usdg_chain_contracts","stablecoin_id":"sog_st_usdg","issuer_id":"sog_issuer_global_dollar_network","topic":"chain_contracts","description":"USDG supported chains, canonical contract addresses, and issuer-supported deployment status need official source review before final chain coverage is displayed.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028D keeps deployment as source_review_needed until durable docs are separated."},
-  {"id":"sog_unknown_usdg_network_partners","stablecoin_id":"sog_st_usdg","issuer_id":"sog_issuer_global_dollar_network","topic":"network_partners","description":"Global Dollar Network partner roles, partner incentives, public partner list, and network economics need source-specific documentation before they are modeled as stablecoin lifecycle facts.","severity":"low","last_checked_at":"2026-06-05","notes":"Partner/network information belongs in context fields, not as a safety or quality score."},
-  {"id":"sog_unknown_usds_dai_upgrade_path","stablecoin_id":"sog_st_usds","issuer_id":"sog_issuer_makerdao_sky","topic":"dai_usds_upgrade_path","description":"The exact lifecycle relationship between DAI and USDS, including upgrade, conversion, reversibility, app flow, and any future migration changes, needs source-specific protocol documentation before final lifecycle treatment.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028E separates DAI/USDS lifecycle from savings-token context."},
-  {"id":"sog_unknown_usds_susds_relationship","stablecoin_id":"sog_st_usds","issuer_id":"sog_issuer_makerdao_sky","topic":"susds_relationship","description":"sUSDS is a related savings token and should not be merged into the USDS stablecoin record. Exact mint, withdrawal, rate, liquidity, and contract behavior need dedicated source-backed treatment.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028E records sUSDS as related context rather than as the same asset."},
-  {"id":"sog_unknown_usds_collateral_composition","stablecoin_id":"sog_st_usds","issuer_id":"sog_issuer_makerdao_sky","topic":"collateral_composition","description":"USDS collateral composition, protocol exposure, reserve-style reporting, and how these relate to legacy MakerDAO or current Sky disclosures need exact protocol and dashboard sources.","severity":"medium","last_checked_at":"2026-06-05","notes":"A fiat-reserve framing is not appropriate for USDS without protocol-specific context."},
-  {"id":"sog_unknown_usds_rates_and_governance","stablecoin_id":"sog_st_usds","issuer_id":"sog_issuer_makerdao_sky","topic":"rates_and_governance","description":"Sky Savings Rate and related rates can change through protocol governance. Current rates, governing modules, and effective dates should not be represented as static guaranteed product terms.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028E keeps rate context separate from stablecoin status and avoids yield guarantees."},
-  {"id":"sog_unknown_usds_chain_contracts","stablecoin_id":"sog_st_usds","issuer_id":"sog_issuer_makerdao_sky","topic":"chain_contracts","description":"USDS, sUSDS, stUSDS, bridge, and chain-by-chain contract references need exact developer-doc, chainlog, or verified explorer sources before final addresses are displayed.","severity":"medium","last_checked_at":"2026-06-05","notes":"PR-028E added documentation entry points but not final contract records."},
-  {"id":"sog_unknown_usds_interface_availability","stablecoin_id":"sog_st_usds","issuer_id":"sog_issuer_makerdao_sky","topic":"interface_availability","description":"Sky.money interface access, regional availability, USDS product availability, and protocol access should be separated because interface restrictions do not necessarily equal protocol unavailability.","severity":"medium","last_checked_at":"2026-06-05","notes":"Keep interface access, protocol access, and secondary-market availability distinct."}
+  {
+    "id": "sog_unknown_rlusd_redemption_terms",
+    "stablecoin_id": "sog_st_rlusd",
+    "issuer_id": "sog_issuer_ripple",
+    "topic": "redemption_terms",
+    "description": "RLUSD customer redemption access, user vs customer distinction, supported jurisdictions, suspension conditions, and operational redemption limits need exact source extraction from Ripple legal terms before final display.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028A refined known unknown. Ripple states RLUSD is redeemable 1:1, but detailed availability is terms-dependent and jurisdiction-dependent."
+  },
+  {
+    "id": "sog_unknown_rlusd_reserve_attestation_history",
+    "stablecoin_id": "sog_st_rlusd",
+    "issuer_id": "sog_issuer_ripple",
+    "topic": "reserve_attestation_history",
+    "description": "RLUSD monthly reserve report history and exact third-party attestation periods need period-level records before SOG displays a historical reserve timeline.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028A added the transparency and attestation archive page, but not exact period-level entries."
+  },
+  {
+    "id": "sog_unknown_rlusd_deployment_identifiers",
+    "stablecoin_id": "sog_st_rlusd",
+    "issuer_id": "sog_issuer_ripple",
+    "topic": "deployment_identifiers",
+    "description": "RLUSD XRP Ledger issuer/token identifiers and Ethereum contract address need official docs, implementation, or verified explorer sources before final address display.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028A keeps XRP Ledger and Ethereum deployment rows as issuer-supported source-review areas."
+  },
+  {
+    "id": "sog_unknown_eurc_mica_context",
+    "stablecoin_id": "sog_st_eurc",
+    "issuer_id": "sog_issuer_circle",
+    "topic": "mica_context",
+    "description": "EURC MiCA compliance and EU regulatory context should be backed by direct Circle and official regulatory sources before SOG treats it as a complete jurisdictional record.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028B separates MiCA context from reserve and deployment topics."
+  },
+  {
+    "id": "sog_unknown_eurc_reserve_report_history",
+    "stablecoin_id": "sog_st_eurc",
+    "issuer_id": "sog_issuer_circle",
+    "topic": "reserve_report_history",
+    "description": "EURC monthly reserve or attestation report history needs exact period-level report URLs before SOG displays a historical reserve timeline.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028B added Circle transparency as an entry point only."
+  },
+  {
+    "id": "sog_unknown_eurc_circle_mint_access",
+    "stablecoin_id": "sog_st_eurc",
+    "issuer_id": "sog_issuer_circle",
+    "topic": "circle_mint_access",
+    "description": "EURC conversion through Circle Mint, account eligibility, business access, geography, and retail availability need source-specific explanation.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "Keep Circle Mint access separate from exchange trading and wallet availability."
+  },
+  {
+    "id": "sog_unknown_eurc_chain_contracts",
+    "stablecoin_id": "sog_st_eurc",
+    "issuer_id": "sog_issuer_circle",
+    "topic": "chain_contracts",
+    "description": "EURC chain-by-chain contract, token mint, or asset issuer references for Avalanche, Base, Ethereum, Solana, and Stellar need official source review before final address display.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028B split deployment rows by chain but leaves exact identifiers as source-review needed."
+  },
+  {
+    "id": "sog_unknown_usdp_reserve_report_history",
+    "stablecoin_id": "sog_st_usdp",
+    "issuer_id": "sog_issuer_paxos",
+    "topic": "reserve_report_history",
+    "description": "USDP reserve report archive entries need period-level report rows before SOG displays a historical reserve timeline.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028C added Paxos transparency entry point but not exact monthly report rows."
+  },
+  {
+    "id": "sog_unknown_usdp_redemption_terms",
+    "stablecoin_id": "sog_st_usdp",
+    "issuer_id": "sog_issuer_paxos",
+    "topic": "redemption_terms",
+    "description": "USDP direct redemption eligibility, customer onboarding, jurisdiction, minimum amounts, and current Paxos terms need source-specific extraction before final redemption availability is displayed.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "Keep Paxos issuer redemption separate from exchange liquidity and secondary-market trading."
+  },
+  {
+    "id": "sog_unknown_usdp_solana_status",
+    "stablecoin_id": "sog_st_usdp",
+    "issuer_id": "sog_issuer_paxos",
+    "topic": "solana_deployment_status",
+    "description": "USDP Solana token status, issuer support level, and exact lifecycle context should be reviewed against Paxos sources and explorer data before being treated as final chain coverage.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028C added Solscan reference because Paxos links to a Solana token page."
+  },
+  {
+    "id": "sog_unknown_usdg_issuer_entity",
+    "stablecoin_id": "sog_st_usdg",
+    "issuer_id": "sog_issuer_global_dollar_network",
+    "topic": "issuer_entity",
+    "description": "Paxos Digital Singapore Pte. Ltd. and Paxos Issuance Europe Oy are now recorded as joint legal issuers. The effective start date of the European issuer role and token-level provenance between the two issuing entities remain unresolved.",
+    "severity": "low",
+    "last_checked_at": "2026-07-14",
+    "notes": "Do not collapse the two legal issuers into the Global Dollar Network brand/network organization or the general Paxos row."
+  },
+  {
+    "id": "sog_unknown_usdg_reserve_reports",
+    "stablecoin_id": "sog_st_usdg",
+    "issuer_id": "sog_issuer_global_dollar_network",
+    "topic": "reserve_report_history",
+    "description": "USDG reserve report source and period-level reserve reporting history need exact source-backed entries before SOG displays a reserve timeline.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028D added network and Paxos reserve entry points only."
+  },
+  {
+    "id": "sog_unknown_usdg_redemption_path",
+    "stablecoin_id": "sog_st_usdg",
+    "issuer_id": "sog_issuer_global_dollar_network",
+    "topic": "redemption_path",
+    "description": "Direct one-to-one redemption is limited to verified Paxos customers and may be routed through Paxos Digital Singapore or Paxos Issuance Europe. Exact availability by residence, registered Paxos entity, account state, current minimum schedule, and banking route remains variable under the current terms.",
+    "severity": "low",
+    "last_checked_at": "2026-07-14",
+    "notes": "Keep direct Paxos redemption separate from Global Dollar Network participation, partner access, wallet holding, and exchange liquidity."
+  },
+  {
+    "id": "sog_unknown_usdg_chain_contracts",
+    "stablecoin_id": "sog_st_usdg",
+    "issuer_id": "sog_issuer_global_dollar_network",
+    "topic": "chain_contracts",
+    "description": "USDG supported chains, canonical contract addresses, and issuer-supported deployment status need official source review before final chain coverage is displayed.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028D keeps deployment as source_review_needed until durable docs are separated."
+  },
+  {
+    "id": "sog_unknown_usdg_network_partners",
+    "stablecoin_id": "sog_st_usdg",
+    "issuer_id": "sog_issuer_global_dollar_network",
+    "topic": "network_partners",
+    "description": "Global Dollar Network partner roles, partner incentives, public partner list, and network economics need source-specific documentation before they are modeled as stablecoin lifecycle facts.",
+    "severity": "low",
+    "last_checked_at": "2026-06-05",
+    "notes": "Partner/network information belongs in context fields, not as a safety or quality score."
+  },
+  {
+    "id": "sog_unknown_usds_dai_upgrade_path",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "dai_usds_upgrade_path",
+    "description": "The exact lifecycle relationship between DAI and USDS, including upgrade, conversion, reversibility, app flow, and any future migration changes, needs source-specific protocol documentation before final lifecycle treatment.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028E separates DAI/USDS lifecycle from savings-token context."
+  },
+  {
+    "id": "sog_unknown_usds_susds_relationship",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "susds_relationship",
+    "description": "sUSDS is a related savings token and should not be merged into the USDS stablecoin record. Exact mint, withdrawal, rate, liquidity, and contract behavior need dedicated source-backed treatment.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028E records sUSDS as related context rather than as the same asset."
+  },
+  {
+    "id": "sog_unknown_usds_collateral_composition",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "collateral_composition",
+    "description": "USDS collateral composition, protocol exposure, reserve-style reporting, and how these relate to legacy MakerDAO or current Sky disclosures need exact protocol and dashboard sources.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "A fiat-reserve framing is not appropriate for USDS without protocol-specific context."
+  },
+  {
+    "id": "sog_unknown_usds_rates_and_governance",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "rates_and_governance",
+    "description": "Sky Savings Rate and related rates can change through protocol governance. Current rates, governing modules, and effective dates should not be represented as static guaranteed product terms.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028E keeps rate context separate from stablecoin status and avoids yield guarantees."
+  },
+  {
+    "id": "sog_unknown_usds_chain_contracts",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "chain_contracts",
+    "description": "USDS, sUSDS, stUSDS, bridge, and chain-by-chain contract references need exact developer-doc, chainlog, or verified explorer sources before final addresses are displayed.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "PR-028E added documentation entry points but not final contract records."
+  },
+  {
+    "id": "sog_unknown_usds_interface_availability",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "topic": "interface_availability",
+    "description": "Sky.money interface access, regional availability, USDS product availability, and protocol access should be separated because interface restrictions do not necessarily equal protocol unavailability.",
+    "severity": "medium",
+    "last_checked_at": "2026-06-05",
+    "notes": "Keep interface access, protocol access, and secondary-market availability distinct."
+  }
 ]

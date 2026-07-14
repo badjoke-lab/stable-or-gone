@@ -12,7 +12,9 @@
     {
       "asset_id": "sog_st_husd",
       "asset_slug": "husd",
-      "target_dimensions": ["redemption"],
+      "target_dimensions": [
+        "redemption"
+      ],
       "decision": "reviewed_no_safe_change",
       "reviewed_evidence_ids": [
         "sog_src_husd_background_batch_d",
@@ -25,7 +27,11 @@
     {
       "asset_id": "sog_st_1gbp",
       "asset_slug": "poundtoken",
-      "target_dimensions": ["lifecycle", "organization_relationships", "redemption"],
+      "target_dimensions": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
       "decision": "reviewed_no_safe_change",
       "reviewed_evidence_ids": [
         "sog_src_1gbp_etherscan_batch_u",
@@ -38,7 +44,9 @@
     {
       "asset_id": "sog_st_rlusd",
       "asset_slug": "rlusd",
-      "target_dimensions": ["redemption"],
+      "target_dimensions": [
+        "redemption"
+      ],
       "decision": "reviewed_no_safe_change",
       "reviewed_evidence_ids": [
         "sog_src_rlusd_user_terms",
@@ -50,7 +58,10 @@
     {
       "asset_id": "sog_st_usdg",
       "asset_slug": "usdg",
-      "target_dimensions": ["legal_profile", "redemption"],
+      "target_dimensions": [
+        "legal_profile",
+        "redemption"
+      ],
       "decision": "canonical_change_applied",
       "reviewed_evidence_ids": [
         "sog_src_usdg_paxos_page",
@@ -61,16 +72,21 @@
         "data/organizations-pr364-tier-a-batch-4.json",
         "data/relationships-pr364-tier-a-batch-4.json",
         "data/evidence-pr364-tier-a-batch-4.json",
-        "data/stablecoin-profiles-pr364-tier-a-batch-4.json",
-        "data/legal-profiles-v3-pr364-tier-a-batch-4.json",
-        "data/known-unknowns-pr364-tier-a-batch-4.json"
+        "data/stablecoin-profiles-v2.json",
+        "data/legal-profiles-v3-batch-d2a.json",
+        "data/known-unknowns-extra.json"
       ],
-      "changed_dimensions": ["legal_profile", "redemption"]
+      "changed_dimensions": [
+        "legal_profile",
+        "redemption"
+      ]
     },
     {
       "asset_id": "sog_st_usds",
       "asset_slug": "usds",
-      "target_dimensions": ["legal_profile"],
+      "target_dimensions": [
+        "legal_profile"
+      ],
       "decision": "canonical_change_applied",
       "reviewed_evidence_ids": [
         "sog_src_usds_sky_page",
@@ -80,9 +96,11 @@
       "reason": "Current Sky disclosures identify USDS as the native stablecoin of Sky Protocol, describe system collateral backing and decentralized governance, and state that Sky.money is a non-custodial interface without control over protocol contracts or governance. This supports a protocol-asset legal profile without a direct corporate holder claim.",
       "canonical_files_changed": [
         "data/evidence-pr364-tier-a-batch-4.json",
-        "data/legal-profiles-v3-pr364-tier-a-batch-4.json"
+        "data/legal-profiles-v3-batch-d2a.json"
       ],
-      "changed_dimensions": ["legal_profile"]
+      "changed_dimensions": [
+        "legal_profile"
+      ]
     }
   ],
   "boundaries": {
