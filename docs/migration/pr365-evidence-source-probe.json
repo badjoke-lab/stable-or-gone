@@ -1,0 +1,815 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_pr365_evidence_source_probe_2026_07_14",
+  "status": "internal_diagnostic_not_canonical_evidence",
+  "public_output": false,
+  "review_pr": 365,
+  "cutoff_timestamp": "20260714235959",
+  "queue_id": "sog_evidence_archive_maintenance_queue_pr365_2026_07_14",
+  "result_count": 10,
+  "results": [
+    {
+      "evidence_id": "sog_src_usdg_network_terms",
+      "source_file": "data/evidence-extra.json",
+      "source_url": "https://www.globaldollar.com/",
+      "published_at": null,
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://globaldollar.com/",
+        "content_type": "text/html"
+      },
+      "cdx": {
+        "ok": true,
+        "status": 200,
+        "error": null,
+        "capture_count": 58,
+        "first_capture": {
+          "timestamp": "20241102173729",
+          "original": "https://globaldollar.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "7L5JUX74LOJXDPRW7NMCORL6Z6ROH3P4"
+        },
+        "latest_capture": {
+          "timestamp": "20260630172719",
+          "original": "https://globaldollar.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "AJ32SWJZNMYCMYCKVVSGJLEHXGSMLFM6"
+        },
+        "captures": [
+          {
+            "timestamp": "20241102173729",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7L5JUX74LOJXDPRW7NMCORL6Z6ROH3P4"
+          },
+          {
+            "timestamp": "20241105002306",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DC7M7K2G5PQARYHEYRCWD242LUOJQRCT"
+          },
+          {
+            "timestamp": "20241106183443",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QUIEOQVGR55WWFZMXZSTFYJLOUZSYTHA"
+          },
+          {
+            "timestamp": "20241127232319",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "N7PCFUMMD4JOGEADIIZFW577IYW3MMTK"
+          },
+          {
+            "timestamp": "20241207130206",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YFDC5OGAP57Z2TYKS5YWDPQRK3RTTHYP"
+          },
+          {
+            "timestamp": "20250115180841",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VMN57OEORFV2BDFJFG2E7NJK4TT6QJVX"
+          },
+          {
+            "timestamp": "20250217074709",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GNZPTR63HFRFO7W5WA4NKCSNDZ7ERQ2A"
+          },
+          {
+            "timestamp": "20250219075900",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VMN57OEORFV2BDFJFG2E7NJK4TT6QJVX"
+          },
+          {
+            "timestamp": "20250225141140",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4SHQ4DFMG3PQ2R5E36QI3A6ZOORHJQWL"
+          },
+          {
+            "timestamp": "20250303173042",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "S7NFM6AMGFK5USC3NBFQNOACAWNXIDVK"
+          },
+          {
+            "timestamp": "20250313004002",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OALMEMIWNVR5JIYCQ7SCE6ZHKVCDJFK7"
+          },
+          {
+            "timestamp": "20250319174745",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IQWCVQJCYGSOW6FM76CIVKBTIZRRLNSM"
+          },
+          {
+            "timestamp": "20250329184554",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QVMQAABFJ4GWYXX6MEEETJKZHSOUC4I4"
+          },
+          {
+            "timestamp": "20250423194032",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3TVINXT4LHRXQDG5NKXMY3I4ZB7K5E36"
+          },
+          {
+            "timestamp": "20250430215233",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XR3IIOIGUYPXAVDWYSYK2R7ZCJBOHIOM"
+          },
+          {
+            "timestamp": "20250512024153",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DSDJ2YK5V45RZZPGR5YZNIS7SHZAGPJD"
+          },
+          {
+            "timestamp": "20250513193341",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BWIQFH34M5BKXBRUCQ5KSUYYMAQGWOTV"
+          },
+          {
+            "timestamp": "20250520041851",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7IKHMC7P54AKJUELFC3LSLLCCJEHDYCP"
+          },
+          {
+            "timestamp": "20250525191035",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "X24LAHUWH46XQSA6BVCY5IV7JCUEXR3A"
+          },
+          {
+            "timestamp": "20250531082609",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7UWECSAVH7OMP43EOAC2G5MZAIAVO76F"
+          },
+          {
+            "timestamp": "20250627052501",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PE62SVTTDO6FM7WWW3Q7KMTDOZHM6WJX"
+          },
+          {
+            "timestamp": "20250702014537",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GN57HXVATHDMPYRVTJOOY5CT56GEOPH7"
+          },
+          {
+            "timestamp": "20250709174856",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ATWYMHKZUHHK6SDJ74GHT32MUA7RZP4X"
+          },
+          {
+            "timestamp": "20250712003055",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DLV7E3BAKFSGEFU4MUCFDR5DYTBFTU4N"
+          },
+          {
+            "timestamp": "20250715123952",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TALCG7QJGK6ID7K45E2X4HJGH76VSTTD"
+          },
+          {
+            "timestamp": "20250719235203",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Y5HJ6AI6RBJ7K6T7TDB4LBM737AZD4Z3"
+          },
+          {
+            "timestamp": "20250801151514",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VUSWKQZGIMP63LBUYMFGLQUAJNZ6C5CE"
+          },
+          {
+            "timestamp": "20250801215056",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UBV6X2QPWCA4PE7KIKMC7IU2B5D22IJZ"
+          },
+          {
+            "timestamp": "20250812024652",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5OOEA5XR7FMKNATFIYROLOE6JUQZT47R"
+          },
+          {
+            "timestamp": "20250814190828",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3ZODVREDAEGBDC5XE7KQ6KPVI3BS3VWQ"
+          },
+          {
+            "timestamp": "20250910195346",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "47TFKY37GFFKA3R4ZI7EEPCKN6EOLTPK"
+          },
+          {
+            "timestamp": "20250920133644",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CT47DIMFTAYSJG4XKY75AEX7RMX65CUX"
+          },
+          {
+            "timestamp": "20251005115225",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4UFHIRWXFJUXKZVV4XIILYZRFCTMSV5I"
+          },
+          {
+            "timestamp": "20251020145744",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Z4SDJSPYJ7DBMWOGNOU2HOO5TZBOZMX3"
+          },
+          {
+            "timestamp": "20251028055519",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "775KNS2YHJLJP255ILHM7TFT7QRHN42D"
+          },
+          {
+            "timestamp": "20251101014630",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RVN2EMOBNONRPESXQEJ4A4JTMMUP3QS7"
+          },
+          {
+            "timestamp": "20251106211753",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RR7L26UQHHKH2M2HWNOIHJR2K6PRBXOR"
+          },
+          {
+            "timestamp": "20251110131832",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6J7CMIM446XMVMB3KHWLECNYSG5FSGWG"
+          },
+          {
+            "timestamp": "20251112131451",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MI46ETF7EC3R43R4CONDDVMBD5L75MWY"
+          },
+          {
+            "timestamp": "20251117150819",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VKURNGRBMN27VTIKUM4XBMA6FFJDX446"
+          },
+          {
+            "timestamp": "20251204151919",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XQRRVBQCVLEOLMQ6YFJC2ZMCV3CGVP66"
+          },
+          {
+            "timestamp": "20251204161816",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IX3WCK5MMSFF4PQARKJZDBNV4LEK5MQC"
+          },
+          {
+            "timestamp": "20251205145700",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "K23XYCMPP4DJNRBF6UBAMTL4CC5EK4H3"
+          },
+          {
+            "timestamp": "20251218225753",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YXSOA2EBBWMMUJ5M2KEHLDW26LHSYUIB"
+          },
+          {
+            "timestamp": "20251220123554",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "J4N725Q6I25GJNOCNSBO35FJZWDMZVHF"
+          },
+          {
+            "timestamp": "20260102072701",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "332G5LRR5PPNJWOA5UU4ZNJJWKQNXTJH"
+          },
+          {
+            "timestamp": "20260125125453",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PZK2YJXSWXVS2W4BDX3YY6VH4GU7RIPH"
+          },
+          {
+            "timestamp": "20260203204620",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6QCDKJJBYYOZ6TMVXK5NNXYAJ6VXBRNL"
+          },
+          {
+            "timestamp": "20260218165459",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CUV3QXQX3VVBCAATAY7N36XY5H7IMMYQ"
+          },
+          {
+            "timestamp": "20260311011109",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Z6MYWAGMRNJ4VTSUF4U3EEJPCALOKOSZ"
+          },
+          {
+            "timestamp": "20260318115440",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FSTTBNLATETP7I52VB2II6Y5MEPXBUDQ"
+          },
+          {
+            "timestamp": "20260324145421",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "74J24KKWAD66CS5JQ7XNANTITCKKKKWZ"
+          },
+          {
+            "timestamp": "20260410010549",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "B7PJTRMPAYJJYZ47PYGMIXDP6FAFSHVD"
+          },
+          {
+            "timestamp": "20260412160633",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UTYU7KWHLIWEAJ372TK7PYRPNDANNDIO"
+          },
+          {
+            "timestamp": "20260517113854",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QIEZYS2KJIA2NT6SEPNYJGIBRZORZEPN"
+          },
+          {
+            "timestamp": "20260622001811",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HZ2E7GXQZAC7TZH3DDJP2R7UAPO3YV3U"
+          },
+          {
+            "timestamp": "20260626113629",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WO7ZPDDF2ZCXCKR5JMT4TI4PCMFBVW67"
+          },
+          {
+            "timestamp": "20260630172719",
+            "original": "https://globaldollar.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AJ32SWJZNMYCMYCKVVSGJLEHXGSMLFM6"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "sog_src_usdg_paxos_stablecoin_terms_pr364",
+      "source_file": "data/evidence-pr364-tier-a-batch-4.json",
+      "source_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+      "published_at": "2026-06-30",
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+        "content_type": "text/html"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "timeout",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_ust_sec_event",
+      "source_file": "data/evidence-events-pr036.json",
+      "source_url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+      "published_at": "2023-02-16",
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+        "content_type": "text/html; charset=UTF-8"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "timeout",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_xaut_legal_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "source_url": "https://gold.tether.to/legal/lawinforcementpolicy",
+      "published_at": null,
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://gold.tether.to/legal/lawinforcementpolicy",
+        "content_type": "text/html"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_bold_live_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "source_url": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+      "published_at": "2025-05-19",
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+        "content_type": "text/html; charset=utf-8"
+      },
+      "cdx": {
+        "ok": true,
+        "status": 200,
+        "error": null,
+        "capture_count": 23,
+        "first_capture": {
+          "timestamp": "20250122180349",
+          "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "GKKLMJYUP5IAY22FSGS2IPWYNR6ZJ77T"
+        },
+        "latest_capture": {
+          "timestamp": "20260702094952",
+          "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "U2PZN7DWUFY3HY3IX522ARDAQFXXO5CB"
+        },
+        "captures": [
+          {
+            "timestamp": "20250122180349",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GKKLMJYUP5IAY22FSGS2IPWYNR6ZJ77T"
+          },
+          {
+            "timestamp": "20250210095328",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Q5OM2ELVG7A4SN4KVLN2KNNIGVT6FJ4P"
+          },
+          {
+            "timestamp": "20250325220851",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XMPPDBTGS7EQDGUXHE5G2XIQJTE5DPRY"
+          },
+          {
+            "timestamp": "20250408213136",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YD57XDLW6JFVLME2JLYGK6GHLI3TRNMR"
+          },
+          {
+            "timestamp": "20250609144742",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2YR3RE6C4TYRQF5IS7ZLQT2GZRGIEZYJ"
+          },
+          {
+            "timestamp": "20250622053221",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IUOHFQZHM5RE6Y7PVW6AZGEUCYA5Z6LG"
+          },
+          {
+            "timestamp": "20250710114652",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5PP4UVV54A6JTUZENENVWQYIGMO5G4UQ"
+          },
+          {
+            "timestamp": "20250809203438",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2WRJVTV5USCO4H35PIV2GER4ZPTX7HS3"
+          },
+          {
+            "timestamp": "20250918054732",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AV5JQJ3PTFSZNM5KAZAVJLGP22DB7Z66"
+          },
+          {
+            "timestamp": "20250919122358",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "N3BH7DUPSRQNMS7KKGT5KCOEAGPQUOAS"
+          },
+          {
+            "timestamp": "20251023075036",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "U6W5P6VMX325V7UCC4EFEE2TPLLCSTDN"
+          },
+          {
+            "timestamp": "20251111050727",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "73Q4JIDMD6XESMUWR5L7MPES4JRKHDGH"
+          },
+          {
+            "timestamp": "20251116015754",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CYUBCO3LILXE26DSN77EY4I4R5JEI2A3"
+          },
+          {
+            "timestamp": "20251212123355",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KHXPJ5MSOX7AIACE2LHBGWQYFDZ535IL"
+          },
+          {
+            "timestamp": "20251220085212",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GVQ5BRB2UIC67M6B3EXAU744EZPH4IOT"
+          },
+          {
+            "timestamp": "20260128091948",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VQ3YYTAIEDKKDT3CG6IA72IOMDG3BU6W"
+          },
+          {
+            "timestamp": "20260216142541",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SJGQWBEXUWEO4TE7QPS7NRSYUHP5BO7A"
+          },
+          {
+            "timestamp": "20260303044932",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "J7EKN3CDFGMENLXOE2ZF2PZ77VIZFTNS"
+          },
+          {
+            "timestamp": "20260315172227",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FTV7NR3J6NY5V4MDDYL36EL4VCERQ2SQ"
+          },
+          {
+            "timestamp": "20260402113451",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UT46G5Z6T5UKTHHFHSHYOWD34YUBO3B4"
+          },
+          {
+            "timestamp": "20260502152614",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KOKCSK7UJAFAA572SJZQR7MKTSDOKOXX"
+          },
+          {
+            "timestamp": "20260601155337",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5PSCPPMLYJEYSSDMDRJCPDYRBW7FFGR4"
+          },
+          {
+            "timestamp": "20260702094952",
+            "original": "https://docs.liquity.org/v2-documentation/friendly-fork-program",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "U2PZN7DWUFY3HY3IX522ARDAQFXXO5CB"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "sog_src_bold_overview_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "source_url": "https://docs.liquity.org/v2-faq/bold-and-earn",
+      "published_at": null,
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.liquity.org/v2-faq/bold-and-earn",
+        "content_type": "text/html; charset=utf-8"
+      },
+      "cdx": {
+        "ok": false,
+        "status": 503,
+        "error": "<html><body><h1>503 Service Unavailable</h1>\nNo server is available to handle this request.\n</body></html>\n",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_bold_redemptions_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "source_url": "https://docs.liquity.org/faq/lusd-redemptions",
+      "published_at": null,
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.liquity.org/v2-faq/redemptions-and-delegation",
+        "content_type": "text/html; charset=utf-8"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_busd_binance_phaseout",
+      "source_file": "data/evidence.json",
+      "source_url": "https://www.binance.com/en/support/announcement/binance-will-gradually-cease-support-for-busd-products-38d49e7aa3ed456f8b2fe4a8e2e8e102",
+      "published_at": null,
+      "current": {
+        "ok": true,
+        "status": 202,
+        "final_url": "https://www.binance.com/en/support/announcement/binance-will-gradually-cease-support-for-busd-products-38d49e7aa3ed456f8b2fe4a8e2e8e102",
+        "content_type": "text/html; charset=UTF-8"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_busd_binance_phaseout_event",
+      "source_file": "data/evidence-events-pr036.json",
+      "source_url": "https://www.binance.com/en/support/announcement/binance-will-gradually-cease-support-for-busd-products-38d49e7aa3ed456f8b2fe4a8e2e8e102",
+      "published_at": "2023-08-31",
+      "current": {
+        "ok": true,
+        "status": 202,
+        "final_url": "https://www.binance.com/en/support/announcement/binance-will-gradually-cease-support-for-busd-products-38d49e7aa3ed456f8b2fe4a8e2e8e102",
+        "content_type": "text/html; charset=UTF-8"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    },
+    {
+      "evidence_id": "sog_src_busd_paxos_issuer_update",
+      "source_file": "data/evidence.json",
+      "source_url": "https://paxos.com/busd/",
+      "published_at": null,
+      "current": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.paxos.com/busd",
+        "content_type": "text/html"
+      },
+      "cdx": {
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "capture_count": 0,
+        "first_capture": null,
+        "latest_capture": null,
+        "captures": []
+      }
+    }
+  ]
+}
