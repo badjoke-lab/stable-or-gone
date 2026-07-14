@@ -20,7 +20,9 @@ export const primaryDisplayRolePriority = [
 // Overrides are allowed only when two or more relationships remain tied after
 // status, role, and temporal-boundary comparison. Keys are stablecoin IDs and
 // values are canonical relationship IDs.
-export const primaryDisplayRelationshipOverrides = Object.freeze({});
+export const primaryDisplayRelationshipOverrides = Object.freeze({
+  sog_st_usdg: 'sog_rel_usdg_paxos_digital_singapore_pr364'
+});
 
 const normalizeStatus = (value) => primaryDisplayStatusPriority.includes(value) ? value : 'unknown';
 const normalizeRole = (value) => primaryDisplayRolePriority.includes(value) ? value : 'other';
