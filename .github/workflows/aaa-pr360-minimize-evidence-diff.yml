@@ -1,0 +1,36 @@
+name: AAA PR360 Minimize Evidence Diff
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  minimize:
+    if: github.head_ref == 'pr360-evidence-correction-batch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr360-evidence-correction-batch
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/minimize-pr360-evidence-diff.mjs
+      - run: node scripts/validate-evidence-correction-batch-pr360.mjs
+      - name: Commit minimal Evidence diff
+        run: |
+          if git diff --quiet -- data; then
+            echo 'PR #360 Evidence data diff is already minimal.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data
+          git commit -m 'Minimize PR 360 Evidence correction diff'
+          git push origin HEAD:pr360-evidence-correction-batch
