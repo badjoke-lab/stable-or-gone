@@ -1,0 +1,51 @@
+name: PR 365 Apply Reviewed Maintenance
+
+on:
+  push:
+    branches:
+      - pr365-evidence-archive-maintenance-batch-2
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr365-evidence-archive-maintenance-batch-2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Apply reviewed maintenance
+        run: node scripts/apply-pr365-evidence-maintenance.mjs
+      - name: Finalize deterministic history and handoff
+        run: node scripts/finalize-pr365-stats-history.mjs
+      - name: Validate reviewed scope
+        run: |
+          node scripts/build-evidence-archive-maintenance-queue-pr365.mjs --check
+          node scripts/validate-evidence-archive-maintenance-batch-2-pr365.mjs
+          node scripts/validate-registry-evidence-integrity-audit.mjs
+          npm run validate:data
+          npm run validate:evidence-relations-v2
+          npm run validate:parity
+          npm run validate:release-integrity
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+          SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+      - name: Commit reviewed result
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add data/evidence-batch-b.json data/evidence-batch-c.json data/stats-history.json docs/migration/current-canonical-checkpoint.json docs/migration/current-stats-history-checkpoint.json docs/migration/evidence-archive-maintenance-outcomes-pr365.json docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Apply reviewed PR 365 Evidence maintenance"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin pr365-evidence-archive-maintenance-batch-2
+          git push origin HEAD:pr365-evidence-archive-maintenance-batch-2
