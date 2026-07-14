@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "review_gate_id": "sog_post_pr360_review_gate_2026_07_14",
+  "status": "reviewed_internal_governance_checkpoint",
+  "public_output": false,
+  "reviewed_at": "2026-07-14",
+  "source_commit": "0bdda598b596b406ae8a01827072f5b8c253b23e",
+  "reviewed_sequence": {
+    "from_pr": 353,
+    "through_pr": 360,
+    "items": [
+      "Record Depth & Coverage Baseline",
+      "Tier A Dossier Deepening Batch 1",
+      "Tier A Dossier Deepening Batch 2",
+      "Market Access Pilot 1",
+      "Tier A Dossier Deepening Batch 3",
+      "Record Growth Batch 1",
+      "Market Access Pilot 2",
+      "Evidence and Correction Batch"
+    ]
+  },
+  "current_checkpoint": {
+    "canonical_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
+    "statistics_checkpoint_id": "sog_evidence_correction_batch_112_checkpoint_pr360_2026_07_14",
+    "assets": 112,
+    "organizations": 105,
+    "relationships": 122,
+    "events": 187,
+    "evidence": 557,
+    "evidence_relations": 557,
+    "deployments": 174,
+    "market_access_records": 8,
+    "known_unknowns": 325,
+    "high_or_critical_known_unknowns": 124,
+    "assets_with_high_or_critical_known_unknowns": 67,
+    "archive_recorded": 387,
+    "archive_not_recorded": 170,
+    "archive_coverage_percentage": 69.48,
+    "typed_event_detail_percentage": 100
+  },
+  "review_findings": {
+    "record_family_depth": {
+      "decision": "rebaseline_required",
+      "evidence": [
+        "The immutable PR #353 baseline covers 110 assets, while the current registry contains 112 assets.",
+        "PR #354, PR #355, and PR #357 reviewed 15 of the original 18 Tier A candidates.",
+        "Thirteen selected candidates received bounded canonical improvements and two were reviewed with no safe canonical change.",
+        "Three original candidates were not consumed by the completed dossier batches: poundtoken, USDG, and USDS.",
+        "The old baseline cannot measure current post-batch Compare, Timeline, Market Access, or evidence-maintenance leverage."
+      ]
+    },
+    "compare_utility": {
+      "decision": "measurement_before_more_batches",
+      "evidence": [
+        "The PR #353 baseline classified all 110 assets as usable and none as strong for comparison readiness.",
+        "No reviewed post-PR #360 Record Depth delta exists to establish which dossier changes materially improved Compare utility."
+      ]
+    },
+    "timeline_density": {
+      "decision": "preserve_semantics_and_measure_density",
+      "evidence": [
+        "The current registry contains 187 events with typed details for all 187 events.",
+        "The completed dossier sequence did not establish a reviewed density metric by asset or material event family."
+      ]
+    },
+    "market_access_utility": {
+      "decision": "bounded_expansion_after_rebaseline",
+      "evidence": [
+        "Canonical Market Access increased from zero to eight records.",
+        "All eight records currently cover two assets, one jurisdiction, and one platform/service context.",
+        "The pilots validate schema, evidence, and manual-review governance but do not yet provide broad access utility."
+      ]
+    },
+    "monitoring_signal_utility": {
+      "decision": "keep_review_only",
+      "evidence": [
+        "The repository does not contain a canonical monitoring-signal-to-reviewed-merge conversion metric.",
+        "Monitoring therefore remains useful for discovery but is not evidence for automatic promotion or a larger publication surface."
+      ]
+    },
+    "correction_and_source_maintenance": {
+      "decision": "continue_bounded_batches",
+      "evidence": [
+        "PR #360 improved archive coverage from 380 to 387 records.",
+        "One hundred seventy canonical Evidence records still have no archive recorded.",
+        "Evidence maintenance remains a material ongoing workload rather than a completed cleanup."
+      ]
+    },
+    "monthly_maintenance": {
+      "decision": "continue_existing_cycle",
+      "evidence": [
+        "No repository-authoritative burden metric establishes that the current monthly cycle should expand or contract.",
+        "The existing public-safe monthly maintenance boundary remains sufficient."
+      ]
+    },
+    "external_usage_and_referrals": {
+      "decision": "no_product_surface_amendment",
+      "evidence": [
+        "No repository-authoritative usage or referral checkpoint was available at this review gate.",
+        "A new public page, explorer, dashboard, ranking surface, or navigation family is therefore not authorized."
+      ]
+    }
+  },
+  "decision": {
+    "asset_growth_in_next_sequence": false,
+    "public_surface_expansion_in_next_sequence": false,
+    "approved_sequence": [
+      {
+        "pr": 361,
+        "item": "post-PR 360 review gate and authority reset"
+      },
+      {
+        "pr": 362,
+        "item": "112-asset Record Depth Rebaseline"
+      },
+      {
+        "pr": 363,
+        "item": "Tier A Dossier Deepening Batch 4"
+      },
+      {
+        "pr": 364,
+        "item": "Market Access Pilot 3"
+      },
+      {
+        "pr": 365,
+        "item": "Evidence and Correction Batch 2"
+      },
+      {
+        "gate": "REVIEW GATE"
+      }
+    ],
+    "rationale": "The next competitive gain is more likely to come from measuring and deepening the existing 112-asset registry, broadening narrowly proven Market Access utility, and reducing Evidence maintenance debt than from immediately adding more assets or public surfaces."
+  },
+  "preserved_boundaries": {
+    "canonical_data_change": false,
+    "historical_checkpoint_rewrite": false,
+    "monitoring_auto_promotion": false,
+    "editorial_research_auto_promotion": false,
+    "new_public_surface": false,
+    "asset_rank": false,
+    "single_composite_score": false,
+    "investment_recommendation": false
+  }
+}
