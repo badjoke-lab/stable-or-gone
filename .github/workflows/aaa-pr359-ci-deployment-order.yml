@@ -1,0 +1,44 @@
+name: AAA PR359 CI Deployment Order
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  diagnose:
+    if: github.head_ref == 'pr359-market-access-pilot-2'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/diagnose-ci-deployment-order-pr359.mjs
+      - name: Publish result
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- pr359-ci-deployment-order -->';
+            let report = null;
+            try { report = JSON.parse(fs.readFileSync('artifacts/pr359/ci-deployment-order.json','utf8')); } catch {}
+            const detail = (report?.results ?? []).map((row)=>`- ${row.ok?'✅':'❌'} **${row.name}**\n\n\`\`\`text\n${row.output_tail || '(no output)'}\n\`\`\``).join('\n');
+            const body = `${marker}\n## PR #359 CI-order deployment diagnostic\n\n${detail || 'No report generated.'}\n\nHead: \`${context.sha}\``;
+            const comments = await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing = comments.find((comment)=>comment.body?.includes(marker));
+            if (existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr359-ci-deployment-order-${{ github.run_id }}
+          path: artifacts/pr359/ci-deployment-order.json
+          if-no-files-found: error
