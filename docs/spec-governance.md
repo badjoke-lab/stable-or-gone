@@ -44,7 +44,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/evidence-correction-batch-pr360-spec.md
+docs/quality/post-pr360-review-gate-pr361-spec.md
 ```
 
 Current required prior outputs:
@@ -88,8 +88,8 @@ PR #356 Market Access Pilot 1: complete
 PR #357 Tier A Dossier Deepening — Batch 3: complete
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
-post-PR #360 review gate: next
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
 ```
 
 Approved bounded sequence:
@@ -570,7 +570,7 @@ Current work item:
 ```text
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
+PR #360 Evidence and Correction Batch: complete
 ```
 
 Binding references:
@@ -605,8 +605,8 @@ Current work item:
 
 ```text
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
-post-PR #360 review gate: next
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
 ```
 
 Binding references:
@@ -631,4 +631,42 @@ Market Access Records: 8
 ```
 
 PR #360 may touch at most 10 Evidence records and 5 non-Evidence records. Queue selection is internal and does not authorize automatic canonical correction. No asset, Market Access, ranking, score, or public product surface may be added.
+
+## PR #361 active review-gate authority
+
+Current work item:
+
+```text
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
+PR #362 Record Depth and Coverage Baseline Refresh: next
+```
+
+Approved bounded sequence after review:
+
+```text
+PR #362 Record Depth and Coverage Baseline Refresh
+PR #363 Tier A Dossier Deepening Batch 4
+PR #364 Evidence and Archive Maintenance Batch 2
+review gate
+```
+
+Not approved in this sequence:
+
+```text
+Market Access Pilot 3
+Record Growth Batch 2
+new public product surface
+asset ranking or composite score
+automatic monitoring promotion
+```
+
+Binding references:
+
+```text
+docs/quality/post-pr360-review-gate-pr361-spec.md
+config/post-pr360-review-gate-pr361.json
+docs/migration/evidence-correction-batch-pr360-reviewed-handoff.json
+docs/migration/post-pr360-review-gate-pr361.json
+```
 
