@@ -13,7 +13,7 @@
     "reliability": "high",
     "claim_scope": "regulatory_reserve_context",
     "notes": "PR-036 event evidence for USDT regulatory and reserve-representation context.",
-    "archived_url": "https://web.archive.org/web/*/https://www.cftc.gov/PressRoom/PressReleases/8450-21"
+    "archived_url": "https://web.archive.org/web/20211015150107/https://www.cftc.gov/PressRoom/PressReleases/8450-21"
   },
   {
     "id": "sog_src_usdt_nyag_2021_event",
@@ -29,7 +29,7 @@
     "reliability": "high",
     "claim_scope": "regulatory_reserve_context",
     "notes": "PR-036 event evidence for NYAG/Tether/Bitfinex settlement context.",
-    "archived_url": "https://web.archive.org/web/*/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
+    "archived_url": "https://web.archive.org/web/20210223124057/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
   },
   {
     "id": "sog_src_usdc_reopen_2023_event",

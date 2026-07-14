@@ -1,20 +1,498 @@
 [
-  {"id":"sog_src_usde_overview_batch_a","stablecoin_id":"sog_st_usde","issuer_id":"sog_issuer_ethena_labs","event_id":"sog_ev_usde_launch_context","source_type":"protocol_docs","title":"USDe Overview","url":"https://docs.ethena.fi/solution-overview/usde-overview","publisher":"Ethena","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"usde_backing_mint_redeem_and_synthetic_dollar_classification","stablecoin_ids":["sog_st_usde"],"organization_ids":["sog_issuer_ethena_labs"],"event_ids":["sog_ev_usde_launch_context"],"claim_scopes":["usde_backing_mint_redeem_and_synthetic_dollar_classification"],"notes":"Primary documentation for USDe design and approved-party mint/redemption."},
-  {"id":"sog_src_usde_terms_batch_a","stablecoin_id":"sog_st_usde","issuer_id":"sog_issuer_ethena_labs","event_id":null,"source_type":"legal_terms","title":"USDe Terms and Conditions","url":"https://docs.ethena.fi/resources/usde-terms-and-conditions","publisher":"Ethena","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"usde_redemption_eligibility_and_non_yielding_asset_context","stablecoin_ids":["sog_st_usde"],"organization_ids":["sog_issuer_ethena_labs"],"event_ids":[],"claim_scopes":["usde_redemption_eligibility_and_non_yielding_asset_context"],"notes":"Primary legal terms distinguish Mint Users from ordinary holders and state that USDe itself is not designed to intrinsically accrue returns."},
-  {"id":"sog_src_susd_v3_faq_batch_a","stablecoin_id":"sog_st_susd","issuer_id":"sog_issuer_synthetix","event_id":"sog_ev_susd_synthetix_lifecycle_context","source_type":"protocol_docs","title":"Synthetix V3 FAQ","url":"https://docs.synthetix.io/developer-docs/v3-frequently-asked-questions-faq","publisher":"Synthetix","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"susd_v2_v3_identity_and_collateral_context","stablecoin_ids":["sog_st_susd"],"organization_ids":["sog_issuer_synthetix"],"event_ids":["sog_ev_susd_synthetix_lifecycle_context"],"claim_scopes":["susd_v2_v3_identity_and_collateral_context"],"notes":"Primary documentation for Synthetix V3 and the distinction between current and legacy sUSD contexts."},
-  {"id":"sog_src_susd_legacy_context_batch_a","stablecoin_id":"sog_st_susd","issuer_id":"sog_issuer_synthetix","event_id":"sog_ev_susd_synthetix_lifecycle_context","source_type":"protocol_docs","title":"Synthetix Perps V2 legacy introduction","url":"https://docs.synthetix.io/exchange/perps-v2-optimism/introduction-legacy","publisher":"Synthetix","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"susd_legacy_settlement_and_collateral_context","stablecoin_ids":["sog_st_susd"],"organization_ids":["sog_issuer_synthetix"],"event_ids":["sog_ev_susd_synthetix_lifecycle_context"],"claim_scopes":["susd_legacy_settlement_and_collateral_context"],"notes":"Primary documentation describing Perps V2 as legacy and sUSD-only collateral in that system."},
-  {"id":"sog_src_mim_docs_batch_a","stablecoin_id":"sog_st_mim","issuer_id":"sog_issuer_abracadabra","event_id":null,"source_type":"protocol_docs","title":"Abracadabra documentation introduction","url":"https://docs.abracadabra.money/","publisher":"Abracadabra Money","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"mim_protocol_design_and_collateralized_borrowing","stablecoin_ids":["sog_st_mim"],"organization_ids":["sog_issuer_abracadabra"],"event_ids":[],"claim_scopes":["mim_protocol_design_and_collateralized_borrowing"],"notes":"Primary documentation describing MIM as a USD-denominated stablecoin minted against supported collateral."},
-  {"id":"sog_src_mim_tokenomics_batch_a","stablecoin_id":"sog_st_mim","issuer_id":"sog_issuer_abracadabra","event_id":null,"source_type":"protocol_docs","title":"MIM tokenomics and supported contracts","url":"https://docs.abracadabra.money/learn/tokens/tokenomics","publisher":"Abracadabra Money","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"mim_peg_contract_and_multichain_context","stablecoin_ids":["sog_st_mim"],"organization_ids":["sog_issuer_abracadabra"],"event_ids":[],"claim_scopes":["mim_peg_contract_and_multichain_context"],"notes":"Primary documentation for MIM token framing and official deployment addresses."},
-  {"id":"sog_src_mim_2025_postmortem_batch_a","stablecoin_id":"sog_st_mim","issuer_id":"sog_issuer_abracadabra","event_id":"sog_ev_mim_2025_03_gm_cauldron_attack","source_type":"protocol_postmortem","title":"Post Mortem - attack on GM Cauldrons 25/03/25","url":"https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA","publisher":"Abracadabra Money","published_at":"2025-03-27","archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"mim_gm_cauldron_exploit_and_response","stablecoin_ids":["sog_st_mim"],"organization_ids":["sog_issuer_abracadabra"],"event_ids":["sog_ev_mim_2025_03_gm_cauldron_attack"],"claim_scopes":["mim_gm_cauldron_exploit_and_response"],"notes":"Primary incident report for the March 2025 GM cauldrons attack."},
-  {"id":"sog_src_fei_intro_batch_a","stablecoin_id":"sog_st_fei","issuer_id":"sog_issuer_fei_protocol","event_id":"sog_ev_fei_2021_04_launch","source_type":"official_blog","title":"Introducing Fei Protocol","url":"https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b","publisher":"Fei Labs","published_at":"2021-01-11","archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"fei_initial_design_and_protocol_controlled_value","stablecoin_ids":["sog_st_fei"],"organization_ids":["sog_issuer_fei_protocol"],"event_ids":["sog_ev_fei_2021_04_launch"],"claim_scopes":["fei_initial_design_and_protocol_controlled_value"],"notes":"Primary launch-design source for FEI and protocol-controlled value."},
-  {"id":"sog_src_fei_launch_batch_a","stablecoin_id":"sog_st_fei","issuer_id":"sog_issuer_fei_protocol","event_id":"sog_ev_fei_2021_04_launch","source_type":"official_blog","title":"Fei Post-Genesis","url":"https://medium.com/fei-protocol/fei-post-genesis-35284a57a659","publisher":"Fei Labs","published_at":"2021-04-02","archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"fei_launch_date_and_genesis_context","stablecoin_ids":["sog_st_fei"],"organization_ids":["sog_issuer_fei_protocol"],"event_ids":["sog_ev_fei_2021_04_launch"],"claim_scopes":["fei_launch_date_and_genesis_context"],"notes":"Primary source stating the April 3, 2021 protocol launch time."},
-  {"id":"sog_src_fei_v2_batch_a","stablecoin_id":"sog_st_fei","issuer_id":"sog_issuer_fei_protocol","event_id":null,"source_type":"official_blog","title":"Fei v2 is coming","url":"https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc","publisher":"Fei Protocol","published_at":"2021-11-04","archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"fei_v2_reserve_and_redemption_design","stablecoin_ids":["sog_st_fei"],"organization_ids":["sog_issuer_fei_protocol"],"event_ids":[],"claim_scopes":["fei_v2_reserve_and_redemption_design"],"notes":"Primary source for Fei v2 and 1:1 redemption design before the later wind-down."},
-  {"id":"sog_src_fei_final_redemption_batch_a","stablecoin_id":"sog_st_fei","issuer_id":"sog_issuer_fei_protocol","event_id":"sog_ev_fei_2022_09_final_redemption","source_type":"governance_proposal","title":"TIP-121c: Final Redemption","url":"https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D","publisher":"Fei / Snapshot via Boardroom","published_at":"2022-09-20","archived_url":null,"accessed_at":"2026-06-14","reliability":"medium","claim_scope":"fei_final_redemption_and_tribe_dao_wind_down","stablecoin_ids":["sog_st_fei"],"organization_ids":["sog_issuer_fei_protocol"],"event_ids":["sog_ev_fei_2022_09_final_redemption"],"claim_scopes":["fei_final_redemption_and_tribe_dao_wind_down"],"notes":"Governance record for the final-redemption design and vote outcome. Current contract availability remains separately unresolved."},
-  {"id":"sog_src_fei_addresses_batch_a","stablecoin_id":"sog_st_fei","issuer_id":"sog_issuer_fei_protocol","event_id":null,"source_type":"protocol_docs","title":"Fei Protocol mainnet addresses","url":"https://fei-protocol.github.io/developers/addresses/","publisher":"Fei Protocol","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"fei_ethereum_contract_identity","stablecoin_ids":["sog_st_fei"],"organization_ids":["sog_issuer_fei_protocol"],"event_ids":[],"claim_scopes":["fei_ethereum_contract_identity"],"notes":"Primary documentation for the FEI Ethereum contract address."},
-  {"id":"sog_src_usdn_faq_batch_a","stablecoin_id":"sog_st_usdn","issuer_id":"sog_issuer_neutrino","event_id":null,"source_type":"official_blog","title":"Neutrino Protocol FAQ","url":"https://medium.com/neutrinoteam/neutrino-protocol-faq-bf19c79eb354","publisher":"Neutrino Protocol","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"usdn_original_protocol_and_waves_backing_design","stablecoin_ids":["sog_st_usdn"],"organization_ids":["sog_issuer_neutrino"],"event_ids":[],"claim_scopes":["usdn_original_protocol_and_waves_backing_design"],"notes":"Primary historical documentation for USDN and Neutrino reserve mechanics."},
-  {"id":"sog_src_usdn_surf_batch_a","stablecoin_id":"sog_st_usdn","issuer_id":"sog_issuer_neutrino","event_id":null,"source_type":"official_blog","title":"What is SURF and why is it important for the Neutrino ecosystem?","url":"https://medium.com/neutrinoteam/what-is-surf-and-why-is-it-important-for-the-neutrino-ecosystem-8962c2230049","publisher":"Neutrino Protocol","published_at":"2022-08-08","archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"usdn_recapitalization_and_backing_ratio_context","stablecoin_ids":["sog_st_usdn"],"organization_ids":["sog_issuer_neutrino"],"event_ids":[],"claim_scopes":["usdn_recapitalization_and_backing_ratio_context"],"notes":"Primary source for SURF and USDN recapitalization mechanics."},
-  {"id":"sog_src_usdn_xtn_transition_batch_a","stablecoin_id":"sog_st_usdn","issuer_id":"sog_issuer_neutrino","event_id":"sog_ev_usdn_xtn_transition","source_type":"official_blog","title":"Why XTN is not actually burned?","url":"https://medium.com/neutrinoteam/why-xtn-is-not-actually-burned-fc4716390ae1","publisher":"Neutrino Protocol","published_at":"2023-07-20","archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"usdn_former_name_xtn_transition_and_token_issuance","stablecoin_ids":["sog_st_usdn"],"organization_ids":["sog_issuer_neutrino"],"event_ids":["sog_ev_usdn_2019_11_issuance","sog_ev_usdn_xtn_transition"],"claim_scopes":["usdn_former_name_xtn_transition_and_token_issuance"],"notes":"Primary source explicitly describing XTN as formerly known as USDN and giving the 2019 issuance date."},
-  {"id":"sog_src_usdn_current_batch_a","stablecoin_id":"sog_st_usdn","issuer_id":"sog_issuer_neutrino","event_id":"sog_ev_usdn_xtn_transition","source_type":"protocol_page","title":"Neutrino Protocol current XTN page","url":"https://neutrino.at/","publisher":"Neutrino Protocol","published_at":null,"archived_url":null,"accessed_at":"2026-06-14","reliability":"high","claim_scope":"current_xtn_identity_and_non_usdn_site_context","stablecoin_ids":["sog_st_usdn"],"organization_ids":["sog_issuer_neutrino"],"event_ids":["sog_ev_usdn_xtn_transition"],"claim_scopes":["current_xtn_identity_and_non_usdn_site_context"],"notes":"Current protocol page identifies XTN / Neutrino Index rather than an active USDN hard-peg product."},
-  {"id":"sog_src_usdn_xtn_step_one_2023","stablecoin_id":"sog_st_usdn","issuer_id":"sog_issuer_neutrino","event_id":"sog_ev_usdn_xtn_transition","source_type":"official_social_statement","title":"USDN>XTN: Step One","url":"https://t.me/s/neutrino_protocol_news?before=361","publisher":"Neutrino Protocol","published_at":"2023-01-31","archived_url":null,"accessed_at":"2026-06-23","reliability":"high","claim_scope":"usdn_xtn_onchain_rename_start_and_stablecoin_classification_end","stablecoin_ids":["sog_st_usdn"],"organization_ids":["sog_issuer_neutrino"],"event_ids":["sog_ev_usdn_xtn_transition"],"claim_scopes":["rebrand_effective_date","waves_update_asset_info","hard_usd_classification_end"],"notes":"First-party Neutrino announcement states that the approved transition started that day by renaming the token on Waves through an Update Asset Info transaction; staged renaming across external interfaces continued afterward."},
-  {"id":"sog_src_fei_tip121c_execution_2022","stablecoin_id":"sog_st_fei","issuer_id":"sog_issuer_fei_protocol","event_id":"sog_ev_fei_2022_09_final_redemption","source_type":"governance_proposal","title":"TIP-121c: Start FEI and TRIBE Redemption","url":"https://www.tally.xyz/gov/fei/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263?govId=eip155%3A1%3A0x0BEF27FEB58e857046d630B2c03dFb7bae567494","publisher":"Fei Protocol governance via Tally","published_at":"2022-09-22","archived_url":null,"accessed_at":"2026-06-23","reliability":"high","claim_scope":"fei_executed_final_redemption_and_one_to_one_dai_backing_package","stablecoin_ids":["sog_st_fei"],"organization_ids":["sog_issuer_fei_protocol"],"event_ids":["sog_ev_fei_2022_09_final_redemption"],"claim_scopes":["executed_governance_package","one_to_one_dai_backing","zero_fee_fei_redemption","final_redemption_context"],"notes":"Tally marks the on-chain proposal Executed. The proposal transferred 51,450,791 DAI to an immutable zero-fee FEI-to-DAI wrapper and directed existing PSM DAI to maintain complete 1:1 backing against circulating FEI. This proves historical execution, not present interface availability or universal holder completion."}
+  {
+    "id": "sog_src_usde_overview_batch_a",
+    "stablecoin_id": "sog_st_usde",
+    "issuer_id": "sog_issuer_ethena_labs",
+    "event_id": "sog_ev_usde_launch_context",
+    "source_type": "protocol_docs",
+    "title": "USDe Overview",
+    "url": "https://docs.ethena.fi/solution-overview/usde-overview",
+    "publisher": "Ethena",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "usde_backing_mint_redeem_and_synthetic_dollar_classification",
+    "stablecoin_ids": [
+      "sog_st_usde"
+    ],
+    "organization_ids": [
+      "sog_issuer_ethena_labs"
+    ],
+    "event_ids": [
+      "sog_ev_usde_launch_context"
+    ],
+    "claim_scopes": [
+      "usde_backing_mint_redeem_and_synthetic_dollar_classification"
+    ],
+    "notes": "Primary documentation for USDe design and approved-party mint/redemption."
+  },
+  {
+    "id": "sog_src_usde_terms_batch_a",
+    "stablecoin_id": "sog_st_usde",
+    "issuer_id": "sog_issuer_ethena_labs",
+    "event_id": null,
+    "source_type": "legal_terms",
+    "title": "USDe Terms and Conditions",
+    "url": "https://docs.ethena.fi/resources/usde-terms-and-conditions",
+    "publisher": "Ethena",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/20260124121957/https://docs.ethena.fi/resources/usde-terms-and-conditions",
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "usde_redemption_eligibility_and_non_yielding_asset_context",
+    "stablecoin_ids": [
+      "sog_st_usde"
+    ],
+    "organization_ids": [
+      "sog_issuer_ethena_labs"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "usde_redemption_eligibility_and_non_yielding_asset_context"
+    ],
+    "notes": "Primary legal terms distinguish Mint Users from ordinary holders and state that USDe itself is not designed to intrinsically accrue returns."
+  },
+  {
+    "id": "sog_src_susd_v3_faq_batch_a",
+    "stablecoin_id": "sog_st_susd",
+    "issuer_id": "sog_issuer_synthetix",
+    "event_id": "sog_ev_susd_synthetix_lifecycle_context",
+    "source_type": "protocol_docs",
+    "title": "Synthetix V3 FAQ",
+    "url": "https://docs.synthetix.io/developer-docs/v3-frequently-asked-questions-faq",
+    "publisher": "Synthetix",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "susd_v2_v3_identity_and_collateral_context",
+    "stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "event_ids": [
+      "sog_ev_susd_synthetix_lifecycle_context"
+    ],
+    "claim_scopes": [
+      "susd_v2_v3_identity_and_collateral_context"
+    ],
+    "notes": "Primary documentation for Synthetix V3 and the distinction between current and legacy sUSD contexts."
+  },
+  {
+    "id": "sog_src_susd_legacy_context_batch_a",
+    "stablecoin_id": "sog_st_susd",
+    "issuer_id": "sog_issuer_synthetix",
+    "event_id": "sog_ev_susd_synthetix_lifecycle_context",
+    "source_type": "protocol_docs",
+    "title": "Synthetix Perps V2 legacy introduction",
+    "url": "https://docs.synthetix.io/exchange/perps-v2-optimism/introduction-legacy",
+    "publisher": "Synthetix",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "susd_legacy_settlement_and_collateral_context",
+    "stablecoin_ids": [
+      "sog_st_susd"
+    ],
+    "organization_ids": [
+      "sog_issuer_synthetix"
+    ],
+    "event_ids": [
+      "sog_ev_susd_synthetix_lifecycle_context"
+    ],
+    "claim_scopes": [
+      "susd_legacy_settlement_and_collateral_context"
+    ],
+    "notes": "Primary documentation describing Perps V2 as legacy and sUSD-only collateral in that system."
+  },
+  {
+    "id": "sog_src_mim_docs_batch_a",
+    "stablecoin_id": "sog_st_mim",
+    "issuer_id": "sog_issuer_abracadabra",
+    "event_id": null,
+    "source_type": "protocol_docs",
+    "title": "Abracadabra documentation introduction",
+    "url": "https://docs.abracadabra.money/",
+    "publisher": "Abracadabra Money",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "mim_protocol_design_and_collateralized_borrowing",
+    "stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "mim_protocol_design_and_collateralized_borrowing"
+    ],
+    "notes": "Primary documentation describing MIM as a USD-denominated stablecoin minted against supported collateral."
+  },
+  {
+    "id": "sog_src_mim_tokenomics_batch_a",
+    "stablecoin_id": "sog_st_mim",
+    "issuer_id": "sog_issuer_abracadabra",
+    "event_id": null,
+    "source_type": "protocol_docs",
+    "title": "MIM tokenomics and supported contracts",
+    "url": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+    "publisher": "Abracadabra Money",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "mim_peg_contract_and_multichain_context",
+    "stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "mim_peg_contract_and_multichain_context"
+    ],
+    "notes": "Primary documentation for MIM token framing and official deployment addresses."
+  },
+  {
+    "id": "sog_src_mim_2025_postmortem_batch_a",
+    "stablecoin_id": "sog_st_mim",
+    "issuer_id": "sog_issuer_abracadabra",
+    "event_id": "sog_ev_mim_2025_03_gm_cauldron_attack",
+    "source_type": "protocol_postmortem",
+    "title": "Post Mortem - attack on GM Cauldrons 25/03/25",
+    "url": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+    "publisher": "Abracadabra Money",
+    "published_at": "2025-03-27",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "mim_gm_cauldron_exploit_and_response",
+    "stablecoin_ids": [
+      "sog_st_mim"
+    ],
+    "organization_ids": [
+      "sog_issuer_abracadabra"
+    ],
+    "event_ids": [
+      "sog_ev_mim_2025_03_gm_cauldron_attack"
+    ],
+    "claim_scopes": [
+      "mim_gm_cauldron_exploit_and_response"
+    ],
+    "notes": "Primary incident report for the March 2025 GM cauldrons attack."
+  },
+  {
+    "id": "sog_src_fei_intro_batch_a",
+    "stablecoin_id": "sog_st_fei",
+    "issuer_id": "sog_issuer_fei_protocol",
+    "event_id": "sog_ev_fei_2021_04_launch",
+    "source_type": "official_blog",
+    "title": "Introducing Fei Protocol",
+    "url": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+    "publisher": "Fei Labs",
+    "published_at": "2021-01-11",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "fei_initial_design_and_protocol_controlled_value",
+    "stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fei_2021_04_launch"
+    ],
+    "claim_scopes": [
+      "fei_initial_design_and_protocol_controlled_value"
+    ],
+    "notes": "Primary launch-design source for FEI and protocol-controlled value."
+  },
+  {
+    "id": "sog_src_fei_launch_batch_a",
+    "stablecoin_id": "sog_st_fei",
+    "issuer_id": "sog_issuer_fei_protocol",
+    "event_id": "sog_ev_fei_2021_04_launch",
+    "source_type": "official_blog",
+    "title": "Fei Post-Genesis",
+    "url": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+    "publisher": "Fei Labs",
+    "published_at": "2021-04-02",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "fei_launch_date_and_genesis_context",
+    "stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fei_2021_04_launch"
+    ],
+    "claim_scopes": [
+      "fei_launch_date_and_genesis_context"
+    ],
+    "notes": "Primary source stating the April 3, 2021 protocol launch time."
+  },
+  {
+    "id": "sog_src_fei_v2_batch_a",
+    "stablecoin_id": "sog_st_fei",
+    "issuer_id": "sog_issuer_fei_protocol",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "Fei v2 is coming",
+    "url": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+    "publisher": "Fei Protocol",
+    "published_at": "2021-11-04",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "fei_v2_reserve_and_redemption_design",
+    "stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "fei_v2_reserve_and_redemption_design"
+    ],
+    "notes": "Primary source for Fei v2 and 1:1 redemption design before the later wind-down."
+  },
+  {
+    "id": "sog_src_fei_final_redemption_batch_a",
+    "stablecoin_id": "sog_st_fei",
+    "issuer_id": "sog_issuer_fei_protocol",
+    "event_id": "sog_ev_fei_2022_09_final_redemption",
+    "source_type": "governance_proposal",
+    "title": "TIP-121c: Final Redemption",
+    "url": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D",
+    "publisher": "Fei / Snapshot via Boardroom",
+    "published_at": "2022-09-20",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "medium",
+    "claim_scope": "fei_final_redemption_and_tribe_dao_wind_down",
+    "stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fei_2022_09_final_redemption"
+    ],
+    "claim_scopes": [
+      "fei_final_redemption_and_tribe_dao_wind_down"
+    ],
+    "notes": "Governance record for the final-redemption design and vote outcome. Current contract availability remains separately unresolved."
+  },
+  {
+    "id": "sog_src_fei_addresses_batch_a",
+    "stablecoin_id": "sog_st_fei",
+    "issuer_id": "sog_issuer_fei_protocol",
+    "event_id": null,
+    "source_type": "protocol_docs",
+    "title": "Fei Protocol mainnet addresses",
+    "url": "https://fei-protocol.github.io/developers/addresses/",
+    "publisher": "Fei Protocol",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "fei_ethereum_contract_identity",
+    "stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "fei_ethereum_contract_identity"
+    ],
+    "notes": "Primary documentation for the FEI Ethereum contract address."
+  },
+  {
+    "id": "sog_src_usdn_faq_batch_a",
+    "stablecoin_id": "sog_st_usdn",
+    "issuer_id": "sog_issuer_neutrino",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "Neutrino Protocol FAQ",
+    "url": "https://medium.com/neutrinoteam/neutrino-protocol-faq-bf19c79eb354",
+    "publisher": "Neutrino Protocol",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "usdn_original_protocol_and_waves_backing_design",
+    "stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "usdn_original_protocol_and_waves_backing_design"
+    ],
+    "notes": "Primary historical documentation for USDN and Neutrino reserve mechanics."
+  },
+  {
+    "id": "sog_src_usdn_surf_batch_a",
+    "stablecoin_id": "sog_st_usdn",
+    "issuer_id": "sog_issuer_neutrino",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "What is SURF and why is it important for the Neutrino ecosystem?",
+    "url": "https://medium.com/neutrinoteam/what-is-surf-and-why-is-it-important-for-the-neutrino-ecosystem-8962c2230049",
+    "publisher": "Neutrino Protocol",
+    "published_at": "2022-08-08",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "usdn_recapitalization_and_backing_ratio_context",
+    "stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "usdn_recapitalization_and_backing_ratio_context"
+    ],
+    "notes": "Primary source for SURF and USDN recapitalization mechanics."
+  },
+  {
+    "id": "sog_src_usdn_xtn_transition_batch_a",
+    "stablecoin_id": "sog_st_usdn",
+    "issuer_id": "sog_issuer_neutrino",
+    "event_id": "sog_ev_usdn_xtn_transition",
+    "source_type": "official_blog",
+    "title": "Why XTN is not actually burned?",
+    "url": "https://medium.com/neutrinoteam/why-xtn-is-not-actually-burned-fc4716390ae1",
+    "publisher": "Neutrino Protocol",
+    "published_at": "2023-07-20",
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "usdn_former_name_xtn_transition_and_token_issuance",
+    "stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_ids": [
+      "sog_ev_usdn_2019_11_issuance",
+      "sog_ev_usdn_xtn_transition"
+    ],
+    "claim_scopes": [
+      "usdn_former_name_xtn_transition_and_token_issuance"
+    ],
+    "notes": "Primary source explicitly describing XTN as formerly known as USDN and giving the 2019 issuance date."
+  },
+  {
+    "id": "sog_src_usdn_current_batch_a",
+    "stablecoin_id": "sog_st_usdn",
+    "issuer_id": "sog_issuer_neutrino",
+    "event_id": "sog_ev_usdn_xtn_transition",
+    "source_type": "protocol_page",
+    "title": "Neutrino Protocol current XTN page",
+    "url": "https://neutrino.at/",
+    "publisher": "Neutrino Protocol",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-06-14",
+    "reliability": "high",
+    "claim_scope": "current_xtn_identity_and_non_usdn_site_context",
+    "stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_ids": [
+      "sog_ev_usdn_xtn_transition"
+    ],
+    "claim_scopes": [
+      "current_xtn_identity_and_non_usdn_site_context"
+    ],
+    "notes": "Current protocol page identifies XTN / Neutrino Index rather than an active USDN hard-peg product."
+  },
+  {
+    "id": "sog_src_usdn_xtn_step_one_2023",
+    "stablecoin_id": "sog_st_usdn",
+    "issuer_id": "sog_issuer_neutrino",
+    "event_id": "sog_ev_usdn_xtn_transition",
+    "source_type": "official_social_statement",
+    "title": "USDN>XTN: Step One",
+    "url": "https://t.me/s/neutrino_protocol_news?before=361",
+    "publisher": "Neutrino Protocol",
+    "published_at": "2023-01-31",
+    "archived_url": null,
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "usdn_xtn_onchain_rename_start_and_stablecoin_classification_end",
+    "stablecoin_ids": [
+      "sog_st_usdn"
+    ],
+    "organization_ids": [
+      "sog_issuer_neutrino"
+    ],
+    "event_ids": [
+      "sog_ev_usdn_xtn_transition"
+    ],
+    "claim_scopes": [
+      "rebrand_effective_date",
+      "waves_update_asset_info",
+      "hard_usd_classification_end"
+    ],
+    "notes": "First-party Neutrino announcement states that the approved transition started that day by renaming the token on Waves through an Update Asset Info transaction; staged renaming across external interfaces continued afterward."
+  },
+  {
+    "id": "sog_src_fei_tip121c_execution_2022",
+    "stablecoin_id": "sog_st_fei",
+    "issuer_id": "sog_issuer_fei_protocol",
+    "event_id": "sog_ev_fei_2022_09_final_redemption",
+    "source_type": "governance_proposal",
+    "title": "TIP-121c: Start FEI and TRIBE Redemption",
+    "url": "https://www.tally.xyz/gov/fei/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263?govId=eip155%3A1%3A0x0BEF27FEB58e857046d630B2c03dFb7bae567494",
+    "publisher": "Fei Protocol governance via Tally",
+    "published_at": "2022-09-22",
+    "archived_url": null,
+    "accessed_at": "2026-06-23",
+    "reliability": "high",
+    "claim_scope": "fei_executed_final_redemption_and_one_to_one_dai_backing_package",
+    "stablecoin_ids": [
+      "sog_st_fei"
+    ],
+    "organization_ids": [
+      "sog_issuer_fei_protocol"
+    ],
+    "event_ids": [
+      "sog_ev_fei_2022_09_final_redemption"
+    ],
+    "claim_scopes": [
+      "executed_governance_package",
+      "one_to_one_dai_backing",
+      "zero_fee_fei_redemption",
+      "final_redemption_context"
+    ],
+    "notes": "Tally marks the on-chain proposal Executed. The proposal transferred 51,450,791 DAI to an immutable zero-fee FEI-to-DAI wrapper and directed existing PSM DAI to maintain complete 1:1 backing against circulating FEI. This proves historical execution, not present interface availability or universal holder completion."
+  }
 ]
