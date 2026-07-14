@@ -17,7 +17,7 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const expectedVerificationCounts = verification.status_counts ?? {};
 const expectedControlNotRecorded = expectedCounts.deployments - 1;
-const expectedRecordedChains = 41;
+const expectedRecordedChains = 45;
 
 expect(report.audit_id === 'sog_registry_100_deployment_chain_identity_pr301', `unexpected audit_id ${report.audit_id}`);
 expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} stable assets, got ${report.audited_counts?.stable_assets}`);
