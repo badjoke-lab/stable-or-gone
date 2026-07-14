@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_tier_a_dossier_batch_4_112_checkpoint_pr364_2026_07_14",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_2_112_checkpoint_pr365_2026_07_14",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
   "recorded_at": "2026-07-14",
-  "registry_version": "pr364-tier-a-dossier-batch-4",
+  "registry_version": "pr365-evidence-archive-maintenance-batch-2",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_evidence_correction_batch_112_checkpoint_pr360_2026_07_14",
-  "canonical_checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
-  "previous_history_checkpoint_id": "sog_evidence_correction_batch_112_checkpoint_pr360_2026_07_14",
-  "dossier_pr": 364,
-  "notes": "Reviewed forward same-count statistics checkpoint for PR #364 Tier A Dossier Deepening Batch 4. It appends after PR #360, binds the new canonical dossier checkpoint, records 107 organizations, 124 relationships, and 559 Evidence identities, and preserves 112 assets, 174 deployments, eight Market Access records, and all no-ranking and no-new-surface boundaries."
+  "source_checkpoint_id": "sog_tier_a_dossier_batch_4_112_checkpoint_pr364_2026_07_14",
+  "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+  "previous_history_checkpoint_id": "sog_tier_a_dossier_batch_4_112_checkpoint_pr364_2026_07_14",
+  "maintenance_pr": 365,
+  "notes": "Reviewed forward same-count statistics checkpoint for PR #365 Evidence and Archive Maintenance Batch 2. It records archive coverage 390 of 559 while preserving every canonical record count and public-surface boundary."
 }

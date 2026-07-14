@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "outcome_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+  "status": "reviewed_bounded_maintenance",
+  "public_output": false,
+  "review_pr": 365,
+  "queue_id": "sog_evidence_archive_maintenance_queue_pr365_2026_07_14",
+  "selected_count": 10,
+  "changed_count": 3,
+  "dated_archive_added_count": 3,
+  "reviewed_no_safe_change_count": 7,
+  "canonical_evidence_count_after": 559,
+  "evidence_relation_count_after": 559,
+  "archive_index_count_before": 387,
+  "archive_index_count_after": 390,
+  "archive_not_recorded_count_before": 172,
+  "archive_not_recorded_count_after": 169,
+  "changed_files": [
+    "data/evidence-batch-b.json",
+    "data/evidence-batch-c.json"
+  ],
+  "outcomes": [
+    {
+      "evidence_id": "sog_src_xaut_legal_batch_b",
+      "decision": "dated_archive_added",
+      "previous_archived_url": null,
+      "new_archived_url": "https://web.archive.org/web/20250320213402/https://gold.tether.to/legal/lawinforcementpolicy",
+      "review_method": "current URL response plus exact-source Wayback CDX review",
+      "capture_timestamp": "20250320213402",
+      "capture_digest": "BR46TIWJIMLBZXPDXTWDTG2KHCD4U2KN",
+      "remaining_uncertainty": "Archive capture preserves the reviewed source URL; later page revisions remain possible."
+    },
+    {
+      "evidence_id": "sog_src_bold_live_batch_c",
+      "decision": "dated_archive_added",
+      "previous_archived_url": null,
+      "new_archived_url": "https://web.archive.org/web/20250609144742/https://docs.liquity.org/v2-documentation/friendly-fork-program",
+      "review_method": "current URL response plus exact-source Wayback CDX review",
+      "capture_timestamp": "20250609144742",
+      "capture_digest": "2YR3RE6C4TYRQF5IS7ZLQT2GZRGIEZYJ",
+      "remaining_uncertainty": "Archive capture preserves the reviewed source URL; later page revisions remain possible."
+    },
+    {
+      "evidence_id": "sog_src_bold_overview_batch_c",
+      "decision": "dated_archive_added",
+      "previous_archived_url": null,
+      "new_archived_url": "https://web.archive.org/web/20250519194953/https://docs.liquity.org/v2-faq/bold-and-earn",
+      "review_method": "current URL response plus exact-source Wayback CDX review",
+      "capture_timestamp": "20250519194953",
+      "capture_digest": "ZE3KM6LVH4LJCF6XFX4PLKZGBGF4AVIN",
+      "remaining_uncertainty": "Archive capture preserves the reviewed source URL; later page revisions remain possible."
+    },
+    {
+      "evidence_id": "sog_src_bold_redemptions_batch_c",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The canonical legacy URL redirects to the Liquity V2 page, while exact captures returned for the legacy URL predate the reviewed May 2025 relaunch boundary; no source-equivalent dated capture was accepted.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    },
+    {
+      "evidence_id": "sog_src_busd_binance_phaseout",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The live endpoint returned an asynchronous 202 response and no exact dated capture was verified.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    },
+    {
+      "evidence_id": "sog_src_busd_paxos_issuer_update",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The official page remains live, but no exact dated capture was verified in the bounded review.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    },
+    {
+      "evidence_id": "sog_src_busd_paxos_statement_pr354",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The official statement remains live, but archive lookup did not yield a verified exact capture in the bounded review.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    },
+    {
+      "evidence_id": "sog_src_circle_stability_update_2023_03_13",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The canonical Circle URL returned 404 and no verified source-equivalent replacement or exact capture was established.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    },
+    {
+      "evidence_id": "sog_src_circle_svb_update",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The canonical URL redirects to the generic Circle blog index and no exact source capture was verified.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    },
+    {
+      "evidence_id": "sog_src_circle_usdc_contract_addresses",
+      "decision": "reviewed_no_safe_change",
+      "previous_archived_url": null,
+      "new_archived_url": null,
+      "review_method": "current URL response, redirect boundary, and exact-source archive lookup",
+      "reason": "The developer page remains live, but no exact dated capture was verified in the bounded review.",
+      "remaining_uncertainty": "A later reviewed batch may accept a newly verified exact capture or source-equivalent replacement."
+    }
+  ]
+}
