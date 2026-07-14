@@ -559,18 +559,14 @@
     "id": "sog_st_usdg",
     "reserve_profile": {
       "backing_types": [
-        "cash",
-        "government_securities"
+        "mixed"
       ],
-      "summary": "Paxos terms state that USDG issued by Paxos Digital Singapore or Paxos Issuance Europe is backed one-to-one by U.S.-dollar deposits or permitted U.S.-dollar-denominated debt instruments held in segregated accounts for token holders.",
-      "disclosure_status": "official_terms_and_monthly_reports_available",
-      "as_of_date": "2026-07-14",
+      "summary": "Reserve disclosure entry points exist, while exact issuer-entity and period-level reporting remain under review.",
+      "disclosure_status": "available_or_source_review_needed",
+      "as_of_date": "2026-06-05",
       "latest_report_id": null,
-      "confidence": "high",
-      "evidence_ids": [
-        "sog_src_usdg_paxos_page",
-        "sog_src_usdg_paxos_stablecoin_terms_pr364"
-      ]
+      "confidence": "medium",
+      "evidence_ids": []
     },
     "redemption_profile": {
       "status": "eligible_customers_only",

@@ -131,7 +131,7 @@ check(usdgProfile?.redemption_profile?.status === 'eligible_customers_only', 'US
 check(usdgProfile?.redemption_profile?.settlement_asset === 'USD', 'USDG settlement asset changed');
 check(usdgProfile?.redemption_profile?.as_of_date === '2026-07-14', 'USDG redemption as-of date changed');
 check(usdgProfile?.redemption_profile?.evidence_ids?.includes('sog_src_usdg_paxos_stablecoin_terms_pr364'), 'USDG redemption terms Evidence missing');
-equal(usdgProfile?.reserve_profile?.backing_types, ['cash','government_securities'], 'USDG backing types changed');
+equal(usdgProfile?.reserve_profile?.backing_types, ['mixed'], 'USDG reserve profile must remain outside the PR #364 change scope');
 
 const usdgLegal = legalById.get('sog_st_usdg');
 check(usdgLegal?.holder_claim_type === 'direct_claim_on_issuer', 'USDG holder claim changed');
