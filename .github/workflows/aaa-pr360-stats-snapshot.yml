@@ -52,6 +52,8 @@ jobs:
             let log = '';
             try { snapshot = JSON.parse(fs.readFileSync('data/stats-history.json','utf8')).snapshots.at(-1); } catch {}
             try { log = fs.readFileSync('pr360-stats-apply.log','utf8'); } catch {}
+            const archiveCount = snapshot?.data_quality?.coverage?.archive_evidence?.count;
+            const noArchiveCount = Number.isInteger(snapshot?.totals?.evidence) && Number.isInteger(archiveCount) ? snapshot.totals.evidence - archiveCount : null;
             const body = `${marker}
             ## PR #360 deterministic stats snapshot
 
@@ -60,8 +62,8 @@ jobs:
             - Canonical checkpoint: \`${snapshot?.canonical_checkpoint_id ?? 'not-generated'}\`
             - Assets: **${snapshot?.totals?.assets ?? 'not-generated'}**
             - Evidence: **${snapshot?.totals?.evidence ?? 'not-generated'}**
-            - Archive indexes: **${snapshot?.evidence?.archive_index_count ?? 'not-generated'}**
-            - Archive not recorded: **${snapshot?.evidence?.archive_not_recorded_count ?? 'not-generated'}**
+            - Archive indexes: **${archiveCount ?? 'not-generated'}**
+            - Archive not recorded: **${noArchiveCount ?? 'not-generated'}**
             - Stats model SHA-256: \`${snapshot?.stats_model_sha256 ?? 'not-generated'}\`
             - Snapshot SHA-256: \`${snapshot?.snapshot_sha256 ?? 'not-generated'}\`
 
