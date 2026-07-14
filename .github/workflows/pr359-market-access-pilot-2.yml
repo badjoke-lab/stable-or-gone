@@ -52,7 +52,7 @@ jobs:
         run: npm run validate:data
 
       - name: Validate classifications
-        run: npm run validate:classifications
+        run: npm run validate:classification
 
       - name: Validate profiles
         run: npm run validate:profiles
@@ -63,8 +63,11 @@ jobs:
       - name: Validate Registry v3 foundation
         run: npm run validate:v3
 
+      - name: Validate Registry v3 deployment view
+        run: npm run validate:deployments-v3
+
       - name: Validate Registry v3 income profiles
-        run: npm run validate:income-profiles
+        run: npm run validate:income-v3
 
       - name: Validate Registry v2 v3 parity
         run: npm run validate:parity
