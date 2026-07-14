@@ -1,6 +1,6 @@
 # PR #364 Tier A Dossier Deepening — Batch 4 Activation
 
-Status: active roadmap amendment  
+Status: reviewed and active pending merge  
 Date: 2026-07-14
 
 ## 1. Activation
@@ -19,10 +19,10 @@ docs/migration/record-depth-baseline-pr363-delta.json
 docs/migration/tier-a-candidate-queue-pr363.json
 ```
 
-The active work item is now:
+The active work item remains:
 
 ```text
-PR #364 Tier A Dossier Deepening Batch 4: active
+PR #364 Tier A Dossier Deepening Batch 4: reviewed, pending merge
 PR #365 Evidence and Archive Maintenance Batch 2: next
 ```
 
@@ -40,6 +40,8 @@ docs/migration/record-depth-baseline-pr363-summary.json
 docs/migration/record-depth-baseline-pr363-delta.json
 docs/migration/tier-a-candidate-queue-pr363.json
 docs/migration/tier-a-dossier-batch-4-pr364-review-queue.json
+docs/migration/tier-a-dossier-batch-4-pr364-findings.json
+docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
 ```
 
 ## 3. Reviewed non-ranking selection
@@ -66,7 +68,37 @@ USDS: legal_profile
 
 Each asset may conclude with either a source-supported canonical change or an explicit reviewed-no-safe-change finding.
 
-## 5. Boundaries
+## 5. Reviewed outcome
+
+The five-asset review concluded as follows:
+
+```text
+USDG: source-supported legal-profile and redemption improvement
+USDS: source-supported legal-profile improvement
+HUSD: reviewed, no safe canonical change
+poundtoken: reviewed, no safe canonical change
+RLUSD: reviewed, no safe canonical change
+```
+
+The reviewed forward checkpoint is:
+
+```text
+assets: 112
+organizations: 107
+relationships: 124
+events: 187
+evidence: 559
+evidence_relations: 559
+deployments: 174
+market_access_records: 8
+archive_recorded: 387
+archive_not_recorded: 172
+new_evidence_records: 2
+```
+
+The batch added no public surface, asset rank, composite score, deployment change, reserve-report change, reserve-component change, income-profile change, or Market Access Record change.
+
+## 6. Boundaries
 
 PR #364 must not:
 
@@ -84,7 +116,7 @@ automatically promote monitoring or editorial research
 rewrite historical checkpoints
 ```
 
-## 6. Implementation sequence
+## 7. Implementation sequence
 
 ```text
 1. bind the PR #363 reviewed baseline and queue
@@ -97,7 +129,9 @@ rewrite historical checkpoints
 8. validate and merge
 ```
 
-## 7. Completion and handoff
+Steps 1–7 are complete. Step 8 remains active until the reviewed PR head passes dedicated and general CI and is merged.
+
+## 8. Completion and handoff
 
 Completion requires green dedicated validation and general CI, plus:
 
