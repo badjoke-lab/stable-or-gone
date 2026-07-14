@@ -10,11 +10,15 @@ const checkpointCounts = checkpoint.expected_counts ?? {};
 const expectedEvidence = baseline.minimum_counts?.evidence;
 const expectedRelations = baseline.minimum_counts?.evidence_relations ?? expectedEvidence;
 const expectedPublicSources = expectedEvidence - evidenceSourceAliasCount;
-// PR #354 established the reviewed 177-record no-archive queue. PR #355 adds two
-// evidence rows with archive indexes, so this queue must remain unchanged rather
-// than reverting to the pre-PR #354 value of 173.
-const expectedArchiveNotRecorded = 177;
-const expectedArchiveIndex = expectedEvidence - expectedArchiveNotRecorded;
+const correctionConfigPath = 'config/evidence-correction-batch-pr360.json';
+const correctionOutcomePath = 'docs/migration/evidence-correction-outcomes-pr360.json';
+const correctionConfig = fs.existsSync(correctionConfigPath) ? JSON.parse(fs.readFileSync(correctionConfigPath, 'utf8')) : null;
+const correctionOutcome = fs.existsSync(correctionOutcomePath) ? JSON.parse(fs.readFileSync(correctionOutcomePath, 'utf8')) : null;
+const expectedArchiveNotRecorded = correctionOutcome?.archive_not_recorded_count_after
+  ?? correctionConfig?.archive_not_recorded_count_before
+  ?? 177;
+const expectedArchiveIndex = correctionOutcome?.archive_index_count_after
+  ?? (expectedEvidence - expectedArchiveNotRecorded);
 
 execFileSync(process.execPath, ['scripts/audit-registry-evidence-integrity.mjs'], {
   stdio: 'inherit',
@@ -47,8 +51,16 @@ expect((report.metadata_quality?.unknown_provenance ?? []).length === 0, 'unknow
 expect((report.metadata_quality?.unknown_primary_state ?? []).length === 0, 'unknown primary-state classification remains');
 expect((report.metadata_quality?.unknown_reliability ?? []).length === 0, 'unknown reliability classification remains');
 expect((report.metadata_quality?.archive_state_counts?.archive_index ?? 0) === expectedArchiveIndex, `archive-index count changed: expected ${expectedArchiveIndex}`);
-expect((report.metadata_quality?.archive_state_counts?.not_recorded ?? 0) === expectedArchiveNotRecorded, 'archive not-recorded queue changed');
+expect((report.metadata_quality?.archive_state_counts?.not_recorded ?? 0) === expectedArchiveNotRecorded, `archive not-recorded queue changed: expected ${expectedArchiveNotRecorded}`);
 expect(['pass', 'pass_with_review_queues'].includes(report.result), `audit result is not passing: ${report.result}`);
+
+if (correctionOutcome) {
+  expect(correctionOutcome.canonical_evidence_count_after === expectedEvidence, 'PR #360 correction report Evidence count mismatch');
+  expect(correctionOutcome.evidence_relation_count_after === expectedRelations, 'PR #360 correction report Evidence Relation count mismatch');
+  expect(correctionOutcome.changed_count <= correctionConfig.maximum_canonical_evidence_records_touched, 'PR #360 correction report exceeds Evidence touch maximum');
+  expect(correctionOutcome.constraints?.new_evidence_identities === 0, 'PR #360 correction report added Evidence identities');
+  expect(correctionOutcome.constraints?.evidence_relation_changes === 0, 'PR #360 correction report changed Evidence Relations');
+}
 
 if (failures.length) {
   console.error('Evidence integrity audit validation failed:');
