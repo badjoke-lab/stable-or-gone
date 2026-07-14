@@ -36,7 +36,7 @@
     "stablecoin_id": "sog_st_usds",
     "issuer_id": "sog_issuer_makerdao_sky",
     "event_id": null,
-    "source_type": "official_protocol_interface",
+    "source_type": "protocol_app",
     "title": "Sky.money USDS protocol, collateral, conversion, and interface disclosures",
     "url": "https://sky.money/",
     "publisher": "Sky.money / Skybase International",
