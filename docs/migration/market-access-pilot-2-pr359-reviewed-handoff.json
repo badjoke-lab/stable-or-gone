@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_merged_handoff",
+  "handoff_id": "sog_market_access_pilot_2_pr359_reviewed_handoff_2026_07_14",
+  "review_pr": 359,
+  "source_merge_commit": "043faab38160d693fb226c2955e2b6062d56946f",
+  "recorded_at": "2026-07-14",
+  "canonical_checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
+  "stats_history_checkpoint_id": "sog_market_access_pilot_2_112_checkpoint_pr359_2026_07_13",
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 105,
+    "relationships": 122,
+    "events": 187,
+    "evidence": 557,
+    "evidence_relations": 557,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "market_access_records": 8,
+    "legal_profiles": 112,
+    "stable_asset_relationships": 5,
+    "reserve_components": 145,
+    "income_profiles": 112
+  },
+  "promoted_market_access_record_ids": [
+    "sog_ma_rlusd_jp_sbivc_vctrade_buy_sell_20260624",
+    "sog_ma_rlusd_jp_sbivc_vctrade_deposit_20260624",
+    "sog_ma_rlusd_jp_sbivc_vctrade_withdrawal_20260624",
+    "sog_ma_rlusd_jp_sbivc_vctrade_external_wallet_transfer_20260624"
+  ],
+  "reused_evidence_ids": [
+    "sog_src_rlusd_japan_launch_sbi_vc_2026",
+    "sog_src_jfsa_electronic_payment_instrument_register_pr356"
+  ],
+  "stats_input_digest_sha256": "6de0650b001978a9faf587157b74f4db3d59a3677ecb6be4869c7dc1c1966d0d",
+  "stats_model_sha256": "a8d372ae09967fb56d880bdc874196257bac64e17f23b37e221bcffe538d920c",
+  "stats_snapshot_sha256": "093cde6d4d83adfe82852fa38308f63fc92636595c2b1163d1b462960c803463",
+  "new_evidence_identities": 0,
+  "new_public_surface": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "next_work_item": "PR #360 Evidence and Correction Batch",
+  "notes": "Reviewed merged handoff after PR #359. Four provider-scoped RLUSD Market Access records were promoted for SBI VC Trade in Japan. The batch preserved 112 assets, 557 Evidence identities, 174 deployments, and canonical/public safety boundaries while advancing total Market Access records from four to eight."
+}

@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
-  "checkpoint_kind": "non_growth_market_access_checkpoint",
-  "recorded_at": "2026-07-13",
-  "source_commit": "pr359-market-access-pilot-2",
+  "checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
+  "checkpoint_kind": "non_growth_normalization_checkpoint",
+  "recorded_at": "2026-07-14",
+  "source_commit": "pr360-evidence-correction-batch",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
-  "previous_checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
-  "market_access_pr": 359,
+  "source_checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
+  "previous_checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
+  "correction_pr": 360,
   "expected_counts": {
     "assets": 112,
     "organizations": 105,
@@ -25,5 +25,14 @@
     "reserve_components": 145,
     "income_profiles": 112
   },
-  "notes": "Current deterministic canonical checkpoint after PR #359 Market Access Pilot 2. Four provider-scoped RLUSD records for Japan / SBI VC Trade / VCTRADE are added across buy/sell, deposit, withdrawal, and Ethereum-restricted external-wallet transfer. Assets, Evidence identities, deployments, and all other canonical record families remain unchanged from PR #358. Total canonical Market Access Records advance from four to eight."
+  "evidence_quality": {
+    "archive_index_count": 387,
+    "archive_not_recorded_count": 170,
+    "selected_for_review": 10,
+    "corrected": 8,
+    "reviewed_no_safe_change": 2,
+    "dated_archive_added_or_replaced": 7,
+    "invalid_wildcard_removed": 1
+  },
+  "notes": "Current deterministic canonical checkpoint after PR #360 Evidence and Correction Batch. Eight bounded Evidence records received reviewed archive corrections, including seven dated capture additions or replacements and one invalid wildcard removal. Two selected terms sources were reviewed with no safe canonical change. Asset, Evidence identity, Evidence Relation, Market Access, deployment, and all other record-family counts remain unchanged from PR #359."
 }

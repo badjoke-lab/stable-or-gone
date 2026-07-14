@@ -225,7 +225,8 @@
     "accessed_at": "2026-06-03",
     "reliability": "high",
     "claim_scope": "regulatory_context",
-    "notes": "Regulatory source connected to Terraform Labs, Do Kwon, and TerraUSD context after the collapse."
+    "notes": "Regulatory source connected to Terraform Labs, Do Kwon, and TerraUSD context after the collapse.",
+    "archived_url": "https://web.archive.org/web/20240702092147/https://www.sec.gov/newsroom/press-releases/2023-32"
   },
   {
     "id": "sog_src_ust_failure_research_arxiv",

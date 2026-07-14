@@ -1,0 +1,228 @@
+{
+  "schema_version": "1.2",
+  "report_id": "sog_evidence_correction_outcomes_pr360_2026_07_14",
+  "status": "reviewed_internal_correction_report",
+  "public_output": false,
+  "review_pr": 360,
+  "queue_id": "sog_evidence_correction_queue_pr360_2026_07_14",
+  "canonical_evidence_count_before": 557,
+  "canonical_evidence_count_after": 557,
+  "evidence_relation_count_before": 557,
+  "evidence_relation_count_after": 557,
+  "archive_index_count_before": 380,
+  "archive_index_count_after": 387,
+  "archive_not_recorded_count_before": 177,
+  "archive_not_recorded_count_after": 170,
+  "selected_count": 10,
+  "changed_count": 8,
+  "dated_archive_added_or_replaced_count": 7,
+  "invalid_wildcard_removed_count": 1,
+  "reviewed_no_change_count": 2,
+  "changed_files": [
+    "data/evidence-batch-a.json",
+    "data/evidence-batch-b.json",
+    "data/evidence-events-pr036.json",
+    "data/evidence-extra.json",
+    "data/evidence.json"
+  ],
+  "outcomes": [
+    {
+      "evidence_id": "sog_src_busd_reuters_sec_2024",
+      "source_file": "data/evidence.json",
+      "review_status": "reviewed_unverified_wildcard_removed",
+      "correction_type": "archive_correction",
+      "previous_value": {
+        "archived_url": "https://web.archive.org/web/*/https://www.reuters.com/technology/us-sec-drops-investigation-stablecoin-issuer-paxos-fortune-reports-2024-07-11/"
+      },
+      "new_value": {
+        "archived_url": null
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "result": "no valid snapshot row"
+      },
+      "reason": "The CDX response contained no valid snapshot rows. A previously added wildcard index was not evidence of a capture and is removed.",
+      "remaining_uncertainty": "A later review may add a dated capture after a valid snapshot is verified."
+    },
+    {
+      "evidence_id": "sog_src_nuon_disclaimer_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "review_status": "reviewed_dated_archive_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20260416023630/https://docs.nuon.fi/resources/legal-documents/investment-disclaimer"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20260416023630",
+        "capture_digest": "VFTRBAYOI7EGEIVLFS7B2DCEQQWJEIUD",
+        "source_url": "https://docs.nuon.fi/resources/legal-documents/investment-disclaimer"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    },
+    {
+      "evidence_id": "sog_src_rlusd_user_terms",
+      "source_file": "data/evidence-extra.json",
+      "review_status": "reviewed_dated_archive_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20260414072541/https://ripple.com/legal/stablecoin/"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20260414072541",
+        "capture_digest": "OKICX4AY7TQ44FZ44BJU42MA2ZPPWBSB",
+        "source_url": "https://ripple.com/legal/stablecoin/"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    },
+    {
+      "evidence_id": "sog_src_tether_legal_terms",
+      "source_file": "data/evidence.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://tether.to/en/legal/"
+      },
+      "new_value": null,
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe"
+      },
+      "reason": "The bounded probe did not produce a capture close enough to the 2026 review date to bind the current terms version safely.",
+      "remaining_uncertainty": "A later batch may add a dated capture or perform source-identity maintenance after version-equivalence review."
+    },
+    {
+      "evidence_id": "sog_src_usdc_terms_pr354",
+      "source_file": "data/evidence-extra.json",
+      "review_status": "reviewed_dated_archive_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20251220022409/https://www.circle.com/legal/usdc-terms"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20251220022409",
+        "capture_digest": "QKET4U64GVSVM7ATK5YO6C3TQF5I7DZS",
+        "source_url": "https://www.circle.com/legal/usdc-terms"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    },
+    {
+      "evidence_id": "sog_src_usde_terms_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "review_status": "reviewed_dated_archive_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20260124121957/https://docs.ethena.fi/resources/usde-terms-and-conditions"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20260124121957",
+        "capture_digest": "K466DMNGPNCYICZ7SFOAL57SCJFVSUSU",
+        "source_url": "https://docs.ethena.fi/resources/usde-terms-and-conditions"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    },
+    {
+      "evidence_id": "sog_src_usdt_cftc_2021_event",
+      "source_file": "data/evidence-events-pr036.json",
+      "review_status": "reviewed_wildcard_replaced_with_dated_capture",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": "https://web.archive.org/web/*/https://www.cftc.gov/PressRoom/PressReleases/8450-21"
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20211015150107/https://www.cftc.gov/PressRoom/PressReleases/8450-21"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20211015150107",
+        "capture_digest": "C57FSCO44WC5PRHLRJMRV6JM7TTY47E2",
+        "source_url": "https://www.cftc.gov/PressRoom/PressReleases/8450-21"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    },
+    {
+      "evidence_id": "sog_src_usdt_nyag_2021_event",
+      "source_file": "data/evidence-events-pr036.json",
+      "review_status": "reviewed_wildcard_replaced_with_dated_capture",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": "https://web.archive.org/web/*/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20210223124057/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20210223124057",
+        "capture_digest": "JZDZLP2JI2DWUNM4TISKYNEUN4E4VB5Z",
+        "source_url": "https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    },
+    {
+      "evidence_id": "sog_src_usdt_terms_pr354",
+      "source_file": "data/evidence-pr354-tier-a-batch-1.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://tether.to/legal/"
+      },
+      "new_value": null,
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe"
+      },
+      "reason": "The legacy /legal/ route returned only old captures and cannot support the February 2026 terms version recorded by this Evidence row.",
+      "remaining_uncertainty": "A later batch may add a dated capture or perform source-identity maintenance after version-equivalence review."
+    },
+    {
+      "evidence_id": "sog_src_ust_sec_2023_32",
+      "source_file": "data/evidence.json",
+      "review_status": "reviewed_wildcard_replaced_with_dated_capture",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": "https://web.archive.org/web/*/https://www.sec.gov/newsroom/press-releases/2023-32"
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/20240702092147/https://www.sec.gov/newsroom/press-releases/2023-32"
+      },
+      "evidence_basis": {
+        "method": "Wayback CDX exact-source probe",
+        "capture_timestamp": "20240702092147",
+        "capture_digest": "I76X6ZI5GRHHWFFPEJ3EBOR6MUQ4NA5K",
+        "source_url": "https://www.sec.gov/newsroom/press-releases/2023-32"
+      },
+      "reason": "A successful HTTP 200 Wayback capture was found for the exact canonical source URL and reviewed against the publication/access boundary.",
+      "remaining_uncertainty": "The archive preserves the captured source version only; later page changes are not inferred."
+    }
+  ],
+  "constraints": {
+    "new_evidence_identities": 0,
+    "removed_evidence_identities": 0,
+    "evidence_relation_changes": 0,
+    "asset_changes": 0,
+    "market_access_record_changes": 0,
+    "new_public_surface": false
+  }
+}
