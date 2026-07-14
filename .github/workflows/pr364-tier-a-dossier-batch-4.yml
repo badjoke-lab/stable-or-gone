@@ -60,8 +60,16 @@ jobs:
             data/reserve-reports*.json \
             data/reserve-components*.json \
             data/income-profiles*.json \
-            src/
-          echo 'PR #364 adds no asset, Market Access record, deployment, reserve report/component, income profile, or public application source.'
+            src/ \
+            ':(exclude)src/lib/data/post351Evidence.ts' \
+            ':(exclude)src/lib/data/stablecoinProfiles.ts'
+          expected_src="$(printf '%s\n' 'src/lib/data/post351Evidence.ts' 'src/lib/data/stablecoinProfiles.ts')"
+          actual_src="$(git diff --name-only origin/main...HEAD -- src/)"
+          test "$actual_src" = "$expected_src"
+          grep -q "evidence-pr364-tier-a-batch-4.json" src/lib/data/post351Evidence.ts
+          grep -q "organizations-pr364-tier-a-batch-4.json" src/lib/data/stablecoinProfiles.ts
+          grep -q "relationships-pr364-tier-a-batch-4.json" src/lib/data/stablecoinProfiles.ts
+          echo 'PR #364 adds no asset, Market Access record, deployment, reserve report/component, income profile, route, or UI surface; only reviewed canonical public loaders are synchronized.'
 
       - name: Validate canonical data
         run: npm run validate:data
