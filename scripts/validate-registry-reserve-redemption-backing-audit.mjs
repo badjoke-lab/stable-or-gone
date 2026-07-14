@@ -16,6 +16,7 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 const expectedApplicabilityQueueAssets = 12;
 const expectedCoveredAssets = checkpoint.asset_count - expectedApplicabilityQueueAssets;
 const expectedNoDateRows = 76;
+const expectedRedemptionSourceReviewNeededFields = 8;
 
 expect(report.audit_id === 'sog_registry_100_reserve_redemption_backing_pr300', `unexpected audit_id ${report.audit_id}`);
 expect(report.audited_counts?.stable_assets === checkpoint.asset_count, `expected ${checkpoint.asset_count} assets, got ${report.audited_counts?.stable_assets}`);
@@ -43,7 +44,7 @@ expect(JSON.stringify(report.review_queues?.lifecycle_redemption_warnings ?? [])
 ]), 'FEI lifecycle/redemption review queue changed');
 expect((report.review_queues?.issuer_redemption_mechanism_warnings ?? []).length === 0, 'issuer-redemption mechanism conflicts remain');
 expect((report.review_queues?.unbacked_disclosure_warnings ?? []).length === 0, 'unbacked disclosure conflicts remain');
-expect((report.review_queues?.redemption_source_review_needed_fields ?? []).length === 10, 'redemption source-review-needed queue changed');
+expect((report.review_queues?.redemption_source_review_needed_fields ?? []).length === expectedRedemptionSourceReviewNeededFields, `redemption source-review-needed queue changed: expected ${expectedRedemptionSourceReviewNeededFields}`);
 expect(JSON.stringify(report.review_queues?.reserve_source_status_unresolved ?? []) === JSON.stringify(['sog_st_eurt', 'sog_st_husd']), 'reserve source-status unresolved queue changed');
 expect(report.result === 'pass_with_review_queues', `unexpected result ${report.result}`);
 
@@ -53,4 +54,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Reserve, redemption, and backing audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: complete ${expectedCoveredAssets}+${expectedApplicabilityQueueAssets} applicability partition, ${expectedNoDateRows} bounded no-date review rows, 0 critical inconsistencies, and bounded review queues.`);
+console.log(`Reserve, redemption, and backing audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: complete ${expectedCoveredAssets}+${expectedApplicabilityQueueAssets} applicability partition, ${expectedNoDateRows} bounded no-date review rows, ${expectedRedemptionSourceReviewNeededFields} remaining redemption source-review-needed fields, 0 critical inconsistencies, and bounded review queues.`);
