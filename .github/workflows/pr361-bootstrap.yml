@@ -1,0 +1,49 @@
+name: PR 361 Review Gate Bootstrap
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    if: github.head_ref == 'pr361-post-pr360-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout PR 361 branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr361-post-pr360-review-gate
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Generate deterministic review gate
+        run: node scripts/build-post-pr360-review-gate-pr361.mjs
+
+      - name: Synchronize repository authority
+        run: node scripts/activate-pr361-review-gate.mjs
+
+      - name: Validate review gate
+        run: npm run validate:active-workstream
+
+      - name: Commit review-gate bootstrap
+        run: |
+          if git diff --quiet; then
+            echo 'PR #361 review gate already synchronized.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md docs/migration/post-pr360-review-gate-pr361.json
+          git commit -m 'Bootstrap post-PR 360 review gate'
+          git push origin HEAD:pr361-post-pr360-review-gate
