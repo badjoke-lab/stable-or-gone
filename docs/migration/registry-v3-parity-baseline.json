@@ -1,24 +1,24 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_pr360_112_assets_2026_07_14",
+  "baseline_id": "sog_registry_v3_parity_pr364_112_assets_2026_07_14",
   "recorded_at": "2026-07-14",
-  "data_checkpoint_commit": "pr360-evidence-correction-batch",
-  "source_baseline_id": "sog_registry_v3_parity_pr359_112_assets_2026_07_13",
-  "canonical_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
+  "data_checkpoint_commit": "pr364-tier-a-dossier-batch-4",
+  "source_baseline_id": "sog_registry_v3_parity_pr360_112_assets_2026_07_14",
+  "canonical_checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
   "expected_v2_counts": {
     "stablecoins": 112,
-    "organizations": 105,
-    "relationships": 122,
+    "organizations": 107,
+    "relationships": 124,
     "classifications": 112,
     "profiles": 112,
     "events": 187,
     "event_details": 187,
-    "evidence": 557,
-    "evidence_relations": 557,
+    "evidence": 559,
+    "evidence_relations": 559,
     "reserve_reports": 120,
     "known_unknowns": 325,
     "regulatory_notes": 9,
@@ -42,7 +42,10 @@
     "data_schema_version": "sog_registry_v2",
     "compatibility_mode": "v2_public_contract_with_additive_v3_summary",
     "registry_v3_summary": true,
-    "summary_locations": ["version.data.registry_v3", "manifest.registry_v3"],
+    "summary_locations": [
+      "version.data.registry_v3",
+      "manifest.registry_v3"
+    ],
     "data_safety": {
       "canonical_only": true,
       "includes_unreviewed_candidates": false,
@@ -52,5 +55,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline preserves all 112-asset v2/v3 record counts while binding the reviewed PR #360 Evidence archive corrections to the current canonical checkpoint. Evidence identities and Relations remain 557; archive coverage improves from 380 to 387 recorded archives while no-archive rows decline from 177 to 170. Historical parity checkpoints remain forward-only."
+  "notes": "Current parity baseline binds PR #364 dossier-depth changes. It preserves 112 assets while adding two exact USDG legal issuer organizations, two legal-issuer relationships, and two primary Evidence records. Legal-profile coverage remains one unique profile per asset; no Market Access, deployment, reserve-component, or income-profile count changes occur."
 }

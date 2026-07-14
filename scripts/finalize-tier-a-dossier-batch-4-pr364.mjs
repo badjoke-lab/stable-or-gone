@@ -25,7 +25,7 @@ const marketAccess = readJson('data/market-access-records-v1.json');
 const legalProfiles = foundation.data_groups.legal_profiles.flatMap(readRows);
 const stableAssetRelationships = foundation.data_groups.stable_asset_relationships.flatMap(readRows);
 const reserveComponents = foundation.data_groups.reserve_components.flatMap(readRows);
-const incomeProfiles = incomeManifest.data_groups.income_profiles.flatMap(readRows);
+const incomeProfiles = incomeManifest.data_files.flatMap(readRows);
 const evidence = group('evidence');
 const archiveRecorded = evidence.filter((row) => typeof row.archived_url === 'string' && row.archived_url.trim() !== '').length;
 const archiveNotRecorded = evidence.length - archiveRecorded;

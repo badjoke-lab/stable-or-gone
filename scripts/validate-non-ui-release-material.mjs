@@ -32,7 +32,7 @@ for (const marker of [
   'PR #359 Market Access Pilot 2: complete',
   'PR #360 Evidence and Correction Batch: complete',
   'PR #361 Post-PR #360 Review Gate: complete',
-  'PR #363 Record Depth and Coverage Baseline Refresh: active',
+  'PR #363 Record Depth and Coverage Baseline Refresh: complete',
   'StraitsX USD (XUSD)',
   'Blast USDB'
 ]) requireText(readme, marker, 'README.md');
@@ -60,25 +60,25 @@ for (const boundary of ['canonical_only = true','includes_unreviewed_candidates 
 check(checkpoint.release_integrity_baseline_id === 'sog_release_integrity_pr316_2026_07_06', 'historical 100-asset release-integrity baseline ID changed');
 check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'historical checkpoint/reproducible-build baseline ID mismatch');
 check(releaseBaseline.status === 'current', 'current release-integrity baseline must remain current');
-check(releaseBaseline.baseline_id === 'sog_release_integrity_pr360_112_assets_2026_07_14', 'current release-integrity baseline must remain the PR #360 canonical baseline');
-check(currentCheckpoint.checkpoint_id === 'sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14', 'current canonical checkpoint must remain the PR #360 correction checkpoint');
+check(releaseBaseline.baseline_id === 'sog_release_integrity_pr364_112_assets_2026_07_14', 'current release-integrity baseline must remain the PR #364 canonical baseline');
+check(currentCheckpoint.checkpoint_id === 'sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14', 'current canonical checkpoint must remain the PR #364 dossier checkpoint');
 check(currentCheckpoint.asset_count === 112, 'current canonical checkpoint must contain 112 assets');
 check(currentCheckpoint.evidence_quality?.archive_index_count === 387, 'current canonical checkpoint must bind 387 archive indexes');
-check(currentCheckpoint.evidence_quality?.archive_not_recorded_count === 170, 'current canonical checkpoint must bind 170 no-archive rows');
+check(currentCheckpoint.evidence_quality?.archive_not_recorded_count === 172, 'current canonical checkpoint must bind 172 no-archive rows');
 check(releaseBaseline.expected_v2_counts?.stablecoins === currentCheckpoint.asset_count, 'current release-integrity baseline must match current checkpoint asset count');
 check(releaseBaseline.expected_v2_counts?.organizations === currentCheckpoint.expected_counts?.organizations, 'current release-integrity baseline must match current checkpoint organization count');
 check(releaseBaseline.expected_v2_counts?.events === currentCheckpoint.expected_counts?.events, 'current release-integrity baseline must match current checkpoint event count');
 check(releaseBaseline.expected_v2_counts?.evidence === currentCheckpoint.expected_counts?.evidence, 'current release-integrity baseline must match current checkpoint Evidence count');
 check(releaseBaseline.expected_v2_counts?.deployments === currentCheckpoint.expected_counts?.deployments, 'current release-integrity baseline must match current checkpoint deployment count');
-check(releaseBaseline.evidence_quality?.archive_index_count === correctionOutcome.archive_index_count_after, 'release baseline archive index count mismatch');
-check(releaseBaseline.evidence_quality?.archive_not_recorded_count === correctionOutcome.archive_not_recorded_count_after, 'release baseline no-archive count mismatch');
+check(releaseBaseline.evidence_quality?.archive_index_count === currentCheckpoint.evidence_quality?.archive_index_count, 'release baseline archive index count mismatch');
+check(releaseBaseline.evidence_quality?.archive_not_recorded_count === currentCheckpoint.evidence_quality?.archive_not_recorded_count, 'release baseline no-archive count mismatch');
 check(history.snapshots?.[0]?.checkpoint_id === checkpoint.checkpoint_id, 'stats history initial checkpoint ID mismatch');
 check(history.snapshots?.[0]?.asset_count === 100, 'stats history initial asset count must be 100');
 const latestSnapshot = history.snapshots?.at(-1);
 check(latestSnapshot?.checkpoint_id === currentHistoryCheckpoint.checkpoint_id, 'stats history current reviewed checkpoint snapshot missing');
 check(latestSnapshot?.canonical_checkpoint_id === currentCheckpoint.checkpoint_id, 'stats history latest snapshot must bind the current canonical checkpoint');
 check(latestSnapshot?.totals?.assets === 112, 'stats history latest snapshot must contain 112 assets');
-check(latestSnapshot?.totals?.evidence === 557, 'stats history latest snapshot must contain 557 Evidence records');
+check(latestSnapshot?.totals?.evidence === 559, 'stats history latest snapshot must contain 559 Evidence records');
 check(latestSnapshot?.totals?.deployments === 174, 'stats history latest snapshot must contain 174 deployments');
 check(latestSnapshot?.totals?.market_access_records === 8, 'stats history latest snapshot must contain eight Market Access records');
 check(latestSnapshot?.data_quality?.coverage?.archive_evidence?.count === 387, 'stats history latest snapshot must contain 387 archived Evidence rows');
@@ -156,7 +156,7 @@ console.log(JSON.stringify({
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
   stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_workstream: 'pr363_record_depth_baseline_refresh',
-  next_workstream: 'pr364_tier_a_dossier_batch_4',
+  active_workstream: 'pr364_tier_a_dossier_batch_4',
+  next_workstream: 'pr365_evidence_archive_maintenance_batch_2',
   approved_sequence: reviewGate.approved_next_sequence.map((row) => row.pr)
 }, null, 2));
