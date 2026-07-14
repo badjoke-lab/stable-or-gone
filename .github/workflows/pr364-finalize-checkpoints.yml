@@ -1,0 +1,96 @@
+name: PR 364 Finalize Checkpoints
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  finalize:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr364-tier-a-dossier-batch-4'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr364-tier-a-dossier-batch-4
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Activate PR 364 authority
+        run: node scripts/activate-pr364-tier-a-batch-4.mjs
+
+      - name: Generate PR 364 checkpoints
+        id: generate
+        run: node scripts/finalize-tier-a-dossier-batch-4-pr364.mjs | tee artifacts-pr364-finalizer.txt
+
+      - name: Validate generated checkpoint set
+        run: |
+          node scripts/validate-tier-a-dossier-batch-4-pr364.mjs
+          npm run validate:active-workstream
+          node scripts/validate-non-ui-release-material.mjs
+          npm run validate:data
+          npm run validate:profiles
+          npm run validate:evidence-relations-v2
+          npm run validate:v3
+          npm run validate:deployments-v3
+          npm run validate:income-v3
+          npm run validate:parity
+          npm run validate:release-integrity
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+          SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+
+      - name: Commit generated authority and checkpoints
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            README.md \
+            AGENTS.md \
+            docs/spec-governance.md \
+            docs/roadmap.md \
+            docs/post-351-data-growth-operating-spec.md \
+            scripts/check-workstream-123.mjs \
+            scripts/validate-active-workstream.mjs \
+            scripts/validate-non-ui-release-material.mjs \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-v3-parity-baseline.json \
+            docs/migration/registry-release-integrity-baseline.json \
+            docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json \
+            data/stats-history.json
+          if git diff --cached --quiet; then
+            echo 'PR #364 authority and checkpoints are already synchronized.'
+            exit 0
+          fi
+          git commit -m 'Finalize PR 364 dossier checkpoints and authority'
+          git pull --rebase origin pr364-tier-a-dossier-batch-4
+          git push origin HEAD:pr364-tier-a-dossier-batch-4
+
+      - name: Publish finalizer status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr364-finalizer-status -->';
+            const report=fs.existsSync('artifacts-pr364-finalizer.txt')?fs.readFileSync('artifacts-pr364-finalizer.txt','utf8').slice(-6000):'not generated';
+            const body=`${marker}\n## PR #364 checkpoint finalizer\n\n- Status: **${{ job.status }}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n\n\`\`\`text\n${report}\n\`\`\`\n`;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((comment)=>comment.body?.includes(marker));
+            if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
