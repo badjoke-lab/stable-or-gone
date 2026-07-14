@@ -30,12 +30,21 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           import path from 'node:path';
+          import { loadRegistryV2Baseline } from './scripts/load-registry-v2-baseline.mjs';
 
           const targetIds = new Set(['sog_st_husd','sog_st_1gbp','sog_st_rlusd','sog_st_usdg','sog_st_usds']);
           const targetSlugs = new Set(['husd','poundtoken','rlusd','usdg','usds']);
           const targetTerms = ['HUSD','poundtoken','1GBP','Ripple USD','RLUSD','Global Dollar','USDG','USDS'];
           const roots = ['data','docs/migration'];
-          const output = { generated_at: new Date().toISOString(), targets: [...targetIds], matches: [] };
+          const baseline = loadRegistryV2Baseline(process.cwd());
+          const overlayFiles = fs.readdirSync('docs/migration').filter((name)=>/^registry-v2-baseline-batch-[a-z]+\.json$/i.test(name)).sort();
+          const output = {
+            generated_at: new Date().toISOString(),
+            targets: [...targetIds],
+            overlay_files: overlayFiles,
+            current_data_groups: baseline.data_groups,
+            matches: []
+          };
 
           function walk(dir) {
             if (!fs.existsSync(dir)) return [];
@@ -67,7 +76,7 @@ jobs:
           }
           output.matches.sort((a,b)=>a.file.localeCompare(b.file)||a.pointer.localeCompare(b.pointer));
           fs.writeFileSync('artifacts/pr364-existing-records.json',JSON.stringify(output,null,2)+'\n');
-          console.log(JSON.stringify({match_count:output.matches.length,files:[...new Set(output.matches.map((row)=>row.file))]},null,2));
+          console.log(JSON.stringify({overlay_files:overlayFiles,match_count:output.matches.length,files:[...new Set(output.matches.map((row)=>row.file))]},null,2));
           NODE
 
       - name: Upload extract
