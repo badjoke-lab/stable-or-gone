@@ -9,7 +9,7 @@ const readRows = (file) => {
   const value = readJson(file);
   const rows = Array.isArray(value) ? value : value.records;
   if (!Array.isArray(rows)) throw new Error(`${file}: expected array or { records: [] }`);
-  return rows;
+  return rows.map((row, index) => ({...row, __source_file: file, __source_index: index}));
 };
 const unique = (values) => [...new Set(values.filter((value) => typeof value === 'string' && value.length > 0))].sort();
 const relationValues = (row, plural, singular) => unique([...(row[plural] ?? []), ...(row[singular] ? [row[singular]] : [])]);
@@ -38,6 +38,8 @@ const noArchive = evidence
     const bucket = priority(row);
     return {
       evidence_id: row.id,
+      source_file: row.__source_file,
+      source_index: row.__source_index,
       priority_rank: bucket.rank,
       priority_bucket: bucket.bucket,
       title: row.title ?? null,
@@ -45,6 +47,7 @@ const noArchive = evidence
       source_type: row.source_type ?? null,
       url: row.url ?? null,
       published_at: row.published_at ?? null,
+      accessed_at: row.accessed_at ?? null,
       stablecoin_ids: relationValues(row, 'stablecoin_ids', 'stablecoin_id'),
       organization_ids: relationValues(row, 'organization_ids', 'issuer_id'),
       event_ids: relationValues(row, 'event_ids', 'event_id'),
@@ -70,7 +73,7 @@ for (const file of inputs) {
 }
 
 const report = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   queue_id: 'sog_evidence_correction_queue_pr360_2026_07_14',
   status: 'internal_review_queue_not_canonical_change',
   public_output: false,
@@ -104,5 +107,6 @@ console.log(JSON.stringify({
   archive_not_recorded_count: report.archive_not_recorded_count,
   selected_count: report.selected_count,
   selected_evidence_ids: selected.map((row) => row.evidence_id),
+  selected_source_files: [...new Set(selected.map((row) => row.source_file))].sort(),
   input_digest_sha256: report.input_digest_sha256
 }, null, 2));
