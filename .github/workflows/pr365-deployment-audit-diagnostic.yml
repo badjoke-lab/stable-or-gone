@@ -1,0 +1,30 @@
+name: PR 365 Deployment Audit Diagnostic
+
+on:
+  push:
+    branches:
+      - pr365-evidence-archive-maintenance-batch-2
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr365-evidence-archive-maintenance-batch-2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build diagnostic
+        run: node scripts/diagnose-pr365-deployment-audit.mjs
+      - name: Commit diagnostic
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add docs/migration/pr365-deployment-audit-diagnostic.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Record PR 365 deployment audit diagnostic"
+          git push
