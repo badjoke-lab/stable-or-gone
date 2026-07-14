@@ -82,7 +82,7 @@ jobs:
           const report = JSON.parse(fs.readFileSync('docs/migration/post-pr360-review-gate-pr361.json','utf8'));
           if (report.public_output !== false) throw new Error('Review gate must remain internal');
           if (report.current_counts?.assets !== 112 || report.current_counts?.evidence !== 557 || report.current_counts?.market_access_records !== 8) throw new Error('Review gate current count boundary changed');
-          if (JSON.stringify(report.approved_next_sequence?.map((row) => row.pr)) !== JSON.stringify([362,363,364])) throw new Error('Approved next sequence changed');
+          if (JSON.stringify(report.approved_next_sequence?.map((row) => row.pr)) !== JSON.stringify([363,364,365])) throw new Error('Approved next sequence changed');
           if (report.decisions?.market_access_pilot_3?.decision !== 'not_approved') throw new Error('Market Access Pilot 3 was incorrectly approved');
           if (report.decisions?.record_growth_batch_2?.decision !== 'not_approved_in_next_sequence') throw new Error('Record Growth Batch 2 was incorrectly approved');
           if (report.decisions?.new_public_surface?.decision !== 'not_approved') throw new Error('New public surface was incorrectly approved');
@@ -136,7 +136,7 @@ jobs:
             - Assets without events: **${timeline?.assets_without_events ?? 'not-generated'}**
             - Market Access breadth: **${access?.asset_count ?? 'not-generated'} assets / ${access?.platform_count ?? 'not-generated'} platform / ${access?.jurisdiction_count ?? 'not-generated'} jurisdiction**
             - Archive not recorded: **${correction?.archive_not_recorded ?? 'not-generated'}**
-            - Approved sequence: **PR #362 → #363 → #364 → review gate**
+            - Approved sequence: **PR #363 → #364 → #365 → review gate**
             - Market Access Pilot 3: **not approved**
             - Record Growth Batch 2: **not approved in this sequence**
             - New public surface: **not approved**
