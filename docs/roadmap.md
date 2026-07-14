@@ -292,7 +292,7 @@ PR #359 may expand only after reviewing Pilot 1 scope, evidence burden, correcti
 
 No automatic promotion from monitoring or editorial research is allowed.
 
-## 12. PR #360 — Evidence and Correction Batch — active
+## 12. PR #360 — Evidence and Correction Batch — active — active
 
 Priority work:
 
