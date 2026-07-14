@@ -1,3 +1,22 @@
+import organizationsBatchZData from '../../../data/organizations-batch-z.json';
+import relationshipsBatchZData from '../../../data/relationships-batch-z.json';
+import organizationsPr364Data from '../../../data/organizations-pr364-tier-a-batch-4.json';
+import relationshipsPr364Data from '../../../data/relationships-pr364-tier-a-batch-4.json';
+
+type IdentifiedRow = { id: string; [key: string]: unknown };
+
+const appendUniqueRows = (target: IdentifiedRow[], additions: IdentifiedRow[]) => {
+  const ids = new Set(target.map((row) => row.id));
+  for (const row of additions) {
+    if (ids.has(row.id)) continue;
+    target.push(row);
+    ids.add(row.id);
+  }
+};
+
+appendUniqueRows(organizationsBatchZData as IdentifiedRow[], organizationsPr364Data as IdentifiedRow[]);
+appendUniqueRows(relationshipsBatchZData as IdentifiedRow[], relationshipsPr364Data as IdentifiedRow[]);
+
 export { getCurrentProfiles as getStablecoinProfiles, getCurrentProfile as getStablecoinProfile } from './currentProfiles';
 export type { CurrentProfile as StablecoinProfileV2 } from './currentProfiles';
 
