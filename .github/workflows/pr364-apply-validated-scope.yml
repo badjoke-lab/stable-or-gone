@@ -63,16 +63,31 @@ jobs:
         run: node scripts/rebuild-pr364-stats-snapshot.mjs
 
       - name: Confirm corrected scope
+        shell: bash
         run: |
-          node scripts/validate-tier-a-dossier-batch-4-pr364.mjs
-          node scripts/validate-registry-evidence-integrity-audit.mjs
-          node scripts/audit-registry-reserve-redemption-backing.mjs
-          node scripts/generate-registry-stats-batch-o.mjs
-          node scripts/build-value-state-stats.mjs
-          node scripts/build-primary-display-relationship-stats.mjs
-          node scripts/build-evidence-source-identity-stats.mjs
-          node scripts/validate-registry-stats.mjs
-          SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+          mkdir -p artifacts/pr364-apply-diagnostic
+          : > artifacts/pr364-apply-diagnostic/summary.txt
+          failed=0
+          run_check() {
+            name="$1"; shift
+            log="artifacts/pr364-apply-diagnostic/${name}.log"
+            if "$@" >"$log" 2>&1; then
+              echo "${name}: success" >> artifacts/pr364-apply-diagnostic/summary.txt
+            else
+              echo "${name}: failure" >> artifacts/pr364-apply-diagnostic/summary.txt
+              failed=1
+            fi
+          }
+          run_check pr364 node scripts/validate-tier-a-dossier-batch-4-pr364.mjs
+          run_check evidence-integrity node scripts/validate-registry-evidence-integrity-audit.mjs
+          run_check reserve-redemption node scripts/audit-registry-reserve-redemption-backing.mjs
+          run_check registry-stats-generate node scripts/generate-registry-stats-batch-o.mjs
+          run_check registry-value-states node scripts/build-value-state-stats.mjs
+          run_check registry-primary-display node scripts/build-primary-display-relationship-stats.mjs
+          run_check registry-evidence-identity node scripts/build-evidence-source-identity-stats.mjs
+          run_check registry-stats-validate node scripts/validate-registry-stats.mjs
+          run_check stats-history env SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+          if [ "$failed" -ne 0 ]; then exit 1; fi
 
       - name: Commit validated scope correction
         run: |
@@ -93,6 +108,15 @@ jobs:
           git pull --rebase origin pr364-tier-a-dossier-batch-4
           git push origin HEAD:pr364-tier-a-dossier-batch-4
 
+      - name: Upload apply diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr364-apply-diagnostic-${{ github.run_id }}
+          path: artifacts/pr364-apply-diagnostic/
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Publish apply status
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -102,7 +126,14 @@ jobs:
             const marker='<!-- pr364-apply-validated-scope -->';
             let handoff=null;
             try{handoff=JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json','utf8'));}catch{}
-            const body=`${marker}\n## PR #364 validated scope application\n\n- Status: **${{ job.status }}**\n- Stats model SHA-256: \`${handoff?.stats_model_sha256??'not-generated'}\`\n- Stats snapshot SHA-256: \`${handoff?.stats_snapshot_sha256??'not-generated'}\`\n- Head: \`${context.sha}\`\n`;
+            const dir='artifacts/pr364-apply-diagnostic';
+            const summary=fs.existsSync(`${dir}/summary.txt`)?fs.readFileSync(`${dir}/summary.txt`,'utf8').trim():'not generated';
+            const failures=[];
+            if(fs.existsSync(dir)) for(const name of fs.readdirSync(dir).filter((name)=>name.endsWith('.log')).sort()) {
+              const text=fs.readFileSync(`${dir}/${name}`,'utf8');
+              if(text.match(/error|failed|invalid|mismatch|missing|must|expected/i)) failures.push(`### ${name}\n\n\`\`\`text\n${text.split('\n').slice(-30).join('\n').slice(-5000)}\n\`\`\``);
+            }
+            const body=`${marker}\n## PR #364 validated scope application\n\n- Status: **${{ job.status }}**\n- Stats model SHA-256: \`${handoff?.stats_model_sha256??'not-generated'}\`\n- Stats snapshot SHA-256: \`${handoff?.stats_snapshot_sha256??'not-generated'}\`\n- Head: \`${context.sha}\`\n\n\`\`\`text\n${summary}\n\`\`\`\n\n${failures.join('\n\n')}`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((comment)=>comment.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
