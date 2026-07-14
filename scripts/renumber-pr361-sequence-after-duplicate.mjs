@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { buildReviewGate, serializeReviewGate } from './build-post-pr360-review-gate-pr361.mjs';
 
 // One-time deterministic repair after the closed duplicate PR consumed #362.
-// Diagnostic trigger: expose commit, rebase, and push exit codes before the final branch update.
+// Final trigger: push the seven non-workflow authority files, then update CI separately.
 const textFiles = [
   'README.md',
   'AGENTS.md',
