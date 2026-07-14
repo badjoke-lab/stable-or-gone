@@ -9,26 +9,56 @@ const queue = readJson('docs/migration/evidence-correction-queue-pr360.json');
 const config = readJson('config/evidence-correction-batch-pr360.json');
 const baseline = loadRegistryV2Baseline(root);
 
-const archiveIds = new Set([
-  'sog_src_busd_reuters_sec_2024',
-  'sog_src_usdt_cftc_2021_event',
-  'sog_src_usdt_nyag_2021_event',
-  'sog_src_ust_sec_2023_32'
+const reviewedArchives = new Map([
+  ['sog_src_nuon_disclaimer_batch_b', {
+    archived_url: 'https://web.archive.org/web/20260416023630/https://docs.nuon.fi/resources/legal-documents/investment-disclaimer',
+    timestamp: '20260416023630',
+    digest: 'VFTRBAYOI7EGEIVLFS7B2DCEQQWJEIUD'
+  }],
+  ['sog_src_rlusd_user_terms', {
+    archived_url: 'https://web.archive.org/web/20260414072541/https://ripple.com/legal/stablecoin/',
+    timestamp: '20260414072541',
+    digest: 'OKICX4AY7TQ44FZ44BJU42MA2ZPPWBSB'
+  }],
+  ['sog_src_usdc_terms_pr354', {
+    archived_url: 'https://web.archive.org/web/20251220022409/https://www.circle.com/legal/usdc-terms',
+    timestamp: '20251220022409',
+    digest: 'QKET4U64GVSVM7ATK5YO6C3TQF5I7DZS'
+  }],
+  ['sog_src_usde_terms_batch_a', {
+    archived_url: 'https://web.archive.org/web/20260124121957/https://docs.ethena.fi/resources/usde-terms-and-conditions',
+    timestamp: '20260124121957',
+    digest: 'K466DMNGPNCYICZ7SFOAL57SCJFVSUSU'
+  }],
+  ['sog_src_usdt_cftc_2021_event', {
+    archived_url: 'https://web.archive.org/web/20211015150107/https://www.cftc.gov/PressRoom/PressReleases/8450-21',
+    timestamp: '20211015150107',
+    digest: 'C57FSCO44WC5PRHLRJMRV6JM7TTY47E2'
+  }],
+  ['sog_src_usdt_nyag_2021_event', {
+    archived_url: 'https://web.archive.org/web/20210223124057/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal',
+    timestamp: '20210223124057',
+    digest: 'JZDZLP2JI2DWUNM4TISKYNEUN4E4VB5Z'
+  }],
+  ['sog_src_ust_sec_2023_32', {
+    archived_url: 'https://web.archive.org/web/20240702092147/https://www.sec.gov/newsroom/press-releases/2023-32',
+    timestamp: '20240702092147',
+    digest: 'I76X6ZI5GRHHWFFPEJ3EBOR6MUQ4NA5K'
+  }]
 ]);
-const noChangeIds = new Set([
-  'sog_src_nuon_disclaimer_batch_b',
-  'sog_src_rlusd_user_terms',
-  'sog_src_tether_legal_terms',
-  'sog_src_usdc_terms_pr354',
-  'sog_src_usde_terms_batch_a',
-  'sog_src_usdt_terms_pr354'
+
+const noChangeReasons = new Map([
+  ['sog_src_busd_reuters_sec_2024', 'The CDX response contained no valid snapshot rows, so no archive URL is recorded.'],
+  ['sog_src_tether_legal_terms', 'The available bounded probe did not produce a capture close enough to the 2026 review date to bind the current terms version safely.'],
+  ['sog_src_usdt_terms_pr354', 'The legacy /legal/ route returned only old captures and cannot support the February 2026 terms version recorded by this Evidence row.']
 ]);
+
 const selectedIds = new Set(queue.selected_candidates.map((row) => row.evidence_id));
-const expectedIds = new Set([...archiveIds, ...noChangeIds]);
+const expectedIds = new Set([...reviewedArchives.keys(), ...noChangeReasons.keys()]);
 if (selectedIds.size !== 10 || expectedIds.size !== 10 || [...selectedIds].some((id) => !expectedIds.has(id))) {
   throw new Error(`PR #360 queue identity mismatch: ${JSON.stringify([...selectedIds].sort())}`);
 }
-if (archiveIds.size > config.maximum_canonical_evidence_records_touched) throw new Error('PR #360 correction count exceeds configured maximum.');
+if (reviewedArchives.size > config.maximum_canonical_evidence_records_touched) throw new Error('PR #360 correction count exceeds configured maximum.');
 
 const outcomes = [];
 const seen = new Set();
@@ -43,21 +73,27 @@ for (const file of baseline.data_groups?.evidence ?? []) {
     if (!selectedIds.has(row.id)) continue;
     if (seen.has(row.id)) throw new Error(`Duplicate selected Evidence ID: ${row.id}`);
     seen.add(row.id);
-    if (archiveIds.has(row.id)) {
-      if (String(row.archived_url ?? '').trim()) throw new Error(`${row.id}: archived_url already recorded`);
-      if (!/^https:\/\//.test(row.url ?? '')) throw new Error(`${row.id}: HTTPS source URL required`);
-      const archivedUrl = `https://web.archive.org/web/*/${row.url}`;
-      row.archived_url = archivedUrl;
-      changed = true;
+    const reviewed = reviewedArchives.get(row.id);
+    if (reviewed) {
+      if (String(row.archived_url ?? '').trim() && row.archived_url !== reviewed.archived_url) throw new Error(`${row.id}: conflicting archived_url already recorded`);
+      const previous = row.archived_url ?? null;
+      row.archived_url = reviewed.archived_url;
+      changed ||= previous !== reviewed.archived_url;
       outcomes.push({
         evidence_id: row.id,
         source_file: file,
-        review_status: 'reviewed_archive_index_added',
+        review_status: 'reviewed_dated_archive_added',
         correction_type: 'archive_supplementation',
-        previous_value: { archived_url: null },
-        new_value: { archived_url: archivedUrl },
-        reason: 'Dated regulator or high-quality reporting source selected from the deterministic no-archive queue. Added the Wayback Machine capture index for the exact canonical source URL without changing source identity, subject relations, claim scope, title, publisher, or publication date.',
-        remaining_uncertainty: 'The index is not treated as proof of any individual timestamped capture; individual captures remain subject to later source review.'
+        previous_value: {archived_url: previous},
+        new_value: {archived_url: reviewed.archived_url},
+        evidence_basis: {
+          method: 'Wayback CDX exact-source probe',
+          capture_timestamp: reviewed.timestamp,
+          capture_digest: reviewed.digest,
+          source_url: row.url
+        },
+        reason: 'A successful HTTP 200 Wayback capture was found for the exact canonical source URL and was reviewed against the publication/access boundary.',
+        remaining_uncertainty: 'The archive preserves the captured source version only; later page changes are not inferred.'
       });
     } else {
       outcomes.push({
@@ -65,10 +101,11 @@ for (const file of baseline.data_groups?.evidence ?? []) {
         source_file: file,
         review_status: 'reviewed_no_safe_canonical_change',
         correction_type: null,
-        previous_value: { archived_url: null, url: row.url },
+        previous_value: {archived_url: row.archived_url ?? null, url: row.url},
         new_value: null,
-        reason: 'Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.',
-        remaining_uncertainty: 'A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope.'
+        evidence_basis: {method: 'Wayback CDX exact-source probe'},
+        reason: noChangeReasons.get(row.id),
+        remaining_uncertainty: 'A later batch may add a dated capture or perform source-identity maintenance after version-equivalence review.'
       });
     }
   }
@@ -80,12 +117,12 @@ for (const file of baseline.data_groups?.evidence ?? []) {
 }
 
 if (seen.size !== selectedIds.size) throw new Error(`Selected Evidence coverage mismatch: saw ${seen.size}, expected ${selectedIds.size}`);
-const changedOutcomes = outcomes.filter((row) => row.review_status === 'reviewed_archive_index_added');
+const changedOutcomes = outcomes.filter((row) => row.review_status === 'reviewed_dated_archive_added');
 const unchangedOutcomes = outcomes.filter((row) => row.review_status === 'reviewed_no_safe_canonical_change');
-if (changedOutcomes.length !== 4 || unchangedOutcomes.length !== 6) throw new Error('Unexpected PR #360 outcome split.');
+if (changedOutcomes.length !== 7 || unchangedOutcomes.length !== 3) throw new Error('Unexpected PR #360 outcome split.');
 
 const report = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   report_id: 'sog_evidence_correction_outcomes_pr360_2026_07_14',
   status: 'reviewed_internal_correction_report',
   public_output: false,
@@ -96,9 +133,9 @@ const report = {
   evidence_relation_count_before: 557,
   evidence_relation_count_after: 557,
   archive_index_count_before: 380,
-  archive_index_count_after: 384,
+  archive_index_count_after: 387,
   archive_not_recorded_count_before: 177,
-  archive_not_recorded_count_after: 173,
+  archive_not_recorded_count_after: 170,
   selected_count: outcomes.length,
   changed_count: changedOutcomes.length,
   reviewed_no_change_count: unchangedOutcomes.length,
