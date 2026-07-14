@@ -43,6 +43,15 @@ jobs:
           node scripts/validate-registry-deployment-chain-identity-audit.mjs
           node scripts/validate-next-growth-candidate-audit-pr329.mjs
           npm run validate:final
+      - name: Capture registry v2 compatibility diagnostics
+        run: |
+          mkdir -p artifacts
+          npm run validate:compat > artifacts/pr365-compat.log 2>&1 || true
+      - name: Upload registry v2 compatibility diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr365-compat-diagnostics
+          path: artifacts/pr365-compat.log
       - name: Validate remaining normal CI contracts
         run: |
           npm run validate:launch-queue
