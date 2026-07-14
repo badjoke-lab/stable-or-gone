@@ -1389,7 +1389,7 @@
     },
     {
       "checkpoint_id": "sog_market_access_pilot_2_112_checkpoint_pr359_2026_07_13",
-      "checkpoint_kind": "non_growth_market_access_checkpoint",
+      "checkpoint_kind": "non_growth_normalization_checkpoint",
       "source_checkpoint_id": "sog_record_growth_batch_1_112_checkpoint_pr358_2026_07_13",
       "canonical_checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
       "recorded_at": "2026-07-13",
@@ -1503,7 +1503,7 @@
           "percentage": 100
         }
       },
-      "snapshot_sha256": "c3454d4c7d36c03c86438d6b65c897f0beadc42df5b126707c1aa45efcf5b974"
+      "snapshot_sha256": "093cde6d4d83adfe82852fa38308f63fc92636595c2b1163d1b462960c803463"
     }
   ]
 }
