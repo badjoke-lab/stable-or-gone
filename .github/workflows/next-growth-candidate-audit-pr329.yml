@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   validate:
+    if: github.event_name == 'pull_request' && github.head_ref == 'pr329-next-candidate-audit'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
