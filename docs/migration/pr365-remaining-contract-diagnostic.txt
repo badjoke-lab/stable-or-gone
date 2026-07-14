@@ -1,13 +1,11 @@
 
 ## compatibility
-exit_code=1
+exit_code=0
 
 > stable-or-gone@0.0.1 validate:compat
 > node scripts/validate-registry-v2-compat.mjs
 
-Registry v2 compatibility validation failed:
-- data/organizations-batch-z.json: sog_issuer_straitsx_singapore has no legacy issuer compatibility record
-- data/organizations-batch-z.json: sog_org_blast has no legacy issuer compatibility record
+Registry v2 compatibility validation passed: 112 stablecoins, 107 organizations, 124 relationships, 187 events, 559 evidence records, 107 legacy issuer compatibility rows, 0 warnings.
 
 ## classification
 exit_code=0
@@ -110,7 +108,7 @@ exit_code=0
 
 {
   "schema_version": "2.0",
-  "generated_at": "2026-07-14T18:02:47.364Z",
+  "generated_at": "2026-07-14T18:04:36.897Z",
   "ok": true,
   "visual_family": "terminal_baseline_restored",
   "restoration_source_commit": "3df568eab0a179d7690a88efb599156b0d659ab7",
