@@ -6,6 +6,7 @@ const root = process.cwd();
 const failures = [];
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const audit = readJson('data/next-growth-candidate-audit-pr329.json');
+const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const baseline = loadRegistryV2Baseline(root);
 const group = (name) => (baseline.data_groups?.[name] ?? []).flatMap(readJson);
 const stablecoins = group('stablecoins');
@@ -127,9 +128,11 @@ for (const [index, batch] of expectedBatches.entries()) {
   fail(rows.every((row) => row.target_growth_pr === expectedPrs[index]), `${batch}: target growth PR mismatch`);
 }
 const promotedNextGrowth = promotions.filter((row) => row.status === 'promoted');
-fail(stablecoins.length === 100 + promotedNextGrowth.length, `canonical stablecoin count must equal 100 plus promoted next-growth candidates; found ${stablecoins.length} assets and ${promotedNextGrowth.length} promotions`);
-fail(promotedNextGrowth.length % 2 === 0, 'next-growth promotions must advance in two-candidate steps');
-fail(promotedNextGrowth.length <= 10, 'next-growth promotions cannot exceed ten candidates');
+const completedPlanCount = audit.canonical_stablecoin_count_before_growth + promotedNextGrowth.length;
+fail(promotedNextGrowth.length === 10, `all ten PR #329 candidates must remain promoted; found ${promotedNextGrowth.length}`);
+fail(completedPlanCount === 110, `PR #329 growth plan must terminate at 110 assets; found ${completedPlanCount}`);
+fail(stablecoins.length === checkpoint.asset_count, `current canonical assets must match the current checkpoint; found ${stablecoins.length} vs ${checkpoint.asset_count}`);
+fail(stablecoins.length >= completedPlanCount, `current canonical assets cannot fall below the completed PR #329 plan boundary ${completedPlanCount}`);
 fail(policy.manual_review_required === true, 'manual review must remain required');
 fail(policy.candidate_selection_is_not_canonical_promotion === true, 'candidate selection must not equal canonical promotion');
 fail(policy.canonical_write_allowed === false, 'PR #329 audit policy must preserve canonical write disabled at selection stage');
@@ -141,4 +144,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(JSON.stringify({ok:true,pre_growth_canonical_assets:audit.canonical_stablecoin_count_before_growth,current_canonical_assets:stablecoins.length,selected_candidates:candidates.length,promoted_next_growth_candidates:promotedNextGrowth.length,growth_prs:expectedPrs,identity_corrections_applied:corrections.length,numbering_corrections_applied:numberingCorrections.length,final_target_count:110,canonical_write_allowed_at_selection_stage:policy.canonical_write_allowed,public_output_at_selection_stage:policy.public_output}, null, 2));
+console.log(JSON.stringify({ok:true,pre_growth_canonical_assets:audit.canonical_stablecoin_count_before_growth,completed_pr329_plan_assets:completedPlanCount,current_canonical_assets:stablecoins.length,post_pr329_plan_growth_assets:stablecoins.length-completedPlanCount,selected_candidates:candidates.length,promoted_next_growth_candidates:promotedNextGrowth.length,growth_prs:expectedPrs,identity_corrections_applied:corrections.length,numbering_corrections_applied:numberingCorrections.length,canonical_write_allowed_at_selection_stage:policy.canonical_write_allowed,public_output_at_selection_stage:policy.public_output}, null, 2));

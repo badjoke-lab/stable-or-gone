@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sog_issuer_straitsx_singapore",
+    "slug": "straitsx-singapore",
+    "name": "StraitsX Singapore",
+    "issuer_type": "company",
+    "jurisdiction": "Singapore",
+    "related_stablecoins": ["xusd"],
+    "official_url": "https://www.straitsx.com/sg",
+    "summary": "StraitsX operating and issuer organization associated with XUSD and the StraitsX stablecoin platform in Singapore.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-13",
+    "notes": "Legacy issuer compatibility projection for the canonical organization introduced in PR #358."
+  },
+  {
+    "id": "sog_org_blast",
+    "slug": "blast",
+    "name": "Blast",
+    "issuer_type": "protocol",
+    "jurisdiction": "Decentralized / protocol",
+    "related_stablecoins": ["usdb"],
+    "official_url": "https://blast.io/",
+    "summary": "Ethereum layer-2 protocol ecosystem that operates the native-yield and bridge infrastructure associated with USDB.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-13",
+    "notes": "Legacy issuer compatibility projection for the canonical protocol organization introduced in PR #358; this is not a legal fiat issuer assertion."
+  }
+]

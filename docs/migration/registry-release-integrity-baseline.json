@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_pr364_112_assets_2026_07_14",
+  "baseline_id": "sog_release_integrity_pr365_112_assets_2026_07_14",
   "recorded_at": "2026-07-14",
-  "source_checkpoint_commit": "pr364-tier-a-dossier-batch-4",
+  "source_checkpoint_commit": "pr365-evidence-archive-maintenance-batch-2",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
     "stablecoins": 112,
@@ -75,12 +75,12 @@
     "runtime_generation_required": true
   },
   "evidence_quality": {
-    "archive_index_count": 387,
-    "archive_not_recorded_count": 172,
-    "selected_for_review": 5,
-    "canonical_change_assets": 2,
-    "reviewed_no_safe_change_assets": 3,
-    "new_evidence_records": 2
+    "archive_index_count": 390,
+    "archive_not_recorded_count": 169,
+    "selected_for_review": 10,
+    "canonical_change_assets": 0,
+    "reviewed_no_safe_change_assets": 0,
+    "new_evidence_records": 0
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md"

@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
   "recorded_at": "2026-07-14",
-  "source_commit": "pr364-tier-a-dossier-batch-4",
+  "source_commit": "pr365-evidence-archive-maintenance-batch-2",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
-  "previous_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
-  "dossier_pr": 364,
+  "source_checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
+  "previous_checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
+  "maintenance_pr": 365,
   "expected_counts": {
     "assets": 112,
     "organizations": 107,
@@ -26,30 +26,28 @@
     "income_profiles": 112
   },
   "evidence_quality": {
-    "archive_index_count": 387,
-    "archive_not_recorded_count": 172,
-    "selected_for_review": 5,
-    "canonical_change_assets": 2,
-    "reviewed_no_safe_change_assets": 3,
-    "new_evidence_records": 2
+    "archive_index_count": 390,
+    "archive_not_recorded_count": 169,
+    "selected_for_review": 10,
+    "canonical_changes": 3,
+    "reviewed_no_safe_change": 7,
+    "new_evidence_records": 0
   },
-  "dossier_outcome": {
-    "selected_asset_slugs": [
-      "husd",
-      "poundtoken",
-      "rlusd",
-      "usdg",
-      "usds"
+  "maintenance_outcome": {
+    "changed_evidence_ids": [
+      "sog_src_xaut_legal_batch_b",
+      "sog_src_bold_live_batch_c",
+      "sog_src_bold_overview_batch_c"
     ],
-    "canonical_change_asset_slugs": [
-      "usdg",
-      "usds"
-    ],
-    "reviewed_no_safe_change_asset_slugs": [
-      "husd",
-      "poundtoken",
-      "rlusd"
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_bold_redemptions_batch_c",
+      "sog_src_busd_binance_phaseout",
+      "sog_src_busd_paxos_issuer_update",
+      "sog_src_busd_paxos_statement_pr354",
+      "sog_src_circle_stability_update_2023_03_13",
+      "sog_src_circle_svb_update",
+      "sog_src_circle_usdc_contract_addresses"
     ]
   },
-  "notes": "Current deterministic canonical checkpoint after PR #364 Tier A Dossier Deepening Batch 4. USDG receives exact joint legal issuer identities, issuer relationships, customer-bounded redemption terms, and a completed legal profile. USDS receives a protocol-asset legal profile without a direct corporate holder claim. HUSD, poundtoken, and RLUSD were reviewed with no safe canonical change. Assets, Market Access, deployments, reserve reports, reserve components, income profiles, and public-surface boundaries remain unchanged."
+  "notes": "Current deterministic canonical checkpoint after PR #365 Evidence and Archive Maintenance Batch 2. Three exact dated archive captures were added for XAUT and two Liquity BOLD sources; seven candidates were retained without unsafe inference. All canonical identities, relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
 }

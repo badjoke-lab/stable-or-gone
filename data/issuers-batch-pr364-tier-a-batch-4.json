@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sog_issuer_paxos_digital_singapore",
+    "slug": "paxos-digital-singapore",
+    "name": "Paxos Digital Singapore Pte. Ltd.",
+    "issuer_type": "company",
+    "jurisdiction": "Singapore",
+    "related_stablecoins": ["usdg"],
+    "official_url": "https://www.paxos.com/",
+    "summary": "Paxos legal entity that jointly issues Global Dollar (USDG) under a Major Payment Institution licence supervised by the Monetary Authority of Singapore.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-14",
+    "notes": "Legacy issuer compatibility projection for the canonical organization introduced in PR #364."
+  },
+  {
+    "id": "sog_issuer_paxos_issuance_europe",
+    "slug": "paxos-issuance-europe",
+    "name": "Paxos Issuance Europe Oy",
+    "issuer_type": "company",
+    "jurisdiction": "Finland / European Union",
+    "related_stablecoins": ["usdg"],
+    "official_url": "https://www.paxos.com/",
+    "summary": "Paxos legal entity that jointly issues Global Dollar (USDG) under an Electronic Money Institution licence supervised by the Finnish Financial Supervisory Authority.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-14",
+    "notes": "Legacy issuer compatibility projection for the canonical organization introduced in PR #364."
+  }
+]

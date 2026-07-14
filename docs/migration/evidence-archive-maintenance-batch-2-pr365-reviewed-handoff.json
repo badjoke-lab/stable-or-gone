@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_evidence_archive_maintenance_batch_2_pr365_reviewed_handoff_2026_07_14",
+  "status": "reviewed_complete",
+  "review_pr": 365,
+  "source_pr": 364,
+  "source_merge_commit": "bf72662a86d252ab827be437ff4d498a6463e98e",
+  "queue_id": "sog_evidence_archive_maintenance_queue_pr365_2026_07_14",
+  "outcome_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+  "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+  "stats_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_112_checkpoint_pr365_2026_07_14",
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "market_access_records": 8,
+    "legal_profiles": 112,
+    "reserve_components": 145,
+    "income_profiles": 112
+  },
+  "evidence_quality": {
+    "archive_recorded": 390,
+    "archive_not_recorded": 169,
+    "selected": 10,
+    "changed": 3,
+    "reviewed_no_safe_change": 7
+  },
+  "changed_evidence_ids": [
+    "sog_src_xaut_legal_batch_b",
+    "sog_src_bold_live_batch_c",
+    "sog_src_bold_overview_batch_c"
+  ],
+  "reviewed_no_safe_change_evidence_ids": [
+    "sog_src_bold_redemptions_batch_c",
+    "sog_src_busd_binance_phaseout",
+    "sog_src_busd_paxos_issuer_update",
+    "sog_src_busd_paxos_statement_pr354",
+    "sog_src_circle_stability_update_2023_03_13",
+    "sog_src_circle_svb_update",
+    "sog_src_circle_usdc_contract_addresses"
+  ],
+  "stats_model_sha256": "b31ff33f57c24484079c0c68a144fd8ae7f876069a1bfd42ee5d632906e903a8",
+  "stats_snapshot_sha256": "b545367cd03806444ea6716269d0877ce828eb242f1b119537e60b1a51911acb",
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "The PR #361 approved sequence ends after PR #365; no later growth, Market Access, or public-surface work is pre-authorized."
+  },
+  "boundaries": {
+    "new_asset": false,
+    "non_evidence_canonical_change": false,
+    "market_access_change": false,
+    "new_public_surface": false,
+    "ranking": false,
+    "automatic_monitoring_promotion": false
+  },
+  "handoff_sha256": "af0485c2551b4a684844b1d84d1a0f509895e5e8e45be0604da7ee70020c8980"
+}

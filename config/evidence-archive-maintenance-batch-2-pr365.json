@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_evidence_archive_maintenance_batch_2_pr365_v1",
+  "status": "bounded_internal_review_and_manual_correction",
+  "review_pr": 365,
+  "source_review_gate": "docs/migration/post-pr360-review-gate-pr361.json",
+  "source_handoff": "docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json",
+  "source_merge_commit": "bf72662a86d252ab827be437ff4d498a6463e98e",
+  "canonical_asset_count_before": 112,
+  "canonical_evidence_count_before": 559,
+  "canonical_evidence_relation_count_before": 559,
+  "archive_index_count_before": 387,
+  "archive_not_recorded_count_before": 172,
+  "market_access_record_count_before": 8,
+  "maximum_canonical_evidence_records_touched": 10,
+  "queue_selection": {
+    "mode": "deterministic_priority_then_evidence_id",
+    "exclude_pr360_selected_ids": true,
+    "archive_candidates_must_lack_archived_url": true,
+    "candidate_queue_is_internal": true,
+    "queue_is_not_automatic_correction": true,
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ]
+  },
+  "authorized_correction_types": [
+    "archive_supplementation",
+    "invalid_archive_removal",
+    "wildcard_archive_replacement",
+    "broken_link_repair",
+    "official_source_replacement",
+    "evidence_source_identity_maintenance",
+    "reviewed_no_safe_change"
+  ],
+  "correction_policy": {
+    "automatic_canonical_write": false,
+    "manual_review_required": true,
+    "exact_source_capture_required": true,
+    "replacement_must_preserve_or_improve_claim_scope": true,
+    "archive_capture_must_match_source_identity": true,
+    "wildcard_archive_is_verified_capture": false,
+    "historical_snapshot_rewrite_allowed": false,
+    "outcome_log_required": true,
+    "deterministic_impact_report_required": true
+  },
+  "boundaries": {
+    "new_canonical_assets_allowed": false,
+    "non_evidence_canonical_changes_allowed": false,
+    "market_access_record_changes_allowed": false,
+    "new_public_surface_allowed": false,
+    "monitoring_auto_promotion_allowed": false,
+    "editorial_research_auto_promotion_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false
+  },
+  "review_gate_after_completion": true
+}

@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-13  
+Updated: 2026-07-14  
 Status: canonical execution schedule — active
 
 ## 1. Current position
@@ -19,19 +19,14 @@ PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
 PR #360 Evidence and Correction Batch: complete
 PR #361 Post-PR #360 Review Gate: complete
+PR #362 duplicate of PR #361: closed without merge
+PR #363 Record Depth and Coverage Baseline Refresh: complete
+PR #364 Tier A Dossier Deepening Batch 4: complete
+PR #365 Evidence and Archive Maintenance Batch 2: complete
+Current authority: REVIEW GATE
 ```
 
-The current operating mode is:
-
-```text
-reviewed data depth and record growth
-canonical Market Access promotion
-monitoring review without automatic promotion
-corrections and evidence maintenance
-monthly maintenance
-```
-
-A new public-surface sequence requires a separate reviewed roadmap amendment and canonical specification.
+The current operating mode remains reviewed data depth, corrections, evidence maintenance, monitoring review without automatic promotion, and monthly maintenance. A new numbered sequence requires a reviewed roadmap amendment.
 
 ## 2. Current authority
 
@@ -43,32 +38,21 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
-docs/roadmap-amendments/2026-07-10-pr353-record-depth-baseline-activation.md
-docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
-docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
-docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
-docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
-docs/quality/tier-a-dossier-batch-3-pr357-spec.md
-config/tier-a-dossier-batch-3-pr357.json
-docs/quality/record-growth-batch-1-pr358-spec.md
-config/record-growth-batch-1-pr358.json
-docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
-docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
-docs/quality/market-access-pilot-1-pr356-spec.md
-docs/market-access-record-spec.md
-config/market-access-pilot-1-pr356.json
-docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
-data/editorial-research/japan-stablecoin-market-access-2026.json
-docs/migration/record-depth-baseline-pr353-summary.json
-docs/migration/tier-a-candidate-queue-pr353.json
-docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+docs/migration/post-pr360-review-gate-pr361.json
+docs/migration/record-depth-baseline-pr363-summary.json
+docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
+docs/roadmap-amendments/2026-07-14-pr365-evidence-archive-maintenance-batch-2-activation.md
+docs/quality/evidence-archive-maintenance-batch-2-pr365-spec.md
+config/evidence-archive-maintenance-batch-2-pr365.json
+docs/migration/evidence-archive-maintenance-queue-pr365.json
+docs/migration/evidence-archive-maintenance-outcomes-pr365.json
+docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json
 named validators, audits, and current work-item outputs
 ```
 
-Earlier amendments remain historical records and do not override this current position.
+Earlier amendments and active-authority sections are historical records and do not override this current review-gate position.
 
-## 3. Completed program through PR #360 and active PR #358 growth
+## 3. Completed program through PR #365
 
 Completed broad programs include:
 
@@ -115,20 +99,22 @@ Its reviewed handoff is:
 docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
 ```
 
-Current reviewed branch checkpoint in PR #358:
+Current reviewed checkpoint after PR #365:
 
 ```text
 112 stable assets
-557 evidence records
-557 evidence relations
+559 Evidence records
+559 Evidence Relations
 112 legal profiles
 174 deployments
-4 canonical Market Access Records
+8 canonical Market Access Records
+390 archive indexes recorded
+169 archive indexes not recorded
 ```
 
 Historical checkpoints remain immutable. Do not rewrite them because current canonical data deepens.
 
-## 4. Current bounded sequence
+## 4. Completed bounded sequence and current gate
 
 ```text
 PR #352  post-351 authority reset and specification/schedule synchronization — complete
@@ -139,15 +125,22 @@ PR #356  Market Access Pilot 1 — complete
 PR #357  Tier A Dossier Deepening — Batch 3 — complete
 PR #358  Record Growth Batch 1 — complete
 PR #359  Market Access Pilot 2 — complete
-PR #360  Evidence and Correction Batch
-REVIEW GATE
+PR #360  Evidence and Correction Batch — complete
+PR #361  Post-PR #360 Review Gate — complete
+PR #362  duplicate of PR #361 — closed without merge
+PR #363  Record Depth and Coverage Baseline Refresh — complete
+PR #364  Tier A Dossier Deepening Batch 4 — complete
+PR #365  Evidence and Archive Maintenance Batch 2 — complete
+REVIEW GATE — current
 ```
 
-No PR number after the review gate is pre-authorized by this roadmap.
+No PR number after PR #365 is pre-authorized by this roadmap.
 
-## 5. PR #358 Record Growth Batch 1 — active
+## 5. Current review gate after PR #365
 
-PR #358 promotes complete reviewed records for StraitsX USD (XUSD) and Blast USDB. The branch advances canonical counts to 112 assets and 557 Evidence records while preserving four Market Access Records and adding no new public product surface. Merge requires all deterministic statistics, release-integrity, immutable-history, build, and public-safety checks to pass.
+PR #365 completed the sequence approved by PR #361. Before any later numbered PR, review record-depth priorities, archive and source-maintenance burden, Market Access utility, monitoring usefulness, monthly maintenance burden, and verified external usage evidence when available.
+
+Market Access Pilot 3, Record Growth Batch 2, new public surfaces, rankings, composite scores, and automatic monitoring promotion remain unapproved.
 
 ## 6. PR #353 historical planning foundation — complete and immutable
 
@@ -241,7 +234,7 @@ The pilot first audits canonical Evidence identity and function-specific claim s
 
 Completion requires reviewed canonical Evidence mappings, no more than four supported function-scoped records, deterministic validation, green CI, and a PR #356 reviewed handoff.
 
-## 9. PR #357 — Tier A Dossier Deepening — Batch 3 — active
+## 9. PR #357 — Tier A Dossier Deepening — Batch 3 — complete
 
 Binding references:
 
@@ -292,7 +285,7 @@ PR #359 may expand only after reviewing Pilot 1 scope, evidence burden, correcti
 
 No automatic promotion from monitoring or editorial research is allowed.
 
-## 12. PR #360 — Evidence and Correction Batch — active — active
+## 12. PR #360 — Evidence and Correction Batch — complete
 
 Priority work:
 
@@ -310,7 +303,7 @@ known-unknown resolution
 
 Registry quality is not measured only by asset count.
 
-## 13. PR #361 — Post-PR #360 Review Gate — active
+## 13. PR #361 — Post-PR #360 Review Gate — complete
 
 Review:
 
@@ -331,10 +324,10 @@ Only then define the next bounded sequence.
 ## 13A. Approved sequence after PR #361
 
 ```text
-PR #363 Record Depth and Coverage Baseline Refresh
-PR #364 Tier A Dossier Deepening Batch 4
-PR #365 Evidence and Archive Maintenance Batch 2
-REVIEW GATE
+PR #363 Record Depth and Coverage Baseline Refresh — complete
+PR #364 Tier A Dossier Deepening Batch 4 — complete
+PR #365 Evidence and Archive Maintenance Batch 2 — complete
+REVIEW GATE — current
 ```
 
 Market Access Pilot 3, Record Growth Batch 2, and new public surfaces are not approved in this sequence.
@@ -422,7 +415,7 @@ Before every non-trivial post-351 PR:
 
 A PR that cannot cite an approved roadmap item and governing specification must pause until repository authority is corrected.
 
-## PR #357 active authority
+## PR #357 historical authority
 
 Current work item:
 
@@ -457,7 +450,7 @@ NZDS
 
 This is deterministic queue consumption, not a ranking. PR #357 preserves 110 canonical stable assets, four canonical Market Access Records, canonical-only publication, and the existing public-surface boundary.
 
-## PR #358 active authority
+## PR #358 historical authority
 
 Current work item:
 
@@ -492,7 +485,7 @@ USDB / USDB / sog_st_usdb
 
 Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
 
-## PR #359 active authority
+## PR #359 historical authority
 
 Current work item:
 
@@ -528,7 +521,7 @@ maximum four new records
 
 PR #359 preserves 112 canonical assets, 557 canonical Evidence identities, and 174 deployments. It expands Market Access from four to eight records by reusing existing canonical source identities. It adds no public product surface, ranking, score, or automatic monitoring promotion.
 
-## PR #360 active authority
+## PR #360 historical authority
 
 Current work item:
 
@@ -671,3 +664,7 @@ docs/migration/tier-a-dossier-batch-4-pr364-findings.json
 ```
 
 PR #364 may improve only the five reviewed existing dossiers and authorized dimensions. It adds no stable asset, Market Access Record, deployment, reserve report, income profile, public surface, ranking, score, or automatic promotion path.
+
+## 18. Current authority after PR #365
+
+PR #365 completed the approved PR #361 sequence. Current canonical state is 112 assets, 559 Evidence identities, 559 Evidence Relations, and 390 recorded / 169 not-recorded archive indexes. The current authority is a review gate, and no PR after #365 is pre-authorized.
