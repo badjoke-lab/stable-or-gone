@@ -24,6 +24,7 @@ docs/roadmap-amendments/2026-07-10-pr354-tier-a-batch-1-activation.md
 docs/roadmap-amendments/2026-07-12-pr355-tier-a-batch-2-activation.md
 docs/roadmap-amendments/2026-07-12-pr356-market-access-pilot-1-activation.md
 docs/roadmap-amendments/2026-07-13-pr357-tier-a-batch-3-activation.md
+docs/roadmap-amendments/2026-07-14-pr365-evidence-archive-maintenance-batch-2-activation.md
 ```
 
 Current operating specification:
@@ -35,17 +36,18 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/tier-a-dossier-batch-4-pr364-spec.md
+docs/quality/evidence-archive-maintenance-batch-2-pr365-spec.md
 ```
 
 Current required prior outputs:
 
 ```text
-docs/migration/record-depth-baseline-pr353-summary.json
-docs/migration/tier-a-candidate-queue-pr353.json
-docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
-docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
-docs/migration/market-access-pilot-1-pr356-reviewed-handoff.json
+docs/migration/post-pr360-review-gate-pr361.json
+docs/migration/record-depth-baseline-pr363-summary.json
+docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
+docs/migration/evidence-archive-maintenance-queue-pr365.json
+docs/migration/evidence-archive-maintenance-outcomes-pr365.json
+docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json
 ```
 
 ## 2. Repository source of truth
@@ -82,26 +84,23 @@ PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
 PR #360 Evidence and Correction Batch: complete
 PR #361 Post-PR #360 Review Gate: complete
+PR #362 duplicate of PR #361: closed without merge
+PR #363 Record Depth and Coverage Baseline Refresh: complete
+PR #364 Tier A Dossier Deepening Batch 4: complete
+PR #365 Evidence and Archive Maintenance Batch 2: complete
+Current authority: REVIEW GATE
 ```
 
-Approved bounded sequence:
+Approved bounded sequence from PR #361:
 
 ```text
-PR #352  post-351 authority reset and specification/schedule synchronization — complete
-PR #353  Record Depth & Coverage Baseline — complete
-PR #354  Tier A Dossier Deepening — Batch 1 — complete
-PR #355  Tier A Dossier Deepening — Batch 2 — complete
-PR #356  Market Access Pilot 1 — complete
-PR #357  Tier A Dossier Deepening — Batch 3 — complete
-PR #358  Record Growth Batch 1 — complete
-PR #359  Market Access Pilot 2 — complete
-PR #360  Evidence and Correction Batch
-REVIEW GATE
+PR #363  Record Depth and Coverage Baseline Refresh — complete
+PR #364  Tier A Dossier Deepening Batch 4 — complete
+PR #365  Evidence and Archive Maintenance Batch 2 — complete
+REVIEW GATE — current
 ```
 
-Do not skip ahead unless `docs/roadmap.md` is deliberately amended.
-
-No PR number after the review gate is pre-authorized.
+No PR number after PR #365 is pre-authorized. Market Access Pilot 3, Record Growth Batch 2, and new public surfaces require a new reviewed authority decision.
 
 ## 4. Operating mode
 
@@ -218,7 +217,7 @@ usdc
 usdt
 ```
 
-## 8. Completed PR #355–#357 and active PR #358 rules
+## 8. Completed PR #355–#358 historical rules
 
 PR #355 completed FDUSD, FRAX, PYUSD, USDP, and UST dossier deepening.
 
@@ -397,23 +396,13 @@ Scheduled monitoring remains artifact-only and does not authorize canonical writ
 
 ## 18. Review gate
 
-After PR #360, stop and review:
+PR #361 approved exactly PR #363, PR #364, and PR #365. All three are complete.
 
-```text
-remaining sparse record families
-Tier A dossier improvement
-Compare utility
-Timeline historical density
-canonical Market Access utility
-monitoring signal usefulness
-correction burden
-monthly maintenance burden
-external usage evidence when available
-```
+The current authority is now a review gate. Review current data depth, Evidence maintenance burden, Market Access utility, monitoring usefulness, monthly maintenance burden, and any verified external usage evidence before authorizing another numbered work item.
 
-Only then define the next bounded sequence.
+No automatic growth, Market Access expansion, public surface, ranking, composite score, or monitoring promotion is authorized.
 
-## PR #357 active authority
+## PR #357 historical authority
 
 Current work item:
 
@@ -448,7 +437,7 @@ NZDS
 
 This is deterministic queue consumption, not a ranking. PR #357 preserves 110 canonical stable assets, four canonical Market Access Records, canonical-only publication, and the existing public-surface boundary.
 
-## PR #358 active authority
+## PR #358 historical authority
 
 Current work item:
 
@@ -483,7 +472,7 @@ USDB / USDB / sog_st_usdb
 
 Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
 
-## PR #359 active authority
+## PR #359 historical authority
 
 Current work item:
 
@@ -519,7 +508,7 @@ maximum four new records
 
 PR #359 preserves 112 canonical assets, 557 canonical Evidence identities, and 174 deployments. It expands Market Access from four to eight records by reusing existing canonical source identities. It adds no public product surface, ranking, score, or automatic monitoring promotion.
 
-## PR #360 active authority
+## PR #360 historical authority
 
 Current work item:
 
@@ -662,3 +651,7 @@ docs/migration/tier-a-dossier-batch-4-pr364-findings.json
 ```
 
 PR #364 may improve only the five reviewed existing dossiers and authorized dimensions. It adds no stable asset, Market Access Record, deployment, reserve report, income profile, public surface, ranking, score, or automatic promotion path.
+
+## Current authority after PR #365
+
+PR #365 completed the approved PR #361 sequence with 112 assets, 559 Evidence identities, 559 Evidence Relations, and archive coverage of 390 recorded / 169 not recorded. The repository is at a review gate. No PR after #365 is pre-authorized.
