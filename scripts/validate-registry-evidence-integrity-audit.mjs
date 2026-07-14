@@ -17,7 +17,7 @@ const correctionOutcome = fs.existsSync(correctionOutcomePath) ? JSON.parse(fs.r
 const expectedArchiveNotRecorded = correctionOutcome?.archive_not_recorded_count_after
   ?? correctionConfig?.archive_not_recorded_count_before
   ?? 177;
-const expectedArchiveIndex = correctionOutcome?.archive_index_count_after
+const expectedArchiveRecorded = correctionOutcome?.archive_index_count_after
   ?? (expectedEvidence - expectedArchiveNotRecorded);
 
 execFileSync(process.execPath, ['scripts/audit-registry-evidence-integrity.mjs'], {
@@ -26,6 +26,10 @@ execFileSync(process.execPath, ['scripts/audit-registry-evidence-integrity.mjs']
 });
 
 const report = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+const archiveStateCounts = report.metadata_quality?.archive_state_counts ?? {};
+const actualArchiveRecorded = (archiveStateCounts.direct_snapshot ?? 0)
+  + (archiveStateCounts.archive_index ?? 0)
+  + (archiveStateCounts.other_archive ?? 0);
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
@@ -50,8 +54,8 @@ expect((report.metadata_quality?.unknown_public_categories ?? []).length === 0, 
 expect((report.metadata_quality?.unknown_provenance ?? []).length === 0, 'unknown evidence provenance remains');
 expect((report.metadata_quality?.unknown_primary_state ?? []).length === 0, 'unknown primary-state classification remains');
 expect((report.metadata_quality?.unknown_reliability ?? []).length === 0, 'unknown reliability classification remains');
-expect((report.metadata_quality?.archive_state_counts?.archive_index ?? 0) === expectedArchiveIndex, `archive-index count changed: expected ${expectedArchiveIndex}`);
-expect((report.metadata_quality?.archive_state_counts?.not_recorded ?? 0) === expectedArchiveNotRecorded, `archive not-recorded queue changed: expected ${expectedArchiveNotRecorded}`);
+expect(actualArchiveRecorded === expectedArchiveRecorded, `archive-recorded count changed: expected ${expectedArchiveRecorded}, got ${actualArchiveRecorded}`);
+expect((archiveStateCounts.not_recorded ?? 0) === expectedArchiveNotRecorded, `archive not-recorded queue changed: expected ${expectedArchiveNotRecorded}`);
 expect(['pass', 'pass_with_review_queues'].includes(report.result), `audit result is not passing: ${report.result}`);
 
 if (correctionOutcome) {
@@ -68,4 +72,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Evidence integrity audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${expectedEvidence} canonical records, ${expectedPublicSources} public identities, ${expectedRelations} relations, 0 structural gaps, archive queue fixed at ${expectedArchiveNotRecorded} not-recorded records.`);
+console.log(`Evidence integrity audit validation passed against current checkpoint ${checkpoint.checkpoint_id}: ${expectedEvidence} canonical records, ${expectedPublicSources} public identities, ${expectedRelations} relations, ${actualArchiveRecorded} archive-recorded rows, and ${expectedArchiveNotRecorded} not-recorded rows.`);
