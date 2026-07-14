@@ -4,7 +4,7 @@ on:
   pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   renumber:
@@ -35,10 +35,15 @@ jobs:
           node scripts/validate-post-pr360-review-gate-pr361.mjs
           npm run validate:active-workstream
 
-      - name: Commit corrected sequence
+      - name: Stage corrected sequence artifact
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md docs/quality/post-pr360-review-gate-pr361-spec.md docs/migration/post-pr360-review-gate-pr361.json scripts/validate-post-pr360-review-gate-pr361.mjs .github/workflows/pr361-post-pr360-review-gate.yml
-          git commit -m 'Align post-review-gate sequence with available PR numbers'
-          git push origin HEAD:pr361-post-pr360-review-gate
+          mkdir -p artifacts/pr361-renumber
+          cp --parents README.md AGENTS.md docs/spec-governance.md docs/roadmap.md docs/quality/post-pr360-review-gate-pr361-spec.md docs/migration/post-pr360-review-gate-pr361.json scripts/validate-post-pr360-review-gate-pr361.mjs .github/workflows/pr361-post-pr360-review-gate.yml artifacts/pr361-renumber/
+
+      - name: Upload corrected sequence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr361-renumbered-sequence-${{ github.run_id }}
+          path: artifacts/pr361-renumber
+          if-no-files-found: error
+          retention-days: 7
