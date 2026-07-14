@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   issues: write
   pull-requests: write
 
@@ -44,21 +44,17 @@ jobs:
             exact_duplicate_url_groups:report.identity?.exact_duplicate_url_groups??[],
             normalized_only_duplicate_url_groups:report.identity?.normalized_only_duplicate_url_groups??[]
           };
-          fs.writeFileSync('docs/migration/pr364-evidence-duplicate-diagnostic.json',`${JSON.stringify(compact,null,2)}\n`);
+          fs.mkdirSync('artifacts/pr364-evidence-duplicate',{recursive:true});
+          fs.writeFileSync('artifacts/pr364-evidence-duplicate/report.json',`${JSON.stringify(compact,null,2)}\n`);
           NODE
 
-      - name: Commit compact finding
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/migration/pr364-evidence-duplicate-diagnostic.json
-          if git diff --cached --quiet; then
-            echo 'Exact duplicate diagnostic already synchronized.'
-            exit 0
-          fi
-          git commit -m 'Record exact PR 364 Evidence duplicate findings'
-          git pull --rebase origin pr364-tier-a-dossier-batch-4
-          git push origin HEAD:pr364-tier-a-dossier-batch-4
+      - name: Upload compact finding
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr364-evidence-duplicate-report-${{ github.run_id }}
+          path: artifacts/pr364-evidence-duplicate/report.json
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Publish exact duplicate findings
         if: always() && github.event_name == 'pull_request'
@@ -68,11 +64,11 @@ jobs:
             const fs=require('fs');
             const marker='<!-- pr364-evidence-duplicate-diagnostic -->';
             let report=null;
-            try{report=JSON.parse(fs.readFileSync('docs/migration/pr364-evidence-duplicate-diagnostic.json','utf8'));}catch{}
+            try{report=JSON.parse(fs.readFileSync('artifacts/pr364-evidence-duplicate/report.json','utf8'));}catch{}
             const exact=report?.exact_duplicate_url_groups??[];
             const normalized=report?.normalized_only_duplicate_url_groups??[];
             const critical=report?.critical??[];
-            const body=`${marker}\n## PR #364 exact Evidence duplicate diagnostic\n\n- Critical findings: **${critical.length}**\n- Exact duplicate URL groups: **${exact.length}**\n- Normalized-only duplicate groups: **${normalized.length}**\n\n\`\`\`json\n${JSON.stringify({critical,exact,normalized},null,2)}\n\`\`\`\n`;
+            const body=`${marker}\n## PR #364 exact Evidence duplicate diagnostic\n\n- Critical findings: **${critical.length}**\n- Exact duplicate URL groups: **${exact.length}**\n- Normalized-only duplicate groups: **${normalized.length}**\n- Artifact: \`pr364-evidence-duplicate-report-${context.runId}\`\n\n\`\`\`json\n${JSON.stringify({critical,exact,normalized},null,2)}\n\`\`\`\n`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((comment)=>comment.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
