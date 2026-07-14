@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildReviewedRecordDepthBaseline } from './growth/build-reviewed-record-depth-baseline-pr353.mjs';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 import { loadStatsInput } from './stats/load-stats-input.mjs';
 
 const root = process.cwd();
@@ -19,6 +20,12 @@ const files = {
 };
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const readJson = (file) => JSON.parse(readText(file));
+const readRows = (file) => {
+  const value = readJson(file);
+  const rows = Array.isArray(value) ? value : value?.records;
+  if (!Array.isArray(rows)) throw new Error(`${file}: expected array or { records: [] }`);
+  return rows;
+};
 const unique = (values) => [...new Set(values.filter(Boolean))].sort();
 const countBy = (values) => Object.fromEntries([...values.reduce((map, value) => map.set(value, (map.get(value) ?? 0) + 1), new Map()).entries()].sort(([a], [b]) => String(a).localeCompare(String(b))));
 const percent = (numerator, denominator) => denominator ? Number(((numerator / denominator) * 100).toFixed(2)) : 0;
@@ -112,6 +119,9 @@ export function buildReviewGate() {
   const updates = readJson(files.registryUpdates);
   const currentDepth = buildReviewedRecordDepthBaseline();
   const input = loadStatsInput(root);
+  const v2 = loadRegistryV2Baseline(root);
+  const evidenceRelationFiles = v2.data_groups?.evidence_relations ?? [];
+  const evidenceRelations = evidenceRelationFiles.flatMap(readRows);
   const latestSnapshot = history.snapshots.at(-1);
   const deltas = buildDimensionDeltas(historical, currentDepth);
   const unresolvedDimensions = [...deltas]
@@ -179,6 +189,12 @@ export function buildReviewGate() {
     inputDigest.update(readText(file));
     inputDigest.update('\0');
   }
+  for (const file of [...evidenceRelationFiles].sort()) {
+    inputDigest.update(file);
+    inputDigest.update('\0');
+    inputDigest.update(readText(file));
+    inputDigest.update('\0');
+  }
   inputDigest.update(currentDepth.input_digest_sha256);
 
   return {
@@ -197,7 +213,7 @@ export function buildReviewGate() {
       relationships: input.relationships.length,
       events: input.events.length,
       evidence: input.evidence.length,
-      evidence_relations: input.evidence_relations.length,
+      evidence_relations: evidenceRelations.length,
       deployments: input.deployments.length,
       known_unknowns: input.known_unknowns.length,
       market_access_records: input.market_access_records.length
