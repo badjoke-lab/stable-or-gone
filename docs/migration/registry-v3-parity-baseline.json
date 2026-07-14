@@ -1,11 +1,11 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_pr358_112_assets_2026_07_13",
+  "baseline_id": "sog_registry_v3_parity_pr359_112_assets_2026_07_13",
   "recorded_at": "2026-07-13",
-  "data_checkpoint_commit": "pr358-record-growth-batch-1",
-  "source_baseline_id": "sog_registry_v3_parity_pr357_110_assets_2026_07_13",
-  "canonical_checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
+  "data_checkpoint_commit": "pr359-market-access-pilot-2",
+  "source_baseline_id": "sog_registry_v3_parity_pr358_112_assets_2026_07_13",
+  "canonical_checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
@@ -52,5 +52,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline binds the complete reviewed XUSD and USDB growth records to the PR #358 canonical 112-asset checkpoint. XUSD contributes issuer-mediated fiat redemption and three verified deployments. USDB contributes protocol bridge redemption into DAI, native rebasing, one verified Blast deployment, and one stable-asset relationship. Four canonical Market Access Records remain governed separately."
+  "notes": "Current parity baseline preserves all 112-asset v2/v3 record counts while binding PR #359 Market Access Pilot 2 to the current canonical checkpoint. Four provider-scoped RLUSD records expand canonical Market Access from four to eight without adding an asset, Evidence identity, deployment, or public product surface. Historical parity checkpoints remain forward-only."
 }

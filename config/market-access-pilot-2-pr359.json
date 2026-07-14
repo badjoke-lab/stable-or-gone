@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "pilot_id": "sog_market_access_pilot_2_pr359",
+  "status": "canonical_promotion_reviewed",
+  "review_pr": 359,
+  "source_handoff_id": "sog_record_growth_batch_1_pr358_reviewed_handoff_2026_07_13",
+  "source_research_id": "japan-stablecoin-market-access-2026",
+  "source_research_record_ids": ["jp_access_rlusd_sbivc_2026_06_24"],
+  "jurisdictions": [{"country_code":"JP","label":"Japan","subdivision_code":null}],
+  "assets": [{"asset_id":"sog_st_rlusd","symbol":"RLUSD"}],
+  "platforms": [{"name":"SBI VC Trade","service":"VCTRADE","organization_id":"sog_org_sbi_vc_trade"}],
+  "functions": ["buy_sell","deposit","withdrawal","external_wallet_transfer"],
+  "excluded_functions": ["direct_issuer_mint","direct_issuer_redemption"],
+  "effective_from": "2026-06-24",
+  "observed_at": "2026-07-13",
+  "review_cutoff": "2026-07-13",
+  "maximum_new_canonical_records": 4,
+  "expected_market_access_records_before": 4,
+  "expected_market_access_records_after": 8,
+  "source_url_dispositions": {
+    "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf": {
+      "status": "reuse_and_expand_existing_canonical_evidence_scope",
+      "evidence_id": "sog_src_jfsa_electronic_payment_instrument_register_pr356",
+      "reason": "Primary provider-registration and RLUSD handled-asset scope. The existing canonical Evidence identity is reused rather than duplicated."
+    },
+    "https://www.sbivc.co.jp/newsview/bsqs09vn_yzv": {
+      "status": "reuse_and_expand_existing_canonical_evidence_scope",
+      "evidence_id": "sog_src_rlusd_japan_launch_sbi_vc_2026",
+      "reason": "Primary launch, function, network, limit, fee, platform-condition, and Japanese legal-route source. The existing canonical Evidence identity is reused rather than duplicated."
+    },
+    "https://www.sbivc.co.jp/rlusd": {
+      "status": "supplementary_current_product_confirmation",
+      "evidence_id": null,
+      "reason": "Current product page confirms continuing product presentation. Function-specific launch conditions are supported by the dated launch announcement."
+    },
+    "https://ripple.com/ripple-press/ripple-and-sbi-group-partner-to-launch-ripple-usd-in-japan/": {
+      "status": "supplementary_not_required_for_promoted_claims",
+      "evidence_id": null,
+      "reason": "Issuer-side launch context; Japanese provider functions and legal route rely on SBI VC Trade and JFSA sources."
+    }
+  },
+  "canonical_promotion": {
+    "automatic": false,
+    "manual_review_required": true,
+    "minimum_canonical_evidence_records_per_function": 1,
+    "require_function_specific_claim_scope": true,
+    "approved_evidence_ids_by_function": {
+      "buy_sell": ["sog_src_rlusd_japan_launch_sbi_vc_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "deposit": ["sog_src_rlusd_japan_launch_sbi_vc_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "withdrawal": ["sog_src_rlusd_japan_launch_sbi_vc_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+      "external_wallet_transfer": ["sog_src_rlusd_japan_launch_sbi_vc_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"]
+    }
+  },
+  "boundaries": {
+    "new_canonical_assets_allowed": false,
+    "new_evidence_identities_allowed": false,
+    "new_public_surface_allowed": false,
+    "comparison_readiness_change_allowed": false,
+    "facet_freshness_semantics_change_allowed": false,
+    "monitoring_promotion_allowed": false,
+    "editorial_research_direct_promotion_allowed": false,
+    "universal_japan_availability_claim_allowed": false,
+    "issuer_mint_or_redemption_claim_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false
+  },
+  "next_pr": 360
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version":"1.0","status":"current","baseline_id":"sog_release_integrity_pr358_112_assets_2026_07_13","recorded_at":"2026-07-13","source_checkpoint_commit":"pr358-record-growth-batch-1","registry_parity_baseline":"docs/migration/registry-v3-parity-baseline.json",
+  "schema_version":"1.0","status":"current","baseline_id":"sog_release_integrity_pr359_112_assets_2026_07_13","recorded_at":"2026-07-13","source_checkpoint_commit":"pr359-market-access-pilot-2","registry_parity_baseline":"docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts":{"stablecoins":112,"organizations":105,"relationships":122,"classifications":112,"profiles":112,"events":187,"event_details":187,"evidence":557,"evidence_relations":557,"reserve_reports":120,"known_unknowns":325,"regulatory_notes":9,"deployments":174},
   "expected_v3_counts":{"legal_profiles":112,"stable_asset_relationships":5,"reserve_components":145,"income_profiles":112,"deployment_view":174},
   "expected_public_record_counts":{"primary_records":112,"events":187,"evidence":557},

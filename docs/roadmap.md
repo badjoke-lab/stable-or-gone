@@ -15,8 +15,9 @@ PR #354 Tier A Dossier Deepening — Batch 1: complete
 PR #355 Tier A Dossier Deepening — Batch 2: complete
 PR #356 Market Access Pilot 1: complete
 PR #357 Tier A Dossier Deepening — Batch 3: complete
-PR #358 Record Growth Batch 1: active
-PR #359 Market Access Pilot 2: next
+PR #358 Record Growth Batch 1: complete
+PR #359 Market Access Pilot 2: active
+PR #360 Evidence and Correction Batch: next
 ```
 
 The current operating mode is:
@@ -66,7 +67,7 @@ named validators, audits, and current work-item outputs
 
 Earlier amendments remain historical records and do not override this current position.
 
-## 3. Completed program through PR #357 and active PR #358 growth
+## 3. Completed program through PR #358 and active PR #358 growth
 
 Completed broad programs include:
 
@@ -135,8 +136,8 @@ PR #354  Tier A Dossier Deepening — Batch 1 — complete
 PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — complete
 PR #357  Tier A Dossier Deepening — Batch 3 — complete
-PR #358  Record Growth Batch 1 — active
-PR #359  Market Access Pilot 2 — next
+PR #358  Record Growth Batch 1 — complete
+PR #359  Market Access Pilot 2 — active
 PR #360  Evidence and Correction Batch
 REVIEW GATE
 ```
@@ -272,7 +273,7 @@ NZDS: events, lifecycle, organization_relationships, redemption
 
 PR #357 adds no canonical stable asset, changes no Market Access Record, and adds no new public surface. Completion requires a deterministic post-change impact report, synchronized checkpoints, green CI, and a reviewed handoff for PR #358.
 
-## 10. PR #358 — Record Growth Batch 1 — active
+## 10. PR #358 — Record Growth Batch 1 — complete
 
 This PR returns to broader evidence-backed registry growth.
 
@@ -284,7 +285,7 @@ maximum two new canonical stable assets per growth PR
 
 Supporting record groups must be preserved as applicable.
 
-## 11. PR #359 — Market Access Pilot 2
+## 11. PR #359 — Market Access Pilot 2 — active
 
 PR #359 may expand only after reviewing Pilot 1 scope, evidence burden, correction burden, and public utility.
 
@@ -416,7 +417,7 @@ Current work item:
 ```text
 PR #356 Market Access Pilot 1: complete
 PR #357 Tier A Dossier Deepening — Batch 3: complete
-PR #358 Record Growth Batch 1: active
+PR #358 Record Growth Batch 1: complete
 ```
 
 Binding references:
@@ -450,8 +451,8 @@ Current work item:
 
 ```text
 PR #357 Tier A Dossier Deepening — Batch 3: complete
-PR #358 Record Growth Batch 1: active
-PR #359 Market Access Pilot 2: next
+PR #358 Record Growth Batch 1: complete
+PR #359 Market Access Pilot 2: active
 ```
 
 Binding references:
@@ -478,4 +479,40 @@ USDB / USDB / sog_st_usdb
 ```
 
 Candidate selection is not canonical promotion. PR #358 may add no more than two fully reviewed records, must reject thin records, preserves four canonical Market Access Records, and adds no public product surface.
+
+## PR #359 active authority
+
+Current work item:
+
+```text
+PR #358 Record Growth Batch 1: complete
+PR #359 Market Access Pilot 2: active
+PR #360 Evidence and Correction Batch: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-13-pr359-market-access-pilot-2-activation.md
+docs/quality/market-access-pilot-2-pr359-spec.md
+config/market-access-pilot-2-pr359.json
+docs/market-access-record-spec.md
+schemas/market-access-record-v1.schema.json
+config/market-access-governance-v1.json
+data/editorial-research/japan-stablecoin-market-access-2026.json
+docs/migration/record-growth-batch-1-pr358-reviewed-handoff.json
+```
+
+Exact bounded scope:
+
+```text
+Japan / SBI VC Trade / VCTRADE
+RLUSD / sog_st_rlusd
+buy_sell, deposit, withdrawal, external_wallet_transfer
+effective_from 2026-06-24
+observed_at 2026-07-13
+maximum four new records
+```
+
+PR #359 preserves 112 canonical assets, 557 canonical Evidence identities, and 174 deployments. It expands Market Access from four to eight records by reusing existing canonical source identities. It adds no public product surface, ranking, score, or automatic monitoring promotion.
 

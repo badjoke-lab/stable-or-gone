@@ -1,21 +1,21 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_growth_checkpoint",
-  "checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
-  "checkpoint_kind": "controlled_growth_checkpoint",
+  "status": "reviewed_non_growth_checkpoint",
+  "checkpoint_id": "sog_market_access_pilot_2_canonical_112_checkpoint_pr359_2026_07_13",
+  "checkpoint_kind": "non_growth_market_access_checkpoint",
   "recorded_at": "2026-07-13",
-  "source_commit": "pr358-record-growth-batch-1",
+  "source_commit": "pr359-market-access-pilot-2",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_tier_a_dossier_batch_3_canonical_110_checkpoint_pr357_2026_07_13",
-  "previous_checkpoint_id": "sog_tier_a_dossier_batch_3_canonical_110_checkpoint_pr357_2026_07_13",
-  "growth_pr": 358,
+  "source_checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
+  "previous_checkpoint_id": "sog_record_growth_batch_1_canonical_112_checkpoint_pr358_2026_07_13",
+  "market_access_pr": 359,
   "expected_counts": {
     "assets": 112,
     "organizations": 105,
     "relationships": 122,
     "events": 187,
     "evidence": 557,
-    "market_access_records": 4,
+    "market_access_records": 8,
     "reserve_reports": 120,
     "known_unknowns": 325,
     "regulatory_notes": 9,
@@ -25,5 +25,5 @@
     "reserve_components": 145,
     "income_profiles": 112
   },
-  "notes": "Current deterministic canonical checkpoint after PR #358 Record Growth Batch 1. StraitsX USD (XUSD) and Blast USDB are promoted as complete reviewed records with entity, organization, relationship, classification, reserve/redemption, event, Evidence, deployment, legal, reserve-component, income, and known-unknown coverage. USDG, USD1, and SoFiUSD were rejected as existing canonical identities. Four canonical Market Access Records are preserved and no new public product surface is added."
+  "notes": "Current deterministic canonical checkpoint after PR #359 Market Access Pilot 2. Four provider-scoped RLUSD records for Japan / SBI VC Trade / VCTRADE are added across buy/sell, deposit, withdrawal, and Ethereum-restricted external-wallet transfer. Assets, Evidence identities, deployments, and all other canonical record families remain unchanged from PR #358. Total canonical Market Access Records advance from four to eight."
 }
