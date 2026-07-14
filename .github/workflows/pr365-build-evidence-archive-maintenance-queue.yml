@@ -1,0 +1,34 @@
+name: PR 365 Build Evidence Archive Maintenance Queue
+
+on:
+  push:
+    branches:
+      - pr365-evidence-archive-maintenance-batch-2
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-queue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pr365-evidence-archive-maintenance-batch-2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build and verify queue
+        run: |
+          node scripts/build-evidence-archive-maintenance-queue-pr365.mjs
+          node scripts/build-evidence-archive-maintenance-queue-pr365.mjs --check
+      - name: Save queue
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add docs/migration/evidence-archive-maintenance-queue-pr365.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Generate PR 365 maintenance queue"
+          git push
