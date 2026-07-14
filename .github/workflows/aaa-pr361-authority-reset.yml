@@ -1,0 +1,49 @@
+name: AAA PR361 Authority Reset
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.head_ref == 'pr361-post-360-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: pr361-post-360-review-gate
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Apply authority reset
+        run: node scripts/apply-pr361-authority-reset.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Validate non-UI release material
+        run: node scripts/validate-non-ui-release-material.mjs
+
+      - name: Commit authority synchronization
+        run: |
+          if git diff --quiet; then
+            echo 'Authority files are already synchronized.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md AGENTS.md docs/spec-governance.md docs/roadmap.md scripts/check-workstream-120.mjs scripts/validate-non-ui-release-material.mjs
+          git commit -m 'Synchronize post-PR 360 review-gate authority'
+          git push origin HEAD:pr361-post-360-review-gate
