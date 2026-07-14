@@ -9,6 +9,10 @@ permissions:
   issues: write
   pull-requests: write
 
+concurrency:
+  group: pr364-apply-validated-scope
+  cancel-in-progress: true
+
 jobs:
   apply:
     if: github.event_name == 'workflow_dispatch' || github.head_ref == 'pr364-tier-a-dossier-batch-4'
@@ -119,7 +123,10 @@ jobs:
             exit 0
           fi
           git commit -m 'Apply validated PR 364 dossier scope correction'
-          git pull --rebase origin pr364-tier-a-dossier-batch-4
+          git reset --hard HEAD
+          git clean -fd
+          git fetch origin pr364-tier-a-dossier-batch-4
+          git rebase origin/pr364-tier-a-dossier-batch-4
           git push origin HEAD:pr364-tier-a-dossier-batch-4
 
       - name: Upload apply diagnostics
