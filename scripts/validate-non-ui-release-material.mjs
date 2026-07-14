@@ -31,8 +31,8 @@ for (const marker of [
   'PR #358 Record Growth Batch 1: complete',
   'PR #359 Market Access Pilot 2: complete',
   'PR #360 Evidence and Correction Batch: complete',
-  'PR #361 Post-PR #360 Review Gate: active',
-  'PR #362 Record Depth and Coverage Baseline Refresh: next',
+  'PR #361 Post-PR #360 Review Gate: complete',
+  'PR #363 Record Depth and Coverage Baseline Refresh: active',
   'StraitsX USD (XUSD)',
   'Blast USDB'
 ]) requireText(readme, marker, 'README.md');
@@ -89,7 +89,7 @@ check(reviewGate.public_output === false, 'PR #361 review gate must remain inter
 check(reviewGate.current_counts?.assets === 112, 'PR #361 review gate asset count mismatch');
 check(reviewGate.current_counts?.evidence === 557, 'PR #361 review gate Evidence count mismatch');
 check(reviewGate.current_counts?.market_access_records === 8, 'PR #361 review gate Market Access count mismatch');
-check(JSON.stringify(reviewGate.approved_next_sequence?.map((row) => row.pr)) === JSON.stringify([362,363,364]), 'PR #361 approved next sequence mismatch');
+check(JSON.stringify(reviewGate.approved_next_sequence?.map((row) => row.pr)) === JSON.stringify([363,364,365]), 'PR #361 approved next sequence mismatch');
 check(reviewGate.decisions?.market_access_pilot_3?.decision === 'not_approved', 'PR #361 must not approve Market Access Pilot 3');
 check(reviewGate.decisions?.record_growth_batch_2?.decision === 'not_approved_in_next_sequence', 'PR #361 must not approve Record Growth Batch 2');
 check(reviewGate.decisions?.new_public_surface?.decision === 'not_approved', 'PR #361 must not approve a new public surface');
@@ -118,10 +118,10 @@ for (const marker of [
   'PR #358 Record Growth Batch 1: complete',
   'PR #359 Market Access Pilot 2: complete',
   'PR #360 Evidence and Correction Batch: complete',
-  'PR #361 Post-PR #360 Review Gate: active',
-  'PR #362 Record Depth and Coverage Baseline Refresh',
-  'PR #363 Tier A Dossier Deepening Batch 4',
-  'PR #364 Evidence and Archive Maintenance Batch 2',
+  'PR #361 Post-PR #360 Review Gate: complete',
+  'PR #363 Record Depth and Coverage Baseline Refresh',
+  'PR #364 Tier A Dossier Deepening Batch 4',
+  'PR #365 Evidence and Archive Maintenance Batch 2',
   '112 stable assets',
   '557 evidence records',
   '174 deployments',
@@ -156,7 +156,7 @@ console.log(JSON.stringify({
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
   stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_workstream: 'pr361_post_pr360_review_gate',
-  next_workstream: 'pr362_record_depth_baseline_refresh',
+  active_workstream: 'pr363_record_depth_baseline_refresh',
+  next_workstream: 'pr364_tier_a_dossier_batch_4',
   approved_sequence: reviewGate.approved_next_sequence.map((row) => row.pr)
 }, null, 2));

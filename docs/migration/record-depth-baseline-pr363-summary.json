@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "baseline_id": "sog_record_depth_baseline_pr363_v1",
+  "status": "reviewed_internal_planning_checkpoint",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 363,
+  "reviewed_at": "2026-07-14",
+  "source_review_gate_id": "sog_post_pr360_review_gate_pr361_2026_07_14",
+  "source_canonical_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
+  "source_stats_checkpoint_id": "sog_evidence_correction_batch_112_checkpoint_pr360_2026_07_14",
+  "historical_baseline_id": "sog_record_depth_baseline_pr353_v1",
+  "asset_count": 112,
+  "dimension_count": 16,
+  "cell_count": 1792,
+  "planning_states": [
+    "strong",
+    "usable",
+    "partial",
+    "sparse",
+    "absent",
+    "not_applicable"
+  ],
+  "dimension_order": [
+    "identity",
+    "lifecycle",
+    "organization_relationships",
+    "mechanism_classification",
+    "reserve_structure",
+    "redemption",
+    "issuance",
+    "deployment",
+    "legal_profile",
+    "regulatory_notes",
+    "events",
+    "evidence_depth",
+    "known_unknowns",
+    "comparison_readiness",
+    "facet_freshness_support",
+    "canonical_market_access"
+  ],
+  "input_digest_sha256": "f5ca002beca75fb3ef573f87acb81fd7cb57c34f3bac0a619bc7ffaa666300af",
+  "generation_digest_sha256": "0bc86edab2915afdbef07c6e4c9e4ca36ad2e1106bbf68472b9ce01179784174",
+  "source_contracts": {
+    "comparison_readiness_audit_id": "sog_comparison_readiness_audit_pr337_110_assets",
+    "comparison_readiness_input_digest_sha256": "0758fe4aa1f93eeaaa384ee9ca1adc569830e9d3d4ebd15c54ffaa13f51d101d",
+    "facet_freshness_audit_id": "sog_facet_freshness_audit_pr342_110_assets",
+    "facet_freshness_input_digest_sha256": "cb388141167a385a5092d69474b66656dc4c6453115dde13d1542d2a74f3108d",
+    "market_access_source": "data/market-access-records-v1.json",
+    "comparison_preset_config_id": "sog_compare_presets_pr345_v1",
+    "comparison_preset_source": "config/compare-v1-presets.json"
+  },
+  "summary": {
+    "state_counts": {
+      "strong": 602,
+      "usable": 716,
+      "partial": 255,
+      "sparse": 0,
+      "absent": 219,
+      "not_applicable": 0
+    },
+    "dimension_states": [
+      {
+        "dimension_id": "identity",
+        "state_counts": {
+          "strong": 83,
+          "usable": 29,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "lifecycle",
+        "state_counts": {
+          "strong": 49,
+          "usable": 60,
+          "partial": 3,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "organization_relationships",
+        "state_counts": {
+          "strong": 9,
+          "usable": 98,
+          "partial": 5,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "mechanism_classification",
+        "state_counts": {
+          "strong": 108,
+          "usable": 4,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "reserve_structure",
+        "state_counts": {
+          "strong": 4,
+          "usable": 108,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "redemption",
+        "state_counts": {
+          "strong": 96,
+          "usable": 4,
+          "partial": 12,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "issuance",
+        "state_counts": {
+          "strong": 107,
+          "usable": 5,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "deployment",
+        "state_counts": {
+          "strong": 9,
+          "usable": 11,
+          "partial": 92,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "legal_profile",
+        "state_counts": {
+          "strong": 0,
+          "usable": 63,
+          "partial": 49,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "regulatory_notes",
+        "state_counts": {
+          "strong": 3,
+          "usable": 2,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 107,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "events",
+        "state_counts": {
+          "strong": 20,
+          "usable": 90,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 2,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "evidence_depth",
+        "state_counts": {
+          "strong": 59,
+          "usable": 50,
+          "partial": 3,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "known_unknowns",
+        "state_counts": {
+          "strong": 53,
+          "usable": 59,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "comparison_readiness",
+        "state_counts": {
+          "strong": 0,
+          "usable": 112,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "facet_freshness_support",
+        "state_counts": {
+          "strong": 0,
+          "usable": 21,
+          "partial": 91,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "canonical_market_access",
+        "state_counts": {
+          "strong": 2,
+          "usable": 0,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 110,
+          "not_applicable": 0
+        }
+      }
+    ],
+    "tier_a_candidate_count": 10
+  },
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "next_work_item": "PR #364 Tier A Dossier Deepening Batch 4"
+}

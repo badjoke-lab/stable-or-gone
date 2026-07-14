@@ -1,0 +1,899 @@
+{
+  "schema_version": "1.0",
+  "delta_id": "sog_record_depth_baseline_delta_pr353_to_pr363_v1",
+  "status": "reviewed_internal_planning_delta",
+  "public_output": false,
+  "asset_rank": false,
+  "review_pr": 363,
+  "reviewed_at": "2026-07-14",
+  "historical_baseline_id": "sog_record_depth_baseline_pr353_v1",
+  "current_baseline_id": "sog_record_depth_baseline_pr363_v1",
+  "historical_input_digest_sha256": "22b4740001fb34188fc4829cd580ff59d6a54a8b78c57ebcd8353e0e3f56d5f9",
+  "current_input_digest_sha256": "f5ca002beca75fb3ef573f87acb81fd7cb57c34f3bac0a619bc7ffaa666300af",
+  "generation_digest_sha256": "0bc86edab2915afdbef07c6e4c9e4ca36ad2e1106bbf68472b9ce01179784174",
+  "asset_count": {
+    "before": 110,
+    "after": 112,
+    "delta": 2
+  },
+  "cell_count": {
+    "before": 1760,
+    "after": 1792,
+    "delta": 32
+  },
+  "state_counts": {
+    "before": {
+      "strong": 589,
+      "usable": 687,
+      "partial": 267,
+      "sparse": 0,
+      "absent": 217,
+      "not_applicable": 0
+    },
+    "after": {
+      "strong": 602,
+      "usable": 716,
+      "partial": 255,
+      "sparse": 0,
+      "absent": 219,
+      "not_applicable": 0
+    },
+    "delta": {
+      "strong": 13,
+      "usable": 29,
+      "partial": -12,
+      "sparse": 0,
+      "absent": 2,
+      "not_applicable": 0
+    }
+  },
+  "dimension_deltas": [
+    {
+      "dimension_id": "identity",
+      "before": {
+        "strong": 82,
+        "usable": 28,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 83,
+        "usable": 29,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 1,
+        "usable": 1,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 0,
+      "unresolved_after": 0
+    },
+    {
+      "dimension_id": "lifecycle",
+      "before": {
+        "strong": 49,
+        "usable": 58,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 49,
+        "usable": 60,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 3,
+      "unresolved_after": 3
+    },
+    {
+      "dimension_id": "organization_relationships",
+      "before": {
+        "strong": 9,
+        "usable": 96,
+        "partial": 5,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 9,
+        "usable": 98,
+        "partial": 5,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 5,
+      "unresolved_after": 5
+    },
+    {
+      "dimension_id": "mechanism_classification",
+      "before": {
+        "strong": 106,
+        "usable": 4,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 108,
+        "usable": 4,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 0,
+      "unresolved_after": 0
+    },
+    {
+      "dimension_id": "reserve_structure",
+      "before": {
+        "strong": 4,
+        "usable": 106,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 4,
+        "usable": 108,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 0,
+      "unresolved_after": 0
+    },
+    {
+      "dimension_id": "redemption",
+      "before": {
+        "strong": 94,
+        "usable": 4,
+        "partial": 12,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 96,
+        "usable": 4,
+        "partial": 12,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 12,
+      "unresolved_after": 12
+    },
+    {
+      "dimension_id": "issuance",
+      "before": {
+        "strong": 105,
+        "usable": 5,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 107,
+        "usable": 5,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 0,
+      "unresolved_after": 0
+    },
+    {
+      "dimension_id": "deployment",
+      "before": {
+        "strong": 8,
+        "usable": 10,
+        "partial": 92,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 9,
+        "usable": 11,
+        "partial": 92,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 1,
+        "usable": 1,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 92,
+      "unresolved_after": 92
+    },
+    {
+      "dimension_id": "legal_profile",
+      "before": {
+        "strong": 0,
+        "usable": 48,
+        "partial": 62,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 0,
+        "usable": 63,
+        "partial": 49,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 15,
+        "partial": -13,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 62,
+      "unresolved_after": 49
+    },
+    {
+      "dimension_id": "regulatory_notes",
+      "before": {
+        "strong": 3,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 105,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 3,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 107,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 0
+      },
+      "unresolved_before": 105,
+      "unresolved_after": 107
+    },
+    {
+      "dimension_id": "events",
+      "before": {
+        "strong": 20,
+        "usable": 88,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 20,
+        "usable": 90,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 2,
+      "unresolved_after": 2
+    },
+    {
+      "dimension_id": "evidence_depth",
+      "before": {
+        "strong": 58,
+        "usable": 49,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 59,
+        "usable": 50,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 1,
+        "usable": 1,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 3,
+      "unresolved_after": 3
+    },
+    {
+      "dimension_id": "known_unknowns",
+      "before": {
+        "strong": 51,
+        "usable": 59,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 53,
+        "usable": 59,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 0,
+      "unresolved_after": 0
+    },
+    {
+      "dimension_id": "comparison_readiness",
+      "before": {
+        "strong": 0,
+        "usable": 110,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 0,
+        "usable": 112,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 0,
+      "unresolved_after": 0
+    },
+    {
+      "dimension_id": "facet_freshness_support",
+      "before": {
+        "strong": 0,
+        "usable": 20,
+        "partial": 90,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 0,
+        "usable": 21,
+        "partial": 91,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 0,
+        "usable": 1,
+        "partial": 1,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 90,
+      "unresolved_after": 91
+    },
+    {
+      "dimension_id": "canonical_market_access",
+      "before": {
+        "strong": 0,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 110,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 110,
+        "not_applicable": 0
+      },
+      "delta": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "unresolved_before": 110,
+      "unresolved_after": 110
+    }
+  ],
+  "candidate_queue": {
+    "before_count": 18,
+    "after_count": 10,
+    "delta": -8,
+    "continuing_asset_ids": [
+      "sog_st_1gbp",
+      "sog_st_audd",
+      "sog_st_busd",
+      "sog_st_frax",
+      "sog_st_husd",
+      "sog_st_nzds",
+      "sog_st_rlusd",
+      "sog_st_usdg",
+      "sog_st_usdp",
+      "sog_st_usds"
+    ],
+    "exited_asset_ids": [
+      "sog_st_dai",
+      "sog_st_fdusd",
+      "sog_st_fei",
+      "sog_st_mim",
+      "sog_st_pyusd",
+      "sog_st_usdc",
+      "sog_st_usdt",
+      "sog_st_ust"
+    ],
+    "entered_asset_ids": []
+  },
+  "canonical_assets_added_since_pr353": {
+    "source_handoff_id": "sog_record_growth_batch_1_pr358_reviewed_handoff_2026_07_13",
+    "asset_ids": [
+      "sog_st_usdb",
+      "sog_st_xusd"
+    ],
+    "assets": [
+      {
+        "asset_id": "sog_st_usdb",
+        "asset_slug": "blast-usdb",
+        "asset_name": "USDB",
+        "symbol": "USDB",
+        "state_counts": {
+          "strong": 5,
+          "usable": 8,
+          "partial": 1,
+          "sparse": 0,
+          "absent": 2,
+          "not_applicable": 0
+        },
+        "priority_gaps": [
+          "canonical_market_access",
+          "facet_freshness_support",
+          "regulatory_notes"
+        ],
+        "dimension_states": [
+          {
+            "dimension_id": "identity",
+            "state": "strong",
+            "reason_codes": [
+              "identity_launch_and_verification_structured"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "lifecycle",
+            "state": "usable",
+            "reason_codes": [
+              "lifecycle_structured"
+            ],
+            "metrics": {
+              "event_count": 1
+            }
+          },
+          {
+            "dimension_id": "organization_relationships",
+            "state": "usable",
+            "reason_codes": [
+              "structured_relationship_present"
+            ],
+            "metrics": {
+              "relationship_count": 1
+            }
+          },
+          {
+            "dimension_id": "mechanism_classification",
+            "state": "strong",
+            "reason_codes": [
+              "classification_and_mechanism_fully_structured"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "reserve_structure",
+            "state": "usable",
+            "reason_codes": [
+              "reserve_profile_with_supporting_structure"
+            ],
+            "metrics": {
+              "reserve_report_count": 1,
+              "reserve_component_count": 1
+            }
+          },
+          {
+            "dimension_id": "redemption",
+            "state": "strong",
+            "reason_codes": [
+              "redemption_structured_with_supported_freshness"
+            ],
+            "metrics": {
+              "freshness_state": "fresh"
+            }
+          },
+          {
+            "dimension_id": "issuance",
+            "state": "strong",
+            "reason_codes": [
+              "issuance_readiness_ready"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "deployment",
+            "state": "usable",
+            "reason_codes": [
+              "structured_deployment_present"
+            ],
+            "metrics": {
+              "deployment_count": 1
+            }
+          },
+          {
+            "dimension_id": "legal_profile",
+            "state": "usable",
+            "reason_codes": [
+              "legal_profile_structured_but_freshness_support_limited"
+            ],
+            "metrics": {
+              "freshness_state": "undated"
+            }
+          },
+          {
+            "dimension_id": "regulatory_notes",
+            "state": "absent",
+            "reason_codes": [
+              "no_canonical_regulatory_note_rows_no_negative_claim"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "events",
+            "state": "usable",
+            "reason_codes": [
+              "canonical_event_history_present"
+            ],
+            "metrics": {
+              "event_count": 1
+            }
+          },
+          {
+            "dimension_id": "evidence_depth",
+            "state": "usable",
+            "reason_codes": [
+              "multi_source_evidence_set"
+            ],
+            "metrics": {
+              "evidence_count": 3
+            }
+          },
+          {
+            "dimension_id": "known_unknowns",
+            "state": "strong",
+            "reason_codes": [
+              "multiple_explicit_known_unknown_rows"
+            ],
+            "metrics": {
+              "known_unknown_count": 3
+            }
+          },
+          {
+            "dimension_id": "comparison_readiness",
+            "state": "usable",
+            "reason_codes": [
+              "comparison_readiness_ready_with_unknowns"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "facet_freshness_support",
+            "state": "partial",
+            "reason_codes": [
+              "freshness_anchor_support_counted_without_composite_score"
+            ],
+            "metrics": {
+              "applicable_cell_count": 18,
+              "unsupported_anchor_count": 3,
+              "stale_cell_count": 0
+            }
+          },
+          {
+            "dimension_id": "canonical_market_access",
+            "state": "absent",
+            "reason_codes": [
+              "no_canonical_market_access_records_no_unavailability_claim"
+            ],
+            "metrics": {}
+          }
+        ]
+      },
+      {
+        "asset_id": "sog_st_xusd",
+        "asset_slug": "straitsx-usd-xusd",
+        "asset_name": "StraitsX USD",
+        "symbol": "XUSD",
+        "state_counts": {
+          "strong": 5,
+          "usable": 8,
+          "partial": 1,
+          "sparse": 0,
+          "absent": 2,
+          "not_applicable": 0
+        },
+        "priority_gaps": [
+          "canonical_market_access",
+          "facet_freshness_support",
+          "regulatory_notes"
+        ],
+        "dimension_states": [
+          {
+            "dimension_id": "identity",
+            "state": "usable",
+            "reason_codes": [
+              "identity_usable_with_explicit_unknowns"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "lifecycle",
+            "state": "usable",
+            "reason_codes": [
+              "lifecycle_structured"
+            ],
+            "metrics": {
+              "event_count": 1
+            }
+          },
+          {
+            "dimension_id": "organization_relationships",
+            "state": "usable",
+            "reason_codes": [
+              "structured_relationship_present"
+            ],
+            "metrics": {
+              "relationship_count": 1
+            }
+          },
+          {
+            "dimension_id": "mechanism_classification",
+            "state": "strong",
+            "reason_codes": [
+              "classification_and_mechanism_fully_structured"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "reserve_structure",
+            "state": "usable",
+            "reason_codes": [
+              "reserve_profile_with_supporting_structure"
+            ],
+            "metrics": {
+              "reserve_report_count": 1,
+              "reserve_component_count": 1
+            }
+          },
+          {
+            "dimension_id": "redemption",
+            "state": "strong",
+            "reason_codes": [
+              "redemption_structured_with_supported_freshness"
+            ],
+            "metrics": {
+              "freshness_state": "fresh"
+            }
+          },
+          {
+            "dimension_id": "issuance",
+            "state": "strong",
+            "reason_codes": [
+              "issuance_readiness_ready"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "deployment",
+            "state": "strong",
+            "reason_codes": [
+              "multiple_structured_deployments"
+            ],
+            "metrics": {
+              "deployment_count": 3
+            }
+          },
+          {
+            "dimension_id": "legal_profile",
+            "state": "usable",
+            "reason_codes": [
+              "legal_profile_structured_but_freshness_support_limited"
+            ],
+            "metrics": {
+              "freshness_state": "undated"
+            }
+          },
+          {
+            "dimension_id": "regulatory_notes",
+            "state": "absent",
+            "reason_codes": [
+              "no_canonical_regulatory_note_rows_no_negative_claim"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "events",
+            "state": "usable",
+            "reason_codes": [
+              "canonical_event_history_present"
+            ],
+            "metrics": {
+              "event_count": 1
+            }
+          },
+          {
+            "dimension_id": "evidence_depth",
+            "state": "usable",
+            "reason_codes": [
+              "multi_source_evidence_set"
+            ],
+            "metrics": {
+              "evidence_count": 3
+            }
+          },
+          {
+            "dimension_id": "known_unknowns",
+            "state": "strong",
+            "reason_codes": [
+              "multiple_explicit_known_unknown_rows"
+            ],
+            "metrics": {
+              "known_unknown_count": 3
+            }
+          },
+          {
+            "dimension_id": "comparison_readiness",
+            "state": "usable",
+            "reason_codes": [
+              "comparison_readiness_ready_with_unknowns"
+            ],
+            "metrics": {}
+          },
+          {
+            "dimension_id": "facet_freshness_support",
+            "state": "partial",
+            "reason_codes": [
+              "freshness_anchor_support_counted_without_composite_score"
+            ],
+            "metrics": {
+              "applicable_cell_count": 18,
+              "unsupported_anchor_count": 3,
+              "stale_cell_count": 0
+            }
+          },
+          {
+            "dimension_id": "canonical_market_access",
+            "state": "absent",
+            "reason_codes": [
+              "no_canonical_market_access_records_no_unavailability_claim"
+            ],
+            "metrics": {}
+          }
+        ]
+      }
+    ],
+    "interpretation_boundary": "These rows describe the current contribution of the two added assets. Other state deltas may reflect later dossier, Market Access, or Evidence work and are not attributed to the additions."
+  },
+  "historical_checkpoint_rewritten": false
+}

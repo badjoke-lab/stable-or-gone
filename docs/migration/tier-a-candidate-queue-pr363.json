@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.0",
+  "baseline_id": "sog_record_depth_baseline_pr363_v1",
+  "status": "internal_reviewed_planning_queue",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 363,
+  "reviewed_at": "2026-07-14",
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "candidate_count": 10,
+  "input_digest_sha256": "f5ca002beca75fb3ef573f87acb81fd7cb57c34f3bac0a619bc7ffaa666300af",
+  "generation_digest_sha256": "0bc86edab2915afdbef07c6e4c9e4ca36ad2e1106bbf68472b9ce01179784174",
+  "source_review_gate_id": "sog_post_pr360_review_gate_pr361_2026_07_14",
+  "source_contracts": {
+    "comparison_readiness_audit_id": "sog_comparison_readiness_audit_pr337_110_assets",
+    "comparison_readiness_input_digest_sha256": "0758fe4aa1f93eeaaa384ee9ca1adc569830e9d3d4ebd15c54ffaa13f51d101d",
+    "facet_freshness_audit_id": "sog_facet_freshness_audit_pr342_110_assets",
+    "facet_freshness_input_digest_sha256": "cb388141167a385a5092d69474b66656dc4c6453115dde13d1542d2a74f3108d",
+    "market_access_source": "data/market-access-records-v1.json",
+    "comparison_preset_config_id": "sog_compare_presets_pr345_v1",
+    "comparison_preset_source": "config/compare-v1-presets.json"
+  },
+  "selection_boundary": {
+    "canonical_promotion_authorized": false,
+    "manual_review_required": true,
+    "maximum_assets_in_pr364": 5
+  },
+  "candidates": [
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "asset_name": "AUDD",
+      "symbol": "AUDD",
+      "reasons": [
+        "comparison_and_evidence_maintenance_leverage",
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "events",
+        "facet_freshness_support",
+        "lifecycle",
+        "organization_relationships",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": true,
+        "historical_importance": true,
+        "regional_relevance": true,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "asset_name": "Binance USD",
+      "symbol": "BUSD",
+      "reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "redemption"
+      ],
+      "material_dossier_gaps": [
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": true,
+        "regional_relevance": false,
+        "comparison_preset_member": true
+      }
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "asset_name": "Frax",
+      "symbol": "FRAX",
+      "reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": false,
+        "regional_relevance": false,
+        "comparison_preset_member": true
+      }
+    },
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "asset_name": "HUSD",
+      "symbol": "HUSD",
+      "reasons": [
+        "comparison_and_evidence_maintenance_leverage"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "facet_freshness_support",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": true,
+        "historical_importance": true,
+        "regional_relevance": false,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "asset_name": "NZD Stablecoin",
+      "symbol": "NZDS",
+      "reasons": [
+        "comparison_and_evidence_maintenance_leverage",
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "events",
+        "facet_freshness_support",
+        "lifecycle",
+        "organization_relationships",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": true,
+        "historical_importance": true,
+        "regional_relevance": true,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "asset_name": "poundtoken",
+      "symbol": "1GBP",
+      "reasons": [
+        "comparison_and_evidence_maintenance_leverage",
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "facet_freshness_support",
+        "lifecycle",
+        "organization_relationships",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": true,
+        "historical_importance": true,
+        "regional_relevance": true,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "asset_name": "Ripple USD",
+      "symbol": "RLUSD",
+      "reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "priority_gaps": [
+        "deployment",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": true,
+        "regional_relevance": false,
+        "comparison_preset_member": true
+      }
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "asset_name": "Global Dollar",
+      "symbol": "USDG",
+      "reasons": [
+        "comparison_and_evidence_maintenance_leverage"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "facet_freshness_support",
+        "legal_profile",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "legal_profile",
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": true,
+        "historical_importance": false,
+        "regional_relevance": false,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "asset_name": "Pax Dollar",
+      "symbol": "USDP",
+      "reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "redemption",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "redemption"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": false,
+        "regional_relevance": false,
+        "comparison_preset_member": true
+      }
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "asset_name": "USDS",
+      "symbol": "USDS",
+      "reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "priority_gaps": [
+        "canonical_market_access",
+        "deployment",
+        "legal_profile",
+        "regulatory_notes"
+      ],
+      "material_dossier_gaps": [
+        "legal_profile"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": false,
+        "timeline_leverage": true,
+        "access_regulation_leverage": true,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": false,
+        "regional_relevance": false,
+        "comparison_preset_member": true
+      }
+    }
+  ]
+}
