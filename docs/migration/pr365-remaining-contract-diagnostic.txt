@@ -92,11 +92,10 @@ exit_code=0
 ## non_ui_release
 exit_code=1
 Non-UI release material validation failed:
+- current release-integrity baseline must remain the PR #364 canonical baseline
 - current canonical checkpoint must remain the PR #364 dossier checkpoint
 - current canonical checkpoint must bind 387 archive indexes
 - current canonical checkpoint must bind 172 no-archive rows
-- release baseline archive index count mismatch
-- release baseline no-archive count mismatch
 - stats history latest snapshot must contain 387 archived Evidence rows
 - current roadmap: missing 557 evidence records
 
@@ -108,7 +107,7 @@ exit_code=0
 
 {
   "schema_version": "2.0",
-  "generated_at": "2026-07-14T18:04:36.897Z",
+  "generated_at": "2026-07-14T18:06:31.997Z",
   "ok": true,
   "visual_family": "terminal_baseline_restored",
   "restoration_source_commit": "3df568eab0a179d7690a88efb599156b0d659ab7",
