@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_pr365_deployment_audit_diagnostic",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+  "expected_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "market_access_records": 8,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "legal_profiles": 112,
+    "stable_asset_relationships": 5,
+    "reserve_components": 145,
+    "income_profiles": 112
+  },
+  "audited_counts": {
+    "stable_assets": 112,
+    "deployments": 174,
+    "stablecoins_with_deployments": 112,
+    "chains_recorded": 45,
+    "verification_overlay_ids": 174
+  },
+  "result": "pass_with_review_queues",
+  "critical": [],
+  "network_review_needed": [
+    "sog_dep_aecoin_unresolved_batch_p",
+    "sog_dep_audd_unknown_batch_y",
+    "sog_dep_nzds_unknown_batch_y",
+    "sog_dep_usdg_chain_seed"
+  ],
+  "aggregate_network_context_count": 4,
+  "freeze_not_recorded_count": 173,
+  "blacklist_not_recorded_count": 173,
+  "verification_expected": {
+    "verified": 49,
+    "identifier_recorded_unverified": 46,
+    "source_linked_no_identifier": 79,
+    "review_needed": 0,
+    "unknown": 0,
+    "not_recorded": 0
+  },
+  "verification_actual": {
+    "identifier_recorded_unverified": 46,
+    "source_linked_no_identifier": 79,
+    "verified": 49
+  },
+  "review_needed_count": 0,
+  "not_recorded_or_unknown_count": 0,
+  "identifier_not_recorded_count": 79,
+  "missing_evidence_ids": []
+}
