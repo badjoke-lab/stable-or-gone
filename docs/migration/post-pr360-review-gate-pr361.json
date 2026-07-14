@@ -676,14 +676,14 @@
   },
   "approved_next_sequence": [
     {
-      "pr": 362,
+      "pr": 363,
       "work_item": "Record Depth and Coverage Baseline Refresh",
       "scope": "Recompute all 16 planning dimensions over exactly 112 canonical assets and replace no historical snapshot.",
       "canonical_data_change_allowed": false,
       "public_surface_allowed": false
     },
     {
-      "pr": 363,
+      "pr": 364,
       "work_item": "Tier A Dossier Deepening Batch 4",
       "scope": "Select no more than five assets from the refreshed non-ranking queue and deepen only reviewed material dossier gaps.",
       "maximum_assets": 5,
@@ -692,7 +692,7 @@
       "public_surface_allowed": false
     },
     {
-      "pr": 364,
+      "pr": 365,
       "work_item": "Evidence and Archive Maintenance Batch 2",
       "scope": "Review no more than ten high-priority Evidence records from the refreshed archive/source-maintenance queue.",
       "maximum_evidence_records_touched": 10,
@@ -709,5 +709,5 @@
     "automatic monitoring promotion"
   ],
   "review_gate_after_sequence": true,
-  "input_digest_sha256": "c808ae4263ab6b62930d8e0566cbbd131237b94d2b31ec7a27ca1af27dd34fbf"
+  "input_digest_sha256": "212cfd214d2a7a0fb8334708acff6b9876bc83c5b82a94ecf0e982cbd5f33fed"
 }

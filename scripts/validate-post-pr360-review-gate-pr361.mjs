@@ -18,8 +18,8 @@ expect(config.status === 'deterministic_review_gate', 'review-gate config status
 expect(config.review_pr === 361, 'review-gate PR mismatch');
 expect(config.evaluation_axes?.length === 9, 'review gate must contain nine evaluation axes');
 expect(config.approved_next_sequence?.length === 3, 'review gate must approve exactly three next PRs');
-expect(JSON.stringify(config.approved_next_sequence.map((row) => row.pr)) === JSON.stringify([362,363,364]), 'approved sequence must be PR #362–#364');
-expect(config.review_gate_after_sequence === true, 'review gate must recur after PR #364');
+expect(JSON.stringify(config.approved_next_sequence.map((row) => row.pr)) === JSON.stringify([363,364,365]), 'approved sequence must be PR #363–#365');
+expect(config.review_gate_after_sequence === true, 'review gate must recur after PR #365');
 
 expect(handoff.status === 'reviewed_merged_handoff', 'PR #360 handoff status mismatch');
 expect(handoff.source_merge_commit === '0bdda598b596b406ae8a01827072f5b8c253b23e', 'PR #360 handoff merge commit mismatch');
@@ -77,13 +77,13 @@ expect(correction?.pr360_corrected === 8, 'review report PR #360 corrected count
 expect(correction?.remaining_known_unknowns === 325, 'review report known-unknown count mismatch');
 
 expect(committed.evaluation_axes?.external_usage_or_referral_evidence?.status === 'not_available_in_reviewed_repository_evidence', 'external usage must not be invented');
-expect(committed.decisions?.record_depth_baseline_refresh?.decision === 'approved_required', 'PR #362 baseline refresh decision mismatch');
-expect(committed.decisions?.tier_a_dossier_batch_4?.decision === 'approved_after_baseline_refresh', 'PR #363 dossier decision mismatch');
-expect(committed.decisions?.evidence_archive_maintenance_batch_2?.decision === 'approved_priority', 'PR #364 Evidence maintenance decision mismatch');
+expect(committed.decisions?.record_depth_baseline_refresh?.decision === 'approved_required', 'PR #363 baseline refresh decision mismatch');
+expect(committed.decisions?.tier_a_dossier_batch_4?.decision === 'approved_after_baseline_refresh', 'PR #364 dossier decision mismatch');
+expect(committed.decisions?.evidence_archive_maintenance_batch_2?.decision === 'approved_priority', 'PR #365 Evidence maintenance decision mismatch');
 expect(committed.decisions?.market_access_pilot_3?.decision === 'not_approved', 'Market Access Pilot 3 must remain unapproved');
 expect(committed.decisions?.record_growth_batch_2?.decision === 'not_approved_in_next_sequence', 'Record Growth Batch 2 must remain unapproved');
 expect(committed.decisions?.new_public_surface?.decision === 'not_approved', 'new public surface must remain unapproved');
-expect(JSON.stringify(committed.approved_next_sequence.map((row) => row.pr)) === JSON.stringify([362,363,364]), 'committed approved sequence mismatch');
+expect(JSON.stringify(committed.approved_next_sequence.map((row) => row.pr)) === JSON.stringify([363,364,365]), 'committed approved sequence mismatch');
 expect(/^[a-f0-9]{64}$/.test(committed.input_digest_sha256), 'review report input digest invalid');
 
 for (const file of ['README.md','AGENTS.md','docs/spec-governance.md','docs/roadmap.md']) {
@@ -92,7 +92,7 @@ for (const file of ['README.md','AGENTS.md','docs/spec-governance.md','docs/road
     'Canonical stable assets: 112',
     'PR #360 Evidence and Correction Batch: complete',
     'PR #361 Post-PR #360 Review Gate: active',
-    'PR #362 Record Depth and Coverage Baseline Refresh: next',
+    'PR #363 Record Depth and Coverage Baseline Refresh: next',
     'docs/quality/post-pr360-review-gate-pr361-spec.md',
     'config/post-pr360-review-gate-pr361.json',
     'docs/migration/evidence-correction-batch-pr360-reviewed-handoff.json',

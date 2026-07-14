@@ -639,15 +639,15 @@ Current work item:
 ```text
 PR #360 Evidence and Correction Batch: complete
 PR #361 Post-PR #360 Review Gate: active
-PR #362 Record Depth and Coverage Baseline Refresh: next
+PR #363 Record Depth and Coverage Baseline Refresh: next
 ```
 
 Approved bounded sequence after review:
 
 ```text
-PR #362 Record Depth and Coverage Baseline Refresh
-PR #363 Tier A Dossier Deepening Batch 4
-PR #364 Evidence and Archive Maintenance Batch 2
+PR #363 Record Depth and Coverage Baseline Refresh
+PR #364 Tier A Dossier Deepening Batch 4
+PR #365 Evidence and Archive Maintenance Batch 2
 review gate
 ```
 

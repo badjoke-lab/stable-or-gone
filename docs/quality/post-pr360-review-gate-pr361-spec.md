@@ -79,19 +79,19 @@ No new public product surface is approved by this gate.
 
 ## 6. Approved next bounded sequence
 
-### PR #362 — Record Depth and Coverage Baseline Refresh
+### PR #363 — Record Depth and Coverage Baseline Refresh
 
 Recompute all 16 planning dimensions across exactly 112 canonical assets. Historical PR #353 snapshots remain immutable.
 
-### PR #363 — Tier A Dossier Deepening Batch 4
+### PR #364 — Tier A Dossier Deepening Batch 4
 
 Select no more than five assets from the refreshed deterministic non-ranking queue. Deepen only reviewed material dossier gaps.
 
-### PR #364 — Evidence and Archive Maintenance Batch 2
+### PR #365 — Evidence and Archive Maintenance Batch 2
 
 Review no more than ten high-priority Evidence records from the refreshed source-maintenance queue.
 
-After PR #364, run another review gate before authorizing Record Growth Batch 2 or Market Access Pilot 3.
+After PR #365, run another review gate before authorizing Record Growth Batch 2 or Market Access Pilot 3.
 
 ## 7. Explicit non-approvals
 
@@ -117,7 +117,7 @@ current archive coverage at 387 recorded and 170 not recorded
 historical PR #353 summary immutability
 current 112-asset Record Depth recomputation
 all nine evaluation axes
-exact PR #362–#364 sequence
+exact PR #363–#365 sequence
 no canonical data diff
 no public output or route addition
 Astro check and site build
@@ -129,7 +129,7 @@ PR #361 completes when:
 
 1. a deterministic review report is committed;
 2. each evaluation axis contains evidence and a decision;
-3. the next sequence is limited to PR #362–#364;
-4. repository authority identifies PR #361 as active and PR #362 as next;
+3. the next sequence is limited to PR #363–#365;
+4. repository authority identifies PR #361 as active and PR #363 as next;
 5. canonical and public outputs are unchanged;
 6. validation and general CI are green.
