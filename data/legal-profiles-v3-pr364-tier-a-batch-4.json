@@ -1,0 +1,75 @@
+[
+  {
+    "id": "sog_st_usdg",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "Singapore",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "Paxos USD Stablecoin Terms and Global Dollar issuer disclosure",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_usdg_paxos_page",
+          "sog_src_usdg_paxos_stablecoin_terms_pr364"
+        ]
+      },
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "Finland / European Union",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "Paxos USD Stablecoin Terms identifying Paxos Issuance Europe and FIN-FSA electronic-money supervision",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_usdg_paxos_stablecoin_terms_pr364"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": [
+      "sog_issuer_paxos_digital_singapore",
+      "sog_issuer_paxos_issuance_europe"
+    ],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "stated_segregated",
+    "bankruptcy_remoteness": "unknown",
+    "licensed_or_regulated_as": [
+      "Paxos Digital Singapore Major Payment Institution supervised by the Monetary Authority of Singapore",
+      "Paxos Issuance Europe Electronic Money Institution supervised by the Finnish Financial Supervisory Authority"
+    ],
+    "evidence_ids": [
+      "sog_src_usdg_paxos_page",
+      "sog_src_usdg_paxos_stablecoin_terms_pr364"
+    ],
+    "notes": "USDG is jointly issued by two modeled Paxos legal entities. The Global Dollar Network remains a separate brand/network relationship. Segregation is stated in the reviewed terms; this batch does not assert legal bankruptcy remoteness beyond those terms."
+  },
+  {
+    "id": "sog_st_usds",
+    "classifications": [
+      {
+        "classification": "protocol_asset",
+        "jurisdiction": "Decentralized / Sky Protocol governance",
+        "effective_from": "2024-08-27",
+        "effective_to": null,
+        "authority_or_basis": "Sky Protocol product, collateral, governance, and non-custodial interface disclosures",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_usds_sky_page",
+          "sog_src_usds_developer_docs",
+          "sog_src_usds_sky_protocol_interface_pr364"
+        ]
+      }
+    ],
+    "holder_claim_type": "no_direct_claim",
+    "claim_against_organization_ids": [],
+    "reserve_ownership": "protocol_controlled",
+    "reserve_segregation": "operationally_separate",
+    "bankruptcy_remoteness": "not_applicable",
+    "licensed_or_regulated_as": [],
+    "evidence_ids": [
+      "sog_src_usds_sky_page",
+      "sog_src_usds_developer_docs",
+      "sog_src_usds_sky_protocol_interface_pr364"
+    ],
+    "notes": "USDS is modeled as a protocol asset backed through the Sky Protocol collateral system, not as a direct corporate redemption claim against Skybase, SkyDAO, or the broader ecosystem row. Operational separation describes smart-contract and protocol accounting and is not a legal segregation or safety conclusion. Sky.money is a non-custodial interface and is not modeled as the legal issuer."
+  }
+]
