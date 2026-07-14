@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "base_manifest": "docs/migration/registry-v2-baseline.json",
+  "batch_id": "pr364_tier_a_dossier_batch_4",
+  "defer_legacy_v3_full_coverage": false,
+  "checkpoint_kind": "non_growth_dossier_depth_checkpoint",
+  "source_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
+  "minimum_counts": {
+    "stablecoins": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "classifications": 112,
+    "profiles": 112,
+    "events": 187,
+    "event_details": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "classification_extensions": 2
+  },
+  "data_group_additions": {
+    "organizations": ["data/organizations-pr364-tier-a-batch-4.json"],
+    "relationships": ["data/relationships-pr364-tier-a-batch-4.json"],
+    "profiles": ["data/stablecoin-profiles-pr364-tier-a-batch-4.json"],
+    "evidence": ["data/evidence-pr364-tier-a-batch-4.json"],
+    "evidence_relations": ["data/evidence-pr364-tier-a-batch-4.json"],
+    "known_unknowns": ["data/known-unknowns-pr364-tier-a-batch-4.json"]
+  },
+  "notes": "Forward-only PR #364 dossier-depth checkpoint. Adds exact USDG legal issuer entities and relationships, a source-bounded USDG redemption profile, a protocol-based USDS legal profile, and two reviewed primary Evidence records. HUSD, poundtoken, and RLUSD remain reviewed no-safe-change outcomes."
+}
