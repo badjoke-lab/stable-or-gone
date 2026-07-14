@@ -33,14 +33,31 @@ jobs:
       - name: Apply existing-record replacements
         run: node scripts/apply-pr364-existing-record-updates.mjs
 
-      - name: Validate normalized canonical data
+      - name: Run normalized validators
+        id: validate
+        shell: bash
         run: |
-          npm run validate:data
-          npm run validate:profiles
-          npm run validate:evidence-relations-v2
-          npm run validate:v3
+          mkdir -p artifacts/pr364-normalize
+          : > artifacts/pr364-normalize/summary.txt
+          failed=0
+          run_check() {
+            name="$1"; shift
+            log="artifacts/pr364-normalize/${name}.log"
+            if "$@" >"$log" 2>&1; then
+              echo "${name}: success" >> artifacts/pr364-normalize/summary.txt
+            else
+              echo "${name}: failure" >> artifacts/pr364-normalize/summary.txt
+              failed=1
+            fi
+          }
+          run_check validate-data npm run validate:data
+          run_check validate-profiles npm run validate:profiles
+          run_check validate-evidence npm run validate:evidence-relations-v2
+          run_check validate-v3 npm run validate:v3
+          echo "failed=${failed}" >> "$GITHUB_OUTPUT"
 
       - name: Commit normalized records
+        if: steps.validate.outputs.failed == '0'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -62,14 +79,35 @@ jobs:
           git pull --rebase origin pr364-tier-a-dossier-batch-4
           git push origin HEAD:pr364-tier-a-dossier-batch-4
 
+      - name: Upload normalization diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr364-normalization-${{ github.run_id }}
+          path: artifacts/pr364-normalize/
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Publish normalization status
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
+            const fs=require('fs');
             const marker='<!-- pr364-normalization-status -->';
-            const body=`${marker}\n## PR #364 existing-record normalization\n\n- Status: **${{ job.status }}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Expected result: USDG profile, USDG/USDS legal profiles, and USDG known unknowns updated in place without duplicate IDs.\n`;
+            const dir='artifacts/pr364-normalize';
+            const summary=fs.existsSync(`${dir}/summary.txt`)?fs.readFileSync(`${dir}/summary.txt`,'utf8').trim():'not generated';
+            const failures=[];
+            if(fs.existsSync(dir)) for(const name of fs.readdirSync(dir).filter((name)=>name.endsWith('.log')).sort()) {
+              const text=fs.readFileSync(`${dir}/${name}`,'utf8');
+              if(text.match(/error|failed|invalid|mismatch|missing|unknown/i)) failures.push(`### ${name}\n\n\`\`\`text\n${text.split('\n').slice(-28).join('\n').slice(-5000)}\n\`\`\``);
+            }
+            const body=`${marker}\n## PR #364 existing-record normalization\n\n- Job status: **${{ job.status }}**\n- Failure flag: **${{ steps.validate.outputs.failed }}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n\n\`\`\`text\n${summary}\n\`\`\`\n\n${failures.join('\n\n')}`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((comment)=>comment.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
             else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
+
+      - name: Fail when normalized validation failed
+        if: steps.validate.outputs.failed == '1'
+        run: exit 1
