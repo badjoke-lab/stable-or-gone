@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "report_id": "sog_pr365_deployment_audit_diagnostic",
   "checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
   "expected_counts": {
