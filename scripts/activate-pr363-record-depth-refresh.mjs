@@ -10,11 +10,6 @@ const authorityFiles = [
 const read = (file) => fs.readFileSync(file, 'utf8');
 const write = (file, value) => fs.writeFileSync(file, value.endsWith('\n') ? value : `${value}\n`);
 
-function replaceAllRequired(body, from, to, file) {
-  if (!body.includes(from)) throw new Error(`${file}: missing authority marker ${from}`);
-  return body.replaceAll(from, to);
-}
-
 const authoritySection = `
 
 ## PR #363 active Record Depth refresh authority
@@ -51,26 +46,21 @@ PR #363 changes no canonical data or public product surface. The refreshed queue
 
 for (const file of authorityFiles) {
   let body = read(file);
-  body = replaceAllRequired(body, 'PR #361 Post-PR #360 Review Gate: active', 'PR #361 Post-PR #360 Review Gate: complete', file);
-  if (body.includes('PR #363 Record Depth and Coverage Baseline Refresh: next')) {
-    body = body.replaceAll('PR #363 Record Depth and Coverage Baseline Refresh: next', 'PR #363 Record Depth and Coverage Baseline Refresh: active');
-  }
-  if (!body.includes('PR #363 Record Depth and Coverage Baseline Refresh: active')) {
-    body += '\nPR #363 Record Depth and Coverage Baseline Refresh: active\n';
-  }
-  if (!body.includes('PR #364 Tier A Dossier Deepening Batch 4: next')) {
-    body += '\nPR #364 Tier A Dossier Deepening Batch 4: next\n';
-  }
+  body = body.replaceAll('PR #361 Post-PR #360 Review Gate: active', 'PR #361 Post-PR #360 Review Gate: complete');
+  body = body.replaceAll('PR #363 Record Depth and Coverage Baseline Refresh: next', 'PR #363 Record Depth and Coverage Baseline Refresh: active');
+  if (!body.includes('PR #361 Post-PR #360 Review Gate: complete')) body += '\nPR #361 Post-PR #360 Review Gate: complete\n';
+  if (!body.includes('PR #363 Record Depth and Coverage Baseline Refresh: active')) body += '\nPR #363 Record Depth and Coverage Baseline Refresh: active\n';
+  if (!body.includes('PR #364 Tier A Dossier Deepening Batch 4: next')) body += '\nPR #364 Tier A Dossier Deepening Batch 4: next\n';
   if (!body.includes('## PR #363 active Record Depth refresh authority')) body += authoritySection;
   write(file, body);
 }
 
 let agents = read('AGENTS.md');
-agents = agents.replace('docs/quality/post-pr360-review-gate-pr361-spec.md', 'docs/quality/record-depth-baseline-refresh-pr363-spec.md');
+agents = agents.replaceAll('docs/quality/post-pr360-review-gate-pr361-spec.md', 'docs/quality/record-depth-baseline-refresh-pr363-spec.md');
 write('AGENTS.md', agents);
 
 let operating = read('docs/post-351-data-growth-operating-spec.md');
-operating = operating.replace('docs/quality/post-pr360-review-gate-pr361-spec.md', 'docs/quality/record-depth-baseline-refresh-pr363-spec.md');
+operating = operating.replaceAll('docs/quality/post-pr360-review-gate-pr361-spec.md', 'docs/quality/record-depth-baseline-refresh-pr363-spec.md');
 write('docs/post-351-data-growth-operating-spec.md', operating);
 
 let nonUi = read('scripts/validate-non-ui-release-material.mjs');
