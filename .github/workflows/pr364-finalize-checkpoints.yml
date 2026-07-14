@@ -35,9 +35,17 @@ jobs:
 
       - name: Generate PR 364 checkpoints
         id: generate
-        run: node scripts/finalize-tier-a-dossier-batch-4-pr364.mjs | tee artifacts-pr364-finalizer.txt
+        shell: bash
+        run: |
+          set +e
+          node scripts/finalize-tier-a-dossier-batch-4-pr364.mjs > artifacts-pr364-finalizer.txt 2>&1
+          status=$?
+          cat artifacts-pr364-finalizer.txt
+          echo "status=${status}" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Validate generated checkpoint set
+        if: steps.generate.outputs.status == '0'
         id: validate
         shell: bash
         run: |
@@ -71,7 +79,7 @@ jobs:
           echo "failed=${failed}" >> "$GITHUB_OUTPUT"
 
       - name: Commit generated authority and checkpoints
-        if: steps.validate.outputs.failed == '0'
+        if: steps.generate.outputs.status == '0' && steps.validate.outputs.failed == '0'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -106,7 +114,7 @@ jobs:
           path: |
             artifacts-pr364-finalizer.txt
             artifacts/pr364-finalizer-diagnostics/
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
 
       - name: Publish finalizer status
@@ -124,12 +132,12 @@ jobs:
               const text=fs.readFileSync(`${dir}/${name}`,'utf8');
               if(text.match(/error|failed|invalid|mismatch|missing|must|expected/i)) failures.push(`### ${name}\n\n\`\`\`text\n${text.split('\n').slice(-30).join('\n').slice(-5000)}\n\`\`\``);
             }
-            const body=`${marker}\n## PR #364 checkpoint finalizer\n\n- Job status: **${{ job.status }}**\n- Failure flag: **${{ steps.validate.outputs.failed }}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n\n### Generator\n\n\`\`\`text\n${report}\n\`\`\`\n\n### Validators\n\n\`\`\`text\n${summary}\n\`\`\`\n\n${failures.join('\n\n')}`;
+            const body=`${marker}\n## PR #364 checkpoint finalizer\n\n- Job status: **${{ job.status }}**\n- Generator status: **${{ steps.generate.outputs.status }}**\n- Validator failure flag: **${{ steps.validate.outputs.failed }}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n\n### Generator\n\n\`\`\`text\n${report}\n\`\`\`\n\n### Validators\n\n\`\`\`text\n${summary}\n\`\`\`\n\n${failures.join('\n\n')}`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((comment)=>comment.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
             else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
 
-      - name: Fail when generated validation failed
-        if: steps.validate.outputs.failed == '1'
+      - name: Fail when generation or validation failed
+        if: steps.generate.outputs.status != '0' || steps.validate.outputs.failed == '1'
         run: exit 1
