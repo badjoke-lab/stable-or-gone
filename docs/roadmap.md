@@ -16,8 +16,9 @@ PR #355 Tier A Dossier Deepening — Batch 2: complete
 PR #356 Market Access Pilot 1: complete
 PR #357 Tier A Dossier Deepening — Batch 3: complete
 PR #358 Record Growth Batch 1: complete
-PR #359 Market Access Pilot 2: active
-PR #360 Evidence and Correction Batch: next
+PR #359 Market Access Pilot 2: complete
+PR #360 Evidence and Correction Batch: active
+post-PR #360 review gate: next
 ```
 
 The current operating mode is:
@@ -67,7 +68,7 @@ named validators, audits, and current work-item outputs
 
 Earlier amendments remain historical records and do not override this current position.
 
-## 3. Completed program through PR #358 and active PR #358 growth
+## 3. Completed program through PR #359 and active PR #358 growth
 
 Completed broad programs include:
 
@@ -137,7 +138,7 @@ PR #355  Tier A Dossier Deepening — Batch 2 — complete
 PR #356  Market Access Pilot 1 — complete
 PR #357  Tier A Dossier Deepening — Batch 3 — complete
 PR #358  Record Growth Batch 1 — complete
-PR #359  Market Access Pilot 2 — active
+PR #359  Market Access Pilot 2 — complete
 PR #360  Evidence and Correction Batch
 REVIEW GATE
 ```
@@ -285,13 +286,13 @@ maximum two new canonical stable assets per growth PR
 
 Supporting record groups must be preserved as applicable.
 
-## 11. PR #359 — Market Access Pilot 2 — active
+## 11. PR #359 — Market Access Pilot 2 — complete
 
 PR #359 may expand only after reviewing Pilot 1 scope, evidence burden, correction burden, and public utility.
 
 No automatic promotion from monitoring or editorial research is allowed.
 
-## 12. PR #360 — Evidence and Correction Batch
+## 12. PR #360 — Evidence and Correction Batch — active
 
 Priority work:
 
@@ -452,7 +453,7 @@ Current work item:
 ```text
 PR #357 Tier A Dossier Deepening — Batch 3: complete
 PR #358 Record Growth Batch 1: complete
-PR #359 Market Access Pilot 2: active
+PR #359 Market Access Pilot 2: complete
 ```
 
 Binding references:
@@ -486,8 +487,8 @@ Current work item:
 
 ```text
 PR #358 Record Growth Batch 1: complete
-PR #359 Market Access Pilot 2: active
-PR #360 Evidence and Correction Batch: next
+PR #359 Market Access Pilot 2: complete
+PR #360 Evidence and Correction Batch: active
 ```
 
 Binding references:
@@ -515,4 +516,37 @@ maximum four new records
 ```
 
 PR #359 preserves 112 canonical assets, 557 canonical Evidence identities, and 174 deployments. It expands Market Access from four to eight records by reusing existing canonical source identities. It adds no public product surface, ranking, score, or automatic monitoring promotion.
+
+## PR #360 active authority
+
+Current work item:
+
+```text
+PR #359 Market Access Pilot 2: complete
+PR #360 Evidence and Correction Batch: active
+post-PR #360 review gate: next
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-14-pr360-evidence-correction-batch-activation.md
+docs/quality/evidence-correction-batch-pr360-spec.md
+config/evidence-correction-batch-pr360.json
+docs/migration/market-access-pilot-2-pr359-reviewed-handoff.json
+docs/migration/evidence-correction-queue-pr360.json
+```
+
+Starting boundary:
+
+```text
+canonical assets: 112
+canonical Evidence: 557
+Evidence Relations: 557
+archive indexes recorded: 380
+archive not recorded: 177
+Market Access Records: 8
+```
+
+PR #360 may touch at most 10 Evidence records and 5 non-Evidence records. Queue selection is internal and does not authorize automatic canonical correction. No asset, Market Access, ranking, score, or public product surface may be added.
 

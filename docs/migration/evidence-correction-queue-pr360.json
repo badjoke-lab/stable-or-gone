@@ -1,0 +1,297 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_correction_queue_pr360_2026_07_14",
+  "status": "internal_review_queue_not_canonical_change",
+  "public_output": false,
+  "review_pr": 360,
+  "selection_rule": "deterministic_priority_then_evidence_id",
+  "canonical_evidence_count": 557,
+  "archive_index_count": 380,
+  "archive_not_recorded_count": 177,
+  "selected_count": 10,
+  "maximum_selected_count": 10,
+  "priority_order": [
+    "regulator_court_legal",
+    "official_issuer_protocol_product",
+    "reserve_attestation_audit",
+    "high_quality_reporting_research",
+    "other_reviewed_source"
+  ],
+  "selected_candidates": [
+    {
+      "evidence_id": "sog_src_busd_reuters_sec_2024",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "SEC ends Paxos BUSD investigation, report",
+      "publisher": "Reuters",
+      "source_type": "news_analysis",
+      "url": "https://www.reuters.com/technology/us-sec-drops-investigation-stablecoin-issuer-paxos-fortune-reports-2024-07-11/",
+      "published_at": "2024-07-11",
+      "stablecoin_ids": [
+        "sog_st_busd"
+      ],
+      "organization_ids": [
+        "sog_issuer_paxos"
+      ],
+      "event_ids": [
+        "sog_ev_busd_2023_02_wind_down"
+      ],
+      "claim_scopes": [
+        "regulatory_followup"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_nuon_disclaimer_batch_b",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "Nuon investment disclaimer",
+      "publisher": "Nuon",
+      "source_type": "legal_terms",
+      "url": "https://docs.nuon.fi/resources/legal-documents/investment-disclaimer",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_nuon"
+      ],
+      "organization_ids": [
+        "sog_issuer_nuon_finance"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "nuon_jurisdiction_and_eligibility_restrictions"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rlusd_user_terms",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "RLUSD Stablecoin User Terms",
+      "publisher": "Ripple",
+      "source_type": "legal_terms",
+      "url": "https://ripple.com/legal/stablecoin/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_rlusd"
+      ],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [
+        "RLUSD user terms, supported networks, customer redemption wording, reserve asset classes, risk factors, suspension and compliance conditions"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_tether_legal_terms",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "Tether legal and redemption terms entry point",
+      "publisher": "Tether",
+      "source_type": "issuer_statement",
+      "url": "https://tether.to/en/legal/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_usdt"
+      ],
+      "organization_ids": [
+        "sog_issuer_tether"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "redemption_access"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_usdc_terms_pr354",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "USDC Terms",
+      "publisher": "Circle",
+      "source_type": "legal_terms",
+      "url": "https://www.circle.com/legal/usdc-terms",
+      "published_at": "2025-12-12",
+      "stablecoin_ids": [
+        "sog_st_usdc"
+      ],
+      "organization_ids": [
+        "sog_issuer_circle"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "holder redemption right, Circle Mint eligibility, reserve ownership for users, reserve segregation, and one-to-one redemption"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_usde_terms_batch_a",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "USDe Terms and Conditions",
+      "publisher": "Ethena",
+      "source_type": "legal_terms",
+      "url": "https://docs.ethena.fi/resources/usde-terms-and-conditions",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_usde"
+      ],
+      "organization_ids": [
+        "sog_issuer_ethena_labs"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "usde_redemption_eligibility_and_non_yielding_asset_context"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_usdt_cftc_2021_event",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "CFTC orders Tether and Bitfinex to pay fines",
+      "publisher": "CFTC",
+      "source_type": "regulatory_source",
+      "url": "https://www.cftc.gov/PressRoom/PressReleases/8450-21",
+      "published_at": "2021-10-15",
+      "stablecoin_ids": [
+        "sog_st_usdt"
+      ],
+      "organization_ids": [
+        "sog_issuer_tether"
+      ],
+      "event_ids": [
+        "sog_ev_usdt_2021_10_cftc_order"
+      ],
+      "claim_scopes": [
+        "regulatory_reserve_context"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_usdt_nyag_2021_event",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "Attorney General James ends virtual currency trading platform Bitfinex's illegal activities in New York",
+      "publisher": "New York Attorney General",
+      "source_type": "regulatory_source",
+      "url": "https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal",
+      "published_at": "2021-02-23",
+      "stablecoin_ids": [
+        "sog_st_usdt"
+      ],
+      "organization_ids": [
+        "sog_issuer_tether"
+      ],
+      "event_ids": [
+        "sog_ev_usdt_2021_02_nyag_settlement"
+      ],
+      "claim_scopes": [
+        "regulatory_reserve_context"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_usdt_terms_pr354",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "Tether Token Terms of Sale and Service",
+      "publisher": "Tether",
+      "source_type": "legal_terms",
+      "url": "https://tether.to/legal/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_usdt"
+      ],
+      "organization_ids": [
+        "sog_issuer_tether"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "issuer relationship, verified-customer redemption claim, reserve ownership language, governing-law scope, eligibility, fees, and restrictions"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_ust_sec_2023_32",
+      "priority_rank": 1,
+      "priority_bucket": "regulator_court_legal",
+      "title": "SEC charges Terraform Labs and Do Kwon with fraud",
+      "publisher": "U.S. SEC",
+      "source_type": "regulatory_source",
+      "url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+      "published_at": "2023-02-16",
+      "stablecoin_ids": [
+        "sog_st_ust"
+      ],
+      "organization_ids": [
+        "sog_issuer_terraform_labs"
+      ],
+      "event_ids": [
+        "sog_ev_ust_2022_05_collapse"
+      ],
+      "claim_scopes": [
+        "regulatory_context"
+      ],
+      "review_reasons": [
+        "archive_not_recorded",
+        "regulator_court_legal"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "remaining_queue_count": 167,
+  "input_digest_sha256": "7bf38e15c5903f0c112fcccf6e1210b46f4da894abd1c668327d96b205dcdaf2",
+  "constraints": {
+    "automatic_canonical_write": false,
+    "manual_review_required": true,
+    "queue_is_internal": true,
+    "market_access_record_changes_allowed": false,
+    "new_canonical_assets_allowed": false
+  }
+}
