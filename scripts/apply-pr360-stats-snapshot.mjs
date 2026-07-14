@@ -6,6 +6,7 @@ const checkpointPath = 'docs/migration/current-stats-history-checkpoint.json';
 const history = JSON.parse(fs.readFileSync(historyPath, 'utf8'));
 const checkpoint = JSON.parse(fs.readFileSync(checkpointPath, 'utf8'));
 const snapshot = generateCurrentHistorySnapshot();
+const archiveCoverage = snapshot.data_quality?.coverage?.archive_evidence;
 
 if (history.checkpoint_policy !== 'append_only_reviewed_pr') throw new Error('Stats history policy must remain append_only_reviewed_pr.');
 if (!Array.isArray(history.snapshots) || history.snapshots.length === 0) throw new Error('Stats history has no snapshots.');
@@ -15,7 +16,8 @@ if (snapshot.checkpoint_id !== checkpoint.checkpoint_id) throw new Error('Genera
 if (snapshot.canonical_checkpoint_id !== checkpoint.canonical_checkpoint_id) throw new Error('Generated canonical checkpoint binding mismatch.');
 if (snapshot.source_checkpoint_id !== checkpoint.source_checkpoint_id) throw new Error('Generated source checkpoint binding mismatch.');
 if (snapshot.totals?.assets !== 112 || snapshot.totals?.evidence !== 557 || snapshot.totals?.market_access_records !== 8) throw new Error(`Unexpected PR #360 totals: ${JSON.stringify(snapshot.totals)}`);
-if (snapshot.evidence?.archive_index_count !== 387 || snapshot.evidence?.archive_not_recorded_count !== 170) throw new Error(`Unexpected PR #360 archive totals: ${JSON.stringify(snapshot.evidence)}`);
+if (archiveCoverage?.count !== 387 || archiveCoverage?.denominator !== 557) throw new Error(`Unexpected PR #360 archive coverage: ${JSON.stringify(archiveCoverage)}`);
+if (snapshot.totals.evidence - archiveCoverage.count !== 170) throw new Error('Unexpected PR #360 no-archive count.');
 
 const existingIndex = history.snapshots.findIndex((row) => row.checkpoint_id === snapshot.checkpoint_id);
 if (existingIndex >= 0) {
@@ -43,7 +45,8 @@ console.log(JSON.stringify({
   checkpoint_id:snapshot.checkpoint_id,
   canonical_checkpoint_id:snapshot.canonical_checkpoint_id,
   totals:snapshot.totals,
-  evidence:snapshot.evidence,
+  archive_coverage:archiveCoverage,
+  archive_not_recorded:snapshot.totals.evidence - archiveCoverage.count,
   stats_model_sha256:snapshot.stats_model_sha256,
   snapshot_sha256:snapshot.snapshot_sha256
 },null,2));
