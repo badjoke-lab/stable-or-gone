@@ -30,64 +30,18 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Generate PR 363 planning outputs
-        id: generate
-        continue-on-error: true
         run: node scripts/build-record-depth-baseline-refresh-pr363.mjs
 
       - name: Activate PR 363 authority
-        id: authority
-        continue-on-error: true
         run: node scripts/activate-pr363-record-depth-refresh.mjs
 
-      - name: Validate deterministic baseline
-        id: baseline
-        continue-on-error: true
-        run: node scripts/validate-record-depth-baseline-refresh-pr363.mjs
-
-      - name: Validate active workstream
-        id: workstream
-        continue-on-error: true
-        run: npm run validate:active-workstream
-
-      - name: Validate non-UI release material
-        id: non_ui
-        continue-on-error: true
-        run: node scripts/validate-non-ui-release-material.mjs
-
-      - name: Stage diagnostic artifact
-        if: always()
+      - name: Validate generated baseline and authority
         run: |
-          mkdir -p artifacts/pr363-bootstrap
-          for file in \
-            README.md \
-            AGENTS.md \
-            docs/spec-governance.md \
-            docs/roadmap.md \
-            docs/post-351-data-growth-operating-spec.md \
-            scripts/check-workstream-122.mjs \
-            scripts/validate-active-workstream.mjs \
-            scripts/validate-non-ui-release-material.mjs \
-            docs/migration/record-depth-baseline-pr363-summary.json \
-            docs/migration/record-depth-baseline-pr363-delta.json \
-            docs/migration/tier-a-candidate-queue-pr363.json; do
-            if [ -e "$file" ]; then cp --parents "$file" artifacts/pr363-bootstrap/; fi
-          done
-          git diff --stat > artifacts/pr363-bootstrap/diff-stat.txt || true
-          git status --short > artifacts/pr363-bootstrap/status.txt || true
-
-      - name: Upload diagnostic artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr363-bootstrap-${{ github.run_id }}
-          path: artifacts/pr363-bootstrap
-          if-no-files-found: error
-          retention-days: 7
+          node scripts/validate-record-depth-baseline-refresh-pr363.mjs
+          npm run validate:active-workstream
+          node scripts/validate-non-ui-release-material.mjs
 
       - name: Commit generated planning checkpoint
-        id: commit
-        if: steps.generate.outcome == 'success' && steps.authority.outcome == 'success' && steps.baseline.outcome == 'success' && steps.workstream.outcome == 'success' && steps.non_ui.outcome == 'success'
-        continue-on-error: true
         run: |
           if git diff --quiet; then
             echo 'PR #363 outputs are already synchronized.'
@@ -99,10 +53,6 @@ jobs:
           git commit -m 'Generate reviewed 112-asset Record Depth baseline'
           git pull --rebase origin pr363-record-depth-baseline-refresh
           git push origin HEAD:pr363-record-depth-baseline-refresh
-
-      - name: Fail when bootstrap is incomplete
-        if: steps.generate.outcome != 'success' || steps.authority.outcome != 'success' || steps.baseline.outcome != 'success' || steps.workstream.outcome != 'success' || steps.non_ui.outcome != 'success' || steps.commit.outcome == 'failure'
-        run: exit 1
 
       - name: Publish bootstrap status
         if: always()
@@ -119,14 +69,6 @@ jobs:
             ## PR #363 Record Depth bootstrap
 
             - Workflow status: **${{ job.status }}**
-            - Generate outputs: **${{ steps.generate.outcome }}**
-            - Activate authority: **${{ steps.authority.outcome }}**
-            - Validate baseline: **${{ steps.baseline.outcome }}**
-            - Validate workstream: **${{ steps.workstream.outcome }}**
-            - Validate non-UI material: **${{ steps.non_ui.outcome }}**
-            - Commit/push: **${{ steps.commit.outcome }}**
-            - Run ID: **${context.runId}**
-            - Artifact: \`pr363-bootstrap-${context.runId}\`
             - Assets: **${summary?.asset_count ?? 'not-generated'}**
             - Dimensions: **${summary?.dimension_count ?? 'not-generated'}**
             - Planning cells: **${summary?.cell_count ?? 'not-generated'}**
