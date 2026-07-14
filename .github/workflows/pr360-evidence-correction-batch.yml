@@ -44,8 +44,10 @@ jobs:
       - name: Validate Evidence integrity
         run: node scripts/validate-registry-evidence-integrity-audit.mjs
 
-      - name: Validate Evidence deduplication
-        run: npm run validate:evidence-deduplication
+      - name: Regenerate and validate Evidence deduplication
+        run: |
+          npm run generate:evidence-deduplication
+          npm run validate:evidence-deduplication
 
       - name: Validate organization and relationship integrity
         run: node scripts/validate-registry-organization-relationship-audit.mjs
