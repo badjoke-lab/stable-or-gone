@@ -179,7 +179,7 @@ const withdrawal = rlusdRows.find((row) => row.function === 'withdrawal');
 expect(withdrawal?.conditions.some((row) => row.type === 'withdrawal_limit'), 'RLUSD withdrawal limit missing');
 const external = rlusdRows.find((row) => row.function === 'external_wallet_transfer');
 expect(external?.access_state === 'restricted_network_scope', 'RLUSD external wallet transfer must remain network-restricted');
-expect(!JSON.stringify(rlusdRows).toLowerCase().includes('xrpl support'), 'RLUSD records must not claim VCTRADE XRPL support');
+expect(rlusdRows.every((row) => !(row.network_scope?.network_ids ?? []).some((networkId) => String(networkId).toLowerCase().includes('xrpl'))), 'RLUSD records must not claim VCTRADE XRPL support');
 
 const rlusdEvidence = evidenceById.get('sog_src_rlusd_japan_launch_sbi_vc_2026');
 const rlusdScopes = normalizeScope([rlusdEvidence?.claim_scope, ...(rlusdEvidence?.claim_scopes ?? [])].join(' '));
