@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_tier_a_dossier_batch_4_pr364_v1",
+  "status": "reviewed_selection_pending_source_findings",
+  "review_pr": 364,
+  "reviewed_at": "2026-07-14",
+  "source_summary": "docs/migration/record-depth-baseline-pr363-summary.json",
+  "source_queue": "docs/migration/tier-a-candidate-queue-pr363.json",
+  "source_delta": "docs/migration/record-depth-baseline-pr363-delta.json",
+  "prior_batch_handoffs": [
+    "docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json",
+    "docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json",
+    "docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json"
+  ],
+  "selection_rule": "reviewed_material_gap_and_new_source_opportunity_non_ranking",
+  "max_assets": 5,
+  "selected_assets": [
+    {
+      "asset_slug": "husd",
+      "asset_id": "sog_st_husd",
+      "target_dimensions": ["redemption"],
+      "selection_reason": "Historical redemption gap remains after a prior bounded improvement; review only newly supportable lifecycle and redemption facts.",
+      "prior_review_state": "canonical_improvement_in_pr357"
+    },
+    {
+      "asset_slug": "poundtoken",
+      "asset_id": "sog_st_1gbp",
+      "target_dimensions": ["lifecycle", "organization_relationships", "redemption"],
+      "selection_reason": "Never consumed by the completed dossier batches and retains three material dossier gaps with regional and historical relevance.",
+      "prior_review_state": "not_consumed_by_pr354_pr355_pr357"
+    },
+    {
+      "asset_slug": "rlusd",
+      "asset_id": "sog_st_rlusd",
+      "target_dimensions": ["redemption"],
+      "selection_reason": "Comparison and Market Access utility remain high while redemption planning remains partial; review only source-versioned redemption terms not already captured in PR354.",
+      "prior_review_state": "canonical_improvement_in_pr354"
+    },
+    {
+      "asset_slug": "usdg",
+      "asset_id": "sog_st_usdg",
+      "target_dimensions": ["legal_profile", "redemption"],
+      "selection_reason": "Never consumed by prior dossier batches and retains both legal-profile and redemption gaps with current issuer documentation potential.",
+      "prior_review_state": "not_consumed_by_pr354_pr355_pr357"
+    },
+    {
+      "asset_slug": "usds",
+      "asset_id": "sog_st_usds",
+      "target_dimensions": ["legal_profile"],
+      "selection_reason": "Never consumed by prior dossier batches and retains a focused legal-profile gap with strong Compare-preset relevance.",
+      "prior_review_state": "not_consumed_by_pr354_pr355_pr357"
+    }
+  ],
+  "explicit_exclusions": [
+    {
+      "asset_slug": "audd",
+      "reason": "PR357 reviewed no safe canonical change; no new source finding has yet been accepted."
+    },
+    {
+      "asset_slug": "nzds",
+      "reason": "PR357 reviewed no safe canonical change; no new source finding has yet been accepted."
+    },
+    {
+      "asset_slug": "busd",
+      "reason": "Completed in PR354; remaining redemption planning gap is deferred behind unconsumed candidates."
+    },
+    {
+      "asset_slug": "frax",
+      "reason": "Completed in PR355; remaining redemption planning gap is deferred behind unconsumed candidates."
+    },
+    {
+      "asset_slug": "usdp",
+      "reason": "Completed in PR355; remaining redemption planning gap is deferred behind unconsumed candidates."
+    }
+  ],
+  "authorized_record_families": [
+    "organizations",
+    "relationships",
+    "stablecoin_profiles",
+    "events",
+    "event_details",
+    "evidence",
+    "evidence_relations",
+    "legal_profiles",
+    "known_unknowns",
+    "regulatory_notes"
+  ],
+  "authorized_redemption_asset_slugs": ["husd", "poundtoken", "rlusd", "usdg"],
+  "authorized_legal_profile_asset_slugs": ["usdg", "usds"],
+  "authorized_lifecycle_asset_slugs": ["poundtoken"],
+  "authorized_organization_relationship_asset_slugs": ["poundtoken"],
+  "source_review_requirements": {
+    "manual_review_required": true,
+    "official_or_primary_source_preferred": true,
+    "exact_source_identity_required": true,
+    "dated_version_or_access_boundary_required": true,
+    "no_safe_change_outcome_allowed": true,
+    "monitoring_auto_promotion_allowed": false,
+    "editorial_research_auto_promotion_allowed": false
+  },
+  "new_canonical_assets_allowed": false,
+  "market_access_records_allowed": false,
+  "new_public_surface_allowed": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "next_pr": 365
+}

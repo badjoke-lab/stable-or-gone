@@ -1,0 +1,60 @@
+[
+  {
+    "id": "sog_src_usdg_paxos_stablecoin_terms_pr364",
+    "stablecoin_id": "sog_st_usdg",
+    "issuer_id": "sog_issuer_paxos_digital_singapore",
+    "event_id": null,
+    "source_type": "legal_terms",
+    "title": "US Dollar-Backed Stablecoin Terms and Conditions",
+    "url": "https://www.paxos.com/terms-and-conditions/stablecoin-terms-conditions",
+    "publisher": "Paxos",
+    "published_at": "2026-06-30",
+    "archived_url": null,
+    "accessed_at": "2026-07-14",
+    "reliability": "high",
+    "claim_scope": "usdg_joint_issuers_customer_eligibility_one_to_one_redemption_fees_settlement_and_reserve_segregation",
+    "stablecoin_ids": ["sog_st_usdg"],
+    "organization_ids": [
+      "sog_issuer_paxos_digital_singapore",
+      "sog_issuer_paxos_issuance_europe"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "legal_issuer_identity",
+      "licensing_context",
+      "customer_only_direct_redemption",
+      "one_to_one_redemption",
+      "redemption_minimum",
+      "fees",
+      "settlement_timing",
+      "reserve_segregation"
+    ],
+    "notes": "Terms last modified 2026-06-30. They identify Paxos Digital Singapore and Paxos Issuance Europe as joint USDG issuers, restrict direct purchase and redemption to verified Paxos customers, and state jurisdiction- and account-dependent service availability."
+  },
+  {
+    "id": "sog_src_usds_sky_protocol_interface_pr364",
+    "stablecoin_id": "sog_st_usds",
+    "issuer_id": "sog_issuer_makerdao_sky",
+    "event_id": null,
+    "source_type": "protocol_app",
+    "title": "Sky.money USDS protocol, collateral, conversion, and interface disclosures",
+    "url": "https://sky.money/",
+    "publisher": "Sky.money / Skybase International",
+    "published_at": null,
+    "archived_url": null,
+    "accessed_at": "2026-07-14",
+    "reliability": "high",
+    "claim_scope": "usds_protocol_asset_collateral_system_conversion_and_non_custodial_interface_separation",
+    "stablecoin_ids": ["sog_st_usds"],
+    "organization_ids": ["sog_issuer_makerdao_sky"],
+    "event_ids": [],
+    "claim_scopes": [
+      "protocol_asset_classification",
+      "protocol_collateral_backing",
+      "usdc_usds_conversion",
+      "decentralized_governance",
+      "non_custodial_interface_separation"
+    ],
+    "notes": "The reviewed page describes USDS as the native stablecoin of Sky Protocol, reports system collateral backing, and states that Sky.money is a non-custodial interface operated independently by Skybase without control over protocol smart contracts or governance."
+  }
+]

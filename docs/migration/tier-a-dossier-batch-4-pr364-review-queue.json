@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_tier_a_dossier_batch_4_pr364_review_queue_v1",
+  "status": "internal_manual_source_review_queue",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 364,
+  "reviewed_at": "2026-07-14",
+  "source_baseline_id": "sog_record_depth_baseline_pr363_v1",
+  "source_queue": "docs/migration/tier-a-candidate-queue-pr363.json",
+  "selection_config": "config/tier-a-dossier-batch-4-pr364.json",
+  "selected_count": 5,
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "canonical_promotion_authorized": false,
+  "manual_review_required": true,
+  "items": [
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "target_dimensions": ["redemption"],
+      "review_questions": [
+        "Does a dated primary source establish the redemption path or its termination boundary?",
+        "Does the source clarify who controlled redemption and under what eligibility conditions?",
+        "Is the fact new relative to the PR357 accepted evidence?"
+      ],
+      "source_priority": ["issuer_or_operator_terms", "official_announcement", "regulator_or_court_record", "archived_primary_source"],
+      "review_status": "pending_manual_source_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "target_dimensions": ["lifecycle", "organization_relationships", "redemption"],
+      "review_questions": [
+        "What organization issued or controlled poundtoken / 1GBP at each material lifecycle point?",
+        "Does a dated primary source establish launch, suspension, migration, discontinuation, or continuing operation?",
+        "What redemption eligibility and process were actually stated?"
+      ],
+      "source_priority": ["issuer_legal_terms", "issuer_announcement", "company_or_regulator_record", "archived_primary_source"],
+      "review_status": "pending_manual_source_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "target_dimensions": ["redemption"],
+      "review_questions": [
+        "Do current dated RLUSD terms distinguish direct redemption from platform trading or transfer?",
+        "Which eligible customer or jurisdiction restrictions are explicit?",
+        "Does the current source supersede or only restate the PR354 redemption evidence?"
+      ],
+      "source_priority": ["issuer_legal_terms", "issuer_product_documentation", "regulator_record"],
+      "review_status": "pending_manual_source_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "target_dimensions": ["legal_profile", "redemption"],
+      "review_questions": [
+        "Which legal entity issues USDG and under which jurisdictional framework?",
+        "Who is eligible for direct redemption and what process is stated?",
+        "Are network, partner, or distribution roles distinct from issuer obligations?"
+      ],
+      "source_priority": ["issuer_legal_terms", "issuer_product_documentation", "regulator_register", "official_network_documentation"],
+      "review_status": "pending_manual_source_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "target_dimensions": ["legal_profile"],
+      "review_questions": [
+        "What legal or protocol entity relationships are explicitly documented for USDS?",
+        "Which terms govern issuance, conversion, or use without conflating protocol mechanics with legal redemption rights?",
+        "Does a dated source establish the effective legal profile at the current checkpoint?"
+      ],
+      "source_priority": ["protocol_legal_terms", "official_governance_documentation", "official_product_documentation", "regulator_or_legal_record"],
+      "review_status": "pending_manual_source_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "completion_rule": "Every item must receive a source-linked changed or reviewed-no-safe-change finding before canonical application."
+}

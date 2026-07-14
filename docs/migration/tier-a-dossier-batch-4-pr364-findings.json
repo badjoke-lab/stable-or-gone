@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "findings_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+  "status": "reviewed_source_findings",
+  "review_pr": 364,
+  "reviewed_at": "2026-07-14",
+  "source_queue": "docs/migration/tier-a-dossier-batch-4-pr364-review-queue.json",
+  "selected_asset_count": 5,
+  "changed_asset_count": 2,
+  "reviewed_no_safe_change_count": 3,
+  "findings": [
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "target_dimensions": [
+        "redemption"
+      ],
+      "decision": "reviewed_no_safe_change",
+      "reviewed_evidence_ids": [
+        "sog_src_husd_background_batch_d",
+        "sog_src_husd_depeg_batch_d",
+        "sog_src_husd_legal_attestation_status_2026"
+      ],
+      "reason": "Historical issuer and depeg material does not establish a current or final direct-redemption process, remaining liabilities, reserve disposition, or final legal responsibility. Existing explicit unknowns remain the safest canonical state.",
+      "canonical_files_changed": []
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "target_dimensions": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "decision": "reviewed_no_safe_change",
+      "reviewed_evidence_ids": [
+        "sog_src_1gbp_etherscan_batch_u",
+        "sog_src_1gbp_whitepaper_metadata_batch_u",
+        "sog_src_1gbp_domain_state_batch_u"
+      ],
+      "reason": "The current poundtoken.io domain no longer presents the historical issuer, reserve, or redemption service, but domain repurposing does not prove the legal issuer's dissolution, a precise end date, or the final redemption outcome. Existing unknown lifecycle and issuer states remain unchanged.",
+      "canonical_files_changed": []
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "target_dimensions": [
+        "redemption"
+      ],
+      "decision": "reviewed_no_safe_change",
+      "reviewed_evidence_ids": [
+        "sog_src_rlusd_user_terms",
+        "sog_src_rlusd_ripple_page"
+      ],
+      "reason": "The current RLUSD User Terms remain dated 2024-10-03 and continue to support the customer-only one-to-one redemption profile already normalized in PR #354. No source-versioned change requiring a new canonical override was found.",
+      "canonical_files_changed": []
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "target_dimensions": [
+        "legal_profile",
+        "redemption"
+      ],
+      "decision": "canonical_change_applied",
+      "reviewed_evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ],
+      "reason": "Paxos terms last modified 2026-06-30 identify Paxos Digital Singapore and Paxos Issuance Europe as joint USDG issuers, state their licensing bases, limit direct purchase and redemption to verified customers, and provide one-to-one redemption, minimum, fee, settlement, and segregation terms.",
+      "canonical_files_changed": [
+        "data/organizations-pr364-tier-a-batch-4.json",
+        "data/relationships-pr364-tier-a-batch-4.json",
+        "data/evidence-pr364-tier-a-batch-4.json",
+        "data/stablecoin-profiles-v2.json",
+        "data/legal-profiles-v3-batch-d2a.json",
+        "data/known-unknowns-extra.json"
+      ],
+      "changed_dimensions": [
+        "legal_profile",
+        "redemption"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "target_dimensions": [
+        "legal_profile"
+      ],
+      "decision": "canonical_change_applied",
+      "reviewed_evidence_ids": [
+        "sog_src_usds_sky_page",
+        "sog_src_usds_developer_docs",
+        "sog_src_usds_sky_protocol_interface_pr364"
+      ],
+      "reason": "Current Sky disclosures identify USDS as the native stablecoin of Sky Protocol, describe system collateral backing and decentralized governance, and state that Sky.money is a non-custodial interface without control over protocol contracts or governance. This supports a protocol-asset legal profile without a direct corporate holder claim.",
+      "canonical_files_changed": [
+        "data/evidence-pr364-tier-a-batch-4.json",
+        "data/legal-profiles-v3-batch-d2a.json"
+      ],
+      "changed_dimensions": [
+        "legal_profile"
+      ]
+    }
+  ],
+  "boundaries": {
+    "new_canonical_assets": 0,
+    "market_access_record_changes": 0,
+    "deployment_changes": 0,
+    "reserve_report_changes": 0,
+    "income_profile_changes": 0,
+    "new_public_surface": false,
+    "asset_rank": false,
+    "single_composite_score": false,
+    "automatic_promotion": false
+  }
+}

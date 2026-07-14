@@ -30,8 +30,17 @@ expect(JSON.stringify(report.organizations?.without_official_url ?? []) === JSON
   'sog_issuer_stable_universal',
   'sog_issuer_blackfridge'
 ]), 'unexpected organization official-url gap set');
-expect((report.organizations?.exact_shared_official_urls ?? []).length === 1, 'unexpected exact shared official URL count');
-expect(report.organizations?.exact_shared_official_urls?.[0]?.url === 'https://circle.com/usyc', 'unexpected shared USYC product URL boundary');
+const exactSharedUrls = (report.organizations?.exact_shared_official_urls ?? []).map((row) => row.url).sort();
+expect(JSON.stringify(exactSharedUrls) === JSON.stringify([
+  'https://circle.com/usyc',
+  'https://paxos.com/'
+]), `unexpected exact shared official URL set: ${JSON.stringify(exactSharedUrls)}`);
+const paxosShared = (report.organizations?.exact_shared_official_urls ?? []).find((row) => row.url === 'https://paxos.com/');
+expect(JSON.stringify(paxosShared?.organization_ids ?? []) === JSON.stringify([
+  'sog_issuer_paxos',
+  'sog_issuer_paxos_digital_singapore',
+  'sog_issuer_paxos_issuance_europe'
+]), 'unexpected Paxos shared corporate URL organization set');
 expect(JSON.stringify(report.relationships?.ended_without_end_date ?? []) === JSON.stringify([
   'sog_rel_husd_stable_universal',
   'sog_rel_esd_empty_set_operator',

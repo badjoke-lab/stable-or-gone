@@ -515,7 +515,7 @@ Current work item:
 ```text
 PR #360 Evidence and Correction Batch: complete
 PR #361 Post-PR #360 Review Gate: complete
-PR #363 Record Depth and Coverage Baseline Refresh: active
+PR #363 Record Depth and Coverage Baseline Refresh: complete
 ```
 
 Approved bounded sequence after review:
@@ -547,7 +547,7 @@ docs/migration/post-pr360-review-gate-pr361.json
 ```
 
 
-PR #364 Tier A Dossier Deepening Batch 4: next
+PR #364 Tier A Dossier Deepening Batch 4: active
 
 
 ## PR #363 active Record Depth refresh authority
@@ -556,8 +556,8 @@ Current work item:
 
 ```text
 PR #361 Post-PR #360 Review Gate: complete
-PR #363 Record Depth and Coverage Baseline Refresh: active
-PR #364 Tier A Dossier Deepening Batch 4: next
+PR #363 Record Depth and Coverage Baseline Refresh: complete
+PR #364 Tier A Dossier Deepening Batch 4: active
 ```
 
 Binding references:
@@ -580,3 +580,41 @@ docs/migration/tier-a-candidate-queue-pr363.json
 ```
 
 PR #363 changes no canonical data or public product surface. The refreshed queue is internal, deterministic, and non-ranking. PR #364 may select at most five assets only after manual source review.
+
+PR #365 Evidence and Archive Maintenance Batch 2: next
+
+
+## PR #364 active Tier A Dossier Batch 4 authority
+
+Current work item:
+
+```text
+PR #363 Record Depth and Coverage Baseline Refresh: complete
+PR #364 Tier A Dossier Deepening Batch 4: active
+PR #365 Evidence and Archive Maintenance Batch 2: next
+```
+
+Reviewed non-ranking selection:
+
+```text
+HUSD: redemption
+poundtoken: lifecycle, organization relationships, redemption
+RLUSD: redemption
+USDG: legal profile, redemption
+USDS: legal profile
+```
+
+Binding references:
+
+```text
+docs/roadmap-amendments/2026-07-14-pr364-tier-a-batch-4-activation.md
+docs/quality/tier-a-dossier-batch-4-pr364-spec.md
+config/tier-a-dossier-batch-4-pr364.json
+docs/migration/record-depth-baseline-pr363-summary.json
+docs/migration/record-depth-baseline-pr363-delta.json
+docs/migration/tier-a-candidate-queue-pr363.json
+docs/migration/tier-a-dossier-batch-4-pr364-review-queue.json
+docs/migration/tier-a-dossier-batch-4-pr364-findings.json
+```
+
+PR #364 may improve only the five reviewed existing dossiers and authorized dimensions. It adds no stable asset, Market Access Record, deployment, reserve report, income profile, public surface, ranking, score, or automatic promotion path.
