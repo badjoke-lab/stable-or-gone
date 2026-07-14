@@ -89,6 +89,20 @@ jobs:
           run_check stats-history env SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
           if [ "$failed" -ne 0 ]; then exit 1; fi
 
+      - name: Export validated files
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr364-validated-files-${{ github.run_id }}
+          path: |
+            data/stablecoin-profiles-v2.json
+            config/primary-display-relationships.mjs
+            scripts/validate-tier-a-dossier-batch-4-pr364.mjs
+            scripts/validate-registry-evidence-integrity-audit.mjs
+            docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
+            data/stats-history.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Commit validated scope correction
         run: |
           git config user.name 'github-actions[bot]'
@@ -128,12 +142,7 @@ jobs:
             try{handoff=JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json','utf8'));}catch{}
             const dir='artifacts/pr364-apply-diagnostic';
             const summary=fs.existsSync(`${dir}/summary.txt`)?fs.readFileSync(`${dir}/summary.txt`,'utf8').trim():'not generated';
-            const failures=[];
-            if(fs.existsSync(dir)) for(const name of fs.readdirSync(dir).filter((name)=>name.endsWith('.log')).sort()) {
-              const text=fs.readFileSync(`${dir}/${name}`,'utf8');
-              if(text.match(/error|failed|invalid|mismatch|missing|must|expected/i)) failures.push(`### ${name}\n\n\`\`\`text\n${text.split('\n').slice(-30).join('\n').slice(-5000)}\n\`\`\``);
-            }
-            const body=`${marker}\n## PR #364 validated scope application\n\n- Status: **${{ job.status }}**\n- Stats model SHA-256: \`${handoff?.stats_model_sha256??'not-generated'}\`\n- Stats snapshot SHA-256: \`${handoff?.stats_snapshot_sha256??'not-generated'}\`\n- Head: \`${context.sha}\`\n\n\`\`\`text\n${summary}\n\`\`\`\n\n${failures.join('\n\n')}`;
+            const body=`${marker}\n## PR #364 validated scope application\n\n- Status: **${{ job.status }}**\n- Validated-files artifact: \`pr364-validated-files-${context.runId}\`\n- Stats model SHA-256: \`${handoff?.stats_model_sha256??'not-generated'}\`\n- Stats snapshot SHA-256: \`${handoff?.stats_snapshot_sha256??'not-generated'}\`\n- Head: \`${context.sha}\`\n\n\`\`\`text\n${summary}\n\`\`\`\n`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((comment)=>comment.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
