@@ -37,6 +37,7 @@ expect(JSON.stringify(exactSharedUrls) === JSON.stringify([
 ]), `unexpected exact shared official URL set: ${JSON.stringify(exactSharedUrls)}`);
 const paxosShared = (report.organizations?.exact_shared_official_urls ?? []).find((row) => row.url === 'https://paxos.com/');
 expect(JSON.stringify(paxosShared?.organization_ids ?? []) === JSON.stringify([
+  'sog_issuer_paxos',
   'sog_issuer_paxos_digital_singapore',
   'sog_issuer_paxos_issuance_europe'
 ]), 'unexpected Paxos shared corporate URL organization set');
