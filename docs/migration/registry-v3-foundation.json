@@ -46,7 +46,8 @@
       "data/w-legal.json",
       "data/x-legal.json",
       "data/y-legal.json",
-      "data/z-legal.json"
+      "data/z-legal.json",
+      "data/legal-profiles-v3-pr364-tier-a-batch-4.json"
     ],
     "stable_asset_relationships": [
       "data/stable-asset-relationships-v3.json",
