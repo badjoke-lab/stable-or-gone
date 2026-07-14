@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_rel_usdg_paxos_digital_singapore_pr364",
+    "stablecoin_id": "sog_st_usdg",
+    "organization_id": "sog_issuer_paxos_digital_singapore",
+    "role": "legal_issuer",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_usdg_paxos_page",
+      "sog_src_usdg_paxos_stablecoin_terms_pr364"
+    ],
+    "notes": "Current USDG legal issuer relationship under Singapore licensing. The exact effective start date is not asserted by this batch."
+  },
+  {
+    "id": "sog_rel_usdg_paxos_issuance_europe_pr364",
+    "stablecoin_id": "sog_st_usdg",
+    "organization_id": "sog_issuer_paxos_issuance_europe",
+    "role": "legal_issuer",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_usdg_paxos_page",
+      "sog_src_usdg_paxos_stablecoin_terms_pr364"
+    ],
+    "notes": "Current USDG legal issuer relationship under Finnish EMI supervision and EU MiCA context. The exact effective start date is not asserted by this batch."
+  }
+]
