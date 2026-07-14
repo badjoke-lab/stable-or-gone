@@ -43,6 +43,20 @@ jobs:
           node scripts/validate-registry-deployment-chain-identity-audit.mjs
           node scripts/validate-next-growth-candidate-audit-pr329.mjs
           npm run validate:final
+      - name: Validate remaining normal CI contracts
+        run: |
+          npm run validate:launch-queue
+          npm run validate:terminal-queue
+          npm run validate:candidates
+          node scripts/validate-registry-v2-compat-batch-t.mjs
+          npm run validate:classification
+          npm run validate:profiles
+          npm run validate:events-v2
+          npm run validate:migration-v3
+          npm run validate:reproducible-build
+          node scripts/validate-audited-100-checkpoint.mjs
+          node scripts/validate-non-ui-release-material.mjs
+          npm run validate:ui-v3-cleanup
       - name: Validate registry and release integrity
         run: |
           npm run validate:v3
