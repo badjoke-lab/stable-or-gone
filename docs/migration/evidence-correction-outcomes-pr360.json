@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_evidence_correction_outcomes_pr360_2026_07_14",
+  "status": "reviewed_internal_correction_report",
+  "public_output": false,
+  "review_pr": 360,
+  "queue_id": "sog_evidence_correction_queue_pr360_2026_07_14",
+  "canonical_evidence_count_before": 557,
+  "canonical_evidence_count_after": 557,
+  "evidence_relation_count_before": 557,
+  "evidence_relation_count_after": 557,
+  "archive_index_count_before": 380,
+  "archive_index_count_after": 384,
+  "archive_not_recorded_count_before": 177,
+  "archive_not_recorded_count_after": 173,
+  "selected_count": 10,
+  "changed_count": 4,
+  "reviewed_no_change_count": 6,
+  "changed_files": [
+    "data/evidence-events-pr036.json",
+    "data/evidence.json"
+  ],
+  "outcomes": [
+    {
+      "evidence_id": "sog_src_busd_reuters_sec_2024",
+      "source_file": "data/evidence.json",
+      "review_status": "reviewed_archive_index_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/*/https://www.reuters.com/technology/us-sec-drops-investigation-stablecoin-issuer-paxos-fortune-reports-2024-07-11/"
+      },
+      "reason": "Dated regulator or high-quality reporting source selected from the deterministic no-archive queue. Added the Wayback Machine capture index for the exact canonical source URL without changing source identity, subject relations, claim scope, title, publisher, or publication date.",
+      "remaining_uncertainty": "The index is not treated as proof of any individual timestamped capture; individual captures remain subject to later source review."
+    },
+    {
+      "evidence_id": "sog_src_nuon_disclaimer_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://docs.nuon.fi/resources/legal-documents/investment-disclaimer"
+      },
+      "new_value": null,
+      "reason": "Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.",
+      "remaining_uncertainty": "A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope."
+    },
+    {
+      "evidence_id": "sog_src_rlusd_user_terms",
+      "source_file": "data/evidence-extra.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://ripple.com/legal/stablecoin/"
+      },
+      "new_value": null,
+      "reason": "Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.",
+      "remaining_uncertainty": "A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope."
+    },
+    {
+      "evidence_id": "sog_src_tether_legal_terms",
+      "source_file": "data/evidence.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://tether.to/en/legal/"
+      },
+      "new_value": null,
+      "reason": "Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.",
+      "remaining_uncertainty": "A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope."
+    },
+    {
+      "evidence_id": "sog_src_usdc_terms_pr354",
+      "source_file": "data/evidence-extra.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://www.circle.com/legal/usdc-terms"
+      },
+      "new_value": null,
+      "reason": "Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.",
+      "remaining_uncertainty": "A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope."
+    },
+    {
+      "evidence_id": "sog_src_usde_terms_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://docs.ethena.fi/resources/usde-terms-and-conditions"
+      },
+      "new_value": null,
+      "reason": "Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.",
+      "remaining_uncertainty": "A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope."
+    },
+    {
+      "evidence_id": "sog_src_usdt_cftc_2021_event",
+      "source_file": "data/evidence-events-pr036.json",
+      "review_status": "reviewed_archive_index_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/*/https://www.cftc.gov/PressRoom/PressReleases/8450-21"
+      },
+      "reason": "Dated regulator or high-quality reporting source selected from the deterministic no-archive queue. Added the Wayback Machine capture index for the exact canonical source URL without changing source identity, subject relations, claim scope, title, publisher, or publication date.",
+      "remaining_uncertainty": "The index is not treated as proof of any individual timestamped capture; individual captures remain subject to later source review."
+    },
+    {
+      "evidence_id": "sog_src_usdt_nyag_2021_event",
+      "source_file": "data/evidence-events-pr036.json",
+      "review_status": "reviewed_archive_index_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/*/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
+      },
+      "reason": "Dated regulator or high-quality reporting source selected from the deterministic no-archive queue. Added the Wayback Machine capture index for the exact canonical source URL without changing source identity, subject relations, claim scope, title, publisher, or publication date.",
+      "remaining_uncertainty": "The index is not treated as proof of any individual timestamped capture; individual captures remain subject to later source review."
+    },
+    {
+      "evidence_id": "sog_src_usdt_terms_pr354",
+      "source_file": "data/evidence-pr354-tier-a-batch-1.json",
+      "review_status": "reviewed_no_safe_canonical_change",
+      "correction_type": null,
+      "previous_value": {
+        "archived_url": null,
+        "url": "https://tether.to/legal/"
+      },
+      "new_value": null,
+      "reason": "Dynamic legal or terms page. A generic archive index was not added because the currently recorded claim scope may depend on a specific terms version and no reviewed dated capture was bound in this batch.",
+      "remaining_uncertainty": "A later correction may add a dated archive capture after matching the capture text and effective version to the canonical claim scope."
+    },
+    {
+      "evidence_id": "sog_src_ust_sec_2023_32",
+      "source_file": "data/evidence.json",
+      "review_status": "reviewed_archive_index_added",
+      "correction_type": "archive_supplementation",
+      "previous_value": {
+        "archived_url": null
+      },
+      "new_value": {
+        "archived_url": "https://web.archive.org/web/*/https://www.sec.gov/newsroom/press-releases/2023-32"
+      },
+      "reason": "Dated regulator or high-quality reporting source selected from the deterministic no-archive queue. Added the Wayback Machine capture index for the exact canonical source URL without changing source identity, subject relations, claim scope, title, publisher, or publication date.",
+      "remaining_uncertainty": "The index is not treated as proof of any individual timestamped capture; individual captures remain subject to later source review."
+    }
+  ],
+  "constraints": {
+    "new_evidence_identities": 0,
+    "removed_evidence_identities": 0,
+    "evidence_relation_changes": 0,
+    "asset_changes": 0,
+    "market_access_record_changes": 0,
+    "new_public_surface": false
+  }
+}
