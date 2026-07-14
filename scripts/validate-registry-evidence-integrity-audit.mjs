@@ -14,10 +14,12 @@ const correctionConfigPath = 'config/evidence-correction-batch-pr360.json';
 const correctionOutcomePath = 'docs/migration/evidence-correction-outcomes-pr360.json';
 const correctionConfig = fs.existsSync(correctionConfigPath) ? JSON.parse(fs.readFileSync(correctionConfigPath, 'utf8')) : null;
 const correctionOutcome = fs.existsSync(correctionOutcomePath) ? JSON.parse(fs.readFileSync(correctionOutcomePath, 'utf8')) : null;
-const expectedArchiveNotRecorded = correctionOutcome?.archive_not_recorded_count_after
+const expectedArchiveNotRecorded = checkpoint.evidence_quality?.archive_not_recorded_count
+  ?? correctionOutcome?.archive_not_recorded_count_after
   ?? correctionConfig?.archive_not_recorded_count_before
   ?? 177;
-const expectedArchiveRecorded = correctionOutcome?.archive_index_count_after
+const expectedArchiveRecorded = checkpoint.evidence_quality?.archive_index_count
+  ?? correctionOutcome?.archive_index_count_after
   ?? (expectedEvidence - expectedArchiveNotRecorded);
 
 execFileSync(process.execPath, ['scripts/audit-registry-evidence-integrity.mjs'], {
@@ -62,13 +64,15 @@ expect(actualArchiveNotRecorded === expectedArchiveNotRecorded, `archive not-rec
 expect(['pass', 'pass_with_review_queues'].includes(report.result), `audit result is not passing: ${report.result}`);
 
 if (correctionOutcome) {
-  expect(correctionOutcome.canonical_evidence_count_after === expectedEvidence, 'PR #360 correction report Evidence count mismatch');
-  expect(correctionOutcome.evidence_relation_count_after === expectedRelations, 'PR #360 correction report Evidence Relation count mismatch');
-  expect(correctionOutcome.archive_index_count_after === actualArchiveRecorded, 'PR #360 correction report archive-recorded total differs from taxonomy total');
-  expect(correctionOutcome.archive_not_recorded_count_after === actualArchiveNotRecorded, 'PR #360 correction report no-archive total differs from taxonomy total');
+  expect(correctionOutcome.canonical_evidence_count_after === 557, 'Historical PR #360 correction report Evidence count changed');
+  expect(correctionOutcome.evidence_relation_count_after === 557, 'Historical PR #360 correction report Evidence Relation count changed');
+  expect(correctionOutcome.archive_index_count_after === 387, 'Historical PR #360 correction report archive-recorded count changed');
+  expect(correctionOutcome.archive_not_recorded_count_after === 170, 'Historical PR #360 correction report no-archive count changed');
   expect(correctionOutcome.changed_count <= correctionConfig.maximum_canonical_evidence_records_touched, 'PR #360 correction report exceeds Evidence touch maximum');
   expect(correctionOutcome.constraints?.new_evidence_identities === 0, 'PR #360 correction report added Evidence identities');
   expect(correctionOutcome.constraints?.evidence_relation_changes === 0, 'PR #360 correction report changed Evidence Relations');
+  expect(correctionOutcome.canonical_evidence_count_after <= expectedEvidence, 'Current Evidence count regressed below the reviewed PR #360 checkpoint');
+  expect(correctionOutcome.evidence_relation_count_after <= expectedRelations, 'Current Evidence Relation count regressed below the reviewed PR #360 checkpoint');
 }
 
 if (failures.length) {
@@ -85,5 +89,6 @@ console.log(JSON.stringify({
   evidence_relations: expectedRelations,
   archive_states: archiveStateCounts,
   archive_recorded_total: actualArchiveRecorded,
-  archive_not_recorded: actualArchiveNotRecorded
+  archive_not_recorded: actualArchiveNotRecorded,
+  historical_pr360_evidence: correctionOutcome?.canonical_evidence_count_after ?? null
 }, null, 2));
