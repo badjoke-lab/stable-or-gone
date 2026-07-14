@@ -4,7 +4,8 @@ import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const failures = [];
-const baseline = loadRegistryV2Baseline(root);
+const baseline = JSON.parse(fs.readFileSync(path.join(root, 'docs/migration/registry-v2-baseline.json'), 'utf8'));
+const resolvedBaseline = loadRegistryV2Baseline(root);
 const redemptionStatuses = new Set(['public_direct','eligible_customers_only','institutional_only','protocol_based','restricted','suspended','terminated','not_applicable','unknown']);
 const backingTypes = new Set(['cash','bank_deposits','government_securities','commercial_paper','corporate_bonds','private_credit','receivables','secured_loans','insurance_or_guarantee','crypto_collateral','stablecoin_collateral','tokenized_fund','commodity','unbacked','mixed','other','unknown']);
 
@@ -19,6 +20,7 @@ function read(relativePath) {
   }
 }
 const group = (name) => (baseline.data_groups?.[name] ?? []).flatMap(read);
+const resolvedGroup = (name) => (resolvedBaseline.data_groups?.[name] ?? []).flatMap(read);
 const dateOrNull = (value, label) => {
   if (value !== null && value !== undefined && value !== '' && (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value))) failures.push(`${label}: expected YYYY-MM-DD or null`);
 };
@@ -26,7 +28,7 @@ const dateOrNull = (value, label) => {
 const stablecoins = group('stablecoins');
 const profiles = group('profiles');
 const reserveReports = group('reserve_reports');
-const evidence = group('evidence');
+const evidence = resolvedGroup('evidence');
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
 const reserveReportIds = new Set(reserveReports.map((row) => row.id));
 const evidenceIds = new Set(evidence.map((row) => row.id));
@@ -72,4 +74,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log(`Stablecoin Registry v2 profile validation passed: ${profiles.length} profiles for ${stablecoins.length} stablecoins.`);
+console.log(`Stablecoin Registry v2 profile validation passed: ${profiles.length} profiles for ${stablecoins.length} stablecoins with ${evidence.length} resolved Evidence rows.`);
