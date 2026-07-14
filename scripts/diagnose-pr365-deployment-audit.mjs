@@ -2,12 +2,13 @@ import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {loadDeploymentVerification} from './load-deployment-verification.mjs';
 
+const diagnosticVersion='1.1';
 execFileSync(process.execPath,['scripts/audit-registry-deployment-chain-identity-current.mjs'],{stdio:'inherit',env:process.env});
 const report=JSON.parse(fs.readFileSync('data/generated/registry-deployment-chain-identity-audit.json','utf8'));
 const checkpoint=JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json','utf8'));
 const verification=loadDeploymentVerification(process.cwd());
 const compact={
-  schema_version:'1.0',
+  schema_version:diagnosticVersion,
   report_id:'sog_pr365_deployment_audit_diagnostic',
   checkpoint_id:checkpoint.checkpoint_id,
   expected_counts:checkpoint.expected_counts,
