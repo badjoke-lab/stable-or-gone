@@ -1,0 +1,713 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr360_review_gate_pr361_2026_07_14",
+  "status": "deterministic_internal_review_gate",
+  "public_output": false,
+  "review_pr": 361,
+  "source_handoff_id": "sog_evidence_correction_batch_pr360_reviewed_handoff_2026_07_14",
+  "source_merge_commit": "0bdda598b596b406ae8a01827072f5b8c253b23e",
+  "current_checkpoint_id": "sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14",
+  "current_stats_checkpoint_id": "sog_evidence_correction_batch_112_checkpoint_pr360_2026_07_14",
+  "current_counts": {
+    "assets": 112,
+    "organizations": 105,
+    "relationships": 122,
+    "events": 187,
+    "evidence": 557,
+    "evidence_relations": 557,
+    "deployments": 174,
+    "known_unknowns": 325,
+    "market_access_records": 8
+  },
+  "evaluation_axes": {
+    "record_family_sparsity": {
+      "historical_asset_count": 110,
+      "current_asset_count": 112,
+      "historical_state_counts": {
+        "strong": 589,
+        "usable": 687,
+        "partial": 267,
+        "sparse": 0,
+        "absent": 217,
+        "not_applicable": 0
+      },
+      "current_state_counts": {
+        "strong": 602,
+        "usable": 716,
+        "partial": 255,
+        "sparse": 0,
+        "absent": 219,
+        "not_applicable": 0
+      },
+      "dimension_deltas": [
+        {
+          "dimension_id": "identity",
+          "before": {
+            "strong": 82,
+            "usable": 28,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 83,
+            "usable": 29,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 1,
+            "usable": 1
+          },
+          "unresolved_after": 0
+        },
+        {
+          "dimension_id": "lifecycle",
+          "before": {
+            "strong": 49,
+            "usable": 58,
+            "partial": 3,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 49,
+            "usable": 60,
+            "partial": 3,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 2
+          },
+          "unresolved_after": 3
+        },
+        {
+          "dimension_id": "organization_relationships",
+          "before": {
+            "strong": 9,
+            "usable": 96,
+            "partial": 5,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 9,
+            "usable": 98,
+            "partial": 5,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 2
+          },
+          "unresolved_after": 5
+        },
+        {
+          "dimension_id": "mechanism_classification",
+          "before": {
+            "strong": 106,
+            "usable": 4,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 108,
+            "usable": 4,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 2,
+            "usable": 0
+          },
+          "unresolved_after": 0
+        },
+        {
+          "dimension_id": "reserve_structure",
+          "before": {
+            "strong": 4,
+            "usable": 106,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 4,
+            "usable": 108,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 2
+          },
+          "unresolved_after": 0
+        },
+        {
+          "dimension_id": "redemption",
+          "before": {
+            "strong": 94,
+            "usable": 4,
+            "partial": 12,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 96,
+            "usable": 4,
+            "partial": 12,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 2,
+            "usable": 0
+          },
+          "unresolved_after": 12
+        },
+        {
+          "dimension_id": "issuance",
+          "before": {
+            "strong": 105,
+            "usable": 5,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 107,
+            "usable": 5,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 2,
+            "usable": 0
+          },
+          "unresolved_after": 0
+        },
+        {
+          "dimension_id": "deployment",
+          "before": {
+            "strong": 8,
+            "usable": 10,
+            "partial": 92,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 9,
+            "usable": 11,
+            "partial": 92,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 1,
+            "usable": 1
+          },
+          "unresolved_after": 92
+        },
+        {
+          "dimension_id": "legal_profile",
+          "before": {
+            "strong": 0,
+            "usable": 48,
+            "partial": 62,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 0,
+            "usable": 63,
+            "partial": 49,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": -13,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 15
+          },
+          "unresolved_after": 49
+        },
+        {
+          "dimension_id": "regulatory_notes",
+          "before": {
+            "strong": 3,
+            "usable": 2,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 105,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 3,
+            "usable": 2,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 107,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 2,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 0
+          },
+          "unresolved_after": 107
+        },
+        {
+          "dimension_id": "events",
+          "before": {
+            "strong": 20,
+            "usable": 88,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 2,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 20,
+            "usable": 90,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 2,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 2
+          },
+          "unresolved_after": 2
+        },
+        {
+          "dimension_id": "evidence_depth",
+          "before": {
+            "strong": 58,
+            "usable": 49,
+            "partial": 3,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 59,
+            "usable": 50,
+            "partial": 3,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 1,
+            "usable": 1
+          },
+          "unresolved_after": 3
+        },
+        {
+          "dimension_id": "known_unknowns",
+          "before": {
+            "strong": 51,
+            "usable": 59,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 53,
+            "usable": 59,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 2,
+            "usable": 0
+          },
+          "unresolved_after": 0
+        },
+        {
+          "dimension_id": "comparison_readiness",
+          "before": {
+            "strong": 0,
+            "usable": 110,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 0,
+            "usable": 112,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 2
+          },
+          "unresolved_after": 0
+        },
+        {
+          "dimension_id": "facet_freshness_support",
+          "before": {
+            "strong": 0,
+            "usable": 20,
+            "partial": 90,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 0,
+            "usable": 21,
+            "partial": 91,
+            "sparse": 0,
+            "absent": 0,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 1,
+            "sparse": 0,
+            "strong": 0,
+            "usable": 1
+          },
+          "unresolved_after": 91
+        },
+        {
+          "dimension_id": "canonical_market_access",
+          "before": {
+            "strong": 0,
+            "usable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 110,
+            "not_applicable": 0
+          },
+          "after": {
+            "strong": 2,
+            "usable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "absent": 110,
+            "not_applicable": 0
+          },
+          "delta": {
+            "absent": 0,
+            "not_applicable": 0,
+            "partial": 0,
+            "sparse": 0,
+            "strong": 2,
+            "usable": 0
+          },
+          "unresolved_after": 110
+        }
+      ],
+      "highest_unresolved_dimensions": [
+        {
+          "dimension_id": "canonical_market_access",
+          "unresolved_after": 110
+        },
+        {
+          "dimension_id": "regulatory_notes",
+          "unresolved_after": 107
+        },
+        {
+          "dimension_id": "deployment",
+          "unresolved_after": 92
+        },
+        {
+          "dimension_id": "facet_freshness_support",
+          "unresolved_after": 91
+        },
+        {
+          "dimension_id": "legal_profile",
+          "unresolved_after": 49
+        },
+        {
+          "dimension_id": "redemption",
+          "unresolved_after": 12
+        },
+        {
+          "dimension_id": "organization_relationships",
+          "unresolved_after": 5
+        },
+        {
+          "dimension_id": "evidence_depth",
+          "unresolved_after": 3
+        }
+      ],
+      "current_tier_a_candidate_count": 10
+    },
+    "tier_a_dossier_depth": {
+      "historical_candidate_count": 18,
+      "current_candidate_count": 10,
+      "historical_queue_reuse_allowed": false,
+      "current_queue_order": "asset_slug_ascending_non_ranking"
+    },
+    "compare_utility": {
+      "preset_count": 5,
+      "unique_preset_asset_count": 12,
+      "preset_assets_present": 12,
+      "current_comparison_readiness_states": {
+        "strong": 0,
+        "usable": 112,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    "timeline_historical_density": {
+      "event_count": 187,
+      "assets_with_events": 110,
+      "assets_without_events": 2,
+      "events_per_asset": 1.67,
+      "dated_event_count": 171,
+      "day_precise_count": 171,
+      "month_precise_count": 0,
+      "year_precise_count": 0,
+      "undated_or_noncanonical_date_count": 16,
+      "earliest_year": 2018,
+      "latest_year": 2026,
+      "events_by_year": {
+        "2018": 7,
+        "2019": 5,
+        "2020": 10,
+        "2021": 20,
+        "2022": 26,
+        "2023": 19,
+        "2024": 27,
+        "2025": 26,
+        "2026": 31
+      }
+    },
+    "canonical_market_access_utility": {
+      "record_count": 8,
+      "asset_count": 2,
+      "asset_ids": [
+        "sog_st_rlusd",
+        "sog_st_usdc"
+      ],
+      "platform_count": 1,
+      "platforms": [
+        "SBI VC Trade|VCTRADE"
+      ],
+      "jurisdiction_count": 1,
+      "jurisdictions": [
+        "JP"
+      ],
+      "function_count": 4,
+      "functions": [
+        "buy_sell",
+        "deposit",
+        "external_wallet_transfer",
+        "withdrawal"
+      ],
+      "records_by_asset": {
+        "sog_st_rlusd": 4,
+        "sog_st_usdc": 4
+      },
+      "records_by_function": {
+        "buy_sell": 2,
+        "deposit": 2,
+        "external_wallet_transfer": 2,
+        "withdrawal": 2
+      }
+    },
+    "monitoring_signal_usefulness": {
+      "decision": "continue_private_review_only",
+      "canonical_auto_promotion_allowed": false,
+      "reviewed_gate_finding": "No repository-backed evidence in this gate justifies converting monitoring observations directly into canonical records."
+    },
+    "correction_and_source_maintenance_burden": {
+      "evidence_records": 557,
+      "archive_recorded": 387,
+      "archive_recorded_percent": 69.48,
+      "archive_not_recorded": 170,
+      "archive_not_recorded_percent": 30.52,
+      "pr360_selected": 10,
+      "pr360_corrected": 8,
+      "pr360_reviewed_no_change": 2,
+      "remaining_known_unknowns": 325
+    },
+    "monthly_maintenance_burden": {
+      "total_update_entries": 16,
+      "latest_reviewed_month": "2026-07",
+      "latest_month_entry_count": 3,
+      "latest_month_categories": {
+        "content": 2,
+        "data": 1
+      }
+    },
+    "external_usage_or_referral_evidence": {
+      "status": "not_available_in_reviewed_repository_evidence",
+      "decision_effect": "No growth or public-surface approval is based on unverified external usage claims."
+    }
+  },
+  "decisions": {
+    "record_depth_baseline_refresh": {
+      "decision": "approved_required",
+      "reasons": [
+        "canonical asset count changed from 110 to 112",
+        "canonical planning input digest changed",
+        "the PR #353 queue predates PR #354-#360 dossier, growth, Market Access, and Evidence corrections"
+      ]
+    },
+    "tier_a_dossier_batch_4": {
+      "decision": "approved_after_baseline_refresh",
+      "maximum_assets": 5,
+      "current_recomputed_candidate_count": 10,
+      "reason": "asset selection must come from the refreshed non-ranking 112-asset queue, not the immutable PR #353 queue"
+    },
+    "evidence_archive_maintenance_batch_2": {
+      "decision": "approved_priority",
+      "maximum_records": 10,
+      "archive_not_recorded": 170,
+      "threshold": 150
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved",
+      "current": {
+        "assets": 2,
+        "platforms": 1,
+        "jurisdictions": 1
+      },
+      "minimum": {
+        "assets": 4,
+        "platforms": 2,
+        "jurisdictions": 2
+      }
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved_in_next_sequence",
+      "reason": "refresh current depth and complete one bounded dossier batch before another asset-growth decision"
+    },
+    "new_public_surface": {
+      "decision": "not_approved",
+      "reason": "current public product set remains sufficient and this gate found data-depth and maintenance priorities first"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 363,
+      "work_item": "Record Depth and Coverage Baseline Refresh",
+      "scope": "Recompute all 16 planning dimensions over exactly 112 canonical assets and replace no historical snapshot.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 364,
+      "work_item": "Tier A Dossier Deepening Batch 4",
+      "scope": "Select no more than five assets from the refreshed non-ranking queue and deepen only reviewed material dossier gaps.",
+      "maximum_assets": 5,
+      "new_asset_allowed": false,
+      "market_access_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 365,
+      "work_item": "Evidence and Archive Maintenance Batch 2",
+      "scope": "Review no more than ten high-priority Evidence records from the refreshed archive/source-maintenance queue.",
+      "maximum_evidence_records_touched": 10,
+      "new_asset_allowed": false,
+      "market_access_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "input_digest_sha256": "212cfd214d2a7a0fb8334708acff6b9876bc83c5b82a94ecf0e982cbd5f33fed"
+}

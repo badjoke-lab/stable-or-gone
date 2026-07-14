@@ -42,8 +42,8 @@ PR #356 Market Access Pilot 1: complete
 PR #357 Tier A Dossier Deepening — Batch 3: complete
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
-post-PR #360 review gate: next
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
 ```
 
 Approved bounded sequence:
@@ -158,9 +158,13 @@ PR #358 has promoted complete reviewed records for StraitsX USD (XUSD) and Blast
 
 PR #359 promotes exactly four provider-scoped RLUSD Market Access records for Japan / SBI VC Trade / VCTRADE. Existing canonical Evidence identities are reused and expanded; no duplicate Evidence identity or new public product surface is allowed.
 
-## Active PR #360 Evidence and Correction Batch
+## Completed PR #360 Evidence and Correction Batch
 
 PR #360 is a bounded quality-maintenance batch for broken links, archives, source identities, Evidence Relations, wording, dates, organization relationships, and known unknowns. It adds no asset or public product surface.
+
+## Active PR #361 Post-PR #360 Review Gate
+
+PR #361 recomputes the current 112-asset planning state and decides the next bounded sequence without changing canonical data or adding a public product surface.
 
 ## Post-351 operating mode
 
@@ -442,7 +446,7 @@ Current work item:
 ```text
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
+PR #360 Evidence and Correction Batch: complete
 ```
 
 Binding references:
@@ -477,8 +481,8 @@ Current work item:
 
 ```text
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
-post-PR #360 review gate: next
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
 ```
 
 Binding references:
@@ -503,4 +507,42 @@ Market Access Records: 8
 ```
 
 PR #360 may touch at most 10 Evidence records and 5 non-Evidence records. Queue selection is internal and does not authorize automatic canonical correction. No asset, Market Access, ranking, score, or public product surface may be added.
+
+## PR #361 active review-gate authority
+
+Current work item:
+
+```text
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
+PR #363 Record Depth and Coverage Baseline Refresh: next
+```
+
+Approved bounded sequence after review:
+
+```text
+PR #363 Record Depth and Coverage Baseline Refresh
+PR #364 Tier A Dossier Deepening Batch 4
+PR #365 Evidence and Archive Maintenance Batch 2
+review gate
+```
+
+Not approved in this sequence:
+
+```text
+Market Access Pilot 3
+Record Growth Batch 2
+new public product surface
+asset ranking or composite score
+automatic monitoring promotion
+```
+
+Binding references:
+
+```text
+docs/quality/post-pr360-review-gate-pr361-spec.md
+config/post-pr360-review-gate-pr361.json
+docs/migration/evidence-correction-batch-pr360-reviewed-handoff.json
+docs/migration/post-pr360-review-gate-pr361.json
+```
 

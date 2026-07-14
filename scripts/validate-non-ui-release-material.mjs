@@ -10,6 +10,7 @@ const reproducibleBaseline = readJson('docs/migration/reproducible-build-output-
 const updates = readJson('data/registry-updates.json');
 const history = readJson('data/stats-history.json');
 const correctionOutcome = readJson('docs/migration/evidence-correction-outcomes-pr360.json');
+const reviewGate = readJson('docs/migration/post-pr360-review-gate-pr361.json');
 const readme = read('README.md');
 const release = read('docs/releases/100-asset-checkpoint-2026-07-06.md');
 const roadmap = read('docs/roadmap.md');
@@ -29,8 +30,9 @@ for (const marker of [
   'PR #357 Tier A Dossier Deepening — Batch 3: complete',
   'PR #358 Record Growth Batch 1: complete',
   'PR #359 Market Access Pilot 2: complete',
-  'PR #360 Evidence and Correction Batch: active',
-  'post-PR #360 review gate: next',
+  'PR #360 Evidence and Correction Batch: complete',
+  'PR #361 Post-PR #360 Review Gate: active',
+  'PR #362 Record Depth and Coverage Baseline Refresh: next',
   'StraitsX USD (XUSD)',
   'Blast USDB'
 ]) requireText(readme, marker, 'README.md');
@@ -58,8 +60,8 @@ for (const boundary of ['canonical_only = true','includes_unreviewed_candidates 
 check(checkpoint.release_integrity_baseline_id === 'sog_release_integrity_pr316_2026_07_06', 'historical 100-asset release-integrity baseline ID changed');
 check(checkpoint.reproducible_build_baseline_id === reproducibleBaseline.baseline_id, 'historical checkpoint/reproducible-build baseline ID mismatch');
 check(releaseBaseline.status === 'current', 'current release-integrity baseline must remain current');
-check(releaseBaseline.baseline_id === 'sog_release_integrity_pr360_112_assets_2026_07_14', 'current release-integrity baseline must be PR #360 baseline');
-check(currentCheckpoint.checkpoint_id === 'sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14', 'current canonical checkpoint must be PR #360 correction checkpoint');
+check(releaseBaseline.baseline_id === 'sog_release_integrity_pr360_112_assets_2026_07_14', 'current release-integrity baseline must remain the PR #360 canonical baseline');
+check(currentCheckpoint.checkpoint_id === 'sog_evidence_correction_batch_canonical_112_checkpoint_pr360_2026_07_14', 'current canonical checkpoint must remain the PR #360 correction checkpoint');
 check(currentCheckpoint.asset_count === 112, 'current canonical checkpoint must contain 112 assets');
 check(currentCheckpoint.evidence_quality?.archive_index_count === 387, 'current canonical checkpoint must bind 387 archive indexes');
 check(currentCheckpoint.evidence_quality?.archive_not_recorded_count === 170, 'current canonical checkpoint must bind 170 no-archive rows');
@@ -81,6 +83,16 @@ check(latestSnapshot?.totals?.deployments === 174, 'stats history latest snapsho
 check(latestSnapshot?.totals?.market_access_records === 8, 'stats history latest snapshot must contain eight Market Access records');
 check(latestSnapshot?.data_quality?.coverage?.archive_evidence?.count === 387, 'stats history latest snapshot must contain 387 archived Evidence rows');
 check(currentHistoryCheckpoint.canonical_checkpoint_id === currentCheckpoint.checkpoint_id, 'current history checkpoint canonical binding mismatch');
+
+check(reviewGate.status === 'deterministic_internal_review_gate', 'PR #361 review gate status mismatch');
+check(reviewGate.public_output === false, 'PR #361 review gate must remain internal');
+check(reviewGate.current_counts?.assets === 112, 'PR #361 review gate asset count mismatch');
+check(reviewGate.current_counts?.evidence === 557, 'PR #361 review gate Evidence count mismatch');
+check(reviewGate.current_counts?.market_access_records === 8, 'PR #361 review gate Market Access count mismatch');
+check(JSON.stringify(reviewGate.approved_next_sequence?.map((row) => row.pr)) === JSON.stringify([362,363,364]), 'PR #361 approved next sequence mismatch');
+check(reviewGate.decisions?.market_access_pilot_3?.decision === 'not_approved', 'PR #361 must not approve Market Access Pilot 3');
+check(reviewGate.decisions?.record_growth_batch_2?.decision === 'not_approved_in_next_sequence', 'PR #361 must not approve Record Growth Batch 2');
+check(reviewGate.decisions?.new_public_surface?.decision === 'not_approved', 'PR #361 must not approve a new public surface');
 
 const updateId = 'sog_update_2026_07_06_audited_100_asset_checkpoint';
 const matchingUpdates = updates.filter((row) => row.id === updateId);
@@ -105,8 +117,11 @@ for (const marker of [
   'PR #357 Tier A Dossier Deepening — Batch 3: complete',
   'PR #358 Record Growth Batch 1: complete',
   'PR #359 Market Access Pilot 2: complete',
-  'PR #360 Evidence and Correction Batch: active',
-  'post-PR #360 review gate: next',
+  'PR #360 Evidence and Correction Batch: complete',
+  'PR #361 Post-PR #360 Review Gate: active',
+  'PR #362 Record Depth and Coverage Baseline Refresh',
+  'PR #363 Tier A Dossier Deepening Batch 4',
+  'PR #364 Evidence and Archive Maintenance Batch 2',
   '112 stable assets',
   '557 evidence records',
   '174 deployments',
@@ -141,6 +156,7 @@ console.log(JSON.stringify({
   reproducible_build_baseline_id: reproducibleBaseline.baseline_id,
   update_id: updateId,
   stats_history_snapshot_count: history.snapshots?.length ?? 0,
-  active_workstream: 'pr360_evidence_correction_batch',
-  next_workstream: 'post_pr360_review_gate'
+  active_workstream: 'pr361_post_pr360_review_gate',
+  next_workstream: 'pr362_record_depth_baseline_refresh',
+  approved_sequence: reviewGate.approved_next_sequence.map((row) => row.pr)
 }, null, 2));

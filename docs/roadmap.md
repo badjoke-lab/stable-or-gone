@@ -17,8 +17,8 @@ PR #356 Market Access Pilot 1: complete
 PR #357 Tier A Dossier Deepening — Batch 3: complete
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
-post-PR #360 review gate: next
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
 ```
 
 The current operating mode is:
@@ -68,7 +68,7 @@ named validators, audits, and current work-item outputs
 
 Earlier amendments remain historical records and do not override this current position.
 
-## 3. Completed program through PR #359 and active PR #358 growth
+## 3. Completed program through PR #360 and active PR #358 growth
 
 Completed broad programs include:
 
@@ -310,7 +310,7 @@ known-unknown resolution
 
 Registry quality is not measured only by asset count.
 
-## 13. Review gate after PR #360
+## 13. PR #361 — Post-PR #360 Review Gate — active
 
 Review:
 
@@ -327,6 +327,17 @@ external usage or referral evidence when available
 ```
 
 Only then define the next bounded sequence.
+
+## 13A. Approved sequence after PR #361
+
+```text
+PR #363 Record Depth and Coverage Baseline Refresh
+PR #364 Tier A Dossier Deepening Batch 4
+PR #365 Evidence and Archive Maintenance Batch 2
+REVIEW GATE
+```
+
+Market Access Pilot 3, Record Growth Batch 2, and new public surfaces are not approved in this sequence.
 
 ## 14. Parallel operating lanes
 
@@ -488,7 +499,7 @@ Current work item:
 ```text
 PR #358 Record Growth Batch 1: complete
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
+PR #360 Evidence and Correction Batch: complete
 ```
 
 Binding references:
@@ -523,8 +534,8 @@ Current work item:
 
 ```text
 PR #359 Market Access Pilot 2: complete
-PR #360 Evidence and Correction Batch: active
-post-PR #360 review gate: next
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
 ```
 
 Binding references:
@@ -549,4 +560,42 @@ Market Access Records: 8
 ```
 
 PR #360 may touch at most 10 Evidence records and 5 non-Evidence records. Queue selection is internal and does not authorize automatic canonical correction. No asset, Market Access, ranking, score, or public product surface may be added.
+
+## PR #361 active review-gate authority
+
+Current work item:
+
+```text
+PR #360 Evidence and Correction Batch: complete
+PR #361 Post-PR #360 Review Gate: active
+PR #363 Record Depth and Coverage Baseline Refresh: next
+```
+
+Approved bounded sequence after review:
+
+```text
+PR #363 Record Depth and Coverage Baseline Refresh
+PR #364 Tier A Dossier Deepening Batch 4
+PR #365 Evidence and Archive Maintenance Batch 2
+review gate
+```
+
+Not approved in this sequence:
+
+```text
+Market Access Pilot 3
+Record Growth Batch 2
+new public product surface
+asset ranking or composite score
+automatic monitoring promotion
+```
+
+Binding references:
+
+```text
+docs/quality/post-pr360-review-gate-pr361-spec.md
+config/post-pr360-review-gate-pr361.json
+docs/migration/evidence-correction-batch-pr360-reviewed-handoff.json
+docs/migration/post-pr360-review-gate-pr361.json
+```
 
