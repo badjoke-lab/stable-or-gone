@@ -1,0 +1,100 @@
+name: PR 368 Record Depth Baseline v2 Refresh
+
+on:
+  push:
+    branches:
+      - pr368-record-depth-baseline-v2-refresh
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr368-record-depth-baseline-v2-refresh'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic v2 planning outputs
+        run: |
+          node scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
+          node scripts/build-record-depth-baseline-v2-refresh-pr368.mjs --check
+      - name: Validate v2 baseline and queue
+        run: |
+          node scripts/validate-record-depth-baseline-v2-refresh-pr368.mjs
+          npm run validate:active-workstream
+      - name: Validate existing canonical contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+      - name: Verify internal-planning-only boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          test ! -e public/data/record-depth-baseline-v2-pr368.json
+          test ! -e public/data/tier-a-candidate-queue-v2-pr368.json
+          test ! -e dist/data/record-depth-baseline-v2-pr368.json
+          test ! -e dist/data/tier-a-candidate-queue-v2-pr368.json
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+      - name: Commit generated outputs
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            docs/migration/record-depth-baseline-v2-pr368.json \
+            docs/migration/record-depth-baseline-v2-pr368-summary.json \
+            docs/migration/record-depth-baseline-v2-pr368-delta.json \
+            docs/migration/tier-a-candidate-queue-v2-pr368.json
+          if git diff --cached --quiet; then
+            echo 'Generated outputs already committed'
+          else
+            git commit -m 'Generate PR 368 Record Depth baseline v2 outputs'
+            git push origin HEAD:pr368-record-depth-baseline-v2-refresh
+          fi
+      - name: Publish PR 368 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr368-record-depth-baseline-v2-refresh-status -->';
+            const fs=require('fs');
+            let summary=null,queue=null,delta=null;
+            try{summary=JSON.parse(fs.readFileSync('docs/migration/record-depth-baseline-v2-pr368-summary.json','utf8'));}catch{}
+            try{queue=JSON.parse(fs.readFileSync('docs/migration/tier-a-candidate-queue-v2-pr368.json','utf8'));}catch{}
+            try{delta=JSON.parse(fs.readFileSync('docs/migration/record-depth-baseline-v2-pr368-delta.json','utf8'));}catch{}
+            const body=`${marker}
+            ## PR #368 Record Depth Baseline v2 Refresh
+
+            - Workflow: **${{ job.status }}**
+            - Assets / dimensions / cells: **${summary?.asset_count??'n/a'} / ${summary?.dimension_count??'n/a'} / ${summary?.cell_count??'n/a'}**
+            - Planning states: **${JSON.stringify(summary?.summary?.planning_state_counts??{})}**
+            - Applicability states: **${JSON.stringify(summary?.summary?.applicability_state_counts??{})}**
+            - Observation states: **${JSON.stringify(summary?.summary?.observation_state_counts??{})}**
+            - Changed v1→v2 cells: **${delta?.changed_cell_count??'n/a'}**
+            - Non-ranking candidates: **${queue?.candidate_count??'n/a'}**
+            - Next work item: **${queue?.next_work_item??'n/a'}**
+            - Head: \`${context.sha}\`
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
