@@ -18,10 +18,21 @@ The planning path must therefore be audited before another queue is trusted:
 
 ```text
 scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs
-  default profileOverrideFiles = []
+  defaults options.profileOverrideFiles to []
 
 scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
   invokes buildReviewedRecordDepthBaseline() without options
+```
+
+The deterministic PR #370 report confirms both code-path conditions and preserves the current checkpoint:
+
+```text
+assets: 112
+evidence: 559
+deployments: 174
+market access records: 8
+queue candidates previously reviewed: 6 / 6
+PR #369 change yield: 0%
 ```
 
 ## Reviewed decision
