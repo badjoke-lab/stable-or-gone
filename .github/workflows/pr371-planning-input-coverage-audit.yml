@@ -33,10 +33,33 @@ jobs:
         run: |
           node scripts/build-planning-input-coverage-audit-pr371.mjs
           node scripts/build-planning-input-coverage-audit-pr371.mjs --check
-      - name: Validate manifest and coverage findings
+      - name: Commit generated audit outputs
+        if: github.event_name == 'push'
         run: |
-          node scripts/validate-planning-input-coverage-audit-pr371.mjs
-          npm run validate:active-workstream
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            docs/migration/planning-input-manifest-pr371.json \
+            docs/migration/planning-input-coverage-audit-pr371.json
+          if git diff --cached --quiet; then
+            echo 'Audit outputs already committed'
+          else
+            git commit -m 'Generate PR 371 planning input audit outputs'
+            git push origin HEAD:pr371-planning-input-coverage-audit
+          fi
+      - name: Validate manifest and coverage findings
+        id: audit_validation
+        run: |
+          set +e
+          node scripts/validate-planning-input-coverage-audit-pr371.mjs > pr371-validation.log 2>&1
+          status=$?
+          cat pr371-validation.log
+          if [ "$status" -eq 0 ]; then
+            npm run validate:active-workstream >> pr371-validation.log 2>&1
+            status=$?
+            cat pr371-validation.log
+          fi
+          exit "$status"
       - name: Validate existing canonical contracts
         run: |
           npm run validate:data
@@ -54,20 +77,6 @@ jobs:
         run: |
           npm run check
           npm run build
-      - name: Commit generated audit outputs
-        if: github.event_name == 'push'
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add \
-            docs/migration/planning-input-manifest-pr371.json \
-            docs/migration/planning-input-coverage-audit-pr371.json
-          if git diff --cached --quiet; then
-            echo 'Audit outputs already committed'
-          else
-            git commit -m 'Generate PR 371 planning input audit outputs'
-            git push origin HEAD:pr371-planning-input-coverage-audit
-          fi
       - name: Publish PR 371 status
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -75,9 +84,11 @@ jobs:
           script: |
             const marker='<!-- pr371-planning-input-coverage-audit-status -->';
             const fs=require('fs');
-            let manifest=null,audit=null;
+            let manifest=null,audit=null,diagnostics='';
             try{manifest=JSON.parse(fs.readFileSync('docs/migration/planning-input-manifest-pr371.json','utf8'));}catch{}
             try{audit=JSON.parse(fs.readFileSync('docs/migration/planning-input-coverage-audit-pr371.json','utf8'));}catch{}
+            try{diagnostics=fs.readFileSync('pr371-validation.log','utf8').trim().split('\n').slice(-30).join('\n');}catch{}
+            const diagnosticBlock=diagnostics?`\n\n<details><summary>Validation diagnostics</summary>\n\n\`\`\`text\n${diagnostics}\n\`\`\`\n</details>`:'';
             const body=`${marker}
             ## PR #371 Planning Input Coverage Audit
 
@@ -87,7 +98,7 @@ jobs:
             - Duplicate asset IDs / duplicate row occurrences: **${manifest?.counts?.duplicate_asset_ids??'n/a'} / ${manifest?.counts?.duplicate_row_occurrences??'n/a'}**
             - Affected asset IDs: **${audit?.coverage_gap?.affected_asset_id_count??'n/a'}**
             - Next work item: **${audit?.decision?.next_work_item??'n/a'}**
-            - Head: \`${context.sha}\`
+            - Head: \`${context.sha}\`${diagnosticBlock}
             `;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
