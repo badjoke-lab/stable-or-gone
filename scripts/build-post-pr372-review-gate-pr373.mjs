@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const paths = {
@@ -16,7 +17,8 @@ const paths = {
   marketAccessHandoff: 'docs/migration/market-access-pilot-2-pr359-reviewed-handoff.json',
   maintenanceLog: 'data/monthly-maintenance-log.json',
   priorReviewGate: 'docs/migration/post-pr369-review-gate-pr370.json',
-  queueBuilder: 'scripts/build-record-depth-baseline-v2-refresh-pr368.mjs'
+  queueBuilder: 'scripts/build-record-depth-baseline-v2-refresh-pr368.mjs',
+  registryLoader: 'scripts/load-registry-v2-baseline.mjs'
 };
 const outputPath = 'docs/migration/post-pr372-review-gate-pr373.json';
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -24,6 +26,18 @@ const readJson = (file) => JSON.parse(readText(file));
 const serialize = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const sameSet = (left, right) => left.length === right.length && left.every((value) => right.includes(value));
+
+function loadEffectiveDefaultRegistry() {
+  const key = 'SOG_PLANNING_PROFILE_MANIFEST';
+  const previous = process.env[key];
+  delete process.env[key];
+  try {
+    return loadRegistryV2Baseline(root);
+  } finally {
+    if (previous === undefined) delete process.env[key];
+    else process.env[key] = previous;
+  }
+}
 
 export function buildPostPr372ReviewGate() {
   const config = readJson(paths.config);
@@ -38,6 +52,8 @@ export function buildPostPr372ReviewGate() {
   const maintenanceLog = readJson(paths.maintenanceLog);
   const priorReviewGate = readJson(paths.priorReviewGate);
   const queueBuilderText = readText(paths.queueBuilder);
+  const effectiveDefaultRegistry = loadEffectiveDefaultRegistry();
+  const effectiveDefaultProfileFiles = effectiveDefaultRegistry.data_groups?.profiles ?? [];
 
   const queueSlugs = queue.candidates.map((row) => row.asset_slug);
   const priorNoSafeRows = pr369.selected_assets.filter((row) => row.outcome === 'reviewed_no_safe_change');
@@ -64,6 +80,7 @@ export function buildPostPr372ReviewGate() {
     correctedQueue: queue.queue_id,
     queueSlugs,
     retainedPriorNoSafe,
+    effectiveDefaultProfileFiles,
     approvedNextSequence: config.approved_next_sequence,
     forbidden: config.forbidden_without_later_review_gate
   }));
@@ -91,8 +108,8 @@ export function buildPostPr372ReviewGate() {
       planning_input_correction: {
         manifest_id: manifest.manifest_id,
         complete_profile_file_count: manifest.counts.ordered_file_count,
-        effective_default_profile_file_count: 27,
-        omitted_or_order_corrected_profile_file_count: manifest.counts.ordered_file_count - 27,
+        effective_default_profile_file_count: effectiveDefaultProfileFiles.length,
+        omitted_or_order_corrected_profile_file_count: manifest.counts.ordered_file_count - effectiveDefaultProfileFiles.length,
         pr371_affected_asset_count: inputAudit.coverage_gap.affected_asset_id_count,
         result: 'successful'
       },
