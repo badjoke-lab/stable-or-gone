@@ -1,0 +1,1454 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "sog_planning_input_manifest_pr371_v1",
+  "status": "reviewed_internal_complete_profile_input_manifest",
+  "public_output": false,
+  "review_pr": 371,
+  "reviewed_at": "2026-07-15",
+  "composition_semantics": {
+    "source_order": "public_loader_import_order",
+    "duplicate_asset_resolution": "last_write_wins",
+    "exact_loader_source": "src/lib/data/currentProfiles.ts"
+  },
+  "source_boundaries": {
+    "public_profile_loader": "src/lib/data/currentProfiles.ts",
+    "legacy_registry_baseline": "docs/migration/registry-v2-baseline.json",
+    "legacy_baseline_id": "sog_registry_v2_reserve_source_context_2026_06_25",
+    "current_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14"
+  },
+  "ordered_profile_files": [
+    {
+      "order_index": 0,
+      "path": "data/stablecoin-profiles-v2.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 20,
+      "unique_id_count": 20,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "d19bdc9a00d96a332355d7731c98f0c3cacaca98999c51df51b1858086db6fff"
+    },
+    {
+      "order_index": 1,
+      "path": "data/stablecoin-profiles-batch-a.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 3,
+      "unique_id_count": 3,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "bcc3a6ee0b9d5575b889adf9fe1284729a1a75a0e517e5e7f268858cc3a13149"
+    },
+    {
+      "order_index": 2,
+      "path": "data/stablecoin-profiles-batch-b.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "b5cf6e3f754a1b2c3047173085caee1163351a12adb25a2bdced1f8b5511f746"
+    },
+    {
+      "order_index": 3,
+      "path": "data/stablecoin-profiles-batch-c.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 4,
+      "unique_id_count": 4,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "969580f2a2f5d9358747f739e550d467625f7662831b2b0d6d2664d591763a52"
+    },
+    {
+      "order_index": 4,
+      "path": "data/stablecoin-profiles-batch-d.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 4,
+      "unique_id_count": 4,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "3059e8213bd07e6c02a5f24b39ac38792e4b99f287917667a45703ccc7be2419"
+    },
+    {
+      "order_index": 5,
+      "path": "data/stablecoin-profiles-batch-e.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 4,
+      "unique_id_count": 4,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "228d7104e08de7ec5c5044108d84cc8e3038bc3c585d3c09685ac4feb3318799"
+    },
+    {
+      "order_index": 6,
+      "path": "data/stablecoin-profiles-batch-f.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "89400e1c6390d32564ea55f35c0215fd658f4df1ab7c3dd7af6f156c3debed8b"
+    },
+    {
+      "order_index": 7,
+      "path": "data/stablecoin-profiles-batch-g.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "105f955f056c62b4fbafb1d9374e365c6c096615717663a7317c6c2cae25e65b"
+    },
+    {
+      "order_index": 8,
+      "path": "data/stablecoin-profiles-batch-h.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "3718c4ba3b566f507516317280047c7b87aefb78e5d89905fba11189e887326c"
+    },
+    {
+      "order_index": 9,
+      "path": "data/stablecoin-profiles-batch-i.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "588b6530a07854b35d97cf9ac32e99717d12164ed377cacf87380ca7829857f0"
+    },
+    {
+      "order_index": 10,
+      "path": "data/stablecoin-profiles-batch-j.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "b421acdda9b33ecb19b36602f20bf333c824aa48f7c49591f65ada5ab51d9b8d"
+    },
+    {
+      "order_index": 11,
+      "path": "data/stablecoin-profiles-batch-k.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "fe81ea67c81faab0fb0cf8ce5b5d641f13ddbd77e8b746c010d730515ff0fc16"
+    },
+    {
+      "order_index": 12,
+      "path": "data/stablecoin-profiles-batch-l.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "2980eaa99d4bbe92669637dbf62580910aba2a4b4e2871389ff78a1968922cfe"
+    },
+    {
+      "order_index": 13,
+      "path": "data/stablecoin-profiles-batch-m.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "cea19a6127f1fa3a2e11315feda85e6347cf7f9e58eef169e40e2060b6198c30"
+    },
+    {
+      "order_index": 14,
+      "path": "data/stablecoin-profiles-batch-n.json",
+      "role": "legacy_baseline_input",
+      "in_legacy_registry_baseline": true,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "1aca8faf49a231545363bab18d464c609cee7f8aa0261e41b3524e1b0b8c47e7"
+    },
+    {
+      "order_index": 15,
+      "path": "data/stablecoin-profiles-batch-o.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "4a4c350ea76f03cc713b5c63b4a046c95bebe0d382c0a78a459e00cc738bbe09"
+    },
+    {
+      "order_index": 16,
+      "path": "data/stablecoin-profiles-batch-p.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 5,
+      "unique_id_count": 5,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "c171692b645e047f866a08b5554745ee15802ff182590e1a1493a9ff92167911"
+    },
+    {
+      "order_index": 17,
+      "path": "data/stablecoin-profiles-batch-q.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "9441f9de74f36a011b554bdb4f17f6a43e95e0f8f9a38ad1551203c88497317f"
+    },
+    {
+      "order_index": 18,
+      "path": "data/r-profiles.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "fbaa2d2c8d81901a48e94cd92feb3bbdd186f9a57d2f75e57927c78f1a865508"
+    },
+    {
+      "order_index": 19,
+      "path": "data/s-profiles.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "333e139ad6ae48790c5849c754686c2d4a75d652a60305afdc554eb75fc16023"
+    },
+    {
+      "order_index": 20,
+      "path": "data/batch-t-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "961935cbb6d54a4e2678239a9174cfbc7682d60e6c41ab256457e9de3b48b82a"
+    },
+    {
+      "order_index": 21,
+      "path": "data/batch-u-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "530a5ddd587f085916695d3b5c763882e8f092695475b4c42931f8b110cae4ab"
+    },
+    {
+      "order_index": 22,
+      "path": "data/batch-v-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "6364b688e94c5e4ceac92361eaf858997ccb0ddf05bd8fa218107c58bacf7394"
+    },
+    {
+      "order_index": 23,
+      "path": "data/batch-w-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "17df25be88ec6017d1180b3d929c8a063bfebfc9c9f9f86f76b83b3bbf44ccdf"
+    },
+    {
+      "order_index": 24,
+      "path": "data/batch-x-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "ccfd8419437c1dce1e7baeb10df64751e20735a8b401b2e084f28ff0e82f59e5"
+    },
+    {
+      "order_index": 25,
+      "path": "data/batch-y-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "aa6e320e8c25c52df588960bf4c55faa23ca951282cbe435963332962ac7731b"
+    },
+    {
+      "order_index": 26,
+      "path": "data/batch-z-reserve-redemption.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "9407fb8c7302d70e1d623d5c017bb8b31b5bd98527de93462d0e6de8f253d0e8"
+    },
+    {
+      "order_index": 27,
+      "path": "data/stablecoin-profiles-pr354-tier-a-batch-1.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 2,
+      "unique_id_count": 2,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "e12ac5588e855dd4b091ce88b16759dd7bd192b5cf43613dd27fdba907e6ce17"
+    },
+    {
+      "order_index": 28,
+      "path": "data/stablecoin-profiles-pr355-tier-a-batch-2.json",
+      "role": "reviewed_overlay_input",
+      "in_legacy_registry_baseline": false,
+      "row_count": 3,
+      "unique_id_count": 3,
+      "duplicate_id_occurrences_within_file": 0,
+      "content_sha256": "c298cfc6f2e2b304ece13d0868c07db69ef5b9fc32e4cc340e4c010db1cdc883"
+    }
+  ],
+  "counts": {
+    "ordered_file_count": 29,
+    "legacy_baseline_file_count": 15,
+    "reviewed_overlay_file_count": 14,
+    "total_row_occurrences": 117,
+    "unique_asset_ids": 112,
+    "duplicate_asset_ids": 5,
+    "duplicate_row_occurrences": 5
+  },
+  "asset_winners": [
+    {
+      "asset_id": "sog_st_1gbp",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-u-reserve-redemption.json",
+      "winning_file_order_index": 21,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_acalaausd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-k.json",
+      "winning_file_order_index": 11,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-k.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_aecoin",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-p.json",
+      "winning_file_order_index": 16,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_agoraausd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-f.json",
+      "winning_file_order_index": 6,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-f.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_alusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-e.json",
+      "winning_file_order_index": 5,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-e.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_audd",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-y-reserve-redemption.json",
+      "winning_file_order_index": 25,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_bac",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-k.json",
+      "winning_file_order_index": 11,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-k.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_bean",
+      "occurrence_count": 1,
+      "winning_file": "data/r-profiles.json",
+      "winning_file_order_index": 18,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_bold",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-c.json",
+      "winning_file_order_index": 3,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-c.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_brz",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-i.json",
+      "winning_file_order_index": 9,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-i.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_busd",
+      "occurrence_count": 2,
+      "winning_file": "data/stablecoin-profiles-pr354-tier-a-batch-1.json",
+      "winning_file_order_index": 27,
+      "superseded_files": [
+        "data/stablecoin-profiles-v2.json"
+      ],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": true
+    },
+    {
+      "asset_id": "sog_st_cadc",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-x-reserve-redemption.json",
+      "winning_file_order_index": 24,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_cashio",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-k.json",
+      "winning_file_order_index": 11,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-k.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_crvusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_dai",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_djed",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-g.json",
+      "winning_file_order_index": 7,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-g.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_doc",
+      "occurrence_count": 1,
+      "winning_file": "data/s-profiles.json",
+      "winning_file_order_index": 19,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_dola",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-g.json",
+      "winning_file_order_index": 7,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-g.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_dsd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-k.json",
+      "winning_file_order_index": 11,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-k.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_esd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-k.json",
+      "winning_file_order_index": 11,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-k.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eura",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-j.json",
+      "winning_file_order_index": 10,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-j.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurau",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-p.json",
+      "winning_file_order_index": 16,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurc",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurcv",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-j.json",
+      "winning_file_order_index": 10,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-j.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eure",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-u-reserve-redemption.json",
+      "winning_file_order_index": 21,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_euri",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-j.json",
+      "winning_file_order_index": 10,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-j.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurm",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-t-reserve-redemption.json",
+      "winning_file_order_index": 20,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurq",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-j.json",
+      "winning_file_order_index": 10,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-j.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurr",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-v-reserve-redemption.json",
+      "winning_file_order_index": 22,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurs",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-e.json",
+      "winning_file_order_index": 5,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-e.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_eurt",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-e.json",
+      "winning_file_order_index": 5,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-e.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_fdusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_fei",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-a.json",
+      "winning_file_order_index": 1,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-a.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "occurrence_count": 2,
+      "winning_file": "data/stablecoin-profiles-pr355-tier-a-batch-2.json",
+      "winning_file_order_index": 28,
+      "superseded_files": [
+        "data/stablecoin-profiles-v2.json"
+      ],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": true
+    },
+    {
+      "asset_id": "sog_st_fxusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-m.json",
+      "winning_file_order_index": 13,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-m.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_gho",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-c.json",
+      "winning_file_order_index": 3,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-c.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_gusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_gyd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-m.json",
+      "winning_file_order_index": 13,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-m.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_gyen",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-i.json",
+      "winning_file_order_index": 9,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-i.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_honey",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-m.json",
+      "winning_file_order_index": 13,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-m.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_husd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-d.json",
+      "winning_file_order_index": 4,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-d.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_iron",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-d.json",
+      "winning_file_order_index": 4,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-d.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_ist",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-q.json",
+      "winning_file_order_index": 17,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_jpyc",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-i.json",
+      "winning_file_order_index": 9,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-i.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_jpysc",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-n.json",
+      "winning_file_order_index": 14,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-n.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_kavausdx",
+      "occurrence_count": 1,
+      "winning_file": "data/r-profiles.json",
+      "winning_file_order_index": 18,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_lisusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-g.json",
+      "winning_file_order_index": 7,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-g.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_lusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_m0m",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-l.json",
+      "winning_file_order_index": 12,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-l.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_mai",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-m.json",
+      "winning_file_order_index": 13,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-m.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_mim",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-a.json",
+      "winning_file_order_index": 1,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-a.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_mountainusdm",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-f.json",
+      "winning_file_order_index": 6,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-f.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_msusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-n.json",
+      "winning_file_order_index": 14,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-n.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_musd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-d.json",
+      "winning_file_order_index": 4,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-d.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_nearusn",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-q.json",
+      "winning_file_order_index": 17,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_nobleusdn",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-p.json",
+      "winning_file_order_index": 16,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_nuon",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-b.json",
+      "winning_file_order_index": 2,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-b.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-y-reserve-redemption.json",
+      "winning_file_order_index": 25,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_ousd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-o.json",
+      "winning_file_order_index": 15,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_paxg",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-b.json",
+      "winning_file_order_index": 2,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-b.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_phpc",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-w-reserve-redemption.json",
+      "winning_file_order_index": 23,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_pyusd",
+      "occurrence_count": 2,
+      "winning_file": "data/stablecoin-profiles-pr355-tier-a-batch-2.json",
+      "winning_file_order_index": 28,
+      "superseded_files": [
+        "data/stablecoin-profiles-v2.json"
+      ],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": true
+    },
+    {
+      "asset_id": "sog_st_rai",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-b.json",
+      "winning_file_order_index": 2,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-b.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "occurrence_count": 2,
+      "winning_file": "data/stablecoin-profiles-pr354-tier-a-batch-1.json",
+      "winning_file_order_index": 27,
+      "superseded_files": [
+        "data/stablecoin-profiles-v2.json"
+      ],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": true
+    },
+    {
+      "asset_id": "sog_st_sai",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-d.json",
+      "winning_file_order_index": 4,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-d.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_sdai",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-h.json",
+      "winning_file_order_index": 8,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-h.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_sofiusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-o.json",
+      "winning_file_order_index": 15,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_solsticeusx",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-o.json",
+      "winning_file_order_index": 15,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_spot",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-b.json",
+      "winning_file_order_index": 2,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-b.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_stablesusdx",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-m.json",
+      "winning_file_order_index": 13,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-m.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_stablrusdr",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-v-reserve-redemption.json",
+      "winning_file_order_index": 22,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_susd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_susde",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-h.json",
+      "winning_file_order_index": 8,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-h.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_susds",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-h.json",
+      "winning_file_order_index": 8,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-h.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_tryb",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-i.json",
+      "winning_file_order_index": 9,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-i.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_tusd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_unitedu",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-o.json",
+      "winning_file_order_index": 15,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usat",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-p.json",
+      "winning_file_order_index": 16,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usd0",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-c.json",
+      "winning_file_order_index": 3,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-c.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usd1",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-f.json",
+      "winning_file_order_index": 6,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-f.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usd3",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-t-reserve-redemption.json",
+      "winning_file_order_index": 20,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usda",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-l.json",
+      "winning_file_order_index": 12,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-l.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdb",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-z-reserve-redemption.json",
+      "winning_file_order_index": 26,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdc",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usde",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdf",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-l.json",
+      "winning_file_order_index": 12,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-l.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdgo",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-o.json",
+      "winning_file_order_index": 15,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdh",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-p.json",
+      "winning_file_order_index": 16,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdm",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-e.json",
+      "winning_file_order_index": 5,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-e.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdn",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-a.json",
+      "winning_file_order_index": 1,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-a.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "occurrence_count": 2,
+      "winning_file": "data/stablecoin-profiles-pr355-tier-a-batch-2.json",
+      "winning_file_order_index": 28,
+      "superseded_files": [
+        "data/stablecoin-profiles-v2.json"
+      ],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": true
+    },
+    {
+      "asset_id": "sog_st_usdq",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-f.json",
+      "winning_file_order_index": 6,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-f.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdt",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdtb",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-f.json",
+      "winning_file_order_index": 6,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-f.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdy",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-h.json",
+      "winning_file_order_index": 8,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-h.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usdz",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-l.json",
+      "winning_file_order_index": 12,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-l.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usk",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-g.json",
+      "winning_file_order_index": 7,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-g.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usr",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-c.json",
+      "winning_file_order_index": 3,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-c.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_ust",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-v2.json",
+      "winning_file_order_index": 0,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-v2.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usx",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-l.json",
+      "winning_file_order_index": 12,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-l.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_usyc",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-h.json",
+      "winning_file_order_index": 8,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-h.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_uxd",
+      "occurrence_count": 1,
+      "winning_file": "data/s-profiles.json",
+      "winning_file_order_index": 19,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_vai",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-g.json",
+      "winning_file_order_index": 7,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-g.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_vchf",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-j.json",
+      "winning_file_order_index": 10,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-j.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_xaut",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-b.json",
+      "winning_file_order_index": 2,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-b.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_xidr",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-w-reserve-redemption.json",
+      "winning_file_order_index": 23,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_xsgd",
+      "occurrence_count": 1,
+      "winning_file": "data/stablecoin-profiles-batch-i.json",
+      "winning_file_order_index": 9,
+      "superseded_files": [],
+      "legacy_winning_file": "data/stablecoin-profiles-batch-i.json",
+      "missing_from_legacy_planning_input": false,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_xusd",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-z-reserve-redemption.json",
+      "winning_file_order_index": 26,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    },
+    {
+      "asset_id": "sog_st_zarp",
+      "occurrence_count": 1,
+      "winning_file": "data/batch-x-reserve-redemption.json",
+      "winning_file_order_index": 24,
+      "superseded_files": [],
+      "legacy_winning_file": null,
+      "missing_from_legacy_planning_input": true,
+      "public_winner_differs_from_legacy": false
+    }
+  ],
+  "manifest_digest_sha256": "d2d9868f64224efa830ad64100cea255047e4a41ee6cb4f3c8fd9c97a0a4c0c0",
+  "source_digest_sha256": "d4de2c7c00e00de9fb1e496082411dea987a895471305749493c752badcc9af4"
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_planning_input_coverage_audit_pr371_v1",
+  "status": "pr370_authorized_internal_input_audit",
+  "review_pr": 371,
+  "reviewed_at": "2026-07-15",
+  "sources": {
+    "public_profile_loader": "src/lib/data/currentProfiles.ts",
+    "public_profile_export": "src/lib/data/stablecoinProfiles.ts",
+    "legacy_registry_baseline": "docs/migration/registry-v2-baseline.json",
+    "canonical_planning_builder": "scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs",
+    "v2_refresh_builder": "scripts/build-record-depth-baseline-v2-refresh-pr368.mjs",
+    "current_checkpoint": "docs/migration/current-canonical-checkpoint.json"
+  },
+  "required_outputs": [
+    "docs/migration/planning-input-manifest-pr371.json",
+    "docs/migration/planning-input-coverage-audit-pr371.json"
+  ],
+  "expected": {
+    "canonical_assets": 112,
+    "public_profile_loader_file_count": 29,
+    "legacy_baseline_profile_file_count": 15,
+    "missing_from_planning_file_count": 14,
+    "public_loader_deduplication": "last_write_wins",
+    "planning_manifest_order": "public_loader_import_order"
+  },
+  "manifest_rules": {
+    "include_content_sha256": true,
+    "include_row_count": true,
+    "include_unique_id_count": true,
+    "include_duplicate_id_occurrences": true,
+    "include_winning_file_by_asset": true,
+    "include_superseded_files_by_asset": true,
+    "reject_duplicate_file_paths": true,
+    "require_exact_public_loader_order": true,
+    "require_all_files_exist": true
+  },
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_loader_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "baseline_recompute_allowed": false,
+    "historical_checkpoint_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "single_composite_score_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_work_item": "PR #372 Record Depth Baseline v2.1 Refresh",
+  "review_gate_after_next_work_item": true
+}
