@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr372_review_gate_pr373_v1",
+  "status": "mandatory_review_gate_contract",
+  "review_pr": 373,
+  "reviewed_at": "2026-07-15",
+  "expected": {
+    "assets": 112,
+    "evidence": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169,
+    "v2_1_profile_files": 29,
+    "v2_1_changed_cells": 4,
+    "v2_1_changed_assets": 4,
+    "corrected_queue_candidates": 3,
+    "corrected_queue_prior_no_safe_change": 3
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 374,
+      "work_item": "Planning Queue Review-History Contract Audit",
+      "scope": "Inventory reviewed dossier handoffs and no-safe-change outcomes; define deterministic suppression, expiry, and new-source reactivation semantics for internal queue eligibility; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 375,
+      "work_item": "Candidate Queue v2.2 Refresh",
+      "scope": "Apply the approved review-history contract to the PR #372 v2.1 baseline; preserve all historical baselines; emit a corrected internal non-ranking queue and review-history delta; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "forbidden_without_later_review_gate": [
+    "Tier A Dossier Deepening Batch 6",
+    "Evidence and Archive Maintenance Batch 3",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_output_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  }
+}

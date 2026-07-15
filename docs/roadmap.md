@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-15  
-Status: canonical execution schedule — PR #372 active
+Status: canonical execution schedule — PR #373 review gate active
 
 The full roadmap that governed the repository through merged PR #366 is preserved byte-for-byte at:
 
@@ -25,16 +25,12 @@ Market Access Records: 8
 Archive recorded: 390
 Archive not recorded: 169
 
-PR #367 Planning Dimension Semantics Audit: complete
-PR #368 Record Depth Baseline v2 Refresh: complete
-PR #369 Tier A Dossier Deepening Batch 5: complete
-PR #370 Post-PR #369 Review Gate: complete
 PR #371 Planning Input Coverage Audit: complete
-PR #372 Record Depth Baseline v2.1 Refresh: active; complete on merge
-REVIEW GATE: next and mandatory
+PR #372 Record Depth Baseline v2.1 Refresh: complete
+PR #373 Post-PR #372 Review Gate: active; complete on merge
 ```
 
-The public-surface expansion sequence remains complete. PR #372 is internal planning-baseline correction work.
+The public-surface expansion sequence remains complete. PR #373 is an internal authority review.
 
 ## 2. Current authority
 
@@ -46,99 +42,128 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-15-pr370-post-pr369-review-gate.md
-docs/migration/post-pr369-review-gate-pr370.json
-docs/roadmap-amendments/2026-07-15-pr371-planning-input-coverage-audit-activation.md
-docs/migration/planning-input-manifest-pr371.json
-docs/migration/planning-input-coverage-audit-pr371.json
-docs/roadmap-amendments/2026-07-15-pr372-record-depth-baseline-v2-1-refresh-activation.md
-docs/quality/record-depth-baseline-v2-1-refresh-pr372-spec.md
-config/record-depth-baseline-v2-1-refresh-pr372.json
+docs/roadmap-amendments/2026-07-15-pr373-post-pr372-review-gate.md
+docs/quality/post-pr372-review-gate-pr373-spec.md
+config/post-pr372-review-gate-pr373.json
+named review inputs and deterministic output
 ```
 
-## 3. Approved bounded sequence
+## 3. Completed bounded sequence
 
 ```text
 PR #371  Planning Input Coverage Audit — complete
-PR #372  Record Depth Baseline v2.1 Refresh — active
+PR #372  Record Depth Baseline v2.1 Refresh — complete
+PR #373  REVIEW GATE — active
+```
+
+## 4. PR #372 result
+
+The complete PR #371 manifest corrected the internal baseline while preserving all canonical and public boundaries.
+
+```text
+profile files: 29
+assets: 112
+dimensions: 16
+cells: 1,792
+changed cells: 4
+changed assets: 4
+```
+
+All four changes were `redemption` cells moving from `partial` to `strong`:
+
+```text
+BUSD
+PYUSD
+RLUSD
+USDP
+```
+
+Aggregate state movement:
+
+```text
+strong   604 → 608
+partial  250 → 246
+```
+
+The corrected queue fell from six candidates to three:
+
+```text
+AUDD
+NZDS
+poundtoken / 1GBP
+```
+
+## 5. Review-gate finding
+
+All three corrected queue candidates already received `reviewed_no_safe_change` outcomes in PR #369. No new source signal is attached to the corrected queue.
+
+The current queue builder derives eligibility from present gap and leverage fields. It does not consume prior dossier handoffs, no-safe-change outcomes, review expiry, or new-source reactivation state.
+
+Therefore Tier A Dossier Deepening Batch 6 is not authorized from this queue.
+
+## 6. Approved next bounded sequence
+
+PR #373 approves but does not activate:
+
+```text
+PR #374  Planning Queue Review-History Contract Audit
+PR #375  Candidate Queue v2.2 Refresh
 REVIEW GATE
 ```
 
-No dossier or growth batch is authorized before the next review gate.
+### PR #374
 
-## 4. PR #371 completed finding
-
-PR #371 established the exact planning input gap:
+Must:
 
 ```text
-public profile input files: 29
-legacy planning profile files: 15
-reviewed overlay files omitted by default planning input: 14
-public unique asset IDs: 112
-legacy unique asset IDs: 82
-asset IDs absent from legacy input: 30
-asset IDs with a changed last-write-wins winner: 5
-affected asset IDs: 35
+inventory reviewed dossier handoffs and no-safe-change outcomes
+define suppression semantics
+define review expiry semantics
+define new-source reactivation semantics
+define one deterministic review-history input contract
+change no canonical data
+change no public output
 ```
 
-Composition semantics:
+### PR #375
+
+May begin only after PR #374 merges. It must:
 
 ```text
-source order: public loader import order
-duplicate resolution: last write wins
-```
-
-Binding manifest:
-
-```text
-docs/migration/planning-input-manifest-pr371.json
-```
-
-## 5. PR #372 — Record Depth Baseline v2.1 Refresh
-
-Status: active; complete on merge.
-
-PR #372 must:
-
-```text
-consume the approved PR #371 manifest
-recompute 112 assets × 16 dimensions = 1,792 cells
-preserve PR #353, #363, and #368 checkpoints
-retain PR #367 semantics
-emit a corrected internal non-ranking queue
-record cell and queue changes relative to PR #368
+consume the approved review-history contract
+apply it to the PR #372 v2.1 baseline
+preserve historical baselines and queues
+emit an internal non-ranking v2.2 queue and review-history delta
 change no canonical data
 change no public output
 stop at another review gate
 ```
 
-Required outputs:
+## 7. Deferred areas
+
+### Evidence and archive maintenance
 
 ```text
-docs/migration/record-depth-baseline-v2-1-pr372.json
-docs/migration/record-depth-baseline-v2-1-pr372-summary.json
-docs/migration/record-depth-baseline-v2-1-pr372-delta.json
-docs/migration/tier-a-candidate-queue-v2-1-pr372.json
+archive recorded: 390
+archive not recorded: 169
+last batch reviewed: 10
+last batch safe canonical changes: 3
+last batch no-safe-change: 7
 ```
 
-PR #372 may not use an ad hoc profile file list.
+Evidence and Archive Maintenance Batch 3 remains deferred until the queue-history sequence completes.
 
-## 6. Validation boundary
+### Market Access
 
-The PR must prove:
+The registry has eight canonical Market Access records. The latest pilot promoted four RLUSD provider-scoped records, but no approved third-pilot candidate manifest exists at this gate. Market Access Pilot 3 remains deferred.
 
-- manifest identity and content digest are bound into the v2.1 output;
-- all 29 profile files are consumed in exact order;
-- default loader behavior remains unchanged without manifest injection;
-- exactly 112 assets, 16 dimensions, and 1,792 cells are emitted;
-- historical outputs remain byte-identical;
-- `data/`, `src/`, and `public/` remain unchanged;
-- the corrected queue is non-ranking and does not authorize follow-on work;
-- Astro check and build succeed.
+### Monitoring and external usage
 
-## 7. Data and public boundaries
+Monitoring remains private-review-only. Automatic promotion is prohibited. Verified external usage evidence remains unavailable in reviewed repository evidence.
 
-PR #372 changes no:
+## 8. Data and public boundaries
+
+PR #373 changes no:
 
 ```text
 data/
@@ -149,25 +174,8 @@ Evidence identities or relations
 Market Access records
 deployments
 statistics history
+historical baselines or queues
 public pages or machine-readable outputs
-```
-
-Its outputs remain internal planning infrastructure.
-
-## 8. Historical preservation
-
-Do not rewrite:
-
-```text
-PR #353 and #363 planning checkpoints
-PR #367 semantics contract and audit
-PR #368 baseline, summary, delta, or queue
-PR #369 outcomes and handoff
-PR #370 review-gate report
-PR #371 manifest and audit
-prior reviewed dossier handoffs
-canonical release-integrity checkpoints
-closed statistics or Maintenance Log history
 ```
 
 ## 9. Not approved
@@ -187,4 +195,4 @@ automatic canonical promotion
 
 ## 10. Next gate
 
-After PR #372, stop and review the corrected queue, complete input manifest, source availability, archive maintenance burden, Market Access breadth, monitoring usefulness, monthly maintenance burden, and verified external usage evidence before authorizing another numbered sequence.
+After PR #375, stop and review the history-aware queue, source reactivation semantics, archive burden, Market Access breadth, monitoring usefulness, monthly maintenance burden, and verified external usage evidence before authorizing another numbered sequence.

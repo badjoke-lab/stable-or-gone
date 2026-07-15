@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr372_review_gate_pr373_2026_07_15",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 373,
+  "reviewed_at": "2026-07-15",
+  "source_checkpoint": {
+    "assets": 112,
+    "evidence": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "completed_sequence": [
+    {
+      "pr": 371,
+      "work_item": "Planning Input Coverage Audit",
+      "status": "complete"
+    },
+    {
+      "pr": 372,
+      "work_item": "Record Depth Baseline v2.1 Refresh",
+      "status": "complete"
+    }
+  ],
+  "evaluation": {
+    "planning_input_correction": {
+      "manifest_id": "sog_planning_input_manifest_pr371_v1",
+      "complete_profile_file_count": 29,
+      "effective_default_profile_file_count": 27,
+      "omitted_or_order_corrected_profile_file_count": 2,
+      "pr371_affected_asset_count": 35,
+      "result": "successful"
+    },
+    "baseline_v2_1": {
+      "baseline_id": "sog_record_depth_baseline_v2_1_pr372",
+      "assets": 112,
+      "dimensions": 16,
+      "cells": 1792,
+      "changed_cell_count": 4,
+      "changed_asset_count": 4,
+      "changed_cells": [
+        {
+          "asset_id": "sog_st_busd",
+          "asset_slug": "busd",
+          "dimension_id": "redemption",
+          "before_state": "partial",
+          "after_state": "strong"
+        },
+        {
+          "asset_id": "sog_st_pyusd",
+          "asset_slug": "pyusd",
+          "dimension_id": "redemption",
+          "before_state": "partial",
+          "after_state": "strong"
+        },
+        {
+          "asset_id": "sog_st_rlusd",
+          "asset_slug": "rlusd",
+          "dimension_id": "redemption",
+          "before_state": "partial",
+          "after_state": "strong"
+        },
+        {
+          "asset_id": "sog_st_usdp",
+          "asset_slug": "usdp",
+          "dimension_id": "redemption",
+          "before_state": "partial",
+          "after_state": "strong"
+        }
+      ],
+      "planning_state_counts": {
+        "strong": 608,
+        "usable": 718,
+        "partial": 246,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 218
+      },
+      "finding": "The complete profile manifest corrected four redemption cells from partial to strong without changing applicability scope."
+    },
+    "corrected_queue": {
+      "queue_id": "sog_tier_a_candidate_queue_v2_1_pr372",
+      "candidate_count": 3,
+      "candidate_slugs": [
+        "audd",
+        "nzds",
+        "poundtoken"
+      ],
+      "prior_reviewed_no_safe_change_count": 3,
+      "prior_reviewed_no_safe_change_slugs": [
+        "audd",
+        "nzds",
+        "poundtoken"
+      ],
+      "all_candidates_prior_reviewed_no_safe_change": true,
+      "new_source_signal_present_in_queue": false,
+      "finding": "Every corrected queue candidate already has a reviewed no-safe-change outcome and the queue carries no new-source reactivation signal."
+    },
+    "queue_builder_review_history": {
+      "reads_pr369_outcomes": false,
+      "reads_reviewed_no_safe_change": false,
+      "reads_prior_review_handoff": false,
+      "consumes_review_history": false,
+      "finding": "The current queue builder derives eligibility from present gap and leverage states but does not consume reviewed dossier outcomes or no-safe-change history."
+    },
+    "archive_maintenance": {
+      "archive_recorded": 390,
+      "archive_not_recorded": 169,
+      "last_batch_selected": 10,
+      "last_batch_canonical_changes": 3,
+      "last_batch_reviewed_no_safe_change": 7,
+      "decision": "defer_until_after_queue_history_sequence"
+    },
+    "market_access": {
+      "canonical_record_count": 8,
+      "latest_promoted_record_count": 4,
+      "third_pilot_candidate_manifest": "not_available_in_named_review_inputs",
+      "decision": "defer"
+    },
+    "monthly_maintenance": {
+      "month": "2026-07",
+      "status": "in_progress",
+      "checks_passed": 6,
+      "next_focus": [
+        "Close the July maintenance entry after month-end review.",
+        "Continue Market Access promotion review under the canonical evidence and governance boundary.",
+        "Continue source-link, correction, and public-surface contract review without exposing internal monitoring rows or unreviewed candidates."
+      ],
+      "decision": "continue_existing_month_end_process"
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    },
+    "external_usage": {
+      "status": "not_available_in_reviewed_repository_evidence",
+      "decision_effect": "No public-surface or growth sequence is authorized from unverified usage claims."
+    }
+  },
+  "decisions": {
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved",
+      "reason": "All three corrected queue candidates retain reviewed no-safe-change outcomes and no new source signal is present."
+    },
+    "planning_queue_review_history_contract_audit": {
+      "decision": "approved_required",
+      "pr": 374,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "candidate_queue_v2_2_refresh": {
+      "decision": "approved_after_pr374",
+      "pr": 375,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "evidence_archive_maintenance_batch_3": {
+      "decision": "not_approved_in_next_sequence"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 374,
+      "work_item": "Planning Queue Review-History Contract Audit",
+      "scope": "Inventory reviewed dossier handoffs and no-safe-change outcomes; define deterministic suppression, expiry, and new-source reactivation semantics for internal queue eligibility; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 375,
+      "work_item": "Candidate Queue v2.2 Refresh",
+      "scope": "Apply the approved review-history contract to the PR #372 v2.1 baseline; preserve all historical baselines; emit a corrected internal non-ranking queue and review-history delta; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Tier A Dossier Deepening Batch 6",
+    "Evidence and Archive Maintenance Batch 3",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #374 must update AGENTS.md and docs/roadmap.md before changing queue eligibility contracts.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "822d9bcf07299e008b7571d1389a0994fd447e2e3d6fd7af8f167ea71e90f917",
+  "decision_digest_sha256": "38974620a5dc66184d905c79354d531d2be15cc0f7ca63064584c6202fd48581"
+}
