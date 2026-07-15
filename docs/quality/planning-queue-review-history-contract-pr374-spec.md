@@ -77,7 +77,9 @@ A candidate remains eligible only when at least one material dossier gap is unre
 
 Queue order remains asset-slug ascending and non-ranking.
 
-## Expected result
+## Reviewed generated result
+
+The deterministic history reconstruction produced:
 
 ```text
 history sources: 5
@@ -87,10 +89,18 @@ effective asset-dimension outcomes: 33
 reviewed complete: 20
 reviewed partial: 0
 reviewed no-safe-change: 13
+```
+
+The PR #372 queue projection produced:
+
+```text
 current queue candidates: 3
 fully suppressed candidates: 3
-projected v2.2 candidates without new signals: 0
+reviewed reactivation signals: 0
+projected v2.2 candidates: 0
 ```
+
+AUDD, NZDS, and poundtoken have every current material dossier gap covered by the latest `reviewed_no_safe_change` event. None may return solely because it appears in a regenerated queue or because time has elapsed.
 
 ## Required outputs
 
