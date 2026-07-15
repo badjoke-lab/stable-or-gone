@@ -34,9 +34,18 @@ jobs:
           node scripts/build-tier-a-dossier-batch-5-pr369.mjs
           node scripts/build-tier-a-dossier-batch-5-pr369.mjs --check
       - name: Validate reviewed selection and outcomes
+        id: review_validation
         run: |
-          node scripts/validate-tier-a-dossier-batch-5-pr369.mjs
-          npm run validate:active-workstream
+          set +e
+          node scripts/validate-tier-a-dossier-batch-5-pr369.mjs > pr369-validation.log 2>&1
+          status=$?
+          cat pr369-validation.log
+          if [ "$status" -eq 0 ]; then
+            npm run validate:active-workstream >> pr369-validation.log 2>&1
+            status=$?
+            cat pr369-validation.log
+          fi
+          exit "$status"
       - name: Validate existing canonical contracts
         run: |
           npm run validate:data
@@ -74,9 +83,11 @@ jobs:
           script: |
             const marker='<!-- pr369-tier-a-dossier-batch-5-status -->';
             const fs=require('fs');
-            let outcomes=null,handoff=null;
+            let outcomes=null,handoff=null,diagnostics='';
             try{outcomes=JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-5-pr369-review-outcomes.json','utf8'));}catch{}
             try{handoff=JSON.parse(fs.readFileSync('docs/migration/tier-a-batch-5-pr369-reviewed-handoff.json','utf8'));}catch{}
+            try{diagnostics=fs.readFileSync('pr369-validation.log','utf8').trim().split('\n').slice(-20).join('\n');}catch{}
+            const diagnosticBlock=diagnostics?`\n\n<details><summary>Validation diagnostics</summary>\n\n\`\`\`text\n${diagnostics}\n\`\`\`\n</details>`:'';
             const body=`${marker}
             ## PR #369 Tier A Dossier Deepening Batch 5
 
@@ -87,7 +98,7 @@ jobs:
             - Prior-completed duplicate changes rejected: **${outcomes?.result_counts?.prior_completed_no_duplicate_change_assets??'n/a'}**
             - Assets / Evidence / deployments / Market Access preserved: **${handoff?.canonical_checkpoint?.assets??'n/a'} / ${handoff?.canonical_checkpoint?.evidence??'n/a'} / ${handoff?.canonical_checkpoint?.deployments??'n/a'} / ${handoff?.canonical_checkpoint?.market_access_records??'n/a'}**
             - Next state: **${handoff?.next_state??'n/a'}**
-            - Head: \`${context.sha}\`
+            - Head: \`${context.sha}\`${diagnosticBlock}
             `;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
