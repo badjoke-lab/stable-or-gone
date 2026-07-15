@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-15  
-Status: canonical execution schedule — PR #369 active
+Status: canonical execution schedule — PR #370 review gate active
 
 The full roadmap that governed the repository through merged PR #366 is preserved byte-for-byte at:
 
@@ -25,15 +25,14 @@ Market Access Records: 8
 Archive recorded: 390
 Archive not recorded: 169
 
-PR #365 Evidence and Archive Maintenance Batch 2: complete
-PR #366 Post-PR #365 Review Gate: complete
 PR #367 Planning Dimension Semantics Audit: complete
 PR #368 Record Depth Baseline v2 Refresh: complete
-PR #369 Tier A Dossier Deepening Batch 5: active; complete on merge
-REVIEW GATE: next and mandatory
+PR #369 Tier A Dossier Deepening Batch 5: complete
+PR #370 Post-PR #369 Review Gate: active; complete on merge
+Current authority: REVIEW GATE
 ```
 
-The public-surface expansion sequence remains complete. The current work is the final bounded manual dossier review before another authority decision.
+The public-surface expansion sequence remains complete. PR #370 is an internal authority decision only.
 
 ## 2. Current authority
 
@@ -49,48 +48,33 @@ docs/roadmap-amendments/2026-07-15-pr366-post-pr365-review-gate.md
 docs/roadmap-amendments/2026-07-15-pr367-planning-dimension-semantics-audit-activation.md
 docs/roadmap-amendments/2026-07-15-pr368-record-depth-baseline-v2-refresh-activation.md
 docs/roadmap-amendments/2026-07-15-pr369-tier-a-dossier-batch-5-activation.md
-docs/quality/tier-a-dossier-batch-5-pr369-spec.md
-config/tier-a-dossier-batch-5-pr369.json
-docs/migration/tier-a-candidate-queue-v2-pr368.json
-prior reviewed handoffs
+docs/roadmap-amendments/2026-07-15-pr370-post-pr369-review-gate.md
+docs/quality/post-pr369-review-gate-pr370-spec.md
+config/post-pr369-review-gate-pr370.json
+docs/migration/post-pr369-review-gate-pr370.json
 ```
 
-## 3. Approved bounded sequence
+## 3. Completed sequence
 
 ```text
 PR #367  Planning Dimension Semantics Audit — complete
 PR #368  Record Depth Baseline v2 Refresh — complete
-PR #369  Tier A Dossier Deepening Batch 5 — active
-REVIEW GATE
+PR #369  Tier A Dossier Deepening Batch 5 — complete
+REVIEW GATE — current
 ```
-
-No work item may skip its predecessor. No PR after #369 is pre-authorized.
 
 ## 4. PR #367 result
 
-PR #367 established the internal three-axis planning model:
+PR #367 established explicit planning quality, applicability, and observation/source-support semantics across 16 dimensions.
 
 ```text
-planning quality
-applicability
-observation/source support
-```
-
-Dimension classes:
-
-```text
-universal_dossier: 11
-conditional_structural: 3
-scoped_observational: 2
-```
-
-Queue roles:
-
-```text
-material_dossier: 11
-maintenance_only: 2
-scoped_non_dossier: 2
-diagnostic_only: 1
+universal dossier dimensions: 11
+conditional structural dimensions: 3
+scoped observational dimensions: 2
+material dossier queue roles: 11
+maintenance-only roles: 2
+scoped non-dossier roles: 2
+diagnostic-only roles: 1
 ```
 
 ## 5. PR #368 result
@@ -103,7 +87,7 @@ PR #368 recomputed:
 1,792 cells
 ```
 
-Reviewed planning counts:
+Planning counts:
 
 ```text
 strong: 604
@@ -114,7 +98,7 @@ absent: 2
 not_applicable: 218
 ```
 
-The non-ranking queue contains six candidates:
+The internal non-ranking queue contained six candidates:
 
 ```text
 AUDD
@@ -125,13 +109,9 @@ RLUSD
 USDP
 ```
 
-The queue is planning infrastructure. It does not override prior reviewed handoffs or authorize automatic canonical changes.
+## 6. PR #369 result
 
-## 6. PR #369 — Tier A Dossier Deepening Batch 5
-
-Status: active; complete on merge.
-
-Selected review set:
+PR #369 reviewed five candidates:
 
 ```text
 AUDD
@@ -141,61 +121,78 @@ poundtoken / 1GBP
 USDP
 ```
 
-RLUSD is not selected because it was improved in PR #354, reviewed again with no safe canonical change in PR #364, and received bounded Market Access records in PR #359.
-
-Configured reviewed outcomes:
-
-```text
-AUDD       reviewed_no_safe_change — PR #357 boundary retained
-BUSD       prior_completed_no_duplicate_change — PR #354 retained
-NZDS       reviewed_no_safe_change — PR #357 boundary retained
-poundtoken reviewed_no_safe_change — PR #364 boundary retained
-USDP       prior_completed_no_duplicate_change — PR #355 retained
-```
-
-Expected result:
+Result:
 
 ```text
 selected assets: 5
 canonical improvement assets: 0
 reviewed no-safe-change assets: 3
 prior-completed duplicate changes rejected: 2
-canonical counts unchanged: true
-public surface unchanged: true
 ```
 
-A zero-change result is valid. The repository must not force unsupported or duplicate canonical edits to manufacture batch yield.
+RLUSD was not selected because it already had PR #354 legal/redemption improvements, a PR #364 no-safe-change re-review, and PR #359 Market Access work.
 
-Required outputs:
+Every PR #368 queue candidate had prior reviewed improvement or no-safe-change history before PR #369.
+
+## 7. Review-gate finding
+
+The queue recurrence is explained by the planning input path:
 
 ```text
-docs/migration/tier-a-batch-5-pr369-review-outcomes.json
-docs/migration/tier-a-batch-5-pr369-reviewed-handoff.json
-scripts/build-tier-a-dossier-batch-5-pr369.mjs
-scripts/validate-tier-a-dossier-batch-5-pr369.mjs
-scripts/check-workstream-126.mjs
-.github/workflows/pr369-tier-a-dossier-batch-5.yml
+scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs
+  default profileOverrideFiles = []
+
+scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
+  invokes buildReviewedRecordDepthBaseline() without options
 ```
 
-## 7. Data and public boundaries
+The next problem is not another dossier batch. The repository must first prove that the planning builder consumes every current reviewed profile overlay exactly once.
 
-The configured PR #369 outcome changes no:
+## 8. Approved next sequence
+
+PR #370 approves but does not activate:
 
 ```text
-canonical data
-Evidence identities or relations
-Market Access records
-deployments
-statistics history
-src product surface
-public output
+PR #371  Planning Input Coverage Audit
+PR #372  Record Depth Baseline v2.1 Refresh
+REVIEW GATE
 ```
 
-If new reviewed source support is introduced before merge, the scope, config, outputs, canonical validators, and PR body must all be updated together. Otherwise `data/`, `src/`, and `public/` remain unchanged.
+PR #371 must update `AGENTS.md` and `docs/roadmap.md` before changing planning input contracts.
 
-## 8. Not approved
+### PR #371
+
+Required scope:
 
 ```text
+inventory canonical and reviewed profile overlays
+map every public loader and planning-builder consumer
+define one deterministic planning input manifest
+detect omitted input paths
+detect duplicate application
+preserve canonical data
+preserve public output
+```
+
+### PR #372
+
+Required scope:
+
+```text
+begin only after PR #371 merges
+consume the approved complete planning input manifest
+recompute 112 assets × 16 dimensions
+preserve PR #353, #363, and #368 checkpoints
+emit a corrected internal non-ranking queue
+preserve canonical data
+preserve public output
+stop at another review gate
+```
+
+## 9. Not approved
+
+```text
+Tier A Dossier Deepening Batch 6
 Evidence and Archive Maintenance Batch 3
 Market Access Pilot 3
 Record Growth Batch 2
@@ -207,31 +204,39 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-## 9. Parallel operating lanes
+## 10. Data and public boundaries
 
-### Data depth and growth
+PR #370 changes no:
 
-Paused after PR #369 until the review gate authorizes another bounded sequence.
+```text
+canonical data
+Evidence identities or relations
+Market Access records
+deployments
+statistics history
+src product surface
+public output
+```
 
-### Market Access
+Its outputs remain internal planning and governance records.
 
-No Pilot 3 is approved. Existing eight records remain canonical and evidence-scoped.
+## 11. Historical preservation
 
-### Monitoring
+Do not rewrite:
 
-Monitoring remains private, review-only, and read-only with respect to canonical data.
+```text
+PR #353 and #363 planning checkpoints
+PR #367 semantics contract and audit
+PR #368 baseline, summary, delta, or queue
+PR #369 outcomes and handoff
+prior reviewed dossier handoffs
+canonical release-integrity checkpoints
+closed statistics or Maintenance Log history
+```
 
-### Corrections and evidence maintenance
+## 12. Product-surface policy
 
-Small correctness and safety fixes remain allowed, but Evidence and Archive Maintenance Batch 3 is not authorized as a numbered work item.
-
-### Monthly maintenance
-
-The current month may remain `in_progress` until month-end review. Closed months remain immutable.
-
-## 10. Product-surface policy
-
-The existing public product set is sufficient for the current phase:
+The existing public product set remains sufficient:
 
 ```text
 Registry records
@@ -244,34 +249,8 @@ Maintenance Log
 machine-readable projections
 ```
 
-PR #369 adds no public surface.
+No new public surface is approved.
 
-## 11. Core data rules
+## 13. Next gate
 
-- Unknown values remain unknown unless reviewed evidence supports a value.
-- Do not coerce partial dates into day-level dates.
-- Preserve evidence relations, known unknowns, deployments, source identities, and value states.
-- Candidate, monitoring, editorial-research, discovery, and private material remain outside canonical public claims.
-- A planning gap is not a negative real-world claim.
-- Prior reviewed handoffs remain authoritative for completed or no-safe-change outcomes.
-- SOG does not create composite asset risk scores or rankings.
-
-## 12. Next gate
-
-After PR #369 merges, stop at `REVIEW GATE`.
-
-The review must evaluate:
-
-```text
-zero-change PR #369 yield
-repeated prior-review candidates in the PR #368 queue
-planning-builder and profile-overlay coverage
-source availability
-archive maintenance burden
-Market Access evidence breadth
-monitoring usefulness
-monthly maintenance burden
-verified external usage evidence
-```
-
-A new numbered sequence requires a reviewed roadmap amendment.
+After PR #372, stop and review the corrected queue, planning input manifest coverage, source availability, archive maintenance burden, Market Access evidence breadth, monitoring usefulness, monthly maintenance burden, and verified external usage evidence before authorizing any dossier or growth work.
