@@ -29,32 +29,33 @@ Current active amendments:
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-15-pr370-post-pr369-review-gate.md
 docs/roadmap-amendments/2026-07-15-pr371-planning-input-coverage-audit-activation.md
+docs/roadmap-amendments/2026-07-15-pr372-record-depth-baseline-v2-1-refresh-activation.md
 ```
 
 Current work-item specification:
 
 ```text
-docs/quality/planning-input-coverage-audit-pr371-spec.md
+docs/quality/record-depth-baseline-v2-1-refresh-pr372-spec.md
 ```
 
 Current required inputs:
 
 ```text
-config/planning-input-coverage-audit-pr371.json
-docs/migration/post-pr369-review-gate-pr370.json
-src/lib/data/currentProfiles.ts
-src/lib/data/stablecoinProfiles.ts
-docs/migration/registry-v2-baseline.json
-scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs
-scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
-docs/migration/current-canonical-checkpoint.json
+config/record-depth-baseline-v2-1-refresh-pr372.json
+docs/migration/planning-input-manifest-pr371.json
+docs/migration/planning-input-coverage-audit-pr371.json
+config/planning-dimension-semantics-v2.json
+docs/migration/planning-dimension-semantics-audit-pr367.json
+docs/migration/record-depth-baseline-v2-pr368.json
+docs/migration/record-depth-baseline-v2-pr368-summary.json
+docs/migration/tier-a-candidate-queue-v2-pr368.json
 ```
 
 ## 2. Repository source of truth
 
 Merged repository specifications and reviewed handoffs outrank chat memory, issue discussion, generated prose, stale roadmap text, unmerged drafts, and mock images.
 
-The public profile composition in `src/lib/data/currentProfiles.ts` is the current reviewed loader boundary. PR #371 may audit that boundary but may not edit it.
+The PR #371 manifest is the only approved planning profile input boundary for PR #372. An ad hoc profile list is prohibited.
 
 ## 3. Current workstream
 
@@ -64,71 +65,80 @@ PR #367 Planning Dimension Semantics Audit: complete
 PR #368 Record Depth Baseline v2 Refresh: complete
 PR #369 Tier A Dossier Deepening Batch 5: complete
 PR #370 Post-PR #369 Review Gate: complete
-PR #371 Planning Input Coverage Audit: active; complete on merge
-PR #372 Record Depth Baseline v2.1 Refresh: next after PR #371
-REVIEW GATE: required after PR #372
+PR #371 Planning Input Coverage Audit: complete
+PR #372 Record Depth Baseline v2.1 Refresh: active; complete on merge
+REVIEW GATE: next and mandatory
 ```
 
 Approved sequence:
 
 ```text
-PR #371  Planning Input Coverage Audit — active
-PR #372  Record Depth Baseline v2.1 Refresh — next
+PR #371  Planning Input Coverage Audit — complete
+PR #372  Record Depth Baseline v2.1 Refresh — active
 REVIEW GATE
 ```
 
-Do not skip ahead. PR #372 may start only from the merged PR #371 manifest and audit.
+No dossier, archive-maintenance, Market Access, record-growth, or public-surface work is authorized before the next review gate.
 
-## 4. PR #371 exact authority
-
-PR #371 must inventory and compare:
+## 4. PR #371 binding result
 
 ```text
-public profile loader files
-legacy registry baseline profile files
-planning-builder default profile inputs
-reviewed overlay inputs
-asset-ID duplicate occurrences
-last-write-wins asset winners
+public profile input files: 29
+legacy planning profile files: 15
+reviewed overlay files omitted by default planning input: 14
+public unique asset IDs: 112
+legacy unique asset IDs: 82
+duplicate asset IDs: 5
+affected asset IDs: 35
+source order: public loader import order
+duplicate resolution: last write wins
 ```
+
+Binding manifest:
+
+```text
+docs/migration/planning-input-manifest-pr371.json
+```
+
+## 5. PR #372 exact authority
+
+PR #372 must:
+
+- consume the exact PR #371 manifest;
+- recompute exactly 112 assets × 16 dimensions = 1,792 cells;
+- retain the PR #367 planning/applicability/observation semantics;
+- preserve PR #353, #363, and #368 checkpoints;
+- produce deterministic v2.1 baseline, summary, delta, and queue outputs;
+- record every changed cell and queue change relative to PR #368;
+- keep the queue internal, non-ranking, and manual-review-only;
+- stop at `REVIEW GATE`.
 
 Required outputs:
 
 ```text
-docs/migration/planning-input-manifest-pr371.json
-docs/migration/planning-input-coverage-audit-pr371.json
-scripts/build-planning-input-coverage-audit-pr371.mjs
-scripts/validate-planning-input-coverage-audit-pr371.mjs
+docs/migration/record-depth-baseline-v2-1-pr372.json
+docs/migration/record-depth-baseline-v2-1-pr372-summary.json
+docs/migration/record-depth-baseline-v2-1-pr372-delta.json
+docs/migration/tier-a-candidate-queue-v2-1-pr372.json
 ```
 
-Expected source-derived boundary:
+## 6. Input injection rule
+
+The internal registry loader may accept the environment variable:
 
 ```text
-public loader files: 29
-legacy planning files: 15
-reviewed overlay files omitted by default planning input: 14
+SOG_PLANNING_PROFILE_MANIFEST=docs/migration/planning-input-manifest-pr371.json
 ```
 
-These values must be derived and validated. They are not permission to edit `src/` or `data/`.
+The loader must validate the reviewed manifest status, ordered paths, path safety, uniqueness, and file existence before replacing the planning-only profile group.
 
-## 5. Composition semantics
+Default loader behavior without this variable must remain unchanged.
 
-The approved planning input manifest must reproduce `currentProfiles.ts` exactly:
+## 7. Canonical and public boundary
 
-```text
-source order: public loader import order
-duplicate resolution: last write wins
-file identity: path + SHA-256
-row identity: non-empty asset id
-```
+PR #372 may change only internal planning loader support, configuration, authority, deterministic builders, generated internal outputs, validators, and workflow files.
 
-For every asset ID, the manifest records the winning file and every superseded file. A duplicate occurrence is allowed only when deterministic last-write-wins composition is preserved.
-
-## 6. Canonical and public boundary
-
-PR #371 may change only internal audit, manifest, authority, validator, and workflow files.
-
-It may not change:
+It may not add or change:
 
 ```text
 data/
@@ -139,24 +149,10 @@ Evidence identities or Evidence Relations
 Market Access records
 deployments
 statistics history
-Record Depth baselines or queues
 public pages or machine-readable outputs
 rankings, scores, recommendations, or leaderboards
 automatic monitoring or canonical promotion
 ```
-
-## 7. PR #372 boundary
-
-After PR #371 merges, PR #372 may:
-
-- consume the exact approved manifest;
-- recompute 112 assets × 16 dimensions;
-- preserve PR #353, #363, and #368 checkpoints;
-- emit a corrected internal non-ranking queue;
-- change no canonical or public data;
-- stop at another review gate.
-
-PR #372 may not begin from an ad hoc file list.
 
 ## 8. Historical preservation
 
@@ -168,6 +164,7 @@ PR #367 semantics contract and audit
 PR #368 baseline, summary, delta, or queue
 PR #369 outcomes and handoff
 PR #370 review-gate report
+PR #371 manifest and audit
 prior dossier handoffs
 canonical release-integrity checkpoints
 closed statistics or Maintenance Log history
