@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_record_depth_baseline_v2_refresh_pr368_v1",
+  "status": "pr367_authorized_internal_baseline_refresh",
+  "review_pr": 368,
+  "reviewed_at": "2026-07-15",
+  "source_semantics_contract": "config/planning-dimension-semantics-v2.json",
+  "source_semantics_audit": "docs/migration/planning-dimension-semantics-audit-pr367.json",
+  "historical_v1_summary": "docs/migration/record-depth-baseline-pr363-summary.json",
+  "historical_v1_delta": "docs/migration/record-depth-baseline-pr363-delta.json",
+  "historical_v1_queue": "docs/migration/tier-a-candidate-queue-pr363.json",
+  "expected": {
+    "asset_count": 112,
+    "dimension_count": 16,
+    "cell_count": 1792,
+    "historical_v1_baseline_id": "sog_record_depth_baseline_pr363_v1",
+    "semantics_contract_id": "sog_planning_dimension_semantics_v2_pr367"
+  },
+  "required_outputs": [
+    "docs/migration/record-depth-baseline-v2-pr368.json",
+    "docs/migration/record-depth-baseline-v2-pr368-summary.json",
+    "docs/migration/record-depth-baseline-v2-pr368-delta.json",
+    "docs/migration/tier-a-candidate-queue-v2-pr368.json"
+  ],
+  "queue_policy": {
+    "order": "asset_slug_ascending_non_ranking",
+    "eligible_gap_states": ["partial", "sparse", "absent"],
+    "material_role": "material_dossier",
+    "historical_material_gap_min": 2,
+    "regional_material_gap_min": 2,
+    "comparison_preset_material_gap_min": 1,
+    "require_at_least_one_material_gap": true,
+    "manual_source_review_required": true,
+    "maximum_assets_in_pr369": 5,
+    "asset_rank": false,
+    "single_composite_score": false
+  },
+  "scope_rules": {
+    "regulatory_notes_without_canonical_rows": "not_applicable_to_current_scope",
+    "market_access_without_canonical_records": "not_applicable_to_current_scope",
+    "explicit_redemption_not_applicable": "not_applicable",
+    "explicit_reserve_not_applicable": "not_applicable",
+    "not_applicable_counts_as_gap": false,
+    "unobserved_is_negative_claim": false,
+    "source_unavailable_authorizes_fabrication": false
+  },
+  "boundaries": {
+    "canonical_write_allowed": false,
+    "market_access_write_allowed": false,
+    "monitoring_auto_promotion_allowed": false,
+    "editorial_research_auto_promotion_allowed": false,
+    "public_output_allowed": false,
+    "new_public_surface_allowed": false,
+    "historical_checkpoint_rewrite_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false,
+    "investment_recommendation": false
+  },
+  "next_work_item": "PR #369 Tier A Dossier Deepening Batch 5"
+}

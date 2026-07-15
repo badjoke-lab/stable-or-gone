@@ -29,6 +29,7 @@ Current active amendments:
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-15-pr366-post-pr365-review-gate.md
 docs/roadmap-amendments/2026-07-15-pr367-planning-dimension-semantics-audit-activation.md
+docs/roadmap-amendments/2026-07-15-pr368-record-depth-baseline-v2-refresh-activation.md
 ```
 
 Current operating specification:
@@ -40,17 +41,19 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/planning-dimension-semantics-audit-pr367-spec.md
+docs/quality/record-depth-baseline-v2-refresh-pr368-spec.md
 ```
 
 Current required prior outputs and contracts:
 
 ```text
 docs/migration/post-pr365-review-gate-pr366.json
+docs/migration/planning-dimension-semantics-audit-pr367.json
+config/planning-dimension-semantics-v2.json
+config/record-depth-baseline-v2-refresh-pr368.json
 docs/migration/record-depth-baseline-pr363-summary.json
-docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
-docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json
-config/record-depth-baseline-v1.json
+docs/migration/record-depth-baseline-pr363-delta.json
+docs/migration/tier-a-candidate-queue-pr363.json
 scripts/growth/build-record-depth-baseline-pr353.mjs
 scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs
 ```
@@ -74,58 +77,55 @@ docs/archive/roadmap-through-pr366.md
 Canonical stable assets: 112
 PR #365 Evidence and Archive Maintenance Batch 2: complete
 PR #366 Post-PR #365 Review Gate: complete
-PR #367 Planning Dimension Semantics Audit: active; complete on merge
-PR #368 Record Depth Baseline v2 Refresh: next after PR #367
-PR #369 Tier A Dossier Deepening Batch 5: after PR #368; maximum five existing assets
+PR #367 Planning Dimension Semantics Audit: complete
+PR #368 Record Depth Baseline v2 Refresh: active; complete on merge
+PR #369 Tier A Dossier Deepening Batch 5: next after PR #368; maximum five existing assets
 REVIEW GATE: required after PR #369
 ```
 
 Approved bounded sequence from PR #366:
 
 ```text
-PR #367  Planning Dimension Semantics Audit
-PR #368  Record Depth Baseline v2 Refresh
+PR #367  Planning Dimension Semantics Audit — complete
+PR #368  Record Depth Baseline v2 Refresh — active
 PR #369  Tier A Dossier Deepening Batch 5 — maximum five existing assets
 REVIEW GATE
 ```
 
-Do not skip ahead. PR #368 may start only from the merged PR #367 semantics contract. PR #369 may start only from the merged PR #368 non-ranking baseline and queue.
+Do not skip ahead. PR #369 may start only from the merged PR #368 non-ranking baseline and queue.
 
-## 4. PR #367 exact authority
+## 4. PR #368 exact authority
 
-PR #367 must review all 16 planning dimensions and define the operational distinction between:
+PR #368 must recompute exactly:
 
 ```text
-strong
-usable
-partial
-sparse
-absent
-not_applicable
+112 canonical assets
+16 planning dimensions
+1,792 planning cells
 ```
 
-It must also separate planning quality from two orthogonal axes:
+Every planning cell must record:
 
 ```text
+planning quality state
 applicability state
 observation/source-support state
+dimension class
+queue role
 ```
 
-The audit must explicitly distinguish a genuine applicable gap from an out-of-scope dimension, an unobserved dimension, and a source-unavailable dimension.
-
-Required PR #367 outputs:
+Required PR #368 outputs:
 
 ```text
-config/planning-dimension-semantics-pr367.json
-config/planning-dimension-semantics-v2.json
-docs/migration/planning-dimension-semantics-audit-pr367.json
-docs/quality/planning-dimension-semantics-audit-pr367-spec.md
-docs/roadmap-amendments/2026-07-15-pr367-planning-dimension-semantics-audit-activation.md
-scripts/build-planning-dimension-semantics-audit-pr367.mjs
-scripts/validate-planning-dimension-semantics-audit-pr367.mjs
+docs/migration/record-depth-baseline-v2-pr368.json
+docs/migration/record-depth-baseline-v2-pr368-summary.json
+docs/migration/record-depth-baseline-v2-pr368-delta.json
+docs/migration/tier-a-candidate-queue-v2-pr368.json
+scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
+scripts/validate-record-depth-baseline-v2-refresh-pr368.mjs
 ```
 
-PR #367 may update internal planning contracts, active-workstream pointers, validators, and workflows. It may not recompute the 112-asset v2 baseline; that belongs to PR #368.
+PR #368 may update internal planning outputs, active-workstream pointers, validators, and workflows. It may not change canonical records, public output, or historical v1 planning checkpoints.
 
 ## 5. Planning semantics boundary
 
@@ -140,9 +140,11 @@ docs/migration/record-depth-baseline-pr363-delta.json
 docs/migration/tier-a-candidate-queue-pr363.json
 ```
 
-The v2 semantics contract is internal planning infrastructure. It is not canonical asset data, a risk score, a safety score, a quality ranking, a transparency ranking, a numeric composite score, an asset rank, an investment recommendation, or a public leaderboard.
+The merged v2 semantics contract is internal planning infrastructure. It is not canonical asset data, a risk score, a safety score, a quality ranking, a transparency ranking, a numeric composite score, an asset rank, an investment recommendation, or a public leaderboard.
 
-`not_applicable` means not applicable to the current reviewed planning scope. It must never be used to hide missing research. `absent` means the dimension is applicable and no canonical representation is present; it does not assert real-world nonexistence. `unobserved` and `source_unavailable` are observation states, not quality scores and not negative factual claims.
+`not_applicable` means not applicable to the current reviewed planning scope. It never counts as a gap or queue trigger. `absent` means the dimension is applicable and no canonical representation is present; it does not assert real-world nonexistence. `unobserved` and `source_unavailable` are observation states, not quality scores and not negative factual claims.
+
+Regulatory Notes and Market Access are scoped observational dimensions. Deployment and Facet Freshness are maintenance-only queue signals. Comparison Readiness is diagnostic and non-ranking. Only material-dossier gaps may directly contribute to the default dossier queue.
 
 ## 6. Canonical data and evidence rules
 
@@ -177,7 +179,7 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
-PR #367 and PR #368 may change no canonical records, `src/` product surface, or `public/` output. Their reports and contracts remain internal and non-public.
+PR #368 may change no canonical records, `src/` product surface, or `public/` output. Its reports and baseline remain internal and non-public.
 
 Normal merged changes publish from `main` under `docs/deployment-policy.md`. Internal planning files must not be copied into public build output.
 
@@ -189,7 +191,7 @@ Market Access remains function-, platform-, jurisdiction-, asset-, effective-dat
 
 ## 9. Dossier and growth boundary
 
-PR #369 may select no more than five existing assets from the PR #368 non-ranking queue and may improve only source-supported material dossier gaps.
+PR #369 may select no more than five existing assets from the merged PR #368 non-ranking queue and may improve only source-supported material dossier gaps.
 
 The current sequence does not authorize:
 
@@ -209,7 +211,7 @@ automatic canonical promotion
 
 Do not rewrite historical checkpoints because current canonical data, planning semantics, or dossier depth changed.
 
-Binding historical material includes release-integrity baselines, reproducible-build baselines, audited asset checkpoints, monitoring snapshots, statistics history, PR #353 and PR #363 planning snapshots, prior reviewed handoffs, and closed Maintenance Log months.
+Binding historical material includes release-integrity baselines, reproducible-build baselines, audited asset checkpoints, monitoring snapshots, statistics history, PR #353 and PR #363 planning snapshots, the merged PR #367 audit and contract, prior reviewed handoffs, and closed Maintenance Log months.
 
 The archived governance files are retained to preserve the complete prior execution record. New current-authority files may be shorter, but the archived blobs must remain unchanged.
 
