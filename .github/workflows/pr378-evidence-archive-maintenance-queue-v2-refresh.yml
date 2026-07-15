@@ -1,0 +1,105 @@
+name: PR 378 Evidence Archive Maintenance Queue v2 Refresh
+
+on:
+  push:
+    branches:
+      - pr378-evidence-archive-maintenance-queue-v2-refresh
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr378-evidence-archive-maintenance-queue-v2-refresh'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic archive queue v2 outputs
+        run: |
+          node scripts/build-evidence-archive-maintenance-queue-v2-pr378.mjs 2>&1 | tee /tmp/pr378-generation.txt
+          node scripts/build-evidence-archive-maintenance-queue-v2-pr378.mjs --check
+      - name: Validate history-aware archive queue
+        run: |
+          node scripts/validate-evidence-archive-maintenance-queue-v2-pr378.mjs 2>&1 | tee /tmp/pr378-validation.txt
+          npm run validate:active-workstream
+      - name: Validate existing canonical contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+      - name: Verify internal-planning-only boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          test ! -e public/data/evidence-archive-maintenance-queue-v2-pr378.json
+          test ! -e public/data/evidence-archive-maintenance-queue-v2-pr378-delta.json
+          test ! -e dist/data/evidence-archive-maintenance-queue-v2-pr378.json
+          test ! -e dist/data/evidence-archive-maintenance-queue-v2-pr378-delta.json
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+      - name: Commit generated archive queue v2 outputs
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            docs/migration/evidence-archive-maintenance-queue-v2-pr378.json \
+            docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json
+          if git diff --cached --quiet; then
+            echo 'Archive queue v2 outputs already committed'
+          else
+            git commit -m 'Generate PR 378 Evidence archive queue v2 outputs'
+            git push origin HEAD:pr378-evidence-archive-maintenance-queue-v2-refresh
+          fi
+      - name: Publish PR 378 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr378-evidence-archive-queue-v2-status -->';
+            const fs=require('fs');
+            let queue=null,delta=null;
+            try{queue=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-queue-v2-pr378.json','utf8'));}catch{}
+            try{delta=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json','utf8'));}catch{}
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr378-validation.txt','utf8').trim();}catch{}
+            const ids=queue?.selected_candidates?.map((row)=>row.evidence_id).join(', ')||'n/a';
+            const body=`${marker}
+            ## PR #378 Evidence Archive Maintenance Queue v2 Refresh
+
+            - Workflow: **${{ job.status }}**
+            - Canonical Evidence / archive recorded / not recorded: **${queue?.canonical_evidence_count??'n/a'} / ${queue?.archive_index_count??'n/a'} / ${queue?.archive_not_recorded_count??'n/a'}**
+            - Reviewed unresolved suppressed: **${queue?.reviewed_unresolved_suppressed_count??'n/a'}**
+            - Eligible pool / selected: **${queue?.eligible_pool_count??'n/a'} / ${queue?.selected_count??'n/a'}**
+            - Selected Evidence IDs: **${ids}**
+            - Next work item: **${queue?.next_work_item??'n/a'}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(0,12000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
