@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_record_depth_baseline_v2_1_refresh_pr372_v1",
+  "status": "pr370_authorized_manifest_bound_baseline_refresh",
+  "review_pr": 372,
+  "reviewed_at": "2026-07-15",
+  "planning_input_manifest": "docs/migration/planning-input-manifest-pr371.json",
+  "planning_input_audit": "docs/migration/planning-input-coverage-audit-pr371.json",
+  "source_semantics_contract": "config/planning-dimension-semantics-v2.json",
+  "source_semantics_audit": "docs/migration/planning-dimension-semantics-audit-pr367.json",
+  "historical_v2_baseline": "docs/migration/record-depth-baseline-v2-pr368.json",
+  "historical_v2_summary": "docs/migration/record-depth-baseline-v2-pr368-summary.json",
+  "historical_v2_queue": "docs/migration/tier-a-candidate-queue-v2-pr368.json",
+  "expected": {
+    "asset_count": 112,
+    "dimension_count": 16,
+    "cell_count": 1792,
+    "profile_file_count": 29,
+    "legacy_profile_file_count": 15,
+    "reviewed_overlay_file_count": 14,
+    "affected_asset_count_from_pr371": 35,
+    "historical_v2_baseline_id": "sog_record_depth_baseline_v2_pr368",
+    "planning_input_manifest_id": "sog_planning_input_manifest_pr371_v1",
+    "semantics_contract_id": "sog_planning_dimension_semantics_v2_pr367"
+  },
+  "required_outputs": [
+    "docs/migration/record-depth-baseline-v2-1-pr372.json",
+    "docs/migration/record-depth-baseline-v2-1-pr372-summary.json",
+    "docs/migration/record-depth-baseline-v2-1-pr372-delta.json",
+    "docs/migration/tier-a-candidate-queue-v2-1-pr372.json"
+  ],
+  "boundaries": {
+    "canonical_write_allowed": false,
+    "market_access_write_allowed": false,
+    "monitoring_auto_promotion_allowed": false,
+    "editorial_research_auto_promotion_allowed": false,
+    "public_output_allowed": false,
+    "new_public_surface_allowed": false,
+    "historical_checkpoint_rewrite_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false,
+    "investment_recommendation": false,
+    "next_dossier_batch_authorized": false
+  },
+  "next_work_item": "REVIEW GATE"
+}
