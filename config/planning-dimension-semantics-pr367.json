@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_planning_dimension_semantics_audit_pr367_v1",
+  "status": "bounded_internal_semantics_audit",
+  "review_pr": 367,
+  "reviewed_at": "2026-07-15",
+  "source_files": {
+    "review_gate": "docs/migration/post-pr365-review-gate-pr366.json",
+    "v1_config": "config/record-depth-baseline-v1.json",
+    "v1_summary": "docs/migration/record-depth-baseline-pr363-summary.json",
+    "v1_builder": "scripts/growth/build-record-depth-baseline-pr353.mjs",
+    "v1_reviewed_builder": "scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs",
+    "agents_archive": "docs/archive/AGENTS-through-pr366.md",
+    "roadmap_archive": "docs/archive/roadmap-through-pr366.md",
+    "semantics_contract": "config/planning-dimension-semantics-v2.json"
+  },
+  "preserved_git_blob_shas": {
+    "agents_through_pr366": "db88c513f1488c79e4d6e66a9c04853018039730",
+    "roadmap_through_pr366": "0a166ce2b3c110bdb1d424beb83ad8859ac49fce"
+  },
+  "expected_v1_boundary": {
+    "baseline_id": "sog_record_depth_baseline_pr363_v1",
+    "assets": 112,
+    "dimensions": 16,
+    "cells": 1792,
+    "state_counts": {
+      "strong": 602,
+      "usable": 716,
+      "partial": 255,
+      "sparse": 0,
+      "absent": 219,
+      "not_applicable": 0
+    },
+    "canonical_market_access_absent": 110,
+    "regulatory_notes_absent": 107,
+    "deployment_partial": 92,
+    "facet_freshness_support_partial": 91
+  },
+  "expected_contract_boundary": {
+    "dimensions": 16,
+    "universal_dossier": 11,
+    "conditional_structural": 3,
+    "scoped_observational": 2,
+    "material_dossier_queue_dimensions": 11,
+    "maintenance_only_dimensions": 2,
+    "scoped_non_dossier_dimensions": 2,
+    "diagnostic_only_dimensions": 1
+  },
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "baseline_recompute_allowed": false,
+    "historical_v1_rewrite_allowed": false,
+    "public_surface_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_work_item": "PR #368 Record Depth Baseline v2 Refresh"
+}
