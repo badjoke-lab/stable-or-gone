@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr369_review_gate_pr370_2026_07_15",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 370,
+  "reviewed_at": "2026-07-15",
+  "source_checkpoint": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "completed_sequence": [
+    {
+      "pr": 367,
+      "work_item": "Planning Dimension Semantics Audit",
+      "status": "complete"
+    },
+    {
+      "pr": 368,
+      "work_item": "Record Depth Baseline v2 Refresh",
+      "status": "complete"
+    },
+    {
+      "pr": 369,
+      "work_item": "Tier A Dossier Deepening Batch 5",
+      "status": "complete"
+    }
+  ],
+  "evaluation": {
+    "semantics_audit": {
+      "result": "successful",
+      "planning_state_counts": {
+        "strong": 604,
+        "usable": 718,
+        "partial": 250,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 218
+      },
+      "applicability_state_counts": {
+        "applicable": 1574,
+        "not_applicable_to_current_scope": 218
+      },
+      "observation_state_counts": {
+        "observed_supported": 604,
+        "observed_limited": 968,
+        "unobserved": 2,
+        "source_unavailable": 0,
+        "not_applicable": 218
+      },
+      "changed_v1_to_v2_cells": 218
+    },
+    "queue_quality": {
+      "candidate_count": 6,
+      "candidate_slugs": [
+        "audd",
+        "busd",
+        "nzds",
+        "poundtoken",
+        "rlusd",
+        "usdp"
+      ],
+      "prior_reviewed_candidate_count": 6,
+      "prior_reviewed_candidate_slugs": [
+        "audd",
+        "busd",
+        "nzds",
+        "poundtoken",
+        "rlusd",
+        "usdp"
+      ],
+      "all_candidates_previously_reviewed": true,
+      "finding": "Every PR #368 queue candidate already had a reviewed improvement or no-safe-change history before PR #369; the queue did not represent a fresh bounded dossier opportunity set."
+    },
+    "batch_5_yield": {
+      "selected_assets": 5,
+      "canonical_improvement_assets": 0,
+      "reviewed_no_safe_change_assets": 3,
+      "prior_completed_no_duplicate_change_assets": 2,
+      "change_yield_percent": 0,
+      "finding": "PR #369 correctly produced zero canonical changes because all selected candidates were prior-completed or retained a prior no-safe-change boundary."
+    },
+    "planning_input_coverage": {
+      "canonical_builder_default_profile_override_files_empty": true,
+      "v2_builder_calls_canonical_builder_without_options": true,
+      "finding": "The reviewed planning builder defaults to no profile override files, and PR #368 invoked it without options. Current profile overlay coverage is therefore not guaranteed to match the complete reviewed dossier surface before queue generation."
+    },
+    "archive_maintenance": {
+      "archive_recorded": 390,
+      "archive_not_recorded": 169,
+      "immediate_batch_3_decision": "hold"
+    },
+    "market_access": {
+      "records": 8,
+      "decision": "hold"
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    },
+    "external_usage": {
+      "status": "not_available_in_reviewed_repository_evidence",
+      "decision_effect": "No new product surface or growth sequence is approved from unverified usage claims."
+    }
+  },
+  "decisions": {
+    "planning_input_coverage_audit": {
+      "decision": "approved_required",
+      "pr": 371,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "record_depth_baseline_v2_1_refresh": {
+      "decision": "approved_after_input_audit",
+      "pr": 372,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved",
+      "reason": "A new dossier batch must not use the current recurrent queue before complete planning input coverage is audited and the baseline is refreshed."
+    },
+    "evidence_archive_maintenance_batch_3": {
+      "decision": "not_approved_in_next_sequence"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 371,
+      "work_item": "Planning Input Coverage Audit",
+      "scope": "Inventory every canonical and reviewed profile overlay consumed by current public loaders and planning builders; identify omitted or duplicated input paths; define one deterministic planning input manifest; revise no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 372,
+      "work_item": "Record Depth Baseline v2.1 Refresh",
+      "scope": "Recompute the 112-asset by 16-dimension internal baseline using the approved complete planning input manifest; preserve PR #353, #363, and #368 checkpoints; generate a corrected non-ranking queue; revise no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Tier A Dossier Deepening Batch 6",
+    "Evidence and Archive Maintenance Batch 3",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #371 must update AGENTS.md and docs/roadmap.md to activate the approved sequence before changing planning input contracts.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "5d7e957c0d3a7766d7147047b251087bfe1851d3492bea517cab9c37b1dfd4f0",
+  "decision_digest_sha256": "ef90b4ae8e67f41122e8fb7c19a58ed1abfa2bcaf4172ee2c1100395bd2a7791"
+}
