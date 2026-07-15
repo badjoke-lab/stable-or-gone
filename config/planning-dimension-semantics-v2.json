@@ -1,0 +1,280 @@
+{
+  "schema_version": "2.0",
+  "contract_id": "sog_planning_dimension_semantics_v2_pr367",
+  "status": "reviewed_internal_planning_contract",
+  "review_pr": 367,
+  "reviewed_at": "2026-07-15",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "preserves_historical_v1": true,
+  "planning_states": [
+    "strong",
+    "usable",
+    "partial",
+    "sparse",
+    "absent",
+    "not_applicable"
+  ],
+  "applicability_states": [
+    "applicable",
+    "not_applicable_to_current_scope"
+  ],
+  "observation_states": [
+    "observed_supported",
+    "observed_limited",
+    "unobserved",
+    "source_unavailable",
+    "not_applicable"
+  ],
+  "state_semantics": {
+    "strong": {
+      "definition": "The dimension is applicable, canonically structured, and supported at the reviewed depth and freshness expected for the dimension.",
+      "counts_as_gap": false,
+      "allowed_applicability_states": [
+        "applicable"
+      ],
+      "allowed_observation_states": [
+        "observed_supported"
+      ]
+    },
+    "usable": {
+      "definition": "The dimension is applicable and interpretable from canonical structure, but depth, multiplicity, or freshness is below the strong threshold.",
+      "counts_as_gap": false,
+      "allowed_applicability_states": [
+        "applicable"
+      ],
+      "allowed_observation_states": [
+        "observed_supported",
+        "observed_limited"
+      ]
+    },
+    "partial": {
+      "definition": "The dimension is applicable and has canonical representation, but one or more material fields, relationships, or supporting observations remain incomplete or unresolved.",
+      "counts_as_gap": true,
+      "allowed_applicability_states": [
+        "applicable"
+      ],
+      "allowed_observation_states": [
+        "observed_limited",
+        "source_unavailable"
+      ]
+    },
+    "sparse": {
+      "definition": "The dimension is applicable but canonical representation is minimal, integrity-blocked, or too weak to support normal comparison or dossier use.",
+      "counts_as_gap": true,
+      "allowed_applicability_states": [
+        "applicable"
+      ],
+      "allowed_observation_states": [
+        "observed_limited",
+        "source_unavailable"
+      ]
+    },
+    "absent": {
+      "definition": "The dimension is applicable to the current reviewed scope and no canonical representation is present. This is a knowledge-state statement, not a claim that the real-world feature does not exist.",
+      "counts_as_gap": true,
+      "allowed_applicability_states": [
+        "applicable"
+      ],
+      "allowed_observation_states": [
+        "unobserved",
+        "source_unavailable"
+      ]
+    },
+    "not_applicable": {
+      "definition": "The dimension is outside the current reviewed planning scope for the asset or is explicitly inapplicable under a source-supported mechanism rule. It is not an unresolved gap.",
+      "counts_as_gap": false,
+      "allowed_applicability_states": [
+        "not_applicable_to_current_scope"
+      ],
+      "allowed_observation_states": [
+        "not_applicable"
+      ]
+    }
+  },
+  "cross_axis_invariants": [
+    "Every planning cell must record one planning_state, one applicability_state, and one observation_state.",
+    "planning_state not_applicable requires applicability_state not_applicable_to_current_scope and observation_state not_applicable.",
+    "planning_state absent requires applicability_state applicable and observation_state unobserved or source_unavailable.",
+    "not_applicable never counts as an unresolved gap or queue trigger.",
+    "unobserved and source_unavailable are knowledge states and never authorize a negative factual claim.",
+    "A source-unavailable state never authorizes fabricated canonical data, an archive URL, or a false boolean.",
+    "Historical v1 baselines and queues remain immutable and retain their original semantics."
+  ],
+  "dimension_classes": {
+    "universal_dossier": 11,
+    "conditional_structural": 3,
+    "scoped_observational": 2
+  },
+  "default_queue_roles": {
+    "material_dossier": 11,
+    "maintenance_only": 2,
+    "scoped_non_dossier": 2,
+    "diagnostic_only": 1
+  },
+  "queue_policy": {
+    "eligible_gap_states": [
+      "partial",
+      "sparse",
+      "absent"
+    ],
+    "excluded_planning_states": [
+      "strong",
+      "usable",
+      "not_applicable"
+    ],
+    "material_dossier_role": "material_dossier",
+    "requires_manual_source_review": true,
+    "unobserved_scoped_dimension_requires_scope_review": true,
+    "source_unavailable_does_not_authorize_fabrication": true,
+    "non_ranking_order": "asset_slug_ascending_non_ranking"
+  },
+  "dimensions": [
+    {
+      "dimension_id": "identity",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset requires an identity, naming, lineage, launch-date, and verification boundary.",
+      "absent_rule": "Use absent only if the canonical asset identity or required identity boundary is missing.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Identity readiness and canonical asset records provide the observation basis."
+    },
+    {
+      "dimension_id": "lifecycle",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset has a lifecycle state and may have material lifecycle history.",
+      "absent_rule": "Use absent when no canonical lifecycle representation exists; do not infer that no lifecycle events occurred.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Lifecycle classification and canonical events provide the observation basis."
+    },
+    {
+      "dimension_id": "organization_relationships",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset requires at least one issuer, protocol, governance, operator, or equivalent organization relationship.",
+      "absent_rule": "Use absent when no canonical relationship row exists.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Canonical relationship rows and issuer/protocol boundary readiness provide the observation basis."
+    },
+    {
+      "dimension_id": "mechanism_classification",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset requires a reference, asset-class, backing-model, and stabilization-mechanism interpretation.",
+      "absent_rule": "Use absent only if the mechanism classification itself is missing.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Canonical classification and comparison-readiness records provide the observation basis."
+    },
+    {
+      "dimension_id": "reserve_structure",
+      "dimension_class": "conditional_structural",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Applicable when the canonical mechanism includes reserve, collateral, backing, treasury, or comparable asset-support structure.",
+      "absent_rule": "Use absent only after applicability is established and no canonical reserve/backing representation exists.",
+      "not_applicable_rule": "Use not_applicable only when the reviewed canonical mechanism explicitly excludes reserve or collateral structure and records a reason.",
+      "observation_rule": "Canonical classification, reserve profile, reserve reports, and reserve components provide the observation basis."
+    },
+    {
+      "dimension_id": "redemption",
+      "dimension_class": "conditional_structural",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Applicable when the issuer or protocol design offers, historically offered, or materially defines a redemption, conversion, burn, or exit mechanism.",
+      "absent_rule": "Use absent only after redemption applicability is established and no canonical redemption profile exists.",
+      "not_applicable_rule": "An explicit source-supported redemption_profile.status of not_applicable maps to planning not_applicable; it must not be converted to partial merely because access or minimum fields are also not_applicable.",
+      "observation_rule": "Canonical redemption profile, comparison readiness, source support, and freshness provide the observation basis."
+    },
+    {
+      "dimension_id": "issuance",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset has an issuance, minting, creation, or historical issuance mechanism.",
+      "absent_rule": "Use absent when no canonical issuance representation exists.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Canonical issuance profile and comparison readiness provide the observation basis."
+    },
+    {
+      "dimension_id": "deployment",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "maintenance_only",
+      "applicability_rule": "Every canonical asset has at least one native, issued, or protocol deployment context.",
+      "absent_rule": "Use absent when no canonical deployment row exists.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Deployment rows provide the observation basis; unresolved verification fields are maintenance gaps and do not by themselves make an asset a dossier candidate."
+    },
+    {
+      "dimension_id": "legal_profile",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset requires a legal-entity, protocol-governance, or explicit decentralized-context profile.",
+      "absent_rule": "Use absent when no canonical legal or governance context exists.",
+      "not_applicable_rule": "Never applicable; decentralized context is represented rather than omitted.",
+      "observation_rule": "Canonical legal profiles, organization relationships, and legal comparison readiness provide the observation basis."
+    },
+    {
+      "dimension_id": "regulatory_notes",
+      "dimension_class": "scoped_observational",
+      "default_queue_role": "scoped_non_dossier",
+      "applicability_rule": "Applicable only when a named jurisdiction, regulator, enforcement event, licensing question, or other bounded regulatory research scope has been reviewed for the asset.",
+      "absent_rule": "Use absent only inside an established regulatory review scope when a required canonical note could not be recorded; absence never means the asset is unregulated or unrestricted.",
+      "not_applicable_rule": "Use not_applicable when no bounded asset-specific regulatory question is part of the current planning scope.",
+      "observation_rule": "Regulatory notes and the named research scope provide the observation basis; generic lack of a note is out of scope, not a dossier defect."
+    },
+    {
+      "dimension_id": "events",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset has a history and may have material canonical events.",
+      "absent_rule": "Use absent when no canonical event row exists; do not infer that no real-world event occurred.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Canonical event rows and lifecycle state provide the observation basis."
+    },
+    {
+      "dimension_id": "evidence_depth",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical asset requires evidence support for its canonical claims.",
+      "absent_rule": "Use absent when no asset-scoped canonical Evidence identity is linked.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Canonical Evidence identities and Evidence Relations provide the observation basis."
+    },
+    {
+      "dimension_id": "known_unknowns",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "material_dossier",
+      "applicability_rule": "Every canonical dossier requires an explicit uncertainty-management boundary, even when no unresolved item has yet been recorded.",
+      "absent_rule": "Use absent when no canonical known-unknown management row exists; this makes no completeness claim.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "Canonical known-unknown rows provide the observation basis."
+    },
+    {
+      "dimension_id": "comparison_readiness",
+      "dimension_class": "universal_dossier",
+      "default_queue_role": "diagnostic_only",
+      "applicability_rule": "Every canonical asset participates in internal comparison-readiness validation.",
+      "absent_rule": "Use absent only if no readiness result can be produced.",
+      "not_applicable_rule": "Never applicable.",
+      "observation_rule": "The Comparison Readiness audit provides the observation basis; this dimension diagnoses structure and does not independently select a dossier batch."
+    },
+    {
+      "dimension_id": "facet_freshness_support",
+      "dimension_class": "conditional_structural",
+      "default_queue_role": "maintenance_only",
+      "applicability_rule": "Applicable when at least one included canonical facet has a defined freshness expectation.",
+      "absent_rule": "Use absent only if applicable freshness facets exist but no freshness support can be observed.",
+      "not_applicable_rule": "Use not_applicable when all included facets are explicitly freshness-not-applicable or no included freshness facet exists.",
+      "observation_rule": "Facet Freshness cells provide the observation basis; unsupported anchors are maintenance signals rather than automatic dossier selection."
+    },
+    {
+      "dimension_id": "canonical_market_access",
+      "dimension_class": "scoped_observational",
+      "default_queue_role": "scoped_non_dossier",
+      "applicability_rule": "Applicable only to asset, jurisdiction, platform, function, and effective-date combinations covered by a reviewed Market Access research scope.",
+      "absent_rule": "Use absent only within an established scope when no canonical record could be established; absence never means unavailable, banned, or unsupported.",
+      "not_applicable_rule": "Use not_applicable for assets outside the currently reviewed Market Access scope.",
+      "observation_rule": "Canonical Market Access records plus the named reviewed research scope provide the observation basis."
+    }
+  ],
+  "next_consumer": "PR #368 Record Depth Baseline v2 Refresh"
+}
