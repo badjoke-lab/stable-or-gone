@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-15  
-Status: canonical execution schedule — PR #371 active
+Status: canonical execution schedule — PR #372 active
 
 The full roadmap that governed the repository through merged PR #366 is preserved byte-for-byte at:
 
@@ -29,12 +29,12 @@ PR #367 Planning Dimension Semantics Audit: complete
 PR #368 Record Depth Baseline v2 Refresh: complete
 PR #369 Tier A Dossier Deepening Batch 5: complete
 PR #370 Post-PR #369 Review Gate: complete
-PR #371 Planning Input Coverage Audit: active; complete on merge
-PR #372 Record Depth Baseline v2.1 Refresh: next
-REVIEW GATE: required after PR #372
+PR #371 Planning Input Coverage Audit: complete
+PR #372 Record Depth Baseline v2.1 Refresh: active; complete on merge
+REVIEW GATE: next and mandatory
 ```
 
-The public-surface expansion sequence remains complete. PR #371 is internal planning-input audit work.
+The public-surface expansion sequence remains complete. PR #372 is internal planning-baseline correction work.
 
 ## 2. Current authority
 
@@ -49,83 +49,96 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-15-pr370-post-pr369-review-gate.md
 docs/migration/post-pr369-review-gate-pr370.json
 docs/roadmap-amendments/2026-07-15-pr371-planning-input-coverage-audit-activation.md
-docs/quality/planning-input-coverage-audit-pr371-spec.md
-config/planning-input-coverage-audit-pr371.json
-named audit outputs and validators
+docs/migration/planning-input-manifest-pr371.json
+docs/migration/planning-input-coverage-audit-pr371.json
+docs/roadmap-amendments/2026-07-15-pr372-record-depth-baseline-v2-1-refresh-activation.md
+docs/quality/record-depth-baseline-v2-1-refresh-pr372-spec.md
+config/record-depth-baseline-v2-1-refresh-pr372.json
 ```
 
 ## 3. Approved bounded sequence
 
 ```text
-PR #371  Planning Input Coverage Audit — active
-PR #372  Record Depth Baseline v2.1 Refresh — next
+PR #371  Planning Input Coverage Audit — complete
+PR #372  Record Depth Baseline v2.1 Refresh — active
 REVIEW GATE
 ```
 
 No dossier or growth batch is authorized before the next review gate.
 
-## 4. Why PR #371 is required
+## 4. PR #371 completed finding
 
-PR #368 generated six queue candidates and all six had already been reviewed. PR #369 produced zero canonical changes.
-
-The planning code path is incomplete by default:
+PR #371 established the exact planning input gap:
 
 ```text
-scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs
-  options.profileOverrideFiles defaults to []
-
-scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
-  invokes buildReviewedRecordDepthBaseline() without options
-```
-
-The public profile loader composes reviewed overlays beyond the legacy registry baseline. PR #371 must inventory that exact composition before another baseline is trusted.
-
-## 5. PR #371 — Planning Input Coverage Audit
-
-Status: active; complete on merge.
-
-Expected source-derived boundary:
-
-```text
-public profile loader files: 29
+public profile input files: 29
 legacy planning profile files: 15
 reviewed overlay files omitted by default planning input: 14
+public unique asset IDs: 112
+legacy unique asset IDs: 82
+asset IDs absent from legacy input: 30
+asset IDs with a changed last-write-wins winner: 5
+affected asset IDs: 35
 ```
 
-Required outputs:
+Composition semantics:
+
+```text
+source order: public loader import order
+duplicate resolution: last write wins
+```
+
+Binding manifest:
 
 ```text
 docs/migration/planning-input-manifest-pr371.json
-docs/migration/planning-input-coverage-audit-pr371.json
-scripts/build-planning-input-coverage-audit-pr371.mjs
-scripts/validate-planning-input-coverage-audit-pr371.mjs
-scripts/check-workstream-128.mjs
-.github/workflows/pr371-planning-input-coverage-audit.yml
 ```
 
-The manifest must preserve exact `currentProfiles.ts` import order and last-write-wins duplicate resolution. Every file receives a content digest and every asset ID receives a winning-file record.
+## 5. PR #372 — Record Depth Baseline v2.1 Refresh
 
-## 6. PR #372 — Record Depth Baseline v2.1 Refresh
+Status: active; complete on merge.
 
-PR #372 may begin only after PR #371 merges.
-
-It must:
+PR #372 must:
 
 ```text
 consume the approved PR #371 manifest
-recompute 112 assets × 16 dimensions
+recompute 112 assets × 16 dimensions = 1,792 cells
 preserve PR #353, #363, and #368 checkpoints
+retain PR #367 semantics
 emit a corrected internal non-ranking queue
+record cell and queue changes relative to PR #368
 change no canonical data
 change no public output
 stop at another review gate
 ```
 
+Required outputs:
+
+```text
+docs/migration/record-depth-baseline-v2-1-pr372.json
+docs/migration/record-depth-baseline-v2-1-pr372-summary.json
+docs/migration/record-depth-baseline-v2-1-pr372-delta.json
+docs/migration/tier-a-candidate-queue-v2-1-pr372.json
+```
+
 PR #372 may not use an ad hoc profile file list.
+
+## 6. Validation boundary
+
+The PR must prove:
+
+- manifest identity and content digest are bound into the v2.1 output;
+- all 29 profile files are consumed in exact order;
+- default loader behavior remains unchanged without manifest injection;
+- exactly 112 assets, 16 dimensions, and 1,792 cells are emitted;
+- historical outputs remain byte-identical;
+- `data/`, `src/`, and `public/` remain unchanged;
+- the corrected queue is non-ranking and does not authorize follow-on work;
+- Astro check and build succeed.
 
 ## 7. Data and public boundaries
 
-PR #371 changes no:
+PR #372 changes no:
 
 ```text
 data/
@@ -136,7 +149,6 @@ Evidence identities or relations
 Market Access records
 deployments
 statistics history
-Record Depth baselines or queues
 public pages or machine-readable outputs
 ```
 
@@ -152,6 +164,7 @@ PR #367 semantics contract and audit
 PR #368 baseline, summary, delta, or queue
 PR #369 outcomes and handoff
 PR #370 review-gate report
+PR #371 manifest and audit
 prior reviewed dossier handoffs
 canonical release-integrity checkpoints
 closed statistics or Maintenance Log history
