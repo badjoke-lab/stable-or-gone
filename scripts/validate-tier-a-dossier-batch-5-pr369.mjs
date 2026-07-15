@@ -7,6 +7,7 @@ const root = process.cwd();
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const readJson = (file) => JSON.parse(readText(file));
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
+const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
@@ -120,10 +121,11 @@ for (const file of [
   'docs/migration/current-canonical-checkpoint.json'
 ]) {
   try {
-    const prior = execFileSync('git', ['show', `origin/main:${file}`], { encoding: 'utf8' });
-    expect(readText(file) === prior, `${file}: immutable input changed`);
+    const currentBlob = git('hash-object', file);
+    const mainBlob = git('rev-parse', `origin/main:${file}`);
+    expect(currentBlob === mainBlob, `${file}: immutable Git blob identity changed`);
   } catch (error) {
-    failures.push(`${file}: unable to verify origin/main preservation: ${error.message}`);
+    failures.push(`${file}: unable to verify origin/main blob identity: ${error.message}`);
   }
 }
 
