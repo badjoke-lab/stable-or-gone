@@ -107,8 +107,8 @@ export function buildPostPr369ReviewGate() {
         finding: 'PR #369 correctly produced zero canonical changes because all selected candidates were prior-completed or retained a prior no-safe-change boundary.'
       },
       planning_input_coverage: {
-        canonical_builder_default_profile_override_files_empty: canonicalBuilderText.includes('profileOverrideFiles = []'),
-        v2_builder_calls_canonical_builder_without_options: v2BuilderText.includes('buildReviewedRecordDepthBaseline();'),
+        canonical_builder_default_profile_override_files_empty: canonicalBuilderText.includes('const profileOverrideFiles = options.profileOverrideFiles ?? [];'),
+        v2_builder_calls_canonical_builder_without_options: v2BuilderText.includes('const current = buildReviewedRecordDepthBaseline();'),
         finding: 'The reviewed planning builder defaults to no profile override files, and PR #368 invoked it without options. Current profile overlay coverage is therefore not guaranteed to match the complete reviewed dossier surface before queue generation.'
       },
       archive_maintenance: {
