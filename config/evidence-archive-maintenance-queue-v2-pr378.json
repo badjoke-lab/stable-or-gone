@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_evidence_archive_maintenance_queue_v2_pr378_v1",
+  "status": "pr376_authorized_history_aware_archive_queue_refresh",
+  "review_pr": 378,
+  "reviewed_at": "2026-07-15",
+  "source_checkpoint": "docs/migration/current-canonical-checkpoint.json",
+  "review_history_contract": "config/evidence-archive-review-history-v1-pr377.json",
+  "review_history_manifest": "docs/migration/evidence-archive-review-history-manifest-pr377.json",
+  "review_history_audit": "docs/migration/evidence-archive-review-history-audit-pr377.json",
+  "authority": "docs/migration/post-pr375-review-gate-pr376.json",
+  "selection": {
+    "mode": "deterministic_priority_then_evidence_id",
+    "maximum_selected_count": 10,
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ],
+    "canonical_identities_only": true,
+    "archive_not_recorded_only": true,
+    "exclude_alias_identities": true,
+    "exclude_web_archive_source_urls": true,
+    "exclude_reviewed_suppressed_without_signal": true,
+    "reactivation_signal_status": "reviewed_only",
+    "manual_review_required": true
+  },
+  "expected": {
+    "canonical_evidence_count": 559,
+    "archive_recorded_count": 390,
+    "archive_not_recorded_count": 169,
+    "review_history_source_count": 2,
+    "review_history_event_count": 20,
+    "reviewed_unresolved_suppressed_count": 10,
+    "reactivated_reviewed_identity_count": 0,
+    "selected_count": 10,
+    "maximum_selected_count": 10,
+    "review_history_contract_id": "sog_evidence_archive_review_history_v1_pr377",
+    "review_history_manifest_id": "sog_evidence_archive_review_history_manifest_pr377_v1"
+  },
+  "required_outputs": [
+    "docs/migration/evidence-archive-maintenance-queue-v2-pr378.json",
+    "docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json"
+  ],
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "automatic_capture_promotion_allowed": false,
+    "automatic_source_replacement_allowed": false,
+    "evidence_rank": false,
+    "single_composite_score": false
+  },
+  "next_work_item": "REVIEW GATE"
+}
