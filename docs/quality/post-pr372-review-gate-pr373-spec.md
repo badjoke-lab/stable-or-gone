@@ -45,6 +45,21 @@ scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
 - Market Access contains eight canonical records; no approved third-pilot candidate manifest exists.
 - Monitoring remains private-review-only and external usage evidence is unavailable in reviewed repository evidence.
 
+## Generated decision result
+
+The deterministic report confirms:
+
+```text
+corrected queue candidates: 3
+prior reviewed no-safe-change candidates: 3
+queue builder consumes review history: false
+archive not recorded: 169
+Market Access records: 8
+Tier A Dossier Batch 6: not approved
+```
+
+The queue-history repair takes precedence over another dossier, archive-maintenance, Market Access, record-growth, or public-surface sequence.
+
 ## Approved next sequence
 
 ```text
