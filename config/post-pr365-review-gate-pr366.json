@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr365_review_gate_pr366_v1",
+  "status": "bounded_internal_review_gate",
+  "review_pr": 366,
+  "reviewed_at": "2026-07-15",
+  "source_files": {
+    "roadmap": "docs/roadmap.md",
+    "record_depth_baseline": "docs/migration/record-depth-baseline-pr363-summary.json",
+    "tier_a_batch_4_handoff": "docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json",
+    "evidence_archive_batch_2_handoff": "docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json",
+    "evidence_archive_batch_2_outcomes": "docs/migration/evidence-archive-maintenance-outcomes-pr365.json"
+  },
+  "decision_rules": {
+    "preserve_canonical_asset_count": 112,
+    "preserve_public_surface": true,
+    "maximum_next_sequence_items": 3,
+    "require_planning_semantics_audit_before_new_growth": true,
+    "require_non_ranking_queue": true,
+    "maximum_dossier_assets_after_refresh": 5
+  },
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 3",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ]
+}

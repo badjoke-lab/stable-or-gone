@@ -1,0 +1,74 @@
+name: PR 366 Post-PR 365 Review Gate
+
+on:
+  push:
+    branches:
+      - pr366-post-pr365-review-gate
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr366-post-pr365-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate deterministic review gate
+        run: |
+          node scripts/build-post-pr365-review-gate-pr366.mjs --check
+          node scripts/validate-post-pr365-review-gate-pr366.mjs
+      - name: Validate existing canonical contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+      - name: Verify documentation-only boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          test ! -e public/data/post-pr365-review-gate-pr366.json
+          test ! -e dist/data/post-pr365-review-gate-pr366.json
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+      - name: Publish PR 366 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr366-post-pr365-review-gate-status -->';
+            const fs=require('fs');
+            let report=null;
+            try{report=JSON.parse(fs.readFileSync('docs/migration/post-pr365-review-gate-pr366.json','utf8'));}catch{}
+            const sequence=(report?.approved_next_sequence??[]).map((row)=>`PR #${row.pr} ${row.work_item}`).join(' → ');
+            const body=`${marker}
+            ## PR #366 Post-PR #365 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Canonical assets preserved: **${report?.source_checkpoint?.assets??'n/a'}**
+            - Evidence / relations: **${report?.source_checkpoint?.evidence??'n/a'} / ${report?.source_checkpoint?.evidence_relations??'n/a'}**
+            - Archive recorded / not recorded: **${report?.source_checkpoint?.archive_recorded??'n/a'} / ${report?.source_checkpoint?.archive_not_recorded??'n/a'}**
+            - Approved bounded sequence: **${sequence||'n/a'}**
+            - Next sequence ends at review gate: **${report?.review_gate_after_sequence??'n/a'}**
+            - Head: \`${context.sha}\`
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
