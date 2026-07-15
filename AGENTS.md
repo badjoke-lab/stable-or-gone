@@ -27,64 +27,59 @@ Current active amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
-docs/roadmap-amendments/2026-07-15-pr370-post-pr369-review-gate.md
-docs/roadmap-amendments/2026-07-15-pr371-planning-input-coverage-audit-activation.md
-docs/roadmap-amendments/2026-07-15-pr372-record-depth-baseline-v2-1-refresh-activation.md
 docs/roadmap-amendments/2026-07-15-pr373-post-pr372-review-gate.md
+docs/roadmap-amendments/2026-07-15-pr374-planning-queue-review-history-contract-activation.md
 ```
 
 Current work-item specification:
 
 ```text
-docs/quality/post-pr372-review-gate-pr373-spec.md
+docs/quality/planning-queue-review-history-contract-pr374-spec.md
 ```
 
 Current required inputs:
 
 ```text
-config/post-pr372-review-gate-pr373.json
-docs/migration/record-depth-baseline-v2-1-pr372-summary.json
-docs/migration/record-depth-baseline-v2-1-pr372-delta.json
-docs/migration/tier-a-candidate-queue-v2-1-pr372.json
+config/planning-queue-review-history-v1-pr374.json
+config/tier-a-dossier-batch-1-pr354.json
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+config/tier-a-dossier-batch-2-pr355.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+docs/migration/tier-a-batch-3-pr357-review-outcomes.json
+docs/migration/tier-a-dossier-batch-4-pr364-findings.json
+docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
 docs/migration/tier-a-batch-5-pr369-review-outcomes.json
-docs/migration/current-canonical-checkpoint.json
-docs/migration/market-access-pilot-2-pr359-reviewed-handoff.json
-data/monthly-maintenance-log.json
+docs/migration/tier-a-candidate-queue-v2-1-pr372.json
+docs/migration/post-pr372-review-gate-pr373.json
 ```
 
 ## 2. Repository source of truth
 
 Merged repository specifications and reviewed handoffs outrank chat memory, issue discussion, generated prose, stale roadmap text, unmerged drafts, and mock images.
 
-The PR #372 corrected queue is internal non-ranking planning output. It does not override prior reviewed no-safe-change outcomes.
+Review history is internal planning authority. It does not alter canonical facts and cannot be inferred from queue presence alone.
 
 ## 3. Current workstream
 
 ```text
 Canonical stable assets: 112
-PR #371 Planning Input Coverage Audit: complete
-PR #372 Record Depth Baseline v2.1 Refresh: complete
-PR #373 Post-PR #372 Review Gate: active; complete on merge
-Current authority: REVIEW GATE
+PR #373 Post-PR #372 Review Gate: complete
+PR #374 Planning Queue Review-History Contract Audit: active; complete on merge
+PR #375 Candidate Queue v2.2 Refresh: next after PR #374
+REVIEW GATE: mandatory after PR #375
 ```
 
-PR #373 may record an authority decision only. It may not change canonical data, public product surfaces, queue eligibility contracts, or the baseline itself.
-
-## 4. Binding PR #372 result
+Approved sequence:
 
 ```text
-complete planning profile files: 29
-assets: 112
-dimensions: 16
-cells: 1,792
-changed cells from PR #368: 4
-changed assets: BUSD, PYUSD, RLUSD, USDP
-changed dimension: redemption
-state movement: partial → strong
-corrected queue candidates: 3
+PR #374  Planning Queue Review-History Contract Audit — active
+PR #375  Candidate Queue v2.2 Refresh — next
+REVIEW GATE
 ```
 
-Corrected queue:
+## 4. Binding problem statement
+
+The PR #372 queue contains:
 
 ```text
 AUDD
@@ -92,57 +87,75 @@ NZDS
 poundtoken / 1GBP
 ```
 
-All three received `reviewed_no_safe_change` outcomes in PR #369. The queue contains no new source signal and the current builder does not consume prior review-history handoffs.
+Every material dossier gap for those three assets already has a reviewed no-safe-change outcome. The current queue builder does not consume that history, so the same work can recur without a new source signal.
 
-## 5. Reviewed next sequence
+## 5. PR #374 exact authority
 
-PR #373 approves but does not activate:
+PR #374 must:
 
-```text
-PR #374  Planning Queue Review-History Contract Audit
-PR #375  Candidate Queue v2.2 Refresh
-REVIEW GATE
-```
+- inventory reviewed dossier history from PR #354, #355, #357, #364, and #369;
+- normalize review events by asset and dimension;
+- resolve the latest reviewed event as effective;
+- distinguish reviewed complete, partial, and no-safe-change outcomes;
+- define deterministic suppression and reactivation states;
+- prohibit automatic time expiry;
+- require a reviewed new-source or semantics-change signal for reactivation;
+- project queue eligibility without recomputing the baseline;
+- emit deterministic manifest and audit outputs;
+- change no canonical or public data.
 
-PR #374 must update `AGENTS.md` and `docs/roadmap.md` before changing queue eligibility contracts.
-
-### PR #374 boundary
-
-- inventory reviewed dossier and no-safe-change handoffs;
-- define deterministic suppression, expiry, and new-source reactivation semantics;
-- define one review-history input contract;
-- no baseline recomputation;
-- no canonical or public change.
-
-### PR #375 boundary
-
-- begin only after PR #374 merges;
-- apply the approved history contract to the PR #372 v2.1 baseline;
-- preserve all historical baselines and queues;
-- emit an internal non-ranking v2.2 queue and delta;
-- no canonical or public change;
-- stop at another review gate.
-
-## 6. Deferred work
-
-The next sequence does not authorize:
+Expected inventory:
 
 ```text
-Tier A Dossier Deepening Batch 6
-Evidence and Archive Maintenance Batch 3
-Market Access Pilot 3
-Record Growth Batch 2
-new public page or explorer
-asset ranking or composite score
-automatic monitoring promotion
-automatic canonical promotion
+history sources: 5
+history events: 48
+reviewed assets: 18
+effective asset-dimension outcomes: 33
+reviewed complete: 20
+reviewed partial: 0
+reviewed no-safe-change: 13
+current queue candidates: 3
+fully suppressed: 3
+projected v2.2 queue without new signals: 0
 ```
 
-Archive maintenance remains important: 169 Evidence records have no recorded archive. Market Access remains narrow at eight canonical records. Both remain deferred until the queue-history sequence completes.
+## 6. Suppression and reactivation rules
 
-## 7. Canonical and public boundary
+The primary key is:
 
-PR #373 may change only internal authority, configuration, deterministic review output, validators, and workflow files.
+```text
+asset_id + dimension_id
+```
+
+The latest reviewed event wins. A reviewed complete, partial, or no-safe-change outcome suppresses the same dimension until one of these reviewed triggers exists:
+
+```text
+reviewed_new_source
+reviewed_semantics_change
+```
+
+The following do not reactivate a dimension:
+
+```text
+time elapsed
+queue presence
+planning-state movement alone
+maintenance-only gaps
+unreviewed monitoring rows
+```
+
+## 7. Required outputs
+
+```text
+docs/migration/planning-queue-review-history-manifest-pr374.json
+docs/migration/planning-queue-review-history-audit-pr374.json
+```
+
+PR #375 may consume only the reviewed PR #374 contract and manifest.
+
+## 8. Canonical and public boundary
+
+PR #374 may change only internal authority, configuration, deterministic builders, generated internal outputs, validators, and workflow files.
 
 It may not add or change:
 
@@ -155,29 +168,43 @@ Evidence identities or relations
 Market Access records
 deployments
 statistics history
-historical baselines or queues
+baseline cells
+historical queues
 rankings, scores, recommendations, or leaderboards
-automatic monitoring or canonical promotion
+automatic source, monitoring, or canonical promotion
 ```
 
-## 8. Historical preservation
+## 9. Historical preservation
 
 Do not rewrite:
 
 ```text
 PR #353 and #363 planning checkpoints
 PR #367 semantics contract and audit
-PR #368 baseline, summary, delta, or queue
+PR #368 baseline and queue outputs
 PR #369 outcomes and handoff
-PR #370 review-gate report
+PR #370 and #373 review-gate reports
 PR #371 manifest and audit
 PR #372 baseline, summary, delta, or queue
-prior dossier handoffs
+prior dossier handoffs and findings
 canonical release-integrity checkpoints
 closed statistics or Maintenance Log history
 ```
 
-## 9. Mandatory PR traceability
+## 10. Not approved
+
+```text
+Tier A Dossier Deepening Batch 6
+Evidence and Archive Maintenance Batch 3
+Market Access Pilot 3
+Record Growth Batch 2
+new public page or explorer
+asset ranking or composite score
+automatic monitoring promotion
+automatic canonical promotion
+```
+
+## 11. Mandatory PR traceability
 
 Every non-trivial PR must identify:
 
