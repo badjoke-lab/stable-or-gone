@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-15  
-Status: canonical execution schedule — PR #373 review gate active
+Status: canonical execution schedule — PR #374 active
 
 The full roadmap that governed the repository through merged PR #366 is preserved byte-for-byte at:
 
@@ -25,12 +25,13 @@ Market Access Records: 8
 Archive recorded: 390
 Archive not recorded: 169
 
-PR #371 Planning Input Coverage Audit: complete
-PR #372 Record Depth Baseline v2.1 Refresh: complete
-PR #373 Post-PR #372 Review Gate: active; complete on merge
+PR #373 Post-PR #372 Review Gate: complete
+PR #374 Planning Queue Review-History Contract Audit: active; complete on merge
+PR #375 Candidate Queue v2.2 Refresh: next after PR #374
+REVIEW GATE: mandatory after PR #375
 ```
 
-The public-surface expansion sequence remains complete. PR #373 is an internal authority review.
+The public-surface expansion sequence remains complete. PR #374 is internal queue-governance work.
 
 ## 2. Current authority
 
@@ -43,49 +44,25 @@ docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-15-pr373-post-pr372-review-gate.md
-docs/quality/post-pr372-review-gate-pr373-spec.md
-config/post-pr372-review-gate-pr373.json
-named review inputs and deterministic output
+docs/migration/post-pr372-review-gate-pr373.json
+docs/roadmap-amendments/2026-07-15-pr374-planning-queue-review-history-contract-activation.md
+docs/quality/planning-queue-review-history-contract-pr374-spec.md
+config/planning-queue-review-history-v1-pr374.json
 ```
 
-## 3. Completed bounded sequence
+## 3. Approved bounded sequence
 
 ```text
-PR #371  Planning Input Coverage Audit — complete
-PR #372  Record Depth Baseline v2.1 Refresh — complete
-PR #373  REVIEW GATE — active
+PR #374  Planning Queue Review-History Contract Audit — active
+PR #375  Candidate Queue v2.2 Refresh — next
+REVIEW GATE
 ```
 
-## 4. PR #372 result
+No dossier or growth batch is authorized before the next review gate.
 
-The complete PR #371 manifest corrected the internal baseline while preserving all canonical and public boundaries.
+## 4. Problem being corrected
 
-```text
-profile files: 29
-assets: 112
-dimensions: 16
-cells: 1,792
-changed cells: 4
-changed assets: 4
-```
-
-All four changes were `redemption` cells moving from `partial` to `strong`:
-
-```text
-BUSD
-PYUSD
-RLUSD
-USDP
-```
-
-Aggregate state movement:
-
-```text
-strong   604 → 608
-partial  250 → 246
-```
-
-The corrected queue fell from six candidates to three:
+The PR #372 queue contains three candidates:
 
 ```text
 AUDD
@@ -93,77 +70,92 @@ NZDS
 poundtoken / 1GBP
 ```
 
-## 5. Review-gate finding
+Every current material dossier gap for those assets already received a reviewed no-safe-change outcome. The queue builder currently uses gap and leverage states but not review history, so reviewed work can immediately recur.
 
-All three corrected queue candidates already received `reviewed_no_safe_change` outcomes in PR #369. No new source signal is attached to the corrected queue.
+## 5. PR #374 contract
 
-The current queue builder derives eligibility from present gap and leverage fields. It does not consume prior dossier handoffs, no-safe-change outcomes, review expiry, or new-source reactivation state.
-
-Therefore Tier A Dossier Deepening Batch 6 is not authorized from this queue.
-
-## 6. Approved next bounded sequence
-
-PR #373 approves but does not activate:
+PR #374 must create one deterministic review-history model keyed by:
 
 ```text
-PR #374  Planning Queue Review-History Contract Audit
-PR #375  Candidate Queue v2.2 Refresh
-REVIEW GATE
+asset_id + dimension_id
 ```
 
-### PR #374
-
-Must:
+The latest reviewed event is effective. Outcomes are:
 
 ```text
-inventory reviewed dossier handoffs and no-safe-change outcomes
-define suppression semantics
-define review expiry semantics
-define new-source reactivation semantics
-define one deterministic review-history input contract
-change no canonical data
-change no public output
+reviewed_complete
+reviewed_partial
+reviewed_no_safe_change
 ```
 
-### PR #375
+All suppress the same dimension unless a reviewed reactivation signal exists.
 
-May begin only after PR #374 merges. It must:
+There is no automatic time expiry.
+
+Accepted reactivation triggers:
 
 ```text
-consume the approved review-history contract
-apply it to the PR #372 v2.1 baseline
-preserve historical baselines and queues
-emit an internal non-ranking v2.2 queue and review-history delta
+reviewed_new_source
+reviewed_semantics_change
+```
+
+Not accepted:
+
+```text
+time elapsed
+queue presence
+planning-state movement alone
+maintenance-only gaps
+unreviewed monitoring rows
+```
+
+## 6. Expected review-history inventory
+
+```text
+history sources: 5
+history events: 48
+reviewed assets: 18
+effective asset-dimension outcomes: 33
+reviewed complete: 20
+reviewed partial: 0
+reviewed no-safe-change: 13
+```
+
+Current queue projection:
+
+```text
+source candidates: 3
+fully suppressed candidates: 3
+reactivated candidates: 0
+projected v2.2 candidates: 0
+```
+
+## 7. Required outputs
+
+```text
+docs/migration/planning-queue-review-history-manifest-pr374.json
+docs/migration/planning-queue-review-history-audit-pr374.json
+```
+
+PR #374 does not recompute the baseline or rewrite the PR #372 queue. PR #375 is the only authorized consumer before the next review gate.
+
+## 8. PR #375 boundary
+
+After PR #374 merges, PR #375 must:
+
+```text
+consume the reviewed contract and manifest
+apply review-history eligibility to the PR #372 v2.1 queue
+preserve all historical baselines and queues
+emit an internal non-ranking v2.2 queue and delta
 change no canonical data
 change no public output
 stop at another review gate
 ```
 
-## 7. Deferred areas
+## 9. Data and public boundaries
 
-### Evidence and archive maintenance
-
-```text
-archive recorded: 390
-archive not recorded: 169
-last batch reviewed: 10
-last batch safe canonical changes: 3
-last batch no-safe-change: 7
-```
-
-Evidence and Archive Maintenance Batch 3 remains deferred until the queue-history sequence completes.
-
-### Market Access
-
-The registry has eight canonical Market Access records. The latest pilot promoted four RLUSD provider-scoped records, but no approved third-pilot candidate manifest exists at this gate. Market Access Pilot 3 remains deferred.
-
-### Monitoring and external usage
-
-Monitoring remains private-review-only. Automatic promotion is prohibited. Verified external usage evidence remains unavailable in reviewed repository evidence.
-
-## 8. Data and public boundaries
-
-PR #373 changes no:
+PR #374 changes no:
 
 ```text
 data/
@@ -174,11 +166,12 @@ Evidence identities or relations
 Market Access records
 deployments
 statistics history
-historical baselines or queues
+baseline cells
+historical queues
 public pages or machine-readable outputs
 ```
 
-## 9. Not approved
+## 10. Deferred and not approved
 
 ```text
 Tier A Dossier Deepening Batch 6
@@ -193,6 +186,6 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-## 10. Next gate
+## 11. Next gate
 
 After PR #375, stop and review the history-aware queue, source reactivation semantics, archive burden, Market Access breadth, monitoring usefulness, monthly maintenance burden, and verified external usage evidence before authorizing another numbered sequence.

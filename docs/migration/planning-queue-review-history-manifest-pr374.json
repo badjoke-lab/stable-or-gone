@@ -1,0 +1,1407 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "sog_planning_queue_review_history_manifest_pr374_v1",
+  "status": "reviewed_internal_complete_review_history_manifest",
+  "public_output": false,
+  "review_pr": 374,
+  "reviewed_at": "2026-07-15",
+  "contract_id": "sog_planning_queue_review_history_v1_pr374",
+  "history_resolution": {
+    "key": "asset_id_dimension_id",
+    "order": [
+      "reviewed_at_ascending",
+      "review_pr_ascending",
+      "source_order_ascending"
+    ],
+    "effective_rule": "latest_review_event_wins"
+  },
+  "sources": [
+    {
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "path": "docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json",
+      "content_sha256": "c8464a46beb7dbc86dda86b4fe952c94e62a5e31fbde7cccf440bab592ded18c"
+    },
+    {
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "path": "docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json",
+      "content_sha256": "094cc0265ea5e385092c4887c40258f121fe5c2dc6723e12d63998214d88735b"
+    },
+    {
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "path": "docs/migration/tier-a-batch-3-pr357-review-outcomes.json",
+      "content_sha256": "095fae37637e27f6370cbeeaeb9179ec047964d3ab315e7ffb2b6b98d80d9db8"
+    },
+    {
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "path": "docs/migration/tier-a-dossier-batch-4-pr364-findings.json",
+      "content_sha256": "20d2922eae33e000a87ecd4defcbf64916e5e63316c00d3d6812589b699c5b73"
+    },
+    {
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "path": "docs/migration/tier-a-batch-5-pr369-review-outcomes.json",
+      "content_sha256": "8bc047ee2f90e0bfb334c5b18acbd9213470d410c30969bace9fa325dc5326fa"
+    }
+  ],
+  "counts": {
+    "history_source_count": 5,
+    "history_event_count": 48,
+    "reviewed_asset_count": 18,
+    "effective_asset_dimension_count": 33,
+    "effective_reviewed_complete_count": 20,
+    "effective_reviewed_partial_count": 0,
+    "effective_reviewed_no_safe_change_count": 13
+  },
+  "reviewed_asset_slugs": [
+    "audd",
+    "busd",
+    "dai",
+    "fdusd",
+    "fei",
+    "frax",
+    "husd",
+    "mim",
+    "nzds",
+    "poundtoken",
+    "pyusd",
+    "rlusd",
+    "usdc",
+    "usdg",
+    "usdp",
+    "usds",
+    "usdt",
+    "ust"
+  ],
+  "history_events": [
+    {
+      "event_id": "pr354:busd:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 0,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr354:busd:redemption:reviewed_complete",
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 0,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr354:dai:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_dai",
+      "asset_slug": "dai",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 1,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr354:rlusd:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 2,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr354:rlusd:redemption:reviewed_complete",
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 2,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr354:usdc:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_usdc",
+      "asset_slug": "usdc",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 3,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr354:usdt:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_usdt",
+      "asset_slug": "usdt",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 354,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "source_order": 4,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:fdusd:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_fdusd",
+      "asset_slug": "fdusd",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 5,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:frax:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 6,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:frax:redemption:reviewed_complete",
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 6,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:pyusd:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_pyusd",
+      "asset_slug": "pyusd",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 7,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:pyusd:redemption:reviewed_complete",
+      "asset_id": "sog_st_pyusd",
+      "asset_slug": "pyusd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 7,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:usdp:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 8,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:usdp:redemption:reviewed_complete",
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 8,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr355:ust:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_ust",
+      "asset_slug": "ust",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 355,
+      "reviewed_at": "2026-07-12",
+      "source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "source_order": 9,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:audd:events:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "events",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 10,
+      "reviewed_evidence_ids": [
+        "sog_src_audd_home_batch_y",
+        "sog_src_audd_terms_batch_y",
+        "sog_src_audd_transparency_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:audd:lifecycle:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "lifecycle",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 10,
+      "reviewed_evidence_ids": [
+        "sog_src_audd_home_batch_y",
+        "sog_src_audd_terms_batch_y",
+        "sog_src_audd_transparency_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:audd:organization_relationships:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "organization_relationships",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 10,
+      "reviewed_evidence_ids": [
+        "sog_src_audd_home_batch_y",
+        "sog_src_audd_terms_batch_y",
+        "sog_src_audd_transparency_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:audd:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 10,
+      "reviewed_evidence_ids": [
+        "sog_src_audd_home_batch_y",
+        "sog_src_audd_terms_batch_y",
+        "sog_src_audd_transparency_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:fei:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_fei",
+      "asset_slug": "fei",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 11,
+      "reviewed_evidence_ids": [
+        "sog_src_fei_intro_batch_a",
+        "sog_src_fei_tip121c_execution_2022",
+        "sog_src_fei_v2_batch_a"
+      ],
+      "reason_codes": [
+        "direct_corporate_claim_not_supported",
+        "executed_final_redemption_supported",
+        "protocol_asset_classification_supported",
+        "protocol_controlled_value_supported"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:husd:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 12,
+      "reviewed_evidence_ids": [
+        "sog_src_husd_background_batch_d",
+        "sog_src_husd_legal_attestation_status_2026"
+      ],
+      "reason_codes": [
+        "bankruptcy_remoteness_not_established",
+        "current_direct_redemption_not_reverified",
+        "historical_issuer_claim_supported",
+        "historical_reserve_account_representation_supported"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:husd:redemption:reviewed_partial",
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_partial",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 13,
+      "reviewed_evidence_ids": [
+        "sog_src_husd_background_batch_d",
+        "sog_src_husd_legal_attestation_status_2026"
+      ],
+      "reason_codes": [
+        "bankruptcy_remoteness_not_established",
+        "current_direct_redemption_not_reverified",
+        "historical_issuer_claim_supported",
+        "historical_reserve_account_representation_supported"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:mim:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_mim",
+      "asset_slug": "mim",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 14,
+      "reviewed_evidence_ids": [
+        "sog_src_mim_docs_batch_a",
+        "sog_src_mim_tokenomics_batch_a"
+      ],
+      "reason_codes": [
+        "collateralized_borrowing_model_supported",
+        "no_direct_organization_claim_supported",
+        "operational_not_legal_separation",
+        "protocol_asset_classification_supported"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:nzds:events:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "events",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 15,
+      "reviewed_evidence_ids": [
+        "sog_src_nzds_home_batch_y",
+        "sog_src_nzds_transparency_batch_y",
+        "sog_src_techemynt_home_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:nzds:lifecycle:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "lifecycle",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 15,
+      "reviewed_evidence_ids": [
+        "sog_src_nzds_home_batch_y",
+        "sog_src_nzds_transparency_batch_y",
+        "sog_src_techemynt_home_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:nzds:organization_relationships:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "organization_relationships",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 15,
+      "reviewed_evidence_ids": [
+        "sog_src_nzds_home_batch_y",
+        "sog_src_nzds_transparency_batch_y",
+        "sog_src_techemynt_home_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr357:nzds:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 357,
+      "reviewed_at": "2026-07-13",
+      "source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "source_order": 15,
+      "reviewed_evidence_ids": [
+        "sog_src_nzds_home_batch_y",
+        "sog_src_nzds_transparency_batch_y",
+        "sog_src_techemynt_home_batch_y"
+      ],
+      "reason_codes": [
+        "current_product_and_redemption_state_not_reverified",
+        "existing_historical_issuer_relationship_already_recorded",
+        "reviewed_sources_are_archive_first",
+        "reviewed_sources_lack_reliable_event_dates"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:husd:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 16,
+      "reviewed_evidence_ids": [
+        "sog_src_husd_background_batch_d",
+        "sog_src_husd_depeg_batch_d",
+        "sog_src_husd_legal_attestation_status_2026"
+      ],
+      "reason_codes": [
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:poundtoken:lifecycle:reviewed_no_safe_change",
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "lifecycle",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 17,
+      "reviewed_evidence_ids": [
+        "sog_src_1gbp_domain_state_batch_u",
+        "sog_src_1gbp_etherscan_batch_u",
+        "sog_src_1gbp_whitepaper_metadata_batch_u"
+      ],
+      "reason_codes": [
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:poundtoken:organization_relationships:reviewed_no_safe_change",
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "organization_relationships",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 17,
+      "reviewed_evidence_ids": [
+        "sog_src_1gbp_domain_state_batch_u",
+        "sog_src_1gbp_etherscan_batch_u",
+        "sog_src_1gbp_whitepaper_metadata_batch_u"
+      ],
+      "reason_codes": [
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:poundtoken:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 17,
+      "reviewed_evidence_ids": [
+        "sog_src_1gbp_domain_state_batch_u",
+        "sog_src_1gbp_etherscan_batch_u",
+        "sog_src_1gbp_whitepaper_metadata_batch_u"
+      ],
+      "reason_codes": [
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:rlusd:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 18,
+      "reviewed_evidence_ids": [
+        "sog_src_rlusd_ripple_page",
+        "sog_src_rlusd_user_terms"
+      ],
+      "reason_codes": [
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:usdg:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 19,
+      "reviewed_evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ],
+      "reason_codes": [
+        "canonical_change_applied"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:usdg:redemption:reviewed_complete",
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 19,
+      "reviewed_evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ],
+      "reason_codes": [
+        "canonical_change_applied"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr364:usds:legal_profile:reviewed_complete",
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "dimension_id": "legal_profile",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 364,
+      "reviewed_at": "2026-07-14",
+      "source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "source_order": 20,
+      "reviewed_evidence_ids": [
+        "sog_src_usds_developer_docs",
+        "sog_src_usds_sky_page",
+        "sog_src_usds_sky_protocol_interface_pr364"
+      ],
+      "reason_codes": [
+        "canonical_change_applied"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:audd:events:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "events",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 21,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:audd:lifecycle:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "lifecycle",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 21,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:audd:organization_relationships:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "organization_relationships",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 21,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:audd:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 21,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:busd:redemption:reviewed_complete",
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 22,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_completed_no_duplicate_change",
+        "prior_review_pr_354"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:nzds:events:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "events",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 23,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:nzds:lifecycle:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "lifecycle",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 23,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:nzds:organization_relationships:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "organization_relationships",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 23,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:nzds:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 23,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_357",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:poundtoken:lifecycle:reviewed_no_safe_change",
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "lifecycle",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 24,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_364",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:poundtoken:organization_relationships:reviewed_no_safe_change",
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "organization_relationships",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 24,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_364",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:poundtoken:redemption:reviewed_no_safe_change",
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_no_safe_change",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 24,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_review_pr_364",
+        "reviewed_no_safe_change"
+      ],
+      "automatic_time_expiry": false
+    },
+    {
+      "event_id": "pr369:usdp:redemption:reviewed_complete",
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "redemption",
+      "review_outcome": "reviewed_complete",
+      "review_pr": 369,
+      "reviewed_at": "2026-07-15",
+      "source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "source_order": 25,
+      "reviewed_evidence_ids": [],
+      "reason_codes": [
+        "prior_completed_no_duplicate_change",
+        "prior_review_pr_355"
+      ],
+      "automatic_time_expiry": false
+    }
+  ],
+  "effective_asset_dimensions": [
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "events",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "lifecycle",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "organization_relationships",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 354,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_dai",
+      "asset_slug": "dai",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 354,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_fdusd",
+      "asset_slug": "fdusd",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_fei",
+      "asset_slug": "fei",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 357,
+      "effective_reviewed_at": "2026-07-13",
+      "effective_source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "reviewed_evidence_ids": [
+        "sog_src_fei_intro_batch_a",
+        "sog_src_fei_tip121c_execution_2022",
+        "sog_src_fei_v2_batch_a"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 357,
+      "effective_reviewed_at": "2026-07-13",
+      "effective_source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "reviewed_evidence_ids": [
+        "sog_src_husd_background_batch_d",
+        "sog_src_husd_legal_attestation_status_2026"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 364,
+      "effective_reviewed_at": "2026-07-14",
+      "effective_source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "reviewed_evidence_ids": [
+        "sog_src_husd_background_batch_d",
+        "sog_src_husd_depeg_batch_d",
+        "sog_src_husd_legal_attestation_status_2026"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_mim",
+      "asset_slug": "mim",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 357,
+      "effective_reviewed_at": "2026-07-13",
+      "effective_source_id": "sog_tier_a_batch_3_pr357_review_outcomes_2026_07_13",
+      "reviewed_evidence_ids": [
+        "sog_src_mim_docs_batch_a",
+        "sog_src_mim_tokenomics_batch_a"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "events",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "lifecycle",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "organization_relationships",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "lifecycle",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "organization_relationships",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_pyusd",
+      "asset_slug": "pyusd",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_pyusd",
+      "asset_slug": "pyusd",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 354,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_no_safe_change",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_no_safe_change",
+      "effective_review_pr": 364,
+      "effective_reviewed_at": "2026-07-14",
+      "effective_source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "reviewed_evidence_ids": [
+        "sog_src_rlusd_ripple_page",
+        "sog_src_rlusd_user_terms"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usdc",
+      "asset_slug": "usdc",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 354,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 364,
+      "effective_reviewed_at": "2026-07-14",
+      "effective_source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "reviewed_evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 364,
+      "effective_reviewed_at": "2026-07-14",
+      "effective_source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "reviewed_evidence_ids": [
+        "sog_src_usdg_paxos_page",
+        "sog_src_usdg_paxos_stablecoin_terms_pr364"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "redemption",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 369,
+      "effective_reviewed_at": "2026-07-15",
+      "effective_source_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 364,
+      "effective_reviewed_at": "2026-07-14",
+      "effective_source_id": "sog_tier_a_dossier_batch_4_pr364_findings_2026_07_14",
+      "reviewed_evidence_ids": [
+        "sog_src_usds_developer_docs",
+        "sog_src_usds_sky_page",
+        "sog_src_usds_sky_protocol_interface_pr364"
+      ],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_usdt",
+      "asset_slug": "usdt",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 354,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    },
+    {
+      "asset_id": "sog_st_ust",
+      "asset_slug": "ust",
+      "dimension_id": "legal_profile",
+      "effective_review_outcome": "reviewed_complete",
+      "eligibility_state_without_new_signal": "suppressed_reviewed_complete",
+      "effective_review_pr": 355,
+      "effective_reviewed_at": "2026-07-12",
+      "effective_source_id": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "reviewed_evidence_ids": [],
+      "automatic_time_expiry": false,
+      "reactivation_required": true
+    }
+  ],
+  "source_digest_sha256": "029a8b20dda6e552ba503f775866d59aac263b6977c39939aee6916ebb3f9705",
+  "manifest_digest_sha256": "4ecc97ff00ecb8e93df7f08bd2a208b9010ff70ac408ea07bd808ad87615526a"
+}

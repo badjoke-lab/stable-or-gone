@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_planning_queue_review_history_v1_pr374",
+  "status": "reviewed_internal_queue_eligibility_contract",
+  "review_pr": 374,
+  "reviewed_at": "2026-07-15",
+  "history_resolution": {
+    "key": "asset_id_dimension_id",
+    "order": ["reviewed_at_ascending", "review_pr_ascending", "source_order_ascending"],
+    "effective_rule": "latest_review_event_wins"
+  },
+  "review_outcomes": [
+    "reviewed_complete",
+    "reviewed_partial",
+    "reviewed_no_safe_change"
+  ],
+  "eligibility_states": [
+    "eligible_unreviewed_gap",
+    "suppressed_reviewed_complete",
+    "suppressed_reviewed_partial_without_new_signal",
+    "suppressed_reviewed_no_safe_change",
+    "reactivated_reviewed_new_source",
+    "reactivated_semantics_change"
+  ],
+  "suppression_policy": {
+    "reviewed_complete": "suppress_same_dimension_until_reviewed_new_source_or_semantics_change",
+    "reviewed_partial": "suppress_same_dimension_until_reviewed_new_source_or_semantics_change",
+    "reviewed_no_safe_change": "suppress_same_dimension_until_reviewed_new_source_or_semantics_change",
+    "automatic_time_expiry": false,
+    "maintenance_gap_can_reactivate_material_dossier_gap": false,
+    "queue_presence_is_new_source_signal": false,
+    "planning_state_change_alone_is_new_source_signal": false
+  },
+  "reactivation_policy": {
+    "accepted_triggers": [
+      "reviewed_new_source",
+      "reviewed_semantics_change"
+    ],
+    "reviewed_new_source_requirements": [
+      "signal_status_reviewed",
+      "observed_at_after_effective_review_at",
+      "new_source_identity_or_source_version_digest",
+      "affected_dimension_declared",
+      "source_support_scope_declared"
+    ],
+    "reviewed_semantics_change_requirements": [
+      "contract_change_reviewed",
+      "affected_dimension_declared",
+      "prior_outcome_reinterpretation_explicit"
+    ],
+    "missing_signal_default": "suppressed"
+  },
+  "candidate_policy": {
+    "requires_material_dossier_gap": true,
+    "eligible_if_any_material_gap_is_unreviewed_or_reactivated": true,
+    "exclude_if_all_material_gaps_are_suppressed": true,
+    "queue_order": "asset_slug_ascending_non_ranking",
+    "asset_rank": false,
+    "single_composite_score": false
+  },
+  "expected": {
+    "history_source_count": 5,
+    "history_event_count": 48,
+    "reviewed_asset_count": 18,
+    "effective_asset_dimension_count": 33,
+    "effective_reviewed_complete_count": 20,
+    "effective_reviewed_no_safe_change_count": 13,
+    "effective_reviewed_partial_count": 0,
+    "current_queue_candidate_count": 3,
+    "current_queue_fully_suppressed_count": 3,
+    "projected_v2_2_candidate_count_without_new_signals": 0
+  },
+  "required_outputs": [
+    "docs/migration/planning-queue-review-history-manifest-pr374.json",
+    "docs/migration/planning-queue-review-history-audit-pr374.json"
+  ],
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "baseline_recompute_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "automatic_source_promotion_allowed": false,
+    "automatic_canonical_promotion_allowed": false
+  },
+  "next_work_item": "PR #375 Candidate Queue v2.2 Refresh"
+}
