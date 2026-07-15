@@ -32,7 +32,7 @@ For each source candidate and material dossier gap:
 
 The operation filters the queue only. It does not change the PR #372 baseline or any planning cell.
 
-## Expected result
+## Reviewed generated result
 
 ```text
 source candidates: 3
@@ -42,7 +42,9 @@ output candidates: 0
 removed asset slugs: audd, nzds, poundtoken
 ```
 
-Each removed candidate must retain its complete dimension-level suppression explanation in the delta output.
+AUDD and NZDS each retain four dimension-level suppression explanations. poundtoken retains three. Every effective outcome is `reviewed_no_safe_change`, every eligibility state is `suppressed_reviewed_no_safe_change`, and no reactivation signal is present.
+
+The source PR #372 queue remains immutable. The removed candidates are preserved in the v2.2 delta rather than deleted from historical planning evidence.
 
 ## Required outputs
 
