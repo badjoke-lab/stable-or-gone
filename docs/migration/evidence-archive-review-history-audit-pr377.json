@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "sog_evidence_archive_review_history_audit_pr377_2026_07_15",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 377,
+  "reviewed_at": "2026-07-15",
+  "contract_id": "sog_evidence_archive_review_history_v1_pr377",
+  "source_manifest_id": "sog_evidence_archive_review_history_manifest_pr377_v1",
+  "source_checkpoint": {
+    "canonical_evidence_count": 559,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "suppression_policy": {
+    "reviewed_archive_present": "not_eligible_while_archive_present",
+    "reviewed_archive_removed_invalid": "suppress_until_reviewed_exact_capture_or_source_replacement",
+    "reviewed_no_safe_change": "suppress_until_reviewed_exact_capture_or_source_replacement",
+    "automatic_time_expiry": false,
+    "queue_presence_is_reactivation_signal": false,
+    "http_status_change_alone_is_reactivation_signal": false,
+    "unreviewed_wayback_result_is_reactivation_signal": false,
+    "unreviewed_source_url_change_is_reactivation_signal": false
+  },
+  "reactivation_policy": {
+    "accepted_triggers": [
+      "reviewed_exact_capture",
+      "reviewed_source_replacement"
+    ],
+    "reviewed_exact_capture_requirements": [
+      "signal_status_reviewed",
+      "exact_canonical_source_url",
+      "successful_capture_timestamp",
+      "capture_digest",
+      "reviewed_after_effective_review_at",
+      "source_version_scope_declared"
+    ],
+    "reviewed_source_replacement_requirements": [
+      "signal_status_reviewed",
+      "replacement_source_identity_declared",
+      "canonical_claim_scope_preserved",
+      "source_version_equivalence_reviewed",
+      "reviewed_after_effective_review_at"
+    ],
+    "missing_signal_default": "suppressed"
+  },
+  "reviewed_unresolved_archive_gaps": {
+    "count": 10,
+    "evidence_ids": [
+      "sog_src_bold_redemptions_batch_c",
+      "sog_src_busd_binance_phaseout",
+      "sog_src_busd_paxos_issuer_update",
+      "sog_src_busd_paxos_statement_pr354",
+      "sog_src_busd_reuters_sec_2024",
+      "sog_src_circle_stability_update_2023_03_13",
+      "sog_src_circle_svb_update",
+      "sog_src_circle_usdc_contract_addresses",
+      "sog_src_tether_legal_terms",
+      "sog_src_usdt_terms_pr354"
+    ],
+    "rows": [
+      {
+        "evidence_id": "sog_src_bold_redemptions_batch_c",
+        "current_source_file": "data/evidence-batch-c.json",
+        "current_url": "https://docs.liquity.org/faq/lusd-redemptions",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_busd_binance_phaseout",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://www.binance.com/en/support/announcement/binance-will-gradually-cease-support-for-busd-products-38d49e7aa3ed456f8b2fe4a8e2e8e102",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_busd_paxos_issuer_update",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://paxos.com/busd/",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_busd_paxos_statement_pr354",
+        "current_source_file": "data/evidence-extra.json",
+        "current_url": "https://www.paxos.com/newsroom/paxos-will-halt-minting-new-busd-tokens",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_busd_reuters_sec_2024",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://www.reuters.com/technology/us-sec-drops-investigation-stablecoin-issuer-paxos-fortune-reports-2024-07-11/",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_archive_removed_invalid",
+        "eligibility_state_without_signal": "suppressed_reviewed_invalid_archive_removed",
+        "effective_review_pr": 360,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_correction_outcomes_pr360_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_circle_stability_update_2023_03_13",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://www.circle.com/blog/usdc-operations-will-open-for-business-on-monday-morning",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_circle_svb_update",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://www.circle.com/blog/an-update-on-usdc-and-silicon-valley-bank",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_circle_usdc_contract_addresses",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_archive_maintenance_outcomes_pr365_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_tether_legal_terms",
+        "current_source_file": "data/evidence.json",
+        "current_url": "https://tether.to/en/legal/",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 360,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_correction_outcomes_pr360_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      },
+      {
+        "evidence_id": "sog_src_usdt_terms_pr354",
+        "current_source_file": "data/evidence-pr354-tier-a-batch-1.json",
+        "current_url": "https://tether.to/legal/",
+        "current_archived_url": null,
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "eligibility_state_without_signal": "suppressed_reviewed_no_safe_change",
+        "effective_review_pr": 360,
+        "effective_reviewed_at": "2026-07-14",
+        "effective_source_id": "sog_evidence_correction_outcomes_pr360_2026_07_14",
+        "automatic_time_expiry": false,
+        "reactivation_required": true,
+        "reactivation_signal_present": false
+      }
+    ]
+  },
+  "findings": [
+    "Archive review history contains 20 reviewed canonical Evidence identities across PR #360 and PR #365.",
+    "Ten reviewed identities currently have no recorded archive: one invalid wildcard removal and nine no-safe-change outcomes.",
+    "No review outcome expires automatically with time.",
+    "Queue presence, HTTP status change, and unreviewed capture results do not reactivate a suppressed Evidence identity.",
+    "PR #378 must exclude the ten reviewed unresolved identities unless an exact reviewed capture or reviewed source replacement signal exists."
+  ],
+  "decision": {
+    "contract_complete": true,
+    "approved_manifest": "docs/migration/evidence-archive-review-history-manifest-pr377.json",
+    "next_work_item": "PR #378 Evidence Archive Maintenance Queue v2 Refresh",
+    "archive_queue_generation_allowed_in_pr377": false,
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "review_gate_after_pr378": true
+  },
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "archive_queue_generated": false,
+    "historical_outcomes_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "manifest_digest_sha256": "f1de780309020e1a2568b0ab50937db05d5ec8f5e850a8f6e11491efa348f419",
+  "source_digest_sha256": "d09478ec0310064864b85d7f69880183efed297ab1d2631ef4f36c4931891249"
+}

@@ -27,105 +27,101 @@ Current active amendments:
 
 ```text
 docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
-docs/roadmap-amendments/2026-07-15-pr373-post-pr372-review-gate.md
-docs/roadmap-amendments/2026-07-15-pr374-planning-queue-review-history-contract-activation.md
-docs/roadmap-amendments/2026-07-15-pr375-candidate-queue-v2-2-refresh-activation.md
 docs/roadmap-amendments/2026-07-15-pr376-post-pr375-review-gate.md
+docs/roadmap-amendments/2026-07-15-pr377-evidence-archive-review-history-contract-activation.md
 ```
 
 Current work-item specification:
 
 ```text
-docs/quality/post-pr375-review-gate-pr376-spec.md
+docs/quality/evidence-archive-review-history-contract-pr377-spec.md
 ```
 
 Current required inputs:
 
 ```text
-config/post-pr375-review-gate-pr376.json
-docs/migration/tier-a-candidate-queue-v2-2-pr375.json
-docs/migration/tier-a-candidate-queue-v2-2-pr375-delta.json
+config/evidence-archive-review-history-v1-pr377.json
 docs/migration/evidence-correction-outcomes-pr360.json
-docs/migration/evidence-archive-maintenance-queue-pr365.json
 docs/migration/evidence-archive-maintenance-outcomes-pr365.json
 docs/migration/evidence-archive-maintenance-batch-2-pr365-reviewed-handoff.json
-scripts/build-evidence-archive-maintenance-queue-pr365.mjs
 docs/migration/current-canonical-checkpoint.json
+docs/migration/post-pr375-review-gate-pr376.json
 ```
 
 ## 2. Repository source of truth
 
 Merged repository specifications and reviewed handoffs outrank chat memory, issue discussion, generated prose, stale roadmap text, unmerged drafts, and mock images.
 
-The PR #375 zero-candidate queue is binding internal planning evidence. No dossier batch can be inferred from suppressed historical candidates.
+Archive review history is internal planning authority. It does not alter canonical Evidence or prove that a future archive capture exists.
 
 ## 3. Current workstream
 
 ```text
 Canonical stable assets: 112
-PR #374 Planning Queue Review-History Contract Audit: complete
-PR #375 Candidate Queue v2.2 Refresh: complete
-PR #376 Post-PR #375 Review Gate: active; complete on merge
-Current authority: REVIEW GATE
+Canonical Evidence: 559
+PR #376 Post-PR #375 Review Gate: complete
+PR #377 Evidence Archive Review-History Contract Audit: active; complete on merge
+PR #378 Evidence Archive Maintenance Queue v2 Refresh: next after PR #377
+REVIEW GATE: mandatory after PR #378
 ```
 
-PR #376 may record an authority decision only. It may not change canonical data, public surfaces, archive queue eligibility, or Evidence records.
-
-## 4. Binding zero-queue result
+Approved sequence:
 
 ```text
-source dossier candidates: 3
-suppressed candidates: 3
-reactivated candidates: 0
-current candidates: 0
+PR #377  Evidence Archive Review-History Contract Audit — active
+PR #378  Evidence Archive Maintenance Queue v2 Refresh — next
+REVIEW GATE
 ```
 
-Tier A Dossier Deepening Batch 6 remains unapproved.
-
-## 5. Archive-maintenance finding
+## 4. Binding problem statement
 
 ```text
-canonical Evidence: 559
 archive recorded: 390
 archive not recorded: 169
 PR #360 selected / changed / no-safe: 10 / 8 / 2
 PR #365 selected / changed / no-safe: 10 / 3 / 7
 ```
 
-The PR #365 queue builder excludes PR #360 selected identities but does not consume PR #365 reviewed outcomes or a complete archive review-history manifest. Another queue can therefore repeat reviewed no-safe-change work.
+The prior queue excluded PR #360 selection but did not consume all reviewed outcomes. Reviewed unresolved Evidence can therefore recur without a new capture or replacement signal.
 
-## 6. Reviewed next sequence
+## 5. PR #377 exact authority
 
-PR #376 approves but does not activate:
+PR #377 must:
+
+- inventory PR #360 and PR #365 outcomes by canonical Evidence ID;
+- resolve the latest reviewed event as effective;
+- distinguish archive present, invalid archive removed, and reviewed no-safe-change outcomes;
+- suppress reviewed unresolved Evidence until a reviewed exact-capture or source-replacement signal exists;
+- prohibit automatic time expiry;
+- prohibit queue presence, HTTP status movement, unreviewed Wayback results, and unreviewed URL changes as reactivation signals;
+- emit deterministic manifest and audit outputs;
+- generate no archive queue;
+- change no canonical or public data.
+
+Expected inventory:
 
 ```text
-PR #377  Evidence Archive Review-History Contract Audit
-PR #378  Evidence Archive Maintenance Queue v2 Refresh
-REVIEW GATE
+history sources: 2
+history events: 20
+reviewed Evidence identities: 20
+archive present: 10
+invalid archive removed: 1
+reviewed no-safe-change: 9
+currently reviewed unresolved archive gaps: 10
 ```
 
-PR #377 must update `AGENTS.md` and `docs/roadmap.md` before changing archive queue eligibility contracts.
+## 6. Required outputs
 
-### PR #377 boundary
+```text
+docs/migration/evidence-archive-review-history-manifest-pr377.json
+docs/migration/evidence-archive-review-history-audit-pr377.json
+```
 
-- inventory PR #360 and PR #365 outcomes by canonical Evidence identity;
-- define reviewed complete and no-safe-change suppression;
-- define reviewed exact-capture and source-replacement reactivation signals;
-- prohibit time-only or queue-presence reactivation;
-- no canonical or public change.
-
-### PR #378 boundary
-
-- begin only after PR #377 merges;
-- apply the reviewed history contract to the 169 archive-not-recorded Evidence identities;
-- exclude prior no-safe-change identities without a reviewed signal;
-- emit a bounded internal non-ranking queue only;
-- no canonical or public change;
-- stop at another review gate.
+PR #378 may consume only the reviewed PR #377 contract, manifest, and audit.
 
 ## 7. Canonical and public boundary
 
-PR #376 may change only internal authority, configuration, deterministic review output, validators, and workflow files.
+PR #377 may change only internal authority, configuration, deterministic builders, generated internal outputs, validators, and workflow files.
 
 It may not add or change:
 
@@ -133,14 +129,14 @@ It may not add or change:
 data/
 src/
 public/
-canonical assets or record families
-Evidence identities, relations, URLs, or archived URLs
+canonical Evidence identities, relations, URLs, or archived URLs
 Market Access records
 deployments
 statistics history
-historical queues or outcomes
+historical outcomes
+archive queues
 rankings, scores, recommendations, or leaderboards
-automatic source, monitoring, or canonical promotion
+automatic capture, source replacement, monitoring, or canonical promotion
 ```
 
 ## 8. Not approved
