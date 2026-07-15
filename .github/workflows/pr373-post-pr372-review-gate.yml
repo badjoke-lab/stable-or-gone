@@ -1,0 +1,101 @@
+name: PR 373 Post-PR 372 Review Gate
+
+on:
+  push:
+    branches:
+      - pr373-post-pr372-review-gate
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr373-post-pr372-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic review gate
+        run: |
+          node scripts/build-post-pr372-review-gate-pr373.mjs 2>&1 | tee /tmp/pr373-generation.txt
+          node scripts/build-post-pr372-review-gate-pr373.mjs --check
+      - name: Validate review gate authority
+        run: |
+          node scripts/validate-post-pr372-review-gate-pr373.mjs 2>&1 | tee /tmp/pr373-validation.txt
+          npm run validate:active-workstream
+      - name: Validate existing canonical contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+      - name: Verify internal-review-only boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          test ! -e public/data/post-pr372-review-gate-pr373.json
+          test ! -e dist/data/post-pr372-review-gate-pr373.json
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+      - name: Commit generated review report
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/post-pr372-review-gate-pr373.json
+          if git diff --cached --quiet; then
+            echo 'Review report already committed'
+          else
+            git commit -m 'Generate PR 373 post-PR 372 review gate report'
+            git push origin HEAD:pr373-post-pr372-review-gate
+          fi
+      - name: Publish PR 373 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr373-post-pr372-review-gate-status -->';
+            const fs=require('fs');
+            let report=null;
+            try{report=JSON.parse(fs.readFileSync('docs/migration/post-pr372-review-gate-pr373.json','utf8'));}catch{}
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr373-validation.txt','utf8').trim();}catch{}
+            const sequence=report?.approved_next_sequence?.map((row)=>`PR #${row.pr} ${row.work_item}`).join(' → ')||'n/a';
+            const body=`${marker}
+            ## PR #373 Post-PR #372 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Corrected queue / prior no-safe-change: **${report?.evaluation?.corrected_queue?.candidate_count??'n/a'} / ${report?.evaluation?.corrected_queue?.prior_reviewed_no_safe_change_count??'n/a'}**
+            - Queue builder consumes review history: **${report?.evaluation?.queue_builder_review_history?.consumes_review_history??'n/a'}**
+            - Archive not recorded: **${report?.evaluation?.archive_maintenance?.archive_not_recorded??'n/a'}**
+            - Market Access records: **${report?.evaluation?.market_access?.canonical_record_count??'n/a'}**
+            - Approved sequence: **${sequence}**
+            - Next sequence ends at review gate: **${report?.review_gate_after_sequence??'n/a'}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(0,12000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
