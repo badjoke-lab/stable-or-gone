@@ -1,0 +1,521 @@
+{
+  "schema_version": "2.1",
+  "baseline_id": "sog_record_depth_baseline_v2_1_pr372",
+  "status": "reviewed_internal_planning_checkpoint",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 372,
+  "reviewed_at": "2026-07-15",
+  "asset_count": 112,
+  "dimension_count": 16,
+  "cell_count": 1792,
+  "planning_states": [
+    "strong",
+    "usable",
+    "partial",
+    "sparse",
+    "absent",
+    "not_applicable"
+  ],
+  "applicability_states": [
+    "applicable",
+    "not_applicable_to_current_scope"
+  ],
+  "observation_states": [
+    "observed_supported",
+    "observed_limited",
+    "unobserved",
+    "source_unavailable",
+    "not_applicable"
+  ],
+  "dimension_order": [
+    "identity",
+    "lifecycle",
+    "organization_relationships",
+    "mechanism_classification",
+    "reserve_structure",
+    "redemption",
+    "issuance",
+    "deployment",
+    "legal_profile",
+    "regulatory_notes",
+    "events",
+    "evidence_depth",
+    "known_unknowns",
+    "comparison_readiness",
+    "facet_freshness_support",
+    "canonical_market_access"
+  ],
+  "input_digest_sha256": "b6869d43dce56de31e6c51533d49d78b6b6ca195508805c1800ff8c0aa377f04",
+  "generation_digest_sha256": "bd25da7427172194441231b9faf45247a6a9c4f65c7e248cfccff7cee27c228b",
+  "source_contracts": {
+    "v1_baseline_id": "sog_record_depth_baseline_pr363_v1",
+    "v1_input_digest_sha256": "f5ca002beca75fb3ef573f87acb81fd7cb57c34f3bac0a619bc7ffaa666300af",
+    "semantics_contract_id": "sog_planning_dimension_semantics_v2_pr367",
+    "semantics_contract_sha256": "180af6f016ead489501470978466ca710296a6cc1867044b56ac1a54361af9a4",
+    "semantics_audit_id": "sog_planning_dimension_semantics_audit_pr367_2026_07_15",
+    "canonical_builder_input_digest_sha256": "b573497f1c7b7f1ba18676874fd9e5ef14be6b6ee1d6473a411a643cb57d53f6",
+    "planning_input_manifest_path": "docs/migration/planning-input-manifest-pr371.json",
+    "planning_input_manifest_id": "sog_planning_input_manifest_pr371_v1",
+    "planning_input_manifest_digest_sha256": "d2d9868f64224efa830ad64100cea255047e4a41ee6cb4f3c8fd9c97a0a4c0c0",
+    "planning_input_source_digest_sha256": "d4de2c7c00e00de9fb1e496082411dea987a895471305749493c752badcc9af4",
+    "planning_input_profile_file_count": 29,
+    "planning_input_profile_files": [
+      "data/stablecoin-profiles-v2.json",
+      "data/stablecoin-profiles-batch-a.json",
+      "data/stablecoin-profiles-batch-b.json",
+      "data/stablecoin-profiles-batch-c.json",
+      "data/stablecoin-profiles-batch-d.json",
+      "data/stablecoin-profiles-batch-e.json",
+      "data/stablecoin-profiles-batch-f.json",
+      "data/stablecoin-profiles-batch-g.json",
+      "data/stablecoin-profiles-batch-h.json",
+      "data/stablecoin-profiles-batch-i.json",
+      "data/stablecoin-profiles-batch-j.json",
+      "data/stablecoin-profiles-batch-k.json",
+      "data/stablecoin-profiles-batch-l.json",
+      "data/stablecoin-profiles-batch-m.json",
+      "data/stablecoin-profiles-batch-n.json",
+      "data/stablecoin-profiles-batch-o.json",
+      "data/stablecoin-profiles-batch-p.json",
+      "data/stablecoin-profiles-batch-q.json",
+      "data/r-profiles.json",
+      "data/s-profiles.json",
+      "data/batch-t-reserve-redemption.json",
+      "data/batch-u-reserve-redemption.json",
+      "data/batch-v-reserve-redemption.json",
+      "data/batch-w-reserve-redemption.json",
+      "data/batch-x-reserve-redemption.json",
+      "data/batch-y-reserve-redemption.json",
+      "data/batch-z-reserve-redemption.json",
+      "data/stablecoin-profiles-pr354-tier-a-batch-1.json",
+      "data/stablecoin-profiles-pr355-tier-a-batch-2.json"
+    ],
+    "planning_input_composition_semantics": {
+      "source_order": "public_loader_import_order",
+      "duplicate_asset_resolution": "last_write_wins",
+      "exact_loader_source": "src/lib/data/currentProfiles.ts"
+    },
+    "planning_input_audit_path": "docs/migration/planning-input-coverage-audit-pr371.json",
+    "planning_input_audit_id": "sog_planning_input_coverage_audit_pr371_2026_07_15",
+    "superseded_baseline_id": "sog_record_depth_baseline_v2_pr368"
+  },
+  "summary": {
+    "planning_state_counts": {
+      "strong": 608,
+      "usable": 718,
+      "partial": 246,
+      "sparse": 0,
+      "absent": 2,
+      "not_applicable": 218
+    },
+    "applicability_state_counts": {
+      "applicable": 1574,
+      "not_applicable_to_current_scope": 218
+    },
+    "observation_state_counts": {
+      "observed_supported": 608,
+      "observed_limited": 964,
+      "unobserved": 2,
+      "source_unavailable": 0,
+      "not_applicable": 218
+    },
+    "dimension_states": [
+      {
+        "dimension_id": "identity",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 83,
+          "usable": 29,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 83,
+          "observed_limited": 29,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "lifecycle",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 49,
+          "usable": 60,
+          "partial": 3,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 49,
+          "observed_limited": 63,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "organization_relationships",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 10,
+          "usable": 97,
+          "partial": 5,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 10,
+          "observed_limited": 102,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "mechanism_classification",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 108,
+          "usable": 4,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 108,
+          "observed_limited": 4,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "reserve_structure",
+        "dimension_class": "conditional_structural",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 4,
+          "usable": 108,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 4,
+          "observed_limited": 108,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "redemption",
+        "dimension_class": "conditional_structural",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 101,
+          "usable": 4,
+          "partial": 6,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 1
+        },
+        "applicability_state_counts": {
+          "applicable": 111,
+          "not_applicable_to_current_scope": 1
+        },
+        "observation_state_counts": {
+          "observed_supported": 101,
+          "observed_limited": 10,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 1
+        }
+      },
+      {
+        "dimension_id": "issuance",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 107,
+          "usable": 5,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 107,
+          "observed_limited": 5,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "deployment",
+        "dimension_class": "universal_dossier",
+        "queue_role": "maintenance_only",
+        "planning_state_counts": {
+          "strong": 9,
+          "usable": 11,
+          "partial": 92,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 9,
+          "observed_limited": 103,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "legal_profile",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 0,
+          "usable": 65,
+          "partial": 47,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 0,
+          "observed_limited": 112,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "regulatory_notes",
+        "dimension_class": "scoped_observational",
+        "queue_role": "scoped_non_dossier",
+        "planning_state_counts": {
+          "strong": 3,
+          "usable": 2,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 107
+        },
+        "applicability_state_counts": {
+          "applicable": 5,
+          "not_applicable_to_current_scope": 107
+        },
+        "observation_state_counts": {
+          "observed_supported": 3,
+          "observed_limited": 2,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 107
+        }
+      },
+      {
+        "dimension_id": "events",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 20,
+          "usable": 90,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 2,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 20,
+          "observed_limited": 90,
+          "unobserved": 2,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "evidence_depth",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 59,
+          "usable": 50,
+          "partial": 3,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 59,
+          "observed_limited": 53,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "known_unknowns",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 53,
+          "usable": 59,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 53,
+          "observed_limited": 59,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "comparison_readiness",
+        "dimension_class": "universal_dossier",
+        "queue_role": "diagnostic_only",
+        "planning_state_counts": {
+          "strong": 0,
+          "usable": 112,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 0,
+          "observed_limited": 112,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "facet_freshness_support",
+        "dimension_class": "conditional_structural",
+        "queue_role": "maintenance_only",
+        "planning_state_counts": {
+          "strong": 0,
+          "usable": 22,
+          "partial": 90,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 0,
+          "observed_limited": 112,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "canonical_market_access",
+        "dimension_class": "scoped_observational",
+        "queue_role": "scoped_non_dossier",
+        "planning_state_counts": {
+          "strong": 2,
+          "usable": 0,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 110
+        },
+        "applicability_state_counts": {
+          "applicable": 2,
+          "not_applicable_to_current_scope": 110
+        },
+        "observation_state_counts": {
+          "observed_supported": 2,
+          "observed_limited": 0,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 110
+        }
+      }
+    ],
+    "changed_from_v1_cell_count": 218,
+    "material_dossier_gap_cell_count": 66,
+    "maintenance_gap_cell_count": 182,
+    "candidate_count": 3
+  },
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "next_work_item": "REVIEW GATE",
+  "supersedes_baseline_id": "sog_record_depth_baseline_v2_pr368",
+  "planning_input_manifest_id": "sog_planning_input_manifest_pr371_v1",
+  "changed_from_pr368_cell_count": 4,
+  "changed_from_pr368_asset_count": 4
+}

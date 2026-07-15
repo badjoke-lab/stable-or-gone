@@ -12,6 +12,49 @@ function mergeMinimumCounts(target, source = {}) {
   }
 }
 
+function applyPlanningProfileManifest(root, baseline) {
+  const relativePath = process.env.SOG_PLANNING_PROFILE_MANIFEST;
+  if (!relativePath) return baseline;
+
+  const absoluteRoot = path.resolve(root);
+  const absoluteManifest = path.resolve(root, relativePath);
+  if (absoluteManifest !== absoluteRoot && !absoluteManifest.startsWith(`${absoluteRoot}${path.sep}`)) {
+    throw new Error(`Planning profile manifest escapes repository root: ${relativePath}`);
+  }
+  if (!fs.existsSync(absoluteManifest)) throw new Error(`Planning profile manifest not found: ${relativePath}`);
+
+  const manifest = readJson(root, relativePath);
+  if (manifest.status !== 'reviewed_internal_complete_profile_input_manifest') {
+    throw new Error(`Planning profile manifest is not reviewed complete: ${relativePath}`);
+  }
+  const files = (manifest.ordered_profile_files ?? []).map((row) => row.path);
+  if (files.length === 0 || new Set(files).size !== files.length) {
+    throw new Error(`Planning profile manifest has an empty or duplicate file list: ${relativePath}`);
+  }
+  for (const file of files) {
+    if (typeof file !== 'string' || !file.startsWith('data/') || !file.endsWith('.json')) {
+      throw new Error(`Planning profile manifest contains an invalid profile path: ${String(file)}`);
+    }
+    if (!fs.existsSync(path.join(root, file))) throw new Error(`Planning profile input file not found: ${file}`);
+  }
+
+  return {
+    ...baseline,
+    data_groups: {
+      ...(baseline.data_groups ?? {}),
+      profiles: files
+    },
+    planning_profile_manifest: {
+      path: relativePath,
+      manifest_id: manifest.manifest_id,
+      manifest_digest_sha256: manifest.manifest_digest_sha256,
+      source_digest_sha256: manifest.source_digest_sha256,
+      profile_file_count: files.length,
+      composition_semantics: manifest.composition_semantics
+    }
+  };
+}
+
 export function loadRegistryV2Baseline(root = process.cwd()) {
   const baseRelativePath = 'docs/migration/registry-v2-baseline.json';
   const base = readJson(root, baseRelativePath);
@@ -21,7 +64,7 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
     .sort()
     .map((name) => `docs/migration/${name}`);
 
-  if (overlayFiles.length === 0) return base;
+  if (overlayFiles.length === 0) return applyPlanningProfileManifest(root, base);
 
   const dataGroups = { ...(base.data_groups ?? {}) };
   const minimumCounts = { ...(base.minimum_counts ?? {}) };
@@ -59,7 +102,7 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
     }
   }
 
-  return {
+  return applyPlanningProfileManifest(root, {
     ...base,
     baseline_id: `${base.baseline_id}_${suffixes.join('_')}`,
     captured_at: capturedAt,
@@ -68,5 +111,5 @@ export function loadRegistryV2Baseline(root = process.cwd()) {
     protected_stablecoins: uniqueRows(protectedStablecoins),
     protected_organizations: uniqueRows(protectedOrganizations),
     deferred_legacy_v3_overlays: deferredLegacyV3Overlays
-  };
+  });
 }
