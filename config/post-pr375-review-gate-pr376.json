@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr375_review_gate_pr376_v1",
+  "status": "mandatory_review_gate_contract",
+  "review_pr": 376,
+  "reviewed_at": "2026-07-15",
+  "expected": {
+    "assets": 112,
+    "evidence": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169,
+    "source_queue_candidates": 3,
+    "history_suppressed_candidates": 3,
+    "history_aware_queue_candidates": 0,
+    "archive_batch_1_selected": 10,
+    "archive_batch_1_changed": 8,
+    "archive_batch_1_no_safe_change": 2,
+    "archive_batch_2_selected": 10,
+    "archive_batch_2_changed": 3,
+    "archive_batch_2_no_safe_change": 7
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 377,
+      "work_item": "Evidence Archive Review-History Contract Audit",
+      "scope": "Inventory PR #360 and PR #365 archive-maintenance outcomes by canonical Evidence identity; define deterministic suppression and reviewed-capture/source-replacement reactivation semantics; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 378,
+      "work_item": "Evidence Archive Maintenance Queue v2 Refresh",
+      "scope": "Apply the approved archive review-history contract to the current 169 archive-not-recorded Evidence records; exclude previously reviewed no-safe-change identities without a reviewed reactivation signal; emit a bounded non-ranking internal review queue; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 3 canonical changes",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_output_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  }
+}
