@@ -1,0 +1,114 @@
+{
+  "schema_version": "2.1",
+  "queue_id": "sog_tier_a_candidate_queue_v2_1_pr372",
+  "status": "reviewed_internal_non_ranking_queue",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 372,
+  "source_baseline_id": "sog_record_depth_baseline_v2_1_pr372",
+  "source_semantics_contract_id": "sog_planning_dimension_semantics_v2_pr367",
+  "candidate_count": 3,
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "selection_boundary": {
+    "canonical_promotion_authorized": false,
+    "manual_review_required": true,
+    "existing_assets_only": true,
+    "market_access_change_allowed": false,
+    "public_surface_allowed": false,
+    "next_dossier_batch_authorized": false,
+    "review_gate_required": true
+  },
+  "candidates": [
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "asset_name": "AUDD",
+      "symbol": "AUDD",
+      "reasons": [
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "maintenance_gaps": [
+        "deployment",
+        "facet_freshness_support"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": false,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": true,
+        "regional_relevance": true,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "asset_name": "NZD Stablecoin",
+      "symbol": "NZDS",
+      "reasons": [
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "maintenance_gaps": [
+        "deployment",
+        "facet_freshness_support"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": false,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": true,
+        "regional_relevance": true,
+        "comparison_preset_member": false
+      }
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "asset_name": "poundtoken",
+      "symbol": "1GBP",
+      "reasons": [
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "material_dossier_gaps": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "maintenance_gaps": [
+        "deployment",
+        "facet_freshness_support"
+      ],
+      "product_leverage_flags": {
+        "compare_leverage": true,
+        "timeline_leverage": true,
+        "access_regulation_leverage": false,
+        "evidence_maintenance_leverage": false,
+        "historical_importance": true,
+        "regional_relevance": true,
+        "comparison_preset_member": false
+      }
+    }
+  ],
+  "generation_digest_sha256": "bd25da7427172194441231b9faf45247a6a9c4f65c7e248cfccff7cee27c228b",
+  "next_work_item": "REVIEW GATE",
+  "reviewed_at": "2026-07-15",
+  "planning_input_manifest_id": "sog_planning_input_manifest_pr371_v1"
+}
