@@ -78,7 +78,9 @@ for (const winner of manifest.asset_winners) {
 expect(manifest.counts.duplicate_asset_ids === manifest.asset_winners.filter((row) => row.occurrence_count > 1).length, 'duplicate asset count mismatch');
 expect(manifest.counts.duplicate_row_occurrences === manifest.counts.total_row_occurrences - manifest.counts.unique_asset_ids, 'duplicate occurrence total mismatch');
 
-expect(audit.planning_code_path.canonical_builder_uses_legacy_registry_profile_group === true, 'canonical builder legacy profile-group finding not reproduced');
+expect(audit.planning_code_path.base_builder_uses_legacy_registry_profile_group === true, 'base builder legacy profile-group finding not reproduced');
+expect(audit.planning_code_path.reviewed_builder_delegates_to_base_builder === true, 'reviewed builder delegation finding not reproduced');
+expect(audit.planning_code_path.canonical_builder_uses_legacy_registry_profile_group === true, 'canonical planning path legacy profile-group finding not reproduced');
 expect(audit.planning_code_path.canonical_builder_defaults_profile_overrides_empty === true, 'empty profile override default finding not reproduced');
 expect(audit.planning_code_path.v2_builder_calls_canonical_builder_without_options === true, 'PR #368 no-options call finding not reproduced');
 expect(audit.planning_code_path.current_planning_input_matches_public_loader === false, 'planning/public input mismatch must remain explicit');
@@ -103,6 +105,7 @@ for (const file of [
   'src/lib/data/currentProfiles.ts',
   'src/lib/data/stablecoinProfiles.ts',
   'docs/migration/registry-v2-baseline.json',
+  'scripts/growth/build-record-depth-baseline-pr353.mjs',
   'scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs',
   'scripts/build-record-depth-baseline-v2-refresh-pr368.mjs',
   'docs/migration/post-pr369-review-gate-pr370.json',
