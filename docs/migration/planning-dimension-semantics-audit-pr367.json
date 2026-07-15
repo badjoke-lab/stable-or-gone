@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "sog_planning_dimension_semantics_audit_pr367_2026_07_15",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 367,
+  "reviewed_at": "2026-07-15",
+  "source_review_gate_id": "sog_post_pr365_review_gate_pr366_2026_07_15",
+  "source_checkpoint": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "historical_v1_boundary": {
+    "baseline_id": "sog_record_depth_baseline_pr363_v1",
+    "asset_count": 112,
+    "dimension_count": 16,
+    "cell_count": 1792,
+    "state_counts": {
+      "strong": 602,
+      "usable": 716,
+      "partial": 255,
+      "sparse": 0,
+      "absent": 219,
+      "not_applicable": 0
+    },
+    "canonical_market_access_absent": 110,
+    "regulatory_notes_absent": 107,
+    "deployment_partial": 92,
+    "facet_freshness_support_partial": 91,
+    "rewritten": false
+  },
+  "approved_contract": {
+    "contract_id": "sog_planning_dimension_semantics_v2_pr367",
+    "contract_sha256": "180af6f016ead489501470978466ca710296a6cc1867044b56ac1a54361af9a4",
+    "planning_states": 6,
+    "applicability_states": 2,
+    "observation_states": 5,
+    "dimensions": 16,
+    "dimension_classes": {
+      "universal_dossier": 11,
+      "conditional_structural": 3,
+      "scoped_observational": 2
+    },
+    "default_queue_roles": {
+      "material_dossier": 11,
+      "maintenance_only": 2,
+      "scoped_non_dossier": 2,
+      "diagnostic_only": 1
+    }
+  },
+  "binding_decisions": [
+    "Preserve all v1 planning files as immutable historical checkpoints.",
+    "Keep the six planning quality states and add orthogonal applicability and observation/source-support axes.",
+    "Treat regulatory_notes and canonical_market_access as scoped observational dimensions rather than universal dossier requirements.",
+    "Treat reserve_structure, redemption, and facet_freshness_support as conditional structural dimensions.",
+    "Map an explicit source-supported redemption status of not_applicable to planning not_applicable rather than partial.",
+    "Keep deployment and facet freshness gaps in maintenance workflows, not the default dossier queue.",
+    "Keep comparison_readiness diagnostic and non-ranking.",
+    "Require PR #368 to recompute the 112-asset baseline before PR #369 selects any asset."
+  ],
+  "semantic_safety": {
+    "not_applicable_counts_as_gap": false,
+    "absent_asserts_real_world_nonexistence": false,
+    "unobserved_is_negative_claim": false,
+    "source_unavailable_authorizes_fabrication": false,
+    "ranking_or_composite_score": false,
+    "automatic_promotion": false
+  },
+  "archive_preservation": {
+    "agents_archive": "docs/archive/AGENTS-through-pr366.md",
+    "agents_git_blob_sha": "db88c513f1488c79e4d6e66a9c04853018039730",
+    "roadmap_archive": "docs/archive/roadmap-through-pr366.md",
+    "roadmap_git_blob_sha": "0a166ce2b3c110bdb1d424beb83ad8859ac49fce",
+    "archives_are_historical_only": true
+  },
+  "boundaries": {
+    "canonical_data_changed": false,
+    "baseline_recomputed": false,
+    "historical_v1_rewritten": false,
+    "public_surface_changed": false
+  },
+  "next_work_item": {
+    "pr": 368,
+    "work_item": "Record Depth Baseline v2 Refresh",
+    "requires_merged_contract_id": "sog_planning_dimension_semantics_v2_pr367",
+    "canonical_data_change_allowed": false,
+    "public_surface_allowed": false
+  }
+}
