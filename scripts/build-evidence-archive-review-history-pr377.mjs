@@ -22,7 +22,9 @@ const readJson = (file) => JSON.parse(readText(file));
 const serialize = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const rows = (value, file) => {
-  const result = Array.isArray(value) ? value : value?.records;
+  const result = Array.isArray(value)
+    ? value
+    : value?.records ?? value?.evidence ?? value?.items;
   if (!Array.isArray(result)) throw new Error(`${file}: invalid rows`);
   return result;
 };
@@ -45,10 +47,14 @@ function currentEvidenceById() {
 function buildHistoryEvents(pr360, pr365) {
   const events = [];
   let sourceOrder = 0;
+  const pr360ReviewedAt = '2026-07-14';
+  const pr365ReviewedAt = '2026-07-14';
+
   for (const row of pr360.outcomes) {
+    const nextArchive = row.new_value?.archived_url ?? null;
     const reviewOutcome = row.review_status === 'reviewed_no_safe_canonical_change'
       ? 'reviewed_no_safe_change'
-      : row.after == null
+      : nextArchive == null
         ? 'reviewed_archive_removed_invalid'
         : 'reviewed_archive_present';
     events.push({
@@ -56,19 +62,21 @@ function buildHistoryEvents(pr360, pr365) {
       evidence_id: row.evidence_id,
       review_outcome: reviewOutcome,
       review_pr: 360,
-      reviewed_at: pr360.recorded_at,
-      source_id: pr360.outcome_id,
+      reviewed_at: pr360ReviewedAt,
+      source_id: pr360.report_id,
       source_order: sourceOrder++,
-      before_archived_url: row.before ?? null,
-      after_archived_url: row.after ?? null,
-      source_url: row.source_url ?? null,
-      decision: row.decision ?? null,
+      before_archived_url: row.previous_value?.archived_url ?? null,
+      after_archived_url: nextArchive,
+      source_url: row.evidence_basis?.source_url ?? row.previous_value?.url ?? null,
+      decision: row.review_status,
+      correction_type: row.correction_type ?? null,
       reason: row.reason ?? null,
       automatic_time_expiry: false
     });
   }
+
   for (const row of pr365.outcomes) {
-    const reviewOutcome = row.decision === 'archive_updated'
+    const reviewOutcome = row.decision === 'dated_archive_added'
       ? 'reviewed_archive_present'
       : 'reviewed_no_safe_change';
     events.push({
@@ -76,17 +84,19 @@ function buildHistoryEvents(pr360, pr365) {
       evidence_id: row.evidence_id,
       review_outcome: reviewOutcome,
       review_pr: 365,
-      reviewed_at: pr365.reviewed_at,
-      source_id: pr365.outcomes_id,
+      reviewed_at: pr365ReviewedAt,
+      source_id: pr365.outcome_id,
       source_order: sourceOrder++,
-      before_archived_url: null,
-      after_archived_url: row.archived_url ?? null,
-      source_url: row.url ?? null,
+      before_archived_url: row.previous_archived_url ?? null,
+      after_archived_url: row.new_archived_url ?? null,
+      source_url: null,
       decision: row.decision,
-      reason: row.reason_code ?? null,
+      correction_type: row.decision === 'dated_archive_added' ? 'archive_supplementation' : null,
+      reason: row.reason ?? null,
       automatic_time_expiry: false
     });
   }
+
   return events.sort((left, right) =>
     left.reviewed_at.localeCompare(right.reviewed_at)
     || left.review_pr - right.review_pr
@@ -139,8 +149,8 @@ export function buildEvidenceArchiveReviewHistoryOutputs() {
   const outcomeCounts = countBy(effective, 'effective_review_outcome');
   const reviewedUnresolved = effective.filter((row) => row.current_archived_url == null && row.eligibility_state_without_signal.startsWith('suppressed_'));
   const sources = [
-    sourceRow(pr360.outcome_id, 360, pr360.recorded_at, paths.pr360Outcomes),
-    sourceRow(pr365.outcomes_id, 365, pr365.reviewed_at, paths.pr365Outcomes)
+    sourceRow(pr360.report_id, 360, '2026-07-14', paths.pr360Outcomes),
+    sourceRow(pr365.outcome_id, 365, '2026-07-14', paths.pr365Outcomes)
   ];
   const sourceDigest = sha256(Object.values(paths).map((file) => `${file}\0${readText(file)}`).join('\0'));
   const manifestDigest = sha256(JSON.stringify({ contractId: contract.contract_id, sources, events, effective, sourceDigest }));
