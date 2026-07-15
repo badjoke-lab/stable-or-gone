@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "sog_planning_queue_review_history_audit_pr374_2026_07_15",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 374,
+  "reviewed_at": "2026-07-15",
+  "contract_id": "sog_planning_queue_review_history_v1_pr374",
+  "source_manifest_id": "sog_planning_queue_review_history_manifest_pr374_v1",
+  "suppression_policy": {
+    "reviewed_complete": "suppress_same_dimension_until_reviewed_new_source_or_semantics_change",
+    "reviewed_partial": "suppress_same_dimension_until_reviewed_new_source_or_semantics_change",
+    "reviewed_no_safe_change": "suppress_same_dimension_until_reviewed_new_source_or_semantics_change",
+    "automatic_time_expiry": false,
+    "maintenance_gap_can_reactivate_material_dossier_gap": false,
+    "queue_presence_is_new_source_signal": false,
+    "planning_state_change_alone_is_new_source_signal": false
+  },
+  "reactivation_policy": {
+    "accepted_triggers": [
+      "reviewed_new_source",
+      "reviewed_semantics_change"
+    ],
+    "reviewed_new_source_requirements": [
+      "signal_status_reviewed",
+      "observed_at_after_effective_review_at",
+      "new_source_identity_or_source_version_digest",
+      "affected_dimension_declared",
+      "source_support_scope_declared"
+    ],
+    "reviewed_semantics_change_requirements": [
+      "contract_change_reviewed",
+      "affected_dimension_declared",
+      "prior_outcome_reinterpretation_explicit"
+    ],
+    "missing_signal_default": "suppressed"
+  },
+  "current_queue_audit": {
+    "source_queue_id": "sog_tier_a_candidate_queue_v2_1_pr372",
+    "source_candidate_count": 3,
+    "reactivation_signal_count": 0,
+    "candidates": [
+      {
+        "asset_id": "sog_st_audd",
+        "asset_slug": "audd",
+        "material_dossier_gaps": [
+          "events",
+          "lifecycle",
+          "organization_relationships",
+          "redemption"
+        ],
+        "dimension_eligibility": [
+          {
+            "dimension_id": "events",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "lifecycle",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "organization_relationships",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "redemption",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          }
+        ],
+        "eligible_dimension_count": 0,
+        "suppressed_dimension_count": 4,
+        "projected_candidate_state": "suppressed_all_material_gaps_reviewed",
+        "projected_v2_2_eligible": false
+      },
+      {
+        "asset_id": "sog_st_nzds",
+        "asset_slug": "nzds",
+        "material_dossier_gaps": [
+          "events",
+          "lifecycle",
+          "organization_relationships",
+          "redemption"
+        ],
+        "dimension_eligibility": [
+          {
+            "dimension_id": "events",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "lifecycle",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "organization_relationships",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "redemption",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          }
+        ],
+        "eligible_dimension_count": 0,
+        "suppressed_dimension_count": 4,
+        "projected_candidate_state": "suppressed_all_material_gaps_reviewed",
+        "projected_v2_2_eligible": false
+      },
+      {
+        "asset_id": "sog_st_1gbp",
+        "asset_slug": "poundtoken",
+        "material_dossier_gaps": [
+          "lifecycle",
+          "organization_relationships",
+          "redemption"
+        ],
+        "dimension_eligibility": [
+          {
+            "dimension_id": "lifecycle",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "organization_relationships",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          },
+          {
+            "dimension_id": "redemption",
+            "review_history_found": true,
+            "effective_review_outcome": "reviewed_no_safe_change",
+            "eligibility_state": "suppressed_reviewed_no_safe_change",
+            "reactivation_signal_present": false
+          }
+        ],
+        "eligible_dimension_count": 0,
+        "suppressed_dimension_count": 3,
+        "projected_candidate_state": "suppressed_all_material_gaps_reviewed",
+        "projected_v2_2_eligible": false
+      }
+    ],
+    "fully_suppressed_candidate_count": 3,
+    "projected_v2_2_candidate_count": 0,
+    "projected_v2_2_candidate_slugs": []
+  },
+  "findings": [
+    "Review history covers 18 assets and 33 effective asset-dimension outcomes across five reviewed dossier sources.",
+    "No review outcome expires automatically with time.",
+    "Queue presence and planning-state changes are not new-source signals.",
+    "AUDD, NZDS, and poundtoken have every current material dossier gap suppressed by a latest reviewed no-safe-change outcome.",
+    "Without a reviewed new-source or semantics-change signal, the projected v2.2 queue contains zero candidates."
+  ],
+  "decision": {
+    "contract_complete": true,
+    "approved_manifest": "docs/migration/planning-queue-review-history-manifest-pr374.json",
+    "next_work_item": "PR #375 Candidate Queue v2.2 Refresh",
+    "baseline_recompute_allowed_in_pr374": false,
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "review_gate_after_pr375": true
+  },
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "baseline_recomputed": false,
+    "historical_queue_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "manifest_digest_sha256": "4ecc97ff00ecb8e93df7f08bd2a208b9010ff70ac408ea07bd808ad87615526a",
+  "source_digest_sha256": "029a8b20dda6e552ba503f775866d59aac263b6977c39939aee6916ebb3f9705"
+}
