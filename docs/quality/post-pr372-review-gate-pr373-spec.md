@@ -38,7 +38,7 @@ scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
 - PR #372 changed four redemption cells across BUSD, PYUSD, RLUSD, and USDP from `partial` to `strong`.
 - The candidate queue decreased from six to three.
 - AUDD, NZDS, and poundtoken are the three retained candidates.
-- PR #369 already assigned `reviewed_no_safe_change` to all three retained candidates.
+- All three retained candidates already have a PR #369 `reviewed_no_safe_change` outcome.
 - The queue builder derives eligibility from current gap and leverage fields but does not consume prior review-history handoffs.
 - Another immediate dossier batch would repeat reviewed work without a new source signal.
 - Archive maintenance has 169 records without a recorded archive, but the last bounded batch safely changed only three of ten reviewed candidates.
