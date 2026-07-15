@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr375_review_gate_pr376_2026_07_15",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 376,
+  "reviewed_at": "2026-07-15",
+  "source_checkpoint": {
+    "assets": 112,
+    "evidence": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "completed_sequence": [
+    {
+      "pr": 374,
+      "work_item": "Planning Queue Review-History Contract Audit",
+      "status": "complete"
+    },
+    {
+      "pr": 375,
+      "work_item": "Candidate Queue v2.2 Refresh",
+      "status": "complete"
+    }
+  ],
+  "evaluation": {
+    "dossier_queue": {
+      "queue_id": "sog_tier_a_candidate_queue_v2_2_pr375",
+      "source_candidate_count": 3,
+      "suppressed_candidate_count": 3,
+      "reactivated_candidate_count": 0,
+      "current_candidate_count": 0,
+      "removed_asset_slugs": [
+        "audd",
+        "nzds",
+        "poundtoken"
+      ],
+      "history_contract_complete": true,
+      "result": "successful_zero_candidate_history_aware_queue"
+    },
+    "archive_backlog": {
+      "canonical_evidence_count": 559,
+      "archive_recorded": 390,
+      "archive_not_recorded": 169,
+      "archive_coverage_percent": 69.77,
+      "result": "largest_named_internal_quality_backlog"
+    },
+    "archive_batch_history": {
+      "pr360": {
+        "selected": 10,
+        "changed": 8,
+        "no_safe_change": 2,
+        "changed_evidence_ids": [
+          "sog_src_busd_reuters_sec_2024",
+          "sog_src_nuon_disclaimer_batch_b",
+          "sog_src_rlusd_user_terms",
+          "sog_src_usdc_terms_pr354",
+          "sog_src_usde_terms_batch_a",
+          "sog_src_usdt_cftc_2021_event",
+          "sog_src_usdt_nyag_2021_event",
+          "sog_src_ust_sec_2023_32"
+        ],
+        "no_safe_change_evidence_ids": [
+          "sog_src_tether_legal_terms",
+          "sog_src_usdt_terms_pr354"
+        ]
+      },
+      "pr365": {
+        "selected": 10,
+        "changed": 3,
+        "no_safe_change": 7,
+        "changed_evidence_ids": [
+          "sog_src_xaut_legal_batch_b",
+          "sog_src_bold_live_batch_c",
+          "sog_src_bold_overview_batch_c"
+        ],
+        "no_safe_change_evidence_ids": [
+          "sog_src_bold_redemptions_batch_c",
+          "sog_src_busd_binance_phaseout",
+          "sog_src_busd_paxos_issuer_update",
+          "sog_src_busd_paxos_statement_pr354",
+          "sog_src_circle_stability_update_2023_03_13",
+          "sog_src_circle_svb_update",
+          "sog_src_circle_usdc_contract_addresses"
+        ]
+      },
+      "total_reviewed_identity_occurrences": 20,
+      "total_no_safe_change_occurrences": 9
+    },
+    "archive_queue_review_history": {
+      "excludes_pr360_selected_queue": true,
+      "reads_pr360_outcomes": false,
+      "reads_pr365_outcomes": false,
+      "reads_reviewed_no_safe_change": false,
+      "reads_archive_review_history_manifest": false,
+      "consumes_complete_archive_review_history": false,
+      "excluded_pr360_selected_count": 10,
+      "pr365_reviewed_outcome_count": 10,
+      "finding": "The PR #365 queue builder excludes PR #360 selected identities but does not consume PR #365 reviewed outcomes or a complete Evidence archive review-history manifest."
+    },
+    "archive_batch_3_readiness": {
+      "canonical_change_decision": "not_approved",
+      "reason": "A history-aware fresh queue must be generated and reviewed before another canonical archive-maintenance batch."
+    },
+    "market_access": {
+      "canonical_record_count": 8,
+      "latest_promoted_record_count": 4,
+      "third_pilot_candidate_manifest": "not_available_in_named_review_inputs",
+      "decision": "defer"
+    },
+    "monthly_maintenance": {
+      "month": "2026-07",
+      "status": "in_progress",
+      "checks_passed": 6,
+      "next_focus": [
+        "Close the July maintenance entry after month-end review.",
+        "Continue Market Access promotion review under the canonical evidence and governance boundary.",
+        "Continue source-link, correction, and public-surface contract review without exposing internal monitoring rows or unreviewed candidates."
+      ],
+      "decision": "continue_existing_month_end_process"
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    },
+    "external_usage": {
+      "status": "not_available_in_reviewed_repository_evidence",
+      "decision_effect": "No public-surface or growth sequence is authorized from unverified usage claims."
+    }
+  },
+  "decisions": {
+    "evidence_archive_review_history_contract_audit": {
+      "decision": "approved_required",
+      "pr": 377,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "evidence_archive_maintenance_queue_v2_refresh": {
+      "decision": "approved_after_pr377",
+      "pr": 378,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "evidence_archive_maintenance_batch_3": {
+      "decision": "not_approved_before_next_review_gate"
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 377,
+      "work_item": "Evidence Archive Review-History Contract Audit",
+      "scope": "Inventory PR #360 and PR #365 archive-maintenance outcomes by canonical Evidence identity; define deterministic suppression and reviewed-capture/source-replacement reactivation semantics; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 378,
+      "work_item": "Evidence Archive Maintenance Queue v2 Refresh",
+      "scope": "Apply the approved archive review-history contract to the current 169 archive-not-recorded Evidence records; exclude previously reviewed no-safe-change identities without a reviewed reactivation signal; emit a bounded non-ranking internal review queue; change no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Evidence and Archive Maintenance Batch 3 canonical changes",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #377 must update AGENTS.md and docs/roadmap.md before changing Evidence archive queue eligibility contracts.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "bcee4aaf82764e102a987d282ce74f91caca4100e78b82010c94010bfb580877",
+  "decision_digest_sha256": "963f621faf5a6f8fcdac5417217839f0c5d8f53852dc626e54b168b4aa2af3c7"
+}
