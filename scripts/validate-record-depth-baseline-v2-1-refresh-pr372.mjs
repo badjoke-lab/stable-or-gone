@@ -116,8 +116,8 @@ for (const key of ['canonical_write_allowed', 'market_access_write_allowed', 'mo
 }
 
 for (const file of [
-  'docs/migration/record-depth-baseline-pr353.json',
-  'docs/migration/record-depth-baseline-pr363.json',
+  'docs/migration/record-depth-baseline-pr353-summary.json',
+  'docs/migration/tier-a-candidate-queue-pr353.json',
   'docs/migration/record-depth-baseline-pr363-summary.json',
   'docs/migration/record-depth-baseline-pr363-delta.json',
   'docs/migration/tier-a-candidate-queue-pr363.json',
