@@ -1,0 +1,473 @@
+{
+  "schema_version": "2.0",
+  "baseline_id": "sog_record_depth_baseline_v2_pr368",
+  "status": "reviewed_internal_planning_checkpoint",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 368,
+  "reviewed_at": "2026-07-15",
+  "asset_count": 112,
+  "dimension_count": 16,
+  "cell_count": 1792,
+  "planning_states": [
+    "strong",
+    "usable",
+    "partial",
+    "sparse",
+    "absent",
+    "not_applicable"
+  ],
+  "applicability_states": [
+    "applicable",
+    "not_applicable_to_current_scope"
+  ],
+  "observation_states": [
+    "observed_supported",
+    "observed_limited",
+    "unobserved",
+    "source_unavailable",
+    "not_applicable"
+  ],
+  "dimension_order": [
+    "identity",
+    "lifecycle",
+    "organization_relationships",
+    "mechanism_classification",
+    "reserve_structure",
+    "redemption",
+    "issuance",
+    "deployment",
+    "legal_profile",
+    "regulatory_notes",
+    "events",
+    "evidence_depth",
+    "known_unknowns",
+    "comparison_readiness",
+    "facet_freshness_support",
+    "canonical_market_access"
+  ],
+  "input_digest_sha256": "d06e8ef498d28ba4438f82805c130e042e4a6a9f7365f121fdc3a89f4028493b",
+  "generation_digest_sha256": "de1c1232675e9e7307395abfaca26c1879669cc4c1f0e2af1d1253627473e4e1",
+  "source_contracts": {
+    "v1_baseline_id": "sog_record_depth_baseline_pr363_v1",
+    "v1_input_digest_sha256": "f5ca002beca75fb3ef573f87acb81fd7cb57c34f3bac0a619bc7ffaa666300af",
+    "semantics_contract_id": "sog_planning_dimension_semantics_v2_pr367",
+    "semantics_contract_sha256": "180af6f016ead489501470978466ca710296a6cc1867044b56ac1a54361af9a4",
+    "semantics_audit_id": "sog_planning_dimension_semantics_audit_pr367_2026_07_15",
+    "canonical_builder_input_digest_sha256": "415333b193fa949939a028125d1d7fad0c9e0d9e0e9fabd6c660179c171477bf"
+  },
+  "summary": {
+    "planning_state_counts": {
+      "strong": 604,
+      "usable": 718,
+      "partial": 250,
+      "sparse": 0,
+      "absent": 2,
+      "not_applicable": 218
+    },
+    "applicability_state_counts": {
+      "applicable": 1574,
+      "not_applicable_to_current_scope": 218
+    },
+    "observation_state_counts": {
+      "observed_supported": 604,
+      "observed_limited": 968,
+      "unobserved": 2,
+      "source_unavailable": 0,
+      "not_applicable": 218
+    },
+    "dimension_states": [
+      {
+        "dimension_id": "identity",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 83,
+          "usable": 29,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 83,
+          "observed_limited": 29,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "lifecycle",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 49,
+          "usable": 60,
+          "partial": 3,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 49,
+          "observed_limited": 63,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "organization_relationships",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 10,
+          "usable": 97,
+          "partial": 5,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 10,
+          "observed_limited": 102,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "mechanism_classification",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 108,
+          "usable": 4,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 108,
+          "observed_limited": 4,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "reserve_structure",
+        "dimension_class": "conditional_structural",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 4,
+          "usable": 108,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 4,
+          "observed_limited": 108,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "redemption",
+        "dimension_class": "conditional_structural",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 97,
+          "usable": 4,
+          "partial": 10,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 1
+        },
+        "applicability_state_counts": {
+          "applicable": 111,
+          "not_applicable_to_current_scope": 1
+        },
+        "observation_state_counts": {
+          "observed_supported": 97,
+          "observed_limited": 14,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 1
+        }
+      },
+      {
+        "dimension_id": "issuance",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 107,
+          "usable": 5,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 107,
+          "observed_limited": 5,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "deployment",
+        "dimension_class": "universal_dossier",
+        "queue_role": "maintenance_only",
+        "planning_state_counts": {
+          "strong": 9,
+          "usable": 11,
+          "partial": 92,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 9,
+          "observed_limited": 103,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "legal_profile",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 0,
+          "usable": 65,
+          "partial": 47,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 0,
+          "observed_limited": 112,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "regulatory_notes",
+        "dimension_class": "scoped_observational",
+        "queue_role": "scoped_non_dossier",
+        "planning_state_counts": {
+          "strong": 3,
+          "usable": 2,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 107
+        },
+        "applicability_state_counts": {
+          "applicable": 5,
+          "not_applicable_to_current_scope": 107
+        },
+        "observation_state_counts": {
+          "observed_supported": 3,
+          "observed_limited": 2,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 107
+        }
+      },
+      {
+        "dimension_id": "events",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 20,
+          "usable": 90,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 2,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 20,
+          "observed_limited": 90,
+          "unobserved": 2,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "evidence_depth",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 59,
+          "usable": 50,
+          "partial": 3,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 59,
+          "observed_limited": 53,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "known_unknowns",
+        "dimension_class": "universal_dossier",
+        "queue_role": "material_dossier",
+        "planning_state_counts": {
+          "strong": 53,
+          "usable": 59,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 53,
+          "observed_limited": 59,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "comparison_readiness",
+        "dimension_class": "universal_dossier",
+        "queue_role": "diagnostic_only",
+        "planning_state_counts": {
+          "strong": 0,
+          "usable": 112,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 0,
+          "observed_limited": 112,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "facet_freshness_support",
+        "dimension_class": "conditional_structural",
+        "queue_role": "maintenance_only",
+        "planning_state_counts": {
+          "strong": 0,
+          "usable": 22,
+          "partial": 90,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 0
+        },
+        "applicability_state_counts": {
+          "applicable": 112,
+          "not_applicable_to_current_scope": 0
+        },
+        "observation_state_counts": {
+          "observed_supported": 0,
+          "observed_limited": 112,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 0
+        }
+      },
+      {
+        "dimension_id": "canonical_market_access",
+        "dimension_class": "scoped_observational",
+        "queue_role": "scoped_non_dossier",
+        "planning_state_counts": {
+          "strong": 2,
+          "usable": 0,
+          "partial": 0,
+          "sparse": 0,
+          "absent": 0,
+          "not_applicable": 110
+        },
+        "applicability_state_counts": {
+          "applicable": 2,
+          "not_applicable_to_current_scope": 110
+        },
+        "observation_state_counts": {
+          "observed_supported": 2,
+          "observed_limited": 0,
+          "unobserved": 0,
+          "source_unavailable": 0,
+          "not_applicable": 110
+        }
+      }
+    ],
+    "changed_from_v1_cell_count": 218,
+    "material_dossier_gap_cell_count": 70,
+    "maintenance_gap_cell_count": 182,
+    "candidate_count": 6
+  },
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "next_work_item": "PR #369 Tier A Dossier Deepening Batch 5"
+}

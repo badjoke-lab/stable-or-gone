@@ -1,0 +1,3193 @@
+{
+  "schema_version": "1.0",
+  "delta_id": "sog_record_depth_baseline_v2_delta_pr368",
+  "review_pr": 368,
+  "historical_v1_baseline_id": "sog_record_depth_baseline_pr363_v1",
+  "current_v2_baseline_id": "sog_record_depth_baseline_v2_pr368",
+  "historical_checkpoint_rewritten": false,
+  "asset_count": {
+    "before": 112,
+    "after": 112
+  },
+  "cell_count": {
+    "before": 1792,
+    "after": 1792
+  },
+  "planning_state_counts": {
+    "before": {
+      "strong": 602,
+      "usable": 716,
+      "partial": 255,
+      "sparse": 0,
+      "absent": 219,
+      "not_applicable": 0
+    },
+    "after": {
+      "strong": 604,
+      "usable": 718,
+      "partial": 250,
+      "sparse": 0,
+      "absent": 2,
+      "not_applicable": 218
+    }
+  },
+  "applicability_state_counts": {
+    "applicable": 1574,
+    "not_applicable_to_current_scope": 218
+  },
+  "observation_state_counts": {
+    "observed_supported": 604,
+    "observed_limited": 968,
+    "unobserved": 2,
+    "source_unavailable": 0,
+    "not_applicable": 218
+  },
+  "changed_cell_count": 218,
+  "changed_cells": [
+    {
+      "asset_id": "sog_st_acalaausd",
+      "asset_slug": "acala-ausd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_aecoin",
+      "asset_slug": "ae-coin",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_agoraausd",
+      "asset_slug": "agora-ausd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_ist",
+      "asset_slug": "agoric-ist",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_alusd",
+      "asset_slug": "alusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdz",
+      "asset_slug": "anzen-usdz",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usda",
+      "asset_slug": "avalon-usda",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_bac",
+      "asset_slug": "basis-cash",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_bean",
+      "asset_slug": "beanstalk-bean",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_honey",
+      "asset_slug": "berachain-honey",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdb",
+      "asset_slug": "blast-usdb",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_bold",
+      "asset_slug": "bold",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_brz",
+      "asset_slug": "brz",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_cashio",
+      "asset_slug": "cashio-dollar",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_phpc",
+      "asset_slug": "coins-phpc",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_crvusd",
+      "asset_slug": "crvusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_dai",
+      "asset_slug": "dai",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usx",
+      "asset_slug": "dforce-usx",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_djed",
+      "asset_slug": "djed",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_dola",
+      "asset_slug": "dola",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_doc",
+      "asset_slug": "dollar-on-chain",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_dsd",
+      "asset_slug": "dynamic-set-dollar",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_esd",
+      "asset_slug": "empty-set-dollar",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eura",
+      "asset_slug": "eura",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurau",
+      "asset_slug": "eurau",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurc",
+      "asset_slug": "eurc",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurcv",
+      "asset_slug": "eurcv",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_euri",
+      "asset_slug": "euri",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurq",
+      "asset_slug": "eurq",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurs",
+      "asset_slug": "eurs",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurt",
+      "asset_slug": "eurt",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdf",
+      "asset_slug": "falcon-usdf",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_fdusd",
+      "asset_slug": "fdusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_fei",
+      "asset_slug": "fei",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_fxusd",
+      "asset_slug": "fx-protocol-fxusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gho",
+      "asset_slug": "gho",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gusd",
+      "asset_slug": "gusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gyen",
+      "asset_slug": "gyen",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gyd",
+      "asset_slug": "gyroscope-gyd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_iron",
+      "asset_slug": "iron",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_jpyc",
+      "asset_slug": "jpyc",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_jpysc",
+      "asset_slug": "jpysc",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_kavausdx",
+      "asset_slug": "kava-usdx",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_lisusd",
+      "asset_slug": "lisusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_cadc",
+      "asset_slug": "loon-cadc",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_lusd",
+      "asset_slug": "lusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_m0m",
+      "asset_slug": "m0-m",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_msusd",
+      "asset_slug": "mainstreet-msusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdm",
+      "asset_slug": "mento-dollar",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurm",
+      "asset_slug": "mento-eurm",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_mim",
+      "asset_slug": "mim",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eure",
+      "asset_slug": "monerium-eure",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_mountainusdm",
+      "asset_slug": "mountain-usdm",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_musd",
+      "asset_slug": "musd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nearusn",
+      "asset_slug": "near-usn",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nobleusdn",
+      "asset_slug": "noble-usdn",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nuon",
+      "asset_slug": "nuon",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_ousd",
+      "asset_slug": "origin-dollar",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_paxg",
+      "asset_slug": "paxg",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_pyusd",
+      "asset_slug": "pyusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_mai",
+      "asset_slug": "qidao-mai",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_rai",
+      "asset_slug": "rai",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usd3",
+      "asset_slug": "reserve-usd3",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_sai",
+      "asset_slug": "sai",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_sdai",
+      "asset_slug": "sdai",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_sofiusd",
+      "asset_slug": "sofiusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_solsticeusx",
+      "asset_slug": "solstice-usx",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_spot",
+      "asset_slug": "spot",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_stablesusdx",
+      "asset_slug": "stables-labs-usdx",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurr",
+      "asset_slug": "stablr-eurr",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_stablrusdr",
+      "asset_slug": "stablr-usdr",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xusd",
+      "asset_slug": "straitsx-usd-xusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xidr",
+      "asset_slug": "straitsx-xidr",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_susd",
+      "asset_slug": "susd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_susde",
+      "asset_slug": "susde",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_susds",
+      "asset_slug": "susds",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_tryb",
+      "asset_slug": "tryb",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_tusd",
+      "asset_slug": "tusd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_unitedu",
+      "asset_slug": "united-stables-u",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usat",
+      "asset_slug": "usat",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usd0",
+      "asset_slug": "usd0",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usd1",
+      "asset_slug": "usd1",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdd",
+      "asset_slug": "usdd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usde",
+      "asset_slug": "usde",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdgo",
+      "asset_slug": "usdgo",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdh",
+      "asset_slug": "usdh",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdn",
+      "asset_slug": "usdn",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdq",
+      "asset_slug": "usdq",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdt",
+      "asset_slug": "usdt",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdtb",
+      "asset_slug": "usdtb",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdy",
+      "asset_slug": "usdy",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usk",
+      "asset_slug": "usk",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usr",
+      "asset_slug": "usr",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_ust",
+      "asset_slug": "ust",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usyc",
+      "asset_slug": "usyc",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_uxd",
+      "asset_slug": "uxd-protocol",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_vai",
+      "asset_slug": "vai",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_vchf",
+      "asset_slug": "vchf",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xaut",
+      "asset_slug": "xaut",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xsgd",
+      "asset_slug": "xsgd",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_zarp",
+      "asset_slug": "zarp",
+      "dimension_id": "canonical_market_access",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_market_access_records_no_unavailability_claim",
+        "outside_current_market_access_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "redemption",
+      "before": "partial",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "explicit_redemption_not_applicable",
+        "redemption_structure_incomplete_or_unknown"
+      ]
+    },
+    {
+      "asset_id": "sog_st_acalaausd",
+      "asset_slug": "acala-ausd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_aecoin",
+      "asset_slug": "ae-coin",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_agoraausd",
+      "asset_slug": "agora-ausd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_ist",
+      "asset_slug": "agoric-ist",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_alusd",
+      "asset_slug": "alusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdz",
+      "asset_slug": "anzen-usdz",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usda",
+      "asset_slug": "avalon-usda",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_bac",
+      "asset_slug": "basis-cash",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_bean",
+      "asset_slug": "beanstalk-bean",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_honey",
+      "asset_slug": "berachain-honey",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdb",
+      "asset_slug": "blast-usdb",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_bold",
+      "asset_slug": "bold",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_brz",
+      "asset_slug": "brz",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_cashio",
+      "asset_slug": "cashio-dollar",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_phpc",
+      "asset_slug": "coins-phpc",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_crvusd",
+      "asset_slug": "crvusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usx",
+      "asset_slug": "dforce-usx",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_djed",
+      "asset_slug": "djed",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_dola",
+      "asset_slug": "dola",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_doc",
+      "asset_slug": "dollar-on-chain",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_dsd",
+      "asset_slug": "dynamic-set-dollar",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_esd",
+      "asset_slug": "empty-set-dollar",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eura",
+      "asset_slug": "eura",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurau",
+      "asset_slug": "eurau",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurc",
+      "asset_slug": "eurc",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurcv",
+      "asset_slug": "eurcv",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_euri",
+      "asset_slug": "euri",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurq",
+      "asset_slug": "eurq",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurs",
+      "asset_slug": "eurs",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurt",
+      "asset_slug": "eurt",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdf",
+      "asset_slug": "falcon-usdf",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_fdusd",
+      "asset_slug": "fdusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_fei",
+      "asset_slug": "fei",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_frax",
+      "asset_slug": "frax",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_fxusd",
+      "asset_slug": "fx-protocol-fxusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gho",
+      "asset_slug": "gho",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gusd",
+      "asset_slug": "gusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gyen",
+      "asset_slug": "gyen",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_gyd",
+      "asset_slug": "gyroscope-gyd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_husd",
+      "asset_slug": "husd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_iron",
+      "asset_slug": "iron",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_jpyc",
+      "asset_slug": "jpyc",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_jpysc",
+      "asset_slug": "jpysc",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_kavausdx",
+      "asset_slug": "kava-usdx",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_lisusd",
+      "asset_slug": "lisusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_cadc",
+      "asset_slug": "loon-cadc",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_lusd",
+      "asset_slug": "lusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_m0m",
+      "asset_slug": "m0-m",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_msusd",
+      "asset_slug": "mainstreet-msusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdm",
+      "asset_slug": "mento-dollar",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurm",
+      "asset_slug": "mento-eurm",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_mim",
+      "asset_slug": "mim",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eure",
+      "asset_slug": "monerium-eure",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_mountainusdm",
+      "asset_slug": "mountain-usdm",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_musd",
+      "asset_slug": "musd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nearusn",
+      "asset_slug": "near-usn",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nobleusdn",
+      "asset_slug": "noble-usdn",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nuon",
+      "asset_slug": "nuon",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_ousd",
+      "asset_slug": "origin-dollar",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_paxg",
+      "asset_slug": "paxg",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_pyusd",
+      "asset_slug": "pyusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_mai",
+      "asset_slug": "qidao-mai",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_rai",
+      "asset_slug": "rai",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usd3",
+      "asset_slug": "reserve-usd3",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_slug": "rlusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_sai",
+      "asset_slug": "sai",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_sdai",
+      "asset_slug": "sdai",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_sofiusd",
+      "asset_slug": "sofiusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_solsticeusx",
+      "asset_slug": "solstice-usx",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_spot",
+      "asset_slug": "spot",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_stablesusdx",
+      "asset_slug": "stables-labs-usdx",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_eurr",
+      "asset_slug": "stablr-eurr",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_stablrusdr",
+      "asset_slug": "stablr-usdr",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xusd",
+      "asset_slug": "straitsx-usd-xusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xidr",
+      "asset_slug": "straitsx-xidr",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_susd",
+      "asset_slug": "susd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_susde",
+      "asset_slug": "susde",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_susds",
+      "asset_slug": "susds",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_tryb",
+      "asset_slug": "tryb",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_tusd",
+      "asset_slug": "tusd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_unitedu",
+      "asset_slug": "united-stables-u",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usat",
+      "asset_slug": "usat",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usd0",
+      "asset_slug": "usd0",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usd1",
+      "asset_slug": "usd1",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdd",
+      "asset_slug": "usdd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usde",
+      "asset_slug": "usde",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdg",
+      "asset_slug": "usdg",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdgo",
+      "asset_slug": "usdgo",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdh",
+      "asset_slug": "usdh",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdn",
+      "asset_slug": "usdn",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdq",
+      "asset_slug": "usdq",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usds",
+      "asset_slug": "usds",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdtb",
+      "asset_slug": "usdtb",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usdy",
+      "asset_slug": "usdy",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usk",
+      "asset_slug": "usk",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usr",
+      "asset_slug": "usr",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_usyc",
+      "asset_slug": "usyc",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_uxd",
+      "asset_slug": "uxd-protocol",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_vai",
+      "asset_slug": "vai",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_vchf",
+      "asset_slug": "vchf",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xaut",
+      "asset_slug": "xaut",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_xsgd",
+      "asset_slug": "xsgd",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    },
+    {
+      "asset_id": "sog_st_zarp",
+      "asset_slug": "zarp",
+      "dimension_id": "regulatory_notes",
+      "before": "absent",
+      "after": "not_applicable",
+      "applicability_state": "not_applicable_to_current_scope",
+      "observation_state": "not_applicable",
+      "reason_codes": [
+        "no_canonical_regulatory_note_rows_no_negative_claim",
+        "outside_current_regulatory_review_scope"
+      ]
+    }
+  ],
+  "dimension_deltas": [
+    {
+      "dimension_id": "identity",
+      "before": {
+        "strong": 83,
+        "usable": 29,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 83,
+        "usable": 29,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "lifecycle",
+      "before": {
+        "strong": 49,
+        "usable": 60,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 49,
+        "usable": 60,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "organization_relationships",
+      "before": {
+        "strong": 9,
+        "usable": 98,
+        "partial": 5,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 10,
+        "usable": 97,
+        "partial": 5,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "mechanism_classification",
+      "before": {
+        "strong": 108,
+        "usable": 4,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 108,
+        "usable": 4,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "reserve_structure",
+      "before": {
+        "strong": 4,
+        "usable": 108,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 4,
+        "usable": 108,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "redemption",
+      "before": {
+        "strong": 96,
+        "usable": 4,
+        "partial": 12,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 97,
+        "usable": 4,
+        "partial": 10,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 1
+      }
+    },
+    {
+      "dimension_id": "issuance",
+      "before": {
+        "strong": 107,
+        "usable": 5,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 107,
+        "usable": 5,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "deployment",
+      "before": {
+        "strong": 9,
+        "usable": 11,
+        "partial": 92,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 9,
+        "usable": 11,
+        "partial": 92,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "legal_profile",
+      "before": {
+        "strong": 0,
+        "usable": 63,
+        "partial": 49,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 0,
+        "usable": 65,
+        "partial": 47,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "regulatory_notes",
+      "before": {
+        "strong": 3,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 107,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 3,
+        "usable": 2,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 107
+      }
+    },
+    {
+      "dimension_id": "events",
+      "before": {
+        "strong": 20,
+        "usable": 90,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 20,
+        "usable": 90,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 2,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "evidence_depth",
+      "before": {
+        "strong": 59,
+        "usable": 50,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 59,
+        "usable": 50,
+        "partial": 3,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "known_unknowns",
+      "before": {
+        "strong": 53,
+        "usable": 59,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 53,
+        "usable": 59,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "comparison_readiness",
+      "before": {
+        "strong": 0,
+        "usable": 112,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 0,
+        "usable": 112,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "facet_freshness_support",
+      "before": {
+        "strong": 0,
+        "usable": 21,
+        "partial": 91,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 0,
+        "usable": 22,
+        "partial": 90,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "dimension_id": "canonical_market_access",
+      "before": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 110,
+        "not_applicable": 0
+      },
+      "after": {
+        "strong": 2,
+        "usable": 0,
+        "partial": 0,
+        "sparse": 0,
+        "absent": 0,
+        "not_applicable": 110
+      }
+    }
+  ],
+  "candidate_queue": {
+    "before_count": 10,
+    "after_count": 6
+  },
+  "generation_digest_sha256": "de1c1232675e9e7307395abfaca26c1879669cc4c1f0e2af1d1253627473e4e1"
+}
