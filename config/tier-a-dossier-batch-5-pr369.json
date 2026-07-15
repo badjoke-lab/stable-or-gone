@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_tier_a_dossier_batch_5_pr369_v1",
+  "status": "pr368_authorized_manual_review_batch",
+  "review_pr": 369,
+  "reviewed_at": "2026-07-15",
+  "source_baseline": "docs/migration/record-depth-baseline-v2-pr368-summary.json",
+  "source_queue": "docs/migration/tier-a-candidate-queue-v2-pr368.json",
+  "source_semantics_contract": "config/planning-dimension-semantics-v2.json",
+  "maximum_selected_assets": 5,
+  "selected_asset_slugs": [
+    "audd",
+    "busd",
+    "nzds",
+    "poundtoken",
+    "usdp"
+  ],
+  "not_selected": [
+    {
+      "asset_slug": "rlusd",
+      "reason": "Already improved for legal_profile and redemption in PR #354, reviewed again with no safe canonical change in PR #364, and received bounded Market Access records in PR #359. A third immediate review is not justified by a new source signal."
+    }
+  ],
+  "review_outcomes": [
+    {
+      "asset_slug": "audd",
+      "outcome": "reviewed_no_safe_change",
+      "prior_review_pr": 357,
+      "material_gaps_reviewed": ["events", "lifecycle", "organization_relationships", "redemption"],
+      "reason": "PR #357 already reviewed archive-first official sources and could not safely reverify event dates, current lifecycle, current redemption, or new organization relationships. No new source signal is present in the approved PR #368 queue."
+    },
+    {
+      "asset_slug": "busd",
+      "outcome": "prior_completed_no_duplicate_change",
+      "prior_review_pr": 354,
+      "material_gaps_reviewed": ["redemption"],
+      "reason": "PR #354 already added the reviewed BUSD legal and redemption profile with primary Evidence. The PR #368 queue is planning output, not authority to duplicate an already completed canonical improvement."
+    },
+    {
+      "asset_slug": "nzds",
+      "outcome": "reviewed_no_safe_change",
+      "prior_review_pr": 357,
+      "material_gaps_reviewed": ["events", "lifecycle", "organization_relationships", "redemption"],
+      "reason": "PR #357 already reviewed archive-first official sources and could not safely reverify event dates, current lifecycle, current redemption, or new organization relationships. No new source signal is present in the approved PR #368 queue."
+    },
+    {
+      "asset_slug": "poundtoken",
+      "outcome": "reviewed_no_safe_change",
+      "prior_review_pr": 364,
+      "material_gaps_reviewed": ["lifecycle", "organization_relationships", "redemption"],
+      "reason": "PR #364 already reviewed poundtoken and retained the conservative unknown boundary because current issuer operation, onboarding, redemption, and service availability could not be established safely."
+    },
+    {
+      "asset_slug": "usdp",
+      "outcome": "prior_completed_no_duplicate_change",
+      "prior_review_pr": 355,
+      "material_gaps_reviewed": ["redemption"],
+      "reason": "PR #355 completed the authorized USDP dossier dimensions. The PR #368 non-ranking queue does not override that reviewed completion handoff."
+    }
+  ],
+  "expected_result": {
+    "selected_assets": 5,
+    "canonical_improvement_assets": 0,
+    "reviewed_no_safe_change_assets": 3,
+    "prior_completed_no_duplicate_change_assets": 2
+  },
+  "boundaries": {
+    "existing_assets_only": true,
+    "canonical_change_requires_new_source_support": true,
+    "force_change_to_fill_batch": false,
+    "market_access_change_allowed": false,
+    "new_asset_allowed": false,
+    "new_deployment_family_allowed": false,
+    "public_surface_allowed": false,
+    "ranking_allowed": false,
+    "single_composite_score_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_state": "REVIEW GATE"
+}

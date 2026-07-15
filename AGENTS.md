@@ -21,7 +21,7 @@ Before changing code, canonical data, workflows, monitoring, or documentation, r
 5. `docs/post-351-data-growth-operating-spec.md`
 6. every active roadmap amendment named below
 7. the current work-item specification
-8. every named baseline, contract, queue, validator, audit, fixture, research checkpoint, release note, or prior output required by that work item
+8. every named baseline, queue, reviewed handoff, validator, audit, fixture, research checkpoint, or prior output required by that work item
 
 Current active amendments:
 
@@ -30,46 +30,33 @@ docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-15-pr366-post-pr365-review-gate.md
 docs/roadmap-amendments/2026-07-15-pr367-planning-dimension-semantics-audit-activation.md
 docs/roadmap-amendments/2026-07-15-pr368-record-depth-baseline-v2-refresh-activation.md
-```
-
-Current operating specification:
-
-```text
-docs/post-351-data-growth-operating-spec.md
+docs/roadmap-amendments/2026-07-15-pr369-tier-a-dossier-batch-5-activation.md
 ```
 
 Current work-item specification:
 
 ```text
-docs/quality/record-depth-baseline-v2-refresh-pr368-spec.md
+docs/quality/tier-a-dossier-batch-5-pr369-spec.md
 ```
 
-Current required prior outputs and contracts:
+Current required inputs:
 
 ```text
-docs/migration/post-pr365-review-gate-pr366.json
-docs/migration/planning-dimension-semantics-audit-pr367.json
-config/planning-dimension-semantics-v2.json
-config/record-depth-baseline-v2-refresh-pr368.json
-docs/migration/record-depth-baseline-pr363-summary.json
-docs/migration/record-depth-baseline-pr363-delta.json
-docs/migration/tier-a-candidate-queue-pr363.json
-scripts/growth/build-record-depth-baseline-pr353.mjs
-scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs
+config/tier-a-dossier-batch-5-pr369.json
+docs/migration/record-depth-baseline-v2-pr368-summary.json
+docs/migration/tier-a-candidate-queue-v2-pr368.json
+docs/migration/tier-a-batch-1-pr354-reviewed-handoff.json
+docs/migration/tier-a-batch-2-pr355-reviewed-handoff.json
+docs/migration/tier-a-batch-3-pr357-reviewed-handoff.json
+docs/migration/tier-a-batch-4-pr364-reviewed-handoff.json
+docs/migration/current-canonical-checkpoint.json
 ```
 
 ## 2. Repository source of truth
 
-Merged repository specifications outrank chat memory, handoff prose, issue discussion, generated reports, stale roadmap text, unmerged drafts, and mock images.
+Merged repository specifications and reviewed handoffs outrank chat memory, issue discussion, generated prose, stale roadmap text, unmerged drafts, and mock images.
 
-PR numbering, active workstream state, and next approved work come from `docs/roadmap.md` plus the active amendments named there. Do not infer the schedule from old PR numbers in historical documents.
-
-The historical files below preserve superseded detail and must not be treated as current authority:
-
-```text
-docs/archive/AGENTS-through-pr366.md
-docs/archive/roadmap-through-pr366.md
-```
+The PR #368 queue is an internal non-ranking planning queue. It does not override prior reviewed handoffs and does not authorize automatic or duplicate canonical edits.
 
 ## 3. Current workstream
 
@@ -78,122 +65,106 @@ Canonical stable assets: 112
 PR #365 Evidence and Archive Maintenance Batch 2: complete
 PR #366 Post-PR #365 Review Gate: complete
 PR #367 Planning Dimension Semantics Audit: complete
-PR #368 Record Depth Baseline v2 Refresh: active; complete on merge
-PR #369 Tier A Dossier Deepening Batch 5: next after PR #368; maximum five existing assets
-REVIEW GATE: required after PR #369
+PR #368 Record Depth Baseline v2 Refresh: complete
+PR #369 Tier A Dossier Deepening Batch 5: active; complete on merge
+REVIEW GATE: next and mandatory
 ```
 
-Approved bounded sequence from PR #366:
+Approved sequence:
 
 ```text
-PR #367  Planning Dimension Semantics Audit — complete
-PR #368  Record Depth Baseline v2 Refresh — active
-PR #369  Tier A Dossier Deepening Batch 5 — maximum five existing assets
+PR #367 — complete
+PR #368 — complete
+PR #369 — active
 REVIEW GATE
 ```
 
-Do not skip ahead. PR #369 may start only from the merged PR #368 non-ranking baseline and queue.
+No PR after #369 is pre-authorized.
 
-## 4. PR #368 exact authority
+## 4. PR #369 exact authority
 
-PR #368 must recompute exactly:
+PR #369 may manually review no more than five existing assets from the merged PR #368 queue.
 
-```text
-112 canonical assets
-16 planning dimensions
-1,792 planning cells
-```
-
-Every planning cell must record:
+Selected review set:
 
 ```text
-planning quality state
-applicability state
-observation/source-support state
-dimension class
-queue role
+AUDD
+BUSD
+NZDS
+poundtoken / 1GBP
+USDP
 ```
 
-Required PR #368 outputs:
+RLUSD is not selected because it already received reviewed PR #354 legal/redemption work, a PR #364 no-safe-change re-review, and bounded PR #359 Market Access work.
+
+Required outputs:
 
 ```text
-docs/migration/record-depth-baseline-v2-pr368.json
-docs/migration/record-depth-baseline-v2-pr368-summary.json
-docs/migration/record-depth-baseline-v2-pr368-delta.json
-docs/migration/tier-a-candidate-queue-v2-pr368.json
-scripts/build-record-depth-baseline-v2-refresh-pr368.mjs
-scripts/validate-record-depth-baseline-v2-refresh-pr368.mjs
+docs/migration/tier-a-batch-5-pr369-review-outcomes.json
+docs/migration/tier-a-batch-5-pr369-reviewed-handoff.json
+scripts/build-tier-a-dossier-batch-5-pr369.mjs
+scripts/validate-tier-a-dossier-batch-5-pr369.mjs
 ```
 
-PR #368 may update internal planning outputs, active-workstream pointers, validators, and workflows. It may not change canonical records, public output, or historical v1 planning checkpoints.
+## 5. Review and change rules
 
-## 5. Planning semantics boundary
+- Canonical changes require new reviewed source support that safely resolves a material dossier gap.
+- Do not force a change to create nominal batch yield.
+- Do not duplicate a completed prior canonical improvement.
+- A prior no-safe-change outcome may be revisited only when a new source signal justifies review.
+- Unknown remains unknown when current operation, redemption, ownership, or event date cannot be established safely.
+- A planning gap is not a factual claim that a real-world feature is absent.
+- Monitoring and editorial research cannot self-promote into canonical data.
 
-Historical v1 planning material remains immutable:
+Configured outcomes:
 
 ```text
-config/record-depth-baseline-v1.json
-docs/migration/record-depth-baseline-pr353-summary.json
-docs/migration/tier-a-candidate-queue-pr353.json
-docs/migration/record-depth-baseline-pr363-summary.json
-docs/migration/record-depth-baseline-pr363-delta.json
-docs/migration/tier-a-candidate-queue-pr363.json
+AUDD       reviewed_no_safe_change — prior PR #357
+BUSD       prior_completed_no_duplicate_change — prior PR #354
+NZDS       reviewed_no_safe_change — prior PR #357
+poundtoken reviewed_no_safe_change — prior PR #364
+USDP       prior_completed_no_duplicate_change — prior PR #355
 ```
 
-The merged v2 semantics contract is internal planning infrastructure. It is not canonical asset data, a risk score, a safety score, a quality ranking, a transparency ranking, a numeric composite score, an asset rank, an investment recommendation, or a public leaderboard.
+The valid expected canonical yield is zero unless a new reviewed source signal is introduced before merge.
 
-`not_applicable` means not applicable to the current reviewed planning scope. It never counts as a gap or queue trigger. `absent` means the dimension is applicable and no canonical representation is present; it does not assert real-world nonexistence. `unobserved` and `source_unavailable` are observation states, not quality scores and not negative factual claims.
+## 6. Canonical and public boundary
 
-Regulatory Notes and Market Access are scoped observational dimensions. Deployment and Facet Freshness are maintenance-only queue signals. Comparison Readiness is diagnostic and non-ranking. Only material-dossier gaps may directly contribute to the default dossier queue.
-
-## 6. Canonical data and evidence rules
-
-- Keep unknown values unknown unless reviewed evidence supports a value.
-- Do not coerce partial-date evidence into a day-level date.
-- Preserve evidence relations, known unknowns, deployments, source identities, and value states.
-- Canonical counts change only through explicit audited data PRs.
-- Missing evidence is not permission to fill a planning gap.
-- Archive absence is a maintenance queue item, not permission to fabricate an archive URL.
-- Missing capability data means unknown knowledge state, not `false`.
-- A registered source or monitoring observation is not an accepted canonical baseline.
-
-Protected unresolved states include:
+PR #369 may not add or change:
 
 ```text
-null
-unknown
-not_recorded
-not_applicable
-source_review_needed
-unclear
+canonical assets
+Evidence identities or Evidence Relations
+Market Access records
+deployment families
+statistics history
+public pages or public machine-readable outputs
+rankings, scores, recommendations, or leaderboards
+automatic monitoring or canonical promotion
 ```
 
-## 7. Public and deployment boundary
+`data/`, `src/`, and `public/` must remain unchanged unless the PR is explicitly revised with new source-supported canonical scope and a matching validator amendment. The current configured and reviewed outcome requires those trees to remain unchanged.
 
-Public release claims remain canonical-only:
+## 7. Historical preservation
+
+Do not rewrite:
 
 ```text
-canonical_only = true
-includes_unreviewed_candidates = false
-includes_internal_monitoring = false
-includes_private_notes = false
+PR #353 or PR #363 planning checkpoints
+PR #367 semantics contract and audit
+PR #368 v2 baseline, delta, summary, or queue
+prior reviewed dossier handoffs
+closed statistics or Maintenance Log history
+canonical release-integrity checkpoints
 ```
-
-PR #368 may change no canonical records, `src/` product surface, or `public/` output. Its reports and baseline remain internal and non-public.
-
-Normal merged changes publish from `main` under `docs/deployment-policy.md`. Internal planning files must not be copied into public build output.
 
 ## 8. Monitoring and Market Access
 
-Monitoring remains private, review-only, and read-only with respect to canonical data. It may not write canonical data, self-accept baselines, edit guides automatically, create canonical pull requests automatically, publish candidates, or deploy.
+Monitoring remains private, review-only, and read-only with respect to canonical data.
 
-Market Access remains function-, platform-, jurisdiction-, asset-, effective-date-, and evidence-scoped. A platform licence is not proof that a specific asset/function combination is available. No Market Access Pilot 3 or new public Market Access surface is approved in the current sequence.
+Market Access remains asset-, jurisdiction-, platform-, function-, effective-date-, and evidence-scoped. No Market Access Pilot 3 or new public Market Access surface is authorized.
 
-## 9. Dossier and growth boundary
-
-PR #369 may select no more than five existing assets from the merged PR #368 non-ranking queue and may improve only source-supported material dossier gaps.
-
-The current sequence does not authorize:
+## 9. Not approved
 
 ```text
 Evidence and Archive Maintenance Batch 3
@@ -207,13 +178,25 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-## 10. Historical checkpoint rules
+## 10. Next gate
 
-Do not rewrite historical checkpoints because current canonical data, planning semantics, or dossier depth changed.
+After PR #369 merges, stop at `REVIEW GATE`.
 
-Binding historical material includes release-integrity baselines, reproducible-build baselines, audited asset checkpoints, monitoring snapshots, statistics history, PR #353 and PR #363 planning snapshots, the merged PR #367 audit and contract, prior reviewed handoffs, and closed Maintenance Log months.
+The review gate must evaluate:
 
-The archived governance files are retained to preserve the complete prior execution record. New current-authority files may be shorter, but the archived blobs must remain unchanged.
+```text
+zero-change PR #369 yield
+repeated prior-review candidates in the PR #368 queue
+planning-builder and overlay coverage
+source availability
+archive maintenance burden
+Market Access evidence breadth
+monitoring usefulness
+monthly maintenance burden
+verified external usage evidence
+```
+
+A new numbered sequence requires a new reviewed roadmap amendment.
 
 ## 11. Mandatory PR traceability
 
@@ -230,4 +213,4 @@ Validation
 Deployment classification
 ```
 
-A PR that cannot identify its roadmap item and governing specification must pause.
+A PR that cannot identify its approved roadmap item and governing specification must pause.

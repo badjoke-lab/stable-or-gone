@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "outcomes_id": "sog_tier_a_batch_5_pr369_review_outcomes_2026_07_15",
+  "status": "reviewed_complete_no_forced_change",
+  "public_output": false,
+  "review_pr": 369,
+  "reviewed_at": "2026-07-15",
+  "source_boundaries": {
+    "source_baseline_id": "sog_record_depth_baseline_v2_pr368",
+    "source_queue_id": "sog_tier_a_candidate_queue_v2_pr368",
+    "queue_generation_digest_sha256": "de1c1232675e9e7307395abfaca26c1879669cc4c1f0e2af1d1253627473e4e1",
+    "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+    "prior_review_handoffs": {
+      "pr354": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "pr355": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "pr357": "sog_tier_a_batch_3_pr357_reviewed_handoff_2026_07_13",
+      "pr364": "sog_tier_a_batch_4_pr364_reviewed_handoff_2026_07_14"
+    }
+  },
+  "selection_policy": {
+    "maximum_selected_assets": 5,
+    "selected_assets": 5,
+    "queue_order": "asset_slug_ascending_non_ranking",
+    "manual_review_required": true,
+    "force_change_to_fill_batch": false
+  },
+  "selected_assets": [
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "asset_name": "AUDD",
+      "symbol": "AUDD",
+      "queue_reasons": [
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "queue_material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "reviewed_material_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "outcome": "reviewed_no_safe_change",
+      "prior_review_pr": 357,
+      "reason": "PR #357 already reviewed archive-first official sources and could not safely reverify event dates, current lifecycle, current redemption, or new organization relationships. No new source signal is present in the approved PR #368 queue."
+    },
+    {
+      "asset_id": "sog_st_busd",
+      "asset_slug": "busd",
+      "asset_name": "Binance USD",
+      "symbol": "BUSD",
+      "queue_reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "queue_material_dossier_gaps": [
+        "redemption"
+      ],
+      "reviewed_material_gaps": [
+        "redemption"
+      ],
+      "outcome": "prior_completed_no_duplicate_change",
+      "prior_review_pr": 354,
+      "reason": "PR #354 already added the reviewed BUSD legal and redemption profile with primary Evidence. The PR #368 queue is planning output, not authority to duplicate an already completed canonical improvement."
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "asset_name": "NZD Stablecoin",
+      "symbol": "NZDS",
+      "queue_reasons": [
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "queue_material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "reviewed_material_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "outcome": "reviewed_no_safe_change",
+      "prior_review_pr": 357,
+      "reason": "PR #357 already reviewed archive-first official sources and could not safely reverify event dates, current lifecycle, current redemption, or new organization relationships. No new source signal is present in the approved PR #368 queue."
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "asset_name": "poundtoken",
+      "symbol": "1GBP",
+      "queue_reasons": [
+        "historical_importance_with_multiple_material_dossier_gaps",
+        "regional_relevance_with_multiple_material_dossier_gaps"
+      ],
+      "queue_material_dossier_gaps": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "reviewed_material_gaps": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "outcome": "reviewed_no_safe_change",
+      "prior_review_pr": 364,
+      "reason": "PR #364 already reviewed poundtoken and retained the conservative unknown boundary because current issuer operation, onboarding, redemption, and service availability could not be established safely."
+    },
+    {
+      "asset_id": "sog_st_usdp",
+      "asset_slug": "usdp",
+      "asset_name": "Pax Dollar",
+      "symbol": "USDP",
+      "queue_reasons": [
+        "comparison_preset_member_with_material_dossier_gap"
+      ],
+      "queue_material_dossier_gaps": [
+        "redemption"
+      ],
+      "reviewed_material_gaps": [
+        "redemption"
+      ],
+      "outcome": "prior_completed_no_duplicate_change",
+      "prior_review_pr": 355,
+      "reason": "PR #355 completed the authorized USDP dossier dimensions. The PR #368 non-ranking queue does not override that reviewed completion handoff."
+    }
+  ],
+  "not_selected": [
+    {
+      "asset_slug": "rlusd",
+      "reason": "Already improved for legal_profile and redemption in PR #354, reviewed again with no safe canonical change in PR #364, and received bounded Market Access records in PR #359. A third immediate review is not justified by a new source signal."
+    }
+  ],
+  "result_counts": {
+    "selected_assets": 5,
+    "canonical_improvement_assets": 0,
+    "reviewed_no_safe_change_assets": 3,
+    "prior_completed_no_duplicate_change_assets": 2
+  },
+  "findings": [
+    "The PR #368 queue is a non-ranking planning queue and does not override prior reviewed handoffs.",
+    "AUDD, NZDS, and poundtoken retain prior no-safe-change outcomes because no new reviewed source signal establishes the unresolved current-state claims.",
+    "BUSD and USDP retain their completed dossier improvements; duplicate canonical edits are not justified.",
+    "RLUSD was not selected because it was improved in PR #354, reviewed again in PR #364, and received bounded Market Access records in PR #359.",
+    "No canonical change is safer and more accurate than forcing a nominal batch yield."
+  ],
+  "boundaries": {
+    "canonical_data_changed": false,
+    "evidence_changed": false,
+    "market_access_changed": false,
+    "public_surface_changed": false,
+    "new_asset_added": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "a466abed823ac32e4d475dca3205016d2831b394d2b8638211d125a6d46c2656",
+  "review_digest_sha256": "d3a7cbd34c26266b1fa7fcf4f0ae40e617fac7424e31a9f1b20b830795c5fb23",
+  "next_state": "REVIEW GATE"
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_tier_a_batch_5_pr369_reviewed_handoff_2026_07_15",
+  "status": "reviewed_internal_handoff_complete_on_merge",
+  "public_output": false,
+  "review_pr": 369,
+  "recorded_at": "2026-07-15",
+  "source_boundaries": {
+    "source_baseline_id": "sog_record_depth_baseline_v2_pr368",
+    "source_queue_id": "sog_tier_a_candidate_queue_v2_pr368",
+    "queue_generation_digest_sha256": "de1c1232675e9e7307395abfaca26c1879669cc4c1f0e2af1d1253627473e4e1",
+    "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+    "prior_review_handoffs": {
+      "pr354": "sog_tier_a_dossier_batch_1_pr354_reviewed_handoff",
+      "pr355": "sog_tier_a_batch_2_pr355_reviewed_handoff_2026_07_12",
+      "pr357": "sog_tier_a_batch_3_pr357_reviewed_handoff_2026_07_13",
+      "pr364": "sog_tier_a_batch_4_pr364_reviewed_handoff_2026_07_14"
+    }
+  },
+  "canonical_checkpoint": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "selected_asset_slugs": [
+    "audd",
+    "busd",
+    "nzds",
+    "poundtoken",
+    "usdp"
+  ],
+  "canonical_improvement_asset_slugs": [],
+  "reviewed_no_safe_change_asset_slugs": [
+    "audd",
+    "nzds",
+    "poundtoken"
+  ],
+  "prior_completed_no_duplicate_change_asset_slugs": [
+    "busd",
+    "usdp"
+  ],
+  "not_selected": [
+    {
+      "asset_slug": "rlusd",
+      "reason": "Already improved for legal_profile and redemption in PR #354, reviewed again with no safe canonical change in PR #364, and received bounded Market Access records in PR #359. A third immediate review is not justified by a new source signal."
+    }
+  ],
+  "result_counts": {
+    "selected_assets": 5,
+    "canonical_improvement_assets": 0,
+    "reviewed_no_safe_change_assets": 3,
+    "prior_completed_no_duplicate_change_assets": 2
+  },
+  "canonical_counts_unchanged": true,
+  "historical_outputs_unchanged": true,
+  "new_public_surface": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_digest_sha256": "d3a7cbd34c26266b1fa7fcf4f0ae40e617fac7424e31a9f1b20b830795c5fb23",
+  "next_state": "REVIEW GATE",
+  "notes": "PR #369 completed the bounded manual review without forcing unsupported or duplicate canonical edits. The approved PR #367–#369 sequence now stops at a review gate."
+}
