@@ -57,6 +57,36 @@ docs/migration/record-depth-baseline-v2-1-pr372-delta.json
 docs/migration/tier-a-candidate-queue-v2-1-pr372.json
 ```
 
+## Reviewed generated result
+
+The complete manifest changed four cells across four assets. Every change is in the `redemption` dimension:
+
+```text
+BUSD   partial → strong
+PYUSD  partial → strong
+RLUSD  partial → strong
+USDP   partial → strong
+```
+
+Aggregate planning-state movement:
+
+```text
+strong   604 → 608
+partial  250 → 246
+```
+
+Applicability counts did not change. Observation states moved by the same four cells from `observed_limited` to `observed_supported`.
+
+The corrected non-ranking queue changed from six candidates to three:
+
+```text
+removed:  busd, rlusd, usdp
+retained: audd, nzds, poundtoken
+added:    none
+```
+
+PYUSD was corrected but was not a PR #368 queue candidate. The three retained candidates are review inputs only and do not authorize a dossier batch.
+
 ## Delta requirements
 
 The delta must record:
