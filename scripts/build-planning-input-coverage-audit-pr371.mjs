@@ -9,6 +9,7 @@ const paths = {
   publicLoader: 'src/lib/data/currentProfiles.ts',
   publicExport: 'src/lib/data/stablecoinProfiles.ts',
   legacyBaseline: 'docs/migration/registry-v2-baseline.json',
+  baseBuilder: 'scripts/growth/build-record-depth-baseline-pr353.mjs',
   canonicalBuilder: 'scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs',
   v2Builder: 'scripts/build-record-depth-baseline-v2-refresh-pr368.mjs',
   checkpoint: 'docs/migration/current-canonical-checkpoint.json'
@@ -100,6 +101,7 @@ export function buildPlanningInputCoverageAudit() {
   const publicExportText = readText(paths.publicExport);
   const legacyBaselineText = readText(paths.legacyBaseline);
   const legacyBaseline = JSON.parse(legacyBaselineText);
+  const baseBuilderText = readText(paths.baseBuilder);
   const canonicalBuilderText = readText(paths.canonicalBuilder);
   const v2BuilderText = readText(paths.v2Builder);
   const checkpoint = readJson(paths.checkpoint);
@@ -125,6 +127,7 @@ export function buildPlanningInputCoverageAudit() {
     loaderText,
     publicExportText,
     legacyBaselineText,
+    baseBuilderText,
     canonicalBuilderText,
     v2BuilderText,
     ...publicFiles.map((file) => readText(file))
@@ -205,7 +208,9 @@ export function buildPlanningInputCoverageAudit() {
       affected_asset_ids: uniq([...missingAssetIds, ...changedWinnerAssetIds]).sort()
     },
     planning_code_path: {
-      canonical_builder_uses_legacy_registry_profile_group: canonicalBuilderText.includes("const profiles = group('profiles');"),
+      base_builder_uses_legacy_registry_profile_group: baseBuilderText.includes("const profiles = group('profiles');"),
+      reviewed_builder_delegates_to_base_builder: canonicalBuilderText.includes("from './build-record-depth-baseline-pr353.mjs'") && canonicalBuilderText.includes('buildRecordDepthBaseline()'),
+      canonical_builder_uses_legacy_registry_profile_group: baseBuilderText.includes("const profiles = group('profiles');"),
       canonical_builder_defaults_profile_overrides_empty: canonicalBuilderText.includes('const profileOverrideFiles = options.profileOverrideFiles ?? [];'),
       v2_builder_calls_canonical_builder_without_options: v2BuilderText.includes('const current = buildReviewedRecordDepthBaseline();'),
       current_planning_input_matches_public_loader: false
