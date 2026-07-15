@@ -127,7 +127,9 @@
     ]
   },
   "planning_code_path": {
-    "canonical_builder_uses_legacy_registry_profile_group": false,
+    "base_builder_uses_legacy_registry_profile_group": true,
+    "reviewed_builder_delegates_to_base_builder": true,
+    "canonical_builder_uses_legacy_registry_profile_group": true,
     "canonical_builder_defaults_profile_overrides_empty": true,
     "v2_builder_calls_canonical_builder_without_options": true,
     "current_planning_input_matches_public_loader": false
@@ -157,6 +159,6 @@
     "ranking_or_score": false,
     "automatic_promotion": false
   },
-  "manifest_digest_sha256": "737c551eccb23d4b0c0732130e76311869b3b31518d7b23232794b671d57882f",
-  "source_digest_sha256": "6a9db9c1c3bec39cf036c4355ce4b1266a93571692a6cb65b146d356704d4e8c"
+  "manifest_digest_sha256": "d2d9868f64224efa830ad64100cea255047e4a41ee6cb4f3c8fd9c97a0a4c0c0",
+  "source_digest_sha256": "d4de2c7c00e00de9fb1e496082411dea987a895471305749493c752badcc9af4"
 }
