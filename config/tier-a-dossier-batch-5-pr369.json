@@ -62,9 +62,7 @@
     "selected_assets": 5,
     "canonical_improvement_assets": 0,
     "reviewed_no_safe_change_assets": 3,
-    "prior_completed_no_duplicate_change_assets": 2,
-    "canonical_counts_unchanged": true,
-    "public_surface_unchanged": true
+    "prior_completed_no_duplicate_change_assets": 2
   },
   "boundaries": {
     "existing_assets_only": true,
