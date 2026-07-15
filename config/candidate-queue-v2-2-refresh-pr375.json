@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_candidate_queue_v2_2_refresh_pr375_v1",
+  "status": "pr373_authorized_review_history_queue_refresh",
+  "review_pr": 375,
+  "reviewed_at": "2026-07-15",
+  "source_baseline": "docs/migration/record-depth-baseline-v2-1-pr372.json",
+  "source_queue": "docs/migration/tier-a-candidate-queue-v2-1-pr372.json",
+  "review_history_contract": "config/planning-queue-review-history-v1-pr374.json",
+  "review_history_manifest": "docs/migration/planning-queue-review-history-manifest-pr374.json",
+  "review_history_audit": "docs/migration/planning-queue-review-history-audit-pr374.json",
+  "authority": "docs/migration/post-pr372-review-gate-pr373.json",
+  "expected": {
+    "source_baseline_id": "sog_record_depth_baseline_v2_1_pr372",
+    "source_queue_id": "sog_tier_a_candidate_queue_v2_1_pr372",
+    "source_candidate_count": 3,
+    "suppressed_candidate_count": 3,
+    "reactivated_candidate_count": 0,
+    "output_candidate_count": 0,
+    "suppressed_asset_slugs": ["audd", "nzds", "poundtoken"],
+    "review_history_contract_id": "sog_planning_queue_review_history_v1_pr374",
+    "review_history_manifest_id": "sog_planning_queue_review_history_manifest_pr374_v1"
+  },
+  "required_outputs": [
+    "docs/migration/tier-a-candidate-queue-v2-2-pr375.json",
+    "docs/migration/tier-a-candidate-queue-v2-2-pr375-delta.json"
+  ],
+  "boundaries": {
+    "baseline_recompute_allowed": false,
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "automatic_source_promotion_allowed": false,
+    "automatic_canonical_promotion_allowed": false,
+    "asset_rank": false,
+    "single_composite_score": false,
+    "investment_recommendation": false
+  },
+  "next_work_item": "REVIEW GATE"
+}
