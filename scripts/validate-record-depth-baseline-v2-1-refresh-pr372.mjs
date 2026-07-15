@@ -89,8 +89,15 @@ process.env.SOG_PLANNING_PROFILE_MANIFEST = paths.manifest;
 const manifestRegistry = loadRegistryV2Baseline(root);
 if (previousManifestEnv === undefined) delete process.env.SOG_PLANNING_PROFILE_MANIFEST;
 else process.env.SOG_PLANNING_PROFILE_MANIFEST = previousManifestEnv;
-expect((defaultRegistry.data_groups?.profiles ?? []).length === config.expected.legacy_profile_file_count, 'default loader profile boundary changed');
-expect((manifestRegistry.data_groups?.profiles ?? []).length === config.expected.profile_file_count, 'manifest loader profile boundary mismatch');
+const defaultProfileFiles = defaultRegistry.data_groups?.profiles ?? [];
+const manifestProfileFiles = manifest.ordered_profile_files.map((row) => row.path);
+const injectedProfileFiles = manifestRegistry.data_groups?.profiles ?? [];
+expect(defaultProfileFiles.length >= config.expected.legacy_profile_file_count, 'effective default loader lost legacy profile inputs');
+expect(defaultProfileFiles.length <= config.expected.profile_file_count, 'effective default loader exceeds approved complete profile input count');
+expect(defaultProfileFiles.every((file) => manifestProfileFiles.includes(file)), 'effective default loader contains a profile file outside the approved manifest');
+expect(!same(defaultProfileFiles, manifestProfileFiles), 'effective default loader already matches the exact manifest; refresh boundary is not reproduced');
+expect(injectedProfileFiles.length === config.expected.profile_file_count, 'manifest loader profile boundary mismatch');
+expect(same(injectedProfileFiles, manifestProfileFiles), 'manifest loader did not preserve exact public-loader order');
 expect(manifestRegistry.planning_profile_manifest?.manifest_id === manifest.manifest_id, 'manifest loader provenance missing');
 
 expect(delta.asset_count.before === config.expected.asset_count && delta.asset_count.after === config.expected.asset_count, 'asset count changed across refresh');
@@ -169,7 +176,8 @@ console.log(JSON.stringify({
   assets: baseline.asset_count,
   dimensions: baseline.dimension_count,
   cells: baseline.cell_count,
-  profile_files: baseline.source_contracts.planning_input_profile_file_count,
+  effective_default_profile_files: defaultProfileFiles.length,
+  complete_profile_files: baseline.source_contracts.planning_input_profile_file_count,
   changed_cells_from_pr368: delta.changed_cell_count,
   changed_assets_from_pr368: delta.changed_asset_count,
   candidate_count: queue.candidate_count,
