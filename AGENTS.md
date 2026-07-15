@@ -30,113 +30,119 @@ docs/roadmap-amendments/2026-07-10-post-351-data-growth-activation.md
 docs/roadmap-amendments/2026-07-15-pr370-post-pr369-review-gate.md
 docs/roadmap-amendments/2026-07-15-pr371-planning-input-coverage-audit-activation.md
 docs/roadmap-amendments/2026-07-15-pr372-record-depth-baseline-v2-1-refresh-activation.md
+docs/roadmap-amendments/2026-07-15-pr373-post-pr372-review-gate.md
 ```
 
 Current work-item specification:
 
 ```text
-docs/quality/record-depth-baseline-v2-1-refresh-pr372-spec.md
+docs/quality/post-pr372-review-gate-pr373-spec.md
 ```
 
 Current required inputs:
 
 ```text
-config/record-depth-baseline-v2-1-refresh-pr372.json
-docs/migration/planning-input-manifest-pr371.json
-docs/migration/planning-input-coverage-audit-pr371.json
-config/planning-dimension-semantics-v2.json
-docs/migration/planning-dimension-semantics-audit-pr367.json
-docs/migration/record-depth-baseline-v2-pr368.json
-docs/migration/record-depth-baseline-v2-pr368-summary.json
-docs/migration/tier-a-candidate-queue-v2-pr368.json
+config/post-pr372-review-gate-pr373.json
+docs/migration/record-depth-baseline-v2-1-pr372-summary.json
+docs/migration/record-depth-baseline-v2-1-pr372-delta.json
+docs/migration/tier-a-candidate-queue-v2-1-pr372.json
+docs/migration/tier-a-batch-5-pr369-review-outcomes.json
+docs/migration/current-canonical-checkpoint.json
+docs/migration/market-access-pilot-2-pr359-reviewed-handoff.json
+data/monthly-maintenance-log.json
 ```
 
 ## 2. Repository source of truth
 
 Merged repository specifications and reviewed handoffs outrank chat memory, issue discussion, generated prose, stale roadmap text, unmerged drafts, and mock images.
 
-The PR #371 manifest is the only approved planning profile input boundary for PR #372. An ad hoc profile list is prohibited.
+The PR #372 corrected queue is internal non-ranking planning output. It does not override prior reviewed no-safe-change outcomes.
 
 ## 3. Current workstream
 
 ```text
 Canonical stable assets: 112
-PR #367 Planning Dimension Semantics Audit: complete
-PR #368 Record Depth Baseline v2 Refresh: complete
-PR #369 Tier A Dossier Deepening Batch 5: complete
-PR #370 Post-PR #369 Review Gate: complete
 PR #371 Planning Input Coverage Audit: complete
-PR #372 Record Depth Baseline v2.1 Refresh: active; complete on merge
-REVIEW GATE: next and mandatory
+PR #372 Record Depth Baseline v2.1 Refresh: complete
+PR #373 Post-PR #372 Review Gate: active; complete on merge
+Current authority: REVIEW GATE
 ```
 
-Approved sequence:
+PR #373 may record an authority decision only. It may not change canonical data, public product surfaces, queue eligibility contracts, or the baseline itself.
+
+## 4. Binding PR #372 result
 
 ```text
-PR #371  Planning Input Coverage Audit — complete
-PR #372  Record Depth Baseline v2.1 Refresh — active
+complete planning profile files: 29
+assets: 112
+dimensions: 16
+cells: 1,792
+changed cells from PR #368: 4
+changed assets: BUSD, PYUSD, RLUSD, USDP
+changed dimension: redemption
+state movement: partial → strong
+corrected queue candidates: 3
+```
+
+Corrected queue:
+
+```text
+AUDD
+NZDS
+poundtoken / 1GBP
+```
+
+All three received `reviewed_no_safe_change` outcomes in PR #369. The queue contains no new source signal and the current builder does not consume prior review-history handoffs.
+
+## 5. Reviewed next sequence
+
+PR #373 approves but does not activate:
+
+```text
+PR #374  Planning Queue Review-History Contract Audit
+PR #375  Candidate Queue v2.2 Refresh
 REVIEW GATE
 ```
 
-No dossier, archive-maintenance, Market Access, record-growth, or public-surface work is authorized before the next review gate.
+PR #374 must update `AGENTS.md` and `docs/roadmap.md` before changing queue eligibility contracts.
 
-## 4. PR #371 binding result
+### PR #374 boundary
 
-```text
-public profile input files: 29
-legacy planning profile files: 15
-reviewed overlay files omitted by default planning input: 14
-public unique asset IDs: 112
-legacy unique asset IDs: 82
-duplicate asset IDs: 5
-affected asset IDs: 35
-source order: public loader import order
-duplicate resolution: last write wins
-```
+- inventory reviewed dossier and no-safe-change handoffs;
+- define deterministic suppression, expiry, and new-source reactivation semantics;
+- define one review-history input contract;
+- no baseline recomputation;
+- no canonical or public change.
 
-Binding manifest:
+### PR #375 boundary
 
-```text
-docs/migration/planning-input-manifest-pr371.json
-```
+- begin only after PR #374 merges;
+- apply the approved history contract to the PR #372 v2.1 baseline;
+- preserve all historical baselines and queues;
+- emit an internal non-ranking v2.2 queue and delta;
+- no canonical or public change;
+- stop at another review gate.
 
-## 5. PR #372 exact authority
+## 6. Deferred work
 
-PR #372 must:
-
-- consume the exact PR #371 manifest;
-- recompute exactly 112 assets × 16 dimensions = 1,792 cells;
-- retain the PR #367 planning/applicability/observation semantics;
-- preserve PR #353, #363, and #368 checkpoints;
-- produce deterministic v2.1 baseline, summary, delta, and queue outputs;
-- record every changed cell and queue change relative to PR #368;
-- keep the queue internal, non-ranking, and manual-review-only;
-- stop at `REVIEW GATE`.
-
-Required outputs:
+The next sequence does not authorize:
 
 ```text
-docs/migration/record-depth-baseline-v2-1-pr372.json
-docs/migration/record-depth-baseline-v2-1-pr372-summary.json
-docs/migration/record-depth-baseline-v2-1-pr372-delta.json
-docs/migration/tier-a-candidate-queue-v2-1-pr372.json
+Tier A Dossier Deepening Batch 6
+Evidence and Archive Maintenance Batch 3
+Market Access Pilot 3
+Record Growth Batch 2
+new public page or explorer
+asset ranking or composite score
+automatic monitoring promotion
+automatic canonical promotion
 ```
 
-## 6. Input injection rule
-
-The internal registry loader may accept the environment variable:
-
-```text
-SOG_PLANNING_PROFILE_MANIFEST=docs/migration/planning-input-manifest-pr371.json
-```
-
-The loader must validate the reviewed manifest status, ordered paths, path safety, uniqueness, and file existence before replacing the planning-only profile group.
-
-Default loader behavior without this variable must remain unchanged.
+Archive maintenance remains important: 169 Evidence records have no recorded archive. Market Access remains narrow at eight canonical records. Both remain deferred until the queue-history sequence completes.
 
 ## 7. Canonical and public boundary
 
-PR #372 may change only internal planning loader support, configuration, authority, deterministic builders, generated internal outputs, validators, and workflow files.
+PR #373 may change only internal authority, configuration, deterministic review output, validators, and workflow files.
 
 It may not add or change:
 
@@ -144,12 +150,12 @@ It may not add or change:
 data/
 src/
 public/
-canonical assets
-Evidence identities or Evidence Relations
+canonical assets or record families
+Evidence identities or relations
 Market Access records
 deployments
 statistics history
-public pages or machine-readable outputs
+historical baselines or queues
 rankings, scores, recommendations, or leaderboards
 automatic monitoring or canonical promotion
 ```
@@ -165,27 +171,13 @@ PR #368 baseline, summary, delta, or queue
 PR #369 outcomes and handoff
 PR #370 review-gate report
 PR #371 manifest and audit
+PR #372 baseline, summary, delta, or queue
 prior dossier handoffs
 canonical release-integrity checkpoints
 closed statistics or Maintenance Log history
 ```
 
-## 9. Not approved
-
-```text
-Tier A Dossier Deepening Batch 6
-Evidence and Archive Maintenance Batch 3
-Market Access Pilot 3
-Record Growth Batch 2
-new canonical asset
-new deployment family
-new public page or explorer
-asset ranking or composite score
-automatic monitoring promotion
-automatic canonical promotion
-```
-
-## 10. Mandatory PR traceability
+## 9. Mandatory PR traceability
 
 Every non-trivial PR must identify:
 
