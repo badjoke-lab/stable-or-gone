@@ -1,17 +1,11 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-15  
-Status: canonical execution schedule — PR #377 active
+Status: canonical execution schedule — PR #378 active
 
-The full roadmap that governed the repository through merged PR #366 is preserved byte-for-byte at:
+Historical roadmap authority through PR #366 is preserved at `docs/archive/roadmap-through-pr366.md` and does not override this file.
 
-```text
-docs/archive/roadmap-through-pr366.md
-```
-
-That archive is historical evidence. This file is the current execution schedule.
-
-## 1. Current position
+## Current position
 
 ```text
 Canonical stable assets: 112
@@ -26,16 +20,12 @@ Archive recorded: 390
 Archive not recorded: 169
 
 PR #376 Post-PR #375 Review Gate: complete
-PR #377 Evidence Archive Review-History Contract Audit: active; complete on merge
-PR #378 Evidence Archive Maintenance Queue v2 Refresh: next after PR #377
-REVIEW GATE: mandatory after PR #378
+PR #377 Evidence Archive Review-History Contract Audit: complete
+PR #378 Evidence Archive Maintenance Queue v2 Refresh: active; complete on merge
+REVIEW GATE: next and mandatory
 ```
 
-The public-surface expansion sequence remains complete. PR #377 is internal Evidence queue-governance work.
-
-## 2. Current authority
-
-Read in this order:
+## Current authority
 
 ```text
 AGENTS.md
@@ -44,65 +34,26 @@ docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-15-pr376-post-pr375-review-gate.md
-docs/migration/post-pr375-review-gate-pr376.json
 docs/roadmap-amendments/2026-07-15-pr377-evidence-archive-review-history-contract-activation.md
-docs/quality/evidence-archive-review-history-contract-pr377-spec.md
 config/evidence-archive-review-history-v1-pr377.json
+docs/migration/evidence-archive-review-history-manifest-pr377.json
+docs/migration/evidence-archive-review-history-audit-pr377.json
+docs/roadmap-amendments/2026-07-15-pr378-evidence-archive-maintenance-queue-v2-refresh-activation.md
+docs/quality/evidence-archive-maintenance-queue-v2-pr378-spec.md
+config/evidence-archive-maintenance-queue-v2-pr378.json
 ```
 
-## 3. Approved bounded sequence
+## Approved sequence
 
 ```text
-PR #377  Evidence Archive Review-History Contract Audit — active
-PR #378  Evidence Archive Maintenance Queue v2 Refresh — next
+PR #377  Evidence Archive Review-History Contract Audit — complete
+PR #378  Evidence Archive Maintenance Queue v2 Refresh — active
 REVIEW GATE
 ```
 
 Evidence and Archive Maintenance Batch 3 canonical changes remain unapproved before the next review gate.
 
-## 4. Archive review-history problem
-
-```text
-canonical Evidence: 559
-archive recorded: 390
-archive not recorded: 169
-PR #360 selected / changed / no-safe: 10 / 8 / 2
-PR #365 selected / changed / no-safe: 10 / 3 / 7
-```
-
-Twenty canonical Evidence identities received a reviewed archive-maintenance outcome. Ten of them currently remain archive-not-recorded: one invalid wildcard removal and nine reviewed no-safe-change outcomes.
-
-## 5. PR #377 contract
-
-The history key is:
-
-```text
-evidence_id
-```
-
-The latest reviewed event wins. Outcomes:
-
-```text
-reviewed_archive_present
-reviewed_archive_removed_invalid
-reviewed_no_safe_change
-```
-
-A current archive-present identity is not eligible. A reviewed invalid-removal or no-safe-change identity is suppressed until a reviewed exact capture or reviewed source replacement exists.
-
-There is no automatic time expiry.
-
-Not accepted as reactivation:
-
-```text
-queue presence
-HTTP status movement alone
-unreviewed Wayback result
-unreviewed source URL change
-time elapsed
-```
-
-## 6. Expected review-history inventory
+## PR #377 completed result
 
 ```text
 history sources: 2
@@ -111,36 +62,54 @@ reviewed Evidence identities: 20
 archive present: 10
 invalid archive removed: 1
 reviewed no-safe-change: 9
-currently reviewed unresolved archive gaps: 10
+reviewed unresolved archive gaps: 10
 ```
 
-## 7. Required outputs
+A reviewed unresolved identity is suppressed until a reviewed exact capture or reviewed source replacement exists. There is no automatic time expiry.
+
+## PR #378 queue refresh
+
+PR #378 applies the completed history contract to current canonical Evidence without changing any canonical record.
+
+Selection pipeline:
 
 ```text
-docs/migration/evidence-archive-review-history-manifest-pr377.json
-docs/migration/evidence-archive-review-history-audit-pr377.json
+start from 169 archive-not-recorded Evidence identities
+exclude missing source URLs
+exclude alias identities
+exclude source URLs already pointing to Web Archive
+exclude ten reviewed suppressed identities without a reviewed signal
+preserve deterministic PR #365 priority buckets
+select at most ten candidates
 ```
 
-PR #377 generates no archive queue. PR #378 is the only authorized consumer before the next review gate.
-
-## 8. PR #378 boundary
-
-After PR #377 merges, PR #378 must:
+Required outputs:
 
 ```text
-consume the reviewed contract, manifest, and audit
-apply history eligibility to the 169 archive-not-recorded Evidence identities
-exclude alias and Web Archive source identities under the existing bounded policy
-exclude the ten reviewed unresolved identities unless reactivated
-emit a maximum-ten internal non-ranking review queue and delta
-change no canonical data
-change no public output
-stop at another review gate
+docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
+docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json
 ```
 
-## 9. Data and public boundaries
+The output must remain internal, non-ranking, manual-review-only, and non-canonical. Each candidate must retain review-history provenance.
 
-PR #377 changes no:
+## Validation boundary
+
+PR #378 must prove:
+
+- exact PR #377 contract, manifest, and audit identity;
+- exact 559 / 390 / 169 canonical boundary;
+- exact suppression of the ten reviewed unresolved identities;
+- no unreviewed automatic reactivation;
+- deterministic priority and Evidence-ID tie breaking;
+- maximum-ten selected queue;
+- immutable canonical Evidence and prior archive outputs;
+- `data/`, `src/`, and `public/` unchanged;
+- Astro check and build succeed;
+- next work item is `REVIEW GATE`.
+
+## Data and public boundaries
+
+PR #378 changes no:
 
 ```text
 data/
@@ -150,12 +119,11 @@ canonical Evidence identities, relations, URLs, or archived URLs
 Market Access records
 deployments
 statistics history
-historical outcomes
-archive queues
+historical outcomes or queues
 public pages or machine-readable outputs
 ```
 
-## 10. Deferred and not approved
+## Deferred and not approved
 
 ```text
 Evidence and Archive Maintenance Batch 3 canonical changes
@@ -168,6 +136,6 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-## 11. Next gate
+## Next gate
 
 After PR #378, stop and review the fresh history-aware archive queue, candidate quality, source reactivation semantics, Market Access breadth, monitoring usefulness, monthly maintenance burden, and verified external usage evidence before authorizing canonical archive changes.
