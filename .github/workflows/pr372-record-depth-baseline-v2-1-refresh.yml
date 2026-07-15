@@ -31,11 +31,11 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Generate deterministic baseline v2.1 outputs
         run: |
-          node scripts/build-record-depth-baseline-v2-1-refresh-pr372.mjs | tee /tmp/pr372-generation.txt
+          node scripts/build-record-depth-baseline-v2-1-refresh-pr372.mjs 2>&1 | tee /tmp/pr372-generation.txt
           node scripts/build-record-depth-baseline-v2-1-refresh-pr372.mjs --check
       - name: Validate manifest-bound baseline refresh
         run: |
-          node scripts/validate-record-depth-baseline-v2-1-refresh-pr372.mjs | tee /tmp/pr372-validation.txt
+          node scripts/validate-record-depth-baseline-v2-1-refresh-pr372.mjs 2>&1 | tee /tmp/pr372-validation.txt
           npm run validate:active-workstream
       - name: Validate existing canonical contracts
         run: |
