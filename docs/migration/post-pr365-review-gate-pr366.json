@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr365_review_gate_pr366_2026_07_15",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 366,
+  "reviewed_at": "2026-07-15",
+  "source_checkpoint": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169
+  },
+  "evaluation": {
+    "planning_semantics": {
+      "cell_count": 1792,
+      "absent_cells": 219,
+      "not_applicable_cells": 0,
+      "market_access_absent_cells": 110,
+      "regulatory_notes_absent_cells": 107,
+      "two_dimension_absent_cells": 217,
+      "two_dimension_share_of_absent_percent": 99.09,
+      "deployment_partial_cells": 92,
+      "facet_freshness_partial_cells": 91,
+      "finding": "The current planning model concentrates nearly all absent states in two structurally sparse dimensions while assigning no not_applicable states anywhere; candidate selection should not continue unchanged."
+    },
+    "recent_batch_yield": {
+      "tier_a_batch_4_reviewed_assets": 5,
+      "tier_a_batch_4_changed_assets": 2,
+      "tier_a_batch_4_change_yield_percent": 40,
+      "evidence_archive_batch_2_reviewed_records": 10,
+      "evidence_archive_batch_2_changed_records": 3,
+      "evidence_archive_batch_2_change_yield_percent": 30,
+      "finding": "Both bounded batches produced valid improvements, but the remaining queue is increasingly constrained by source availability and planning semantics."
+    },
+    "evidence_maintenance": {
+      "archive_recorded": 390,
+      "archive_not_recorded": 169,
+      "archive_recorded_percent": 69.77,
+      "archive_not_recorded_percent": 30.23,
+      "finding": "Archive coverage remains incomplete, but another immediate identical archive batch is not the highest-priority next step after a 3-of-10 yield."
+    },
+    "market_access": {
+      "records": 8,
+      "assets": 2,
+      "platforms": 1,
+      "jurisdictions": 1,
+      "decision": "hold",
+      "reason": "The repository still lacks the breadth and reviewed external evidence required to justify Market Access Pilot 3 or a new public surface."
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    },
+    "external_usage": {
+      "status": "not_available_in_reviewed_repository_evidence",
+      "decision_effect": "No growth or public-surface approval is based on unverified usage claims."
+    }
+  },
+  "decisions": {
+    "planning_dimension_semantics_audit": {
+      "decision": "approved_required",
+      "pr": 367,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "record_depth_baseline_v2_refresh": {
+      "decision": "approved_after_semantics_audit",
+      "pr": 368,
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "tier_a_dossier_batch_5": {
+      "decision": "approved_after_baseline_refresh",
+      "pr": 369,
+      "maximum_assets": 5,
+      "existing_assets_only": true,
+      "new_asset_allowed": false,
+      "market_access_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    "evidence_archive_maintenance_batch_3": {
+      "decision": "not_approved_in_next_sequence",
+      "reason": "Reassess archive-priority semantics and source-equivalence policy after the planning audit instead of immediately repeating the same bounded lookup."
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 367,
+      "work_item": "Planning Dimension Semantics Audit",
+      "scope": "Review all 16 planning dimensions, define absent versus not_applicable versus unobserved semantics, and revise no canonical data.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 368,
+      "work_item": "Record Depth Baseline v2 Refresh",
+      "scope": "Recompute the non-ranking 112-asset planning baseline using the approved semantics while preserving all historical baselines.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 369,
+      "work_item": "Tier A Dossier Deepening Batch 5",
+      "scope": "Select no more than five existing assets from the refreshed non-ranking queue and deepen only source-supported material gaps.",
+      "maximum_assets": 5,
+      "new_asset_allowed": false,
+      "market_access_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Evidence and Archive Maintenance Batch 3",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #367 must update AGENTS.md and docs/roadmap.md to activate the approved sequence before changing planning contracts."
+}
