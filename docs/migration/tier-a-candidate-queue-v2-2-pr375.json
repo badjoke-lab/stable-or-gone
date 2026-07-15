@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.2",
+  "queue_id": "sog_tier_a_candidate_queue_v2_2_pr375",
+  "status": "reviewed_internal_non_ranking_history_aware_queue",
+  "public_output": false,
+  "asset_rank": false,
+  "single_composite_score": false,
+  "review_pr": 375,
+  "reviewed_at": "2026-07-15",
+  "source_baseline_id": "sog_record_depth_baseline_v2_1_pr372",
+  "source_queue_id": "sog_tier_a_candidate_queue_v2_1_pr372",
+  "source_semantics_contract_id": "sog_planning_dimension_semantics_v2_pr367",
+  "review_history_contract_id": "sog_planning_queue_review_history_v1_pr374",
+  "review_history_manifest_id": "sog_planning_queue_review_history_manifest_pr374_v1",
+  "review_history_audit_id": "sog_planning_queue_review_history_audit_pr374_2026_07_15",
+  "queue_order": "asset_slug_ascending_non_ranking",
+  "candidate_count": 0,
+  "candidates": [],
+  "suppressed_candidate_count": 3,
+  "reactivated_candidate_count": 0,
+  "selection_boundary": {
+    "canonical_promotion_authorized": false,
+    "manual_review_required": true,
+    "existing_assets_only": true,
+    "public_surface_allowed": false,
+    "next_dossier_batch_authorized": false,
+    "review_gate_required": true
+  },
+  "source_digest_sha256": "fda0647520b9c6d89c51d63ea568a3bb9ef59bd1a551ffad229b23a987c8f9e4",
+  "generation_digest_sha256": "b1016dc55cafc46d4f20b6ad686c0181722e64b81a73ed642736265f0c83db25",
+  "next_work_item": "REVIEW GATE"
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "delta_id": "sog_tier_a_candidate_queue_v2_2_delta_pr375",
+  "status": "reviewed_internal_queue_history_delta",
+  "public_output": false,
+  "review_pr": 375,
+  "reviewed_at": "2026-07-15",
+  "source_baseline_id": "sog_record_depth_baseline_v2_1_pr372",
+  "source_queue_id": "sog_tier_a_candidate_queue_v2_1_pr372",
+  "current_queue_id": "sog_tier_a_candidate_queue_v2_2_pr375",
+  "historical_queue_rewritten": false,
+  "source_candidate_count": 3,
+  "current_candidate_count": 0,
+  "removed_candidate_count": 3,
+  "retained_candidate_count": 0,
+  "reactivated_candidate_count": 0,
+  "added_candidate_count": 0,
+  "removed_asset_slugs": [
+    "audd",
+    "nzds",
+    "poundtoken"
+  ],
+  "retained_asset_slugs": [],
+  "reactivated_asset_slugs": [],
+  "added_asset_slugs": [],
+  "suppressed_candidates": [
+    {
+      "asset_id": "sog_st_audd",
+      "asset_slug": "audd",
+      "asset_name": "AUDD",
+      "symbol": "AUDD",
+      "source_material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "suppression_reason": "suppressed_all_material_gaps_reviewed",
+      "dimension_eligibility": [
+        {
+          "dimension_id": "events",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "lifecycle",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "organization_relationships",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "redemption",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        }
+      ],
+      "latest_review_outcomes": [
+        "reviewed_no_safe_change"
+      ],
+      "reactivation_signal_present": false
+    },
+    {
+      "asset_id": "sog_st_nzds",
+      "asset_slug": "nzds",
+      "asset_name": "NZD Stablecoin",
+      "symbol": "NZDS",
+      "source_material_dossier_gaps": [
+        "events",
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "suppression_reason": "suppressed_all_material_gaps_reviewed",
+      "dimension_eligibility": [
+        {
+          "dimension_id": "events",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "lifecycle",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "organization_relationships",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "redemption",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        }
+      ],
+      "latest_review_outcomes": [
+        "reviewed_no_safe_change"
+      ],
+      "reactivation_signal_present": false
+    },
+    {
+      "asset_id": "sog_st_1gbp",
+      "asset_slug": "poundtoken",
+      "asset_name": "poundtoken",
+      "symbol": "1GBP",
+      "source_material_dossier_gaps": [
+        "lifecycle",
+        "organization_relationships",
+        "redemption"
+      ],
+      "suppression_reason": "suppressed_all_material_gaps_reviewed",
+      "dimension_eligibility": [
+        {
+          "dimension_id": "lifecycle",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "organization_relationships",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        },
+        {
+          "dimension_id": "redemption",
+          "review_history_found": true,
+          "effective_review_outcome": "reviewed_no_safe_change",
+          "eligibility_state": "suppressed_reviewed_no_safe_change",
+          "reactivation_signal_present": false
+        }
+      ],
+      "latest_review_outcomes": [
+        "reviewed_no_safe_change"
+      ],
+      "reactivation_signal_present": false
+    }
+  ],
+  "review_history_summary": {
+    "contract_id": "sog_planning_queue_review_history_v1_pr374",
+    "manifest_id": "sog_planning_queue_review_history_manifest_pr374_v1",
+    "history_source_count": 5,
+    "history_event_count": 48,
+    "reviewed_asset_count": 18,
+    "effective_asset_dimension_count": 33,
+    "automatic_time_expiry": false,
+    "accepted_reactivation_triggers": [
+      "reviewed_new_source",
+      "reviewed_semantics_change"
+    ]
+  },
+  "boundaries": {
+    "baseline_recomputed": false,
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_queue_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "fda0647520b9c6d89c51d63ea568a3bb9ef59bd1a551ffad229b23a987c8f9e4",
+  "generation_digest_sha256": "b1016dc55cafc46d4f20b6ad686c0181722e64b81a73ed642736265f0c83db25",
+  "next_work_item": "REVIEW GATE"
+}
