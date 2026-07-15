@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr369_review_gate_pr370_v1",
+  "status": "bounded_internal_review_gate",
+  "review_pr": 370,
+  "reviewed_at": "2026-07-15",
+  "source_files": {
+    "roadmap": "docs/roadmap.md",
+    "semantics_contract": "config/planning-dimension-semantics-v2.json",
+    "baseline_v2_summary": "docs/migration/record-depth-baseline-v2-pr368-summary.json",
+    "queue_v2": "docs/migration/tier-a-candidate-queue-v2-pr368.json",
+    "batch_5_handoff": "docs/migration/tier-a-batch-5-pr369-reviewed-handoff.json",
+    "batch_5_outcomes": "docs/migration/tier-a-batch-5-pr369-review-outcomes.json",
+    "baseline_builder": "scripts/build-record-depth-baseline-v2-refresh-pr368.mjs",
+    "canonical_builder": "scripts/growth/build-reviewed-record-depth-baseline-pr353.mjs"
+  },
+  "decision_rules": {
+    "preserve_canonical_asset_count": 112,
+    "preserve_public_surface": true,
+    "maximum_next_sequence_items": 2,
+    "require_planning_input_coverage_audit_before_another_queue": true,
+    "require_complete_current_profile_overlay_manifest": true,
+    "require_non_ranking_queue": true,
+    "forbid_dossier_batch_until_refresh_review": true
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 371,
+      "work_item": "Planning Input Coverage Audit",
+      "scope": "Inventory every canonical and reviewed profile overlay consumed by current public loaders and planning builders; identify omitted or duplicated input paths; define one deterministic planning input manifest; revise no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    },
+    {
+      "pr": 372,
+      "work_item": "Record Depth Baseline v2.1 Refresh",
+      "scope": "Recompute the 112-asset by 16-dimension internal baseline using the approved complete planning input manifest; preserve PR #353, #363, and #368 checkpoints; generate a corrected non-ranking queue; revise no canonical data and no public surface.",
+      "canonical_data_change_allowed": false,
+      "public_surface_allowed": false
+    }
+  ],
+  "forbidden_without_later_review_gate": [
+    "Tier A Dossier Deepening Batch 6",
+    "Evidence and Archive Maintenance Batch 3",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset ranking or composite score",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true
+}
