@@ -64,7 +64,7 @@ An exact-capture signal must identify the canonical source URL, successful captu
 
 A source-replacement signal must identify the replacement source, preserve canonical claim scope, establish reviewed source-version equivalence, and be reviewed later than the effective prior outcome.
 
-## Expected result
+## Reviewed generated result
 
 ```text
 history sources: 2
@@ -76,7 +76,22 @@ reviewed no-safe-change: 9
 currently reviewed unresolved archive gaps: 10
 ```
 
-The ten unresolved identities are excluded from PR #378 unless a reviewed reactivation signal exists.
+The ten unresolved identities are:
+
+```text
+sog_src_bold_redemptions_batch_c
+sog_src_busd_binance_phaseout
+sog_src_busd_paxos_issuer_update
+sog_src_busd_paxos_statement_pr354
+sog_src_busd_reuters_sec_2024
+sog_src_circle_stability_update_2023_03_13
+sog_src_circle_svb_update
+sog_src_circle_usdc_contract_addresses
+sog_src_tether_legal_terms
+sog_src_usdt_terms_pr354
+```
+
+One identity is suppressed after removal of an invalid wildcard archive; nine retain reviewed no-safe-change outcomes. None may re-enter PR #378 without a reviewed exact-capture or source-replacement signal.
 
 ## Required outputs
 
