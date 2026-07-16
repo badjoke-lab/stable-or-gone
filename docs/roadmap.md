@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #380 active
+Status: canonical execution schedule — PR #380 reviewed complete; REVIEW GATE next
 
 Historical roadmap authority through PR #366 remains archived and does not override this file.
 
@@ -16,15 +16,21 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded: 390
-Archive not recorded: 169
+Archive recorded: 399
+Archive not recorded: 160
 
+PR #363 Record Depth and Coverage Baseline Refresh: complete
+PR #364 Tier A Dossier Deepening Batch 4: complete
+PR #365 Evidence and Archive Maintenance Batch 2: complete
 PR #379 Post-PR #378 Review Gate: complete
-PR #380 Evidence and Archive Maintenance Batch 3: active; complete on merge
-REVIEW GATE: mandatory after PR #380
+PR #380 Evidence and Archive Maintenance Batch 3: reviewed complete; complete on merge
+Current authority: REVIEW GATE
+Next work item: none pre-authorized
 ```
 
-## Current authority
+The registry currently contains 112 stable assets, 559 Evidence records, and 174 deployments. Of the 559 Evidence identities, 399 archive indexes are recorded and 160 archive indexes are not recorded.
+
+## Current reviewed authority
 
 ```text
 AGENTS.md
@@ -35,81 +41,69 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-16-pr380-evidence-archive-maintenance-batch-3-activation.md
 docs/quality/evidence-archive-maintenance-batch-3-pr380-spec.md
 config/evidence-archive-maintenance-batch-3-pr380.json
-docs/migration/post-pr378-review-gate-pr379.json
-docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
-```
-
-## Approved bounded sequence
-
-```text
-PR #380 Evidence and Archive Maintenance Batch 3 — active
-REVIEW GATE
-```
-
-## Exact selected scope
-
-```text
-sog_src_bold_technical_batch_c
-sog_src_circle_transparency
-sog_src_circle_usdc_product
-sog_src_crvusd_curve_docs
-sog_src_crvusd_curve_lifecycle_event
-sog_src_dai_whitepaper_pr354
-sog_src_eurc_circle_page
-sog_src_eurc_developer_docs
-sog_src_eurc_launch_2022
-sog_src_eurc_mint_page
-```
-
-No identity may be substituted or added.
-
-## Review outcomes
-
-Each selected identity must receive exactly one outcome:
-
-```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
-```
-
-Archive additions require a verified exact-source dated capture. Source replacements require reviewed claim-scope and version equivalence. No change is forced to create nominal yield.
-
-## Required outputs
-
-```text
-docs/migration/evidence-archive-maintenance-batch-3-pr380-review-queue.json
-docs/migration/evidence-archive-maintenance-outcomes-pr380.json
+config/evidence-archive-maintenance-batch-3-pr380-decisions.json
 docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
+docs/migration/current-canonical-checkpoint.json
 ```
 
-## Validation boundary
+## Completed bounded sequence
 
-PR #380 must prove:
+```text
+PR #380 Evidence and Archive Maintenance Batch 3 — reviewed complete
+REVIEW GATE — mandatory next
+```
 
-- exact ten-ID scope and one outcome per ID;
-- field-level canonical changes only for accepted outcomes;
-- exact archive-count transition;
-- no new or removed Evidence identity;
-- no Evidence Relation change;
-- all unselected Evidence preserved;
-- no automatic capture/source replacement;
-- no asset, deployment, Market Access, ranking, score, recommendation, or public-surface change;
-- canonical validators, parity, release integrity, statistics history, Astro check and build succeed;
-- final authority is `REVIEW GATE`.
+## PR #380 reviewed result
+
+```text
+selected Evidence identities: 10
+changed Evidence records: 10
+dated exact archives added: 9
+reviewed source replacements: 1
+reviewed no-safe-change: 0
+archive recorded: 390 → 399
+archive not recorded: 169 → 160
+Evidence identities: 559
+Evidence Relations: 559
+```
+
+Nine exact-source HTTP 200 Wayback captures were accepted with reviewed timestamps and digests. The remaining change replaces the obsolete Circle Mint route with its successful same-product redirect target:
+
+```text
+https://www.circle.com/mint
+→ https://www.circle.com/circle-mint
+```
+
+No Evidence identity, Evidence Relation, asset, organization, deployment, Market Access record, ranking, score, recommendation, or public navigation surface changed.
+
+## Required next review
+
+The next authority decision must evaluate:
+
+- PR #380 actual yield and source-replacement quality;
+- whether PR #380 outcomes must first be incorporated into the archive review-history contract;
+- whether a new archive queue may be generated from the remaining 160 identities;
+- the empty history-aware dossier queue;
+- Market Access breadth, still eight records;
+- monitoring usefulness and monthly maintenance burden;
+- verified external usage evidence;
+- whether any canonical or public work should be authorized.
 
 ## Deferred and not approved
 
 ```text
 Evidence and Archive Maintenance Batch 4
+archive queue refresh
+archive review-history mutation
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
 new public page or explorer
+asset or Evidence ranking
 automatic monitoring promotion
 automatic canonical promotion
 ```
 
 ## Next gate
 
-After PR #380, stop and review actual archive additions, source replacements, no-safe-change outcomes, remaining archive backlog, maintenance burden, Market Access breadth, monitoring usefulness, and verified external usage evidence.
+Stop at `REVIEW GATE`. No PR after #380 is pre-authorized until a new reviewed authority decision is merged.
