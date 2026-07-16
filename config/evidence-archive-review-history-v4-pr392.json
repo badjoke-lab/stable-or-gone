@@ -7,6 +7,8 @@
   "reviewed_at": "2026-07-16",
   "prior_contract_id": "sog_evidence_archive_review_history_v3_pr387",
   "authority_report_id": "sog_post_pr390_review_gate_pr391_2026_07_16",
+  "manifest_id": "sog_evidence_archive_review_history_manifest_v4_pr392",
+  "audit_id": "sog_evidence_archive_review_history_audit_v4_pr392_2026_07_16",
   "history_resolution": {
     "key": "evidence_id",
     "order": ["reviewed_at_ascending", "review_pr_ascending", "source_order_ascending"],
