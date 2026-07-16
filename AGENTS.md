@@ -16,11 +16,11 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr386-post-pr385-review-gate.md
-docs/quality/post-pr385-review-gate-pr386-spec.md
-config/post-pr385-review-gate-pr386.json
+docs/roadmap-amendments/2026-07-16-pr387-evidence-archive-review-history-v3-activation.md
+docs/quality/evidence-archive-review-history-contract-v3-pr387-spec.md
+config/evidence-archive-review-history-v3-pr387.json
+docs/migration/post-pr385-review-gate-pr386.json
 docs/migration/evidence-archive-maintenance-outcomes-pr385.json
-docs/migration/evidence-archive-maintenance-batch-4-pr385-reviewed-handoff.json
 docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
 docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 ```
@@ -35,32 +35,15 @@ Archive recorded: 406
 Archive not recorded: 153
 Deployments: 174
 Market Access Records: 8
-PR #385 Evidence and Archive Maintenance Batch 4: complete
-PR #386 Post-PR #385 Review Gate: active; complete on merge
-PR #387 Evidence Archive Review-History Contract v3 Update: approved next
-PR #388 Evidence Archive Maintenance Queue v4 Refresh: approved after PR #387
+PR #386 Post-PR #385 Review Gate: complete
+PR #387 Evidence Archive Review-History Contract v3 Update: active; complete on merge
+PR #388 Evidence Archive Maintenance Queue v4 Refresh: approved next
 REVIEW GATE: mandatory after PR #388
 ```
 
-PR #386 may record an authority decision only. It may change no canonical data, statistics, checkpoint, release baseline, or public surface.
+PR #387 may create internal versioned History v3 contract outputs only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
 
-## Binding review finding
-
-PR #385 completed:
-
-```text
-Selected: 10
-Changed: 8
-Dated exact archives added: 7
-Reviewed source replacements: 1
-Reviewed no-safe-change: 2
-Archive recorded: 399 → 406
-Archive not recorded: 160 → 153
-```
-
-The current History v2 contract is stale because it includes PR #360, PR #365, and PR #380 only. Queue v3 is consumed and may not authorize another canonical batch.
-
-Expected History v3 inventory:
+## Binding History v3 inventory
 
 ```text
 history sources: 4
@@ -75,7 +58,13 @@ reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 1
 ```
 
-Circle Mint becomes archive-present. `sog_src_fdusd_site` becomes the sole reviewed-reactivated source-replacement eligibility.
+The sole reviewed-reactivated identity is:
+
+```text
+sog_src_fdusd_site
+```
+
+Circle Mint resolves to archive-present because PR #385 added an exact archive. Time elapsed, queue presence, HTTP movement, and unreviewed URL or Wayback results do not reactivate suppressed identities.
 
 ## Approved next sequence
 
@@ -85,7 +74,7 @@ PR #388 Evidence Archive Maintenance Queue v4 Refresh
 REVIEW GATE
 ```
 
-PR #387 and PR #388 are internal-only. They may not change canonical data or public surfaces. Queue v4 may select at most ten candidates.
+PR #388 must consume History v3, exclude all twelve reviewed suppressions, include the reviewed FDUSD reactivation explicitly, select at most ten candidates, and make no canonical or public change.
 
 ## Not approved
 

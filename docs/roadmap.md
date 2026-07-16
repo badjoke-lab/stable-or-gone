@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #386 review gate active
+Status: canonical execution schedule — PR #387 active
 
 Historical roadmap authority through PR #366 remains archived and does not override this file.
 
@@ -19,10 +19,9 @@ Market Access Records: 8
 Archive recorded: 406
 Archive not recorded: 153
 
-PR #385 Evidence and Archive Maintenance Batch 4: complete
-PR #386 Post-PR #385 Review Gate: active; complete on merge
-PR #387 Evidence Archive Review-History Contract v3 Update: approved next
-PR #388 Evidence Archive Maintenance Queue v4 Refresh: approved after PR #387
+PR #386 Post-PR #385 Review Gate: complete
+PR #387 Evidence Archive Review-History Contract v3 Update: active; complete on merge
+PR #388 Evidence Archive Maintenance Queue v4 Refresh: approved next
 REVIEW GATE: mandatory after PR #388
 ```
 
@@ -34,45 +33,20 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr386-post-pr385-review-gate.md
-docs/quality/post-pr385-review-gate-pr386-spec.md
-config/post-pr385-review-gate-pr386.json
+docs/roadmap-amendments/2026-07-16-pr387-evidence-archive-review-history-v3-activation.md
+docs/quality/evidence-archive-review-history-contract-v3-pr387-spec.md
+config/evidence-archive-review-history-v3-pr387.json
+docs/migration/post-pr385-review-gate-pr386.json
 docs/migration/evidence-archive-maintenance-outcomes-pr385.json
-docs/migration/evidence-archive-maintenance-batch-4-pr385-reviewed-handoff.json
 docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
 docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 ```
 
-## Completed Batch 4 result
+## History v3 objective
 
-```text
-Selected: 10
-Changed: 8
-Dated exact archives added: 7
-Reviewed source replacements: 1
-Reviewed no-safe-change: 2
-Archive recorded: 399 → 406
-Archive not recorded: 160 → 153
-Evidence identities: 559
-Evidence Relations: 559
-```
+PR #387 must reconstruct reviewed archive history from PR #360, PR #365, PR #380, and PR #385 outcomes while preserving all prior versions unchanged.
 
-Canonical identity counts, Evidence Relations, assets, deployments, Market Access records, non-Evidence record families, and public surfaces remain unchanged.
-
-## Binding history problem
-
-History v2 contains:
-
-```text
-history sources: 3
-history events: 30
-reviewed Evidence identities: 30
-latest included review PR: 380
-```
-
-It does not contain PR #385 outcomes. Queue v3 is consumed and cannot authorize another canonical batch.
-
-Expected History v3 inventory:
+Expected reviewed inventory:
 
 ```text
 history sources: 4
@@ -87,7 +61,16 @@ reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 1
 ```
 
-Circle Mint resolves to archive-present after PR #385. `sog_src_fdusd_site` is the sole reviewed-reactivated source-replacement eligibility.
+The sole reviewed-reactivated identity is `sog_src_fdusd_site`. Circle Mint is archive-present and must not remain queue-eligible.
+
+## Required outputs
+
+```text
+docs/migration/evidence-archive-review-history-manifest-v3-pr387.json
+docs/migration/evidence-archive-review-history-audit-v3-pr387.json
+```
+
+The outputs remain internal and non-ranking. PR #377 v1 and PR #382 v2 files are immutable historical inputs.
 
 ## Approved next sequence
 
@@ -97,7 +80,7 @@ PR #388 Evidence Archive Maintenance Queue v4 Refresh
 REVIEW GATE
 ```
 
-PR #387 must create new versioned History v3 outputs without rewriting v1 or v2. PR #388 must generate a new deterministic non-ranking manual-review queue, exclude the twelve reviewed suppressions, explicitly include reviewed-reactivated eligibility, select at most ten, and make no canonical or public change.
+PR #388 must consume History v3, exclude the twelve reviewed suppressions, include the reviewed FDUSD reactivation explicitly, select at most ten candidates, and make no canonical or public change.
 
 ## Deferred and not approved
 
