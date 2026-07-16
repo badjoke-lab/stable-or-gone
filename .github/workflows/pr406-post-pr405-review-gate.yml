@@ -1,0 +1,101 @@
+name: PR 406 Post PR 405 Review Gate
+
+on:
+  push:
+    branches:
+      - pr406-post-pr405-review-gate
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr406-post-pr405-review-gate
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr406-post-pr405-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate review gate authority
+        run: |
+          set -o pipefail
+          { node scripts/validate-post-pr405-review-gate-pr406.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr406-all.txt
+      - name: Verify no implementation or canonical changes
+        run: |
+          set -o pipefail
+          {
+            git diff --exit-code origin/main...HEAD -- data/ src/ public/ config/ scripts/monitoring/
+            git diff --exit-code origin/main...HEAD -- \
+              docs/migration/current-canonical-checkpoint.json \
+              docs/migration/current-stats-history-checkpoint.json \
+              docs/migration/registry-release-integrity-baseline.json
+          } 2>&1 | tee -a /tmp/pr406-all.txt
+      - name: Validate repository contracts
+        run: |
+          set -o pipefail
+          {
+            npm run validate:data
+            npm run validate:evidence-relations-v2
+            npm run validate:compat
+            npm run validate:final
+            npm run validate:release-integrity
+            npm run validate:reproducible-build
+          } 2>&1 | tee -a /tmp/pr406-all.txt
+      - name: Astro check and build
+        run: |
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr406-all.txt
+      - name: Verify review gate remains private
+        run: |
+          test ! -e dist/data/post-pr405-review-gate-pr406.json
+          test ! -e dist/post-pr405-review-gate-pr406/index.html
+      - name: Publish PR 406 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr406-post-pr405-review-gate-status -->';
+            const gate=JSON.parse(fs.readFileSync('docs/migration/post-pr405-review-gate-pr406.json','utf8'));
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr406-all.txt','utf8').trim();}catch{}
+            const decision=gate.decisions.visa_open_usd_editorial_and_monitoring;
+            const body=`${marker}
+            ## PR #406 Post-PR #405 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Source PR: **#${gate.source_pr}**
+            - Approved next PR: **#${decision.pr}**
+            - Article route: **\`${decision.article_route}\`**
+            - Private monitoring subjects: **${decision.monitoring_subjects.length}**
+            - Canonical action: **${decision.canonical_action}**
+            - Next authority: **${decision.next_work_item}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics (tail)</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(-12000)}
+            \`\`\`
+            </details>`;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});

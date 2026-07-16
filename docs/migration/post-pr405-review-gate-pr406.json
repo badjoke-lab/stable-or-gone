@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_post_pr405_review_gate_pr406_2026_07_17",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 406,
+  "reviewed_at": "2026-07-17",
+  "source_pr": 405,
+  "source_merge_commit": "bcf494b975a5e5cc38ddba218a4da9a787cef329",
+  "source_handoff": "docs/migration/evidence-archive-maintenance-batch-8-pr405-reviewed-handoff.json",
+  "binding_findings": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129,
+    "deployments": 174,
+    "market_access_records": 8,
+    "pr405_selected": 10,
+    "pr405_changed": 0,
+    "pr405_dated_archives_added": 0,
+    "pr405_source_replacements": 0,
+    "pr405_reviewed_no_safe_change": 10
+  },
+  "decisions": {
+    "visa_open_usd_editorial_and_monitoring": {
+      "pr": 407,
+      "decision": "approved_bounded_editorial_and_private_monitoring",
+      "article_route": "/updates/visa-stablecoin-platform-open-usd/",
+      "article_language": "ja",
+      "update_feed_entries": 1,
+      "monitoring_subjects": [
+        {
+          "subject_id": "open-usd",
+          "display_name": "Open USD",
+          "symbol": "OUSD",
+          "subject_kind": "prelaunch_stablecoin",
+          "canonical_record": false
+        },
+        {
+          "subject_id": "visa-stablecoin-platform",
+          "display_name": "Visa Stablecoin Platform",
+          "abbreviation": "VSP",
+          "subject_kind": "stablecoin_infrastructure",
+          "canonical_record": false
+        }
+      ],
+      "official_sources": 2,
+      "baseline_status": "pending_initial_acceptance",
+      "max_news_queries_added": 2,
+      "canonical_action": "none",
+      "next_work_item": "REVIEW GATE"
+    }
+  },
+  "prohibited": [
+    "open_usd_canonical_asset",
+    "open_standard_canonical_issuer",
+    "canonical_event_or_evidence",
+    "canonical_deployment_or_reserve_report",
+    "market_access_record",
+    "ranking_or_recommendation",
+    "new_top_level_navigation_family",
+    "public_monitoring_output",
+    "automatic_baseline_acceptance",
+    "automatic_canonical_promotion",
+    "automatic_article_rewrite",
+    "archive_batch_9",
+    "unrelated_workstream"
+  ],
+  "boundaries": {
+    "canonical_counts_change": false,
+    "canonical_data_change": false,
+    "public_machine_readable_data_change": false,
+    "private_monitoring_only": true,
+    "one_bounded_editorial_route": true,
+    "automatic_promotion": false,
+    "review_gate_after_pr407": true
+  }
+}
