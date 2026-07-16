@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "outcome_id": "sog_evidence_archive_maintenance_outcomes_pr405_2026_07_17",
+  "status": "reviewed_bounded_maintenance",
+  "public_output": false,
+  "review_pr": 405,
+  "queue_id": "sog_evidence_archive_maintenance_queue_v7_pr403",
+  "selected_count": 10,
+  "changed_count": 0,
+  "dated_archive_added_count": 0,
+  "reviewed_source_replacement_count": 0,
+  "reviewed_no_safe_change_count": 10,
+  "canonical_evidence_count_after": 559,
+  "evidence_relation_count_after": 559,
+  "archive_index_count_before": 430,
+  "archive_index_count_after": 430,
+  "archive_not_recorded_count_before": 129,
+  "archive_not_recorded_count_after": 129,
+  "changed_files": [],
+  "outcomes": [
+    {
+      "evidence_id": "sog_src_rai_integrations_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but archived payload content was not independently reviewed against the integrations claim scope."
+    },
+    {
+      "evidence_id": "sog_src_rai_oracle_relayer_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but archived payload content was not independently reviewed against the contract-mechanics claim scope."
+    },
+    {
+      "evidence_id": "sog_src_rai_ungovernance_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but archived payload content was not independently reviewed against the governance-minimization claim scope."
+    },
+    {
+      "evidence_id": "sog_src_rlusd_docs",
+      "source_file": "data/evidence-extra.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but the archived developer-documentation payload and product-version context were not independently reviewed."
+    },
+    {
+      "evidence_id": "sog_src_rlusd_launch_2024",
+      "source_file": "data/evidence-extra.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but the archived announcement payload was not independently reviewed against the launch claim scope."
+    },
+    {
+      "evidence_id": "sog_src_rlusd_ripple_page",
+      "source_file": "data/evidence-extra.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but the archived product page was not independently reviewed against its broad temporal claim scope."
+    },
+    {
+      "evidence_id": "sog_src_spot_about_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but the archived SPOT overview payload was not independently reviewed against the collateral and use-case claim scope."
+    },
+    {
+      "evidence_id": "sog_src_spot_mint_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but the archived guide was not independently reviewed against the mint-and-redeem interface claim scope."
+    },
+    {
+      "evidence_id": "sog_src_spot_site_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "The domain has unrelated historical captures and the current archived payload was not independently verified to preserve SPOT-specific content."
+    },
+    {
+      "evidence_id": "sog_src_spot_v2_rollout_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "reason": "Exact-source CDX metadata exists, but the archived proposal payload and captured discussion state were not independently reviewed."
+    }
+  ],
+  "constraints": {
+    "new_evidence_identities": 0,
+    "removed_evidence_identities": 0,
+    "evidence_relation_changes": 0,
+    "asset_changes": 0,
+    "market_access_record_changes": 0,
+    "new_public_surface": false,
+    "automatic_promotion": false
+  }
+}
