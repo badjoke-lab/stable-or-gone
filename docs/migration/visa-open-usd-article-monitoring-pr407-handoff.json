@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_visa_open_usd_article_monitoring_pr407_2026_07_17",
+  "status": "implementation_complete",
+  "public_output": false,
+  "implementation_pr": 407,
+  "source_review_pr": 406,
+  "source_review_merge_commit": "8e077b3ad320db5fa09b400e5914f50405289f89",
+  "implemented_at": "2026-07-17",
+  "article": {
+    "route": "/updates/visa-stablecoin-platform-open-usd/",
+    "language": "ja",
+    "title": "Visa Stablecoin Platformとは何か――Open USDを起点にVisaが狙う「ステーブルコイン運用基盤」",
+    "publication_date": "2026-07-17",
+    "information_current_through": "2026-07-17",
+    "update_feed_entry_id": "sog_update_2026_07_17_visa_vsp_open_usd_analysis",
+    "canonical_stablecoin_record": false
+  },
+  "private_monitoring": {
+    "source_ids": [
+      "open-standard-open-usd",
+      "visa-stablecoin-platform"
+    ],
+    "subject_count": 2,
+    "pending_initial_baseline_count": 2,
+    "news_query_ids": [
+      "visa-vsp-open-usd",
+      "open-standard-ousd-launch"
+    ],
+    "news_queries_added": 2,
+    "public_output": false,
+    "automatic_baseline_acceptance": false,
+    "automatic_pull_request": false,
+    "automatic_article_write": false,
+    "automatic_canonical_promotion": false
+  },
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "canonical_changes": 0,
+  "public_machine_readable_canonical_changes": 0,
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "PR #406 authorizes only PR #407 before another review gate. Canonical Open USD work, baseline acceptance, article revision, or any unrelated work requires separate reviewed authority."
+  },
+  "boundaries": {
+    "one_public_editorial_route": true,
+    "one_update_feed_entry": true,
+    "two_private_monitoring_subjects": true,
+    "canonical_data_change": false,
+    "canonical_count_change": false,
+    "canonical_open_usd_record": false,
+    "canonical_open_standard_record": false,
+    "public_monitoring_output": false,
+    "automatic_promotion": false,
+    "new_top_level_navigation_family": false
+  }
+}
