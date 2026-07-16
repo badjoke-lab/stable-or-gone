@@ -1,6 +1,6 @@
 # PR #405 Evidence and Archive Maintenance Batch 8 Specification
 
-Status: active bounded manual review  
+Status: active reviewed bounded maintenance  
 Review PR: 405  
 Public output: false
 
@@ -23,19 +23,29 @@ sog_src_spot_site_batch_b
 sog_src_spot_v2_rollout_batch_b
 ```
 
-## Initial phase
+## Reviewed application
 
-The initial workflow records live response and exact-source CDX evidence. Canonical writes are disabled during this probe phase. Probe rows remain pending manual review and contain no proposed outcome.
-
-## Allowed reviewed outcomes
+The live and exact-source CDX probe completed for all ten identities. Manual review accepted ten dated exact archive additions and zero reviewed no-safe-change outcomes.
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+ten dated exact archive additions
+zero reviewed source replacements
+zero reviewed no-safe-change
 ```
 
-An archive may be accepted only for an exact canonical source URL HTTP 200 capture with timestamp and digest. Source replacement requires explicit claim-scope and source-version equivalence review. No outcome is presumed.
+Every accepted archive is an exact canonical source URL HTTP 200 capture with a reviewed timestamp and digest. The Ampleforth root-domain capture is explicitly limited to the current protocol-era version and must not be used to infer the domain's older unrelated history.
+
+## Canonical effect
+
+```text
+Evidence identities: 559 -> 559
+Evidence Relations: 559 -> 559
+Archive recorded: 430 -> 440
+Archive not recorded: 129 -> 119
+Assets: 112 -> 112
+Deployments: 174 -> 174
+Market Access Records: 8 -> 8
+```
 
 ## Boundaries
 
@@ -46,4 +56,4 @@ An archive may be accepted only for an exact canonical source URL HTTP 200 captu
 - no automatic source replacement;
 - no Batch 9.
 
-PR #405 stops at `REVIEW GATE` after reviewed decisions and any bounded canonical maintenance are complete.
+PR #405 stops at `REVIEW GATE` after the reviewed decisions and bounded canonical maintenance are complete.
