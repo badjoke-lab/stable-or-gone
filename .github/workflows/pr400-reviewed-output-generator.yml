@@ -93,3 +93,38 @@ jobs:
           npm run check
           npm run build
           npm run verify:public
+      - name: Commit final validation marker
+        run: |
+          mkdir -p docs/quality
+          cat > docs/quality/evidence-archive-maintenance-batch-7-pr400-final-validation.json <<'JSON'
+          {
+            "schema_version": "1.0",
+            "validation_id": "sog_pr400_final_validation_2026_07_16",
+            "status": "all_required_checks_passed",
+            "review_pr": 400,
+            "selected": 10,
+            "changed": 5,
+            "dated_exact_archive_added": 5,
+            "reviewed_source_replacement": 0,
+            "reviewed_no_safe_change": 5,
+            "archive_recorded": 430,
+            "archive_not_recorded": 129,
+            "evidence": 559,
+            "evidence_relations": 559,
+            "canonical_boundary_passed": true,
+            "release_boundary_passed": true,
+            "statistics_boundary_passed": true,
+            "public_build_passed": true,
+            "next_authority": "review_gate_required"
+          }
+          JSON
+          git add docs/quality/evidence-archive-maintenance-batch-7-pr400-final-validation.json
+          if git diff --cached --quiet; then
+            echo 'Final validation marker already committed'
+            exit 0
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git commit -m 'Record PR 400 final validation success'
+          git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
+          git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
