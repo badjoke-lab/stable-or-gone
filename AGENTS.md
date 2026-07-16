@@ -28,6 +28,8 @@ Archive recorded before PR #400: 425
 Archive not recorded before PR #400: 134
 Archive recorded after reviewed decisions: 430
 Archive not recorded after reviewed decisions: 129
+Archive recorded: 430
+Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
 PR #399 Post-PR #398 Review Gate: complete
