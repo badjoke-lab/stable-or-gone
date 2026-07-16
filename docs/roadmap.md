@@ -40,6 +40,8 @@ docs/migration/evidence-archive-review-history-manifest-v4-pr392.json
 docs/migration/evidence-archive-review-history-audit-v4-pr392.json
 docs/migration/post-pr390-review-gate-pr391.json
 docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
 ```
 
 ## History v4 boundary
@@ -50,9 +52,34 @@ Archive present / invalid removed / no-safe / replacement: 36 / 1 / 11 / 0
 Reviewed unresolved / suppressed / reactivated: 12 / 12 / 0
 ```
 
-## Queue v5 rule
+## Reviewed Queue v5 result
 
-Queue v5 starts from 143 archive-not-recorded canonical Evidence identities, excludes aliases, Web Archive source URLs, missing source URLs, and twelve reviewed suppressions, then applies the established non-ranking source-priority order. There is no reviewed-reactivated candidate tier.
+```text
+Eligible pool: 98
+Selected: 10
+Reviewed suppressed excluded: 12
+Reviewed reactivated selected: 0
+Added versus Queue v4: 10
+Removed versus Queue v4: 10
+Retained versus Queue v4: 0
+```
+
+Selected Evidence identities:
+
+```text
+sog_src_makerdao_docs_dai
+sog_src_makerdao_forum_lifecycle_reference
+sog_src_mim_2025_postmortem_batch_a
+sog_src_mim_docs_batch_a
+sog_src_mim_tokenomics_batch_a
+sog_src_mstable_withdrawal_batch_d
+sog_src_nuon_contracts_batch_b
+sog_src_nuon_guarded_launch_batch_b
+sog_src_nuon_maxcap_batch_b
+sog_src_nuon_minting_batch_b
+```
+
+There is no reviewed-reactivated candidate tier. All selected identities are ordinary unreviewed archive gaps and authorize no canonical change.
 
 ## Required outputs
 
