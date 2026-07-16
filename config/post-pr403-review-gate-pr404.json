@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr403_review_gate_pr404_v1",
+  "status": "mandatory_internal_review_gate",
+  "review_pr": 404,
+  "reviewed_at": "2026-07-16",
+  "generated_report_id": "sog_post_pr403_review_gate_pr404_2026_07_16",
+  "source_queue": "docs/migration/evidence-archive-maintenance-queue-v7-pr403.json",
+  "source_delta": "docs/migration/evidence-archive-maintenance-queue-v7-pr403-delta.json",
+  "source_history_contract": "config/evidence-archive-review-history-v6-pr402.json",
+  "source_history_manifest": "docs/migration/evidence-archive-review-history-manifest-v6-pr402.json",
+  "source_history_audit": "docs/migration/evidence-archive-review-history-audit-v6-pr402.json",
+  "expected": {
+    "canonical_evidence_count": 559,
+    "evidence_relation_count": 559,
+    "archive_recorded_count": 430,
+    "archive_not_recorded_count": 129,
+    "history_source_count": 7,
+    "history_event_count": 70,
+    "reviewed_identity_count": 68,
+    "reviewed_suppressed_count": 18,
+    "reviewed_reactivated_count": 0,
+    "eligible_pool_count": 78,
+    "selected_count": 10,
+    "added_vs_queue_v6": 10,
+    "removed_vs_queue_v6": 10,
+    "retained_vs_queue_v6": 0,
+    "selected_evidence_ids": [
+      "sog_src_rai_integrations_batch_b",
+      "sog_src_rai_oracle_relayer_batch_b",
+      "sog_src_rai_ungovernance_batch_b",
+      "sog_src_rlusd_docs",
+      "sog_src_rlusd_launch_2024",
+      "sog_src_rlusd_ripple_page",
+      "sog_src_spot_about_batch_b",
+      "sog_src_spot_mint_batch_b",
+      "sog_src_spot_site_batch_b",
+      "sog_src_spot_v2_rollout_batch_b"
+    ]
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 405,
+      "work_item": "Evidence and Archive Maintenance Batch 8",
+      "selected_identity_count": 10,
+      "allowed_outcomes": [
+        "dated_exact_archive_added",
+        "reviewed_source_replacement",
+        "reviewed_no_safe_change"
+      ],
+      "review_gate_required_after_batch": true
+    }
+  ],
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 9",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ]
+}
