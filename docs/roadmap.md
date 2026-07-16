@@ -16,8 +16,8 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded before PR #385: 399
-Archive not recorded before PR #385: 160
+Archive recorded: 406
+Archive not recorded: 153
 
 PR #384 Post-PR #383 Review Gate: complete
 PR #385 Evidence and Archive Maintenance Batch 4: active; complete on merge
@@ -35,35 +35,53 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-16-pr385-evidence-archive-maintenance-batch-4-activation.md
 docs/quality/evidence-archive-maintenance-batch-4-pr385-spec.md
 config/evidence-archive-maintenance-batch-4-pr385.json
+config/evidence-archive-maintenance-batch-4-pr385-decisions.json
 docs/migration/post-pr383-review-gate-pr384.json
 docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
-docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json
+docs/migration/evidence-archive-maintenance-batch-4-pr385-review-queue.json
 ```
 
-## Selected Queue v3 identities
+## Reviewed Batch 4 result
+
+```text
+Selected: 10
+Changed: 8
+Dated exact archives added: 7
+Reviewed source replacements: 1
+Reviewed no-safe-change: 2
+Archive recorded: 399 → 406
+Archive not recorded: 160 → 153
+Evidence identities: 559
+Evidence Relations: 559
+```
+
+Accepted archive additions:
 
 ```text
 sog_src_eurc_mint_page
 sog_src_fdusd_official_site
-sog_src_fdusd_site
-sog_src_fei_addresses_batch_a
 sog_src_fei_final_redemption_batch_a
 sog_src_fei_intro_batch_a
 sog_src_fei_launch_batch_a
-sog_src_fei_tip121c_execution_2022
 sog_src_fei_v2_batch_a
 sog_src_frax_app
 ```
 
-PR #385 must probe and review each identity independently. Allowed outcomes:
+Reviewed source replacement:
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+sog_src_fdusd_site
+https://firstdigitallabs.com/fdusd/ → https://www.firstdigitallabs.com/fdusd
 ```
 
-A canonical change is allowed only after exact-source capture verification or reviewed publisher/product and claim-scope equivalence. No candidate is presumed to change.
+Reviewed no-safe-change:
+
+```text
+sog_src_fei_addresses_batch_a
+sog_src_fei_tip121c_execution_2022
+```
+
+Every archive addition is backed by the reviewed exact-source probe timestamp and digest. The FDUSD replacement is the successful current issuer/product route with reviewed claim-scope equivalence. The two no-safe-change identities remain unchanged.
 
 ## Required outputs
 
@@ -77,7 +95,7 @@ data/stats-history.json
 docs/migration/registry-release-integrity-baseline.json
 ```
 
-Canonical identity counts, Evidence Relations, assets, deployments, Market Access records, non-Evidence record families, and public surfaces must remain unchanged.
+Canonical identity counts, Evidence Relations, assets, deployments, Market Access records, non-Evidence record families, and public surfaces remain unchanged.
 
 ## Deferred and not approved
 
