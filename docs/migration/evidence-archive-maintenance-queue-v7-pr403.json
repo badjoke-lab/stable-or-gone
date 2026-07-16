@@ -386,7 +386,7 @@
     "batch_8_authorized": false,
     "review_gate_required": true
   },
-  "source_digest_sha256": "7bc264c2bb197f6915a25381821cc7df65238e6f3b3fd2cb26f7f218cc139525",
-  "generation_digest_sha256": "6ff0bbfbe5cf37c74d4e413c6c8335ee1d1cbcc7e109ee794345562d81aff840",
+  "source_digest_sha256": "ce9d6496cc1641ded0091334be6b4026ebcda8664d9139314f2f67811588f6d3",
+  "generation_digest_sha256": "776f71fe6e29b7379d46f68634b7f13cc97c287eb53ccfa1c91955fdd6177ef3",
   "next_work_item": "REVIEW GATE"
 }
