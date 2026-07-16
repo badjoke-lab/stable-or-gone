@@ -34,7 +34,7 @@ PR #379 Post-PR #378 Review Gate: active; complete on merge
 Current authority: REVIEW GATE
 ```
 
-PR #379 may record an authority decision only. It may not change canonical Evidence or public surfaces.
+PR #379 may record an authority decision and recover the two omitted deterministic PR #378 internal outputs. It may not change canonical Evidence or public surfaces.
 
 ## Binding PR #378 result
 
@@ -46,7 +46,7 @@ maximum selected candidates: 10
 next work item: REVIEW GATE
 ```
 
-The exact selected Evidence IDs and deterministic priority order are fixed in `docs/migration/evidence-archive-maintenance-queue-v2-pr378.json`.
+The exact selected Evidence IDs and deterministic priority order are fixed by the merged PR #378 builder. PR #379 must regenerate the missing queue and delta without changing those semantics.
 
 ## Reviewed next sequence
 
@@ -69,7 +69,7 @@ A canonical change is allowed only after a reviewed exact capture or reviewed cl
 
 ## Boundaries
 
-PR #379 may change only internal authority, configuration, deterministic review output, validators, and workflow files.
+PR #379 may change only internal authority, configuration, deterministic recovered/generated outputs, validators, and workflow files.
 
 It may not change:
 
@@ -81,7 +81,7 @@ canonical Evidence identities, relations, URLs, or archived URLs
 Market Access records
 deployments
 statistics history
-historical queues or outcomes
+reviewed PR #378 selection semantics
 automatic monitoring or canonical promotion
 ```
 
