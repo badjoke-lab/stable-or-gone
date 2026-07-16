@@ -1,17 +1,19 @@
 # PR #379 Post-PR #378 Review Gate Specification
 
-Status: active internal authority review  
+Status: active internal authority review and output recovery  
 Review PR: 379  
 Public output: false
 
 ## Objective
 
-Review the fresh history-aware PR #378 archive-maintenance queue and decide whether one bounded canonical Evidence maintenance batch is authorized.
+Recover the two omitted deterministic PR #378 internal outputs, then review the fresh history-aware archive-maintenance queue and decide whether one bounded canonical Evidence maintenance batch is authorized.
 
 ## Required inputs
 
 ```text
 config/post-pr378-review-gate-pr379.json
+config/evidence-archive-maintenance-queue-v2-pr378.json
+scripts/build-evidence-archive-maintenance-queue-v2-pr378.mjs
 docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
 docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json
 config/evidence-archive-review-history-v1-pr377.json
@@ -24,14 +26,19 @@ docs/migration/market-access-pilot-2-pr359-reviewed-handoff.json
 data/monthly-maintenance-log.json
 ```
 
+## Recovery requirement
+
+The PR #378 queue and delta were computed during PR validation but omitted from the merged file set. PR #379 must regenerate them byte-deterministically from the merged PR #378 builder and immutable inputs before review-gate evaluation. Recovery may not change the PR #378 config, builder, history contract, canonical Evidence, or public output.
+
 ## Mandatory review questions
 
-1. Is the queue bounded to ten fresh canonical Evidence identities?
-2. Were all ten reviewed unresolved history identities suppressed?
-3. Is any automatic or unreviewed reactivation present?
-4. Are exact-capture and source-replacement rules sufficient for canonical review?
-5. Is one bounded Batch 3 preferable to Market Access or dossier work?
-6. Is any new public surface or automatic promotion authorized?
+1. Are the recovered queue and delta deterministic products of the merged PR #378 builder?
+2. Is the queue bounded to ten fresh canonical Evidence identities?
+3. Were all ten reviewed unresolved history identities suppressed?
+4. Is any automatic or unreviewed reactivation present?
+5. Are exact-capture and source-replacement rules sufficient for canonical review?
+6. Is one bounded Batch 3 preferable to Market Access or dossier work?
+7. Is any new public surface or automatic promotion authorized?
 
 ## Binding findings
 
@@ -62,16 +69,19 @@ reviewed_no_safe_change
 
 Canonical changes are allowed only for the first two reviewed outcomes. Automatic capture or source replacement is prohibited.
 
-## Required decision output
+## Required outputs
 
 ```text
+docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
+docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json
 docs/migration/post-pr378-review-gate-pr379.json
 ```
 
 ## Prohibited work
 
 - any identity outside the PR #378 queue;
+- any change to PR #378 selection semantics while recovering outputs;
 - automatic archive or source promotion;
 - new public surfaces;
 - dossier, Market Access, or record-growth work;
-- ranking, scoring, recommendation, or historical-output rewrite.
+- ranking, scoring, recommendation, or historical reviewed-input rewrite.
