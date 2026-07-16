@@ -4,6 +4,7 @@
   "status": "mandatory_internal_review_gate",
   "review_pr": 394,
   "reviewed_at": "2026-07-16",
+  "generated_report_id": "sog_post_pr393_review_gate_pr394_2026_07_16",
   "source_queue": "docs/migration/evidence-archive-maintenance-queue-v5-pr393.json",
   "source_delta": "docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json",
   "source_history_contract": "config/evidence-archive-review-history-v4-pr392.json",
