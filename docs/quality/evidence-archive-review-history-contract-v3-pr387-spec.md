@@ -45,7 +45,7 @@ reviewed_source_replacement
 
 The FDUSD replacement is eligible for fresh manual archive review only. It does not authorize an archive or another replacement automatically.
 
-## Deterministic result
+## History v3 deterministic result
 
 The generated manifest and audit resolve to exactly:
 
