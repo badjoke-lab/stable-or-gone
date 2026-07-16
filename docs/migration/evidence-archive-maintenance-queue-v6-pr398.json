@@ -1,0 +1,380 @@
+{
+  "schema_version": "6.0",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v6_pr398",
+  "status": "reviewed_internal_non_ranking_history_v5_queue",
+  "public_output": false,
+  "evidence_rank": false,
+  "single_composite_score": false,
+  "review_pr": 398,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
+  "review_history_contract_id": "sog_evidence_archive_review_history_v5_pr397",
+  "review_history_manifest_id": "sog_evidence_archive_review_history_manifest_v5_pr397",
+  "review_history_audit_id": "sog_evidence_archive_review_history_audit_v5_pr397_2026_07_16",
+  "prior_queue_id": "sog_evidence_archive_maintenance_queue_v5_pr393",
+  "selection_rule": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+  "source_identity_scope": "canonical_identities_only",
+  "canonical_evidence_count": 559,
+  "archive_index_count": 425,
+  "archive_not_recorded_count": 134,
+  "reviewed_unresolved_suppressed_count": 13,
+  "reactivated_reviewed_identity_count": 0,
+  "selected_reactivated_reviewed_identity_count": 0,
+  "eligible_pool_count": 88,
+  "selected_count": 10,
+  "maximum_selected_count": 10,
+  "priority_order": [
+    "regulator_court_legal",
+    "official_issuer_protocol_product",
+    "reserve_attestation_audit",
+    "high_quality_reporting_research",
+    "other_reviewed_source"
+  ],
+  "selected_candidates": [
+    {
+      "evidence_id": "sog_src_nuon_overview_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Nuon stablecoin overview",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "url": "https://docs.nuon.fi/nuon-stablecoin",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_nuon"
+      ],
+      "organization_ids": [
+        "sog_issuer_nuon_finance"
+      ],
+      "event_ids": [
+        "sog_ev_nuon_base_launch"
+      ],
+      "claim_scopes": [
+        "nuon_usd_mint_inflation_yield_rebase_and_base_deployment"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_paxg_allocation_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "PAXG allocation and physical gold bar details",
+      "publisher": "Paxos",
+      "source_type": "issuer_support",
+      "url": "https://support.paxos.com/articles/7204091747-paxg-allocation-and-physical-gold-bar-details-representing-my-paxg-tokens",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_paxg"
+      ],
+      "organization_ids": [
+        "sog_issuer_paxos"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "paxg_bar_allocation_and_fractional_ownership"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_paxg_launch_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Paxos Launches PAX Gold",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "url": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+      "published_at": "2019-09-05",
+      "stablecoin_ids": [
+        "sog_st_paxg"
+      ],
+      "organization_ids": [
+        "sog_issuer_paxos"
+      ],
+      "event_ids": [
+        "sog_ev_paxg_2019_09_launch"
+      ],
+      "claim_scopes": [
+        "paxg_launch_issuer_and_one_ounce_gold_design"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_paxg_pricing_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "PAX Gold price determination",
+      "publisher": "Paxos",
+      "source_type": "issuer_support",
+      "url": "https://support.paxos.com/articles/7818174259-pax-gold-price-determination",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_paxg"
+      ],
+      "organization_ids": [
+        "sog_issuer_paxos"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "paxg_london_gold_market_price_source"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_paxg_redemption_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "How to buy, sell, or redeem PAX Gold",
+      "publisher": "Paxos",
+      "source_type": "issuer_support",
+      "url": "https://support.paxos.com/articles/7682455289-how-to-buy-sell-redeem-pax-gold",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_paxg"
+      ],
+      "organization_ids": [
+        "sog_issuer_paxos"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "paxg_usd_unallocated_and_physical_redemption_paths"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_paxos_busd_announcement",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Paxos to end relationship with Binance for BUSD",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "url": "https://paxos.com/2023/02/13/paxos-to-end-relationship-with-binance-for-busd/",
+      "published_at": "2023-02-13",
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_pyusd_paxos_official",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Paxos PayPal USD official reference",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "url": "https://paxos.com/paypal-usd/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_pyusd_paxos_page",
+      "source_file": "data/evidence-pr033.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Paxos PYUSD page",
+      "publisher": "Paxos",
+      "source_type": "issuer_page",
+      "url": "https://paxos.com/pyusd/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_pyusd_paypal_official",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "PayPal USD official product page",
+      "publisher": "PayPal",
+      "source_type": "issuer_statement",
+      "url": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rai_faq_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "RAI FAQ",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "url": "https://docs.reflexer.finance/faq",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_rai"
+      ],
+      "organization_ids": [
+        "sog_issuer_reflexer"
+      ],
+      "event_ids": [
+        "sog_ev_rai_2021_02_launch"
+      ],
+      "claim_scopes": [
+        "rai_floating_redemption_price_and_protocol_design"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "selected_reactivated_reviewed_evidence_ids": [],
+  "selection_boundary": {
+    "canonical_change_authorized": false,
+    "manual_review_required": true,
+    "exact_source_capture_required": true,
+    "replacement_requires_reviewed_claim_scope_equivalence": true,
+    "public_surface_allowed": false,
+    "batch_7_authorized": false,
+    "review_gate_required": true
+  },
+  "source_digest_sha256": "34d0ad458ca7f82c38fbbf5a25ee1c3de16fd610fc57d3f974395d63e2937f13",
+  "generation_digest_sha256": "f47529b85a407c92274600735ec152ded6abebc31e0cf35e3ffcdcc5e3d08f93",
+  "next_work_item": "REVIEW GATE"
+}
