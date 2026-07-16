@@ -1,0 +1,387 @@
+{
+  "schema_version": "3.0",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v3_pr383",
+  "status": "reviewed_internal_non_ranking_history_v2_queue",
+  "public_output": false,
+  "evidence_rank": false,
+  "single_composite_score": false,
+  "review_pr": 383,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_3_canonical_112_checkpoint_pr380_2026_07_16",
+  "review_history_contract_id": "sog_evidence_archive_review_history_v2_pr382",
+  "review_history_manifest_id": "sog_evidence_archive_review_history_manifest_v2_pr382",
+  "review_history_audit_id": "sog_evidence_archive_review_history_audit_v2_pr382_2026_07_16",
+  "prior_queue_id": "sog_evidence_archive_maintenance_queue_v2_pr378",
+  "selection_rule": "history_v2_eligibility_then_deterministic_priority_then_evidence_id",
+  "source_identity_scope": "canonical_identities_only",
+  "canonical_evidence_count": 559,
+  "archive_index_count": 399,
+  "archive_not_recorded_count": 160,
+  "reviewed_unresolved_suppressed_count": 10,
+  "reactivated_reviewed_identity_count": 1,
+  "selected_reactivated_reviewed_identity_count": 1,
+  "eligible_pool_count": 117,
+  "selected_count": 10,
+  "maximum_selected_count": 10,
+  "priority_order": [
+    "regulator_court_legal",
+    "official_issuer_protocol_product",
+    "reserve_attestation_audit",
+    "high_quality_reporting_research",
+    "other_reviewed_source"
+  ],
+  "selected_candidates": [
+    {
+      "evidence_id": "sog_src_eurc_mint_page",
+      "source_file": "data/evidence-extra.json",
+      "selection_tier": 0,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Circle Mint product page",
+      "publisher": "Circle",
+      "source_type": "product_page",
+      "url": "https://www.circle.com/circle-mint",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": true,
+      "effective_review_outcome": "reviewed_source_replacement",
+      "eligibility_state": "reactivated_reviewed_source_replacement",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": true,
+      "reactivation_signal_type": "reviewed_source_replacement",
+      "review_reasons": [
+        "archive_not_recorded",
+        "reviewed_reactivated_history_v2",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fdusd_official_site",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "First Digital USD official site",
+      "publisher": "First Digital Labs",
+      "source_type": "issuer_statement",
+      "url": "https://firstdigitallabs.com/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fdusd_site",
+      "source_file": "data/evidence-pr033.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "First Digital USD official page",
+      "publisher": "First Digital",
+      "source_type": "issuer_page",
+      "url": "https://firstdigitallabs.com/fdusd/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fei_addresses_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Fei Protocol mainnet addresses",
+      "publisher": "Fei Protocol",
+      "source_type": "protocol_docs",
+      "url": "https://fei-protocol.github.io/developers/addresses/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_fei"
+      ],
+      "organization_ids": [
+        "sog_issuer_fei_protocol"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "fei_ethereum_contract_identity"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fei_final_redemption_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "TIP-121c: Final Redemption",
+      "publisher": "Fei / Snapshot via Boardroom",
+      "source_type": "governance_proposal",
+      "url": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D",
+      "published_at": "2022-09-20",
+      "stablecoin_ids": [
+        "sog_st_fei"
+      ],
+      "organization_ids": [
+        "sog_issuer_fei_protocol"
+      ],
+      "event_ids": [
+        "sog_ev_fei_2022_09_final_redemption"
+      ],
+      "claim_scopes": [
+        "fei_final_redemption_and_tribe_dao_wind_down"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fei_intro_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Introducing Fei Protocol",
+      "publisher": "Fei Labs",
+      "source_type": "official_blog",
+      "url": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+      "published_at": "2021-01-11",
+      "stablecoin_ids": [
+        "sog_st_fei"
+      ],
+      "organization_ids": [
+        "sog_issuer_fei_protocol"
+      ],
+      "event_ids": [
+        "sog_ev_fei_2021_04_launch"
+      ],
+      "claim_scopes": [
+        "fei_initial_design_and_protocol_controlled_value"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fei_launch_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Fei Post-Genesis",
+      "publisher": "Fei Labs",
+      "source_type": "official_blog",
+      "url": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+      "published_at": "2021-04-02",
+      "stablecoin_ids": [
+        "sog_st_fei"
+      ],
+      "organization_ids": [
+        "sog_issuer_fei_protocol"
+      ],
+      "event_ids": [
+        "sog_ev_fei_2021_04_launch"
+      ],
+      "claim_scopes": [
+        "fei_launch_date_and_genesis_context"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fei_tip121c_execution_2022",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "TIP-121c: Start FEI and TRIBE Redemption",
+      "publisher": "Fei Protocol governance via Tally",
+      "source_type": "governance_proposal",
+      "url": "https://www.tally.xyz/gov/fei/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263?govId=eip155%3A1%3A0x0BEF27FEB58e857046d630B2c03dFb7bae567494",
+      "published_at": "2022-09-22",
+      "stablecoin_ids": [
+        "sog_st_fei"
+      ],
+      "organization_ids": [
+        "sog_issuer_fei_protocol"
+      ],
+      "event_ids": [
+        "sog_ev_fei_2022_09_final_redemption"
+      ],
+      "claim_scopes": [
+        "executed_governance_package",
+        "final_redemption_context",
+        "one_to_one_dai_backing",
+        "zero_fee_fei_redemption"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_fei_v2_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Fei v2 is coming",
+      "publisher": "Fei Protocol",
+      "source_type": "official_blog",
+      "url": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+      "published_at": "2021-11-04",
+      "stablecoin_ids": [
+        "sog_st_fei"
+      ],
+      "organization_ids": [
+        "sog_issuer_fei_protocol"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "fei_v2_reserve_and_redemption_design"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_frax_app",
+      "source_file": "data/evidence-pr033.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Frax Finance app",
+      "publisher": "Frax Finance",
+      "source_type": "protocol_app",
+      "url": "https://app.frax.finance/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "selected_reactivated_reviewed_evidence_ids": [
+    "sog_src_eurc_mint_page"
+  ],
+  "selection_boundary": {
+    "canonical_change_authorized": false,
+    "manual_review_required": true,
+    "exact_source_capture_required": true,
+    "replacement_requires_reviewed_claim_scope_equivalence": true,
+    "public_surface_allowed": false,
+    "batch_4_authorized": false,
+    "review_gate_required": true
+  },
+  "source_digest_sha256": "e1e5b76c4f9f30ae861149bb2cfef8859dc40a9c37892ad4c390d24f38a781dc",
+  "generation_digest_sha256": "ed0b91c142875a30bd26187575020bd3720b1578b119c99fdf4673e7739982df",
+  "next_work_item": "REVIEW GATE"
+}
