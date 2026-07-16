@@ -513,7 +513,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "403: Forbidden",
-        "sampled_body_sha256": "8601063013389909d4fa4673efd904c472f9bd4fe66b3a5a0dd729de9ad5b576",
+        "sampled_body_sha256": "a6604663567416676e05605797bb1d99c39a432d6811c4dd28da0f81bc2e299e",
         "sampled_body_bytes": 5525
       },
       "exact_cdx_probe": {
@@ -612,7 +612,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Page not found | Curve Knowledge Hub",
-        "sampled_body_sha256": "1dadb2974d19cf76c1e0595acec11e488ba0106f43dcbf5d30c74efe66b7d9ca",
+        "sampled_body_sha256": "636b0e6f7d2f1a772ec63f0880cbb54b0b0a929e1754ce089ddd62577befe0ff",
         "sampled_body_bytes": 9179
       },
       "exact_cdx_probe": {
@@ -690,7 +690,7 @@
         "redirected": false,
         "content_type": "text/html",
         "title": "The Maker Protocol White Paper | Feb 2020",
-        "sampled_body_sha256": "76a6d95c2fb1fff4a7919fc8c71adcd10f9703495d232af079810ed409b25776",
+        "sampled_body_sha256": "3b241b9800735713e3cfb3036c5ae39efce9c3a5dd767a0c053a97c24255388e",
         "sampled_body_bytes": 173401
       },
       "exact_cdx_probe": {
@@ -1176,7 +1176,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Circle Announces Fully-reserved, Euro-backed Stablecoin | Circle",
-        "sampled_body_sha256": "3bea47ccbb0783a5c7dfd2815bdf04ed7acff37069ec97f68b3d707cccfd26a4",
+        "sampled_body_sha256": "65331925f521dbb4da3faa9abdabd0dc9e70423c83b2e65a1862bc7d67811492",
         "sampled_body_bytes": 246035
       },
       "exact_cdx_probe": {
