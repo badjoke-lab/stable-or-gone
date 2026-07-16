@@ -1,0 +1,53 @@
+{
+  "schema_version": "3.0",
+  "config_id": "sog_evidence_archive_maintenance_queue_v3_pr383_v1",
+  "status": "internal_history_v2_queue_refresh",
+  "review_pr": 383,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr380-review-gate-pr381.json",
+  "history_contract": "config/evidence-archive-review-history-v2-pr382.json",
+  "history_manifest": "docs/migration/evidence-archive-review-history-manifest-v2-pr382.json",
+  "history_audit": "docs/migration/evidence-archive-review-history-audit-v2-pr382.json",
+  "source_checkpoint": "docs/migration/current-canonical-checkpoint.json",
+  "prior_queue": "docs/migration/evidence-archive-maintenance-queue-v2-pr378.json",
+  "selection": {
+    "mode": "history_v2_eligibility_then_deterministic_priority_then_evidence_id",
+    "maximum_selected_count": 10,
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ],
+    "requires_archive_not_recorded": true,
+    "exclude_alias_identities": true,
+    "exclude_web_archive_source_urls": true,
+    "exclude_reviewed_suppressed": true,
+    "include_reviewed_reactivated": true,
+    "manual_review_required": true,
+    "canonical_change_authorized": false
+  },
+  "expected": {
+    "canonical_evidence_count": 559,
+    "archive_recorded_count": 399,
+    "archive_not_recorded_count": 160,
+    "history_source_count": 3,
+    "history_event_count": 30,
+    "reviewed_identity_count": 30,
+    "reviewed_suppressed_count": 10,
+    "reviewed_reactivated_eligible_count": 1,
+    "reviewed_reactivated_evidence_ids": [
+      "sog_src_eurc_mint_page"
+    ],
+    "selected_count": 10
+  },
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_work_item": "REVIEW GATE"
+}
