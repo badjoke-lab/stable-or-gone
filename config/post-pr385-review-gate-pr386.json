@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr385_review_gate_pr386_v1",
+  "status": "mandatory_review_gate_contract",
+  "review_pr": 386,
+  "reviewed_at": "2026-07-16",
+  "expected": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 406,
+    "archive_not_recorded": 153,
+    "pr385_selected": 10,
+    "pr385_changed": 8,
+    "pr385_dated_archives": 7,
+    "pr385_source_replacements": 1,
+    "pr385_no_safe_change": 2,
+    "history_v2_sources": 3,
+    "history_v2_events": 30,
+    "history_v2_identities": 30,
+    "expected_history_v3_sources": 4,
+    "expected_history_v3_events": 40,
+    "expected_history_v3_identities": 39,
+    "expected_effective_archive_present": 26,
+    "expected_effective_invalid_removed": 1,
+    "expected_effective_no_safe_change": 11,
+    "expected_effective_source_replacement": 1,
+    "expected_reviewed_unresolved_total": 13,
+    "expected_reviewed_suppressed": 12,
+    "expected_reviewed_reactivated_eligible": 1
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 387,
+      "work_item": "Evidence Archive Review-History Contract v3 Update",
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    {
+      "pr": 388,
+      "work_item": "Evidence Archive Maintenance Queue v4 Refresh",
+      "maximum_selected_count": 10,
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 5",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "boundaries": {
+    "current_pr_canonical_data_change_allowed": false,
+    "current_pr_public_surface_change_allowed": false,
+    "historical_output_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  }
+}
