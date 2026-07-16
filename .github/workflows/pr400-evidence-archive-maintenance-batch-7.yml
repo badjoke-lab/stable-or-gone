@@ -117,9 +117,9 @@ jobs:
           if(handoff.next_work_item?.decision!=='review_gate_required')throw new Error('PR #400 must end at a review gate');
           NODE
           } 2>&1 | tee -a /tmp/pr400-all.txt
-      - name: Verify generated outputs are committed
+      - name: Verify generated outputs are deterministic
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code 2>&1 | tee -a /tmp/pr400-all.txt
+        run: node scripts/build-evidence-archive-maintenance-batch-7-pr400.mjs --check 2>&1 | tee -a /tmp/pr400-all.txt
       - name: Astro check and build
         run: |
           set -o pipefail
