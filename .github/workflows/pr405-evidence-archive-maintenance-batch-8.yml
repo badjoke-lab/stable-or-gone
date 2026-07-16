@@ -15,7 +15,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: pr405-evidence-archive-maintenance-batch-8
+  group: pr405-evidence-archive-maintenance-batch-8-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
