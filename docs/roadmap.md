@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #382 active
+Status: canonical execution schedule — PR #383 active
 
 Historical roadmap authority through PR #366 remains archived and does not override this file.
 
@@ -20,8 +20,8 @@ Archive recorded: 399
 Archive not recorded: 160
 
 PR #381 Post-PR #380 Review Gate: complete
-PR #382 Evidence Archive Review-History Contract v2 Update: active; complete on merge
-PR #383 Evidence Archive Maintenance Queue v3 Refresh: next after PR #382
+PR #382 Evidence Archive Review-History Contract v2 Update: complete
+PR #383 Evidence Archive Maintenance Queue v3 Refresh: active; complete on merge
 REVIEW GATE: mandatory after PR #383
 ```
 
@@ -33,34 +33,28 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr382-evidence-archive-review-history-v2-activation.md
-docs/quality/evidence-archive-review-history-contract-v2-pr382-spec.md
-config/evidence-archive-review-history-v2-pr382.json
+docs/roadmap-amendments/2026-07-16-pr383-evidence-archive-maintenance-queue-v3-activation.md
+docs/quality/evidence-archive-maintenance-queue-v3-pr383-spec.md
+config/evidence-archive-maintenance-queue-v3-pr383.json
 docs/migration/post-pr380-review-gate-pr381.json
-docs/migration/evidence-archive-maintenance-outcomes-pr380.json
+config/evidence-archive-review-history-v2-pr382.json
+docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
+docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 ```
 
 ## Approved bounded sequence
 
 ```text
-PR #382 Evidence Archive Review-History Contract v2 Update — active
-PR #383 Evidence Archive Maintenance Queue v3 Refresh — next
+PR #382 Evidence Archive Review-History Contract v2 Update — complete
+PR #383 Evidence Archive Maintenance Queue v3 Refresh — active
 REVIEW GATE
 ```
 
-## History v2 objective
+## Queue v3 objective
 
-The current PR #377 history files are preserved as reviewed v1 outputs. PR #382 creates new versioned outputs from three immutable sources:
+PR #383 must start from 160 archive-not-recorded Evidence identities and apply the reviewed PR #382 history v2 eligibility contract.
 
-```text
-PR #360 Evidence correction outcomes
-PR #365 Evidence archive-maintenance outcomes
-PR #380 Evidence archive-maintenance outcomes
-```
-
-The history key remains `evidence_id`; latest reviewed event wins.
-
-Expected inventory:
+History v2 inventory:
 
 ```text
 history sources: 3
@@ -75,16 +69,28 @@ reviewed unresolved suppressed: 10
 reviewed reactivated eligible: 1
 ```
 
-The sole reviewed reactivated identity is `sog_src_eurc_mint_page`. Its current replacement URL has no recorded archive and may enter PR #383's fresh manual-review queue. No automatic canonical change is allowed.
+The ten reviewed suppressed identities remain excluded. `sog_src_eurc_mint_page` is the sole reviewed reactivated identity and must be selected for fresh manual archive review before ordinary unreviewed archive gaps.
+
+After that reviewed-reactivated tier, the queue preserves the existing deterministic non-ranking priority order:
+
+```text
+regulator / court / legal
+official issuer / protocol / product
+reserve / attestation / audit
+high-quality reporting / research
+other reviewed source
+```
+
+Ties use Evidence ID. The queue selects at most ten identities and authorizes no canonical change.
 
 ## Required outputs
 
 ```text
-docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
-docs/migration/evidence-archive-review-history-audit-v2-pr382.json
+docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
+docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json
 ```
 
-PR #382 generates no queue. PR #383 is the only authorized consumer before the next review gate.
+The outputs remain internal and manual-review-only. PR #378 queue and delta are immutable historical inputs.
 
 ## Deferred and not approved
 
@@ -101,4 +107,4 @@ automatic canonical promotion
 
 ## Next gate
 
-After PR #383, stop at `REVIEW GATE`. No canonical archive work is authorized until the fresh v3 queue is reviewed.
+After PR #383, stop at `REVIEW GATE`. No canonical archive work is authorized until the fresh v3 queue and delta are reviewed.
