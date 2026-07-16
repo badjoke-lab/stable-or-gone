@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr383_review_gate_pr384_v1",
+  "status": "mandatory_review_gate_contract",
+  "review_pr": 384,
+  "reviewed_at": "2026-07-16",
+  "expected": {
+    "assets": 112,
+    "evidence": 559,
+    "archive_recorded": 399,
+    "archive_not_recorded": 160,
+    "history_sources": 3,
+    "history_events": 30,
+    "reviewed_identities": 30,
+    "reviewed_unresolved_suppressed": 10,
+    "reactivated_reviewed_identities": 1,
+    "eligible_pool": 117,
+    "selected_queue_candidates": 10,
+    "maximum_selected_candidates": 10,
+    "selected_reactivated_candidates": 1,
+    "queue_v2_added": 9,
+    "queue_v2_removed": 9,
+    "queue_v2_retained": 1
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 385,
+      "work_item": "Evidence and Archive Maintenance Batch 4",
+      "scope": "Manually review exactly the ten PR #383 Queue v3 identities. Add a dated exact archive only after exact-source verification, use a reviewed source replacement only after publisher/product and claim-scope equivalence review, otherwise record reviewed no-safe-change. Canonical Evidence may change only through explicit reviewed outcomes.",
+      "canonical_evidence_change_allowed": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 5",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "boundaries": {
+    "current_pr_canonical_data_change_allowed": false,
+    "current_pr_public_surface_change_allowed": false,
+    "historical_output_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  }
+}
