@@ -24,6 +24,8 @@ docs/migration/evidence-archive-review-history-manifest-v3-pr387.json
 docs/migration/evidence-archive-review-history-audit-v3-pr387.json
 docs/migration/post-pr385-review-gate-pr386.json
 docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
+docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
+docs/migration/evidence-archive-maintenance-queue-v4-pr388-delta.json
 ```
 
 ## Current workstream
@@ -58,15 +60,32 @@ reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 1
 ```
 
-The twelve reviewed suppressed identities remain excluded. The sole reviewed-reactivated identity is:
+## Reviewed Queue v4 result
+
+```text
+Eligible pool: 108
+Selected: 10
+Reviewed suppressed excluded: 12
+Reviewed reactivated selected: 1
+Added / removed / retained versus Queue v3: 9 / 9 / 1
+```
+
+Selected Evidence identities:
 
 ```text
 sog_src_fdusd_site
+sog_src_frax_docs
+sog_src_frax_docs_frax
+sog_src_frax_official_site
+sog_src_gho_bridge_batch_c
+sog_src_gho_facilitators_batch_c
+sog_src_gho_gsm_batch_c
+sog_src_gho_launch_batch_c
+sog_src_gusd_gemini_official
+sog_src_lusd_liquity_docs
 ```
 
-It must be included in Queue v4 before ordinary unreviewed archive gaps. This is queue eligibility only and authorizes no archive, source replacement, or canonical promotion.
-
-After the reviewed-reactivated tier, candidates use the existing deterministic non-ranking source-priority order and Evidence ID tie-break. PR #388 may select at most ten candidates.
+`sog_src_fdusd_site` is the sole reviewed-reactivated identity and is selection tier 0. The remaining nine identities are ordinary unreviewed archive gaps. Every selected row remains pending manual review and authorizes no canonical change.
 
 ## Boundaries
 
