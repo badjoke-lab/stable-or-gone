@@ -14,8 +14,8 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded after reviewed decisions: 440
-Archive not recorded after reviewed decisions: 119
+Archive recorded after reviewed decisions: 430
+Archive not recorded after reviewed decisions: 129
 PR #404 Post-PR #403 Review Gate: complete
 PR #405 Evidence and Archive Maintenance Batch 8: active; complete on merge
 REVIEW GATE: mandatory after PR #405
@@ -36,6 +36,8 @@ config/evidence-archive-maintenance-batch-8-pr405.json
 config/evidence-archive-maintenance-batch-8-pr405-decisions.json
 docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
 docs/migration/evidence-archive-maintenance-batch-8-pr405-review-queue.json
+docs/migration/evidence-archive-maintenance-outcomes-pr405.json
+docs/migration/evidence-archive-maintenance-batch-8-pr405-reviewed-handoff.json
 ```
 
 ## Reviewed identities
@@ -55,19 +57,19 @@ sog_src_spot_v2_rollout_batch_b
 
 ## Reviewed outcome
 
-The bounded probe completed for all ten canonical source URLs. Manual review accepted ten exact canonical-source HTTP 200 captures as dated archive additions.
+The bounded live and exact-CDX probe completed for all ten canonical source URLs. Manual review recorded `reviewed_no_safe_change` for all ten identities because archived payload content was not independently inspected against each claim scope. Exact-source metadata alone is not sufficient for canonical archive promotion.
 
 ```text
-dated_exact_archive_added: 10
+dated_exact_archive_added: 0
 reviewed_source_replacement: 0
-reviewed_no_safe_change: 0
-Archive recorded: 430 -> 440
-Archive not recorded: 129 -> 119
+reviewed_no_safe_change: 10
+Archive recorded: 430 -> 430
+Archive not recorded: 129 -> 129
 ```
 
 ## Boundaries
 
-No Evidence identity, Evidence Relation, non-Evidence canonical record, Market Access record, ranking, or public surface changes. Automatic promotion is prohibited.
+No canonical Evidence field, Evidence identity, Evidence Relation, non-Evidence canonical record, Market Access record, ranking, or public surface changes. Automatic promotion is prohibited.
 
 Batch 9 and all unrelated workstreams remain unapproved.
 
