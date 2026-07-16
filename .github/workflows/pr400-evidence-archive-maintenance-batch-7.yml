@@ -16,7 +16,7 @@ permissions:
 
 concurrency:
   group: pr400-evidence-archive-maintenance-batch-7
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   validate:
