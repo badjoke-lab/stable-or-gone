@@ -8,7 +8,8 @@
     "publisher": "Frax Finance",
     "claim_scope": "FRAX / frxUSD ecosystem documentation, protocol design, collateral, AMO, governance, and related stablecoin context",
     "reliability": "high",
-    "notes": "PR-033 source. Use as protocol documentation entry point, not as a fiat redemption source."
+    "notes": "PR-033 source. Use as protocol documentation entry point, not as a fiat redemption source.",
+    "archived_url": "https://web.archive.org/web/20260509195515/https://docs.frax.com/"
   },
   {
     "id": "sog_src_frax_app",
@@ -53,7 +54,8 @@
     "publisher": "First Digital",
     "claim_scope": "FDUSD overview, issuer context, reserve, redemption, and access restrictions",
     "reliability": "medium",
-    "notes": "PR-033 source. Use for high-level FDUSD issuer and product statements."
+    "notes": "PR-033 source. Use for high-level FDUSD issuer and product statements.",
+    "archived_url": "https://web.archive.org/web/20260416065330/https://www.firstdigitallabs.com/fdusd"
   },
   {
     "id": "sog_src_fdusd_reserve_entry",
