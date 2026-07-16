@@ -1,9 +1,9 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #388 active
+Status: canonical execution schedule — PR #390 active
 
-Historical roadmap authority through PR #366 remains archived and does not override this file.
+Historical roadmap authority through PR #389 remains archived and does not override this file.
 
 ## Current position
 
@@ -16,12 +16,14 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded: 406
-Archive not recorded: 153
+Archive recorded before PR #390: 406
+Archive not recorded before PR #390: 153
+Archive recorded after reviewed decisions: 416
+Archive not recorded after reviewed decisions: 143
 
-PR #387 Evidence Archive Review-History Contract v3 Update: complete
-PR #388 Evidence Archive Maintenance Queue v4 Refresh: active; complete on merge
-REVIEW GATE: mandatory after PR #388
+PR #389 Post-PR #388 Review Gate: complete
+PR #390 Evidence and Archive Maintenance Batch 5: active; complete on merge
+REVIEW GATE: mandatory after PR #390
 ```
 
 ## Current authority
@@ -32,28 +34,26 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr388-evidence-archive-maintenance-queue-v4-activation.md
-docs/quality/evidence-archive-maintenance-queue-v4-pr388-spec.md
-config/evidence-archive-maintenance-queue-v4-pr388.json
-config/evidence-archive-review-history-v3-pr387.json
-docs/migration/evidence-archive-review-history-manifest-v3-pr387.json
-docs/migration/evidence-archive-review-history-audit-v3-pr387.json
-docs/migration/post-pr385-review-gate-pr386.json
-docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
+docs/roadmap-amendments/2026-07-16-pr390-evidence-archive-maintenance-batch-5-activation.md
+docs/quality/evidence-archive-maintenance-batch-5-pr390-spec.md
+config/evidence-archive-maintenance-batch-5-pr390.json
+config/evidence-archive-maintenance-batch-5-pr390-decisions.json
+docs/migration/post-pr388-review-gate-pr389.json
 docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
 docs/migration/evidence-archive-maintenance-queue-v4-pr388-delta.json
+docs/migration/evidence-archive-maintenance-batch-5-pr390-review-queue.json
 ```
 
-## Reviewed Queue v4 result
+## Reviewed Batch 5 result
 
 ```text
-Eligible pool: 108
 Selected: 10
-Reviewed suppressed excluded: 12
-Reviewed reactivated selected: 1
-Added versus Queue v3: 9
-Removed versus Queue v3: 9
-Retained versus Queue v3: 1
+Changed: 10
+Dated exact archives added: 10
+Reviewed source replacements: 0
+Reviewed no-safe-change: 0
+Archive coverage transition: 406 / 153 -> 416 / 143
+Evidence identities / relations: 559 / 559
 ```
 
 Selected Evidence identities:
@@ -71,35 +71,26 @@ sog_src_gusd_gemini_official
 sog_src_lusd_liquity_docs
 ```
 
-`sog_src_fdusd_site` is the sole reviewed-reactivated identity, remains archive-not-recorded, and is selection tier 0. The remaining nine identities are ordinary unreviewed archive gaps. Every selected row remains pending manual review and authorizes no canonical change.
-
-## Selection rule
-
-Queue v4 starts from 153 archive-not-recorded Evidence identities, excludes aliases, Web Archive source URLs, missing source URLs, and all twelve History v3 suppressions, then uses:
-
-```text
-reviewed-reactivated tier
-regulator / court / legal
-official issuer / protocol / product
-reserve / attestation / audit
-high-quality reporting / research
-other reviewed source
-Evidence ID tie-break
-```
+Each accepted archive uses a reviewed HTTP 200 capture for the exact canonical source URL. The only canonical field changed on each selected row is `archived_url`.
 
 ## Required outputs
 
 ```text
-docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
-docs/migration/evidence-archive-maintenance-queue-v4-pr388-delta.json
+docs/migration/evidence-archive-maintenance-batch-5-pr390-review-queue.json
+docs/migration/evidence-archive-maintenance-outcomes-pr390.json
+docs/migration/evidence-archive-maintenance-batch-5-pr390-reviewed-handoff.json
+docs/migration/current-canonical-checkpoint.json
+docs/migration/current-stats-history-checkpoint.json
+data/stats-history.json
+docs/migration/registry-release-integrity-baseline.json
 ```
 
-The outputs remain internal and manual-review-only. Queue v3, History v3, and all canonical/release inputs remain immutable.
+Canonical identity counts, Evidence Relations, assets, deployments, Market Access records, non-Evidence record families, and public surfaces must remain unchanged.
 
 ## Deferred and not approved
 
 ```text
-Evidence and Archive Maintenance Batch 5
+Evidence and Archive Maintenance Batch 6
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
@@ -111,4 +102,4 @@ automatic canonical promotion
 
 ## Next gate
 
-After PR #388, stop at `REVIEW GATE`. No canonical archive work or other expansion is authorized until the fresh Queue v4 and delta are reviewed.
+After PR #390, stop at `REVIEW GATE`. No later archive batch or other canonical expansion is authorized until the Batch 5 outcomes are reviewed.
