@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "queue_id": "sog_evidence_archive_maintenance_batch_3_pr380_review_queue",
-  "status": "internal_manual_review_probe_complete",
+  "status": "reviewed_complete",
   "public_output": false,
   "review_pr": 380,
   "reviewed_at": "2026-07-16",
@@ -165,14 +165,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260511180442/https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+      "accepted_capture_timestamp": "20260511180442",
+      "accepted_capture_digest": "XRQVHYF2ABFAETB3H2DSH4BA6MSCK7G3",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact canonical source URL returned a successful dated HTTP 200 capture and the captured page identity matches the technical-documentation claim scope.",
+      "remaining_uncertainty": "The archive preserves the reviewed source version only; later documentation revisions remain possible."
     },
     {
       "evidence_id": "sog_src_circle_transparency",
@@ -327,14 +327,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260709220608/https://www.circle.com/transparency",
+      "accepted_capture_timestamp": "20260709220608",
+      "accepted_capture_digest": "FMGGNPD5FIJKFKCHQUJFM7FHATINBEW2",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact Circle transparency URL returned a successful dated HTTP 200 capture and remains the same transparency entry point.",
+      "remaining_uncertainty": "The archive preserves one reviewed transparency-page version and does not establish later reserve changes."
     },
     {
       "evidence_id": "sog_src_circle_usdc_product",
@@ -489,14 +489,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260710145752/https://www.circle.com/usdc",
+      "accepted_capture_timestamp": "20260710145752",
+      "accepted_capture_digest": "QSNMUUQGDQKEPXZO5YUDNVTJDBHRZMXI",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact Circle USDC product URL returned a successful dated HTTP 200 capture and preserves the official product-page identity.",
+      "remaining_uncertainty": "The archive preserves the reviewed product-page version only; later product or availability changes remain possible."
     },
     {
       "evidence_id": "sog_src_crvusd_curve_docs",
@@ -588,14 +588,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20250425052808/https://docs.curve.fi/crvUSD/overview/",
+      "accepted_capture_timestamp": "20250425052808",
+      "accepted_capture_digest": "TD5YKPUV6URV2LYBDK3JHGZB3WROKNOA",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The live endpoint currently blocks the probe, but Wayback returned a successful exact-source HTTP 200 capture for the canonical crvUSD documentation URL.",
+      "remaining_uncertainty": "The archived documentation reflects the captured 2025 source version and may not represent later documentation changes."
     },
     {
       "evidence_id": "sog_src_crvusd_curve_lifecycle_event",
@@ -666,14 +666,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260210181555/https://resources.curve.finance/crvusd/overview/",
+      "accepted_capture_timestamp": "20260210181555",
+      "accepted_capture_digest": "HNTCPFZTGCWG5CXL4N6AWOTIGZWZ4AHO",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The live resource now returns 404, while Wayback returned a successful exact-source HTTP 200 capture for the recorded Curve Knowledge Hub URL.",
+      "remaining_uncertainty": "The archived lifecycle page preserves the reviewed source version; a later canonical replacement was not inferred."
     },
     {
       "evidence_id": "sog_src_dai_whitepaper_pr354",
@@ -828,14 +828,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260709092101/https://makerdao.com/en/whitepaper/",
+      "accepted_capture_timestamp": "20260709092101",
+      "accepted_capture_digest": "PIHGM6GSFIEDAZDXDCFHAO2SXSQRJZWC",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact Maker Protocol white-paper URL returned a successful dated HTTP 200 capture and the live page title remains the same white-paper identity.",
+      "remaining_uncertainty": "The archive preserves the reviewed white-paper page version and does not imply that all protocol documentation is unchanged."
     },
     {
       "evidence_id": "sog_src_eurc_circle_page",
@@ -990,14 +990,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260709220612/https://www.circle.com/eurc",
+      "accepted_capture_timestamp": "20260709220612",
+      "accepted_capture_digest": "NAK4XFJUC5EBDXAIHHQX6YFZPY63K6VQ",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact Circle EURC URL returned a successful dated HTTP 200 capture and preserves the official EURC product-page identity.",
+      "remaining_uncertainty": "The archive preserves one reviewed EURC-page version; later availability and chain changes remain possible."
     },
     {
       "evidence_id": "sog_src_eurc_developer_docs",
@@ -1152,14 +1152,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260701124001/https://developers.circle.com/",
+      "accepted_capture_timestamp": "20260701124001",
+      "accepted_capture_digest": "SFXPGV2IUNMJCRGVBC2TOLBNJQV7NUHU",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact Circle developer-docs root returned a successful dated HTTP 200 capture and matches the canonical documentation-entry-point claim scope.",
+      "remaining_uncertainty": "The archive preserves the documentation entry point, not every chain-specific integration page."
     },
     {
       "evidence_id": "sog_src_eurc_launch_2022",
@@ -1314,14 +1314,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20241212145508/https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+      "accepted_capture_timestamp": "20241212145508",
+      "accepted_capture_digest": "ZV3GWDUKWMFRNR7WVGTVLAJFO2WFGYIJ",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact official launch-announcement URL returned a successful dated HTTP 200 capture and preserves the historical Euro Coin launch source.",
+      "remaining_uncertainty": "The archive was captured after the 2022 publication date but preserves the same official announcement URL and title."
     },
     {
       "evidence_id": "sog_src_eurc_mint_page",
@@ -1351,20 +1351,25 @@
         "sampled_captures": [],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "reviewed_source_replacement",
       "accepted_archived_url": null,
       "accepted_capture_timestamp": null,
       "accepted_capture_digest": null,
-      "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "accepted_replacement_url": "https://www.circle.com/circle-mint",
+      "reviewer_reason": "The recorded Circle Mint URL redirects directly to the current Circle Mint product page with the same publisher, product identity, and business minting and conversion claim scope. No exact dated capture exists for the old URL.",
+      "remaining_uncertainty": "Future Circle route changes remain possible; no archive URL is added without an exact capture of the accepted canonical route."
     }
   ],
   "boundaries": {
-    "canonical_data_changed": false,
+    "canonical_data_changed": true,
     "automatic_capture_promotion": false,
     "automatic_source_replacement": false,
     "public_surface_changed": false
+  },
+  "outcome_counts": {
+    "dated_exact_archive_added": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_no_safe_change": 0
   }
 }

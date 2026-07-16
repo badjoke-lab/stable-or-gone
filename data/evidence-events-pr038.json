@@ -42,7 +42,8 @@
     "accessed_at": "2026-06-08",
     "reliability": "medium",
     "claim_scope": "crvusd_protocol_lifecycle_context",
-    "notes": "PR-038 evidence for crvUSD launch and LLAMMA context."
+    "notes": "PR-038 evidence for crvUSD launch and LLAMMA context.",
+    "archived_url": "https://web.archive.org/web/20260210181555/https://resources.curve.finance/crvusd/overview/"
   },
   {
     "id": "sog_src_usde_ethena_lifecycle_event",

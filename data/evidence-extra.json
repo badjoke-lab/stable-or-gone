@@ -64,7 +64,8 @@
     "publisher": "Circle",
     "claim_scope": "EURC overview, euro backing, 1:1 euro redemption, MiCA context, Circle Mint access, supported chains, and rename context from Euro Coin / EUROC",
     "reliability": "medium",
-    "notes": "PR-028B primary overview source. Circle states EURC is MiCA-compliant, redeemable 1:1 for euro, backed 100% by euro, supported by Circle Mint for qualified businesses, and accessible across multiple chains."
+    "notes": "PR-028B primary overview source. Circle states EURC is MiCA-compliant, redeemable 1:1 for euro, backed 100% by euro, supported by Circle Mint for qualified businesses, and accessible across multiple chains.",
+    "archived_url": "https://web.archive.org/web/20260709220612/https://www.circle.com/eurc"
   },
   {
     "id": "sog_src_eurc_transparency",
@@ -82,7 +83,7 @@
     "stablecoin_id": "sog_st_eurc",
     "source_type": "product_page",
     "title": "Circle Mint product page",
-    "url": "https://www.circle.com/mint",
+    "url": "https://www.circle.com/circle-mint",
     "publisher": "Circle",
     "claim_scope": "Circle Mint business access, conversion, on/off-ramp, and institutional workflow context",
     "reliability": "medium",
@@ -97,7 +98,8 @@
     "publisher": "Circle",
     "claim_scope": "Circle developer documentation entry point for EURC integration and supported-chain follow-up",
     "reliability": "high",
-    "notes": "PR-028B docs entry point. Use for future chain-specific contract and integration review."
+    "notes": "PR-028B docs entry point. Use for future chain-specific contract and integration review.",
+    "archived_url": "https://web.archive.org/web/20260701124001/https://developers.circle.com/"
   },
   {
     "id": "sog_src_usdp_paxos_page",
@@ -275,7 +277,8 @@
     "publisher": "Circle",
     "claim_scope": "Euro Coin / EUROC official availability and Ethereum launch on June 30, 2022",
     "reliability": "high",
-    "notes": "Circle announced that Euro Coin would be available and officially launch on Ethereum on June 30, 2022; SOG treats later EURC branding as the same asset identity."
+    "notes": "Circle announced that Euro Coin would be available and officially launch on Ethereum on June 30, 2022; SOG treats later EURC branding as the same asset identity.",
+    "archived_url": "https://web.archive.org/web/20241212145508/https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc"
   },
   {
     "id": "sog_src_usdc_terms_pr354",
@@ -304,7 +307,8 @@
     "accessed_at": "2026-07-11",
     "reliability": "high",
     "claim_scope": "protocol asset structure, collateralized generation, vault collateral control, and absence of conventional issuer redemption claim",
-    "notes": "PR #354 primary protocol source. Describes DAI as collateral-backed and generated through protocol Vaults against locked collateral rather than issued as a conventional corporate liability."
+    "notes": "PR #354 primary protocol source. Describes DAI as collateral-backed and generated through protocol Vaults against locked collateral rather than issued as a conventional corporate liability.",
+    "archived_url": "https://web.archive.org/web/20260709092101/https://makerdao.com/en/whitepaper/"
   },
   {
     "id": "sog_src_busd_paxos_statement_pr354",
