@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #402 Evidence Archive Review-History Contract v6 Update.
+Current mandatory authority: PR #403 Evidence Archive Maintenance Queue v7 Refresh.
 
 Current authority:
 
@@ -11,13 +11,13 @@ docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/migration/post-pr400-review-gate-pr401.json
-docs/roadmap-amendments/2026-07-16-pr402-evidence-archive-review-history-v6-activation.md
-docs/quality/evidence-archive-review-history-contract-v6-pr402-spec.md
+docs/roadmap-amendments/2026-07-16-pr403-evidence-archive-maintenance-queue-v7-activation.md
+docs/quality/evidence-archive-maintenance-queue-v7-pr403-spec.md
+config/evidence-archive-maintenance-queue-v7-pr403.json
 config/evidence-archive-review-history-v6-pr402.json
-config/evidence-archive-review-history-v5-pr397.json
-docs/migration/evidence-archive-review-history-manifest-v5-pr397.json
-docs/migration/evidence-archive-review-history-audit-v5-pr397.json
-docs/migration/evidence-archive-maintenance-outcomes-pr400.json
+docs/migration/evidence-archive-review-history-manifest-v6-pr402.json
+docs/migration/evidence-archive-review-history-audit-v6-pr402.json
+docs/migration/evidence-archive-maintenance-queue-v6-pr398.json
 ```
 
 ## Current workstream
@@ -30,26 +30,24 @@ Archive recorded: 430
 Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
-PR #401 Post-PR #400 Review Gate: complete
-PR #402 Evidence Archive Review-History Contract v6 Update: active; complete on merge
-PR #403 Evidence Archive Maintenance Queue v7 Refresh: approved next
+PR #402 Evidence Archive Review-History Contract v6 Update: complete
+PR #403 Evidence Archive Maintenance Queue v7 Refresh: active; complete on merge
 REVIEW GATE: mandatory after PR #403
 ```
 
-## History v6 binding
+## Queue v7 binding
 
 ```text
-history sources: 7
-history events: 70
-reviewed Evidence identities: 68
-archive present: 50
-invalid archive removed: 1
-no-safe-change: 17
-source replacement: 0
-reviewed unresolved suppressed: 18
-reviewed reactivated eligible: 0
+History sources / events / identities: 7 / 70 / 68
+Reviewed unresolved suppressed: 18
+Reviewed reactivated eligible: 0
+Eligible pool: 78
+Selected: 10
+Selected reactivated: 0
 ```
 
-History v5 remains immutable. PR #402 appends exactly ten PR #400 review events and may create only the versioned History v6 manifest, audit, and internal validation material.
+Queue v7 is non-ranking and manual-review only. It excludes all eighteen reviewed suppressions, contains no reviewed-reactivated identity, and selects at most ten ordinary archive gaps using source-priority bucket then Evidence ID ordering.
 
-No canonical, checkpoint, statistics, release-baseline, or public change is authorized. Queue v7 is not generated in PR #402. Batch 8 remains unapproved.
+PR #403 may create only the versioned Queue v7 and Queue v6 delta plus internal validation material. It may not change canonical records, checkpoints, statistics, release baselines, public surfaces, History v6, or Queue v6.
+
+Archive Batch 8 is not authorized. After PR #403, stop at `REVIEW GATE`.
