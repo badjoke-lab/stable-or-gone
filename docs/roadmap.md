@@ -1,9 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #399 review gate active
-
-Historical roadmap authority through PR #398 remains archived and does not override this file.
+Status: canonical execution schedule — PR #400 active
 
 ## Current position
 
@@ -16,12 +14,14 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded: 425
-Archive not recorded: 134
-
-PR #398 Evidence Archive Maintenance Queue v6 Refresh: complete
-PR #399 Post-PR #398 Review Gate: active; complete on merge
-PR #400 Evidence and Archive Maintenance Batch 7: approved next
+Archive recorded before PR #400: 425
+Archive not recorded before PR #400: 134
+Archive recorded after reviewed decisions: 430
+Archive not recorded after reviewed decisions: 129
+Archive recorded: 430
+Archive not recorded: 129
+PR #399 Post-PR #398 Review Gate: complete
+PR #400 Evidence and Archive Maintenance Batch 7: active; complete on merge
 REVIEW GATE: mandatory after PR #400
 ```
 
@@ -33,37 +33,27 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr399-post-pr398-review-gate.md
-docs/quality/post-pr398-review-gate-pr399-spec.md
-config/post-pr398-review-gate-pr399.json
-docs/migration/evidence-archive-maintenance-queue-v6-pr398.json
-docs/migration/evidence-archive-maintenance-queue-v6-pr398-delta.json
+docs/migration/post-pr398-review-gate-pr399.json
+docs/roadmap-amendments/2026-07-16-pr400-evidence-archive-maintenance-batch-7-activation.md
+docs/quality/evidence-archive-maintenance-batch-7-pr400-spec.md
+config/evidence-archive-maintenance-batch-7-pr400.json
+config/evidence-archive-maintenance-batch-7-pr400-decisions.json
 ```
 
-## Review finding
+## Reviewed Batch 7 result
 
 ```text
-History sources / events / identities: 6 / 60 / 58
-Reviewed unresolved suppressed / reactivated: 13 / 0
-Queue v6 eligible pool / selected: 88 / 10
-Added / removed / retained versus Queue v5: 10 / 10 / 0
+Selected: 10
+Changed: 5
+Dated exact archives added: 5
+Reviewed source replacements: 0
+Reviewed no-safe-change: 5
+Archive coverage transition: 425 / 134 -> 430 / 129
+Evidence identities / Relations: 559 / 559
 ```
 
-The ten Queue v6 identities are fresh unreviewed archive gaps, all remain manual-review only, and none is presumed to change.
+The five accepted canonical changes add only reviewed exact `archived_url` values. The five no-safe-change rows remain unchanged. No Evidence identity, Relation, non-Evidence canonical record, or public surface changes.
 
-## Approved next work
-
-```text
-PR #400 Evidence and Archive Maintenance Batch 7
-REVIEW GATE
-```
-
-PR #400 is bounded to exactly the ten Queue v6 identities. Allowed reviewed outcomes are exact dated archive addition, reviewed source replacement, or reviewed no-safe-change. Automatic promotion is prohibited.
-
-## Boundaries
-
-PR #399 is internal authority work only. Canonical records, checkpoints, statistics, release baselines, public surfaces, History v5, Queue v6, and prior outputs remain unchanged.
-
-Evidence and Archive Maintenance Batch 8 and all unrelated workstreams remain unapproved.
+Batch 8 remains unapproved.
 
 After PR #400, stop at `REVIEW GATE`.

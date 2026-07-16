@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_evidence_archive_maintenance_batch_7_pr400",
+  "status": "active_bounded_reviewed_maintenance",
+  "review_pr": 400,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr398-review-gate-pr399.json",
+  "source_queue": "docs/migration/evidence-archive-maintenance-queue-v6-pr398.json",
+  "decision_id": "sog_evidence_archive_maintenance_batch_7_pr400_decisions_v1",
+  "selected_evidence_ids": [
+    "sog_src_nuon_overview_batch_b",
+    "sog_src_paxg_allocation_batch_b",
+    "sog_src_paxg_launch_batch_b",
+    "sog_src_paxg_pricing_batch_b",
+    "sog_src_paxg_redemption_batch_b",
+    "sog_src_paxos_busd_announcement",
+    "sog_src_pyusd_paxos_official",
+    "sog_src_pyusd_paxos_page",
+    "sog_src_pyusd_paypal_official",
+    "sog_src_rai_faq_batch_b"
+  ],
+  "allowed_outcomes": [
+    "dated_exact_archive_added",
+    "reviewed_source_replacement",
+    "reviewed_no_safe_change"
+  ],
+  "input_boundary": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 425,
+    "archive_not_recorded": 134,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "reviewed_result": {
+    "selected": 10,
+    "changed": 5,
+    "dated_exact_archive_added": 5,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 5,
+    "archive_recorded_after": 430,
+    "archive_not_recorded_after": 129,
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_paxg_allocation_batch_b",
+      "sog_src_paxg_pricing_batch_b",
+      "sog_src_paxg_redemption_batch_b",
+      "sog_src_paxos_busd_announcement",
+      "sog_src_pyusd_paxos_official"
+    ]
+  },
+  "review_requirements": {
+    "probe_live_url": true,
+    "probe_exact_wayback_cdx": true,
+    "http_200_required_for_archive": true,
+    "capture_timestamp_required": true,
+    "capture_digest_required": true,
+    "source_replacement_equivalence_review_required": true,
+    "automatic_canonical_write": false
+  },
+  "boundaries": {
+    "new_evidence_identity_allowed": false,
+    "evidence_relation_change_allowed": false,
+    "non_evidence_canonical_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "batch_8_authorized": false
+  },
+  "next_work_item": "REVIEW GATE"
+}

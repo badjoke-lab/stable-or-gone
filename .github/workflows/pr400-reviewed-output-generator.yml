@@ -1,0 +1,153 @@
+name: PR 400 Reviewed Output Generator
+
+on:
+  push:
+    branches:
+      - pr400-evidence-archive-maintenance-batch-7
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pr400-reviewed-output-generator-${{ github.event_name }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr400-evidence-archive-maintenance-batch-7'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate reviewed application outputs
+        run: |
+          node scripts/build-evidence-archive-maintenance-batch-7-pr400.mjs
+          node scripts/build-evidence-archive-maintenance-batch-7-pr400.mjs --check
+      - name: Commit generated outputs
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            data/evidence-batch-b.json \
+            data/evidence-pr033.json \
+            data/evidence.json \
+            data/stats-history.json \
+            docs/migration/evidence-archive-maintenance-batch-7-pr400-review-queue.json \
+            docs/migration/evidence-archive-maintenance-outcomes-pr400.json \
+            docs/migration/evidence-archive-maintenance-batch-7-pr400-reviewed-handoff.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+          if git diff --cached --quiet; then
+            echo 'Reviewed outputs already committed'
+          else
+            git commit -m 'Apply PR 400 reviewed archive maintenance outcomes'
+            git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
+            git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
+          fi
+      - name: Validate reviewed maintenance contract
+        run: |
+          node scripts/validate-evidence-archive-maintenance-batch-7-pr400.mjs
+          npm run validate:active-workstream
+      - name: Validate canonical and release integrity
+        run: |
+          node scripts/validate-registry-evidence-integrity-audit.mjs
+          npm run validate:data
+          npm run validate:evidence-relations-v2
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:v3
+          npm run validate:deployments-v3
+          npm run validate:income-v3
+          npm run validate:parity
+          npm run validate:release-integrity
+          node scripts/validate-non-ui-release-material-current.mjs
+      - name: Validate launch queue
+        run: npm run validate:launch-queue
+      - name: Validate terminal queue
+        run: npm run validate:terminal-queue
+      - name: Validate candidates
+        run: npm run validate:candidates
+      - name: Validate classification
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate events v2
+        run: npm run validate:events-v2
+      - name: Validate migration v3
+        run: npm run validate:migration-v3
+      - name: Validate reproducible build audit
+        run: npm run validate:reproducible-build
+      - name: Validate audited checkpoint
+        run: node scripts/validate-audited-100-checkpoint.mjs
+      - name: Validate UI v3 cleanup
+        run: npm run validate:ui-v3-cleanup
+      - name: Validate deployment audit
+        run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
+      - name: Validate next-growth audit
+        run: node scripts/validate-next-growth-candidate-audit-pr329.mjs
+      - name: Validate statistics
+        run: |
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+          SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+      - name: Verify bounded committed diff
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ \
+            ':!data/evidence-batch-b.json' \
+            ':!data/evidence-pr033.json' \
+            ':!data/evidence.json' \
+            ':!data/stats-history.json'
+          git diff --exit-code origin/main...HEAD -- src/ public/
+      - name: Check and build public site
+        run: |
+          npm run check
+          npm run build
+          npm run verify:public
+      - name: Commit final validation marker
+        run: |
+          mkdir -p docs/quality
+          cat > docs/quality/evidence-archive-maintenance-batch-7-pr400-final-validation.json <<'JSON'
+          {
+            "schema_version": "1.0",
+            "validation_id": "sog_pr400_final_validation_2026_07_16",
+            "status": "all_required_checks_passed",
+            "review_pr": 400,
+            "selected": 10,
+            "changed": 5,
+            "dated_exact_archive_added": 5,
+            "reviewed_source_replacement": 0,
+            "reviewed_no_safe_change": 5,
+            "archive_recorded": 430,
+            "archive_not_recorded": 129,
+            "evidence": 559,
+            "evidence_relations": 559,
+            "canonical_boundary_passed": true,
+            "release_boundary_passed": true,
+            "statistics_boundary_passed": true,
+            "public_build_passed": true,
+            "next_authority": "review_gate_required"
+          }
+          JSON
+          git add docs/quality/evidence-archive-maintenance-batch-7-pr400-final-validation.json
+          if git diff --cached --quiet; then
+            echo 'Final validation marker already committed'
+            exit 0
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git commit -m 'Record PR 400 final validation success'
+          git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
+          git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
