@@ -36,6 +36,8 @@ Reviewed unresolved / suppressed / reactivated: 12 / 12 / 0
 
 History v3 is stale because it excludes PR #390. The later FDUSD exact archive supersedes the previous source-replacement eligibility, so no reviewed-reactivated identity remains.
 
+Validation target: `5 sources / 50 events / 48 identities`, with `12 suppressed / 0 reactivated` and canonical `416 / 143` unchanged.
+
 ## Authority decision
 
 PR #391 authorizes exactly:
