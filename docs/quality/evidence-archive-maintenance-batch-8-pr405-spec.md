@@ -25,23 +25,23 @@ sog_src_spot_v2_rollout_batch_b
 
 ## Reviewed application
 
-The live and exact-source CDX probe completed for all ten identities. Manual review accepted ten dated exact archive additions and zero reviewed no-safe-change outcomes.
+The live and exact-source CDX probe completed for all ten identities. Manual review recorded ten reviewed no-safe-change outcomes and no canonical archive additions.
 
 ```text
-ten dated exact archive additions
+zero dated exact archive additions
 zero reviewed source replacements
-zero reviewed no-safe-change
+ten reviewed no-safe-change
 ```
 
-Every accepted archive is an exact canonical source URL HTTP 200 capture with a reviewed timestamp and digest. The Ampleforth root-domain capture is explicitly limited to the current protocol-era version and must not be used to infer the domain's older unrelated history.
+Exact-source CDX metadata establishes that captures exist, but it does not establish that each archived payload preserves the canonical claim scope. This bounded pass did not independently inspect the archived payload contents. No archive may be promoted from metadata alone. The Ampleforth root domain also contains substantial unrelated historical archive material and requires especially careful payload review.
 
 ## Canonical effect
 
 ```text
 Evidence identities: 559 -> 559
 Evidence Relations: 559 -> 559
-Archive recorded: 430 -> 440
-Archive not recorded: 129 -> 119
+Archive recorded: 430 -> 430
+Archive not recorded: 129 -> 129
 Assets: 112 -> 112
 Deployments: 174 -> 174
 Market Access Records: 8 -> 8
@@ -49,6 +49,7 @@ Market Access Records: 8 -> 8
 
 ## Boundaries
 
+- no canonical Evidence field change;
 - no Evidence identity or Relation changes;
 - no non-Evidence canonical change;
 - no public-surface change;
@@ -56,4 +57,4 @@ Market Access Records: 8 -> 8
 - no automatic source replacement;
 - no Batch 9.
 
-PR #405 stops at `REVIEW GATE` after the reviewed decisions and bounded canonical maintenance are complete.
+PR #405 stops at `REVIEW GATE` after the reviewed decisions and no-safe-change handoff are complete.
