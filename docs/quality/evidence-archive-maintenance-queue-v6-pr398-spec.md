@@ -29,9 +29,29 @@ Reviewed unresolved / suppressed / reactivated: 13 / 13 / 0
 - select at most ten identities;
 - do not rank assets or Evidence.
 
-Expected eligible pool: **88**.  
-Expected selected count: **10**.  
-Expected selected reactivated count: **0**.
+```text
+Expected eligible pool: 88
+Expected selected count: 10
+Expected selected reactivated count: 0
+Alias identities excluded: 33
+Reviewed suppressions excluded: 13
+Added / removed / retained versus Queue v5: 10 / 10 / 0
+```
+
+Selected Evidence identities:
+
+```text
+sog_src_nuon_overview_batch_b
+sog_src_paxg_allocation_batch_b
+sog_src_paxg_launch_batch_b
+sog_src_paxg_pricing_batch_b
+sog_src_paxg_redemption_batch_b
+sog_src_paxos_busd_announcement
+sog_src_pyusd_paxos_official
+sog_src_pyusd_paxos_page
+sog_src_pyusd_paypal_official
+sog_src_rai_faq_batch_b
+```
 
 ## Required outputs
 
@@ -46,4 +66,4 @@ PR #398 is an internal manual-review queue only. It may not change canonical rec
 
 ## Exit condition
 
-Queue v6 and its Queue v5 delta regenerate deterministically, contain ten unique ordinary unreviewed candidates, enforce all thirteen suppressions, include no reactivated identity, and stop at `REVIEW GATE`.
+Queue v6 and its Queue v5 delta regenerate deterministically, contain the ten fixed ordinary unreviewed candidates above, enforce all thirteen suppressions, include no reactivated identity, and stop at `REVIEW GATE`.
