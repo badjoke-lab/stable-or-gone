@@ -38,6 +38,18 @@
     "selected_count": 10,
     "maximum_selected_count": 10,
     "selected_reactivated_count": 0,
+    "selected_evidence_ids": [
+      "sog_src_rai_integrations_batch_b",
+      "sog_src_rai_oracle_relayer_batch_b",
+      "sog_src_rai_ungovernance_batch_b",
+      "sog_src_rlusd_docs",
+      "sog_src_rlusd_launch_2024",
+      "sog_src_rlusd_ripple_page",
+      "sog_src_spot_about_batch_b",
+      "sog_src_spot_mint_batch_b",
+      "sog_src_spot_site_batch_b",
+      "sog_src_spot_v2_rollout_batch_b"
+    ],
     "added_vs_queue_v6": 10,
     "removed_vs_queue_v6": 10,
     "retained_vs_queue_v6": 0,
