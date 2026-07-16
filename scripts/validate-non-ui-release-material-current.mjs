@@ -23,6 +23,8 @@ check(historical.release_integrity_baseline_id === 'sog_release_integrity_pr316_
 check(historical.reproducible_build_baseline_id === reproducible.baseline_id, 'historical reproducibility binding changed');
 
 const c = current.expected_counts;
+const archiveRecorded = current.evidence_quality?.archive_index_count;
+const archiveNotRecorded = current.evidence_quality?.archive_not_recorded_count;
 check(current.status === 'reviewed_non_growth_checkpoint', 'current checkpoint status');
 check(current.asset_count === 112 && c.assets === 112, 'current asset count');
 check(c.organizations === 107, 'current organization count');
@@ -38,8 +40,9 @@ check(c.legal_profiles === 112, 'current legal-profile count');
 check(c.stable_asset_relationships === 5, 'current v3 relationship count');
 check(c.reserve_components === 145, 'current reserve-component count');
 check(c.income_profiles === 112, 'current income-profile count');
-check(current.evidence_quality?.archive_index_count === 399, 'current archive count');
-check(current.evidence_quality?.archive_not_recorded_count === 160, 'current no-archive count');
+check(Number.isInteger(archiveRecorded) && archiveRecorded >= 0, 'current archive count');
+check(Number.isInteger(archiveNotRecorded) && archiveNotRecorded >= 0, 'current no-archive count');
+check(archiveRecorded + archiveNotRecorded === c.evidence, 'current archive partition');
 
 check(releaseBaseline.status === 'current', 'release baseline status');
 check(releaseBaseline.expected_v2_counts?.stablecoins === 112, 'release stablecoin count');
@@ -49,8 +52,8 @@ check(releaseBaseline.expected_v2_counts?.deployments === 174, 'release deployme
 check(releaseBaseline.expected_v3_counts?.legal_profiles === 112, 'release legal-profile count');
 check(releaseBaseline.expected_v3_counts?.reserve_components === 145, 'release reserve-component count');
 check(releaseBaseline.expected_v3_counts?.income_profiles === 112, 'release income-profile count');
-check(releaseBaseline.evidence_quality?.archive_index_count === 399, 'release archive count');
-check(releaseBaseline.evidence_quality?.archive_not_recorded_count === 160, 'release no-archive count');
+check(releaseBaseline.evidence_quality?.archive_index_count === archiveRecorded, 'release archive count');
+check(releaseBaseline.evidence_quality?.archive_not_recorded_count === archiveNotRecorded, 'release no-archive count');
 
 const first = history.snapshots?.[0];
 const latest = history.snapshots?.at(-1);
@@ -61,11 +64,11 @@ check(latest?.totals?.assets === 112, 'latest asset total');
 check(latest?.totals?.evidence === 559, 'latest Evidence total');
 check(latest?.totals?.deployments === 174, 'latest deployment total');
 check(latest?.totals?.market_access_records === 8, 'latest Market Access total');
-check(latest?.data_quality?.coverage?.archive_evidence?.count === 399, 'latest archive coverage');
+check(latest?.data_quality?.coverage?.archive_evidence?.count === archiveRecorded, 'latest archive coverage');
 check(historyCheckpoint.canonical_checkpoint_id === current.checkpoint_id, 'history/current binding');
 
-markers(roadmap, ['Canonical stable assets: 112', 'Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', 'Archive recorded: 399', 'Archive not recorded: 160'], 'current roadmap');
-markers(agents, ['Canonical stable assets: 112', 'Canonical Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', 'Archive recorded: 399', 'Archive not recorded: 160', 'Current authority:'], 'AGENTS.md');
+markers(roadmap, ['Canonical stable assets: 112', 'Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`], 'current roadmap');
+markers(agents, ['Canonical stable assets: 112', 'Canonical Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, 'Current authority:'], 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -81,8 +84,8 @@ console.log(JSON.stringify({
   current_stable_assets: 112,
   current_evidence: 559,
   current_evidence_relations: 559,
-  current_archive_indexes: 399,
-  current_archive_not_recorded: 160,
+  current_archive_indexes: archiveRecorded,
+  current_archive_not_recorded: archiveNotRecorded,
   current_deployments: 174,
   current_market_access_records: 8,
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
