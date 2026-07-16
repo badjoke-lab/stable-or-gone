@@ -8,10 +8,10 @@ import '../styles/reference-utility-v3.css';
 import '../styles/mobile-accessibility-v3.css';
 import BrandLockup from '../components/BrandLockup.astro';
 import { aboutNavigation, footerNavigationGroups, primaryNavigation } from '../../config/site-architecture.mjs';
-interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
+interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; language?: string; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd } = Astro.props;
+const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd, language = 'en' } = Astro.props;
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
@@ -33,21 +33,21 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
 const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
 ---
 <!doctype html>
-<html lang="en">
+<html lang={language}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang={language} href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
     <link rel="alternate" type="text/plain" href="/ai.txt" title="SOG AI entrypoint" />
-    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:locale" content={language === 'ja' ? 'ja_JP' : 'en_US'} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={ogImageUrl} />
     {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}{gaInline && <script set:html={gaInline} />}{structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
@@ -105,7 +105,7 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
     <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="site-footer-intro"><BrandLockup surface="light" /><p>Historical information only. Stable or Gone is a source-backed registry, not a ranking or recommendation service.</p></div>
-        {footerNavigationGroups.map((group) => (<nav class="site-footer-group" aria-labelledby={`footer-${group.id}`}><h2 id={`footer-${group.id}`}>{group.label}</h2>{group.items.map((item) => <a href={item.href}>{item.label}</a>)}</nav>))}
+        {footerNavigationGroups.map((group) => (<nav class="site-footer-group" aria-labelledby={`footer-${group.id}`}><h2 id={`footer-${group.id}`}>{group.label}</h2>{group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>))}
         <nav class="site-footer-group site-footer-data" aria-labelledby="footer-data"><h2 id="footer-data">Data access</h2><a href="/version.json">Version JSON</a><a href="/data/manifest.json">Data manifest</a><a href="/llms.txt">LLM guide</a><a href="/ai.txt">AI entrypoint</a></nav>
         <p class="site-footer-meta">Canonical records, evidence relations, and known unknowns are preserved across desktop and compact layouts.</p>
       </div>
@@ -118,107 +118,13 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
         sync();
         details.addEventListener('toggle', sync);
         details.addEventListener('keydown', (event) => {
-          if (event.key !== 'Escape' || !details.open) return;
-          event.preventDefault();
-          details.open = false;
-          trigger.focus();
-        });
-      };
-      document.querySelectorAll('[data-disclosure]').forEach((item) => { if (item instanceof HTMLDetailsElement) initialiseDisclosure(item); });
-      const navigation = document.querySelector('[data-mobile-navigation]');
-      if (navigation instanceof HTMLDetailsElement) navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.open = false; }));
-      document.addEventListener('click', (event) => {
-        document.querySelectorAll('.site-about-menu[open]').forEach((menu) => {
-          if (menu instanceof HTMLDetailsElement && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
-        });
-      });
-      const buildContents = (articleSelector: string, tocSelector: string, listSelector: string, sectionSelector: string, headingSelector: string) => {
-        const article = document.querySelector(articleSelector);
-        const toc = document.querySelector(tocSelector);
-        const list = document.querySelector(listSelector);
-        if (!(article instanceof HTMLElement) || !(toc instanceof HTMLDetailsElement) || !(list instanceof HTMLOListElement)) return;
-        const usedIds = new Set<string>();
-        const makeId = (value: string) => {
-          const base = String(value || 'section').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
-          let next = base;
-          let suffix = 2;
-          while (usedIds.has(next) || document.getElementById(next)) next = `${base}-${suffix++}`;
-          usedIds.add(next);
-          return next;
-        };
-        [...article.querySelectorAll(sectionSelector)].forEach((section) => {
-          let heading = section.querySelector(headingSelector);
-          if (!(heading instanceof HTMLElement)) return;
-          if (heading.classList.contains('bar') && heading.tagName !== 'H2') {
-            const replacement = document.createElement('h2');
-            replacement.className = heading.className;
-            replacement.innerHTML = heading.innerHTML;
-            heading.replaceWith(replacement);
-            heading = replacement;
+          if (event.key === 'Escape' && details.open) {
+            details.open = false;
+            trigger.focus();
           }
-          const label = heading.textContent?.trim();
-          if (!label) return;
-          if (!section.id) section.id = makeId(label);
-          const item = document.createElement('li');
-          const link = document.createElement('a');
-          link.href = `#${section.id}`;
-          link.textContent = label;
-          item.append(link);
-          list.append(item);
         });
-        if (list.children.length === 0) toc.hidden = true;
-        if (window.matchMedia('(max-width: 820px)').matches) toc.open = false;
       };
-      buildContents('[data-guide-article]', '[data-guide-toc]', '[data-guide-toc-list]', '.guide-article-content > section.panel.registry, .guide-article-content > section[data-guide-section]', ':scope > .bar, :scope > .guide-article-section-title');
-      buildContents('[data-longform-article]', '[data-longform-toc]', '[data-longform-toc-list]', '.longform-content > section.panel.registry, .longform-content > section[data-longform-section]', ':scope > .bar, :scope > .longform-section-title');
-      const focusAnchorTarget = (hash: string) => {
-        if (!hash || hash === '#') return;
-        const target = document.getElementById(decodeURIComponent(hash.slice(1)));
-        if (!(target instanceof HTMLElement)) return;
-        if (!target.matches('a,button,input,select,textarea,summary,[tabindex]')) target.setAttribute('tabindex', '-1');
-        target.setAttribute('data-anchor-focus', 'true');
-        target.focus({ preventScroll: true });
-      };
-      document.addEventListener('click', (event) => {
-        const link = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
-        if (!(link instanceof HTMLAnchorElement)) return;
-        window.setTimeout(() => focusAnchorTarget(link.hash), 0);
-      });
-      window.addEventListener('hashchange', () => focusAnchorTarget(window.location.hash));
-      if (window.location.hash) window.setTimeout(() => focusAnchorTarget(window.location.hash), 0);
-      const fallbackCopy = (value: string) => {
-        const textarea = document.createElement('textarea');
-        textarea.value = value;
-        textarea.setAttribute('readonly', '');
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.append(textarea);
-        textarea.select();
-        const copied = document.execCommand('copy');
-        textarea.remove();
-        return copied;
-      };
-      document.querySelectorAll('[data-copy-value]').forEach((button) => {
-        if (!(button instanceof HTMLButtonElement)) return;
-        button.addEventListener('click', async () => {
-          const value = button.dataset.copyValue ?? '';
-          const original = button.textContent ?? 'Copy';
-          let copied = false;
-          try {
-            if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(value); copied = true; }
-            else copied = fallbackCopy(value);
-          } catch { copied = fallbackCopy(value); }
-          const card = button.closest('[data-copy-container]');
-          const feedback = card?.querySelector('[data-copy-feedback]');
-          button.textContent = copied ? 'Copied' : 'Copy failed';
-          button.dataset.copyState = copied ? 'success' : 'error';
-          if (feedback instanceof HTMLElement) {
-            feedback.setAttribute('aria-live', 'polite');
-            feedback.textContent = copied ? 'Full identifier copied to clipboard.' : 'Could not copy automatically. Select and copy the full identifier manually.';
-          }
-          window.setTimeout(() => { button.textContent = original; delete button.dataset.copyState; }, 1800);
-        });
-      });
+      document.querySelectorAll<HTMLDetailsElement>('details[data-disclosure]').forEach(initialiseDisclosure);
     </script>
   </body>
 </html>
