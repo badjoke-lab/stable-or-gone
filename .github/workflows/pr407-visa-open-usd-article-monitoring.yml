@@ -1,0 +1,125 @@
+name: PR 407 Visa Open USD Article Monitoring
+
+on:
+  push:
+    branches:
+      - pr407-visa-open-usd-article-monitoring
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr407-visa-open-usd-article-monitoring
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr407-visa-open-usd-article-monitoring'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate PR 407 bounded implementation
+        run: |
+          set -o pipefail
+          { node scripts/validate-visa-open-usd-article-monitoring-pr407.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr407-all.txt
+      - name: Validate private monitoring chain
+        run: |
+          set -o pipefail
+          { npm run validate:monitoring; } 2>&1 | tee -a /tmp/pr407-all.txt
+      - name: Validate canonical registry boundaries
+        run: |
+          set -o pipefail
+          {
+            npm run validate:data
+            npm run validate:evidence-relations-v2
+            npm run validate:compat
+            npm run validate:final
+            npm run validate:release-integrity
+            npm run validate:reproducible-build
+          } 2>&1 | tee -a /tmp/pr407-all.txt
+      - name: Verify changed-file boundaries
+        run: |
+          set -o pipefail
+          {
+            changed_data="$(git diff --name-only origin/main...HEAD -- data/)"
+            test "$changed_data" = "data/registry-updates.json"
+            test -z "$(git diff --name-only origin/main...HEAD -- public/)"
+            git diff --exit-code origin/main...HEAD -- \
+              data/entities.json \
+              data/events.json \
+              data/evidence.json \
+              data/stats-history.json \
+              docs/migration/current-canonical-checkpoint.json \
+              docs/migration/current-stats-history-checkpoint.json \
+              docs/migration/registry-release-integrity-baseline.json
+          } 2>&1 | tee -a /tmp/pr407-all.txt
+      - name: Astro check and build
+        run: |
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr407-all.txt
+      - name: Verify public article and Update Feed
+        run: |
+          set -o pipefail
+          {
+            test -f dist/updates/visa-stablecoin-platform-open-usd/index.html
+            test -f dist/data/update-feed.json
+            grep -q 'Visa Stablecoin Platformとは何か' dist/updates/visa-stablecoin-platform-open-usd/index.html
+            grep -q 'lang="ja"' dist/updates/visa-stablecoin-platform-open-usd/index.html
+            grep -q 'sog_update_2026_07_17_visa_vsp_open_usd_analysis' dist/data/update-feed.json
+          } 2>&1 | tee -a /tmp/pr407-all.txt
+      - name: Verify monitoring remains private
+        run: |
+          test ! -e dist/data/open-standard-open-usd.json
+          test ! -e dist/data/visa-stablecoin-platform.json
+          test ! -e dist/data/visa-open-usd-article-monitoring-pr407-handoff.json
+          test ! -e dist/stablecoin/open-usd/index.html
+          test ! -e dist/issuer/open-standard/index.html
+      - name: Publish PR 407 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr407-visa-open-usd-status -->';
+            const handoff=JSON.parse(fs.readFileSync('docs/migration/visa-open-usd-article-monitoring-pr407-handoff.json','utf8'));
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr407-all.txt','utf8').trim();}catch{}
+            const body=`${marker}
+            ## PR #407 Visa Stablecoin Platform / Open USD
+
+            - Workflow: **${{ job.status }}**
+            - Article route: **\`${handoff.article.route}\`**
+            - Article language: **${handoff.article.language}**
+            - Update Feed entries added: **1**
+            - Private monitoring subjects: **${handoff.private_monitoring.subject_count}**
+            - Pending initial baselines: **${handoff.private_monitoring.pending_initial_baseline_count}**
+            - News queries added: **${handoff.private_monitoring.news_queries_added}**
+            - Canonical changes: **${handoff.canonical_changes}**
+            - Next authority: **${handoff.next_work_item.decision}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics (tail)</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(-16000)}
+            \`\`\`
+            </details>`;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
