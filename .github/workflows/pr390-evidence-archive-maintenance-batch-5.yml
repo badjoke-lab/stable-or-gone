@@ -1,0 +1,84 @@
+name: PR 390 Evidence Archive Maintenance Batch 5
+
+on:
+  push:
+    branches:
+      - pr390-evidence-archive-maintenance-batch-5
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr390-evidence-archive-maintenance-batch-5
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr390-evidence-archive-maintenance-batch-5'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Probe live and exact archive sources
+        run: node scripts/probe-evidence-archive-maintenance-batch-5-pr390.mjs | tee /tmp/pr390-probe.txt
+      - name: Commit probe queue
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/evidence-archive-maintenance-batch-5-pr390-review-queue.json
+          if git diff --cached --quiet; then
+            echo 'PR #390 probe queue already committed'
+          else
+            git commit -m 'Probe PR 390 Evidence archive maintenance sources'
+            git pull --rebase origin pr390-evidence-archive-maintenance-batch-5
+            git push origin HEAD:pr390-evidence-archive-maintenance-batch-5
+          fi
+      - name: Verify pre-decision boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const queue=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-5-pr390-review-queue.json','utf8'));
+          if(queue.selected_count!==10)throw new Error('PR #390 probe queue must contain ten identities');
+          if(queue.automatic_canonical_write!==false)throw new Error('PR #390 probe queue must not authorize writes');
+          NODE
+      - name: Publish probe status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr390-evidence-archive-maintenance-status -->';
+            let queue=null;
+            try{queue=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-5-pr390-review-queue.json','utf8'));}catch{}
+            const rows=queue?.rows||[];
+            const body=`${marker}
+            ## PR #390 Evidence and Archive Maintenance Batch 5
+
+            - Phase: **source probe**
+            - Workflow: **${{ job.status }}**
+            - Selected: **${queue?.selected_count??'n/a'}**
+            - Live OK: **${rows.filter((row)=>row.live_probe?.ok).length}**
+            - Exact CDX captures found: **${rows.filter((row)=>(row.exact_cdx_probe?.capture_count||0)>0).length}**
+            - Canonical writes: **not yet applied**
+            - Head: \`${context.sha}\`
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
