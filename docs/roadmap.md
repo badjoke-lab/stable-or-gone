@@ -45,9 +45,11 @@ PR #378  Evidence Archive Maintenance Queue v2 Refresh — complete
 PR #379  REVIEW GATE — active
 ```
 
-## Fresh bounded queue
+## PR #378 output recovery
 
-PR #378 applied review history to the current archive backlog.
+PR #378 computed the correct queue values, but the required queue and delta files were omitted from the merged file set. PR #379 deterministically regenerates and commits those two internal outputs from the merged builder and immutable inputs before completing the review gate. Canonical data, public surfaces, and PR #378 selection semantics remain unchanged.
+
+## Fresh bounded queue
 
 ```text
 canonical Evidence: 559
@@ -59,7 +61,7 @@ fresh selected candidates: 10
 maximum selected candidates: 10
 ```
 
-The queue is deterministic, internal, non-ranking, and manual-review-only. The selected Evidence identities are fixed by the PR #378 queue and may not be substituted.
+The queue is deterministic, internal, non-ranking, and manual-review-only. The selected Evidence identities are fixed by the PR #378 builder and may not be substituted.
 
 ## Review decision under consideration
 
@@ -84,6 +86,7 @@ A dated archive may be added only after exact canonical source capture is verifi
 
 PR #379 must prove:
 
+- deterministic recovery of the two omitted PR #378 outputs;
 - exact PR #378 queue identity and selected count;
 - exact ten reviewed-history suppressions and zero reviewed reactivation;
 - exact PR #360 and PR #365 prior yield;
