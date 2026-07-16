@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr378_review_gate_pr379_2026_07_15",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 379,
+  "reviewed_at": "2026-07-15",
+  "source_checkpoint": {
+    "assets": 112,
+    "evidence": 559,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169,
+    "market_access_records": 8
+  },
+  "completed_sequence": [
+    {
+      "pr": 377,
+      "work_item": "Evidence Archive Review-History Contract Audit",
+      "status": "complete"
+    },
+    {
+      "pr": 378,
+      "work_item": "Evidence Archive Maintenance Queue v2 Refresh",
+      "status": "complete"
+    }
+  ],
+  "evaluation": {
+    "queue_integrity": {
+      "queue_id": "sog_evidence_archive_maintenance_queue_v2_pr378",
+      "canonical_evidence_count": 559,
+      "archive_recorded_count": 390,
+      "archive_not_recorded_count": 169,
+      "reviewed_unresolved_suppressed_count": 10,
+      "reactivated_reviewed_identity_count": 0,
+      "eligible_pool_count": 126,
+      "selected_count": 10,
+      "maximum_selected_count": 10,
+      "selected_evidence_ids": [
+        "sog_src_bold_technical_batch_c",
+        "sog_src_circle_transparency",
+        "sog_src_circle_usdc_product",
+        "sog_src_crvusd_curve_docs",
+        "sog_src_crvusd_curve_lifecycle_event",
+        "sog_src_dai_whitepaper_pr354",
+        "sog_src_eurc_circle_page",
+        "sog_src_eurc_developer_docs",
+        "sog_src_eurc_launch_2022",
+        "sog_src_eurc_mint_page"
+      ],
+      "priority_bucket_counts": {
+        "official_issuer_protocol_product": 10
+      },
+      "deterministic_order": true,
+      "all_candidates_manual_review_only": true,
+      "result": "bounded_fresh_history_aware_queue"
+    },
+    "history_enforcement": {
+      "contract_id": "sog_evidence_archive_review_history_v1_pr377",
+      "manifest_id": "sog_evidence_archive_review_history_manifest_pr377_v1",
+      "history_source_count": 2,
+      "history_event_count": 20,
+      "reviewed_unresolved_count": 10,
+      "exact_suppressed_ids_preserved": true,
+      "reviewed_reactivation_signal_count": 0,
+      "automatic_time_expiry": false,
+      "result": "successful"
+    },
+    "prior_batch_yield": {
+      "pr360": {
+        "selected": 10,
+        "changed": 8,
+        "no_safe_change": 2,
+        "change_yield_percent": 80
+      },
+      "pr365": {
+        "selected": 10,
+        "changed": 3,
+        "no_safe_change": 7,
+        "change_yield_percent": 30
+      },
+      "finding": "Prior archive-maintenance yield varied materially, so PR #380 must review every selected identity and cannot presume a canonical change."
+    },
+    "batch_3_readiness": {
+      "decision": "approved_bounded_manual_review",
+      "selected_identity_count": 10,
+      "allowed_outcomes": [
+        "dated_exact_archive_added",
+        "reviewed_source_replacement",
+        "reviewed_no_safe_change"
+      ],
+      "canonical_change_allowed_only_after_reviewed_exact_capture_or_equivalent_replacement": true,
+      "automatic_promotion_allowed": false,
+      "review_gate_required_after_batch": true
+    },
+    "market_access": {
+      "canonical_record_count": 8,
+      "third_pilot_candidate_manifest": "not_available_in_named_review_inputs",
+      "decision": "defer"
+    },
+    "monthly_maintenance": {
+      "month": "2026-07",
+      "status": "in_progress",
+      "decision": "continue_existing_month_end_process"
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    }
+  },
+  "decisions": {
+    "evidence_archive_maintenance_batch_3": {
+      "decision": "approved_bounded",
+      "pr": 380,
+      "selected_evidence_ids": [
+        "sog_src_bold_technical_batch_c",
+        "sog_src_circle_transparency",
+        "sog_src_circle_usdc_product",
+        "sog_src_crvusd_curve_docs",
+        "sog_src_crvusd_curve_lifecycle_event",
+        "sog_src_dai_whitepaper_pr354",
+        "sog_src_eurc_circle_page",
+        "sog_src_eurc_developer_docs",
+        "sog_src_eurc_launch_2022",
+        "sog_src_eurc_mint_page"
+      ],
+      "maximum_identity_count": 10,
+      "canonical_evidence_change_allowed_under_reviewed_outcomes": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    },
+    "evidence_archive_maintenance_batch_4": {
+      "decision": "not_approved"
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 380,
+      "work_item": "Evidence and Archive Maintenance Batch 3",
+      "scope": "Manually review exactly the ten PR #378 queue identities; add a dated exact archive only when verified, use a reviewed source replacement only when claim-scope equivalence is established, otherwise record reviewed no-safe-change; update canonical Evidence only through explicit reviewed outcomes.",
+      "canonical_evidence_change_allowed": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Evidence and Archive Maintenance Batch 4",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #380 must update AGENTS.md and docs/roadmap.md before changing canonical Evidence.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "39615a80d1280a76669e3cf5c11d4f1725dda7c4122bedd1551303752498e064",
+  "decision_digest_sha256": "3a029004d8526492f25bcdd0e8f70829d61915a18263835d523cfbf10a746f6e"
+}
