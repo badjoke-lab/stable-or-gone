@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "decision_id": "sog_evidence_archive_maintenance_batch_4_pr385_decisions_v1",
+  "status": "reviewed_manual_decisions",
+  "public_output": false,
+  "review_pr": 385,
+  "reviewed_at": "2026-07-16",
+  "source_review_queue": "docs/migration/evidence-archive-maintenance-batch-4-pr385-review-queue.json",
+  "decisions": [
+    {
+      "evidence_id": "sog_src_eurc_mint_page",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.circle.com/circle-mint",
+      "capture_timestamp": "20260615233047",
+      "capture_digest": "VLQ357FCQH7RYH2LYIFNVI2NM2EJ5WPV",
+      "archived_url": "https://web.archive.org/web/20260615233047/https://www.circle.com/circle-mint",
+      "review_reason": "The accepted current Circle Mint route is live with the expected Circle Mint product identity, and Wayback returned a successful HTTP 200 capture for the same canonical route.",
+      "remaining_uncertainty": "The capture preserves the reviewed 2026 product-page version; later product or eligibility changes remain possible."
+    },
+    {
+      "evidence_id": "sog_src_fdusd_official_site",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://firstdigitallabs.com/",
+      "capture_timestamp": "20230804133643",
+      "capture_digest": "2QFD7YM2OESJLCLZLKHJ764UNBKSCRRS",
+      "archived_url": "https://web.archive.org/web/20230804133643/https://firstdigitallabs.com/",
+      "review_reason": "Wayback returned a successful HTTP 200 capture for the exact recorded First Digital Labs root URL, preserving the official issuer-site identity despite the current www redirect and bot challenge.",
+      "remaining_uncertainty": "The archive reflects the 2023 issuer-site version and does not establish later FDUSD disclosures."
+    },
+    {
+      "evidence_id": "sog_src_fdusd_site",
+      "outcome": "reviewed_source_replacement",
+      "canonical_url": "https://firstdigitallabs.com/fdusd/",
+      "replacement_url": "https://www.firstdigitallabs.com/fdusd",
+      "review_reason": "The recorded FDUSD route redirects successfully to the current First Digital Labs FDUSD product page. Publisher, product identity, and FDUSD claim scope are preserved, while the old trailing-slash route has no string-identical accepted capture.",
+      "claim_scope_equivalence": "reviewed_equivalent",
+      "source_version_equivalence": "reviewed_current_issuer_product_route_replacement",
+      "remaining_uncertainty": "The replacement records the current canonical route only; a dated archive of the replacement route is not added in this decision."
+    },
+    {
+      "evidence_id": "sog_src_fei_addresses_batch_a",
+      "outcome": "reviewed_no_safe_change",
+      "canonical_url": "https://fei-protocol.github.io/developers/addresses/",
+      "review_reason": "The live Fei Protocol address page remains available with the expected title, but the exact-source CDX query returned no successful capture.",
+      "remaining_uncertainty": "A later review may add an exact dated capture if one becomes available; no replacement is inferred."
+    },
+    {
+      "evidence_id": "sog_src_fei_final_redemption_batch_a",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D",
+      "capture_timestamp": "20221207073746",
+      "capture_digest": "F7QBCSIDNIH4UDQ4EO3FWTSINBKWMG3J",
+      "archived_url": "https://web.archive.org/web/20221207073746/https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D",
+      "review_reason": "The exact CDX lookup returned one successful capture for the same Boardroom proposal resource; the returned original differs only by equivalent percent-encoding of the terminal base64 padding.",
+      "remaining_uncertainty": "The archive preserves the 2022 proposal page shell and resource identity; dynamic Boardroom rendering may vary."
+    },
+    {
+      "evidence_id": "sog_src_fei_intro_batch_a",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+      "capture_timestamp": "20210111203428",
+      "capture_digest": "FSPC6PJP26J5GPSJTPIIUOOX52477DC5",
+      "archived_url": "https://web.archive.org/web/20210111203428/https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+      "review_reason": "Wayback returned a successful exact-source capture for the official Fei Protocol introduction article close to its original publication period.",
+      "remaining_uncertainty": "The archive preserves the captured article version; Medium access and later edits remain outside this claim."
+    },
+    {
+      "evidence_id": "sog_src_fei_launch_batch_a",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+      "capture_timestamp": "20210402233802",
+      "capture_digest": "ST5TMAIUZBMCT2ILE2T2R5DLGFACJUBY",
+      "archived_url": "https://web.archive.org/web/20210402233802/https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+      "review_reason": "Wayback returned a successful exact-source capture for the official Fei Post-Genesis article during the launch period.",
+      "remaining_uncertainty": "The archive preserves the captured launch-period article and does not imply later protocol continuity."
+    },
+    {
+      "evidence_id": "sog_src_fei_tip121c_execution_2022",
+      "outcome": "reviewed_no_safe_change",
+      "canonical_url": "https://www.tally.xyz/gov/fei/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263?govId=eip155%3A1%3A0x0BEF27FEB58e857046d630B2c03dFb7bae567494",
+      "review_reason": "The live Tally proposal remains available with the expected Fei TIP-121c title, but the exact-source CDX query returned no successful capture.",
+      "remaining_uncertainty": "No archive or replacement is added without an exact reviewed capture."
+    },
+    {
+      "evidence_id": "sog_src_fei_v2_batch_a",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+      "capture_timestamp": "20211104200241",
+      "capture_digest": "C4LES2UL5NSKJG3F3XYWWAHGAIUGQM2T",
+      "archived_url": "https://web.archive.org/web/20211104200241/https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+      "review_reason": "Wayback returned a successful exact-source capture for the official Fei v2 announcement near its publication period.",
+      "remaining_uncertainty": "The archive preserves the announcement version and does not establish later v2 operating state."
+    },
+    {
+      "evidence_id": "sog_src_frax_app",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://app.frax.finance/",
+      "capture_timestamp": "20260601132859",
+      "capture_digest": "IZASFB4YQYEPQ2ANTMTVJZIQXRS3IQVU",
+      "archived_url": "https://web.archive.org/web/20260601132859/https://app.frax.finance/",
+      "review_reason": "The Frax app is live with the expected Frax Finance identity, and Wayback returned a successful exact-source HTTP 200 capture for the same canonical URL.",
+      "remaining_uncertainty": "The archive preserves the reviewed application shell; dynamic protocol state is not captured by this Evidence row."
+    }
+  ],
+  "counts": {
+    "selected": 10,
+    "dated_exact_archive_added": 7,
+    "reviewed_source_replacement": 1,
+    "reviewed_no_safe_change": 2
+  },
+  "boundaries": {
+    "automatic_promotion": false,
+    "identity_substitution": false,
+    "new_evidence_identity": false,
+    "evidence_relation_change": false,
+    "public_surface_change": false
+  }
+}

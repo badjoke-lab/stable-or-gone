@@ -87,7 +87,8 @@
     "publisher": "Circle",
     "claim_scope": "Circle Mint business access, conversion, on/off-ramp, and institutional workflow context",
     "reliability": "medium",
-    "notes": "PR-028B access source. EURC page states Circle Mint allows businesses to convert EUR into EURC and vice versa; keep this separate from retail exchange access."
+    "notes": "PR-028B access source. EURC page states Circle Mint allows businesses to convert EUR into EURC and vice versa; keep this separate from retail exchange access.",
+    "archived_url": "https://web.archive.org/web/20260615233047/https://www.circle.com/circle-mint"
   },
   {
     "id": "sog_src_eurc_developer_docs",

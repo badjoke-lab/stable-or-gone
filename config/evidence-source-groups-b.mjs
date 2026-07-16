@@ -1,6 +1,6 @@
 export const evidenceSourceGroupsB = [
   ['sog_src_fdusd_official_site', ['sog_src_fdusd_reserve_reports', 'sog_src_fdusd_reserve_entry'], 'https://firstdigitallabs.com/'],
-  ['sog_src_fdusd_site', ['sog_src_fdusd_firstdigital_launch_event'], 'https://firstdigitallabs.com/fdusd/'],
+  ['sog_src_fdusd_site', ['sog_src_fdusd_firstdigital_launch_event'], 'https://www.firstdigitallabs.com/fdusd'],
   ['sog_src_makerdao_forum_lifecycle_reference', ['sog_src_dai_black_thursday_event'], 'https://forum.sky.money/'],
   ['sog_src_usds_sky_page', ['sog_src_dai_sky_transition_event', 'sog_src_usds_sky_protocol_interface_pr364'], 'https://sky.money/'],
   ['sog_src_usds_susds_page', ['sog_src_susds_product_batch_h'], 'https://sky.money/susds'],

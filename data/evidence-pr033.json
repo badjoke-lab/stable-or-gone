@@ -1,13 +1,124 @@
 [
-  {"id":"sog_src_frax_docs","stablecoin_id":"sog_st_frax","source_type":"protocol_docs","title":"Frax documentation","url":"https://docs.frax.com/","publisher":"Frax Finance","claim_scope":"FRAX / frxUSD ecosystem documentation, protocol design, collateral, AMO, governance, and related stablecoin context","reliability":"high","notes":"PR-033 source. Use as protocol documentation entry point, not as a fiat redemption source."},
-  {"id":"sog_src_frax_app","stablecoin_id":"sog_st_frax","source_type":"protocol_app","title":"Frax Finance app","url":"https://app.frax.finance/","publisher":"Frax Finance","claim_scope":"Frax ecosystem interface entry point and protocol product context","reliability":"medium","notes":"PR-033 source. Interface state should not be treated as final historical record without source review."},
-  {"id":"sog_src_tusd_site","stablecoin_id":"sog_st_tusd","source_type":"issuer_page","title":"TrueUSD official site","url":"https://tusd.io/","publisher":"TrueUSD","claim_scope":"TUSD overview, redemption, reserve, chain support, and product context","reliability":"medium","notes":"PR-033 source. Use for high-level issuer statements only until terms/report URLs are separated."},
-  {"id":"sog_src_tusd_attestation_entry","stablecoin_id":"sog_st_tusd","source_type":"reserve_transparency_page","title":"TrueUSD attestation entry point","url":"https://tusd.io/attestation","publisher":"TrueUSD","claim_scope":"TUSD reserve or attestation entry point","reliability":"high","notes":"PR-033 source-review entry. Confirm current report archive structure before period-level records."},
-  {"id":"sog_src_fdusd_site","stablecoin_id":"sog_st_fdusd","source_type":"issuer_page","title":"First Digital USD official page","url":"https://firstdigitallabs.com/fdusd/","publisher":"First Digital","claim_scope":"FDUSD overview, issuer context, reserve, redemption, and access restrictions","reliability":"medium","notes":"PR-033 source. Use for high-level FDUSD issuer and product statements."},
-  {"id":"sog_src_fdusd_reserve_entry","stablecoin_id":"sog_st_fdusd","source_type":"reserve_transparency_page","title":"First Digital transparency entry point","url":"https://firstdigitallabs.com/","publisher":"First Digital","claim_scope":"FDUSD reserve and company disclosure entry point","reliability":"medium","notes":"PR-033 source-review entry. Add exact reserve-report or attestation URLs later."},
-  {"id":"sog_src_pyusd_paypal_page","stablecoin_id":"sog_st_pyusd","source_type":"product_page","title":"PayPal USD official page","url":"https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd","publisher":"PayPal","claim_scope":"PYUSD overview, PayPal app availability, redemption or conversion framing, and product context","reliability":"medium","notes":"PR-033 source. Keep PayPal app conversion separate from Paxos issuer reserve reports and on-chain deployment."},
-  {"id":"sog_src_pyusd_paxos_page","stablecoin_id":"sog_st_pyusd","source_type":"issuer_page","title":"Paxos PYUSD page","url":"https://paxos.com/pyusd/","publisher":"Paxos","claim_scope":"PYUSD issuer, backing, reserve, redemption, and transparency context","reliability":"medium","notes":"PR-033 issuer source. Use together with PayPal product source."},
-  {"id":"sog_src_pyusd_transparency","stablecoin_id":"sog_st_pyusd","source_type":"reserve_transparency_page","title":"Paxos PYUSD transparency reports","url":"https://paxos.com/pyusd-transparency/","publisher":"Paxos","claim_scope":"PYUSD reserve reports and transparency archive entry point","reliability":"high","notes":"PR-033 reserve source. Add period-level report rows later."},
-  {"id":"sog_src_usdd_site","stablecoin_id":"sog_st_usdd","source_type":"protocol_or_reserve_page","title":"USDD official site","url":"https://usdd.io/","publisher":"USDD","claim_scope":"USDD overview, collateral, reserve, and protocol context","reliability":"medium","notes":"PR-033 source. Use as entry point; redemption and reserve mechanics need deeper source separation."},
-  {"id":"sog_src_usdd_tron_dao_reserve","stablecoin_id":"sog_st_usdd","source_type":"reserve_or_governance_page","title":"TRON DAO Reserve site","url":"https://tdr.org/","publisher":"TRON DAO Reserve","claim_scope":"USDD reserve, governance, collateral, and TRON DAO Reserve context","reliability":"medium","notes":"PR-033 source-review entry. Confirm current public reserve and collateral pages before period-level records."}
+  {
+    "id": "sog_src_frax_docs",
+    "stablecoin_id": "sog_st_frax",
+    "source_type": "protocol_docs",
+    "title": "Frax documentation",
+    "url": "https://docs.frax.com/",
+    "publisher": "Frax Finance",
+    "claim_scope": "FRAX / frxUSD ecosystem documentation, protocol design, collateral, AMO, governance, and related stablecoin context",
+    "reliability": "high",
+    "notes": "PR-033 source. Use as protocol documentation entry point, not as a fiat redemption source."
+  },
+  {
+    "id": "sog_src_frax_app",
+    "stablecoin_id": "sog_st_frax",
+    "source_type": "protocol_app",
+    "title": "Frax Finance app",
+    "url": "https://app.frax.finance/",
+    "publisher": "Frax Finance",
+    "claim_scope": "Frax ecosystem interface entry point and protocol product context",
+    "reliability": "medium",
+    "notes": "PR-033 source. Interface state should not be treated as final historical record without source review.",
+    "archived_url": "https://web.archive.org/web/20260601132859/https://app.frax.finance/"
+  },
+  {
+    "id": "sog_src_tusd_site",
+    "stablecoin_id": "sog_st_tusd",
+    "source_type": "issuer_page",
+    "title": "TrueUSD official site",
+    "url": "https://tusd.io/",
+    "publisher": "TrueUSD",
+    "claim_scope": "TUSD overview, redemption, reserve, chain support, and product context",
+    "reliability": "medium",
+    "notes": "PR-033 source. Use for high-level issuer statements only until terms/report URLs are separated."
+  },
+  {
+    "id": "sog_src_tusd_attestation_entry",
+    "stablecoin_id": "sog_st_tusd",
+    "source_type": "reserve_transparency_page",
+    "title": "TrueUSD attestation entry point",
+    "url": "https://tusd.io/attestation",
+    "publisher": "TrueUSD",
+    "claim_scope": "TUSD reserve or attestation entry point",
+    "reliability": "high",
+    "notes": "PR-033 source-review entry. Confirm current report archive structure before period-level records."
+  },
+  {
+    "id": "sog_src_fdusd_site",
+    "stablecoin_id": "sog_st_fdusd",
+    "source_type": "issuer_page",
+    "title": "First Digital USD official page",
+    "url": "https://www.firstdigitallabs.com/fdusd",
+    "publisher": "First Digital",
+    "claim_scope": "FDUSD overview, issuer context, reserve, redemption, and access restrictions",
+    "reliability": "medium",
+    "notes": "PR-033 source. Use for high-level FDUSD issuer and product statements."
+  },
+  {
+    "id": "sog_src_fdusd_reserve_entry",
+    "stablecoin_id": "sog_st_fdusd",
+    "source_type": "reserve_transparency_page",
+    "title": "First Digital transparency entry point",
+    "url": "https://firstdigitallabs.com/",
+    "publisher": "First Digital",
+    "claim_scope": "FDUSD reserve and company disclosure entry point",
+    "reliability": "medium",
+    "notes": "PR-033 source-review entry. Add exact reserve-report or attestation URLs later."
+  },
+  {
+    "id": "sog_src_pyusd_paypal_page",
+    "stablecoin_id": "sog_st_pyusd",
+    "source_type": "product_page",
+    "title": "PayPal USD official page",
+    "url": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+    "publisher": "PayPal",
+    "claim_scope": "PYUSD overview, PayPal app availability, redemption or conversion framing, and product context",
+    "reliability": "medium",
+    "notes": "PR-033 source. Keep PayPal app conversion separate from Paxos issuer reserve reports and on-chain deployment."
+  },
+  {
+    "id": "sog_src_pyusd_paxos_page",
+    "stablecoin_id": "sog_st_pyusd",
+    "source_type": "issuer_page",
+    "title": "Paxos PYUSD page",
+    "url": "https://paxos.com/pyusd/",
+    "publisher": "Paxos",
+    "claim_scope": "PYUSD issuer, backing, reserve, redemption, and transparency context",
+    "reliability": "medium",
+    "notes": "PR-033 issuer source. Use together with PayPal product source."
+  },
+  {
+    "id": "sog_src_pyusd_transparency",
+    "stablecoin_id": "sog_st_pyusd",
+    "source_type": "reserve_transparency_page",
+    "title": "Paxos PYUSD transparency reports",
+    "url": "https://paxos.com/pyusd-transparency/",
+    "publisher": "Paxos",
+    "claim_scope": "PYUSD reserve reports and transparency archive entry point",
+    "reliability": "high",
+    "notes": "PR-033 reserve source. Add period-level report rows later."
+  },
+  {
+    "id": "sog_src_usdd_site",
+    "stablecoin_id": "sog_st_usdd",
+    "source_type": "protocol_or_reserve_page",
+    "title": "USDD official site",
+    "url": "https://usdd.io/",
+    "publisher": "USDD",
+    "claim_scope": "USDD overview, collateral, reserve, and protocol context",
+    "reliability": "medium",
+    "notes": "PR-033 source. Use as entry point; redemption and reserve mechanics need deeper source separation."
+  },
+  {
+    "id": "sog_src_usdd_tron_dao_reserve",
+    "stablecoin_id": "sog_st_usdd",
+    "source_type": "reserve_or_governance_page",
+    "title": "TRON DAO Reserve site",
+    "url": "https://tdr.org/",
+    "publisher": "TRON DAO Reserve",
+    "claim_scope": "USDD reserve, governance, collateral, and TRON DAO Reserve context",
+    "reliability": "medium",
+    "notes": "PR-033 source-review entry. Confirm current public reserve and collateral pages before period-level records."
+  }
 ]

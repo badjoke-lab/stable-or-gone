@@ -386,7 +386,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity_redemption_reserve",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20230804133643/https://firstdigitallabs.com/"
   },
   {
     "id": "sog_src_fdusd_reserve_reports",
