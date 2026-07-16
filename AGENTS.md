@@ -19,9 +19,11 @@ Current authority:
 docs/roadmap-amendments/2026-07-16-pr395-evidence-archive-maintenance-batch-6-activation.md
 docs/quality/evidence-archive-maintenance-batch-6-pr395-spec.md
 config/evidence-archive-maintenance-batch-6-pr395.json
+config/evidence-archive-maintenance-batch-6-pr395-decisions.json
 docs/migration/post-pr393-review-gate-pr394.json
 docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
 docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
+docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
 ```
 
 ## Current workstream
@@ -32,6 +34,10 @@ Canonical Evidence: 559
 Evidence Relations: 559
 Archive recorded before PR #395: 416
 Archive not recorded before PR #395: 143
+Archive recorded: 425
+Archive not recorded: 134
+Archive recorded after reviewed decisions: 425
+Archive not recorded after reviewed decisions: 134
 Deployments: 174
 Market Access Records: 8
 PR #394 Post-PR #393 Review Gate: complete
@@ -39,7 +45,17 @@ PR #395 Evidence and Archive Maintenance Batch 6: active; complete on merge
 REVIEW GATE: mandatory after PR #395
 ```
 
-PR #395 may review exactly the ten Queue v5 Evidence identities. Canonical writes remain disabled during the probe phase.
+PR #395 may change exactly nine Queue v5 Evidence rows by adding reviewed exact dated archives. `sog_src_makerdao_docs_dai` remains unchanged under a reviewed no-safe-change decision.
+
+## Reviewed outcomes
+
+```text
+selected: 10
+changed: 9
+dated_exact_archive_added: 9
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 1
+```
 
 Selected Evidence identities:
 
@@ -56,15 +72,13 @@ sog_src_nuon_maxcap_batch_b
 sog_src_nuon_minting_batch_b
 ```
 
-Allowed reviewed outcomes:
+Every accepted archive is backed by an exact-canonical-URL HTTP 200 CDX capture, timestamp, digest, and reviewed source-version scope. The Sky documentation root has no exact capture and redirects to a legal-document page that does not safely preserve the Dai documentation claim scope, so no source replacement is accepted.
 
-```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
-```
+## Boundaries
 
-A dated archive requires an exact-canonical-URL HTTP 200 capture, timestamp, digest, and reviewed source-version scope. A source replacement requires reviewed publisher/product identity and claim-scope equivalence. No canonical change is presumed.
+PR #395 may update only the selected canonical Evidence rows and the internal review queue, decisions, outcomes, handoff, same-count checkpoints, statistics history, release baseline, validator, and workflow required to record the reviewed maintenance.
+
+It may not add or remove Evidence identities, alter Evidence Relations, assets, deployments, Market Access records, other canonical record families, or public surfaces.
 
 Not approved:
 
