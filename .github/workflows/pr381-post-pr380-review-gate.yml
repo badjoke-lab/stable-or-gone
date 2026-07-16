@@ -1,0 +1,102 @@
+name: PR 381 Post-PR 380 Review Gate
+
+on:
+  push:
+    branches:
+      - pr381-post-pr380-review-gate
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr381-post-pr380-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic review gate
+        run: |
+          set -o pipefail
+          { node scripts/build-post-pr380-review-gate-pr381.mjs; node scripts/build-post-pr380-review-gate-pr381.mjs --check; } 2>&1 | tee -a /tmp/pr381-all.txt
+      - name: Commit generated review report
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/post-pr380-review-gate-pr381.json
+          if git diff --cached --quiet; then
+            echo 'PR #381 review report already committed'
+          else
+            git commit -m 'Generate PR 381 post-PR 380 review gate report'
+            git pull --rebase origin pr381-post-pr380-review-gate
+            git push origin HEAD:pr381-post-pr380-review-gate
+          fi
+      - name: Validate review gate authority
+        run: |
+          set -o pipefail
+          { node scripts/validate-post-pr380-review-gate-pr381.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr381-all.txt
+      - name: Validate canonical and release contracts
+        run: |
+          set -o pipefail
+          { npm run validate:data; npm run validate:compat; npm run validate:final; npm run validate:release-integrity; node scripts/validate-non-ui-release-material.mjs; } 2>&1 | tee -a /tmp/pr381-all.txt
+      - name: Verify internal-review-only boundary
+        run: |
+          set -o pipefail
+          { git diff --exit-code origin/main...HEAD -- data/ src/ public/; test ! -e public/data/post-pr380-review-gate-pr381.json; test ! -e dist/data/post-pr380-review-gate-pr381.json; } 2>&1 | tee -a /tmp/pr381-all.txt
+      - name: Verify generated output is committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code 2>&1 | tee -a /tmp/pr381-all.txt
+      - name: Astro check and build
+        run: |
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr381-all.txt
+      - name: Publish PR 381 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr381-post-pr380-review-gate-status -->';
+            const fs=require('fs');
+            let report=null;
+            try{report=JSON.parse(fs.readFileSync('docs/migration/post-pr380-review-gate-pr381.json','utf8'));}catch{}
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr381-all.txt','utf8').trim();}catch{}
+            const sequence=report?.approved_next_sequence?.map((row)=>`PR #${row.pr} ${row.work_item}`).join(' → ')||'n/a';
+            const body=`${marker}
+            ## PR #381 Post-PR #380 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Archive recorded / not recorded: **${report?.source_checkpoint?.archive_recorded??'n/a'} / ${report?.source_checkpoint?.archive_not_recorded??'n/a'}**
+            - PR #380 reviewed yield: **${report?.completed_pr380?.changed??'n/a'} / ${report?.completed_pr380?.selected??'n/a'}**
+            - History v2 sources / events / identities: **${report?.expected_history_v2_after_pr382?.sources??'n/a'} / ${report?.expected_history_v2_after_pr382?.events??'n/a'} / ${report?.expected_history_v2_after_pr382?.reviewed_identities??'n/a'}**
+            - Suppressed / reactivated eligible: **${report?.expected_history_v2_after_pr382?.reviewed_unresolved_suppressed??'n/a'} / ${report?.expected_history_v2_after_pr382?.reviewed_reactivated_eligible??'n/a'}**
+            - Approved sequence: **${sequence}**
+            - Review gate after sequence: **${report?.review_gate_after_sequence??'n/a'}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics (tail)</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(-16000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});

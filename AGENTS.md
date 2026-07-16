@@ -9,19 +9,18 @@ This file is the current mandatory authority entry point. Historical authority t
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. `docs/post-351-data-growth-operating-spec.md`
-6. active roadmap amendments
-7. the latest reviewed handoff and checkpoint
-8. every named queue, history contract, audit, outcome, and prior output
+6. active roadmap amendment
+7. active work-item specification
+8. every named handoff, outcome, history contract, manifest, audit, queue, and checkpoint
 
-Current reviewed authority:
+Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr380-evidence-archive-maintenance-batch-3-activation.md
-docs/quality/evidence-archive-maintenance-batch-3-pr380-spec.md
-config/evidence-archive-maintenance-batch-3-pr380.json
-config/evidence-archive-maintenance-batch-3-pr380-decisions.json
+docs/roadmap-amendments/2026-07-16-pr381-post-pr380-review-gate.md
+docs/quality/post-pr380-review-gate-pr381-spec.md
+config/post-pr380-review-gate-pr381.json
 docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
-docs/migration/current-canonical-checkpoint.json
+docs/migration/evidence-archive-maintenance-outcomes-pr380.json
 ```
 
 ## Current workstream
@@ -34,52 +33,48 @@ Archive recorded: 399
 Archive not recorded: 160
 Deployments: 174
 Market Access Records: 8
-PR #380 Evidence and Archive Maintenance Batch 3: reviewed complete; complete on merge
+PR #380 Evidence and Archive Maintenance Batch 3: complete
+PR #381 Post-PR #380 Review Gate: active; complete on merge
 Current authority: REVIEW GATE
-Next work item: none pre-authorized
 ```
 
-## Binding PR #380 result
+PR #381 may record an authority decision only. It may change no canonical data or public surface.
+
+## Binding review finding
+
+The current PR #377 archive review-history contract contains only PR #360 and PR #365 outcomes. It does not include the nine PR #380 archive additions or the reviewed Circle Mint source replacement.
+
+The consumed PR #378 queue may not be reused, and Archive Batch 4 is not authorized before a fresh history-aware queue is reviewed.
+
+## Approved next sequence
 
 ```text
-selected Evidence identities: 10
-changed Evidence records: 10
-dated exact archives added: 9
-reviewed source replacements: 1
-reviewed no-safe-change: 0
+PR #382 Evidence Archive Review-History Contract v2 Update
+PR #383 Evidence Archive Maintenance Queue v3 Refresh
+REVIEW GATE
 ```
 
-The only source replacement is the reviewed Circle Mint Evidence identity and route change:
+Expected PR #382 history inventory:
 
 ```text
-sog_src_eurc_mint_page
-https://www.circle.com/mint
-→ https://www.circle.com/circle-mint
+history sources: 3
+history events: 30
+reviewed Evidence identities: 30
+archive present: 19
+invalid archive removed: 1
+reviewed no-safe-change: 9
+reviewed source replacement: 1
+reviewed unresolved total: 11
+reviewed unresolved suppressed: 10
+reviewed reactivated eligible: 1
 ```
 
-All nine archive additions use dated exact-source HTTP 200 captures with reviewed timestamps and digests. No Evidence identity or Evidence Relation was added, removed, or substituted.
+PR #382 and PR #383 are internal contract/queue work only. PR #383 may select at most ten candidates and may make no canonical or public change.
 
-## Activation trace
-
-The completed implementation remains bound to the activation statements that governed it:
-
-```text
-PR #380 Evidence and Archive Maintenance Batch 3: active; complete on merge
-REVIEW GATE: mandatory after PR #380
-```
-
-These lines are historical execution trace. The current authority is the review gate shown above.
-
-## Current authority boundary
-
-Work after PR #380 must pause at `REVIEW GATE`. A later PR must explicitly evaluate the PR #380 yield, the remaining 160 archive-not-recorded identities, archive review-history ingestion, Market Access breadth, dossier queue state, maintenance burden, monitoring usefulness, and verified external usage before authorizing another sequence.
-
-The following are not pre-authorized:
+## Not approved
 
 ```text
 Evidence and Archive Maintenance Batch 4
-archive queue refresh
-archive review-history mutation
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
@@ -89,4 +84,4 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification. A PR without new reviewed authority must pause.
+Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification. PR #383 must stop at `REVIEW GATE`.

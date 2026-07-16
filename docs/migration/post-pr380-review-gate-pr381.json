@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr380_review_gate_pr381_2026_07_16",
+  "status": "deterministic_internal_review_gate",
+  "public_output": false,
+  "review_pr": 381,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint": {
+    "checkpoint_id": "sog_evidence_archive_maintenance_batch_3_canonical_112_checkpoint_pr380_2026_07_16",
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 399,
+    "archive_not_recorded": 160
+  },
+  "completed_pr380": {
+    "selected": 10,
+    "changed": 10,
+    "dated_archive_added": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_no_safe_change": 0,
+    "exact_archive_evidence_ids": [
+      "sog_src_bold_technical_batch_c",
+      "sog_src_circle_transparency",
+      "sog_src_circle_usdc_product",
+      "sog_src_crvusd_curve_docs",
+      "sog_src_crvusd_curve_lifecycle_event",
+      "sog_src_dai_whitepaper_pr354",
+      "sog_src_eurc_circle_page",
+      "sog_src_eurc_developer_docs",
+      "sog_src_eurc_launch_2022"
+    ],
+    "source_replacement_evidence_ids": [
+      "sog_src_eurc_mint_page"
+    ],
+    "no_safe_change_evidence_ids": [],
+    "identity_or_relation_change": false,
+    "result": "high_yield_reviewed_bounded_maintenance"
+  },
+  "current_history_v1": {
+    "contract_id": "sog_evidence_archive_review_history_v1_pr377",
+    "manifest_id": "sog_evidence_archive_review_history_manifest_pr377_v1",
+    "sources": 2,
+    "events": 20,
+    "reviewed_identities": 20,
+    "archive_present": 10,
+    "archive_removed_invalid": 1,
+    "no_safe_change": 9,
+    "reviewed_unresolved_suppressed": 10,
+    "includes_pr380": false,
+    "stale_after_pr380": true
+  },
+  "expected_history_v2_after_pr382": {
+    "sources": 3,
+    "events": 30,
+    "reviewed_identities": 30,
+    "archive_present": 19,
+    "archive_removed_invalid": 1,
+    "no_safe_change": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_unresolved_total": 11,
+    "reviewed_unresolved_suppressed": 10,
+    "reviewed_reactivated_eligible": 1
+  },
+  "evaluation": {
+    "history_update_required_before_new_queue": true,
+    "consumed_pr378_queue_reusable": false,
+    "archive_batch_4_ready": false,
+    "circle_mint_reactivation": {
+      "evidence_id": "sog_src_eurc_mint_page",
+      "state": "reviewed_source_replacement_without_archive",
+      "next_eligibility": "eligible_for_fresh_archive_review_under_history_v2",
+      "automatic_canonical_change_allowed": false
+    },
+    "dossier_queue_state": "empty_history_aware_queue",
+    "market_access_state": "eight_records_no_reviewed_pilot_3_manifest",
+    "monitoring_state": "private_review_only_no_automatic_promotion",
+    "external_usage_state": "no_repository_backed_verified_usage_signal",
+    "monthly_maintenance_log_status": "recorded"
+  },
+  "decisions": {
+    "evidence_archive_review_history_contract_v2": {
+      "decision": "approved_internal_contract_update",
+      "pr": 382,
+      "expected_inventory": {
+        "sources": 3,
+        "events": 30,
+        "reviewed_identities": 30,
+        "archive_present": 19,
+        "archive_removed_invalid": 1,
+        "no_safe_change": 9,
+        "reviewed_source_replacement": 1,
+        "reviewed_unresolved_total": 11,
+        "reviewed_unresolved_suppressed": 10,
+        "reviewed_reactivated_eligible": 1
+      },
+      "canonical_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    "evidence_archive_maintenance_queue_v3": {
+      "decision": "approved_internal_queue_refresh_after_pr382",
+      "pr": 383,
+      "source_archive_not_recorded": 160,
+      "maximum_selected_candidates": 10,
+      "canonical_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    "evidence_archive_maintenance_batch_4": {
+      "decision": "not_approved_before_fresh_queue_review"
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved_empty_history_aware_queue"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved_no_reviewed_candidate_manifest"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    },
+    "automatic_promotion": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 382,
+      "work_item": "Evidence Archive Review-History Contract v2 Update",
+      "canonical_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    {
+      "pr": 383,
+      "work_item": "Evidence Archive Maintenance Queue v3 Refresh",
+      "canonical_change_allowed": false,
+      "public_surface_change_allowed": false,
+      "maximum_selected_candidates": 10
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #382 must update AGENTS.md and docs/roadmap.md before changing history contracts. PR #383 may start only after PR #382 merges. No canonical archive work is authorized before the post-PR #383 review gate.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "02ef431e654ec6909ea9c9f6d6aa30ec055f7cdf0784e6fed11d6b8baefa35f1",
+  "report_digest_sha256": "5b0cf41abab0289c7597f73ff11476e219ee8e60b0f6c19806f51378cb6f279c"
+}

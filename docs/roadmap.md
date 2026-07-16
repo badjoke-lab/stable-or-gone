@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #380 reviewed complete; REVIEW GATE next
+Status: canonical execution schedule — PR #381 review gate active
 
 Historical roadmap authority through PR #366 remains archived and does not override this file.
 
@@ -19,18 +19,11 @@ Market Access Records: 8
 Archive recorded: 399
 Archive not recorded: 160
 
-PR #363 Record Depth and Coverage Baseline Refresh: complete
-PR #364 Tier A Dossier Deepening Batch 4: complete
-PR #365 Evidence and Archive Maintenance Batch 2: complete
-PR #379 Post-PR #378 Review Gate: complete
-PR #380 Evidence and Archive Maintenance Batch 3: reviewed complete; complete on merge
-Current authority: REVIEW GATE
-Next work item: none pre-authorized
+PR #380 Evidence and Archive Maintenance Batch 3: complete
+PR #381 Post-PR #380 Review Gate: active; complete on merge
 ```
 
-The registry currently contains 112 stable assets, 559 Evidence records, and 174 deployments. Of the 559 Evidence identities, 399 archive indexes are recorded and 160 archive indexes are not recorded.
-
-## Current reviewed authority
+## Current authority
 
 ```text
 AGENTS.md
@@ -38,43 +31,14 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr380-evidence-archive-maintenance-batch-3-activation.md
-docs/quality/evidence-archive-maintenance-batch-3-pr380-spec.md
-config/evidence-archive-maintenance-batch-3-pr380.json
-config/evidence-archive-maintenance-batch-3-pr380-decisions.json
+docs/roadmap-amendments/2026-07-16-pr381-post-pr380-review-gate.md
+docs/quality/post-pr380-review-gate-pr381-spec.md
+config/post-pr380-review-gate-pr381.json
 docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
-docs/migration/current-canonical-checkpoint.json
+docs/migration/evidence-archive-maintenance-outcomes-pr380.json
 ```
 
-## Completed bounded sequence
-
-```text
-PR #380 Evidence and Archive Maintenance Batch 3 — reviewed complete
-REVIEW GATE — mandatory next
-```
-
-## Activation trace
-
-The historical activation state that governed this completed batch was:
-
-```text
-Status: canonical execution schedule — PR #380 active
-REVIEW GATE: mandatory after PR #380
-```
-
-This trace does not override the current review-gate status.
-
-## PR #380 reviewed result
-
-The allowed outcome vocabulary was:
-
-```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
-```
-
-The reviewed distribution is:
+## Completed result under review
 
 ```text
 selected Evidence identities: 10
@@ -88,34 +52,48 @@ Evidence identities: 559
 Evidence Relations: 559
 ```
 
-Nine exact-source HTTP 200 Wayback captures were accepted with reviewed timestamps and digests. The remaining change replaces the obsolete Circle Mint route with its successful same-product redirect target:
+## Binding history problem
+
+The current PR #377 archive review-history contract contains only PR #360 and PR #365 outcomes:
 
 ```text
-https://www.circle.com/mint
-→ https://www.circle.com/circle-mint
+history sources: 2
+history events: 20
+reviewed Evidence identities: 20
+reviewed unresolved suppressed: 10
 ```
 
-No Evidence identity, Evidence Relation, asset, organization, deployment, Market Access record, ranking, score, recommendation, or public navigation surface changed.
+It does not include the nine PR #380 archive-present outcomes or the reviewed Circle Mint source replacement. The consumed PR #378 queue must not be reused.
 
-## Required next review
+## Approved next sequence
 
-The next authority decision must evaluate:
+```text
+PR #382 Evidence Archive Review-History Contract v2 Update
+PR #383 Evidence Archive Maintenance Queue v3 Refresh
+REVIEW GATE
+```
 
-- PR #380 actual yield and source-replacement quality;
-- whether PR #380 outcomes must first be incorporated into the archive review-history contract;
-- whether a new archive queue may be generated from the remaining 160 identities;
-- the empty history-aware dossier queue;
-- Market Access breadth, still eight records;
-- monitoring usefulness and monthly maintenance burden;
-- verified external usage evidence;
-- whether any canonical or public work should be authorized.
+Expected PR #382 history inventory:
+
+```text
+history sources: 3
+history events: 30
+reviewed Evidence identities: 30
+archive present: 19
+invalid archive removed: 1
+reviewed no-safe-change: 9
+reviewed source replacement: 1
+reviewed unresolved total: 11
+reviewed unresolved suppressed: 10
+reviewed reactivated eligible: 1
+```
+
+PR #383 may generate a deterministic internal non-ranking manual-review queue of at most ten candidates from the current 160 archive-not-recorded identities. PR #382 and PR #383 may make no canonical or public change.
 
 ## Deferred and not approved
 
 ```text
 Evidence and Archive Maintenance Batch 4
-archive queue refresh
-archive review-history mutation
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
@@ -127,4 +105,4 @@ automatic canonical promotion
 
 ## Next gate
 
-Stop at `REVIEW GATE`. No PR after #380 is pre-authorized until a new reviewed authority decision is merged.
+After PR #383, stop at `REVIEW GATE`. No canonical archive work is authorized until the fresh queue is reviewed.
