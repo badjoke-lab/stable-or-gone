@@ -16,14 +16,12 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr384-post-pr383-review-gate.md
-docs/quality/post-pr383-review-gate-pr384-spec.md
-config/post-pr383-review-gate-pr384.json
+docs/roadmap-amendments/2026-07-16-pr385-evidence-archive-maintenance-batch-4-activation.md
+docs/quality/evidence-archive-maintenance-batch-4-pr385-spec.md
+config/evidence-archive-maintenance-batch-4-pr385.json
+docs/migration/post-pr383-review-gate-pr384.json
 docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
 docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json
-config/evidence-archive-review-history-v2-pr382.json
-docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
-docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 ```
 
 ## Current workstream
@@ -32,50 +30,49 @@ docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 Canonical stable assets: 112
 Canonical Evidence: 559
 Evidence Relations: 559
-Archive recorded: 399
-Archive not recorded: 160
+Archive recorded before PR #385: 399
+Archive not recorded before PR #385: 160
 Deployments: 174
 Market Access Records: 8
-PR #383 Evidence Archive Maintenance Queue v3 Refresh: complete
-PR #384 Post-PR #383 Review Gate: active; complete on merge
-PR #385 Evidence and Archive Maintenance Batch 4: approved next
+PR #384 Post-PR #383 Review Gate: complete
+PR #385 Evidence and Archive Maintenance Batch 4: active; complete on merge
 REVIEW GATE: mandatory after PR #385
 ```
 
-PR #384 may record an authority decision only. It may change no canonical data or public surface.
+PR #385 may review exactly the ten Queue v3 Evidence identities and may change only those existing canonical Evidence rows through explicit reviewed outcomes.
 
-## Binding review finding
-
-Queue v3 is deterministic, non-ranking, manual-review-only, and bounded:
+## Selected Evidence identities
 
 ```text
-Eligible pool: 117
-Selected: 10
-Reviewed suppressed excluded: 10
-Reviewed reactivated selected: 1
-Added / removed / retained versus Queue v2: 9 / 9 / 1
+sog_src_eurc_mint_page
+sog_src_fdusd_official_site
+sog_src_fdusd_site
+sog_src_fei_addresses_batch_a
+sog_src_fei_final_redemption_batch_a
+sog_src_fei_intro_batch_a
+sog_src_fei_launch_batch_a
+sog_src_fei_tip121c_execution_2022
+sog_src_fei_v2_batch_a
+sog_src_frax_app
 ```
 
-The selected reviewed-reactivated identity is `sog_src_eurc_mint_page`. The remaining nine selected identities are fresh unreviewed archive gaps.
-
-## Approved next sequence
+## Allowed reviewed outcomes
 
 ```text
-PR #385 Evidence and Archive Maintenance Batch 4
-REVIEW GATE
+dated_exact_archive_added
+reviewed_source_replacement
+reviewed_no_safe_change
 ```
 
-PR #385 may review exactly the ten Queue v3 identities. It may add a dated exact archive only after exact-source verification, use a reviewed source replacement only after publisher/product and claim-scope equivalence review, or record reviewed no-safe-change.
-
-No candidate is presumed to change. PR #385 must update `AGENTS.md` and `docs/roadmap.md` before changing canonical Evidence.
+A dated archive requires an exact-canonical-URL HTTP 200 capture, timestamp, digest, and reviewed source-version scope. A source replacement requires reviewed publisher/product identity and claim-scope equivalence. No canonical change is presumed.
 
 ## Boundaries
 
-PR #384 may change only internal authority, deterministic review report, validator, and workflow files.
+PR #385 may update only selected Evidence rows and the internal review queue, decisions, outcomes, handoff, same-count checkpoints, stats history, release baseline, validator, and workflow needed to record reviewed maintenance.
 
-PR #385 may change canonical Evidence only through explicit reviewed outcomes for the ten Queue v3 identities. It may not add or remove Evidence identities, alter Evidence Relations, assets, deployments, Market Access records, or public surfaces.
+It may not add or remove Evidence identities, alter Evidence Relations, assets, deployments, Market Access records, other canonical record families, or public surfaces.
 
-Not approved before the next review gate:
+Not approved:
 
 ```text
 Evidence and Archive Maintenance Batch 5
@@ -88,4 +85,4 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification. PR #385 must stop at `REVIEW GATE`.
+PR #385 must stop at `REVIEW GATE`.
