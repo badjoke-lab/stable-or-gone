@@ -1,29 +1,19 @@
 # Stable or Gone Agent Instructions
 
-This file is the current mandatory authority entry point. Historical authority through PR #394 remains archived and does not override this file.
-
-## Required reading
-
-1. `AGENTS.md`
-2. `docs/spec-governance.md`
-3. `docs/roadmap.md`
-4. `docs/deployment-policy.md`
-5. `docs/post-351-data-growth-operating-spec.md`
-6. active roadmap amendment
-7. active work-item specification
-8. every named handoff, outcome, history contract, manifest, audit, queue, and checkpoint
+Current mandatory authority: PR #397 History v5.
 
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr395-evidence-archive-maintenance-batch-6-activation.md
-docs/quality/evidence-archive-maintenance-batch-6-pr395-spec.md
-config/evidence-archive-maintenance-batch-6-pr395.json
-config/evidence-archive-maintenance-batch-6-pr395-decisions.json
-docs/migration/post-pr393-review-gate-pr394.json
-docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
-docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
-docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
+AGENTS.md
+docs/spec-governance.md
+docs/roadmap.md
+docs/deployment-policy.md
+docs/post-351-data-growth-operating-spec.md
+docs/migration/post-pr395-review-gate-pr396.json
+docs/roadmap-amendments/2026-07-16-pr397-evidence-archive-review-history-v5-activation.md
+docs/quality/evidence-archive-review-history-contract-v5-pr397-spec.md
+config/evidence-archive-review-history-v5-pr397.json
 ```
 
 ## Current workstream
@@ -32,65 +22,34 @@ docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
 Canonical stable assets: 112
 Canonical Evidence: 559
 Evidence Relations: 559
-Archive recorded before PR #395: 416
-Archive not recorded before PR #395: 143
 Archive recorded: 425
 Archive not recorded: 134
-Archive recorded after reviewed decisions: 425
-Archive not recorded after reviewed decisions: 134
 Deployments: 174
 Market Access Records: 8
-PR #394 Post-PR #393 Review Gate: complete
-PR #395 Evidence and Archive Maintenance Batch 6: active; complete on merge
-REVIEW GATE: mandatory after PR #395
+PR #395 Evidence and Archive Maintenance Batch 6: complete
+PR #396 Post-PR #395 Review Gate: complete
+PR #397 Evidence Archive Review-History Contract v5 Update: active; complete on merge
+PR #398 Evidence Archive Maintenance Queue v6 Refresh: approved next
+REVIEW GATE: mandatory after PR #398
 ```
 
-PR #395 may change exactly nine Queue v5 Evidence rows by adding reviewed exact dated archives. `sog_src_makerdao_docs_dai` remains unchanged under a reviewed no-safe-change decision.
-
-## Reviewed outcomes
+## History v5
 
 ```text
-selected: 10
-changed: 9
-dated_exact_archive_added: 9
-reviewed_source_replacement: 0
-reviewed_no_safe_change: 1
+history sources: 6
+history events: 60
+reviewed Evidence identities: 58
+archive present: 45
+invalid archive removed: 1
+reviewed no-safe-change: 12
+reviewed source replacement: 0
+reviewed unresolved total: 13
+reviewed unresolved suppressed: 13
+reviewed reactivated eligible: 0
 ```
 
-Selected Evidence identities:
+PR #397 appends the ten reviewed PR #395 events to immutable History v4. Nine resolve to archive-present. `sog_src_makerdao_docs_dai` resolves to reviewed no-safe-change and remains suppressed.
 
-```text
-sog_src_makerdao_docs_dai
-sog_src_makerdao_forum_lifecycle_reference
-sog_src_mim_2025_postmortem_batch_a
-sog_src_mim_docs_batch_a
-sog_src_mim_tokenomics_batch_a
-sog_src_mstable_withdrawal_batch_d
-sog_src_nuon_contracts_batch_b
-sog_src_nuon_guarded_launch_batch_b
-sog_src_nuon_maxcap_batch_b
-sog_src_nuon_minting_batch_b
-```
+PR #397 may create only internal History v5 contract outputs and validation material. It may not change canonical records, checkpoints, statistics, release baselines, public surfaces, prior histories, or prior outcomes. Queue v6 is not generated in PR #397.
 
-Every accepted archive is backed by an exact-canonical-URL HTTP 200 CDX capture, timestamp, digest, and reviewed source-version scope. The Sky documentation root has no exact capture and redirects to a legal-document page that does not safely preserve the Dai documentation claim scope, so no source replacement is accepted.
-
-## Boundaries
-
-PR #395 may update only the selected canonical Evidence rows and the internal review queue, decisions, outcomes, handoff, same-count checkpoints, statistics history, release baseline, validator, and workflow required to record the reviewed maintenance.
-
-It may not add or remove Evidence identities, alter Evidence Relations, assets, deployments, Market Access records, other canonical record families, or public surfaces.
-
-Not approved:
-
-```text
-Evidence and Archive Maintenance Batch 7
-Tier A Dossier Deepening Batch 6
-Market Access Pilot 3
-Record Growth Batch 2
-new public page or explorer
-ranking, score, or recommendation
-automatic monitoring promotion
-automatic canonical promotion
-```
-
-PR #395 must stop at `REVIEW GATE`.
+The sole next work item is PR #398. After PR #398, stop at `REVIEW GATE`.

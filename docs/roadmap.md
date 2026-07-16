@@ -1,9 +1,9 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #395 active
+Status: canonical execution schedule — PR #397 active
 
-Historical roadmap authority through PR #394 remains archived and does not override this file.
+Historical roadmap authority through PR #396 remains archived and does not override this file.
 
 ## Current position
 
@@ -16,16 +16,14 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded before PR #395: 416
-Archive not recorded before PR #395: 143
 Archive recorded: 425
 Archive not recorded: 134
-Archive recorded after reviewed decisions: 425
-Archive not recorded after reviewed decisions: 134
 
-PR #394 Post-PR #393 Review Gate: complete
-PR #395 Evidence and Archive Maintenance Batch 6: active; complete on merge
-REVIEW GATE: mandatory after PR #395
+PR #395 Evidence and Archive Maintenance Batch 6: complete
+PR #396 Post-PR #395 Review Gate: complete
+PR #397 Evidence Archive Review-History Contract v5 Update: active; complete on merge
+PR #398 Evidence Archive Maintenance Queue v6 Refresh: approved next
+REVIEW GATE: mandatory after PR #398
 ```
 
 ## Current authority
@@ -36,72 +34,45 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr395-evidence-archive-maintenance-batch-6-activation.md
-docs/quality/evidence-archive-maintenance-batch-6-pr395-spec.md
-config/evidence-archive-maintenance-batch-6-pr395.json
-config/evidence-archive-maintenance-batch-6-pr395-decisions.json
-docs/migration/post-pr393-review-gate-pr394.json
-docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
-docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
-docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
+docs/migration/post-pr395-review-gate-pr396.json
+docs/roadmap-amendments/2026-07-16-pr397-evidence-archive-review-history-v5-activation.md
+docs/quality/evidence-archive-review-history-contract-v5-pr397-spec.md
+config/evidence-archive-review-history-v5-pr397.json
 ```
 
-## Reviewed Batch 6 result
+## History v5 binding inventory
 
 ```text
-Selected: 10
-Changed: 9
-Dated exact archives added: 9
-Reviewed source replacements: 0
-Reviewed no-safe-change: 1
-Archive coverage transition: 416 / 143 -> 425 / 134
-Evidence identities / relations: 559 / 559
+history sources: 6
+history events: 60
+reviewed Evidence identities: 58
+archive present: 45
+invalid archive removed: 1
+reviewed no-safe-change: 12
+reviewed source replacement: 0
+reviewed unresolved total: 13
+reviewed unresolved suppressed: 13
+reviewed reactivated eligible: 0
 ```
 
-`sog_src_makerdao_docs_dai` remains unchanged because the canonical route has no exact archive and redirects to a legal-document page that does not safely preserve its Dai documentation claim scope. The other nine selected identities receive exact dated archives.
-
-Selected Evidence identities:
-
-```text
-sog_src_makerdao_docs_dai
-sog_src_makerdao_forum_lifecycle_reference
-sog_src_mim_2025_postmortem_batch_a
-sog_src_mim_docs_batch_a
-sog_src_mim_tokenomics_batch_a
-sog_src_mstable_withdrawal_batch_d
-sog_src_nuon_contracts_batch_b
-sog_src_nuon_guarded_launch_batch_b
-sog_src_nuon_maxcap_batch_b
-sog_src_nuon_minting_batch_b
-```
+History v5 extends immutable History v4 with the ten reviewed PR #395 outcomes. Nine selected identities are archive-present. `sog_src_makerdao_docs_dai` remains archive-not-recorded under reviewed no-safe-change suppression.
 
 ## Required outputs
 
 ```text
-docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
-docs/migration/evidence-archive-maintenance-outcomes-pr395.json
-docs/migration/evidence-archive-maintenance-batch-6-pr395-reviewed-handoff.json
-docs/migration/current-canonical-checkpoint.json
-docs/migration/current-stats-history-checkpoint.json
-data/stats-history.json
-docs/migration/registry-release-integrity-baseline.json
+docs/migration/evidence-archive-review-history-manifest-v5-pr397.json
+docs/migration/evidence-archive-review-history-audit-v5-pr397.json
 ```
 
-Canonical identity counts, Evidence Relations, assets, deployments, Market Access records, non-Evidence record families, and public surfaces must remain unchanged.
+## Boundaries
 
-## Deferred and not approved
+PR #397 is internal history-contract work only. Canonical records, checkpoints, statistics, release baselines, public surfaces, prior history versions, and prior outcomes remain unchanged. Queue v6 is not generated in this PR.
+
+## Next sequence
 
 ```text
-Evidence and Archive Maintenance Batch 7
-Tier A Dossier Deepening Batch 6
-Market Access Pilot 3
-Record Growth Batch 2
-new public page or explorer
-asset or Evidence ranking
-automatic monitoring promotion
-automatic canonical promotion
+PR #398 Evidence Archive Maintenance Queue v6 Refresh
+REVIEW GATE
 ```
 
-## Next gate
-
-After PR #395, stop at `REVIEW GATE`. No later archive batch or other canonical expansion is authorized before that review.
+After PR #398, stop at `REVIEW GATE`. Archive Batch 7 and all other canonical expansion remain unapproved.
