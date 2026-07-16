@@ -330,7 +330,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity_collateral_redemption",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20260702224626/https://docs.frax.finance/"
   },
   {
     "id": "sog_src_frax_official_site",
@@ -344,7 +345,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20250522112121/https://frax.finance/"
   },
   {
     "id": "sog_src_tusd_official_site",
@@ -471,7 +473,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity_redemption_reserve",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20260706120118/https://www.gemini.com/dollar"
   },
   {
     "id": "sog_src_lusd_liquity_docs",
@@ -485,7 +488,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity_collateral_redemption",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20260708204810/https://docs.liquity.org/"
   },
   {
     "id": "sog_src_crvusd_curve_docs",

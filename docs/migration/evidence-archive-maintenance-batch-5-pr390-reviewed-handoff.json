@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_evidence_archive_maintenance_batch_5_pr390_reviewed_handoff_2026_07_16",
+  "status": "reviewed_complete",
+  "review_pr": 390,
+  "source_pr": 389,
+  "source_merge_commit": "d6c49c90fff5088684d35c2a813dff81bd8f057d",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v4_pr388",
+  "outcome_id": "sog_evidence_archive_maintenance_outcomes_pr390_2026_07_16",
+  "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
+  "stats_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_112_checkpoint_pr390_2026_07_16",
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "market_access_records": 8,
+    "legal_profiles": 112,
+    "reserve_components": 145,
+    "income_profiles": 112
+  },
+  "evidence_quality": {
+    "archive_recorded": 416,
+    "archive_not_recorded": 143,
+    "selected": 10,
+    "changed": 10,
+    "dated_archive_added": 10,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 0
+  },
+  "changed_evidence_ids": [
+    "sog_src_fdusd_site",
+    "sog_src_frax_docs",
+    "sog_src_frax_docs_frax",
+    "sog_src_frax_official_site",
+    "sog_src_gho_bridge_batch_c",
+    "sog_src_gho_facilitators_batch_c",
+    "sog_src_gho_gsm_batch_c",
+    "sog_src_gho_launch_batch_c",
+    "sog_src_gusd_gemini_official",
+    "sog_src_lusd_liquity_docs"
+  ],
+  "dated_archive_added_evidence_ids": [
+    "sog_src_fdusd_site",
+    "sog_src_frax_docs",
+    "sog_src_frax_docs_frax",
+    "sog_src_frax_official_site",
+    "sog_src_gho_bridge_batch_c",
+    "sog_src_gho_facilitators_batch_c",
+    "sog_src_gho_gsm_batch_c",
+    "sog_src_gho_launch_batch_c",
+    "sog_src_gusd_gemini_official",
+    "sog_src_lusd_liquity_docs"
+  ],
+  "source_replacement_evidence_ids": [],
+  "reviewed_no_safe_change_evidence_ids": [],
+  "stats_input_digest_sha256": "68da1922eb558e3f614e54de20a57e7f72f32e1a290142092e9ca5738b7a14ff",
+  "stats_model_sha256": "67b88985aa4a1cb854685003446775a87120cc5d79ceaac972b7039bdfe61048",
+  "stats_snapshot_sha256": "63a05fe683640f0f8fc71a973c14a4c1953e784309a493dc0d3364d9ef19be27",
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "Merged PR #389 authorizes only PR #390 before another review gate; no later archive, dossier, Market Access, growth, or public-surface work is pre-authorized."
+  },
+  "boundaries": {
+    "new_asset": false,
+    "new_or_removed_evidence_identity": false,
+    "evidence_relation_change": false,
+    "non_evidence_canonical_change": false,
+    "market_access_change": false,
+    "new_public_surface": false,
+    "ranking": false,
+    "automatic_monitoring_promotion": false
+  },
+  "handoff_sha256": "ce29d2013cd65d671f50f262fdbf05f3b08f89939b2dad96e849a664684ab017"
+}

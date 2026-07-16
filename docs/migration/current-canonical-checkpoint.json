@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
   "recorded_at": "2026-07-16",
-  "source_commit": "pr385-evidence-archive-maintenance-batch-4",
+  "source_commit": "pr390-evidence-archive-maintenance-batch-5",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_3_canonical_112_checkpoint_pr380_2026_07_16",
-  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_3_canonical_112_checkpoint_pr380_2026_07_16",
-  "maintenance_pr": 385,
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
+  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
+  "maintenance_pr": 390,
   "expected_counts": {
     "assets": 112,
     "organizations": 107,
@@ -26,40 +26,40 @@
     "income_profiles": 112
   },
   "evidence_quality": {
-    "archive_index_count": 406,
-    "archive_not_recorded_count": 153,
+    "archive_index_count": 416,
+    "archive_not_recorded_count": 143,
     "selected_for_review": 10,
-    "canonical_changes": 8,
-    "reviewed_no_safe_change": 2,
+    "canonical_changes": 10,
+    "reviewed_no_safe_change": 0,
     "new_evidence_records": 0
   },
   "maintenance_outcome": {
     "changed_evidence_ids": [
-      "sog_src_eurc_mint_page",
-      "sog_src_fdusd_official_site",
       "sog_src_fdusd_site",
-      "sog_src_fei_final_redemption_batch_a",
-      "sog_src_fei_intro_batch_a",
-      "sog_src_fei_launch_batch_a",
-      "sog_src_fei_v2_batch_a",
-      "sog_src_frax_app"
+      "sog_src_frax_docs",
+      "sog_src_frax_docs_frax",
+      "sog_src_frax_official_site",
+      "sog_src_gho_bridge_batch_c",
+      "sog_src_gho_facilitators_batch_c",
+      "sog_src_gho_gsm_batch_c",
+      "sog_src_gho_launch_batch_c",
+      "sog_src_gusd_gemini_official",
+      "sog_src_lusd_liquity_docs"
     ],
     "dated_archive_added_evidence_ids": [
-      "sog_src_eurc_mint_page",
-      "sog_src_fdusd_official_site",
-      "sog_src_fei_final_redemption_batch_a",
-      "sog_src_fei_intro_batch_a",
-      "sog_src_fei_launch_batch_a",
-      "sog_src_fei_v2_batch_a",
-      "sog_src_frax_app"
+      "sog_src_fdusd_site",
+      "sog_src_frax_docs",
+      "sog_src_frax_docs_frax",
+      "sog_src_frax_official_site",
+      "sog_src_gho_bridge_batch_c",
+      "sog_src_gho_facilitators_batch_c",
+      "sog_src_gho_gsm_batch_c",
+      "sog_src_gho_launch_batch_c",
+      "sog_src_gusd_gemini_official",
+      "sog_src_lusd_liquity_docs"
     ],
-    "source_replacement_evidence_ids": [
-      "sog_src_fdusd_site"
-    ],
-    "reviewed_no_safe_change_evidence_ids": [
-      "sog_src_fei_addresses_batch_a",
-      "sog_src_fei_tip121c_execution_2022"
-    ]
+    "source_replacement_evidence_ids": [],
+    "reviewed_no_safe_change_evidence_ids": []
   },
-  "notes": "Current deterministic canonical checkpoint after PR #385 Evidence and Archive Maintenance Batch 4. 7 exact dated archive captures and 1 reviewed source replacement were accepted; 2 identities recorded reviewed no-safe-change. Archive coverage is 406 of 559. All canonical identity counts, Evidence Relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
+  "notes": "Current deterministic canonical checkpoint after PR #390 Evidence and Archive Maintenance Batch 5. 10 exact dated archive captures and 0 reviewed source replacements were accepted; 0 identities recorded reviewed no-safe-change. Archive coverage is 416 of 559. All canonical identity counts, Evidence Relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
 }
