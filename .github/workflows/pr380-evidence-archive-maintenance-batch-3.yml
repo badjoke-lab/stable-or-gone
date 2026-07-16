@@ -35,8 +35,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Apply deterministic reviewed decisions
         run: |
-          node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs 2>&1 | tee /tmp/pr380-build.txt
-          node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs --check
+          set -o pipefail
+          { node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs; node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs --check; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Commit generated PR 380 outputs
         if: github.event_name == 'push'
         run: |
@@ -63,54 +63,53 @@ jobs:
           fi
       - name: Validate PR 380 reviewed scope
         run: |
-          node scripts/validate-evidence-archive-maintenance-batch-3-pr380.mjs 2>&1 | tee /tmp/pr380-validation.txt
-          npm run validate:active-workstream
+          set -o pipefail
+          { node scripts/validate-evidence-archive-maintenance-batch-3-pr380.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Validate canonical Evidence
         run: |
-          node scripts/validate-registry-evidence-integrity-audit.mjs
-          npm run validate:data
-          npm run validate:evidence-relations-v2
+          set -o pipefail
+          { node scripts/validate-registry-evidence-integrity-audit.mjs; npm run validate:data; npm run validate:evidence-relations-v2; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Validate maintained audit invariants
         run: |
-          node scripts/validate-registry-deployment-chain-identity-audit.mjs
-          node scripts/validate-next-growth-candidate-audit-pr329.mjs
-          npm run validate:final
+          set -o pipefail
+          { node scripts/validate-registry-deployment-chain-identity-audit.mjs; node scripts/validate-next-growth-candidate-audit-pr329.mjs; npm run validate:final; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Validate remaining canonical contracts
         run: |
-          npm run validate:launch-queue
-          npm run validate:terminal-queue
-          npm run validate:candidates
-          npm run validate:compat
-          npm run validate:classification
-          npm run validate:profiles
-          npm run validate:events-v2
-          npm run validate:migration-v3
-          npm run validate:reproducible-build
-          node scripts/validate-audited-100-checkpoint.mjs
-          node scripts/validate-non-ui-release-material.mjs
-          npm run validate:ui-v3-cleanup
+          set -o pipefail
+          {
+            npm run validate:launch-queue
+            npm run validate:terminal-queue
+            npm run validate:candidates
+            npm run validate:compat
+            npm run validate:classification
+            npm run validate:profiles
+            npm run validate:events-v2
+            npm run validate:migration-v3
+            npm run validate:reproducible-build
+            node scripts/validate-audited-100-checkpoint.mjs
+            node scripts/validate-non-ui-release-material.mjs
+            npm run validate:ui-v3-cleanup
+          } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Validate registry and release integrity
         run: |
-          npm run validate:v3
-          npm run validate:deployments-v3
-          npm run validate:income-v3
-          npm run validate:parity
-          npm run validate:release-integrity
+          set -o pipefail
+          { npm run validate:v3; npm run validate:deployments-v3; npm run validate:income-v3; npm run validate:parity; npm run validate:release-integrity; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Validate deterministic statistics
         run: |
-          node scripts/build-stats.mjs
-          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
-          SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+          set -o pipefail
+          { node scripts/build-stats.mjs; SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs; SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Verify PR 380 boundaries
         run: |
-          git diff --exit-code origin/main...HEAD -- data/ \
-            ':!data/evidence-batch-c.json' \
-            ':!data/evidence-events-pr038.json' \
-            ':!data/evidence-extra.json' \
-            ':!data/evidence.json' \
-            ':!data/stats-history.json'
-          git diff --exit-code origin/main...HEAD -- src/ public/
-          node --input-type=module <<'NODE'
+          set -o pipefail
+          {
+            git diff --exit-code origin/main...HEAD -- data/ \
+              ':!data/evidence-batch-c.json' \
+              ':!data/evidence-events-pr038.json' \
+              ':!data/evidence-extra.json' \
+              ':!data/evidence.json' \
+              ':!data/stats-history.json'
+            git diff --exit-code origin/main...HEAD -- src/ public/
+            node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const outcomes=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-outcomes-pr380.json','utf8'));
           const handoff=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json','utf8'));
@@ -119,14 +118,14 @@ jobs:
           if(handoff.canonical_counts.evidence!==559||handoff.canonical_counts.evidence_relations!==559)throw new Error('PR #380 Evidence identity/relation boundary changed');
           if(handoff.next_work_item?.decision!=='review_gate_required')throw new Error('PR #380 must end at a review gate');
           NODE
+          } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Verify generated outputs are committed
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code
+        run: git diff --exit-code 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Astro check and build
         run: |
-          npm run check
-          npm run build
-          npm run verify:public
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr380-all.txt
       - name: Verify internal review files remain non-public
         run: |
           test ! -e dist/data/evidence-archive-maintenance-batch-3-pr380-review-queue.json
@@ -142,9 +141,7 @@ jobs:
             let handoff=null;
             try{handoff=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json','utf8'));}catch{}
             let diagnostics='';
-            for(const file of ['/tmp/pr380-build.txt','/tmp/pr380-validation.txt']){
-              try{diagnostics+=`${fs.readFileSync(file,'utf8').trim()}\n`;}catch{}
-            }
+            try{diagnostics=fs.readFileSync('/tmp/pr380-all.txt','utf8').trim();}catch{}
             const body=`${marker}
             ## PR #380 Evidence and Archive Maintenance Batch 3
 
@@ -158,10 +155,10 @@ jobs:
             - Next authority: **${handoff?.next_work_item?.decision??'n/a'}**
             - Head: \`${context.sha}\`
 
-            <details><summary>Validation diagnostics</summary>
+            <details><summary>Validation diagnostics (tail)</summary>
 
             \`\`\`text
-            ${diagnostics.trim().slice(0,12000)}
+            ${diagnostics.slice(-16000)}
             \`\`\`
             </details>
             `;
