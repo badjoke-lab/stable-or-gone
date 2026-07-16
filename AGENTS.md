@@ -49,14 +49,26 @@ reviewed source replacements: 1
 reviewed no-safe-change: 0
 ```
 
-The only source replacement is the reviewed Circle Mint route change:
+The only source replacement is the reviewed Circle Mint Evidence identity and route change:
 
 ```text
+sog_src_eurc_mint_page
 https://www.circle.com/mint
 → https://www.circle.com/circle-mint
 ```
 
 All nine archive additions use dated exact-source HTTP 200 captures with reviewed timestamps and digests. No Evidence identity or Evidence Relation was added, removed, or substituted.
+
+## Activation trace
+
+The completed implementation remains bound to the activation statements that governed it:
+
+```text
+PR #380 Evidence and Archive Maintenance Batch 3: active; complete on merge
+REVIEW GATE: mandatory after PR #380
+```
+
+These lines are historical execution trace. The current authority is the review gate shown above.
 
 ## Current authority boundary
 
