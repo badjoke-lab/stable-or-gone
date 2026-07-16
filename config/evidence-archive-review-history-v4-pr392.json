@@ -1,0 +1,98 @@
+{
+  "schema_version": "4.0",
+  "contract_id": "sog_evidence_archive_review_history_v4_pr392",
+  "status": "reviewed_internal_archive_queue_eligibility_contract",
+  "public_output": false,
+  "review_pr": 392,
+  "reviewed_at": "2026-07-16",
+  "prior_contract_id": "sog_evidence_archive_review_history_v3_pr387",
+  "authority_report_id": "sog_post_pr390_review_gate_pr391_2026_07_16",
+  "history_resolution": {
+    "key": "evidence_id",
+    "order": ["reviewed_at_ascending", "review_pr_ascending", "source_order_ascending"],
+    "effective_rule": "latest_review_event_wins"
+  },
+  "review_outcomes": [
+    "reviewed_archive_present",
+    "reviewed_archive_removed_invalid",
+    "reviewed_no_safe_change",
+    "reviewed_source_replacement"
+  ],
+  "eligibility_states": [
+    "eligible_unreviewed_archive_gap",
+    "not_eligible_archive_present",
+    "suppressed_reviewed_invalid_archive_removed",
+    "suppressed_reviewed_no_safe_change",
+    "reactivated_reviewed_exact_capture",
+    "reactivated_reviewed_source_replacement"
+  ],
+  "suppression_policy": {
+    "reviewed_archive_present": "not_eligible_while_archive_present",
+    "reviewed_archive_removed_invalid": "suppress_until_reviewed_exact_capture_or_source_replacement",
+    "reviewed_no_safe_change": "suppress_until_reviewed_exact_capture_or_source_replacement",
+    "reviewed_source_replacement": "eligible_for_fresh_manual_archive_review_while_archive_absent",
+    "automatic_time_expiry": false,
+    "queue_presence_is_reactivation_signal": false,
+    "http_status_change_alone_is_reactivation_signal": false,
+    "unreviewed_wayback_result_is_reactivation_signal": false,
+    "unreviewed_source_url_change_is_reactivation_signal": false
+  },
+  "reactivation_policy": {
+    "accepted_triggers": ["reviewed_exact_capture", "reviewed_source_replacement"],
+    "reviewed_exact_capture_requirements": [
+      "signal_status_reviewed",
+      "exact_canonical_source_url",
+      "successful_capture_timestamp",
+      "capture_digest",
+      "reviewed_after_effective_review_at",
+      "source_version_scope_declared"
+    ],
+    "reviewed_source_replacement_requirements": [
+      "signal_status_reviewed",
+      "replacement_source_identity_declared",
+      "canonical_claim_scope_preserved",
+      "source_version_equivalence_reviewed",
+      "reviewed_after_effective_review_at"
+    ],
+    "missing_signal_default": "suppressed"
+  },
+  "candidate_policy": {
+    "requires_archive_not_recorded": true,
+    "exclude_alias_identities": true,
+    "exclude_web_archive_source_urls": true,
+    "exclude_if_effective_state_suppressed": true,
+    "include_reviewed_reactivated_before_unreviewed": true,
+    "queue_order": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+    "maximum_selected_count": 10,
+    "asset_rank": false,
+    "evidence_rank": false,
+    "single_composite_score": false
+  },
+  "expected": {
+    "history_source_count": 5,
+    "history_event_count": 50,
+    "reviewed_evidence_identity_count": 48,
+    "effective_archive_present_count": 36,
+    "effective_archive_removed_invalid_count": 1,
+    "effective_no_safe_change_count": 11,
+    "effective_source_replacement_count": 0,
+    "current_archive_not_recorded_count": 143,
+    "current_reviewed_unresolved_total_count": 12,
+    "current_reviewed_suppressed_count": 12,
+    "current_reviewed_reactivated_eligible_count": 0,
+    "current_reviewed_reactivated_evidence_ids": []
+  },
+  "required_outputs": [
+    "docs/migration/evidence-archive-review-history-manifest-v4-pr392.json",
+    "docs/migration/evidence-archive-review-history-audit-v4-pr392.json"
+  ],
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "archive_queue_generation_allowed": false,
+    "historical_outcome_rewrite_allowed": false,
+    "automatic_capture_promotion_allowed": false,
+    "automatic_source_replacement_allowed": false
+  },
+  "next_work_item": "PR #393 Evidence Archive Maintenance Queue v5 Refresh"
+}
