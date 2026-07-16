@@ -7,19 +7,19 @@ Authority source: merged PR #404
 
 PR #405 reviews exactly the ten Queue v7 identities and no others.
 
-The completed workflow recorded live response and exact Wayback CDX results. Manual decisions were committed before any canonical archive field changed.
+The completed workflow recorded live response and exact Wayback CDX results. Manual decisions were committed before any canonical archive field change was considered.
 
 ## Reviewed outcome boundary
 
 The reviewed result is:
 
 ```text
-ten exact dated archives
+zero exact dated archives
 zero reviewed source replacements
-zero reviewed no-safe-change
+ten reviewed no-safe-change
 ```
 
-No automatic capture promotion or automatic source replacement was permitted. Every archive decision is bound to an exact canonical source URL HTTP 200 capture, timestamp, and digest.
+No automatic capture promotion or automatic source replacement was permitted. Exact-source CDX metadata alone was not treated as proof that an archived payload preserved the canonical claim scope.
 
 ## Canonical boundary
 
@@ -28,13 +28,13 @@ Assets: 112
 Evidence: 559
 Evidence Relations: 559
 Archive recorded / not recorded before review: 430 / 129
-Archive recorded / not recorded after review: 440 / 119
+Archive recorded / not recorded after review: 430 / 129
 Deployments: 174
 Market Access Records: 8
 ```
 
-Only the ten selected Evidence `archived_url` fields and the required same-count checkpoints, statistics history, release baseline, and internal review outputs may change.
+No canonical data, checkpoint, statistics history, release baseline, Evidence identity, Relation, non-Evidence canonical record, ranking, or public surface changes.
 
-No Evidence identity, Relation, non-Evidence canonical record, ranking, or public surface may change.
+Only the private reviewed decisions, outcomes, handoff, authority documents, and validation workflow may change.
 
 Batch 9 remains unapproved. After PR #405, stop at `REVIEW GATE`.
