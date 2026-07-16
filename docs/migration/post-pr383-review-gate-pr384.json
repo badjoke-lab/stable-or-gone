@@ -1,0 +1,207 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr383_review_gate_pr384_2026_07_16",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 384,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint": {
+    "checkpoint_id": "sog_evidence_archive_maintenance_batch_3_canonical_112_checkpoint_pr380_2026_07_16",
+    "assets": 112,
+    "evidence": 559,
+    "archive_recorded": 399,
+    "archive_not_recorded": 160,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "completed_sequence": [
+    {
+      "pr": 382,
+      "work_item": "Evidence Archive Review-History Contract v2 Update",
+      "status": "complete"
+    },
+    {
+      "pr": 383,
+      "work_item": "Evidence Archive Maintenance Queue v3 Refresh",
+      "status": "complete"
+    }
+  ],
+  "evaluation": {
+    "queue_integrity": {
+      "queue_id": "sog_evidence_archive_maintenance_queue_v3_pr383",
+      "canonical_evidence_count": 559,
+      "archive_recorded_count": 399,
+      "archive_not_recorded_count": 160,
+      "reviewed_unresolved_suppressed_count": 10,
+      "reactivated_reviewed_identity_count": 1,
+      "selected_reactivated_reviewed_identity_count": 1,
+      "eligible_pool_count": 117,
+      "selected_count": 10,
+      "maximum_selected_count": 10,
+      "selected_evidence_ids": [
+        "sog_src_eurc_mint_page",
+        "sog_src_fdusd_official_site",
+        "sog_src_fdusd_site",
+        "sog_src_fei_addresses_batch_a",
+        "sog_src_fei_final_redemption_batch_a",
+        "sog_src_fei_intro_batch_a",
+        "sog_src_fei_launch_batch_a",
+        "sog_src_fei_tip121c_execution_2022",
+        "sog_src_fei_v2_batch_a",
+        "sog_src_frax_app"
+      ],
+      "priority_bucket_counts": {
+        "official_issuer_protocol_product": 10
+      },
+      "selection_tier_counts": {
+        "0": 1,
+        "1": 9
+      },
+      "added_vs_queue_v2": 9,
+      "removed_vs_queue_v2": 9,
+      "retained_vs_queue_v2": 1,
+      "deterministic_order": true,
+      "all_candidates_manual_review_only": true,
+      "result": "bounded_fresh_history_v2_queue"
+    },
+    "history_enforcement": {
+      "contract_id": "sog_evidence_archive_review_history_v2_pr382",
+      "manifest_id": "sog_evidence_archive_review_history_manifest_v2_pr382",
+      "audit_id": "sog_evidence_archive_review_history_audit_v2_pr382_2026_07_16",
+      "history_source_count": 3,
+      "history_event_count": 30,
+      "reviewed_identity_count": 30,
+      "reviewed_unresolved_total": 11,
+      "reviewed_unresolved_suppressed": 10,
+      "reviewed_reactivated_eligible": 1,
+      "exact_suppressed_ids_preserved": true,
+      "exact_reactivated_ids_preserved": true,
+      "reviewed_reactivated_selected": true,
+      "automatic_time_expiry": false,
+      "result": "successful"
+    },
+    "prior_batch_yield": {
+      "pr360": {
+        "selected": 10,
+        "changed": 8,
+        "no_safe_change": 2,
+        "change_yield_percent": 80
+      },
+      "pr365": {
+        "selected": 10,
+        "changed": 3,
+        "no_safe_change": 7,
+        "change_yield_percent": 30
+      },
+      "pr380": {
+        "selected": 10,
+        "changed": 10,
+        "dated_archive_added": 9,
+        "reviewed_source_replacement": 1,
+        "no_safe_change": 0,
+        "change_yield_percent": 100
+      },
+      "finding": "Archive-maintenance yield varies by source set. PR #385 must review every Queue v3 identity and may not presume a canonical change."
+    },
+    "batch_4_readiness": {
+      "decision": "approved_bounded_manual_review",
+      "selected_identity_count": 10,
+      "selected_evidence_ids": [
+        "sog_src_eurc_mint_page",
+        "sog_src_fdusd_official_site",
+        "sog_src_fdusd_site",
+        "sog_src_fei_addresses_batch_a",
+        "sog_src_fei_final_redemption_batch_a",
+        "sog_src_fei_intro_batch_a",
+        "sog_src_fei_launch_batch_a",
+        "sog_src_fei_tip121c_execution_2022",
+        "sog_src_fei_v2_batch_a",
+        "sog_src_frax_app"
+      ],
+      "allowed_outcomes": [
+        "dated_exact_archive_added",
+        "reviewed_source_replacement",
+        "reviewed_no_safe_change"
+      ],
+      "canonical_change_allowed_only_after_reviewed_exact_capture_or_equivalent_replacement": true,
+      "automatic_promotion_allowed": false,
+      "review_gate_required_after_batch": true
+    },
+    "market_access": {
+      "canonical_record_count": 8,
+      "decision": "defer"
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    }
+  },
+  "decisions": {
+    "evidence_archive_maintenance_batch_4": {
+      "decision": "approved_bounded",
+      "pr": 385,
+      "selected_evidence_ids": [
+        "sog_src_eurc_mint_page",
+        "sog_src_fdusd_official_site",
+        "sog_src_fdusd_site",
+        "sog_src_fei_addresses_batch_a",
+        "sog_src_fei_final_redemption_batch_a",
+        "sog_src_fei_intro_batch_a",
+        "sog_src_fei_launch_batch_a",
+        "sog_src_fei_tip121c_execution_2022",
+        "sog_src_fei_v2_batch_a",
+        "sog_src_frax_app"
+      ],
+      "maximum_identity_count": 10,
+      "canonical_evidence_change_allowed_under_reviewed_outcomes": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    },
+    "evidence_archive_maintenance_batch_5": {
+      "decision": "not_approved"
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 385,
+      "work_item": "Evidence and Archive Maintenance Batch 4",
+      "scope": "Manually review exactly the ten PR #383 Queue v3 identities. Add a dated exact archive only after exact-source verification, use a reviewed source replacement only after publisher/product and claim-scope equivalence review, otherwise record reviewed no-safe-change. Canonical Evidence may change only through explicit reviewed outcomes.",
+      "canonical_evidence_change_allowed": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Evidence and Archive Maintenance Batch 5",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #385 must update AGENTS.md and docs/roadmap.md before changing canonical Evidence.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "264e174a38495338f698d617330ae0fe2dc515ed71e2e4005c8566c7d5d18c00",
+  "decision_digest_sha256": "7943b44c054a0dfe46319ce7a0c4cb3c6da9b0b8ab8b8b88c67ad10ec2c049b9"
+}
