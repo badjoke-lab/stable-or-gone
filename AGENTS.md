@@ -9,18 +9,19 @@ This file is the current mandatory authority entry point. Historical authority t
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. `docs/post-351-data-growth-operating-spec.md`
-6. active roadmap amendment
-7. active work-item specification
-8. every named queue, history contract, audit, outcome, and checkpoint
+6. active roadmap amendments
+7. the latest reviewed handoff and checkpoint
+8. every named queue, history contract, audit, outcome, and prior output
 
-Current authority:
+Current reviewed authority:
 
 ```text
 docs/roadmap-amendments/2026-07-16-pr380-evidence-archive-maintenance-batch-3-activation.md
 docs/quality/evidence-archive-maintenance-batch-3-pr380-spec.md
 config/evidence-archive-maintenance-batch-3-pr380.json
-docs/migration/post-pr378-review-gate-pr379.json
-docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
+config/evidence-archive-maintenance-batch-3-pr380-decisions.json
+docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
+docs/migration/current-canonical-checkpoint.json
 ```
 
 ## Current workstream
@@ -29,54 +30,51 @@ docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
 Canonical stable assets: 112
 Canonical Evidence: 559
 Evidence Relations: 559
-Archive recorded: 390
-Archive not recorded: 169
-PR #379 Post-PR #378 Review Gate: complete
-PR #380 Evidence and Archive Maintenance Batch 3: active; complete on merge
-REVIEW GATE: mandatory after PR #380
+Archive recorded: 399
+Archive not recorded: 160
+Deployments: 174
+Market Access Records: 8
+PR #380 Evidence and Archive Maintenance Batch 3: reviewed complete; complete on merge
+Current authority: REVIEW GATE
+Next work item: none pre-authorized
 ```
 
-## Exact PR #380 scope
-
-PR #380 must review exactly these ten existing Evidence identities:
+## Binding PR #380 result
 
 ```text
-sog_src_bold_technical_batch_c
-sog_src_circle_transparency
-sog_src_circle_usdc_product
-sog_src_crvusd_curve_docs
-sog_src_crvusd_curve_lifecycle_event
-sog_src_dai_whitepaper_pr354
-sog_src_eurc_circle_page
-sog_src_eurc_developer_docs
-sog_src_eurc_launch_2022
-sog_src_eurc_mint_page
+selected Evidence identities: 10
+changed Evidence records: 10
+dated exact archives added: 9
+reviewed source replacements: 1
+reviewed no-safe-change: 0
 ```
 
-No identity may be substituted. Every identity must receive exactly one reviewed outcome:
+The only source replacement is the reviewed Circle Mint route change:
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+https://www.circle.com/mint
+→ https://www.circle.com/circle-mint
 ```
 
-A canonical archive may be added only after a successful exact-source dated capture is verified. A source replacement requires reviewed claim-scope and source-version equivalence. Queue presence does not presume a canonical change.
+All nine archive additions use dated exact-source HTTP 200 captures with reviewed timestamps and digests. No Evidence identity or Evidence Relation was added, removed, or substituted.
 
-## Boundaries
+## Current authority boundary
 
-PR #380 may update only the ten selected Evidence records and the internal authority, queue, outcomes, handoff, validators, checkpoints, statistics, and workflow files required to validate those reviewed changes.
+Work after PR #380 must pause at `REVIEW GATE`. A later PR must explicitly evaluate the PR #380 yield, the remaining 160 archive-not-recorded identities, archive review-history ingestion, Market Access breadth, dossier queue state, maintenance burden, monitoring usefulness, and verified external usage before authorizing another sequence.
 
-It may not add or remove Evidence identities, change Evidence Relations, assets, deployments, Market Access records, rankings, scores, recommendations, monitoring promotion, or public navigation/surfaces.
-
-Not approved before the next review gate:
+The following are not pre-authorized:
 
 ```text
 Evidence and Archive Maintenance Batch 4
+archive queue refresh
+archive review-history mutation
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
 new public page or explorer
+ranking, score, or recommendation
+automatic monitoring promotion
+automatic canonical promotion
 ```
 
-Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification. Work after PR #380 must pause at `REVIEW GATE`.
+Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification. A PR without new reviewed authority must pause.
