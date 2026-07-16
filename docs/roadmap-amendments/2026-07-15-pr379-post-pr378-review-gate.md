@@ -1,7 +1,7 @@
 # PR #379 Post-PR #378 Review Gate
 
 Date: 2026-07-15
-Status: active mandatory review gate
+Status: active mandatory review gate and internal-output recovery
 Public output: no
 
 ## Completed sequence reviewed
@@ -10,6 +10,17 @@ Public output: no
 PR #377 Evidence Archive Review-History Contract Audit
 PR #378 Evidence Archive Maintenance Queue v2 Refresh
 ```
+
+## Recovery note
+
+PR #378 computed and validated the queue values, but its two required generated internal outputs were not committed before merge:
+
+```text
+docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
+docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json
+```
+
+PR #379 deterministically regenerates and commits those omitted outputs from the merged PR #378 builder and immutable named inputs before evaluating the review gate. This is completion of an omitted internal artifact, not a rewrite of the reviewed queue semantics or canonical data.
 
 ## Binding result
 
@@ -45,4 +56,4 @@ Tier A Dossier Batch 6 remains unapproved because the history-aware dossier queu
 
 ## Boundaries
 
-PR #379 changes no canonical data or public surface. Historical queues and outcomes remain immutable. PR #380 is the only approved canonical Evidence work before the next review gate.
+PR #379 changes no canonical data or public surface. Historical reviewed inputs remain immutable. The only recovered files are the two omitted deterministic PR #378 internal outputs. PR #380 is the only approved canonical Evidence work before the next review gate.
