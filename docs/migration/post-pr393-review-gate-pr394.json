@@ -132,6 +132,6 @@
     "ranking_or_score": false,
     "automatic_promotion": false
   },
-  "source_digest_sha256": "5224aa4e7261238d8a258d4c7d129db4d3c8790c7289904f1a6e0c8dbba2540f",
-  "decision_digest_sha256": "df0f43415ec79ce2f5a3a3f110e1a9c2ff3df23f9704da35c0c2ca72b53d8746"
+  "source_digest_sha256": "ac36e8ea05b9b83fef59794df7fa0ca80eaf2dbc35cadc84e0b9a6aa0c0fbba2",
+  "decision_digest_sha256": "a6403ce6968445c35cf8d4142678740eb3105c066f70ab05b0256531b8f871a8"
 }
