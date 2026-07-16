@@ -15,7 +15,7 @@ REVIEW GATE
 
 ## Scope
 
-PR #390 must manually review exactly the ten identities selected by PR #388 Queue v4:
+PR #390 manually reviews exactly the ten identities selected by PR #388 Queue v4:
 
 ```text
 sog_src_fdusd_site
@@ -30,15 +30,21 @@ sog_src_gusd_gemini_official
 sog_src_lusd_liquity_docs
 ```
 
-Each identity must receive exactly one reviewed outcome:
+## Reviewed decision
+
+The source probe found at least one exact-canonical-URL HTTP 200 capture for each of the ten identities. Manual review accepted ten exact dated archives.
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+selected: 10
+changed: 10
+ten exact dated archives
+dated_exact_archive_added: 10
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 0
+archive coverage: 406 / 153 -> 416 / 143
 ```
 
-A dated archive requires a successful exact-canonical-URL HTTP 200 capture, timestamp, digest, and source-version scope. A source replacement requires reviewed publisher/product identity and claim-scope equivalence. No canonical change is presumed.
+Every accepted archive is bound to the recorded timestamp, digest, canonical URL, and reviewed source-version scope in `config/evidence-archive-maintenance-batch-5-pr390-decisions.json`.
 
 ## Boundaries
 
@@ -48,4 +54,4 @@ It may not add or remove Evidence identities, alter Evidence Relations, assets, 
 
 ## Exit condition
 
-PR #390 must record all ten reviewed outcomes, update canonical data only where explicitly justified, and stop at `REVIEW GATE`.
+PR #390 must apply only the ten reviewed `archived_url` additions, preserve all identity and relation counts, and stop at `REVIEW GATE`.
