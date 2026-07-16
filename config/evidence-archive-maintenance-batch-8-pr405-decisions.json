@@ -6,115 +6,87 @@
   "review_pr": 405,
   "reviewed_at": "2026-07-17",
   "source_review_queue": "docs/migration/evidence-archive-maintenance-batch-8-pr405-review-queue.json",
+  "decision_basis": "The probe established live response and exact-source CDX metadata, but this bounded pass did not independently inspect each archived payload against the canonical claim scope. No archive is promoted on metadata alone.",
   "decisions": [
     {
       "evidence_id": "sog_src_rai_integrations_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
-      "capture_timestamp": "20260412052859",
-      "capture_digest": "3UFRJ7GYHSXDSRYLSTJBZ2LUNNZT37C5",
-      "archived_url": "https://web.archive.org/web/20260412052859/https://docs.reflexer.finance/rai/rai-integrations-and-partners",
-      "review_reason": "The reviewed Reflexer integrations page is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed integrations page version; listed integrations and market availability may change later."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the integrations claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying that the archived payload preserves the claimed integrations and contract context."
     },
     {
       "evidence_id": "sog_src_rai_oracle_relayer_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
-      "capture_timestamp": "20260516114629",
-      "capture_digest": "4N3KGRYJ23YRFQW6JFJJSCASGDMKNIV6",
-      "archived_url": "https://web.archive.org/web/20260516114629/https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
-      "review_reason": "The reviewed Reflexer Oracle Relayer documentation is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed contract-mechanics documentation version; later system parameters or implementation details may differ."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the redemption-price and rate mechanics claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived contract documentation payload."
     },
     {
       "evidence_id": "sog_src_rai_ungovernance_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
-      "capture_timestamp": "20260516120713",
-      "capture_digest": "GVRRTNZYZ5JVYSHRYVNVL4NWJYEZTVJU",
-      "archived_url": "https://web.archive.org/web/20260516120713/https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
-      "review_reason": "The reviewed Reflexer governance-minimization guide is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed governance-minimization guide version and does not establish that every described stage was completed unchanged."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the governance-minimization claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived guide and its version context."
     },
     {
       "evidence_id": "sog_src_rlusd_docs",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://docs.ripple.com/products/stablecoin",
-      "capture_timestamp": "20260421093749",
-      "capture_digest": "TW4MEMUNDQYUUM4YNYIJSBVLZ5AS4ZQP",
-      "archived_url": "https://web.archive.org/web/20260421093749/https://docs.ripple.com/products/stablecoin",
-      "review_reason": "The reviewed Ripple stablecoin documentation entry point is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed documentation entry point; supported products, integrations, and technical guidance may change later."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed as a stable developer-documentation entry point in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived documentation payload and product-version context."
     },
     {
       "evidence_id": "sog_src_rlusd_launch_2024",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
-      "capture_timestamp": "20260626171436",
-      "capture_digest": "NFYFAHS5RU3H2MIO27VGNHRC3UFCZJXZ",
-      "archived_url": "https://web.archive.org/web/20260626171436/https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
-      "review_reason": "The reviewed Ripple USD launch announcement is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed launch announcement and does not imply that later distribution, reserve, or jurisdictional conditions remain unchanged."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the RLUSD launch claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived announcement payload."
     },
     {
       "evidence_id": "sog_src_rlusd_ripple_page",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://ripple.com/solutions/stablecoin/",
-      "capture_timestamp": "20260711212052",
-      "capture_digest": "G4XGURLAVX6THHUJINNWY7ILINXYJHJU",
-      "archived_url": "https://web.archive.org/web/20260711212052/https://ripple.com/solutions/stablecoin/",
-      "review_reason": "The reviewed Ripple USD product page is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed product-page version; availability, supported networks, custody references, and product terms may evolve."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the broad product, backing, availability, chain, and transparency claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived product-page payload and its temporal scope."
     },
     {
       "evidence_id": "sog_src_spot_about_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://docs.ampleforth.org/learn/about-spot",
-      "capture_timestamp": "20260421195157",
-      "capture_digest": "IIAAWAN2DT3JUBNHTVYLFAOQ5GVR7MQG",
-      "archived_url": "https://web.archive.org/web/20260421195157/https://docs.ampleforth.org/learn/about-spot",
-      "review_reason": "The reviewed Ampleforth SPOT overview is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed SPOT overview version; collateral structure, interfaces, and use cases may change later."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the SPOT collateral and use-case claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived SPOT overview payload."
     },
     {
       "evidence_id": "sog_src_spot_mint_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
-      "capture_timestamp": "20260309115055",
-      "capture_digest": "LRUMQDL6PWUXBD6U4CBMOT3LDU7GVOCM",
-      "archived_url": "https://web.archive.org/web/20260309115055/https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
-      "review_reason": "The reviewed Ampleforth SPOT minting guide is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed mint-and-redeem interface guidance; application routes and protocol behavior may change later."
+      "review_reason": "Exact-source captures exist, but archived payload content was not independently reviewed against the mint-and-redeem interface claim scope in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived guide and application-version context."
     },
     {
       "evidence_id": "sog_src_spot_site_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://www.ampleforth.org/",
-      "capture_timestamp": "20260628121342",
-      "capture_digest": "3EXOFGCMFP7VJRX6QX6Q66YCOE55PK24",
-      "archived_url": "https://web.archive.org/web/20260628121342/https://www.ampleforth.org/",
-      "review_reason": "The reviewed current Ampleforth protocol site is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture from the current protocol era.",
-      "remaining_uncertainty": "The domain has much older unrelated archive history and the accepted capture preserves only the reviewed current-site version; it should not be used to infer historical SPOT availability before the current protocol era."
+      "review_reason": "The exact domain has substantial unrelated historical archive material and the current capture payload was not independently verified to preserve the SPOT-specific claim scope.",
+      "remaining_uncertainty": "A later bounded review should inspect a current-era capture directly and confirm SPOT-specific content before any archive is recorded."
     },
     {
       "evidence_id": "sog_src_spot_v2_rollout_batch_b",
-      "outcome": "dated_exact_archive_added",
+      "outcome": "reviewed_no_safe_change",
       "canonical_url": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
-      "capture_timestamp": "20240522054902",
-      "capture_digest": "HZCSELJ2DCEKXCLYYR2D7Y2TIG6HABIW",
-      "archived_url": "https://web.archive.org/web/20240522054902/https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
-      "review_reason": "The reviewed SPOT v2 rollout proposal is live at the exact canonical URL and Wayback returned a successful exact-source HTTP 200 capture.",
-      "remaining_uncertainty": "The capture preserves the reviewed proposal and discussion state; it does not by itself establish that every proposed rollout step was completed as written."
+      "review_reason": "Exact-source captures exist, but archived payload content and discussion state were not independently reviewed against the rollout and continuity claim scopes in this pass.",
+      "remaining_uncertainty": "A later bounded review may accept a dated capture after verifying the archived proposal payload and its captured discussion state."
     }
   ],
   "counts": {
     "selected": 10,
-    "dated_exact_archive_added": 10,
+    "dated_exact_archive_added": 0,
     "reviewed_source_replacement": 0,
-    "reviewed_no_safe_change": 0
+    "reviewed_no_safe_change": 10
   },
   "boundaries": {
+    "canonical_data_changed": false,
     "automatic_promotion": false,
     "identity_substitution": false,
     "new_evidence_identity": false,
