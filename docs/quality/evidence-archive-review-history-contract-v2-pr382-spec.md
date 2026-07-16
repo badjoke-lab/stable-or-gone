@@ -1,6 +1,6 @@
 # PR #382 Evidence Archive Review-History Contract v2 Specification
 
-Status: active internal contract update  
+Status: reviewed implementation complete; merge pending  
 Review PR: 382  
 Public output: false
 
@@ -58,7 +58,7 @@ reviewed_source_replacement
 
 The Circle Mint replacement is eligible for a fresh manual archive review only. It does not authorize a canonical archive or another source replacement automatically.
 
-## Expected inventory
+## Reviewed result
 
 ```text
 history sources: 3
@@ -72,6 +72,14 @@ reviewed unresolved total: 11
 reviewed unresolved suppressed: 10
 reviewed reactivated eligible: 1
 ```
+
+The sole reviewed reactivated identity is:
+
+```text
+sog_src_eurc_mint_page
+```
+
+Its current canonical URL is `https://www.circle.com/circle-mint`, its archive remains unrecorded, and its eligibility state is `reactivated_reviewed_source_replacement`.
 
 ## Required outputs
 
