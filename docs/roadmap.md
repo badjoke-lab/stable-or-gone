@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-16  
-Status: canonical execution schedule — PR #383 active
+Status: canonical execution schedule — PR #384 review gate active
 
 Historical roadmap authority through PR #366 remains archived and does not override this file.
 
@@ -19,10 +19,10 @@ Market Access Records: 8
 Archive recorded: 399
 Archive not recorded: 160
 
-PR #381 Post-PR #380 Review Gate: complete
-PR #382 Evidence Archive Review-History Contract v2 Update: complete
-PR #383 Evidence Archive Maintenance Queue v3 Refresh: active; complete on merge
-REVIEW GATE: mandatory after PR #383
+PR #383 Evidence Archive Maintenance Queue v3 Refresh: complete
+PR #384 Post-PR #383 Review Gate: active; complete on merge
+PR #385 Evidence and Archive Maintenance Batch 4: approved next
+REVIEW GATE: mandatory after PR #385
 ```
 
 ## Current authority
@@ -33,69 +33,68 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr383-evidence-archive-maintenance-queue-v3-activation.md
-docs/quality/evidence-archive-maintenance-queue-v3-pr383-spec.md
-config/evidence-archive-maintenance-queue-v3-pr383.json
-docs/migration/post-pr380-review-gate-pr381.json
+docs/roadmap-amendments/2026-07-16-pr384-post-pr383-review-gate.md
+docs/quality/post-pr383-review-gate-pr384-spec.md
+config/post-pr383-review-gate-pr384.json
+docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
+docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json
 config/evidence-archive-review-history-v2-pr382.json
 docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
 docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 ```
 
-## Approved bounded sequence
+## Completed Queue v3 result
 
 ```text
-PR #382 Evidence Archive Review-History Contract v2 Update — complete
-PR #383 Evidence Archive Maintenance Queue v3 Refresh — active
+Eligible pool: 117
+Selected: 10
+Reviewed suppressed excluded: 10
+Reviewed reactivated selected: 1
+Added versus Queue v2: 9
+Removed versus Queue v2: 9
+Retained versus Queue v2: 1
+```
+
+Selected Evidence identities:
+
+```text
+sog_src_eurc_mint_page
+sog_src_fdusd_official_site
+sog_src_fdusd_site
+sog_src_fei_addresses_batch_a
+sog_src_fei_final_redemption_batch_a
+sog_src_fei_intro_batch_a
+sog_src_fei_launch_batch_a
+sog_src_fei_tip121c_execution_2022
+sog_src_fei_v2_batch_a
+sog_src_frax_app
+```
+
+The selected Circle Mint record is the sole reviewed-reactivated identity. The remaining nine are fresh unreviewed archive gaps. Every row remains pending manual review and authorizes no automatic change.
+
+## Approved next sequence
+
+```text
+PR #385 Evidence and Archive Maintenance Batch 4
 REVIEW GATE
 ```
 
-## Queue v3 objective
-
-PR #383 must start from 160 archive-not-recorded Evidence identities and apply the reviewed PR #382 history v2 eligibility contract.
-
-History v2 inventory:
+PR #385 may review exactly the ten Queue v3 identities. Allowed outcomes are:
 
 ```text
-history sources: 3
-history events: 30
-reviewed Evidence identities: 30
-archive present: 19
-invalid archive removed: 1
-reviewed no-safe-change: 9
-reviewed source replacement: 1
-reviewed unresolved total: 11
-reviewed unresolved suppressed: 10
-reviewed reactivated eligible: 1
+dated_exact_archive_added
+reviewed_source_replacement
+reviewed_no_safe_change
 ```
 
-The ten reviewed suppressed identities remain excluded. `sog_src_eurc_mint_page` is the sole reviewed reactivated identity and must be selected for fresh manual archive review before ordinary unreviewed archive gaps.
+A canonical change is allowed only after an exact-source capture is verified or a replacement source is reviewed for publisher/product identity and claim-scope equivalence. No candidate is presumed to change.
 
-After that reviewed-reactivated tier, the queue preserves the existing deterministic non-ranking priority order:
-
-```text
-regulator / court / legal
-official issuer / protocol / product
-reserve / attestation / audit
-high-quality reporting / research
-other reviewed source
-```
-
-Ties use Evidence ID. The queue selects at most ten identities and authorizes no canonical change.
-
-## Required outputs
-
-```text
-docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
-docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json
-```
-
-The outputs remain internal and manual-review-only. PR #378 queue and delta are immutable historical inputs.
+PR #385 must update `AGENTS.md` and this roadmap before changing canonical Evidence.
 
 ## Deferred and not approved
 
 ```text
-Evidence and Archive Maintenance Batch 4
+Evidence and Archive Maintenance Batch 5
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
@@ -107,4 +106,4 @@ automatic canonical promotion
 
 ## Next gate
 
-After PR #383, stop at `REVIEW GATE`. No canonical archive work is authorized until the fresh v3 queue and delta are reviewed.
+After PR #385, stop at `REVIEW GATE`. No further archive batch or other canonical expansion is authorized until the Batch 4 outcomes are reviewed.

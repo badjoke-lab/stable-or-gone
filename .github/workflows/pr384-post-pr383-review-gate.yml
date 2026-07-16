@@ -1,0 +1,112 @@
+name: PR 384 Post-PR 383 Review Gate
+
+on:
+  push:
+    branches:
+      - pr384-post-pr383-review-gate
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr384-post-pr383-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic review gate
+        run: |
+          node scripts/build-post-pr383-review-gate-pr384.mjs 2>&1 | tee /tmp/pr384-build.txt
+          node scripts/build-post-pr383-review-gate-pr384.mjs --check
+      - name: Commit generated review report
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/post-pr383-review-gate-pr384.json
+          if git diff --cached --quiet; then
+            echo 'PR #384 review report already committed'
+          else
+            git commit -m 'Generate PR 384 post-PR 383 review gate report'
+            git pull --rebase origin pr384-post-pr383-review-gate
+            git push origin HEAD:pr384-post-pr383-review-gate
+          fi
+      - name: Validate review gate authority
+        run: |
+          node scripts/validate-post-pr383-review-gate-pr384.mjs 2>&1 | tee /tmp/pr384-validation.txt
+          npm run validate:active-workstream
+      - name: Validate canonical and release contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+          node scripts/validate-non-ui-release-material.mjs
+      - name: Verify internal-review-only boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          test ! -e public/data/post-pr383-review-gate-pr384.json
+          test ! -e src/pages/post-pr383-review-gate-pr384.astro
+      - name: Verify generated output is committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+          npm run verify:public
+      - name: Publish PR 384 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr384-post-pr383-review-gate-status -->';
+            const fs=require('fs');
+            let report=null;
+            try{report=JSON.parse(fs.readFileSync('docs/migration/post-pr383-review-gate-pr384.json','utf8'));}catch{}
+            let diagnostics='';
+            for(const file of ['/tmp/pr384-build.txt','/tmp/pr384-validation.txt']){
+              try{diagnostics+=`${fs.readFileSync(file,'utf8').trim()}\n`;}catch{}
+            }
+            const sequence=report?.approved_next_sequence?.map((row)=>`PR #${row.pr} ${row.work_item}`).join(' → ')||'n/a';
+            const selected=report?.evaluation?.queue_integrity?.selected_evidence_ids?.join(', ')||'n/a';
+            const body=`${marker}
+            ## PR #384 Post-PR #383 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Archive recorded / not recorded: **${report?.source_checkpoint?.archive_recorded??'n/a'} / ${report?.source_checkpoint?.archive_not_recorded??'n/a'}**
+            - Eligible pool / selected: **${report?.evaluation?.queue_integrity?.eligible_pool_count??'n/a'} / ${report?.evaluation?.queue_integrity?.selected_count??'n/a'}**
+            - Reviewed suppressed / reactivated selected: **${report?.evaluation?.queue_integrity?.reviewed_unresolved_suppressed_count??'n/a'} / ${report?.evaluation?.queue_integrity?.selected_reactivated_reviewed_identity_count??'n/a'}**
+            - Queue v2 added / removed / retained: **${report?.evaluation?.queue_integrity?.added_vs_queue_v2??'n/a'} / ${report?.evaluation?.queue_integrity?.removed_vs_queue_v2??'n/a'} / ${report?.evaluation?.queue_integrity?.retained_vs_queue_v2??'n/a'}**
+            - Batch 4 decision: **${report?.decisions?.evidence_archive_maintenance_batch_4?.decision??'n/a'}**
+            - Approved sequence: **${sequence}**
+            - Review gate after sequence: **${report?.review_gate_after_sequence??'n/a'}**
+            - Selected IDs: \`${selected}\`
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics</summary>
+
+            \`\`\`text
+            ${diagnostics.trim().slice(-12000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
