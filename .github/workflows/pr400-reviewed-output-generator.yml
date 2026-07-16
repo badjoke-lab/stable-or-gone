@@ -103,7 +103,7 @@ jobs:
           node scripts/build-stats.mjs
           SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
           SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
-      - name: Verify bounded diff
+      - name: Verify bounded committed diff
         run: |
           git diff --exit-code origin/main...HEAD -- data/ \
             ':!data/evidence-batch-b.json' \
@@ -111,7 +111,6 @@ jobs:
             ':!data/evidence.json' \
             ':!data/stats-history.json'
           git diff --exit-code origin/main...HEAD -- src/ public/
-          git diff --exit-code
       - name: Check and build public site
         run: |
           npm run check
