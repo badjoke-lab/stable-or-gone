@@ -1,11 +1,12 @@
 {
   "schema_version": "1.0",
   "config_id": "sog_evidence_archive_maintenance_batch_6_pr395",
-  "status": "active_bounded_manual_review",
+  "status": "active_bounded_reviewed_maintenance",
   "review_pr": 395,
   "reviewed_at": "2026-07-16",
   "source_authority": "docs/migration/post-pr393-review-gate-pr394.json",
   "source_queue": "docs/migration/evidence-archive-maintenance-queue-v5-pr393.json",
+  "decision_id": "sog_evidence_archive_maintenance_batch_6_pr395_decisions_v1",
   "selected_evidence_ids": [
     "sog_src_makerdao_docs_dai",
     "sog_src_makerdao_forum_lifecycle_reference",
@@ -31,6 +32,18 @@
     "archive_not_recorded": 143,
     "deployments": 174,
     "market_access_records": 8
+  },
+  "reviewed_result": {
+    "selected": 10,
+    "changed": 9,
+    "dated_exact_archive_added": 9,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 1,
+    "archive_recorded_after": 425,
+    "archive_not_recorded_after": 134,
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_makerdao_docs_dai"
+    ]
   },
   "review_requirements": {
     "probe_live_url": true,
