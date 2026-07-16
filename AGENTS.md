@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-This file is the current mandatory authority entry point. Historical authority through PR #392 remains archived and does not override this file.
+This file is the current mandatory authority entry point. Historical authority through PR #393 remains archived and does not override this file.
 
 ## Required reading
 
@@ -16,16 +16,14 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr393-evidence-archive-maintenance-queue-v5-activation.md
-docs/quality/evidence-archive-maintenance-queue-v5-pr393-spec.md
-config/evidence-archive-maintenance-queue-v5-pr393.json
+docs/roadmap-amendments/2026-07-16-pr394-post-pr393-review-gate.md
+docs/quality/post-pr393-review-gate-pr394-spec.md
+config/post-pr393-review-gate-pr394.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
 config/evidence-archive-review-history-v4-pr392.json
 docs/migration/evidence-archive-review-history-manifest-v4-pr392.json
 docs/migration/evidence-archive-review-history-audit-v4-pr392.json
-docs/migration/post-pr390-review-gate-pr391.json
-docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
-docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
-docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
 ```
 
 ## Current workstream
@@ -38,29 +36,15 @@ Archive recorded: 416
 Archive not recorded: 143
 Deployments: 174
 Market Access Records: 8
-PR #392 Evidence Archive Review-History Contract v4 Update: complete
-PR #393 Evidence Archive Maintenance Queue v5 Refresh: active; complete on merge
-REVIEW GATE: mandatory after PR #393
+PR #393 Evidence Archive Maintenance Queue v5 Refresh: complete
+PR #394 Post-PR #393 Review Gate: active; complete on merge
+PR #395 Evidence and Archive Maintenance Batch 6: approved next
+REVIEW GATE: mandatory after PR #395
 ```
 
-PR #393 may create internal Queue v5 and delta outputs only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
+PR #394 may record an authority decision only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
 
-## Binding History v4 inventory
-
-```text
-history sources: 5
-history events: 50
-reviewed Evidence identities: 48
-archive present: 36
-invalid archive removed: 1
-reviewed no-safe-change: 11
-reviewed source replacement: 0
-reviewed unresolved total: 12
-reviewed unresolved suppressed: 12
-reviewed reactivated eligible: 0
-```
-
-## Reviewed Queue v5 result
+## Binding Queue v5 result
 
 ```text
 Eligible pool: 98
@@ -85,18 +69,19 @@ sog_src_nuon_maxcap_batch_b
 sog_src_nuon_minting_batch_b
 ```
 
-All ten selected rows are ordinary unreviewed archive gaps in selection tier 1. Queue v5 authorizes no canonical change.
+## Approved next sequence
 
-## Boundaries
+```text
+PR #395 Evidence and Archive Maintenance Batch 6
+REVIEW GATE
+```
 
-PR #393 may change only internal authority, queue configuration, deterministic builder, versioned Queue v5/delta outputs, validator, active-workstream pointer, and workflow.
-
-It may not change canonical Evidence or Relations, assets, deployments, Market Access records, statistics, checkpoints, release baselines, prior histories/queues/outcomes, or public surfaces.
+PR #395 may review exactly these ten identities and may record only `dated_exact_archive_added`, `reviewed_source_replacement`, or `reviewed_no_safe_change`. No candidate is presumed to change.
 
 Not approved:
 
 ```text
-Evidence and Archive Maintenance Batch 6
+Evidence and Archive Maintenance Batch 7
 Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
@@ -106,4 +91,4 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-PR #393 must stop at `REVIEW GATE`.
+PR #394 must stop with authority limited to PR #395 and the following `REVIEW GATE`.
