@@ -14,10 +14,36 @@ Queue v5 starts from 143 archive-not-recorded canonical Evidence identities, exc
 
 History v4 contains no reviewed-reactivated eligible identity. All selected rows therefore begin as ordinary unreviewed archive gaps.
 
+## Deterministic result
+
+```text
+Eligible pool: 98
+Selected: 10
+Reviewed reactivated selected: 0
+Added / removed / retained versus Queue v4: 10 / 10 / 0
+```
+
+Selected Evidence identities:
+
+```text
+sog_src_makerdao_docs_dai
+sog_src_makerdao_forum_lifecycle_reference
+sog_src_mim_2025_postmortem_batch_a
+sog_src_mim_docs_batch_a
+sog_src_mim_tokenomics_batch_a
+sog_src_mstable_withdrawal_batch_d
+sog_src_nuon_contracts_batch_b
+sog_src_nuon_guarded_launch_batch_b
+sog_src_nuon_maxcap_batch_b
+sog_src_nuon_minting_batch_b
+```
+
+All ten are ordinary unreviewed archive gaps and authorize no canonical change.
+
 ## Boundaries
 
 PR #393 may generate an internal Queue v5 and delta only. It may not change canonical data, checkpoints, statistics, release baselines, prior histories or queues, or public surfaces. Queue candidates authorize no canonical change.
 
 ## Exit condition
 
-Select at most ten manual-review candidates and stop at `REVIEW GATE`. Evidence and Archive Maintenance Batch 6 remains unapproved.
+Queue v5 is fixed at ten manual-review candidates and must stop at `REVIEW GATE`. Evidence and Archive Maintenance Batch 6 remains unapproved.
