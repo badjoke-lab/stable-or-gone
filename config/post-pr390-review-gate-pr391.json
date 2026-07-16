@@ -4,6 +4,7 @@
   "status": "mandatory_internal_review_gate",
   "review_pr": 391,
   "reviewed_at": "2026-07-16",
+  "generated_report_id": "sog_post_pr390_review_gate_pr391_2026_07_16",
   "source_outcomes": "docs/migration/evidence-archive-maintenance-outcomes-pr390.json",
   "source_handoff": "docs/migration/evidence-archive-maintenance-batch-5-pr390-reviewed-handoff.json",
   "source_history_contract": "config/evidence-archive-review-history-v3-pr387.json",
