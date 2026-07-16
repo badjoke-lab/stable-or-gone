@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_evidence_archive_maintenance_batch_8_pr405",
+  "status": "active_bounded_manual_review",
+  "review_pr": 405,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr403-review-gate-pr404.json",
+  "source_queue": "docs/migration/evidence-archive-maintenance-queue-v7-pr403.json",
+  "selected_evidence_ids": [
+    "sog_src_rai_integrations_batch_b",
+    "sog_src_rai_oracle_relayer_batch_b",
+    "sog_src_rai_ungovernance_batch_b",
+    "sog_src_rlusd_docs",
+    "sog_src_rlusd_launch_2024",
+    "sog_src_rlusd_ripple_page",
+    "sog_src_spot_about_batch_b",
+    "sog_src_spot_mint_batch_b",
+    "sog_src_spot_site_batch_b",
+    "sog_src_spot_v2_rollout_batch_b"
+  ],
+  "allowed_outcomes": [
+    "dated_exact_archive_added",
+    "reviewed_source_replacement",
+    "reviewed_no_safe_change"
+  ],
+  "input_boundary": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "review_requirements": {
+    "probe_live_url": true,
+    "probe_exact_wayback_cdx": true,
+    "http_200_required_for_archive": true,
+    "capture_timestamp_required": true,
+    "capture_digest_required": true,
+    "source_replacement_equivalence_review_required": true,
+    "automatic_canonical_write": false
+  },
+  "boundaries": {
+    "new_evidence_identity_allowed": false,
+    "evidence_relation_change_allowed": false,
+    "non_evidence_canonical_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "batch_9_authorized": false
+  },
+  "next_work_item": "REVIEW GATE"
+}

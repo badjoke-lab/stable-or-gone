@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #404 Post-PR #403 Review Gate.
+Current mandatory authority: PR #405 Evidence and Archive Maintenance Batch 8.
 
 Current authority:
 
@@ -10,14 +10,15 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-16-pr404-post-pr403-review-gate.md
-docs/quality/post-pr403-review-gate-pr404-spec.md
-config/post-pr403-review-gate-pr404.json
+docs/migration/post-pr403-review-gate-pr404.json
+docs/roadmap-amendments/2026-07-16-pr405-evidence-archive-maintenance-batch-8-activation.md
+docs/quality/evidence-archive-maintenance-batch-8-pr405-spec.md
+config/evidence-archive-maintenance-batch-8-pr405.json
+config/evidence-archive-maintenance-batch-8-pr405-decisions.json
 docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
-docs/migration/evidence-archive-maintenance-queue-v7-pr403-delta.json
-config/evidence-archive-review-history-v6-pr402.json
-docs/migration/evidence-archive-review-history-manifest-v6-pr402.json
-docs/migration/evidence-archive-review-history-audit-v6-pr402.json
+docs/migration/evidence-archive-maintenance-batch-8-pr405-review-queue.json
+docs/migration/evidence-archive-maintenance-outcomes-pr405.json
+docs/migration/evidence-archive-maintenance-batch-8-pr405-reviewed-handoff.json
 ```
 
 ## Current workstream
@@ -26,28 +27,20 @@ docs/migration/evidence-archive-review-history-audit-v6-pr402.json
 Canonical stable assets: 112
 Canonical Evidence: 559
 Evidence Relations: 559
-Archive recorded: 430
-Archive not recorded: 129
+Archive recorded after reviewed decisions: 430
+Archive not recorded after reviewed decisions: 129
 Deployments: 174
 Market Access Records: 8
-PR #403 Evidence Archive Maintenance Queue v7 Refresh: complete
-PR #404 Post-PR #403 Review Gate: active; complete on merge
-PR #405 Evidence and Archive Maintenance Batch 8: approved next
+PR #404 Post-PR #403 Review Gate: complete
+PR #405 Evidence and Archive Maintenance Batch 8: active; complete on merge
+dated_exact_archive_added: 0
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 10
 REVIEW GATE: mandatory after PR #405
 ```
 
-## Queue v7 review
+PR #405 remains bounded to exactly the ten Queue v7 identities. The completed live and exact-CDX probe was manually reviewed. Exact-source capture metadata existed for every row, but archived payload contents were not independently inspected against their claim scopes during this bounded pass. Therefore all ten identities received `reviewed_no_safe_change`; no archive was promoted from metadata alone.
 
-```text
-History sources / events / identities: 7 / 70 / 68
-Reviewed unresolved suppressed: 18
-Reviewed reactivated eligible: 0
-Queue v7 eligible pool / selected: 78 / 10
-Added / removed / retained versus Queue v6: 10 / 10 / 0
-```
+No canonical Evidence field, Evidence identity, Relation, non-Evidence canonical record, Market Access record, ranking, or public surface changed. Automatic promotion remains prohibited.
 
-PR #405 is bounded to exactly the ten Queue v7 identities. Allowed reviewed outcomes are `dated_exact_archive_added`, `reviewed_source_replacement`, or `reviewed_no_safe_change`. No outcome is presumed and automatic promotion is prohibited.
-
-PR #404 may create only the internal authority report and validation material. It may not change canonical records, checkpoints, statistics, release baselines, public surfaces, History v6, Queue v7, or prior outputs.
-
-Evidence and Archive Maintenance Batch 9 and every unrelated workstream remain unapproved. After PR #405, stop at `REVIEW GATE`.
+PR #405 must stop at `REVIEW GATE`. Evidence and Archive Maintenance Batch 9 and every unrelated workstream remain unapproved.
