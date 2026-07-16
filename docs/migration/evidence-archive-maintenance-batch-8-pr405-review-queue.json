@@ -1,0 +1,1490 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_archive_maintenance_batch_8_pr405_review_queue",
+  "status": "internal_manual_review_probe_complete",
+  "public_output": false,
+  "review_pr": 405,
+  "reviewed_at": "2026-07-16",
+  "source_queue_id": "sog_evidence_archive_maintenance_queue_v7_pr403",
+  "selected_count": 10,
+  "automatic_canonical_write": false,
+  "exact_source_match_required": true,
+  "rows": [
+    {
+      "evidence_id": "sog_src_rai_integrations_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "RAI integrations and partners",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+      "claim_scopes": [
+        "rai_ethereum_contract_and_market_integrations"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "RAI Integrations | GEB Docs",
+        "sampled_body_sha256": "78aa408e1294985808973f431fffee303be2a962eb43c5b029cb679a684e1a40",
+        "sampled_body_bytes": 262148
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.reflexer.finance%2Frai%2Frai-integrations-and-partners&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 19,
+        "earliest_capture": {
+          "timestamp": "20210927102451",
+          "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "NYG2H7R5VZFV6L3DLWUSAHS6NKCFRXXZ"
+        },
+        "latest_capture": {
+          "timestamp": "20260412052859",
+          "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+          "statuscode": "200",
+          "mimetype": "text/markdown",
+          "digest": "3UFRJ7GYHSXDSRYLSTJBZ2LUNNZT37C5"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210927102451",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NYG2H7R5VZFV6L3DLWUSAHS6NKCFRXXZ"
+          },
+          {
+            "timestamp": "20210928191016",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "X6Q7RH4YOQXL3FUGFKVRTSAL32FOCFZ7"
+          },
+          {
+            "timestamp": "20211009005509",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MDUS4FGEWMQFR6T4PRYTZWZTCP7HOQ4V"
+          },
+          {
+            "timestamp": "20211206231006",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UUXB35J5AMVTN4FJF2U5XRFZN4SP535X"
+          },
+          {
+            "timestamp": "20220520100239",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "37FXS3MRXA77JPU5UVNW65IHP5URYI5I"
+          },
+          {
+            "timestamp": "20220807183242",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FQRJ4XLRIF5KU6IBBP26MAYFRCQNVH6J"
+          },
+          {
+            "timestamp": "20220927092927",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IB57TJVNBTX4AVELUQQKS6KFV6BU5BCM"
+          },
+          {
+            "timestamp": "20221128174523",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2V62LO3FYCGX3XG7VS3GTYHORROPAMJ6"
+          },
+          {
+            "timestamp": "20240214132748",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RHYU3AMBEHIIFC7VPVUA4WJJQZ2RTRHX"
+          },
+          {
+            "timestamp": "20240303205932",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MGNBZGY7OGRNJF63TTOFW7YHUZT5JTDY"
+          },
+          {
+            "timestamp": "20240425035455",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WOPLD4HIZSPZFMNOIQZEF26JLKFN6Q4L"
+          },
+          {
+            "timestamp": "20250614163736",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TVVUMWBMYXWI4JAROKB7FIUS4QOWLRTK"
+          },
+          {
+            "timestamp": "20251017035609",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7EIEYVUJ5V4N54JOYUD33YW7N7DFHU26"
+          },
+          {
+            "timestamp": "20260120174745",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZAV6OO7XX2WPIZY56HZ3LGSC6G5S3KD4"
+          },
+          {
+            "timestamp": "20260227084513",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "55KTGIIJCIYVM2WRQ7VR4ZYRFYOVPB6K"
+          },
+          {
+            "timestamp": "20260412052859",
+            "original": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+            "statuscode": "200",
+            "mimetype": "text/markdown",
+            "digest": "3UFRJ7GYHSXDSRYLSTJBZ2LUNNZT37C5"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rai_oracle_relayer_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Oracle Relayer",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+      "claim_scopes": [
+        "rai_redemption_price_and_rate_contract_mechanics"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Oracle Relayer | GEB Docs",
+        "sampled_body_sha256": "4d4e01b7a3c5abe73b6d24a2dc7366589cbe6a46e9aae3a4545ccff41791fd0c",
+        "sampled_body_bytes": 262228
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.reflexer.finance%2Fsystem-contracts%2Foracle-module%2Foracle-relayer&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 19,
+        "earliest_capture": {
+          "timestamp": "20210301194148",
+          "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "QMQJMKIN4XRI3JWKIWTKS47L6Y4DNEBE"
+        },
+        "latest_capture": {
+          "timestamp": "20260516114629",
+          "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "4N3KGRYJ23YRFQW6JFJJSCASGDMKNIV6"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210301194148",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QMQJMKIN4XRI3JWKIWTKS47L6Y4DNEBE"
+          },
+          {
+            "timestamp": "20210513064540",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D6MZGGXHXLEAK76KDITZADI4QQAG25OV"
+          },
+          {
+            "timestamp": "20210927103139",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UPMVBMBJAF7CFYQGGHD7PE7O77PS4ZNU"
+          },
+          {
+            "timestamp": "20220121235358",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CASRB2U5LXGTWZHE642UVWS4CBIIAMX3"
+          },
+          {
+            "timestamp": "20220626204344",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MERM63IZFT24UVW7QYXGNVBM3O4FRMLV"
+          },
+          {
+            "timestamp": "20221007130353",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YIOTP3LUL6QIZBBPRZ5RBYBCBUEO4UW4"
+          },
+          {
+            "timestamp": "20230205143613",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CJJS27T5XFP5XTMM5GQNLBBPPEZ3SH3F"
+          },
+          {
+            "timestamp": "20230609151023",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZNGVATNSSWI67EWWZY6CVMTBWRESUVI3"
+          },
+          {
+            "timestamp": "20240810171257",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NRUAWROP5XJVANWBGJE7MS3ZCE3TDMXE"
+          },
+          {
+            "timestamp": "20241110090513",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QBWHF4DYIPYTFFU2EJLCUXKKSX4HPNCJ"
+          },
+          {
+            "timestamp": "20250218230711",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UO5QTM3FAEIU55J245EVH65Y5ZL5JIC3"
+          },
+          {
+            "timestamp": "20250614172935",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PVDPXVWBI6XMTACCUQNDNISQEMHFUVQ2"
+          },
+          {
+            "timestamp": "20250908064407",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FRDIMF65ASOZJWOSATFXOOOGBXHMVZJ6"
+          },
+          {
+            "timestamp": "20251213072158",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SRCLVSHBUJ7EDSYMLKCSE7JAUQMDLS4I"
+          },
+          {
+            "timestamp": "20260312201215",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2GC4FS6IFREJYSDPRPVQDWQ6SH4QLB7J"
+          },
+          {
+            "timestamp": "20260516114629",
+            "original": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4N3KGRYJ23YRFQW6JFJJSCASGDMKNIV6"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rai_ungovernance_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Governance Minimization Guide",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+      "claim_scopes": [
+        "rai_governance_minimization_stages"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Governance Minimization Guide | GEB Docs",
+        "sampled_body_sha256": "102ae13d70499b0398cf6161473756b8085dd6ffea8f6b7fef398373fff5ef17",
+        "sampled_body_bytes": 262248
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.reflexer.finance%2Fungovernance%2Fgovernance-minimization-guide&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 47,
+        "earliest_capture": {
+          "timestamp": "20210120151645",
+          "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "F27VVDM5XABJPCYK3KVXLODTMQNIJIWV"
+        },
+        "latest_capture": {
+          "timestamp": "20260516120713",
+          "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "GVRRTNZYZ5JVYSHRYVNVL4NWJYEZTVJU"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210120151645",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "F27VVDM5XABJPCYK3KVXLODTMQNIJIWV"
+          },
+          {
+            "timestamp": "20210121220759",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5DPVKUALZUBPPIYLRLWBNHR22C4BBR6H"
+          },
+          {
+            "timestamp": "20210131233649",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GI46YQZXBZRTIIH7DSIHPA5DPPYAN6HM"
+          },
+          {
+            "timestamp": "20210227214405",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KNSNWCCDZ4S2HQDB3QM7LU5HLZEE44L5"
+          },
+          {
+            "timestamp": "20210301200742",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D3ONTQOBBC647T7PTB6DHIUPLYGOIM3X"
+          },
+          {
+            "timestamp": "20210309124218",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AKPK6DBUF73JRKVDJJ4OI34PQXIPFZHQ"
+          },
+          {
+            "timestamp": "20210421084951",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "352S2CXKZIWTGO376QKKS6ITA4CYSS24"
+          },
+          {
+            "timestamp": "20210614222811",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "R6ZHN5Z52O4CCGU6PXEOBWJFKXNQK3B5"
+          },
+          {
+            "timestamp": "20250401023009",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XJDQRZZNGBF2DL5DFVE2NYHDAAOMRE4V"
+          },
+          {
+            "timestamp": "20250402071014",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XTQUW7A2C5Z3RXXOGNYQQ2DEXRZH4KE5"
+          },
+          {
+            "timestamp": "20250524165936",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NTUHZJAANQ3N27WAHQ2MP6D6LT2DQUMX"
+          },
+          {
+            "timestamp": "20250908070943",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WLFAX5UKA43LDET57LPKUFJPCQU7QGLO"
+          },
+          {
+            "timestamp": "20250917232842",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VW4ICYARA4DTCKXBN2N7VSMECD4W3D3L"
+          },
+          {
+            "timestamp": "20251213074325",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IB5OXMCX3H5XOFGXEOU5D5TGZBVKSWVX"
+          },
+          {
+            "timestamp": "20260120171744",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YYZZIA4HGAM3CUDNENA467FHZLUUMDGW"
+          },
+          {
+            "timestamp": "20260516120713",
+            "original": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GVRRTNZYZ5JVYSHRYVNVL4NWJYEZTVJU"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rlusd_docs",
+      "source_file": "data/evidence-extra.json",
+      "title": "Ripple documentation for stablecoin products",
+      "publisher": "Ripple",
+      "source_type": "developer_docs",
+      "canonical_url": "https://docs.ripple.com/products/stablecoin",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.ripple.com/products/stablecoin",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Ripple documentation",
+        "sampled_body_sha256": "8a8b8e24729035ab9f3b5d814243aaeb953d27a3fd7b6fdc6ef0fc0698c84b53",
+        "sampled_body_bytes": 262144
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.ripple.com%2Fproducts%2Fstablecoin&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20251204205157",
+          "original": "https://docs.ripple.com/products/stablecoin",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "XR67CVKX7KB5ANF3RYNOHCSQGD373HCL"
+        },
+        "latest_capture": {
+          "timestamp": "20260421093749",
+          "original": "https://docs.ripple.com/products/stablecoin",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "TW4MEMUNDQYUUM4YNYIJSBVLZ5AS4ZQP"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20251204205157",
+            "original": "https://docs.ripple.com/products/stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XR67CVKX7KB5ANF3RYNOHCSQGD373HCL"
+          },
+          {
+            "timestamp": "20260116225158",
+            "original": "https://docs.ripple.com/products/stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7ALJFWJZLSEJ2D65IZN44CIRD7IAOZUJ"
+          },
+          {
+            "timestamp": "20260123004954",
+            "original": "https://docs.ripple.com/products/stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HCOJRTFN55SULPUDYOQZLH3MJTYM4NLE"
+          },
+          {
+            "timestamp": "20260302044958",
+            "original": "https://docs.ripple.com/products/stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SYHJ6O25ZNPHEWR3DIKH4WJCPRSHF3GJ"
+          },
+          {
+            "timestamp": "20260419081113",
+            "original": "https://docs.ripple.com/products/stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3TGY6JV6US2ZRT6A43V7SLEJJ25X3K53"
+          },
+          {
+            "timestamp": "20260421093749",
+            "original": "https://docs.ripple.com/products/stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TW4MEMUNDQYUUM4YNYIJSBVLZ5AS4ZQP"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rlusd_launch_2024",
+      "source_file": "data/evidence-extra.json",
+      "title": "Ripple USD launches globally",
+      "publisher": "Ripple",
+      "source_type": "official_launch_announcement",
+      "canonical_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Raising the Standard for Stablecoins: Ripple USD Launches Globally with Unmatched Utility, Experience, and Compliance | Ripple",
+        "sampled_body_sha256": "62c35d7440e7c26c345ac1d952eb5fc321dbff77259d3d4b38c3d9eb0c84eb4e",
+        "sampled_body_bytes": 116762
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fripple.com%2Fripple-press%2Fraising-the-standard-for-stablecoins-ripple-usd-launches-globally%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 22,
+        "earliest_capture": {
+          "timestamp": "20241216170952",
+          "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "UGSHJWZN2HBCVKQ2EED7OSOSCIVS7PMP"
+        },
+        "latest_capture": {
+          "timestamp": "20260626171436",
+          "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "NFYFAHS5RU3H2MIO27VGNHRC3UFCZJXZ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20241216170952",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UGSHJWZN2HBCVKQ2EED7OSOSCIVS7PMP"
+          },
+          {
+            "timestamp": "20241221022326",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3DP2BEV523RGKUTDWFCRGGE6DM4WXKP6"
+          },
+          {
+            "timestamp": "20241223061357",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OCAFFMSGRV6JLVOTOYQSKMWHYI6Q2URL"
+          },
+          {
+            "timestamp": "20241225051242",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YJQ5VBFLGMBVPZBQWNBITE2QDKL5XRNI"
+          },
+          {
+            "timestamp": "20250115142823",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4BJSVCXXZHNF77HELBJWGUY4HXQFOHCK"
+          },
+          {
+            "timestamp": "20250123001156",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2ICM2DPIXUT42T5PVDAM3YAM4KTYPOWQ"
+          },
+          {
+            "timestamp": "20250130040718",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "N57HGFZLD2FEPZZ6XNOJM6DTXV7ZD3AA"
+          },
+          {
+            "timestamp": "20250205014709",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NMEV6RJWMVTH6EVYUPOZT7IRA77T5DWK"
+          },
+          {
+            "timestamp": "20251023000139",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LZIVRMXHMDE537WKVVMVRAKX6NFBE7SK"
+          },
+          {
+            "timestamp": "20251117215127",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IWD6LNSCPCQORDDLTI7DRTZNLDPCMSJZ"
+          },
+          {
+            "timestamp": "20251121175226",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JNEHZZI2GBRPVQZOAHBH4BX52AZDKWVC"
+          },
+          {
+            "timestamp": "20260123195419",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SLN75BCFKSQJXXQYGFTWOFMVUWIZWF5H"
+          },
+          {
+            "timestamp": "20260210022750",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7ZV2LXHOU2WNEE4WUJRBDSCI6QY33ZYF"
+          },
+          {
+            "timestamp": "20260223004505",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NIGXROUNGUYUENDCQJ2TTXSAT6YBD6ZR"
+          },
+          {
+            "timestamp": "20260516171108",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2PV2M7RQJ5PATWVPZWEAZCBFULH6KVRL"
+          },
+          {
+            "timestamp": "20260626171436",
+            "original": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NFYFAHS5RU3H2MIO27VGNHRC3UFCZJXZ"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rlusd_ripple_page",
+      "source_file": "data/evidence-extra.json",
+      "title": "Ripple USD stablecoin page",
+      "publisher": "Ripple",
+      "source_type": "issuer_page",
+      "canonical_url": "https://ripple.com/solutions/stablecoin/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://ripple.com/solutions/stablecoin/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Ripple USD (RLUSD) Stablecoin | Ripple",
+        "sampled_body_sha256": "8c1751226aa1b4ef28cb7f46caad78772bd2b856a8b94bdf0165e76ed7e27c92",
+        "sampled_body_bytes": 244343
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fripple.com%2Fsolutions%2Fstablecoin%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 110,
+        "earliest_capture": {
+          "timestamp": "20240805145401",
+          "original": "https://ripple.com/solutions/stablecoin/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "HDBBK5OL2GHX7JQEEQRCU2EG6IBB3D6R"
+        },
+        "latest_capture": {
+          "timestamp": "20260711212052",
+          "original": "https://ripple.com/solutions/stablecoin/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "G4XGURLAVX6THHUJINNWY7ILINXYJHJU"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20240805145401",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HDBBK5OL2GHX7JQEEQRCU2EG6IBB3D6R"
+          },
+          {
+            "timestamp": "20240808024638",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OC2HK4PJVB47QMY2LM44YWOX7YKYEYVC"
+          },
+          {
+            "timestamp": "20240808035630",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3RTTPF2PGX5ULA2DOGQQ6JFUDPHQFXSJ"
+          },
+          {
+            "timestamp": "20240809225453",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GJA23SMZEAA6CYBBO4DHV2VCUDPIAUWM"
+          },
+          {
+            "timestamp": "20240812230147",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "T5SS27Y7AROGSWEBR3ZDETDZZI624NTR"
+          },
+          {
+            "timestamp": "20240814005247",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PZJD66QUSXRYKAKNJ7WQ6DDNVZWBCODG"
+          },
+          {
+            "timestamp": "20240823122348",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QL3A7NOQGIHDLABRHTGJE3JE3I7IH6JT"
+          },
+          {
+            "timestamp": "20240902171834",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HMOA3NQVJXIZOPIEHP7BVKFWFPCHDWMA"
+          },
+          {
+            "timestamp": "20260513090101",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NSOBRSUEK6FBEQL5HWGJKQ5T4FUWHIVY"
+          },
+          {
+            "timestamp": "20260513125935",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GWI52FPE4BDVWXOEVOTQ2JV3KE5DU5AO"
+          },
+          {
+            "timestamp": "20260515181115",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FWSCENJRNL2XKEVWIPYGHP7FM2G2HPAG"
+          },
+          {
+            "timestamp": "20260516181700",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EW5GN72K2YXJYQCFXEH773IO6W2MXQ75"
+          },
+          {
+            "timestamp": "20260521002348",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "B4D7M5IZF3BZTMFLV7BSI2DFBGI5EUW4"
+          },
+          {
+            "timestamp": "20260618162541",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZXUUK6BAYU67TIDJZOBJVWWOEEDP6P3Z"
+          },
+          {
+            "timestamp": "20260618190508",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZTOWJE5PDUTFMGAGDDYFUVOSLUGLAWEQ"
+          },
+          {
+            "timestamp": "20260711212052",
+            "original": "https://ripple.com/solutions/stablecoin/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "G4XGURLAVX6THHUJINNWY7ILINXYJHJU"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_spot_about_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "About SPOT",
+      "publisher": "Ampleforth",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.ampleforth.org/learn/about-spot",
+      "claim_scopes": [
+        "spot_perpetual_note_collateral_and_use_cases"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.ampleforth.org/learn/about-spot",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "About SPOT | Ampleforth Docs",
+        "sampled_body_sha256": "cf1cbe95732dc825948fcc963eeb98b278b85c56514e321280faba7b6d753c4d",
+        "sampled_body_bytes": 262174
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.ampleforth.org%2Flearn%2Fabout-spot&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 27,
+        "earliest_capture": {
+          "timestamp": "20220927214739",
+          "original": "https://docs.ampleforth.org/learn/about-spot",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "WYSNVJ7ANBT3MJGRKVZEJNT2CMZXQUAR"
+        },
+        "latest_capture": {
+          "timestamp": "20260421195157",
+          "original": "https://docs.ampleforth.org/learn/about-spot",
+          "statuscode": "200",
+          "mimetype": "text/markdown",
+          "digest": "IIAAWAN2DT3JUBNHTVYLFAOQ5GVR7MQG"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20220927214739",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WYSNVJ7ANBT3MJGRKVZEJNT2CMZXQUAR"
+          },
+          {
+            "timestamp": "20221007124850",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FFJYG5ZOH2D4XREL3T3WV34L7ZOVGPVO"
+          },
+          {
+            "timestamp": "20221007230136",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DD62RJOJ5UEFRXYVGPL3FDQQPRL3ZVBV"
+          },
+          {
+            "timestamp": "20221022092427",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KMT5BSIRJHBDWGKAZ3NUETLQBC6WCHFU"
+          },
+          {
+            "timestamp": "20221210021721",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XMSCH4FNKENWTYTCR67ZEZW3R77PTZDS"
+          },
+          {
+            "timestamp": "20230324031101",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "T636O6VELAMGBPQL6EDBL5L2BQICVXUD"
+          },
+          {
+            "timestamp": "20230601222914",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ECM6JGJYZQSTR3VWAEQGHMIHTKULGYGU"
+          },
+          {
+            "timestamp": "20230928074747",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BEYYWJPD4HWRC24YP7EXXKZZFVXQV7TV"
+          },
+          {
+            "timestamp": "20250709031351",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3AATLR4SZZ3AKIGHPHRKB72C23TA4Q44"
+          },
+          {
+            "timestamp": "20250722160901",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4ZSY5U3RNQLV7E2W36ETIUIUFZD7M5KU"
+          },
+          {
+            "timestamp": "20250806162609",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RBFM5YH76P3MQK7IWMGQWO22IPRK6CSA"
+          },
+          {
+            "timestamp": "20250918090136",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NLE3WRHPAMENGHZOO4K2MDJLRXMKRM6X"
+          },
+          {
+            "timestamp": "20251014005615",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "II3N6B5LR5U2MQ6AEIW2BLCX5HPXIXLN"
+          },
+          {
+            "timestamp": "20260112061245",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CAX67NZWRN5C6TO4IZ44S4PERDODLKQQ"
+          },
+          {
+            "timestamp": "20260114040825",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QPJBTUEHHW36MQ6TQ7IPU7XHB7MJO2P6"
+          },
+          {
+            "timestamp": "20260421195157",
+            "original": "https://docs.ampleforth.org/learn/about-spot",
+            "statuscode": "200",
+            "mimetype": "text/markdown",
+            "digest": "IIAAWAN2DT3JUBNHTVYLFAOQ5GVR7MQG"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_spot_mint_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "How to mint SPOT",
+      "publisher": "Ampleforth",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+      "claim_scopes": [
+        "spot_protocol_mint_and_redeem_interface"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "How to Mint SPOT | Ampleforth Docs",
+        "sampled_body_sha256": "23124372658b1760938911c0fb9bdb4c907f60b2170fc48b6d6f5ac030b3a2d8",
+        "sampled_body_bytes": 262168
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.ampleforth.org%2Fhow-to-guides%2Fhow-to-mint-spot&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 17,
+        "earliest_capture": {
+          "timestamp": "20220630100140",
+          "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "CLSE352WL5ZGGACFVPTI4YMLTBSAIOIH"
+        },
+        "latest_capture": {
+          "timestamp": "20260309115055",
+          "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "LRUMQDL6PWUXBD6U4CBMOT3LDU7GVOCM"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20220630100140",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CLSE352WL5ZGGACFVPTI4YMLTBSAIOIH"
+          },
+          {
+            "timestamp": "20221007214507",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2QCUS37SFWLHLJ7XR5PGUAJR7WGSC3RD"
+          },
+          {
+            "timestamp": "20230127235249",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BM3O7TPBRLQ75F2PQM53M5DZKBOYCIVZ"
+          },
+          {
+            "timestamp": "20230601215732",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "O3DNR4LNXDBDR3ZB3SZ7Y3ONDCJXSAUX"
+          },
+          {
+            "timestamp": "20230928071708",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GIVQCF2F4S7XFXQ3X6WPW5GZ2MCVDC5D"
+          },
+          {
+            "timestamp": "20240304011314",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5UZC5KH5J45KGPANMV6I7O5YYP2I7LTQ"
+          },
+          {
+            "timestamp": "20240615133533",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZB5DTFUPFMOKMXD3NL4NQXCUDTBJ7HWZ"
+          },
+          {
+            "timestamp": "20240810162852",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PHWH6WJNYKENK3JX3VSUDN5GI6EUSFLM"
+          },
+          {
+            "timestamp": "20250213121805",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HUV42UAMLPJYFMRXALEAKDV7RYAJB6WZ"
+          },
+          {
+            "timestamp": "20250319153731",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FRG47KJHAXE35NIXYHBPXGWFKOE4CZ7E"
+          },
+          {
+            "timestamp": "20250418222859",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "35N36ELVJRTN7VS2PYTKFUAXKLHNT6RX"
+          },
+          {
+            "timestamp": "20250618143034",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FADBON3XAY5JVB72XZOCDXZSF47FNUIH"
+          },
+          {
+            "timestamp": "20250809180040",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XQMPRIYU7BVVAAAXUKVTIYRPG4FO4QFR"
+          },
+          {
+            "timestamp": "20251005183913",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5BIDQAKTIVIABEXANN66ND7QMB3TTVIL"
+          },
+          {
+            "timestamp": "20251210080301",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "F526KAQYW6AFLVFWONF4Q6AOE57FKH4N"
+          },
+          {
+            "timestamp": "20260309115055",
+            "original": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LRUMQDL6PWUXBD6U4CBMOT3LDU7GVOCM"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_spot_site_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Ampleforth SPOT Protocol",
+      "publisher": "Ampleforth",
+      "source_type": "protocol_page",
+      "canonical_url": "https://www.ampleforth.org/",
+      "claim_scopes": [
+        "spot_current_protocol_presence"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.ampleforth.org/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "AMPL",
+        "sampled_body_sha256": "279bf46574321ae8d68ce8fb61766bbb082b5428c56945e386325bf688013e66",
+        "sampled_body_bytes": 36644
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.ampleforth.org%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 192,
+        "earliest_capture": {
+          "timestamp": "20021126191426",
+          "original": "http://www.ampleforth.org:80/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "YLSR75KCYPHZKHUVQ2FPW7OAIATFJKA6"
+        },
+        "latest_capture": {
+          "timestamp": "20260628121342",
+          "original": "https://www.ampleforth.org/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "3EXOFGCMFP7VJRX6QX6Q66YCOE55PK24"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20021126191426",
+            "original": "http://www.ampleforth.org:80/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YLSR75KCYPHZKHUVQ2FPW7OAIATFJKA6"
+          },
+          {
+            "timestamp": "20030210074435",
+            "original": "http://www.ampleforth.org:80/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SWYKW3FLUQ4QY7ATZXUEMUBWQ4R2QRHL"
+          },
+          {
+            "timestamp": "20030422175126",
+            "original": "http://www.ampleforth.org:80/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GSKWOECIVDRC4AACR6WXAVM27JLU2U3I"
+          },
+          {
+            "timestamp": "20070703124114",
+            "original": "http://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WQXO7QHC4HYGRK5KCGPVDZJTQLCY46H2"
+          },
+          {
+            "timestamp": "20071123030442",
+            "original": "http://www.ampleforth.org:80/",
+            "statuscode": "200",
+            "mimetype": "unk",
+            "digest": "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ"
+          },
+          {
+            "timestamp": "20080820054334",
+            "original": "http://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "62E6ES3KC4KAMUUW6DXAJVJMNZWW423C"
+          },
+          {
+            "timestamp": "20120916222208",
+            "original": "http://www.ampleforth.org:80/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "P5NLCDXNQDVDQM6SMF7RNOCCEVPPEJRG"
+          },
+          {
+            "timestamp": "20130814090605",
+            "original": "http://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "US4D25ZIVAY4VBLJVDGDUIGRCJE3RUVO"
+          },
+          {
+            "timestamp": "20251110005306",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MFWGFTPPHMV5BCR7LOOJKHX3CO6M3UYY"
+          },
+          {
+            "timestamp": "20251117155459",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3EXOFGCMFP7VJRX6QX6Q66YCOE55PK24"
+          },
+          {
+            "timestamp": "20251214042326",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MFWGFTPPHMV5BCR7LOOJKHX3CO6M3UYY"
+          },
+          {
+            "timestamp": "20260216070401",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3EXOFGCMFP7VJRX6QX6Q66YCOE55PK24"
+          },
+          {
+            "timestamp": "20260309150949",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MFWGFTPPHMV5BCR7LOOJKHX3CO6M3UYY"
+          },
+          {
+            "timestamp": "20260317223603",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3EXOFGCMFP7VJRX6QX6Q66YCOE55PK24"
+          },
+          {
+            "timestamp": "20260319095900",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MFWGFTPPHMV5BCR7LOOJKHX3CO6M3UYY"
+          },
+          {
+            "timestamp": "20260628121342",
+            "original": "https://www.ampleforth.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3EXOFGCMFP7VJRX6QX6Q66YCOE55PK24"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_spot_v2_rollout_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Proposal to initiate rollout of SPOT v2",
+      "publisher": "Ampleforth Governance",
+      "source_type": "governance_proposal",
+      "canonical_url": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+      "claim_scopes": [
+        "button_tranche_continuity",
+        "in_place_upgrade",
+        "no_holder_migration",
+        "signal_vote_passed",
+        "v2_proposal"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Proposal: Initiate Rollout of Spot v2 - Ampleforth Governance - Ampleforth Governance",
+        "sampled_body_sha256": "c5e53b182200ab71de1f2a5373bda65c6cab78c72e433ef3f82cac58e16916c0",
+        "sampled_body_bytes": 60311
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fforum.ampleforth.org%2Ft%2Fproposal-initiate-rollout-of-spot-v2%2F738&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 2,
+        "earliest_capture": {
+          "timestamp": "20240510042029",
+          "original": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "ALHYCOPPP2ZDSFVUZF5PZRHIA4PKRW7F"
+        },
+        "latest_capture": {
+          "timestamp": "20240522054902",
+          "original": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "HZCSELJ2DCEKXCLYYR2D7Y2TIG6HABIW"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20240510042029",
+            "original": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ALHYCOPPP2ZDSFVUZF5PZRHIA4PKRW7F"
+          },
+          {
+            "timestamp": "20240522054902",
+            "original": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HZCSELJ2DCEKXCLYYR2D7Y2TIG6HABIW"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    }
+  ],
+  "boundaries": {
+    "canonical_data_changed": false,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "public_surface_changed": false
+  }
+}
