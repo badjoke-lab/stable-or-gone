@@ -36,7 +36,12 @@ jobs:
       - name: Apply deterministic reviewed decisions
         run: |
           set -o pipefail
-          { node scripts/build-evidence-archive-maintenance-batch-4-pr385.mjs; node scripts/build-evidence-archive-maintenance-batch-4-pr385.mjs --check; } 2>&1 | tee -a /tmp/pr385-all.txt
+          {
+            node scripts/build-evidence-archive-maintenance-batch-4-pr385.mjs
+            node scripts/sync-evidence-source-alias-pr385.mjs
+            node scripts/build-evidence-archive-maintenance-batch-4-pr385.mjs --check
+            node scripts/sync-evidence-source-alias-pr385.mjs --check
+          } 2>&1 | tee -a /tmp/pr385-all.txt
       - name: Commit generated PR 385 outputs
         if: github.event_name == 'push'
         run: |
@@ -47,6 +52,7 @@ jobs:
             data/evidence-extra.json \
             data/evidence-pr033.json \
             data/evidence.json \
+            data/evidence-events-pr037.json \
             data/stats-history.json \
             docs/migration/evidence-archive-maintenance-batch-4-pr385-review-queue.json \
             docs/migration/evidence-archive-maintenance-outcomes-pr385.json \
@@ -64,7 +70,11 @@ jobs:
       - name: Validate PR 385 reviewed scope
         run: |
           set -o pipefail
-          { node scripts/validate-evidence-archive-maintenance-batch-4-pr385.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr385-all.txt
+          {
+            node scripts/validate-evidence-archive-maintenance-batch-4-pr385.mjs
+            node scripts/validate-evidence-source-alias-sync-pr385.mjs
+            npm run validate:active-workstream
+          } 2>&1 | tee -a /tmp/pr385-all.txt
       - name: Validate canonical Evidence
         run: |
           set -o pipefail
@@ -107,6 +117,7 @@ jobs:
               ':!data/evidence-extra.json' \
               ':!data/evidence-pr033.json' \
               ':!data/evidence.json' \
+              ':!data/evidence-events-pr037.json' \
               ':!data/stats-history.json'
             git diff --exit-code origin/main...HEAD -- src/ public/
             node --input-type=module <<'NODE'
