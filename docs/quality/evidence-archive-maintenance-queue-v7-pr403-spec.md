@@ -38,6 +38,23 @@ Reviewed suppressions excluded: 18
 Added / removed / retained versus Queue v6: 10 / 10 / 0
 ```
 
+Selected Evidence identities:
+
+```text
+sog_src_rai_integrations_batch_b
+sog_src_rai_oracle_relayer_batch_b
+sog_src_rai_ungovernance_batch_b
+sog_src_rlusd_docs
+sog_src_rlusd_launch_2024
+sog_src_rlusd_ripple_page
+sog_src_spot_about_batch_b
+sog_src_spot_mint_batch_b
+sog_src_spot_site_batch_b
+sog_src_spot_v2_rollout_batch_b
+```
+
+All ten selected rows are ordinary unreviewed archive gaps in the `official_issuer_protocol_product` priority bucket. No reviewed identity is reactivated.
+
 ## Required outputs
 
 ```text
@@ -51,4 +68,4 @@ PR #403 is an internal manual-review queue only. It may not change canonical rec
 
 ## Exit condition
 
-Queue v7 and its Queue v6 delta regenerate deterministically, exclude all eighteen suppressions, include no reactivated identity, select exactly ten ordinary unreviewed candidates, and stop at `REVIEW GATE`.
+Queue v7 and its Queue v6 delta regenerate deterministically, contain the ten fixed ordinary unreviewed candidates above, exclude all eighteen suppressions, include no reactivated identity, and stop at `REVIEW GATE`.
