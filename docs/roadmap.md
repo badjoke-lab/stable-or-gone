@@ -53,7 +53,28 @@ PR #380 Evidence and Archive Maintenance Batch 3 — reviewed complete
 REVIEW GATE — mandatory next
 ```
 
+## Activation trace
+
+The historical activation state that governed this completed batch was:
+
+```text
+Status: canonical execution schedule — PR #380 active
+REVIEW GATE: mandatory after PR #380
+```
+
+This trace does not override the current review-gate status.
+
 ## PR #380 reviewed result
+
+The allowed outcome vocabulary was:
+
+```text
+dated_exact_archive_added
+reviewed_source_replacement
+reviewed_no_safe_change
+```
+
+The reviewed distribution is:
 
 ```text
 selected Evidence identities: 10
