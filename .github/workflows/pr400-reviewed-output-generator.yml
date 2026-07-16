@@ -20,7 +20,7 @@ jobs:
   generate:
     if: github.event_name != 'pull_request' || github.head_ref == 'pr400-evidence-archive-maintenance-batch-7'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,8 +52,44 @@ jobs:
             docs/migration/registry-release-integrity-baseline.json
           if git diff --cached --quiet; then
             echo 'Reviewed outputs already committed'
-            exit 0
+          else
+            git commit -m 'Apply PR 400 reviewed archive maintenance outcomes'
+            git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
+            git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
           fi
-          git commit -m 'Apply PR 400 reviewed archive maintenance outcomes'
-          git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
-          git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
+      - name: Validate reviewed maintenance contract
+        run: |
+          node scripts/validate-evidence-archive-maintenance-batch-7-pr400.mjs
+          npm run validate:active-workstream
+      - name: Validate canonical and release integrity
+        run: |
+          node scripts/validate-registry-evidence-integrity-audit.mjs
+          npm run validate:data
+          npm run validate:evidence-relations-v2
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:v3
+          npm run validate:deployments-v3
+          npm run validate:income-v3
+          npm run validate:parity
+          npm run validate:release-integrity
+          node scripts/validate-non-ui-release-material-current.mjs
+      - name: Validate statistics
+        run: |
+          node scripts/build-stats.mjs
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+          SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs
+      - name: Verify bounded diff
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ \
+            ':!data/evidence-batch-b.json' \
+            ':!data/evidence-pr033.json' \
+            ':!data/evidence.json' \
+            ':!data/stats-history.json'
+          git diff --exit-code origin/main...HEAD -- src/ public/
+          git diff --exit-code
+      - name: Check and build public site
+        run: |
+          npm run check
+          npm run build
+          npm run verify:public
