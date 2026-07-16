@@ -30,7 +30,23 @@
     "reviewed_suppressed_count": 12,
     "reviewed_reactivated_eligible_count": 1,
     "reviewed_reactivated_evidence_ids": ["sog_src_fdusd_site"],
-    "selected_count": 10
+    "eligible_pool_count": 108,
+    "selected_count": 10,
+    "selected_evidence_ids": [
+      "sog_src_fdusd_site",
+      "sog_src_frax_docs",
+      "sog_src_frax_docs_frax",
+      "sog_src_frax_official_site",
+      "sog_src_gho_bridge_batch_c",
+      "sog_src_gho_facilitators_batch_c",
+      "sog_src_gho_gsm_batch_c",
+      "sog_src_gho_launch_batch_c",
+      "sog_src_gusd_gemini_official",
+      "sog_src_lusd_liquity_docs"
+    ],
+    "added_vs_queue_v3": 9,
+    "removed_vs_queue_v3": 9,
+    "retained_vs_queue_v3": 1
   },
   "boundaries": {
     "canonical_data_change_allowed": false,
