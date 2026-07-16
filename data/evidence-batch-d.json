@@ -367,7 +367,7 @@
     "url": "https://withdraw.mstable.org/",
     "publisher": "mStable",
     "published_at": null,
-    "archived_url": null,
+    "archived_url": "https://web.archive.org/web/20250812145859/https://withdraw.mstable.org/",
     "accessed_at": "2026-06-14",
     "reliability": "high",
     "claim_scope": "legacy_withdrawal_path",

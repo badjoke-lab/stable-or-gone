@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_evidence_archive_maintenance_batch_6_pr395_reviewed_handoff_2026_07_16",
+  "status": "reviewed_complete",
+  "review_pr": 395,
+  "source_pr": 394,
+  "source_merge_commit": "e40e437e4bbd39e442399d00ac5f7f790beac821",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v5_pr393",
+  "outcome_id": "sog_evidence_archive_maintenance_outcomes_pr395_2026_07_16",
+  "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
+  "stats_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_112_checkpoint_pr395_2026_07_16",
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "reserve_reports": 120,
+    "known_unknowns": 325,
+    "regulatory_notes": 9,
+    "deployments": 174,
+    "market_access_records": 8,
+    "legal_profiles": 112,
+    "reserve_components": 145,
+    "income_profiles": 112
+  },
+  "evidence_quality": {
+    "archive_recorded": 425,
+    "archive_not_recorded": 134,
+    "selected": 10,
+    "changed": 9,
+    "dated_archive_added": 9,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 1
+  },
+  "changed_evidence_ids": [
+    "sog_src_makerdao_forum_lifecycle_reference",
+    "sog_src_mim_2025_postmortem_batch_a",
+    "sog_src_mim_docs_batch_a",
+    "sog_src_mim_tokenomics_batch_a",
+    "sog_src_mstable_withdrawal_batch_d",
+    "sog_src_nuon_contracts_batch_b",
+    "sog_src_nuon_guarded_launch_batch_b",
+    "sog_src_nuon_maxcap_batch_b",
+    "sog_src_nuon_minting_batch_b"
+  ],
+  "dated_archive_added_evidence_ids": [
+    "sog_src_makerdao_forum_lifecycle_reference",
+    "sog_src_mim_2025_postmortem_batch_a",
+    "sog_src_mim_docs_batch_a",
+    "sog_src_mim_tokenomics_batch_a",
+    "sog_src_mstable_withdrawal_batch_d",
+    "sog_src_nuon_contracts_batch_b",
+    "sog_src_nuon_guarded_launch_batch_b",
+    "sog_src_nuon_maxcap_batch_b",
+    "sog_src_nuon_minting_batch_b"
+  ],
+  "source_replacement_evidence_ids": [],
+  "reviewed_no_safe_change_evidence_ids": [
+    "sog_src_makerdao_docs_dai"
+  ],
+  "stats_input_digest_sha256": "68da1922eb558e3f614e54de20a57e7f72f32e1a290142092e9ca5738b7a14ff",
+  "stats_model_sha256": "7b05cb35245330b0bc48351d0f82c0c2dcaeab193f4175ecfa978f2fc40dcfbb",
+  "stats_snapshot_sha256": "adc8913a797fd6453567c5a3fee83c52bc7891afeda188c05d92d8d579567092",
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "Merged PR #394 authorizes only PR #395 before another review gate; no later archive, dossier, Market Access, growth, or public-surface work is pre-authorized."
+  },
+  "boundaries": {
+    "new_asset": false,
+    "new_or_removed_evidence_identity": false,
+    "evidence_relation_change": false,
+    "non_evidence_canonical_change": false,
+    "market_access_change": false,
+    "new_public_surface": false,
+    "ranking": false,
+    "automatic_monitoring_promotion": false
+  },
+  "handoff_sha256": "8fce0c02039d321c3babfba9347dbd0d9708210b22c96060b2f787fbc2700c58"
+}

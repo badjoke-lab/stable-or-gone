@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "queue_id": "sog_evidence_archive_maintenance_batch_6_pr395_review_queue",
-  "status": "internal_manual_review_probe_complete",
+  "status": "reviewed_complete",
   "public_output": false,
   "review_pr": 395,
   "reviewed_at": "2026-07-16",
@@ -38,14 +38,14 @@
         "sampled_captures": [],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "reviewed_no_safe_change",
       "accepted_archived_url": null,
       "accepted_capture_timestamp": null,
       "accepted_capture_digest": null,
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The exact canonical route has no successful exact-source Wayback capture, and the live redirect resolves to Sky Legal Documents rather than a clearly equivalent Dai documentation source.",
+      "remaining_uncertainty": "A future reviewed exact capture or a source replacement preserving the Dai documentation claim scope could reactivate this identity."
     },
     {
       "evidence_id": "sog_src_makerdao_forum_lifecycle_reference",
@@ -200,14 +200,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260228065719/https://forum.sky.money/",
+      "accepted_capture_timestamp": "20260228065719",
+      "accepted_capture_digest": "3IWYYY7HKOZ2524NNJWOP2VUJBWGBSEY",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "Wayback returned a successful HTTP 200 capture for the exact Sky forum canonical URL before its later redirect to forum.skyeco.com.",
+      "remaining_uncertainty": "The capture preserves the reviewed forum identity and does not imply that every governance thread or later forum migration is included."
     },
     {
       "evidence_id": "sog_src_mim_2025_postmortem_batch_a",
@@ -273,14 +273,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20250504142146/https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+      "accepted_capture_timestamp": "20250504142146",
+      "accepted_capture_digest": "JV2HKCJX3VUTUIR3G4QY2VXIN6J3SFUX",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The live Mirror route is currently protected by an interstitial, while Wayback returned a successful exact-source HTTP 200 capture of the reviewed Abracadabra postmortem URL.",
+      "remaining_uncertainty": "The archive preserves the reviewed postmortem page version; later revisions or linked incident material may not be included."
     },
     {
       "evidence_id": "sog_src_mim_docs_batch_a",
@@ -437,14 +437,14 @@
         ],
         "captures_sample_truncated": true
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20221129035158/https://docs.abracadabra.money/",
+      "accepted_capture_timestamp": "20221129035158",
+      "accepted_capture_digest": "WAGPFPPOEFMAQNAEGTO23A73KYPMOJOV",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "Wayback returned a successful HTTP 200 capture for the exact Abracadabra documentation root, which remains the reviewed protocol documentation identity.",
+      "remaining_uncertainty": "The capture preserves a 2022 documentation version and does not represent all later collateral, product, or interface changes."
     },
     {
       "evidence_id": "sog_src_mim_tokenomics_batch_a",
@@ -587,14 +587,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260309213939/https://docs.abracadabra.money/learn/tokens/tokenomics",
+      "accepted_capture_timestamp": "20260309213939",
+      "accepted_capture_digest": "NPFHFM36LW5TGZ4HP6U7FOHDZ3PDTAWJ",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The tokenomics route is live with the expected Abracadabra documentation identity, and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed tokenomics version; supported contracts and multichain details may change later."
     },
     {
       "evidence_id": "sog_src_mstable_withdrawal_batch_d",
@@ -683,14 +683,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20250812145859/https://withdraw.mstable.org/",
+      "accepted_capture_timestamp": "20250812145859",
+      "accepted_capture_digest": "C5DNSKJZRSOOBBHRVPLXFE4VUDUTKJGU",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The mStable withdrawal application is live with the expected interface identity, and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the application shell; wallet connectivity and onchain withdrawal functionality are not guaranteed by the archive alone."
     },
     {
       "evidence_id": "sog_src_nuon_contracts_batch_b",
@@ -777,14 +777,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260519094405/https://docs.nuon.fi/resources/token-contracts",
+      "accepted_capture_timestamp": "20260519094405",
+      "accepted_capture_digest": "FB6SKRKGXCFGCAU3HRX7ABUSZ3SRZRF7",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The Nuon token-contract documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed address list; later deployments or contract migrations may not be represented."
     },
     {
       "evidence_id": "sog_src_nuon_guarded_launch_batch_b",
@@ -871,14 +871,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260519090059/https://docs.nuon.fi/guarded-launch",
+      "accepted_capture_timestamp": "20260519090059",
+      "accepted_capture_digest": "XOYAWSY6D2YXGUGCEXJKUXWFXL6ZZNWF",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The Nuon guarded-launch documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed guarded-launch description; operational phases and distribution conditions may evolve."
     },
     {
       "evidence_id": "sog_src_nuon_maxcap_batch_b",
@@ -958,14 +958,14 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260207155818/https://docs.nuon.fi/maxcap-token",
+      "accepted_capture_timestamp": "20260207155818",
+      "accepted_capture_digest": "2ZYV2KANYWAZVD7OI3MQSO335LQIUADN",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The Nuon MaxCap documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed MaxCap design description; governance, risk, and strategy parameters may change later."
     },
     {
       "evidence_id": "sog_src_nuon_minting_batch_b",
@@ -1045,20 +1045,25 @@
         ],
         "captures_sample_truncated": false
       },
-      "review_status": "pending_manual_review",
-      "proposed_outcome": null,
-      "accepted_archived_url": null,
-      "accepted_capture_timestamp": null,
-      "accepted_capture_digest": null,
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260519100944/https://docs.nuon.fi/guides/minting-nuon",
+      "accepted_capture_timestamp": "20260519100944",
+      "accepted_capture_digest": "H3QN342MHMPTXWNOLG5RQ7Y3554PUM53",
       "accepted_replacement_url": null,
-      "reviewer_reason": null,
-      "remaining_uncertainty": null
+      "reviewer_reason": "The Nuon minting documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed minting and rebase description; supported assets, parameters, and interface behavior may change later."
     }
   ],
   "boundaries": {
-    "canonical_data_changed": false,
+    "canonical_data_changed": true,
     "automatic_capture_promotion": false,
     "automatic_source_replacement": false,
     "public_surface_changed": false
+  },
+  "outcome_counts": {
+    "dated_exact_archive_added": 9,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 1
   }
 }

@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
   "recorded_at": "2026-07-16",
-  "source_commit": "pr390-evidence-archive-maintenance-batch-5",
+  "source_commit": "pr395-evidence-archive-maintenance-batch-6",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
-  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
-  "maintenance_pr": 390,
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
+  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
+  "maintenance_pr": 395,
   "expected_counts": {
     "assets": 112,
     "organizations": 107,
@@ -26,40 +26,40 @@
     "income_profiles": 112
   },
   "evidence_quality": {
-    "archive_index_count": 416,
-    "archive_not_recorded_count": 143,
+    "archive_index_count": 425,
+    "archive_not_recorded_count": 134,
     "selected_for_review": 10,
-    "canonical_changes": 10,
-    "reviewed_no_safe_change": 0,
+    "canonical_changes": 9,
+    "reviewed_no_safe_change": 1,
     "new_evidence_records": 0
   },
   "maintenance_outcome": {
     "changed_evidence_ids": [
-      "sog_src_fdusd_site",
-      "sog_src_frax_docs",
-      "sog_src_frax_docs_frax",
-      "sog_src_frax_official_site",
-      "sog_src_gho_bridge_batch_c",
-      "sog_src_gho_facilitators_batch_c",
-      "sog_src_gho_gsm_batch_c",
-      "sog_src_gho_launch_batch_c",
-      "sog_src_gusd_gemini_official",
-      "sog_src_lusd_liquity_docs"
+      "sog_src_makerdao_forum_lifecycle_reference",
+      "sog_src_mim_2025_postmortem_batch_a",
+      "sog_src_mim_docs_batch_a",
+      "sog_src_mim_tokenomics_batch_a",
+      "sog_src_mstable_withdrawal_batch_d",
+      "sog_src_nuon_contracts_batch_b",
+      "sog_src_nuon_guarded_launch_batch_b",
+      "sog_src_nuon_maxcap_batch_b",
+      "sog_src_nuon_minting_batch_b"
     ],
     "dated_archive_added_evidence_ids": [
-      "sog_src_fdusd_site",
-      "sog_src_frax_docs",
-      "sog_src_frax_docs_frax",
-      "sog_src_frax_official_site",
-      "sog_src_gho_bridge_batch_c",
-      "sog_src_gho_facilitators_batch_c",
-      "sog_src_gho_gsm_batch_c",
-      "sog_src_gho_launch_batch_c",
-      "sog_src_gusd_gemini_official",
-      "sog_src_lusd_liquity_docs"
+      "sog_src_makerdao_forum_lifecycle_reference",
+      "sog_src_mim_2025_postmortem_batch_a",
+      "sog_src_mim_docs_batch_a",
+      "sog_src_mim_tokenomics_batch_a",
+      "sog_src_mstable_withdrawal_batch_d",
+      "sog_src_nuon_contracts_batch_b",
+      "sog_src_nuon_guarded_launch_batch_b",
+      "sog_src_nuon_maxcap_batch_b",
+      "sog_src_nuon_minting_batch_b"
     ],
     "source_replacement_evidence_ids": [],
-    "reviewed_no_safe_change_evidence_ids": []
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_makerdao_docs_dai"
+    ]
   },
-  "notes": "Current deterministic canonical checkpoint after PR #390 Evidence and Archive Maintenance Batch 5. 10 exact dated archive captures and 0 reviewed source replacements were accepted; 0 identities recorded reviewed no-safe-change. Archive coverage is 416 of 559. All canonical identity counts, Evidence Relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
+  "notes": "Current deterministic canonical checkpoint after PR #395 Evidence and Archive Maintenance Batch 6. 9 exact dated archive captures and 0 reviewed source replacements were accepted; 1 identity recorded reviewed no-safe-change. Archive coverage is 425 of 559. All canonical identity counts, Evidence Relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
 }

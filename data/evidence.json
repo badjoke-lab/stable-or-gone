@@ -198,7 +198,8 @@
     "accessed_at": "2026-06-03",
     "reliability": "medium",
     "claim_scope": "governance_lifecycle",
-    "notes": "Governance entry point for DAI/Sky lifecycle context. Do not use as final source for a specific claim until exact post/proposal is selected."
+    "notes": "Governance entry point for DAI/Sky lifecycle context. Do not use as final source for a specific claim until exact post/proposal is selected.",
+    "archived_url": "https://web.archive.org/web/20260228065719/https://forum.sky.money/"
   },
   {
     "id": "sog_src_terra_docs",
