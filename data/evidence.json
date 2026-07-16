@@ -418,7 +418,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity_redemption",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20260710183731/https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd"
   },
   {
     "id": "sog_src_pyusd_paxos_official",

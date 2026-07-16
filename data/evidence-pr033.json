@@ -88,7 +88,8 @@
     "publisher": "Paxos",
     "claim_scope": "PYUSD issuer, backing, reserve, redemption, and transparency context",
     "reliability": "medium",
-    "notes": "PR-033 issuer source. Use together with PayPal product source."
+    "notes": "PR-033 issuer source. Use together with PayPal product source.",
+    "archived_url": "https://web.archive.org/web/20230807191502/https://paxos.com/pyusd/"
   },
   {
     "id": "sog_src_pyusd_transparency",
