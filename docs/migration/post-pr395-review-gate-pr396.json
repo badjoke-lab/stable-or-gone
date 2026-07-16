@@ -1,0 +1,511 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr395_review_gate_pr396_2026_07_16",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 396,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint": {
+    "checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
+    "stats_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_112_checkpoint_pr395_2026_07_16",
+    "release_baseline_id": "sog_release_integrity_pr395_112_assets_2026_07_16",
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 425,
+    "archive_not_recorded": 134,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "completed_pr395": {
+    "outcome_id": "sog_evidence_archive_maintenance_outcomes_pr395_2026_07_16",
+    "handoff_id": "sog_evidence_archive_maintenance_batch_6_pr395_reviewed_handoff_2026_07_16",
+    "selected": 10,
+    "changed": 9,
+    "dated_archives_added": 9,
+    "reviewed_source_replacements": 0,
+    "reviewed_no_safe_change": 1,
+    "changed_evidence_ids": [
+      "sog_src_makerdao_forum_lifecycle_reference",
+      "sog_src_mim_2025_postmortem_batch_a",
+      "sog_src_mim_docs_batch_a",
+      "sog_src_mim_tokenomics_batch_a",
+      "sog_src_mstable_withdrawal_batch_d",
+      "sog_src_nuon_contracts_batch_b",
+      "sog_src_nuon_guarded_launch_batch_b",
+      "sog_src_nuon_maxcap_batch_b",
+      "sog_src_nuon_minting_batch_b"
+    ],
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_makerdao_docs_dai"
+    ],
+    "canonical_identity_counts_preserved": true,
+    "public_surface_changed": false
+  },
+  "current_history_v4": {
+    "contract_id": "sog_evidence_archive_review_history_v4_pr392",
+    "manifest_id": "sog_evidence_archive_review_history_manifest_v4_pr392",
+    "audit_id": "sog_evidence_archive_review_history_audit_v4_pr392_2026_07_16",
+    "sources": 5,
+    "events": 50,
+    "reviewed_identities": 48,
+    "latest_included_review_pr": 390,
+    "stale_after_pr395": true
+  },
+  "expected_history_v5": {
+    "sources": 6,
+    "events": 60,
+    "identities": 58,
+    "effective_archive_present": 45,
+    "effective_invalid_removed": 1,
+    "effective_no_safe_change": 12,
+    "effective_source_replacement": 0,
+    "reviewed_unresolved_total": 13,
+    "reviewed_suppressed": 13,
+    "reviewed_reactivated_eligible": 0,
+    "suppressed_evidence_ids": [
+      "sog_src_bold_redemptions_batch_c",
+      "sog_src_busd_binance_phaseout",
+      "sog_src_busd_paxos_issuer_update",
+      "sog_src_busd_paxos_statement_pr354",
+      "sog_src_busd_reuters_sec_2024",
+      "sog_src_circle_stability_update_2023_03_13",
+      "sog_src_circle_svb_update",
+      "sog_src_circle_usdc_contract_addresses",
+      "sog_src_fei_addresses_batch_a",
+      "sog_src_fei_tip121c_execution_2022",
+      "sog_src_makerdao_docs_dai",
+      "sog_src_tether_legal_terms",
+      "sog_src_usdt_terms_pr354"
+    ],
+    "reactivated_evidence_ids": [],
+    "effective_rows": [
+      {
+        "evidence_id": "sog_src_bold_live_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 365,
+        "current_archived_url": "https://web.archive.org/web/20250609144742/https://docs.liquity.org/v2-documentation/friendly-fork-program"
+      },
+      {
+        "evidence_id": "sog_src_bold_overview_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 365,
+        "current_archived_url": "https://web.archive.org/web/20250519194953/https://docs.liquity.org/v2-faq/bold-and-earn"
+      },
+      {
+        "evidence_id": "sog_src_bold_redemptions_batch_c",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_bold_technical_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260511180442/https://docs.liquity.org/v2-documentation/technical-docs-and-audits"
+      },
+      {
+        "evidence_id": "sog_src_busd_binance_phaseout",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_busd_paxos_issuer_update",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_busd_paxos_statement_pr354",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_busd_reuters_sec_2024",
+        "effective_review_outcome": "reviewed_archive_removed_invalid",
+        "effective_review_pr": 360,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_circle_stability_update_2023_03_13",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_circle_svb_update",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_circle_transparency",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260709220608/https://www.circle.com/transparency"
+      },
+      {
+        "evidence_id": "sog_src_circle_usdc_contract_addresses",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 365,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_circle_usdc_product",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260710145752/https://www.circle.com/usdc"
+      },
+      {
+        "evidence_id": "sog_src_crvusd_curve_docs",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20250425052808/https://docs.curve.fi/crvUSD/overview/"
+      },
+      {
+        "evidence_id": "sog_src_crvusd_curve_lifecycle_event",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260210181555/https://resources.curve.finance/crvusd/overview/"
+      },
+      {
+        "evidence_id": "sog_src_dai_whitepaper_pr354",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260709092101/https://makerdao.com/en/whitepaper/"
+      },
+      {
+        "evidence_id": "sog_src_eurc_circle_page",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260709220612/https://www.circle.com/eurc"
+      },
+      {
+        "evidence_id": "sog_src_eurc_developer_docs",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20260701124001/https://developers.circle.com/"
+      },
+      {
+        "evidence_id": "sog_src_eurc_launch_2022",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 380,
+        "current_archived_url": "https://web.archive.org/web/20241212145508/https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc"
+      },
+      {
+        "evidence_id": "sog_src_eurc_mint_page",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20260615233047/https://www.circle.com/circle-mint"
+      },
+      {
+        "evidence_id": "sog_src_fdusd_official_site",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20230804133643/https://firstdigitallabs.com/"
+      },
+      {
+        "evidence_id": "sog_src_fdusd_site",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260416065330/https://www.firstdigitallabs.com/fdusd"
+      },
+      {
+        "evidence_id": "sog_src_fei_addresses_batch_a",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 385,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_fei_final_redemption_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20221207073746/https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D"
+      },
+      {
+        "evidence_id": "sog_src_fei_intro_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20210111203428/https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b"
+      },
+      {
+        "evidence_id": "sog_src_fei_launch_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20210402233802/https://medium.com/fei-protocol/fei-post-genesis-35284a57a659"
+      },
+      {
+        "evidence_id": "sog_src_fei_tip121c_execution_2022",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 385,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_fei_v2_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20211104200241/https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc"
+      },
+      {
+        "evidence_id": "sog_src_frax_app",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 385,
+        "current_archived_url": "https://web.archive.org/web/20260601132859/https://app.frax.finance/"
+      },
+      {
+        "evidence_id": "sog_src_frax_docs",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260509195515/https://docs.frax.com/"
+      },
+      {
+        "evidence_id": "sog_src_frax_docs_frax",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260702224626/https://docs.frax.finance/"
+      },
+      {
+        "evidence_id": "sog_src_frax_official_site",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20250522112121/https://frax.finance/"
+      },
+      {
+        "evidence_id": "sog_src_gho_bridge_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260323202039/https://aave.com/help/gho-stablecoin/bridging-gho"
+      },
+      {
+        "evidence_id": "sog_src_gho_facilitators_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260510055607/https://aave.com/help/gho-stablecoin/facilitators"
+      },
+      {
+        "evidence_id": "sog_src_gho_gsm_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260323202039/https://aave.com/help/gho-stablecoin/stability-module"
+      },
+      {
+        "evidence_id": "sog_src_gho_launch_batch_c",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20250602164747/https://governance-v2.aave.com/governance/proposal/268/"
+      },
+      {
+        "evidence_id": "sog_src_gusd_gemini_official",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260706120118/https://www.gemini.com/dollar"
+      },
+      {
+        "evidence_id": "sog_src_lusd_liquity_docs",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 390,
+        "current_archived_url": "https://web.archive.org/web/20260708204810/https://docs.liquity.org/"
+      },
+      {
+        "evidence_id": "sog_src_makerdao_docs_dai",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 395,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_makerdao_forum_lifecycle_reference",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20260228065719/https://forum.sky.money/"
+      },
+      {
+        "evidence_id": "sog_src_mim_2025_postmortem_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20250504142146/https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA"
+      },
+      {
+        "evidence_id": "sog_src_mim_docs_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20221129035158/https://docs.abracadabra.money/"
+      },
+      {
+        "evidence_id": "sog_src_mim_tokenomics_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20260309213939/https://docs.abracadabra.money/learn/tokens/tokenomics"
+      },
+      {
+        "evidence_id": "sog_src_mstable_withdrawal_batch_d",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20250812145859/https://withdraw.mstable.org/"
+      },
+      {
+        "evidence_id": "sog_src_nuon_contracts_batch_b",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20260519094405/https://docs.nuon.fi/resources/token-contracts"
+      },
+      {
+        "evidence_id": "sog_src_nuon_disclaimer_batch_b",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20260416023630/https://docs.nuon.fi/resources/legal-documents/investment-disclaimer"
+      },
+      {
+        "evidence_id": "sog_src_nuon_guarded_launch_batch_b",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20260519090059/https://docs.nuon.fi/guarded-launch"
+      },
+      {
+        "evidence_id": "sog_src_nuon_maxcap_batch_b",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20260207155818/https://docs.nuon.fi/maxcap-token"
+      },
+      {
+        "evidence_id": "sog_src_nuon_minting_batch_b",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 395,
+        "current_archived_url": "https://web.archive.org/web/20260519100944/https://docs.nuon.fi/guides/minting-nuon"
+      },
+      {
+        "evidence_id": "sog_src_rlusd_user_terms",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20260414072541/https://ripple.com/legal/stablecoin/"
+      },
+      {
+        "evidence_id": "sog_src_tether_legal_terms",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 360,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_usdc_terms_pr354",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20251220022409/https://www.circle.com/legal/usdc-terms"
+      },
+      {
+        "evidence_id": "sog_src_usde_terms_batch_a",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20260124121957/https://docs.ethena.fi/resources/usde-terms-and-conditions"
+      },
+      {
+        "evidence_id": "sog_src_usdt_cftc_2021_event",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20211015150107/https://www.cftc.gov/PressRoom/PressReleases/8450-21"
+      },
+      {
+        "evidence_id": "sog_src_usdt_nyag_2021_event",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20210223124057/https://ag.ny.gov/press-release/2021/attorney-general-james-ends-virtual-currency-trading-platform-bitfinexs-illegal"
+      },
+      {
+        "evidence_id": "sog_src_usdt_terms_pr354",
+        "effective_review_outcome": "reviewed_no_safe_change",
+        "effective_review_pr": 360,
+        "current_archived_url": null
+      },
+      {
+        "evidence_id": "sog_src_ust_sec_2023_32",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 360,
+        "current_archived_url": "https://web.archive.org/web/20240702092147/https://www.sec.gov/newsroom/press-releases/2023-32"
+      },
+      {
+        "evidence_id": "sog_src_xaut_legal_batch_b",
+        "effective_review_outcome": "reviewed_archive_present",
+        "effective_review_pr": 365,
+        "current_archived_url": "https://web.archive.org/web/20250320213402/https://gold.tether.to/legal/lawinforcementpolicy"
+      }
+    ]
+  },
+  "findings": [
+    "PR #395 completed ten bounded reviews with nine exact dated archive additions and one reviewed no-safe-change.",
+    "Archive coverage advanced from 416/143 to 425/134 while Evidence identities and Relations remained 559/559.",
+    "History v4 is stale because it excludes all PR #395 review events.",
+    "The Sky documentation root becomes a new reviewed no-safe-change suppression.",
+    "No reviewed source replacement remains eligible for queue reactivation."
+  ],
+  "decisions": {
+    "evidence_archive_review_history_contract_v5": {
+      "decision": "approved_internal",
+      "pr": 397,
+      "expected_sources": 6,
+      "expected_events": 60,
+      "expected_reviewed_identities": 58,
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    "evidence_archive_maintenance_queue_v6": {
+      "decision": "approved_internal_after_pr397",
+      "pr": 398,
+      "maximum_selected_count": 10,
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false,
+      "review_gate_required": true
+    },
+    "evidence_archive_maintenance_batch_7": {
+      "decision": "not_approved"
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 397,
+      "work_item": "Evidence Archive Review-History Contract v5 Update",
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    {
+      "pr": 398,
+      "work_item": "Evidence Archive Maintenance Queue v6 Refresh",
+      "depends_on_pr": 397,
+      "maximum_selected_count": 10,
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Evidence and Archive Maintenance Batch 7",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #397 must update AGENTS.md and docs/roadmap.md before generating History v5 outputs.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "cf5bca7d6b19402d8ce71b9b8b2f72b018e3b7cef7aba73004a834345b229675",
+  "decision_digest_sha256": "538e036d4320ed56c0ec05959d7701eed1621ec6c14723a9ba4c420fdf80801a"
+}
