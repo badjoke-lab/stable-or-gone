@@ -1,0 +1,1064 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_archive_maintenance_batch_6_pr395_review_queue",
+  "status": "internal_manual_review_probe_complete",
+  "public_output": false,
+  "review_pr": 395,
+  "reviewed_at": "2026-07-16",
+  "source_queue_id": "sog_evidence_archive_maintenance_queue_v5_pr393",
+  "selected_count": 10,
+  "automatic_canonical_write": false,
+  "exact_source_match_required": true,
+  "rows": [
+    {
+      "evidence_id": "sog_src_makerdao_docs_dai",
+      "source_file": "data/evidence.json",
+      "title": "MakerDAO / Sky documentation for Dai",
+      "publisher": "Sky / MakerDAO ecosystem",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://docs.sky.money/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.sky.money/legal",
+        "redirected": true,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Home | Sky Legal Documents",
+        "sampled_body_sha256": "732e2e4051e11500b9d0bbcf7bd70e3f485b79382a252e432e08d2cc5b664f0c",
+        "sampled_body_bytes": 262164
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.sky.money%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_makerdao_forum_lifecycle_reference",
+      "source_file": "data/evidence.json",
+      "title": "MakerDAO governance/forum lifecycle reference",
+      "publisher": "Sky / MakerDAO governance forum",
+      "source_type": "governance_reference",
+      "canonical_url": "https://forum.sky.money/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://forum.skyeco.com/",
+        "redirected": true,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Sky Forum - Transparent and sustainable finance",
+        "sampled_body_sha256": "050cb808491842cb463a60a4802038c2e08144ba0dfc7678ad83833f33515aed",
+        "sampled_body_bytes": 27760
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fforum.sky.money%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 33,
+        "earliest_capture": {
+          "timestamp": "20240927155226",
+          "original": "https://forum.sky.money/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "UEWBT46CAPSBW7VPHWXTRFKND2SEW5DC"
+        },
+        "latest_capture": {
+          "timestamp": "20260228065719",
+          "original": "https://forum.sky.money/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "3IWYYY7HKOZ2524NNJWOP2VUJBWGBSEY"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20240927155226",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UEWBT46CAPSBW7VPHWXTRFKND2SEW5DC"
+          },
+          {
+            "timestamp": "20240928151516",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "55URYFGFCZDGZ6LARFCMM75DA3XI5U2C"
+          },
+          {
+            "timestamp": "20241001014250",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7R3EQRNOH3RI7CUDWL3I3ADGQZE4VIQS"
+          },
+          {
+            "timestamp": "20241101071604",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WHQQX3XTHGK3AXFN2SCUG4EKMOLAOAIU"
+          },
+          {
+            "timestamp": "20241202141054",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DBELQ7IBT54M4GSA7VBIXJKYPHYL2QPH"
+          },
+          {
+            "timestamp": "20250112042218",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SWXTG7CTUY6FSBITDPJPV2JLIPWHEZ6K"
+          },
+          {
+            "timestamp": "20250215023333",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IQGJTFPPRAWQQQ34OAUS6NG6CRZFTLWA"
+          },
+          {
+            "timestamp": "20250301220107",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VNYTTQRWQAIGCONPDC7U3NTQSZJUMGYW"
+          },
+          {
+            "timestamp": "20251030063432",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2EQYJ77SQN3FTWE5VRURP7ORKKB4EBW5"
+          },
+          {
+            "timestamp": "20251105041103",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D3XUDJZ4MU2AZYQ45JDHYQ2YNJWXXZYH"
+          },
+          {
+            "timestamp": "20251117044124",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UEYWXWE4PLOOMVDKBGDXOZ7BE67JDTPM"
+          },
+          {
+            "timestamp": "20251217151845",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EJIUPANC3L7WS3OSI42EHSZQ7EIVEIUN"
+          },
+          {
+            "timestamp": "20251223054911",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6IMWPFSU2VIULDARJSOYOM66YR6532UH"
+          },
+          {
+            "timestamp": "20260128044810",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2DKOWAB56YBNBEGTMW2YUUO2ELJUDUSR"
+          },
+          {
+            "timestamp": "20260202010659",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OZCQ3HDVZBQGIRJEAPUSBNJ6KLNFWCRL"
+          },
+          {
+            "timestamp": "20260228065719",
+            "original": "https://forum.sky.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3IWYYY7HKOZ2524NNJWOP2VUJBWGBSEY"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_mim_2025_postmortem_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "Post Mortem - attack on GM Cauldrons 25/03/25",
+      "publisher": "Abracadabra Money",
+      "source_type": "protocol_postmortem",
+      "canonical_url": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+      "claim_scopes": [
+        "mim_gm_cauldron_exploit_and_response"
+      ],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Just a moment...",
+        "sampled_body_sha256": "5681c4b3c5e5a416423da8ce611f1faa0ab6b16d0f0a177d021752d9c9282df3",
+        "sampled_body_bytes": 5915
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fmirror.xyz%2F0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9%2FG5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 3,
+        "earliest_capture": {
+          "timestamp": "20250327204211",
+          "original": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "RYZTE4556U3DZBG6Z5WKBXB5EO7ICFUX"
+        },
+        "latest_capture": {
+          "timestamp": "20250504142146",
+          "original": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "JV2HKCJX3VUTUIR3G4QY2VXIN6J3SFUX"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250327204211",
+            "original": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RYZTE4556U3DZBG6Z5WKBXB5EO7ICFUX"
+          },
+          {
+            "timestamp": "20250424173825",
+            "original": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2CRUAOLYYVZHBDBZVCEKMAALN6E2VKGF"
+          },
+          {
+            "timestamp": "20250504142146",
+            "original": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JV2HKCJX3VUTUIR3G4QY2VXIN6J3SFUX"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_mim_docs_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "Abracadabra documentation introduction",
+      "publisher": "Abracadabra Money",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.abracadabra.money/",
+      "claim_scopes": [
+        "mim_protocol_design_and_collateralized_borrowing"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.abracadabra.money/learn",
+        "redirected": true,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Introduction | User&#x27;s Documentation",
+        "sampled_body_sha256": "a75c308ee480b2eae10300b2ece6a6d9234d9cbd869fe836f348f0b9163649da",
+        "sampled_body_bytes": 262242
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.abracadabra.money%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 39,
+        "earliest_capture": {
+          "timestamp": "20210826005652",
+          "original": "https://docs.abracadabra.money/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "NH6JARX7CN2YKKRBJNQ75NIQ7IORAY7J"
+        },
+        "latest_capture": {
+          "timestamp": "20221129035158",
+          "original": "https://docs.abracadabra.money/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "WAGPFPPOEFMAQNAEGTO23A73KYPMOJOV"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210826005652",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NH6JARX7CN2YKKRBJNQ75NIQ7IORAY7J"
+          },
+          {
+            "timestamp": "20211021131118",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "G6YDJIPHPKHQSVZO4E7NEQRDBV2ELDDZ"
+          },
+          {
+            "timestamp": "20211128105047",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "V343MSFCQNMCKVVZSC5HDTSMVM2B4TII"
+          },
+          {
+            "timestamp": "20211129000405",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "I3RAODSGDEYNB2D4CMYMQ6RXRXSD3DJX"
+          },
+          {
+            "timestamp": "20211129152702",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HDRGA47SGUCQJUO7UJRST6PZN3LE3J5U"
+          },
+          {
+            "timestamp": "20211214011520",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "E26WWONP53FHCHPCWWSNSTOIBKJABYJI"
+          },
+          {
+            "timestamp": "20211216131714",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JUYRSGC7HSFH64ZHWQRDKXAYDWTG5SQ6"
+          },
+          {
+            "timestamp": "20211221021559",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JC6EAZM6VSE6UBNUD3PCQGJ5T2WMPHOF"
+          },
+          {
+            "timestamp": "20220726033225",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4Q3OE4H7XGPVDWLCLRZT3IBIKNCZALN4"
+          },
+          {
+            "timestamp": "20220814033505",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "75RQ3Z3IWBKAKHEQEZBGYLR73W3ISSU7"
+          },
+          {
+            "timestamp": "20220823152331",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IQKGL6RTARKH2K2TEDBDLKIQYC7KVSTT"
+          },
+          {
+            "timestamp": "20221002130236",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "46BMDOE7U44OBYOGSBMPOCMZ4EOQHGZA"
+          },
+          {
+            "timestamp": "20221115084939",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6CJST7Y3FNMBT35A5SWZ6YAUAJN4P6W2"
+          },
+          {
+            "timestamp": "20221116062924",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Z45IKI6BIA6R7A5E5TZCQPAGOXEXVWPE"
+          },
+          {
+            "timestamp": "20221122070424",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KTLV5HTXKJS46RM5TH4KMJZUOMGOYQWF"
+          },
+          {
+            "timestamp": "20221129035158",
+            "original": "https://docs.abracadabra.money/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WAGPFPPOEFMAQNAEGTO23A73KYPMOJOV"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_mim_tokenomics_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "MIM tokenomics and supported contracts",
+      "publisher": "Abracadabra Money",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+      "claim_scopes": [
+        "mim_peg_contract_and_multichain_context"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Tokenomics | User&#x27;s Documentation",
+        "sampled_body_sha256": "aeedb28cdc6cf601b14fc0dcbc93b0736242cb15e601e75d39455ad150baccdd",
+        "sampled_body_bytes": 262224
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.abracadabra.money%2Flearn%2Ftokens%2Ftokenomics&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 14,
+        "earliest_capture": {
+          "timestamp": "20230928213304",
+          "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "JOPMEOASBYQCWTJZANKXSZMSVS7MHGVU"
+        },
+        "latest_capture": {
+          "timestamp": "20260309213939",
+          "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "NPFHFM36LW5TGZ4HP6U7FOHDZ3PDTAWJ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20230928213304",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JOPMEOASBYQCWTJZANKXSZMSVS7MHGVU"
+          },
+          {
+            "timestamp": "20231129155426",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4OU6XPGJCLFC5PAAHK7D76QRRIS2X43L"
+          },
+          {
+            "timestamp": "20240414071529",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QICCJRDPHPQIKF7EHMMEBL3AGCWK7WWQ"
+          },
+          {
+            "timestamp": "20240424215024",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AOPUC6CQQ2AJO72PHPANBOZ5QKE3RY3B"
+          },
+          {
+            "timestamp": "20241209151231",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ODWQRYCDVYUFDUI6DQE46OPDFEUOA6MY"
+          },
+          {
+            "timestamp": "20250124223029",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YMNA3T2LM44YXESVKM7IA2X2Y4Q3YOY6"
+          },
+          {
+            "timestamp": "20250125163500",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5BDNLFYH3REG26C4EOVBH5R4BZGTINB2"
+          },
+          {
+            "timestamp": "20250404223039",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "U3GBTG3WTENTAUS3JQQQYIDPSPVN6ZUV"
+          },
+          {
+            "timestamp": "20250420040116",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2X2L3LY6INFO2RSFG7RISO5FZDQHJ25B"
+          },
+          {
+            "timestamp": "20250714184619",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WBAWQK3DA2VLNYQDGUV5P3AKVTMRV7GK"
+          },
+          {
+            "timestamp": "20250801041525",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RIP4ANICPFXIGI7D42GJROEN2KRSVJM6"
+          },
+          {
+            "timestamp": "20250910084003",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GPDB6TQGJEUNF7NEMXFUT5NA2K63462B"
+          },
+          {
+            "timestamp": "20251208074618",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KGGHJZYJQ3KTKJQPYDGSUT545SOVSLNP"
+          },
+          {
+            "timestamp": "20260309213939",
+            "original": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NPFHFM36LW5TGZ4HP6U7FOHDZ3PDTAWJ"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_mstable_withdrawal_batch_d",
+      "source_file": "data/evidence-batch-d.json",
+      "title": "mStable legacy withdrawal application",
+      "publisher": "mStable",
+      "source_type": "official_application",
+      "canonical_url": "https://withdraw.mstable.org/",
+      "claim_scopes": [
+        "current_interface",
+        "legacy_withdrawal_path",
+        "redemption_exit"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://withdraw.mstable.org/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "mStable Withdraw",
+        "sampled_body_sha256": "b39aa6da2a030361910015ec01b0906146eebd02904cd33fd8fc777b39b1f4be",
+        "sampled_body_bytes": 479
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwithdraw.mstable.org%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20231210063045",
+          "original": "https://withdraw.mstable.org/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "CRSPCI2S6RFLFBI3I3Z5JIWDZX5NIIS7"
+        },
+        "latest_capture": {
+          "timestamp": "20250812145859",
+          "original": "https://withdraw.mstable.org/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "C5DNSKJZRSOOBBHRVPLXFE4VUDUTKJGU"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20231210063045",
+            "original": "https://withdraw.mstable.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CRSPCI2S6RFLFBI3I3Z5JIWDZX5NIIS7"
+          },
+          {
+            "timestamp": "20240302191029",
+            "original": "https://withdraw.mstable.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WFOFSJRQGW2RU76AGY7GYWIVPNHKIN7J"
+          },
+          {
+            "timestamp": "20240323134523",
+            "original": "https://withdraw.mstable.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5RHZ7XMOBVIS6MM4D3F2DMUIUKHPZPUS"
+          },
+          {
+            "timestamp": "20240524180617",
+            "original": "https://withdraw.mstable.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YI4IHCTPS4MKYIRPVX7BT4DATHI5ZS56"
+          },
+          {
+            "timestamp": "20250314054216",
+            "original": "https://withdraw.mstable.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XJ53R4YSBND7JRCRJFCMYIHPFALM7MOQ"
+          },
+          {
+            "timestamp": "20250812145859",
+            "original": "https://withdraw.mstable.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "C5DNSKJZRSOOBBHRVPLXFE4VUDUTKJGU"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_nuon_contracts_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Nuon token contracts",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.nuon.fi/resources/token-contracts",
+      "claim_scopes": [
+        "nuon_base_contract_and_related_token_addresses"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.nuon.fi/resources/token-contracts",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Token Contracts | Nuon Guides",
+        "sampled_body_sha256": "62722036974d629dfe31d4ae3cb63d39bac068768b4dfab6ff1758cdb986a44b",
+        "sampled_body_bytes": 262164
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.nuon.fi%2Fresources%2Ftoken-contracts&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20250428055345",
+          "original": "https://docs.nuon.fi/resources/token-contracts",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "OEIRBZEFNA43JQJTROE4NCOB46LV3GNJ"
+        },
+        "latest_capture": {
+          "timestamp": "20260519094405",
+          "original": "https://docs.nuon.fi/resources/token-contracts",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "FB6SKRKGXCFGCAU3HRX7ABUSZ3SRZRF7"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250428055345",
+            "original": "https://docs.nuon.fi/resources/token-contracts",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OEIRBZEFNA43JQJTROE4NCOB46LV3GNJ"
+          },
+          {
+            "timestamp": "20250813033157",
+            "original": "https://docs.nuon.fi/resources/token-contracts",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QWJ4AVODHZRUE6CBJ2TYYEYGMG2TRQ4S"
+          },
+          {
+            "timestamp": "20250814235510",
+            "original": "https://docs.nuon.fi/resources/token-contracts",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BQ3IAS5IM3255UL3RMJR45W2SCAD3Q4R"
+          },
+          {
+            "timestamp": "20251113122327",
+            "original": "https://docs.nuon.fi/resources/token-contracts",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D6V7IS3FII5XQWCJZRBB7KOZHBIIZZIY"
+          },
+          {
+            "timestamp": "20260121220009",
+            "original": "https://docs.nuon.fi/resources/token-contracts",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RNDKN2FBLGCIOI4WFG2TIBTHKCKXI3CC"
+          },
+          {
+            "timestamp": "20260519094405",
+            "original": "https://docs.nuon.fi/resources/token-contracts",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FB6SKRKGXCFGCAU3HRX7ABUSZ3SRZRF7"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_nuon_guarded_launch_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Nuon guarded launch",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.nuon.fi/guarded-launch",
+      "claim_scopes": [
+        "nuon_v2_guarded_launch_and_maxcap_distribution"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.nuon.fi/guarded-launch",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Guarded Launch | Nuon Guides",
+        "sampled_body_sha256": "63b0f3c40226ef002bade305dd574ed644573c8538ad615d3e4192231f883688",
+        "sampled_body_bytes": 262186
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.nuon.fi%2Fguarded-launch&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20250428045141",
+          "original": "https://docs.nuon.fi/guarded-launch",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "BBVK7OALDPDQGKQCERVUEZHMOVJDJIBO"
+        },
+        "latest_capture": {
+          "timestamp": "20260519090059",
+          "original": "https://docs.nuon.fi/guarded-launch",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "XOYAWSY6D2YXGUGCEXJKUXWFXL6ZZNWF"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250428045141",
+            "original": "https://docs.nuon.fi/guarded-launch",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BBVK7OALDPDQGKQCERVUEZHMOVJDJIBO"
+          },
+          {
+            "timestamp": "20250717144332",
+            "original": "https://docs.nuon.fi/guarded-launch",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JJOZRULS2DIYR63LE6TX2QCM5UHLXPJ5"
+          },
+          {
+            "timestamp": "20250813203340",
+            "original": "https://docs.nuon.fi/guarded-launch",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3TOYXDOXZYPZB3FCGUUEPFUHKFH3HN7T"
+          },
+          {
+            "timestamp": "20251113104035",
+            "original": "https://docs.nuon.fi/guarded-launch",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JCTWGWRNAAOWPRRIKHNUTHE3BMCOEU2Z"
+          },
+          {
+            "timestamp": "20260207154241",
+            "original": "https://docs.nuon.fi/guarded-launch",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "M7WGNWQ4W7X7WJ3MAM7ITERFIRSBAAGD"
+          },
+          {
+            "timestamp": "20260519090059",
+            "original": "https://docs.nuon.fi/guarded-launch",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XOYAWSY6D2YXGUGCEXJKUXWFXL6ZZNWF"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_nuon_maxcap_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "MaxCap token",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.nuon.fi/maxcap-token",
+      "claim_scopes": [
+        "nuon_risk_bearing_governance_and_strategy_layer"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.nuon.fi/maxcap-token",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "MaxCap Token | Nuon Guides",
+        "sampled_body_sha256": "5148722fc4109f19df47b8b294ec1c4525bf8b1dac262f3466a9c809a5789ff1",
+        "sampled_body_bytes": 262170
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.nuon.fi%2Fmaxcap-token&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 5,
+        "earliest_capture": {
+          "timestamp": "20250428050444",
+          "original": "https://docs.nuon.fi/maxcap-token",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "HULXWZXZ7RRYJHEQSNHKZL5OLJBBWY5D"
+        },
+        "latest_capture": {
+          "timestamp": "20260207155818",
+          "original": "https://docs.nuon.fi/maxcap-token",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "2ZYV2KANYWAZVD7OI3MQSO335LQIUADN"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250428050444",
+            "original": "https://docs.nuon.fi/maxcap-token",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HULXWZXZ7RRYJHEQSNHKZL5OLJBBWY5D"
+          },
+          {
+            "timestamp": "20250813030127",
+            "original": "https://docs.nuon.fi/maxcap-token",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KDID72SDLWB6542GRQMRBA7DL5WMWYWY"
+          },
+          {
+            "timestamp": "20250813060720",
+            "original": "https://docs.nuon.fi/maxcap-token",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "I5N6QCJCJT2NZ2D3J32X6Y5XYPR22XDQ"
+          },
+          {
+            "timestamp": "20251113104753",
+            "original": "https://docs.nuon.fi/maxcap-token",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IR6OEX5WXO6OONYIB5CSV2X6QZMDTF2U"
+          },
+          {
+            "timestamp": "20260207155818",
+            "original": "https://docs.nuon.fi/maxcap-token",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2ZYV2KANYWAZVD7OI3MQSO335LQIUADN"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_nuon_minting_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Minting Nuon",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.nuon.fi/guides/minting-nuon",
+      "claim_scopes": [
+        "nuon_usdc_mint_and_positive_rebase_mechanics"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.nuon.fi/guides/minting-nuon",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Minting Nuon | Nuon Guides",
+        "sampled_body_sha256": "5ac30db32dc6901643c340c1ab9fbb46c52568e8d9ce58504b94dc19c24e8e38",
+        "sampled_body_bytes": 262176
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.nuon.fi%2Fguides%2Fminting-nuon&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 5,
+        "earliest_capture": {
+          "timestamp": "20250428063250",
+          "original": "https://docs.nuon.fi/guides/minting-nuon",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "DIKRSLNIN3RC6FHTLTKDARVHEL4VEU7W"
+        },
+        "latest_capture": {
+          "timestamp": "20260519100944",
+          "original": "https://docs.nuon.fi/guides/minting-nuon",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "H3QN342MHMPTXWNOLG5RQ7Y3554PUM53"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250428063250",
+            "original": "https://docs.nuon.fi/guides/minting-nuon",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DIKRSLNIN3RC6FHTLTKDARVHEL4VEU7W"
+          },
+          {
+            "timestamp": "20250813132420",
+            "original": "https://docs.nuon.fi/guides/minting-nuon",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EKNLDCS2WN67N7K7HB3YDA6XITPV3SXA"
+          },
+          {
+            "timestamp": "20250916231229",
+            "original": "https://docs.nuon.fi/guides/minting-nuon",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3MKRHEK2QRPJ5PAOQ7TMICZZBAH7ILB7"
+          },
+          {
+            "timestamp": "20260121223706",
+            "original": "https://docs.nuon.fi/guides/minting-nuon",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WQ5IZQLHCHLYLJST33KLKGQOXDZYOIGX"
+          },
+          {
+            "timestamp": "20260519100944",
+            "original": "https://docs.nuon.fi/guides/minting-nuon",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "H3QN342MHMPTXWNOLG5RQ7Y3554PUM53"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    }
+  ],
+  "boundaries": {
+    "canonical_data_changed": false,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "public_surface_changed": false
+  }
+}
