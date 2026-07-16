@@ -35,6 +35,8 @@ reviewed_no_safe_change
 
 The initial workflow records live response, final URL, content identity, and exact-source HTTP 200 Wayback CDX captures. Canonical writes are disabled until a reviewed decision file is committed.
 
+Probe validation target: ten selected identities, zero canonical writes, and one exact-source CDX result set per canonical URL.
+
 ## Boundaries
 
 No new Evidence identities, Evidence Relations, non-Evidence canonical changes, public surfaces, ranking, scoring, recommendation, or automatic promotion. Batch 7 is not authorized.
