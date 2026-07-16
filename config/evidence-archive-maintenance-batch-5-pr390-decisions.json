@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "decision_id": "sog_evidence_archive_maintenance_batch_5_pr390_decisions_v1",
+  "status": "reviewed_manual_decisions",
+  "public_output": false,
+  "review_pr": 390,
+  "reviewed_at": "2026-07-16",
+  "source_review_queue": "docs/migration/evidence-archive-maintenance-batch-5-pr390-review-queue.json",
+  "decisions": [
+    {
+      "evidence_id": "sog_src_fdusd_site",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.firstdigitallabs.com/fdusd",
+      "capture_timestamp": "20260416065330",
+      "capture_digest": "GMTUUTWGGSVMX3DEPHDYQB3QFH2P5OAZ",
+      "archived_url": "https://web.archive.org/web/20260416065330/https://www.firstdigitallabs.com/fdusd",
+      "review_reason": "Wayback returned a successful HTTP 200 capture for the exact reviewed First Digital Labs FDUSD product route after the PR #385 source replacement.",
+      "remaining_uncertainty": "The capture preserves the reviewed 2026 product-page version; later issuer disclosures or eligibility changes remain possible."
+    },
+    {
+      "evidence_id": "sog_src_frax_docs",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://docs.frax.com/",
+      "capture_timestamp": "20260509195515",
+      "capture_digest": "4ASWRQ4DLRJNOBH4QU5ELS7QGOKEEDQ5",
+      "archived_url": "https://web.archive.org/web/20260509195515/https://docs.frax.com/",
+      "review_reason": "The Frax documentation route is live with the expected Frax documentation identity, and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed documentation shell; later documentation restructuring remains possible."
+    },
+    {
+      "evidence_id": "sog_src_frax_docs_frax",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://docs.frax.finance/",
+      "capture_timestamp": "20260702224626",
+      "capture_digest": "67UXDEHQF76DV3K5C3UR3SMFEYATWFYX",
+      "archived_url": "https://web.archive.org/web/20260702224626/https://docs.frax.finance/",
+      "review_reason": "The recorded Frax Finance documentation route is live and Wayback returned a successful HTTP 200 capture for the same canonical source identity.",
+      "remaining_uncertainty": "The capture preserves the reviewed documentation version and does not imply that every historical subsection remains unchanged."
+    },
+    {
+      "evidence_id": "sog_src_frax_official_site",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://frax.finance/",
+      "capture_timestamp": "20250522112121",
+      "capture_digest": "RJ2HE7U2TAPYOYLPOWUDIZW4Q3PQE57T",
+      "archived_url": "https://web.archive.org/web/20250522112121/https://frax.finance/",
+      "review_reason": "Although the live route now redirects to frax.com, Wayback returned a successful HTTP 200 capture for the exact recorded frax.finance source identity.",
+      "remaining_uncertainty": "The archive preserves the former official-site version; the later frax.com redirect remains a separate current-state fact."
+    },
+    {
+      "evidence_id": "sog_src_gho_bridge_batch_c",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://aave.com/help/gho-stablecoin/bridging-gho",
+      "capture_timestamp": "20260323202039",
+      "capture_digest": "OGHERHKB4ARRFRAMUNCKSBA4RV5GD3JR",
+      "archived_url": "https://web.archive.org/web/20260323202039/https://aave.com/help/gho-stablecoin/bridging-gho",
+      "review_reason": "The Aave GHO bridging documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed bridge documentation version; supported networks and operational details may change later."
+    },
+    {
+      "evidence_id": "sog_src_gho_facilitators_batch_c",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://aave.com/help/gho-stablecoin/facilitators",
+      "capture_timestamp": "20260510055607",
+      "capture_digest": "6NPIINYHRL7A4LNN2N7NYQ4UFDMGWSE7",
+      "archived_url": "https://web.archive.org/web/20260510055607/https://aave.com/help/gho-stablecoin/facilitators",
+      "review_reason": "The Aave GHO facilitators documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed facilitator documentation version; facilitator sets and bucket parameters may change later."
+    },
+    {
+      "evidence_id": "sog_src_gho_gsm_batch_c",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://aave.com/help/gho-stablecoin/stability-module",
+      "capture_timestamp": "20260323202039",
+      "capture_digest": "4RZP3KB2EWBPMU2E7QSAFM46PXCU2SVB",
+      "archived_url": "https://web.archive.org/web/20260323202039/https://aave.com/help/gho-stablecoin/stability-module",
+      "review_reason": "The Aave GHO Stability Module documentation is live and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed module documentation version; supported assets and parameters may change later."
+    },
+    {
+      "evidence_id": "sog_src_gho_launch_batch_c",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://governance-v2.aave.com/governance/proposal/268/",
+      "capture_timestamp": "20250602164747",
+      "capture_digest": "MNRA2CZD5WE73TPAYYVDIJYJRL3PZA4T",
+      "archived_url": "https://web.archive.org/web/20250602164747/https://governance-v2.aave.com/governance/proposal/268/",
+      "review_reason": "The Aave governance proposal remains available with the expected GHO Mainnet Launch identity, and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The archive preserves the proposal resource and page shell; dynamic governance rendering may vary."
+    },
+    {
+      "evidence_id": "sog_src_gusd_gemini_official",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.gemini.com/dollar",
+      "capture_timestamp": "20260706120118",
+      "capture_digest": "F4WXF2BUXOY53D25HNA7MMENVXJXGDR6",
+      "archived_url": "https://web.archive.org/web/20260706120118/https://www.gemini.com/dollar",
+      "review_reason": "The Gemini Dollar official page is live with the expected GUSD product identity, and Wayback returned a successful exact-source HTTP 200 capture.",
+      "remaining_uncertainty": "The capture preserves the reviewed 2026 product-page version; later reserve, availability, or legal disclosures may change."
+    },
+    {
+      "evidence_id": "sog_src_lusd_liquity_docs",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://docs.liquity.org/",
+      "capture_timestamp": "20260708204810",
+      "capture_digest": "WDZWJEWM4MTHYBV2WVGBZC6RRD4XT5F4",
+      "archived_url": "https://web.archive.org/web/20260708204810/https://docs.liquity.org/",
+      "review_reason": "The Liquity documentation route is live and Wayback returned a successful HTTP 200 capture for the exact canonical source identity.",
+      "remaining_uncertainty": "The capture preserves the reviewed documentation version; the current site emphasizes Liquity V2 and may continue to evolve."
+    }
+  ],
+  "counts": {
+    "selected": 10,
+    "dated_exact_archive_added": 10,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 0
+  },
+  "boundaries": {
+    "automatic_promotion": false,
+    "identity_substitution": false,
+    "new_evidence_identity": false,
+    "evidence_relation_change": false,
+    "public_surface_change": false
+  }
+}
