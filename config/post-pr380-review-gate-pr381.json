@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr380_review_gate_pr381_v1",
+  "status": "mandatory_internal_review_gate",
+  "review_pr": 381,
+  "reviewed_at": "2026-07-16",
+  "public_output": false,
+  "source_handoff": "docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json",
+  "source_outcomes": "docs/migration/evidence-archive-maintenance-outcomes-pr380.json",
+  "source_history_audit": "docs/migration/evidence-archive-review-history-audit-pr377.json",
+  "source_history_manifest": "docs/migration/evidence-archive-review-history-manifest-pr377.json",
+  "source_checkpoint": "docs/migration/current-canonical-checkpoint.json",
+  "expected_current": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 399,
+    "archive_not_recorded": 160,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "expected_pr380": {
+    "selected": 10,
+    "changed": 10,
+    "dated_archive_added": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_no_safe_change": 0
+  },
+  "current_history_v1": {
+    "sources": 2,
+    "events": 20,
+    "reviewed_identities": 20,
+    "archive_present": 10,
+    "archive_removed_invalid": 1,
+    "no_safe_change": 9,
+    "reviewed_unresolved_suppressed": 10
+  },
+  "expected_history_v2_after_pr382": {
+    "sources": 3,
+    "events": 30,
+    "reviewed_identities": 30,
+    "archive_present": 19,
+    "archive_removed_invalid": 1,
+    "no_safe_change": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_unresolved_total": 11,
+    "reviewed_unresolved_suppressed": 10,
+    "reviewed_reactivated_eligible": 1
+  },
+  "approved_sequence": [
+    {
+      "pr": 382,
+      "work_item": "Evidence Archive Review-History Contract v2 Update",
+      "canonical_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    {
+      "pr": 383,
+      "work_item": "Evidence Archive Maintenance Queue v3 Refresh",
+      "canonical_change_allowed": false,
+      "public_surface_change_allowed": false,
+      "maximum_selected_candidates": 10
+    }
+  ],
+  "decisions": {
+    "evidence_archive_maintenance_batch_4": "not_approved_before_fresh_queue_review",
+    "tier_a_dossier_batch_6": "not_approved_empty_history_aware_queue",
+    "market_access_pilot_3": "not_approved_no_reviewed_candidate_manifest",
+    "record_growth_batch_2": "not_approved",
+    "new_public_surface": "not_approved",
+    "automatic_promotion": "not_approved"
+  },
+  "boundaries": {
+    "current_pr_canonical_data_change_allowed": false,
+    "current_pr_public_surface_change_allowed": false,
+    "historical_output_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "review_gate_after_sequence": true
+}
