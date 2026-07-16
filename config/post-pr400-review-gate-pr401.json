@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr400_review_gate_pr401_v1",
+  "status": "mandatory_internal_review_gate",
+  "review_pr": 401,
+  "reviewed_at": "2026-07-16",
+  "source_outcomes": "docs/migration/evidence-archive-maintenance-outcomes-pr400.json",
+  "source_handoff": "docs/migration/evidence-archive-maintenance-batch-7-pr400-reviewed-handoff.json",
+  "source_history_contract": "config/evidence-archive-review-history-v5-pr397.json",
+  "source_history_manifest": "docs/migration/evidence-archive-review-history-manifest-v5-pr397.json",
+  "source_history_audit": "docs/migration/evidence-archive-review-history-audit-v5-pr397.json",
+  "expected_current": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "expected_history_v6_projection": {
+    "history_source_count": 7,
+    "history_event_count": 70,
+    "reviewed_evidence_identity_count": 68,
+    "effective_archive_present_count": 50,
+    "effective_archive_removed_invalid_count": 1,
+    "effective_no_safe_change_count": 17,
+    "effective_source_replacement_count": 0,
+    "reviewed_unresolved_total_count": 18,
+    "reviewed_suppressed_count": 18,
+    "reviewed_reactivated_eligible_count": 0
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 402,
+      "work_item": "Evidence Archive Review-History Contract v6 Update",
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    },
+    {
+      "pr": 403,
+      "work_item": "Evidence Archive Maintenance Queue v7 Refresh",
+      "depends_on_pr": 402,
+      "maximum_selected_count": 10,
+      "canonical_data_change_allowed": false,
+      "public_surface_change_allowed": false
+    }
+  ],
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 8",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true
+}
