@@ -160,7 +160,7 @@
     "ranking_or_score": false,
     "automatic_promotion": false
   },
-  "source_digest_sha256": "41510957545ef73165cde83b9f70989cfea6ef13fab60a85e7054196d8e96eff",
-  "generation_digest_sha256": "590bbcb4c8e7db13817eb41e7117ff34032e9d6a6a4eb9b72a3ae6707590ae0b",
+  "source_digest_sha256": "87dfe11bf00ca85f0188c6cecf18d4cfd009a0c3f5005056a94440add59a9e6c",
+  "generation_digest_sha256": "3f1ac95ef141f73cf722b945087c2c88ceb434295cee11d35e264366d9716a00",
   "next_work_item": "REVIEW GATE"
 }
