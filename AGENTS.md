@@ -16,10 +16,10 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr381-post-pr380-review-gate.md
-docs/quality/post-pr380-review-gate-pr381-spec.md
-config/post-pr380-review-gate-pr381.json
-docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
+docs/roadmap-amendments/2026-07-16-pr382-evidence-archive-review-history-v2-activation.md
+docs/quality/evidence-archive-review-history-contract-v2-pr382-spec.md
+config/evidence-archive-review-history-v2-pr382.json
+docs/migration/post-pr380-review-gate-pr381.json
 docs/migration/evidence-archive-maintenance-outcomes-pr380.json
 ```
 
@@ -33,28 +33,19 @@ Archive recorded: 399
 Archive not recorded: 160
 Deployments: 174
 Market Access Records: 8
-PR #380 Evidence and Archive Maintenance Batch 3: complete
-PR #381 Post-PR #380 Review Gate: active; complete on merge
-Current authority: REVIEW GATE
+PR #381 Post-PR #380 Review Gate: complete
+PR #382 Evidence Archive Review-History Contract v2 Update: active; complete on merge
+PR #383 Evidence Archive Maintenance Queue v3 Refresh: next after PR #382
+REVIEW GATE: mandatory after PR #383
 ```
 
-PR #381 may record an authority decision only. It may change no canonical data or public surface.
+PR #382 may update internal history contracts and outputs only. It may change no canonical data or public surface.
 
-## Binding review finding
+## Binding history v2 scope
 
-The current PR #377 archive review-history contract contains only PR #360 and PR #365 outcomes. It does not include the nine PR #380 archive additions or the reviewed Circle Mint source replacement.
+PR #382 must ingest PR #360, PR #365, and PR #380 as three immutable reviewed sources keyed by `evidence_id`. The latest reviewed event wins.
 
-The consumed PR #378 queue may not be reused, and Archive Batch 4 is not authorized before a fresh history-aware queue is reviewed.
-
-## Approved next sequence
-
-```text
-PR #382 Evidence Archive Review-History Contract v2 Update
-PR #383 Evidence Archive Maintenance Queue v3 Refresh
-REVIEW GATE
-```
-
-Expected PR #382 history inventory:
+Expected inventory:
 
 ```text
 history sources: 3
@@ -69,9 +60,21 @@ reviewed unresolved suppressed: 10
 reviewed reactivated eligible: 1
 ```
 
-PR #382 and PR #383 are internal contract/queue work only. PR #383 may select at most ten candidates and may make no canonical or public change.
+The sole reactivated identity is:
 
-## Not approved
+```text
+sog_src_eurc_mint_page
+```
+
+Its reviewed same-product source replacement makes it eligible for fresh manual archive review under PR #383. It does not authorize an automatic archive, source change, or canonical promotion.
+
+## Boundaries
+
+PR #382 may change only internal authority, contract, deterministic builder, versioned manifest/audit, validator, and workflow files.
+
+It may not change canonical Evidence, Evidence Relations, assets, deployments, Market Access records, statistics, public outputs, rankings, scores, recommendations, or any reviewed PR #360/#365/#377/#380/#381 source file.
+
+Not approved before the next review gate:
 
 ```text
 Evidence and Archive Maintenance Batch 4
@@ -79,7 +82,6 @@ Tier A Dossier Deepening Batch 6
 Market Access Pilot 3
 Record Growth Batch 2
 new public page or explorer
-ranking, score, or recommendation
 automatic monitoring promotion
 automatic canonical promotion
 ```

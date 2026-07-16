@@ -65,7 +65,7 @@ check(latest?.data_quality?.coverage?.archive_evidence?.count === 399, 'latest a
 check(historyCheckpoint.canonical_checkpoint_id === current.checkpoint_id, 'history/current binding');
 
 markers(roadmap, ['Canonical stable assets: 112', 'Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', 'Archive recorded: 399', 'Archive not recorded: 160'], 'current roadmap');
-markers(agents, ['Canonical stable assets: 112', 'Canonical Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', 'Archive recorded: 399', 'Archive not recorded: 160', 'Current authority: REVIEW GATE'], 'AGENTS.md');
+markers(agents, ['Canonical stable assets: 112', 'Canonical Evidence: 559', 'Evidence Relations: 559', 'Deployments: 174', 'Market Access Records: 8', 'Archive recorded: 399', 'Archive not recorded: 160', 'Current authority:'], 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
