@@ -16,11 +16,13 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr382-evidence-archive-review-history-v2-activation.md
-docs/quality/evidence-archive-review-history-contract-v2-pr382-spec.md
-config/evidence-archive-review-history-v2-pr382.json
+docs/roadmap-amendments/2026-07-16-pr383-evidence-archive-maintenance-queue-v3-activation.md
+docs/quality/evidence-archive-maintenance-queue-v3-pr383-spec.md
+config/evidence-archive-maintenance-queue-v3-pr383.json
 docs/migration/post-pr380-review-gate-pr381.json
-docs/migration/evidence-archive-maintenance-outcomes-pr380.json
+config/evidence-archive-review-history-v2-pr382.json
+docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
+docs/migration/evidence-archive-review-history-audit-v2-pr382.json
 ```
 
 ## Current workstream
@@ -34,18 +36,18 @@ Archive not recorded: 160
 Deployments: 174
 Market Access Records: 8
 PR #381 Post-PR #380 Review Gate: complete
-PR #382 Evidence Archive Review-History Contract v2 Update: active; complete on merge
-PR #383 Evidence Archive Maintenance Queue v3 Refresh: next after PR #382
+PR #382 Evidence Archive Review-History Contract v2 Update: complete
+PR #383 Evidence Archive Maintenance Queue v3 Refresh: active; complete on merge
 REVIEW GATE: mandatory after PR #383
 ```
 
-PR #382 may update internal history contracts and outputs only. It may change no canonical data or public surface.
+PR #383 may generate internal queue and delta outputs only. It may change no canonical data or public surface.
 
-## Binding history v2 scope
+## Binding queue v3 scope
 
-PR #382 must ingest PR #360, PR #365, and PR #380 as three immutable reviewed sources keyed by `evidence_id`. The latest reviewed event wins.
+PR #383 must start from the current 160 archive-not-recorded canonical Evidence identities and consume the reviewed PR #382 history v2 contract.
 
-Expected inventory:
+History v2 boundary:
 
 ```text
 history sources: 3
@@ -60,19 +62,21 @@ reviewed unresolved suppressed: 10
 reviewed reactivated eligible: 1
 ```
 
-The sole reactivated identity is:
+The ten reviewed suppressed identities remain excluded. The sole reviewed reactivated identity is:
 
 ```text
 sog_src_eurc_mint_page
 ```
 
-Its reviewed same-product source replacement makes it eligible for fresh manual archive review under PR #383. It does not authorize an automatic archive, source change, or canonical promotion.
+It must be included in the fresh manual-review queue before ordinary unreviewed archive gaps. This is queue eligibility only and does not authorize an automatic archive, source change, or canonical promotion.
+
+After the reviewed-reactivated tier, candidates use the existing deterministic non-ranking priority order and Evidence ID tie-break. PR #383 may select at most ten candidates.
 
 ## Boundaries
 
-PR #382 may change only internal authority, contract, deterministic builder, versioned manifest/audit, validator, and workflow files.
+PR #383 may change only internal authority, queue configuration, deterministic builder, versioned queue/delta outputs, validator, and workflow files.
 
-It may not change canonical Evidence, Evidence Relations, assets, deployments, Market Access records, statistics, public outputs, rankings, scores, recommendations, or any reviewed PR #360/#365/#377/#380/#381 source file.
+It may not change canonical Evidence, Evidence Relations, assets, deployments, Market Access records, statistics, public outputs, rankings, scores, recommendations, or any reviewed PR #360/#365/#377/#378/#380/#381/#382 source or output file.
 
 Not approved before the next review gate:
 
