@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-16  
+Updated: 2026-07-17  
 Status: canonical execution schedule — PR #405 active
 
 ## Current position
@@ -14,8 +14,8 @@ Evidence: 559
 Evidence Relations: 559
 Deployments: 174
 Market Access Records: 8
-Archive recorded before PR #405: 430
-Archive not recorded before PR #405: 129
+Archive recorded after reviewed decisions: 440
+Archive not recorded after reviewed decisions: 119
 PR #404 Post-PR #403 Review Gate: complete
 PR #405 Evidence and Archive Maintenance Batch 8: active; complete on merge
 REVIEW GATE: mandatory after PR #405
@@ -33,10 +33,12 @@ docs/migration/post-pr403-review-gate-pr404.json
 docs/roadmap-amendments/2026-07-16-pr405-evidence-archive-maintenance-batch-8-activation.md
 docs/quality/evidence-archive-maintenance-batch-8-pr405-spec.md
 config/evidence-archive-maintenance-batch-8-pr405.json
+config/evidence-archive-maintenance-batch-8-pr405-decisions.json
 docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
+docs/migration/evidence-archive-maintenance-batch-8-pr405-review-queue.json
 ```
 
-## Selected identities
+## Reviewed identities
 
 ```text
 sog_src_rai_integrations_batch_b
@@ -51,15 +53,21 @@ sog_src_spot_site_batch_b
 sog_src_spot_v2_rollout_batch_b
 ```
 
-## Initial phase
+## Reviewed outcome
 
-The initial workflow is probe-only. It records live response and exact Wayback CDX evidence for the ten canonical source URLs. Canonical writes are disabled until reviewed decisions are committed.
+The bounded probe completed for all ten canonical source URLs. Manual review accepted ten exact canonical-source HTTP 200 captures as dated archive additions.
 
-Allowed reviewed outcomes are exact dated archive addition, reviewed source replacement, or reviewed no-safe-change. No outcome is presumed.
+```text
+dated_exact_archive_added: 10
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 0
+Archive recorded: 430 -> 440
+Archive not recorded: 129 -> 119
+```
 
 ## Boundaries
 
-No Evidence identity, Evidence Relation, non-Evidence canonical record, checkpoint, statistics, release-baseline, or public-surface change is allowed during the probe phase. Automatic promotion is prohibited.
+No Evidence identity, Evidence Relation, non-Evidence canonical record, Market Access record, ranking, or public surface changes. Automatic promotion is prohibited.
 
 Batch 9 and all unrelated workstreams remain unapproved.
 
