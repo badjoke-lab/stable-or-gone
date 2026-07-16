@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { buildEvidenceArchiveMaintenanceQueueV2Outputs } from './build-evidence-archive-maintenance-queue-v2-pr378.mjs';
 import { buildPostPr378ReviewGate } from './build-post-pr378-review-gate-pr379.mjs';
 
 const root = process.cwd();
@@ -15,9 +16,12 @@ const config = readJson('config/post-pr378-review-gate-pr379.json');
 const report = readJson('docs/migration/post-pr378-review-gate-pr379.json');
 const queue = readJson('docs/migration/evidence-archive-maintenance-queue-v2-pr378.json');
 const delta = readJson('docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json');
-const generated = buildPostPr378ReviewGate();
+const generatedQueue = buildEvidenceArchiveMaintenanceQueueV2Outputs();
+const generatedReport = buildPostPr378ReviewGate();
 
-expect(same(report, generated), 'committed PR #379 review report is not deterministic');
+expect(same(queue, generatedQueue.queue), 'recovered PR #378 queue is not deterministic');
+expect(same(delta, generatedQueue.delta), 'recovered PR #378 queue delta is not deterministic');
+expect(same(report, generatedReport), 'committed PR #379 review report is not deterministic');
 expect(config.review_pr === 379 && report.review_pr === 379, 'review PR identity changed');
 expect(report.status === 'reviewed_internal_authority_decision', 'review status changed');
 expect(report.public_output === false, 'review output must remain internal');
@@ -89,8 +93,8 @@ for (const key of ['canonical_data_changed', 'public_surface_changed', 'historic
 }
 
 for (const file of [
-  'docs/migration/evidence-archive-maintenance-queue-v2-pr378.json',
-  'docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json',
+  'config/evidence-archive-maintenance-queue-v2-pr378.json',
+  'scripts/build-evidence-archive-maintenance-queue-v2-pr378.mjs',
   'config/evidence-archive-review-history-v1-pr377.json',
   'docs/migration/evidence-archive-review-history-manifest-pr377.json',
   'docs/migration/evidence-archive-review-history-audit-pr377.json',
@@ -103,6 +107,12 @@ for (const file of [
   } catch (error) {
     failures.push(`${file}: unable to verify origin/main blob identity: ${error.message}`);
   }
+}
+
+for (const file of ['docs/migration/evidence-archive-maintenance-queue-v2-pr378.json', 'docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json']) {
+  let existedOnSourceMain = true;
+  try { git('cat-file', '-e', `origin/main:${file}`); } catch { existedOnSourceMain = false; }
+  expect(existedOnSourceMain === false, `${file}: recovery boundary changed; file unexpectedly existed on source main`);
 }
 
 for (const [file, markers] of [
@@ -127,6 +137,7 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
+  recovered_pr378_outputs: 2,
   report_id: report.report_id,
   selected_candidates: integrity.selected_count,
   reviewed_suppressed: integrity.reviewed_unresolved_suppressed_count,
