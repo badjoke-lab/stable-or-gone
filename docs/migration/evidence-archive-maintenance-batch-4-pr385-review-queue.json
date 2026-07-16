@@ -1,0 +1,1055 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_archive_maintenance_batch_4_pr385_review_queue",
+  "status": "internal_manual_review_probe_complete",
+  "public_output": false,
+  "review_pr": 385,
+  "reviewed_at": "2026-07-16",
+  "source_queue_id": "sog_evidence_archive_maintenance_queue_v3_pr383",
+  "selected_count": 10,
+  "automatic_canonical_write": false,
+  "exact_source_match_required": true,
+  "rows": [
+    {
+      "evidence_id": "sog_src_eurc_mint_page",
+      "source_file": "data/evidence-extra.json",
+      "title": "Circle Mint product page",
+      "publisher": "Circle",
+      "source_type": "product_page",
+      "canonical_url": "https://www.circle.com/circle-mint",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.circle.com/circle-mint",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Circle Mint | Mint USDC, Unlock Business Efficiency | Circle",
+        "sampled_body_sha256": "3ab11b7d46c6a7b746078396bc29ae8acd4dd44ac41711eff9999f64312b299a",
+        "sampled_body_bytes": 262182
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Fcircle-mint&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 79,
+        "earliest_capture": {
+          "timestamp": "20241103161246",
+          "original": "https://circle.com/circle-mint",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "OFGN4P4PPTIUT4YHV4QIBGIH44M22YWH"
+        },
+        "latest_capture": {
+          "timestamp": "20260615233047",
+          "original": "https://www.circle.com/circle-mint",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "VLQ357FCQH7RYH2LYIFNVI2NM2EJ5WPV"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20241103161246",
+            "original": "https://circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OFGN4P4PPTIUT4YHV4QIBGIH44M22YWH"
+          },
+          {
+            "timestamp": "20241112114451",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BQI5JH7WKKB55GH24YVOZQYJPWJYLNIW"
+          },
+          {
+            "timestamp": "20241122152531",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CDSSRVQFOKQH5AFO5LTS2EV5MYZ7YPI5"
+          },
+          {
+            "timestamp": "20241128175605",
+            "original": "https://circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "C7VBA5IBXCV4VASKPJBYTCDMWSKTA6BN"
+          },
+          {
+            "timestamp": "20241203082931",
+            "original": "https://circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5JJTPVAIROBMVA75NBEFTJRJI7HUMEJI"
+          },
+          {
+            "timestamp": "20241210160859",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJLQAATFAQRSGP5CU65XGYFFAD7U3QDY"
+          },
+          {
+            "timestamp": "20241216182038",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D7JOCBQ7Z4LB67GV452AIELL5474CHFC"
+          },
+          {
+            "timestamp": "20241217073322",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AEZTSQA6NFPU6TKBFF72TQ6W7CVO6NMJ"
+          },
+          {
+            "timestamp": "20260217165529",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OYNAXAV6VYIBGAFUFCSCTAWCLMCJAUA4"
+          },
+          {
+            "timestamp": "20260218191149",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "K2EDWRZ5IGEBQRM7Y2QGYOOPMMNBNPHZ"
+          },
+          {
+            "timestamp": "20260219033630",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GN6BX3SKOUOJANAHFPPSOPZYCDDLX6XB"
+          },
+          {
+            "timestamp": "20260305120433",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MKPJYOE3IQKVQV7FF2P52QNN27J5O6KM"
+          },
+          {
+            "timestamp": "20260413082750",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6VBRJVXGCA2BFRURIZHIA7KMUFKXGK4K"
+          },
+          {
+            "timestamp": "20260502204139",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Y2X7XQGPGUBU7Q2ERBWDHBRLVXJH6DUX"
+          },
+          {
+            "timestamp": "20260513192702",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5UVY5B7XCAZKVSRYFFEIKLOYC5YBMNSX"
+          },
+          {
+            "timestamp": "20260615233047",
+            "original": "https://www.circle.com/circle-mint",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VLQ357FCQH7RYH2LYIFNVI2NM2EJ5WPV"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fdusd_official_site",
+      "source_file": "data/evidence.json",
+      "title": "First Digital USD official site",
+      "publisher": "First Digital Labs",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://firstdigitallabs.com/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://www.firstdigitallabs.com/",
+        "redirected": true,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Just a moment...",
+        "sampled_body_sha256": "f5c53832fe60ff446d4ba8ca1a4460a2e686c4b27a45f52a74715001db3f50fc",
+        "sampled_body_bytes": 5585
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Ffirstdigitallabs.com%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 105,
+        "earliest_capture": {
+          "timestamp": "20230601053900",
+          "original": "https://firstdigitallabs.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "VDVWTHOURTSALZTEEOS5GYAYMFGP2TVF"
+        },
+        "latest_capture": {
+          "timestamp": "20260417165931",
+          "original": "https://www.firstdigitallabs.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "LOMYCPBBULYSDLHEJIGAQAYQ4L5SFVUA"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20230601053900",
+            "original": "https://firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VDVWTHOURTSALZTEEOS5GYAYMFGP2TVF"
+          },
+          {
+            "timestamp": "20230601170931",
+            "original": "https://firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6PQDZPFQED6KG3KK6B6PBEGZZL4V3JQD"
+          },
+          {
+            "timestamp": "20230723221714",
+            "original": "https://firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2MIAVJQOXOG2XTMPVHTYZY3B5TSKREEQ"
+          },
+          {
+            "timestamp": "20230726042658",
+            "original": "https://firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PANMUGKEWIENEYGB5B44N7YBNXCGUZCE"
+          },
+          {
+            "timestamp": "20230726050609",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RG6GHFQTFD5T4FQ6ELHIMYVIDBGEDD5A"
+          },
+          {
+            "timestamp": "20230726050632",
+            "original": "https://firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WBKQN2SVJH6AFC3HNQTVOCI4A5UC45PA"
+          },
+          {
+            "timestamp": "20230726062436",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RG6GHFQTFD5T4FQ6ELHIMYVIDBGEDD5A"
+          },
+          {
+            "timestamp": "20230804133643",
+            "original": "https://firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2QFD7YM2OESJLCLZLKHJ764UNBKSCRRS"
+          },
+          {
+            "timestamp": "20260115214338",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "STOOFDK4FRHXIVMWLTJBKV6F3ST7DFNJ"
+          },
+          {
+            "timestamp": "20260116133808",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SHMBUXXHMZPLHI2OF3SJZEETPCBYZHSP"
+          },
+          {
+            "timestamp": "20260217034802",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "62MURAU4Z7XDNWXDLJ5ZG42JYND6UO62"
+          },
+          {
+            "timestamp": "20260217153734",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4E523FBZ2FTO6SHX7FUKSWE4YBXZKNFZ"
+          },
+          {
+            "timestamp": "20260315212302",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJSHAXIUQOQPQQNPF667PADNGI5SEW5N"
+          },
+          {
+            "timestamp": "20260415011701",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LOMYCPBBULYSDLHEJIGAQAYQ4L5SFVUA"
+          },
+          {
+            "timestamp": "20260415073718",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VWDHZVN3U4725ILBXNYCOEXOLBZMKERG"
+          },
+          {
+            "timestamp": "20260417165931",
+            "original": "https://www.firstdigitallabs.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LOMYCPBBULYSDLHEJIGAQAYQ4L5SFVUA"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fdusd_site",
+      "source_file": "data/evidence-pr033.json",
+      "title": "First Digital USD official page",
+      "publisher": "First Digital",
+      "source_type": "issuer_page",
+      "canonical_url": "https://firstdigitallabs.com/fdusd/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.firstdigitallabs.com/fdusd",
+        "redirected": true,
+        "content_type": "text/html; charset=utf-8",
+        "title": "FDUSD – First Digital Labs",
+        "sampled_body_sha256": "fd5bda29f4b775bbb69ea4ab740fd7b170b579b0a99aafefe945f6e335571ee9",
+        "sampled_body_bytes": 144484
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Ffirstdigitallabs.com%2Ffdusd%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20250403035240",
+          "original": "https://firstdigitallabs.com/fdusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "PIYDFHHKFH5XV5TOEWLEF7NB2XMBPFSM"
+        },
+        "latest_capture": {
+          "timestamp": "20260416065330",
+          "original": "https://www.firstdigitallabs.com/fdusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "GMTUUTWGGSVMX3DEPHDYQB3QFH2P5OAZ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250403035240",
+            "original": "https://firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PIYDFHHKFH5XV5TOEWLEF7NB2XMBPFSM"
+          },
+          {
+            "timestamp": "20250406071657",
+            "original": "https://firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PNZHVWU273U2MXLWUQYD4J5NYIEH63Q2"
+          },
+          {
+            "timestamp": "20260114193520",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JPGPT5I44KKCUWQQ2YKSLALIQOVNHBWD"
+          },
+          {
+            "timestamp": "20260311114001",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MWT3VBPLHDURRUCY7XI27IBGWOBUPYXL"
+          },
+          {
+            "timestamp": "20260315212738",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EJI4PFNSBYWNSXLRNOIDPYMZAC4FR3AH"
+          },
+          {
+            "timestamp": "20260416065330",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GMTUUTWGGSVMX3DEPHDYQB3QFH2P5OAZ"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fei_addresses_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "Fei Protocol mainnet addresses",
+      "publisher": "Fei Protocol",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://fei-protocol.github.io/developers/addresses/",
+      "claim_scopes": [
+        "fei_ethereum_contract_identity"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://fei-protocol.github.io/developers/addresses/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Mainnet Addresses - Fei Protocol Docs",
+        "sampled_body_sha256": "81491e8477c0d2e59d35d8114d423f9cf190cfc1e2dd9bdce407a4c5eecdbcbc",
+        "sampled_body_bytes": 50240
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Ffei-protocol.github.io%2Fdevelopers%2Faddresses%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fei_final_redemption_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "TIP-121c: Final Redemption",
+      "publisher": "Fei / Snapshot via Boardroom",
+      "source_type": "governance_proposal",
+      "canonical_url": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D",
+      "claim_scopes": [
+        "fei_final_redemption_and_tribe_dao_wind_down"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%3D%3D",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Boardroom",
+        "sampled_body_sha256": "e6b850befcab9c0bda2690d5f4320a61fd49b9813713684922ab331ce9f015d9",
+        "sampled_body_bytes": 4187
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fboardroom.io%2Ffei%2Fproposal%2FcHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg%253D%253D&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 1,
+        "earliest_capture": {
+          "timestamp": "20221207073746",
+          "original": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg==",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "F7QBCSIDNIH4UDQ4EO3FWTSINBKWMG3J"
+        },
+        "latest_capture": {
+          "timestamp": "20221207073746",
+          "original": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg==",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "F7QBCSIDNIH4UDQ4EO3FWTSINBKWMG3J"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20221207073746",
+            "original": "https://boardroom.io/fei/proposal/cHJvcG9zYWw6ZmVpOnNuYXBzaG90OjB4MTE3MGZmMTQ3Mjc5ZWJkZmM2ZDc0ODExZDY4OTM5MWE5YjlhZTc5ODNkYjZhOTc4M2VmYjY2YjBkN2IyYzMwZg==",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "F7QBCSIDNIH4UDQ4EO3FWTSINBKWMG3J"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fei_intro_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "Introducing Fei Protocol",
+      "publisher": "Fei Labs",
+      "source_type": "official_blog",
+      "canonical_url": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+      "claim_scopes": [
+        "fei_initial_design_and_protocol_controlled_value"
+      ],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Just a moment...",
+        "sampled_body_sha256": "066dc15c001d0f216fe00bef325e6245d5377d908f9c104bc90d209fa44e4132",
+        "sampled_body_bytes": 5743
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fmedium.com%2Ffei-protocol%2Fintroducing-fei-protocol-2db79bd7a82b&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 25,
+        "earliest_capture": {
+          "timestamp": "20210111203428",
+          "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "FSPC6PJP26J5GPSJTPIIUOOX52477DC5"
+        },
+        "latest_capture": {
+          "timestamp": "20260210053906",
+          "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "AS6OOD6OE5FRUUM7YBVTG47AX5ZSIRPP"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210111203428",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FSPC6PJP26J5GPSJTPIIUOOX52477DC5"
+          },
+          {
+            "timestamp": "20210112182026",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "I57RJ2KRLOEHYHN4E554LWFAJDUY5CJ6"
+          },
+          {
+            "timestamp": "20210220011153",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ON4ZRT4CR4GZOFD7BGJ4B5EUHPCIWSB3"
+          },
+          {
+            "timestamp": "20210324214011",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4LRV3CJN4KY3BEGYNIFZDOVNKE6GQ526"
+          },
+          {
+            "timestamp": "20210330014433",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ROJ3VF2ZI55KFOXHOUOMUFYBCMIXLSA6"
+          },
+          {
+            "timestamp": "20210331172800",
+            "original": "http://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VYKVTWZLH3RSYHJI64DTSAZFBKWNBD5S"
+          },
+          {
+            "timestamp": "20210404021132",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "U7FM2PFDIX4HL5G4Z53FTWABXBJP52CD"
+          },
+          {
+            "timestamp": "20211206214521",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IQSAON3PDSCT7LHKTHKTXKPHLMQ3PT5G"
+          },
+          {
+            "timestamp": "20240303003835",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2BGJSZXLPWNRV3NZWL4D6C36PR3OSPPN"
+          },
+          {
+            "timestamp": "20241013030917",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5I3IWLC7YG35A4T6NX3UIOIQR3EKOOOB"
+          },
+          {
+            "timestamp": "20241226094345",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LYG7VUN7OTGEOR7RRVACGHXCXYQBPHOG"
+          },
+          {
+            "timestamp": "20250126064911",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PL7VVN2JLPPHXF2U2M4KUGF6XZYMT7B4"
+          },
+          {
+            "timestamp": "20250308033023",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PGAB4SNUTEIDI7HIHN7TKJDYGGINDUVM"
+          },
+          {
+            "timestamp": "20250915231225",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5RALYJ3YUGJNLWTG3BHZXOJUXO6ZB2DY"
+          },
+          {
+            "timestamp": "20251118152116",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "B63U6HVILVLIFV2MU62N3AFL662VIBAQ"
+          },
+          {
+            "timestamp": "20260210053906",
+            "original": "https://medium.com/fei-protocol/introducing-fei-protocol-2db79bd7a82b",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AS6OOD6OE5FRUUM7YBVTG47AX5ZSIRPP"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fei_launch_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "Fei Post-Genesis",
+      "publisher": "Fei Labs",
+      "source_type": "official_blog",
+      "canonical_url": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+      "claim_scopes": [
+        "fei_launch_date_and_genesis_context"
+      ],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Just a moment...",
+        "sampled_body_sha256": "615ceaa1f04c4432029943314d1c11e301e82e99583075c02e1a9af8b242eb2f",
+        "sampled_body_bytes": 5697
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fmedium.com%2Ffei-protocol%2Ffei-post-genesis-35284a57a659&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 4,
+        "earliest_capture": {
+          "timestamp": "20210402233802",
+          "original": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "ST5TMAIUZBMCT2ILE2T2R5DLGFACJUBY"
+        },
+        "latest_capture": {
+          "timestamp": "20210423124156",
+          "original": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "IXSQDOQ4O2RJEWLE3XANSJE65FE26ZJZ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210402233802",
+            "original": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ST5TMAIUZBMCT2ILE2T2R5DLGFACJUBY"
+          },
+          {
+            "timestamp": "20210402234431",
+            "original": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UNKCROTMACJUHNJGFXQ2YJYJ73DOG264"
+          },
+          {
+            "timestamp": "20210403001446",
+            "original": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CEYYVTFPPNLFSSZE2G7GQLFKJU7D3CM7"
+          },
+          {
+            "timestamp": "20210423124156",
+            "original": "https://medium.com/fei-protocol/fei-post-genesis-35284a57a659",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IXSQDOQ4O2RJEWLE3XANSJE65FE26ZJZ"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fei_tip121c_execution_2022",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "TIP-121c: Start FEI and TRIBE Redemption",
+      "publisher": "Fei Protocol governance via Tally",
+      "source_type": "governance_proposal",
+      "canonical_url": "https://www.tally.xyz/gov/fei/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263?govId=eip155%3A1%3A0x0BEF27FEB58e857046d630B2c03dFb7bae567494",
+      "claim_scopes": [
+        "executed_governance_package",
+        "final_redemption_context",
+        "one_to_one_dai_backing",
+        "zero_fee_fei_redemption"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.tally.xyz/gov/fei/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263?govId=eip155%3A1%3A0x0BEF27FEB58e857046d630B2c03dFb7bae567494",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Cactus | Fei | TIP-121c: Start FEI and TRIBE Redemption",
+        "sampled_body_sha256": "cbade9787369a980cf58b52c577a468c8dd90509e2c1be5c80c1842901f01f3e",
+        "sampled_body_bytes": 262144
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.tally.xyz%2Fgov%2Ffei%2Fproposal%2F64863446409291443125870692229577565231046239594774676712611109555958259692263%3FgovId%3Deip155%253A1%253A0x0BEF27FEB58e857046d630B2c03dFb7bae567494&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_fei_v2_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "title": "Fei v2 is coming",
+      "publisher": "Fei Protocol",
+      "source_type": "official_blog",
+      "canonical_url": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+      "claim_scopes": [
+        "fei_v2_reserve_and_redemption_design"
+      ],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Just a moment...",
+        "sampled_body_sha256": "d84c43c789daba097511aae029cec35b0a1060e66c9d5824b066a25c3af47bbf",
+        "sampled_body_bytes": 5697
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fmedium.com%2Ffei-protocol%2Ffei-v2-is-coming-e0bae727a9dc&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 3,
+        "earliest_capture": {
+          "timestamp": "20211104200241",
+          "original": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "C4LES2UL5NSKJG3F3XYWWAHGAIUGQM2T"
+        },
+        "latest_capture": {
+          "timestamp": "20220901153339",
+          "original": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "XV5VOFZTEPWWCBK7H2JZFGKK6STSRCHZ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20211104200241",
+            "original": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "C4LES2UL5NSKJG3F3XYWWAHGAIUGQM2T"
+          },
+          {
+            "timestamp": "20211104200425",
+            "original": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2YMOIJQ6VUE25SU6TTSMDS55CI5AIHQS"
+          },
+          {
+            "timestamp": "20220901153339",
+            "original": "https://medium.com/fei-protocol/fei-v2-is-coming-e0bae727a9dc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XV5VOFZTEPWWCBK7H2JZFGKK6STSRCHZ"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_frax_app",
+      "source_file": "data/evidence-pr033.json",
+      "title": "Frax Finance app",
+      "publisher": "Frax Finance",
+      "source_type": "protocol_app",
+      "canonical_url": "https://app.frax.finance/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://app.frax.finance/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Frax Finance",
+        "sampled_body_sha256": "eab2b44a0f61df39c8620fa511d9663170a3d24c0e866bf9fce644dbd5dd0672",
+        "sampled_body_bytes": 2455
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fapp.frax.finance%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 243,
+        "earliest_capture": {
+          "timestamp": "20201117054730",
+          "original": "https://app.frax.finance/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "32UXUMKZMG6TICV2DRRE6BPFPHKA7E4C"
+        },
+        "latest_capture": {
+          "timestamp": "20260601132859",
+          "original": "https://app.frax.finance/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "IZASFB4YQYEPQ2ANTMTVJZIQXRS3IQVU"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20201117054730",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "32UXUMKZMG6TICV2DRRE6BPFPHKA7E4C"
+          },
+          {
+            "timestamp": "20201212075616",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7GZUQM4NCLF7RCYUXZSOF363J63KA7OH"
+          },
+          {
+            "timestamp": "20210117120621",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OCRAN45I5IYXWBS3FVVH6CQIOBPWRUSL"
+          },
+          {
+            "timestamp": "20210302011408",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AKAXX2KI3RTUX67HDZXUM6ARDJXHJIZB"
+          },
+          {
+            "timestamp": "20210306134658",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HFRSAMRZ3IDFUYDZVRCO6XQGC3JM76Z2"
+          },
+          {
+            "timestamp": "20210510213128",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JITU7SYZGRZ6I5WCYPIWQ6QUCGMXD75U"
+          },
+          {
+            "timestamp": "20210803035702",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "65FRN4O4N2MQQQFYTK5LFCTIEJMVOAO6"
+          },
+          {
+            "timestamp": "20210923173706",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HOUJQSPLM76ZMPOG4R2LCLT3P3OZELJF"
+          },
+          {
+            "timestamp": "20260220190554",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3D673H7FGS36JYVSSVNE5UAI35OUCH4W"
+          },
+          {
+            "timestamp": "20260306203556",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HW5AOOC7ARLJQWA4GLVVB5IZBITXNSRT"
+          },
+          {
+            "timestamp": "20260312042152",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3D673H7FGS36JYVSSVNE5UAI35OUCH4W"
+          },
+          {
+            "timestamp": "20260323201132",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IZASFB4YQYEPQ2ANTMTVJZIQXRS3IQVU"
+          },
+          {
+            "timestamp": "20260421022243",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AYVJESR4LAL5GKV6VZ3IDCXKLEXKOP32"
+          },
+          {
+            "timestamp": "20260425035911",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IZASFB4YQYEPQ2ANTMTVJZIQXRS3IQVU"
+          },
+          {
+            "timestamp": "20260520131149",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AYVJESR4LAL5GKV6VZ3IDCXKLEXKOP32"
+          },
+          {
+            "timestamp": "20260601132859",
+            "original": "https://app.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IZASFB4YQYEPQ2ANTMTVJZIQXRS3IQVU"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    }
+  ],
+  "boundaries": {
+    "canonical_data_changed": false,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "public_surface_changed": false
+  }
+}
