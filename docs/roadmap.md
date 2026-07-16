@@ -18,6 +18,10 @@ Deployments: 174
 Market Access Records: 8
 Archive recorded before PR #395: 416
 Archive not recorded before PR #395: 143
+Archive recorded: 425
+Archive not recorded: 134
+Archive recorded after reviewed decisions: 425
+Archive not recorded after reviewed decisions: 134
 
 PR #394 Post-PR #393 Review Gate: complete
 PR #395 Evidence and Archive Maintenance Batch 6: active; complete on merge
@@ -35,12 +39,28 @@ docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-16-pr395-evidence-archive-maintenance-batch-6-activation.md
 docs/quality/evidence-archive-maintenance-batch-6-pr395-spec.md
 config/evidence-archive-maintenance-batch-6-pr395.json
+config/evidence-archive-maintenance-batch-6-pr395-decisions.json
 docs/migration/post-pr393-review-gate-pr394.json
 docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
 docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
+docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
 ```
 
-## Selected Queue v5 identities
+## Reviewed Batch 6 result
+
+```text
+Selected: 10
+Changed: 9
+Dated exact archives added: 9
+Reviewed source replacements: 0
+Reviewed no-safe-change: 1
+Archive coverage transition: 416 / 143 -> 425 / 134
+Evidence identities / relations: 559 / 559
+```
+
+`sog_src_makerdao_docs_dai` remains unchanged because the canonical route has no exact archive and redirects to a legal-document page that does not safely preserve its Dai documentation claim scope. The other nine selected identities receive exact dated archives.
+
+Selected Evidence identities:
 
 ```text
 sog_src_makerdao_docs_dai
@@ -55,15 +75,19 @@ sog_src_nuon_maxcap_batch_b
 sog_src_nuon_minting_batch_b
 ```
 
-PR #395 must probe and review each identity independently. Allowed outcomes:
+## Required outputs
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
+docs/migration/evidence-archive-maintenance-outcomes-pr395.json
+docs/migration/evidence-archive-maintenance-batch-6-pr395-reviewed-handoff.json
+docs/migration/current-canonical-checkpoint.json
+docs/migration/current-stats-history-checkpoint.json
+data/stats-history.json
+docs/migration/registry-release-integrity-baseline.json
 ```
 
-The initial workflow is probe-only. Canonical changes remain disabled until the decision file is reviewed and committed.
+Canonical identity counts, Evidence Relations, assets, deployments, Market Access records, non-Evidence record families, and public surfaces must remain unchanged.
 
 ## Deferred and not approved
 
