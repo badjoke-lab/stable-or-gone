@@ -4,10 +4,12 @@ export const NEWS_DISCOVERY_QUERIES = [
   { query_id: 'mica-exchange-eea', query: 'stablecoin MiCA exchange EEA when:1d' },
   { query_id: 'stablecoin-delisting-europe', query: 'stablecoin delisting Europe exchange when:1d' },
   { query_id: 'stablecoin-deposit-withdrawal-eea', query: 'stablecoin deposit withdrawal EEA exchange when:1d' },
-  { query_id: 'stablecoin-casp-authorization-europe', query: 'stablecoin CASP authorization Europe when:1d' }
+  { query_id: 'stablecoin-casp-authorization-europe', query: 'stablecoin CASP authorization Europe when:1d' },
+  { query_id: 'visa-vsp-open-usd', query: '"Visa Stablecoin Platform" OR "Open USD" Visa when:1d' },
+  { query_id: 'open-standard-ousd-launch', query: '"Open Standard" "Open USD" OUSD launch when:1d' }
 ];
 
-const MAX_QUERIES = 4;
+const MAX_QUERIES = 6;
 const MAX_ITEMS_PER_QUERY = 20;
 const MAX_BODY_BYTES = 1024 * 1024;
 const TIMEOUT_MS = 15_000;
