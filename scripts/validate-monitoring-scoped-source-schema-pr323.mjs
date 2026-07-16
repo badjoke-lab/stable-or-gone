@@ -8,9 +8,9 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const sources = loadOfficialSources(root);
 const baselineSet = loadOfficialSourceBaselines(root);
 
-check(sources.length === 39, `PR #323 source count must be 39, found ${sources.length}`);
-check(baselineSet.baselines?.length === 39, `PR #323 baseline count must be 39, found ${baselineSet.baselines?.length ?? 0}`);
-check((baselineSet.baselines ?? []).every((row) => row.status === 'pending_initial_acceptance'), 'all PR #323 baselines must remain pending');
+check(sources.length === 41, `current scoped source count must be 41, found ${sources.length}`);
+check(baselineSet.baselines?.length === 41, `current scoped baseline count must be 41, found ${baselineSet.baselines?.length ?? 0}`);
+check((baselineSet.baselines ?? []).every((row) => row.status === 'pending_initial_acceptance'), 'all current baselines must remain pending');
 check((baselineSet.baselines ?? []).every((row) => [
   'accepted_final_url','body_sha256','normalized_content_sha256','content_type','etag','last_modified',
   'accepted_observed_at','accepted_repository_commit','accepted_review_reference'
@@ -94,6 +94,13 @@ try {
   failures.push(error instanceof Error ? error.message : String(error));
 }
 
+const openUsd = sources.find((row) => row.source_id === 'open-standard-open-usd');
+const vsp = sources.find((row) => row.source_id === 'visa-stablecoin-platform');
+check(openUsd?.monitoring_scope?.subject_kind === 'prelaunch_stablecoin', 'Open USD subject-kind scope missing');
+check(openUsd?.monitoring_scope?.canonical_record === false, 'Open USD scope became canonical');
+check(vsp?.monitoring_scope?.subject_kind === 'stablecoin_infrastructure', 'VSP subject-kind scope missing');
+check(vsp?.monitoring_scope?.canonical_record === false, 'VSP scope became canonical');
+
 const schema = fs.readFileSync('docs/quality/monitoring-official-source-schema.md', 'utf8');
 for (const marker of [
   'platform_policy',
@@ -107,9 +114,9 @@ for (const marker of [
 }
 
 if (failures.length) {
-  console.error('PR #323 scoped source schema validation failed:');
+  console.error('Current scoped source schema validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
-console.log('PR #323 scoped source schema valid: 39 pending sources preserve platform, region, function, and register scope without canonical writes.');
+console.log('Current scoped source schema valid: 41 pending sources preserve platform, region, function, register, pre-launch, and infrastructure scope without canonical writes.');
