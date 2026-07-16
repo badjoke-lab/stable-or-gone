@@ -45,7 +45,9 @@ reviewed_source_replacement
 
 The FDUSD replacement is eligible for fresh manual archive review only. It does not authorize an archive or another replacement automatically.
 
-## Expected inventory
+## Deterministic result
+
+The generated manifest and audit resolve to exactly:
 
 ```text
 history sources: 4
@@ -59,6 +61,8 @@ reviewed unresolved total: 13
 reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 1
 ```
+
+The sole reviewed-reactivated identity is `sog_src_fdusd_site`; Circle Mint is archive-present.
 
 ## Required outputs
 
