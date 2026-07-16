@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "decision_id": "sog_evidence_archive_maintenance_batch_3_pr380_decisions_v1",
+  "status": "reviewed_manual_decisions",
+  "public_output": false,
+  "review_pr": 380,
+  "reviewed_at": "2026-07-16",
+  "source_review_queue": "docs/migration/evidence-archive-maintenance-batch-3-pr380-review-queue.json",
+  "decisions": [
+    {
+      "evidence_id": "sog_src_bold_technical_batch_c",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+      "capture_timestamp": "20260511180442",
+      "capture_digest": "XRQVHYF2ABFAETB3H2DSH4BA6MSCK7G3",
+      "archived_url": "https://web.archive.org/web/20260511180442/https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+      "review_reason": "The exact canonical source URL returned a successful dated HTTP 200 capture and the captured page identity matches the technical-documentation claim scope.",
+      "remaining_uncertainty": "The archive preserves the reviewed source version only; later documentation revisions remain possible."
+    },
+    {
+      "evidence_id": "sog_src_circle_transparency",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.circle.com/transparency",
+      "capture_timestamp": "20260709220608",
+      "capture_digest": "FMGGNPD5FIJKFKCHQUJFM7FHATINBEW2",
+      "archived_url": "https://web.archive.org/web/20260709220608/https://www.circle.com/transparency",
+      "review_reason": "The exact Circle transparency URL returned a successful dated HTTP 200 capture and remains the same transparency entry point.",
+      "remaining_uncertainty": "The archive preserves one reviewed transparency-page version and does not establish later reserve changes."
+    },
+    {
+      "evidence_id": "sog_src_circle_usdc_product",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.circle.com/usdc",
+      "capture_timestamp": "20260710145752",
+      "capture_digest": "QSNMUUQGDQKEPXZO5YUDNVTJDBHRZMXI",
+      "archived_url": "https://web.archive.org/web/20260710145752/https://www.circle.com/usdc",
+      "review_reason": "The exact Circle USDC product URL returned a successful dated HTTP 200 capture and preserves the official product-page identity.",
+      "remaining_uncertainty": "The archive preserves the reviewed product-page version only; later product or availability changes remain possible."
+    },
+    {
+      "evidence_id": "sog_src_crvusd_curve_docs",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://docs.curve.fi/crvUSD/overview/",
+      "capture_timestamp": "20250425052808",
+      "capture_digest": "TD5YKPUV6URV2LYBDK3JHGZB3WROKNOA",
+      "archived_url": "https://web.archive.org/web/20250425052808/https://docs.curve.fi/crvUSD/overview/",
+      "review_reason": "The live endpoint currently blocks the probe, but Wayback returned a successful exact-source HTTP 200 capture for the canonical crvUSD documentation URL.",
+      "remaining_uncertainty": "The archived documentation reflects the captured 2025 source version and may not represent later documentation changes."
+    },
+    {
+      "evidence_id": "sog_src_crvusd_curve_lifecycle_event",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://resources.curve.finance/crvusd/overview/",
+      "capture_timestamp": "20260210181555",
+      "capture_digest": "HNTCPFZTGCWG5CXL4N6AWOTIGZWZ4AHO",
+      "archived_url": "https://web.archive.org/web/20260210181555/https://resources.curve.finance/crvusd/overview/",
+      "review_reason": "The live resource now returns 404, while Wayback returned a successful exact-source HTTP 200 capture for the recorded Curve Knowledge Hub URL.",
+      "remaining_uncertainty": "The archived lifecycle page preserves the reviewed source version; a later canonical replacement was not inferred."
+    },
+    {
+      "evidence_id": "sog_src_dai_whitepaper_pr354",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://makerdao.com/en/whitepaper/",
+      "capture_timestamp": "20260709092101",
+      "capture_digest": "PIHGM6GSFIEDAZDXDCFHAO2SXSQRJZWC",
+      "archived_url": "https://web.archive.org/web/20260709092101/https://makerdao.com/en/whitepaper/",
+      "review_reason": "The exact Maker Protocol white-paper URL returned a successful dated HTTP 200 capture and the live page title remains the same white-paper identity.",
+      "remaining_uncertainty": "The archive preserves the reviewed white-paper page version and does not imply that all protocol documentation is unchanged."
+    },
+    {
+      "evidence_id": "sog_src_eurc_circle_page",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.circle.com/eurc",
+      "capture_timestamp": "20260709220612",
+      "capture_digest": "NAK4XFJUC5EBDXAIHHQX6YFZPY63K6VQ",
+      "archived_url": "https://web.archive.org/web/20260709220612/https://www.circle.com/eurc",
+      "review_reason": "The exact Circle EURC URL returned a successful dated HTTP 200 capture and preserves the official EURC product-page identity.",
+      "remaining_uncertainty": "The archive preserves one reviewed EURC-page version; later availability and chain changes remain possible."
+    },
+    {
+      "evidence_id": "sog_src_eurc_developer_docs",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://developers.circle.com/",
+      "capture_timestamp": "20260701124001",
+      "capture_digest": "SFXPGV2IUNMJCRGVBC2TOLBNJQV7NUHU",
+      "archived_url": "https://web.archive.org/web/20260701124001/https://developers.circle.com/",
+      "review_reason": "The exact Circle developer-docs root returned a successful dated HTTP 200 capture and matches the canonical documentation-entry-point claim scope.",
+      "remaining_uncertainty": "The archive preserves the documentation entry point, not every chain-specific integration page."
+    },
+    {
+      "evidence_id": "sog_src_eurc_launch_2022",
+      "outcome": "dated_exact_archive_added",
+      "canonical_url": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+      "capture_timestamp": "20241212145508",
+      "capture_digest": "ZV3GWDUKWMFRNR7WVGTVLAJFO2WFGYIJ",
+      "archived_url": "https://web.archive.org/web/20241212145508/https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+      "review_reason": "The exact official launch-announcement URL returned a successful dated HTTP 200 capture and preserves the historical Euro Coin launch source.",
+      "remaining_uncertainty": "The archive was captured after the 2022 publication date but preserves the same official announcement URL and title."
+    },
+    {
+      "evidence_id": "sog_src_eurc_mint_page",
+      "outcome": "reviewed_source_replacement",
+      "canonical_url": "https://www.circle.com/mint",
+      "replacement_url": "https://www.circle.com/circle-mint",
+      "review_reason": "The recorded Circle Mint URL redirects directly to the current Circle Mint product page with the same publisher, product identity, and business minting and conversion claim scope. No exact dated capture exists for the old URL.",
+      "claim_scope_equivalence": "reviewed_equivalent",
+      "source_version_equivalence": "reviewed_current_product_route_replacement",
+      "remaining_uncertainty": "Future Circle route changes remain possible; no archive URL is added without an exact capture of the accepted canonical route."
+    }
+  ],
+  "counts": {
+    "selected": 10,
+    "dated_exact_archive_added": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_no_safe_change": 0
+  },
+  "boundaries": {
+    "automatic_promotion": false,
+    "identity_substitution": false,
+    "new_evidence_identity": false,
+    "evidence_relation_change": false,
+    "public_surface_change": false
+  }
+}
