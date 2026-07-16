@@ -24,6 +24,8 @@ docs/migration/evidence-archive-review-history-manifest-v4-pr392.json
 docs/migration/evidence-archive-review-history-audit-v4-pr392.json
 docs/migration/post-pr390-review-gate-pr391.json
 docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
 ```
 
 ## Current workstream
@@ -58,9 +60,32 @@ reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 0
 ```
 
-## Queue v5 selection rule
+## Reviewed Queue v5 result
 
-Start from 143 archive-not-recorded canonical identities. Exclude aliases, Web Archive source URLs, missing source URLs, and the twelve reviewed suppressions. There is no reviewed-reactivated tier. Select at most ten ordinary unreviewed archive gaps by source-priority bucket and Evidence ID.
+```text
+Eligible pool: 98
+Selected: 10
+Reviewed suppressed excluded: 12
+Reviewed reactivated selected: 0
+Added / removed / retained versus Queue v4: 10 / 10 / 0
+```
+
+Selected Evidence identities:
+
+```text
+sog_src_makerdao_docs_dai
+sog_src_makerdao_forum_lifecycle_reference
+sog_src_mim_2025_postmortem_batch_a
+sog_src_mim_docs_batch_a
+sog_src_mim_tokenomics_batch_a
+sog_src_mstable_withdrawal_batch_d
+sog_src_nuon_contracts_batch_b
+sog_src_nuon_guarded_launch_batch_b
+sog_src_nuon_maxcap_batch_b
+sog_src_nuon_minting_batch_b
+```
+
+All ten selected rows are ordinary unreviewed archive gaps in selection tier 1. Queue v5 authorizes no canonical change.
 
 ## Boundaries
 
