@@ -16,13 +16,16 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr387-evidence-archive-review-history-v3-activation.md
-docs/quality/evidence-archive-review-history-contract-v3-pr387-spec.md
+docs/roadmap-amendments/2026-07-16-pr388-evidence-archive-maintenance-queue-v4-activation.md
+docs/quality/evidence-archive-maintenance-queue-v4-pr388-spec.md
+config/evidence-archive-maintenance-queue-v4-pr388.json
 config/evidence-archive-review-history-v3-pr387.json
+docs/migration/evidence-archive-review-history-manifest-v3-pr387.json
+docs/migration/evidence-archive-review-history-audit-v3-pr387.json
 docs/migration/post-pr385-review-gate-pr386.json
-docs/migration/evidence-archive-maintenance-outcomes-pr385.json
-docs/migration/evidence-archive-review-history-manifest-v2-pr382.json
-docs/migration/evidence-archive-review-history-audit-v2-pr382.json
+docs/migration/evidence-archive-maintenance-queue-v3-pr383.json
+docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
+docs/migration/evidence-archive-maintenance-queue-v4-pr388-delta.json
 ```
 
 ## Current workstream
@@ -35,13 +38,12 @@ Archive recorded: 406
 Archive not recorded: 153
 Deployments: 174
 Market Access Records: 8
-PR #386 Post-PR #385 Review Gate: complete
-PR #387 Evidence Archive Review-History Contract v3 Update: active; complete on merge
-PR #388 Evidence Archive Maintenance Queue v4 Refresh: approved next
+PR #387 Evidence Archive Review-History Contract v3 Update: complete
+PR #388 Evidence Archive Maintenance Queue v4 Refresh: active; complete on merge
 REVIEW GATE: mandatory after PR #388
 ```
 
-PR #387 may create internal versioned History v3 contract outputs only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
+PR #388 may generate internal Queue v4 and delta outputs only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
 
 ## Binding History v3 inventory
 
@@ -58,25 +60,40 @@ reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 1
 ```
 
-The sole reviewed-reactivated identity is:
+## Reviewed Queue v4 result
+
+```text
+Eligible pool: 108
+Selected: 10
+Reviewed suppressed excluded: 12
+Reviewed reactivated selected: 1
+Added / removed / retained versus Queue v3: 9 / 9 / 1
+```
+
+Selected Evidence identities:
 
 ```text
 sog_src_fdusd_site
+sog_src_frax_docs
+sog_src_frax_docs_frax
+sog_src_frax_official_site
+sog_src_gho_bridge_batch_c
+sog_src_gho_facilitators_batch_c
+sog_src_gho_gsm_batch_c
+sog_src_gho_launch_batch_c
+sog_src_gusd_gemini_official
+sog_src_lusd_liquity_docs
 ```
 
-Circle Mint resolves to archive-present because PR #385 added an exact archive. Time elapsed, queue presence, HTTP movement, and unreviewed URL or Wayback results do not reactivate suppressed identities.
+`sog_src_fdusd_site` is the sole reviewed-reactivated identity and is selection tier 0. The remaining nine identities are ordinary unreviewed archive gaps. Every selected row remains pending manual review and authorizes no canonical change.
 
-## Approved next sequence
+## Boundaries
 
-```text
-PR #387 Evidence Archive Review-History Contract v3 Update
-PR #388 Evidence Archive Maintenance Queue v4 Refresh
-REVIEW GATE
-```
+PR #388 may change only internal authority, queue configuration, deterministic builder, versioned Queue v4/delta outputs, validator, and workflow files.
 
-PR #388 must consume History v3, exclude all twelve reviewed suppressions, include the reviewed FDUSD reactivation explicitly, select at most ten candidates, and make no canonical or public change.
+It may not change canonical Evidence, Evidence Relations, assets, deployments, Market Access records, statistics, checkpoints, release baselines, prior queues, history versions, reviewed outcomes, or public surfaces.
 
-## Not approved
+Not approved before the next review gate:
 
 ```text
 Evidence and Archive Maintenance Batch 5

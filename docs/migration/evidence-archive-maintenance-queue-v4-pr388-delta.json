@@ -1,0 +1,170 @@
+{
+  "schema_version": "3.0",
+  "delta_id": "sog_evidence_archive_maintenance_queue_v4_delta_pr388",
+  "status": "reviewed_internal_archive_queue_history_v3_delta",
+  "public_output": false,
+  "review_pr": 388,
+  "reviewed_at": "2026-07-16",
+  "prior_queue_id": "sog_evidence_archive_maintenance_queue_v3_pr383",
+  "current_queue_id": "sog_evidence_archive_maintenance_queue_v4_pr388",
+  "historical_queue_rewritten": false,
+  "canonical_evidence_count": 559,
+  "archive_recorded_count": 406,
+  "archive_not_recorded_count": 153,
+  "exclusion_counts": {
+    "alias_identity": 33,
+    "web_archive_source_url": 0,
+    "reviewed_suppressed_without_signal": 12,
+    "missing_source_url": 0
+  },
+  "exclusion_evidence_ids": {
+    "alias_identity": [
+      "sog_src_busd_binance_phaseout_event",
+      "sog_src_circle_reserve_reports",
+      "sog_src_circle_usdc_redemption_access_faq",
+      "sog_src_dai_black_thursday_event",
+      "sog_src_dai_mcd_2019_event",
+      "sog_src_dai_sky_transition_event",
+      "sog_src_eurc_transparency",
+      "sog_src_fdusd_binance_adoption_event",
+      "sog_src_fdusd_firstdigital_launch_event",
+      "sog_src_fdusd_reserve_entry",
+      "sog_src_fdusd_reserve_reports",
+      "sog_src_gusd_gemini_launch_event",
+      "sog_src_lusd_liquity_lifecycle_event",
+      "sog_src_pyusd_paypal_launch_event",
+      "sog_src_pyusd_paypal_page",
+      "sog_src_pyusd_solana_event",
+      "sog_src_rai_settlement_batch_b",
+      "sog_src_sky_dai_product_docs",
+      "sog_src_susd_synthetix_lifecycle_event",
+      "sog_src_tether_assurance_opinions",
+      "sog_src_tusd_attestations",
+      "sog_src_tusd_site",
+      "sog_src_usdc_reopen_2023_event",
+      "sog_src_usdd_official_launch_event",
+      "sog_src_usdd_site",
+      "sog_src_usdd_tron_dao_reserve",
+      "sog_src_usde_ethena_lifecycle_event",
+      "sog_src_usdg_network_terms",
+      "sog_src_usdg_paxos_stablecoin_terms_pr364",
+      "sog_src_usds_sky_protocol_interface_pr364",
+      "sog_src_ust_chain_halt_research_event",
+      "sog_src_ust_lfg_research_event",
+      "sog_src_ust_sec_event"
+    ],
+    "web_archive_source_url": [],
+    "reviewed_suppressed_without_signal": [
+      "sog_src_bold_redemptions_batch_c",
+      "sog_src_busd_binance_phaseout",
+      "sog_src_busd_paxos_issuer_update",
+      "sog_src_busd_paxos_statement_pr354",
+      "sog_src_busd_reuters_sec_2024",
+      "sog_src_circle_stability_update_2023_03_13",
+      "sog_src_circle_svb_update",
+      "sog_src_circle_usdc_contract_addresses",
+      "sog_src_fei_addresses_batch_a",
+      "sog_src_fei_tip121c_execution_2022",
+      "sog_src_tether_legal_terms",
+      "sog_src_usdt_terms_pr354"
+    ],
+    "missing_source_url": []
+  },
+  "eligible_pool_count": 108,
+  "selected_count": 10,
+  "prior_selected_evidence_ids": [
+    "sog_src_eurc_mint_page",
+    "sog_src_fdusd_official_site",
+    "sog_src_fdusd_site",
+    "sog_src_fei_addresses_batch_a",
+    "sog_src_fei_final_redemption_batch_a",
+    "sog_src_fei_intro_batch_a",
+    "sog_src_fei_launch_batch_a",
+    "sog_src_fei_tip121c_execution_2022",
+    "sog_src_fei_v2_batch_a",
+    "sog_src_frax_app"
+  ],
+  "current_selected_evidence_ids": [
+    "sog_src_fdusd_site",
+    "sog_src_frax_docs",
+    "sog_src_frax_docs_frax",
+    "sog_src_frax_official_site",
+    "sog_src_gho_bridge_batch_c",
+    "sog_src_gho_facilitators_batch_c",
+    "sog_src_gho_gsm_batch_c",
+    "sog_src_gho_launch_batch_c",
+    "sog_src_gusd_gemini_official",
+    "sog_src_lusd_liquity_docs"
+  ],
+  "added_evidence_ids": [
+    "sog_src_frax_docs",
+    "sog_src_frax_docs_frax",
+    "sog_src_frax_official_site",
+    "sog_src_gho_bridge_batch_c",
+    "sog_src_gho_facilitators_batch_c",
+    "sog_src_gho_gsm_batch_c",
+    "sog_src_gho_launch_batch_c",
+    "sog_src_gusd_gemini_official",
+    "sog_src_lusd_liquity_docs"
+  ],
+  "removed_evidence_ids": [
+    "sog_src_eurc_mint_page",
+    "sog_src_fdusd_official_site",
+    "sog_src_fei_addresses_batch_a",
+    "sog_src_fei_final_redemption_batch_a",
+    "sog_src_fei_intro_batch_a",
+    "sog_src_fei_launch_batch_a",
+    "sog_src_fei_tip121c_execution_2022",
+    "sog_src_fei_v2_batch_a",
+    "sog_src_frax_app"
+  ],
+  "retained_evidence_ids": [
+    "sog_src_fdusd_site"
+  ],
+  "reviewed_unresolved_suppressed_evidence_ids": [
+    "sog_src_bold_redemptions_batch_c",
+    "sog_src_busd_binance_phaseout",
+    "sog_src_busd_paxos_issuer_update",
+    "sog_src_busd_paxos_statement_pr354",
+    "sog_src_busd_reuters_sec_2024",
+    "sog_src_circle_stability_update_2023_03_13",
+    "sog_src_circle_svb_update",
+    "sog_src_circle_usdc_contract_addresses",
+    "sog_src_fei_addresses_batch_a",
+    "sog_src_fei_tip121c_execution_2022",
+    "sog_src_tether_legal_terms",
+    "sog_src_usdt_terms_pr354"
+  ],
+  "reactivated_reviewed_evidence_ids": [
+    "sog_src_fdusd_site"
+  ],
+  "selected_reactivated_reviewed_evidence_ids": [
+    "sog_src_fdusd_site"
+  ],
+  "review_history_summary": {
+    "contract_id": "sog_evidence_archive_review_history_v3_pr387",
+    "manifest_id": "sog_evidence_archive_review_history_manifest_v3_pr387",
+    "audit_id": "sog_evidence_archive_review_history_audit_v3_pr387_2026_07_16",
+    "history_source_count": 4,
+    "history_event_count": 40,
+    "reviewed_evidence_identity_count": 39,
+    "current_reviewed_unresolved_total_count": 13,
+    "current_reviewed_unresolved_suppressed_count": 12,
+    "current_reviewed_reactivated_eligible_count": 1,
+    "automatic_time_expiry": false,
+    "accepted_reactivation_triggers": [
+      "reviewed_exact_capture",
+      "reviewed_source_replacement"
+    ]
+  },
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "historical_queue_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "6e436c729b0d88f1c7858155d627e3346a879182bb13771de6835d759f3bb55c",
+  "generation_digest_sha256": "98344cde28010c98c30cd2adb74ed982a40b2a9ccc5710aa7935c54094c92df4",
+  "next_work_item": "REVIEW GATE"
+}
