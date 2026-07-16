@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_pr380_112_assets_2026_07_16",
+  "baseline_id": "sog_release_integrity_pr385_112_assets_2026_07_16",
   "recorded_at": "2026-07-16",
-  "source_checkpoint_commit": "pr380-evidence-archive-maintenance-batch-3",
+  "source_checkpoint_commit": "pr385-evidence-archive-maintenance-batch-4",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
     "stablecoins": 112,
@@ -75,11 +75,11 @@
     "runtime_generation_required": true
   },
   "evidence_quality": {
-    "archive_index_count": 399,
-    "archive_not_recorded_count": 160,
+    "archive_index_count": 406,
+    "archive_not_recorded_count": 153,
     "selected_for_review": 10,
     "canonical_change_assets": 0,
-    "reviewed_no_safe_change_assets": 0,
+    "reviewed_no_safe_change_assets": 2,
     "new_evidence_records": 0
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
