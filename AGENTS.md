@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-This file is the current mandatory authority entry point. Historical authority through PR #391 remains archived and does not override this file.
+This file is the current mandatory authority entry point. Historical authority through PR #392 remains archived and does not override this file.
 
 ## Required reading
 
@@ -16,14 +16,14 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr392-evidence-archive-review-history-v4-activation.md
-docs/quality/evidence-archive-review-history-contract-v4-pr392-spec.md
+docs/roadmap-amendments/2026-07-16-pr393-evidence-archive-maintenance-queue-v5-activation.md
+docs/quality/evidence-archive-maintenance-queue-v5-pr393-spec.md
+config/evidence-archive-maintenance-queue-v5-pr393.json
 config/evidence-archive-review-history-v4-pr392.json
+docs/migration/evidence-archive-review-history-manifest-v4-pr392.json
+docs/migration/evidence-archive-review-history-audit-v4-pr392.json
 docs/migration/post-pr390-review-gate-pr391.json
-config/evidence-archive-review-history-v3-pr387.json
-docs/migration/evidence-archive-review-history-manifest-v3-pr387.json
-docs/migration/evidence-archive-review-history-audit-v3-pr387.json
-docs/migration/evidence-archive-maintenance-outcomes-pr390.json
+docs/migration/evidence-archive-maintenance-queue-v4-pr388.json
 ```
 
 ## Current workstream
@@ -36,13 +36,12 @@ Archive recorded: 416
 Archive not recorded: 143
 Deployments: 174
 Market Access Records: 8
-PR #391 Post-PR #390 Review Gate: complete
-PR #392 Evidence Archive Review-History Contract v4 Update: active; complete on merge
-PR #393 Evidence Archive Maintenance Queue v5 Refresh: approved next
+PR #392 Evidence Archive Review-History Contract v4 Update: complete
+PR #393 Evidence Archive Maintenance Queue v5 Refresh: active; complete on merge
 REVIEW GATE: mandatory after PR #393
 ```
 
-PR #392 may create internal versioned History v4 outputs only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
+PR #393 may create internal Queue v5 and delta outputs only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
 
 ## Binding History v4 inventory
 
@@ -59,13 +58,15 @@ reviewed unresolved suppressed: 12
 reviewed reactivated eligible: 0
 ```
 
-The PR #390 exact archive makes `sog_src_fdusd_site` archive-present. No reviewed-reactivated identity remains.
+## Queue v5 selection rule
+
+Start from 143 archive-not-recorded canonical identities. Exclude aliases, Web Archive source URLs, missing source URLs, and the twelve reviewed suppressions. There is no reviewed-reactivated tier. Select at most ten ordinary unreviewed archive gaps by source-priority bucket and Evidence ID.
 
 ## Boundaries
 
-PR #392 may change only internal authority, the History v4 contract, deterministic builder, versioned manifest/audit, validator, active-workstream pointer, and workflow.
+PR #393 may change only internal authority, queue configuration, deterministic builder, versioned Queue v5/delta outputs, validator, active-workstream pointer, and workflow.
 
-It may not generate Queue v5, change canonical Evidence or Relations, assets, deployments, Market Access records, statistics, checkpoints, release baselines, prior histories/outcomes, or public surfaces.
+It may not change canonical Evidence or Relations, assets, deployments, Market Access records, statistics, checkpoints, release baselines, prior histories/queues/outcomes, or public surfaces.
 
 Not approved:
 
@@ -80,4 +81,4 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-The only next work item is `PR #393 Evidence Archive Maintenance Queue v5 Refresh`, followed by `REVIEW GATE`.
+PR #393 must stop at `REVIEW GATE`.
