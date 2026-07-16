@@ -31,6 +31,7 @@ docs/migration/registry-release-integrity-baseline.json
 - History v2 is stale because it excludes PR #385 outcomes.
 - Queue v3 is consumed and cannot authorize another canonical batch.
 - History v3 must resolve Circle Mint to archive-present and FDUSD product route to reviewed source-replacement eligibility.
+- The deterministic projection is 4 sources, 40 events, and 39 reviewed Evidence identities.
 
 ## Expected History v3 inventory
 
