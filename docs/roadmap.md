@@ -43,6 +43,15 @@ docs/migration/evidence-archive-maintenance-batch-4-pr385-review-queue.json
 
 ## Reviewed Batch 4 result
 
+Before boundary:
+
+```text
+Archive recorded before PR #385: 399
+Archive not recorded before PR #385: 160
+```
+
+Reviewed result:
+
 ```text
 Selected: 10
 Changed: 8
