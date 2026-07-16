@@ -164,7 +164,7 @@
     "ranking_or_score": false,
     "automatic_promotion": false
   },
-  "source_digest_sha256": "ceedb9e550b7c7a86d9897b3297a7c0e2ff5aeb159b0d969402407b23802a943",
-  "generation_digest_sha256": "ef0c810129b2417b80b0ae91645629263832596d72e6c3cf65098b9ccd870343",
+  "source_digest_sha256": "6e436c729b0d88f1c7858155d627e3346a879182bb13771de6835d759f3bb55c",
+  "generation_digest_sha256": "98344cde28010c98c30cd2adb74ed982a40b2a9ccc5710aa7935c54094c92df4",
   "next_work_item": "REVIEW GATE"
 }
