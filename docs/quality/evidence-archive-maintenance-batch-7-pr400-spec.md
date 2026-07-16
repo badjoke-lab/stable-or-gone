@@ -1,41 +1,47 @@
 # PR #400 Evidence and Archive Maintenance Batch 7 Specification
 
-Status: active bounded manual review  
+Status: active bounded reviewed maintenance  
 Review PR: 400  
 Public output: false
 
 ## Objective
 
-Review exactly the ten Queue v6 Evidence identities, probe each canonical source URL and exact Wayback CDX history, then record one reviewed outcome per identity.
+Review exactly the ten Queue v6 Evidence identities, accept only exact canonical HTTP 200 Wayback captures, and preserve every identity without a safe reviewed change.
 
-## Selected identities
+## Reviewed result
+
+```text
+selected: 10
+changed: 5
+dated_exact_archive_added: 5
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 5
+archive recorded before / after: 425 / 430
+archive not recorded before / after: 134 / 129
+Evidence identities / Relations: 559 / 559
+```
+
+The five dated exact archive additions are:
 
 ```text
 sog_src_nuon_overview_batch_b
-sog_src_paxg_allocation_batch_b
 sog_src_paxg_launch_batch_b
-sog_src_paxg_pricing_batch_b
-sog_src_paxg_redemption_batch_b
-sog_src_paxos_busd_announcement
-sog_src_pyusd_paxos_official
 sog_src_pyusd_paxos_page
 sog_src_pyusd_paypal_official
 sog_src_rai_faq_batch_b
 ```
 
-## Initial phase
-
-The initial workflow records live response and exact-source CDX evidence. Canonical writes are disabled during this probe phase. Probe rows remain pending manual review and contain no proposed outcome.
-
-## Allowed reviewed outcomes
+The five reviewed no-safe-change identities are:
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+sog_src_paxg_allocation_batch_b
+sog_src_paxg_pricing_batch_b
+sog_src_paxg_redemption_batch_b
+sog_src_paxos_busd_announcement
+sog_src_pyusd_paxos_official
 ```
 
-An archive may be accepted only for an exact canonical source URL HTTP 200 capture with timestamp and digest. Source replacement requires explicit claim-scope and source-version equivalence review. No outcome is presumed.
+No reviewed source replacement is accepted. Each archive addition is backed by an exact canonical URL HTTP 200 capture, timestamp, and digest. Exact-source capture count was zero for every no-safe-change identity.
 
 ## Boundaries
 
@@ -46,4 +52,4 @@ An archive may be accepted only for an exact canonical source URL HTTP 200 captu
 - no automatic source replacement;
 - no Batch 8.
 
-PR #400 stops at `REVIEW GATE` after reviewed decisions and any bounded canonical maintenance are complete.
+PR #400 stops at `REVIEW GATE` after the five dated exact archive additions and five reviewed no-safe-change outcomes are recorded.
