@@ -603,14 +603,14 @@
       "canonical_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
       "claim_scopes": [],
       "live_probe": {
-        "ok": false,
-        "status": 429,
+        "ok": true,
+        "status": 200,
         "final_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
-        "title": "Vercel Security Checkpoint",
-        "sampled_body_sha256": "0ea88a60782d608e229ebc8191176fd02387b99ad6173310f241d13fea7e54dd",
-        "sampled_body_bytes": 33795
+        "title": "Raising the Standard for Stablecoins: Ripple USD Launches Globally with Unmatched Utility, Experience, and Compliance | Ripple",
+        "sampled_body_sha256": "edc1ad3f5845a6827a4536453f41891136df36d890a91b25bc1989639d835fd2",
+        "sampled_body_bytes": 116762
       },
       "exact_cdx_probe": {
         "ok": true,
@@ -765,14 +765,14 @@
       "canonical_url": "https://ripple.com/solutions/stablecoin/",
       "claim_scopes": [],
       "live_probe": {
-        "ok": false,
-        "status": 403,
+        "ok": true,
+        "status": 200,
         "final_url": "https://ripple.com/solutions/stablecoin/",
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
-        "title": "Vercel Security Checkpoint",
-        "sampled_body_sha256": "0447b3ac5368963a8eb2ced1583935cb5e97abccfd490b22c248a2709af23ada",
-        "sampled_body_bytes": 33795
+        "title": "Ripple USD (RLUSD) Stablecoin | Ripple",
+        "sampled_body_sha256": "2f165bf3805b9a0b661157e61ca7ac770405c9eeb05aae354bc6c48a2600a2b1",
+        "sampled_body_bytes": 244343
       },
       "exact_cdx_probe": {
         "ok": true,
@@ -1431,7 +1431,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Proposal: Initiate Rollout of Spot v2 - Ampleforth Governance - Ampleforth Governance",
-        "sampled_body_sha256": "6127efc4d3b6994b92818228f4ff5943ea5c587b78b81368ce103aa690ab14da",
+        "sampled_body_sha256": "ce87500589231b7eed9ae3cab5d3e9ca8ae9767991c62bab4fd643121f664bde",
         "sampled_body_bytes": 60311
       },
       "exact_cdx_probe": {
