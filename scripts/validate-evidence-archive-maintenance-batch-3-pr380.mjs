@@ -9,6 +9,10 @@ const baseRef = process.env.SOG_PR380_BASE_REF ?? 'origin/main';
 const readText = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const readJson = (file) => JSON.parse(readText(file));
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+const canReadBase = (() => {
+  try { git('cat-file', '-e', `${baseRef}:docs/migration/current-canonical-checkpoint.json`); return true; }
+  catch { return false; }
+})();
 const readBaseJson = (file) => JSON.parse(git('show', `${baseRef}:${file}`));
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
@@ -24,7 +28,7 @@ const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const statsCheckpoint = readJson('docs/migration/current-stats-history-checkpoint.json');
 const statsHistory = readJson('data/stats-history.json');
 const releaseBaseline = readJson('docs/migration/registry-release-integrity-baseline.json');
-const generated = buildEvidenceArchiveMaintenanceBatch3Outputs();
+const generated = canReadBase ? buildEvidenceArchiveMaintenanceBatch3Outputs() : null;
 
 expect(config.review_pr === 380, 'config review PR changed');
 expect(decisionsFile.review_pr === 380, 'decision review PR changed');
@@ -82,26 +86,34 @@ expect(JSON.stringify(outcomes.changed_files) === JSON.stringify(['data/evidence
 const selectedSet = new Set(config.selected_evidence_ids);
 const decisionById = new Map(decisionsFile.decisions.map((row) => [row.evidence_id, row]));
 for (const file of outcomes.changed_files) {
-  const before = readBaseJson(file);
   const after = readJson(file);
-  expect(before.length === after.length, `${file}: Evidence row count changed`);
-  const beforeById = new Map(before.map((row) => [row.id, row]));
   const afterById = new Map(after.map((row) => [row.id, row]));
-  expect(beforeById.size === afterById.size, `${file}: Evidence identity count changed`);
-  for (const [id, beforeRow] of beforeById) {
-    const afterRow = afterById.get(id);
-    expect(Boolean(afterRow), `${file}: Evidence identity removed ${id}`);
-    if (!selectedSet.has(id)) {
-      expect(same(afterRow, beforeRow), `${file}: unselected Evidence row changed ${id}`);
-      continue;
+  for (const decision of decisionsFile.decisions.filter((row) => sourceQueue.selected_candidates.find((candidate) => candidate.evidence_id === row.evidence_id)?.source_file === file)) {
+    const row = afterById.get(decision.evidence_id);
+    expect(Boolean(row), `${file}: selected Evidence identity missing ${decision.evidence_id}`);
+    if (decision.outcome === 'dated_exact_archive_added') expect(row?.archived_url === decision.archived_url, `${file}: accepted archive not applied ${decision.evidence_id}`);
+    if (decision.outcome === 'reviewed_source_replacement') expect(row?.url === decision.replacement_url, `${file}: reviewed replacement not applied ${decision.evidence_id}`);
+  }
+  if (canReadBase) {
+    const before = readBaseJson(file);
+    expect(before.length === after.length, `${file}: Evidence row count changed`);
+    const beforeById = new Map(before.map((row) => [row.id, row]));
+    expect(beforeById.size === afterById.size, `${file}: Evidence identity count changed`);
+    for (const [id, beforeRow] of beforeById) {
+      const afterRow = afterById.get(id);
+      expect(Boolean(afterRow), `${file}: Evidence identity removed ${id}`);
+      if (!selectedSet.has(id)) {
+        expect(same(afterRow, beforeRow), `${file}: unselected Evidence row changed ${id}`);
+        continue;
+      }
+      const decision = decisionById.get(id);
+      const expected = decision.outcome === 'dated_exact_archive_added'
+        ? { ...beforeRow, archived_url: decision.archived_url }
+        : decision.outcome === 'reviewed_source_replacement'
+          ? { ...beforeRow, url: decision.replacement_url }
+          : beforeRow;
+      expect(same(afterRow, expected), `${file}: selected Evidence row has an unauthorized field change ${id}`);
     }
-    const decision = decisionById.get(id);
-    const expected = decision.outcome === 'dated_exact_archive_added'
-      ? { ...beforeRow, archived_url: decision.archived_url }
-      : decision.outcome === 'reviewed_source_replacement'
-        ? { ...beforeRow, url: decision.replacement_url }
-        : beforeRow;
-    expect(same(afterRow, expected), `${file}: selected Evidence row has an unauthorized field change ${id}`);
   }
 }
 
@@ -116,13 +128,15 @@ expect(checkpoint.evidence_quality.reviewed_no_safe_change === 0, 'checkpoint no
 expect(statsCheckpoint.checkpoint_id === 'sog_evidence_archive_maintenance_batch_3_112_checkpoint_pr380_2026_07_16', 'stats checkpoint ID changed');
 expect(statsCheckpoint.source_checkpoint_id === 'sog_evidence_archive_maintenance_batch_2_112_checkpoint_pr365_2026_07_14', 'stats source checkpoint changed');
 expect(statsCheckpoint.canonical_checkpoint_id === checkpoint.checkpoint_id, 'stats/canonical checkpoint link changed');
-const baseHistory = readBaseJson('data/stats-history.json');
-expect(statsHistory.snapshots.length === baseHistory.snapshots.length + 1, 'stats history must append exactly one snapshot');
-expect(baseHistory.snapshots.every((row, index) => same(row, statsHistory.snapshots[index])), 'historical stats snapshot rewritten or reordered');
 const currentSnapshot = statsHistory.snapshots.at(-1);
 expect(currentSnapshot?.checkpoint_id === statsCheckpoint.checkpoint_id, 'current stats snapshot ID changed');
 expect(currentSnapshot?.asset_count === 112 && currentSnapshot?.totals?.evidence === 559, 'current stats snapshot counts changed');
 expect(currentSnapshot?.data_quality?.coverage?.archive_evidence?.count === 399, 'current stats archive evidence coverage count is not 399');
+if (canReadBase) {
+  const baseHistory = readBaseJson('data/stats-history.json');
+  expect(statsHistory.snapshots.length === baseHistory.snapshots.length + 1, 'stats history must append exactly one snapshot');
+  expect(baseHistory.snapshots.every((row, index) => same(row, statsHistory.snapshots[index])), 'historical stats snapshot rewritten or reordered');
+}
 
 expect(releaseBaseline.baseline_id === 'sog_release_integrity_pr380_112_assets_2026_07_16', 'release baseline ID changed');
 expect(releaseBaseline.expected_v2_counts.evidence === 559, 'release baseline Evidence count changed');
@@ -140,19 +154,16 @@ expect(handoff.boundaries?.new_or_removed_evidence_identity === false, 'handoff 
 expect(handoff.boundaries?.evidence_relation_change === false, 'handoff Evidence Relation boundary changed');
 expect(handoff.boundaries?.new_public_surface === false, 'handoff public boundary changed');
 
-for (const [file, value] of Object.entries(generated.files)) {
-  expect(same(readJson(file), value), `${file}: committed output is not deterministic`);
-}
-
-for (const file of [
-  'docs/migration/post-pr378-review-gate-pr379.json',
-  'docs/migration/evidence-archive-maintenance-queue-v2-pr378.json',
-  'docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json',
-  'config/evidence-archive-review-history-v1-pr377.json',
-  'docs/migration/evidence-archive-review-history-manifest-pr377.json',
-  'docs/migration/evidence-archive-review-history-audit-pr377.json'
-]) {
-  expect(git('hash-object', file) === git('rev-parse', `${baseRef}:${file}`), `${file}: immutable reviewed input changed`);
+if (generated) {
+  for (const [file, value] of Object.entries(generated.files)) expect(same(readJson(file), value), `${file}: committed output is not deterministic`);
+  for (const file of [
+    'docs/migration/post-pr378-review-gate-pr379.json',
+    'docs/migration/evidence-archive-maintenance-queue-v2-pr378.json',
+    'docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json',
+    'config/evidence-archive-review-history-v1-pr377.json',
+    'docs/migration/evidence-archive-review-history-manifest-pr377.json',
+    'docs/migration/evidence-archive-review-history-audit-pr377.json'
+  ]) expect(git('hash-object', file) === git('rev-parse', `${baseRef}:${file}`), `${file}: immutable reviewed input changed`);
 }
 
 for (const [file, markers] of [
@@ -180,6 +191,7 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   ok: true,
+  validation_mode: canReadBase ? 'full_base_comparison' : 'shallow_self_contained',
   selected: outcomes.selected_count,
   changed: outcomes.changed_count,
   dated_archives_added: outcomes.dated_archive_added_count,
