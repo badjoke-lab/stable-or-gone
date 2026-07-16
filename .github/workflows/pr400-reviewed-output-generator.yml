@@ -74,6 +74,30 @@ jobs:
           npm run validate:parity
           npm run validate:release-integrity
           node scripts/validate-non-ui-release-material-current.mjs
+      - name: Validate launch queue
+        run: npm run validate:launch-queue
+      - name: Validate terminal queue
+        run: npm run validate:terminal-queue
+      - name: Validate candidates
+        run: npm run validate:candidates
+      - name: Validate classification
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate events v2
+        run: npm run validate:events-v2
+      - name: Validate migration v3
+        run: npm run validate:migration-v3
+      - name: Validate reproducible build audit
+        run: npm run validate:reproducible-build
+      - name: Validate audited checkpoint
+        run: node scripts/validate-audited-100-checkpoint.mjs
+      - name: Validate UI v3 cleanup
+        run: npm run validate:ui-v3-cleanup
+      - name: Validate deployment audit
+        run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
+      - name: Validate next-growth audit
+        run: node scripts/validate-next-growth-candidate-audit-pr329.mjs
       - name: Validate statistics
         run: |
           node scripts/build-stats.mjs
