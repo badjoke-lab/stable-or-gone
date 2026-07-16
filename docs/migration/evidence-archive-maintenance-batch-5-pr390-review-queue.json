@@ -1,0 +1,1229 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_archive_maintenance_batch_5_pr390_review_queue",
+  "status": "internal_manual_review_probe_complete",
+  "public_output": false,
+  "review_pr": 390,
+  "reviewed_at": "2026-07-16",
+  "source_queue_id": "sog_evidence_archive_maintenance_queue_v4_pr388",
+  "selected_count": 10,
+  "automatic_canonical_write": false,
+  "exact_source_match_required": true,
+  "rows": [
+    {
+      "evidence_id": "sog_src_fdusd_site",
+      "source_file": "data/evidence-pr033.json",
+      "title": "First Digital USD official page",
+      "publisher": "First Digital",
+      "source_type": "issuer_page",
+      "canonical_url": "https://www.firstdigitallabs.com/fdusd",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://www.firstdigitallabs.com/fdusd",
+        "redirected": false,
+        "content_type": "text/html; charset=UTF-8",
+        "title": "Just a moment...",
+        "sampled_body_sha256": "899613cad365f0a7a7cf5730332cb8c8c630189543d437b6eb1dbeb10040c01c",
+        "sampled_body_bytes": 5600
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.firstdigitallabs.com%2Ffdusd&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20250403035240",
+          "original": "https://firstdigitallabs.com/fdusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "PIYDFHHKFH5XV5TOEWLEF7NB2XMBPFSM"
+        },
+        "latest_capture": {
+          "timestamp": "20260416065330",
+          "original": "https://www.firstdigitallabs.com/fdusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "GMTUUTWGGSVMX3DEPHDYQB3QFH2P5OAZ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250403035240",
+            "original": "https://firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PIYDFHHKFH5XV5TOEWLEF7NB2XMBPFSM"
+          },
+          {
+            "timestamp": "20250406071657",
+            "original": "https://firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PNZHVWU273U2MXLWUQYD4J5NYIEH63Q2"
+          },
+          {
+            "timestamp": "20260114193520",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JPGPT5I44KKCUWQQ2YKSLALIQOVNHBWD"
+          },
+          {
+            "timestamp": "20260311114001",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MWT3VBPLHDURRUCY7XI27IBGWOBUPYXL"
+          },
+          {
+            "timestamp": "20260315212738",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EJI4PFNSBYWNSXLRNOIDPYMZAC4FR3AH"
+          },
+          {
+            "timestamp": "20260416065330",
+            "original": "https://www.firstdigitallabs.com/fdusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GMTUUTWGGSVMX3DEPHDYQB3QFH2P5OAZ"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_frax_docs",
+      "source_file": "data/evidence-pr033.json",
+      "title": "Frax documentation",
+      "publisher": "Frax Finance",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.frax.com/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.frax.com/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Frax Docs | Fraxtal Docs",
+        "sampled_body_sha256": "7835659b8a32c8e71d254fa1e406cd1f06d02d54e0a5c6ce53c1813ed5c32eac",
+        "sampled_body_bytes": 22941
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.frax.com%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 38,
+        "earliest_capture": {
+          "timestamp": "20240209051800",
+          "original": "https://docs.frax.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "VYZDDFL37ERL5FSUQHWHWVSXEKTKWVVG"
+        },
+        "latest_capture": {
+          "timestamp": "20260509195515",
+          "original": "https://docs.frax.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "4ASWRQ4DLRJNOBH4QU5ELS7QGOKEEDQ5"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20240209051800",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VYZDDFL37ERL5FSUQHWHWVSXEKTKWVVG"
+          },
+          {
+            "timestamp": "20240421045527",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SZ5XC677TRJ3UDRFTJTDMJDXAT6FAGID"
+          },
+          {
+            "timestamp": "20240524161829",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IXRV2ZHQ2PKSUUWJSONO3NTQPUV5VSTJ"
+          },
+          {
+            "timestamp": "20240619030639",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HOSBPL6TAT2TMPZMGU3EIEFAEXQOJPJ3"
+          },
+          {
+            "timestamp": "20240621010939",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Q7YDSP7PB3IRYZEKRJGWJDDXUHRCZC3T"
+          },
+          {
+            "timestamp": "20240716055140",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SR65KR2JYY5X4PBQ23M4KVGLQMFIVMV6"
+          },
+          {
+            "timestamp": "20240806134823",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5XFXQR7WLSRA76MDL6NLWRTCRH6PJ453"
+          },
+          {
+            "timestamp": "20240809192007",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4MSECW2LLNWVCAAA66MPTISTMYZEWNXW"
+          },
+          {
+            "timestamp": "20251014152218",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EKFF57HRQKDBRKXNTWF67NU63DDA6KCA"
+          },
+          {
+            "timestamp": "20251102202716",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UVIZ7DE4Q4TF5GWDV4DVZP2VCGTTD6MO"
+          },
+          {
+            "timestamp": "20251116063319",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3KVMMMPBH2GJWEFJVJQMC5SXASRG5M4S"
+          },
+          {
+            "timestamp": "20251216023708",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZYO6HLRJ57SUGGBE26POSHDI2XZY5HMF"
+          },
+          {
+            "timestamp": "20260205190243",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Z7YJC6SX7TTEZ44AO2ZTVAEHRO5C4FK6"
+          },
+          {
+            "timestamp": "20260308233816",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OJ6LVCJSYSDPQDMXT6UC2P5UTFEKKNYW"
+          },
+          {
+            "timestamp": "20260415034105",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JVV3RCJ2O22ZCL3V7KFMDFHG7D243V4C"
+          },
+          {
+            "timestamp": "20260509195515",
+            "original": "https://docs.frax.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4ASWRQ4DLRJNOBH4QU5ELS7QGOKEEDQ5"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_frax_docs_frax",
+      "source_file": "data/evidence.json",
+      "title": "Frax Finance documentation for FRAX stablecoin",
+      "publisher": "Frax Finance",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://docs.frax.finance/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.frax.finance/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Frax Ecosystem Overview | Frax Finance ¤",
+        "sampled_body_sha256": "882f6d8d79a74b8e55867d43e5d3ed7746929c9d84658e97b7a047c509f03e8d",
+        "sampled_body_bytes": 262228
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.frax.finance%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 107,
+        "earliest_capture": {
+          "timestamp": "20201102080424",
+          "original": "https://docs.frax.finance/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "AHAXXY64WLHLRQCIJFJEFFEQHB6GETGI"
+        },
+        "latest_capture": {
+          "timestamp": "20260702224626",
+          "original": "https://docs.frax.finance/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "67UXDEHQF76DV3K5C3UR3SMFEYATWFYX"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20201102080424",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AHAXXY64WLHLRQCIJFJEFFEQHB6GETGI"
+          },
+          {
+            "timestamp": "20201103002825",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "77CNM4P73AA3KR2A7SS3XOQNHF4ZSB7U"
+          },
+          {
+            "timestamp": "20201127023512",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NHNIZGIUZFMBWFPOLQ6KTIKPKNZWCNFQ"
+          },
+          {
+            "timestamp": "20210119144922",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GD33SMDL5PDTDNTQL5UQXHUGNQY3YJSK"
+          },
+          {
+            "timestamp": "20210307174350",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FT62VH5AQ43OQ4OIKLQ74VLH5CXESZY4"
+          },
+          {
+            "timestamp": "20210515232413",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JOTSJ4DGMQY6SOV2MHCABAXIPVN65YPK"
+          },
+          {
+            "timestamp": "20210618015910",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YR33O2UJX7P7FQRIGV2MHV5T35YJ73JL"
+          },
+          {
+            "timestamp": "20210725090529",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FXGKGNOMIFIUBHORY7UDW45REFBQOL7T"
+          },
+          {
+            "timestamp": "20260217084446",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NP2JSKO245TORH5Z26AOXZIO6IABJ7JC"
+          },
+          {
+            "timestamp": "20260309025555",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YOOZBTMVUGMREX4M73C65R37AJNNIZOQ"
+          },
+          {
+            "timestamp": "20260319183637",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QPB6FJMIJS2KUHXFHOX2CCM6VZHPWSTN"
+          },
+          {
+            "timestamp": "20260319184336",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "S7ZMAAE2POI7MCEKYRNSOHFGM2V6I2LN"
+          },
+          {
+            "timestamp": "20260413110905",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/markdown",
+            "digest": "4OXY3ZP5EK43W7G3VC3YUACW2E3D5VE3"
+          },
+          {
+            "timestamp": "20260425183301",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/markdown",
+            "digest": "HLXGXVPPOVMZ5QSJKEHMIAEO72EFOIWS"
+          },
+          {
+            "timestamp": "20260525210515",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KYHKJSY7JMRAIJ43F6AJFFWNGO2SYRCT"
+          },
+          {
+            "timestamp": "20260702224626",
+            "original": "https://docs.frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "67UXDEHQF76DV3K5C3UR3SMFEYATWFYX"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_frax_official_site",
+      "source_file": "data/evidence.json",
+      "title": "Frax Finance official site",
+      "publisher": "Frax Finance",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://frax.finance/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://frax.com/",
+        "redirected": true,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Frax.com",
+        "sampled_body_sha256": "b56a54dfeec582de2f205997f8752aead414ad0c7da7a23b3c9a142f185ea648",
+        "sampled_body_bytes": 1501
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Ffrax.finance%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 185,
+        "earliest_capture": {
+          "timestamp": "20191028074711",
+          "original": "https://frax.finance/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "QS4OUN2F5R236L2UWAXVFD7IRMICMJHM"
+        },
+        "latest_capture": {
+          "timestamp": "20250522112121",
+          "original": "https://frax.finance/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "RJ2HE7U2TAPYOYLPOWUDIZW4Q3PQE57T"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20191028074711",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QS4OUN2F5R236L2UWAXVFD7IRMICMJHM"
+          },
+          {
+            "timestamp": "20191214075840",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "64NLJGWFVHG5WYUHBGEWZOPKQDEKDS6Q"
+          },
+          {
+            "timestamp": "20191215035321",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CEDUE2GNKTK3ZCBF5YKUFN7ZIM5TO7DU"
+          },
+          {
+            "timestamp": "20191216035231",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LJOHZZAMGGW6BBQABEWXNZQPUE7ZKGWU"
+          },
+          {
+            "timestamp": "20200105132154",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "G2LXCKYIGQWQPMICNBVCKDW7EI4NWDQN"
+          },
+          {
+            "timestamp": "20200405223804",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KJLDCXOPJLLDHQ4XHZMVP4FZAKJ7MDO3"
+          },
+          {
+            "timestamp": "20200407230946",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DZFV5EAW3ZGMBDNPAATS54T3G5N3JE3L"
+          },
+          {
+            "timestamp": "20200522123635",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TPXZKE3JPBQM4ZR5W6FMPMWJF35F5P2D"
+          },
+          {
+            "timestamp": "20250222024043",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LKYBAQLGFVDD6EDSOSAHXX5WLY5CEZL6"
+          },
+          {
+            "timestamp": "20250302064119",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJ2HE7U2TAPYOYLPOWUDIZW4Q3PQE57T"
+          },
+          {
+            "timestamp": "20250304005500",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LKYBAQLGFVDD6EDSOSAHXX5WLY5CEZL6"
+          },
+          {
+            "timestamp": "20250323202737",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJ2HE7U2TAPYOYLPOWUDIZW4Q3PQE57T"
+          },
+          {
+            "timestamp": "20250402070344",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LKYBAQLGFVDD6EDSOSAHXX5WLY5CEZL6"
+          },
+          {
+            "timestamp": "20250406180924",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJ2HE7U2TAPYOYLPOWUDIZW4Q3PQE57T"
+          },
+          {
+            "timestamp": "20250424172716",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LKYBAQLGFVDD6EDSOSAHXX5WLY5CEZL6"
+          },
+          {
+            "timestamp": "20250522112121",
+            "original": "https://frax.finance/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJ2HE7U2TAPYOYLPOWUDIZW4Q3PQE57T"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_gho_bridge_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "title": "Bridging GHO",
+      "publisher": "Aave",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://aave.com/help/gho-stablecoin/bridging-gho",
+      "claim_scopes": [
+        "gho_canonical_bridge_and_remote_deployment_design"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://aave.com/help/gho-stablecoin/bridging-gho",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Bridging GHO | Aave",
+        "sampled_body_sha256": "fcb8e8f5488979de5c555ac71da0f48b82c415d0dd9a17ab0227f238feffe1f3",
+        "sampled_body_bytes": 57437
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Faave.com%2Fhelp%2Fgho-stablecoin%2Fbridging-gho&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 4,
+        "earliest_capture": {
+          "timestamp": "20250207182031",
+          "original": "https://aave.com/help/gho-stablecoin/bridging-gho",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "3Y4CQAOBOPFCBUBERXM23ROQBSQ3GJMN"
+        },
+        "latest_capture": {
+          "timestamp": "20260323202039",
+          "original": "https://aave.com/help/gho-stablecoin/bridging-gho",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "OGHERHKB4ARRFRAMUNCKSBA4RV5GD3JR"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250207182031",
+            "original": "https://aave.com/help/gho-stablecoin/bridging-gho",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3Y4CQAOBOPFCBUBERXM23ROQBSQ3GJMN"
+          },
+          {
+            "timestamp": "20250804161947",
+            "original": "https://aave.com/help/gho-stablecoin/bridging-gho",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WDJ5B3DKRPARB56XD3BPRBETZFSJF5JL"
+          },
+          {
+            "timestamp": "20260115025131",
+            "original": "https://aave.com/help/gho-stablecoin/bridging-gho",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7N5LQVUCXNBHARF537YHFKGU2EL3T726"
+          },
+          {
+            "timestamp": "20260323202039",
+            "original": "https://aave.com/help/gho-stablecoin/bridging-gho",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OGHERHKB4ARRFRAMUNCKSBA4RV5GD3JR"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_gho_facilitators_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "title": "GHO Facilitators",
+      "publisher": "Aave",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://aave.com/help/gho-stablecoin/facilitators",
+      "claim_scopes": [
+        "gho_aave_v3_ethereum_facilitator",
+        "gho_facilitator_supply_and_bucket_mechanics"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://aave.com/help/gho-stablecoin/facilitators",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Facilitators | Aave",
+        "sampled_body_sha256": "819d8e9495a53fc7a1bad7725753f8fdb3a767957b864cca3426959f65e3f926",
+        "sampled_body_bytes": 56763
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Faave.com%2Fhelp%2Fgho-stablecoin%2Ffacilitators&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 5,
+        "earliest_capture": {
+          "timestamp": "20250207190333",
+          "original": "https://aave.com/help/gho-stablecoin/facilitators",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "HT5VCWZYY3FMA4DIYAEIMZL55EOZTEHJ"
+        },
+        "latest_capture": {
+          "timestamp": "20260510055607",
+          "original": "https://aave.com/help/gho-stablecoin/facilitators",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "6NPIINYHRL7A4LNN2N7NYQ4UFDMGWSE7"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250207190333",
+            "original": "https://aave.com/help/gho-stablecoin/facilitators",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HT5VCWZYY3FMA4DIYAEIMZL55EOZTEHJ"
+          },
+          {
+            "timestamp": "20250804165443",
+            "original": "https://aave.com/help/gho-stablecoin/facilitators",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3P2TNNXJOAYOYOUMKMPDNUPULTG4WKA4"
+          },
+          {
+            "timestamp": "20260115033030",
+            "original": "https://aave.com/help/gho-stablecoin/facilitators",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NLCYAVL3LA6PM66HLTIDILYPBSK32QQY"
+          },
+          {
+            "timestamp": "20260323202039",
+            "original": "https://aave.com/help/gho-stablecoin/facilitators",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WJJU3PGQZO53HJV45RLBOR2UZ5ZPSPGV"
+          },
+          {
+            "timestamp": "20260510055607",
+            "original": "https://aave.com/help/gho-stablecoin/facilitators",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6NPIINYHRL7A4LNN2N7NYQ4UFDMGWSE7"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_gho_gsm_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "title": "GHO Stability Module",
+      "publisher": "Aave",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://aave.com/help/gho-stablecoin/stability-module",
+      "claim_scopes": [
+        "gho_stability_module_conversion_mechanics"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://aave.com/help/gho-stablecoin/stability-module",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Stability Module | Aave",
+        "sampled_body_sha256": "e326115b7f393267ec32b77a20bcb61d3e31de674b1baf33342ec73bee780582",
+        "sampled_body_bytes": 53679
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Faave.com%2Fhelp%2Fgho-stablecoin%2Fstability-module&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 4,
+        "earliest_capture": {
+          "timestamp": "20250207182834",
+          "original": "https://aave.com/help/gho-stablecoin/stability-module",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "OMLKTQXLG5RZTKHUCGKXPCVYIJNTJZ5I"
+        },
+        "latest_capture": {
+          "timestamp": "20260323202039",
+          "original": "https://aave.com/help/gho-stablecoin/stability-module",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "4RZP3KB2EWBPMU2E7QSAFM46PXCU2SVB"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250207182834",
+            "original": "https://aave.com/help/gho-stablecoin/stability-module",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OMLKTQXLG5RZTKHUCGKXPCVYIJNTJZ5I"
+          },
+          {
+            "timestamp": "20250804162637",
+            "original": "https://aave.com/help/gho-stablecoin/stability-module",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VKUABSVN2EH36477CMB4OZDUX2OZLOUE"
+          },
+          {
+            "timestamp": "20260115025846",
+            "original": "https://aave.com/help/gho-stablecoin/stability-module",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JWPXX3EZZPC3WCMVGEVJEN6LAI47TD2A"
+          },
+          {
+            "timestamp": "20260323202039",
+            "original": "https://aave.com/help/gho-stablecoin/stability-module",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4RZP3KB2EWBPMU2E7QSAFM46PXCU2SVB"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_gho_launch_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "title": "GHO Mainnet Launch",
+      "publisher": "Aave Governance",
+      "source_type": "governance_proposal",
+      "canonical_url": "https://governance-v2.aave.com/governance/proposal/268/",
+      "claim_scopes": [
+        "gho_mainnet_launch_and_initial_facilitators"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://governance-v2.aave.com/governance/proposal/268/",
+        "redirected": false,
+        "content_type": "text/html",
+        "title": "Aave - GHO Mainnet Launch",
+        "sampled_body_sha256": "2664c24f86cebc16aa378c1d4b64f8cc25a55e32206944ded2266e15e818cb84",
+        "sampled_body_bytes": 173809
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fgovernance-v2.aave.com%2Fgovernance%2Fproposal%2F268%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 1,
+        "earliest_capture": {
+          "timestamp": "20250602164747",
+          "original": "https://governance-v2.aave.com/governance/proposal/268/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "MNRA2CZD5WE73TPAYYVDIJYJRL3PZA4T"
+        },
+        "latest_capture": {
+          "timestamp": "20250602164747",
+          "original": "https://governance-v2.aave.com/governance/proposal/268/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "MNRA2CZD5WE73TPAYYVDIJYJRL3PZA4T"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250602164747",
+            "original": "https://governance-v2.aave.com/governance/proposal/268/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MNRA2CZD5WE73TPAYYVDIJYJRL3PZA4T"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_gusd_gemini_official",
+      "source_file": "data/evidence.json",
+      "title": "Gemini Dollar official page",
+      "publisher": "Gemini",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://www.gemini.com/dollar",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.gemini.com/dollar",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "What is Gemini Dollar (GUSD)? A Secure Stablecoin | Gemini",
+        "sampled_body_sha256": "98e24b46b16be8512d794c1fdde4870625a8b0c3791d88d711b3ddf45ec3fa6a",
+        "sampled_body_bytes": 262689
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.gemini.com%2Fdollar&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 744,
+        "earliest_capture": {
+          "timestamp": "20180910151448",
+          "original": "https://gemini.com/dollar/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "C662IV4VSNMXKHVJ5YPSCMXSPTP444T7"
+        },
+        "latest_capture": {
+          "timestamp": "20260706120118",
+          "original": "https://www.gemini.com/dollar",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "F4WXF2BUXOY53D25HNA7MMENVXJXGDR6"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20180910151448",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "C662IV4VSNMXKHVJ5YPSCMXSPTP444T7"
+          },
+          {
+            "timestamp": "20180911181122",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WZI6QIFXN7G5KZ77LKEWOGLWUHRNW5PS"
+          },
+          {
+            "timestamp": "20180912230212",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SZEATBYCHGY3V2NRDGMLZBUGWZIXSKAM"
+          },
+          {
+            "timestamp": "20181008102845",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3XCX3C464VVLSQVMGVOTBYOKTEE53LDK"
+          },
+          {
+            "timestamp": "20181011094501",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UJJAWYSCZTF46P4SNNBTR3RKHYTUQKVA"
+          },
+          {
+            "timestamp": "20181018130940",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5Y4OCPBL4FIE5A26SJRMRQ6TD3EWMBFN"
+          },
+          {
+            "timestamp": "20181018231657",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RJXTMXQSAQF5ZQZOIHPRHJQEJSSXCI7T"
+          },
+          {
+            "timestamp": "20181020011431",
+            "original": "https://gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "B6GJVTV5ZFQYPES3N5TLGFN7EXJXWG2X"
+          },
+          {
+            "timestamp": "20260528153229",
+            "original": "https://www.gemini.com/dollar",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7GCPOKTJAKQWY2CZKALORBRNG4DHLO7J"
+          },
+          {
+            "timestamp": "20260605084910",
+            "original": "https://www.gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "L3C7AOYXPLPT5P6KHRD5QOQDURANXRWO"
+          },
+          {
+            "timestamp": "20260611205418",
+            "original": "https://www.gemini.com/dollar",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WZZJRTLOZWDN7YNILO5RWDWYYXMGGM7C"
+          },
+          {
+            "timestamp": "20260625143909",
+            "original": "https://www.gemini.com/dollar",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SOG4JO7K5CMGSG7T6I5PYEH3THKQOJ5B"
+          },
+          {
+            "timestamp": "20260627193919",
+            "original": "https://www.gemini.com/dollar",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZTJ7FFYIQQGAMDFGKCX3YHK7MJSW3S6H"
+          },
+          {
+            "timestamp": "20260705170209",
+            "original": "https://www.gemini.com/dollar",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XXEO6SNHJEECZOOCRDVDBPGYOCDN74H4"
+          },
+          {
+            "timestamp": "20260706120117",
+            "original": "https://www.gemini.com/dollar/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "722R5PZBGEV6AUJPWTLMJZG7YNMLWCYD"
+          },
+          {
+            "timestamp": "20260706120118",
+            "original": "https://www.gemini.com/dollar",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "F4WXF2BUXOY53D25HNA7MMENVXJXGDR6"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_lusd_liquity_docs",
+      "source_file": "data/evidence.json",
+      "title": "Liquity documentation for LUSD",
+      "publisher": "Liquity",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://docs.liquity.org/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.liquity.org/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Official Liquity V2 Documentation | Liquity Docs",
+        "sampled_body_sha256": "b4c26e09f00634755ebffd14a6de30ae8829ddc2ce652feedbd75cf99bb0ec22",
+        "sampled_body_bytes": 262196
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.liquity.org%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 115,
+        "earliest_capture": {
+          "timestamp": "20210304094515",
+          "original": "https://docs.liquity.org/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "53YPAVHRSOEOCU7F3KX6MQXZKIOJMKMF"
+        },
+        "latest_capture": {
+          "timestamp": "20260708204810",
+          "original": "https://docs.liquity.org/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "WDZWJEWM4MTHYBV2WVGBZC6RRD4XT5F4"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20210304094515",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "53YPAVHRSOEOCU7F3KX6MQXZKIOJMKMF"
+          },
+          {
+            "timestamp": "20210307172051",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VJIOEBAXXLCQMAVQLE6SGUXI5H34UGGW"
+          },
+          {
+            "timestamp": "20210511170757",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EG2HVJIEDDLC2U25PILQ7G46LIY63OTG"
+          },
+          {
+            "timestamp": "20210605033257",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ECBV7JAWOVDKDKJJQKQ3I53VKZ42XRMB"
+          },
+          {
+            "timestamp": "20210620052752",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VL7VUQP4MMFFSA5EHZLUQNBWF3CVIX7W"
+          },
+          {
+            "timestamp": "20210620065910",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "EAX2UYSX4LE7P2WBJEMSTMBJLLWNUXFT"
+          },
+          {
+            "timestamp": "20210704032945",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AFUTGP24E2NQHF5C4SREYJOCZFKPLX73"
+          },
+          {
+            "timestamp": "20210727023139",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "S7GJPQQLJD3CGC364ZYL6OMIIBERAADE"
+          },
+          {
+            "timestamp": "20251212122945",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "676NHRC474O656OU2POQWLRIRCKN6SCQ"
+          },
+          {
+            "timestamp": "20251216234357",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VXBR3HG73KYA5RO2XYSZBAZMHOX7DH45"
+          },
+          {
+            "timestamp": "20260113221731",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MNGZUQYT766M2CZES6YENPFFTNJLZN72"
+          },
+          {
+            "timestamp": "20260408125334",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/markdown",
+            "digest": "BQZWHWHFVGYPW6E6UJANMTWYCROHRDSX"
+          },
+          {
+            "timestamp": "20260508153251",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OUBWLMPAC5SSBUMS6OQOSN6TACFUB7UZ"
+          },
+          {
+            "timestamp": "20260511182533",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RSI62RAM6X66FFGQDRWKOKKJDCRQKSXB"
+          },
+          {
+            "timestamp": "20260608083709",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "P32F33PW2PH4DRORMNFZA3YYSIUO64C5"
+          },
+          {
+            "timestamp": "20260708204810",
+            "original": "https://docs.liquity.org/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WDZWJEWM4MTHYBV2WVGBZC6RRD4XT5F4"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    }
+  ],
+  "boundaries": {
+    "canonical_data_changed": false,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "public_surface_changed": false
+  }
+}
