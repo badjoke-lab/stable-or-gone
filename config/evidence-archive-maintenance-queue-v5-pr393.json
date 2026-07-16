@@ -1,0 +1,46 @@
+{
+  "schema_version": "5.0",
+  "config_id": "sog_evidence_archive_maintenance_queue_v5_pr393",
+  "status": "reviewed_internal_non_ranking_history_v4_queue_contract",
+  "review_pr": 393,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr390-review-gate-pr391.json",
+  "source_contract": "config/evidence-archive-review-history-v4-pr392.json",
+  "source_manifest": "docs/migration/evidence-archive-review-history-manifest-v4-pr392.json",
+  "source_audit": "docs/migration/evidence-archive-review-history-audit-v4-pr392.json",
+  "prior_queue": "docs/migration/evidence-archive-maintenance-queue-v4-pr388.json",
+  "selection": {
+    "mode": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+    "maximum_selected_count": 10,
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ]
+  },
+  "expected_input": {
+    "canonical_evidence_count": 559,
+    "archive_recorded_count": 416,
+    "archive_not_recorded_count": 143,
+    "history_source_count": 5,
+    "history_event_count": 50,
+    "reviewed_identity_count": 48,
+    "reviewed_suppressed_count": 12,
+    "reviewed_reactivated_eligible_count": 0,
+    "reviewed_reactivated_evidence_ids": []
+  },
+  "expected_output": {
+    "selected_count": 10,
+    "maximum_selected_count": 10
+  },
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_work_item": "REVIEW GATE"
+}
