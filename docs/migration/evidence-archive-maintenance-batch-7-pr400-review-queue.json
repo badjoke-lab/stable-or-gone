@@ -1,0 +1,908 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_archive_maintenance_batch_7_pr400_review_queue",
+  "status": "internal_manual_review_probe_complete",
+  "public_output": false,
+  "review_pr": 400,
+  "reviewed_at": "2026-07-16",
+  "source_queue_id": "sog_evidence_archive_maintenance_queue_v6_pr398",
+  "selected_count": 10,
+  "automatic_canonical_write": false,
+  "exact_source_match_required": true,
+  "rows": [
+    {
+      "evidence_id": "sog_src_nuon_overview_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Nuon stablecoin overview",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.nuon.fi/nuon-stablecoin",
+      "claim_scopes": [
+        "nuon_usd_mint_inflation_yield_rebase_and_base_deployment"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.nuon.fi/nuon-stablecoin",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Nuon Stablecoin | Nuon Guides",
+        "sampled_body_sha256": "b4991667bd04e415db2667866c54530d5b443296f7ed984a3351654049cb5fac",
+        "sampled_body_bytes": 262172
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.nuon.fi%2Fnuon-stablecoin&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 6,
+        "earliest_capture": {
+          "timestamp": "20250428060128",
+          "original": "https://docs.nuon.fi/nuon-stablecoin",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "XZECFKM2K7N343NT64YWFPQ6RL6IU4A2"
+        },
+        "latest_capture": {
+          "timestamp": "20260519094927",
+          "original": "https://docs.nuon.fi/nuon-stablecoin",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "DJPTWBNIEB4DRMUAYDBFCX4QOETQOY2F"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250428060128",
+            "original": "https://docs.nuon.fi/nuon-stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XZECFKM2K7N343NT64YWFPQ6RL6IU4A2"
+          },
+          {
+            "timestamp": "20250813033718",
+            "original": "https://docs.nuon.fi/nuon-stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CYXEYQH7UAEUVSPKGOPJLCMZUTJNDD2M"
+          },
+          {
+            "timestamp": "20250813194921",
+            "original": "https://docs.nuon.fi/nuon-stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MZNZPK7TPLZCLXFC2B2B5JVRHZM2A6K7"
+          },
+          {
+            "timestamp": "20251113112802",
+            "original": "https://docs.nuon.fi/nuon-stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3EW6PFJY7MQWI4KL4GJRYLUSVEMEF3UB"
+          },
+          {
+            "timestamp": "20260207164319",
+            "original": "https://docs.nuon.fi/nuon-stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NSFWTKLI457XLD6VDJKAGPMEIZNNOTUK"
+          },
+          {
+            "timestamp": "20260519094927",
+            "original": "https://docs.nuon.fi/nuon-stablecoin",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DJPTWBNIEB4DRMUAYDBFCX4QOETQOY2F"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_paxg_allocation_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "PAXG allocation and physical gold bar details",
+      "publisher": "Paxos",
+      "source_type": "issuer_support",
+      "canonical_url": "https://support.paxos.com/articles/7204091747-paxg-allocation-and-physical-gold-bar-details-representing-my-paxg-tokens",
+      "claim_scopes": [
+        "paxg_bar_allocation_and_fractional_ownership"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://support.paxos.com/articles/7204091747-paxg-allocation-and-physical-gold-bar-details-representing-my-paxg-tokens",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "PAXG Allocation and Physical Gold Bar Details Representing My PAXG Tokens | Paxos Knowledge Base",
+        "sampled_body_sha256": "8e02d4381695caecac7dadc38ee9b3ac35ef94348a0442fe6ed7828946b0b8d3",
+        "sampled_body_bytes": 19689
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsupport.paxos.com%2Farticles%2F7204091747-paxg-allocation-and-physical-gold-bar-details-representing-my-paxg-tokens&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_paxg_launch_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "Paxos Launches PAX Gold",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+      "claim_scopes": [
+        "paxg_launch_issuer_and_one_ounce_gold_design"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+        "redirected": false,
+        "content_type": "text/html",
+        "title": "Paxos Launches PAX Gold: Physical Gold on the Blockchain - Paxos | Newsroom",
+        "sampled_body_sha256": "b2aa1a8fe6ad03f6035fdeeca209d4e9fa27165d51e64755afac9baf8a3c3339",
+        "sampled_body_bytes": 262194
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.paxos.com%2Fnewsroom%2Fpaxos-launches-pax-gold-physical-gold-on-the-blockchain&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 9,
+        "earliest_capture": {
+          "timestamp": "20250717130514",
+          "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "MSYJHCWXTH6SRQBV3EP6FRKLDIVETS2O"
+        },
+        "latest_capture": {
+          "timestamp": "20260704114647",
+          "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "RMDPBNZQD55HBB6RM2XFPNFOYEAQ3J5X"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250717130514",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MSYJHCWXTH6SRQBV3EP6FRKLDIVETS2O"
+          },
+          {
+            "timestamp": "20250824110636",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HTXGXZPPHIMOO5U3FWZ5K44YQ4XYUODK"
+          },
+          {
+            "timestamp": "20260204014808",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JJ5G7H2FX75MNMCFTT7A7R3BF4E2FSD3"
+          },
+          {
+            "timestamp": "20260218172751",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5DYEYFIJU7ORCQXNYP3VEDCXPOCS2IWW"
+          },
+          {
+            "timestamp": "20260306085841",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AAMLWTC7QSOF44M6YULOTHNT4KZHGVO5"
+          },
+          {
+            "timestamp": "20260406193717",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZH2QW7JOBTJ6KQPK6MZ6ZC4G6CQUAFTH"
+          },
+          {
+            "timestamp": "20260511020224",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BTDVJRCEX6ABRVIH4RKPRWQ5R6MP56ON"
+          },
+          {
+            "timestamp": "20260524140906",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NJ7G3I2KWLJEZTUQ3MHQICIUNCSW22WA"
+          },
+          {
+            "timestamp": "20260704114647",
+            "original": "https://www.paxos.com/newsroom/paxos-launches-pax-gold-physical-gold-on-the-blockchain",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RMDPBNZQD55HBB6RM2XFPNFOYEAQ3J5X"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_paxg_pricing_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "PAX Gold price determination",
+      "publisher": "Paxos",
+      "source_type": "issuer_support",
+      "canonical_url": "https://support.paxos.com/articles/7818174259-pax-gold-price-determination",
+      "claim_scopes": [
+        "paxg_london_gold_market_price_source"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://support.paxos.com/articles/7818174259-pax-gold-price-determination",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "PAX Gold Price Determination | Paxos Knowledge Base",
+        "sampled_body_sha256": "1c240783a3a1ba3d31145362981386bf5bd6b49d805bfe32a2fab38b62ba8bab",
+        "sampled_body_bytes": 13730
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsupport.paxos.com%2Farticles%2F7818174259-pax-gold-price-determination&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_paxg_redemption_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "How to buy, sell, or redeem PAX Gold",
+      "publisher": "Paxos",
+      "source_type": "issuer_support",
+      "canonical_url": "https://support.paxos.com/articles/7682455289-how-to-buy-sell-redeem-pax-gold",
+      "claim_scopes": [
+        "paxg_usd_unallocated_and_physical_redemption_paths"
+      ],
+      "live_probe": {
+        "ok": false,
+        "status": 404,
+        "final_url": "https://support.paxos.com/articles/7682455289-how-to-buy-sell-redeem-pax-gold",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Page Not Found | Paxos Knowledge Base",
+        "sampled_body_sha256": "fdfef9575d1093b6948bdb06c8c938fa953d4a1a1b8c0460af4dd8e84d5665d1",
+        "sampled_body_bytes": 8602
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsupport.paxos.com%2Farticles%2F7682455289-how-to-buy-sell-redeem-pax-gold&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_paxos_busd_announcement",
+      "source_file": "data/evidence.json",
+      "title": "Paxos to end relationship with Binance for BUSD",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://paxos.com/2023/02/13/paxos-to-end-relationship-with-binance-for-busd/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": false,
+        "status": 404,
+        "final_url": "https://www.paxos.com/2023/02/13/paxos-to-end-relationship-with-binance-for-busd/",
+        "redirected": true,
+        "content_type": "text/html",
+        "title": "Paxos | Regulated Blockchain Infrastructure",
+        "sampled_body_sha256": "a26ed14c2fef1f129e368b8d854ffb74043e7e5ad8536cfd501836d9f766635f",
+        "sampled_body_bytes": 262161
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fpaxos.com%2F2023%2F02%2F13%2Fpaxos-to-end-relationship-with-binance-for-busd%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_pyusd_paxos_official",
+      "source_file": "data/evidence.json",
+      "title": "Paxos PayPal USD official reference",
+      "publisher": "Paxos",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://paxos.com/paypal-usd/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": false,
+        "status": 404,
+        "final_url": "https://www.paxos.com/paypal-usd/",
+        "redirected": true,
+        "content_type": "text/html",
+        "title": "Paxos | Regulated Blockchain Infrastructure",
+        "sampled_body_sha256": "a26ed14c2fef1f129e368b8d854ffb74043e7e5ad8536cfd501836d9f766635f",
+        "sampled_body_bytes": 262161
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fpaxos.com%2Fpaypal-usd%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_pyusd_paxos_page",
+      "source_file": "data/evidence-pr033.json",
+      "title": "Paxos PYUSD page",
+      "publisher": "Paxos",
+      "source_type": "issuer_page",
+      "canonical_url": "https://paxos.com/pyusd/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.paxos.com/pyusd",
+        "redirected": true,
+        "content_type": "text/html",
+        "title": "Paxos | PayPal USD (PYUSD)",
+        "sampled_body_sha256": "6fe745d2c3e736b0e8e3910c5613aca6c37464aae0173ef3b934a31b1f87c2a1",
+        "sampled_body_bytes": 262159
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fpaxos.com%2Fpyusd%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 39,
+        "earliest_capture": {
+          "timestamp": "20230807191502",
+          "original": "https://paxos.com/pyusd/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "27MPFT3723HLLA3XHNH2EIO7JBRGS5LO"
+        },
+        "latest_capture": {
+          "timestamp": "20260511023149",
+          "original": "https://www.paxos.com/pyusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "7NJ62LI5CHBXL62JCUMFVOXXT4VYD6OE"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20230807191502",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "27MPFT3723HLLA3XHNH2EIO7JBRGS5LO"
+          },
+          {
+            "timestamp": "20230808025825",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SEVA2YW74FHBNCQWAV4FS3YS3W4OKEGO"
+          },
+          {
+            "timestamp": "20230809011307",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "J4F36LSXVFQ636XTC3T5VJEYROBOMRHK"
+          },
+          {
+            "timestamp": "20230810060906",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CJWB2UMRBRDUSGJK5WZLFBYMI7G2KPUP"
+          },
+          {
+            "timestamp": "20230810121632",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5RJII7IZ4BYZUQ3LA6YQZKJHXNPMVMYQ"
+          },
+          {
+            "timestamp": "20230816214939",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PZDYPS5XRXVY2KL2GHWUFDUECLC7VNHT"
+          },
+          {
+            "timestamp": "20230920014152",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QXGVPGF52MMHO6X3HVE5ESGHDQZ6RKKX"
+          },
+          {
+            "timestamp": "20230920225023",
+            "original": "https://paxos.com/pyusd/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "B2BA7QWNIPKX3LPGX3LODGUGVGUWG6TS"
+          },
+          {
+            "timestamp": "20251110131929",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZEJX7JSCPM5AOUXRXP2EPYYY6ORVIK6Y"
+          },
+          {
+            "timestamp": "20251112053257",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "64Z6K6F6SEPOMN24WIMVOOKMUIICD4XH"
+          },
+          {
+            "timestamp": "20251213230729",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4SI7MAGAXEJGEVMDBRWUACGVKWM5SDHE"
+          },
+          {
+            "timestamp": "20260117160552",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RBFTTTVOBOVG2OLGHUTI2IA2WH3TUUT3"
+          },
+          {
+            "timestamp": "20260122223158",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CTC7KI6NX4RQV4RCBIDQAX57AM5FFH33"
+          },
+          {
+            "timestamp": "20260312042853",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MGZM6RO3BKJHFOQPG3A5NIQF6MX5SYGO"
+          },
+          {
+            "timestamp": "20260419054225",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YNJVRMAXPRJW7SBRGSV5SMVEW7ZKTRBP"
+          },
+          {
+            "timestamp": "20260511023149",
+            "original": "https://www.paxos.com/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7NJ62LI5CHBXL62JCUMFVOXXT4VYD6OE"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_pyusd_paypal_official",
+      "source_file": "data/evidence.json",
+      "title": "PayPal USD official product page",
+      "publisher": "PayPal",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "PYUSD Stablecoin | US Dollar Crypto Rewards | PayPal US",
+        "sampled_body_sha256": "4abdf2d9eb396d3dec0e5c416e3496c329cb9833e8cdd274afb4250117da1af4",
+        "sampled_body_bytes": 225110
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.paypal.com%2Fus%2Fdigital-wallet%2Fmanage-money%2Fcrypto%2Fpyusd&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 491,
+        "earliest_capture": {
+          "timestamp": "20230807134148",
+          "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "TD5PMLDNBPQ7Y7VUIGJNOC3UGNKWWRYV"
+        },
+        "latest_capture": {
+          "timestamp": "20260710183731",
+          "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "ZE6PZN5TLM2OD3XYE7HOCRBCOC6U5TO2"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20230807134148",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TD5PMLDNBPQ7Y7VUIGJNOC3UGNKWWRYV"
+          },
+          {
+            "timestamp": "20230807141013",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "G6HPFKGFMGJQBJCNZH3VLT5DFO4IHBJE"
+          },
+          {
+            "timestamp": "20230807142233",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PWCKF5S2TYOC5T2FJU6REFPEKZRX4BUG"
+          },
+          {
+            "timestamp": "20230807150713",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4VRKVCFFJRH3ITGCYALZ3J2J6AIXEWT5"
+          },
+          {
+            "timestamp": "20230807155310",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NELW727ALZGO5NWZKN4FHE5MI74Y324G"
+          },
+          {
+            "timestamp": "20230807173708",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ISUCTMWO7FV6E7MOMZWIVV2RNHYL34ER"
+          },
+          {
+            "timestamp": "20230807195610",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4WENCM2P74AUSVZJHVHFSNNFQOG2E54P"
+          },
+          {
+            "timestamp": "20230807235429",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UJU7FT53B7LSVI6XXOC3WKU2O7AWXAKI"
+          },
+          {
+            "timestamp": "20260421040915",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QA4L7GXOVJEZRNUYL6LUOUBTUBN532UG"
+          },
+          {
+            "timestamp": "20260426223929",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "J6KREVIH2VMOVPN2TC5P4QVSC5RWCGIE"
+          },
+          {
+            "timestamp": "20260528170911",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "U73AG7DEZEVLU6IVRBIXDDS4C5FPUHL2"
+          },
+          {
+            "timestamp": "20260605114336",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OGWP2BPXRXNHWKK7MVD2RWFAIU33D7GR"
+          },
+          {
+            "timestamp": "20260605114337",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4AXQUWKLUV5EAYJRI3PPZT5AX36ID4OA"
+          },
+          {
+            "timestamp": "20260630172718",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IDL4BFSM4RKQ5NAPIWVJJRPVN6LEI7KE"
+          },
+          {
+            "timestamp": "20260706120114",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7OEIL24ITPL3NIDWTSM2BAZ6YBNWX3NG"
+          },
+          {
+            "timestamp": "20260710183731",
+            "original": "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZE6PZN5TLM2OD3XYE7HOCRBCOC6U5TO2"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rai_faq_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "title": "RAI FAQ",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.reflexer.finance/faq",
+      "claim_scopes": [
+        "rai_floating_redemption_price_and_protocol_design"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.reflexer.finance/faq",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "FAQ | GEB Docs",
+        "sampled_body_sha256": "60a825b98ad86d04ec88d71b2da235e123ea07b17c61c156e1b4b9c45dc0a33d",
+        "sampled_body_bytes": 262200
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.reflexer.finance%2Ffaq&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 45,
+        "earliest_capture": {
+          "timestamp": "20201201210639",
+          "original": "https://docs.reflexer.finance/faq",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "4K65WEFX6JFMODYXKNYFYI56WBJ7TGUY"
+        },
+        "latest_capture": {
+          "timestamp": "20260516115926",
+          "original": "https://docs.reflexer.finance/faq",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "2N57YVQBI4AH3WZNOCQDQYFIVTKL7INL"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20201201210639",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4K65WEFX6JFMODYXKNYFYI56WBJ7TGUY"
+          },
+          {
+            "timestamp": "20201211182957",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "I5WMQUZTUYVWFWEZF76GGMCNHNFMCENX"
+          },
+          {
+            "timestamp": "20201213220849",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "56OI2NDRHPING3YE4M5UW2XZLUNNXLRX"
+          },
+          {
+            "timestamp": "20201227023555",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4UHWWW3X7ZUJD4FR7E4XMUAFFMASZENM"
+          },
+          {
+            "timestamp": "20210120170912",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PX7EGDSUVQUTJCLY4ONYTYLGWFNDNF4U"
+          },
+          {
+            "timestamp": "20210216155117",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CRZQCWKVAJTLERMWYIFSAV6D5NOKDMGY"
+          },
+          {
+            "timestamp": "20210301195735",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FKLCX7N67H5YENQSNQ2ASI4AWZZUNOJE"
+          },
+          {
+            "timestamp": "20210309125727",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D5QKHOA5NAXHCNHJNQWYJKM3RAMPGDVS"
+          },
+          {
+            "timestamp": "20250524165026",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6OQUOJC3EIAWALYMCBHNDUCLY2OE4K6W"
+          },
+          {
+            "timestamp": "20250609213024",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DXDZGKLCVIQAS4RM6SPJX7DFFYXHZ32C"
+          },
+          {
+            "timestamp": "20250813201018",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "GXWQZ4SJYON4WTQNSWQM43MZ66S27GQ2"
+          },
+          {
+            "timestamp": "20250821195637",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XITRWDANBOZBYLB7RIZNSW6XU4E6THHA"
+          },
+          {
+            "timestamp": "20251017051400",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LNO4HCMPCM4QIMYSSFA4GX4MAKIYFNGS"
+          },
+          {
+            "timestamp": "20251113173947",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UPVD2MOTBQYCV5YL3FWXDFL7DU3J7EGG"
+          },
+          {
+            "timestamp": "20260216085237",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "THZ5LZBMJVKJGCOJUMHJNFZKJVNFZZYS"
+          },
+          {
+            "timestamp": "20260516115926",
+            "original": "https://docs.reflexer.finance/faq",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2N57YVQBI4AH3WZNOCQDQYFIVTKL7INL"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "pending_manual_review",
+      "proposed_outcome": null,
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": null,
+      "reviewer_reason": null,
+      "remaining_uncertainty": null
+    }
+  ],
+  "boundaries": {
+    "canonical_data_changed": false,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "public_surface_changed": false
+  }
+}
