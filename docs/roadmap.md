@@ -18,6 +18,8 @@ Deployments: 174
 Market Access Records: 8
 Archive recorded before PR #390: 406
 Archive not recorded before PR #390: 153
+Archive recorded: 416
+Archive not recorded: 143
 Archive recorded after reviewed decisions: 416
 Archive not recorded after reviewed decisions: 143
 
