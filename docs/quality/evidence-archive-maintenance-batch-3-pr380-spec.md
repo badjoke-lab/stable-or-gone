@@ -1,6 +1,6 @@
 # PR #380 Evidence and Archive Maintenance Batch 3 Specification
 
-Status: active bounded canonical maintenance  
+Status: reviewed implementation complete; merge pending  
 Review PR: 380  
 Public surface: unchanged
 
@@ -12,6 +12,7 @@ Manually review exactly the ten PR #378 Evidence identities and apply only sourc
 
 ```text
 config/evidence-archive-maintenance-batch-3-pr380.json
+config/evidence-archive-maintenance-batch-3-pr380-decisions.json
 docs/migration/post-pr378-review-gate-pr379.json
 docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
 docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json
@@ -42,6 +43,30 @@ reviewed_no_safe_change
 
 Exactly one outcome is required for each of the ten identities.
 
+## Reviewed result
+
+```text
+selected identities: 10
+canonical records changed: 10
+dated exact archives added: 9
+reviewed source replacements: 1
+reviewed no-safe-change: 0
+archive recorded: 390 → 399
+archive not recorded: 169 → 160
+canonical Evidence identities: 559
+Evidence Relations: 559
+assets: 112
+```
+
+The sole source replacement is the Circle Mint route:
+
+```text
+https://www.circle.com/mint
+→ https://www.circle.com/circle-mint
+```
+
+The old route produced no exact dated capture and redirects successfully to the same Circle Mint product identity and business minting/conversion claim scope. No archive was inferred for that replacement.
+
 ## Required outputs
 
 ```text
@@ -66,7 +91,7 @@ docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
 - exact selected-ID set and deterministic queue identity;
 - one reviewed outcome per selected ID;
 - field-level canonical diff limited to accepted outcomes;
-- exact archive-count transition;
+- exact 390/169 to 399/160 archive transition;
 - no wildcard archive accepted as a dated capture;
 - no automatic capture or replacement;
 - immutable PR #377–#379 inputs;
