@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_07_17_visa_vsp_open_usd_analysis",
+    "date": "2026-07-17",
+    "title": "Visa Stablecoin Platform and Open USD analysis published",
+    "category": "content",
+    "summary": "Published a Japanese analysis of Visa Stablecoin Platform, its relationship to Open USD and Open Standard, the select-client beta boundary, unresolved launch facts, and the existing OUSD ticker collision. Registered Open USD and VSP for private review-only monitoring without creating canonical records.",
+    "related_paths": ["/updates/visa-stablecoin-platform-open-usd/"]
+  },
+  {
     "id": "sog_update_2026_07_10_japan_stablecoin_access_guide",
     "date": "2026-07-10",
     "title": "Japan stablecoin access guide added",
@@ -78,53 +86,5 @@
     "category": "data",
     "summary": "Deepened USDC with source-specific reserve examination evidence, Circle redemption-access context, selected Ethereum/Base/Solana deployment records, and updated dossier notes while keeping full chain-by-chain coverage and exact depeg market data as source-review areas.",
     "related_paths": ["/stablecoin/usdc/", "/issuer/circle/"]
-  },
-  {
-    "id": "sog_update_2026_06_03_pr020_guides",
-    "date": "2026-06-03",
-    "title": "Guides and glossary layer added",
-    "category": "content",
-    "summary": "Added guide pages for depeg handling, status vs event separation, reserve disclosure basics, and lifecycle terms. Expanded the glossary and added guides to navigation and sitemap.",
-    "related_paths": ["/guides/", "/glossary/", "/sitemap-index.xml"]
-  },
-  {
-    "id": "sog_update_2026_06_03_pr019_filters",
-    "date": "2026-06-03",
-    "title": "Registry filtering and search added",
-    "category": "ui",
-    "summary": "Added client-side search, filters, sorting, result count, and empty-state handling to the stablecoin registry list.",
-    "related_paths": ["/stablecoins/"]
-  },
-  {
-    "id": "sog_update_2026_06_03_pr018_top5",
-    "date": "2026-06-03",
-    "title": "Top five records deepened",
-    "category": "data",
-    "summary": "Strengthened USDT, USDC, DAI, UST, and BUSD with additional evidence, reserve references, deployment notes, regulatory context, and known unknowns.",
-    "related_paths": ["/stablecoins/"]
-  },
-  {
-    "id": "sog_update_2026_06_02_pr017_15_records",
-    "date": "2026-06-02",
-    "title": "15 stablecoin records reached",
-    "category": "data",
-    "summary": "Added GUSD, LUSD, crvUSD, USDe, and sUSD to bring the registry to 15 stablecoin seed records.",
-    "related_paths": ["/stablecoins/"]
-  },
-  {
-    "id": "sog_update_2026_06_02_pr016_10_records",
-    "date": "2026-06-02",
-    "title": "Second seed expansion completed",
-    "category": "data",
-    "summary": "Added FRAX, TUSD, FDUSD, PYUSD, and USDD to bring the registry to 10 stablecoin seed records.",
-    "related_paths": ["/stablecoins/"]
-  },
-  {
-    "id": "sog_update_2026_06_01_v0_foundation",
-    "date": "2026-06-01",
-    "title": "SOG v0 foundation launched",
-    "category": "foundation",
-    "summary": "Created the initial Astro-based registry with stablecoin, issuer, event, evidence, reserve, known unknown, regulatory note, and deployment data structures.",
-    "related_paths": ["/", "/stablecoins/", "/methodology/"]
   }
 ]
