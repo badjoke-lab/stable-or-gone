@@ -52,6 +52,14 @@ Archive recorded: 399 → 406
 Archive not recorded: 160 → 153
 ```
 
+Canonical reviewed outcome identifiers:
+
+```text
+dated_exact_archive_added
+reviewed_source_replacement
+reviewed_no_safe_change
+```
+
 Accepted archive additions:
 
 ```text
