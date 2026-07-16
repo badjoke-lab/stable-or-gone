@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   issues: write
   pull-requests: write
 
@@ -33,36 +33,10 @@ jobs:
           node-version: 22.22.0
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: Apply deterministic reviewed decisions
+      - name: Validate PR 405 reviewed boundary
         run: |
           set -o pipefail
-          { node scripts/build-evidence-archive-maintenance-batch-8-pr405.mjs; node scripts/build-evidence-archive-maintenance-batch-8-pr405.mjs --check; } 2>&1 | tee -a /tmp/pr405-all.txt
-      - name: Commit generated PR 405 outputs
-        if: github.event_name == 'push'
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add \
-            data/evidence-batch-b.json \
-            data/evidence-extra.json \
-            data/stats-history.json \
-            docs/migration/evidence-archive-maintenance-batch-8-pr405-review-queue.json \
-            docs/migration/evidence-archive-maintenance-outcomes-pr405.json \
-            docs/migration/evidence-archive-maintenance-batch-8-pr405-reviewed-handoff.json \
-            docs/migration/current-canonical-checkpoint.json \
-            docs/migration/current-stats-history-checkpoint.json \
-            docs/migration/registry-release-integrity-baseline.json
-          if git diff --cached --quiet; then
-            echo 'PR #405 generated outputs already committed'
-          else
-            git commit -m 'Apply PR 405 reviewed archive maintenance outcomes'
-            git pull --rebase origin pr405-evidence-archive-maintenance-batch-8
-            git push origin HEAD:pr405-evidence-archive-maintenance-batch-8
-          fi
-      - name: Validate PR 405 reviewed scope
-        run: |
-          set -o pipefail
-          { node scripts/validate-evidence-archive-maintenance-batch-8-pr405.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr405-all.txt
+          { node scripts/validate-evidence-archive-maintenance-batch-8-pr405-reviewed.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr405-all.txt
       - name: Validate canonical Evidence
         run: |
           set -o pipefail
@@ -96,28 +70,25 @@ jobs:
         run: |
           set -o pipefail
           { node scripts/build-stats.mjs; SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs; SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs; } 2>&1 | tee -a /tmp/pr405-all.txt
-      - name: Verify PR 405 boundaries
+      - name: Verify no canonical or public change
         run: |
           set -o pipefail
           {
-            git diff --exit-code origin/main...HEAD -- data/ \
-              ':!data/evidence-batch-b.json' \
-              ':!data/evidence-extra.json' \
-              ':!data/stats-history.json'
-            git diff --exit-code origin/main...HEAD -- src/ public/
+            git diff --exit-code origin/main...HEAD -- data/ src/ public/
+            git diff --exit-code origin/main...HEAD -- \
+              docs/migration/current-canonical-checkpoint.json \
+              docs/migration/current-stats-history-checkpoint.json \
+              docs/migration/registry-release-integrity-baseline.json
             node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const outcomes=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-outcomes-pr405.json','utf8'));
           const handoff=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-8-pr405-reviewed-handoff.json','utf8'));
-          if(outcomes.selected_count!==10||outcomes.changed_count!==10||outcomes.dated_archive_added_count!==10||outcomes.reviewed_source_replacement_count!==0||outcomes.reviewed_no_safe_change_count!==0)throw new Error('PR #405 reviewed outcome boundary changed');
-          if(handoff.evidence_quality.archive_recorded!==440||handoff.evidence_quality.archive_not_recorded!==119)throw new Error('PR #405 archive boundary changed');
+          if(outcomes.selected_count!==10||outcomes.changed_count!==0||outcomes.dated_archive_added_count!==0||outcomes.reviewed_source_replacement_count!==0||outcomes.reviewed_no_safe_change_count!==10)throw new Error('PR #405 reviewed outcome boundary changed');
+          if(handoff.evidence_quality.archive_recorded!==430||handoff.evidence_quality.archive_not_recorded!==129)throw new Error('PR #405 archive boundary changed');
           if(handoff.canonical_counts.evidence!==559||handoff.canonical_counts.evidence_relations!==559)throw new Error('PR #405 Evidence identity/relation boundary changed');
           if(handoff.next_work_item?.decision!=='review_gate_required')throw new Error('PR #405 must end at a review gate');
           NODE
           } 2>&1 | tee -a /tmp/pr405-all.txt
-      - name: Verify generated outputs are deterministic
-        if: github.event_name == 'pull_request'
-        run: node scripts/build-evidence-archive-maintenance-batch-8-pr405.mjs --check 2>&1 | tee -a /tmp/pr405-all.txt
       - name: Astro check and build
         run: |
           set -o pipefail
@@ -141,7 +112,7 @@ jobs:
             const body=`${marker}
             ## PR #405 Evidence and Archive Maintenance Batch 8
 
-            - Phase: **reviewed application**
+            - Phase: **reviewed no-safe-change handoff**
             - Workflow: **${{ job.status }}**
             - Reviewed / changed: **${handoff?.evidence_quality?.selected??'n/a'} / ${handoff?.evidence_quality?.changed??'n/a'}**
             - Dated archives added: **${handoff?.evidence_quality?.dated_archive_added??'n/a'}**
