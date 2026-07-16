@@ -11,14 +11,16 @@ This file is the current mandatory authority entry point. Historical authority t
 5. `docs/post-351-data-growth-operating-spec.md`
 6. active roadmap amendment
 7. active work-item specification
-8. every named queue, history contract, audit, and checkpoint
+8. every named queue, history contract, audit, outcome, and checkpoint
 
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-15-pr379-post-pr378-review-gate.md
-docs/quality/post-pr378-review-gate-pr379-spec.md
-config/post-pr378-review-gate-pr379.json
+docs/roadmap-amendments/2026-07-16-pr380-evidence-archive-maintenance-batch-3-activation.md
+docs/quality/evidence-archive-maintenance-batch-3-pr380-spec.md
+config/evidence-archive-maintenance-batch-3-pr380.json
+docs/migration/post-pr378-review-gate-pr379.json
+docs/migration/evidence-archive-maintenance-queue-v2-pr378.json
 ```
 
 ## Current workstream
@@ -26,38 +28,32 @@ config/post-pr378-review-gate-pr379.json
 ```text
 Canonical stable assets: 112
 Canonical Evidence: 559
+Evidence Relations: 559
 Archive recorded: 390
 Archive not recorded: 169
-PR #377 Evidence Archive Review-History Contract Audit: complete
-PR #378 Evidence Archive Maintenance Queue v2 Refresh: complete
-PR #379 Post-PR #378 Review Gate: active; complete on merge
-Current authority: REVIEW GATE
+PR #379 Post-PR #378 Review Gate: complete
+PR #380 Evidence and Archive Maintenance Batch 3: active; complete on merge
+REVIEW GATE: mandatory after PR #380
 ```
 
-PR #379 may record an authority decision and recover the two omitted deterministic PR #378 internal outputs. It may not change canonical Evidence or public surfaces.
+## Exact PR #380 scope
 
-## Binding PR #378 result
+PR #380 must review exactly these ten existing Evidence identities:
 
 ```text
-reviewed unresolved Evidence suppressed: 10
-reviewed reactivation signals: 0
-fresh selected candidates: 10
-maximum selected candidates: 10
-next work item: REVIEW GATE
+sog_src_bold_technical_batch_c
+sog_src_circle_transparency
+sog_src_circle_usdc_product
+sog_src_crvusd_curve_docs
+sog_src_crvusd_curve_lifecycle_event
+sog_src_dai_whitepaper_pr354
+sog_src_eurc_circle_page
+sog_src_eurc_developer_docs
+sog_src_eurc_launch_2022
+sog_src_eurc_mint_page
 ```
 
-The exact selected Evidence IDs and deterministic priority order are fixed by the merged PR #378 builder. PR #379 must regenerate the missing queue and delta without changing those semantics.
-
-## Reviewed next sequence
-
-PR #379 may approve exactly:
-
-```text
-PR #380 Evidence and Archive Maintenance Batch 3
-REVIEW GATE
-```
-
-PR #380 must review exactly the ten PR #378 identities. Each identity must receive one outcome:
+No identity may be substituted. Every identity must receive exactly one reviewed outcome:
 
 ```text
 dated_exact_archive_added
@@ -65,25 +61,13 @@ reviewed_source_replacement
 reviewed_no_safe_change
 ```
 
-A canonical change is allowed only after a reviewed exact capture or reviewed claim-scope-equivalent source replacement. Automatic capture, automatic replacement, rankings, scores, recommendations, and new public surfaces remain prohibited.
+A canonical archive may be added only after a successful exact-source dated capture is verified. A source replacement requires reviewed claim-scope and source-version equivalence. Queue presence does not presume a canonical change.
 
 ## Boundaries
 
-PR #379 may change only internal authority, configuration, deterministic recovered/generated outputs, validators, and workflow files.
+PR #380 may update only the ten selected Evidence records and the internal authority, queue, outcomes, handoff, validators, checkpoints, statistics, and workflow files required to validate those reviewed changes.
 
-It may not change:
-
-```text
-data/
-src/
-public/
-canonical Evidence identities, relations, URLs, or archived URLs
-Market Access records
-deployments
-statistics history
-reviewed PR #378 selection semantics
-automatic monitoring or canonical promotion
-```
+It may not add or remove Evidence identities, change Evidence Relations, assets, deployments, Market Access records, rankings, scores, recommendations, monitoring promotion, or public navigation/surfaces.
 
 Not approved before the next review gate:
 
@@ -95,4 +79,4 @@ Record Growth Batch 2
 new public page or explorer
 ```
 
-Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification.
+Every non-trivial PR must state specification references, roadmap item, scope, non-goals, named inputs, preservation, validation, and deployment classification. Work after PR #380 must pause at `REVIEW GATE`.
