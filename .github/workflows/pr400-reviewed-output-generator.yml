@@ -1,0 +1,54 @@
+name: PR 400 Reviewed Output Generator
+
+on:
+  push:
+    branches:
+      - pr400-evidence-archive-maintenance-batch-7
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pr400-reviewed-output-generator
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate reviewed application outputs
+        run: |
+          node scripts/build-evidence-archive-maintenance-batch-7-pr400.mjs
+          node scripts/build-evidence-archive-maintenance-batch-7-pr400.mjs --check
+      - name: Commit generated outputs
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            data/evidence-batch-b.json \
+            data/evidence-pr033.json \
+            data/evidence.json \
+            data/stats-history.json \
+            docs/migration/evidence-archive-maintenance-batch-7-pr400-review-queue.json \
+            docs/migration/evidence-archive-maintenance-outcomes-pr400.json \
+            docs/migration/evidence-archive-maintenance-batch-7-pr400-reviewed-handoff.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+          if git diff --cached --quiet; then
+            echo 'Reviewed outputs already committed'
+            exit 0
+          fi
+          git commit -m 'Apply PR 400 reviewed archive maintenance outcomes'
+          git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
+          git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
