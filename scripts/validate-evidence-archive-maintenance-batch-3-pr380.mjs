@@ -122,7 +122,7 @@ expect(baseHistory.snapshots.every((row, index) => same(row, statsHistory.snapsh
 const currentSnapshot = statsHistory.snapshots.at(-1);
 expect(currentSnapshot?.checkpoint_id === statsCheckpoint.checkpoint_id, 'current stats snapshot ID changed');
 expect(currentSnapshot?.asset_count === 112 && currentSnapshot?.totals?.evidence === 559, 'current stats snapshot counts changed');
-expect(currentSnapshot?.data_quality?.coverage?.archive?.count === 399 || currentSnapshot?.data_quality?.coverage?.archive_coverage?.count === 399, 'current stats archive coverage count is not 399');
+expect(currentSnapshot?.data_quality?.coverage?.archive_evidence?.count === 399, 'current stats archive evidence coverage count is not 399');
 
 expect(releaseBaseline.baseline_id === 'sog_release_integrity_pr380_112_assets_2026_07_16', 'release baseline ID changed');
 expect(releaseBaseline.expected_v2_counts.evidence === 559, 'release baseline Evidence count changed');
