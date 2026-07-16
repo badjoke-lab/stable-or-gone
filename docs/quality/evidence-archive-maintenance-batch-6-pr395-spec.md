@@ -1,46 +1,91 @@
 # PR #395 Evidence and Archive Maintenance Batch 6 Specification
 
-Status: active bounded manual review  
+Status: active bounded reviewed maintenance  
 Review PR: 395  
 Public output: false
 
 ## Objective
 
-Review exactly the ten Queue v5 Evidence identities using live-source and exact Wayback CDX probes before any canonical decision.
+Review the ten PR #393 Queue v5 Evidence identities and apply only source-preserving archive maintenance supported by exact-source capture verification.
 
-## Selected identities
-
-```text
-sog_src_makerdao_docs_dai
-sog_src_makerdao_forum_lifecycle_reference
-sog_src_mim_2025_postmortem_batch_a
-sog_src_mim_docs_batch_a
-sog_src_mim_tokenomics_batch_a
-sog_src_mstable_withdrawal_batch_d
-sog_src_nuon_contracts_batch_b
-sog_src_nuon_guarded_launch_batch_b
-sog_src_nuon_maxcap_batch_b
-sog_src_nuon_minting_batch_b
-```
-
-## Allowed outcomes
+## Required inputs
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+config/evidence-archive-maintenance-batch-6-pr395.json
+config/evidence-archive-maintenance-batch-6-pr395-decisions.json
+docs/migration/post-pr393-review-gate-pr394.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
+docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
+docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
+docs/migration/current-canonical-checkpoint.json
 ```
 
-## Review phase
+## Reviewed result
 
-The initial workflow records live response, final URL, content identity, and exact-source HTTP 200 Wayback CDX captures. Canonical writes are disabled until a reviewed decision file is committed.
+Nine selected identities have exact-canonical-URL HTTP 200 captures accepted by timestamp and digest. The Sky documentation root has no exact capture and its live redirect does not preserve the Dai documentation claim scope.
 
-Probe validation target: ten selected identities, zero canonical writes, and one exact-source CDX result set per canonical URL.
+```text
+selected: 10
+changed: 9
+nine dated exact archive additions
+one reviewed no-safe-change
+dated_exact_archive_added: 9
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 1
+archive recorded: 416 -> 425
+archive not recorded: 143 -> 134
+```
 
-## Boundaries
+No source replacement or inferred promotion is used.
 
-No new Evidence identities, Evidence Relations, non-Evidence canonical changes, public surfaces, ranking, scoring, recommendation, or automatic promotion. Batch 7 is not authorized.
+## Canonical boundary
+
+Before PR #395:
+
+```text
+Assets: 112
+Evidence identities: 559
+Evidence Relations: 559
+Archive recorded: 416
+Archive not recorded: 143
+Market Access records: 8
+```
+
+After the reviewed decisions:
+
+```text
+Assets: 112
+Evidence identities: 559
+Evidence Relations: 559
+Archive recorded: 425
+Archive not recorded: 134
+Market Access records: 8
+```
+
+PR #395 may change exactly nine existing Evidence rows. On each changed row, only `archived_url` may change. `sog_src_makerdao_docs_dai` must remain byte-equivalent to its base canonical row.
+
+## Required outputs
+
+```text
+docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
+docs/migration/evidence-archive-maintenance-outcomes-pr395.json
+docs/migration/evidence-archive-maintenance-batch-6-pr395-reviewed-handoff.json
+docs/migration/current-canonical-checkpoint.json
+docs/migration/current-stats-history-checkpoint.json
+data/stats-history.json
+docs/migration/registry-release-integrity-baseline.json
+```
+
+## Prohibited work
+
+- Evidence identities outside Queue v5;
+- automatic capture or replacement promotion;
+- new Evidence identities or Evidence Relations;
+- source URL replacement in this reviewed batch;
+- non-Evidence canonical changes;
+- Market Access, dossier, growth, ranking, score, recommendation, or public-page work;
+- rewrite of historical queue, history, authority, outcome, checkpoint, or release-baseline files.
 
 ## Exit condition
 
-Every selected identity receives one reviewed outcome, all accepted changes are reproducible, and PR #395 stops at `REVIEW GATE`.
+All ten selected identities have exactly one reviewed outcome, the nine dated exact archive additions and one no-safe-change are reproducible from the decision and probe files, all canonical/release/build validations pass, and PR #395 stops at `REVIEW GATE`.
