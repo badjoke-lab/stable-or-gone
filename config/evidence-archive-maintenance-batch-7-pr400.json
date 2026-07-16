@@ -1,11 +1,12 @@
 {
   "schema_version": "1.0",
   "config_id": "sog_evidence_archive_maintenance_batch_7_pr400",
-  "status": "active_bounded_manual_review",
+  "status": "active_bounded_reviewed_maintenance",
   "review_pr": 400,
   "reviewed_at": "2026-07-16",
   "source_authority": "docs/migration/post-pr398-review-gate-pr399.json",
   "source_queue": "docs/migration/evidence-archive-maintenance-queue-v6-pr398.json",
+  "decision_id": "sog_evidence_archive_maintenance_batch_7_pr400_decisions_v1",
   "selected_evidence_ids": [
     "sog_src_nuon_overview_batch_b",
     "sog_src_paxg_allocation_batch_b",
@@ -31,6 +32,22 @@
     "archive_not_recorded": 134,
     "deployments": 174,
     "market_access_records": 8
+  },
+  "reviewed_result": {
+    "selected": 10,
+    "changed": 5,
+    "dated_exact_archive_added": 5,
+    "reviewed_source_replacement": 0,
+    "reviewed_no_safe_change": 5,
+    "archive_recorded_after": 430,
+    "archive_not_recorded_after": 129,
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_paxg_allocation_batch_b",
+      "sog_src_paxg_pricing_batch_b",
+      "sog_src_paxg_redemption_batch_b",
+      "sog_src_paxos_busd_announcement",
+      "sog_src_pyusd_paxos_official"
+    ]
   },
   "review_requirements": {
     "probe_live_url": true,
