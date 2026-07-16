@@ -48,7 +48,9 @@ expect(queue.reactivated_reviewed_identity_count === 0, 'reviewed reactivation c
 expect(queue.selected_reactivated_reviewed_identity_count === 0, 'reactivated identity was selected');
 expect(queue.selected_reactivated_reviewed_evidence_ids.length === 0, 'selected reactivated IDs must be empty');
 
-expect(queue.selected_count === config.expected_output.selected_count, 'selected count changed');
+const expectedOutput = config.expected_output;
+expect(queue.eligible_pool_count === expectedOutput.eligible_pool_count, 'eligible pool count changed');
+expect(queue.selected_count === expectedOutput.selected_count, 'selected count changed');
 expect(queue.selected_count <= config.selection.maximum_selected_count, 'selected count exceeds maximum');
 expect(queue.selected_candidates.length === queue.selected_count, 'selected candidate array count changed');
 expect(new Set(queue.selected_candidates.map((row) => row.evidence_id)).size === queue.selected_count, 'selected Evidence IDs are not unique');
@@ -59,14 +61,18 @@ expect(queue.selected_candidates.every((row) => row.review_reasons.includes('unr
 
 const selectedIds = queue.selected_candidates.map((row) => row.evidence_id);
 const priorIds = priorQueue.selected_candidates.map((row) => row.evidence_id).sort();
+expect(same(selectedIds, expectedOutput.selected_evidence_ids), 'selected Evidence identities changed');
 expect(same(delta.current_selected_evidence_ids, selectedIds), 'delta current selection changed');
 expect(same(delta.prior_selected_evidence_ids, priorIds), 'delta prior selection changed');
 expect(delta.selected_count === queue.selected_count && delta.eligible_pool_count === queue.eligible_pool_count, 'queue/delta counts differ');
+expect(delta.added_evidence_ids.length === expectedOutput.added_vs_queue_v4, 'delta added count changed');
+expect(delta.removed_evidence_ids.length === expectedOutput.removed_vs_queue_v4, 'delta removed count changed');
+expect(delta.retained_evidence_ids.length === expectedOutput.retained_vs_queue_v4, 'delta retained count changed');
 expect(delta.added_evidence_ids.length + delta.retained_evidence_ids.length === queue.selected_count, 'delta added/retained count invalid');
 expect(delta.removed_evidence_ids.length + delta.retained_evidence_ids.length === priorIds.length, 'delta removed/retained count invalid');
 expect(delta.reviewed_unresolved_suppressed_evidence_ids.length === 12, 'delta suppression IDs changed');
 expect(delta.reactivated_reviewed_evidence_ids.length === 0 && delta.selected_reactivated_reviewed_evidence_ids.length === 0, 'delta reactivation IDs changed');
-expect(Object.values(queue.selection_boundary).filter((value) => value === true).length === 3, 'queue selection boundary changed');
+expect(Object.values(queue.selection_boundary).filter((value) => value === true).length === 4, 'queue selection boundary changed');
 expect(queue.selection_boundary.canonical_change_authorized === false && queue.selection_boundary.public_surface_allowed === false && queue.selection_boundary.batch_6_authorized === false, 'queue canonical/public/Batch 6 boundary changed');
 expect(Object.values(delta.boundaries).every((value) => value === false), 'delta boundary changed');
 expect(queue.next_work_item === 'REVIEW GATE' && delta.next_work_item === 'REVIEW GATE', 'Queue v5 must stop at review gate');
