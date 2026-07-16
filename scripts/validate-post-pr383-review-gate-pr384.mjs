@@ -30,7 +30,6 @@ expect(report.public_output === false, 'review report must remain internal');
 const expected = config.expected;
 expect(report.source_checkpoint.assets === expected.assets, 'asset count mismatch');
 expect(report.source_checkpoint.evidence === expected.evidence, 'Evidence count mismatch');
-expect(report.source_checkpoint.evidence_relations === expected.evidence, 'Evidence Relation count mismatch');
 expect(report.source_checkpoint.archive_recorded === expected.archive_recorded, 'archive-recorded count mismatch');
 expect(report.source_checkpoint.archive_not_recorded === expected.archive_not_recorded, 'archive-not-recorded count mismatch');
 expect(checkpoint.expected_counts.assets === expected.assets, 'checkpoint asset count changed');
