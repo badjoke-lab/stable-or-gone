@@ -72,6 +72,8 @@ Market Access records: 8
 
 PR #390 may change exactly ten existing Evidence rows. On each selected row, only `archived_url` may change.
 
+Validation target: `416 archive-recorded / 143 archive-not-recorded`, with `559 Evidence / 559 Evidence Relations` unchanged.
+
 ## Required outputs
 
 ```text
