@@ -1,0 +1,400 @@
+{
+  "schema_version": "5.0",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v5_pr393",
+  "status": "reviewed_internal_non_ranking_history_v4_queue",
+  "public_output": false,
+  "evidence_rank": false,
+  "single_composite_score": false,
+  "review_pr": 393,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
+  "review_history_contract_id": "sog_evidence_archive_review_history_v4_pr392",
+  "review_history_manifest_id": "sog_evidence_archive_review_history_manifest_v4_pr392",
+  "review_history_audit_id": "sog_evidence_archive_review_history_audit_v4_pr392_2026_07_16",
+  "prior_queue_id": "sog_evidence_archive_maintenance_queue_v4_pr388",
+  "selection_rule": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+  "source_identity_scope": "canonical_identities_only",
+  "canonical_evidence_count": 559,
+  "archive_index_count": 416,
+  "archive_not_recorded_count": 143,
+  "reviewed_unresolved_suppressed_count": 12,
+  "reactivated_reviewed_identity_count": 0,
+  "selected_reactivated_reviewed_identity_count": 0,
+  "eligible_pool_count": 98,
+  "selected_count": 10,
+  "maximum_selected_count": 10,
+  "priority_order": [
+    "regulator_court_legal",
+    "official_issuer_protocol_product",
+    "reserve_attestation_audit",
+    "high_quality_reporting_research",
+    "other_reviewed_source"
+  ],
+  "selected_candidates": [
+    {
+      "evidence_id": "sog_src_makerdao_docs_dai",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "MakerDAO / Sky documentation for Dai",
+      "publisher": "Sky / MakerDAO ecosystem",
+      "source_type": "issuer_statement",
+      "url": "https://docs.sky.money/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_makerdao_forum_lifecycle_reference",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "MakerDAO governance/forum lifecycle reference",
+      "publisher": "Sky / MakerDAO governance forum",
+      "source_type": "governance_reference",
+      "url": "https://forum.sky.money/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_mim_2025_postmortem_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Post Mortem - attack on GM Cauldrons 25/03/25",
+      "publisher": "Abracadabra Money",
+      "source_type": "protocol_postmortem",
+      "url": "https://mirror.xyz/0x5744b051845B62D6f5B6Db095cc428bCbBBAc6F9/G5sa_jDZFUZSxw_b8sEE7lOSBcb2t5FfwfASOIixtoA",
+      "published_at": "2025-03-27",
+      "stablecoin_ids": [
+        "sog_st_mim"
+      ],
+      "organization_ids": [
+        "sog_issuer_abracadabra"
+      ],
+      "event_ids": [
+        "sog_ev_mim_2025_03_gm_cauldron_attack"
+      ],
+      "claim_scopes": [
+        "mim_gm_cauldron_exploit_and_response"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_mim_docs_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Abracadabra documentation introduction",
+      "publisher": "Abracadabra Money",
+      "source_type": "protocol_docs",
+      "url": "https://docs.abracadabra.money/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_mim"
+      ],
+      "organization_ids": [
+        "sog_issuer_abracadabra"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "mim_protocol_design_and_collateralized_borrowing"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_mim_tokenomics_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "MIM tokenomics and supported contracts",
+      "publisher": "Abracadabra Money",
+      "source_type": "protocol_docs",
+      "url": "https://docs.abracadabra.money/learn/tokens/tokenomics",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_mim"
+      ],
+      "organization_ids": [
+        "sog_issuer_abracadabra"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "mim_peg_contract_and_multichain_context"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_mstable_withdrawal_batch_d",
+      "source_file": "data/evidence-batch-d.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "mStable legacy withdrawal application",
+      "publisher": "mStable",
+      "source_type": "official_application",
+      "url": "https://withdraw.mstable.org/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_musd"
+      ],
+      "organization_ids": [
+        "sog_issuer_mstable"
+      ],
+      "event_ids": [
+        "sog_ev_musd_2026_01_legacy_transition"
+      ],
+      "claim_scopes": [
+        "current_interface",
+        "legacy_withdrawal_path",
+        "redemption_exit"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_nuon_contracts_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Nuon token contracts",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "url": "https://docs.nuon.fi/resources/token-contracts",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_nuon"
+      ],
+      "organization_ids": [
+        "sog_issuer_nuon_finance"
+      ],
+      "event_ids": [
+        "sog_ev_nuon_base_launch"
+      ],
+      "claim_scopes": [
+        "nuon_base_contract_and_related_token_addresses"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_nuon_guarded_launch_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Nuon guarded launch",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "url": "https://docs.nuon.fi/guarded-launch",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_nuon"
+      ],
+      "organization_ids": [
+        "sog_issuer_nuon_finance"
+      ],
+      "event_ids": [
+        "sog_ev_nuon_guarded_launch"
+      ],
+      "claim_scopes": [
+        "nuon_v2_guarded_launch_and_maxcap_distribution"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_nuon_maxcap_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "MaxCap token",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "url": "https://docs.nuon.fi/maxcap-token",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_nuon"
+      ],
+      "organization_ids": [
+        "sog_issuer_nuon_finance"
+      ],
+      "event_ids": [
+        "sog_ev_nuon_guarded_launch"
+      ],
+      "claim_scopes": [
+        "nuon_risk_bearing_governance_and_strategy_layer"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_nuon_minting_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Minting Nuon",
+      "publisher": "Nuon",
+      "source_type": "protocol_docs",
+      "url": "https://docs.nuon.fi/guides/minting-nuon",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_nuon"
+      ],
+      "organization_ids": [
+        "sog_issuer_nuon_finance"
+      ],
+      "event_ids": [
+        "sog_ev_nuon_base_launch"
+      ],
+      "claim_scopes": [
+        "nuon_usdc_mint_and_positive_rebase_mechanics"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "selected_reactivated_reviewed_evidence_ids": [],
+  "selection_boundary": {
+    "canonical_change_authorized": false,
+    "manual_review_required": true,
+    "exact_source_capture_required": true,
+    "replacement_requires_reviewed_claim_scope_equivalence": true,
+    "public_surface_allowed": false,
+    "batch_6_authorized": false,
+    "review_gate_required": true
+  },
+  "source_digest_sha256": "87dfe11bf00ca85f0188c6cecf18d4cfd009a0c3f5005056a94440add59a9e6c",
+  "generation_digest_sha256": "3f1ac95ef141f73cf722b945087c2c88ceb434295cee11d35e264366d9716a00",
+  "next_work_item": "REVIEW GATE"
+}
