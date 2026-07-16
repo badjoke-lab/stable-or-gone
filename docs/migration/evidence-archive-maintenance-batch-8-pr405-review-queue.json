@@ -27,7 +27,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "RAI Integrations | GEB Docs",
-        "sampled_body_sha256": "78aa408e1294985808973f431fffee303be2a962eb43c5b029cb679a684e1a40",
+        "sampled_body_sha256": "c0880920435a3dae6373b4929fbb2c20170ce27fd3d65d9743fb30d5d839d3ce",
         "sampled_body_bytes": 262148
       },
       "exact_cdx_probe": {
@@ -191,7 +191,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Oracle Relayer | GEB Docs",
-        "sampled_body_sha256": "4d4e01b7a3c5abe73b6d24a2dc7366589cbe6a46e9aae3a4545ccff41791fd0c",
+        "sampled_body_sha256": "4c881f7fae3f565278110a9e3de26082833f061b705df9765737717a8bcb6a0f",
         "sampled_body_bytes": 262228
       },
       "exact_cdx_probe": {
@@ -355,7 +355,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Governance Minimization Guide | GEB Docs",
-        "sampled_body_sha256": "102ae13d70499b0398cf6161473756b8085dd6ffea8f6b7fef398373fff5ef17",
+        "sampled_body_sha256": "c2b5037b5718b9feab7c9bfc19e3373862e47ea31bf1bc79bc47357a1dd9d132",
         "sampled_body_bytes": 262248
       },
       "exact_cdx_probe": {
@@ -603,14 +603,14 @@
       "canonical_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
       "claim_scopes": [],
       "live_probe": {
-        "ok": true,
-        "status": 200,
+        "ok": false,
+        "status": 429,
         "final_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
-        "title": "Raising the Standard for Stablecoins: Ripple USD Launches Globally with Unmatched Utility, Experience, and Compliance | Ripple",
-        "sampled_body_sha256": "62c35d7440e7c26c345ac1d952eb5fc321dbff77259d3d4b38c3d9eb0c84eb4e",
-        "sampled_body_bytes": 116762
+        "title": "Vercel Security Checkpoint",
+        "sampled_body_sha256": "0ea88a60782d608e229ebc8191176fd02387b99ad6173310f241d13fea7e54dd",
+        "sampled_body_bytes": 33795
       },
       "exact_cdx_probe": {
         "ok": true,
@@ -765,14 +765,14 @@
       "canonical_url": "https://ripple.com/solutions/stablecoin/",
       "claim_scopes": [],
       "live_probe": {
-        "ok": true,
-        "status": 200,
+        "ok": false,
+        "status": 403,
         "final_url": "https://ripple.com/solutions/stablecoin/",
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
-        "title": "Ripple USD (RLUSD) Stablecoin | Ripple",
-        "sampled_body_sha256": "8c1751226aa1b4ef28cb7f46caad78772bd2b856a8b94bdf0165e76ed7e27c92",
-        "sampled_body_bytes": 244343
+        "title": "Vercel Security Checkpoint",
+        "sampled_body_sha256": "0447b3ac5368963a8eb2ced1583935cb5e97abccfd490b22c248a2709af23ada",
+        "sampled_body_bytes": 33795
       },
       "exact_cdx_probe": {
         "ok": true,
@@ -935,7 +935,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "About SPOT | Ampleforth Docs",
-        "sampled_body_sha256": "cf1cbe95732dc825948fcc963eeb98b278b85c56514e321280faba7b6d753c4d",
+        "sampled_body_sha256": "24da97f4825bacea98139eb5bad5a20b66f77cccf3516f1f08c085ba82db125f",
         "sampled_body_bytes": 262174
       },
       "exact_cdx_probe": {
@@ -1099,7 +1099,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "How to Mint SPOT | Ampleforth Docs",
-        "sampled_body_sha256": "23124372658b1760938911c0fb9bdb4c907f60b2170fc48b6d6f5ac030b3a2d8",
+        "sampled_body_sha256": "4028f05be6c817448ab52d187ff9aa15f4454bdb1f13aa3da140bbb466d9688f",
         "sampled_body_bytes": 262168
       },
       "exact_cdx_probe": {
@@ -1431,7 +1431,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Proposal: Initiate Rollout of Spot v2 - Ampleforth Governance - Ampleforth Governance",
-        "sampled_body_sha256": "c5e53b182200ab71de1f2a5373bda65c6cab78c72e433ef3f82cac58e16916c0",
+        "sampled_body_sha256": "6127efc4d3b6994b92818228f4ff5943ea5c587b78b81368ce103aa690ab14da",
         "sampled_body_bytes": 60311
       },
       "exact_cdx_probe": {
