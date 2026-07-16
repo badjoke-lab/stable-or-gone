@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-This file is the current mandatory authority entry point. Historical authority through PR #393 remains archived and does not override this file.
+This file is the current mandatory authority entry point. Historical authority through PR #394 remains archived and does not override this file.
 
 ## Required reading
 
@@ -16,14 +16,14 @@ This file is the current mandatory authority entry point. Historical authority t
 Current authority:
 
 ```text
-docs/roadmap-amendments/2026-07-16-pr394-post-pr393-review-gate.md
-docs/quality/post-pr393-review-gate-pr394-spec.md
-config/post-pr393-review-gate-pr394.json
+docs/roadmap-amendments/2026-07-16-pr395-evidence-archive-maintenance-batch-6-activation.md
+docs/quality/evidence-archive-maintenance-batch-6-pr395-spec.md
+config/evidence-archive-maintenance-batch-6-pr395.json
+config/evidence-archive-maintenance-batch-6-pr395-decisions.json
+docs/migration/post-pr393-review-gate-pr394.json
 docs/migration/evidence-archive-maintenance-queue-v5-pr393.json
 docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json
-config/evidence-archive-review-history-v4-pr392.json
-docs/migration/evidence-archive-review-history-manifest-v4-pr392.json
-docs/migration/evidence-archive-review-history-audit-v4-pr392.json
+docs/migration/evidence-archive-maintenance-batch-6-pr395-review-queue.json
 ```
 
 ## Current workstream
@@ -32,26 +32,29 @@ docs/migration/evidence-archive-review-history-audit-v4-pr392.json
 Canonical stable assets: 112
 Canonical Evidence: 559
 Evidence Relations: 559
-Archive recorded: 416
-Archive not recorded: 143
+Archive recorded before PR #395: 416
+Archive not recorded before PR #395: 143
+Archive recorded: 425
+Archive not recorded: 134
+Archive recorded after reviewed decisions: 425
+Archive not recorded after reviewed decisions: 134
 Deployments: 174
 Market Access Records: 8
-PR #393 Evidence Archive Maintenance Queue v5 Refresh: complete
-PR #394 Post-PR #393 Review Gate: active; complete on merge
-PR #395 Evidence and Archive Maintenance Batch 6: approved next
+PR #394 Post-PR #393 Review Gate: complete
+PR #395 Evidence and Archive Maintenance Batch 6: active; complete on merge
 REVIEW GATE: mandatory after PR #395
 ```
 
-PR #394 may record an authority decision only. It may change no canonical data, statistics, checkpoints, release baselines, or public surfaces.
+PR #395 may change exactly nine Queue v5 Evidence rows by adding reviewed exact dated archives. `sog_src_makerdao_docs_dai` remains unchanged under a reviewed no-safe-change decision.
 
-## Binding Queue v5 result
+## Reviewed outcomes
 
 ```text
-Eligible pool: 98
-Selected: 10
-Reviewed suppressed excluded: 12
-Reviewed reactivated selected: 0
-Added / removed / retained versus Queue v4: 10 / 10 / 0
+selected: 10
+changed: 9
+dated_exact_archive_added: 9
+reviewed_source_replacement: 0
+reviewed_no_safe_change: 1
 ```
 
 Selected Evidence identities:
@@ -69,14 +72,13 @@ sog_src_nuon_maxcap_batch_b
 sog_src_nuon_minting_batch_b
 ```
 
-## Approved next sequence
+Every accepted archive is backed by an exact-canonical-URL HTTP 200 CDX capture, timestamp, digest, and reviewed source-version scope. The Sky documentation root has no exact capture and redirects to a legal-document page that does not safely preserve the Dai documentation claim scope, so no source replacement is accepted.
 
-```text
-PR #395 Evidence and Archive Maintenance Batch 6
-REVIEW GATE
-```
+## Boundaries
 
-PR #395 may review exactly these ten identities and may record only `dated_exact_archive_added`, `reviewed_source_replacement`, or `reviewed_no_safe_change`. No candidate is presumed to change.
+PR #395 may update only the selected canonical Evidence rows and the internal review queue, decisions, outcomes, handoff, same-count checkpoints, statistics history, release baseline, validator, and workflow required to record the reviewed maintenance.
+
+It may not add or remove Evidence identities, alter Evidence Relations, assets, deployments, Market Access records, other canonical record families, or public surfaces.
 
 Not approved:
 
@@ -91,4 +93,4 @@ automatic monitoring promotion
 automatic canonical promotion
 ```
 
-PR #394 must stop with authority limited to PR #395 and the following `REVIEW GATE`.
+PR #395 must stop at `REVIEW GATE`.

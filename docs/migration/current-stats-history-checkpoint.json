@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_evidence_archive_maintenance_batch_5_112_checkpoint_pr390_2026_07_16",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_6_112_checkpoint_pr395_2026_07_16",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
   "recorded_at": "2026-07-16",
-  "registry_version": "pr390-evidence-archive-maintenance-batch-5",
+  "registry_version": "pr395-evidence-archive-maintenance-batch-6",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_112_checkpoint_pr385_2026_07_16",
-  "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_canonical_112_checkpoint_pr390_2026_07_16",
-  "previous_history_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_112_checkpoint_pr385_2026_07_16",
-  "maintenance_pr": 390,
-  "notes": "Reviewed forward same-count statistics checkpoint for PR #390 Evidence and Archive Maintenance Batch 5. It records archive coverage 416 of 559 while preserving every canonical record count and public-surface boundary."
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_112_checkpoint_pr390_2026_07_16",
+  "canonical_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
+  "previous_history_checkpoint_id": "sog_evidence_archive_maintenance_batch_5_112_checkpoint_pr390_2026_07_16",
+  "maintenance_pr": 395,
+  "notes": "Reviewed forward same-count statistics checkpoint for PR #395 Evidence and Archive Maintenance Batch 6. It records archive coverage 425 of 559 while preserving every canonical record count and public-surface boundary."
 }
