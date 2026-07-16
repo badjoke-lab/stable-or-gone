@@ -37,6 +37,30 @@ jobs:
         run: |
           node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs 2>&1 | tee /tmp/pr380-build.txt
           node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs --check
+      - name: Commit generated PR 380 outputs
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            data/evidence-batch-c.json \
+            data/evidence-events-pr038.json \
+            data/evidence-extra.json \
+            data/evidence.json \
+            data/stats-history.json \
+            docs/migration/evidence-archive-maintenance-batch-3-pr380-review-queue.json \
+            docs/migration/evidence-archive-maintenance-outcomes-pr380.json \
+            docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+          if git diff --cached --quiet; then
+            echo 'PR #380 generated outputs already committed'
+          else
+            git commit -m 'Apply PR 380 reviewed archive maintenance outcomes'
+            git pull --rebase origin pr380-evidence-archive-maintenance-batch-3
+            git push origin HEAD:pr380-evidence-archive-maintenance-batch-3
+          fi
       - name: Validate PR 380 reviewed scope
         run: |
           node scripts/validate-evidence-archive-maintenance-batch-3-pr380.mjs 2>&1 | tee /tmp/pr380-validation.txt
@@ -108,30 +132,6 @@ jobs:
           test ! -e dist/data/evidence-archive-maintenance-batch-3-pr380-review-queue.json
           test ! -e dist/data/evidence-archive-maintenance-outcomes-pr380.json
           test ! -e dist/data/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
-      - name: Commit generated PR 380 outputs
-        if: github.event_name == 'push'
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add \
-            data/evidence-batch-c.json \
-            data/evidence-events-pr038.json \
-            data/evidence-extra.json \
-            data/evidence.json \
-            data/stats-history.json \
-            docs/migration/evidence-archive-maintenance-batch-3-pr380-review-queue.json \
-            docs/migration/evidence-archive-maintenance-outcomes-pr380.json \
-            docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json \
-            docs/migration/current-canonical-checkpoint.json \
-            docs/migration/current-stats-history-checkpoint.json \
-            docs/migration/registry-release-integrity-baseline.json
-          if git diff --cached --quiet; then
-            echo 'PR #380 generated outputs already committed'
-          else
-            git commit -m 'Apply PR 380 reviewed archive maintenance outcomes'
-            git pull --rebase origin pr380-evidence-archive-maintenance-batch-3
-            git push origin HEAD:pr380-evidence-archive-maintenance-batch-3
-          fi
       - name: Publish PR 380 status
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
