@@ -162,7 +162,7 @@
     "ranking_or_score": false,
     "automatic_promotion": false
   },
-  "source_digest_sha256": "34d0ad458ca7f82c38fbbf5a25ee1c3de16fd610fc57d3f974395d63e2937f13",
-  "generation_digest_sha256": "f47529b85a407c92274600735ec152ded6abebc31e0cf35e3ffcdcc5e3d08f93",
+  "source_digest_sha256": "d9d2225888ec2a890b4c8c22ba55eb2aed28f2087d1c0c2a3a7d3ebc74ae8f91",
+  "generation_digest_sha256": "bd82009b16d96009ed45e4b87708951713544c168ae9373fb3bb6e4c27998fd9",
   "next_work_item": "REVIEW GATE"
 }
