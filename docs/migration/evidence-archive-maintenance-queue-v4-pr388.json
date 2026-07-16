@@ -1,0 +1,369 @@
+{
+  "schema_version": "4.0",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v4_pr388",
+  "status": "reviewed_internal_non_ranking_history_v3_queue",
+  "public_output": false,
+  "evidence_rank": false,
+  "single_composite_score": false,
+  "review_pr": 388,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
+  "review_history_contract_id": "sog_evidence_archive_review_history_v3_pr387",
+  "review_history_manifest_id": "sog_evidence_archive_review_history_manifest_v3_pr387",
+  "review_history_audit_id": "sog_evidence_archive_review_history_audit_v3_pr387_2026_07_16",
+  "prior_queue_id": "sog_evidence_archive_maintenance_queue_v3_pr383",
+  "selection_rule": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+  "source_identity_scope": "canonical_identities_only",
+  "canonical_evidence_count": 559,
+  "archive_index_count": 406,
+  "archive_not_recorded_count": 153,
+  "reviewed_unresolved_suppressed_count": 12,
+  "reactivated_reviewed_identity_count": 1,
+  "selected_reactivated_reviewed_identity_count": 1,
+  "eligible_pool_count": 108,
+  "selected_count": 10,
+  "maximum_selected_count": 10,
+  "priority_order": [
+    "regulator_court_legal",
+    "official_issuer_protocol_product",
+    "reserve_attestation_audit",
+    "high_quality_reporting_research",
+    "other_reviewed_source"
+  ],
+  "selected_candidates": [
+    {
+      "evidence_id": "sog_src_fdusd_site",
+      "source_file": "data/evidence-pr033.json",
+      "selection_tier": 0,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "First Digital USD official page",
+      "publisher": "First Digital",
+      "source_type": "issuer_page",
+      "url": "https://www.firstdigitallabs.com/fdusd",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": true,
+      "effective_review_outcome": "reviewed_source_replacement",
+      "eligibility_state": "reactivated_reviewed_source_replacement",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": true,
+      "reactivation_signal_type": "reviewed_source_replacement",
+      "review_reasons": [
+        "archive_not_recorded",
+        "reviewed_reactivated_history_v3",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_frax_docs",
+      "source_file": "data/evidence-pr033.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Frax documentation",
+      "publisher": "Frax Finance",
+      "source_type": "protocol_docs",
+      "url": "https://docs.frax.com/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_frax_docs_frax",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Frax Finance documentation for FRAX stablecoin",
+      "publisher": "Frax Finance",
+      "source_type": "issuer_statement",
+      "url": "https://docs.frax.finance/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_frax_official_site",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Frax Finance official site",
+      "publisher": "Frax Finance",
+      "source_type": "issuer_statement",
+      "url": "https://frax.finance/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_gho_bridge_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Bridging GHO",
+      "publisher": "Aave",
+      "source_type": "protocol_docs",
+      "url": "https://aave.com/help/gho-stablecoin/bridging-gho",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_gho"
+      ],
+      "organization_ids": [
+        "sog_issuer_aave"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "gho_canonical_bridge_and_remote_deployment_design"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_gho_facilitators_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "GHO Facilitators",
+      "publisher": "Aave",
+      "source_type": "protocol_docs",
+      "url": "https://aave.com/help/gho-stablecoin/facilitators",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_gho"
+      ],
+      "organization_ids": [
+        "sog_issuer_aave"
+      ],
+      "event_ids": [
+        "sog_ev_gho_2023_07_launch"
+      ],
+      "claim_scopes": [
+        "gho_aave_v3_ethereum_facilitator",
+        "gho_facilitator_supply_and_bucket_mechanics"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_gho_gsm_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "GHO Stability Module",
+      "publisher": "Aave",
+      "source_type": "protocol_docs",
+      "url": "https://aave.com/help/gho-stablecoin/stability-module",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_gho"
+      ],
+      "organization_ids": [
+        "sog_issuer_aave"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "gho_stability_module_conversion_mechanics"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_gho_launch_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "GHO Mainnet Launch",
+      "publisher": "Aave Governance",
+      "source_type": "governance_proposal",
+      "url": "https://governance-v2.aave.com/governance/proposal/268/",
+      "published_at": "2023-07-15",
+      "stablecoin_ids": [
+        "sog_st_gho"
+      ],
+      "organization_ids": [
+        "sog_issuer_aave"
+      ],
+      "event_ids": [
+        "sog_ev_gho_2023_07_launch"
+      ],
+      "claim_scopes": [
+        "gho_mainnet_launch_and_initial_facilitators"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_gusd_gemini_official",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Gemini Dollar official page",
+      "publisher": "Gemini",
+      "source_type": "issuer_statement",
+      "url": "https://www.gemini.com/dollar",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_lusd_liquity_docs",
+      "source_file": "data/evidence.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Liquity documentation for LUSD",
+      "publisher": "Liquity",
+      "source_type": "issuer_statement",
+      "url": "https://docs.liquity.org/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "selected_reactivated_reviewed_evidence_ids": [
+    "sog_src_fdusd_site"
+  ],
+  "selection_boundary": {
+    "canonical_change_authorized": false,
+    "manual_review_required": true,
+    "exact_source_capture_required": true,
+    "replacement_requires_reviewed_claim_scope_equivalence": true,
+    "public_surface_allowed": false,
+    "batch_5_authorized": false,
+    "review_gate_required": true
+  },
+  "source_digest_sha256": "ceedb9e550b7c7a86d9897b3297a7c0e2ff5aeb159b0d969402407b23802a943",
+  "generation_digest_sha256": "ef0c810129b2417b80b0ae91645629263832596d72e6c3cf65098b9ccd870343",
+  "next_work_item": "REVIEW GATE"
+}
