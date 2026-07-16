@@ -28,6 +28,8 @@ docs/migration/current-canonical-checkpoint.json
 6. record outcomes, reviewed handoff, same-count checkpoint, stats history, and release-integrity baseline;
 7. stop at a review gate.
 
+Exact-source capture verification is mandatory for every archive addition.
+
 The initial probe phase must commit only `docs/migration/evidence-archive-maintenance-batch-4-pr385-review-queue.json`; canonical writes remain disabled until reviewed decisions are added.
 
 ## Allowed outcomes
