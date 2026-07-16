@@ -1,4 +1,8 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
+  sog_update_2026_07_17_visa_vsp_open_usd_analysis: {
+    title: 'Visa Stablecoin Platform and Open USD analysis published',
+    summary: 'Published a Japanese analysis of Visa’s enterprise stablecoin platform, its relationship to Open USD and Open Standard, the beta boundary, unresolved launch facts, and the separate Origin Dollar OUSD asset.'
+  },
   sog_update_2026_07_10_japan_stablecoin_access_guide: {
     title: 'Japan stablecoin access guide added',
     summary: 'Published a reviewed comparison of USDC, RLUSD, and JPYSC in Japan, separating legal route, platform functions, network scope, external-transfer availability, and effective dates.'
