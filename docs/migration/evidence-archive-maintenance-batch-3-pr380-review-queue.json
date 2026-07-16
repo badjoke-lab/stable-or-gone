@@ -1,0 +1,1375 @@
+{
+  "schema_version": "1.0",
+  "queue_id": "sog_evidence_archive_maintenance_batch_3_pr380_review_queue",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 380,
+  "reviewed_at": "2026-07-16",
+  "source_queue_id": "sog_evidence_archive_maintenance_queue_v2_pr378",
+  "selected_count": 10,
+  "automatic_canonical_write": false,
+  "exact_source_match_required": true,
+  "rows": [
+    {
+      "evidence_id": "sog_src_bold_technical_batch_c",
+      "source_file": "data/evidence-batch-c.json",
+      "title": "Liquity V2 technical documentation and audits",
+      "publisher": "Liquity",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+      "claim_scopes": [
+        "bold_contract_identity_audits_and_technical_architecture"
+      ],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Technical Docs &amp; Audits | Liquity Docs",
+        "sampled_body_sha256": "2ec758d270e0e7ae84887ab38d5c503a2b1dd6fe9a41aa55aa2eb43767def008",
+        "sampled_body_bytes": 262148
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.liquity.org%2Fv2-documentation%2Ftechnical-docs-and-audits&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 16,
+        "earliest_capture": {
+          "timestamp": "20250622052750",
+          "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "Z4JASRKKW2UNNZFFDUGHRDIYKLEA4J4S"
+        },
+        "latest_capture": {
+          "timestamp": "20260511180442",
+          "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "XRQVHYF2ABFAETB3H2DSH4BA6MSCK7G3"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250622052750",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Z4JASRKKW2UNNZFFDUGHRDIYKLEA4J4S"
+          },
+          {
+            "timestamp": "20250701072839",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JV2VIG4ZJYDACIQBPY3FK7KGIKI5RVYE"
+          },
+          {
+            "timestamp": "20250805141425",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6OJBCJMKGJ42OBQZ2E5HIVXBJYP2FK6B"
+          },
+          {
+            "timestamp": "20250830121130",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CZYHBDN74HOLAYNMWOQ7NTFYGYT7NMQ4"
+          },
+          {
+            "timestamp": "20251017105450",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NWOJ6JIFF54B3DRQ2V4HALCXBKBEI75K"
+          },
+          {
+            "timestamp": "20251108010345",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6NS53TBUDYCT5VLUKJAQGFQXXT6EUW4U"
+          },
+          {
+            "timestamp": "20251111050730",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/x-component",
+            "digest": "A3GZEWHDJSL7R3727WKODKMKSSK64FV4"
+          },
+          {
+            "timestamp": "20251113115559",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PLMGGDSZVU4GSX653TB3UGNKRWDF27BK"
+          },
+          {
+            "timestamp": "20251124080536",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7K3RXBEJ34WJKIXUAW5XWQ4J2L6RBP6B"
+          },
+          {
+            "timestamp": "20260206083840",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "F3NY5NSOCBA7NSVTES2LZCOC5CXYYEQ4"
+          },
+          {
+            "timestamp": "20260216142217",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XHS6HSQRXURNOTDS6GKOJERFYX5RJ6MD"
+          },
+          {
+            "timestamp": "20260216181158",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZVLUMTX4VLBAUYHHWSLEOMDGUBXG26YZ"
+          },
+          {
+            "timestamp": "20260218030555",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TCRRY23MSEPK6XYHG2ADDZ3EM6RFMAZB"
+          },
+          {
+            "timestamp": "20260311114147",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WMKUBHABLICGLRUFBKT2OBO4AEZQWUTS"
+          },
+          {
+            "timestamp": "20260421081747",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/markdown",
+            "digest": "FVP3KM63J7BFNKDDJ5CCY3HFWCUBVHU4"
+          },
+          {
+            "timestamp": "20260511180442",
+            "original": "https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XRQVHYF2ABFAETB3H2DSH4BA6MSCK7G3"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260511180442/https://docs.liquity.org/v2-documentation/technical-docs-and-audits",
+      "accepted_capture_timestamp": "20260511180442",
+      "accepted_capture_digest": "XRQVHYF2ABFAETB3H2DSH4BA6MSCK7G3",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact canonical source URL returned a successful dated HTTP 200 capture and the captured page identity matches the technical-documentation claim scope.",
+      "remaining_uncertainty": "The archive preserves the reviewed source version only; later documentation revisions remain possible."
+    },
+    {
+      "evidence_id": "sog_src_circle_transparency",
+      "source_file": "data/evidence.json",
+      "title": "Circle Transparency",
+      "publisher": "Circle",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://www.circle.com/transparency",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.circle.com/transparency",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Transparency &amp; Stability | Circle",
+        "sampled_body_sha256": "dc439594f7b533e8518bf1f176c9cacd40609d63e2d8b166dabd1ca4e72530ab",
+        "sampled_body_bytes": 262188
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Ftransparency&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 105,
+        "earliest_capture": {
+          "timestamp": "20241102021348",
+          "original": "https://www.circle.com/transparency",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "4Y6PMZUP5BDBPRMZKOW5AEP6BQ3QA6KX"
+        },
+        "latest_capture": {
+          "timestamp": "20260709220608",
+          "original": "https://www.circle.com/transparency",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "FMGGNPD5FIJKFKCHQUJFM7FHATINBEW2"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20241102021348",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "4Y6PMZUP5BDBPRMZKOW5AEP6BQ3QA6KX"
+          },
+          {
+            "timestamp": "20241112115329",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2XIR6HVAM636TTVBXEXGIX4ZN22EZSRH"
+          },
+          {
+            "timestamp": "20241117225052",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5T4NIDGVWPTQWEI76YPOKG254LRVVLJW"
+          },
+          {
+            "timestamp": "20241118074953",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KYOQTOXBPB3GBERF5NAJNEJB72GYQCCC"
+          },
+          {
+            "timestamp": "20241201020539",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "DBINSXDLJGROXQH6IFLRSPEWO3OVCBYC"
+          },
+          {
+            "timestamp": "20241212141705",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "JRCAJUGSZTF72B4S2GS66BUA5B7LUKEP"
+          },
+          {
+            "timestamp": "20241216133544",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VXVKQ5LM4IEJUJJOGFYBFWZFLOKPCSSS"
+          },
+          {
+            "timestamp": "20250102003828",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QDLJJIZ5D4GFMGXNEOLD6NYUNYEVJKD3"
+          },
+          {
+            "timestamp": "20260510175021",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "57FE6QP4HMZ3S6H4M5XTL7ZMGJ67E5EN"
+          },
+          {
+            "timestamp": "20260510175023",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KNI3UWLHI7I2EOAE3GPSUBB55BZP6RTZ"
+          },
+          {
+            "timestamp": "20260515011243",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VDDAPO6GSSGEZYDBHW6HB5MPOG2HX44P"
+          },
+          {
+            "timestamp": "20260519213024",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BMBYMFZMQ7WPADIQHVBQ3OXRPMQF5OPA"
+          },
+          {
+            "timestamp": "20260610084453",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "P47FMY7I34XWU7SH6ALDVT5MOWUZKM43"
+          },
+          {
+            "timestamp": "20260611204931",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FRSIGX524AFVPFZKNNPFMFL4ULU3QZUP"
+          },
+          {
+            "timestamp": "20260622002121",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "C7NBGIO5RCLKS7XBBV7IVTY7C6O4VJ2M"
+          },
+          {
+            "timestamp": "20260709220608",
+            "original": "https://www.circle.com/transparency",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FMGGNPD5FIJKFKCHQUJFM7FHATINBEW2"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260709220608/https://www.circle.com/transparency",
+      "accepted_capture_timestamp": "20260709220608",
+      "accepted_capture_digest": "FMGGNPD5FIJKFKCHQUJFM7FHATINBEW2",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact Circle transparency URL returned a successful dated HTTP 200 capture and remains the same transparency entry point.",
+      "remaining_uncertainty": "The archive preserves one reviewed transparency-page version and does not establish later reserve changes."
+    },
+    {
+      "evidence_id": "sog_src_circle_usdc_product",
+      "source_file": "data/evidence.json",
+      "title": "USDC official product page",
+      "publisher": "Circle",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://www.circle.com/usdc",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.circle.com/usdc",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "USDC | Powering global finance. Issued by Circle.",
+        "sampled_body_sha256": "8e8057c7cd106b2044ea1ac90d2d19f328200bfd63ad141ad4ea4722aa1784fa",
+        "sampled_body_bytes": 262168
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Fusdc&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 202,
+        "earliest_capture": {
+          "timestamp": "20241027144053",
+          "original": "https://www.circle.com/usdc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "R3ULWIJ3YECE6W776UWA7H5HYCFPSVHE"
+        },
+        "latest_capture": {
+          "timestamp": "20260710145752",
+          "original": "https://www.circle.com/usdc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "QSNMUUQGDQKEPXZO5YUDNVTJDBHRZMXI"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20241027144053",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "R3ULWIJ3YECE6W776UWA7H5HYCFPSVHE"
+          },
+          {
+            "timestamp": "20241030021456",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "G7M6XH6EXB5HSCUDZ5MFLU5BW35FXVBS"
+          },
+          {
+            "timestamp": "20241102123854",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "K2POMCAVHOWPSX6VFVWJOQ4XQROSNEQV"
+          },
+          {
+            "timestamp": "20241109014731",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IWR24E663YHCHDV6SPMDCAKUKL5B6Y34"
+          },
+          {
+            "timestamp": "20241111230452",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UXMSUEHQCBMD7XUXPH5OZ4RQQUWKCU4W"
+          },
+          {
+            "timestamp": "20241118194115",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5HDZFVYDVYUJBGLWAY7K75HD5PQWCDBN"
+          },
+          {
+            "timestamp": "20241119042920",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6ZIHQKZFYFONDIUMDCKA2L4RLPB62WJF"
+          },
+          {
+            "timestamp": "20241119065655",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "M6NJTDQTBK4XK6EI57EN3Z4FLOKCQBRH"
+          },
+          {
+            "timestamp": "20260620185357",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CGXPKYIZCN75BI3QLQFJX5GJCYCEHGP4"
+          },
+          {
+            "timestamp": "20260620185359",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "C5ALEH6UV267QNVDJ6FMFYSGZB2JOA2X"
+          },
+          {
+            "timestamp": "20260625162729",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FEWKDOCPG2OTECZZVXLAM65JC52BDPLG"
+          },
+          {
+            "timestamp": "20260630172720",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2MY4YM6CRUXZAGKK6AEMTI2OG4FOWXAO"
+          },
+          {
+            "timestamp": "20260707182001",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VAYDNOH2THQZFB2P776SHUWEMWIPLPAZ"
+          },
+          {
+            "timestamp": "20260709081916",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BLJ3N3XADPP6XCGCO3E2BNRBRXOR726D"
+          },
+          {
+            "timestamp": "20260710142615",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SXA36PR2W5VWPMO6AZSOZ4SAEHI6AOFX"
+          },
+          {
+            "timestamp": "20260710145752",
+            "original": "https://www.circle.com/usdc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QSNMUUQGDQKEPXZO5YUDNVTJDBHRZMXI"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260710145752/https://www.circle.com/usdc",
+      "accepted_capture_timestamp": "20260710145752",
+      "accepted_capture_digest": "QSNMUUQGDQKEPXZO5YUDNVTJDBHRZMXI",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact Circle USDC product URL returned a successful dated HTTP 200 capture and preserves the official product-page identity.",
+      "remaining_uncertainty": "The archive preserves the reviewed product-page version only; later product or availability changes remain possible."
+    },
+    {
+      "evidence_id": "sog_src_crvusd_curve_docs",
+      "source_file": "data/evidence.json",
+      "title": "Curve documentation for crvUSD",
+      "publisher": "Curve Finance",
+      "source_type": "issuer_statement",
+      "canonical_url": "https://docs.curve.fi/crvUSD/overview/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": false,
+        "status": 403,
+        "final_url": "https://docs.curve.fi/crvUSD/overview/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "403: Forbidden",
+        "sampled_body_sha256": "230415f4a363e5e4d369de9bba85828e5ee9eae3f61c7a3ee6c618f0a53f3c0c",
+        "sampled_body_bytes": 5525
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdocs.curve.fi%2FcrvUSD%2Foverview%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 7,
+        "earliest_capture": {
+          "timestamp": "20240115132845",
+          "original": "https://docs.curve.fi/crvUSD/overview/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "LLSHQQTTIVKNJLXH3BZM54QK5BUJFEYG"
+        },
+        "latest_capture": {
+          "timestamp": "20250425052808",
+          "original": "https://docs.curve.fi/crvUSD/overview/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "TD5YKPUV6URV2LYBDK3JHGZB3WROKNOA"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20240115132845",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LLSHQQTTIVKNJLXH3BZM54QK5BUJFEYG"
+          },
+          {
+            "timestamp": "20240221013311",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NT7UYVBFTDBQTOP474WPCONBMWG6YM4U"
+          },
+          {
+            "timestamp": "20240624064206",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MGYCXCKFLQMHY7TSG6SPQTQBOXSWP7BF"
+          },
+          {
+            "timestamp": "20241231162616",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "2CAG7Y5EMM54OR2F5MWUKRPROGR3IB5Z"
+          },
+          {
+            "timestamp": "20250119230058",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YJX7IW4EQILTFRYHFHENGFNHJPEIJOSC"
+          },
+          {
+            "timestamp": "20250131183739",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3IOWGPDP4GAGSCCDN3OGKMXNUAUTIB7K"
+          },
+          {
+            "timestamp": "20250425052808",
+            "original": "https://docs.curve.fi/crvUSD/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "TD5YKPUV6URV2LYBDK3JHGZB3WROKNOA"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20250425052808/https://docs.curve.fi/crvUSD/overview/",
+      "accepted_capture_timestamp": "20250425052808",
+      "accepted_capture_digest": "TD5YKPUV6URV2LYBDK3JHGZB3WROKNOA",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The live endpoint currently blocks the probe, but Wayback returned a successful exact-source HTTP 200 capture for the canonical crvUSD documentation URL.",
+      "remaining_uncertainty": "The archived documentation reflects the captured 2025 source version and may not represent later documentation changes."
+    },
+    {
+      "evidence_id": "sog_src_crvusd_curve_lifecycle_event",
+      "source_file": "data/evidence-events-pr038.json",
+      "title": "Curve crvUSD overview",
+      "publisher": "Curve Finance",
+      "source_type": "protocol_docs",
+      "canonical_url": "https://resources.curve.finance/crvusd/overview/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": false,
+        "status": 404,
+        "final_url": "https://resources.curve.finance/crvusd/overview/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Page not found | Curve Knowledge Hub",
+        "sampled_body_sha256": "49e4e5d6754d7b9294b737ca3c2f364a2c908af0a1b0abde75ecbfc8e9792d1b",
+        "sampled_body_bytes": 9179
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fresources.curve.finance%2Fcrvusd%2Foverview%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 4,
+        "earliest_capture": {
+          "timestamp": "20250616115211",
+          "original": "https://resources.curve.finance/crvusd/overview/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "CGBRFYHQVF34PSOO4JVDELGDSNO34C5Y"
+        },
+        "latest_capture": {
+          "timestamp": "20260210181555",
+          "original": "https://resources.curve.finance/crvusd/overview/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "HNTCPFZTGCWG5CXL4N6AWOTIGZWZ4AHO"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20250616115211",
+            "original": "https://resources.curve.finance/crvusd/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "CGBRFYHQVF34PSOO4JVDELGDSNO34C5Y"
+          },
+          {
+            "timestamp": "20250824205444",
+            "original": "https://resources.curve.finance/crvusd/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "76O5YPNRML5JWMRJSXRVIAXR4U3QFHVX"
+          },
+          {
+            "timestamp": "20251104081523",
+            "original": "https://resources.curve.finance/crvusd/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "O7PZB6QL5IM5FLUPIZSC7BZMXAH7L26O"
+          },
+          {
+            "timestamp": "20260210181555",
+            "original": "https://resources.curve.finance/crvusd/overview/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HNTCPFZTGCWG5CXL4N6AWOTIGZWZ4AHO"
+          }
+        ],
+        "captures_sample_truncated": false
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260210181555/https://resources.curve.finance/crvusd/overview/",
+      "accepted_capture_timestamp": "20260210181555",
+      "accepted_capture_digest": "HNTCPFZTGCWG5CXL4N6AWOTIGZWZ4AHO",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The live resource now returns 404, while Wayback returned a successful exact-source HTTP 200 capture for the recorded Curve Knowledge Hub URL.",
+      "remaining_uncertainty": "The archived lifecycle page preserves the reviewed source version; a later canonical replacement was not inferred."
+    },
+    {
+      "evidence_id": "sog_src_dai_whitepaper_pr354",
+      "source_file": "data/evidence-extra.json",
+      "title": "The Maker Protocol White Paper",
+      "publisher": "MakerDAO / Sky",
+      "source_type": "official_whitepaper",
+      "canonical_url": "https://makerdao.com/en/whitepaper/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://makerdao.com/en/whitepaper/",
+        "redirected": false,
+        "content_type": "text/html",
+        "title": "The Maker Protocol White Paper | Feb 2020",
+        "sampled_body_sha256": "e16cc6c617c3bc65175118a0c6afe1ee2986e7b59b531df0d01ce2e844bd6e91",
+        "sampled_body_bytes": 173401
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fmakerdao.com%2Fen%2Fwhitepaper%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 454,
+        "earliest_capture": {
+          "timestamp": "20190113053235",
+          "original": "https://makerdao.com/en/whitepaper/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "LHU3M7E65IVTYFRPWJWFDVYXRHGYJMUJ"
+        },
+        "latest_capture": {
+          "timestamp": "20260709092101",
+          "original": "https://makerdao.com/en/whitepaper/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "PIHGM6GSFIEDAZDXDCFHAO2SXSQRJZWC"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20190113053235",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LHU3M7E65IVTYFRPWJWFDVYXRHGYJMUJ"
+          },
+          {
+            "timestamp": "20190125020445",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5TKLUQ4WH6WFFU2IKSE7EXHSSBHL27CM"
+          },
+          {
+            "timestamp": "20190206220901",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "IYYLCVOO5RFEB326U4DVU4KQ3SEHZK32"
+          },
+          {
+            "timestamp": "20190208123837",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RODU5SNBAYWNXFHHOIOQW5TJKOOZXBBC"
+          },
+          {
+            "timestamp": "20190213051048",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ETIVSNG3HALMXUTHHMEC6WKEPDCZF6WM"
+          },
+          {
+            "timestamp": "20190214170659",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "V7MFUTPT6MLFB5DPB6MG2TIUNLX3SBKE"
+          },
+          {
+            "timestamp": "20190217164815",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SWOJ74VVQORKOMJZ3UX6V6VP6UIMWEWG"
+          },
+          {
+            "timestamp": "20190219180157",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "F6AEHXQVOKQX2OQHLTHEBRBXJDDPNCDT"
+          },
+          {
+            "timestamp": "20251113204015",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LBIJHGWNB5545ZKFKW2TAW2WX24JHNWF"
+          },
+          {
+            "timestamp": "20251127040659",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6QJXU2M3PKHSWYVECPQGFP65MDTWWZ4Y"
+          },
+          {
+            "timestamp": "20260130152738",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "L63B4ONE33K5AJYKWU7RXRMSSQW6DEXB"
+          },
+          {
+            "timestamp": "20260226000925",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SEPQL3ATGR5KRU33ZGFJ6WDSNE43ODPB"
+          },
+          {
+            "timestamp": "20260311030336",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "USIGY6GN3DL7QVBZDJ5RC423DOFVFJ7Y"
+          },
+          {
+            "timestamp": "20260422170958",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WH54IIQPXQKC3L4SAXDK5HKB5VME4HIH"
+          },
+          {
+            "timestamp": "20260607003250",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YJP6WXI6WJDC5EYIKJFVPV26AIIMMF4D"
+          },
+          {
+            "timestamp": "20260709092101",
+            "original": "https://makerdao.com/en/whitepaper/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PIHGM6GSFIEDAZDXDCFHAO2SXSQRJZWC"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260709092101/https://makerdao.com/en/whitepaper/",
+      "accepted_capture_timestamp": "20260709092101",
+      "accepted_capture_digest": "PIHGM6GSFIEDAZDXDCFHAO2SXSQRJZWC",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact Maker Protocol white-paper URL returned a successful dated HTTP 200 capture and the live page title remains the same white-paper identity.",
+      "remaining_uncertainty": "The archive preserves the reviewed white-paper page version and does not imply that all protocol documentation is unchanged."
+    },
+    {
+      "evidence_id": "sog_src_eurc_circle_page",
+      "source_file": "data/evidence-extra.json",
+      "title": "Circle EURC page",
+      "publisher": "Circle",
+      "source_type": "issuer_page",
+      "canonical_url": "https://www.circle.com/eurc",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.circle.com/eurc",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "EURC | A Euro-Backed Stablecoin | Circle",
+        "sampled_body_sha256": "df0f75f2d7fa36854a192964626c3e54d5e0e313632757eec84c468acc55c9f5",
+        "sampled_body_bytes": 262216
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Feurc&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 63,
+        "earliest_capture": {
+          "timestamp": "20241103163549",
+          "original": "https://circle.com/eurc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "3W6FHZWYUGKRBER6P5RCEBXZTJL5ZY3K"
+        },
+        "latest_capture": {
+          "timestamp": "20260709220612",
+          "original": "https://www.circle.com/eurc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "NAK4XFJUC5EBDXAIHHQX6YFZPY63K6VQ"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20241103163549",
+            "original": "https://circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3W6FHZWYUGKRBER6P5RCEBXZTJL5ZY3K"
+          },
+          {
+            "timestamp": "20241111230009",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7Q4SMSAZHEQU75ZE4A6BPQJJMLJQTDKG"
+          },
+          {
+            "timestamp": "20241117165939",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3TP2UO7AI6FBAFKIRHCCYWUCST3PXMMD"
+          },
+          {
+            "timestamp": "20241203074714",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BQNXUYEN7I4KYJ4KMXXEC24GMIK6YJE5"
+          },
+          {
+            "timestamp": "20250102003828",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XU4A2BRJGZ56QQFJCUJTESYKCPMJQEEL"
+          },
+          {
+            "timestamp": "20250107201249",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FV5E6A6GPD2LZET2V6IN7QCGJZU7NV7Z"
+          },
+          {
+            "timestamp": "20250118141323",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "UZR7WESNTLY7IX6CZKEGX2LZXBQ5V7XY"
+          },
+          {
+            "timestamp": "20250127170958",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "L6ELLPQOJPNYQU6GHYYNSWS6PEFUXJ6U"
+          },
+          {
+            "timestamp": "20260416065330",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "Q2R44GGYRHQNR4WJ5HIMAZMICZWVKLVK"
+          },
+          {
+            "timestamp": "20260510170157",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BRRWNJX4CVNM34PWZ5BSLK6TLKTSPB5I"
+          },
+          {
+            "timestamp": "20260513183720",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LHEISUGZWNIH3T6JDUYMKC5Z6C7SDUSS"
+          },
+          {
+            "timestamp": "20260519225217",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "RWWY5RJ2ZOH45CWRC4OCXSDYZDCFQB44"
+          },
+          {
+            "timestamp": "20260605051746",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "WDA24SYB6FPV7QRMQWXCQTW6I3OLIJRS"
+          },
+          {
+            "timestamp": "20260610084454",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "QLWL26EDKJDWRAHP2V3THUOSFFWMVHS6"
+          },
+          {
+            "timestamp": "20260626202531",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "XJ4R55WLJLMULKTRH25DRGOQWFQKOY3I"
+          },
+          {
+            "timestamp": "20260709220612",
+            "original": "https://www.circle.com/eurc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "NAK4XFJUC5EBDXAIHHQX6YFZPY63K6VQ"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260709220612/https://www.circle.com/eurc",
+      "accepted_capture_timestamp": "20260709220612",
+      "accepted_capture_digest": "NAK4XFJUC5EBDXAIHHQX6YFZPY63K6VQ",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact Circle EURC URL returned a successful dated HTTP 200 capture and preserves the official EURC product-page identity.",
+      "remaining_uncertainty": "The archive preserves one reviewed EURC-page version; later availability and chain changes remain possible."
+    },
+    {
+      "evidence_id": "sog_src_eurc_developer_docs",
+      "source_file": "data/evidence-extra.json",
+      "title": "Circle developer documentation",
+      "publisher": "Circle",
+      "source_type": "developer_docs",
+      "canonical_url": "https://developers.circle.com/",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://developers.circle.com/",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Circle developer docs - Circle Docs",
+        "sampled_body_sha256": "22df33c494d8e26454640a8f7ed7e1036405b5611d49abd3a5a1a097ca732f21",
+        "sampled_body_bytes": 262202
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fdevelopers.circle.com%2F&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 276,
+        "earliest_capture": {
+          "timestamp": "20200401012114",
+          "original": "https://developers.circle.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "YYIGZBI47KCWUCDZBDA5DW6B6L6RMFKI"
+        },
+        "latest_capture": {
+          "timestamp": "20260701124001",
+          "original": "https://developers.circle.com/",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "SFXPGV2IUNMJCRGVBC2TOLBNJQV7NUHU"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20200401012114",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YYIGZBI47KCWUCDZBDA5DW6B6L6RMFKI"
+          },
+          {
+            "timestamp": "20200508095715",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "YFEV4JYG7WIZTWTFWWRWHHA7UXPZ4G4J"
+          },
+          {
+            "timestamp": "20200811092402",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KFAMTWD4ZQGGUTQBUODCSC3DYHMXTQXW"
+          },
+          {
+            "timestamp": "20200912041554",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SELM3ZPIHQDVEIJVXO3L3TQJN3QZQEFQ"
+          },
+          {
+            "timestamp": "20200925153654",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "5IHIHPP7GM7MFHEVT4BUA4X2GINOX4ZX"
+          },
+          {
+            "timestamp": "20201020122923",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "P72CTJQMD5G6SCE2YAISZKCNJFK325DI"
+          },
+          {
+            "timestamp": "20201021080308",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6GEY5O3IQFRCD3M3ZD3IIUTIO4A3LOEG"
+          },
+          {
+            "timestamp": "20201121221414",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "D7ICWHVGPNBQOC3SIJOEFZIFMPYHEWLQ"
+          },
+          {
+            "timestamp": "20260313104459",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FRNO2SO4DTC6D7Y5EZUD6UXNQ5K7N4A6"
+          },
+          {
+            "timestamp": "20260314101445",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "BDRQDX53XQT7GXD6LBBNY5GV6QSPD43C"
+          },
+          {
+            "timestamp": "20260412023101",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "VPOCTGGJX5K7N4UDXGI44MIOMLYL6HFS"
+          },
+          {
+            "timestamp": "20260421020328",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "AQJ2KLHIURPS3AAUPOE5ZGYNWTVEGIY7"
+          },
+          {
+            "timestamp": "20260513095934",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "W4MEML3TZ4WCTEJEPF3HD23XNIG3HLCU"
+          },
+          {
+            "timestamp": "20260514014919",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZXEF555OVV5JS7DJQ46TTIS3WBG7SOD4"
+          },
+          {
+            "timestamp": "20260515172703",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "PNDOYZS6LDWENLSCB5LFBVQAHGFT4EE7"
+          },
+          {
+            "timestamp": "20260701124001",
+            "original": "https://developers.circle.com/",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SFXPGV2IUNMJCRGVBC2TOLBNJQV7NUHU"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20260701124001/https://developers.circle.com/",
+      "accepted_capture_timestamp": "20260701124001",
+      "accepted_capture_digest": "SFXPGV2IUNMJCRGVBC2TOLBNJQV7NUHU",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact Circle developer-docs root returned a successful dated HTTP 200 capture and matches the canonical documentation-entry-point claim scope.",
+      "remaining_uncertainty": "The archive preserves the documentation entry point, not every chain-specific integration page."
+    },
+    {
+      "evidence_id": "sog_src_eurc_launch_2022",
+      "source_file": "data/evidence-extra.json",
+      "title": "Circle announces fully reserved euro-backed stablecoin Euro Coin",
+      "publisher": "Circle",
+      "source_type": "official_launch_announcement",
+      "canonical_url": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+        "redirected": false,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Circle Announces Fully-reserved, Euro-backed Stablecoin | Circle",
+        "sampled_body_sha256": "bf28fe720e8161cd79f788c496c1c170f2c00a1854d3a213ce97a37aa7c7c2e6",
+        "sampled_body_bytes": 246035
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Fpressroom%2Fcircle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 18,
+        "earliest_capture": {
+          "timestamp": "20241212145508",
+          "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "ZV3GWDUKWMFRNR7WVGTVLAJFO2WFGYIJ"
+        },
+        "latest_capture": {
+          "timestamp": "20260513191810",
+          "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+          "statuscode": "200",
+          "mimetype": "text/html",
+          "digest": "OCDELEGWXR7JHRI5EEZOQOVAHQVL2JGS"
+        },
+        "sampled_captures": [
+          {
+            "timestamp": "20241212145508",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZV3GWDUKWMFRNR7WVGTVLAJFO2WFGYIJ"
+          },
+          {
+            "timestamp": "20250318225515",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "ZARSEWU6YLOXKNEQXJ5AYNRUHJLOR3TD"
+          },
+          {
+            "timestamp": "20250326112544",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "R3FWB7ZO3HATPIONVMEXKRIVQ7IHRRZC"
+          },
+          {
+            "timestamp": "20250514085659",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OTJLW72HYWMZLQKZTGFQRAOGENZBSYXN"
+          },
+          {
+            "timestamp": "20250618130331",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "MZ3EZRJKFKYAH5QO567B4AS34EC2WLDE"
+          },
+          {
+            "timestamp": "20250626082516",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "3D2UYSORUG5PQP5LF2OSOZBC3ORNZTSJ"
+          },
+          {
+            "timestamp": "20250924090129",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "7U5XRYBXKOFOY3H6QRGUEZ25YHVF4J3S"
+          },
+          {
+            "timestamp": "20251014005539",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "SGBXFP5R5ZXNSRQUF2UVHST6MXR67QRH"
+          },
+          {
+            "timestamp": "20251115234445",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "KDP65T5XLGQIZUEE74MYGXGPQCGJOZUY"
+          },
+          {
+            "timestamp": "20251206173224",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "24DX3UGAEQSKBJSSXTH27N4EF62K2EWO"
+          },
+          {
+            "timestamp": "20251210185801",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "6S4EBSBR6EH6WQJ42T2552MF2IZ3OVZD"
+          },
+          {
+            "timestamp": "20251217224834",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "LW3KN4NM3ZS3YJ5NVZVTQJ7MF4OY2IDH"
+          },
+          {
+            "timestamp": "20251219043620",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "HWXSMUR7SOXNZN5IOVZDQGNOKJRWLSV3"
+          },
+          {
+            "timestamp": "20251220023201",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "FGD4APVL5J3UR54KRNH7LUMLPGW6QWZF"
+          },
+          {
+            "timestamp": "20260415014056",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "A5RSUSAWJQJT4UQRQR777LC5GOQBAEOC"
+          },
+          {
+            "timestamp": "20260513191810",
+            "original": "https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+            "statuscode": "200",
+            "mimetype": "text/html",
+            "digest": "OCDELEGWXR7JHRI5EEZOQOVAHQVL2JGS"
+          }
+        ],
+        "captures_sample_truncated": true
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "dated_exact_archive_added",
+      "accepted_archived_url": "https://web.archive.org/web/20241212145508/https://www.circle.com/pressroom/circle-announces-a-fully-reserved-euro-backed-stablecoin-euro-coin-euroc",
+      "accepted_capture_timestamp": "20241212145508",
+      "accepted_capture_digest": "ZV3GWDUKWMFRNR7WVGTVLAJFO2WFGYIJ",
+      "accepted_replacement_url": null,
+      "reviewer_reason": "The exact official launch-announcement URL returned a successful dated HTTP 200 capture and preserves the historical Euro Coin launch source.",
+      "remaining_uncertainty": "The archive was captured after the 2022 publication date but preserves the same official announcement URL and title."
+    },
+    {
+      "evidence_id": "sog_src_eurc_mint_page",
+      "source_file": "data/evidence-extra.json",
+      "title": "Circle Mint product page",
+      "publisher": "Circle",
+      "source_type": "product_page",
+      "canonical_url": "https://www.circle.com/mint",
+      "claim_scopes": [],
+      "live_probe": {
+        "ok": true,
+        "status": 200,
+        "final_url": "https://www.circle.com/circle-mint",
+        "redirected": true,
+        "content_type": "text/html; charset=utf-8",
+        "title": "Circle Mint | Mint USDC, Unlock Business Efficiency | Circle",
+        "sampled_body_sha256": "3ab11b7d46c6a7b746078396bc29ae8acd4dd44ac41711eff9999f64312b299a",
+        "sampled_body_bytes": 262182
+      },
+      "exact_cdx_probe": {
+        "ok": true,
+        "status": 200,
+        "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Fmint&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
+        "capture_count": 0,
+        "earliest_capture": null,
+        "latest_capture": null,
+        "sampled_captures": [],
+        "captures_sample_truncated": false
+      },
+      "review_status": "reviewed_complete",
+      "proposed_outcome": "reviewed_source_replacement",
+      "accepted_archived_url": null,
+      "accepted_capture_timestamp": null,
+      "accepted_capture_digest": null,
+      "accepted_replacement_url": "https://www.circle.com/circle-mint",
+      "reviewer_reason": "The recorded Circle Mint URL redirects directly to the current Circle Mint product page with the same publisher, product identity, and business minting and conversion claim scope. No exact dated capture exists for the old URL.",
+      "remaining_uncertainty": "Future Circle route changes remain possible; no archive URL is added without an exact capture of the accepted canonical route."
+    }
+  ],
+  "boundaries": {
+    "canonical_data_changed": true,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "public_surface_changed": false
+  },
+  "outcome_counts": {
+    "dated_exact_archive_added": 9,
+    "reviewed_source_replacement": 1,
+    "reviewed_no_safe_change": 0
+  }
+}

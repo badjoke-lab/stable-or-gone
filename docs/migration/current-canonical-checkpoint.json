@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+  "checkpoint_id": "sog_evidence_archive_maintenance_batch_3_canonical_112_checkpoint_pr380_2026_07_16",
   "checkpoint_kind": "non_growth_normalization_checkpoint",
-  "recorded_at": "2026-07-14",
-  "source_commit": "pr365-evidence-archive-maintenance-batch-2",
+  "recorded_at": "2026-07-16",
+  "source_commit": "pr380-evidence-archive-maintenance-batch-3",
   "asset_count": 112,
-  "source_checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
-  "previous_checkpoint_id": "sog_tier_a_dossier_batch_4_canonical_112_checkpoint_pr364_2026_07_14",
-  "maintenance_pr": 365,
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_2_canonical_112_checkpoint_pr365_2026_07_14",
+  "maintenance_pr": 380,
   "expected_counts": {
     "assets": 112,
     "organizations": 107,
@@ -26,28 +26,41 @@
     "income_profiles": 112
   },
   "evidence_quality": {
-    "archive_index_count": 390,
-    "archive_not_recorded_count": 169,
+    "archive_index_count": 399,
+    "archive_not_recorded_count": 160,
     "selected_for_review": 10,
-    "canonical_changes": 3,
-    "reviewed_no_safe_change": 7,
+    "canonical_changes": 10,
+    "reviewed_no_safe_change": 0,
     "new_evidence_records": 0
   },
   "maintenance_outcome": {
     "changed_evidence_ids": [
-      "sog_src_xaut_legal_batch_b",
-      "sog_src_bold_live_batch_c",
-      "sog_src_bold_overview_batch_c"
+      "sog_src_bold_technical_batch_c",
+      "sog_src_circle_transparency",
+      "sog_src_circle_usdc_product",
+      "sog_src_crvusd_curve_docs",
+      "sog_src_crvusd_curve_lifecycle_event",
+      "sog_src_dai_whitepaper_pr354",
+      "sog_src_eurc_circle_page",
+      "sog_src_eurc_developer_docs",
+      "sog_src_eurc_launch_2022",
+      "sog_src_eurc_mint_page"
     ],
-    "reviewed_no_safe_change_evidence_ids": [
-      "sog_src_bold_redemptions_batch_c",
-      "sog_src_busd_binance_phaseout",
-      "sog_src_busd_paxos_issuer_update",
-      "sog_src_busd_paxos_statement_pr354",
-      "sog_src_circle_stability_update_2023_03_13",
-      "sog_src_circle_svb_update",
-      "sog_src_circle_usdc_contract_addresses"
-    ]
+    "dated_archive_added_evidence_ids": [
+      "sog_src_bold_technical_batch_c",
+      "sog_src_circle_transparency",
+      "sog_src_circle_usdc_product",
+      "sog_src_crvusd_curve_docs",
+      "sog_src_crvusd_curve_lifecycle_event",
+      "sog_src_dai_whitepaper_pr354",
+      "sog_src_eurc_circle_page",
+      "sog_src_eurc_developer_docs",
+      "sog_src_eurc_launch_2022"
+    ],
+    "source_replacement_evidence_ids": [
+      "sog_src_eurc_mint_page"
+    ],
+    "reviewed_no_safe_change_evidence_ids": []
   },
-  "notes": "Current deterministic canonical checkpoint after PR #365 Evidence and Archive Maintenance Batch 2. Three exact dated archive captures were added for XAUT and two Liquity BOLD sources; seven candidates were retained without unsafe inference. All canonical identities, relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
+  "notes": "Current deterministic canonical checkpoint after PR #380 Evidence and Archive Maintenance Batch 3. Nine exact dated archive captures and one reviewed claim-scope-equivalent Circle Mint route replacement were accepted across the ten selected Evidence identities. All canonical identity counts, Evidence Relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
 }

@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_evidence_archive_maintenance_batch_3_pr380_v1",
+  "status": "bounded_manual_review_and_canonical_maintenance",
+  "review_pr": 380,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr378-review-gate-pr379.json",
+  "source_queue": "docs/migration/evidence-archive-maintenance-queue-v2-pr378.json",
+  "source_queue_delta": "docs/migration/evidence-archive-maintenance-queue-v2-pr378-delta.json",
+  "expected_before": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 390,
+    "archive_not_recorded": 169,
+    "market_access_records": 8
+  },
+  "selected_evidence_ids": [
+    "sog_src_bold_technical_batch_c",
+    "sog_src_circle_transparency",
+    "sog_src_circle_usdc_product",
+    "sog_src_crvusd_curve_docs",
+    "sog_src_crvusd_curve_lifecycle_event",
+    "sog_src_dai_whitepaper_pr354",
+    "sog_src_eurc_circle_page",
+    "sog_src_eurc_developer_docs",
+    "sog_src_eurc_launch_2022",
+    "sog_src_eurc_mint_page"
+  ],
+  "required_outcomes": [
+    "dated_exact_archive_added",
+    "reviewed_source_replacement",
+    "reviewed_no_safe_change"
+  ],
+  "review_policy": {
+    "every_selected_identity_requires_exactly_one_outcome": true,
+    "manual_review_required": true,
+    "exact_source_capture_required_for_archive_addition": true,
+    "successful_capture_timestamp_required": true,
+    "capture_digest_required": true,
+    "source_version_scope_required": true,
+    "source_replacement_requires_claim_scope_equivalence": true,
+    "source_replacement_requires_version_equivalence_review": true,
+    "automatic_capture_promotion": false,
+    "automatic_source_replacement": false,
+    "canonical_change_not_presumed": true,
+    "outcome_log_required": true
+  },
+  "limits": {
+    "selected_identity_count": 10,
+    "maximum_canonical_evidence_records_touched": 10,
+    "new_evidence_identities": 0,
+    "removed_evidence_identities": 0,
+    "evidence_relation_changes": 0,
+    "asset_changes": 0,
+    "market_access_record_changes": 0,
+    "deployment_changes": 0,
+    "new_public_surface": false
+  },
+  "boundaries": {
+    "identity_outside_queue_allowed": false,
+    "ranking_allowed": false,
+    "score_allowed": false,
+    "recommendation_allowed": false,
+    "monitoring_auto_promotion_allowed": false,
+    "editorial_research_auto_promotion_allowed": false,
+    "historical_output_rewrite_allowed": false
+  },
+  "review_gate_after_completion": true,
+  "next_work_item": "REVIEW GATE"
+}

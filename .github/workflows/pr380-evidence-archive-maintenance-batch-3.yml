@@ -1,0 +1,168 @@
+name: PR 380 Evidence Archive Maintenance Batch 3
+
+on:
+  push:
+    branches:
+      - pr380-evidence-archive-maintenance-batch-3
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr380-evidence-archive-maintenance-batch-3
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr380-evidence-archive-maintenance-batch-3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Apply deterministic reviewed decisions
+        run: |
+          set -o pipefail
+          { node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs; node scripts/build-evidence-archive-maintenance-batch-3-pr380.mjs --check; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Commit generated PR 380 outputs
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            data/evidence-batch-c.json \
+            data/evidence-events-pr038.json \
+            data/evidence-extra.json \
+            data/evidence.json \
+            data/stats-history.json \
+            docs/migration/evidence-archive-maintenance-batch-3-pr380-review-queue.json \
+            docs/migration/evidence-archive-maintenance-outcomes-pr380.json \
+            docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+          if git diff --cached --quiet; then
+            echo 'PR #380 generated outputs already committed'
+          else
+            git commit -m 'Apply PR 380 reviewed archive maintenance outcomes'
+            git pull --rebase origin pr380-evidence-archive-maintenance-batch-3
+            git push origin HEAD:pr380-evidence-archive-maintenance-batch-3
+          fi
+      - name: Validate PR 380 reviewed scope
+        run: |
+          set -o pipefail
+          { node scripts/validate-evidence-archive-maintenance-batch-3-pr380.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Validate canonical Evidence
+        run: |
+          set -o pipefail
+          { node scripts/validate-registry-evidence-integrity-audit.mjs; npm run validate:data; npm run validate:evidence-relations-v2; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Validate maintained audit invariants
+        run: |
+          set -o pipefail
+          { node scripts/validate-registry-deployment-chain-identity-audit.mjs; node scripts/validate-next-growth-candidate-audit-pr329.mjs; npm run validate:final; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Validate remaining canonical contracts
+        run: |
+          set -o pipefail
+          {
+            npm run validate:launch-queue
+            npm run validate:terminal-queue
+            npm run validate:candidates
+            npm run validate:compat
+            npm run validate:classification
+            npm run validate:profiles
+            npm run validate:events-v2
+            npm run validate:migration-v3
+            npm run validate:reproducible-build
+            node scripts/validate-audited-100-checkpoint.mjs
+            node scripts/validate-non-ui-release-material.mjs
+            npm run validate:ui-v3-cleanup
+          } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Validate registry and release integrity
+        run: |
+          set -o pipefail
+          { npm run validate:v3; npm run validate:deployments-v3; npm run validate:income-v3; npm run validate:parity; npm run validate:release-integrity; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Validate deterministic statistics
+        run: |
+          set -o pipefail
+          { node scripts/build-stats.mjs; SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs; SOG_STATS_HISTORY_BASE_REF=origin/main node scripts/validate-stats-history.mjs; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Verify PR 380 boundaries
+        run: |
+          set -o pipefail
+          {
+            git diff --exit-code origin/main...HEAD -- data/ \
+              ':!data/evidence-batch-c.json' \
+              ':!data/evidence-events-pr038.json' \
+              ':!data/evidence-extra.json' \
+              ':!data/evidence.json' \
+              ':!data/stats-history.json'
+            git diff --exit-code origin/main...HEAD -- src/ public/
+            node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const outcomes=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-outcomes-pr380.json','utf8'));
+          const handoff=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json','utf8'));
+          if(outcomes.selected_count!==10||outcomes.changed_count!==10||outcomes.dated_archive_added_count!==9||outcomes.reviewed_source_replacement_count!==1||outcomes.reviewed_no_safe_change_count!==0)throw new Error('PR #380 reviewed outcome boundary changed');
+          if(handoff.evidence_quality.archive_recorded!==399||handoff.evidence_quality.archive_not_recorded!==160)throw new Error('PR #380 archive boundary changed');
+          if(handoff.canonical_counts.evidence!==559||handoff.canonical_counts.evidence_relations!==559)throw new Error('PR #380 Evidence identity/relation boundary changed');
+          if(handoff.next_work_item?.decision!=='review_gate_required')throw new Error('PR #380 must end at a review gate');
+          NODE
+          } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Verify generated outputs are committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Astro check and build
+        run: |
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr380-all.txt
+      - name: Verify internal review files remain non-public
+        run: |
+          test ! -e dist/data/evidence-archive-maintenance-batch-3-pr380-review-queue.json
+          test ! -e dist/data/evidence-archive-maintenance-outcomes-pr380.json
+          test ! -e dist/data/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json
+      - name: Publish PR 380 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr380-evidence-archive-maintenance-status -->';
+            let handoff=null;
+            try{handoff=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-3-pr380-reviewed-handoff.json','utf8'));}catch{}
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr380-all.txt','utf8').trim();}catch{}
+            const body=`${marker}
+            ## PR #380 Evidence and Archive Maintenance Batch 3
+
+            - Workflow: **${{ job.status }}**
+            - Reviewed / changed: **${handoff?.evidence_quality?.selected??'n/a'} / ${handoff?.evidence_quality?.changed??'n/a'}**
+            - Dated archives added: **${handoff?.evidence_quality?.dated_archive_added??'n/a'}**
+            - Reviewed source replacements: **${handoff?.evidence_quality?.reviewed_source_replacement??'n/a'}**
+            - Reviewed no-safe-change: **${handoff?.evidence_quality?.reviewed_no_safe_change??'n/a'}**
+            - Archive recorded / not recorded: **${handoff?.evidence_quality?.archive_recorded??'n/a'} / ${handoff?.evidence_quality?.archive_not_recorded??'n/a'}**
+            - Evidence identities / relations: **${handoff?.canonical_counts?.evidence??'n/a'} / ${handoff?.canonical_counts?.evidence_relations??'n/a'}**
+            - Next authority: **${handoff?.next_work_item?.decision??'n/a'}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics (tail)</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(-16000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
