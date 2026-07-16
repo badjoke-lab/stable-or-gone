@@ -1,25 +1,25 @@
 # PR #405 Evidence and Archive Maintenance Batch 8 Activation
 
-Status: active bounded manual source review  
+Status: active reviewed bounded maintenance  
 Authority source: merged PR #404
 
 ## Authorized scope
 
-PR #405 may review exactly the ten Queue v7 identities and no others.
+PR #405 reviews exactly the ten Queue v7 identities and no others.
 
-The initial workflow is probe-only. It records live response and exact Wayback CDX results. Canonical writes remain disabled during the probe phase.
+The completed workflow recorded live response and exact Wayback CDX results. Manual decisions were committed before any canonical archive field changed.
 
 ## Reviewed outcome boundary
 
-Each selected identity may later receive exactly one reviewed outcome:
+The reviewed result is:
 
 ```text
-dated_exact_archive_added
-reviewed_source_replacement
-reviewed_no_safe_change
+ten exact dated archives
+zero reviewed source replacements
+zero reviewed no-safe-change
 ```
 
-No automatic capture promotion or automatic source replacement is permitted.
+No automatic capture promotion or automatic source replacement was permitted. Every archive decision is bound to an exact canonical source URL HTTP 200 capture, timestamp, and digest.
 
 ## Canonical boundary
 
@@ -28,10 +28,13 @@ Assets: 112
 Evidence: 559
 Evidence Relations: 559
 Archive recorded / not recorded before review: 430 / 129
+Archive recorded / not recorded after review: 440 / 119
 Deployments: 174
 Market Access Records: 8
 ```
 
-No canonical change is allowed until reviewed decisions are committed and strict validation is switched from probe-only to reviewed application.
+Only the ten selected Evidence `archived_url` fields and the required same-count checkpoints, statistics history, release baseline, and internal review outputs may change.
+
+No Evidence identity, Relation, non-Evidence canonical record, ranking, or public surface may change.
 
 Batch 9 remains unapproved. After PR #405, stop at `REVIEW GATE`.
