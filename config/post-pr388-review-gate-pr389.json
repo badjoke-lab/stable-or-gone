@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "config_id": "sog_post_pr388_review_gate_pr389_v1",
+  "status": "mandatory_review_gate_contract",
+  "review_pr": 389,
+  "reviewed_at": "2026-07-16",
+  "expected": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 406,
+    "archive_not_recorded": 153,
+    "history_sources": 4,
+    "history_events": 40,
+    "reviewed_identities": 39,
+    "reviewed_unresolved_suppressed": 12,
+    "reviewed_reactivated_eligible": 1,
+    "eligible_pool": 108,
+    "selected_queue_candidates": 10,
+    "maximum_selected_candidates": 10,
+    "selected_reactivated_candidates": 1,
+    "queue_v3_added": 9,
+    "queue_v3_removed": 9,
+    "queue_v3_retained": 1,
+    "selected_evidence_ids": [
+      "sog_src_fdusd_site",
+      "sog_src_frax_docs",
+      "sog_src_frax_docs_frax",
+      "sog_src_frax_official_site",
+      "sog_src_gho_bridge_batch_c",
+      "sog_src_gho_facilitators_batch_c",
+      "sog_src_gho_gsm_batch_c",
+      "sog_src_gho_launch_batch_c",
+      "sog_src_gusd_gemini_official",
+      "sog_src_lusd_liquity_docs"
+    ]
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 390,
+      "work_item": "Evidence and Archive Maintenance Batch 5",
+      "scope": "Manually review exactly the ten PR #388 Queue v4 identities. Add a dated exact archive only after exact-source verification, use a reviewed source replacement only after publisher/product and claim-scope equivalence review, otherwise record reviewed no-safe-change. Canonical Evidence may change only through explicit reviewed outcomes.",
+      "canonical_evidence_change_allowed": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "forbidden_without_later_review_gate": [
+    "Evidence and Archive Maintenance Batch 6",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "boundaries": {
+    "current_pr_canonical_data_change_allowed": false,
+    "current_pr_public_surface_change_allowed": false,
+    "historical_output_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  }
+}

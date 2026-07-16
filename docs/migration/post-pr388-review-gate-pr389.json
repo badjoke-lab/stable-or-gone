@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr388_review_gate_pr389_2026_07_16",
+  "status": "reviewed_internal_authority_decision",
+  "public_output": false,
+  "review_pr": 389,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint": {
+    "checkpoint_id": "sog_evidence_archive_maintenance_batch_4_canonical_112_checkpoint_pr385_2026_07_16",
+    "stats_checkpoint_id": "sog_evidence_archive_maintenance_batch_4_112_checkpoint_pr385_2026_07_16",
+    "release_baseline_id": "sog_release_integrity_pr385_112_assets_2026_07_16",
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 406,
+    "archive_not_recorded": 153,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "completed_sequence": [
+    {
+      "pr": 387,
+      "work_item": "Evidence Archive Review-History Contract v3 Update",
+      "status": "complete"
+    },
+    {
+      "pr": 388,
+      "work_item": "Evidence Archive Maintenance Queue v4 Refresh",
+      "status": "complete"
+    }
+  ],
+  "evaluation": {
+    "queue_integrity": {
+      "queue_id": "sog_evidence_archive_maintenance_queue_v4_pr388",
+      "canonical_evidence_count": 559,
+      "archive_recorded_count": 406,
+      "archive_not_recorded_count": 153,
+      "reviewed_unresolved_suppressed_count": 12,
+      "reactivated_reviewed_identity_count": 1,
+      "selected_reactivated_reviewed_identity_count": 1,
+      "eligible_pool_count": 108,
+      "selected_count": 10,
+      "maximum_selected_count": 10,
+      "selected_evidence_ids": [
+        "sog_src_fdusd_site",
+        "sog_src_frax_docs",
+        "sog_src_frax_docs_frax",
+        "sog_src_frax_official_site",
+        "sog_src_gho_bridge_batch_c",
+        "sog_src_gho_facilitators_batch_c",
+        "sog_src_gho_gsm_batch_c",
+        "sog_src_gho_launch_batch_c",
+        "sog_src_gusd_gemini_official",
+        "sog_src_lusd_liquity_docs"
+      ],
+      "priority_bucket_counts": {
+        "official_issuer_protocol_product": 10
+      },
+      "selection_tier_counts": {
+        "0": 1,
+        "1": 9
+      },
+      "added_vs_queue_v3": 9,
+      "removed_vs_queue_v3": 9,
+      "retained_vs_queue_v3": 1,
+      "retained_evidence_ids": [
+        "sog_src_fdusd_site"
+      ],
+      "deterministic_order": true,
+      "all_candidates_manual_review_only": true,
+      "result": "bounded_fresh_history_v3_queue"
+    },
+    "history_enforcement": {
+      "contract_id": "sog_evidence_archive_review_history_v3_pr387",
+      "manifest_id": "sog_evidence_archive_review_history_manifest_v3_pr387",
+      "audit_id": "sog_evidence_archive_review_history_audit_v3_pr387_2026_07_16",
+      "history_source_count": 4,
+      "history_event_count": 40,
+      "reviewed_identity_count": 39,
+      "reviewed_unresolved_total": 13,
+      "reviewed_unresolved_suppressed": 12,
+      "reviewed_reactivated_eligible": 1,
+      "reviewed_reactivated_evidence_ids": [
+        "sog_src_fdusd_site"
+      ],
+      "exact_suppressed_ids_preserved": true,
+      "exact_reactivated_ids_preserved": true,
+      "reviewed_reactivated_selected_first": true,
+      "automatic_time_expiry": false,
+      "result": "successful"
+    },
+    "batch_5_readiness": {
+      "decision": "approved_bounded_manual_review",
+      "selected_identity_count": 10,
+      "selected_evidence_ids": [
+        "sog_src_fdusd_site",
+        "sog_src_frax_docs",
+        "sog_src_frax_docs_frax",
+        "sog_src_frax_official_site",
+        "sog_src_gho_bridge_batch_c",
+        "sog_src_gho_facilitators_batch_c",
+        "sog_src_gho_gsm_batch_c",
+        "sog_src_gho_launch_batch_c",
+        "sog_src_gusd_gemini_official",
+        "sog_src_lusd_liquity_docs"
+      ],
+      "allowed_outcomes": [
+        "dated_exact_archive_added",
+        "reviewed_source_replacement",
+        "reviewed_no_safe_change"
+      ],
+      "canonical_change_allowed_only_after_reviewed_exact_capture_or_equivalent_replacement": true,
+      "automatic_promotion_allowed": false,
+      "review_gate_required_after_batch": true
+    },
+    "market_access": {
+      "canonical_record_count": 8,
+      "decision": "defer"
+    },
+    "monitoring": {
+      "decision": "continue_private_review_only",
+      "automatic_canonical_promotion_allowed": false
+    }
+  },
+  "decisions": {
+    "evidence_archive_maintenance_batch_5": {
+      "decision": "approved_bounded",
+      "pr": 390,
+      "selected_evidence_ids": [
+        "sog_src_fdusd_site",
+        "sog_src_frax_docs",
+        "sog_src_frax_docs_frax",
+        "sog_src_frax_official_site",
+        "sog_src_gho_bridge_batch_c",
+        "sog_src_gho_facilitators_batch_c",
+        "sog_src_gho_gsm_batch_c",
+        "sog_src_gho_launch_batch_c",
+        "sog_src_gusd_gemini_official",
+        "sog_src_lusd_liquity_docs"
+      ],
+      "maximum_identity_count": 10,
+      "canonical_evidence_change_allowed_under_reviewed_outcomes": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    },
+    "evidence_archive_maintenance_batch_6": {
+      "decision": "not_approved"
+    },
+    "tier_a_dossier_batch_6": {
+      "decision": "not_approved"
+    },
+    "market_access_pilot_3": {
+      "decision": "not_approved"
+    },
+    "record_growth_batch_2": {
+      "decision": "not_approved"
+    },
+    "new_public_surface": {
+      "decision": "not_approved"
+    }
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 390,
+      "work_item": "Evidence and Archive Maintenance Batch 5",
+      "scope": "Manually review exactly the ten PR #388 Queue v4 identities. Add a dated exact archive only after exact-source verification, use a reviewed source replacement only after publisher/product and claim-scope equivalence review, otherwise record reviewed no-safe-change. Canonical Evidence may change only through explicit reviewed outcomes.",
+      "canonical_evidence_change_allowed": true,
+      "new_public_surface_allowed": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "not_approved_in_next_sequence": [
+    "Evidence and Archive Maintenance Batch 6",
+    "Tier A Dossier Deepening Batch 6",
+    "Market Access Pilot 3",
+    "Record Growth Batch 2",
+    "new public page or explorer",
+    "asset or Evidence ranking",
+    "automatic monitoring promotion",
+    "automatic canonical promotion"
+  ],
+  "review_gate_after_sequence": true,
+  "activation_rule": "PR #390 must update AGENTS.md and docs/roadmap.md before changing canonical Evidence.",
+  "boundaries": {
+    "canonical_data_changed": false,
+    "public_surface_changed": false,
+    "statistics_changed": false,
+    "checkpoints_changed": false,
+    "release_baseline_changed": false,
+    "historical_outputs_rewritten": false,
+    "ranking_or_score": false,
+    "automatic_promotion": false
+  },
+  "source_digest_sha256": "5203ac4a7054cc7bd1e2088ee81d88c7e2ca79d8a5b8e4bf931a77a3396d15d6",
+  "decision_digest_sha256": "0769551903c71f851e09bb380f688d2eeedf72acaeb234d79c8646b43771be61"
+}
