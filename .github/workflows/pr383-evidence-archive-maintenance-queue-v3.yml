@@ -1,0 +1,114 @@
+name: PR 383 Evidence Archive Maintenance Queue v3 Refresh
+
+on:
+  push:
+    branches:
+      - pr383-evidence-archive-maintenance-queue-v3
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr383-evidence-archive-maintenance-queue-v3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic Queue v3 outputs
+        run: |
+          node scripts/build-evidence-archive-maintenance-queue-v3-pr383.mjs 2>&1 | tee /tmp/pr383-build.txt
+          node scripts/build-evidence-archive-maintenance-queue-v3-pr383.mjs --check
+      - name: Commit generated Queue v3 outputs
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/evidence-archive-maintenance-queue-v3-pr383.json docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json
+          if git diff --cached --quiet; then
+            echo 'PR #383 Queue v3 outputs already committed'
+          else
+            git commit -m 'Generate PR 383 Evidence archive queue v3 outputs'
+            git pull --rebase origin pr383-evidence-archive-maintenance-queue-v3
+            git push origin HEAD:pr383-evidence-archive-maintenance-queue-v3
+          fi
+      - name: Validate Queue v3 authority and outputs
+        run: |
+          node scripts/validate-evidence-archive-maintenance-queue-v3-pr383.mjs 2>&1 | tee /tmp/pr383-validation.txt
+          npm run validate:active-workstream
+      - name: Validate canonical and release contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+          node scripts/validate-non-ui-release-material.mjs
+      - name: Verify internal-review-only boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- data/ src/ public/
+          test ! -e public/data/evidence-archive-maintenance-queue-v3-pr383.json
+          test ! -e public/data/evidence-archive-maintenance-queue-v3-pr383-delta.json
+          test ! -e src/pages/evidence-archive-maintenance-queue-v3.astro
+      - name: Verify generated output is committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+          npm run verify:public
+      - name: Publish PR 383 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr383-evidence-archive-maintenance-queue-v3-status -->';
+            const fs=require('fs');
+            let queue=null;
+            let delta=null;
+            try{queue=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-queue-v3-pr383.json','utf8'));}catch{}
+            try{delta=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-queue-v3-pr383-delta.json','utf8'));}catch{}
+            let diagnostics='';
+            for(const file of ['/tmp/pr383-build.txt','/tmp/pr383-validation.txt']){
+              try{diagnostics+=`${fs.readFileSync(file,'utf8').trim()}\n`;}catch{}
+            }
+            const selected=(queue?.selected_candidates||[]).map((row)=>row.evidence_id).join(', ')||'n/a';
+            const body=`${marker}
+            ## PR #383 Evidence Archive Maintenance Queue v3
+
+            - Workflow: **${{ job.status }}**
+            - Canonical Evidence: **${queue?.canonical_evidence_count??'n/a'}**
+            - Archive recorded / not recorded: **${queue?.archive_index_count??'n/a'} / ${queue?.archive_not_recorded_count??'n/a'}**
+            - Reviewed suppressed / reactivated eligible: **${queue?.reviewed_unresolved_suppressed_count??'n/a'} / ${queue?.reactivated_reviewed_identity_count??'n/a'}**
+            - Eligible pool / selected: **${queue?.eligible_pool_count??'n/a'} / ${queue?.selected_count??'n/a'}**
+            - Selected reviewed-reactivated: **${queue?.selected_reactivated_reviewed_identity_count??'n/a'}**
+            - Added / removed / retained versus Queue v2: **${delta?.added_evidence_ids?.length??'n/a'} / ${delta?.removed_evidence_ids?.length??'n/a'} / ${delta?.retained_evidence_ids?.length??'n/a'}**
+            - Selected IDs: \`${selected}\`
+            - Next work item: **${queue?.next_work_item??'n/a'}**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics</summary>
+
+            \`\`\`text
+            ${diagnostics.trim().slice(-12000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
