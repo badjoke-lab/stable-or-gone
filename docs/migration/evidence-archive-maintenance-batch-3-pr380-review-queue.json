@@ -513,7 +513,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "403: Forbidden",
-        "sampled_body_sha256": "7ba403bd2bb10558d4d2268c2476e28e71769e7a0fb99927234c7aa1dcae642f",
+        "sampled_body_sha256": "5bcefe6d5776d40efa55e84e87352350b29ca27c27f097373c2180373f6c7478",
         "sampled_body_bytes": 5525
       },
       "exact_cdx_probe": {
@@ -612,7 +612,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Page not found | Curve Knowledge Hub",
-        "sampled_body_sha256": "f5a2d61b60d1de80ac184d0cb35663af85900d1e9f781b3a7ffb15170e62eff2",
+        "sampled_body_sha256": "49d1df7126188ab8b4ae81c5f60b98c2dc32571db9c5883ece202d9cf83d9413",
         "sampled_body_bytes": 9179
       },
       "exact_cdx_probe": {
@@ -690,7 +690,7 @@
         "redirected": false,
         "content_type": "text/html",
         "title": "The Maker Protocol White Paper | Feb 2020",
-        "sampled_body_sha256": "73dc8c47489872c5c56be1ccae3bab88979c5b18f0b7a60e226f5a2e1f70fa4d",
+        "sampled_body_sha256": "76c9bfe620269562c4b572e4906ed60627528eee1725763dfc38b4c8afebf826",
         "sampled_body_bytes": 173401
       },
       "exact_cdx_probe": {
@@ -1176,7 +1176,7 @@
         "redirected": false,
         "content_type": "text/html; charset=utf-8",
         "title": "Circle Announces Fully-reserved, Euro-backed Stablecoin | Circle",
-        "sampled_body_sha256": "36d35855812d09944ec91933d7cbaaf192a21d3b7ba5fffd1bb2df5b69a5c6fc",
+        "sampled_body_sha256": "456237cbafdc19d5ff53b62b30dc466dc210ce4e449b3e4a5653520a57d01af0",
         "sampled_body_bytes": 246035
       },
       "exact_cdx_probe": {
@@ -1342,14 +1342,11 @@
         "sampled_body_bytes": 262182
       },
       "exact_cdx_probe": {
-        "ok": true,
-        "status": 200,
+        "ok": false,
+        "status": null,
         "query_url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fwww.circle.com%2Fmint&matchType=exact&output=json&filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest&collapse=digest",
-        "capture_count": 0,
-        "earliest_capture": null,
-        "latest_capture": null,
-        "sampled_captures": [],
-        "captures_sample_truncated": false
+        "captures": [],
+        "error": "This operation was aborted"
       },
       "review_status": "pending_manual_review",
       "proposed_outcome": null,
