@@ -1,0 +1,118 @@
+name: PR 394 Post-PR 393 Review Gate
+
+on:
+  push:
+    branches:
+      - pr394-post-pr393-review-gate
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr394-post-pr393-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic review gate
+        run: |
+          set -o pipefail
+          { node scripts/build-post-pr393-review-gate-pr394.mjs; node scripts/build-post-pr393-review-gate-pr394.mjs --check; } 2>&1 | tee -a /tmp/pr394-all.txt
+      - name: Commit generated review report
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/post-pr393-review-gate-pr394.json
+          if git diff --cached --quiet; then
+            echo 'PR #394 review report already committed'
+          else
+            git commit -m 'Generate PR 394 post-PR 393 review gate report'
+            git pull --rebase origin pr394-post-pr393-review-gate
+            git push origin HEAD:pr394-post-pr393-review-gate
+          fi
+      - name: Validate review gate authority
+        run: |
+          set -o pipefail
+          { node scripts/validate-post-pr393-review-gate-pr394.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr394-all.txt
+      - name: Validate canonical and release contracts
+        run: |
+          set -o pipefail
+          { npm run validate:data; npm run validate:compat; npm run validate:final; npm run validate:release-integrity; node scripts/validate-non-ui-release-material-current.mjs; } 2>&1 | tee -a /tmp/pr394-all.txt
+      - name: Verify internal-review-only boundary
+        run: |
+          set -o pipefail
+          {
+            git diff --exit-code origin/main...HEAD -- data/ src/ public/
+            git diff --exit-code origin/main...HEAD -- \
+              docs/migration/evidence-archive-maintenance-queue-v5-pr393.json \
+              docs/migration/evidence-archive-maintenance-queue-v5-pr393-delta.json \
+              config/evidence-archive-review-history-v4-pr392.json \
+              docs/migration/evidence-archive-review-history-manifest-v4-pr392.json \
+              docs/migration/evidence-archive-review-history-audit-v4-pr392.json \
+              docs/migration/current-canonical-checkpoint.json \
+              docs/migration/current-stats-history-checkpoint.json \
+              docs/migration/registry-release-integrity-baseline.json
+            test ! -e public/data/post-pr393-review-gate-pr394.json
+            test ! -e src/pages/post-pr393-review-gate-pr394.astro
+          } 2>&1 | tee -a /tmp/pr394-all.txt
+      - name: Verify generated output is committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code 2>&1 | tee -a /tmp/pr394-all.txt
+      - name: Astro check and build
+        run: |
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr394-all.txt
+      - name: Publish PR 394 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr394-post-pr393-review-gate-status -->';
+            const fs=require('fs');
+            let report=null;
+            try{report=JSON.parse(fs.readFileSync('docs/migration/post-pr393-review-gate-pr394.json','utf8'));}catch{}
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr394-all.txt','utf8').trim();}catch{}
+            const selected=report?.queue_review?.selected_evidence_ids?.join(', ')||'n/a';
+            const sequence=report?.approved_next_sequence?.map((row)=>`PR #${row.pr} ${row.work_item}`).join(' → ')||'n/a';
+            const body=`${marker}
+            ## PR #394 Post-PR #393 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Archive recorded / not recorded: **${report?.source_checkpoint?.archive_recorded??'n/a'} / ${report?.source_checkpoint?.archive_not_recorded??'n/a'}**
+            - Eligible pool / selected: **${report?.queue_review?.eligible_pool_count??'n/a'} / ${report?.queue_review?.selected_count??'n/a'}**
+            - Reviewed suppressed / reactivated selected: **${report?.queue_review?.reviewed_suppressed_excluded??'n/a'} / ${report?.queue_review?.reviewed_reactivated_selected??'n/a'}**
+            - Queue v4 added / removed / retained: **${report?.queue_review?.added_vs_queue_v4??'n/a'} / ${report?.queue_review?.removed_vs_queue_v4??'n/a'} / ${report?.queue_review?.retained_vs_queue_v4??'n/a'}**
+            - Batch 6 decision: **${report?.decisions?.evidence_archive_maintenance_batch_6?.decision??'n/a'}**
+            - Approved sequence: **${sequence}**
+            - Review gate after sequence: **${report?.review_gate_after_sequence??'n/a'}**
+            - Selected IDs: \`${selected}\`
+            - Head: \`${context.sha}\`
+
+            <details><summary>Validation diagnostics (tail)</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(-16000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
