@@ -62,7 +62,7 @@
         "redirected": true,
         "content_type": "text/html; charset=utf-8",
         "title": "Sky Forum - Transparent and sustainable finance",
-        "sampled_body_sha256": "050cb808491842cb463a60a4802038c2e08144ba0dfc7678ad83833f33515aed",
+        "sampled_body_sha256": "26885bf7edfb7feab0ceae51bc609e21c115932ce75e16d8214e908e1344b43a",
         "sampled_body_bytes": 27760
       },
       "exact_cdx_probe": {
@@ -226,7 +226,7 @@
         "redirected": false,
         "content_type": "text/html; charset=UTF-8",
         "title": "Just a moment...",
-        "sampled_body_sha256": "5681c4b3c5e5a416423da8ce611f1faa0ab6b16d0f0a177d021752d9c9282df3",
+        "sampled_body_sha256": "3059272ee26c9c62e4da08cb6f3b1f65c064810eb692144b241f8464aad4268e",
         "sampled_body_bytes": 5915
       },
       "exact_cdx_probe": {
