@@ -1,0 +1,67 @@
+{
+  "schema_version": "7.0",
+  "config_id": "sog_evidence_archive_maintenance_queue_v7_pr403",
+  "status": "reviewed_internal_non_ranking_history_v6_queue_contract",
+  "review_pr": 403,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr400-review-gate-pr401.json",
+  "source_contract": "config/evidence-archive-review-history-v6-pr402.json",
+  "source_manifest": "docs/migration/evidence-archive-review-history-manifest-v6-pr402.json",
+  "source_audit": "docs/migration/evidence-archive-review-history-audit-v6-pr402.json",
+  "prior_queue": "docs/migration/evidence-archive-maintenance-queue-v6-pr398.json",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v7_pr403",
+  "delta_id": "sog_evidence_archive_maintenance_queue_v7_delta_pr403",
+  "selection": {
+    "mode": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+    "maximum_selected_count": 10,
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ]
+  },
+  "expected_input": {
+    "canonical_evidence_count": 559,
+    "archive_recorded_count": 430,
+    "archive_not_recorded_count": 129,
+    "history_source_count": 7,
+    "history_event_count": 70,
+    "reviewed_identity_count": 68,
+    "reviewed_suppressed_count": 18,
+    "reviewed_reactivated_eligible_count": 0,
+    "reviewed_reactivated_evidence_ids": []
+  },
+  "expected_output": {
+    "eligible_pool_count": 78,
+    "selected_count": 10,
+    "maximum_selected_count": 10,
+    "selected_reactivated_count": 0,
+    "selected_evidence_ids": [
+      "sog_src_rai_integrations_batch_b",
+      "sog_src_rai_oracle_relayer_batch_b",
+      "sog_src_rai_ungovernance_batch_b",
+      "sog_src_rlusd_docs",
+      "sog_src_rlusd_launch_2024",
+      "sog_src_rlusd_ripple_page",
+      "sog_src_spot_about_batch_b",
+      "sog_src_spot_mint_batch_b",
+      "sog_src_spot_site_batch_b",
+      "sog_src_spot_v2_rollout_batch_b"
+    ],
+    "added_vs_queue_v6": 10,
+    "removed_vs_queue_v6": 10,
+    "retained_vs_queue_v6": 0,
+    "alias_identity_excluded_count": 33,
+    "reviewed_suppressed_excluded_count": 18
+  },
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_work_item": "REVIEW GATE"
+}

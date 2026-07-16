@@ -1,0 +1,392 @@
+{
+  "schema_version": "7.0",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v7_pr403",
+  "status": "reviewed_internal_non_ranking_history_v6_queue",
+  "public_output": false,
+  "evidence_rank": false,
+  "single_composite_score": false,
+  "review_pr": 403,
+  "reviewed_at": "2026-07-16",
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_7_canonical_112_checkpoint_pr400_2026_07_16",
+  "review_history_contract_id": "sog_evidence_archive_review_history_v6_pr402",
+  "review_history_manifest_id": "sog_evidence_archive_review_history_manifest_v6_pr402",
+  "review_history_audit_id": "sog_evidence_archive_review_history_audit_v6_pr402_2026_07_16",
+  "prior_queue_id": "sog_evidence_archive_maintenance_queue_v6_pr398",
+  "selection_rule": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+  "source_identity_scope": "canonical_identities_only",
+  "canonical_evidence_count": 559,
+  "archive_index_count": 430,
+  "archive_not_recorded_count": 129,
+  "reviewed_unresolved_suppressed_count": 18,
+  "reactivated_reviewed_identity_count": 0,
+  "selected_reactivated_reviewed_identity_count": 0,
+  "eligible_pool_count": 78,
+  "selected_count": 10,
+  "maximum_selected_count": 10,
+  "priority_order": [
+    "regulator_court_legal",
+    "official_issuer_protocol_product",
+    "reserve_attestation_audit",
+    "high_quality_reporting_research",
+    "other_reviewed_source"
+  ],
+  "selected_candidates": [
+    {
+      "evidence_id": "sog_src_rai_integrations_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "RAI integrations and partners",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "url": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_rai"
+      ],
+      "organization_ids": [
+        "sog_issuer_reflexer"
+      ],
+      "event_ids": [
+        "sog_ev_rai_2021_02_launch"
+      ],
+      "claim_scopes": [
+        "rai_ethereum_contract_and_market_integrations"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rai_oracle_relayer_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Oracle Relayer",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "url": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_rai"
+      ],
+      "organization_ids": [
+        "sog_issuer_reflexer"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "rai_redemption_price_and_rate_contract_mechanics"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rai_ungovernance_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Governance Minimization Guide",
+      "publisher": "Reflexer",
+      "source_type": "protocol_docs",
+      "url": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_rai"
+      ],
+      "organization_ids": [
+        "sog_issuer_reflexer"
+      ],
+      "event_ids": [
+        "sog_ev_rai_governance_minimization"
+      ],
+      "claim_scopes": [
+        "rai_governance_minimization_stages"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rlusd_docs",
+      "source_file": "data/evidence-extra.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Ripple documentation for stablecoin products",
+      "publisher": "Ripple",
+      "source_type": "developer_docs",
+      "url": "https://docs.ripple.com/products/stablecoin",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rlusd_launch_2024",
+      "source_file": "data/evidence-extra.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Ripple USD launches globally",
+      "publisher": "Ripple",
+      "source_type": "official_launch_announcement",
+      "url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_rlusd_ripple_page",
+      "source_file": "data/evidence-extra.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Ripple USD stablecoin page",
+      "publisher": "Ripple",
+      "source_type": "issuer_page",
+      "url": "https://ripple.com/solutions/stablecoin/",
+      "published_at": null,
+      "stablecoin_ids": [],
+      "organization_ids": [],
+      "event_ids": [],
+      "claim_scopes": [],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_spot_about_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "About SPOT",
+      "publisher": "Ampleforth",
+      "source_type": "protocol_docs",
+      "url": "https://docs.ampleforth.org/learn/about-spot",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_spot"
+      ],
+      "organization_ids": [
+        "sog_issuer_ampleforth"
+      ],
+      "event_ids": [
+        "sog_ev_spot_v2_rollout"
+      ],
+      "claim_scopes": [
+        "spot_perpetual_note_collateral_and_use_cases"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_spot_mint_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "How to mint SPOT",
+      "publisher": "Ampleforth",
+      "source_type": "protocol_docs",
+      "url": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_spot"
+      ],
+      "organization_ids": [
+        "sog_issuer_ampleforth"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "spot_protocol_mint_and_redeem_interface"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_spot_site_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Ampleforth SPOT Protocol",
+      "publisher": "Ampleforth",
+      "source_type": "protocol_page",
+      "url": "https://www.ampleforth.org/",
+      "published_at": null,
+      "stablecoin_ids": [
+        "sog_st_spot"
+      ],
+      "organization_ids": [
+        "sog_issuer_ampleforth"
+      ],
+      "event_ids": [],
+      "claim_scopes": [
+        "spot_current_protocol_presence"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    },
+    {
+      "evidence_id": "sog_src_spot_v2_rollout_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "selection_tier": 1,
+      "priority_rank": 2,
+      "priority_bucket": "official_issuer_protocol_product",
+      "title": "Proposal to initiate rollout of SPOT v2",
+      "publisher": "Ampleforth Governance",
+      "source_type": "governance_proposal",
+      "url": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+      "published_at": "2024-04-09",
+      "stablecoin_ids": [
+        "sog_st_spot"
+      ],
+      "organization_ids": [
+        "sog_issuer_ampleforth"
+      ],
+      "event_ids": [
+        "sog_ev_spot_v2_rollout"
+      ],
+      "claim_scopes": [
+        "button_tranche_continuity",
+        "in_place_upgrade",
+        "no_holder_migration",
+        "signal_vote_passed",
+        "v2_proposal"
+      ],
+      "review_history_found": false,
+      "effective_review_outcome": null,
+      "eligibility_state": "eligible_unreviewed_archive_gap",
+      "candidate_eligible_under_contract": true,
+      "reactivation_signal_present": false,
+      "reactivation_signal_type": null,
+      "review_reasons": [
+        "archive_not_recorded",
+        "unreviewed_archive_gap",
+        "official_issuer_protocol_product"
+      ],
+      "review_status": "pending_manual_review",
+      "canonical_change_authorized": false
+    }
+  ],
+  "selected_reactivated_reviewed_evidence_ids": [],
+  "selection_boundary": {
+    "canonical_change_authorized": false,
+    "manual_review_required": true,
+    "exact_source_capture_required": true,
+    "replacement_requires_reviewed_claim_scope_equivalence": true,
+    "public_surface_allowed": false,
+    "batch_8_authorized": false,
+    "review_gate_required": true
+  },
+  "source_digest_sha256": "ce9d6496cc1641ded0091334be6b4026ebcda8664d9139314f2f67811588f6d3",
+  "generation_digest_sha256": "776f71fe6e29b7379d46f68634b7f13cc97c287eb53ccfa1c91955fdd6177ef3",
+  "next_work_item": "REVIEW GATE"
+}
