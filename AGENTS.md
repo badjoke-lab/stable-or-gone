@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #397 History v5.
+Current mandatory authority: PR #398 Queue v6.
 
 Current authority:
 
@@ -11,9 +11,12 @@ docs/roadmap.md
 docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/migration/post-pr395-review-gate-pr396.json
-docs/roadmap-amendments/2026-07-16-pr397-evidence-archive-review-history-v5-activation.md
-docs/quality/evidence-archive-review-history-contract-v5-pr397-spec.md
+docs/roadmap-amendments/2026-07-16-pr398-evidence-archive-maintenance-queue-v6-activation.md
+docs/quality/evidence-archive-maintenance-queue-v6-pr398-spec.md
+config/evidence-archive-maintenance-queue-v6-pr398.json
 config/evidence-archive-review-history-v5-pr397.json
+docs/migration/evidence-archive-review-history-manifest-v5-pr397.json
+docs/migration/evidence-archive-review-history-audit-v5-pr397.json
 ```
 
 ## Current workstream
@@ -26,30 +29,24 @@ Archive recorded: 425
 Archive not recorded: 134
 Deployments: 174
 Market Access Records: 8
-PR #395 Evidence and Archive Maintenance Batch 6: complete
-PR #396 Post-PR #395 Review Gate: complete
-PR #397 Evidence Archive Review-History Contract v5 Update: active; complete on merge
-PR #398 Evidence Archive Maintenance Queue v6 Refresh: approved next
+PR #397 Evidence Archive Review-History Contract v5 Update: complete
+PR #398 Evidence Archive Maintenance Queue v6 Refresh: active; complete on merge
 REVIEW GATE: mandatory after PR #398
 ```
 
-## History v5
+## Queue v6 binding
 
 ```text
-history sources: 6
-history events: 60
-reviewed Evidence identities: 58
-archive present: 45
-invalid archive removed: 1
-reviewed no-safe-change: 12
-reviewed source replacement: 0
-reviewed unresolved total: 13
-reviewed unresolved suppressed: 13
-reviewed reactivated eligible: 0
+History sources / events / identities: 6 / 60 / 58
+Reviewed unresolved suppressed: 13
+Reviewed reactivated eligible: 0
+Eligible pool: 88
+Selected: 10
+Selected reactivated: 0
 ```
 
-PR #397 appends the ten reviewed PR #395 events to immutable History v4. Nine resolve to archive-present. `sog_src_makerdao_docs_dai` resolves to reviewed no-safe-change and remains suppressed.
+Queue v6 is non-ranking and manual-review only. It excludes all thirteen reviewed suppressions, contains no reviewed-reactivated identity, and selects at most ten ordinary archive gaps using source-priority bucket then Evidence ID ordering.
 
-PR #397 may create only internal History v5 contract outputs and validation material. It may not change canonical records, checkpoints, statistics, release baselines, public surfaces, prior histories, or prior outcomes. Queue v6 is not generated in PR #397.
+PR #398 may create only the versioned Queue v6 and Queue v5 delta plus internal validation material. It may not change canonical records, checkpoints, statistics, release baselines, public surfaces, History v5, or Queue v5.
 
-The sole next work item is PR #398. After PR #398, stop at `REVIEW GATE`.
+Archive Batch 7 is not authorized. After PR #398, stop at `REVIEW GATE`.

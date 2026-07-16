@@ -1,0 +1,67 @@
+{
+  "schema_version": "6.0",
+  "config_id": "sog_evidence_archive_maintenance_queue_v6_pr398",
+  "status": "reviewed_internal_non_ranking_history_v5_queue_contract",
+  "review_pr": 398,
+  "reviewed_at": "2026-07-16",
+  "source_authority": "docs/migration/post-pr395-review-gate-pr396.json",
+  "source_contract": "config/evidence-archive-review-history-v5-pr397.json",
+  "source_manifest": "docs/migration/evidence-archive-review-history-manifest-v5-pr397.json",
+  "source_audit": "docs/migration/evidence-archive-review-history-audit-v5-pr397.json",
+  "prior_queue": "docs/migration/evidence-archive-maintenance-queue-v5-pr393.json",
+  "queue_id": "sog_evidence_archive_maintenance_queue_v6_pr398",
+  "delta_id": "sog_evidence_archive_maintenance_queue_v6_delta_pr398",
+  "selection": {
+    "mode": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+    "maximum_selected_count": 10,
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ]
+  },
+  "expected_input": {
+    "canonical_evidence_count": 559,
+    "archive_recorded_count": 425,
+    "archive_not_recorded_count": 134,
+    "history_source_count": 6,
+    "history_event_count": 60,
+    "reviewed_identity_count": 58,
+    "reviewed_suppressed_count": 13,
+    "reviewed_reactivated_eligible_count": 0,
+    "reviewed_reactivated_evidence_ids": []
+  },
+  "expected_output": {
+    "eligible_pool_count": 88,
+    "selected_count": 10,
+    "maximum_selected_count": 10,
+    "selected_reactivated_count": 0,
+    "selected_evidence_ids": [
+      "sog_src_nuon_overview_batch_b",
+      "sog_src_paxg_allocation_batch_b",
+      "sog_src_paxg_launch_batch_b",
+      "sog_src_paxg_pricing_batch_b",
+      "sog_src_paxg_redemption_batch_b",
+      "sog_src_paxos_busd_announcement",
+      "sog_src_pyusd_paxos_official",
+      "sog_src_pyusd_paxos_page",
+      "sog_src_pyusd_paypal_official",
+      "sog_src_rai_faq_batch_b"
+    ],
+    "added_vs_queue_v5": 10,
+    "removed_vs_queue_v5": 10,
+    "retained_vs_queue_v5": 0,
+    "alias_identity_excluded_count": 33,
+    "reviewed_suppressed_excluded_count": 13
+  },
+  "boundaries": {
+    "canonical_data_change_allowed": false,
+    "public_surface_change_allowed": false,
+    "historical_queue_rewrite_allowed": false,
+    "ranking_allowed": false,
+    "automatic_promotion_allowed": false
+  },
+  "next_work_item": "REVIEW GATE"
+}
