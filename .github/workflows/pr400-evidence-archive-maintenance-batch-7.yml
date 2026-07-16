@@ -1,0 +1,124 @@
+name: PR 400 Evidence Archive Maintenance Batch 7
+
+on:
+  push:
+    branches:
+      - pr400-evidence-archive-maintenance-batch-7
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr400-evidence-archive-maintenance-batch-7
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr400-evidence-archive-maintenance-batch-7'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Probe selected canonical sources
+        run: |
+          set -o pipefail
+          node scripts/probe-evidence-archive-maintenance-batch-7-pr400.mjs 2>&1 | tee -a /tmp/pr400-all.txt
+      - name: Commit probe output
+        if: github.event_name == 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/evidence-archive-maintenance-batch-7-pr400-review-queue.json
+          if git diff --cached --quiet; then
+            echo 'PR #400 probe output already committed'
+          else
+            git commit -m 'Record PR 400 Batch 7 source probes'
+            git pull --rebase origin pr400-evidence-archive-maintenance-batch-7
+            git push origin HEAD:pr400-evidence-archive-maintenance-batch-7
+          fi
+      - name: Validate probe boundary
+        run: |
+          set -o pipefail
+          { node scripts/validate-evidence-archive-maintenance-batch-7-pr400-probe.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr400-all.txt
+      - name: Validate canonical and release contracts
+        run: |
+          set -o pipefail
+          { npm run validate:data; npm run validate:compat; npm run validate:final; npm run validate:release-integrity; node scripts/validate-non-ui-release-material-current.mjs; } 2>&1 | tee -a /tmp/pr400-all.txt
+      - name: Verify probe-only boundary
+        run: |
+          set -o pipefail
+          {
+            git diff --exit-code origin/main...HEAD -- data/ src/ public/
+            git diff --exit-code origin/main...HEAD -- \
+              docs/migration/post-pr398-review-gate-pr399.json \
+              docs/migration/evidence-archive-maintenance-queue-v6-pr398.json \
+              docs/migration/evidence-archive-maintenance-queue-v6-pr398-delta.json \
+              docs/migration/current-canonical-checkpoint.json \
+              docs/migration/current-stats-history-checkpoint.json \
+              docs/migration/registry-release-integrity-baseline.json
+            test ! -e public/data/evidence-archive-maintenance-batch-7-pr400-review-queue.json
+            test ! -e src/pages/evidence-archive-maintenance-batch-7-pr400.astro
+          } 2>&1 | tee -a /tmp/pr400-all.txt
+      - name: Verify generated probe is committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code 2>&1 | tee -a /tmp/pr400-all.txt
+      - name: Astro check and build
+        run: |
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr400-all.txt
+      - name: Publish PR 400 probe status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr400-evidence-archive-maintenance-probe-status -->';
+            let probe=null;
+            try{probe=JSON.parse(fs.readFileSync('docs/migration/evidence-archive-maintenance-batch-7-pr400-review-queue.json','utf8'));}catch{}
+            let diagnostics='';
+            try{diagnostics=fs.readFileSync('/tmp/pr400-all.txt','utf8').trim();}catch{}
+            const rows=probe?.rows||[];
+            const summary=rows.map((row)=>`${row.evidence_id} | live=${row.live_probe?.status??'error'} | redirected=${row.live_probe?.redirected??'n/a'} | captures=${row.exact_cdx_probe?.capture_count??0} | final=${row.live_probe?.final_url??'n/a'}`).join('\n');
+            const body=`${marker}
+            ## PR #400 Evidence and Archive Maintenance Batch 7 Probe
+
+            - Phase: **probe only**
+            - Workflow: **${{ job.status }}**
+            - Selected: **${probe?.selected_count??'n/a'}**
+            - Live OK: **${rows.filter((row)=>row.live_probe?.ok).length}**
+            - Exact CDX with capture: **${rows.filter((row)=>(row.exact_cdx_probe?.capture_count??0)>0).length}**
+            - Canonical writes: **disabled**
+            - Head: \`${context.sha}\`
+
+            <details><summary>Probe summary</summary>
+
+            \`\`\`text
+            ${summary}
+            \`\`\`
+            </details>
+
+            <details><summary>Validation diagnostics (tail)</summary>
+
+            \`\`\`text
+            ${diagnostics.slice(-12000)}
+            \`\`\`
+            </details>
+            `;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
