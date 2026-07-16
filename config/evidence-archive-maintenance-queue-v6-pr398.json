@@ -37,7 +37,24 @@
     "eligible_pool_count": 88,
     "selected_count": 10,
     "maximum_selected_count": 10,
-    "selected_reactivated_count": 0
+    "selected_reactivated_count": 0,
+    "selected_evidence_ids": [
+      "sog_src_nuon_overview_batch_b",
+      "sog_src_paxg_allocation_batch_b",
+      "sog_src_paxg_launch_batch_b",
+      "sog_src_paxg_pricing_batch_b",
+      "sog_src_paxg_redemption_batch_b",
+      "sog_src_paxos_busd_announcement",
+      "sog_src_pyusd_paxos_official",
+      "sog_src_pyusd_paxos_page",
+      "sog_src_pyusd_paypal_official",
+      "sog_src_rai_faq_batch_b"
+    ],
+    "added_vs_queue_v5": 10,
+    "removed_vs_queue_v5": 10,
+    "retained_vs_queue_v5": 0,
+    "alias_identity_excluded_count": 33,
+    "reviewed_suppressed_excluded_count": 13
   },
   "boundaries": {
     "canonical_data_change_allowed": false,
