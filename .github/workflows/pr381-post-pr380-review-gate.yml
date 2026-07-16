@@ -31,8 +31,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Generate deterministic review gate
         run: |
-          node scripts/build-post-pr380-review-gate-pr381.mjs 2>&1 | tee /tmp/pr381-build.txt
-          node scripts/build-post-pr380-review-gate-pr381.mjs --check
+          set -o pipefail
+          { node scripts/build-post-pr380-review-gate-pr381.mjs; node scripts/build-post-pr380-review-gate-pr381.mjs --check; } 2>&1 | tee -a /tmp/pr381-all.txt
       - name: Commit generated review report
         if: github.event_name == 'push'
         run: |
@@ -48,28 +48,23 @@ jobs:
           fi
       - name: Validate review gate authority
         run: |
-          node scripts/validate-post-pr380-review-gate-pr381.mjs 2>&1 | tee /tmp/pr381-validation.txt
-          npm run validate:active-workstream
+          set -o pipefail
+          { node scripts/validate-post-pr380-review-gate-pr381.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr381-all.txt
       - name: Validate canonical and release contracts
         run: |
-          npm run validate:data
-          npm run validate:compat
-          npm run validate:final
-          npm run validate:release-integrity
-          node scripts/validate-non-ui-release-material.mjs
+          set -o pipefail
+          { npm run validate:data; npm run validate:compat; npm run validate:final; npm run validate:release-integrity; node scripts/validate-non-ui-release-material.mjs; } 2>&1 | tee -a /tmp/pr381-all.txt
       - name: Verify internal-review-only boundary
         run: |
-          git diff --exit-code origin/main...HEAD -- data/ src/ public/
-          test ! -e public/data/post-pr380-review-gate-pr381.json
-          test ! -e dist/data/post-pr380-review-gate-pr381.json
+          set -o pipefail
+          { git diff --exit-code origin/main...HEAD -- data/ src/ public/; test ! -e public/data/post-pr380-review-gate-pr381.json; test ! -e dist/data/post-pr380-review-gate-pr381.json; } 2>&1 | tee -a /tmp/pr381-all.txt
       - name: Verify generated output is committed
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code
+        run: git diff --exit-code 2>&1 | tee -a /tmp/pr381-all.txt
       - name: Astro check and build
         run: |
-          npm run check
-          npm run build
-          npm run verify:public
+          set -o pipefail
+          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr381-all.txt
       - name: Publish PR 381 status
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -80,9 +75,7 @@ jobs:
             let report=null;
             try{report=JSON.parse(fs.readFileSync('docs/migration/post-pr380-review-gate-pr381.json','utf8'));}catch{}
             let diagnostics='';
-            for(const file of ['/tmp/pr381-build.txt','/tmp/pr381-validation.txt']){
-              try{diagnostics+=`${fs.readFileSync(file,'utf8').trim()}\n`;}catch{}
-            }
+            try{diagnostics=fs.readFileSync('/tmp/pr381-all.txt','utf8').trim();}catch{}
             const sequence=report?.approved_next_sequence?.map((row)=>`PR #${row.pr} ${row.work_item}`).join(' → ')||'n/a';
             const body=`${marker}
             ## PR #381 Post-PR #380 Review Gate
@@ -96,10 +89,10 @@ jobs:
             - Review gate after sequence: **${report?.review_gate_after_sequence??'n/a'}**
             - Head: \`${context.sha}\`
 
-            <details><summary>Validation diagnostics</summary>
+            <details><summary>Validation diagnostics (tail)</summary>
 
             \`\`\`text
-            ${diagnostics.trim().slice(0,12000)}
+            ${diagnostics.slice(-16000)}
             \`\`\`
             </details>
             `;
