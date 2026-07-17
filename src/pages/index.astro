@@ -63,7 +63,7 @@ const issueWatch = [...knownUnknowns]
   .sort((left, right) => String(right.last_checked_at ?? '').localeCompare(String(left.last_checked_at ?? '')) || String(left.id).localeCompare(String(right.id)))
   .slice(0, 5)
   .map((item) => {
-    const coin = stablecoinById.get(item.stablecoin_id);
+    const coin = item.stablecoin_id ? stablecoinById.get(item.stablecoin_id) : undefined;
     return {
       ...item,
       coinName: coin?.name ?? 'Unknown stablecoin',
