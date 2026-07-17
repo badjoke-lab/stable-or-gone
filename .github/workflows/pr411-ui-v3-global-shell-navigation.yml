@@ -1,0 +1,175 @@
+name: PR 411 UI v3 Global Shell Navigation
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr411-ui-v3-global-shell-navigation-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr411-ui-v3-global-shell-navigation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate PR 411 shell authority and implementation
+        run: node scripts/validate-ui-v3-global-shell-pr411.mjs && npm run validate:active-workstream
+      - name: Verify bounded implementation files
+        run: |
+          test -z "$(git diff --name-only origin/main...HEAD -- src/pages/ data/ public/ scripts/monitoring/)"
+          test "$(git diff --name-only origin/main...HEAD -- src/ | sort)" = $'src/layouts/BaseLayout.astro\nsrc/styles/shell.css\nsrc/styles/terminal-typography-contract.css\nsrc/styles/text-readability-v3.css'
+          git diff --exit-code origin/main...HEAD -- \
+            config/site-architecture.mjs \
+            docs/migration/ui-v3-visual-approval-register.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate final registry contract
+        run: npm run validate:final
+      - name: Validate site architecture
+        run: npm run prepare:site-architecture
+      - name: Validate responsive accessibility
+        run: npm run prepare:responsive-accessibility-contract
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+      - name: Validate reproducible build
+        run: npm run validate:reproducible-build
+      - name: Astro check
+        run: npm run check
+      - name: Build site
+        run: npm run build
+      - name: Verify public layer
+        run: npm run verify:public
+      - name: Verify built shell markers
+        run: |
+          test -f dist/index.html
+          test -f dist/stablecoins/index.html
+          grep -q 'data-shell="evidence-registry-pr411"' dist/index.html
+          grep -q 'Search stablecoins, issuers, events' dist/index.html
+          grep -q 'Registry' dist/index.html
+          grep -q 'Learn' dist/index.html
+          grep -q 'Project' dist/index.html
+          grep -q 'aria-current="page"' dist/stablecoins/index.html
+
+  visual-audit:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr411-ui-v3-global-shell-navigation'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build static site
+        run: npm run build
+      - name: Start local static server
+        run: |
+          python3 -m http.server 4321 --bind 127.0.0.1 --directory dist > /tmp/pr411-server.log 2>&1 &
+          echo $! > /tmp/pr411-server.pid
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4321/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/pr411-server.log
+          exit 1
+      - name: Capture desktop and mobile screenshots
+        env:
+          SOG_SCREENSHOT_BASE_URL: http://127.0.0.1:4321
+          SOG_SCREENSHOT_MODE: representative
+        run: npm run screenshot:all
+      - name: Run representative visual audit
+        run: npm run audit:visual-representatives
+      - name: Build shell contact sheet
+        run: node scripts/build-shell-contact-sheet-pr411.mjs
+      - name: Verify visual audit cannot be skipped
+        run: |
+          test -f artifacts/screenshots/manifest.desktop.json
+          test -f artifacts/screenshots/manifest.mobile.json
+          test -f artifacts/screenshots/representative-visual-audit.json
+          test -f artifacts/screenshots/shell-contact-sheet-pr411.html
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const audit=JSON.parse(fs.readFileSync('artifacts/screenshots/representative-visual-audit.json','utf8'));
+          const contact=JSON.parse(fs.readFileSync('artifacts/screenshots/shell-contact-sheet-pr411.json','utf8'));
+          if(audit.ok!==true)throw new Error('representative visual audit failed');
+          if(contact.owner_approval!==false)throw new Error('automated contact sheet may not record owner approval');
+          NODE
+      - name: Upload mandatory shell visual artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr411-global-shell-visual-review-${{ github.run_id }}
+          path: |
+            artifacts/screenshots/
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Stop local server
+        if: always()
+        run: |
+          if test -f /tmp/pr411-server.pid; then kill "$(cat /tmp/pr411-server.pid)" || true; fi
+
+  report:
+    if: always()
+    needs: [validate, visual-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish PR 411 status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr411-global-shell-status -->';
+            const issueNumber=context.issue?.number || 411;
+            const validate='${{ needs.validate.result }}';
+            const visual='${{ needs.visual-audit.result }}';
+            const overall=validate==='success' && visual==='success' ? 'success' : 'failure';
+            const body=`${marker}
+            ## PR #411 Global Shell and Navigation
+
+            - Overall: **${overall}**
+            - Contract and build validation: **${validate}**
+            - Mandatory desktop/mobile visual audit: **${visual}**
+            - Visual review run ID: **${context.runId}**
+            - Shell marker: **\`evidence-registry-pr411\`**
+            - Routes changed: **0**
+            - Canonical changes: **0**
+            - Owner approvals changed: **0**
+            - Automated screenshots count as approval: **false**
+            - Next authority: **REVIEW GATE**
+            - Head: \`${context.sha}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,body});

@@ -17,7 +17,16 @@ const pages = {
 const updates = read('src/pages/updates/index.astro');
 const updateFeedStyles = read('src/styles/update-feed.css');
 
-for (const marker of ['reference-utility-v3.css', "const isReferencePage = ['/models/', '/glossary/', '/updates/']", "const isLongformPage = ['/methodology/', '/about/']", "const isUtilityPage = ['/contact/', '/support/']", 'data-longform-article', 'data-longform-toc', 'data-longform-toc-list', 'buildContents']) check(layout.includes(marker), `BaseLayout missing page-family contract: ${marker}`);
+for (const marker of [
+  'reference-utility-v3.css',
+  "const isReferencePage = ['/models/', '/glossary/', '/updates/', '/maintenance/']",
+  "const isLongformPage = ['/methodology/', '/about/']",
+  "const isUtilityPage = ['/contact/', '/support/']",
+  'data-longform-article',
+  'data-longform-toc',
+  'data-longform-toc-list',
+  'buildContents'
+]) check(layout.includes(marker), `BaseLayout missing page-family contract: ${marker}`);
 for (const marker of ['data-editorial-page-header', 'editorial-page-masthead', 'editorial-page-overline', 'editorial-page-title', 'editorial-page-ledger']) check(header.includes(marker), `EditorialPageHeader missing: ${marker}`);
 for (const marker of ['.reference-entry-grid', '.reference-table', '.longform-layout', '.longform-toc', '.utility-action-grid', '.wallet-grid', '@media(max-width:820px)', '@media(forced-colors:active)']) check(styles.includes(marker), `Reference/utility CSS missing: ${marker}`);
 check(!styles.includes('radial-gradient') && !styles.includes('border-radius:24px') && !styles.includes('box-shadow:0 16px'), 'Reference/utility CSS contains prohibited SaaS decoration');
@@ -50,14 +59,16 @@ check(pages.contact.includes('data-ui-v3-utility="contact-corrections"') && page
 check(pages.support.includes('data-ui-v3-utility="support"') && pages.support.includes('wallets.length') && pages.support.includes('data-copy-address') && pages.support.includes('navigator.clipboard') && pages.support.includes('fallbackCopy'), 'Support wallet or copy contract missing');
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   ok: failures.length === 0,
+  shell: 'evidence-registry-pr411',
   reference_pages: 2,
   update_feed_pages: 1,
+  maintenance_reference_routes: 1,
   longform_pages: 2,
   utility_pages: 2,
   canonical_record_changes: 0,
-  route_changes: 1,
+  route_changes: 0,
   failures
 };
 console.log(JSON.stringify(result, null, 2));

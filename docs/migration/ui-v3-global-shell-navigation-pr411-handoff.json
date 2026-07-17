@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_ui_v3_global_shell_navigation_pr411_2026_07_17",
+  "status": "implementation_complete",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 411,
+  "source_review_pr": 410,
+  "phase": "PR B",
+  "shell_marker": "evidence-registry-pr411",
+  "implemented_surfaces": [
+    "shared_header",
+    "brand_presentation",
+    "registry_search",
+    "grouped_navigation",
+    "utility_navigation",
+    "mobile_navigation",
+    "shared_interaction_states",
+    "shared_page_width",
+    "shared_footer",
+    "shell_visual_artifacts"
+  ],
+  "accessibility": {
+    "body_min_px": 16,
+    "table_min_px": 14,
+    "control_min_px": 14,
+    "touch_target_min_px": 44,
+    "skip_link": true,
+    "aria_current": true,
+    "aria_expanded_sync": true,
+    "escape_focus_return": true,
+    "outside_click_close": true,
+    "reduced_motion": true,
+    "forced_colors": true
+  },
+  "visual_artifacts": {
+    "desktop_capture": "required_ci_artifact",
+    "mobile_capture": "required_ci_artifact",
+    "representative_audit": "required_ci_artifact",
+    "contact_sheet": "artifacts/screenshots/shell-contact-sheet-pr411.html",
+    "skipped_visual_audit_allowed": false,
+    "automated_rendering_is_owner_approval": false
+  },
+  "owner_approval_state": {
+    "changed": false,
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "ui_completion": false
+  },
+  "canonical_counts": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "changes": {
+    "routes": 0,
+    "canonical_data": 0,
+    "public_machine_readable_data": 0,
+    "page_templates_redesigned": 0
+  },
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "PR #410 authorizes only the shared-shell phase. Home and stablecoin register work in PR C requires a separate reviewed decision after shell artifacts are reviewed."
+  },
+  "boundaries": {
+    "home_redesigned": false,
+    "stablecoin_register_redesigned": false,
+    "stablecoin_dossier_redesigned": false,
+    "events_redesigned": false,
+    "organizations_redesigned": false,
+    "guides_redesigned": false,
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "owner_approval_changed": false,
+    "ui_completion_declared": false,
+    "pr_c_pre_authorized": false
+  }
+}
