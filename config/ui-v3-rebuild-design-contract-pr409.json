@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_rebuild_design_contract_pr409_2026_07_17",
+  "status": "active_specification",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 409,
+  "phase": "PR A",
+  "direction": {
+    "name": "modern_evidence_registry",
+    "replaces": "editorial_newspaper_first",
+    "primary_purpose": "help users understand current stablecoin state, material lifecycle changes, redemption and backing structure, controlling organizations, evidence quality, and unresolved questions",
+    "principles": [
+      "operational meaning before normalized schema order",
+      "evidence and uncertainty remain visible",
+      "dense data is progressively disclosed rather than dumped",
+      "filters and states are explicit and reversible",
+      "visual hierarchy reflects SOG-specific concepts",
+      "desktop and mobile are first-class acceptance targets",
+      "automated rendering is not visual approval"
+    ]
+  },
+  "tokens": {
+    "typography": {
+      "body_min_px": 16,
+      "body_preferred_px": 17,
+      "table_body_min_px": 14,
+      "metadata_min_px": 13,
+      "control_min_px": 14,
+      "heading_scale_px": [48, 36, 28, 22, 18],
+      "line_height_body_min": 1.55,
+      "line_height_dense_min": 1.35,
+      "maximum_reading_width_ch": 74,
+      "prohibited_default_sizes_px": [9, 10, 11]
+    },
+    "spacing": {
+      "base_unit_px": 4,
+      "scale_px": [4, 8, 12, 16, 24, 32, 48, 64],
+      "section_gap_min_px": 32,
+      "card_padding_min_px": 16,
+      "control_gap_min_px": 8,
+      "touch_target_min_px": 44
+    },
+    "density": {
+      "default": "comfortable_registry",
+      "table_row_min_height_px": 44,
+      "compact_mode": "explicit_user_choice_only",
+      "unbounded_primary_index_dump": false,
+      "primary_index_max_initial_rows": 50,
+      "pagination_or_bounded_rendering_required_above_rows": 100
+    },
+    "surfaces": {
+      "required_levels": ["page", "section", "card", "interactive", "emphasis"],
+      "border_only_flat_system_prohibited": true,
+      "status_surfaces_required": true,
+      "selected_state_surface_required": true,
+      "focus_surface_required": true,
+      "empty_state_surface_required": true
+    },
+    "navigation": {
+      "product_search_prominence": "primary",
+      "active_route_state_required": true,
+      "mobile_menu_state_required": true,
+      "skip_link_required": true,
+      "breadcrumb_or_context_link_required_on_detail_pages": true,
+      "giant_decorative_masthead_prohibited": true
+    },
+    "interaction": {
+      "filter_option_visibility_required": true,
+      "selected_filter_state_required": true,
+      "active_filter_chips_required": true,
+      "result_count_required": true,
+      "clear_action_required": true,
+      "empty_state_required": true,
+      "loading_state_required_for_async_surfaces": true,
+      "keyboard_operation_required": true,
+      "focus_visible_required": true
+    },
+    "responsive": {
+      "required_widths_px": [320, 390, 768, 1280, 1440],
+      "horizontal_page_overflow_prohibited": true,
+      "table_strategy_must_be_explicit": true,
+      "mobile_card_or_scroll_preserve_required": true,
+      "long_label_test_required": true,
+      "long_identifier_test_required": true
+    },
+    "accessibility": {
+      "wcag_target": "2.2_AA",
+      "contrast_required": true,
+      "reduced_motion_required": true,
+      "forced_colors_review_required": true,
+      "semantic_heading_order_required": true,
+      "form_labels_required": true,
+      "aria_state_sync_required": true,
+      "keyboard_focus_return_required_for_disclosures": true
+    }
+  },
+  "sog_visual_components": [
+    "lifecycle_status_summary",
+    "redemption_state",
+    "backing_and_reserve_structure",
+    "issuer_and_control_relationships",
+    "material_event_timeline",
+    "deployment_network_summary",
+    "evidence_quality_summary",
+    "unresolved_questions",
+    "change_severity",
+    "organization_asset_relationships"
+  ],
+  "template_priority": {
+    "home": ["search", "registry_state", "recent_material_changes", "issue_watch", "exploration_paths"],
+    "stablecoin_register": ["search", "filters", "active_chips", "result_count", "sort", "clear", "cards_or_table", "compare_state"],
+    "stablecoin_dossier": ["current_status", "redemption", "backing_reserves", "issuer_control", "material_events", "deployments", "unresolved_questions", "evidence", "technical_fields"],
+    "events": ["severity", "type", "lifecycle_context", "filters", "bounded_rendering", "responsive_layout"],
+    "organizations": ["organization_role", "connected_assets", "relationship_type", "filters", "bounded_rendering"],
+    "guides": ["reading_width", "table_of_contents", "callouts", "examples", "section_navigation", "source_presentation"]
+  },
+  "visual_review_matrix": [
+    {"id":"home-desktop","template":"home","route":"/","viewport":{"width":1440,"height":1000},"state":"default","owner_approval_required":true},
+    {"id":"home-mobile","template":"home","route":"/","viewport":{"width":390,"height":844},"state":"default","owner_approval_required":true},
+    {"id":"register-desktop-default","template":"stablecoin_register","route":"/stablecoins/","viewport":{"width":1440,"height":1000},"state":"default","owner_approval_required":true},
+    {"id":"register-desktop-filtered","template":"stablecoin_register","route":"/stablecoins/","viewport":{"width":1440,"height":1000},"state":"filters_selected","owner_approval_required":true},
+    {"id":"register-mobile-filtered","template":"stablecoin_register","route":"/stablecoins/","viewport":{"width":390,"height":844},"state":"filters_selected","owner_approval_required":true},
+    {"id":"register-empty","template":"stablecoin_register","route":"/stablecoins/","viewport":{"width":1280,"height":900},"state":"no_results","owner_approval_required":false},
+    {"id":"dossier-desktop","template":"stablecoin_dossier","route":"/stablecoin/usdc/","viewport":{"width":1440,"height":1000},"state":"representative_deep_record","owner_approval_required":true},
+    {"id":"dossier-mobile","template":"stablecoin_dossier","route":"/stablecoin/usdc/","viewport":{"width":390,"height":844},"state":"representative_deep_record","owner_approval_required":true},
+    {"id":"events-desktop","template":"events","route":"/events/","viewport":{"width":1440,"height":1000},"state":"default","owner_approval_required":true},
+    {"id":"events-mobile","template":"events","route":"/events/","viewport":{"width":390,"height":844},"state":"default","owner_approval_required":true},
+    {"id":"organizations-desktop","template":"organizations","route":"/issuers/","viewport":{"width":1440,"height":1000},"state":"default","owner_approval_required":true},
+    {"id":"organizations-mobile","template":"organizations","route":"/issuers/","viewport":{"width":390,"height":844},"state":"default","owner_approval_required":true},
+    {"id":"guide-desktop","template":"guides","route":"/guides/eu-stablecoin-access-after-mica/","viewport":{"width":1280,"height":1000},"state":"longform_with_table","owner_approval_required":true},
+    {"id":"guide-mobile","template":"guides","route":"/guides/eu-stablecoin-access-after-mica/","viewport":{"width":390,"height":844},"state":"longform_with_table","owner_approval_required":true}
+  ],
+  "visual_failure_gates": {
+    "screenshot_artifact_required": true,
+    "desktop_and_mobile_required": true,
+    "contact_sheet_required": true,
+    "visual_audit_may_be_skipped": false,
+    "skipped_visual_audit_result": "hard_failure",
+    "automated_rendering_counts_as_approval": false,
+    "manual_owner_approval_required": true,
+    "approval_record_required": true,
+    "approval_record_statuses": ["pending", "accepted", "rejected"],
+    "default_approval_status": "pending",
+    "ui_completion_requires_all_required_approvals": true
+  },
+  "phase_sequence": [
+    {"phase":"PR A","name":"design contract and failure gates","production_ui_change":false,"status":"active"},
+    {"phase":"PR B","name":"global shell and navigation","production_ui_change":true,"status":"blocked_review_gate"},
+    {"phase":"PR C","name":"home and stablecoin register","production_ui_change":true,"status":"blocked_review_gate"},
+    {"phase":"PR D","name":"stablecoin dossier","production_ui_change":true,"status":"blocked_review_gate"},
+    {"phase":"PR E","name":"events and organizations","production_ui_change":true,"status":"blocked_review_gate"},
+    {"phase":"PR F","name":"guides and secondary pages","production_ui_change":true,"status":"blocked_review_gate"},
+    {"phase":"PR G","name":"full visual closure","production_ui_change":false,"status":"blocked_review_gate"}
+  ],
+  "boundaries": {
+    "production_ui_changed": false,
+    "route_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "ui_completion_declared": false,
+    "automatic_visual_approval": false,
+    "next_phase_pre_authorized": false,
+    "review_gate_after_pr409": true
+  }
+}

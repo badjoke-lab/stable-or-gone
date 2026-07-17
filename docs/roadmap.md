@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #408 active review gate
+Status: canonical execution schedule — PR #409 active
 
 ## Current position
 
@@ -16,9 +16,10 @@ Deployments: 174
 Market Access Records: 8
 Archive recorded: 430
 Archive not recorded: 129
-PR #407 Visa Stablecoin Platform article and OUSD/VSP private monitoring: complete
-PR #408 Post-PR #407 Review Gate: active; complete on merge
-PR #409 UI v3 Rebuild A — design contract and failure gates: approved next
+Issue #281 UI v3 rebuild: reopened
+PR #408 Post-PR #407 Review Gate: complete
+PR #409 UI v3 Rebuild A — design contract and failure gates: active; complete on merge
+PR B global shell and navigation: blocked
 REVIEW GATE: mandatory after PR #409
 ```
 
@@ -32,36 +33,56 @@ docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/quality/post-pr407-review-gate-pr408-spec.md
 docs/migration/post-pr407-review-gate-pr408.json
-docs/migration/visa-open-usd-article-monitoring-pr407-handoff.json
+docs/quality/ui-v3-rebuild-design-contract-pr409.md
+config/ui-v3-rebuild-design-contract-pr409.json
 ```
 
-## PR #407 reviewed outcome
+## Why UI v3 is reopened
+
+The current implementation is technically valid but failed product-design review. The prior direction overemphasized an editorial masthead, used undersized typography, flattened distinct concepts into border-only panels, exposed long data dumps as primary browsing modes, and allowed skipped visual review to coexist with green workflows.
+
+UI v3 is not complete.
+
+## PR #409 design direction
 
 ```text
-Article route: /updates/visa-stablecoin-platform-open-usd/
-Language: Japanese
-Update Feed entries added: 1
-Private monitoring subjects: 2
-Pending initial baselines: 2
-Bounded news queries added: 2
-Canonical changes: 0
-Public monitoring output: false
-Automatic promotion: false
+Direction: modern evidence registry
+Body minimum: 16px
+Dense table minimum: 14px
+Touch target minimum: 44px
+Primary index initial rows: at most 50
+Pagination/bounded rendering required above: 100 rows
+Required review widths: 320 / 390 / 768 / 1280 / 1440
+Representative capture states: 14
+Required owner-approved templates: 6
+Skipped visual audit: hard failure
+Automated rendering equals approval: false
 ```
 
-The article is an editorial analysis inside the existing Update Feed route family. Open USD and Visa Stablecoin Platform remain private, pending, noncanonical monitoring subjects.
+## Required template priorities
 
-## PR #408 decision
+- home: search, registry state, recent material changes, issue watch, exploration paths;
+- stablecoin register: filters, selected states, chips, result count, sort, clear action, responsive browse and compare states;
+- stablecoin dossier: status, redemption, backing/reserves, issuer/control, events, deployments, unresolved questions, evidence, then technical fields;
+- events and organizations: bounded rendering, grouping, useful filters, clear severity/type or relationship distinctions;
+- guides: reading width, table of contents, callouts, examples, section navigation, and source presentation.
 
-PR #408 authorizes exactly the first implementation step of the reopened UI v3 workstream in Issue #281:
+## Visual acceptance boundary
+
+Screenshot artifacts, desktop and mobile captures, a contact sheet, and explicit owner approval are all mandatory. A skipped audit, missing capture, or pending/rejected required approval blocks UI completion.
+
+## Phase sequence
 
 ```text
-PR #409 — UI v3 Rebuild A: design contract and failure gates
-REVIEW GATE
+PR A — design contract and failure gates: active
+PR B — global shell and navigation: blocked
+PR C — home and stablecoin register: blocked
+PR D — stablecoin dossier: blocked
+PR E — events and organizations: blocked
+PR F — guides and secondary pages: blocked
+PR G — full visual closure: blocked
 ```
 
-PR #409 is specification-and-validation only. It may define the evidence-registry design direction, design tokens, representative desktop/mobile review matrix, mandatory screenshot artifacts, hard failure for skipped visual audits, and explicit owner-approval gates.
-
-It may not change the production shell, templates, CSS, components, routes, canonical data, public machine-readable outputs, or begin PR B.
+PR #409 changes no production UI, routes, canonical data, or public machine-readable outputs.
 
 After PR #409, stop at `REVIEW GATE`.
