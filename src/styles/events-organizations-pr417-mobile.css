@@ -79,7 +79,9 @@
   .event-index-page[data-register-version="pr417-events"] .mobile-card-details > summary,
   .organization-index-page[data-register-version="pr417-organizations"] .mobile-card-details > summary,
   .organization-index-page[data-register-version="pr417-organizations"] .organization-assets-summary > summary {
-    min-height: 36px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
     padding: 0.35rem 0;
     font-size: 0.7rem;
   }
