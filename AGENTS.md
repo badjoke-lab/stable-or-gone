@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #412 Post-PR #411 Review Gate.
+Current mandatory authority: PR #413 UI v3 Rebuild C — home and stablecoin register.
 
 Current authority:
 
@@ -12,11 +12,10 @@ docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/quality/ui-v3-rebuild-design-contract-pr409.md
 config/ui-v3-rebuild-design-contract-pr409.json
-docs/quality/ui-v3-global-shell-navigation-pr411.md
-config/ui-v3-global-shell-pr411.json
-docs/migration/ui-v3-global-shell-navigation-pr411-handoff.json
 docs/quality/post-pr411-review-gate-pr412-spec.md
 docs/migration/post-pr411-review-gate-pr412.json
+docs/quality/ui-v3-home-register-pr413.md
+config/ui-v3-home-register-pr413.json
 ```
 
 ## Current workstream
@@ -30,15 +29,14 @@ Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
 Issue #281 UI v3 rebuild: reopened
-PR #411 UI v3 Rebuild B — global shell and navigation: complete
-PR #412 Post-PR #411 Review Gate: active; complete on merge
-PR #413 UI v3 Rebuild C — home and stablecoin register: approved next
+PR #412 Post-PR #411 Review Gate: complete
+PR #413 UI v3 Rebuild C — home and stablecoin register: active; complete on merge
 PR D stablecoin dossier: blocked
 REVIEW GATE: mandatory after PR #413
 ```
 
-PR #412 confirms the shared evidence-registry shell passed contract/build validation and the mandatory desktop/mobile visual audit. Automated screenshots remain non-approving: all owner-approval states stay pending.
+PR #413 is bounded to `/` and `/stablecoins/`. The home page may provide a compact product entrypoint, canonical cross-registry search, registry totals, lifecycle state, separate material-event and publication histories, known-unknown issue watch, exploration routes, recently reviewed records, and reviewed guides.
 
-PR #412 authorizes exactly PR #413. PR #413 may redesign only `/` and `/stablecoins/`, including product-entry search, registry state, recent changes, issue watch, exploration paths, visible filters, active chips, result/sort state, compare state, responsive table/cards, and bounded rendering.
+The stablecoin register may expose visible filters and selected states, active chips, clear-all, result range/count, sorting, URL state, bounded pagination, responsive table/cards, comparison state, and explicit no-result behavior. Page size remains 20, below the authorized maximum of 50, and the 112-record register remains bounded.
 
-PR #413 may not redesign dossiers, events, organizations, guides, or secondary pages. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. It must stop at `REVIEW GATE`; every unrelated workstream remains unapproved.
+PR #413 may not redesign dossiers, events, organizations, guides, or secondary pages. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. Automated captures do not constitute owner approval. PR #413 must stop at `REVIEW GATE`; every unrelated workstream remains unapproved.
