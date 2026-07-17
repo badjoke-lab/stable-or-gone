@@ -149,10 +149,13 @@ jobs:
           if(manifest.owner_approval!==false || contact.owner_approval!==false)throw new Error('automated artifact may not record owner approval');
           NODE
       - name: Upload mandatory PR 413 visual artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pr413-home-register-visual-review-${{ github.run_id }}
-          path: artifacts/pr413-home-register/
+          path: |
+            artifacts/pr413-home-register/
+            /tmp/pr413-server.log
           if-no-files-found: error
           retention-days: 30
       - name: Stop local server
