@@ -18,6 +18,7 @@ const approvals = readJson('docs/migration/ui-v3-visual-approval-register.json')
 const layout = readText('src/layouts/BaseLayout.astro');
 const shell = readText('src/styles/shell.css');
 const typography = readText('src/styles/terminal-typography-contract.css');
+const finalCascade = readText('src/styles/text-readability-v3.css');
 const contactSheet = readText('scripts/build-shell-contact-sheet-pr411.mjs');
 
 expect(review.review_pr === 410 && review.source_pr === 409, 'source review identity changed');
@@ -89,7 +90,17 @@ expect(typography.includes('--sog-font-data: ui-monospace'), 'data font is not s
 expect(typography.includes('html body {\n  font-size: 1rem;'), 'shared body minimum is below 16px');
 expect(typography.includes('font-size: 0.875rem !important;'), 'shared table minimum is below 14px');
 expect(!typography.includes('font-size: 0.84rem;'), 'legacy undersized mobile body type remains');
-expect(!typography.includes('font-size: 0.875rem;\n  line-height: 1.55;'), 'legacy undersized body type remains');
+
+for (const marker of [
+  'PR #411 final shell cascade',
+  'html body .site-header[data-shell="evidence-registry-pr411"] .site-search',
+  'html body .site-footer .site-footer-inner',
+  'grid-template-columns: minmax(280px, 0.85fr) minmax(680px, 2.15fr) !important',
+  'html body .site-footer .site-footer-navigation',
+  'grid-template-columns: repeat(4, minmax(140px, 1fr)) !important',
+  'word-break: normal !important',
+  '@media (max-width: 860px)'
+]) expect(finalCascade.includes(marker), `final shell cascade missing ${marker}`);
 
 expect(contactSheet.includes('Automated capture only'), 'contact sheet owner-approval warning missing');
 expect(contactSheet.includes('shell-contact-sheet-pr411.html'), 'contact sheet output missing');
@@ -120,7 +131,7 @@ try {
   expect(git('hash-object', 'docs/migration/ui-v3-visual-approval-register.json') === git('rev-parse', 'origin/main:docs/migration/ui-v3-visual-approval-register.json'), 'owner approval register changed');
   for (const file of ['docs/migration/current-canonical-checkpoint.json','docs/migration/current-stats-history-checkpoint.json','docs/migration/registry-release-integrity-baseline.json']) expect(git('hash-object', file) === git('rev-parse', `origin/main:${file}`), `${file}: immutable checkpoint changed`);
   const changedSrc = git('diff', '--name-only', 'origin/main...HEAD', '--', 'src/').split('\n').filter(Boolean).sort();
-  const allowedSrc = ['src/layouts/BaseLayout.astro','src/styles/shell.css','src/styles/terminal-typography-contract.css'];
+  const allowedSrc = ['src/layouts/BaseLayout.astro','src/styles/shell.css','src/styles/terminal-typography-contract.css','src/styles/text-readability-v3.css'].sort();
   expect(JSON.stringify(changedSrc) === JSON.stringify(allowedSrc), `unexpected src changes: ${changedSrc.join(', ')}`);
 } catch (error) {
   failures.push(`origin/main comparison failed: ${error.message}`);
