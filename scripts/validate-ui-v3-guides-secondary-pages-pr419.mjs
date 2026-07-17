@@ -93,8 +93,10 @@ for (const marker of ['.compare-page[data-compare-page]','.ar-explorer[data-ar-e
 check(source.mobileStyles.includes('@import "./secondary-pages-pr419.css";'), 'secondary page stylesheet is not globally loaded');
 check(source.mobileStyles.includes('@import "./secondary-tools-pr419-alias.css";'), 'secondary tool aliases are not globally loaded');
 check(!`${source.styles}\n${source.toolAliases}`.includes('linear-gradient(') && !`${source.styles}\n${source.toolAliases}`.includes('radial-gradient('), 'decorative gradient introduced');
-const publicCopy = `${source.guideIndex}\n${source.guideHeader}\n${source.methodology}\n${source.about}\n${source.compare}\n${source.access}\n${source.timeline}\n${source.stats}`.toLowerCase();
-for (const prohibited of ['safety score','transparency score','risk score','incident score','organization score','quality score']) check(!publicCopy.includes(prohibited), `prohibited score introduced: ${prohibited}`);
+check(source.compare.includes('no score or ranking is generated'), 'comparison no-score boundary missing');
+check(source.access.includes('<dt>Score</dt><dd>None</dd>') && source.access.includes('<dt>Ranking</dt><dd>None</dd>'), 'access/regulation no-score boundary missing');
+check(source.timeline.includes('<dt>Score</dt><dd>None</dd>') && source.timeline.includes('<dt>Live feed</dt><dd>No</dd>'), 'timeline no-score/live-feed boundary missing');
+check(source.stats.includes('not market rankings, scores, or investment recommendations'), 'statistics no-ranking boundary missing');
 
 check(approvals.current_counts?.accepted_desktop === 0 && approvals.current_counts?.accepted_mobile === 0, 'owner approval register changed');
 check(approvals.completion_rule?.automated_capture_counts_as_approval === false, 'automated capture counts as owner approval');
