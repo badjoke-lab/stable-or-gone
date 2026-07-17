@@ -1,0 +1,76 @@
+name: PR 420 Post PR 419 Review Gate
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr420-post-pr419-review-gate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr420-post-pr419-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate PR 420 review authority
+        run: node scripts/validate-post-pr419-review-gate-pr420.mjs && npm run validate:active-workstream
+      - name: Verify governance-only boundary
+        run: |
+          test -z "$(git diff --name-only origin/main...HEAD -- src/ public/ data/ config/ scripts/monitoring/)"
+          git diff --exit-code origin/main...HEAD -- \
+            docs/migration/ui-v3-visual-approval-register.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+      - name: Validate canonical data and Evidence
+        run: npm run validate:data && npm run validate:evidence-relations-v2
+      - name: Validate compatibility and final state
+        run: npm run validate:compat && npm run validate:final
+      - name: Validate release and reproducible build
+        run: npm run validate:release-integrity && npm run validate:reproducible-build
+      - name: Astro check and build
+        run: npm run check && npm run build && npm run verify:public
+      - name: Publish PR 420 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr420-post-pr419-review-status -->';
+            const body=`${marker}
+            ## PR #420 Post-PR #419 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Source implementation merge: **\`5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7\`**
+            - Visual review run: **29599351044**
+            - Required captures: **16 / 16**
+            - Visual failures: **0**
+            - Horizontal-overflow failures: **0**
+            - Owner approvals accepted: **0**
+            - Routes changed: **0**
+            - Canonical changes: **0**
+            - Public projection changes: **0**
+            - Approved next PR: **#421**
+            - Approved scope: **full visual closure and owner-review preparation**
+            - Exit after PR #421: **AWAITING OWNER REVIEW**
+            - Head: \`${context.sha}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
