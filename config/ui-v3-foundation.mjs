@@ -7,48 +7,53 @@ export const uiV3BrandAssets = Object.freeze({
 
 export const uiV3Tokens = Object.freeze({
   colors: Object.freeze({
-    paper: '#F4F1E9',
-    paper_subtle: '#ECE7DC',
-    paper_emphasis: '#E2DCCF',
-    ink: '#1B1A18',
-    ink_muted: '#5C5851',
-    ink_quiet: '#7A746B',
-    rule: '#C4BDB1',
-    rule_strong: '#5D5850',
-    accent: '#7F242A',
-    accent_strong: '#641A1F',
-    focus: '#1D5F85',
+    background: '#071018',
+    background_deep: '#040A0F',
+    background_subtle: '#0A151F',
+    surface: '#0D1A25',
+    surface_raised: '#122534',
+    surface_emphasis: '#183346',
+    surface_selected: '#16374A',
+    line: '#315164',
+    line_subtle: '#1D3948',
+    text: '#EDF6F8',
+    text_muted: '#A6BAC3',
+    text_faint: '#7F98A4',
+    link: '#7AD9FF',
+    link_hover: '#B9ECFF',
+    focus: '#FFD276',
     logo_teal: '#153F4A',
     logo_coral: '#EF6A55',
-    positive: '#2F6B4F',
-    warning: '#93651B',
-    critical: '#8B2B2B',
-    unknown: '#655C79',
-    inactive: '#6B6862'
+    positive: '#7EE0B1',
+    warning: '#F0CB72',
+    critical: '#FF9696',
+    unknown: '#C8B5EF',
+    inactive: '#B4C1C7'
   }),
-  content_width_px: Object.freeze({ reading: 740, dossier: 1220, registry: 1360, wide: 1440 }),
-  radius_px: Object.freeze({ compact: 2, control: 4, pill: 999 }),
-  spacing_px: Object.freeze([4, 8, 12, 16, 24, 32, 48, 64, 88]),
+  content_width_px: Object.freeze({ reading: 740, dossier: 1220, registry: 1280, shell: 1480 }),
+  radius_px: Object.freeze({ compact: 8, panel: 14, prominent: 18, pill: 999 }),
+  spacing_px: Object.freeze([4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80]),
   control_min_height_px: 44,
+  body_min_px: 16,
+  table_min_px: 14,
   focus_ring_px: 3,
   typography: Object.freeze({
-    display: 'Georgia, Cambria, Times New Roman, serif',
-    body: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
-    mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+    interface: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
+    data: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace'
   })
 });
 
 export const uiV3RequiredClasses = Object.freeze([
   'site-header',
-  'site-primary-navigation',
+  'site-header-primary',
   'site-search',
-  'site-about-menu',
+  'site-search-control',
+  'grouped-navigation',
+  'utility-navigation',
+  'mobile-navigation',
   'site-main',
   'site-footer',
-  'ledger-section',
-  'ledger-summary',
-  'ledger-meta',
-  'ledger-rule',
+  'site-footer-navigation',
   'ui-panel',
   'ui-button',
   'ui-field',
@@ -56,13 +61,12 @@ export const uiV3RequiredClasses = Object.freeze([
 ]);
 
 export const uiV3ForbiddenVisualPatterns = Object.freeze([
-  'radial-gradient(',
-  '#030b16',
-  '#061221',
-  '#081727',
-  '#18b6ff',
-  'box-shadow: var(--sog-shadow-panel)',
-  'box-shadow: var(--sog-shadow-accent)'
+  'font-size: 10px',
+  'font-size: 0.625rem',
+  'class="site-primary-navigation"',
+  'class="site-about-menu"',
+  'editorial/newspaper-first',
+  'automated_capture_counts_as_approval: true'
 ]);
 
 export const uiV3ForbiddenBrandPatterns = Object.freeze([
