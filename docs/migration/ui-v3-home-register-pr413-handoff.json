@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_ui_v3_home_register_pr413_2026_07_17",
+  "status": "implementation_complete",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 413,
+  "source_review_pr": 412,
+  "phase": "PR C",
+  "authorized_routes": ["/", "/stablecoins/"],
+  "implemented_home_surfaces": [
+    "compact_product_entrypoint",
+    "canonical_cross_registry_search",
+    "canonical_registry_totals",
+    "lifecycle_state_ledger",
+    "material_event_history",
+    "publication_history",
+    "known_unknown_issue_watch",
+    "direct_exploration_paths",
+    "recently_reviewed_records",
+    "reviewed_guides"
+  ],
+  "implemented_register_surfaces": [
+    "visible_filter_groups",
+    "selected_filter_counts",
+    "active_filter_chips",
+    "clear_all",
+    "result_range_and_count",
+    "sort_state",
+    "url_state",
+    "bounded_pagination",
+    "desktop_table",
+    "compact_cards",
+    "comparison_workspace",
+    "no_result_state"
+  ],
+  "register_bounds": {
+    "canonical_records": 112,
+    "page_size": 20,
+    "authorized_initial_render_max": 50,
+    "bounded_rendering_required_above": 100,
+    "comparison_min": 2,
+    "comparison_max": 4
+  },
+  "visual_artifacts": {
+    "required_capture_count": 10,
+    "manifest": "artifacts/pr413-home-register/manifest.json",
+    "contact_sheet": "artifacts/pr413-home-register/contact-sheet.html",
+    "skipped_visual_audit_allowed": false,
+    "automated_capture_is_owner_approval": false
+  },
+  "owner_approval_state": {
+    "changed": false,
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "ui_completion": false
+  },
+  "canonical_counts": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "changes": {
+    "routes": 0,
+    "canonical_data": 0,
+    "public_machine_readable_data": 0,
+    "metadata_contract": 0,
+    "dossier_templates": 0,
+    "event_templates": 0,
+    "organization_templates": 0,
+    "guide_or_secondary_templates": 0
+  },
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "PR #412 authorizes only the home and stablecoin register phase. Stablecoin dossier work requires a separate review after all required PR #413 visual states are examined."
+  },
+  "boundaries": {
+    "only_authorized_routes_changed": true,
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "owner_approval_changed": false,
+    "ui_completion_declared": false,
+    "pr_d_pre_authorized": false
+  }
+}

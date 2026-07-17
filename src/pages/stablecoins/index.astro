@@ -4,7 +4,6 @@ import StablecoinIndexRow from '../../components/StablecoinIndexRow.astro';
 import StablecoinIndexCard from '../../components/StablecoinIndexCard.astro';
 import StablecoinComparisonSource from '../../components/StablecoinComparisonSource.astro';
 import '../../styles/stablecoin-index.css';
-import '../../styles/terminal-stablecoin-filter-repair.css';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel } from '../../utils/publicTaxonomy';
 import { getReferenceFilterOptions, resolveReferenceTarget } from '../../utils/referenceTarget';
@@ -95,62 +94,82 @@ const referenceOptions = getReferenceFilterOptions().map((item) => option(item.v
 const backingOptions = getPublicBackingModelFilterOptions().map((item) => option(item.value, item.public_label));
 const stabilizationOptions = unique(records.map((record) => record.stabilization)).sort().map((value) => option(value));
 const filters = [
-  { id: 'lifecycle', label: 'Lifecycle', options: lifecycleOptions },
-  { id: 'issuance', label: 'Issuance', options: issuanceOptions },
-  { id: 'asset_class', label: 'Asset class', options: assetClassOptions },
-  { id: 'reference', label: 'Reference', options: referenceOptions },
-  { id: 'backing', label: 'Backing', options: backingOptions },
-  { id: 'stabilization', label: 'Stabilization', options: stabilizationOptions }
+  { id: 'lifecycle', label: 'Lifecycle', copy: 'Current recorded operating state', options: lifecycleOptions },
+  { id: 'issuance', label: 'Issuance', copy: 'Whether new units can be issued', options: issuanceOptions },
+  { id: 'asset_class', label: 'Asset class', copy: 'Registry classification of the asset', options: assetClassOptions },
+  { id: 'reference', label: 'Reference', copy: 'Target or comparison reference', options: referenceOptions },
+  { id: 'backing', label: 'Backing', copy: 'Public backing-model category', options: backingOptions },
+  { id: 'stabilization', label: 'Stabilization', copy: 'Mechanism used to pursue the reference', options: stabilizationOptions }
 ];
 const title = 'Stablecoin Register — Stable or Gone';
 const description = 'Search and filter canonical stablecoin records by lifecycle, issuance, reference target, model, organization, evidence, and review context.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Register', url: 'https://sog.badjoke-lab.com/stablecoins/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/stablecoins/" jsonLd={jsonLd}>
-  <div class="stablecoin-index-page" data-stablecoin-index data-page-size={PAGE_SIZE}>
+  <div class="stablecoin-index-page" data-stablecoin-index data-page-size={PAGE_SIZE} data-register-version="pr413">
     <header class="stablecoin-register-header">
       <div>
-        <p class="stablecoin-index-eyebrow">Register / Stable assets</p>
+        <p class="stablecoin-index-eyebrow">Canonical register · {records.length} records</p>
         <h1>Stablecoin register</h1>
-        <p>Canonical stable-asset records with lifecycle, issuance, reference target, primary organization, backing model, evidence context, and review date kept as separate facts.</p>
+        <p>Find records by operating state, issuance, reference target, backing model, organization, and evidence context. Lifecycle and issuance remain separate facts; unknown and not-recorded values are never silently filled.</p>
+        <nav class="stablecoin-register-links" aria-label="Related registry tools">
+          <a href="/compare/">Comparison explorer</a>
+          <a href="/timeline/">Change timeline</a>
+          <a href="/access-regulation/">Access and regulation</a>
+          <a href="/methodology/">Methodology</a>
+        </nav>
       </div>
-      <div class="stablecoin-register-count" aria-label={`${records.length} canonical stablecoin records`}>
-        <strong>{records.length}</strong>
-        <span>records</span>
-      </div>
+      <dl class="stablecoin-register-state" aria-label="Register state">
+        <div><dt>Records</dt><dd>{records.length}</dd></div>
+        <div><dt>Page size</dt><dd>{PAGE_SIZE}</dd></div>
+        <div><dt>Browse mode</dt><dd>Bounded</dd></div>
+      </dl>
     </header>
 
     <section class="stablecoin-index-registry" aria-labelledby="stablecoin-index-heading">
       <div class="stablecoin-index-section-heading">
         <div>
-          <h2 id="stablecoin-index-heading">Public register</h2>
-          <p>Search, filter, sort, and share the current register state. Twenty records are shown per page; all matching records remain available.</p>
+          <p class="stablecoin-index-eyebrow">Explore canonical records</p>
+          <h2 id="stablecoin-index-heading">Search, filter, sort, and compare</h2>
+          <p>URL state is preserved for search, filters, sort, page, and comparison. Only the current page is rendered in the primary results surface.</p>
         </div>
-        <span class="stablecoin-index-page-size">{PAGE_SIZE} per page</span>
+        <span class="stablecoin-index-page-size">{PAGE_SIZE} per page · max 4 compared</span>
       </div>
 
-      <div class="stablecoin-index-toolbar">
-        <label class="stablecoin-index-search"><span>Search</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
-        <label><span>Sort</span><select class="ui-field" data-index-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="lifecycle_then_name">Lifecycle, then name</option><option value="launch_oldest">Launch: oldest first</option><option value="launch_newest">Launch: newest first</option><option value="evidence_most">Most source identities</option></select></label>
-        <button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button>
-      </div>
-
-      <div class="stablecoin-index-filter-grid" aria-label="Stablecoin filters">
-        {filters.map((filter) => (
-          <details class="stablecoin-index-filter">
-            <summary data-summary-label="All"><span>{filter.label}</span><span aria-hidden="true" data-filter-count={filter.id} data-option-total={filter.options.length}>{filter.options.length}</span></summary>
-            <div class="stablecoin-index-filter-options">
-              {filter.options.map((item) => <label><input type="checkbox" data-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}
-            </div>
-          </details>
-        ))}
-      </div>
-
-      <div class="stablecoin-index-summary">
-        <div class="stablecoin-index-active-filters" data-active-filters aria-label="Active filters"></div>
-        <div class="stablecoin-index-result-count" aria-live="polite">
-          <span data-visible-range>1–{Math.min(PAGE_SIZE, records.length)}</span> of <span data-result-count>{records.length}</span> records
+      <section class="stablecoin-index-controls" aria-label="Register controls">
+        <div class="stablecoin-index-toolbar">
+          <label class="stablecoin-index-search"><span>Search records</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
+          <label><span>Sort results</span><select class="ui-field" data-index-sort name="sort"><option value="name_asc">Name A–Z</option><option value="name_desc">Name Z–A</option><option value="lifecycle_then_name">Lifecycle, then name</option><option value="launch_oldest">Launch: oldest first</option><option value="launch_newest">Launch: newest first</option><option value="evidence_most">Most source identities</option></select></label>
+          <button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button>
         </div>
+
+        <div class="stablecoin-index-filter-grid" aria-label="Stablecoin filter groups">
+          {filters.map((filter) => (
+            <details class="stablecoin-index-filter" open>
+              <summary data-summary-label="All"><span><strong>{filter.label}</strong><small>{filter.copy}</small></span><span aria-hidden="true" data-filter-count={filter.id} data-option-total={filter.options.length}>{filter.options.length}</span></summary>
+              <div class="stablecoin-index-filter-options">
+                {filter.options.map((item) => <label><input type="checkbox" data-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <div class="stablecoin-index-summary" data-register-summary>
+        <div><span class="stablecoin-index-summary-label">Active state</span><div class="stablecoin-index-active-filters" data-active-filters aria-label="Active filters"></div></div>
+        <div class="stablecoin-index-result-count" aria-live="polite"><strong><span data-visible-range>1–{Math.min(PAGE_SIZE, records.length)}</span></strong> of <strong><span data-result-count>{records.length}</span></strong> matching records</div>
+      </div>
+
+      <section class="stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
+        <div class="comparison-heading"><div><p class="stablecoin-index-eyebrow">Selected records</p><h2 id="comparison-heading">Comparison workspace</h2><p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p></div><button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button></div>
+        <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
+        <div class="comparison-grid" data-comparison-grid></div>
+        <p class="comparison-disclaimer">Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
+      </section>
+
+      <div class="stablecoin-index-results-heading">
+        <div><h2>Register results</h2><p>Desktop uses a structured table. Compact screens use full-field cards instead of hiding columns.</p></div>
+        <span>Lifecycle · issuance · organizations · evidence</span>
       </div>
 
       <div class="stablecoin-index-table">
@@ -162,7 +181,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       </div>
 
       <div class="stablecoin-index-cards" data-card-body aria-label="Stablecoin compact records">{records.map((record, index) => <StablecoinIndexCard record={record} initiallyVisible={index < PAGE_SIZE} />)}</div>
-      <div class="stablecoin-index-no-results" data-no-results hidden><strong>No stablecoins match this state.</strong><span>Clear the search and filters to restore the register.</span><button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button></div>
+      <div class="stablecoin-index-no-results" data-no-results hidden><strong>No stablecoins match this state.</strong><span>Clear the search and filters to restore the register.</span><button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all filters</button></div>
 
       <nav class="stablecoin-index-pagination" data-pagination aria-label="Stablecoin register pages">
         <button class="ui-button" type="button" data-page-prev>Previous</button>
@@ -171,12 +190,6 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       </nav>
     </section>
 
-    <section class="stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
-      <div class="comparison-heading"><div><p class="stablecoin-index-eyebrow">Bounded comparison</p><h2 id="comparison-heading">Compare historical records</h2><p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p></div><button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button></div>
-      <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
-      <div class="comparison-grid" data-comparison-grid></div>
-      <p class="comparison-disclaimer">Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
-    </section>
     <div hidden>{records.map((record) => <StablecoinComparisonSource record={record} />)}</div>
   </div>
   <script>
