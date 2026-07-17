@@ -1,9 +1,6 @@
 name: PR 411 UI v3 Global Shell Navigation
 
 on:
-  push:
-    branches:
-      - pr411-ui-v3-global-shell-navigation
   pull_request:
     branches:
       - main
@@ -15,7 +12,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: pr411-ui-v3-global-shell-navigation
+  group: pr411-ui-v3-global-shell-navigation-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
