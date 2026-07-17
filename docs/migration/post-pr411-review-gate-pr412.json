@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_post_pr411_review_gate_pr412_2026_07_17",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 412,
+  "source_pr": 411,
+  "source_merge_commit": "a9a37b79ca6b7313d310d206ad82dc19a273598f",
+  "source_handoff": "docs/migration/ui-v3-global-shell-navigation-pr411-handoff.json",
+  "reviewed_at": "2026-07-17",
+  "binding_findings": {
+    "ui_v3_state": "reopened",
+    "completed_phase": "PR B",
+    "shell_marker": "evidence-registry-pr411",
+    "visual_review_run_id": 29559515009,
+    "contract_and_build_validation": "success",
+    "mandatory_desktop_mobile_visual_audit": "success",
+    "automated_rendering_is_owner_approval": false,
+    "owner_approved_desktop_templates": 0,
+    "owner_approved_mobile_templates": 0,
+    "routes_changed": 0,
+    "canonical_changes": 0,
+    "public_machine_readable_changes": 0
+  },
+  "decision": {
+    "next_pr": 413,
+    "next_phase": "PR C",
+    "next_work_item": "home_and_stablecoin_register",
+    "authorization": "approved_bounded_implementation",
+    "authorized_routes": ["/", "/stablecoins/"],
+    "routes_change": false,
+    "canonical_action": "none",
+    "public_machine_readable_change": false,
+    "owner_approval_change": false,
+    "later_phases_pre_authorized": false,
+    "exit_state_after_pr413": "REVIEW GATE"
+  },
+  "home_requirements": [
+    "prominent_registry_search",
+    "current_canonical_registry_state",
+    "recent_material_or_publication_changes_with_date_semantics",
+    "issue_watch_or_unresolved_question_entrypoint",
+    "direct_exploration_paths",
+    "no_competing_decorative_masthead",
+    "no_invented_metrics"
+  ],
+  "register_requirements": {
+    "visible_filter_options": true,
+    "selected_filter_states": true,
+    "active_filter_chips": true,
+    "clear_all_action": true,
+    "result_count": true,
+    "sort_state": true,
+    "compare_selection_state": true,
+    "responsive_table_and_cards": true,
+    "initial_primary_render_max": 50,
+    "bounded_rendering_required_above": 100,
+    "misleading_zero_count_headings": false,
+    "required_states": ["default", "filtered", "no_results", "compare_selection", "long_labels", "narrow_screen"]
+  },
+  "visual_requirements": {
+    "desktop_and_mobile": true,
+    "contact_sheet": true,
+    "machine_audit": true,
+    "skipped_audit_result": "hard_failure",
+    "automated_capture_counts_as_owner_approval": false
+  },
+  "prohibited": [
+    "stablecoin_dossier_redesign",
+    "events_redesign",
+    "organizations_redesign",
+    "guides_or_secondary_page_redesign",
+    "route_change",
+    "metadata_contract_change",
+    "canonical_data_change",
+    "public_machine_readable_change",
+    "owner_approval_change",
+    "ui_completion_declaration",
+    "pr_d_or_later"
+  ],
+  "canonical_counts": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  }
+}
