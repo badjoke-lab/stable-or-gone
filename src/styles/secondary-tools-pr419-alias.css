@@ -1,0 +1,300 @@
+/* PR #419 aliases for existing secondary-tool root attributes. */
+
+:where(
+  .compare-page[data-compare-page],
+  .ar-explorer[data-ar-explorer],
+  .timeline-page[data-timeline-page],
+  .stats-page[data-stats-foundation]
+) {
+  --pr419-surface: var(--sog-surface, var(--shell-background));
+  --pr419-raised: var(--sog-surface-raised, var(--shell-background));
+  --pr419-interactive: var(--sog-surface-interactive, var(--shell-background));
+  --pr419-line: var(--sog-line, var(--shell-line-subtle));
+  --pr419-line-subtle: var(--sog-line-subtle, var(--shell-line-subtle));
+  --pr419-text: var(--sog-text, var(--shell-text));
+  --pr419-muted: var(--sog-text-muted, var(--shell-text-muted));
+  --pr419-link: var(--sog-link, var(--shell-link));
+  width: min(1280px, 100%);
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+  display: grid;
+  gap: 1rem;
+  color: var(--pr419-text);
+  box-sizing: border-box;
+}
+
+:where(
+  .compare-page[data-compare-page],
+  .ar-explorer[data-ar-explorer],
+  .timeline-page[data-timeline-page],
+  .stats-page[data-stats-foundation]
+) * {
+  box-sizing: border-box;
+}
+
+.compare-page[data-compare-page] .compare-masthead,
+.ar-explorer[data-ar-explorer] .ar-masthead,
+.timeline-page[data-timeline-page] .timeline-masthead,
+.stats-page[data-stats-foundation] .stats-header {
+  margin: 0;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  overflow: hidden;
+  border: 1px solid var(--pr419-line);
+  border-radius: 18px;
+  background: var(--pr419-surface);
+  box-shadow: var(--sog-shadow-panel, none);
+}
+
+.compare-page[data-compare-page] .compare-masthead h1,
+.ar-explorer[data-ar-explorer] .ar-masthead h1,
+.timeline-page[data-timeline-page] .timeline-masthead h1,
+.stats-page[data-stats-foundation] .stats-header h1 {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--pr419-text);
+  font-family: var(--sog-font-body, Inter, system-ui, sans-serif);
+  font-size: clamp(2.3rem, 5vw, 4.5rem);
+  font-weight: 760;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  overflow-wrap: anywhere;
+}
+
+.compare-page[data-compare-page] .compare-masthead__copy > p:last-child,
+.ar-explorer[data-ar-explorer] .ar-masthead > div > p:last-child,
+.timeline-page[data-timeline-page] .timeline-masthead > div > p:last-child,
+.stats-page[data-stats-foundation] .stats-lead {
+  max-width: 68ch;
+  color: var(--pr419-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.compare-page[data-compare-page] .compare-contract-summary,
+.ar-explorer[data-ar-explorer] .ar-contract-summary,
+.timeline-page[data-timeline-page] .timeline-contract-summary,
+.stats-page[data-stats-foundation] .stats-header-meta {
+  gap: 0.55rem;
+  border: 0;
+}
+
+.compare-page[data-compare-page] .compare-contract-summary > div,
+.ar-explorer[data-ar-explorer] .ar-contract-summary > div,
+.timeline-page[data-timeline-page] .timeline-contract-summary > div,
+.stats-page[data-stats-foundation] .stats-header-meta > div {
+  min-width: 0;
+  min-height: 82px;
+  padding: 0.85rem;
+  border: 1px solid var(--pr419-line-subtle);
+  border-radius: 10px;
+  background: var(--pr419-raised);
+}
+
+.compare-page[data-compare-page] .compare-contract-summary dt,
+.ar-explorer[data-ar-explorer] .ar-contract-summary dt,
+.timeline-page[data-timeline-page] .timeline-contract-summary dt,
+.stats-page[data-stats-foundation] .stats-header-meta dt {
+  color: var(--pr419-muted);
+  font-family: var(--sog-font-data, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.compare-page[data-compare-page] .compare-contract-summary dd,
+.ar-explorer[data-ar-explorer] .ar-contract-summary dd,
+.timeline-page[data-timeline-page] .timeline-contract-summary dd,
+.stats-page[data-stats-foundation] .stats-header-meta dd {
+  margin-top: 0.25rem;
+  color: var(--pr419-text);
+  font-family: var(--sog-font-body, Inter, system-ui, sans-serif);
+  font-size: 1.08rem;
+  overflow-wrap: anywhere;
+}
+
+.compare-page[data-compare-page] :is(.compare-controls, .compare-matrix-section, .compare-method-note),
+.ar-explorer[data-ar-explorer] :is(.ar-boundary-note, .ar-controls, .ar-results-section),
+.timeline-page[data-timeline-page] :is(.timeline-boundary, .timeline-controls, .timeline-results-section),
+.stats-page[data-stats-foundation] :is(.stats-methodology-notice, .stats-section) {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1.1rem, 3vw, 1.75rem);
+  border: 1px solid var(--pr419-line);
+  border-radius: 14px;
+  background: var(--pr419-surface);
+  box-shadow: var(--sog-shadow-panel, none);
+}
+
+.compare-page[data-compare-page] :is(.compare-section-heading h2, .compare-method-note h2),
+.ar-explorer[data-ar-explorer] :is(.ar-section-heading h2, .ar-boundary-note h2, .ar-results-heading h2),
+.timeline-page[data-timeline-page] :is(.timeline-section-heading h2, .timeline-boundary h2, .timeline-results-heading h2),
+.stats-page[data-stats-foundation] :is(.stats-section-heading h2, .stats-methodology-notice h2) {
+  color: var(--pr419-text);
+  font-size: clamp(1.5rem, 3vw, 2.35rem);
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.compare-page[data-compare-page] :is(.compare-preset-panel, .compare-group-filter, .compare-empty),
+.ar-explorer[data-ar-explorer] :is(.ar-search-row, .ar-filter-group, .ar-empty),
+.timeline-page[data-timeline-page] :is(.timeline-search-row, .timeline-filter-group, .timeline-empty),
+.stats-page[data-stats-foundation] :is(.stats-kpi, .stats-analysis-panel, .stats-bar-row, .stats-deep-panel) {
+  border: 1px solid var(--pr419-line-subtle);
+  border-radius: 10px;
+  background: var(--pr419-raised);
+}
+
+.compare-page[data-compare-page] :is(input, select, button),
+.ar-explorer[data-ar-explorer] :is(input, select, button),
+.timeline-page[data-timeline-page] :is(input, select, button) {
+  min-height: 44px;
+}
+
+.compare-page[data-compare-page] :is(.compare-slot-grid, .compare-preset-grid, .compare-group-filter__grid, .compare-method-grid),
+.ar-explorer[data-ar-explorer] :is(.ar-boundary-grid, .ar-filter-groups),
+.timeline-page[data-timeline-page] :is(.timeline-boundary-grid, .timeline-filter-groups),
+.stats-page[data-stats-foundation] :is(.stats-kpi-grid, .stats-analysis-grid, .stats-lifecycle-layout) {
+  gap: 0.7rem;
+}
+
+.compare-page[data-compare-page] .compare-slot,
+.compare-page[data-compare-page] .compare-preset,
+.compare-page[data-compare-page] .compare-group-toggle,
+.ar-explorer[data-ar-explorer] .ar-filter-group,
+.timeline-page[data-timeline-page] .timeline-filter-group {
+  border: 1px solid var(--pr419-line-subtle);
+  border-radius: 9px;
+  background: var(--pr419-raised);
+}
+
+.compare-page[data-compare-page] .compare-output,
+.ar-explorer[data-ar-explorer] .ar-results,
+.timeline-page[data-timeline-page] .timeline-results,
+.stats-page[data-stats-foundation] .stats-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--pr419-line-subtle);
+  border-radius: 10px;
+}
+
+.stats-page[data-stats-foundation] {
+  padding-block: 0;
+}
+
+.stats-page[data-stats-foundation] .stats-kpi {
+  min-height: 120px;
+  padding: 1rem;
+}
+
+.stats-page[data-stats-foundation] .stats-kpi dd {
+  color: var(--pr419-text);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 780;
+  letter-spacing: -0.045em;
+}
+
+.stats-page[data-stats-foundation] .stats-bar-track {
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--pr419-interactive);
+}
+
+.stats-page[data-stats-foundation] .stats-bar-track > span {
+  border-radius: inherit;
+}
+
+@media (max-width: 900px) {
+  .compare-page[data-compare-page] .compare-slot-grid,
+  .compare-page[data-compare-page] .compare-preset-grid,
+  .ar-explorer[data-ar-explorer] .ar-filter-groups,
+  .timeline-page[data-timeline-page] .timeline-filter-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 719px) {
+  :where(
+    .compare-page[data-compare-page],
+    .ar-explorer[data-ar-explorer],
+    .timeline-page[data-timeline-page],
+    .stats-page[data-stats-foundation]
+  ) {
+    gap: 0.75rem;
+  }
+
+  .compare-page[data-compare-page] .compare-masthead,
+  .ar-explorer[data-ar-explorer] .ar-masthead,
+  .timeline-page[data-timeline-page] .timeline-masthead,
+  .stats-page[data-stats-foundation] .stats-header,
+  .compare-page[data-compare-page] :is(.compare-controls, .compare-matrix-section, .compare-method-note),
+  .ar-explorer[data-ar-explorer] :is(.ar-boundary-note, .ar-controls, .ar-results-section),
+  .timeline-page[data-timeline-page] :is(.timeline-boundary, .timeline-controls, .timeline-results-section),
+  .stats-page[data-stats-foundation] :is(.stats-methodology-notice, .stats-section) {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .compare-page[data-compare-page] .compare-masthead,
+  .ar-explorer[data-ar-explorer] .ar-masthead,
+  .timeline-page[data-timeline-page] .timeline-masthead,
+  .stats-page[data-stats-foundation] .stats-header,
+  .compare-page[data-compare-page] .compare-section-heading,
+  .ar-explorer[data-ar-explorer] .ar-section-heading,
+  .timeline-page[data-timeline-page] .timeline-section-heading,
+  .stats-page[data-stats-foundation] .stats-section-heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .compare-page[data-compare-page] .compare-contract-summary,
+  .ar-explorer[data-ar-explorer] .ar-contract-summary,
+  .timeline-page[data-timeline-page] .timeline-contract-summary,
+  .stats-page[data-stats-foundation] .stats-header-meta,
+  .stats-page[data-stats-foundation] .stats-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compare-page[data-compare-page] .compare-slot-grid,
+  .compare-page[data-compare-page] .compare-preset-grid,
+  .compare-page[data-compare-page] .compare-group-filter__grid,
+  .ar-explorer[data-ar-explorer] .ar-filter-groups,
+  .timeline-page[data-timeline-page] .timeline-filter-groups,
+  .stats-page[data-stats-foundation] .stats-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-page[data-compare-page] .compare-actions,
+  .ar-explorer[data-ar-explorer] .ar-search-row,
+  .timeline-page[data-timeline-page] .timeline-search-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .compare-page[data-compare-page] :is(.compare-actions button, .compare-slot select),
+  .ar-explorer[data-ar-explorer] :is(.ar-search-row button, .ar-search-row input),
+  .timeline-page[data-timeline-page] :is(.timeline-search-row button, .timeline-search-row input) {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .compare-page[data-compare-page] .compare-contract-summary,
+  .ar-explorer[data-ar-explorer] .ar-contract-summary,
+  .timeline-page[data-timeline-page] .timeline-contract-summary,
+  .stats-page[data-stats-foundation] .stats-header-meta,
+  .stats-page[data-stats-foundation] .stats-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(
+    .compare-page[data-compare-page],
+    .ar-explorer[data-ar-explorer],
+    .timeline-page[data-timeline-page],
+    .stats-page[data-stats-foundation]
+  ) {
+    forced-color-adjust: auto;
+  }
+}

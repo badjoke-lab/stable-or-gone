@@ -1,0 +1,169 @@
+name: PR 419 UI v3 Guides Secondary Pages
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr419-ui-v3-guides-secondary-pages-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr419-ui-v3-guides-secondary-pages'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate PR 419 bounded implementation
+        run: node scripts/validate-ui-v3-guides-secondary-pages-pr419.mjs && npm run validate:active-workstream
+      - name: Verify authorized source files only
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only origin/main...HEAD -- src/ | grep -Ev '^(src/pages/(guides|methodology|about|glossary|models|updates|maintenance|contact|support|compare|access-regulation|timeline|stats)/|src/components/(GuideEditorialIndex|GuideArticleHeader|EditorialPageHeader)\.astro|src/styles/(secondary-pages-pr419|secondary-tools-pr419-alias|secondary-longform-pr419-containment|mobile-accessibility-v3)\.css)$' || true)"
+          test -z "$unexpected" || { echo "Unauthorized src changes:"; echo "$unexpected"; exit 1; }
+          test -z "$(git diff --name-only origin/main...HEAD -- public/ data/)"
+          git diff --exit-code origin/main...HEAD -- \
+            config/site-architecture.mjs \
+            docs/migration/ui-v3-visual-approval-register.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+      - name: Validate canonical data and Evidence
+        run: npm run validate:data && npm run validate:evidence-relations-v2
+      - name: Validate responsive and compatibility contracts
+        run: npm run prepare:responsive-accessibility-contract && npm run validate:compat && npm run validate:final
+      - name: Validate release and reproducible build
+        run: npm run validate:release-integrity && npm run validate:reproducible-build
+      - name: Astro check
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run check 2>&1 | tee /tmp/pr419-astro-check.log
+      - name: Build site
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/pr419-build.log
+      - name: Verify public layer
+        run: npm run verify:public
+      - name: Verify built route markers and existing tool roots
+        run: |
+          grep -q 'data-secondary-version="pr419-guides"' dist/guides/index.html
+          grep -q 'data-secondary-version="pr419-guide-article"' dist/guides/eu-stablecoin-access-after-mica/index.html
+          grep -q 'data-secondary-version="pr419-editorial"' dist/methodology/index.html
+          grep -q 'data-secondary-version="pr419-editorial"' dist/about/index.html
+          grep -q 'data-compare-page' dist/compare/index.html
+          grep -q 'data-ar-explorer' dist/access-regulation/index.html
+          grep -q 'data-timeline-page' dist/timeline/index.html
+          grep -q 'data-stats-foundation' dist/stats/index.html
+      - name: Publish validation diagnostics
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr419-validation-diagnostics -->';
+            let diagnostics='';
+            for(const file of ['/tmp/pr419-astro-check.log','/tmp/pr419-build.log']){try{diagnostics+=`\n## ${file}\n${fs.readFileSync(file,'utf8')}`;}catch{}}
+            const body=`${marker}\n## PR #419 Validation Diagnostics\n\n\`\`\`text\n${diagnostics.slice(-30000)}\n\`\`\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
+
+  visual-audit:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr419-ui-v3-guides-secondary-pages'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Start local static server
+        run: |
+          python3 -m http.server 4321 --bind 127.0.0.1 --directory dist > /tmp/pr419-server.log 2>&1 &
+          echo $! > /tmp/pr419-server.pid
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4321/guides/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/pr419-server.log
+          exit 1
+      - name: Capture required guide and secondary-page states
+        env:
+          SOG_SCREENSHOT_BASE_URL: http://127.0.0.1:4321
+        run: node scripts/capture-guides-secondary-pages-pr419.mjs
+      - name: Build visual contact sheet
+        run: node scripts/build-guides-secondary-contact-sheet-pr419.mjs
+      - name: Verify mandatory visual states
+        run: |
+          test -f artifacts/pr419-guides-secondary-pages/manifest.json
+          test -f artifacts/pr419-guides-secondary-pages/contact-sheet.html
+          test -f artifacts/pr419-guides-secondary-pages/contact-sheet.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest=JSON.parse(fs.readFileSync('artifacts/pr419-guides-secondary-pages/manifest.json','utf8'));
+          const contact=JSON.parse(fs.readFileSync('artifacts/pr419-guides-secondary-pages/contact-sheet.json','utf8'));
+          if(manifest.failure_count!==0 || manifest.capture_count!==16)throw new Error('required PR419 visual state matrix failed');
+          if(manifest.horizontal_overflow_failure_count!==0)throw new Error('horizontal overflow detected');
+          if(manifest.owner_approval!==false || contact.owner_approval!==false)throw new Error('automated artifact may not record owner approval');
+          NODE
+      - name: Upload mandatory PR 419 visual artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr419-guides-secondary-pages-visual-review-${{ github.run_id }}
+          path: |
+            artifacts/pr419-guides-secondary-pages/
+            /tmp/pr419-server.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Stop local server
+        if: always()
+        run: |
+          if test -f /tmp/pr419-server.pid; then kill "$(cat /tmp/pr419-server.pid)" || true; fi
+
+  report:
+    if: always()
+    needs: [validate, visual-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish PR 419 status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr419-guides-secondary-pages-status -->';
+            const validate='${{ needs.validate.result }}';
+            const visual='${{ needs.visual-audit.result }}';
+            const overall=validate==='success' && visual==='success' ? 'success' : 'failure';
+            const body=`${marker}\n## PR #419 Guides and Secondary Pages\n\n- Overall: **${overall}**\n- Contract and build validation: **${validate}**\n- Required sixteen-state desktop/mobile visual audit: **${visual}**\n- Visual review run ID: **${context.runId}**\n- Authorized route families: **guides and secondary HTML pages**\n- Canonical changes: **0**\n- Public machine-readable changes: **0**\n- Owner approvals changed: **0**\n- Automated capture counts as approval: **false**\n- Next authority: **REVIEW GATE**\n- Head: \`${context.sha}\``;
+            const issueNumber=context.issue?.number || 419;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,body});

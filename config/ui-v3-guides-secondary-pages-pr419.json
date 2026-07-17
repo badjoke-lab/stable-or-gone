@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_guides_secondary_pages_pr419_2026_07_17",
+  "status": "active_implementation",
+  "issue": 281,
+  "implementation_pr": 419,
+  "source_review_pr": 418,
+  "phase": "PR F",
+  "authorized_route_families": [
+    "/guides/",
+    "/guides/[article]/",
+    "/methodology/",
+    "/about/",
+    "/glossary/",
+    "/models/",
+    "/updates/",
+    "/maintenance/",
+    "/contact/",
+    "/support/",
+    "/compare/",
+    "/access-regulation/",
+    "/timeline/",
+    "/stats/"
+  ],
+  "guide_priority": ["reading_width", "table_of_contents", "callouts", "examples", "section_navigation", "source_presentation"],
+  "secondary_page_priority": [
+    "visible_inputs_and_state",
+    "bounded_reading_or_results",
+    "responsive_tables",
+    "source_and_methodology_links",
+    "keyboard_and_focus",
+    "absence_and_freshness_semantics"
+  ],
+  "required_components": {
+    "guide_index": [
+      "reviewed_archive_header",
+      "category_navigation",
+      "desktop_table",
+      "compact_mobile_records",
+      "reference_links"
+    ],
+    "guide_article": [
+      "bounded_reading_width",
+      "table_of_contents",
+      "publication_metadata",
+      "reviewed_update_notice",
+      "callouts_and_examples",
+      "responsive_tables",
+      "source_and_revision_presentation",
+      "correction_path"
+    ],
+    "longform_and_reference": [
+      "evidence_registry_header",
+      "local_navigation_where_required",
+      "canonical_definition_distinction",
+      "responsive_tables",
+      "correction_and_support_utility"
+    ],
+    "secondary_tools": [
+      "visible_inputs",
+      "selected_state",
+      "clear_action",
+      "result_or_empty_state",
+      "bounded_result_container",
+      "freshness_readiness_or_absence_semantics",
+      "shareable_state_preserved",
+      "machine_readable_link_preserved"
+    ]
+  },
+  "visual_markers": {
+    "guide_index": "pr419-guides",
+    "guide_article": "pr419-guide-article",
+    "editorial_header": "pr419-editorial",
+    "compare_existing_root": "data-compare-page",
+    "access_regulation_existing_root": "data-ar-explorer",
+    "timeline_existing_root": "data-timeline-page",
+    "stats_existing_root": "data-stats-foundation"
+  },
+  "representative_visual_states": [
+    {"id":"guides-desktop","route":"/guides/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"guides-mobile","route":"/guides/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"guide-mica-desktop","route":"/guides/eu-stablecoin-access-after-mica/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"guide-mica-mobile","route":"/guides/eu-stablecoin-access-after-mica/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"methodology-desktop","route":"/methodology/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"methodology-mobile","route":"/methodology/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"about-desktop","route":"/about/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"about-mobile","route":"/about/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"compare-desktop","route":"/compare/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"compare-mobile","route":"/compare/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"access-regulation-desktop","route":"/access-regulation/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"access-regulation-mobile","route":"/access-regulation/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"timeline-desktop","route":"/timeline/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"timeline-mobile","route":"/timeline/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"stats-desktop","route":"/stats/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"stats-mobile","route":"/stats/","device":"mobile","viewport":{"width":390,"height":844}}
+  ],
+  "visual_review": {
+    "required_capture_count": 16,
+    "contact_sheet_required": true,
+    "machine_audit_required": true,
+    "bounded_reading_and_results": true,
+    "responsive_table_strategy_required": true,
+    "horizontal_page_overflow_allowed": false,
+    "skipped_audit_result": "hard_failure",
+    "automated_capture_counts_as_owner_approval": false
+  },
+  "boundaries": {
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "metadata_contract_changed": false,
+    "home_changed": false,
+    "stablecoin_register_changed": false,
+    "stablecoin_dossier_changed": false,
+    "event_pages_changed": false,
+    "organization_pages_changed": false,
+    "owner_approval_records_changed": false,
+    "ui_completion_declared": false,
+    "pr_g_pre_authorized": false
+  }
+}

@@ -1,4 +1,5 @@
 ---
+import '../styles/secondary-pages-pr419.css';
 interface Fact { label: string; value: string | number; note?: string; }
 interface Props {
   kind: 'reference' | 'longform' | 'utility';
@@ -11,7 +12,7 @@ interface Props {
 }
 const { kind, eyebrow, title, description, facts = [], returnHref, returnLabel = 'Return' } = Astro.props;
 ---
-<header class={`editorial-page-masthead editorial-page-masthead--${kind}`} data-editorial-page-header={kind}>
+<header class={`editorial-page-masthead editorial-page-masthead--${kind}`} data-editorial-page-header={kind} data-secondary-version="pr419-editorial">
   <div class="editorial-page-overline">
     <span>{eyebrow}</span>
     {returnHref ? <a href={returnHref}>{returnLabel}</a> : <span>Stable or Gone</span>}

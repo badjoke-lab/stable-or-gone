@@ -1,6 +1,7 @@
 ---
 import { guideLatestUpdates } from '../data/guideLatestUpdates';
 import '../styles/guide-article-spacing-fix.css';
+import '../styles/secondary-pages-pr419.css';
 
 interface Props {
   category: string;
@@ -13,7 +14,7 @@ interface Props {
 const { category, title, description, publishedAt, informationCurrentThrough, updatedAt } = Astro.props;
 const latestUpdate = guideLatestUpdates[title];
 ---
-<header class="guide-article-masthead">
+<header class="guide-article-masthead" data-secondary-version="pr419-guide-article">
   <div class="guide-article-overline"><span>Guides / {category}</span><a href="/guides/">Return to guide archive</a></div>
   <h1>{title}</h1>
   <p class="guide-article-deck">{description}</p>
