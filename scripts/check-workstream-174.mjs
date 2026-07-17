@@ -1,1 +1,1 @@
-import './validate-ui-v3-stablecoin-dossier-pr415.mjs';
+import './validate-ui-v3-stablecoin-dossier-pr415-v2.mjs';
