@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_events_organizations_pr417_2026_07_17",
+  "status": "active_implementation",
+  "issue": 281,
+  "implementation_pr": 417,
+  "source_review_pr": 416,
+  "phase": "PR E",
+  "authorized_route_families": ["/events/", "/event/[id]/", "/issuers/", "/issuer/[slug]/"],
+  "event_priority": ["severity", "type", "lifecycle_context", "filters", "bounded_rendering", "responsive_layout"],
+  "organization_priority": ["organization_role", "connected_assets", "relationship_type", "filters", "bounded_rendering"],
+  "registers": {
+    "events": {"page_size": 20, "initial_ssr_max": 20, "filters": ["category", "subtype", "status_effect", "recovery", "year"], "url_state": true, "empty_state": true},
+    "organizations": {"page_size": 20, "initial_ssr_max": 20, "filters": ["category", "regulatory", "jurisdiction", "role", "relationship_status"], "url_state": true, "empty_state": true}
+  },
+  "required_components": {
+    "events": ["bounded_event_register", "visible_filters", "selected_state", "result_sort_clear_empty", "impact_and_lifecycle_effect", "responsive_event_detail", "subject_and_evidence_context"],
+    "organizations": ["bounded_organization_register", "visible_filters", "selected_state", "result_sort_clear_empty", "role_jurisdiction_and_connected_assets", "relationship_view", "responsive_organization_detail"]
+  },
+  "representative_visual_states": [
+    {"id":"events-desktop","route":"/events/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"events-mobile","route":"/events/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"event-ust-collapse-desktop","route":"/event/sog_ev_ust_2022_05_collapse/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"event-ust-collapse-mobile","route":"/event/sog_ev_ust_2022_05_collapse/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"organizations-desktop","route":"/issuers/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"organizations-mobile","route":"/issuers/","device":"mobile","viewport":{"width":390,"height":844}},
+    {"id":"organization-circle-desktop","route":"/issuer/circle/","device":"desktop","viewport":{"width":1440,"height":1000}},
+    {"id":"organization-circle-mobile","route":"/issuer/circle/","device":"mobile","viewport":{"width":390,"height":844}}
+  ],
+  "visual_review": {"required_capture_count": 8, "contact_sheet_required": true, "machine_audit_required": true, "bounded_primary_indexes": true, "horizontal_page_overflow_allowed": false, "skipped_audit_result": "hard_failure", "automated_capture_counts_as_owner_approval": false},
+  "boundaries": {"routes_changed": false, "canonical_data_changed": false, "public_machine_readable_data_changed": false, "metadata_contract_changed": false, "home_changed": false, "stablecoin_register_changed": false, "stablecoin_dossier_changed": false, "guides_or_secondary_pages_changed": false, "owner_approval_records_changed": false, "ui_completion_declared": false, "pr_f_pre_authorized": false}
+}
