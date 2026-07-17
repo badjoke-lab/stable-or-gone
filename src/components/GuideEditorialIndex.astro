@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/secondary-pages-pr419.css';
 import { guides, guideCategoryDescriptions, guideCategoryLabels, type GuideCategory } from '../data/guideCatalog';
 
 const categoryOrder: GuideCategory[] = ['regulation', 'asset-comparisons', 'core-concepts'];
@@ -19,9 +20,9 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/" jsonLd={jsonLd}>
-  <article class="guide-index-page" data-ui-v3-guides>
+  <article class="guide-index-page" data-ui-v3-guides data-secondary-version="pr419-guides">
     <header class="guide-index-masthead">
-      <div class="guide-index-overline"><span>Editorial archive</span><span>Stablecoin guides and explainers</span></div>
+      <div class="guide-index-overline"><span>Reviewed guide archive</span><span>Definitions, regulation, and record interpretation</span></div>
       <div class="guide-index-title"><h1>Guides</h1><p>Readable explanations of regulation, asset structures, reserve and redemption systems, lifecycle events, and the record distinctions used throughout Stable or Gone.</p></div>
       <dl class="guide-index-ledger" aria-label="Guide archive summary">
         <div><dt>Guide records</dt><dd>{guides.length}</dd></div>
