@@ -1,0 +1,83 @@
+name: PR 411 Diagnostic
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr411-diagnostic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    if: github.head_ref == 'pr411-ui-v3-global-shell-navigation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Run diagnostic command matrix
+        id: matrix
+        shell: bash
+        run: |
+          set +e
+          : > /tmp/pr411-diagnostic.txt
+          run_check() {
+            local name="$1"
+            shift
+            echo "## ${name}" >> /tmp/pr411-diagnostic.txt
+            "$@" >> /tmp/pr411-diagnostic.txt 2>&1
+            local code=$?
+            echo "exit_code=${code}" >> /tmp/pr411-diagnostic.txt
+            echo >> /tmp/pr411-diagnostic.txt
+          }
+          run_check shell node scripts/validate-ui-v3-global-shell-pr411.mjs
+          run_check active npm run validate:active-workstream
+          run_check data npm run validate:data
+          run_check evidence npm run validate:evidence-relations-v2
+          run_check compat npm run validate:compat
+          run_check final npm run validate:final
+          run_check architecture npm run prepare:site-architecture
+          run_check accessibility npm run prepare:responsive-accessibility-contract
+          run_check release npm run validate:release-integrity
+          run_check reproducible npm run validate:reproducible-build
+          run_check astro npm run check
+          run_check build npm run build
+          run_check public npm run verify:public
+          cat /tmp/pr411-diagnostic.txt
+      - name: Publish diagnostic matrix
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const marker='<!-- pr411-diagnostic-status -->';
+            let diagnostics='diagnostics file missing';
+            try{diagnostics=fs.readFileSync('/tmp/pr411-diagnostic.txt','utf8').trim();}catch{}
+            const body=`${marker}
+            ## PR #411 Diagnostic
+
+            - Run ID: **${context.runId}**
+            - Head: \`${context.payload.pull_request.head.sha}\`
+
+            \`\`\`text
+            ${diagnostics.slice(-30000)}
+            \`\`\``;
+            const issueNumber=context.issue.number;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,body});
