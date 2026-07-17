@@ -126,6 +126,11 @@ jobs:
           const contact=JSON.parse(fs.readFileSync('artifacts/pr417-events-organizations/contact-sheet.json','utf8'));
           if(manifest.failure_count!==0 || manifest.capture_count!==8)throw new Error('required PR417 visual state matrix failed');
           if(manifest.horizontal_overflow_failure_count!==0)throw new Error('horizontal overflow detected');
+          if(manifest.vertical_density_failure_count!==0)throw new Error('mobile vertical density failure detected');
+          for(const id of ['events-mobile','organizations-mobile']){
+            const record=manifest.records.find((item)=>item.id===id);
+            if(!record || record.metrics.bodyHeight>9000)throw new Error(`${id} exceeds the 9000px mobile height ceiling`);
+          }
           if(manifest.owner_approval!==false || contact.owner_approval!==false)throw new Error('automated artifact may not record owner approval');
           NODE
       - name: Upload mandatory PR 417 visual artifacts
@@ -156,7 +161,7 @@ jobs:
             const validate='${{ needs.validate.result }}';
             const visual='${{ needs.visual-audit.result }}';
             const overall=validate==='success' && visual==='success' ? 'success' : 'failure';
-            const body=`${marker}\n## PR #417 Events and Organizations\n\n- Overall: **${overall}**\n- Contract and build validation: **${validate}**\n- Required eight-state desktop/mobile visual audit: **${visual}**\n- Visual review run ID: **${context.runId}**\n- Event and organization page size: **20**\n- Canonical changes: **0**\n- Owner approvals changed: **0**\n- Automated capture counts as approval: **false**\n- Next authority: **REVIEW GATE**\n- Head: \`${context.sha}\``;
+            const body=`${marker}\n## PR #417 Events and Organizations\n\n- Overall: **${overall}**\n- Contract and build validation: **${validate}**\n- Required eight-state desktop/mobile visual audit: **${visual}**\n- Visual review run ID: **${context.runId}**\n- Event and organization page size: **20**\n- Mobile register height ceiling: **9,000px**\n- Canonical changes: **0**\n- Owner approvals changed: **0**\n- Automated capture counts as approval: **false**\n- Next authority: **REVIEW GATE**\n- Head: \`${context.sha}\``;
             const issueNumber=context.issue?.number || 417;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
