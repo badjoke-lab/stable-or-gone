@@ -161,6 +161,7 @@ jobs:
             - Overall: **${overall}**
             - Contract and build validation: **${validate}**
             - Mandatory desktop/mobile visual audit: **${visual}**
+            - Visual review run ID: **${context.runId}**
             - Shell marker: **\`evidence-registry-pr411\`**
             - Routes changed: **0**
             - Canonical changes: **0**
