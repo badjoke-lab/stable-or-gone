@@ -1,135 +1,192 @@
 .stablecoin-index-page {
   display: grid;
-  gap: 0;
+  gap: 1rem;
 }
 
 .stablecoin-register-header {
-  padding: 1.2rem 0 2rem;
+  padding: clamp(1.35rem, 3vw, 2.4rem);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.36fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: end;
-  border-top: 2px solid var(--sog-rule-strong);
-  border-bottom: 2px solid var(--sog-rule-strong);
+  border: 1px solid var(--sog-line);
+  border-radius: var(--sog-radius-prominent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--sog-surface-emphasis) 88%, transparent), color-mix(in srgb, var(--sog-surface) 96%, transparent)),
+    var(--sog-surface);
+  box-shadow: var(--sog-shadow-panel);
 }
 
 .stablecoin-index-eyebrow {
-  margin: 0 0 0.55rem;
-  color: var(--sog-accent);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
+  margin: 0 0 0.45rem;
+  color: var(--sog-link);
+  font-family: var(--sog-font-data);
+  font-size: 0.8125rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.075em;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
 .stablecoin-register-header h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 6.5vw, 6.4rem);
-  line-height: 0.92;
-  letter-spacing: -0.055em;
-  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 4.6rem) !important;
+  font-weight: 760 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 1 !important;
 }
 
-.stablecoin-register-header > div:first-child > p:last-child {
-  max-width: 76ch;
+.stablecoin-register-header > div > p:last-of-type {
+  max-width: 78ch;
   margin: 1rem 0 0;
-  color: var(--sog-ink-muted);
-  font-size: 0.92rem;
-  line-height: 1.7;
+  color: var(--sog-text-muted);
+  font-size: 1rem;
+  line-height: 1.68;
 }
 
-.stablecoin-register-count {
-  min-width: 132px;
-  padding-left: 1.5rem;
+.stablecoin-register-links {
+  margin-top: 1.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.stablecoin-register-links a {
+  min-height: 40px;
+  padding: 0.45rem 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 999px;
+  background: var(--sog-surface-interactive);
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.stablecoin-register-links a:hover,
+.stablecoin-register-links a:focus-visible {
+  border-color: var(--sog-link);
+  color: var(--sog-link-hover);
+}
+
+.stablecoin-register-state {
+  margin: 0;
   display: grid;
-  justify-items: end;
-  border-left: 1px solid var(--sog-rule-strong);
+  gap: 0.65rem;
 }
 
-.stablecoin-register-count strong {
-  color: var(--sog-ink);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(2.3rem, 4vw, 4.4rem);
-  font-weight: 500;
-  line-height: 0.95;
-  font-variant-numeric: tabular-nums;
+.stablecoin-register-state > div {
+  min-height: 62px;
+  padding: 0.75rem 0.9rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-compact);
+  background: color-mix(in srgb, var(--sog-background-subtle) 78%, transparent);
 }
 
-.stablecoin-register-count span {
-  margin-top: 0.35rem;
-  color: var(--sog-ink-quiet);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.stablecoin-register-state dt,
+.stablecoin-register-state dd {
+  margin: 0;
+}
+
+.stablecoin-register-state dt {
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
+}
+
+.stablecoin-register-state dd {
+  color: var(--sog-text);
+  font-family: var(--sog-font-data);
+  font-size: 1rem;
+  font-weight: 750;
 }
 
 .stablecoin-index-registry {
+  min-width: 0;
   overflow: visible;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  background: color-mix(in srgb, var(--sog-surface) 94%, transparent);
 }
 
 .stablecoin-index-section-heading {
-  padding: 1.5rem 0 1.1rem;
+  padding: clamp(1.1rem, 2.6vw, 1.8rem);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid var(--sog-rule-strong);
+  border-bottom: 1px solid var(--sog-line-subtle);
 }
 
-.stablecoin-index-section-heading h2 {
+.stablecoin-index-section-heading h2,
+.stablecoin-index-results-heading h2,
+.comparison-heading h2 {
   margin: 0;
-  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
-  line-height: 1.02;
+  font-size: clamp(1.35rem, 2.5vw, 1.9rem) !important;
+  line-height: 1.2 !important;
 }
 
-.stablecoin-index-section-heading p {
+.stablecoin-index-section-heading p:not(.stablecoin-index-eyebrow),
+.stablecoin-index-results-heading p,
+.comparison-heading p {
   max-width: 76ch;
-  margin: 0.45rem 0 0;
-  color: var(--sog-ink-muted);
-  font-size: 0.78rem;
+  margin: 0.4rem 0 0;
+  color: var(--sog-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .stablecoin-index-page-size {
   flex: 0 0 auto;
-  color: var(--sog-ink-quiet);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
-  text-transform: uppercase;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 999px;
+  color: var(--sog-text-muted);
+  font-family: var(--sog-font-data);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.stablecoin-index-controls {
+  padding: 1rem;
+  border-bottom: 1px solid var(--sog-line-subtle);
+  background: color-mix(in srgb, var(--sog-background-subtle) 76%, transparent);
 }
 
 .stablecoin-index-toolbar {
-  padding: 0.9rem 0;
   display: grid;
-  grid-template-columns: minmax(300px, 1.4fr) minmax(220px, 0.55fr) auto;
-  gap: 1rem;
+  grid-template-columns: minmax(280px, 1.35fr) minmax(220px, 0.55fr) auto;
+  gap: 0.8rem;
   align-items: end;
-  border-bottom: 1px solid var(--sog-rule);
 }
 
 .stablecoin-index-toolbar label {
+  min-width: 0;
   display: grid;
-  gap: 0.32rem;
+  gap: 0.35rem;
 }
 
-.stablecoin-index-toolbar label > span,
-.stablecoin-index-filter summary,
-.stablecoin-index-card-grid dt,
-.comparison-record dt {
-  color: var(--sog-ink-muted);
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.stablecoin-index-toolbar label > span {
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 750;
 }
 
 .stablecoin-index-toolbar .ui-field {
-  min-height: 44px;
-  border: 0;
-  border-bottom: 1px solid var(--sog-rule-strong);
-  border-radius: 0;
-  padding-inline: 0.15rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--sog-line);
+  border-radius: var(--sog-radius-compact);
+  background: var(--sog-surface-raised);
+  color: var(--sog-text);
+  font-size: 0.9375rem;
 }
 
 .stablecoin-index-toolbar .ui-field:focus-visible {
@@ -138,36 +195,47 @@
 
 .stablecoin-index-action {
   min-width: max-content;
+  min-height: 46px;
+  padding-inline: 0.9rem;
+  border: 1px solid var(--sog-line);
+  border-radius: var(--sog-radius-compact);
+  background: var(--sog-surface-interactive);
+  color: var(--sog-text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stablecoin-index-action:hover,
+.stablecoin-index-action:focus-visible {
+  border-color: var(--sog-link);
+  color: var(--sog-link-hover);
 }
 
 .stablecoin-index-filter-grid {
-  display: flex;
-  align-items: stretch;
-  overflow-x: auto;
-  border-bottom: 1px solid var(--sog-rule-strong);
-  scrollbar-gutter: stable;
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
 }
 
 .stablecoin-index-filter {
-  position: relative;
-  flex: 1 0 154px;
-  border-right: 1px solid var(--sog-rule);
-}
-
-.stablecoin-index-filter:first-child {
-  border-left: 1px solid var(--sog-rule);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-compact);
+  background: var(--sog-surface-interactive);
 }
 
 .stablecoin-index-filter[open] {
-  background: var(--sog-paper-subtle);
+  background: var(--sog-surface-raised);
 }
 
 .stablecoin-index-filter summary {
-  min-height: 44px;
-  padding: 0.58rem 0.7rem;
+  min-height: 58px;
+  padding: 0.65rem 0.75rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.5rem;
+  gap: 0.65rem;
   align-items: center;
   cursor: pointer;
   list-style: none;
@@ -177,111 +245,173 @@
   display: none;
 }
 
+.stablecoin-index-filter summary > span:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.stablecoin-index-filter summary strong {
+  color: var(--sog-text);
+  font-size: 0.875rem;
+}
+
+.stablecoin-index-filter summary small {
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
 .stablecoin-index-filter summary > span:last-child {
-  min-width: 22px;
-  height: 22px;
+  min-width: 32px;
+  height: 28px;
+  padding-inline: 0.3rem;
   display: inline-grid;
   place-items: center;
-  border: 1px solid var(--sog-rule);
-  border-radius: var(--sog-radius-compact);
-  color: var(--sog-accent);
-  font-size: 0.64rem;
+  border: 1px solid var(--sog-line);
+  border-radius: 999px;
+  color: var(--sog-text-muted);
+  font-family: var(--sog-font-data);
+  font-size: 0.75rem;
+}
+
+.stablecoin-index-filter summary > span:last-child[data-selected] {
+  border-color: var(--sog-link);
+  background: var(--sog-surface-selected);
+  color: var(--sog-link-hover);
 }
 
 .stablecoin-index-filter summary::after {
   content: attr(data-summary-label);
   grid-column: 1 / -1;
-  color: var(--sog-ink-quiet);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
+  color: var(--sog-link);
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .stablecoin-index-filter-options {
-  max-height: 250px;
+  max-height: 220px;
   overflow-y: auto;
-  padding: 0.3rem 0.55rem 0.65rem;
+  padding: 0.2rem 0.65rem 0.7rem;
   display: grid;
-  gap: 0.1rem;
-  border-top: 1px solid var(--sog-rule);
+  gap: 0.2rem;
+  border-top: 1px solid var(--sog-line-subtle);
 }
 
 .stablecoin-index-filter-options label {
-  min-height: 38px;
-  padding: 0.32rem 0.2rem;
+  min-height: 40px;
+  padding: 0.35rem 0.4rem;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  color: var(--sog-ink-muted);
-  font-size: 0.75rem;
+  gap: 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
   cursor: pointer;
+  overflow-wrap: anywhere;
 }
 
 .stablecoin-index-filter-options label:hover {
-  color: var(--sog-accent);
+  border-color: var(--sog-line-subtle);
+  background: var(--sog-surface-interactive);
+  color: var(--sog-text);
+}
+
+.stablecoin-index-filter-options label:has(input:checked) {
+  border-color: color-mix(in srgb, var(--sog-link) 60%, var(--sog-line));
+  background: var(--sog-surface-selected);
+  color: var(--sog-link-hover);
 }
 
 .stablecoin-index-filter-options input,
 .comparison-choice input {
   width: 18px;
   height: 18px;
-  accent-color: var(--sog-accent);
+  flex: 0 0 auto;
+  accent-color: var(--sog-link);
 }
 
 .stablecoin-index-summary {
-  min-height: 54px;
-  padding: 0.7rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  min-height: 68px;
+  padding: 0.85rem 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 1rem;
-  border-bottom: 1px solid var(--sog-rule-strong);
-  scroll-margin-top: 6rem;
+  align-items: center;
+  border-bottom: 1px solid var(--sog-line-subtle);
+  background: color-mix(in srgb, var(--sog-surface-raised) 72%, transparent);
+  scroll-margin-top: 8rem;
+}
+
+.stablecoin-index-summary > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.stablecoin-index-summary-label {
+  color: var(--sog-text-faint);
+  font-family: var(--sog-font-data);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .stablecoin-index-active-filters {
   min-width: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.55rem;
+  gap: 0.4rem;
 }
 
 .active-filter-chip {
-  min-height: 32px;
-  padding: 0.28rem 0;
-  border: 0;
-  border-bottom: 1px solid var(--sog-rule-strong);
-  border-radius: 0;
-  background: transparent;
-  color: var(--sog-ink-muted);
+  min-height: 36px;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--sog-link) 56%, var(--sog-line));
+  border-radius: 999px;
+  background: var(--sog-surface-selected);
+  color: var(--sog-link-hover);
   font: inherit;
-  font-size: 0.68rem;
+  font-size: 0.8125rem;
   cursor: pointer;
 }
 
 .active-filter-chip:hover,
 .active-filter-chip:focus-visible {
-  color: var(--sog-accent);
-  border-color: var(--sog-accent);
+  border-color: var(--sog-focus);
 }
 
 .active-filter-empty {
-  color: var(--sog-ink-quiet);
-  font-size: 0.72rem;
+  color: var(--sog-text-muted);
+  font-size: 0.875rem;
 }
 
 .stablecoin-index-result-count {
-  flex: 0 0 auto;
-  color: var(--sog-ink-muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
-  font-variant-numeric: tabular-nums;
+  color: var(--sog-text-muted);
+  font-family: var(--sog-font-data);
+  font-size: 0.8125rem;
+  white-space: nowrap;
 }
 
-.stablecoin-index-result-count [data-result-count] {
-  color: var(--sog-ink);
-  font-weight: 800;
+.stablecoin-index-result-count strong {
+  color: var(--sog-text);
+}
+
+.stablecoin-index-results-heading {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  border-bottom: 1px solid var(--sog-line-subtle);
+}
+
+.stablecoin-index-results-heading > span {
+  color: var(--sog-text-faint);
+  font-family: var(--sog-font-data);
+  font-size: 0.75rem;
 }
 
 .stablecoin-index-table {
@@ -291,66 +421,54 @@
 }
 
 .stablecoin-index-table table {
-  min-width: 1120px;
-  font-size: 0.76rem;
+  min-width: 1180px;
+  margin: 0;
+  font-size: 0.875rem;
 }
 
 .stablecoin-index-table th {
   position: sticky;
-  top: 74px;
-  z-index: 2;
-  padding: 0.7rem 0.65rem;
-  background: var(--sog-paper);
-  color: var(--sog-ink-quiet);
-  font-size: 0.6rem;
+  z-index: 3;
+  top: 144px;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--sog-line);
+  background: color-mix(in srgb, var(--sog-background-subtle) 98%, transparent);
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem !important;
   white-space: nowrap;
 }
 
 .stablecoin-index-table td {
-  padding: 0.82rem 0.65rem;
-  border-bottom-color: var(--sog-rule);
-  color: var(--sog-ink);
+  padding: 0.9rem 0.75rem;
+  border-bottom: 1px solid var(--sog-line-subtle);
+  color: var(--sog-text);
+  font-size: 0.875rem !important;
   line-height: 1.45;
+  vertical-align: top;
+}
+
+.stablecoin-index-table tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--sog-surface-interactive) 62%, transparent);
 }
 
 .stablecoin-index-table tbody tr:hover {
-  background: var(--sog-paper-subtle);
+  background: var(--sog-surface-selected);
 }
 
 .stablecoin-index-table th:nth-child(1),
-.stablecoin-index-table td:nth-child(1) {
-  min-width: 210px;
-}
-
+.stablecoin-index-table td:nth-child(1) { min-width: 220px; }
 .stablecoin-index-table th:nth-child(2),
-.stablecoin-index-table td:nth-child(2) {
-  width: 84px;
-}
-
+.stablecoin-index-table td:nth-child(2) { width: 88px; }
 .stablecoin-index-table th:nth-child(3),
-.stablecoin-index-table td:nth-child(3) {
-  min-width: 145px;
-}
-
+.stablecoin-index-table td:nth-child(3) { min-width: 150px; }
 .stablecoin-index-table th:nth-child(4),
-.stablecoin-index-table td:nth-child(4) {
-  min-width: 140px;
-}
-
+.stablecoin-index-table td:nth-child(4) { min-width: 150px; }
 .stablecoin-index-table th:nth-child(5),
-.stablecoin-index-table td:nth-child(5) {
-  min-width: 195px;
-}
-
+.stablecoin-index-table td:nth-child(5) { min-width: 210px; }
 .stablecoin-index-table th:nth-child(6),
-.stablecoin-index-table td:nth-child(6) {
-  min-width: 170px;
-}
-
+.stablecoin-index-table td:nth-child(6) { min-width: 180px; }
 .stablecoin-index-table th:nth-child(7),
-.stablecoin-index-table td:nth-child(7) {
-  min-width: 170px;
-}
+.stablecoin-index-table td:nth-child(7) { min-width: 190px; }
 
 .stablecoin-index-table tr[hidden],
 .stablecoin-index-card[hidden],
@@ -363,16 +481,16 @@
 .stablecoin-index-table td small,
 .stablecoin-index-card small {
   display: block;
-  margin-top: 0.2rem;
-  color: var(--sog-ink-quiet);
-  font-size: 0.64rem;
+  margin-top: 0.25rem;
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
   line-height: 1.45;
 }
 
 .stablecoin-record-identity {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.7rem;
 }
 
 .stablecoin-record-identity > div {
@@ -380,50 +498,60 @@
 }
 
 .record-name {
-  color: var(--sog-ink);
+  color: var(--sog-text);
   font-weight: 800;
   text-decoration: none;
 }
 
 .record-name:hover {
-  color: var(--sog-accent);
+  color: var(--sog-link-hover);
 }
 
 .record-symbol {
-  color: var(--sog-accent);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
+  color: var(--sog-link);
+  font-family: var(--sog-font-data);
+  font-size: 0.8125rem;
   font-weight: 800;
-  letter-spacing: 0.03em;
 }
 
 .organization-summary {
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .organization-summary summary {
-  min-height: 30px;
-  color: var(--sog-accent);
-  font-size: 0.65rem;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  color: var(--sog-link);
+  font-size: 0.75rem;
   cursor: pointer;
 }
 
 .organization-summary p {
-  margin: 0.25rem 0 0;
-  color: var(--sog-ink-muted);
-  font-size: 0.68rem;
-  line-height: 1.5;
+  margin: 0.35rem 0 0;
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
 }
 
 .comparison-choice {
-  min-height: 30px;
-  margin: 0.32rem 0 0 2.5rem;
+  margin-top: 0.55rem;
+  min-height: 38px;
+  padding: 0.35rem 0.55rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  color: var(--sog-ink-quiet);
-  font-size: 0.64rem;
+  gap: 0.45rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 999px;
+  background: var(--sog-surface-interactive);
+  color: var(--sog-text-muted);
+  font-size: 0.75rem;
   cursor: pointer;
+}
+
+.comparison-choice:has(input:checked) {
+  border-color: var(--sog-link);
+  background: var(--sog-surface-selected);
+  color: var(--sog-link-hover);
 }
 
 .stablecoin-index-cards {
@@ -431,249 +559,233 @@
 }
 
 .stablecoin-index-card {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--sog-rule-strong);
+  padding: 1rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  background: var(--sog-surface-interactive);
 }
 
 .stablecoin-index-card-heading {
   display: flex;
   justify-content: space-between;
-  gap: 0.8rem;
+  gap: 0.75rem;
   align-items: flex-start;
 }
 
 .stablecoin-index-card-identity {
   min-width: 0;
   display: flex;
+  gap: 0.75rem;
   align-items: center;
-  gap: 0.7rem;
 }
 
 .stablecoin-index-card h2 {
-  margin: 0;
-  font-family: Georgia, Cambria, "Times New Roman", serif;
-  font-size: 1.25rem;
-  line-height: 1.08;
+  margin: 0.2rem 0 0;
+  font-size: 1.1rem !important;
+  line-height: 1.3 !important;
 }
 
 .stablecoin-index-card h2 a {
-  color: var(--sog-ink);
+  color: var(--sog-text);
   text-decoration: none;
 }
 
-.stablecoin-index-card h2 a:hover {
-  color: var(--sog-accent);
-}
-
-.stablecoin-index-card-grid {
+.mobile-card-primary,
+.mobile-card-details dl {
   margin: 0.9rem 0 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--sog-rule);
+  gap: 0.55rem;
 }
 
-.stablecoin-index-card-grid > div {
-  padding: 0.58rem 0;
-  display: grid;
-  grid-template-columns: minmax(92px, 0.75fr) minmax(0, 1fr);
-  gap: 0.6rem;
-  border-bottom: 1px solid var(--sog-rule);
+.mobile-card-primary > div,
+.mobile-card-details dl > div {
+  padding: 0.65rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--sog-background-subtle) 65%, transparent);
 }
 
-.stablecoin-index-card-grid > div:nth-child(odd) {
-  padding-right: 0.85rem;
+.mobile-card-primary dt,
+.mobile-card-details dt {
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
 }
 
-.stablecoin-index-card-grid > div:nth-child(even) {
-  padding-left: 0.85rem;
-  border-left: 1px solid var(--sog-rule);
+.mobile-card-primary dd,
+.mobile-card-details dd {
+  margin: 0.2rem 0 0;
+  color: var(--sog-text);
+  font-size: 0.875rem;
 }
 
-.stablecoin-index-card-grid dt,
-.stablecoin-index-card-grid dd {
-  margin: 0;
+.mobile-card-details {
+  margin-top: 0.75rem;
 }
 
-.stablecoin-index-card-grid dd {
-  color: var(--sog-ink);
-  font-size: 0.72rem;
+.mobile-card-details summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: var(--sog-link);
+  cursor: pointer;
 }
 
 .comparison-choice-card {
-  margin-left: 0;
+  margin-top: 0.85rem;
+  width: 100%;
+  justify-content: center;
 }
 
 .stablecoin-index-no-results {
-  padding: 2.2rem 0;
+  margin: 1rem;
+  min-height: 210px;
+  padding: 2rem;
   display: grid;
-  justify-items: start;
-  gap: 0.45rem;
-  border-bottom: 1px solid var(--sog-rule-strong);
+  place-items: center;
+  align-content: center;
+  gap: 0.65rem;
+  border: 1px dashed var(--sog-line);
+  border-radius: var(--sog-radius-panel);
+  background: var(--sog-surface-interactive);
+  text-align: center;
 }
 
 .stablecoin-index-no-results strong {
-  font-family: Georgia, Cambria, "Times New Roman", serif;
-  font-size: 1.35rem;
+  font-size: 1.2rem;
 }
 
 .stablecoin-index-no-results span {
-  color: var(--sog-ink-muted);
-  font-size: 0.78rem;
+  color: var(--sog-text-muted);
 }
 
 .stablecoin-index-pagination {
-  min-height: 64px;
-  padding: 0.75rem 0;
+  min-height: 68px;
+  padding: 0.8rem 1rem;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto 1fr auto;
   gap: 1rem;
   align-items: center;
-  border-bottom: 1px solid var(--sog-rule-strong);
+  border-top: 1px solid var(--sog-line-subtle);
 }
 
-.stablecoin-index-pagination [data-page-status] {
+.stablecoin-index-pagination span {
   justify-self: center;
-  color: var(--sog-ink-muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
+  color: var(--sog-text-muted);
+  font-family: var(--sog-font-data);
+  font-size: 0.8125rem;
 }
 
-.stablecoin-index-pagination button:disabled {
-  opacity: 0.42;
-  cursor: not-allowed;
+.stablecoin-index-pagination .ui-button {
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--sog-line);
+  border-radius: var(--sog-radius-compact);
+  background: var(--sog-surface-interactive);
+  color: var(--sog-text);
+  cursor: pointer;
+}
+
+.stablecoin-index-pagination .ui-button:disabled {
+  opacity: 0.45;
 }
 
 .stablecoin-index-comparison {
-  margin-top: 2.5rem;
-  padding: 1.4rem 0 0;
-  border-top: 2px solid var(--sog-rule-strong);
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--sog-link) 52%, var(--sog-line));
+  border-radius: var(--sog-radius-panel);
+  background: color-mix(in srgb, var(--sog-surface-selected) 72%, var(--sog-surface));
 }
 
 .comparison-heading {
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-}
-
-.comparison-heading h2 {
-  margin: 0;
-  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-}
-
-.comparison-heading p:not(.stablecoin-index-eyebrow) {
-  margin: 0.4rem 0 0;
-  color: var(--sog-ink-muted);
-  font-size: 0.76rem;
+  align-items: flex-start;
 }
 
 .comparison-alert {
-  min-height: 1.2rem;
-  margin-top: 0.6rem;
-  color: var(--sog-critical);
-  font-size: 0.72rem;
+  min-height: 1.4rem;
+  margin-top: 0.5rem;
+  color: var(--sog-warning);
+  font-size: 0.875rem;
 }
 
 .comparison-grid {
+  margin-top: 0.75rem;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--sog-rule-strong);
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 0.65rem;
+  overflow-x: auto;
 }
 
 .comparison-record {
-  min-width: 0;
-  padding: 1rem;
-  border-right: 1px solid var(--sog-rule);
-  border-bottom: 1px solid var(--sog-rule);
-}
-
-.comparison-record:first-child {
-  border-left: 1px solid var(--sog-rule);
+  padding: 0.85rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-compact);
+  background: var(--sog-surface-raised);
 }
 
 .comparison-record h3 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1rem !important;
 }
 
 .comparison-record dl {
-  margin: 0.8rem 0 0;
+  margin: 0.75rem 0 0;
+  display: grid;
+  gap: 0.45rem;
 }
 
 .comparison-record dl > div {
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--sog-rule);
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--sog-line-subtle);
 }
 
-.comparison-record dd,
 .comparison-record dt {
-  margin: 0;
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
 }
 
 .comparison-record dd {
-  margin-top: 0.2rem;
-  color: var(--sog-ink);
-  font-size: 0.72rem;
+  margin: 0.15rem 0 0;
+  color: var(--sog-text);
+  font-size: 0.8125rem;
 }
 
 .comparison-disclaimer {
-  margin: 0;
-  padding: 0.8rem 0;
-  color: var(--sog-ink-quiet);
-  font-size: 0.7rem;
+  margin: 0.8rem 0 0;
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
 }
 
-@media (max-width: 1180px) {
-  .stablecoin-index-filter {
-    flex-basis: 180px;
-  }
-
-  .comparison-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .stablecoin-register-header {
     grid-template-columns: 1fr;
   }
 
-  .stablecoin-register-count {
-    min-width: 0;
-    padding: 0.8rem 0 0;
-    grid-template-columns: auto 1fr;
-    justify-items: start;
-    align-items: baseline;
-    gap: 0.5rem;
-    border-top: 1px solid var(--sog-rule);
-    border-left: 0;
+  .stablecoin-register-state {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .stablecoin-register-state > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .stablecoin-index-filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
   .stablecoin-index-toolbar {
-    grid-template-columns: minmax(0, 1fr) minmax(190px, 0.55fr);
+    grid-template-columns: 1fr 1fr;
   }
 
   .stablecoin-index-action {
     grid-column: 1 / -1;
-    justify-self: start;
-  }
-}
-
-@media (max-width: 719px) {
-  .stablecoin-index-section-heading,
-  .stablecoin-index-summary,
-  .comparison-heading {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .stablecoin-index-toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .stablecoin-index-filter-grid {
-    margin-inline: -0.625rem;
-    padding-inline: 0.625rem;
   }
 
   .stablecoin-index-table {
@@ -681,63 +793,95 @@
   }
 
   .stablecoin-index-cards {
-    padding: 0;
+    padding: 0.8rem;
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .stablecoin-index-results-heading > span {
+    display: none;
+  }
+}
+
+@media (max-width: 719px) {
+  .stablecoin-register-header,
+  .stablecoin-index-section-heading,
+  .stablecoin-index-controls,
+  .stablecoin-index-summary,
+  .stablecoin-index-results-heading {
+    padding: 1rem;
+  }
+
+  .stablecoin-register-header h1 {
+    font-size: clamp(2.15rem, 11vw, 3.35rem) !important;
+  }
+
+  .stablecoin-register-state,
+  .stablecoin-index-toolbar,
+  .stablecoin-index-filter-grid,
+  .stablecoin-index-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-filter:not([open]) .stablecoin-index-filter-options {
+    display: none;
+  }
+
+  .stablecoin-index-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-result-count {
+    white-space: normal;
+  }
+
+  .stablecoin-index-section-heading,
+  .stablecoin-index-results-heading,
+  .comparison-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .stablecoin-index-page-size,
+  .stablecoin-index-action {
+    width: 100%;
+    justify-content: center;
   }
 
   .stablecoin-index-pagination {
     grid-template-columns: 1fr 1fr;
   }
 
-  .stablecoin-index-pagination [data-page-status] {
+  .stablecoin-index-pagination span {
     grid-column: 1 / -1;
     grid-row: 1;
   }
 
-  .stablecoin-index-pagination [data-page-next] {
-    justify-self: end;
-  }
-
-  .comparison-grid {
+  .mobile-card-primary,
+  .mobile-card-details dl {
     grid-template-columns: 1fr;
-  }
-
-  .comparison-record,
-  .comparison-record:first-child {
-    border-left: 0;
-    border-right: 0;
   }
 }
 
-@media (max-width: 520px) {
-  .stablecoin-index-card-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 420px) {
+  .stablecoin-register-links {
+    display: grid;
   }
 
-  .stablecoin-index-card-grid > div:nth-child(odd),
-  .stablecoin-index-card-grid > div:nth-child(even) {
-    padding-inline: 0;
-    border-left: 0;
-  }
-
-  .stablecoin-index-card-heading {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .stablecoin-index-page * {
-    scroll-behavior: auto !important;
+  .stablecoin-register-links a {
+    justify-content: center;
   }
 }
 
 @media (forced-colors: active) {
+  .stablecoin-register-header,
+  .stablecoin-index-registry,
+  .stablecoin-index-controls,
   .stablecoin-index-filter,
-  .stablecoin-index-pagination,
   .stablecoin-index-card,
-  .comparison-record,
-  .active-filter-chip {
+  .stablecoin-index-comparison,
+  .comparison-record {
     forced-color-adjust: auto;
   }
 }
