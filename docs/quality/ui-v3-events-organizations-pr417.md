@@ -31,7 +31,8 @@ No route addition, removal, or rename is authorized.
 - selected counts, removable active filters, clear-all, result range/count, pagination, and explicit empty state;
 - URL-backed search/filter/sort/page state;
 - impact and historical lifecycle effect remain separate;
-- responsive desktop table and compact mobile records.
+- responsive desktop table and compact mobile records;
+- the 390px mobile default register must remain at or below 9,000px total body height.
 
 ## Event detail
 
@@ -49,7 +50,8 @@ No route addition, removal, or rename is authorized.
 - selected counts, removable active filters, clear-all, result range/count, pagination, and explicit empty state;
 - URL-backed search/filter/sort/page state;
 - organization role/type, connected assets, relationship count/state, evidence, and confidence remain separate;
-- responsive desktop table and compact mobile records.
+- responsive desktop table and compact mobile records;
+- the 390px mobile default register must remain at or below 9,000px total body height.
 
 ## Organization detail
 
@@ -65,7 +67,9 @@ No route addition, removal, or rename is authorized.
 - avoid decorative gradients and marketing-dashboard styling;
 - sticky record navigation must remain keyboard operable;
 - long event titles, organization names, IDs, roles, jurisdictions, and URLs must wrap or use explicit local scroll containers;
-- no horizontal page overflow at 1440px or 390px.
+- no horizontal page overflow at 1440px or 390px;
+- do not treat a 12,000px mobile register as acceptable merely because it has no horizontal overflow;
+- compact mobile cards must preserve primary facts while moving secondary facts behind disclosure.
 
 ## Mandatory visual matrix
 
@@ -80,7 +84,7 @@ Desktop /issuer/circle/
 Mobile  /issuer/circle/
 ```
 
-The machine audit must verify route markers, visible controls, bounded initial register records, required detail sections, and zero horizontal overflow. Missing capture or skipped audit is a hard failure. Automated rendering does not update owner approval.
+The machine audit must verify route markers, visible controls, bounded initial register records, required detail sections, zero horizontal overflow, and the 9,000px mobile-register height ceiling. Missing capture, skipped audit, horizontal overflow, or mobile vertical-density failure is a hard failure. Automated rendering does not update owner approval.
 
 ## Preserved boundaries
 
