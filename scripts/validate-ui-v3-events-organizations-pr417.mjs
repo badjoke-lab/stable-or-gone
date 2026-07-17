@@ -21,6 +21,8 @@ const files = {
   eventScript: 'src/scripts/event-index.ts',
   organizationScript: 'src/scripts/organization-index.ts',
   styles: 'src/styles/events-organizations-pr417.css',
+  mobileStyles: 'src/styles/events-organizations-pr417-mobile.css',
+  capture: 'scripts/capture-events-organizations-pr417.mjs',
   contract: 'config/ui-v3-events-organizations-pr417.json',
   handoff: 'docs/migration/ui-v3-events-organizations-pr417-handoff.json'
 };
@@ -29,7 +31,6 @@ if (failures.length) { console.error(JSON.stringify({ ok:false, failures }, null
 const source = Object.fromEntries(Object.entries(files).map(([key, file]) => [key, read(file)]));
 const contract = json(files.contract);
 const handoff = json(files.handoff);
-const gate = json('docs/migration/post-pr415-review-gate-pr416.json');
 const approvals = json('docs/migration/ui-v3-visual-approval-register.json');
 const design = json('config/ui-v3-rebuild-design-contract-pr409.json');
 
@@ -39,13 +40,18 @@ check(JSON.stringify(contract.event_priority) === JSON.stringify(design.template
 check(JSON.stringify(contract.organization_priority) === JSON.stringify(design.template_priority.organizations), 'organization priority changed');
 check(contract.registers?.events?.page_size === 20 && contract.registers?.events?.initial_ssr_max === 20, 'event bound changed');
 check(contract.registers?.organizations?.page_size === 20 && contract.registers?.organizations?.initial_ssr_max === 20, 'organization bound changed');
+check(contract.registers?.events?.mobile_max_body_height_px === 9000, 'event mobile height ceiling changed');
+check(contract.registers?.organizations?.mobile_max_body_height_px === 9000, 'organization mobile height ceiling changed');
 check(contract.visual_review?.required_capture_count === 8 && contract.visual_review?.bounded_primary_indexes === true, 'visual matrix or bounded-index gate changed');
+check(contract.visual_review?.mobile_vertical_density_gate_required === true && contract.visual_review?.mobile_register_max_body_height_px === 9000, 'mobile vertical-density gate changed');
 check(contract.visual_review?.horizontal_page_overflow_allowed === false && contract.visual_review?.skipped_audit_result === 'hard_failure' && contract.visual_review?.automated_capture_counts_as_owner_approval === false, 'visual failure gates changed');
 check(contract.representative_visual_states?.length === 8, 'visual state matrix must contain eight states');
+for (const id of ['events-mobile','organizations-mobile']) check(contract.representative_visual_states.find((state) => state.id === id)?.max_body_height_px === 9000, `${id}: mobile height limit missing`);
 
 check(handoff.status === 'implementation_complete' && handoff.implementation_pr === 417 && handoff.source_review_pr === 416, 'handoff identity changed');
 check(handoff.register_bounds?.events_initial_ssr_max === 20 && handoff.register_bounds?.organizations_initial_ssr_max === 20, 'handoff bounds changed');
-check(handoff.visual_artifacts?.required_capture_count === 8 && handoff.visual_artifacts?.skipped_visual_audit_allowed === false && handoff.visual_artifacts?.horizontal_page_overflow_allowed === false, 'handoff visual gates changed');
+check(handoff.register_bounds?.events_mobile_max_body_height_px === 9000 && handoff.register_bounds?.organizations_mobile_max_body_height_px === 9000, 'handoff mobile density bounds changed');
+check(handoff.visual_artifacts?.required_capture_count === 8 && handoff.visual_artifacts?.skipped_visual_audit_allowed === false && handoff.visual_artifacts?.horizontal_page_overflow_allowed === false && handoff.visual_artifacts?.mobile_vertical_density_failure_allowed === false, 'handoff visual gates changed');
 check(handoff.owner_approval_state?.accepted_desktop === 0 && handoff.owner_approval_state?.accepted_mobile === 0 && handoff.owner_approval_state?.ui_completion === false, 'handoff records owner approval or completion');
 check(handoff.changes?.routes === 0 && handoff.changes?.canonical_data === 0 && handoff.changes?.public_machine_readable_data === 0 && handoff.changes?.metadata_contract === 0, 'handoff records protected changes');
 check(handoff.next_work_item?.decision === 'review_gate_required' && handoff.boundaries?.pr_f_pre_authorized === false, 'handoff does not stop at review gate');
@@ -53,6 +59,8 @@ check(handoff.canonical_counts?.assets === 112 && handoff.canonical_counts?.orga
 
 check(source.eventRegister.includes('const PAGE_SIZE = 20'), 'event page size missing');
 check(source.organizationRegister.includes('const PAGE_SIZE = 20'), 'organization page size missing');
+check(source.eventRegister.includes("import '../styles/events-organizations-pr417-mobile.css'"), 'event mobile density stylesheet is not loaded');
+check(source.organizationRegister.includes("import '../styles/events-organizations-pr417-mobile.css'"), 'organization mobile density stylesheet is not loaded');
 check(source.eventRegister.includes('data-register-version="pr417-events"'), 'event register marker missing');
 check(source.organizationRegister.includes('data-register-version="pr417-organizations"'), 'organization register marker missing');
 check(source.eventRecord.includes('data-record-version="pr417-event"'), 'event detail marker missing');
@@ -66,7 +74,9 @@ for (const marker of ['data-organization-search','data-organization-sort','data-
 for (const marker of ['URLSearchParams','pushState','replaceState','popstate','currentPage','pageSize','noResults.hidden']) check(source.eventScript.includes(marker), `event URL/bound marker missing: ${marker}`);
 for (const marker of ['URLSearchParams','pushState','replaceState','popstate','currentPage','pageSize','noResults.hidden']) check(source.organizationScript.includes(marker), `organization URL/bound marker missing: ${marker}`);
 for (const marker of ['.event-index-page[data-register-version="pr417-events"]','.organization-index-page[data-register-version="pr417-organizations"]','.event-detail-page[data-record-version="pr417-event"]','.organization-detail-page[data-record-version="pr417-organization"]','@media (max-width: 719px)','@media (forced-colors: active)']) check(source.styles.includes(marker), `style marker missing: ${marker}`);
-check(!source.styles.includes('linear-gradient(') && !source.styles.includes('radial-gradient('), 'decorative gradient introduced');
+for (const marker of ['.event-index-page[data-register-version="pr417-events"] .event-index-card','.organization-index-page[data-register-version="pr417-organizations"] .organization-index-card','.mobile-card-primary','@media (max-width: 719px)']) check(source.mobileStyles.includes(marker), `mobile density style marker missing: ${marker}`);
+check(!`${source.styles}\n${source.mobileStyles}`.includes('linear-gradient(') && !`${source.styles}\n${source.mobileStyles}`.includes('radial-gradient('), 'decorative gradient introduced');
+check(source.capture.includes("maxBodyHeight:9000") && source.capture.includes('vertical density failure') && source.capture.includes('vertical_density_failure_count'), 'capture script does not enforce mobile vertical density');
 const publicCopy = `${source.eventRegister}\n${source.eventRecord}\n${source.organizationRegister}\n${source.organizationRecord}`.toLowerCase();
 for (const prohibited of ['incident score','organization score','safety score','transparency score','risk score','quality score']) check(!publicCopy.includes(prohibited), `prohibited score introduced: ${prohibited}`);
 
@@ -84,7 +94,7 @@ try {
   for (const file of ['config/site-architecture.mjs','docs/migration/ui-v3-visual-approval-register.json','docs/migration/current-canonical-checkpoint.json','docs/migration/current-stats-history-checkpoint.json','docs/migration/registry-release-integrity-baseline.json']) check(git('hash-object', file) === git('rev-parse', `origin/main:${file}`), `${file}: protected content changed`);
 } catch (error) { failures.push(`origin/main comparison failed: ${error.message}`); }
 
-const result = { schema_version:'1.0', generated_at:new Date().toISOString(), ok:failures.length === 0, implementation_pr:417, event_page_size:20, organization_page_size:20, representative_visual_states:8, canonical_record_changes:0, route_changes:0, owner_approval_changes:0, failures };
+const result = { schema_version:'1.0', generated_at:new Date().toISOString(), ok:failures.length === 0, implementation_pr:417, event_page_size:20, organization_page_size:20, mobile_register_max_body_height_px:9000, representative_visual_states:8, canonical_record_changes:0, route_changes:0, owner_approval_changes:0, failures };
 fs.mkdirSync(path.join(root, 'data/generated'), { recursive:true });
 fs.writeFileSync(path.join(root, 'data/generated/ui-v3-events-organizations-pr417-validation.json'), `${JSON.stringify(result, null, 2)}\n`);
 if (failures.length) { console.error(JSON.stringify(result, null, 2)); process.exit(1); }
