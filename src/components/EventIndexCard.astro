@@ -1,5 +1,5 @@
 ---
-const { record } = Astro.props;
+const { record, initiallyVisible = true } = Astro.props;
 const data = {
   'data-record-id': record.id,
   'data-search': record.search,
@@ -13,12 +13,12 @@ const data = {
   'data-evidence-count': String(record.sourceIdentityCount)
 };
 ---
-<article class="event-index-card" data-event-card data-mobile-representation-for="event-index" {...data}>
-  <header><time>{record.eventDate || 'Date not recorded'}</time><h2><a href={`/event/${record.id}/`}>{record.title}</a></h2></header>
+<article class="event-index-card" data-event-card data-mobile-representation-for="event-index" hidden={initiallyVisible ? undefined : true} {...data}>
+  <header><time datetime={record.eventDate || undefined}>{record.eventDate || 'Date not recorded'}</time><h2><a href={`/event/${record.id}/`}>{record.title}</a></h2><span class="event-impact-label">{record.impactLabel}</span></header>
   <dl class="mobile-card-primary">
     <div><dt>Category</dt><dd>{record.categoryLabel}</dd></div>
     <div><dt>Subjects</dt><dd>{record.subjectNames.join(', ') || 'Not recorded'}</dd></div>
-    <div><dt>Status effect</dt><dd>{record.statusEffectLabel}</dd></div>
+    <div><dt>Lifecycle effect</dt><dd>{record.statusEffectLabel}</dd></div>
     <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
   </dl>
   <details class="mobile-card-details">
