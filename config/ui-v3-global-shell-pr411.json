@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_global_shell_pr411_2026_07_17",
+  "status": "active_implementation",
+  "issue": 281,
+  "implementation_pr": 411,
+  "source_review_pr": 410,
+  "phase": "PR B",
+  "shell_marker": "evidence-registry-pr411",
+  "structure": {
+    "desktop_rows": 2,
+    "brand_present": true,
+    "prominent_registry_search": true,
+    "grouped_navigation": true,
+    "utility_navigation": true,
+    "mobile_navigation": true,
+    "structured_footer": true
+  },
+  "typography": {
+    "body_min_px": 16,
+    "table_min_px": 14,
+    "control_min_px": 14,
+    "metadata_min_px": 13,
+    "touch_target_min_px": 44,
+    "interface_font": "system_sans",
+    "data_font": "system_monospace"
+  },
+  "navigation": {
+    "source": "config/site-architecture.mjs",
+    "group_source_export": "globalNavigationGroups",
+    "utility_source_export": "utilityNavigation",
+    "active_route_state": "aria-current=page",
+    "mobile_disclosure": "details",
+    "escape_focus_return": true,
+    "outside_click_close": true
+  },
+  "search": {
+    "action": "/stablecoins/",
+    "method": "GET",
+    "query_parameter": "q",
+    "desktop_visible": true,
+    "mobile_panel_visible": true
+  },
+  "surface_levels": [
+    "page",
+    "section",
+    "card",
+    "interactive",
+    "selected",
+    "focus",
+    "warning",
+    "critical"
+  ],
+  "responsive": {
+    "desktop_navigation_breakpoint_px": 1120,
+    "compact_breakpoint_px": 719,
+    "required_review_widths_px": [320, 390, 768, 1280, 1440],
+    "horizontal_overflow_allowed": false
+  },
+  "visual_artifacts": {
+    "desktop_screenshots_required": true,
+    "mobile_screenshots_required": true,
+    "representative_audit_required": true,
+    "contact_sheet_required": true,
+    "skipped_audit_result": "hard_failure",
+    "automated_rendering_is_owner_approval": false
+  },
+  "boundaries": {
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "page_templates_redesigned": false,
+    "owner_approval_records_changed": false,
+    "ui_completion_declared": false,
+    "pr_c_pre_authorized": false
+  }
+}
