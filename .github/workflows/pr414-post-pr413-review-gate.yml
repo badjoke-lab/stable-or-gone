@@ -1,0 +1,82 @@
+name: PR 414 Post PR 413 Review Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr414-post-pr413-review-gate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr414-post-pr413-review-gate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate PR 414 review authority
+        run: node scripts/validate-post-pr413-review-gate-pr414.mjs && npm run validate:active-workstream
+      - name: Verify governance-only boundary
+        run: |
+          test -z "$(git diff --name-only origin/main...HEAD -- src/ public/ data/ config/ scripts/monitoring/)"
+          git diff --exit-code origin/main...HEAD -- \
+            docs/migration/ui-v3-visual-approval-register.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate final registry state
+        run: npm run validate:final
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+      - name: Validate reproducible build
+        run: npm run validate:reproducible-build
+      - name: Astro check and build
+        run: npm run check && npm run build && npm run verify:public
+      - name: Publish PR 414 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr414-post-pr413-review-status -->';
+            const body=`${marker}
+            ## PR #414 Post-PR #413 Review Gate
+
+            - Workflow: **${{ job.status }}**
+            - Source implementation merge: **\`8771de6ad5fc79310a638455f5be24b27af20eb3\`**
+            - Visual review run: **29573553479**
+            - Required captures: **10 / 10**
+            - Visual failures: **0**
+            - Horizontal-overflow failures: **0**
+            - Owner approvals accepted: **0**
+            - Routes changed: **0**
+            - Canonical changes: **0**
+            - Approved next PR: **#415**
+            - Approved route family: **\`/stablecoin/[slug]/\`**
+            - Exit after PR #415: **REVIEW GATE**
+            - Head: \`${context.sha}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
