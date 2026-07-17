@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import EventEditorialHeader from './EventEditorialHeader.astro';
 import EventEditorialBody from './EventEditorialBody.astro';
 import '../styles/event-detail-v3.css';
+import '../styles/events-organizations-pr417.css';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 const { event } = Astro.props;
 const view = buildEventDetailView(event);
@@ -11,7 +12,7 @@ const description = view.eventDescription;
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: view.eventTitle, url: `https://sog.badjoke-lab.com/event/${event.id}/`, description, datePublished: event.event_date };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
-  <article class="event-detail-page" data-ui-v3-event-detail>
+  <article class="event-detail-page" data-ui-v3-event-detail data-record-version="pr417-event">
     <EventEditorialHeader event={event} view={view} />
     <nav class="event-detail-nav" aria-label="Event record sections"><a href="#overview">Overview</a><a href="#subjects">Subjects</a>{view.hasStructuredDetail && <a href="#structured-detail">Structured detail</a>}<a href="#sources">Sources</a><a href="#corrections">Corrections</a></nav>
     <EventEditorialBody event={event} view={view} />
