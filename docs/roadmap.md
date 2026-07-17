@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #419 active
+Status: canonical execution schedule — PR #420 active review gate
 
 ## Current position
 
@@ -27,9 +27,11 @@ PR #415 UI v3 Rebuild D — stablecoin dossier: complete
 PR #416 Post-PR #415 Review Gate: complete
 PR #417 UI v3 Rebuild E — events and organizations: complete
 PR #418 Post-PR #417 Review Gate: complete
-PR #419 UI v3 Rebuild F — guides and secondary pages: active; complete on merge
-PR G full visual closure: blocked
-REVIEW GATE: mandatory after PR #419
+PR #419 UI v3 Rebuild F — guides and secondary pages: complete
+PR #420 Post-PR #419 Review Gate: active; complete on merge
+PR #421 UI v3 Rebuild G — full visual closure: approved next
+Owner review: mandatory after PR #421
+UI completion: false
 ```
 
 ## Current authority
@@ -62,110 +64,88 @@ docs/migration/post-pr417-review-gate-pr418.json
 docs/quality/ui-v3-guides-secondary-pages-pr419.md
 config/ui-v3-guides-secondary-pages-pr419.json
 docs/migration/ui-v3-guides-secondary-pages-pr419-handoff.json
+docs/quality/post-pr419-review-gate-pr420-spec.md
+docs/migration/post-pr419-review-gate-pr420.json
 ```
 
-## PR #417 reviewed outcome
+## PR #419 reviewed outcome
 
 ```text
-Source implementation merge: aa4e5b98ae25652c2aeb6327000ce6a7b8f14e51
-Source implementation head: 8d9d9472e9458ac689b7edb624baf737e5119364
+Source implementation merge: 5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7
+Source implementation head: 87fd5d9539b87c8cee46870b60eb745644129467
 Contract/build validation: success
 Mandatory desktop/mobile visual audit: success
-Visual review run: 29596605158
-Visual artifact: 8413318222
-Required captures: 8
-Completed captures: 8
+Visual review run: 29599351044
+Visual artifact: 8414428588
+Visual artifact digest: sha256:9b844bdd46b37b577d1c33f725a166f0682972ffc458f903066a567bef27216f
+Required captures: 16
+Completed captures: 16
 Visual failures: 0
 Horizontal-overflow failures: 0
-Mobile vertical-density failures: 0
-Events mobile body height: 8,886px
-Organizations mobile body height: 8,514px
 Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
+Metadata contract changed: 0
 Owner approval records changed: 0
+Automated rendering equals owner approval: false
 ```
 
-## PR #418 decision
+The guide archive, representative long-form guide, methodology, about, comparison, access/regulation, timeline, and statistics pages now share the evidence-registry hierarchy. Reading width, generated contents navigation, publication metadata, local table containment, visible tool state, absence/freshness semantics, and no-score boundaries remain explicit.
 
-PR #418 authorizes exactly:
+## PR #420 decision
+
+PR #420 authorizes exactly:
 
 ```text
-PR #419 — UI v3 Rebuild F: guides and secondary pages
-REVIEW GATE
+PR #421 — UI v3 Rebuild G: full visual closure
+AWAITING OWNER REVIEW
 ```
 
-Authorized existing route families:
+PR #421 is not another broad redesign. It prepares the final cross-template visual review package and verifies that every completed phase remains intact.
+
+Required owner-review states:
 
 ```text
-/guides/
-/guides/[article]/
-/methodology/
-/about/
-/glossary/
-/models/
-/updates/
-/maintenance/
-/contact/
-/support/
-/compare/
-/access-regulation/
-/timeline/
-/stats/
+Desktop + mobile: home
+Desktop default + filtered: stablecoin register
+Mobile filtered: stablecoin register
+Desktop empty: stablecoin register
+Desktop + mobile: USDC dossier
+Desktop + mobile: event register
+Desktop + mobile: organization register
+Desktop + mobile: representative MiCA guide
 ```
 
-## PR #419 implementation
+Total required captures: 14.
 
-### Guide index and guide articles
+## PR #421 requirements
 
 ```text
-Reviewed research-archive entry surface
-Bounded reading width
-Sticky or local table of contents
-Publication, current-through, and update metadata kept separate
-Summary/callout distinction
-Responsive local table scrolling
-Related records, revision history, sources, methodology, and correction paths preserved
-Compact guide index records on mobile
+Final screenshot manifest
+Final contact sheet
+Owner-review worksheet
+All implementation merge commits verified as ancestors
+All route/canonical/public-projection/metadata boundaries unchanged
+Zero horizontal page overflow
+Real filtered and empty register states
+Responsive typography and 44px controls verified
+Automated capture remains non-approving
 ```
 
-### Methodology, about, reference, and utility pages
+## Owner approval boundary
+
+The visual approval register currently remains:
 
 ```text
-Evidence-registry page headers
-Clear section hierarchy
-Canonical definitions separated from explanatory prose
-Long-form table of contents retained
-Responsive tables and long identifiers
-Correction and support utility roles preserved
-No marketing landing-page conversion
+Required templates: 6
+Accepted desktop: 0
+Accepted mobile: 0
+Pending desktop: 6
+Pending mobile: 6
+UI completion: false
 ```
 
-### Comparison, access/regulation, timeline, and statistics
-
-```text
-Visible inputs, selected state, clear actions, and result or empty state
-Bounded matrices and tables
-Comparison Readiness and freshness remain separate
-Record absence and legal/access boundaries remain explicit
-Timeline date semantics remain explicit
-Statistics remain measured and registry-like
-Machine-readable projections and shareable URL state preserved
-No score or ranking added
-```
-
-Required representative visual states:
-
-```text
-Desktop + mobile: /guides/
-Desktop + mobile: /guides/eu-stablecoin-access-after-mica/
-Desktop + mobile: /methodology/
-Desktop + mobile: /about/
-Desktop + mobile: /compare/
-Desktop + mobile: /access-regulation/
-Desktop + mobile: /timeline/
-Desktop + mobile: /stats/
-```
+PR #421 may reach `AWAITING OWNER REVIEW`. It may not mark any template accepted or declare UI completion until the owner explicitly accepts every required desktop and mobile template state.
 
 ## Preserved boundaries
 
@@ -174,9 +154,9 @@ Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Home/stablecoin register/stablecoin dossier/event/organization templates changed: 0
-Owner approval records changed: 0
+Owner approval records changed by PR #420: 0
+Production UI changed by PR #420: 0
 UI completion declared: false
 ```
 
-Automated screenshots remain non-approving. PR #419 may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #419, stop at `REVIEW GATE` before PR G full visual closure.
+After PR #421, stop at `AWAITING OWNER REVIEW` unless an explicit owner decision is recorded.
