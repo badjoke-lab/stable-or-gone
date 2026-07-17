@@ -68,14 +68,14 @@ assert(changeEntrySchema.before_after_value_states.length === 8, 'before/after v
 assert(changeEntrySchema.affected_record_kinds.includes('evidence_source_identity'), 'affected records must include source identity');
 assert(changeEntrySchema.affected_record_kinds.includes('evidence_relation'), 'affected records must include evidence relation');
 
-assert(audit.totals?.legacy_update_entries === 16, `expected 16 legacy update entries, found ${audit.totals?.legacy_update_entries}`);
+assert(audit.totals?.legacy_update_entries === 17, `expected 17 legacy update entries, found ${audit.totals?.legacy_update_entries}`);
 assert(audit.totals?.legacy_categories === 4, `expected four legacy categories, found ${audit.totals?.legacy_categories}`);
 assert(audit.totals?.duplicate_legacy_ids === 0, 'legacy update IDs must be unique');
-assert(audit.totals?.legacy_public_copy_overrides === 16, 'all 16 legacy updates must retain public-copy overlays');
+assert(audit.totals?.legacy_public_copy_overrides === 17, 'all 17 legacy updates must retain public-copy overlays');
 assert(audit.totals?.legacy_missing_public_copy === 0, 'legacy update public-copy coverage must be complete');
 assert(audit.totals?.public_copy_without_legacy === 0, 'public-copy overlays must not point to missing legacy updates');
 assert(audit.totals?.target_ready_legacy_entries === 0, 'legacy updates must not be silently treated as structured change entries');
-assert(JSON.stringify(audit.legacy_updates?.categories) === JSON.stringify({ content: 4, data: 9, foundation: 1, ui: 2 }), 'legacy category inventory changed unexpectedly');
+assert(JSON.stringify(audit.legacy_updates?.categories) === JSON.stringify({ content: 5, data: 9, foundation: 1, ui: 2 }), 'legacy category inventory changed unexpectedly');
 assert((audit.legacy_updates?.duplicate_ids ?? []).length === 0, 'legacy duplicate ID list must be empty');
 assert((audit.legacy_updates?.missing_public_copy ?? []).length === 0, 'legacy missing-copy list must be empty');
 assert((audit.legacy_updates?.target_ready_ids ?? []).length === 0, 'legacy entries require explicit manual migration');

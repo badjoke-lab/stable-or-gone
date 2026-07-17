@@ -11,7 +11,7 @@ const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
 const partition = validateScheduledSourcePartition({ root });
-check(partition.daily.selected_source_count === 4, `daily source count must be 4, found ${partition.daily.selected_source_count}`);
+check(partition.daily.selected_source_count === 6, `daily source count must be 6, found ${partition.daily.selected_source_count}`);
 check(partition.weekly.selected_source_count === 35, `weekly source count must be 35, found ${partition.weekly.selected_source_count}`);
 check(partition.overlap.length === 0, `daily/weekly overlap must be zero: ${partition.overlap.join(', ')}`);
 check(partition.union_matches_all_sources === true, 'daily/weekly union must equal all enabled sources');
@@ -22,7 +22,9 @@ check(JSON.stringify(partition.daily.selected_source_ids) === JSON.stringify([
   'binance-eea-stablecoin-policy',
   'bitstamp-europe-mica-assets',
   'gemini-eea-account-closure',
-  'kraken-eea-stablecoin-offerings'
+  'kraken-eea-stablecoin-offerings',
+  'open-standard-open-usd',
+  'visa-stablecoin-platform'
 ]), 'daily source membership mismatch');
 check(partition.weekly.selected_source_ids.includes('esma-mica-interim-register-hub'), 'weekly group must include ESMA register source');
 
@@ -52,10 +54,10 @@ try {
     discoveredAt: '2026-07-07T01:00:00.000Z',
     fetchImpl: newsFetch
   });
-  check(news.query_count === 4, 'news discovery must execute four bounded queries');
-  check(news.item_count === 80, `news discovery must retain at most 20 items per query, found ${news.item_count}`);
+  check(news.query_count === 6, 'news discovery must execute six bounded queries');
+  check(news.item_count === 120, `news discovery must retain at most 20 items per query, found ${news.item_count}`);
   check(news.error_count === 0, 'news discovery fixture must have zero errors');
-  check(news.max_queries === 4 && news.max_items_per_query === 20, 'news discovery bounds mismatch');
+  check(news.max_queries === 6 && news.max_items_per_query === 20, 'news discovery bounds mismatch');
   check(news.policy.discovery_only === true, 'news discovery must remain discovery_only');
   check(news.policy.canonical_action === 'none', 'news discovery canonical action must remain none');
   check(news.policy.public_output === false, 'news discovery public output must remain false');
@@ -69,11 +71,11 @@ try {
   await runNewsDiscovery({
     discoveredAt: '2026-07-07T01:00:00.000Z',
     fetchImpl: newsFetch,
-    queries: Array.from({ length: 5 }, (_, index) => ({ query_id: `q${index}`, query: `query ${index}` }))
+    queries: Array.from({ length: 7 }, (_, index) => ({ query_id: `q${index}`, query: `query ${index}` }))
   });
-  failures.push('news discovery accepted more than four queries');
+  failures.push('news discovery accepted more than six queries');
 } catch (error) {
-  check(String(error).includes('query count must be between 1 and 4'), `unexpected news bound error: ${error}`);
+  check(String(error).includes('query count must be between 1 and 6'), `unexpected news bound error: ${error}`);
 }
 
 const staleFixture = {
@@ -130,8 +132,8 @@ async function runScheduledFixture(group) {
     const files = fs.readdirSync(result.run_directory).sort();
     if (group === 'daily') {
       check(result.manifest.schedule_group === 'daily', 'daily manifest schedule_group mismatch');
-      check(result.manifest.official_source_selection_count === 4, 'daily manifest source selection count must be 4');
-      check(result.manifest.news_discovery_item_count === 80, 'daily manifest news item count must be 80');
+      check(result.manifest.official_source_selection_count === 6, 'daily manifest source selection count must be 6');
+      check(result.manifest.news_discovery_item_count === 120, 'daily manifest news item count must be 120');
       check(result.manifest.article_stale_finding_count === 0, 'daily manifest stale finding count must be zero');
       check(files.includes('news-discovery.json'), 'daily scheduled output missing news-discovery.json');
       check(!files.includes('article-stale-state-review.json'), 'daily scheduled output must not include stale-state review');
@@ -140,13 +142,13 @@ async function runScheduledFixture(group) {
       check(result.manifest.official_source_selection_count === 35, 'weekly manifest source selection count must be 35');
       check(result.manifest.news_discovery_item_count === 0, 'weekly manifest news item count must be zero');
       check(result.manifest.article_stale_finding_count === 6, 'weekly manifest stale finding count must be 6');
-      check(files.includes('article-stale-state-review.json'), 'weekly scheduled output missing article-stale-state-review.json');
+      check(files.includes('article-stale-state-review.json'), 'weekly scheduled output missing stale-state review');
       check(!files.includes('news-discovery.json'), 'weekly scheduled output must not include news discovery');
     }
     check(result.manifest.canonical_guard?.ok === true, `${group} scheduled fixture canonical guard failed`);
     check(result.manifest.review_material_enabled === false, `${group} fixture review material setting mismatch`);
   } finally {
-    fs.rmSync(outputRoot, { recursive: true, force: true });
+    fs.rmSync(outputRoot, { recursive:true, force:true });
   }
 }
 
@@ -173,7 +175,7 @@ try {
 } catch (error) {
   failures.push(`manual compatibility fixture failed: ${error instanceof Error ? error.message : String(error)}`);
 } finally {
-  fs.rmSync(manualRoot, { recursive: true, force: true });
+  fs.rmSync(manualRoot, { recursive:true, force:true });
 }
 
 const workflow = fs.readFileSync('.github/workflows/monitoring-bounded-scheduled-read-only.yml', 'utf8');
@@ -184,7 +186,7 @@ check(workflow.includes('workflow_dispatch:'), 'manual scheduled-group dispatch 
 check(workflow.includes('contents: read'), 'scheduled workflow must use contents: read');
 check(workflow.includes('actions/upload-artifact@v4'), 'scheduled workflow must upload private artifact');
 check(workflow.includes('SOG_MONITORING_SCHEDULE_GROUP'), 'scheduled workflow must pass schedule group to runner');
-for (const forbidden of ['contents: write', 'pull-requests: write', 'issues: write', 'id-token: write', 'wrangler', 'CLOUDFLARE_', 'create-pull-request', 'pull_request:', 'workflow_run:', 'push:']) {
+for (const forbidden of ['contents: write','pull-requests: write','issues: write','id-token: write','wrangler','CLOUDFLARE_','create-pull-request','pull_request:','workflow_run:','push:']) {
   check(!workflow.includes(forbidden), `scheduled workflow contains prohibited token: ${forbidden}`);
 }
 
@@ -198,11 +200,11 @@ for (const marker of [
   'contents: read',
   'deploy monitoring output'
 ]) {
-  check(spec.includes(marker), `PR #324 specification missing marker: ${marker}`);
+  check(spec.includes(marker), `PR #324 historical specification missing marker: ${marker}`);
 }
 
 if (failures.length) {
-  console.error('PR #324 bounded scheduled monitoring validation failed:');
+  console.error('Current bounded scheduled monitoring validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
@@ -214,7 +216,7 @@ console.log(JSON.stringify({
   overlap: partition.overlap.length,
   union_matches_all_sources: partition.union_matches_all_sources,
   all_baselines_pending: partition.all_baselines_pending,
-  news_query_limit: 4,
+  news_query_limit: 6,
   news_item_limit_per_query: 20,
-  schedule_groups: ['daily', 'weekly']
+  schedule_groups: ['daily','weekly']
 }, null, 2));

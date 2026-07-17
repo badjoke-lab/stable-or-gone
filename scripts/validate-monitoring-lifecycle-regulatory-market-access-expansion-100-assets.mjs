@@ -39,26 +39,26 @@ check(current.checkpoint_id === checkpoint.checkpoint_id, `current observation c
 check(current.canonical_counts?.stablecoins === checkpoint.asset_count, `current observation stablecoin count must be ${checkpoint.asset_count}`);
 check(current.canonical_counts?.organizations === expectedCurrent.organizations, `current observation organization count must be ${expectedCurrent.organizations}`);
 check(current.canonical_counts?.relationships === expectedCurrent.relationships, `current observation relationship count must be ${expectedCurrent.relationships}`);
-check(current.coverage?.registered_asset_reach_count === 23, 'current registered asset reach must remain 23 until monitoring source scope expands');
+check(current.coverage?.registered_asset_reach_count === 23, 'current registered asset reach must remain 23 because new subjects are noncanonical');
 check(current.coverage?.uncovered_asset_count === checkpoint.asset_count - 23, `current uncovered asset count must be ${checkpoint.asset_count - 23}`);
 check(current.coverage?.covered_organization_count === 18, 'current covered organization count must remain 18');
 check(current.coverage?.accepted_asset_reach_count === 0, 'current accepted asset reach must remain zero');
 check(current.coverage?.multi_family_asset_count === 17, 'current multi-family asset count must remain 17');
 
-check(snapshot.source_baseline_sync?.source_count === 39, 'PR #323 source count must be 39');
-check(snapshot.source_baseline_sync?.baseline_count === 39, 'PR #323 baseline count must be 39');
-check(snapshot.source_baseline_sync?.source_baseline_id_parity === true, 'PR #323 source/baseline ID parity must be true');
+check(snapshot.source_baseline_sync?.source_count === 39, 'PR #323 historical source count must be 39');
+check(snapshot.source_baseline_sync?.baseline_count === 39, 'PR #323 historical baseline count must be 39');
+check(snapshot.source_baseline_sync?.source_baseline_id_parity === true, 'PR #323 historical source/baseline ID parity must be true');
 check(snapshot.source_baseline_sync?.pending_initial_acceptance === 39, 'all 39 historical baselines must remain pending');
 check(snapshot.source_baseline_sync?.accepted === 0, 'historical accepted baseline count must remain zero');
 check(snapshot.source_baseline_sync?.missing === 0, 'historical missing baseline count must remain zero');
-check(current.source_baseline_sync?.source_count === 39, 'current source count must be 39');
-check(current.source_baseline_sync?.baseline_count === 39, 'current baseline count must be 39');
+check(current.source_baseline_sync?.source_count === 41, 'current source count must be 41');
+check(current.source_baseline_sync?.baseline_count === 41, 'current baseline count must be 41');
 check(current.source_baseline_sync?.source_baseline_id_parity === true, 'current source/baseline ID parity must be true');
-check(current.source_baseline_sync?.pending_initial_acceptance === 39, 'all 39 current baselines must remain pending');
+check(current.source_baseline_sync?.pending_initial_acceptance === 41, 'all 41 current baselines must remain pending');
 check(current.source_baseline_sync?.accepted === 0, 'current accepted baseline count must remain zero');
 check(current.source_baseline_sync?.missing === 0, 'current missing baseline count must remain zero');
 
-const expectedScopedCoverage = {
+const historicalScopedCoverage = {
   platform_policy_source_count: 3,
   platform_service_state_source_count: 1,
   regulatory_register_source_count: 1,
@@ -66,16 +66,33 @@ const expectedScopedCoverage = {
   scoped_platform_count: 4,
   scoped_region_count: 4,
 };
-check(isDeepStrictEqual(snapshot.scoped_coverage, expectedScopedCoverage), 'PR #323 historical scoped coverage summary mismatch');
-check(isDeepStrictEqual(current.scoped_coverage, expectedScopedCoverage), 'current scoped coverage summary mismatch');
+const currentScopedCoverage = {
+  platform_policy_source_count: 3,
+  platform_service_state_source_count: 2,
+  regulatory_register_source_count: 1,
+  market_access_schema_capable_source_count: 7,
+  scoped_platform_count: 6,
+  scoped_region_count: 6,
+};
+check(isDeepStrictEqual(snapshot.scoped_coverage, historicalScopedCoverage), 'PR #323 historical scoped coverage summary mismatch');
+check(isDeepStrictEqual(current.scoped_coverage, currentScopedCoverage), 'current scoped coverage summary mismatch');
 
-const expectedSourceFamilyCounts = {
+const historicalSourceFamilyCounts = {
   reserve_assurance: 14,
   redemption_terms: 11,
   issuer_lifecycle: 7,
   regulatory: 9,
   platform_policy: 3,
   platform_service_state: 1,
+  regulatory_register: 1,
+};
+const currentSourceFamilyCounts = {
+  reserve_assurance: 15,
+  redemption_terms: 12,
+  issuer_lifecycle: 9,
+  regulatory: 9,
+  platform_policy: 3,
+  platform_service_state: 2,
   regulatory_register: 1,
 };
 const expectedStablecoinFamilyCounts = {
@@ -87,12 +104,12 @@ const expectedStablecoinFamilyCounts = {
   platform_service_state: 0,
   regulatory_register: 0,
 };
-check(isDeepStrictEqual(snapshot.source_family_counts, expectedSourceFamilyCounts), 'PR #323 historical source-family counts mismatch');
+check(isDeepStrictEqual(snapshot.source_family_counts, historicalSourceFamilyCounts), 'PR #323 historical source-family counts mismatch');
 check(isDeepStrictEqual(snapshot.stablecoin_family_counts, expectedStablecoinFamilyCounts), 'PR #323 historical asset-family reach mismatch');
-check(isDeepStrictEqual(current.source_family_counts, expectedSourceFamilyCounts), 'current source-family counts mismatch');
+check(isDeepStrictEqual(current.source_family_counts, currentSourceFamilyCounts), 'current source-family counts mismatch');
 check(isDeepStrictEqual(current.stablecoin_family_counts, expectedStablecoinFamilyCounts), 'current asset-family reach mismatch');
 
-const approvedSourceIds = [
+const approvedHistoricalSourceIds = [
   'ripple-eu-emi-license',
   'ripple-preliminary-mica-casp',
   'banking-circle-euri-launch',
@@ -105,7 +122,7 @@ const approvedSourceIds = [
 ];
 const sourceById = new Map(sources.map((row) => [row.source_id, row]));
 const baselineById = new Map((baselineSet.baselines ?? []).map((row) => [row.source_id, row]));
-for (const sourceId of approvedSourceIds) {
+for (const sourceId of [...approvedHistoricalSourceIds, 'open-standard-open-usd', 'visa-stablecoin-platform']) {
   const source = sourceById.get(sourceId);
   const baseline = baselineById.get(sourceId);
   check(Boolean(source), `${sourceId}: approved source missing`);
@@ -123,6 +140,8 @@ check(sourceById.get('bitstamp-europe-mica-assets')?.monitoring_scope?.platform_
 check(sourceById.get('gemini-eea-account-closure')?.affected_stablecoin_ids?.length === 0, 'Gemini service-state source must not gain fake asset targets');
 check(sourceById.get('esma-mica-interim-register-hub')?.affected_stablecoin_ids?.length === 0, 'ESMA register source must not gain fake asset targets');
 check(sourceById.get('esma-mica-interim-register-hub')?.affected_organization_ids?.length === 0, 'ESMA register source must not gain fake organization targets');
+check(sourceById.get('open-standard-open-usd')?.monitoring_scope?.canonical_record === false, 'Open USD monitoring subject became canonical');
+check(sourceById.get('visa-stablecoin-platform')?.monitoring_scope?.canonical_record === false, 'VSP monitoring subject became canonical');
 
 for (const field of [
   'asset_sync_sha256',
@@ -151,7 +170,7 @@ check(isDeepStrictEqual(snapshot.policy, expectedPolicy), 'PR #323 historical sa
 check(isDeepStrictEqual(current.policy, expectedPolicy), 'current safety policy changed');
 
 if (failures.length) {
-  console.error('PR #323 lifecycle/regulatory/market-access expansion validation failed:');
+  console.error('Current lifecycle/regulatory/market-access monitoring validation failed:');
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }

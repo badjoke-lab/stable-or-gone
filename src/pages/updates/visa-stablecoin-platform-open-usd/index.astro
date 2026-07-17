@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const headline = 'Visa Stablecoin Platformとは何か――Open USDを起点にVisaが狙う「ステーブルコイン運用基盤」';
+const title = `${headline} — Stable or Gone`;
+const description = 'Visaが発表したVisa Stablecoin Platformの機能、Open USDとOpen Standardの関係、金融機関向けステーブルコイン運用基盤としての狙い、未確定事項を整理する。';
+const canonicalPath = '/updates/visa-stablecoin-platform-open-usd/';
+const publishedAt = '2026-07-17';
+const informationCurrentThrough = '2026-07-17';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'ja',
+  datePublished: publishedAt,
+  dateModified: publishedAt,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['Visa Stablecoin Platform', 'Open USD', 'Open Standard', 'stablecoin infrastructure', 'enterprise payments']
+};
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} language="ja" jsonLd={jsonLd}>
+  <article class="update-analysis" data-update-analysis>
+    <header class="update-analysis__masthead">
+      <div class="update-analysis__overline"><span>分析 / ステーブルコイン基盤</span><a href="/updates/">Update Feedへ戻る</a></div>
+      <h1>{headline}</h1>
+      <p class="update-analysis__deck">Visaは独自ステーブルコインを発行したのではない。今回の発表で重要なのは、金融機関がステーブルコインを発行・保管・移動・償還するための運用環境を、Visaが自社の決済・リスク管理機能と結び付けて提供し始めたことである。</p>
+      <dl class="update-analysis__meta" aria-label="記事情報">
+        <div><dt>公開日</dt><dd>{publishedAt}</dd></div>
+        <div><dt>情報基準日</dt><dd>{informationCurrentThrough}</dd></div>
+        <div><dt>言語</dt><dd>日本語</dd></div>
+      </dl>
+    </header>
+
+    <aside class="update-analysis__notice" aria-label="記事の位置付け">
+      <strong>この記事は編集・分析記事であり、Open USDの正式なSOGレコードではありません。</strong>
+      <p>Open USDとVisa Stablecoin Platformは、正式ローンチ、発行、償還、準備資産、採用状況などを確認するための非公開・レビュー専用監視対象として登録しています。監視結果が自動でcanonicalデータへ反映されることはありません。</p>
+    </aside>
+
+    <section class="update-analysis__summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">この記事の要点</h2>
+      <ul>
+        <li>Visaは2026年7月16日、企業向けのVisa Stablecoin Platform（VSP）を発表した。<sup><a href="#note-1" id="ref-1">1</a></sup></li>
+        <li>VSPはステーブルコインではなく、金融機関などがステーブルコイン業務を管理するための運用基盤である。</li>
+        <li>最初の対応資産は、Open Standardが発表したOpen USD（OUSD）である。</li>
+        <li>VisaはOpen USDの単独発行者・単独運営者とは説明されていない。Open Standardは独立した運営会社と共同ガバナンスを掲げている。<sup><a href="#note-2" id="ref-2">2</a></sup></li>
+        <li>VSPは選定顧客とのベータ段階であり、Open USDも正式な一般流通実績が確認された段階ではない。</li>
+        <li>「OUSD」はOrigin Dollarも使用しているため、正式名称、ネットワーク、コントラクトによる識別が必要になる。<sup><a href="#note-3" id="ref-3">3</a></sup></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Visaが「ステーブルコイン対応」から一段進んだ</h2>
+      <p>Visaは2026年7月16日、金融機関、フィンテック、暗号資産関連企業などが、一つのVisa管理環境からステーブルコイン機能へアクセスするための企業向け基盤「Visa Stablecoin Platform」を発表した。</p>
+      <p>公式発表で示された中心機能は、ステーブルコインへのアクセス、保管、移動、発行・償還への接続、オンチェーンウォレットの管理である。Visaはこれに、自社のネットワーク、リスク管理、不正対策機能を組み合わせるとしている。最初の対応資産がOpen USDである。<sup><a href="#note-1">1</a></sup></p>
+      <p>この発表を「VisaがOUSDを発行した」と要約すると、構造を誤る。VSPはステーブルコインそのものではなく、企業がステーブルコインを実際の業務へ組み込む際の操作・統制レイヤーである。</p>
+      <div class="update-analysis__flow" aria-label="VSPの基本構造">
+        <span>金融機関の法定通貨・既存システム</span><b>↓</b><span>発行・償還への接続</span><b>↓</b><span>企業向けオンチェーンウォレット</span><b>↓</b><span>保管・移動・決済・財務運用</span><b>↓</b><span>Visaのネットワーク、リスク、不正対策機能</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>VSPで何ができるのか</h2>
+      <p>Visaの発表では、VSPは企業がステーブルコインを「ミントし、移動し、管理する」ための単一環境として説明されている。具体的には、Visaが新たに導入するWallet-as-a-Service、Open USDのミント・バーンへの接続、ウォレット間移動、送付先の許可リスト、重要操作の二重承認、監査ログなどが挙げられている。<sup><a href="#note-1">1</a></sup></p>
+      <p>ここで重要なのは、ブロックチェーン上でトークンを送れること自体ではない。企業利用では、誰が操作できるのか、どの送付先を許可するのか、複数人の承認を必要とするのか、後から操作履歴を追跡できるのかが実装上の中心になる。VSPは、その企業統制をVisaの既存機能と同じ環境へ寄せようとしている。</p>
+      <p>Visaは、顧客が既存ウォレットを接続する場合と、Visaのウォレット基盤を利用する場合の双方を想定している。つまり、すべての企業に一つのカストディ形態を強制するというより、ステーブルコイン業務をVisaの管理・接続層へ統合する製品として設計されている。</p>
+    </section>
+
+    <section>
+      <h2>Open USDとOpen Standardの関係</h2>
+      <p>Open USDは、Open Standardが導入を進める米ドル連動型ステーブルコインである。Open Standardは、参加企業がOpen USDの採用と流通を拡大した場合に、準備資産から生じる経済的利益の大部分を参加企業側へ還元する構想を掲げている。また、ミントと償還に手数料を課さず、単独企業ではなく開かれた中立的なガバナンスを目指すとしている。<sup><a href="#note-2">2</a></sup></p>
+      <p>Open Standardの公式説明では、Open USDを運営する独立会社が置かれ、参加企業がガバナンスへ関与する構造が示されている。Visaは参加企業として掲載され、VSPを通じてOpen USDを最初に扱う重要な接続事業者になるが、Open USDをVisaだけが発行・所有・統治するという説明ではない。</p>
+      <table>
+        <thead><tr><th>主体</th><th>発表時点で確認できる役割</th></tr></thead>
+        <tbody>
+          <tr><th>Open Standard</th><td>Open USDの設計、運営会社、共同ガバナンス、参加企業への経済設計を提示する。</td></tr>
+          <tr><th>Visa</th><td>VSPを通じ、企業向けウォレット、発行・償還への接続、移動、統制、Visa機能との連携を提供する。</td></tr>
+          <tr><th>Open USD</th><td>VSPが最初に対応する予定の米ドル連動型ステーブルコイン。発表時点では将来の本格運用を検証する段階にある。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Visaが狙うのはコインではなく「運用レイヤー」</h2>
+      <p>Visaは以前から、ステーブルコインをカード、国際送金、加盟店決済、ネットワーク間精算などへ接続してきた。VSPは、その取り組みをさらに上流へ広げるものとみることができる。</p>
+      <div class="update-analysis__comparison">
+        <article><h3>従来の接続</h3><p>すでに発行されたステーブルコインを、Visaの決済・カード・送金・精算機能へ接続する。</p></article>
+        <article><h3>VSPが加える層</h3><p>金融機関がステーブルコインを発行・償還・保管・移動する段階から、Visaの企業向け環境へ接続する。</p></article>
+      </div>
+      <p>ステーブルコインは、理論上はカードネットワークを経由せずにパブリックチェーン上を移動できる。Visaにとっては競争要因になり得る一方、企業が安全に運用するためにはウォレット、権限、銀行接続、監査、不正対策が必要になる。</p>
+      <p>VSPは、その複雑な運用部分をVisa製品として提供することで、ステーブルコインが普及した後もVisaのネットワークと管理機能が利用される構造を作ろうとする戦略だと解釈できる。Visaが取りに来ているのは、特定トークンの時価総額だけではなく、金融機関がステーブルコインを扱う際の運用標準である。</p>
+    </section>
+
+    <section>
+      <h2>金融機関にとって何が変わるのか</h2>
+      <p>金融機関がステーブルコインサービスを独自に構築する場合、ウォレット、鍵管理、カストディ、法定通貨との入出金、ミント・バーン、送付先管理、社内承認、監査記録、不正検知、既存決済システムとの連携を別々に組み合わせる必要がある。</p>
+      <p>VSPの価値は、ブロックチェーン技術が新しいという点だけではない。金融機関が既存の取引関係と統制モデルを持つVisaを通じて、ステーブルコイン機能を導入できる点にある。技術を一から組み上げる負担だけでなく、社内の承認、運用責任、監査可能性をまとめやすくなる可能性がある。</p>
+      <p>ただし、実際にどこまでをVisaが提供し、どこからを顧客企業や外部カストディ事業者が担うのかは、導入形態ごとに確認する必要がある。「Visa管理環境」という表現だけで、Visaがすべての資産を直接保管すると推定してはならない。</p>
+    </section>
+
+    <section>
+      <h2>USDTやUSDCへの対抗馬なのか</h2>
+      <p>Open USDは米ドル連動型であるため、将来的にはUSDTやUSDCと同じ利用領域に入る可能性がある。しかし、発表時点で市場シェアの競争を論じるのは早い。</p>
+      <p>Open StandardはOpen USDを2026年後半に開始する計画を示しているが、現時点でSOGが確認すべきなのは、実際のコントラクト、初回ミント、流通供給量、償還開始、準備資産の開示、保証・監査の方法、利用企業、取引所やウォレットでの流動性である。<sup><a href="#note-2">2</a></sup></p>
+      <p>参加企業の名前が多いことと、本番環境でOpen USDが広く利用されていることは同じではない。Open USDの競争力は、発表資料ではなく、発行・償還が安定して機能するか、準備資産が十分に説明されるか、流通事業者に採用されるかによって判断される。</p>
+    </section>
+
+    <section>
+      <h2>「OUSD」には既存の別資産がある</h2>
+      <p>Open USDが使用するOUSDという表記は、すでにOrigin ProtocolのOrigin Dollarでも使われている。Origin Dollarは2020年から存在する、Open USDとは別の資産である。<sup><a href="#note-3">3</a></sup></p>
+      <p>したがって、ウォレット、取引所、価格サイト、検索結果で「OUSD」とだけ表示されている場合、ティッカーだけでは資産を識別できない。少なくとも正式名称、発行・運営主体、ブロックチェーン、コントラクトアドレスを確認する必要がある。</p>
+      <div class="update-analysis__callout"><strong>SOGでの表記</strong><span>Open USD（OUSD）</span><span>Origin Dollar（OUSD）</span></div>
+    </section>
+
+    <section>
+      <h2>確定していることと、まだ分からないこと</h2>
+      <div class="update-analysis__comparison">
+        <article>
+          <h3>公式発表で確認できること</h3>
+          <ul>
+            <li>VisaがVSPを発表した。</li>
+            <li>対象は金融機関、フィンテック、暗号資産関連企業などである。</li>
+            <li>ウォレット、保管、移動、ミント・バーンへの接続、企業統制機能を扱う。</li>
+            <li>最初の対応資産はOpen USDである。</li>
+            <li>VSPは選定顧客とのベータ段階である。</li>
+            <li>Open StandardはOpen USDを2026年後半に開始する計画を示している。</li>
+          </ul>
+        </article>
+        <article>
+          <h3>今後の確認が必要なこと</h3>
+          <ul>
+            <li>Open USDの正式な一般提供日。</li>
+            <li>対応ネットワークと正式コントラクト。</li>
+            <li>発行量、流通量、保有状況。</li>
+            <li>準備資産の構成、保管、証明・監査。</li>
+            <li>償還条件と実際の償還実績。</li>
+            <li>VSPの一般提供、利用地域、導入企業。</li>
+            <li>Open USD以外の対応資産。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>SOGは何を監視するのか</h2>
+      <p>この記事の公開と同時に、SOGはOpen USDとVSPを非公開・レビュー専用の監視対象として登録する。これはcanonicalレコードの追加ではなく、発表後の変化を取りこぼさないための運用登録である。</p>
+      <table>
+        <thead><tr><th>対象</th><th>主な監視項目</th></tr></thead>
+        <tbody>
+          <tr><th>Open USD</th><td>正式ローンチ、対応ネットワーク、コントラクト、初回ミント、供給量、発行・償還、準備資産、証明・監査、採用、価格乖離、停止。</td></tr>
+          <tr><th>Visa Stablecoin Platform</th><td>ベータ状態、一般提供、導入企業、対応資産、ウォレット機能、統制機能、決済・財務利用、サービス条件、停止や重大変更。</td></tr>
+        </tbody>
+      </table>
+      <p>公式ページの変化や関連ニュースを検出しても、監視システムは記事やcanonicalデータを自動更新しない。変化候補は非公開のレビュー材料となり、一次資料の確認と人間の承認を経た場合だけ、別のPRで記事更新やレコード追加を検討する。</p>
+    </section>
+
+    <section>
+      <h2>Visaはステーブルコインを排除せず、自社の基盤へ接続しようとしている</h2>
+      <p>Visa Stablecoin Platformは、ステーブルコインが既存決済網を単純に置き換えるという構図に対するVisaの回答である。</p>
+      <p>Visaはステーブルコインの普及を止めるのではなく、金融機関がステーブルコインを発行・保管・移動・償還する際の運用基盤を自社のネットワークへ接続しようとしている。これが成功すれば、オンチェーン送金が増えても、Visaはウォレット、企業統制、リスク、不正対策、決済・財務接続の提供者として残ることができる。</p>
+      <p>ただし、現時点ではOpen USDもVSPも、広い本番利用が証明された段階ではない。今後見るべきなのは、参加企業の一覧ではなく、実際の発行、償還、準備資産、流動性、利用企業、障害時の対応である。SOGは、その発表から運用実績までを継続して記録する。</p>
+    </section>
+
+    <section class="update-analysis__notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">注</h2>
+      <ol>
+        <li id="note-1">Visaの公式発表はVSPを企業向け基盤と位置付け、Open USDから対応を始めること、Wallet-as-a-Service、ミント・バーンへの接続、二重承認、監査ログ、許可リストなどを説明している。VSPは選定顧客とのベータ段階である。 <a href="https://investor.visa.com/news/news-details/2026/Visa-Introduces-Platform-for-Stablecoin-Minting-Movement-and-Management/default.aspx">Visa公式発表</a> <a href="#ref-1" aria-label="本文の参照位置へ戻る">↩</a></li>
+        <li id="note-2">Open Standardは、Open USDの共同ガバナンス、参加企業への準備資産経済の還元、ミント・償還手数料を課さない構想、独立運営会社、2026年後半の開始計画を説明している。詳細な法的発行主体、準備資産保管、監査方法は正式運用時の資料で再確認が必要である。 <a href="https://joinopenstandard.com/">Open Standard公式サイト</a> <a href="#ref-2" aria-label="本文の参照位置へ戻る">↩</a></li>
+        <li id="note-3">Origin DollarはOpen USDとは別の既存資産であり、同じOUSD表記を使用する。 <a href="https://www.originprotocol.com/ousd">Origin Protocol公式ページ</a> / <a href="https://docs.originprotocol.com/yield-bearing-tokens/ousd">Origin Protocol公式ドキュメント</a> <a href="#ref-3" aria-label="本文の参照位置へ戻る">↩</a></li>
+      </ol>
+    </section>
+
+    <section class="update-analysis__sources" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">主要ソース</h2>
+      <ul>
+        <li><a href="https://investor.visa.com/news/news-details/2026/Visa-Introduces-Platform-for-Stablecoin-Minting-Movement-and-Management/default.aspx">Visa — Visa Introduces Platform for Stablecoin Minting, Movement and Management</a></li>
+        <li><a href="https://www.visa.com/en-us/solutions/stablecoins">Visa — Stablecoin solutions</a></li>
+        <li><a href="https://joinopenstandard.com/">Open Standard — Open USD</a></li>
+        <li><a href="https://www.originprotocol.com/ousd">Origin Protocol — Origin Dollar</a></li>
+        <li><a href="https://docs.originprotocol.com/yield-bearing-tokens/ousd">Origin Protocol documentation — OUSD</a></li>
+      </ul>
+      <p><strong>情報基準日：2026年7月17日。</strong> 正式ローンチ、コントラクト、準備資産、償還、一般提供、採用状況が確認された場合は、別のレビュー済み更新として記録する。</p>
+    </section>
+  </article>
+
+  <style>
+    .update-analysis{max-width:960px;margin:0 auto;padding:clamp(1.25rem,3vw,3rem) clamp(1rem,3vw,2rem) 4rem;color:var(--ink,#161616);line-height:1.85;overflow-wrap:anywhere}.update-analysis__masthead{border-bottom:1px solid var(--line,#d8d5ce);padding-bottom:2rem;margin-bottom:1.5rem}.update-analysis__overline{display:flex;justify-content:space-between;gap:1rem;align-items:center;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase}.update-analysis__overline a,.update-analysis a{text-underline-offset:.18em}.update-analysis h1{font-size:clamp(2rem,5vw,4.25rem);line-height:1.14;letter-spacing:-.035em;margin:1.25rem 0}.update-analysis__deck{font-size:clamp(1.05rem,2vw,1.35rem);max-width:52rem;color:var(--ink-muted,#4f4f4f)}.update-analysis__meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin:1.5rem 0 0}.update-analysis__meta div{border-top:1px solid var(--line,#d8d5ce);padding-top:.65rem}.update-analysis__meta dt{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted,#666)}.update-analysis__meta dd{margin:.15rem 0 0;font-variant-numeric:tabular-nums}.update-analysis section{margin:2.5rem 0}.update-analysis h2{font-size:clamp(1.4rem,3vw,2rem);line-height:1.28;margin:0 0 1rem}.update-analysis h3{font-size:1.05rem;margin:.1rem 0 .5rem}.update-analysis p{margin:.9rem 0}.update-analysis__notice,.update-analysis__summary,.update-analysis__callout{border:1px solid var(--line,#d8d5ce);background:var(--surface-subtle,#f7f5f0);padding:1.15rem 1.25rem}.update-analysis__notice strong{display:block;margin-bottom:.4rem}.update-analysis__summary ul,.update-analysis__notes ol,.update-analysis__sources ul{padding-left:1.25rem}.update-analysis__summary li,.update-analysis__notes li,.update-analysis__sources li{margin:.55rem 0}.update-analysis__flow{display:grid;gap:.35rem;text-align:center;border-block:1px solid var(--line,#d8d5ce);padding:1.25rem;margin:1.5rem 0}.update-analysis__flow span{font-weight:650}.update-analysis__flow b{font-weight:400;color:var(--ink-muted,#666)}.update-analysis__comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.update-analysis__comparison article{border:1px solid var(--line,#d8d5ce);padding:1rem 1.1rem}.update-analysis table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.94rem}.update-analysis th,.update-analysis td{border:1px solid var(--line,#d8d5ce);padding:.75rem;text-align:left;vertical-align:top}.update-analysis th{background:var(--surface-subtle,#f7f5f0)}.update-analysis__callout{display:flex;flex-wrap:wrap;gap:.7rem 1.25rem;align-items:center}.update-analysis__notes,.update-analysis__sources{border-top:2px solid var(--ink,#161616);padding-top:1.25rem}.update-analysis sup{font-size:.75em}.update-analysis sup a{text-decoration:none}.update-analysis :target{scroll-margin-top:6rem;background:color-mix(in srgb,var(--surface-subtle,#f7f5f0) 80%,transparent)}@media(max-width:700px){.update-analysis__meta,.update-analysis__comparison{grid-template-columns:1fr}.update-analysis__overline{align-items:flex-start;flex-direction:column}.update-analysis table{display:block;overflow-x:auto;white-space:normal}.update-analysis h1{font-size:2.15rem}.update-analysis{line-height:1.75}}
+  </style>
+</BaseLayout>

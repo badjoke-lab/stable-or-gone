@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_07_17_visa_vsp_open_usd_analysis",
+    "date": "2026-07-17",
+    "title": "Visa Stablecoin Platform and Open USD analysis published",
+    "category": "content",
+    "summary": "Published a Japanese analysis of Visa Stablecoin Platform, its relationship to Open USD and Open Standard, the select-client beta boundary, unresolved launch facts, and the existing OUSD ticker collision. Registered Open USD and VSP for private review-only monitoring without creating canonical records.",
+    "related_paths": ["/updates/visa-stablecoin-platform-open-usd/"]
+  },
+  {
     "id": "sog_update_2026_07_10_japan_stablecoin_access_guide",
     "date": "2026-07-10",
     "title": "Japan stablecoin access guide added",

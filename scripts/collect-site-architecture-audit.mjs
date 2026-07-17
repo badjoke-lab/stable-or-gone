@@ -23,6 +23,9 @@ const actualPageSources = walk(path.join(root, 'src/pages'))
   .map((file) => path.relative(root, file).replaceAll(path.sep, '/'))
   .sort();
 const configuredSources = siteArchitectureRoutes.map((route) => route.source_file).sort();
+const familyManagedPageSources = actualPageSources
+  .filter((source) => /^src\/pages\/updates\/[^/]+\/index\.astro$/.test(source))
+  .sort();
 const routes = siteArchitectureRoutes.map((route) => ({
   route: route.pattern,
   source_file: route.source_file,
@@ -38,12 +41,12 @@ const routeSet = new Set(routes.map((route) => route.route));
 const duplicateRoutes = [...new Set(routes.filter((route, index) => routes.findIndex((candidate) => candidate.route === route.route) !== index).map((route) => route.route))].sort();
 const navigationWithoutRoute = navigation.filter((item) => !routeSet.has(item.href));
 const configuredWithoutSource = configuredSources.filter((source) => !actualPageSources.includes(source));
-const sourceWithoutConfiguration = actualPageSources.filter((source) => !configuredSources.includes(source));
+const sourceWithoutConfiguration = actualPageSources.filter((source) => !configuredSources.includes(source) && !familyManagedPageSources.includes(source));
 const machineSource = fs.readFileSync(path.join(root, 'src/lib/machine-readable.ts'), 'utf8');
 const mainBlock = machineSource.match(/export const MAIN_ROUTES = \[([\s\S]*?)\] as const;/)?.[1] ?? '';
 const declaredMainRoutes = [...mainBlock.matchAll(/'([^']+)'/g)].map((match) => match[1]);
 const declaredWithoutSource = declaredMainRoutes.filter((declared) => !routeSet.has(declared) && !routes.some((route) => route.dynamic && declared.split('{')[0] === route.route.split('{')[0]));
-const digest = createHash('sha256').update(JSON.stringify({ routes, navigation, declaredMainRoutes, actualPageSources })).digest('hex');
+const digest = createHash('sha256').update(JSON.stringify({ routes, navigation, declaredMainRoutes, actualPageSources, familyManagedPageSources })).digest('hex');
 
 const audit = {
   schema_version: '1.0',
@@ -57,6 +60,7 @@ const audit = {
     machine_readable_route_patterns: routes.filter((route) => route.output_kind !== 'html').length,
     primary_navigation_items: navigation.length,
     declared_main_routes: declaredMainRoutes.length,
+    family_managed_page_sources: familyManagedPageSources.length,
     duplicate_routes: duplicateRoutes.length,
     navigation_without_route: navigationWithoutRoute.length,
     declared_without_source: declaredWithoutSource.length,
@@ -68,6 +72,7 @@ const audit = {
   routes,
   primary_navigation: navigation,
   declared_main_routes: declaredMainRoutes,
+  family_managed_page_sources: familyManagedPageSources,
   duplicate_routes: duplicateRoutes,
   navigation_without_route: navigationWithoutRoute,
   declared_without_source: declaredWithoutSource,

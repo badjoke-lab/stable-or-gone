@@ -8,10 +8,10 @@ import '../styles/reference-utility-v3.css';
 import '../styles/mobile-accessibility-v3.css';
 import BrandLockup from '../components/BrandLockup.astro';
 import { aboutNavigation, footerNavigationGroups, primaryNavigation } from '../../config/site-architecture.mjs';
-interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
+interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; language?: string; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd } = Astro.props;
+const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd, language = 'en' } = Astro.props;
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
@@ -33,7 +33,7 @@ const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix
 const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
 ---
 <!doctype html>
-<html lang="en">
+<html lang={language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,13 +41,13 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang={language} href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
     <link rel="alternate" type="text/plain" href="/ai.txt" title="SOG AI entrypoint" />
-    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:locale" content={language === 'ja' ? 'ja_JP' : 'en_US'} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={ogImageUrl} />
     {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}{gaInline && <script set:html={gaInline} />}{structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>

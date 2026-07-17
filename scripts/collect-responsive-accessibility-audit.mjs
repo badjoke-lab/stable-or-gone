@@ -88,6 +88,9 @@ const unknownTargetTableContracts = targetTableKinds.filter((kind) => !requiredM
 const missingCurrentTables = requiredMobileTableKinds.filter((kind) => !currentTableKinds.includes(kind));
 const duplicateCurrentTables = unique(currentTableKinds.filter((kind, index) => currentTableKinds.indexOf(kind) !== index));
 
+const dynamicLanguageContract = layout.includes('language?: string')
+  && layout.includes("language = 'en'")
+  && layout.includes('<html lang={language}>');
 const currentBaseline = {
   table_source_files: mobileTableSourceFiles.length,
   table_count: tableInventory.length,
@@ -114,7 +117,7 @@ const currentBaseline = {
     compact_320_present: /max-width:\s*(?:360|480|520|719)px/.test(css)
   },
   layout: {
-    language_declared: /<html\s+lang="en"/.test(layout),
+    language_declared: /<html\s+lang="en"/.test(layout) || dynamicLanguageContract,
     viewport_declared: /name="viewport"/.test(layout),
     main_landmark_present: /<main\b/.test(layout),
     main_landmark_has_id: /<main\b[^>]*\bid="main-content"/.test(layout),

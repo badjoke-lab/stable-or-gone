@@ -15,10 +15,12 @@ const routeMap = new Map(siteArchitectureRoutes.map((route) => [route.pattern, r
 
 check(audit.schema_version === '1.0', 'architecture schema changed');
 check(audit.totals?.route_patterns === 43, 'route count must include Maintenance Log page/endpoint and all existing routes');
-check(audit.totals?.page_source_files === 43, 'page source count must include Maintenance Log page/endpoint and all existing sources');
+check(audit.totals?.page_source_files === 44, 'page source count must include one family-managed Update Feed article and all existing sources');
 check(audit.totals?.html_route_patterns === 31, 'HTML route count must include Maintenance Log page');
 check(audit.totals?.machine_readable_route_patterns === 12, 'machine route count must include maintenance log, update feed, timeline, access/regulation, comparison, and stats routes');
 check(audit.totals?.dynamic_route_families === 3, 'dynamic route count changed');
+check(audit.totals?.family_managed_page_sources === 1, 'exactly one family-managed Update Feed article source is expected');
+check(JSON.stringify(audit.family_managed_page_sources) === JSON.stringify(['src/pages/updates/visa-stablecoin-platform-open-usd/index.astro']), 'family-managed Update Feed article inventory changed');
 for (const key of ['duplicate_routes', 'navigation_without_route', 'declared_without_source', 'configured_without_source', 'source_without_configuration', 'unassigned_routes']) check(audit.totals?.[key] === 0, `inventory failure: ${key}`);
 
 check(globalNavigationGroups.length === 3, 'navigation group count changed');
@@ -71,6 +73,7 @@ const validation = {
     configured_routes: siteArchitectureRoutes.length,
     current_routes_preserved: siteArchitectureRoutes.filter((route) => route.decision === 'keep').length,
     added_routes: siteArchitectureRoutes.filter((route) => route.decision === 'add').length,
+    family_managed_page_sources: audit.totals.family_managed_page_sources,
     navigation_groups: globalNavigationGroups.length,
     grouped_navigation_items: grouped.length,
     utility_navigation_items: utilities.length,

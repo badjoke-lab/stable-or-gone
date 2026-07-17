@@ -12,7 +12,7 @@ const organizations = (baseline.data_groups?.organizations ?? []).flatMap(readRo
 const relationships = (baseline.data_groups?.relationships ?? []).flatMap(readRows);
 const report = buildMonitoringCoverageReport(root);
 const again = buildMonitoringCoverageReport(root);
-const expectedId = `sog_monitoring_coverage_${stablecoins.length}_assets_39_sources_v1`;
+const expectedId = `sog_monitoring_coverage_${stablecoins.length}_assets_41_sources_v1`;
 const pairs = new Set(relationships.map((row) => `${row.stablecoin_id}|${row.organization_id}`));
 const fail = (condition, message) => { if (!condition) failures.push(message); };
 
@@ -23,23 +23,23 @@ fail(JSON.stringify(report) === JSON.stringify(again), 'report must be determini
 fail(report.report_id === expectedId, `report id must be ${expectedId}`);
 fail(report.stablecoins.length === stablecoins.length, 'asset rows must match canonical count');
 fail(report.organizations.length === organizations.length, 'organization rows must match canonical count');
-fail(report.sources.length === 39, 'registered source count must be 39');
+fail(report.sources.length === 41, 'registered source count must be 41');
 fail(report.summary.covered_stablecoin_count === expectedCoveredStablecoins, `covered stablecoin count must be ${expectedCoveredStablecoins}`);
 fail(report.summary.uncovered_stablecoin_count === expectedUncoveredStablecoins, `uncovered stablecoin count must be ${expectedUncoveredStablecoins}`);
 fail(report.summary.covered_stablecoin_count + report.summary.uncovered_stablecoin_count === stablecoins.length, 'covered and uncovered stablecoin counts must equal current canonical denominator');
 fail(report.summary.multi_family_stablecoin_count === 17, 'multi-family count must be 17');
 fail(report.summary.covered_organization_count === 18, 'covered organization count must be 18');
 fail(report.summary.accepted_coverage_stablecoin_count === 0, 'accepted coverage must remain zero');
-fail(report.summary.baseline_status_counts.pending_initial_acceptance === 39, 'pending baseline count must be 39');
+fail(report.summary.baseline_status_counts.pending_initial_acceptance === 41, 'pending baseline count must be 41');
 fail(report.summary.baseline_status_counts.accepted === 0 && report.summary.baseline_status_counts.missing === 0, 'accepted and missing baseline counts must remain zero');
 
 const expectedSourceFamilies = {
-  reserve_assurance: 14,
-  redemption_terms: 11,
-  issuer_lifecycle: 7,
+  reserve_assurance: 15,
+  redemption_terms: 12,
+  issuer_lifecycle: 9,
   regulatory: 9,
   platform_policy: 3,
-  platform_service_state: 1,
+  platform_service_state: 2,
   regulatory_register: 1,
 };
 const expectedAssetFamilies = {
@@ -55,11 +55,11 @@ for (const [family, count] of Object.entries(expectedSourceFamilies)) fail(repor
 for (const [family, count] of Object.entries(expectedAssetFamilies)) fail(report.summary.stablecoin_family_counts[family] === count, `${family}: asset reach must be ${count}`);
 
 fail(report.summary.platform_policy_source_count === 3, 'platform-policy source count must be 3');
-fail(report.summary.platform_service_state_source_count === 1, 'platform service-state source count must be 1');
+fail(report.summary.platform_service_state_source_count === 2, 'platform service-state source count must be 2');
 fail(report.summary.regulatory_register_source_count === 1, 'regulatory-register source count must be 1');
-fail(report.summary.market_access_schema_capable_source_count === 5, 'schema-capable source count must be 5');
-fail(report.summary.scoped_platform_count === 4, 'scoped platform count must be 4');
-fail(report.summary.scoped_region_count === 4, 'scoped region count must be 4');
+fail(report.summary.market_access_schema_capable_source_count === 7, 'schema-capable source count must be 7');
+fail(report.summary.scoped_platform_count === 6, 'scoped platform count must be 6');
+fail(report.summary.scoped_region_count === 6, 'scoped region count must be 6');
 fail(report.policy.platform_register_scope_not_divided_by_asset_denominator === true, 'platform/register scope denominator boundary missing');
 fail(report.canonical_reference_check.stablecoin_ids_resolved === true, 'stablecoin references must resolve');
 fail(report.canonical_reference_check.organization_ids_resolved === true, 'organization references must resolve');
@@ -84,4 +84,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring coverage valid: ${expectedCoveredStablecoins} of ${stablecoins.length} assets reached by 39 pending sources; ${expectedUncoveredStablecoins} assets remain uncovered; 5 scoped market-access/register sources cover 4 platforms and official register context.`);
+console.log(`Current monitoring coverage valid: ${expectedCoveredStablecoins} of ${stablecoins.length} assets reached by 41 pending sources; ${expectedUncoveredStablecoins} assets remain uncovered; 7 scoped sources cover 6 platform subjects and official register context.`);

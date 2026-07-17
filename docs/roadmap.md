@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #406 active
+Status: canonical execution schedule — PR #407 active
 
 ## Current position
 
@@ -17,8 +17,8 @@ Market Access Records: 8
 Archive recorded: 430
 Archive not recorded: 129
 PR #405 Evidence and Archive Maintenance Batch 8: complete
-PR #406 Post-PR #405 Review Gate: active; complete on merge
-PR #407 Visa Stablecoin Platform article and OUSD/VSP private monitoring: approved next
+PR #406 Post-PR #405 Review Gate: complete
+PR #407 Visa Stablecoin Platform article and OUSD/VSP private monitoring: active; complete on merge
 REVIEW GATE: mandatory after PR #407
 ```
 
@@ -32,33 +32,32 @@ docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/quality/post-pr405-review-gate-pr406-spec.md
 docs/migration/post-pr405-review-gate-pr406.json
+docs/quality/visa-open-usd-article-monitoring-pr407-spec.md
 docs/migration/evidence-archive-maintenance-batch-8-pr405-reviewed-handoff.json
 ```
 
-## PR #405 reviewed outcome
+## PR #407 public output
 
 ```text
-selected: 10
-canonical changes: 0
-dated_exact_archive_added: 0
-reviewed_source_replacement: 0
-reviewed_no_safe_change: 10
-Archive recorded: 430 -> 430
-Archive not recorded: 129 -> 129
+Article route: /updates/visa-stablecoin-platform-open-usd/
+Language: Japanese
+Update Feed entries added: 1
+New top-level navigation families: 0
 ```
 
-Exact-source CDX metadata was not promoted without archived-payload review. All canonical and public boundaries were preserved.
+The article records Visa's VSP announcement, its relationship to Open USD and Open Standard, the select-client beta boundary, unresolved launch and circulation facts, and the existing Origin Dollar OUSD ticker collision. It is an editorial analysis page, not a canonical stablecoin dossier.
 
-## PR #406 decision
-
-PR #406 authorizes exactly one bounded next work item:
+## PR #407 private monitoring output
 
 ```text
-PR #407 Visa Stablecoin Platform article and OUSD/VSP private monitoring registration
-REVIEW GATE
+Open USD: prelaunch_stablecoin / canonical_record=false
+Visa Stablecoin Platform: stablecoin_infrastructure / canonical_record=false
+Official sources added: 2
+Pending initial baselines added: 2
+Bounded news queries added: 2
+Public monitoring output: false
+Automatic promotion: false
 ```
-
-PR #407 may publish one verified Japanese article under the existing `/updates/` route family, add one Update Feed entry, and register exactly two noncanonical official monitoring subjects with pending baselines and at most two bounded news-discovery queries.
 
 ## PR #407 boundaries
 
