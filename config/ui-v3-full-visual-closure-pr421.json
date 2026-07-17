@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_full_visual_closure_pr421_2026_07_17",
+  "status": "active_owner_review_preparation",
+  "issue": 281,
+  "implementation_pr": 421,
+  "source_review_pr": 420,
+  "phase": "PR G",
+  "production_ui_change": false,
+  "exit_state": "AWAITING OWNER REVIEW",
+  "required_capture_count": 14,
+  "state_source": "config/ui-v3-rebuild-design-contract-pr409.json#visual_review_matrix",
+  "deterministic_routes": {
+    "register_default": "/stablecoins/",
+    "register_filtered": "/stablecoins/?lifecycle=active&sort=evidence_most",
+    "register_empty": "/stablecoins/?q=__sog_no_matching_record__"
+  },
+  "required_outputs": [
+    "artifacts/pr421-full-visual-closure/manifest.json",
+    "artifacts/pr421-full-visual-closure/contact-sheet.html",
+    "artifacts/pr421-full-visual-closure/contact-sheet.json",
+    "artifacts/pr421-full-visual-closure/owner-review.html",
+    "artifacts/pr421-full-visual-closure/owner-review.json",
+    "docs/migration/ui-v3-full-visual-closure-pr421.json"
+  ],
+  "required_template_markers": {
+    "home": "data-home-registry=pr413",
+    "stablecoin_register": "data-register-version=pr413",
+    "stablecoin_dossier": "data-dossier-version=pr415",
+    "events": "data-register-version=pr417-events",
+    "organizations": "data-register-version=pr417-organizations",
+    "guides": "data-secondary-version=pr419-guide-article"
+  },
+  "hard_gates": {
+    "http_success": true,
+    "shared_shell": true,
+    "template_marker": true,
+    "h1_min_px": 28,
+    "horizontal_page_overflow_allowed": false,
+    "register_initial_max_visible_records": 20,
+    "event_initial_max_visible_records": 20,
+    "organization_initial_max_visible_records": 20,
+    "filtered_register_active_chip_min": 1,
+    "empty_register_state_required": true,
+    "guide_toc_min_links": 5,
+    "guide_article_min_sections": 5,
+    "guide_table_required": true,
+    "guide_footer_min_links": 4,
+    "merge_lineage_required": true,
+    "protected_hashes_required": true,
+    "automated_capture_counts_as_owner_approval": false
+  },
+  "owner_review": {
+    "required_templates": ["home", "stablecoin_register", "stablecoin_dossier", "events", "organizations", "guides"],
+    "generated_status": "pending",
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "reviewer": null,
+    "reviewed_at": null,
+    "automatic_decision_allowed": false,
+    "completion_allowed_without_explicit_owner_decision": false
+  },
+  "merge_lineage": [
+    {"pr":411,"commit":"a9a37b79ca6b7313d310d206ad82dc19a273598f"},
+    {"pr":413,"commit":"8771de6ad5fc79310a638455f5be24b27af20eb3"},
+    {"pr":415,"commit":"e4af173ff3560e0474b8282de0ad8da4532d0f4a"},
+    {"pr":417,"commit":"aa4e5b98ae25652c2aeb6327000ce6a7b8f14e51"},
+    {"pr":419,"commit":"5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7"},
+    {"pr":420,"commit":"1dbe3cded3701700a59608e409b79c2030f79aa2"}
+  ],
+  "boundaries": {
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "metadata_contract_changed": false,
+    "owner_approval_register_changed": false,
+    "automatic_owner_approval": false,
+    "ui_completion_declared": false,
+    "later_phase_exists": false
+  }
+}
