@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #418 active review gate
+Status: canonical execution schedule — PR #419 active
 
 ## Current position
 
@@ -26,8 +26,8 @@ PR #414 Post-PR #413 Review Gate: complete
 PR #415 UI v3 Rebuild D — stablecoin dossier: complete
 PR #416 Post-PR #415 Review Gate: complete
 PR #417 UI v3 Rebuild E — events and organizations: complete
-PR #418 Post-PR #417 Review Gate: active; complete on merge
-PR #419 UI v3 Rebuild F — guides and secondary pages: approved next
+PR #418 Post-PR #417 Review Gate: complete
+PR #419 UI v3 Rebuild F — guides and secondary pages: active; complete on merge
 PR G full visual closure: blocked
 REVIEW GATE: mandatory after PR #419
 ```
@@ -59,6 +59,9 @@ config/ui-v3-events-organizations-pr417.json
 docs/migration/ui-v3-events-organizations-pr417-handoff.json
 docs/quality/post-pr417-review-gate-pr418-spec.md
 docs/migration/post-pr417-review-gate-pr418.json
+docs/quality/ui-v3-guides-secondary-pages-pr419.md
+config/ui-v3-guides-secondary-pages-pr419.json
+docs/migration/ui-v3-guides-secondary-pages-pr419-handoff.json
 ```
 
 ## PR #417 reviewed outcome
@@ -70,7 +73,6 @@ Contract/build validation: success
 Mandatory desktop/mobile visual audit: success
 Visual review run: 29596605158
 Visual artifact: 8413318222
-Visual artifact digest: sha256:fe5529682a0bf1cfe8ef9a62ff4e642b60ae5a8157835f87232f11a7a620c735
 Required captures: 8
 Completed captures: 8
 Visual failures: 0
@@ -78,18 +80,11 @@ Horizontal-overflow failures: 0
 Mobile vertical-density failures: 0
 Events mobile body height: 8,886px
 Organizations mobile body height: 8,514px
-Mobile register height ceiling: 9,000px
 Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
-Metadata contract changed: 0
 Owner approval records changed: 0
-Automated rendering equals owner approval: false
 ```
-
-The event and organization registers now show 20 records per page with bounded initial server rendering. Search, five visible filter groups, selected-state counts, active chips, sort, clear-all, result range/count, pagination, and explicit empty state remain available. Event impact and historical lifecycle effect are separate. Organization type, jurisdiction, roles, connected assets, relationship state/count, evidence, and confidence are separate.
-
-The desktop and mobile event index, TerraUSD collapse event, organization index, and Circle organization record all passed. The two mobile registers also passed the explicit vertical-density gate rather than being accepted only because horizontal overflow was absent.
 
 ## PR #418 decision
 
@@ -119,39 +114,44 @@ Authorized existing route families:
 /stats/
 ```
 
-### Guides and long-form pages
+## PR #419 implementation
+
+### Guide index and guide articles
 
 ```text
+Reviewed research-archive entry surface
 Bounded reading width
-Table of contents or local section navigation
-Clear heading rhythm
-Callouts and examples
-Responsive table strategy
-Source presentation
-Correction path
-No uninterrupted wall-of-text presentation
+Sticky or local table of contents
+Publication, current-through, and update metadata kept separate
+Summary/callout distinction
+Responsive local table scrolling
+Related records, revision history, sources, methodology, and correction paths preserved
+Compact guide index records on mobile
 ```
 
-### Secondary registry tools
+### Methodology, about, reference, and utility pages
 
 ```text
-Visible inputs and selected state
-Visible result and absence state
-Clear action
-Bounded, responsive results
-Freshness/readiness/absence semantics preserved
-Shareable URL state preserved where present
-No derived-data or machine-readable contract changes
+Evidence-registry page headers
+Clear section hierarchy
+Canonical definitions separated from explanatory prose
+Long-form table of contents retained
+Responsive tables and long identifiers
+Correction and support utility roles preserved
+No marketing landing-page conversion
 ```
 
-### Project and reference pages
+### Comparison, access/regulation, timeline, and statistics
 
 ```text
-Clear heading hierarchy
-Local navigation where needed
-Canonical definitions distinguished from explanatory prose
-Correction and support roles preserved
-Long labels and URLs remain usable
+Visible inputs, selected state, clear actions, and result or empty state
+Bounded matrices and tables
+Comparison Readiness and freshness remain separate
+Record absence and legal/access boundaries remain explicit
+Timeline date semantics remain explicit
+Statistics remain measured and registry-like
+Machine-readable projections and shareable URL state preserved
+No score or ranking added
 ```
 
 Required representative visual states:
@@ -174,9 +174,9 @@ Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Home/stablecoin register/stablecoin dossier/event/organization templates changed by PR #418: 0
+Home/stablecoin register/stablecoin dossier/event/organization templates changed: 0
 Owner approval records changed: 0
 UI completion declared: false
 ```
 
-Automated screenshots remain non-approving. PR #419 may not redesign the already completed primary templates and may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #419, stop at `REVIEW GATE` before PR G full visual closure.
+Automated screenshots remain non-approving. PR #419 may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #419, stop at `REVIEW GATE` before PR G full visual closure.
