@@ -88,7 +88,7 @@ const redemptionProfile = coin.redemption_profile;
     </nav>
 
     <section class="stablecoin-dossier-section stablecoin-assessment" id="assessment">
-      <div class="stablecoin-section-heading"><p>Decision-useful overview</p><h2>Current meaning of this record</h2><span>Reviewed facts and uncertainty are shown separately. This is not a rating, safety score, or recommendation.</span></div>
+      <div class="stablecoin-section-heading"><p>Decision-useful overview</p><h2>Identity and current state</h2><span>Reviewed facts and uncertainty are shown separately. This is not a rating, safety score, or recommendation.</span></div>
       <div class="stablecoin-assessment-copy"><p>{publicSummary}</p></div>
 
       <dl class="stablecoin-decision-grid" aria-label="Decision-useful stablecoin summary">
@@ -119,7 +119,7 @@ const redemptionProfile = coin.redemption_profile;
     <StablecoinOrganizationsControl coin={coin} relationships={relationships} primaryResolution={primaryResolution} primaryRelationship={primaryRelationship} primaryOrganization={primaryOrganization} organizations={organizations} deployments={deployments} issuerControlEvents={issuerControlEvents} />
 
     <section class="stablecoin-dossier-section stablecoin-mechanism" id="mechanism">
-      <div class="stablecoin-section-heading"><p>Mechanism</p><h2>Reference, backing, and exit model</h2><span>Reference, backing, stabilization, exit, valuation, and yield remain separate facts.</span></div>
+      <div class="stablecoin-section-heading"><p>Reference, backing, and exit model</p><h2>How the asset works</h2><span>Reference, backing, stabilization, exit, valuation, and yield remain separate facts.</span></div>
       <dl class="stablecoin-mechanism-ledger">
         <div><dt>Reference target</dt><dd>{reference.public_label}</dd></div><div><dt>Reference kind</dt><dd>{reference.reference_kind_label}</dd></div><div><dt>Comparison category</dt><dd>{reference.comparison_category_label}</dd></div><div><dt>Target value</dt><dd><ValueStateText value={reference.target_value} /></dd></div><div class="wide"><dt>Reference methodology</dt><dd><ValueStateText value={reference.methodology_description} displayValue={reference.methodology_description} detectMarkers={false} /></dd></div><div><dt>Public backing model</dt><dd>{model.public_label}</dd></div><div><dt>Canonical backing types</dt><dd>{model.canonical_backing_type_labels.join(', ') || 'Not recorded'}</dd></div><div><dt>Reserve component categories</dt><dd>{reserveComponents.map((component) => formatPublicLabel(component.asset_category)).join(', ') || 'Not recorded'}</dd></div><div><dt>Primary stabilization mechanism</dt><dd>{model.stabilization_label}</dd></div><div class="wide"><dt>Recorded model description</dt><dd>{model.recorded_model_description ?? 'Not recorded'}</dd></div><div><dt>Redemption / exit model</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div><div><dt>Valuation source</dt><dd>{valuationSource?.url ? <a href={valuationSource.url}>{valuationText}</a> : valuationText}</dd></div><div><dt>Yield / rebase profile</dt><dd>{yieldText}</dd></div><div class="wide"><dt>Classification notes</dt><dd>{coin.classification_notes ?? 'Not recorded'}</dd></div>
       </dl>
