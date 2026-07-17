@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_post_pr409_review_gate_pr410_2026_07_17",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 410,
+  "source_pr": 409,
+  "source_handoff": "docs/migration/ui-v3-rebuild-design-contract-pr409-handoff.json",
+  "reviewed_at": "2026-07-17",
+  "binding_findings": {
+    "ui_v3_state": "reopened",
+    "direction": "modern_evidence_registry",
+    "capture_states": 14,
+    "required_owner_approved_templates": 6,
+    "required_widths": [320, 390, 768, 1280, 1440],
+    "skipped_visual_audit_result": "hard_failure",
+    "automated_rendering_is_approval": false,
+    "production_ui_changes": 0,
+    "canonical_changes": 0
+  },
+  "decision": {
+    "next_pr": 411,
+    "next_phase": "PR B",
+    "next_work_item": "global_shell_and_navigation",
+    "authorization": "approved_bounded_implementation",
+    "routes_change": false,
+    "canonical_action": "none",
+    "public_machine_readable_change": false,
+    "owner_approval_change": false,
+    "later_phases_pre_authorized": false,
+    "exit_state_after_pr411": "REVIEW GATE"
+  },
+  "authorized_files_and_concerns": [
+    "shared layout",
+    "shared shell styles",
+    "brand presentation",
+    "global navigation",
+    "registry search",
+    "mobile menu",
+    "shared interaction states",
+    "shared footer",
+    "shell validation",
+    "shell screenshot workflow"
+  ],
+  "prohibited": [
+    "home_template_redesign",
+    "stablecoin_register_redesign",
+    "stablecoin_dossier_redesign",
+    "events_template_redesign",
+    "organizations_template_redesign",
+    "guides_template_redesign",
+    "route_change",
+    "canonical_data_change",
+    "public_machine_readable_change",
+    "visual_completion_declaration",
+    "owner_approval_status_change",
+    "pr_c_or_later"
+  ],
+  "canonical_counts": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  }
+}
