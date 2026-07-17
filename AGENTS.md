@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #417 UI v3 Rebuild E — events and organizations.
+Current mandatory authority: PR #418 Post-PR #417 Review Gate.
 
 Current authority:
 
@@ -27,6 +27,8 @@ docs/migration/post-pr415-review-gate-pr416.json
 docs/quality/ui-v3-events-organizations-pr417.md
 config/ui-v3-events-organizations-pr417.json
 docs/migration/ui-v3-events-organizations-pr417-handoff.json
+docs/quality/post-pr417-review-gate-pr418-spec.md
+docs/migration/post-pr417-review-gate-pr418.json
 ```
 
 ## Current workstream
@@ -40,15 +42,15 @@ Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
 Issue #281 UI v3 rebuild: reopened
-PR #415 UI v3 Rebuild D — stablecoin dossier: complete
-PR #416 Post-PR #415 Review Gate: complete
-PR #417 UI v3 Rebuild E — events and organizations: active; complete on merge
-PR F guides and secondary pages: blocked
-REVIEW GATE: mandatory after PR #417
+PR #417 UI v3 Rebuild E — events and organizations: complete
+PR #418 Post-PR #417 Review Gate: active; complete on merge
+PR #419 UI v3 Rebuild F — guides and secondary pages: approved next
+PR G full visual closure: blocked
+REVIEW GATE: mandatory after PR #419
 ```
 
-PR #416 binds PR #415 merge commit `e4af173ff3560e0474b8282de0ad8da4532d0f4a`, implementation head `c632a4419da7a6e45645e75f5a3d87985cd0dbe8`, and successful visual review run `29576352130`. All six USDC, UST, and BUSD desktop/mobile dossier states passed with zero visual failures and exact viewport/scroll widths. Automated rendering remains non-approving: owner-approved desktop templates remain 0, owner-approved mobile templates remain 0, and UI completion remains false.
+PR #418 binds PR #417 merge commit `aa4e5b98ae25652c2aeb6327000ce6a7b8f14e51`, implementation head `8d9d9472e9458ac689b7edb624baf737e5119364`, and successful visual review run `29596605158`. All eight event and organization desktop/mobile states passed with zero visual failures, zero horizontal-overflow failures, and zero mobile vertical-density failures. The event register rendered at 8,886px and the organization register at 8,514px against the 9,000px mobile ceiling. Automated rendering remains non-approving: owner-approved desktop templates remain 0, owner-approved mobile templates remain 0, and UI completion remains false.
 
-PR #417 may redesign only the existing `/events/`, `/event/[id]/`, `/issuers/`, and `/issuer/[slug]/` route families. Event surfaces must prioritize impact/severity, type, lifecycle effect, filters, bounded rendering, subjects, and responsive evidence context. Organization surfaces must prioritize role/type, jurisdiction, connected stablecoins, relationship state, filters, bounded rendering, and organization-to-stablecoin relationship views.
+PR #419 may redesign only the existing guide and secondary HTML route families: `/guides/`, `/guides/[article]/`, `/methodology/`, `/about/`, `/glossary/`, `/models/`, `/updates/`, `/maintenance/`, `/contact/`, `/support/`, `/compare/`, `/access-regulation/`, `/timeline/`, and `/stats/`. Guides must prioritize reading width, table of contents, callouts, examples, section navigation, tables, and source presentation. Secondary tools must preserve visible inputs/state, bounded results, freshness/readiness/absence semantics, shareable state, and responsive tables.
 
-PR #417 must capture desktop and mobile states for `/events/`, `/event/sog_ev_ust_2022_05_collapse/`, `/issuers/`, and `/issuer/circle/`. It may not redesign home, stablecoin register, stablecoin dossier, guides, or secondary pages. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. Automated captures do not constitute owner approval. PR #417 must stop at `REVIEW GATE`; PR F and every later workstream remain unapproved.
+PR #419 must capture desktop and mobile states for `/guides/`, `/guides/eu-stablecoin-access-after-mica/`, `/methodology/`, `/about/`, `/compare/`, `/access-regulation/`, `/timeline/`, and `/stats/`. It may not redesign home, stablecoin register, stablecoin dossier, events, or organizations. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. Automated captures do not constitute owner approval. PR #419 must stop at `REVIEW GATE`; PR G and every later workstream remain unapproved.

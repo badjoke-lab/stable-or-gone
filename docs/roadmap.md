@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #417 active
+Status: canonical execution schedule — PR #418 active review gate
 
 ## Current position
 
@@ -25,9 +25,11 @@ PR #413 UI v3 Rebuild C — home and stablecoin register: complete
 PR #414 Post-PR #413 Review Gate: complete
 PR #415 UI v3 Rebuild D — stablecoin dossier: complete
 PR #416 Post-PR #415 Review Gate: complete
-PR #417 UI v3 Rebuild E — events and organizations: active; complete on merge
-PR F guides and secondary pages: blocked
-REVIEW GATE: mandatory after PR #417
+PR #417 UI v3 Rebuild E — events and organizations: complete
+PR #418 Post-PR #417 Review Gate: active; complete on merge
+PR #419 UI v3 Rebuild F — guides and secondary pages: approved next
+PR G full visual closure: blocked
+REVIEW GATE: mandatory after PR #419
 ```
 
 ## Current authority
@@ -55,74 +57,114 @@ docs/migration/post-pr415-review-gate-pr416.json
 docs/quality/ui-v3-events-organizations-pr417.md
 config/ui-v3-events-organizations-pr417.json
 docs/migration/ui-v3-events-organizations-pr417-handoff.json
+docs/quality/post-pr417-review-gate-pr418-spec.md
+docs/migration/post-pr417-review-gate-pr418.json
 ```
 
-## PR #415 reviewed outcome
+## PR #417 reviewed outcome
 
 ```text
-Source implementation merge: e4af173ff3560e0474b8282de0ad8da4532d0f4a
-Source implementation head: c632a4419da7a6e45645e75f5a3d87985cd0dbe8
+Source implementation merge: aa4e5b98ae25652c2aeb6327000ce6a7b8f14e51
+Source implementation head: 8d9d9472e9458ac689b7edb624baf737e5119364
 Contract/build validation: success
 Mandatory desktop/mobile visual audit: success
-Visual review run: 29576352130
-Visual artifact: 8405201944
-Required captures: 6
-Completed captures: 6
+Visual review run: 29596605158
+Visual artifact: 8413318222
+Visual artifact digest: sha256:fe5529682a0bf1cfe8ef9a62ff4e642b60ae5a8157835f87232f11a7a620c735
+Required captures: 8
+Completed captures: 8
 Visual failures: 0
 Horizontal-overflow failures: 0
+Mobile vertical-density failures: 0
+Events mobile body height: 8,886px
+Organizations mobile body height: 8,514px
+Mobile register height ceiling: 9,000px
 Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
+Metadata contract changed: 0
 Owner approval records changed: 0
+Automated rendering equals owner approval: false
 ```
 
-## PR #416 decision
+The event and organization registers now show 20 records per page with bounded initial server rendering. Search, five visible filter groups, selected-state counts, active chips, sort, clear-all, result range/count, pagination, and explicit empty state remain available. Event impact and historical lifecycle effect are separate. Organization type, jurisdiction, roles, connected assets, relationship state/count, evidence, and confidence are separate.
 
-PR #416 authorizes exactly:
+The desktop and mobile event index, TerraUSD collapse event, organization index, and Circle organization record all passed. The two mobile registers also passed the explicit vertical-density gate rather than being accepted only because horizontal overflow was absent.
+
+## PR #418 decision
+
+PR #418 authorizes exactly:
 
 ```text
-PR #417 — UI v3 Rebuild E: events and organizations
+PR #419 — UI v3 Rebuild F: guides and secondary pages
 REVIEW GATE
 ```
 
 Authorized existing route families:
 
 ```text
-/events/
-/event/[id]/
-/issuers/
-/issuer/[slug]/
+/guides/
+/guides/[article]/
+/methodology/
+/about/
+/glossary/
+/models/
+/updates/
+/maintenance/
+/contact/
+/support/
+/compare/
+/access-regulation/
+/timeline/
+/stats/
 ```
 
-## PR #417 implementation
-
-### Events
+### Guides and long-form pages
 
 ```text
-20 records per page with bounded initial SSR
-Search, sort, five visible filter groups, selected-state counts, active chips, clear-all, result range/count, pagination, and empty state
-Impact/severity and historical lifecycle effect shown separately
-Responsive table and compact records
-Event detail with taxonomy, recovery, subjects, structured detail, evidence, and corrections
+Bounded reading width
+Table of contents or local section navigation
+Clear heading rhythm
+Callouts and examples
+Responsive table strategy
+Source presentation
+Correction path
+No uninterrupted wall-of-text presentation
 ```
 
-### Organizations
+### Secondary registry tools
 
 ```text
-20 records per page with bounded initial SSR
-Search, sort, five visible filter groups, selected-state counts, active chips, clear-all, result range/count, pagination, and empty state
-Organization type, regulatory character, jurisdiction, roles, connected assets, relationship states/counts, evidence, and confidence shown separately
-Responsive table and compact records
-Organization detail with identity, current/historical relationships, events, evidence, unknowns, and corrections
+Visible inputs and selected state
+Visible result and absence state
+Clear action
+Bounded, responsive results
+Freshness/readiness/absence semantics preserved
+Shareable URL state preserved where present
+No derived-data or machine-readable contract changes
+```
+
+### Project and reference pages
+
+```text
+Clear heading hierarchy
+Local navigation where needed
+Canonical definitions distinguished from explanatory prose
+Correction and support roles preserved
+Long labels and URLs remain usable
 ```
 
 Required representative visual states:
 
 ```text
-Desktop + mobile: /events/
-Desktop + mobile: /event/sog_ev_ust_2022_05_collapse/
-Desktop + mobile: /issuers/
-Desktop + mobile: /issuer/circle/
+Desktop + mobile: /guides/
+Desktop + mobile: /guides/eu-stablecoin-access-after-mica/
+Desktop + mobile: /methodology/
+Desktop + mobile: /about/
+Desktop + mobile: /compare/
+Desktop + mobile: /access-regulation/
+Desktop + mobile: /timeline/
+Desktop + mobile: /stats/
 ```
 
 ## Preserved boundaries
@@ -132,9 +174,9 @@ Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Home/stablecoin register/stablecoin dossier/guide templates changed: 0
+Home/stablecoin register/stablecoin dossier/event/organization templates changed by PR #418: 0
 Owner approval records changed: 0
 UI completion declared: false
 ```
 
-Automated screenshots remain non-approving. PR #417 may not redesign guides or secondary pages and may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #417, stop at `REVIEW GATE` before PR F.
+Automated screenshots remain non-approving. PR #419 may not redesign the already completed primary templates and may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #419, stop at `REVIEW GATE` before PR G full visual closure.
