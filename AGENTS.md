@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #415 UI v3 Rebuild D — stablecoin dossier.
+Current mandatory authority: PR #416 Post-PR #415 Review Gate.
 
 Current authority:
 
@@ -22,6 +22,8 @@ docs/migration/post-pr413-review-gate-pr414.json
 docs/quality/ui-v3-stablecoin-dossier-pr415.md
 config/ui-v3-stablecoin-dossier-pr415.json
 docs/migration/ui-v3-stablecoin-dossier-pr415-handoff.json
+docs/quality/post-pr415-review-gate-pr416-spec.md
+docs/migration/post-pr415-review-gate-pr416.json
 ```
 
 ## Current workstream
@@ -35,15 +37,15 @@ Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
 Issue #281 UI v3 rebuild: reopened
-PR #413 UI v3 Rebuild C — home and stablecoin register: complete
-PR #414 Post-PR #413 Review Gate: complete
-PR #415 UI v3 Rebuild D — stablecoin dossier: active; complete on merge
-PR E events and organizations: blocked
-REVIEW GATE: mandatory after PR #415
+PR #415 UI v3 Rebuild D — stablecoin dossier: complete
+PR #416 Post-PR #415 Review Gate: active; complete on merge
+PR #417 UI v3 Rebuild E — events and organizations: approved next
+PR F guides and secondary pages: blocked
+REVIEW GATE: mandatory after PR #417
 ```
 
-PR #414 binds PR #413 merge commit `8771de6ad5fc79310a638455f5be24b27af20eb3` and successful visual review run `29573553479`. All ten home/register desktop and mobile states passed with zero visual failures and zero horizontal-overflow failures. Automated rendering remains non-approving: owner-approved desktop templates remain 0, owner-approved mobile templates remain 0, and UI completion remains false.
+PR #416 binds PR #415 merge commit `e4af173ff3560e0474b8282de0ad8da4532d0f4a`, implementation head `c632a4419da7a6e45645e75f5a3d87985cd0dbe8`, and successful visual review run `29576352130`. All six USDC, UST, and BUSD desktop/mobile dossier states passed with zero visual failures and exact viewport/scroll widths. Automated rendering remains non-approving: owner-approved desktop templates remain 0, owner-approved mobile templates remain 0, and UI completion remains false.
 
-PR #415 may redesign only the existing `/stablecoin/[slug]/` dossier family. The primary hierarchy is current lifecycle and issuance, redemption/exit, backing/reserves, issuer and control relationships, material events, deployments, unresolved questions, evidence, and progressively disclosed technical fields.
+PR #417 may redesign only the existing `/events/`, `/event/[id]/`, `/issuers/`, and `/issuer/[slug]/` route families. Events must prioritize severity, type, lifecycle context, filters, bounded rendering, and responsive records. Organizations must prioritize role, connected assets, relationship type, filters, bounded rendering, and explicit organization-to-stablecoin relationship views.
 
-PR #415 must capture desktop and mobile states for `/stablecoin/usdc/`, `/stablecoin/ust/`, and `/stablecoin/busd/`. It may not redesign home, register, events, organizations, guides, or secondary pages. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. Automated captures do not constitute owner approval. PR #415 must stop at `REVIEW GATE`; PR E and every later workstream remain unapproved.
+PR #417 must capture desktop and mobile states for `/events/`, `/event/sog_ev_ust_2022_05_collapse/`, `/issuers/`, and `/issuer/circle/`. It may not redesign home, stablecoin register, stablecoin dossier, guides, or secondary pages. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. Automated captures do not constitute owner approval. PR #417 must stop at `REVIEW GATE`; PR F and every later workstream remain unapproved.

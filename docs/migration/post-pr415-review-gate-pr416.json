@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_post_pr415_review_gate_pr416_2026_07_17",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 416,
+  "source_pr": 415,
+  "source_merge_commit": "e4af173ff3560e0474b8282de0ad8da4532d0f4a",
+  "source_implementation_head": "c632a4419da7a6e45645e75f5a3d87985cd0dbe8",
+  "source_handoff": "docs/migration/ui-v3-stablecoin-dossier-pr415-handoff.json",
+  "reviewed_at": "2026-07-17",
+  "binding_findings": {
+    "ui_v3_state": "reopened",
+    "completed_phase": "PR D",
+    "completed_work_item": "stablecoin_dossier",
+    "visual_review_run_id": 29576352130,
+    "visual_artifact_id": 8405201944,
+    "visual_artifact_digest": "sha256:2e0b937b44d53b0ddf0f50c87894ca1f36a7a25ff436f564b45366136a0799a5",
+    "contract_and_build_validation": "success",
+    "mandatory_desktop_mobile_visual_audit": "success",
+    "required_capture_count": 6,
+    "completed_capture_count": 6,
+    "visual_failure_count": 0,
+    "horizontal_overflow_failures": 0,
+    "automated_rendering_is_owner_approval": false,
+    "owner_approved_desktop_templates": 0,
+    "owner_approved_mobile_templates": 0,
+    "routes_changed": 0,
+    "canonical_changes": 0,
+    "public_machine_readable_changes": 0,
+    "metadata_contract_changes": 0
+  },
+  "reviewed_dossier_surfaces": [
+    "current_lifecycle_and_issuance",
+    "six_item_decision_summary",
+    "redemption_and_exit_context",
+    "backing_and_reserve_structure",
+    "primary_and_connected_organizations",
+    "material_event_timeline",
+    "deployment_and_legal_context",
+    "known_unknowns_before_evidence",
+    "evidence_source_and_claim_context",
+    "progressive_technical_disclosure"
+  ],
+  "reviewed_visual_states": [
+    {"route":"/stablecoin/usdc/","device":"desktop","viewport_width":1440,"scroll_width":1440,"status":"active"},
+    {"route":"/stablecoin/usdc/","device":"mobile","viewport_width":390,"scroll_width":390,"status":"active"},
+    {"route":"/stablecoin/ust/","device":"desktop","viewport_width":1440,"scroll_width":1440,"status":"collapsed"},
+    {"route":"/stablecoin/ust/","device":"mobile","viewport_width":390,"scroll_width":390,"status":"collapsed"},
+    {"route":"/stablecoin/busd/","device":"desktop","viewport_width":1440,"scroll_width":1440,"status":"winding_down"},
+    {"route":"/stablecoin/busd/","device":"mobile","viewport_width":390,"scroll_width":390,"status":"winding_down"}
+  ],
+  "decision": {
+    "next_pr": 417,
+    "next_phase": "PR E",
+    "next_work_item": "events_and_organizations",
+    "authorization": "approved_bounded_implementation",
+    "authorized_route_families": ["/events/", "/event/[id]/", "/issuers/", "/issuer/[slug]/"],
+    "route_change": false,
+    "canonical_action": "none",
+    "public_machine_readable_change": false,
+    "owner_approval_change": false,
+    "later_phases_pre_authorized": false,
+    "exit_state_after_pr417": "REVIEW GATE"
+  },
+  "event_priority": ["severity", "type", "lifecycle_context", "filters", "bounded_rendering", "responsive_layout"],
+  "organization_priority": ["organization_role", "connected_assets", "relationship_type", "filters", "bounded_rendering"],
+  "required_components": {
+    "events": [
+      "bounded_event_register",
+      "visible_filters_and_selected_state",
+      "result_count_sort_clear_and_empty_state",
+      "severity_type_and_lifecycle_context",
+      "responsive_event_record",
+      "subject_and_evidence_context"
+    ],
+    "organizations": [
+      "bounded_organization_register",
+      "visible_filters_and_selected_state",
+      "result_count_sort_clear_and_empty_state",
+      "organization_role_and_jurisdiction",
+      "connected_stablecoin_relationship_view",
+      "responsive_organization_record"
+    ]
+  },
+  "representative_visual_states": [
+    {"route":"/events/","device":"desktop","state":"default_bounded_register"},
+    {"route":"/events/","device":"mobile","state":"default_bounded_register"},
+    {"route":"/event/sog_ev_ust_2022_05_collapse/","device":"desktop","state":"critical_failed_lifecycle_event"},
+    {"route":"/event/sog_ev_ust_2022_05_collapse/","device":"mobile","state":"critical_failed_lifecycle_event"},
+    {"route":"/issuers/","device":"desktop","state":"default_bounded_register"},
+    {"route":"/issuers/","device":"mobile","state":"default_bounded_register"},
+    {"route":"/issuer/circle/","device":"desktop","state":"connected_asset_relationship_record"},
+    {"route":"/issuer/circle/","device":"mobile","state":"connected_asset_relationship_record"}
+  ],
+  "visual_requirements": {
+    "desktop_and_mobile": true,
+    "required_capture_count": 8,
+    "contact_sheet": true,
+    "machine_audit": true,
+    "bounded_primary_indexes": true,
+    "horizontal_page_overflow_allowed": false,
+    "skipped_audit_result": "hard_failure",
+    "automated_capture_counts_as_owner_approval": false
+  },
+  "prohibited": [
+    "guides_or_secondary_page_redesign",
+    "route_change",
+    "metadata_contract_change",
+    "canonical_data_change",
+    "public_machine_readable_change",
+    "owner_approval_change",
+    "invented_scores",
+    "ui_completion_declaration",
+    "pr_f_or_later"
+  ],
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  }
+}

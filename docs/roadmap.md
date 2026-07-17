@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #415 active
+Status: canonical execution schedule — PR #416 active review gate
 
 ## Current position
 
@@ -23,9 +23,11 @@ PR #411 UI v3 Rebuild B — global shell and navigation: complete
 PR #412 Post-PR #411 Review Gate: complete
 PR #413 UI v3 Rebuild C — home and stablecoin register: complete
 PR #414 Post-PR #413 Review Gate: complete
-PR #415 UI v3 Rebuild D — stablecoin dossier: active; complete on merge
-PR E events and organizations: blocked
-REVIEW GATE: mandatory after PR #415
+PR #415 UI v3 Rebuild D — stablecoin dossier: complete
+PR #416 Post-PR #415 Review Gate: active; complete on merge
+PR #417 UI v3 Rebuild E — events and organizations: approved next
+PR F guides and secondary pages: blocked
+REVIEW GATE: mandatory after PR #417
 ```
 
 ## Current authority
@@ -48,77 +50,89 @@ docs/migration/post-pr413-review-gate-pr414.json
 docs/quality/ui-v3-stablecoin-dossier-pr415.md
 config/ui-v3-stablecoin-dossier-pr415.json
 docs/migration/ui-v3-stablecoin-dossier-pr415-handoff.json
+docs/quality/post-pr415-review-gate-pr416-spec.md
+docs/migration/post-pr415-review-gate-pr416.json
 ```
 
-## PR #413 reviewed outcome
+## PR #415 reviewed outcome
 
 ```text
-Source implementation merge: 8771de6ad5fc79310a638455f5be24b27af20eb3
-Source implementation head: 6df1719295070d206e800a92e024284e4e6a6011
+Source implementation merge: e4af173ff3560e0474b8282de0ad8da4532d0f4a
+Source implementation head: c632a4419da7a6e45645e75f5a3d87985cd0dbe8
 Contract/build validation: success
 Mandatory desktop/mobile visual audit: success
-Visual review run: 29573553479
-Visual artifact: 8404110345
-Required captures: 10
-Completed captures: 10
+Visual review run: 29576352130
+Visual artifact: 8405201944
+Visual artifact digest: sha256:2e0b937b44d53b0ddf0f50c87894ca1f36a7a25ff436f564b45366136a0799a5
+Required captures: 6
+Completed captures: 6
 Visual failures: 0
 Horizontal-overflow failures: 0
 Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
+Metadata contract changed: 0
 Owner approval records changed: 0
 Automated rendering equals owner approval: false
 ```
 
-The home is now a compact evidence-registry product entrypoint with canonical cross-registry search, truthful totals, lifecycle state, separate event/publication histories, known-unknown issue watch, exploration routes, recently reviewed records, and reviewed guides.
+The stablecoin dossier now presents current lifecycle and issuance, redemption/exit, backing/reserves, primary and connected organizations, material events, deployments, known unknowns, and evidence before progressively disclosed technical identity and coverage fields.
 
-The stablecoin register now exposes six visible filter groups, selected-state counts, active chips, clear-all, result range/count, sorting, URL-backed state, bounded pagination at 20 records per page, desktop table and compact-card representations, comparison state, and explicit no-result behavior.
+USDC, UST, and BUSD each passed desktop and mobile review. All six records contained the complete dossier hierarchy and rendered at exact viewport width without horizontal page overflow.
 
-## PR #414 decision
+## PR #416 decision
 
-PR #414 authorizes exactly:
+PR #416 authorizes exactly:
 
 ```text
-PR #415 — UI v3 Rebuild D: stablecoin dossier
+PR #417 — UI v3 Rebuild E: events and organizations
 REVIEW GATE
 ```
 
-PR #415 may redesign only the existing `/stablecoin/[slug]/` template family. No route addition, removal, or rename is authorized.
-
-## PR #415 implementation
-
-The dossier hierarchy is rebuilt around:
+Authorized existing route families:
 
 ```text
-1. Current lifecycle and issuance
-2. Redemption meaning and access
-3. Backing and reserve structure
-4. Issuer, operator, governance, and control relationships
-5. Material lifecycle events and timeline
-6. Deployment/network summary
-7. Unresolved questions and known unknowns
-8. Evidence identities and claim context
-9. Progressively disclosed technical fields
+/events/
+/event/[id]/
+/issuers/
+/issuer/[slug]/
 ```
 
-Implementation requirements:
+### Events
 
 ```text
-Decision-useful summary: 6 explicit records
-Primary technical identity: progressive disclosure
-Known unknowns: before evidence
-Evidence: source identity and claim context, no invented score
-Section navigation: sticky and keyboard-operable
-Desktop/mobile: first-class
-Horizontal page overflow: prohibited
+Severity and impact
+Event type and date
+Lifecycle context and status effect
+Subject stablecoin and organization context
+Visible filters and selected state
+Result count, sort, clear, and empty state
+Bounded rendering or pagination
+Responsive event records
+Evidence context without invented scores
+```
+
+### Organizations
+
+```text
+Organization role/type and jurisdiction
+Connected stablecoins
+Relationship roles and counts
+Primary display relationship versus all relationships
+Visible filters and selected state
+Result count, sort, clear, and empty state
+Bounded rendering or pagination
+Responsive organization records
+Unknown legal/control roles remain explicit
 ```
 
 Required representative visual states:
 
 ```text
-Desktop + mobile: /stablecoin/usdc/ — deep active fiat-backed record
-Desktop + mobile: /stablecoin/ust/ — failed algorithmic record
-Desktop + mobile: /stablecoin/busd/ — discontinued wind-down record
+Desktop + mobile: /events/ — default bounded event register
+Desktop + mobile: /event/sog_ev_ust_2022_05_collapse/ — critical failed-lifecycle event
+Desktop + mobile: /issuers/ — default bounded organization register
+Desktop + mobile: /issuer/circle/ — connected-asset relationship record
 ```
 
 ## Preserved boundaries
@@ -128,9 +142,9 @@ Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Home/register/event/organization/guide templates changed: 0
+Home/register/dossier/guide templates changed by PR #416: 0
 Owner approval records changed: 0
 UI completion declared: false
 ```
 
-Automated screenshots remain non-approving. PR #415 may not redesign events, organizations, guides, or secondary pages, and may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #415, stop at `REVIEW GATE` before PR E.
+Automated screenshots remain non-approving. PR #417 may not redesign guides or secondary pages and may not change canonical data, public machine-readable outputs, routes, metadata contracts, or owner-approval records. After PR #417, stop at `REVIEW GATE` before PR F.
