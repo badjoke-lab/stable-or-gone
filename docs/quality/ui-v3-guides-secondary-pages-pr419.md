@@ -89,6 +89,7 @@ Applies to comparison, access/regulation, timeline, and statistics.
 - replace oversized editorial mastheads with bounded evidence-registry headers;
 - use sans-serif headings and readable body text;
 - preserve metadata at 13px or larger and dense table text at 14px or larger;
+- keep every representative page H1 at 28px or larger in the rendered desktop and mobile audit;
 - maintain 44px controls and disclosure targets;
 - avoid decorative gradients, glassmorphism, and marketing-dashboard styling;
 - preserve keyboard operation, focus visibility, reduced motion, forced colors, semantic headings, and form labels.
@@ -122,11 +123,12 @@ The machine audit must verify:
 - guide index category navigation present;
 - comparison/access/timeline inputs, clear actions, and result or empty state present;
 - statistics methodology notice and KPI section present;
+- representative H1 text remains at least 28px;
 - responsive tables use local containment;
 - no horizontal page overflow;
 - required desktop and mobile captures are complete.
 
-Missing capture, skipped audit, missing required hierarchy, or horizontal page overflow is a hard failure. Automated rendering does not update owner approval.
+Missing capture, skipped audit, missing required hierarchy, undersized H1, or horizontal page overflow is a hard failure. Automated rendering does not update owner approval.
 
 ## Preserved boundaries
 
