@@ -5,17 +5,17 @@ import StablecoinValueStateSections from './StablecoinValueStateSections.astro';
 const { coin, deployments, evidence, reserveProfile, redemptionProfile, model, reserveReports, regulatoryNotes, openQuestions } = Astro.props;
 ---
 <section class="stablecoin-dossier-section stablecoin-deployments-legal" id="deployments-legal-context">
-  <div class="stablecoin-section-heading"><p>Deployments and legal context</p><h2>Deployments and legal context</h2><span>Network state, contract identity, legal notices, and value states remain separate.</span></div>
+  <div class="stablecoin-section-heading"><p>Deployments and legal context</p><h2>Where the asset exists and what governs access</h2><span>Network state, contract identity, legal notices, and value states remain separate.</span></div>
   <div class="stablecoin-deployment-group"><DeploymentTable deployments={deployments} /></div>
   <div class="stablecoin-legal-group"><StablecoinValueStateSections mode="legal" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
 </section>
 
-<section class="stablecoin-dossier-section stablecoin-evidence-section" id="evidence">
-  <div class="stablecoin-section-heading"><p>Evidence</p><h2>Evidence</h2><span>Publisher, provenance, supported claims, archive state, reliability, and publication date remain separate.</span></div>
-  <EvidenceSourceTable evidence={evidence} tableKind="stablecoin-sources" />
+<section class="stablecoin-dossier-section stablecoin-unknowns-section" id="known-unknowns" aria-labelledby="unknowns-title">
+  <div class="stablecoin-section-heading"><p>Known unknowns</p><h2 id="unknowns-title">What this record has not resolved</h2><span>Missing or disputed facts remain visible instead of being converted into certainty.</span></div>
+  <div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
 </section>
 
-<section class="stablecoin-dossier-section stablecoin-unknowns-section" aria-labelledby="unknowns-title">
-  <div class="stablecoin-section-heading"><p>Known unknowns</p><h2 id="unknowns-title">Known unknowns and coverage</h2><span>Missing or disputed facts remain visible instead of being converted into certainty.</span></div>
-  <div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
+<section class="stablecoin-dossier-section stablecoin-evidence-section" id="evidence">
+  <div class="stablecoin-section-heading"><p>Evidence</p><h2>Sources and supported claims</h2><span>Publisher, provenance, supported claims, archive state, reliability, and publication date remain separate.</span></div>
+  <EvidenceSourceTable evidence={evidence} tableKind="stablecoin-sources" />
 </section>
