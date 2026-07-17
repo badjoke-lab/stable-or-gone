@@ -1,6 +1,6 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
-const { record } = Astro.props as { record: { search: string; name: string; category: string; regulatory: string; jurisdictionScope: string; roles: string[]; relationshipStatuses: string[]; assetCount: number; relationshipCount: number; sourceIdentityCount: number; slug: string; categoryLabel: string; regulatoryLabel: string; jurisdictionLabel: string; confidenceLabel: string; assetNames: string[] } };
+const { record, initiallyVisible = true } = Astro.props as { record: { search: string; name: string; category: string; regulatory: string; jurisdictionScope: string; roles: string[]; relationshipStatuses: string[]; assetCount: number; relationshipCount: number; sourceIdentityCount: number; slug: string; categoryLabel: string; regulatoryLabel: string; jurisdictionLabel: string; confidenceLabel: string; assetNames: string[] }; initiallyVisible?: boolean };
 const data = {
   'data-record-slug': record.slug,
   'data-search': record.search,
@@ -15,15 +15,12 @@ const data = {
   'data-evidence-count': String(record.sourceIdentityCount)
 };
 ---
-<article class="organization-index-card" data-organization-card data-mobile-representation-for="organization-index" {...data}>
-  <header>
-    <span class="record-kicker">{record.categoryLabel}</span>
-    <h2><a href={`/issuer/${record.slug}/`}>{record.name}</a></h2>
-  </header>
+<article class="organization-index-card" data-organization-card data-mobile-representation-for="organization-index" hidden={initiallyVisible ? undefined : true} {...data}>
+  <header><span class="record-kicker">{record.categoryLabel}</span><h2><a href={`/issuer/${record.slug}/`}>{record.name}</a></h2><span class="organization-asset-count">{record.assetCount} connected asset{record.assetCount === 1 ? '' : 's'}</span></header>
   <dl class="mobile-card-primary">
     <div><dt>Jurisdiction</dt><dd>{record.jurisdictionLabel}</dd></div>
     <div><dt>Functional roles</dt><dd>{record.roles.length ? record.roles.map((role: string) => formatPublicLabel(role)).join(', ') : 'Not recorded'}</dd></div>
-    <div><dt>Connected assets</dt><dd>{record.assetCount}</dd></div>
+    <div><dt>Relationships</dt><dd>{record.relationshipCount}</dd></div>
     <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
   </dl>
   <details class="mobile-card-details">
@@ -31,7 +28,7 @@ const data = {
     <dl>
       <div><dt>Regulatory character</dt><dd>{record.regulatoryLabel}</dd></div>
       <div><dt>Relationship states</dt><dd>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status: string) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</dd></div>
-      <div><dt>Relationships</dt><dd>{record.relationshipCount}</dd></div>
+      <div><dt>Connected assets</dt><dd>{record.assetCount}</dd></div>
       <div><dt>Record confidence</dt><dd>{record.confidenceLabel}</dd></div>
     </dl>
   </details>
