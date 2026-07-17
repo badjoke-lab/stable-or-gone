@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #414 active review gate
+Status: canonical execution schedule — PR #415 active
 
 ## Current position
 
@@ -22,8 +22,8 @@ PR #410 Post-PR #409 Review Gate: complete
 PR #411 UI v3 Rebuild B — global shell and navigation: complete
 PR #412 Post-PR #411 Review Gate: complete
 PR #413 UI v3 Rebuild C — home and stablecoin register: complete
-PR #414 Post-PR #413 Review Gate: active; complete on merge
-PR #415 UI v3 Rebuild D — stablecoin dossier: approved next
+PR #414 Post-PR #413 Review Gate: complete
+PR #415 UI v3 Rebuild D — stablecoin dossier: active; complete on merge
 PR E events and organizations: blocked
 REVIEW GATE: mandatory after PR #415
 ```
@@ -45,6 +45,9 @@ config/ui-v3-home-register-pr413.json
 docs/migration/ui-v3-home-register-pr413-handoff.json
 docs/quality/post-pr413-review-gate-pr414-spec.md
 docs/migration/post-pr413-review-gate-pr414.json
+docs/quality/ui-v3-stablecoin-dossier-pr415.md
+config/ui-v3-stablecoin-dossier-pr415.json
+docs/migration/ui-v3-stablecoin-dossier-pr415-handoff.json
 ```
 
 ## PR #413 reviewed outcome
@@ -82,7 +85,9 @@ REVIEW GATE
 
 PR #415 may redesign only the existing `/stablecoin/[slug]/` template family. No route addition, removal, or rename is authorized.
 
-The dossier hierarchy must prioritize:
+## PR #415 implementation
+
+The dossier hierarchy is rebuilt around:
 
 ```text
 1. Current lifecycle and issuance
@@ -94,6 +99,18 @@ The dossier hierarchy must prioritize:
 7. Unresolved questions and known unknowns
 8. Evidence identities and claim context
 9. Progressively disclosed technical fields
+```
+
+Implementation requirements:
+
+```text
+Decision-useful summary: 6 explicit records
+Primary technical identity: progressive disclosure
+Known unknowns: before evidence
+Evidence: source identity and claim context, no invented score
+Section navigation: sticky and keyboard-operable
+Desktop/mobile: first-class
+Horizontal page overflow: prohibited
 ```
 
 Required representative visual states:
@@ -111,7 +128,7 @@ Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Home/register/event/organization/guide templates changed by PR #414: 0
+Home/register/event/organization/guide templates changed: 0
 Owner approval records changed: 0
 UI completion declared: false
 ```
