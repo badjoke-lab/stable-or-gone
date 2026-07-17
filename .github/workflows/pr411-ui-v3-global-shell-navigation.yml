@@ -34,52 +34,49 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - name: Validate PR 411 shell authority and implementation
-        run: |
-          set -o pipefail
-          { node scripts/validate-ui-v3-global-shell-pr411.mjs; npm run validate:active-workstream; } 2>&1 | tee -a /tmp/pr411-all.txt
+        run: node scripts/validate-ui-v3-global-shell-pr411.mjs && npm run validate:active-workstream
       - name: Verify bounded implementation files
         run: |
-          set -o pipefail
-          {
-            test -z "$(git diff --name-only origin/main...HEAD -- src/pages/ data/ public/ scripts/monitoring/)"
-            test "$(git diff --name-only origin/main...HEAD -- src/ | sort)" = $'src/layouts/BaseLayout.astro\nsrc/styles/shell.css\nsrc/styles/terminal-typography-contract.css'
-            git diff --exit-code origin/main...HEAD -- \
-              config/site-architecture.mjs \
-              docs/migration/ui-v3-visual-approval-register.json \
-              docs/migration/current-canonical-checkpoint.json \
-              docs/migration/current-stats-history-checkpoint.json \
-              docs/migration/registry-release-integrity-baseline.json
-          } 2>&1 | tee -a /tmp/pr411-all.txt
-      - name: Validate repository contracts
-        run: |
-          set -o pipefail
-          {
-            npm run validate:data
-            npm run validate:evidence-relations-v2
-            npm run validate:compat
-            npm run validate:final
-            npm run prepare:site-architecture
-            npm run prepare:responsive-accessibility-contract
-            npm run validate:release-integrity
-            npm run validate:reproducible-build
-          } 2>&1 | tee -a /tmp/pr411-all.txt
-      - name: Astro check and build
-        run: |
-          set -o pipefail
-          { npm run check; npm run build; npm run verify:public; } 2>&1 | tee -a /tmp/pr411-all.txt
+          test -z "$(git diff --name-only origin/main...HEAD -- src/pages/ data/ public/ scripts/monitoring/)"
+          test "$(git diff --name-only origin/main...HEAD -- src/ | sort)" = $'src/layouts/BaseLayout.astro\nsrc/styles/shell.css\nsrc/styles/terminal-typography-contract.css'
+          git diff --exit-code origin/main...HEAD -- \
+            config/site-architecture.mjs \
+            docs/migration/ui-v3-visual-approval-register.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-release-integrity-baseline.json
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate Evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate compatibility
+        run: npm run validate:compat
+      - name: Validate final registry contract
+        run: npm run validate:final
+      - name: Validate site architecture
+        run: npm run prepare:site-architecture
+      - name: Validate responsive accessibility
+        run: npm run prepare:responsive-accessibility-contract
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+      - name: Validate reproducible build
+        run: npm run validate:reproducible-build
+      - name: Astro check
+        run: npm run check
+      - name: Build site
+        run: npm run build
+      - name: Verify public layer
+        run: npm run verify:public
       - name: Verify built shell markers
         run: |
-          set -o pipefail
-          {
-            test -f dist/index.html
-            test -f dist/stablecoins/index.html
-            grep -q 'data-shell="evidence-registry-pr411"' dist/index.html
-            grep -q 'Search stablecoins, issuers, events' dist/index.html
-            grep -q 'Registry' dist/index.html
-            grep -q 'Learn' dist/index.html
-            grep -q 'Project' dist/index.html
-            grep -q 'aria-current="page"' dist/stablecoins/index.html
-          } 2>&1 | tee -a /tmp/pr411-all.txt
+          test -f dist/index.html
+          test -f dist/stablecoins/index.html
+          grep -q 'data-shell="evidence-registry-pr411"' dist/index.html
+          grep -q 'Search stablecoins, issuers, events' dist/index.html
+          grep -q 'Registry' dist/index.html
+          grep -q 'Learn' dist/index.html
+          grep -q 'Project' dist/index.html
+          grep -q 'aria-current="page"' dist/stablecoins/index.html
 
   visual-audit:
     if: github.event_name != 'pull_request' || github.head_ref == 'pr411-ui-v3-global-shell-navigation'
