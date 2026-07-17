@@ -35,7 +35,7 @@ jobs:
       - name: Verify bounded implementation files
         run: |
           test -z "$(git diff --name-only origin/main...HEAD -- src/pages/ data/ public/ scripts/monitoring/)"
-          test "$(git diff --name-only origin/main...HEAD -- src/ | sort)" = $'src/layouts/BaseLayout.astro\nsrc/styles/shell.css\nsrc/styles/terminal-typography-contract.css'
+          test "$(git diff --name-only origin/main...HEAD -- src/ | sort)" = $'src/layouts/BaseLayout.astro\nsrc/styles/shell.css\nsrc/styles/terminal-typography-contract.css\nsrc/styles/text-readability-v3.css'
           git diff --exit-code origin/main...HEAD -- \
             config/site-architecture.mjs \
             docs/migration/ui-v3-visual-approval-register.json \
