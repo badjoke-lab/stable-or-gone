@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_home_register_pr413_2026_07_17",
+  "status": "active_implementation",
+  "issue": 281,
+  "implementation_pr": 413,
+  "source_review_pr": 412,
+  "phase": "PR C",
+  "authorized_routes": ["/", "/stablecoins/"],
+  "home": {
+    "product_entrypoint": true,
+    "prominent_registry_search": true,
+    "canonical_registry_totals": true,
+    "lifecycle_state": true,
+    "material_event_dates_separate_from_publication_dates": true,
+    "issue_watch_from_known_unknowns": true,
+    "direct_exploration_paths": true,
+    "oversized_decorative_masthead": false,
+    "invented_metrics": false
+  },
+  "register": {
+    "page_size": 20,
+    "authorized_initial_render_max": 50,
+    "bounded_rendering_required_above": 100,
+    "visible_filter_groups": true,
+    "selected_filter_state": true,
+    "active_filter_chips": true,
+    "clear_all_action": true,
+    "result_range": true,
+    "match_count": true,
+    "sort_state": true,
+    "url_state": true,
+    "compare_selection_min": 2,
+    "compare_selection_max": 4,
+    "desktop_table": true,
+    "compact_cards": true,
+    "required_states": ["default", "filtered", "no_results", "compare_selection", "long_labels", "narrow_screen"]
+  },
+  "visual_review": {
+    "required_states": [
+      "home_desktop",
+      "home_mobile",
+      "register_default_desktop",
+      "register_default_mobile",
+      "register_filtered_desktop",
+      "register_filtered_mobile",
+      "register_no_results_desktop",
+      "register_no_results_mobile",
+      "register_compare_desktop",
+      "register_compare_mobile"
+    ],
+    "contact_sheet_required": true,
+    "machine_audit_required": true,
+    "skipped_audit_result": "hard_failure",
+    "automated_capture_counts_as_owner_approval": false
+  },
+  "boundaries": {
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "metadata_contract_changed": false,
+    "dossier_templates_changed": false,
+    "event_templates_changed": false,
+    "organization_templates_changed": false,
+    "guide_or_secondary_templates_changed": false,
+    "owner_approval_records_changed": false,
+    "ui_completion_declared": false,
+    "pr_d_pre_authorized": false
+  }
+}
