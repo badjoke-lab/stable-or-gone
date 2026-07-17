@@ -48,7 +48,17 @@ check(gate.decision?.authorization === 'approved_owner_review_preparation' && ga
 check(gate.decision?.route_change === false && gate.decision?.canonical_action === 'none' && gate.decision?.public_machine_readable_change === false && gate.decision?.owner_approval_change === false, 'PR #421 boundary changed');
 check(gate.decision?.later_phases_pre_authorized === false && gate.decision?.exit_state_after_pr421 === 'AWAITING OWNER REVIEW', 'closure exit state changed');
 check(gate.required_owner_review_states?.length === design.visual_review_matrix?.length, 'owner-review matrix does not match design contract count');
-check(JSON.stringify(gate.required_owner_review_states) === JSON.stringify(design.visual_review_matrix.map((state) => ({ ...state, device: state.viewport.width <= 390 ? 'mobile' : 'desktop' })).map(({ device, ...rest }) => ({ ...rest, device, viewport: rest.viewport }))), 'owner-review matrix differs from design contract');
+for (const expected of design.visual_review_matrix ?? []) {
+  const actual = gate.required_owner_review_states?.find((state) => state.id === expected.id);
+  check(Boolean(actual), `${expected.id}: owner-review state missing`);
+  if (!actual) continue;
+  check(actual.template === expected.template, `${expected.id}: template changed`);
+  check(actual.route === expected.route, `${expected.id}: route changed`);
+  check(actual.state === expected.state, `${expected.id}: state changed`);
+  check(actual.viewport?.width === expected.viewport?.width && actual.viewport?.height === expected.viewport?.height, `${expected.id}: viewport changed`);
+  check(actual.owner_approval_required === expected.owner_approval_required, `${expected.id}: approval requirement changed`);
+  check(actual.device === (expected.viewport.width <= 390 ? 'mobile' : 'desktop'), `${expected.id}: device classification changed`);
+}
 check(gate.closure_requirements?.required_capture_count === 14 && gate.closure_requirements?.owner_review_worksheet === true, 'closure output requirements changed');
 check(gate.closure_requirements?.horizontal_page_overflow_allowed === false && gate.closure_requirements?.skipped_audit_result === 'hard_failure', 'closure failure gates changed');
 check(gate.closure_requirements?.automated_capture_counts_as_owner_approval === false && gate.closure_requirements?.approval_register_change_allowed_without_owner_decision === false, 'closure permits automatic approval');
