@@ -30,7 +30,7 @@ const data = {
       <div><dt>Relationship states</dt><dd>{record.relationshipStatuses.length ? record.relationshipStatuses.map((status: string) => formatPublicLabel(status)).join(', ') : 'Not recorded'}</dd></div>
       <div><dt>Connected assets</dt><dd>{record.assetCount}</dd></div>
       <div><dt>Record confidence</dt><dd>{record.confidenceLabel}</dd></div>
+      {record.assetNames.length > 0 && <div class="mobile-card-detail-wide"><dt>Connected stablecoins</dt><dd>{record.assetNames.join(', ')}</dd></div>}
     </dl>
   </details>
-  {record.assetNames.length > 0 && <details class="organization-assets-summary"><summary>Connected stablecoins</summary><p>{record.assetNames.join(', ')}</p></details>}
 </article>
