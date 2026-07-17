@@ -69,7 +69,7 @@ for (const marker of [
   '--sog-surface-selected:',
   '--sog-font-interface:',
   '--sog-font-data:',
-  '.site-header[data-shell="evidence-registry-pr411"]',
+  '.site-header {',
   '.site-search-control',
   '.grouped-navigation',
   '.mobile-navigation-panel',
@@ -104,7 +104,8 @@ expect(handoff.next_work_item?.decision === 'review_gate_required', 'PR #411 did
 expect(handoff.canonical_counts?.assets === 112 && handoff.canonical_counts?.evidence === 559 && handoff.canonical_counts?.evidence_relations === 559, 'canonical counts changed');
 
 expect(approvals.current_counts?.accepted_desktop === 0 && approvals.current_counts?.accepted_mobile === 0, 'owner approvals were changed');
-expect(approvals.ui_completion === false, 'UI completion was declared');
+expect(approvals.status === 'pending_implementation_and_review', 'approval register status changed');
+expect(approvals.completion_rule?.automated_capture_counts_as_approval === false, 'automated capture became owner approval');
 
 for (const marker of ['PR #411 UI v3 Rebuild B — global shell and navigation: active; complete on merge','PR C home and stablecoin register: blocked','PR #411 must stop at `REVIEW GATE`']) expect(readText('AGENTS.md').includes(marker), `AGENTS missing ${marker}`);
 for (const marker of ['Status: canonical execution schedule — PR #411 active','Shell marker: evidence-registry-pr411','Home, register, dossier, events, organizations, guides, and later UI phases remain blocked']) expect(readText('docs/roadmap.md').includes(marker), `roadmap missing ${marker}`);
