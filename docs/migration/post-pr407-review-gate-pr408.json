@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_post_pr407_review_gate_pr408_2026_07_17",
+  "status": "reviewed_complete",
+  "public_output": false,
+  "review_pr": 408,
+  "reviewed_at": "2026-07-17",
+  "source_pr": 407,
+  "source_merge_commit": "7fcd5b245b1ae8d184cb0ef5a34d0ca55434b5f8",
+  "source_handoff": "docs/migration/visa-open-usd-article-monitoring-pr407-handoff.json",
+  "binding_findings": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129,
+    "deployments": 174,
+    "market_access_records": 8,
+    "article_route": "/updates/visa-stablecoin-platform-open-usd/",
+    "update_feed_entries_added": 1,
+    "private_monitoring_subjects_added": 2,
+    "pending_initial_baselines_added": 2,
+    "news_queries_added": 2,
+    "canonical_changes": 0
+  },
+  "decisions": {
+    "ui_v3_rebuild_design_contract": {
+      "issue": 281,
+      "pr": 409,
+      "decision": "approved_specification_and_failure_gates_only",
+      "phase": "PR A",
+      "work_item": "UI v3 Rebuild A: design contract and failure gates",
+      "production_ui_change": false,
+      "canonical_action": "none",
+      "next_work_item": "REVIEW GATE"
+    }
+  },
+  "prohibited": [
+    "production_shell_change",
+    "production_template_change",
+    "production_css_change",
+    "route_change",
+    "canonical_data_change",
+    "public_machine_readable_data_change",
+    "ui_completion_declaration",
+    "automatic_visual_approval",
+    "ui_rebuild_pr_b_or_later",
+    "unrelated_workstream"
+  ],
+  "boundaries": {
+    "canonical_counts_change": false,
+    "canonical_data_change": false,
+    "public_machine_readable_data_change": false,
+    "pr407_article_preserved": true,
+    "pr407_monitoring_private": true,
+    "one_next_work_item": true,
+    "review_gate_after_pr409": true
+  }
+}
