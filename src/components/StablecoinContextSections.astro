@@ -10,7 +10,7 @@ const { coin, deployments, evidence, reserveProfile, redemptionProfile, model, r
   <div class="stablecoin-legal-group"><StablecoinValueStateSections mode="legal" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
 </section>
 
-<section class="stablecoin-dossier-section stablecoin-unknowns-section" id="known-unknowns" aria-labelledby="unknowns-title">
+<section class="stablecoin-dossier-section stablecoin-unknowns-section" id="known-unknowns" aria-labelledby="unknowns-title" aria-label="What this record has not resolved">
   <div class="stablecoin-section-heading"><p>What remains unresolved</p><h2 id="unknowns-title">Known unknowns and coverage</h2><span>Missing or disputed facts remain visible instead of being converted into certainty.</span></div>
   <div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
 </section>
