@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          unexpected="$(git diff --name-only origin/main...HEAD -- src/ | grep -Ev '^(src/pages/(guides|methodology|about|glossary|models|updates|maintenance|contact|support|compare|access-regulation|timeline|stats)/|src/components/(GuideEditorialIndex|GuideArticleHeader|EditorialPageHeader)\.astro|src/styles/(secondary-pages-pr419|secondary-tools-pr419-alias|mobile-accessibility-v3)\.css)$' || true)"
+          unexpected="$(git diff --name-only origin/main...HEAD -- src/ | grep -Ev '^(src/pages/(guides|methodology|about|glossary|models|updates|maintenance|contact|support|compare|access-regulation|timeline|stats)/|src/components/(GuideEditorialIndex|GuideArticleHeader|EditorialPageHeader)\.astro|src/styles/(secondary-pages-pr419|secondary-tools-pr419-alias|secondary-longform-pr419-containment|mobile-accessibility-v3)\.css)$' || true)"
           test -z "$unexpected" || { echo "Unauthorized src changes:"; echo "$unexpected"; exit 1; }
           test -z "$(git diff --name-only origin/main...HEAD -- public/ data/)"
           git diff --exit-code origin/main...HEAD -- \
