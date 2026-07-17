@@ -76,6 +76,15 @@ jobs:
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing)await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
             else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,body});
+      - name: Upload diagnostic logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr413-astro-diagnostics-${{ github.run_id }}
+          path: |
+            /tmp/pr413-check-raw.log
+            /tmp/pr413-check-errors.txt
+          if-no-files-found: error
+          retention-days: 7
       - name: Preserve failure state
         if: steps.check.outputs.exit_code != '0'
         run: exit 1
