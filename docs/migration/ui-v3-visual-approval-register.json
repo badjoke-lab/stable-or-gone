@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "register_id": "sog_ui_v3_visual_approval_register_v1",
+  "status": "pending_implementation_and_review",
+  "public_output": false,
+  "issue": 281,
+  "design_contract": "config/ui-v3-rebuild-design-contract-pr409.json",
+  "required_templates": [
+    {
+      "template": "home",
+      "desktop_status": "pending",
+      "mobile_status": "pending",
+      "desktop_artifact": null,
+      "mobile_artifact": null,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": null
+    },
+    {
+      "template": "stablecoin_register",
+      "desktop_status": "pending",
+      "mobile_status": "pending",
+      "desktop_artifact": null,
+      "mobile_artifact": null,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": null
+    },
+    {
+      "template": "stablecoin_dossier",
+      "desktop_status": "pending",
+      "mobile_status": "pending",
+      "desktop_artifact": null,
+      "mobile_artifact": null,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": null
+    },
+    {
+      "template": "events",
+      "desktop_status": "pending",
+      "mobile_status": "pending",
+      "desktop_artifact": null,
+      "mobile_artifact": null,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": null
+    },
+    {
+      "template": "organizations",
+      "desktop_status": "pending",
+      "mobile_status": "pending",
+      "desktop_artifact": null,
+      "mobile_artifact": null,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": null
+    },
+    {
+      "template": "guides",
+      "desktop_status": "pending",
+      "mobile_status": "pending",
+      "desktop_artifact": null,
+      "mobile_artifact": null,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "notes": null
+    }
+  ],
+  "completion_rule": {
+    "all_desktop_status": "accepted",
+    "all_mobile_status": "accepted",
+    "artifact_required": true,
+    "reviewer_required": true,
+    "review_timestamp_required": true,
+    "pending_counts_as_complete": false,
+    "rejected_counts_as_complete": false,
+    "automated_capture_counts_as_approval": false
+  },
+  "current_counts": {
+    "templates": 6,
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "pending_desktop": 6,
+    "pending_mobile": 6,
+    "rejected_desktop": 0,
+    "rejected_mobile": 0
+  }
+}
