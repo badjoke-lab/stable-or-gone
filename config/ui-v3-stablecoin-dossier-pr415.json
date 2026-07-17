@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "sog_ui_v3_stablecoin_dossier_pr415_2026_07_17",
+  "status": "active_implementation",
+  "issue": 281,
+  "implementation_pr": 415,
+  "source_review_pr": 414,
+  "phase": "PR D",
+  "authorized_route_family": "/stablecoin/[slug]/",
+  "priority": [
+    "current_status",
+    "redemption",
+    "backing_reserves",
+    "issuer_control",
+    "material_events",
+    "deployments",
+    "unresolved_questions",
+    "evidence",
+    "technical_fields"
+  ],
+  "required_components": {
+    "entry_header": true,
+    "decision_useful_summary": true,
+    "lifecycle_and_issuance": true,
+    "redemption_exit_state": true,
+    "backing_and_reserve_structure": true,
+    "primary_and_connected_organizations": true,
+    "material_event_timeline": true,
+    "deployment_summary": true,
+    "known_unknowns": true,
+    "evidence_context": true,
+    "progressive_technical_disclosure": true,
+    "invented_scores": false
+  },
+  "decision_summary": [
+    "current_state",
+    "redemption_exit",
+    "backing_stabilization",
+    "primary_organization",
+    "latest_material_event",
+    "open_questions"
+  ],
+  "section_order": [
+    "overview",
+    "redemption_reserves",
+    "organizations_control",
+    "mechanism",
+    "history",
+    "deployments_legal_context",
+    "known_unknowns",
+    "evidence",
+    "related"
+  ],
+  "representative_visual_states": [
+    {"id":"usdc-desktop","route":"/stablecoin/usdc/","device":"desktop","state":"deep_active_fiat_backed","viewport":{"width":1440,"height":1000}},
+    {"id":"usdc-mobile","route":"/stablecoin/usdc/","device":"mobile","state":"deep_active_fiat_backed","viewport":{"width":390,"height":844}},
+    {"id":"ust-desktop","route":"/stablecoin/ust/","device":"desktop","state":"failed_algorithmic","viewport":{"width":1440,"height":1000}},
+    {"id":"ust-mobile","route":"/stablecoin/ust/","device":"mobile","state":"failed_algorithmic","viewport":{"width":390,"height":844}},
+    {"id":"busd-desktop","route":"/stablecoin/busd/","device":"desktop","state":"discontinued_wind_down","viewport":{"width":1440,"height":1000}},
+    {"id":"busd-mobile","route":"/stablecoin/busd/","device":"mobile","state":"discontinued_wind_down","viewport":{"width":390,"height":844}}
+  ],
+  "visual_review": {
+    "required_capture_count": 6,
+    "contact_sheet_required": true,
+    "machine_audit_required": true,
+    "horizontal_page_overflow_allowed": false,
+    "skipped_audit_result": "hard_failure",
+    "automated_capture_counts_as_owner_approval": false
+  },
+  "accessibility": {
+    "desktop_and_mobile_first_class": true,
+    "touch_target_min_px": 44,
+    "keyboard_operation_required": true,
+    "focus_visible_required": true,
+    "semantic_heading_order_required": true,
+    "forced_colors_review_required": true,
+    "long_labels_and_identifiers_required": true
+  },
+  "boundaries": {
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "metadata_contract_changed": false,
+    "home_template_changed": false,
+    "stablecoin_register_changed": false,
+    "event_templates_changed": false,
+    "organization_templates_changed": false,
+    "guide_or_secondary_templates_changed": false,
+    "owner_approval_records_changed": false,
+    "ui_completion_declared": false,
+    "pr_e_pre_authorized": false
+  }
+}

@@ -10,3 +10,26 @@ export function getStaticPaths() {
 const { coin } = Astro.props;
 ---
 <StablecoinDetailView coin={coin} />
+<style is:global>
+  .stablecoin-dossier[data-dossier-version="pr415"] {
+    width: min(1280px, 100%);
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  .stablecoin-dossier[data-dossier-version="pr415"] > *,
+  .stablecoin-dossier[data-dossier-version="pr415"] .stablecoin-dossier-section,
+  .stablecoin-dossier[data-dossier-version="pr415"] .stablecoin-organizations-control {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  @supports not (overflow: clip) {
+    .stablecoin-dossier[data-dossier-version="pr415"] {
+      overflow-x: hidden;
+    }
+  }
+</style>

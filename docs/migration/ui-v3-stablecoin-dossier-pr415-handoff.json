@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_ui_v3_stablecoin_dossier_pr415_2026_07_17",
+  "status": "implementation_complete",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 415,
+  "source_review_pr": 414,
+  "phase": "PR D",
+  "authorized_route_family": "/stablecoin/[slug]/",
+  "implemented_surfaces": [
+    "current_lifecycle_and_issuance",
+    "decision_useful_summary",
+    "redemption_and_exit_context",
+    "backing_and_reserve_structure",
+    "primary_and_connected_organization_relationships",
+    "material_event_timeline",
+    "deployment_and_legal_context",
+    "known_unknowns_before_evidence",
+    "evidence_source_and_claim_context",
+    "progressive_technical_identity_and_coverage"
+  ],
+  "decision_summary": [
+    "current_state",
+    "redemption_exit",
+    "backing_stabilization",
+    "primary_organization",
+    "latest_material_event",
+    "open_questions"
+  ],
+  "representative_records": [
+    {"slug":"usdc","state":"deep_active_fiat_backed"},
+    {"slug":"ust","state":"failed_algorithmic"},
+    {"slug":"busd","state":"discontinued_wind_down"}
+  ],
+  "visual_artifacts": {
+    "required_capture_count": 6,
+    "manifest": "artifacts/pr415-stablecoin-dossier/manifest.json",
+    "contact_sheet": "artifacts/pr415-stablecoin-dossier/contact-sheet.html",
+    "skipped_visual_audit_allowed": false,
+    "horizontal_page_overflow_allowed": false,
+    "automated_capture_is_owner_approval": false
+  },
+  "owner_approval_state": {
+    "changed": false,
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "ui_completion": false
+  },
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "changes": {
+    "routes": 0,
+    "canonical_data": 0,
+    "public_machine_readable_data": 0,
+    "metadata_contract": 0,
+    "home_template": 0,
+    "stablecoin_register_template": 0,
+    "event_templates": 0,
+    "organization_templates": 0,
+    "guide_or_secondary_templates": 0
+  },
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "PR #414 authorizes only the stablecoin dossier phase. Events and organizations work requires a separate review after all required PR #415 visual states are examined."
+  },
+  "boundaries": {
+    "only_authorized_route_family_changed": true,
+    "routes_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "owner_approval_changed": false,
+    "ui_completion_declared": false,
+    "pr_e_pre_authorized": false
+  }
+}
