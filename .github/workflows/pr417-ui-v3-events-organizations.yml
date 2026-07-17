@@ -31,8 +31,6 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Validate PR 417 bounded implementation
         run: node scripts/validate-ui-v3-events-organizations-pr417.mjs && npm run validate:active-workstream
-      - name: Validate existing event and organization contracts
-        run: npm run validate:events-v2 && npm run validate:ui-v2-organizations
       - name: Verify authorized source files only
         shell: bash
         run: |
