@@ -36,9 +36,9 @@ expect(handoff.boundaries?.pr_d_pre_authorized === false, 'PR #413 pre-authorize
 
 expect(implementationContract.implementation_pr === 413 && implementationContract.phase === 'PR C', 'PR #413 implementation contract identity changed');
 expect(implementationContract.register?.page_size === 20, 'PR #413 contract page size changed');
-expect(implementationContract.visual_review?.required_capture_count === 10, 'PR #413 contract visual matrix changed');
+expect(implementationContract.visual_review?.required_states?.length === 10, 'PR #413 contract visual matrix changed');
 expect(implementationContract.visual_review?.skipped_audit_result === 'hard_failure', 'PR #413 contract visual skip no longer hard-fails');
-expect(implementationContract.visual_review?.automated_capture_is_owner_approval === false, 'PR #413 contract treats capture as approval');
+expect(implementationContract.visual_review?.automated_capture_counts_as_owner_approval === false, 'PR #413 contract treats capture as approval');
 
 expect(design.template_priority?.stablecoin_dossier?.[0] === 'current_status', 'dossier priority no longer starts with current status');
 expect(JSON.stringify(design.template_priority?.stablecoin_dossier) === JSON.stringify(['current_status','redemption','backing_reserves','issuer_control','material_events','deployments','unresolved_questions','evidence','technical_fields']), 'design dossier priority changed');
