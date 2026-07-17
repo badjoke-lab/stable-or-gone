@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #411 UI v3 Rebuild B — global shell and navigation.
+Current mandatory authority: PR #412 Post-PR #411 Review Gate.
 
 Current authority:
 
@@ -12,10 +12,11 @@ docs/deployment-policy.md
 docs/post-351-data-growth-operating-spec.md
 docs/quality/ui-v3-rebuild-design-contract-pr409.md
 config/ui-v3-rebuild-design-contract-pr409.json
-docs/quality/post-pr409-review-gate-pr410-spec.md
-docs/migration/post-pr409-review-gate-pr410.json
 docs/quality/ui-v3-global-shell-navigation-pr411.md
 config/ui-v3-global-shell-pr411.json
+docs/migration/ui-v3-global-shell-navigation-pr411-handoff.json
+docs/quality/post-pr411-review-gate-pr412-spec.md
+docs/migration/post-pr411-review-gate-pr412.json
 ```
 
 ## Current workstream
@@ -29,14 +30,15 @@ Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
 Issue #281 UI v3 rebuild: reopened
-PR #410 Post-PR #409 Review Gate: complete
-PR #411 UI v3 Rebuild B — global shell and navigation: active; complete on merge
-PR C home and stablecoin register: blocked
-REVIEW GATE: mandatory after PR #411
+PR #411 UI v3 Rebuild B — global shell and navigation: complete
+PR #412 Post-PR #411 Review Gate: active; complete on merge
+PR #413 UI v3 Rebuild C — home and stablecoin register: approved next
+PR D stablecoin dossier: blocked
+REVIEW GATE: mandatory after PR #413
 ```
 
-PR #411 is bounded to the shared header, brand presentation, registry search, grouped navigation, mobile menu, page-width and shell surfaces, shared typography and interaction states, footer, shell validation, and screenshot/contact-sheet artifacts.
+PR #412 confirms the shared evidence-registry shell passed contract/build validation and the mandatory desktop/mobile visual audit. Automated screenshots remain non-approving: all owner-approval states stay pending.
 
-PR #411 may not redesign the home page, stablecoin register, stablecoin dossier, events, organizations, guides, or any other page template. It may not change routes, canonical data, public machine-readable outputs, metadata, or owner-approval records. Automated screenshots do not constitute owner approval.
+PR #412 authorizes exactly PR #413. PR #413 may redesign only `/` and `/stablecoins/`, including product-entry search, registry state, recent changes, issue watch, exploration paths, visible filters, active chips, result/sort state, compare state, responsive table/cards, and bounded rendering.
 
-PR #411 must stop at `REVIEW GATE`. Every unrelated workstream remains unapproved.
+PR #413 may not redesign dossiers, events, organizations, guides, or secondary pages. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. It must stop at `REVIEW GATE`; every unrelated workstream remains unapproved.
