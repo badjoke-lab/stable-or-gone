@@ -260,4 +260,13 @@ const jsonLd = {
     root?.addEventListener('keydown', (event) => { if (event instanceof KeyboardEvent && event.key === 'Escape' && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); input.focus(); } });
     document.addEventListener('click', (event) => { if (root instanceof HTMLElement && event.target instanceof Node && !root.contains(event.target) && results instanceof HTMLElement && input instanceof HTMLInputElement) { results.hidden = true; input.setAttribute('aria-expanded', 'false'); } });
   </script>
+  <style is:global>
+    .home-entry::after {
+      right: 1rem;
+      bottom: 1rem;
+      width: min(20rem, calc(100% - 2rem));
+      height: auto;
+      aspect-ratio: 1;
+    }
+  </style>
 </BaseLayout>
