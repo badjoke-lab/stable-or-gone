@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_ui_v3_rebuild_design_contract_pr409_2026_07_17",
+  "status": "specification_complete",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 409,
+  "source_review_pr": 408,
+  "source_review_merge_commit": "257d04851a02c2ca2208fb3e46282f6d67b0d994",
+  "design_contract": "config/ui-v3-rebuild-design-contract-pr409.json",
+  "design_specification": "docs/quality/ui-v3-rebuild-design-contract-pr409.md",
+  "approval_register": "docs/migration/ui-v3-visual-approval-register.json",
+  "direction": "modern_evidence_registry",
+  "replaced_direction": "editorial_newspaper_first",
+  "contract_counts": {
+    "representative_capture_states": 14,
+    "required_owner_approved_templates": 6,
+    "responsive_widths": 5,
+    "sog_visual_components": 10,
+    "ui_phases": 7
+  },
+  "failure_gates": {
+    "screenshot_artifact_required": true,
+    "desktop_and_mobile_required": true,
+    "contact_sheet_required": true,
+    "skipped_visual_audit_is_failure": true,
+    "automated_rendering_is_approval": false,
+    "manual_owner_approval_required": true,
+    "approval_record_required": true
+  },
+  "approval_state": {
+    "templates": 6,
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "pending_desktop": 6,
+    "pending_mobile": 6,
+    "ui_completion": false
+  },
+  "canonical_counts": {
+    "assets": 112,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "changes": {
+    "production_ui_files": 0,
+    "routes": 0,
+    "canonical_data": 0,
+    "public_machine_readable_data": 0
+  },
+  "phase_state": {
+    "pr_a": "complete_on_merge",
+    "pr_b": "blocked_review_gate",
+    "pr_c": "blocked_review_gate",
+    "pr_d": "blocked_review_gate",
+    "pr_e": "blocked_review_gate",
+    "pr_f": "blocked_review_gate",
+    "pr_g": "blocked_review_gate"
+  },
+  "next_work_item": {
+    "decision": "review_gate_required",
+    "reason": "PR #408 authorizes only PR #409. Production shell work in PR B requires a separate reviewed authority decision after the design contract is merged."
+  },
+  "boundaries": {
+    "production_ui_changed": false,
+    "route_changed": false,
+    "canonical_data_changed": false,
+    "public_machine_readable_data_changed": false,
+    "ui_completion_declared": false,
+    "automatic_visual_approval": false,
+    "next_phase_pre_authorized": false
+  }
+}
