@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_ui_v3_events_organizations_pr417_2026_07_17",
+  "status": "implementation_complete",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 417,
+  "source_review_pr": 416,
+  "phase": "PR E",
+  "authorized_route_families": ["/events/", "/event/[id]/", "/issuers/", "/issuer/[slug]/"],
+  "implemented_surfaces": [
+    "bounded_event_register",
+    "compact_mobile_event_records",
+    "event_search_filter_sort_page_url_state",
+    "event_impact_and_lifecycle_effect",
+    "responsive_event_record",
+    "event_subject_and_evidence_context",
+    "bounded_organization_register",
+    "compact_mobile_organization_records",
+    "organization_search_filter_sort_page_url_state",
+    "organization_role_jurisdiction_connected_assets",
+    "organization_relationship_view",
+    "responsive_organization_record"
+  ],
+  "register_bounds": {"events_page_size": 20, "events_initial_ssr_max": 20, "events_mobile_max_body_height_px": 9000, "organizations_page_size": 20, "organizations_initial_ssr_max": 20, "organizations_mobile_max_body_height_px": 9000},
+  "visual_artifacts": {"required_capture_count": 8, "manifest": "artifacts/pr417-events-organizations/manifest.json", "contact_sheet": "artifacts/pr417-events-organizations/contact-sheet.html", "skipped_visual_audit_allowed": false, "horizontal_page_overflow_allowed": false, "mobile_vertical_density_failure_allowed": false, "automated_capture_is_owner_approval": false},
+  "owner_approval_state": {"changed": false, "accepted_desktop": 0, "accepted_mobile": 0, "ui_completion": false},
+  "canonical_counts": {"assets": 112, "organizations": 107, "relationships": 124, "events": 187, "evidence": 559, "evidence_relations": 559, "deployments": 174, "market_access_records": 8},
+  "changes": {"routes": 0, "canonical_data": 0, "public_machine_readable_data": 0, "metadata_contract": 0, "home": 0, "stablecoin_register": 0, "stablecoin_dossier": 0, "guides_or_secondary_pages": 0},
+  "next_work_item": {"decision": "review_gate_required", "reason": "PR #416 authorizes only events and organizations. Guides and secondary pages require a separate post-PR #417 review."},
+  "boundaries": {"only_authorized_route_families_changed": true, "routes_changed": false, "canonical_data_changed": false, "public_machine_readable_data_changed": false, "owner_approval_changed": false, "ui_completion_declared": false, "pr_f_pre_authorized": false}
+}

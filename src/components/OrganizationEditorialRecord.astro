@@ -4,6 +4,7 @@ import OrganizationEditorialHeader from './OrganizationEditorialHeader.astro';
 import OrganizationEditorialIdentity from './OrganizationEditorialIdentity.astro';
 import OrganizationEditorialHistory from './OrganizationEditorialHistory.astro';
 import '../styles/organization-detail.css';
+import '../styles/events-organizations-pr417.css';
 import { buildOrganizationDetailView } from '../lib/views/organizationDetailView';
 const { organization } = Astro.props;
 const view = buildOrganizationDetailView(organization);
@@ -12,7 +13,7 @@ const description = `${organization.name} organization category, legal-form stat
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name: organization.name, url: `https://sog.badjoke-lab.com/issuer/${organization.slug}/`, description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, sameAs: organization.official_url ? [organization.official_url] : undefined };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/issuer/${organization.slug}/`} jsonLd={jsonLd}>
-  <article class="organization-detail-page" data-ui-v3-organization-detail>
+  <article class="organization-detail-page" data-ui-v3-organization-detail data-record-version="pr417-organization">
     <OrganizationEditorialHeader organization={organization} view={view} />
     <nav class="organization-detail-nav" aria-label="Organization record sections"><a href="#overview">Overview</a><a href="#relationships">Relationships</a><a href="#events">Events</a><a href="#evidence">Evidence</a><a href="#unknowns">Known unknowns</a><a href="#corrections">Corrections</a></nav>
     <OrganizationEditorialIdentity organization={organization} view={view} />

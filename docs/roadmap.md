@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #416 active review gate
+Status: canonical execution schedule — PR #417 active
 
 ## Current position
 
@@ -24,8 +24,8 @@ PR #412 Post-PR #411 Review Gate: complete
 PR #413 UI v3 Rebuild C — home and stablecoin register: complete
 PR #414 Post-PR #413 Review Gate: complete
 PR #415 UI v3 Rebuild D — stablecoin dossier: complete
-PR #416 Post-PR #415 Review Gate: active; complete on merge
-PR #417 UI v3 Rebuild E — events and organizations: approved next
+PR #416 Post-PR #415 Review Gate: complete
+PR #417 UI v3 Rebuild E — events and organizations: active; complete on merge
 PR F guides and secondary pages: blocked
 REVIEW GATE: mandatory after PR #417
 ```
@@ -52,6 +52,9 @@ config/ui-v3-stablecoin-dossier-pr415.json
 docs/migration/ui-v3-stablecoin-dossier-pr415-handoff.json
 docs/quality/post-pr415-review-gate-pr416-spec.md
 docs/migration/post-pr415-review-gate-pr416.json
+docs/quality/ui-v3-events-organizations-pr417.md
+config/ui-v3-events-organizations-pr417.json
+docs/migration/ui-v3-events-organizations-pr417-handoff.json
 ```
 
 ## PR #415 reviewed outcome
@@ -63,7 +66,6 @@ Contract/build validation: success
 Mandatory desktop/mobile visual audit: success
 Visual review run: 29576352130
 Visual artifact: 8405201944
-Visual artifact digest: sha256:2e0b937b44d53b0ddf0f50c87894ca1f36a7a25ff436f564b45366136a0799a5
 Required captures: 6
 Completed captures: 6
 Visual failures: 0
@@ -71,14 +73,8 @@ Horizontal-overflow failures: 0
 Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
-Metadata contract changed: 0
 Owner approval records changed: 0
-Automated rendering equals owner approval: false
 ```
-
-The stablecoin dossier now presents current lifecycle and issuance, redemption/exit, backing/reserves, primary and connected organizations, material events, deployments, known unknowns, and evidence before progressively disclosed technical identity and coverage fields.
-
-USDC, UST, and BUSD each passed desktop and mobile review. All six records contained the complete dossier hierarchy and rendered at exact viewport width without horizontal page overflow.
 
 ## PR #416 decision
 
@@ -98,41 +94,35 @@ Authorized existing route families:
 /issuer/[slug]/
 ```
 
+## PR #417 implementation
+
 ### Events
 
 ```text
-Severity and impact
-Event type and date
-Lifecycle context and status effect
-Subject stablecoin and organization context
-Visible filters and selected state
-Result count, sort, clear, and empty state
-Bounded rendering or pagination
-Responsive event records
-Evidence context without invented scores
+20 records per page with bounded initial SSR
+Search, sort, five visible filter groups, selected-state counts, active chips, clear-all, result range/count, pagination, and empty state
+Impact/severity and historical lifecycle effect shown separately
+Responsive table and compact records
+Event detail with taxonomy, recovery, subjects, structured detail, evidence, and corrections
 ```
 
 ### Organizations
 
 ```text
-Organization role/type and jurisdiction
-Connected stablecoins
-Relationship roles and counts
-Primary display relationship versus all relationships
-Visible filters and selected state
-Result count, sort, clear, and empty state
-Bounded rendering or pagination
-Responsive organization records
-Unknown legal/control roles remain explicit
+20 records per page with bounded initial SSR
+Search, sort, five visible filter groups, selected-state counts, active chips, clear-all, result range/count, pagination, and empty state
+Organization type, regulatory character, jurisdiction, roles, connected assets, relationship states/counts, evidence, and confidence shown separately
+Responsive table and compact records
+Organization detail with identity, current/historical relationships, events, evidence, unknowns, and corrections
 ```
 
 Required representative visual states:
 
 ```text
-Desktop + mobile: /events/ — default bounded event register
-Desktop + mobile: /event/sog_ev_ust_2022_05_collapse/ — critical failed-lifecycle event
-Desktop + mobile: /issuers/ — default bounded organization register
-Desktop + mobile: /issuer/circle/ — connected-asset relationship record
+Desktop + mobile: /events/
+Desktop + mobile: /event/sog_ev_ust_2022_05_collapse/
+Desktop + mobile: /issuers/
+Desktop + mobile: /issuer/circle/
 ```
 
 ## Preserved boundaries
@@ -142,7 +132,7 @@ Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Home/register/dossier/guide templates changed by PR #416: 0
+Home/stablecoin register/stablecoin dossier/guide templates changed: 0
 Owner approval records changed: 0
 UI completion declared: false
 ```
