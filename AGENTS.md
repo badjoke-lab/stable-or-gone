@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #421 UI v3 Rebuild G — full visual closure.
+Current mandatory authority: UI v3 complete — PR #422 owner approval and completion record.
 
 Current authority:
 
@@ -49,17 +49,15 @@ Archive recorded: 430
 Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
-Issue #281 UI v3 rebuild: reopened
+Issue #281 UI v3 rebuild: complete
 PR #420 Post-PR #419 Review Gate: complete
-PR #421 UI v3 Rebuild G — full visual closure: active
-Exit state: AWAITING OWNER REVIEW
-Owner-approved desktop templates: 0
-Owner-approved mobile templates: 0
-UI completion: false
+PR #421 UI v3 Rebuild G — full visual closure: complete
+Exit state: COMPLETE
+Owner-approved desktop templates: 6 / 6
+Owner-approved mobile templates: 6 / 6
+UI completion: true
 ```
 
-PR #421 is the final non-production visual-closure phase. It captures the fourteen design-contract owner-review states across home, stablecoin register default/filtered/empty states, USDC dossier, event register, organization register, and the representative MiCA guide. It builds the final machine manifest, contact sheet, and owner-review worksheet and verifies all implementation merge commits and protected boundaries.
+The owner explicitly approved all six required desktop and mobile UI v3 template families on 2026-07-18. PR #422 records the decision and the fourteen-state PR #421 visual evidence. Automated capture did not constitute approval.
 
-PR #421 may not redesign production UI unless a required closure state fails a hard gate. Any repair must be isolated, justified by the failure, and recaptured. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or the owner-approval register.
-
-Automated capture does not constitute owner approval. PR #421 may reach `AWAITING OWNER REVIEW`, but it may not mark a template accepted, declare UI completion, or close Issue #281 without an explicit owner decision for every required desktop and mobile template state. No later implementation phase is authorized.
+UI v3 has no active implementation workstream. Future material UI changes require a new independently authorized workstream. Production UI, routes, canonical data, public machine-readable outputs, and metadata contracts were unchanged by the approval closure.

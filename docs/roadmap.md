@@ -18,7 +18,7 @@ Archive recorded: 430
 Archive not recorded: 129
 Issue #281 UI v3 rebuild: complete
 PR #421 full visual closure: complete
-PR #422 owner approval record: active; complete on merge
+PR #422 owner approval record: complete
 Accepted desktop templates: 6
 Accepted mobile templates: 6
 Pending desktop templates: 0
