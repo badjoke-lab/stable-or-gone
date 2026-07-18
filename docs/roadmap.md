@@ -16,14 +16,15 @@ Deployments: 174
 Market Access Records: 8
 Archive recorded: 430
 Archive not recorded: 129
-Issue #281 UI v3 rebuild: complete
+Issue #281 UI v3 rebuild: complete; close authorized
 PR #421 full visual closure: complete
-PR #422 owner approval record: active; complete on merge
+PR #422 owner approval record: complete
 Accepted desktop templates: 6
 Accepted mobile templates: 6
 Pending desktop templates: 0
 Pending mobile templates: 0
 UI completion: true
+Active UI v3 implementation workstream: none
 ```
 
 ## Completed UI v3 sequence
@@ -75,4 +76,4 @@ Public machine-readable data changed: 0
 Metadata contract changed: 0
 ```
 
-Future material UI work requires a new authorized workstream.
+UI v3 has no active implementation phase. Future material UI work requires a new authorized workstream.
