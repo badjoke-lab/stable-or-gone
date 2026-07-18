@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #420 Post-PR #419 Review Gate.
+Current mandatory authority: PR #421 UI v3 Rebuild G — full visual closure.
 
 Current authority:
 
@@ -34,6 +34,9 @@ config/ui-v3-guides-secondary-pages-pr419.json
 docs/migration/ui-v3-guides-secondary-pages-pr419-handoff.json
 docs/quality/post-pr419-review-gate-pr420-spec.md
 docs/migration/post-pr419-review-gate-pr420.json
+docs/quality/ui-v3-full-visual-closure-pr421.md
+config/ui-v3-full-visual-closure-pr421.json
+docs/migration/ui-v3-full-visual-closure-pr421.json
 ```
 
 ## Current workstream
@@ -47,15 +50,16 @@ Archive not recorded: 129
 Deployments: 174
 Market Access Records: 8
 Issue #281 UI v3 rebuild: reopened
-PR #419 UI v3 Rebuild F — guides and secondary pages: complete
-PR #420 Post-PR #419 Review Gate: active; complete on merge
-PR #421 UI v3 Rebuild G — full visual closure: approved next
-Owner review: mandatory after PR #421
+PR #420 Post-PR #419 Review Gate: complete
+PR #421 UI v3 Rebuild G — full visual closure: active
+Exit state: AWAITING OWNER REVIEW
+Owner-approved desktop templates: 0
+Owner-approved mobile templates: 0
 UI completion: false
 ```
 
-PR #420 binds PR #419 merge commit `5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7`, implementation head `87fd5d9539b87c8cee46870b60eb745644129467`, and successful visual review run `29599351044`. All sixteen guide and secondary-page desktop/mobile states passed with zero visual failures and zero horizontal-overflow failures. Automated rendering remains non-approving: owner-approved desktop templates remain 0, owner-approved mobile templates remain 0, and UI completion remains false.
+PR #421 is the final non-production visual-closure phase. It captures the fourteen design-contract owner-review states across home, stablecoin register default/filtered/empty states, USDC dossier, event register, organization register, and the representative MiCA guide. It builds the final machine manifest, contact sheet, and owner-review worksheet and verifies all implementation merge commits and protected boundaries.
 
-PR #421 is non-production full visual closure. It may capture the fourteen design-contract owner-review states, build the final contact sheet and owner-review worksheet, verify merge lineage and protected boundaries, and report `AWAITING OWNER REVIEW`. It may not redesign production UI unless a hard visual gate fails, and any repair must be isolated and recaptured.
+PR #421 may not redesign production UI unless a required closure state fails a hard gate. Any repair must be isolated, justified by the failure, and recaptured. It may not change routes, canonical data, public machine-readable outputs, metadata contracts, or the owner-approval register.
 
-PR #421 may not change routes, canonical data, public machine-readable outputs, metadata contracts, or owner-approval records. Automated captures do not constitute owner approval. It may not mark a template accepted or declare UI completion without an explicit owner decision for every required desktop and mobile template state.
+Automated capture does not constitute owner approval. PR #421 may reach `AWAITING OWNER REVIEW`, but it may not mark a template accepted, declare UI completion, or close Issue #281 without an explicit owner decision for every required desktop and mobile template state. No later implementation phase is authorized.

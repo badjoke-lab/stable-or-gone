@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-17  
-Status: canonical execution schedule — PR #420 active review gate
+Status: canonical execution schedule — PR #421 active full visual closure
 
 ## Current position
 
@@ -28,9 +28,11 @@ PR #416 Post-PR #415 Review Gate: complete
 PR #417 UI v3 Rebuild E — events and organizations: complete
 PR #418 Post-PR #417 Review Gate: complete
 PR #419 UI v3 Rebuild F — guides and secondary pages: complete
-PR #420 Post-PR #419 Review Gate: active; complete on merge
-PR #421 UI v3 Rebuild G — full visual closure: approved next
-Owner review: mandatory after PR #421
+PR #420 Post-PR #419 Review Gate: complete
+PR #421 UI v3 Rebuild G — full visual closure: active
+Exit state: AWAITING OWNER REVIEW
+Owner-approved desktop templates: 0
+Owner-approved mobile templates: 0
 UI completion: false
 ```
 
@@ -66,44 +68,25 @@ config/ui-v3-guides-secondary-pages-pr419.json
 docs/migration/ui-v3-guides-secondary-pages-pr419-handoff.json
 docs/quality/post-pr419-review-gate-pr420-spec.md
 docs/migration/post-pr419-review-gate-pr420.json
+docs/quality/ui-v3-full-visual-closure-pr421.md
+config/ui-v3-full-visual-closure-pr421.json
+docs/migration/ui-v3-full-visual-closure-pr421.json
 ```
 
-## PR #419 reviewed outcome
+## Completed implementation lineage
 
 ```text
-Source implementation merge: 5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7
-Source implementation head: 87fd5d9539b87c8cee46870b60eb745644129467
-Contract/build validation: success
-Mandatory desktop/mobile visual audit: success
-Visual review run: 29599351044
-Visual artifact: 8414428588
-Visual artifact digest: sha256:9b844bdd46b37b577d1c33f725a166f0682972ffc458f903066a567bef27216f
-Required captures: 16
-Completed captures: 16
-Visual failures: 0
-Horizontal-overflow failures: 0
-Routes changed: 0
-Canonical data changed: 0
-Public machine-readable data changed: 0
-Metadata contract changed: 0
-Owner approval records changed: 0
-Automated rendering equals owner approval: false
+PR #411 global shell: a9a37b79ca6b7313d310d206ad82dc19a273598f
+PR #413 home/register: 8771de6ad5fc79310a638455f5be24b27af20eb3
+PR #415 dossier: e4af173ff3560e0474b8282de0ad8da4532d0f4a
+PR #417 events/organizations: aa4e5b98ae25652c2aeb6327000ce6a7b8f14e51
+PR #419 guides/secondary pages: 5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7
+PR #420 final review authority: 1dbe3cded3701700a59608e409b79c2030f79aa2
 ```
 
-The guide archive, representative long-form guide, methodology, about, comparison, access/regulation, timeline, and statistics pages now share the evidence-registry hierarchy. Reading width, generated contents navigation, publication metadata, local table containment, visible tool state, absence/freshness semantics, and no-score boundaries remain explicit.
+## PR #421 full visual closure
 
-## PR #420 decision
-
-PR #420 authorizes exactly:
-
-```text
-PR #421 — UI v3 Rebuild G: full visual closure
-AWAITING OWNER REVIEW
-```
-
-PR #421 is not another broad redesign. It prepares the final cross-template visual review package and verifies that every completed phase remains intact.
-
-Required owner-review states:
+PR #421 captures the final design-contract matrix:
 
 ```text
 Desktop + mobile: home
@@ -118,23 +101,33 @@ Desktop + mobile: representative MiCA guide
 
 Total required captures: 14.
 
-## PR #421 requirements
+Required outputs:
 
 ```text
-Final screenshot manifest
+Final machine manifest
 Final contact sheet
-Owner-review worksheet
-All implementation merge commits verified as ancestors
-All route/canonical/public-projection/metadata boundaries unchanged
+Final owner-review worksheet
+Merge-lineage verification
+Protected-boundary verification
+```
+
+Hard gates:
+
+```text
+All fourteen captures exist
+Shared shell and correct template markers present
+H1 remains at least 28px
 Zero horizontal page overflow
-Real filtered and empty register states
-Responsive typography and 44px controls verified
+Register filtered and empty states are genuine
+Register/event/organization lists remain bounded
+Dossier and guide hierarchy remain complete
+No production UI, route, canonical, public projection, metadata, or approval-register changes
 Automated capture remains non-approving
 ```
 
 ## Owner approval boundary
 
-The visual approval register currently remains:
+The visual approval register remains:
 
 ```text
 Required templates: 6
@@ -145,18 +138,31 @@ Pending mobile: 6
 UI completion: false
 ```
 
-PR #421 may reach `AWAITING OWNER REVIEW`. It may not mark any template accepted or declare UI completion until the owner explicitly accepts every required desktop and mobile template state.
+PR #421 may reach `AWAITING OWNER REVIEW`. The generated contact sheet and worksheet are review evidence only. They do not mark any template accepted.
+
+Explicit owner acceptance or rejection is required for:
+
+```text
+home desktop/mobile
+stablecoin register desktop/mobile
+stablecoin dossier desktop/mobile
+events desktop/mobile
+organizations desktop/mobile
+guides desktop/mobile
+```
 
 ## Preserved boundaries
 
 ```text
+Production UI changed: 0
 Routes changed: 0
 Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
-Owner approval records changed by PR #420: 0
-Production UI changed by PR #420: 0
+Owner approval register changed: 0
+Automated owner approvals: 0
 UI completion declared: false
+Later implementation phase: none
 ```
 
-After PR #421, stop at `AWAITING OWNER REVIEW` unless an explicit owner decision is recorded.
+Exit state: `AWAITING OWNER REVIEW`.

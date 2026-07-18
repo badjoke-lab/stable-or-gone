@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "closure_id": "sog_ui_v3_full_visual_closure_pr421_2026_07_17",
+  "status": "awaiting_owner_review",
+  "public_output": false,
+  "issue": 281,
+  "implementation_pr": 421,
+  "source_review_pr": 420,
+  "phase": "PR G",
+  "production_ui_change": false,
+  "required_capture_count": 14,
+  "visual_artifacts": {
+    "manifest": "artifacts/pr421-full-visual-closure/manifest.json",
+    "contact_sheet": "artifacts/pr421-full-visual-closure/contact-sheet.html",
+    "contact_sheet_json": "artifacts/pr421-full-visual-closure/contact-sheet.json",
+    "owner_review": "artifacts/pr421-full-visual-closure/owner-review.html",
+    "owner_review_json": "artifacts/pr421-full-visual-closure/owner-review.json",
+    "skipped_visual_audit_allowed": false,
+    "horizontal_page_overflow_allowed": false,
+    "automated_capture_is_owner_approval": false
+  },
+  "owner_approval_state": {
+    "status": "pending",
+    "accepted_desktop": 0,
+    "accepted_mobile": 0,
+    "pending_desktop": 6,
+    "pending_mobile": 6,
+    "reviewer": null,
+    "reviewed_at": null,
+    "ui_completion": false
+  },
+  "required_templates": [
+    "home",
+    "stablecoin_register",
+    "stablecoin_dossier",
+    "events",
+    "organizations",
+    "guides"
+  ],
+  "merge_lineage": [
+    {"pr":411,"commit":"a9a37b79ca6b7313d310d206ad82dc19a273598f"},
+    {"pr":413,"commit":"8771de6ad5fc79310a638455f5be24b27af20eb3"},
+    {"pr":415,"commit":"e4af173ff3560e0474b8282de0ad8da4532d0f4a"},
+    {"pr":417,"commit":"aa4e5b98ae25652c2aeb6327000ce6a7b8f14e51"},
+    {"pr":419,"commit":"5e5857f2e0bd39b24dfc9afaef62cc9e9fa27eb7"},
+    {"pr":420,"commit":"1dbe3cded3701700a59608e409b79c2030f79aa2"}
+  ],
+  "canonical_counts": {
+    "assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "changes": {
+    "production_ui": 0,
+    "routes": 0,
+    "canonical_data": 0,
+    "public_machine_readable_data": 0,
+    "metadata_contract": 0,
+    "owner_approval_register": 0
+  },
+  "next_action": {
+    "decision": "explicit_owner_review_required",
+    "allowed_results": ["accepted", "rejected"],
+    "automatic_result_allowed": false,
+    "issue_close_allowed_before_acceptance": false
+  },
+  "boundaries": {
+    "automated_owner_approval": false,
+    "ui_completion_declared": false,
+    "later_phase_exists": false,
+    "exit_state": "AWAITING OWNER REVIEW"
+  }
+}
