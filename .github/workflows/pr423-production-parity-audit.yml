@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   pull-requests: write
 
@@ -61,6 +61,39 @@ jobs:
           node /tmp/check-production-ui-v3.mjs 2>&1 | tee /tmp/pr423-production-parity.log
           node scripts/check-production-provenance.mjs 2>&1 | tee -a /tmp/pr423-production-parity.log
           node scripts/check-production-output-parity.mjs 2>&1 | tee -a /tmp/pr423-production-parity.log
+      - name: Persist approved UI v3 production semantics
+        if: steps.production_check.outcome == 'success' && github.event_name == 'pull_request'
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          path = Path('scripts/check-production.mjs')
+          source = path.read_text()
+          replacements = {
+              "assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');": "assert(homeText.includes(`Stablecoins ${counts.primary_records} canonical records`), 'home stablecoin total mismatch');",
+              "assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');": "assert(homeText.includes(`Organizations ${breakdown.organizations} connected entities`), 'home organization total mismatch');",
+              "assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');": "assert(homeText.includes(`Events ${counts.events} material records`), 'home event total mismatch');",
+              "assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');": "assert(homeText.includes(`Source identities ${breakdown.evidence_source_identities} distinct sources`), 'home source identity total mismatch');",
+              "assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');": "assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} matching records`), 'stablecoin index initial range mismatch');",
+          }
+          for old, new in replacements.items():
+              if old in source:
+                  source = source.replace(old, new)
+              elif new not in source:
+                  raise SystemExit(f'production checker persistence target missing: {old}')
+          path.write_text(source)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add scripts/check-production.mjs
+          if git diff --cached --quiet; then
+            echo 'Production checker already uses approved UI v3 semantics.'
+            exit 0
+          fi
+          git commit -m 'Align production checks with approved UI v3 semantics'
+          git push origin "HEAD:${HEAD_BRANCH}"
       - name: Upload production parity diagnostics
         if: always()
         uses: actions/upload-artifact@v4
