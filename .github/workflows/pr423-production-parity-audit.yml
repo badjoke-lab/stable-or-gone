@@ -40,6 +40,7 @@ jobs:
               "assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');": "assert(homeText.includes(`Organizations ${breakdown.organizations} connected entities`), 'home organization total mismatch');",
               "assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');": "assert(homeText.includes(`Events ${counts.events} material records`), 'home event total mismatch');",
               "assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');": "assert(homeText.includes(`Source identities ${breakdown.evidence_source_identities} distinct sources`), 'home source identity total mismatch');",
+              "assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');": "assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} matching records`), 'stablecoin index initial range mismatch');",
           }
           for old, new in replacements.items():
               if old not in source:
