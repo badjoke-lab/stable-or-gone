@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_ui_v3_data_growth_reset_pr426_2026_07_18",
+  "status": "reviewed_decision",
+  "reviewed_at": "2026-07-18",
+  "source_merge_commit": "1f03af5fa540c7d0179fb5354b0cd9cd77b59fd7",
+  "reviewed_state": {
+    "ui_v3_complete": true,
+    "issue_281_state": "closed_completed",
+    "canonical_assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129
+  },
+  "lane_review": {
+    "dossier_lane": {
+      "latest_history_aware_candidate_count": 0,
+      "decision": "do_not_repeat_without_reactivation_signal"
+    },
+    "archive_lane": {
+      "latest_batch": 8,
+      "selected": 10,
+      "safe_canonical_changes": 0,
+      "decision": "do_not_repeat_immediately"
+    },
+    "growth_lane": {
+      "latest_growth_batch": 1,
+      "canonical_assets_added": 2,
+      "current_candidate_audit_required": true
+    }
+  },
+  "decision": {
+    "resume_post_351_default_mode": true,
+    "next_pr": 427,
+    "next_work_item": "Record Growth Candidate Audit v2",
+    "candidate_limit": 12,
+    "canonical_changes_allowed": false,
+    "public_changes_allowed": false,
+    "review_gate_after_next_pr": true,
+    "future_growth_limit": 2
+  },
+  "preserved_boundaries": {
+    "canonical_data": true,
+    "public_routes": true,
+    "public_machine_readable_semantics": true,
+    "ui_v3_owner_approval": true,
+    "issue_281_closure": true,
+    "candidate_private_boundary": true,
+    "automatic_promotion": false
+  }
+}
