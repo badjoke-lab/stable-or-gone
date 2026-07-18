@@ -52,7 +52,9 @@ jobs:
           npm run check
           npm run build
       - name: Commit generated authority files
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        env:
+          TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.head_ref || 'pr426-data-growth-reset' }}
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -61,7 +63,7 @@ jobs:
             echo 'Authority files already committed.'
           else
             git commit -m 'Apply PR 426 post-UI v3 authority state'
-            git push origin HEAD:pr426-data-growth-reset
+            git push origin "HEAD:${TARGET_BRANCH}"
           fi
       - name: Publish PR 426 status
         if: always() && github.event_name == 'pull_request'
