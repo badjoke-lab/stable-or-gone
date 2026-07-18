@@ -43,9 +43,10 @@ jobs:
               "assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');": "assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} matching records`), 'stablecoin index initial range mismatch');",
           }
           for old, new in replacements.items():
-              if old not in source:
+              if old in source:
+                  source = source.replace(old, new)
+              elif new not in source:
                   raise SystemExit(f'production checker compatibility target missing: {old}')
-              source = source.replace(old, new)
           Path('/tmp/check-production-ui-v3.mjs').write_text(source)
           PY
       - name: Check deployed production against latest approved main
