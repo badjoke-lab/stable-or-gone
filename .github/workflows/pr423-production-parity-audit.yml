@@ -40,17 +40,16 @@ jobs:
         run: |
           set -o pipefail
           npm run check:production 2>&1 | tee /tmp/pr423-production-parity.log
-      - name: Prepare clean authority closure branch
+      - name: Prepare clean authority-only branch
         if: steps.production_check.outcome == 'success' && github.event_name == 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
-          cp docs/migration/ui-v3-issue-281-closure-pr423.md /tmp/ui-v3-closure.md
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git fetch origin main
           git switch --detach origin/main
-          git switch -C pr425-align-ui-v3-authority
+          git switch -C pr426-align-ui-v3-authority
           python3 <<'PY'
           from pathlib import Path
 
@@ -72,7 +71,10 @@ jobs:
           marker = 'PR #421 is the final non-production visual-closure phase.'
           if marker not in text:
               raise SystemExit('AGENTS stale closure paragraph missing')
-          text = text[:text.index(marker)] + '''The owner explicitly approved all six required desktop and mobile UI v3 template families on 2026-07-18. PR #422 records the decision and the fourteen-state PR #421 visual evidence. Automated capture did not constitute approval.\n\nUI v3 has no active implementation workstream. Future material UI changes require a new independently authorized workstream. Production UI, routes, canonical data, public machine-readable outputs, and metadata contracts were unchanged by the approval closure.\n'''
+          text = text[:text.index(marker)] + '''The owner explicitly approved all six required desktop and mobile UI v3 template families on 2026-07-18. PR #422 records the decision and the fourteen-state PR #421 visual evidence. Automated capture did not constitute approval.
+
+UI v3 has no active implementation workstream. Future material UI changes require a new independently authorized workstream. Production UI, routes, canonical data, public machine-readable outputs, and metadata contracts were unchanged by the approval closure.
+'''
           agents.write_text(text)
 
           roadmap = Path('docs/roadmap.md')
@@ -82,10 +84,9 @@ jobs:
               raise SystemExit('roadmap PR #422 completion target missing')
           roadmap.write_text(text.replace(old, 'PR #422 owner approval record: complete'))
           PY
-          cp /tmp/ui-v3-closure.md docs/migration/ui-v3-issue-281-closure-pr425.md
-          git add AGENTS.md docs/roadmap.md docs/migration/ui-v3-issue-281-closure-pr425.md
+          git add AGENTS.md docs/roadmap.md
           git commit -m 'Align active authority with completed UI v3 approval'
-          git push --force-with-lease origin pr425-align-ui-v3-authority
+          git push --force-with-lease origin pr426-align-ui-v3-authority
       - name: Upload production parity diagnostics
         if: always()
         uses: actions/upload-artifact@v4
