@@ -88,6 +88,7 @@ jobs:
             const marker='<!-- pr423-production-parity-status -->';
             let log='No production log was produced.';
             try { log=fs.readFileSync('/tmp/pr423-production-parity.log','utf8').slice(-12000); } catch {}
+            const diagnostic=log.split('\n').filter((line)=>/failed:|Error:|does not match|mismatch|missing|expected/i.test(line)).slice(-12).join('\n') || 'No error line was emitted.';
             const body=`${marker}
             ## Production parity audit
 
@@ -110,6 +111,7 @@ jobs:
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
             else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
+            await github.rest.pulls.update({owner:context.repo.owner,repo:context.repo.repo,pull_number:context.issue.number,body:`## UI v3 completion record\n\nThe final visual package is owner-approved and UI v3 is complete.\n\n## Production parity\n\n- Result: **${process.env.CHECK_OUTCOME}**\n- Expected approved main: \`8ee43d6cf2f46d76afe5270eaf4a512ede4f7204\`\n- Audit run: \`${context.runId}\`\n\n\`\`\`text\n${diagnostic}\n\`\`\`\n\nThis PR changes documentation and production-audit tooling only.`});
       - name: Enforce production parity result
         if: steps.production_check.outcome != 'success'
         run: exit 1
