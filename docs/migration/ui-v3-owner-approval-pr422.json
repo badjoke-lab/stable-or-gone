@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "sog_ui_v3_owner_approval_pr422_2026_07_18",
+  "status": "accepted_complete",
+  "issue": 281,
+  "pull_request": 422,
+  "source_closure_pr": 421,
+  "source_merge_commit": "c7cbd9e7dd21fe899d1d2315b83adcaa7966793c",
+  "reviewed_by": "badjoke-lab",
+  "reviewed_at": "2026-07-18",
+  "decision_source": "Explicit owner instruction: 承認",
+  "templates": {
+    "home": {"desktop": "accepted", "mobile": "accepted"},
+    "stablecoin_register": {"desktop": "accepted", "mobile": "accepted"},
+    "stablecoin_dossier": {"desktop": "accepted", "mobile": "accepted"},
+    "events": {"desktop": "accepted", "mobile": "accepted"},
+    "organizations": {"desktop": "accepted", "mobile": "accepted"},
+    "guides": {"desktop": "accepted", "mobile": "accepted"}
+  },
+  "counts": {
+    "templates": 6,
+    "accepted_desktop": 6,
+    "accepted_mobile": 6,
+    "pending_desktop": 0,
+    "pending_mobile": 0,
+    "rejected_desktop": 0,
+    "rejected_mobile": 0
+  },
+  "visual_evidence": {
+    "workflow_run": 29600987197,
+    "artifact_id": 8415028658,
+    "artifact_digest": "sha256:992d419ddbb9d4cce397de27ac358cdc1d12bca1574117f71109fad820ebb8d9",
+    "required_captures": 14,
+    "completed_captures": 14,
+    "visual_failures": 0,
+    "horizontal_overflow_failures": 0,
+    "automated_capture_is_owner_approval": false
+  },
+  "completion": {
+    "ui_v3_complete": true,
+    "issue_close_authorized": true,
+    "production_ui_change": false,
+    "route_change": false,
+    "canonical_change": false,
+    "public_machine_readable_change": false
+  }
+}

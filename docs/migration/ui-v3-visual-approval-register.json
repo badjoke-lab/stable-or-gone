@@ -1,70 +1,81 @@
 {
   "schema_version": "1.0",
   "register_id": "sog_ui_v3_visual_approval_register_v1",
-  "status": "pending_implementation_and_review",
+  "status": "accepted_complete",
   "public_output": false,
   "issue": 281,
   "design_contract": "config/ui-v3-rebuild-design-contract-pr409.json",
+  "review_source": {
+    "pull_request": 421,
+    "merge_commit": "c7cbd9e7dd21fe899d1d2315b83adcaa7966793c",
+    "workflow_run": 29600987197,
+    "artifact_id": 8415028658,
+    "artifact_digest": "sha256:992d419ddbb9d4cce397de27ac358cdc1d12bca1574117f71109fad820ebb8d9",
+    "required_capture_count": 14,
+    "completed_capture_count": 14,
+    "visual_failures": 0,
+    "horizontal_overflow_failures": 0
+  },
   "required_templates": [
     {
       "template": "home",
-      "desktop_status": "pending",
-      "mobile_status": "pending",
-      "desktop_artifact": null,
-      "mobile_artifact": null,
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "notes": null
+      "desktop_status": "accepted",
+      "mobile_status": "accepted",
+      "desktop_artifact": "PR #421 artifact 8415028658 / home-desktop.png",
+      "mobile_artifact": "PR #421 artifact 8415028658 / home-mobile.png",
+      "reviewed_by": "badjoke-lab",
+      "reviewed_at": "2026-07-18",
+      "notes": "Accepted after direct review of the final desktop and mobile captures. Hierarchy, search, registry state, exploration paths, updates, unresolved questions, and footer remain readable and coherent."
     },
     {
       "template": "stablecoin_register",
-      "desktop_status": "pending",
-      "mobile_status": "pending",
-      "desktop_artifact": null,
-      "mobile_artifact": null,
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "notes": null
+      "desktop_status": "accepted",
+      "mobile_status": "accepted",
+      "desktop_artifact": "PR #421 artifact 8415028658 / register-desktop-default.png; register-desktop-filtered.png; register-empty.png",
+      "mobile_artifact": "PR #421 artifact 8415028658 / register-mobile-filtered.png",
+      "reviewed_by": "badjoke-lab",
+      "reviewed_at": "2026-07-18",
+      "notes": "Accepted after direct review of default, filtered, empty, and mobile filtered states. The mobile register is intentionally long because filter groups and full-field cards remain visible, but controls, selected state, results, and clear actions are usable and no blocking overflow was found."
     },
     {
       "template": "stablecoin_dossier",
-      "desktop_status": "pending",
-      "mobile_status": "pending",
-      "desktop_artifact": null,
-      "mobile_artifact": null,
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "notes": null
+      "desktop_status": "accepted",
+      "mobile_status": "accepted",
+      "desktop_artifact": "PR #421 artifact 8415028658 / dossier-desktop.png",
+      "mobile_artifact": "PR #421 artifact 8415028658 / dossier-mobile.png",
+      "reviewed_by": "badjoke-lab",
+      "reviewed_at": "2026-07-18",
+      "notes": "Accepted after direct review of the USDC representative dossier. Current state, redemption, backing, organizations, lifecycle history, unknowns, evidence, and technical context remain distinct and readable."
     },
     {
       "template": "events",
-      "desktop_status": "pending",
-      "mobile_status": "pending",
-      "desktop_artifact": null,
-      "mobile_artifact": null,
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "notes": null
+      "desktop_status": "accepted",
+      "mobile_status": "accepted",
+      "desktop_artifact": "PR #421 artifact 8415028658 / events-desktop.png",
+      "mobile_artifact": "PR #421 artifact 8415028658 / events-mobile.png",
+      "reviewed_by": "badjoke-lab",
+      "reviewed_at": "2026-07-18",
+      "notes": "Accepted after direct review of the bounded event register. Search, filters, chronology, severity, subjects, evidence, cards, and pagination remain understandable on desktop and mobile."
     },
     {
       "template": "organizations",
-      "desktop_status": "pending",
-      "mobile_status": "pending",
-      "desktop_artifact": null,
-      "mobile_artifact": null,
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "notes": null
+      "desktop_status": "accepted",
+      "mobile_status": "accepted",
+      "desktop_artifact": "PR #421 artifact 8415028658 / organizations-desktop.png",
+      "mobile_artifact": "PR #421 artifact 8415028658 / organizations-mobile.png",
+      "reviewed_by": "badjoke-lab",
+      "reviewed_at": "2026-07-18",
+      "notes": "Accepted after direct review of the bounded organization register. Roles, jurisdictions, connected assets, relationship state, evidence, cards, and pagination remain legible and operational."
     },
     {
       "template": "guides",
-      "desktop_status": "pending",
-      "mobile_status": "pending",
-      "desktop_artifact": null,
-      "mobile_artifact": null,
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "notes": null
+      "desktop_status": "accepted",
+      "mobile_status": "accepted",
+      "desktop_artifact": "PR #421 artifact 8415028658 / guide-desktop.png",
+      "mobile_artifact": "PR #421 artifact 8415028658 / guide-mobile.png",
+      "reviewed_by": "badjoke-lab",
+      "reviewed_at": "2026-07-18",
+      "notes": "Accepted after direct review of the representative MiCA guide. Reading width, contents navigation, publication metadata, callouts, long-form sections, tables, sources, revisions, and correction paths remain coherent on desktop and mobile."
     }
   ],
   "completion_rule": {
@@ -79,11 +90,18 @@
   },
   "current_counts": {
     "templates": 6,
-    "accepted_desktop": 0,
-    "accepted_mobile": 0,
-    "pending_desktop": 6,
-    "pending_mobile": 6,
+    "accepted_desktop": 6,
+    "accepted_mobile": 6,
+    "pending_desktop": 0,
+    "pending_mobile": 0,
     "rejected_desktop": 0,
     "rejected_mobile": 0
+  },
+  "owner_decision": {
+    "decision": "accepted",
+    "decision_source": "explicit owner instruction after review of the PR #421 visual package",
+    "recorded_at": "2026-07-18",
+    "ui_completion": true,
+    "issue_close_authorized": true
   }
 }
