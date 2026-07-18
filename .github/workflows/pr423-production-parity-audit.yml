@@ -1,0 +1,58 @@
+name: PR 423 Production Parity Audit
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr423-production-parity-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  production-parity:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr423-align-ui-v3-authority'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Check deployed production against latest approved main
+        env:
+          SOG_EXPECTED_COMMIT: 8ee43d6cf2f46d76afe5270eaf4a512ede4f7204
+          SOG_SMOKE_ATTEMPTS: 5
+          SOG_SMOKE_DELAY_MS: 15000
+        run: npm run check:production
+      - name: Publish audit result
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr423-production-parity-status -->';
+            const body=`${marker}
+            ## Production parity audit
+
+            - Result: **${{ job.status }}**
+            - Expected approved main: **\`8ee43d6cf2f46d76afe5270eaf4a512ede4f7204\`**
+            - Canonical assets: **112**
+            - Organizations: **107**
+            - Events: **187**
+            - Evidence: **559**
+            - Base URL: **https://sog.badjoke-lab.com**
+            - Head: \`${context.sha}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
