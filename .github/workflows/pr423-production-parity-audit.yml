@@ -40,6 +40,14 @@ jobs:
         run: |
           set -o pipefail
           npm run check:production 2>&1 | tee /tmp/pr423-production-parity.log
+      - name: Upload production parity diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr423-production-parity-${{ github.run_id }}
+          path: /tmp/pr423-production-parity.log
+          if-no-files-found: error
+          retention-days: 30
       - name: Publish audit result
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
