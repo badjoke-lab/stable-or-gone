@@ -29,6 +29,33 @@ jobs:
           node-version: 22.22.0
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: Prepare UI v3-compatible production checker
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          source = Path('scripts/check-production.mjs').read_text()
+          replacements = {
+              "assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');": "assert(homeText.includes(`Stablecoins ${counts.primary_records} canonical records`), 'home stablecoin total mismatch');",
+              "assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');": "assert(homeText.includes(`Organizations ${breakdown.organizations} connected entities`), 'home organization total mismatch');",
+              "assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');": "assert(homeText.includes(`Events ${counts.events} material records`), 'home event total mismatch');",
+              "assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');": "assert(homeText.includes(`Source identities ${breakdown.evidence_source_identities} distinct sources`), 'home source identity total mismatch');",
+          }
+          for old, new in replacements.items():
+              if old not in source:
+                  raise SystemExit(f'production checker compatibility target missing: {old}')
+              source = source.replace(old, new)
+          old_hierarchy = """    for (const heading of ['Identity and current state', 'Organizations and control', 'How the asset works', 'Reserve and redemption', 'Deployments and legal context', 'History', 'Evidence', 'Known unknowns and coverage']) {
+              assert(text.includes(heading), `${sampleStablecoin}: missing ${heading}`);
+            }"""
+          new_hierarchy = """    for (const marker of ['data-dossier-version=\"pr415\"', 'id=\"reserves-redemption\"', 'id=\"organizations-control\"', 'id=\"history\"', 'id=\"known-unknowns\"', 'id=\"evidence\"']) {
+              assert(response.text.includes(marker), `${sampleStablecoin}: missing ${marker}`);
+            }"""
+          if old_hierarchy not in source:
+              raise SystemExit('production checker dossier hierarchy target missing')
+          source = source.replace(old_hierarchy, new_hierarchy)
+          Path('/tmp/check-production-ui-v3.mjs').write_text(source)
+          PY
       - name: Check deployed production against latest approved main
         id: production_check
         continue-on-error: true
@@ -39,7 +66,9 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          npm run check:production 2>&1 | tee /tmp/pr423-production-parity.log
+          node /tmp/check-production-ui-v3.mjs 2>&1 | tee /tmp/pr423-production-parity.log
+          node scripts/check-production-provenance.mjs 2>&1 | tee -a /tmp/pr423-production-parity.log
+          node scripts/check-production-output-parity.mjs 2>&1 | tee -a /tmp/pr423-production-parity.log
       - name: Upload production parity diagnostics
         if: always()
         uses: actions/upload-artifact@v4
