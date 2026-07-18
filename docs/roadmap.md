@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-18  
-Status: UI v3 complete
+Status: UI v3 complete; reviewed data growth resumed
 
 ## Current position
 
@@ -17,14 +17,24 @@ Market Access Records: 8
 Archive recorded: 430
 Archive not recorded: 129
 Issue #281 UI v3 rebuild: complete
-PR #421 full visual closure: complete
-PR #422 owner approval record: complete
 Accepted desktop templates: 6
 Accepted mobile templates: 6
 Pending desktop templates: 0
 Pending mobile templates: 0
 UI completion: true
 ```
+
+## Active data-growth sequence
+
+```text
+PR #426 Post-UI v3 Data-Growth Reset: complete
+PR #427 Record Growth Candidate Audit v2: active
+REVIEW GATE after PR #427
+```
+
+PR #427 is an internal candidate audit over at most twelve stable-asset leads. It performs full duplicate, identity, lineage, and source-coverage review without changing canonical records or public output.
+
+A canonical Record Growth Batch 2 is not authorized yet. The review gate after PR #427 may authorize at most two complete records only when the audit shows that complete evidence-backed record families can be produced.
 
 ## Completed UI v3 sequence
 
@@ -43,6 +53,8 @@ PR #419 guides and secondary pages
 PR #420 review gate
 PR #421 full visual closure
 PR #422 owner approval and completion record
+PR #424 production checker aligned with UI v3
+PR #425 active authority aligned and Issue #281 closed
 ```
 
 ## Final visual result
@@ -59,20 +71,15 @@ Approved mobile states: 6
 
 The owner reviewed and accepted the final visual package on 2026-07-18. Approval covers home, stablecoin register, stablecoin dossier, events, organizations, and guides on desktop and mobile.
 
-Approval records:
-
-- `docs/migration/ui-v3-visual-approval-register.json`
-- `docs/migration/ui-v3-owner-approval-pr422.json`
-- `docs/quality/ui-v3-owner-approval-pr422.md`
-
 ## Preserved boundaries
 
 ```text
-Production UI changed by PR #422: 0
+Canonical data changed by PR #426: 0
+Public UI changed by PR #426: 0
 Routes changed: 0
-Canonical data changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
+Automatic candidate promotion: disabled
 ```
 
-Future material UI work requires a new authorized workstream.
+Future material UI work requires a new authorized workstream. PR #427 must stop at a review gate before any canonical growth.
