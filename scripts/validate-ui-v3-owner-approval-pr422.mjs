@@ -41,32 +41,44 @@ check(approval.completion?.ui_v3_complete === true && approval.completion?.issue
 check(approval.completion?.production_ui_change === false && approval.completion?.route_change === false && approval.completion?.canonical_change === false && approval.completion?.public_machine_readable_change === false, 'protected boundary changed');
 check(closure.status === 'awaiting_owner_review' && closure.required_capture_count === 14, 'source closure record changed');
 
-check(read('docs/roadmap.md').includes('Status: UI v3 complete'), 'roadmap is not marked complete');
-check(read('docs/roadmap.md').includes('Accepted desktop templates: 6'), 'roadmap desktop count missing');
-check(read('docs/roadmap.md').includes('Accepted mobile templates: 6'), 'roadmap mobile count missing');
-check(read('docs/roadmap.md').includes('UI completion: true'), 'roadmap completion missing');
+const agents = read('AGENTS.md');
+check(agents.includes('Current mandatory authority: completed UI v3 owner approval and closeout.'), 'AGENTS authority is not closed');
+check(agents.includes('PR #422 owner approval and completion record: complete'), 'AGENTS does not mark PR #422 complete');
+check(agents.includes('Owner-approved desktop templates: 6 / 6'), 'AGENTS desktop approval count missing');
+check(agents.includes('Owner-approved mobile templates: 6 / 6'), 'AGENTS mobile approval count missing');
+check(agents.includes('UI completion: true'), 'AGENTS completion missing');
+check(agents.includes('Active UI v3 implementation workstream: none'), 'AGENTS still exposes an active UI v3 workstream');
+check(!agents.includes('AWAITING OWNER REVIEW'), 'AGENTS still awaits owner review');
+
+const roadmap = read('docs/roadmap.md');
+check(roadmap.includes('Status: UI v3 complete'), 'roadmap is not marked complete');
+check(roadmap.includes('PR #422 owner approval record: complete'), 'roadmap does not mark PR #422 complete');
+check(roadmap.includes('Accepted desktop templates: 6'), 'roadmap desktop count missing');
+check(roadmap.includes('Accepted mobile templates: 6'), 'roadmap mobile count missing');
+check(roadmap.includes('UI completion: true'), 'roadmap completion missing');
+check(roadmap.includes('Active UI v3 implementation workstream: none'), 'roadmap still exposes an active UI v3 workstream');
 
 try {
   git('rev-parse', '--verify', 'origin/main');
-  check(git('diff', '--name-only', 'origin/main...HEAD', '--', 'src/', 'public/', 'data/', 'config/').trim() === '', 'PR #422 contains production, canonical, public, or config changes');
+  check(git('diff', '--name-only', 'origin/main...HEAD', '--', 'src/', 'public/', 'data/', 'config/').trim() === '', 'closeout contains production, canonical, public, or config changes');
   for (const file of [
     'config/site-architecture.mjs',
     'docs/migration/current-canonical-checkpoint.json',
     'docs/migration/current-stats-history-checkpoint.json',
-    'docs/migration/registry-release-integrity-baseline.json'
+    'docs/migration/registry-release-integrity-baseline.json',
+    'docs/migration/ui-v3-visual-approval-register.json'
   ]) check(git('hash-object', file) === git('rev-parse', `origin/main:${file}`), `${file}: protected content changed`);
 } catch (error) {
   failures.push(`protected-boundary validation failed: ${error.message}`);
 }
 
 if (failures.length) {
-  console.error(JSON.stringify({ ok: false, implementation_pr: 422, failures }, null, 2));
+  console.error(JSON.stringify({ ok: false, workstream: 'ui-v3-closeout', failures }, null, 2));
   process.exit(1);
 }
 
 console.log(JSON.stringify({
   ok: true,
-  implementation_pr: 422,
   status: 'accepted_complete',
   accepted_desktop: 6,
   accepted_mobile: 6,
@@ -74,6 +86,7 @@ console.log(JSON.stringify({
   pending_mobile: 0,
   ui_completion: true,
   issue_close_authorized: true,
+  active_ui_workstream: 'none',
   production_ui_changes: 0,
   canonical_changes: 0
 }, null, 2));
