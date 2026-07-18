@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_ui_v3_data_growth_reset_pr426",
+  "status": "approved_on_merge",
+  "recorded_at": "2026-07-18",
+  "source_state": {
+    "canonical_assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129,
+    "ui_v3_complete": true,
+    "issue_281_closed": true,
+    "active_ui_workstream": false
+  },
+  "review_findings": {
+    "history_aware_dossier_queue_candidates": 0,
+    "archive_batch_8_selected": 10,
+    "archive_batch_8_safe_canonical_changes": 0,
+    "decision": "fresh_candidate_audit_required_before_growth"
+  },
+  "approved_next_sequence": [
+    {
+      "pr": 427,
+      "work_item": "Record Growth Candidate Audit v2",
+      "canonical_changes_allowed": false,
+      "public_changes_allowed": false
+    }
+  ],
+  "review_gate_after_sequence": true,
+  "pr427_scope": {
+    "maximum_candidates": 12,
+    "allowed_dispositions": [
+      "ready_for_full_record_review",
+      "duplicate_existing",
+      "prelaunch_or_noncanonical",
+      "insufficient_evidence",
+      "out_of_scope",
+      "deferred"
+    ],
+    "required_duplicate_dimensions": [
+      "asset_id",
+      "slug",
+      "canonical_name",
+      "symbol",
+      "aliases",
+      "issuer_or_operator",
+      "official_domain",
+      "deployment_identity",
+      "predecessor_successor_lineage"
+    ],
+    "required_outputs": [
+      "reviewed_candidate_audit",
+      "duplicate_report",
+      "source_coverage_report",
+      "review_gate_handoff"
+    ],
+    "automatic_promotion": false,
+    "future_growth_limit": 2
+  },
+  "protected_boundaries": [
+    "canonical_data",
+    "public_candidate_output",
+    "public_routes",
+    "ui_v3",
+    "metadata_contracts",
+    "public_machine_readable_semantics",
+    "rankings",
+    "scores",
+    "recommendations"
+  ]
+}
