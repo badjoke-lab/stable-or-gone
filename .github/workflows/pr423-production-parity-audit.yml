@@ -45,15 +45,6 @@ jobs:
               if old not in source:
                   raise SystemExit(f'production checker compatibility target missing: {old}')
               source = source.replace(old, new)
-          old_hierarchy = """    for (const heading of ['Identity and current state', 'Organizations and control', 'How the asset works', 'Reserve and redemption', 'Deployments and legal context', 'History', 'Evidence', 'Known unknowns and coverage']) {
-              assert(text.includes(heading), `${sampleStablecoin}: missing ${heading}`);
-            }"""
-          new_hierarchy = """    for (const marker of ['data-dossier-version=\"pr415\"', 'id=\"reserves-redemption\"', 'id=\"organizations-control\"', 'id=\"history\"', 'id=\"known-unknowns\"', 'id=\"evidence\"']) {
-              assert(response.text.includes(marker), `${sampleStablecoin}: missing ${marker}`);
-            }"""
-          if old_hierarchy not in source:
-              raise SystemExit('production checker dossier hierarchy target missing')
-          source = source.replace(old_hierarchy, new_hierarchy)
           Path('/tmp/check-production-ui-v3.mjs').write_text(source)
           PY
       - name: Check deployed production against latest approved main
