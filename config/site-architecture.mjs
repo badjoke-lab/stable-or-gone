@@ -105,6 +105,16 @@ export const footerNavigationGroups = Object.freeze([
       Object.freeze({ label: 'Support', href: '/support/' }),
       Object.freeze({ label: 'GitHub Issues', href: 'https://github.com/badjoke-lab/stable-or-gone/issues' })
     ])
+  }),
+  Object.freeze({
+    id: 'discovery',
+    label: 'Browse & network',
+    items: Object.freeze([
+      Object.freeze({ label: 'Stablecoin record pages', href: '/stablecoins/page/2/' }),
+      Object.freeze({ label: 'Event record pages', href: '/events/page/2/' }),
+      Object.freeze({ label: 'Organization record pages', href: '/issuers/page/2/' }),
+      Object.freeze({ label: 'BadJoke-Lab project hub', href: 'https://badjoke-lab.com/' })
+    ])
   })
 ]);
 
@@ -125,6 +135,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/data/update-feed.json', source_file: 'src/pages/data/update-feed.json.ts', output_kind: 'json', group: 'data_access', role: 'registry_publication_feed', decision: 'add', navigation: 'data_manifest' }),
   Object.freeze({ pattern: '/event/{id}/', source_file: 'src/pages/event/[id].astro', output_kind: 'html', group: 'registry', role: 'event_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/events/', source_file: 'src/pages/events/index.astro', output_kind: 'html', group: 'registry', role: 'event_index', decision: 'keep', navigation: 'registry' }),
+  Object.freeze({ pattern: '/events/page/{page}/', source_file: 'src/pages/events/page/[page].astro', output_kind: 'html', group: 'discovery', role: 'event_index_pagination', decision: 'add', navigation: 'footer' }),
   Object.freeze({ pattern: '/glossary/', source_file: 'src/pages/glossary/index.astro', output_kind: 'html', group: 'learn', role: 'glossary', decision: 'keep', navigation: 'learn' }),
   Object.freeze({ pattern: '/guides/', source_file: 'src/pages/guides/index.astro', output_kind: 'html', group: 'learn', role: 'guide_index', decision: 'keep', navigation: 'learn' }),
   Object.freeze({ pattern: '/guides/japan-stablecoin-access-usdc-rlusd-jpysc/', source_file: 'src/pages/guides/japan-stablecoin-access-usdc-rlusd-jpysc/index.astro', output_kind: 'html', group: 'learn', role: 'guide_article', decision: 'add', navigation: 'contextual' }),
@@ -140,6 +151,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/guides/what-is-a-depeg/', source_file: 'src/pages/guides/what-is-a-depeg/index.astro', output_kind: 'html', group: 'learn', role: 'guide_article', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/issuer/{slug}/', source_file: 'src/pages/issuer/[slug].astro', output_kind: 'html', group: 'registry', role: 'organization_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/issuers/', source_file: 'src/pages/issuers/index.astro', output_kind: 'html', group: 'registry', role: 'organization_index', decision: 'keep', navigation: 'registry' }),
+  Object.freeze({ pattern: '/issuers/page/{page}/', source_file: 'src/pages/issuers/page/[page].astro', output_kind: 'html', group: 'discovery', role: 'organization_index_pagination', decision: 'add', navigation: 'footer' }),
   Object.freeze({ pattern: '/llms.txt', source_file: 'src/pages/llms.txt.ts', output_kind: 'text', group: 'data_access', role: 'llm_guide', decision: 'keep', navigation: 'footer_data' }),
   Object.freeze({ pattern: '/maintenance/', source_file: 'src/pages/maintenance/index.astro', output_kind: 'html', group: 'project', role: 'monthly_maintenance_log', decision: 'add', navigation: 'project' }),
   Object.freeze({ pattern: '/methodology/', source_file: 'src/pages/methodology/index.astro', output_kind: 'html', group: 'project', role: 'methodology', decision: 'keep', navigation: 'project' }),
@@ -147,6 +159,7 @@ export const siteArchitectureRoutes = Object.freeze([
   Object.freeze({ pattern: '/sitemap-index.xml', source_file: 'src/pages/sitemap-index.xml.ts', output_kind: 'xml', group: 'discovery', role: 'sitemap_index', decision: 'keep', navigation: 'none' }),
   Object.freeze({ pattern: '/stablecoin/{slug}/', source_file: 'src/pages/stablecoin/[slug].astro', output_kind: 'html', group: 'registry', role: 'stablecoin_record', decision: 'keep', navigation: 'contextual' }),
   Object.freeze({ pattern: '/stablecoins/', source_file: 'src/pages/stablecoins/index.astro', output_kind: 'html', group: 'registry', role: 'stablecoin_index', decision: 'keep', navigation: 'registry' }),
+  Object.freeze({ pattern: '/stablecoins/page/{page}/', source_file: 'src/pages/stablecoins/page/[page].astro', output_kind: 'html', group: 'discovery', role: 'stablecoin_index_pagination', decision: 'add', navigation: 'footer' }),
   Object.freeze({ pattern: '/stats/', source_file: 'src/pages/stats/index.astro', output_kind: 'html', group: 'registry', role: 'registry_statistics', decision: 'add', navigation: 'registry' }),
   Object.freeze({ pattern: '/support/', source_file: 'src/pages/support/index.astro', output_kind: 'html', group: 'project', role: 'project_support', decision: 'keep', navigation: 'utility' }),
   Object.freeze({ pattern: '/timeline/', source_file: 'src/pages/timeline/index.astro', output_kind: 'html', group: 'registry', role: 'change_timeline_ui', decision: 'add', navigation: 'registry' }),

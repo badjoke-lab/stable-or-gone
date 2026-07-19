@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Item {
+  title: string;
+  href: string;
+  meta?: string;
+  description?: string;
+}
+
+interface Props {
+  sectionLabel: string;
+  title: string;
+  description: string;
+  basePath: string;
+  page: number;
+  totalPages: number;
+  totalRecords: number;
+  items: Item[];
+}
+
+const {
+  sectionLabel,
+  title,
+  description,
+  basePath,
+  page,
+  totalPages,
+  totalRecords,
+  items
+} = Astro.props;
+
+const pageHref = (target: number) => target === 1 ? basePath : `${basePath}page/${target}/`;
+const canonicalPath = pageHref(page);
+const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+const rangeStart = (page - 1) * 20 + 1;
+const rangeEnd = Math.min(page * 20, totalRecords);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Stable or Gone',
+    url: 'https://sog.badjoke-lab.com/'
+  }
+};
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <article class="static-registry-page">
+    <header class="static-registry-header">
+      <p class="static-registry-eyebrow">{sectionLabel} · Static page {page} of {totalPages}</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <p class="static-registry-range">Showing records {rangeStart}–{rangeEnd} of {totalRecords}. These pages provide ordinary HTML links to every canonical record.</p>
+    </header>
+
+    <ol class="static-registry-list" start={rangeStart}>
+      {items.map((item) => (
+        <li>
+          <a href={item.href}>{item.title}</a>
+          {item.meta && <p class="static-registry-meta">{item.meta}</p>}
+          {item.description && <p>{item.description}</p>}
+        </li>
+      ))}
+    </ol>
+
+    <nav class="static-registry-pagination" aria-label={`${sectionLabel} pages`}>
+      {page > 1 && <a rel="prev" href={pageHref(page - 1)}>Previous</a>}
+      {pageNumbers.map((number) => (
+        <a href={pageHref(number)} aria-current={number === page ? 'page' : undefined}>{number}</a>
+      ))}
+      {page < totalPages && <a rel="next" href={pageHref(page + 1)}>Next</a>}
+    </nav>
+
+    <p class="static-registry-return"><a href={basePath}>Return to the interactive {sectionLabel.toLocaleLowerCase()}</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .static-registry-page{width:min(calc(100% - 40px),1040px);margin:0 auto;padding:48px 0 72px}
+  .static-registry-header{max-width:760px;margin-bottom:32px}
+  .static-registry-eyebrow{margin:0 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+  .static-registry-header h1{margin:0 0 16px;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1;letter-spacing:-.035em}
+  .static-registry-header>p{max-width:720px;color:#4f5b66;line-height:1.65}
+  .static-registry-range{font-size:.92rem}
+  .static-registry-list{display:grid;gap:0;margin:0;padding:0;list-style-position:inside;border-top:1px solid #d8dee6}
+  .static-registry-list li{padding:18px 0;border-bottom:1px solid #d8dee6}
+  .static-registry-list a{font-weight:750;text-decoration-thickness:1px;text-underline-offset:3px}
+  .static-registry-list p{margin:6px 0 0;color:#4f5b66;line-height:1.55}
+  .static-registry-meta{font-size:.86rem;font-weight:650}
+  .static-registry-pagination{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:32px 0 0}
+  .static-registry-pagination a{display:inline-flex;min-width:40px;min-height:40px;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #9ca7b1;text-decoration:none;font-weight:700}
+  .static-registry-pagination a[aria-current="page"]{background:#111827;color:#fff;border-color:#111827}
+  .static-registry-return{margin-top:24px}
+</style>

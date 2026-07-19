@@ -1,0 +1,37 @@
+---
+import StaticRegistryPagination from '../../../components/StaticRegistryPagination.astro';
+import { buildOrganizationIndexView } from '../../../lib/views/organizationIndexView';
+
+const PAGE_SIZE = 20;
+
+export function getStaticPaths() {
+  const { records } = buildOrganizationIndexView();
+  const totalPages = Math.ceil(records.length / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => index + 2).map((page) => ({
+    params: { page: String(page) },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props as { page: number };
+const { records } = buildOrganizationIndexView();
+const totalPages = Math.ceil(records.length / PAGE_SIZE);
+const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
+  title: record.name,
+  href: `/issuer/${record.slug}/`,
+  meta: `${record.categoryLabel} · ${record.regulatoryLabel} · ${record.jurisdictionLabel}`,
+  description: `${record.assetCount} connected asset${record.assetCount === 1 ? '' : 's'}, ${record.relationshipCount} relationship${record.relationshipCount === 1 ? '' : 's'}, and ${record.sourceIdentityCount} source${record.sourceIdentityCount === 1 ? '' : 's'}.`
+}));
+const title = `Stablecoin Organizations — Page ${page}`;
+const description = `Browse reviewed Stable or Gone organization records, page ${page} of ${totalPages}, with ordinary HTML links to each organization.`;
+---
+<StaticRegistryPagination
+  sectionLabel="Organization register"
+  title={title}
+  description={description}
+  basePath="/issuers/"
+  page={page}
+  totalPages={totalPages}
+  totalRecords={records.length}
+  items={items}
+/>
