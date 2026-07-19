@@ -168,9 +168,20 @@ jobs:
             const marker='<!-- pr429-generated-output-repair-status -->';
             let diagnostic='';
             try {
-              const lines=fs.readFileSync('artifacts/astro-check.log','utf8').trim().split('\n');
-              const tail=lines.slice(-60).join('\n').slice(-6000);
-              if(tail) diagnostic='\n\n### Astro check tail\n\n    '+tail.replace(/\n/g,'\n    ');
+              const lines=fs.readFileSync('artifacts/astro-check.log','utf8').split('\n');
+              const blocks=[];
+              const seen=new Set();
+              for(let i=0;i<lines.length;i++) {
+                if(!/\berror\b/i.test(lines[i]) || /0 errors/i.test(lines[i])) continue;
+                const start=Math.max(0,i-10);
+                const end=Math.min(lines.length,i+16);
+                const key=`${start}:${end}`;
+                if(seen.has(key)) continue;
+                seen.add(key);
+                blocks.push(lines.slice(start,end).join('\n'));
+              }
+              const details=blocks.join('\n\n---\n\n').slice(-9000);
+              if(details) diagnostic='\n\n### Astro error context\n\n    '+details.replace(/\n/g,'\n    ');
             } catch {}
             const body=`${marker}
             ## Generated-output repair
