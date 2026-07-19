@@ -1,0 +1,114 @@
+name: PR 429 Generated Output Repair
+run-name: PR 429 generated outputs · ${{ github.event_name }} · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - agent/pr429-generated-output-repair
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pr429-generated-output-repair
+  cancel-in-progress: true
+
+jobs:
+  generate-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Apply PR 429 loader and manifest wiring
+        run: node scripts/apply-record-growth-batch-2-pr429.mjs
+
+      - name: Generate PR 429 checkpoints and statistics history
+        run: node scripts/build-record-growth-batch-2-pr429.mjs
+
+      - name: Validate PR 429 complete records
+        run: node scripts/validate-record-growth-batch-2-pr429.mjs
+
+      - name: Validate canonical and Registry v3 contracts
+        run: |
+          npm run validate:active-workstream
+          npm run validate:data
+          npm run validate:classification
+          npm run validate:profiles
+          npm run validate:events-v2
+          npm run validate:evidence-relations-v2
+          npm run validate:v3
+          npm run validate:deployments-v3
+          npm run validate:income-v3
+          npm run validate:parity
+          npm run validate:release-integrity
+          npm run validate:final
+
+      - name: Validate statistics and public build
+        env:
+          SOG_STATS_HISTORY_BASE_REF: origin/main
+        run: |
+          npm run generate:deployment-taxonomy
+          npm run generate:provenance
+          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+          node scripts/validate-stats-history.mjs
+          npm run check
+          npm run build
+          npm run verify:public
+
+      - name: Verify exact 114-asset output
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          if (manifest.record_counts?.primary_records !== 114) throw new Error('public primary record count is not 114');
+          if (manifest.record_count_breakdown?.stablecoins !== 114) throw new Error('public stablecoin count is not 114');
+          if (manifest.record_count_breakdown?.events !== 189) throw new Error('public event count is not 189');
+          if (manifest.record_count_breakdown?.evidence !== 565) throw new Error('public evidence count is not 565');
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('unreviewed candidate boundary changed');
+          NODE
+          grep -q "stablecoinsBatchAAData" src/lib/data/registry.ts
+          grep -q "profileBatchAAData" src/lib/data/currentProfiles.ts
+          grep -q "legalProfilesGrowthAA" src/lib/data/registryV3.ts
+          grep -q "batchAA" src/lib/data/incomeProfilesV3.ts
+
+      - name: Commit generated outputs
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            src/lib/data/registry.ts \
+            src/lib/data/currentProfiles.ts \
+            src/lib/data/registryV3.ts \
+            src/lib/data/incomeProfilesV3.ts \
+            docs/migration/registry-v3-foundation.json \
+            docs/migration/registry-v3-income-profiles.json \
+            docs/migration/registry-v3-view-67.json \
+            docs/migration/registry-v3-migration-audit.json \
+            docs/migration/current-canonical-checkpoint.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            docs/migration/registry-v3-parity-baseline.json \
+            docs/migration/registry-release-integrity-baseline.json \
+            docs/migration/record-growth-batch-2-pr429-handoff.json \
+            data/generated/build-provenance.json \
+            data/stats-history.json
+          if git diff --cached --quiet; then
+            echo 'Generated PR 429 outputs already current.'
+          else
+            git commit -m 'Generate PR 429 loaders and canonical checkpoints'
+            git push origin HEAD:agent/pr429-generated-output-repair
+          fi
