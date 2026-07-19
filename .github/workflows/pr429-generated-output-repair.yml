@@ -49,32 +49,64 @@ jobs:
       - name: Validate PR 429 complete records
         run: node scripts/validate-record-growth-batch-2-pr429.mjs
 
-      - name: Validate canonical and Registry v3 contracts
-        run: |
-          npm run validate:active-workstream
-          npm run validate:data
-          npm run validate:classification
-          npm run validate:profiles
-          npm run validate:events-v2
-          npm run validate:evidence-relations-v2
-          npm run validate:v3
-          npm run validate:deployments-v3
-          npm run validate:income-v3
-          npm run validate:parity
-          npm run validate:release-integrity
-          npm run validate:final
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
 
-      - name: Validate statistics and public build
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate classifications
+        run: npm run validate:classification
+
+      - name: Validate profiles
+        run: npm run validate:profiles
+
+      - name: Validate event details
+        run: npm run validate:events-v2
+
+      - name: Validate Evidence relations
+        run: npm run validate:evidence-relations-v2
+
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+
+      - name: Validate Registry v3 deployments
+        run: npm run validate:deployments-v3
+
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+
+      - name: Validate final Registry v2 contracts
+        run: npm run validate:final
+
+      - name: Generate deployment taxonomy
+        run: npm run generate:deployment-taxonomy
+
+      - name: Generate provenance
+        run: npm run generate:provenance
+
+      - name: Validate current statistics
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+
+      - name: Validate statistics history
         env:
           SOG_STATS_HISTORY_BASE_REF: origin/main
-        run: |
-          npm run generate:deployment-taxonomy
-          npm run generate:provenance
-          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
-          node scripts/validate-stats-history.mjs
-          npm run check
-          npm run build
-          npm run verify:public
+        run: node scripts/validate-stats-history.mjs
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify public layer
+        run: npm run verify:public
 
       - name: Verify exact 114-asset output
         run: |
