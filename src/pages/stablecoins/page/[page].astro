@@ -1,0 +1,37 @@
+---
+import StaticRegistryPagination from '../../../components/StaticRegistryPagination.astro';
+import { getStablecoins } from '../../../lib/data/registry';
+
+const PAGE_SIZE = 20;
+
+export function getStaticPaths() {
+  const records = getStablecoins().sort((left, right) => left.name.localeCompare(right.name));
+  const totalPages = Math.ceil(records.length / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => index + 2).map((page) => ({
+    params: { page: String(page) },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props as { page: number };
+const records = getStablecoins().sort((left, right) => left.name.localeCompare(right.name));
+const totalPages = Math.ceil(records.length / PAGE_SIZE);
+const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
+  title: `${record.name}${record.symbol ? ` (${record.symbol})` : ''}`,
+  href: `/stablecoin/${record.slug}/`,
+  meta: `Lifecycle: ${record.lifecycle_status ?? 'not recorded'} · Issuance: ${record.issuance_status ?? 'not recorded'}`,
+  description: record.description ?? record.summary ?? undefined
+}));
+const title = `Stablecoin Register — Page ${page}`;
+const description = `Browse canonical Stable or Gone stablecoin records, page ${page} of ${totalPages}, with ordinary HTML links to each record.`;
+---
+<StaticRegistryPagination
+  sectionLabel="Stablecoin register"
+  title={title}
+  description={description}
+  basePath="/stablecoins/"
+  page={page}
+  totalPages={totalPages}
+  totalRecords={records.length}
+  items={items}
+/>
