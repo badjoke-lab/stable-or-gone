@@ -151,6 +151,29 @@ write('docs/migration/current-stats-history-checkpoint.json', {
   });
 }
 
+{
+  const deploymentView = read('docs/migration/registry-v3-view-67.json');
+  deploymentView.minimum_count = expectedV3.deployment_view;
+  write('docs/migration/registry-v3-view-67.json', deploymentView);
+}
+
+{
+  const migrationAudit = read('docs/migration/registry-v3-migration-audit.json');
+  migrationAudit.minimum_counts = {
+    ...migrationAudit.minimum_counts,
+    legal_profiles: expectedV3.legal_profiles,
+    stable_asset_relationships: expectedV3.stable_asset_relationships,
+    reserve_components: expectedV3.reserve_components,
+    deployments: expectedV3.deployment_view,
+    income_profiles: expectedV3.income_profiles
+  };
+  migrationAudit.coverage = {
+    ...migrationAudit.coverage,
+    protected_stablecoins: expectedV2.stablecoins
+  };
+  write('docs/migration/registry-v3-migration-audit.json', migrationAudit);
+}
+
 write('docs/migration/record-growth-batch-2-pr429-handoff.json', {
   schema_version: '1.0',
   handoff_id: 'sog_record_growth_batch_2_pr429_handoff_2026_07_18',
