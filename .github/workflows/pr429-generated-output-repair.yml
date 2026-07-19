@@ -108,11 +108,17 @@ jobs:
           set -o pipefail
           NO_COLOR=1 npm run check 2>&1 | tee artifacts/astro-check.log
 
-      - name: Build site
+      - name: Validate guides
         run: |
           mkdir -p artifacts
           set -o pipefail
-          NO_COLOR=1 npm run build 2>&1 | tee artifacts/build.log
+          NO_COLOR=1 npm run validate:guides 2>&1 | tee artifacts/guides.log
+
+      - name: Build Astro site
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          NO_COLOR=1 npm run build:site 2>&1 | tee artifacts/build.log
 
       - name: Verify public layer
         run: npm run verify:public
@@ -194,9 +200,11 @@ jobs:
               return blocks.join('\n\n---\n\n').slice(0,10000);
             };
             const astro=extract(cleanLog('artifacts/astro-check.log'));
+            const guides=extract(cleanLog('artifacts/guides.log'));
             const build=extract(cleanLog('artifacts/build.log'));
             let diagnostic='';
             if(astro && /\berror\b/i.test(astro)) diagnostic+='\n\n### Astro context\n\n    '+astro.replace(/\n/g,'\n    ');
+            if(guides) diagnostic+='\n\n### Guide validation context\n\n    '+guides.replace(/\n/g,'\n    ');
             if(build) diagnostic+='\n\n### Build context\n\n    '+build.replace(/\n/g,'\n    ');
             const body=`${marker}
             ## Generated-output repair
