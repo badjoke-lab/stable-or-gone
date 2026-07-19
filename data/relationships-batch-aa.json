@@ -1,0 +1,24 @@
+[
+  {
+    "id": "sog_rel_chfau_allunity_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "organization_id": "sog_issuer_allunity",
+    "role": "legal_issuer",
+    "start_date": "2026-02-26",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_chfau_launch_pr429", "sog_src_chfau_product_pr429", "sog_src_allunity_legal_pr429"],
+    "notes": "AllUnity GmbH is recorded as the issuer and statutory redemption counterparty for CHFAU."
+  },
+  {
+    "id": "sog_rel_sekau_allunity_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "organization_id": "sog_issuer_allunity",
+    "role": "legal_issuer",
+    "start_date": "2026-06-19",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_sekau_launch_pr429", "sog_src_sekau_product_pr429", "sog_src_allunity_legal_pr429"],
+    "notes": "AllUnity GmbH is recorded as the issuer and statutory redemption counterparty for SEKAU."
+  }
+]

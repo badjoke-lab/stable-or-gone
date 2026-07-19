@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sog_st_chfau",
+    "reserve_profile": {
+      "backing_types": ["cash", "bank_deposits"],
+      "summary": "AllUnity states that CHFAU is fully backed 1:1 by Swiss-franc reserves held at EU CRR credit institutions and segregated from operational funds.",
+      "disclosure_status": "official_reserve_page_and_regulatory_reporting",
+      "as_of_date": "2026-07-18",
+      "latest_report_id": "sog_rr_chfau_reserve_context_pr429",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_chfau_product_pr429", "sog_src_chfau_launch_pr429", "sog_src_allunity_legal_pr429"]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "CHF",
+      "eligible_parties": "Holders have a statutory par-redemption right against AllUnity; direct mint-platform access is limited to onboarded institutional and professional clients.",
+      "retail_access": "statutory_holder_right_operational_channel_subject_to_terms",
+      "institutional_access": "available_subject_to_allunity_onboarding",
+      "minimum_amount_text": "Not established in the reviewed public source set.",
+      "fee_text": "Current operational fees are not established in the reviewed public source set.",
+      "settlement_time_text": "The product page describes straight-through conversion in under five minutes, but no universal settlement guarantee is inferred.",
+      "jurisdiction_restrictions": ["AllUnity directs the service to legal entities and business customers.", "Onboarding, compliance, and current product terms apply."],
+      "redemption_url": "https://allunity.com/chfau",
+      "as_of_date": "2026-07-18",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_chfau_product_pr429", "sog_src_allunity_legal_pr429"]
+    }
+  },
+  {
+    "id": "sog_st_sekau",
+    "reserve_profile": {
+      "backing_types": ["cash", "bank_deposits"],
+      "summary": "AllUnity states that SEKAU is fully backed 1:1 by Swedish-krona reserves held at regulated European banking partners and segregated from operational funds.",
+      "disclosure_status": "official_reserve_page_and_regulatory_reporting",
+      "as_of_date": "2026-07-18",
+      "latest_report_id": "sog_rr_sekau_reserve_context_pr429",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_sekau_product_pr429", "sog_src_sekau_launch_pr429", "sog_src_allunity_legal_pr429"]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "SEK",
+      "eligible_parties": "Holders have a statutory par-redemption right against AllUnity; businesses may access direct mint and redemption through the Business Mint Account subject to onboarding.",
+      "retail_access": "statutory_holder_right_operational_channel_subject_to_terms",
+      "institutional_access": "available_subject_to_allunity_onboarding",
+      "minimum_amount_text": "Not established in the reviewed public source set.",
+      "fee_text": "Current operational fees are not established in the reviewed public source set.",
+      "settlement_time_text": "The product page describes conversion in minutes, but no universal settlement guarantee is inferred.",
+      "jurisdiction_restrictions": ["AllUnity directs the service to legal entities and business customers.", "Onboarding, compliance, and current product terms apply."],
+      "redemption_url": "https://allunity.com/sekau",
+      "as_of_date": "2026-07-18",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_sekau_product_pr429", "sog_src_allunity_legal_pr429"]
+    }
+  }
+]

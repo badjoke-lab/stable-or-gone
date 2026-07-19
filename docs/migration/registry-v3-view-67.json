@@ -1,3 +1,11 @@
 {
-  "schema_version":"3.0-deployment-view","status":"additive","source_manifest":"docs/migration/registry-v2-baseline.json","source_group":"deployments","canonicality_default":"unknown","minimum_count":174,"loader":"src/lib/data/registryV3.ts","loader_export":"getDeploymentsV3","validator":"scripts/validate-registry-v3-deployments.mjs"
+  "schema_version": "3.0-deployment-view",
+  "status": "additive",
+  "source_manifest": "docs/migration/registry-v2-baseline.json",
+  "source_group": "deployments",
+  "canonicality_default": "unknown",
+  "minimum_count": 180,
+  "loader": "src/lib/data/registryV3.ts",
+  "loader_export": "getDeploymentsV3",
+  "validator": "scripts/validate-registry-v3-deployments.mjs"
 }

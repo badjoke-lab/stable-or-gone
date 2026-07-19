@@ -1,9 +1,35 @@
 {
-  "schema_version":"3.0-migration-audit","status":"protected_baseline","base_registry":"docs/migration/registry-v2-baseline.json",
-  "manifests":{"foundation":"docs/migration/registry-v3-foundation.json","deployments":"docs/migration/registry-v3-view-67.json","income_profiles":"docs/migration/registry-v3-income-profiles.json"},
-  "minimum_counts":{"legal_profiles":112,"stable_asset_relationships":5,"reserve_components":145,"deployments":174,"income_profiles":112},
-  "coverage":{"protected_stablecoins":112,"legal_profiles_required_for_each":true,"reserve_components_required_for_each":true,"income_profiles_required_for_each":true},
-  "loaders":{"foundation":"src/lib/data/registryV3.ts","income_profiles":"src/lib/data/incomeProfilesV3.ts"},
-  "validators":["scripts/validate-registry-v3-foundation.mjs","scripts/validate-registry-v3-deployments.mjs","scripts/validate-registry-v3-income-profiles.mjs","scripts/validate-registry-v3-migration-audit.mjs","scripts/validate-registry-v2-v3-machine-readable-parity.mjs"],
-  "unknown_policy":"Unknown and unresolved values remain explicit; the audit protects structure and coverage without asserting unsupported facts."
+  "schema_version": "3.0-migration-audit",
+  "status": "protected_baseline",
+  "base_registry": "docs/migration/registry-v2-baseline.json",
+  "manifests": {
+    "foundation": "docs/migration/registry-v3-foundation.json",
+    "deployments": "docs/migration/registry-v3-view-67.json",
+    "income_profiles": "docs/migration/registry-v3-income-profiles.json"
+  },
+  "minimum_counts": {
+    "legal_profiles": 114,
+    "stable_asset_relationships": 5,
+    "reserve_components": 147,
+    "deployments": 180,
+    "income_profiles": 114
+  },
+  "coverage": {
+    "protected_stablecoins": 114,
+    "legal_profiles_required_for_each": true,
+    "reserve_components_required_for_each": true,
+    "income_profiles_required_for_each": true
+  },
+  "loaders": {
+    "foundation": "src/lib/data/registryV3.ts",
+    "income_profiles": "src/lib/data/incomeProfilesV3.ts"
+  },
+  "validators": [
+    "scripts/validate-registry-v3-foundation.mjs",
+    "scripts/validate-registry-v3-deployments.mjs",
+    "scripts/validate-registry-v3-income-profiles.mjs",
+    "scripts/validate-registry-v3-migration-audit.mjs",
+    "scripts/validate-registry-v2-v3-machine-readable-parity.mjs"
+  ],
+  "unknown_policy": "Unknown and unresolved values remain explicit; the audit protects structure and coverage without asserting unsupported facts."
 }

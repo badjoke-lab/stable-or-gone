@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sog_st_chfau",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_chfau_product_pr429"],
+    "notes": "No issuer-native CHFAU yield or balance rebase is asserted. Third-party opportunities are outside this profile."
+  },
+  {
+    "id": "sog_st_sekau",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_sekau_product_pr429"],
+    "notes": "No issuer-native SEKAU yield or balance rebase is asserted. Third-party opportunities are outside this profile."
+  }
+]

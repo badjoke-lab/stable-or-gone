@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_ku_chfau_network_inventory_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "issuer_id": "sog_issuer_allunity",
+    "topic": "complete_deployment_inventory",
+    "description": "Ethereum and Tempo identifiers are verified in the reviewed product page, while the complete current Base and Polygon contract inventory requires separate address verification.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-18",
+    "notes": "Network announcements are not converted into unverified contract records."
+  },
+  {
+    "id": "sog_ku_chfau_reserve_series_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "issuer_id": "sog_issuer_allunity",
+    "topic": "reserve_report_series",
+    "description": "Full and segregated reserve backing is stated, but a complete immutable report-level reserve and assurance series has not been normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-07-18",
+    "notes": "No fixed reserve allocation is inferred from the aggregate product page."
+  },
+  {
+    "id": "sog_ku_chfau_redemption_operations_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "issuer_id": "sog_issuer_allunity",
+    "topic": "redemption_fees_limits_and_settlement",
+    "description": "The statutory par-redemption right and institutional mint access are documented, but complete current fees, minimums, limits, settlement guarantees, and channel availability remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-18",
+    "notes": "Legal entitlement and operational access are kept separate."
+  },
+  {
+    "id": "sog_ku_sekau_tempo_and_network_inventory_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "issuer_id": "sog_issuer_allunity",
+    "topic": "complete_deployment_inventory",
+    "description": "Ethereum, Polygon, Base, and Solana identifiers are verified, while the current Tempo identifier and complete deployment-change history remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-18",
+    "notes": "The launch announcement establishes a five-network rollout but does not replace address-level verification."
+  },
+  {
+    "id": "sog_ku_sekau_reserve_series_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "issuer_id": "sog_issuer_allunity",
+    "topic": "reserve_report_series",
+    "description": "Full and segregated reserve backing is stated, but a complete immutable report-level reserve and assurance series has not been normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-07-18",
+    "notes": "Banking Circle is named in the launch context, but current allocation and complete banking relationships require continuing review."
+  },
+  {
+    "id": "sog_ku_sekau_redemption_and_circulation_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "issuer_id": "sog_issuer_allunity",
+    "topic": "redemption_operations_and_circulation",
+    "description": "The statutory par-redemption right and business mint path are documented, but complete fees, minimums, limits, first-mint chronology, and current circulation remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-18",
+    "notes": "No current supply amount is inferred."
+  }
+]

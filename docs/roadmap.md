@@ -1,20 +1,20 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-18  
-Status: UI v3 complete; Record Growth Batch 2 authorized
+Status: UI v3 complete; Record Growth Batch 2 active
 
 ## Current position
 
 ```text
-Canonical stable assets: 112
+Canonical stable assets: 114 on PR #429
 Organizations: 107
-Relationships: 124
-Events: 187
-Evidence: 559
-Evidence Relations: 559
-Deployments: 174
+Relationships: 126
+Events: 189
+Evidence: 565
+Evidence Relations: 565
+Deployments: 180
 Market Access Records: 8
-Archive recorded: 430
+Archive recorded: 436
 Archive not recorded: 129
 Issue #281 UI v3 rebuild: complete
 Accepted desktop templates: 6
@@ -29,16 +29,16 @@ UI completion: true
 ```text
 PR #426 Post-UI v3 Data-Growth Reset: complete
 PR #427 Record Growth Candidate Audit v2: complete
-PR #428 Post-PR #427 Review Gate: complete on merge
-PR #429 Record Growth Batch 2 — CHFAU and SEKAU: authorized next
+PR #428 Post-PR #427 Review Gate: complete
+PR #429 Record Growth Batch 2 — CHFAU and SEKAU: active; complete on merge
 REVIEW GATE after PR #429
 ```
 
 PR #427 reviewed eleven leads. Four exact existing canonical identities were suppressed: EURAU, EURQ, USDQ, and USR. Four distinct launched identities were ready for full-record review: CHFAU, SEKAU, PLNQ, and GBPQ. Open USD remained deferred, FIUSD remained evidence-incomplete, and Roughrider Coin remained prelaunch or noncanonical.
 
-PR #428 selects the coherent AllUnity regulated non-EUR context pair, CHFAU and SEKAU, for PR #429. The selection is non-ranking. PLNQ and GBPQ remain retained for future review and are not rejected.
+PR #428 selected the coherent AllUnity regulated non-EUR context pair, CHFAU and SEKAU, for PR #429. The selection is non-ranking. PLNQ and GBPQ remain retained for future review and are not rejected.
 
-PR #429 may add at most two complete canonical assets and the applicable supporting record families. It may not add a third asset, a Market Access Record, a public surface, a UI change, a score, ranking, endorsement, recommendation, or automatic promotion path.
+PR #429 adds exactly two complete canonical records, reuses the existing AllUnity issuer identity, records six verified deployments, six primary-source Evidence records, explicit reserve and redemption profiles, legal profiles, launch events, reserve components, income profiles, and six known unknowns. It preserves all eight Market Access Records and makes no public-surface or UI change.
 
 ## Completed UI v3 sequence
 
@@ -78,11 +78,12 @@ The owner reviewed and accepted the final visual package on 2026-07-18. Approval
 ## Preserved boundaries
 
 ```text
-Canonical data changed by PR #426, PR #427, or PR #428: 0
-Public UI changed by PR #426, PR #427, or PR #428: 0
-Routes changed: 0
-Public machine-readable data changed: 0
-Metadata contract changed: 0
+New canonical assets in PR #429: 2
+Third asset: 0
+Market Access changes: 0
+New public routes or surfaces: 0
+UI changes: 0
+Metadata contract changes: 0
 Automatic candidate promotion: disabled
 ```
 
