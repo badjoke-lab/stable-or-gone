@@ -103,7 +103,10 @@ jobs:
         run: node scripts/validate-stats-history.mjs
 
       - name: Astro check
-        run: npm run check
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run check 2>&1 | tee artifacts/astro-check.log
 
       - name: Build site
         run: npm run build
@@ -161,7 +164,14 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const fs=require('fs');
             const marker='<!-- pr429-generated-output-repair-status -->';
+            let diagnostic='';
+            try {
+              const lines=fs.readFileSync('artifacts/astro-check.log','utf8').trim().split('\n');
+              const tail=lines.slice(-60).join('\n').slice(-6000);
+              if(tail) diagnostic='\n\n### Astro check tail\n\n    '+tail.replace(/\n/g,'\n    ');
+            } catch {}
             const body=`${marker}
             ## Generated-output repair
 
@@ -170,7 +180,7 @@ jobs:
             - Head: \`${context.sha}\`
             - Expected public assets: **114**
             - Expected events: **189**
-            - Expected Evidence: **565**`;
+            - Expected Evidence: **565**${diagnostic}`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
