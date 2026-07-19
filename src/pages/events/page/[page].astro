@@ -1,0 +1,37 @@
+---
+import StaticRegistryPagination from '../../../components/StaticRegistryPagination.astro';
+import { buildEventIndexView } from '../../../lib/views/eventIndexView';
+
+const PAGE_SIZE = 20;
+
+export function getStaticPaths() {
+  const { records } = buildEventIndexView();
+  const totalPages = Math.ceil(records.length / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => index + 2).map((page) => ({
+    params: { page: String(page) },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props as { page: number };
+const { records } = buildEventIndexView();
+const totalPages = Math.ceil(records.length / PAGE_SIZE);
+const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
+  title: record.title,
+  href: `/event/${record.id}/`,
+  meta: `${record.eventDate || 'Date not recorded'} · ${record.categoryLabel} · ${record.subtypeLabel}`,
+  description: `Impact: ${record.impactLabel}. Lifecycle effect: ${record.statusEffectLabel}. Recovery: ${record.recoveryLabel}.`
+}));
+const title = `Stablecoin Events — Page ${page}`;
+const description = `Browse reviewed Stable or Gone event records, page ${page} of ${totalPages}, with ordinary HTML links to each event.`;
+---
+<StaticRegistryPagination
+  sectionLabel="Event register"
+  title={title}
+  description={description}
+  basePath="/events/"
+  page={page}
+  totalPages={totalPages}
+  totalRecords={records.length}
+  items={items}
+/>
