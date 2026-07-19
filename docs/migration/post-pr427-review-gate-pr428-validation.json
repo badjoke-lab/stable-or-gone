@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "status": "success",
+  "validated_work_item": "post_pr427_review_gate_pr428",
+  "source_pr": 427,
+  "next_pr": 429,
+  "selected_symbols": ["CHFAU", "SEKAU"],
+  "maximum_new_canonical_assets": 2,
+  "canonical_changes_in_pr428": 0,
+  "public_changes_in_pr428": 0,
+  "review_gate_after_pr429": true
+}

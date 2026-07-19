@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_pr427_review_gate_pr428",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-07-18",
+  "source_pr": 427,
+  "source_head_commit": "de85c9002867c9ebed6d5cad6448cf401ff2a3a0",
+  "source_validation": {
+    "status": "success",
+    "reviewed_candidates": 11,
+    "ready_for_full_record_review": 4,
+    "duplicate_existing": 4,
+    "blocked_or_deferred": 3,
+    "canonical_changes": 0,
+    "public_changes": 0
+  },
+  "canonical_baseline": {
+    "stable_assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129
+  },
+  "decision": {
+    "authorize_next_pr": 429,
+    "authorize_work_item": "Record Growth Batch 2",
+    "selected_context_id": "allunity_regulated_non_eur_expansion",
+    "selected_candidate_ids": [
+      "sog_cand_pr427_chfau",
+      "sog_cand_pr427_sekau"
+    ],
+    "selected_symbols": ["CHFAU", "SEKAU"],
+    "maximum_new_canonical_assets": 2,
+    "review_gate_after_pr429": true,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "selection_basis": [
+    "distinct_current_asset_identity",
+    "existing_reviewed_allunity_issuer_identity",
+    "official_launch_sources",
+    "official_deployment_sources",
+    "official_current_state_source_for_chfau",
+    "coherent_regulated_non_eur_context",
+    "complete_record_feasibility"
+  ],
+  "not_selected_now": [
+    {
+      "context_id": "quantoz_regulated_non_eur_expansion",
+      "candidate_ids": ["sog_cand_pr427_plnq", "sog_cand_pr427_gbpq"],
+      "decision": "retain_for_future_review_not_rejected"
+    }
+  ],
+  "pr429_requirements": {
+    "complete_record_only": true,
+    "thin_records_forbidden": true,
+    "duplicate_recheck_required": true,
+    "manual_source_review_required": true,
+    "required_record_families": [
+      "stablecoins",
+      "relationships",
+      "classifications",
+      "stablecoin_profiles",
+      "events",
+      "event_details",
+      "evidence",
+      "evidence_relations",
+      "reserve_reports_or_explicit_not_applicable",
+      "known_unknowns",
+      "deployments",
+      "legal_profiles",
+      "reserve_components",
+      "income_profiles"
+    ],
+    "automatic_promotion": false,
+    "public_surface_change": false,
+    "market_access_change": false
+  },
+  "protected_boundaries": [
+    "ui_v3",
+    "public_routes",
+    "metadata_contracts",
+    "public_machine_readable_semantics",
+    "market_access_records",
+    "rankings",
+    "scores",
+    "recommendations"
+  ]
+}

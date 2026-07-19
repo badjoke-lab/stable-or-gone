@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_pr427_review_gate_pr428_2026_07_18",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-07-18",
+  "source_pr": 427,
+  "source_head_commit": "de85c9002867c9ebed6d5cad6448cf401ff2a3a0",
+  "source_outputs": {
+    "audit": "data/editorial-research/record-growth-candidate-audit-v2-pr427.json",
+    "duplicate_report": "docs/migration/record-growth-candidate-audit-v2-pr427-duplicate-report.json",
+    "source_coverage": "docs/migration/record-growth-candidate-audit-v2-pr427-source-coverage.json",
+    "handoff": "docs/migration/record-growth-candidate-audit-v2-pr427-handoff.json",
+    "validation": "docs/migration/record-growth-candidate-audit-v2-pr427-validation.json"
+  },
+  "reviewed_findings": {
+    "reviewed_candidates": 11,
+    "ready_for_full_record_review": 4,
+    "duplicate_existing": 4,
+    "blocked_or_deferred": 3,
+    "ready_candidates": ["CHFAU", "SEKAU", "PLNQ", "GBPQ"],
+    "duplicate_candidates": ["EURAU", "EURQ", "USDQ", "USR"]
+  },
+  "decision": {
+    "next_pr": 429,
+    "next_work_item": "Record Growth Batch 2",
+    "selected_context_id": "allunity_regulated_non_eur_expansion",
+    "selected_candidates": [
+      {
+        "candidate_id": "sog_cand_pr427_chfau",
+        "name": "AllUnity CHF",
+        "symbol": "CHFAU",
+        "reference_asset": "CHF"
+      },
+      {
+        "candidate_id": "sog_cand_pr427_sekau",
+        "name": "AllUnity SEK",
+        "symbol": "SEKAU",
+        "reference_asset": "SEK"
+      }
+    ],
+    "maximum_new_canonical_assets": 2,
+    "canonical_changes_in_pr428": false,
+    "canonical_changes_in_pr429": "bounded_reviewed_complete_records_only",
+    "review_gate_after_pr429": true
+  },
+  "selection_reasoning": {
+    "context_coherence": "Both candidates are current non-EUR e-money tokens from the already reviewed AllUnity issuer family.",
+    "source_strength": "The candidate audit records official launch sources for both assets, official deployment coverage, and an additional current-state source for CHFAU.",
+    "record_feasibility": "The audit and source-coverage report classify both candidates as complete-record feasible.",
+    "non_ranking_boundary": "This is a bounded context selection, not a quality, safety, market-size, or investment ranking."
+  },
+  "retained_for_future_review": [
+    {
+      "context_id": "quantoz_regulated_non_eur_expansion",
+      "candidate_symbols": ["PLNQ", "GBPQ"],
+      "state": "ready_but_not_selected_in_this_bounded_sequence"
+    }
+  ],
+  "preserved_boundaries": {
+    "canonical_counts_in_pr428": true,
+    "public_routes": true,
+    "ui_v3": true,
+    "metadata_contracts": true,
+    "public_machine_readable_semantics": true,
+    "market_access_records": true,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  }
+}
