@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-18  
-Status: UI v3 complete; reviewed data growth resumed
+Status: UI v3 complete; Record Growth Batch 2 authorized
 
 ## Current position
 
@@ -28,15 +28,17 @@ UI completion: true
 
 ```text
 PR #426 Post-UI v3 Data-Growth Reset: complete
-PR #427 Record Growth Candidate Audit v2: active
-REVIEW GATE after PR #427
+PR #427 Record Growth Candidate Audit v2: complete
+PR #428 Post-PR #427 Review Gate: complete on merge
+PR #429 Record Growth Batch 2 — CHFAU and SEKAU: authorized next
+REVIEW GATE after PR #429
 ```
 
-PR #427 audits eleven current stable-asset leads against all 112 canonical assets. Four rows are existing canonical identities and must be suppressed as duplicates: EURAU, EURQ, USDQ, and USR.
+PR #427 reviewed eleven leads. Four exact existing canonical identities were suppressed: EURAU, EURQ, USDQ, and USR. Four distinct launched identities were ready for full-record review: CHFAU, SEKAU, PLNQ, and GBPQ. Open USD remained deferred, FIUSD remained evidence-incomplete, and Roughrider Coin remained prelaunch or noncanonical.
 
-Four distinct launched identities are ready for complete-record review: CHFAU, SEKAU, PLNQ, and GBPQ. Open USD remains deferred, FIUSD remains evidence-incomplete, and Roughrider Coin remains prelaunch or noncanonical.
+PR #428 selects the coherent AllUnity regulated non-EUR context pair, CHFAU and SEKAU, for PR #429. The selection is non-ranking. PLNQ and GBPQ remain retained for future review and are not rejected.
 
-A canonical Record Growth Batch 2 is not authorized yet. The review gate after PR #427 may authorize at most two complete records only when the audit shows that complete evidence-backed record families can be produced.
+PR #429 may add at most two complete canonical assets and the applicable supporting record families. It may not add a third asset, a Market Access Record, a public surface, a UI change, a score, ranking, endorsement, recommendation, or automatic promotion path.
 
 ## Completed UI v3 sequence
 
@@ -76,12 +78,12 @@ The owner reviewed and accepted the final visual package on 2026-07-18. Approval
 ## Preserved boundaries
 
 ```text
-Canonical data changed by PR #426 or PR #427: 0
-Public UI changed by PR #426 or PR #427: 0
+Canonical data changed by PR #426, PR #427, or PR #428: 0
+Public UI changed by PR #426, PR #427, or PR #428: 0
 Routes changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0
 Automatic candidate promotion: disabled
 ```
 
-Future material UI work requires a new authorized workstream. PR #427 must stop at a review gate before any canonical growth.
+Future material UI work requires a new authorized workstream. PR #429 must stop at a mandatory review gate.

@@ -1,6 +1,6 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authority: PR #427 Record Growth Candidate Audit v2.
+Current mandatory authority: PR #429 Record Growth Batch 2 — CHFAU and SEKAU.
 
 Current authority:
 
@@ -20,6 +20,11 @@ data/editorial-research/record-growth-candidate-audit-v2-pr427.json
 docs/migration/record-growth-candidate-audit-v2-pr427-duplicate-report.json
 docs/migration/record-growth-candidate-audit-v2-pr427-source-coverage.json
 docs/migration/record-growth-candidate-audit-v2-pr427-handoff.json
+docs/migration/record-growth-candidate-audit-v2-pr427-validation.json
+docs/roadmap-amendments/2026-07-18-pr428-post-pr427-review-gate.md
+docs/quality/post-pr427-review-gate-pr428-spec.md
+config/post-pr427-review-gate-pr428.json
+docs/migration/post-pr427-review-gate-pr428.json
 ```
 
 ## Current workstream
@@ -40,10 +45,12 @@ Owner-approved desktop templates: 6 / 6
 Owner-approved mobile templates: 6 / 6
 UI v3 completion: true
 PR #426 Post-UI v3 Data-Growth Reset: complete
-PR #427 Record Growth Candidate Audit v2: active
-Next boundary: REVIEW GATE
+PR #427 Record Growth Candidate Audit v2: complete
+PR #428 Post-PR #427 Review Gate: complete on merge
+PR #429 Record Growth Batch 2 — CHFAU and SEKAU: authorized next
+Next boundary after PR #429: REVIEW GATE
 ```
 
 UI v3 is complete and has no active implementation workstream. Future material UI changes require a new independently authorized workstream.
 
-PR #427 is an internal, non-ranking, manual-review-only candidate audit. It reviews eleven candidate leads, suppresses existing canonical identities, records source coverage and blocking unknowns, and stops at the mandatory review gate. Canonical Record Growth Batch 2 remains unapproved until that review gate records an explicit decision.
+PR #429 may promote only the exact reviewed AllUnity context pair, CHFAU and SEKAU, and only as complete records with all applicable supporting families. It may add no third asset, no Market Access Record, no public surface, no ranking, score, endorsement, recommendation, or automatic promotion path.
