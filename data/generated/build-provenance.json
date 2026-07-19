@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "source_commit": "unknown",
-  "source_branch": "main",
-  "generated_at": "1970-01-01T00:00:00.000Z",
-  "canonical_data_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-  "canonical_file_count": 0,
+  "source_commit": "518327d935be67dbf39a11116e7d39199da0d656",
+  "source_branch": "agent/pr429-generated-output-repair",
+  "generated_at": "2026-07-19T11:59:01.919Z",
+  "canonical_data_hash": "sha256:73a50ae0edbc90aa65806b09271fa765aa0a7f0266549b3306229d6b59af3a96",
+  "canonical_file_count": 438,
   "canonical_record_counts": {
     "stablecoins": 114,
     "organizations": 107,
@@ -14,7 +14,6 @@
     "events": 189,
     "event_details": 189,
     "evidence": 565,
-    "evidence_relations": 565,
     "reserve_reports": 122,
     "known_unknowns": 331,
     "regulatory_notes": 9,
@@ -22,7 +21,8 @@
     "legal_profiles": 114,
     "stable_asset_relationships": 5,
     "reserve_components": 147,
-    "income_profiles": 114
+    "income_profiles": 114,
+    "evidence_relations": 565
   },
   "route_counts": {
     "stablecoin_detail": 114,

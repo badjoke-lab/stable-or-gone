@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_record_growth_batch_2_pr429_handoff_2026_07_18",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-07-18",
+  "source_pr": 429,
+  "authority_pr": 428,
+  "candidate_audit_pr": 427,
+  "selected_context_id": "allunity_regulated_non_eur_expansion",
+  "promoted_assets": [
+    {
+      "candidate_id": "sog_cand_pr427_chfau",
+      "stablecoin_id": "sog_st_chfau",
+      "symbol": "CHFAU"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_sekau",
+      "stablecoin_id": "sog_st_sekau",
+      "symbol": "SEKAU"
+    }
+  ],
+  "canonical_counts": {
+    "assets": 114,
+    "organizations": 107,
+    "relationships": 126,
+    "events": 189,
+    "evidence": 565,
+    "evidence_relations": 565,
+    "reserve_reports": 122,
+    "known_unknowns": 331,
+    "deployments": 180,
+    "legal_profiles": 114,
+    "stable_asset_relationships": 5,
+    "reserve_components": 147,
+    "income_profiles": 114,
+    "market_access_records": 8,
+    "archive_recorded": 436,
+    "archive_not_recorded": 129
+  },
+  "verified_deployments": {
+    "CHFAU": [
+      "ethereum",
+      "tempo"
+    ],
+    "SEKAU": [
+      "ethereum",
+      "polygon",
+      "base",
+      "solana"
+    ]
+  },
+  "preserved_boundaries": {
+    "third_asset_added": false,
+    "allunity_organization_reused": true,
+    "market_access_change": false,
+    "public_surface_change": false,
+    "ui_change": false,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "next_work_item": "REVIEW_GATE"
+}
