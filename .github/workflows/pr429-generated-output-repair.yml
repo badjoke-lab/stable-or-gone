@@ -91,6 +91,9 @@ jobs:
       - name: Generate provenance
         run: npm run generate:provenance
 
+      - name: Generate current statistics
+        run: SOG_STATS_OUTPUT=artifacts/stats-current.json node scripts/build-stats.mjs
+
       - name: Validate current statistics
         run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
 
