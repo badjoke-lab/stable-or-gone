@@ -1,61 +1,78 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_evidence_archive_maintenance_batch_7_canonical_112_checkpoint_pr400_2026_07_16",
-  "checkpoint_kind": "non_growth_normalization_checkpoint",
-  "recorded_at": "2026-07-16",
-  "source_commit": "pr400-evidence-archive-maintenance-batch-7",
-  "asset_count": 112,
-  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
-  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_6_canonical_112_checkpoint_pr395_2026_07_16",
-  "maintenance_pr": 400,
+  "status": "reviewed_growth_checkpoint",
+  "checkpoint_id": "sog_record_growth_batch_2_canonical_114_checkpoint_pr429_2026_07_18",
+  "checkpoint_kind": "controlled_growth_checkpoint",
+  "recorded_at": "2026-07-18",
+  "source_commit": "pr429-record-growth-batch-2",
+  "asset_count": 114,
+  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_7_112_checkpoint_pr400_2026_07_16",
+  "previous_checkpoint_id": "sog_evidence_archive_maintenance_batch_7_112_checkpoint_pr400_2026_07_16",
+  "growth_pr": 429,
   "expected_counts": {
-    "assets": 112,
+    "assets": 114,
     "organizations": 107,
-    "relationships": 124,
-    "events": 187,
-    "evidence": 559,
+    "relationships": 126,
+    "events": 189,
+    "evidence": 565,
     "market_access_records": 8,
-    "reserve_reports": 120,
-    "known_unknowns": 325,
+    "reserve_reports": 122,
+    "known_unknowns": 331,
     "regulatory_notes": 9,
-    "deployments": 174,
-    "legal_profiles": 112,
+    "deployments": 180,
+    "legal_profiles": 114,
     "stable_asset_relationships": 5,
-    "reserve_components": 145,
-    "income_profiles": 112
+    "reserve_components": 147,
+    "income_profiles": 114
+  },
+  "counts": {
+    "assets": 114,
+    "organizations": 107,
+    "relationships": 126,
+    "events": 189,
+    "evidence": 565,
+    "market_access_records": 8,
+    "reserve_reports": 122,
+    "known_unknowns": 331,
+    "regulatory_notes": 9,
+    "deployments": 180,
+    "legal_profiles": 114,
+    "stable_asset_relationships": 5,
+    "reserve_components": 147,
+    "income_profiles": 114,
+    "evidence_relations": 565,
+    "classifications": 114,
+    "profiles": 114,
+    "event_details": 189,
+    "archive_index_count": 436,
+    "archive_not_recorded_count": 129
   },
   "evidence_quality": {
-    "archive_index_count": 430,
+    "archive_index_count": 436,
     "archive_not_recorded_count": 129,
-    "selected_for_review": 10,
-    "canonical_changes": 5,
-    "reviewed_no_safe_change": 5,
-    "new_evidence_records": 0
+    "selected_for_review": 6,
+    "canonical_changes": 2,
+    "reviewed_no_safe_change": 0,
+    "new_evidence_records": 6
   },
-  "maintenance_outcome": {
-    "changed_evidence_ids": [
-      "sog_src_nuon_overview_batch_b",
-      "sog_src_paxg_launch_batch_b",
-      "sog_src_pyusd_paxos_page",
-      "sog_src_pyusd_paypal_official",
-      "sog_src_rai_faq_batch_b"
+  "audit": {
+    "source_pr": 429,
+    "source_authority_pr": 428,
+    "source_candidate_audit_pr": 427,
+    "source_pr_head": "pr429-record-growth-batch-2",
+    "completed_at": "2026-07-18",
+    "selected_context": "allunity_regulated_non_eur_expansion",
+    "selected_assets": [
+      "sog_st_chfau",
+      "sog_st_sekau"
     ],
-    "dated_archive_added_evidence_ids": [
-      "sog_src_nuon_overview_batch_b",
-      "sog_src_paxg_launch_batch_b",
-      "sog_src_pyusd_paxos_page",
-      "sog_src_pyusd_paypal_official",
-      "sog_src_rai_faq_batch_b"
-    ],
-    "source_replacement_evidence_ids": [],
-    "reviewed_no_safe_change_evidence_ids": [
-      "sog_src_paxg_allocation_batch_b",
-      "sog_src_paxg_pricing_batch_b",
-      "sog_src_paxg_redemption_batch_b",
-      "sog_src_paxos_busd_announcement",
-      "sog_src_pyusd_paxos_official"
-    ]
+    "added_assets": 2,
+    "added_evidence": 6,
+    "added_deployments": 6,
+    "market_access_change": 0,
+    "public_surface_change": 0,
+    "automatic_promotion": false,
+    "review_gate_after_pr429": true
   },
-  "notes": "Current deterministic canonical checkpoint after PR #400 Evidence and Archive Maintenance Batch 7. 5 exact dated archive captures and 0 reviewed source replacements were accepted; 5 identities recorded reviewed no-safe-change. Archive coverage is 430 of 559. All canonical identity counts, Evidence Relations, assets, Market Access records, non-Evidence record families, and public surfaces remain unchanged."
+  "notes": "Reviewed controlled-growth checkpoint after PR #429. CHFAU and SEKAU were added as complete records; the established asset_count and expected_counts contract is preserved for deterministic statistics validation."
 }

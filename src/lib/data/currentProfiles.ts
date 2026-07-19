@@ -25,12 +25,13 @@ import profileBatchWData from '../../../data/batch-w-reserve-redemption.json';
 import profileBatchXData from '../../../data/batch-x-reserve-redemption.json';
 import profileBatchYData from '../../../data/batch-y-reserve-redemption.json';
 import profileBatchZData from '../../../data/batch-z-reserve-redemption.json';
+import profileBatchAAData from '../../../data/batch-aa-reserve-redemption.json';
 import profilePr354Data from '../../../data/stablecoin-profiles-pr354-tier-a-batch-1.json';
 import profilePr355Data from '../../../data/stablecoin-profiles-pr355-tier-a-batch-2.json';
 import type { ReserveProfileV2, RedemptionProfileV2 } from '../schema/registry-v2';
 
 export type CurrentProfile = { id:string; reserve_profile:ReserveProfileV2; redemption_profile:RedemptionProfileV2; };
-const rawProfiles = [...profileData,...profileBatchAData,...profileBatchBData,...profileBatchCData,...profileBatchDData,...profileBatchEData,...profileBatchFData,...profileBatchGData,...profileBatchHData,...profileBatchIData,...profileBatchJData,...profileBatchKData,...profileBatchLData,...profileBatchMData,...profileBatchNData,...profileBatchOData,...profileBatchPData,...profileBatchQData,...profileBatchRData,...profileBatchSData,...profileBatchTData,...profileBatchUData,...profileBatchVData,...profileBatchWData,...profileBatchXData,...profileBatchYData,...profileBatchZData,...profilePr354Data,...profilePr355Data] as CurrentProfile[];
+const rawProfiles = [...profileData,...profileBatchAData,...profileBatchBData,...profileBatchCData,...profileBatchDData,...profileBatchEData,...profileBatchFData,...profileBatchGData,...profileBatchHData,...profileBatchIData,...profileBatchJData,...profileBatchKData,...profileBatchLData,...profileBatchMData,...profileBatchNData,...profileBatchOData,...profileBatchPData,...profileBatchQData,...profileBatchRData,...profileBatchSData,...profileBatchTData,...profileBatchUData,...profileBatchVData,...profileBatchWData,...profileBatchXData,...profileBatchYData,...profileBatchZData,...profileBatchAAData,...profilePr354Data,...profilePr355Data] as CurrentProfile[];
 const byId = new Map(rawProfiles.map((row) => [row.id,row] as const));
 const profiles = [...byId.values()];
 const clone = (row:CurrentProfile):CurrentProfile => ({...row,reserve_profile:{...row.reserve_profile,backing_types:[...row.reserve_profile.backing_types],evidence_ids:[...(row.reserve_profile.evidence_ids ?? [])]},redemption_profile:{...row.redemption_profile,jurisdiction_restrictions:[...(row.redemption_profile.jurisdiction_restrictions ?? [])],evidence_ids:[...(row.redemption_profile.evidence_ids ?? [])]}});

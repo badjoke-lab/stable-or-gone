@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: pr429-generated-output-repair-${{ github.event_name }}
+  group: pr429-generated-output-repair
   cancel-in-progress: true
 
 jobs:
@@ -49,32 +49,79 @@ jobs:
       - name: Validate PR 429 complete records
         run: node scripts/validate-record-growth-batch-2-pr429.mjs
 
-      - name: Validate canonical and Registry v3 contracts
-        run: |
-          npm run validate:active-workstream
-          npm run validate:data
-          npm run validate:classification
-          npm run validate:profiles
-          npm run validate:events-v2
-          npm run validate:evidence-relations-v2
-          npm run validate:v3
-          npm run validate:deployments-v3
-          npm run validate:income-v3
-          npm run validate:parity
-          npm run validate:release-integrity
-          npm run validate:final
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
 
-      - name: Validate statistics and public build
+      - name: Validate canonical data
+        run: npm run validate:data
+
+      - name: Validate classifications
+        run: npm run validate:classification
+
+      - name: Validate profiles
+        run: npm run validate:profiles
+
+      - name: Validate event details
+        run: npm run validate:events-v2
+
+      - name: Validate Evidence relations
+        run: npm run validate:evidence-relations-v2
+
+      - name: Validate Registry v3 foundation
+        run: npm run validate:v3
+
+      - name: Validate Registry v3 deployments
+        run: npm run validate:deployments-v3
+
+      - name: Validate Registry v3 income profiles
+        run: npm run validate:income-v3
+
+      - name: Validate Registry v2 v3 parity
+        run: npm run validate:parity
+
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
+
+      - name: Validate final Registry v2 contracts
+        run: npm run validate:final
+
+      - name: Generate deployment taxonomy
+        run: npm run generate:deployment-taxonomy
+
+      - name: Generate provenance
+        run: npm run generate:provenance
+
+      - name: Generate current statistics
+        run: SOG_STATS_OUTPUT=artifacts/stats-current.json node scripts/build-stats.mjs
+
+      - name: Validate current statistics
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+
+      - name: Validate statistics history
         env:
           SOG_STATS_HISTORY_BASE_REF: origin/main
+        run: node scripts/validate-stats-history.mjs
+
+      - name: Astro check
         run: |
-          npm run generate:deployment-taxonomy
-          npm run generate:provenance
-          SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
-          node scripts/validate-stats-history.mjs
-          npm run check
-          npm run build
-          npm run verify:public
+          mkdir -p artifacts
+          set -o pipefail
+          NO_COLOR=1 npm run check 2>&1 | tee artifacts/astro-check.log
+
+      - name: Validate guides
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          NO_COLOR=1 npm run validate:guides 2>&1 | tee artifacts/guides.log
+
+      - name: Build Astro site
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          NO_COLOR=1 npm run build:site 2>&1 | tee artifacts/build.log
+
+      - name: Verify public layer
+        run: npm run verify:public
 
       - name: Verify exact 114-asset output
         run: |
@@ -83,8 +130,8 @@ jobs:
           const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
           if (manifest.record_counts?.primary_records !== 114) throw new Error('public primary record count is not 114');
           if (manifest.record_count_breakdown?.stablecoins !== 114) throw new Error('public stablecoin count is not 114');
-          if (manifest.record_count_breakdown?.events !== 189) throw new Error('public event count is not 189');
-          if (manifest.record_count_breakdown?.evidence !== 565) throw new Error('public evidence count is not 565');
+          if (manifest.record_counts?.events !== 189) throw new Error('public event count is not 189');
+          if (manifest.record_counts?.evidence !== 565) throw new Error('public evidence count is not 565');
           if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('unreviewed candidate boundary changed');
           NODE
@@ -94,6 +141,7 @@ jobs:
           grep -q "batchAA" src/lib/data/incomeProfilesV3.ts
 
       - name: Commit generated outputs
+        if: github.event_name == 'pull_request'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -125,16 +173,48 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const fs=require('fs');
             const marker='<!-- pr429-generated-output-repair-status -->';
+            const cleanLog=(path)=>{
+              try { return fs.readFileSync(path,'utf8').replace(/\u001b\[[0-9;]*m/g,''); }
+              catch { return ''; }
+            };
+            const extract=(raw)=>{
+              if(!raw) return '';
+              const lines=raw.split('\n');
+              const indices=[];
+              for(let i=0;i<lines.length;i++) {
+                if(/\b(error|failed|failure|exception)\b/i.test(lines[i]) && !/0 errors|0 failures/i.test(lines[i])) indices.push(i);
+              }
+              if(indices.length===0) return lines.slice(-80).join('\n').slice(-8000);
+              const blocks=[];
+              const seen=new Set();
+              for(const i of indices.slice(0,8)) {
+                const start=Math.max(0,i-12);
+                const end=Math.min(lines.length,i+20);
+                const key=`${start}:${end}`;
+                if(seen.has(key)) continue;
+                seen.add(key);
+                blocks.push(lines.slice(start,end).join('\n'));
+              }
+              return blocks.join('\n\n---\n\n').slice(0,10000);
+            };
+            const astro=extract(cleanLog('artifacts/astro-check.log'));
+            const guides=extract(cleanLog('artifacts/guides.log'));
+            const build=extract(cleanLog('artifacts/build.log'));
+            let diagnostic='';
+            if(astro && /\berror\b/i.test(astro)) diagnostic+='\n\n### Astro context\n\n    '+astro.replace(/\n/g,'\n    ');
+            if(guides) diagnostic+='\n\n### Guide validation context\n\n    '+guides.replace(/\n/g,'\n    ');
+            if(build) diagnostic+='\n\n### Build context\n\n    '+build.replace(/\n/g,'\n    ');
             const body=`${marker}
-            ## PR #432 generated-output repair
+            ## Generated-output repair
 
             - Workflow: **${{ job.status }}**
             - Run ID: **${{ github.run_id }}**
             - Head: \`${context.sha}\`
             - Expected public assets: **114**
             - Expected events: **189**
-            - Expected Evidence: **565**`;
+            - Expected Evidence: **565**${diagnostic}`;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});

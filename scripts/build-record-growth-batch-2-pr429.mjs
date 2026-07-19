@@ -28,6 +28,22 @@ const expectedV3 = {
   income_profiles: 114,
   deployment_view: 180
 };
+const expectedCounts = {
+  assets: expectedV2.stablecoins,
+  organizations: expectedV2.organizations,
+  relationships: expectedV2.relationships,
+  events: expectedV2.events,
+  evidence: expectedV2.evidence,
+  market_access_records: 8,
+  reserve_reports: expectedV2.reserve_reports,
+  known_unknowns: expectedV2.known_unknowns,
+  regulatory_notes: expectedV2.regulatory_notes,
+  deployments: expectedV2.deployments,
+  legal_profiles: expectedV3.legal_profiles,
+  stable_asset_relationships: expectedV3.stable_asset_relationships,
+  reserve_components: expectedV3.reserve_components,
+  income_profiles: expectedV3.income_profiles
+};
 
 write('docs/migration/current-canonical-checkpoint.json', {
   schema_version: '1.0',
@@ -36,24 +52,27 @@ write('docs/migration/current-canonical-checkpoint.json', {
   checkpoint_kind: 'controlled_growth_checkpoint',
   recorded_at: '2026-07-18',
   source_commit: 'pr429-record-growth-batch-2',
+  asset_count: expectedCounts.assets,
+  source_checkpoint_id: previousStatsCheckpointId,
+  previous_checkpoint_id: previousStatsCheckpointId,
+  growth_pr: 429,
+  expected_counts: expectedCounts,
   counts: {
-    assets: 114,
-    organizations: 107,
-    relationships: 126,
-    events: 189,
-    evidence: 565,
-    evidence_relations: 565,
-    reserve_reports: 122,
-    known_unknowns: 331,
-    regulatory_notes: 9,
-    deployments: 180,
-    legal_profiles: 114,
-    stable_asset_relationships: 5,
-    reserve_components: 147,
-    income_profiles: 114,
-    market_access_records: 8,
+    ...expectedCounts,
+    evidence_relations: expectedV2.evidence_relations,
+    classifications: expectedV2.classifications,
+    profiles: expectedV2.profiles,
+    event_details: expectedV2.event_details,
     archive_index_count: 436,
     archive_not_recorded_count: 129
+  },
+  evidence_quality: {
+    archive_index_count: 436,
+    archive_not_recorded_count: 129,
+    selected_for_review: 6,
+    canonical_changes: 2,
+    reviewed_no_safe_change: 0,
+    new_evidence_records: 6
   },
   audit: {
     source_pr: 429,
@@ -70,7 +89,8 @@ write('docs/migration/current-canonical-checkpoint.json', {
     public_surface_change: 0,
     automatic_promotion: false,
     review_gate_after_pr429: true
-  }
+  },
+  notes: 'Reviewed controlled-growth checkpoint after PR #429. CHFAU and SEKAU were added as complete records; the established asset_count and expected_counts contract is preserved for deterministic statistics validation.'
 });
 
 write('docs/migration/current-stats-history-checkpoint.json', {

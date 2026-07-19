@@ -30,31 +30,31 @@ const replaceOnce = (content, before, after) => {
 
   text = replaceOnce(text,
     "...(stablecoinClassificationBatchYData as StablecoinRow[]), ...(stablecoinClassificationBatchZData as StablecoinRow[])",
-    "...(stablecoinClassificationBatchYData as StablecoinRow[]), ...(stablecoinClassificationBatchZData as StablecoinRow[]), ...(stablecoinClassificationBatchAAData as StablecoinRow[])");
+    "...(stablecoinClassificationBatchYData as StablecoinRow[]), ...(stablecoinClassificationBatchZData as StablecoinRow[]), ...(stablecoinClassificationBatchAAData as unknown as StablecoinRow[])");
   text = replaceOnce(text,
     "...(eventDetailsBatchXData as EventRow[]), ...(eventDetailsBatchYData as EventRow[]), ...(eventDetailsBatchZData as EventRow[])",
-    "...(eventDetailsBatchXData as EventRow[]), ...(eventDetailsBatchYData as EventRow[]), ...(eventDetailsBatchZData as EventRow[]), ...(eventDetailsBatchAAData as EventRow[])");
+    "...(eventDetailsBatchXData as EventRow[]), ...(eventDetailsBatchYData as EventRow[]), ...(eventDetailsBatchZData as EventRow[]), ...(eventDetailsBatchAAData as unknown as EventRow[])");
   text = replaceOnce(text,
     "...(stablecoinsBatchYData as StablecoinRow[]), ...(stablecoinsBatchZData as StablecoinRow[])",
-    "...(stablecoinsBatchYData as StablecoinRow[]), ...(stablecoinsBatchZData as StablecoinRow[]), ...(stablecoinsBatchAAData as StablecoinRow[])");
+    "...(stablecoinsBatchYData as StablecoinRow[]), ...(stablecoinsBatchZData as StablecoinRow[]), ...(stablecoinsBatchAAData as unknown as StablecoinRow[])");
   text = replaceOnce(text,
     "...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[])",
-    "...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[]), ...(relationshipsBatchAAData as RelationshipRow[])");
+    "...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[]), ...(relationshipsBatchAAData as unknown as RelationshipRow[])");
   text = replaceOnce(text,
     "...(eventsBatchYData as EventRow[]), ...(eventsBatchZData as EventRow[])",
-    "...(eventsBatchYData as EventRow[]), ...(eventsBatchZData as EventRow[]), ...(eventsBatchAAData as EventRow[])");
+    "...(eventsBatchYData as EventRow[]), ...(eventsBatchZData as EventRow[]), ...(eventsBatchAAData as unknown as EventRow[])");
   text = replaceOnce(text,
     "...(evidenceBatchYData as EvidenceRow[]), ...(evidenceBatchZData as EvidenceRow[]), ...(evidenceQualityPr219Data as EvidenceRow[])",
-    "...(evidenceBatchYData as EvidenceRow[]), ...(evidenceBatchZData as EvidenceRow[]), ...(evidenceBatchAAData as EvidenceRow[]), ...(evidenceQualityPr219Data as EvidenceRow[])");
+    "...(evidenceBatchYData as EvidenceRow[]), ...(evidenceBatchZData as EvidenceRow[]), ...(evidenceBatchAAData as unknown as EvidenceRow[]), ...(evidenceQualityPr219Data as EvidenceRow[])");
   text = replaceOnce(text,
     "...(reserveReportsBatchYData as ReserveReportRow[]), ...(reserveReportsBatchZData as ReserveReportRow[])]",
-    "...(reserveReportsBatchYData as ReserveReportRow[]), ...(reserveReportsBatchZData as ReserveReportRow[]), ...(reserveReportsBatchAAData as ReserveReportRow[])]");
+    "...(reserveReportsBatchYData as ReserveReportRow[]), ...(reserveReportsBatchZData as ReserveReportRow[]), ...(reserveReportsBatchAAData as unknown as ReserveReportRow[])]");
   text = replaceOnce(text,
     "...(knownUnknownsBatchYData as KnownUnknownRow[]), ...(knownUnknownsBatchZData as KnownUnknownRow[])]",
-    "...(knownUnknownsBatchYData as KnownUnknownRow[]), ...(knownUnknownsBatchZData as KnownUnknownRow[]), ...(knownUnknownsBatchAAData as KnownUnknownRow[])]");
+    "...(knownUnknownsBatchYData as KnownUnknownRow[]), ...(knownUnknownsBatchZData as KnownUnknownRow[]), ...(knownUnknownsBatchAAData as unknown as KnownUnknownRow[])]");
   text = replaceOnce(text,
     "...(deploymentsBatchYData as DeploymentRow[]), ...(deploymentsBatchZData as DeploymentRow[])]",
-    "...(deploymentsBatchYData as DeploymentRow[]), ...(deploymentsBatchZData as DeploymentRow[]), ...(deploymentsBatchAAData as DeploymentRow[])]");
+    "...(deploymentsBatchYData as DeploymentRow[]), ...(deploymentsBatchZData as DeploymentRow[]), ...(deploymentsBatchAAData as unknown as DeploymentRow[])]");
   write(path, text);
 }
 
