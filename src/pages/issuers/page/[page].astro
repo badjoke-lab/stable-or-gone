@@ -6,7 +6,7 @@ const PAGE_SIZE = 20;
 
 export function getStaticPaths() {
   const { records } = buildOrganizationIndexView();
-  const totalPages = Math.ceil(records.length / PAGE_SIZE);
+  const totalPages = Math.ceil(records.length / 20);
   return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => index + 2).map((page) => ({
     params: { page: String(page) },
     props: { page }
