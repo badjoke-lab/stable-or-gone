@@ -94,7 +94,6 @@ jobs:
           grep -q "batchAA" src/lib/data/incomeProfilesV3.ts
 
       - name: Commit generated outputs
-        if: github.event_name == 'push'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
