@@ -3,20 +3,32 @@ import { guides } from '../data/guideCatalog';
 import { getStablecoins, getOrganizations, getEvents } from '../lib/data/registry';
 
 const SITE = 'https://sog.badjoke-lab.com';
+const PAGE_SIZE = 20;
 
 function url(path: string) {
   return `${SITE}${path}`;
 }
 
+function paginatedPaths(basePath: string, recordCount: number) {
+  const totalPages = Math.ceil(recordCount / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => `${basePath}page/${index + 2}/`);
+}
+
 export const GET: APIRoute = () => {
+  const stablecoins = getStablecoins();
+  const organizations = getOrganizations();
+  const events = getEvents();
   const staticPaths = [
     '/',
     '/stablecoins/',
+    ...paginatedPaths('/stablecoins/', stablecoins.length),
     '/compare/',
     '/access-regulation/',
     '/timeline/',
     '/issuers/',
+    ...paginatedPaths('/issuers/', organizations.length),
     '/events/',
+    ...paginatedPaths('/events/', events.length),
     '/stats/',
     '/models/',
     '/guides/',
@@ -31,9 +43,9 @@ export const GET: APIRoute = () => {
   ];
 
   const dynamicPaths = [
-    ...getStablecoins().map((row) => `/stablecoin/${row.slug}/`),
-    ...getOrganizations().map((row) => `/issuer/${row.slug}/`),
-    ...getEvents().map((row) => `/event/${row.id}/`)
+    ...stablecoins.map((row) => `/stablecoin/${row.slug}/`),
+    ...organizations.map((row) => `/issuer/${row.slug}/`),
+    ...events.map((row) => `/event/${row.id}/`)
   ];
 
   const urls = [...new Set([...staticPaths, ...dynamicPaths])]
