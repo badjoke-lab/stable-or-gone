@@ -1,0 +1,36 @@
+[
+  {
+    "id": "sog_rc_chfau_reserve_assets_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "reserve_report_id": "sog_rr_chfau_reserve_context_pr429",
+    "asset_category": "other",
+    "asset_label": "Swiss-franc reserves held at EU CRR credit institutions and segregated from AllUnity operational funds",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "CHF",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-07-18",
+    "confidence": "high",
+    "evidence_ids": ["sog_src_chfau_product_pr429", "sog_src_allunity_trust_pr429"],
+    "notes": "Official material establishes full segregated reserve backing but not a fixed report-level instrument allocation."
+  },
+  {
+    "id": "sog_rc_sekau_reserve_assets_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "reserve_report_id": "sog_rr_sekau_reserve_context_pr429",
+    "asset_category": "other",
+    "asset_label": "Swedish-krona reserves held at regulated European banking partners and segregated from AllUnity operational funds",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "SEK",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-07-18",
+    "confidence": "high",
+    "evidence_ids": ["sog_src_sekau_product_pr429", "sog_src_sekau_launch_pr429", "sog_src_allunity_trust_pr429"],
+    "notes": "Official material establishes full segregated reserve backing but not a fixed report-level instrument allocation."
+  }
+]

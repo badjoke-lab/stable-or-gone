@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sog_st_chfau",
+    "classifications": [
+      {
+        "classification": "e_money_token",
+        "jurisdiction": "European Union / Germany",
+        "effective_from": "2026-02-26",
+        "effective_to": null,
+        "authority_or_basis": "MiCAR electronic-money-token issuance by AllUnity GmbH as a BaFin-authorized electronic-money institution",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_chfau_launch_pr429", "sog_src_allunity_legal_pr429"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": ["sog_issuer_allunity"],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "stated_segregated",
+    "bankruptcy_remoteness": "limited",
+    "licensed_or_regulated_as": ["MiCAR electronic-money token", "BaFin-authorized electronic-money institution issuance"],
+    "evidence_ids": ["sog_src_chfau_launch_pr429", "sog_src_chfau_product_pr429", "sog_src_allunity_legal_pr429", "sog_src_allunity_trust_pr429"],
+    "notes": "AllUnity GmbH is the recorded legal issuer and statutory redemption counterparty. Segregation is stated; no broader deposit-insurance or insolvency-protection conclusion is inferred."
+  },
+  {
+    "id": "sog_st_sekau",
+    "classifications": [
+      {
+        "classification": "e_money_token",
+        "jurisdiction": "European Union / Germany",
+        "effective_from": "2026-06-19",
+        "effective_to": null,
+        "authority_or_basis": "MiCAR electronic-money-token issuance by AllUnity GmbH as a BaFin-authorized electronic-money institution",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_sekau_launch_pr429", "sog_src_allunity_legal_pr429"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": ["sog_issuer_allunity"],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "stated_segregated",
+    "bankruptcy_remoteness": "limited",
+    "licensed_or_regulated_as": ["MiCAR electronic-money token", "BaFin-authorized electronic-money institution issuance"],
+    "evidence_ids": ["sog_src_sekau_launch_pr429", "sog_src_sekau_product_pr429", "sog_src_allunity_legal_pr429", "sog_src_allunity_trust_pr429"],
+    "notes": "AllUnity GmbH is the recorded legal issuer and statutory redemption counterparty. Banking Circle is named as reserve and transaction bank in the launch announcement, but the complete current banking map remains under review."
+  }
+]

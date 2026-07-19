@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_ev_chfau_launch_pr429",
+    "title": "AllUnity launches CHFAU as a Swiss-franc electronic-money token",
+    "subject_stablecoin_ids": ["sog_st_chfau"],
+    "subject_organization_ids": ["sog_issuer_allunity"],
+    "evidence_ids": ["sog_src_chfau_launch_pr429", "sog_src_chfau_product_pr429", "sog_src_allunity_legal_pr429"],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of CHFAU with segregated CHF reserve backing and statutory par redemption.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": ["sog_dep_chfau_ethereum_pr429", "sog_dep_chfau_tempo_pr429"],
+      "related_organization_ids": ["sog_issuer_allunity"]
+    }
+  },
+  {
+    "id": "sog_ev_sekau_launch_pr429",
+    "title": "AllUnity launches SEKAU as a Swedish-krona electronic-money token",
+    "subject_stablecoin_ids": ["sog_st_sekau"],
+    "subject_organization_ids": ["sog_issuer_allunity"],
+    "evidence_ids": ["sog_src_sekau_launch_pr429", "sog_src_sekau_product_pr429", "sog_src_allunity_legal_pr429"],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of SEKAU with segregated SEK reserve backing, statutory par redemption, and a multi-chain deployment plan.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": ["sog_dep_sekau_ethereum_pr429", "sog_dep_sekau_polygon_pr429", "sog_dep_sekau_base_pr429", "sog_dep_sekau_solana_pr429"],
+      "related_organization_ids": ["sog_issuer_allunity"]
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sog_rr_chfau_reserve_context_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "issuer_id": "sog_issuer_allunity",
+    "publisher": "AllUnity",
+    "report_type": "official_reserve_and_regulatory_context",
+    "asset_categories": ["cash", "bank_deposits"],
+    "url": "https://allunity.com/chfau",
+    "archived_url": "https://web.archive.org/web/*/https://allunity.com/chfau",
+    "confidence": "high",
+    "notes": "Official material states full segregated CHF reserve backing. No fixed instrument allocation is inferred."
+  },
+  {
+    "id": "sog_rr_sekau_reserve_context_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "issuer_id": "sog_issuer_allunity",
+    "publisher": "AllUnity",
+    "report_type": "official_reserve_and_regulatory_context",
+    "asset_categories": ["cash", "bank_deposits"],
+    "url": "https://allunity.com/sekau",
+    "archived_url": "https://web.archive.org/web/*/https://allunity.com/sekau",
+    "confidence": "high",
+    "notes": "Official material states full segregated SEK reserve backing. No fixed instrument allocation is inferred."
+  }
+]

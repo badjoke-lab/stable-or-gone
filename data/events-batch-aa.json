@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_ev_chfau_launch_pr429",
+    "stablecoin_id": "sog_st_chfau",
+    "issuer_id": "sog_issuer_allunity",
+    "event_type": "launch",
+    "event_date": "2026-02-26",
+    "title": "AllUnity launches CHFAU as a Swiss-franc electronic-money token",
+    "description": "AllUnity announced the launch of CHFAU as a fully reserved, MiCAR-compliant Swiss-franc electronic-money token backed by segregated reserves.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "active",
+    "notes": "The event records the official launch and does not infer unrestricted direct retail mint access."
+  },
+  {
+    "id": "sog_ev_sekau_launch_pr429",
+    "stablecoin_id": "sog_st_sekau",
+    "issuer_id": "sog_issuer_allunity",
+    "event_type": "launch",
+    "event_date": "2026-06-19",
+    "title": "AllUnity launches SEKAU as a Swedish-krona electronic-money token",
+    "description": "AllUnity announced the launch of SEKAU as a fully reserved, MiCAR-compliant Swedish-krona electronic-money token across multiple networks.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "active",
+    "notes": "The event records the official launch and separates statutory redemption rights from direct business-mint onboarding."
+  }
+]

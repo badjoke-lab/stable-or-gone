@@ -1,0 +1,16 @@
+[
+  {
+    "candidate_id": "sog_cand_pr427_chfau",
+    "status": "promoted",
+    "promotion_pr": 429,
+    "promoted_record_id": "sog_st_chfau",
+    "notes": "Reviewed PR 427 candidate promoted after PR 428 authorization with complete supporting record layers."
+  },
+  {
+    "candidate_id": "sog_cand_pr427_sekau",
+    "status": "promoted",
+    "promotion_pr": 429,
+    "promoted_record_id": "sog_st_sekau",
+    "notes": "Reviewed PR 427 candidate promoted after PR 428 authorization with complete supporting record layers."
+  }
+]
