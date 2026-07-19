@@ -5,24 +5,29 @@ on:
   push:
     branches:
       - agent/pr429-generated-output-repair
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: pr429-generated-output-repair
+  group: pr429-generated-output-repair-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
   generate-and-validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/pr429-generated-output-repair'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
-      - name: Checkout
+      - name: Checkout repair branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -87,6 +92,7 @@ jobs:
           grep -q "batchAA" src/lib/data/incomeProfilesV3.ts
 
       - name: Commit generated outputs
+        if: github.event_name == 'push'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
