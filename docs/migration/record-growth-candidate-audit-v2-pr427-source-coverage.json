@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_record_growth_candidate_audit_v2_pr427_source_coverage_2026_07_18",
+  "status": "reviewed_complete",
+  "coverage_states": ["strong", "usable", "partial", "absent", "not_applicable"],
+  "required_scopes": ["asset_identity", "issuer_or_operator", "lifecycle", "mechanism", "legal_and_redemption", "reserves", "deployment_identity"],
+  "rows": [
+    {
+      "candidate_id": "sog_cand_pr427_open_usd",
+      "source_identity_count": 1,
+      "primary_source_count": 1,
+      "coverage": {"asset_identity": "usable", "issuer_or_operator": "partial", "lifecycle": "usable", "mechanism": "partial", "legal_and_redemption": "absent", "reserves": "absent", "deployment_identity": "absent"},
+      "full_record_feasible": false,
+      "disposition": "deferred"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_fiusd",
+      "source_identity_count": 2,
+      "primary_source_count": 2,
+      "coverage": {"asset_identity": "strong", "issuer_or_operator": "partial", "lifecycle": "usable", "mechanism": "usable", "legal_and_redemption": "partial", "reserves": "partial", "deployment_identity": "absent"},
+      "full_record_feasible": false,
+      "disposition": "insufficient_evidence"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_eurau",
+      "source_identity_count": 1,
+      "primary_source_count": 1,
+      "coverage": {"asset_identity": "not_applicable", "issuer_or_operator": "not_applicable", "lifecycle": "not_applicable", "mechanism": "not_applicable", "legal_and_redemption": "not_applicable", "reserves": "not_applicable", "deployment_identity": "not_applicable"},
+      "full_record_feasible": false,
+      "disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_chfau",
+      "source_identity_count": 3,
+      "primary_source_count": 3,
+      "coverage": {"asset_identity": "strong", "issuer_or_operator": "strong", "lifecycle": "strong", "mechanism": "strong", "legal_and_redemption": "usable", "reserves": "usable", "deployment_identity": "usable"},
+      "full_record_feasible": true,
+      "disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_sekau",
+      "source_identity_count": 2,
+      "primary_source_count": 2,
+      "coverage": {"asset_identity": "strong", "issuer_or_operator": "strong", "lifecycle": "strong", "mechanism": "strong", "legal_and_redemption": "usable", "reserves": "usable", "deployment_identity": "usable"},
+      "full_record_feasible": true,
+      "disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_eurq",
+      "source_identity_count": 1,
+      "primary_source_count": 1,
+      "coverage": {"asset_identity": "not_applicable", "issuer_or_operator": "not_applicable", "lifecycle": "not_applicable", "mechanism": "not_applicable", "legal_and_redemption": "not_applicable", "reserves": "not_applicable", "deployment_identity": "not_applicable"},
+      "full_record_feasible": false,
+      "disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usdq",
+      "source_identity_count": 1,
+      "primary_source_count": 1,
+      "coverage": {"asset_identity": "not_applicable", "issuer_or_operator": "not_applicable", "lifecycle": "not_applicable", "mechanism": "not_applicable", "legal_and_redemption": "not_applicable", "reserves": "not_applicable", "deployment_identity": "not_applicable"},
+      "full_record_feasible": false,
+      "disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_plnq",
+      "source_identity_count": 3,
+      "primary_source_count": 3,
+      "coverage": {"asset_identity": "strong", "issuer_or_operator": "strong", "lifecycle": "strong", "mechanism": "usable", "legal_and_redemption": "usable", "reserves": "usable", "deployment_identity": "usable"},
+      "full_record_feasible": true,
+      "disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_gbpq",
+      "source_identity_count": 3,
+      "primary_source_count": 3,
+      "coverage": {"asset_identity": "strong", "issuer_or_operator": "strong", "lifecycle": "strong", "mechanism": "usable", "legal_and_redemption": "usable", "reserves": "usable", "deployment_identity": "usable"},
+      "full_record_feasible": true,
+      "disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usr",
+      "source_identity_count": 2,
+      "primary_source_count": 2,
+      "coverage": {"asset_identity": "not_applicable", "issuer_or_operator": "not_applicable", "lifecycle": "not_applicable", "mechanism": "not_applicable", "legal_and_redemption": "not_applicable", "reserves": "not_applicable", "deployment_identity": "not_applicable"},
+      "full_record_feasible": false,
+      "disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_roughrider",
+      "source_identity_count": 1,
+      "primary_source_count": 1,
+      "coverage": {"asset_identity": "partial", "issuer_or_operator": "usable", "lifecycle": "partial", "mechanism": "partial", "legal_and_redemption": "absent", "reserves": "partial", "deployment_identity": "absent"},
+      "full_record_feasible": false,
+      "disposition": "prelaunch_or_noncanonical"
+    }
+  ],
+  "summary": {
+    "reviewed_rows": 11,
+    "full_record_feasible": 4,
+    "duplicates_not_reassessed_as_new_records": 4,
+    "blocked_or_deferred": 3,
+    "canonical_changes": 0
+  }
+}

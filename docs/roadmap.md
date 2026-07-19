@@ -32,7 +32,9 @@ PR #427 Record Growth Candidate Audit v2: active
 REVIEW GATE after PR #427
 ```
 
-PR #427 is an internal candidate audit over at most twelve stable-asset leads. It performs full duplicate, identity, lineage, and source-coverage review without changing canonical records or public output.
+PR #427 audits eleven current stable-asset leads against all 112 canonical assets. Four rows are existing canonical identities and must be suppressed as duplicates: EURAU, EURQ, USDQ, and USR.
+
+Four distinct launched identities are ready for complete-record review: CHFAU, SEKAU, PLNQ, and GBPQ. Open USD remains deferred, FIUSD remains evidence-incomplete, and Roughrider Coin remains prelaunch or noncanonical.
 
 A canonical Record Growth Batch 2 is not authorized yet. The review gate after PR #427 may authorize at most two complete records only when the audit shows that complete evidence-backed record families can be produced.
 
@@ -74,8 +76,8 @@ The owner reviewed and accepted the final visual package on 2026-07-18. Approval
 ## Preserved boundaries
 
 ```text
-Canonical data changed by PR #426: 0
-Public UI changed by PR #426: 0
+Canonical data changed by PR #426 or PR #427: 0
+Public UI changed by PR #426 or PR #427: 0
 Routes changed: 0
 Public machine-readable data changed: 0
 Metadata contract changed: 0

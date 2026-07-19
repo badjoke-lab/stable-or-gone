@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_record_growth_candidate_audit_v2_pr427_handoff_2026_07_18",
+  "status": "reviewed_handoff",
+  "recorded_at": "2026-07-18",
+  "source_authority_pr": 426,
+  "source_pr": 427,
+  "canonical_state": {
+    "stable_assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129,
+    "changed_by_pr427": false
+  },
+  "audit_result": {
+    "reviewed_candidates": 11,
+    "ready_for_full_record_review": 4,
+    "duplicate_existing": 4,
+    "prelaunch_or_noncanonical": 1,
+    "insufficient_evidence": 1,
+    "deferred": 1,
+    "out_of_scope": 0
+  },
+  "ready_candidates": [
+    {
+      "candidate_id": "sog_cand_pr427_chfau",
+      "name": "AllUnity CHF",
+      "symbol": "CHFAU",
+      "context_id": "allunity_regulated_non_eur_expansion"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_sekau",
+      "name": "AllUnity SEK",
+      "symbol": "SEKAU",
+      "context_id": "allunity_regulated_non_eur_expansion"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_plnq",
+      "name": "Quantoz PLNQ",
+      "symbol": "PLNQ",
+      "context_id": "quantoz_regulated_non_eur_expansion"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_gbpq",
+      "name": "Quantoz GBPQ",
+      "symbol": "GBPQ",
+      "context_id": "quantoz_regulated_non_eur_expansion"
+    }
+  ],
+  "duplicate_candidates": [
+    {
+      "candidate_id": "sog_cand_pr427_eurau",
+      "existing_canonical_id": "sog_st_eurau",
+      "canonical_source_file": "data/stablecoins-batch-p.json"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_eurq",
+      "existing_canonical_id": "sog_st_eurq",
+      "canonical_source_file": "data/stablecoins-batch-j.json"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usdq",
+      "existing_canonical_id": "sog_st_usdq",
+      "canonical_source_file": "data/stablecoins-batch-f.json"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usr",
+      "existing_canonical_id": "sog_st_usr",
+      "canonical_source_file": "data/stablecoins-batch-c.json"
+    }
+  ],
+  "blocked_or_deferred": [
+    {
+      "candidate_id": "sog_cand_pr427_open_usd",
+      "disposition": "deferred",
+      "reason": "Legal issuer, reserves, redemption terms, contracts, and independent circulation remain incomplete."
+    },
+    {
+      "candidate_id": "sog_cand_pr427_fiusd",
+      "disposition": "insufficient_evidence",
+      "reason": "Legal issuance identity, canonical contracts, reserve-report series, and first public issuance remain incomplete."
+    },
+    {
+      "candidate_id": "sog_cand_pr427_roughrider",
+      "disposition": "prelaunch_or_noncanonical",
+      "reason": "Current launch, symbol, legal issuance structure, contract identity, and circulation are not confirmed."
+    }
+  ],
+  "review_gate_options": [
+    {
+      "context_id": "allunity_regulated_non_eur_expansion",
+      "candidate_ids": ["sog_cand_pr427_chfau", "sog_cand_pr427_sekau"],
+      "maximum_future_promotions": 2,
+      "ranking": false
+    },
+    {
+      "context_id": "quantoz_regulated_non_eur_expansion",
+      "candidate_ids": ["sog_cand_pr427_plnq", "sog_cand_pr427_gbpq"],
+      "maximum_future_promotions": 2,
+      "ranking": false
+    }
+  ],
+  "decision_boundary": {
+    "next_work_item": "REVIEW_GATE",
+    "record_growth_batch_2_authorized": false,
+    "maximum_future_canonical_additions": 2,
+    "canonical_changes_allowed_in_pr427": false,
+    "public_changes_allowed_in_pr427": false,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "research_id": "sog_post_ui_v3_stablecoin_leads_2026_07_18",
+  "status": "private_research_checkpoint_not_canonical",
+  "recorded_at": "2026-07-18",
+  "canonical_boundary": {
+    "included_in_public_counts": false,
+    "automatic_promotion": false,
+    "manual_duplicate_review_required": true,
+    "manual_source_review_required": true
+  },
+  "selection_basis": "Current issuer, operator, and payment-network primary-source leads found after UI v3 completion.",
+  "leads": [
+    {
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "issuer_or_operator": "Open Standard",
+      "reference_asset": "USD",
+      "preliminary_state": "beta_or_early_launch",
+      "review_disposition": "deferred",
+      "reason": "Visa describes Open USD as the first asset supported by its beta Stablecoin Platform, but issuer legal identity, reserve terms, public contracts, and independent issuance evidence still require review.",
+      "source_leads": [
+        "https://corporate.visa.com/en/sites/visa-perspectives/newsroom/visa-stablecoin-platform.html",
+        "https://www.visa.com/en-us/solutions/stablecoins"
+      ],
+      "blocking_unknowns": [
+        "legal_issuer_identity",
+        "reserve_and_redemption_terms",
+        "public_contract_addresses",
+        "independent_circulation_evidence"
+      ]
+    },
+    {
+      "name": "FIUSD",
+      "symbol": "FIUSD",
+      "issuer_or_operator": "Fiserv",
+      "reference_asset": "USD",
+      "preliminary_state": "marketed_current_product",
+      "review_disposition": "needs_full_record_review",
+      "reason": "Fiserv currently markets FIUSD as a fully reserved USD-backed stablecoin, while the original launch announcement described platform delivery and infrastructure partners. Exact issuance, legal claim, and deployment identity require full review.",
+      "source_leads": [
+        "https://www.fiserv.com/en/solutions/embedded-finance/fiusd-stablecoin.html",
+        "https://investors.fiserv.com/news-releases/news-release-details/fiserv-launches-new-fiusd-stablecoin-financial-institutions"
+      ],
+      "blocking_unknowns": [
+        "legal_issuer_and_redemption_counterparty",
+        "canonical_contract_addresses",
+        "first_public_issuance_date",
+        "reserve_reporting_series"
+      ]
+    },
+    {
+      "name": "AllUnity EUR",
+      "symbol": "EURAU",
+      "issuer_or_operator": "AllUnity",
+      "reference_asset": "EUR",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "AllUnity presents EURAU as a live MiCAR-compliant, fully reserved euro e-money token with par redemption rights.",
+      "source_leads": [
+        "https://allunity.com/",
+        "https://allunity.com/stablecoins"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "complete_deployment_lineage",
+        "first_public_issuance_date",
+        "reserve_report_history"
+      ]
+    },
+    {
+      "name": "AllUnity CHF",
+      "symbol": "CHFAU",
+      "issuer_or_operator": "AllUnity",
+      "reference_asset": "CHF",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "AllUnity announced CHFAU's launch in February 2026 and subsequently reported live deployments on Base and Polygon.",
+      "source_leads": [
+        "https://allunity.com/news/allunity-launches-the-first-fully-reserved-micar-compliant-swiss-franc-stablecoin-chfau",
+        "https://allunity.com/"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "contract_identity_by_network",
+        "reserve_report_history",
+        "distribution_and_redemption_access"
+      ]
+    },
+    {
+      "name": "AllUnity SEK",
+      "symbol": "SEKAU",
+      "issuer_or_operator": "AllUnity",
+      "reference_asset": "SEK",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "AllUnity announced the launch of SEKAU on 2026-06-19 as a fully reserved MiCAR-compliant Swedish-krona e-money token.",
+      "source_leads": [
+        "https://allunity.com/news/allunity-launches-the-first-fully-reserved-swedish-krona-backed-stablecoin-sekau",
+        "https://allunity.com/"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "contract_addresses",
+        "first_mint_and_circulation_evidence",
+        "reserve_report_history"
+      ]
+    },
+    {
+      "name": "Quantoz EURQ",
+      "symbol": "EURQ",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "reference_asset": "EUR",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "Quantoz publishes current EURQ product, redemption, whitepaper, and multi-network issuance information under its Dutch EMI framework.",
+      "source_leads": [
+        "https://www.quantoz.com/products/eurq-usdq",
+        "https://www.quantoz.com/resources",
+        "https://www.quantoz.com/marketing-communications"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "complete_network_lineage",
+        "reserve_reporting_history",
+        "exchange_and_redemption_access"
+      ]
+    },
+    {
+      "name": "Quantoz USDQ",
+      "symbol": "USDQ",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "reference_asset": "USD",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "Quantoz publishes current USDQ product, redemption, whitepaper, and multi-network issuance information under its Dutch EMI framework.",
+      "source_leads": [
+        "https://www.quantoz.com/products/eurq-usdq",
+        "https://www.quantoz.com/resources",
+        "https://www.quantoz.com/marketing-communications"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "complete_network_lineage",
+        "reserve_reporting_history",
+        "exchange_and_redemption_access"
+      ]
+    },
+    {
+      "name": "Quantoz PLNQ",
+      "symbol": "PLNQ",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "reference_asset": "PLN",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "Quantoz announced PLNQ's launch on 2026-04-14 and publishes a current whitepaper and Ethereum token identity.",
+      "source_leads": [
+        "https://www.quantoz.com/blog/quantoz-payments-becomes-europes-leading-stablecoin-issuer-with-five-licensed-tokens-adding-polish-zloty-and-british-pound",
+        "https://www.quantoz.com/resources",
+        "https://www.quantoz.com/marketing-communications"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "circulation_and_distribution_evidence",
+        "reserve_reporting_history",
+        "redemption_access"
+      ]
+    },
+    {
+      "name": "Quantoz GBPQ",
+      "symbol": "GBPQ",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "reference_asset": "GBP",
+      "preliminary_state": "active",
+      "review_disposition": "needs_duplicate_and_full_record_review",
+      "reason": "Quantoz announced GBPQ's launch on 2026-04-14 and publishes a current whitepaper and Ethereum token identity.",
+      "source_leads": [
+        "https://www.quantoz.com/blog/quantoz-payments-becomes-europes-leading-stablecoin-issuer-with-five-licensed-tokens-adding-polish-zloty-and-british-pound",
+        "https://www.quantoz.com/resources",
+        "https://www.quantoz.com/marketing-communications"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "circulation_and_distribution_evidence",
+        "reserve_reporting_history",
+        "redemption_access"
+      ]
+    },
+    {
+      "name": "Resolv USD",
+      "symbol": "USR",
+      "issuer_or_operator": "Resolv / RDAL",
+      "reference_asset": "USD",
+      "preliminary_state": "active_with_incident_signal",
+      "review_disposition": "needs_duplicate_and_incident_review",
+      "reason": "Resolv documents USR minting, redemption, collateral, insurance-layer mechanics, and legal issuance by RDAL; its current site also displays an unauthorized-minting incident notice requiring event review.",
+      "source_leads": [
+        "https://docs.resolv.xyz/litepaper/overview/usr",
+        "https://docs.resolv.xyz/litepaper/legal/terms-of-service",
+        "https://resolv.xyz/"
+      ],
+      "blocking_unknowns": [
+        "canonical_duplicate_check",
+        "incident_date_and_resolution",
+        "current_supply_and_contract_lineage",
+        "complete_collateral_and_counterparty_model"
+      ]
+    },
+    {
+      "name": "Roughrider Coin",
+      "symbol": null,
+      "issuer_or_operator": "Bank of North Dakota / Fiserv",
+      "reference_asset": "USD",
+      "preliminary_state": "announced_launch_window",
+      "review_disposition": "prelaunch_or_noncanonical",
+      "reason": "The official 2025 announcement said the coin would become available to North Dakota banks and credit unions in 2026, but a current launch, token identity, and circulation source have not yet been confirmed in this checkpoint.",
+      "source_leads": [
+        "https://investors.fiserv.com/news-releases/news-release-details/bank-north-dakota-and-fiserv-partner-launch-roughrider-coin"
+      ],
+      "blocking_unknowns": [
+        "current_launch_status",
+        "symbol_and_token_identity",
+        "legal_issuance_structure",
+        "contract_and_circulation_evidence"
+      ]
+    }
+  ],
+  "next_review": {
+    "required": true,
+    "steps": [
+      "compare every lead against the 112 canonical asset identities",
+      "verify current official contract and deployment identities",
+      "separate launch announcements from circulating canonical assets",
+      "select no more than two complete records for any later bounded growth proposal"
+    ]
+  }
+}
