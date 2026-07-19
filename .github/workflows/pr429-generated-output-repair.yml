@@ -109,7 +109,10 @@ jobs:
           NO_COLOR=1 npm run check 2>&1 | tee artifacts/astro-check.log
 
       - name: Build site
-        run: npm run build
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          NO_COLOR=1 npm run build 2>&1 | tee artifacts/build.log
 
       - name: Verify public layer
         run: npm run verify:public
@@ -166,25 +169,35 @@ jobs:
           script: |
             const fs=require('fs');
             const marker='<!-- pr429-generated-output-repair-status -->';
-            let diagnostic='';
-            try {
-              const raw=fs.readFileSync('artifacts/astro-check.log','utf8');
-              const clean=raw.replace(/\u001b\[[0-9;]*m/g,'');
-              const lines=clean.split('\n');
+            const cleanLog=(path)=>{
+              try { return fs.readFileSync(path,'utf8').replace(/\u001b\[[0-9;]*m/g,''); }
+              catch { return ''; }
+            };
+            const extract=(raw)=>{
+              if(!raw) return '';
+              const lines=raw.split('\n');
+              const indices=[];
+              for(let i=0;i<lines.length;i++) {
+                if(/\b(error|failed|failure|exception)\b/i.test(lines[i]) && !/0 errors|0 failures/i.test(lines[i])) indices.push(i);
+              }
+              if(indices.length===0) return lines.slice(-80).join('\n').slice(-8000);
               const blocks=[];
               const seen=new Set();
-              for(let i=0;i<lines.length;i++) {
-                if(!/\berror\b/i.test(lines[i]) || /0 errors/i.test(lines[i]) || /^\s*- 1 error\s*$/i.test(lines[i])) continue;
-                const start=Math.max(0,i-10);
-                const end=Math.min(lines.length,i+16);
+              for(const i of indices.slice(0,8)) {
+                const start=Math.max(0,i-12);
+                const end=Math.min(lines.length,i+20);
                 const key=`${start}:${end}`;
                 if(seen.has(key)) continue;
                 seen.add(key);
                 blocks.push(lines.slice(start,end).join('\n'));
               }
-              const details=blocks.join('\n\n---\n\n').slice(0,9000);
-              if(details) diagnostic='\n\n### Astro error context\n\n    '+details.replace(/\n/g,'\n    ');
-            } catch {}
+              return blocks.join('\n\n---\n\n').slice(0,10000);
+            };
+            const astro=extract(cleanLog('artifacts/astro-check.log'));
+            const build=extract(cleanLog('artifacts/build.log'));
+            let diagnostic='';
+            if(astro && /\berror\b/i.test(astro)) diagnostic+='\n\n### Astro context\n\n    '+astro.replace(/\n/g,'\n    ');
+            if(build) diagnostic+='\n\n### Build context\n\n    '+build.replace(/\n/g,'\n    ');
             const body=`${marker}
             ## Generated-output repair
 
