@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "work_item": "record_growth_candidate_audit_v2_pr427",
+  "status": "reviewed_candidate_audit_complete",
+  "recorded_at": "2026-07-18",
+  "authority_pr": 426,
+  "implementation_pr": 427,
+  "candidate_limit": 12,
+  "reviewed_candidates": 11,
+  "canonical_baseline": {
+    "stable_assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8,
+    "archive_recorded": 430,
+    "archive_not_recorded": 129
+  },
+  "disposition_counts": {
+    "ready_for_full_record_review": 4,
+    "duplicate_existing": 4,
+    "prelaunch_or_noncanonical": 1,
+    "insufficient_evidence": 1,
+    "out_of_scope": 0,
+    "deferred": 1
+  },
+  "ready_candidate_ids": [
+    "sog_cand_pr427_chfau",
+    "sog_cand_pr427_sekau",
+    "sog_cand_pr427_plnq",
+    "sog_cand_pr427_gbpq"
+  ],
+  "duplicate_candidate_ids": [
+    "sog_cand_pr427_eurau",
+    "sog_cand_pr427_eurq",
+    "sog_cand_pr427_usdq",
+    "sog_cand_pr427_usr"
+  ],
+  "context_pair_options": [
+    {
+      "context_id": "allunity_regulated_non_eur_expansion",
+      "candidate_ids": ["sog_cand_pr427_chfau", "sog_cand_pr427_sekau"],
+      "ranking": false
+    },
+    {
+      "context_id": "quantoz_regulated_non_eur_expansion",
+      "candidate_ids": ["sog_cand_pr427_plnq", "sog_cand_pr427_gbpq"],
+      "ranking": false
+    }
+  ],
+  "required_outputs": [
+    "data/editorial-research/record-growth-candidate-audit-v2-pr427.json",
+    "docs/migration/record-growth-candidate-audit-v2-pr427-duplicate-report.json",
+    "docs/migration/record-growth-candidate-audit-v2-pr427-source-coverage.json",
+    "docs/migration/record-growth-candidate-audit-v2-pr427-handoff.json"
+  ],
+  "next_boundary": "REVIEW_GATE",
+  "future_growth_limit": 2,
+  "canonical_changes_allowed": false,
+  "public_changes_allowed": false,
+  "automatic_promotion": false,
+  "ranking": false,
+  "score": false,
+  "recommendation": false
+}

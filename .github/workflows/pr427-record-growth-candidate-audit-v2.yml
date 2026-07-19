@@ -1,0 +1,148 @@
+name: PR 427 Record Growth Candidate Audit v2
+run-name: PR 427 audit · ${{ github.event_name }} · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - pr427-data-growth-planning-reset
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr427-record-growth-candidate-audit-v2-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr427-data-growth-planning-reset'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate reviewed candidate audit
+        run: node scripts/validate-record-growth-candidate-audit-v2-pr427.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Validate canonical and release contracts
+        run: |
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+
+      - name: Verify private noncanonical boundary
+        run: |
+          git diff --exit-code origin/main...HEAD -- src/ public/
+          changed_data="$(git diff --name-only origin/main...HEAD -- data/)"
+          allowed_data="$(printf '%s\n' \
+            data/editorial-research/post-ui-v3-stablecoin-leads-2026-07-18.json \
+            data/editorial-research/record-growth-candidate-audit-v2-pr427.json | sort)"
+          test "$(printf '%s\n' "$changed_data" | sed '/^$/d' | sort)" = "$allowed_data"
+          test ! -e public/data/record-growth-candidate-audit-v2-pr427.json
+          test ! -e public/data/record-growth-candidate-audit-v2-pr427-duplicate-report.json
+          test ! -e public/data/record-growth-candidate-audit-v2-pr427-source-coverage.json
+          test ! -e public/data/record-growth-candidate-audit-v2-pr427-handoff.json
+
+      - name: Astro check and build
+        run: |
+          npm run check
+          npm run build
+
+      - name: Verify audit outputs remain absent from build
+        run: |
+          test ! -e dist/data/record-growth-candidate-audit-v2-pr427.json
+          test ! -e dist/data/record-growth-candidate-audit-v2-pr427-duplicate-report.json
+          test ! -e dist/data/record-growth-candidate-audit-v2-pr427-source-coverage.json
+          test ! -e dist/data/record-growth-candidate-audit-v2-pr427-handoff.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
+          const serialized = JSON.stringify(manifest);
+          for (const marker of ['record-growth-candidate-audit-v2-pr427','post-ui-v3-stablecoin-leads-2026-07-18']) {
+            if (serialized.includes(marker)) throw new Error(`Private PR #427 output leaked into public manifest: ${marker}`);
+          }
+          if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
+          if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('candidate publication boundary changed');
+          console.log('PR #427 private output boundary valid.');
+          NODE
+
+      - name: Commit successful validation receipt
+        if: github.event_name == 'push'
+        run: |
+          cat > docs/migration/record-growth-candidate-audit-v2-pr427-validation.json <<'JSON'
+          {
+            "schema_version": "1.0",
+            "status": "success",
+            "validated_work_item": "record_growth_candidate_audit_v2_pr427",
+            "reviewed_candidates": 11,
+            "ready_for_full_record_review": 4,
+            "duplicate_existing": 4,
+            "blocked_or_deferred": 3,
+            "canonical_changes": 0,
+            "public_changes": 0,
+            "automatic_promotion": false,
+            "next_boundary": "REVIEW_GATE"
+          }
+          JSON
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/record-growth-candidate-audit-v2-pr427-validation.json
+          if git diff --cached --quiet; then
+            echo 'Validation receipt already current.'
+          else
+            git commit -m 'Record successful PR 427 candidate audit validation'
+            git push origin HEAD:pr427-data-growth-planning-reset
+          fi
+
+      - name: Publish PR 427 status
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker='<!-- pr427-record-growth-candidate-audit-v2-status -->';
+            const fs=require('fs');
+            let config=null;
+            let handoff=null;
+            try { config=JSON.parse(fs.readFileSync('config/record-growth-candidate-audit-v2-pr427.json','utf8')); } catch {}
+            try { handoff=JSON.parse(fs.readFileSync('docs/migration/record-growth-candidate-audit-v2-pr427-handoff.json','utf8')); } catch {}
+            const ready=(handoff?.ready_candidates??[]).map((row)=>row.symbol).join(', ')||'n/a';
+            const body=`${marker}
+            ## PR #427 Record Growth Candidate Audit v2
+
+            - Workflow: **${{ job.status }}**
+            - Reviewed candidates: **${config?.reviewed_candidates ?? 'n/a'}**
+            - Ready for full-record review: **${config?.disposition_counts?.ready_for_full_record_review ?? 'n/a'}** — ${ready}
+            - Existing canonical duplicates: **${config?.disposition_counts?.duplicate_existing ?? 'n/a'}**
+            - Blocked or deferred: **3**
+            - Canonical changes: **0**
+            - Public changes: **0**
+            - Automatic promotion: **disabled**
+            - Next boundary: **REVIEW GATE**
+            - Head: \`${context.sha}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});

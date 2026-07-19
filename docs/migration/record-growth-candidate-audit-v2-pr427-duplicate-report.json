@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_record_growth_candidate_audit_v2_pr427_duplicate_report_2026_07_18",
+  "status": "reviewed_complete",
+  "canonical_asset_count": 112,
+  "reviewed_candidate_count": 11,
+  "duplicate_count": 4,
+  "distinct_candidate_count": 7,
+  "duplicate_dimensions": [
+    "asset_id",
+    "slug",
+    "canonical_name",
+    "symbol",
+    "aliases",
+    "issuer_or_operator",
+    "official_domain",
+    "deployment_identity",
+    "predecessor_successor_lineage"
+  ],
+  "duplicates": [
+    {
+      "candidate_id": "sog_cand_pr427_eurau",
+      "candidate_name": "EURAU",
+      "existing_canonical_id": "sog_st_eurau",
+      "existing_slug": "eurau",
+      "canonical_source_file": "data/stablecoins-batch-p.json",
+      "match_type": "exact_identity",
+      "decision": "suppress_from_growth"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_eurq",
+      "candidate_name": "Quantoz EURQ",
+      "existing_canonical_id": "sog_st_eurq",
+      "existing_slug": "eurq",
+      "canonical_source_file": "data/stablecoins-batch-j.json",
+      "match_type": "exact_identity",
+      "decision": "suppress_from_growth"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usdq",
+      "candidate_name": "Quantoz USDQ",
+      "existing_canonical_id": "sog_st_usdq",
+      "existing_slug": "usdq",
+      "canonical_source_file": "data/stablecoins-batch-f.json",
+      "match_type": "exact_identity",
+      "decision": "suppress_from_growth"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usr",
+      "candidate_name": "Resolv USD",
+      "existing_canonical_id": "sog_st_usr",
+      "existing_slug": "usr",
+      "canonical_source_file": "data/stablecoins-batch-c.json",
+      "match_type": "exact_identity",
+      "decision": "suppress_from_growth"
+    }
+  ],
+  "distinct_rows": [
+    "sog_cand_pr427_open_usd",
+    "sog_cand_pr427_fiusd",
+    "sog_cand_pr427_chfau",
+    "sog_cand_pr427_sekau",
+    "sog_cand_pr427_plnq",
+    "sog_cand_pr427_gbpq",
+    "sog_cand_pr427_roughrider"
+  ],
+  "boundary": {
+    "duplicate_record_promotion_allowed": false,
+    "existing_record_maintenance_may_be_reviewed_later": true,
+    "canonical_changes_in_pr427": 0
+  }
+}

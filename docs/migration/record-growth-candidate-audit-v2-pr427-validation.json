@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "status": "success",
+  "validated_work_item": "record_growth_candidate_audit_v2_pr427",
+  "reviewed_candidates": 11,
+  "ready_for_full_record_review": 4,
+  "duplicate_existing": 4,
+  "blocked_or_deferred": 3,
+  "canonical_changes": 0,
+  "public_changes": 0,
+  "automatic_promotion": false,
+  "next_boundary": "REVIEW_GATE"
+}

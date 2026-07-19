@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "sog_record_growth_candidate_audit_v2_pr427_2026_07_18",
+  "status": "reviewed_internal_complete",
+  "reviewed_at": "2026-07-18",
+  "authority_pr": 426,
+  "implementation_pr": 427,
+  "canonical_baseline": {
+    "stable_assets": 112,
+    "organizations": 107,
+    "relationships": 124,
+    "events": 187,
+    "evidence": 559,
+    "evidence_relations": 559,
+    "deployments": 174,
+    "market_access_records": 8
+  },
+  "canonical_boundary": {
+    "included_in_public_counts": false,
+    "automatic_promotion": false,
+    "canonical_changes_allowed": false,
+    "manual_review_required": true
+  },
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr427_open_usd",
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "proposed_slug": "open-usd",
+      "issuer_or_operator": "Open Standard",
+      "official_domain": "openstandard.xyz",
+      "reference_asset": "USD",
+      "mechanism_hypothesis": "fiat_referenced_stablecoin_mechanism_not_yet_fully_documented",
+      "lifecycle_hypothesis": "beta_or_early_launch",
+      "source_leads": [
+        {
+          "source_id": "pr427_visa_vsp_open_usd",
+          "publisher": "Visa",
+          "url": "https://corporate.visa.com/en/sites/visa-perspectives/newsroom/visa-stablecoin-platform.html",
+          "source_type": "official_platform_launch",
+          "primary": true,
+          "claim_scopes": ["asset_name", "platform_integration", "mint_burn_transfer_support", "select_client_beta"]
+        }
+      ],
+      "duplicate_review": {
+        "asset_id_match": false,
+        "slug_match": false,
+        "canonical_name_match": false,
+        "symbol_match": false,
+        "alias_match": false,
+        "issuer_or_operator_match": false,
+        "official_domain_match": false,
+        "deployment_identity_match": false,
+        "lineage_match": false,
+        "existing_canonical_id": null,
+        "decision": "distinct_identity_subject_to_full_review"
+      },
+      "blocking_unknowns": ["legal_issuer_identity", "reserve_composition_and_safeguarding", "redemption_terms", "canonical_contract_addresses", "independent_public_circulation_evidence"],
+      "complete_record_feasibility": {"state": "partial", "complete_record_possible_now": false},
+      "reviewed_disposition": "deferred"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_fiusd",
+      "name": "FIUSD",
+      "symbol": "FIUSD",
+      "proposed_slug": "fiusd",
+      "issuer_or_operator": "Fiserv",
+      "official_domain": "fiserv.com",
+      "reference_asset": "USD",
+      "mechanism_hypothesis": "fully_reserved_usd_backed_institutional_stablecoin",
+      "lifecycle_hypothesis": "marketed_current_product",
+      "source_leads": [
+        {
+          "source_id": "pr427_fiserv_fiusd_product",
+          "publisher": "Fiserv",
+          "url": "https://www.fiserv.com/en/solutions/embedded-finance/fiusd-stablecoin.html",
+          "source_type": "official_product_page",
+          "primary": true,
+          "claim_scopes": ["asset_identity", "fully_reserved_claim", "one_dollar_redemption_claim", "institutional_use"]
+        },
+        {
+          "source_id": "pr427_fiserv_fiusd_launch",
+          "publisher": "Fiserv",
+          "url": "https://investors.fiserv.com/news-releases/news-release-details/fiserv-launches-new-fiusd-stablecoin-financial-institutions",
+          "source_type": "official_launch_announcement",
+          "primary": true,
+          "claim_scopes": ["launch_plan", "platform_scope", "infrastructure_partners", "institutional_distribution"]
+        }
+      ],
+      "duplicate_review": {
+        "asset_id_match": false,
+        "slug_match": false,
+        "canonical_name_match": false,
+        "symbol_match": false,
+        "alias_match": false,
+        "issuer_or_operator_match": false,
+        "official_domain_match": false,
+        "deployment_identity_match": false,
+        "lineage_match": false,
+        "existing_canonical_id": null,
+        "decision": "distinct_identity_subject_to_full_review"
+      },
+      "blocking_unknowns": ["legal_issuer_and_redemption_counterparty", "canonical_contract_addresses", "first_public_issuance_date", "reserve_report_series", "independent_deployment_identity"],
+      "complete_record_feasibility": {"state": "partial", "complete_record_possible_now": false},
+      "reviewed_disposition": "insufficient_evidence"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_eurau",
+      "name": "EURAU",
+      "symbol": "EURAU",
+      "proposed_slug": "eurau",
+      "issuer_or_operator": "AllUnity",
+      "official_domain": "allunity.com",
+      "reference_asset": "EUR",
+      "mechanism_hypothesis": "fully_reserved_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [{"source_id": "pr427_allunity_eurau", "publisher": "AllUnity", "url": "https://allunity.com/stablecoins", "source_type": "official_product_page", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "reserve_model", "redemption"]}],
+      "duplicate_review": {
+        "asset_id_match": true,
+        "slug_match": true,
+        "canonical_name_match": true,
+        "symbol_match": true,
+        "alias_match": true,
+        "issuer_or_operator_match": true,
+        "official_domain_match": true,
+        "deployment_identity_match": true,
+        "lineage_match": true,
+        "existing_canonical_id": "sog_st_eurau",
+        "canonical_source_file": "data/stablecoins-batch-p.json",
+        "decision": "exact_existing_canonical_identity"
+      },
+      "blocking_unknowns": ["existing_record_maintenance_only"],
+      "complete_record_feasibility": {"state": "not_applicable", "complete_record_possible_now": false},
+      "reviewed_disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_chfau",
+      "name": "AllUnity CHF",
+      "symbol": "CHFAU",
+      "proposed_slug": "chfau",
+      "issuer_or_operator": "AllUnity",
+      "official_domain": "allunity.com",
+      "reference_asset": "CHF",
+      "mechanism_hypothesis": "fully_reserved_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [
+        {"source_id": "pr427_allunity_chfau_launch", "publisher": "AllUnity", "url": "https://allunity.com/news/allunity-launches-the-first-fully-reserved-micar-compliant-swiss-franc-stablecoin-chfau", "source_type": "official_launch_announcement", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "launch_date", "reserve_model", "ethereum_launch", "institutional_mint_access"]},
+        {"source_id": "pr427_allunity_chfau_polygon", "publisher": "AllUnity", "url": "https://allunity.com/news/allunity-launches-chfau-on-polygon", "source_type": "official_deployment_announcement", "primary": true, "claim_scopes": ["polygon_deployment", "current_network_inventory", "redemption_right", "reserve_model"]},
+        {"source_id": "pr427_allunity_chfau_market_state", "publisher": "AllUnity", "url": "https://allunity.com/news/allunity%E2%80%99s-fully-reserved-swiss-franc-stablecoin-becomes-largest-chf-stablecoin-surpassing-chf-39-million-tvl-in-four-months", "source_type": "official_current_state_announcement", "primary": true, "claim_scopes": ["continued_active_state", "circulation_signal", "launch_date", "reserve_model"]}
+      ],
+      "duplicate_review": {"asset_id_match": false, "slug_match": false, "canonical_name_match": false, "symbol_match": false, "alias_match": false, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": false, "lineage_match": false, "existing_canonical_id": null, "decision": "distinct_asset_same_existing_issuer"},
+      "blocking_unknowns": ["exact_contract_addresses_by_network", "complete_reserve_report_series", "legal_terms_version_history", "complete_distribution_inventory"],
+      "complete_record_feasibility": {"state": "usable", "complete_record_possible_now": true},
+      "reviewed_disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_sekau",
+      "name": "AllUnity SEK",
+      "symbol": "SEKAU",
+      "proposed_slug": "sekau",
+      "issuer_or_operator": "AllUnity",
+      "official_domain": "allunity.com",
+      "reference_asset": "SEK",
+      "mechanism_hypothesis": "fully_reserved_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [
+        {"source_id": "pr427_allunity_sekau_launch", "publisher": "AllUnity", "url": "https://allunity.com/news/allunity-launches-the-first-fully-reserved-swedish-krona-backed-stablecoin-sekau", "source_type": "official_launch_announcement", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "launch_date", "reserve_model", "redemption_right", "initial_networks", "institutional_mint_access"]},
+        {"source_id": "pr427_allunity_sekau_intent", "publisher": "AllUnity", "url": "https://allunity.com/news/allunity-announces-intent-to-launch-the-first-swedish-krona%E2%80%93backed-stablecoin-and-launches-agentic-payments", "source_type": "official_prelaunch_announcement", "primary": true, "claim_scopes": ["prelaunch_chronology", "planned_launch_month", "reserve_model", "regulatory_structure"]}
+      ],
+      "duplicate_review": {"asset_id_match": false, "slug_match": false, "canonical_name_match": false, "symbol_match": false, "alias_match": false, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": false, "lineage_match": false, "existing_canonical_id": null, "decision": "distinct_asset_same_existing_issuer"},
+      "blocking_unknowns": ["exact_contract_addresses_by_network", "first_mint_and_supply_evidence", "complete_reserve_report_series", "distribution_inventory"],
+      "complete_record_feasibility": {"state": "usable", "complete_record_possible_now": true},
+      "reviewed_disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_eurq",
+      "name": "Quantoz EURQ",
+      "symbol": "EURQ",
+      "proposed_slug": "eurq",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "official_domain": "quantoz.com",
+      "reference_asset": "EUR",
+      "mechanism_hypothesis": "regulated_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [{"source_id": "pr427_quantoz_eurq_product", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/products/eurq-usdq", "source_type": "official_product_page", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "redemption", "reserve_model"]}],
+      "duplicate_review": {"asset_id_match": true, "slug_match": true, "canonical_name_match": true, "symbol_match": true, "alias_match": true, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": true, "lineage_match": true, "existing_canonical_id": "sog_st_eurq", "canonical_source_file": "data/stablecoins-batch-j.json", "decision": "exact_existing_canonical_identity"},
+      "blocking_unknowns": ["existing_record_maintenance_only"],
+      "complete_record_feasibility": {"state": "not_applicable", "complete_record_possible_now": false},
+      "reviewed_disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usdq",
+      "name": "Quantoz USDQ",
+      "symbol": "USDQ",
+      "proposed_slug": "usdq",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "official_domain": "quantoz.com",
+      "reference_asset": "USD",
+      "mechanism_hypothesis": "regulated_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [{"source_id": "pr427_quantoz_usdq_product", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/products/eurq-usdq", "source_type": "official_product_page", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "redemption", "reserve_model"]}],
+      "duplicate_review": {"asset_id_match": true, "slug_match": true, "canonical_name_match": true, "symbol_match": true, "alias_match": true, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": true, "lineage_match": true, "existing_canonical_id": "sog_st_usdq", "canonical_source_file": "data/stablecoins-batch-f.json", "decision": "exact_existing_canonical_identity"},
+      "blocking_unknowns": ["existing_record_maintenance_only"],
+      "complete_record_feasibility": {"state": "not_applicable", "complete_record_possible_now": false},
+      "reviewed_disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_plnq",
+      "name": "Quantoz PLNQ",
+      "symbol": "PLNQ",
+      "proposed_slug": "plnq",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "official_domain": "quantoz.com",
+      "reference_asset": "PLN",
+      "mechanism_hypothesis": "regulated_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [
+        {"source_id": "pr427_quantoz_plnq_launch", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/blog/quantoz-payments-becomes-europes-leading-stablecoin-issuer-with-five-licensed-tokens-adding-polish-zloty-and-british-pound", "source_type": "official_launch_announcement", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "launch_date", "regulatory_structure", "use_cases"]},
+        {"source_id": "pr427_quantoz_plnq_whitepaper_index", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/resources", "source_type": "official_resource_index", "primary": true, "claim_scopes": ["whitepaper_identity", "terms_version", "redemption_and_reserve_document_availability"]},
+        {"source_id": "pr427_quantoz_plnq_marketing", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/marketing-communications", "source_type": "official_marketing_communication", "primary": true, "claim_scopes": ["token_identity", "ethereum_identity", "regulatory_disclosure"]}
+      ],
+      "duplicate_review": {"asset_id_match": false, "slug_match": false, "canonical_name_match": false, "symbol_match": false, "alias_match": false, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": false, "lineage_match": false, "existing_canonical_id": null, "decision": "distinct_asset_same_existing_issuer"},
+      "blocking_unknowns": ["exact_contract_address_confirmation", "complete_reserve_report_series", "distribution_and_circulation_evidence", "redemption_channel_inventory"],
+      "complete_record_feasibility": {"state": "usable", "complete_record_possible_now": true},
+      "reviewed_disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_gbpq",
+      "name": "Quantoz GBPQ",
+      "symbol": "GBPQ",
+      "proposed_slug": "gbpq",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "official_domain": "quantoz.com",
+      "reference_asset": "GBP",
+      "mechanism_hypothesis": "regulated_micar_e_money_token",
+      "lifecycle_hypothesis": "active",
+      "source_leads": [
+        {"source_id": "pr427_quantoz_gbpq_launch", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/blog/quantoz-payments-becomes-europes-leading-stablecoin-issuer-with-five-licensed-tokens-adding-polish-zloty-and-british-pound", "source_type": "official_launch_announcement", "primary": true, "claim_scopes": ["asset_identity", "issuer_identity", "launch_date", "regulatory_structure", "use_cases"]},
+        {"source_id": "pr427_quantoz_gbpq_whitepaper_index", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/resources", "source_type": "official_resource_index", "primary": true, "claim_scopes": ["whitepaper_identity", "terms_version", "redemption_and_reserve_document_availability"]},
+        {"source_id": "pr427_quantoz_gbpq_marketing", "publisher": "Quantoz Payments B.V.", "url": "https://www.quantoz.com/marketing-communications", "source_type": "official_marketing_communication", "primary": true, "claim_scopes": ["token_identity", "ethereum_identity", "regulatory_disclosure"]}
+      ],
+      "duplicate_review": {"asset_id_match": false, "slug_match": false, "canonical_name_match": false, "symbol_match": false, "alias_match": false, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": false, "lineage_match": false, "existing_canonical_id": null, "decision": "distinct_asset_same_existing_issuer"},
+      "blocking_unknowns": ["exact_contract_address_confirmation", "complete_reserve_report_series", "distribution_and_circulation_evidence", "redemption_channel_inventory"],
+      "complete_record_feasibility": {"state": "usable", "complete_record_possible_now": true},
+      "reviewed_disposition": "ready_for_full_record_review"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_usr",
+      "name": "Resolv USD",
+      "symbol": "USR",
+      "proposed_slug": "usr",
+      "issuer_or_operator": "Resolv / RDAL",
+      "official_domain": "resolv.xyz",
+      "reference_asset": "USD",
+      "mechanism_hypothesis": "crypto_native_delta_neutral_with_insurance_tranche",
+      "lifecycle_hypothesis": "limited_incident_recovery",
+      "source_leads": [
+        {"source_id": "pr427_resolv_usr_docs", "publisher": "Resolv", "url": "https://docs.resolv.xyz/litepaper/overview/usr", "source_type": "official_protocol_documentation", "primary": true, "claim_scopes": ["asset_identity", "mechanism", "minting", "redemption", "collateral"]},
+        {"source_id": "pr427_resolv_terms", "publisher": "Resolv / RDAL", "url": "https://docs.resolv.xyz/litepaper/legal/terms-of-service", "source_type": "official_legal_terms", "primary": true, "claim_scopes": ["legal_issuer", "terms", "access_restrictions"]}
+      ],
+      "duplicate_review": {"asset_id_match": true, "slug_match": true, "canonical_name_match": true, "symbol_match": true, "alias_match": true, "issuer_or_operator_match": true, "official_domain_match": true, "deployment_identity_match": true, "lineage_match": true, "existing_canonical_id": "sog_st_usr", "canonical_source_file": "data/stablecoins-batch-c.json", "decision": "exact_existing_canonical_identity"},
+      "blocking_unknowns": ["incident_and_record_maintenance_only"],
+      "complete_record_feasibility": {"state": "not_applicable", "complete_record_possible_now": false},
+      "reviewed_disposition": "duplicate_existing"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_roughrider",
+      "name": "Roughrider Coin",
+      "symbol": null,
+      "proposed_slug": "roughrider-coin",
+      "issuer_or_operator": "Bank of North Dakota / Fiserv",
+      "official_domain": "fiserv.com",
+      "reference_asset": "USD",
+      "mechanism_hypothesis": "fully_usd_backed_bank_network_stablecoin_announced",
+      "lifecycle_hypothesis": "announced_launch_window",
+      "source_leads": [{"source_id": "pr427_fiserv_roughrider_announcement", "publisher": "Fiserv / Bank of North Dakota", "url": "https://investors.fiserv.com/news-releases/news-release-details/bank-north-dakota-and-fiserv-partner-launch-roughrider-coin", "source_type": "official_launch_plan", "primary": true, "claim_scopes": ["asset_name", "operator_partnership", "usd_backing_claim", "2026_availability_target", "intended_user_cohort"]}],
+      "duplicate_review": {"asset_id_match": false, "slug_match": false, "canonical_name_match": false, "symbol_match": false, "alias_match": false, "issuer_or_operator_match": false, "official_domain_match": false, "deployment_identity_match": false, "lineage_match": false, "existing_canonical_id": null, "decision": "distinct_announced_identity_not_yet_launched"},
+      "blocking_unknowns": ["current_launch_status", "symbol", "legal_issuance_structure", "contract_addresses", "public_circulation_evidence"],
+      "complete_record_feasibility": {"state": "absent", "complete_record_possible_now": false},
+      "reviewed_disposition": "prelaunch_or_noncanonical"
+    }
+  ],
+  "summary": {
+    "reviewed": 11,
+    "ready_for_full_record_review": 4,
+    "duplicate_existing": 4,
+    "prelaunch_or_noncanonical": 1,
+    "insufficient_evidence": 1,
+    "deferred": 1,
+    "canonical_changes": 0,
+    "next_boundary": "REVIEW_GATE"
+  }
+}
