@@ -130,8 +130,8 @@ jobs:
           const manifest = JSON.parse(fs.readFileSync('dist/data/manifest.json', 'utf8'));
           if (manifest.record_counts?.primary_records !== 114) throw new Error('public primary record count is not 114');
           if (manifest.record_count_breakdown?.stablecoins !== 114) throw new Error('public stablecoin count is not 114');
-          if (manifest.record_count_breakdown?.events !== 189) throw new Error('public event count is not 189');
-          if (manifest.record_count_breakdown?.evidence !== 565) throw new Error('public evidence count is not 565');
+          if (manifest.record_counts?.events !== 189) throw new Error('public event count is not 189');
+          if (manifest.record_counts?.evidence !== 565) throw new Error('public evidence count is not 565');
           if (manifest.data_safety?.canonical_only !== true) throw new Error('canonical-only boundary changed');
           if (manifest.data_safety?.includes_unreviewed_candidates !== false) throw new Error('unreviewed candidate boundary changed');
           NODE
