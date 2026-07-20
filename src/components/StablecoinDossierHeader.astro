@@ -1,7 +1,7 @@
 ---
 import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
-import { formatIssuanceLabel, formatLifecycleLabel } from '../utils/publicTaxonomy';
+import { formatLifecycleLabel } from '../utils/publicTaxonomy';
 
 const {
   coin,
@@ -18,43 +18,36 @@ const {
   latestMaterialEventSummary
 } = Astro.props;
 ---
-<header class="stablecoin-dossier-masthead" aria-label="Current meaning of this record">
+<header class="stablecoin-dossier-masthead stablecoin-dossier-masthead-r4" aria-label="Current reviewed meaning of this record">
   <div class="stablecoin-dossier-overline">
     <span>Stablecoin dossier</span>
-    <a href="/stablecoins/">Return to register</a>
+    <nav aria-label="Dossier utilities"><a href="/stablecoins/">Register</a><a href="/contact/">Report a correction</a></nav>
   </div>
 
   <div class="stablecoin-dossier-title-row">
     <div>
       <p class="stablecoin-record-id">Record <code>{coin.id}</code></p>
-      <h1><span>{coin.symbol ?? '—'}</span><i aria-hidden="true">/</i>{coin.name}</h1>
-      <p class="stablecoin-aliases">
-        {aliases.length > 0 ? <>Also recorded as {aliases.join(', ')}</> : 'No additional aliases are recorded.'}
-      </p>
+      <h1>{coin.name}<span>{coin.symbol ?? 'No symbol recorded'}</span></h1>
+      {aliases.length > 0 && <p class="stablecoin-aliases">Also recorded as {aliases.join(', ')}</p>}
     </div>
     <span class={statusClass}>{formatLifecycleLabel(coin.lifecycle_status)}</span>
   </div>
 
-  <dl class="stablecoin-dossier-facts" aria-label="Current reviewed stablecoin facts">
+  <dl class="stablecoin-dossier-facts stablecoin-dossier-facts-r4" aria-label="Six primary stablecoin facts">
     <div><dt>Lifecycle</dt><dd>{formatLifecycleLabel(coin.lifecycle_status)}</dd></div>
-    <div><dt>Issuance</dt><dd>{formatIssuanceLabel(coin.issuance_status)}</dd></div>
-    <div><dt>Reference target</dt><dd>{reference.public_label}</dd></div>
-    <div>
-      <dt>Primary organization</dt>
-      <dd>
-        {primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Not recorded'}
-        <small>{additionalRelationshipCount > 0 ? `${additionalRelationshipCount} additional relationship${additionalRelationshipCount === 1 ? '' : 's'}` : 'No additional recorded relationship'}</small>
-      </dd>
-    </div>
-    <div><dt>Launch</dt><dd><ValueStateText value={coin.launch_date} /></dd></div>
-    <div><dt>Redemption</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div>
+    <div><dt>Reference</dt><dd>{reference.public_label}</dd></div>
     <div><dt>Backing</dt><dd>{model.public_label}</dd></div>
-    <div><dt>Stabilization</dt><dd>{model.stabilization_label}</dd></div>
-    <div><dt>Last review</dt><dd><ValueStateText value={coin.last_verified_at} /></dd></div>
+    <div><dt>Redemption / exit</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div>
+    <div><dt>Primary organization</dt><dd>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Not recorded'}<small>{additionalRelationshipCount > 0 ? `${additionalRelationshipCount} additional relationship${additionalRelationshipCount === 1 ? '' : 's'}` : 'No additional relationship recorded'}</small></dd></div>
     <div><dt>Evidence</dt><dd><a href="#evidence">{evidenceCount} source record{evidenceCount === 1 ? '' : 's'}</a></dd></div>
   </dl>
 
-  <aside class="stablecoin-material-change" aria-label="Latest material change">
+  <div class="stablecoin-dossier-review-line">
+    <span>Launch <ValueStateText value={coin.launch_date} /></span>
+    <span>Last reviewed <ValueStateText value={coin.last_verified_at} /></span>
+  </div>
+
+  <aside class="stablecoin-material-change stablecoin-material-change-r4" aria-label="Latest material change">
     <span>Latest material change</span>
     {latestMaterialEvent ? (
       <div>
