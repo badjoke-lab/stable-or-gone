@@ -14,8 +14,8 @@ const shell = read('src/styles/shell.css');
 const valueSections = read('src/components/StablecoinValueStateSections.astro');
 
 check(pageFamilyContracts.length === 11, 'all eleven protected page families must be covered');
-check(requiredMobileTableKinds.length === 25, 'all twenty-five protected table kinds must remain registered');
-check(Object.keys(implementedMobileTableRepresentations).length === 25, 'all protected table kinds need compact representations');
+check(requiredMobileTableKinds.length === 23, 'all twenty-three protected table kinds must remain registered');
+check(Object.keys(implementedMobileTableRepresentations).length === 23, 'all protected table kinds need compact representations');
 check(responsiveAccessibilityPolicies.implementation_deferred === false, 'mobile hardening may not remain deferred');
 check(responsiveAccessibilityPolicies.implementation_starts_at_pr === 270, 'mobile hardening PR changed');
 
@@ -68,14 +68,15 @@ check(generatedKinds.length === 8, 'generated compact representation count chang
 for (const kind of ['stablecoin-record-coverage', 'issuer-control-events', 'stablecoin-event-timeline', 'stablecoin-deployments', 'stablecoin-sources', 'methodology-value-states', 'methodology-primary-display-relationships', 'methodology-evidence-source-identities']) check(generatedKinds.includes(kind), `runtime-generated compact representation missing: ${kind}`);
 
 const result = {
-  schema_version: '1.2',
+  schema_version: '1.3',
   ok: failures.length === 0,
-  gate: 'V3-E',
+  gate: 'V3-E-R5',
   shell: 'evidence-registry-pr411',
   page_families: pageFamilyContracts.length,
   protected_tables: requiredMobileTableKinds.length,
-  explicit_representations: 17,
+  explicit_representations: 15,
   generated_representations: generatedKinds.length,
+  retired_duplicate_tables: ['organization-overview', 'event-details'],
   route_changes: 0,
   canonical_record_changes: 0,
   owner_approval_changes: 0,
