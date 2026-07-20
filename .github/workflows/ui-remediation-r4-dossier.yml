@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
   pull-requests: write
 
 concurrency:
@@ -40,6 +41,8 @@ jobs:
           grep -q 'stablecoin-dossier-facts-r4' src/components/StablecoinDossierHeader.astro
           grep -q 'slice(0, 10)' src/components/StablecoinContextSections.astro
           test -z "$(git diff --name-only origin/main...HEAD -- data/ public/data/ config/site-architecture.mjs docs/migration/current-canonical-checkpoint.json docs/migration/current-stats-history-checkpoint.json docs/migration/registry-release-integrity-baseline.json)"
+      - name: Validate shared R4 dossier contracts
+        run: npm run validate:ui-v3-stablecoin-detail && npm run prepare:stablecoin-dossier-hierarchy
       - name: Validate canonical data
         run: npm run validate:data
       - name: Validate Evidence relations
