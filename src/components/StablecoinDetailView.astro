@@ -133,14 +133,15 @@ const redemptionProfile = coin.redemption_profile;
 
   <script is:inline>
     (() => {
-      const media = window.matchMedia('(max-width: 760px)');
+      const compact = window.matchMedia('(max-width: 900px)');
+      const defaultClosed = new Set(['mechanism', 'more']);
       const sync = () => {
         document.querySelectorAll('[data-r4-section]').forEach((section) => {
-          if (section instanceof HTMLDetailsElement) section.open = !media.matches;
+          if (section instanceof HTMLDetailsElement) section.open = !compact.matches && !defaultClosed.has(section.id);
         });
       };
       sync();
-      media.addEventListener?.('change', sync);
+      compact.addEventListener?.('change', sync);
     })();
   </script>
 </BaseLayout>
