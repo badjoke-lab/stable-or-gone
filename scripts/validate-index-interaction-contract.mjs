@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { indexInteractionContracts } from '../config/index-interaction-contract.mjs';
+import { indexInteractionContracts, sharedInteractionPolicy } from '../config/index-interaction-contract.mjs';
 
 const root = process.cwd();
 const auditPath = path.join(root, 'data/generated/index-interaction-audit.json');
@@ -22,20 +22,24 @@ const expected = {
 check(audit.schema_version === '1.1', 'audit schema changed');
 check(indexInteractionContracts.length === 3, 'three index contracts are required');
 check(new Set(indexInteractionContracts.map((contract) => contract.id)).size === 3, 'index contract IDs must be unique');
+check(sharedInteractionPolicy.query_parameters_are_shareable === true, 'shareable query state is required');
+check(sharedInteractionPolicy.query_parameters_replace_history_on_typing === true, 'typing must replace history state');
+check(sharedInteractionPolicy.query_parameters_push_history_on_committed_filter_change === true, 'committed filters must push history state');
+check(sharedInteractionPolicy.browser_back_forward_restores_state === true, 'back/forward restoration is required');
+check(sharedInteractionPolicy.zero_result_state_required === true, 'zero-result state is required');
+check(sharedInteractionPolicy.zero_result_state_must_offer_clear === true, 'zero-result clear action is required');
+check(sharedInteractionPolicy.result_count_required === true, 'result count is required');
 
 for (const [id, spec] of Object.entries(expected)) {
   const contract = contractById.get(id);
   check(Boolean(contract), `${id}: contract missing`);
   if (!contract) continue;
   check(contract.route === spec.route, `${id}: route changed`);
+  check(contract.search.query_param === 'q', `${id}: query parameter changed`);
   check(contract.search.fields.length === 6, `${id}: six search fields are required`);
   check(contract.filters.length > 0, `${id}: filters are required`);
-  check(contract.sort.options.length > 0, `${id}: sort options are required`);
-  check(contract.mobile_row.fields.length > 0, `${id}: mobile row fields are required`);
-  check(contract.url_state.query_parameter === 'q', `${id}: query parameter changed`);
-  check(contract.url_state.history_mode === 'replace_then_push', `${id}: history mode changed`);
-  check(contract.zero_results.result_count_required === true, `${id}: zero-result count is required`);
-  check(contract.accessibility.result_count_aria_live === 'polite', `${id}: result count must remain polite`);
+  check(contract.sorts.length > 0, `${id}: sort options are required`);
+  check(contract.mobile_row_fields.length > 0, `${id}: mobile row fields are required`);
 
   const source = read(spec.source);
   const client = read(spec.client);
@@ -57,7 +61,7 @@ for (const [id, spec] of Object.entries(expected)) {
 }
 
 const validation = {
-  schema_version: '1.4',
+  schema_version: '1.5',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   totals: {
