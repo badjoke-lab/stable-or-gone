@@ -73,6 +73,21 @@ for (const viewport of viewports) {
         return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) !== 0 && rect.width > 0 && rect.height > 0;
       };
       const px = (value) => Number.parseFloat(String(value || '0')) || 0;
+      const selectorFor = (element) => {
+        if (!(element instanceof Element)) return '';
+        if (element.id) return `#${element.id}`;
+        const parts = [];
+        let current = element;
+        for (let depth = 0; current && current !== document.body && depth < 4; depth += 1) {
+          let part = current.tagName.toLowerCase();
+          if (current.classList.length) part += `.${[...current.classList].slice(0, 3).join('.')}`;
+          const siblings = current.parentElement ? [...current.parentElement.children].filter((child) => child.tagName === current.tagName) : [];
+          if (siblings.length > 1) part += `:nth-of-type(${siblings.indexOf(current) + 1})`;
+          parts.unshift(part);
+          current = current.parentElement;
+        }
+        return parts.join(' > ');
+      };
       const root = document.documentElement;
       const body = document.body;
       const header = document.querySelector('.site-header');
@@ -90,16 +105,42 @@ for (const viewport of viewports) {
         .filter((element) => !element.closest('code,pre,kbd,samp,[data-long-value],.contract-address,.transaction-hash'))
         .filter((element) => window.getComputedStyle(element).wordBreak === 'break-all')
         .slice(0, 20)
-        .map((element) => `${element.tagName.toLowerCase()}${element.className ? `.${String(element.className).trim().replace(/\s+/g, '.')}` : ''}`);
+        .map((element) => selectorFor(element));
       const clippedText = [...document.querySelectorAll('h1,h2,h3,p,a,button,label,th,td,dt,dd')]
         .filter((element) => visible(element))
         .filter((element) => !element.classList.contains('visually-hidden') && !element.closest('.visually-hidden'))
         .filter((element) => element.scrollWidth > element.clientWidth + 2 && window.getComputedStyle(element).overflowX === 'hidden')
         .slice(0, 20)
-        .map((element) => `${element.tagName.toLowerCase()}${element.className ? `.${String(element.className).trim().replace(/\s+/g, '.')}` : ''}`);
+        .map((element) => selectorFor(element));
       const tableFontSizes = [...document.querySelectorAll('table th, table td')]
         .filter((element) => visible(element))
         .map((element) => px(window.getComputedStyle(element).fontSize));
+      const overflowElements = [...document.querySelectorAll('body *')]
+        .filter((element) => visible(element))
+        .map((element) => {
+          const rect = element.getBoundingClientRect();
+          const style = window.getComputedStyle(element);
+          const overflowAmount = Math.max(0, rect.right - window.innerWidth, -rect.left, element.scrollWidth - window.innerWidth);
+          return {
+            selector: selectorFor(element),
+            left: Math.round(rect.left * 100) / 100,
+            right: Math.round(rect.right * 100) / 100,
+            width: Math.round(rect.width * 100) / 100,
+            clientWidth: element.clientWidth,
+            scrollWidth: element.scrollWidth,
+            minWidth: style.minWidth,
+            maxWidth: style.maxWidth,
+            computedWidth: style.width,
+            display: style.display,
+            position: style.position,
+            overflowX: style.overflowX,
+            transform: style.transform,
+            overflowAmount
+          };
+        })
+        .filter((entry) => entry.overflowAmount > 1)
+        .sort((left, right) => right.overflowAmount - left.overflowAmount)
+        .slice(0, 20);
       return {
         title: document.title,
         runtimeState: root.dataset.uiRemediationR2 || '',
@@ -124,6 +165,7 @@ for (const viewport of viewports) {
         forbiddenText,
         breakAll,
         clippedText,
+        overflowElements,
         minimumTableFontSize: tableFontSizes.length ? Math.min(...tableFontSizes) : null
       };
     }, { forbiddenReadyText, technicalTags: [...technicalTags] });
@@ -138,7 +180,10 @@ for (const viewport of viewports) {
     if (pageErrors.length) recordFailures.push(`page errors: ${pageErrors.join(' | ')}`);
     if (failedRequests.length) recordFailures.push(`failed requests: ${failedRequests.join(' | ')}`);
     if (failedResponses.length) recordFailures.push(`failed responses: ${failedResponses.join(' | ')}`);
-    if (audit.scrollWidth > audit.viewportWidth + 1) recordFailures.push(`horizontal page overflow ${audit.scrollWidth}px > ${audit.viewportWidth}px`);
+    if (audit.scrollWidth > audit.viewportWidth + 1) {
+      const offenders = audit.overflowElements.slice(0, 6).map((entry) => `${entry.selector}[left=${entry.left},right=${entry.right},width=${entry.width},scroll=${entry.scrollWidth},min=${entry.minWidth},display=${entry.display},position=${entry.position}]`).join(' | ');
+      recordFailures.push(`horizontal page overflow ${audit.scrollWidth}px > ${audit.viewportWidth}px; offenders=${offenders || 'none detected'}`);
+    }
     if (audit.headerHeight > viewport.headerMax) recordFailures.push(`header ${audit.headerHeight}px exceeds ${viewport.headerMax}px; inline=${audit.headerInlineHeight || 'none'} priority=${audit.headerInlinePriority || 'none'} nav=${audit.navigationDisplay || 'unknown'} columns=${audit.headerInnerColumns || 'unknown'}`);
     if (!audit.h1Text) recordFailures.push('missing visible H1');
     if (audit.h1FontSize > viewport.h1Max + 0.25) recordFailures.push(`H1 ${audit.h1FontSize}px exceeds ${viewport.h1Max}px; inline=${audit.h1InlineFontSize || 'none'} priority=${audit.h1InlinePriority || 'none'}`);
@@ -170,7 +215,7 @@ for (const viewport of viewports) {
 await browser.close();
 
 const manifest = {
-  schemaVersion: '1.1',
+  schemaVersion: '1.2',
   authority: 'docs/ui-v3-remediation-authority.md',
   phase: 'R2',
   createdAt: new Date().toISOString(),
