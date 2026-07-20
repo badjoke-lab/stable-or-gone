@@ -31,5 +31,27 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
 <a class:list={['brand-lockup', compact && 'brand-lockup--compact', className]} href={href} aria-label="Stable or Gone home">
   <img src={asset} alt="Stable or Gone" width={compact ? 56 : 228} height={compact ? 56 : 56} decoding="async" />
 </a>
-{loadsGlobalRuntime && <style is:inline data-ui-remediation-r2-runtime>@import url("/ui-remediation-r2.css?runtime=1");</style>}
+{loadsGlobalRuntime && <script is:inline>
+  (() => {
+    const marker = 'ui-remediation-r2-runtime-style';
+    if (document.getElementById(marker)) return;
+    fetch('/ui-remediation-r2.css?runtime=2', { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) throw new Error(`R2 stylesheet request failed: ${response.status}`);
+        return response.text();
+      })
+      .then((css) => {
+        const style = document.createElement('style');
+        style.id = marker;
+        style.dataset.uiRemediationR2Runtime = 'loaded';
+        style.textContent = css;
+        document.body.append(style);
+        document.documentElement.dataset.uiRemediationR2 = 'ready';
+      })
+      .catch((error) => {
+        document.documentElement.dataset.uiRemediationR2 = 'failed';
+        console.error(error);
+      });
+  })();
+</script>}
 {loadsGlobalRuntime && <><MobileTableRuntime /><DisclosureRuntime /><TerminalContentRuntime /></>}
