@@ -12,7 +12,7 @@ const renderEvent = (event: any) => ({
   description: eventPublicCopy[event.id]?.description ?? event.description
 });
 ---
-<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-history" id="events" open>
+<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-history" id="events" data-r4-section open>
   <summary class="stablecoin-r4-section-summary"><span><small>Lifecycle</small><strong>Material events</strong></span><b>{events.length}</b></summary>
   <div class="stablecoin-r4-section-body">
     <p class="stablecoin-r4-section-intro">Current classification remains separate from dated changes and incidents. The five latest records are shown first.</p>
