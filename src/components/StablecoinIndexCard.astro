@@ -27,3 +27,20 @@ const data = {
   </div>
   <p class="stablecoin-index-card-meta"><span>{record.referenceLabel}</span><span>{record.backingLabel}</span><span>{record.sourceIdentityCount} sources</span><span>{record.reviewedAt || 'Not reviewed'}</span></p>
 </article>
+
+<style is:global>
+  .stablecoin-index-page-r3 .stablecoin-index-card-r3 {
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    padding: 0.45rem 0.6rem !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-card-r3 .stablecoin-index-card-heading {
+    gap: 0.45rem !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-card-r3 .stablecoin-index-card-meta {
+    margin-top: 0.2rem !important;
+    line-height: 1.2 !important;
+  }
+</style>
