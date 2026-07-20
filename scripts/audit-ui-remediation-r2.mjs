@@ -58,7 +58,13 @@ for (const viewport of viewports) {
 
     const url = `${baseUrl}${route.pathname}`;
     const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 });
-    await page.waitForTimeout(250);
+    let runtimeReady = true;
+    try {
+      await page.waitForFunction(() => document.documentElement.dataset.uiRemediationR2 === 'ready', null, { timeout: 5_000 });
+    } catch {
+      runtimeReady = false;
+    }
+    await page.waitForTimeout(100);
 
     const audit = await page.evaluate(({ forbiddenReadyText, technicalTags }) => {
       const visible = (element) => {
@@ -70,7 +76,10 @@ for (const viewport of viewports) {
       const root = document.documentElement;
       const body = document.body;
       const header = document.querySelector('.site-header');
+      const headerInner = document.querySelector('.site-header-inner');
+      const navBar = document.querySelector('.site-navigation-bar');
       const h1 = document.querySelector('h1');
+      const firstTableCell = document.querySelector('table th, table td');
       const bodyStyle = window.getComputedStyle(body);
       const h1Style = h1 ? window.getComputedStyle(h1) : null;
       const pageText = body.innerText.toLocaleLowerCase();
@@ -93,15 +102,25 @@ for (const viewport of viewports) {
         .map((element) => px(window.getComputedStyle(element).fontSize));
       return {
         title: document.title,
+        runtimeState: root.dataset.uiRemediationR2 || '',
+        runtimeInstalled: root.dataset.uiRemediationR2Runtime || '',
         bodyFontFamily: bodyStyle.fontFamily,
         bodyFontSize: px(bodyStyle.fontSize),
         viewportWidth: window.innerWidth,
         scrollWidth: Math.max(root.scrollWidth, body.scrollWidth),
         pageHeight: Math.max(root.scrollHeight, body.scrollHeight),
         headerHeight: header ? header.getBoundingClientRect().height : 0,
+        headerInlineHeight: header instanceof HTMLElement ? header.style.getPropertyValue('height') : '',
+        headerInlinePriority: header instanceof HTMLElement ? header.style.getPropertyPriority('height') : '',
+        headerInnerColumns: headerInner ? window.getComputedStyle(headerInner).gridTemplateColumns : '',
+        navigationDisplay: navBar ? window.getComputedStyle(navBar).display : '',
         h1Text: h1?.textContent?.trim() || '',
         h1FontSize: h1Style ? px(h1Style.fontSize) : 0,
+        h1InlineFontSize: h1 instanceof HTMLElement ? h1.style.getPropertyValue('font-size') : '',
+        h1InlinePriority: h1 instanceof HTMLElement ? h1.style.getPropertyPriority('font-size') : '',
         h1WordBreak: h1Style?.wordBreak || '',
+        firstTableCellFontSize: firstTableCell ? window.getComputedStyle(firstTableCell).fontSize : '',
+        firstTableCellInlineFontSize: firstTableCell instanceof HTMLElement ? firstTableCell.style.getPropertyValue('font-size') : '',
         forbiddenText,
         breakAll,
         clippedText,
@@ -114,21 +133,22 @@ for (const viewport of viewports) {
 
     const recordFailures = [];
     if (!response || !response.ok()) recordFailures.push(`document response was ${response?.status() ?? 'missing'}`);
+    if (!runtimeReady || audit.runtimeState !== 'ready') recordFailures.push(`R2 runtime not ready: state=${audit.runtimeState || 'missing'} installed=${audit.runtimeInstalled || 'missing'}`);
     if (consoleErrors.length) recordFailures.push(`console errors: ${consoleErrors.join(' | ')}`);
     if (pageErrors.length) recordFailures.push(`page errors: ${pageErrors.join(' | ')}`);
     if (failedRequests.length) recordFailures.push(`failed requests: ${failedRequests.join(' | ')}`);
     if (failedResponses.length) recordFailures.push(`failed responses: ${failedResponses.join(' | ')}`);
     if (audit.scrollWidth > audit.viewportWidth + 1) recordFailures.push(`horizontal page overflow ${audit.scrollWidth}px > ${audit.viewportWidth}px`);
-    if (audit.headerHeight > viewport.headerMax) recordFailures.push(`header ${audit.headerHeight}px exceeds ${viewport.headerMax}px`);
+    if (audit.headerHeight > viewport.headerMax) recordFailures.push(`header ${audit.headerHeight}px exceeds ${viewport.headerMax}px; inline=${audit.headerInlineHeight || 'none'} priority=${audit.headerInlinePriority || 'none'} nav=${audit.navigationDisplay || 'unknown'} columns=${audit.headerInnerColumns || 'unknown'}`);
     if (!audit.h1Text) recordFailures.push('missing visible H1');
-    if (audit.h1FontSize > viewport.h1Max + 0.25) recordFailures.push(`H1 ${audit.h1FontSize}px exceeds ${viewport.h1Max}px`);
+    if (audit.h1FontSize > viewport.h1Max + 0.25) recordFailures.push(`H1 ${audit.h1FontSize}px exceeds ${viewport.h1Max}px; inline=${audit.h1InlineFontSize || 'none'} priority=${audit.h1InlinePriority || 'none'}`);
     if (audit.h1WordBreak === 'break-all') recordFailures.push('H1 uses word-break: break-all');
     if (audit.bodyFontSize < 16) recordFailures.push(`body font ${audit.bodyFontSize}px is below 16px`);
     if (/mono|menlo|consolas|courier/i.test(audit.bodyFontFamily)) recordFailures.push(`body font is monospace: ${audit.bodyFontFamily}`);
     if (audit.forbiddenText.length) recordFailures.push(`visible runtime error text: ${audit.forbiddenText.join(', ')}`);
     if (audit.breakAll.length) recordFailures.push(`ordinary break-all elements: ${audit.breakAll.join(', ')}`);
     if (audit.clippedText.length) recordFailures.push(`clipped text elements: ${audit.clippedText.join(', ')}`);
-    if (audit.minimumTableFontSize !== null && audit.minimumTableFontSize < 14) recordFailures.push(`table font ${audit.minimumTableFontSize}px is below 14px`);
+    if (audit.minimumTableFontSize !== null && audit.minimumTableFontSize < 14) recordFailures.push(`table font ${audit.minimumTableFontSize}px is below 14px; first=${audit.firstTableCellFontSize || 'none'} inline=${audit.firstTableCellInlineFontSize || 'none'}`);
 
     const record = {
       viewport: viewport.id,
@@ -150,7 +170,7 @@ for (const viewport of viewports) {
 await browser.close();
 
 const manifest = {
-  schemaVersion: '1.0',
+  schemaVersion: '1.1',
   authority: 'docs/ui-v3-remediation-authority.md',
   phase: 'R2',
   createdAt: new Date().toISOString(),
