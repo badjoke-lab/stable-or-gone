@@ -1,6 +1,6 @@
 ---
 import TickerBadge from './TickerBadge.astro';
-import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
+import { formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 const { record, initiallyVisible = true } = Astro.props;
 const data = {
   'data-record-slug': record.slug,
@@ -18,20 +18,58 @@ const data = {
 ---
 <tr data-registry-row hidden={initiallyVisible ? undefined : true} {...data}>
   <td>
-    <div class="stablecoin-record-identity">
+    <div class="stablecoin-record-identity stablecoin-record-identity-r3">
+      <label class="comparison-choice comparison-choice-icon"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span class="visually-hidden">Compare</span></label>
       <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} size="small" />
-      <div><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a><small>{record.id}</small></div>
+      <div><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a><small>{record.symbol || 'No symbol'}</small></div>
     </div>
-    <label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Compare</span></label>
   </td>
-  <td><span class="record-symbol">{record.symbol || 'No symbol'}</span></td>
-  <td><span>{record.referenceLabel}</span><small>{record.assetClassLabel}</small></td>
-  <td><span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span><small>Issuance: {formatIssuanceLabel(record.issuance)}</small></td>
-  <td>
-    {record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}
-    <small>{record.primaryRoleLabel}{record.relationshipCount > 1 ? ` · ${record.relationshipCount} relationships` : ''}</small>
-    {record.relationshipCount > 1 && <details class="organization-summary"><summary>All connected organizations</summary><p>{record.organizationSummary}</p></details>}
-  </td>
-  <td><span>{record.backingLabel}</span><small>{record.stabilizationLabel}</small></td>
-  <td><time datetime={record.reviewedAt || undefined}>{record.reviewedAt || 'Not recorded'}</time><small>{record.sourceIdentityCount} sources · {record.eventCount} events · {record.knownUnknownCount} open questions</small></td>
+  <td><span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span></td>
+  <td>{record.referenceLabel}</td>
+  <td>{record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}</td>
+  <td>{record.backingLabel}</td>
+  <td><time datetime={record.reviewedAt || undefined}>{record.reviewedAt || 'Not recorded'}</time><small>{record.sourceIdentityCount} sources</small></td>
 </tr>
+
+<style is:global>
+  .stablecoin-index-page-r3 .stablecoin-index-table tbody td {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-table td {
+    box-sizing: border-box !important;
+    height: 48px !important;
+    padding-block: 0.25rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-table td small {
+    margin-top: 0.05rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-record-identity-r3 {
+    flex-wrap: nowrap !important;
+    gap: 0.4rem !important;
+  }
+
+  .stablecoin-index-page-r3 .comparison-choice-icon {
+    box-sizing: border-box !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+  }
+
+  .stablecoin-index-page-r3 .comparison-choice-icon input {
+    width: 16px !important;
+    height: 16px !important;
+  }
+</style>

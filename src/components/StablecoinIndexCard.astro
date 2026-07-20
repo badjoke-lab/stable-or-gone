@@ -1,6 +1,5 @@
 ---
-import TickerBadge from './TickerBadge.astro';
-import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
+import { formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 const { record, initiallyVisible = true } = Astro.props;
 const data = {
   'data-record-slug': record.slug,
@@ -16,31 +15,32 @@ const data = {
   'data-evidence-count': String(record.sourceIdentityCount)
 };
 ---
-<article class="stablecoin-index-card" data-registry-card data-mobile-representation-for="stablecoin-index" hidden={initiallyVisible ? undefined : true} {...data}>
+<article class="stablecoin-index-card stablecoin-index-card-r3" data-registry-card data-mobile-representation-for="stablecoin-index" hidden={initiallyVisible ? undefined : true} {...data}>
   <div class="stablecoin-index-card-heading">
-    <div class="stablecoin-index-card-identity">
-      <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} />
-      <div><span class="record-symbol">{record.symbol || 'No symbol'}</span><h2><a href={`/stablecoin/${record.slug}/`}>{record.name}</a></h2><small>{record.id}</small></div>
+    <a class="stablecoin-index-card-identity" href={`/stablecoin/${record.slug}/`}>
+      <span><strong>{record.name}</strong><small>{record.symbol || 'No symbol'} · {record.primaryOrganizationName}</small></span>
+    </a>
+    <div class="stablecoin-index-card-actions">
+      <span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span>
+      <label class="comparison-choice comparison-choice-card comparison-choice-icon"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span class="visually-hidden">Compare</span></label>
     </div>
-    <span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span>
   </div>
-  <dl class="mobile-card-primary">
-    <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
-    <div><dt>Reference</dt><dd>{record.referenceLabel}</dd></div>
-    <div><dt>Backing</dt><dd>{record.backingLabel}</dd></div>
-    <div><dt>Organization</dt><dd>{record.primaryOrganizationName}</dd></div>
-  </dl>
-  <details class="mobile-card-details">
-    <summary>More record details</summary>
-    <dl>
-      <div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div>
-      <div><dt>Relationships</dt><dd>{record.relationshipCount} across {record.organizationCount}</dd></div>
-      <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
-      <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
-      <div><dt>Events</dt><dd>{record.eventCount}</dd></div>
-      <div><dt>Last reviewed</dt><dd>{record.reviewedAt || 'Not recorded'}</dd></div>
-    </dl>
-  </details>
-  {record.relationshipCount > 1 && <details class="organization-summary"><summary>All connected organizations</summary><p>{record.organizationSummary}</p><small>Includes {record.relationshipCount - 1} additional relationships beyond the primary display.</small></details>}
-  <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
+  <p class="stablecoin-index-card-meta"><span>{record.referenceLabel}</span><span>{record.backingLabel}</span><span>{record.sourceIdentityCount} sources</span><span>{record.reviewedAt || 'Not reviewed'}</span></p>
 </article>
+
+<style is:global>
+  .stablecoin-index-page-r3 .stablecoin-index-card-r3 {
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    padding: 0.45rem 0.6rem !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-card-r3 .stablecoin-index-card-heading {
+    gap: 0.45rem !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-card-r3 .stablecoin-index-card-meta {
+    margin-top: 0.2rem !important;
+    line-height: 1.2 !important;
+  }
+</style>

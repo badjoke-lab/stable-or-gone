@@ -312,9 +312,9 @@ Hard failures:
 | Phase | Status | PR | Notes |
 |---|---|---:|---|
 | R1 Authority reset and audit baseline | complete | #436 | Memo and mandatory reference merged; Issue #281 reopened; UI completion set false |
-| R2 Global shell and tokens | active | #437 | One-row shell, unified typography, compact Home entry, compact footer, and 35-capture audit in progress |
-| R3 Home and Stablecoin Register | blocked | — | Starts after R2 review |
-| R4 Stablecoin Dossier | blocked | — | — |
+| R2 Global shell and tokens | complete | #437 | 35/35 captures passed in run 29738874474; one-row shell, typography, compact footer, and overflow fixes merged |
+| R3 Home and Stablecoin Register | active | #438 | Compact Home and six-column/compact-mobile register under 20-capture review |
+| R4 Stablecoin Dossier | blocked | — | Starts after R3 review |
 | R5 Events and Organizations | blocked | — | — |
 | R6 Guides and long-form | blocked | — | — |
 | R7 Reference and utility | blocked | — | — |
@@ -322,16 +322,16 @@ Hard failures:
 | R9 Timeline and Stats | blocked | — | — |
 | R10 Full visual closure | blocked | — | Requires complete manual review |
 
-## Current R2 evidence
+## Current R3 evidence
 
-Branch: `agent/ui-v3-r2-global-shell`  
-Pull request: #437
+Branch: `agent/ui-v3-r3-home-register`  
+Pull request: #438
 
-R2 currently changes only shared presentation and its audit tooling. It must preserve the 114-asset canonical baseline, all public routes, metadata contracts, and machine-readable outputs.
+R3 removes duplicated Home sections, retains only the required entrypoint content, reduces the desktop register to six primary columns, closes filters by default, and replaces mobile field-by-field cards with compact rows.
 
-The R2 workflow captures 35 combinations across Home, Stablecoin Register, USDC dossier, Events, Organizations, Guides, and Methodology at the five required widths. It fails on visible runtime error text, console/page errors, failed required requests, horizontal page overflow, oversized header or H1, monospace body text, ordinary `break-all`, clipped text, and table text below 14px.
+The R3 workflow captures Home plus Stablecoin Register default, filtered, and empty states at all five required widths. It fails on runtime errors, horizontal overflow, page-height budgets, incorrect desktop/mobile representation, more than six columns, open default filters, absent empty state, desktop rows above 68px, or mobile rows above 112px.
 
-R2 remains active until the generated contact sheet is manually inspected and every failure is corrected.
+R3 remains active until the generated contact sheet is manually inspected, every failure is corrected, and PR #438 is merged.
 
 ## Completion rule
 
