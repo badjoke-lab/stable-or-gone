@@ -96,6 +96,7 @@ const isCurrent = (href: string) => {
     {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}
     {gaInline && <script set:html={gaInline} />}
     {structuredData && <script type="application/ld+json" set:html={structuredData} />}
+    <link rel="stylesheet" href="/ui-remediation-r2.css" data-ui-remediation-r2 />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
