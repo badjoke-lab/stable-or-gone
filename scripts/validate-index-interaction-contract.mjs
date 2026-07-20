@@ -14,7 +14,7 @@ if (!fs.existsSync(auditPath)) process.exit(1);
 const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
 const contractById = new Map(indexInteractionContracts.map((contract) => [contract.id, contract]));
 const expected = {
-  stablecoins: { route: '/stablecoins/', source: 'src/pages/stablecoins/index.astro', client: 'src/scripts/stablecoin-index.ts', headers: 7 },
+  stablecoins: { route: '/stablecoins/', source: 'src/pages/stablecoins/index.astro', client: 'src/scripts/stablecoin-index.ts', headers: 6 },
   organizations: { route: '/issuers/', source: 'src/components/OrganizationEditorialRegister.astro', client: 'src/scripts/organization-index.ts', headers: 5 },
   events: { route: '/events/', source: 'src/components/EventEditorialRegister.astro', client: 'src/scripts/event-index.ts', headers: 5 }
 };
@@ -44,7 +44,7 @@ for (const [id, spec] of Object.entries(expected)) {
   check(source.includes('aria-live="polite"'), `${id}: result announcement missing`);
   check(/data-(?:organization-|event-)?result-count/.test(source), `${id}: result count marker missing`);
   check(/data-(?:organization-|event-)?no-results/.test(source), `${id}: zero-result state missing`);
-  check(/data-(?:organization-|event-)?clear-all/.test(source) || source.includes('data-stablecoin-clear-all'), `${id}: clear-all action missing`);
+  check(/data-(?:organization-|event-)?clear-all/.test(source) || source.includes('data-clear-all') || source.includes('data-stablecoin-clear-all'), `${id}: clear-all action missing`);
   check(source.includes('records.map'), `${id}: server-rendered rows missing`);
   check(client.includes('URLSearchParams'), `${id}: URL state parser missing`);
   check(client.includes('replaceState'), `${id}: replaceState missing`);
@@ -57,13 +57,13 @@ for (const [id, spec] of Object.entries(expected)) {
 }
 
 const validation = {
-  schema_version: '1.3',
+  schema_version: '1.4',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   totals: {
     index_contracts: indexInteractionContracts.length,
     implemented_indexes: 3,
-    stablecoin_columns: 7,
+    stablecoin_columns: 6,
     organization_columns: 5,
     event_columns: 5,
     route_changes: 0,
