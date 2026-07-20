@@ -84,6 +84,7 @@ for (const viewport of viewports) {
         .map((element) => `${element.tagName.toLowerCase()}${element.className ? `.${String(element.className).trim().replace(/\s+/g, '.')}` : ''}`);
       const clippedText = [...document.querySelectorAll('h1,h2,h3,p,a,button,label,th,td,dt,dd')]
         .filter((element) => visible(element))
+        .filter((element) => !element.classList.contains('visually-hidden') && !element.closest('.visually-hidden'))
         .filter((element) => element.scrollWidth > element.clientWidth + 2 && window.getComputedStyle(element).overflowX === 'hidden')
         .slice(0, 20)
         .map((element) => `${element.tagName.toLowerCase()}${element.className ? `.${String(element.className).trim().replace(/\s+/g, '.')}` : ''}`);
