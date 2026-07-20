@@ -164,6 +164,57 @@ html body table td {
   padding-block: 0.7rem !important;
 }
 
+/* Inline-size containment for generated disclosures and locally wide data. */
+html body .site-footer-navigation,
+html body .site-footer-disclosure,
+html body .site-footer-disclosure > summary,
+html body .site-footer-disclosure-panel {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+html body .site-footer-navigation,
+html body .site-footer-disclosure {
+  overflow: hidden !important;
+}
+
+html body .site-footer-disclosure-panel {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0.1rem !important;
+}
+
+html body .site-footer-disclosure-panel a {
+  box-sizing: border-box !important;
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 34px !important;
+  padding-block: 0.2rem !important;
+  font-size: 0.8125rem !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+html body details.stablecoin-technical-disclosure,
+html body article.editorial-page > section[id] {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overscroll-behavior-inline: contain !important;
+}
+
+html body details.stablecoin-technical-disclosure > table,
+html body article.editorial-page > section[id] > table {
+  max-width: none !important;
+}
+
 /* Compact Home entrypoint. */
 html body .home-registry .home-entry {
   min-height: 0 !important;
@@ -359,15 +410,48 @@ html body .mobile-card-grid h3 {
   }
 
   html body .home-registry .home-registry-totals {
-    display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x proximity !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    scroll-snap-type: none !important;
   }
 
   html body .home-registry .home-registry-totals a {
-    flex: 0 0 min(44vw, 170px) !important;
+    box-sizing: border-box !important;
+    flex: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
     min-height: 72px !important;
-    scroll-snap-align: start !important;
+    scroll-snap-align: none !important;
+  }
+
+  html body .stablecoin-dossier-nav,
+  html body .guide-index-nav {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    gap: 0.45rem !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  html body .stablecoin-dossier-nav > a,
+  html body .guide-index-nav > a {
+    box-sizing: border-box !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    scroll-snap-align: none !important;
   }
 
   html body .site-footer-summary {
@@ -375,14 +459,17 @@ html body .mobile-card-grid h3 {
   }
 
   html body .site-footer-navigation {
-    grid-template-columns: 1fr 1fr !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
 }
 
 @media (max-width: 420px) {
   html body .mobile-navigation-links,
-  html body .mobile-navigation-utilities,
-  html body .site-footer-navigation {
+  html body .mobile-navigation-utilities {
     grid-template-columns: 1fr !important;
   }
 }
