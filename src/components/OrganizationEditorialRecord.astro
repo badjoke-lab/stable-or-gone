@@ -20,4 +20,13 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name
     <OrganizationEditorialIdentity organization={organization} view={view} />
     <OrganizationEditorialHistory view={view} />
   </article>
+  <script is:inline>
+    (() => {
+      const compact = window.matchMedia('(max-width: 760px)');
+      const unknowns = document.querySelector('.organization-detail-page-r5 #unknowns');
+      const sync = () => { if (unknowns instanceof HTMLDetailsElement) unknowns.open = !compact.matches; };
+      sync();
+      compact.addEventListener?.('change', sync);
+    })();
+  </script>
 </BaseLayout>
