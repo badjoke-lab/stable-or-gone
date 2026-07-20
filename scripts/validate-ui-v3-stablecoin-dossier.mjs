@@ -43,8 +43,9 @@ need(sources.header, 'aria-label="Six primary stablecoin facts"');
 need(sources.history, 'slice(0, 5)');
 need(sources.context, 'slice(0, 10)');
 need(sources.organizations, '<th>Organization</th><th>Role</th><th>Jurisdiction</th><th>Period</th><th>State</th>');
-need(sources.view, "window.matchMedia('(max-width: 760px)')");
-need(sources.view, 'section.open = !media.matches');
+need(sources.view, "window.matchMedia('(max-width: 900px)')");
+need(sources.view, "defaultClosed = new Set(['mechanism', 'more'])");
+need(sources.view, 'section.open = !compact.matches && !defaultClosed.has(section.id)');
 need(sources.css, '.stablecoin-dossier-r4');
 need(sources.related, '<RelatedGuides guides={relatedGuides} />');
 
@@ -57,7 +58,7 @@ const organizationHeaderCount = ((sources.organizations.match(/<thead><tr>([\s\S
 if (organizationHeaderCount !== 5) failures.push(`organization-column-count:${organizationHeaderCount}`);
 
 const result = {
-  schema_version: '2.0',
+  schema_version: '2.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   page_family: 'ui_remediation_r4_stablecoin_dossier',
@@ -65,6 +66,8 @@ const result = {
   organization_column_count: organizationHeaderCount,
   initial_event_limit: 5,
   initial_evidence_limit: 10,
+  compact_disclosure_breakpoint: 900,
+  desktop_default_open_sections: 6,
   canonical_record_changes: 0,
   route_changes: 0,
   failures
