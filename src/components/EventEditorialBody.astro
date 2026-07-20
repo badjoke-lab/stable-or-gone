@@ -5,7 +5,7 @@ import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 type View = ReturnType<typeof buildEventDetailView>;
-type Subject = { id: string; name: string; slug: string };
+type Subject = { id: string; name: string; slug?: string };
 const { event, view } = Astro.props as { event: any; view: View };
 ---
 <section class="event-detail-section event-detail-overview-r5" id="overview">
@@ -21,8 +21,8 @@ const { event, view } = Astro.props as { event: any; view: View };
 <section class="event-detail-section" id="subjects">
   <div class="event-detail-section-heading"><p>Affected records</p><h2>Subjects</h2><span>Stablecoin and organization subjects remain separate record groups.</span></div>
   <div class="event-subject-list-r5">
-    {view.subjectStablecoins.map((item: Subject) => <a href={item.slug ? `/stablecoin/${item.slug}/` : undefined}><span>Stablecoin</span><strong>{item.name}</strong></a>)}
-    {view.subjectOrganizations.map((item: Subject) => <a href={item.slug ? `/issuer/${item.slug}/` : undefined}><span>Organization</span><strong>{item.name}</strong></a>)}
+    {view.subjectStablecoins.map((item: Subject) => item.slug ? <a href={`/stablecoin/${item.slug}/`}><span>Stablecoin</span><strong>{item.name}</strong></a> : <div><span>Stablecoin</span><strong>{item.name}</strong></div>)}
+    {view.subjectOrganizations.map((item: Subject) => item.slug ? <a href={`/issuer/${item.slug}/`}><span>Organization</span><strong>{item.name}</strong></a> : <div><span>Organization</span><strong>{item.name}</strong></div>)}
     {view.subjectCount === 0 && <p class="event-detail-empty">No subject relationship is recorded.</p>}
   </div>
 </section>
