@@ -8,32 +8,22 @@ import { buildOrganizationDetailView } from '../lib/views/organizationDetailView
 type View = ReturnType<typeof buildOrganizationDetailView>;
 const { organization, view } = Astro.props as { organization: OrganizationRow; view: View };
 ---
-<section class="organization-detail-section" id="overview">
-  <div class="organization-detail-section-heading"><p>Identity and taxonomy</p><h2>Overview</h2><span>Public classification, legal-form state, jurisdiction, roles, confidence, and review state remain explicit.</span></div>
-  <div class="organization-detail-table"><table data-table-kind="organization-overview" data-mobile-table="scroll-preserve"><tbody>
-    <tr><th>Organization category</th><td>{view.taxonomy.public_category_label}</td></tr>
-    <tr><th>Canonical organization type</th><td>{formatPublicLabel(view.taxonomy.canonical_organization_type)}</td></tr>
-    <tr><th>Legal form</th><td>{view.taxonomy.legal_form_label}</td></tr>
-    <tr><th>Legal-form state</th><td>{formatPublicLabel(view.taxonomy.legal_form_state)}</td></tr>
-    <tr><th>Regulatory character</th><td>{view.taxonomy.regulatory_character_label}</td></tr>
-    <tr><th>Jurisdiction</th><td>{view.taxonomy.jurisdiction_label}</td></tr>
-    <tr><th>Jurisdiction scope</th><td>{view.taxonomy.jurisdiction_scope_label}</td></tr>
-    <tr><th>Functional roles</th><td>{view.functionalRoles.length ? view.functionalRoles.map(getFunctionalRoleLabel).join(', ') : 'Not recorded'}</td></tr>
-    <tr><th>Relationship states</th><td>{view.relationshipStates.length ? view.relationshipStates.map(getRelationshipStatusLabel).join(', ') : 'Not recorded'}</td></tr>
-    <tr><th>Primary display relationships</th><td>{view.primaryDisplayRelationshipCount}</td></tr>
-    <tr><th>Official website</th><td>{organization.official_url ? <a href={organization.official_url}>{organization.official_url}</a> : 'Not recorded'}</td></tr>
-    <tr><th>Record confidence</th><td><ValueStateText value={organization.confidence} displayValue={formatPublicLabel(organization.confidence)} /></td></tr>
-    <tr><th>Last reviewed</th><td><ValueStateText value={organization.last_verified_at} /></td></tr>
-  </tbody></table></div>
-  <dl class="organization-overview-cards" data-mobile-representation-for="organization-overview">
-    <div><dt>Category</dt><dd>{view.taxonomy.public_category_label}</dd></div><div><dt>Regulatory character</dt><dd>{view.taxonomy.regulatory_character_label}</dd></div><div><dt>Jurisdiction</dt><dd>{view.taxonomy.jurisdiction_label}</dd></div><div><dt>Jurisdiction scope</dt><dd>{view.taxonomy.jurisdiction_scope_label}</dd></div><div><dt>Functional roles</dt><dd>{view.functionalRoles.length ? view.functionalRoles.map(getFunctionalRoleLabel).join(', ') : 'Not recorded'}</dd></div><div><dt>Record confidence</dt><dd>{formatPublicLabel(organization.confidence)}</dd></div>
+<section class="organization-detail-section organization-overview-r5" id="overview">
+  <div class="organization-detail-section-heading"><p>Reviewed identity</p><h2>Organization summary</h2><span>The primary category, regulatory character, jurisdiction, asset count, relationship count, and Evidence count are already shown above.</span></div>
+  <p class="organization-detail-summary-r5">{view.summary}</p>
+  <dl class="organization-detail-secondary-r5">
+    <div><dt>Legal form</dt><dd>{view.taxonomy.legal_form_label}</dd></div>
+    <div><dt>Functional roles</dt><dd>{view.functionalRoles.length ? view.functionalRoles.map(getFunctionalRoleLabel).join(', ') : 'Not recorded'}</dd></div>
+    <div><dt>Official website</dt><dd>{organization.official_url ? <a href={organization.official_url}>{organization.official_url}</a> : 'Not recorded'}</dd></div>
+    <div><dt>Record confidence</dt><dd><ValueStateText value={organization.confidence} displayValue={formatPublicLabel(organization.confidence)} /></dd></div>
+    <div><dt>Last reviewed</dt><dd><ValueStateText value={organization.last_verified_at} /></dd></div>
   </dl>
 </section>
 
 <section class="organization-detail-section" id="relationships">
   <div class="organization-detail-section-heading"><p>Connected assets</p><h2>Relationships</h2><span>Current, ended, and unknown relationships remain separate. Primary display is navigation only.</span></div>
-  <div class="organization-detail-table"><table data-table-kind="organization-relationships" data-mobile-table="scroll-preserve"><thead><tr><th>Stablecoin</th><th>Symbol</th><th>Functional role</th><th>Display</th><th>From</th><th>Until</th><th>State</th><th>Lifecycle</th></tr></thead><tbody>
-    {view.relationships.length === 0 ? <tr><td colspan="8">No stablecoin relationships have been added.</td></tr> : view.relationships.map(({ relationship, coin, isPrimary }) => <tr><td>{coin ? <a href={'/stablecoin/' + coin.slug + '/'}>{coin.name}</a> : relationship.stablecoin_id}</td><td><ValueStateText value={coin?.symbol} /></td><td>{getFunctionalRoleLabel(relationship.role)}</td><td>{isPrimary ? 'Primary display' : 'Additional'}</td><td><ValueStateText value={relationship.start_date} /></td><td><ValueStateText value={relationship.end_date} /></td><td>{getRelationshipStatusLabel(relationship.status ?? 'unknown')}</td><td>{coin ? <span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span> : 'Not recorded'}</td></tr>)}
+  <div class="organization-detail-table organization-relationships-r5"><table data-table-kind="organization-relationships" data-mobile-table="scroll-preserve"><thead><tr><th>Stablecoin</th><th>Role</th><th>Period</th><th>State</th><th>Lifecycle</th></tr></thead><tbody>
+    {view.relationships.length === 0 ? <tr><td colspan="5">No stablecoin relationships have been added.</td></tr> : view.relationships.map(({ relationship, coin, isPrimary }) => <tr><td>{coin ? <a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a> : relationship.stablecoin_id}<small>{isPrimary ? 'Primary display' : 'Additional relationship'}</small></td><td>{getFunctionalRoleLabel(relationship.role)}</td><td><ValueStateText value={relationship.start_date} /> – <ValueStateText value={relationship.end_date} /></td><td>{getRelationshipStatusLabel(relationship.status ?? 'unknown')}</td><td>{coin ? <span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span> : 'Not recorded'}</td></tr>)}
   </tbody></table></div>
-  <div class="organization-relationship-cards" data-mobile-representation-for="organization-relationships">{view.relationships.map(({ relationship, coin, isPrimary }) => <article><header><h3>{coin ? <a href={'/stablecoin/' + coin.slug + '/'}>{coin.name}</a> : relationship.stablecoin_id}</h3><span>{isPrimary ? 'Primary display' : 'Additional'}</span></header><dl><div><dt>Role</dt><dd>{getFunctionalRoleLabel(relationship.role)}</dd></div><div><dt>State</dt><dd>{getRelationshipStatusLabel(relationship.status ?? 'unknown')}</dd></div><div><dt>From</dt><dd>{relationship.start_date ?? 'Not recorded'}</dd></div><div><dt>Until</dt><dd>{relationship.end_date ?? 'Not recorded'}</dd></div></dl></article>)}</div>
+  <div class="organization-relationship-cards organization-relationship-cards-r5" data-mobile-representation-for="organization-relationships">{view.relationships.map(({ relationship, coin, isPrimary }) => <article><header><h3>{coin ? <a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a> : relationship.stablecoin_id}</h3><span>{isPrimary ? 'Primary' : getRelationshipStatusLabel(relationship.status ?? 'unknown')}</span></header><p>{getFunctionalRoleLabel(relationship.role)}</p><small>{relationship.start_date ?? 'Start not recorded'} – {relationship.end_date ?? 'Present / not recorded'}</small></article>)}</div>
 </section>
