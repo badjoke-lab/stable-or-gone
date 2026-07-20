@@ -22,8 +22,7 @@ html {
 }
 
 body {
-  background:
-    linear-gradient(180deg, rgba(8, 19, 28, 0.98), rgba(4, 10, 15, 1));
+  background: linear-gradient(180deg, rgba(8, 19, 28, 0.98), rgba(4, 10, 15, 1));
   font-family: var(--sog-font-interface);
   font-size: 16px;
   line-height: 1.62;
@@ -211,12 +210,12 @@ body table :where(th, td) {
   padding: 0;
 }
 
-.home-registry .home-entry__copy h1 {
+.home-registry .home-entry .home-entry__copy h1 {
   max-width: 18ch;
   margin-bottom: 0.8rem;
-  font-size: clamp(2.5rem, 4.3vw, 3rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+  font-size: clamp(2.5rem, 4.3vw, 3rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
 }
 
 .home-registry .home-entry__deck {
@@ -248,6 +247,25 @@ body table :where(th, td) {
 .home-registry .home-search__popular,
 .home-registry .home-search__results {
   margin-inline: 1rem;
+}
+
+.home-registry :where(
+  .home-eyebrow,
+  .home-search__popular > span,
+  .home-search__popular button,
+  .home-search__summary,
+  .home-search__type,
+  .home-registry-totals strong,
+  .home-explore-card > span,
+  .home-material-list__meta,
+  .home-status-ledger dd,
+  .home-issue-list li > div span,
+  .home-issue-list time,
+  .home-publications time,
+  .home-recent-grid > a > div span,
+  .home-guide-grid article > div
+) {
+  font-family: var(--sog-font-interface) !important;
 }
 
 .home-registry .home-registry-totals {
@@ -333,7 +351,7 @@ body table :where(th, td) {
 
 .mobile-record-list h3,
 .mobile-card-grid h3 {
-  font-family: var(--sog-font-interface);
+  font-family: var(--sog-font-interface) !important;
   letter-spacing: -0.01em;
 }
 
@@ -418,13 +436,10 @@ body table :where(th, td) {
   body :where(h1, .editorial-page-title h1, .guide-index-title h1, .guide-article-masthead h1, .stablecoin-dossier-title-row h1) {
     max-width: none;
     font-size: clamp(1.875rem, 9vw, 2.25rem) !important;
-    line-height: 1.12;
+    line-height: 1.12 !important;
+    letter-spacing: -0.02em !important;
     overflow-wrap: normal !important;
     word-break: normal;
-  }
-
-  body h2 {
-    font-size: clamp(1.4rem, 7vw, 1.75rem);
   }
 
   .home-registry .home-entry {
@@ -433,9 +448,11 @@ body table :where(th, td) {
     padding-block: 1.25rem;
   }
 
-  .home-registry .home-entry__copy h1 {
+  .home-registry .home-entry .home-entry__copy h1 {
     max-width: none;
-    font-size: clamp(2rem, 9.5vw, 2.4rem);
+    font-size: clamp(2rem, 9.5vw, 2.25rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
   }
 
   .home-registry .home-entry__deck {
