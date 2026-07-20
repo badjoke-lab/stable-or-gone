@@ -64,17 +64,29 @@ for (const marker of [
 check(!css.includes('th:nth-child(') && !css.includes('td:nth-child('), 'generic mobile column hiding is prohibited');
 
 const generatedKinds = Object.entries(implementedMobileTableRepresentations).filter(([, file]) => file === 'src/components/MobileTableRuntime.astro').map(([kind]) => kind);
-check(generatedKinds.length === 8, 'generated compact representation count changed');
-for (const kind of ['stablecoin-record-coverage', 'issuer-control-events', 'stablecoin-event-timeline', 'stablecoin-deployments', 'stablecoin-sources', 'methodology-value-states', 'methodology-primary-display-relationships', 'methodology-evidence-source-identities']) check(generatedKinds.includes(kind), `runtime-generated compact representation missing: ${kind}`);
+const expectedGeneratedKinds = [
+  'organization-sources',
+  'event-sources',
+  'stablecoin-record-coverage',
+  'issuer-control-events',
+  'stablecoin-event-timeline',
+  'stablecoin-deployments',
+  'stablecoin-sources',
+  'methodology-value-states',
+  'methodology-primary-display-relationships',
+  'methodology-evidence-source-identities'
+];
+check(generatedKinds.length === 10, 'generated compact representation count changed');
+for (const kind of expectedGeneratedKinds) check(generatedKinds.includes(kind), `runtime-generated compact representation missing: ${kind}`);
 
 const result = {
-  schema_version: '1.3',
+  schema_version: '1.4',
   ok: failures.length === 0,
   gate: 'V3-E-R5',
   shell: 'evidence-registry-pr411',
   page_families: pageFamilyContracts.length,
   protected_tables: requiredMobileTableKinds.length,
-  explicit_representations: 15,
+  explicit_representations: 13,
   generated_representations: generatedKinds.length,
   retired_duplicate_tables: ['organization-overview', 'event-details'],
   route_changes: 0,
