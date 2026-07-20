@@ -34,16 +34,17 @@ jobs:
         run: |
           set -euo pipefail
           test -f docs/ui-v3-remediation-authority.md
-          test -f src/styles/ui-remediation-r2.css
+          test -f public/ui-remediation-r2.css
           test -f scripts/audit-ui-remediation-r2.mjs
           grep -q 'docs/ui-v3-remediation-authority.md' AGENTS.md
           grep -q 'UI completion: false' docs/roadmap.md
-          grep -q '@import "./ui-remediation-r2.css"' src/styles/mobile-accessibility-v3.css
-          grep -q 'Phase R2' src/styles/ui-remediation-r2.css
-          grep -q 'site-navigation-bar' src/styles/ui-remediation-r2.css
-          grep -q 'display: none' src/styles/ui-remediation-r2.css
-          grep -q 'min-height: 64px' src/styles/ui-remediation-r2.css
-          grep -q 'min-height: 56px' src/styles/ui-remediation-r2.css
+          grep -q 'href="/ui-remediation-r2.css"' src/layouts/BaseLayout.astro
+          grep -q 'data-ui-remediation-r2' src/layouts/BaseLayout.astro
+          grep -q 'Phase R2' public/ui-remediation-r2.css
+          grep -q 'site-navigation-bar' public/ui-remediation-r2.css
+          grep -q 'display: none' public/ui-remediation-r2.css
+          grep -q 'min-height: 64px' public/ui-remediation-r2.css
+          grep -q 'min-height: 56px' public/ui-remediation-r2.css
           test -z "$(git diff --name-only origin/main...HEAD -- data/ public/data/ config/site-architecture.mjs docs/migration/current-canonical-checkpoint.json docs/migration/current-stats-history-checkpoint.json docs/migration/registry-release-integrity-baseline.json)"
 
       - name: Validate canonical data
@@ -58,6 +59,14 @@ jobs:
         run: npm run check
       - name: Build site
         run: npm run build
+      - name: Verify browser-final stylesheet output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dist/ui-remediation-r2.css
+          grep -q 'data-ui-remediation-r2' dist/index.html
+          grep -q '/ui-remediation-r2.css' dist/index.html
+          grep -q 'site-navigation-bar' dist/ui-remediation-r2.css
       - name: Verify public layer
         run: npm run verify:public
 
@@ -86,7 +95,7 @@ jobs:
           python3 -m http.server 4321 --bind 127.0.0.1 --directory dist > /tmp/ui-r2-server.log 2>&1 &
           echo $! > /tmp/ui-r2-server.pid
           for attempt in $(seq 1 40); do
-            if curl --fail --silent http://127.0.0.1:4321/ > /dev/null; then exit 0; fi
+            if curl --fail --silent http://127.0.0.1:4321/ui-remediation-r2.css > /dev/null && curl --fail --silent http://127.0.0.1:4321/ > /dev/null; then exit 0; fi
             sleep 1
           done
           cat /tmp/ui-r2-server.log
@@ -126,7 +135,7 @@ jobs:
             const validate='${{ needs.validate.result }}';
             const visual='${{ needs.visual-audit.result }}';
             const passed=validate==='success' && visual==='success';
-            const body=`${marker}\n## UI remediation R2 — global shell\n\n- Authority: \`docs/ui-v3-remediation-authority.md\`\n- Contract, canonical, build, and public validation: **${validate}**\n- 35-capture shell visual audit: **${visual}**\n- Viewports: **1440 / 1280 / 768 / 390 / 320**\n- Routes: **Home / Stablecoins / USDC / Events / Organizations / Guides / Methodology**\n- Automated capture counts as owner approval: **false**\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\``;
+            const body=`${marker}\n## UI remediation R2 — global shell\n\n- Authority: \`docs/ui-v3-remediation-authority.md\`\n- Contract, canonical, build, and public validation: **${validate}**\n- Browser-final static stylesheet verification: **${validate}**\n- 35-capture shell visual audit: **${visual}**\n- Viewports: **1440 / 1280 / 768 / 390 / 320**\n- Routes: **Home / Stablecoins / USDC / Events / Organizations / Guides / Methodology**\n- Automated capture counts as owner approval: **false**\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\``;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
