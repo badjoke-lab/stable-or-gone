@@ -9,7 +9,7 @@ Completion: false
 
 This is the mandatory working memo for every material Stable or Gone UI change until the replacement interface is explicitly approved.
 
-Every UI-related issue, branch, commit, pull request, review gate, screenshot workflow, and completion report must read and cite this document. A UI pull request that does not identify the exact requirements it implements is out of scope and must not merge.
+Every UI issue, branch, commit, pull request, review gate, screenshot workflow, and completion report must read and cite this document. A UI pull request that does not identify the exact requirements it implements is out of scope and must not merge.
 
 Do not create a competing UI plan. Implementation notes may add technical detail but may not weaken or replace this authority.
 
@@ -23,41 +23,39 @@ The current interface may remain deployed as a data projection while remediation
 
 ### Global shell and typography
 
-- Page titles and the decorative Home masthead are oversized.
-- The desktop header uses an 82px primary row plus a 62px navigation row.
-- Interface, prose, labels, and data fields use inconsistent font treatment.
-- Monospace and serif treatments appear outside technical literals.
-- Cyan is used for links, headings, labels, counts, and emphasis, weakening hierarchy.
-- Borders, dark panels, and cards are applied to nearly every information group.
-- The footer is too large, especially on mobile.
+- Page titles and the former Home masthead were oversized.
+- The desktop header used two tall navigation rows.
+- Interface, prose, labels, and data fields used inconsistent font treatment.
+- Monospace and serif treatments appeared outside technical literals.
+- Cyan, borders, dark panels, and cards were applied too broadly.
+- The footer was too large, especially on mobile.
 
 ### Desktop
 
-- Registers show too many columns and compensate with very small text.
-- Filters and explanatory panels frequently appear before primary results.
-- Long labels are forced into narrow cells.
-- Detail pages follow normalized schema order instead of decision-useful order.
-- Evidence, metadata, and technical fields receive too much default weight.
+- Registers showed too many columns and compensated with very small text.
+- Filters and explanatory panels appeared before primary results.
+- Detail pages followed normalized schema order instead of decision-useful order.
+- Evidence, metadata, and technical fields received too much default weight.
 
 ### Mobile
 
-- Desktop tables become tall field-by-field cards instead of compact records.
-- Filters are expanded by default.
-- Repeated `More details` and comparison controls inflate every record.
-- Navigation labels and ordinary words wrap or split unnaturally.
-- Page heights are excessive and were previously accepted by permissive ceilings.
+- Desktop tables became tall field-by-field cards.
+- Filters were expanded by default.
+- Repeated controls inflated every record.
+- Ordinary labels wrapped or split unnaturally.
+- Page heights were excessive.
 
 ### Functional states
 
-- Compare and Access/Regulation have displayed data-loading or contract-mismatch errors.
-- Loading, empty, error, and ready states are not consistently separated.
-- Internal diagnostic strings can reach public pages.
+- Compare and Access/Regulation displayed data-loading or contract-mismatch errors.
+- Loading, empty, error, and ready states were not consistently separated.
+- Internal diagnostic strings could reach public pages.
 
 ### Visual audit
 
-- The previous final closure covered representative templates, not every public route and state.
+- The previous closure covered representative templates, not every public route and state.
 - Glossary, Models, Updates, Maintenance, Contact, Support, 404, loading, and error states were not all mandatory captures.
-- Existing automation checked file existence and basic overflow but not readability, density, duplication, hierarchy, runtime errors, or complete route coverage.
+- Existing automation did not adequately check readability, density, duplication, hierarchy, runtime errors, or complete route coverage.
 
 ## Non-negotiable shared rules
 
@@ -76,16 +74,15 @@ The current interface may remain deployed as a data projection while remediation
 
 - Desktop header: one row, approximately 64px.
 - Mobile header: one row, approximately 56px, with search and a menu drawer.
-- Remove the decorative Home masthead and giant background ornament.
 - Use compact page headers on non-Home routes.
-- Reduce footer size and collapse secondary groups on mobile.
+- Keep the footer compact and collapse secondary groups on mobile.
 
 ### Surfaces and color
 
 - Reserve cyan for links, selected state, and primary actions.
 - Do not put every text block inside a bordered card.
 - Use simple rows and separators for registers and Evidence lists.
-- Distinguish active, limited, impaired, discontinued, failed, unknown, warning, and error using text plus visual treatment; never color alone.
+- Statuses, warnings, and errors must use text plus visual treatment; never color alone.
 
 ### Density
 
@@ -111,20 +108,19 @@ Public error states must not expose internal exception text or schema-contract d
 
 ### Home
 
-- Replace the giant hero with a compact title, one-sentence purpose, search, and current counts.
+- Use a compact title, one-sentence purpose, search, and current counts.
 - Keep only recent material events, selected records, latest updates, three guides, and direct registry links.
-- Remove the large grid of exploratory cards and repeated explanatory sections.
+- Remove repeated exploratory and explanatory sections.
 - Desktop target height: under 4,000px.
 - Mobile target height: under 6,000px.
 
 ### Stablecoin Register
 
 - Put search, sort, filter trigger, selected-filter chips, and result count in one compact control area.
-- Move desktop filters to a side panel or collapsible area.
-- Use a maximum of six primary columns focused on Asset, Lifecycle, Reference, Issuer, Model, and Updated/Evidence.
-- Move secondary backing and stabilization fields to expansion or the dossier.
-- Use compact mobile rows; do not render each field as a nested card.
-- Make empty state immediately visible and provide one clear reset action.
+- Keep filters collapsible and closed by default.
+- Use at most six primary columns: Asset, Lifecycle, Reference, Issuer, Model, and Updated/Evidence.
+- Use compact mobile rows rather than nested field cards.
+- Make empty state immediately visible with one reset action.
 
 ### Stablecoin Dossier
 
@@ -154,8 +150,8 @@ Public error states must not expose internal exception text or schema-contract d
 - Index records show title, two-line summary, region, current-through date, and category only.
 - Article reading width: approximately 720–780px.
 - Desktop contents navigation must be readable and show current section.
-- Mobile contents start collapsed and provide section navigation.
-- Split long reference tables and source appendices from the main article where necessary.
+- Mobile contents start collapsed.
+- Split long reference tables and source appendices where necessary.
 
 ### Methodology
 
@@ -169,7 +165,7 @@ Public error states must not expose internal exception text or schema-contract d
 - Use restrained prose layouts rather than registry-definition cards.
 - About explains purpose, exclusions, coverage, review process, and operator.
 - Contact has one primary correction action plus secondary evidence, technical, and general-contact paths.
-- Support has one donation action, a short use-of-funds explanation, and editorial-independence disclosure.
+- Support has one donation action, use-of-funds explanation, and editorial-independence disclosure.
 
 ### Glossary, Models, Updates, Maintenance
 
@@ -196,12 +192,12 @@ Public error states must not expose internal exception text or schema-contract d
 
 - Paginate or load in bounded batches.
 - Group by year and month.
-- Remove repeated source/date-semantics controls from every row; place metadata in expansion.
+- Move repeated metadata into expansion.
 - Provide year, asset, and event-type navigation.
 
 ### Stats
 
-- Replace the raw all-in-one aggregation page with Overview, Lifecycle, Backing, Events, Deployments, Data quality, and History views.
+- Replace the raw all-in-one page with Overview, Lifecycle, Backing, Events, Deployments, Data quality, and History views.
 - Show six headline KPIs and a small number of useful charts.
 - Show top categories first; move exhaustive tables to disclosure or downloadable data.
 - Do not retain desktop multi-column tables on mobile.
@@ -210,10 +206,7 @@ Public error states must not expose internal exception text or schema-contract d
 
 ### R1 — Authority reset and audit baseline
 
-- Add this document.
-- Make it mandatory in `AGENTS.md`.
-- Reopen Issue #281 and set UI completion false.
-- Establish complete route and state requirements.
+- Add this document, make it mandatory, reopen Issue #281, and set UI completion false.
 
 ### R2 — Global shell and tokens
 
@@ -266,7 +259,7 @@ Every UI pull request must include:
 - visible error, console error, failed request, overflow, clipping, and keyboard results;
 - remaining unchecked items from this document.
 
-Every merged UI pull request must update this progress table.
+Every merged UI pull request must update the progress table.
 
 ## Screenshot and audit matrix
 
@@ -303,7 +296,7 @@ Hard failures:
 - clipped or overlapping text;
 - ordinary words split with break-all behavior;
 - essential text hidden by ellipsis;
-- mobile filters expanded by default;
+- mobile filters or secondary dossier sections expanded by default;
 - desktop table text below 14px;
 - completion declared without explicit manual approval.
 
@@ -313,25 +306,25 @@ Hard failures:
 |---|---|---:|---|
 | R1 Authority reset and audit baseline | complete | #436 | Memo and mandatory reference merged; Issue #281 reopened; UI completion set false |
 | R2 Global shell and tokens | complete | #437 | 35/35 captures passed in run 29738874474; one-row shell, typography, compact footer, and overflow fixes merged |
-| R3 Home and Stablecoin Register | active | #438 | Compact Home and six-column/compact-mobile register under 20-capture review |
-| R4 Stablecoin Dossier | blocked | — | Starts after R3 review |
-| R5 Events and Organizations | blocked | — | — |
+| R3 Home and Stablecoin Register | complete | #438 | 20/20 captures passed in run 29741326782; compact Home and six-column/compact-mobile register merged |
+| R4 Stablecoin Dossier | active | #439 | Six primary facts, bounded Events/Evidence, compact organizations, mobile disclosures, and 15-capture audit under review |
+| R5 Events and Organizations | blocked | — | Starts after R4 review |
 | R6 Guides and long-form | blocked | — | — |
 | R7 Reference and utility | blocked | — | — |
 | R8 Compare and Access/Regulation | blocked | — | Runtime errors are completion blockers |
 | R9 Timeline and Stats | blocked | — | — |
 | R10 Full visual closure | blocked | — | Requires complete manual review |
 
-## Current R3 evidence
+## Current R4 evidence
 
-Branch: `agent/ui-v3-r3-home-register`  
-Pull request: #438
+Branch: `agent/ui-v3-r4-dossier-clean`  
+Pull request: #439
 
-R3 removes duplicated Home sections, retains only the required entrypoint content, reduces the desktop register to six primary columns, closes filters by default, and replaces mobile field-by-field cards with compact rows.
+R4 reduces the first viewport to six primary facts, removes the duplicated decision-card summary, bounds Events to five and Evidence to ten initial records, reduces organization relationships to five desktop columns, and moves secondary fields into disclosures.
 
-The R3 workflow captures Home plus Stablecoin Register default, filtered, and empty states at all five required widths. It fails on runtime errors, horizontal overflow, page-height budgets, incorrect desktop/mobile representation, more than six columns, open default filters, absent empty state, desktop rows above 68px, or mobile rows above 112px.
+The R4 workflow captures USDC, UST, and BUSD at all five required widths. It fails on build or contract errors, visible runtime errors, failed requests, horizontal overflow, H1 outside the allowed range, missing primary facts, more than five initial events, more than ten initial Evidence rows, more than five organization columns, wrong desktop/mobile disclosure state, or excessive page height.
 
-R3 remains active until the generated contact sheet is manually inspected, every failure is corrected, and PR #438 is merged.
+R4 remains active until the generated contact sheet is manually inspected, every failure is corrected, and PR #439 is merged.
 
 ## Completion rule
 
