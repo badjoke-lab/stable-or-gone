@@ -30,3 +30,40 @@ const data = {
   <td>{record.backingLabel}</td>
   <td><time datetime={record.reviewedAt || undefined}>{record.reviewedAt || 'Not recorded'}</time><small>{record.sourceIdentityCount} sources</small></td>
 </tr>
+
+<style is:global>
+  .stablecoin-index-page-r3 .stablecoin-index-table td {
+    box-sizing: border-box !important;
+    height: 48px !important;
+    padding-block: 0.25rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-table td small {
+    margin-top: 0.05rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-record-identity-r3 {
+    flex-wrap: nowrap !important;
+    gap: 0.4rem !important;
+  }
+
+  .stablecoin-index-page-r3 .comparison-choice-icon {
+    box-sizing: border-box !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+  }
+
+  .stablecoin-index-page-r3 .comparison-choice-icon input {
+    width: 16px !important;
+    height: 16px !important;
+  }
+</style>
