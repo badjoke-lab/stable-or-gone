@@ -1,0 +1,480 @@
+/* Authority: docs/ui-v3-remediation-authority.md — R3 Home and Stablecoin Register. */
+
+.home-registry-r3 {
+  gap: 1rem !important;
+}
+
+.home-registry-r3 .home-entry {
+  padding-block: 1.5rem !important;
+}
+
+.home-registry-r3 .home-entry__deck {
+  margin-top: 0.75rem !important;
+}
+
+.home-registry-r3 .home-registry-totals a {
+  min-height: 72px !important;
+}
+
+.home-direct-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--sog-line-subtle);
+  gap: 1px;
+}
+
+.home-direct-links a {
+  min-width: 0;
+  min-height: 62px;
+  padding: 0.75rem 0.85rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: center;
+  gap: 0.1rem 0.75rem;
+  background: var(--sog-surface);
+  color: var(--sog-text);
+  text-decoration: none;
+}
+
+.home-direct-links a:hover,
+.home-direct-links a:focus-visible {
+  background: var(--sog-surface-raised);
+}
+
+.home-direct-links strong {
+  min-width: 0;
+  font-size: 0.9375rem;
+}
+
+.home-direct-links span {
+  grid-column: 1;
+  color: var(--sog-text-muted);
+  font-size: 0.75rem;
+}
+
+.home-direct-links b {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: var(--sog-link);
+}
+
+.home-registry-r3 .home-panel {
+  padding: 1rem !important;
+  border-radius: 10px !important;
+}
+
+.home-registry-r3 .home-section-heading {
+  margin-bottom: 0.65rem !important;
+}
+
+.home-registry-r3 .home-material-list li {
+  padding-block: 0.7rem !important;
+}
+
+.home-registry-r3 .home-material-list h3 {
+  font-size: 1rem !important;
+}
+
+.home-registry-r3 .home-material-list p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.home-registry-r3 .home-recent-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1px !important;
+  overflow: hidden;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 8px;
+  background: var(--sog-line-subtle);
+}
+
+.home-registry-r3 .home-recent-grid > a {
+  min-height: 96px !important;
+  padding: 0.75rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--sog-surface) !important;
+}
+
+.home-registry-r3 .home-recent-grid dl {
+  margin-top: 0.55rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.55rem !important;
+}
+
+.home-registry-r3 .home-recent-grid dl > div {
+  min-width: 0;
+}
+
+.home-registry-r3 .home-recent-grid dd {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-r3-secondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-registry-r3 .home-publications ol,
+.home-registry-r3 .home-guide-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+}
+
+.home-registry-r3 .home-publications li,
+.home-registry-r3 .home-guide-grid article {
+  min-height: 0 !important;
+  padding: 0.75rem 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--sog-line-subtle) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.home-registry-r3 .home-publications p,
+.home-registry-r3 .home-guide-grid p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Register shell. */
+.stablecoin-index-page-r3 {
+  gap: 0.8rem !important;
+}
+
+.stablecoin-index-page-r3 .stablecoin-register-header {
+  padding: 1.25rem 0 !important;
+  display: block !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.stablecoin-index-page-r3 .stablecoin-register-header h1 {
+  font-size: clamp(2.5rem, 4vw, 3rem) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.12 !important;
+}
+
+.stablecoin-index-page-r3 .stablecoin-register-header > div > p:last-of-type {
+  max-width: 68ch;
+  margin-top: 0.6rem;
+  line-height: 1.55;
+}
+
+.stablecoin-index-page-r3 .stablecoin-register-links {
+  margin-top: 0.7rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-register-links a {
+  min-height: 34px;
+  padding: 0.3rem 0.55rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-registry {
+  border-radius: 10px;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-controls {
+  padding: 0.85rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-toolbar {
+  grid-template-columns: minmax(260px, 1.4fr) minmax(190px, 0.55fr) auto;
+  gap: 0.65rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-toolbar .ui-field,
+.stablecoin-index-page-r3 .stablecoin-index-action {
+  min-height: 42px;
+}
+
+.stablecoin-filter-panel {
+  margin-top: 0.7rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 8px;
+  background: var(--sog-surface-interactive);
+}
+
+.stablecoin-filter-panel > summary {
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.stablecoin-filter-panel > summary span {
+  font-weight: 750;
+}
+
+.stablecoin-filter-panel > summary small {
+  color: var(--sog-text-muted);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.stablecoin-filter-panel .stablecoin-index-filter-grid {
+  margin: 0;
+  padding: 0.65rem;
+  border-top: 1px solid var(--sog-line-subtle);
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-filter summary {
+  min-height: 50px;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-summary {
+  min-height: 56px;
+  padding: 0.65rem 0.85rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-results-heading {
+  padding: 0.75rem 0.85rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-results-heading p {
+  margin-top: 0.2rem;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-table table {
+  min-width: 940px;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-table th {
+  top: 64px;
+  padding: 0.6rem 0.65rem;
+  font-size: 14px !important;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-table td {
+  height: 64px;
+  padding: 0.55rem 0.65rem;
+  font-size: 14px !important;
+  vertical-align: middle;
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-table th:nth-child(1),
+.stablecoin-index-page-r3 .stablecoin-index-table td:nth-child(1) { min-width: 210px; }
+.stablecoin-index-page-r3 .stablecoin-index-table th:nth-child(2),
+.stablecoin-index-page-r3 .stablecoin-index-table td:nth-child(2) { min-width: 135px; }
+.stablecoin-index-page-r3 .stablecoin-index-table th:nth-child(3),
+.stablecoin-index-page-r3 .stablecoin-index-table td:nth-child(3) { min-width: 140px; }
+.stablecoin-index-page-r3 .stablecoin-index-table th:nth-child(4),
+.stablecoin-index-page-r3 .stablecoin-index-table td:nth-child(4) { min-width: 185px; }
+.stablecoin-index-page-r3 .stablecoin-index-table th:nth-child(5),
+.stablecoin-index-page-r3 .stablecoin-index-table td:nth-child(5) { min-width: 150px; }
+.stablecoin-index-page-r3 .stablecoin-index-table th:nth-child(6),
+.stablecoin-index-page-r3 .stablecoin-index-table td:nth-child(6) { min-width: 170px; }
+
+.stablecoin-index-page-r3 .comparison-choice {
+  margin-top: 0.25rem;
+  min-height: 30px;
+  padding: 0.2rem 0.4rem;
+}
+
+.stablecoin-index-card-r3 {
+  min-height: 96px;
+  padding: 0.65rem 0.75rem;
+  border: 0;
+  border-bottom: 1px solid var(--sog-line-subtle);
+  border-radius: 0;
+  background: var(--sog-surface);
+}
+
+.stablecoin-index-card-r3 .stablecoin-index-card-heading {
+  align-items: center;
+}
+
+.stablecoin-index-card-r3 .stablecoin-index-card-identity {
+  color: var(--sog-text);
+  text-decoration: none;
+}
+
+.stablecoin-index-card-r3 .stablecoin-index-card-identity > span {
+  min-width: 0;
+}
+
+.stablecoin-index-card-r3 .stablecoin-index-card-identity strong,
+.stablecoin-index-card-r3 .stablecoin-index-card-identity small {
+  display: block;
+}
+
+.stablecoin-index-card-r3 .stablecoin-index-card-identity strong {
+  font-size: 0.975rem;
+}
+
+.stablecoin-index-card-r3 .stablecoin-index-card-identity small {
+  margin-top: 0.1rem;
+  overflow: hidden;
+  color: var(--sog-text-muted);
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stablecoin-index-card-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stablecoin-index-card-r3 .comparison-choice-card {
+  width: auto;
+  margin: 0;
+  min-height: 32px;
+  padding: 0.2rem 0.35rem;
+}
+
+.stablecoin-index-card-meta,
+.stablecoin-index-card-foot {
+  margin: 0.3rem 0 0;
+  display: flex;
+  min-width: 0;
+  gap: 0.45rem;
+  color: var(--sog-text-muted);
+  font-size: 0.75rem;
+}
+
+.stablecoin-index-card-meta span,
+.stablecoin-index-card-foot span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stablecoin-index-card-meta span + span::before,
+.stablecoin-index-card-foot span + span::before {
+  content: "·";
+  margin-right: 0.45rem;
+  color: var(--sog-text-faint);
+}
+
+.stablecoin-index-page-r3 .stablecoin-index-no-results {
+  min-height: 320px;
+}
+
+@media (max-width: 860px) {
+  .home-r3-secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-cards {
+    padding: 0;
+    gap: 0;
+    border-top: 1px solid var(--sog-line-subtle);
+  }
+}
+
+@media (max-width: 719px) {
+  .home-direct-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-registry-r3 .home-recent-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-registry-r3 .home-recent-grid > a {
+    min-height: 88px !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-register-header {
+    padding: 1rem 0 !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-register-header h1 {
+    font-size: clamp(1.875rem, 9vw, 2.25rem) !important;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-register-links {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-register-links a {
+    flex: 0 0 auto;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-action {
+    grid-column: auto;
+  }
+
+  .stablecoin-filter-panel > summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .stablecoin-filter-panel > summary small {
+    text-align: left;
+  }
+
+  .stablecoin-filter-panel .stablecoin-index-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-summary {
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-results-heading {
+    flex-direction: row;
+    align-items: end;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-results-heading p {
+    display: none;
+  }
+
+  .stablecoin-index-page-r3 .stablecoin-index-no-results {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-direct-links {
+    grid-template-columns: 1fr;
+  }
+
+  .home-registry-r3 .home-recent-grid dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .home-registry-r3 .home-recent-grid dl > div:last-child {
+    display: none;
+  }
+
+  .stablecoin-index-card-r3 .comparison-choice-card span {
+    display: none;
+  }
+
+  .stablecoin-index-card-actions {
+    gap: 0.2rem;
+  }
+}
