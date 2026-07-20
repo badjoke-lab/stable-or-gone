@@ -1,0 +1,609 @@
+.stablecoin-dossier-r4 {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.stablecoin-dossier-r4,
+.stablecoin-dossier-r4 * {
+  box-sizing: border-box;
+}
+
+.stablecoin-dossier-r4 > * {
+  min-width: 0;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-masthead-r4 {
+  padding: clamp(1.25rem, 3vw, 2rem) !important;
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  background: var(--sog-surface);
+  box-shadow: none;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-overline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-overline nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-title-row {
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-title-row h1 {
+  margin: 0 !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+  font-size: clamp(2.1rem, 5vw, 3rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-title-row h1 > span {
+  width: auto !important;
+  color: var(--sog-text-muted) !important;
+  font-family: var(--sog-font-data) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.3 !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-aliases {
+  margin: 0.5rem 0 0;
+  color: var(--sog-text-muted);
+  font-size: 0.875rem;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-compact);
+  overflow: hidden;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div {
+  min-height: 86px !important;
+  padding: 0.85rem !important;
+  border: 0 !important;
+  border-right: 1px solid var(--sog-line-subtle) !important;
+  border-bottom: 1px solid var(--sog-line-subtle) !important;
+  background: color-mix(in srgb, var(--sog-background-subtle) 72%, transparent) !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-child(3n) {
+  border-right: 0 !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-last-child(-n + 3) {
+  border-bottom: 0 !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 dt {
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 dd {
+  margin-top: 0.3rem;
+  color: var(--sog-text);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-review-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  color: var(--sog-text-muted);
+  font-size: 0.8125rem;
+}
+
+.stablecoin-dossier-r4 .stablecoin-material-change-r4 {
+  min-height: 0 !important;
+  padding: 0.85rem 1rem !important;
+  display: grid !important;
+  grid-template-columns: 170px minmax(0, 1fr) !important;
+  gap: 1rem !important;
+  border-radius: var(--sog-radius-compact) !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-material-change-r4 div {
+  min-width: 0;
+}
+
+.stablecoin-dossier-nav-r4 {
+  position: sticky;
+  z-index: 8;
+  top: 64px;
+  margin: 0 !important;
+  padding: 0.55rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.35rem !important;
+  border: 1px solid var(--sog-line-subtle) !important;
+  border-radius: var(--sog-radius-compact) !important;
+  background: color-mix(in srgb, var(--sog-background) 94%, transparent) !important;
+  backdrop-filter: blur(12px);
+  overflow: visible !important;
+}
+
+.stablecoin-dossier-nav-r4 a {
+  min-width: 0;
+  min-height: 38px;
+  padding: 0.45rem 0.3rem !important;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  color: var(--sog-text-muted) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal !important;
+}
+
+.stablecoin-dossier-nav-r4 a:hover,
+.stablecoin-dossier-nav-r4 a:focus-visible {
+  background: var(--sog-surface-selected);
+  color: var(--sog-link-hover) !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-dossier-section,
+.stablecoin-dossier-r4 .stablecoin-organizations-control {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--sog-line-subtle) !important;
+  border-radius: var(--sog-radius-panel) !important;
+  background: var(--sog-surface) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.stablecoin-dossier-r4 .stablecoin-overview-r4 {
+  padding: clamp(1.1rem, 2.5vw, 1.6rem) !important;
+  display: grid;
+  gap: 1rem;
+}
+
+.stablecoin-dossier-r4 .stablecoin-overview-r4 .stablecoin-section-heading {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-overview-r4 .stablecoin-section-heading h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem) !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-assessment-copy {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.stablecoin-overview-secondary-r4 {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.stablecoin-overview-secondary-r4 > div {
+  padding: 0.8rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-compact);
+  background: color-mix(in srgb, var(--sog-background-subtle) 68%, transparent);
+}
+
+.stablecoin-overview-secondary-r4 dt,
+.stablecoin-control-summary-r4 dt,
+.stablecoin-r4-technical dt {
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
+}
+
+.stablecoin-overview-secondary-r4 dd,
+.stablecoin-control-summary-r4 dd,
+.stablecoin-r4-technical dd {
+  margin: 0.25rem 0 0;
+  color: var(--sog-text);
+  font-size: 0.9rem;
+}
+
+.stablecoin-r4-disclosure > summary {
+  list-style: none;
+}
+
+.stablecoin-r4-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.stablecoin-r4-section-summary {
+  min-height: 66px;
+  padding: 0.85rem 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--sog-background-subtle) 72%, transparent);
+}
+
+.stablecoin-r4-disclosure[open] > .stablecoin-r4-section-summary {
+  border-bottom: 1px solid var(--sog-line-subtle);
+}
+
+.stablecoin-r4-section-summary > span {
+  min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.stablecoin-r4-section-summary small {
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+}
+
+.stablecoin-r4-section-summary strong {
+  color: var(--sog-text);
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.stablecoin-r4-section-summary b {
+  min-width: 32px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: 999px;
+  color: var(--sog-text-muted);
+  font-family: var(--sog-font-data);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.stablecoin-r4-section-body {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  display: grid;
+  gap: 1rem;
+}
+
+.stablecoin-r4-section-intro {
+  max-width: 82ch;
+  margin: 0;
+  color: var(--sog-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.stablecoin-dossier-r4 .stablecoin-section-heading,
+.stablecoin-dossier-r4 .bar {
+  font-family: var(--sog-font-body) !important;
+}
+
+.stablecoin-control-summary-r4 {
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
+}
+
+.stablecoin-control-summary-r4 > div {
+  min-height: 74px !important;
+  padding: 0.75rem !important;
+  border: 1px solid var(--sog-line-subtle) !important;
+  border-radius: var(--sog-radius-compact) !important;
+  background: color-mix(in srgb, var(--sog-background-subtle) 68%, transparent) !important;
+}
+
+.stablecoin-organizations-table-r4 {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.stablecoin-organizations-table-r4 table {
+  min-width: 820px !important;
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+}
+
+.stablecoin-organizations-table-r4 th,
+.stablecoin-organizations-table-r4 td {
+  padding: 0.65rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.35 !important;
+}
+
+.stablecoin-organizations-table-r4 td small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
+}
+
+.stablecoin-r4-technical,
+.stablecoin-r4-more-list {
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-compact);
+  overflow: hidden;
+}
+
+.stablecoin-r4-technical > summary,
+.stablecoin-r4-more-list > summary {
+  min-height: 46px;
+  padding: 0.65rem 0.8rem;
+  display: flex;
+  align-items: center;
+  color: var(--sog-link);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stablecoin-r4-technical > dl {
+  margin: 0;
+  padding: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  border-top: 1px solid var(--sog-line-subtle);
+}
+
+.stablecoin-r4-technical > dl > div {
+  min-width: 0;
+}
+
+.stablecoin-r4-event-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  list-style: none;
+}
+
+.stablecoin-r4-event-list > li {
+  min-height: 88px;
+  padding: 0.85rem 0;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 1rem;
+  border-bottom: 1px solid var(--sog-line-subtle);
+}
+
+.stablecoin-r4-event-list > li:last-child {
+  border-bottom: 0;
+}
+
+.stablecoin-r4-event-list time,
+.stablecoin-r4-event-list li > div > span {
+  color: var(--sog-text-faint);
+  font-size: 0.75rem;
+}
+
+.stablecoin-r4-event-list h3 {
+  margin: 0.15rem 0 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+}
+
+.stablecoin-r4-event-list p {
+  margin: 0.35rem 0 0;
+  color: var(--sog-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.stablecoin-r4-more-list > .stablecoin-r4-event-list,
+.stablecoin-r4-more-evidence > .stablecoin-r4-evidence-table {
+  padding: 0 0.8rem 0.8rem;
+  border-top: 1px solid var(--sog-line-subtle);
+}
+
+.stablecoin-r4-evidence-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.stablecoin-r4-evidence-table table {
+  min-width: 980px !important;
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+}
+
+.stablecoin-r4-evidence-table th,
+.stablecoin-r4-evidence-table td {
+  padding: 0.65rem !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.4 !important;
+  vertical-align: top;
+}
+
+.stablecoin-dossier-r4 .stablecoin-reserve-components,
+.stablecoin-dossier-r4 .stablecoin-value-state-group,
+.stablecoin-dossier-r4 .stablecoin-deployment-group,
+.stablecoin-dossier-r4 .stablecoin-legal-group,
+.stablecoin-dossier-r4 .stablecoin-unknown-group {
+  margin: 0 !important;
+}
+
+.stablecoin-dossier-r4 .ui-panel.registry,
+.stablecoin-dossier-r4 .panel {
+  margin: 0 !important;
+  border-color: var(--sog-line-subtle) !important;
+  box-shadow: none !important;
+}
+
+.stablecoin-dossier-r4 table {
+  font-size: 0.875rem;
+}
+
+.stablecoin-dossier-r4 th,
+.stablecoin-dossier-r4 td {
+  font-size: 0.875rem !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-further-reading {
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
+}
+
+.stablecoin-dossier-r4 .stablecoin-further-reading li,
+.stablecoin-dossier-r4 .stablecoin-further-reading a {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4,
+  .stablecoin-control-summary-r4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-child(3n) {
+    border-right: 1px solid var(--sog-line-subtle) !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-child(2n) {
+    border-right: 0 !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-last-child(-n + 3) {
+    border-bottom: 1px solid var(--sog-line-subtle) !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-last-child(-n + 2) {
+    border-bottom: 0 !important;
+  }
+
+  .stablecoin-dossier-nav-r4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .stablecoin-dossier-r4 {
+    gap: 0.75rem;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-masthead-r4 {
+    padding: 1rem !important;
+    gap: 0.85rem;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-overline {
+    align-items: flex-start;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-overline nav {
+    justify-content: flex-end;
+    gap: 0.45rem;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-title-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-title-row h1 {
+    font-size: clamp(1.8rem, 9vw, 2.25rem) !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div,
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:nth-child(n) {
+    min-height: 64px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--sog-line-subtle) !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-dossier-facts-r4 > div:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .stablecoin-dossier-r4 .stablecoin-material-change-r4 {
+    grid-template-columns: 1fr !important;
+    gap: 0.4rem !important;
+  }
+
+  .stablecoin-dossier-nav-r4 {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stablecoin-overview-secondary-r4,
+  .stablecoin-control-summary-r4,
+  .stablecoin-r4-technical > dl,
+  .stablecoin-dossier-r4 .stablecoin-further-reading {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stablecoin-r4-section-summary {
+    min-height: 58px;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .stablecoin-r4-section-summary strong {
+    font-size: 1rem;
+  }
+
+  .stablecoin-r4-section-body {
+    padding: 0.85rem;
+  }
+
+  .stablecoin-r4-event-list > li {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .stablecoin-organization-cards-r4 article {
+    padding: 0.8rem !important;
+    border-radius: var(--sog-radius-compact) !important;
+  }
+
+  .stablecoin-organization-cards-r4 article dl {
+    margin-top: 0.6rem !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.45rem !important;
+  }
+
+  .stablecoin-organization-cards-r4 article dl > div {
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .stablecoin-r4-more-evidence .stablecoin-r4-evidence-table table {
+    display: table !important;
+  }
+
+  .stablecoin-r4-more-evidence .mobile-record-list {
+    display: none !important;
+  }
+}
