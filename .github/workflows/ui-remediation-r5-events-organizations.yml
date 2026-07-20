@@ -1,0 +1,134 @@
+name: UI remediation R5 Events Organizations
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [agent/ui-v3-r5-events-organizations]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: ui-remediation-r5-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/ui-v3-r5-events-organizations'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate R5 contracts and build
+        id: validation
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f docs/ui-v3-remediation-authority.md
+          test -f src/styles/ui-remediation-r5.css
+          test -f src/styles/ui-remediation-r5-detail.css
+          test -f scripts/audit-ui-remediation-r5.mjs
+          grep -q 'data-register-version="r5-events"' src/components/EventEditorialRegister.astro
+          grep -q '<th>Date</th><th>Severity</th><th>Event</th><th>Subject</th><th>Effect</th>' src/components/EventEditorialRegister.astro
+          grep -q 'data-register-version="r5-organizations"' src/components/OrganizationEditorialRegister.astro
+          grep -q '<th>Organization</th><th>Role</th><th>Jurisdiction</th><th>Connected assets</th><th>Relationships</th>' src/components/OrganizationEditorialRegister.astro
+          grep -q 'data-record-version="r5-event"' src/components/EventEditorialRecordV3.astro
+          grep -q 'data-record-version="r5-organization"' src/components/OrganizationEditorialRecord.astro
+          ! grep -R -q 'More event details\|More organization details' src/components/EventIndexCard.astro src/components/OrganizationIndexCard.astro
+          ! grep -q 'event-overview-cards\|event-source-cards' src/components/EventEditorialBody.astro
+          ! grep -q 'organization-overview-cards\|organization-source-cards' src/components/OrganizationEditorialIdentity.astro src/components/OrganizationEditorialHistory.astro
+          test -z "$(git diff --name-only origin/main...HEAD -- data/ public/data/ config/site-architecture.mjs docs/migration/current-canonical-checkpoint.json docs/migration/current-stats-history-checkpoint.json docs/migration/registry-release-integrity-baseline.json)"
+          npm run prepare:index-interaction-contract
+          npm run prepare:responsive-accessibility-contract
+          npm run validate:data
+          npm run validate:evidence-relations-v2
+          npm run validate:compat
+          npm run validate:final
+          npm run check
+          npm run build
+          npm run verify:public
+      - name: Install Chromium
+        if: steps.validation.outcome == 'success'
+        run: npx playwright install --with-deps chromium
+      - name: Start local static server
+        if: steps.validation.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4321 --bind 127.0.0.1 --directory dist > /tmp/ui-r5-server.log 2>&1 &
+          echo $! > /tmp/ui-r5-server.pid
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4321/events/ > /dev/null && curl --fail --silent http://127.0.0.1:4321/event/sog_ev_ust_2022_05_collapse/ > /dev/null && curl --fail --silent http://127.0.0.1:4321/issuers/ > /dev/null && curl --fail --silent http://127.0.0.1:4321/issuer/circle/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ui-r5-server.log
+          exit 1
+      - name: Capture and audit R5 states
+        id: visual
+        if: steps.validation.outcome == 'success'
+        continue-on-error: true
+        env:
+          SOG_SCREENSHOT_BASE_URL: http://127.0.0.1:4321
+        run: node scripts/audit-ui-remediation-r5.mjs
+      - name: Upload mandatory R5 visual evidence
+        if: always() && steps.validation.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-remediation-r5-events-organizations-${{ github.run_id }}
+          path: |
+            artifacts/ui-remediation-r5/
+            /tmp/ui-r5-server.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Stop local server
+        if: always()
+        run: |
+          if test -f /tmp/ui-r5-server.pid; then kill "$(cat /tmp/ui-r5-server.pid)" || true; fi
+      - name: Publish R5 status
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          R5_PR_NUMBER: ${{ github.event.pull_request.number || 440 }}
+          R5_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          R5_VALIDATION: ${{ steps.validation.outcome }}
+          R5_VISUAL: ${{ steps.visual.outcome }}
+        with:
+          script: |
+            const issueNumber=Number(process.env.R5_PR_NUMBER);
+            const marker='<!-- ui-remediation-r5-events-organizations -->';
+            const bodyStart='<!-- ui-remediation-r5-run-status:start -->';
+            const bodyEnd='<!-- ui-remediation-r5-run-status:end -->';
+            const validate=process.env.R5_VALIDATION || 'skipped';
+            const visual=process.env.R5_VISUAL || 'skipped';
+            const passed=validate==='success' && visual==='success';
+            const status=`## Latest R5 workflow\n\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R5_HEAD_SHA}\`\n- Validation: **${validate}**\n- 40-capture visual audit: **${visual}**\n- Overall: **${passed ? 'pass' : 'failure'}**`;
+            const body=`${marker}\n## UI remediation R5 — Events and Organizations\n\n- Validation: **${validate}**\n- 40-capture audit: **${visual}**\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R5_HEAD_SHA}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,body});
+            const pr=await github.rest.pulls.get({owner:context.repo.owner,repo:context.repo.repo,pull_number:issueNumber});
+            const original=pr.data.body || '';
+            const block=`${bodyStart}\n${status}\n${bodyEnd}`;
+            const expression=new RegExp(`${bodyStart}[\\s\\S]*?${bodyEnd}`,'m');
+            const next=expression.test(original) ? original.replace(expression,block) : `${original.trim()}\n\n${block}\n`;
+            await github.rest.pulls.update({owner:context.repo.owner,repo:context.repo.repo,pull_number:issueNumber,body:next});
+      - name: Enforce R5 result
+        if: always()
+        shell: bash
+        run: |
+          test '${{ steps.validation.outcome }}' = success
+          test '${{ steps.visual.outcome }}' = success
