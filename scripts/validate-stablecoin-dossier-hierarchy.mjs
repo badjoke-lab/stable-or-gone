@@ -24,10 +24,11 @@ const sections = hierarchy.dossier_sections ?? [];
 const currentFields = hierarchy.current_field_matrix ?? [];
 const syntheticFields = hierarchy.synthetic_field_matrix ?? [];
 const allFields = hierarchy.field_matrix ?? [];
-const sectionIds = new Set(dossierSections.map((section) => section.id));
+const expectedSectionIds = dossierSections.map((section) => section.id);
+const sectionIds = new Set(expectedSectionIds);
 const allowedDecisions = new Set(['keep', 'move', 'consolidate', 'replace', 'deprecate', 'add_contextual_link']);
 
-assert(hierarchy.schema_version === '1.0', 'dossier hierarchy schema version must be 1.0');
+assert(hierarchy.schema_version === '2.0', 'dossier hierarchy schema version must be 2.0');
 assert(hierarchy.totals?.dossier_sections === 8, `expected 8 dossier sections, found ${hierarchy.totals?.dossier_sections}`);
 assert(hierarchy.totals?.surface_files === dossierSurfaceFiles.length, 'surface file count mismatch');
 assert(hierarchy.totals?.unique_current_field_surfaces === currentFields.length, 'current field surface count mismatch');
@@ -37,17 +38,7 @@ assert(hierarchy.totals?.unassigned_current_fields === 0, 'every current field s
 assert(hierarchy.totals?.duplicate_field_ids === 0, 'dossier field ids must be unique');
 assert(hierarchy.totals?.failures === 0, 'collector failures must be zero');
 assert((hierarchy.failures ?? []).length === 0, 'collector failure list must be empty');
-assert(sections.length === 8, 'dossier section matrix must contain eight rows');
-assert(JSON.stringify(sections.map((section) => section.id)) === JSON.stringify([
-  'identity_current_state',
-  'organizations_control',
-  'how_asset_works',
-  'deployments_legal_context',
-  'history',
-  'evidence',
-  'known_unknowns',
-  'corrections_further_reading'
-]), 'dossier section order is not approved');
+assert(JSON.stringify(sections.map((section) => section.id)) === JSON.stringify(expectedSectionIds), 'dossier section order is not approved');
 
 for (const section of sections) {
   assert(sectionIds.has(section.id), `unknown dossier section ${section.id}`);
@@ -64,7 +55,7 @@ for (const field of allFields) {
   fieldIds.add(field.field_id);
   assert(sectionIds.has(field.destination_section), `${field.field_id}: invalid destination section ${field.destination_section}`);
   assert(allowedDecisions.has(field.decision), `${field.field_id}: invalid decision ${field.decision}`);
-  assert(field.required === true, `${field.field_id}: all current PR 18 fields must remain required until a dedicated deprecation is approved`);
+  assert(field.required === true, `${field.field_id}: required dossier field was weakened`);
 }
 
 for (const field of currentFields) {
@@ -73,46 +64,51 @@ for (const field of currentFields) {
   assert(field.render_occurrences > 0, `${field.field_id}: render occurrence count must be positive`);
 }
 
-assert(dossierPolicies.implementation_deferred === true, 'PR 18 must remain a specification-only migration');
-assert(dossierPolicies.implementation_starts_at_pr === 27, 'dossier implementation must remain deferred to PR 27');
-assert(dossierPolicies.route_changes_allowed === false, 'PR 18 must not change routes');
+assert(dossierPolicies.implementation_deferred === false, 'R4 dossier implementation may not be marked deferred');
+assert(dossierPolicies.implementation_starts_at_pr === 415, 'dossier implementation start PR must remain recorded');
+assert(dossierPolicies.current_remediation_pr === 439, 'current dossier remediation PR must be 439');
+assert(dossierPolicies.route_changes_allowed === false, 'R4 must not change routes');
 assert(dossierPolicies.evidence_section_required === true, 'Evidence section must remain mandatory');
 assert(dossierPolicies.known_unknowns_section_required === true, 'Known unknowns section must remain mandatory');
-assert(dossierPolicies.corrections_section_required === true, 'Corrections and further reading section must remain mandatory');
+assert(dossierPolicies.corrections_section_required === true, 'Related records and corrections must remain mandatory');
 assert(dossierPolicies.all_relationships_required === true, 'All organization relationships must remain reachable');
 assert(dossierPolicies.current_and_historical_data_must_remain_distinct === true, 'Current and historical data must remain distinct');
-assert(dossierPolicies.hero_metrics_are_summaries_not_replacement_fields === true, 'Hero metrics must remain summaries rather than replacement fields');
+assert(dossierPolicies.primary_facts_are_summaries_not_replacement_fields === true, 'Primary facts must remain summaries rather than replacement fields');
+assert(dossierPolicies.primary_fact_limit === 6, 'R4 primary fact limit must be six');
+assert(dossierPolicies.initial_event_limit === 5, 'R4 initial event limit must be five');
+assert(dossierPolicies.initial_evidence_limit === 10, 'R4 initial Evidence limit must be ten');
+assert(dossierPolicies.organization_primary_column_limit === 5, 'R4 organization primary column limit must be five');
+assert(dossierPolicies.mobile_secondary_sections_closed === true, 'R4 secondary sections must close on mobile');
 assert(dossierPolicies.deployment_axes_must_remain_separate.length === 8, 'all eight deployment axes must remain separate');
 assert(dossierPolicies.evidence_axes_must_remain_separate.length === 8, 'all eight evidence axes must remain separate');
-assert(dossierPolicies.evidence_axes_must_remain_separate.includes('published_at'), 'evidence publication date must remain a separate axis');
+assert(dossierPolicies.evidence_axes_must_remain_separate.includes('published_at'), 'Evidence publication date must remain a separate axis');
 
-const evidenceFields = allFields.filter((field) => field.destination_section === 'evidence');
-const unknownFields = allFields.filter((field) => field.destination_section === 'known_unknowns');
-const correctionFields = allFields.filter((field) => field.destination_section === 'corrections_further_reading');
-assert(evidenceFields.length > 0, 'Evidence section must contain mapped fields');
-assert(unknownFields.length > 0, 'Known unknowns section must contain mapped fields');
-assert(correctionFields.some((field) => field.field_id === 'further_reading.corrections'), 'Corrections section must include a contextual correction link');
-assert(correctionFields.some((field) => field.field_id === 'further_reading.methodology'), 'Corrections section must include methodology access');
-assert(correctionFields.some((field) => field.field_id === 'further_reading.machine_readable'), 'Corrections section must include machine-readable access');
+const inSection = (sectionId) => allFields.filter((field) => field.destination_section === sectionId);
+const hasLabel = (rows, label) => rows.some((field) => field.current_label === label || field.public_label === label);
+const hasId = (rows, id) => rows.some((field) => field.field_id === id);
+const identityFields = inSection('identity_current_state');
+const organizationFields = inSection('organizations_control');
+const mechanicsFields = inSection('how_asset_works');
+const historyFields = inSection('history');
+const deploymentFields = inSection('deployments_legal_context');
+const unknownFields = inSection('known_unknowns');
+const evidenceFields = inSection('evidence');
+const correctionFields = inSection('corrections_further_reading');
 
-const organizationFields = allFields.filter((field) => field.destination_section === 'organizations_control');
-assert(organizationFields.some((field) => field.current_label === 'Organization'), 'Organizations section must contain all relationship rows');
-assert(organizationFields.some((field) => field.current_label === 'Relationship status'), 'Organizations section must preserve relationship state');
-const deploymentFields = allFields.filter((field) => field.destination_section === 'deployments_legal_context');
-for (const label of ['Operational state', 'Canonicality', 'Verification state', 'Contract identity state', 'Network record state']) {
-  assert(deploymentFields.some((field) => field.current_label === label), `Deployments section must preserve ${label}`);
-}
-const sourceFields = allFields.filter((field) => field.destination_section === 'evidence');
-for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'Supported claims', 'Archive', 'Reliability']) {
-  assert(sourceFields.some((field) => field.current_label === label), `Evidence section must preserve ${label}`);
-}
-assert(sourceFields.some((field) => field.field_id === 'evidence.published_at'), 'Evidence section must preserve publication date');
+for (const label of ['Name', 'Summary', 'Lifecycle', 'Issuance', 'Last reviewed']) assert(hasLabel(identityFields, label), `Overview must preserve ${label}`);
+for (const label of ['Reference', 'Backing', 'Redemption / exit', 'Stabilization', 'Reserve components']) assert(hasLabel(mechanicsFields, label), `Reserves and technical model must preserve ${label}`);
+for (const label of ['Organization', 'Role', 'Jurisdiction', 'State']) assert(hasLabel(organizationFields, label), `Organizations must preserve ${label}`);
+for (const id of ['history.event_date', 'history.event_type', 'history.event_title', 'history.event_description']) assert(hasId(historyFields, id), `Events section is missing ${id}`);
+for (const label of ['Network', 'Operational state', 'Canonicality', 'Verification state', 'Contract identity state', 'Network record state']) assert(hasLabel(deploymentFields, label), `Deployments must preserve ${label}`);
+for (const label of ['Topic', 'What remains unclear', 'Value state', 'Priority', 'Last checked']) assert(hasLabel(unknownFields, label), `Known unknowns must preserve ${label}`);
+for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'Supported claims', 'Archive', 'Reliability', 'Published']) assert(hasLabel(evidenceFields, label), `Evidence must preserve ${label}`);
+for (const id of ['further_reading.related_registry', 'further_reading.guides', 'further_reading.corrections', 'further_reading.methodology', 'further_reading.machine_readable']) assert(hasId(correctionFields, id), `Related records and corrections is missing ${id}`);
 
 const deprecatedFields = allFields.filter((field) => field.decision === 'deprecate');
-assert(deprecatedFields.length === 0, 'PR 18 must not deprecate a current field without a dedicated replacement decision');
+assert(deprecatedFields.length === 0, 'R4 may not silently deprecate a field');
 
 const validation = {
-  schema_version: '1.0',
+  schema_version: '2.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   totals: {
@@ -120,10 +116,6 @@ const validation = {
     current_field_surfaces: currentFields.length,
     synthetic_fields: syntheticFields.length,
     total_matrix_fields: allFields.length,
-    evidence_fields: evidenceFields.length,
-    known_unknown_fields: unknownFields.length,
-    correction_and_reading_fields: correctionFields.length,
-    deprecated_fields: deprecatedFields.length,
     failures: failures.length
   },
   policies: dossierPolicies,

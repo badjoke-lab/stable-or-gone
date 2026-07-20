@@ -3,19 +3,36 @@ import DeploymentTable from './DeploymentTable.astro';
 import EvidenceSourceTable from './EvidenceSourceTable.astro';
 import StablecoinValueStateSections from './StablecoinValueStateSections.astro';
 const { coin, deployments, evidence, reserveProfile, redemptionProfile, model, reserveReports, regulatoryNotes, openQuestions } = Astro.props;
+const visibleEvidence = evidence.slice(0, 10);
+const remainingEvidence = evidence.slice(10);
 ---
-<section class="stablecoin-dossier-section stablecoin-deployments-legal" id="deployments-legal-context">
-  <div class="stablecoin-section-heading"><p>Where the asset exists</p><h2>Deployments and legal context</h2><span>Network state, contract identity, legal notices, and value states remain separate.</span></div>
-  <div class="stablecoin-deployment-group"><DeploymentTable deployments={deployments} /></div>
-  <div class="stablecoin-legal-group"><StablecoinValueStateSections mode="legal" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
-</section>
+<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-deployments-legal" id="deployments-legal-context" data-r4-section open>
+  <summary class="stablecoin-r4-section-summary"><span><small>Networks and notices</small><strong>Deployments and legal context</strong></span><b>{deployments.length}</b></summary>
+  <div class="stablecoin-r4-section-body">
+    <p class="stablecoin-r4-section-intro">Network state, contract identity, and legal notices remain separate from the asset-level classification.</p>
+    <div class="stablecoin-deployment-group"><DeploymentTable deployments={deployments} /></div>
+    <div class="stablecoin-legal-group"><StablecoinValueStateSections mode="legal" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
+  </div>
+</details>
 
-<section class="stablecoin-dossier-section stablecoin-unknowns-section" id="known-unknowns" aria-labelledby="unknowns-title" aria-label="What this record has not resolved">
-  <div class="stablecoin-section-heading"><p>What remains unresolved</p><h2 id="unknowns-title">Known unknowns and coverage</h2><span>Missing or disputed facts remain visible instead of being converted into certainty.</span></div>
-  <div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
-</section>
+<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-unknowns-section" id="unknowns" data-r4-section open aria-label="What this record has not resolved">
+  <summary class="stablecoin-r4-section-summary"><span><small>Coverage limits</small><strong>Known unknowns</strong></span><b>{openQuestions.length}</b></summary>
+  <div class="stablecoin-r4-section-body">
+    <p class="stablecoin-r4-section-intro">Missing, undisclosed, unreviewed, or disputed facts remain visible instead of being converted into certainty.</p>
+    <div class="stablecoin-unknown-group"><StablecoinValueStateSections mode="unknowns" coin={coin} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} /></div>
+  </div>
+</details>
 
-<section class="stablecoin-dossier-section stablecoin-evidence-section" id="evidence">
-  <div class="stablecoin-section-heading"><p>Sources and supported claims</p><h2>Evidence</h2><span>Publisher, provenance, supported claims, archive state, reliability, and publication date remain separate.</span></div>
-  <EvidenceSourceTable evidence={evidence} tableKind="stablecoin-sources" />
-</section>
+<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-evidence-section" id="evidence" data-r4-section open>
+  <summary class="stablecoin-r4-section-summary"><span><small>Sources and claims</small><strong>Evidence</strong></span><b>{evidence.length}</b></summary>
+  <div class="stablecoin-r4-section-body">
+    <p class="stablecoin-r4-section-intro">The first ten linked records are shown initially. Publisher, provenance, archive state, supported claims, and reliability remain separate fields.</p>
+    <div class="stablecoin-r4-evidence-table"><EvidenceSourceTable evidence={visibleEvidence} tableKind="stablecoin-sources" /></div>
+    {remainingEvidence.length > 0 && (
+      <details class="stablecoin-r4-more-list stablecoin-r4-more-evidence">
+        <summary>Show {remainingEvidence.length} additional source record{remainingEvidence.length === 1 ? '' : 's'}</summary>
+        <div class="stablecoin-r4-evidence-table"><EvidenceSourceTable evidence={remainingEvidence} tableKind="stablecoin-sources" /></div>
+      </details>
+    )}
+  </div>
+</details>

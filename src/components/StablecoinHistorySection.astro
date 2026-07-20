@@ -1,19 +1,39 @@
 ---
-import IssuerControlEvents from './IssuerControlEvents.astro';
-import StablecoinEventTimeline from './StablecoinEventTimeline.astro';
 import ValueStateText from './ValueStateText.astro';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { formatPublicLabel } from '../utils/displayLabels';
-const { modelHistoryEvents, issuerControlEvents, events } = Astro.props;
+const { events } = Astro.props;
+const orderedEvents = [...events].sort((left: any, right: any) => String(right.event_date ?? '').localeCompare(String(left.event_date ?? '')) || String(right.id).localeCompare(String(left.id)));
+const visibleEvents = orderedEvents.slice(0, 5);
+const remainingEvents = orderedEvents.slice(5);
+const renderEvent = (event: any) => ({
+  event,
+  title: eventPublicCopy[event.id]?.title ?? event.title,
+  description: eventPublicCopy[event.id]?.description ?? event.description
+});
 ---
-<section class="stablecoin-dossier-section stablecoin-history" id="history">
-  <div class="stablecoin-section-heading"><p>Lifecycle</p><h2>History</h2><span>Current classification remains separate from dated changes and incidents.</span></div>
-  <section class="stablecoin-model-history" aria-labelledby="model-history-title">
-    <h3 id="model-history-title">Model and lifecycle changes</h3>
-    {modelHistoryEvents.length === 0 ? <p class="stablecoin-empty-state">No separate model-change event is currently recorded.</p> : (
-      <ol>{modelHistoryEvents.map((event: any) => <li><time datetime={event.event_date ?? undefined}><ValueStateText value={event.event_date} /></time><span><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><small>{formatPublicLabel(event.event_detail_kind ?? event.event_type)}</small></span></li>)}</ol>
+<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-history" id="events" data-r4-section open>
+  <summary class="stablecoin-r4-section-summary"><span><small>Lifecycle</small><strong>Material events</strong></span><b>{events.length}</b></summary>
+  <div class="stablecoin-r4-section-body">
+    <p class="stablecoin-r4-section-intro">Current classification remains separate from dated changes and incidents. The five latest records are shown first.</p>
+    {visibleEvents.length === 0 ? <p class="stablecoin-empty-state">No material event is currently recorded.</p> : (
+      <ol class="stablecoin-r4-event-list">
+        {visibleEvents.map((item: any) => {
+          const row = renderEvent(item);
+          return <li><time datetime={row.event.event_date ?? undefined}><ValueStateText value={row.event.event_date} /></time><div><span>{formatPublicLabel(row.event.event_type ?? row.event.event_detail_kind, 'Event')}</span><h3><a href={`/event/${row.event.id}/`}>{row.title}</a></h3>{row.description && <p>{row.description}</p>}</div></li>;
+        })}
+      </ol>
     )}
-  </section>
-  <IssuerControlEvents events={issuerControlEvents} />
-  <StablecoinEventTimeline events={events} />
-</section>
+    {remainingEvents.length > 0 && (
+      <details class="stablecoin-r4-more-list">
+        <summary>Show {remainingEvents.length} earlier event{remainingEvents.length === 1 ? '' : 's'}</summary>
+        <ol class="stablecoin-r4-event-list stablecoin-r4-event-list--earlier">
+          {remainingEvents.map((item: any) => {
+            const row = renderEvent(item);
+            return <li><time datetime={row.event.event_date ?? undefined}><ValueStateText value={row.event.event_date} /></time><div><span>{formatPublicLabel(row.event.event_type ?? row.event.event_detail_kind, 'Event')}</span><h3><a href={`/event/${row.event.id}/`}>{row.title}</a></h3></div></li>;
+          })}
+        </ol>
+      </details>
+    )}
+  </div>
+</details>
