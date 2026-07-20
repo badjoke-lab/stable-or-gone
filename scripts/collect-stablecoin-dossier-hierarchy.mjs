@@ -2,12 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import {
-  blockSectionAssignments,
   dossierPolicies,
   dossierSections,
   dossierSurfaceFiles,
-  fieldDecisionOverrides,
-  fieldSectionOverrides,
   syntheticDossierFields
 } from '../config/stablecoin-dossier-hierarchy.mjs';
 
@@ -17,7 +14,7 @@ const failures = [];
 const sectionIds = new Set(dossierSections.map((section) => section.id));
 
 function normalizeLabel(value) {
-  return value.replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+  return String(value ?? '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
 }
 
 function slugify(value) {
@@ -28,9 +25,51 @@ function slugify(value) {
 }
 
 function defaultSectionForFile(file) {
-  if (file.endsWith('IssuerControlEvents.astro')) return 'Issuer controls and intervention history';
-  if (file.endsWith('EvidenceSourceTable.astro')) return 'embedded';
-  return 'embedded';
+  if (file.endsWith('StablecoinReserveSection.astro')) return 'how_asset_works';
+  if (file.endsWith('StablecoinOrganizationsControl.astro')) return 'organizations_control';
+  if (file.endsWith('StablecoinHistorySection.astro')) return 'history';
+  if (file.endsWith('DeploymentTable.astro')) return 'deployments_legal_context';
+  if (file.endsWith('EvidenceSourceTable.astro')) return 'evidence';
+  if (file.endsWith('StablecoinRelatedSection.astro')) return 'corrections_further_reading';
+  return 'identity_current_state';
+}
+
+function sectionForHeading(label, fallback) {
+  const normalized = normalizeLabel(label).toLowerCase();
+  if (/current state|overview/.test(normalized)) return 'identity_current_state';
+  if (/reserve|redemption|technical model|how the asset works/.test(normalized)) return 'how_asset_works';
+  if (/organization|control/.test(normalized)) return 'organizations_control';
+  if (/material event|history|lifecycle/.test(normalized)) return 'history';
+  if (/deployment|legal context|regulatory|official notice|blockchain/.test(normalized)) return 'deployments_legal_context';
+  if (/known unknown|open question|coverage limit/.test(normalized)) return 'known_unknowns';
+  if (/evidence|source/.test(normalized)) return 'evidence';
+  if (/related record|correction|further reading|next step/.test(normalized)) return 'corrections_further_reading';
+  return fallback;
+}
+
+function sectionForField(file, currentSection, label) {
+  const normalized = normalizeLabel(label);
+
+  if (file.endsWith('StablecoinDossierHeader.astro')) {
+    if (['Reference', 'Backing', 'Redemption / exit'].includes(normalized)) return 'how_asset_works';
+    if (normalized === 'Primary organization') return 'organizations_control';
+    if (normalized === 'Evidence') return 'evidence';
+    return 'identity_current_state';
+  }
+
+  if (file.endsWith('StablecoinDetailView.astro')) {
+    if (['Stabilization', 'Reference target', 'Reference kind', 'Comparison category', 'Target value', 'Reference methodology', 'Public backing model', 'Canonical backing types', 'Reserve component categories', 'Primary stabilization mechanism', 'Recorded model description', 'Redemption / exit model', 'Valuation source', 'Yield / rebase profile', 'Classification notes'].includes(normalized)) return 'how_asset_works';
+    if (normalized === 'Open questions' || ['Coverage area', 'Entries'].includes(normalized)) return 'known_unknowns';
+    return currentSection;
+  }
+
+  if (file.endsWith('StablecoinOrganizationsControl.astro')) return 'organizations_control';
+  if (file.endsWith('StablecoinHistorySection.astro')) return 'history';
+  if (file.endsWith('StablecoinReserveSection.astro')) return 'how_asset_works';
+  if (file.endsWith('DeploymentTable.astro')) return 'deployments_legal_context';
+  if (file.endsWith('EvidenceSourceTable.astro')) return 'evidence';
+  if (file.endsWith('StablecoinRelatedSection.astro')) return 'corrections_further_reading';
+  return currentSection;
 }
 
 function collectFileSurfaces(file) {
@@ -41,26 +80,31 @@ function collectFileSurfaces(file) {
   }
 
   const source = fs.readFileSync(absolute, 'utf8');
-  const pattern = /<div class="bar">([^<{][^<]*)<\/div>|<div class="stablecoin-section-heading">[\s\S]*?<h2>([^<{][^<]*)<\/h2>[\s\S]*?<\/div>|<th>([^<{][^<]*)<\/th>|<div class="stat"><span>([^<{][^<]*)<\/span>|<dt>([^<{][^<]*)<\/dt>/g;
+  const pattern = /<summary[^>]*class="[^"]*stablecoin-r4-section-summary[^"]*"[^>]*>[\s\S]*?<strong>([^<{][^<]*)<\/strong>[\s\S]*?<\/summary>|<div class="bar">([^<{][^<]*)<\/div>|<div class="stablecoin-section-heading">[\s\S]*?<h2>([^<{][^<]*)<\/h2>[\s\S]*?<\/div>|<th>([^<{][^<]*)<\/th>|<dt>([^<{][^<]*)<\/dt>/g;
   const sections = [];
   const fields = [];
   let currentSection = defaultSectionForFile(file);
   let match;
+
   while ((match = pattern.exec(source)) !== null) {
-    if (match[1] || match[2]) {
-      currentSection = normalizeLabel(match[1] ?? match[2]);
-      sections.push({ file, label: currentSection, source_index: match.index });
+    const sectionLabel = match[1] ?? match[2] ?? match[3];
+    if (sectionLabel) {
+      const normalized = normalizeLabel(sectionLabel);
+      currentSection = sectionForHeading(normalized, currentSection);
+      sections.push({ file, label: normalized, section_id: currentSection, source_index: match.index });
       continue;
     }
-    const label = normalizeLabel(match[3] ?? match[4] ?? match[5]);
-    const section = match[4] ? 'Hero metrics' : currentSection;
-    const kind = match[4] ? 'hero_metric' : match[5] ? 'definition_term' : 'table_header';
+
+    const label = normalizeLabel(match[4] ?? match[5]);
+    const destinationSection = sectionForField(file, currentSection, label);
+    if (!sectionIds.has(destinationSection)) failures.push(`invalid dossier section ${destinationSection} for ${file}|${label}`);
     fields.push({
-      surface_key: `${file}|${section}|${label}`,
+      surface_key: `${file}|${destinationSection}|${label}`,
       file,
-      current_section: section,
+      current_section: currentSection,
       current_label: label,
-      kind,
+      kind: match[5] ? 'definition_term' : 'table_header',
+      destination_section: destinationSection,
       source_index: match.index
     });
   }
@@ -91,25 +135,19 @@ for (const field of rawFields) {
   }
 }
 
-const fieldMatrix = [...groupedFields.values()].map((field) => {
-  const blockKey = `${field.file}|${field.current_section}`;
-  const destinationSection = fieldSectionOverrides[field.surface_key] ?? blockSectionAssignments[blockKey] ?? null;
-  if (!destinationSection) failures.push(`unassigned dossier field surface: ${field.surface_key}`);
-  if (destinationSection && !sectionIds.has(destinationSection)) failures.push(`invalid destination section ${destinationSection} for ${field.surface_key}`);
-  return {
-    field_id: `surface.${slugify(field.file.replace('src/components/', '').replace('.astro', ''))}.${slugify(field.current_section)}.${slugify(field.current_label)}`,
-    current_surface: field.surface_key,
-    source_file: field.file,
-    current_section: field.current_section,
-    current_label: field.current_label,
-    kind: field.kind,
-    render_occurrences: field.render_occurrences,
-    destination_section: destinationSection,
-    decision: fieldDecisionOverrides[field.surface_key] ?? 'move',
-    required: true,
-    value_state: field.kind !== 'hero_metric'
-  };
-}).sort((left, right) => left.source_file.localeCompare(right.source_file) || left.current_section.localeCompare(right.current_section) || left.current_label.localeCompare(right.current_label));
+const fieldMatrix = [...groupedFields.values()].map((field) => ({
+  field_id: `surface.${slugify(field.file.replace('src/components/', '').replace('.astro', ''))}.${slugify(field.destination_section)}.${slugify(field.current_label)}`,
+  current_surface: field.surface_key,
+  source_file: field.file,
+  current_section: field.current_section,
+  current_label: field.current_label,
+  kind: field.kind,
+  render_occurrences: field.render_occurrences,
+  destination_section: field.destination_section,
+  decision: 'keep',
+  required: true,
+  value_state: true
+})).sort((left, right) => left.source_file.localeCompare(right.source_file) || left.destination_section.localeCompare(right.destination_section) || left.current_label.localeCompare(right.current_label));
 
 const syntheticMatrix = syntheticDossierFields.map((field) => ({ ...field, synthetic: true }));
 for (const field of syntheticMatrix) {
@@ -139,11 +177,12 @@ const inventoryDigest = createHash('sha256')
   .digest('hex');
 
 const output = {
-  schema_version: '1.0',
+  schema_version: '2.0',
   generated_at: new Date().toISOString(),
   implementation_boundary: {
     specification_only: dossierPolicies.implementation_deferred,
     implementation_starts_at_pr: dossierPolicies.implementation_starts_at_pr,
+    current_remediation_pr: dossierPolicies.current_remediation_pr,
     route_changes_allowed: dossierPolicies.route_changes_allowed
   },
   totals: {
