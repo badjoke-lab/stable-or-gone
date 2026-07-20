@@ -33,25 +33,81 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
 </a>
 {loadsGlobalRuntime && <script is:inline>
   (() => {
-    const marker = 'ui-remediation-r2-runtime-style';
-    if (document.getElementById(marker)) return;
-    fetch('/ui-remediation-r2.css?runtime=2', { cache: 'no-store' })
-      .then((response) => {
-        if (!response.ok) throw new Error(`R2 stylesheet request failed: ${response.status}`);
-        return response.text();
-      })
-      .then((css) => {
-        const style = document.createElement('style');
-        style.id = marker;
-        style.dataset.uiRemediationR2Runtime = 'loaded';
-        style.textContent = css;
-        document.body.append(style);
-        document.documentElement.dataset.uiRemediationR2 = 'ready';
-      })
-      .catch((error) => {
-        document.documentElement.dataset.uiRemediationR2 = 'failed';
-        console.error(error);
+    const root = document.documentElement;
+    if (root.dataset.uiRemediationR2Runtime === 'installed') return;
+    root.dataset.uiRemediationR2Runtime = 'installed';
+
+    const important = (element, property, value) => {
+      if (element instanceof HTMLElement || element instanceof SVGElement) {
+        element.style.setProperty(property, value, 'important');
+      }
+    };
+
+    const apply = () => {
+      const width = window.innerWidth;
+      const headerHeight = width <= 719 ? 56 : width <= 1120 ? 60 : 64;
+      const titleSize = width <= 719 ? 36 : width <= 860 ? 40 : 48;
+      const interfaceFont = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+      important(document.body, 'font-family', interfaceFont);
+      important(document.body, 'font-size', '16px');
+      important(document.body, 'line-height', '1.62');
+
+      const header = document.querySelector('.site-header');
+      const primary = document.querySelector('.site-header-primary');
+      const inner = document.querySelector('.site-header-inner');
+      const navBar = document.querySelector('.site-navigation-bar');
+      const purpose = document.querySelector('.site-brand-purpose');
+      const brandCluster = document.querySelector('.site-brand-cluster');
+
+      for (const element of [header, primary, inner]) {
+        important(element, 'height', `${headerHeight}px`);
+        important(element, 'min-height', `${headerHeight}px`);
+        important(element, 'max-height', `${headerHeight}px`);
+      }
+      important(header, 'padding', '0');
+      important(primary, 'border-bottom', '0');
+      important(navBar, 'display', 'none');
+      important(purpose, 'display', 'none');
+      important(brandCluster, 'display', 'block');
+
+      if (inner instanceof HTMLElement) {
+        const columns = width <= 860
+          ? 'minmax(0, 1fr) auto'
+          : width <= 1120
+            ? 'minmax(150px, 190px) minmax(220px, 1fr) auto'
+            : 'minmax(150px, 190px) minmax(240px, 1fr) auto auto';
+        inner.style.setProperty('grid-template-columns', columns, 'important');
+        inner.style.setProperty('gap', width <= 719 ? '0.5rem' : 'clamp(0.65rem, 1.4vw, 1.25rem)', 'important');
+      }
+
+      document.querySelectorAll('h1').forEach((heading) => {
+        important(heading, 'font-family', interfaceFont);
+        important(heading, 'font-size', `${titleSize}px`);
+        important(heading, 'line-height', '1.12');
+        important(heading, 'letter-spacing', '-0.02em');
+        important(heading, 'overflow-wrap', 'normal');
+        important(heading, 'word-break', 'normal');
       });
+
+      document.querySelectorAll('table th, table td').forEach((cell) => {
+        important(cell, 'font-family', interfaceFont);
+        important(cell, 'font-size', '14px');
+        important(cell, 'line-height', '1.48');
+      });
+
+      document.querySelectorAll('h1, h2, h3, h4, p, li, dt, dd, label, button, input, select, textarea, summary, a, span, strong, small').forEach((element) => {
+        if (!element.closest('code, pre, kbd, samp, [data-long-value], .contract-address, .transaction-hash')) {
+          important(element, 'font-family', interfaceFont);
+        }
+      });
+
+      root.dataset.uiRemediationR2 = 'ready';
+    };
+
+    apply();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, { once: true });
+    window.addEventListener('resize', apply, { passive: true });
   })();
 </script>}
 {loadsGlobalRuntime && <><MobileTableRuntime /><DisclosureRuntime /><TerminalContentRuntime /></>}
