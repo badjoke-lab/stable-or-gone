@@ -1,6 +1,22 @@
 ---
 import { formatPublicLabel } from '../utils/displayLabels';
-const { record, initiallyVisible = true } = Astro.props;
+interface OrganizationCardRecord {
+  slug: string;
+  search: string;
+  name: string;
+  category: string;
+  regulatory: string;
+  jurisdictionScope: string;
+  roles: string[];
+  relationshipStatuses: string[];
+  assetCount: number;
+  relationshipCount: number;
+  sourceIdentityCount: number;
+  categoryLabel: string;
+  regulatoryLabel: string;
+  jurisdictionLabel: string;
+}
+const { record, initiallyVisible = true } = Astro.props as { record: OrganizationCardRecord; initiallyVisible?: boolean };
 const data = {
   'data-record-slug': record.slug,
   'data-search': record.search,
@@ -14,8 +30,8 @@ const data = {
   'data-relationships-count': String(record.relationshipCount),
   'data-evidence-count': String(record.sourceIdentityCount)
 };
-const roleLabel = record.roles.length ? record.roles.map((role) => formatPublicLabel(role)).join(', ') : 'Role not recorded';
-const relationshipLabel = record.relationshipStatuses.length ? record.relationshipStatuses.map((status) => formatPublicLabel(status)).join(', ') : 'State not recorded';
+const roleLabel = record.roles.length ? record.roles.map((role: string) => formatPublicLabel(role)).join(', ') : 'Role not recorded';
+const relationshipLabel = record.relationshipStatuses.length ? record.relationshipStatuses.map((status: string) => formatPublicLabel(status)).join(', ') : 'State not recorded';
 ---
 <article class="organization-index-card organization-index-card-r5" data-organization-card data-mobile-representation-for="organization-index" hidden={initiallyVisible ? undefined : true} {...data}>
   <div class="organization-index-card-r5-heading"><span class="record-kicker">{record.categoryLabel}</span><span class="organization-asset-count">{record.assetCount} asset{record.assetCount === 1 ? '' : 's'}</span></div>
