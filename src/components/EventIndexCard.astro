@@ -19,3 +19,11 @@ const data = {
   <p class="event-index-card-r5-subject">{record.subjectNames.join(', ') || 'Subject not recorded'}<span>{record.categoryLabel} · {record.subtypeLabel}</span></p>
   <p class="event-index-card-r5-effect">{record.statusEffectLabel}<span>{record.recoveryLabel} · {record.sourceIdentityCount} source{record.sourceIdentityCount === 1 ? '' : 's'}</span></p>
 </article>
+<style is:global>
+  @media (max-width: 760px) {
+    .event-index-page-r5 .event-index-card-r5 {
+      max-height: none !important;
+      overflow: visible !important;
+    }
+  }
+</style>
