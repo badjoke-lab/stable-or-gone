@@ -1,6 +1,6 @@
 ---
 import TickerBadge from './TickerBadge.astro';
-import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
+import { formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 const { record, initiallyVisible = true } = Astro.props;
 const data = {
   'data-record-slug': record.slug,
@@ -18,15 +18,15 @@ const data = {
 ---
 <tr data-registry-row hidden={initiallyVisible ? undefined : true} {...data}>
   <td>
-    <div class="stablecoin-record-identity">
+    <div class="stablecoin-record-identity stablecoin-record-identity-r3">
+      <label class="comparison-choice comparison-choice-icon"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span class="visually-hidden">Compare</span></label>
       <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} size="small" />
-      <div><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a><small>{record.symbol || 'No symbol'} · {record.id}</small></div>
+      <div><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a><small>{record.symbol || 'No symbol'}</small></div>
     </div>
-    <label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Compare</span></label>
   </td>
-  <td><span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span><small>Issuance: {formatIssuanceLabel(record.issuance)}</small></td>
-  <td><span>{record.referenceLabel}</span><small>{record.assetClassLabel}</small></td>
-  <td>{record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}<small>{record.primaryRoleLabel}</small></td>
-  <td><span>{record.backingLabel}</span><small>{record.stabilizationLabel}</small></td>
-  <td><time datetime={record.reviewedAt || undefined}>{record.reviewedAt || 'Not recorded'}</time><small>{record.sourceIdentityCount} sources · {record.eventCount} events</small></td>
+  <td><span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span></td>
+  <td>{record.referenceLabel}</td>
+  <td>{record.primaryOrganizationSlug ? <a href={`/issuer/${record.primaryOrganizationSlug}/`}>{record.primaryOrganizationName}</a> : record.primaryOrganizationName}</td>
+  <td>{record.backingLabel}</td>
+  <td><time datetime={record.reviewedAt || undefined}>{record.reviewedAt || 'Not recorded'}</time><small>{record.sourceIdentityCount} sources</small></td>
 </tr>
