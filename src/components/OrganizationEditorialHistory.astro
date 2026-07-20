@@ -6,28 +6,35 @@ import { formatPublicLabel } from '../utils/displayLabels';
 import { buildOrganizationDetailView } from '../lib/views/organizationDetailView';
 type View = ReturnType<typeof buildOrganizationDetailView>;
 const { view } = Astro.props as { view: View };
+const visibleEvents = view.events.slice(0, 5);
+const remainingEvents = view.events.slice(5);
+const visibleEvidence = view.evidence.slice(0, 10);
+const remainingEvidence = view.evidence.slice(10);
 ---
 <section class="organization-detail-section" id="events">
-  <div class="organization-detail-section-heading"><p>Material history</p><h2>Events</h2><span>Typed events and organization control actions remain linked to evidence.</span></div>
+  <div class="organization-detail-section-heading"><p>Material history</p><h2>Events</h2><span>The five latest typed events are shown first. Control actions remain linked to evidence.</span></div>
   <IssuerControlEvents events={view.issuerControlEvents} title="Enforcement and control actions" />
-  <div class="organization-detail-table"><table data-table-kind="organization-events" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Subtype</th><th>Status effect</th></tr></thead><tbody>
-    {view.events.length === 0 ? <tr><td colspan="5">No organization-level events have been added.</td></tr> : view.events.map(({ event, taxonomy, title }) => <tr><td><ValueStateText value={event.event_date} /></td><td><a href={'/event/' + event.id + '/'}>{title}</a></td><td>{taxonomy.public_category_label}</td><td>{taxonomy.canonical_subtype_label}</td><td>{taxonomy.status_effect_label}</td></tr>)}
+  <div class="organization-detail-table organization-events-r5"><table data-table-kind="organization-events" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Effect</th></tr></thead><tbody>
+    {visibleEvents.length === 0 ? <tr><td colspan="4">No organization-level events have been added.</td></tr> : visibleEvents.map(({ event, taxonomy, title }) => <tr><td><ValueStateText value={event.event_date} /></td><td><a href={`/event/${event.id}/`}>{title}</a></td><td>{taxonomy.canonical_subtype_label}<small>{taxonomy.public_category_label}</small></td><td>{taxonomy.status_effect_label}</td></tr>)}
   </tbody></table></div>
-  <div class="organization-event-cards" data-mobile-representation-for="organization-events">{view.events.map(({ event, taxonomy, title }) => <article><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time><h3><a href={'/event/' + event.id + '/'}>{title}</a></h3><p>{taxonomy.public_category_label} · {taxonomy.canonical_subtype_label}</p><small>{taxonomy.status_effect_label}</small></article>)}</div>
+  <div class="organization-event-cards organization-event-cards-r5" data-mobile-representation-for="organization-events">{visibleEvents.map(({ event, taxonomy, title }) => <article><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time><h3><a href={`/event/${event.id}/`}>{title}</a></h3><p>{taxonomy.canonical_subtype_label}</p><small>{taxonomy.status_effect_label}</small></article>)}</div>
+  {remainingEvents.length > 0 && <details class="organization-detail-more-r5"><summary>Show {remainingEvents.length} earlier event{remainingEvents.length === 1 ? '' : 's'}</summary><ul>{remainingEvents.map(({ event, taxonomy, title }) => <li><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time><a href={`/event/${event.id}/`}>{title}</a><span>{taxonomy.status_effect_label}</span></li>)}</ul></details>}
 </section>
 
 <section class="organization-detail-section" id="evidence">
-  <div class="organization-detail-section-heading"><p>Provenance</p><h2>Evidence</h2><span>Source identity, publication date, reliability, archive state, and relation count remain separate.</span></div>
-  <div class="organization-detail-table"><EvidenceSourceTable evidence={view.evidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added." /></div>
-  <div class="organization-source-cards" data-mobile-representation-for="organization-sources">{view.sourceIdentities.map((source) => <article><h3><a href={source.url}>{source.title}</a></h3><dl><div><dt>Publisher</dt><dd>{source.publisher ?? 'Not recorded'}</dd></div><div><dt>Published</dt><dd>{source.published_at ?? 'Not recorded'}</dd></div><div><dt>Reliability</dt><dd>{formatPublicLabel(source.reliability)}</dd></div></dl>{source.archived_url && <a href={source.archived_url}>Open archive</a>}</article>)}</div>
+  <div class="organization-detail-section-heading"><p>Provenance</p><h2>Evidence</h2><span>The first ten source records are shown initially. Source identity, publication date, reliability, and archive state remain separate.</span></div>
+  <div class="organization-detail-table organization-evidence-r5"><EvidenceSourceTable evidence={visibleEvidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added." /></div>
+  {remainingEvidence.length > 0 && <details class="organization-detail-more-r5"><summary>Show {remainingEvidence.length} additional source record{remainingEvidence.length === 1 ? '' : 's'}</summary><div class="organization-detail-table"><EvidenceSourceTable evidence={remainingEvidence} tableKind="organization-sources" /></div></details>}
 </section>
 
-<section class="organization-detail-section" id="unknowns">
-  <div class="organization-detail-section-heading"><p>Uncertainty</p><h2>Known unknowns</h2><span>Reviewed gaps remain visible instead of being converted into false certainty.</span></div>
-  {view.knownUnknowns.length === 0 ? <p class="organization-detail-empty">No organization-specific known unknowns are currently recorded.</p> : <div class="organization-unknown-cards">{view.knownUnknowns.map((item) => <article><h3>{item.topic}</h3><p>{item.description}</p><dl><div><dt>Severity</dt><dd>{formatPublicLabel(item.severity)}</dd></div><div><dt>Last checked</dt><dd><ValueStateText value={item.last_checked_at} /></dd></div></dl>{item.notes && <p>{item.notes}</p>}</article>)}</div>}
-</section>
+<details class="organization-detail-section organization-unknowns-r5" id="unknowns" open>
+  <summary><span><small>Uncertainty</small><strong>Known unknowns</strong></span><b>{view.knownUnknowns.length}</b></summary>
+  <div class="organization-unknown-list-r5">
+    {view.knownUnknowns.length === 0 ? <p class="organization-detail-empty">No organization-specific known unknowns are currently recorded.</p> : view.knownUnknowns.map((item) => <article><h3>{item.topic}</h3><p>{item.description}</p><small>{formatPublicLabel(item.severity)} · last checked <ValueStateText value={item.last_checked_at} /></small>{item.notes && <p>{item.notes}</p>}</article>)}
+  </div>
+</details>
 
-<section class="organization-detail-section" id="corrections">
+<section class="organization-detail-section organization-corrections-r5" id="corrections">
   <div class="organization-detail-section-heading"><p>Maintenance</p><h2>Corrections and further reading</h2><span>Report a record problem or inspect methodology and machine-readable data.</span></div>
   <div class="organization-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Methodology</a><a href="/data/manifest.json">Data manifest</a></div>
 </section>
