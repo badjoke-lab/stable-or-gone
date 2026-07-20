@@ -78,7 +78,8 @@ for (const viewport of viewports) {
           .filter((element) => window.getComputedStyle(element).wordBreak === 'break-all')
           .slice(0, 10)
           .map((element) => element.tagName.toLowerCase() + (element.className ? `.${String(element.className).split(/\s+/).slice(0, 2).join('.')}` : '')),
-        isMobile: width <= 760
+        isMobile: width <= 760,
+        isCompact: width <= 900
       };
     }, { width: viewport.width });
 
@@ -93,8 +94,8 @@ for (const viewport of viewports) {
     if (audit.primaryFacts !== 6) stateFailures.push(`primary facts ${audit.primaryFacts}/6`);
     if (audit.navLinks !== 8) stateFailures.push(`section nav links ${audit.navLinks}/8`);
     if (audit.r4Sections < 8) stateFailures.push(`R4 sections ${audit.r4Sections}/8 minimum`);
-    if (audit.isMobile && audit.openSections !== 0) stateFailures.push(`mobile open sections ${audit.openSections}/0`);
-    if (!audit.isMobile && audit.openSections !== audit.r4Sections) stateFailures.push(`desktop open sections ${audit.openSections}/${audit.r4Sections}`);
+    if (audit.isCompact && audit.openSections !== 0) stateFailures.push(`compact open sections ${audit.openSections}/0`);
+    if (!audit.isCompact && audit.openSections !== 6) stateFailures.push(`desktop open sections ${audit.openSections}/6`);
     if (audit.visibleEvents > 5) stateFailures.push(`initial events ${audit.visibleEvents}/5 maximum`);
     if (audit.initialEvidenceRows > 10) stateFailures.push(`initial evidence rows ${audit.initialEvidenceRows}/10 maximum`);
     if (audit.organizationColumns > 5) stateFailures.push(`organization columns ${audit.organizationColumns}/5 maximum`);
@@ -102,7 +103,7 @@ for (const viewport of viewports) {
     if (!audit.overviewVisible) stateFailures.push('overview not visible');
     if (audit.errorTextVisible) stateFailures.push('visible runtime error text');
     if (audit.ordinaryBreakAll.length) stateFailures.push(`ordinary break-all ${audit.ordinaryBreakAll.join(', ')}`);
-    const heightBudget = audit.isMobile ? 9000 : 8500;
+    const heightBudget = audit.isCompact ? 9000 : 8500;
     if (audit.pageHeight > heightBudget) stateFailures.push(`page height ${audit.pageHeight}/${heightBudget}`);
 
     const screenshot = path.join(viewportDir, `${state.id}.png`);
@@ -126,7 +127,7 @@ for (const viewport of viewports) {
 
 await browser.close();
 const manifest = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   capture_count: records.length,
   failure_count: failures.length,
