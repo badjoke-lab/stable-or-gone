@@ -1,7 +1,6 @@
 ---
 import StructuredEventDetail from './StructuredEventDetail.astro';
 import EvidenceSourceTable from './EvidenceSourceTable.astro';
-import EventValueStateRows from './EventValueStateRows.astro';
 import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
@@ -9,30 +8,30 @@ type View = ReturnType<typeof buildEventDetailView>;
 type Subject = { id: string; name: string; slug: string };
 const { event, view } = Astro.props as { event: any; view: View };
 ---
-<section class="event-detail-section" id="overview">
-  <div class="event-detail-section-heading"><p>Identity and classification</p><h2>Overview</h2><span>Date, taxonomy, impact, recovery, mechanism, confidence, and evidence remain separate.</span></div>
-  <div class="event-detail-table"><table data-table-kind="event-details" data-mobile-table="scroll-preserve"><tbody><EventValueStateRows event={event} taxonomy={view.taxonomy} subjectStablecoins={view.subjectStablecoins} subjectOrganizations={view.subjectOrganizations} detailSummary={view.detailSummary} hasStructuredDetail={view.hasStructuredDetail} /></tbody></table></div>
-  <dl class="event-overview-cards" data-mobile-representation-for="event-details">
-    <div><dt>Date</dt><dd><ValueStateText value={event.event_date} /></dd></div><div><dt>Public category</dt><dd>{view.taxonomy.public_category_label}</dd></div><div><dt>Canonical subtype</dt><dd>{view.taxonomy.canonical_subtype_label}</dd></div><div><dt>Structured detail kind</dt><dd>{view.taxonomy.detail_kind_label}</dd></div><div><dt>Impact</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div><div><dt>Status effect</dt><dd>{view.taxonomy.status_effect_label}</dd></div><div><dt>Recovery</dt><dd>{view.taxonomy.recovery_label}</dd></div><div><dt>Recovery date</dt><dd><ValueStateText value={view.recoveryDate} /></dd></div><div><dt>Cause or mechanism</dt><dd>{view.causeOrMechanism ?? 'Not recorded'}</dd></div><div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
+<section class="event-detail-section event-detail-overview-r5" id="overview">
+  <div class="event-detail-section-heading"><p>Reviewed explanation</p><h2>What happened</h2><span>The primary date, severity, type, effect, recovery, and Evidence count are already shown above.</span></div>
+  <p class="event-detail-summary-r5">{view.eventDescription}</p>
+  <dl class="event-detail-secondary-r5">
+    <div><dt>Cause or mechanism</dt><dd>{view.causeOrMechanism ?? 'Not recorded'}</dd></div>
+    <div><dt>Structured detail kind</dt><dd>{view.taxonomy.detail_kind_label}</dd></div>
+    <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
   </dl>
 </section>
 
 <section class="event-detail-section" id="subjects">
   <div class="event-detail-section-heading"><p>Affected records</p><h2>Subjects</h2><span>Stablecoin and organization subjects remain separate record groups.</span></div>
-  <div class="event-subject-grid">
-    {view.subjectStablecoins.map((item: Subject) => <article class="event-subject-card"><span>Stablecoin subject</span><h3>{item.slug ? <a href={'/stablecoin/' + item.slug + '/'}>{item.name}</a> : item.name}</h3><p>Open the stablecoin dossier for current state, organizations, deployments, evidence, and unknowns.</p></article>)}
-    {view.subjectOrganizations.map((item: Subject) => <article class="event-subject-card"><span>Organization subject</span><h3>{item.slug ? <a href={'/issuer/' + item.slug + '/'}>{item.name}</a> : item.name}</h3><p>Open the organization record for roles, relationships, events, evidence, and unknowns.</p></article>)}
+  <div class="event-subject-list-r5">
+    {view.subjectStablecoins.map((item: Subject) => <a href={item.slug ? `/stablecoin/${item.slug}/` : undefined}><span>Stablecoin</span><strong>{item.name}</strong></a>)}
+    {view.subjectOrganizations.map((item: Subject) => <a href={item.slug ? `/issuer/${item.slug}/` : undefined}><span>Organization</span><strong>{item.name}</strong></a>)}
     {view.subjectCount === 0 && <p class="event-detail-empty">No subject relationship is recorded.</p>}
   </div>
 </section>
 
-{view.hasStructuredDetail && <section class="event-detail-section" id="structured-detail"><div class="event-detail-section-heading"><p>Typed record</p><h2>Structured detail</h2><span>Event-type-specific facts remain visible with explicit value states.</span></div><StructuredEventDetail event={event} /></section>}
+{view.hasStructuredDetail && <section class="event-detail-section" id="structured-detail"><div class="event-detail-section-heading"><p>Typed record</p><h2>Structured detail</h2><span>Only event-type-specific facts are shown here.</span></div><StructuredEventDetail event={event} /></section>}
 
 <section class="event-detail-section" id="sources">
   <div class="event-detail-section-heading"><p>Provenance</p><h2>Evidence</h2><span>Source identity, publisher, publication date, reliability, archive, and relation count remain separate.</span></div>
-  <div class="event-detail-table"><EvidenceSourceTable evidence={view.evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added." /></div>
-  <div class="event-source-cards" data-mobile-representation-for="event-sources">{view.sourceIdentities.map((source) => <article><h3><a href={source.url}>{source.title}</a></h3><dl><div><dt>Publisher</dt><dd>{source.publisher ?? 'Not recorded'}</dd></div><div><dt>Published</dt><dd>{source.published_at ?? 'Not recorded'}</dd></div><div><dt>Reliability</dt><dd>{formatPublicLabel(source.reliability)}</dd></div><div><dt>Relations</dt><dd>{view.eventRelations.filter((relation) => relation.evidence_id === source.id).length}</dd></div></dl>{source.archived_url && <a href={source.archived_url}>Open archive</a>}</article>)}</div>
-  {view.sourceIdentities.length === 0 && <p class="event-detail-empty">No event-specific source identity has been added.</p>}
+  <div class="event-detail-table event-detail-evidence-r5"><EvidenceSourceTable evidence={view.evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added." /></div>
 </section>
 
-<section class="event-detail-section" id="corrections"><div class="event-detail-section-heading"><p>Maintenance</p><h2>Corrections and further reading</h2><span>Use the documented correction path and methodology.</span></div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Methodology</a><a href="/events/">Event register</a><a href="/data/manifest.json">Data manifest</a></div></section>
+<section class="event-detail-section event-detail-corrections-r5" id="corrections"><div class="event-detail-section-heading"><p>Maintenance</p><h2>Corrections and further reading</h2><span>Use the documented correction path and methodology.</span></div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Methodology</a><a href="/events/">Event register</a><a href="/data/manifest.json">Data manifest</a></div></section>
