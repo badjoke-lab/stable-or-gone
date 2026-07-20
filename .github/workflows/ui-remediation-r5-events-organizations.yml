@@ -31,8 +31,9 @@ jobs:
           node-version: 22.22.0
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: Validate R5 contracts and build
-        id: validation
+
+      - name: Validate R5 static authority and containment
+        id: static
         continue-on-error: true
         shell: bash
         run: |
@@ -51,15 +52,46 @@ jobs:
           ! grep -q 'event-overview-cards\|event-source-cards' src/components/EventEditorialBody.astro
           ! grep -q 'organization-overview-cards\|organization-source-cards' src/components/OrganizationEditorialIdentity.astro src/components/OrganizationEditorialHistory.astro
           test -z "$(git diff --name-only origin/main...HEAD -- data/ public/data/ config/site-architecture.mjs docs/migration/current-canonical-checkpoint.json docs/migration/current-stats-history-checkpoint.json docs/migration/registry-release-integrity-baseline.json)"
-          npm run prepare:index-interaction-contract
-          npm run prepare:responsive-accessibility-contract
-          npm run validate:data
-          npm run validate:evidence-relations-v2
-          npm run validate:compat
-          npm run validate:final
-          npm run check
-          npm run build
-          npm run verify:public
+
+      - name: Validate index interaction contract
+        id: index
+        continue-on-error: true
+        run: npm run prepare:index-interaction-contract
+
+      - name: Validate responsive accessibility contract
+        id: responsive
+        continue-on-error: true
+        run: npm run prepare:responsive-accessibility-contract
+
+      - name: Validate canonical and Evidence contracts
+        id: canonical
+        continue-on-error: true
+        run: npm run validate:data && npm run validate:evidence-relations-v2 && npm run validate:compat && npm run validate:final
+
+      - name: Astro check
+        id: astro
+        continue-on-error: true
+        run: npm run check
+
+      - name: Build and verify public layer
+        id: build
+        continue-on-error: true
+        run: npm run build && npm run verify:public
+
+      - name: Resolve validation result
+        id: validation
+        shell: bash
+        run: |
+          printf 'static=%s\nindex=%s\nresponsive=%s\ncanonical=%s\nastro=%s\nbuild=%s\n' \
+            '${{ steps.static.outcome }}' '${{ steps.index.outcome }}' '${{ steps.responsive.outcome }}' \
+            '${{ steps.canonical.outcome }}' '${{ steps.astro.outcome }}' '${{ steps.build.outcome }}'
+          test '${{ steps.static.outcome }}' = success
+          test '${{ steps.index.outcome }}' = success
+          test '${{ steps.responsive.outcome }}' = success
+          test '${{ steps.canonical.outcome }}' = success
+          test '${{ steps.astro.outcome }}' = success
+          test '${{ steps.build.outcome }}' = success
+
       - name: Install Chromium
         if: steps.validation.outcome == 'success'
         run: npx playwright install --with-deps chromium
@@ -105,6 +137,12 @@ jobs:
           R5_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           R5_VALIDATION: ${{ steps.validation.outcome }}
           R5_VISUAL: ${{ steps.visual.outcome }}
+          R5_STATIC: ${{ steps.static.outcome }}
+          R5_INDEX: ${{ steps.index.outcome }}
+          R5_RESPONSIVE: ${{ steps.responsive.outcome }}
+          R5_CANONICAL: ${{ steps.canonical.outcome }}
+          R5_ASTRO: ${{ steps.astro.outcome }}
+          R5_BUILD: ${{ steps.build.outcome }}
         with:
           script: |
             const issueNumber=Number(process.env.R5_PR_NUMBER);
@@ -114,8 +152,9 @@ jobs:
             const validate=process.env.R5_VALIDATION || 'skipped';
             const visual=process.env.R5_VISUAL || 'skipped';
             const passed=validate==='success' && visual==='success';
-            const status=`## Latest R5 workflow\n\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R5_HEAD_SHA}\`\n- Validation: **${validate}**\n- 40-capture visual audit: **${visual}**\n- Overall: **${passed ? 'pass' : 'failure'}**`;
-            const body=`${marker}\n## UI remediation R5 — Events and Organizations\n\n- Validation: **${validate}**\n- 40-capture audit: **${visual}**\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R5_HEAD_SHA}\``;
+            const diagnostics=`Static: **${process.env.R5_STATIC}** · Index: **${process.env.R5_INDEX}** · Responsive: **${process.env.R5_RESPONSIVE}** · Canonical: **${process.env.R5_CANONICAL}** · Astro: **${process.env.R5_ASTRO}** · Build: **${process.env.R5_BUILD}**`;
+            const status=`## Latest R5 workflow\n\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R5_HEAD_SHA}\`\n- Validation: **${validate}**\n- 40-capture visual audit: **${visual}**\n- Diagnostics: ${diagnostics}\n- Overall: **${passed ? 'pass' : 'failure'}**`;
+            const body=`${marker}\n## UI remediation R5 — Events and Organizations\n\n- Validation: **${validate}**\n- 40-capture audit: **${visual}**\n- Diagnostics: ${diagnostics}\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R5_HEAD_SHA}\``;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
             const existing=comments.find((row)=>row.body?.includes(marker));
             if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
