@@ -86,7 +86,7 @@ const redemptionProfile = coin.redemption_profile;
     <StablecoinDossierHeader coin={coin} aliases={aliases} statusClass={statusClass} reference={reference} primaryOrganization={primaryOrganization} additionalRelationshipCount={additionalRelationshipCount} exitModel={exitModel} model={model} evidenceCount={evidence.length} latestMaterialEvent={latestMaterialEvent} latestMaterialEventTitle={latestMaterialEventTitle} latestMaterialEventSummary={latestMaterialEventSummary} />
 
     <nav class="stablecoin-dossier-nav stablecoin-dossier-nav-r4" aria-label="Stablecoin dossier sections">
-      <a href="#overview">Overview</a><a href="#reserves-redemption">Reserves</a><a href="#organizations-control">Organizations</a><a href="#events">Events</a><a href="#deployments-legal-context">Deployments</a><a href="#known-unknowns">Unknowns</a><a href="#evidence">Evidence</a><a href="#mechanism">Technical</a>
+      <a href="#overview">Overview</a><a href="#reserves-redemption">Reserves</a><a href="#organizations-control">Organizations</a><a href="#events">Events</a><a href="#deployments-legal-context">Deployments</a><a href="#unknowns">Unknowns</a><a href="#evidence">Evidence</a><a href="#mechanism">Technical</a>
     </nav>
 
     <section class="stablecoin-dossier-section stablecoin-assessment stablecoin-overview-r4" id="overview">
@@ -95,7 +95,7 @@ const redemptionProfile = coin.redemption_profile;
       <dl class="stablecoin-overview-secondary-r4">
         <div><dt>Issuance</dt><dd>{formatIssuanceLabel(coin.issuance_status)}</dd></div>
         <div><dt>Stabilization</dt><dd>{model.stabilization_label}</dd></div>
-        <div><dt>Open questions</dt><dd><a href="#known-unknowns">{openQuestions.length} unresolved item{openQuestions.length === 1 ? '' : 's'}</a></dd></div>
+        <div><dt>Open questions</dt><dd><a href="#unknowns">{openQuestions.length} unresolved item{openQuestions.length === 1 ? '' : 's'}</a></dd></div>
       </dl>
 
       <details class="stablecoin-technical-disclosure stablecoin-r4-technical">
