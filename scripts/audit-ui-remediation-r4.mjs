@@ -52,6 +52,10 @@ for (const viewport of viewports) {
       const sections = [...document.querySelectorAll('[data-r4-section]')].filter((item) => item instanceof HTMLDetailsElement);
       const firstEvidenceTable = document.querySelector('#evidence > .stablecoin-r4-section-body > .stablecoin-r4-evidence-table table');
       const firstEvidenceRows = firstEvidenceTable ? firstEvidenceTable.querySelectorAll('tbody tr').length : 0;
+      const visibleTableTextSizes = [...document.querySelectorAll('.stablecoin-dossier-r4 table th, .stablecoin-dossier-r4 table td')]
+        .filter(visible)
+        .map((cell) => Number.parseFloat(window.getComputedStyle(cell).fontSize))
+        .filter(Number.isFinite);
       const bodyText = body.innerText;
       return {
         viewportWidth: window.innerWidth,
@@ -65,6 +69,7 @@ for (const viewport of viewports) {
         visibleEvents: document.querySelectorAll('#events > .stablecoin-r4-section-body > .stablecoin-r4-event-list > li').length,
         initialEvidenceRows: firstEvidenceRows,
         organizationColumns: document.querySelectorAll('.stablecoin-organizations-table-r4 thead th').length,
+        minimumVisibleTableTextSize: visibleTableTextSizes.length ? Math.min(...visibleTableTextSizes) : 0,
         overviewVisible: visible(document.querySelector('#overview')),
         errorTextVisible: /failed to load|contract mismatch|index unavailable|comparison data failed|undefined is not|internal server error/i.test(bodyText),
         ordinaryBreakAll: [...document.querySelectorAll('body *')]
@@ -87,12 +92,13 @@ for (const viewport of viewports) {
     if (audit.h1Size < (audit.isMobile ? 28 : 32)) stateFailures.push(`H1 too small ${audit.h1Size}`);
     if (audit.primaryFacts !== 6) stateFailures.push(`primary facts ${audit.primaryFacts}/6`);
     if (audit.navLinks !== 8) stateFailures.push(`section nav links ${audit.navLinks}/8`);
-    if (audit.r4Sections < 7) stateFailures.push(`R4 sections ${audit.r4Sections}/7 minimum`);
+    if (audit.r4Sections < 8) stateFailures.push(`R4 sections ${audit.r4Sections}/8 minimum`);
     if (audit.isMobile && audit.openSections !== 0) stateFailures.push(`mobile open sections ${audit.openSections}/0`);
     if (!audit.isMobile && audit.openSections !== audit.r4Sections) stateFailures.push(`desktop open sections ${audit.openSections}/${audit.r4Sections}`);
     if (audit.visibleEvents > 5) stateFailures.push(`initial events ${audit.visibleEvents}/5 maximum`);
     if (audit.initialEvidenceRows > 10) stateFailures.push(`initial evidence rows ${audit.initialEvidenceRows}/10 maximum`);
     if (audit.organizationColumns > 5) stateFailures.push(`organization columns ${audit.organizationColumns}/5 maximum`);
+    if (audit.minimumVisibleTableTextSize > 0 && audit.minimumVisibleTableTextSize < 14) stateFailures.push(`table text below 14px ${audit.minimumVisibleTableTextSize}`);
     if (!audit.overviewVisible) stateFailures.push('overview not visible');
     if (audit.errorTextVisible) stateFailures.push('visible runtime error text');
     if (audit.ordinaryBreakAll.length) stateFailures.push(`ordinary break-all ${audit.ordinaryBreakAll.join(', ')}`);
