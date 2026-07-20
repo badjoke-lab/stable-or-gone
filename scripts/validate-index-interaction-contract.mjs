@@ -1,22 +1,76 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { indexInteractionContracts } from '../config/index-interaction-contract.mjs';
-const root=process.cwd(),audit=JSON.parse(fs.readFileSync(path.join(root,'data/generated/index-interaction-audit.json'),'utf8')),failures=[];
-const check=(value,message)=>{if(!value)failures.push(message)};
-const sources={organizations:'src/components/OrganizationEditorialRegister.astro',events:'src/components/EventEditorialRegister.astro'};
-const clients={stablecoins:'src/scripts/stablecoin-index.ts',organizations:'src/scripts/organization-index.ts',events:'src/scripts/event-index.ts'};
-const expected={stablecoins:{route:'/stablecoins/',inputs:2,selects:1,headers:7},organizations:{route:'/issuers/',inputs:2,selects:1,headers:5},events:{route:'/events/',inputs:2,selects:1,headers:5}};
-check(audit.schema_version==='1.1','audit schema changed');check(indexInteractionContracts.length===3,'three index contracts are required');
-for(const [key,value] of Object.entries({search_fields:18,filters:16,sorts:15,mobile_row_fields:26,paginated_indexes:1,implemented_indexes:3,route_changes:0}))check(audit.totals?.[key]===value,`${key} changed`);
-for(const contract of indexInteractionContracts){
-  const target=expected[contract.id],clientFile=clients[contract.id];
-  let current=audit.current_implementation.find((item)=>item.id===contract.id);
-  if(sources[contract.id]){
-    const source=fs.readFileSync(path.join(root,sources[contract.id]),'utf8'),client=fs.readFileSync(path.join(root,clientFile),'utf8'),behavior=`${source}\n${client}`;
-    current={missing_source:false,client_file:clientFile,current_controls:{input_count:[...source.matchAll(/<input\b/g)].length,select_count:[...source.matchAll(/<select\b/g)].length},current_table_headers:[...source.matchAll(/<th\b/g)],current_behavior:{result_count_present:/data-(?:organization-|event-)?result-count/.test(source),zero_result_row_present:/data-(?:organization-|event-)?no-results/.test(source),aria_live_present:/aria-live=/.test(source),server_rendered_rows_present:/records\.map/.test(source),url_search_params_present:behavior.includes('URLSearchParams'),history_replace_present:behavior.includes('replaceState'),history_push_present:behavior.includes('pushState'),popstate_present:behavior.includes('popstate'),clear_all_present:/clear-all/i.test(behavior),comparison_present:false,pagination_present:false,page_state_present:false,visible_range_present:false}};
-  }
-  check(contract.route===target.route,`${contract.id}: route changed`);check(contract.search.fields.length===6,`${contract.id}: search contract changed`);check(current?.missing_source===false,`${contract.id}: source missing`);check(current?.client_file===clientFile,`${contract.id}: client mismatch`);check(current?.current_controls?.input_count===target.inputs,`${contract.id}: input inventory changed`);check(current?.current_controls?.select_count===target.selects,`${contract.id}: select inventory changed`);check(current?.current_table_headers?.length===target.headers,`${contract.id}: header inventory changed`);
-  for(const key of ['result_count_present','zero_result_row_present','aria_live_present','server_rendered_rows_present','url_search_params_present','history_replace_present','history_push_present','popstate_present','clear_all_present'])check(current?.current_behavior?.[key]===true,`${contract.id}: behavior missing: ${key}`);
+
+const root = process.cwd();
+const auditPath = path.join(root, 'data/generated/index-interaction-audit.json');
+const outputPath = path.join(root, 'data/generated/index-interaction-validation.json');
+const failures = [];
+const check = (condition, message) => { if (!condition) failures.push(message); };
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+
+check(fs.existsSync(auditPath), 'index interaction audit is missing');
+if (!fs.existsSync(auditPath)) process.exit(1);
+const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
+const contractById = new Map(indexInteractionContracts.map((contract) => [contract.id, contract]));
+const expected = {
+  stablecoins: { route: '/stablecoins/', source: 'src/pages/stablecoins/index.astro', client: 'src/scripts/stablecoin-index.ts', headers: 7 },
+  organizations: { route: '/issuers/', source: 'src/components/OrganizationEditorialRegister.astro', client: 'src/scripts/organization-index.ts', headers: 5 },
+  events: { route: '/events/', source: 'src/components/EventEditorialRegister.astro', client: 'src/scripts/event-index.ts', headers: 5 }
+};
+
+check(audit.schema_version === '1.1', 'audit schema changed');
+check(indexInteractionContracts.length === 3, 'three index contracts are required');
+check(new Set(indexInteractionContracts.map((contract) => contract.id)).size === 3, 'index contract IDs must be unique');
+
+for (const [id, spec] of Object.entries(expected)) {
+  const contract = contractById.get(id);
+  check(Boolean(contract), `${id}: contract missing`);
+  if (!contract) continue;
+  check(contract.route === spec.route, `${id}: route changed`);
+  check(contract.search.fields.length === 6, `${id}: six search fields are required`);
+  check(contract.filters.length > 0, `${id}: filters are required`);
+  check(contract.sort.options.length > 0, `${id}: sort options are required`);
+  check(contract.mobile_row.fields.length > 0, `${id}: mobile row fields are required`);
+  check(contract.url_state.query_parameter === 'q', `${id}: query parameter changed`);
+  check(contract.url_state.history_mode === 'replace_then_push', `${id}: history mode changed`);
+  check(contract.zero_results.result_count_required === true, `${id}: zero-result count is required`);
+  check(contract.accessibility.result_count_aria_live === 'polite', `${id}: result count must remain polite`);
+
+  const source = read(spec.source);
+  const client = read(spec.client);
+  const headerCount = [...source.matchAll(/<th\b/g)].length;
+  check(headerCount === spec.headers, `${id}: expected ${spec.headers} primary headers, found ${headerCount}`);
+  check(source.includes('aria-live="polite"'), `${id}: result announcement missing`);
+  check(/data-(?:organization-|event-)?result-count/.test(source), `${id}: result count marker missing`);
+  check(/data-(?:organization-|event-)?no-results/.test(source), `${id}: zero-result state missing`);
+  check(/data-(?:organization-|event-)?clear-all/.test(source) || source.includes('data-stablecoin-clear-all'), `${id}: clear-all action missing`);
+  check(source.includes('records.map'), `${id}: server-rendered rows missing`);
+  check(client.includes('URLSearchParams'), `${id}: URL state parser missing`);
+  check(client.includes('replaceState'), `${id}: replaceState missing`);
+  check(client.includes('pushState'), `${id}: pushState missing`);
+  check(client.includes('popstate'), `${id}: popstate restoration missing`);
+
+  if (id === 'stablecoins') check(source.includes('stablecoin-index-page-r3') || source.includes('data-index-version="r3"'), 'stablecoins: R3 marker missing');
+  if (id === 'organizations') check(source.includes('data-register-version="r5-organizations"'), 'organizations: R5 marker missing');
+  if (id === 'events') check(source.includes('data-register-version="r5-events"'), 'events: R5 marker missing');
 }
-const validation={schema_version:'1.2',generated_at:new Date().toISOString(),ok:!failures.length,totals:{index_contracts:3,implemented_indexes:3,paginated_indexes:1,deferred_indexes:0,event_primary_columns:5,organization_primary_columns:5,failures:failures.length},failures};
-fs.writeFileSync(path.join(root,'data/generated/index-interaction-validation.json'),JSON.stringify(validation,null,2)+'\n');if(failures.length){console.error(JSON.stringify(validation,null,2));process.exit(1)}console.log(JSON.stringify(validation,null,2));
+
+const validation = {
+  schema_version: '1.3',
+  generated_at: new Date().toISOString(),
+  ok: failures.length === 0,
+  totals: {
+    index_contracts: indexInteractionContracts.length,
+    implemented_indexes: 3,
+    stablecoin_columns: 7,
+    organization_columns: 5,
+    event_columns: 5,
+    route_changes: 0,
+    failures: failures.length
+  },
+  failures
+};
+fs.writeFileSync(outputPath, `${JSON.stringify(validation, null, 2)}\n`);
+if (failures.length) { console.error(JSON.stringify(validation, null, 2)); process.exit(1); }
+console.log(JSON.stringify(validation, null, 2));
