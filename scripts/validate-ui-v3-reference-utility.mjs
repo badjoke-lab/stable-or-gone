@@ -5,7 +5,9 @@ const failures = [];
 const check = (value, message) => { if (!value) failures.push(message); };
 const layout = read('src/layouts/BaseLayout.astro');
 const styles = read('src/styles/reference-utility-v3.css');
+const r6Styles = read('src/styles/ui-remediation-r6.css');
 const header = read('src/components/EditorialPageHeader.astro');
+const r6Contents = read('src/components/LongformContentsR6.astro');
 const pages = {
   models: read('src/pages/models/index.astro'),
   glossary: read('src/pages/glossary/index.astro'),
@@ -31,11 +33,14 @@ for (const marker of ['data-editorial-page-header', 'editorial-page-masthead', '
 for (const marker of ['.reference-entry-grid', '.reference-table', '.longform-layout', '.longform-toc', '.utility-action-grid', '.wallet-grid', '@media(max-width:820px)', '@media(forced-colors:active)']) check(styles.includes(marker), `Reference/utility CSS missing: ${marker}`);
 check(!styles.includes('radial-gradient') && !styles.includes('border-radius:24px') && !styles.includes('box-shadow:0 16px'), 'Reference/utility CSS contains prohibited SaaS decoration');
 
-for (const [name, page] of Object.entries(pages)) {
+for (const name of ['models', 'glossary', 'about', 'contact', 'support']) {
+  const page = pages[name];
   check(page.includes('EditorialPageHeader'), `${name}: shared masthead missing`);
   check(!page.includes('<section class="hero'), `${name}: legacy hero remains`);
   check(!page.includes('class="panel stats"'), `${name}: KPI stats panel remains`);
 }
+check(!pages.methodology.includes('<section class="hero'), 'methodology: legacy hero remains');
+check(!pages.methodology.includes('class="panel stats"'), 'methodology: KPI stats panel remains');
 for (const name of ['models', 'glossary']) check(pages[name].includes('data-ui-v3-reference'), `${name}: reference marker missing`);
 check(pages.models.includes('reference-entry-grid') && pages.models.includes('models.length'), 'Models reference index is incomplete');
 check(pages.glossary.includes('reference-table') && pages.glossary.includes('reference-mobile-records'), 'Glossary desktop/mobile reference surfaces missing');
@@ -53,14 +58,29 @@ for (const marker of [
 for (const marker of ['.update-feed-masthead', '.update-feed-boundary-grid', '.update-feed-filter-grid', '.update-feed-item', '@media (max-width: 719px)']) check(updateFeedStyles.includes(marker), `Update Feed CSS missing: ${marker}`);
 check(!updateFeedStyles.includes('border-radius: 24px') && !updateFeedStyles.includes('box-shadow: 0 16px'), 'Update Feed CSS contains prohibited SaaS decoration');
 
-check(pages.methodology.includes('ValueStateMethodology') && pages.methodology.includes('Core approach') && pages.methodology.includes('Incomplete or conflicting information'), 'Methodology protected sections missing');
+for (const marker of [
+  'data-methodology-version="r6"',
+  '<LongformContentsR6',
+  '>Operational summary<',
+  '>How a record is built<',
+  '>Evidence and review<',
+  '>Events and control actions<',
+  '>Uncertainty and corrections<',
+  'data-r6-reference',
+  'ValueStateMethodology'
+]) check(pages.methodology.includes(marker), `R6 Methodology protected structure missing: ${marker}`);
+check(!pages.methodology.includes('EditorialPageHeader'), 'R6 Methodology reintroduced the schema-led shared masthead');
+for (const marker of ['data-r6-contents', "window.matchMedia('(min-width: 761px)')", "!heading.closest('[data-r6-reference]')"]) check(r6Contents.includes(marker), `R6 Methodology contents contract missing: ${marker}`);
+for (const marker of ['.r6-methodology-primary', 'width: min(760px, 100%)', '.r6-methodology-reference', '@media (max-width: 760px)']) check(r6Styles.includes(marker), `R6 Methodology styles missing: ${marker}`);
+
 check(pages.about.includes('What Stable or Gone covers') && pages.about.includes('What Stable or Gone is not') && pages.about.includes('support-callout'), 'About protected sections missing');
 check(pages.contact.includes('data-ui-v3-utility="contact-corrections"') && pages.contact.includes('googleFormUrl') && pages.contact.includes('githubIssueUrl') && pages.contact.includes('No private secrets'), 'Contact/corrections functions missing');
 check(pages.support.includes('data-ui-v3-utility="support"') && pages.support.includes('wallets.length') && pages.support.includes('data-copy-address') && pages.support.includes('navigator.clipboard') && pages.support.includes('fallbackCopy'), 'Support wallet or copy contract missing');
 
 const result = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   ok: failures.length === 0,
+  gate: 'V3-F-R6',
   shell: 'evidence-registry-pr411',
   reference_pages: 2,
   update_feed_pages: 1,

@@ -1,0 +1,99 @@
+/* R6 must load after the legacy Guide stylesheet. The canonical register remains the only dataset at tablet/mobile widths. */
+@media (max-width: 820px) {
+  .guide-index-page-r6 .guide-index-table {
+    display: block !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table table,
+  .guide-index-page-r6 .guide-index-table tbody {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table thead {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table tr {
+    width: 100% !important;
+    padding: .5rem 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: .22rem .45rem !important;
+    border-bottom: 1px solid var(--sog-line-subtle) !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table td {
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    font-family: var(--sog-font-body) !important;
+    font-size: .875rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table td:first-child { grid-column: 1 / -1; }
+
+  .guide-index-page-r6 .guide-index-table td:first-child p {
+    margin-top: .1rem !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-height: 2.7em;
+    overflow: hidden !important;
+    font-size: .8125rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table td:first-child small {
+    display: none !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table td:not(:first-child)::before {
+    display: inline;
+    margin-right: .1rem;
+    color: var(--sog-text-faint);
+    font: inherit;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .guide-index-page-r6 .guide-index-table td:nth-child(2)::before { content: "Scope: "; }
+  .guide-index-page-r6 .guide-index-table td:nth-child(3)::before { content: "Current: "; }
+  .guide-index-page-r6 .guide-index-table td:nth-child(4)::before { content: "Category: "; }
+
+  .guide-index-page-r6 .guide-index-mobile { display: none !important; }
+}
+
+@media (max-width: 360px) {
+  .guide-index-page-r6 .guide-index-table tr {
+    padding-block: .22rem !important;
+    grid-template-columns: .9fr 1fr 1.2fr !important;
+    column-gap: .3rem !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table h3 {
+    font-size: .875rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table td:first-child p {
+    max-height: 2.4em;
+    font-size: .875rem !important;
+    line-height: 1.2 !important;
+  }
+}

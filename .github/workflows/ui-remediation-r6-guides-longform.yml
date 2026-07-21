@@ -1,0 +1,176 @@
+name: UI remediation R6 Guides Longform
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [agent/ui-v3-r6-guides-longform]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: ui-remediation-r6-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/ui-v3-r6-guides-longform'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+
+      - name: Validate R6 authority and containment
+        id: static
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f docs/ui-v3-remediation-authority.md
+          test -f src/styles/ui-remediation-r6.css
+          test -f src/components/LongformContentsR6.astro
+          test -f scripts/audit-ui-remediation-r6.mjs
+          grep -q 'data-secondary-version="r6-guides"' src/components/GuideEditorialIndex.astro
+          grep -q '<th>Guide</th><th>Region or scope</th><th>Current through</th><th>Category</th>' src/components/GuideEditorialIndex.astro
+          grep -q 'data-secondary-version="r6-guide-article"' src/components/GuideArticleHeader.astro
+          grep -q 'data-methodology-version="r6"' src/pages/methodology/index.astro
+          grep -q '>Operational summary<' src/pages/methodology/index.astro
+          grep -q 'data-r6-reference' src/pages/methodology/index.astro
+          test -z "$(git diff --name-only origin/main...HEAD -- data/ public/data/ config/site-architecture.mjs docs/migration/current-canonical-checkpoint.json docs/migration/current-stats-history-checkpoint.json docs/migration/registry-release-integrity-baseline.json)"
+
+      - name: Validate canonical and Evidence contracts
+        id: canonical
+        continue-on-error: true
+        run: npm run validate:data && npm run validate:evidence-relations-v2 && npm run validate:compat && npm run validate:final
+
+      - name: Validate Guide and reference contracts
+        id: guides
+        continue-on-error: true
+        run: npm run validate:guides
+
+      - name: Astro check
+        id: astro
+        continue-on-error: true
+        run: npm run check
+
+      - name: Generate static site
+        id: site
+        continue-on-error: true
+        run: npm run build:site
+
+      - name: Verify public layer
+        id: public
+        continue-on-error: true
+        if: steps.site.outcome == 'success'
+        run: npm run verify:public
+
+      - name: Resolve validation result
+        id: validation
+        shell: bash
+        run: |
+          printf 'static=%s\ncanonical=%s\nguides=%s\nastro=%s\nsite=%s\npublic=%s\n' \
+            '${{ steps.static.outcome }}' '${{ steps.canonical.outcome }}' '${{ steps.guides.outcome }}' '${{ steps.astro.outcome }}' '${{ steps.site.outcome }}' '${{ steps.public.outcome }}'
+          test '${{ steps.static.outcome }}' = success
+          test '${{ steps.canonical.outcome }}' = success
+          test '${{ steps.guides.outcome }}' = success
+          test '${{ steps.astro.outcome }}' = success
+          test '${{ steps.site.outcome }}' = success
+          test '${{ steps.public.outcome }}' = success
+
+      - name: Install Chromium
+        if: steps.validation.outcome == 'success'
+        run: npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        if: steps.validation.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4321 --bind 127.0.0.1 --directory dist > /tmp/ui-r6-server.log 2>&1 &
+          echo $! > /tmp/ui-r6-server.pid
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4321/guides/ > /dev/null && curl --fail --silent http://127.0.0.1:4321/guides/what-is-a-depeg/ > /dev/null && curl --fail --silent http://127.0.0.1:4321/methodology/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ui-r6-server.log
+          exit 1
+
+      - name: Capture and audit R6 pages
+        id: visual
+        if: steps.validation.outcome == 'success'
+        continue-on-error: true
+        env:
+          SOG_SCREENSHOT_BASE_URL: http://127.0.0.1:4321
+        run: node scripts/audit-ui-remediation-r6.mjs
+
+      - name: Upload mandatory R6 visual evidence
+        if: always() && steps.validation.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-remediation-r6-guides-longform-${{ github.run_id }}
+          path: |
+            artifacts/ui-remediation-r6/
+            /tmp/ui-r6-server.log
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Stop local server
+        if: always()
+        run: |
+          if test -f /tmp/ui-r6-server.pid; then kill "$(cat /tmp/ui-r6-server.pid)" || true; fi
+
+      - name: Publish R6 status
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          R6_PR_NUMBER: ${{ github.event.pull_request.number || 442 }}
+          R6_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          R6_VALIDATION: ${{ steps.validation.outcome }}
+          R6_VISUAL: ${{ steps.visual.outcome }}
+          R6_STATIC: ${{ steps.static.outcome }}
+          R6_CANONICAL: ${{ steps.canonical.outcome }}
+          R6_GUIDES: ${{ steps.guides.outcome }}
+          R6_ASTRO: ${{ steps.astro.outcome }}
+          R6_SITE: ${{ steps.site.outcome }}
+          R6_PUBLIC: ${{ steps.public.outcome }}
+        with:
+          script: |
+            const issueNumber=Number(process.env.R6_PR_NUMBER);
+            const marker='<!-- ui-remediation-r6-guides-longform -->';
+            const bodyStart='<!-- ui-remediation-r6-run-status:start -->';
+            const bodyEnd='<!-- ui-remediation-r6-run-status:end -->';
+            const validate=process.env.R6_VALIDATION || 'skipped';
+            const visual=process.env.R6_VISUAL || 'skipped';
+            const passed=validate==='success' && visual==='success';
+            const diagnostics=`Static: **${process.env.R6_STATIC}** · Canonical: **${process.env.R6_CANONICAL}** · Guides: **${process.env.R6_GUIDES}** · Astro: **${process.env.R6_ASTRO}** · Site: **${process.env.R6_SITE}** · Public: **${process.env.R6_PUBLIC}**`;
+            const status=`## Latest R6 workflow\n\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R6_HEAD_SHA}\`\n- Validation: **${validate}**\n- 15-capture visual audit: **${visual}**\n- Diagnostics: ${diagnostics}\n- Overall: **${passed ? 'pass' : 'failure'}**`;
+            const body=`${marker}\n## UI remediation R6 — Guides and long-form\n\n- Validation: **${validate}**\n- 15-capture audit: **${visual}**\n- Diagnostics: ${diagnostics}\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R6_HEAD_SHA}\``;
+            const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
+            const existing=comments.find((row)=>row.body?.includes(marker));
+            if(existing) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:existing.id,body});
+            else await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,body});
+            const pr=await github.rest.pulls.get({owner:context.repo.owner,repo:context.repo.repo,pull_number:issueNumber});
+            const original=pr.data.body || '';
+            const block=`${bodyStart}\n${status}\n${bodyEnd}`;
+            const expression=new RegExp(`${bodyStart}[\\s\\S]*?${bodyEnd}`,'m');
+            const next=expression.test(original) ? original.replace(expression,block) : `${original.trim()}\n\n${block}\n`;
+            await github.rest.pulls.update({owner:context.repo.owner,repo:context.repo.repo,pull_number:issueNumber,body:next});
+
+      - name: Enforce R6 result
+        if: always()
+        shell: bash
+        run: |
+          test '${{ steps.validation.outcome }}' = success
+          test '${{ steps.visual.outcome }}' = success
