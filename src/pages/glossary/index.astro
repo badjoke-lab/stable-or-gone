@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
+import '../../styles/ui-remediation-r7.css';
 const terms = [
   ['Active', 'The stablecoin is operating or available according to the latest sources reviewed.'],
   ['Attestation', 'A report that provides assurance about reserves or related financial information for a specific date or period.'],
@@ -21,25 +21,50 @@ const terms = [
   ['Peg reference', 'The asset or unit a stablecoin aims to track, such as USD, EUR, a crypto asset, a commodity, an index, or another reference.'],
   ['Protocol disclosure', 'Documentation or dashboards showing collateral, debt, reserves, or mechanism details for a protocol-based stablecoin.'],
   ['Recovered depeg', 'A depeg after which the stablecoin returned close to its target value.'],
-  ['Redemption profile', 'A normalized summary of direct redemption status, eligible parties, settlement asset, fees, timing, restrictions, and confidence.'],
   ['Redemption', 'Converting a stablecoin back into cash, collateral, or another asset under issuer or protocol rules.'],
+  ['Redemption profile', 'A normalized summary of direct redemption status, eligible parties, settlement asset, fees, timing, restrictions, and confidence.'],
   ['Reserve disclosure', 'Public information about the assets, collateral, or mechanisms supporting a stablecoin.'],
-  ['Reserve profile', 'A normalized summary of current reserve backing, disclosure status, latest report reference, confidence, and supporting evidence.'],
+  ['Reserve profile', 'A normalized summary of current reserve backing, disclosure status, latest report reference, confidence, and supporting Evidence.'],
   ['Source', 'A public document, page, notice, report, archive, or reference used to support a specific record or claim.'],
   ['Wind-down', 'A planned process to end issuance, redemption, support, or availability.']
-];
+] as const;
+const grouped = [...new Set(terms.map(([term]) => term[0].toUpperCase()))].sort().map((letter) => ({ letter, terms: terms.filter(([term]) => term[0].toUpperCase() === letter) }));
 ---
-<BaseLayout title="Glossary — Stable or Gone" description="Definitions of common stablecoin and Registry v2 terms used throughout Stable or Gone." canonicalPath="/glossary/">
-  <article class="editorial-reference-page" data-ui-v3-reference="glossary">
-    <EditorialPageHeader kind="reference" eyebrow="Reference / glossary" title="Terms used throughout the archive" description="Plain-language definitions for lifecycle status, issuance, event types, reserve profiles, redemption profiles, evidence relations, and stablecoin history." facts={[{ label: 'Terms', value: terms.length }, { label: 'Order', value: 'A–Z' }, { label: 'Definitions', value: 'Plain language' }]} />
-    <section class="reference-section" id="glossary-index">
-      <div class="reference-section-heading"><h2>Glossary</h2><p>Definitions describe how terms are used in Stable or Gone. They do not replace issuer terms, legal definitions, or source-specific language.</p></div>
-      <div class="reference-table"><table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>{terms.map(([term, definition]) => <tr><td>{term}</td><td>{definition}</td></tr>)}</tbody></table></div>
-      <div class="reference-mobile-records" aria-label="Glossary terms">{terms.map(([term, definition]) => <article><h3>{term}</h3><p>{definition}</p></article>)}</div>
+<BaseLayout title="Glossary — Stable or Gone" description="Definitions of common stablecoin and registry terms used throughout Stable or Gone." canonicalPath="/glossary/">
+  <article class="r7-page" data-r7-page="glossary" data-ui-v3-reference="glossary">
+    <header class="r7-masthead"><div class="r7-masthead-copy"><p class="r7-eyebrow">Reference / glossary</p><h1>Terms used throughout the archive</h1><p class="r7-lead">Plain-language definitions for lifecycle state, issuance, events, reserves, redemption, organizations, Evidence, and uncertainty.</p></div><dl class="r7-facts"><div><dt>Terms</dt><dd>{terms.length}</dd></div><div><dt>Order</dt><dd>A–Z</dd></div><div><dt>Search</dt><dd>Term and definition</dd></div><div><dt>Purpose</dt><dd>Registry interpretation</dd></div></dl></header>
+
+    <section class="r7-section"><div class="r7-glossary-tools"><label><span>Search glossary</span><input type="search" data-r7-glossary-search placeholder="Search terms and definitions" autocomplete="off" /></label><span aria-live="polite"><strong data-r7-glossary-count>{terms.length}</strong> terms</span></div><nav class="r7-letter-nav" aria-label="Glossary letters">{grouped.map(({ letter }) => <a href={`#glossary-${letter}`}>{letter}</a>)}</nav></section>
+
+    <section class="r7-glossary-list" data-r7-glossary-list>
+      {grouped.map(({ letter, terms: letterTerms }) => <section class="r7-glossary-group" id={`glossary-${letter}`} data-r7-glossary-group><h2>{letter}</h2><dl>{letterTerms.map(([term, definition]) => <div class="r7-glossary-term" data-r7-glossary-term data-search={`${term} ${definition}`.toLocaleLowerCase()}><dt>{term}</dt><dd>{definition}</dd></div>)}</dl></section>)}
     </section>
-    <section class="reference-section">
-      <div class="reference-section-heading"><h2>Related guides</h2><p>Use these explainers when a definition needs event, reserve, or lifecycle context.</p></div>
-      <nav class="reference-actions" aria-label="Related glossary guides"><a href="/guides/what-is-a-depeg/"><strong>Depegs</strong><span>What a depeg is and how recoveries differ from collapses.</span></a><a href="/guides/status-vs-event/"><strong>Status and events</strong><span>Why current state and dated history remain separate.</span></a><a href="/guides/reserve-disclosure-basics/"><strong>Reserve disclosures</strong><span>How issuer statements, attestations, audits, and protocol data differ.</span></a></nav>
-    </section>
+    <div class="r7-glossary-empty" data-r7-glossary-empty hidden><strong>No glossary terms match.</strong><p>Clear the search or try a broader word.</p></div>
+
+    <section class="r7-section"><div class="r7-section-heading"><h2>Related guides</h2><p>Open an explainer when a definition needs event, reserve, or lifecycle context.</p></div><div class="r7-secondary-links"><a href="/guides/what-is-a-depeg/">Depegs</a><a href="/guides/status-vs-event/">Status and events</a><a href="/guides/reserve-disclosure-basics/">Reserve disclosures</a><a href="/methodology/">Methodology</a></div></section>
+
+    <script is:inline>
+      (() => {
+        const input = document.querySelector('[data-r7-glossary-search]');
+        const terms = [...document.querySelectorAll('[data-r7-glossary-term]')];
+        const groups = [...document.querySelectorAll('[data-r7-glossary-group]')];
+        const count = document.querySelector('[data-r7-glossary-count]');
+        const empty = document.querySelector('[data-r7-glossary-empty]');
+        const render = () => {
+          const query = String(input?.value || '').normalize('NFKC').toLocaleLowerCase().trim();
+          let visibleCount = 0;
+          terms.forEach((term) => {
+            const matches = !query || String(term.getAttribute('data-search') || '').includes(query);
+            term.hidden = !matches;
+            if (matches) visibleCount += 1;
+          });
+          groups.forEach((group) => { group.hidden = !group.querySelector('[data-r7-glossary-term]:not([hidden])'); });
+          if (count) count.textContent = String(visibleCount);
+          if (empty) empty.hidden = visibleCount !== 0;
+        };
+        input?.addEventListener('input', render);
+        render();
+      })();
+    </script>
   </article>
 </BaseLayout>
