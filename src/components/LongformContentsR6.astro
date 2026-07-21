@@ -27,7 +27,7 @@ const { label = 'On this page', scope = 'guide' } = Astro.props;
     if (!list || !details || !current) return;
 
     const headings = Array.from(main.querySelectorAll<HTMLElement>('h2'))
-      .filter((heading) => !heading.closest('[data-r6-contents]') && !heading.closest('footer'));
+      .filter((heading) => !heading.closest('[data-r6-contents]') && !heading.closest('[data-r6-reference]') && !heading.closest('footer'));
     const used = new Set<string>();
     const slug = (value: string) => value.normalize('NFKD').toLocaleLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
     headings.forEach((heading, index) => {
