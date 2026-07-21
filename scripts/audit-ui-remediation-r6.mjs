@@ -49,6 +49,8 @@ for (const viewport of viewports) {
       const root = document.documentElement;
       const body = document.body;
       const h1 = document.querySelector('h1');
+      const guideRegisters = [...document.querySelectorAll('[data-r6-guide-register]')];
+      const guideColumnCounts = guideRegisters.map((table) => table.querySelectorAll('thead th').length);
       const guideRows = [...document.querySelectorAll('[data-r6-guide-register] tbody tr')].filter(visible);
       const guideRowHeights = guideRows.map((item) => item.getBoundingClientRect().height);
       const tables = [...document.querySelectorAll('table')].filter(visible);
@@ -65,7 +67,8 @@ for (const viewport of viewports) {
         isMobile: width <= 760,
         h1Size: h1 ? Number.parseFloat(window.getComputedStyle(h1).fontSize) : 0,
         guideVersion: document.querySelector('[data-secondary-version="r6-guides"]') !== null,
-        guideColumns: document.querySelectorAll('[data-r6-guide-register] thead th').length,
+        guideRegisterCount: guideRegisters.length,
+        guideColumnCounts,
         guideRows: guideRows.length,
         maxGuideRowHeight: guideRowHeights.length ? Math.max(...guideRowHeights) : 0,
         visibleDuplicateGuideMobile: [...document.querySelectorAll('.guide-index-mobile')].filter(visible).length,
@@ -97,7 +100,8 @@ for (const viewport of viewports) {
 
     if (state.family === 'guides-index') {
       if (!audit.guideVersion) stateFailures.push('R6 Guide index marker missing');
-      if (audit.guideColumns !== 4) stateFailures.push(`Guide columns ${audit.guideColumns}/4`);
+      if (audit.guideRegisterCount < 1) stateFailures.push('Guide registers missing');
+      if (audit.guideColumnCounts.some((count) => count !== 4)) stateFailures.push(`Guide column counts ${audit.guideColumnCounts.join(',')}/4 each`);
       if (audit.guideRows < 1) stateFailures.push('Guide rows missing');
       if (audit.visibleDuplicateGuideMobile !== 0) stateFailures.push(`duplicate mobile Guide surface ${audit.visibleDuplicateGuideMobile}`);
       if (audit.isMobile && audit.maxGuideRowHeight > 180) stateFailures.push(`Guide mobile row height ${audit.maxGuideRowHeight}/180`);
@@ -129,7 +133,7 @@ for (const viewport of viewports) {
 }
 
 await browser.close();
-const manifest = { schema_version: '1.0', generated_at: new Date().toISOString(), capture_count: records.length, failure_count: failures.length, records, failures };
+const manifest = { schema_version: '1.1', generated_at: new Date().toISOString(), capture_count: records.length, failure_count: failures.length, records, failures };
 fs.writeFileSync(path.join(outputRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 fs.writeFileSync(path.join(outputRoot, 'contact-sheet.html'), `<!doctype html><meta charset="utf-8"><title>UI remediation R6</title><style>body{font-family:system-ui;margin:24px;background:#111;color:#eee}section{margin:0 0 32px}img{max-width:100%;border:1px solid #555}pre{white-space:pre-wrap}</style><h1>UI remediation R6 audit</h1>${records.map((record) => `<section><h2>${record.id}</h2><p>${record.route} · ${record.audit.pageHeight}px · ${record.failures.length ? 'FAIL' : 'PASS'}</p><img src="${record.screenshot}" alt="${record.id}"><pre>${record.failures.join('\n')}</pre></section>`).join('')}`);
 if (failures.length) { console.error(`UI remediation R6 audit failed with ${failures.length} failure(s):`); failures.forEach((failure) => console.error(`- ${failure}`)); process.exit(1); }
