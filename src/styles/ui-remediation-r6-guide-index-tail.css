@@ -81,7 +81,19 @@
 
 @media (max-width: 360px) {
   .guide-index-page-r6 .guide-index-table tr {
-    padding-block: .38rem !important;
-    column-gap: .35rem !important;
+    padding-block: .22rem !important;
+    grid-template-columns: .9fr 1fr 1.2fr !important;
+    column-gap: .3rem !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table h3 {
+    font-size: .875rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .guide-index-page-r6 .guide-index-table td:first-child p {
+    max-height: 2.4em;
+    font-size: .875rem !important;
+    line-height: 1.2 !important;
   }
 }
