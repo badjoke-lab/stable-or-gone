@@ -59,6 +59,10 @@ for (const viewport of viewports) {
       const reference = document.querySelector('[data-r6-reference]');
       const primary = document.querySelector('.r6-methodology-primary') ?? document.querySelector('.r6-guide-article-page article') ?? document.querySelector('.r6-guide-article-page .longform-content') ?? document.querySelector('.r6-guide-article-page .prose');
       const ordinaryText = [...document.querySelectorAll('h1,h2,h3,p,a,th,td,li,dt,dd')].filter(visible);
+      const legacyGuideContentsVisible = [...document.querySelectorAll('.guide-article-toc')].filter(visible).length;
+      const wideGuideArticleTables = [...document.querySelectorAll('.guide-article-content table')]
+        .filter(visible)
+        .filter((table) => table.scrollWidth > table.clientWidth + 1).length;
       return {
         family,
         viewportWidth: window.innerWidth,
@@ -72,6 +76,8 @@ for (const viewport of viewports) {
         guideRows: guideRows.length,
         maxGuideRowHeight: guideRowHeights.length ? Math.max(...guideRowHeights) : 0,
         visibleDuplicateGuideMobile: [...document.querySelectorAll('.guide-index-mobile')].filter(visible).length,
+        legacyGuideContentsVisible,
+        wideGuideArticleTables,
         contentsLinks: document.querySelectorAll('[data-r6-contents-list] a').length,
         contentsOpen: contents instanceof HTMLDetailsElement ? contents.open : null,
         contentsCurrent: document.querySelectorAll('[data-r6-contents-list] a[aria-current]').length,
@@ -115,6 +121,11 @@ for (const viewport of viewports) {
       if (audit.primaryWidth > 800) stateFailures.push(`reading width ${audit.primaryWidth}/800`);
     }
 
+    if (state.family === 'guide-article') {
+      if (audit.legacyGuideContentsVisible !== 0) stateFailures.push(`legacy Guide contents visible ${audit.legacyGuideContentsVisible}`);
+      if (audit.isMobile && audit.wideGuideArticleTables !== 0) stateFailures.push(`mobile Guide tables still scroll ${audit.wideGuideArticleTables}`);
+    }
+
     if (state.family === 'methodology') {
       if (!audit.operationalSummaryPresent) stateFailures.push('operational summary missing');
       if (audit.referenceOpen !== false) stateFailures.push('internal enum reference open by default');
@@ -133,7 +144,7 @@ for (const viewport of viewports) {
 }
 
 await browser.close();
-const manifest = { schema_version: '1.1', generated_at: new Date().toISOString(), capture_count: records.length, failure_count: failures.length, records, failures };
+const manifest = { schema_version: '1.2', generated_at: new Date().toISOString(), capture_count: records.length, failure_count: failures.length, records, failures };
 fs.writeFileSync(path.join(outputRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 fs.writeFileSync(path.join(outputRoot, 'contact-sheet.html'), `<!doctype html><meta charset="utf-8"><title>UI remediation R6</title><style>body{font-family:system-ui;margin:24px;background:#111;color:#eee}section{margin:0 0 32px}img{max-width:100%;border:1px solid #555}pre{white-space:pre-wrap}</style><h1>UI remediation R6 audit</h1>${records.map((record) => `<section><h2>${record.id}</h2><p>${record.route} · ${record.audit.pageHeight}px · ${record.failures.length ? 'FAIL' : 'PASS'}</p><img src="${record.screenshot}" alt="${record.id}"><pre>${record.failures.join('\n')}</pre></section>`).join('')}`);
 if (failures.length) { console.error(`UI remediation R6 audit failed with ${failures.length} failure(s):`); failures.forEach((failure) => console.error(`- ${failure}`)); process.exit(1); }
