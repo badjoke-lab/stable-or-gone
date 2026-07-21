@@ -1,0 +1,60 @@
+/* R6 replaces the BaseLayout Guide ToC with LongformContentsR6. */
+.site-main[data-page-kind="guide-article"] .guide-article-toc {
+  display: none !important;
+}
+
+.site-main[data-page-kind="guide-article"] .guide-article-layout {
+  width: min(760px, 100%) !important;
+  max-width: 760px !important;
+  margin-inline: auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 760px) !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+.site-main[data-page-kind="guide-article"] .guide-article-content,
+.site-main[data-page-kind="guide-article"] .guide-article-footer {
+  grid-column: 1 !important;
+}
+
+@media (max-width: 760px) {
+  .site-main[data-page-kind="guide-article"] .guide-article-layout {
+    width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .site-main[data-page-kind="guide-article"] .guide-article-content table,
+  .site-main[data-page-kind="guide-article"] .guide-article-content tbody,
+  .site-main[data-page-kind="guide-article"] .guide-article-content tr,
+  .site-main[data-page-kind="guide-article"] .guide-article-content th,
+  .site-main[data-page-kind="guide-article"] .guide-article-content td {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .site-main[data-page-kind="guide-article"] .guide-article-content table {
+    margin: .75rem 0 !important;
+    overflow: visible !important;
+  }
+
+  .site-main[data-page-kind="guide-article"] .guide-article-content tr {
+    padding: .55rem 0 !important;
+    border-bottom: 1px solid var(--sog-line-subtle) !important;
+  }
+
+  .site-main[data-page-kind="guide-article"] .guide-article-content th,
+  .site-main[data-page-kind="guide-article"] .guide-article-content td {
+    padding: .12rem 0 !important;
+    border: 0 !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .site-main[data-page-kind="guide-article"] .guide-article-content th {
+    margin-bottom: .12rem;
+    font-size: .75rem !important;
+  }
+}
