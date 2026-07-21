@@ -1,19 +1,132 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
+import LongformContentsR6 from '../../components/LongformContentsR6.astro';
 import ValueStateMethodology from '../../components/ValueStateMethodology.astro';
+import '../../styles/ui-remediation-r6.css';
 const title = 'Methodology — Stable or Gone';
 const description = 'How Stable or Gone records stablecoin lifecycle status, issuer relationships, events, reserve and redemption profiles, issuer controls, sources, and unresolved public-information gaps.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: title, url: 'https://sog.badjoke-lab.com/methodology/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: ['stablecoin methodology', 'stablecoin lifecycle status', 'stablecoin events', 'reserve disclosure', 'redemption access', 'issuer controls', 'evidence relations', 'value-state semantics'] };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/methodology/" jsonLd={jsonLd}>
-  <EditorialPageHeader kind="longform" eyebrow="Project / methodology" title="How records are built" description="This page explains how Stable or Gone separates stablecoin entities, organizations, relationships, events, reserve and redemption profiles, issuer-control actions, evidence, and unresolved questions." facts={[{ label: 'Main unit', value: 'Entity' }, { label: 'Review basis', value: 'Sources' }, { label: 'Model', value: 'Registry v2' }]} />
-  <section class="section-grid" aria-label="Methodology entrypoints"><a class="panel mini-card" href="/guides/status-vs-event/"><h2>Status labels</h2><p>See how a stablecoin’s current state is kept separate from past incidents.</p></a><a class="panel mini-card" href="/guides/what-is-a-depeg/"><h2>Event selection</h2><p>Learn which depegs and other changes are significant enough to record.</p></a><a class="panel mini-card" href="/guides/reserve-disclosure-basics/"><h2>Source types</h2><p>Compare issuer statements, reports, regulatory documents, protocol data, and on-chain records.</p></a></section>
-  <section class="panel registry longform-definition-table"><div class="bar">Core approach</div><table><tbody><tr><th>Separate entities and events</th><td>A stablecoin record describes the asset. Event records describe dated changes such as launches, depegs, migrations, regulatory actions, reserve interventions, issuer-control actions, or wind-downs.</td></tr><tr><th>Separate organizations and roles</th><td>Companies, protocols, DAOs, reserve managers, custodians, and redemption agents are recorded as organizations. Their roles are attached through relationship records.</td></tr><tr><th>Prefer primary sources</th><td>Issuer statements, official notices, reports, regulatory documents, repositories, verified contract references, and direct on-chain records are preferred where available.</td></tr><tr><th>Keep evidence scoped</th><td>A source is linked to the stablecoin, organization, event, and claim it supports rather than treated as proof of the whole record.</td></tr></tbody></table></section>
-  <section class="panel registry longform-definition-table"><div class="bar">Registry v2 fields</div><table><tbody><tr><th>Lifecycle status</th><td>The broad current state of the stablecoin, such as active, restricted, winding down, terminated, collapsed, migrated, rebranded, or unknown.</td></tr><tr><th>Issuance status</th><td>Whether new issuance appears open, restricted, paused, terminated, protocol-based, or unknown.</td></tr><tr><th>Peg reference</th><td>The target asset or unit the stablecoin attempts to track, including fiat, crypto asset, commodity, index, floating, other, or unknown references.</td></tr><tr><th>Backing types</th><td>The public reserve or collateral categories associated with the stablecoin, such as cash, bank deposits, government securities, crypto collateral, tokenized funds, mixed backing, or unknown backing.</td></tr><tr><th>Reserve profile</th><td>A current high-level summary of reserve backing, disclosure status, confidence, and the latest supporting report if available.</td></tr><tr><th>Redemption profile</th><td>A current high-level summary of direct redemption access, eligible parties, settlement asset, minimum amount, fees, timing, jurisdiction limits, and confidence where public information exists.</td></tr><tr><th>Event detail kind</th><td>The normalized event subtype used for display and review, including depeg, regulatory, reserve change, redemption change, migration, issuer control, or other.</td></tr><tr><th>Evidence relation</th><td>The projected relation between a source and one or more stablecoins, organizations, events, and claim scopes.</td></tr></tbody></table></section>
-  <section class="panel registry longform-definition-table"><div class="bar">Lifecycle and status labels</div><table><tbody><tr><th>Active</th><td>Operating or available according to the most recent sources reviewed.</td></tr><tr><th>Restricted</th><td>Still operating, but with important restrictions on access, minting, redemption, geography, or market availability.</td></tr><tr><th>Suspended</th><td>Temporarily unavailable or paused in a way that affects issuance, redemption, transfer, or market support.</td></tr><tr><th>Winding down</th><td>Issuance, support, or operation has entered a formal wind-down but some redemption or support path may remain.</td></tr><tr><th>Terminated</th><td>The stablecoin or issuer-supported product has ended.</td></tr><tr><th>Collapsed</th><td>The stablecoin no longer functions as intended after a severe event or collapse.</td></tr><tr><th>Migrated / rebranded</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr><tr><th>Unknown</th><td>Available information is not sufficient for a reliable classification.</td></tr></tbody></table></section>
-  <ValueStateMethodology />
-  <section class="panel registry longform-definition-table"><div class="bar">Depegs and other events</div><table><tbody><tr><th>Small price movement</th><td>Short or minor deviations are normally not recorded as separate events.</td></tr><tr><th>Notable depeg</th><td>A depeg may be included when it is material, sustained, historically important, or well documented.</td></tr><tr><th>Major event</th><td>The entry should identify what happened, when it happened, whether the peg recovered, and which sources support the account.</td></tr><tr><th>Status impact</th><td>A depeg does not automatically mean failure. Recovery and long-term outcome are considered separately.</td></tr><tr><th>Event subjects</th><td>Events can reference multiple stablecoins or organizations when the same source-backed event affects more than one record.</td></tr></tbody></table></section>
-  <section class="panel registry longform-definition-table"><div class="bar">Issuer controls</div><table><tbody><tr><th>Issuer freeze</th><td>An issuer, or an issuer-controlled contract authority, restricts transfer or use of stablecoins associated with a specific address or balance.</td></tr><tr><th>Address blacklisting</th><td>An address is registered in an on-chain blacklist that can restrict sending, receiving, redemption, or other token actions.</td></tr><tr><th>Blacklist versus seizure</th><td>Adding an address to a blacklist is not recorded as asset seizure unless a separate source proves a legal or custodial transfer of control.</td></tr><tr><th>Freeze versus burn</th><td>A freeze or blacklist action does not destroy tokens. Burn, reissuance, and return of funds are separate events.</td></tr><tr><th>Unfreeze</th><td>Removal from a blacklist or restoration of transfer capability is recorded as an independent reversal event.</td></tr><tr><th>Authority involvement</th><td>A regulator, court, law-enforcement agency, or other requesting authority is named only when supported by a primary source.</td></tr><tr><th>Effect boundaries</th><td>An address-level control action is not automatically treated as reserve impairment, redemption suspension, depeg, issuer insolvency, or network failure.</td></tr></tbody></table></section>
-  <section class="panel registry longform-definition-table"><div class="bar">Incomplete or conflicting information</div><table><tbody><tr><th>Open questions</th><td>Missing dates, unclear reserve histories, uncertain issuer roles, unresolved on-chain identifiers, and conflicting claims are listed explicitly.</td></tr><tr><th>Confidence</th><td>Confidence describes how complete and well supported the record is. It is not a judgment on the asset itself.</td></tr><tr><th>Corrections</th><td>Corrections and additional sources can be submitted through the contact page or GitHub Issues.</td></tr></tbody></table></section>
+  <article class="r6-methodology-page" data-r6-longform-root data-methodology-version="r6">
+    <header class="r6-methodology-header">
+      <p class="eyebrow">Project / methodology</p>
+      <h1>How records are built</h1>
+      <p>Stable or Gone separates asset identity, current state, organizations, dated events, Evidence, and unresolved questions so that a single source or incident never stands in for the whole record.</p>
+      <dl class="r6-methodology-ledger" aria-label="Methodology summary">
+        <div><dt>Main unit</dt><dd>Stablecoin entity</dd></div>
+        <div><dt>Review basis</dt><dd>Scoped Evidence</dd></div>
+        <div><dt>Current state</dt><dd>Separate from events</dd></div>
+        <div><dt>Unknown values</dt><dd>Kept explicit</dd></div>
+      </dl>
+    </header>
+
+    <LongformContentsR6 label="On this page" scope="methodology" />
+
+    <div class="r6-methodology-primary">
+      <section class="r6-methodology-summary">
+        <h2>Operational summary</h2>
+        <ul>
+          <li>A stablecoin entity records identity and the latest reviewed state; dated events record what changed.</li>
+          <li>Organizations and their roles are separate records, because issuer, custodian, reserve manager, and redemption agent are not interchangeable.</li>
+          <li>Evidence is linked only to the entities, events, organizations, and claims it actually supports.</li>
+          <li>Unknown, conflicting, or incomplete information stays visible instead of being forced into a confident classification.</li>
+        </ul>
+      </section>
+
+      <section class="r6-methodology-section">
+        <h2>How a record is built</h2>
+        <p>The public dossier is assembled in decision-useful order rather than raw schema order. Identity and current lifecycle come first, followed by reserve and redemption conditions, organizations, material events, deployments, unresolved questions, and Evidence.</p>
+        <dl>
+          <div><dt>Entity</dt><dd>The canonical stablecoin identity, lifecycle state, issuance state, peg reference, backing model, and current public summary.</dd></div>
+          <div><dt>Organization and relationship</dt><dd>Companies, protocols, DAOs, custodians, reserve managers, and redemption agents are linked through dated roles rather than collapsed into one issuer field.</dd></div>
+          <div><dt>Event</dt><dd>A dated, source-backed change such as launch, depeg, reserve or redemption change, migration, regulatory action, issuer-control action, or wind-down.</dd></div>
+          <div><dt>Known unknown</dt><dd>A missing date, unresolved identifier, unclear reserve history, conflicting claim, or other gap that materially limits the record.</dd></div>
+        </dl>
+        <p><a href="/guides/status-vs-event/">Read the status-versus-event guide</a> for a plain-language explanation of this separation.</p>
+      </section>
+
+      <section class="r6-methodology-section">
+        <h2>Evidence and review</h2>
+        <p>Primary material is preferred where available: issuer statements, official notices, reserve reports, regulatory documents, repositories, verified contract references, and direct on-chain records. Secondary reporting is used to add independent context or preserve events that no longer have a live primary page.</p>
+        <dl>
+          <div><dt>Scoped support</dt><dd>A source relation identifies the stablecoin, organization, event, and claim scope supported by that source. It is not treated as proof of unrelated fields.</dd></div>
+          <div><dt>Source identity</dt><dd>One public source remains one Evidence identity even when it supports several records or claims. Relation counts and source counts remain distinct.</dd></div>
+          <div><dt>Confidence</dt><dd>Confidence describes completeness and support for the record. It is not a safety rating, recommendation, or judgment on the asset.</dd></div>
+          <div><dt>Review date</dt><dd>The last-verified date records when the cited public material and current-state classification were last checked.</dd></div>
+        </dl>
+        <p><a href="/guides/reserve-disclosure-basics/">Read the reserve-disclosure guide</a> for the limits of reports, attestations, and public reserve summaries.</p>
+      </section>
+
+      <section class="r6-methodology-section">
+        <h2>Events and control actions</h2>
+        <p>Not every market movement or operational update becomes an event. The registry records changes that are material, sustained, historically important, or necessary to explain a later state.</p>
+        <dl>
+          <div><dt>Depegs</dt><dd>Short or minor deviations are normally excluded. A recorded depeg should explain what happened, when it happened, whether the reference recovered, and which sources support the account.</dd></div>
+          <div><dt>Status effect</dt><dd>An event may affect lifecycle state, but a depeg or control action does not automatically mean collapse. Recovery and long-term outcome are reviewed separately.</dd></div>
+          <div><dt>Multiple subjects</dt><dd>One event may reference several stablecoins or organizations when the same source-backed development affects them together.</dd></div>
+          <div><dt>Issuer controls</dt><dd>Freeze, blacklist, unfreeze, burn, reissuance, and return of funds are recorded as distinct actions. Address-level controls are not automatically treated as reserve impairment or issuer insolvency.</dd></div>
+        </dl>
+        <p><a href="/guides/what-is-a-depeg/">Read the depeg guide</a> for examples and inclusion boundaries.</p>
+      </section>
+
+      <section class="r6-methodology-section">
+        <h2>Uncertainty and corrections</h2>
+        <p>Public information is often incomplete, jurisdiction-specific, or inconsistent across time. Stable or Gone preserves those limits rather than filling them with estimates.</p>
+        <dl>
+          <div><dt>Open questions</dt><dd>Missing dates, uncertain issuer roles, unresolved contracts, reserve-history gaps, and conflicting claims are listed explicitly.</dd></div>
+          <div><dt>Unknown values</dt><dd>Unknown is a valid state. It does not mean zero, not applicable, unsafe, or the worst category.</dd></div>
+          <div><dt>Corrections</dt><dd>Readers can submit a correction or additional source through the contact page or GitHub Issues. Proposed changes are reviewed against the same Evidence and classification rules.</dd></div>
+        </dl>
+        <p><a href="/contact/">Submit a correction or source</a>.</p>
+      </section>
+    </div>
+
+    <details class="panel r6-methodology-reference" data-r6-reference>
+      <summary>Internal field and enum reference</summary>
+      <div class="r6-methodology-reference-body">
+        <section class="panel registry longform-definition-table">
+          <div class="bar">Registry fields</div>
+          <table><tbody>
+            <tr><th>Lifecycle status</th><td>The broad current state, such as active, restricted, winding down, terminated, collapsed, migrated, rebranded, or unknown.</td></tr>
+            <tr><th>Issuance status</th><td>Whether new issuance appears open, restricted, paused, terminated, protocol-based, or unknown.</td></tr>
+            <tr><th>Peg reference</th><td>The target asset or unit, including fiat, crypto asset, commodity, index, floating, other, or unknown references.</td></tr>
+            <tr><th>Backing types</th><td>Public reserve or collateral categories such as cash, bank deposits, government securities, crypto collateral, tokenized funds, mixed backing, or unknown.</td></tr>
+            <tr><th>Reserve profile</th><td>A current summary of backing, disclosure status, confidence, and the latest supporting report where available.</td></tr>
+            <tr><th>Redemption profile</th><td>Direct redemption access, eligible parties, settlement asset, minimum, fees, timing, jurisdiction limits, and confidence where public information exists.</td></tr>
+            <tr><th>Event detail kind</th><td>The normalized event subtype used for display and review.</td></tr>
+            <tr><th>Evidence relation</th><td>The relation between a source and one or more stablecoins, organizations, events, and claim scopes.</td></tr>
+          </tbody></table>
+        </section>
+
+        <section class="panel registry longform-definition-table">
+          <div class="bar">Lifecycle labels</div>
+          <table><tbody>
+            <tr><th>Active</th><td>Operating or available according to the most recent sources reviewed.</td></tr>
+            <tr><th>Restricted</th><td>Operating with important restrictions on access, minting, redemption, geography, or market availability.</td></tr>
+            <tr><th>Suspended</th><td>Temporarily unavailable or paused in a way that affects issuance, redemption, transfer, or market support.</td></tr>
+            <tr><th>Winding down</th><td>Issuance, support, or operation entered a formal wind-down while some redemption or support path may remain.</td></tr>
+            <tr><th>Terminated</th><td>The stablecoin or issuer-supported product ended.</td></tr>
+            <tr><th>Collapsed</th><td>The stablecoin no longer functions as intended after a severe event.</td></tr>
+            <tr><th>Migrated / rebranded</th><td>The product moved to a new name, contract, structure, or successor asset.</td></tr>
+            <tr><th>Unknown</th><td>Available information is not sufficient for a reliable classification.</td></tr>
+          </tbody></table>
+        </section>
+
+        <ValueStateMethodology />
+
+        <section class="panel registry longform-definition-table">
+          <div class="bar">Issuer-control boundaries</div>
+          <table><tbody>
+            <tr><th>Issuer freeze</th><td>An issuer or issuer-controlled authority restricts transfer or use associated with a specific address or balance.</td></tr>
+            <tr><th>Address blacklisting</th><td>An address is placed on an on-chain list that can restrict sending, receiving, redemption, or other token actions.</td></tr>
+            <tr><th>Blacklist versus seizure</th><td>Blacklisting is not recorded as seizure unless a separate source proves a legal or custodial transfer of control.</td></tr>
+            <tr><th>Freeze versus burn</th><td>A freeze does not destroy tokens. Burn, reissuance, and return of funds are separate events.</td></tr>
+            <tr><th>Unfreeze</th><td>Removal from a blacklist or restoration of transfer capability is an independent reversal event.</td></tr>
+            <tr><th>Authority involvement</th><td>A regulator, court, or law-enforcement authority is named only when supported by a primary source.</td></tr>
+          </tbody></table>
+        </section>
+      </div>
+    </details>
+  </article>
 </BaseLayout>
