@@ -1,95 +1,40 @@
 import fs from 'node:fs';
-
-const read = (path) => fs.readFileSync(path, 'utf8');
-const failures = [];
-const check = (value, message) => { if (!value) failures.push(message); };
-const layout = read('src/layouts/BaseLayout.astro');
-const styles = read('src/styles/reference-utility-v3.css');
-const r6Styles = read('src/styles/ui-remediation-r6.css');
-const header = read('src/components/EditorialPageHeader.astro');
-const r6Contents = read('src/components/LongformContentsR6.astro');
-const pages = {
-  models: read('src/pages/models/index.astro'),
-  glossary: read('src/pages/glossary/index.astro'),
-  methodology: read('src/pages/methodology/index.astro'),
-  about: read('src/pages/about/index.astro'),
-  contact: read('src/pages/contact/index.astro'),
-  support: read('src/pages/support/index.astro')
+const read=(p)=>fs.readFileSync(p,'utf8');
+const failures=[];
+const check=(v,m)=>{if(!v)failures.push(m)};
+const pages={
+  models:read('src/pages/models/index.astro'),glossary:read('src/pages/glossary/index.astro'),
+  methodology:read('src/pages/methodology/index.astro'),about:read('src/pages/about/index.astro'),
+  contact:read('src/pages/contact/index.astro'),support:read('src/pages/support/index.astro'),
+  updates:read('src/pages/updates/index.astro'),maintenance:read('src/pages/maintenance/index.astro')
 };
-const updates = read('src/pages/updates/index.astro');
-const updateFeedStyles = read('src/styles/update-feed.css');
+const styles=read('src/styles/ui-remediation-r7.css');
+const updateScript=read('src/scripts/update-feed-ui.ts');
+const r6Contents=read('src/components/LongformContentsR6.astro');
 
-for (const marker of [
-  'reference-utility-v3.css',
-  "const isReferencePage = ['/models/', '/glossary/', '/updates/', '/maintenance/']",
-  "const isLongformPage = ['/methodology/', '/about/']",
-  "const isUtilityPage = ['/contact/', '/support/']",
-  'data-longform-article',
-  'data-longform-toc',
-  'data-longform-toc-list',
-  'buildContents'
-]) check(layout.includes(marker), `BaseLayout missing page-family contract: ${marker}`);
-for (const marker of ['data-editorial-page-header', 'editorial-page-masthead', 'editorial-page-overline', 'editorial-page-title', 'editorial-page-ledger']) check(header.includes(marker), `EditorialPageHeader missing: ${marker}`);
-for (const marker of ['.reference-entry-grid', '.reference-table', '.longform-layout', '.longform-toc', '.utility-action-grid', '.wallet-grid', '@media(max-width:820px)', '@media(forced-colors:active)']) check(styles.includes(marker), `Reference/utility CSS missing: ${marker}`);
-check(!styles.includes('radial-gradient') && !styles.includes('border-radius:24px') && !styles.includes('box-shadow:0 16px'), 'Reference/utility CSS contains prohibited SaaS decoration');
-
-for (const name of ['models', 'glossary', 'about', 'contact', 'support']) {
-  const page = pages[name];
-  check(page.includes('EditorialPageHeader'), `${name}: shared masthead missing`);
-  check(!page.includes('<section class="hero'), `${name}: legacy hero remains`);
-  check(!page.includes('class="panel stats"'), `${name}: KPI stats panel remains`);
+for(const marker of ['.r7-page','.r7-masthead','.r7-row-list','.r7-primary-action','.r7-disclosure','.r7-glossary-list','.r7-model-groups','.r7-update-pagination','.r7-maintenance-current','@media (max-width:760px)']) check(styles.includes(marker),`R7 CSS missing: ${marker}`);
+check(!styles.includes('radial-gradient')&&!styles.includes('border-radius:24px'),'R7 SaaS decoration detected');
+for(const name of ['models','glossary','about','contact','support']){
+  check(pages[name].includes(`data-r7-page="${name}"`),`${name}: R7 marker missing`);
+  check(pages[name].includes('ui-remediation-r7.css'),`${name}: R7 CSS import missing`);
+  check(!pages[name].includes('EditorialPageHeader'),`${name}: old masthead remains`);
+  check(!pages[name].includes('mini-card'),`${name}: mini cards remain`);
 }
-check(!pages.methodology.includes('<section class="hero'), 'methodology: legacy hero remains');
-check(!pages.methodology.includes('class="panel stats"'), 'methodology: KPI stats panel remains');
-for (const name of ['models', 'glossary']) check(pages[name].includes('data-ui-v3-reference'), `${name}: reference marker missing`);
-check(pages.models.includes('reference-entry-grid') && pages.models.includes('models.length'), 'Models reference index is incomplete');
-check(pages.glossary.includes('reference-table') && pages.glossary.includes('reference-mobile-records'), 'Glossary desktop/mobile reference surfaces missing');
+for(const marker of ['>Purpose<','>Coverage and exclusions<','>Review process<','>Operator and independence<','badjoke-lab']) check(pages.about.includes(marker),`About missing: ${marker}`);
+for(const marker of ['data-ui-v3-utility="contact-corrections"','Open correction form','Secondary routes','No private secrets','googleFormUrl','githubIssueUrl']) check(pages.contact.includes(marker),`Contact missing: ${marker}`);
+check((pages.contact.match(/class="r7-primary-action"/g)||[]).length===1,'Contact primary action count changed');
+for(const marker of ['data-ui-v3-utility="support"','data-donation-action','Choose a donation asset','What support funds','Editorial independence','wallets.length','data-copy-address','navigator.clipboard','fallbackCopy']) check(pages.support.includes(marker),`Support missing: ${marker}`);
+check((pages.support.match(/data-donation-action/g)||[]).length===1,'Support donation action count changed');
+for(const marker of ['data-r7-glossary-search','data-r7-glossary-term','data-r7-glossary-count','data-r7-glossary-empty','r7-letter-nav']) check(pages.glossary.includes(marker),`Glossary missing: ${marker}`);
+check(!pages.glossary.includes('reference-mobile-records')&&!pages.glossary.includes('reference-table'),'Glossary duplicate surfaces remain');
+for(const marker of ['Issuance structures','Backing structures','Stabilization mechanisms','r7-model-row','Unknown state']) check(pages.models.includes(marker),`Models missing: ${marker}`);
+for(const marker of ['data-r7-page="updates"','data-update-feed-pagination','data-update-feed-page-prev','data-update-feed-page-next','Publication dates and historical dates are different']) check(pages.updates.includes(marker),`Updates missing: ${marker}`);
+for(const marker of ['page_size','currentPage',"params.get('page')",'data-update-feed-page-prev','data-update-feed-page-next']) check(updateScript.includes(marker),`Update script missing: ${marker}`);
+for(const marker of ['data-r7-page="maintenance"','r7-maintenance-current','Current public state','Next focus','Previous monthly checkpoints','What the public maintenance log includes and excludes']) check(pages.maintenance.includes(marker),`Maintenance missing: ${marker}`);
+check(pages.maintenance.indexOf('r7-maintenance-current')<pages.maintenance.indexOf('maintenance-ledger'),'Maintenance current state appears after diagnostics');
+for(const marker of ['data-methodology-version="r6"','<LongformContentsR6','>Operational summary<','data-r6-reference','ValueStateMethodology']) check(pages.methodology.includes(marker),`R6 Methodology missing: ${marker}`);
+check(r6Contents.includes('data-r6-contents'),'R6 contents navigation missing');
 
-for (const marker of [
-  'data-update-feed-page',
-  'getPublicUpdateFeed',
-  'updatePublicCopy',
-  'Two timelines, two different questions',
-  'data-update-feed-filter-id="category"',
-  'data-update-feed-filter-id="year"',
-  'data-update-feed-filter-id="route_family"',
-  'data-update-feed-results'
-]) check(updates.includes(marker), `Updates feed surface missing: ${marker}`);
-for (const marker of ['.update-feed-masthead', '.update-feed-boundary-grid', '.update-feed-filter-grid', '.update-feed-item', '@media (max-width: 719px)']) check(updateFeedStyles.includes(marker), `Update Feed CSS missing: ${marker}`);
-check(!updateFeedStyles.includes('border-radius: 24px') && !updateFeedStyles.includes('box-shadow: 0 16px'), 'Update Feed CSS contains prohibited SaaS decoration');
-
-for (const marker of [
-  'data-methodology-version="r6"',
-  '<LongformContentsR6',
-  '>Operational summary<',
-  '>How a record is built<',
-  '>Evidence and review<',
-  '>Events and control actions<',
-  '>Uncertainty and corrections<',
-  'data-r6-reference',
-  'ValueStateMethodology'
-]) check(pages.methodology.includes(marker), `R6 Methodology protected structure missing: ${marker}`);
-check(!pages.methodology.includes('EditorialPageHeader'), 'R6 Methodology reintroduced the schema-led shared masthead');
-for (const marker of ['data-r6-contents', "window.matchMedia('(min-width: 761px)')", "!heading.closest('[data-r6-reference]')"]) check(r6Contents.includes(marker), `R6 Methodology contents contract missing: ${marker}`);
-for (const marker of ['.r6-methodology-primary', 'width: min(760px, 100%)', '.r6-methodology-reference', '@media (max-width: 760px)']) check(r6Styles.includes(marker), `R6 Methodology styles missing: ${marker}`);
-
-check(pages.about.includes('What Stable or Gone covers') && pages.about.includes('What Stable or Gone is not') && pages.about.includes('support-callout'), 'About protected sections missing');
-check(pages.contact.includes('data-ui-v3-utility="contact-corrections"') && pages.contact.includes('googleFormUrl') && pages.contact.includes('githubIssueUrl') && pages.contact.includes('No private secrets'), 'Contact/corrections functions missing');
-check(pages.support.includes('data-ui-v3-utility="support"') && pages.support.includes('wallets.length') && pages.support.includes('data-copy-address') && pages.support.includes('navigator.clipboard') && pages.support.includes('fallbackCopy'), 'Support wallet or copy contract missing');
-
-const result = {
-  schema_version: '1.2',
-  ok: failures.length === 0,
-  gate: 'V3-F-R6',
-  shell: 'evidence-registry-pr411',
-  reference_pages: 2,
-  update_feed_pages: 1,
-  maintenance_reference_routes: 1,
-  longform_pages: 2,
-  utility_pages: 2,
-  canonical_record_changes: 0,
-  route_changes: 0,
-  failures
-};
-console.log(JSON.stringify(result, null, 2));
-if (failures.length) process.exit(1);
+const result={schema_version:'1.3',ok:failures.length===0,gate:'V3-G-R7',reference_pages:2,update_feed_pages:1,maintenance_pages:1,about_pages:1,utility_pages:2,canonical_record_changes:0,route_changes:0,failures};
+console.log(JSON.stringify(result,null,2));
+if(failures.length)process.exit(1);
