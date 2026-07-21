@@ -1,0 +1,72 @@
+---
+interface Props {
+  label?: string;
+  scope?: 'guide' | 'methodology';
+}
+const { label = 'On this page', scope = 'guide' } = Astro.props;
+---
+<nav class="longform-contents-r6" data-r6-contents data-r6-scope={scope} aria-label={label}>
+  <details data-r6-contents-details>
+    <summary><span>{label}</span><small data-r6-current-section>Overview</small></summary>
+    <ol data-r6-contents-list></ol>
+  </details>
+</nav>
+<script>
+  const installR6Contents = () => {
+    const navigation = document.querySelector<HTMLElement>('[data-r6-contents]');
+    if (!navigation || navigation.dataset.r6Installed === 'true') return;
+    const main = navigation.closest('main') ?? document.querySelector('main');
+    if (!(main instanceof HTMLElement)) return;
+    navigation.dataset.r6Installed = 'true';
+    main.dataset.r6LongformRoot = 'true';
+    main.classList.add(navigation.dataset.r6Scope === 'methodology' ? 'r6-methodology-page' : 'r6-guide-article-page');
+
+    const list = navigation.querySelector<HTMLOListElement>('[data-r6-contents-list]');
+    const details = navigation.querySelector<HTMLDetailsElement>('[data-r6-contents-details]');
+    const current = navigation.querySelector<HTMLElement>('[data-r6-current-section]');
+    if (!list || !details || !current) return;
+
+    const headings = Array.from(main.querySelectorAll<HTMLElement>('h2'))
+      .filter((heading) => !heading.closest('[data-r6-contents]') && !heading.closest('footer'));
+    const used = new Set<string>();
+    const slug = (value: string) => value.normalize('NFKD').toLocaleLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
+    headings.forEach((heading, index) => {
+      let id = heading.id || slug(heading.textContent ?? `section-${index + 1}`);
+      const base = id;
+      let suffix = 2;
+      while (used.has(id) || (document.getElementById(id) && document.getElementById(id) !== heading)) id = `${base}-${suffix++}`;
+      heading.id = id;
+      heading.dataset.anchorFocus = '';
+      used.add(id);
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.textContent = heading.textContent?.trim() || `Section ${index + 1}`;
+      item.append(link);
+      list.append(item);
+    });
+
+    navigation.hidden = headings.length < 2;
+    const media = window.matchMedia('(min-width: 761px)');
+    const syncDisclosure = () => { details.open = media.matches; };
+    syncDisclosure();
+    media.addEventListener?.('change', syncDisclosure);
+
+    const links = Array.from(list.querySelectorAll<HTMLAnchorElement>('a'));
+    const setCurrent = (id: string) => {
+      links.forEach((link) => link.toggleAttribute('aria-current', link.hash === `#${id}`));
+      const heading = headings.find((item) => item.id === id);
+      current.textContent = heading?.textContent?.trim() || 'Overview';
+    };
+    if (headings[0]) setCurrent(headings[0].id);
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      const first = visible[0]?.target;
+      if (first instanceof HTMLElement) setCurrent(first.id);
+    }, { rootMargin: '-18% 0px -70% 0px', threshold: [0, 1] });
+    headings.forEach((heading) => observer.observe(heading));
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installR6Contents, { once: true });
+  else installR6Contents();
+</script>
