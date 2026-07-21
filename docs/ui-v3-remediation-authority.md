@@ -228,8 +228,8 @@ Hard failures:
 | R3 Home and Stablecoin Register | complete | #438 | 20/20 captures passed in run 29741326782; compact Home and six-column/compact-mobile register |
 | R4 Stablecoin Dossier | complete | #439 | Validation and 15/15 captures passed in run 29784166384; screenshots manually reviewed; desktop max 7,154px, tablet max 3,191px, mobile max 3,620px |
 | R5 Events and Organizations | complete | #440 | Validation and 40/40 captures passed in run 29800031326 at head `787bec1c`; screenshots manually reviewed; five-column registers and 96–123px mobile rows |
-| R6 Guides and long-form | active | pending | Starts after R5 merge; guide index, guide article, and Methodology are the authorized scope |
-| R7 Reference and utility | blocked | — | — |
+| R6 Guides and long-form | complete | #442 | Validation and 15/15 captures passed in run 29803262075 at head `1b6ddf0f`; screenshots manually reviewed; single responsive Guide register, 760px reading width, one contents navigation, and closed internal Methodology reference |
+| R7 Reference and utility | active | pending | Starts after R6 merge; About, Contact, Support, Glossary, Models, Updates, and Maintenance are the authorized scope |
 | R8 Compare and Access/Regulation | blocked | — | Runtime errors remain completion blockers |
 | R9 Timeline and Stats | blocked | — | — |
 | R10 Full visual closure | blocked | — | Requires complete manual review and explicit owner approval |
@@ -265,6 +265,23 @@ Representative final measurements:
 - Organizations mobile 320 filtered: 2,459px; maximum row 123.1px.
 
 The audit confirmed five-column desktop registers, compact mobile records, closed filters, working filtered and empty states, six primary detail facts, five relationship columns, 14px minimum visible table text, zero horizontal overflow, zero runtime/load failures, no repeated More-details controls, and no duplicate Overview or Evidence card sets. Desktop, tablet, and mobile screenshots were manually inspected before merge.
+
+## R6 completion evidence
+
+Run `29803262075` at head `1b6ddf0f92eb6f2456230f518b2c67fc4b82afa1` passed static authority containment, canonical and Evidence contracts, Guide/reference contracts, Astro check, static site generation, public verification, and all 15 required captures.
+
+Representative final measurements:
+
+- Guide index desktop 1440: 2,840px.
+- Guide article desktop 1440: 2,776px.
+- Methodology desktop 1440: 4,140px.
+- Guide index tablet 768: 3,416px.
+- Guide index mobile 390: 4,084px; maximum row 159.2px.
+- Guide index mobile 320: 4,249px; maximum row 162.6px.
+- Guide article mobile 320: 4,328px.
+- Methodology mobile 320: 6,286px.
+
+The audit confirmed four columns in every Guide register, one responsive dataset, zero duplicate mobile Guide surface, 14px minimum table text, zero horizontal overflow, zero runtime/load failures, one current-section contents navigation, desktop-open and mobile-closed contents behavior, zero visible legacy Guide contents, zero horizontally scrolling mobile article tables, Guide reference navigation after the article body, and a closed internal Methodology reference. Desktop, tablet, 390px, and 320px screenshots were manually inspected before merge.
 
 ## Completion rule
 
