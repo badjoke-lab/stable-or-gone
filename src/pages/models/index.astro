@@ -1,30 +1,60 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
-const models = [
-  ['Fiat-backed', 'Backed by cash or other off-chain reserve assets.'],
-  ['Crypto-collateralized', 'Backed by crypto assets held in smart contracts or protocol positions.'],
-  ['Algorithmic', 'Uses incentives, supply changes, or linked assets to maintain the target price.'],
-  ['Hybrid', 'Combines more than one reserve or stabilization method.'],
-  ['Synthetic', 'Tracks a dollar-like value through hedging or other synthetic exposure.'],
-  ['Yield-bearing', 'Includes an interest or yield mechanism in the token or related protocol.'],
-  ['Commodity-backed', 'Backed by commodities or claims on commodity holdings.'],
-  ['Multi-collateral', 'Uses several types of collateral rather than a single reserve asset.'],
-  ['Unknown / under review', 'Public information is not yet sufficient to classify the model confidently.']
-];
+import '../../styles/ui-remediation-r7.css';
+const groups = [
+  {
+    id: 'issuance',
+    title: 'Issuance structures',
+    description: 'Who or what can create new units, and under which public rules.',
+    entries: [
+      ['Issuer-minted', 'A legal entity or designated operator mints and burns units under documented terms.', 'USDC, PYUSD'],
+      ['Protocol-minted', 'A smart-contract system creates units against collateral, debt positions, or protocol rules.', 'DAI, LUSD'],
+      ['Synthetic issuance', 'Units are created through hedged, derivative, or synthetic exposure rather than a direct reserve claim.', 'USDe'],
+      ['Closed or terminated', 'New issuance is paused or ended while redemption, migration, or wind-down may continue.', 'Winding-down records'],
+      ['Unknown', 'Public information is insufficient to identify the issuance process confidently.', 'Explicit unknown state']
+    ]
+  },
+  {
+    id: 'backing',
+    title: 'Backing structures',
+    description: 'The reserve, collateral, or economic exposure used to support the reference value.',
+    entries: [
+      ['Fiat reserves', 'Cash, bank deposits, government securities, money-market instruments, or similar off-chain assets.', 'USDC, USDP'],
+      ['Crypto collateral', 'Crypto assets held in smart contracts or protocol positions.', 'DAI, LUSD'],
+      ['Commodity backing', 'Commodities or contractual claims on commodity holdings.', 'PAXG'],
+      ['Mixed reserves', 'Several reserve or collateral categories are used together.', 'Hybrid portfolios'],
+      ['No direct reserve claim', 'The design relies on incentives, hedging, linked assets, or another mechanism instead of a direct redemption claim on reserves.', 'Algorithmic or synthetic designs'],
+      ['Unknown', 'Available public information does not support a reliable backing classification.', 'Explicit unknown state']
+    ]
+  },
+  {
+    id: 'stabilization',
+    title: 'Stabilization mechanisms',
+    description: 'The process used to keep market value near the stated reference.',
+    entries: [
+      ['Direct redemption', 'Eligible holders can redeem with an issuer or designated agent at documented terms.', 'Issuer-backed stablecoins'],
+      ['Collateralized debt', 'Minting, repayment, liquidation, and collateral ratios regulate supply and solvency.', 'Maker-style systems'],
+      ['Market arbitrage', 'Mint, redeem, swap, or burn paths create incentives for market participants to close price gaps.', 'Many issuer and protocol models'],
+      ['Supply adjustment', 'Protocol rules expand or contract supply or linked-token incentives in response to price conditions.', 'Algorithmic designs'],
+      ['Hedged exposure', 'Derivatives or offsetting positions seek to stabilize the value of backing exposure.', 'Synthetic-dollar designs'],
+      ['Unknown', 'The public mechanism is incomplete, disputed, or not yet reviewed.', 'Explicit unknown state']
+    ]
+  }
+] as const;
+const modelCount = groups.reduce((total, group) => total + group.entries.length, 0);
 ---
-<BaseLayout title="Stablecoin Backing Models — Stable or Gone" description="A plain-language guide to fiat-backed, crypto-collateralized, algorithmic, synthetic, hybrid, and other stablecoin models." canonicalPath="/models/">
-  <article class="editorial-reference-page" data-ui-v3-reference="models">
-    <EditorialPageHeader kind="reference" eyebrow="Reference / models" title="How stablecoins try to hold their value" description="Stablecoins use different reserve, collateral, and stabilization methods. These categories describe the main design used by each record." facts={[{ label: 'Model records', value: models.length }, { label: 'Purpose', value: 'Comparison' }, { label: 'Unknown state', value: 'Preserved' }]} />
-    <section class="reference-section" id="model-index">
-      <div class="reference-section-heading"><h2>Backing and stabilization models</h2><p>These labels summarize the dominant public design. Hybrid and uncertain records remain explicit instead of being forced into a single category.</p></div>
-      <div class="reference-entry-grid">
-        {models.map(([name, modelDescription]) => <article><h2>{name}</h2><p>{modelDescription}</p></article>)}
-      </div>
-    </section>
-    <section class="reference-section">
-      <div class="reference-section-heading"><h2>Use with record evidence</h2><p>A model label is a navigation aid, not a complete risk assessment or reserve claim.</p></div>
-      <nav class="reference-actions" aria-label="Model reference links"><a href="/stablecoins/"><strong>Stablecoin register</strong><span>Compare the model labels attached to canonical records.</span></a><a href="/methodology/"><strong>Methodology</strong><span>Review backing, reserve, redemption, and value-state rules.</span></a><a href="/guides/reserve-disclosure-basics/"><strong>Reserve guide</strong><span>Learn how disclosure types differ across models.</span></a></nav>
-    </section>
+<BaseLayout title="Stablecoin Models — Stable or Gone" description="Plain-language reference for stablecoin issuance, backing, and stabilization structures." canonicalPath="/models/">
+  <article class="r7-page" data-r7-page="models" data-ui-v3-reference="models">
+    <header class="r7-masthead"><div class="r7-masthead-copy"><p class="r7-eyebrow">Reference / models</p><h1>How stablecoins are issued and stabilized</h1><p class="r7-lead">A model label is a navigation aid. It summarizes issuance, backing, and stabilization without replacing record-specific Evidence, reserve reports, redemption terms, or known unknowns.</p></div><dl class="r7-facts"><div><dt>Dimensions</dt><dd>{groups.length}</dd></div><div><dt>Definitions</dt><dd>{modelCount}</dd></div><div><dt>Unknown state</dt><dd>Preserved</dd></div><div><dt>Use</dt><dd>Record comparison</dd></div></dl></header>
+
+    <nav class="r7-secondary-links" aria-label="Model dimensions">{groups.map((group) => <a href={`#model-${group.id}`}>{group.title}</a>)}</nav>
+
+    <div class="r7-model-groups">
+      {groups.map((group) => <section class="r7-model-group" id={`model-${group.id}`}><header><h2>{group.title}</h2><p>{group.description}</p></header><div>{group.entries.map(([name, definition, example]) => <article class="r7-model-row"><strong>{name}</strong><p>{definition}</p><small>{example}</small></article>)}</div></section>)}
+    </div>
+
+    <details class="r7-disclosure" data-disclosure><summary>How model labels should be used</summary><div class="r7-disclosure-body"><dl class="r7-row-list"><div><dt>Not a risk score</dt><dd>A design category does not establish reserve quality, legal enforceability, market liquidity, operational reliability, or safety.</dd></div><div><dt>Multiple dimensions</dt><dd>One stablecoin can combine issuer minting, mixed reserves, direct redemption, and market arbitrage. No single label describes every relevant property.</dd></div><div><dt>Evidence first</dt><dd>Open the stablecoin dossier for source-backed reserve, redemption, organization, deployment, event, and uncertainty details.</dd></div></dl></div></details>
+
+    <div class="r7-secondary-links"><a href="/stablecoins/">Stablecoin register</a><a href="/methodology/">Methodology</a><a href="/guides/reserve-disclosure-basics/">Reserve guide</a></div>
   </article>
 </BaseLayout>
