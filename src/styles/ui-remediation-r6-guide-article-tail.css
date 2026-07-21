@@ -49,12 +49,13 @@
   .site-main[data-page-kind="guide-article"] .guide-article-content td {
     padding: .12rem 0 !important;
     border: 0 !important;
+    font-size: .875rem !important;
+    line-height: 1.45 !important;
     overflow-wrap: normal !important;
     word-break: normal !important;
   }
 
   .site-main[data-page-kind="guide-article"] .guide-article-content th {
     margin-bottom: .12rem;
-    font-size: .75rem !important;
   }
 }
