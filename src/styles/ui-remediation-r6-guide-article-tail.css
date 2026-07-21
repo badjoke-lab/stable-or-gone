@@ -13,9 +13,14 @@
   gap: 0 !important;
 }
 
-.site-main[data-page-kind="guide-article"] .guide-article-content,
+.site-main[data-page-kind="guide-article"] .guide-article-content {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+
 .site-main[data-page-kind="guide-article"] .guide-article-footer {
   grid-column: 1 !important;
+  grid-row: 2 !important;
 }
 
 @media (max-width: 760px) {
