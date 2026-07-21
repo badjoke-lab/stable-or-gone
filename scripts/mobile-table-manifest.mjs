@@ -23,10 +23,10 @@ export const requiredMobileTableKinds = [
   'stablecoin-organizations', 'stablecoin-reserve-profile', 'stablecoin-redemption-profile',
   'stablecoin-record-coverage', 'issuer-control-events', 'stablecoin-event-timeline',
   'stablecoin-reserve-history', 'stablecoin-regulatory-notices', 'stablecoin-deployments',
-  'stablecoin-sources', 'stablecoin-open-questions', 'organization-overview',
-  'organization-relationships', 'organization-events', 'organization-sources',
-  'event-details', 'event-detail-overlay', 'event-sources', 'methodology-value-states',
-  'methodology-primary-display-relationships', 'methodology-evidence-source-identities'
+  'stablecoin-sources', 'stablecoin-open-questions', 'organization-relationships',
+  'organization-events', 'organization-sources', 'event-detail-overlay', 'event-sources',
+  'methodology-value-states', 'methodology-primary-display-relationships',
+  'methodology-evidence-source-identities'
 ];
 
 const generatedByRuntime = 'src/components/MobileTableRuntime.astro';
@@ -36,14 +36,12 @@ export const implementedMobileTableRepresentations = Object.freeze({
   'stablecoin-overview': 'src/components/StablecoinDetailView.astro',
   'stablecoin-organizations': 'src/components/StablecoinOrganizationsControl.astro',
   'organization-index': 'src/components/OrganizationIndexCard.astro',
-  'organization-overview': 'src/components/OrganizationEditorialIdentity.astro',
   'organization-relationships': 'src/components/OrganizationEditorialIdentity.astro',
   'organization-events': 'src/components/OrganizationEditorialHistory.astro',
-  'organization-sources': 'src/components/OrganizationEditorialHistory.astro',
+  'organization-sources': generatedByRuntime,
   'event-index': 'src/components/EventIndexCard.astro',
-  'event-details': 'src/components/EventEditorialBody.astro',
   'event-detail-overlay': 'src/components/StructuredEventDetail.astro',
-  'event-sources': 'src/components/EventEditorialBody.astro',
+  'event-sources': generatedByRuntime,
   'stablecoin-reserve-profile': 'src/components/StablecoinValueStateSections.astro',
   'stablecoin-redemption-profile': 'src/components/StablecoinValueStateSections.astro',
   'stablecoin-record-coverage': generatedByRuntime,

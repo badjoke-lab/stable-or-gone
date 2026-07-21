@@ -1,5 +1,5 @@
 ---
-const { record, initiallyVisible = true } = Astro.props as { record: { search: string; title: string; category: string; subtype: string; statusEffect: string; recovery: string; year: string; eventDate: string; sourceIdentityCount: number; id: string; categoryLabel: string; subtypeLabel: string; impactLabel: string; statusEffectLabel: string; recoveryLabel: string }; initiallyVisible?: boolean };
+const { record, initiallyVisible = true } = Astro.props as { record: { search: string; title: string; category: string; subtype: string; statusEffect: string; recovery: string; year: string; eventDate: string; sourceIdentityCount: number; id: string; categoryLabel: string; subtypeLabel: string; impactLabel: string; statusEffectLabel: string; recoveryLabel: string; subjectNames: string[] }; initiallyVisible?: boolean };
 const data = {
   'data-record-id': record.id,
   'data-search': record.search,
@@ -15,9 +15,8 @@ const data = {
 ---
 <tr data-event-row hidden={initiallyVisible ? undefined : true} {...data}>
   <td><time datetime={record.eventDate || undefined}>{record.eventDate || 'Not recorded'}</time></td>
-  <td><a class="record-name" href={`/event/${record.id}/`}>{record.title}</a><small>{record.categoryLabel}</small></td>
-  <td>{record.subtypeLabel}</td>
-  <td><strong class="event-impact-label">{record.impactLabel}</strong><small>Lifecycle effect: {record.statusEffectLabel}</small></td>
-  <td>{record.recoveryLabel}</td>
-  <td>{record.sourceIdentityCount} source{record.sourceIdentityCount === 1 ? '' : 's'}</td>
+  <td><strong class="event-impact-label">{record.impactLabel}</strong></td>
+  <td><a class="record-name" href={`/event/${record.id}/`}>{record.title}</a><small>{record.subtypeLabel}</small></td>
+  <td>{record.subjectNames.join(', ') || 'Not recorded'}<small>{record.categoryLabel}</small></td>
+  <td>{record.statusEffectLabel}<small>{record.recoveryLabel}</small></td>
 </tr>

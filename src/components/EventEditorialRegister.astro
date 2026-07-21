@@ -6,28 +6,29 @@ import '../styles/event-index.css';
 import '../styles/events-organizations-pr417.css';
 import '../styles/events-organizations-pr417-mobile.css';
 import '../styles/terminal-index-pagination.css';
+import '../styles/ui-remediation-r5.css';
 import { buildEventIndexView } from '../lib/views/eventIndexView';
 
 const PAGE_SIZE = 20;
 const { records, filters, stablecoinSubjectCount, organizationSubjectCount, sourceIdentityCount } = buildEventIndexView();
 const title = 'Events — Stable or Gone';
-const description = 'Browse stablecoin lifecycle events by public category, precise subtype, status effect, recovery state, year, subjects, and evidence.';
+const description = 'Browse stablecoin lifecycle events by date, severity, subject, effect, and supporting evidence.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Events', url: 'https://sog.badjoke-lab.com/events/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/events/" jsonLd={jsonLd}>
-  <div class="event-index-page" data-event-index data-ui-v3-events data-register-version="pr417-events" data-page-size={PAGE_SIZE}>
-    <header class="event-index-masthead">
+  <div class="event-index-page event-index-page-r5" data-event-index data-ui-v3-events data-register-version="r5-events" data-page-size={PAGE_SIZE}>
+    <header class="event-index-masthead event-index-masthead-r5">
       <div class="event-index-overline"><span>Event register</span><nav aria-label="Related registers"><a href="/stablecoins/">Stablecoins</a><a href="/issuers/">Organizations</a></nav></div>
       <div class="event-index-title"><div><p>Material changes and public records</p><h1>Events</h1></div><span>Launches, incidents, migrations, regulatory actions, shutdowns, recoveries, and other reviewed changes. Event effects are historical context, not current-status labels.</span></div>
       <dl class="event-index-ledger" aria-label="Event register totals"><div><dt>Events</dt><dd>{records.length}</dd></div><div><dt>Stablecoin subjects</dt><dd>{stablecoinSubjectCount}</dd></div><div><dt>Organization subjects</dt><dd>{organizationSubjectCount}</dd></div><div><dt>Source identities</dt><dd>{sourceIdentityCount}</dd></div></dl>
     </header>
 
     <section class="event-index-registry" aria-labelledby="event-index-heading">
-      <div class="event-index-section-heading"><p>Chronological registry</p><h2 id="event-index-heading">Review severity, type, and lifecycle effect</h2><span>Filter by category, subtype, status effect, recovery, and year. Twenty matching records are shown per page.</span></div>
+      <div class="event-index-section-heading"><p>Chronological registry</p><h2 id="event-index-heading">Date, severity, subject, and effect</h2><span>Search or open filters when needed. Twenty matching records are shown per page.</span></div>
       <div class="event-index-toolbar"><label><span>Search</span><input data-event-search type="search" name="q" placeholder="Title, description, ID, subject, publisher" autocomplete="off" /></label><label><span>Sort</span><select data-event-sort name="sort"><option value="date_desc">Date: newest first</option><option value="date_asc">Date: oldest first</option><option value="title_asc">Title A–Z</option><option value="evidence_most">Most source identities</option></select></label><button class="event-index-action" type="button" data-event-clear-all>Clear all</button></div>
       <div class="event-index-filter-grid" aria-label="Event filters" data-event-category>{filters.map((filter) => <details class="event-index-filter"><summary data-summary-label="All">{filter.label} <span aria-hidden="true" data-event-filter-count={filter.id} data-option-total={filter.options.length}>{filter.options.length}</span></summary><div class="event-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-event-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}</div></details>)}</div>
       <div class="event-index-summary"><div class="event-index-active-filters" data-event-active-filters aria-label="Active event filters"></div><div class="event-index-result-count" aria-live="polite"><span data-event-visible-range>1–{Math.min(PAGE_SIZE, records.length)}</span> of <span data-event-result-count>{records.length}</span> events</div></div>
-      <div class="event-index-table"><table data-table-kind="event-index" data-mobile-table="scroll-preserve"><caption>Event registry results. Compact records follow for small screens.</caption><thead><tr><th>Date</th><th>Event</th><th>Subtype</th><th>Impact / status effect</th><th>Recovery</th><th>Sources</th></tr></thead><tbody data-event-body>{records.map((record, index) => <EventIndexRow record={record} initiallyVisible={index < PAGE_SIZE} />)}</tbody></table></div>
+      <div class="event-index-table"><table data-table-kind="event-index" data-mobile-table="scroll-preserve"><caption>Event registry results. Compact records follow for small screens.</caption><thead><tr><th>Date</th><th>Severity</th><th>Event</th><th>Subject</th><th>Effect</th></tr></thead><tbody data-event-body>{records.map((record, index) => <EventIndexRow record={record} initiallyVisible={index < PAGE_SIZE} />)}</tbody></table></div>
       <div class="event-index-cards" data-event-card-body aria-label="Event compact records">{records.map((record, index) => <EventIndexCard record={record} initiallyVisible={index < PAGE_SIZE} />)}</div>
       <div class="event-index-no-results" data-event-no-results hidden><strong>No events match this state.</strong><span>Clear the search and filters to restore all event records.</span><button class="event-index-action" type="button" data-event-clear-all>Clear all</button></div>
       <nav class="event-index-pagination" data-event-pagination aria-label="Event register pages"><button class="event-index-action" type="button" data-event-page-prev>Previous</button><span data-event-page-status aria-live="polite">Page 1 of {Math.max(1, Math.ceil(records.length / PAGE_SIZE))}</span><button class="event-index-action" type="button" data-event-page-next>Next</button></nav>

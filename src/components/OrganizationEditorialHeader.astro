@@ -1,14 +1,14 @@
 ---
 const { organization, view } = Astro.props;
 ---
-<header class="organization-detail-masthead">
-  <div class="organization-detail-overline"><span>Organization record</span><div><a href="/issuers/">Return to register</a>{organization.official_url && <a href={organization.official_url}>Official website</a>}</div></div>
+<header class="organization-detail-masthead organization-detail-masthead-r5">
+  <div class="organization-detail-overline"><span>Organization record</span><div><a href="/issuers/">Organization register</a><a href="/contact/">Report a correction</a></div></div>
   <div class="organization-detail-title"><div><p>Record <code>{organization.id}</code></p><h1>{organization.name}</h1></div><p>{view.summary}</p></div>
-  <dl class="organization-detail-ledger" aria-label="Current reviewed organization facts">
+  <dl class="organization-detail-ledger organization-detail-ledger-r5" aria-label="Primary reviewed organization facts">
     <div><dt>Category</dt><dd>{view.taxonomy.public_category_label}</dd></div>
     <div><dt>Regulatory character</dt><dd>{view.taxonomy.regulatory_character_label}</dd></div>
     <div><dt>Jurisdiction</dt><dd>{view.taxonomy.jurisdiction_label}<small>{view.taxonomy.jurisdiction_scope_label}</small></dd></div>
-    <div><dt>Connected assets</dt><dd>{view.stablecoins.length}</dd></div>
+    <div><dt>Connected assets</dt><dd><a href="#relationships">{view.stablecoins.length}</a></dd></div>
     <div><dt>Relationships</dt><dd>{view.currentRelationships.length} current<small>{view.historicalRelationships.length} historical</small></dd></div>
     <div><dt>Evidence</dt><dd><a href="#evidence">{view.sourceIdentities.length} source record{view.sourceIdentities.length === 1 ? '' : 's'}</a></dd></div>
   </dl>
