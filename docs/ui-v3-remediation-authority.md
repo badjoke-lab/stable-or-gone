@@ -1,6 +1,6 @@
 # UI v3 Remediation Authority
 
-Updated: 2026-07-20  
+Updated: 2026-07-21  
 Status: active — rework required  
 Issue: #281  
 Completion: false
@@ -227,8 +227,8 @@ Hard failures:
 | R2 Global shell and tokens | complete | #437 | 35/35 captures passed in run 29738874474; one-row shell, typography, compact footer, overflow fixes |
 | R3 Home and Stablecoin Register | complete | #438 | 20/20 captures passed in run 29741326782; compact Home and six-column/compact-mobile register |
 | R4 Stablecoin Dossier | complete | #439 | Validation and 15/15 captures passed in run 29784166384; screenshots manually reviewed; desktop max 7,154px, tablet max 3,191px, mobile max 3,620px |
-| R5 Events and Organizations | active | pending | Five-column registers, compact mobile rows, deduplicated details, and bounded Evidence in progress on `agent/ui-v3-r5-events-organizations` |
-| R6 Guides and long-form | blocked | — | Starts after R5 review |
+| R5 Events and Organizations | complete | #440 | Validation and 40/40 captures passed in run 29800031326 at head `787bec1c`; screenshots manually reviewed; five-column registers and 96–123px mobile rows |
+| R6 Guides and long-form | active | pending | Starts after R5 merge; guide index, guide article, and Methodology are the authorized scope |
 | R7 Reference and utility | blocked | — | — |
 | R8 Compare and Access/Regulation | blocked | — | Runtime errors remain completion blockers |
 | R9 Timeline and Stats | blocked | — | — |
@@ -248,6 +248,23 @@ Representative final heights:
 - USDC mobile 320: 3,620px.
 
 The audit confirmed six primary facts, at most five initial events, at most ten initial Evidence rows, five organization columns, 14px minimum visible table text, zero page overflow, zero runtime/load failures, six open desktop sections, and zero open tablet/mobile secondary sections. Desktop, tablet, and mobile screenshots were manually inspected before merge.
+
+## R5 completion evidence
+
+Run `29800031326` at head `787bec1c0d6ffdafa76364361d963d345d07c688` passed static authority containment, index interaction, responsive accessibility, canonical and Evidence contracts, Astro check, build, public verification, and all 40 required captures.
+
+Representative final measurements:
+
+- Events desktop 1440 default: 3,034px.
+- Organizations desktop 1440 default: 3,065px.
+- Event detail desktop 1440: 3,321px.
+- Organization detail desktop 1440: 4,917px.
+- Events mobile 390 default: 4,001px; maximum row 96.3px.
+- Organizations mobile 390 default: 4,033px; maximum row 111.8px.
+- Events mobile 320 default: 4,235px; maximum row 112.9px.
+- Organizations mobile 320 filtered: 2,459px; maximum row 123.1px.
+
+The audit confirmed five-column desktop registers, compact mobile records, closed filters, working filtered and empty states, six primary detail facts, five relationship columns, 14px minimum visible table text, zero horizontal overflow, zero runtime/load failures, no repeated More-details controls, and no duplicate Overview or Evidence card sets. Desktop, tablet, and mobile screenshots were manually inspected before merge.
 
 ## Completion rule
 
