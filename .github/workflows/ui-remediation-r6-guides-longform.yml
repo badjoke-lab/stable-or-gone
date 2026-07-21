@@ -60,21 +60,28 @@ jobs:
         continue-on-error: true
         run: npm run check
 
-      - name: Build and verify public layer
+      - name: Build site
         id: build
         continue-on-error: true
-        run: npm run build && npm run verify:public
+        run: npm run build
+
+      - name: Verify public layer
+        id: public
+        continue-on-error: true
+        if: steps.build.outcome == 'success'
+        run: npm run verify:public
 
       - name: Resolve validation result
         id: validation
         shell: bash
         run: |
-          printf 'static=%s\ncanonical=%s\nastro=%s\nbuild=%s\n' \
-            '${{ steps.static.outcome }}' '${{ steps.canonical.outcome }}' '${{ steps.astro.outcome }}' '${{ steps.build.outcome }}'
+          printf 'static=%s\ncanonical=%s\nastro=%s\nbuild=%s\npublic=%s\n' \
+            '${{ steps.static.outcome }}' '${{ steps.canonical.outcome }}' '${{ steps.astro.outcome }}' '${{ steps.build.outcome }}' '${{ steps.public.outcome }}'
           test '${{ steps.static.outcome }}' = success
           test '${{ steps.canonical.outcome }}' = success
           test '${{ steps.astro.outcome }}' = success
           test '${{ steps.build.outcome }}' = success
+          test '${{ steps.public.outcome }}' = success
 
       - name: Install Chromium
         if: steps.validation.outcome == 'success'
@@ -130,6 +137,7 @@ jobs:
           R6_CANONICAL: ${{ steps.canonical.outcome }}
           R6_ASTRO: ${{ steps.astro.outcome }}
           R6_BUILD: ${{ steps.build.outcome }}
+          R6_PUBLIC: ${{ steps.public.outcome }}
         with:
           script: |
             const issueNumber=Number(process.env.R6_PR_NUMBER);
@@ -139,7 +147,7 @@ jobs:
             const validate=process.env.R6_VALIDATION || 'skipped';
             const visual=process.env.R6_VISUAL || 'skipped';
             const passed=validate==='success' && visual==='success';
-            const diagnostics=`Static: **${process.env.R6_STATIC}** · Canonical: **${process.env.R6_CANONICAL}** · Astro: **${process.env.R6_ASTRO}** · Build: **${process.env.R6_BUILD}**`;
+            const diagnostics=`Static: **${process.env.R6_STATIC}** · Canonical: **${process.env.R6_CANONICAL}** · Astro: **${process.env.R6_ASTRO}** · Build: **${process.env.R6_BUILD}** · Public: **${process.env.R6_PUBLIC}**`;
             const status=`## Latest R6 workflow\n\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R6_HEAD_SHA}\`\n- Validation: **${validate}**\n- 15-capture visual audit: **${visual}**\n- Diagnostics: ${diagnostics}\n- Overall: **${passed ? 'pass' : 'failure'}**`;
             const body=`${marker}\n## UI remediation R6 — Guides and long-form\n\n- Validation: **${validate}**\n- 15-capture audit: **${visual}**\n- Diagnostics: ${diagnostics}\n- Overall: **${passed ? 'pass' : 'failure'}**\n- Run ID: **${context.runId}**\n- Head: \`${process.env.R6_HEAD_SHA}\``;
             const comments=await github.paginate(github.rest.issues.listComments,{owner:context.repo.owner,repo:context.repo.repo,issue_number:issueNumber,per_page:100});
