@@ -63,7 +63,6 @@
   }
 
   .guide-index-page-r6 .guide-index-table td:not(:first-child)::before {
-    content: attr(data-label) ": ";
     display: inline;
     margin-right: .1rem;
     color: var(--sog-text-faint);
@@ -73,5 +72,16 @@
     letter-spacing: 0;
   }
 
+  .guide-index-page-r6 .guide-index-table td:nth-child(2)::before { content: "Scope: "; }
+  .guide-index-page-r6 .guide-index-table td:nth-child(3)::before { content: "Current: "; }
+  .guide-index-page-r6 .guide-index-table td:nth-child(4)::before { content: "Category: "; }
+
   .guide-index-page-r6 .guide-index-mobile { display: none !important; }
+}
+
+@media (max-width: 360px) {
+  .guide-index-page-r6 .guide-index-table tr {
+    padding-block: .38rem !important;
+    column-gap: .35rem !important;
+  }
 }
