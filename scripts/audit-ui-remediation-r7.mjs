@@ -5,6 +5,9 @@ import { chromium } from 'playwright';
 const baseUrl = process.env.UI_AUDIT_BASE_URL || 'http://127.0.0.1:4321';
 const outputRoot = process.env.UI_AUDIT_OUTPUT || 'artifacts/ui-remediation-r7';
 const routes = [
+  ['home', '/'],
+  ['guide-article', '/guides/what-is-a-depeg/'],
+  ['dossier-usdc', '/stablecoin/usdc/'],
   ['about', '/about/'],
   ['contact', '/contact/'],
   ['support', '/support/'],
@@ -23,7 +26,7 @@ const viewports = [
 
 fs.mkdirSync(outputRoot, { recursive: true });
 const browser = await chromium.launch({ headless: true });
-const manifest = { schema_version: '1.0', base_url: baseUrl, captures: [], failures: [] };
+const manifest = { schema_version: '1.1', base_url: baseUrl, captures: [], failures: [] };
 const forbiddenFont = /(georgia|cambria|times new roman|\bserif\b)/i;
 const monospaceFont = /(menlo|monaco|consolas|sfmono|liberation mono|\bmonospace\b)/i;
 
@@ -44,8 +47,8 @@ for (const [viewportName, width, height] of viewports) {
         const rect = element.getBoundingClientRect();
         return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) !== 0 && rect.width > 0 && rect.height > 0;
       };
-      const technical = (element) => element.matches('code,pre,kbd,samp,.contract-address,.transaction-hash,[data-long-value],.r7-wallet-row code,.address-block code');
-      const textSelector = 'h1,h2,h3,h4,p,li,dt,dd,th,td,label,button,input,select,textarea,summary,a,span,strong,small';
+      const technical = (element) => element.matches('code,pre,kbd,samp,.contract-address,.transaction-hash,[data-long-value],.r7-wallet-row code,.address-block code,.stablecoin-record-id');
+      const textSelector = 'h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,label,button,input,select,textarea,summary,a,span,strong,small,time,i,em,blockquote';
       const fontIssues = [];
       for (const element of document.querySelectorAll(textSelector)) {
         if (!isVisible(element)) continue;
@@ -53,7 +56,7 @@ for (const [viewportName, width, height] of viewports) {
         if (/(georgia|cambria|times new roman|\bserif\b)/i.test(family)) fontIssues.push({ selector: element.tagName.toLowerCase(), family, text: element.textContent?.trim().slice(0, 80) });
         if (/(menlo|monaco|consolas|sfmono|liberation mono|\bmonospace\b)/i.test(family) && !technical(element)) fontIssues.push({ selector: element.tagName.toLowerCase(), family, text: element.textContent?.trim().slice(0, 80) });
       }
-      const flatSelectors = '.r7-masthead,.r7-disclosure,.r7-primary-action,.r7-letter-nav a,.r7-maintenance-status,.site-search-control,.mobile-navigation-panel';
+      const flatSelectors = '.site-header,.site-search-control,.mobile-navigation-panel,.r7-masthead,.r7-disclosure,.r7-primary-action,.r7-letter-nav a,.r7-maintenance-status';
       const flatIssues = [];
       for (const element of document.querySelectorAll(flatSelectors)) {
         if (!isVisible(element)) continue;
@@ -62,6 +65,7 @@ for (const [viewportName, width, height] of viewports) {
         if (radius.some((value) => parseFloat(value) > 0)) flatIssues.push({ selector: element.className || element.tagName, property: 'border-radius', value: radius.join(' ') });
         if (style.boxShadow !== 'none') flatIssues.push({ selector: element.className || element.tagName, property: 'box-shadow', value: style.boxShadow });
         if (style.backgroundImage !== 'none') flatIssues.push({ selector: element.className || element.tagName, property: 'background-image', value: style.backgroundImage });
+        if (style.backdropFilter && style.backdropFilter !== 'none') flatIssues.push({ selector: element.className || element.tagName, property: 'backdrop-filter', value: style.backdropFilter });
       }
       return {
         title: document.title,
@@ -69,8 +73,8 @@ for (const [viewportName, width, height] of viewports) {
         viewportWidth: width,
         bodyFont: getComputedStyle(document.body).fontFamily,
         bodyBackgroundImage: getComputedStyle(document.body).backgroundImage,
-        fontIssues: fontIssues.slice(0, 50),
-        flatIssues: flatIssues.slice(0, 50)
+        fontIssues: fontIssues.slice(0, 100),
+        flatIssues: flatIssues.slice(0, 100)
       };
     }, { width });
 
