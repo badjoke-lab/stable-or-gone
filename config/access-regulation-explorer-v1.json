@@ -1,10 +1,10 @@
 {
-  "schema_version": "1.0",
-  "config_id": "sog_access_regulation_explorer_pr347_v1",
+  "schema_version": "1.1",
+  "config_id": "sog_access_regulation_explorer_r8_v1",
   "source_endpoint": "/data/access-regulation-index.json",
   "route": "/access-regulation/",
-  "initial_result_limit": 50,
-  "result_limit_increment": 25,
+  "initial_result_limit": 10,
+  "result_limit_increment": 10,
   "filters": [
     {"id":"lifecycle_status","label":"Lifecycle","query_param":"lifecycle","group":"record_state"},
     {"id":"legal_profile_state","label":"Legal profile state","query_param":"legal_state","group":"legal"},
@@ -35,7 +35,9 @@
     "risk_ranking": false,
     "sort_order": "canonical_asset_id",
     "no_absence_inference": true,
-    "readiness_and_freshness_visible": true
+    "readiness_and_freshness_visible": true,
+    "initial_rows": 10,
+    "row_increment": 10
   },
-  "next_pr": 348
+  "next_pr": 445
 }
