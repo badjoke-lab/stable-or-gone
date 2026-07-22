@@ -1,0 +1,15 @@
+src/styles/home-v3.css
+src/styles/editorial-ledger-v3.css
+src/styles/guide-editorial-v3.css
+src/styles/reference-utility-v3.css
+src/styles/mobile-accessibility-v3.css
+src/components/StablecoinDossierHeader.astro
+src/components/StablecoinReserveSection.astro
+src/components/StablecoinContextSections.astro
+src/components/StablecoinHistorySection.astro
+src/components/StablecoinOrganizationsControl.astro
+src/components/StablecoinRelatedSection.astro
+src/pages/events/index.astro
+src/components/EventEditorialRegister.astro
+src/pages/issuers/index.astro
+src/components/OrganizationEditorialRegister.astro
