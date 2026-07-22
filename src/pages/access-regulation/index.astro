@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/access-regulation-explorer.css';
+import '../../styles/ui-remediation-r8.css';
 import explorerConfig from '../../../config/access-regulation-explorer-v1.json';
+import { getPublicAccessRegulationIndex } from '../../lib/accessRegulationData.mjs';
 
+const index = getPublicAccessRegulationIndex();
 const title = 'Access & Regulation Explorer — Stable or Gone';
-const description = 'Filter canonical legal profiles, Regulatory Notes, and Market Access record presence across the Stable or Gone registry without ranking assets or inferring conclusions from missing records.';
+const description = 'Filter canonical legal profiles, Regulatory Notes, and Market Access records without scores, rankings, or conclusions inferred from missing records.';
 const configJson = JSON.stringify(explorerConfig).replace(/</g, '\u003c');
+const indexJson = JSON.stringify(index).replace(/</g, '\u003c');
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -16,107 +20,90 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/access-regulation/" jsonLd={jsonLd}>
-  <div class="ar-explorer" data-ar-explorer>
-    <header class="ar-masthead">
+  <main class="ar-explorer r8-access-page" data-ar-explorer data-r8-surface="access-regulation">
+    <header class="ar-masthead r8-masthead">
       <div>
-        <p class="ar-eyebrow">Research tools / Canonical index</p>
+        <p class="ar-eyebrow">Registry tool / legal and access records</p>
         <h1>Access & Regulation Explorer</h1>
-        <p>Search canonical legal profiles, Regulatory Notes, and Market Access record presence across 110 stable assets. Missing records remain missing-record states; they are not converted into legal, regulatory, or availability conclusions.</p>
+        <p>Search record presence across {index.asset_count} stable assets. Missing records remain unknown inventory states; they are not converted into legal, regulatory, or availability conclusions.</p>
       </div>
-      <dl class="ar-contract-summary" aria-label="Explorer contract">
-        <div><dt>Assets</dt><dd>110</dd></div>
-        <div><dt>Score</dt><dd>None</dd></div>
-        <div><dt>Ranking</dt><dd>None</dd></div>
+      <dl class="ar-contract-summary" aria-label="Explorer inventory">
+        <div><dt>Available records</dt><dd>{index.asset_count}</dd></div>
+        <div><dt>Regulatory records</dt><dd>{index.summary.regulatory_record_count}</dd></div>
+        <div><dt>Market access records</dt><dd>{index.summary.market_access_record_count}</dd></div>
       </dl>
     </header>
 
-    <section class="ar-boundary-note" aria-labelledby="ar-boundary-heading">
-      <p class="ar-eyebrow">Interpretation boundary</p>
-      <h2 id="ar-boundary-heading">Record presence is context, not a verdict</h2>
-      <div class="ar-boundary-grid">
-        <p><strong>No Regulatory Note</strong><span>does not prove that no regulatory action or development exists.</span></p>
-        <p><strong>No Market Access Record</strong><span>does not mean unavailable in a jurisdiction or on a platform.</span></p>
-        <p><strong>Unclassified legal profile</strong><span>does not mean illegal, unregulated, banned, or unsafe.</span></p>
-      </div>
-    </section>
-
-    <section class="ar-controls" aria-labelledby="ar-controls-heading">
-      <div class="ar-section-heading">
+    <section class="ar-controls r8-primary-surface" aria-labelledby="ar-controls-heading">
+      <div class="ar-section-heading r8-section-heading">
         <div>
-          <p class="ar-eyebrow">Filter</p>
+          <p class="ar-eyebrow">Search and filter</p>
           <h2 id="ar-controls-heading">Narrow the canonical index</h2>
-          <p>Filters use asset-presence tokens from the deterministic index. Result order remains canonical asset ID order and is never rearranged into a risk ranking.</p>
+          <p>Result order remains canonical record order. No score or ranking controls are provided.</p>
         </div>
-        <p class="ar-machine-link"><a href="/data/access-regulation-index.json">Machine-readable index</a> · canonical data only</p>
+        <a class="ar-machine-link" href="/data/access-regulation-index.json">Download index JSON</a>
       </div>
 
       <div class="ar-search-row">
         <label class="ar-search-field">
           <span>Search asset name, symbol, or slug</span>
-          <input type="search" data-ar-search placeholder="Search 110 assets" autocomplete="off" />
+          <input type="search" data-ar-search placeholder={`Search ${index.asset_count} assets`} autocomplete="off" />
         </label>
         <button type="button" class="ui-button" data-ar-clear>Clear filters</button>
         <button type="button" class="ui-button" data-ar-copy>Copy filtered view</button>
         <span data-ar-copy-status aria-live="polite"></span>
       </div>
 
-      <div class="ar-filter-groups" data-ar-filter-groups>
-        <fieldset class="ar-filter-group">
-          <legend>Record state</legend>
-          <div data-ar-filter-slot="record_state"></div>
-        </fieldset>
-        <fieldset class="ar-filter-group">
-          <legend>Legal profile</legend>
-          <div data-ar-filter-slot="legal"></div>
-        </fieldset>
-        <fieldset class="ar-filter-group">
-          <legend>Regulatory Notes</legend>
-          <div data-ar-filter-slot="regulatory"></div>
-        </fieldset>
-        <fieldset class="ar-filter-group">
-          <legend>Market Access</legend>
-          <div data-ar-filter-slot="market_access"></div>
-          <p class="ar-filter-help" data-ar-access-help>Canonical Market Access record coverage is currently determined by the index. Empty option axes remain empty rather than being filled from editorial research.</p>
-        </fieldset>
-      </div>
+      <details class="r8-secondary-disclosure ar-filter-disclosure">
+        <summary>Filter by canonical record state</summary>
+        <div class="r8-secondary-disclosure__body">
+          <div class="ar-filter-groups" data-ar-filter-groups>
+            <fieldset class="ar-filter-group"><legend>Record state</legend><div data-ar-filter-slot="record_state"></div></fieldset>
+            <fieldset class="ar-filter-group"><legend>Legal profile</legend><div data-ar-filter-slot="legal"></div></fieldset>
+            <fieldset class="ar-filter-group"><legend>Regulatory Notes</legend><div data-ar-filter-slot="regulatory"></div></fieldset>
+            <fieldset class="ar-filter-group">
+              <legend>Market Access</legend><div data-ar-filter-slot="market_access"></div>
+              <p class="ar-filter-help" data-ar-access-help>Empty option axes stay empty. They are not filled from editorial inference.</p>
+            </fieldset>
+          </div>
+        </div>
+      </details>
 
       <div class="ar-active-filters" data-ar-active-filters aria-live="polite"></div>
-      <div class="ar-alert" data-ar-alert role="alert" aria-live="assertive"></div>
+      <div class="ar-alert r8-error" data-ar-alert role="alert" aria-live="assertive" hidden>
+        <strong>Explorer unavailable</strong>
+        <p>The index could not be prepared.</p>
+        <button type="button" data-ar-retry>Retry</button>
+      </div>
     </section>
 
     <section class="ar-results-section" aria-labelledby="ar-results-heading">
       <div class="ar-results-heading">
-        <div>
-          <p class="ar-eyebrow">Results</p>
-          <h2 id="ar-results-heading">Canonical asset records</h2>
-        </div>
-        <p><strong data-ar-result-count>0</strong> matching assets · <span data-ar-result-range>loading index</span></p>
+        <div><p class="ar-eyebrow">Results</p><h2 id="ar-results-heading">Canonical asset records</h2></div>
+        <p><strong data-ar-result-count>{index.asset_count}</strong> matching assets · <span data-ar-result-range>showing initial results</span></p>
       </div>
 
-      <div class="ar-loading" data-ar-loading>Loading canonical access and regulation index…</div>
-      <div class="ar-empty" data-ar-empty hidden>
+      <div class="ar-loading" data-ar-loading hidden>Preparing index…</div>
+      <div class="ar-empty r8-empty" data-ar-empty hidden>
         <strong>No matching assets</strong>
-        <p>Clear one or more filters. A zero-result filter state is not a legal, regulatory, or availability conclusion.</p>
+        <p>Clear one or more filters. Zero matches are not a legal, regulatory, or availability conclusion.</p>
+        <button type="button" data-ar-empty-clear>Clear filters</button>
       </div>
-      <div class="ar-results" data-ar-results hidden></div>
-      <div class="ar-show-more-row" data-ar-show-more-row hidden>
-        <button type="button" class="ui-button" data-ar-show-more>Show more results</button>
-      </div>
+      <div class="ar-results" data-ar-results></div>
+      <div class="ar-show-more-row" data-ar-show-more-row hidden><button type="button" class="ui-button" data-ar-show-more>Show more results</button></div>
     </section>
 
-    <section class="ar-method-note" aria-labelledby="ar-method-heading">
-      <p class="ar-eyebrow">Method</p>
-      <h2 id="ar-method-heading">Three layers remain separate</h2>
-      <div class="ar-method-grid">
-        <article><h3>Legal profile</h3><p>Jurisdiction-scoped classifications and structural legal fields. Unclassified state remains explicit.</p></article>
-        <article><h3>Regulatory Notes</h3><p>Canonical notes remain typed and scoped. Record count is inventory context, not severity.</p></article>
-        <article><h3>Market Access</h3><p>Only canonical provider-, function-, jurisdiction-, and date-scoped records may appear.</p></article>
+    <details class="ar-method-note r8-method-note">
+      <summary>How missing records are interpreted</summary>
+      <div class="ar-boundary-grid">
+        <p><strong>No Regulatory Note</strong><span>does not prove that no regulatory action exists.</span></p>
+        <p><strong>No Market Access Record</strong><span>does not mean unavailable in a jurisdiction or on a platform.</span></p>
+        <p><strong>Unclassified legal profile</strong><span>does not mean illegal, banned, or unsafe.</span></p>
       </div>
       <p class="ar-disclaimer">Historical registry context only. This explorer is not legal advice, a compliance determination, a risk score, a ranking, or an investment recommendation.</p>
-    </section>
-  </div>
+    </details>
+  </main>
   <script id="ar-explorer-config" type="application/json" set:html={configJson}></script>
-  <script>
-    import '../../scripts/access-regulation-explorer';
-  </script>
+  <script id="ar-index-data" type="application/json" set:html={indexJson}></script>
+  <script>import '../../scripts/access-regulation-explorer';</script>
 </BaseLayout>
