@@ -57,6 +57,7 @@ check(!accessRuntime.includes('index contract mismatch'), 'Access exposes the re
 check(!/asset_count\s*!==\s*110/.test(accessRuntime), 'Access retains a fixed record-count contract');
 check(!accessRuntime.includes('error.message') && !accessRuntime.includes('String(error)'), 'Access may not expose internal exception text');
 
+const compactStyles = styles.replaceAll(' ', '');
 for (const marker of [
   '.r8-masthead',
   '.r8-secondary-disclosure',
@@ -65,11 +66,23 @@ for (const marker of [
   '@media(max-width:719px)',
   'backdrop-filter:none',
   'border-radius:0'
-]) check(styles.replaceAll(' ', '').includes(marker.replaceAll(' ', '')), `R8 CSS missing: ${marker}`);
-check(!/(linear-gradient|radial-gradient|box-shadow\s*:\s*(?!none)|border-radius\s*:\s*(?!0))/i.test(styles), 'R8 CSS contains prohibited SaaS decoration');
+]) check(compactStyles.includes(marker.replaceAll(' ', '')), `R8 CSS missing: ${marker}`);
+check(!/(linear-gradient|radial-gradient|conic-gradient)\s*\(/i.test(styles), 'R8 CSS contains a decorative gradient');
+for (const match of styles.matchAll(/box-shadow\s*:\s*([^;}]*)/gi)) {
+  const value = match[1].replace(/!important/gi, '').trim();
+  check(/^none$/i.test(value), `R8 CSS contains decorative box-shadow: ${value}`);
+}
+for (const match of styles.matchAll(/border-radius\s*:\s*([^;}]*)/gi)) {
+  const value = match[1].replace(/!important/gi, '').trim();
+  check(/^(0|0px|none)$/i.test(value), `R8 CSS contains non-zero border-radius: ${value}`);
+}
+for (const match of styles.matchAll(/backdrop-filter\s*:\s*([^;}]*)/gi)) {
+  const value = match[1].replace(/!important/gi, '').trim();
+  check(/^none$/i.test(value), `R8 CSS contains backdrop filter: ${value}`);
+}
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   ok: failures.length === 0,
   gate: 'UI-R8',
   compare_runtime_source: 'embedded canonical projection',
