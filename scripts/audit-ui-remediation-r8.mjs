@@ -23,7 +23,7 @@ const states = [
 
 fs.mkdirSync(outputRoot, { recursive: true });
 const browser = await chromium.launch({ headless: true });
-const manifest = { schema_version: '1.0', base_url: baseUrl, captures: [], failures: [] };
+const manifest = { schema_version: '1.1', base_url: baseUrl, captures: [], failures: [] };
 
 for (const [viewportName, width, height] of viewports) {
   const context = await browser.newContext({ viewport: { width, height } });
@@ -64,7 +64,7 @@ for (const [viewportName, width, height] of viewports) {
         .filter((element) => /(score|ranking)/i.test(element.textContent ?? '')).map((element) => element.textContent?.trim().slice(0,80));
       const compareOutput = document.querySelector('[data-compare-output]');
       const accessRows = [...document.querySelectorAll('.r8-access-row')];
-      const result = {
+      return {
         document_width: document.documentElement.scrollWidth,
         viewport_width: width,
         visible_error_language: /(contract mismatch|index unavailable|failed to load|HTTP \d+)/i.test(visibleText),
@@ -74,9 +74,7 @@ for (const [viewportName, width, height] of viewports) {
           ready: visible('[data-compare-output]'),
           error: visible('[data-compare-alert]'),
           mobile_facet_control: visible('[data-compare-mobile-facet]'),
-          visible_facets: [...document.querySelectorAll('[data-dimension-id]')].filter((element) => {
-            const node = element; return node instanceof HTMLElement && !node.hidden && getComputedStyle(node).display !== 'none';
-          }).length,
+          visible_facets: [...document.querySelectorAll('[data-dimension-id]')].filter((element) => element instanceof HTMLElement && !element.hidden && getComputedStyle(element).display !== 'none').length,
           output_scroll_width: compareOutput instanceof HTMLElement ? compareOutput.scrollWidth : 0,
           output_client_width: compareOutput instanceof HTMLElement ? compareOutput.clientWidth : 0
         },
@@ -91,7 +89,6 @@ for (const [viewportName, width, height] of viewports) {
         family,
         state
       };
-      return result;
     }, { width, family: spec.family, state: spec.state });
 
     const failures = [];
@@ -100,7 +97,7 @@ for (const [viewportName, width, height] of viewports) {
     if (consoleErrors.length) failures.push(`${consoleErrors.length} console errors`);
     if (failedRequests.length) failures.push(`${failedRequests.length} failed requests`);
     if (diagnostics.interactive_score_ranking.length) failures.push('unsupported Score or Ranking control visible');
-    if (state === 'ready' && diagnostics.visible_error_language) failures.push('internal/load error language visible in ready state');
+    if (spec.state === 'ready' && diagnostics.visible_error_language) failures.push('internal/load error language visible in ready state');
 
     if (spec.family === 'compare') {
       const statesVisible = [diagnostics.compare.empty, diagnostics.compare.ready, diagnostics.compare.error].filter(Boolean).length;
