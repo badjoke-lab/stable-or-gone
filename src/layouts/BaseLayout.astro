@@ -7,68 +7,33 @@ import '../styles/guide-editorial-v3.css';
 import '../styles/reference-utility-v3.css';
 import '../styles/mobile-accessibility-v3.css';
 import BrandLockup from '../components/BrandLockup.astro';
-import { footerNavigationGroups, globalNavigationGroups, utilityNavigation } from '../../config/site-architecture.mjs';
-
-interface Props {
-  title?: string;
-  description?: string;
-  canonicalPath?: string;
-  ogImage?: string;
-  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-  language?: string;
-}
-
+import { aboutNavigation, footerNavigationGroups, primaryNavigation } from '../../config/site-architecture.mjs';
+interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const {
-  title = 'Stable or Gone — Stablecoin History Registry',
-  description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.',
-  canonicalPath = Astro.url.pathname,
-  ogImage = '/og/sog-og.svg',
-  jsonLd,
-  language = 'en'
-} = Astro.props;
+const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd } = Astro.props;
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
-const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';
+const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\u003c') : '';
 const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
 const gaInline = gaMeasurementId ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');` : '';
-
 const routeFamilies: Record<string, string[]> = {
-  '/': ['/'],
-  '/stablecoins/': ['/stablecoins/', '/stablecoin/'],
-  '/compare/': ['/compare/'],
-  '/access-regulation/': ['/access-regulation/'],
-  '/timeline/': ['/timeline/'],
-  '/issuers/': ['/issuers/', '/issuer/'],
-  '/events/': ['/events/', '/event/'],
-  '/stats/': ['/stats/'],
-  '/guides/': ['/guides/'],
-  '/glossary/': ['/glossary/'],
-  '/models/': ['/models/'],
-  '/methodology/': ['/methodology/'],
-  '/updates/': ['/updates/'],
-  '/maintenance/': ['/maintenance/'],
-  '/about/': ['/about/'],
-  '/contact/': ['/contact/'],
-  '/support/': ['/support/']
+  '/stablecoins/': ['/stablecoins/', '/stablecoin/'], '/issuers/': ['/issuers/', '/issuer/'], '/events/': ['/events/', '/event/'], '/guides/': ['/guides/'], '/glossary/': ['/glossary/'], '/models/': ['/models/'], '/methodology/': ['/methodology/'], '/updates/': ['/updates/'], '/about/': ['/about/'], '/contact/': ['/contact/'], '/support/': ['/support/']
 };
-const editorialPrefixes = ['/guides/', '/glossary/', '/models/', '/methodology/', '/updates/', '/maintenance/', '/about/', '/contact/', '/support/'];
+const editorialPrefixes = ['/guides/', '/glossary/', '/models/', '/methodology/', '/updates/', '/about/', '/contact/', '/support/'];
 const pageFamily = editorialPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix)) ? 'editorial' : 'registry';
 const isGuideIndex = pathname === '/guides/';
 const isGuideArticle = pathname.startsWith('/guides/') && !isGuideIndex;
-const isReferencePage = ['/models/', '/glossary/', '/updates/', '/maintenance/'].includes(pathname);
+const isReferencePage = ['/models/', '/glossary/', '/updates/'].includes(pathname);
 const isLongformPage = ['/methodology/', '/about/'].includes(pathname);
 const isUtilityPage = ['/contact/', '/support/'].includes(pathname);
 const pageKind = isGuideIndex ? 'guide-index' : isGuideArticle ? 'guide-article' : isReferencePage ? 'reference' : isLongformPage ? 'longform' : isUtilityPage ? 'utility' : undefined;
-const isCurrent = (href: string) => {
-  if (href === '/') return pathname === '/';
-  return (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
-};
+const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
+const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
 ---
 <!doctype html>
-<html lang={language}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -76,165 +41,75 @@ const isCurrent = (href: string) => {
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang={language} href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
     <link rel="alternate" type="text/plain" href="/ai.txt" title="SOG AI entrypoint" />
-    <meta property="og:site_name" content="Stable or Gone" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content={language === 'ja' ? 'ja_JP' : 'en_US'} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImageUrl} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
-    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}
-    {gaInline && <script set:html={gaInline} />}
-    {structuredData && <script type="application/ld+json" set:html={structuredData} />}
-    <link rel="stylesheet" href="/ui-remediation-r2.css" data-ui-remediation-r2 />
+    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={ogImageUrl} />
+    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}{gaInline && <script set:html={gaInline} />}{structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-
-    <header class="site-header" data-shell="evidence-registry-pr411">
-      <div class="site-header-primary">
-        <div class="site-header-inner">
-          <div class="site-brand-cluster">
-            <BrandLockup class="site-brand" surface="light" />
-            <span class="site-brand-purpose">Evidence-backed stablecoin registry</span>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <BrandLockup class="site-brand" surface="light" />
+        <nav class="site-primary-navigation" aria-label="Primary navigation">
+          {primaryNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+        <form class="site-search" action="/stablecoins/" method="get" role="search">
+          <label class="visually-hidden" for="site-search-input">Search stablecoin records</label>
+          <input id="site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <details class="site-about-menu" data-disclosure>
+          <summary aria-current={isAboutCurrent ? 'page' : undefined} aria-controls="site-about-panel" aria-expanded="false">About</summary>
+          <nav class="site-about-panel" id="site-about-panel" aria-label="About and project navigation">
+            {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+          </nav>
+        </details>
+        <details class="mobile-navigation" data-mobile-navigation data-disclosure>
+          <summary aria-label="Open navigation menu" aria-controls="mobile-navigation-panel" aria-expanded="false">Menu</summary>
+          <div class="mobile-navigation-panel" id="mobile-navigation-panel">
+            <nav class="mobile-navigation-links" aria-label="Mobile primary navigation">
+              {primaryNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+            </nav>
+            <form class="mobile-site-search" action="/stablecoins/" method="get" role="search">
+              <label for="mobile-site-search-input">Search stablecoin records</label>
+              <div><input id="mobile-site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" /><button type="submit">Search</button></div>
+            </form>
+            <nav class="mobile-navigation-secondary" aria-label="Mobile project navigation">
+              {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+            </nav>
           </div>
-
-          <form class="site-search" action="/stablecoins/" method="get" role="search">
-            <label class="visually-hidden" for="site-search-input">Search stablecoin records</label>
-            <div class="site-search-control">
-              <span class="site-search-icon" aria-hidden="true">⌕</span>
-              <input id="site-search-input" type="search" name="q" placeholder="Search stablecoins, issuers, events" autocomplete="off" />
-              <button type="submit">Search</button>
-            </div>
-          </form>
-
-          <nav class="utility-navigation" aria-label="Utility navigation">
-            {utilityNavigation.map((item) => (
-              <a
-                href={item.href}
-                class:list={[item.prominence === 'primary_utility' ? 'utility-primary' : 'utility-secondary']}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <details class="mobile-navigation" data-mobile-navigation data-disclosure>
-            <summary aria-label="Open navigation menu" aria-controls="mobile-navigation-panel" aria-expanded="false">
-              <span>Menu</span>
-              <span class="mobile-navigation-icon" aria-hidden="true"><i></i><i></i><i></i></span>
-            </summary>
-            <div class="mobile-navigation-panel" id="mobile-navigation-panel">
-              <form class="mobile-site-search" action="/stablecoins/" method="get" role="search">
-                <label for="mobile-site-search-input">Search the registry</label>
-                <div class="site-search-control">
-                  <span class="site-search-icon" aria-hidden="true">⌕</span>
-                  <input id="mobile-site-search-input" type="search" name="q" placeholder="Stablecoin, issuer, event" autocomplete="off" />
-                  <button type="submit">Search</button>
-                </div>
-              </form>
-
-              {globalNavigationGroups.map((group) => (
-                <section class="mobile-navigation-group" aria-labelledby={`mobile-navigation-${group.id}`}>
-                  <h2 id={`mobile-navigation-${group.id}`}>{group.label}</h2>
-                  <nav class="mobile-navigation-links" aria-label={`${group.label} navigation`}>
-                    {group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-                  </nav>
-                </section>
-              ))}
-
-              <nav class="mobile-navigation-utilities" aria-label="Mobile utility navigation">
-                {utilityNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-              </nav>
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <div class="site-navigation-bar">
-        <div class="site-navigation-inner">
-          <nav class="grouped-navigation" aria-label="Primary navigation">
-            {globalNavigationGroups.map((group) => (
-              <section class="navigation-group" aria-labelledby={`navigation-${group.id}`}>
-                <span class="navigation-group-label" id={`navigation-${group.id}`}>{group.label}</span>
-                <div class="navigation-group-links">
-                  {group.items.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-                </div>
-              </section>
-            ))}
-          </nav>
-          <p class="site-navigation-context">Historical records · evidence links · unresolved questions</p>
-        </div>
+        </details>
       </div>
     </header>
-
     <main id="main-content" class="site-main" tabindex="-1" data-page-family={pageFamily} data-page-kind={pageKind}>
       {isGuideArticle ? (
         <article class="guide-article-layout" data-guide-article>
-          <details class="guide-article-toc" data-guide-toc data-disclosure open>
-            <summary aria-controls="guide-article-contents" aria-expanded="true">On this page</summary>
-            <ol id="guide-article-contents" data-guide-toc-list></ol>
-          </details>
+          <details class="guide-article-toc" data-guide-toc data-disclosure open><summary aria-controls="guide-article-contents" aria-expanded="true">On this page</summary><ol id="guide-article-contents" data-guide-toc-list></ol></details>
           <div class="guide-article-content"><slot /></div>
-          <nav class="guide-article-footer" aria-label="Guide reference navigation">
-            <a href="/guides/">All guides</a><a href="/glossary/">Glossary</a><a href="/methodology/">Methodology</a><a href="/contact/">Submit a correction</a>
-          </nav>
+          <nav class="guide-article-footer" aria-label="Guide reference navigation"><a href="/guides/">All guides</a><a href="/glossary/">Glossary</a><a href="/methodology/">Methodology</a><a href="/contact/">Submit a correction</a></nav>
         </article>
       ) : isLongformPage ? (
         <article class="longform-layout" data-longform-article>
-          <details class="longform-toc" data-longform-toc data-disclosure open>
-            <summary aria-controls="longform-contents" aria-expanded="true">On this page</summary>
-            <ol id="longform-contents" data-longform-toc-list></ol>
-          </details>
+          <details class="longform-toc" data-longform-toc data-disclosure open><summary aria-controls="longform-contents" aria-expanded="true">On this page</summary><ol id="longform-contents" data-longform-toc-list></ol></details>
           <div class="longform-content"><slot /></div>
-          <nav class="longform-footer" aria-label="Project reference navigation">
-            <a href="/glossary/">Glossary</a><a href="/models/">Models</a><a href="/updates/">Updates</a><a href="/contact/">Corrections</a>
-          </nav>
+          <nav class="longform-footer" aria-label="Project reference navigation"><a href="/glossary/">Glossary</a><a href="/models/">Models</a><a href="/updates/">Updates</a><a href="/contact/">Corrections</a></nav>
         </article>
       ) : <slot />}
     </main>
-
     <footer class="site-footer">
       <div class="site-footer-inner">
-        <section class="site-footer-summary" aria-label="Stable or Gone project statement">
-          <BrandLockup surface="light" />
-          <p>Stable or Gone is a source-backed historical registry. It records lifecycle changes, organizations, evidence, and unresolved questions; it is not a ranking or recommendation service.</p>
-          <div class="site-footer-principles" aria-label="Registry principles">
-            <span>Canonical records</span><span>Source relations</span><span>Known unknowns</span>
-          </div>
-        </section>
-
-        <div class="site-footer-navigation">
-          {footerNavigationGroups.map((group) => (
-            <nav class="site-footer-group" aria-labelledby={`footer-${group.id}`}>
-              <h2 id={`footer-${group.id}`}>{group.label}</h2>
-              {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
-            </nav>
-          ))}
-          <nav class="site-footer-group site-footer-data" aria-labelledby="footer-data">
-            <h2 id="footer-data">Data access</h2>
-            <a href="/version.json">Version JSON</a>
-            <a href="/data/manifest.json">Data manifest</a>
-            <a href="/llms.txt">LLM guide</a>
-            <a href="/ai.txt">AI entrypoint</a>
-          </nav>
-        </div>
-
-        <p class="site-footer-meta">Routes, canonical records, evidence relations, and public machine-readable outputs are preserved across desktop and mobile layouts.</p>
+        <div class="site-footer-intro"><BrandLockup surface="light" /><p>Historical information only. Stable or Gone is a source-backed registry, not a ranking or recommendation service.</p></div>
+        {footerNavigationGroups.map((group) => (<nav class="site-footer-group" aria-labelledby={`footer-${group.id}`}><h2 id={`footer-${group.id}`}>{group.label}</h2>{group.items.map((item) => <a href={item.href}>{item.label}</a>)}</nav>))}
+        <nav class="site-footer-group site-footer-data" aria-labelledby="footer-data"><h2 id="footer-data">Data access</h2><a href="/version.json">Version JSON</a><a href="/data/manifest.json">Data manifest</a><a href="/llms.txt">LLM guide</a><a href="/ai.txt">AI entrypoint</a></nav>
+        <p class="site-footer-meta">Canonical records, evidence relations, and known unknowns are preserved across desktop and compact layouts.</p>
       </div>
     </footer>
-
     <script>
       const initialiseDisclosure = (details: HTMLDetailsElement) => {
         const trigger = details.querySelector(':scope > summary');
@@ -249,19 +124,14 @@ const isCurrent = (href: string) => {
           trigger.focus();
         });
       };
-      document.querySelectorAll('[data-disclosure]').forEach((item) => {
-        if (item instanceof HTMLDetailsElement) initialiseDisclosure(item);
-      });
-
+      document.querySelectorAll('[data-disclosure]').forEach((item) => { if (item instanceof HTMLDetailsElement) initialiseDisclosure(item); });
       const navigation = document.querySelector('[data-mobile-navigation]');
-      if (navigation instanceof HTMLDetailsElement) {
-        navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.open = false; }));
-        document.addEventListener('click', (event) => {
-          if (!navigation.open || !(event.target instanceof Node) || navigation.contains(event.target)) return;
-          navigation.open = false;
+      if (navigation instanceof HTMLDetailsElement) navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.open = false; }));
+      document.addEventListener('click', (event) => {
+        document.querySelectorAll('.site-about-menu[open]').forEach((menu) => {
+          if (menu instanceof HTMLDetailsElement && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
         });
-      }
-
+      });
       const buildContents = (articleSelector: string, tocSelector: string, listSelector: string, sectionSelector: string, headingSelector: string) => {
         const article = document.querySelector(articleSelector);
         const toc = document.querySelector(tocSelector);
@@ -301,7 +171,6 @@ const isCurrent = (href: string) => {
       };
       buildContents('[data-guide-article]', '[data-guide-toc]', '[data-guide-toc-list]', '.guide-article-content > section.panel.registry, .guide-article-content > section[data-guide-section]', ':scope > .bar, :scope > .guide-article-section-title');
       buildContents('[data-longform-article]', '[data-longform-toc]', '[data-longform-toc-list]', '.longform-content > section.panel.registry, .longform-content > section[data-longform-section]', ':scope > .bar, :scope > .longform-section-title');
-
       const focusAnchorTarget = (hash: string) => {
         if (!hash || hash === '#') return;
         const target = document.getElementById(decodeURIComponent(hash.slice(1)));
@@ -317,7 +186,6 @@ const isCurrent = (href: string) => {
       });
       window.addEventListener('hashchange', () => focusAnchorTarget(window.location.hash));
       if (window.location.hash) window.setTimeout(() => focusAnchorTarget(window.location.hash), 0);
-
       const fallbackCopy = (value: string) => {
         const textarea = document.createElement('textarea');
         textarea.value = value;
