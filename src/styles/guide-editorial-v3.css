@@ -105,3 +105,6 @@
   .guide-index-overline,.guide-article-overline { flex-direction:column; }
   .guide-article-content th,.guide-article-content td { min-width:132px; }
 }
+@media(forced-colors:active) {
+  .guide-index-masthead,.guide-index-ledger,.guide-index-section,.guide-index-reference,.guide-article-masthead,.guide-article-toc,.guide-article-content>section,.guide-related-records { forced-color-adjust:auto; }
+}
