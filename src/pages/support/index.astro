@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import '../../styles/ui-remediation-r7.css';
+import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
 const wallets = [
   { asset: 'BTC', name: 'Bitcoin', network: 'Bitcoin network', address: 'bc1qk3y8x72me37aj8d236z9v0gu42t8xxr2ytspmd' },
   { asset: 'ETH', name: 'Ether', network: 'Ethereum Mainnet', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
@@ -19,19 +19,28 @@ const description = 'Support ongoing research, source checks, link maintenance, 
 const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: title, url: 'https://sog.badjoke-lab.com/support/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/support/" jsonLd={jsonLd}>
-  <article class="r7-page r7-support-page" data-r7-page="support" data-ui-v3-utility="support">
-    <header class="r7-masthead"><div class="r7-masthead-copy"><p class="r7-eyebrow">Utility / support</p><h1>Support independent maintenance</h1><p class="r7-lead">Optional support helps cover research, source checks, broken-link review, new records, and public infrastructure. It never changes editorial decisions.</p></div><dl class="r7-facts"><div><dt>Use</dt><dd>Research and maintenance</dd></div><div><dt>Editorial influence</dt><dd>None</dd></div><div><dt>Payment type</dt><dd>Crypto transfer</dd></div><div><dt>Receipts</dt><dd>Not issued</dd></div></dl></header>
-
-    <section class="r7-section"><div class="r7-section-heading"><h2>What support funds</h2><p>Funding is operational, not editorial.</p></div><dl class="r7-row-list"><div><dt>Research</dt><dd>Reviewing issuer documents, regulator notices, repositories, archives, and independent reporting.</dd></div><div><dt>Evidence maintenance</dt><dd>Checking source links, preserving archives, repairing broken references, and clarifying claim scope.</dd></div><div><dt>Registry growth</dt><dd>Adding reviewed stablecoins, organizations, events, deployments, and known unknowns.</dd></div><div><dt>Public infrastructure</dt><dd>Maintaining the site, validation workflows, machine-readable outputs, and monitoring tools.</dd></div></dl></section>
-
-    <section class="r7-section"><div class="r7-section-heading"><h2>Editorial independence</h2><p>Support does not purchase inclusion, wording, priority, or a favorable classification.</p></div><dl class="r7-row-list"><div><dt>No paid listings</dt><dd>A payment cannot add or remove a stablecoin, organization, event, or Evidence source.</dd></div><div><dt>No favorable treatment</dt><dd>Support does not change confidence, lifecycle status, event treatment, corrections, or methodology.</dd></div><div><dt>Open corrections</dt><dd>Anyone may submit a source-backed correction without making a payment.</dd></div></dl></section>
-
-    <details class="r7-disclosure r7-donation-action" data-donation-action data-disclosure><summary><span>Choose a donation asset</span><span>{wallets.length} options</span></summary><div class="r7-disclosure-body"><p>Select the exact asset and network shown. Sending through a different network can result in permanent loss. Check the full address and consider a small test transfer.</p><div class="r7-wallet-list">{wallets.map((wallet) => <div class="r7-wallet-row"><strong>{wallet.asset}</strong><span>{wallet.network}</span><code>{wallet.address}</code><button type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy</button>{wallet.note && <small>{wallet.note}</small>}</div>)}</div><p class="copy-status" data-copy-status aria-live="polite"></p></div></details>
-
-    <details class="r7-disclosure" data-disclosure><summary>Transfer and tax limits</summary><div class="r7-disclosure-body"><p>Crypto transfers are generally irreversible. Stable or Gone does not provide tax advice, does not issue charitable donation receipts, and cannot recover a transfer sent to the wrong asset, network, or address.</p></div></details>
-
-    <div class="r7-secondary-links"><a href={googleFormUrl} target="_blank" rel="noopener noreferrer">Submit a correction</a><a href={githubIssueUrl} target="_blank" rel="noopener noreferrer">Open public issue</a><a href="/about/">About editorial independence</a></div>
-
+  <article class="editorial-utility-page" data-ui-v3-utility="support">
+    <EditorialPageHeader kind="utility" eyebrow="Utility / support" title="Help keep Stable or Gone updated" description="Support helps cover research, source checks, broken-link review, new records, and ongoing site maintenance." facts={[{ label: 'Supported assets', value: wallets.length }, { label: 'Use', value: 'Maintenance' }, { label: 'Editorial influence', value: 'None' }]} />
+    <section class="support-intro" aria-labelledby="before-sending">
+      <div class="bar" id="before-sending">Before sending</div>
+      <div class="support-intro-body"><p>Select the exact asset and network shown below. Sending through a different network can result in permanent loss. Check the full address before confirming and consider a small test transfer first.</p><p>Support is optional. It does not affect which records are included, how they are written, or how corrections are reviewed. Crypto transfers are generally irreversible, and charitable donation receipts are not issued.</p></div>
+    </section>
+    <section class="wallet-section" aria-labelledby="wallet-addresses">
+      <div class="section-heading"><div><div class="prompt">Available payment options</div><h2 id="wallet-addresses">Wallet addresses</h2></div><p>Use only the network shown for each record.</p></div>
+      <div class="wallet-grid">
+        {wallets.map((wallet) => <article class="wallet-card"><header class="wallet-card-header"><div><span class="asset-symbol">{wallet.asset}</span><h3>{wallet.name}</h3></div><span class="network-chip">{wallet.network}</span></header><div class="address-block"><span class="address-label">Address</span><code>{wallet.address}</code><button class="copy-button" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button></div>{wallet.note && <p class="network-note">{wallet.note}</p>}</article>)}
+      </div>
+      <p class="copy-status" data-copy-status aria-live="polite"></p>
+    </section>
+    <section class="support-principles" aria-label="Support principles">
+      <div><h2>What support funds</h2><p>Research, source review, record updates, link maintenance, and expansion of the archive.</p></div>
+      <div><h2>What support does not buy</h2><p>Listings, favorable wording, faster corrections, status changes, or influence over the methodology.</p></div>
+      <div><h2>Corrections remain open</h2><p>Anyone can submit a correction, missing source, broken link, or missing record through the contact form or public GitHub Issues.</p></div>
+    </section>
+    <section class="support-footer-note">
+      <div class="bar">Questions or corrections</div>
+      <div class="support-footer-body"><p>To report incorrect information, add a source, suggest a missing record, or contact the maintainers, use the <a href={googleFormUrl} target="_blank" rel="noopener noreferrer">Google contact form</a>. For public, source-backed corrections, use <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer">GitHub Issues</a>.</p><p>Stable or Gone provides historical information only. Check current issuer terms, exchange notices, and market data before making decisions.</p></div>
+    </section>
     <script is:inline>
       (() => {
         const status = document.querySelector('[data-copy-status]');
