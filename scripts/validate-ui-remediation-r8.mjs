@@ -7,9 +7,11 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const comparePage = read('src/pages/compare/index.astro');
 const compareEntry = read('src/scripts/compare-v1.ts');
 const compareRuntime = read('src/scripts/compare-r8.ts');
+const compareVisibility = read('src/scripts/compare-r8-visibility.ts');
 const accessPage = read('src/pages/access-regulation/index.astro');
 const accessEntry = read('src/scripts/access-regulation-explorer.ts');
 const accessRuntime = read('src/scripts/access-regulation-r8.ts');
+const accessConfig = JSON.parse(read('config/access-regulation-explorer-v1.json'));
 const styles = read('src/styles/ui-remediation-r8.css');
 
 for (const marker of [
@@ -20,7 +22,7 @@ for (const marker of [
   'No comparison yet',
   "import '../../scripts/compare-v1'"
 ]) check(comparePage.includes(marker), `Compare page missing: ${marker}`);
-check(compareEntry.trim() === "import './compare-r8';", 'Compare entry must only load the R8 runtime');
+check(compareEntry.includes("import './compare-r8';") && compareEntry.includes("import './compare-r8-visibility';"), 'Compare entry must load the R8 runtime and visibility guard');
 for (const marker of [
   '#compare-projection-data',
   'parsed.asset_count !== parsed.assets.length',
@@ -30,6 +32,7 @@ for (const marker of [
   'setError(false)',
   'setError(true)'
 ]) check(compareRuntime.includes(marker), `Compare runtime missing: ${marker}`);
+for (const marker of ['window.innerWidth <= 719', "row.style.setProperty('display'", "group.style.setProperty('display'"]) check(compareVisibility.includes(marker), `Compare visibility guard missing: ${marker}`);
 check(!compareRuntime.includes("fetch('/data/comparison.json'"), 'Compare must not fetch its own build output at runtime');
 check(!compareRuntime.includes('projection contract mismatch'), 'Compare exposes the retired contract mismatch path');
 check(!/asset_count\s*!==\s*110|cell_count\s*!==\s*2090/.test(compareRuntime), 'Compare retains fixed record-count contracts');
@@ -52,6 +55,7 @@ for (const marker of [
   'setError(true)',
   'r8-access-row'
 ]) check(accessRuntime.includes(marker), `Access runtime missing: ${marker}`);
+check(accessConfig.initial_result_limit === 10 && accessConfig.result_limit_increment === 10, 'Access must use bounded ten-row batches');
 check(!accessRuntime.includes('source_endpoint'), 'Access must not fetch its own build output at runtime');
 check(!accessRuntime.includes('index contract mismatch'), 'Access exposes the retired contract mismatch path');
 check(!/asset_count\s*!==\s*110/.test(accessRuntime), 'Access retains a fixed record-count contract');
@@ -82,12 +86,13 @@ for (const match of styles.matchAll(/backdrop-filter\s*:\s*([^;}]*)/gi)) {
 }
 
 const result = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   ok: failures.length === 0,
   gate: 'UI-R8',
   compare_runtime_source: 'embedded canonical projection',
   access_runtime_source: 'embedded canonical index',
   fixed_record_count_contracts: 0,
+  access_initial_rows: accessConfig.initial_result_limit,
   score_controls: 0,
   ranking_controls: 0,
   route_changes: 0,
