@@ -1,0 +1,75 @@
+name: UI remediation R7 Reference Utility
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/pages/about/**'
+      - 'src/pages/contact/**'
+      - 'src/pages/support/**'
+      - 'src/pages/glossary/**'
+      - 'src/pages/models/**'
+      - 'src/pages/updates/**'
+      - 'src/pages/maintenance/**'
+      - 'src/styles/**'
+      - 'public/ui-remediation-r2.css'
+      - 'scripts/audit-ui-remediation-r7.mjs'
+      - 'scripts/validate-ui-typography-authority.mjs'
+      - '.github/workflows/ui-remediation-r7-reference-utility.yml'
+  push:
+    branches: [agent/ui-v3-r7-reference-utility]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Enforce typography and flat registry authority
+        run: node scripts/validate-ui-typography-authority.mjs
+      - name: Validate reference and utility contracts
+        run: node scripts/validate-ui-v3-reference-utility.mjs
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Astro check
+        run: npm run check
+      - name: Build static site
+        run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          cd dist
+          python3 -m http.server 4321 > /tmp/r7-server.log 2>&1 &
+          echo $! > /tmp/r7-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4321/about/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/r7-server.log
+          exit 1
+      - name: Capture and audit 35 R7 screens
+        env:
+          UI_AUDIT_BASE_URL: http://127.0.0.1:4321
+          UI_AUDIT_OUTPUT: artifacts/ui-remediation-r7
+        run: node scripts/audit-ui-remediation-r7.mjs
+      - name: Upload R7 visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-remediation-r7-reference-utility-${{ github.run_id }}
+          path: artifacts/ui-remediation-r7
+          if-no-files-found: warn
+      - name: Stop static server
+        if: always()
+        run: |
+          if [ -f /tmp/r7-server.pid ]; then kill "$(cat /tmp/r7-server.pid)" || true; fi
