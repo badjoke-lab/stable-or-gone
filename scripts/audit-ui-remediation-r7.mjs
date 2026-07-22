@@ -26,8 +26,8 @@ const viewports = [
 
 fs.mkdirSync(outputRoot, { recursive: true });
 const browser = await chromium.launch({ headless: true });
-const manifest = { schema_version: '1.1', base_url: baseUrl, captures: [], failures: [] };
-const forbiddenFont = /(georgia|cambria|times new roman|\bserif\b)/i;
+const manifest = { schema_version: '1.2', base_url: baseUrl, captures: [], failures: [] };
+const forbiddenFont = /(georgia|cambria|times new roman|(?:^|[,\s])serif(?:[,\s]|$))/i;
 const monospaceFont = /(menlo|monaco|consolas|sfmono|liberation mono|\bmonospace\b)/i;
 
 for (const [viewportName, width, height] of viewports) {
@@ -50,11 +50,13 @@ for (const [viewportName, width, height] of viewports) {
       const technical = (element) => element.matches('code,pre,kbd,samp,.contract-address,.transaction-hash,[data-long-value],.r7-wallet-row code,.address-block code,.stablecoin-record-id');
       const textSelector = 'h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,label,button,input,select,textarea,summary,a,span,strong,small,time,i,em,blockquote';
       const fontIssues = [];
+      const serif = /(georgia|cambria|times new roman|(?:^|[,\s])serif(?:[,\s]|$))/i;
+      const mono = /(menlo|monaco|consolas|sfmono|liberation mono|\bmonospace\b)/i;
       for (const element of document.querySelectorAll(textSelector)) {
         if (!isVisible(element)) continue;
         const family = getComputedStyle(element).fontFamily;
-        if (/(georgia|cambria|times new roman|\bserif\b)/i.test(family)) fontIssues.push({ selector: element.tagName.toLowerCase(), family, text: element.textContent?.trim().slice(0, 80) });
-        if (/(menlo|monaco|consolas|sfmono|liberation mono|\bmonospace\b)/i.test(family) && !technical(element)) fontIssues.push({ selector: element.tagName.toLowerCase(), family, text: element.textContent?.trim().slice(0, 80) });
+        if (serif.test(family)) fontIssues.push({ selector: element.tagName.toLowerCase(), family, text: element.textContent?.trim().slice(0, 80) });
+        if (mono.test(family) && !technical(element)) fontIssues.push({ selector: element.tagName.toLowerCase(), family, text: element.textContent?.trim().slice(0, 80) });
       }
       const flatSelectors = '.site-header,.site-search-control,.mobile-navigation-panel,.r7-masthead,.r7-disclosure,.r7-primary-action,.r7-letter-nav a,.r7-maintenance-status';
       const flatIssues = [];
