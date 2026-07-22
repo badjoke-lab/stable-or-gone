@@ -17,10 +17,13 @@ const protectedFlatFiles = new Set([
   'src/styles/global.css',
   'src/styles/guide-editorial-v3.css',
   'src/styles/reference-utility-v3.css',
-  'src/styles/ui-remediation-r7.css'
+  'src/styles/ui-remediation-r2.css',
+  'src/styles/ui-remediation-r7.css',
+  'public/ui-remediation-r2.css'
 ]);
 
-for (const absolute of walk(stylesRoot)) {
+const files = [...walk(stylesRoot), path.join(root, 'public/ui-remediation-r2.css')];
+for (const absolute of files) {
   const relative = path.relative(root, absolute).replaceAll(path.sep, '/');
   const css = fs.readFileSync(absolute, 'utf8');
   checked.push(relative);
@@ -33,8 +36,7 @@ for (const absolute of walk(stylesRoot)) {
   for (const match of css.matchAll(rulePattern)) {
     const selector = match[1].trim();
     const declarations = match[2];
-    const fontDeclarations = [...declarations.matchAll(/font-family\s*:\s*([^;}]*)/gi)];
-    for (const font of fontDeclarations) {
+    for (const font of declarations.matchAll(/font-family\s*:\s*([^;}]*)/gi)) {
       const value = font[1];
       if (!/(ui-monospace|sfmono|menlo|monaco|consolas|liberation mono|\bmonospace\b)/i.test(value)) continue;
       if (selector === ':root' && declarations.includes('--sog-font-data')) continue;
@@ -52,6 +54,7 @@ for (const absolute of walk(stylesRoot)) {
       if (!/^none$/i.test(value)) failures.push(`${relative}: decorative box-shadow ${value}`);
     }
     if (/(linear-gradient|radial-gradient|conic-gradient)\s*\(/i.test(css)) failures.push(`${relative}: decorative gradient`);
+    if (/backdrop-filter\s*:\s*(?!none)/i.test(css)) failures.push(`${relative}: decorative backdrop filter`);
   }
 }
 
@@ -60,7 +63,7 @@ if (!globalCss.includes('--sog-font-interface: ui-sans-serif')) failures.push('g
 if (!/body\s*\{[^}]*font-family\s*:\s*var\(--sog-font-interface\)/s.test(globalCss)) failures.push('global.css: body is not bound to the system sans token');
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   ok: failures.length === 0,
   authority: 'docs/ui-v3-remediation-authority.md',
   css_files_checked: checked.length,
@@ -72,6 +75,5 @@ const result = {
   },
   failures
 };
-
 console.log(JSON.stringify(result, null, 2));
 if (failures.length) process.exit(1);
