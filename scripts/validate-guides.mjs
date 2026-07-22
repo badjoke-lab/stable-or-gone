@@ -1,7 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import './validate-ui-v3-guides.mjs';
-import './validate-ui-v3-reference-utility.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
