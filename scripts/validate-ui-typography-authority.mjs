@@ -39,14 +39,15 @@ for (const absolute of files) {
       if (selector === ':root' && declarations.includes('--sog-font-data')) continue;
       if (!technicalSelector.test(selector)) failures.push(`${relative}: non-technical monospace selector ${selector}`);
     }
-  }
-  for (const match of css.matchAll(/border-radius\s*:\s*([^;}]*)/gi)) {
-    const value = match[1].replace(/!important/gi, '').trim();
-    if (!/^(0|0px|none)$/i.test(value)) failures.push(`${relative}: non-zero border-radius ${value}`);
-  }
-  for (const match of css.matchAll(/box-shadow\s*:\s*([^;}]*)/gi)) {
-    const value = match[1].replace(/!important/gi, '').trim();
-    if (!/^none$/i.test(value)) failures.push(`${relative}: decorative box-shadow ${value}`);
+    for (const radius of declarations.matchAll(/border-radius\s*:\s*([^;}]*)/gi)) {
+      const value = radius[1].replace(/!important/gi, '').trim();
+      if (!/^(0|0px|none)$/i.test(value)) failures.push(`${relative}: non-zero border-radius ${value}`);
+    }
+    for (const shadow of declarations.matchAll(/box-shadow\s*:\s*([^;}]*)/gi)) {
+      const value = shadow[1].replace(/!important/gi, '').trim();
+      const accessibilityFocusRing = /:focus(?:-visible)?/i.test(selector) && /^0\s+0\s+0\s+(?:1px|2px)\b/i.test(value);
+      if (!/^none$/i.test(value) && !accessibilityFocusRing) failures.push(`${relative}: decorative box-shadow ${value}`);
+    }
   }
   if (/(linear-gradient|radial-gradient|conic-gradient)\s*\(/i.test(css)) failures.push(`${relative}: decorative gradient`);
   if (/backdrop-filter\s*:\s*(?!none)/i.test(css)) failures.push(`${relative}: decorative backdrop filter`);
@@ -57,7 +58,7 @@ if (!globalCss.includes('--sog-font-interface: ui-sans-serif')) failures.push('g
 if (!/body\s*\{[^}]*font-family\s*:\s*var\(--sog-font-interface\)/s.test(globalCss)) failures.push('global.css: body is not bound to the system sans token');
 
 const result = {
-  schema_version: '1.2',
+  schema_version: '1.3',
   ok: failures.length === 0,
   authority: 'docs/ui-v3-remediation-authority.md',
   css_files_checked: checked.length,
