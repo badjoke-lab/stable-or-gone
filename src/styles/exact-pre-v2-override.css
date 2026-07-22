@@ -1,0 +1,83 @@
+/* Final visual authority for the restored pre-v2 terminal interface. */
+:root {
+  --sog-terminal-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sog-restored-page-title: clamp(2rem, 3.2vw, 3.25rem);
+  --sog-restored-section-title: clamp(1.15rem, 1.8vw, 1.55rem);
+  --sog-restored-subsection-title: clamp(0.95rem, 1.25vw, 1.12rem);
+}
+
+html body,
+html body :where(h1,h2,h3,h4,h5,h6,p,a,span,strong,small,time,li,dt,dd,label,button,input,select,textarea,summary,table,thead,tbody,tr,th,td,code,pre,kbd,samp) {
+  font-family: var(--sog-terminal-font) !important;
+}
+
+html body {
+  font-variant-numeric: tabular-nums;
+}
+
+html body h1,
+html body :where(.home-masthead h1,.stablecoin-register-header h1,.event-index-title h1,.organization-index-title h1,.stablecoin-dossier-title-row h1,.guide-index-title h1,.guide-article-masthead h1,.editorial-page-title h1) {
+  font-size: var(--sog-restored-page-title) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.045em !important;
+  font-weight: 700 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+html body .home-masthead__title {
+  padding-top: clamp(1.7rem, 3.6vw, 3rem) !important;
+  padding-bottom: clamp(1.45rem, 3vw, 2.25rem) !important;
+}
+
+html body .home-masthead h1 {
+  max-width: 12ch;
+}
+
+html body h2,
+html body :where(.home-section-heading h2,.stablecoin-index-section-heading h2,.event-index-section-heading h2,.organization-index-section-heading h2,.stablecoin-section-heading h2,.guide-index-section-heading h2,.reference-section-heading h2,.utility-section-heading h2,.section-heading h2,.guide-article-content .bar,.guide-article-section-title,.longform-content .bar,.editorial-utility-page .bar) {
+  font-size: var(--sog-restored-section-title) !important;
+  line-height: 1.16 !important;
+  letter-spacing: -0.025em !important;
+  font-weight: 700 !important;
+}
+
+html body h3 {
+  font-size: var(--sog-restored-subsection-title) !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.015em !important;
+  font-weight: 700 !important;
+}
+
+html body :where(.home-register-strip strong,.stablecoin-register-count strong,.event-index-ledger dd,.organization-index-ledger dd,.guide-index-ledger dd,.guide-article-meta dd,.editorial-page-ledger dd) {
+  font-family: var(--sog-terminal-font) !important;
+  font-size: 1rem !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0 !important;
+  font-weight: 700 !important;
+}
+
+html body :where(.home-search__heading h2,.eyebrow,.record-kicker,.home-section-kicker,th) {
+  font-family: var(--sog-terminal-font) !important;
+}
+
+html body .site-footer-group,
+html body .site-footer-group a,
+html body .site-footer-group h2,
+html body .site-footer-intro,
+html body .site-footer-meta {
+  font-family: var(--sog-terminal-font) !important;
+}
+
+@media (max-width: 719px) {
+  :root {
+    --sog-restored-page-title: clamp(1.8rem, 9vw, 2.35rem);
+    --sog-restored-section-title: clamp(1.08rem, 5.5vw, 1.35rem);
+    --sog-restored-subsection-title: 1rem;
+  }
+
+  html body .home-masthead__title {
+    padding-top: 1.35rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+}
