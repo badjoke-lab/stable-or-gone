@@ -1,40 +1,498 @@
-/* Authority: docs/ui-v3-remediation-authority.md — R2 shared shell. */
+/*
+ * Authority: docs/ui-v3-remediation-authority.md
+ * Phase R2 — Global shell and tokens.
+ * This file is loaded after the legacy UI layers and intentionally overrides
+ * the previous two-row shell, oversized titles, mixed typography, and dense footer.
+ */
+
 :root {
-  --sog-shell-width:1360px;
-  --sog-content-width:1240px;
-  --sog-reading-width:76ch;
-  --sog-radius-compact:0;
-  --sog-radius-panel:0;
-  --sog-radius-prominent:0;
-  --sog-shadow-panel:none;
-  --sog-shadow-header:none;
-  --sog-font-interface:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --sog-shell-width: 1360px;
+  --sog-content-width: 1240px;
+  --sog-reading-width: 76ch;
+  --sog-radius-compact: 8px;
+  --sog-radius-panel: 10px;
+  --sog-radius-prominent: 12px;
+  --sog-shadow-panel: 0 12px 36px rgba(0, 0, 0, 0.22);
+  --sog-shadow-header: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --sog-font-interface: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-html { scroll-padding-top:5rem; }
-body { background:var(--sog-background); font-family:var(--sog-font-interface); font-size:16px; line-height:1.62; }
-body :where(h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,label,button,input,select,textarea,summary,a,span,strong,small,time,i,em,blockquote) { font-family:var(--sog-font-interface); }
-body :where(code,pre,kbd,samp,.contract-address,.transaction-hash,[data-long-value],.stablecoin-record-id) { font-family:var(--sog-font-data); overflow-wrap:anywhere; word-break:break-word; }
-body :where(h1,.editorial-page-title h1,.guide-index-title h1,.guide-article-masthead h1,.stablecoin-dossier-title-row h1) { max-width:24ch; font-size:clamp(2.5rem,4vw,3rem); line-height:1.12; letter-spacing:-.02em; overflow-wrap:normal; word-break:normal; }
-body h2 { font-size:clamp(1.55rem,2.6vw,2rem); line-height:1.2; letter-spacing:-.015em; }
-body h3 { font-size:clamp(1.08rem,1.8vw,1.35rem); line-height:1.28; letter-spacing:-.01em; }
-body :where(p,li,dd) { font-size:1rem; line-height:1.62; }
-body a { overflow-wrap:normal; word-break:normal; }
-.site-header { min-height:64px; border-bottom:1px solid var(--sog-line-subtle); background:var(--sog-background); box-shadow:none; backdrop-filter:none; }
-.site-header-primary { border-bottom:0; }
-.site-header-inner { min-height:64px; grid-template-columns:minmax(170px,auto) minmax(260px,1fr) auto auto; gap:clamp(.65rem,1.4vw,1.25rem); }
-.site-brand-cluster { display:block; }
-.site-brand-purpose { display:none; }
-.site-brand img { width:min(174px,100%); }
-.site-search-control { min-height:42px; padding:.15rem; border-radius:0; box-shadow:none; }
-.site-search input,.mobile-site-search input { min-height:38px; font-size:.9375rem; border-radius:0; }
-.site-search button,.mobile-site-search button { min-height:36px; border-radius:0; }
-.utility-navigation { gap:.2rem; }
-.utility-navigation a,.mobile-navigation summary { min-height:40px; padding-inline:.7rem; font-size:.875rem; }
-.site-navigation-bar { display:none; }
-.mobile-navigation { position:relative; display:block; }
-.mobile-navigation-panel { top:calc(100% + .7rem); right:0; left:auto; width:min(720px,calc(100vw - 2rem)); max-height:calc(100vh - 5.5rem); border-radius:0; box-shadow:none; }
-.mobile-navigation-links { grid-template-columns:repeat(3,minmax(0,1fr)); }
-.mobile-navigation-links a,.mobile-navigation-utilities a { justify-content:flex-start; min-height:40px; padding:.55rem .7rem; text-align:left; }
-.site-main { width:min(calc(100% - 2rem),var(--sog-content-width)); padding-block:clamp(1.25rem,2.2vw,2rem) clamp(3rem,5vw,5rem); }
-body table,body table th,body table td { font-size:14px; line-height:1.48; }
-body table th,body table td { padding-block:.7rem; }
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: linear-gradient(180deg, rgba(8, 19, 28, 0.98), rgba(4, 10, 15, 1));
+  font-family: var(--sog-font-interface);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+body :where(h1, h2, h3, h4, p, li, dt, dd, th, td, label, button, input, select, textarea, summary, a, span, strong, small) {
+  font-family: var(--sog-font-interface);
+}
+
+body :where(code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value]) {
+  font-family: var(--sog-font-data);
+}
+
+body :where(h1, .editorial-page-title h1, .guide-index-title h1, .guide-article-masthead h1, .stablecoin-dossier-title-row h1) {
+  max-width: 24ch;
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+body h2 {
+  font-size: clamp(1.55rem, 2.6vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+body h3 {
+  font-size: clamp(1.08rem, 1.8vw, 1.35rem);
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+}
+
+body :where(p, li, dd) {
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+body a {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+body :where(code, pre, .contract-address, .transaction-hash, [data-long-value]) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* One-row application shell. */
+.site-header {
+  min-height: 64px;
+  border-bottom: 1px solid var(--sog-line-subtle);
+  background: color-mix(in srgb, var(--sog-background) 97%, transparent);
+  box-shadow: var(--sog-shadow-header);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+.site-header-primary {
+  border-bottom: 0;
+}
+
+.site-header-inner {
+  min-height: 64px;
+  grid-template-columns: minmax(170px, auto) minmax(260px, 1fr) auto auto;
+  gap: clamp(0.65rem, 1.4vw, 1.25rem);
+}
+
+.site-brand-cluster {
+  display: block;
+}
+
+.site-brand-purpose {
+  display: none;
+}
+
+.site-brand img {
+  width: min(174px, 100%);
+}
+
+.site-search-control {
+  min-height: 42px;
+  padding: 0.15rem;
+  border-radius: var(--sog-radius-panel);
+  box-shadow: none;
+}
+
+.site-search input,
+.mobile-site-search input {
+  min-height: 38px;
+  font-size: 0.9375rem;
+}
+
+.site-search button,
+.mobile-site-search button {
+  min-height: 36px;
+  border-radius: 7px;
+}
+
+.utility-navigation {
+  gap: 0.2rem;
+}
+
+.utility-navigation a,
+.mobile-navigation summary {
+  min-height: 40px;
+  padding-inline: 0.7rem;
+  font-size: 0.875rem;
+}
+
+.site-navigation-bar {
+  display: none;
+}
+
+.mobile-navigation {
+  position: relative;
+  display: block;
+}
+
+.mobile-navigation-panel {
+  top: calc(100% + 0.7rem);
+  right: 0;
+  left: auto;
+  width: min(720px, calc(100vw - 2rem));
+  max-height: calc(100vh - 5.5rem);
+  border-radius: var(--sog-radius-panel);
+}
+
+.mobile-navigation-links {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mobile-navigation-links a,
+.mobile-navigation-utilities a {
+  justify-content: flex-start;
+  min-height: 40px;
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+}
+
+.site-main {
+  width: min(calc(100% - 2rem), var(--sog-content-width));
+  padding-block: clamp(1.25rem, 2.2vw, 2rem) clamp(3rem, 5vw, 5rem);
+}
+
+/* Reduce the generic panel treatment so hierarchy comes from content. */
+body .panel,
+body .home-panel {
+  border-color: color-mix(in srgb, var(--sog-line-subtle) 78%, transparent);
+  border-radius: var(--sog-radius-panel);
+  box-shadow: none;
+}
+
+body table,
+body table :where(th, td) {
+  font-size: max(0.875rem, 14px);
+  line-height: 1.48;
+}
+
+body table :where(th, td) {
+  padding-block: 0.7rem;
+}
+
+/* Compact Home entrypoint; no decorative oversized masthead. */
+.home-registry .home-entry {
+  min-height: 0;
+  margin: 0;
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.home-registry .home-entry::before,
+.home-registry .home-entry::after {
+  display: none;
+}
+
+.home-registry .home-entry__copy,
+.home-registry .home-search {
+  padding: 0;
+}
+
+.home-registry .home-entry .home-entry__copy h1 {
+  max-width: 18ch;
+  margin-bottom: 0.8rem;
+  font-size: clamp(2.5rem, 4.3vw, 3rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.home-registry .home-entry__deck {
+  max-width: 64ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.home-registry .home-entry__actions {
+  margin-top: 1.1rem;
+}
+
+.home-registry .home-search {
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  background: var(--sog-surface);
+  box-shadow: none;
+}
+
+.home-registry .home-search__heading {
+  padding: 1rem 1rem 0;
+}
+
+.home-registry .home-search__heading h2 {
+  font-size: 1.2rem;
+}
+
+.home-registry .home-search__form,
+.home-registry .home-search__popular,
+.home-registry .home-search__results {
+  margin-inline: 1rem;
+}
+
+.home-registry :where(
+  .home-eyebrow,
+  .home-search__popular > span,
+  .home-search__popular button,
+  .home-search__summary,
+  .home-search__type,
+  .home-registry-totals strong,
+  .home-explore-card > span,
+  .home-material-list__meta,
+  .home-status-ledger dd,
+  .home-issue-list li > div span,
+  .home-issue-list time,
+  .home-publications time,
+  .home-recent-grid > a > div span,
+  .home-guide-grid article > div
+) {
+  font-family: var(--sog-font-interface) !important;
+}
+
+.home-registry .home-registry-totals {
+  gap: 1px;
+  border: 1px solid var(--sog-line-subtle);
+  border-radius: var(--sog-radius-panel);
+  overflow: hidden;
+  background: var(--sog-line-subtle);
+}
+
+.home-registry .home-registry-totals a {
+  min-height: 76px;
+  padding: 0.8rem 0.9rem;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.home-registry .home-registry-totals strong {
+  font-size: 1.45rem;
+}
+
+.home-registry .home-registry-totals small {
+  font-size: 0.75rem;
+}
+
+.home-registry .home-explore-grid {
+  gap: 0.75rem;
+}
+
+.home-registry .home-explore-card {
+  min-height: 0;
+  padding: 1rem;
+  border-radius: var(--sog-radius-panel);
+  box-shadow: none;
+}
+
+.home-registry .home-explore-card p {
+  font-size: 0.9375rem;
+}
+
+/* Compact footer. */
+.site-footer-inner {
+  padding-block: 1.75rem 1.25rem;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 2fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.site-footer-summary {
+  gap: 0.65rem;
+}
+
+.site-footer-summary p {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.site-footer-principles {
+  display: none;
+}
+
+.site-footer-navigation {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.site-footer-group h2 {
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.site-footer-group a {
+  min-height: 34px;
+  padding-block: 0.2rem;
+  font-size: 0.8125rem;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.site-footer-meta {
+  display: none;
+}
+
+.mobile-record-list h3,
+.mobile-card-grid h3 {
+  font-family: var(--sog-font-interface) !important;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1120px) {
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+
+  .site-header-inner {
+    min-height: 60px;
+    grid-template-columns: minmax(170px, auto) minmax(240px, 1fr) auto;
+  }
+
+  .utility-navigation {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .site-header-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .site-search {
+    display: none;
+  }
+
+  .mobile-navigation-panel {
+    right: 0;
+    width: min(620px, calc(100vw - 1.25rem));
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer-summary p {
+    max-width: 70ch;
+  }
+}
+
+@media (max-width: 719px) {
+  html {
+    scroll-padding-top: 4rem;
+  }
+
+  .site-header {
+    min-height: 56px;
+  }
+
+  .site-header-inner,
+  .site-main,
+  .site-footer-inner {
+    width: min(calc(100% - 1.5rem), var(--sog-content-width)) !important;
+  }
+
+  .site-header-inner {
+    min-height: 56px;
+  }
+
+  .site-brand img {
+    width: min(150px, 52vw);
+  }
+
+  .mobile-navigation summary {
+    min-height: 40px;
+    padding-inline: 0.65rem;
+  }
+
+  .mobile-navigation-panel {
+    top: calc(100% + 0.45rem);
+    right: -0.125rem;
+    width: calc(100vw - 1.25rem);
+    padding: 0.8rem;
+  }
+
+  .mobile-navigation-links,
+  .mobile-navigation-utilities {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body :where(h1, .editorial-page-title h1, .guide-index-title h1, .guide-article-masthead h1, .stablecoin-dossier-title-row h1) {
+    max-width: none;
+    font-size: clamp(1.875rem, 9vw, 2.25rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.02em !important;
+    overflow-wrap: normal !important;
+    word-break: normal;
+  }
+
+  .home-registry .home-entry {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding-block: 1.25rem;
+  }
+
+  .home-registry .home-entry .home-entry__copy h1 {
+    max-width: none;
+    font-size: clamp(2rem, 9.5vw, 2.25rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .home-registry .home-entry__deck {
+    font-size: 1rem;
+  }
+
+  .home-registry .home-registry-totals {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+
+  .home-registry .home-registry-totals a {
+    flex: 0 0 min(44vw, 170px);
+    min-height: 72px;
+    scroll-snap-align: start;
+  }
+
+  .home-registry .home-explore-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer-summary {
+    display: none;
+  }
+
+  .site-footer-navigation {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-navigation-links,
+  .mobile-navigation-utilities,
+  .site-footer-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer-group a {
+    min-height: 36px;
+  }
+}

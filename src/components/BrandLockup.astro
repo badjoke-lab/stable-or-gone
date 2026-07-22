@@ -46,8 +46,6 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
       important(document.body, 'font-family', interfaceFont);
       important(document.body, 'font-size', '16px');
       important(document.body, 'line-height', '1.62');
-      important(document.body, 'background', 'var(--sog-background)');
-      important(document.body, 'background-image', 'none');
 
       const header = document.querySelector('.site-header');
       const primary = document.querySelector('.site-header-primary');
@@ -62,11 +60,6 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
         important(element, 'max-height', `${headerHeight}px`);
       }
       important(header, 'padding', '0');
-      important(header, 'background', 'var(--sog-background)');
-      important(header, 'background-image', 'none');
-      important(header, 'box-shadow', 'none');
-      important(header, 'backdrop-filter', 'none');
-      important(header, '-webkit-backdrop-filter', 'none');
       important(primary, 'border-bottom', '0');
       important(navBar, 'display', 'none');
       important(purpose, 'display', 'none');
@@ -81,14 +74,6 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
         inner.style.setProperty('grid-template-columns', columns, 'important');
         inner.style.setProperty('gap', width <= 719 ? '0.5rem' : 'clamp(0.65rem, 1.4vw, 1.25rem)', 'important');
       }
-
-      document.querySelectorAll('.site-search-control, .mobile-navigation-panel, .site-search input, .mobile-site-search input, .site-search button, .mobile-site-search button').forEach((element) => {
-        important(element, 'border-radius', '0');
-      });
-      document.querySelectorAll('.site-search-control, .mobile-navigation-panel').forEach((element) => {
-        important(element, 'box-shadow', 'none');
-        important(element, 'background-image', 'none');
-      });
 
       document.querySelectorAll('h1').forEach((heading) => {
         important(heading, 'font-family', interfaceFont);
@@ -105,8 +90,8 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
         important(cell, 'line-height', '1.48');
       });
 
-      document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, dt, dd, label, button, input, select, textarea, summary, a, span, strong, small, time, i, em, blockquote').forEach((element) => {
-        if (!element.closest('code, pre, kbd, samp, [data-long-value], .contract-address, .transaction-hash, .stablecoin-record-id')) {
+      document.querySelectorAll('h1, h2, h3, h4, p, li, dt, dd, label, button, input, select, textarea, summary, a, span, strong, small').forEach((element) => {
+        if (!element.closest('code, pre, kbd, samp, [data-long-value], .contract-address, .transaction-hash')) {
           important(element, 'font-family', interfaceFont);
         }
       });

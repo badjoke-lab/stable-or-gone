@@ -1,6 +1,6 @@
 # UI v3 Remediation Authority
 
-Updated: 2026-07-22  
+Updated: 2026-07-21  
 Status: active — rework required  
 Issue: #281  
 Completion: false
@@ -25,7 +25,7 @@ The earlier UI v3 completion decision is withdrawn. Build success, route existen
 - Two-row desktop navigation and oversized mobile footer.
 - Mixed font treatment across UI, prose, labels, and data.
 - Monospace or serif treatment outside technical literals.
-- Excessive cyan, borders, panels, cards, rounded controls, shadows, blur, and generic SaaS decoration.
+- Excessive cyan, borders, panels, and cards.
 
 ### Desktop
 
@@ -54,7 +54,6 @@ The earlier UI v3 completion decision is withdrawn. Build success, route existen
 
 - Use one system sans-serif family for UI, prose, headings, labels, dates, symbols, statuses, and counts.
 - Use monospace only for IDs, hashes, addresses, API paths, JSON keys, and literal code.
-- Serif display typography is prohibited.
 - Desktop H1: 40–48px.
 - Mobile H1: 30–36px.
 - Body: 16–18px desktop and 16–17px mobile.
@@ -71,7 +70,6 @@ The earlier UI v3 completion decision is withdrawn. Build success, route existen
 - Reserve cyan for links, selected state, and primary actions.
 - Do not put every text block in a bordered card.
 - Prefer rows and separators for registers and Evidence lists.
-- Protected shell and editorial surfaces must not use decorative gradients, panel shadows, backdrop blur, pill controls, or rounded SaaS panels.
 - Statuses, warnings, and errors must use text plus visual treatment, never color alone.
 
 ### Density
@@ -94,7 +92,6 @@ Every interactive data surface must visibly separate loading, empty, error, and 
 - Compact title, one-sentence purpose, search, and counts.
 - Keep recent material events, selected records, three updates, three guides, and direct registry links.
 - Remove repeated exploratory and explanatory sections.
-- Remove decorative hero orbs, gradients, shadows, rounded cards, and non-technical monospace.
 - Target heights: desktop under 4,000px; mobile under 6,000px.
 
 ### Stablecoin Register
@@ -137,7 +134,6 @@ Every interactive data surface must visibly separate loading, empty, error, and 
 - Mobile contents start collapsed.
 - Split long reference tables and source appendices where needed.
 - Methodology begins with a short operational summary and separates internal enum dictionaries from primary explanation.
-- Use the shared system sans; do not use editorial serif or decorative monospace.
 
 ### Reference and utility pages
 
@@ -148,7 +144,6 @@ Every interactive data surface must visibly separate loading, empty, error, and 
 - Models: issuance, backing, and stabilization definitions/examples.
 - Updates: paginated chronological log with collapsed details.
 - Maintenance: user-facing operational state before developer diagnostics.
-- Use flat rows and separators, not rounded SaaS cards, filled hero CTAs, pill navigation, shadows, or gradients.
 
 ### Compare and Access/Regulation
 
@@ -175,7 +170,7 @@ Every interactive data surface must visibly separate loading, empty, error, and 
 4. R4 — Stablecoin Dossier.
 5. R5 — Events and Organizations.
 6. R6 — Guides and long-form pages.
-7. R7 — Reference and utility pages plus typography-regression correction.
+7. R7 — Reference and utility pages.
 8. R8 — Compare and Access/Regulation.
 9. R9 — Timeline and Stats.
 10. R10 — Full visual closure.
@@ -192,7 +187,7 @@ Every UI pull request must include:
 - desktop and mobile screenshots;
 - before/after heights for changed long pages;
 - confirmation of canonical data, route, metadata, and machine-readable preservation unless separately authorized;
-- visible-error, console-error, failed-request, overflow, clipping, typography, keyboard, and computed-style results;
+- visible-error, console-error, failed-request, overflow, clipping, typography, and keyboard results;
 - remaining unchecked items.
 
 Every merged UI pull request must update the progress table.
@@ -219,8 +214,6 @@ Hard failures:
 - skipped screenshot or visual-audit step;
 - visible `failed to load`, `contract mismatch`, or `index unavailable` on a ready capture;
 - console errors or failed required requests;
-- visible serif or non-technical monospace;
-- protected rounded SaaS surfaces, decorative shadow, gradient, or backdrop blur;
 - horizontal overflow, clipped/overlapping text, ordinary break-all, or essential ellipsis;
 - mobile filters or secondary dossier sections open by default;
 - desktop table text below 14px;
@@ -236,8 +229,8 @@ Hard failures:
 | R4 Stablecoin Dossier | complete | #439 | Validation and 15/15 captures passed in run 29784166384; screenshots manually reviewed; desktop max 7,154px, tablet max 3,191px, mobile max 3,620px |
 | R5 Events and Organizations | complete | #440 | Validation and 40/40 captures passed in run 29800031326 at head `787bec1c`; screenshots manually reviewed; five-column registers and 96–123px mobile rows |
 | R6 Guides and long-form | complete | #442 | Validation and 15/15 captures passed in run 29803262075 at head `1b6ddf0f`; screenshots manually reviewed; single responsive Guide register, 760px reading width, one contents navigation, and closed internal Methodology reference |
-| R7 Reference and utility plus typography correction | complete | #443 | All gates and 50/50 computed-style captures passed in run 29885162733 at head `9cef0fa2`; screenshots manually reviewed; one system sans and flat archival surfaces restored |
-| R8 Compare and Access/Regulation | next | — | Runtime and state correctness are the next blockers |
+| R7 Reference and utility | active | pending | Starts after R6 merge; About, Contact, Support, Glossary, Models, Updates, and Maintenance are the authorized scope |
+| R8 Compare and Access/Regulation | blocked | — | Runtime errors remain completion blockers |
 | R9 Timeline and Stats | blocked | — | — |
 | R10 Full visual closure | blocked | — | Requires complete manual review and explicit owner approval |
 
@@ -254,7 +247,7 @@ Representative final heights:
 - USDC mobile 390: 3,408px.
 - USDC mobile 320: 3,620px.
 
-The audit confirmed six primary facts, at most five initial events, at most ten Evidence rows, five organization columns, 14px minimum visible table text, zero page overflow, zero runtime/load failures, six open desktop sections, and zero open tablet/mobile secondary sections. Desktop, tablet, and mobile screenshots were manually inspected before merge.
+The audit confirmed six primary facts, at most five initial events, at most ten initial Evidence rows, five organization columns, 14px minimum visible table text, zero page overflow, zero runtime/load failures, six open desktop sections, and zero open tablet/mobile secondary sections. Desktop, tablet, and mobile screenshots were manually inspected before merge.
 
 ## R5 completion evidence
 
@@ -289,24 +282,6 @@ Representative final measurements:
 - Methodology mobile 320: 6,286px.
 
 The audit confirmed four columns in every Guide register, one responsive dataset, zero duplicate mobile Guide surface, 14px minimum table text, zero horizontal overflow, zero runtime/load failures, one current-section contents navigation, desktop-open and mobile-closed contents behavior, zero visible legacy Guide contents, zero horizontally scrolling mobile article tables, Guide reference navigation after the article body, and a closed internal Methodology reference. Desktop, tablet, 390px, and 320px screenshots were manually inspected before merge.
-
-## R7 completion evidence
-
-Run `29885162733` at head `9cef0fa2bf082d2a04db00fb92ed51619295d22f` passed typography authority, reference/utility contracts, canonical validation, Astro check, static build, and all 50 computed-style captures.
-
-The 50-capture matrix covered Home, a Guide article, the USDC dossier, About, Contact, Support, Glossary, Models, Updates, and Maintenance at 1440px, 1280px, 768px, 390px, and 320px.
-
-The audit confirmed:
-
-- one visible system sans-serif family for every non-technical text role;
-- monospace limited to IDs, addresses, hashes, API/data keys, and literal code;
-- zero visible Georgia, Cambria, Times, or generic serif use;
-- zero protected rounded surfaces, panel shadows, decorative gradients, or backdrop blur;
-- zero horizontal overflow;
-- zero console errors or failed required requests;
-- flat Home, Guide, Dossier, reference, and utility presentation using rows and separators.
-
-Representative desktop, tablet, 390px, and 320px screenshots were manually inspected before merge, including Home, Guide article, USDC dossier, About, Glossary, and Updates.
 
 ## Completion rule
 
