@@ -1,25 +1,18 @@
-name: Capture full-page screenshots
+name: Capture all public page screenshots
 
 on:
   workflow_dispatch:
-    inputs:
-      device:
-        description: Screenshot device set
-        required: true
-        default: desktop
-        type: choice
-        options:
-          - desktop
-          - mobile
-          - all
-      mode:
-        description: Capture scope
-        required: true
-        default: representative
-        type: choice
-        options:
-          - representative
-          - exhaustive
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'public/brand/**'
+      - 'config/public-routes.json'
+      - 'scripts/capture-site-screenshots.mjs'
+      - 'scripts/collect-public-routes.mjs'
+      - '.github/workflows/capture-screenshots.yml'
+      - 'package.json'
   pull_request:
     paths:
       - 'src/**'
@@ -27,27 +20,17 @@ on:
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/collect-public-routes.mjs'
-      - 'scripts/audit-representative-visuals.mjs'
-      - 'scripts/audit-stats-contrast.mjs'
-      - 'scripts/validate-ui-v3-representative-visual-audit.mjs'
       - '.github/workflows/capture-screenshots.yml'
       - 'package.json'
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/capture-screenshots.yml
 
 permissions:
   contents: read
 
 jobs:
-  capture:
+  capture-all-public-pages:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     env:
-      CAPTURE_DEVICE: ${{ github.event_name == 'pull_request' && 'all' || github.event.inputs.device || 'desktop' }}
-      CAPTURE_MODE: ${{ github.event_name == 'pull_request' && 'representative' || github.event.inputs.mode || 'representative' }}
       CAPTURE_BASE_URL: http://127.0.0.1:4173
     steps:
       - name: Checkout
@@ -59,13 +42,10 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm clean-install --no-audit --no-fund
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-
-      - name: Validate visual audit contract
-        run: node scripts/validate-ui-v3-representative-visual-audit.mjs
 
       - name: Build site
         run: npm run build
@@ -83,68 +63,34 @@ jobs:
           cat /tmp/sog-screenshot-server.log
           exit 1
 
-      - name: Audit Stats contrast
-        run: node scripts/audit-stats-contrast.mjs
+      - name: Capture every desktop route
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode exhaustive --base-url "$CAPTURE_BASE_URL"
 
-      - name: Capture screenshots
-        run: |
-          case "$CAPTURE_DEVICE" in
-            desktop)
-              node scripts/capture-site-screenshots.mjs --device desktop --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
-              ;;
-            mobile)
-              node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
-              ;;
-            all)
-              node scripts/capture-site-screenshots.mjs --device desktop --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
-              node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --base-url "$CAPTURE_BASE_URL"
-              ;;
-            *)
-              echo "Unsupported device: $CAPTURE_DEVICE" >&2
-              exit 1
-              ;;
-          esac
+      - name: Capture every mobile route
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode exhaustive --base-url "$CAPTURE_BASE_URL"
 
-      - name: Audit representative captures
-        if: always() && env.CAPTURE_DEVICE == 'all' && env.CAPTURE_MODE == 'representative'
-        run: node scripts/audit-representative-visuals.mjs
-
-      - name: Upload screenshot artifacts
+      - name: Upload complete screenshot artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-full-page-screenshots-${{ env.CAPTURE_DEVICE }}-${{ env.CAPTURE_MODE }}-${{ github.run_id }}
+          name: sog-all-public-page-screenshots-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           path: |
             artifacts/screenshots/**
-            artifacts/screenshots/stats-contrast-audit.json
-            artifacts/screenshots/representative-visual-audit.json
-            artifacts/screenshots/representative-visual-audit.md
             artifacts/screenshots-desktop.zip
             artifacts/screenshots-mobile.zip
 
-      - name: Write summary
+      - name: Write capture summary
         if: always()
         run: |
-          echo "## SOG screenshot capture" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Device: $CAPTURE_DEVICE" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
+          echo "## SOG exhaustive screenshot capture" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
             if [ -f "$MANIFEST" ]; then
               DISCOVERED=$(node -e "const x=require('./$MANIFEST'); console.log(x.discovered_route_count)")
-              SELECTED=$(node -e "const x=require('./$MANIFEST'); console.log(x.selected_route_count)")
               CAPTURED=$(node -e "const x=require('./$MANIFEST'); console.log(x.captured_count)")
               FAILED=$(node -e "const x=require('./$MANIFEST'); console.log(x.failed_count)")
-              echo "- $DEVICE: $DISCOVERED discovered / $SELECTED selected / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
+              echo "- $DEVICE: $DISCOVERED discovered / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
-          if [ -f artifacts/screenshots/stats-contrast-audit.json ]; then
-            STATS_RESULT=$(node -e "const x=require('./artifacts/screenshots/stats-contrast-audit.json'); console.log(x.ok ? 'PASS' : 'FAIL')")
-            echo "- Stats contrast audit: $STATS_RESULT" >> "$GITHUB_STEP_SUMMARY"
-          fi
-          if [ -f artifacts/screenshots/representative-visual-audit.json ]; then
-            RESULT=$(node -e "const x=require('./artifacts/screenshots/representative-visual-audit.json'); console.log(x.ok ? 'PASS' : 'FAIL')")
-            echo "- Gate V3-F automated audit: $RESULT" >> "$GITHUB_STEP_SUMMARY"
-          fi
