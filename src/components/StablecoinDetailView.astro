@@ -9,8 +9,6 @@ import ValueStateText from './ValueStateText.astro';
 import StablecoinOrganizationsControl from './StablecoinOrganizationsControl.astro';
 import '../styles/stablecoin-dossier.css';
 import '../styles/stablecoin-dossier-v3-overrides.css';
-import '../styles/stablecoin-dossier-pr415.css';
-import '../styles/ui-remediation-r4.css';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { resolveReferenceTarget } from '../utils/referenceTarget';
@@ -39,6 +37,8 @@ const latestMaterialEvent = datedEvents[0];
 const latestMaterialEventTitle = latestMaterialEvent ? eventPublicCopy[latestMaterialEvent.id]?.title ?? latestMaterialEvent.title : null;
 const latestMaterialEventSummary = latestMaterialEvent?.description ? cleanPublicText(latestMaterialEvent.description) : null;
 const issuerControlEvents = events.filter((item) => item.event_detail_kind === 'issuer_control' || item.event_type === 'issuer_freeze');
+const modelTerms = /model|collateral|reserve|migration|transition|upgrade|rebrand/i;
+const modelHistoryEvents = events.filter((event) => modelTerms.test(`${event.event_type ?? ''} ${event.event_detail_kind ?? ''} ${event.title ?? ''} ${event.description ?? ''}`));
 const evidence = getEvidence().filter((item) => item.stablecoin_ids?.includes(coin.id) || item.stablecoin_id === coin.id);
 const reserveReports = getReserveReports().filter((item) => item.stablecoin_id === coin.id);
 const reserveComponents = getReserveComponentsFor(coin.id);
@@ -58,7 +58,7 @@ const yieldText = yieldProfile ? [formatPublicLabel(yieldProfile.mode), yieldPro
 const aliases = Array.isArray(coin.aliases) ? coin.aliases.filter(Boolean) : [];
 const additionalRelationshipCount = Math.max(relationships.length - (primaryRelationship ? 1 : 0), 0);
 const title = `${coin.name} (${coin.symbol ?? coin.slug}) — Stablecoin History | Stable or Gone`;
-const description = `${coin.name} lifecycle, issuance, reference target, backing category, redemption terms, major events, reserve information, and sources.`;
+const description = `${coin.name} lifecycle, issuance, reference target, backing category, canonical backing types, stabilization mechanism, redemption terms, major events, reserve information, and sources.`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -70,78 +70,48 @@ const jsonLd = {
   ...(relatedGuides.length > 0 ? { subjectOf: relatedGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://sog.badjoke-lab.com${guide.href}` })) } : {})
 };
 const coverageRows = [
-  ['Organizations', relationships.length],
-  ['Source records', evidence.length],
-  ['Reserve reports', reserveReports.length],
-  ['Deployments', deployments.length],
-  ['Regulatory notes', regulatoryNotes.length],
-  ['Open questions', openQuestions.length],
-  ['Events', events.length]
+  ['Organizations', relationships.length], ['Sources', evidence.length], ['Reserve reports', reserveReports.length],
+  ['Reserve components', reserveComponents.length], ['Model-history events', modelHistoryEvents.length],
+  ['Regulatory notes', regulatoryNotes.length], ['Deployments', deployments.length],
+  ['Issuer-control actions', issuerControlEvents.length], ['Open questions', openQuestions.length], ['Events', events.length]
 ];
 const reserveProfile = coin.reserve_profile;
 const redemptionProfile = coin.redemption_profile;
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/stablecoin/${coin.slug}/`} jsonLd={jsonLd}>
-  <article class="stablecoin-dossier stablecoin-dossier-r4" data-dossier-version="r4">
+  <article class="stablecoin-dossier">
     <StablecoinDossierHeader coin={coin} aliases={aliases} statusClass={statusClass} reference={reference} primaryOrganization={primaryOrganization} additionalRelationshipCount={additionalRelationshipCount} exitModel={exitModel} model={model} evidenceCount={evidence.length} latestMaterialEvent={latestMaterialEvent} latestMaterialEventTitle={latestMaterialEventTitle} latestMaterialEventSummary={latestMaterialEventSummary} />
 
-    <nav class="stablecoin-dossier-nav stablecoin-dossier-nav-r4" aria-label="Stablecoin dossier sections">
-      <a href="#overview">Overview</a><a href="#reserves-redemption">Reserves</a><a href="#organizations-control">Organizations</a><a href="#events">Events</a><a href="#deployments-legal-context">Deployments</a><a href="#unknowns">Unknowns</a><a href="#evidence">Evidence</a><a href="#mechanism">Technical</a>
+    <nav class="stablecoin-dossier-nav" aria-label="Stablecoin dossier sections">
+      <a href="#assessment">Assessment</a><a href="#organizations-control">Organizations</a><a href="#mechanism">Mechanism</a><a href="#reserves-redemption">Reserves</a><a href="#deployments-legal-context">Deployments</a><a href="#history">Lifecycle</a><a href="#evidence">Evidence</a><a href="#known-unknowns">Unknowns</a><a href="#more">Related</a>
     </nav>
 
-    <section class="stablecoin-dossier-section stablecoin-assessment stablecoin-overview-r4" id="overview">
-      <div class="stablecoin-section-heading"><p>Reviewed overview</p><h2>Current state</h2><span>Reviewed facts and uncertainty are shown separately. This is not a rating, safety score, or recommendation.</span></div>
+    <section class="stablecoin-dossier-section stablecoin-assessment" id="assessment">
+      <div class="stablecoin-section-heading"><p>Reviewed assessment</p><h2>Identity and current state</h2><span>This summary reports reviewed facts and uncertainty. It is not a rating or recommendation.</span></div>
       <div class="stablecoin-assessment-copy"><p>{publicSummary}</p></div>
-      <dl class="stablecoin-overview-secondary-r4">
-        <div><dt>Issuance</dt><dd>{formatIssuanceLabel(coin.issuance_status)}</dd></div>
-        <div><dt>Stabilization</dt><dd>{model.stabilization_label}</dd></div>
-        <div><dt>Open questions</dt><dd><a href="#unknowns">{openQuestions.length} unresolved item{openQuestions.length === 1 ? '' : 's'}</a></dd></div>
+      <div class="stablecoin-identity-table">
+        <table data-table-kind="stablecoin-overview" data-mobile-table="scroll-preserve"><tbody>
+          <tr><th>Name</th><td>{coin.name}</td></tr><tr><th>Symbol</th><td><ValueStateText value={coin.symbol} /></td></tr><tr><th>Aliases</th><td>{aliases.length > 0 ? aliases.join(', ') : 'None recorded'}</td></tr><tr><th>Asset class</th><td>{formatPublicLabel(assetClass, 'Unknown')}</td></tr><tr><th>Lifecycle status</th><td>{formatLifecycleLabel(coin.lifecycle_status)}</td></tr><tr><th>Issuance status</th><td>{formatIssuanceLabel(coin.issuance_status)}</td></tr><tr><th>Canonical record ID</th><td><code>{coin.id}</code></td></tr><tr><th>Route slug</th><td><code>{coin.slug}</code></td></tr><tr><th>Record confidence</th><td><ValueStateText value={coin.confidence} displayValue={formatPublicLabel(coin.confidence)} /></td></tr><tr><th>Last reviewed</th><td><ValueStateText value={coin.last_verified_at} /></td></tr>
+        </tbody></table>
+      </div>
+      <dl class="stablecoin-identity-ledger" data-mobile-representation-for="stablecoin-overview">
+        <div><dt>Name</dt><dd>{coin.name}</dd></div><div><dt>Symbol</dt><dd><ValueStateText value={coin.symbol} /></dd></div><div><dt>Aliases</dt><dd>{aliases.length > 0 ? aliases.join(', ') : 'None recorded'}</dd></div><div><dt>Asset class</dt><dd>{formatPublicLabel(assetClass, 'Unknown')}</dd></div><div><dt>Lifecycle status</dt><dd>{formatLifecycleLabel(coin.lifecycle_status)}</dd></div><div><dt>Issuance status</dt><dd>{formatIssuanceLabel(coin.issuance_status)}</dd></div><div><dt>Canonical record ID</dt><dd><code>{coin.id}</code></dd></div><div><dt>Route slug</dt><dd><code>{coin.slug}</code></dd></div><div><dt>Record confidence</dt><dd><ValueStateText value={coin.confidence} displayValue={formatPublicLabel(coin.confidence)} /></dd></div><div><dt>Last reviewed</dt><dd><ValueStateText value={coin.last_verified_at} /></dd></div>
       </dl>
-
-      <details class="stablecoin-technical-disclosure stablecoin-r4-technical">
-        <summary>Technical identity and record coverage</summary>
-        <div class="stablecoin-identity-table">
-          <table data-table-kind="stablecoin-overview" data-mobile-table="scroll-preserve"><tbody>
-            <tr><th>Name</th><td>{coin.name}</td></tr><tr><th>Symbol</th><td><ValueStateText value={coin.symbol} /></td></tr><tr><th>Aliases</th><td>{aliases.length > 0 ? aliases.join(', ') : 'None recorded'}</td></tr><tr><th>Asset class</th><td>{formatPublicLabel(assetClass, 'Unknown')}</td></tr><tr><th>Lifecycle status</th><td>{formatLifecycleLabel(coin.lifecycle_status)}</td></tr><tr><th>Issuance status</th><td>{formatIssuanceLabel(coin.issuance_status)}</td></tr><tr><th>Canonical record ID</th><td><code>{coin.id}</code></td></tr><tr><th>Route slug</th><td><code>{coin.slug}</code></td></tr><tr><th>Record confidence</th><td><ValueStateText value={coin.confidence} displayValue={formatPublicLabel(coin.confidence)} /></td></tr><tr><th>Last reviewed</th><td><ValueStateText value={coin.last_verified_at} /></td></tr>
-          </tbody></table>
-        </div>
-        <dl class="stablecoin-identity-ledger" data-mobile-representation-for="stablecoin-overview">
-          <div><dt>Name</dt><dd>{coin.name}</dd></div><div><dt>Symbol</dt><dd><ValueStateText value={coin.symbol} /></dd></div><div><dt>Aliases</dt><dd>{aliases.length > 0 ? aliases.join(', ') : 'None recorded'}</dd></div><div><dt>Asset class</dt><dd>{formatPublicLabel(assetClass, 'Unknown')}</dd></div><div><dt>Lifecycle status</dt><dd>{formatLifecycleLabel(coin.lifecycle_status)}</dd></div><div><dt>Issuance status</dt><dd>{formatIssuanceLabel(coin.issuance_status)}</dd></div><div><dt>Canonical record ID</dt><dd><code>{coin.id}</code></dd></div><div><dt>Route slug</dt><dd><code>{coin.slug}</code></dd></div><div><dt>Record confidence</dt><dd><ValueStateText value={coin.confidence} displayValue={formatPublicLabel(coin.confidence)} /></dd></div><div><dt>Last reviewed</dt><dd><ValueStateText value={coin.last_verified_at} /></dd></div>
-        </dl>
-        <table class="stablecoin-coverage-table" data-table-kind="stablecoin-record-coverage" data-mobile-table="scroll-preserve"><thead><tr><th>Coverage area</th><th>Entries</th></tr></thead><tbody>{coverageRows.map(([label, count]) => <tr><td>{label}</td><td>{count}</td></tr>)}</tbody></table>
-      </details>
+      <details class="stablecoin-coverage-disclosure"><summary>Record coverage</summary><table data-table-kind="stablecoin-record-coverage" data-mobile-table="scroll-preserve"><thead><tr><th>Section</th><th>Entries</th></tr></thead><tbody>{coverageRows.map(([label, count]) => <tr><td>{label}</td><td>{count}</td></tr>)}</tbody></table></details>
     </section>
-
-    <StablecoinReserveSection coin={coin} reserveComponents={reserveComponents} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
 
     <StablecoinOrganizationsControl coin={coin} relationships={relationships} primaryResolution={primaryResolution} primaryRelationship={primaryRelationship} primaryOrganization={primaryOrganization} organizations={organizations} deployments={deployments} issuerControlEvents={issuerControlEvents} />
 
-    <details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-mechanism" id="mechanism" data-r4-section open>
-      <summary class="stablecoin-r4-section-summary"><span><small>Classification fields</small><strong>Technical model</strong></span><b>14 fields</b></summary>
-      <div class="stablecoin-r4-section-body">
-        <p class="stablecoin-r4-section-intro">Reference, backing, stabilization, exit, valuation, and yield remain separate facts.</p>
-        <dl class="stablecoin-mechanism-ledger">
-          <div><dt>Reference target</dt><dd>{reference.public_label}</dd></div><div><dt>Reference kind</dt><dd>{reference.reference_kind_label}</dd></div><div><dt>Comparison category</dt><dd>{reference.comparison_category_label}</dd></div><div><dt>Target value</dt><dd><ValueStateText value={reference.target_value} /></dd></div><div class="wide"><dt>Reference methodology</dt><dd><ValueStateText value={reference.methodology_description} displayValue={reference.methodology_description} detectMarkers={false} /></dd></div><div><dt>Public backing model</dt><dd>{model.public_label}</dd></div><div><dt>Canonical backing types</dt><dd>{model.canonical_backing_type_labels.join(', ') || 'Not recorded'}</dd></div><div><dt>Reserve component categories</dt><dd>{reserveComponents.map((component) => formatPublicLabel(component.asset_category)).join(', ') || 'Not recorded'}</dd></div><div><dt>Primary stabilization mechanism</dt><dd>{model.stabilization_label}</dd></div><div class="wide"><dt>Recorded model description</dt><dd>{model.recorded_model_description ?? 'Not recorded'}</dd></div><div><dt>Redemption / exit model</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div><div><dt>Valuation source</dt><dd>{valuationSource?.url ? <a href={valuationSource.url}>{valuationText}</a> : valuationText}</dd></div><div><dt>Yield / rebase profile</dt><dd>{yieldText}</dd></div><div class="wide"><dt>Classification notes</dt><dd>{coin.classification_notes ?? 'Not recorded'}</dd></div>
-        </dl>
-      </div>
-    </details>
+    <section class="stablecoin-dossier-section stablecoin-mechanism" id="mechanism">
+      <div class="stablecoin-section-heading"><p>Mechanism</p><h2>How the asset works</h2><span>Reference, backing, stabilization, exit, valuation, and yield remain separate facts.</span></div>
+      <dl class="stablecoin-mechanism-ledger">
+        <div><dt>Reference target</dt><dd>{reference.public_label}</dd></div><div><dt>Reference kind</dt><dd>{reference.reference_kind_label}</dd></div><div><dt>Comparison category</dt><dd>{reference.comparison_category_label}</dd></div><div><dt>Target value</dt><dd><ValueStateText value={reference.target_value} /></dd></div><div class="wide"><dt>Reference methodology</dt><dd><ValueStateText value={reference.methodology_description} displayValue={reference.methodology_description} detectMarkers={false} /></dd></div><div><dt>Public backing model</dt><dd>{model.public_label}</dd></div><div><dt>Canonical backing types</dt><dd>{model.canonical_backing_type_labels.join(', ') || 'Not recorded'}</dd></div><div><dt>Reserve component categories</dt><dd>{reserveComponents.map((component) => formatPublicLabel(component.asset_category)).join(', ') || 'Not recorded'}</dd></div><div><dt>Primary stabilization mechanism</dt><dd>{model.stabilization_label}</dd></div><div class="wide"><dt>Recorded model description</dt><dd>{model.recorded_model_description ?? 'Not recorded'}</dd></div><div><dt>Redemption / exit model</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div><div><dt>Valuation source</dt><dd>{valuationSource?.url ? <a href={valuationSource.url}>{valuationText}</a> : valuationText}</dd></div><div><dt>Yield / rebase profile</dt><dd>{yieldText}</dd></div><div class="wide"><dt>Classification notes</dt><dd>{coin.classification_notes ?? 'Not recorded'}</dd></div>
+      </dl>
+    </section>
 
-    <StablecoinHistorySection events={events} />
+    <StablecoinReserveSection coin={coin} reserveComponents={reserveComponents} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
     <StablecoinContextSections coin={coin} deployments={deployments} evidence={evidence} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
+    <StablecoinHistorySection modelHistoryEvents={modelHistoryEvents} issuerControlEvents={issuerControlEvents} events={events} />
     <StablecoinRelatedSection relatedGuides={relatedGuides} primaryOrganization={primaryOrganization} primaryOrganizationTaxonomy={primaryOrganizationTaxonomy} eventCount={events.length} />
   </article>
-
-  <script is:inline>
-    (() => {
-      const compact = window.matchMedia('(max-width: 900px)');
-      const defaultClosed = new Set(['mechanism', 'more']);
-      const sync = () => {
-        document.querySelectorAll('[data-r4-section]').forEach((section) => {
-          if (section instanceof HTMLDetailsElement) section.open = !compact.matches && !defaultClosed.has(section.id);
-        });
-      };
-      sync();
-      compact.addEventListener?.('change', sync);
-    })();
-  </script>
 </BaseLayout>
