@@ -23,7 +23,7 @@ const states = [
 
 fs.mkdirSync(outputRoot, { recursive: true });
 const browser = await chromium.launch({ headless: true });
-const manifest = { schema_version: '1.1', base_url: baseUrl, captures: [], failures: [] };
+const manifest = { schema_version: '1.2', base_url: baseUrl, captures: [], failures: [] };
 
 for (const [viewportName, width, height] of viewports) {
   const context = await browser.newContext({ viewport: { width, height } });
@@ -60,12 +60,19 @@ for (const [viewportName, width, height] of viewports) {
         return !element.hidden && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
       };
       const visibleText = document.body.innerText;
-      const interactiveScoreRanking = [...document.querySelectorAll('button,select,option,input,label')]
-        .filter((element) => /(score|ranking)/i.test(element.textContent ?? '')).map((element) => element.textContent?.trim().slice(0,80));
+      const interactiveScoreRanking = [...document.querySelectorAll('button,select,input,label')]
+        .filter((element) => {
+          const accessibleName = [element.getAttribute('aria-label'), element.getAttribute('name'), element.getAttribute('data-control'), element.textContent]
+            .filter(Boolean).join(' ').trim().toLowerCase();
+          return /^(score|ranking|risk score|risk ranking)$/.test(accessibleName)
+            || element.matches('[data-score],[data-ranking],[name*="score" i],[name*="ranking" i]');
+        })
+        .map((element) => element.textContent?.trim().slice(0,80));
       const compareOutput = document.querySelector('[data-compare-output]');
       const accessRows = [...document.querySelectorAll('.r8-access-row')];
       return {
         document_width: document.documentElement.scrollWidth,
+        document_height: document.documentElement.scrollHeight,
         viewport_width: width,
         visible_error_language: /(contract mismatch|index unavailable|failed to load|HTTP \d+)/i.test(visibleText),
         interactive_score_ranking: interactiveScoreRanking,
@@ -75,6 +82,7 @@ for (const [viewportName, width, height] of viewports) {
           error: visible('[data-compare-alert]'),
           mobile_facet_control: visible('[data-compare-mobile-facet]'),
           visible_facets: [...document.querySelectorAll('[data-dimension-id]')].filter((element) => element instanceof HTMLElement && !element.hidden && getComputedStyle(element).display !== 'none').length,
+          visible_groups: [...document.querySelectorAll('[data-compare-group]')].filter((element) => element instanceof HTMLElement && getComputedStyle(element).display !== 'none').length,
           output_scroll_width: compareOutput instanceof HTMLElement ? compareOutput.scrollWidth : 0,
           output_client_width: compareOutput instanceof HTMLElement ? compareOutput.clientWidth : 0
         },
@@ -105,8 +113,9 @@ for (const [viewportName, width, height] of viewports) {
       if (spec.state === 'empty' && !diagnostics.compare.empty) failures.push('compare empty state missing');
       if (spec.state === 'ready' && !diagnostics.compare.ready) failures.push('compare ready state missing');
       if (spec.state === 'error' && !diagnostics.compare.error) failures.push('compare error state missing');
-      if (spec.state === 'ready' && width <= 719 && (!diagnostics.compare.mobile_facet_control || diagnostics.compare.visible_facets !== 1)) failures.push(`mobile compare must show one facet, found ${diagnostics.compare.visible_facets}`);
+      if (spec.state === 'ready' && width <= 719 && (!diagnostics.compare.mobile_facet_control || diagnostics.compare.visible_facets !== 1 || diagnostics.compare.visible_groups !== 1)) failures.push(`mobile compare must show one facet in one group, found ${diagnostics.compare.visible_facets} facets / ${diagnostics.compare.visible_groups} groups`);
       if (spec.state === 'ready' && width > 719 && diagnostics.compare.output_scroll_width > diagnostics.compare.output_client_width + 1) failures.push('desktop comparison requires horizontal scrolling');
+      if (spec.state === 'ready' && width <= 719 && diagnostics.document_height > 5200) failures.push(`mobile comparison too tall: ${diagnostics.document_height}px`);
     } else {
       const statesVisible = [diagnostics.access.loading, diagnostics.access.empty, diagnostics.access.ready, diagnostics.access.error].filter(Boolean).length;
       if (statesVisible !== 1) failures.push(`access state overlap: ${statesVisible} visible`);
@@ -114,7 +123,9 @@ for (const [viewportName, width, height] of viewports) {
       if (spec.state === 'empty' && !diagnostics.access.empty) failures.push('access empty state missing');
       if (spec.state === 'error' && !diagnostics.access.error) failures.push('access error state missing');
       if (spec.state === 'loading' && !diagnostics.access.loading) failures.push('access loading state missing');
+      if (spec.state === 'ready' && diagnostics.access.rows > 10) failures.push(`access initial result batch exceeds 10 rows: ${diagnostics.access.rows}`);
       if (spec.state === 'ready' && width <= 719 && diagnostics.access.max_row_height > 300) failures.push(`access mobile row too tall: ${diagnostics.access.max_row_height}px`);
+      if (spec.state === 'ready' && width <= 719 && diagnostics.document_height > 6500) failures.push(`access mobile page too tall: ${diagnostics.document_height}px`);
     }
 
     const directory = path.join(outputRoot, viewportName);
