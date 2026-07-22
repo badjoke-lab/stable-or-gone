@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/home-v3.css';
-import '../styles/ui-remediation-r3.css';
-import { formatLifecycleLabel } from '../utils/publicTaxonomy';
+import { formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { formatPublicBackingModelLabel } from '../utils/backingModel';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
@@ -10,7 +9,6 @@ import { getFeaturedGuides } from '../data/guideCatalog';
 import { eventPublicCopy } from '../data/eventPublicCopy';
 import { getStablecoins, getOrganizations, getRelationships, getEvents } from '../lib/data/registry';
 import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
-import registryUpdates from '../../data/registry-updates.json';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
@@ -24,7 +22,25 @@ const primaryOrganizationName = (stablecoinId: string) => {
   return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
 };
 
-const featuredGuides = getFeaturedGuides(3).map((guide) => ({ guide, label: guide.regionLabel ?? 'Guide' }));
+const featuredGuides = getFeaturedGuides(4).map((guide) => ({
+  guide,
+  label: guide.regionLabel ?? 'Guide'
+}));
+
+const lifecycleOrder = ['active', 'restricted', 'winding_down', 'terminated', 'collapsed', 'migrated', 'rebranded', 'unknown'];
+const lifecycleCounts = stablecoins.reduce<Record<string, number>>((counts, coin) => {
+  const key = String(coin.lifecycle_status || 'unknown');
+  counts[key] = (counts[key] ?? 0) + 1;
+  return counts;
+}, {});
+const registryStatuses = Object.entries(lifecycleCounts)
+  .sort(([left], [right]) => {
+    const leftIndex = lifecycleOrder.indexOf(left);
+    const rightIndex = lifecycleOrder.indexOf(right);
+    return (leftIndex === -1 ? 999 : leftIndex) - (rightIndex === -1 ? 999 : rightIndex) || left.localeCompare(right);
+  })
+  .map(([status, count]) => ({ status, count, label: formatLifecycleLabel(status) }));
+
 const latestMaterialChanges = [...events]
   .filter((event) => Boolean(event.event_date))
   .sort((left, right) => String(right.event_date).localeCompare(String(left.event_date)) || String(right.id).localeCompare(String(left.id)))
@@ -41,27 +57,15 @@ const latestMaterialChanges = [...events]
     };
   });
 
-const latestPublications = [...registryUpdates]
-  .sort((left, right) => String(right.date).localeCompare(String(left.date)) || String(right.id).localeCompare(String(left.id)))
-  .slice(0, 3);
-
 const recentlyUpdated = [...stablecoins]
   .sort((left, right) => String(right.last_verified_at ?? '').localeCompare(String(left.last_verified_at ?? '')) || left.name.localeCompare(right.name))
-  .slice(0, 6);
+  .slice(0, 8);
 
 const registryReviewDate = [
   ...stablecoins.map((coin) => coin.last_verified_at),
+  ...events.map((event) => event.event_date),
   ...featuredGuides.flatMap(({ guide }) => [guide.updatedAt, guide.publishedAt, guide.informationCurrentThrough])
 ].filter((value): value is string => Boolean(value)).sort().at(-1) ?? 'Not recorded';
-
-const directLinks = [
-  { href: '/stablecoins/', label: 'Stablecoin register', meta: `${stablecoins.length} records` },
-  { href: '/events/', label: 'Material events', meta: `${events.length} events` },
-  { href: '/issuers/', label: 'Organizations', meta: `${organizations.length} organizations` },
-  { href: '/compare/', label: 'Compare records', meta: 'Up to 4 records' },
-  { href: '/timeline/', label: 'Change timeline', meta: 'Chronological view' },
-  { href: '/methodology/', label: 'Methodology', meta: 'Definitions and limits' }
-];
 
 const searchRecords = [
   ...stablecoins.map((coin) => ({
@@ -102,81 +106,131 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
-  <div class="home-registry home-registry-r3" data-home-registry="r3">
-    <section class="home-entry" aria-labelledby="home-title">
-      <div class="home-entry__copy">
-        <p class="home-eyebrow">Independent evidence registry · reviewed through <time datetime={registryReviewDate}>{registryReviewDate}</time></p>
-        <h1 id="home-title">Stablecoins, their history, and the evidence behind each state.</h1>
-        <p class="home-entry__deck">Search current lifecycle, connected organizations, material events, reserve and redemption structures, and source-backed changes.</p>
-        <div class="home-entry__actions">
-          <a class="home-primary-action" href="/stablecoins/">Open the register</a>
-          <a class="home-secondary-action" href="/methodology/">Read the methodology</a>
-        </div>
+  <div class="home-ledger">
+    <header class="home-masthead">
+      <div class="home-masthead__edition">
+        <span>Independent stablecoin historical register</span>
+        <span>Registry reviewed through <time datetime={registryReviewDate}>{registryReviewDate}</time></span>
       </div>
+      <div class="home-masthead__title">
+        <h1>Stable or Gone</h1>
+        <p>A source-backed record of stable assets, the organizations connected to them, the events that changed them, and the questions that remain unresolved.</p>
+      </div>
+    </header>
 
-      <section class="home-search" aria-labelledby="home-search-title" data-home-search>
-        <div class="home-search__heading">
-          <p class="home-eyebrow">Search canonical records</p>
-          <h2 id="home-search-title">Find a stablecoin, organization, or event</h2>
-        </div>
-        <form class="home-search__form" action="/stablecoins/" method="get" data-home-search-form>
-          <label class="visually-hidden" for="home-search-input">Search stablecoins, organizations, and events</label>
-          <input id="home-search-input" class="home-search__field" type="search" name="q" placeholder="USDC, Tether, collapse, redemption…" autocomplete="off" aria-controls="home-search-results" aria-expanded="false" data-home-search-input />
-          <button type="submit">Search</button>
-        </form>
-        <div class="home-search__popular"><span>Try</span>{['USDT', 'USDC', 'DAI', 'UST'].map((term) => <button type="button" data-home-search-term={term}>{term}</button>)}</div>
-        <div class="home-search__results" id="home-search-results" role="region" aria-live="polite" hidden data-home-search-results></div>
-      </section>
-    </section>
-
-    <nav class="home-registry-totals" aria-label="Canonical registry totals">
-      <a href="/stablecoins/"><span>Stablecoins</span><strong>{stablecoins.length}</strong><small>canonical records</small></a>
-      <a href="/issuers/"><span>Organizations</span><strong>{organizations.length}</strong><small>connected entities</small></a>
-      <a href="/events/"><span>Events</span><strong>{events.length}</strong><small>material records</small></a>
-      <a href="/methodology/"><span>Sources</span><strong>{evidenceSummary.source_identities}</strong><small>distinct identities</small></a>
+    <nav class="home-register-strip" aria-label="Registry totals and primary entrypoints">
+      <a href="/stablecoins/"><strong>{stablecoins.length}</strong> stable assets</a>
+      <a href="/issuers/"><strong>{organizations.length}</strong> organizations</a>
+      <a href="/events/"><strong>{events.length}</strong> events</a>
+      <a href="/methodology/"><strong>{evidenceSummary.source_identities}</strong> Source identities</a>
     </nav>
 
-    <nav class="home-direct-links" aria-label="Explore the registry">
-      {directLinks.map((item) => <a href={item.href}><strong>{item.label}</strong><span>{item.meta}</span><b aria-hidden="true">→</b></a>)}
-    </nav>
-
-    <section class="home-panel home-material-changes" aria-labelledby="home-events-title">
-      <div class="home-section-heading">
-        <div><p class="home-eyebrow">Latest changes</p><h2 id="home-events-title">Recent material events</h2></div>
-        <a href="/events/">All events</a>
+    <section class="home-search" aria-labelledby="home-search-title" data-home-search>
+      <div class="home-search__heading">
+        <h2 id="home-search-title">Search the register</h2>
+        <p>Search canonical stablecoin, organization, and event records.</p>
       </div>
-      <ol class="home-material-list">
-        {latestMaterialChanges.map(({ event, title: eventTitle, description: eventDescription, subjectName, subjectHref }) => (
-          <li>
-            <div class="home-material-list__meta"><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time>{subjectHref ? <a href={subjectHref}>{subjectName}</a> : <span>{subjectName}</span>}</div>
-            <div><h3><a href={`/event/${event.id}/`}>{eventTitle}</a></h3><p>{eventDescription}</p></div>
-          </li>
-        ))}
-      </ol>
+      <form class="home-search__form" action="/stablecoins/" method="get" data-home-search-form>
+        <label class="visually-hidden" for="home-search-input">Search stablecoins, organizations, and events</label>
+        <input id="home-search-input" class="home-search__field" type="search" name="q" placeholder="Name, symbol, organization, event, or record ID" autocomplete="off" aria-controls="home-search-results" aria-expanded="false" data-home-search-input />
+        <button type="submit">Search</button>
+      </form>
+      <div class="home-search__popular"><span>Direct terms</span>{['USDT', 'USDC', 'DAI', 'UST'].map((term) => <button type="button" data-home-search-term={term}>{term}</button>)}</div>
+      <div class="home-search__results" id="home-search-results" role="region" aria-live="polite" hidden data-home-search-results></div>
     </section>
 
-    <section class="home-panel home-recent" aria-labelledby="home-recent-title">
-      <div class="home-section-heading"><div><p class="home-eyebrow">Recently reviewed</p><h2 id="home-recent-title">Stablecoin records</h2></div><a href="/stablecoins/">All {stablecoins.length}</a></div>
-      <div class="home-recent-grid">
-        {recentlyUpdated.map((coin) => <a href={`/stablecoin/${coin.slug}/`}><div><strong>{coin.name}</strong><span>{coin.symbol ?? 'No symbol recorded'}</span></div><dl><div><dt>Lifecycle</dt><dd>{formatLifecycleLabel(coin.lifecycle_status)}</dd></div><div><dt>Organization</dt><dd>{primaryOrganizationName(coin.id)}</dd></div><div><dt>Reviewed</dt><dd>{coin.last_verified_at ?? 'Not recorded'}</dd></div></dl></a>)}
-      </div>
-    </section>
-
-    <div class="home-r3-secondary">
-      <section class="home-panel home-publications" aria-labelledby="home-publications-title">
-        <div class="home-section-heading"><div><p class="home-eyebrow">Registry maintenance</p><h2 id="home-publications-title">Latest updates</h2></div><a href="/updates/">Full feed</a></div>
-        <ol>
-          {latestPublications.map((update) => <li><time datetime={update.date}>{update.date}</time><strong>{update.title}</strong><p>{update.summary}</p>{update.related_paths?.[0] && <a href={update.related_paths[0]}>Open update</a>}</li>)}
+    <section class="home-lead" aria-label="Latest material changes and current registry state">
+      <div class="home-material-changes">
+        <div class="home-section-heading">
+          <div><p class="home-section-kicker">Register desk</p><h2>Latest material changes</h2></div>
+          <a href="/events/">All events</a>
+        </div>
+        <ol class="home-material-list">
+          {latestMaterialChanges.map(({ event, title: eventTitle, description: eventDescription, subjectName, subjectHref }, index) => (
+            <li class:list={[index === 0 && 'home-material-list__lead']}>
+              <div class="home-material-list__meta">
+                <time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time>
+                {subjectHref ? <a href={subjectHref}>{subjectName}</a> : <span>{subjectName}</span>}
+              </div>
+              <h3><a href={`/event/${event.id}/`}>{eventTitle}</a></h3>
+              <p>{eventDescription}</p>
+              <a class="home-text-link" href={`/event/${event.id}/`}>Read event record</a>
+            </li>
+          ))}
         </ol>
-      </section>
+      </div>
 
-      <section class="home-panel home-guides" aria-labelledby="home-guides-title">
-        <div class="home-section-heading"><div><p class="home-eyebrow">Reviewed explanations</p><h2 id="home-guides-title">Guides</h2></div><a href="/guides/">All guides</a></div>
-        <div class="home-guide-grid">
-          {featuredGuides.map(({ guide, label }) => <article><div><span>{label}</span><time datetime={guide.informationCurrentThrough}>Through {guide.informationCurrentThrough}</time></div><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p></article>)}
+      <aside class="home-registry-state" aria-labelledby="home-registry-state-title">
+        <div class="home-section-heading">
+          <div><p class="home-section-kicker">Current register</p><h2 id="home-registry-state-title">Records by lifecycle</h2></div>
+          <a href="/stablecoins/">Open register</a>
         </div>
-      </section>
-    </div>
+        <dl class="home-status-ledger">
+          {registryStatuses.map(({ status, count, label }) => (
+            <div><dt><span class={lifecycleChipClass(status)}>{label}</span></dt><dd>{count}</dd></div>
+          ))}
+        </dl>
+        <p class="home-registry-state__note">Lifecycle describes the recorded state of an asset. It is not a safety score, recommendation, or market assessment.</p>
+        <nav class="home-registry-links" aria-label="Registry sections">
+          <a href="/stablecoins/">Stablecoin register</a>
+          <a href="/issuers/">Organization records</a>
+          <a href="/events/">Event records</a>
+        </nav>
+      </aside>
+    </section>
+
+    <section class="home-recent" aria-labelledby="home-recent-title">
+      <div class="home-section-heading">
+        <div><p class="home-section-kicker">Record maintenance</p><h2 id="home-recent-title">Recently reviewed stablecoin records</h2></div>
+        <a href="/stablecoins/">All {stablecoins.length} records</a>
+      </div>
+      <div class="home-recent__table-wrap">
+        <table>
+          <caption class="visually-hidden">Recently reviewed stablecoin records with symbol, lifecycle, primary organization, and review date.</caption>
+          <thead><tr><th>Record</th><th>Symbol</th><th>Lifecycle</th><th>Primary organization</th><th>Last reviewed</th></tr></thead>
+          <tbody>
+            {recentlyUpdated.map((coin) => (
+              <tr>
+                <td><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a></td>
+                <td>{coin.symbol ?? 'Not recorded'}</td>
+                <td><span class={lifecycleChipClass(coin.lifecycle_status)}>{formatLifecycleLabel(coin.lifecycle_status)}</span></td>
+                <td>{primaryOrganizationName(coin.id)}</td>
+                <td><time datetime={coin.last_verified_at ?? undefined}>{coin.last_verified_at ?? 'Not recorded'}</time></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="home-reference" aria-label="Guides and registry reference">
+      <div class="home-guides">
+        <div class="home-section-heading">
+          <div><p class="home-section-kicker">Editorial desk</p><h2>Guides and explanations</h2></div>
+          <a href="/guides/">All guides</a>
+        </div>
+        <div class="home-guide-list">
+          {featuredGuides.map(({ guide, label }, index) => (
+            <article class:list={[index === 0 && 'home-guide-list__lead']}>
+              <div class="home-guide-list__meta"><span>{label}</span><time datetime={guide.informationCurrentThrough}>Current through {guide.informationCurrentThrough}</time></div>
+              <h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3>
+              <p>{guide.summary}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <aside class="home-reference-index" aria-labelledby="home-reference-title">
+        <div class="home-section-heading"><div><p class="home-section-kicker">Reference shelf</p><h2 id="home-reference-title">How to read the ledger</h2></div></div>
+        <nav>
+          <a href="/methodology/"><strong>Methodology</strong><span>Scope, evidence, classification, review, and known-unknown policy.</span></a>
+          <a href="/glossary/"><strong>Glossary</strong><span>Terms used across asset, organization, event, reserve, and redemption records.</span></a>
+          <a href="/models/"><strong>Models</strong><span>Backing, stabilization, issuance, and redemption structures.</span></a>
+          <a href="/updates/"><strong>Updates</strong><span>Public change history for the registry and its editorial material.</span></a>
+          <a href="/contact/"><strong>Corrections</strong><span>Submit a source-backed correction or missing primary source.</span></a>
+        </nav>
+      </aside>
+    </section>
   </div>
 
   <script id="home-search-data" type="application/json" set:html={searchDataJson}></script>
