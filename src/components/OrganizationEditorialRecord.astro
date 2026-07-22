@@ -4,29 +4,18 @@ import OrganizationEditorialHeader from './OrganizationEditorialHeader.astro';
 import OrganizationEditorialIdentity from './OrganizationEditorialIdentity.astro';
 import OrganizationEditorialHistory from './OrganizationEditorialHistory.astro';
 import '../styles/organization-detail.css';
-import '../styles/events-organizations-pr417.css';
-import '../styles/ui-remediation-r5-detail.css';
 import { buildOrganizationDetailView } from '../lib/views/organizationDetailView';
 const { organization } = Astro.props;
 const view = buildOrganizationDetailView(organization);
 const title = `${organization.name} — Stablecoin Organization History | Stable or Gone`;
-const description = `${organization.name} organization category, jurisdiction, roles, stablecoin relationships, material events, evidence, and reviewed unknowns.`;
+const description = `${organization.name} organization category, legal-form state, regulatory character, jurisdiction, functional roles, stablecoin relationships, major events, and sources.`;
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name: organization.name, url: `https://sog.badjoke-lab.com/issuer/${organization.slug}/`, description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, sameAs: organization.official_url ? [organization.official_url] : undefined };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/issuer/${organization.slug}/`} jsonLd={jsonLd}>
-  <article class="organization-detail-page organization-detail-page-r5" data-ui-v3-organization-detail data-record-version="r5-organization">
+  <article class="organization-detail-page" data-ui-v3-organization-detail>
     <OrganizationEditorialHeader organization={organization} view={view} />
-    <nav class="organization-detail-nav" aria-label="Organization record sections"><a href="#overview">Summary</a><a href="#relationships">Connected assets</a><a href="#events">Events</a><a href="#evidence">Evidence</a><a href="#unknowns">Known unknowns</a><a href="#corrections">Corrections</a></nav>
+    <nav class="organization-detail-nav" aria-label="Organization record sections"><a href="#overview">Overview</a><a href="#relationships">Relationships</a><a href="#events">Events</a><a href="#evidence">Evidence</a><a href="#unknowns">Known unknowns</a><a href="#corrections">Corrections</a></nav>
     <OrganizationEditorialIdentity organization={organization} view={view} />
     <OrganizationEditorialHistory view={view} />
   </article>
-  <script is:inline>
-    (() => {
-      const compact = window.matchMedia('(max-width: 760px)');
-      const unknowns = document.querySelector('.organization-detail-page-r5 #unknowns');
-      const sync = () => { if (unknowns instanceof HTMLDetailsElement) unknowns.open = !compact.matches; };
-      sync();
-      compact.addEventListener?.('change', sync);
-    })();
-  </script>
 </BaseLayout>

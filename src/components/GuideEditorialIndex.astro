@@ -1,8 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import '../styles/secondary-pages-pr419.css';
-import '../styles/ui-remediation-r6.css';
-import '../styles/ui-remediation-r6-guide-index-tail.css';
 import { guides, guideCategoryDescriptions, guideCategoryLabels, type GuideCategory } from '../data/guideCatalog';
 
 const categoryOrder: GuideCategory[] = ['regulation', 'asset-comparisons', 'core-concepts'];
@@ -22,15 +19,15 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/" jsonLd={jsonLd}>
-  <article class="guide-index-page guide-index-page-r6" data-ui-v3-guides data-secondary-version="r6-guides">
+  <article class="guide-index-page" data-ui-v3-guides>
     <header class="guide-index-masthead">
-      <div class="guide-index-overline"><span>Reviewed guide archive</span><span>Definitions, regulation, and record interpretation</span></div>
+      <div class="guide-index-overline"><span>Editorial archive</span><span>Stablecoin guides and explainers</span></div>
       <div class="guide-index-title"><h1>Guides</h1><p>Readable explanations of regulation, asset structures, reserve and redemption systems, lifecycle events, and the record distinctions used throughout Stable or Gone.</p></div>
       <dl class="guide-index-ledger" aria-label="Guide archive summary">
         <div><dt>Guide records</dt><dd>{guides.length}</dd></div>
         <div><dt>Dated publications</dt><dd>{published.length}</dd></div>
-        <div><dt>Categories</dt><dd>{categories.length}</dd></div>
-        <div><dt>Current through</dt><dd>{currentThrough}</dd></div>
+        <div><dt>Sections</dt><dd>{categories.length}</dd></div>
+        <div><dt>Information current through</dt><dd>{currentThrough}</dd></div>
       </dl>
     </header>
 
@@ -43,28 +40,23 @@ const jsonLd = {
       <section class="guide-index-section" id={`guide-category-${category}`}>
         <div class="guide-index-section-heading"><h2>{guideCategoryLabels[category]}</h2><p>{guideCategoryDescriptions[category]}</p></div>
         <div class="guide-index-table">
-          <table data-r6-guide-register>
-            <caption class="visually-hidden">{guideCategoryLabels[category]} guide records</caption>
-            <thead><tr><th>Guide</th><th>Region or scope</th><th>Current through</th><th>Category</th></tr></thead>
+          <table>
+            <thead><tr><th>Guide</th><th>Region or scope</th><th>Publication</th><th>Current through</th></tr></thead>
             <tbody>
-              {entries.map((guide) => (
-                <tr>
-                  <td data-label="Guide"><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p>{guide.publishedAt && <small>Published {guide.publishedAt}</small>}</td>
-                  <td data-label="Region">{guide.regionLabel ?? 'Global or general scope'}</td>
-                  <td data-label="Current through">{guide.informationCurrentThrough}</td>
-                  <td data-label="Category">{guideCategoryLabels[guide.category]}</td>
-                </tr>
-              ))}
+              {entries.map((guide) => <tr><td><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p></td><td>{guide.regionLabel ?? guideCategoryLabels[guide.category]}</td><td><span class="guide-index-status">{guide.publishedAt ?? 'Publication date not recorded'}</span></td><td>{guide.informationCurrentThrough}</td></tr>)}
             </tbody>
           </table>
+        </div>
+        <div class="guide-index-mobile" aria-label={`${guideCategoryLabels[category]} guides`}>
+          {entries.map((guide) => <article><h3><a href={`/guides/${guide.slug}/`}>{guide.title}</a></h3><p>{guide.summary}</p><p><small>{guide.regionLabel ?? guideCategoryLabels[guide.category]} · {guide.publishedAt ? `Published ${guide.publishedAt}` : 'Publication date not recorded'} · Current through {guide.informationCurrentThrough}</small></p></article>)}
         </div>
       </section>
     ))}
 
     <section class="guide-index-section" id="guide-reference">
-      <div class="guide-index-section-heading"><h2>How to use the archive</h2><p>Guides explain the framework. Registry records, event files, Evidence relations, and known unknowns remain the factual source surfaces.</p></div>
+      <div class="guide-index-section-heading"><h2>How to use the archive</h2><p>Guides explain the framework. Registry records, event files, evidence relations, and known unknowns remain the factual source surfaces.</p></div>
       <nav class="guide-index-reference" aria-label="Guide reference links">
-        <a href="/glossary/"><strong>Glossary</strong><span>Definitions of recurring legal, reserve, redemption, lifecycle, and Evidence terms.</span></a>
+        <a href="/glossary/"><strong>Glossary</strong><span>Definitions of recurring legal, reserve, redemption, lifecycle, and evidence terms.</span></a>
         <a href="/methodology/"><strong>Methodology</strong><span>How records, events, relationships, sources, and uncertainty are reviewed.</span></a>
         <a href="/stablecoins/"><strong>Stablecoin register</strong><span>Open the canonical records behind claims and examples used in the guides.</span></a>
       </nav>
