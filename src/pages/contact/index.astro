@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
+import '../../styles/ui-remediation-r7.css';
 const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeEUxdPktIm46X0HgwuYvk8vpx0N3R0EezOaC2fz64nfE6JjA/viewform?usp=dialog';
 const githubIssueUrl = 'https://github.com/badjoke-lab/stable-or-gone/issues/new/choose';
 const githubIssuesUrl = 'https://github.com/badjoke-lab/stable-or-gone/issues';
@@ -9,27 +9,20 @@ const description = 'Contact Stable or Gone, report incorrect registry informati
 const jsonLd = { '@context': 'https://schema.org', '@type': 'ContactPage', name: title, url: 'https://sog.badjoke-lab.com/contact/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/contact/" jsonLd={jsonLd}>
-  <article class="editorial-utility-page" data-ui-v3-utility="contact-corrections">
-    <EditorialPageHeader kind="utility" eyebrow="Utility / corrections and contact" title="Report a correction, missing record, or broken source" description="Use the Google Form for normal contact and private reports. Use GitHub Issues for public, source-backed corrections that can be discussed openly." facts={[{ label: 'Primary route', value: 'Google Form' }, { label: 'Public route', value: 'GitHub Issues' }, { label: 'Review', value: 'Manual' }]} />
-    <section class="utility-section">
-      <div class="utility-section-heading"><h2>Choose a reporting route</h2><p>Use the private form for normal submissions. Use GitHub only when the report and supporting sources may remain public.</p></div>
-      <nav class="contact-actions" aria-label="Contact routes">
-        <a class="contact-card-primary" href={googleFormUrl} target="_blank" rel="noopener noreferrer"><h2>Submit via Google Form</h2><p>Best for corrections, missing records, broken links, source suggestions, general contact, or reports that do not need public discussion.</p></a>
-        <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer"><h2>Open a GitHub Issue</h2><p>Best for public, source-backed corrections where discussion, review notes, and acceptance history should remain visible.</p></a>
-        <a href={githubIssuesUrl} target="_blank" rel="noopener noreferrer"><h2>View existing reports</h2><p>Check open and closed reports before submitting a duplicate.</p></a>
-      </nav>
-    </section>
-    <section class="utility-section">
-      <div class="utility-section-heading"><h2>What to report</h2><p>Include the affected record, the disputed or missing claim, and a source that supports the requested change.</p></div>
-      <table><tbody><tr><th>Record correction</th><td>Link the affected page, identify the incorrect statement, and provide a source supporting the change.</td></tr><tr><th>Missing stablecoin</th><td>Provide the name, symbol, issuer or protocol, launch information, and at least one reliable source.</td></tr><tr><th>Missing event</th><td>Include the stablecoin, date, event description, outcome, and source links.</td></tr><tr><th>Reserve or redemption information</th><td>Submit issuer pages, reserve reports, redemption terms, regulator notices, archived pages, or other verifiable references.</td></tr><tr><th>Broken link</th><td>Share the affected page and source title. An archived replacement is helpful when available.</td></tr><tr><th>General contact</th><td>Use the form for non-public messages or questions about the archive.</td></tr></tbody></table>
-    </section>
-    <section class="utility-section">
-      <div class="utility-section-heading"><h2>Important limits</h2><p>Stable or Gone is a historical registry and cannot provide issuer, exchange, wallet, legal, tax, or account support.</p></div>
-      <table><tbody><tr><th>No private secrets</th><td>Do not submit private keys, seed phrases, passwords, wallet credentials, exchange account details, bank information, identification documents, or sensitive personal information.</td></tr><tr><th>No account support</th><td>Stable or Gone is not an issuer, exchange, wallet provider, redemption desk, investment adviser, legal adviser, or tax adviser.</td></tr><tr><th>Manual review</th><td>Reports are reviewed manually. A response is not guaranteed, and records may change only after verification.</td></tr><tr><th>Public GitHub issues</th><td>GitHub Issues are public. Use the Google Form when the report should not be discussed publicly.</td></tr></tbody></table>
-    </section>
-    <section class="utility-section" aria-labelledby="methodology-before-reporting">
-      <div class="utility-section-heading"><h2 id="methodology-before-reporting">Before reporting</h2><p>Review the methodology when the issue concerns status labels, event treatment, evidence quality, relationship roles, or unresolved questions.</p></div>
-      <div class="report-actions"><a href="/methodology/">Read methodology</a><a href={googleFormUrl} target="_blank" rel="noopener noreferrer" data-primary="true">Submit via Google Form</a><a href={githubIssueUrl} target="_blank" rel="noopener noreferrer">Open GitHub Issue</a></div>
-    </section>
+  <article class="r7-page" data-r7-page="contact" data-ui-v3-utility="contact-corrections">
+    <header class="r7-masthead">
+      <div class="r7-masthead-copy"><p class="r7-eyebrow">Utility / corrections</p><h1>Report a correction or missing record</h1><p class="r7-lead">Use the private form for normal reports. Include the affected page, the disputed or missing claim, and a source that supports the requested change.</p></div>
+      <dl class="r7-facts"><div><dt>Primary route</dt><dd>Google Form</dd></div><div><dt>Review</dt><dd>Manual</dd></div><div><dt>Public discussion</dt><dd>GitHub Issues</dd></div><div><dt>Private secrets</dt><dd>Never submit</dd></div></dl>
+    </header>
+
+    <section class="r7-contact-primary" aria-labelledby="contact-primary-title"><p class="r7-eyebrow">Primary action</p><h2 id="contact-primary-title">Submit through the correction form</h2><p>Use this route for incorrect wording, missing records or events, broken links, additional Evidence, general contact, or a report that should not begin as a public GitHub discussion.</p><a class="r7-primary-action" href={googleFormUrl} target="_blank" rel="noopener noreferrer">Open correction form</a></section>
+
+    <section class="r7-section"><div class="r7-section-heading"><h2>Secondary routes</h2><p>Use these only when the report belongs in a public or technical workflow.</p></div><nav class="r7-contact-routes" aria-label="Secondary contact routes"><a href={githubIssueUrl} target="_blank" rel="noopener noreferrer"><strong>Public source-backed issue</strong><span>Open a GitHub Issue when the report, sources, and review discussion may remain public.</span></a><a href={githubIssuesUrl} target="_blank" rel="noopener noreferrer"><strong>Existing reports</strong><span>Check open and closed issues before submitting a duplicate.</span></a><a href="https://github.com/badjoke-lab/stable-or-gone/issues/new?labels=bug" target="_blank" rel="noopener noreferrer"><strong>Technical problem</strong><span>Report a broken page, runtime error, accessibility problem, or machine-readable output failure.</span></a></nav></section>
+
+    <section class="r7-section"><div class="r7-section-heading"><h2>What to include</h2><p>A concise, source-backed report is easier to verify and less likely to be misinterpreted.</p></div><dl class="r7-row-list"><div><dt>Record correction</dt><dd>Link the affected Stable or Gone page, quote or identify the incorrect statement, and provide a supporting source.</dd></div><div><dt>Missing stablecoin</dt><dd>Provide the name, symbol, issuer or protocol, launch information, official page, and at least one reliable independent or primary source.</dd></div><div><dt>Missing event</dt><dd>Include the stablecoin, date, event description, outcome, and source links.</dd></div><div><dt>Reserve or redemption</dt><dd>Submit issuer pages, reserve reports, redemption terms, regulator notices, archived pages, or direct protocol references.</dd></div><div><dt>Broken Evidence link</dt><dd>Share the affected page and source title. Include an archived or replacement URL when available.</dd></div></dl></section>
+
+    <details class="r7-disclosure" data-disclosure><summary>Important privacy and support limits</summary><div class="r7-disclosure-body"><dl class="r7-row-list"><div><dt>No private secrets</dt><dd>Do not submit private keys, seed phrases, passwords, wallet credentials, exchange account details, bank information, identification documents, or sensitive personal information.</dd></div><div><dt>No account support</dt><dd>Stable or Gone is not an issuer, exchange, wallet provider, redemption desk, investment adviser, legal adviser, or tax adviser.</dd></div><div><dt>Manual review</dt><dd>A response is not guaranteed. Records change only after the submitted claim and sources are verified.</dd></div><div><dt>Public GitHub issues</dt><dd>GitHub Issues are public. Use the correction form when the report should not be discussed publicly.</dd></div></dl></div></details>
+
+    <div class="r7-secondary-links"><a href="/methodology/">Read methodology</a><a href="/evidence/">Browse Evidence</a><a href="/maintenance/">Maintenance status</a></div>
   </article>
 </BaseLayout>

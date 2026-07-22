@@ -1,0 +1,151 @@
+name: UI remediation R7 Reference Utility
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/pages/about/**'
+      - 'src/pages/contact/**'
+      - 'src/pages/support/**'
+      - 'src/pages/glossary/**'
+      - 'src/pages/models/**'
+      - 'src/pages/updates/**'
+      - 'src/pages/maintenance/**'
+      - 'src/styles/**'
+      - 'public/ui-remediation-r2.css'
+      - 'scripts/audit-ui-remediation-r7.mjs'
+      - 'scripts/validate-ui-typography-authority.mjs'
+      - '.github/workflows/ui-remediation-r7-reference-utility.yml'
+  push:
+    branches: [agent/ui-v3-r7-reference-utility]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: mkdir -p artifacts/ui-remediation-r7/diagnostics
+
+      - id: typography
+        name: Enforce typography and flat registry authority
+        continue-on-error: true
+        run: set -o pipefail; node scripts/validate-ui-typography-authority.mjs 2>&1 | tee artifacts/ui-remediation-r7/diagnostics/typography.log
+      - id: contracts
+        name: Validate reference and utility contracts
+        continue-on-error: true
+        run: set -o pipefail; node scripts/validate-ui-v3-reference-utility.mjs 2>&1 | tee artifacts/ui-remediation-r7/diagnostics/contracts.log
+      - id: canonical
+        name: Validate canonical data
+        continue-on-error: true
+        run: set -o pipefail; npm run validate:data 2>&1 | tee artifacts/ui-remediation-r7/diagnostics/canonical.log
+      - id: astro
+        name: Astro check
+        continue-on-error: true
+        run: set -o pipefail; npm run check 2>&1 | tee artifacts/ui-remediation-r7/diagnostics/astro.log
+      - id: build
+        name: Build static site
+        continue-on-error: true
+        run: set -o pipefail; npm run build 2>&1 | tee artifacts/ui-remediation-r7/diagnostics/build.log
+      - id: chromium
+        name: Install Chromium
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: npx playwright install --with-deps chromium
+      - id: server
+        name: Start static server
+        if: steps.build.outcome == 'success' && steps.chromium.outcome == 'success'
+        continue-on-error: true
+        run: |
+          cd dist
+          python3 -m http.server 4321 > /tmp/r7-server.log 2>&1 &
+          echo $! > /tmp/r7-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4321/about/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/r7-server.log
+          exit 1
+      - id: visual
+        name: Capture and audit 50 representative screens
+        if: steps.server.outcome == 'success'
+        continue-on-error: true
+        env:
+          UI_AUDIT_BASE_URL: http://127.0.0.1:4321
+          UI_AUDIT_OUTPUT: artifacts/ui-remediation-r7
+        run: set -o pipefail; node scripts/audit-ui-remediation-r7.mjs 2>&1 | tee artifacts/ui-remediation-r7/diagnostics/visual.log
+
+      - name: Upload R7 visual evidence and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-remediation-r7-reference-utility-${{ github.run_id }}
+          path: artifacts/ui-remediation-r7
+          if-no-files-found: warn
+      - name: Stop static server
+        if: always()
+        run: |
+          if [ -f /tmp/r7-server.pid ]; then kill "$(cat /tmp/r7-server.pid)" || true; fi
+
+      - name: Publish exact R7 status to PR
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          TYPOGRAPHY: ${{ steps.typography.outcome }}
+          CONTRACTS: ${{ steps.contracts.outcome }}
+          CANONICAL: ${{ steps.canonical.outcome }}
+          ASTRO: ${{ steps.astro.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          VISUAL: ${{ steps.visual.outcome }}
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          if [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER="$(gh pr list --head "$GITHUB_REF_NAME" --json number --jq '.[0].number // empty')"
+          fi
+          if [ -z "$PR_NUMBER" ]; then exit 0; fi
+          BODY="$(gh pr view "$PR_NUMBER" --json body --jq .body)"
+          export BODY PR_NUMBER
+          python3 - <<'PY'
+          import os, re, subprocess, tempfile
+          start='<!-- ui-remediation-r7-run-status:start -->'
+          end='<!-- ui-remediation-r7-run-status:end -->'
+          values={k:os.environ.get(k,'skipped') for k in ['TYPOGRAPHY','CONTRACTS','CANONICAL','ASTRO','BUILD','VISUAL']}
+          overall='pass' if all(v=='success' for v in values.values()) else 'failure'
+          logs=[]
+          for name in ['typography','contracts','astro','build','visual']:
+            path=f'artifacts/ui-remediation-r7/diagnostics/{name}.log'
+            if not os.path.exists(path): continue
+            lines=open(path,encoding='utf-8',errors='replace').read().splitlines()
+            if lines:
+              logs.append(f'### {name}\n```text\n'+ '\n'.join(lines[-24:]) +'\n```')
+          diagnostics='\n\n<details><summary>Failure diagnostics</summary>\n\n'+'\n\n'.join(logs)+'\n\n</details>' if overall=='failure' else ''
+          block=f'''{start}\n## Latest R7 workflow\n\n- Run ID: **{os.environ['GITHUB_RUN_ID']}**\n- Head: `{os.environ['HEAD_SHA']}`\n- Typography authority: **{values['TYPOGRAPHY']}**\n- Reference contracts: **{values['CONTRACTS']}**\n- Canonical: **{values['CANONICAL']}**\n- Astro: **{values['ASTRO']}**\n- Build: **{values['BUILD']}**\n- 50-capture audit: **{values['VISUAL']}**\n- Overall: **{overall}**{diagnostics}\n{end}'''
+          body=os.environ['BODY']
+          pattern=re.compile(re.escape(start)+r'.*?'+re.escape(end),re.S)
+          body=pattern.sub(block,body) if pattern.search(body) else body.rstrip()+"\n\n"+block+"\n"
+          with tempfile.NamedTemporaryFile('w',delete=False) as handle:
+            handle.write(body)
+            name=handle.name
+          subprocess.run(['gh','pr','edit',os.environ['PR_NUMBER'],'--body-file',name],check=True)
+          PY
+
+      - name: Enforce R7 result
+        if: always()
+        run: |
+          test "${{ steps.typography.outcome }}" = success
+          test "${{ steps.contracts.outcome }}" = success
+          test "${{ steps.canonical.outcome }}" = success
+          test "${{ steps.astro.outcome }}" = success
+          test "${{ steps.build.outcome }}" = success
+          test "${{ steps.visual.outcome }}" = success

@@ -1,195 +1,32 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/update-feed.css';
+import '../../styles/ui-remediation-r7.css';
 import updateFeedConfig from '../../../config/update-feed-v1.json';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { updatePublicCopy } from '../../data/updatePublicCopy';
 import { getPublicUpdateFeed } from '../../lib/updateFeedData.mjs';
 
-type UpdateFeedEntry = {
-  update_id: string;
-  publication_date: string;
-  year: string;
-  category: string;
-  title: string;
-  summary: string;
-  related_paths: string[];
-  route_families: string[];
-};
-
+type UpdateFeedEntry = { update_id: string; publication_date: string; year: string; category: string; title: string; summary: string; related_paths: string[]; route_families: string[] };
 const feed = getPublicUpdateFeed();
 const entries = feed.entries as UpdateFeedEntry[];
 const latestUpdateDate = feed.summary.latest_publication_date ?? 'Not recorded';
 const title = 'Updates — Stable or Gone';
 const description = 'Registry publication changes: additions, corrections, source reviews, guide releases, and interface changes across Stable or Gone.';
-const configJson = JSON.stringify(updateFeedConfig).replace(/</g, '\\u003c');
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: title,
-  url: 'https://sog.badjoke-lab.com/updates/',
-  description,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  about: ['registry publication updates', 'source reviews', 'public data changes', 'interface changes']
-};
+const configJson = JSON.stringify({ ...updateFeedConfig, page_size: 10 }).replace(/</g, '\u003c');
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, url: 'https://sog.badjoke-lab.com/updates/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, about: ['registry publication updates', 'source reviews', 'public data changes', 'interface changes'] };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/updates/" jsonLd={jsonLd}>
-  <div class="update-feed-page" data-update-feed-page>
-    <header class="update-feed-masthead">
-      <div>
-        <p class="update-feed-eyebrow">Project / Publication history</p>
-        <h1>Update Feed</h1>
-        <p>Track when Stable or Gone publishes reviewed registry additions, corrections, source work, guides, and interface changes. These are publication dates for changes to the registry, not historical subject dates for stablecoin events.</p>
-      </div>
-      <dl class="update-feed-contract-summary" aria-label="Update Feed summary">
-        <div><dt>Published updates</dt><dd>{feed.item_count}</dd></div>
-        <div><dt>Latest</dt><dd>{latestUpdateDate}</dd></div>
-        <div><dt>Ordering</dt><dd>Newest first</dd></div>
-      </dl>
-    </header>
+  <div class="update-feed-page r7-update-page" data-update-feed-page data-r7-page="updates">
+    <header class="update-feed-masthead"><div><p class="update-feed-eyebrow">Project / publication history</p><h1>Updates</h1><p>Reviewed additions, corrections, source work, guide releases, and interface changes, ordered by publication date. Historical subject dates remain in the Change Timeline.</p></div><dl class="update-feed-contract-summary"><div><dt>Published</dt><dd>{feed.item_count}</dd></div><div><dt>Latest</dt><dd>{latestUpdateDate}</dd></div><div><dt>Order</dt><dd>Newest first</dd></div></dl></header>
 
-    <section class="update-feed-boundary" aria-labelledby="update-feed-boundary-heading">
-      <p class="update-feed-eyebrow">Publication vs history</p>
-      <h2 id="update-feed-boundary-heading">Two timelines, two different questions</h2>
-      <div class="update-feed-boundary-grid">
-        <article>
-          <h3>Update Feed</h3>
-          <p><strong>When did the registry publish a change?</strong> This page records additions, corrections, reviews, guides, and UI releases using publication dates.</p>
-        </article>
-        <article>
-          <h3>Change Timeline</h3>
-          <p><strong>When did the historical subject change?</strong> The Timeline preserves event dates, recovery dates, relationship boundaries, and effective dates.</p>
-          <a href="/timeline/">Open Change Timeline →</a>
-        </article>
-        <article>
-          <h3>No date substitution</h3>
-          <p>A registry publication date does not replace an event date, effective date, review date, or observation date. The two public layers remain separate.</p>
-        </article>
-      </div>
-    </section>
+    <section class="update-feed-controls" aria-labelledby="update-controls-title"><div class="update-feed-section-heading"><div><p class="update-feed-eyebrow">Find updates</p><h2 id="update-controls-title">Search publication history</h2></div><p class="update-feed-machine-link"><a href="/data/update-feed.json">Machine-readable feed</a></p></div><div class="update-feed-search-row"><label class="update-feed-search-field"><span>Search</span><input type="search" data-update-feed-search placeholder="Title, summary, or route" autocomplete="off" /></label><button type="button" class="ui-button" data-update-feed-clear>Clear</button><button type="button" class="ui-button" data-update-feed-copy>Copy view</button><span data-update-feed-copy-status aria-live="polite"></span></div><div class="update-feed-filter-grid"><label class="update-feed-filter-control"><span>Category</span><select data-update-feed-filter-id="category" data-update-feed-query-param="category"><option value="">All categories</option>{feed.filters.category.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}</select></label><label class="update-feed-filter-control"><span>Year</span><select data-update-feed-filter-id="year" data-update-feed-query-param="year"><option value="">All years</option>{feed.filters.year.map((option) => <option value={option.value}>{option.value} ({option.item_count})</option>)}</select></label><label class="update-feed-filter-control"><span>Route family</span><select data-update-feed-filter-id="route_family" data-update-feed-query-param="route_family"><option value="">All route families</option>{feed.filters.route_family.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}</select></label></div><div class="update-feed-active-filters" data-update-feed-active-filters aria-live="polite"></div><div class="update-feed-alert" data-update-feed-alert role="alert" aria-live="assertive"></div></section>
 
-    <section class="update-feed-controls" aria-labelledby="update-feed-controls-heading">
-      <div class="update-feed-section-heading">
-        <div>
-          <p class="update-feed-eyebrow">Filter</p>
-          <h2 id="update-feed-controls-heading">Find publication changes</h2>
-          <p>Search titles, summaries, and related paths, or filter by update category, publication year, and related route family. Feed order remains publication date descending.</p>
-        </div>
-        <p class="update-feed-machine-link"><a href="/data/update-feed.json">Machine-readable feed</a> · publication history only</p>
-      </div>
+    <section class="update-feed-results-section" aria-labelledby="update-results-title"><div class="update-feed-results-heading"><div><p class="update-feed-eyebrow">Chronological log</p><h2 id="update-results-title">Registry publication changes</h2></div><p><strong data-update-feed-result-count>{feed.item_count}</strong> matches · <span data-update-feed-result-range>Page 1</span></p></div><div class="update-feed-empty" data-update-feed-empty hidden><strong>No matching updates</strong><p>Clear one or more filters.</p></div><div class="update-feed-results" data-update-feed-results>{entries.map((entry) => { const publicCopy = updatePublicCopy[entry.update_id]; return <details class="update-feed-item" data-update-feed-item data-update-id={entry.update_id} data-category={entry.category} data-year={entry.year} data-route-families={entry.route_families.join(',')} data-search-text={`${entry.title} ${entry.summary} ${entry.related_paths.join(' ')}`.toLowerCase()}><summary><span class="update-feed-item__date"><span>{entry.year}</span><time datetime={entry.publication_date}>{entry.publication_date}</time></span><span class="update-feed-item__content"><span class="update-feed-item__meta"><span class="update-feed-category">{formatPublicLabel(entry.category)}</span></span><strong>{publicCopy?.title ?? entry.title}</strong></span></summary><div class="update-feed-item__content"><p>{publicCopy?.summary ?? entry.summary}</p><div class="update-feed-paths">{entry.related_paths.map((pathname) => <a href={pathname}>{pathname}</a>)}</div><dl class="r7-row-list"><div><dt>Update ID</dt><dd>{entry.update_id}</dd></div><div><dt>Route families</dt><dd>{entry.route_families.join(', ') || 'None recorded'}</dd></div></dl></div></details>; })}</div><nav class="r7-update-pagination" data-update-feed-pagination aria-label="Update pages"><button type="button" class="ui-button" data-update-feed-page-prev>Previous</button><span data-update-feed-page-status aria-live="polite">Page 1</span><button type="button" class="ui-button" data-update-feed-page-next>Next</button></nav><div class="update-feed-show-more-row" data-update-feed-show-more-row hidden><button type="button" data-update-feed-show-more>Show more</button></div></section>
 
-      <div class="update-feed-search-row">
-        <label class="update-feed-search-field">
-          <span>Search updates</span>
-          <input type="search" data-update-feed-search placeholder="Search publication history" autocomplete="off" />
-        </label>
-        <button type="button" class="ui-button" data-update-feed-clear>Clear filters</button>
-        <button type="button" class="ui-button" data-update-feed-copy>Copy filtered view</button>
-        <span data-update-feed-copy-status aria-live="polite"></span>
-      </div>
+    <details class="r7-disclosure update-feed-boundary" data-disclosure><summary>Publication dates and historical dates are different</summary><div class="r7-disclosure-body"><dl class="r7-row-list"><div><dt>Update Feed</dt><dd>When did the registry publish an addition, correction, review, guide, or interface change?</dd></div><div><dt>Change Timeline</dt><dd>When did the historical stablecoin, organization, relationship, or event change?</dd></div><div><dt>No substitution</dt><dd>A publication date never replaces an event date, effective date, recovery date, review date, or observation date.</dd></div></dl><a href="/timeline/">Open Change Timeline</a></div></details>
 
-      <div class="update-feed-filter-grid">
-        <label class="update-feed-filter-control">
-          <span>Category</span>
-          <select data-update-feed-filter-id="category" data-update-feed-query-param="category">
-            <option value="">All categories</option>
-            {feed.filters.category.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}
-          </select>
-        </label>
-        <label class="update-feed-filter-control">
-          <span>Publication year</span>
-          <select data-update-feed-filter-id="year" data-update-feed-query-param="year">
-            <option value="">All years</option>
-            {feed.filters.year.map((option) => <option value={option.value}>{option.value} ({option.item_count})</option>)}
-          </select>
-        </label>
-        <label class="update-feed-filter-control">
-          <span>Related route family</span>
-          <select data-update-feed-filter-id="route_family" data-update-feed-query-param="route_family">
-            <option value="">All route families</option>
-            {feed.filters.route_family.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}
-          </select>
-        </label>
-      </div>
-
-      <div class="update-feed-active-filters" data-update-feed-active-filters aria-live="polite"></div>
-      <div class="update-feed-alert" data-update-feed-alert role="alert" aria-live="assertive"></div>
-    </section>
-
-    <section class="update-feed-results-section" aria-labelledby="update-feed-results-heading">
-      <div class="update-feed-results-heading">
-        <div>
-          <p class="update-feed-eyebrow">Feed</p>
-          <h2 id="update-feed-results-heading">Registry publication changes</h2>
-        </div>
-        <p><strong data-update-feed-result-count>{feed.item_count}</strong> matching updates · <span data-update-feed-result-range>showing {Math.min(feed.item_count, updateFeedConfig.initial_result_limit)} of {feed.item_count}</span></p>
-      </div>
-
-      <div class="update-feed-empty" data-update-feed-empty hidden>
-        <strong>No matching publication updates</strong>
-        <p>Clear one or more filters. A zero-result state only means the publication feed has no matching registry change.</p>
-      </div>
-
-      <div class="update-feed-results" data-update-feed-results>
-        {entries.map((entry, index) => {
-          const publicCopy = updatePublicCopy[entry.update_id];
-          return (
-            <article
-              class="update-feed-item"
-              data-update-feed-item
-              data-update-id={entry.update_id}
-              data-category={entry.category}
-              data-year={entry.year}
-              data-route-families={entry.route_families.join(',')}
-              data-search-text={`${entry.title} ${entry.summary} ${entry.related_paths.join(' ')}`.toLowerCase()}
-              hidden={index >= updateFeedConfig.initial_result_limit}
-            >
-              <div class="update-feed-item__date">
-                <span>{entry.year}</span>
-                <time datetime={entry.publication_date}>{entry.publication_date}</time>
-              </div>
-              <div class="update-feed-item__content">
-                <div class="update-feed-item__meta">
-                  <span class="update-feed-category">{formatPublicLabel(entry.category)}</span>
-                  <span>Publication change</span>
-                </div>
-                <h3>{publicCopy?.title ?? entry.title}</h3>
-                <p>{publicCopy?.summary ?? entry.summary}</p>
-                <div class="update-feed-paths" aria-label="Related public paths">
-                  {entry.related_paths.map((pathname) => <a href={pathname}>{pathname}</a>)}
-                </div>
-                <details class="update-feed-details">
-                  <summary>View feed metadata</summary>
-                  <dl>
-                    <div><dt>Update ID</dt><dd>{entry.update_id}</dd></div>
-                    <div><dt>Publication date</dt><dd>{entry.publication_date}</dd></div>
-                    <div><dt>Category</dt><dd>{entry.category}</dd></div>
-                    <div><dt>Route families</dt><dd>{entry.route_families.join(', ') || 'None recorded'}</dd></div>
-                  </dl>
-                </details>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-
-      <div class="update-feed-show-more-row" data-update-feed-show-more-row hidden={feed.item_count <= updateFeedConfig.initial_result_limit}>
-        <button type="button" class="ui-button" data-update-feed-show-more>Show more updates</button>
-      </div>
-    </section>
-
-    <section class="update-feed-maintenance">
-      <p class="update-feed-eyebrow">Corrections and maintenance</p>
-      <h2>Public changes remain reviewable</h2>
-      <div class="update-feed-actions">
-        <a href="/contact/"><strong>Submit a correction</strong><span>Report incorrect wording, missing sources, broken links, or missing records.</span></a>
-        <a href="/support/"><strong>Support maintenance</strong><span>Help fund research, source checks, broken-link review, and new records.</span></a>
-        <a href="/data/manifest.json"><strong>Data manifest</strong><span>Inspect the machine-readable public record inventory and safety declaration.</span></a>
-      </div>
-    </section>
+    <section class="update-feed-maintenance"><p class="update-feed-eyebrow">Corrections and maintenance</p><h2>Public changes remain reviewable</h2><div class="r7-secondary-links"><a href="/contact/">Submit correction</a><a href="/maintenance/">Maintenance log</a><a href="/data/manifest.json">Data manifest</a></div></section>
   </div>
-  <script id="update-feed-config" type="application/json" set:html={configJson}></script>
-  <script>
-    import '../../scripts/update-feed-ui';
-  </script>
+  <script id="update-feed-config" type="application/json" set:html={configJson}></script><script>import '../../scripts/update-feed-ui';</script>
 </BaseLayout>
