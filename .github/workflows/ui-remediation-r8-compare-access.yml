@@ -1,0 +1,134 @@
+name: UI remediation R8 Compare Access
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/pages/compare/**'
+      - 'src/pages/access-regulation/**'
+      - 'src/scripts/compare-v1.ts'
+      - 'src/scripts/compare-r8.ts'
+      - 'src/scripts/access-regulation-explorer.ts'
+      - 'src/scripts/access-regulation-r8.ts'
+      - 'src/styles/ui-remediation-r8.css'
+      - 'scripts/validate-ui-remediation-r8.mjs'
+      - 'scripts/audit-ui-remediation-r8.mjs'
+      - '.github/workflows/ui-remediation-r8-compare-access.yml'
+      - 'docs/ui-v3-remediation-authority.md'
+  push:
+    branches: [agent/ui-v3-r8-compare-access]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: mkdir -p artifacts/ui-remediation-r8/diagnostics
+
+      - id: typography
+        continue-on-error: true
+        run: set -o pipefail; node scripts/validate-ui-typography-authority.mjs 2>&1 | tee artifacts/ui-remediation-r8/diagnostics/typography.log
+      - id: r8
+        continue-on-error: true
+        run: set -o pipefail; node scripts/validate-ui-remediation-r8.mjs 2>&1 | tee artifacts/ui-remediation-r8/diagnostics/r8.log
+      - id: canonical
+        continue-on-error: true
+        run: set -o pipefail; npm run validate:data 2>&1 | tee artifacts/ui-remediation-r8/diagnostics/canonical.log
+      - id: astro
+        continue-on-error: true
+        run: set -o pipefail; npm run check 2>&1 | tee artifacts/ui-remediation-r8/diagnostics/astro.log
+      - id: build
+        continue-on-error: true
+        run: set -o pipefail; npm run build 2>&1 | tee artifacts/ui-remediation-r8/diagnostics/build.log
+      - id: chromium
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: npx playwright install --with-deps chromium
+      - id: server
+        if: steps.build.outcome == 'success' && steps.chromium.outcome == 'success'
+        continue-on-error: true
+        run: |
+          cd dist
+          python3 -m http.server 4321 > /tmp/r8-server.log 2>&1 &
+          echo $! > /tmp/r8-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4321/compare/ >/dev/null && curl -fsS http://127.0.0.1:4321/access-regulation/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/r8-server.log
+          exit 1
+      - id: visual
+        if: steps.server.outcome == 'success'
+        continue-on-error: true
+        env:
+          UI_AUDIT_BASE_URL: http://127.0.0.1:4321
+          UI_AUDIT_OUTPUT: artifacts/ui-remediation-r8
+        run: set -o pipefail; node scripts/audit-ui-remediation-r8.mjs 2>&1 | tee artifacts/ui-remediation-r8/diagnostics/visual.log
+
+      - name: Upload R8 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-remediation-r8-compare-access-${{ github.run_id }}
+          path: artifacts/ui-remediation-r8
+          if-no-files-found: warn
+      - if: always()
+        run: |
+          if [ -f /tmp/r8-server.pid ]; then kill "$(cat /tmp/r8-server.pid)" || true; fi
+
+      - name: Publish exact R8 status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          TYPOGRAPHY: ${{ steps.typography.outcome }}
+          R8: ${{ steps.r8.outcome }}
+          CANONICAL: ${{ steps.canonical.outcome }}
+          ASTRO: ${{ steps.astro.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          VISUAL: ${{ steps.visual.outcome }}
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          if [ -z "$PR_NUMBER" ]; then PR_NUMBER="$(gh pr list --head "$GITHUB_REF_NAME" --json number --jq '.[0].number // empty')"; fi
+          if [ -z "$PR_NUMBER" ]; then exit 0; fi
+          BODY="$(gh pr view "$PR_NUMBER" --json body --jq .body)"
+          export BODY PR_NUMBER
+          python3 - <<'PY'
+          import os,re,subprocess,tempfile
+          start='<!-- ui-remediation-r8-run-status:start -->'; end='<!-- ui-remediation-r8-run-status:end -->'
+          names=['TYPOGRAPHY','R8','CANONICAL','ASTRO','BUILD','VISUAL']; values={name:os.environ.get(name,'skipped') for name in names}
+          overall='pass' if all(value=='success' for value in values.values()) else 'failure'
+          logs=[]
+          for name in ['r8','astro','build','visual']:
+            file=f'artifacts/ui-remediation-r8/diagnostics/{name}.log'
+            if os.path.exists(file):
+              lines=open(file,encoding='utf-8',errors='replace').read().splitlines()
+              if lines: logs.append(f'### {name}\n```text\n'+ '\n'.join(lines[-24:]) +'\n```')
+          diagnostic='\n\n<details><summary>Failure diagnostics</summary>\n\n'+'\n\n'.join(logs)+'\n\n</details>' if overall=='failure' else ''
+          block=f'''{start}\n## Latest R8 workflow\n\n- Run ID: **{os.environ['GITHUB_RUN_ID']}**\n- Head: `{os.environ['HEAD_SHA']}`\n- Typography: **{values['TYPOGRAPHY']}**\n- R8 contract: **{values['R8']}**\n- Canonical: **{values['CANONICAL']}**\n- Astro: **{values['ASTRO']}**\n- Build: **{values['BUILD']}**\n- 35-capture state audit: **{values['VISUAL']}**\n- Overall: **{overall}**{diagnostic}\n{end}'''
+          body=os.environ['BODY']; pattern=re.compile(re.escape(start)+r'.*?'+re.escape(end),re.S)
+          body=pattern.sub(block,body) if pattern.search(body) else body.rstrip()+"\n\n"+block+"\n"
+          with tempfile.NamedTemporaryFile('w',delete=False) as handle: handle.write(body); filename=handle.name
+          subprocess.run(['gh','pr','edit',os.environ['PR_NUMBER'],'--body-file',filename],check=True)
+          PY
+
+      - name: Enforce R8 result
+        if: always()
+        run: |
+          test "${{ steps.typography.outcome }}" = success
+          test "${{ steps.r8.outcome }}" = success
+          test "${{ steps.canonical.outcome }}" = success
+          test "${{ steps.astro.outcome }}" = success
+          test "${{ steps.build.outcome }}" = success
+          test "${{ steps.visual.outcome }}" = success
