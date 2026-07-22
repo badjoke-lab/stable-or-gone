@@ -1,9 +1,8 @@
 <script>
-  const initialiseDisclosure = (details: HTMLDetailsElement, index: number) => {
-    if (details.dataset.disclosureRuntimeBound === 'true') return;
+  document.querySelectorAll('details:not([data-disclosure])').forEach((details, index) => {
+    if (!(details instanceof HTMLDetailsElement)) return;
     const trigger = details.querySelector(':scope > summary');
     if (!(trigger instanceof HTMLElement)) return;
-    details.dataset.disclosureRuntimeBound = 'true';
     let controlled = trigger.getAttribute('aria-controls');
     const target = trigger.nextElementSibling;
     if (!controlled && target instanceof HTMLElement) {
@@ -20,54 +19,5 @@
       details.open = false;
       trigger.focus();
     });
-  };
-
-  const buildFooterDisclosures = () => {
-    const groups = [...document.querySelectorAll('.site-footer-group')];
-    groups.forEach((group, index) => {
-      if (!(group instanceof HTMLElement) || group.dataset.footerDisclosureBuilt === 'true') return;
-      const heading = group.querySelector(':scope > h2');
-      if (!(heading instanceof HTMLElement)) return;
-      const details = document.createElement('details');
-      details.className = 'site-footer-disclosure';
-      details.dataset.footerDisclosureBuilt = 'true';
-      details.open = true;
-      const summary = document.createElement('summary');
-      summary.textContent = heading.textContent?.trim() || 'Footer links';
-      const panel = document.createElement('div');
-      panel.className = 'site-footer-disclosure-panel';
-      group.querySelectorAll(':scope > a').forEach((link) => panel.append(link));
-      details.append(summary, panel);
-      group.replaceWith(details);
-      initialiseDisclosure(details, index + 1000);
-    });
-
-    const media = window.matchMedia('(max-width: 640px)');
-    const syncFooterState = () => {
-      document.querySelectorAll('.site-footer-disclosure').forEach((details, index) => {
-        if (!(details instanceof HTMLDetailsElement)) return;
-        details.open = media.matches ? index === 0 : true;
-      });
-    };
-    syncFooterState();
-    media.addEventListener?.('change', syncFooterState);
-  };
-
-  const shortenSearchPlaceholders = () => {
-    const replacements = [
-      ['[data-index-search]', 'Name, symbol, organization'],
-      ['[data-event-search]', 'Title, subject, publisher'],
-      ['[data-organization-search]', 'Name, asset, role']
-    ] as const;
-    replacements.forEach(([selector, placeholder]) => {
-      const input = document.querySelector(selector);
-      if (input instanceof HTMLInputElement) input.placeholder = placeholder;
-    });
-  };
-
-  document.querySelectorAll('details:not([data-disclosure])').forEach((details, index) => {
-    if (details instanceof HTMLDetailsElement) initialiseDisclosure(details, index);
   });
-  buildFooterDisclosures();
-  shortenSearchPlaceholders();
 </script>
