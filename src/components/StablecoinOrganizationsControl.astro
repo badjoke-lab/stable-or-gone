@@ -40,60 +40,59 @@ const blacklistUnknown = deployments.length - blacklistYes - blacklistNo;
 const controlEventIds = new Set(deployments.flatMap((deployment: any) => deployment.control_event_ids ?? []));
 const capabilitySummary = (yes: number, no: number, unknown: number) => {
   if (deployments.length === 0) return 'No deployment records';
-  return `${yes} yes · ${no} no · ${unknown} not recorded`;
+  return `${yes} recorded yes · ${no} recorded no · ${unknown} not recorded`;
 };
 ---
-<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-organizations-control" id="organizations-control" data-r4-section open>
-  <summary class="stablecoin-r4-section-summary"><span><small>People and institutions</small><strong>Organizations and control</strong></span><b>{relationships.length}</b></summary>
-  <div class="stablecoin-r4-section-body">
-    <p class="stablecoin-r4-section-intro">Primary display is a navigation choice only. Other recorded organizations and historical relationships remain visible.</p>
+<section class="panel stablecoin-organizations-control" id="organizations-control">
+  <div class="bar">Organizations and control</div>
+  <p class="stablecoin-control-note">Primary display is a navigation and summary choice only. It does not replace other organizations or imply sole legal responsibility, operational control, reserve custody, or historical continuity.</p>
 
-    <dl class="stablecoin-control-summary stablecoin-control-summary-r4">
-      <div><dt>Governance</dt><dd><ValueStateText value={coin.governance_model} displayValue={formatPublicLabel(coin.governance_model)} /></dd></div>
-      <div><dt>Primary organization</dt><dd>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Not recorded'}</dd></div>
-      <div><dt>Primary role</dt><dd>{primaryRelationship ? getFunctionalRoleLabel(primaryRelationship.role) : 'Not recorded'}</dd></div>
-      <div><dt>Current</dt><dd>{currentCount}</dd></div>
-      <div><dt>Ended</dt><dd>{endedCount}</dd></div>
-      <div><dt>Unknown state</dt><dd>{unknownCount}</dd></div>
-    </dl>
+  <dl class="stablecoin-control-summary">
+    <div><dt>Governance</dt><dd><ValueStateText value={coin.governance_model} displayValue={formatPublicLabel(coin.governance_model)} /></dd></div>
+    <div><dt>Primary display organization</dt><dd>{primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Not recorded'}</dd></div>
+    <div><dt>Primary display role</dt><dd>{primaryRelationship ? getFunctionalRoleLabel(primaryRelationship.role) : 'Not recorded'}</dd></div>
+    <div><dt>Display selection mode</dt><dd>{formatPublicLabel(primaryResolution.selection_mode)}</dd></div>
+    <div><dt>Current relationships</dt><dd>{currentCount}</dd></div>
+    <div><dt>Ended relationships</dt><dd>{endedCount}</dd></div>
+    <div><dt>Unknown relationship state</dt><dd>{unknownCount}</dd></div>
+    <div><dt>Freeze capability</dt><dd>{capabilitySummary(freezeYes, freezeNo, freezeUnknown)}</dd></div>
+    <div><dt>Blacklist capability</dt><dd>{capabilitySummary(blacklistYes, blacklistNo, blacklistUnknown)}</dd></div>
+    <div><dt>Deployment control-event references</dt><dd>{controlEventIds.size}</dd></div>
+    <div><dt>Observed issuer-control events</dt><dd>{issuerControlEvents.length}</dd></div>
+    <div><dt>Relationship coverage</dt><dd>{relationships.length} recorded relationship{relationships.length === 1 ? '' : 's'}</dd></div>
+  </dl>
 
-    <div class="stablecoin-organizations-table stablecoin-organizations-table-r4">
-      <table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve">
-        <caption>Current, ended, and unknown-state organization relationships</caption>
-        <thead><tr><th>Organization</th><th>Role</th><th>Jurisdiction</th><th>Period</th><th>State</th></tr></thead>
-        <tbody>
-          {relationshipRows.length === 0 ? <tr><td colspan="5">No organization relationships have been added yet.</td></tr> : relationshipRows.map((item: any) => <tr>
-            <td>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}<small>{item.isPrimary ? 'Primary display' : item.taxonomy?.public_category_label ?? 'Additional relationship'}</small></td>
-            <td>{getFunctionalRoleLabel(item.relationship.role)}</td>
-            <td>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</td>
-            <td><ValueStateText value={item.relationship.start_date} /> – <ValueStateText value={item.relationship.end_date} /></td>
-            <td>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</td>
-          </tr>)}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="stablecoin-organization-cards stablecoin-organization-cards-r4" data-mobile-representation-for="stablecoin-organizations">
-      {relationshipRows.map((item: any) => <article>
-        <header><div><span class="record-kicker">{item.isPrimary ? 'Primary display' : item.taxonomy?.public_category_label ?? 'Organization'}</span><h3>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</h3></div><span>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</span></header>
-        <dl>
-          <div><dt>Role</dt><dd>{getFunctionalRoleLabel(item.relationship.role)}</dd></div>
-          <div><dt>Jurisdiction</dt><dd>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</dd></div>
-          <div><dt>From</dt><dd>{item.relationship.start_date ?? 'Not recorded'}</dd></div>
-          <div><dt>Until</dt><dd>{item.relationship.end_date ?? 'Not recorded'}</dd></div>
-        </dl>
-      </article>)}
-    </div>
-
-    <details class="stablecoin-r4-technical">
-      <summary>Control capability and selection details</summary>
-      <dl>
-        <div><dt>Display selection mode</dt><dd>{formatPublicLabel(primaryResolution.selection_mode)}</dd></div>
-        <div><dt>Freeze capability</dt><dd>{capabilitySummary(freezeYes, freezeNo, freezeUnknown)}</dd></div>
-        <div><dt>Blacklist capability</dt><dd>{capabilitySummary(blacklistYes, blacklistNo, blacklistUnknown)}</dd></div>
-        <div><dt>Deployment control-event references</dt><dd>{controlEventIds.size}</dd></div>
-        <div><dt>Observed issuer-control events</dt><dd>{issuerControlEvents.length}</dd></div>
-      </dl>
-    </details>
+  <div class="stablecoin-organizations-table">
+    <table data-table-kind="stablecoin-organizations" data-mobile-table="scroll-preserve">
+      <caption>All current, ended, and unknown-state organization relationships</caption>
+      <thead><tr><th>Organization</th><th>Organization category</th><th>Regulatory character</th><th>Jurisdiction</th><th>Role</th><th>Display priority</th><th>From</th><th>Until</th><th>Relationship status</th></tr></thead>
+      <tbody>
+        {relationshipRows.length === 0 ? <tr><td colspan="9">No organization relationships have been added yet.</td></tr> : relationshipRows.map((item: any) => <tr>
+          <td>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</td>
+          <td>{item.taxonomy?.public_category_label ?? 'Not recorded'}</td>
+          <td>{item.taxonomy?.regulatory_character_label ?? 'Not recorded'}</td>
+          <td>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</td>
+          <td>{getFunctionalRoleLabel(item.relationship.role)}</td>
+          <td>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</td>
+          <td><ValueStateText value={item.relationship.start_date} /></td>
+          <td><ValueStateText value={item.relationship.end_date} /></td>
+          <td>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</td>
+        </tr>)}
+      </tbody>
+    </table>
   </div>
-</details>
+
+  <div class="stablecoin-organization-cards" data-mobile-representation-for="stablecoin-organizations">
+    {relationshipRows.map((item: any) => <article>
+      <header><div><span class="record-kicker">{item.taxonomy?.public_category_label ?? 'Organization'}</span><h3>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</h3></div><span>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</span></header>
+      <dl>
+        <div><dt>Functional role</dt><dd>{getFunctionalRoleLabel(item.relationship.role)}</dd></div>
+        <div><dt>Relationship status</dt><dd>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</dd></div>
+        <div><dt>Regulatory character</dt><dd>{item.taxonomy?.regulatory_character_label ?? 'Not recorded'}</dd></div>
+        <div><dt>Jurisdiction</dt><dd>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</dd></div>
+        <div><dt>From</dt><dd>{item.relationship.start_date ?? 'Not recorded'}</dd></div>
+        <div><dt>Until</dt><dd>{item.relationship.end_date ?? 'Not recorded'}</dd></div>
+      </dl>
+    </article>)}
+  </div>
+</section>

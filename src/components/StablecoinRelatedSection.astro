@@ -2,18 +2,15 @@
 import RelatedGuides from './RelatedGuides.astro';
 const { relatedGuides, primaryOrganization, primaryOrganizationTaxonomy, eventCount } = Astro.props;
 ---
-<details class="stablecoin-dossier-section stablecoin-r4-disclosure stablecoin-more" id="more" data-r4-section open>
-  <summary class="stablecoin-r4-section-summary"><span><small>Next steps</small><strong>Related records and corrections</strong></span><b>{relatedGuides.length}</b></summary>
-  <div class="stablecoin-r4-section-body">
-    <p class="stablecoin-r4-section-intro">Open connected records, methodology, machine-readable data, or report a correction.</p>
-    <RelatedGuides guides={relatedGuides} />
-    <ul class="stablecoin-further-reading" aria-label="Corrections and further reading">
-      <li><a href="/stablecoins/"><strong>All stablecoins</strong><span>Compare this record with the rest of the archive.</span></a></li>
-      {primaryOrganization && <li><a href={`/issuer/${primaryOrganization.slug}/`}><strong>{primaryOrganization.name}</strong><span>{primaryOrganizationTaxonomy?.jurisdiction_label ?? 'Open the connected organization record.'}</span></a></li>}
-      <li><a href="/events/"><strong>Event registry</strong><span>{eventCount} connected event{eventCount === 1 ? '' : 's'} recorded.</span></a></li>
-      <li><a href="/methodology/"><strong>Methodology</strong><span>Read classification, evidence, and value-state rules.</span></a></li>
-      <li><a href="/contact/"><strong>Corrections</strong><span>Report a source, relationship, or record problem.</span></a></li>
-      <li><a href="/data/manifest.json"><strong>Data manifest</strong><span>Inspect the machine-readable public layer.</span></a></li>
-    </ul>
-  </div>
-</details>
+<section class="stablecoin-dossier-section stablecoin-more" id="more">
+  <div class="stablecoin-section-heading"><p>Related records and corrections</p><h2>Corrections and further reading</h2><span>Open connected records, methodology, machine-readable data, or report a correction.</span></div>
+  <RelatedGuides guides={relatedGuides} />
+  <ul class="stablecoin-further-reading" aria-label="Corrections and further reading">
+    <li><a href="/stablecoins/"><strong>All stablecoins</strong><span>Compare this record with the rest of the archive.</span></a></li>
+    {primaryOrganization && <li><a href={`/issuer/${primaryOrganization.slug}/`}><strong>{primaryOrganization.name}</strong><span>{primaryOrganizationTaxonomy?.jurisdiction_label ?? 'Open the connected organization record.'}</span></a></li>}
+    <li><a href="/events/"><strong>Event registry</strong><span>{eventCount} connected event{eventCount === 1 ? '' : 's'} recorded.</span></a></li>
+    <li><a href="/methodology/"><strong>Methodology</strong><span>Read classification, evidence, and value-state rules.</span></a></li>
+    <li><a href="/contact/"><strong>Corrections</strong><span>Report a source, relationship, or record problem.</span></a></li>
+    <li><a href="/data/manifest.json"><strong>Data manifest</strong><span>Inspect the machine-readable public layer.</span></a></li>
+  </ul>
+</section>
