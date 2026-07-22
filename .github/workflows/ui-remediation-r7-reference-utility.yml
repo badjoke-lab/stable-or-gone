@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: mkdir -p artifacts/ui-remediation-r7/diagnostics
@@ -77,7 +77,7 @@ jobs:
           cat /tmp/r7-server.log
           exit 1
       - id: visual
-        name: Capture and audit 35 R7 screens
+        name: Capture and audit 50 representative screens
         if: steps.server.outcome == 'success'
         continue-on-error: true
         env:
@@ -130,7 +130,7 @@ jobs:
             if lines:
               logs.append(f'### {name}\n```text\n'+ '\n'.join(lines[-24:]) +'\n```')
           diagnostics='\n\n<details><summary>Failure diagnostics</summary>\n\n'+'\n\n'.join(logs)+'\n\n</details>' if overall=='failure' else ''
-          block=f'''{start}\n## Latest R7 workflow\n\n- Run ID: **{os.environ['GITHUB_RUN_ID']}**\n- Head: `{os.environ['HEAD_SHA']}`\n- Typography authority: **{values['TYPOGRAPHY']}**\n- Reference contracts: **{values['CONTRACTS']}**\n- Canonical: **{values['CANONICAL']}**\n- Astro: **{values['ASTRO']}**\n- Build: **{values['BUILD']}**\n- 35-capture audit: **{values['VISUAL']}**\n- Overall: **{overall}**{diagnostics}\n{end}'''
+          block=f'''{start}\n## Latest R7 workflow\n\n- Run ID: **{os.environ['GITHUB_RUN_ID']}**\n- Head: `{os.environ['HEAD_SHA']}`\n- Typography authority: **{values['TYPOGRAPHY']}**\n- Reference contracts: **{values['CONTRACTS']}**\n- Canonical: **{values['CANONICAL']}**\n- Astro: **{values['ASTRO']}**\n- Build: **{values['BUILD']}**\n- 50-capture audit: **{values['VISUAL']}**\n- Overall: **{overall}**{diagnostics}\n{end}'''
           body=os.environ['BODY']
           pattern=re.compile(re.escape(start)+r'.*?'+re.escape(end),re.S)
           body=pattern.sub(block,body) if pattern.search(body) else body.rstrip()+"\n\n"+block+"\n"
