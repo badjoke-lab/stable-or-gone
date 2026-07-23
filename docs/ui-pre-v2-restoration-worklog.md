@@ -20,8 +20,8 @@ Reference deployment: `https://5c91a918.stable-or-gone.pages.dev/`
 
 ## Required template families
 
-- [ ] Global header/navigation/search
-- [ ] Global footer
+- [~] Global header/navigation/search — restored baseline committed; screenshot verification pending
+- [~] Global footer — restored baseline committed; screenshot verification pending
 - [ ] Home
 - [ ] Stablecoin register
 - [ ] Stablecoin dossier/detail
@@ -62,15 +62,15 @@ Reference deployment: `https://5c91a918.stable-or-gone.pages.dev/`
 ## Restoration sequence
 
 ### Phase A — inventory and removal
-- [ ] Find all remaining `v3`, `v4`, `remediation`, `editorial`, `dashboard`, and card-layout imports/classes.
-- [ ] Remove obsolete visual-only CSS and runtime transforms.
+- [~] Find all remaining `v3`, `v4`, `remediation`, `editorial`, `dashboard`, and card-layout imports/classes.
+- [~] Remove obsolete visual-only CSS and runtime transforms.
 - [ ] Keep functional scripts unless replaced by an equivalent implementation.
 
 ### Phase B — global shell
-- [ ] Restore reference header structure.
-- [ ] Restore reference footer structure.
-- [ ] Restore one global typography/spacing/color contract.
-- [ ] Fix desktop and mobile navigation.
+- [~] Restore reference header structure.
+- [~] Restore reference footer structure.
+- [~] Restore one global typography/spacing/color contract.
+- [~] Fix desktop and mobile navigation.
 
 ### Phase C — registry templates
 - [ ] Home
@@ -105,3 +105,4 @@ Reference deployment: `https://5c91a918.stable-or-gone.pages.dev/`
 ## Work log
 
 - 2026-07-23: Temporary authority created after exhaustive screenshot audit showed widespread pre-v2 restoration failures.
+- 2026-07-23: Restored a terminal shell baseline and compact mobile record contract. Reconnected them globally through `BrandLockup.astro`. No completion claim; screenshot verification pending.
