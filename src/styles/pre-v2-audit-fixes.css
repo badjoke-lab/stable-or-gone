@@ -1,0 +1,274 @@
+/* Temporary audit fixes governed by docs/ui-pre-v2-restoration-worklog.md. */
+
+/* Remove remaining SaaS framing from register and utility templates. */
+.stablecoin-register-header,
+.stablecoin-index-registry,
+.event-index-registry,
+.organization-index-registry,
+.editorial-page-masthead,
+.guide-index-masthead,
+.stats-page section,
+.compare-page section {
+  margin: 0 !important;
+  padding: 1rem 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--sog-rule) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.stablecoin-register-header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 1rem !important;
+  align-items: end !important;
+}
+
+.stablecoin-register-count {
+  min-width: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.stablecoin-register-count strong,
+.stablecoin-register-count span {
+  display: inline !important;
+  margin-right: .25rem !important;
+}
+
+.stablecoin-index-section-heading,
+.event-index-section-heading,
+.organization-index-section-heading {
+  margin: 0 !important;
+  padding: .9rem 0 !important;
+  border-bottom: 1px solid var(--sog-rule) !important;
+}
+
+.stablecoin-index-toolbar,
+.event-index-toolbar,
+.organization-index-toolbar {
+  padding: .75rem 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, .35fr) auto !important;
+  gap: 0 !important;
+  border-bottom: 1px solid var(--sog-rule) !important;
+  background: transparent !important;
+}
+
+.stablecoin-index-toolbar label,
+.event-index-toolbar label,
+.organization-index-toolbar label {
+  gap: .3rem !important;
+  padding-right: .75rem !important;
+}
+
+.stablecoin-index-toolbar input,
+.stablecoin-index-toolbar select,
+.event-index-toolbar input,
+.event-index-toolbar select,
+.organization-index-toolbar input,
+.organization-index-toolbar select,
+.stablecoin-index-toolbar button,
+.event-index-toolbar button,
+.organization-index-toolbar button {
+  border: 1px solid var(--sog-rule) !important;
+  border-radius: 0 !important;
+  background: var(--sog-paper-subtle) !important;
+}
+
+.stablecoin-index-filter-grid,
+.event-index-filter-grid,
+.organization-index-filter-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  border-bottom: 1px solid var(--sog-rule) !important;
+}
+
+.stablecoin-index-filter,
+.event-index-filter,
+.organization-index-filter {
+  margin: 0 !important;
+  border: 0 !important;
+  border-right: 1px solid var(--sog-rule) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.stablecoin-index-filter:last-child,
+.event-index-filter:last-child,
+.organization-index-filter:last-child { border-right: 0 !important; }
+
+.stablecoin-index-filter summary,
+.event-index-filter summary,
+.organization-index-filter summary {
+  min-height: 42px !important;
+  padding: .55rem .6rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.stablecoin-index-filter-options,
+.event-index-filter-options,
+.organization-index-filter-options {
+  border: 1px solid var(--sog-rule) !important;
+  border-radius: 0 !important;
+  background: var(--sog-paper-subtle) !important;
+  box-shadow: none !important;
+}
+
+.stablecoin-index-summary,
+.event-index-summary,
+.organization-index-summary {
+  padding: .65rem 0 !important;
+  border-bottom: 1px solid var(--sog-rule) !important;
+  background: transparent !important;
+}
+
+/* Desktop uses dense tables only. */
+@media (min-width: 720px) {
+  .stablecoin-index-cards,
+  .event-index-cards,
+  .organization-index-cards { display: none !important; }
+
+  .stablecoin-index-table,
+  .event-index-table,
+  .organization-index-table { display: block !important; }
+}
+
+/* Mobile uses compact ruled records, never SaaS cards. */
+@media (max-width: 719px) {
+  body { font-size: 15px !important; }
+
+  .site-main { width: calc(100% - 1.25rem) !important; }
+
+  .stablecoin-register-header {
+    grid-template-columns: 1fr !important;
+    padding: .8rem 0 !important;
+  }
+
+  .stablecoin-register-header h1 { font-size: 1.8rem !important; }
+  .stablecoin-register-header > div > p:last-child { font-size: .86rem !important; line-height: 1.55 !important; }
+
+  .stablecoin-index-toolbar,
+  .event-index-toolbar,
+  .organization-index-toolbar {
+    grid-template-columns: 1fr !important;
+    gap: .55rem !important;
+  }
+
+  .stablecoin-index-toolbar label,
+  .event-index-toolbar label,
+  .organization-index-toolbar label { padding-right: 0 !important; }
+
+  .stablecoin-index-filter-grid,
+  .event-index-filter-grid,
+  .organization-index-filter-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .stablecoin-index-filter:nth-child(even),
+  .event-index-filter:nth-child(even),
+  .organization-index-filter:nth-child(even) { border-right: 0 !important; }
+
+  .stablecoin-index-table,
+  .event-index-table,
+  .organization-index-table { display: none !important; }
+
+  .stablecoin-index-cards,
+  .event-index-cards,
+  .organization-index-cards {
+    display: block !important;
+    border-top: 1px solid var(--sog-rule) !important;
+  }
+
+  .stablecoin-index-card,
+  .event-index-card,
+  .organization-index-card {
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: .8rem 0 !important;
+    display: block !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--sog-rule) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .stablecoin-index-card-heading,
+  .event-index-card-heading,
+  .organization-index-card-heading {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: .6rem !important;
+    align-items: start !important;
+  }
+
+  .stablecoin-index-card h2,
+  .event-index-card h2,
+  .organization-index-card h2 {
+    margin: 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .stablecoin-index-card-grid,
+  .event-index-card dl,
+  .organization-index-card dl {
+    margin: .55rem 0 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: .45rem .75rem !important;
+  }
+
+  .stablecoin-index-card dt,
+  .event-index-card dt,
+  .organization-index-card dt {
+    margin: 0 0 .1rem !important;
+    font-size: .62rem !important;
+    color: var(--sog-ink-quiet) !important;
+    text-transform: uppercase !important;
+  }
+
+  .stablecoin-index-card dd,
+  .event-index-card dd,
+  .organization-index-card dd {
+    margin: 0 !important;
+    font-size: .75rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .comparison-choice-card {
+    min-height: 36px !important;
+    margin-top: .55rem !important;
+    padding: .35rem 0 !important;
+    border: 0 !important;
+    border-top: 1px solid var(--sog-rule) !important;
+    background: transparent !important;
+  }
+
+  .home-masthead h1 { font-size: 2rem !important; }
+  .home-material-list p,
+  .home-guide-list p,
+  .home-registry-state__note,
+  .home-reference-index nav span { font-size: .82rem !important; color: #c2d5dc !important; }
+
+  .site-footer-group a { font-size: .78rem !important; }
+}
+
+@media (max-width: 440px) {
+  .stablecoin-index-filter-grid,
+  .event-index-filter-grid,
+  .organization-index-filter-grid { grid-template-columns: 1fr !important; }
+
+  .stablecoin-index-filter,
+  .event-index-filter,
+  .organization-index-filter { border-right: 0 !important; }
+}
