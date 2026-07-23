@@ -25,6 +25,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   capture-all-public-pages:
@@ -74,12 +75,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sog-all-public-page-screenshots-${{ github.run_id }}
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
           path: |
             artifacts/screenshots/**
             artifacts/screenshots-desktop.zip
             artifacts/screenshots-mobile.zip
+            /tmp/sog-screenshot-server.log
 
       - name: Write capture summary
         if: always()
@@ -92,5 +94,52 @@ jobs:
               CAPTURED=$(node -e "const x=require('./$MANIFEST'); console.log(x.captured_count)")
               FAILED=$(node -e "const x=require('./$MANIFEST'); console.log(x.failed_count)")
               echo "- $DEVICE: $DISCOVERED discovered / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "- $DEVICE: manifest missing" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+
+      - name: Report run for manual artifact inspection
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const read = (device) => {
+              const file = `artifacts/screenshots/manifest.${device}.json`;
+              if (!fs.existsSync(file)) return { device, manifest: 'missing' };
+              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
+              return {
+                device,
+                discovered: x.discovered_route_count,
+                selected: x.selected_route_count,
+                captured: x.captured_count,
+                failed: x.failed_count
+              };
+            };
+            const desktop = read('desktop');
+            const mobile = read('mobile');
+            const marker = '<!-- sog-exhaustive-screenshot-latest -->';
+            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 281,
+              per_page: 100
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: 281,
+                body
+              });
+            }
