@@ -70,18 +70,36 @@ jobs:
       - name: Capture every mobile route
         run: node scripts/capture-site-screenshots.mjs --device mobile --mode exhaustive --base-url "$CAPTURE_BASE_URL"
 
-      - name: Upload complete screenshot artifacts
+      - name: Upload manifests and logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-all-public-page-screenshots-${{ github.run_id }}
+          name: sog-screenshot-manifests-${{ github.run_id }}
           if-no-files-found: warn
           retention-days: 14
           path: |
-            artifacts/screenshots/**
-            artifacts/screenshots-desktop.zip
-            artifacts/screenshots-mobile.zip
+            artifacts/screenshots/manifest.desktop.json
+            artifacts/screenshots/manifest.mobile.json
+            artifacts/screenshots/routes.json
             /tmp/sog-screenshot-server.log
+
+      - name: Upload desktop screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-desktop-screenshots-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/screenshots-desktop.zip
+
+      - name: Upload mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-mobile-screenshots-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/screenshots-mobile.zip
 
       - name: Write capture summary
         if: always()
@@ -123,5 +141,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `Exhaustive UI audit run ${context.runId}`,
-              body: `- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``
+              body: `- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifacts: \`sog-screenshot-manifests-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``
             });
