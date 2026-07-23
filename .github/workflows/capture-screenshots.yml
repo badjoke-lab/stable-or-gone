@@ -99,8 +99,8 @@ jobs:
             fi
           done
 
-      - name: Report run for manual artifact inspection
-        if: always() && github.event_name != 'pull_request'
+      - name: Publish audit locator issue
+        if: always()
         uses: actions/github-script@v7
         with:
           script: |
@@ -119,27 +119,9 @@ jobs:
             };
             const desktop = read('desktop');
             const mobile = read('mobile');
-            const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``;
-            const comments = await github.paginate(github.rest.issues.listComments, {
+            await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 281,
-              per_page: 100
+              title: `Exhaustive UI audit run ${context.runId}`,
+              body: `- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``
             });
-            const existing = comments.find((comment) => comment.body?.includes(marker));
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: 281,
-                body
-              });
-            }
