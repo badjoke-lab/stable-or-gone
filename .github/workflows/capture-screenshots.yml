@@ -36,110 +36,74 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
       - name: Install dependencies
         run: npm clean-install --no-audit --no-fund
-
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-
       - name: Build site
         run: npm run build
-
       - name: Start local site
         run: |
           python3 -m http.server 4173 --directory dist > /tmp/sog-screenshot-server.log 2>&1 &
           echo $! > /tmp/sog-screenshot-server.pid
           for attempt in $(seq 1 30); do
-            if curl -fsS "$CAPTURE_BASE_URL/" > /dev/null; then
-              exit 0
-            fi
+            if curl -fsS "$CAPTURE_BASE_URL/" > /dev/null; then exit 0; fi
             sleep 1
           done
           cat /tmp/sog-screenshot-server.log
           exit 1
-
-      - name: Capture every desktop route
-        run: node scripts/capture-site-screenshots.mjs --device desktop --mode exhaustive --base-url "$CAPTURE_BASE_URL"
-
-      - name: Capture every mobile route
-        run: node scripts/capture-site-screenshots.mjs --device mobile --mode exhaustive --base-url "$CAPTURE_BASE_URL"
-
-      - name: Upload complete screenshot artifacts
+      - name: Capture representative desktop routes
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
+      - name: Preserve desktop manifest
+        run: cp artifacts/screenshots/manifest.desktop.json artifacts/manifest.desktop.json
+      - name: Capture representative mobile routes
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
+      - name: Preserve mobile manifest
+        run: cp artifacts/screenshots/manifest.mobile.json artifacts/manifest.mobile.json
+      - name: Upload desktop audit images
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-all-public-page-screenshots-${{ github.run_id }}
+          name: sog-core-desktop-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/screenshots/desktop/**
+      - name: Upload mobile audit images
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-core-mobile-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/screenshots/mobile/**
+      - name: Upload manifests and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-core-manifests-${{ github.run_id }}
           if-no-files-found: warn
           retention-days: 14
           path: |
-            artifacts/screenshots/**
-            artifacts/screenshots-desktop.zip
-            artifacts/screenshots-mobile.zip
+            artifacts/manifest.desktop.json
+            artifacts/manifest.mobile.json
+            artifacts/screenshots/routes.json
             /tmp/sog-screenshot-server.log
-
       - name: Write capture summary
         if: always()
         run: |
-          echo "## SOG exhaustive screenshot capture" >> "$GITHUB_STEP_SUMMARY"
+          echo "## SOG representative screenshot capture" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
-            MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
+            MANIFEST="artifacts/manifest.$DEVICE.json"
             if [ -f "$MANIFEST" ]; then
               DISCOVERED=$(node -e "const x=require('./$MANIFEST'); console.log(x.discovered_route_count)")
               CAPTURED=$(node -e "const x=require('./$MANIFEST'); console.log(x.captured_count)")
               FAILED=$(node -e "const x=require('./$MANIFEST'); console.log(x.failed_count)")
-              echo "- $DEVICE: $DISCOVERED discovered / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
+              echo "- $DEVICE: $DISCOVERED discovered / $CAPTURED representative captures / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
             else
               echo "- $DEVICE: manifest missing" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
-
-      - name: Report run for manual artifact inspection
-        if: always() && github.event_name != 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const read = (device) => {
-              const file = `artifacts/screenshots/manifest.${device}.json`;
-              if (!fs.existsSync(file)) return { device, manifest: 'missing' };
-              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
-              return {
-                device,
-                discovered: x.discovered_route_count,
-                selected: x.selected_route_count,
-                captured: x.captured_count,
-                failed: x.failed_count
-              };
-            };
-            const desktop = read('desktop');
-            const mobile = read('mobile');
-            const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``;
-            const comments = await github.paginate(github.rest.issues.listComments, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 281,
-              per_page: 100
-            });
-            const existing = comments.find((comment) => comment.body?.includes(marker));
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: 281,
-                body
-              });
-            }
