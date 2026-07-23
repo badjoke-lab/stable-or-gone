@@ -4,6 +4,9 @@
   --sog-restored-page-title: clamp(2rem, 3.2vw, 3.25rem);
   --sog-restored-section-title: clamp(1.15rem, 1.8vw, 1.55rem);
   --sog-restored-subsection-title: clamp(0.95rem, 1.25vw, 1.12rem);
+  --sog-ink-muted: #b2c8d1;
+  --sog-ink-quiet: #92adb9;
+  --muted: #b2c8d1;
 }
 
 html body,
@@ -61,6 +64,14 @@ html body :where(.home-search__heading h2,.eyebrow,.record-kicker,.home-section-
   font-family: var(--sog-terminal-font) !important;
 }
 
+html body :where(p,.home-material-list p,.home-guide-list p,.home-registry-state__note,.home-reference-index nav span,.guide-article-content p,.longform-content p,.reference-entry-grid p,.stablecoin-index-card p,.event-index-card p,.organization-index-card p) {
+  color: var(--sog-ink-muted) !important;
+}
+
+html body :where(time,.home-material-list__meta,.home-guide-list__meta,small,.record-meta,.field-note) {
+  color: var(--sog-ink-quiet) !important;
+}
+
 html body .site-footer-group,
 html body .site-footer-group a,
 html body .site-footer-group h2,
@@ -71,13 +82,88 @@ html body .site-footer-meta {
 
 @media (max-width: 719px) {
   :root {
-    --sog-restored-page-title: clamp(1.8rem, 9vw, 2.35rem);
-    --sog-restored-section-title: clamp(1.08rem, 5.5vw, 1.35rem);
-    --sog-restored-subsection-title: 1rem;
+    --sog-restored-page-title: clamp(1.7rem, 7.5vw, 2.15rem);
+    --sog-restored-section-title: clamp(1.05rem, 5vw, 1.25rem);
+    --sog-restored-subsection-title: 0.98rem;
   }
 
   html body .home-masthead__title {
-    padding-top: 1.35rem !important;
-    padding-bottom: 1.2rem !important;
+    padding-top: 1.1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  html body .site-header,
+  html body .site-header-inner {
+    min-height: 56px !important;
+  }
+
+  html body .home-material-changes,
+  html body .home-guides,
+  html body .home-registry-state,
+  html body .home-reference-index {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  html body .home-material-list li {
+    padding: 0.9rem 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(88px, 0.28fr) minmax(0, 1fr) !important;
+    grid-template-areas:
+      "meta title"
+      "meta copy"
+      "meta link" !important;
+    gap: 0.24rem 0.8rem !important;
+  }
+
+  html body .home-material-list__meta {
+    display: grid !important;
+    align-content: start !important;
+    gap: 0.25rem !important;
+    font-size: 0.62rem !important;
+  }
+
+  html body .home-material-list h3 {
+    font-size: 0.98rem !important;
+    line-height: 1.22 !important;
+  }
+
+  html body .home-material-list p {
+    font-size: 0.76rem !important;
+    line-height: 1.48 !important;
+  }
+
+  html body .home-text-link {
+    margin-top: 0.1rem !important;
+    font-size: 0.68rem !important;
+  }
+
+  html body :where(.stablecoin-index-card,.event-index-card,.organization-index-card,.mobile-record-list>article,.mobile-card-grid>article) {
+    padding: 0.8rem 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  html body :where(.stablecoin-index-card h2,.event-index-card h2,.organization-index-card h2,.mobile-record-list h3,.mobile-card-grid h3) {
+    font-size: 0.98rem !important;
+    line-height: 1.22 !important;
+  }
+
+  html body :where(.stablecoin-index-card p,.event-index-card p,.organization-index-card p,.mobile-record-list p,.mobile-card-grid p) {
+    font-size: 0.75rem !important;
+    line-height: 1.46 !important;
+  }
+
+  html body :where(.stablecoin-index-card dl,.event-index-card dl,.organization-index-card dl,.mobile-record-list dl,.mobile-card-grid dl) {
+    gap: 0.45rem 0.7rem !important;
+    margin-top: 0.55rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  html body .home-material-list li {
+    grid-template-columns: 78px minmax(0, 1fr) !important;
+    gap: 0.22rem 0.65rem !important;
   }
 }
