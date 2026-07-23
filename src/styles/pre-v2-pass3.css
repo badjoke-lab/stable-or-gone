@@ -1,0 +1,107 @@
+/* Final structural corrections after pass-2 image audit. */
+
+/* Restore a readable brand lockup in the compact terminal header. */
+.site-brand img {
+  width: 190px !important;
+  max-width: 190px !important;
+  height: 46px !important;
+}
+
+/* Stablecoin register rows must remain single table rows. */
+@media (min-width: 720px) {
+  .stablecoin-index-table tbody tr {
+    vertical-align: top !important;
+  }
+
+  .stablecoin-index-table td {
+    padding-top: .72rem !important;
+    padding-bottom: .72rem !important;
+  }
+
+  .stablecoin-index-table .stablecoin-record-identity {
+    display: grid !important;
+    grid-template-columns: 28px minmax(0, 1fr) !important;
+    gap: .5rem !important;
+    align-items: start !important;
+  }
+
+  .stablecoin-index-table .comparison-choice {
+    min-height: 0 !important;
+    margin: .35rem 0 0 2.2rem !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    gap: .35rem !important;
+    align-items: center !important;
+    border: 0 !important;
+    background: transparent !important;
+    font-size: .62rem !important;
+  }
+
+  .stablecoin-index-table .comparison-choice input {
+    width: 13px !important;
+    height: 13px !important;
+    margin: 0 !important;
+  }
+
+  .stablecoin-index-table .organization-summary {
+    margin-top: .25rem !important;
+  }
+
+  .stablecoin-index-table .organization-summary summary {
+    min-height: 0 !important;
+    padding: 0 !important;
+    font-size: .62rem !important;
+  }
+}
+
+/* Mobile records: fewer boxed controls, clearer hierarchy. */
+@media (max-width: 719px) {
+  .site-brand img {
+    width: 160px !important;
+    max-width: 62vw !important;
+    height: 42px !important;
+  }
+
+  .stablecoin-index-card {
+    padding: .9rem 0 !important;
+  }
+
+  .stablecoin-index-card-heading {
+    padding-bottom: .45rem !important;
+    border-bottom: 1px solid var(--sog-rule) !important;
+  }
+
+  .stablecoin-index-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .stablecoin-index-card-grid > div {
+    min-width: 0 !important;
+  }
+
+  .comparison-choice-card {
+    min-height: 0 !important;
+    padding: .45rem 0 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: .4rem !important;
+    border-top: 0 !important;
+    font-size: .7rem !important;
+  }
+
+  .comparison-choice-card input {
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0 !important;
+  }
+
+  .stablecoin-index-pagination {
+    padding: .8rem 0 !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .stablecoin-index-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
