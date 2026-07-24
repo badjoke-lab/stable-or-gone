@@ -11,7 +11,7 @@ const viewport = deviceName === 'mobile' ? { width: 393, height: 852 } : { width
 if (!fs.existsSync(manifestPath)) throw new Error(`Missing ${manifestPath}`);
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const routes = manifest.records.map((record) => record.path);
-const browser = await chromium.launch();
+const browser = await chromium.launch({ args: ['--disable-lcd-text'] });
 const context = await browser.newContext({ viewport, reducedMotion: 'reduce', isMobile: deviceName === 'mobile', hasTouch: deviceName === 'mobile' });
 const page = await context.newPage();
 const records = [];
@@ -129,7 +129,8 @@ for (const route of routes) {
         tokens,
         rendering: {
           webkit_font_smoothing: rootStyle.getPropertyValue('-webkit-font-smoothing').trim(),
-          text_rendering: rootStyle.textRendering
+          text_rendering: rootStyle.textRendering,
+          chromium_lcd_text_disabled: true
         },
         text_color_inventory: [...inventory.values()].sort((a, b) => b.count - a.count),
         legacy_palette_hits: legacyPaletteHits,
@@ -154,9 +155,11 @@ for (const route of routes) {
 await browser.close();
 const sum = (field) => records.reduce((total, record) => total + Number(record[field] ?? 0), 0);
 const output = {
-  schema_version: '2.0',
+  schema_version: '2.1',
   generated_at: new Date().toISOString(),
   device: deviceName,
+  text_rasterization: 'grayscale_antialiasing',
+  chromium_args: ['--disable-lcd-text'],
   route_count: routes.length,
   audited_count: records.length,
   failed_count: failures.length,
@@ -183,6 +186,7 @@ console.log(JSON.stringify({
   legacy_palette_hit_count: output.legacy_palette_hit_count,
   text_shadow_count: output.text_shadow_count,
   nonsemantic_colored_border_count: output.nonsemantic_colored_border_count,
-  nonsemantic_colored_background_count: output.nonsemantic_colored_background_count
+  nonsemantic_colored_background_count: output.nonsemantic_colored_background_count,
+  text_rasterization: output.text_rasterization
 }, null, 2));
 if (failures.length) process.exit(1);
