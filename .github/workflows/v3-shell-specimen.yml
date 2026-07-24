@@ -1,0 +1,171 @@
+name: V3 CYA-dark shell specimen
+
+on:
+  push:
+    branches:
+      - 'ui/v3-cya-dark-redesign'
+    paths:
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/components/BrandLockup.astro'
+      - 'src/styles/v3-cya-dark-shell.css'
+      - '.github/workflows/v3-shell-specimen.yml'
+      - 'src/.v3-shell-audit-trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sog-v3-shell-specimen
+  cancel-in-progress: true
+
+jobs:
+  build-and-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm clean-install --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-v3-shell-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-v3-shell-server.log
+          exit 1
+
+      - name: Capture Phase 1 shell specimen
+        run: |
+          mkdir -p artifacts/v3-shell
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
+
+          const routes = [
+            ['home', '/'],
+            ['register', '/stablecoins/'],
+            ['guide', '/guides/eu-stablecoin-access-after-mica/']
+          ];
+          const devices = {
+            desktop: { viewport: { width: 1440, height: 900 } },
+            mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }
+          };
+          const browser = await chromium.launch();
+          const results = [];
+
+          for (const [deviceName, settings] of Object.entries(devices)) {
+            const context = await browser.newContext({ ...settings, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+            const page = await context.newPage();
+            for (const [name, route] of routes) {
+              const response = await page.goto(`http://127.0.0.1:4173${route}`, { waitUntil: 'networkidle', timeout: 60000 });
+              if (!response?.ok()) throw new Error(`${route}: HTTP ${response?.status()}`);
+              await page.evaluate(() => document.fonts?.ready);
+              const metrics = await page.evaluate(() => {
+                const header = document.querySelector('.site-header');
+                const footer = document.querySelector('.site-footer');
+                const title = document.querySelector('h1');
+                const paragraph = document.querySelector('main p');
+                const meta = document.querySelector('.v3-masthead-meta');
+                const style = (element) => element ? getComputedStyle(element) : null;
+                return {
+                  viewportWidth: document.documentElement.clientWidth,
+                  scrollWidth: document.documentElement.scrollWidth,
+                  horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
+                  bodyBackground: getComputedStyle(document.body).backgroundColor,
+                  headerHeight: Math.round(header?.getBoundingClientRect().height ?? 0),
+                  footerHeight: Math.round(footer?.getBoundingClientRect().height ?? 0),
+                  titleFont: style(title)?.fontFamily ?? null,
+                  paragraphFont: style(paragraph)?.fontFamily ?? null,
+                  metaFont: style(meta)?.fontFamily ?? null,
+                  visiblePrimaryNav: Boolean(document.querySelector('.site-primary-navigation') && style(document.querySelector('.site-primary-navigation'))?.display !== 'none'),
+                  visibleMobileMenu: Boolean(document.querySelector('.mobile-navigation') && style(document.querySelector('.mobile-navigation'))?.display !== 'none')
+                };
+              });
+              await page.screenshot({ path: `artifacts/v3-shell/${deviceName}-${name}.png`, fullPage: true });
+              results.push({ device: deviceName, route, metrics });
+            }
+            if (deviceName === 'mobile') {
+              await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle', timeout: 60000 });
+              await page.locator('.mobile-navigation > summary').click();
+              await page.screenshot({ path: 'artifacts/v3-shell/mobile-menu-open.png', fullPage: false });
+            }
+            await context.close();
+          }
+
+          await browser.close();
+          await writeFile('artifacts/v3-shell/metrics.json', JSON.stringify(results, null, 2));
+          console.log(JSON.stringify(results, null, 2));
+
+          const failures = results.filter((item) =>
+            item.metrics.horizontalOverflow ||
+            item.metrics.bodyBackground !== 'rgb(5, 6, 7)' ||
+            (item.device === 'desktop' && !item.metrics.visiblePrimaryNav) ||
+            (item.device === 'mobile' && !item.metrics.visibleMobileMenu)
+          );
+          if (failures.length) {
+            console.error('V3 shell failures:', JSON.stringify(failures, null, 2));
+            process.exitCode = 1;
+          }
+          NODE
+
+      - name: Upload Phase 1 artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-v3-shell-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/v3-shell/**
+            /tmp/sog-v3-shell-server.log
+
+      - name: Report run to V3 audit issue
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const metricsPath = 'artifacts/v3-shell/metrics.json';
+            const metrics = fs.existsSync(metricsPath) ? JSON.parse(fs.readFileSync(metricsPath, 'utf8')) : [];
+            const summary = metrics.map((item) => ({
+              device: item.device,
+              route: item.route,
+              overflow: item.metrics.horizontalOverflow,
+              header: item.metrics.headerHeight,
+              footer: item.metrics.footerHeight,
+              background: item.metrics.bodyBackground
+            }));
+            const marker = '<!-- sog-v3-shell-specimen -->';
+            const body = `${marker}\nV3 shell run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nMetrics: \`${JSON.stringify(summary)}\`\nArtifact: \`sog-v3-shell-${context.runId}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 457,
+              per_page: 100
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, body });
+            }
