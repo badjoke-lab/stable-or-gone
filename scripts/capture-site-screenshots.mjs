@@ -130,7 +130,39 @@ async function measurePage(page) {
       const element = [...document.querySelectorAll(selector)].find(visible);
       return element instanceof HTMLElement ? getComputedStyle(element).fontFamily : null;
     };
+    const parseColor = (value) => {
+      const input = String(value ?? '').trim().toLowerCase();
+      if (!input || input === 'transparent') return null;
+      const hex = input.match(/^#([0-9a-f]{6}|[0-9a-f]{3})$/i);
+      if (hex) {
+        const raw = hex[1].length === 3 ? hex[1].split('').map((part) => `${part}${part}`).join('') : hex[1];
+        return { r: Number.parseInt(raw.slice(0, 2), 16), g: Number.parseInt(raw.slice(2, 4), 16), b: Number.parseInt(raw.slice(4, 6), 16), a: 1 };
+      }
+      const rgb = input.match(/^rgba?\(([^)]+)\)$/i);
+      if (!rgb) return null;
+      const parts = rgb[1].split(',').map((part) => Number.parseFloat(part.trim()));
+      if (parts.length < 3 || parts.some((part, index) => index < 3 && !Number.isFinite(part))) return null;
+      return { r: Math.round(parts[0]), g: Math.round(parts[1]), b: Math.round(parts[2]), a: Number.isFinite(parts[3]) ? parts[3] : 1 };
+    };
+    const colorKey = (color) => color ? `${color.r},${color.g},${color.b}` : null;
     const root = document.documentElement;
+    const rootStyle = getComputedStyle(root);
+    const tokenColor = (name) => parseColor(rootStyle.getPropertyValue(name));
+    const allowedSurfaceColors = new Set([
+      colorKey(tokenColor('--v3-bg')),
+      colorKey(tokenColor('--v3-bg-raised')),
+      colorKey(tokenColor('--v3-bg-soft')),
+      '0,0,0'
+    ].filter(Boolean));
+    const semanticColors = Object.fromEntries([
+      ['accent', '--v3-accent'],
+      ['archive', '--v3-archive'],
+      ['positive', '--v3-positive'],
+      ['warning', '--v3-warning'],
+      ['danger', '--v3-danger'],
+      ['violet', '--v3-violet']
+    ].map(([label, token]) => [colorKey(tokenColor(token)), label]).filter(([key]) => Boolean(key)));
+
     const overflowPx = Math.max(0, root.scrollWidth - root.clientWidth);
     const brokenImages = [...document.images].filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.getAttribute('src') ?? 'missing-src');
     const approvedBrandPaths = new Set([
@@ -145,8 +177,53 @@ async function measurePage(page) {
         try { return !approvedBrandPaths.has(new URL(src, location.origin).pathname); }
         catch { return true; }
       });
-    const legacyVisualSelectors = ['.page-hero', '.metric-card', '[class*="blue-purple"]', '[class*="glow-art"]', '[data-saas-dashboard]'];
+
+    const legacyVisualSelectors = ['.page-hero', '.metric-card', '[class*="blue-purple"]', '[class*="glow-art"]', '[data-saas-dashboard]', '.event-structured-detail.panel.registry'];
     const legacyVisualMarkers = legacyVisualSelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
+    const legacyPanelSurfaces = [...document.querySelectorAll('.panel.registry, .panel > .bar')].filter(visible).flatMap((element) => {
+      const style = getComputedStyle(element);
+      const background = parseColor(style.backgroundColor);
+      const backgroundKey = colorKey(background);
+      const radius = Number.parseFloat(style.borderTopLeftRadius) || 0;
+      const hasShadow = style.boxShadow !== 'none';
+      const offTokenBackground = background && background.a > .05 && !allowedSurfaceColors.has(backgroundKey);
+      if (!offTokenBackground && radius === 0 && !hasShadow) return [];
+      const rect = element.getBoundingClientRect();
+      return [{ element: elementPath(element), background: style.backgroundColor, border_radius: style.borderTopLeftRadius, box_shadow: style.boxShadow, area: Math.round(rect.width * rect.height) }];
+    }).slice(0, 50);
+
+    const largeOffTokenSurfaces = [...document.querySelectorAll('body *')].filter(visible).flatMap((element) => {
+      const style = getComputedStyle(element);
+      const background = parseColor(style.backgroundColor);
+      if (!background || background.a <= .05) return [];
+      const backgroundKey = colorKey(background);
+      if (allowedSurfaceColors.has(backgroundKey)) return [];
+      const rect = element.getBoundingClientRect();
+      const area = rect.width * rect.height;
+      if (area < 12000) return [];
+      const chroma = Math.max(background.r, background.g, background.b) - Math.min(background.r, background.g, background.b);
+      if (chroma < 6) return [];
+      return [{ element: elementPath(element), background: style.backgroundColor, area: Math.round(area), width: Math.round(rect.width), height: Math.round(rect.height) }];
+    }).sort((left, right) => right.area - left.area).slice(0, 50);
+
+    const approvedSemanticContainer = [
+      '[class*="status"]', '[class*="chip"]', '[class*="badge"]', '[data-value-state]', '[data-confidence]', '[data-lifecycle]',
+      '.stablecoin-dossier-title-row h1 span', '.stablecoin-material-change > span', '.stablecoin-material-change > time',
+      '.organization-latest-change > span', '.organization-latest-change > time',
+      '.organization-unknowns-r5 > summary small', '.organization-unknowns-r5 > summary > b',
+      '.timeline-item__date > span', '.timeline-active-filter', '.ar-active-filter', '.timeline-filter-group legend', '.ar-filter-group legend'
+    ].join(', ');
+    const semanticColorCandidates = [...document.querySelectorAll('h1, h2, h3, h4, p, li, dd, dt, span, strong, small, time, label, summary')].filter(visible);
+    const semanticColorViolations = semanticColorCandidates.flatMap((element) => {
+      if (element.closest('a') || element.closest(approvedSemanticContainer)) return [];
+      const text = (element.textContent ?? '').trim().replace(/\s+/g, ' ');
+      if (!text) return [];
+      const style = getComputedStyle(element);
+      const role = semanticColors[colorKey(parseColor(style.color))];
+      if (!role) return [];
+      return [{ element: elementPath(element), text: text.slice(0, 120), color: style.color, semantic_role: role }];
+    }).slice(0, 100);
+
     const unexpectedEmptySelectors = ['[data-stablecoin-no-results]', '[data-organization-no-results]', '[data-event-no-results]'];
     const unexpectedEmptyStates = unexpectedEmptySelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
     const monoTokens = ['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'monospace'];
@@ -176,7 +253,9 @@ async function measurePage(page) {
       brokenImages,
       brandViolations,
       legacyVisualMarkers,
-      legacyFontViolations,
+      legacyPanelSurfaces,
+      largeOffTokenSurfaces,
+      semanticColorViolations,
       unexpectedEmptyStates,
       bodyHeight: Math.round(document.body.getBoundingClientRect().height),
       viewportWidth: root.clientWidth,
@@ -244,7 +323,7 @@ async function main() {
 
   await browser.close();
   const manifest = {
-    schema_version: '3.0',
+    schema_version: '3.1',
     generated_at: new Date().toISOString(),
     device: deviceName,
     viewport: device.viewport,
