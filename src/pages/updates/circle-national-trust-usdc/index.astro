@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const headline = 'Circle National Trustとは何か――USDCの連邦監督・カストディ・準備資産管理はどう変わるのか';
+const title = `${headline} — Stable or Gone`;
+const description = 'CircleがOCCの最終承認を得て設立するCircle National Trustについて、通常の銀行との違い、開始時のカストディ機能、将来のUSDC準備資産管理、変わらない点を整理する。';
+const canonicalPath = '/updates/circle-national-trust-usdc/';
+const publishedAt = '2026-07-25';
+const informationCurrentThrough = '2026-07-25';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://sog.badjoke-lab.com${canonicalPath}`,
+  inLanguage: 'ja',
+  datePublished: publishedAt,
+  dateModified: publishedAt,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  about: ['Circle National Trust', 'USDC', 'Circle', 'OCC', 'stablecoin reserves', 'digital asset custody']
+};
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} language="ja" jsonLd={jsonLd}>
+  <article class="analysis-article" data-update-analysis>
+    <header class="analysis-masthead">
+      <div class="analysis-overline"><span>分析 / 発行体・準備資産基盤</span><a href="/updates/">Update Feedへ戻る</a></div>
+      <h1>{headline}</h1>
+      <p class="analysis-deck">「Circleが銀行になった」「USDCが銀行預金になった」「準備資産がすぐ自社管理へ移る」。今回の承認をそう要約すると正確ではない。直ちに変わるのは、Circleが連邦監督下の信託銀行を通じてカストディ機能を内製化できることだ。USDC準備資産の直接管理は、Circle自身も将来機能として説明している。</p>
+      <dl class="analysis-meta" aria-label="記事情報">
+        <div><dt>公開日</dt><dd>{publishedAt}</dd></div>
+        <div><dt>情報基準日</dt><dd>{informationCurrentThrough}</dd></div>
+        <div><dt>言語</dt><dd>日本語</dd></div>
+      </dl>
+    </header>
+
+    <aside class="analysis-boundary" aria-label="記事の位置付け">
+      <strong>この記事は編集・分析記事です。</strong>
+      <p>Circle National Trustの承認は、USDCのライフサイクル状態、1ドル償還、準備資産構成が同日に変更されたことを意味しません。SOGのcanonical USDCレコードを自動変更せず、実際の業務開始と開示変更を別途確認します。</p>
+    </aside>
+
+    <section class="analysis-summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">この記事の要点</h2>
+      <ul>
+        <li>Circleは2026年7月10日、米通貨監督庁（OCC）から、First National Digital Currency Bank, N.A.を設立するための最終承認を得たと発表した。銀行はCircle National Trustとして運営される。<sup><a href="#note-1" id="ref-1">1</a></sup></li>
+        <li>Circle National Trustは、一般顧客から預金を集めて融資する通常の商業銀行ではない。Circleは「預金を受け入れず、貸付を行わない」と説明している。<sup><a href="#note-2" id="ref-2">2</a></sup></li>
+        <li>業務開始時の中心は、Circleと関連会社向けの受託カストディおよびサブカストディである。</li>
+        <li>USDC準備資産の管理は、Circleの説明でも「将来的に期待される」機能であり、最終承認日に直ちに全面移管されたとは確認できない。</li>
+        <li>USDCは銀行預金にならず、FDIC保険付き預金になったわけでもない。</li>
+        <li>長期的には、発行、償還、準備資産、カストディをCircleグループ内へ寄せる垂直統合が進む可能性がある。その一方で、運用集中と利益相反をどう管理するかが監視点になる。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>何が最終承認されたのか</h2>
+      <p>Circleの発表によると、OCCが最終承認したのは、連邦認可の信託銀行であるFirst National Digital Currency Bank, N.A.の設立である。営業上はCircle National Trustの名称を使い、OCCの直接監督下に入る。</p>
+      <p>経緯は一段階ではない。Circleは2025年6月30日に申請し、OCCは同年12月12日に条件付き承認を公表した。2026年7月10日の発表は、その条件付き承認から銀行設立の最終承認へ進んだことを示す。<sup><a href="#note-3" id="ref-3">3</a></sup></p>
+      <p>ただし、「最終承認」と「すべての計画業務が同日に稼働した」は同義ではない。Circleの現在の説明は、開業時の機能と将来の機能を分けている。したがって、SOGでは承認日、実際の開業日、各業務の開始日を別の事実として扱う必要がある。</p>
+    </section>
+
+    <section>
+      <h2>普通の銀行ではない</h2>
+      <p>Circle National Trustは、名称に「Bank」が入るものの、預金口座、住宅ローン、企業融資などを提供する一般的な銀行ではない。Circleは公式ページで、預金を受け入れず、資金を貸し出さないと明記している。</p>
+      <p>主な役割は信託・受託機能である。デジタル資産を顧客や関連会社のために保管し、資産をCircleの自己資産と分離し、受託者として管理する。Circleはこの銀行を「federally chartered trust bank and qualified custodian」と位置付けている。<sup><a href="#note-2">2</a></sup></p>
+      <dl class="analysis-facts">
+        <div><dt>行うこと</dt><dd>受託カストディ、関連会社向けサブカストディ、将来の限定的な機関顧客向けサービス、将来のUSDC準備資産管理。</dd></div>
+        <div><dt>行わないこと</dt><dd>一般預金の受入れ、貸付、通常の消費者向け銀行業務。</dd></div>
+        <div><dt>監督</dt><dd>米通貨監督庁（OCC）の連邦監督。</dd></div>
+      </dl>
+    </section>
+
+    <section>
+      <h2>開始時に変わるのはカストディ層</h2>
+      <p>Circleの説明では、開業時のCircle National Trustは、まずCircle関連会社を通じた機関顧客関係を支えるカストディ機能を担う。直接、多数の一般機関顧客を受け入れる形ではなく、Circle関連会社のサブカストディとして始まる想定である。</p>
+      <p>これは、USDCを取り巻く業務のうち、資産保管と受託責任をCircleグループ内の連邦認可信託銀行へ置けるようになることを意味する。Circleは、受託資産を企業資産から分離し、破産隔離を意図した構造にすると説明している。</p>
+      <p>一方、こうした説明はCircle側の制度設計の表明であり、個別顧客の契約、どの資産がどの時点で移管されるか、外部カストディ事業者との役割分担までは示さない。実運用は開業後の契約・開示で確認する必要がある。</p>
+    </section>
+
+    <section>
+      <h2>USDC準備資産はすぐ移るのか</h2>
+      <p>今回のニュースで最も誤解しやすい点である。Circle National Trustの公式ページは、将来的にUSDC準備資産を管理することが期待されると説明している。つまり、準備資産管理は重要な計画だが、2026年7月10日に全準備資産が新銀行へ即時移管されたという発表ではない。</p>
+      <p>USDCの準備資産は、現金や短期米国債などで構成され、銀行預金、カストディ、資産運用、日次流動性、償還経路が複数の外部機関と結び付いている。新銀行がどこまでを直接管理し、どこまでを外部銀行、カストディアン、資産運用会社が担うかは、今後の準備資産開示で確認すべき事項である。<sup><a href="#note-4" id="ref-4">4</a></sup></p>
+      <div class="analysis-split" aria-label="変わることと変わらないこと">
+        <div>
+          <h3>承認で確認できる変化</h3>
+          <ul>
+            <li>連邦認可信託銀行という新しい法人・監督レイヤーが加わる。</li>
+            <li>Circleグループ内で受託カストディを提供できる。</li>
+            <li>将来、USDC準備資産管理を担う制度的な器ができる。</li>
+          </ul>
+        </div>
+        <div>
+          <h3>承認だけでは確認できない変化</h3>
+          <ul>
+            <li>USDC準備資産の即時全面移管。</li>
+            <li>USDC発行主体の変更。</li>
+            <li>償還条件や1ドル連動メカニズムの変更。</li>
+            <li>USDCが銀行預金またはFDIC保険対象になったこと。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>USDC保有者にとって何が変わるのか</h2>
+      <p>一般のUSDC保有者にとって、承認日にウォレット残高、送金方法、価格連動、償還権が変わったわけではない。新銀行の初期業務は、Circle関連会社と機関顧客を支えるバックエンドの受託機能である。</p>
+      <p>それでも重要なのは、USDCの運用構造にOCC監督下の法人が加わる点だ。将来、準備資産管理まで移れば、USDCの発行・償還と準備資産の受託管理が、より明確な連邦監督の枠内で結び付く可能性がある。</p>
+      <p>ただし、監督主体が増えることは自動的にリスクが消えることを意味しない。準備資産の構成、償還時の流動性、関連会社間取引、業務委託先、障害時の責任分担は引き続き個別に確認する必要がある。</p>
+    </section>
+
+    <section>
+      <h2>Circleが狙う垂直統合</h2>
+      <p>Circleは、ステーブルコイン発行、企業向けウォレット、クロスボーダー決済、ブロックチェーン基盤に加え、連邦認可信託銀行を持つことになる。Circle National Trustが計画どおり準備資産管理へ進めば、USDCの主要な運用層をグループ内でより強く統合できる。</p>
+      <p>利点は、責任主体、統制、監査、カストディ、償還流動性の連携を設計しやすくなることだ。外部事業者への依存を減らし、機関顧客へ一体化したサービスを提供しやすくなる。</p>
+      <p>一方で、発行体グループがカストディと準備資産管理を広く担うほど、業務集中と利益相反の管理が重要になる。OCC監督、資産分別、内部統制、第三者による証明、関連会社間契約の透明性が、その統合を評価する鍵になる。</p>
+    </section>
+
+    <section>
+      <h2>SOGが今後確認すること</h2>
+      <ul class="analysis-watchlist">
+        <li><strong>実際の開業日</strong><span>最終承認と営業開始を分けて記録する。</span></li>
+        <li><strong>カストディ開始範囲</strong><span>Circle関連会社、直接機関顧客、対象資産、サブカストディ関係を確認する。</span></li>
+        <li><strong>準備資産管理の開始</strong><span>USDC準備資産のどの部分を、いつCircle National Trustが管理し始めるかを見る。</span></li>
+        <li><strong>外部事業者との関係</strong><span>銀行、カストディアン、資産運用会社との役割分担がどう変わるかを見る。</span></li>
+        <li><strong>発行・償還主体</strong><span>USDCを発行・償還する法人と契約条件に変更があるか確認する。</span></li>
+        <li><strong>開示と保証</strong><span>準備資産報告、第三者保証、資産分別、関連会社間取引の説明を追う。</span></li>
+      </ul>
+      <p>現時点のSOG上の結論は、USDCの状態変更ではなく、発行体・カストディ・将来の準備資産管理を支える組織基盤の重大な変化である。</p>
+    </section>
+
+    <section class="analysis-notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">注</h2>
+      <ol>
+        <li id="note-1">Circleは2026年7月10日、OCCからFirst National Digital Currency Bank, N.A.設立の最終承認を得たと発表した。営業名はCircle National Trust。 <a href="https://www.circle.com/pressroom/circle-receives-final-occ-approval-to-establish-national-trust-bank">Circle公式発表</a> <a href="#ref-1" aria-label="本文の参照位置へ戻る">↩</a></li>
+        <li id="note-2">Circleの現行説明では、Circle National Trustは連邦認可信託銀行・qualified custodianであり、預金を受け入れず、貸付を行わない。開業時はCircle関連会社向けの受託カストディを中心とし、USDC準備資産管理は将来機能として説明されている。 <a href="https://www.circle.com/circle-national-trust">Circle National Trust公式ページ</a> <a href="#ref-2" aria-label="本文の参照位置へ戻る">↩</a></li>
+        <li id="note-3">OCCは2025年12月12日、Circleを含む複数のnational trust bank申請に条件付き承認を与えたと公表した。 <a href="https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-125.html">OCC公式発表</a> <a href="#ref-3" aria-label="本文の参照位置へ戻る">↩</a></li>
+        <li id="note-4">CircleはUSDCを1対1で償還可能と説明し、準備資産の構成と月次保証報告を公開している。Circle National Trustの承認後も、実際の準備資産管理主体は最新開示で確認する必要がある。 <a href="https://www.circle.com/transparency">Circle Transparency</a> <a href="#ref-4" aria-label="本文の参照位置へ戻る">↩</a></li>
+      </ol>
+    </section>
+
+    <section class="analysis-sources" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">主要ソース</h2>
+      <ul>
+        <li><a href="https://www.circle.com/pressroom/circle-receives-final-occ-approval-to-establish-national-trust-bank">Circle — Circle Receives Final OCC Approval to Establish National Trust Bank</a></li>
+        <li><a href="https://www.circle.com/circle-national-trust">Circle — Circle National Trust</a></li>
+        <li><a href="https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-125.html">OCC — OCC Conditionally Approves Five National Trust Bank Charter Applications</a></li>
+        <li><a href="https://www.circle.com/transparency">Circle — Transparency &amp; Stability</a></li>
+      </ul>
+      <p><strong>情報基準日：2026年7月25日。</strong> 開業、準備資産管理、発行・償還主体、カストディ範囲に実質的な変更が確認された場合は、別のレビュー済み更新として記録する。</p>
+    </section>
+  </article>
+
+  <style>
+    .analysis-article{max-width:780px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem) 1rem 4rem;color:var(--v3-text,var(--text,#e8eef1));font:400 clamp(1rem,1.3vw,1.08rem)/1.82 var(--v3-sans,system-ui,sans-serif);overflow-wrap:break-word}.analysis-masthead{padding-bottom:2rem;border-bottom:1px solid var(--v3-rule-strong,var(--line,#44515a))}.analysis-overline{display:flex;justify-content:space-between;gap:1rem;align-items:center;color:var(--v3-text-quiet,var(--muted,#9aa8b0));font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}.analysis-article h1{margin:1.1rem 0;font-size:clamp(2rem,5vw,3rem);line-height:1.12;letter-spacing:-.035em}.analysis-deck{margin:0;max-width:47rem;color:var(--v3-text-muted,var(--muted,#aeb9bf));font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.65}.analysis-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:1.5rem 0 0;background:var(--v3-rule,var(--line,#33404a))}.analysis-meta div{padding:.8rem;background:var(--v3-bg,var(--bg,#0b1115))}.analysis-meta dt{color:var(--v3-text-quiet,var(--muted,#9aa8b0));font-size:.78rem}.analysis-meta dd{margin:.2rem 0 0}.analysis-boundary{margin:1.5rem 0;padding:1rem 0;border-block:1px solid var(--v3-rule-strong,var(--line,#44515a))}.analysis-boundary p{margin:.45rem 0 0}.analysis-article section{padding-top:1.7rem;margin-top:1.7rem;border-top:1px solid var(--v3-rule,var(--line,#33404a))}.analysis-article h2{margin:0 0 .8rem;font-size:clamp(1.35rem,2.5vw,1.75rem);line-height:1.3}.analysis-article h3{font-size:1.05rem}.analysis-article p,.analysis-article ul,.analysis-article ol{margin:.75rem 0}.analysis-article li+li{margin-top:.45rem}.analysis-article a{color:var(--v3-accent,var(--cyan,#75d5ff));text-underline-offset:.2em}.analysis-summary{border-top:0!important}.analysis-facts{margin:1.2rem 0;border-block:1px solid var(--v3-rule-strong,var(--line,#44515a))}.analysis-facts div{display:grid;grid-template-columns:9rem 1fr;gap:1rem;padding:.85rem 0;border-top:1px solid var(--v3-rule,var(--line,#33404a))}.analysis-facts div:first-child{border-top:0}.analysis-facts dt{font-weight:700}.analysis-facts dd{margin:0}.analysis-split{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.2rem 0}.analysis-split>div{padding-top:.8rem;border-top:2px solid var(--v3-rule-strong,var(--line,#44515a))}.analysis-watchlist{list-style:none;padding:0;border-block:1px solid var(--v3-rule-strong,var(--line,#44515a))}.analysis-watchlist li{display:grid;grid-template-columns:10rem 1fr;gap:1rem;padding:.8rem 0;margin:0;border-top:1px solid var(--v3-rule,var(--line,#33404a))}.analysis-watchlist li:first-child{border-top:0}.analysis-notes,.analysis-sources{font-size:.95rem}.analysis-sources ul{padding-left:1.2rem}@media(max-width:640px){.analysis-overline{align-items:flex-start;flex-direction:column}.analysis-meta{grid-template-columns:1fr}.analysis-facts div,.analysis-watchlist li{grid-template-columns:1fr;gap:.25rem}.analysis-split{grid-template-columns:1fr}.analysis-article{padding-inline:1rem}.analysis-article h1{font-size:clamp(1.9rem,9vw,2.25rem)}}
+  </style>
+</BaseLayout>
