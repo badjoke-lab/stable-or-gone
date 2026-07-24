@@ -1,6 +1,7 @@
 <script>
   const mobileRepresentationSelector = (kind: string) => `[data-mobile-representation-for="${CSS.escape(kind)}"]`;
   const evidenceKinds = new Set(['stablecoin-sources', 'organization-sources', 'event-sources']);
+  const collapsedRecordKinds = new Set(['stablecoin-deployments', 'stablecoin-organizations']);
 
   const markMobileRepresentation = (element: HTMLElement, kind: string) => {
     const data = element.dataset;
@@ -49,6 +50,29 @@
     return list;
   };
 
+  const appendDefinitionRows = (definition: HTMLDListElement, cells: Element[], headers: string[]) => {
+    cells.forEach((cell, index) => {
+      const item = document.createElement('div');
+      const term = document.createElement('dt');
+      const label = headers[index] || `Field ${index + 1}`;
+      term.textContent = label;
+      const value = document.createElement('dd');
+      value.innerHTML = cell.innerHTML;
+      item.append(term, value);
+      definition.append(item);
+      appendCopyControl(item, label, cell.textContent?.trim() ?? '');
+    });
+  };
+
+  const appendEmptyRecord = (list: HTMLElement, cells: Element[]) => {
+    if (!(cells.length === 1 && cells[0] instanceof HTMLTableCellElement && Number(cells[0].colSpan) > 1)) return false;
+    const empty = document.createElement('p');
+    empty.className = 'mobile-empty-record';
+    empty.innerHTML = cells[0].innerHTML;
+    list.append(empty);
+    return true;
+  };
+
   const createRecordRepresentation = (table: HTMLTableElement, kind: string) => {
     const list = document.createElement('div');
     list.className = 'mobile-record-list';
@@ -56,29 +80,42 @@
     const headers = [...table.querySelectorAll(':scope > thead th')].map((cell) => cell.textContent?.trim() ?? 'Field');
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
       const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
-      if (cells.length === 1 && cells[0] instanceof HTMLTableCellElement && Number(cells[0].colSpan) > 1) {
-        const empty = document.createElement('p');
-        empty.className = 'mobile-empty-record';
-        empty.innerHTML = cells[0].innerHTML;
-        list.append(empty);
-        return;
-      }
+      if (appendEmptyRecord(list, cells)) return;
       const article = document.createElement('article');
       const definition = document.createElement('dl');
-      cells.forEach((cell, index) => {
-        const item = document.createElement('div');
-        const term = document.createElement('dt');
-        const label = headers[index] || `Field ${index + 1}`;
-        term.textContent = label;
-        const value = document.createElement('dd');
-        value.innerHTML = cell.innerHTML;
-        item.append(term, value);
-        definition.append(item);
-        appendCopyControl(item, label, cell.textContent?.trim() ?? '');
-      });
+      appendDefinitionRows(definition, cells, headers);
       article.append(definition);
       list.append(article);
     });
+    return list;
+  };
+
+  const createCollapsedRecordRepresentation = (table: HTMLTableElement, kind: string) => {
+    const list = document.createElement('div');
+    list.className = 'mobile-record-list mobile-collapsed-record-list';
+    markMobileRepresentation(list, kind);
+    const headers = [...table.querySelectorAll(':scope > thead th')].map((cell) => cell.textContent?.trim() ?? 'Field');
+
+    table.querySelectorAll(':scope > tbody > tr').forEach((row, rowIndex) => {
+      const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
+      if (appendEmptyRecord(list, cells)) return;
+
+      const details = document.createElement('details');
+      details.className = 'mobile-table-record';
+      const summary = document.createElement('summary');
+      const title = document.createElement('strong');
+      title.textContent = cells[0]?.textContent?.trim() || `Record ${rowIndex + 1}`;
+      const meta = document.createElement('span');
+      const secondary = cells[4]?.textContent?.trim() || cells[1]?.textContent?.trim() || `${cells.length} fields`;
+      meta.textContent = secondary;
+      summary.append(title, meta);
+
+      const definition = document.createElement('dl');
+      appendDefinitionRows(definition, cells, headers);
+      details.append(summary, definition);
+      list.append(details);
+    });
+
     return list;
   };
 
@@ -90,13 +127,7 @@
 
     table.querySelectorAll(':scope > tbody > tr').forEach((row) => {
       const cells = [...row.querySelectorAll(':scope > th, :scope > td')];
-      if (cells.length === 1 && cells[0] instanceof HTMLTableCellElement && Number(cells[0].colSpan) > 1) {
-        const empty = document.createElement('p');
-        empty.className = 'mobile-empty-record';
-        empty.innerHTML = cells[0].innerHTML;
-        list.append(empty);
-        return;
-      }
+      if (appendEmptyRecord(list, cells)) return;
 
       const details = document.createElement('details');
       details.className = 'mobile-evidence-record';
@@ -171,9 +202,11 @@
       const hasColumnHeaders = table.querySelector(':scope > thead th') !== null;
       const representation = evidenceKinds.has(kind)
         ? createEvidenceRepresentation(table, kind)
-        : hasColumnHeaders
-          ? createRecordRepresentation(table, kind)
-          : createDefinitionRepresentation(table, kind);
+        : collapsedRecordKinds.has(kind)
+          ? createCollapsedRecordRepresentation(table, kind)
+          : hasColumnHeaders
+            ? createRecordRepresentation(table, kind)
+            : createDefinitionRepresentation(table, kind);
       table.insertAdjacentElement('afterend', representation);
     });
     bindGeneratedCopyControls();

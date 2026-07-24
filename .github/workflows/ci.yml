@@ -21,24 +21,24 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Validate current evidence integrity audit
+        run: node scripts/validate-registry-evidence-integrity-audit.mjs
       - name: Validate guides
         run: npm run validate:guides
       - name: Validate baseline
         run: npm run validate:baseline
-      - name: Validate 100-record core workstream
+      - name: Validate active workstream
         run: npm run validate:active-workstream
-      - name: Validate 100-record identity and lineage audit
-        run: node scripts/validate-registry-identity-lineage-audit.mjs
       - name: Validate organization and relationship integrity audit
         run: node scripts/validate-registry-organization-relationship-audit.mjs
-      - name: Validate current evidence integrity audit
-        run: node scripts/validate-registry-evidence-integrity-audit.mjs
       - name: Validate reserve redemption backing audit
         run: node scripts/validate-registry-reserve-redemption-backing-audit.mjs
       - name: Validate deployment and chain identity audit
         run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
       - name: Validate known-unknown and placeholder integrity audit
         run: node scripts/validate-registry-known-unknown-placeholder-integrity-audit.mjs
+      - name: Validate current canonical registry integrity
+        run: node scripts/validate-current-registry-integrity.mjs
       - name: Validate monitoring coverage recalculation
         run: node scripts/validate-monitoring-coverage-recalculation-100-assets.mjs
       - name: Validate unresolved launch-date queue
@@ -88,8 +88,6 @@ jobs:
         run: npm run validate:release-integrity
       - name: Validate reproducible build contract
         run: npm run validate:reproducible-build
-      - name: Validate audited 100-asset canonical checkpoint
-        run: node scripts/validate-audited-100-checkpoint.mjs
       - name: Validate non-UI release material
         run: node scripts/validate-non-ui-release-material.mjs
       - name: Validate final state

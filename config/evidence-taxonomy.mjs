@@ -16,7 +16,7 @@ export const publicEvidenceCategories = [
 
 const sourceTypesByCategory = {
   official_statement_or_announcement: [
-    'exchange_notice', 'issuer_contract_event', 'issuer_statement', 'official_blog',
+    'exchange_notice', 'issuer_contract_event', 'issuer_statement', 'official_announcement', 'official_blog',
     'official_ecosystem_announcement', 'official_ecosystem_publication', 'official_incident_report',
     'official_launch_announcement', 'official_postmortem', 'official_protocol_announcement',
     'official_protocol_milestone', 'official_protocol_update', 'official_social',
@@ -33,7 +33,8 @@ const sourceTypesByCategory = {
     'official_governance_proposal', 'reserve_or_governance_page'
   ],
   legal_or_terms: [
-    'legal_terms', 'network_terms_or_docs', 'official_terms', 'risk_disclosure', 'terms_of_service'
+    'legal_terms', 'network_terms_or_docs', 'official_legal_documentation', 'official_terms',
+    'risk_disclosure', 'terms_of_service'
   ],
   regulatory_or_court: ['regulator_register', 'regulatory_notice', 'regulatory_source'],
   reserve_or_assurance_report: [
@@ -81,14 +82,14 @@ const sourceTypesByProvenance = {
   subject_controlled: [
     'developer_docs', 'exchange_notice', 'historical_official_document_reference', 'issuer_contract_event',
     'issuer_or_network_page', 'issuer_or_product_page', 'issuer_page', 'issuer_statement', 'issuer_support',
-    'legal_terms', 'network_terms_or_docs', 'official_application', 'official_blog',
+    'legal_terms', 'network_terms_or_docs', 'official_announcement', 'official_application', 'official_blog',
     'official_developer_documentation', 'official_documentation', 'official_ecosystem_announcement',
     'official_ecosystem_publication', 'official_incident_report', 'official_launch_announcement',
-    'official_postmortem', 'official_product_page', 'official_protocol_announcement',
-    'official_protocol_guide', 'official_protocol_milestone', 'official_protocol_roadmap',
-    'official_protocol_update', 'official_social', 'official_social_statement', 'official_statement',
-    'official_terms', 'official_website', 'official_whitepaper', 'product_page', 'protocol_app',
-    'protocol_docs', 'protocol_or_reserve_page', 'protocol_page', 'protocol_postmortem',
+    'official_legal_documentation', 'official_postmortem', 'official_product_page',
+    'official_protocol_announcement', 'official_protocol_guide', 'official_protocol_milestone',
+    'official_protocol_roadmap', 'official_protocol_update', 'official_social', 'official_social_statement',
+    'official_statement', 'official_terms', 'official_website', 'official_whitepaper', 'product_page',
+    'protocol_app', 'protocol_docs', 'protocol_or_reserve_page', 'protocol_page', 'protocol_postmortem',
     'reserve_or_governance_page', 'reserve_transparency_page', 'risk_disclosure', 'terms_of_service',
     'website_state_observation', 'whitepaper'
   ],

@@ -1,0 +1,93 @@
+name: V3 final acceptance audit
+
+on:
+  push:
+    branches:
+      - 'ui/v3-cya-dark-redesign'
+    paths:
+      - '.github/workflows/v3-final-acceptance-audit.yml'
+      - 'scripts/audit/v3-final-acceptance.mjs'
+      - 'src/.v3-final-acceptance-trigger'
+      - 'src/styles/v3-cya-dark-*.css'
+      - 'src/components/**'
+      - 'src/layouts/**'
+      - 'src/pages/**'
+      - 'src/scripts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sog-v3-final-acceptance
+  cancel-in-progress: true
+
+jobs:
+  build-test-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm clean-install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-v3-final-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/sog-v3-final-server.log
+          exit 1
+      - name: Run final visual and functional acceptance audit
+        run: node scripts/audit/v3-final-acceptance.mjs
+      - name: Upload final acceptance artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-v3-final-acceptance-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            artifacts/v3-final/**
+            /tmp/sog-v3-final-server.log
+      - name: Report final acceptance run
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- sog-v3-final-acceptance -->';
+            const reportPath = 'artifacts/v3-final/acceptance-report.json';
+            const report = fs.existsSync(reportPath)
+              ? JSON.parse(fs.readFileSync(reportPath, 'utf8'))
+              : { summary: { totalChecks: 0, passed: 0, failed: 0, browserErrors: 0, pageErrors: 0 }, failures: [] };
+            const failedLines = report.failures?.slice(0, 20).map((item) => `- ${item.name}: ${item.details || ''}`).join('\n') || '- None';
+            const body = `${marker}\nV3 final acceptance run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nChecks: **${report.summary.passed}/${report.summary.totalChecks} passed**\nFailures: **${report.summary.failed}**\nBrowser errors: **${report.summary.browserErrors}**\nPage errors: **${report.summary.pageErrors}**\n\n${failedLines}\n\nArtifact: \`sog-v3-final-acceptance-${context.runId}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 457,
+              per_page: 100
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: 457,
+                body
+              });
+            }

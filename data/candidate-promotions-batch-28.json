@@ -1,16 +1,16 @@
 [
   {
-    "candidate_id": "sog_cand_pr427_chfau",
+    "candidate_id": "sog_cand_000113",
     "status": "promoted",
     "promotion_pr": 429,
     "promoted_record_id": "sog_st_chfau",
-    "notes": "Reviewed PR 427 candidate promoted after PR 428 authorization with complete supporting record layers."
+    "notes": "Reviewed in PR #427 as sog_cand_pr427_chfau, authorized by PR #428, and promoted after complete supporting record layers were verified."
   },
   {
-    "candidate_id": "sog_cand_pr427_sekau",
+    "candidate_id": "sog_cand_000114",
     "status": "promoted",
     "promotion_pr": 429,
     "promoted_record_id": "sog_st_sekau",
-    "notes": "Reviewed PR 427 candidate promoted after PR 428 authorization with complete supporting record layers."
+    "notes": "Reviewed in PR #427 as sog_cand_pr427_sekau, authorized by PR #428, and promoted after complete supporting record layers were verified."
   }
 ]

@@ -21,10 +21,10 @@ const jsonLd = {
       <div>
         <p class="ar-eyebrow">Research tools / Canonical index</p>
         <h1>Access & Regulation Explorer</h1>
-        <p>Search canonical legal profiles, Regulatory Notes, and Market Access record presence across 110 stable assets. Missing records remain missing-record states; they are not converted into legal, regulatory, or availability conclusions.</p>
+        <p>Search canonical legal profiles, Regulatory Notes, and Market Access record presence across the stable-asset registry. Missing records remain missing-record states; they are not converted into legal, regulatory, or availability conclusions.</p>
       </div>
       <dl class="ar-contract-summary" aria-label="Explorer contract">
-        <div><dt>Assets</dt><dd>110</dd></div>
+        <div><dt>Assets</dt><dd data-ar-contract-asset-count>Loading</dd></div>
         <div><dt>Score</dt><dd>None</dd></div>
         <div><dt>Ranking</dt><dd>None</dd></div>
       </dl>
@@ -53,7 +53,7 @@ const jsonLd = {
       <div class="ar-search-row">
         <label class="ar-search-field">
           <span>Search asset name, symbol, or slug</span>
-          <input type="search" data-ar-search placeholder="Search 110 assets" autocomplete="off" />
+          <input type="search" data-ar-search placeholder="Search canonical assets" autocomplete="off" />
         </label>
         <button type="button" class="ui-button" data-ar-clear>Clear filters</button>
         <button type="button" class="ui-button" data-ar-copy>Copy filtered view</button>

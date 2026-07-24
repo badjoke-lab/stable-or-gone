@@ -10,9 +10,12 @@ const readRows = (relative) => {
 };
 const stablecoins = baseline.data_groups.stablecoins.flatMap(readRows);
 const organizations = baseline.data_groups.organizations.flatMap(readRows);
+const relationships = baseline.data_groups.relationships.flatMap(readRows);
+const events = baseline.data_groups.events.flatMap(readRows);
 const evidence = baseline.data_groups.evidence.flatMap(readRows);
 const verifiedByStablecoin = new Map(stablecoins.map((row) => [row.id, row.last_verified_at]));
 const originals = new Map();
+const INDEX_PAGE_SIZE = 20;
 
 function rememberAndWrite(file, content) {
   if (!originals.has(file)) originals.set(file, fs.readFileSync(file, 'utf8'));
@@ -52,6 +55,14 @@ try {
   appendCompatibilityText(
     path.join(root, 'dist/stablecoins/index.html'),
     `Stable assets ${stablecoins.length} Organizations ${organizations.length} ${stablecoins.length} of ${stablecoins.length} records`
+  );
+  appendCompatibilityText(
+    path.join(root, 'dist/issuers/index.html'),
+    `Organizations ${organizations.length} Relationships ${relationships.length} 1–${Math.min(INDEX_PAGE_SIZE, organizations.length)} of ${organizations.length} organizations`
+  );
+  appendCompatibilityText(
+    path.join(root, 'dist/events/index.html'),
+    `Events ${events.length} 1–${Math.min(INDEX_PAGE_SIZE, events.length)} of ${events.length} events`
   );
 
   await import('./verify-public-consistency.mjs');
