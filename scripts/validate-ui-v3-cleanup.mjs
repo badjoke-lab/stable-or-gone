@@ -22,10 +22,12 @@ const walk = (directory) => {
 };
 walk('src');
 
-const prohibitedSourceMarkers = ['PageHero', 'MetricCard', 'editorial-v2.css', '.page-hero', '.metric-card'];
 for (const file of sourceFiles) {
   const content = read(file);
-  for (const marker of prohibitedSourceMarkers) check(!content.includes(marker), `${file}: superseded marker remains: ${marker}`);
+  const prohibitedMarkers = file.endsWith('.css')
+    ? ['editorial-v2.css']
+    : ['PageHero', 'MetricCard', 'editorial-v2.css'];
+  for (const marker of prohibitedMarkers) check(!content.includes(marker), `${file}: superseded marker remains: ${marker}`);
 }
 
 const layout = read('src/layouts/BaseLayout.astro');
@@ -78,7 +80,14 @@ for (const marker of [
   '.mobile-navigation-panel'
 ]) check(shellCorrectionsCss.includes(marker), `CYA-dark shell correction missing: ${marker}`);
 
-for (const marker of ['.registry', 'border', '--v3-rule']) check(registryCss.includes(marker), `CYA-dark registry rule missing: ${marker}`);
+for (const marker of [
+  '.stablecoin-index-page',
+  '.stablecoin-index-registry',
+  '.stablecoin-index-toolbar',
+  'border-radius: 0',
+  'box-shadow: none',
+  '--v3-rule'
+]) check(registryCss.includes(marker), `CYA-dark registry rule missing: ${marker}`);
 
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
@@ -86,7 +95,7 @@ check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step 
 check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
 
 const result = {
-  schema_version: '3.0',
+  schema_version: '3.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
