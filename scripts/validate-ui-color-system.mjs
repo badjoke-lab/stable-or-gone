@@ -19,6 +19,8 @@ for (const file of files) {
     route_count: audit.route_count,
     audited_count: audit.audited_count,
     failed_count: audit.failed_count,
+    text_rasterization: audit.text_rasterization,
+    chromium_args: audit.chromium_args,
     legacy_palette_hit_count: audit.legacy_palette_hit_count,
     colored_ordinary_text_count: audit.colored_ordinary_text_count,
     text_shadow_count: audit.text_shadow_count,
@@ -27,6 +29,8 @@ for (const file of files) {
   };
   if (audit.audited_count !== audit.route_count) findings.push({ device, category: 'incomplete_audit', detail: `${audit.audited_count}/${audit.route_count}` });
   if (audit.failed_count) findings.push({ device, category: 'audit_failures', detail: audit.failures });
+  if (audit.text_rasterization !== 'grayscale_antialiasing') findings.push({ device, category: 'uncontrolled_text_rasterization', detail: audit.text_rasterization ?? null });
+  if (!Array.isArray(audit.chromium_args) || !audit.chromium_args.includes('--disable-lcd-text')) findings.push({ device, category: 'lcd_text_not_disabled', detail: audit.chromium_args ?? null });
   for (const [category, count] of [
     ['legacy_palette_hit', audit.legacy_palette_hit_count],
     ['colored_ordinary_text', audit.colored_ordinary_text_count],
@@ -39,7 +43,7 @@ for (const file of files) {
 }
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   ok: findings.length === 0,
   policy: {
@@ -47,6 +51,7 @@ const result = {
     legacy_palette: 'forbidden',
     text_shadow: 'forbidden',
     semantic_color: 'status, warning, archive, chart, and interactive roles only',
+    screenshot_text_rasterization: 'grayscale antialiasing; RGB LCD fringes forbidden',
     desktop_and_mobile: 'both exhaustive audits required'
   },
   summaries,
