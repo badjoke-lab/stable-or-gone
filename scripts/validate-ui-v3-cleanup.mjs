@@ -9,6 +9,14 @@ const removedPaths = [
   'src/components/MetricCard.astro',
   'src/styles/editorial-v2.css'
 ];
+const inactiveCompatibilityStyles = [
+  'exact-pre-v2-override.css',
+  'pre-v2-audit-fixes.css',
+  'pre-v2-pass3.css',
+  'pre-v2-final-structural-fixes.css',
+  'pre-v2-guide-type-fix.css',
+  'pre-v2-mobile-tail-fixes.css'
+];
 
 for (const file of removedPaths) check(!fs.existsSync(file), `superseded file still exists: ${file}`);
 
@@ -28,6 +36,11 @@ for (const file of sourceFiles) {
     ? ['editorial-v2.css']
     : ['PageHero', 'MetricCard', 'editorial-v2.css'];
   for (const marker of prohibitedMarkers) check(!content.includes(marker), `${file}: superseded marker remains: ${marker}`);
+  if (!file.endsWith('.css')) {
+    for (const stylesheet of inactiveCompatibilityStyles) {
+      check(!content.includes(stylesheet), `${file}: pre-v2 compatibility stylesheet remains active: ${stylesheet}`);
+    }
+  }
 }
 
 const layout = read('src/layouts/BaseLayout.astro');
@@ -52,7 +65,8 @@ for (const stylesheet of [
 for (const stylesheet of [
   "import '../styles/editorial-ledger-v3.css'",
   "import '../styles/mobile-accessibility-v3.css'",
-  "import '../styles/editorial-v2.css'"
+  "import '../styles/editorial-v2.css'",
+  ...inactiveCompatibilityStyles.map((name) => `import '../styles/${name}'`)
 ]) check(!brand.includes(stylesheet) && !layout.includes(stylesheet), `superseded active stylesheet import remains: ${stylesheet}`);
 
 for (const marker of [
@@ -95,12 +109,13 @@ check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step 
 check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
 
 const result = {
-  schema_version: '3.1',
+  schema_version: '3.2',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
   active_shell: 'src/styles/v3-cya-dark-shell.css',
   active_shell_corrections: 'src/styles/v3-cya-dark-shell-corrections.css',
+  inactive_compatibility_styles: inactiveCompatibilityStyles,
   removed_paths: removedPaths,
   scanned_source_files: sourceFiles.length,
   accessibility_contracts: {
