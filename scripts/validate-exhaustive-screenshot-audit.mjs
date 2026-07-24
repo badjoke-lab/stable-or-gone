@@ -8,9 +8,21 @@ const manifestFiles = [
 ];
 const findings = [];
 const devices = {};
+const monospaceObservations = [];
+const monoTokens = ['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'monospace'];
 
 const add = (device, route, category, detail) => {
   findings.push({ device, route, category, detail });
+};
+
+const usesMonospace = (fontFamily) => {
+  const value = String(fontFamily ?? '').toLocaleLowerCase();
+  return monoTokens.some((token) => value.includes(token));
+};
+
+const isBlockingFontLeak = (detail) => {
+  const element = String(detail?.element ?? '');
+  return element.includes('static-registry-') || element.includes('panel.registry') || element.includes('data-saas-dashboard');
 };
 
 for (const file of manifestFiles) {
@@ -45,7 +57,16 @@ for (const file of manifestFiles) {
     for (const value of metrics.brokenImages ?? []) add(device, route, 'broken_image', value);
     for (const value of metrics.brandViolations ?? []) add(device, route, 'brand_violation', value);
     for (const value of metrics.legacyVisualMarkers ?? []) add(device, route, 'legacy_visual_marker', value);
-    for (const value of metrics.legacyFontViolations ?? []) add(device, route, 'legacy_font_violation', value);
+    for (const value of metrics.legacyFontViolations ?? []) {
+      monospaceObservations.push({ device, route, detail: value });
+      if (isBlockingFontLeak(value)) add(device, route, 'legacy_font_leak', value);
+    }
+    for (const role of ['body', 'h1', 'h2', 'h3']) {
+      const fontFamily = metrics.fontRoles?.[role];
+      if (fontFamily && usesMonospace(fontFamily)) {
+        add(device, route, 'primary_font_role_monospace', { role, font_family: fontFamily });
+      }
+    }
     for (const value of metrics.unexpectedEmptyStates ?? []) add(device, route, 'unexpected_empty_state', value);
     if (!record.screenshot_bytes || record.screenshot_bytes < 1000) add(device, route, 'invalid_screenshot', record.screenshot_bytes ?? 0);
   }
@@ -56,11 +77,18 @@ const categories = findings.reduce((counts, finding) => {
   return counts;
 }, {});
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   ok: findings.length === 0,
   manual_review_required: true,
+  font_policy: {
+    sans_body_and_primary_headings_required: true,
+    editorial_metadata_monospace_allowed: true,
+    static_pagination_monospace_forbidden: true
+  },
   devices,
+  observed_monospace_count: monospaceObservations.length,
+  blocking_finding_count: findings.length,
   finding_count: findings.length,
   categories,
   findings
