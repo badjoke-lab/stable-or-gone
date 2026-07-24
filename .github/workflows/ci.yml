@@ -27,8 +27,6 @@ jobs:
         run: npm run validate:baseline
       - name: Validate active workstream
         run: npm run validate:active-workstream
-      - name: Validate current canonical registry integrity
-        run: node scripts/validate-current-registry-integrity.mjs
       - name: Validate organization and relationship integrity audit
         run: node scripts/validate-registry-organization-relationship-audit.mjs
       - name: Validate current evidence integrity audit
@@ -39,6 +37,8 @@ jobs:
         run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
       - name: Validate known-unknown and placeholder integrity audit
         run: node scripts/validate-registry-known-unknown-placeholder-integrity-audit.mjs
+      - name: Validate current canonical registry integrity
+        run: node scripts/validate-current-registry-integrity.mjs
       - name: Validate monitoring coverage recalculation
         run: node scripts/validate-monitoring-coverage-recalculation-100-assets.mjs
       - name: Validate unresolved launch-date queue
