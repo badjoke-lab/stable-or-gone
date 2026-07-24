@@ -19,11 +19,8 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
-      - name: Rebuild current integrity audit
-        run: node scripts/audit-registry-integrity-batch-o.mjs
-      - name: Validate generated current integrity audit
-        if: success()
-        run: node scripts/audit-registry-integrity-batch-o.mjs --check
+      - name: Validate current canonical registry integrity
+        run: node scripts/validate-current-registry-integrity.mjs
       - name: Upload integrity audit
         if: always()
         uses: actions/upload-artifact@v4
