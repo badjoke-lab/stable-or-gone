@@ -119,32 +119,51 @@ html body .stats-methodology-notice > a {
   color: var(--v3-archive) !important;
 }
 
-/* Dates, group labels, and section labels are neutral metadata. */
+/* Dates, group labels, indexes, and section labels are neutral metadata. */
 html body .timeline-item__date span,
 html body :where(.timeline-filter-group, .ar-filter-group) legend,
 html body .compare-group-heading > span,
-html body :where(.event-detail-section-heading, .organization-detail-section-heading) > p {
+html body :where(.event-detail-section-heading, .organization-detail-section-heading) > p,
+html body .static-registry-number,
+html body .stablecoin-model-history time,
+html body .stablecoin-model-history time > span,
+html body .stablecoin-dossier-title-row h1 > span,
+html body .record-symbol {
   color: var(--v3-text-quiet) !important;
 }
 
-/* A new material record is informative, not automatically a warning. */
-html body .organization-latest-change {
+/* Material-change annotations are informative, not automatically warnings. */
+html body .organization-latest-change,
+html body .stablecoin-material-change {
   border-top-color: var(--v3-rule-strong) !important;
   border-bottom-color: var(--v3-rule-strong) !important;
 }
 
-html body .organization-latest-change > span {
+html body .organization-latest-change > span,
+html body .organization-latest-change > time,
+html body .stablecoin-material-change > span,
+html body .stablecoin-material-change time {
   color: var(--v3-text-quiet) !important;
 }
 
-html body .organization-latest-change > a {
+html body .organization-latest-change > a,
+html body .stablecoin-material-change a {
   color: var(--v3-archive) !important;
+}
+
+/* Completeness values are text states, not a multicolor decoration system. */
+html body [class*="value-state--"] {
+  color: inherit !important;
 }
 
 /* Unknown information is uncertainty, not a danger condition. */
 html body .organization-unknowns-r5 > summary {
   border-top-color: var(--v3-rule-strong) !important;
   border-bottom-color: var(--v3-rule-strong) !important;
+}
+
+html body .organization-unknowns-r5 > summary small {
+  color: var(--v3-text-quiet) !important;
 }
 
 /* Preserve semantic color only on explicitly typed state/quality markers. */
