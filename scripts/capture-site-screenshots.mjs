@@ -208,7 +208,7 @@ async function measurePage(page) {
 
     const approvedSemanticContainer = [
       '[class*="status"]', '[class*="chip"]', '[class*="badge"]', '[data-value-state]', '[data-confidence]', '[data-lifecycle]',
-      '.stablecoin-dossier-title-row h1 span', '.stablecoin-material-change > span', '.stablecoin-material-change > time',
+      '.stablecoin-dossier-title-row h1 span', '.stablecoin-material-change > span',
       '.organization-latest-change > span', '.organization-latest-change > time',
       '.organization-unknowns-r5 > summary small', '.organization-unknowns-r5 > summary > b',
       '.timeline-item__date > span', '.timeline-active-filter', '.ar-active-filter', '.timeline-filter-group legend', '.ar-filter-group legend'
@@ -256,6 +256,7 @@ async function measurePage(page) {
       legacyPanelSurfaces,
       largeOffTokenSurfaces,
       semanticColorViolations,
+      legacyFontViolations,
       unexpectedEmptyStates,
       bodyHeight: Math.round(document.body.getBoundingClientRect().height),
       viewportWidth: root.clientWidth,
@@ -323,7 +324,7 @@ async function main() {
 
   await browser.close();
   const manifest = {
-    schema_version: '3.1',
+    schema_version: '3.2',
     generated_at: new Date().toISOString(),
     device: deviceName,
     viewport: device.viewport,
