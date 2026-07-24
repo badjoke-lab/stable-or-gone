@@ -123,3 +123,13 @@ html body .site-about-menu > summary {
     top: 58px !important;
   }
 }
+
+/*
+ * Final representative contrast gate.
+ * Keep the restrained hierarchy while ensuring every audited body, muted, and
+ * quiet text role clears its assigned threshold against the registry canvas.
+ */
+:root {
+  --v3-text-muted: #c0beb6;
+  --v3-text-quiet: #afaea7;
+}
