@@ -21,14 +21,14 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Validate current evidence integrity audit
+        run: node scripts/validate-registry-evidence-integrity-audit.mjs
       - name: Validate guides
         run: npm run validate:guides
       - name: Validate baseline
         run: npm run validate:baseline
       - name: Validate active workstream
         run: npm run validate:active-workstream
-      - name: Validate current evidence integrity audit
-        run: node scripts/validate-registry-evidence-integrity-audit.mjs
       - name: Validate organization and relationship integrity audit
         run: node scripts/validate-registry-organization-relationship-audit.mjs
       - name: Validate reserve redemption backing audit
