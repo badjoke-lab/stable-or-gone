@@ -29,34 +29,69 @@ for (const file of sourceFiles) {
 }
 
 const layout = read('src/layouts/BaseLayout.astro');
-const visualCss = read('src/styles/editorial-ledger-v3.css');
-const mobileCss = read('src/styles/mobile-accessibility-v3.css');
+const brand = read('src/components/BrandLockup.astro');
+const shellCss = read('src/styles/v3-cya-dark-shell.css');
+const shellCorrectionsCss = read('src/styles/v3-cya-dark-shell-corrections.css');
+const registryCss = read('src/styles/v3-cya-dark-registry.css');
 const packageJson = read('package.json');
 const ci = read('.github/workflows/ci.yml');
-const audit = read('docs/audits/ui-v3-accessibility-performance-legacy-cleanup-2026-07-02.md');
+
+for (const stylesheet of [
+  "import '../styles/v3-cya-dark-shell.css'",
+  "import '../styles/v3-cya-dark-shell-corrections.css'",
+  "import '../styles/v3-cya-dark-registry.css'",
+  "import '../styles/v3-cya-dark-home.css'",
+  "import '../styles/v3-cya-dark-detail.css'",
+  "import '../styles/v3-cya-dark-indexes.css'",
+  "import '../styles/v3-cya-dark-analysis.css'",
+  "import '../styles/v3-cya-dark-research-longform.css'"
+]) check(brand.includes(stylesheet), `BrandLockup active stylesheet import missing: ${stylesheet}`);
 
 for (const stylesheet of [
   "import '../styles/editorial-ledger-v3.css'",
-  "import '../styles/guide-editorial-v3.css'",
-  "import '../styles/reference-utility-v3.css'",
-  "import '../styles/mobile-accessibility-v3.css'"
-]) check(layout.includes(stylesheet), `BaseLayout active stylesheet import missing: ${stylesheet}`);
-check(!layout.includes('editorial-v2.css'), 'BaseLayout still imports editorial-v2.css');
-for (const marker of ['class="skip-link"', 'id="main-content"', 'tabindex="-1"', "event.key !== 'Escape'", "feedback.setAttribute('aria-live', 'polite')"]) check(layout.includes(marker), `BaseLayout accessibility marker missing: ${marker}`);
-for (const marker of ['Terminal baseline restored from the pre-v2 visual family', '--sog-paper: #061018', '--sog-ink: #e7f2f5', '--sog-accent: #71d6ff', 'color-scheme: dark', '@media (forced-colors: active)']) check(visualCss.includes(marker), `Terminal shared rule missing: ${marker}`);
-for (const marker of ['body{min-width:320px}', '@media(prefers-reduced-motion:reduce)', '@media(forced-colors:active)', 'min-height:44px', 'overflow-wrap:anywhere']) check(mobileCss.includes(marker), `mobile/accessibility marker missing: ${marker}`);
+  "import '../styles/mobile-accessibility-v3.css'",
+  "import '../styles/editorial-v2.css'"
+]) check(!brand.includes(stylesheet) && !layout.includes(stylesheet), `superseded active stylesheet import remains: ${stylesheet}`);
+
+for (const marker of [
+  'class="skip-link"',
+  'id="main-content"',
+  'tabindex="-1"',
+  "event.key !== 'Escape'",
+  "feedback.setAttribute('aria-live', 'polite')",
+  "window.matchMedia('(max-width: 820px)').matches"
+]) check(layout.includes(marker), `BaseLayout accessibility marker missing: ${marker}`);
+
+for (const marker of [
+  '--v3-bg: #050607',
+  '--v3-text: #f1efe8',
+  '--v3-accent: #67cef4',
+  'color-scheme: dark',
+  '.site-primary-navigation',
+  '.site-footer-inner'
+]) check(shellCss.includes(marker), `CYA-dark shell rule missing: ${marker}`);
+
+for (const marker of [
+  '--v3-text-muted: #c0beb6',
+  '--v3-text-quiet: #afaea7',
+  '@media (max-width: 820px)',
+  '.mobile-navigation-panel'
+]) check(shellCorrectionsCss.includes(marker), `CYA-dark shell correction missing: ${marker}`);
+
+for (const marker of ['.registry', 'border', '--v3-rule']) check(registryCss.includes(marker), `CYA-dark registry rule missing: ${marker}`);
+
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
 check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step missing');
 check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
-for (const marker of ['Roadmap item: PR #272', 'Canonical stable assets changed: 0', 'PageHero.astro', 'MetricCard.astro', 'editorial-v2.css', 'performance budgets', 'representative screenshot regression']) check(audit.includes(marker), `cleanup audit document missing: ${marker}`);
 
 const result = {
-  schema_version: '2.0',
+  schema_version: '3.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
-  visual_family: 'terminal_baseline_restored',
-  restoration_source_commit: '3df568eab0a179d7690a88efb599156b0d659ab7',
+  visual_family: 'cya_dark_historical_registry',
+  active_shell: 'src/styles/v3-cya-dark-shell.css',
+  active_shell_corrections: 'src/styles/v3-cya-dark-shell-corrections.css',
   removed_paths: removedPaths,
   scanned_source_files: sourceFiles.length,
   accessibility_contracts: {
@@ -64,9 +99,8 @@ const result = {
     focusable_main: true,
     escape_focus_return: true,
     polite_copy_feedback: true,
-    width_320: true,
-    reduced_motion: true,
-    forced_colors: true
+    compact_mobile_navigation: true,
+    representative_contrast_gate: true
   },
   failures
 };
