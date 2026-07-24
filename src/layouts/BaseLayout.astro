@@ -3,7 +3,7 @@ import '../styles/global.css';
 import '../styles/shell.css';
 import '../styles/accessibility-utilities.css';
 import BrandLockup from '../components/BrandLockup.astro';
-import { aboutNavigation, footerNavigationGroups, primaryNavigation } from '../../config/site-architecture.mjs';
+import { aboutNavigation, globalNavigationGroups } from '../../config/site-architecture.mjs';
 interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
@@ -27,12 +27,27 @@ const isUtilityPage = ['/contact/', '/support/'].includes(pathname);
 const pageKind = isGuideIndex ? 'guide-index' : isGuideArticle ? 'guide-article' : isReferencePage ? 'reference' : isLongformPage ? 'longform' : isUtilityPage ? 'utility' : undefined;
 const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
 const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
+const registryNavigation = globalNavigationGroups.find((group) => group.id === 'registry')?.items ?? [];
+const shellNavigation = [...registryNavigation, { label: 'Guides', href: '/guides/' }];
+const footerLinks = [
+  { label: 'Stablecoins', href: '/stablecoins/' },
+  { label: 'Timeline', href: '/timeline/' },
+  { label: 'Guides', href: '/guides/' },
+  { label: 'Methodology', href: '/methodology/' },
+  { label: 'Corrections', href: '/contact/' },
+  { label: 'GitHub', href: 'https://github.com/badjoke-lab/stable-or-gone' },
+  { label: 'Version JSON', href: '/version.json' },
+  { label: 'Data manifest', href: '/data/manifest.json' },
+  { label: 'LLM guide', href: '/llms.txt' },
+  { label: 'AI entrypoint', href: '/ai.txt' }
+];
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050607" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
@@ -51,36 +66,51 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
       <div class="site-header-inner">
-        <BrandLockup class="site-brand" surface="light" />
-        <nav class="site-primary-navigation" aria-label="Primary navigation">
-          {primaryNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-        </nav>
-        <form class="site-search" action="/stablecoins/" method="get" role="search">
-          <label class="visually-hidden" for="site-search-input">Search stablecoin records</label>
-          <input id="site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" />
-          <button type="submit">Search</button>
-        </form>
-        <details class="site-about-menu" data-disclosure>
-          <summary aria-current={isAboutCurrent ? 'page' : undefined} aria-controls="site-about-panel" aria-expanded="false">About</summary>
-          <nav class="site-about-panel" id="site-about-panel" aria-label="About and project navigation">
-            {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        <div class="v3-masthead-row">
+          <div class="v3-brand-block">
+            <BrandLockup class="site-brand" surface="dark" />
+            <span class="v3-brand-copy" aria-hidden="true">
+              <strong>Stablecoin history registry</strong>
+              <small>Evidence, lifecycle, access, and institutional context</small>
+            </span>
+          </div>
+          <div class="v3-masthead-meta" aria-label="Registry description">
+            <span>Evidence-led</span>
+            <span>Static registry</span>
+            <a href="/contact/">Submit correction</a>
+          </div>
+        </div>
+        <div class="v3-nav-row">
+          <nav class="site-primary-navigation" aria-label="Primary navigation">
+            {shellNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
           </nav>
-        </details>
-        <details class="mobile-navigation" data-mobile-navigation data-disclosure>
-          <summary aria-label="Open navigation menu" aria-controls="mobile-navigation-panel" aria-expanded="false">Menu</summary>
-          <div class="mobile-navigation-panel" id="mobile-navigation-panel">
-            <nav class="mobile-navigation-links" aria-label="Mobile primary navigation">
-              {primaryNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-            </nav>
-            <form class="mobile-site-search" action="/stablecoins/" method="get" role="search">
-              <label for="mobile-site-search-input">Search stablecoin records</label>
-              <div><input id="mobile-site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" /><button type="submit">Search</button></div>
-            </form>
-            <nav class="mobile-navigation-secondary" aria-label="Mobile project navigation">
+          <form class="site-search" action="/stablecoins/" method="get" role="search">
+            <label class="visually-hidden" for="site-search-input">Search stablecoin records</label>
+            <input id="site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" />
+            <button type="submit">Search</button>
+          </form>
+          <details class="site-about-menu" data-disclosure>
+            <summary aria-current={isAboutCurrent ? 'page' : undefined} aria-controls="site-about-panel" aria-expanded="false">Reference</summary>
+            <nav class="site-about-panel" id="site-about-panel" aria-label="Reference and project navigation">
               {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
             </nav>
-          </div>
-        </details>
+          </details>
+          <details class="mobile-navigation" data-mobile-navigation data-disclosure>
+            <summary aria-label="Open navigation menu" aria-controls="mobile-navigation-panel" aria-expanded="false">Menu</summary>
+            <div class="mobile-navigation-panel" id="mobile-navigation-panel">
+              <nav class="mobile-navigation-links" aria-label="Mobile primary navigation">
+                {shellNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+              </nav>
+              <form class="mobile-site-search" action="/stablecoins/" method="get" role="search">
+                <label for="mobile-site-search-input">Search stablecoin records</label>
+                <div><input id="mobile-site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" /><button type="submit">Search</button></div>
+              </form>
+              <nav class="mobile-navigation-secondary" aria-label="Mobile reference navigation">
+                {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+              </nav>
+            </div>
+          </details>
+        </div>
       </div>
     </header>
     <main id="main-content" class="site-main" tabindex="-1" data-page-family={pageFamily} data-page-kind={pageKind}>
@@ -100,10 +130,13 @@ const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
     </main>
     <footer class="site-footer">
       <div class="site-footer-inner">
-        <div class="site-footer-intro"><BrandLockup surface="light" /><p>Historical information only. Stable or Gone is a source-backed registry, not a ranking or recommendation service.</p></div>
-        {footerNavigationGroups.map((group) => (<nav class="site-footer-group" aria-labelledby={`footer-${group.id}`}><h2 id={`footer-${group.id}`}>{group.label}</h2>{group.items.map((item) => <a href={item.href}>{item.label}</a>)}</nav>))}
-        <nav class="site-footer-group site-footer-data" aria-labelledby="footer-data"><h2 id="footer-data">Data access</h2><a href="/version.json">Version JSON</a><a href="/data/manifest.json">Data manifest</a><a href="/llms.txt">LLM guide</a><a href="/ai.txt">AI entrypoint</a></nav>
-        <p class="site-footer-meta">Canonical records, evidence relations, and known unknowns are preserved across desktop and compact layouts.</p>
+        <div class="site-footer-intro">
+          <p>Stable or Gone is a source-backed historical registry, not a ranking, recommendation, or real-time market dashboard.</p>
+        </div>
+        <nav class="v3-footer-links" aria-label="Footer navigation">
+          {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <p class="site-footer-meta">Canonical records, evidence relations, and known unknowns remain preserved across desktop and compact layouts.</p>
       </div>
     </footer>
     <script>
