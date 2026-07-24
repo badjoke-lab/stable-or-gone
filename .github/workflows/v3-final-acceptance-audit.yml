@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   issues: write
 
 concurrency:
@@ -24,40 +24,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  prune-historical-pr-workflows:
-    if: github.ref_name == 'ui/v3-cya-dark-redesign'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ui/v3-cya-dark-redesign
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Remove workflows tied to completed PR numbers
-        run: node scripts/audit/prune-historical-pr-workflows.mjs --apply
-      - name: Commit workflow cleanup
-        run: |
-          set -euo pipefail
-          if git diff --quiet -- .github/workflows; then
-            echo "No historical PR-specific workflows remain."
-            exit 0
-          fi
-          git diff --check
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -u .github/workflows
-          git commit -m "Remove historical PR-specific workflows"
-          git push origin HEAD:ui/v3-cya-dark-redesign
-      - name: Upload workflow cleanup inventory
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: historical-pr-workflow-prune-${{ github.run_id }}
-          retention-days: 14
-          if-no-files-found: error
-          path: artifacts/workflow-prune/**
-
   build-test-capture:
     runs-on: ubuntu-latest
     timeout-minutes: 90
