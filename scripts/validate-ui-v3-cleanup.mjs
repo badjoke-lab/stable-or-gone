@@ -140,15 +140,17 @@ for (const marker of [
   'legacyPanelSurfaces',
   'largeOffTokenSurfaces',
   'semanticColorViolations',
+  'legacyFontViolations',
   '.event-structured-detail.panel.registry'
-]) check(screenshotCapture.includes(marker), `screenshot color/surface measurement missing: ${marker}`);
+]) check(screenshotCapture.includes(marker), `screenshot visual measurement missing: ${marker}`);
 
 for (const marker of [
   'legacy_panel_surface',
   'large_off_token_surface',
   'semantic_color_misuse',
+  'legacyFontViolations',
   'semantic_colors_require_approved_meaning'
-]) check(screenshotAudit.includes(marker), `screenshot color/surface gate missing: ${marker}`);
+]) check(screenshotAudit.includes(marker), `screenshot visual gate missing: ${marker}`);
 
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
@@ -156,7 +158,7 @@ check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step 
 check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
 
 const result = {
-  schema_version: '3.4',
+  schema_version: '3.5',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
@@ -176,7 +178,8 @@ const result = {
     representative_contrast_gate: true,
     exhaustive_screenshot_gate: true,
     color_restraint_gate: true,
-    legacy_surface_gate: true
+    legacy_surface_gate: true,
+    legacy_font_gate: true
   },
   failures
 };
