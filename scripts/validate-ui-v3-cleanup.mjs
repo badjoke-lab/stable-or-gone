@@ -34,7 +34,7 @@ for (const file of sourceFiles) {
   const content = read(file);
   const prohibitedMarkers = file.endsWith('.css')
     ? ['editorial-v2.css']
-    : ['PageHero', 'MetricCard', 'editorial-v2.css'];
+    : ['PageHero', 'MetricCard', 'editorial-v2.css', 'class="panel registry"'];
   for (const marker of prohibitedMarkers) check(!content.includes(marker), `${file}: superseded marker remains: ${marker}`);
   if (!file.endsWith('.css')) {
     for (const stylesheet of inactiveCompatibilityStyles) {
@@ -48,6 +48,7 @@ const brand = read('src/components/BrandLockup.astro');
 const shellCss = read('src/styles/v3-cya-dark-shell.css');
 const shellCorrectionsCss = read('src/styles/v3-cya-dark-shell-corrections.css');
 const registryCss = read('src/styles/v3-cya-dark-registry.css');
+const remediationCss = read('src/styles/v3-exhaustive-remediation.css');
 const packageJson = read('package.json');
 const ci = read('.github/workflows/ci.yml');
 
@@ -59,7 +60,8 @@ for (const stylesheet of [
   "import '../styles/v3-cya-dark-detail.css'",
   "import '../styles/v3-cya-dark-indexes.css'",
   "import '../styles/v3-cya-dark-analysis.css'",
-  "import '../styles/v3-cya-dark-research-longform.css'"
+  "import '../styles/v3-cya-dark-research-longform.css'",
+  "import '../styles/v3-exhaustive-remediation.css'"
 ]) check(brand.includes(stylesheet), `BrandLockup active stylesheet import missing: ${stylesheet}`);
 
 for (const stylesheet of [
@@ -103,18 +105,26 @@ for (const marker of [
   '--v3-rule'
 ]) check(registryCss.includes(marker), `CYA-dark registry rule missing: ${marker}`);
 
+for (const marker of [
+  '.issuer-control-events__cards',
+  '.home-recent table',
+  'min-width: 0 !important',
+  '.organization-detail-page'
+]) check(remediationCss.includes(marker), `exhaustive UI remediation rule missing: ${marker}`);
+
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
 check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step missing');
 check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
 
 const result = {
-  schema_version: '3.2',
+  schema_version: '3.3',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
   active_shell: 'src/styles/v3-cya-dark-shell.css',
   active_shell_corrections: 'src/styles/v3-cya-dark-shell-corrections.css',
+  active_exhaustive_remediation: 'src/styles/v3-exhaustive-remediation.css',
   inactive_compatibility_styles: inactiveCompatibilityStyles,
   removed_paths: removedPaths,
   scanned_source_files: sourceFiles.length,
@@ -124,7 +134,8 @@ const result = {
     escape_focus_return: true,
     polite_copy_feedback: true,
     compact_mobile_navigation: true,
-    representative_contrast_gate: true
+    representative_contrast_gate: true,
+    exhaustive_screenshot_gate: true
   },
   failures
 };
