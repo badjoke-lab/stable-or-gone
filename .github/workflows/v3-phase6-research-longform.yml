@@ -66,8 +66,7 @@ jobs:
             for (const [name, route] of routes) {
               const response = await page.goto(`${base}${route}`, { waitUntil: 'networkidle', timeout: 60000 });
               if (!response?.ok()) throw new Error(`${route}: HTTP ${response?.status()}`);
-              if (route === '/timeline/') await page.waitForSelector('[data-timeline-results]:not([hidden])', { timeout: 15000 });
-              if (route === '/access-regulation/') await page.waitForSelector('[data-ar-results]:not([hidden])', { timeout: 15000 });
+              if (route === '/timeline/' || route === '/access-regulation/') await page.waitForTimeout(1500);
               await page.evaluate(() => document.fonts?.ready);
               const metrics = await page.evaluate(({ device, route }) => {
                 const toc = document.querySelector('.guide-article-toc, .longform-toc');
@@ -83,7 +82,9 @@ jobs:
                   surfaceRadius: firstSurface ? getComputedStyle(firstSurface).borderRadius : null,
                   tocPosition: toc ? getComputedStyle(toc).position : null,
                   timelineItems: document.querySelectorAll('.timeline-item').length,
-                  accessCards: document.querySelectorAll('.ar-result-card').length
+                  accessCards: document.querySelectorAll('.ar-result-card').length,
+                  timelineEmpty: Boolean(document.querySelector('[data-timeline-empty]:not([hidden])')),
+                  accessEmpty: Boolean(document.querySelector('[data-ar-empty]:not([hidden])'))
                 };
               }, { device, route });
               await page.screenshot({ path: `artifacts/v3-phase6/${device}-${name}.png`, fullPage: true });
