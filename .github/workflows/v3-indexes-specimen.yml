@@ -1,0 +1,105 @@
+name: V3 propagated index specimen audit
+
+on:
+  push:
+    branches:
+      - 'ui/v3-cya-dark-redesign'
+    paths:
+      - 'src/styles/v3-cya-dark-indexes.css'
+      - 'src/components/BrandLockup.astro'
+      - '.github/workflows/v3-indexes-specimen.yml'
+      - 'src/.v3-indexes-audit-trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sog-v3-indexes-specimen
+  cancel-in-progress: true
+
+jobs:
+  build-and-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm clean-install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-v3-indexes-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/sog-v3-indexes-server.log
+          exit 1
+      - name: Capture propagated indexes
+        run: |
+          mkdir -p artifacts/v3-indexes
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
+          const routes = [['events','/events/'],['organizations','/issuers/'],['guides','/guides/']];
+          const devices = {
+            desktop: { viewport: { width: 1440, height: 900 } },
+            mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }
+          };
+          const browser = await chromium.launch();
+          const results = [];
+          for (const [device, settings] of Object.entries(devices)) {
+            const context = await browser.newContext({ ...settings, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+            const page = await context.newPage();
+            for (const [name, route] of routes) {
+              const response = await page.goto(`http://127.0.0.1:4173${route}`, { waitUntil: 'networkidle', timeout: 60000 });
+              if (!response?.ok()) throw new Error(`${route}: HTTP ${response?.status()}`);
+              await page.evaluate(() => document.fonts?.ready);
+              const metrics = await page.evaluate(() => ({
+                bodyHeight: Math.round(document.body.getBoundingClientRect().height),
+                viewportWidth: document.documentElement.clientWidth,
+                scrollWidth: document.documentElement.scrollWidth,
+                horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
+                visibleEventCards: [...document.querySelectorAll('.event-index-card:not([hidden])')].length,
+                visibleOrganizationCards: [...document.querySelectorAll('.organization-index-card:not([hidden])')].length,
+                visibleGuideMobile: [...document.querySelectorAll('.guide-index-mobile article')].filter((item) => getComputedStyle(item).display !== 'none').length
+              }));
+              await page.screenshot({ path: `artifacts/v3-indexes/${device}-${name}.png`, fullPage: true });
+              results.push({ device, route, metrics });
+            }
+            await context.close();
+          }
+          await browser.close();
+          await writeFile('artifacts/v3-indexes/metrics.json', JSON.stringify(results, null, 2));
+          console.log(JSON.stringify(results, null, 2));
+          if (results.some((item) => item.metrics.horizontalOverflow)) process.exitCode = 1;
+          NODE
+      - name: Upload index artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-v3-indexes-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/v3-indexes/**
+            /tmp/sog-v3-indexes-server.log
+      - name: Report run
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const file = 'artifacts/v3-indexes/metrics.json';
+            const metrics = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : [];
+            const marker = '<!-- sog-v3-indexes-specimen -->';
+            const body = `${marker}\nV3 index run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nMetrics: \`${JSON.stringify(metrics)}\`\nArtifact: \`sog-v3-indexes-${context.runId}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, per_page: 100 });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
+            else await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, body });
