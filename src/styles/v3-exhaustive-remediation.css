@@ -69,6 +69,18 @@ html body .issuer-control-events__cards {
   display: none;
 }
 
+html body .organization-unknown-list-r5,
+html body .organization-unknown-list-r5 article,
+html body .organization-unknown-list-r5 h3 {
+  min-width: 0;
+  max-width: 100%;
+}
+
+html body .organization-unknown-list-r5 h3 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 @media (max-width: 719px) {
   html body .home-recent__table-wrap {
     max-width: 100%;
