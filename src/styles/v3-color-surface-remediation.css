@@ -191,6 +191,17 @@ html body .event-structured-cards {
     box-shadow: none !important;
   }
 
+  html body .ar-explorer .ar-controls .ar-search-row button.ui-button,
+  html body .timeline-page .timeline-controls .timeline-search-row button.ui-button,
+  html body .compare-page .compare-controls .compare-actions button.ui-button,
+  html body .stablecoin-index-page .stablecoin-index-registry .stablecoin-index-toolbar button.ui-button.stablecoin-index-action {
+    border: 1px solid var(--v3-rule-strong) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--v3-text-muted) !important;
+    box-shadow: none !important;
+  }
+
   html body :where(
     .ar-search-row .ui-button,
     .timeline-search-row .ui-button,
@@ -208,7 +219,15 @@ html body .event-structured-cards {
     .organization-index-toolbar .organization-index-action,
     .stablecoin-index-toolbar .stablecoin-index-action,
     .support-callout-action
-  ):focus-visible {
+  ):focus-visible,
+  html body .ar-explorer .ar-controls .ar-search-row button.ui-button:hover,
+  html body .ar-explorer .ar-controls .ar-search-row button.ui-button:focus-visible,
+  html body .timeline-page .timeline-controls .timeline-search-row button.ui-button:hover,
+  html body .timeline-page .timeline-controls .timeline-search-row button.ui-button:focus-visible,
+  html body .compare-page .compare-controls .compare-actions button.ui-button:hover,
+  html body .compare-page .compare-controls .compare-actions button.ui-button:focus-visible,
+  html body .stablecoin-index-page .stablecoin-index-registry .stablecoin-index-toolbar button.ui-button.stablecoin-index-action:hover,
+  html body .stablecoin-index-page .stablecoin-index-registry .stablecoin-index-toolbar button.ui-button.stablecoin-index-action:focus-visible {
     border-color: var(--v3-accent) !important;
     color: var(--v3-accent) !important;
   }
