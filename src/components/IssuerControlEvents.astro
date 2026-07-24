@@ -5,21 +5,44 @@ import type { EventRow } from '../lib/data/registry';
 const { events = [], title = 'Issuer controls and intervention history' } = Astro.props as { events?: EventRow[]; title?: string };
 ---
 {events.length > 0 && (
-  <section class="panel registry">
-    <div class="bar">{title}</div>
-    <table data-table-kind="issuer-control-events" data-mobile-table="scroll-preserve">
-      <thead><tr><th>Date</th><th>Action</th><th>Network</th><th>Address</th><th>Amount</th><th>Verification</th></tr></thead>
-      <tbody>{events.map((event: EventRow) => {
+  <section class="issuer-control-events" data-ui-v3-issuer-controls>
+    <header class="issuer-control-events__heading">
+      <p>Control history</p>
+      <h3>{title}</h3>
+    </header>
+
+    <div class="organization-detail-table issuer-control-events__table">
+      <table data-table-kind="issuer-control-events" data-mobile-table="cards">
+        <thead><tr><th>Date</th><th>Action</th><th>Network</th><th>Address</th><th>Amount</th><th>Verification</th></tr></thead>
+        <tbody>{events.map((event: EventRow) => {
+          const detail = event.issuer_control_detail;
+          return <tr>
+            <td>{event.event_date ?? '—'}</td>
+            <td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><br /><small>{formatPublicLabel(detail?.event_subtype ?? event.event_type)}</small></td>
+            <td>{[detail?.network, detail?.token_standard].filter(Boolean).join(' · ') || '—'}</td>
+            <td class="issuer-control-events__break">{detail?.affected_addresses?.join(', ') ?? '—'}</td>
+            <td>{detail?.reported_frozen_amount?.display_text ?? '—'}</td>
+            <td>{formatPublicLabel(detail?.verification_status, 'Unknown')}</td>
+          </tr>;
+        })}</tbody>
+      </table>
+    </div>
+
+    <div class="issuer-control-events__cards" data-mobile-representation-for="issuer-control-events">
+      {events.map((event: EventRow) => {
         const detail = event.issuer_control_detail;
-        return <tr>
-          <td>{event.event_date ?? '—'}</td>
-          <td><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a><br /><small>{formatPublicLabel(detail?.event_subtype ?? event.event_type)}</small></td>
-          <td>{[detail?.network, detail?.token_standard].filter(Boolean).join(' · ') || '—'}</td>
-          <td>{detail?.affected_addresses?.join(', ') ?? '—'}</td>
-          <td>{detail?.reported_frozen_amount?.display_text ?? '—'}</td>
-          <td>{formatPublicLabel(detail?.verification_status, 'Unknown')}</td>
-        </tr>;
-      })}</tbody>
-    </table>
+        return <article>
+          <time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time>
+          <h4><a href={`/event/${event.id}/`}>{eventPublicCopy[event.id]?.title ?? event.title}</a></h4>
+          <p>{formatPublicLabel(detail?.event_subtype ?? event.event_type)}</p>
+          <dl>
+            <div><dt>Network</dt><dd>{[detail?.network, detail?.token_standard].filter(Boolean).join(' · ') || '—'}</dd></div>
+            <div><dt>Address</dt><dd class="issuer-control-events__break">{detail?.affected_addresses?.join(', ') ?? '—'}</dd></div>
+            <div><dt>Amount</dt><dd>{detail?.reported_frozen_amount?.display_text ?? '—'}</dd></div>
+            <div><dt>Verification</dt><dd>{formatPublicLabel(detail?.verification_status, 'Unknown')}</dd></div>
+          </dl>
+        </article>;
+      })}
+    </div>
   </section>
 )}
