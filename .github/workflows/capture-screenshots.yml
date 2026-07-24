@@ -1,4 +1,4 @@
-name: Capture final representative pre-v2 screenshots
+name: Verify final pre-v2 UI functions
 
 on:
   push:
@@ -13,15 +13,15 @@ permissions:
   issues: write
 
 concurrency:
-  group: sog-pre-v2-final-representative
+  group: sog-pre-v2-final-functional
   cancel-in-progress: true
 
 jobs:
-  capture-final-representative:
+  verify-final-functions:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 60
     env:
-      CAPTURE_BASE_URL: http://127.0.0.1:4173
+      BASE_URL: http://127.0.0.1:4173
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,81 +42,145 @@ jobs:
 
       - name: Start local site
         run: |
-          python3 -m http.server 4173 --directory dist > /tmp/sog-final-representative-server.log 2>&1 &
+          python3 -m http.server 4173 --directory dist > /tmp/sog-final-functional-server.log 2>&1 &
           for attempt in $(seq 1 30); do
-            if curl -fsS "$CAPTURE_BASE_URL/" >/dev/null; then
+            if curl -fsS "$BASE_URL/" >/dev/null; then
               exit 0
             fi
             sleep 1
           done
-          cat /tmp/sog-final-representative-server.log
+          cat /tmp/sog-final-functional-server.log
           exit 1
 
-      - name: Capture representative desktop routes
-        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
+      - name: Run browser and public-layer smoke tests
+        run: |
+          mkdir -p artifacts/final-functional
+          node --input-type=module <<'NODE'
+          import { chromium, request } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
 
-      - name: Preserve desktop manifest
-        run: cp artifacts/screenshots/manifest.desktop.json artifacts/final-manifest.desktop.json
+          const baseURL = process.env.BASE_URL;
+          const checks = [];
+          const assert = (condition, message, details = {}) => {
+            checks.push({ check: message, passed: Boolean(condition), ...details });
+            if (!condition) throw new Error(message);
+          };
+          const visibleRecordNames = async (page) => page.locator('[data-registry-row]:visible .record-name').allTextContents();
 
-      - name: Capture representative mobile routes
-        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
+          const browser = await chromium.launch();
+          try {
+            const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+            const page = await desktop.newPage();
+            let response = await page.goto(`${baseURL}/stablecoins/`, { waitUntil: 'networkidle', timeout: 60000 });
+            assert(response?.ok(), 'Stablecoin register loads');
 
-      - name: Preserve mobile manifest
-        run: cp artifacts/screenshots/manifest.mobile.json artifacts/final-manifest.mobile.json
+            const initialCount = Number(await page.locator('[data-result-count]').textContent());
+            assert(initialCount > 100, 'Stablecoin register exposes the full current record count', { initialCount });
 
-      - name: Upload representative desktop images
+            const initialNames = await visibleRecordNames(page);
+            await page.locator('[data-index-search]').fill('USDT');
+            await page.waitForFunction((original) => Number(document.querySelector('[data-result-count]')?.textContent) < original, initialCount);
+            const searchedCount = Number(await page.locator('[data-result-count]').textContent());
+            assert(searchedCount > 0 && searchedCount < initialCount, 'Search narrows the register', { searchedCount });
+
+            await page.locator('[data-clear-all]').first().click();
+            await page.waitForFunction((original) => Number(document.querySelector('[data-result-count]')?.textContent) === original, initialCount);
+            assert(Number(await page.locator('[data-result-count]').textContent()) === initialCount, 'Clear all restores the register');
+
+            await page.locator('[data-index-sort]').selectOption('name_desc');
+            await page.waitForTimeout(100);
+            const sortedNames = await visibleRecordNames(page);
+            assert(sortedNames.length > 0 && sortedNames[0] !== initialNames[0], 'Sort changes the visible ordering', { before: initialNames[0], after: sortedNames[0] });
+
+            const pageStatusBefore = await page.locator('[data-page-status]').textContent();
+            await page.locator('[data-page-next]').click();
+            await page.waitForFunction((before) => document.querySelector('[data-page-status]')?.textContent !== before, pageStatusBefore);
+            const pageStatusAfter = await page.locator('[data-page-status]').textContent();
+            assert(pageStatusAfter !== pageStatusBefore, 'Pagination advances to the next result page', { pageStatusBefore, pageStatusAfter });
+
+            await page.locator('[data-page-prev]').click();
+            await page.waitForFunction(() => document.querySelector('[data-page-status]')?.textContent?.startsWith('Page 1'));
+            const compareChoices = page.locator('[data-compare-select]:visible');
+            assert(await compareChoices.count() >= 2, 'Comparison choices remain available');
+            await compareChoices.nth(0).check();
+            await compareChoices.nth(1).check();
+            await page.waitForFunction(() => {
+              const panel = document.querySelector('[data-comparison-panel]');
+              return panel && !panel.hasAttribute('hidden') && (document.querySelector('[data-comparison-grid]')?.children.length ?? 0) >= 2;
+            });
+            assert(await page.locator('[data-comparison-grid]').locator(':scope > *').count() >= 2, 'Bounded comparison renders selected records');
+
+            response = await page.goto(`${baseURL}/compare/`, { waitUntil: 'networkidle', timeout: 60000 });
+            assert(response?.ok() && await page.locator('main').count() === 1, 'Standalone compare page loads');
+
+            response = await page.goto(`${baseURL}/guides/eu-stablecoin-access-after-mica/`, { waitUntil: 'networkidle', timeout: 60000 });
+            assert(response?.ok(), 'MiCA guide loads');
+            assert(await page.locator('.guide-article-toc').count() === 1, 'Guide has one table of contents');
+            assert(await page.locator('.guide-related-records > a').count() >= 2, 'Guide related records remain linked');
+
+            response = await page.goto(`${baseURL}/stats/`, { waitUntil: 'networkidle', timeout: 60000 });
+            assert(response?.ok(), 'Stats page loads');
+            assert(await page.locator('.stats-page').count() === 1, 'Stats analysis remains present');
+            await desktop.close();
+
+            const mobile = await browser.newContext({ viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+            const mobilePage = await mobile.newPage();
+            response = await mobilePage.goto(`${baseURL}/stablecoins/`, { waitUntil: 'networkidle', timeout: 60000 });
+            assert(response?.ok(), 'Mobile stablecoin register loads');
+            await mobilePage.locator('[data-index-search]').fill('USDC');
+            await mobilePage.waitForFunction((original) => Number(document.querySelector('[data-result-count]')?.textContent) < original, initialCount);
+            const mobileCount = Number(await mobilePage.locator('[data-result-count]').textContent());
+            assert(mobileCount > 0 && mobileCount < initialCount, 'Mobile search narrows the register', { mobileCount });
+            const mobileOverflow = await mobilePage.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+            assert(!mobileOverflow, 'Mobile register has no horizontal overflow');
+            await mobile.close();
+
+            const api = await request.newContext({ baseURL });
+            for (const [route, type] of [['/version.json', 'json'], ['/data/manifest.json', 'json'], ['/llms.txt', 'text'], ['/ai.txt', 'text']]) {
+              const result = await api.get(route);
+              assert(result.ok(), `${route} remains available`, { status: result.status() });
+              if (type === 'json') {
+                const parsed = await result.json();
+                assert(parsed && typeof parsed === 'object', `${route} remains valid JSON`);
+              } else {
+                const text = await result.text();
+                assert(text.trim().length > 0, `${route} remains non-empty`);
+              }
+            }
+            await api.dispose();
+          } finally {
+            await browser.close();
+          }
+
+          const summary = { generatedAt: new Date().toISOString(), passed: checks.every((entry) => entry.passed), checkCount: checks.length, checks };
+          await writeFile('artifacts/final-functional/results.json', JSON.stringify(summary, null, 2));
+          console.log(JSON.stringify(summary, null, 2));
+          NODE
+
+      - name: Upload functional verification
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-final-desktop-${{ github.run_id }}
-          if-no-files-found: error
-          retention-days: 14
-          path: artifacts/screenshots/desktop/**
-
-      - name: Upload representative mobile images
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: sog-final-mobile-${{ github.run_id }}
-          if-no-files-found: error
-          retention-days: 14
-          path: artifacts/screenshots/mobile/**
-
-      - name: Upload final manifests and log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: sog-final-manifests-${{ github.run_id }}
+          name: sog-final-functional-${{ github.run_id }}
           if-no-files-found: warn
           retention-days: 14
           path: |
-            artifacts/final-manifest.desktop.json
-            artifacts/final-manifest.mobile.json
-            artifacts/screenshots/routes.json
-            /tmp/sog-final-representative-server.log
+            artifacts/final-functional/**
+            /tmp/sog-final-functional-server.log
 
-      - name: Report run to audit issue
+      - name: Report functional run to audit issue
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const read = (device) => {
-              const file = `artifacts/final-manifest.${device}.json`;
-              if (!fs.existsSync(file)) return { device, manifest: 'missing' };
-              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
-              return {
-                device,
-                discovered: x.discovered_route_count,
-                selected: x.selected_route_count,
-                captured: x.captured_count,
-                failed: x.failed_count
-              };
-            };
-            const marker = '<!-- sog-pre-v2-final-representative -->';
-            const desktop = read('desktop');
-            const mobile = read('mobile');
-            const body = `${marker}\nFinal representative run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nDesktop: \`${JSON.stringify(desktop)}\`\nMobile: \`${JSON.stringify(mobile)}\`\nArtifacts: \`sog-final-desktop-${context.runId}\`, \`sog-final-mobile-${context.runId}\`, \`sog-final-manifests-${context.runId}\``;
+            const marker = '<!-- sog-pre-v2-final-functional -->';
+            let result = { results: 'missing' };
+            if (fs.existsSync('artifacts/final-functional/results.json')) {
+              const x = JSON.parse(fs.readFileSync('artifacts/final-functional/results.json', 'utf8'));
+              result = { passed: x.passed, checks: x.checkCount };
+            }
+            const body = `${marker}\nFinal functional run: **${context.runId}**\nHead: \`${context.sha}\`\nWorkflow result: **${{ job.status }}**\nVerification: \`${JSON.stringify(result)}\`\nArtifact: \`sog-final-functional-${context.runId}\``;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -125,17 +189,7 @@ jobs:
             });
             const existing = comments.find((comment) => comment.body?.includes(marker));
             if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body
-              });
+              await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
             } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: 455,
-                body
-              });
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: 455, body });
             }
