@@ -127,7 +127,13 @@ jobs:
           done
           if [ -f artifacts/screenshots/exhaustive-ui-audit.json ]; then
             FINDINGS=$(node -e "const x=require('./artifacts/screenshots/exhaustive-ui-audit.json'); console.log(x.finding_count)")
+            LEGACY_PANELS=$(node -e "const x=require('./artifacts/screenshots/exhaustive-ui-audit.json'); console.log(x.categories?.legacy_panel_surface ?? 0)")
+            COLORED_SURFACES=$(node -e "const x=require('./artifacts/screenshots/exhaustive-ui-audit.json'); console.log(x.categories?.large_off_token_surface ?? 0)")
+            SEMANTIC_COLOR=$(node -e "const x=require('./artifacts/screenshots/exhaustive-ui-audit.json'); console.log(x.categories?.semantic_color_misuse ?? 0)")
             echo "- automated UI findings: $FINDINGS" >> "$GITHUB_STEP_SUMMARY"
+            echo "- legacy panel surfaces: $LEGACY_PANELS" >> "$GITHUB_STEP_SUMMARY"
+            echo "- large off-token colored surfaces: $COLORED_SURFACES" >> "$GITHUB_STEP_SUMMARY"
+            echo "- semantic color misuse: $SEMANTIC_COLOR" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "- automated UI findings: audit missing" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -154,9 +160,9 @@ jobs:
             const desktop = read('desktop');
             const mobile = read('mobile');
             const auditFile = 'artifacts/screenshots/exhaustive-ui-audit.json';
-            const audit = fs.existsSync(auditFile) ? JSON.parse(fs.readFileSync(auditFile, 'utf8')) : { finding_count: 'missing' };
+            const audit = fs.existsSync(auditFile) ? JSON.parse(fs.readFileSync(auditFile, 'utf8')) : { finding_count: 'missing', categories: {} };
             const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Manual artifact inspection: **required**\n- Artifacts: \`sog-screenshot-audit-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``;
+            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Legacy panel surfaces: **${audit.categories?.legacy_panel_surface ?? 0}**\n- Large off-token colored surfaces: **${audit.categories?.large_off_token_surface ?? 0}**\n- Semantic color misuse: **${audit.categories?.semantic_color_misuse ?? 0}**\n- Manual artifact inspection: **required**\n- Artifacts: \`sog-screenshot-audit-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
