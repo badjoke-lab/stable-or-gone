@@ -22,7 +22,7 @@ const usesMonospace = (fontFamily) => {
 
 const isBlockingFontLeak = (detail) => {
   const element = String(detail?.element ?? '');
-  return element.includes('static-registry-') || element.includes('panel.registry') || element.includes('data-saas-dashboard');
+  return element.includes('static-registry-') || element.includes('panel.registry') || element.includes('data-saas-dashboard') || element.includes('event-structured');
 };
 
 for (const file of manifestFiles) {
@@ -57,6 +57,9 @@ for (const file of manifestFiles) {
     for (const value of metrics.brokenImages ?? []) add(device, route, 'broken_image', value);
     for (const value of metrics.brandViolations ?? []) add(device, route, 'brand_violation', value);
     for (const value of metrics.legacyVisualMarkers ?? []) add(device, route, 'legacy_visual_marker', value);
+    for (const value of metrics.legacyPanelSurfaces ?? []) add(device, route, 'legacy_panel_surface', value);
+    for (const value of metrics.largeOffTokenSurfaces ?? []) add(device, route, 'large_off_token_surface', value);
+    for (const value of metrics.semanticColorViolations ?? []) add(device, route, 'semantic_color_misuse', value);
     for (const value of metrics.legacyFontViolations ?? []) {
       monospaceObservations.push({ device, route, detail: value });
       if (isBlockingFontLeak(value)) add(device, route, 'legacy_font_leak', value);
@@ -77,14 +80,17 @@ const categories = findings.reduce((counts, finding) => {
   return counts;
 }, {});
 const result = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   generated_at: new Date().toISOString(),
   ok: findings.length === 0,
   manual_review_required: true,
-  font_policy: {
+  visual_policy: {
     sans_body_and_primary_headings_required: true,
     editorial_metadata_monospace_allowed: true,
-    static_pagination_monospace_forbidden: true
+    static_pagination_monospace_forbidden: true,
+    legacy_panel_surfaces_forbidden: true,
+    large_off_token_colored_surfaces_forbidden: true,
+    semantic_colors_require_approved_meaning: true
   },
   devices,
   observed_monospace_count: monospaceObservations.length,
