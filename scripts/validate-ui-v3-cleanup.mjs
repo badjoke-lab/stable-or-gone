@@ -34,7 +34,7 @@ for (const file of sourceFiles) {
   const content = read(file);
   const prohibitedMarkers = file.endsWith('.css')
     ? ['editorial-v2.css']
-    : ['PageHero', 'MetricCard', 'editorial-v2.css', 'class="panel registry"'];
+    : ['PageHero', 'MetricCard', 'editorial-v2.css'];
   for (const marker of prohibitedMarkers) check(!content.includes(marker), `${file}: superseded marker remains: ${marker}`);
   if (!file.endsWith('.css')) {
     for (const stylesheet of inactiveCompatibilityStyles) {
@@ -45,6 +45,7 @@ for (const file of sourceFiles) {
 
 const layout = read('src/layouts/BaseLayout.astro');
 const brand = read('src/components/BrandLockup.astro');
+const issuerControlEvents = read('src/components/IssuerControlEvents.astro');
 const shellCss = read('src/styles/v3-cya-dark-shell.css');
 const shellCorrectionsCss = read('src/styles/v3-cya-dark-shell-corrections.css');
 const registryCss = read('src/styles/v3-cya-dark-registry.css');
@@ -70,6 +71,10 @@ for (const stylesheet of [
   "import '../styles/editorial-v2.css'",
   ...inactiveCompatibilityStyles.map((name) => `import '../styles/${name}'`)
 ]) check(!brand.includes(stylesheet) && !layout.includes(stylesheet), `superseded active stylesheet import remains: ${stylesheet}`);
+
+check(!issuerControlEvents.includes('class="panel registry"'), 'IssuerControlEvents legacy panel implementation remains active');
+check(issuerControlEvents.includes('class="issuer-control-events"'), 'IssuerControlEvents V3 wrapper is missing');
+check(issuerControlEvents.includes('issuer-control-events__cards'), 'IssuerControlEvents mobile cards are missing');
 
 for (const marker of [
   'class="skip-link"',
