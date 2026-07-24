@@ -4,10 +4,10 @@ import '../styles/shell.css';
 import '../styles/accessibility-utilities.css';
 import BrandLockup from '../components/BrandLockup.astro';
 import { aboutNavigation, globalNavigationGroups } from '../../config/site-architecture.mjs';
-interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
+interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; language?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', jsonLd } = Astro.props;
+const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', language = 'en', jsonLd } = Astro.props;
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
@@ -43,7 +43,7 @@ const footerLinks = [
 ];
 ---
 <!doctype html>
-<html lang="en">
+<html lang={language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,7 +52,7 @@ const footerLinks = [
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang={language} href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <link rel="alternate" type="application/json" href="/version.json" title="SOG production version" />
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
