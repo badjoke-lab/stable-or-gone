@@ -132,7 +132,10 @@ html body .static-registry-number,
 html body .stablecoin-model-history time,
 html body .stablecoin-model-history time > span,
 html body .stablecoin-dossier-title-row h1 > span,
-html body .record-symbol {
+html body .record-symbol,
+html body .stablecoin-index-table .record-symbol,
+html body .stablecoin-index-card .record-symbol,
+html body .issuer-control-events__cards article > time {
   color: var(--v3-text-quiet) !important;
 }
 
