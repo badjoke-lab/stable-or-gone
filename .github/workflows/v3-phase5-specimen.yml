@@ -1,0 +1,166 @@
+name: V3 Phase 5 detail and analysis audit
+
+on:
+  push:
+    branches:
+      - 'ui/v3-cya-dark-redesign'
+    paths:
+      - 'src/styles/v3-cya-dark-secondary-details.css'
+      - 'src/styles/v3-cya-dark-analysis.css'
+      - 'src/components/BrandLockup.astro'
+      - '.github/workflows/v3-phase5-specimen.yml'
+      - 'src/.v3-phase5-audit-trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sog-v3-phase5-specimen
+  cancel-in-progress: true
+
+jobs:
+  build-and-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm clean-install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-v3-phase5-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/sog-v3-phase5-server.log
+          exit 1
+      - name: Capture Phase 5 specimens and interactions
+        run: |
+          mkdir -p artifacts/v3-phase5
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
+
+          const base = 'http://127.0.0.1:4173';
+          const browser = await chromium.launch();
+          const discovery = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+
+          await discovery.goto(`${base}/events/`, { waitUntil: 'networkidle' });
+          const eventHref = await discovery.locator('a[href^="/event/"]').first().getAttribute('href');
+          await discovery.goto(`${base}/issuers/`, { waitUntil: 'networkidle' });
+          const organizationHref = await discovery.locator('a[href^="/issuer/"]').first().getAttribute('href');
+          await discovery.close();
+          if (!eventHref || !organizationHref) throw new Error('Could not discover representative detail routes');
+
+          const routes = [
+            ['event-detail', eventHref],
+            ['organization-detail', organizationHref],
+            ['compare-empty', '/compare/'],
+            ['stats', '/stats/']
+          ];
+          const devices = {
+            desktop: { viewport: { width: 1440, height: 900 } },
+            mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }
+          };
+          const results = [];
+
+          const measure = async (page, device, route, state = 'default') => page.evaluate(({ device, route, state }) => {
+            const visible = (selector) => [...document.querySelectorAll(selector)].filter((node) => getComputedStyle(node).display !== 'none').length;
+            const firstPanel = document.querySelector('.stats-analysis-panel, .compare-preset, .event-detail-section, .organization-detail-section');
+            const panelStyle = firstPanel ? getComputedStyle(firstPanel) : null;
+            return {
+              device,
+              route,
+              state,
+              bodyHeight: Math.round(document.body.getBoundingClientRect().height),
+              viewportWidth: document.documentElement.clientWidth,
+              scrollWidth: document.documentElement.scrollWidth,
+              horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
+              background: getComputedStyle(document.body).backgroundColor,
+              panelRadius: panelStyle?.borderRadius ?? null,
+              visibleOriginalMobileTables: device === 'mobile' ? visible('table[data-mobile-table="scroll-preserve"]') : null,
+              visibleMobileRepresentations: visible('[data-mobile-representation-for]'),
+              compareOutputVisible: Boolean(document.querySelector('.compare-output') && getComputedStyle(document.querySelector('.compare-output')).display !== 'none'),
+              compareEmptyVisible: Boolean(document.querySelector('.compare-empty') && getComputedStyle(document.querySelector('.compare-empty')).display !== 'none')
+            };
+          }, { device, route, state });
+
+          for (const [device, settings] of Object.entries(devices)) {
+            const context = await browser.newContext({ ...settings, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+            const page = await context.newPage();
+            for (const [name, route] of routes) {
+              const response = await page.goto(`${base}${route}`, { waitUntil: 'networkidle', timeout: 60000 });
+              if (!response?.ok()) throw new Error(`${route}: HTTP ${response?.status()}`);
+              await page.evaluate(() => document.fonts?.ready);
+              const metrics = await measure(page, device, route);
+              await page.screenshot({ path: `artifacts/v3-phase5/${device}-${name}.png`, fullPage: true });
+              results.push(metrics);
+
+              if (route === '/compare/') {
+                const slots = page.locator('[data-compare-slot]');
+                const first = slots.nth(0);
+                const second = slots.nth(1);
+                const firstOptions = await first.locator('option').count();
+                const secondOptions = await second.locator('option').count();
+                if (firstOptions < 3 || secondOptions < 3) throw new Error('Comparison asset options missing');
+                await first.selectOption({ index: 1 });
+                await second.selectOption({ index: 2 });
+                await page.waitForFunction(() => {
+                  const output = document.querySelector('.compare-output');
+                  return output && !output.hasAttribute('hidden');
+                }, null, { timeout: 10000 });
+                const selectedMetrics = await measure(page, device, route, 'two-assets-selected');
+                await page.screenshot({ path: `artifacts/v3-phase5/${device}-compare-selected.png`, fullPage: true });
+                results.push(selectedMetrics);
+              }
+            }
+            await context.close();
+          }
+
+          await browser.close();
+          await writeFile('artifacts/v3-phase5/metrics.json', JSON.stringify({ eventHref, organizationHref, results }, null, 2));
+          console.log(JSON.stringify({ eventHref, organizationHref, results }, null, 2));
+
+          const failures = results.filter((item) =>
+            item.horizontalOverflow ||
+            item.background !== 'rgb(5, 6, 7)' ||
+            item.panelRadius !== '0px' ||
+            (item.route === '/compare/' && item.state === 'two-assets-selected' && !item.compareOutputVisible)
+          );
+          if (failures.length) {
+            console.error('Phase 5 failures:', JSON.stringify(failures, null, 2));
+            process.exitCode = 1;
+          }
+          NODE
+      - name: Upload Phase 5 artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-v3-phase5-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            artifacts/v3-phase5/**
+            /tmp/sog-v3-phase5-server.log
+      - name: Report Phase 5 run
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const file = 'artifacts/v3-phase5/metrics.json';
+            const result = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : { results: [] };
+            const summary = result.results.map((item) => ({ device: item.device, route: item.route, state: item.state, body: item.bodyHeight, overflow: item.horizontalOverflow, compare: item.compareOutputVisible }));
+            const marker = '<!-- sog-v3-phase5-specimen -->';
+            const body = `${marker}\nV3 Phase 5 run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nEvent: \`${result.eventHref ?? 'missing'}\`\nOrganization: \`${result.organizationHref ?? 'missing'}\`\nMetrics: \`${JSON.stringify(summary)}\`\nArtifact: \`sog-v3-phase5-${context.runId}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, per_page: 100 });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
+            else await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, body });
