@@ -75,18 +75,40 @@ jobs:
       - name: Validate exhaustive screenshot audit
         run: node scripts/validate-exhaustive-screenshot-audit.mjs
 
-      - name: Upload complete screenshot artifacts
+      - name: Upload screenshot manifests and audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-all-public-page-screenshots-${{ github.run_id }}
-          if-no-files-found: warn
+          name: sog-screenshot-audit-${{ github.run_id }}
+          if-no-files-found: error
           retention-days: 14
+          compression-level: 9
           path: |
-            artifacts/screenshots/**
-            artifacts/screenshots-desktop.zip
-            artifacts/screenshots-mobile.zip
+            artifacts/screenshots/routes.json
+            artifacts/screenshots/manifest.desktop.json
+            artifacts/screenshots/manifest.mobile.json
+            artifacts/screenshots/exhaustive-ui-audit.json
             /tmp/sog-screenshot-server.log
+
+      - name: Upload desktop screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-desktop-screenshots-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          path: artifacts/screenshots/desktop/**
+
+      - name: Upload mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-mobile-screenshots-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          path: artifacts/screenshots/mobile/**
 
       - name: Write capture summary
         if: always()
@@ -134,7 +156,7 @@ jobs:
             const auditFile = 'artifacts/screenshots/exhaustive-ui-audit.json';
             const audit = fs.existsSync(auditFile) ? JSON.parse(fs.readFileSync(auditFile, 'utf8')) : { finding_count: 'missing' };
             const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Manual artifact inspection: **required**\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``;
+            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Manual artifact inspection: **required**\n- Artifacts: \`sog-screenshot-audit-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
