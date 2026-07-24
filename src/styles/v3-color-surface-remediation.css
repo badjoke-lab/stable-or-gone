@@ -1,0 +1,171 @@
+/* Final V3 color and legacy-surface remediation. Load after all other V3 styles. */
+
+/* Structured event facts must use the ruled registry grammar, not the legacy blue panel. */
+html body .event-structured-detail {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--v3-rule-strong);
+  border-bottom: 1px solid var(--v3-rule-strong);
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body .event-structured-detail__heading {
+  padding: .7rem 0;
+  border-bottom: 1px solid var(--v3-rule);
+}
+
+html body .event-structured-detail__heading p {
+  margin: 0 0 .2rem;
+  color: var(--v3-text-quiet) !important;
+  font-family: var(--v3-sans) !important;
+  font-size: .62rem;
+  font-weight: 750;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+html body .event-structured-detail__heading h3 {
+  margin: 0;
+  color: var(--v3-text) !important;
+  font-family: var(--v3-serif) !important;
+  font-size: clamp(1.15rem, 2vw, 1.55rem) !important;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+html body .event-structured-detail__table,
+html body .event-structured-detail__table table,
+html body .event-structured-detail__table tbody,
+html body .event-structured-detail__table tr,
+html body .event-structured-detail__table th,
+html body .event-structured-detail__table td {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body .event-structured-detail__table table {
+  width: 100% !important;
+  min-width: 0 !important;
+  border-collapse: collapse;
+}
+
+html body .event-structured-detail__table th,
+html body .event-structured-detail__table td {
+  padding: .62rem .55rem !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--v3-rule) !important;
+  vertical-align: top;
+}
+
+html body .event-structured-detail__table th {
+  width: 42%;
+  color: var(--v3-text-quiet) !important;
+  font-family: var(--v3-mono) !important;
+  font-size: .56rem !important;
+  font-weight: 700;
+  letter-spacing: .045em;
+  line-height: 1.45;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+html body .event-structured-detail__table td,
+html body .event-structured-detail__table td span {
+  color: var(--v3-text-muted);
+  font-family: var(--v3-sans) !important;
+  font-size: .72rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Ordinary dates are metadata, not warnings. */
+html body .stablecoin-dossier :where(time, [class*="date"]) {
+  color: var(--v3-text-quiet) !important;
+}
+
+html body .stablecoin-material-change > span,
+html body .stablecoin-material-change time {
+  color: var(--v3-warning) !important;
+}
+
+/* Internal record navigation stays neutral; source/archive destinations retain archive blue. */
+html body .stablecoin-dossier a:not(.stablecoin-dossier-nav a),
+html body .event-detail-table a,
+html body .organization-detail-table a,
+html body :where(.guide-article-content, .longform-content) a {
+  color: var(--v3-text-muted) !important;
+}
+
+html body :where(.stablecoin-evidence-section, .event-detail-evidence-r5, .organization-evidence-r5) a,
+html body :where(.guide-article-content, .longform-content) a[href^="http"],
+html body :where(.guide-article-content, .longform-content) a[target="_blank"],
+html body [class*="archive"] a,
+html body a[class*="archive"] {
+  color: var(--v3-archive) !important;
+}
+
+html body .stablecoin-dossier a:hover,
+html body .stablecoin-dossier a:focus-visible,
+html body .event-detail-table a:hover,
+html body .event-detail-table a:focus-visible,
+html body .organization-detail-table a:hover,
+html body .organization-detail-table a:focus-visible,
+html body :where(.guide-article-content, .longform-content) a:hover,
+html body :where(.guide-article-content, .longform-content) a:focus-visible {
+  color: var(--v3-accent) !important;
+}
+
+html body .event-structured-cards {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  html body .event-structured-detail__table {
+    display: none !important;
+  }
+
+  html body .event-structured-cards {
+    margin: 0;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  html body .event-structured-cards > div {
+    min-width: 0;
+    padding: .7rem 0;
+    border: 0 !important;
+    border-bottom: 1px solid var(--v3-rule) !important;
+    background: transparent !important;
+  }
+
+  html body .event-structured-cards dt {
+    color: var(--v3-text-quiet) !important;
+    font-family: var(--v3-mono) !important;
+    font-size: .56rem !important;
+    font-weight: 700;
+    letter-spacing: .045em;
+    line-height: 1.45;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  html body .event-structured-cards dd {
+    min-width: 0;
+    margin: .3rem 0 0;
+    color: var(--v3-text-muted) !important;
+    font-family: var(--v3-sans) !important;
+    font-size: .75rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  html body .event-structured-cards dd span {
+    font-family: inherit !important;
+  }
+}
