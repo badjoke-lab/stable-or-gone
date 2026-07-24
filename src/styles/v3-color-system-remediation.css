@@ -109,6 +109,10 @@ html body .footer-support {
   color: var(--v3-accent) !important;
 }
 
+html body .maintenance-check > span {
+  color: var(--v3-text-quiet) !important;
+}
+
 /* Methodology is an explanatory note, not a warning state. */
 html body .stats-methodology-notice {
   border-top-color: var(--v3-rule-strong) !important;
