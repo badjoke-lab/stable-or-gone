@@ -46,10 +46,14 @@ for (const file of sourceFiles) {
 const layout = read('src/layouts/BaseLayout.astro');
 const brand = read('src/components/BrandLockup.astro');
 const issuerControlEvents = read('src/components/IssuerControlEvents.astro');
+const structuredEventDetail = read('src/components/StructuredEventDetail.astro');
 const shellCss = read('src/styles/v3-cya-dark-shell.css');
 const shellCorrectionsCss = read('src/styles/v3-cya-dark-shell-corrections.css');
 const registryCss = read('src/styles/v3-cya-dark-registry.css');
 const remediationCss = read('src/styles/v3-exhaustive-remediation.css');
+const colorRemediationCss = read('src/styles/v3-color-surface-remediation.css');
+const screenshotCapture = read('scripts/capture-site-screenshots.mjs');
+const screenshotAudit = read('scripts/validate-exhaustive-screenshot-audit.mjs');
 const packageJson = read('package.json');
 const ci = read('.github/workflows/ci.yml');
 
@@ -62,7 +66,8 @@ for (const stylesheet of [
   "import '../styles/v3-cya-dark-indexes.css'",
   "import '../styles/v3-cya-dark-analysis.css'",
   "import '../styles/v3-cya-dark-research-longform.css'",
-  "import '../styles/v3-exhaustive-remediation.css'"
+  "import '../styles/v3-exhaustive-remediation.css'",
+  "import '../styles/v3-color-surface-remediation.css'"
 ]) check(brand.includes(stylesheet), `BrandLockup active stylesheet import missing: ${stylesheet}`);
 
 for (const stylesheet of [
@@ -75,6 +80,11 @@ for (const stylesheet of [
 check(!issuerControlEvents.includes('class="panel registry"'), 'IssuerControlEvents legacy panel implementation remains active');
 check(issuerControlEvents.includes('class="issuer-control-events"'), 'IssuerControlEvents V3 wrapper is missing');
 check(issuerControlEvents.includes('issuer-control-events__cards'), 'IssuerControlEvents mobile cards are missing');
+
+check(!structuredEventDetail.includes('class="panel registry'), 'StructuredEventDetail legacy panel implementation remains active');
+check(!structuredEventDetail.includes('<div class="bar">'), 'StructuredEventDetail legacy bar remains active');
+check(structuredEventDetail.includes('data-ui-v3-structured-detail'), 'StructuredEventDetail V3 marker is missing');
+check(structuredEventDetail.includes('event-structured-detail__heading'), 'StructuredEventDetail V3 heading is missing');
 
 for (const marker of [
   'class="skip-link"',
@@ -117,19 +127,43 @@ for (const marker of [
   '.organization-detail-page'
 ]) check(remediationCss.includes(marker), `exhaustive UI remediation rule missing: ${marker}`);
 
+for (const marker of [
+  '.event-structured-detail',
+  'background: transparent !important',
+  '.stablecoin-dossier :where(time, [class*="date"])',
+  'color: var(--v3-text-quiet) !important',
+  '.event-structured-cards',
+  'font-family: var(--v3-sans) !important'
+]) check(colorRemediationCss.includes(marker), `color and surface remediation rule missing: ${marker}`);
+
+for (const marker of [
+  'legacyPanelSurfaces',
+  'largeOffTokenSurfaces',
+  'semanticColorViolations',
+  '.event-structured-detail.panel.registry'
+]) check(screenshotCapture.includes(marker), `screenshot color/surface measurement missing: ${marker}`);
+
+for (const marker of [
+  'legacy_panel_surface',
+  'large_off_token_surface',
+  'semantic_color_misuse',
+  'semantic_colors_require_approved_meaning'
+]) check(screenshotAudit.includes(marker), `screenshot color/surface gate missing: ${marker}`);
+
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
 check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step missing');
 check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
 
 const result = {
-  schema_version: '3.3',
+  schema_version: '3.4',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
   active_shell: 'src/styles/v3-cya-dark-shell.css',
   active_shell_corrections: 'src/styles/v3-cya-dark-shell-corrections.css',
   active_exhaustive_remediation: 'src/styles/v3-exhaustive-remediation.css',
+  active_color_surface_remediation: 'src/styles/v3-color-surface-remediation.css',
   inactive_compatibility_styles: inactiveCompatibilityStyles,
   removed_paths: removedPaths,
   scanned_source_files: sourceFiles.length,
@@ -140,7 +174,9 @@ const result = {
     polite_copy_feedback: true,
     compact_mobile_navigation: true,
     representative_contrast_gate: true,
-    exhaustive_screenshot_gate: true
+    exhaustive_screenshot_gate: true,
+    color_restraint_gate: true,
+    legacy_surface_gate: true
   },
   failures
 };
