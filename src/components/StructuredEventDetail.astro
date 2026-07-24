@@ -52,9 +52,16 @@ function valueFor(key: string, value: unknown): PresentedValue {
 const rows = sections.flatMap((section) => Object.entries(section.value as Record<string, unknown>).map(([key, value]) => ({ label: `${section.label} — ${labelFor(key)}`, presentation: valueFor(key, value) })));
 ---
 {rows.length > 0 && (
-  <section class="panel registry event-structured-detail" id="structured-detail">
-    <div class="bar">Structured event detail</div>
-    <div class="event-detail-table"><table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve"><tbody>{rows.map((row) => <tr><th>{row.label}</th><td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td></tr>)}</tbody></table></div>
+  <section class="event-structured-detail" data-ui-v3-structured-detail>
+    <header class="event-structured-detail__heading">
+      <p>Typed facts</p>
+      <h3>Structured event detail</h3>
+    </header>
+    <div class="event-detail-table event-structured-detail__table">
+      <table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve">
+        <tbody>{rows.map((row) => <tr><th>{row.label}</th><td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td></tr>)}</tbody>
+      </table>
+    </div>
     <dl class="event-structured-cards" data-mobile-representation-for="event-detail-overlay">{rows.map((row) => <div><dt>{row.label}</dt><dd><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></dd></div>)}</dl>
   </section>
 )}
