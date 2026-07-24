@@ -1,38 +1,25 @@
-name: Capture all public page screenshots
+name: Capture focused pre-v2 screenshots
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main
+      - 'audit/pre-v2-restoration-pass-4'
     paths:
-      - 'src/**'
-      - 'public/brand/**'
-      - 'config/public-routes.json'
-      - 'scripts/capture-site-screenshots.mjs'
-      - 'scripts/collect-public-routes.mjs'
-      - '.github/workflows/capture-screenshots.yml'
-      - 'package.json'
-  pull_request:
-    paths:
-      - 'src/**'
-      - 'public/brand/**'
-      - 'config/public-routes.json'
-      - 'scripts/capture-site-screenshots.mjs'
-      - 'scripts/collect-public-routes.mjs'
-      - '.github/workflows/capture-screenshots.yml'
-      - 'package.json'
+      - 'src/.pre-v2-pass4-focused-audit'
+  workflow_dispatch:
 
 permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: sog-pre-v2-pass4-focused
+  cancel-in-progress: true
+
 jobs:
-  capture-all-public-pages:
+  capture-focused-pages:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
-    env:
-      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,78 +40,85 @@ jobs:
 
       - name: Start local site
         run: |
-          python3 -m http.server 4173 --directory dist > /tmp/sog-screenshot-server.log 2>&1 &
-          echo $! > /tmp/sog-screenshot-server.pid
+          python3 -m http.server 4173 --directory dist > /tmp/sog-pass4-server.log 2>&1 &
           for attempt in $(seq 1 30); do
-            if curl -fsS "$CAPTURE_BASE_URL/" > /dev/null; then
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
               exit 0
             fi
             sleep 1
           done
-          cat /tmp/sog-screenshot-server.log
+          cat /tmp/sog-pass4-server.log
           exit 1
 
-      - name: Capture every desktop route
-        run: node scripts/capture-site-screenshots.mjs --device desktop --mode exhaustive --base-url "$CAPTURE_BASE_URL"
+      - name: Capture guide and Stats on desktop and mobile
+        run: |
+          mkdir -p artifacts/pass4
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
 
-      - name: Capture every mobile route
-        run: node scripts/capture-site-screenshots.mjs --device mobile --mode exhaustive --base-url "$CAPTURE_BASE_URL"
+          const pages = [
+            ['guide-eu-mica', '/guides/eu-stablecoin-access-after-mica/'],
+            ['stats', '/stats/']
+          ];
+          const devices = {
+            desktop: { viewport: { width: 1440, height: 900 } },
+            mobile: { viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true }
+          };
+          const browser = await chromium.launch();
+          const results = [];
+          for (const [deviceName, settings] of Object.entries(devices)) {
+            const context = await browser.newContext({ ...settings, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+            const page = await context.newPage();
+            for (const [name, route] of pages) {
+              const response = await page.goto(`http://127.0.0.1:4173${route}`, { waitUntil: 'networkidle', timeout: 60000 });
+              if (!response?.ok()) throw new Error(`${route}: HTTP ${response?.status()}`);
+              await page.evaluate(() => document.fonts?.ready);
+              const metrics = await page.evaluate(() => ({
+                title: document.title,
+                bodyHeight: Math.round(document.body.getBoundingClientRect().height),
+                viewportWidth: document.documentElement.clientWidth,
+                scrollWidth: document.documentElement.scrollWidth,
+                horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
+                footerHeight: Math.round(document.querySelector('.site-footer')?.getBoundingClientRect().height ?? 0),
+                relatedGridColumns: getComputedStyle(document.querySelector('.guide-related-records') ?? document.body).gridTemplateColumns,
+                guideLayoutColumns: getComputedStyle(document.querySelector('.guide-article-layout') ?? document.body).gridTemplateColumns,
+                revisionDateWidth: Math.round(document.querySelector('.guide-revision-table th:first-child')?.getBoundingClientRect().width ?? 0),
+                historyHeaderWraps: [...document.querySelectorAll('.stats-section[aria-labelledby="stats-history-title"] thead th')].map((cell) => cell.getClientRects().length > 1 || cell.scrollHeight > cell.clientHeight + 1)
+              }));
+              await page.screenshot({ path: `artifacts/pass4/${deviceName}-${name}.png`, fullPage: true });
+              results.push({ device: deviceName, route, metrics });
+            }
+            await context.close();
+          }
+          await browser.close();
+          await writeFile('artifacts/pass4/metrics.json', JSON.stringify(results, null, 2));
+          console.log(JSON.stringify(results, null, 2));
+          if (results.some((result) => result.metrics.horizontalOverflow)) process.exitCode = 1;
+          NODE
 
-      - name: Upload complete screenshot artifacts
+      - name: Upload focused audit artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-all-public-page-screenshots-${{ github.run_id }}
-          if-no-files-found: warn
+          name: sog-pre-v2-pass4-${{ github.run_id }}
+          if-no-files-found: error
           retention-days: 14
           path: |
-            artifacts/screenshots/**
-            artifacts/screenshots-desktop.zip
-            artifacts/screenshots-mobile.zip
-            /tmp/sog-screenshot-server.log
+            artifacts/pass4/**
+            /tmp/sog-pass4-server.log
 
-      - name: Write capture summary
+      - name: Report run to audit issue
         if: always()
-        run: |
-          echo "## SOG exhaustive screenshot capture" >> "$GITHUB_STEP_SUMMARY"
-          for DEVICE in desktop mobile; do
-            MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
-            if [ -f "$MANIFEST" ]; then
-              DISCOVERED=$(node -e "const x=require('./$MANIFEST'); console.log(x.discovered_route_count)")
-              CAPTURED=$(node -e "const x=require('./$MANIFEST'); console.log(x.captured_count)")
-              FAILED=$(node -e "const x=require('./$MANIFEST'); console.log(x.failed_count)")
-              echo "- $DEVICE: $DISCOVERED discovered / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
-            else
-              echo "- $DEVICE: manifest missing" >> "$GITHUB_STEP_SUMMARY"
-            fi
-          done
-
-      - name: Report run for manual artifact inspection
-        if: always() && github.event_name != 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs');
-            const read = (device) => {
-              const file = `artifacts/screenshots/manifest.${device}.json`;
-              if (!fs.existsSync(file)) return { device, manifest: 'missing' };
-              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
-              return {
-                device,
-                discovered: x.discovered_route_count,
-                selected: x.selected_route_count,
-                captured: x.captured_count,
-                failed: x.failed_count
-              };
-            };
-            const desktop = read('desktop');
-            const mobile = read('mobile');
-            const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Artifact: \`sog-all-public-page-screenshots-${context.runId}\``;
+            const marker = '<!-- sog-pre-v2-pass4-focused -->';
+            const body = `${marker}\nFocused screenshot run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nArtifact: \`sog-pre-v2-pass4-${context.runId}\``;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 281,
+              issue_number: 455,
               per_page: 100
             });
             const existing = comments.find((comment) => comment.body?.includes(marker));
@@ -139,7 +133,7 @@ jobs:
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: 281,
+                issue_number: 455,
                 body
               });
             }
