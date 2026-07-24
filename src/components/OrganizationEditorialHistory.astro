@@ -30,7 +30,7 @@ const remainingEvidence = view.evidence.slice(10);
 <details class="organization-detail-section organization-unknowns-r5" id="unknowns" open>
   <summary><span><small>Uncertainty</small><strong>Known unknowns</strong></span><b>{view.knownUnknowns.length}</b></summary>
   <div class="organization-unknown-list-r5">
-    {view.knownUnknowns.length === 0 ? <p class="organization-detail-empty">No organization-specific known unknowns are currently recorded.</p> : view.knownUnknowns.map((item) => <article><h3>{item.topic}</h3><p>{item.description}</p><small>{formatPublicLabel(item.severity)} · last checked <ValueStateText value={item.last_checked_at} /></small>{item.notes && <p>{item.notes}</p>}</article>)}
+    {view.knownUnknowns.length === 0 ? <p class="organization-detail-empty">No organization-specific known unknowns are currently recorded.</p> : view.knownUnknowns.map((item) => <article><h3>{formatPublicLabel(item.topic)}</h3><p>{item.description}</p><small>{formatPublicLabel(item.severity)} · last checked <ValueStateText value={item.last_checked_at} /></small>{item.notes && <p>{item.notes}</p>}</article>)}
   </div>
 </details>
 

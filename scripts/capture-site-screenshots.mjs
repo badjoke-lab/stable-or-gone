@@ -114,6 +114,22 @@ async function measurePage(page) {
       const rect = element.getBoundingClientRect();
       return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
     };
+    const elementPath = (element) => {
+      const parts = [];
+      let current = element;
+      while (current instanceof HTMLElement && parts.length < 4) {
+        let part = current.tagName.toLowerCase();
+        if (current.id) part += `#${current.id}`;
+        else if (current.classList.length) part += `.${[...current.classList].slice(0, 2).join('.')}`;
+        parts.unshift(part);
+        current = current.parentElement;
+      }
+      return parts.join(' > ');
+    };
+    const fontFor = (selector) => {
+      const element = [...document.querySelectorAll(selector)].find(visible);
+      return element instanceof HTMLElement ? getComputedStyle(element).fontFamily : null;
+    };
     const root = document.documentElement;
     const overflowPx = Math.max(0, root.scrollWidth - root.clientWidth);
     const brokenImages = [...document.images].filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.getAttribute('src') ?? 'missing-src');
@@ -133,6 +149,24 @@ async function measurePage(page) {
     const legacyVisualMarkers = legacyVisualSelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
     const unexpectedEmptySelectors = ['[data-stablecoin-no-results]', '[data-organization-no-results]', '[data-event-no-results]'];
     const unexpectedEmptyStates = unexpectedEmptySelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
+    const monoTokens = ['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'monospace'];
+    const approvedMonoContainer = 'code, pre, kbd, samp, time, dt, th, .kicker, .eyebrow, [class*="meta"], [class*="overline"], [data-mono], .v3-brand-copy small';
+    const textCandidates = [...document.querySelectorAll('a, span, strong, small, p, li, dd, label, button, input, select, textarea, summary, h3')].filter(visible);
+    const legacyFontViolations = textCandidates.flatMap((element) => {
+      const text = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
+        ? element.value || element.placeholder || ''
+        : element.textContent || '';
+      if (!text.trim()) return [];
+      const fontFamily = getComputedStyle(element).fontFamily;
+      const lower = fontFamily.toLowerCase();
+      const usesMono = monoTokens.some((token) => lower.includes(token));
+      if (!usesMono || element.closest(approvedMonoContainer)) return [];
+      return [{
+        element: elementPath(element),
+        text: text.trim().replace(/\s+/g, ' ').slice(0, 120),
+        font_family: fontFamily
+      }];
+    }).slice(0, 100);
     return {
       title: document.title,
       h1Count: document.querySelectorAll('h1').length,
@@ -142,9 +176,24 @@ async function measurePage(page) {
       brokenImages,
       brandViolations,
       legacyVisualMarkers,
+      legacyFontViolations,
       unexpectedEmptyStates,
       bodyHeight: Math.round(document.body.getBoundingClientRect().height),
-      viewportWidth: root.clientWidth
+      viewportWidth: root.clientWidth,
+      fontRoles: {
+        body: getComputedStyle(document.body).fontFamily,
+        h1: fontFor('h1'),
+        h2: fontFor('h2'),
+        h3: fontFor('h3'),
+        paragraph: fontFor('p'),
+        link: fontFor('a'),
+        strong: fontFor('strong'),
+        definition: fontFor('dd'),
+        button: fontFor('button'),
+        input: fontFor('input'),
+        select: fontFor('select')
+      },
+      stylesheetCount: document.styleSheets.length
     };
   });
 }
@@ -195,7 +244,7 @@ async function main() {
 
   await browser.close();
   const manifest = {
-    schema_version: '2.0',
+    schema_version: '3.0',
     generated_at: new Date().toISOString(),
     device: deviceName,
     viewport: device.viewport,

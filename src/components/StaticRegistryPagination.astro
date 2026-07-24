@@ -49,50 +49,258 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
-  <article class="static-registry-page">
+  <article class="static-registry-page" data-ui-v3-static-pagination>
     <header class="static-registry-header">
-      <p class="static-registry-eyebrow">{sectionLabel} · Static page {page} of {totalPages}</p>
+      <div class="static-registry-headerline">
+        <p class="static-registry-eyebrow">{sectionLabel}</p>
+        <p class="static-registry-range">Records {rangeStart}–{rangeEnd} of {totalRecords}</p>
+      </div>
       <h1>{title}</h1>
-      <p>{description}</p>
-      <p class="static-registry-range">Showing records {rangeStart}–{rangeEnd} of {totalRecords}. These pages provide ordinary HTML links to every canonical record.</p>
+      <p class="static-registry-description">{description}</p>
+      <p class="static-registry-note">Bounded page {page} of {totalPages}. Every record remains available through an ordinary HTML link.</p>
     </header>
 
     <ol class="static-registry-list" start={rangeStart}>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <li>
-          <a href={item.href}>{item.title}</a>
-          {item.meta && <p class="static-registry-meta">{item.meta}</p>}
-          {item.description && <p>{item.description}</p>}
+          <span class="static-registry-number" aria-hidden="true">{String(rangeStart + index).padStart(2, '0')}</span>
+          <div class="static-registry-item-copy">
+            <a href={item.href}>{item.title}</a>
+            {item.meta && <p class="static-registry-meta">{item.meta}</p>}
+            {item.description && <p class="static-registry-item-description">{item.description}</p>}
+          </div>
         </li>
       ))}
     </ol>
 
-    <nav class="static-registry-pagination" aria-label={`${sectionLabel} pages`}>
-      {page > 1 && <a rel="prev" href={pageHref(page - 1)}>Previous</a>}
-      {pageNumbers.map((number) => (
-        <a href={pageHref(number)} aria-current={number === page ? 'page' : undefined}>{number}</a>
-      ))}
-      {page < totalPages && <a rel="next" href={pageHref(page + 1)}>Next</a>}
-    </nav>
-
-    <p class="static-registry-return"><a href={basePath}>Return to the interactive {sectionLabel.toLocaleLowerCase()}</a></p>
+    <footer class="static-registry-footer">
+      <nav class="static-registry-pagination" aria-label={`${sectionLabel} pages`}>
+        {page > 1 && <a class="static-registry-direction" rel="prev" href={pageHref(page - 1)}>Previous</a>}
+        {pageNumbers.map((number) => (
+          <a href={pageHref(number)} aria-current={number === page ? 'page' : undefined}>{number}</a>
+        ))}
+        {page < totalPages && <a class="static-registry-direction" rel="next" href={pageHref(page + 1)}>Next</a>}
+      </nav>
+      <p class="static-registry-return"><a href={basePath}>Open the interactive {sectionLabel.toLocaleLowerCase()}</a></p>
+    </footer>
   </article>
 </BaseLayout>
 
 <style>
-  .static-registry-page{width:min(calc(100% - 40px),1040px);margin:0 auto;padding:48px 0 72px}
-  .static-registry-header{max-width:760px;margin-bottom:32px}
-  .static-registry-eyebrow{margin:0 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-  .static-registry-header h1{margin:0 0 16px;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1;letter-spacing:-.035em}
-  .static-registry-header>p{max-width:720px;color:#4f5b66;line-height:1.65}
-  .static-registry-range{font-size:.92rem}
-  .static-registry-list{display:grid;gap:0;margin:0;padding:0;list-style-position:inside;border-top:1px solid #d8dee6}
-  .static-registry-list li{padding:18px 0;border-bottom:1px solid #d8dee6}
-  .static-registry-list a{font-weight:750;text-decoration-thickness:1px;text-underline-offset:3px}
-  .static-registry-list p{margin:6px 0 0;color:#4f5b66;line-height:1.55}
-  .static-registry-meta{font-size:.86rem;font-weight:650}
-  .static-registry-pagination{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:32px 0 0}
-  .static-registry-pagination a{display:inline-flex;min-width:40px;min-height:40px;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #9ca7b1;text-decoration:none;font-weight:700}
-  .static-registry-pagination a[aria-current="page"]{background:#111827;color:#fff;border-color:#111827}
-  .static-registry-return{margin-top:24px}
+  .static-registry-page {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.25rem 0 3.5rem;
+    color: var(--v3-text);
+    font-family: var(--v3-sans);
+  }
+
+  .static-registry-header {
+    padding: 1rem 0 1.5rem;
+    border-top: 1px solid var(--v3-text);
+    border-bottom: 1px solid var(--v3-rule-strong);
+  }
+
+  .static-registry-headerline {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+    margin-bottom: 1.25rem;
+  }
+
+  .static-registry-eyebrow,
+  .static-registry-range {
+    margin: 0;
+    color: var(--v3-text-quiet);
+    font-family: var(--v3-sans);
+    font-size: .68rem;
+    font-weight: 750;
+    letter-spacing: .075em;
+    text-transform: uppercase;
+  }
+
+  .static-registry-header h1 {
+    max-width: 980px;
+    margin: 0;
+    color: var(--v3-text);
+    font-family: var(--v3-serif);
+    font-size: clamp(2.8rem, 6vw, 5.4rem);
+    font-weight: 600;
+    line-height: .94;
+    letter-spacing: -.045em;
+  }
+
+  .static-registry-description {
+    max-width: 760px;
+    margin: 1.15rem 0 0;
+    color: var(--v3-text-muted);
+    font-family: var(--v3-sans);
+    font-size: .92rem;
+    line-height: 1.65;
+  }
+
+  .static-registry-note {
+    max-width: 760px;
+    margin: .55rem 0 0;
+    color: var(--v3-text-quiet);
+    font-family: var(--v3-sans);
+    font-size: .76rem;
+    line-height: 1.55;
+  }
+
+  .static-registry-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--v3-rule-strong);
+    border-left: 1px solid var(--v3-rule-strong);
+  }
+
+  .static-registry-list li {
+    min-width: 0;
+    min-height: 112px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: .8rem;
+    align-content: start;
+    border-right: 1px solid var(--v3-rule-strong);
+    border-bottom: 1px solid var(--v3-rule-strong);
+    background: transparent;
+  }
+
+  .static-registry-number {
+    color: var(--v3-archive);
+    font-family: var(--v3-sans);
+    font-size: .68rem;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .static-registry-item-copy {
+    min-width: 0;
+  }
+
+  .static-registry-list a {
+    color: var(--v3-text);
+    font-family: var(--v3-sans);
+    font-size: 1rem;
+    font-weight: 750;
+    line-height: 1.3;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+
+  .static-registry-list a:hover,
+  .static-registry-list a:focus-visible {
+    color: var(--v3-accent);
+  }
+
+  .static-registry-meta,
+  .static-registry-item-description {
+    margin: .45rem 0 0;
+    color: var(--v3-text-quiet);
+    font-family: var(--v3-sans);
+    font-size: .76rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .static-registry-item-description {
+    color: var(--v3-text-muted);
+  }
+
+  .static-registry-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+    align-items: center;
+    border-top: 1px solid var(--v3-rule-strong);
+  }
+
+  .static-registry-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+  }
+
+  .static-registry-pagination a {
+    min-width: 38px;
+    min-height: 38px;
+    padding: .5rem .7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--v3-rule-strong);
+    color: var(--v3-text-muted);
+    background: transparent;
+    font-family: var(--v3-sans);
+    font-size: .74rem;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .static-registry-pagination a:hover,
+  .static-registry-pagination a:focus-visible {
+    border-color: var(--v3-accent);
+    color: var(--v3-accent);
+  }
+
+  .static-registry-pagination a[aria-current="page"] {
+    border-color: var(--v3-accent);
+    background: var(--v3-accent);
+    color: var(--v3-bg);
+  }
+
+  .static-registry-direction {
+    padding-inline: .9rem !important;
+  }
+
+  .static-registry-return {
+    margin: 0;
+    font-family: var(--v3-sans);
+    font-size: .76rem;
+    text-align: right;
+  }
+
+  .static-registry-return a {
+    color: var(--v3-text-muted);
+  }
+
+  @media (max-width: 720px) {
+    .static-registry-page {
+      padding-top: .5rem;
+    }
+
+    .static-registry-headerline,
+    .static-registry-footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .static-registry-header h1 {
+      font-size: clamp(2.35rem, 12vw, 3.5rem);
+    }
+
+    .static-registry-list {
+      grid-template-columns: 1fr;
+    }
+
+    .static-registry-list li {
+      min-height: 0;
+      padding: .9rem .75rem;
+      grid-template-columns: 2rem minmax(0, 1fr);
+    }
+
+    .static-registry-return {
+      text-align: left;
+    }
+  }
 </style>
