@@ -103,3 +103,5 @@ jobs:
           git add src/scripts/access-regulation-explorer.ts src/pages/access-regulation/index.astro .github/workflows/v3-access-regulation-contract-fix.yml
           git commit -m "Fix Access and Regulation index count contract"
           git push origin HEAD:ui/v3-cya-dark-redesign
+
+# trigger: 2026-07-24T09:07Z
