@@ -68,21 +68,21 @@ assert(changeEntrySchema.before_after_value_states.length === 8, 'before/after v
 assert(changeEntrySchema.affected_record_kinds.includes('evidence_source_identity'), 'affected records must include source identity');
 assert(changeEntrySchema.affected_record_kinds.includes('evidence_relation'), 'affected records must include evidence relation');
 
-assert(audit.totals?.legacy_update_entries === 17, `expected 17 legacy update entries, found ${audit.totals?.legacy_update_entries}`);
+assert(audit.totals?.legacy_update_entries === 18, `expected 18 legacy update entries, found ${audit.totals?.legacy_update_entries}`);
 assert(audit.totals?.legacy_categories === 4, `expected four legacy categories, found ${audit.totals?.legacy_categories}`);
 assert(audit.totals?.duplicate_legacy_ids === 0, 'legacy update IDs must be unique');
-assert(audit.totals?.legacy_public_copy_overrides === 17, 'all 17 legacy updates must retain public-copy overlays');
+assert(audit.totals?.legacy_public_copy_overrides === 18, 'all 18 legacy updates must retain public-copy overlays');
 assert(audit.totals?.legacy_missing_public_copy === 0, 'legacy update public-copy coverage must be complete');
 assert(audit.totals?.public_copy_without_legacy === 0, 'public-copy overlays must not point to missing legacy updates');
 assert(audit.totals?.target_ready_legacy_entries === 0, 'legacy updates must not be silently treated as structured change entries');
-assert(JSON.stringify(audit.legacy_updates?.categories) === JSON.stringify({ content: 5, data: 9, foundation: 1, ui: 2 }), 'legacy category inventory changed unexpectedly');
+assert(JSON.stringify(audit.legacy_updates?.categories) === JSON.stringify({ content: 6, data: 9, foundation: 1, ui: 2 }), 'legacy category inventory changed unexpectedly');
 assert((audit.legacy_updates?.duplicate_ids ?? []).length === 0, 'legacy duplicate ID list must be empty');
 assert((audit.legacy_updates?.missing_public_copy ?? []).length === 0, 'legacy missing-copy list must be empty');
 assert((audit.legacy_updates?.target_ready_ids ?? []).length === 0, 'legacy entries require explicit manual migration');
 
 assert(audit.current_updates_page?.presentation_model === 'filterable_publication_feed', 'Updates page must use the reviewed publication-feed presentation model');
 assert(audit.current_updates_page?.uses_registry_updates === true, 'Update Feed must remain bound to registry-updates.json');
-assert(audit.current_updates_page?.uses_publication_feed_projection === true, 'Updates page must consume the deterministic publication-feed projection');
+assert(audit.current_updates_page?.uses_publication_feed_projection === true, 'Update Feed must consume the deterministic publication-feed projection');
 assert(audit.current_updates_page?.orders_by_publication_date === true, 'Update Feed must preserve publication-date ordering');
 assert(audit.current_updates_page?.exposes_legacy_category_filter === true, 'legacy publication categories must remain visibly filterable without becoming change types');
 assert(audit.current_updates_page?.uses_public_copy_overlay === true, 'current update public-copy overlay must remain in use');
