@@ -6,6 +6,7 @@ on:
       - 'ui/v3-cya-dark-redesign'
     paths:
       - '.github/workflows/v3-final-acceptance-audit.yml'
+      - 'scripts/audit/v3-final-acceptance.mjs'
       - 'src/.v3-final-acceptance-trigger'
       - 'src/styles/v3-cya-dark-*.css'
       - 'src/components/**'
@@ -44,323 +45,7 @@ jobs:
           cat /tmp/sog-v3-final-server.log
           exit 1
       - name: Run final visual and functional acceptance audit
-        run: |
-          mkdir -p artifacts/v3-final/screenshots
-          node --input-type=module <<'NODE'
-          import { chromium } from 'playwright';
-          import { writeFile } from 'node:fs/promises';
-
-          const base = 'http://127.0.0.1:4173';
-          const failures = [];
-          const checks = [];
-          const routeMetrics = [];
-          const consoleErrors = [];
-
-          const record = (name, passed, details = '') => {
-            checks.push({ name, passed, details });
-            if (!passed) failures.push({ name, details });
-          };
-          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-          const numberText = (value) => Number(String(value ?? '').replace(/[^0-9]/g, ''));
-
-          const browser = await chromium.launch();
-          const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
-          const mobile = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
-
-          const attachDiagnostics = (page, scope) => {
-            page.on('pageerror', (error) => consoleErrors.push({ scope, type: 'pageerror', message: error.message }));
-            page.on('console', (message) => {
-              if (message.type() === 'error') consoleErrors.push({ scope, type: 'console', message: message.text() });
-            });
-          };
-
-          const waitForDynamic = async (page, route) => {
-            if (route === '/timeline/') {
-              await page.waitForFunction(() => {
-                const results = document.querySelector('[data-timeline-results]');
-                const empty = document.querySelector('[data-timeline-empty]');
-                return (results && !results.hasAttribute('hidden')) || (empty && !empty.hasAttribute('hidden'));
-              }, { timeout: 20000 }).catch(() => {});
-            }
-            if (route === '/access-regulation/') {
-              await page.waitForFunction(() => {
-                const results = document.querySelector('[data-ar-results]');
-                const empty = document.querySelector('[data-ar-empty]');
-                return (results && !results.hasAttribute('hidden')) || (empty && !empty.hasAttribute('hidden'));
-              }, { timeout: 20000 }).catch(() => {});
-            }
-            await sleep(250);
-          };
-
-          const routes = [
-            ['home', '/'],
-            ['stablecoins', '/stablecoins/'],
-            ['stablecoin-usdc', '/stablecoin/usdc/'],
-            ['events', '/events/'],
-            ['event-detail', '/event/sog_ev_usk_limited_status_batch_g/'],
-            ['organizations', '/issuers/'],
-            ['organization-detail', '/issuer/aave/'],
-            ['guides', '/guides/'],
-            ['guide-article', '/guides/eu-stablecoin-access-after-mica/'],
-            ['compare', '/compare/'],
-            ['stats', '/stats/'],
-            ['timeline', '/timeline/'],
-            ['access-regulation', '/access-regulation/'],
-            ['methodology', '/methodology/'],
-            ['glossary', '/glossary/'],
-            ['contact', '/contact/']
-          ];
-
-          const capture = async (context, device) => {
-            const page = await context.newPage();
-            attachDiagnostics(page, `capture:${device}`);
-            for (const [name, route] of routes) {
-              const response = await page.goto(`${base}${route}`, { waitUntil: 'networkidle', timeout: 60000 });
-              record(`${device} ${route} HTTP`, Boolean(response?.ok()), `status=${response?.status()}`);
-              await waitForDynamic(page, route);
-              await page.evaluate(() => document.fonts?.ready);
-              const metrics = await page.evaluate(({ route, device }) => {
-                const surfaceSelectors = [
-                  '.stablecoin-register-header', '.stablecoin-index-registry', '.event-index-masthead',
-                  '.organization-index-masthead', '.guide-index-masthead', '.editorial-page-masthead',
-                  '.timeline-boundary-grid p', '.ar-boundary-grid p', '.stats-section',
-                  '.event-detail-section', '.organization-detail-section'
-                ];
-                const surfaces = surfaceSelectors.flatMap((selector) => [...document.querySelectorAll(selector)]);
-                const radii = surfaces.map((node) => parseFloat(getComputedStyle(node).borderRadius) || 0);
-                return {
-                  device,
-                  route,
-                  bodyHeight: Math.round(document.body.getBoundingClientRect().height),
-                  viewportWidth: document.documentElement.clientWidth,
-                  scrollWidth: document.documentElement.scrollWidth,
-                  horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
-                  background: getComputedStyle(document.body).backgroundColor,
-                  h1: document.querySelector('h1')?.textContent?.trim() ?? '',
-                  headerHeight: Math.round(document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0),
-                  footerHeight: Math.round(document.querySelector('.site-footer')?.getBoundingClientRect().height ?? 0),
-                  maxSurfaceRadius: radii.length ? Math.max(...radii) : 0,
-                  timelineItems: document.querySelectorAll('.timeline-item').length,
-                  accessCards: document.querySelectorAll('.ar-result-card').length
-                };
-              }, { route, device });
-              routeMetrics.push(metrics);
-              record(`${device} ${route} no horizontal overflow`, !metrics.horizontalOverflow, JSON.stringify(metrics));
-              record(`${device} ${route} dark background`, metrics.background === 'rgb(5, 6, 7)', metrics.background);
-              record(`${device} ${route} has H1`, Boolean(metrics.h1), metrics.h1);
-              record(`${device} ${route} flat major surfaces`, metrics.maxSurfaceRadius <= 1, `maxRadius=${metrics.maxSurfaceRadius}`);
-              await page.screenshot({ path: `artifacts/v3-final/screenshots/${device}-${name}.jpg`, type: 'jpeg', quality: 72, fullPage: true });
-            }
-            await page.close();
-          };
-
-          await capture(desktop, 'desktop');
-          await capture(mobile, 'mobile');
-
-          // Stablecoin register: search, sorting, filters, pagination, and comparison.
-          {
-            const page = await desktop.newPage();
-            attachDiagnostics(page, 'functional:stablecoins');
-            await page.goto(`${base}/stablecoins/`, { waitUntil: 'networkidle' });
-            const initial = numberText(await page.locator('[data-result-count]').textContent());
-            record('stablecoin initial record count', initial > 20, `count=${initial}`);
-            await page.locator('[data-index-search]').fill('USDC');
-            await sleep(250);
-            const searched = numberText(await page.locator('[data-result-count]').textContent());
-            record('stablecoin search narrows results', searched > 0 && searched < initial, `initial=${initial}, searched=${searched}`);
-            await page.locator('[data-clear-all]').first().click();
-            await page.locator('[data-index-sort]').selectOption('name_desc');
-            record('stablecoin sorting changes state', await page.locator('[data-index-sort]').inputValue() === 'name_desc');
-            const filter = page.locator('[data-filter-group]').first();
-            await filter.evaluate((node) => node.closest('details')?.setAttribute('open', ''));
-            await filter.check();
-            await sleep(250);
-            const filtered = numberText(await page.locator('[data-result-count]').textContent());
-            const activeFilterText = (await page.locator('[data-active-filters]').textContent())?.trim() ?? '';
-            record('stablecoin filter applies', filtered > 0 && filtered <= initial && activeFilterText.length > 0, `filtered=${filtered}, active=${activeFilterText}`);
-            await page.locator('[data-clear-all]').first().click();
-            await page.locator('[data-page-next]').click();
-            await sleep(150);
-            record('stablecoin pagination advances', /Page 2 of/.test(await page.locator('[data-page-status]').textContent() ?? ''), await page.locator('[data-page-status]').textContent() ?? '');
-            await page.locator('[data-page-prev]').click();
-            const compare = page.locator('[data-compare-select]:visible');
-            const compareCount = await compare.count();
-            if (compareCount >= 2) {
-              await compare.nth(0).check();
-              await compare.nth(1).check();
-              await sleep(250);
-              const panelVisible = await page.locator('[data-comparison-panel]').isVisible();
-              const comparisonItems = await page.locator('[data-comparison-grid] > *').count();
-              record('stablecoin bounded comparison renders', panelVisible && comparisonItems >= 2, `visible=${panelVisible}, items=${comparisonItems}`);
-            } else {
-              record('stablecoin bounded comparison renders', false, `visible compare controls=${compareCount}`);
-            }
-            await page.close();
-          }
-
-          // Event register: search, sorting, and filter state.
-          {
-            const page = await desktop.newPage();
-            attachDiagnostics(page, 'functional:events');
-            await page.goto(`${base}/events/`, { waitUntil: 'networkidle' });
-            const initial = numberText(await page.locator('[data-event-result-count]').textContent());
-            const firstTitle = (await page.locator('[data-event-body] tr:not([hidden]) a').first().textContent())?.trim() ?? '';
-            const query = firstTitle.split(/\s+/).find((part) => part.length >= 5) ?? firstTitle;
-            await page.locator('[data-event-search]').fill(query);
-            await sleep(250);
-            const searched = numberText(await page.locator('[data-event-result-count]').textContent());
-            record('event search returns matching records', initial > 0 && searched > 0 && searched <= initial, `initial=${initial}, searched=${searched}, query=${query}`);
-            await page.locator('[data-event-clear-all]').first().click();
-            await page.locator('[data-event-sort]').selectOption('date_asc');
-            record('event sorting changes state', await page.locator('[data-event-sort]').inputValue() === 'date_asc');
-            const filter = page.locator('[data-event-filter-group]').first();
-            await filter.evaluate((node) => node.closest('details')?.setAttribute('open', ''));
-            await filter.check();
-            await sleep(250);
-            record('event filter applies', ((await page.locator('[data-event-active-filters]').textContent())?.trim() ?? '').length > 0);
-            await page.close();
-          }
-
-          // Organization register: search, sorting, and filter state.
-          {
-            const page = await desktop.newPage();
-            attachDiagnostics(page, 'functional:organizations');
-            await page.goto(`${base}/issuers/`, { waitUntil: 'networkidle' });
-            const initial = numberText(await page.locator('[data-organization-result-count]').textContent());
-            const firstName = (await page.locator('[data-organization-body] tr:not([hidden]) a').first().textContent())?.trim() ?? '';
-            const query = firstName.split(/\s+/).find((part) => part.length >= 4) ?? firstName;
-            await page.locator('[data-organization-search]').fill(query);
-            await sleep(250);
-            const searched = numberText(await page.locator('[data-organization-result-count]').textContent());
-            record('organization search returns matching records', initial > 0 && searched > 0 && searched <= initial, `initial=${initial}, searched=${searched}, query=${query}`);
-            await page.locator('[data-organization-clear-all]').first().click();
-            await page.locator('[data-organization-sort]').selectOption('name_desc');
-            record('organization sorting changes state', await page.locator('[data-organization-sort]').inputValue() === 'name_desc');
-            const filter = page.locator('[data-organization-filter-group]').first();
-            await filter.evaluate((node) => node.closest('details')?.setAttribute('open', ''));
-            await filter.check();
-            await sleep(250);
-            record('organization filter applies', ((await page.locator('[data-organization-active-filters]').textContent())?.trim() ?? '').length > 0);
-            await page.close();
-          }
-
-          // Timeline data rendering, search, and show-more.
-          {
-            const page = await desktop.newPage();
-            attachDiagnostics(page, 'functional:timeline');
-            await page.goto(`${base}/timeline/`, { waitUntil: 'networkidle' });
-            await waitForDynamic(page, '/timeline/');
-            const initial = await page.locator('.timeline-item').count();
-            record('timeline renders canonical items', initial > 0, `items=${initial}`);
-            if (initial > 0) {
-              const title = (await page.locator('.timeline-item h3').first().textContent())?.trim() ?? '';
-              const query = title.split(/\s+/).find((part) => part.length >= 5) ?? title;
-              await page.locator('[data-timeline-search]').fill(query);
-              await sleep(350);
-              const searched = await page.locator('.timeline-item').count();
-              record('timeline search updates rendered items', searched > 0 && searched <= initial, `initial=${initial}, searched=${searched}, query=${query}`);
-              await page.locator('[data-timeline-clear]').click();
-              await sleep(250);
-              if (await page.locator('[data-timeline-show-more-row]').isVisible()) {
-                const before = await page.locator('.timeline-item').count();
-                await page.locator('[data-timeline-show-more]').click();
-                await sleep(250);
-                const after = await page.locator('.timeline-item').count();
-                record('timeline show-more expands results', after > before, `before=${before}, after=${after}`);
-              }
-            }
-            await page.close();
-          }
-
-          // Access & Regulation must resolve to records or an explicit empty state.
-          {
-            const page = await desktop.newPage();
-            attachDiagnostics(page, 'functional:access-regulation');
-            await page.goto(`${base}/access-regulation/`, { waitUntil: 'networkidle' });
-            await waitForDynamic(page, '/access-regulation/');
-            const cards = await page.locator('.ar-result-card').count();
-            const emptyVisible = await page.locator('[data-ar-empty]').isVisible().catch(() => false);
-            const loadingVisible = await page.locator('[data-ar-loading]').isVisible().catch(() => false);
-            record('access-regulation resolves loading state', cards > 0 || emptyVisible, `cards=${cards}, empty=${emptyVisible}, loading=${loadingVisible}`);
-            await page.close();
-          }
-
-          // Mobile navigation and collapsed record details.
-          {
-            const page = await mobile.newPage();
-            attachDiagnostics(page, 'functional:mobile');
-            await page.goto(`${base}/stablecoins/`, { waitUntil: 'networkidle' });
-            const menu = page.locator('[data-mobile-navigation]');
-            await menu.locator(':scope > summary').click();
-            record('mobile navigation opens', await menu.evaluate((node) => node.open === true));
-            const details = page.locator('.stablecoin-index-card:visible .stablecoin-index-card-details').first();
-            const detailsExists = await details.count() > 0;
-            if (detailsExists) {
-              await details.locator(':scope > summary').click();
-              record('mobile record details open', await details.evaluate((node) => node.open === true));
-            } else {
-              record('mobile record details open', false, 'no visible mobile record detail');
-            }
-            await page.close();
-          }
-
-          // Machine-readable public layer and research indexes.
-          for (const [path, kind] of [
-            ['/version.json', 'json'],
-            ['/data/manifest.json', 'json'],
-            ['/data/change-timeline.json', 'json'],
-            ['/data/access-regulation-index.json', 'json'],
-            ['/llms.txt', 'text'],
-            ['/ai.txt', 'text']
-          ]) {
-            try {
-              const response = await fetch(`${base}${path}`);
-              const body = await response.text();
-              let valid = response.ok && body.trim().length > 20;
-              if (kind === 'json') {
-                try { JSON.parse(body); } catch { valid = false; }
-              }
-              record(`machine endpoint ${path}`, valid, `status=${response.status}, bytes=${body.length}`);
-            } catch (error) {
-              record(`machine endpoint ${path}`, false, String(error));
-            }
-          }
-
-          await desktop.close();
-          await mobile.close();
-          await browser.close();
-
-          const report = {
-            generatedAt: new Date().toISOString(),
-            checks,
-            failures,
-            consoleErrors,
-            routeMetrics,
-            summary: {
-              totalChecks: checks.length,
-              passed: checks.filter((item) => item.passed).length,
-              failed: failures.length,
-              consoleErrors: consoleErrors.length
-            }
-          };
-          await writeFile('artifacts/v3-final/acceptance-report.json', JSON.stringify(report, null, 2));
-          await writeFile('artifacts/v3-final/acceptance-summary.md', [
-            '# SOG V3 Final Acceptance Audit',
-            '',
-            `- Total checks: ${report.summary.totalChecks}`,
-            `- Passed: ${report.summary.passed}`,
-            `- Failed: ${report.summary.failed}`,
-            `- Browser console errors: ${report.summary.consoleErrors}`,
-            '',
-            '## Failures',
-            ...(failures.length ? failures.map((item) => `- **${item.name}** — ${item.details || 'no details'}`) : ['- None']),
-            '',
-            '## Console errors',
-            ...(consoleErrors.length ? consoleErrors.slice(0, 30).map((item) => `- **${item.scope}** — ${item.message}`) : ['- None'])
-          ].join('\n'));
-          console.log(JSON.stringify(report.summary, null, 2));
-          if (failures.length || consoleErrors.length) process.exitCode = 1;
-          NODE
+        run: node scripts/audit/v3-final-acceptance.mjs
       - name: Upload final acceptance artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -379,10 +64,30 @@ jobs:
             const fs = require('fs');
             const marker = '<!-- sog-v3-final-acceptance -->';
             const reportPath = 'artifacts/v3-final/acceptance-report.json';
-            const report = fs.existsSync(reportPath) ? JSON.parse(fs.readFileSync(reportPath, 'utf8')) : { summary: { totalChecks: 0, passed: 0, failed: 0, consoleErrors: 0 }, failures: [] };
-            const failedLines = report.failures?.slice(0, 15).map((item) => `- ${item.name}: ${item.details || ''}`).join('\n') || '- None';
-            const body = `${marker}\nV3 final acceptance run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nChecks: **${report.summary.passed}/${report.summary.totalChecks} passed**\nFailures: **${report.summary.failed}**\nConsole errors: **${report.summary.consoleErrors}**\n\n${failedLines}\n\nArtifact: \`sog-v3-final-acceptance-${context.runId}\``;
-            const comments = await github.paginate(github.rest.issues.listComments, { owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, per_page: 100 });
+            const report = fs.existsSync(reportPath)
+              ? JSON.parse(fs.readFileSync(reportPath, 'utf8'))
+              : { summary: { totalChecks: 0, passed: 0, failed: 0, browserErrors: 0, pageErrors: 0 }, failures: [] };
+            const failedLines = report.failures?.slice(0, 20).map((item) => `- ${item.name}: ${item.details || ''}`).join('\n') || '- None';
+            const body = `${marker}\nV3 final acceptance run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nChecks: **${report.summary.passed}/${report.summary.totalChecks} passed**\nFailures: **${report.summary.failed}**\nBrowser errors: **${report.summary.browserErrors}**\nPage errors: **${report.summary.pageErrors}**\n\n${failedLines}\n\nArtifact: \`sog-v3-final-acceptance-${context.runId}\``;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 457,
+              per_page: 100
+            });
             const existing = comments.find((comment) => comment.body?.includes(marker));
-            if (existing) await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
-            else await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: 457, body });
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: 457,
+                body
+              });
+            }
