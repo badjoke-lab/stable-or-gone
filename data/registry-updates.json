@@ -1,5 +1,13 @@
 [
   {
+    "id": "sog_update_2026_07_25_circle_national_trust_usdc_analysis",
+    "date": "2026-07-25",
+    "title": "Circle National Trust and USDC analysis published",
+    "category": "content",
+    "summary": "Published a Japanese analysis of Circle's final OCC approval, the trust-bank custody scope, the difference from deposit-taking banking, the future rather than immediate USDC reserve-management capability, and the implications for oversight and operational concentration.",
+    "related_paths": ["/updates/circle-national-trust-usdc/", "/stablecoin/usdc/", "/updates/"]
+  },
+  {
     "id": "sog_update_2026_07_17_visa_vsp_open_usd_analysis",
     "date": "2026-07-17",
     "title": "Visa Stablecoin Platform and Open USD analysis published",

@@ -1,4 +1,8 @@
 export const updatePublicCopy: Record<string, { title: string; summary: string }> = {
+  sog_update_2026_07_25_circle_national_trust_usdc_analysis: {
+    title: 'Circle National Trust and USDC analysis published',
+    summary: 'Published a Japanese analysis of Circle’s final OCC approval, its initial trust-bank custody role, the difference from deposit-taking banking, the future rather than immediate USDC reserve-management capability, and the resulting oversight and concentration questions.'
+  },
   sog_update_2026_07_17_visa_vsp_open_usd_analysis: {
     title: 'Visa Stablecoin Platform and Open USD analysis published',
     summary: 'Published a Japanese analysis of Visa’s enterprise stablecoin platform, its relationship to Open USD and Open Standard, the beta boundary, unresolved launch facts, and the separate Origin Dollar OUSD asset.'
