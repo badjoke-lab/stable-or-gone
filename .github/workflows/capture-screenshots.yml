@@ -1,4 +1,4 @@
-name: Capture focused pre-v2 screenshots
+name: Capture final representative pre-v2 screenshots
 
 on:
   push:
@@ -13,13 +13,15 @@ permissions:
   issues: write
 
 concurrency:
-  group: sog-pre-v2-pass4-focused
+  group: sog-pre-v2-final-representative
   cancel-in-progress: true
 
 jobs:
-  capture-focused-pages:
+  capture-final-representative:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 120
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,81 +42,81 @@ jobs:
 
       - name: Start local site
         run: |
-          python3 -m http.server 4173 --directory dist > /tmp/sog-pass4-server.log 2>&1 &
+          python3 -m http.server 4173 --directory dist > /tmp/sog-final-representative-server.log 2>&1 &
           for attempt in $(seq 1 30); do
-            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+            if curl -fsS "$CAPTURE_BASE_URL/" >/dev/null; then
               exit 0
             fi
             sleep 1
           done
-          cat /tmp/sog-pass4-server.log
+          cat /tmp/sog-final-representative-server.log
           exit 1
 
-      - name: Capture guide and Stats on desktop and mobile
-        run: |
-          mkdir -p artifacts/pass4
-          node --input-type=module <<'NODE'
-          import { chromium } from 'playwright';
-          import { writeFile } from 'node:fs/promises';
+      - name: Capture representative desktop routes
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
 
-          const pages = [
-            ['guide-eu-mica', '/guides/eu-stablecoin-access-after-mica/'],
-            ['stats', '/stats/']
-          ];
-          const devices = {
-            desktop: { viewport: { width: 1440, height: 900 } },
-            mobile: { viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true }
-          };
-          const browser = await chromium.launch();
-          const results = [];
-          for (const [deviceName, settings] of Object.entries(devices)) {
-            const context = await browser.newContext({ ...settings, deviceScaleFactor: 1, reducedMotion: 'reduce' });
-            const page = await context.newPage();
-            for (const [name, route] of pages) {
-              const response = await page.goto(`http://127.0.0.1:4173${route}`, { waitUntil: 'networkidle', timeout: 60000 });
-              if (!response?.ok()) throw new Error(`${route}: HTTP ${response?.status()}`);
-              await page.evaluate(() => document.fonts?.ready);
-              const metrics = await page.evaluate(() => ({
-                title: document.title,
-                bodyHeight: Math.round(document.body.getBoundingClientRect().height),
-                viewportWidth: document.documentElement.clientWidth,
-                scrollWidth: document.documentElement.scrollWidth,
-                horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
-                footerHeight: Math.round(document.querySelector('.site-footer')?.getBoundingClientRect().height ?? 0),
-                relatedGridColumns: getComputedStyle(document.querySelector('.guide-related-records') ?? document.body).gridTemplateColumns,
-                guideLayoutColumns: getComputedStyle(document.querySelector('.guide-article-layout') ?? document.body).gridTemplateColumns,
-                revisionDateWidth: Math.round(document.querySelector('.guide-revision-table th:first-child')?.getBoundingClientRect().width ?? 0),
-                historyHeaderWraps: [...document.querySelectorAll('.stats-section[aria-labelledby="stats-history-title"] thead th')].map((cell) => cell.getClientRects().length > 1 || cell.scrollHeight > cell.clientHeight + 1)
-              }));
-              await page.screenshot({ path: `artifacts/pass4/${deviceName}-${name}.png`, fullPage: true });
-              results.push({ device: deviceName, route, metrics });
-            }
-            await context.close();
-          }
-          await browser.close();
-          await writeFile('artifacts/pass4/metrics.json', JSON.stringify(results, null, 2));
-          console.log(JSON.stringify(results, null, 2));
-          if (results.some((result) => result.metrics.horizontalOverflow)) process.exitCode = 1;
-          NODE
+      - name: Preserve desktop manifest
+        run: cp artifacts/screenshots/manifest.desktop.json artifacts/final-manifest.desktop.json
 
-      - name: Upload focused audit artifact
+      - name: Capture representative mobile routes
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
+
+      - name: Preserve mobile manifest
+        run: cp artifacts/screenshots/manifest.mobile.json artifacts/final-manifest.mobile.json
+
+      - name: Upload representative desktop images
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-pre-v2-pass4-${{ github.run_id }}
+          name: sog-final-desktop-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
+          path: artifacts/screenshots/desktop/**
+
+      - name: Upload representative mobile images
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-final-mobile-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/screenshots/mobile/**
+
+      - name: Upload final manifests and log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-final-manifests-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
           path: |
-            artifacts/pass4/**
-            /tmp/sog-pass4-server.log
+            artifacts/final-manifest.desktop.json
+            artifacts/final-manifest.mobile.json
+            artifacts/screenshots/routes.json
+            /tmp/sog-final-representative-server.log
 
       - name: Report run to audit issue
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
-            const marker = '<!-- sog-pre-v2-pass4-focused -->';
-            const body = `${marker}\nFocused screenshot run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nArtifact: \`sog-pre-v2-pass4-${context.runId}\``;
+            const fs = require('fs');
+            const read = (device) => {
+              const file = `artifacts/final-manifest.${device}.json`;
+              if (!fs.existsSync(file)) return { device, manifest: 'missing' };
+              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
+              return {
+                device,
+                discovered: x.discovered_route_count,
+                selected: x.selected_route_count,
+                captured: x.captured_count,
+                failed: x.failed_count
+              };
+            };
+            const marker = '<!-- sog-pre-v2-final-representative -->';
+            const desktop = read('desktop');
+            const mobile = read('mobile');
+            const body = `${marker}\nFinal representative run: **${context.runId}**\nHead: \`${context.sha}\`\nResult: **${{ job.status }}**\nDesktop: \`${JSON.stringify(desktop)}\`\nMobile: \`${JSON.stringify(mobile)}\`\nArtifacts: \`sog-final-desktop-${context.runId}\`, \`sog-final-mobile-${context.runId}\`, \`sog-final-manifests-${context.runId}\``;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
