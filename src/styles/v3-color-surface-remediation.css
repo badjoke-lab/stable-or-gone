@@ -91,6 +91,11 @@ html body .stablecoin-material-change time {
   color: var(--v3-warning) !important;
 }
 
+/* Archive blue is for source/archive links, not decorative record numbering. */
+html body .static-registry-number {
+  color: var(--v3-text-quiet) !important;
+}
+
 /* Internal record navigation stays neutral; source/archive destinations retain archive blue. */
 html body .stablecoin-dossier a:not(.stablecoin-dossier-nav a),
 html body .event-detail-table a,
@@ -167,5 +172,44 @@ html body .event-structured-cards {
 
   html body .event-structured-cards dd span {
     font-family: inherit !important;
+  }
+
+  /* Wide mobile actions use the same dark ruled system rather than white or tinted slabs. */
+  html body :where(
+    .ar-search-row .ui-button,
+    .timeline-search-row .ui-button,
+    .compare-actions .ui-button,
+    .event-index-toolbar .event-index-action,
+    .organization-index-toolbar .organization-index-action,
+    .stablecoin-index-toolbar .stablecoin-index-action,
+    .support-callout-action
+  ) {
+    border: 1px solid var(--v3-rule-strong) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--v3-text-muted) !important;
+    box-shadow: none !important;
+  }
+
+  html body :where(
+    .ar-search-row .ui-button,
+    .timeline-search-row .ui-button,
+    .compare-actions .ui-button,
+    .event-index-toolbar .event-index-action,
+    .organization-index-toolbar .organization-index-action,
+    .stablecoin-index-toolbar .stablecoin-index-action,
+    .support-callout-action
+  ):hover,
+  html body :where(
+    .ar-search-row .ui-button,
+    .timeline-search-row .ui-button,
+    .compare-actions .ui-button,
+    .event-index-toolbar .event-index-action,
+    .organization-index-toolbar .organization-index-action,
+    .stablecoin-index-toolbar .stablecoin-index-action,
+    .support-callout-action
+  ):focus-visible {
+    border-color: var(--v3-accent) !important;
+    color: var(--v3-accent) !important;
   }
 }
