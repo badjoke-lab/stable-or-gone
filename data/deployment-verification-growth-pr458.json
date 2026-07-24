@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-07-24",
+  "source_review": "PR #429 canonical growth records; synchronized during PR #458 CI cleanup",
+  "expected_additions": 6,
+  "status_counts": {
+    "verified": 6,
+    "identifier_recorded_unverified": 0,
+    "source_linked_no_identifier": 0,
+    "review_needed": 0,
+    "unknown": 0,
+    "not_recorded": 0
+  },
+  "status_ids": {
+    "verified": [
+      "sog_dep_chfau_ethereum_pr429",
+      "sog_dep_chfau_tempo_pr429",
+      "sog_dep_sekau_ethereum_pr429",
+      "sog_dep_sekau_polygon_pr429",
+      "sog_dep_sekau_base_pr429",
+      "sog_dep_sekau_solana_pr429"
+    ],
+    "identifier_recorded_unverified": [],
+    "source_linked_no_identifier": [],
+    "review_needed": [],
+    "unknown": [],
+    "not_recorded": []
+  },
+  "reviewed_records": []
+}
