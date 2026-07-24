@@ -82,12 +82,12 @@ html body .event-structured-detail__table td span {
 }
 
 /* Ordinary dates are metadata, not warnings. */
-html body .stablecoin-dossier :where(time, [class*="date"]) {
+html body .stablecoin-dossier :where(time, [class*="date"]),
+html body .stablecoin-material-change time {
   color: var(--v3-text-quiet) !important;
 }
 
-html body .stablecoin-material-change > span,
-html body .stablecoin-material-change time {
+html body .stablecoin-material-change > span {
   color: var(--v3-warning) !important;
 }
 
