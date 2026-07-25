@@ -12,7 +12,7 @@ const { event, view } = Astro.props as { event: any; view: View };
   <div class="event-detail-section-heading"><p>Reviewed explanation</p><h2>What happened</h2><span>The primary date, severity, type, effect, recovery, and Evidence count are already shown above.</span></div>
   <p class="event-detail-summary-r5">{view.eventDescription}</p>
   <dl class="event-detail-secondary-r5">
-    <div><dt>Cause or mechanism</dt><dd>{view.causeOrMechanism ?? 'Not recorded'}</dd></div>
+    <div><dt>Cause or mechanism</dt><dd><ValueStateText value={view.causeOrMechanism} displayValue={formatPublicLabel(view.causeOrMechanism, 'Not recorded')} /></dd></div>
     <div><dt>Structured detail kind</dt><dd>{view.taxonomy.detail_kind_label}</dd></div>
     <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
   </dl>
