@@ -88,6 +88,18 @@ export function formatPublicLabel(value?: string | null, fallback = '—'): stri
     .join(' ');
 }
 
+export function formatPublicText(value?: string | null, fallback = '—'): string {
+  const normalized = String(value ?? '').trim();
+  if (!normalized) return fallback;
+
+  return normalized.replace(/\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/g, (token) => {
+    if (token.startsWith('sog_')) return token;
+    const label = formatPublicLabel(token, token);
+    if (/^[A-Z0-9-]{2,}(?:\s|$)/.test(label)) return label;
+    return label.charAt(0).toLowerCase() + label.slice(1);
+  });
+}
+
 export function formatStatusLabel(value?: string | null): string {
   return formatPublicLabel(value, 'Unknown');
 }
