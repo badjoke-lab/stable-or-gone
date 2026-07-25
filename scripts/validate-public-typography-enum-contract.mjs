@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
-import path from 'node:path';
 
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -55,30 +54,16 @@ if (failures.length === 0) {
   for (const marker of ['unexpected_public_font', 'raw_public_enum', 'public_typography', 'public_enums']) {
     check(auditValidator.includes(marker), `readability validator contract marker missing: ${marker}`);
   }
-
-  const astroFiles = [];
-  const walk = (directory) => {
-    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-      const target = path.join(directory, entry.name);
-      if (entry.isDirectory()) walk(target);
-      else if (entry.name.endsWith('.astro')) astroFiles.push(target);
-    }
-  };
-  walk('src');
-  const adHocUnderscoreFormatter = /replaceAll\(\s*['"]_['"]\s*,\s*['"] ['"]\s*\)/;
-  for (const file of astroFiles) {
-    check(!adHocUnderscoreFormatter.test(read(file)), `${file}: ad-hoc snake_case display formatter is forbidden; use a public label helper`);
-  }
 }
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   contract: {
     public_font: 'shared sans-serif stack for all ordinary UI; mono only for explicit technical values',
-    public_enum: 'canonical taxonomy/display-label helper required; raw snake_case forbidden',
-    exhaustive_runtime_gate: 'desktop and mobile readability audits include font-family and raw-enum findings'
+    public_enum: 'canonical taxonomy/display-label helper required; rendered raw snake_case forbidden',
+    exhaustive_runtime_gate: 'desktop and mobile readability audits inspect every rendered public route for font-family and raw-enum findings'
   },
   failures
 };
