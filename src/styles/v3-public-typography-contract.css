@@ -1,6 +1,7 @@
-/* Blocking public typography contract.
+/* Blocking public typography role contract.
  * This stylesheet loads after every legacy and remediation stylesheet.
- * Ordinary public UI is sans-serif. Monospace is limited to explicit technical values. */
+ * CYA-aligned roles: ordinary copy and controls use sans-serif, primary
+ * editorial headings use serif, and explicit technical values use monospace. */
 html body,
 html body :where(button, input, select, textarea),
 html body header.site-header .site-header-inner,
@@ -10,6 +11,21 @@ html body footer.site-footer .site-footer-inner :where(*),
 html body #main-content,
 html body #main-content :where(*) {
   font-family: var(--v3-sans) !important;
+}
+
+html body #main-content :where(
+  h1,
+  h2,
+  [data-editorial-serif],
+  [data-editorial-number]
+),
+html body #main-content :where(
+  h1,
+  h2,
+  [data-editorial-serif],
+  [data-editorial-number]
+) :where(*) {
+  font-family: var(--v3-serif) !important;
 }
 
 html body header.site-header .site-header-inner :where(
