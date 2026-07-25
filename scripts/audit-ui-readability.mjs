@@ -81,6 +81,15 @@ for (const route of routes) {
           color: style.color
         };
       };
+      const overlap = (left, right) => {
+        const width = Math.min(left.right, right.right) - Math.max(left.left, right.left);
+        const height = Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top);
+        return {
+          width,
+          height,
+          area: Math.max(0, width) * Math.max(0, height)
+        };
+      };
       const findings = {
         undersized_ordinary_text: [],
         undersized_compact_text: [],
@@ -89,6 +98,7 @@ for (const route of routes) {
         compressed_line_height: [],
         oversized_headings: [],
         excessive_heading_height: [],
+        overlapping_section_heading_content: [],
         ambiguous_internal_accent_links: [],
         undersized_mobile_targets: []
       };
@@ -137,6 +147,37 @@ for (const route of routes) {
         }
       }
 
+      /* Font-size checks cannot detect text painted on top of adjacent text.
+       * Inspect the direct children of every shared section-heading component
+       * and reject any material rectangle intersection. */
+      const sectionHeadingSelector = [
+        '.event-detail-section-heading',
+        '.organization-detail-section-heading',
+        '.stablecoin-section-heading',
+        '.event-index-section-heading',
+        '.organization-index-section-heading',
+        '.guide-index-section-heading'
+      ].join(', ');
+      for (const container of [...document.querySelectorAll(sectionHeadingSelector)].filter(visible)) {
+        const children = [...container.children].filter(visible);
+        for (let leftIndex = 0; leftIndex < children.length; leftIndex += 1) {
+          for (let rightIndex = leftIndex + 1; rightIndex < children.length; rightIndex += 1) {
+            const left = children[leftIndex];
+            const right = children[rightIndex];
+            const intersection = overlap(left.getBoundingClientRect(), right.getBoundingClientRect());
+            if (intersection.width <= 2 || intersection.height <= 2 || intersection.area <= 16) continue;
+            push('overlapping_section_heading_content', {
+              container: pathFor(container),
+              first: sample(left, 'section-heading-child'),
+              second: sample(right, 'section-heading-child'),
+              overlap_width_px: Math.round(intersection.width),
+              overlap_height_px: Math.round(intersection.height),
+              overlap_area_px: Math.round(intersection.area)
+            });
+          }
+        }
+      }
+
       const rootStyle = getComputedStyle(document.documentElement);
       const accent = rootStyle.getPropertyValue('--v3-accent').trim();
       const probe = document.createElement('span');
@@ -180,13 +221,14 @@ const categories = [
   'compressed_line_height',
   'oversized_headings',
   'excessive_heading_height',
+  'overlapping_section_heading_content',
   'ambiguous_internal_accent_links',
   'undersized_mobile_targets'
 ];
 const totals = Object.fromEntries(categories.map((category) => [category, records.reduce((sum, record) => sum + Number(record.counts?.[category] ?? 0), 0)]));
 const routesWithFindings = records.filter((record) => categories.some((category) => Number(record.counts?.[category] ?? 0) > 0)).length;
 const output = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   device,
   route_count: routes.length,
