@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import path from 'node:path';
 
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -54,15 +55,32 @@ if (failures.length === 0) {
   for (const marker of ['unexpected_public_font', 'raw_public_enum', 'public_typography', 'public_enums']) {
     check(auditValidator.includes(marker), `readability validator contract marker missing: ${marker}`);
   }
+
+  const publicRenderRoots = ['src/pages', 'src/components', 'src/lib/views', 'src/scripts'];
+  const publicRenderFiles = [];
+  const walk = (directory) => {
+    if (!fs.existsSync(directory)) return;
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const target = path.join(directory, entry.name);
+      if (entry.isDirectory()) walk(target);
+      else if (/\.(astro|js|mjs|ts|tsx)$/.test(entry.name)) publicRenderFiles.push(target);
+    }
+  };
+  for (const root of publicRenderRoots) walk(root);
+  const adHocUnderscoreFormatter = /replaceAll\(\s*['"]_['"]\s*,\s*['"] ['"]\s*\)/;
+  for (const file of publicRenderFiles) {
+    check(!adHocUnderscoreFormatter.test(read(file)), `${file}: ad-hoc snake_case display formatter is forbidden; use a public taxonomy/display-label helper`);
+  }
 }
 
 const result = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   contract: {
     public_font: 'shared sans-serif stack for all ordinary UI; mono only for explicit technical values',
     public_enum: 'canonical taxonomy/display-label helper required; rendered raw snake_case forbidden',
+    static_render_scan: 'public pages, components, views, and client scripts may not use ad-hoc underscore replacement as a display formatter',
     exhaustive_runtime_gate: 'desktop and mobile readability audits inspect every rendered public route for font-family and raw-enum findings'
   },
   failures
